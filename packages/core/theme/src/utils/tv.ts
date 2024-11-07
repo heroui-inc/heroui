@@ -16,5 +16,6 @@ export const tv: TV = (options, config) =>
         ...config?.twMergeConfig?.classGroups,
         ...twMergeConfig.classGroups,
       },
+      prefix: "vg-",
     },
   });

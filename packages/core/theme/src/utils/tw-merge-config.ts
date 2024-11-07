@@ -19,4 +19,5 @@ export const twMergeConfig = {
       "bg-stripe-gradient-danger",
     ],
   },
+  prefix: "vg-",
 };
