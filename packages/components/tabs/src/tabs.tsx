@@ -111,11 +111,15 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   }, [isDropdownOpen, tabListProps.ref]);
 
   useEffect(() => {
-    checkOverflow();
+    const debouncedCheckOverflow = debounce(checkOverflow, 100);
 
-    window.addEventListener("resize", checkOverflow);
+    debouncedCheckOverflow();
 
-    return () => window.removeEventListener("resize", checkOverflow);
+    window.addEventListener("resize", debouncedCheckOverflow);
+
+    return () => {
+      window.removeEventListener("resize", debouncedCheckOverflow);
+    };
   }, [checkOverflow]);
 
   const tabsProps = {
