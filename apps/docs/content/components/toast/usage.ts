@@ -1,4 +1,4 @@
-import Types from "./types.raw.jsx?raw";
+import Types from "./usage.raw.jsx?raw";
 
 const react = {
   "/App.jsx": Types,

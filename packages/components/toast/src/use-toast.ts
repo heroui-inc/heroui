@@ -74,6 +74,10 @@ export interface ToastProps extends ToastVariantProps {
    */
   timeout?: number;
   /**
+   * hides the close button
+   */
+  hideCloseButton?: boolean;
+  /**
    * function which is called when toast is closed.
    */
   onClose?: () => void;
@@ -116,6 +120,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     hideIcon = false,
     placement: placementProp = "right-bottom",
     isRegionExpanded,
+    hideCloseButton = false,
     state,
     total = 1,
     index = 0,
@@ -405,6 +410,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     (props = {}) => ({
       className: slots.closeButton({class: classNames?.closeButton}),
       "aria-label": "closeButton",
+      "data-hidden": dataAttr(hideCloseButton),
       ...mergeProps(props, closeButtonProps, {onPress: originalProps.onClose}),
     }),
     [closeButtonProps],

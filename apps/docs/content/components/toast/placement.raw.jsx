@@ -18,7 +18,7 @@ export default function App() {
         ].map((position) => (
           <Button
             key={position}
-            variant={"solid"}
+            variant={"flat"}
             onPress={() => {
               setPlacement(position);
               addToast({

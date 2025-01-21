@@ -4,7 +4,7 @@ import customStyles from "./custom-styles";
 import radius from "./radius";
 import placement from "./placement";
 import provider from "./provider";
-import types from "./types";
+import usage from "./usage";
 
 export const toastContent = {
   color,
@@ -13,5 +13,5 @@ export const toastContent = {
   radius,
   placement,
   provider,
-  types,
+  usage,
 };

@@ -45,6 +45,11 @@ export default {
         "center-top",
       ],
     },
+    hideCloseButton: {
+      control: {
+        type: "boolean",
+      },
+    },
   },
   decorators: [
     (Story) => (

@@ -20,7 +20,7 @@ Toasts are temporary notifications that provide concise feedback about an action
 <PackageManagers
   showGlobalInstallWarning
   commands={{
-    cli: "npx nextui-cli@latest add toast",
+    cli: "npx heroui-cli@latest add toast",
     npm: "npm install @heroui/toast",
     yarn: "yarn add @heroui/toast",
     pnpm: "pnpm add @heroui/toast",
@@ -39,13 +39,13 @@ Toasts are temporary notifications that provide concise feedback about an action
 
 ## Requirement
 
-The ToastProvider must be added to the application's root (or the relevant part of it) before using the addToast function. This is required to initialize the context for managing toasts.
+The `ToastProvider` must be added to the application's root (or the relevant part of it) before using the addToast function. This is required to initialize the context for managing toasts.
 
 <CodeDemo showPreview={false} title="ToastProvider" files={toastContent.provider} />
 
 ### Usage
 
-<CodeDemo title="Usage" files={toastContent.types} />
+<CodeDemo title="Usage" files={toastContent.usage} />
 
 ### Colors
 
@@ -154,7 +154,7 @@ Toast has the following slots:
     },
     {
       attribute: "variant",
-      type: "solid | bordered | flat | faded",
+      type: "solid | bordered | flat",
       description: "The alert variant",
       default: "flat"
     },
@@ -197,9 +197,21 @@ Toast has the following slots:
     {
       attribute: "hideIcon",
       type: "boolean",
-      description: "Whether the icon is hidden",
+      description: "Hides icon when true",
       default: "false"
     },
+    {
+      attribute: "hideCloseButton",
+      type: "boolean",
+      description: "Hides closeButton when true",
+      default: "false"
+    },
+    {
+      attribute: "classNames",
+      type: "Partial<Record<\"base\" | \"content\" | \"title\" | \"description\" | \"icon\" | \"loadingIcon\" | \"progressTrack\" | \"progressIndicator\", string>>",
+      description: "Allows to set custom class names for the toast slots.",
+      default: "-"
+    }
   ]}
 />
 

@@ -4,7 +4,7 @@ export default function App() {
   return (
     <div className="flex flex-wrap gap-2">
       <Button
-        variant="solid"
+        variant="flat"
         onPress={() => {
           addToast({
             title: "Toast Title",
@@ -15,7 +15,7 @@ export default function App() {
       </Button>
 
       <Button
-        variant="solid"
+        variant="flat"
         onPress={() => {
           addToast({
             title: "Toast Title",
@@ -27,7 +27,7 @@ export default function App() {
       </Button>
 
       <Button
-        variant="solid"
+        variant="flat"
         onPress={() => {
           addToast({
             title: "Toast Title",
@@ -40,7 +40,7 @@ export default function App() {
       </Button>
 
       <Button
-        variant="solid"
+        variant="flat"
         onPress={() => {
           addToast({
             title: "Toast Title",
@@ -53,6 +53,7 @@ export default function App() {
       </Button>
 
       <Button
+        variant="flat"
         onPress={() => {
           addToast({
             title: "Toast Title",
@@ -70,6 +71,7 @@ export default function App() {
       </Button>
 
       <Button
+        variant="flat"
         onPress={() => {
           addToast({
             title: "Toast Title",
@@ -82,6 +84,7 @@ export default function App() {
       </Button>
 
       <Button
+        variant="flat"
         onPress={() =>
           addToast({
             title: "Toast title",

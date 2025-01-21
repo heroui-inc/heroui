@@ -62,6 +62,7 @@ const toast = tv({
     ],
     closeButton: [
       "opacity-0 p-0 group-hover:opacity-100 w-6 h-6 min-w-4 absolute -right-2 -top-2 items-center justify-center bg-transparent text-default-400 hover:text-default-600 border border-3 border-transparent",
+      "data-[hidden=true]:hidden",
     ],
     closeIcon: ["rounded-full w-full h-full p-0.5 border border-default-400 bg-default-100"],
   },
