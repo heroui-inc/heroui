@@ -1,7 +1,7 @@
 import Radius from "./radius.raw.jsx?raw";
 
 const react = {
-  "/Radius.jsx": Radius,
+  "/App.jsx": Radius,
 };
 
 export default {

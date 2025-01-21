@@ -1,7 +1,7 @@
 import Color from "./color.raw.jsx?raw";
 
 const react = {
-  "/Color.jsx": Color,
+  "/App.jsx": Color,
 };
 
 export default {

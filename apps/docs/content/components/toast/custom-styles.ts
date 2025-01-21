@@ -1,7 +1,7 @@
 import CustomStyles from "./custom-styles.raw.jsx?raw";
 
 const react = {
-  "CustomStyles.jsx": CustomStyles,
+  "/App.jsx": CustomStyles,
 };
 
 export default {

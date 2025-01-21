@@ -1,7 +1,7 @@
 import Position from "./placement.raw.jsx?raw";
 
 const react = {
-  "Position.jsx": Position,
+  "/App.jsx": Position,
 };
 
 export default {

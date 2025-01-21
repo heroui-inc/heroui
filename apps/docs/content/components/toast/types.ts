@@ -1,7 +1,7 @@
 import Types from "./types.raw.jsx?raw";
 
 const react = {
-  "/Types.jsx": Types,
+  "/App.jsx": Types,
 };
 
 export default {
