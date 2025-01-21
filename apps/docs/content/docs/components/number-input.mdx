@@ -73,7 +73,7 @@ You can change the position of the label by setting the `labelPlacement` propert
 
 ### Clear Button
 
-If you pass the `isClearable` property to NumberInput, it will have a clear button at the
+If you pass the `isClearable` property to the input, it will have a clear button at the
 end of input, it will be visible when input has a value.
 
 <CodeDemo title="Clear Button" files={numberInputContent.clearButton} />
@@ -92,13 +92,13 @@ You can use the `startContent` and `endContent` properties to add content to the
 
 ### With Label
 
-You can add a label to NumberInput by passing the `label` property.
+You can add a label to the input by passing the `label` property.
 
 <CodeDemo title="With Label" files={numberInputContent.label} />
 
 ### With Description
 
-You can add a description to NumberInput by passing the `description` property.
+You can add a description to the input by passing the `description` property.
 
 <CodeDemo title="With Description" files={numberInputContent.description} />
 
@@ -134,11 +134,11 @@ You can combine the `isInvalid` and `errorMessage` properties to show an invalid
 
 ### Controlled
 
-You can use the `value` and `onValueChange` properties to control NumberInput value.
+You can use the `value` and `onValueChange` properties to control the input value.
 
 <CodeDemo title="Controlled" files={numberInputContent.controlled} />
 
-> **Note**: NextUI `NumberInput` also supports native events like `onChange`, useful for form libraries
+> **Note**: HeroUI `NumberInput` also supports native events like `onChange`, useful for form libraries
 > such as [Formik](https://formik.org/) and [React Hook Form](https://react-hook-form.com/).
 
 ### With Form
@@ -160,7 +160,7 @@ If you want to display validation errors while the user is typing, you can contr
 #### Server Validation
 
 Client-side validation provides immediate feedback, but you should also validate data on the server to ensure accuracy and security.
-NextUI allows you to display server-side validation errors by using the `validationErrors` prop in the `Form` component.
+HeroUI allows you to display server-side validation errors by using the `validationErrors` prop in the `Form` component.
 This prop should be an object where each key is the field `name` and the value is the error message.
 
 <CodeDemo title="Server Validation" files={numberInputContent.serverValidation} />
