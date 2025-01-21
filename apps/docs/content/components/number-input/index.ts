@@ -22,6 +22,7 @@ import realTimeValidation from "./real-time-validation";
 import serverValidation from "./server-validation";
 import customStyles from "./custom-styles";
 import formatOptions from "./format-options";
+import labelPlacements from "./label-placements";
 
 export const numberInputContent = {
   usage,
@@ -48,4 +49,5 @@ export const numberInputContent = {
   serverValidation,
   customStyles,
   formatOptions,
+  labelPlacements,
 };
