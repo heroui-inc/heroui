@@ -37,7 +37,11 @@ Toasts are temporary notifications that provide concise feedback about an action
   }}
 />
 
-> **Note**: Before using the addToast function, ensure you have added `ToastProvider` to your application (or the relevant part of it). This is necessary to initialize the context for managing toasts.
+## Requirement
+
+The ToastProvider must be added to the application's root (or the relevant part of it) before using the addToast function. This is required to initialize the context for managing toasts.
+
+<CodeDemo showPreview={false} title="ToastProvider" files={toastContent.provider} />
 
 ### Usage
 

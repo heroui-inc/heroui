@@ -10,6 +10,7 @@ import radius from "./radius";
 import placement from "./placement";
 import description from "./description";
 import promise from "./promise";
+import provider from "./provider";
 
 export const toastContent = {
   color,
@@ -24,4 +25,5 @@ export const toastContent = {
   placement,
   description,
   promise,
+  provider,
 };

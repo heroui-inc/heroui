@@ -140,6 +140,7 @@ const toast = tv({
         closeButton: "transition-opacity ease-in duration-300",
         base: [
           "data-[animation=exiting]:transform",
+          "data-[animation=exiting]:delay-100",
           "data-[animation=exiting]:data-[placement=right-bottom]:translate-x-28",
           "data-[animation=exiting]:data-[placement=left-bottom]:-translate-x-28",
           "data-[animation=exiting]:data-[placement=center-bottom]:translate-y-28",
