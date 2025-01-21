@@ -184,19 +184,6 @@ export const WithDescription = {
   },
 };
 
-export const WithHelperText = {
-  render: Template,
-
-  args: {
-    ...defaultProps,
-    label: "Amount",
-    description: "Specify the amount",
-    helperText: "Amount should be between 5 and 50",
-    minValue: 5,
-    maxValue: 50,
-  },
-};
-
 export const WithStepValue = {
   render: Template,
 
@@ -204,7 +191,7 @@ export const WithStepValue = {
     ...defaultProps,
     label: "Amount",
     step: 10,
-    helperText: "Set `step` to `10` to increment / decrement the value by 10.",
+    description: "Set `step` to `10` to increment / decrement the value by 10.",
   },
 };
 
@@ -215,7 +202,7 @@ export const WithWheelDisabled = {
     ...defaultProps,
     label: "Amount",
     step: 10,
-    helperText: "Set `isWheelDisabled` to `true` to disable the wheel.",
+    description: "Set `isWheelDisabled` to `true` to disable the wheel.",
     isWheelDisabled: true,
   },
 };
@@ -227,7 +214,7 @@ export const HorizontalStepper = {
     ...defaultProps,
     steps: "horizontal",
     label: "Horizontal Stepper",
-    helperText: "Set `steps` to `horizontal` to show the stepper horizontally.",
+    description: "Set `steps` to `horizontal` to show the stepper horizontally.",
   },
 };
 
@@ -253,7 +240,7 @@ export const HideStepper = {
     ...defaultProps,
     hideStepper: true,
     label: "Hide Stepper",
-    helperText: "Set `hideStepper` to `true` to hide the stepper.",
+    description: "Set `hideStepper` to `true` to hide the stepper.",
   },
 };
 

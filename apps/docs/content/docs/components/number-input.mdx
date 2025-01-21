@@ -94,12 +94,6 @@ You can add a description to NumberInput by passing the `description` property.
 
 <CodeDemo title="With Description" files={numberInputContent.description} />
 
-### With Helper Text
-
-You can add a helper text to NumberInput by passing the `helperText` property.
-
-<CodeDemo title="With HelperText" files={numberInputContent.helperText} />
-
 ### With Min Value
 
 You can set the minimum value of the input by passing the `minValue` property.
@@ -123,12 +117,6 @@ You can disable changing the vaule with scroll in NumberInput by passing the `is
 You can format the value of the input by passing the `formatOptions` property.
 
 <CodeDemo title="With Format Options" files={numberInputContent.formatOptions} />
-
-### With Helper Text
-
-You can add a helper text to NumberInput by passing the `helperText` property.
-
-<CodeDemo title="With HelperText" files={numberInputContent.helperText} />
 
 ### With Error Message
 
@@ -181,7 +169,6 @@ This prop should be an object where each key is the field `name` and the value i
 - **stepperButton**: The stepper button to increase or decrease the value.
 - **verticalStepperWrapper**: The wrapper for the vertical stepper.
 - **description**: The description of NumberInput.
-- **helperText**: The helper text of NumberInput.
 - **errorMessage**: The error message of NumberInput.
 
 ### Custom Styles
@@ -302,12 +289,6 @@ You can customize the `NumberInput` component by passing custom Tailwind CSS cla
       attribute: "defaultValue",
       type: "string",
       description: "The default value of the input (uncontrolled).",
-      default: "-"
-    },
-    {
-      attribute: "helperText",
-      type: "ReactNode",
-      description: "A helper text for the input. Provides a hint such as specific requirements for what to choose.",
       default: "-"
     },
     {
@@ -450,7 +431,7 @@ You can customize the `NumberInput` component by passing custom Tailwind CSS cla
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<'base' | 'label' | 'inputWrapper' | 'innerWrapper' | 'mainWrapper' | 'input' | 'clearButton' | 'stepperButton' | 'helperWrapper' | 'verticalStepperWrapper' | 'description' | 'helperText' | 'errorMessage', string>>",
+      type: "Partial<Record<'base' | 'label' | 'inputWrapper' | 'innerWrapper' | 'mainWrapper' | 'input' | 'clearButton' | 'stepperButton' | 'helperWrapper' | 'verticalStepperWrapper' | 'description' | 'errorMessage', string>>",
       description: "Allows to set custom class names for the Input slots.",
       default: "-"
     }

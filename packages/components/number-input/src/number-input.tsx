@@ -12,7 +12,6 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
     Component,
     label,
     description,
-    helperText,
     isClearable,
     startContent,
     endContent,
@@ -29,7 +28,6 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
     getMainWrapperProps,
     getHelperWrapperProps,
     getDescriptionProps,
-    getHelperTextProps,
     getErrorMessageProps,
     getClearButtonProps,
     getStepperIncreaseButtonProps,
@@ -38,10 +36,6 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
   } = useNumberInput({...props, ref});
 
   const labelContent = label ? <label {...getLabelProps()}>{label}</label> : null;
-
-  const descriptionContent = description ? (
-    <div {...getDescriptionProps()}>{description}</div>
-  ) : null;
 
   const end = useMemo(() => {
     if (isClearable) {
@@ -60,14 +54,17 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
 
   const helperWrapper = useMemo(() => {
     const shouldShowError = isInvalid && errorMessage;
-    const hasContent = shouldShowError || description || helperText;
+    const hasContent = shouldShowError || description;
 
     if (!hasHelper || !hasContent) return null;
 
     return (
       <div {...getHelperWrapperProps()}>
-        {shouldShowError && <div {...getErrorMessageProps()}>{errorMessage}</div>}
-        {helperText && <div {...getHelperTextProps()}>{helperText}</div>}
+        {shouldShowError ? (
+          <div {...getErrorMessageProps()}>{errorMessage}</div>
+        ) : (
+          <div {...getDescriptionProps()}>{description}</div>
+        )}
       </div>
     );
   }, [
@@ -102,7 +99,6 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
       <div {...getMainWrapperProps()}>
         <div {...getInputWrapperProps()}>
           {labelContent}
-          {descriptionContent}
           {innerWrapper}
         </div>
         {helperWrapper}

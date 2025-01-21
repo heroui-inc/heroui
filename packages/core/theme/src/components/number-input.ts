@@ -1,23 +1,22 @@
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "../utils/tv";
-import {numberInputLabelClasses, groupDataFocusVisibleClasses} from "../utils";
+import {groupDataFocusVisibleClasses} from "../utils";
 
 /**
  * NumberInput wrapper **Tailwind Variants** component
  *
  * @example
  * ```js
- * const {base, label, inputWrapper, input, clearButton, description, helperText, errorMessage} = numberInput({...})
+ * const {base, label, inputWrapper, input, clearButton, description, errorMessage} = numberInput({...})
  *
  * <div className={base())}>
  *  <label className={label()}>Label</label>
- *  <span className={description()}>Description</span>
  *  <div className={inputWrapper()}>
  *    <input className={input()}/>
  *    <button className={clearButton()}>Clear</button>
  *  </div>
- *  <span className={helperText()}>Helper text</span>
+ *  <span className={description()}>Description</span>
  *  <span className={errorMessage()}>Invalid input</span>
  * </div>
  * ```
@@ -25,7 +24,19 @@ import {numberInputLabelClasses, groupDataFocusVisibleClasses} from "../utils";
 const numberInput = tv({
   slots: {
     base: "group flex flex-col data-[hidden=true]:hidden relative justify-end",
-    label: numberInputLabelClasses,
+    label: [
+      "absolute",
+      "z-10",
+      "pointer-events-none",
+      "origin-top-left",
+      "flex-shrink-0",
+      // Using RTL here as Tailwind CSS doesn't support `start` and `end` logical properties for transforms yet.
+      "rtl:origin-top-right",
+      "subpixel-antialiased",
+      "block",
+      "text-small",
+      "text-foreground-500",
+    ],
     mainWrapper: "h-full flex flex-col",
     inputWrapper:
       "relative w-full inline-flex tap-highlight-transparent flex-row items-center shadow-sm px-3 py-2 h-8 gap-3",
@@ -51,8 +62,7 @@ const numberInput = tv({
     stepperButton: ["bg-transparent", "min-w-5", "w-5", "h-4", "rounded-none"],
     verticalStepperWrapper: ["flex", "flex-col", "ps-1"],
     helperWrapper: "hidden group-data-[has-helper=true]:flex py-2 relative flex-col gap-1.5",
-    description: [...numberInputLabelClasses, "text-tiny", "text-default-400"],
-    helperText: "text-tiny text-foreground-400",
+    description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
   },
   variants: {

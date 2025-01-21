@@ -48,10 +48,6 @@ export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputV
    */
   endContent?: React.ReactNode;
   /**
-   * 	A helper text for the field. Provides a hint such as specific requirements for what to choose.
-   */
-  helperText?: React.ReactNode;
-  /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.
    *
@@ -68,7 +64,6 @@ export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputV
    *    helperWrapper: "helper-wrapper-classes",
    *    verticalStepperWrapper: "vertical-stepper-wrapper-classes",
    *    description: "description-classes",
-   *    helperText: "helper-text-classes",
    *    errorMessage: "error-message-classes",
    * }} />
    * ```
@@ -107,7 +102,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     baseRef,
     wrapperRef,
     description,
-    helperText,
     className,
     classNames,
     autoFocus,
@@ -208,11 +202,10 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       ? props.errorMessage({isInvalid, validationErrors, validationDetails})
       : props.errorMessage || validationErrors?.join(" ");
   const isClearable = !!onClear || originalProps.isClearable;
-  const hasElements = !!label || !!description || !!errorMessage || !!helperText;
+  const hasElements = !!label || !!description || !!errorMessage;
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
-  const hasHelper = !!helperText || !!errorMessage;
-  const hasDescription = !!description;
+  const hasHelper = !!description || !!errorMessage;
   const isPlaceholderShown = domRef.current
     ? (!domRef.current.value || domRef.current.value === "" || !inputValue) && hasPlaceholder
     : false;
@@ -249,7 +242,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         "data-disabled": dataAttr(originalProps.isDisabled),
         "data-has-elements": dataAttr(hasElements),
         "data-has-helper": dataAttr(hasHelper),
-        "data-has-description": dataAttr(hasDescription),
         "data-has-label": dataAttr(hasLabel),
         "data-has-value": dataAttr(!isPlaceholderShown),
         ...focusWithinProps,
@@ -267,7 +259,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       hasHelper,
       hasLabel,
       hasElements,
-      hasDescription,
       isPlaceholderShown,
       hasStartContent,
       isFocusWithin,
@@ -436,18 +427,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     [slots, classNames?.description],
   );
 
-  const getHelperTextProps: PropGetter = useCallback(
-    (props = {}) => {
-      return {
-        ...props,
-        ...descriptionProps, // apply description props
-        "data-slot": "helper-text",
-        className: slots.helperText({class: clsx(classNames?.helperText, props?.className)}),
-      };
-    },
-    [slots, classNames?.helperText],
-  );
-
   const getErrorMessageProps: PropGetter = useCallback(
     (props = {}) => {
       return {
@@ -528,7 +507,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     domRef,
     label,
     description,
-    helperText,
     startContent,
     endContent,
     isClearable,
@@ -549,7 +527,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     getInnerWrapperProps,
     getHelperWrapperProps,
     getDescriptionProps,
-    getHelperTextProps,
     getErrorMessageProps,
     getClearButtonProps,
     getStepperIncreaseButtonProps,
