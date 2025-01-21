@@ -7,10 +7,9 @@ export default function App() {
         {["default", "primary", "secondary", "success", "warning", "danger"].map((color) => (
           <Button
             key={color}
-            className="w-fit m-2"
             // @ts-ignore
             color={color}
-            variant={"bordered"}
+            variant={"solid"}
             onPress={() =>
               addToast({
                 title: "Toast title",
@@ -20,7 +19,7 @@ export default function App() {
               })
             }
           >
-            Show {color} toast
+            {color}
           </Button>
         ))}
       </div>

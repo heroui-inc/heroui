@@ -7,19 +7,18 @@ export default function App() {
         {["none", "sm", "md", "lg", "full"].map((radius) => (
           <Button
             key={radius}
-            className="w-fit m-2"
-            variant={"bordered"}
+            radius={radius}
+            variant={"solid"}
             onPress={() =>
               addToast({
                 title: "Toast title",
                 description: "Toast displayed successfully",
                 // @ts-ignore
                 radius: radius,
-                color: "primary",
               })
             }
           >
-            Show radius-{radius} toast
+            {radius}
           </Button>
         ))}
       </div>

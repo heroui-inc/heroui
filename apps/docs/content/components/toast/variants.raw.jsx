@@ -4,22 +4,26 @@ export default function App() {
   return (
     <>
       <div className="flex flex-wrap gap-x-2">
-        {["solid", "bordered", "flat", "faded"].map((variant) => (
+        {[
+          ["solid", "solid"],
+          ["bordered", "bordered"],
+          ["flat", "faded"],
+        ].map((variant) => (
           <Button
-            key={variant}
-            className="w-fit m-2"
-            variant={"bordered"}
+            key={variant[0]}
+            // @ts-ignore
+            variant={variant[1]}
             onPress={() =>
               addToast({
                 title: "Toast title",
                 description: "Toast displayed successfully",
                 // @ts-ignore
-                variant: variant,
+                variant: variant[0],
                 color: "secondary",
               })
             }
           >
-            Show {variant} toast
+            {variant[0]}
           </Button>
         ))}
       </div>

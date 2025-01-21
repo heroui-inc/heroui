@@ -18,8 +18,7 @@ export default function App() {
         ].map((position) => (
           <Button
             key={position}
-            className="w-fit m-2"
-            variant={"bordered"}
+            variant={"solid"}
             onPress={() => {
               setPlacement(position);
               addToast({
@@ -28,7 +27,7 @@ export default function App() {
               });
             }}
           >
-            Show toast at {position}
+            {position}
           </Button>
         ))}
       </div>

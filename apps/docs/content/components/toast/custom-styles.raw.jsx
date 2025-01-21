@@ -4,7 +4,7 @@ const CustomToastComponent = () => {
   return (
     <>
       <Button
-        variant="bordered"
+        variant="solid"
         onPress={() => {
           addToast({
             title: "Sucessful!",
