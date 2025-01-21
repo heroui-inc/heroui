@@ -3014,6 +3014,9 @@ importers:
       '@heroui/spinner':
         specifier: workspace:*
         version: link:../spinner
+      '@heroui/use-is-mobile':
+        specifier: workspace:*
+        version: link:../../hooks/use-is-mobile
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)

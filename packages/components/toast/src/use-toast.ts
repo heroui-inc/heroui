@@ -10,6 +10,7 @@ import {mergeProps} from "@react-aria/utils";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {MotionProps} from "framer-motion";
 import {useHover} from "@react-aria/interactions";
+import {useIsMobile} from "@heroui/use-is-mobile";
 
 export interface ToastProps extends ToastVariantProps {
   /**
@@ -112,7 +113,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     toast,
     endContent,
     hideIcon = false,
-    placement = "right-bottom",
+    placement: placementProp = "right-bottom",
     isRegionExpanded,
     state,
     total = 1,
@@ -127,8 +128,20 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     isDisabled: false,
   });
   const disableAnimation = originalProps.disableAnimation;
-  const SWIPE_THRESHOLD = 100;
+  const SWIPE_THRESHOLD_X = 100;
+  const SWIPE_THRESHOLD_Y = 20;
   const INITIAL_POSITION = 50;
+
+  const isMobile = useIsMobile();
+  let placement = placementProp;
+
+  if (isMobile) {
+    if (placementProp.includes("top")) {
+      placement = "center-top";
+    } else {
+      placement = "center-bottom";
+    }
+  }
 
   const animationRef = useRef<number | null>(null);
   const startTime = useRef<number | null>(null);
@@ -267,16 +280,17 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const [drag, setDrag] = useState(false);
   const [dragValue, setDragValue] = useState(0);
 
-  const shouldCloseToast = (offsetX: number) => {
+  const shouldCloseToast = (offsetX: number, offsetY: number) => {
     const isRight = placement.includes("right");
     const isLeft = placement.includes("left");
     const isCenterTop = placement === "center-top";
     const isCenterBottom = placement === "center-bottom";
 
     if (
-      (isRight && offsetX >= SWIPE_THRESHOLD) ||
-      (isLeft && offsetX <= -SWIPE_THRESHOLD) ||
-      ((isCenterTop || isCenterBottom) && Math.abs(offsetX) >= SWIPE_THRESHOLD)
+      (isRight && offsetX >= SWIPE_THRESHOLD_X) ||
+      (isLeft && offsetX <= -SWIPE_THRESHOLD_X) ||
+      (isCenterTop && offsetY <= -SWIPE_THRESHOLD_Y) ||
+      (isCenterBottom && offsetY >= SWIPE_THRESHOLD_Y)
     ) {
       return true;
     }
@@ -285,6 +299,16 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const getDragElasticConstraints = (placement: string) => {
     const elasticConstraint = {top: 0, bottom: 0, right: 0, left: 0};
 
+    if (placement === "center-bottom") {
+      elasticConstraint.bottom = 1;
+
+      return elasticConstraint;
+    }
+    if (placement === "center-top") {
+      elasticConstraint.top = 1;
+
+      return elasticConstraint;
+    }
     if (placement.includes("right")) {
       elasticConstraint.right = 1;
 
@@ -301,6 +325,14 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
     return elasticConstraint;
   };
+
+  let opacityValue: undefined | number = undefined;
+
+  if ((drag && placement === "center-bottom") || placement === "center-top") {
+    opacityValue = Math.max(0, 1 - dragValue / (SWIPE_THRESHOLD_Y + 5));
+  } else if (drag) {
+    opacityValue = Math.max(0, 1 - dragValue / (SWIPE_THRESHOLD_X + 20));
+  }
 
   const getToastProps: PropGetter = useCallback(
     (props = {}) => ({
@@ -319,11 +351,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         }
       },
       style: {
-        opacity: drag ? Math.max(0, 1 - dragValue / (SWIPE_THRESHOLD + 20)) : undefined,
+        opacity: opacityValue,
       },
       ...mergeProps(props, otherProps, toastProps, hoverProps),
     }),
-    [slots, classNames, toastProps, hoverProps, originalProps.toast.animation],
+    [slots, classNames, toastProps, hoverProps, originalProps.toast.animation, opacityValue],
   );
 
   const getIconProps: PropGetter = useCallback(
@@ -395,34 +427,48 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       className: string;
     } => {
       const isCloseToEnd = total - index - 1 <= 2;
-      const dragDirection = "x";
+      const dragDirection = placement === "center-bottom" || placement === "center-top" ? "y" : "x";
       const dragConstraints = {left: 0, right: 0, top: 0, bottom: 0};
       const dragElastic = getDragElasticConstraints(placement);
+
+      const animateProps = (() => {
+        if (placement.includes("top")) {
+          return {
+            top: isRegionExpanded || drag ? liftHeight : (total - 1 - index) * 8,
+            bottom: "auto",
+          };
+        } else if (placement.includes("bottom")) {
+          return {
+            bottom: isRegionExpanded || drag ? liftHeight : (total - 1 - index) * 8,
+            top: "auto",
+          };
+        }
+
+        return {};
+      })();
 
       return {
         animate: {
           opacity: isCloseToEnd ? 1 : 0,
           pointerEvents: isCloseToEnd ? "all" : "none",
-          y:
-            isRegionExpanded || drag
-              ? liftHeight * multiplier
-              : (total - 1 - index) * 8 * multiplier,
           scaleX: isRegionExpanded || drag ? 1 : 1 - (total - 1 - index) * 0.1,
           height: isRegionExpanded || drag ? initialHeight : frontHeight,
+          y: 0,
+          ...animateProps,
         },
         drag: dragDirection,
         dragConstraints,
-        exit: {opacity: 0, y: 100},
-        initial: {opacity: 0, y: -40 * multiplier, scale: 1},
+        exit: {opacity: 0},
+        initial: {opacity: 0, scale: 1, y: -40 * multiplier},
         transition: {duration: 0.3, ease: "easeOut"},
         variants: toastVariants,
         dragElastic,
         onDragEnd: (_, info) => {
-          const {x: offsetX} = info.offset;
+          const {x: offsetX, y: offsetY} = info.offset;
 
           setDrag(false);
 
-          if (shouldCloseToast(offsetX)) {
+          if (shouldCloseToast(offsetX, offsetY)) {
             state.close(toast.key);
             state.remove(toast.key);
 
@@ -431,12 +477,15 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
           setDragValue(0);
         },
         onDrag: (_, info) => {
-          let updatedDragValue = Math.abs(info.offset.x);
+          let updatedDragValue = 0;
 
-          if (placement.includes("right")) {
+          if (placement === "center-top") {
+            updatedDragValue = -info.offset.y;
+          } else if (placement === "center-bottom") {
+            updatedDragValue = info.offset.y;
+          } else if (placement.includes("right")) {
             updatedDragValue = info.offset.x;
-          }
-          if (placement.includes("left")) {
+          } else if (placement.includes("left")) {
             updatedDragValue = -info.offset.x;
           }
 

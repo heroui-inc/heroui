@@ -138,7 +138,17 @@ const toast = tv({
       },
       false: {
         closeButton: "transition-opacity ease-in duration-300",
-        base: "data-[animation=exiting]:transition data-[animation=exiting]:ease-out data-[animation=exiting]:duration-200 data-[animation=exiting]:opacity-0",
+        base: [
+          "data-[animation=exiting]:transform",
+          "data-[animation=exiting]:data-[placement=right-bottom]:translate-x-28",
+          "data-[animation=exiting]:data-[placement=left-bottom]:-translate-x-28",
+          "data-[animation=exiting]:data-[placement=center-bottom]:translate-y-28",
+          "data-[animation=exiting]:data-[placement=right-top]:translate-x-28",
+          "data-[animation=exiting]:data-[placement=left-top]:-translate-x-28",
+          "data-[animation=exiting]:data-[placement=center-top]:-translate-y-28",
+          "data-[animation=exiting]:opacity-0",
+          "data-[animation=exiting]:duration-200",
+        ],
       },
     },
     shadow: {
