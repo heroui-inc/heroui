@@ -3,7 +3,7 @@ import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
 import {UseNumberInputProps, useNumberInput} from "./use-number-input";
-import NumberInputVerticalStepper from "./number-input-vertical-stepper";
+import NumberInputStepper from "./number-input-stepper";
 
 export interface NumberInputProps extends UseNumberInputProps {}
 
@@ -89,8 +89,8 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
         {end}
         {!hideStepper && (
           <div {...getStepperWrapperProps()}>
-            <NumberInputVerticalStepper {...getStepperIncreaseButtonProps()} direction="up" />
-            <NumberInputVerticalStepper {...getStepperDecreaseButtonProps()} direction="down" />
+            <NumberInputStepper {...getStepperIncreaseButtonProps()} direction="up" />
+            <NumberInputStepper {...getStepperDecreaseButtonProps()} direction="down" />
           </div>
         )}
       </div>

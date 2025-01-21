@@ -167,7 +167,7 @@ This prop should be an object where each key is the field `name` and the value i
 - **input**: The input element.
 - **clearButton**: The clear button, it is at the end of the input.
 - **stepperButton**: The stepper button to increase or decrease the value.
-- **verticalStepperWrapper**: The wrapper for the vertical stepper.
+- **stepperWrapper**: The wrapper for the stepper.
 - **description**: The description of NumberInput.
 - **errorMessage**: The error message of NumberInput.
 
@@ -431,7 +431,7 @@ You can customize the `NumberInput` component by passing custom Tailwind CSS cla
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<'base' | 'label' | 'inputWrapper' | 'innerWrapper' | 'mainWrapper' | 'input' | 'clearButton' | 'stepperButton' | 'helperWrapper' | 'verticalStepperWrapper' | 'description' | 'errorMessage', string>>",
+      type: "Partial<Record<'base' | 'label' | 'inputWrapper' | 'innerWrapper' | 'mainWrapper' | 'input' | 'clearButton' | 'stepperButton' | 'helperWrapper' | 'stepperWrapper' | 'description' | 'errorMessage', string>>",
       description: "Allows to set custom class names for the Input slots.",
       default: "-"
     }
