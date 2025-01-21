@@ -15,7 +15,10 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
     isClearable,
     startContent,
     endContent,
+    labelPlacement,
     hasHelper,
+    isOutsideLeft,
+    shouldLabelBeOutside,
     errorMessage,
     isInvalid,
     hideStepper,
@@ -32,7 +35,7 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
     getClearButtonProps,
     getStepperIncreaseButtonProps,
     getStepperDecreaseButtonProps,
-    getVerticalStepperWrapperProps,
+    getStepperWrapperProps,
   } = useNumberInput({...props, ref});
 
   const labelContent = label ? <label {...getLabelProps()}>{label}</label> : null;
@@ -85,7 +88,7 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
         <input {...getHiddenNumberInputProps()} />
         {end}
         {!hideStepper && (
-          <div {...getVerticalStepperWrapperProps()}>
+          <div {...getStepperWrapperProps()}>
             <NumberInputVerticalStepper {...getStepperIncreaseButtonProps()} direction="up" />
             <NumberInputVerticalStepper {...getStepperDecreaseButtonProps()} direction="down" />
           </div>
@@ -95,17 +98,31 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
   }, [startContent, end, getNumberInputProps, getInnerWrapperProps]);
 
   const mainWrapper = useMemo(() => {
+    if (shouldLabelBeOutside) {
+      return (
+        <div {...getMainWrapperProps()}>
+          <div {...getInputWrapperProps()}>
+            {!isOutsideLeft ? labelContent : null}
+            {innerWrapper}
+          </div>
+          {helperWrapper}
+        </div>
+      );
+    }
+
     return (
-      <div {...getMainWrapperProps()}>
+      <>
         <div {...getInputWrapperProps()}>
           {labelContent}
           {innerWrapper}
         </div>
         {helperWrapper}
-      </div>
+      </>
     );
   }, [
+    labelPlacement,
     helperWrapper,
+    shouldLabelBeOutside,
     labelContent,
     innerWrapper,
     errorMessage,
@@ -116,7 +133,12 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
     getDescriptionProps,
   ]);
 
-  return <Component {...getBaseProps()}>{mainWrapper}</Component>;
+  return (
+    <Component {...getBaseProps()}>
+      {isOutsideLeft ? labelContent : null}
+      {mainWrapper}
+    </Component>
+  );
 });
 
 NumberInput.displayName = "HeroUI.NumberInput";

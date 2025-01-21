@@ -38,6 +38,12 @@ export default {
       },
       options: ["sm", "md", "lg"],
     },
+    labelPlacement: {
+      control: {
+        type: "select",
+      },
+      options: ["inside", "outside", "outside-left"],
+    },
     isDisabled: {
       control: {
         type: "boolean",
@@ -95,6 +101,37 @@ const ControlledTemplate = (args) => {
     </div>
   );
 };
+
+const LabelPlacementTemplate = (args) => (
+  <div className="w-full flex flex-col items-center gap-12">
+    <div className="flex flex-col gap-3">
+      <h3>Without placeholder</h3>
+      <div className="w-full max-w-3xl flex flex-row items-end gap-4">
+        <NumberInput {...args} description="inside" />
+        <NumberInput {...args} description="outside" labelPlacement="outside" />
+        <NumberInput {...args} description="outside-left" labelPlacement="outside-left" />
+      </div>
+    </div>
+    <div className="flex flex-col gap-3">
+      <h3>With placeholder</h3>
+      <div className="w-full max-w-3xl flex flex-row items-end gap-4">
+        <NumberInput {...args} description="inside" placeholder="Enter a number" />
+        <NumberInput
+          {...args}
+          description="outside"
+          labelPlacement="outside"
+          placeholder="Enter a number"
+        />
+        <NumberInput
+          {...args}
+          description="outside-left"
+          labelPlacement="outside-left"
+          placeholder="Enter a number"
+        />
+      </div>
+    </div>
+  </div>
+);
 
 // const WithReactHookFormTemplate = (args: NumberInputProps) => {
 //   const {
@@ -275,6 +312,16 @@ export const ReadOnly = {
     variant: "bordered",
     isReadOnly: true,
     "aria-label": "amount",
+  },
+};
+
+export const LabelPlacement = {
+  render: LabelPlacementTemplate,
+
+  args: {
+    ...defaultProps,
+    label: "Amount",
+    defaultValue: undefined,
   },
 };
 

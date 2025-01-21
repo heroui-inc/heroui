@@ -62,7 +62,7 @@ export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputV
    *    input: "input-classes",
    *    clearButton: "clear-button-classes",
    *    helperWrapper: "helper-wrapper-classes",
-   *    verticalStepperWrapper: "vertical-stepper-wrapper-classes",
+   *    stepperWrapper: "stepper-wrapper-classes",
    *    description: "description-classes",
    *    errorMessage: "error-message-classes",
    * }} />
@@ -153,7 +153,10 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   } = useAriaNumberInput(originalProps, state, domRef);
 
   const inputValue = isNaN(state.numberValue) ? "" : state.numberValue;
+
   const isFilled = !isEmpty(inputValue);
+
+  const isFilledWithin = isFilled || isFocusWithin;
 
   const baseStyles = clsx(classNames?.base, className, isFilled ? "is-filled" : "");
 
@@ -197,6 +200,14 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
   const isInvalid = validationState === "invalid" || isAriaInvalid;
 
+  const labelPlacement = useMemo<NumberInputVariantProps["labelPlacement"]>(() => {
+    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
+      return "outside";
+    }
+
+    return originalProps.labelPlacement ?? "inside";
+  }, [originalProps.labelPlacement, label]);
+
   const errorMessage =
     typeof props.errorMessage === "function"
       ? props.errorMessage({isInvalid, validationErrors, validationDetails})
@@ -206,11 +217,21 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
   const hasHelper = !!description || !!errorMessage;
+  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeInside = labelPlacement === "inside";
   const isPlaceholderShown = domRef.current
     ? (!domRef.current.value || domRef.current.value === "" || !inputValue) && hasPlaceholder
     : false;
+  const isOutsideLeft = labelPlacement === "outside-left";
 
   const hasStartContent = !!startContent;
+  const isLabelOutside = shouldLabelBeOutside
+    ? labelPlacement === "outside-left" ||
+      hasPlaceholder ||
+      (labelPlacement === "outside" && hasStartContent)
+    : false;
+  const isLabelOutsideAsPlaceholder =
+    labelPlacement === "outside" && !hasPlaceholder && !hasStartContent;
 
   const slots = useMemo(
     () =>
@@ -231,6 +252,9 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         "data-slot": "base",
         "data-filled": dataAttr(
           isFilled || hasPlaceholder || hasStartContent || isPlaceholderShown,
+        ),
+        "data-filled-within": dataAttr(
+          isFilledWithin || hasPlaceholder || hasStartContent || isPlaceholderShown,
         ),
         "data-focus-within": dataAttr(isFocusWithin),
         "data-focus-visible": dataAttr(isFocusVisible),
@@ -456,12 +480,12 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     [slots, isClearButtonFocusVisible, clearPressProps, clearFocusProps, classNames?.clearButton],
   );
 
-  const getVerticalStepperWrapperProps: PropGetter = useCallback(
+  const getStepperWrapperProps: PropGetter = useCallback(
     (props = {}) => {
       return {
         ...props,
-        className: slots.verticalStepperWrapper({
-          class: clsx(classNames?.verticalStepperWrapper, props?.className),
+        className: slots.stepperWrapper({
+          class: clsx(classNames?.stepperWrapper, props?.className),
         }),
       };
     },
@@ -509,9 +533,15 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     description,
     startContent,
     endContent,
+    labelPlacement,
     isClearable,
     hasHelper,
     hasStartContent,
+    isLabelOutside,
+    isOutsideLeft,
+    isLabelOutsideAsPlaceholder,
+    shouldLabelBeOutside,
+    shouldLabelBeInside,
     hasPlaceholder,
     isInvalid,
     errorMessage,
@@ -531,7 +561,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     getClearButtonProps,
     getStepperIncreaseButtonProps,
     getStepperDecreaseButtonProps,
-    getVerticalStepperWrapperProps,
+    getStepperWrapperProps,
   };
 }
 

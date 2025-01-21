@@ -1,7 +1,7 @@
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "../utils/tv";
-import {groupDataFocusVisibleClasses} from "../utils";
+import {dataFocusVisibleClasses, groupDataFocusVisibleClasses} from "../utils";
 
 /**
  * NumberInput wrapper **Tailwind Variants** component
@@ -23,7 +23,7 @@ import {groupDataFocusVisibleClasses} from "../utils";
  */
 const numberInput = tv({
   slots: {
-    base: "group flex flex-col data-[hidden=true]:hidden relative justify-end",
+    base: "group flex flex-col data-[hidden=true]:hidden",
     label: [
       "absolute",
       "z-10",
@@ -37,9 +37,9 @@ const numberInput = tv({
       "text-small",
       "text-foreground-500",
     ],
-    mainWrapper: "h-full flex flex-col",
+    mainWrapper: "h-full",
     inputWrapper:
-      "relative w-full inline-flex tap-highlight-transparent flex-row items-center shadow-sm px-3 py-2 h-8 gap-3",
+      "relative w-full inline-flex tap-highlight-transparent flex-row items-center shadow-sm px-3 gap-3",
     innerWrapper: "inline-flex w-full items-center h-full box-border",
     input: [
       "w-full font-normal bg-transparent !outline-none placeholder:text-foreground-500 focus-visible:outline-none",
@@ -48,19 +48,26 @@ const numberInput = tv({
       "autofill:bg-transparent bg-clip-text",
     ],
     clearButton: [
-      "opacity-0",
+      "p-2",
+      "-m-2",
+      "z-10",
+      "absolute",
+      "end-3",
+      "start-auto",
       "pointer-events-none",
-      "group-data-[invalid=true]:text-danger",
-      "peer-data-[filled=true]:opacity-100", // on mobile is always visible when there is a value
-      "peer-data-[filled=true]:pointer-events-auto",
-      "peer-data-[filled=true]:cursor-pointer",
-      "sm:peer-data-[filled=true]:opacity-0", // only visible on hover
-      "sm:peer-data-[filled=true]:pointer-events-none",
-      "sm:group-data-[hover=true]:peer-data-[filled=true]:opacity-100",
-      "sm:group-data-[hover=true]:peer-data-[filled=true]:pointer-events-auto",
+      "appearance-none",
+      "outline-none",
+      "select-none",
+      "opacity-0",
+      "hover:!opacity-100",
+      "cursor-pointer",
+      "active:!opacity-70",
+      "rounded-full",
+      // focus ring
+      ...dataFocusVisibleClasses,
     ],
     stepperButton: ["bg-transparent", "min-w-5", "w-5", "h-4", "rounded-none"],
-    verticalStepperWrapper: ["flex", "flex-col", "ps-1"],
+    stepperWrapper: ["flex", "flex-col", "ps-1"],
     helperWrapper: "hidden group-data-[has-helper=true]:flex py-2 relative flex-col gap-1.5",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
@@ -115,6 +122,7 @@ const numberInput = tv({
           "group-data-[focus=true]:after:w-full",
         ],
         innerWrapper: "pb-1",
+        label: "group-data-[filled-within=true]:text-foreground",
       },
     },
     color: {
@@ -127,56 +135,21 @@ const numberInput = tv({
     },
     size: {
       sm: {
-        label: [
-          "start-0",
-          "text-tiny",
-          "-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_16px)]",
-          "group-data-[has-description=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_32px)]",
-        ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]",
+        label: "text-tiny",
         inputWrapper: "h-8 min-h-8 px-2 rounded-small",
         input: "text-small",
         clearButton: "text-medium",
-        description: [
-          "start-0",
-          "-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
-          "group-data-[has-label=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
-        ],
       },
       md: {
-        label: [
-          "start-0",
-          "end-auto",
-          "-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
-          "group-data-[has-description=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_36px)]",
-        ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]",
         inputWrapper: "h-10 min-h-10 rounded-medium",
         input: "text-small",
         clearButton: "text-large",
-        description: [
-          "start-0",
-          "-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_20px)]",
-          "group-data-[has-label=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_20px)]",
-        ],
       },
       lg: {
-        label: [
-          "start-0",
-          "end-auto",
-          "text-medium",
-          "-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
-          "group-data-[has-description=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_40px)]",
-        ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+        label: "text-medium",
         inputWrapper: "h-12 min-h-12 rounded-large",
         input: "text-medium",
         clearButton: "text-large",
-        description: [
-          "start-0",
-          "-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_24px)]",
-          "group-data-[has-label=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_24px)]",
-        ],
       },
     },
     radius: {
@@ -196,6 +169,22 @@ const numberInput = tv({
         inputWrapper: "rounded-full",
       },
     },
+    labelPlacement: {
+      outside: {
+        mainWrapper: "flex flex-col",
+      },
+      "outside-left": {
+        base: "flex-row items-center flex-nowrap data-[has-helper=true]:items-start",
+        inputWrapper: "flex-1",
+        mainWrapper: "flex flex-col",
+        label: "relative text-foreground pe-2 ps-2 pointer-events-auto",
+      },
+      inside: {
+        label: "cursor-text",
+        inputWrapper: "flex-col items-start justify-center gap-0",
+        innerWrapper: "group-data-[has-label=true]:items-end",
+      },
+    },
     fullWidth: {
       true: {
         base: "w-full",
@@ -205,9 +194,11 @@ const numberInput = tv({
     isClearable: {
       true: {
         input: "peer pe-6 input-search-cancel-button-none",
-      },
-      false: {
-        clearButton: "hidden",
+        clearButton: [
+          "peer-data-[filled=true]:pointer-events-auto",
+          "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
+          "peer-data-[filled=true]:scale-100",
+        ],
       },
     },
     isDisabled: {
@@ -259,6 +250,7 @@ const numberInput = tv({
     color: "default",
     size: "md",
     fullWidth: true,
+    labelPlacement: "inside",
     isDisabled: false,
   },
   compoundVariants: [
@@ -481,6 +473,22 @@ const numberInput = tv({
         label: "text-danger",
       },
     },
+    // labelPlacement=inside & default
+    {
+      labelPlacement: "inside",
+      color: "default",
+      class: {
+        label: "group-data-[filled-within=true]:text-default-600",
+      },
+    },
+    // labelPlacement=outside & default
+    {
+      labelPlacement: "outside",
+      color: "default",
+      class: {
+        label: "group-data-[filled-within=true]:text-foreground",
+      },
+    },
     // radius-full & size
     {
       radius: "full",
@@ -554,6 +562,101 @@ const numberInput = tv({
         inputWrapper: "after:!bg-danger",
       },
     },
+    // size & labelPlacement
+    {
+      labelPlacement: "inside",
+      size: "sm",
+      class: {
+        inputWrapper: "h-12 py-1.5 px-3",
+      },
+    },
+    {
+      labelPlacement: "inside",
+      size: "md",
+      class: {
+        inputWrapper: "h-14 py-2",
+      },
+    },
+    {
+      labelPlacement: "inside",
+      size: "lg",
+      class: {
+        inputWrapper: "h-16 py-2.5 gap-0",
+      },
+    },
+    // size & labelPlacement & variant=[faded, bordered]
+    {
+      labelPlacement: "inside",
+      size: "sm",
+      variant: ["bordered", "faded"],
+      class: {
+        inputWrapper: "py-1",
+      },
+    },
+    // labelPlacement=[inside,outside]
+    {
+      labelPlacement: ["inside", "outside"],
+      class: {
+        label: ["group-data-[filled-within=true]:pointer-events-auto"],
+      },
+    },
+    // labelPlacement=[outside]
+    {
+      labelPlacement: "outside",
+      class: {
+        base: "relative justify-end",
+        label: [
+          "pb-0",
+          "z-20",
+          "top-1/2",
+          "-translate-y-1/2",
+          "group-data-[filled-within=true]:start-0",
+        ],
+      },
+    },
+    // labelPlacement=[inside]
+    {
+      labelPlacement: ["inside"],
+      class: {
+        label: ["group-data-[filled-within=true]:scale-85"],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      size: "sm",
+      class: {
+        label: [
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px)]",
+        ],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      size: "md",
+      class: {
+        label: [
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]",
+        ],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      size: "lg",
+      class: {
+        label: [
+          "text-medium",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]",
+        ],
+      },
+    },
+    // labelPlacement=[inside] & variant=flat
+    {
+      labelPlacement: ["inside"],
+      variant: "flat",
+      class: {
+        innerWrapper: "pb-0.5",
+      },
+    },
     // variant=underlined & size
     {
       variant: "underlined",
@@ -567,6 +670,147 @@ const numberInput = tv({
       size: ["md", "lg"],
       class: {
         innerWrapper: "pb-1.5",
+      },
+    },
+    // inside & size
+    {
+      labelPlacement: "inside",
+      size: ["sm", "md"],
+      class: {
+        label: "text-small",
+      },
+    },
+    // inside & size & [faded, bordered]
+    {
+      labelPlacement: "inside",
+      variant: ["faded", "bordered"],
+      size: "sm",
+      class: {
+        label: [
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]",
+        ],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      variant: ["faded", "bordered"],
+      isMultiline: false,
+      size: "md",
+      class: {
+        label: [
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]",
+        ],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      variant: ["faded", "bordered"],
+      size: "lg",
+      class: {
+        label: [
+          "text-medium",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px_-_theme(borderWidth.medium))]",
+        ],
+      },
+    },
+    // inside & size & underlined
+    {
+      labelPlacement: "inside",
+      variant: "underlined",
+      size: "sm",
+      class: {
+        label: [
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_5px)]",
+        ],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      variant: "underlined",
+      size: "md",
+      class: {
+        label: [
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]",
+        ],
+      },
+    },
+    {
+      labelPlacement: "inside",
+      variant: "underlined",
+      size: "lg",
+      class: {
+        label: [
+          "text-medium",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]",
+        ],
+      },
+    },
+    // outside & size
+    {
+      labelPlacement: "outside",
+      size: "sm",
+      class: {
+        label: [
+          "start-2",
+          "text-tiny",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
+        ],
+        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]",
+      },
+    },
+    {
+      labelPlacement: "outside",
+      size: "md",
+      class: {
+        label: [
+          "start-3",
+          "end-auto",
+          "text-small",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
+        ],
+        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]",
+      },
+    },
+    {
+      labelPlacement: "outside",
+      size: "lg",
+      class: {
+        label: [
+          "start-3",
+          "end-auto",
+          "text-medium",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
+        ],
+        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+      },
+    },
+    // outside-left & size & hasHelper
+    {
+      labelPlacement: "outside-left",
+      size: "sm",
+      class: {
+        label: "group-data-[has-helper=true]:pt-2",
+      },
+    },
+    {
+      labelPlacement: "outside-left",
+      size: "md",
+      class: {
+        label: "group-data-[has-helper=true]:pt-3",
+      },
+    },
+    {
+      labelPlacement: "outside-left",
+      size: "lg",
+      class: {
+        label: "group-data-[has-helper=true]:pt-4",
+      },
+    },
+    // text truncate labelPlacement=[inside,outside]
+    {
+      labelPlacement: ["inside", "outside"],
+      class: {
+        label: ["pe-2", "max-w-full", "text-ellipsis", "overflow-hidden"],
       },
     },
   ],
