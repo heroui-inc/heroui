@@ -9,7 +9,7 @@ import withTimeout from "./with-timeout";
 import radius from "./radius";
 import placement from "./placement";
 import description from "./description";
-import disableAnimation from "./disable-animation";
+import promise from "./promise";
 
 export const toastContent = {
   color,
@@ -23,5 +23,5 @@ export const toastContent = {
   radius,
   placement,
   description,
-  disableAnimation,
+  promise,
 };

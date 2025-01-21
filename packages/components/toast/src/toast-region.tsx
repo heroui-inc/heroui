@@ -19,6 +19,7 @@ interface ToastRegionProps<T> extends AriaToastRegionProps {
     | "center-top";
   disableAnimation: boolean;
   maxVisibleToasts: number;
+  toastOffset?: number;
 }
 
 export function ToastRegion<T extends ToastProps>({
@@ -26,6 +27,7 @@ export function ToastRegion<T extends ToastProps>({
   placement,
   disableAnimation,
   maxVisibleToasts,
+  toastOffset,
   ...props
 }: ToastRegionProps<T>) {
   const ref = useRef(null);
@@ -89,6 +91,7 @@ export function ToastRegion<T extends ToastProps>({
               isRegionExpanded={isHovered || isTouched}
               placement={placement}
               setHeights={setHeights}
+              toastOffset={toastOffset}
               total={total}
             />
           );

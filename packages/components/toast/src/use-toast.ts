@@ -95,6 +95,7 @@ interface Props<T> extends HTMLHeroUIProps<"div">, ToastProps {
     | "right-top"
     | "left-top"
     | "center-top";
+  toastOffset?: number;
 }
 
 export type UseToastProps<T = ToastProps> = Props<T> &
@@ -121,6 +122,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     heights,
     promise: promiseProp,
     setHeights,
+    toastOffset = 0,
     ...otherProps
   } = props;
 
@@ -434,12 +436,18 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       const animateProps = (() => {
         if (placement.includes("top")) {
           return {
-            top: isRegionExpanded || drag ? liftHeight : (total - 1 - index) * 8,
+            top:
+              isRegionExpanded || drag
+                ? liftHeight + toastOffset
+                : (total - 1 - index) * 8 + toastOffset,
             bottom: "auto",
           };
         } else if (placement.includes("bottom")) {
           return {
-            bottom: isRegionExpanded || drag ? liftHeight : (total - 1 - index) * 8,
+            bottom:
+              isRegionExpanded || drag
+                ? liftHeight + toastOffset
+                : (total - 1 - index) * 8 + toastOffset,
             top: "auto",
           };
         }

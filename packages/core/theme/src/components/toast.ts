@@ -4,7 +4,7 @@ import {tv} from "../utils/tv";
 
 const toastRegion = tv({
   slots: {
-    base: "",
+    base: "relative z-50",
   },
   variants: {
     disableAnimation: {
@@ -35,7 +35,7 @@ const toast = tv({
       "group",
       "cursor-pointer",
       "relative",
-      "z-[9999]",
+      "z-50",
       "box-border",
       "outline-none",
       "p-3 sm:mx-1",

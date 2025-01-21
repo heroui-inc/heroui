@@ -41,53 +41,29 @@ Toasts are temporary notifications that provide concise feedback about an action
 
 ### Usage
 
-<CodeDemo
-  asIframe
-  title="Usage"
-  previewHeight="300px"
-  iframeSrc="/examples/toast/usage"
-  files={toastContent.usage}
-/>
+<CodeDemo title="Usage" files={toastContent.usage} />
 
 ### With Description
 
-<CodeDemo
-  asIframe
-  title="WithDescription"
-  previewHeight="300px"
-  iframeSrc="/examples/toast/with-description"
-  files={toastContent.description}
-/>
+<CodeDemo title="WithDescription"  files={toastContent.description} />
 
 ### Colors
 
 Toast comes with 6 color variants to convey different meanings.
 
-<CodeDemo
-  asIframe
-  title="Color"
-  previewHeight="600px"
-  iframeSrc="/examples/toast/color"
-  files={toastContent.color}
-/>
+<CodeDemo title="Color" files={toastContent.color} />
 
 ### Variants
 
 <CodeDemo
-  asIframe
   title="Variants"
-  previewHeight="500px"
-  iframeSrc="/examples/toast/variant"
   files={toastContent.variants}
 />
 
 ### Radius
 
 <CodeDemo
-  asIframe
   title="Radius"
-  previewHeight="600px"
-  iframeSrc="/examples/toast/radius"
   files={toastContent.radius}
 />
 
@@ -96,10 +72,7 @@ Toast comes with 6 color variants to convey different meanings.
 By default, Toast displays an appropriate icon based on the `color` prop. You can override this by providing a custom icon using the `icon` prop.
 
 <CodeDemo
-  asIframe
   title="Custom Icon"
-  previewHeight="600px"
-  iframeSrc="/examples/toast/custom-icon"
   files={toastContent.customIcon}
 />
 
@@ -108,10 +81,7 @@ By default, Toast displays an appropriate icon based on the `color` prop. You ca
 You can hide the icon by setting the `hideIcon` prop to `true`.
 
 <CodeDemo
-  asIframe
   title="Without Icon"
-  previewHeight="350px"
-  iframeSrc="/examples/toast/hidden-icon"
   files={toastContent.hiddenIcon}
 />
 
@@ -120,10 +90,7 @@ You can hide the icon by setting the `hideIcon` prop to `true`.
 Toast supports an `endContent` prop for additional actions.
 
 <CodeDemo
-  asIframe
   title="With Action"
-  previewHeight="350px"
-  iframeSrc="/examples/toast/with-action"
   files={toastContent.withAction}
 />
 
@@ -132,40 +99,21 @@ Toast supports an `endContent` prop for additional actions.
 Toast supports an `endContent` prop for additional actions.
 
 <CodeDemo
-  asIframe
   title="With Timeout"
-  previewHeight="350px"
-  iframeSrc="/examples/toast/with-timeout"
   files={toastContent.withTimeout}
 />
 
 ### Toast Placement
 
 <CodeDemo
-  asIframe
   title="Placement"
-  previewHeight="400px"
-  iframeSrc="/examples/toast/placement"
   files={toastContent.placement}
-/>
-
-### Disable Animation
-
-<CodeDemo
-  asIframe
-  title="Placement"
-  previewHeight="400px"
-  iframeSrc="/examples/toast/disable-animation"
-  files={toastContent.disableAnimation}
 />
 
 ### Promise
 
 <CodeDemo
-  asIframe
   title="Promise"
-  previewHeight="400px"
-  iframeSrc="/examples/toast/promise"
   files={toastContent.promise}
 />
 
@@ -174,10 +122,7 @@ Toast supports an `endContent` prop for additional actions.
 You can customize the alert by passing custom Tailwind CSS classes to the component slots.
 
 <CodeDemo
-  asIframe
   title="Custom Style"
-  previewHeight="350px"
-  iframeSrc="/examples/toast/custom-style"
   files={toastContent.customStyles}
 />
 
@@ -323,6 +268,12 @@ Toast has the following slots:
       description: "Disables the animation.",
       default: "false"
     },
+    {
+      attribute: "toastOffset",
+      type: "number",
+      description: "offset distance from the top or bottom",
+      default: "0"
+    }
   ]}
 />
 
