@@ -334,6 +334,17 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
           </NavbarItem>
 
           <NavbarItem>
+            <NextLink
+              className={navLinkClasses}
+              color="foreground"
+              data-active={pathname.includes("themes")}
+              href="/themes"
+              onClick={() => handlePressNavbarItem("Themes", "/themes")}
+            >
+              Theme
+            </NextLink>
+          </NavbarItem>
+          <NavbarItem>
             <FbRoadmapLink className={navLinkClasses} />
           </NavbarItem>
         </ul>
