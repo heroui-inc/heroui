@@ -17,7 +17,7 @@ export function Other({config}: OtherProps) {
   };
 
   return (
-    <ConfigSection cols={1} title="Other">
+    <ConfigSection title="Other">
       <NumberInput
         label="Disabled opacity (0-1)"
         value={config.layout.otherParams.disabledOpacity}

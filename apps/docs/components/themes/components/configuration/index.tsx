@@ -24,12 +24,9 @@ import {setAllCssVars} from "../../css-vars";
 import {BaseColors} from "./base-colors";
 import {ContentColors} from "./content-colors";
 import {LayoutColors} from "./layout-colors";
-import {FontSizes} from "./font-sizes";
-import {LineHeights} from "./line-heights";
 import {Radiuses} from "./radiuses";
-import {BorderWidths} from "./border-widths";
-import {Other} from "./other";
 import {DefaultColors} from "./default-colors";
+import {DisableOpacity} from "./disable-opacity";
 
 import usePrevious from "@/hooks/use-previous";
 import {RotateLeftLinearIcon} from "@/components/icons";
@@ -109,20 +106,13 @@ export default function Configuration() {
             }}
           />
 
-          <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-6 mt-6">
             <DefaultColors config={config} theme={theme} />
-
             <BaseColors config={config} syncIcon={syncIcon} syncThemes={syncThemes} theme={theme} />
-
             <ContentColors config={config} theme={theme} />
-
             <LayoutColors config={config} syncThemes={syncThemes} theme={theme} />
-
-            <FontSizes config={config} />
-            <LineHeights config={config} />
-            <Radiuses config={config} />
-            <BorderWidths config={config} />
-            <Other config={config} />
+            <Radiuses />
+            <DisableOpacity config={config} />
           </div>
         </ScrollShadow>
       </CardBody>

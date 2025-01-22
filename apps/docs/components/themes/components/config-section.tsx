@@ -14,7 +14,7 @@ export function ConfigSection({children, id, title, icon}: ConfigurationSectionP
         {icon}
         {title}
       </div>
-      <div className={clsx("flex flex-wrap gap-1 mt-2")}>{children}</div>
+      <div className={clsx("flex flex-wrap gap-2 mt-2")}>{children}</div>
     </div>
   );
 }

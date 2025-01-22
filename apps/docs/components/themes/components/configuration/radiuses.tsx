@@ -1,41 +1,44 @@
-import {setCssRadius} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
-import {Config} from "../../types";
 import {ConfigSection} from "../config-section";
-import {NumberInput} from "../number-input";
 
-interface RadiusesProps {
-  config: Config;
-}
+import EditableButton from "./editable-button";
 
-export function Radiuses({config}: RadiusesProps) {
-  const {setRadius} = useThemeBuilder();
+import {CropMinimalistic} from "@/components/icons/crop";
+
+export function Radiuses() {
+  const {radiusValue, setRadiusValue} = useThemeBuilder();
 
   return (
-    <ConfigSection cols={3} title="Radius (rem)">
-      <NumberInput
-        label="Small"
-        value={config.layout.radius.small}
-        onChange={(value) => {
-          setRadius({small: value});
-          setCssRadius("small", value);
-        }}
+    <ConfigSection icon={<CropMinimalistic className="h-4 w-4" />} title="Radius">
+      <EditableButton
+        className="rounded-tl-none"
+        setValue={setRadiusValue}
+        title="none"
+        value={radiusValue}
       />
-      <NumberInput
-        label="Medium"
-        value={config.layout.radius.medium}
-        onChange={(value) => {
-          setRadius({medium: value});
-          setCssRadius("medium", value);
-        }}
+      <EditableButton
+        className="rounded-tl-sm"
+        setValue={setRadiusValue}
+        title="sm"
+        value={radiusValue}
       />
-      <NumberInput
-        label="Large"
-        value={config.layout.radius.large}
-        onChange={(value) => {
-          setRadius({large: value});
-          setCssRadius("large", value);
-        }}
+      <EditableButton
+        className="rounded-tl-md"
+        setValue={setRadiusValue}
+        title="md"
+        value={radiusValue}
+      />
+      <EditableButton
+        className="rounded-tl-lg"
+        setValue={setRadiusValue}
+        title="lg"
+        value={radiusValue}
+      />
+      <EditableButton
+        className="rounded-tl-full"
+        setValue={setRadiusValue}
+        title="full"
+        value={radiusValue}
       />
     </ConfigSection>
   );

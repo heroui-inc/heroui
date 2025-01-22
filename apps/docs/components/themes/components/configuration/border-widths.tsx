@@ -1,37 +1,32 @@
-import {setCssBorderWidth} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
-import {Config} from "../../types";
 import {ConfigSection} from "../config-section";
-import {NumberInput} from "../number-input";
 
-interface BorderWidthsProps {
-  config: Config;
-}
+import EditableButton from "./editable-button";
 
-export function BorderWidths({config}: BorderWidthsProps) {
-  const {setBorderWidth} = useThemeBuilder();
+import {Crop} from "@/components/icons/crop";
 
-  const handleChange = (key: keyof Config["layout"]["borderWidth"], value: string) => {
-    setBorderWidth({[key]: value});
-    setCssBorderWidth(key, value);
-  };
+export function BorderWidths() {
+  const {borderWidthValue, setBorderWidthValue} = useThemeBuilder();
 
   return (
-    <ConfigSection cols={3} title="Border width (px)">
-      <NumberInput
-        label="Small"
-        value={config.layout.borderWidth.small}
-        onChange={(value) => handleChange("small", value)}
+    <ConfigSection icon={<Crop className="w-4 h-4" />} title="Border width">
+      <EditableButton
+        className="rounded-tl-md border-t-2 border-l-2"
+        setValue={setBorderWidthValue}
+        title="sm"
+        value={borderWidthValue}
       />
-      <NumberInput
-        label="Medium"
-        value={config.layout.borderWidth.medium}
-        onChange={(value) => handleChange("medium", value)}
+      <EditableButton
+        className="rounded-tl-md border-t-3 border-l-3"
+        setValue={setBorderWidthValue}
+        title="md"
+        value={borderWidthValue}
       />
-      <NumberInput
-        label="Large"
-        value={config.layout.borderWidth.large}
-        onChange={(value) => handleChange("large", value)}
+      <EditableButton
+        className="rounded-tl-md border-t-4 border-l-4"
+        setValue={setBorderWidthValue}
+        title="lg"
+        value={borderWidthValue}
       />
     </ConfigSection>
   );
