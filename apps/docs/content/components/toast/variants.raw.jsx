@@ -2,7 +2,7 @@ import {addToast, Button} from "@heroui/react";
 
 export default function App() {
   return (
-    <div className="flex flex-wrap gap-x-2">
+    <div className="flex flex-wrap gap-2">
       {[
         ["solid", "solid"],
         ["bordered", "bordered"],
