@@ -21,14 +21,15 @@ import {SelectTemplate} from "../select-template";
 import {generatePluginConfig} from "../../utils/config";
 import {setAllCssVars} from "../../css-vars";
 
-import {BrandColors} from "./brand-colors";
 import {BaseColors} from "./base-colors";
-import {OtherColors} from "./other-colors";
+import {ContentColors} from "./content-colors";
+import {LayoutColors} from "./layout-colors";
 import {FontSizes} from "./font-sizes";
 import {LineHeights} from "./line-heights";
 import {Radiuses} from "./radiuses";
 import {BorderWidths} from "./border-widths";
 import {Other} from "./other";
+import {DefaultColors} from "./default-colors";
 
 import usePrevious from "@/hooks/use-previous";
 import {RotateLeftLinearIcon} from "@/components/icons";
@@ -79,13 +80,17 @@ export default function Configuration() {
   }
 
   return (
-    <Card className="max-w-sm w-full h-[70vh]">
-      <CardHeader className="p-2 px-4 flex justify-between">
+    <Card className="max-w-sm h-[70vh] sticky top-28 z-30 mx-auto">
+      <CardHeader className="flex justify-between px-6 py-4">
         <div className="flex gap-x-4 items-center">
           <div className="text-xl font-medium text-default-800 ">Theme</div>
-          <Button className="text-tiny bg-default-100" onPress={handleResetTheme}>
+          <Button
+            className="text-tiny bg-default-100 flex items-center"
+            size="sm"
+            onPress={handleResetTheme}
+          >
             Reset
-            <RotateLeftLinearIcon className="h-4 w-4" />
+            <RotateLeftLinearIcon className="h-3 w-3" />
           </Button>
         </div>
         <div>
@@ -93,8 +98,8 @@ export default function Configuration() {
         </div>
       </CardHeader>
       <Divider className="bg-default-100" />
-      <CardBody className="flex flex-col p-4 h-[60vh] overflow-scroll">
-        <ScrollShadow orientation="vertical">
+      <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-scroll pb-6">
+        <ScrollShadow className="py-1" orientation="vertical">
           <SelectTemplate
             name={selectedTemplate?.name ?? null}
             onChange={(template) => {
@@ -104,20 +109,15 @@ export default function Configuration() {
             }}
           />
 
-          <div className="flex flex-col gap-8 mt-6">
-            <BrandColors
-              config={config}
-              syncIcon={syncIcon}
-              syncThemes={syncThemes}
-              theme={theme}
-            />
-            <BaseColors config={config} theme={theme} />
-            <OtherColors
-              config={config}
-              syncIcon={syncIcon}
-              syncThemes={syncThemes}
-              theme={theme}
-            />
+          <div className="flex flex-col gap-4 mt-6">
+            <DefaultColors config={config} theme={theme} />
+
+            <BaseColors config={config} syncIcon={syncIcon} syncThemes={syncThemes} theme={theme} />
+
+            <ContentColors config={config} theme={theme} />
+
+            <LayoutColors config={config} syncThemes={syncThemes} theme={theme} />
+
             <FontSizes config={config} />
             <LineHeights config={config} />
             <Radiuses config={config} />

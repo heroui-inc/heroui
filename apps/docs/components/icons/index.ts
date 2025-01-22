@@ -13,3 +13,6 @@ export * from "./two-tone";
 export * from "./bold";
 export * from "./linear";
 export * from "./bug";
+export * from "./mirror-left";
+export * from "./palette-round";
+export * from "./filters";

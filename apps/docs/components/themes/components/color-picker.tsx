@@ -3,35 +3,20 @@ import {Button, Popover, PopoverContent, PopoverTrigger} from "@heroui/react";
 import {HexColorInput, HexColorPicker} from "react-colorful";
 import Values from "values.js";
 import {readableColor} from "color2k";
-import waterDrop from "@iconify/icons-solar/waterdrop-linear";
-import {Icon} from "@iconify/react/dist/offline";
 import {useTheme} from "next-themes";
 import {clsx} from "@heroui/shared-utils";
 
 import {ColorPickerType, ThemeType} from "../types";
 import {colorValuesToRgb, getColorWeight} from "../utils/colors";
 
-import {CopyButton} from "./copy-button";
-
 interface ColorPickerProps {
   hexColor: string;
-  icon?: React.ReactNode;
-  label: string;
   type: ColorPickerType;
   onChange: (hexColor: string) => void;
   onClose: (hexColor: string) => void;
-  onCopy: (theme: ThemeType) => void;
 }
 
-export function ColorPicker({
-  hexColor,
-  icon,
-  label,
-  type,
-  onChange,
-  onClose,
-  onCopy,
-}: ColorPickerProps) {
+export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProps) {
   const [selectedColor, setSelectedColor] = useState(hexColor);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,17 +47,14 @@ export function ColorPicker({
         <PopoverTrigger>
           <Button
             fullWidth
-            className={clsx(getColor(type), "rounded-r-none")}
+            className={clsx(getColor(type), "rounded-lg min-w-8 w-8 h-8 border border-[#A1A1A7]")}
             size="sm"
             style={{
               color: ["background", "foreground", "focus", "overlay"].includes(type)
                 ? readableColor(selectedColor)
                 : undefined,
             }}
-          >
-            <Icon className="text-lg" icon={waterDrop} />
-            {label} {icon}
-          </Button>
+          />
         </PopoverTrigger>
         <PopoverContent>
           <div className="flex flex-col gap-2 max-w-48 my-2">
@@ -99,7 +81,6 @@ export function ColorPicker({
           </div>
         </PopoverContent>
       </Popover>
-      <CopyButton className="rounded-l-none" size="sm" variant="flat" onCopy={onCopy} />
     </div>
   );
 }

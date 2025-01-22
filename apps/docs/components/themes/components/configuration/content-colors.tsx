@@ -1,0 +1,50 @@
+import {baseColorsId} from "../../constants";
+import {setCssContentColor} from "../../css-vars";
+import {useThemeBuilder} from "../../provider";
+import {Config, ThemeType} from "../../types";
+import {ColorPicker} from "../color-picker";
+import {ConfigSection} from "../config-section";
+
+import {PaletteRound} from "@/components/icons";
+
+interface BaseColorsProps {
+  config: Config;
+  theme: ThemeType;
+}
+
+export function ContentColors({config, theme}: BaseColorsProps) {
+  const {setConentColor} = useThemeBuilder();
+
+  return (
+    <ConfigSection
+      icon={<PaletteRound className="w-4 h-4" />}
+      id={baseColorsId}
+      title="Content colors"
+    >
+      <ColorPicker
+        hexColor={config[theme].contentColor.content1}
+        type="content1"
+        onChange={(hexColor) => setCssContentColor(1, hexColor)}
+        onClose={(hexColor) => setConentColor({content1: hexColor}, theme)}
+      />
+      <ColorPicker
+        hexColor={config[theme].contentColor.content2}
+        type="content2"
+        onChange={(hexColor) => setCssContentColor(2, hexColor)}
+        onClose={(hexColor) => setConentColor({content2: hexColor}, theme)}
+      />
+      <ColorPicker
+        hexColor={config[theme].contentColor.content3}
+        type="content3"
+        onChange={(hexColor) => setCssContentColor(3, hexColor)}
+        onClose={(hexColor) => setConentColor({content3: hexColor}, theme)}
+      />
+      <ColorPicker
+        hexColor={config[theme].contentColor.content4}
+        type="content4"
+        onChange={(hexColor) => setCssContentColor(4, hexColor)}
+        onClose={(hexColor) => setConentColor({content4: hexColor}, theme)}
+      />
+    </ConfigSection>
+  );
+}

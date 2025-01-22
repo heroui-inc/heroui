@@ -12,10 +12,12 @@ export const floatNumberPattern = /^\d+(\.\d*)?$/;
 
 // Elements ids
 export const colorsId = "th-colors";
+export const defaultColorsId = "th-default-colors";
 export const baseColorsId = "th-base-colors";
 export const otherColorsId = "th-other-colors";
 export const showcaseId = "th-showcase";
 export const contentShowcaseId = "th-content-showcase";
+export const contentColorsId = "th-content-colors";
 
 // Local storage
 export const configKey = "config";
@@ -23,50 +25,52 @@ export const syncThemesKey = "sync-themes";
 
 // Theme configuration
 export const initialLightTheme: ConfigColors = {
-  brandColor: {
+  defaultColor: {
     default: "#d4d4d8",
+  },
+  baseColor: {
     primary: colors.blue[500],
     secondary: colors.purple[500],
     success: colors.green[500],
     warning: colors.yellow[500],
     danger: colors.red[500],
   },
-  baseColor: {
+  layoutColor: {
     foreground: colors.black,
     background: colors.white,
+    focus: colors.blue[500],
+    overlay: colors.black,
+  },
+  contentColor: {
     content1: colors.white,
     content2: colors.zinc[100],
     content3: colors.zinc[200],
     content4: colors.zinc[300],
   },
-  otherColor: {
-    divider: "#111111",
-    focus: colors.blue[500],
-    overlay: colors.black,
-  },
 };
 
 export const initialDarkTheme: ConfigColors = {
-  brandColor: {
+  defaultColor: {
     default: colors.zinc[700],
+  },
+  baseColor: {
     primary: colors.blue[500],
     secondary: colors.purple[500],
     success: colors.green[500],
     warning: colors.yellow[500],
     danger: colors.red[500],
   },
-  baseColor: {
+  layoutColor: {
     foreground: colors.white,
     background: colors.black,
+    focus: colors.blue[500],
+    overlay: colors.white,
+  },
+  contentColor: {
     content1: colors.zinc[900],
     content2: colors.zinc[800],
     content3: colors.zinc[700],
     content4: colors.zinc[600],
-  },
-  otherColor: {
-    divider: colors.white,
-    focus: colors.blue[500],
-    overlay: colors.white,
   },
 };
 

@@ -1,68 +1,53 @@
-import {baseColorsId} from "../../constants";
-import {setCssBackground, setCssColor, setCssContentColor} from "../../css-vars";
+import {colorsId} from "../../constants";
+import {setCssColor} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
 import {Config, ThemeType} from "../../types";
-import {copyBaseColorConfig} from "../../utils/config";
 import {ColorPicker} from "../color-picker";
 import {ConfigSection} from "../config-section";
 
-interface BaseColorsProps {
+import {Filters} from "@/components/icons";
+
+interface BrandColorsProps {
   config: Config;
+  syncIcon: React.ReactNode;
+  syncThemes: boolean;
   theme: ThemeType;
 }
 
-export function BaseColors({config, theme}: BaseColorsProps) {
+export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
   const {setBaseColor} = useThemeBuilder();
 
   return (
-    <ConfigSection id={baseColorsId} title="Base colors">
+    <ConfigSection icon={<Filters className="h-4 w-4" />} id={colorsId} title="Base colors">
       <ColorPicker
-        hexColor={config[theme].baseColor.background}
-        label="Background"
-        type="background"
-        onChange={(hexColor) => setCssBackground(hexColor)}
-        onClose={(hexColor) => setBaseColor({background: hexColor}, theme)}
-        onCopy={(theme) => copyBaseColorConfig(config, "background", theme)}
+        hexColor={config[theme].baseColor.primary}
+        type="primary"
+        onChange={(hexColor) => setCssColor("primary", hexColor, theme)}
+        onClose={(hexColor) => setBaseColor({primary: hexColor}, theme, syncThemes)}
       />
       <ColorPicker
-        hexColor={config[theme].baseColor.foreground}
-        label="Foreground"
-        type="foreground"
-        onChange={(hexColor) => setCssColor("foreground", hexColor, theme)}
-        onClose={(hexColor) => setBaseColor({foreground: hexColor}, theme)}
-        onCopy={(theme) => copyBaseColorConfig(config, "foreground", theme)}
+        hexColor={config[theme].baseColor.secondary}
+        type="secondary"
+        onChange={(hexColor) => setCssColor("secondary", hexColor, theme)}
+        onClose={(hexColor) => setBaseColor({secondary: hexColor}, theme, syncThemes)}
       />
       <ColorPicker
-        hexColor={config[theme].baseColor.content1}
-        label="Content 1"
-        type="content1"
-        onChange={(hexColor) => setCssContentColor(1, hexColor)}
-        onClose={(hexColor) => setBaseColor({content1: hexColor}, theme)}
-        onCopy={(theme) => copyBaseColorConfig(config, "content1", theme)}
+        hexColor={config[theme].baseColor.success}
+        type="success"
+        onChange={(hexColor) => setCssColor("success", hexColor, theme)}
+        onClose={(hexColor) => setBaseColor({success: hexColor}, theme, syncThemes)}
       />
       <ColorPicker
-        hexColor={config[theme].baseColor.content2}
-        label="Content 2"
-        type="content2"
-        onChange={(hexColor) => setCssContentColor(2, hexColor)}
-        onClose={(hexColor) => setBaseColor({content2: hexColor}, theme)}
-        onCopy={(theme) => copyBaseColorConfig(config, "content2", theme)}
+        hexColor={config[theme].baseColor.warning}
+        type="warning"
+        onChange={(hexColor) => setCssColor("warning", hexColor, theme)}
+        onClose={(hexColor) => setBaseColor({warning: hexColor}, theme, syncThemes)}
       />
       <ColorPicker
-        hexColor={config[theme].baseColor.content3}
-        label="Content 3"
-        type="content3"
-        onChange={(hexColor) => setCssContentColor(3, hexColor)}
-        onClose={(hexColor) => setBaseColor({content3: hexColor}, theme)}
-        onCopy={(theme) => copyBaseColorConfig(config, "content3", theme)}
-      />
-      <ColorPicker
-        hexColor={config[theme].baseColor.content4}
-        label="Content 4"
-        type="content4"
-        onChange={(hexColor) => setCssContentColor(4, hexColor)}
-        onClose={(hexColor) => setBaseColor({content4: hexColor}, theme)}
-        onCopy={(theme) => copyBaseColorConfig(config, "content4", theme)}
+        hexColor={config[theme].baseColor.danger}
+        type="danger"
+        onChange={(hexColor) => setCssColor("danger", hexColor, theme)}
+        onClose={(hexColor) => setBaseColor({danger: hexColor}, theme, syncThemes)}
       />
     </ConfigSection>
   );

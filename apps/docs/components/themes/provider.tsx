@@ -7,21 +7,26 @@ import {ConfigColors, Config, ConfigLayout, ThemeType} from "./types";
 export interface ThemeBuilderContextProps {
   config: Config;
   resetConfig: (theme: ThemeType, sync: boolean) => Config;
-  setBaseColor: (newConfig: Partial<ConfigColors["baseColor"]>, theme: ThemeType) => void;
+  setLayoutColor: (
+    newConfig: Partial<ConfigColors["layoutColor"]>,
+    theme: ThemeType,
+    sync: boolean,
+  ) => void;
+  setConentColor: (newConfig: Partial<ConfigColors["contentColor"]>, theme: ThemeType) => void;
   setBorderWidth: (newConfig: Partial<ConfigLayout["borderWidth"]>) => void;
-  setBrandColor: (
-    newConfig: Partial<ConfigColors["brandColor"]>,
+  setBaseColor: (
+    newConfig: Partial<ConfigColors["baseColor"]>,
+    theme: ThemeType,
+    sync: boolean,
+  ) => void;
+  setDefaultColor: (
+    newConfig: Partial<ConfigColors["defaultColor"]>,
     theme: ThemeType,
     sync: boolean,
   ) => void;
   setConfiguration: (newConfig: Config, theme: ThemeType, sync: boolean) => void;
   setLineHeight: (newConfig: Partial<ConfigLayout["lineHeight"]>) => void;
   setFontSize: (newConfig: Partial<ConfigLayout["fontSize"]>) => void;
-  setOtherColor: (
-    newConfig: Partial<ConfigColors["otherColor"]>,
-    theme: ThemeType,
-    sync: boolean,
-  ) => void;
   setOtherParams: (newConfig: Partial<ConfigLayout["otherParams"]>) => void;
   setRadius: (newConfig: Partial<ConfigLayout["radius"]>) => void;
 }
@@ -29,15 +34,16 @@ export interface ThemeBuilderContextProps {
 const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   config: initialConfig,
   resetConfig: () => initialConfig,
-  setBaseColor: () => {},
+  setLayoutColor: () => {},
   setBorderWidth: () => {},
-  setBrandColor: () => {},
+  setBaseColor: () => {},
   setConfiguration: () => {},
   setLineHeight: () => {},
   setFontSize: () => {},
-  setOtherColor: () => {},
   setOtherParams: () => {},
   setRadius: () => {},
+  setDefaultColor: () => {},
+  setConentColor: () => {},
 });
 
 interface ThemeBuilderProviderProps {
@@ -77,8 +83,8 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
     return newConfig;
   };
 
-  const setBrandColor = (
-    newConfig: Partial<ConfigColors["brandColor"]>,
+  const setBaseColor = (
+    newConfig: Partial<ConfigColors["baseColor"]>,
     theme: ThemeType,
     sync: boolean,
   ) => {
@@ -88,15 +94,15 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
             ...prev,
             light: {
               ...prev.light,
-              brandColor: {
-                ...prev.light.brandColor,
+              baseColor: {
+                ...prev.light.baseColor,
                 ...newConfig,
               },
             },
             dark: {
               ...prev.dark,
-              brandColor: {
-                ...prev.dark.brandColor,
+              baseColor: {
+                ...prev.dark.baseColor,
                 ...newConfig,
               },
             },
@@ -105,8 +111,8 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
             ...prev,
             [theme]: {
               ...prev[theme],
-              brandColor: {
-                ...prev[theme].brandColor,
+              baseColor: {
+                ...prev[theme].baseColor,
                 ...newConfig,
               },
             },
@@ -114,21 +120,58 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
     );
   };
 
-  const setBaseColor = (newConfig: Partial<ConfigColors["baseColor"]>, theme: ThemeType) => {
+  const setDefaultColor = (
+    newConfig: Partial<ConfigColors["defaultColor"]>,
+    theme: ThemeType,
+    sync: boolean,
+  ) => {
+    setConfig((prev) =>
+      sync
+        ? {
+            ...prev,
+            light: {
+              ...prev.light,
+              defaultColor: {
+                ...prev.light.defaultColor,
+                ...newConfig,
+              },
+            },
+            dark: {
+              ...prev.dark,
+              defaultColor: {
+                ...prev.dark.defaultColor,
+                ...newConfig,
+              },
+            },
+          }
+        : {
+            ...prev,
+            [theme]: {
+              ...prev[theme],
+              defaultColor: {
+                ...prev[theme].defaultColor,
+                ...newConfig,
+              },
+            },
+          },
+    );
+  };
+
+  const setConentColor = (newConfig: Partial<ConfigColors["contentColor"]>, theme: ThemeType) => {
     setConfig((prev) => ({
       ...prev,
       [theme]: {
         ...prev[theme],
-        baseColor: {
-          ...prev[theme].baseColor,
+        contentColor: {
+          ...prev[theme].contentColor,
           ...newConfig,
         },
       },
     }));
   };
 
-  const setOtherColor = (
-    newConfig: Partial<ConfigColors["otherColor"]>,
+  const setLayoutColor = (
+    newConfig: Partial<ConfigColors["layoutColor"]>,
     theme: ThemeType,
     sync: boolean,
   ) => {
@@ -139,14 +182,14 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
             light: {
               ...prev.light,
               otherColor: {
-                ...prev.light.otherColor,
+                ...prev.light.layoutColor,
                 ...newConfig,
               },
             },
             dark: {
               ...prev.dark,
               otherColor: {
-                ...prev.dark.otherColor,
+                ...prev.dark.layoutColor,
                 ...newConfig,
               },
             },
@@ -156,7 +199,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
             [theme]: {
               ...prev[theme],
               otherColor: {
-                ...prev[theme].otherColor,
+                ...prev[theme].layoutColor,
                 ...newConfig,
               },
             },
@@ -227,17 +270,18 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
   return (
     <ThemeBuilderContext.Provider
       value={{
-        resetConfig,
         config,
-        setBaseColor,
+        resetConfig,
+        setLayoutColor,
         setBorderWidth,
-        setBrandColor,
+        setBaseColor,
         setConfiguration,
         setLineHeight,
         setFontSize,
-        setOtherColor,
         setOtherParams,
         setRadius,
+        setDefaultColor,
+        setConentColor,
       }}
     >
       {children}

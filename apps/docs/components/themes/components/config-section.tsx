@@ -2,23 +2,19 @@ import {clsx} from "@heroui/shared-utils";
 
 interface ConfigurationSectionProps {
   children: React.ReactNode;
-  cols?: number;
   id?: string;
   title: string;
+  icon?: React.ReactNode;
 }
 
-export function ConfigSection({children, cols = 2, id, title}: ConfigurationSectionProps) {
+export function ConfigSection({children, id, title, icon}: ConfigurationSectionProps) {
   return (
     <div id={id}>
-      <span className="font-semibold">{title}</span>
-      <div
-        className={clsx("grid flex-wrap gap-4 mt-2", {
-          "grid-cols-2": cols === 2,
-          "grid-cols-3": cols === 3,
-        })}
-      >
-        {children}
+      <div className="text-[#71717A] dark:text-[#A1A1AA] text-sm flex gap-1 items-center">
+        {icon}
+        {title}
       </div>
+      <div className={clsx("flex flex-wrap gap-1 mt-2")}>{children}</div>
     </div>
   );
 }

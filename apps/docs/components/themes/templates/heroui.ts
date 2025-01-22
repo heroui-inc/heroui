@@ -1,7 +1,7 @@
 import {initialDarkTheme, initialLayout, initialLightTheme} from "../constants";
 import {Config} from "../types";
 
-export const nextui: Config = {
+export const heroui: Config = {
   light: initialLightTheme,
   dark: initialDarkTheme,
   layout: initialLayout,

@@ -1,11 +1,10 @@
-import {NextUIPluginConfig} from "@heroui/theme";
+import {HeroUIPluginConfig} from "@heroui/theme";
 import {readableColor} from "color2k";
 
-import {Config, ConfigColors, ThemeType} from "../types";
+import {Config, ThemeType} from "../types";
 
 import {generateThemeColor} from "./colors";
-import {copyData, stringifyData} from "./shared";
-function generateLayoutConfig(config: Config): NextUIPluginConfig["layout"] {
+function generateLayoutConfig(config: Config): HeroUIPluginConfig["layout"] {
   return {
     fontSize: {
       tiny: `${config.layout.fontSize.tiny}rem`,
@@ -37,40 +36,39 @@ function generateLayoutConfig(config: Config): NextUIPluginConfig["layout"] {
 
 function generateThemeColorsConfig(config: Config, theme: ThemeType) {
   return {
-    default: generateThemeColor(config[theme].brandColor.default, "default", "light"),
-    primary: generateThemeColor(config[theme].brandColor.primary, "primary", "light"),
-    secondary: generateThemeColor(config[theme].brandColor.secondary, "secondary", "light"),
-    success: generateThemeColor(config[theme].brandColor.success, "success", "light"),
-    warning: generateThemeColor(config[theme].brandColor.warning, "warning", "light"),
-    danger: generateThemeColor(config[theme].brandColor.danger, "danger", "light"),
-    background: config[theme].baseColor.background,
-    foreground: generateThemeColor(config[theme].baseColor.foreground, "foreground", "light"),
+    default: generateThemeColor(config[theme].defaultColor.default, "default", "light"),
+    primary: generateThemeColor(config[theme].baseColor.primary, "primary", "light"),
+    secondary: generateThemeColor(config[theme].baseColor.secondary, "secondary", "light"),
+    success: generateThemeColor(config[theme].baseColor.success, "success", "light"),
+    warning: generateThemeColor(config[theme].baseColor.warning, "warning", "light"),
+    danger: generateThemeColor(config[theme].baseColor.danger, "danger", "light"),
+    background: config[theme].layoutColor.background,
+    foreground: generateThemeColor(config[theme].layoutColor.foreground, "foreground", "light"),
     content1: {
-      DEFAULT: config[theme].baseColor.content1,
-      foreground: readableColor(config[theme].baseColor.content1),
+      DEFAULT: config[theme].contentColor.content1,
+      foreground: readableColor(config[theme].contentColor.content1),
     },
     content2: {
-      DEFAULT: config[theme].baseColor.content2,
-      foreground: readableColor(config[theme].baseColor.content2),
+      DEFAULT: config[theme].contentColor.content2,
+      foreground: readableColor(config[theme].contentColor.content2),
     },
     content3: {
-      DEFAULT: config[theme].baseColor.content3,
-      foreground: readableColor(config[theme].baseColor.content3),
+      DEFAULT: config[theme].contentColor.content3,
+      foreground: readableColor(config[theme].contentColor.content3),
     },
     content4: {
-      DEFAULT: config[theme].baseColor.content4,
-      foreground: readableColor(config[theme].baseColor.content4),
+      DEFAULT: config[theme].contentColor.content4,
+      foreground: readableColor(config[theme].contentColor.content4),
     },
-    focus: config[theme].otherColor.focus,
-    overlay: config[theme].otherColor.overlay,
-    divider: config[theme].otherColor.divider,
+    focus: config[theme].layoutColor.focus,
+    overlay: config[theme].layoutColor.overlay,
   };
 }
 
 /**
  * Generate plugin configuration
  */
-export function generatePluginConfig(config: Config): NextUIPluginConfig {
+export function generatePluginConfig(config: Config): HeroUIPluginConfig {
   return {
     themes: {
       light: {
@@ -82,54 +80,4 @@ export function generatePluginConfig(config: Config): NextUIPluginConfig {
     },
     layout: generateLayoutConfig(config),
   };
-}
-
-export function copyBrandColorConfig(
-  config: Config,
-  colorType: keyof ConfigColors["brandColor"],
-  theme: ThemeType,
-) {
-  copyData(
-    `"${colorType}": ${stringifyData(
-      generateThemeColor(config[theme].brandColor[colorType], colorType, theme),
-    )}`,
-  );
-}
-
-export function copyBaseColorConfig(
-  config: Config,
-  colorType: keyof ConfigColors["baseColor"],
-  theme: ThemeType,
-) {
-  switch (colorType) {
-    case "background":
-      copyData(`"${colorType}": "${config[theme].baseColor[colorType]}"`);
-      break;
-    case "foreground":
-      copyData(
-        `"${colorType}": ${stringifyData(
-          generateThemeColor(config[theme].baseColor[colorType], colorType, theme),
-        )}`,
-      );
-      break;
-    case "content1":
-    case "content2":
-    case "content3":
-    case "content4":
-      copyData(
-        `"${colorType}": {
-            "DEFAULT": "${config[theme].baseColor[colorType]}",
-            "foreground": "${readableColor(config[theme].baseColor[colorType])}",
-        },`,
-      );
-      break;
-  }
-}
-
-export function copyOtherColorConfig(
-  config: Config,
-  colorType: keyof ConfigColors["otherColor"],
-  theme: ThemeType,
-) {
-  copyData(`"${colorType}": "${config[theme].otherColor[colorType]}"`);
 }

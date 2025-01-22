@@ -60,26 +60,27 @@ export interface Config {
 }
 
 export interface ConfigColors {
-  brandColor: {
+  defaultColor: {
     default: string;
+  };
+  baseColor: {
     primary: string;
     secondary: string;
     success: string;
     warning: string;
     danger: string;
   };
-  baseColor: {
+  layoutColor: {
     foreground: string;
     background: string;
+    focus: string;
+    overlay: string;
+  };
+  contentColor: {
     content1: string;
     content2: string;
     content3: string;
     content4: string;
-  };
-  otherColor: {
-    focus: string;
-    overlay: string;
-    divider: string;
   };
 }
 
@@ -120,4 +121,4 @@ export interface Template {
   value: Config;
 }
 
-export type TemplateType = "coffee" | "emerald" | "nextui";
+export type TemplateType = "coffee" | "emerald" | "heroui";
