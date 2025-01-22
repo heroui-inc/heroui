@@ -1,5 +1,5 @@
 import {Children, cloneElement, useState} from "react";
-import {Select, SelectItem} from "@nextui-org/react";
+import {Select, SelectItem} from "@heroui/react";
 
 import {NextUIRadius, NextUISize, NextUIVariant} from "../types";
 

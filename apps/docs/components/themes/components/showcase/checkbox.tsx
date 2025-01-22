@@ -1,4 +1,4 @@
-import {Checkbox as NextUICheckbox} from "@nextui-org/react";
+import {Checkbox as NextUICheckbox} from "@heroui/react";
 
 import {NextUIRadius, NextUISize} from "../../types";
 import {ShowcaseComponent} from "../showcase-component";

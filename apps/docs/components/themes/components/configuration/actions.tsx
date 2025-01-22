@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Button, Tooltip} from "@nextui-org/react";
+import {Button, Tooltip} from "@heroui/react";
 import {Icon} from "@iconify/react/dist/offline";
 import SunIcon from "@iconify/icons-solar/sun-linear";
 import MoonIcon from "@iconify/icons-solar/moon-linear";

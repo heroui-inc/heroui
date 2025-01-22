@@ -1,4 +1,4 @@
-import {Slider as NextUISlider} from "@nextui-org/react";
+import {Slider as NextUISlider} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {NextUIColor, NextUIRadius, NextUISize} from "../../types";

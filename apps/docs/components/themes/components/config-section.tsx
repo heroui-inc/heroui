@@ -1,4 +1,4 @@
-import {clsx} from "@nextui-org/shared-utils";
+import {clsx} from "@heroui/shared-utils";
 
 interface ConfigurationSectionProps {
   children: React.ReactNode;

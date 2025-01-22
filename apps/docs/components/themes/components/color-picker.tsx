@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import {Button, Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react";
+import {Button, Popover, PopoverContent, PopoverTrigger} from "@heroui/react";
 import {HexColorInput, HexColorPicker} from "react-colorful";
 import Values from "values.js";
 import {readableColor} from "color2k";
 import waterDrop from "@iconify/icons-solar/waterdrop-linear";
 import {Icon} from "@iconify/react/dist/offline";
 import {useTheme} from "next-themes";
-import {clsx} from "@nextui-org/shared-utils";
+import {clsx} from "@heroui/shared-utils";
 
 import {ColorPickerType, ThemeType} from "../types";
 import {colorValuesToRgb, getColorWeight} from "../utils/colors";

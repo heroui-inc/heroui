@@ -1,4 +1,4 @@
-import {Switch as NextUISwitch} from "@nextui-org/react";
+import {Switch as NextUISwitch} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {NextUISize} from "../../types";

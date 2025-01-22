@@ -1,4 +1,4 @@
-import {colors} from "@nextui-org/theme";
+import {colors} from "@heroui/theme";
 
 import {initialLayout} from "../constants";
 import {Config} from "../types";

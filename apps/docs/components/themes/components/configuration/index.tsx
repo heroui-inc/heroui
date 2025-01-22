@@ -8,7 +8,7 @@ import {
   CardFooter,
   Link,
   ScrollShadow,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {useTheme} from "next-themes";
 import {useLocalStorage} from "usehooks-ts";
 import {Icon} from "@iconify/react/dist/offline";

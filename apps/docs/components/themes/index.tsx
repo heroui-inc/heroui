@@ -1,7 +1,7 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {Progress} from "@nextui-org/react";
+import {Progress} from "@heroui/react";
 
 import Configuration from "./components/configuration";
 import {Showcase} from "./components/showcase";

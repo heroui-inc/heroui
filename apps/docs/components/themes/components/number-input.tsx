@@ -1,4 +1,4 @@
-import {Input} from "@nextui-org/react";
+import {Input} from "@heroui/react";
 
 import {floatNumberPattern} from "../constants";
 

@@ -1,4 +1,4 @@
-import {BreadcrumbItem, Breadcrumbs as NextUIBreadcrumbs} from "@nextui-org/react";
+import {BreadcrumbItem, Breadcrumbs as NextUIBreadcrumbs} from "@heroui/react";
 
 import {NextUIColor, NextUIRadius, NextUISize, NextUIVariant} from "../../types";
 import {ShowcaseComponent} from "../showcase-component";

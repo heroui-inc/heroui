@@ -1,4 +1,4 @@
-import {swapColorValues} from "@nextui-org/theme/src/utils/object";
+import {swapColorValues} from "@heroui/theme/src/utils/object";
 import {readableColor} from "color2k";
 import Values from "values.js";
 

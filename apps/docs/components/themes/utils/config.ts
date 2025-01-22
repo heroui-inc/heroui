@@ -1,4 +1,4 @@
-import {NextUIPluginConfig} from "@nextui-org/theme";
+import {NextUIPluginConfig} from "@heroui/theme";
 import {readableColor} from "color2k";
 
 import {Config, ConfigColors, ThemeType} from "../types";

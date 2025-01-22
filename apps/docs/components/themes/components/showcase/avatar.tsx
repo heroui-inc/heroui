@@ -1,4 +1,4 @@
-import {Avatar as NextUIAvatar} from "@nextui-org/react";
+import {Avatar as NextUIAvatar} from "@heroui/react";
 
 import {NextUIRadius, NextUISize} from "../../types";
 import {ShowcaseComponent} from "../showcase-component";

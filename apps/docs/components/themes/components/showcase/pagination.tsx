@@ -1,4 +1,4 @@
-import {Pagination as NextUIPagination} from "@nextui-org/react";
+import {Pagination as NextUIPagination} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {NextUIRadius, NextUISize, NextUIVariant} from "../../types";

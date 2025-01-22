@@ -1,4 +1,4 @@
-import {Tab, Tabs as NextUITabs} from "@nextui-org/react";
+import {Tab, Tabs as NextUITabs} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {NextUIColor, NextUIRadius, NextUISize, NextUIVariant} from "../../types";

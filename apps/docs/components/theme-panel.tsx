@@ -1,7 +1,7 @@
 "use client";
 
-import {Button} from "@nextui-org/react";
-import {CopyIcon, MoonIcon, SunIcon} from "@nextui-org/shared-icons";
+import {Button} from "@heroui/react";
+import {CopyIcon, MoonIcon, SunIcon} from "@heroui/shared-icons";
 import {useTheme} from "next-themes";
 import {useEffect, useState} from "react";
 
