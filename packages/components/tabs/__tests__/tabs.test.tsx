@@ -401,4 +401,91 @@ describe("Tabs", () => {
     );
     expect(ref.current).not.toBeNull();
   });
+
+  const mockTabListDimensions = (el: HTMLElement | null, overflowing: boolean) => {
+    if (!el) return;
+
+    Object.defineProperty(el, "scrollWidth", {
+      configurable: true,
+      value: overflowing ? 500 : 200,
+    });
+    Object.defineProperty(el, "clientWidth", {
+      configurable: true,
+      value: 200,
+    });
+  };
+
+  const mockTabPositions = (container: HTMLElement | null) => {
+    if (!container) return;
+
+    // Mock getBoundingClientRect for container
+    const containerRect = {left: 0, right: 200};
+
+    jest
+      .spyOn(container, "getBoundingClientRect")
+      .mockImplementation(() => containerRect as DOMRect);
+
+    // Mock tab elements positions
+    const tabs = container.querySelectorAll("[data-key]");
+
+    tabs.forEach((tab, index) => {
+      if (!(tab instanceof HTMLElement)) return;
+
+      const isHidden = index >= 2; // First 2 tabs visible, rest hidden
+      const left = isHidden ? 210 : index * 100;
+      const right = left + 100;
+
+      jest.spyOn(tab, "getBoundingClientRect").mockImplementation(() => ({left, right} as DOMRect));
+    });
+  };
+
+  it("should show overflow menu when tabs overflow", () => {
+    const {container, getByLabelText} = render(
+      <Tabs aria-label="Tabs">
+        <Tab key="1" title="Tab 1">
+          Content 1
+        </Tab>
+        <Tab key="2" title="Tab 2">
+          Content 2
+        </Tab>
+        <Tab key="3" title="Tab 3">
+          Content 3
+        </Tab>
+        <Tab key="4" title="Tab 4">
+          Content 4
+        </Tab>
+      </Tabs>,
+    );
+
+    const tabList = container.querySelector('[role="tablist"]') as HTMLElement;
+
+    mockTabListDimensions(tabList, true);
+    mockTabPositions(tabList);
+
+    fireEvent.scroll(tabList);
+
+    expect(getByLabelText("Show more tabs")).toBeInTheDocument();
+  });
+
+  it("should not show overflow menu when tabs don't overflow", () => {
+    const {container, queryByLabelText} = render(
+      <Tabs aria-label="Tabs">
+        <Tab key="1" title="Tab 1">
+          Content 1
+        </Tab>
+        <Tab key="2" title="Tab 2">
+          Content 2
+        </Tab>
+      </Tabs>,
+    );
+
+    const tabList = container.querySelector('[role="tablist"]') as HTMLElement;
+
+    mockTabListDimensions(tabList, false);
+    mockTabPositions(tabList);
+
+    fireEvent.scroll(tabList);
+
+    expect(queryByLabelText("Show more tabs")).not.toBeInTheDocument();
+  });
 });
