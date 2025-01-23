@@ -1,14 +1,14 @@
 import type {AriaButtonProps} from "@react-types/button";
-import type {As, HTMLNextUIProps} from "@nextui-org/system";
-import type {ButtonProps} from "@nextui-org/button";
+import type {As, HTMLHeroUIProps} from "@heroui/system";
+import type {ButtonProps} from "@heroui/button";
 import type {HTMLAttributes, ReactNode, RefObject} from "react";
 
-import {Fragment, useState} from "react";
+import {forwardRef, Fragment, useState} from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {Button} from "@nextui-org/button";
+import {Button} from "@heroui/button";
 import {chain, mergeProps} from "@react-aria/utils";
 import {AnimatePresence, LazyMotion, MotionConfig} from "framer-motion";
-import {ResizablePanel} from "@nextui-org/framer-utils";
+import {ResizablePanel} from "@heroui/framer-utils";
 
 import {ChevronLeftIcon} from "./chevron-left";
 import {ChevronRightIcon} from "./chevron-right";
@@ -18,9 +18,9 @@ import {CalendarHeader} from "./calendar-header";
 import {CalendarPicker} from "./calendar-picker";
 import {useCalendarContext} from "./calendar-context";
 
-const domAnimation = () => import("@nextui-org/dom-animation").then((res) => res.default);
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
 
-export interface CalendarBaseProps extends HTMLNextUIProps<"div"> {
+export interface CalendarBaseProps extends HTMLHeroUIProps<"div"> {
   Component?: As;
   showHelper?: boolean;
   topContent?: ReactNode;
@@ -33,6 +33,21 @@ export interface CalendarBaseProps extends HTMLNextUIProps<"div"> {
   calendarRef: RefObject<HTMLDivElement>;
   errorMessage?: ReactNode;
 }
+
+/**
+ * Avoid this framer-motion warning:
+ * Function components cannot be given refs.
+ * Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+ *
+ * @see https://www.framer.com/motion/animate-presence/###mode
+ */
+const PopLayoutWrapper = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  (props, ref) => {
+    return <div ref={ref} {...props} />;
+  },
+);
+
+PopLayoutWrapper.displayName = "HeroUI - PopLayoutWrapper";
 
 export function CalendarBase(props: CalendarBaseProps) {
   const {
@@ -152,9 +167,11 @@ export function CalendarBase(props: CalendarBaseProps) {
           data-slot="content"
         >
           <AnimatePresence custom={direction} initial={false} mode="popLayout">
-            <MotionConfig transition={transition}>
-              <LazyMotion features={domAnimation}>{calendarContent}</LazyMotion>
-            </MotionConfig>
+            <PopLayoutWrapper>
+              <MotionConfig transition={transition}>
+                <LazyMotion features={domAnimation}>{calendarContent}</LazyMotion>
+              </MotionConfig>
+            </PopLayoutWrapper>
           </AnimatePresence>
         </ResizablePanel>
       )}
