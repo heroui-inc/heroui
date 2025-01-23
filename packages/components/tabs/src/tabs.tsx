@@ -1,9 +1,9 @@
 import {ForwardedRef, ReactElement, useId, useState, useEffect, useCallback} from "react";
 import {LayoutGroup} from "framer-motion";
-import {forwardRef} from "@nextui-org/system";
 import {EllipsisIcon} from "@nextui-org/shared-icons";
 import {clsx, dataAttr, debounce} from "@nextui-org/shared-utils";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/dropdown";
+import {forwardRef} from "@heroui/system";
 
 import {UseTabsProps, useTabs} from "./use-tabs";
 import Tab from "./tab";
