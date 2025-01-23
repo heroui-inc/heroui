@@ -10,6 +10,7 @@ import {
   NextUIRadius,
   NextUISize,
   TemplateType,
+  FontType,
 } from "./types";
 
 export interface ThemeBuilderContextProps {
@@ -17,6 +18,7 @@ export interface ThemeBuilderContextProps {
   radiusValue: NextUIRadius;
   borderWidthValue: NextUISize;
   templateTheme: TemplateType;
+  font: FontType;
   resetConfig: (theme: ThemeType, sync: boolean) => Config;
   setLayoutColor: (
     newConfig: Partial<ConfigColors["layoutColor"]>,
@@ -43,13 +45,15 @@ export interface ThemeBuilderContextProps {
   setRadiusValue: (radius: NextUIRadius) => void;
   setBorderWidthValue: (borderWidth: NextUISize) => void;
   setTemplateTheme: (theme: TemplateType) => void;
+  setFont: (font: FontType) => void;
 }
 
 const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   config: initialConfig,
-  radiusValue: "none",
+  radiusValue: "md",
   borderWidthValue: "md",
   templateTheme: "heroui",
+  font: "inter",
   resetConfig: () => initialConfig,
   setLayoutColor: () => {},
   setBorderWidth: () => {},
@@ -64,6 +68,7 @@ const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   setRadiusValue: () => {},
   setBorderWidthValue: () => {},
   setTemplateTheme: () => {},
+  setFont: () => {},
 });
 
 interface ThemeBuilderProviderProps {
@@ -76,6 +81,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
   const [radiusValue, setRadiusValue] = useState<NextUIRadius>("none");
   const [borderWidthValue, setBorderWidthValue] = useState<NextUISize>("md");
   const [templateTheme, setTemplateTheme] = useState<TemplateType>("heroui");
+  const [font, setFont] = useState<FontType>("inter");
 
   const setConfiguration = (newConfig: Config, theme: ThemeType, sync: boolean) => {
     setConfig((prev) =>
@@ -297,6 +303,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         radiusValue,
         borderWidthValue,
         templateTheme,
+        font,
         resetConfig,
         setLayoutColor,
         setBorderWidth,
@@ -311,6 +318,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         setRadiusValue,
         setBorderWidthValue,
         setTemplateTheme,
+        setFont,
       }}
     >
       {children}

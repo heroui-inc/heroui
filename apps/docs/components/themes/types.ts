@@ -122,3 +122,5 @@ export interface Template {
 }
 
 export type TemplateType = "coffee" | "emerald" | "heroui";
+
+export type FontType = "inter" | "roboto" | "outfit" | "lora";

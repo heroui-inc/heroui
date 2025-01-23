@@ -1,7 +1,6 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {Progress} from "@heroui/react";
 
 import Configuration from "./components/configuration";
 import {Showcase} from "./components/showcase";
@@ -19,9 +18,5 @@ export function ThemeBuilder() {
       <Showcase />
       <Configuration />
     </ThemeBuilderProvider>
-  ) : (
-    <div className="flex justify-center items-center w-full h-min md:h-[calc(100vh-15rem)]">
-      <Progress isIndeterminate label="Loading theme generator" />
-    </div>
-  );
+  ) : null;
 }
