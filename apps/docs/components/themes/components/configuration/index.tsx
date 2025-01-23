@@ -77,7 +77,7 @@ export default function Configuration() {
   }
 
   return (
-    <Card className="max-w-sm h-[70vh] sticky top-28 z-30 mx-auto">
+    <Card className="h-[70vh] sticky top-28 z-30 mx-auto p-0">
       <CardHeader className="flex justify-between px-6 py-4">
         <div className="flex gap-x-4 items-center">
           <div className="text-xl font-medium text-default-800 ">Theme</div>
@@ -95,8 +95,8 @@ export default function Configuration() {
         </div>
       </CardHeader>
       <Divider className="bg-default-100" />
-      <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-scroll pb-6">
-        <ScrollShadow className="py-1" orientation="vertical">
+      <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-y-scroll pb-6 scrollbar-hide">
+        <ScrollShadow className="py-1 scrollbar-hide" orientation="vertical">
           <SelectTemplate
             name={selectedTemplate?.name ?? null}
             onChange={(template) => {
