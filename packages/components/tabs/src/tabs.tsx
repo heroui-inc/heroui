@@ -74,7 +74,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     });
 
     setHiddenTabs(hiddenTabsList);
-  }, [state.collection, tabListProps.ref]);
+  }, [state.collection, tabList]);
 
   const scrollToTab = useCallback(
     (key: string) => {
@@ -161,7 +161,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
             <DropdownTrigger>
               <button
                 aria-label="Show more tabs"
-                className="flex-none flex items-center justify-center w-10 h-8 ml-1 hover:bg-default-100 rounded-small transition-colors"
+                className="flex items-center justify-center w-10 h-8 hover:bg-default-100 rounded-small transition-colors"
               >
                 <EllipsisIcon className="w-5 h-5" />
                 <span className="sr-only">More tabs</span>
