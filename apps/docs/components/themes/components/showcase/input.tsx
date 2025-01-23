@@ -1,26 +1,58 @@
-import {Input as NextUIInput} from "@heroui/react";
+import {cloneElement} from "react";
+import {InputProps, Input} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
-import {NextUIColor, NextUISize, NextUIVariant} from "../../types";
+import {useThemeBuilder} from "../../provider";
 
-export function Input() {
+type Color = InputProps["color"];
+type Radius = InputProps["radius"];
+type Variant = InputProps["variant"];
+
+const SectionBase = ({
+  color,
+  isDisabled,
+  radius,
+  variant,
+}: {
+  color?: Color;
+  isDisabled?: boolean;
+  radius?: Radius;
+  variant?: Variant;
+}) => {
   return (
-    <ShowcaseComponent defaultVariant="faded" name="Input" sizes={sizes} variants={variants}>
-      {colors.map((color) => (
-        <NextUIInput
-          key={color}
-          className="max-w-[220px]"
-          color={color}
-          defaultValue="junior@nextui.org"
-          label="Email"
-          placeholder="Enter your email"
-          type="email"
-        />
+    <Input
+      color={color}
+      isDisabled={isDisabled}
+      label="Email"
+      radius={radius}
+      type="email"
+      variant={variant}
+    />
+  );
+};
+
+const Section = ({color, radius}: {color: Color; radius: Radius}) => {
+  const variants = ["flat", "bordered", "faded", "underlined"];
+
+  return (
+    <div key={color} className="flex flex-col gap-y-4">
+      {variants.map((variant, idx) =>
+        cloneElement(<SectionBase key={idx} />, {color, variant, isDisabled: false, radius}),
+      )}
+      {cloneElement(<SectionBase />, {color, variant: "flat", isDisabled: true, radius})}
+    </div>
+  );
+};
+
+export const InputComponent = () => {
+  const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
+  const {radiusValue} = useThemeBuilder();
+
+  return (
+    <ShowcaseComponent name="Input">
+      {colors.map((color, idx) => (
+        <Section key={idx} color={color} radius={radiusValue} />
       ))}
     </ShowcaseComponent>
   );
-}
-
-const colors: NextUIColor[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-const sizes: NextUISize[] = ["sm", "md", "lg"];
-const variants: NextUIVariant[] = ["flat", "bordered", "underlined", "faded"];
+};

@@ -1,35 +1,59 @@
-import {Button as NextUIButton} from "@heroui/react";
+import {cloneElement} from "react";
+import {ButtonProps, Button as HeroUIButton} from "@heroui/react";
 
-import {NextUIRadius, NextUISize, NextUIVariant} from "../../types";
 import {ShowcaseComponent} from "../showcase-component";
+import {useThemeBuilder} from "../../provider";
 
-export function Button() {
+type Color = ButtonProps["color"];
+type Radius = ButtonProps["radius"];
+type Variant = ButtonProps["variant"];
+
+const SectionBase = ({
+  color,
+  radius,
+  isDisabled,
+  variant,
+}: {
+  color?: Color;
+  radius?: Radius;
+  isDisabled?: boolean;
+  variant?: Variant;
+}) => {
   return (
-    <ShowcaseComponent
-      defaultVariant="solid"
-      name="Button"
-      radiuses={radiuses}
-      sizes={sizes}
-      variants={variants}
+    <HeroUIButton
+      key={color}
+      color={color}
+      isDisabled={isDisabled}
+      radius={radius}
+      variant={variant}
     >
-      <NextUIButton color="default">Default</NextUIButton>
-      <NextUIButton color="primary">Primary</NextUIButton>
-      <NextUIButton color="secondary">Secondary</NextUIButton>
-      <NextUIButton color="success">Success</NextUIButton>
-      <NextUIButton color="warning">Warning</NextUIButton>
-      <NextUIButton color="danger">Danger</NextUIButton>
+      {color}
+    </HeroUIButton>
+  );
+};
+
+const Section = ({color, radius}: {color: Color; radius: Radius}) => {
+  const variants = ["solid", "shadow", "bordered", "flat", "faded", "ghost"];
+
+  return (
+    <div key={color} className="flex flex-col gap-y-4">
+      {variants.map((variant) =>
+        cloneElement(<SectionBase />, {color, radius, isDisabled: false, variant}),
+      )}
+      {cloneElement(<SectionBase />, {color, radius, isDisabled: true, variant: "solid"})}
+    </div>
+  );
+};
+
+export const Button = () => {
+  const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
+  const {radiusValue} = useThemeBuilder();
+
+  return (
+    <ShowcaseComponent name="Button">
+      {colors.map((color, idx) => (
+        <Section key={idx} color={color} radius={radiusValue} />
+      ))}
     </ShowcaseComponent>
   );
-}
-
-const radiuses: NextUIRadius[] = ["none", "sm", "md", "lg", "full"];
-const sizes: NextUISize[] = ["sm", "md", "lg"];
-const variants: NextUIVariant[] = [
-  "solid",
-  "faded",
-  "bordered",
-  "light",
-  "flat",
-  "ghost",
-  "shadow",
-];
+};

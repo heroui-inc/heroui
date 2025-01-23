@@ -1,17 +1,25 @@
 import {cloneElement} from "react";
-import {CodeProps, Code as HeroUICode} from "@heroui/react";
+import {PopoverProps, Popover, PopoverTrigger, PopoverContent, Button} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
 
-type Color = CodeProps["color"];
-type Radius = CodeProps["radius"];
+type Color = PopoverProps["color"];
+type Radius = PopoverProps["radius"];
 
 const SectionBase = ({color, radius}: {color?: Color; radius?: Radius}) => {
   return (
-    <HeroUICode key={radius} className="px-4" color={color} radius={radius}>
-      npm install @heroui/react
-    </HeroUICode>
+    <Popover color={color} placement="right" radius={radius}>
+      <PopoverTrigger>
+        <Button>Open Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="px-1 py-2">
+          <div className="text-small font-bold">Popover Content</div>
+          <div className="text-tiny">This is the popover content</div>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
 
@@ -23,12 +31,12 @@ const Section = ({color, radius}: {color: Color; radius: Radius}) => {
   );
 };
 
-export const Code = () => {
+export const PopoverComponent = () => {
   const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
   const {radiusValue} = useThemeBuilder();
 
   return (
-    <ShowcaseComponent name="Code">
+    <ShowcaseComponent name="Popover">
       {colors.map((color, idx) => (
         <Section key={idx} color={color} radius={radiusValue} />
       ))}

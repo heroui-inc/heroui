@@ -1,47 +1,42 @@
 import {showcaseId} from "../../constants";
 
+import {Alert} from "./alert";
 import {Avatar} from "./avatar";
-import {Badge} from "./badge";
-import {Breadcrumbs} from "./breadcrumbs";
+import {BreadCrumbs} from "./breadcrumbs";
 import {Button} from "./button";
+import {Calendar} from "./calendar";
 import {Checkbox} from "./checkbox";
 import {Chip} from "./chip";
-import {CircularProgress} from "./circular-progress";
 import {Code} from "./code";
-import {Content} from "./content";
-import {Divider} from "./divider";
-import {Dropdown} from "./dropdown";
-import {FontSize} from "./font-size";
-import {Input} from "./input";
-import {Link} from "./link";
-import {Pagination} from "./pagination";
-import {Select} from "./select";
-import {Slider} from "./slider";
-import {Switch} from "./switch";
-import {Tabs} from "./tabs";
+import {DropdownComponent} from "./dropdown";
+import {InputComponent} from "./input";
+import {PaginationComponent} from "./pagination";
+import {PopoverComponent} from "./popover";
+import {SelectComponent} from "./select";
+import {SwitchComponent} from "./switch";
+import {TableComponent} from "./table";
+import {TabsComponent} from "./tabs";
 
 export function Showcase() {
   return (
-    <div className="grid grid-cols-1 gap-4 w-full " id={showcaseId}>
-      <Content />
+    <div className="grid grid-cols-1 gap-4 w-full min-w-6xl pb-20" id={showcaseId}>
+      <div className="text-4xl text-default-800 font-medium">Theme Generator</div>
       <Avatar />
-      <Badge />
-      <Breadcrumbs />
+      <Alert />
+      <BreadCrumbs />
       <Button />
-      <Divider />
+      <Calendar />
       <Checkbox />
       <Chip />
       <Code />
-      <CircularProgress />
-      <Dropdown />
-      <Input />
-      <Link />
-      <Pagination />
-      <Select />
-      <Switch />
-      <Slider />
-      <Tabs />
-      <FontSize />
+      <DropdownComponent />
+      <InputComponent />
+      <PaginationComponent />
+      <PopoverComponent />
+      <SelectComponent />
+      <SwitchComponent />
+      <TableComponent />
+      <TabsComponent />
     </div>
   );
 }

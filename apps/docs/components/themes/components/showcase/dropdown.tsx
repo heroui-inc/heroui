@@ -1,38 +1,35 @@
+import {cloneElement} from "react";
 import {
-  Dropdown as NextUIDropdown,
+  Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Button,
+  DropdownMenuProps,
 } from "@heroui/react";
 
-import {NextUIColor, NextUIVariant} from "../../types";
 import {ShowcaseComponent} from "../showcase-component";
 
-export function Dropdown() {
-  return (
-    <ShowcaseComponent defaultVariant="solid" name="Dropdown" variants={variants}>
-      {colors.map((color) => (
-        <DropdownContent key={color} color={color} />
-      ))}
-    </ShowcaseComponent>
-  );
-}
+type Color = DropdownMenuProps["color"];
+type Variant = DropdownMenuProps["variant"];
 
-interface DropdownContentProps {
-  color: NextUIColor;
-  variant?: Extract<NextUIVariant, "solid" | "faded" | "bordered" | "light" | "flat" | "shadow">;
-}
-
-function DropdownContent({color, variant}: DropdownContentProps) {
+const SectionBase = ({
+  color,
+  isDisabled,
+  variant,
+}: {
+  color?: Color;
+  isDisabled?: boolean;
+  variant?: Variant;
+}) => {
   return (
-    <NextUIDropdown>
+    <Dropdown isDisabled={isDisabled}>
       <DropdownTrigger>
-        <Button className="capitalize" color={color} variant={variant}>
-          {color}
+        <Button color={color} variant={variant}>
+          Open Menu
         </Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Dropdown Variants" color={color} variant={variant}>
+      <DropdownMenu aria-label="Static Actions" color={color} variant={variant}>
         <DropdownItem key="new">New file</DropdownItem>
         <DropdownItem key="copy">Copy link</DropdownItem>
         <DropdownItem key="edit">Edit file</DropdownItem>
@@ -40,9 +37,31 @@ function DropdownContent({color, variant}: DropdownContentProps) {
           Delete file
         </DropdownItem>
       </DropdownMenu>
-    </NextUIDropdown>
+    </Dropdown>
   );
-}
+};
 
-const colors: NextUIColor[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-const variants: NextUIVariant[] = ["solid", "faded", "bordered", "light", "flat", "shadow"];
+const Section = ({color}: {color: Color}) => {
+  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow"];
+
+  return (
+    <div key={color} className="flex flex-col gap-y-4">
+      {variants.map((variant, idx) =>
+        cloneElement(<SectionBase key={idx} />, {color, variant, isDisabled: false}),
+      )}
+      {cloneElement(<SectionBase />, {color, variant: "solid", isDisabled: true})}
+    </div>
+  );
+};
+
+export const DropdownComponent = () => {
+  const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
+
+  return (
+    <ShowcaseComponent name="Dropdown">
+      {colors.map((color, idx) => (
+        <Section key={idx} color={color} />
+      ))}
+    </ShowcaseComponent>
+  );
+};

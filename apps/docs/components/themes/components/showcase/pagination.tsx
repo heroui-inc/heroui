@@ -1,39 +1,58 @@
-import {Pagination as NextUIPagination} from "@heroui/react";
+import {cloneElement} from "react";
+import {PaginationProps, Pagination} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
-import {NextUIRadius, NextUISize, NextUIVariant} from "../../types";
+import {useThemeBuilder} from "../../provider";
 
-export function Pagination() {
+type Color = PaginationProps["color"];
+type Radius = PaginationProps["radius"];
+type Variant = PaginationProps["variant"];
+
+const SectionBase = ({
+  color,
+  isDisabled,
+  radius,
+  variant,
+}: {
+  color?: Color;
+  isDisabled?: boolean;
+  radius?: Radius;
+  variant?: Variant;
+}) => {
   return (
-    <ShowcaseComponent
-      defaultVariant="light"
-      name="Pagination"
-      radiuses={radiuses}
-      sizes={sizes}
-      variants={variants}
-    >
-      <NextUIPagination color="default" page={1} total={10}>
-        Default
-      </NextUIPagination>
-      <NextUIPagination color="primary" page={1} total={10}>
-        Primary
-      </NextUIPagination>
-      <NextUIPagination color="secondary" page={1} total={10}>
-        Secondary
-      </NextUIPagination>
-      <NextUIPagination color="success" page={1} total={10}>
-        Success
-      </NextUIPagination>
-      <NextUIPagination color="warning" page={1} total={10}>
-        Warning
-      </NextUIPagination>
-      <NextUIPagination color="danger" page={1} total={10}>
-        Danger
-      </NextUIPagination>
+    <Pagination
+      color={color}
+      initialPage={1}
+      isDisabled={isDisabled}
+      radius={radius}
+      total={10}
+      variant={variant}
+    />
+  );
+};
+
+const Section = ({color, radius}: {color: Color; radius: Radius}) => {
+  const variants = ["flat", "bordered", "faded", "light"];
+
+  return (
+    <div key={color} className="flex flex-col gap-y-4">
+      {variants.map((variant, idx) =>
+        cloneElement(<SectionBase key={idx} />, {color, variant, isDisabled: false, radius}),
+      )}
+      {cloneElement(<SectionBase />, {color, variant: "flat", isDisabled: true, radius})}
+    </div>
+  );
+};
+
+export const PaginationComponent = () => {
+  const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
+  const {radiusValue} = useThemeBuilder();
+
+  return (
+    <ShowcaseComponent name="Pagination">
+      {colors.map((color, idx) => (
+        <Section key={idx} color={color} radius={radiusValue} />
+      ))}
     </ShowcaseComponent>
   );
-}
-
-const radiuses: NextUIRadius[] = ["none", "sm", "md", "lg", "full"];
-const sizes: NextUISize[] = ["sm", "md", "lg"];
-const variants: NextUIVariant[] = ["faded", "bordered", "light", "flat"];
+};

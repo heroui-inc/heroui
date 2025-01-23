@@ -1,7 +1,9 @@
 import {Select, SelectItem} from "@heroui/react";
 
 import {templates} from "../templates";
-import {ConfigColors, Template, TemplateType} from "../types";
+import {Template, TemplateType} from "../types";
+
+import Swatch from "./configuration/swatch";
 
 import {MirrorLeft} from "@/components/icons";
 
@@ -45,19 +47,5 @@ export function SelectTemplate({name, onChange}: SelectTemplateProps) {
         ))}
       </Select>
     </>
-  );
-}
-
-interface SwatchProps {
-  colors: ConfigColors["baseColor"];
-}
-
-function Swatch({colors}: SwatchProps) {
-  return (
-    <div className="flex h-6 rounded-lg">
-      {Object.entries(colors).map(([key, value]) => (
-        <div key={key} className="w-2 h-full" style={{background: value}} />
-      ))}
-    </div>
   );
 }

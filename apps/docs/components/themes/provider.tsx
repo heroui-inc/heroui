@@ -2,12 +2,21 @@ import {useState, createContext, useContext} from "react";
 import {useLocalStorage} from "usehooks-ts";
 
 import {configKey, initialConfig} from "./constants";
-import {ConfigColors, Config, ConfigLayout, ThemeType, NextUIRadius, NextUISize} from "./types";
+import {
+  ConfigColors,
+  Config,
+  ConfigLayout,
+  ThemeType,
+  NextUIRadius,
+  NextUISize,
+  TemplateType,
+} from "./types";
 
 export interface ThemeBuilderContextProps {
   config: Config;
   radiusValue: NextUIRadius;
   borderWidthValue: NextUISize;
+  templateTheme: TemplateType;
   resetConfig: (theme: ThemeType, sync: boolean) => Config;
   setLayoutColor: (
     newConfig: Partial<ConfigColors["layoutColor"]>,
@@ -33,12 +42,14 @@ export interface ThemeBuilderContextProps {
   setRadius: (newConfig: Partial<ConfigLayout["radius"]>) => void;
   setRadiusValue: (radius: NextUIRadius) => void;
   setBorderWidthValue: (borderWidth: NextUISize) => void;
+  setTemplateTheme: (theme: TemplateType) => void;
 }
 
 const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   config: initialConfig,
   radiusValue: "none",
   borderWidthValue: "md",
+  templateTheme: "heroui",
   resetConfig: () => initialConfig,
   setLayoutColor: () => {},
   setBorderWidth: () => {},
@@ -52,6 +63,7 @@ const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   setConentColor: () => {},
   setRadiusValue: () => {},
   setBorderWidthValue: () => {},
+  setTemplateTheme: () => {},
 });
 
 interface ThemeBuilderProviderProps {
@@ -63,6 +75,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
   const [config, setConfig] = useState<Config>(lsConfig);
   const [radiusValue, setRadiusValue] = useState<NextUIRadius>("none");
   const [borderWidthValue, setBorderWidthValue] = useState<NextUISize>("md");
+  const [templateTheme, setTemplateTheme] = useState<TemplateType>("heroui");
 
   const setConfiguration = (newConfig: Config, theme: ThemeType, sync: boolean) => {
     setConfig((prev) =>
@@ -283,6 +296,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         config,
         radiusValue,
         borderWidthValue,
+        templateTheme,
         resetConfig,
         setLayoutColor,
         setBorderWidth,
@@ -296,6 +310,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         setConentColor,
         setRadiusValue,
         setBorderWidthValue,
+        setTemplateTheme,
       }}
     >
       {children}

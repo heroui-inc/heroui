@@ -1,60 +1,78 @@
-import {Select as NextUI, SelectItem} from "@heroui/react";
+import {cloneElement} from "react";
+import {SelectProps, Select, SelectItem} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
-import {NextUIColor, NextUIRadius, NextUISize, NextUIVariant} from "../../types";
+import {useThemeBuilder} from "../../provider";
 
-export function Select() {
+type Color = SelectProps["color"];
+type Radius = SelectProps["radius"];
+type Variant = SelectProps["variant"];
+
+export const animals = [
+  {key: "cat", label: "Cat"},
+  {key: "dog", label: "Dog"},
+  {key: "elephant", label: "Elephant"},
+  {key: "lion", label: "Lion"},
+  {key: "tiger", label: "Tiger"},
+  {key: "giraffe", label: "Giraffe"},
+  {key: "dolphin", label: "Dolphin"},
+  {key: "penguin", label: "Penguin"},
+  {key: "zebra", label: "Zebra"},
+  {key: "shark", label: "Shark"},
+  {key: "whale", label: "Whale"},
+  {key: "otter", label: "Otter"},
+  {key: "crocodile", label: "Crocodile"},
+];
+
+const SectionBase = ({
+  color,
+  isDisabled,
+  radius,
+  variant,
+}: {
+  color?: Color;
+  isDisabled?: boolean;
+  radius?: Radius;
+  variant?: Variant;
+}) => {
   return (
-    <ShowcaseComponent
-      defaultVariant="bordered"
-      name="Select"
-      radiuses={radiuses}
-      sizes={sizes}
-      variants={variants}
+    <Select
+      className="w-[300px]"
+      color={color}
+      isDisabled={isDisabled}
+      label="Select an animal"
+      radius={radius}
+      variant={variant}
     >
-      {colors.map((color) => (
-        <NextUI
-          key={color}
-          className="max-w-xs"
-          color={color}
-          defaultSelectedKeys={["cat"]}
-          label="Favorite Animal"
-          placeholder="Select an animal"
-        >
-          {animals.map((animal) => (
-            <SelectItem key={animal.value} value={animal.value}>
-              {animal.label}
-            </SelectItem>
-          ))}
-        </NextUI>
+      {animals.map((animal) => (
+        <SelectItem key={animal.key}>{animal.label}</SelectItem>
+      ))}
+    </Select>
+  );
+};
+
+const Section = ({color, radius}: {color: Color; radius: Radius}) => {
+  const variants = ["flat", "faded", "bordered", "underlined"];
+
+  return (
+    <div key={color} className="flex flex-col gap-y-4">
+      {variants.map((variant, idx) =>
+        cloneElement(<SectionBase key={idx} />, {color, variant, isDisabled: false, radius}),
+      )}
+      {cloneElement(<SectionBase />, {color, variant: "flat", isDisabled: true, radius})}
+    </div>
+  );
+};
+
+export const SelectComponent = () => {
+  const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
+  const {radiusValue} = useThemeBuilder();
+
+  return (
+    <ShowcaseComponent name="Select">
+      {colors.map((color, idx) => (
+        <Section key={idx} color={color} radius={radiusValue} />
       ))}
     </ShowcaseComponent>
   );
-}
-
-const animals: {label: string; value: string}[] = [
-  {
-    label: "Cat",
-    value: "cat",
-  },
-  {
-    label: "Dog",
-    value: "dog",
-  },
-  {
-    label: "Bird",
-    value: "bird",
-  },
-  {
-    label: "Fish",
-    value: "fish",
-  },
-  {
-    label: "Rabbit",
-    value: "rabbit",
-  },
-];
-const colors: NextUIColor[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-const radiuses: NextUIRadius[] = ["none", "sm", "md", "lg", "full"];
-const sizes: NextUISize[] = ["sm", "md", "lg"];
-const variants: NextUIVariant[] = ["faded", "bordered", "flat", "underlined"];
+};
