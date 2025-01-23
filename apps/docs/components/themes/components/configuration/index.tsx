@@ -152,18 +152,18 @@ export default function Configuration() {
           </div>
         </CardFooter>
       </Card>
-      <div className="md:hidden w-screen fixed bottom-0 right-0 left-0 z-40 bg-default-100 overflow-hidden rounde-md">
+      <div className="md:hidden w-screen fixed bottom-0 right-0 left-0 z-40 bg-default-100 overflow-hidden rounded-t-full">
         <Button
           disableRipple
           isIconOnly
-          className="bg-default-100 hover:scale-125 hover:text-default-600 text-default-400 left-1/2 transform -translate-x-1/2 w-full h-6"
+          className="bg-default-100 group hover:text-default-600 text-default-400 left-1/2 transform -translate-x-1/2 w-full h-6 flex-col pb-2"
           onPress={() => {
             setIsDrawerOpen(!isDrawerOpen);
           }}
         >
-          <ChevronIcon
-            className={clsx("fill-current", isDrawerOpen ? "-rotate-90" : "rotate-90")}
-          />
+          <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer group-hover:bg-default-500" />
+          <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
+          <div className="h-1 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
         </Button>
         <Drawer
           hideCloseButton
@@ -177,15 +177,19 @@ export default function Configuration() {
             <ScrollShadow orientation="vertical">
               <div className="flex flex-col items-center gap-y-8">
                 <div
-                  className="h-2 w-16 my-3 mb-8 bg-default-200 rounded-full cursor-pointer hover:bg-default-400"
+                  className="group"
                   onPointerDown={() => {
                     setIsDrawerOpen(false);
                     setSelectedSection("none");
                   }}
-                />
+                >
+                  <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer group-hover:bg-default-500" />
+                  <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
+                  <div className="h-1 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
+                </div>
                 {selectedSection === "none" && (
                   <>
-                    <div className="flex w-full flex-start ">
+                    <div className="flex w-full flex-start overflow-x-scroll scrollbar-hide py-2">
                       {templates.map((template) => {
                         return (
                           <div key={template.name} className="flex flex-col items-center px-2">
@@ -214,7 +218,7 @@ export default function Configuration() {
                         );
                       })}
                     </div>
-                    <div className="w-full flex gap-4 flex-wrap justify-between">
+                    <div className="w-full flex gap-4 flex-wrap justify-around">
                       <Button
                         className="w-48 h-16 text-lg flex justify-around"
                         onPress={() => {
@@ -248,6 +252,7 @@ export default function Configuration() {
                 {selectedSection === "color" && (
                   <div className="w-full h-full">
                     <Button
+                      isIconOnly
                       className="absolute left-6 top-5 text-default-400 hover:text-default-600 cursor-pointer"
                       variant="light"
                       onPress={() => {
@@ -272,6 +277,7 @@ export default function Configuration() {
                 {selectedSection === "radius" && (
                   <div className="w-full h-full">
                     <Button
+                      isIconOnly
                       className="absolute left-6 top-5 text-default-400 hover:text-default-600 cursor-pointer"
                       variant="light"
                       onPress={() => {
@@ -286,6 +292,7 @@ export default function Configuration() {
                 {selectedSection === "opacity" && (
                   <div className="w-full h-full">
                     <Button
+                      isIconOnly
                       className="absolute left-6 top-5 text-default-400 hover:text-default-600 cursor-pointer"
                       variant="light"
                       onPress={() => {
