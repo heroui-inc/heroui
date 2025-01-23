@@ -81,6 +81,16 @@ const StaticTemplate = (args: TabsProps) => (
   </Tabs>
 );
 
+const MultipleTabsTemplate = (args: TabsProps) => (
+  <Tabs aria-label="Tabs with many items" {...args}>
+    {[...Array(25)].map((_, index) => (
+      <Tab key={`tab-${index + 1}`} title={`Tab ${index + 1}`}>
+        <Lorem count={1} sentenceUpperBound={20} />
+      </Tab>
+    ))}
+  </Tabs>
+);
+
 const WithIconsTemplate = (args: TabsProps) => (
   <Tabs
     aria-label="Tabs example"
@@ -278,6 +288,15 @@ export const Dynamic = {
 
   args: {
     ...defaultProps,
+  },
+};
+
+export const MultipleTabs = {
+  render: MultipleTabsTemplate,
+
+  args: {
+    ...defaultProps,
+    variant: "solid",
   },
 };
 

@@ -1,5 +1,5 @@
 ---
-"@heroui/tabs": major
+"@heroui/tabs": patch
 ---
 
-Added ellipsis to tabs
+Added ellipsis to tabs (#3573)
