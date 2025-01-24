@@ -3,7 +3,6 @@ import variants from "./variants";
 import customStyles from "./custom-styles";
 import radius from "./radius";
 import placement from "./placement";
-import provider from "./provider";
 import usage from "./usage";
 
 export const toastContent = {
@@ -12,6 +11,5 @@ export const toastContent = {
   customStyles,
   radius,
   placement,
-  provider,
   usage,
 };

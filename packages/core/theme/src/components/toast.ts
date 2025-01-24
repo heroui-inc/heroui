@@ -72,15 +72,15 @@ const toast = tv({
         icon: "w-5 h-5",
         loadingIcon: "w-5 h-5",
         title: "text-sm font-medium",
-        description: "text-xs font-light",
+        description: "text-xs",
       },
       md: {
         title: "text-sm font-semibold",
-        description: "text-xs font-light",
+        description: "text-xs",
       },
       lg: {
         title: "text-md font-semibold",
-        description: "text-sm font-light",
+        description: "text-sm",
       },
     },
     variant: {
@@ -184,7 +184,7 @@ const toast = tv({
         closeButton: "text-foreground-400 hover:text-foreground-600",
         closeIcon: "border border-foreground-400 bg-foreground-100",
         title: "text-background-600",
-        description: "text-background-400",
+        description: "text-background-500",
       },
     },
     {
@@ -195,7 +195,7 @@ const toast = tv({
         closeButton: "text-primary-400 hover:text-primary-600",
         closeIcon: "border border-primary-400 bg-primary-100",
         title: "text-primary-600",
-        description: "text-primary-400",
+        description: "text-primary-500",
       },
     },
     {
@@ -206,7 +206,7 @@ const toast = tv({
         closeButton: "text-secondary-400 hover:text-secondary-600",
         closeIcon: "border border-secondary-400 bg-secondary-100",
         title: "text-secondary-600",
-        description: "text-secondary-400",
+        description: "text-secondary-500",
       },
     },
     {
@@ -217,7 +217,7 @@ const toast = tv({
         closeButton: "text-success-400 hover:text-success-600",
         closeIcon: "border border-success-400 bg-success-100",
         title: "text-success-600",
-        description: "text-success-400",
+        description: "text-success-500",
       },
     },
     {
@@ -228,7 +228,7 @@ const toast = tv({
         closeButton: "text-warning-400 hover:text-warning-600",
         closeIcon: "border border-warning-400 bg-warning-100",
         title: "text-warning-600",
-        description: "text-warning-400",
+        description: "text-warning-500",
       },
     },
     {
@@ -239,7 +239,7 @@ const toast = tv({
         closeButton: "text-danger-400 hover:text-danger-600",
         closeIcon: "border border-danger-400 bg-danger-100",
         title: "text-danger-600",
-        description: "text-danger-400",
+        description: "text-danger-500",
       },
     },
     // bordered and color
@@ -251,7 +251,7 @@ const toast = tv({
         closeButton: "text-foreground-400 hover:text-foreground-600",
         closeIcon: "border border-foreground-400 bg-foreground-100",
         title: "text-background-600",
-        description: "text-background-400",
+        description: "text-background-500",
       },
     },
     {
@@ -262,7 +262,7 @@ const toast = tv({
         closeButton: "text-primary-400 hover:text-primary-600",
         closeIcon: "border border-primary-400 bg-primary-100",
         title: "text-primary-600",
-        description: "text-primary-400",
+        description: "text-primary-500",
       },
     },
     {
@@ -273,7 +273,7 @@ const toast = tv({
         closeButton: "text-secondary-400 hover:text-secondary-600",
         closeIcon: "border border-secondary-400 bg-secondary-100",
         title: "text-secondary-600",
-        description: "text-secondary-400",
+        description: "text-secondary-500",
       },
     },
     {
@@ -284,7 +284,7 @@ const toast = tv({
         closeButton: "text-success-400 hover:text-success-600",
         closeIcon: "border border-success-400 bg-success-100",
         title: "text-success-600",
-        description: "text-success-400",
+        description: "text-success-500",
       },
     },
     {
@@ -295,7 +295,7 @@ const toast = tv({
         closeButton: "text-warning-400 hover:text-warning-600",
         closeIcon: "border border-warning-400 bg-warning-100",
         title: "text-warning-600",
-        description: "text-warning-400",
+        description: "text-warning-500",
       },
     },
     {
@@ -306,7 +306,7 @@ const toast = tv({
         closeButton: "text-danger-400 hover:text-danger-600",
         closeIcon: "border border-danger-400 bg-danger-100",
         title: "text-danger-600",
-        description: "text-danger-400",
+        description: "text-danger-500",
       },
     },
     // solid and color
@@ -318,7 +318,7 @@ const toast = tv({
         closeButton: "text-foreground-400 hover:text-foreground-600",
         closeIcon: "border border-foreground-400 bg-foreground-100",
         title: "text-background-600",
-        description: "text-background-400",
+        description: "text-background-500",
       },
     },
     {
@@ -329,7 +329,7 @@ const toast = tv({
         closeButton: "text-primary-400 hover:text-primary-600",
         closeIcon: "border border-primary-400 bg-primary-100",
         title: "text-primary-600",
-        description: "text-primary-400",
+        description: "text-primary-500",
       },
     },
     {
@@ -340,7 +340,7 @@ const toast = tv({
         closeButton: "text-secondary-400 hover:text-secondary-600",
         closeIcon: "border border-secondary-400 bg-secondary-100",
         title: "text-secondary-600",
-        description: "text-secondary-400",
+        description: "text-secondary-500",
       },
     },
     {
@@ -351,7 +351,7 @@ const toast = tv({
         closeButton: "text-success-400 hover:text-success-600",
         closeIcon: "border border-success-400 bg-success-100",
         title: "text-success-600",
-        description: "text-success-400",
+        description: "text-success-500",
       },
     },
     {
@@ -362,7 +362,7 @@ const toast = tv({
         closeButton: "text-warning-400 hover:text-warning-600",
         closeIcon: "border border-warning-400 bg-warning-100",
         title: "text-warning-600",
-        description: "text-warning-400",
+        description: "text-warning-500",
       },
     },
     {
@@ -373,7 +373,7 @@ const toast = tv({
         closeButton: "text-danger-400 hover:text-danger-600",
         closeIcon: "border border-danger-400 bg-danger-100",
         title: "text-danger-600",
-        description: "text-danger-400",
+        description: "text-danger-500",
       },
     },
   ],

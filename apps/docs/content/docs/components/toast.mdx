@@ -39,9 +39,43 @@ Toasts are temporary notifications that provide concise feedback about an action
 
 ## Requirement
 
-The `ToastProvider` must be added to the application's root (or the relevant part of it) before using the addToast function. This is required to initialize the context for managing toasts.
+The `ToastProvider` must be added to the application before using the `addToast` function. This is required to initialize the context for managing toasts.
 
-<CodeDemo showPreview={false} title="ToastProvider" files={toastContent.provider} />
+```jsx {4,9}
+// app/providers.tsx
+
+import {HeroUIProvider} from '@heroui/react'
+import {ToastProvider} from "@heroui/toast";
+
+export default function Providers({children}) {
+  return (
+    <HeroUIProvider>
+      <ToastProvider />
+      {children}
+    </HeroUIProvider>
+  )
+}
+```
+
+<Spacer y={4} />
+
+```jsx {3,9,11}
+// app/layout.tsx
+
+import {Providers} from "./providers";
+
+export default function RootLayout({children}) {
+  return (
+    <html lang="en" className='dark'>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
+}
+```
 
 ### Usage
 
