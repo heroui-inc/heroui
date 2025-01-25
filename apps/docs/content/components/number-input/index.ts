@@ -7,7 +7,6 @@ import colors from "./colors";
 import variants from "./variants";
 import radius from "./radius";
 import description from "./description";
-import helperText from "./helper-text";
 import isWheelDisabled from "./is-wheel-disabled";
 import label from "./label";
 import minValue from "./min-value";
@@ -34,7 +33,6 @@ export const numberInputContent = {
   variants,
   radius,
   description,
-  helperText,
   label,
   isWheelDisabled,
   minValue,
