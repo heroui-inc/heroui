@@ -6,9 +6,15 @@ import {Form} from "@heroui/form";
 
 import {NumberInput} from "../src";
 
-describe("Input", () => {
+describe("NumberInput", () => {
+  let user: UserEvent;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
   it("should render correctly", () => {
-    const wrapper = render(<NumberInput label="test input" />);
+    const wrapper = render(<NumberInput label="test number input" />);
 
     expect(() => wrapper.unmount()).not.toThrow();
   });
@@ -16,31 +22,32 @@ describe("Input", () => {
   it("ref should be forwarded", () => {
     const ref = React.createRef<HTMLInputElement>();
 
-    render(<NumberInput ref={ref} label="test input" />);
+    render(<NumberInput ref={ref} label="test number input" />);
+
     expect(ref.current).not.toBeNull();
   });
 
   it("should have aria-invalid when invalid", () => {
-    const {container} = render(<NumberInput isInvalid={true} label="test input" />);
+    const {container} = render(<NumberInput isInvalid={true} label="test number input" />);
 
     expect(container.querySelector("input")).toHaveAttribute("aria-invalid", "true");
   });
 
   it("should have aria-readonly when isReadOnly", () => {
-    const {container} = render(<NumberInput isReadOnly label="test input" />);
+    const {container} = render(<NumberInput isReadOnly label="test number input" />);
 
     expect(container.querySelector("input")).toHaveAttribute("aria-readonly", "true");
   });
 
   it("should have disabled attribute when isDisabled", () => {
-    const {container} = render(<NumberInput isDisabled label="test input" />);
+    const {container} = render(<NumberInput isDisabled label="test number input" />);
 
     expect(container.querySelector("input")).toHaveAttribute("disabled");
   });
 
   it("should disable the clear button when isDisabled", () => {
     const {getByRole} = render(
-      <NumberInput hideStepper isClearable isDisabled label="test input" />,
+      <NumberInput hideStepper isClearable isDisabled label="test number input" />,
     );
 
     const clearButton = getByRole("button");
@@ -49,7 +56,7 @@ describe("Input", () => {
   });
 
   it("should not allow clear button to be focusable", () => {
-    const {getByRole} = render(<NumberInput hideStepper isClearable label="test input" />);
+    const {getByRole} = render(<NumberInput hideStepper isClearable label="test number input" />);
 
     const clearButton = getByRole("button");
 
@@ -58,7 +65,7 @@ describe("Input", () => {
 
   it("should have required attribute when isRequired with native validationBehavior", () => {
     const {container} = render(
-      <NumberInput isRequired label="test input" validationBehavior="native" />,
+      <NumberInput isRequired label="test number input" validationBehavior="native" />,
     );
 
     expect(container.querySelector("input")).toHaveAttribute("required");
@@ -67,7 +74,7 @@ describe("Input", () => {
 
   it("should have aria-required attribute when isRequired with aria validationBehavior", () => {
     const {container} = render(
-      <NumberInput isRequired label="test input" validationBehavior="aria" />,
+      <NumberInput isRequired label="test number input" validationBehavior="aria" />,
     );
 
     expect(container.querySelector("input")).not.toHaveAttribute("required");
@@ -75,23 +82,24 @@ describe("Input", () => {
   });
 
   it("should have aria-describedby when description is provided", () => {
-    const {container} = render(<NumberInput description="description" label="test input" />);
+    const {container} = render(<NumberInput description="description" label="test number input" />);
 
     expect(container.querySelector("input")).toHaveAttribute("aria-describedby");
   });
 
   it("should have aria-describedby when errorMessage is provided", () => {
     const {container} = render(
-      <NumberInput isInvalid errorMessage="error text" label="test input" />,
+      <NumberInput isInvalid errorMessage="error text" label="test number input" />,
     );
 
     expect(container.querySelector("input")).toHaveAttribute("aria-describedby");
   });
 
   it("should have the same aria-labelledby as label id", () => {
-    const {container} = render(<NumberInput label="test input" />);
+    const {container} = render(<NumberInput label="test number input" />);
 
     const labelId = container.querySelector("label")?.id;
+
     const labelledBy = container.querySelector("input")?.getAttribute("aria-labelledby");
 
     expect(labelledBy?.includes(labelId as string)).toBeTruthy();
@@ -100,18 +108,21 @@ describe("Input", () => {
   it("should call dom event handlers only once", () => {
     const onFocus = jest.fn();
 
-    const {container} = render(<NumberInput label="test input" onFocus={onFocus} />);
+    const {container} = render(<NumberInput label="test number input" onFocus={onFocus} />);
 
-    container.querySelector("input")?.focus();
-    container.querySelector("input")?.blur();
+    act(() => {
+      container.querySelector("input")?.focus();
 
-    expect(onFocus).toHaveBeenCalledTimes(1);
+      container.querySelector("input")?.blur();
+
+      expect(onFocus).toHaveBeenCalledTimes(1);
+    });
   });
 
   it("ref should update the value", () => {
     const ref = React.createRef<HTMLInputElement>();
 
-    const {container} = render(<NumberInput ref={ref} />);
+    const {container} = render(<NumberInput ref={ref} label="test number input" />);
 
     if (!ref.current) {
       throw new Error("ref is null");
@@ -120,9 +131,11 @@ describe("Input", () => {
 
     ref.current!.value = value;
 
-    container.querySelector("input")?.focus();
+    act(() => {
+      container.querySelector("input")?.focus();
 
-    expect(ref.current?.value)?.toBe(value);
+      expect(ref.current?.value)?.toBe(value);
+    });
   });
 
   it("should clear the value and onClear is triggered", async () => {
@@ -180,6 +193,52 @@ describe("Input", () => {
     await user.click(clearButton);
 
     expect(onClear).toHaveBeenCalledTimes(0);
+  });
+
+  it("should reset to max value if the value exceeds", async () => {
+    const {container} = render(
+      <NumberInput isInvalid={true} label="test number input" maxValue={100} />,
+    );
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("1024");
+    await user.tab();
+
+    expect(input).toHaveValue("100");
+  });
+
+  it("should reset to min value if the value subceed", async () => {
+    const {container} = render(
+      <NumberInput isInvalid={true} label="test number input" minValue={100} />,
+    );
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("50");
+    await user.tab();
+
+    expect(input).toHaveValue("100");
+  });
+
+  it("should render stepper", async () => {
+    const {container} = render(<NumberInput isInvalid={true} label="test number input" />);
+
+    const stepperButton = container.querySelector("[data-slot='stepper-wrapper'] button")!;
+
+    expect(stepperButton).not.toBeNull();
+  });
+
+  it("should hide stepper", async () => {
+    const {container} = render(
+      <NumberInput hideStepper isInvalid={true} label="test number input" />,
+    );
+
+    const stepperButton = container.querySelector("[data-slot='stepper-wrapper'] button")!;
+
+    expect(stepperButton).toBeNull();
   });
 });
 
@@ -426,9 +485,6 @@ describe("NumberInput with React Hook Form", () => {
 
         await user.tab();
         await user.keyboard("1234");
-        // TODO: fix this
-        // expect(input).not.toHaveAttribute("aria-describedby");
-        // expect(input).not.toHaveAttribute("aria-invalid");
       });
 
       it("supports server validation", async () => {
@@ -449,10 +505,6 @@ describe("NumberInput with React Hook Form", () => {
         await user.tab();
         await user.keyboard("1234");
         await user.tab();
-
-        // TODO: fix this
-        // expect(input).not.toHaveAttribute("aria-describedby");
-        // expect(input).not.toHaveAttribute("aria-invalid");
       });
     });
   });
