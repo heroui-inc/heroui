@@ -1,6 +1,6 @@
-import {forwardRef, HTMLNextUIProps} from "@nextui-org/system";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 import {AnimatePresence, HTMLMotionProps, LazyMotion, m} from "framer-motion";
 import {mergeProps} from "@react-aria/utils";
 import {Overlay} from "@react-aria/overlays";
@@ -9,7 +9,7 @@ import React from "react";
 import {menuVariants} from "./navbar-menu-transitions";
 import {useNavbarContext} from "./navbar-context";
 
-export interface NavbarMenuProps extends HTMLNextUIProps<"ul"> {
+export interface NavbarMenuProps extends HTMLHeroUIProps<"ul"> {
   children?: React.ReactNode;
   /**
    * The container element in which the navbar menu overlay portal will be placed.
@@ -22,7 +22,7 @@ export interface NavbarMenuProps extends HTMLNextUIProps<"ul"> {
   motionProps?: HTMLMotionProps<"ul">;
 }
 
-const domAnimation = () => import("@nextui-org/dom-animation").then((res) => res.default);
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
 
 const NavbarMenu = forwardRef<"ul", NavbarMenuProps>((props, ref) => {
   const {className, children, portalContainer, motionProps, style, ...otherProps} = props;
@@ -32,25 +32,28 @@ const NavbarMenu = forwardRef<"ul", NavbarMenuProps>((props, ref) => {
 
   const styles = clsx(classNames?.menu, className);
 
-  // only apply overlay when menu is open
-  const OverlayComponent = isMenuOpen ? Overlay : React.Fragment;
+  if (disableAnimation) {
+    if (!isMenuOpen) return null;
 
-  const contents = disableAnimation ? (
-    <OverlayComponent portalContainer={portalContainer}>
-      <ul
-        ref={domRef}
-        className={slots.menu?.({class: styles})}
-        data-open={dataAttr(isMenuOpen)}
-        style={{
-          // @ts-expect-error
-          "--navbar-height": typeof height === "number" ? `${height}px` : height,
-        }}
-        {...otherProps}
-      >
-        {children}
-      </ul>
-    </OverlayComponent>
-  ) : (
+    return (
+      <Overlay portalContainer={portalContainer}>
+        <ul
+          ref={domRef}
+          className={slots.menu?.({class: styles})}
+          data-open={dataAttr(isMenuOpen)}
+          style={{
+            // @ts-expect-error
+            "--navbar-height": typeof height === "number" ? `${height}px` : height,
+          }}
+          {...otherProps}
+        >
+          {children}
+        </ul>
+      </Overlay>
+    );
+  }
+
+  return (
     <AnimatePresence mode="wait">
       {isMenuOpen ? (
         <Overlay portalContainer={portalContainer}>
@@ -78,10 +81,8 @@ const NavbarMenu = forwardRef<"ul", NavbarMenuProps>((props, ref) => {
       ) : null}
     </AnimatePresence>
   );
-
-  return contents;
 });
 
-NavbarMenu.displayName = "NextUI.NavbarMenu";
+NavbarMenu.displayName = "HeroUI.NavbarMenu";
 
 export default NavbarMenu;
