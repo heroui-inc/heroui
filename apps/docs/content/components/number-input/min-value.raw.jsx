@@ -5,7 +5,7 @@ export default function App() {
     <NumberInput
       hideStepper
       className="max-w-xs"
-      helperText="The value of the element should be greater than 100"
+      description="The value should be greater than 100"
       minValue={100}
       placeholder="Enter the amount"
     />

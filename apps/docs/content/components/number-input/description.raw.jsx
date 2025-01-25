@@ -5,7 +5,7 @@ export default function App() {
     <NumberInput
       className="max-w-xs"
       defaultValue={1024}
-      description="Enter the amount of the element"
+      description="Enter the amount"
       label="Amount"
     />
   );
