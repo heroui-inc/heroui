@@ -484,6 +484,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     (props = {}) => {
       return {
         ...props,
+        "data-slot": "stepper-wrapper",
         className: slots.stepperWrapper({
           class: clsx(classNames?.stepperWrapper, props?.className),
         }),
