@@ -73,7 +73,7 @@ jobs:
 
   continuous-release:
     name: Continuous Release
-    if: github.repository == 'nextui-org/nextui'
+    if: github.repository == 'heroui-inc/heroui'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
