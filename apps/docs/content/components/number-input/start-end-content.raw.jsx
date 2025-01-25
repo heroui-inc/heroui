@@ -31,13 +31,7 @@ export default function App() {
             </div>
           }
           label="Price"
-          labelPlacement="outside"
           placeholder="0.00"
-          startContent={
-            <div className="pointer-events-none flex items-center">
-              <span className="text-default-400 text-small">$</span>
-            </div>
-          }
         />
       </div>
     </div>
