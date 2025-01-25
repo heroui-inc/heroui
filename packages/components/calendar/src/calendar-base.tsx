@@ -3,7 +3,7 @@ import type {As, HTMLHeroUIProps} from "@heroui/system";
 import type {ButtonProps} from "@heroui/button";
 import type {HTMLAttributes, ReactNode, RefObject} from "react";
 
-import {Fragment, useState} from "react";
+import {forwardRef, Fragment, useState} from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {Button} from "@heroui/button";
 import {chain, mergeProps} from "@react-aria/utils";
@@ -33,6 +33,21 @@ export interface CalendarBaseProps extends HTMLHeroUIProps<"div"> {
   calendarRef: RefObject<HTMLDivElement>;
   errorMessage?: ReactNode;
 }
+
+/**
+ * Avoid this framer-motion warning:
+ * Function components cannot be given refs.
+ * Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+ *
+ * @see https://www.framer.com/motion/animate-presence/###mode
+ */
+const PopLayoutWrapper = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  (props, ref) => {
+    return <div ref={ref} {...props} />;
+  },
+);
+
+PopLayoutWrapper.displayName = "HeroUI - PopLayoutWrapper";
 
 export function CalendarBase(props: CalendarBaseProps) {
   const {
@@ -152,9 +167,11 @@ export function CalendarBase(props: CalendarBaseProps) {
           data-slot="content"
         >
           <AnimatePresence custom={direction} initial={false} mode="popLayout">
-            <MotionConfig transition={transition}>
-              <LazyMotion features={domAnimation}>{calendarContent}</LazyMotion>
-            </MotionConfig>
+            <PopLayoutWrapper>
+              <MotionConfig transition={transition}>
+                <LazyMotion features={domAnimation}>{calendarContent}</LazyMotion>
+              </MotionConfig>
+            </PopLayoutWrapper>
           </AnimatePresence>
         </ResizablePanel>
       )}
