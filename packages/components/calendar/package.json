@@ -49,6 +49,7 @@
     "@heroui/dom-animation": "workspace:*",
     "@heroui/react-aria-i18n": "workspace:*",
     "@heroui/motion": "workspace:*",
+    "@heroui/shared-utils": "workspace:*",
     "@react-aria/calendar": "3.6.0",
     "@react-aria/focus": "3.19.0",
     "@react-stately/calendar": "3.6.0",

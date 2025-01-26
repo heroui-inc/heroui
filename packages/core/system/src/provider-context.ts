@@ -1,5 +1,5 @@
 import type {SupportedCalendars} from "./types";
-import type {Calendar} from "@heroui/shared-utils";
+import type {Calendar} from "@heroui/internationalized-date";
 import type {DateValue} from "@react-types/datepicker";
 
 import {createContext} from "@heroui/react-utils";

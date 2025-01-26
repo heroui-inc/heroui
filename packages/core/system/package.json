@@ -57,6 +57,7 @@
     "@heroui/react-aria-i18n": "workspace:*",
     "@heroui/motion": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
+    "@heroui/internationalized-date": "workspace:*",
     "@react-aria/overlays": "3.24.0",
     "@react-aria/utils": "3.26.0",
     "@react-stately/utils": "3.10.5",

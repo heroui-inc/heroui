@@ -21,12 +21,7 @@ import {calendar} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
 import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@heroui/react-aria-i18n";
-import {
-  clamp,
-  dataAttr,
-  objectToDeps,
-  getGregorianYearOffset,
-} from "@heroui/internationalized-date";
+import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 
 type HeroUIBaseProps = Omit<HTMLHeroUIProps<"div">, keyof AriaCalendarPropsBase | "onChange">;
