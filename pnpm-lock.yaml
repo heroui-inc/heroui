@@ -289,6 +289,9 @@ importers:
       '@heroui/input-otp':
         specifier: workspace:*
         version: link:../../packages/components/input-otp
+      '@heroui/internationalized-date':
+        specifier: workspace:*
+        version: link:../../packages/external/internationalized-date
       '@heroui/kbd':
         specifier: workspace:*
         version: link:../../packages/components/kbd
@@ -337,9 +340,6 @@ importers:
       '@iconify/react':
         specifier: 5.0.2
         version: 5.0.2(react@18.2.0)
-      '@internationalized/date':
-        specifier: 3.6.0
-        version: 3.6.0
       '@mapbox/rehype-prism':
         specifier: ^0.6.0
         version: 0.6.0
@@ -1047,6 +1047,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/internationalized-date':
+        specifier: workspace:*
+        version: link:../../external/internationalized-date
       '@heroui/motion':
         specifier: workspace:*
         version: link:../../external/motion
@@ -1059,9 +1062,6 @@ importers:
       '@heroui/shared-icons':
         specifier: workspace:*
         version: link:../../utilities/shared-icons
-      '@heroui/shared-utils':
-        specifier: workspace:*
-        version: link:../../utilities/shared-utils
       '@heroui/use-aria-button':
         specifier: workspace:*
         version: link:../../hooks/use-aria-button
@@ -1398,6 +1398,9 @@ importers:
       '@heroui/form':
         specifier: workspace:*
         version: link:../form
+      '@heroui/internationalized-date':
+        specifier: workspace:*
+        version: link:../../external/internationalized-date
       '@heroui/motion':
         specifier: workspace:*
         version: link:../../external/motion
@@ -3339,6 +3342,16 @@ importers:
         specifier: ^3.4.0
         version: 3.4.14(ts-node@10.9.2(@swc/core@1.10.6(@swc/helpers@0.5.15))(@types/node@20.5.1)(typescript@5.7.2))
 
+  packages/external/internationalized-date:
+    dependencies:
+      '@internationalized/date':
+        specifier: 3.6.0
+        version: 3.6.0
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+
   packages/external/motion:
     dependencies:
       framer-motion:
@@ -3972,10 +3985,6 @@ importers:
         version: 18.2.0
 
   packages/utilities/shared-utils:
-    dependencies:
-      '@internationalized/date':
-        specifier: 3.6.0
-        version: 3.6.0
     devDependencies:
       clean-package:
         specifier: 2.2.0

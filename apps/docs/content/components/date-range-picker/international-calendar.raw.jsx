@@ -1,5 +1,5 @@
 import {DateRangePicker} from "@heroui/react";
-import {parseAbsoluteToLocal} from "@heroui/shared-utils";
+import {parseAbsoluteToLocal} from "@heroui/internationalized-date";
 import {I18nProvider} from "@heroui/react-aria-i18n";
 
 export default function App() {

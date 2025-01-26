@@ -1,4 +1,4 @@
-import type {DateValue} from "@heroui/shared-utils";
+import type {DateValue} from "@heroui/internationalized-date";
 import type {DateInputProps} from "@heroui/date-input";
 import type {DatePickerState} from "@react-stately/datepicker";
 import type {ButtonProps} from "@heroui/button";
@@ -13,7 +13,7 @@ import {useMemo, useRef} from "react";
 import {datePicker} from "@heroui/theme";
 import {useDatePickerState} from "@react-stately/datepicker";
 import {AriaDatePickerProps, useDatePicker as useAriaDatePicker} from "@react-aria/datepicker";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/internationalized-date";
 import {mergeProps} from "@react-aria/utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";

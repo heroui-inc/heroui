@@ -1,5 +1,5 @@
 import {RangeCalendar, Radio, RadioGroup, Button, ButtonGroup, cn} from "@heroui/react";
-import {today, getLocalTimeZone, startOfWeek, startOfMonth} from "@heroui/shared-utils";
+import {today, getLocalTimeZone, startOfWeek, startOfMonth} from "@heroui/internationalized-date";
 import {useLocale} from "@heroui/react-aria-i18n";
 
 export default function App() {

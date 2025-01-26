@@ -6,7 +6,7 @@ import {
   endOfWeek,
   endOfMonth,
   getLocalTimeZone,
-} from "@heroui/shared-utils";
+} from "@heroui/internationalized-date";
 import {useLocale, useDateFormatter} from "@heroui/react-aria-i18n";
 
 export default function App() {

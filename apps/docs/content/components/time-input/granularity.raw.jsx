@@ -1,5 +1,5 @@
 import {TimeInput} from "@heroui/react";
-import {parseAbsoluteToLocal} from "@heroui/shared-utils";
+import {parseAbsoluteToLocal} from "@heroui/internationalized-date";
 
 export default function App() {
   let [date, setDate] = React.useState(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));

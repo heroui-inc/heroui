@@ -2,7 +2,7 @@ import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@herou
 import type {AriaDateFieldProps} from "@react-types/datepicker";
 import type {SupportedCalendars} from "@heroui/system";
 import type {DateValue} from "@react-types/datepicker";
-import type {Calendar} from "@heroui/shared-utils";
+import type {Calendar} from "@heroui/internationalized-date";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
@@ -22,7 +22,7 @@ import {
   clsx,
   dataAttr,
   getGregorianYearOffset,
-} from "@heroui/shared-utils";
+} from "@heroui/internationalized-date";
 import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";

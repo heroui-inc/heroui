@@ -1,4 +1,4 @@
-import type {DateValue} from "@heroui/shared-utils";
+import type {DateValue} from "@heroui/internationalized-date";
 
 import {ForwardedRef, ReactElement, useMemo} from "react";
 import {cloneElement, isValidElement} from "react";

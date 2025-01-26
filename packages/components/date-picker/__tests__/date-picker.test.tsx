@@ -3,7 +3,7 @@ import * as React from "react";
 import {render, act, fireEvent, waitFor, within} from "@testing-library/react";
 import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
-import {CalendarDate, CalendarDateTime} from "@heroui/shared-utils";
+import {CalendarDate, CalendarDateTime} from "@heroui/internationalized-date";
 import {HeroUIProvider} from "@heroui/system";
 import {Form} from "@heroui/form";
 

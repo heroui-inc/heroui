@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import * as React from "react";
 import {render, act, fireEvent} from "@testing-library/react";
-import {CalendarDate, isWeekend} from "@heroui/shared-utils";
+import {CalendarDate, isWeekend} from "@heroui/internationalized-date";
 import {triggerPress, keyCodes} from "@heroui/test-utils";
 import {useLocale} from "@heroui/react-aria-i18n";
 import {HeroUIProvider} from "@heroui/system";

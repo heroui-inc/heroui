@@ -1,5 +1,5 @@
 import {DateRangePicker} from "@heroui/react";
-import {getLocalTimeZone, parseDate, today} from "@heroui/shared-utils";
+import {getLocalTimeZone, parseDate, today} from "@heroui/internationalized-date";
 
 export default function App() {
   return (

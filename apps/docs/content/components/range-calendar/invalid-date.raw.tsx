@@ -3,7 +3,7 @@ import type {RangeValue} from "@react-types/shared";
 
 import React from "react";
 import {RangeCalendar} from "@heroui/react";
-import {today, getLocalTimeZone, isWeekend} from "@heroui/shared-utils";
+import {today, getLocalTimeZone, isWeekend} from "@heroui/internationalized-date";
 import {useLocale} from "@heroui/react-aria-i18n";
 
 export default function App() {

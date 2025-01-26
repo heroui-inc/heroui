@@ -50,6 +50,7 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/motion": "workspace:*",
+    "@heroui/internationalized-date": "workspace:*",
     "@react-aria/datepicker": "3.12.0",
     "@heroui/react-aria-i18n": "workspace:*",
     "@react-aria/utils": "3.26.0",

@@ -9,14 +9,24 @@ import type {SupportedCalendars} from "@heroui/system";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
 
-import {createCalendar, Calendar, CalendarDate, DateFormatter} from "@heroui/shared-utils";
+import {
+  createCalendar,
+  Calendar,
+  CalendarDate,
+  DateFormatter,
+} from "@heroui/internationalized-date";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
 import {calendar} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
 import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@heroui/react-aria-i18n";
-import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@heroui/shared-utils";
+import {
+  clamp,
+  dataAttr,
+  objectToDeps,
+  getGregorianYearOffset,
+} from "@heroui/internationalized-date";
 import {mergeProps} from "@react-aria/utils";
 
 type HeroUIBaseProps = Omit<HTMLHeroUIProps<"div">, keyof AriaCalendarPropsBase | "onChange">;

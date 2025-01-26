@@ -11,7 +11,7 @@ import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useTimeField as useAriaTimeField} from "@react-aria/datepicker";
 import {useTimeFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr} from "@heroui/shared-utils";
+import {objectToDeps, clsx, dataAttr} from "@heroui/internationalized-date";
 import {dateInput} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";

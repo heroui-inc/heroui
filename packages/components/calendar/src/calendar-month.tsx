@@ -1,10 +1,10 @@
-import {CalendarDate, endOfMonth, getWeeksInMonth} from "@heroui/shared-utils";
+import {CalendarDate, endOfMonth, getWeeksInMonth} from "@heroui/internationalized-date";
 import {CalendarPropsBase} from "@react-types/calendar";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useLocale} from "@heroui/react-aria-i18n";
 import {useCalendarGrid} from "@react-aria/calendar";
 import {m} from "@heroui/motion";
-import {dataAttr, getInertValue} from "@heroui/shared-utils";
+import {dataAttr, getInertValue} from "@heroui/internationalized-date";
 
 import {CalendarCell} from "./calendar-cell";
 import {slideVariants} from "./calendar-transitions";

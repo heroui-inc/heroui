@@ -14,7 +14,7 @@ import {
   startOfMonth,
   startOfWeek,
   today,
-} from "@heroui/shared-utils";
+} from "@heroui/internationalized-date";
 import {RangeValue, ValidationResult} from "@react-types/shared";
 import {DateValue} from "@react-types/datepicker";
 import {I18nProvider, useDateFormatter, useLocale} from "@heroui/react-aria-i18n";

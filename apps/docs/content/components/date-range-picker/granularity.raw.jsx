@@ -1,5 +1,5 @@
 import {DateRangePicker} from "@heroui/react";
-import {parseAbsoluteToLocal} from "@heroui/shared-utils";
+import {parseAbsoluteToLocal} from "@heroui/internationalized-date";
 
 export default function App() {
   let [date, setDate] = React.useState({

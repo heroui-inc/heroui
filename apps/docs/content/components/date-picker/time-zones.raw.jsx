@@ -1,5 +1,5 @@
 import {DatePicker} from "@heroui/react";
-import {parseZonedDateTime, parseAbsoluteToLocal} from "@heroui/shared-utils";
+import {parseZonedDateTime, parseAbsoluteToLocal} from "@heroui/internationalized-date";
 
 export default function App() {
   return (

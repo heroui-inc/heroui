@@ -1,5 +1,5 @@
 import {DateRangePicker} from "@heroui/react";
-import {parseDate} from "@heroui/shared-utils";
+import {parseDate} from "@heroui/internationalized-date";
 
 export default function App() {
   return (

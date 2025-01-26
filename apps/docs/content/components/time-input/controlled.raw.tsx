@@ -2,7 +2,7 @@ import type {TimeInputValue} from "@heroui/react";
 
 import React from "react";
 import {TimeInput} from "@heroui/react";
-import {parseAbsoluteToLocal, Time, ZonedDateTime} from "@heroui/shared-utils";
+import {parseAbsoluteToLocal, Time, ZonedDateTime} from "@heroui/internationalized-date";
 import {useDateFormatter} from "@heroui/react-aria-i18n";
 
 export default function App() {

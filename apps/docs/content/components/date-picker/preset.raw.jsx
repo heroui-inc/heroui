@@ -1,5 +1,5 @@
 import {DatePicker, RadioGroup, Radio, ButtonGroup, Button, cn} from "@heroui/react";
-import {startOfWeek, startOfMonth, getLocalTimeZone, today} from "@heroui/shared-utils";
+import {startOfWeek, startOfMonth, getLocalTimeZone, today} from "@heroui/internationalized-date";
 import {useLocale, useDateFormatter} from "@heroui/react-aria-i18n";
 
 export default function App() {
