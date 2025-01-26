@@ -295,6 +295,9 @@ importers:
       '@heroui/listbox':
         specifier: workspace:*
         version: link:../../packages/components/listbox
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../packages/external/motion
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/core/react
@@ -641,6 +644,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -757,6 +763,9 @@ importers:
       '@heroui/listbox':
         specifier: workspace:*
         version: link:../listbox
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
@@ -1386,6 +1395,9 @@ importers:
       '@heroui/form':
         specifier: workspace:*
         version: link:../form
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
@@ -2004,6 +2016,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2089,6 +2104,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2220,6 +2238,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2385,6 +2406,9 @@ importers:
       '@heroui/dom-animation':
         specifier: workspace:*
         version: link:../../utilities/dom-animation
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2872,6 +2896,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2954,6 +2981,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -3302,6 +3332,16 @@ importers:
       tailwindcss:
         specifier: ^3.4.0
         version: 3.4.14(ts-node@10.9.2(@swc/core@1.10.6(@swc/helpers@0.5.15))(@types/node@20.5.1)(typescript@5.7.2))
+
+  packages/external/motion:
+    dependencies:
+      framer-motion:
+        specifier: 11.9.0
+        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
 
   packages/hooks/use-aria-accordion:
     dependencies:
@@ -3848,9 +3888,9 @@ importers:
 
   packages/utilities/dom-animation:
     dependencies:
-      '@heroui/shared-utils':
+      '@heroui/motion':
         specifier: workspace:*
-        version: link:../shared-utils
+        version: link:../../external/motion
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3858,6 +3898,9 @@ importers:
 
   packages/utilities/framer-utils:
     dependencies:
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/shared-utils':
         specifier: workspace:*
         version: link:../shared-utils

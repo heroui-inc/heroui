@@ -1,7 +1,7 @@
 import type {Ref} from "react";
 
 import {forwardRef} from "react";
-import {domAnimation, LazyMotion, m} from "framer-motion";
+import {domAnimation, LazyMotion, m} from "@heroui/motion";
 import {useMeasure} from "@heroui/use-measure";
 import {HTMLHeroUIProps} from "@heroui/system";
 

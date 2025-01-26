@@ -34,7 +34,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*"
+    "@heroui/motion": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0"

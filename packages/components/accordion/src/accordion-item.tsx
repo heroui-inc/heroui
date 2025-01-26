@@ -1,9 +1,9 @@
-import type {Variants} from "framer-motion";
+import type {Variants} from "@heroui/motion";
 
 import {forwardRef} from "@heroui/system";
 import {useMemo, ReactNode} from "react";
 import {ChevronIcon} from "@heroui/shared-icons";
-import {AnimatePresence, LazyMotion, m, useWillChange} from "framer-motion";
+import {AnimatePresence, LazyMotion, m, useWillChange} from "@heroui/motion";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 
 import {UseAccordionItemProps, useAccordionItem} from "./use-accordion-item";

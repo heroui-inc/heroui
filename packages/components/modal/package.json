@@ -49,6 +49,7 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-aria-modal-overlay": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
+    "@heroui/motion": "workspace:*",
     "@react-aria/dialog": "3.5.20",
     "@react-aria/focus": "3.19.0",
     "@react-aria/interactions": "3.22.5",

@@ -1,4 +1,4 @@
-import type {Target, TargetAndTransition, Transition} from "framer-motion";
+import type {Target, TargetAndTransition, Transition} from "@heroui/motion";
 
 type WithMotionState<P> = Partial<Record<"enter" | "exit", P>>;
 

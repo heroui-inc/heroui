@@ -4,7 +4,7 @@ import {As} from "@heroui/system";
 import {ItemProps, BaseItem} from "@heroui/aria-utils";
 import {FocusableProps, PressEvents} from "@react-types/shared";
 import {ReactNode, MouseEventHandler} from "react";
-import {HTMLMotionProps} from "framer-motion";
+import {HTMLMotionProps} from "@heroui/motion";
 
 export type AccordionItemIndicatorProps = {
   /**

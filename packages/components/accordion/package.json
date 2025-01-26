@@ -54,6 +54,7 @@
     "@heroui/divider": "workspace:*",
     "@heroui/use-aria-accordion": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
+    "@heroui/motion": "workspace:*",
     "@react-aria/interactions": "3.22.5",
     "@react-aria/focus": "3.19.0",
     "@react-aria/utils": "3.26.0",

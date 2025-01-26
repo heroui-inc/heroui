@@ -11,7 +11,7 @@ import {AriaTabListProps, useTabList} from "@react-aria/tabs";
 import {mergeProps} from "@react-aria/utils";
 import {CollectionProps} from "@heroui/aria-utils";
 import {CollectionChildren} from "@react-types/shared";
-import {HTMLMotionProps} from "framer-motion";
+import {HTMLMotionProps} from "@heroui/motion";
 
 export interface Props extends Omit<HTMLHeroUIProps, "children"> {
   /**

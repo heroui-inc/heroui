@@ -3,7 +3,7 @@ import {CalendarPropsBase} from "@react-types/calendar";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useLocale} from "@react-aria/i18n";
 import {useCalendarGrid} from "@react-aria/calendar";
-import {m} from "framer-motion";
+import {m} from "@heroui/motion";
 import {dataAttr, getInertValue} from "@heroui/shared-utils";
 
 import {CalendarCell} from "./calendar-cell";

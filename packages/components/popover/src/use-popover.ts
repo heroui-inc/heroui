@@ -1,5 +1,5 @@
 import type {PopoverVariantProps, SlotsToClasses, PopoverSlots} from "@heroui/theme";
-import type {HTMLMotionProps} from "framer-motion";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {PressEvent} from "@react-types/shared";
 
 import {RefObject, Ref, useEffect} from "react";

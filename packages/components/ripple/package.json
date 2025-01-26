@@ -42,7 +42,8 @@
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@heroui/dom-animation": "workspace:*"
+    "@heroui/dom-animation": "workspace:*",
+    "@heroui/motion": "workspace:*"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

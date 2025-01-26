@@ -53,6 +53,7 @@
     "@heroui/spinner": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
+    "@heroui/motion": "workspace:*",
     "@react-aria/combobox": "3.11.0",
     "@react-aria/focus": "3.19.0",
     "@react-aria/i18n": "3.12.4",

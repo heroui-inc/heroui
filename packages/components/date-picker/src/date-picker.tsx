@@ -7,7 +7,7 @@ import {Button} from "@heroui/button";
 import {DateInput, TimeInput} from "@heroui/date-input";
 import {FreeSoloPopover} from "@heroui/popover";
 import {Calendar} from "@heroui/calendar";
-import {AnimatePresence} from "framer-motion";
+import {AnimatePresence} from "@heroui/motion";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
 
 import {UseDatePickerProps, useDatePicker} from "./use-date-picker";

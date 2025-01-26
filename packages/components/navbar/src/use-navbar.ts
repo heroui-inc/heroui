@@ -9,7 +9,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {mergeProps, useResizeObserver} from "@react-aria/utils";
 import {useScrollPosition} from "@heroui/use-scroll-position";
 import {useControlledState} from "@react-stately/utils";
-import {HTMLMotionProps} from "framer-motion";
+import {HTMLMotionProps} from "@heroui/motion";
 import {usePreventScroll} from "@react-aria/overlays";
 
 interface Props extends HTMLHeroUIProps<"nav"> {

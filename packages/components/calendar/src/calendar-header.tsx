@@ -3,7 +3,7 @@ import type {CalendarDate} from "@heroui/shared-utils";
 
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useDateFormatter} from "@react-aria/i18n";
-import {m} from "framer-motion";
+import {m} from "@heroui/motion";
 import {Button} from "@heroui/button";
 import {useCallback} from "react";
 

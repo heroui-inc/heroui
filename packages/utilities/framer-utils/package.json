@@ -40,7 +40,8 @@
   "dependencies": {
     "@heroui/system": "workspace:*",
     "@heroui/use-measure": "workspace:*",
-    "@heroui/shared-utils": "workspace:*"
+    "@heroui/shared-utils": "workspace:*",
+    "@heroui/motion": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

@@ -1,9 +1,9 @@
 import type {RippleType} from "./use-ripple";
 import type {FC} from "react";
-import type {HTMLMotionProps} from "framer-motion";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {AnimatePresence, m, LazyMotion} from "framer-motion";
+import {AnimatePresence, m, LazyMotion} from "@heroui/motion";
 import {clamp} from "@heroui/shared-utils";
 
 export interface RippleProps extends HTMLHeroUIProps<"span"> {

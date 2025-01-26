@@ -1,11 +1,11 @@
 import type {AriaDialogProps} from "@react-aria/dialog";
-import type {HTMLMotionProps} from "framer-motion";
+import type {HTMLMotionProps} from "@heroui/motion";
 
 import {cloneElement, isValidElement, ReactNode, useMemo, useCallback} from "react";
 import {DismissButton} from "@react-aria/overlays";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 import {CloseIcon} from "@heroui/shared-icons";
-import {LazyMotion, m} from "framer-motion";
+import {LazyMotion, m} from "@heroui/motion";
 import {useDialog} from "@react-aria/dialog";
 import {chain, mergeProps, useViewportSize} from "@react-aria/utils";
 import {HTMLHeroUIProps} from "@heroui/system";

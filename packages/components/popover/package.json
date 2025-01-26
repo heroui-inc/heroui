@@ -48,6 +48,7 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
+    "@heroui/motion": "workspace:*",
     "@react-aria/dialog": "3.5.20",
     "@react-aria/focus": "3.19.0",
     "@react-aria/interactions": "3.22.5",
