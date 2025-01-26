@@ -1,0 +1,116 @@
+[
+  {
+    "attribute": "children",
+    "type": "ReactNode | ReactNode[]",
+    "description": "The contents of the collection. Usually the array of AccordionItem",
+    "default": "-"
+  },
+  {
+    "attribute": "variant",
+    "type": "light | shadow | bordered | splitted",
+    "description": "The accordion appearance style.",
+    "default": "light"
+  },
+  {
+    "attribute": "selectionMode",
+    "type": "none | single | multiple",
+    "description": "The type of selection that is allowed in the collection.",
+    "default": "-"
+  },
+  {
+    "attribute": "selectionBehavior",
+    "type": "toggle | replace",
+    "description": "The accordion selection behavior.",
+    "default": "toggle"
+  },
+  {
+    "attribute": "isCompact",
+    "type": "boolean",
+    "description": "Whether all Accordion items should be smaller.",
+    "default": "false"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the Accordion items are disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "showDivider",
+    "type": "boolean",
+    "description": "Whether to display a divider at the bottom of the each accordion item.",
+    "default": "true"
+  },
+  {
+    "attribute": "dividerProps",
+    "type": "DividerProps",
+    "description": "The divider component props.",
+    "default": "-"
+  },
+  {
+    "attribute": "hideIndicator",
+    "type": "boolean",
+    "description": "Whether the Accordion items indicator is hidden.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the Accordion items open/close animation is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableIndicatorAnimation",
+    "type": "boolean",
+    "description": "Whether the Accordion items indicator animation is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "disallowEmptySelection",
+    "type": "boolean",
+    "description": "Whether the collection allows empty selection.",
+    "default": "false"
+  },
+  {
+    "attribute": "keepContentMounted",
+    "type": "boolean",
+    "description": "Whether the Accordion items content should be always mounted.",
+    "default": "false"
+  },
+  {
+    "attribute": "fullWidth",
+    "type": "boolean",
+    "description": "Whether the accordion should take up the full width of its parent container.",
+    "default": "true"
+  },
+  {
+    "attribute": "motionProps",
+    "type": "MotionProps",
+    "description": "The motion properties of the Accordion.",
+    "default": "-"
+  },
+  {
+    "attribute": "disabledKeys",
+    "type": "React.Key[]",
+    "description": "The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with.",
+    "default": "-"
+  },
+  {
+    "attribute": "itemClasses",
+    "type": "AccordionItemClassnames",
+    "description": "The accordion items classNames.",
+    "default": "-"
+  },
+  {
+    "attribute": "selectedKeys",
+    "type": "all | React.Key[]",
+    "description": "The currently selected keys in the collection (controlled).",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultSelectedKeys",
+    "type": "all | React.Key[]",
+    "description": "The initial selected keys in the collection (uncontrolled).",
+    "default": "-"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "attribute": "onFocus",
+    "type": "(e: FocusEvent<Target>) => void",
+    "description": "Handler that is called when the element receives focus."
+  },
+  {
+    "attribute": "onBlur",
+    "type": "(e: FocusEvent<Target>) => void",
+    "description": "Handler that is called when the element loses focus."
+  },
+  {
+    "attribute": "onFocusChange",
+    "type": "(isFocused: boolean) => void",
+    "description": "Handler that is called when the element's focus status changes."
+  },
+  {
+    "attribute": "onKeyDown",
+    "type": "(e: KeyboardEvent) => void",
+    "description": "Handler that is called when a key is pressed."
+  },
+  {
+    "attribute": "onKeyUp",
+    "type": "(e: KeyboardEvent) => void",
+    "description": "Handler that is called when a key is released."
+  },
+  {
+    "attribute": "onChange",
+    "type": "(value: MappedTimeValue<TimeValue>) => void",
+    "description": "Handler that is called when the value changes."
+  }
+]

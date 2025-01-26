@@ -1,0 +1,122 @@
+[
+  {
+    "attribute": "children*",
+    "type": "ReactNode | ((item: T) => ReactElement)",
+    "description": "The list of tabs.",
+    "default": "-"
+  },
+  {
+    "attribute": "variant",
+    "type": "solid | bordered | light | underlined",
+    "description": "The tabs appearance style.",
+    "default": "solid"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The tabs color theme.",
+    "default": "default"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "The tabs size.",
+    "default": "md"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg | full",
+    "description": "The tabs border radius.",
+    "default": "-"
+  },
+  {
+    "attribute": "fullWidth",
+    "type": "boolean",
+    "description": "Whether the tabs should take the full width of its parent.",
+    "default": "false"
+  },
+  {
+    "attribute": "items",
+    "type": "Iterable<T>",
+    "description": "The list of tabs (dynamic).",
+    "default": "-"
+  },
+  {
+    "attribute": "disabledKeys",
+    "type": "React.Key[]",
+    "description": "The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with.",
+    "default": "-"
+  },
+  {
+    "attribute": "selectedKey",
+    "type": "React.Key",
+    "description": "The key for the currently selected item.",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultSelectedKey",
+    "type": "React.Key",
+    "description": "The key for the initially selected item.",
+    "default": "-"
+  },
+  {
+    "attribute": "shouldSelectOnPressUp",
+    "type": "boolean",
+    "description": "Whether the tabs selection should occur on press up instead of press down.",
+    "default": "true"
+  },
+  {
+    "attribute": "keyboardActivation",
+    "type": "automatic | manual",
+    "description": "Whether tabs are activated automatically on focus or manually.",
+    "default": "automatic"
+  },
+  {
+    "attribute": "motionProps",
+    "type": "MotionProps",
+    "description": "The props to modify the cursor framer motion animation. Use the variants API to create your own animation.",
+    "default": "-"
+  },
+  {
+    "attribute": "disableCursorAnimation",
+    "type": "boolean",
+    "description": "Whether the cursor should be hidden.",
+    "default": "false"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the tab list should be disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the tab list should be animated.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\"｜ \"tabList\"｜ \"tab\"｜ \"tabContent\"｜ \"cursor\" ｜ \"panel\", string>>",
+    "description": "Allows to set custom class names for the card slots.",
+    "default": "-"
+  },
+  {
+    "attribute": "placement",
+    "type": "top | bottom | start | end",
+    "description": "The position of the tabs.",
+    "default": "top"
+  },
+  {
+    "attribute": "isVertical",
+    "type": "boolean",
+    "description": "Whether the tabs are vertical.",
+    "default": "false"
+  },
+  {
+    "attribute": "destroyInactiveTabPanel",
+    "type": "boolean",
+    "description": "Whether to destroy inactive tab panel when switching tabs. Inactive tab panels are inert and cannot be interacted with.",
+    "default": "true"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "attribute": "onChange",
+    "type": "(value: MappedDateValue) => void",
+    "description": "Handler that is called when the value changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "onFocusChange",
+    "type": "(date: CalendarDate) => void",
+    "description": "Handler that is called when the focused date changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "onHeaderExpandedChange",
+    "type": "(isExpanded: boolean) => void",
+    "description": "The event handler for the calendar header expanded state. This is only available if the showMonthAndYearPickers prop is set to true.",
+    "default": "-"
+  }
+]

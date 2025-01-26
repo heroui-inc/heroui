@@ -1,0 +1,8 @@
+[
+  {
+    "attribute": "onVisibilityChange",
+    "type": "(visibility: ScrollShadowVisibility) => void",
+    "description": "Callback invoked when the shadow visibility changes.",
+    "default": "-"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "attribute": "onAction",
+    "type": "(key: React.Key) => void",
+    "description": "Handler that is called when an item is selected.",
+    "default": "-"
+  },
+  {
+    "attribute": "onSelectionChange",
+    "type": "(keys: React.Key[]) => void",
+    "description": "Handler that is called when the selection changes.",
+    "default": "-"
+  }
+]

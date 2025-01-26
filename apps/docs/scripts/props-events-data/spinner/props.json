@@ -1,0 +1,32 @@
+[
+  {
+    "attribute": "label",
+    "type": "string",
+    "description": "The content to display as the label.",
+    "default": "-"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "The size of the spinner circles.",
+    "default": "md"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The color of the spinner circles.",
+    "default": "primary"
+  },
+  {
+    "attribute": "labelColor",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The color of the label.",
+    "default": "default"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\"｜\"wrapper\"｜\"circle1\"｜\"circle2\"｜\"label\", string>>",
+    "description": "Allows to set custom class names for the spinner slots.",
+    "default": "-"
+  }
+]

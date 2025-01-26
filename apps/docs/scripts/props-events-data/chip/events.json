@@ -1,0 +1,8 @@
+[
+  {
+    "attribute": "onClose",
+    "type": "(e: PressEvent) => void",
+    "description": "Handler that is called when the close button is pressed. If you pass this prop, the chip will display a close button (endContent).",
+    "default": "-"
+  }
+]

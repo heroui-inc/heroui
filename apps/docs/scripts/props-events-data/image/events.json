@@ -1,0 +1,14 @@
+[
+  {
+    "attribute": "onLoad",
+    "type": "ReactEventHandler<HTMLImageElement>",
+    "description": "Handler that is called when the image load.",
+    "default": "-"
+  },
+  {
+    "attribute": "onError",
+    "type": "() => void",
+    "description": "Handler that is called when the image fails to load.",
+    "default": "-"
+  }
+]

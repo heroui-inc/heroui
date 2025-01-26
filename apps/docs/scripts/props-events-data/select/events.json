@@ -1,0 +1,32 @@
+[
+  {
+    "attribute": "onClose",
+    "type": "() => void",
+    "description": "Callback fired when the select popover is closed.",
+    "default": "-"
+  },
+  {
+    "attribute": "onOpenChange",
+    "type": "(isOpen: boolean) => void",
+    "description": "Callback fired when the select popover is opened or closed.",
+    "default": "-"
+  },
+  {
+    "attribute": "onSelectionChange",
+    "type": "(keys: \"all\" | Set<React.Key> & {anchorKey?: string; currentKey?: string}) => void",
+    "description": "Callback fired when the selected keys change.",
+    "default": "-"
+  },
+  {
+    "attribute": "onChange",
+    "type": "React.ChangeEvent<HTMLSelectElement>",
+    "description": "Native select change event, fired when the selected value changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "renderValue",
+    "type": "RenderValueFunction",
+    "description": "Function to render the value of the select. It renders the selected item by default.",
+    "default": "-"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "attribute": "onOpenChange",
+    "type": "(isOpen: boolean) => void",
+    "description": "Handler that is called when the popover's open state changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "shouldCloseOnInteractOutside",
+    "type": "(e: HTMLElement) => void",
+    "description": "When user interacts with the argument element outside of the popover ref, return true if onClose should be called.",
+    "default": "-"
+  },
+  {
+    "attribute": "onClose",
+    "type": "() => void",
+    "description": "Handler that is called when the popover should close.",
+    "default": "-"
+  }
+]

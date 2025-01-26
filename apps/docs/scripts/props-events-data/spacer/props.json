@@ -1,0 +1,14 @@
+[
+  {
+    "attribute": "x",
+    "type": "Space",
+    "description": "The x axis space",
+    "default": "1"
+  },
+  {
+    "attribute": "y",
+    "type": "Space",
+    "description": "The y axis space",
+    "default": "1"
+  }
+]

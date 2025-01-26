@@ -1,0 +1,86 @@
+[
+  {
+    "attribute": "src",
+    "type": "string",
+    "description": "The source URL of the image to be displayed.",
+    "default": "-"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "Sets the avatar background color.",
+    "default": "default"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg | full",
+    "description": "Sets the avatar border radius.",
+    "default": "full"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "Sets the avatar size.",
+    "default": "md"
+  },
+  {
+    "attribute": "name",
+    "type": "string",
+    "description": "Displays the initials if the image is not provided or fails to load.",
+    "default": "-"
+  },
+  {
+    "attribute": "icon",
+    "type": "ReactNode",
+    "description": "Displays a custom icon inside the avatar.",
+    "default": "-"
+  },
+  {
+    "attribute": "fallback",
+    "type": "ReactNode",
+    "description": "A custom fallback component to display when the image fails to load.",
+    "default": "-"
+  },
+  {
+    "attribute": "isBordered",
+    "type": "boolean",
+    "description": "If true, adds a border around the avatar.",
+    "default": "false"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "If true, disables the avatar and applies a disabled styling.",
+    "default": "false"
+  },
+  {
+    "attribute": "isFocusable",
+    "type": "boolean",
+    "description": "If true, makes the avatar focusable for keyboard navigation.",
+    "default": "false"
+  },
+  {
+    "attribute": "showFallback",
+    "type": "boolean",
+    "description": "If true, shows the fallback icon or initials when the image fails to load.",
+    "default": "false"
+  },
+  {
+    "attribute": "ImgComponent",
+    "type": "React.ElementType",
+    "description": "The component to be used as the image element.",
+    "default": "img"
+  },
+  {
+    "attribute": "imgProps",
+    "type": "ImgComponentProps",
+    "description": "Props to be passed to the image element.",
+    "default": "-"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\" | \"img\" | \"fallback\" | \"name\" | \"icon\", string>>",
+    "description": "Allows to set custom class names for the avatar slots.",
+    "default": "-"
+  }
+]

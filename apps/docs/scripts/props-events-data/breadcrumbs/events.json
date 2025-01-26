@@ -1,0 +1,8 @@
+[
+  {
+    "attribute": "onAction",
+    "type": "(key: React.Key) => void",
+    "description": "Handler called when any breadcrumb item is pressed. It returns the item key.",
+    "default": "-"
+  }
+]

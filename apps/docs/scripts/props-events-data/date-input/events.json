@@ -1,0 +1,38 @@
+[
+  {
+    "attribute": "onChange",
+    "type": "(value: ZonedDateTime | CalendarDate | CalendarDateTime) => void",
+    "description": "Handler that is called when the date-input's value changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "onFocus",
+    "type": "(e: FocusEvent<HTMLInputElement>) => void",
+    "description": "Handler that is called when the element receives focus.",
+    "default": "-"
+  },
+  {
+    "attribute": "onBlur",
+    "type": "(e: FocusEvent<HTMLInputElement>) => void",
+    "description": "Handler that is called when the element loses focus.",
+    "default": "-"
+  },
+  {
+    "attribute": "onFocusChange",
+    "type": "(isFocused: boolean) => void",
+    "description": "Handler that is called when the element's focus status changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "onKeyDown",
+    "type": "(e: KeyboardEvent) => void",
+    "description": "Handler that is called when a key is pressed.",
+    "default": "-"
+  },
+  {
+    "attribute": "onKeyUp",
+    "type": "(e: KeyboardEvent) => void",
+    "description": "Handler that is called when a key is released.",
+    "default": "-"
+  }
+]

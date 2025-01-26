@@ -1,0 +1,116 @@
+[
+  {
+    "attribute": "children",
+    "type": "ReactNode | ReactNode[]",
+    "description": "The list of radio elements.",
+    "default": "-"
+  },
+  {
+    "attribute": "label",
+    "type": "ReactNode",
+    "description": "The label of the radio group.",
+    "default": "-"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "The size of the radios.",
+    "default": "md"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The color of the radios.",
+    "default": "primary"
+  },
+  {
+    "attribute": "orientation",
+    "type": "horizontal | vertical",
+    "description": "The orientation of the radio group.",
+    "default": "vertical"
+  },
+  {
+    "attribute": "name",
+    "type": "string",
+    "description": "The name of the RadioGroup, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name_and_radio_buttons).",
+    "default": "-"
+  },
+  {
+    "attribute": "value",
+    "type": "string[]",
+    "description": "The current selected value. (controlled)",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultValue",
+    "type": "string[]",
+    "description": "The default selected value. (uncontrolled)",
+    "default": "-"
+  },
+  {
+    "attribute": "description",
+    "type": "ReactNode",
+    "description": "Radio group description.",
+    "default": "-"
+  },
+  {
+    "attribute": "errorMessage",
+    "type": "ReactNode | ((v: ValidationResult) => ReactNode)",
+    "description": "Radio group error message.",
+    "default": "-"
+  },
+  {
+    "attribute": "validate",
+    "type": "(value: string) => ValidationError | true | null | undefined",
+    "description": "Validate input values when committing (e.g. on blur), returning error messages for invalid values. Validation errors are displayed upon form submission if `validationBehavior` is set to `native`. For real-time validation, use the `isInvalid` prop.",
+    "default": "-"
+  },
+  {
+    "attribute": "validationBehavior",
+    "type": "native | aria",
+    "description": "Whether to use native HTML form validation or ARIA validation. When wrapped in a Form component, the default is `aria`. Otherwise, the default is `native`.",
+    "default": "native"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the radio group is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "isRequired",
+    "type": "boolean",
+    "description": "Whether user checkboxes are required on the input before form submission.",
+    "default": "false"
+  },
+  {
+    "attribute": "isReadOnly",
+    "type": "boolean",
+    "description": "Whether the checkboxes can be selected but not changed by the user.",
+    "default": "-"
+  },
+  {
+    "attribute": "isInvalid",
+    "type": "boolean",
+    "description": "Whether the radio group is invalid.",
+    "default": "false"
+  },
+  {
+    "attribute": "validationState",
+    "type": "valid | invalid",
+    "description": "Whether the inputs should display its \"valid\" or \"invalid\" visual styling. (Deprecated) use isInvalid instead.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the animation should be disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\" | \"wrapper\" | \"label\", string>>",
+    "description": "Allows to set custom class names for the radio group slots.",
+    "default": "-"
+  }
+]

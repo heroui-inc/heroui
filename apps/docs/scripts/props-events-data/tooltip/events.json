@@ -1,0 +1,20 @@
+[
+  {
+    "attribute": "onOpenChange",
+    "type": "(isOpen: boolean) => void",
+    "description": "Handler that is called when the tooltip's open state changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "shouldCloseOnInteractOutside",
+    "type": "(e: HTMLElement) => void",
+    "description": "When user interacts with the argument element outside of the tooltip ref, return true if onClose should be called. This gives you a chance to filter out interaction with elements that should not dismiss the tooltip. By default, onClose will always be called on interaction outside the overlay ref.",
+    "default": "-"
+  },
+  {
+    "attribute": "onClose",
+    "type": "() => void",
+    "description": "Handler that is called when the tooltip should close.",
+    "default": "-"
+  }
+]

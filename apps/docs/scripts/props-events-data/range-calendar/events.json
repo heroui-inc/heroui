@@ -1,0 +1,14 @@
+[
+  {
+    "attribute": "onFocusChange",
+    "type": "(date: CalendarDate) => void",
+    "description": "Handler that is called when the focused date changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "onChange",
+    "type": "(value: RangeValue<DateValue> | null) => void",
+    "description": "Handler that is called when the value changes.",
+    "default": "-"
+  }
+]

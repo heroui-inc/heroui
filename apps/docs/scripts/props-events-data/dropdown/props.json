@@ -1,0 +1,44 @@
+[
+  {
+    "attribute": "children*",
+    "type": "ReactNode[]",
+    "description": "The children to render. Usually a DropdownTrigger and DropdownMenu elements.",
+    "default": "-"
+  },
+  {
+    "attribute": "type",
+    "type": "menu | listbox",
+    "description": "Type of overlay that is opened by the dropdown trigger.",
+    "default": "menu"
+  },
+  {
+    "attribute": "trigger",
+    "type": "press | longPress",
+    "description": "How the dropdown menu is triggered.",
+    "default": "press"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the dropdown trigger is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "closeOnSelect",
+    "type": "boolean",
+    "description": "Whether the dropdown menu should be closed when an item is selected.",
+    "default": "true"
+  },
+  {
+    "attribute": "shouldBlockScroll",
+    "type": "boolean",
+    "description": "Whether the dropdown menu should block scrolling outside the menu.",
+    "default": "true"
+  },
+  {
+    "attribute": "PopoverProps",
+    "type": "PopoverProps",
+    "description": "Since the dropdown is an extension of the popover, it accepts all the props of the popover component.",
+    "default": "-"
+  }
+]

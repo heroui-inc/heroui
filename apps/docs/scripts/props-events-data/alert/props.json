@@ -1,0 +1,80 @@
+[
+  {
+    "attribute": "title",
+    "type": "ReactNode",
+    "description": "The alert title",
+    "default": "-"
+  },
+  {
+    "attribute": "icon",
+    "type": "ReactNode",
+    "description": "The alert icon - overrides the default icon",
+    "default": "-"
+  },
+  {
+    "attribute": "description",
+    "type": "ReactNode",
+    "description": "The alert description",
+    "default": "-"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The alert color theme",
+    "default": "default"
+  },
+  {
+    "attribute": "variant",
+    "type": "solid | bordered | flat | faded",
+    "description": "The alert variant",
+    "default": "flat"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg | full",
+    "description": "The alert border radius",
+    "default": "md"
+  },
+  {
+    "attribute": "startContent",
+    "type": "ReactNode",
+    "description": "The alert start content",
+    "default": "-"
+  },
+  {
+    "attribute": "endContent",
+    "type": "ReactNode",
+    "description": "The alert end content",
+    "default": "-"
+  },
+  {
+    "attribute": "isVisible",
+    "type": "boolean",
+    "description": "Whether the alert is visible",
+    "default": "-"
+  },
+  {
+    "attribute": "isClosable",
+    "type": "boolean",
+    "description": "Whether the alert can be closed",
+    "default": "false"
+  },
+  {
+    "attribute": "hideIcon",
+    "type": "boolean",
+    "description": "Whether the icon is hidden",
+    "default": "false"
+  },
+  {
+    "attribute": "hideIconWrapper",
+    "type": "boolean",
+    "description": "Whether the icon wrapper is hidden",
+    "default": "false"
+  },
+  {
+    "attribute": "closeButtonProps",
+    "type": "ButtonProps",
+    "description": "Props for the close button",
+    "default": "-"
+  }
+]

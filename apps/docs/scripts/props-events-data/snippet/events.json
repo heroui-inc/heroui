@@ -1,0 +1,8 @@
+[
+  {
+    "attribute": "onCopy",
+    "type": "(value: string | string[]) => void",
+    "description": "Handler that is called when the code is copied.",
+    "default": "-"
+  }
+]

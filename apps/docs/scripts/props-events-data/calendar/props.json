@@ -1,0 +1,170 @@
+[
+  {
+    "attribute": "value",
+    "type": "DateValue | null",
+    "description": "The current value (controlled).",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultValue",
+    "type": "DateValue | null",
+    "description": "The default value (uncontrolled).",
+    "default": "-"
+  },
+  {
+    "attribute": "minValue",
+    "type": "DateValue",
+    "description": "The minimum allowed date that a user may select.",
+    "default": "-"
+  },
+  {
+    "attribute": "maxValue",
+    "type": "DateValue",
+    "description": "The maximum allowed date that a user may select.",
+    "default": "-"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The color of the time input.",
+    "default": "default"
+  },
+  {
+    "attribute": "visibleMonths",
+    "type": "number",
+    "description": "The number of months to display at once. Up to 3 months are supported. Passing a number greater than 1 will disable the showMonthAndYearPickers prop.",
+    "default": "1"
+  },
+  {
+    "attribute": "focusedValue",
+    "type": "DateValue",
+    "description": "Controls the currently focused date within the calendar.",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultFocusedValue",
+    "type": "DateValue",
+    "description": "The date that is focused when the calendar first mounts (uncountrolled).",
+    "default": "-"
+  },
+  {
+    "attribute": "calendarWidth",
+    "type": "number | string",
+    "description": "The width to be applied to the calendar component. This value is multiplied by the visibleMonths number to determine the total width of the calendar.",
+    "default": "256"
+  },
+  {
+    "attribute": "pageBehavior",
+    "type": "single | visible",
+    "description": "Controls the behavior of paging. Pagination either works by advancing the visible page by visibleDuration (default) or one unit of visibleDuration.",
+    "default": "visible"
+  },
+  {
+    "attribute": "weekdayStyle",
+    "type": "narrow | short | long | undefined",
+    "description": "The style of weekday names to display in the calendar grid header, e.g. single letter, abbreviation, or full day name.",
+    "default": "narrow"
+  },
+  {
+    "attribute": "showMonthAndYearPickers",
+    "type": "boolean",
+    "description": "Whether the label should be crossed out.",
+    "default": "false"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the calendar is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "isReadOnly",
+    "type": "boolean",
+    "description": "Whether the calendar value is immutable.",
+    "default": "false"
+  },
+  {
+    "attribute": "isInvalid",
+    "type": "boolean",
+    "description": "Whether the current selection is invalid according to application logic.",
+    "default": "-"
+  },
+  {
+    "attribute": "autoFocus",
+    "type": "boolean",
+    "description": "Whether to automatically focus the calendar when it mounts.",
+    "default": "false"
+  },
+  {
+    "attribute": "showHelper",
+    "type": "boolean",
+    "description": "Whether to show the description or error message.",
+    "default": "false"
+  },
+  {
+    "attribute": "showShadow",
+    "type": "boolean",
+    "description": "Whether to show the shadow in the selected date.",
+    "default": "false"
+  },
+  {
+    "attribute": "isHeaderExpanded",
+    "type": "boolean",
+    "description": "Whether the calendar header is expanded. This is only available if the showMonthAndYearPickers prop is set to true.",
+    "default": "false"
+  },
+  {
+    "attribute": "isHeaderDefaultExpanded",
+    "type": "boolean",
+    "description": "Whether the calendar header should be expanded by default. This is only available if the showMonthAndYearPickers prop is set to true.",
+    "default": "false"
+  },
+  {
+    "attribute": "topContent",
+    "type": "ReactNode",
+    "description": "Custom content to be included in the top of the calendar.",
+    "default": "-"
+  },
+  {
+    "attribute": "bottomContent",
+    "type": "ReactNode",
+    "description": "Custom content to be included in the bottom of the calendar.",
+    "default": "-"
+  },
+  {
+    "attribute": "isDateUnavailable",
+    "type": "(date: DateValue) => boolean",
+    "description": "Callback that is called for each date of the calendar. If it returns true, then the date is unavailable.",
+    "default": "-"
+  },
+  {
+    "attribute": "createCalendar",
+    "type": "(calendar: SupportedCalendars) => Calendar | null",
+    "description": "This function helps to reduce the bundle size by providing a custom calendar system. You can also use the HeroUIProvider to provide the createCalendar function to all nested components.",
+    "default": "all calendars"
+  },
+  {
+    "attribute": "errorMessage",
+    "type": "ReactNode | (v: ValidationResult) => ReactNode",
+    "description": "An error message for the field.",
+    "default": "-"
+  },
+  {
+    "attribute": "hideDisabledDates",
+    "type": "boolean",
+    "description": "Whether to hide the disabled or invalid dates.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether to disable the animation of the calendar.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<'base' | 'prevButton' | 'nextButton' | 'headerWrapper' | 'header' | 'title' | 'content' | 'gridWrapper' | 'grid' | 'gridHeader' | 'gridHeaderRow' | 'gridHeaderCell' | 'gridBody' | 'gridBodyRow' | 'cell' | 'cellButton' | 'pickerWrapper' | 'pickerMonthList' | 'pickerYearList' | 'pickerHighlight' | 'pickerItem' | 'helperWrapper' | 'errorMessage', string>>",
+    "description": "Allows to set custom class names for the calendar slots.",
+    "default": "-"
+  }
+]

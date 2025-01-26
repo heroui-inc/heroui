@@ -1,0 +1,152 @@
+[
+  {
+    "attribute": "children*",
+    "type": "ReactNode[]",
+    "description": "The content of the popover. It's usually the PopoverTrigger and PopoverContent.",
+    "default": "-"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "The popover content font size.",
+    "default": "md"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The popover color theme.",
+    "default": "default"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg | full",
+    "description": "The popover border radius.",
+    "default": "lg"
+  },
+  {
+    "attribute": "shadow",
+    "type": "none | sm | md | lg",
+    "description": "The popover shadow.",
+    "default": "lg"
+  },
+  {
+    "attribute": "backdrop",
+    "type": "transparent | opaque | blur",
+    "description": "The popover backdrop type.",
+    "default": "transparent"
+  },
+  {
+    "attribute": "placement",
+    "type": "PopoverPlacement",
+    "description": "The placement of the popover relative to its trigger reference.",
+    "default": "bottom"
+  },
+  {
+    "attribute": "state",
+    "type": "OverlayTriggerState",
+    "description": "The controlled state of the popover.",
+    "default": "-"
+  },
+  {
+    "attribute": "isOpen",
+    "type": "boolean",
+    "description": "Whether the popover is open by default (controlled).",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultOpen",
+    "type": "boolean",
+    "description": "Whether the popover is open by default (uncontrolled).",
+    "default": "-"
+  },
+  {
+    "attribute": "offset",
+    "type": "number",
+    "description": "The distance or margin between the reference and popper.",
+    "default": "7"
+  },
+  {
+    "attribute": "containerPadding",
+    "type": "number",
+    "description": "The placement padding between the element and its surrounding container.",
+    "default": "12"
+  },
+  {
+    "attribute": "crossOffset",
+    "type": "number",
+    "description": "The additional offset applied along the cross axis between the element and its anchor element.",
+    "default": "0"
+  },
+  {
+    "attribute": "triggerType",
+    "type": "dialog | menu | listbox | tree | grid",
+    "description": "Type of popover that is opened by the trigger.",
+    "default": "dialog"
+  },
+  {
+    "attribute": "showArrow",
+    "type": "boolean",
+    "description": "Whether the popover should have an arrow.",
+    "default": "false"
+  },
+  {
+    "attribute": "shouldFlip",
+    "type": "boolean",
+    "description": "Whether the popover should change its placement and flip when it's about to overflow.",
+    "default": "true"
+  },
+  {
+    "attribute": "triggerScaleOnOpen",
+    "type": "boolean",
+    "description": "Whether the trigger should scale down when the popover is open.",
+    "default": "true"
+  },
+  {
+    "attribute": "shouldBlockScroll",
+    "type": "boolean",
+    "description": "Whether the popover should block the scroll outside the popover.",
+    "default": "true"
+  },
+  {
+    "attribute": "shouldCloseOnScroll",
+    "type": "boolean",
+    "description": "Whether the popover should close on scroll.",
+    "default": "false"
+  },
+  {
+    "attribute": "isKeyboardDismissDisabled",
+    "type": "boolean",
+    "description": "Whether pressing the escape key to close the popover should be disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "shouldCloseOnBlur",
+    "type": "boolean",
+    "description": "Whether the popover should close when focus is lost or moves outside it.",
+    "default": "false"
+  },
+  {
+    "attribute": "motionProps",
+    "type": "MotionProps",
+    "description": "The props to modify the framer motion animation.",
+    "default": "-"
+  },
+  {
+    "attribute": "portalContainer",
+    "type": "HTMLElement",
+    "description": "The container element in which the overlay portal will be placed.",
+    "default": "document.body"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the popover is animated.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<'base' | 'trigger' | 'backdrop' | 'content', string>>",
+    "description": "Allows to set custom class names for the popover slots.",
+    "default": "-"
+  }
+]

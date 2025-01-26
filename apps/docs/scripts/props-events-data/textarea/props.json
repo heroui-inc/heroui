@@ -1,0 +1,176 @@
+[
+  {
+    "attribute": "children",
+    "type": "ReactNode",
+    "description": "The content of the textarea.",
+    "default": "-"
+  },
+  {
+    "attribute": "minRows",
+    "type": "number",
+    "description": "The minimum number of rows to display.",
+    "default": "3"
+  },
+  {
+    "attribute": "maxRows",
+    "type": "number",
+    "description": "Maximum number of rows up to which the textarea can grow.",
+    "default": "8"
+  },
+  {
+    "attribute": "cacheMeasurements",
+    "type": "boolean",
+    "description": "Reuse previously computed measurements when computing height of textarea.",
+    "default": "false"
+  },
+  {
+    "attribute": "variant",
+    "type": "flat | bordered | faded | underlined",
+    "description": "The variant of the textarea.",
+    "default": "flat"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The color of the textarea.",
+    "default": "default"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "The size of the textarea.",
+    "default": "md"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg | full",
+    "description": "The radius of the textarea.",
+    "default": "-"
+  },
+  {
+    "attribute": "label",
+    "type": "ReactNode",
+    "description": "The content to display as the label.",
+    "default": "-"
+  },
+  {
+    "attribute": "value",
+    "type": "string",
+    "description": "The current value of the textarea (controlled).",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultValue",
+    "type": "string",
+    "description": "The default value of the textarea (uncontrolled).",
+    "default": "-"
+  },
+  {
+    "attribute": "placeholder",
+    "type": "string",
+    "description": "The placeholder of the textarea.",
+    "default": "-"
+  },
+  {
+    "attribute": "startContent",
+    "type": "ReactNode",
+    "description": "Element to be rendered in the left side of the input.",
+    "default": "-"
+  },
+  {
+    "attribute": "endContent",
+    "type": "ReactNode",
+    "description": "Element to be rendered in the right side of the input.",
+    "default": "-"
+  },
+  {
+    "attribute": "description",
+    "type": "ReactNode",
+    "description": "A description for the textarea. Provides a hint such as specific requirements for what to choose.",
+    "default": "-"
+  },
+  {
+    "attribute": "errorMessage",
+    "type": "ReactNode | ((v: ValidationResult) => ReactNode)",
+    "description": "An error message for the textarea.",
+    "default": "-"
+  },
+  {
+    "attribute": "validate",
+    "type": "(value: string) => ValidationError | true | null | undefined",
+    "description": "Validate input values when committing (e.g. on blur), returning error messages for invalid values.",
+    "default": "-"
+  },
+  {
+    "attribute": "validationBehavior",
+    "type": "native | aria",
+    "description": "Whether to use native HTML form validation or ARIA validation. When wrapped in a Form component, the default is `aria`. Otherwise, the default is `native`.",
+    "default": "native"
+  },
+  {
+    "attribute": "labelPlacement",
+    "type": "inside | outside | outside-left",
+    "description": "The position of the label.",
+    "default": "inside"
+  },
+  {
+    "attribute": "fullWidth",
+    "type": "boolean",
+    "description": "Whether the textarea should take up the width of its parent.",
+    "default": "true"
+  },
+  {
+    "attribute": "isRequired",
+    "type": "boolean",
+    "description": "Whether user input is required on the textarea before form submission.",
+    "default": "false"
+  },
+  {
+    "attribute": "isReadOnly",
+    "type": "boolean",
+    "description": "Whether the textarea can be selected but not changed by the user.",
+    "default": "-"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the textarea is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "isClearable",
+    "type": "boolean",
+    "description": "Whether the textarea should have a clear button.",
+    "default": "false"
+  },
+  {
+    "attribute": "isInvalid",
+    "type": "boolean",
+    "description": "Whether the textarea is invalid.",
+    "default": "false"
+  },
+  {
+    "attribute": "validationState",
+    "type": "valid | invalid",
+    "description": "Whether the textarea should display its \"valid\" or \"invalid\" visual styling. (Deprecated) use isInvalid instead.",
+    "default": "-"
+  },
+  {
+    "attribute": "disableAutosize",
+    "type": "boolean",
+    "description": "Whether the textarea auto vertically resize should be disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the textarea should be animated.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\" | \"label\" | \"inputWrapper\" | \"innerWrapper\" | \"input\" | \"description\" | \"errorMessage\", string>>",
+    "description": "Allows to set custom class names for the checkbox slots.",
+    "default": "-"
+  }
+]

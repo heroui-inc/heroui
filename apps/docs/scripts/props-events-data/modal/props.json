@@ -1,0 +1,110 @@
+[
+  {
+    "attribute": "children*",
+    "type": "ReactNode",
+    "description": "The content of the modal. It's usually the `ModalContent`.",
+    "default": "-"
+  },
+  {
+    "attribute": "size",
+    "type": "xs | sm | md | lg | xl | 2xl | 3xl | 4xl | 5xl | full",
+    "description": "The modal size. This changes the modal `max-width` and `height` (full).",
+    "default": "md"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg",
+    "description": "The modal border radius.",
+    "default": "lg"
+  },
+  {
+    "attribute": "shadow",
+    "type": "none | sm | md | lg",
+    "description": "The modal shadow.",
+    "default": "lg"
+  },
+  {
+    "attribute": "backdrop",
+    "type": "transparent | opaque | blur",
+    "description": "The modal backdrop type.",
+    "default": "opaque"
+  },
+  {
+    "attribute": "scrollBehavior",
+    "type": "normal | inside | outside",
+    "description": "The modal scroll behavior.",
+    "default": "normal"
+  },
+  {
+    "attribute": "placement",
+    "type": "auto | top | center | bottom",
+    "description": "The modal position.",
+    "default": "auto"
+  },
+  {
+    "attribute": "isOpen",
+    "type": "boolean",
+    "description": "Whether the modal is open by default (controlled).",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultOpen",
+    "type": "boolean",
+    "description": "Whether the modal is open by default (uncontrolled).",
+    "default": "-"
+  },
+  {
+    "attribute": "isDismissable",
+    "type": "boolean",
+    "description": "Whether the modal can be closed by clicking on the overlay or pressing the Esc key.",
+    "default": "true"
+  },
+  {
+    "attribute": "isKeyboardDismissDisabled",
+    "type": "boolean",
+    "description": "Whether pressing the Esc key to close the modal should be disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "shouldBlockScroll",
+    "type": "boolean",
+    "description": "Whether the modal should block the scroll of the page on open.",
+    "default": "true"
+  },
+  {
+    "attribute": "hideCloseButton",
+    "type": "boolean",
+    "description": "Whether to hide the modal close button.",
+    "default": "false"
+  },
+  {
+    "attribute": "closeButton",
+    "type": "ReactNode",
+    "description": "Custom close button to display on top right corner.",
+    "default": "-"
+  },
+  {
+    "attribute": "motionProps",
+    "type": "MotionProps",
+    "description": "The props to modify the framer motion animation. Use the `variants` API to create your own animation.",
+    "default": "-"
+  },
+  {
+    "attribute": "portalContainer",
+    "type": "HTMLElement",
+    "description": "The container element in which the overlay portal will be placed.",
+    "default": "document.body"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the modal should not have animations.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<'wrapper' | 'base' | 'backdrop' | 'header' | 'body' | 'footer' | 'closeButton', string>>",
+    "description": "Allows to set custom class names for the modal slots.",
+    "default": "-"
+  }
+]

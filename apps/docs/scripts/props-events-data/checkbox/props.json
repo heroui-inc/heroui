@@ -1,0 +1,110 @@
+[
+  {
+    "attribute": "children",
+    "type": "ReactNode",
+    "description": "The label of the checkbox.",
+    "default": "-"
+  },
+  {
+    "attribute": "icon",
+    "type": "CheckboxIconProps",
+    "description": "The icon to be displayed when the checkbox is checked.",
+    "default": "-"
+  },
+  {
+    "attribute": "value",
+    "type": "string",
+    "description": "The value of the checkbox element, used when submitting an HTML form.",
+    "default": "-"
+  },
+  {
+    "attribute": "name",
+    "type": "string",
+    "description": "The name of the checkbox element, used when submitting an HTML form.",
+    "default": "-"
+  },
+  {
+    "attribute": "size",
+    "type": "sm | md | lg",
+    "description": "The size of the checkbox.",
+    "default": "md"
+  },
+  {
+    "attribute": "color",
+    "type": "default | primary | secondary | success | warning | danger",
+    "description": "The color of the checkbox.",
+    "default": "primary"
+  },
+  {
+    "attribute": "radius",
+    "type": "none | sm | md | lg | full",
+    "description": "The radius of the checkbox.",
+    "default": "-"
+  },
+  {
+    "attribute": "lineThrough",
+    "type": "boolean",
+    "description": "Whether the label should be crossed out.",
+    "default": "false"
+  },
+  {
+    "attribute": "isSelected",
+    "type": "boolean",
+    "description": "Whether the element should be selected (controlled).",
+    "default": "-"
+  },
+  {
+    "attribute": "defaultSelected",
+    "type": "boolean",
+    "description": "Whether the element should be selected (uncontrolled).",
+    "default": "-"
+  },
+  {
+    "attribute": "isRequired",
+    "type": "boolean",
+    "description": "Whether user checkbox is required on the checkbox before form submission.",
+    "default": "false"
+  },
+  {
+    "attribute": "isReadOnly",
+    "type": "boolean",
+    "description": "Whether the checkbox can be selected but not changed by the user.",
+    "default": "-"
+  },
+  {
+    "attribute": "isDisabled",
+    "type": "boolean",
+    "description": "Whether the checkbox is disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "isIndeterminate",
+    "type": "boolean",
+    "description": "Indeterminism is presentational only. The indeterminate visual representation remains regardless of user interaction.",
+    "default": "-"
+  },
+  {
+    "attribute": "isInvalid",
+    "type": "boolean",
+    "description": "Whether the checkbox is invalid.",
+    "default": "false"
+  },
+  {
+    "attribute": "validationState",
+    "type": "valid | invalid",
+    "description": "Whether the checkbox should display its \"valid\" or \"invalid\" visual styling. (Deprecated) use isInvalid instead.",
+    "default": "-"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether the animation should be disabled.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\"｜ \"wrapper\"｜ \"icon\"｜ \"label\", string>>",
+    "description": "Allows to set custom class names for the checkbox slots.",
+    "default": "-"
+  }
+]

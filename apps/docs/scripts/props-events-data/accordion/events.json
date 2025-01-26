@@ -1,0 +1,8 @@
+[
+  {
+    "attribute": "onSelectionChange",
+    "type": "(keys: \"all\" | Set<React.Key>) => any",
+    "description": "Handler that is called when the selection changes.",
+    "default": "-"
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {
+    "attribute": "onChange",
+    "type": "(page: number) => void",
+    "description": "Handler that is called when the pagination active page changes.",
+    "default": "-"
+  }
+]

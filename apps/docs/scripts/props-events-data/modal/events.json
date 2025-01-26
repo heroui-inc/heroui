@@ -1,0 +1,14 @@
+[
+  {
+    "attribute": "onOpenChange",
+    "type": "(isOpen: boolean) => void",
+    "description": "Handler that is called when the modal's open state changes.",
+    "default": "-"
+  },
+  {
+    "attribute": "onClose",
+    "type": "() => void",
+    "description": "Handler that is called when the modal is closed.",
+    "default": "-"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "attribute": "children",
+    "type": "ReactNode",
+    "description": "The content of the skeleton.",
+    "default": "-"
+  },
+  {
+    "attribute": "isLoaded",
+    "type": "boolean",
+    "description": "Whether the skeleton is loaded.",
+    "default": "false"
+  },
+  {
+    "attribute": "disableAnimation",
+    "type": "boolean",
+    "description": "Whether to disable the animations.",
+    "default": "false"
+  },
+  {
+    "attribute": "classNames",
+    "type": "Partial<Record<\"base\" | \"content\", string>>",
+    "description": "Allows to set custom class names for the skeleton slots.",
+    "default": "-"
+  }
+]
