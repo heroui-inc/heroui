@@ -13,10 +13,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": "./dist/index.js",
-    "./framer-motion": "./dist/framer-motion/index.js"
-  },
   "publishConfig": {
     "access": "public"
   },
