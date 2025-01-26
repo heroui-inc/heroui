@@ -33,6 +33,10 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
+  "dependencies": {
+    "@internationalized/date": "3.6.0",
+    "@react-aria/i18n": "3.12.5"
+  },
   "devDependencies": {
     "clean-package": "2.2.0"
   },

@@ -1,4 +1,4 @@
-import {CalendarDate, endOfMonth, getWeeksInMonth} from "@internationalized/date";
+import {CalendarDate, endOfMonth, getWeeksInMonth} from "@heroui/shared-utils";
 import {CalendarPropsBase} from "@react-types/calendar";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useLocale} from "@react-aria/i18n";

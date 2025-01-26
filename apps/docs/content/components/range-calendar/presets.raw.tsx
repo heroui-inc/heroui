@@ -10,7 +10,7 @@ import {
   endOfWeek,
   startOfMonth,
   endOfMonth,
-} from "@internationalized/date";
+} from "@heroui/shared-utils";
 import {useLocale} from "@react-aria/i18n";
 
 export default function App() {

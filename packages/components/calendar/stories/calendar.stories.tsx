@@ -8,7 +8,7 @@ import {
   isWeekend,
   startOfWeek,
   startOfMonth,
-} from "@internationalized/date";
+} from "@heroui/shared-utils";
 import {I18nProvider, useLocale} from "@react-aria/i18n";
 import {Button, ButtonGroup} from "@heroui/button";
 import {Radio, RadioGroup} from "@heroui/radio";

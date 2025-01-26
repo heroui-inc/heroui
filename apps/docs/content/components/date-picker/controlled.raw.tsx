@@ -1,6 +1,6 @@
 import React from "react";
 import {DatePicker} from "@heroui/react";
-import {DateValue, parseDate, getLocalTimeZone} from "@internationalized/date";
+import {DateValue, parseDate, getLocalTimeZone} from "@heroui/shared-utils";
 import {useDateFormatter} from "@react-aria/i18n";
 
 export default function App() {

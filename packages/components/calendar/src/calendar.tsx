@@ -1,4 +1,4 @@
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/shared-utils";
 import type {ForwardedRef, ReactElement} from "react";
 
 import {forwardRef} from "@heroui/system";

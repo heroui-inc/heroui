@@ -1,5 +1,5 @@
 import {RangeCalendar} from "@heroui/react";
-import {isWeekend} from "@internationalized/date";
+import {isWeekend} from "@heroui/shared-utils";
 import {useLocale} from "@react-aria/i18n";
 
 export default function App() {

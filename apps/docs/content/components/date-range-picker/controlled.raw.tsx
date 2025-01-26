@@ -3,7 +3,7 @@ import type {DateValue} from "@react-types/datepicker";
 
 import React from "react";
 import {DateRangePicker} from "@heroui/react";
-import {parseDate, getLocalTimeZone} from "@internationalized/date";
+import {parseDate, getLocalTimeZone} from "@heroui/shared-utils";
 import {useDateFormatter} from "@react-aria/i18n";
 
 export default function App() {

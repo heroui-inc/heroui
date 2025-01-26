@@ -1,4 +1,4 @@
-import type {CalendarDate} from "@internationalized/date";
+import type {CalendarDate} from "@heroui/shared-utils";
 import type {PressEvent} from "@react-types/shared";
 
 import {useDateFormatter} from "@react-aria/i18n";

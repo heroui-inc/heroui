@@ -14,7 +14,7 @@ import {
   startOfMonth,
   startOfWeek,
   today,
-} from "@internationalized/date";
+} from "@heroui/shared-utils";
 import {I18nProvider, useDateFormatter, useLocale} from "@react-aria/i18n";
 import {Button, ButtonGroup} from "@heroui/button";
 import {Radio, RadioGroup, RadioProps} from "@heroui/radio";

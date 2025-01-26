@@ -1,5 +1,5 @@
 import {DateRangePicker} from "@heroui/react";
-import {isWeekend, today, getLocalTimeZone} from "@internationalized/date";
+import {isWeekend, today, getLocalTimeZone} from "@heroui/shared-utils";
 import {useLocale} from "@react-aria/i18n";
 
 export default function App() {

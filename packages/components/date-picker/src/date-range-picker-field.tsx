@@ -3,7 +3,7 @@ import type {AriaDatePickerProps} from "@react-types/datepicker";
 import type {HTMLHeroUIProps} from "@heroui/system";
 import type {DateInputProps} from "@heroui/date-input";
 
-import {createCalendar} from "@internationalized/date";
+import {createCalendar} from "@heroui/shared-utils";
 import {forwardRef, useRef} from "react";
 import {DateValue} from "@react-types/datepicker";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";

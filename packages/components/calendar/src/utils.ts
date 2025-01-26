@@ -1,4 +1,4 @@
-import {DateValue, startOfYear} from "@internationalized/date";
+import {DateValue, startOfYear} from "@heroui/shared-utils";
 
 export function getYearRange(start?: DateValue | null, end?: DateValue | null): DateValue[] {
   const years: DateValue[] = [];

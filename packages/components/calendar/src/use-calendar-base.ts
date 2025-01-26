@@ -9,7 +9,7 @@ import type {SupportedCalendars} from "@heroui/system";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
 
-import {createCalendar, Calendar, CalendarDate, DateFormatter} from "@internationalized/date";
+import {createCalendar, Calendar, CalendarDate, DateFormatter} from "@heroui/shared-utils";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
 import {calendar} from "@heroui/theme";

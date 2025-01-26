@@ -1,5 +1,5 @@
 import {TimeInput} from "@heroui/react";
-import {parseAbsoluteToLocal, Time, ZonedDateTime} from "@internationalized/date";
+import {parseAbsoluteToLocal, Time, ZonedDateTime} from "@heroui/shared-utils";
 import {useDateFormatter} from "@react-aria/i18n";
 
 export default function App() {

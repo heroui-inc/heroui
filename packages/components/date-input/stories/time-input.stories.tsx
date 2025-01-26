@@ -2,12 +2,7 @@ import React from "react";
 import {Meta} from "@storybook/react";
 import {dateInput, button} from "@heroui/theme";
 import {ClockCircleLinearIcon} from "@heroui/shared-icons";
-import {
-  parseAbsoluteToLocal,
-  parseZonedDateTime,
-  Time,
-  ZonedDateTime,
-} from "@internationalized/date";
+import {parseAbsoluteToLocal, parseZonedDateTime, Time, ZonedDateTime} from "@heroui/shared-utils";
 import {useDateFormatter} from "@react-aria/i18n";
 import {ValidationResult} from "@react-types/shared";
 

@@ -1,4 +1,4 @@
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/shared-utils";
 import type {DateInputVariantProps} from "@heroui/theme";
 import type {TimeInputProps} from "@heroui/date-input";
 import type {ButtonProps} from "@heroui/button";

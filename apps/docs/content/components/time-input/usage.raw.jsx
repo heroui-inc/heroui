@@ -1,5 +1,5 @@
 import {TimeInput} from "@heroui/react";
-import {Time} from "@internationalized/date";
+import {Time} from "@heroui/shared-utils";
 
 export default function App() {
   return (

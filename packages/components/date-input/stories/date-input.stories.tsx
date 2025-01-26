@@ -10,7 +10,7 @@ import {
   parseDate,
   parseZonedDateTime,
   today,
-} from "@internationalized/date";
+} from "@heroui/shared-utils";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
 import {useDateFormatter, I18nProvider} from "@react-aria/i18n";
 import {ValidationResult} from "@react-types/shared";

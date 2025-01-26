@@ -54,8 +54,8 @@
     ]
   },
   "dependencies": {
-    "@internationalized/date": "3.6.0",
     "@heroui/react-utils": "workspace:*",
+    "@heroui/shared-utils": "workspace:*",
     "@react-aria/i18n": "3.12.4",
     "@heroui/system-rsc": "workspace:*",
     "@react-aria/overlays": "3.24.0",

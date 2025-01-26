@@ -1,5 +1,5 @@
 import type {ButtonProps} from "@heroui/button";
-import type {CalendarDate} from "@internationalized/date";
+import type {CalendarDate} from "@heroui/shared-utils";
 
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useDateFormatter} from "@react-aria/i18n";

@@ -1,4 +1,4 @@
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/shared-utils";
 import type {AriaDatePickerBaseProps} from "@react-types/datepicker";
 import type {DateInputProps, TimeInputProps} from "@heroui/date-input";
 import type {ButtonProps} from "@heroui/button";

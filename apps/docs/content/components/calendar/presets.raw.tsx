@@ -2,7 +2,7 @@ import type {DateValue} from "@react-types/calendar";
 
 import React from "react";
 import {Calendar, Radio, RadioGroup, Button, ButtonGroup, cn} from "@heroui/react";
-import {today, getLocalTimeZone, startOfWeek, startOfMonth} from "@internationalized/date";
+import {today, getLocalTimeZone, startOfWeek, startOfMonth} from "@heroui/shared-utils";
 import {useLocale} from "@react-aria/i18n";
 
 export default function App() {
