@@ -4,7 +4,7 @@ import type {DateValue} from "@react-types/datepicker";
 import React from "react";
 import {DateRangePicker} from "@heroui/react";
 import {parseAbsoluteToLocal} from "@heroui/shared-utils";
-import {I18nProvider} from "@react-aria/i18n";
+import {I18nProvider} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let [date, setDate] = React.useState<RangeValue<DateValue> | null>({

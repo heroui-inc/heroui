@@ -46,7 +46,7 @@
     "@heroui/use-intersection-observer": "workspace:*",
     "@heroui/use-pagination": "workspace:*",
     "@react-aria/focus": "3.19.0",
-    "@react-aria/i18n": "3.12.4",
+    "@heroui/react-aria-i18n": "workspace:*",
     "@react-aria/interactions": "3.22.5",
     "@react-aria/utils": "3.26.0",
     "scroll-into-view-if-needed": "3.0.10"

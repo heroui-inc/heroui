@@ -1,6 +1,6 @@
 import {DateRangePicker} from "@heroui/react";
 import {parseDate, getLocalTimeZone} from "@heroui/shared-utils";
-import {useDateFormatter} from "@react-aria/i18n";
+import {useDateFormatter} from "@heroui/react-aria-i18n";
 
 export default function App() {
   const [value, setValue] = React.useState({

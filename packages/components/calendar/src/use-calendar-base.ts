@@ -15,7 +15,7 @@ import {useCallback, useMemo} from "react";
 import {calendar} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
 import {ReactRef, useDOMRef} from "@heroui/react-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 

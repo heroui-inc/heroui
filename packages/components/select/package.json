@@ -69,7 +69,7 @@
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
-    "@react-aria/i18n": "3.12.4",
+    "@heroui/react-aria-i18n": "workspace:*",
     "@react-stately/data": "3.12.0",
     "clean-package": "2.2.0",
     "react": "^18.0.0",

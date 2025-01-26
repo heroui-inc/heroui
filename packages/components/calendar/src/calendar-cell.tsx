@@ -5,7 +5,7 @@ import {CalendarDate, getDayOfWeek, isSameDay, isSameMonth, isToday} from "@hero
 import {AriaCalendarCellProps, useCalendarCell} from "@react-aria/calendar";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useRef} from "react";

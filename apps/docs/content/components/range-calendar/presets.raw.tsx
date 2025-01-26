@@ -11,7 +11,7 @@ import {
   startOfMonth,
   endOfMonth,
 } from "@heroui/shared-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let [value, setValue] = React.useState<RangeValue<DateValue> | null>({

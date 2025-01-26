@@ -1,7 +1,7 @@
 import {CalendarDate, endOfMonth, getWeeksInMonth} from "@heroui/shared-utils";
 import {CalendarPropsBase} from "@react-types/calendar";
 import {HTMLHeroUIProps} from "@heroui/system";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {useCalendarGrid} from "@react-aria/calendar";
 import {m} from "@heroui/motion";
 import {dataAttr, getInertValue} from "@heroui/shared-utils";

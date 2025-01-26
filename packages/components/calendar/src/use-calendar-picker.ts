@@ -1,7 +1,7 @@
 import type {CalendarDate} from "@heroui/shared-utils";
 import type {PressEvent} from "@react-types/shared";
 
-import {useDateFormatter} from "@react-aria/i18n";
+import {useDateFormatter} from "@heroui/react-aria-i18n";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useCallback, useRef, useEffect} from "react";
 import {debounce} from "@heroui/shared-utils";

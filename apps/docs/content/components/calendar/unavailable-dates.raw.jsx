@@ -1,6 +1,6 @@
 import {Calendar} from "@heroui/react";
 import {today, getLocalTimeZone, isWeekend} from "@heroui/shared-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let now = today(getLocalTimeZone());

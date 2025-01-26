@@ -3,7 +3,7 @@ import type {DateValue} from "@react-types/calendar";
 import React from "react";
 import {Calendar} from "@heroui/react";
 import {today, getLocalTimeZone, isWeekend} from "@heroui/shared-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let [date, setDate] = React.useState<DateValue | null>(today(getLocalTimeZone()));

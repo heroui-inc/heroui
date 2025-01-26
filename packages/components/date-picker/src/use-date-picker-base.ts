@@ -13,7 +13,7 @@ import {useCallback} from "react";
 import {HTMLHeroUIProps, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
 import {useDOMRef} from "@heroui/react-utils";
-import {useLocalizedStringFormatter} from "@react-aria/i18n";
+import {useLocalizedStringFormatter} from "@heroui/react-aria-i18n";
 import {useControlledState} from "@react-stately/utils";
 
 import intlMessages from "../intl/messages";

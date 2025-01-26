@@ -7,7 +7,7 @@ import {
   endOfMonth,
   getLocalTimeZone,
 } from "@heroui/shared-utils";
-import {useLocale, useDateFormatter} from "@react-aria/i18n";
+import {useLocale, useDateFormatter} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let defaultDate = {

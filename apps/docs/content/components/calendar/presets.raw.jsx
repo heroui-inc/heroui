@@ -1,6 +1,6 @@
 import {Calendar, Radio, RadioGroup, Button, ButtonGroup, cn} from "@heroui/react";
 import {today, getLocalTimeZone, startOfWeek, startOfMonth} from "@heroui/shared-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let defaultDate = today(getLocalTimeZone());

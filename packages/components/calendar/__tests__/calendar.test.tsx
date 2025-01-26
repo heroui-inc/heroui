@@ -3,7 +3,7 @@ import * as React from "react";
 import {render, act, fireEvent} from "@testing-library/react";
 import {CalendarDate, isWeekend} from "@heroui/shared-utils";
 import {triggerPress, keyCodes} from "@heroui/test-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {HeroUIProvider} from "@heroui/system";
 
 import {Calendar as CalendarBase, CalendarProps} from "../src";

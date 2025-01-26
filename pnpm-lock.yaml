@@ -301,6 +301,9 @@ importers:
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/core/react
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../packages/external/react-aria-i18n
       '@heroui/shared-icons':
         specifier: workspace:*
         version: link:../../packages/utilities/shared-icons
@@ -346,9 +349,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.0
         version: 3.19.0(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)
@@ -769,6 +769,9 @@ importers:
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -796,9 +799,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.0
         version: 3.19.0(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)
@@ -1047,6 +1047,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -1065,9 +1068,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.0
         version: 3.19.0(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)
@@ -1331,6 +1331,9 @@ importers:
       '@heroui/form':
         specifier: workspace:*
         version: link:../form
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -1340,9 +1343,6 @@ importers:
       '@react-aria/datepicker':
         specifier: 3.12.0
         version: 3.12.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/utils':
         specifier: 3.26.0
         version: 3.26.0(react@18.2.0)
@@ -1401,6 +1401,9 @@ importers:
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -1413,9 +1416,6 @@ importers:
       '@react-aria/datepicker':
         specifier: 3.12.0
         version: 3.12.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/utils':
         specifier: 3.26.0
         version: 3.26.0(react@18.2.0)
@@ -2177,6 +2177,9 @@ importers:
 
   packages/components/pagination:
     dependencies:
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2195,9 +2198,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.0
         version: 3.19.0(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)
@@ -2302,6 +2302,9 @@ importers:
 
   packages/components/progress:
     dependencies:
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2311,9 +2314,6 @@ importers:
       '@heroui/use-is-mounted':
         specifier: workspace:*
         version: link:../../hooks/use-is-mounted
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/progress':
         specifier: 3.4.18
         version: 3.4.18(react@18.2.0)
@@ -2535,6 +2535,9 @@ importers:
       '@heroui/input':
         specifier: workspace:*
         version: link:../input
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/stories-utils':
         specifier: workspace:*
         version: link:../../utilities/stories-utils
@@ -2547,9 +2550,6 @@ importers:
       '@heroui/use-infinite-scroll':
         specifier: workspace:*
         version: link:../../hooks/use-infinite-scroll
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-stately/data':
         specifier: 3.12.0
         version: 3.12.0(react@18.2.0)
@@ -2599,6 +2599,9 @@ importers:
 
   packages/components/slider:
     dependencies:
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2611,9 +2614,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.0
         version: 3.19.0(react@18.2.0)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)
@@ -3230,6 +3230,12 @@ importers:
 
   packages/core/system:
     dependencies:
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -3239,9 +3245,6 @@ importers:
       '@heroui/system-rsc':
         specifier: workspace:*
         version: link:../system-rsc
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
       '@react-aria/overlays':
         specifier: 3.24.0
         version: 3.24.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -3338,6 +3341,16 @@ importers:
       framer-motion:
         specifier: 11.9.0
         version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+
+  packages/external/react-aria-i18n:
+    dependencies:
+      '@react-aria/i18n':
+        specifier: 3.12.5
+        version: 3.12.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3479,9 +3492,9 @@ importers:
 
   packages/hooks/use-aria-multiselect:
     dependencies:
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@react-aria/interactions':
         specifier: 3.22.5
         version: 3.22.5(react@18.2.0)
@@ -3686,12 +3699,12 @@ importers:
 
   packages/hooks/use-pagination:
     dependencies:
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/shared-utils':
         specifier: workspace:*
         version: link:../../utilities/shared-utils
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3960,12 +3973,6 @@ importers:
       '@internationalized/date':
         specifier: 3.6.0
         version: 3.6.0
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0

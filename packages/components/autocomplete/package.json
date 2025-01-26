@@ -56,7 +56,7 @@
     "@heroui/motion": "workspace:*",
     "@react-aria/combobox": "3.11.0",
     "@react-aria/focus": "3.19.0",
-    "@react-aria/i18n": "3.12.4",
+    "@heroui/react-aria-i18n": "workspace:*",
     "@react-aria/interactions": "3.22.5",
     "@react-aria/utils": "3.26.0",
     "@react-aria/visually-hidden": "3.8.18",

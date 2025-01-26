@@ -1,7 +1,7 @@
 import React from "react";
 import {DatePicker, RadioGroup, Radio, ButtonGroup, Button, cn} from "@heroui/react";
 import {DateValue, startOfWeek, startOfMonth, getLocalTimeZone, today} from "@heroui/shared-utils";
-import {useLocale, useDateFormatter} from "@react-aria/i18n";
+import {useLocale, useDateFormatter} from "@heroui/react-aria-i18n";
 
 export default function App() {
   let defaultDate = today(getLocalTimeZone());
