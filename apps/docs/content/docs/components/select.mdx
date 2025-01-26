@@ -294,6 +294,13 @@ the popover and listbox components.
 
 <CodeDemo title="Custom Styles" files={selectContent.customStyles} />
 
+
+### Using `value` attribute in option
+
+The [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value) attribute is not directly supported in `SelectItem`. Instead, the `key` property should be used to set the `value` to be submitted in forms.
+
+If you need to submit a specific `value` instead of the `key` during form submission, consider implementing a lookup map in your application.
+
 ## Slots
 
 - **base**: The main wrapper of the select. This wraps the rest of the slots.

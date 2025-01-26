@@ -482,26 +482,14 @@ describe("Select", () => {
     const wrapper = render(
       <>
         <Select aria-label="Favorite Animal" data-testid="select" label="Favorite Animal">
-          <SelectItem key="penguin" value="penguin">
-            Penguin
-          </SelectItem>
-          <SelectItem key="zebra" value="zebra">
-            Zebra
-          </SelectItem>
-          <SelectItem key="shark" value="shark">
-            Shark
-          </SelectItem>
+          <SelectItem key="penguin">Penguin</SelectItem>
+          <SelectItem key="zebra">Zebra</SelectItem>
+          <SelectItem key="shark">Shark</SelectItem>
         </Select>
         <Select aria-label="Favorite Animal" data-testid="select2" label="Favorite Animal">
-          <SelectItem key="penguin" value="penguin">
-            Penguin
-          </SelectItem>
-          <SelectItem key="zebra" value="zebra">
-            Zebra
-          </SelectItem>
-          <SelectItem key="shark" value="shark">
-            Shark
-          </SelectItem>
+          <SelectItem key="penguin">Penguin</SelectItem>
+          <SelectItem key="zebra">Zebra</SelectItem>
+          <SelectItem key="shark">Shark</SelectItem>
         </Select>
       </>,
     );
@@ -631,15 +619,9 @@ describe("Select", () => {
   it("should close listbox by clicking selector button again", async () => {
     const wrapper = render(
       <Select aria-label="Favorite Animal" data-testid="select" label="Favorite Animal">
-        <SelectItem key="penguin" value="penguin">
-          Penguin
-        </SelectItem>
-        <SelectItem key="zebra" value="zebra">
-          Zebra
-        </SelectItem>
-        <SelectItem key="shark" value="shark">
-          Shark
-        </SelectItem>
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
       </Select>,
     );
 
@@ -678,9 +660,7 @@ describe("Select", () => {
         onChange={onChange}
       >
         {options.map((o) => (
-          <SelectItem key={o} value={o}>
-            {o}
-          </SelectItem>
+          <SelectItem key={o}>{o}</SelectItem>
         ))}
       </Select>,
     );
@@ -716,9 +696,7 @@ describe("Select", () => {
         onChange={onChange}
       >
         {options.map((o) => (
-          <SelectItem key={o} value={o}>
-            {o}
-          </SelectItem>
+          <SelectItem key={o}>{o}</SelectItem>
         ))}
       </Select>,
     );
@@ -748,15 +726,9 @@ describe("Select", () => {
         labelPlacement="outside"
         placeholder="placeholder"
       >
-        <SelectItem key="penguin" value="penguin">
-          Penguin
-        </SelectItem>
-        <SelectItem key="zebra" value="zebra">
-          Zebra
-        </SelectItem>
-        <SelectItem key="shark" value="shark">
-          Shark
-        </SelectItem>
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
       </Select>,
     );
 
@@ -777,15 +749,9 @@ describe("Select", () => {
         label={labelContent}
         placeholder="placeholder"
       >
-        <SelectItem key="penguin" value="penguin">
-          Penguin
-        </SelectItem>
-        <SelectItem key="zebra" value="zebra">
-          Zebra
-        </SelectItem>
-        <SelectItem key="shark" value="shark">
-          Shark
-        </SelectItem>
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
       </Select>,
     );
 
@@ -901,9 +867,7 @@ describe("Select virtualization tests", () => {
       <div style={{height: "200px", overflow: "auto"}}>
         <Select isOpen aria-label="Favorite Animal" label="Favorite Animal" onChange={onChange}>
           {options.map((o) => (
-            <SelectItem key={o} value={o}>
-              {o}
-            </SelectItem>
+            <SelectItem key={o}>{o}</SelectItem>
           ))}
         </Select>
       </div>,
@@ -930,9 +894,7 @@ describe("Select virtualization tests", () => {
       <div style={{height: "200px", overflow: "auto"}}>
         <Select isOpen aria-label="Favorite Animal" label="Favorite Animal" onChange={onChange}>
           {options.map((o) => (
-            <SelectItem key={o} value={o}>
-              {o}
-            </SelectItem>
+            <SelectItem key={o}>{o}</SelectItem>
           ))}
         </Select>
       </div>,
@@ -982,9 +944,7 @@ describe("Select virtualization tests", () => {
           onChange={onChange}
         >
           {options.map((o) => (
-            <SelectItem key={o} value={o}>
-              {o}
-            </SelectItem>
+            <SelectItem key={o}>{o}</SelectItem>
           ))}
         </Select>
       </div>,
@@ -1036,9 +996,7 @@ describe("Select virtualization tests", () => {
           onChange={onChange}
         >
           {options.map((o) => (
-            <SelectItem key={o} value={o}>
-              {o}
-            </SelectItem>
+            <SelectItem key={o}>{o}</SelectItem>
           ))}
         </Select>
       </div>,
