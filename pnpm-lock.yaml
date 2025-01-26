@@ -1047,6 +1047,9 @@ importers:
       '@heroui/framer-utils':
         specifier: workspace:*
         version: link:../../utilities/framer-utils
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/react-aria-i18n':
         specifier: workspace:*
         version: link:../../external/react-aria-i18n
