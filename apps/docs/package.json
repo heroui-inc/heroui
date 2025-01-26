@@ -66,6 +66,7 @@
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-to-html": "9.0.3",
+    "js-yaml": "^4.1.0",
     "marked": "^5.1.0",
     "match-sorter": "8.0.0",
     "mini-svg-data-uri": "1.4.4",

@@ -1,0 +1,3276 @@
+name: HeroUI
+components:
+  accordion:
+    package: '@heroui/accordion'
+    props:
+      children: ReactNode | ReactNode[]
+      variant:
+        type: string
+        enum:
+          - light
+          - shadow
+          - bordered
+          - splitted
+        default: light
+      selectionMode:
+        type: string
+        enum:
+          - none
+          - single
+          - multiple
+      selectionBehavior:
+        type: string
+        enum:
+          - toggle
+          - replace
+        default: toggle
+      isCompact:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      showDivider:
+        type: boolean
+        default: true
+      dividerProps: DividerProps
+      hideIndicator:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      disableIndicatorAnimation:
+        type: boolean
+        default: false
+      disallowEmptySelection:
+        type: boolean
+        default: false
+      keepContentMounted:
+        type: boolean
+        default: false
+      fullWidth:
+        type: boolean
+        default: true
+      motionProps: MotionProps
+      disabledKeys: React.Key[]
+      itemClasses: AccordionItemClassnames
+      selectedKeys: all | React.Key[]
+      defaultSelectedKeys: all | React.Key[]
+    events:
+      onSelectionChange: '(keys: "all" | Set<React.Key>) => any'
+  alert:
+    package: '@heroui/alert'
+    props:
+      title: ReactNode
+      icon: ReactNode
+      description: ReactNode
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      variant:
+        type: string
+        enum:
+          - solid
+          - bordered
+          - flat
+          - faded
+        default: flat
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: md
+      startContent: ReactNode
+      endContent: ReactNode
+      isVisible:
+        type: boolean
+      isClosable:
+        type: boolean
+        default: false
+      hideIcon:
+        type: boolean
+        default: false
+      hideIconWrapper:
+        type: boolean
+        default: false
+      closeButtonProps: ButtonProps
+    events:
+      onClose: () => void
+      onVisibleChange: '(isVisible: boolean) => void'
+  autocomplete:
+    package: '@heroui/autocomplete'
+    props:
+      children*: ReactNode[]
+      label: ReactNode
+      name: string
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      items: Iterable<T>
+      defaultItems: Iterable<T>
+      inputValue: string
+      defaultInputValue: string
+      allowsCustomValue:
+        type: boolean
+        default: false
+      allowsEmptyCollection:
+        type: boolean
+        default: true
+      shouldCloseOnBlur:
+        type: boolean
+        default: true
+      placeholder: string
+      description: ReactNode
+      menuTrigger:
+        type: string
+        enum:
+          - focus
+          - input
+          - manual
+        default: focus
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      selectedKey: React.Key
+      defaultSelectedKey: React.Key
+      disabledKeys: all | React.Key[]
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      validate: '(value: { inputValue: string, selectedKey: React.Key }) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      startContent: ReactNode
+      endContent: ReactNode
+      autoFocus:
+        type: boolean
+        default: false
+      defaultFilter: '(textValue: string, inputValue: string) => boolean'
+      filterOptions:
+        type: Intl.CollatorOptions
+        default: '{ sensitivity: ''base''}'
+      maxListboxHeight:
+        type: number
+        default: 256
+      itemHeight:
+        type: number
+        default: 32
+      isVirtualized:
+        type: boolean
+      isReadOnly:
+        type: boolean
+        default: false
+      isRequired:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      fullWidth:
+        type: boolean
+        default: true
+      selectorIcon: ReactNode
+      clearIcon: ReactNode
+      showScrollIndicators:
+        type: boolean
+        default: true
+      scrollRef: React.RefObject<HTMLElement>
+      inputProps: InputProps
+      popoverProps: PopoverProps
+      listboxProps: ListboxProps
+      scrollShadowProps: ScrollShadowProps
+      selectorButtonProps: ButtonProps
+      clearButtonProps: ButtonProps
+      isClearable:
+        type: boolean
+        default: true
+      disableClearable:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: true
+      disableSelectorIconRotation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<'base' | 'listboxWrapper' | 'listbox' | 'popoverContent' | 'endContentWrapper' | 'clearButton' |
+        'selectorButton', string>>
+    events:
+      onOpenChange: '(isOpen: boolean, menuTrigger?: MenuTriggerAction) => void'
+      onInputChange: '(value: string) => void'
+      onSelectionChange: '(key: React.Key) => void'
+      onFocus: '(e: FocusEvent<HTMLInputElement>) => void'
+      onBlur: '(e: FocusEvent<HTMLInputElement>) => void'
+      onFocusChange: '(isFocused: boolean) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+      onClose: () => void
+  avatar:
+    package: '@heroui/avatar'
+    props:
+      src: string
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: full
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      name: string
+      icon: ReactNode
+      fallback: ReactNode
+      isBordered:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isFocusable:
+        type: boolean
+        default: false
+      showFallback:
+        type: boolean
+        default: false
+      ImgComponent:
+        type: React.ElementType
+        default: img
+      imgProps: ImgComponentProps
+      classNames: Partial<Record<"base" | "img" | "fallback" | "name" | "icon", string>>
+    events:
+      max:
+        type: number
+        default: 5
+      total: number
+      size: AvatarProps['size']
+      color: AvatarProps['color']
+      radius: AvatarProps['radius']
+      isGrid:
+        type: boolean
+        default: false
+      isDisabled: boolean
+      isBordered: boolean
+      renderCount: '(count: number) => ReactNode'
+      classNames: Partial<Record<"base" | "count", string>>
+  badge:
+    package: '@heroui/badge'
+    props:
+      children: ReactNode
+      content:
+        type: string
+        enum:
+          - string
+          - number
+          - ReactNode
+      variant:
+        type: string
+        enum:
+          - solid
+          - flat
+          - faded
+          - shadow
+        default: solid
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      shape:
+        type: string
+        enum:
+          - circle
+          - rectangle
+        default: rectangle
+      placement:
+        type: string
+        enum:
+          - top-right
+          - top-left
+          - bottom-right
+          - bottom-left
+        default: top-right
+      showOutline:
+        type: boolean
+        default: true
+      disableOutline:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      isInvisible:
+        type: boolean
+        default: false
+      isOneChar:
+        type: boolean
+        default: false
+      isDot:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base"｜"badge", string>>
+    events: {}
+  breadcrumbs:
+    package: '@heroui/breadcrumbs'
+    props:
+      children*: ReactNode
+      variant:
+        type: string
+        enum:
+          - solid
+          - bordered
+          - light
+        default: solid
+      color:
+        type: string
+        enum:
+          - foreground
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: foreground
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      underline:
+        type: string
+        enum:
+          - none
+          - active
+          - hover
+          - focus
+          - always
+        default: none
+      separator: ReactNode
+      maxItems:
+        type: number
+      itemsBeforeCollapse:
+        type: number
+      itemsAfterCollapse:
+        type: number
+      hideSeparator:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      itemClasses: Partial<Record<"base" | "item" | "separator", string>>
+      classNames: Partial<Record<"base" | "list" | "ellipsis" | "separator", string>>
+    events:
+      onAction: '(key: React.Key) => void'
+  button:
+    package: '@heroui/button'
+    props:
+      children: ReactNode
+      variant:
+        type: string
+        enum:
+          - solid
+          - bordered
+          - light
+          - flat
+          - faded
+          - shadow
+          - ghost
+        default: solid
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      startContent: ReactNode
+      endContent: ReactNode
+      spinner: ReactNode
+      spinnerPlacement:
+        type: string
+        enum:
+          - start
+          - end
+        default: start
+      fullWidth:
+        type: boolean
+        default: false
+      isIconOnly:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isLoading:
+        type: boolean
+        default: false
+      disableRipple:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+    events:
+      onPress: '(e: PressEvent) => void'
+      onPressStart: '(e: PressEvent) => void'
+      onPressEnd: '(e: PressEvent) => void'
+      onPressChange: '(isPressed: boolean) => void'
+      onPressUp: '(e: PressEvent) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+      onClick: MouseEventHandler
+  calendar:
+    package: '@heroui/calendar'
+    props:
+      value:
+        type: string
+        enum:
+          - DateValue
+          - 'null'
+      defaultValue:
+        type: string
+        enum:
+          - DateValue
+          - 'null'
+      minValue: DateValue
+      maxValue: DateValue
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      visibleMonths:
+        type: number
+        default: 1
+      focusedValue: DateValue
+      defaultFocusedValue: DateValue
+      calendarWidth:
+        type: string
+        enum:
+          - number
+          - string
+      pageBehavior:
+        type: string
+        enum:
+          - single
+          - visible
+        default: visible
+      weekdayStyle:
+        type: string
+        enum:
+          - narrow
+          - short
+          - long
+          - undefined
+        default: narrow
+      showMonthAndYearPickers:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+      autoFocus:
+        type: boolean
+        default: false
+      showHelper:
+        type: boolean
+        default: false
+      showShadow:
+        type: boolean
+        default: false
+      isHeaderExpanded:
+        type: boolean
+        default: false
+      isHeaderDefaultExpanded:
+        type: boolean
+        default: false
+      topContent: ReactNode
+      bottomContent: ReactNode
+      isDateUnavailable: '(date: DateValue) => boolean'
+      createCalendar:
+        type: '(calendar: SupportedCalendars) => Calendar | null'
+        default: all calendars
+      errorMessage: 'ReactNode | (v: ValidationResult) => ReactNode'
+      hideDisabledDates:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<'base' | 'prevButton' | 'nextButton' | 'headerWrapper' | 'header' | 'title' | 'content' |
+        'gridWrapper' | 'grid' | 'gridHeader' | 'gridHeaderRow' | 'gridHeaderCell' | 'gridBody' | 'gridBodyRow' | 'cell'
+        | 'cellButton' | 'pickerWrapper' | 'pickerMonthList' | 'pickerYearList' | 'pickerHighlight' | 'pickerItem' |
+        'helperWrapper' | 'errorMessage', string>>
+    events:
+      onChange: '(value: MappedDateValue) => void'
+      onFocusChange: '(date: CalendarDate) => void'
+      onHeaderExpandedChange: '(isExpanded: boolean) => void'
+  card:
+    package: '@heroui/card'
+    props:
+      children: ReactNode | ReactNode[]
+      shadow:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      fullWidth:
+        type: boolean
+        default: false
+      isHoverable:
+        type: boolean
+        default: false
+      isPressable:
+        type: boolean
+        default: false
+      isBlurred:
+        type: boolean
+        default: false
+      isFooterBlurred:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      disableRipple:
+        type: boolean
+        default: false
+      allowTextSelectionOnPress:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'base' | 'header' | 'body' | 'footer', string>>
+    events:
+      onPress: '(e: PressEvent) => void'
+      onPressStart: '(e: PressEvent) => void'
+      onPressEnd: '(e: PressEvent) => void'
+      onPressChange: '(isPressed: boolean) => void'
+      onPressUp: '(e: PressEvent) => void'
+  checkbox-group:
+    package: '@heroui/checkbox-group'
+    props:
+      children: ReactNode[] | ReactNode[]
+      orientation:
+        type: string
+        enum:
+          - vertical
+          - horizontal
+        default: vertical
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      size:
+        type: string
+        enum:
+          - xs
+          - sm
+          - md
+          - lg
+          - xl
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - base
+          - xs
+          - sm
+          - md
+          - lg
+          - xl
+          - full
+        default: md
+      name: string
+      label: string
+      value: string[]
+      lineThrough:
+        type: boolean
+        default: false
+      defaultValue: string[]
+      isInvalid:
+        type: boolean
+        default: false
+      validationState:
+        type: string
+        enum:
+          - valid
+          - invalid
+      description: ReactNode
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      validate: '(value: string[]) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      isDisabled:
+        type: boolean
+        default: false
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base" | "wrapper" | "label", string>>
+    events:
+      onChange: '(value: string[]) => void'
+  checkbox:
+    package: '@heroui/checkbox'
+    props:
+      children: ReactNode
+      icon: CheckboxIconProps
+      value: string
+      name: string
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      lineThrough:
+        type: boolean
+        default: false
+      isSelected:
+        type: boolean
+      defaultSelected:
+        type: boolean
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+      isDisabled:
+        type: boolean
+        default: false
+      isIndeterminate:
+        type: boolean
+      isInvalid:
+        type: boolean
+        default: false
+      validationState:
+        type: string
+        enum:
+          - valid
+          - invalid
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base"｜ "wrapper"｜ "icon"｜ "label", string>>
+    events:
+      onChange: React.ChangeEvent<HTMLInputElement>
+      onValueChange: '(isSelected: boolean) => void'
+  chip:
+    package: '@heroui/chip'
+    props:
+      children: ReactNode
+      variant:
+        type: string
+        enum:
+          - solid
+          - bordered
+          - light
+          - flat
+          - faded
+          - shadow
+          - dot
+        default: solid
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: full
+      avatar: ReactNode
+      startContent: ReactNode
+      endContent: ReactNode
+      isDisabled:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base" | "content" | "dot" | "avatar" | "closeButton", string>>
+    events:
+      onClose: '(e: PressEvent) => void'
+  circular-progress:
+    package: '@heroui/circular-progress'
+    props:
+      label: ReactNode
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      value:
+        type: number
+      valueLabel: ReactNode
+      minValue:
+        type: number
+        default: 0
+      maxValue:
+        type: number
+        default: 100
+      formatOptions:
+        type: Intl.NumberFormat
+        default: '{style: ''percent''}'
+      isIndeterminate:
+        type: boolean
+        default: true
+      showValueLabel:
+        type: boolean
+        default: true
+      strokeWidth:
+        type: number
+        default: 2
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'base'｜'svgWrapper'｜'svg'｜'track'｜'indicator'｜'value'｜'label', string>>
+    events: {}
+  code:
+    package: '@heroui/code'
+    props:
+      children: ReactNode
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: sm
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: sm
+    events: {}
+  date-input:
+    package: '@heroui/date-input'
+    props:
+      label: ReactNode
+      value: DateValue
+      defaultValue: DateValue
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      placeholderValue: DateValue
+      minValue: DateValue
+      maxValue: DateValue
+      locale: string
+      description: ReactNode
+      errorMessage: 'ReactNode | (v: ValidationResult) => ReactNode'
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+      isDisabled:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      autoFocus:
+        type: boolean
+        default: false
+      hideTimeZone:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+    events:
+      onChange: '(value: ZonedDateTime | CalendarDate | CalendarDateTime) => void'
+      onFocus: '(e: FocusEvent<HTMLInputElement>) => void'
+      onBlur: '(e: FocusEvent<HTMLInputElement>) => void'
+      onFocusChange: '(isFocused: boolean) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+  date-picker:
+    package: '@heroui/date-picker'
+    props:
+      label: ReactNode
+      value:
+        type: string
+        enum:
+          - ZonedDateTime
+          - CalendarDate
+          - CalendarDateTime
+          - undefined
+          - 'null'
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      defaultValue: string
+      placeholderValue:
+        type: string
+        enum:
+          - ZonedDateTime
+          - CalendarDate
+          - CalendarDateTime
+          - undefined
+          - 'null'
+      description: ReactNode
+      errorMessage: 'ReactNode | (v: ValidationResult) => ReactNode'
+      validate: '(value: MappedDateValue<DateValue>) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      startContent: ReactNode
+      endContent: ReactNode
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      visibleMonths:
+        type: number
+        default: 1
+      selectorIcon: ReactNode
+      pageBehavior:
+        type: PageBehavior
+        default: visible
+      calendarWidth:
+        type: number
+        default: 256
+      isDateUnavailable: '(date: DateValue) => boolean'
+      autoFocus:
+        type: boolean
+        default: false
+      hourCycle:
+        type: string
+        enum:
+          - '12'
+          - '24'
+      granularity:
+        type: string
+        enum:
+          - day
+          - hour
+          - minute
+          - second
+      hideTimeZone:
+        type: boolean
+        default: false
+      shouldForceLeadingZeros:
+        type: boolean
+        default: true
+    events:
+      onChange: '(value: ZonedDateTime | CalendarDate | CalendarDateTime) => void'
+      onFocus: '(e: FocusEvent<HTMLInputElement>) => void'
+      onBlur: '(e: FocusEvent<HTMLInputElement>) => void'
+      onFocusChange: '(isFocused: boolean) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+  date-range-picker:
+    package: '@heroui/date-range-picker'
+    props:
+      label: ReactNode
+      value: RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      minValue: RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null
+      maxValue: RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null
+      defaultValue: string
+      placeholderValue:
+        type: string
+        enum:
+          - ZonedDateTime
+          - CalendarDate
+          - CalendarDateTime
+          - undefined
+          - 'null'
+      description: ReactNode
+      errorMessage: 'ReactNode | (v: ValidationResult) => ReactNode'
+      validate: '(value: RangeValue<MappedDateValue<DateValue>>) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      startContent: ReactNode
+      endContent: ReactNode
+      startName: string
+      endName: string
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      isOpen:
+        type: boolean
+      defaultOpen:
+        type: boolean
+        default: false
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      selectorIcon: ReactNode
+      pageBehavior:
+        type: string
+        enum:
+          - single
+          - visible
+        default: visible
+      visibleMonths:
+        type: number
+        default: 1
+      autoFocus:
+        type: boolean
+        default: false
+      hourCycle:
+        type: string
+        enum:
+          - '12'
+          - '24'
+      granularity:
+        type: string
+        enum:
+          - day
+          - hour
+          - minute
+          - second
+      hideTimeZone:
+        type: boolean
+        default: false
+      allowsNonContiguousRanges:
+        type: boolean
+        default: false
+      shouldForceLeadingZeros:
+        type: boolean
+        default: true
+      calendarWidth:
+        type: number
+        default: 256
+      CalendarTopContent: ReactNode
+      CalendarBottomContent: ReactNode
+      showMonthAndYearPickers:
+        type: boolean
+        default: false
+      popoverProps:
+        type: PopoverProps
+        default: '{ placement: "bottom", triggerScaleOnOpen: false, offset: 13 }'
+      selectorButtonProps:
+        type: ButtonProps
+        default: '{ size: "sm", variant: "light", radius: "full", isIconOnly: true }'
+      selectorButtonPlacement:
+        type: string
+        enum:
+          - start
+          - end
+        default: end
+      calendarProps: CalendarProps
+      timeInputProps: TimeInputProps
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<"base" | "selectorButton" | "selectorIcon" | "popoverContent" | "calendar" | "calendarContent" |
+        "timeInputLabel" | "timeInput", string>>
+    events:
+      onChange: '(value: RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime>) => void'
+      onOpenChange: '(isOpen: boolean) => void'
+      onFocus: '(e: FocusEvent<HTMLInputElement>) => void'
+      onBlur: '(e: FocusEvent<HTMLInputElement>) => void'
+      onFocusChange: '(isFocused: boolean) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+  divider:
+    package: '@heroui/divider'
+    props:
+      orientation:
+        type: '`horizontal` | `vertical`'
+        default: '`horizontal`'
+    events: {}
+  drawer:
+    package: '@heroui/drawer'
+    props:
+      children: ReactNode
+      size:
+        type: string
+        enum:
+          - xs
+          - sm
+          - md
+          - lg
+          - xl
+          - 2xl
+          - 3xl
+          - 4xl
+          - 5xl
+          - full
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      placement:
+        type: string
+        enum:
+          - left
+          - right
+          - top
+          - bottom
+        default: right
+      isOpen:
+        type: boolean
+      defaultOpen:
+        type: boolean
+      isDismissable:
+        type: boolean
+        default: true
+      isKeyboardDismissDisabled:
+        type: boolean
+        default: false
+      shouldBlockScroll:
+        type: boolean
+        default: true
+      hideCloseButton:
+        type: boolean
+        default: false
+      closeButton: ReactNode
+      motionProps: MotionProps
+      portalContainer:
+        type: HTMLElement
+        default: document.body
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'wrapper' | 'base' | 'backdrop' | 'header' | 'body' | 'footer' | 'closeButton', string>>
+    events:
+      onOpenChange: '(isOpen: boolean) => void'
+      onClose: () => void
+  dropdown:
+    package: '@heroui/dropdown'
+    props:
+      children*: ReactNode[]
+      type:
+        type: string
+        enum:
+          - menu
+          - listbox
+        default: menu
+      trigger:
+        type: string
+        enum:
+          - press
+          - longPress
+        default: press
+      isDisabled:
+        type: boolean
+        default: false
+      closeOnSelect:
+        type: boolean
+        default: true
+      shouldBlockScroll:
+        type: boolean
+        default: true
+      PopoverProps: PopoverProps
+    events:
+      onOpenChange: '(isOpen: boolean) => void'
+      shouldCloseOnInteractOutside: '(e: HTMLElement) => void'
+      onClose: () => void
+  form:
+    package: '@heroui/form'
+    props:
+      children: ReactNode
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: aria
+      validationErrors: Record<string, string | string[]>
+      action: string | FormHTMLAttributes<HTMLFormElement>['action']
+      encType: '''application/x-www-form-urlencoded'' | ''multipart/form-data'' | ''text/plain'''
+      method:
+        type: string
+        enum:
+          - get
+          - post
+          - dialog
+      target:
+        type: string
+        enum:
+          - _blank
+          - _self
+          - _parent
+          - _top
+      autoComplete:
+        type: string
+        enum:
+          - 'off'
+          - 'on'
+      autoCapitalize:
+        type: string
+        enum:
+          - 'off'
+          - none
+          - 'on'
+          - sentences
+          - words
+          - characters
+      className: string
+      style: CSSProperties
+    events: {}
+  image:
+    package: '@heroui/image'
+    props:
+      src: string
+      srcSet: string
+      sizes: string
+      alt: string
+      width:
+        type: number
+      height:
+        type: number
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      shadow:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: none
+      loading:
+        type: string
+        enum:
+          - eager
+          - lazy
+      fallbackSrc: string
+      isBlurred:
+        type: boolean
+        default: false
+      isZoomed:
+        type: boolean
+        default: false
+      removeWrapper:
+        type: boolean
+        default: false
+      disableSkeleton:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"img" | "wrapper" | "zoomedWrapper" | "blurredImg", string>>
+    events:
+      onLoad: ReactEventHandler<HTMLImageElement>
+      onError: () => void
+  input-otp:
+    package: '@heroui/input-otp'
+    props:
+      length:
+        type: number
+        default: 4
+      allowedKeys:
+        type: regEx string
+        default: ^[0-9]*$
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      value: string
+      defaultValue: string
+      description: ReactNode
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      fullWidth:
+        type: boolean
+        default: false
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      baseRef: RefObject<HTMLDivElement>
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<'base' | 'inputWrapper' | 'input' | 'segmentWrapper' | 'segment' | 'caret' | 'passwordChar' |
+        'helperWrapper' | 'description' | 'errorMessage', string>>
+      autoFocus:
+        type: boolean
+        default: false
+      textAlign:
+        type: string
+        enum:
+          - left
+          - center
+          - right
+        default: center
+      pushPasswordManagerStrategy:
+        type: string
+        enum:
+          - none
+          - hidden
+          - input
+      pasteTransformer: '(text: string) => string'
+      containerClassName: string
+      noScriptCSSFallback: string
+    events:
+      onChange: React.ChangeEvent<HTMLInputElement>
+      onValueChange: '(value: string) => void'
+      onComplete: '(value: string) => void'
+  input:
+    package: '@heroui/input'
+    props:
+      children: ReactNode
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      label: ReactNode
+      value: string
+      defaultValue: string
+      placeholder: string
+      description: ReactNode
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      validate: '(value: string) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      minLength:
+        type: number
+      maxLength:
+        type: number
+      pattern: string
+      type:
+        type: string
+        enum:
+          - text
+          - email
+          - url
+          - password
+          - tel
+          - search
+          - file
+        default: text
+      startContent: ReactNode
+      endContent: ReactNode
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      fullWidth:
+        type: boolean
+        default: true
+      isClearable:
+        type: boolean
+        default: false
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      baseRef: RefObject<HTMLDivElement>
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<'base' | 'label' | 'inputWrapper' | 'innerWrapper' | 'mainWrapper' | 'input' | 'clearButton' |
+        'helperWrapper' | 'description' | 'errorMessage', string>>
+    events:
+      onChange: React.ChangeEvent<HTMLInputElement>
+      onValueChange: '(value: string) => void'
+      onClear: () => void
+  kbd:
+    package: '@heroui/kbd'
+    props:
+      children: ReactNode
+      keys: KbdKey | KbdKey[]
+      classNames: Partial<Record<"base" | "abbr" | "content", string>>
+    events: {}
+  link:
+    package: '@heroui/link'
+    props:
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - foreground
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      underline:
+        type: string
+        enum:
+          - none
+          - hover
+          - always
+          - active
+          - focus
+        default: none
+      href: string
+      target: HTMLAttributeAnchorTarget
+      rel: string
+      download:
+        type: string
+        enum:
+          - boolean
+          - string
+      ping: string
+      referrerPolicy: HTMLAttributeReferrerPolicy
+      isExternal:
+        type: boolean
+        default: false
+      showAnchorIcon:
+        type: boolean
+        default: false
+      anchorIcon: ReactNode
+      isBlock:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+    events:
+      onPress: '(e: PressEvent) => void'
+      onPressStart: '(e: PressEvent) => void'
+      onPressEnd: '(e: PressEvent) => void'
+      onPressChange: '(isPressed: boolean) => void'
+      onPressUp: '(e: PressEvent) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+      onClick: MouseEventHandler
+  listbox:
+    package: '@heroui/listbox'
+    props:
+      children*: ReactNode[]
+      items: Iterable<T>
+      variant:
+        type: string
+        enum:
+          - solid
+          - bordered
+          - light
+          - flat
+          - faded
+          - shadow
+        default: solid
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      selectionMode:
+        type: string
+        enum:
+          - none
+          - single
+          - multiple
+      selectedKeys: React.Key[]
+      disabledKeys: React.Key[]
+      defaultSelectedKeys: all | React.Key[]
+      disallowEmptySelection:
+        type: boolean
+        default: false
+      shouldHighlightOnFocus:
+        type: boolean
+        default: false
+      autoFocus:
+        type: string
+        enum:
+          - boolean
+          - first
+          - last
+      topContent: ReactNode
+      bottomContent: ReactNode
+      emptyContent:
+        type: ReactNode
+        default: No items.
+      shouldFocusWrap:
+        type: boolean
+        default: false
+      isVirtualized:
+        type: boolean
+        default: false
+      virtualization: Record<"maxListboxHeight" & "itemHeight", number>
+      hideEmptyContent:
+        type: boolean
+        default: false
+      hideSelectedIcon:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base" | "list" | "emptyContent", string>>
+      itemClasses: Partial<Record<"base" | "wrapper" | "title" | "description" | "selectedIcon", string>>
+    events:
+      onAction: '(key: React.Key) => void'
+      onSelectionChange: '(keys: React.Key[]) => void'
+  modal:
+    package: '@heroui/modal'
+    props:
+      children*: ReactNode
+      size:
+        type: string
+        enum:
+          - xs
+          - sm
+          - md
+          - lg
+          - xl
+          - 2xl
+          - 3xl
+          - 4xl
+          - 5xl
+          - full
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      shadow:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      backdrop:
+        type: string
+        enum:
+          - transparent
+          - opaque
+          - blur
+        default: opaque
+      scrollBehavior:
+        type: string
+        enum:
+          - normal
+          - inside
+          - outside
+        default: normal
+      placement:
+        type: string
+        enum:
+          - auto
+          - top
+          - center
+          - bottom
+        default: auto
+      isOpen:
+        type: boolean
+      defaultOpen:
+        type: boolean
+      isDismissable:
+        type: boolean
+        default: true
+      isKeyboardDismissDisabled:
+        type: boolean
+        default: false
+      shouldBlockScroll:
+        type: boolean
+        default: true
+      hideCloseButton:
+        type: boolean
+        default: false
+      closeButton: ReactNode
+      motionProps: MotionProps
+      portalContainer:
+        type: HTMLElement
+        default: document.body
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'wrapper' | 'base' | 'backdrop' | 'header' | 'body' | 'footer' | 'closeButton', string>>
+    events:
+      onOpenChange: '(isOpen: boolean) => void'
+      onClose: () => void
+  navbar:
+    package: '@heroui/navbar'
+    props:
+      children*: ReactNode[]
+      height:
+        type: string
+        enum:
+          - string
+          - number
+      position:
+        type: string
+        enum:
+          - static
+          - sticky
+        default: sticky
+      maxWidth:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+          - xl
+          - 2xl
+          - full
+        default: lg
+      parentRef:
+        type: React.RefObject<HTMLElement>
+        default: window
+      isBordered:
+        type: boolean
+        default: false
+      isBlurred:
+        type: boolean
+        default: true
+      isMenuOpen:
+        type: boolean
+        default: false
+      isMenuDefaultOpen:
+        type: boolean
+        default: false
+      shouldHideOnScroll:
+        type: boolean
+        default: false
+      motionProps: MotionProps
+      disableScrollHandler:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<'base' | 'wrapper' | 'brand' | 'content' | 'item' | 'toggle' | 'toggleIcon' | 'menu' |
+        'menuItem', string>>
+    events:
+      onMenuOpenChange: '(isOpen: boolean) => void'
+      onScrollPositionChange: '(position: number) => void'
+  pagination:
+    package: '@heroui/pagination'
+    props:
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - light
+          - faded
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      total:
+        type: number
+        default: 1
+      dotsJump:
+        type: number
+        default: 5
+      initialPage:
+        type: number
+        default: 1
+      page:
+        type: number
+      siblings:
+        type: number
+        default: 1
+      boundaries:
+        type: number
+        default: 1
+      loop:
+        type: boolean
+        default: false
+      isCompact:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      showShadow:
+        type: boolean
+        default: false
+      showControls:
+        type: boolean
+        default: false
+      disableCursorAnimation:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      renderItem: PaginationItemProps
+      getItemAriaLabel: '(page: string) => string'
+      classNames: >-
+        Partial<Record<'base' | 'wrapper' | 'prev' | 'next' | 'item' | 'cursor' | 'forwardIcon' | 'ellipsis' |
+        'chevronNext', string>>
+    events:
+      onChange: '(page: number) => void'
+  popover:
+    package: '@heroui/popover'
+    props:
+      children*: ReactNode[]
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: lg
+      shadow:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      backdrop:
+        type: string
+        enum:
+          - transparent
+          - opaque
+          - blur
+        default: transparent
+      placement:
+        type: PopoverPlacement
+        default: bottom
+      state: OverlayTriggerState
+      isOpen:
+        type: boolean
+      defaultOpen:
+        type: boolean
+      offset:
+        type: number
+        default: 7
+      containerPadding:
+        type: number
+        default: 12
+      crossOffset:
+        type: number
+        default: 0
+      triggerType:
+        type: string
+        enum:
+          - dialog
+          - menu
+          - listbox
+          - tree
+          - grid
+        default: dialog
+      showArrow:
+        type: boolean
+        default: false
+      shouldFlip:
+        type: boolean
+        default: true
+      triggerScaleOnOpen:
+        type: boolean
+        default: true
+      shouldBlockScroll:
+        type: boolean
+        default: true
+      shouldCloseOnScroll:
+        type: boolean
+        default: false
+      isKeyboardDismissDisabled:
+        type: boolean
+        default: false
+      shouldCloseOnBlur:
+        type: boolean
+        default: false
+      motionProps: MotionProps
+      portalContainer:
+        type: HTMLElement
+        default: document.body
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'base' | 'trigger' | 'backdrop' | 'content', string>>
+    events:
+      onOpenChange: '(isOpen: boolean) => void'
+      shouldCloseOnInteractOutside: '(e: HTMLElement) => void'
+      onClose: () => void
+  progress:
+    package: '@heroui/progress'
+    props:
+      label: ReactNode
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: full
+      value:
+        type: number
+      valueLabel: ReactNode
+      minValue:
+        type: number
+        default: 0
+      maxValue:
+        type: number
+        default: 100
+      formatOptions:
+        type: Intl.NumberFormat
+        default: '{style: ''percent''}'
+      isIndeterminate:
+        type: boolean
+        default: false
+      isStriped:
+        type: boolean
+        default: false
+      showValueLabel:
+        type: boolean
+        default: true
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'base' | 'labelWrapper' | 'label' | 'track' | 'value' | 'indicator', string>>
+    events: {}
+  radio-group:
+    package: '@heroui/radio-group'
+    props:
+      children: ReactNode | ReactNode[]
+      label: ReactNode
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      orientation:
+        type: string
+        enum:
+          - horizontal
+          - vertical
+        default: vertical
+      name: string
+      value: string[]
+      defaultValue: string[]
+      description: ReactNode
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      validate: '(value: string) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      isDisabled:
+        type: boolean
+        default: false
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+      isInvalid:
+        type: boolean
+        default: false
+      validationState:
+        type: string
+        enum:
+          - valid
+          - invalid
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base" | "wrapper" | "label", string>>
+    events:
+      onChange: React.ChangeEvent<HTMLInputElement>
+      onValueChange: '((value: string) => void)'
+  range-calendar:
+    package: '@heroui/range-calendar'
+    props:
+      value:
+        type: RangeValue
+        default: 'null'
+      defaultValue:
+        type: RangeValue
+        default: 'null'
+      minValue: DateValue
+      maxValue: DateValue
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      visibleMonths:
+        type: number
+        default: 1
+      focusedValue: DateValue
+      defaultFocusedValue: DateValue
+      calendarWidth:
+        type: string
+        enum:
+          - number
+          - string
+      pageBehavior:
+        type: PageBehavior
+        default: visible
+      weekdayStyle:
+        type: string
+        enum:
+          - narrow
+          - short
+          - long
+        default: narrow
+      showMonthAndYearPickers:
+        type: boolean
+        default: false
+      allowsNonContiguousRanges:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+      autoFocus:
+        type: boolean
+        default: false
+      showHelper:
+        type: boolean
+        default: false
+      showShadow:
+        type: boolean
+        default: false
+      topContent: ReactNode
+      bottomContent: ReactNode
+      isDateUnavailable: '(date: DateValue) => boolean'
+      createCalendar:
+        type: '(calendar: SupportedCalendars) => Calendar | null'
+        default: all calendars
+      errorMessage: 'ReactNode | (v: ValidationResult) => ReactNode'
+      validate: '(value: { inputValue: string, selectedKey: React.Key }) => ValidationError | true | null | undefined'
+      hideDisabledDates:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+    events:
+      onFocusChange: '(date: CalendarDate) => void'
+      onChange: '(value: RangeValue<DateValue> | null) => void'
+  scroll-shadow:
+    package: '@heroui/scroll-shadow'
+    props:
+      size:
+        type: number
+        default: 40
+      offset:
+        type: number
+        default: 0
+      hideScrollBar:
+        type: boolean
+        default: false
+      orientation:
+        type: string
+        enum:
+          - horizontal
+          - vertical
+        default: vertical
+      isEnabled:
+        type: boolean
+        default: true
+      visibility:
+        type: ScrollShadowVisibility
+        default: auto
+    events:
+      onVisibilityChange: '(visibility: ScrollShadowVisibility) => void'
+  select:
+    package: '@heroui/select'
+    props:
+      children*: ReactNode[]
+      items: Iterable<T>
+      selectionMode:
+        type: string
+        enum:
+          - single
+          - multiple
+      selectedKeys: all | Iterable<React.Key>
+      disabledKeys: Iterable<React.Key>
+      defaultSelectedKeys: all | Iterable<React.Key>
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      placeholder:
+        type: string
+        default: Select an option
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      label: ReactNode
+      description: ReactNode
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      startContent: ReactNode
+      endContent: ReactNode
+      selectorIcon: ReactNode
+      scrollRef: React.RefObject<HTMLElement>
+      spinnerRef: React.RefObject<HTMLElement>
+      maxListboxHeight:
+        type: number
+        default: 256
+      itemHeight:
+        type: number
+        default: 32
+      isVirtualized:
+        type: boolean
+      fullWidth:
+        type: boolean
+        default: true
+      isOpen:
+        type: boolean
+      defaultOpen:
+        type: boolean
+      isRequired:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      isMultiline:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      validationState:
+        type: string
+        enum:
+          - valid
+          - invalid
+      showScrollIndicators:
+        type: boolean
+        default: true
+      autoFocus:
+        type: boolean
+        default: false
+      disallowEmptySelection:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: true
+      disableSelectorIconRotation:
+        type: boolean
+        default: false
+      hideEmptyContent:
+        type: boolean
+        default: false
+      popoverProps: PopoverProps
+      listboxProps: ListboxProps
+      scrollShadowProps: ScrollShadowProps
+      classNames: >-
+        Partial<Record<"base"｜ "label"｜ "trigger"｜ "mainWrapper" ｜ "innerWrapper"｜ "selectorIcon" ｜ "value" ｜
+        "listboxWrapper"｜ "listbox" ｜ "popoverContent" ｜ "helperWrapper" ｜ "description" ｜ "errorMessage", string>>
+    events:
+      onClose: () => void
+      onOpenChange: '(isOpen: boolean) => void'
+      onSelectionChange: '(keys: "all" | Set<React.Key> & {anchorKey?: string; currentKey?: string}) => void'
+      onChange: React.ChangeEvent<HTMLSelectElement>
+      renderValue: RenderValueFunction
+  skeleton:
+    package: '@heroui/skeleton'
+    props:
+      children: ReactNode
+      isLoaded:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base" | "content", string>>
+    events: {}
+  slider:
+    package: '@heroui/slider'
+    props:
+      label: ReactNode
+      name: string
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - foreground
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: full
+      step:
+        type: number
+        default: 1
+      value:
+        type: number
+      defaultValue:
+        type: number
+      minValue:
+        type: number
+        default: 0
+      maxValue:
+        type: number
+        default: 100
+      orientation:
+        type: string
+        enum:
+          - horizontal
+          - vertical
+        default: horizontal
+      fillOffset:
+        type: number
+      showSteps:
+        type: boolean
+        default: false
+      showTooltip:
+        type: boolean
+        default: false
+      marks: SliderStepMarks
+      startContent: ReactNode
+      endContent: ReactNode
+      formatOptions: Intl.NumberFormat
+      tooltipValueFormatOptions: Intl.NumberFormat
+      tooltipProps: TooltipProps
+      showOutline:
+        type: boolean
+        default: false
+      hideValue:
+        type: boolean
+        default: false
+      hideThumb:
+        type: boolean
+        default: false
+      disableThumbScale:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+    events:
+      getValue: '(value: SliderValue) => string'
+      renderLabel: '(props: DOMAttributes<HTMLLabelElement>) => ReactNode'
+      renderValue: '(props: DOMAttributes<HTMLOutputElement>) => ReactNode'
+      renderThumb: '(props: DOMAttributes<HTMLDivElement> & {index?: number}) => ReactNode'
+  snippet:
+    package: '@heroui/snippet'
+    props:
+      children: ReactNode | ReactNode[]
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      symbol:
+        type: string
+        enum:
+          - string
+          - ReactNode
+      timeout:
+        type: number
+        default: 2000
+      codeString: string
+      tooltipProps: TooltipProps
+      copyIcon: ReactNode
+      checkIcon: ReactNode
+      disableTooltip:
+        type: boolean
+        default: false
+      disableCopy:
+        type: boolean
+        default: false
+      hideCopyButton:
+        type: boolean
+        default: false
+      hideSymbol:
+        type: boolean
+        default: false
+      copyButtonProps: ButtonProps
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<'base' | 'content' | 'pre' | 'symbol' | 'copyButton' | 'checkIcon', string>>
+    events:
+      onCopy: '(value: string | string[]) => void'
+  spacer:
+    package: '@heroui/spacer'
+    props:
+      x:
+        type: Space
+        default: '1'
+      'y':
+        type: Space
+        default: '1'
+    events: {}
+  spinner:
+    package: '@heroui/spinner'
+    props:
+      label: string
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      labelColor:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      classNames: Partial<Record<"base"｜"wrapper"｜"circle1"｜"circle2"｜"label", string>>
+    events: {}
+  switch:
+    package: '@heroui/switch'
+    props:
+      children: ReactNode
+      value: string
+      name: string
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: primary
+      thumbIcon: ThumbIconProps
+      startContent: ReactNode
+      endContent: ReactNode
+      isSelected:
+        type: boolean
+      defaultSelected:
+        type: boolean
+      isReadOnly:
+        type: boolean
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base"｜ "wrapper"｜ "thumb"｜ "label" ｜ "startContent" ｜ "endContent" ｜ "thumbIcon" , string>>
+    events:
+      onChange: React.ChangeEvent<HTMLInputElement>
+      onValueChange: '(isSelected: boolean) => void'
+  table:
+    package: '@heroui/table'
+    props:
+      children*: ReactNode[]
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      layout:
+        type: string
+        enum:
+          - auto
+          - fixed
+        default: auto
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: lg
+      shadow:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: sm
+      hideHeader:
+        type: boolean
+        default: false
+      isStriped:
+        type: boolean
+        default: false
+      isCompact:
+        type: boolean
+        default: false
+      isHeaderSticky:
+        type: boolean
+        default: false
+      fullWidth:
+        type: boolean
+        default: true
+      removeWrapper:
+        type: boolean
+        default: false
+      BaseComponent:
+        type: React.ComponentType<any>
+        default: div
+      topContent: ReactNode
+      bottomContent: ReactNode
+      topContentPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+        default: inside
+      bottomContentPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+        default: inside
+      showSelectionCheckboxes:
+        type: boolean
+      sortDescriptor: SortDescriptor
+      selectedKeys: Selection
+      defaultSelectedKeys: Selection
+      disabledKeys: Selection
+      disallowEmptySelection:
+        type: boolean
+      selectionMode:
+        type: string
+        enum:
+          - single
+          - multiple
+          - none
+        default: none
+      selectionBehavior:
+        type: string
+        enum:
+          - toggle
+          - replace
+        default: toggle
+      disabledBehavior:
+        type: string
+        enum:
+          - selection
+          - all
+        default: selection
+      allowDuplicateSelectionEvents:
+        type: boolean
+      disableAnimation:
+        type: boolean
+        default: false
+      checkboxesProps: CheckboxProps
+      classNames: >-
+        Partial<Record<'base' | 'table' | 'thead' | 'tbody' | 'tfoot' | 'emptyWrapper' | 'loadingWrapper' | 'wrapper' |
+        'tr' | 'th' | 'td' | 'sortIcon', string>>
+      isKeyboardNavigationDisabled:
+        type: boolean
+        default: false
+    events:
+      onRowAction: '(key: React.Key) => void'
+      onCellAction: '(key: React.Key) => void'
+      onSelectionChange: '(keys: Selection) => any'
+      onSortChange: '(descriptor: SortDescriptor) => any'
+  tabs:
+    package: '@heroui/tabs'
+    props:
+      children*: 'ReactNode | ((item: T) => ReactElement)'
+      variant:
+        type: string
+        enum:
+          - solid
+          - bordered
+          - light
+          - underlined
+        default: solid
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      fullWidth:
+        type: boolean
+        default: false
+      items: Iterable<T>
+      disabledKeys: React.Key[]
+      selectedKey: React.Key
+      defaultSelectedKey: React.Key
+      shouldSelectOnPressUp:
+        type: boolean
+        default: true
+      keyboardActivation:
+        type: string
+        enum:
+          - automatic
+          - manual
+        default: automatic
+      motionProps: MotionProps
+      disableCursorAnimation:
+        type: boolean
+        default: false
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base"｜ "tabList"｜ "tab"｜ "tabContent"｜ "cursor" ｜ "panel", string>>
+      placement:
+        type: string
+        enum:
+          - top
+          - bottom
+          - start
+          - end
+        default: top
+      isVertical:
+        type: boolean
+        default: false
+      destroyInactiveTabPanel:
+        type: boolean
+        default: true
+    events:
+      onSelectionChange: '(key: React.Key) => any'
+  textarea:
+    package: '@heroui/textarea'
+    props:
+      children: ReactNode
+      minRows:
+        type: number
+        default: 3
+      maxRows:
+        type: number
+        default: 8
+      cacheMeasurements:
+        type: boolean
+        default: false
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      label: ReactNode
+      value: string
+      defaultValue: string
+      placeholder: string
+      startContent: ReactNode
+      endContent: ReactNode
+      description: ReactNode
+      errorMessage: 'ReactNode | ((v: ValidationResult) => ReactNode)'
+      validate: '(value: string) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      fullWidth:
+        type: boolean
+        default: true
+      isRequired:
+        type: boolean
+        default: false
+      isReadOnly:
+        type: boolean
+      isDisabled:
+        type: boolean
+        default: false
+      isClearable:
+        type: boolean
+        default: false
+      isInvalid:
+        type: boolean
+        default: false
+      validationState:
+        type: string
+        enum:
+          - valid
+          - invalid
+      disableAutosize:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: >-
+        Partial<Record<"base" | "label" | "inputWrapper" | "innerWrapper" | "input" | "description" | "errorMessage",
+        string>>
+    events:
+      onChange: React.ChangeEvent<HTMLInputElement>
+      onValueChange: '(value: string) => void'
+      onClear: () => void
+      onHeightChange: '(height: number, meta: { rowHeight: number }) => void'
+  time-input:
+    package: '@heroui/time-input'
+    props:
+      label: ReactNode
+      name: string
+      value:
+        type: string
+        enum:
+          - TimeValue
+          - 'null'
+      defaultValue:
+        type: string
+        enum:
+          - TimeValue
+          - 'null'
+      variant:
+        type: string
+        enum:
+          - flat
+          - bordered
+          - faded
+          - underlined
+        default: flat
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+      hourCycle:
+        type: string
+        enum:
+          - '12'
+          - '24'
+      granularity:
+        type: string
+        enum:
+          - hour
+          - minute
+          - second
+        default: minute
+      hideTimeZone:
+        type: boolean
+      labelPlacement:
+        type: string
+        enum:
+          - inside
+          - outside
+          - outside-left
+        default: inside
+      shouldForceLeadingZeros:
+        type: boolean
+        default: true
+      placeholderValue: TimeValue
+      minValue: TimeValue
+      maxValue: TimeValue
+      isDisabled:
+        type: boolean
+      isReadOnly:
+        type: boolean
+      isRequired:
+        type: boolean
+      isInvalid:
+        type: boolean
+      autoFocus:
+        type: boolean
+      description: ReactNode
+      errorMessage: 'ReactNode | (v: ValidationResult) => ReactNode'
+      validate: '(value: MappedTimeValue<TimeValue>) => ValidationError | true | null | undefined'
+      validationBehavior:
+        type: string
+        enum:
+          - native
+          - aria
+        default: native
+      disableAnimation:
+        type: boolean
+      classNames: >-
+        Partial<Record<"base" | "label" | "inputWrapper" | "innerWrapper" | "segment" | "helperWrapper" | "input" |
+        "description" | "errorMessage", string>>
+    events:
+      onFocus: '(e: FocusEvent<Target>) => void'
+      onBlur: '(e: FocusEvent<Target>) => void'
+      onFocusChange: '(isFocused: boolean) => void'
+      onKeyDown: '(e: KeyboardEvent) => void'
+      onKeyUp: '(e: KeyboardEvent) => void'
+      onChange: '(value: MappedTimeValue<TimeValue>) => void'
+  tooltip:
+    package: '@heroui/tooltip'
+    props:
+      children*: ReactNode[]
+      content: ReactNode
+      size:
+        type: string
+        enum:
+          - sm
+          - md
+          - lg
+        default: md
+      color:
+        type: string
+        enum:
+          - default
+          - primary
+          - secondary
+          - success
+          - warning
+          - danger
+        default: default
+      radius:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+          - full
+        default: md
+      shadow:
+        type: string
+        enum:
+          - none
+          - sm
+          - md
+          - lg
+        default: sm
+      placement:
+        type: TooltipPlacement
+        default: top
+      delay:
+        type: number
+        default: 0
+      closeDelay:
+        type: number
+        default: 500
+      isOpen:
+        type: boolean
+      defaultOpen:
+        type: boolean
+      offset:
+        type: number
+        default: 7
+      containerPadding:
+        type: number
+        default: 12
+      crossOffset:
+        type: number
+        default: 0
+      showArrow:
+        type: boolean
+        default: false
+      shouldFlip:
+        type: boolean
+        default: true
+      triggerScaleOnOpen:
+        type: boolean
+        default: true
+      shouldBlockScroll:
+        type: boolean
+        default: true
+      isKeyboardDismissDisabled:
+        type: boolean
+        default: false
+      isDismissable:
+        type: boolean
+        default: false
+      shouldCloseOnBlur:
+        type: boolean
+        default: true
+      motionProps: MotionProps
+      portalContainer:
+        type: HTMLElement
+        default: document.body
+      updatePositionDeps:
+        type: any[]
+        default: '[]'
+      isDisabled:
+        type: boolean
+        default: false
+      disableAnimation:
+        type: boolean
+        default: false
+      classNames: Partial<Record<"base"｜"content", string>>
+    events:
+      onOpenChange: '(isOpen: boolean) => void'
+      shouldCloseOnInteractOutside: '(e: HTMLElement) => void'
+      onClose: () => void
+  user:
+    package: '@heroui/user'
+    props:
+      name: string
+      description: ReactNode
+      isFocusable:
+        type: boolean
+        default: false
+      avatarProps: AvatarProps
+      classNames: Partial<Record<"base" | "wrapper" | "name" | "description", string>>
+    events: {}

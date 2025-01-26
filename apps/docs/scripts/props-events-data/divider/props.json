@@ -1,8 +1,0 @@
-[
-  {
-    "attribute": "orientation",
-    "type": "`horizontal` | `vertical`",
-    "description": "The orientation of the divider.",
-    "default": "`horizontal`"
-  }
-]

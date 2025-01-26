@@ -418,6 +418,9 @@ importers:
       hast-util-to-html:
         specifier: 9.0.3
         version: 9.0.3
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       marked:
         specifier: ^5.1.0
         version: 5.1.2
