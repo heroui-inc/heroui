@@ -13,6 +13,10 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./framer-motion": "./dist/framer-motion/index.js"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -35,7 +39,8 @@
   },
   "dependencies": {
     "@internationalized/date": "3.6.0",
-    "@react-aria/i18n": "3.12.5"
+    "@react-aria/i18n": "3.12.5",
+    "framer-motion": "11.9.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0"

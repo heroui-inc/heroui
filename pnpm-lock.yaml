@@ -403,9 +403,6 @@ importers:
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
-      framer-motion:
-        specifier: 11.11.13
-        version: 11.11.13(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       geist:
         specifier: 1.3.1
         version: 1.3.1(next@14.3.0-canary.43(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
@@ -699,9 +696,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -839,9 +833,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1029,9 +1020,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1117,9 +1105,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1181,9 +1166,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1456,9 +1438,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1618,9 +1597,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2095,9 +2071,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2174,9 +2147,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2302,9 +2272,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2434,9 +2401,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2568,9 +2532,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2703,9 +2664,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2975,9 +2933,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3048,9 +3003,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   packages/components/user:
     dependencies:
@@ -3235,9 +3187,6 @@ importers:
       '@react-aria/visually-hidden':
         specifier: 3.8.18
         version: 3.8.18(react@18.2.0)
-      framer-motion:
-        specifier: '>=11.5.6 || >=12.0.0-alpha.1'
-        version: 11.11.13(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3279,9 +3228,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3901,13 +3847,14 @@ importers:
         version: 18.2.0(react@18.2.0)
 
   packages/utilities/dom-animation:
+    dependencies:
+      '@heroui/shared-utils':
+        specifier: workspace:*
+        version: link:../shared-utils
     devDependencies:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   packages/utilities/framer-utils:
     dependencies:
@@ -3924,9 +3871,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3976,6 +3920,9 @@ importers:
       '@react-aria/i18n':
         specifier: 3.12.5
         version: 3.12.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      framer-motion:
+        specifier: 11.9.0
+        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -10429,20 +10376,6 @@ packages:
   fragment-cache@0.2.1:
     resolution: {integrity: sha512-GMBAbW9antB8iZRHLoGw0b3HANt57diZYFO/HL1JGIC1MjKrdmhxvrJbupnVvpys0zsz7yBApXdQyfepKly2kA==}
     engines: {node: '>=0.10.0'}
-
-  framer-motion@11.11.13:
-    resolution: {integrity: sha512-aoEA83gsqRRsnh4TN7S9YNcKVLrg+GtPNnxNMd9bGn23+pLmuKGQeccPnqffEKzlkgmy2MkMo0jRkK41S2LzWw==}
-    peerDependencies:
-      '@emotion/is-prop-valid': '*'
-      react: 18.2.0
-      react-dom: 18.2.0
-    peerDependenciesMeta:
-      '@emotion/is-prop-valid':
-        optional: true
-      react:
-        optional: true
-      react-dom:
-        optional: true
 
   framer-motion@11.9.0:
     resolution: {integrity: sha512-nCfGxvsQecVLjjYDu35G2F5ls+ArE3FBfhxV0RSiisMaUKqteq5DMBFNRKwMyVj+VqKTNhawt+BV480YCHKFlQ==}
@@ -23543,14 +23476,6 @@ snapshots:
   fragment-cache@0.2.1:
     dependencies:
       map-cache: 0.2.2
-
-  framer-motion@11.11.13(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      tslib: 2.8.1
-    optionalDependencies:
-      '@emotion/is-prop-valid': 1.3.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
 
   framer-motion@11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
