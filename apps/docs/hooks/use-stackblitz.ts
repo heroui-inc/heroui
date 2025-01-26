@@ -11,10 +11,11 @@ export interface UseSandpackProps {
 
 const viteConfig = `import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
 });
 `;
 
@@ -61,7 +62,7 @@ export function useStackblitz(props: UseSandpackProps) {
     "vite": "6.0.6",
     "autoprefixer": "10.4.20",
     "postcss": "8.4.49",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "4.0.0"
   },
   "main": "/index.jsx"
 }`;

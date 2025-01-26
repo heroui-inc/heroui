@@ -43,7 +43,7 @@ const createExtendSlotsComponent = () =>
           base: "shadow-xs",
         },
         sm: {
-          base: "shadow-sm",
+          base: "shadow-xs",
         },
         xl: {
           base: "shadow-xl",
@@ -56,7 +56,7 @@ const createExtendSlotsComponent = () =>
           footer: "rounded-xs",
         },
         sm: {
-          base: "rounded-sm",
+          base: "rounded-xs",
           header: "rounded-t-sm",
           footer: "rounded-b-sm",
         },
@@ -232,23 +232,23 @@ describe("extendVariants function - with slots", () => {
 
   test("should override the slots styles", () => {
     const Card2 = createExtendSlotsComponent();
-    const {getByTestId} = render(<Card2 classNames={{base: "shadow-sm"}}>Card Content</Card2>);
+    const {getByTestId} = render(<Card2 classNames={{base: "shadow-xs"}}>Card Content</Card2>);
 
     const baseEl = getByTestId("base");
 
-    expect(baseEl).toHaveClass("shadow-sm");
+    expect(baseEl).toHaveClass("shadow-xs");
   });
 
   test("should override all slots styles", () => {
     const Card2 = createExtendSlotsComponent();
     const {getByTestId} = render(
-      <Card2 classNames={{base: "shadow-sm", header: "rounded-none"}}>Card Content</Card2>,
+      <Card2 classNames={{base: "shadow-xs", header: "rounded-none"}}>Card Content</Card2>,
     );
 
     const baseEl = getByTestId("base");
     const headerEl = getByTestId("header");
 
-    expect(baseEl).toHaveClass("shadow-sm");
+    expect(baseEl).toHaveClass("shadow-xs");
     expect(headerEl).toHaveClass("rounded-none");
   });
 });

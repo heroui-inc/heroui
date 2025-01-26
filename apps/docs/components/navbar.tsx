@@ -133,7 +133,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
       }
       startContent={
         <SearchLinearIcon
-          className="text-base text-default-400 pointer-events-none flex-shrink-0"
+          className="text-base text-default-400 pointer-events-none shrink-0"
           size={16}
           strokeWidth={2}
         />
@@ -254,7 +254,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         <NavbarItem className="flex h-full items-center">
           <button
             className={clsx(
-              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-none",
+              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-hidden",
               // focus ring
               ...dataFocusVisibleClasses,
             )}

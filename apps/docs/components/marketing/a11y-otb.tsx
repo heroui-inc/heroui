@@ -70,7 +70,7 @@ const a11yItems = [
   },
 ];
 
-const iconClasses = "text-2xl text-default-500 pointer-events-none flex-shrink-0";
+const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
 export const A11yOtb = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

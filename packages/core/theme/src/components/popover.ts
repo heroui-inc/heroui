@@ -32,7 +32,7 @@ const popover = tv({
       "before:rotate-45",
       "before:w-2.5",
       "before:h-2.5",
-      "before:rounded-sm",
+      "before:rounded-xs",
       // visibility
       "data-[arrow=true]:before:block",
       // top
@@ -81,7 +81,7 @@ const popover = tv({
       "justify-center",
       "box-border",
       "subpixel-antialiased",
-      "outline-none",
+      "outline-hidden",
       "box-border",
     ],
     trigger: ["z-10"],
@@ -151,7 +151,7 @@ const popover = tv({
         backdrop: "bg-overlay/50 backdrop-opacity-disabled",
       },
       blur: {
-        backdrop: "backdrop-blur-sm backdrop-saturate-150 bg-overlay/30",
+        backdrop: "backdrop-blur-xs backdrop-saturate-150 bg-overlay/30",
       },
     },
     triggerScaleOnOpen: {

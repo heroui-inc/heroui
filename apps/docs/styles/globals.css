@@ -2,9 +2,9 @@
 @import 'nprogress.css';
 @import 'ads.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../tailwind.config.js';
 
 html {
   font-size: 16px;

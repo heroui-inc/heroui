@@ -4,6 +4,7 @@
  */
 
 import Color from "color";
+// @ts-ignore
 import plugin from "tailwindcss/plugin.js";
 import deepMerge from "deepmerge";
 import {omit, kebabCase, mapKeys} from "@heroui/shared-utils";

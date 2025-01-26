@@ -95,7 +95,7 @@ export const ProBanner = () => {
           </span>
         </a>
         <a
-          className="flex group min-w-[120px] items-center font-semibold text-foreground shadow-sm gap-1.5 relative overflow-hidden rounded-full p-[1px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="flex group min-w-[120px] items-center font-semibold text-foreground shadow-xs gap-1.5 relative overflow-hidden rounded-full p-[1px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           href="https://heroui.pro?utm_source=heroui.com&utm_medium=top-banner"
           rel="noopener noreferrer"
           onClick={handleClick}
@@ -105,7 +105,7 @@ export const ProBanner = () => {
             HeroUI Pro
             <Icon
               aria-hidden="true"
-              className="outline-none transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
+              className="outline-hidden transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
               icon={arrowRightIcon}
               width={16}
             />

@@ -30,7 +30,7 @@ export const HeroUIProCallout = () => {
           Discover 210+ stunning components by HeroUI
         </p>
       </div>
-      <div className="mt-3 w-fit flex group items-center text-foreground hover:shadow-sm relative overflow-hidden rounded-full p-[2px]">
+      <div className="mt-3 w-fit flex group items-center text-foreground hover:shadow-xs relative overflow-hidden rounded-full p-[2px]">
         <span className="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#338EF7_0%,#F54180_50%,#338EF7_100%)]" />
         <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-background transition-background p-2.5 text-xs font-medium hover:font-semibold text-foreground backdrop-blur-3xl">
           Explore Components

@@ -236,7 +236,7 @@ import {
   DeleteDocumentBulkIcon,
 } from "@heroui/shared-icons";
 
-const iconClasses = "text-2xl text-default-500 pointer-events-none flex-shrink-0";
+const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
 export const Example = () => {
   return (
