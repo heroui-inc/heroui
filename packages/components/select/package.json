@@ -51,6 +51,7 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/use-aria-multiselect": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
+    "@heroui/motion": "workspace:*",
     "@heroui/form": "workspace:*",
     "@react-aria/focus": "3.19.0",
     "@react-aria/form": "3.0.11",

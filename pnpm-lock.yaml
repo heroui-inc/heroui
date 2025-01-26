@@ -2486,6 +2486,9 @@ importers:
       '@heroui/listbox':
         specifier: workspace:*
         version: link:../listbox
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
