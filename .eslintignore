@@ -24,3 +24,4 @@ build
 apps/docs/preinstall.js
 apps/docs/next-redirect.js
 apps/docs/scripts/openui-spec/gen-openui-spec.ts
+apps/docs/scripts/openui-spec/_get-component-from-yaml.ts

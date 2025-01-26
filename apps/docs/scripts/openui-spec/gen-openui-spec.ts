@@ -1,16 +1,12 @@
-#!/usr/bin/env node
-
+/* eslint-disable no-console */
 import fs from "fs";
 import path from "path";
-
 import yaml from "js-yaml";
 
 // -----------------------------------------------------------------------------
 // 1. CONFIGURATION
 // -----------------------------------------------------------------------------
-// Path to your .mdx docs folder
 const MDX_FOLDER_PATH = "../../content/docs/components";
-// Output file for the generated YAML
 const OUTPUT_YAML_PATH = "./openui-spec.yaml";
 
 // ANSI colors for console feedback
@@ -21,7 +17,6 @@ const COLORS = {
 };
 
 // Regex to capture all <APITable data={...}> blocks, allowing for newlines/spaces.
-// The `(\[[\s\S]*?\])` group extracts the array of objects from data={ ... }.
 const APITABLE_REGEX =
   /<APITable[\s\S]*?data=\{\s*(\[[\s\S]*?\])\s*\}[\s\S]*?(?:\/>|>\s*<\/APITable>)/g;
 
@@ -38,96 +33,84 @@ const openUISpec = {
  * Attempts to parse a union type such as `'sm' | 'md' | 'lg'`.
  * Returns an array of string literals if it matches, otherwise null.
  */
-function tryParseStringUnion(typeStr) {
-  // Strip surrounding whitespace
+function tryParseStringUnion(typeStr: string): string[] | null {
   const trimmed = typeStr.trim();
+  // Example patterns: `'sm' | 'md' | 'lg'` or `sm | md | lg`
+  // We'll remove any leading/trailing quotes for each part
+  const parts = trimmed.split("|").map((p) => p.trim().replace(/^'|'$/g, ""));
 
-  // A simple check to see if it's something like:
-  // `'sm' | 'md' | 'lg'` or "sm | md | lg"
-  // We'll accept either quoted or unquoted, as sometimes you see `'primary' | 'secondary'`.
-  const parts = trimmed.split("|").map((p) => p.trim().replace(/^'|'$/g, "")); // remove leading/trailing single quotes
-
-  // If there's more than one part and none are obviously typed (e.g., "ReactNode", "boolean"), treat them as an enum
+  // If there's more than one part, and all are simple words (no punctuation besides -), treat as enum
   if (parts.length > 1 && parts.every((p) => /^[\w-]+$/.test(p))) {
-    // We have a clean union of simple literal values
     return parts;
   }
-
   return null;
 }
 
 interface TypeObject {
   type: string;
-  enum?: Array<string>;
+  enum?: string[];
   default?: string | number | boolean;
 }
 
 /**
- * Converts a "type" + "default" into an appropriate YAML structure:
- * - If it's a union of string constants, produce `{ enum: [...], type: string, default?: ... }`.
- * - If it's obviously "boolean" or `'true' | 'false'`, produce `{ type: boolean, default?: ... }`.
- * - If it's obviously "number", produce `{ type: number, default?: ... }`.
- * - Otherwise, return a single string if there's no default, or an object if there is a default.
+ * Converts a "type" + "default" into an appropriate object or string:
+ * - If it's a union of string constants, produce { type: "string", enum: [...], default?: ... }.
+ * - If it's `'true' | 'false'`, produce { type: "boolean", default?: ... }.
+ * - If it's "number", produce { type: "number", default?: ... }.
+ * - If there's no recognized union or single basic type, return either a plain string or an object with "type" and "default".
  */
-function convertPropOrEventToYamlType(typeStr: string, defaultValue: string): string | TypeObject {
+function convertPropOrEventToYamlType(
+  typeStr: string,
+  defaultValue: string
+): string | TypeObject {
   const trimmedType = typeStr.trim();
-
-  // Attempt union parse
   const union = tryParseStringUnion(trimmedType);
 
   if (union) {
-    // If it's specifically ['true','false'], treat that as a boolean
+    // Handle 'true' | 'false' -> boolean
     if (union.length === 2 && union.includes("true") && union.includes("false")) {
       const obj: TypeObject = { type: "boolean" };
-
       if (defaultValue && defaultValue !== "-" && /^true|false$/.test(defaultValue)) {
         obj.default = defaultValue === "true";
       }
-
       return obj;
     }
 
-    // Otherwise it's a string union
+    // Otherwise treat it as a string union
     const obj: TypeObject = {
       type: "string",
       enum: union
     };
-
     if (defaultValue && defaultValue !== "-" && union.includes(defaultValue)) {
       obj.default = defaultValue;
     }
-
     return obj;
   }
 
-  // If it's a direct "boolean"
+  // Direct "boolean"
   if (trimmedType === "boolean") {
     const obj: TypeObject = { type: "boolean" };
-
     if (defaultValue && defaultValue !== "-" && /^true|false$/.test(defaultValue)) {
       obj.default = defaultValue === "true";
     }
-
     return obj;
   }
 
-  // If it's a direct "number"
+  // Direct "number"
   if (trimmedType === "number") {
     const obj: TypeObject = { type: "number" };
-
     if (defaultValue && defaultValue !== "-" && !isNaN(Number(defaultValue))) {
       obj.default = Number(defaultValue);
     }
-
     return obj;
   }
 
-  // If it's a single type (like "ReactNode") and there's no meaningful default, just return a string
+  // If no default, just return a simple string
   if (!defaultValue || defaultValue === "-") {
     return trimmedType;
   }
 
-  // If there's a default, return an object
+  // Otherwise, return an object with type + default
   return {
     type: trimmedType,
     default: defaultValue
@@ -138,9 +121,7 @@ function convertPropOrEventToYamlType(typeStr: string, defaultValue: string): st
 // 3. MAIN LOGIC
 // -----------------------------------------------------------------------------
 function main() {
-  // Read all .mdx files
-  let mdxFiles: Array<string> = [];
-
+  let mdxFiles: string[] = [];
   try {
     mdxFiles = fs
       .readdirSync(MDX_FOLDER_PATH)
@@ -159,11 +140,9 @@ function main() {
       COLORS.red + "No .mdx files found in:" + COLORS.reset,
       MDX_FOLDER_PATH
     );
-
     return;
   }
 
-  // Iterate over each file
   mdxFiles.forEach((filename) => {
     const componentName = path.basename(filename, ".mdx");
 
@@ -175,104 +154,120 @@ function main() {
     const fileContent = fs.readFileSync(filePath, "utf8");
 
     const matches = [...fileContent.matchAll(APITABLE_REGEX)];
-
     if (matches.length === 0) {
       console.log(
         `${COLORS.red}No <APITable> blocks found in ${filename}. Skipping...${COLORS.reset}`
       );
-
       return;
     }
 
-    // We expect two APITable blocks: first for Props, second for Events
-    // but let's handle a short count gracefully.
+    // We expect two APITable blocks: first (props), second (events)
     if (matches.length < 2) {
       console.log(
         `${COLORS.red}Found only ${matches.length} <APITable> in ${filename}. Expected 2.${COLORS.reset}`
       );
     }
 
-    const [propsMatch, eventsMatch] = matches;
+    const [propsMatch, eventsMatch] = matches || [];
 
-    // Helper function to parse the JS array objects
-    function parseDataArray(str) {
+    function parseDataArray(str: string) {
       try {
-        // Wrap it in parentheses so eval sees it as an expression
+        // Use eval on the array contents
         return eval("(" + str + ")");
       } catch (err) {
         console.error(
           `${COLORS.red}Failed to parse data array:\n${str}\n${err}${COLORS.reset}`
         );
-
         return null;
       }
     }
 
-    // Extract the group for each
     const propsDataString = propsMatch?.[1];
     const eventsDataString = eventsMatch?.[1];
 
     const propsData = propsDataString ? parseDataArray(propsDataString) : null;
     const eventsData = eventsDataString ? parseDataArray(eventsDataString) : null;
 
-    // Build the structure for this component
     openUISpec.components[componentName] = {
       package: `@heroui/${componentName}`,
       props: {},
       events: {}
     };
 
-    // Handle props
+    // Process Props
     if (propsData && Array.isArray(propsData)) {
       propsData.forEach((propDef) => {
         const {
           attribute: propName,
           type: typeStr = "",
-          default: defaultVal = "-"
+          default: defaultVal = "-",
+          description: desc = ""
         } = propDef;
 
-        // Convert the type + default to a suitable YAML-friendly structure
-        const yamlProp = convertPropOrEventToYamlType(typeStr, defaultVal);
+        // Convert the type + default
+        const converted = convertPropOrEventToYamlType(typeStr, defaultVal);
 
-        openUISpec.components[componentName].props[propName] = yamlProp;
+        // If the converter returned a string, we wrap it in an object so we can add a description
+        if (typeof converted === "string") {
+          openUISpec.components[componentName].props[propName] = {
+            type: converted,
+            description: desc
+          };
+        } else {
+          // If it's an object, add the description property
+          openUISpec.components[componentName].props[propName] = {
+            ...converted,
+            description: desc
+          };
+        }
       });
       console.log(
-        `${COLORS.green}- Done processing props data for: ${filename}, component: ${componentName}${COLORS.reset}`
+        `${COLORS.green}- Done processing props for: ${filename}, component: ${componentName}${COLORS.reset}`
       );
     }
 
-    // Handle events
+    // Process Events
     if (eventsData && Array.isArray(eventsData)) {
       eventsData.forEach((eventDef) => {
         const {
           attribute: eventName,
           type: typeStr = "",
-          default: defaultVal = "-"
+          default: defaultVal = "-",
+          description: desc = ""
         } = eventDef;
 
-        // For events, we'll usually store the entire function signature as a single string
-        // But if you prefer to parse it, you can reuse convertPropOrEventToYamlType.
-        // For now, treat them as just strings:
-        if (defaultVal !== "-" && defaultVal.trim() !== "") {
-          // Some events might have a default? Rare, but we can handle similarly:
-          openUISpec.components[componentName].events[eventName] =
-            convertPropOrEventToYamlType(typeStr, defaultVal);
+        // Typically store the event signature as a string
+        // But we can also handle the default and description similarly
+        // If there's a "default" or you want to parse it as well, you can reuse the same converter logic
+        const baseEventVal =
+          defaultVal !== "-" && defaultVal.trim() !== ""
+            ? convertPropOrEventToYamlType(typeStr, defaultVal)
+            : typeStr.trim();
+
+        if (typeof baseEventVal === "string") {
+          openUISpec.components[componentName].events[eventName] = {
+            type: baseEventVal,
+            description: desc
+          };
         } else {
-          openUISpec.components[componentName].events[eventName] = typeStr.trim();
+          // It's an object from the converter. Add 'description'
+          openUISpec.components[componentName].events[eventName] = {
+            ...baseEventVal,
+            description: desc
+          };
         }
       });
       console.log(
-        `${COLORS.green}- Done processing events data for: ${filename}, component: ${componentName}${COLORS.reset}`
+        `${COLORS.green}- Done processing events for: ${filename}, component: ${componentName}${COLORS.reset}`
       );
     }
   });
 
-  // Now write out a single "openui-spec.yaml" file
+  // Finally write out a single openui-spec.yaml file
   try {
     const yamlString = yaml.dump(openUISpec, {
       lineWidth: 120
     });
-
     fs.writeFileSync(OUTPUT_YAML_PATH, yamlString, "utf8");
     console.log(
       COLORS.green +
