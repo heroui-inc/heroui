@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "tailwind-variants": ["../../../node_modules/tailwind-variants"]
+      "tailwind-variants": ["../../../node_modules/tailwind-variants"],
+      "framer-motion": ["../../../node_modules/framer-motion"]
     }
   },
   "include": ["src", "index.ts"]
