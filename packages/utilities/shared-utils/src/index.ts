@@ -9,4 +9,3 @@ export * from "./console";
 export * from "./types";
 export * from "./dates";
 export * from "./regex";
-export * from "./packages";

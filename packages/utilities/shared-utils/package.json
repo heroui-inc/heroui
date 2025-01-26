@@ -33,9 +33,6 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {
-    "@internationalized/date": "3.6.0"
-  },
   "devDependencies": {
     "clean-package": "2.2.0"
   },
