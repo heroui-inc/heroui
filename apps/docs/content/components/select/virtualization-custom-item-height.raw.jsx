@@ -45,8 +45,8 @@ export default function App() {
         maxListboxHeight={400}
         placeholder="Select..."
       >
-        {items.map((item, index) => (
-          <SelectItem key={index}>{item.label}</SelectItem>
+        {items.map((item) => (
+          <SelectItem key={item.value}>{item.label}</SelectItem>
         ))}
       </Select>
     </div>
