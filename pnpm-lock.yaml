@@ -1337,6 +1337,9 @@ importers:
       '@heroui/form':
         specifier: workspace:*
         version: link:../form
+      '@heroui/internationalized-date':
+        specifier: workspace:*
+        version: link:../../external/internationalized-date
       '@heroui/react-aria-i18n':
         specifier: workspace:*
         version: link:../../external/react-aria-i18n
