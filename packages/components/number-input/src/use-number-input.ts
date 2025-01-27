@@ -109,7 +109,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     endContent,
     onClear,
     onChange,
-    validationState,
     validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "aria",
     innerWrapperRef: innerWrapperRefProp,
     onValueChange,
@@ -147,7 +146,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     decrementButtonProps,
     descriptionProps,
     errorMessageProps,
-    isInvalid: isAriaInvalid,
+    isInvalid,
     validationErrors,
     validationDetails,
   } = useAriaNumberInput(originalProps, state, domRef);
@@ -197,8 +196,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     isDisabled: !!originalProps?.isDisabled || !!originalProps?.isReadOnly,
     onPress: handleClear,
   });
-
-  const isInvalid = validationState === "invalid" || isAriaInvalid;
 
   const labelPlacement = useMemo<NumberInputVariantProps["labelPlacement"]>(() => {
     if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
