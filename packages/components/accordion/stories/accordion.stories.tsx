@@ -3,7 +3,6 @@ import type {Selection} from "@react-types/shared";
 import React from "react";
 import {Meta} from "@storybook/react";
 import {button} from "@heroui/theme";
-
 import {
   AnchorIcon,
   MoonIcon,

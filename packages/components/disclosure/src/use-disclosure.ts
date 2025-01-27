@@ -136,9 +136,13 @@ export function useDisclosure(originalProps: UseDisclosureProps) {
   const buttonPropsOnPointerDown = buttonProps.onPointerDown;
 
   buttonProps.onPointerDown = (e) => {
+    if (disableAnimation) {
+      return buttonPropsOnPointerDown?.(e);
+    }
     if (state.isExpanded) {
       setExiting(true);
     } else {
+      setExiting(false);
       buttonPropsOnPointerDown?.(e);
     }
   };

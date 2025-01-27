@@ -51,7 +51,7 @@ const disclosure = tv({
       false: {
         indicator: "transition-transform",
         trigger: "transition-opacity",
-        content: "data-[exiting=true]:transition-all",
+        content: "transition-disclosure",
       },
     },
     disableIndicatorAnimation: {

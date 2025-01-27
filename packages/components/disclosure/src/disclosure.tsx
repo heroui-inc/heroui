@@ -61,12 +61,7 @@ const Disclosure = forwardRef<"div", DisclosureProps>((props, ref) => {
           )}
         </button>
       </HeadingComponent>
-      <div
-        {...getContentProps()}
-        style={{transition: "height 150ms ease-out, opacity 300ms ease-out 100ms"}}
-      >
-        {keepContentMounted || isExpanded ? children : null}
-      </div>
+      <div {...getContentProps()}>{keepContentMounted || isExpanded ? children : null}</div>
     </Component>
   );
 });
