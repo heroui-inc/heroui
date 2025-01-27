@@ -44,7 +44,6 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
-    "@heroui/dom-animation": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
     "@heroui/spinner": "workspace:*",
     "@react-aria/toast": "3.0.0-beta.15",

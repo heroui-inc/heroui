@@ -2999,9 +2999,6 @@ importers:
 
   packages/components/toast:
     dependencies:
-      '@heroui/dom-animation':
-        specifier: workspace:*
-        version: link:../../utilities/dom-animation
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
