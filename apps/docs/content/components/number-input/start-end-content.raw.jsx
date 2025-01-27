@@ -20,13 +20,21 @@ export default function App() {
                 Currency
               </label>
               <select
+                aria-label="Select currency"
                 className="outline-none border-0 bg-transparent text-default-400 text-small"
+                defaultValue="USD"
                 id="currency"
                 name="currency"
               >
-                <option>USD</option>
-                <option>ARS</option>
-                <option>EUR</option>
+                <option aria-label="US Dollar" value="USD">
+                  USD
+                </option>
+                <option aria-label="Argentine Peso" value="ARS">
+                  ARS
+                </option>
+                <option aria-label="Euro" value="EUR">
+                  EUR
+                </option>
               </select>
             </div>
           }

@@ -8,8 +8,10 @@ export default function App() {
       {radius.map((r) => (
         <NumberInput
           key={r}
+          aria-label={`${r} radius`}
           className="max-w-[220px]"
           defaultValue={1024}
+          label="Amount"
           placeholder="Enter the amount"
           radius={r}
         />
