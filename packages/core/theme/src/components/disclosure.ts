@@ -17,7 +17,7 @@ const disclosure = tv({
     title: "text-foreground text-medium",
     subtitle: "text-small text-foreground-500 font-normal",
     content: [
-      "overflow-hidden ease-in opacity-0 data-[expanded=true]:opacity-100 data-[expanded=true]:duration-300 data-[expanded=true]:my-2",
+      "overflow-hidden ease-out opacity-0 data-[expanded=true]:opacity-100 my-0.5 data-[exiting=true]:opacity-0 data-[exiting=true]:opacity-0 data-[exiting=true]:h-0",
     ],
   },
   variants: {
@@ -51,7 +51,7 @@ const disclosure = tv({
       false: {
         indicator: "transition-transform",
         trigger: "transition-opacity",
-        content: "transition-all",
+        content: "data-[exiting=true]:transition-all",
       },
     },
     disableIndicatorAnimation: {
@@ -60,7 +60,7 @@ const disclosure = tv({
       },
       false: {
         indicator:
-          "rotate-0 data-[expanded=true]:-rotate-90 rtl:-rotate-180 rtl:data-[expanded=true]:-rotate-90",
+          "rotate-0 data-[rotated=true]:-rotate-90 rtl:-rotate-180 rtl:data-[rotated=true]:-rotate-90",
       },
     },
   },

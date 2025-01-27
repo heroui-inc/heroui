@@ -5,7 +5,7 @@ import {As, HTMLHeroUIProps, mapPropsVariants, PropGetter} from "@heroui/system"
 import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {useDisclosure as useAriaDisclosure} from "@react-aria/disclosure";
 import {DisclosureProps, useDisclosureState} from "@react-stately/disclosure";
-import {ReactNode, useCallback, useMemo, useRef} from "react";
+import {ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {chain, mergeProps} from "@react-aria/utils";
 import {useButton} from "@react-aria/button";
@@ -133,6 +133,44 @@ export function useDisclosure(originalProps: UseDisclosureProps) {
   );
 
   const {buttonProps} = useButton(triggerProps, triggerRef);
+  const buttonPropsOnPointerDown = buttonProps.onPointerDown;
+
+  buttonProps.onPointerDown = (e) => {
+    if (state.isExpanded) {
+      setExiting(true);
+    } else {
+      buttonPropsOnPointerDown?.(e);
+    }
+  };
+
+  const [exiting, setExiting] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!contentRef.current || !mounted) {
+      return;
+    }
+    if (!isExpanded || exiting) {
+      contentRef.current.style.height = `${0}px`;
+
+      return;
+    }
+
+    contentRef.current.style.height = "auto";
+    const newHeight = contentRef.current.scrollHeight;
+
+    contentRef.current.style.height = "0px";
+
+    requestAnimationFrame(() => {
+      if (contentRef.current) {
+        contentRef.current.style.height = `${newHeight}px`;
+      }
+    });
+  }, [mounted, contentRef, isExpanded, exiting]);
 
   const {pressProps, isPressed} = usePress({
     ref: domRef,
@@ -172,6 +210,7 @@ export function useDisclosure(originalProps: UseDisclosureProps) {
       "data-focus": dataAttr(isFocused),
       "data-disabled": dataAttr(isDisabled),
       "data-focus-visible": dataAttr(isFocusVisible),
+      "data-exiting": dataAttr(exiting),
       onFocus: chain(originalProps.onFocus, focusProps.onFocus),
       onBlur: chain(originalProps.onBlur, focusProps.onBlur),
       ...mergeProps(buttonProps, props, focusProps, hoverProps, pressProps, {
@@ -180,7 +219,17 @@ export function useDisclosure(originalProps: UseDisclosureProps) {
       disabled: isDisabled,
       hidden,
     }),
-    [triggerProps, focusProps, pressProps, isExpanded, isDisabled, hidden],
+    [
+      triggerProps,
+      focusProps,
+      pressProps,
+      isExpanded,
+      isDisabled,
+      hidden,
+      state,
+      exiting,
+      setExiting,
+    ],
   );
 
   const getContentProps = useCallback<PropGetter>(
@@ -188,9 +237,16 @@ export function useDisclosure(originalProps: UseDisclosureProps) {
       ref: contentRef,
       className: slots.content({class: clsx(classNames?.content, props?.className)}),
       "data-expanded": dataAttr(isExpanded),
+      "data-exiting": dataAttr(exiting),
+      onTransitionEnd: () => {
+        if (exiting) {
+          setExiting(false);
+          state.collapse();
+        }
+      },
       ...mergeProps(contentProps, props),
     }),
-    [contentProps, contentRef, isExpanded],
+    [contentProps, contentRef, isExpanded, exiting, setExiting, state],
   );
 
   const getTitleProps = useCallback<PropGetter>(
@@ -223,11 +279,12 @@ export function useDisclosure(originalProps: UseDisclosureProps) {
         "aria-hidden": dataAttr(true),
         "data-expanded": dataAttr(isExpanded),
         "data-disabled": dataAttr(isDisabled),
+        "data-rotated": dataAttr(isExpanded && !exiting),
         className: slots.indicator({class: classNames?.indicator}),
         ...props,
       };
     },
-    [slots, classNames?.indicator, isExpanded, isDisabled, classNames?.indicator],
+    [slots, classNames?.indicator, isExpanded, isDisabled, classNames?.indicator, exiting],
   );
 
   return {
