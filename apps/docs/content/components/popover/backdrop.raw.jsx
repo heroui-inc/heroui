@@ -1,7 +1,7 @@
 import {Popover, PopoverTrigger, PopoverContent, Button, Input} from "@heroui/react";
 
 export default function App() {
-  const backdrops = ["opaque", "blur", "transparent"];
+  const backdrops = ["opaque", "blur-sm", "transparent"];
 
   const content = (
     <PopoverContent className="w-[240px]">

@@ -209,7 +209,7 @@ export default function App() {
       className="p-2 flex flex-col gap-1 w-full max-w-[300px]"
       itemClasses={itemClasses}
       showDivider={false}
-      variant="shadow"
+      variant="shadow-sm"
     >
       <AccordionItem
         key="1"

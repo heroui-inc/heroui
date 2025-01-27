@@ -21,7 +21,7 @@ export default function App() {
       <Button color="primary" variant="ghost">
         Ghost
       </Button>
-      <Button color="primary" variant="shadow">
+      <Button color="primary" variant="shadow-sm">
         Shadow
       </Button>
     </div>

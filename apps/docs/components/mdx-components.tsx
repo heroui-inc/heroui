@@ -252,7 +252,7 @@ export const APITable: React.FC<APITableProps> = ({data}) => {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableRow key={index} className="[&>td]:px-2 [&>td]:py-1.5 [&>td]:first:pt-4">
+            <TableRow key={index} className="[&>td]:px-2 [&>td]:py-1.5 first:[&>td]:pt-4">
               <TableCell className="flex items-center gap-1 font-mono text-small whitespace-nowrap">
                 <InlineCodeChip className={item.deprecated ? "line-through" : ""}>
                   {item.attribute}

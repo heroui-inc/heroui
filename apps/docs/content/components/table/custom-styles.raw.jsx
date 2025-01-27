@@ -606,13 +606,13 @@ export default function App() {
       td: [
         // changing the rows border radius
         // first
-        "group-data-[first=true]/tr:first:before:rounded-none",
-        "group-data-[first=true]/tr:last:before:rounded-none",
+        "first:group-data-[first=true]/tr:before:rounded-none",
+        "last:group-data-[first=true]/tr:before:rounded-none",
         // middle
         "group-data-[middle=true]/tr:before:rounded-none",
         // last
-        "group-data-[last=true]/tr:first:before:rounded-none",
-        "group-data-[last=true]/tr:last:before:rounded-none",
+        "first:group-data-[last=true]/tr:before:rounded-none",
+        "last:group-data-[last=true]/tr:before:rounded-none",
       ],
     }),
     [],

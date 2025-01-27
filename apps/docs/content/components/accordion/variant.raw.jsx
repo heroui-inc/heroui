@@ -36,7 +36,7 @@ export default function App() {
       </div>
       <div className="col-span-12 lg:col-span-6 flex flex-col gap-4">
         <h3>Shadow</h3>
-        <Accordion variant="shadow">
+        <Accordion variant="shadow-sm">
           <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
             {defaultContent}
           </AccordionItem>

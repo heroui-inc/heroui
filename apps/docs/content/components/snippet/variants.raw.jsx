@@ -10,7 +10,7 @@ export default function App() {
       <Snippet color="primary" variant="solid">
         npm install @heroui/react
       </Snippet>
-      <Snippet color="secondary" variant="shadow">
+      <Snippet color="secondary" variant="shadow-sm">
         npm install @heroui/react
       </Snippet>
     </div>

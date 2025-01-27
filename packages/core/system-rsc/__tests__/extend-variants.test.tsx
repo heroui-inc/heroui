@@ -46,7 +46,7 @@ const createExtendSlotsComponent = () =>
           base: "shadow-xs",
         },
         xl: {
-          base: "shadow-xl",
+          base: "shadow-xs",
         },
       },
       radius: {
@@ -208,7 +208,7 @@ describe("extendVariants function - with slots", () => {
 
     const baseEl = getByTestId("base");
 
-    expect(baseEl).toHaveClass("shadow-xl");
+    expect(baseEl).toHaveClass("shadow-xs");
   });
 
   test("should have all slots styles", () => {
@@ -220,7 +220,7 @@ describe("extendVariants function - with slots", () => {
     const footerEl = getByTestId("footer");
 
     // shadow
-    expect(baseEl).toHaveClass("shadow-xl");
+    expect(baseEl).toHaveClass("shadow-xs");
     expect(headerEl).toHaveClass("rounded-t-xl");
     expect(footerEl).toHaveClass("rounded-b-xl");
 

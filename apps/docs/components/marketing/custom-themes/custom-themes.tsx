@@ -179,7 +179,7 @@ const CustomThemesExample = ({
               <Button
                 className={slots.buyButton()}
                 color="primary"
-                variant={selectedTheme === "heroui" ? "shadow" : "solid"}
+                variant={selectedTheme === "heroui" ? "shadow-sm" : "solid"}
               >
                 Buy now
               </Button>
@@ -261,7 +261,7 @@ export const CustomThemes = () => {
           />
         </div>
       </div>
-      <div className="h-full dark:md:block absolute hidden -bottom-[10%] -left-[15%] -z-[1]">
+      <div className="h-full dark:md:block absolute hidden -bottom-[10%] -left-[15%] -z-1">
         <Image
           removeWrapper
           alt="custom themes background"

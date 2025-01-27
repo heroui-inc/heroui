@@ -59,16 +59,16 @@ const styles = {
   ],
   innerWrapper: "bg-transparent",
   inputWrapper: [
-    "shadow-xl",
+    "shadow-2xs",
     "bg-default-200/50",
     "dark:bg-default/60",
     "backdrop-blur-xl",
     "backdrop-saturate-200",
     "hover:bg-default-200/70",
-    "focus-within:!bg-default-200/50",
+    "focus-within:bg-default-200/50!",
     "dark:hover:bg-default/70",
-    "dark:focus-within:!bg-default/60",
-    "!cursor-text",
+    "dark:focus-within:bg-default/60!",
+    "cursor-text!",
   ],
 };
 
@@ -133,7 +133,7 @@ const MyInput = forwardRef((props, ref) => {
   }, [startContent, end, getInputProps, getInnerWrapperProps]);
 
   return (
-    <div className="w-[340px] h-[300px] px-8 rounded-2xl flex justify-center items-center bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
+    <div className="w-[340px] h-[300px] px-8 rounded-2xl flex justify-center items-center bg-linear-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
       <Component {...getBaseProps()}>
         {shouldLabelBeOutside ? labelContent : null}
         <div

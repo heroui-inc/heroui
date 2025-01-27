@@ -190,7 +190,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     <HeroUINavbar
       ref={ref}
       className={clsx({
-        "z-[100001]": isMenuOpen,
+        "z-100001": isMenuOpen,
       })}
       classNames={{
         base: "bg-white/[.90] dark:bg-black/[.65]",
@@ -247,7 +247,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         <NavbarItem className="flex h-full items-center">
           <ThemeSwitch
             classNames={{
-              wrapper: "!text-default-500 dark:!text-default-500",
+              wrapper: "text-default-500! dark:text-default-500!",
             }}
           />
         </NavbarItem>
@@ -353,7 +353,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
           <ThemeSwitch
             className="border-1 border-default-200 rounded-full h-full min-w-10 min-h-10 flex items-center justify-center"
             classNames={{
-              wrapper: "!text-default-400 dark:!text-default-500",
+              wrapper: "text-default-400! dark:text-default-500!",
             }}
           />
         </NavbarItem>

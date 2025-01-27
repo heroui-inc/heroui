@@ -1,51 +1,68 @@
-@import "tailwindcss";
-
 @theme {
   --color-code-foreground: rgb(var(--code-foreground) / <alpha-value>),
-  --color-code-syntax1: rgb(var(--code-syntax1) / <alpha-value>)  ,
-  --color-code-syntax2: rgb(var(--code-syntax2) / <alpha-value>),
-  --color-code-syntax3: rgb(var(--code-syntax3) / <alpha-value>),
-  --color-code-syntax4: rgb(var(-font-size-code-syntax4) / <alpha-value>),
-  --color-code-syntax5: rgb(var(--code-syntax5) / <alpha-value>),
-  --color-code-syntax6: rgb(var(--code-syntax6) / <alpha-value>),
-  --color-code-removed: rgb(var(--code-removed) / <alpha-value>),
-  --color-code-string: rgb(var(--code-string) / <alpha-value>),
-  --color-code-class: rgb(var(--code-class) / <alpha-value>),
-  --color-code-punctuation: rgb(var(--code-punctuation) / <alpha-value>),
-  --color-code-number: rgb(var(--code-number) / <alpha-value>),
-  --color-code-added: rgb(var(--code-added) / <alpha-value>),
-  --color-code-line-number: rgb(var(--code-line-number) / <alpha-value>),
-  --color-code-faded-line: rgb(var(--code-faded-line) / <alpha-value>),
-  --color-code-comment: rgb(var(--code-comment) / <alpha-value>),
-  --color-code-keyword: rgb(var(--code-keyword) / <alpha-value>),
-  --color-code-function: rgb(var(--code-function) / <alpha-value>),
-  --color-code-tag: rgb(var(--code-tag) / <alpha-value>),
-  --color-code-attr-name: rgb(var(--code-attr-name) / <alpha-value>),
-  --color-code-language-javascript: rgb(var(--code-language-javascript) / <alpha-value>),
-  --color-code-highlighted-word1-bg: rgb(var(--code-highlighted-word1-bg) / <alpha-value>),
-  --color-code-highlighted-word1-bg-active: rgb(var(--code-highlighted-word1-bg-active) / <alpha-value>),
-  --color-code-highlighted-word1-text: rgb(var(--code-highlighted-word1-text) / <alpha-value>),
-  --color-code-highlighted-word2-bg: rgb(var(--code-highlighted-word2-bg) / <alpha-value>),
-  --color-code-highlighted-word2-bg-active: rgb(var(--code-highlighted-word2-bg-active) / <alpha-value>),
-  --color-code-highlighted-word2-text: rgb(var(--code-highlighted-word2-text) / <alpha-value>),
-  --color-code-highlighted-word3-bg: rgb(var(--code-highlighted-word3-bg) / <alpha-value>),
-  --color-code-highlighted-word3-bg-active: rgb(var(--code-highlighted-word3-bg-active) / <alpha-value>),
-  --color-code-highlighted-word3-text: rgb(var(--code-highlighted-word3-text) / <alpha-value>)
-
-  --color-white: #ffffff;
+    --color-code-syntax1: rgb(var(--code-syntax1) / <alpha-value>),
+    --color-code-syntax2: rgb(var(--code-syntax2) / <alpha-value>),
+    --color-code-syntax3: rgb(var(--code-syntax3) / <alpha-value>),
+    --color-code-syntax4: rgb(var(-font-size-code-syntax4) / <alpha-value>),
+    --color-code-syntax5: rgb(var(--code-syntax5) / <alpha-value>),
+    --color-code-syntax6: rgb(var(--code-syntax6) / <alpha-value>),
+    --color-code-removed: rgb(var(--code-removed) / <alpha-value>),
+    --color-code-string: rgb(var(--code-string) / <alpha-value>),
+    --color-code-class: rgb(var(--code-class) / <alpha-value>),
+    --color-code-punctuation: rgb(var(--code-punctuation) / <alpha-value>),
+    --color-code-number: rgb(var(--code-number) / <alpha-value>),
+    --color-code-added: rgb(var(--code-added) / <alpha-value>),
+    --color-code-line-number: rgb(var(--code-line-number) / <alpha-value>),
+    --color-code-faded-line: rgb(var(--code-faded-line) / <alpha-value>),
+    --color-code-comment: rgb(var(--code-comment) / <alpha-value>),
+    --color-code-keyword: rgb(var(--code-keyword) / <alpha-value>),
+    --color-code-function: rgb(var(--code-function) / <alpha-value>),
+    --color-code-tag: rgb(var(--code-tag) / <alpha-value>),
+    --color-code-attr-name: rgb(var(--code-attr-name) / <alpha-value>),
+    --color-code-language-javascript: rgb(
+        var(--code-language-javascript) / <alpha-value>
+      ),
+    --color-code-highlighted-word1-bg: rgb(
+        var(--code-highlighted-word1-bg) / <alpha-value>
+      ),
+    --color-code-highlighted-word1-bg-active: rgb(
+        var(--code-highlighted-word1-bg-active) / <alpha-value>
+      ),
+    --color-code-highlighted-word1-text: rgb(
+        var(--code-highlighted-word1-text) / <alpha-value>
+      ),
+    --color-code-highlighted-word2-bg: rgb(
+        var(--code-highlighted-word2-bg) / <alpha-value>
+      ),
+    --color-code-highlighted-word2-bg-active: rgb(
+        var(--code-highlighted-word2-bg-active) / <alpha-value>
+      ),
+    --color-code-highlighted-word2-text: rgb(
+        var(--code-highlighted-word2-text) / <alpha-value>
+      ),
+    --color-code-highlighted-word3-bg: rgb(
+        var(--code-highlighted-word3-bg) / <alpha-value>
+      ),
+    --color-code-highlighted-word3-bg-active: rgb(
+        var(--code-highlighted-word3-bg-active) / <alpha-value>
+      ),
+    --color-code-highlighted-word3-text: rgb(
+        var(--code-highlighted-word3-text) / <alpha-value>
+      )
+      --color-white: #ffffff;
   --color-black: #000000;
-  
+
   --color-blue-50: #e6f1fe;
   --color-blue-100: #cce3fd;
   --color-blue-200: #99c7fb;
   --color-blue-300: #66aaf9;
   --color-blue-400: #338ef7;
-  --color-blue-500: #006FEE;
+  --color-blue-500: #006fee;
   --color-blue-600: #005bc4;
   --color-blue-700: #004493;
   --color-blue-800: #002e62;
   --color-blue-900: #001731;
-  
+
   --color-green-50: #e8faf0;
   --color-green-100: #d1f4e0;
   --color-green-200: #a2e9c1;
@@ -56,7 +73,7 @@
   --color-green-700: #0e793c;
   --color-green-800: #095028;
   --color-green-900: #052814;
-  
+
   --color-pink-50: #ffedfa;
   --color-pink-100: #ffdcf5;
   --color-pink-200: #ffb8eb;
@@ -67,7 +84,7 @@
   --color-pink-700: #992f7b;
   --color-pink-800: #661f52;
   --color-pink-900: #331029;
-  
+
   --color-purple-50: #f2eafa;
   --color-purple-100: #e4d4f4;
   --color-purple-200: #c9a9e9;
@@ -78,7 +95,7 @@
   --color-purple-700: #481878;
   --color-purple-800: #301050;
   --color-purple-900: #180828;
-  
+
   --color-red-50: #fee7ef;
   --color-red-100: #fdd0df;
   --color-red-200: #faa0bf;
@@ -89,7 +106,7 @@
   --color-red-700: #920b3a;
   --color-red-800: #610726;
   --color-red-900: #310413;
-  
+
   --color-yellow-50: #fefce8;
   --color-yellow-100: #fdedd3;
   --color-yellow-200: #fbdba7;
@@ -100,18 +117,18 @@
   --color-yellow-700: #936316;
   --color-yellow-800: #62420e;
   --color-yellow-900: #312107;
-  
-  --color-cyan-50: #F0FCFF;
-  --color-cyan-100: #E6FAFE;
-  --color-cyan-200: #D7F8FE;
-  --color-cyan-300: #C3F4FD;
-  --color-cyan-400: #A5EEFD;
-  --color-cyan-500: #7EE7FC;
-  --color-cyan-600: #06B7DB;
-  --color-cyan-700: #09AACD;
-  --color-cyan-800: #0E8AAA;
-  --color-cyan-900: #053B48;
-  
+
+  --color-cyan-50: #f0fcff;
+  --color-cyan-100: #e6fafe;
+  --color-cyan-200: #d7f8fe;
+  --color-cyan-300: #c3f4fd;
+  --color-cyan-400: #a5eefd;
+  --color-cyan-500: #7ee7fc;
+  --color-cyan-600: #06b7db;
+  --color-cyan-700: #09aacd;
+  --color-cyan-800: #0e8aaa;
+  --color-cyan-900: #053b48;
+
   --color-zinc-50: #fafafa;
   --color-zinc-100: #f4f4f5;
   --color-zinc-200: #e4e4e7;
@@ -126,26 +143,27 @@
   /* Scale */
   --scale-80: 0.8;
   --scale-85: 0.85;
-  
+
   /* Height & Width */
   --height-divider: var(--heroui-divider-weight);
   --width-divider: var(--heroui-divider-weight);
-  
+
   /* Font Sizes */
   --text-tiny: var(--heroui-font-size-tiny), var(--heroui-line-height-tiny);
   --text-small: var(--heroui-font-size-small), var(--heroui-line-height-small);
-  --text-medium: var(--heroui-font-size-medium), var(--heroui-line-height-medium);
+  --text-medium: var(--heroui-font-size-medium),
+    var(--heroui-line-height-medium);
   --text-large: var(--heroui-font-size-large), var(--heroui-line-height-large);
-  
+
   /* Border Radius */
   --radius-sm: var(--heroui-radius-sm);
   --radius-md: var(--heroui-radius-md);
   --radius-lg: var(--heroui-radius-lg);
-  
+
   /* Opacity */
   --opacity-hover: var(--heroui-hover-opacity);
   --opacity-disabled: var(--heroui-disabled-opacity);
-  
+
   /* Border Width */
   --border-width-sm: var(--heroui-border-width-sm);
   --border-width-md: var(--heroui-border-width-md);
@@ -154,15 +172,15 @@
   --border-width-1-5: 1.5px;
   --border-width-3: 3px;
   --border-width-5: 5px;
-  
+
   /* Box Shadow */
   --shadow-sm: var(--heroui-box-shadow-sm);
   --shadow-md: var(--heroui-box-shadow-md);
   --shadow-lg: var(--heroui-box-shadow-lg);
-  
+
   /* Background Size */
   --bg-stripe-size: 1.25rem 1.25rem;
-  
+
   /* Background Gradients */
   --bg-stripe-gradient-default: linear-gradient(
     45deg,
@@ -174,7 +192,7 @@
     hsl(var(--heroui-default-400)) 75%,
     hsl(var(--heroui-default-400))
   );
-  
+
   --bg-stripe-gradient-primary: linear-gradient(
     45deg,
     hsl(var(--heroui-primary-200)) 25%,
@@ -185,7 +203,7 @@
     hsl(var(--heroui-primary)) 75%,
     hsl(var(--heroui-primary))
   );
-  
+
   --bg-stripe-gradient-secondary: linear-gradient(
     45deg,
     hsl(var(--heroui-secondary-200)) 25%,
@@ -196,7 +214,7 @@
     hsl(var(--heroui-secondary)) 75%,
     hsl(var(--heroui-secondary))
   );
-  
+
   --bg-stripe-gradient-success: linear-gradient(
     45deg,
     hsl(var(--heroui-success-200)) 25%,
@@ -207,7 +225,7 @@
     hsl(var(--heroui-success)) 75%,
     hsl(var(--heroui-success))
   );
-  
+
   --bg-stripe-gradient-warning: linear-gradient(
     45deg,
     hsl(var(--heroui-warning-200)) 25%,
@@ -218,7 +236,7 @@
     hsl(var(--heroui-warning)) 75%,
     hsl(var(--heroui-warning))
   );
-  
+
   --bg-stripe-gradient-danger: linear-gradient(
     45deg,
     hsl(var(--heroui-danger-200)) 25%,
@@ -229,13 +247,13 @@
     hsl(var(--heroui-danger)) 75%,
     hsl(var(--heroui-danger))
   );
-  
+
   /* Transitions */
   --transition-duration-0: 0ms;
   --transition-duration-250: 250ms;
   --transition-duration-400: 400ms;
   --transition-duration-default: 250ms;
-  
+
   /* Transition Timing */
   --transition-timing-soft-spring: cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }

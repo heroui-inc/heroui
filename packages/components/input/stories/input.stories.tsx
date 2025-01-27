@@ -423,7 +423,7 @@ const CustomWithHooksTemplate = (args: InputProps) => {
       ],
       innerWrapper: "bg-transparent",
       inputWrapper: [
-        "shadow-xl",
+        "shadow-xs",
         "bg-default-200/50",
         "dark:bg-default/60",
         "backdrop-blur-xl",

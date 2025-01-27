@@ -12,7 +12,7 @@ export default function App() {
       <Badge color="warning" content="5" variant="faded">
         <Avatar radius="md" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
       </Badge>
-      <Badge color="warning" content="5" variant="shadow">
+      <Badge color="warning" content="5" variant="shadow-sm">
         <Avatar radius="md" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
       </Badge>
     </div>

@@ -12,7 +12,7 @@ export default function App() {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [backdrop, setBackdrop] = React.useState("opaque");
 
-  const backdrops = ["opaque", "blur", "transparent"];
+  const backdrops = ["opaque", "blur-sm", "transparent"];
 
   const handleOpen = (backdrop) => {
     setBackdrop(backdrop);

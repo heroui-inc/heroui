@@ -11,7 +11,7 @@ import {
 export default function App() {
   const [selectedColor, setSelectedColor] = React.useState("default");
 
-  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow"];
+  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow-sm"];
 
   const DropdownContent = ({variant, color}) => (
     <Dropdown>

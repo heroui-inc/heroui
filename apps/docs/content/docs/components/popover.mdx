@@ -87,7 +87,7 @@ form elements without any problem. the focus returns to the trigger when the pop
 ### Backdrop
 
 The `Popover` component has a `backdrop` prop to show a backdrop behind the popover. The backdrop can be
-either `transparent`, `opaque` or `blur`. The default value is `transparent`.
+either `transparent`, `opaque` or `blur-sm`. The default value is `transparent`.
 
 <CodeDemo title="Backdrop" files={popoverContent.backdrop} />
 
@@ -175,14 +175,14 @@ You can customize the `Popover` component by passing custom Tailwind CSS classes
       default: "lg"
     },
     {
-      attribute: "shadow",
+      attribute: "shadow-sm",
       type: "none | sm | md | lg",
       description: "The popover shadow.",
       default: "lg"
     },
     {
       attribute: "backdrop",
-      type: "transparent | opaque | blur",
+      type: "transparent | opaque | blur-sm",
       description: "The popover backdrop type.",
       default: "transparent"
     },

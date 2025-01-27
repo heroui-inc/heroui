@@ -101,7 +101,7 @@ const MyInput = extendVariants(Input, {
         inputWrapper: [
           "bg-zinc-100",
           "border",
-          "shadow-sm",
+          "shadow-xs",
           "transition-colors",
           "focus-within:bg-zinc-100",
           "data-[hover=true]:border-zinc-600",
@@ -454,7 +454,7 @@ export default function HeroUIPerf() {
           classNames: {
             base: [
               "before:content-[''] before:rounded-t-medium before:fixed before:w-full before:h-14 before:z-10",
-              "before:top-0 before:left-0 before:bg-gradient-to-b before:from-default-50",
+              "before:top-0 before:left-0 before:bg-linear-to-b before:from-default-50",
             ],
           },
         }}

@@ -6,7 +6,36 @@
 @import './theme.css';
 
 @config '../tailwind.config.js';
+
 @plugin '@tailwindcss/typography';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility step {
+  counter-increment: step;
+
+  &:before {
+    @apply absolute w-7 h-7 border-1 border-default-200 bg-default-100 rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
+    @apply ml-[-41px];
+    content: counter(step);
+  }
+}
 
 html {
   font-size: 16px;
@@ -83,19 +112,6 @@ z-index: 0;
     --code-tag: 83, 224, 192;
     --code-attr-name: 145 180 213;
     --code-language-javascript: 145 180 213;
-  }
-}
-
-
-@layer utilities {
-  .step {
-    counter-increment: step;
-  }
-
-  .step:before {
-    @apply absolute w-7 h-7 border-1 border-default-200 bg-default-100 rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
-    @apply ml-[-41px];
-    content: counter(step);
   }
 }
 

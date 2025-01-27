@@ -148,7 +148,7 @@ export const A11yOtb = () => {
               <Button
                 isIconOnly
                 aria-label="Show code"
-                className="absolute top-1 right-1 text-success-50 data-[hover]:bg-foreground/10"
+                className="absolute top-1 right-1 text-success-50 data-hover:bg-foreground/10"
                 radius="full"
                 variant="light"
                 onPress={() => setIsModalOpen(true)}
@@ -167,7 +167,7 @@ export const A11yOtb = () => {
             </Button>
             {ref.current && (
               <Dropdown
-                className="shadow-xl"
+                className="shadow-2xs"
                 closeOnSelect={true}
                 isDismissable={false}
                 isOpen={isDropdownOpen}
@@ -218,7 +218,7 @@ export const A11yOtb = () => {
                       description="Permanently delete the file"
                       shortcut="⌘⇧D"
                       startContent={
-                        <DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />
+                        <DeleteDocumentBulkIcon className={clsx(iconClasses, "text-danger!")} />
                       }
                     >
                       Delete file
