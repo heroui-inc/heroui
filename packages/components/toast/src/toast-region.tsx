@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {useHover} from "@react-aria/interactions";
@@ -61,9 +61,10 @@ export function ToastRegion<T extends ToastProps>({
 
   const [heights, setHeights] = useState<number[]>([]);
   const total = toastQueue.visibleToasts?.length ?? 0;
-  const handleTouchStart = () => {
+
+  const handleTouchStart = useCallback(() => {
     setIsTouched(true);
-  };
+  }, [setIsTouched]);
 
   return (
     <div

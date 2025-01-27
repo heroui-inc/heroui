@@ -103,6 +103,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
           <AnimatePresence>
             <motion.div {...getMotionDivProps()}>
               <motion.div
+                key={"inner-div"}
                 animate={{opacity: 1}}
                 exit={{opacity: 0}}
                 initial={{opacity: 0}}
