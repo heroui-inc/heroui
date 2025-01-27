@@ -20,11 +20,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frontio-ai/heroui.git",
-    "directory": "packages/components/input"
+    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "directory": "packages/components/number-input"
   },
   "bugs": {
-    "url": "https://github.com/frontio-ai/heroui/issues"
+    "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -38,8 +38,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.5",
-    "@heroui/system": ">=2.4.5"
+    "@heroui/theme": ">=2.4.7",
+    "@heroui/system": ">=2.4.8"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",

@@ -2,7 +2,7 @@
 
 NumberInput is a component that allows users to enter number. It can be used to get user inputs in forms, search fields, and more.
 
-Please refer to the [documentation](https://nextui.org/docs/components/number-input) for more information.
+Please refer to the [documentation](https://heroui.com/docs/components/number-input) for more information.
 
 ## Installation
 
@@ -15,10 +15,10 @@ npm i @heroui/number-input
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/nextui-org/nextui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/nextui-org/nextui/blob/master/LICENSE).
+[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
