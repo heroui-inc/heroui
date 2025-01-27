@@ -1,6 +1,7 @@
 ---
+"@heroui/autocomplete": patch
 "@heroui/listbox": patch
 "@heroui/select": patch
 ---
 
-Fix SelectItem dose not accept value props (#2283)
+Fix SelectItem, ListboxItem, and AutocompleteItem not to accept value props (#2283)
