@@ -355,12 +355,7 @@ const CustomWithClassNamesTemplate = (args: AccordionProps) => {
         id="4"
         startContent={<InvalidCardIcon className="text-danger" />}
         subtitle="Please, update now"
-        title={
-          <p className="flex gap-1 items-center">
-            Card expired
-            <span className="text-default-400 text-sm">*4812</span>
-          </p>
-        }
+        title={"Card expired"}
       >
         {defaultContent}
       </AccordionItem>

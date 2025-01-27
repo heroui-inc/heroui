@@ -101,7 +101,7 @@ const CustomInidicatorTemplate = () => (
 );
 
 const ControlledTemplate = () => {
-  const [isExpanded, onExpandedChange] = React.useState<boolean>(false);
+  const [isExpanded, onExpandedChange] = React.useState(false);
 
   return (
     <div className="flex flex-col gap-4">

@@ -1,9 +1,8 @@
-import type {DisclosureSlots, DisclosureVariantProps} from "@heroui/theme";
+import type {DisclosureVariantProps} from "@heroui/theme";
 
 import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import {ReactRef} from "@heroui/react-utils";
 import {DisclosureProps} from "@heroui/disclosure";
-import {SlotsToClasses} from "@heroui/theme";
 import {Key, useCallback} from "react";
 import {callAllHandlers} from "@heroui/shared-utils";
 
@@ -17,7 +16,6 @@ export interface Props extends HTMLHeroUIProps<"div"> {
   ref?: ReactRef<HTMLButtonElement | null>;
   id: string;
   disabledKeys?: Iterable<Key>;
-  classNames?: SlotsToClasses<DisclosureSlots>;
   onFocusChange?: (isFocused: boolean, key?: React.Key) => void;
 }
 

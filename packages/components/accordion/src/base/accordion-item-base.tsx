@@ -3,6 +3,7 @@ import {ItemProps, BaseItem} from "@heroui/aria-utils";
 import {FocusableProps, PressEvents} from "@react-types/shared";
 import {ReactNode, MouseEventHandler} from "react";
 import {HTMLMotionProps} from "framer-motion";
+import {DisclosureSlots, SlotsToClasses} from "@heroui/theme";
 
 export type AccordionItemIndicatorProps = {
   /**
@@ -28,10 +29,6 @@ export interface Props<T extends object = {}>
    * The content of the component.
    */
   children?: ReactNode;
-  /**
-   * The accordion item title.
-   */
-  title?: ReactNode;
   /**
    * The accordion item subtitle.
    */
@@ -66,6 +63,7 @@ export interface Props<T extends object = {}>
    * This will help all users to better find the content they are looking for.
    */
   HeadingComponent?: As;
+  classNames?: SlotsToClasses<DisclosureSlots>;
 }
 
 export type AccordionItemBaseProps<T extends object = {}> = Props<T>;
