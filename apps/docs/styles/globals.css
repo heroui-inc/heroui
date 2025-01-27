@@ -1,10 +1,12 @@
-@import 'prism.css';
-@import 'nprogress.css';
-@import 'ads.css';
+@import './prism.css';
+@import './nprogress.css';
+@import './ads.css';
 
 @import 'tailwindcss';
+@import './theme.css';
 
 @config '../tailwind.config.js';
+@plugin '@tailwindcss/typography';
 
 html {
   font-size: 16px;
