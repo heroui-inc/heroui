@@ -24,7 +24,7 @@ export default {
   },
   ".transition-disclosure": {
     "transition-property": "height,opacity",
-    "transition-duration": "100ms,300ms",
+    "transition-duration": "200ms,300ms",
     "transition-timing-function": "easeout,easeout",
     "transition-delay": "0ms,50ms",
   },
