@@ -195,7 +195,7 @@ function AppTabs() {
 
 - **base**: The main tabs slot, it wraps the items and the panels.
 - **tabList**: The tab list slot, it wraps the tab items.
-- **tab**: The tab slot, it wraps the tab item.
+- **tabWrapper**: The tab wrapper slot, it wraps the tab item.
 - **tabContent**: The tab content slot, it wraps the tab content.
 - **cursor**: The cursor slot, it wraps the cursor. This is only visible when `disableAnimation=false`
 - **panel**: The panel slot, it wraps the tab panel (content).
@@ -343,7 +343,7 @@ You can customize the `Tabs` component by passing custom Tailwind CSS classes to
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<\"base\"｜ \"tabList\"｜ \"tab\"｜ \"tabContent\"｜ \"cursor\" ｜ \"panel\", string>>",
+      type: "Partial<Record<\"base\"｜ \"tabList\"｜ \"tabWrapper\"｜ \"tabContent\"｜ \"cursor\" ｜ \"panel\", string>>",
       description: "Allows to set custom class names for the card slots.",
       default: "-"
     },
