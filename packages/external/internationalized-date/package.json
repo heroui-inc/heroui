@@ -1,7 +1,7 @@
 {
   "name": "@heroui/internationalized-date",
   "version": "2.0.0",
-  "description": "Mirror package of framer-motion",
+  "description": "Mirror package of @internationalized/date",
   "keywords": [
     "hero ui",
     "@internationalize/date"
@@ -20,7 +20,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heroui-inc/heroui.git",
-    "directory": "packages/core/system"
+    "directory": "packages/external/internationalized-date"
   },
   "bugs": {
     "url": "https://github.com/heroui-inc/heroui/issues"
