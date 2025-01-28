@@ -60,6 +60,10 @@ Spinner express an unspecified wait time or display the length of a process.
 
 <CodeDemo title="Label colors" files={spinnerContent.labelColors} />
 
+### Variants
+
+<CodeDemo title="Label colors" files={spinnerContent.variants} />
+
 ## Slots
 
 - **base**: The base slot of the spinner, it wraps the circles and the label.
@@ -93,6 +97,12 @@ Spinner express an unspecified wait time or display the length of a process.
       type: "default | primary | secondary | success | warning | danger",
       description: "The color of the spinner circles.",
       default: "primary"
+    },
+    {
+      attribute: "variant",
+      type: "default | gradient | dots | dots-blink | star",
+      description: "The variant of the spinner",
+      default: "default"
     },
     {
       attribute: "labelColor",

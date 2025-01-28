@@ -190,13 +190,14 @@ const spinner = tv({
         ],
       },
       "dots-blink": {
+        wrapper: "translate-y-2/4",
         dots: [
           "animate-blink",
           "[&:nth-child(2)]:[animation-delay:200ms]",
           "[&:nth-child(3)]:[animation-delay:400ms]",
         ],
       },
-      "spinner-bars": {},
+      star: {},
     },
   },
   defaultVariants: {
@@ -218,48 +219,42 @@ const spinner = tv({
       variant: "dots",
       size: "sm",
       class: {
-        base: "h-5",
-        wrapper: "w-5 h-1",
+        wrapper: "w-5 h-5",
       },
     },
     {
       variant: "dots",
       size: "md",
       class: {
-        base: "h-8",
-        wrapper: "w-8 h-1.5",
+        wrapper: "w-8 h-8",
       },
     },
     {
       variant: "dots",
       size: "lg",
       class: {
-        base: "h-10",
-        wrapper: "w-12 h-2",
+        wrapper: "w-12 h-12",
       },
     },
     {
       variant: "dots-blink",
       size: "sm",
       class: {
-        base: "h-5",
-        wrapper: "w-4 h-1",
+        wrapper: "w-5 h-5",
       },
     },
     {
       variant: "dots-blink",
       size: "md",
       class: {
-        base: "h-8",
-        wrapper: "w-6 h-1.5",
+        wrapper: "w-8 h-8",
       },
     },
     {
       variant: "dots-blink",
       size: "lg",
       class: {
-        base: "h-10",
-        wrapper: "w-9 h-2",
+        wrapper: "w-12 h-12",
       },
     },
   ],

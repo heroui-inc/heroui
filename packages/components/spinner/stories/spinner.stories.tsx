@@ -2,7 +2,7 @@ import React from "react";
 import {Meta} from "@storybook/react";
 import {spinner} from "@heroui/theme";
 
-import {Spinner, SpinnerProps} from "../src";
+import {Spinner} from "../src";
 
 export default {
   title: "Components/Spinner",
@@ -40,81 +40,39 @@ const defaultProps = {
   ...spinner.defaultVariants,
 };
 
-const VariantsTemplate = (args: SpinnerProps) => {
+const VariantsTemplate = () => {
   return (
-    <div className="flex flex-col gap-4 w-fit">
-      <table className="border-collapse">
-        <thead>
-          <tr>
-            <th className="p-2">variant</th>
-            <th className="p-2">sm</th>
-            <th className="p-2">md</th>
-            <th className="p-2">lg</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="p-2 text-center">default</td>
-            <td className="p-2">
-              <Spinner {...args} size="sm" variant="default" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="md" variant="default" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="lg" variant="default" />
-            </td>
-          </tr>
-          <tr>
-            <td className="p-2 text-center">gradient</td>
-            <td className="p-2">
-              <Spinner {...args} size="sm" variant="gradient" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="md" variant="gradient" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="lg" variant="gradient" />
-            </td>
-          </tr>
-          <tr>
-            <td className="p-2 text-center">dots</td>
-            <td className="p-2">
-              <Spinner {...args} size="sm" variant="dots" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="md" variant="dots" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="lg" variant="dots" />
-            </td>
-          </tr>
-          <tr>
-            <td className="p-2 text-center">dots-blink</td>
-            <td className="p-2">
-              <Spinner {...args} size="sm" variant="dots-blink" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="md" variant="dots-blink" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="lg" variant="dots-blink" />
-            </td>
-          </tr>
-          <tr>
-            <td className="p-2 text-center">spinner-bars</td>
-            <td className="p-2">
-              <Spinner {...args} size="sm" variant="spinner-bars" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="md" variant="spinner-bars" />
-            </td>
-            <td className="p-2">
-              <Spinner {...args} size="lg" variant="spinner-bars" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="flex flex-wrap items-end gap-8">
+      <Spinner
+        classNames={{label: "font-semibold text-foreground-600"}}
+        color="default"
+        label="default"
+        variant="default"
+      />
+      <Spinner
+        classNames={{label: "font-semibold text-foreground-600"}}
+        color="default"
+        label="gradient"
+        variant="gradient"
+      />
+      <Spinner
+        classNames={{label: "font-semibold text-foreground-600"}}
+        color="default"
+        label="star"
+        variant="star"
+      />
+      <Spinner
+        classNames={{label: "font-semibold text-foreground-600"}}
+        color="default"
+        label="dots"
+        variant="dots"
+      />
+      <Spinner
+        classNames={{label: "font-semibold text-foreground-600"}}
+        color="default"
+        label="dots-blink"
+        variant="dots-blink"
+      />
     </div>
   );
 };
