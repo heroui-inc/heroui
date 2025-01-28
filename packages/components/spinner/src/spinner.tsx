@@ -27,7 +27,12 @@ const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
           {[...new Array(12)].map((_, index) => (
             <i
               key={`star-${index}`}
-              className={slots.spinnerBars({class: classNames?.spinnerBars})}
+              className={slots.bars({class: classNames?.bars})}
+              style={
+                {
+                  "--bar-index": index,
+                } as React.CSSProperties
+              }
             />
           ))}
         </div>
