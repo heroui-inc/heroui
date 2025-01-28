@@ -368,14 +368,14 @@ Tooltip changes:
       placement="right"
       content="I am a tooltip"
       classNames={{
--        base: "py-2 px-4 shadow-2xs text-black bg-linear-to-br from-white to-neutral-400",
+-        base: "py-2 px-4 shadow-sm text-black bg-linear-to-br from-white to-neutral-400",
 -        arrow: "bg-neutral-400 dark:bg-white",
 +        base: [
 +          // the "before" pseudo element is now the popover' arrow
 +          "before:bg-neutral-400 dark:before:bg-white",
 +        ],
 +        content: [ // now we need to use the "content" slot to actually modify the popover' content styles
-+          "py-2 px-4 shadow-2xs",
++          "py-2 px-4 shadow-sm",
 +          "text-black bg-linear-to-br from-white to-neutral-400",
 +        ],
       }}

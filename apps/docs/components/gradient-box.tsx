@@ -29,9 +29,9 @@ const styles = tv({
     },
     shadow: {
       none: "shadow-none",
-      sm: "shadow-2xs",
+      sm: "shadow-sm",
       lg: "shadow-lg",
-      xl: "shadow-2xs",
+      xl: "shadow-xl",
       "2xl": "shadow-2xl",
       "3xl": "shadow-3xl",
     },

@@ -59,7 +59,7 @@ const styles = {
   ],
   innerWrapper: "bg-transparent",
   inputWrapper: [
-    "shadow-2xs",
+    "shadow-sm",
     "bg-default-200/50",
     "dark:bg-default/60",
     "backdrop-blur-xl",
