@@ -148,12 +148,20 @@ const calendar = tv({
         pickerItem: "transition-opacity",
       },
     },
+    isRTL: {
+      true: {
+        nextButton: "order-1",
+        prevButton: "order-3",
+      },
+      false: {},
+    },
   },
   defaultVariants: {
     color: "primary",
     showShadow: false,
     hideDisabledDates: false,
     showMonthAndYearPickers: false,
+    isRTL: false,
   },
   compoundVariants: [
     // !isRange & colors --> Calendar

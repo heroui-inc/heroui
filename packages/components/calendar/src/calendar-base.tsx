@@ -78,7 +78,7 @@ export function CalendarBase(props: CalendarBaseProps) {
   const headers: React.ReactNode[] = [];
   const calendars: React.ReactNode[] = [];
 
-  const isLTR = localeDirection === "ltr";
+  const isRTL = localeDirection === "rtl";
 
   for (let i = 0; i < visibleMonths; i++) {
     let d = currentMonth.add({months: i});
@@ -87,11 +87,8 @@ export function CalendarBase(props: CalendarBaseProps) {
       <Fragment key={`calendar-header-${i}`}>
         {i === 0 && (
           <Button
-            {...(isLTR ? prevButtonProps : nextButtonProps)}
-            className={
-              isLTR ? prevButtonProps?.["className"] : `${nextButtonProps?.["className"]} order-1`
-            }
-            onPress={chain(isLTR ? prevButtonProps.onPress : nextButtonProps.onPress, () =>
+            {...(isRTL ? nextButtonProps : prevButtonProps)}
+            onPress={chain(isRTL ? nextButtonProps.onPress : prevButtonProps.onPress, () =>
               setDirection(-1),
             )}
           >
@@ -106,11 +103,8 @@ export function CalendarBase(props: CalendarBaseProps) {
         />
         {i === visibleMonths - 1 && (
           <Button
-            {...(isLTR ? nextButtonProps : prevButtonProps)}
-            className={
-              isLTR ? nextButtonProps?.["className"] : `${prevButtonProps?.["className"]} order-3`
-            }
-            onPress={chain(isLTR ? nextButtonProps.onPress : prevButtonProps.onPress, () =>
+            {...(isRTL ? prevButtonProps : nextButtonProps)}
+            onPress={chain(isRTL ? prevButtonProps.onPress : nextButtonProps.onPress, () =>
               setDirection(1),
             )}
           >
