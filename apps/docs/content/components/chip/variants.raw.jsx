@@ -18,7 +18,7 @@ export default function App() {
       <Chip color="warning" variant="faded">
         Faded
       </Chip>
-      <Chip color="warning" variant="shadow-sm">
+      <Chip color="warning" variant="shadow">
         Shadow
       </Chip>
       <Chip color="warning" variant="dot">
