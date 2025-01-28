@@ -138,7 +138,7 @@ const MyInput = extendVariants(Input, {
     },
     radius: {
       xs: {
-        inputWrapper: "rounded-xs",
+        inputWrapper: "rounded-sm",
       },
       sm: {
         inputWrapper: "rounded-[4px]",

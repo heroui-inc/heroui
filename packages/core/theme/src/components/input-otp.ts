@@ -108,7 +108,7 @@ const inputOtp = tv({
         segment: "rounded-none",
       },
       sm: {
-        segment: "rounded-xs",
+        segment: "rounded-sm",
       },
       md: {
         segment: "rounded-md",

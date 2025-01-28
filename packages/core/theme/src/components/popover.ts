@@ -32,7 +32,7 @@ const popover = tv({
       "before:rotate-45",
       "before:w-2.5",
       "before:h-2.5",
-      "before:rounded-xs",
+      "before:rounded-sm",
       // visibility
       "data-[arrow=true]:before:block",
       // top

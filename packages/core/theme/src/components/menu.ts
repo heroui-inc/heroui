@@ -77,7 +77,7 @@ const menuItem = tv({
     shortcut: [
       "px-1",
       "py-0.5",
-      "rounded-xs",
+      "rounded-sm",
       "font-sans",
       "text-foreground-500",
       "text-tiny",

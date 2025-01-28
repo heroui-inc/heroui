@@ -21,7 +21,7 @@ const styles = tv({
     },
     radius: {
       none: "rounded-none",
-      sm: "rounded-xs",
+      sm: "rounded-sm",
       lg: "rounded-lg",
       xl: "rounded-xl",
       "2xl": "rounded-2xl",

@@ -51,12 +51,12 @@ const createExtendSlotsComponent = () =>
       },
       radius: {
         none: {
-          base: "rounded-xs",
-          header: "rounded-xs",
-          footer: "rounded-xs",
+          base: "rounded-sm",
+          header: "rounded-sm",
+          footer: "rounded-sm",
         },
         sm: {
-          base: "rounded-xs",
+          base: "rounded-sm",
           header: "rounded-t-sm",
           footer: "rounded-b-sm",
         },
