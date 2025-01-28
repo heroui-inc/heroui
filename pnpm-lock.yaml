@@ -295,9 +295,6 @@ importers:
       '@heroui/listbox':
         specifier: workspace:*
         version: link:../../packages/components/listbox
-      '@heroui/number-input':
-        specifier: workspace:*
-        version: link:../../packages/components/number-input
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/core/react
