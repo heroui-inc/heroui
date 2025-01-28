@@ -10,7 +10,7 @@ export default function App() {
     </PopoverContent>
   );
 
-  const variants = ["solid", "bordered", "flat", "faded", "shadow-sm"];
+  const variants = ["solid", "bordered", "flat", "faded", "shadow"];
 
   return (
     <div className="flex gap-2">

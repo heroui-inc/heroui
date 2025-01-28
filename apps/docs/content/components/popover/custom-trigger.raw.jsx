@@ -16,7 +16,7 @@ export const UserTwitterCard = () => {
   const [isFollowed, setIsFollowed] = React.useState(false);
 
   return (
-    <Card className="max-w-[300px] border-none bg-transparent" shadow-sm="none">
+    <Card className="max-w-[300px] border-none bg-transparent" shadow="none">
       <CardHeader className="justify-between">
         <div className="flex gap-3">
           <Avatar

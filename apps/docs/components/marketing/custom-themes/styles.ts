@@ -122,7 +122,7 @@ export const shopCartStyles = tv({
           "lg:scale-[1.3]",
           "before:rounded-sm",
           "before:from-[#323232] before:to-[#000000]",
-          "shadow-sm",
+          "shadow-xl",
         ],
         img: "sm:scale-75 sm:left-0 saturate-0",
         title: "text-xl font-mono font-thin",

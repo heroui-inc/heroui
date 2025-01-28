@@ -36,7 +36,7 @@ export default function App() {
             "before:bg-linear-to-r before:from-secondary-400 before:to-primary-500",
           ],
           content: [
-            "py-2 shadow-sm",
+            "py-2 shadow-xl",
             "text-white bg-linear-to-r from-secondary-400 to-primary-500",
           ],
         },

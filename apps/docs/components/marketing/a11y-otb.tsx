@@ -167,7 +167,7 @@ export const A11yOtb = () => {
             </Button>
             {ref.current && (
               <Dropdown
-                className="shadow-sm"
+                className="shadow-xl"
                 closeOnSelect={true}
                 isDismissable={false}
                 isOpen={isDropdownOpen}

@@ -10,7 +10,7 @@ export default function App() {
   const [selectedVariant, setSelectedVariant] = React.useState("solid");
   const [selectedColor, setSelectedColor] = React.useState("default");
 
-  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow-sm"];
+  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow"];
   const colors = ["default", "primary", "secondary", "success", "warning", "danger"];
 
   return (
