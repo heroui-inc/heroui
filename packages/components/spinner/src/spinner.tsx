@@ -11,9 +11,17 @@ const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
     return (
       <div ref={ref} {...getSpinnerProps()}>
         <div className={slots.wrapper({class: classNames?.wrapper})}>
-          <i className={slots.dots({class: classNames?.dots})} />
-          <i className={slots.dots({class: classNames?.dots})} />
-          <i className={slots.dots({class: classNames?.dots})} />
+          {[...new Array(3)].map((_, index) => (
+            <i
+              key={`dot-${index}`}
+              className={slots.dots({class: classNames?.dots})}
+              style={
+                {
+                  "--dot-index": index,
+                } as React.CSSProperties
+              }
+            />
+          ))}
         </div>
         {label && <span className={slots.label({class: classNames?.label})}>{label}</span>}
       </div>

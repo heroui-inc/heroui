@@ -160,19 +160,11 @@ const spinner = tv({
       },
       dots: {
         wrapper: "translate-y-3/4",
-        dots: [
-          "animate-sway",
-          "[&:nth-child(2)]:[animation-delay:250ms]",
-          "[&:nth-child(3)]:[animation-delay:500ms]",
-        ],
+        dots: ["animate-sway", "spinner-dot-animation"],
       },
       "dots-blink": {
         wrapper: "translate-y-2/4",
-        dots: [
-          "animate-blink",
-          "[&:nth-child(2)]:[animation-delay:200ms]",
-          "[&:nth-child(3)]:[animation-delay:400ms]",
-        ],
+        dots: ["animate-blink", "spinner-dot-blink-animation"],
       },
       star: {},
     },
