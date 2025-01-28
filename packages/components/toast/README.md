@@ -2,8 +2,6 @@
 
 Toast Component helps to provide feedback on user-actions.
 
-> This is an internal utility, not intended for public usage.
-
 ## Installation
 
 ```sh

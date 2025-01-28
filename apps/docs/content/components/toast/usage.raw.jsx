@@ -45,11 +45,11 @@ export default function App() {
           addToast({
             title: "Toast Title",
             description: "Toast Description",
-            promise: new Promise((resolve) => setTimeout(resolve, 4000)),
+            promise: new Promise((resolve) => setTimeout(resolve, 3000)),
           });
         }}
       >
-        Promise
+        Promise (3000ms)
       </Button>
 
       <Button
@@ -67,7 +67,7 @@ export default function App() {
           });
         }}
       >
-        With Action
+        With endContent
       </Button>
 
       <Button
@@ -80,7 +80,7 @@ export default function App() {
           });
         }}
       >
-        With Timeout
+        With Timeout(3000ms)
       </Button>
 
       <Button
