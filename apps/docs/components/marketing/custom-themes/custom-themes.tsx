@@ -179,7 +179,7 @@ const CustomThemesExample = ({
               <Button
                 className={slots.buyButton()}
                 color="primary"
-                variant={selectedTheme === "heroui" ? "shadow-sm" : "solid"}
+                variant={selectedTheme === "heroui" ? "shadow" : "solid"}
               >
                 Buy now
               </Button>
