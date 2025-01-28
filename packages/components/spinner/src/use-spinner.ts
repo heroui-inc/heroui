@@ -37,6 +37,7 @@ export type UseSpinnerProps = Props & SpinnerVariantProps;
 
 export function useSpinner(originalProps: UseSpinnerProps) {
   const [props, variantProps] = mapPropsVariants(originalProps, spinner.variantKeys);
+  const {variant} = originalProps;
 
   const {children, className, classNames, label: labelProp, ...otherProps} = props;
 
@@ -65,7 +66,7 @@ export function useSpinner(originalProps: UseSpinnerProps) {
     [ariaLabel, slots, baseStyles, otherProps],
   );
 
-  return {label, slots, classNames, getSpinnerProps};
+  return {label, slots, classNames, variant, getSpinnerProps};
 }
 
 export type UseSpinnerReturn = ReturnType<typeof useSpinner>;
