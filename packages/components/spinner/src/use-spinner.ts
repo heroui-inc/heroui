@@ -37,7 +37,7 @@ export type UseSpinnerProps = Props & SpinnerVariantProps;
 
 export function useSpinner(originalProps: UseSpinnerProps) {
   const [props, variantProps] = mapPropsVariants(originalProps, spinner.variantKeys);
-  const {variant} = originalProps;
+  const variant = originalProps.variant ?? "default";
 
   const {children, className, classNames, label: labelProp, ...otherProps} = props;
 

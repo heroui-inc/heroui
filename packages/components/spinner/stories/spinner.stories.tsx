@@ -26,6 +26,12 @@ export default {
       },
       options: ["sm", "md", "lg"],
     },
+    variant: {
+      control: {
+        type: "select",
+      },
+      options: ["default", "gradient", "star", "dots", "dots-blink"],
+    },
   },
   decorators: [
     (Story) => (
