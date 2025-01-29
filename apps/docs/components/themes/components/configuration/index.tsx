@@ -41,6 +41,7 @@ import {Filters, RotateLeftLinearIcon} from "@/components/icons";
 import {ThemeSwitch} from "@/components/theme-switch";
 import {Crop} from "@/components/icons/crop";
 import {RadialBlur} from "@/components/icons/radial-blur";
+import {Scaling as ScalingIcon} from "@/components/icons/scaling";
 
 export default function Configuration() {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
@@ -54,7 +55,7 @@ export default function Configuration() {
   const syncIcon = syncThemes ? <Icon className="flex-shrink-0" icon={LinkSquareIcon} /> : null;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedSection, setSelectedSection] = useState<
-    "none" | "color" | "radius" | "font" | "opacity"
+    "none" | "color" | "radius" | "font" | "opacity" | "scaling"
   >("none");
 
   /**
@@ -223,41 +224,55 @@ export default function Configuration() {
                           );
                         })}
                       </div>
-                      <div className="w-full flex gap-4 flex-wrap justify-around">
+                      <div className="w-full flex gap-4 flex-wrap items-center">
                         <Button
-                          className="w-[40vw] h-16 text-lg flex justify-around"
+                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
                           onPress={() => {
                             setSelectedSection("color");
                           }}
                         >
-                          <Filters className="h-6 w-6" /> <span className="mx-2">Colors</span>{" "}
+                          <Filters className="h-6 w-6" />
+                          <span className="mx-2 w-20">Colors</span>{" "}
                           <ChevronIcon className="h-6 w-6 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex justify-around"
+                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
                           onPress={() => {
                             setSelectedSection("radius");
                           }}
                         >
-                          <Crop className="h-6 w-6" /> <span className="mx-2">Radius</span>{" "}
+                          <Crop className="h-6 w-6" />
+                          <span className="mx-2 w-20">Radius</span>{" "}
                           <ChevronIcon className="h-6 w-6 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex justify-around"
+                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
                           onPress={() => {
                             setSelectedSection("opacity");
                           }}
                         >
-                          <RadialBlur className="h-6 w-6" /> <span className="mx-2">Opacity</span>{" "}
+                          <RadialBlur className="h-6 w-6" />
+                          <span className="mx-2 w-20">Opacity</span>{" "}
                           <ChevronIcon className="h-6 w-6 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex justify-around"
+                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
                           onPress={() => {
                             setSelectedSection("font");
                           }}
                         >
-                          <RadialBlur className="h-6 w-6" /> <span className="mx-2">Font</span>{" "}
+                          <RadialBlur className="h-6 w-6" />
+                          <span className="mx-2 w-20">Font</span>{" "}
+                          <ChevronIcon className="h-6 w-6 rotate-180" />
+                        </Button>
+                        <Button
+                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          onPress={() => {
+                            setSelectedSection("scaling");
+                          }}
+                        >
+                          <ScalingIcon className="h-8 w-8" />
+                          <span className="mx-2 w-20">Scaling</span>{" "}
                           <ChevronIcon className="h-6 w-6 rotate-180" />
                         </Button>
                       </div>
@@ -331,6 +346,21 @@ export default function Configuration() {
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
                       <DisableOpacity config={config} />
+                    </div>
+                  )}
+                  {selectedSection === "scaling" && (
+                    <div className="w-full h-full">
+                      <Button
+                        isIconOnly
+                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        variant="light"
+                        onPress={() => {
+                          setSelectedSection("none");
+                        }}
+                      >
+                        <ArrowLeftIcon className="h-5 w-5" />
+                      </Button>
+                      <Scaling />
                     </div>
                   )}
                 </div>

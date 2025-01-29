@@ -3,7 +3,6 @@ import {showcaseId} from "../../constants";
 import {Avatar} from "./avatar";
 import {BreadCrumbs} from "./breadcrumbs";
 import {Button} from "./button";
-import {Calendar} from "./calendar";
 import {Checkbox} from "./checkbox";
 import {Chip} from "./chip";
 import {Code} from "./code";
@@ -19,7 +18,6 @@ export function Showcase() {
       <Avatar />
       <BreadCrumbs />
       <Button />
-      <Calendar />
       <Checkbox />
       <Chip />
       <Code />
