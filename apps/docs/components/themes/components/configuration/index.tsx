@@ -95,7 +95,7 @@ export default function Configuration() {
 
   return (
     <>
-      <Card className="h-auto w-[35vw] lg:w-[23vw] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
+      <Card className="h-auto w-[40vw] lg:w-[35vw] xl:w-[25vw] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
         <CardHeader className="flex justify-between px-6 py-4">
           <div className="flex gap-x-4 items-center">
             <div className="text-xl font-medium text-default-800 ">Theme</div>
@@ -138,8 +138,8 @@ export default function Configuration() {
               <Radiuses />
               <BorderWidths />
               <Fonts />
-              <DisableOpacity config={config} />
               <Scaling />
+              <DisableOpacity config={config} />
             </div>
           </ScrollShadow>
         </CardBody>
@@ -180,7 +180,7 @@ export default function Configuration() {
             setIsDrawerOpen(false);
           }}
         >
-          <DrawerContent className="backdrop-blur-2xl">
+          <DrawerContent className="backdrop-blur-2xl max-h-[56rem]">
             <Button
               isIconOnly
               className="group fixed top-0 right-0 bg-default-100 hover:bg-default-200 z-50 min-w-8 w-8 h-8 rounded-full m-1"
@@ -191,93 +191,93 @@ export default function Configuration() {
             >
               <CloseIcon className="h-4 w-4" />
             </Button>
-            <div className="overflow-x-scroll scrollbar-hide p-2 px-8 pt-12">
+            {selectedSection === "none" && (
+              <div className="flex w-full flex-start overflow-x-scroll scrollbar-hide py-6 px-4 h-30 fixed top-5">
+                {templates.map((template) => {
+                  return (
+                    <div key={template.name} className="flex flex-col items-center px-2">
+                      <Button
+                        className={clsx(
+                          "p-0 min-w-0 w-auto h-12 rounded-md gap-0",
+                          templateTheme === template.name ? "outline-2 outline-foreground-800" : "",
+                        )}
+                        onPress={() => {
+                          setConfiguration(template.value, theme, syncThemes);
+                          setAllCssVars(template.value, theme);
+                          setSelectedTemplate(template);
+                          setTemplateTheme(template.name);
+                        }}
+                      >
+                        <Swatch
+                          className="h-full"
+                          colors={template.value.light.baseColor}
+                          innerClassName="w-4"
+                        />
+                      </Button>
+                      <div className="text-sm text-default-500 my-1">{template.name}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            <div className="overflow-x-scroll scrollbar-hide p-2 px-4 pt-16">
               <ScrollShadow orientation="vertical">
                 <div className="flex flex-col items-center gap-y-8">
                   {selectedSection === "none" && (
                     <>
-                      <div className="flex w-full flex-start overflow-x-scroll scrollbar-hide py-2 h-auto">
-                        {templates.map((template) => {
-                          return (
-                            <div key={template.name} className="flex flex-col items-center px-2">
-                              <Button
-                                className={clsx(
-                                  "p-0 min-w-0 w-auto h-12 rounded-md gap-0",
-                                  templateTheme === template.name
-                                    ? "outline-2 outline-foreground-800"
-                                    : "",
-                                )}
-                                onPress={() => {
-                                  setConfiguration(template.value, theme, syncThemes);
-                                  setAllCssVars(template.value, theme);
-                                  setSelectedTemplate(template);
-                                  setTemplateTheme(template.name);
-                                }}
-                              >
-                                <Swatch
-                                  className="h-full"
-                                  colors={template.value.light.baseColor}
-                                  innerClassName="w-4"
-                                />
-                              </Button>
-                              <div className="text-sm text-default-500 my-1">{template.name}</div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                      <div className="w-full flex gap-4 flex-wrap items-center justify-around">
+                      <div className="w-full grid grid-cols-4 gap-4 flex-wrap items-center justify-around pt-20">
                         <Button
-                          className="w-[40vw] h-16 flex items-center gap-x-3"
+                          className="col-span-2 h-14 flex items-center justify-around gap-x-3"
                           onPress={() => {
                             setSelectedSection("color");
                           }}
                         >
                           <Filters className="h-5 w-5" />
-                          <span className="mx-2 w-16 text-base">Colors</span>{" "}
+                          <span className="mx-2 w-14 text-base">Colors</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 flex items-center gap-x-3"
+                          className="col-span-2 h-14 flex items-center justify-around gap-x-3"
                           onPress={() => {
                             setSelectedSection("radius");
                           }}
                         >
                           <Crop className="h-5 w-5" />
-                          <span className="mx-2 w-16 text-base">Radius</span>{" "}
+                          <span className="mx-2 text-base">Radius</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("borderWidths");
                           }}
                         >
                           <CropMinimalistic className="h-5 w-5" />
-                          <span className="mx-2 w-16 text-base">Border</span>{" "}
+                          <span className="mx-2 w-14 text-base">Border</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("opacity");
                           }}
                         >
                           <RadialBlur className="h-5 w-5" />
-                          <span className="mx-2 w-16 text-base">Opacity</span>{" "}
+                          <span className="mx-2 w-14 text-base">Opacity</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("font");
                           }}
                         >
                           <RadialBlur className="h-5 w-5" />
-                          <span className="mx-2 w-16 text-base">Font</span>{" "}
+                          <span className="mx-2 w-14 text-base">Font</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("scaling");
                           }}
@@ -290,7 +290,7 @@ export default function Configuration() {
                     </>
                   )}
                   {selectedSection === "color" && (
-                    <div className="w-full h-full">
+                    <div className="w-full h-auto">
                       <Button
                         isIconOnly
                         className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
@@ -301,7 +301,7 @@ export default function Configuration() {
                       >
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
-                      <div className="flex flex-col gap-y-4">
+                      <div className="flex flex-col gap-y-4 h-auto p-4">
                         <DefaultColors config={config} theme={theme} />
                         <BaseColors
                           config={config}
@@ -326,7 +326,9 @@ export default function Configuration() {
                       >
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
-                      <Radiuses />
+                      <div className="p-4">
+                        <Radiuses />
+                      </div>
                     </div>
                   )}
                   {selectedSection === "borderWidths" && (
@@ -341,7 +343,9 @@ export default function Configuration() {
                       >
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
-                      <BorderWidths />
+                      <div className="p-4">
+                        <BorderWidths />
+                      </div>
                     </div>
                   )}
                   {selectedSection === "font" && (
@@ -356,7 +360,9 @@ export default function Configuration() {
                       >
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
-                      <Fonts />
+                      <div className="p-4">
+                        <Fonts />
+                      </div>
                     </div>
                   )}
                   {selectedSection === "opacity" && (
@@ -371,7 +377,9 @@ export default function Configuration() {
                       >
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
-                      <DisableOpacity config={config} />
+                      <div className="p-4">
+                        <DisableOpacity config={config} />
+                      </div>
                     </div>
                   )}
                   {selectedSection === "scaling" && (
@@ -386,7 +394,9 @@ export default function Configuration() {
                       >
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
-                      <Scaling />
+                      <div className="p-4">
+                        <Scaling />
+                      </div>
                     </div>
                   )}
                 </div>

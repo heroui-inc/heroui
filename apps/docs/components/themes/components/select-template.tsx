@@ -24,14 +24,12 @@ export function SelectTemplate({name, onChange}: SelectTemplateProps) {
 
   return (
     <>
-      <div className="flex gap-1 items-center pb-2 text-default-500">
-        <MirrorLeft className="w-4 h-4 fill-current" />
-        <div className="text-sm">Prebuilt Themes</div>
+      <div className="text-[#71717A] dark:text-[#A1A1AA] text-lg flex gap-1.5 items-center">
+        <MirrorLeft className="w-5 h-5 fill-current" />
+        <div>Prebuilt Themes</div>
       </div>
       <Select
-        classNames={{
-          innerWrapper: "my-2",
-        }}
+        className="my-3"
         placeholder="Select a theme"
         selectedKeys={name === null ? [] : [name]}
         onChange={handleChange}

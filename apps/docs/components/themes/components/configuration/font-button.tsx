@@ -29,7 +29,7 @@ const FontButton = ({title, value, setValue}: FontButtonProps) => {
   return (
     <Button
       className={clsx(
-        "group h-auto p-4 flex flex-col justify-between",
+        "group h-24 flex flex-col justify-center items-center gap-y-2 px-0",
         value === title ? "border-foreground" : "",
       )}
       variant="bordered"
@@ -38,7 +38,7 @@ const FontButton = ({title, value, setValue}: FontButtonProps) => {
       }}
     >
       <div className="font-medium text-2xl" style={style}>
-        Ag
+        Ag12
       </div>
       <div className="relative text-sm text-default-500">
         <div className="">{title}</div>

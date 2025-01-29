@@ -9,7 +9,7 @@ export function Radiuses() {
   const {radiusValue, setRadiusValue} = useThemeBuilder();
 
   return (
-    <ConfigSection icon={<CropMinimalistic className="h-4 w-4" />} title="Radius">
+    <ConfigSection icon={<CropMinimalistic className="h-5 w-5" />} title="Radius">
       <EditableButton
         className="rounded-tl-none"
         setValue={setRadiusValue}

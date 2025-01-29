@@ -18,7 +18,12 @@ export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
   const {setBaseColor} = useThemeBuilder();
 
   return (
-    <ConfigSection icon={<Filters className="h-4 w-4" />} id={colorsId} title="Base colors">
+    <ConfigSection
+      icon={<Filters className="h-5 w-5" />}
+      id={colorsId}
+      title="Base colors"
+      toolTip="Primary, Secondary, Success, Warning, Danger colors"
+    >
       <ColorPicker
         hexColor={config[theme].baseColor.primary}
         type="primary"

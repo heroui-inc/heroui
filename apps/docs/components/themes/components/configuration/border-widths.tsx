@@ -9,7 +9,7 @@ export function BorderWidths() {
   const {borderWidthValue, setBorderWidthValue} = useThemeBuilder();
 
   return (
-    <ConfigSection icon={<Crop className="w-4 h-4" />} title="Border width">
+    <ConfigSection icon={<Crop className="w-5 h-5" />} title="Border width">
       <EditableButton
         className="rounded-tl-md border-t-1 border-l-1"
         setValue={setBorderWidthValue}

@@ -17,9 +17,10 @@ export function ContentColors({config, theme}: BaseColorsProps) {
 
   return (
     <ConfigSection
-      icon={<PaletteRound className="w-4 h-4" />}
+      icon={<PaletteRound className="w-5 h-5" />}
       id={baseColorsId}
       title="Content colors"
+      toolTip="content1, content2, content3, content4 colors"
     >
       <ColorPicker
         hexColor={config[theme].contentColor.content1}

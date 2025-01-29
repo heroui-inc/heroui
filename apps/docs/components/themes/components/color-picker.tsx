@@ -47,7 +47,7 @@ export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProp
         <PopoverTrigger>
           <Button
             fullWidth
-            className={clsx(getColor(type), "rounded-lg min-w-8 w-8 h-8 border border-[#A1A1A7]")}
+            className={clsx(getColor(type), "rounded-lg min-w-9 w-9 h-9 border border-[#A1A1A7]")}
             size="sm"
             style={{
               color: ["background", "foreground", "focus", "overlay"].includes(type)

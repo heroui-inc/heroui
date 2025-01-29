@@ -18,9 +18,10 @@ export function LayoutColors({config, syncThemes, theme}: OtherColorsProps) {
 
   return (
     <ConfigSection
-      icon={<PaletteIcon className="w-4 h-4" />}
+      icon={<PaletteIcon className="w-5 h-5" />}
       id={otherColorsId}
       title="Layout colors"
+      toolTip="background, foreground, focus, overlay colors"
     >
       <ColorPicker
         hexColor={config[theme].layoutColor.background}

@@ -9,9 +9,10 @@ export function Scaling() {
   const {scaling, setScaling} = useThemeBuilder();
 
   return (
-    <ConfigSection icon={<ScalingIcon className="h-4 w-4" />} title="Scaling">
+    <ConfigSection icon={<ScalingIcon className="h-5 w-5" />} title="Scaling">
       <ValueButton
         currentValue={scaling}
+        endContent="%"
         setValue={(value) => {
           setScaling(value);
         }}
@@ -19,6 +20,7 @@ export function Scaling() {
       />
       <ValueButton
         currentValue={scaling}
+        endContent="%"
         setValue={(value) => {
           setScaling(value);
         }}
@@ -26,6 +28,7 @@ export function Scaling() {
       />
       <ValueButton
         currentValue={scaling}
+        endContent="%"
         setValue={(value) => {
           setScaling(value);
         }}
@@ -33,6 +36,7 @@ export function Scaling() {
       />
       <ValueButton
         currentValue={scaling}
+        endContent="%"
         setValue={(value) => {
           setScaling(value);
         }}
@@ -40,6 +44,7 @@ export function Scaling() {
       />
       <ValueButton
         currentValue={scaling}
+        endContent="%"
         setValue={(value) => {
           setScaling(value);
         }}
