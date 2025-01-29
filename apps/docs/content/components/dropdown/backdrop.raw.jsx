@@ -2,7 +2,7 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@he
 
 export default function App() {
   return (
-    <Dropdown backdrop="blur-sm">
+    <Dropdown backdrop="blur">
       <DropdownTrigger>
         <Button variant="bordered">Open Menu</Button>
       </DropdownTrigger>

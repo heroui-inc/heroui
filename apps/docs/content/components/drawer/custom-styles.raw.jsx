@@ -36,7 +36,7 @@ export default function App() {
       </Button>
       <Drawer
         hideCloseButton
-        backdrop="blur-sm"
+        backdrop="blur"
         classNames={{
           base: "sm:data-[placement=right]:m-2 sm:data-[placement=left]:m-2  rounded-medium",
         }}
