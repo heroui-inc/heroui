@@ -33,6 +33,13 @@
   button, [role="button"] {
     cursor: pointer;
   }
+
+  /*
+    Make sure disabled buttons don't get the pointer cursor.
+  */
+  :disabled {
+    cursor: default;
+  }
 }
 
 @layer base {
