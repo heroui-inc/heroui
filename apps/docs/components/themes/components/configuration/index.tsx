@@ -15,7 +15,7 @@ import {useTheme} from "next-themes";
 import {useLocalStorage} from "usehooks-ts";
 import {Icon} from "@iconify/react/dist/offline";
 import LinkSquareIcon from "@iconify/icons-solar/link-square-linear";
-import {ArrowLeftIcon, ChevronIcon} from "@heroui/shared-icons";
+import {ArrowLeftIcon, ChevronIcon, CloseIcon} from "@heroui/shared-icons";
 import {clsx} from "@heroui/shared-utils";
 
 import {useThemeBuilder} from "../../provider";
@@ -181,23 +181,22 @@ export default function Configuration() {
           }}
         >
           <DrawerContent className="backdrop-blur-2xl">
-            <div className="h-[40vh] overflow-x-scroll scrollbar-hide p-2 px-8">
+            <Button
+              isIconOnly
+              className="group fixed top-0 right-0 bg-default-100 hover:bg-default-200 z-50 min-w-8 w-8 h-8 rounded-full m-1"
+              onPress={() => {
+                setIsDrawerOpen(false);
+                setSelectedSection("none");
+              }}
+            >
+              <CloseIcon className="h-4 w-4" />
+            </Button>
+            <div className="overflow-x-scroll scrollbar-hide p-2 px-8 pt-12">
               <ScrollShadow orientation="vertical">
                 <div className="flex flex-col items-center gap-y-8">
-                  <div
-                    className="group"
-                    onPointerDown={() => {
-                      setIsDrawerOpen(false);
-                      setSelectedSection("none");
-                    }}
-                  >
-                    <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer group-hover:bg-default-500" />
-                    <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
-                    <div className="h-1 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
-                  </div>
                   {selectedSection === "none" && (
                     <>
-                      <div className="flex w-full flex-start overflow-x-scroll scrollbar-hide py-2">
+                      <div className="flex w-full flex-start overflow-x-scroll scrollbar-hide py-2 h-auto">
                         {templates.map((template) => {
                           return (
                             <div key={template.name} className="flex flex-col items-center px-2">
