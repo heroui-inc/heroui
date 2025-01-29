@@ -298,9 +298,6 @@ importers:
       '@heroui/listbox':
         specifier: workspace:*
         version: link:../../packages/components/listbox
-      '@heroui/motion':
-        specifier: workspace:*
-        version: link:../../packages/external/motion
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/core/react
