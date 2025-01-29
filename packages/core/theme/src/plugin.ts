@@ -77,13 +77,15 @@ const resolveConfig = (
 
         parsedColorsCache[colorValue] = parsedColor;
 
-        const [h, s, l] = parsedColor;
+        const [h, s, l, defaultAlphaValue] = parsedColor;
         const herouiColorVariable = `--${prefix}-${colorName}`;
 
         // set the css variable in "@layer utilities"
         resolved.utilities[cssSelector]![herouiColorVariable] = `${h} ${s}% ${l}%`;
         // set the dynamic color in tailwind config theme.colors
-        resolved.colors[colorName] = `hsl(var(${herouiColorVariable}) / <alpha-value>)`;
+        resolved.colors[colorName] = `hsl(var(${herouiColorVariable}) / ${
+          defaultAlphaValue ?? "<alpha-value>"
+        })`;
       } catch (error: any) {
         // eslint-disable-next-line no-console
         console.log("error", error?.message);
@@ -164,12 +166,6 @@ const corePlugin = (
           },
           width: {
             divider: `var(--${prefix}-divider-weight)`,
-          },
-          fontSize: {
-            tiny: [`var(--${prefix}-font-size-tiny)`, `var(--${prefix}-line-height-tiny)`],
-            small: [`var(--${prefix}-font-size-small)`, `var(--${prefix}-line-height-small)`],
-            medium: [`var(--${prefix}-font-size-medium)`, `var(--${prefix}-line-height-medium)`],
-            large: [`var(--${prefix}-font-size-large)`, `var(--${prefix}-line-height-large)`],
           },
           borderRadius: {
             small: `var(--${prefix}-radius-small)`,
