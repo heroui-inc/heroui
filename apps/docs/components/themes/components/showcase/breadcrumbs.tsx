@@ -6,6 +6,7 @@ import {
 } from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
+import {useThemeBuilder} from "../../provider";
 
 type Color = BreadcrumbsProps["color"];
 
@@ -13,13 +14,20 @@ const SectionBase = ({
   color,
   variant,
   isDisabled,
+  className,
 }: {
   color?: BreadcrumbsProps["color"];
   variant?: BreadcrumbsProps["variant"];
   isDisabled?: boolean;
+  className?: string;
 }) => {
   return (
-    <HeroUIBreadcrumbs color={color} isDisabled={isDisabled} variant={variant}>
+    <HeroUIBreadcrumbs
+      className={className}
+      color={color}
+      isDisabled={isDisabled}
+      variant={variant}
+    >
       <HeroUIBreadcrumbsItem>Home</HeroUIBreadcrumbsItem>
       <HeroUIBreadcrumbsItem>Music</HeroUIBreadcrumbsItem>
       <HeroUIBreadcrumbsItem>Artist</HeroUIBreadcrumbsItem>
@@ -29,14 +37,43 @@ const SectionBase = ({
   );
 };
 
-const Section = ({color}: {color: Color}) => {
-  const variants = ["bordered", "light", "solid", "solid"];
+const Section = ({color, scaling}: {color: Color; scaling: number}) => {
+  const variants = ["bordered", "light", "solid"];
   const disabled = [false, false, false, true];
+  let className = "text-small";
+
+  switch (scaling) {
+    case 90: {
+      className = "text-[0.7rem]";
+      break;
+    }
+    case 95: {
+      className = "text-tiny";
+      break;
+    }
+    case 100: {
+      className = "text-small p-0.5";
+      break;
+    }
+    case 105: {
+      className = "text-medium p-1";
+      break;
+    }
+    case 110: {
+      className = "text-large p-1.5";
+      break;
+    }
+  }
 
   return (
     <div className="flex flex-col gap-y-4">
       {variants.map((variant, idx) =>
-        cloneElement(<SectionBase key={idx} />, {color: color, variant, isDisabled: disabled[idx]}),
+        cloneElement(<SectionBase key={idx} />, {
+          color: color,
+          variant,
+          className,
+          isDisabled: disabled[idx],
+        }),
       )}
     </div>
   );
@@ -44,11 +81,12 @@ const Section = ({color}: {color: Color}) => {
 
 export const BreadCrumbs = () => {
   const colors: Color[] = ["foreground", "primary", "secondary", "success", "warning", "danger"];
+  const {scaling} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="BreadCrumbs">
       {colors.map((color, idx) => (
-        <Section key={idx} color={color} />
+        <Section key={idx} color={color} scaling={scaling} />
       ))}
     </ShowcaseComponent>
   );

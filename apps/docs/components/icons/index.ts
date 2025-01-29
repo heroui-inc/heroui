@@ -16,3 +16,4 @@ export * from "./bug";
 export * from "./mirror-left";
 export * from "./palette-round";
 export * from "./filters";
+export * from "./scaling";

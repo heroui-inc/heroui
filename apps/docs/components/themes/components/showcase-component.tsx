@@ -11,11 +11,11 @@ interface ShowcaseComponentProps {
 function getFontStyle(fontName) {
   switch (fontName) {
     case "inter":
-      return {fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em"};
+      return {fontFamily: "'Inter', sans-serif"};
     case "roboto":
       return {fontFamily: "'Roboto', sans-serif"};
     case "outfit":
-      return {fontFamily: "'Outfit', sans-serif", letterSpacing: "0.05em"};
+      return {fontFamily: "'Outfit', sans-serif"};
     case "lora":
       return {fontFamily: "'Lora', serif"};
     default:

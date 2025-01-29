@@ -2,8 +2,8 @@ import {Button} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 interface ValueButtonProps {
-  currentValue: string;
-  value: string;
+  currentValue: string | number;
+  value: string | number;
   setValue: (value: any) => void;
 }
 

@@ -11,6 +11,7 @@ import {
   NextUISize,
   TemplateType,
   FontType,
+  HeroUIScaling,
 } from "./types";
 
 export interface ThemeBuilderContextProps {
@@ -19,6 +20,7 @@ export interface ThemeBuilderContextProps {
   borderWidthValue: NextUISize;
   templateTheme: TemplateType;
   font: FontType;
+  scaling: HeroUIScaling;
   resetConfig: (theme: ThemeType, sync: boolean) => Config;
   setLayoutColor: (
     newConfig: Partial<ConfigColors["layoutColor"]>,
@@ -46,6 +48,7 @@ export interface ThemeBuilderContextProps {
   setBorderWidthValue: (borderWidth: NextUISize) => void;
   setTemplateTheme: (theme: TemplateType) => void;
   setFont: (font: FontType) => void;
+  setScaling: (scale: HeroUIScaling) => void;
 }
 
 const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
@@ -54,6 +57,7 @@ const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   borderWidthValue: "md",
   templateTheme: "heroui",
   font: "inter",
+  scaling: 100,
   resetConfig: () => initialConfig,
   setLayoutColor: () => {},
   setBorderWidth: () => {},
@@ -69,6 +73,7 @@ const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   setBorderWidthValue: () => {},
   setTemplateTheme: () => {},
   setFont: () => {},
+  setScaling: () => {},
 });
 
 interface ThemeBuilderProviderProps {
@@ -78,10 +83,11 @@ interface ThemeBuilderProviderProps {
 export default function ThemeBuilderProvider({children}: ThemeBuilderProviderProps) {
   const [lsConfig] = useLocalStorage<Config>(configKey, initialConfig);
   const [config, setConfig] = useState<Config>(lsConfig);
-  const [radiusValue, setRadiusValue] = useState<NextUIRadius>("none");
+  const [radiusValue, setRadiusValue] = useState<NextUIRadius>("sm");
   const [borderWidthValue, setBorderWidthValue] = useState<NextUISize>("md");
   const [templateTheme, setTemplateTheme] = useState<TemplateType>("heroui");
   const [font, setFont] = useState<FontType>("inter");
+  const [scaling, setScaling] = useState<HeroUIScaling>(100);
 
   const setConfiguration = (newConfig: Config, theme: ThemeType, sync: boolean) => {
     setConfig((prev) =>
@@ -304,6 +310,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         borderWidthValue,
         templateTheme,
         font,
+        scaling,
         resetConfig,
         setLayoutColor,
         setBorderWidth,
@@ -319,6 +326,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         setBorderWidthValue,
         setTemplateTheme,
         setFont,
+        setScaling,
       }}
     >
       {children}

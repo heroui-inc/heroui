@@ -6,31 +6,7 @@ import {Config, ThemeType} from "../types";
 import {generateThemeColor} from "./colors";
 function generateLayoutConfig(config: Config): HeroUIPluginConfig["layout"] {
   return {
-    fontSize: {
-      tiny: `${config.layout.fontSize.tiny}rem`,
-      small: `${config.layout.fontSize.small}rem`,
-      medium: `${config.layout.fontSize.medium}rem`,
-      large: `${config.layout.fontSize.large}rem`,
-    },
-    lineHeight: {
-      tiny: `${config.layout.lineHeight.tiny}rem`,
-      small: `${config.layout.lineHeight.small}rem`,
-      medium: `${config.layout.lineHeight.medium}rem`,
-      large: `${config.layout.lineHeight.large}rem`,
-    },
-    radius: {
-      small: `${config.layout.radius.small}rem`,
-      medium: `${config.layout.radius.medium}rem`,
-      large: `${config.layout.radius.large}rem`,
-    },
-    borderWidth: {
-      small: `${config.layout.borderWidth.small}px`,
-      medium: `${config.layout.borderWidth.medium}px`,
-      large: `${config.layout.borderWidth.large}px`,
-    },
     disabledOpacity: config.layout.otherParams.disabledOpacity,
-    dividerWeight: config.layout.otherParams.dividerWeight,
-    hoverOpacity: config.layout.otherParams.hoverOpacity,
   };
 }
 

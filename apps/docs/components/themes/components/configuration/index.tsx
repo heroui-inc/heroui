@@ -34,6 +34,7 @@ import {DefaultColors} from "./default-colors";
 import {DisableOpacity} from "./disable-opacity";
 import Swatch from "./swatch";
 import {Fonts} from "./fonts";
+import {Scaling} from "./scaling";
 
 import usePrevious from "@/hooks/use-previous";
 import {Filters, RotateLeftLinearIcon} from "@/components/icons";
@@ -92,7 +93,7 @@ export default function Configuration() {
 
   return (
     <>
-      <Card className="h-[68vh] w-[35vw] lg:w-[23vw] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
+      <Card className="h-auto w-[35vw] lg:w-[23vw] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
         <CardHeader className="flex justify-between px-6 py-4">
           <div className="flex gap-x-4 items-center">
             <div className="text-xl font-medium text-default-800 ">Theme</div>
@@ -135,11 +136,12 @@ export default function Configuration() {
               <Radiuses />
               <Fonts />
               <DisableOpacity config={config} />
+              <Scaling />
             </div>
           </ScrollShadow>
         </CardBody>
         <Divider className="bg-default-100" />
-        <CardFooter className="flex flex-col">
+        <CardFooter className="flex flex-col h-auto">
           <Button fullWidth className="text-white" color="primary" onPress={handleCopy}>
             Copy Theme
           </Button>

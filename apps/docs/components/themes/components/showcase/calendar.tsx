@@ -28,7 +28,7 @@ const Section = ({color}: {color: Color}) => {
 };
 
 export const Calendar = () => {
-  const colors: Color[] = ["foreground", "primary", "secondary", "success", "warning", "danger"];
+  const colors: Color[] = ["foreground", "primary"];
 
   return (
     <ShowcaseComponent name="Calendar">
