@@ -7,6 +7,8 @@ import {
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
+import {getBorderWidth} from "../../utils/shared";
+import {Border} from "../../types";
 
 type Color = BreadcrumbsProps["color"];
 
@@ -14,16 +16,16 @@ const SectionBase = ({
   color,
   variant,
   isDisabled,
-  className,
+  classNames,
 }: {
   color?: BreadcrumbsProps["color"];
   variant?: BreadcrumbsProps["variant"];
   isDisabled?: boolean;
-  className?: string;
+  classNames?: any;
 }) => {
   return (
     <HeroUIBreadcrumbs
-      className={className}
+      classNames={classNames}
       color={color}
       isDisabled={isDisabled}
       variant={variant}
@@ -37,30 +39,41 @@ const SectionBase = ({
   );
 };
 
-const Section = ({color, scaling}: {color: Color; scaling: number}) => {
+const Section = ({
+  color,
+  scaling,
+  borderWidthValue,
+}: {
+  color: Color;
+  scaling: number;
+  borderWidthValue: Border;
+}) => {
   const variants = ["bordered", "light", "solid"];
   const disabled = [false, false, false, true];
-  let className = "text-small";
+  let classNames = {base: "text-small"};
+
+  const border = getBorderWidth(borderWidthValue);
+  const borderClassName = `border-${border}`;
 
   switch (scaling) {
     case 90: {
-      className = "text-[0.7rem]";
+      classNames = {base: "text-[0.7rem]"};
       break;
     }
     case 95: {
-      className = "text-tiny";
+      classNames = {base: "text-tiny"};
       break;
     }
     case 100: {
-      className = "text-small p-0.5";
+      classNames = {base: "text-small p-0.5"};
       break;
     }
     case 105: {
-      className = "text-medium p-1";
+      classNames = {base: "text-medium p-1"};
       break;
     }
     case 110: {
-      className = "text-large p-1.5";
+      classNames = {base: "text-large p-1.5"};
       break;
     }
   }
@@ -71,7 +84,10 @@ const Section = ({color, scaling}: {color: Color; scaling: number}) => {
         cloneElement(<SectionBase key={idx} />, {
           color: color,
           variant,
-          className,
+          classNames: {
+            ...classNames,
+            list: variant === "bordered" ? borderClassName : "",
+          },
           isDisabled: disabled[idx],
         }),
       )}
@@ -81,12 +97,12 @@ const Section = ({color, scaling}: {color: Color; scaling: number}) => {
 
 export const BreadCrumbs = () => {
   const colors: Color[] = ["foreground", "primary", "secondary", "success", "warning", "danger"];
-  const {scaling} = useThemeBuilder();
+  const {scaling, borderWidthValue} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="BreadCrumbs">
       {colors.map((color, idx) => (
-        <Section key={idx} color={color} scaling={scaling} />
+        <Section key={idx} borderWidthValue={borderWidthValue} color={color} scaling={scaling} />
       ))}
     </ShowcaseComponent>
   );

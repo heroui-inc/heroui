@@ -44,6 +44,7 @@ export type NextUIVariant =
   | "underlined";
 export type NextUIRadius = "none" | "sm" | "md" | "lg" | "full";
 export type HeroUIScaling = 90 | 95 | 100 | 105 | 110;
+export type Border = "thin" | "medium" | "thick";
 
 // Themes
 export type ThemeType = "light" | "dark";

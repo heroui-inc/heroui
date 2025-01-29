@@ -35,11 +35,12 @@ import {DisableOpacity} from "./disable-opacity";
 import Swatch from "./swatch";
 import {Fonts} from "./fonts";
 import {Scaling} from "./scaling";
+import {BorderWidths} from "./border-widths";
 
 import usePrevious from "@/hooks/use-previous";
 import {Filters, RotateLeftLinearIcon} from "@/components/icons";
 import {ThemeSwitch} from "@/components/theme-switch";
-import {Crop} from "@/components/icons/crop";
+import {Crop, CropMinimalistic} from "@/components/icons/crop";
 import {RadialBlur} from "@/components/icons/radial-blur";
 import {Scaling as ScalingIcon} from "@/components/icons/scaling";
 
@@ -55,7 +56,7 @@ export default function Configuration() {
   const syncIcon = syncThemes ? <Icon className="flex-shrink-0" icon={LinkSquareIcon} /> : null;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedSection, setSelectedSection] = useState<
-    "none" | "color" | "radius" | "font" | "opacity" | "scaling"
+    "none" | "color" | "radius" | "font" | "opacity" | "scaling" | "borderWidths"
   >("none");
 
   /**
@@ -135,6 +136,7 @@ export default function Configuration() {
               <ContentColors config={config} theme={theme} />
               <LayoutColors config={config} syncThemes={syncThemes} theme={theme} />
               <Radiuses />
+              <BorderWidths />
               <Fonts />
               <DisableOpacity config={config} />
               <Scaling />
@@ -224,26 +226,36 @@ export default function Configuration() {
                           );
                         })}
                       </div>
-                      <div className="w-full flex gap-4 flex-wrap items-center">
+                      <div className="w-full flex gap-4 flex-wrap items-center justify-around">
                         <Button
-                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          className="w-[40vw] h-16 flex items-center gap-x-3"
                           onPress={() => {
                             setSelectedSection("color");
                           }}
                         >
-                          <Filters className="h-6 w-6" />
-                          <span className="mx-2 w-20">Colors</span>{" "}
-                          <ChevronIcon className="h-6 w-6 rotate-180" />
+                          <Filters className="h-5 w-5" />
+                          <span className="mx-2 w-16 text-base">Colors</span>{" "}
+                          <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          className="w-[40vw] h-16 flex items-center gap-x-3"
                           onPress={() => {
                             setSelectedSection("radius");
                           }}
                         >
-                          <Crop className="h-6 w-6" />
-                          <span className="mx-2 w-20">Radius</span>{" "}
-                          <ChevronIcon className="h-6 w-6 rotate-180" />
+                          <Crop className="h-5 w-5" />
+                          <span className="mx-2 w-16 text-base">Radius</span>{" "}
+                          <ChevronIcon className="h-5 w-5 rotate-180" />
+                        </Button>
+                        <Button
+                          className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
+                          onPress={() => {
+                            setSelectedSection("borderWidths");
+                          }}
+                        >
+                          <CropMinimalistic className="h-5 w-5" />
+                          <span className="mx-2 w-16 text-base">Border</span>{" "}
+                          <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
                           className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
@@ -251,9 +263,9 @@ export default function Configuration() {
                             setSelectedSection("opacity");
                           }}
                         >
-                          <RadialBlur className="h-6 w-6" />
-                          <span className="mx-2 w-20">Opacity</span>{" "}
-                          <ChevronIcon className="h-6 w-6 rotate-180" />
+                          <RadialBlur className="h-5 w-5" />
+                          <span className="mx-2 w-16 text-base">Opacity</span>{" "}
+                          <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
                           className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
@@ -261,9 +273,9 @@ export default function Configuration() {
                             setSelectedSection("font");
                           }}
                         >
-                          <RadialBlur className="h-6 w-6" />
-                          <span className="mx-2 w-20">Font</span>{" "}
-                          <ChevronIcon className="h-6 w-6 rotate-180" />
+                          <RadialBlur className="h-5 w-5" />
+                          <span className="mx-2 w-16 text-base">Font</span>{" "}
+                          <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
                           className="w-[40vw] h-16 text-lg flex items-center gap-x-3"
@@ -271,9 +283,9 @@ export default function Configuration() {
                             setSelectedSection("scaling");
                           }}
                         >
-                          <ScalingIcon className="h-8 w-8" />
-                          <span className="mx-2 w-20">Scaling</span>{" "}
-                          <ChevronIcon className="h-6 w-6 rotate-180" />
+                          <ScalingIcon className="h-6 w-6" />
+                          <span className="mx-2 w-20 text-base">Scaling</span>{" "}
+                          <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                       </div>
                     </>
@@ -316,6 +328,21 @@ export default function Configuration() {
                         <ArrowLeftIcon className="h-5 w-5" />
                       </Button>
                       <Radiuses />
+                    </div>
+                  )}
+                  {selectedSection === "borderWidths" && (
+                    <div className="w-full h-full">
+                      <Button
+                        isIconOnly
+                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        variant="light"
+                        onPress={() => {
+                          setSelectedSection("none");
+                        }}
+                      >
+                        <ArrowLeftIcon className="h-5 w-5" />
+                      </Button>
+                      <BorderWidths />
                     </div>
                   )}
                   {selectedSection === "font" && (

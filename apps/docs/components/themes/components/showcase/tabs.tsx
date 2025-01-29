@@ -3,7 +3,7 @@ import {TabsProps, Tabs, Tab} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {HeroUIScaling} from "../../types";
+import {Border, HeroUIScaling} from "../../types";
 
 type Color = TabsProps["color"];
 type Radius = TabsProps["radius"];
@@ -14,21 +14,19 @@ const SectionBase = ({
   isDisabled,
   radius,
   variant,
-  className,
+  classNames,
 }: {
   color?: Color;
   isDisabled?: boolean;
   radius?: Radius;
   variant?: Variant;
-  className?: string;
+  classNames?: any;
 }) => {
   return (
     <Tabs
       key={color}
       aria-label="Tabs colors"
-      classNames={{
-        tab: className,
-      }}
+      classNames={classNames}
       color={color}
       isDisabled={isDisabled}
       radius={radius}
@@ -45,33 +43,44 @@ const Section = ({
   color,
   radius,
   scaling,
+  borderWidthValue,
 }: {
   color: Color;
   radius: Radius;
   scaling: HeroUIScaling;
+  borderWidthValue: Border;
 }) => {
   const variants = ["solid", "bordered", "light", "underlined"];
-  let className = "text-tiny px-2 h-6";
+
+  let borderClass = "border-medium";
+
+  if (borderWidthValue === "thin") {
+    borderClass = "border-small";
+  } else if (borderWidthValue === "thick") {
+    borderClass = "border-large";
+  }
+
+  let classNames = {tab: "text-tiny px-2 h-6"};
 
   switch (scaling) {
     case 90: {
-      className = "text-tiny px-2 h-6";
+      classNames = {tab: "text-tiny px-2 h-6"};
       break;
     }
     case 95: {
-      className = "text-tiny px-2 h-7";
+      classNames = {tab: "text-tiny px-2 h-7"};
       break;
     }
     case 100: {
-      className = "text-tiny px-3 h-7";
+      classNames = {tab: "text-tiny px-3 h-7"};
       break;
     }
     case 105: {
-      className = "text-medium px-3 h-8";
+      classNames = {tab: "text-medium px-3 h-8"};
       break;
     }
     case 110: {
-      className = "text-medium px-4 h-9";
+      classNames = {tab: "text-medium px-4 h-9"};
       break;
     }
   }
@@ -82,14 +91,17 @@ const Section = ({
         cloneElement(<SectionBase key={idx} />, {
           color,
           variant,
-          className,
+          classNames: {
+            ...classNames,
+            tabList: variant === "bordered" ? borderClass : "",
+          },
           isDisabled: false,
           radius,
         }),
       )}
       {cloneElement(<SectionBase />, {
         color,
-        className,
+        classNames,
         variant: "solid",
         isDisabled: true,
         radius,
@@ -100,12 +112,18 @@ const Section = ({
 
 export const TabsComponent = () => {
   const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-  const {radiusValue, scaling} = useThemeBuilder();
+  const {radiusValue, scaling, borderWidthValue} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="Tabs">
       {colors.map((color, idx) => (
-        <Section key={idx} color={color} radius={radiusValue} scaling={scaling} />
+        <Section
+          key={idx}
+          borderWidthValue={borderWidthValue}
+          color={color}
+          radius={radiusValue}
+          scaling={scaling}
+        />
       ))}
     </ShowcaseComponent>
   );

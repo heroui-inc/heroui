@@ -1,9 +1,11 @@
 import {cloneElement} from "react";
 import {InputProps, Input} from "@heroui/react";
+import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {HeroUIScaling} from "../../types";
+import {Border, HeroUIScaling} from "../../types";
+import {getBorderWidth} from "../../utils/shared";
 
 type Color = InputProps["color"];
 type Radius = InputProps["radius"];
@@ -38,13 +40,18 @@ const Section = ({
   color,
   radius,
   scaling,
+  borderWidthValue,
 }: {
   color: Color;
   radius: Radius;
   scaling: HeroUIScaling;
+  borderWidthValue: Border;
 }) => {
   const variants = ["flat", "bordered", "faded", "underlined"];
   let classNames = {base: "h-10 w-[340px]", label: "text-small"};
+
+  const border = getBorderWidth(borderWidthValue);
+  const borderClassName = `border-${border}`;
 
   switch (scaling) {
     case 90: {
@@ -75,7 +82,12 @@ const Section = ({
         cloneElement(<SectionBase key={idx} />, {
           color,
           variant,
-          classNames,
+          classNames: {
+            ...classNames,
+            inputWrapper: clsx(
+              variant === "bordered" ? `${borderClassName} border-${color}-200` : "",
+            ),
+          },
           isDisabled: false,
           radius,
         }),
@@ -93,12 +105,18 @@ const Section = ({
 
 export const InputComponent = () => {
   const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-  const {radiusValue, scaling} = useThemeBuilder();
+  const {radiusValue, scaling, borderWidthValue} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="Input">
       {colors.map((color, idx) => (
-        <Section key={idx} color={color} radius={radiusValue} scaling={scaling} />
+        <Section
+          key={idx}
+          borderWidthValue={borderWidthValue}
+          color={color}
+          radius={radiusValue}
+          scaling={scaling}
+        />
       ))}
     </ShowcaseComponent>
   );

@@ -1,8 +1,10 @@
 import {cloneElement} from "react";
 import {ButtonProps, Button as HeroUIButton} from "@heroui/react";
+import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
+import {Border} from "../../types";
 
 type Color = ButtonProps["color"];
 type Radius = ButtonProps["radius"];
@@ -35,13 +37,31 @@ const SectionBase = ({
   );
 };
 
-const Section = ({color, radius, scaling}: {color: Color; radius: Radius; scaling: number}) => {
+const Section = ({
+  color,
+  radius,
+  scaling,
+  borderWidthValue,
+}: {
+  color: Color;
+  radius: Radius;
+  scaling: number;
+  borderWidthValue: Border;
+}) => {
   const variants = ["solid", "shadow", "bordered", "flat", "faded", "ghost"];
   let className = "px-6 min-w-16 h-10 text-small";
 
+  let borderClass = "border-medium";
+
+  if (borderWidthValue === "thin") {
+    borderClass = "border-small";
+  } else if (borderWidthValue === "thick") {
+    borderClass = "border-large";
+  }
+
   switch (scaling) {
     case 90: {
-      className = "px-4 min-w-12 h-8 text-[0.7rem]";
+      className = clsx("px-4 min-w-12 h-8 text-[0.7rem]");
       break;
     }
     case 95: {
@@ -65,7 +85,16 @@ const Section = ({color, radius, scaling}: {color: Color; radius: Radius; scalin
   return (
     <div key={color} className="flex flex-col gap-y-4">
       {variants.map((variant) =>
-        cloneElement(<SectionBase />, {color, radius, className, isDisabled: false, variant}),
+        cloneElement(<SectionBase />, {
+          color,
+          radius,
+          className: clsx(
+            className,
+            variant === "bordered" || variant === "faded" || variant === "ghost" ? borderClass : "",
+          ),
+          isDisabled: false,
+          variant,
+        }),
       )}
       {cloneElement(<SectionBase />, {
         color,
@@ -80,12 +109,18 @@ const Section = ({color, radius, scaling}: {color: Color; radius: Radius; scalin
 
 export const Button = () => {
   const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-  const {radiusValue, scaling} = useThemeBuilder();
+  const {radiusValue, scaling, borderWidthValue} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="Button">
       {colors.map((color, idx) => (
-        <Section key={idx} color={color} radius={radiusValue} scaling={scaling} />
+        <Section
+          key={idx}
+          borderWidthValue={borderWidthValue}
+          color={color}
+          radius={radiusValue}
+          scaling={scaling}
+        />
       ))}
     </ShowcaseComponent>
   );

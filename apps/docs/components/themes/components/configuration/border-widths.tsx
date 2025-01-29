@@ -11,21 +11,21 @@ export function BorderWidths() {
   return (
     <ConfigSection icon={<Crop className="w-4 h-4" />} title="Border width">
       <EditableButton
-        className="rounded-tl-md border-t-2 border-l-2"
+        className="rounded-tl-md border-t-1 border-l-1"
         setValue={setBorderWidthValue}
-        title="sm"
+        title="thin"
         value={borderWidthValue}
       />
       <EditableButton
-        className="rounded-tl-md border-t-3 border-l-3"
+        className="rounded-tl-md border-t-2 border-l-2"
         setValue={setBorderWidthValue}
-        title="md"
+        title="medium"
         value={borderWidthValue}
       />
       <EditableButton
         className="rounded-tl-md border-t-4 border-l-4"
         setValue={setBorderWidthValue}
-        title="lg"
+        title="thick"
         value={borderWidthValue}
       />
     </ConfigSection>

@@ -8,16 +8,16 @@ import {
   ConfigLayout,
   ThemeType,
   NextUIRadius,
-  NextUISize,
   TemplateType,
   FontType,
   HeroUIScaling,
+  Border,
 } from "./types";
 
 export interface ThemeBuilderContextProps {
   config: Config;
   radiusValue: NextUIRadius;
-  borderWidthValue: NextUISize;
+  borderWidthValue: Border;
   templateTheme: TemplateType;
   font: FontType;
   scaling: HeroUIScaling;
@@ -45,7 +45,7 @@ export interface ThemeBuilderContextProps {
   setOtherParams: (newConfig: Partial<ConfigLayout["otherParams"]>) => void;
   setRadius: (newConfig: Partial<ConfigLayout["radius"]>) => void;
   setRadiusValue: (radius: NextUIRadius) => void;
-  setBorderWidthValue: (borderWidth: NextUISize) => void;
+  setBorderWidthValue: (borderWidth: Border) => void;
   setTemplateTheme: (theme: TemplateType) => void;
   setFont: (font: FontType) => void;
   setScaling: (scale: HeroUIScaling) => void;
@@ -54,7 +54,7 @@ export interface ThemeBuilderContextProps {
 const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   config: initialConfig,
   radiusValue: "md",
-  borderWidthValue: "md",
+  borderWidthValue: "thick",
   templateTheme: "heroui",
   font: "inter",
   scaling: 100,
@@ -84,7 +84,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
   const [lsConfig] = useLocalStorage<Config>(configKey, initialConfig);
   const [config, setConfig] = useState<Config>(lsConfig);
   const [radiusValue, setRadiusValue] = useState<NextUIRadius>("sm");
-  const [borderWidthValue, setBorderWidthValue] = useState<NextUISize>("md");
+  const [borderWidthValue, setBorderWidthValue] = useState<Border>("thin");
   const [templateTheme, setTemplateTheme] = useState<TemplateType>("heroui");
   const [font, setFont] = useState<FontType>("inter");
   const [scaling, setScaling] = useState<HeroUIScaling>(100);

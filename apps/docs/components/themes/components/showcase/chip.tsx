@@ -1,9 +1,10 @@
 import {cloneElement} from "react";
 import {ChipProps, Chip as HeroUIChip} from "@heroui/react";
+import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {HeroUIScaling} from "../../types";
+import {Border, HeroUIScaling} from "../../types";
 
 type Color = ChipProps["color"];
 type Radius = ChipProps["radius"];
@@ -40,12 +41,22 @@ const Section = ({
   color,
   radius,
   scaling,
+  borderWidthValue,
 }: {
   color: Color;
   radius: Radius;
   scaling: HeroUIScaling;
+  borderWidthValue: Border;
 }) => {
-  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow", "dot"];
+  const variants = ["solid", "bordered", "light", "flat", "faded", "shadow"];
+
+  let borderClass = "border-medium";
+
+  if (borderWidthValue === "thin") {
+    borderClass = "border-small";
+  } else if (borderWidthValue === "thick") {
+    borderClass = "border-large";
+  }
 
   let className = "px-1 h-6 text-tiny";
 
@@ -63,11 +74,11 @@ const Section = ({
       break;
     }
     case 105: {
-      className = "px-1 h-7 text-medium";
+      className = "px-2 h-8 text-medium";
       break;
     }
     case 110: {
-      className = "px-2 h-8 text-medium";
+      className = "px-3 h-8 text-medium";
       break;
     }
   }
@@ -77,7 +88,10 @@ const Section = ({
       {variants.map((variant, idx) =>
         cloneElement(<SectionBase key={idx} />, {
           color,
-          className,
+          className: clsx(
+            className,
+            variant === "bordered" || variant === "faded" ? borderClass : "",
+          ),
           variant,
           isDisabled: false,
           radius,
@@ -96,12 +110,18 @@ const Section = ({
 
 export const Chip = () => {
   const colors: Color[] = ["default", "primary", "secondary", "success", "warning", "danger"];
-  const {radiusValue, scaling} = useThemeBuilder();
+  const {radiusValue, scaling, borderWidthValue} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="Chip">
       {colors.map((color, idx) => (
-        <Section key={idx} color={color} radius={radiusValue} scaling={scaling} />
+        <Section
+          key={idx}
+          borderWidthValue={borderWidthValue}
+          color={color}
+          radius={radiusValue}
+          scaling={scaling}
+        />
       ))}
     </ShowcaseComponent>
   );
