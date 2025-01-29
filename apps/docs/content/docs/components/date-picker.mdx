@@ -39,21 +39,33 @@ DatePicker combines a DateInput and a Calendar popover to allow users to enter o
 
 For some usages, you may require [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/). The package provides objects and functions for representing and manipulating dates and times in a locale-aware manner. To avoid incompatibility issues, please use our internal one.
 
-<ImportTabs
+<PackageManagers
   commands={{
-    main: 'import {parseAbsoluteToLocal} from "@heroui/react";',
-    individual: 'import {parseAbsoluteToLocal} from "@heroui/internationalized-date";',
+    npm: "npm install @heroui/internationalized-date",
+    yarn: "yarn add @heroui/internationalized-date",
+    pnpm: "pnpm add @heroui/internationalized-date",
+    bun: "bun add @heroui/internationalized-date",
   }}
 />
+
+<Blockquote color="warning">
+**Note**: <Code className="px-1 py-0.5 text-small md:text-tiny font-mono">@heroui/internationalized-date</Code> is only available for individual installation.
+</Blockquote>
 
 For some usages, you may require `@react-aria/i18n`. To avoid incompatibility issues, please use our internal one.
 
-<ImportTabs
+<PackageManagers
   commands={{
-    main: 'import {I18nProvider} from "@heroui/react";',
-    individual: 'import {I18nProvider} from "@heroui/react-aria-i18n";',
+    npm: "npm install @heroui/react-aria-i18n",
+    yarn: "yarn add @heroui/react-aria-i18n",
+    pnpm: "pnpm add @heroui/react-aria-i18n",
+    bun: "bun add @heroui/react-aria-i18n",
   }}
 />
+
+<Blockquote color="warning">
+**Note**: <Code className="px-1 py-0.5 text-small md:text-tiny font-mono">@heroui/react-aria-i18n</Code> is only available for individual installation.
+</Blockquote>
 
 ## Usage
 
