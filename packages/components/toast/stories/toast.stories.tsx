@@ -270,6 +270,46 @@ const CustomToastTemplate = (args) => {
   );
 };
 
+const CustomCloseButtonTemplate = (args) => {
+  return (
+    <>
+      <ToastProvider
+        placement={args.placement}
+        toastProps={{
+          classNames: {
+            closeButton: "opacity-100 absolute right-4 top-1/2 -translate-y-1/2",
+          },
+        }}
+      />
+      <Button
+        onPress={() =>
+          addToast({
+            title: "Toast Title",
+            description: "Toast Description",
+            closeIcon: (
+              <svg
+                fill="none"
+                height="32"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                width="32"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            ),
+          })
+        }
+      >
+        Toast
+      </Button>
+    </>
+  );
+};
+
 export const Default = {
   render: Template,
   args: {
@@ -356,6 +396,13 @@ export const WithEndContent = {
 
 export const CustomStyles = {
   render: CustomToastTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const CustomCloseButton = {
+  render: CustomCloseButtonTemplate,
   args: {
     ...defaultProps,
   },

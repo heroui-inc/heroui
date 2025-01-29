@@ -16,6 +16,7 @@ interface ToastProviderProps {
     | "left-top"
     | "center-top";
   disableAnimation?: boolean;
+  toastProps?: ToastProps;
   toastOffset?: number;
 }
 
@@ -35,6 +36,7 @@ export const ToastProvider = ({
   disableAnimation: disableAnimationProp = false,
   maxVisibleToasts = 3,
   toastOffset = 0,
+  toastProps = {},
 }: ToastProviderProps) => {
   const toastQueue = useToastQueue(getToastQueue());
   const globalContext = useProviderContext();
@@ -50,6 +52,7 @@ export const ToastProvider = ({
       maxVisibleToasts={maxVisibleToasts}
       placement={placement}
       toastOffset={toastOffset}
+      toastProps={toastProps}
       toastQueue={toastQueue}
     />
   );

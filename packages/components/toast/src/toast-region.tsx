@@ -20,6 +20,7 @@ interface ToastRegionProps<T> extends AriaToastRegionProps {
   disableAnimation: boolean;
   maxVisibleToasts: number;
   toastOffset?: number;
+  toastProps?: ToastProps;
 }
 
 export function ToastRegion<T extends ToastProps>({
@@ -28,6 +29,7 @@ export function ToastRegion<T extends ToastProps>({
   disableAnimation,
   maxVisibleToasts,
   toastOffset,
+  toastProps = {},
   ...props
 }: ToastRegionProps<T>) {
   const ref = useRef(null);
@@ -64,7 +66,7 @@ export function ToastRegion<T extends ToastProps>({
 
   const handleTouchStart = useCallback(() => {
     setIsTouched(true);
-  }, [setIsTouched]);
+  }, []);
 
   return (
     <div
@@ -85,7 +87,7 @@ export function ToastRegion<T extends ToastProps>({
               key={toast.key}
               state={toastQueue}
               toast={toast}
-              {...toast.content}
+              {...mergeProps(toastProps, toast.content)}
               disableAnimation={disableAnimation}
               heights={heights}
               index={index}

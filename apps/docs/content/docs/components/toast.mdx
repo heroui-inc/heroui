@@ -77,6 +77,7 @@ export default function RootLayout({children}) {
 }
 ```
 
+
 ### Usage
 
 <CodeDemo title="Usage" files={toastContent.usage} />
@@ -116,6 +117,34 @@ You can customize the alert by passing custom Tailwind CSS classes to the compon
   title="Custom Style"
   files={toastContent.customStyles}
 />
+
+### Custom Close Icon
+
+You can pass a custom close icon to the toast by passing the `closeIcon` prop and a custom class name to the `closeButton` slot.
+
+<CodeDemo
+  title="Custom Close Icon"
+  files={toastContent.customCloseIcon}
+/>
+
+### Global Toast Props
+
+You can pass global toast props to the `ToastProvider` to apply to all toasts.
+
+```jsx
+<ToastProvider 
+  toastProps={{
+    radius: "full",
+    color: "primary",
+    variant: "flat",
+    timeout: 1000,
+    hideIcon: true,
+    classNames: {
+      closeButton: "opacity-100 absolute right-4 top-1/2 -translate-y-1/2",
+    },
+  }} 
+/>
+```
 
 <Spacer y={4} />
 
@@ -205,6 +234,12 @@ Toast has the following slots:
       default: "-"
     },
     {
+      attribute: "closeIcon",
+      type: "ReactNode",
+      description: "The close icon for the toast - overrides the default close icon",
+      default: "-"
+    },
+    {
       attribute: "timeout",
       type: "number | undefined",
       description: "Time in milliseconds after which the toast will be closed", 
@@ -276,6 +311,12 @@ Toast has the following slots:
       type: "number",
       description: "offset distance from the top or bottom",
       default: "0"
+    },
+    {
+      attribute: "toastProps",
+      type: "ToastProps",
+      description: "Props to be passed to all toasts",
+      default: "-"
     }
   ]}
 />

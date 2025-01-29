@@ -41,7 +41,7 @@ export interface ToastProps extends ToastVariantProps {
    *    content: "content-classes"
    *    description: "description-classes"
    *    title: "title-classes"
-   *    laodingIcon: "loading-icon-classes",
+   *    loadingIcon: "loading-icon-classes",
    *    icon: "icon-classes",
    *    progressTrack: "progress-track-classes",
    *    progressIndicator: "progress-indicator-classes",
@@ -60,6 +60,10 @@ export interface ToastProps extends ToastVariantProps {
    * Icon to be displayed in the toast - overrides the default icon
    */
   icon?: ReactNode;
+  /**
+   * Icon to be displayed in the close button - overrides the default close icon
+   */
+  closeIcon?: ReactNode | ((props: any) => ReactNode);
   /**
    * Icon to be displayed in the loading toast - overrides the loading icon
    */
@@ -125,6 +129,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     classNames,
     toast,
     endContent,
+    closeIcon,
     hideIcon = false,
     placement: placementProp = "right-bottom",
     isRegionExpanded,
@@ -554,6 +559,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     icon,
     loadingIcon,
     domRef,
+    closeIcon,
     classNames,
     color: variantProps["color"],
     hideIcon,

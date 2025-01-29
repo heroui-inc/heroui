@@ -34,6 +34,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     endContent,
     color,
     hideIcon,
+    closeIcon,
     disableAnimation,
     progressBarRef,
     classNames,
@@ -70,6 +71,9 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       )
     : null;
 
+  const customCloseIcon =
+    closeIcon && isValidElement(closeIcon) ? cloneElement(closeIcon, {}) : null;
+
   const toastContent = (
     <Component ref={domRef} {...getToastProps()}>
       <main {...getContentProps()}>
@@ -90,7 +94,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
         </div>
       )}
       <Button isIconOnly {...(getCloseButtonProps() as ButtonProps)}>
-        <CloseIcon {...getCloseIconProps()} />
+        {customCloseIcon || <CloseIcon {...getCloseIconProps()} />}
       </Button>
       {endContent}
     </Component>
@@ -121,6 +125,6 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
   );
 });
 
-Toast.displayName = "NextUI.Toast";
+Toast.displayName = "HeroUI.Toast";
 
 export default Toast;
