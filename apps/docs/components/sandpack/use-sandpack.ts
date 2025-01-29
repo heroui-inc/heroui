@@ -70,7 +70,7 @@ export const useSandpack = ({
   }, {});
 
   let dependencies = {
-    "@heroui/motion": "11.18.2",
+    "@heroui/motion": "11.9.0",
     "@heroui/react": "latest",
   };
 
