@@ -59,7 +59,6 @@ export default function Page() {
           </NavbarItem>
           <DropdownMenu
             aria-label="ACME features"
-            className="w-[340px]"
             itemClasses={{
               base: "gap-4",
             }}
