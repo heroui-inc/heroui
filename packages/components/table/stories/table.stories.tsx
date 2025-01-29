@@ -1078,7 +1078,7 @@ export const CustomWithClassNames = {
   args: {
     ...defaultProps,
     classNames: {
-      base: ["max-w-3xl", "bg-gradient-to-br", "from-purple-500", "to-indigo-900/90", "shadow-xs"],
+      base: ["max-w-3xl", "bg-gradient-to-br", "from-purple-500", "to-indigo-900/90", "shadow-xl"],
       th: ["bg-transparent", "text-default-700", "border-b", "border-default"],
       td: [
         "py-4",

@@ -240,7 +240,7 @@ const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
 export const Example = () => {
   return (
-    <Dropdown className="shadow-sm" placement="bottom">
+    <Dropdown className="shadow-xl" placement="bottom">
       <DropdownTrigger>
         <Button color="success" variant="flat">
           Actions

@@ -151,7 +151,7 @@ const popover = tv({
         backdrop: "bg-overlay/50 backdrop-opacity-disabled",
       },
       blur: {
-        backdrop: "backdrop-blur-xs backdrop-saturate-150 bg-overlay/30",
+        backdrop: "backdrop-blur-sm backdrop-saturate-150 bg-overlay/30",
       },
     },
     triggerScaleOnOpen: {

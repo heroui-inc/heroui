@@ -41,7 +41,7 @@
   flex-direction: row;
 }
 #carbonads .carbon-img {
-  @apply shadow-sm;
+  @apply shadow-xl;
   display: block;
   line-height: 1;
   max-width: 130px;
