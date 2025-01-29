@@ -101,7 +101,7 @@ const MyInput = extendVariants(Input, {
         inputWrapper: [
           "bg-zinc-100",
           "border",
-          "shadow-xs",
+          "shadow-sm",
           "transition-colors",
           "focus-within:bg-zinc-100",
           "data-[hover=true]:border-zinc-600",

@@ -61,7 +61,7 @@ export default {
     {
       title: "Focus interactions",
       description:
-        "Focus ring-3 will appear only when user navigates with keyboard or screen reader.",
+        "Focus ring will appear only when user navigates with keyboard or screen reader.",
       icon: <MouseCircleLinearIcon className="text-pink-500" />,
     },
     {
