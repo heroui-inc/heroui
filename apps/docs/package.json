@@ -35,7 +35,6 @@
     "@heroui/use-clipboard": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
-    "@heroui/motion": "workspace:*",
     "@heroui/react-aria-i18n": "workspace:*",
     "@heroui/internationalized-date": "workspace:*",
     "@iconify/icons-solar": "1.2.3",
