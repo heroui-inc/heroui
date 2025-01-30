@@ -11,7 +11,7 @@ HeroUI supports both `light` and `dark` themes. To enable dark mode, simply add 
 // main.tsx or main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 import App from "./App";
 import "./index.css";
 
@@ -65,7 +65,7 @@ Component with the `HeroUIProvider` and the `next-themes` provider components.
 // app/providers.tsx
 "use client";
 
-import {HeroUIProvider} from '@heroui/react'
+import {HeroUIProvider} from '@vezham/react'
 import {ThemeProvider as NextThemesProvider} from "next-themes";
 
 export function Providers({children}: { children: React.ReactNode }) {
@@ -140,7 +140,7 @@ Component with the `HeroUIProvider` and the `next-themes` provider components.
 
 ```jsx
 // pages/_app.js
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 import {ThemeProvider as NextThemesProvider} from "next-themes";
 
 function MyApp({ Component, pageProps }) {
@@ -188,19 +188,19 @@ export const ThemeSwitcher = () => {
 ## Using use-theme hook
 
 In case you're using plain React with [Vite](/docs/frameworks/vite) or [Create React App](https://create-react-app.dev/) 
-you can use the [@heroui/use-theme](https://github.com/heroui-inc/heroui/tree/canary/packages/hooks/use-theme) hook to switch between themes.
+you can use the [@vezham/use-theme](https://github.com/vezham/heroui/tree/canary/packages/hooks/use-theme) hook to switch between themes.
 
 <Steps> 
 
-### Install @heroui/use-theme
+### Install @vezham/use-theme
 
-Install `@heroui/use-theme` in your project.
+Install `@vezham/use-theme` in your project.
 
 <PackageManagers
   commands={{
-    npm: 'npm install @heroui/use-theme',
-    yarn: 'yarn add @heroui/use-theme',
-    pnpm: 'pnpm add @heroui/use-theme',
+    npm: 'npm install @vezham/use-theme',
+    yarn: 'yarn add @vezham/use-theme',
+    pnpm: 'pnpm add @vezham/use-theme',
   }}
 /> 
 
@@ -209,7 +209,7 @@ Install `@heroui/use-theme` in your project.
 ```jsx
 // App.tsx or App.jsx
 import React from "react";
-import {useTheme} from "@heroui/use-theme";
+import {useTheme} from "@vezham/use-theme";
 
 export default function App() {
   const {theme} = useTheme();
@@ -230,7 +230,7 @@ Add the theme switcher to your app.
 // 'use client'; // uncomment this line if you're using Next.js App Directory Setup
 
 // components/ThemeSwitcher.tsx
-import {useTheme} from "@heroui/use-theme";
+import {useTheme} from "@vezham/use-theme";
 
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()

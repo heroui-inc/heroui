@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 
 import {notFound} from "next/navigation";
 import {allDocs} from "contentlayer2/generated";
-import {Link} from "@heroui/react";
+import {Link} from "@vezham/react";
 
 import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";

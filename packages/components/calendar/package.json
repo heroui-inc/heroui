@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/calendar",
-  "version": "2.2.10",
+  "name": "@vezham/calendar",
+  "version": "0.0.1",
   "description": "A calendar displays one or more date grids and allows users to select a single date.",
   "keywords": [
     "calendar"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/components/calendar"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -34,20 +34,20 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.0",
-    "@heroui/theme": ">=2.4.0",
+    "@vezham/system": ">=2.4.0",
+    "@vezham/theme": ">=2.4.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
   "dependencies": {
-    "@heroui/react-utils": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/shared-icons": "workspace:*",
-    "@heroui/framer-utils": "workspace:*",
-    "@heroui/use-aria-button": "workspace:*",
-    "@heroui/button": "workspace:*",
-    "@heroui/dom-animation": "workspace:*",
+    "@vezham/react-utils": "workspace:*",
+    "@vezham/shared-utils": "workspace:*",
+    "@vezham/shared-icons": "workspace:*",
+    "@vezham/framer-utils": "workspace:*",
+    "@vezham/use-aria-button": "workspace:*",
+    "@vezham/button": "workspace:*",
+    "@vezham/dom-animation": "workspace:*",
     "@internationalized/date": "3.6.0",
     "@react-aria/calendar": "3.6.0",
     "@react-aria/focus": "3.19.0",
@@ -64,10 +64,10 @@
     "@types/lodash.debounce": "^4.0.7"
   },
   "devDependencies": {
-    "@heroui/system": "workspace:*",
-    "@heroui/theme": "workspace:*",
-    "@heroui/radio": "workspace:*",
-    "@heroui/test-utils": "workspace:*",
+    "@vezham/system": "workspace:*",
+    "@vezham/theme": "workspace:*",
+    "@vezham/radio": "workspace:*",
+    "@vezham/test-utils": "workspace:*",
     "framer-motion": "11.9.0",
     "clean-package": "2.2.0",
     "react": "^18.0.0",

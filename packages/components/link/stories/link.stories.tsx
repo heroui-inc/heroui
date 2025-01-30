@@ -1,9 +1,9 @@
-import type {VariantProps} from "@heroui/theme";
+import type {VariantProps} from "@vezham/theme";
 
 import {Meta} from "@storybook/react";
 import React, {useState} from "react";
-import {tv} from "@heroui/theme";
-import {link} from "@heroui/theme";
+import {tv} from "@vezham/theme";
+import {link} from "@vezham/theme";
 
 import {Link, LinkProps} from "../src";
 

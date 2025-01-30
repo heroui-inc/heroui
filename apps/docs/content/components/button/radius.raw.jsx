@@ -1,4 +1,4 @@
-import {Button} from "@heroui/react";
+import {Button} from "@vezham/react";
 
 export default function App() {
   return (

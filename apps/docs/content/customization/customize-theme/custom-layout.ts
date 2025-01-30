@@ -1,4 +1,4 @@
-const App = `import {Button} from '@heroui/react';
+const App = `import {Button} from '@vezham/react';
 
 export default function App() {
   return (

@@ -1,4 +1,4 @@
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseBreadcrumbItemProps, useBreadcrumbItem} from "./use-breadcrumb-item";
 

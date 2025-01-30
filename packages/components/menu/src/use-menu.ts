@@ -1,14 +1,14 @@
-import type {HTMLHeroUIProps, PropGetter, SharedSelection} from "@heroui/system";
+import type {HTMLHeroUIProps, PropGetter, SharedSelection} from "@vezham/system";
 
-import {useProviderContext} from "@heroui/system";
+import {useProviderContext} from "@vezham/system";
 import {AriaMenuProps} from "@react-types/menu";
 import {AriaMenuOptions} from "@react-aria/menu";
 import {useMenu as useAriaMenu} from "@react-aria/menu";
-import {menu, MenuVariantProps, SlotsToClasses, MenuSlots} from "@heroui/theme";
+import {menu, MenuVariantProps, SlotsToClasses, MenuSlots} from "@vezham/theme";
 import {TreeState, useTreeState} from "@react-stately/tree";
-import {ReactRef, filterDOMProps, useDOMRef} from "@heroui/react-utils";
+import {ReactRef, filterDOMProps, useDOMRef} from "@vezham/react-utils";
 import {ReactNode, useMemo} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {clsx} from "@vezham/shared-utils";
 
 import {MenuItemProps} from "./menu-item";
 

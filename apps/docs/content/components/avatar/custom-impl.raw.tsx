@@ -1,5 +1,5 @@
 import {forwardRef, useMemo} from "react";
-import {AvatarIcon, useAvatar, AvatarProps as BaseAvatarProps} from "@heroui/react";
+import {AvatarIcon, useAvatar, AvatarProps as BaseAvatarProps} from "@vezham/react";
 
 export interface AvatarProps extends BaseAvatarProps {}
 

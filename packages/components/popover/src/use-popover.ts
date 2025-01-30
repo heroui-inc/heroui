@@ -1,19 +1,19 @@
-import type {PopoverVariantProps, SlotsToClasses, PopoverSlots} from "@heroui/theme";
+import type {PopoverVariantProps, SlotsToClasses, PopoverSlots} from "@vezham/theme";
 import type {HTMLMotionProps} from "framer-motion";
 import type {PressEvent} from "@react-types/shared";
 
 import {RefObject, Ref, useEffect} from "react";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {ReactRef, useDOMRef} from "@vezham/react-utils";
 import {OverlayTriggerState, useOverlayTriggerState} from "@react-stately/overlays";
 import {useFocusRing} from "@react-aria/focus";
 import {ariaHideOutside, useOverlayTrigger, usePreventScroll} from "@react-aria/overlays";
 import {OverlayTriggerProps} from "@react-types/overlays";
-import {getShouldUseAxisPlacement} from "@heroui/aria-utils";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {getArrowPlacement} from "@heroui/aria-utils";
-import {popover} from "@heroui/theme";
+import {getShouldUseAxisPlacement} from "@vezham/aria-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {getArrowPlacement} from "@vezham/aria-utils";
+import {popover} from "@vezham/theme";
 import {mergeProps, mergeRefs} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
 import {useMemo, useCallback, useRef} from "react";
 import {AriaDialogProps} from "@react-aria/dialog";
 

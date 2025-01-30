@@ -1,23 +1,23 @@
-import type {PaginationSlots, PaginationVariantProps, SlotsToClasses} from "@heroui/theme";
+import type {PaginationSlots, PaginationVariantProps, SlotsToClasses} from "@vezham/theme";
 import type {Key, ReactNode, Ref} from "react";
-import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {HTMLHeroUIProps, PropGetter} from "@vezham/system";
 
-import {objectToDeps, Timer} from "@heroui/shared-utils";
+import {objectToDeps, Timer} from "@vezham/shared-utils";
 import {useLocale} from "@react-aria/i18n";
 import {
   UsePaginationProps as UseBasePaginationProps,
   PaginationItemValue,
   PaginationItemType,
-} from "@heroui/use-pagination";
+} from "@vezham/use-pagination";
 import {useEffect, useRef, useMemo} from "react";
-import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {usePagination as useBasePagination} from "@heroui/use-pagination";
+import {mapPropsVariants, useProviderContext} from "@vezham/system";
+import {usePagination as useBasePagination} from "@vezham/use-pagination";
 import scrollIntoView from "scroll-into-view-if-needed";
-import {pagination} from "@heroui/theme";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {pagination} from "@vezham/theme";
+import {useDOMRef} from "@vezham/react-utils";
+import {clsx, dataAttr} from "@vezham/shared-utils";
 import {PressEvent} from "@react-types/shared";
-import {useIntersectionObserver} from "@heroui/use-intersection-observer";
+import {useIntersectionObserver} from "@vezham/use-intersection-observer";
 
 export type PaginationItemRenderProps = {
   /**

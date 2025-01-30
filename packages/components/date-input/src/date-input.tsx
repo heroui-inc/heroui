@@ -1,7 +1,7 @@
 import type {DateValue} from "@internationalized/date";
 import type {ForwardedRef, ReactElement} from "react";
 
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseDateInputProps, useDateInput} from "./use-date-input";
 import {DateInputGroup} from "./date-input-group";

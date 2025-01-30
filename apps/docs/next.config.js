@@ -2,7 +2,7 @@ const withContentlayer = require("next-contentlayer2").withContentlayer;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@heroui/react", "@heroui/theme"],
+  transpilePackages: ["@vezham/react", "@vezham/theme"],
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   redirects: require("./next-redirect.js"),
   eslint: {

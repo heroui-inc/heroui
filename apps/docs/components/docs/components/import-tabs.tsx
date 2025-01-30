@@ -1,4 +1,4 @@
-import {Tabs, Tab, Snippet} from "@heroui/react";
+import {Tabs, Tab, Snippet} from "@vezham/react";
 
 import Codeblock from "./codeblock";
 

@@ -1,4 +1,4 @@
-const App = `import {CircularProgress, Card, CardBody, CardFooter, Chip} from "@heroui/react";
+const App = `import {CircularProgress, Card, CardBody, CardFooter, Chip} from "@vezham/react";
 
 export default function App() {
   return (

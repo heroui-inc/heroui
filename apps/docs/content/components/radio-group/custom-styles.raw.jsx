@@ -1,4 +1,4 @@
-import {RadioGroup, Radio, cn} from "@heroui/react";
+import {RadioGroup, Radio, cn} from "@vezham/react";
 
 export const CustomRadio = (props) => {
   const {children, ...otherProps} = props;

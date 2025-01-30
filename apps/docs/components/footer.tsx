@@ -1,7 +1,7 @@
 "use client";
 
 import {usePathname} from "next/navigation";
-import {Link} from "@heroui/react";
+import {Link} from "@vezham/react";
 
 import {getCurrentYear} from "@/utils/time";
 import {XIcon, GithubIcon, DiscordIcon} from "@/components/icons";

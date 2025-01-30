@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Link} from "@heroui/react";
+import {Link} from "@vezham/react";
 
 import {HashLinearIcon} from "@/components/icons";
 

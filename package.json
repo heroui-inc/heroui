@@ -1,7 +1,7 @@
 {
   "name": "heroui",
   "private": true,
-  "version": "2.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "author": {
     "name": "Junior Garcia",
@@ -9,21 +9,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroui-inc/heroui"
+    "url": "https://github.com/vezham/heroui"
   },
   "scripts": {
     "dev": "pnpm sb",
-    "build": "turbo build --filter=!@heroui/docs --filter=!@heroui/storybook",
-    "build:fast": "turbo build:fast --filter=!@heroui/docs --filter=!@heroui/storybook",
-    "dev:docs": "turbo dev --filter=@heroui/docs",
-    "build:docs": "turbo build --filter=@heroui/docs",
+    "build": "turbo build --filter=!@vezham/docs --filter=!@vezham/storybook",
+    "build:fast": "turbo build:fast --filter=!@vezham/docs --filter=!@vezham/storybook",
+    "dev:docs": "turbo dev --filter=@vezham/docs",
+    "build:docs": "turbo build --filter=@vezham/docs",
     "build:docs-meta": "node ./scripts/update-index-docs.js",
-    "start:docs": "turbo start --filter=@heroui/docs",
-    "deploy:docs": "pnpm --filter @heroui/docs deploy",
-    "deploy:stage-docs": "pnpm --filter @heroui/docs deploy:stage",
-    "sb": "pnpm --filter @heroui/storybook dev",
-    "build:sb": "pnpm --filter @heroui/storybook build",
-    "start:sb": "pnpm --filter @heroui/storybook start",
+    "start:docs": "turbo start --filter=@vezham/docs",
+    "deploy:docs": "pnpm --filter @vezham/docs deploy",
+    "deploy:stage-docs": "pnpm --filter @vezham/docs deploy:stage",
+    "sb": "pnpm --filter @vezham/storybook dev",
+    "build:sb": "pnpm --filter @vezham/storybook build",
+    "start:sb": "pnpm --filter @vezham/storybook start",
     "test": "jest --verbose --config ./jest.config.js",
     "test:strict": "cross-env STRICT_MODE=true pnpm test",
     "typecheck": "turbo typecheck",
@@ -52,7 +52,7 @@
     "release": "changeset publish",
     "version:canary": "changeset version --snapshot canary",
     "release:canary": "changeset publish --snapshot --no-git-tag --tag canary",
-    "postinstall": "husky install && pnpm --filter @heroui/theme build"
+    "postinstall": "husky install && pnpm --filter @vezham/theme build"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",

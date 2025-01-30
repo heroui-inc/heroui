@@ -1,4 +1,4 @@
-import {Alert} from "@heroui/react";
+import {Alert} from "@vezham/react";
 
 const UserIcon = ({fill = "currentColor", size, height, width, ...props}) => {
   return (

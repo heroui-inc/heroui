@@ -19,7 +19,7 @@ A slot is a part of a component that can be styled separately using the `classNa
 Let's override the default styles of the [Button](/docs/components/button) component, which is a component that has no slots.
 
 ```jsx {7}
-import {Button} from "@heroui/react";
+import {Button} from "@vezham/react";
 
 export default function App() {
   return (
@@ -67,7 +67,7 @@ The example below demonstrates styling these slots to create a custom circular p
 import slotsOverrideExample from "@/content/customization/override-styles/slots-example";
 
 ```jsx {9-12}
-import {CircularProgress, Card, CardBody} from "@heroui/react";
+import {CircularProgress, Card, CardBody} from "@vezham/react";
 
 export default function App() {
   return (
@@ -107,7 +107,7 @@ CSS Modules allow for the creation of local scope classes and variables. Here's 
 you can use it to override styles:
 
 ```jsx
-import {CircularProgress, Card, CardBody} from "@heroui/react";
+import {CircularProgress, Card, CardBody} from "@vezham/react";
 import styles from './App.module.css';
 
 export default function App() {
@@ -175,7 +175,7 @@ example to override the styles of a component:
 
 
 ```jsx
-import {CircularProgress, Card, CardBody} from "@heroui/react";
+import {CircularProgress, Card, CardBody} from "@vezham/react";
 import styled from 'styled-components';
 
 const StyledCard = styled(Card)`

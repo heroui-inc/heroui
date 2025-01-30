@@ -1,4 +1,4 @@
-import {DateInput} from "@heroui/react";
+import {DateInput} from "@vezham/react";
 import {getLocalTimeZone, today} from "@internationalized/date";
 
 export default function App() {

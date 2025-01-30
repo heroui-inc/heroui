@@ -1,12 +1,12 @@
-import {menuSection} from "@heroui/theme";
+import {menuSection} from "@vezham/theme";
 import {Node} from "@react-types/shared";
 import {TreeState} from "@react-stately/tree";
 import {useMenuSection} from "@react-aria/menu";
 import {useMemo, Key} from "react";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {mergeProps} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
-import {Divider} from "@heroui/divider";
+import {clsx} from "@vezham/shared-utils";
+import {Divider} from "@vezham/divider";
 
 import MenuItem, {MenuItemProps} from "./menu-item";
 import {MenuSectionBaseProps} from "./base/menu-section-base";

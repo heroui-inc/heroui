@@ -1,6 +1,6 @@
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@vezham/system";
+import {useDOMRef} from "@vezham/react-utils";
+import {clsx} from "@vezham/shared-utils";
 
 import {useModalContext} from "./modal-context";
 

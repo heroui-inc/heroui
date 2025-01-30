@@ -1,7 +1,7 @@
 import {cloneElement, useMemo} from "react";
-import {forwardRef} from "@heroui/system";
-import {ChevronRightIcon, EllipsisIcon} from "@heroui/shared-icons";
-import {warn} from "@heroui/shared-utils";
+import {forwardRef} from "@vezham/system";
+import {ChevronRightIcon, EllipsisIcon} from "@vezham/shared-icons";
+import {warn} from "@vezham/shared-utils";
 import {chain} from "@react-aria/utils";
 
 import {UseBreadcrumbsProps, useBreadcrumbs} from "./use-breadcrumbs";

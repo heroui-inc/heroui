@@ -1,5 +1,5 @@
-import {ButtonProps} from "@heroui/react";
-import {useClipboard} from "@heroui/use-clipboard";
+import {ButtonProps} from "@vezham/react";
+import {useClipboard} from "@vezham/use-clipboard";
 import {memo} from "react";
 
 import {PreviewButton} from "./preview-button";

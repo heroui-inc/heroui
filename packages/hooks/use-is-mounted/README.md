@@ -1,4 +1,4 @@
-# @heroui/use-is-mounted
+# @vezham/use-is-mounted
 
 A Quick description of the component
 
@@ -7,18 +7,18 @@ A Quick description of the component
 ## Installation
 
 ```sh
-yarn add @heroui/use-is-mounted
+yarn add @vezham/use-is-mounted
 # or
-npm i @heroui/use-is-mounted
+npm i @vezham/use-is-mounted
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

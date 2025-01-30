@@ -1,7 +1,7 @@
 export const rootFile = `
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HeroUIProvider } from "@heroui/react";
+import { HeroUIProvider } from "@vezham/react";
 import App from "./App";
 import "./styles.css";
 
@@ -28,14 +28,14 @@ export const getHtmlFile = (theme: string, entryFile: string) => `<!DOCTYPE html
   </body>
 </html>`;
 
-export const tailwindConfig = `const { heroui } = require("@heroui/react");
+export const tailwindConfig = `const { heroui } = require("@vezham/react");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./index.html",
     "./*.{js,ts,jsx,tsx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@vezham/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},

@@ -9,9 +9,9 @@ import {
   TableCell,
   getKeyValue,
   Spinner,
-} from "@heroui/react";
+} from "@vezham/react";
 import {useAsyncList} from "@react-stately/data";
-import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
+import {useInfiniteScroll} from "@vezham/use-infinite-scroll";
 import {useState} from "react";
 
 type SWCharacter = {

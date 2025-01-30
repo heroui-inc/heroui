@@ -1,9 +1,9 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {breadcrumbItem} from "@heroui/theme";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
-import {Button} from "@heroui/button";
-import {Tooltip} from "@heroui/tooltip";
+import {breadcrumbItem} from "@vezham/theme";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@vezham/dropdown";
+import {Button} from "@vezham/button";
+import {Tooltip} from "@vezham/tooltip";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -12,8 +12,8 @@ import {
   MailFilledIcon,
   PetBoldIcon,
   ShoppingCartBoldIcon,
-} from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+} from "@vezham/shared-icons";
+import {clsx} from "@vezham/shared-utils";
 
 import {Breadcrumbs, BreadcrumbItem, BreadcrumbsProps} from "../src";
 

@@ -1,4 +1,4 @@
-import {Image} from "@heroui/react";
+import {Image} from "@vezham/react";
 
 import manifest from "@/config/routes.json";
 import {DocsSidebar} from "@/components/docs/sidebar";

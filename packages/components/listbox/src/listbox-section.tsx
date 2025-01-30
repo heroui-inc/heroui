@@ -1,10 +1,10 @@
-import {listboxSection} from "@heroui/theme";
+import {listboxSection} from "@vezham/theme";
 import {Node} from "@react-types/shared";
 import {useMemo} from "react";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {mergeProps} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
-import {Divider} from "@heroui/divider";
+import {clsx} from "@vezham/shared-utils";
+import {Divider} from "@vezham/divider";
 import {ListState} from "@react-stately/list";
 import {useListBoxSection} from "@react-aria/listbox";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {alert, cn} from "@heroui/theme";
-import {Button} from "@heroui/button";
+import {alert, cn} from "@vezham/theme";
+import {Button} from "@vezham/button";
 
 import {Alert, AlertProps} from "../src";
 

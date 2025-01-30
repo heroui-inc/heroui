@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import * as React from "react";
 import {render, fireEvent, act} from "@testing-library/react";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {Button} from "@heroui/button";
+import {Button} from "@vezham/button";
 
 import {Popover, PopoverContent, PopoverTrigger} from "../src";
 import {Select, SelectItem} from "../../select/src";

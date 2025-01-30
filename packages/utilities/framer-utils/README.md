@@ -1,4 +1,4 @@
-# @heroui/framer-utils
+# @vezham/framer-utils
 
 A Quick description of the component
 
@@ -7,18 +7,18 @@ A Quick description of the component
 ## Installation
 
 ```sh
-yarn add @heroui/framer-utils
+yarn add @vezham/framer-utils
 # or
-npm i @heroui/framer-utils
+npm i @vezham/framer-utils
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

@@ -1,6 +1,6 @@
 export {Item as BaseItem} from "@react-stately/collections";
 import {ItemProps as BaseItemProps} from "@react-types/shared";
-import {HTMLHeroUIProps, As} from "@heroui/system";
+import {HTMLHeroUIProps, As} from "@vezham/system";
 
 /**
  * A modified version of the ItemProps from @react-types/shared, with the addition of the HeroUI props.

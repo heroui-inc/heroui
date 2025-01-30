@@ -1,4 +1,4 @@
-import {InputOtp} from "@heroui/react";
+import {InputOtp} from "@vezham/react";
 
 export default function App() {
   const colors = ["default", "primary", "secondary", "success", "warning", "danger"];

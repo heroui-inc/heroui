@@ -1,4 +1,4 @@
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseCircularProgressProps, useCircularProgress} from "./use-circular-progress";
 

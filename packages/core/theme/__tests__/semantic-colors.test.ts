@@ -1,5 +1,5 @@
 import {getContrast} from "color2k";
-import {get} from "@heroui/shared-utils";
+import {get} from "@vezham/shared-utils";
 
 import {semanticColors} from "../src/colors/semantic";
 

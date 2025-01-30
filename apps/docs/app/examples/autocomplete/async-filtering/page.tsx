@@ -2,7 +2,7 @@
 "use client";
 
 import * as React from "react";
-import {Autocomplete, AutocompleteItem} from "@heroui/react";
+import {Autocomplete, AutocompleteItem} from "@vezham/react";
 import {useAsyncList} from "@react-stately/data";
 
 type SWCharacter = {

@@ -1,4 +1,4 @@
-import {Spacer} from "@heroui/spacer";
+import {Spacer} from "@vezham/spacer";
 import {Suspense} from "react";
 
 import {Hero} from "@/components/marketing/hero";

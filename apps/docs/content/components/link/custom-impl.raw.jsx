@@ -1,7 +1,7 @@
 import {forwardRef} from "react";
-import {LinkIcon} from "@heroui/shared-icons";
-import {linkAnchorClasses} from "@heroui/theme";
-import {useLink} from "@heroui/react";
+import {LinkIcon} from "@vezham/shared-icons";
+import {linkAnchorClasses} from "@vezham/theme";
+import {useLink} from "@vezham/react";
 
 const MyLink = forwardRef((props, ref) => {
   const {

@@ -1,5 +1,5 @@
-const {heroui} = require("@heroui/theme/plugin");
-const {commonColors} = require("@heroui/theme/colors");
+const {heroui} = require("@vezham/theme/plugin");
+const {commonColors} = require("@vezham/theme/colors");
 const svgToDataUri = require("mini-svg-data-uri");
 const plugin = require("tailwindcss/plugin");
 const {default: flattenColorPalette} = require("tailwindcss/lib/util/flattenColorPalette");
@@ -17,7 +17,7 @@ module.exports = {
     "./layouts/**/*.{js,ts,jsx,tsx,mdx}",
     "./libs/**/*.{js,ts,jsx,tsx,mdx}",
     "./content/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@vezham/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {

@@ -1,4 +1,4 @@
-import {ScrollShadow} from "@heroui/react";
+import {ScrollShadow} from "@vezham/react";
 
 export const Content = () => (
   <div>

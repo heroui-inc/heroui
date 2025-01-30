@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Radio,
   ModalProps,
-} from "@heroui/react";
+} from "@vezham/react";
 import {useState} from "react";
 
 export default function Page() {

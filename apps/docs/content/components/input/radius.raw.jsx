@@ -1,4 +1,4 @@
-import {Input} from "@heroui/react";
+import {Input} from "@vezham/react";
 
 export default function App() {
   const radius = ["full", "lg", "md", "sm", "none"];
@@ -9,7 +9,7 @@ export default function App() {
         <Input
           key={r}
           className="max-w-[220px]"
-          defaultValue="junior@heroui.com"
+          defaultValue="junior@vezham.com"
           label="Email"
           placeholder="Enter your email"
           radius={r}

@@ -1,8 +1,8 @@
 import * as React from "react";
 import {act, render} from "@testing-library/react";
-import {focus} from "@heroui/test-utils";
+import {focus} from "@vezham/test-utils";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {Input} from "@heroui/input";
+import {Input} from "@vezham/input";
 
 import {Accordion, AccordionItem} from "../src";
 

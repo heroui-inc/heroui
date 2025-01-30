@@ -1,4 +1,4 @@
-import {Checkbox} from "@heroui/react";
+import {Checkbox} from "@vezham/react";
 
 export const HeartIcon = ({size, height, width, ...props}) => {
   // avoid passing non-DOM attributes to svg

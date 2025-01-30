@@ -1,4 +1,4 @@
-import {Slider} from "@heroui/react";
+import {Slider} from "@vezham/react";
 
 export default function App() {
   const colors = ["foreground", "primary", "secondary", "success", "warning", "danger"];

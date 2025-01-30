@@ -2,7 +2,7 @@ import type {DateValue} from "@react-types/calendar";
 import type {RangeValue} from "@react-types/shared";
 
 import React from "react";
-import {RangeCalendar} from "@heroui/react";
+import {RangeCalendar} from "@vezham/react";
 import {today, getLocalTimeZone, isWeekend} from "@internationalized/date";
 import {useLocale} from "@react-aria/i18n";
 

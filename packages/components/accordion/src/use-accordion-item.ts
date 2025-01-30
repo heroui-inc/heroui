@@ -1,12 +1,12 @@
-import type {AccordionItemVariantProps} from "@heroui/theme";
+import type {AccordionItemVariantProps} from "@vezham/theme";
 
-import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
+import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@vezham/system";
 import {useFocusRing} from "@react-aria/focus";
-import {accordionItem} from "@heroui/theme";
-import {clsx, callAllHandlers, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {NodeWithProps} from "@heroui/aria-utils";
-import {useReactAriaAccordionItem} from "@heroui/use-aria-accordion";
+import {accordionItem} from "@vezham/theme";
+import {clsx, callAllHandlers, dataAttr, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef, useDOMRef, filterDOMProps} from "@vezham/react-utils";
+import {NodeWithProps} from "@vezham/aria-utils";
+import {useReactAriaAccordionItem} from "@vezham/use-aria-accordion";
 import {useCallback, useMemo} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
 import {useHover, usePress} from "@react-aria/interactions";

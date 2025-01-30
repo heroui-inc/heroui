@@ -1,4 +1,4 @@
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseBadgeProps, useBadge} from "./use-badge";
 

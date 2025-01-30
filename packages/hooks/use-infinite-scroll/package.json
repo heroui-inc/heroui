@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/use-infinite-scroll",
-  "version": "2.2.3",
+  "name": "@vezham/use-infinite-scroll",
+  "version": "0.0.1",
   "description": "A hook for handling infinite scroll based on the IntersectionObserver API",
   "keywords": [
     "use-infinite-scroll"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/hooks/use-infinite-scroll"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -37,7 +37,7 @@
     "react": ">=18 || >=19.0.0-rc.0"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*"
+    "@vezham/shared-utils": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

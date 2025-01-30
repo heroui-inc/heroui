@@ -10,7 +10,7 @@ import {
   getKeyValue,
   Spinner,
   Button,
-} from "@heroui/react";
+} from "@vezham/react";
 import {useAsyncList} from "@react-stately/data";
 import {useState} from "react";
 

@@ -1,10 +1,10 @@
 import type {HTMLHeroUIProps} from "../src/types";
-import type {VariantProps} from "@heroui/theme";
+import type {VariantProps} from "@vezham/theme";
 
 import React, {useMemo} from "react";
-import {tv} from "@heroui/theme";
-import {filterDOMProps, ReactRef, useDOMRef} from "@heroui/react-utils";
-import {objectToDeps} from "@heroui/shared-utils";
+import {tv} from "@vezham/theme";
+import {filterDOMProps, ReactRef, useDOMRef} from "@vezham/react-utils";
+import {objectToDeps} from "@vezham/shared-utils";
 
 import {mapPropsVariants} from "../src/utils";
 import {forwardRef} from "../src/utils";

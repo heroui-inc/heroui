@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/use-update-effect",
-  "version": "2.1.2",
+  "name": "@vezham/use-update-effect",
+  "version": "0.0.1",
   "description": "React effect hook that invokes only on update",
   "keywords": [
     "use-update-effect"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/hooks/use-update-effect"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",

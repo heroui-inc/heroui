@@ -1,4 +1,4 @@
-import {uniqBy} from "@heroui/shared-utils";
+import {uniqBy} from "@vezham/shared-utils";
 import fetch from "node-fetch";
 
 import {__PROD__} from "./env";

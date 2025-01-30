@@ -1,4 +1,4 @@
-import {Pagination, PaginationItemType} from "@heroui/react";
+import {Pagination, PaginationItemType} from "@vezham/react";
 
 export const ChevronIcon = (props) => {
   return (

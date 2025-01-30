@@ -1,4 +1,4 @@
-import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@heroui/theme";
+import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@vezham/theme";
 import type {HiddenSelectProps} from "./hidden-select";
 
 import {
@@ -8,29 +8,29 @@ import {
   PropGetter,
   SharedSelection,
   useProviderContext,
-} from "@heroui/system";
-import {select} from "@heroui/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
+} from "@vezham/system";
+import {select} from "@vezham/theme";
+import {ReactRef, useDOMRef, filterDOMProps} from "@vezham/react-utils";
 import {useMemo, useCallback, useRef, Key, ReactNode, useEffect} from "react";
-import {ListboxProps} from "@heroui/listbox";
-import {useAriaButton} from "@heroui/use-aria-button";
+import {ListboxProps} from "@vezham/listbox";
+import {useAriaButton} from "@vezham/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {useHover} from "@react-aria/interactions";
-import {PopoverProps} from "@heroui/popover";
-import {ScrollShadowProps} from "@heroui/scroll-shadow";
+import {PopoverProps} from "@vezham/popover";
+import {ScrollShadowProps} from "@vezham/scroll-shadow";
 import {
   MultiSelectProps,
   MultiSelectState,
   useMultiSelect,
   useMultiSelectState,
-} from "@heroui/use-aria-multiselect";
-import {SpinnerProps} from "@heroui/spinner";
-import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
+} from "@vezham/use-aria-multiselect";
+import {SpinnerProps} from "@vezham/spinner";
+import {useSafeLayoutEffect} from "@vezham/use-safe-layout-effect";
+import {ariaShouldCloseOnInteractOutside} from "@vezham/aria-utils";
 import {CollectionChildren, ValidationError} from "@react-types/shared";
-import {FormContext, useSlottedContext} from "@heroui/form";
+import {FormContext, useSlottedContext} from "@vezham/form";
 
 export type SelectedItemProps<T = object> = {
   /** A unique key for the item. */

@@ -1,19 +1,19 @@
 import type {FocusableProps, PressEvents} from "@react-types/shared";
-import type {SlotsToClasses, CardSlots, CardReturnType, CardVariantProps} from "@heroui/theme";
-import type {AriaButtonProps} from "@heroui/use-aria-button";
-import type {RippleProps} from "@heroui/ripple";
+import type {SlotsToClasses, CardSlots, CardReturnType, CardVariantProps} from "@vezham/theme";
+import type {AriaButtonProps} from "@vezham/use-aria-button";
+import type {RippleProps} from "@vezham/ripple";
 
-import {card} from "@heroui/theme";
+import {card} from "@vezham/theme";
 import {MouseEventHandler, ReactNode, useCallback, useMemo} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
 import {PressEvent, useHover} from "@react-aria/interactions";
-import {useAriaButton} from "@heroui/use-aria-button";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, filterDOMProps} from "@heroui/react-utils";
-import {useDOMRef} from "@heroui/react-utils";
-import {useRipple} from "@heroui/ripple";
+import {useAriaButton} from "@vezham/use-aria-button";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef, filterDOMProps} from "@vezham/react-utils";
+import {useDOMRef} from "@vezham/react-utils";
+import {useRipple} from "@vezham/ripple";
 
 export interface Props extends Omit<HTMLHeroUIProps<"div">, "onClick"> {
   /**

@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import * as React from "react";
 import {render, act, fireEvent, waitFor, within} from "@testing-library/react";
-import {pointerMap, triggerPress} from "@heroui/test-utils";
+import {pointerMap, triggerPress} from "@vezham/test-utils";
 import userEvent from "@testing-library/user-event";
 import {CalendarDate, CalendarDateTime} from "@internationalized/date";
-import {HeroUIProvider} from "@heroui/system";
-import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@vezham/system";
+import {Form} from "@vezham/form";
 
 import {DatePicker as DatePickerBase, DatePickerProps} from "../src";
 

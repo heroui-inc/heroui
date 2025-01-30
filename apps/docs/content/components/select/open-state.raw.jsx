@@ -1,4 +1,4 @@
-import {Select, SelectItem, Button} from "@heroui/react";
+import {Select, SelectItem, Button} from "@vezham/react";
 
 export const animals = [
   {key: "cat", label: "Cat"},

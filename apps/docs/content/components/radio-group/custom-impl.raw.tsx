@@ -1,5 +1,5 @@
 import React from "react";
-import {RadioGroup, useRadio, VisuallyHidden, RadioProps, cn} from "@heroui/react";
+import {RadioGroup, useRadio, VisuallyHidden, RadioProps, cn} from "@vezham/react";
 
 export const CustomRadio = (props: RadioProps) => {
   const {

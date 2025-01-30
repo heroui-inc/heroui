@@ -9,16 +9,16 @@
 
 import * as React from "react";
 import {DismissButton, Overlay} from "@react-aria/overlays";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {HTMLMotionProps, LazyMotion, m} from "framer-motion";
 import {mergeProps} from "@react-aria/utils";
-import {getTransformOrigins} from "@heroui/aria-utils";
-import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
+import {getTransformOrigins} from "@vezham/aria-utils";
+import {TRANSITION_VARIANTS} from "@vezham/framer-utils";
 import {useDialog} from "@react-aria/dialog";
 
 import {usePopover, UsePopoverProps, UsePopoverReturn} from "./use-popover";
 
-const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
+const domAnimation = () => import("@vezham/dom-animation").then((res) => res.default);
 
 export interface FreeSoloPopoverProps extends Omit<UsePopoverProps, "children"> {
   children: React.ReactNode | ((titleProps: React.DOMAttributes<HTMLElement>) => React.ReactNode);

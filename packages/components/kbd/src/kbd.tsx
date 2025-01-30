@@ -1,5 +1,5 @@
 import {useMemo} from "react";
-import {forwardRef} from "@heroui/system-rsc";
+import {forwardRef} from "@vezham/system-rsc";
 
 import {UseKbdProps, useKbd} from "./use-kbd";
 import {kbdKeysLabelMap, kbdKeysMap} from "./utils";

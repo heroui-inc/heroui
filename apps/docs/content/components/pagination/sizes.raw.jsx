@@ -1,4 +1,4 @@
-import {Pagination} from "@heroui/react";
+import {Pagination} from "@vezham/react";
 
 export default function App() {
   const sizes = ["sm", "md", "lg"];

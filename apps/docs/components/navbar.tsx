@@ -18,11 +18,11 @@ import {
   DropdownTrigger,
   Chip,
   Divider,
-} from "@heroui/react";
-import {dataFocusVisibleClasses} from "@heroui/theme";
-import {ChevronDownIcon, LinkIcon} from "@heroui/shared-icons";
+} from "@vezham/react";
+import {dataFocusVisibleClasses} from "@vezham/theme";
+import {ChevronDownIcon, LinkIcon} from "@vezham/shared-icons";
 import {isAppleDevice} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
+import {clsx} from "@vezham/shared-utils";
 import NextLink from "next/link";
 import {usePathname} from "next/navigation";
 import {motion, AnimatePresence} from "framer-motion";

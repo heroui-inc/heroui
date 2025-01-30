@@ -21,10 +21,10 @@ Tabs organize content into multiple sections and allow users to navigate between
   showGlobalInstallWarning
   commands={{
     cli: "npx heroui-cli@latest add tabs",
-    npm: "npm install @heroui/tabs",
-    yarn: "yarn add @heroui/tabs",
-    pnpm: "pnpm add @heroui/tabs",
-    bun: "bun add @heroui/tabs"
+    npm: "npm install @vezham/tabs",
+    yarn: "yarn add @vezham/tabs",
+    pnpm: "pnpm add @vezham/tabs",
+    bun: "bun add @vezham/tabs"
   }}
 />
 
@@ -37,8 +37,8 @@ HeroUI exports 2 tabs-related components:
 
 <ImportTabs
   commands={{
-    main: 'import {Tabs, Tab} from "@heroui/react";',
-    individual: 'import {Tabs, Tab} from "@heroui/tabs";',
+    main: 'import {Tabs, Tab} from "@vezham/react";',
+    individual: 'import {Tabs, Tab} from "@vezham/tabs";',
   }}
 />
 
@@ -161,7 +161,7 @@ This example uses [React Router](https://reactrouter.com/en/main) to setup route
 
 ```tsx
 import {Route, Routes, useLocation} from "react-router-dom";
-import {Tabs, Tab} from "@heroui/react";
+import {Tabs, Tab} from "@vezham/react";
 
 function AppTabs() {
   const {pathname} = useLocation();

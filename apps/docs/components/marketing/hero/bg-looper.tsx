@@ -1,6 +1,6 @@
 "use client";
 
-import {clsx} from "@heroui/shared-utils";
+import {clsx} from "@vezham/shared-utils";
 
 import {useIsMounted} from "@/hooks/use-is-mounted";
 

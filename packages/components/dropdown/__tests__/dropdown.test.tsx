@@ -1,11 +1,11 @@
 import * as React from "react";
 import {act, render, fireEvent} from "@testing-library/react";
-import {Button} from "@heroui/button";
+import {Button} from "@vezham/button";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {keyCodes} from "@heroui/test-utils";
-import {User} from "@heroui/user";
-import {Image} from "@heroui/image";
-import {Avatar} from "@heroui/avatar";
+import {keyCodes} from "@vezham/test-utils";
+import {User} from "@vezham/user";
+import {Image} from "@vezham/image";
+import {Avatar} from "@vezham/avatar";
 
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, DropdownSection} from "../src";
 

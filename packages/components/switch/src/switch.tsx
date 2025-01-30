@@ -1,5 +1,5 @@
 import {cloneElement, ReactElement} from "react";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseSwitchProps, useSwitch} from "./use-switch";
 

@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/use-pagination",
-  "version": "2.2.4",
+  "name": "@vezham/use-pagination",
+  "version": "0.0.1",
   "description": "State management hook for Pagination component, it lets you manage pagination with controlled and uncontrolled state",
   "keywords": [
     "use-pagination"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/hooks/use-pagination"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -34,7 +34,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*",
+    "@vezham/shared-utils": "workspace:*",
     "@react-aria/i18n": "3.12.4"
   },
   "peerDependencies": {

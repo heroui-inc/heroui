@@ -1,4 +1,4 @@
-# @heroui/select
+# @vezham/select
 
 A select displays a collapsible list of options and allows a user to select one of them.
 
@@ -7,18 +7,18 @@ Please refer to the [documentation](https://heroui.com/docs/components/select) f
 ## Installation
 
 ```sh
-yarn add @heroui/select
+yarn add @vezham/select
 # or
-npm i @heroui/select
+npm i @vezham/select
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

@@ -1,10 +1,10 @@
 import {parseToRgba, readableColor} from "color2k";
-import {Button, Tooltip} from "@heroui/react";
-import {commonColors, semanticColors} from "@heroui/theme";
-import {useClipboard} from "@heroui/use-clipboard";
+import {Button, Tooltip} from "@vezham/react";
+import {commonColors, semanticColors} from "@vezham/theme";
+import {useClipboard} from "@vezham/use-clipboard";
 import {useState} from "react";
 import {useTheme} from "next-themes";
-import {get, isEmpty} from "@heroui/shared-utils";
+import {get, isEmpty} from "@vezham/shared-utils";
 
 type ColorsItem = {
   color: string;

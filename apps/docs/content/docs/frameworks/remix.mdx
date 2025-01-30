@@ -46,7 +46,7 @@ You can also add multiple components at once:
 npx heroui-cli@latest add button input
 ```
 
-Or you can add the main library `@heroui/react` by running the following command:
+Or you can add the main library `@vezham/react` by running the following command:
 
 ```codeBlock bash
 npx heroui-cli@latest add --all
@@ -81,7 +81,7 @@ You still need to add the provider to your app manually (we are working on autom
 ```jsx {3,7,9}
 // app/providers.tsx
 
-import {HeroUIProvider} from '@heroui/react'
+import {HeroUIProvider} from '@vezham/react'
 
 export function Providers({children}: { children: React.ReactNode }) {
   return (
@@ -125,10 +125,10 @@ In your Remix project, run one of the following command to install HeroUI:
 
 <PackageManagers
   commands={{
-    npm: 'npm i @heroui/react framer-motion',
-    yarn: 'yarn add @heroui/react framer-motion',
-    pnpm: 'pnpm add @heroui/react framer-motion',
-    bun: "bun add @heroui/react framer-motion"
+    npm: 'npm i @vezham/react framer-motion',
+    yarn: 'yarn add @vezham/react framer-motion',
+    pnpm: 'pnpm add @vezham/react framer-motion',
+    bun: "bun add @vezham/react framer-motion"
   }}
 />
 
@@ -141,7 +141,7 @@ In your Remix project, run one of the following command to install HeroUI:
 If you are using pnpm, you need to add the following line to your `.npmrc` file to hoist our packages to the root `node_modules`.
 
 ```bash
-public-hoist-pattern[]=*@heroui/*
+public-hoist-pattern[]=*@vezham/*
 ```
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
@@ -158,7 +158,7 @@ the following code to your `tailwind.config.js` file:
 
 ```ts {2,10,15-16}
 // tailwind.config.ts
-const { heroui } = require("@heroui/react");
+const { heroui } = require("@vezham/react");
 
 import type { Config } from 'tailwindcss'
 
@@ -166,7 +166,7 @@ export default {
   content: [
     // ...
     // make sure it's pointing to the ROOT node_module
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
+    "./node_modules/@vezham/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {},
@@ -191,7 +191,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 export default function App() {
   return (

@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
-import {clsx} from "@heroui/shared-utils";
-import * as Components from "@heroui/react";
+import {clsx} from "@vezham/shared-utils";
+import * as Components from "@vezham/react";
 import {Language} from "prism-react-renderer";
 import NextImage from "next/image";
 import {usePostHog} from "posthog-js/react";

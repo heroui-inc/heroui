@@ -1,7 +1,7 @@
 import * as React from "react";
 import {act, render} from "@testing-library/react";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {Form} from "@heroui/form";
+import {Form} from "@vezham/form";
 
 import {RadioGroup, Radio, RadioGroupProps} from "../src";
 

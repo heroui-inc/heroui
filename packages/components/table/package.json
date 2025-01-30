@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/table",
-  "version": "2.2.9",
+  "name": "@vezham/table",
+  "version": "0.0.1",
   "description": "Tables are used to display tabular data using rows and columns. ",
   "keywords": [
     "table"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/components/table"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -36,15 +36,15 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0",
-    "@heroui/system": ">=2.4.0"
+    "@vezham/theme": ">=2.4.0",
+    "@vezham/system": ">=2.4.0"
   },
   "dependencies": {
-    "@heroui/checkbox": "workspace:*",
-    "@heroui/react-utils": "workspace:*",
-    "@heroui/shared-icons": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/spacer": "workspace:*",
+    "@vezham/checkbox": "workspace:*",
+    "@vezham/react-utils": "workspace:*",
+    "@vezham/shared-icons": "workspace:*",
+    "@vezham/shared-utils": "workspace:*",
+    "@vezham/spacer": "workspace:*",
     "@react-aria/focus": "3.19.0",
     "@react-aria/interactions": "3.22.5",
     "@react-aria/table": "3.16.0",
@@ -56,15 +56,15 @@
     "@react-types/table": "3.10.3"
   },
   "devDependencies": {
-    "@heroui/theme": "workspace:*",
-    "@heroui/system": "workspace:*",
-    "@heroui/button": "workspace:*",
-    "@heroui/chip": "workspace:*",
-    "@heroui/pagination": "workspace:*",
-    "@heroui/spinner": "workspace:*",
-    "@heroui/tooltip": "workspace:*",
-    "@heroui/use-infinite-scroll": "workspace:*",
-    "@heroui/user": "workspace:*",
+    "@vezham/theme": "workspace:*",
+    "@vezham/system": "workspace:*",
+    "@vezham/button": "workspace:*",
+    "@vezham/chip": "workspace:*",
+    "@vezham/pagination": "workspace:*",
+    "@vezham/spinner": "workspace:*",
+    "@vezham/tooltip": "workspace:*",
+    "@vezham/use-infinite-scroll": "workspace:*",
+    "@vezham/user": "workspace:*",
     "@react-stately/data": "3.12.0",
     "clean-package": "2.2.0",
     "react": "^18.0.0",

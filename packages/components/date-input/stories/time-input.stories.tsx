@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {dateInput, button} from "@heroui/theme";
-import {ClockCircleLinearIcon} from "@heroui/shared-icons";
+import {dateInput, button} from "@vezham/theme";
+import {ClockCircleLinearIcon} from "@vezham/shared-icons";
 import {
   parseAbsoluteToLocal,
   parseZonedDateTime,

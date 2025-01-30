@@ -1,4 +1,4 @@
-import {Listbox, ListboxItem} from "@heroui/react";
+import {Listbox, ListboxItem} from "@vezham/react";
 const generateItems = (n) => {
   const items = [
     "Cat",

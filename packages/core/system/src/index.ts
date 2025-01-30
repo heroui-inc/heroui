@@ -16,7 +16,7 @@ export type {
   ExtendVariantWithSlotsProps,
   ExtendVariants,
   SharedSelection,
-} from "@heroui/system-rsc";
+} from "@vezham/system-rsc";
 
 export {
   forwardRef,
@@ -25,7 +25,7 @@ export {
   mapPropsVariantsWithCommon,
   isHeroUIEl,
   extendVariants,
-} from "@heroui/system-rsc";
+} from "@vezham/system-rsc";
 
 export type {SupportedCalendars} from "./types";
 export type {HeroUIProviderProps} from "./provider";

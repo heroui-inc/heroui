@@ -1,4 +1,4 @@
-import {Badge, Avatar} from "@heroui/react";
+import {Badge, Avatar} from "@vezham/react";
 
 export const NotificationIcon = ({size, height, width, ...props}) => {
   return (

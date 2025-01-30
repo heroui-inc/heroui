@@ -1,8 +1,8 @@
-import type {MenuItemVariantProps, MenuItemSlots, SlotsToClasses} from "@heroui/theme";
+import type {MenuItemVariantProps, MenuItemSlots, SlotsToClasses} from "@vezham/theme";
 import type {AriaMenuItemProps} from "@react-aria/menu";
 import type {FocusableProps, PressEvents} from "@react-types/shared";
 
-import {BaseItem, ItemProps} from "@heroui/aria-utils";
+import {BaseItem, ItemProps} from "@vezham/aria-utils";
 import {MouseEventHandler, ReactNode} from "react";
 
 export type MenuItemSelectedIconProps = {

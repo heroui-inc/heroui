@@ -1,8 +1,8 @@
 import type {GridNode} from "@react-types/grid";
 
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
-import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@vezham/system";
+import {useDOMRef, filterDOMProps} from "@vezham/react-utils";
+import {clsx} from "@vezham/shared-utils";
 import {useTableHeaderRow} from "@react-aria/table";
 import {mergeProps} from "@react-aria/utils";
 

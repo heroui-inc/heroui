@@ -3,9 +3,9 @@
 import React, {ReactNode} from "react";
 import {usePostHog} from "posthog-js/react";
 import {tv} from "tailwind-variants";
-import {Card, CardHeader, CardBody, LinkProps, SlotsToClasses} from "@heroui/react";
+import {Card, CardHeader, CardBody, LinkProps, SlotsToClasses} from "@vezham/react";
 import {useRouter} from "next/navigation";
-import {LinkIcon} from "@heroui/shared-icons";
+import {LinkIcon} from "@vezham/shared-icons";
 
 const styles = tv({
   slots: {

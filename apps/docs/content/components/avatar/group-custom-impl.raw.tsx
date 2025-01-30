@@ -4,7 +4,7 @@ import {
   useAvatarGroup,
   AvatarGroupProvider,
   AvatarGroupProps as BaseAvatarGroupProps,
-} from "@heroui/react";
+} from "@vezham/react";
 
 export interface AvatarGroupProps extends BaseAvatarGroupProps {}
 

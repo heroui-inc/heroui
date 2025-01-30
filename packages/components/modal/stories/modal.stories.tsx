@@ -2,13 +2,13 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React from "react";
 import {Meta} from "@storybook/react";
-import {modal} from "@heroui/theme";
-import {Button} from "@heroui/button";
-import {Input} from "@heroui/input";
-import {Checkbox} from "@heroui/checkbox";
-import {Link} from "@heroui/link";
-import {Switch} from "@heroui/switch";
-import {MailFilledIcon, LockFilledIcon} from "@heroui/shared-icons";
+import {modal} from "@vezham/theme";
+import {Button} from "@vezham/button";
+import {Input} from "@vezham/input";
+import {Checkbox} from "@vezham/checkbox";
+import {Link} from "@vezham/link";
+import {Switch} from "@vezham/switch";
+import {MailFilledIcon, LockFilledIcon} from "@vezham/shared-icons";
 import Lorem from "react-lorem-component";
 
 import {

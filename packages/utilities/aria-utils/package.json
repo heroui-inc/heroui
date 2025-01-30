@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/aria-utils",
-  "version": "2.2.8",
+  "name": "@vezham/aria-utils",
+  "version": "0.0.1",
   "description": "A package for managing @react-aria HeroUI utils.",
   "keywords": [
     "aria-utils"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/utilities/aria-utils"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -38,9 +38,9 @@
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
   "dependencies": {
-    "@heroui/system": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-rsc-utils": "workspace:*",
+    "@vezham/system": "workspace:*",
+    "@vezham/shared-utils": "workspace:*",
+    "@vezham/react-rsc-utils": "workspace:*",
     "@react-aria/utils": "3.26.0",
     "@react-stately/collections": "3.12.0",
     "@react-stately/overlays": "3.6.12",

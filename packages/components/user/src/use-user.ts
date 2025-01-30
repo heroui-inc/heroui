@@ -1,13 +1,13 @@
-import type {SlotsToClasses, UserSlots} from "@heroui/theme";
-import type {AvatarProps} from "@heroui/avatar";
+import type {SlotsToClasses, UserSlots} from "@vezham/theme";
+import type {AvatarProps} from "@vezham/avatar";
 
 import {ReactNode, useMemo, useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
-import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
-import {user} from "@heroui/theme";
-import {clsx, dataAttr} from "@heroui/shared-utils";
-import {filterDOMProps, ReactRef} from "@heroui/react-utils";
-import {useDOMRef} from "@heroui/react-utils";
+import {HTMLHeroUIProps, PropGetter} from "@vezham/system";
+import {user} from "@vezham/theme";
+import {clsx, dataAttr} from "@vezham/shared-utils";
+import {filterDOMProps, ReactRef} from "@vezham/react-utils";
+import {useDOMRef} from "@vezham/react-utils";
 import {mergeProps} from "@react-aria/utils";
 interface Props {
   /**

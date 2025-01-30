@@ -1,5 +1,5 @@
 import React from "react";
-import {DatePicker} from "@heroui/react";
+import {DatePicker} from "@vezham/react";
 import {DateValue, parseAbsoluteToLocal} from "@internationalized/date";
 import {I18nProvider} from "@react-aria/i18n";
 

@@ -1,4 +1,4 @@
-import {DatePicker} from "@heroui/react";
+import {DatePicker} from "@vezham/react";
 
 export const SelectorIcon = () => {
   return (

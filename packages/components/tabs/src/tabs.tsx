@@ -1,6 +1,6 @@
 import {ForwardedRef, ReactElement, useId} from "react";
 import {LayoutGroup} from "framer-motion";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseTabsProps, useTabs} from "./use-tabs";
 import Tab from "./tab";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {isFunction} from "@heroui/shared-utils";
+import {isFunction} from "@vezham/shared-utils";
 import {MutableRefObject} from "react";
 
 export type ReactRef<T> = React.RefObject<T> | React.MutableRefObject<T> | React.Ref<T>;

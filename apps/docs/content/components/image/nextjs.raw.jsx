@@ -1,4 +1,4 @@
-import {Image} from "@heroui/react";
+import {Image} from "@vezham/react";
 import NextImage from "next/image";
 
 export default function App() {

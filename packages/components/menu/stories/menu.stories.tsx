@@ -1,13 +1,13 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {menuItem} from "@heroui/theme";
+import {menuItem} from "@vezham/theme";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
-} from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+} from "@vezham/shared-icons";
+import {clsx} from "@vezham/shared-utils";
 
 import {Menu, MenuItem, MenuSection, MenuProps} from "../src";
 

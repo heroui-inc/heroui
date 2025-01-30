@@ -9,8 +9,8 @@ export type {PaginationItemProps} from "./pagination-item";
 export type {PaginationCursorProps} from "./pagination-cursor";
 
 // misc
-export type {PaginationItemValue} from "@heroui/use-pagination";
-export {PaginationItemType} from "@heroui/use-pagination";
+export type {PaginationItemValue} from "@vezham/use-pagination";
+export {PaginationItemType} from "@vezham/use-pagination";
 
 // export hooks
 export {usePagination} from "./use-pagination";

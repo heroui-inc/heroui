@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {popover} from "@heroui/theme";
-import {Button} from "@heroui/button";
+import {popover} from "@vezham/theme";
+import {Button} from "@vezham/button";
 
 import {Tooltip, TooltipProps} from "../src";
 

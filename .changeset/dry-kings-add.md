@@ -1,5 +1,5 @@
 ---
-"@heroui/shared-utils": patch
+"@vezham/shared-utils": patch
 ---
 
 update brand name

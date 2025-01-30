@@ -4,7 +4,7 @@ import {
   CircularProgress,
   CircularProgressProps,
   circularProgress,
-} from "@heroui/react";
+} from "@vezham/react";
 import {FC} from "react";
 
 const speedProgress = tv({

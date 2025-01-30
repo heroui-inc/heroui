@@ -1,18 +1,18 @@
 import type {MenuItemBaseProps} from "./base/menu-item-base";
-import type {MenuItemVariantProps} from "@heroui/theme";
+import type {MenuItemVariantProps} from "@vezham/theme";
 import type {Node, PressEvent} from "@react-types/shared";
 
 import {useMemo, useRef, useCallback} from "react";
-import {menuItem} from "@heroui/theme";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {menuItem} from "@vezham/theme";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
 import {useFocusRing} from "@react-aria/focus";
 import {TreeState} from "@react-stately/tree";
-import {clsx, dataAttr, objectToDeps, removeEvents, warn} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, removeEvents, warn} from "@vezham/shared-utils";
 import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
 import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
-import {useIsMobile} from "@heroui/use-is-mobile";
-import {filterDOMProps} from "@heroui/react-utils";
+import {useIsMobile} from "@vezham/use-is-mobile";
+import {filterDOMProps} from "@vezham/react-utils";
 
 interface Props<T extends object> extends MenuItemBaseProps<T> {
   item: Node<T>;
@@ -79,7 +79,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
 
   if (deprecatedOnClick && typeof deprecatedOnClick === "function") {
     warn(
-      "onClick is deprecated, please use onPress instead. See: https://github.com/heroui-inc/heroui/issues/4292",
+      "onClick is deprecated, please use onPress instead. See: https://github.com/vezham/heroui/issues/4292",
       "MenuItem",
     );
   }

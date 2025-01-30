@@ -1,6 +1,6 @@
 import {useCallback} from "react";
-import {Spacer} from "@heroui/spacer";
-import {forwardRef} from "@heroui/system";
+import {Spacer} from "@vezham/spacer";
+import {forwardRef} from "@vezham/system";
 
 import {UseTableProps, useTable} from "./use-table";
 import TableRowGroup from "./table-row-group";

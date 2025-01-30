@@ -1,6 +1,6 @@
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {ForwardedRef, ReactElement} from "react";
-import {mergeClasses} from "@heroui/theme";
+import {mergeClasses} from "@vezham/theme";
 
 import {UseMenuProps, useMenu} from "./use-menu";
 import MenuSection from "./menu-section";

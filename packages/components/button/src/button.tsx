@@ -1,6 +1,6 @@
-import {Spinner} from "@heroui/spinner";
-import {Ripple} from "@heroui/ripple";
-import {forwardRef} from "@heroui/system";
+import {Spinner} from "@vezham/spinner";
+import {Ripple} from "@vezham/ripple";
+import {forwardRef} from "@vezham/system";
 
 import {UseButtonProps, useButton} from "./use-button";
 

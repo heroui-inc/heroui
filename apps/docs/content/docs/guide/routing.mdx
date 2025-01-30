@@ -29,7 +29,7 @@ navigation, while `useHref` optionally converts router hrefs to native HTML href
 ```jsx
 import * as React from "react";
 
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 import {useNavigate, useHref} from "your-router";
 
 function App() {
@@ -91,7 +91,7 @@ Go to your `app/providers.tsx` or `app/providers.jsx` (create it if it doesn't e
 "use client";
 
 import {useRouter} from "next/navigation";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 // Only if using TypeScript
 declare module "@react-types/shared" {
@@ -151,7 +151,7 @@ Then, provide a custom `useHref` function to prepend it to the href for all link
 "use client";
 
 import {useRouter} from "next/navigation";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 export function Providers({children}: {children: React.ReactNode}) {
   const router = useRouter();
@@ -176,7 +176,7 @@ from `next/router`, it returns a router object that can be used to perform navig
 // pages/_app.tsx
 import type {AppProps} from "next/app";
 import {type NextRouter, useRouter} from "next/router";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -205,7 +205,7 @@ provide a `useHref` option to the router passed to Provider to prepend it to lin
 ```tsx {8}
 // pages/_app.tsx
 import type {AppProps} from "next/app";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 import {useRouter} from "next/router";
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -233,7 +233,7 @@ Make sure to place the component using these hooks inside `BrowserRouter` and ke
 import type {NavigateOptions} from "react-router-dom";
 
 import {BrowserRouter, useNavigate, useHref} from "react-router-dom";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -282,7 +282,7 @@ for more details.
 import type {NavigateOptions} from 'react-router-dom';
 
 import {useNavigate, useHref, Outlet} from "@remix-run/react";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -317,7 +317,7 @@ Use `router.navigate` in the `navigate` prop, and `router.buildLocation` in the 
 import type {NavigateOptions, ToOptions} from '@tanstack/react-router';
 
 import {useRouter} from '@tanstack/react-router';
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 
 
 declare module "@react-types/shared" {
@@ -361,7 +361,7 @@ import {
   DropdownItem,
   Button,
   Link,
-} from "@heroui/react";
+} from "@vezham/react";
 
 function App() {
   return (

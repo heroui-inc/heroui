@@ -1,16 +1,16 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {dropdown, popover} from "@heroui/theme";
-import {Button} from "@heroui/button";
-import {Avatar} from "@heroui/avatar";
-import {User} from "@heroui/user";
+import {dropdown, popover} from "@vezham/theme";
+import {Button} from "@vezham/button";
+import {Avatar} from "@vezham/avatar";
+import {User} from "@vezham/user";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
-} from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+} from "@vezham/shared-icons";
+import {clsx} from "@vezham/shared-utils";
 
 import {
   Dropdown,

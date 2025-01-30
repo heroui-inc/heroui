@@ -1,6 +1,6 @@
-import {forwardRef} from "@heroui/system";
-import {LinkIcon} from "@heroui/shared-icons";
-import {linkAnchorClasses} from "@heroui/theme";
+import {forwardRef} from "@vezham/system";
+import {LinkIcon} from "@vezham/shared-icons";
+import {linkAnchorClasses} from "@vezham/theme";
 
 import {UseLinkProps, useLink} from "./use-link";
 

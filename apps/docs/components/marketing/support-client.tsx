@@ -1,8 +1,8 @@
 "use client";
 
 import {FC, useMemo, useRef} from "react";
-import {Avatar, AvatarProps, Button, Spacer, Tooltip} from "@heroui/react";
-import {clamp} from "@heroui/shared-utils";
+import {Avatar, AvatarProps, Button, Spacer, Tooltip} from "@vezham/react";
+import {clamp} from "@vezham/shared-utils";
 import {usePostHog} from "posthog-js/react";
 
 import {sectionWrapper, titleWrapper, title, subtitle} from "../primitives";

@@ -10,7 +10,7 @@ import {colorVariants} from "../utils";
  *
  * @example
  * <code className={classNames)}>
- *   npm install @heroui/react
+ *   npm install @vezham/react
  * </code>
  */
 const code = tv({

@@ -1,22 +1,22 @@
-import type {PopoverVariantProps, SlotsToClasses} from "@heroui/theme";
+import type {PopoverVariantProps, SlotsToClasses} from "@vezham/theme";
 import type {AriaTooltipProps} from "@react-types/tooltip";
 import type {OverlayTriggerProps} from "@react-types/overlays";
 import type {HTMLMotionProps} from "framer-motion";
-import type {OverlayOptions} from "@heroui/aria-utils";
+import type {OverlayOptions} from "@vezham/aria-utils";
 
 import {ReactNode, Ref, useId, useImperativeHandle} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
 import {mergeProps} from "@react-aria/utils";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
 import {useOverlayPosition, useOverlay, AriaOverlayProps} from "@react-aria/overlays";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {popover} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, mergeRefs} from "@heroui/react-utils";
-import {createDOMRef} from "@heroui/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {popover} from "@vezham/theme";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef, mergeRefs} from "@vezham/react-utils";
+import {createDOMRef} from "@vezham/react-utils";
 import {useMemo, useRef, useCallback} from "react";
-import {toReactAriaPlacement, getArrowPlacement} from "@heroui/aria-utils";
-import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {toReactAriaPlacement, getArrowPlacement} from "@vezham/aria-utils";
+import {useSafeLayoutEffect} from "@vezham/use-safe-layout-effect";
 
 interface Props extends Omit<HTMLHeroUIProps, "content"> {
   /**

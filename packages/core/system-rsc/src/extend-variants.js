@@ -1,5 +1,5 @@
 import * as React from "react";
-import {tv} from "@heroui/theme";
+import {tv} from "@vezham/theme";
 import clsx from "clsx";
 
 import {mapPropsVariants} from "./utils";

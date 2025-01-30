@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/system",
-  "version": "2.4.7",
+  "name": "@vezham/system",
+  "version": "0.0.1",
   "description": "HeroUI system primitives",
   "keywords": [
     "system"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/core/system"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src !src/extend-variants.d.ts --dts",
@@ -55,9 +55,9 @@
   },
   "dependencies": {
     "@internationalized/date": "3.6.0",
-    "@heroui/react-utils": "workspace:*",
+    "@vezham/react-utils": "workspace:*",
     "@react-aria/i18n": "3.12.4",
-    "@heroui/system-rsc": "workspace:*",
+    "@vezham/system-rsc": "workspace:*",
     "@react-aria/overlays": "3.24.0",
     "@react-aria/utils": "3.26.0",
     "@react-stately/utils": "3.10.5",

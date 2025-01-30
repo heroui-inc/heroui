@@ -2,10 +2,10 @@ import type {ValidationResult} from "@react-types/shared";
 
 import React from "react";
 import {Meta} from "@storybook/react";
-import {input} from "@heroui/theme";
-import {SendFilledIcon, PlusFilledIcon} from "@heroui/shared-icons";
-import {button} from "@heroui/theme";
-import {Form} from "@heroui/form";
+import {input} from "@vezham/theme";
+import {SendFilledIcon, PlusFilledIcon} from "@vezham/shared-icons";
+import {button} from "@vezham/theme";
+import {Form} from "@vezham/form";
 
 import {Textarea, TextAreaProps} from "../src";
 

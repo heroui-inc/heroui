@@ -1,6 +1,6 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {scrollShadow, button} from "@heroui/theme";
+import {scrollShadow, button} from "@vezham/theme";
 import Lorem from "react-lorem-component";
 
 import {

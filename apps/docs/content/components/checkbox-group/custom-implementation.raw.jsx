@@ -1,4 +1,4 @@
-import {useCheckbox, CheckboxGroup, Chip, VisuallyHidden, tv} from "@heroui/react";
+import {useCheckbox, CheckboxGroup, Chip, VisuallyHidden, tv} from "@vezham/react";
 
 const checkbox = tv({
   slots: {

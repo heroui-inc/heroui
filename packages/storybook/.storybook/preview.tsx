@@ -1,6 +1,6 @@
 import React from "react";
 import {themes} from "@storybook/theming";
-import {HeroUIProvider} from "@heroui/system/src/provider";
+import {HeroUIProvider} from "@vezham/system/src/provider";
 import type {Preview} from "@storybook/react";
 
 import "./style.css";

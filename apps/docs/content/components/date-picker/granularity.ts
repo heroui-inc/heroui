@@ -1,4 +1,4 @@
-const App = `import {DatePicker} from "@heroui/react";
+const App = `import {DatePicker} from "@vezham/react";
 import {now, parseAbsoluteToLocal} from "@internationalized/date";
 
 export default function App() {
@@ -31,7 +31,7 @@ export default function App() {
   );
 }`;
 
-const AppTs = `import {DatePicker} from "@heroui/react";
+const AppTs = `import {DatePicker} from "@vezham/react";
 import {DateValue, now, parseAbsoluteToLocal} from "@internationalized/date";
 
 export default function App() {

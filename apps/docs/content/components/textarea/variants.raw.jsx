@@ -1,4 +1,4 @@
-import {Textarea} from "@heroui/react";
+import {Textarea} from "@vezham/react";
 
 export default function App() {
   const variants = ["flat", "faded", "bordered", "underlined"];

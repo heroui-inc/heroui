@@ -1,6 +1,6 @@
-import {InputOtp} from "@heroui/react";
+import {InputOtp} from "@vezham/react";
 import {useForm, Controller} from "react-hook-form";
-import {Button} from "@heroui/react";
+import {Button} from "@vezham/react";
 
 export default function App() {
   const {

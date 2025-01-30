@@ -1,4 +1,4 @@
-import {User, Link} from "@heroui/react";
+import {User, Link} from "@vezham/react";
 
 export default function App() {
   return (

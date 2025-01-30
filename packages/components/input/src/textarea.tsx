@@ -1,9 +1,9 @@
-import {dataAttr} from "@heroui/shared-utils";
-import {forwardRef} from "@heroui/system";
+import {dataAttr} from "@vezham/shared-utils";
+import {forwardRef} from "@vezham/system";
 import {mergeProps} from "@react-aria/utils";
 import {useMemo, useState} from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import {CloseFilledIcon} from "@heroui/shared-icons";
+import {CloseFilledIcon} from "@vezham/shared-icons";
 
 import {UseInputProps, useInput} from "./use-input";
 

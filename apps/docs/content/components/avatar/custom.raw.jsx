@@ -1,4 +1,4 @@
-import {Avatar, AvatarIcon} from "@heroui/react";
+import {Avatar, AvatarIcon} from "@vezham/react";
 
 export default function App() {
   return (

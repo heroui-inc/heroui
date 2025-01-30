@@ -1,4 +1,4 @@
-# @heroui/theme
+# @vezham/theme
 
 NextUI theme primitives, here you can find the TailwindCSS `plugin`, `colors`, `layout`, `spacing`, `typography` and some other utilities.
 
@@ -7,18 +7,18 @@ Please refer to the [documentation](https://heroui.com/theme) for more informati
 ## Installation
 
 ```sh
-yarn add @heroui/theme
+yarn add @vezham/theme
 # or
-npm i @heroui/theme
+npm i @vezham/theme
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

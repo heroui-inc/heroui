@@ -1,14 +1,14 @@
 import React, {useMemo} from "react";
 import {Meta} from "@storybook/react";
-import {table} from "@heroui/theme";
-import {User} from "@heroui/user";
-import {Chip, ChipProps} from "@heroui/chip";
-import {Button} from "@heroui/button";
-import {Spinner} from "@heroui/spinner";
-import {Pagination} from "@heroui/pagination";
-import {Tooltip} from "@heroui/tooltip";
-import {EditIcon, DeleteIcon, EyeIcon} from "@heroui/shared-icons";
-import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
+import {table} from "@vezham/theme";
+import {User} from "@vezham/user";
+import {Chip, ChipProps} from "@vezham/chip";
+import {Button} from "@vezham/button";
+import {Spinner} from "@vezham/spinner";
+import {Pagination} from "@vezham/pagination";
+import {Tooltip} from "@vezham/tooltip";
+import {EditIcon, DeleteIcon, EyeIcon} from "@vezham/shared-icons";
+import {useInfiniteScroll} from "@vezham/use-infinite-scroll";
 import {useAsyncList} from "@react-stately/data";
 import useSWR from "swr";
 

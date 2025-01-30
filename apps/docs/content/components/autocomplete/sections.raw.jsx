@@ -1,4 +1,4 @@
-import {Autocomplete, AutocompleteItem, AutocompleteSection} from "@heroui/react";
+import {Autocomplete, AutocompleteItem, AutocompleteSection} from "@vezham/react";
 
 export default function App() {
   return (

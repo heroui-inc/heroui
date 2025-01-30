@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {badge} from "@heroui/theme";
-import {Avatar} from "@heroui/avatar";
-import {CheckIcon} from "@heroui/shared-icons";
-import {Switch} from "@heroui/switch";
-import {Notification, CartIcon} from "@heroui/shared-icons";
+import {badge} from "@vezham/theme";
+import {Avatar} from "@vezham/avatar";
+import {CheckIcon} from "@vezham/shared-icons";
+import {Switch} from "@vezham/switch";
+import {Notification, CartIcon} from "@vezham/shared-icons";
 
 import {Badge, BadgeProps} from "../src";
 

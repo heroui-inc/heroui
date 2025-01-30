@@ -1,4 +1,4 @@
-import {Accordion, AccordionItem} from "@heroui/react";
+import {Accordion, AccordionItem} from "@vezham/react";
 
 export default function App() {
   const defaultContent =

@@ -23,8 +23,8 @@ fs.readFile("./package.json", "utf8", function (err, data) {
   let packageJson = JSON.parse(data);
 
   Object.keys(packageJson.dependencies).forEach((pkg) => {
-    // Check if the package is in the @heroui namespace and has "workspace:*" as its version
-    if (pkg.startsWith("@heroui/") && packageJson.dependencies[pkg] === "workspace:*") {
+    // Check if the package is in the @vezham namespace and has "workspace:*" as its version
+    if (pkg.startsWith("@vezham/") && packageJson.dependencies[pkg] === "workspace:*") {
       // Get the latest version of the package under the specified tag
       const latestVersion = execSync(`npm show ${pkg}@canary version`, {encoding: "utf8"}).trim();
 

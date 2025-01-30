@@ -1,4 +1,4 @@
-import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@heroui/react";
+import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@vezham/react";
 
 export default function App() {
   const [isFollowed, setIsFollowed] = React.useState(false);

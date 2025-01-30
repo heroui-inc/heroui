@@ -1,13 +1,13 @@
-import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@heroui/theme";
+import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@vezham/theme";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {navbar} from "@heroui/theme";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {navbar} from "@vezham/theme";
+import {useDOMRef} from "@vezham/react-utils";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef} from "@vezham/react-utils";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {mergeProps, useResizeObserver} from "@react-aria/utils";
-import {useScrollPosition} from "@heroui/use-scroll-position";
+import {useScrollPosition} from "@vezham/use-scroll-position";
 import {useControlledState} from "@react-stately/utils";
 import {HTMLMotionProps} from "framer-motion";
 import {usePreventScroll} from "@react-aria/overlays";

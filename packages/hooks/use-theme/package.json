@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/use-theme",
-  "version": "2.1.2",
+  "name": "@vezham/use-theme",
+  "version": "0.0.1",
   "description": "React hook to switch between light and dark themes",
   "keywords": [
     "use-theme"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/hooks/use-theme"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",

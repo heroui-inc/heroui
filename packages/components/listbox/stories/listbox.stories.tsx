@@ -2,19 +2,19 @@ import type {Selection} from "@react-types/shared";
 
 import React, {Key} from "react";
 import {Meta} from "@storybook/react";
-import {menuItem} from "@heroui/theme";
+import {menuItem} from "@vezham/theme";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
   ChevronRightIcon,
-} from "@heroui/shared-icons";
-import {usersData} from "@heroui/stories-utils";
-import {Avatar} from "@heroui/avatar";
-import {Chip} from "@heroui/chip";
-import {clsx} from "@heroui/shared-utils";
-import {ScrollShadow} from "@heroui/scroll-shadow";
+} from "@vezham/shared-icons";
+import {usersData} from "@vezham/stories-utils";
+import {Avatar} from "@vezham/avatar";
+import {Chip} from "@vezham/chip";
+import {clsx} from "@vezham/shared-utils";
+import {ScrollShadow} from "@vezham/scroll-shadow";
 
 import {Listbox, ListboxItem, ListboxSection, ListboxProps} from "../src";
 
@@ -636,7 +636,7 @@ const CustomWithClassNamesTemplate = ({color, variant, disableAnimation, ...args
         <div className="flex flex-col gap-1">
           <span>Releases</span>
           <div className="px-2 py-1 rounded-small bg-default-100 group-data-[hover=true]:bg-default-200">
-            <span className="text-tiny text-default-600">@heroui/react@2.0.10</span>
+            <span className="text-tiny text-default-600">@vezham/react@2.0.10</span>
             <div className="flex gap-2 text-tiny">
               <span className="text-default-500">49 minutes ago</span>
               <span className="text-success">Latest</span>

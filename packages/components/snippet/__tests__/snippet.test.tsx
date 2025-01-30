@@ -18,15 +18,15 @@ describe("Snippet", () => {
   });
 
   it("should include the code", () => {
-    const wrapper = render(<Snippet data-testid="code-test">npm install @heroui/react</Snippet>);
+    const wrapper = render(<Snippet data-testid="code-test">npm install @vezham/react</Snippet>);
 
-    expect(wrapper.getByTestId("code-test")).toHaveTextContent("npm install @heroui/react");
+    expect(wrapper.getByTestId("code-test")).toHaveTextContent("npm install @vezham/react");
   });
 
   it("should render multiple <pre> tags when children is an array of string", () => {
     const wrapper = render(
       <Snippet data-testid="code-test">
-        {["npm install @heroui/react", "npm install @heroui/react"]}
+        {["npm install @vezham/react", "npm install @vezham/react"]}
       </Snippet>,
     );
 
@@ -65,7 +65,7 @@ describe("Snippet - Clipboard", () => {
   it('should copy text to clipboard when "copy" button is clicked', async () => {
     jest.spyOn(navigator.clipboard, "writeText");
 
-    let code = "npm install @heroui/react";
+    let code = "npm install @vezham/react";
 
     const wrapper = render(<Snippet data-testid="code-test">{code}</Snippet>);
 

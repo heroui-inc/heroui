@@ -1,4 +1,4 @@
-# @heroui/tabs
+# @vezham/tabs
 
 Tabs organize content into multiple sections and allow users to navigate between them.
 
@@ -7,18 +7,18 @@ Please refer to the [documentation](https://heroui.com/docs/components/tabs) for
 ## Installation
 
 ```sh
-yarn add @heroui/tabs
+yarn add @vezham/tabs
 # or
-npm i @heroui/tabs
+npm i @vezham/tabs
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

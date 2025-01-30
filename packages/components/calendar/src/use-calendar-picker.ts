@@ -2,10 +2,10 @@ import type {CalendarDate} from "@internationalized/date";
 import type {PressEvent} from "@react-types/shared";
 
 import {useDateFormatter} from "@react-aria/i18n";
-import {HTMLHeroUIProps} from "@heroui/system";
+import {HTMLHeroUIProps} from "@vezham/system";
 import {useCallback, useRef, useEffect} from "react";
-import {debounce} from "@heroui/shared-utils";
-import {areRectsIntersecting} from "@heroui/react-utils";
+import {debounce} from "@vezham/shared-utils";
+import {areRectsIntersecting} from "@vezham/react-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 
 import {getMonthsInYear, getYearRange} from "./utils";

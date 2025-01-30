@@ -1,4 +1,4 @@
-import {Autocomplete, AutocompleteItem, Avatar, Button} from "@heroui/react";
+import {Autocomplete, AutocompleteItem, Avatar, Button} from "@vezham/react";
 
 const SearchIcon = ({size = 24, strokeWidth = 1.5, width, height, ...props}) => {
   return (

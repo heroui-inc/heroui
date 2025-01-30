@@ -3,7 +3,7 @@
 
 import {useInView} from "framer-motion";
 import {useRef, FC, useEffect, useState, useCallback} from "react";
-import {Button, cn, Spinner, Tooltip} from "@heroui/react";
+import {Button, cn, Spinner, Tooltip} from "@vezham/react";
 
 import {PlayBoldIcon, PauseBoldIcon} from "@/components/icons";
 import {RotateLeftLinearIcon} from "@/components/icons";

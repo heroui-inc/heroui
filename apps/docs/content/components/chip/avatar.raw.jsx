@@ -1,4 +1,4 @@
-import {Chip, Avatar} from "@heroui/react";
+import {Chip, Avatar} from "@vezham/react";
 
 export default function App() {
   return (

@@ -1,4 +1,4 @@
-import {Autocomplete, AutocompleteItem} from "@heroui/react";
+import {Autocomplete, AutocompleteItem} from "@vezham/react";
 import {useFilter} from "@react-aria/i18n";
 
 export const animals = [

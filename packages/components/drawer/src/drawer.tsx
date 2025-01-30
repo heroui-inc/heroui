@@ -1,5 +1,5 @@
-import {forwardRef} from "@heroui/system";
-import {Modal} from "@heroui/modal";
+import {forwardRef} from "@vezham/system";
+import {Modal} from "@vezham/modal";
 
 import {useDrawer, UseDrawerProps} from "./use-drawer";
 

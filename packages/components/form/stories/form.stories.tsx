@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Meta} from "@storybook/react";
-// import {Input} from "@heroui/input";
-import {Button} from "@heroui/button";
+// import {Input} from "@vezham/input";
+import {Button} from "@vezham/button";
 
 import {Form, FormProps} from "../src";
 

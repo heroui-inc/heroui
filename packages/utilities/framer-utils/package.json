@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/framer-utils",
-  "version": "2.1.7",
+  "name": "@vezham/framer-utils",
+  "version": "0.0.1",
   "description": "A set of framer motion transitions for react",
   "keywords": [
     "framer-utils"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/utilities/framer-utils"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -39,9 +39,9 @@
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1"
   },
   "dependencies": {
-    "@heroui/system": "workspace:*",
-    "@heroui/use-measure": "workspace:*",
-    "@heroui/shared-utils": "workspace:*"
+    "@vezham/system": "workspace:*",
+    "@vezham/use-measure": "workspace:*",
+    "@vezham/shared-utils": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

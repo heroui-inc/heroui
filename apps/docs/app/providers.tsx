@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 import {ThemeProvider as NextThemesProvider} from "next-themes";
 import {ThemeProviderProps} from "next-themes";
 import {useRouter} from "next/navigation";

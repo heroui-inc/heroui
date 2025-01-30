@@ -32,7 +32,7 @@ const SearchIcon = `export const SearchIcon = ({
   </svg>
 );`;
 
-const App = `import {extendVariants, Input} from "@heroui/react";
+const App = `import {extendVariants, Input} from "@vezham/react";
 import {SearchIcon} from "./SearchIcon";
 
 const MyInput = extendVariants(Input, {

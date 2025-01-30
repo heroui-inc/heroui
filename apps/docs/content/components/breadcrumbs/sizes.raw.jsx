@@ -1,4 +1,4 @@
-import {Breadcrumbs, BreadcrumbItem} from "@heroui/react";
+import {Breadcrumbs, BreadcrumbItem} from "@vezham/react";
 
 export default function App() {
   const sizes = ["sm", "md", "lg"];

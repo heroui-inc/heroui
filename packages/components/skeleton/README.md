@@ -1,4 +1,4 @@
-# @heroui/skeleton
+# @vezham/skeleton
 
 Skeleton is a placeholder to show a loading state and the expected shape of a component.
 
@@ -7,18 +7,18 @@ Please refer to the [documentation](https://heroui.com/docs/components/skeleton)
 ## Installation
 
 ```sh
-yarn add @heroui/skeleton
+yarn add @vezham/skeleton
 # or
-npm i @heroui/skeleton
+npm i @vezham/skeleton
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

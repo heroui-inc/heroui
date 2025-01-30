@@ -10,7 +10,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from "@heroui/react";
+} from "@vezham/react";
 import React from "react";
 
 const AcmeLogo = () => (

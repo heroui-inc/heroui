@@ -1,6 +1,6 @@
 import * as React from "react";
 import {render, fireEvent, act} from "@testing-library/react";
-import {Button} from "@heroui/button";
+import {Button} from "@vezham/button";
 
 import {Tooltip} from "../src";
 

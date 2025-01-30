@@ -1,12 +1,12 @@
 import type {KeyboardDelegate} from "@react-types/shared";
 
 import {AriaListBoxProps, useListBox as useAriaListbox} from "@react-aria/listbox";
-import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
-import {listbox, ListboxVariantProps, ListboxSlots, SlotsToClasses} from "@heroui/theme";
+import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@vezham/system";
+import {listbox, ListboxVariantProps, ListboxSlots, SlotsToClasses} from "@vezham/theme";
 import {ListState, useListState} from "@react-stately/list";
-import {filterDOMProps, ReactRef, useDOMRef} from "@heroui/react-utils";
+import {filterDOMProps, ReactRef, useDOMRef} from "@vezham/react-utils";
 import {ReactNode, useMemo} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {clsx} from "@vezham/shared-utils";
 
 import {ListboxItemProps} from "./listbox-item";
 

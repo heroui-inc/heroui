@@ -8,7 +8,7 @@ import {
   NavbarItem,
   Link,
   Button,
-} from "@heroui/react";
+} from "@vezham/react";
 
 export const AcmeLogo = () => {
   return (

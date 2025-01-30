@@ -1,4 +1,4 @@
-import {forwardRef} from "@heroui/system-rsc";
+import {forwardRef} from "@vezham/system-rsc";
 
 import {useCode, UseCodeProps} from "./use-code";
 

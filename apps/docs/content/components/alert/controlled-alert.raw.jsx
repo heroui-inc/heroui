@@ -1,4 +1,4 @@
-import {Alert, Button} from "@heroui/react";
+import {Alert, Button} from "@vezham/react";
 
 export default function App() {
   const [isVisible, setIsVisible] = React.useState(true);

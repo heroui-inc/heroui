@@ -1,4 +1,4 @@
-import {Tooltip, Button} from "@heroui/react";
+import {Tooltip, Button} from "@vezham/react";
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState(false);

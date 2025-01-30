@@ -1,4 +1,4 @@
-import {CheckboxGroup, Checkbox} from "@heroui/react";
+import {CheckboxGroup, Checkbox} from "@vezham/react";
 
 export default function App() {
   const [isInvalid, setIsInvalid] = React.useState(true);

@@ -1,4 +1,4 @@
-import {Switch} from "@heroui/react";
+import {Switch} from "@vezham/react";
 
 export const MoonIcon = (props) => {
   return (

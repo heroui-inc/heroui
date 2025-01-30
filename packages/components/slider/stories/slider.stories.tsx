@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import {Meta} from "@storybook/react";
-import {slider} from "@heroui/theme";
-import {InfoIcon, VolumeHighBoldIcon, VolumeLowBoldIcon} from "@heroui/shared-icons";
-import {Tooltip} from "@heroui/tooltip";
-import {cn} from "@heroui/theme";
+import {slider} from "@vezham/theme";
+import {InfoIcon, VolumeHighBoldIcon, VolumeLowBoldIcon} from "@vezham/shared-icons";
+import {Tooltip} from "@vezham/tooltip";
+import {cn} from "@vezham/theme";
 
 import {Slider, SliderProps, SliderValue} from "../src";
 

@@ -1,4 +1,4 @@
-import {Listbox, ListboxItem, ListboxSection, cn} from "@heroui/react";
+import {Listbox, ListboxItem, ListboxSection, cn} from "@vezham/react";
 
 export const AddNoteIcon = (props) => {
   return (

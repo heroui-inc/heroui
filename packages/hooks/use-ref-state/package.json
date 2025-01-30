@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/use-ref-state",
-  "version": "2.1.2",
+  "name": "@vezham/use-ref-state",
+  "version": "0.0.1",
   "description": "Hook for saving the state in a ref value",
   "keywords": [
     "use-ref-state"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/hooks/use-ref-state"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",

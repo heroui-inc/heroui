@@ -1,5 +1,5 @@
 import {ForwardedRef, ReactElement} from "react";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {mergeProps} from "@react-aria/utils";
 
 import {UseListboxProps, UseListboxReturn, useListbox} from "./use-listbox";

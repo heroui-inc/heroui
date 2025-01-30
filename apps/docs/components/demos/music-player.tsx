@@ -1,8 +1,8 @@
 "use client";
 
-import {Card, CardBody, Button, Image, Slider, CardProps} from "@heroui/react";
+import {Card, CardBody, Button, Image, Slider, CardProps} from "@vezham/react";
 import {useState, FC} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {clsx} from "@vezham/shared-utils";
 import NextImage from "next/image";
 
 import {

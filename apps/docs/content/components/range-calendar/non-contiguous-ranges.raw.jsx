@@ -1,4 +1,4 @@
-import {RangeCalendar} from "@heroui/react";
+import {RangeCalendar} from "@vezham/react";
 import {isWeekend} from "@internationalized/date";
 import {useLocale} from "@react-aria/i18n";
 

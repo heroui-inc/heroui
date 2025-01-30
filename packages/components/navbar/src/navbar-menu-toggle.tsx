@@ -1,7 +1,7 @@
 import {AriaToggleButtonProps, useToggleButton as useAriaToggleButton} from "@react-aria/button";
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@vezham/system";
+import {useDOMRef} from "@vezham/react-utils";
+import {clsx, dataAttr} from "@vezham/shared-utils";
 import {useToggleState} from "@react-stately/toggle";
 import {useFocusRing} from "@react-aria/focus";
 import {mergeProps} from "@react-aria/utils";

@@ -1,6 +1,6 @@
 import {forwardRef} from "react";
-import {Button, ButtonProps} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import {Button, ButtonProps} from "@vezham/react";
+import {clsx} from "@vezham/shared-utils";
 
 export interface PreviewButtonProps extends ButtonProps {
   icon: React.ReactNode;

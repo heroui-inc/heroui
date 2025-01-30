@@ -1,8 +1,8 @@
-import type {ListboxItemVariantProps, ListboxItemSlots, SlotsToClasses} from "@heroui/theme";
+import type {ListboxItemVariantProps, ListboxItemSlots, SlotsToClasses} from "@vezham/theme";
 import type {AriaOptionProps} from "@react-aria/listbox";
 import type {FocusableProps, PressEvents} from "@react-types/shared";
 
-import {BaseItem, ItemProps} from "@heroui/aria-utils";
+import {BaseItem, ItemProps} from "@vezham/aria-utils";
 import {ReactNode} from "react";
 
 export type ListboxItemSelectedIconProps = {

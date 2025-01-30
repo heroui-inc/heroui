@@ -10,7 +10,7 @@ import {
   getKeyValue,
   Spinner,
   Pagination,
-} from "@heroui/react";
+} from "@vezham/react";
 import {useMemo, useState} from "react";
 import useSWR from "swr";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import {Autocomplete, AutocompleteItem} from "@heroui/react";
-import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
+import {Autocomplete, AutocompleteItem} from "@vezham/react";
+import {useInfiniteScroll} from "@vezham/use-infinite-scroll";
 
 export function usePokemonList({fetchDelay = 0} = {}) {
   const [items, setItems] = React.useState([]);

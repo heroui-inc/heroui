@@ -31,6 +31,6 @@ export {
   pickChildren,
   renderFn,
   filterDOMProps,
-} from "@heroui/react-rsc-utils";
+} from "@vezham/react-rsc-utils";
 
 export {useIsHydrated} from "./use-is-hydrated";

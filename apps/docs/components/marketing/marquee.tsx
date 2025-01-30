@@ -1,11 +1,11 @@
 "use client";
 
 import type {ReactNode} from "react";
-import type {ScrollShadowProps} from "@heroui/react";
+import type {ScrollShadowProps} from "@vezham/react";
 
 import {Children, cloneElement} from "react";
-import {ScrollShadow} from "@heroui/react";
-import {cn} from "@heroui/react";
+import {ScrollShadow} from "@vezham/react";
+import {cn} from "@vezham/react";
 
 interface MarqueeProps {
   className?: string;

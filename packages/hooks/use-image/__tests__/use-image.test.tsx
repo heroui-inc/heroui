@@ -1,5 +1,5 @@
 import {renderHook, waitFor} from "@testing-library/react";
-import {mocks} from "@heroui/test-utils";
+import {mocks} from "@vezham/test-utils";
 
 import {useImage} from "../src";
 

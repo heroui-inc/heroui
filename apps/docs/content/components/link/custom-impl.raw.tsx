@@ -1,7 +1,7 @@
 import React, {forwardRef} from "react";
-import {LinkIcon} from "@heroui/shared-icons";
-import {linkAnchorClasses} from "@heroui/theme";
-import {LinkProps, useLink} from "@heroui/react";
+import {LinkIcon} from "@vezham/shared-icons";
+import {linkAnchorClasses} from "@vezham/theme";
+import {LinkProps, useLink} from "@vezham/react";
 
 export interface MyLinkProps extends LinkProps {}
 

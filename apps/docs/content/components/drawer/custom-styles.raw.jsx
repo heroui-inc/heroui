@@ -11,7 +11,7 @@ import {
   Tooltip,
   Avatar,
   AvatarGroup,
-} from "@heroui/react";
+} from "@vezham/react";
 
 export default function App() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -326,10 +326,10 @@ export default function App() {
                 </div>
               </DrawerBody>
               <DrawerFooter className="flex flex-col gap-1">
-                <Link className="text-default-400" href="mailto:hello@heroui.com" size="sm">
+                <Link className="text-default-400" href="mailto:hello@vezham.com" size="sm">
                   Contact the host
                 </Link>
-                <Link className="text-default-400" href="mailto:hello@heroui.com" size="sm">
+                <Link className="text-default-400" href="mailto:hello@vezham.com" size="sm">
                   Report event
                 </Link>
               </DrawerFooter>

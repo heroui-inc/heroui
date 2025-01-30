@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {card} from "@heroui/theme";
-import {Link} from "@heroui/link";
-import {Button} from "@heroui/button";
-import {Code} from "@heroui/code";
-import {Image} from "@heroui/image";
+import {card} from "@vezham/theme";
+import {Link} from "@vezham/link";
+import {Button} from "@vezham/button";
+import {Code} from "@vezham/code";
+import {Image} from "@vezham/image";
 
 import {Card, CardBody, CardHeader, CardFooter, CardProps} from "../src";
 
@@ -118,7 +118,7 @@ const WithFooterTemplate = (args: CardProps) => (
       <p>Make beautiful websites regardless of your design experience.</p>
     </CardBody>
     <CardFooter>
-      <Link isExternal showAnchorIcon href="https://github.com/heroui-inc/heroui">
+      <Link isExternal showAnchorIcon href="https://github.com/vezham/heroui">
         Visit source code on GitHub.
       </Link>
     </CardFooter>

@@ -1,4 +1,4 @@
-import {Badge, Avatar} from "@heroui/react";
+import {Badge, Avatar} from "@vezham/react";
 
 export default function App() {
   return (

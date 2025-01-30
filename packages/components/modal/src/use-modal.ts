@@ -1,15 +1,15 @@
-import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@heroui/theme";
+import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@vezham/theme";
 import type {HTMLMotionProps} from "framer-motion";
 
 import {AriaModalOverlayProps} from "@react-aria/overlays";
-import {useAriaModalOverlay} from "@heroui/use-aria-modal-overlay";
+import {useAriaModalOverlay} from "@vezham/use-aria-modal-overlay";
 import {useCallback, useId, useRef, useState, useMemo, ReactNode} from "react";
-import {modal} from "@heroui/theme";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {useAriaButton} from "@heroui/use-aria-button";
+import {modal} from "@vezham/theme";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {useAriaButton} from "@vezham/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef, useDOMRef} from "@vezham/react-utils";
 import {useOverlayTriggerState} from "@react-stately/overlays";
 import {OverlayTriggerProps} from "@react-stately/overlays";
 import {mergeRefs, mergeProps} from "@react-aria/utils";

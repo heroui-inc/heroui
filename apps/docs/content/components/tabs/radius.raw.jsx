@@ -1,4 +1,4 @@
-import {Tabs, Tab} from "@heroui/react";
+import {Tabs, Tab} from "@vezham/react";
 
 export default function App() {
   const radiusList = ["full", "lg", "md", "sm", "none"];

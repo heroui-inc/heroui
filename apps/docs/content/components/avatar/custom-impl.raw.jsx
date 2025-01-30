@@ -1,5 +1,5 @@
 import {forwardRef, useMemo} from "react";
-import {AvatarIcon, useAvatar} from "@heroui/react";
+import {AvatarIcon, useAvatar} from "@vezham/react";
 
 const MyAvatar = forwardRef((props, ref) => {
   const {

@@ -1,4 +1,4 @@
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {usePaginationItem, UsePaginationItemProps} from "./use-pagination-item";
 

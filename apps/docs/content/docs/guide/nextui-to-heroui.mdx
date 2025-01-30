@@ -23,10 +23,10 @@ Execute the codemod in your project directory:
 
 <PackageManagers
   commands={{
-    npm: "npx @heroui/codemod@latest migrate",
-    pnpm: "pnpm dlx @heroui/codemod@latest migrate",
-    yarn: "yarn dlx @heroui/codemod@latest migrate",
-    bun: "bunx --bun @heroui/codemod@latest migrate"
+    npm: "npx @vezham/codemod@latest migrate",
+    pnpm: "pnpm dlx @vezham/codemod@latest migrate",
+    yarn: "yarn dlx @vezham/codemod@latest migrate",
+    bun: "bunx --bun @vezham/codemod@latest migrate"
   }}
 />
 
@@ -34,7 +34,7 @@ Execute the codemod in your project directory:
 > **Note:** If you're using a monorepo, run the codemod from the root directory
 
 This will automatically:
-- Update all package names from `@nextui-org/*` to `@heroui/*`
+- Update all package names from `@nextui-org/*` to `@vezham/*`
 - Rename component imports and references
 - Update TailwindCSS configuration
 - Transform provider components
@@ -68,10 +68,10 @@ Replace NextUI packages with their HeroUI equivalents:
 
 <PackageManagers
   commands={{
-    npm: "npm uninstall @nextui-org/react && npm install @heroui/react",
-    yarn: "yarn remove @nextui-org/react && yarn add @heroui/react",
-    pnpm: "pnpm remove @nextui-org/react && pnpm add @heroui/react",
-    bun: "bun remove @nextui-org/react && bun add @heroui/react"
+    npm: "npm uninstall @nextui-org/react && npm install @vezham/react",
+    yarn: "yarn remove @nextui-org/react && yarn add @vezham/react",
+    pnpm: "pnpm remove @nextui-org/react && pnpm add @vezham/react",
+    bun: "bun remove @nextui-org/react && bun add @vezham/react"
   }}
 />
 
@@ -92,12 +92,12 @@ module.exports = {
 };
 
 // After
-const {heroui} = require("@heroui/react");
+const {heroui} = require("@vezham/react");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@vezham/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   plugins: [heroui()]
 };
@@ -112,7 +112,7 @@ Replace the NextUI provider with HeroUI's provider:
 import {NextUIProvider} from "@nextui-org/react";
 
 // After
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider} from "@vezham/react";
 ```
 
 ### Update Imports
@@ -124,7 +124,7 @@ Update all component imports to use the new package name:
 import {Button, Input} from "@nextui-org/react";
 
 // After
-import {Button, Input} from "@heroui/react";
+import {Button, Input} from "@vezham/react";
 ```
 
 ### Individual Packages
@@ -139,10 +139,10 @@ import {nextui} from "@nextui-org/theme";
 import {NextUIProvider} from "@nextui-org/react";
 
 // After
-import {Button} from "@heroui/button";
-import {Input} from "@heroui/input";
-import {heroui} from "@heroui/theme";
-import {HeroUIProvider} from "@heroui/react";
+import {Button} from "@vezham/button";
+import {Input} from "@vezham/input";
+import {heroui} from "@vezham/theme";
+import {HeroUIProvider} from "@vezham/react";
 ```
 
 ### Npmrc Pnpm Only
@@ -154,7 +154,7 @@ If you are using pnpm, you need to update your .npmrc file to use the new packag
 public-hoist-pattern[]=*@nextui-org/*
 
 # After
-public-hoist-pattern[]=*@heroui/*
+public-hoist-pattern[]=*@vezham/*
 ```
 
 </Steps>
@@ -189,4 +189,4 @@ Join our Discord community in the **#nextui-to-heroui** channel [https://discord
 
 ---
 
-If you encounter any issues during migration, please [open an issue](https://github.com/heroui-inc/heroui/issues) on our GitHub repository.
+If you encounter any issues during migration, please [open an issue](https://github.com/vezham/heroui/issues) on our GitHub repository.

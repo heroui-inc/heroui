@@ -1,4 +1,4 @@
-import {Tabs, Tab, Input, Link, Button, Card, CardBody} from "@heroui/react";
+import {Tabs, Tab, Input, Link, Button, Card, CardBody} from "@vezham/react";
 
 export default function App() {
   const [selected, setSelected] = React.useState("login");

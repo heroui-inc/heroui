@@ -1,4 +1,4 @@
-import {TimeInput} from "@heroui/react";
+import {TimeInput} from "@vezham/react";
 
 export default function App() {
   return (

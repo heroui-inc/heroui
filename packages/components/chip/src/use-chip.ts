@@ -1,14 +1,14 @@
-import type {ChipVariantProps, ChipSlots, SlotsToClasses} from "@heroui/theme";
+import type {ChipVariantProps, ChipSlots, SlotsToClasses} from "@vezham/theme";
 import type {ReactNode} from "react";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter} from "@heroui/system";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter} from "@vezham/system";
 import {mergeProps} from "@react-aria/utils";
 import {usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
-import {chip} from "@heroui/theme";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {chip} from "@vezham/theme";
+import {useDOMRef} from "@vezham/react-utils";
+import {clsx, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef} from "@vezham/react-utils";
 import {useMemo, isValidElement, cloneElement} from "react";
 import {PressEvent} from "@react-types/shared";
 

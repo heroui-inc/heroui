@@ -1,4 +1,4 @@
-import {Checkbox, CheckboxGroup, Link, User, Chip, cn} from "@heroui/react";
+import {Checkbox, CheckboxGroup, Link, User, Chip, cn} from "@vezham/react";
 
 export const CustomCheckbox = ({user, statusColor, value}) => {
   return (

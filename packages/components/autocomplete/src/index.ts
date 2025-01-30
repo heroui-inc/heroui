@@ -1,7 +1,7 @@
-import type {ListboxItemProps, ListboxSectionProps} from "@heroui/listbox";
+import type {ListboxItemProps, ListboxSectionProps} from "@vezham/listbox";
 import type {MenuTriggerAction as BaseMenuTriggerAction} from "@react-types/combobox";
 
-import {ListboxItem, ListboxSection} from "@heroui/listbox";
+import {ListboxItem, ListboxSection} from "@vezham/listbox";
 
 import Autocomplete from "./autocomplete";
 

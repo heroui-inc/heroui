@@ -1,4 +1,4 @@
-import {Tabs, Tab, Card, CardBody} from "@heroui/react";
+import {Tabs, Tab, Card, CardBody} from "@vezham/react";
 
 export default function App() {
   return (

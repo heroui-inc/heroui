@@ -95,9 +95,9 @@ export function extractHeroUIImport(code: string): string[] {
   // Split the code into lines
   const lines = code.split("\n");
 
-  // Filter the lines to only include import statements from "@heroui/react"
+  // Filter the lines to only include import statements from "@vezham/react"
   const importStatements = lines.filter(
-    (line) => line.startsWith("import") && line.includes("@heroui/react"),
+    (line) => line.startsWith("import") && line.includes("@vezham/react"),
   );
 
   // Return the import statements
@@ -133,7 +133,7 @@ export function updateTailwindConfig(tailwindConfig: string, componentNames: str
 
   // Find the index of the line to replace
   const lineIndex = lines.findIndex((line) =>
-    line.includes("./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"),
+    line.includes("./node_modules/@vezham/theme/dist/**/*.{js,ts,jsx,tsx}"),
   );
 
   // If the line was found
@@ -147,7 +147,7 @@ export function updateTailwindConfig(tailwindConfig: string, componentNames: str
       const name = componentName.replace(/"/g, "");
 
       // Add the new line
-      lines.splice(lineIndex, 0, `  "./node_modules/@heroui/theme/dist/components/${name}.js",`);
+      lines.splice(lineIndex, 0, `  "./node_modules/@vezham/theme/dist/components/${name}.js",`);
     });
   }
 

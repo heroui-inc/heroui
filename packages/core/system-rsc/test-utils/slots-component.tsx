@@ -1,10 +1,10 @@
 import type {HTMLHeroUIProps} from "../src/types";
-import type {VariantProps} from "@heroui/theme";
+import type {VariantProps} from "@vezham/theme";
 
 import React, {useMemo} from "react";
-import {SlotsToClasses, tv} from "@heroui/theme";
-import {filterDOMProps, ReactRef, useDOMRef} from "@heroui/react-utils";
-import {objectToDeps} from "@heroui/shared-utils";
+import {SlotsToClasses, tv} from "@vezham/theme";
+import {filterDOMProps, ReactRef, useDOMRef} from "@vezham/react-utils";
+import {objectToDeps} from "@vezham/shared-utils";
 import clsx from "clsx";
 
 import {forwardRef, mapPropsVariants} from "../src/utils";

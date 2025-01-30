@@ -1,15 +1,15 @@
-import type {ButtonProps} from "@heroui/button";
+import type {ButtonProps} from "@vezham/button";
 
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {
   CloseIcon,
   DangerIcon,
   InfoCircleIcon,
   SuccessIcon,
   WarningIcon,
-} from "@heroui/shared-icons";
-import {isEmpty} from "@heroui/shared-utils";
-import {Button} from "@heroui/button";
+} from "@vezham/shared-icons";
+import {isEmpty} from "@vezham/shared-utils";
+import {Button} from "@vezham/button";
 import {cloneElement, isValidElement} from "react";
 
 import {useAlert, UseAlertProps} from "./use-alert";

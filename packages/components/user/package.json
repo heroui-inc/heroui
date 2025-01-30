@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/user",
-  "version": "2.2.7",
+  "name": "@vezham/user",
+  "version": "0.0.1",
   "description": "Flexible User Profile Component.",
   "keywords": [
     "user"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/components/user"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -36,20 +36,20 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0",
-    "@heroui/system": ">=2.4.0"
+    "@vezham/theme": ">=2.4.0",
+    "@vezham/system": ">=2.4.0"
   },
   "dependencies": {
-    "@heroui/avatar": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-utils": "workspace:*",
+    "@vezham/avatar": "workspace:*",
+    "@vezham/shared-utils": "workspace:*",
+    "@vezham/react-utils": "workspace:*",
     "@react-aria/focus": "3.19.0",
     "@react-aria/utils": "3.26.0"
   },
   "devDependencies": {
-    "@heroui/theme": "workspace:*",
-    "@heroui/system": "workspace:*",
-    "@heroui/link": "workspace:*",
+    "@vezham/theme": "workspace:*",
+    "@vezham/system": "workspace:*",
+    "@vezham/link": "workspace:*",
     "clean-package": "2.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

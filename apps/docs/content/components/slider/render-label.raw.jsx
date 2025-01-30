@@ -1,4 +1,4 @@
-import {Slider, Tooltip} from "@heroui/react";
+import {Slider, Tooltip} from "@vezham/react";
 
 export const InfoIcon = (props) => {
   return (

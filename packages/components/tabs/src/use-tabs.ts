@@ -1,15 +1,15 @@
-import type {TabsVariantProps, SlotsToClasses, TabsSlots, TabsReturnType} from "@heroui/theme";
+import type {TabsVariantProps, SlotsToClasses, TabsSlots, TabsReturnType} from "@vezham/theme";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {tabs} from "@heroui/theme";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, filterDOMProps} from "@heroui/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {tabs} from "@vezham/theme";
+import {useDOMRef} from "@vezham/react-utils";
+import {clsx, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef, filterDOMProps} from "@vezham/react-utils";
 import {useMemo, RefObject, useCallback} from "react";
 import {TabListState, TabListStateOptions, useTabListState} from "@react-stately/tabs";
 import {AriaTabListProps, useTabList} from "@react-aria/tabs";
 import {mergeProps} from "@react-aria/utils";
-import {CollectionProps} from "@heroui/aria-utils";
+import {CollectionProps} from "@vezham/aria-utils";
 import {CollectionChildren} from "@react-types/shared";
 import {HTMLMotionProps} from "framer-motion";
 

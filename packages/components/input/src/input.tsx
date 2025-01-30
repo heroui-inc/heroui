@@ -1,6 +1,6 @@
-import {CloseFilledIcon} from "@heroui/shared-icons";
+import {CloseFilledIcon} from "@vezham/shared-icons";
 import {useMemo} from "react";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseInputProps, useInput} from "./use-input";
 

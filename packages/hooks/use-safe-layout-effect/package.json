@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/use-safe-layout-effect",
-  "version": "2.1.2",
+  "name": "@vezham/use-safe-layout-effect",
+  "version": "0.0.1",
   "description": "",
   "keywords": [
     "use-safe-layout-effect"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/hooks/use-safe-layout-effect"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",

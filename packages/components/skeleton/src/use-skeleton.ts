@@ -1,11 +1,11 @@
-import type {SkeletonVariantProps, SkeletonSlots, SlotsToClasses} from "@heroui/theme";
-import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {SkeletonVariantProps, SkeletonSlots, SlotsToClasses} from "@vezham/theme";
+import type {HTMLHeroUIProps, PropGetter} from "@vezham/system";
 
-import {mapPropsVariants} from "@heroui/system";
-import {skeleton} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {mapPropsVariants} from "@vezham/system";
+import {skeleton} from "@vezham/theme";
+import {clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
 import {useMemo, Ref} from "react";
-import {useProviderContext} from "@heroui/system";
+import {useProviderContext} from "@vezham/system";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**

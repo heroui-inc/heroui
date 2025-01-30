@@ -1,4 +1,4 @@
-import {CheckboxGroup, Checkbox} from "@heroui/react";
+import {CheckboxGroup, Checkbox} from "@vezham/react";
 
 export default function App() {
   const [selected, setSelected] = React.useState(["buenos-aires", "sydney"]);

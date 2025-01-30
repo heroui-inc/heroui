@@ -10150,14 +10150,14 @@
     }
   },
   {
-    "content": "Install @heroui/use-theme",
+    "content": "Install @vezham/use-theme",
     "objectID": "0293a490-e8c6-4591-b4b2-6c522536710b",
     "type": "lvl3",
     "url": "/docs/customization/dark-mode#install-herouiuse-theme",
     "hierarchy": {
       "lvl1": "Dark mode",
       "lvl2": "Using use-theme hook",
-      "lvl3": "Install @heroui/use-theme"
+      "lvl3": "Install @vezham/use-theme"
     }
   },
   {
@@ -10167,7 +10167,7 @@
     "url": "/docs/customization/dark-mode#add-the-current-theme-to-the-main-element",
     "hierarchy": {
       "lvl1": "Dark mode",
-      "lvl2": "Install @heroui/use-theme",
+      "lvl2": "Install @vezham/use-theme",
       "lvl3": "Add the current theme to the main element"
     }
   },

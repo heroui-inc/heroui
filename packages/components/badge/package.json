@@ -1,6 +1,6 @@
 {
-  "name": "@heroui/badge",
-  "version": "2.2.6",
+  "name": "@vezham/badge",
+  "version": "0.0.1",
   "description": "Badges are used as a small numerical value or status descriptor for UI elements.",
   "keywords": [
     "badge"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "git+https://github.com/vezham/heroui.git",
     "directory": "packages/components/badge"
   },
   "bugs": {
-    "url": "https://github.com/heroui-inc/heroui/issues"
+    "url": "https://github.com/vezham/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -36,19 +36,19 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0",
-    "@heroui/system": ">=2.4.0"
+    "@vezham/theme": ">=2.4.0",
+    "@vezham/system": ">=2.4.0"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-utils": "workspace:*"
+    "@vezham/shared-utils": "workspace:*",
+    "@vezham/react-utils": "workspace:*"
   },
   "devDependencies": {
-    "@heroui/system": "workspace:*",
-    "@heroui/theme": "workspace:*",
-    "@heroui/avatar": "workspace:*",
-    "@heroui/shared-icons": "workspace:*",
-    "@heroui/switch": "workspace:*",
+    "@vezham/system": "workspace:*",
+    "@vezham/theme": "workspace:*",
+    "@vezham/avatar": "workspace:*",
+    "@vezham/shared-icons": "workspace:*",
+    "@vezham/switch": "workspace:*",
     "clean-package": "2.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

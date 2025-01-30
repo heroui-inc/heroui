@@ -1,15 +1,15 @@
-import type {ProgressVariantProps, SlotsToClasses, ProgressSlots} from "@heroui/theme";
-import type {PropGetter} from "@heroui/system";
+import type {ProgressVariantProps, SlotsToClasses, ProgressSlots} from "@vezham/theme";
+import type {PropGetter} from "@vezham/system";
 import type {AriaProgressBarProps} from "@react-types/progress";
 
-import {HTMLHeroUIProps, mapPropsVariants, useProviderContext} from "@heroui/system";
-import {progress} from "@heroui/theme";
-import {useDOMRef} from "@heroui/react-utils";
-import {clampPercentage, clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, useProviderContext} from "@vezham/system";
+import {progress} from "@vezham/theme";
+import {useDOMRef} from "@vezham/react-utils";
+import {clampPercentage, clsx, dataAttr, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef} from "@vezham/react-utils";
 import {mergeProps} from "@react-aria/utils";
 import {useMemo, useCallback} from "react";
-import {useIsMounted} from "@heroui/use-is-mounted";
+import {useIsMounted} from "@vezham/use-is-mounted";
 import {useProgressBar as useAriaProgress} from "@react-aria/progress";
 
 interface Props extends HTMLHeroUIProps<"div"> {

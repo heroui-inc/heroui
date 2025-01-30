@@ -1,4 +1,4 @@
-import {forwardRef} from "@heroui/system-rsc";
+import {forwardRef} from "@vezham/system-rsc";
 
 import {UseSpacerProps, useSpacer} from "./use-spacer";
 

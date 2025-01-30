@@ -1,4 +1,4 @@
-# @heroui/use-infinite-scroll
+# @vezham/use-infinite-scroll
 
 A Quick description of the component
 
@@ -7,18 +7,18 @@ A Quick description of the component
 ## Installation
 
 ```sh
-yarn add @heroui/use-infinite-scroll
+yarn add @vezham/use-infinite-scroll
 # or
-npm i @heroui/use-infinite-scroll
+npm i @vezham/use-infinite-scroll
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

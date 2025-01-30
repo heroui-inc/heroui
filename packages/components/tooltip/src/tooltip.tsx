@@ -1,17 +1,17 @@
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 import {OverlayContainer} from "@react-aria/overlays";
 import {AnimatePresence, m, LazyMotion} from "framer-motion";
-import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
-import {warn} from "@heroui/shared-utils";
+import {TRANSITION_VARIANTS} from "@vezham/framer-utils";
+import {warn} from "@vezham/shared-utils";
 import {Children, cloneElement, isValidElement} from "react";
-import {getTransformOrigins} from "@heroui/aria-utils";
+import {getTransformOrigins} from "@vezham/aria-utils";
 import {mergeProps} from "@react-aria/utils";
 
 import {UseTooltipProps, useTooltip} from "./use-tooltip";
 
 export interface TooltipProps extends Omit<UseTooltipProps, "disableTriggerFocus" | "backdrop"> {}
 
-const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
+const domAnimation = () => import("@vezham/dom-animation").then((res) => res.default);
 
 const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
   const {

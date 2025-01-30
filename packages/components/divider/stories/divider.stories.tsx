@@ -1,6 +1,6 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {divider} from "@heroui/theme";
+import {divider} from "@vezham/theme";
 
 import {Divider, DividerProps} from "../src";
 

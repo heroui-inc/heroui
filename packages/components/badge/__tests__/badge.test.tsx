@@ -1,6 +1,6 @@
 import * as React from "react";
 import {render} from "@testing-library/react";
-import {Avatar} from "@heroui/avatar";
+import {Avatar} from "@vezham/avatar";
 
 import {Badge} from "../src";
 

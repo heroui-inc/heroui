@@ -1,4 +1,4 @@
-# @heroui/table
+# @vezham/table
 
 Tables are used to display tabular data using rows and columns. They allow users to quickly scan, sort, compare, and take action on large amounts of data.
 
@@ -7,18 +7,18 @@ Please refer to the [documentation](https://heroui.com/docs/components/table) fo
 ## Installation
 
 ```sh
-yarn add @heroui/table
+yarn add @vezham/table
 # or
-npm i @heroui/table
+npm i @vezham/table
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

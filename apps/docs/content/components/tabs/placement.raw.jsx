@@ -1,4 +1,4 @@
-import {Tabs, Tab, Card, CardBody, RadioGroup, Radio} from "@heroui/react";
+import {Tabs, Tab, Card, CardBody, RadioGroup, Radio} from "@vezham/react";
 
 export default function App() {
   const [placement, setPlacement] = React.useState("top");

@@ -4,15 +4,15 @@ import type {ValidationResult} from "@react-types/shared";
 import React, {ChangeEvent} from "react";
 import {useForm} from "react-hook-form";
 import {Meta} from "@storybook/react";
-import {select, button} from "@heroui/theme";
-import {PetBoldIcon, SelectorIcon} from "@heroui/shared-icons";
-import {Avatar} from "@heroui/avatar";
-import {Chip} from "@heroui/chip";
-import {Button} from "@heroui/button";
+import {select, button} from "@vezham/theme";
+import {PetBoldIcon, SelectorIcon} from "@vezham/shared-icons";
+import {Avatar} from "@vezham/avatar";
+import {Chip} from "@vezham/chip";
+import {Button} from "@vezham/button";
 import {Selection} from "@react-types/shared";
-import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
-import {Pokemon, usePokemonList, animalsData, usersData, Animal, User} from "@heroui/stories-utils";
-import {Form} from "@heroui/form";
+import {useInfiniteScroll} from "@vezham/use-infinite-scroll";
+import {Pokemon, usePokemonList, animalsData, usersData, Animal, User} from "@vezham/stories-utils";
+import {Form} from "@vezham/form";
 
 import {Select, SelectedItems, SelectItem, SelectProps, SelectSection} from "../src";
 

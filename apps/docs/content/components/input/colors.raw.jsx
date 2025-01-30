@@ -1,4 +1,4 @@
-import {Input} from "@heroui/react";
+import {Input} from "@vezham/react";
 
 export default function App() {
   const colors = ["default", "primary", "secondary", "success", "warning", "danger"];
@@ -10,7 +10,7 @@ export default function App() {
           key={color}
           className="max-w-[220px]"
           color={color}
-          defaultValue="junior@heroui.com"
+          defaultValue="junior@vezham.com"
           label="Email"
           placeholder="Enter your email"
           type="email"

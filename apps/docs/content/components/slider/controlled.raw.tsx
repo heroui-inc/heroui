@@ -1,7 +1,7 @@
-import type {SliderValue} from "@heroui/react";
+import type {SliderValue} from "@vezham/react";
 
 import React from "react";
-import {Slider, Button} from "@heroui/react";
+import {Slider, Button} from "@vezham/react";
 
 export const VolumeHighIcon = (props) => {
   return (

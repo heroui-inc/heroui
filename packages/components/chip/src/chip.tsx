@@ -1,5 +1,5 @@
-import {CloseFilledIcon} from "@heroui/shared-icons";
-import {forwardRef} from "@heroui/system";
+import {CloseFilledIcon} from "@vezham/shared-icons";
+import {forwardRef} from "@vezham/system";
 import {useMemo} from "react";
 
 import {UseChipProps, useChip} from "./use-chip";

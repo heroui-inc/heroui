@@ -1,18 +1,18 @@
-import type {CheckboxGroupSlots, SlotsToClasses} from "@heroui/theme";
+import type {CheckboxGroupSlots, SlotsToClasses} from "@vezham/theme";
 import type {AriaCheckboxGroupProps} from "@react-types/checkbox";
 import type {Orientation} from "@react-types/shared";
-import type {ReactRef} from "@heroui/react-utils";
-import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@vezham/react-utils";
+import type {HTMLHeroUIProps, PropGetter} from "@vezham/system";
 
-import {useProviderContext} from "@heroui/system";
+import {useProviderContext} from "@vezham/system";
 import {useCallback, useMemo} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
-import {checkboxGroup} from "@heroui/theme";
+import {checkboxGroup} from "@vezham/theme";
 import {useCheckboxGroup as useReactAriaCheckboxGroup} from "@react-aria/checkbox";
 import {CheckboxGroupState, useCheckboxGroupState} from "@react-stately/checkbox";
-import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, safeAriaLabel} from "@heroui/shared-utils";
-import {FormContext, useSlottedContext} from "@heroui/form";
+import {filterDOMProps, useDOMRef} from "@vezham/react-utils";
+import {clsx, safeAriaLabel} from "@vezham/shared-utils";
+import {FormContext, useSlottedContext} from "@vezham/form";
 
 import {CheckboxProps} from "./index";
 

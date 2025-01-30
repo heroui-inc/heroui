@@ -9,7 +9,7 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
-} from "@heroui/react";
+} from "@vezham/react";
 
 export const AcmeLogo = () => {
   return (

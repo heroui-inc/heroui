@@ -1,4 +1,4 @@
-import type {TableVariantProps, SlotsToClasses, TableReturnType, TableSlots} from "@heroui/theme";
+import type {TableVariantProps, SlotsToClasses, TableReturnType, TableSlots} from "@vezham/theme";
 import type {Layout} from "@react-stately/virtualizer";
 import type {SelectionBehavior, DisabledBehavior, Node} from "@react-types/shared";
 import type {TableState, TableStateProps} from "@react-stately/table";
@@ -7,14 +7,14 @@ import type {TableCollection} from "@react-types/table";
 import {ReactNode, Key, useCallback} from "react";
 import {useTableState} from "@react-stately/table";
 import {AriaTableProps, useTable as useReactAriaTable} from "@react-aria/table";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {table} from "@heroui/theme";
-import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@vezham/system";
+import {table} from "@vezham/theme";
+import {useDOMRef, filterDOMProps} from "@vezham/react-utils";
 import {mergeProps} from "@react-aria/utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {clsx, objectToDeps} from "@vezham/shared-utils";
+import {ReactRef} from "@vezham/react-utils";
 import {useMemo} from "react";
-import {CheckboxProps} from "@heroui/checkbox";
+import {CheckboxProps} from "@vezham/checkbox";
 
 type TableContentPlacement = "inside" | "outside";
 

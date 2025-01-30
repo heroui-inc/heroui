@@ -1,5 +1,5 @@
-import {forwardRef} from "@heroui/system";
-import {Avatar} from "@heroui/avatar";
+import {forwardRef} from "@vezham/system";
+import {Avatar} from "@vezham/avatar";
 
 import {UseUserProps, useUser} from "./use-user";
 

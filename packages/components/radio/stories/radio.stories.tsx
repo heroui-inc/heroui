@@ -3,9 +3,9 @@ import type {ValidationResult} from "@react-types/shared";
 import React from "react";
 import {Meta} from "@storybook/react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {radio, button} from "@heroui/theme";
-import {clsx} from "@heroui/shared-utils";
-import {Form} from "@heroui/form";
+import {radio, button} from "@vezham/theme";
+import {clsx} from "@vezham/shared-utils";
+import {Form} from "@vezham/form";
 
 import {
   RadioGroup,

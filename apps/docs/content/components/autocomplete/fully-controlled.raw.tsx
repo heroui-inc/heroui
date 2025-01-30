@@ -1,5 +1,5 @@
 import React from "react";
-import {Autocomplete, AutocompleteItem, MenuTriggerAction} from "@heroui/react";
+import {Autocomplete, AutocompleteItem, MenuTriggerAction} from "@vezham/react";
 import {useFilter} from "@react-aria/i18n";
 
 export type FieldState = {

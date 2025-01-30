@@ -1,9 +1,9 @@
 "use client";
 
 import {FC, useRef, useEffect, useState} from "react";
-import {clsx} from "@heroui/shared-utils";
-import {Divider, Spacer} from "@heroui/react";
-import {ChevronCircleTopLinearIcon} from "@heroui/shared-icons";
+import {clsx} from "@vezham/shared-utils";
+import {Divider, Spacer} from "@vezham/react";
+import {ChevronCircleTopLinearIcon} from "@vezham/shared-icons";
 import scrollIntoView from "scroll-into-view-if-needed";
 
 import {HeroUIProCallout} from "./heroui-pro-callout";

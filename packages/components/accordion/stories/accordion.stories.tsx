@@ -2,7 +2,7 @@ import type {Selection} from "@react-types/shared";
 
 import React from "react";
 import {Meta} from "@storybook/react";
-import {accordionItem, button} from "@heroui/theme";
+import {accordionItem, button} from "@vezham/theme";
 import {
   AnchorIcon,
   MoonIcon,
@@ -11,10 +11,10 @@ import {
   ShieldSecurityIcon,
   MonitorMobileIcon,
   InvalidCardIcon,
-} from "@heroui/shared-icons";
-import {Avatar} from "@heroui/avatar";
-import {Input, Textarea} from "@heroui/input";
-import {Button} from "@heroui/button";
+} from "@vezham/shared-icons";
+import {Avatar} from "@vezham/avatar";
+import {Input, Textarea} from "@vezham/input";
+import {Button} from "@vezham/button";
 
 import {Accordion, AccordionProps, AccordionItem, AccordionItemProps} from "../src";
 

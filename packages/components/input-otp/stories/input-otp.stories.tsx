@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {button, inputOtp} from "@heroui/theme";
+import {button, inputOtp} from "@vezham/theme";
 import {Controller, useForm} from "react-hook-form";
 import {ValidationResult} from "@react-types/shared";
-import {Button} from "@heroui/button";
-import {Form} from "@heroui/form";
+import {Button} from "@vezham/button";
+import {Form} from "@vezham/form";
 
 import {InputOtp} from "../src";
 

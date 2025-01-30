@@ -1,4 +1,4 @@
-import {RangeCalendar} from "@heroui/react";
+import {RangeCalendar} from "@vezham/react";
 import {today, getLocalTimeZone} from "@internationalized/date";
 
 export default function App() {

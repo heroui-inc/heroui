@@ -1,20 +1,20 @@
-import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
+import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@vezham/theme";
 import type {AriaTimeFieldProps, TimeValue} from "@react-types/datepicker";
-import type {ReactRef} from "@heroui/react-utils";
+import type {ReactRef} from "@vezham/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
 
 import {useLocale} from "@react-aria/i18n";
 import {mergeProps} from "@react-aria/utils";
-import {PropGetter, useProviderContext} from "@heroui/system";
-import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
-import {useDOMRef} from "@heroui/react-utils";
+import {PropGetter, useProviderContext} from "@vezham/system";
+import {HTMLHeroUIProps, mapPropsVariants} from "@vezham/system";
+import {useDOMRef} from "@vezham/react-utils";
 import {useTimeField as useAriaTimeField} from "@react-aria/datepicker";
 import {useTimeFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr} from "@heroui/shared-utils";
-import {dateInput} from "@heroui/theme";
+import {objectToDeps, clsx, dataAttr} from "@vezham/shared-utils";
+import {dateInput} from "@vezham/theme";
 import {useMemo} from "react";
-import {FormContext, useSlottedContext} from "@heroui/form";
+import {FormContext, useSlottedContext} from "@vezham/form";
 
 type HeroUIBaseProps<T extends TimeValue> = Omit<
   HTMLHeroUIProps<"div">,

@@ -2,9 +2,9 @@ import type {ValidationResult} from "@react-types/shared";
 
 import React from "react";
 import {Meta} from "@storybook/react";
-import {checkbox} from "@heroui/theme";
-import {button} from "@heroui/theme";
-import {Form} from "@heroui/form";
+import {checkbox} from "@vezham/theme";
+import {button} from "@vezham/theme";
+import {Form} from "@vezham/form";
 
 import {CheckboxGroup, Checkbox, CheckboxGroupProps} from "../src";
 

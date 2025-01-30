@@ -1,5 +1,5 @@
 import {cloneElement} from "react";
-import {forwardRef} from "@heroui/system";
+import {forwardRef} from "@vezham/system";
 
 import {UseImageProps, useImage} from "./use-image";
 

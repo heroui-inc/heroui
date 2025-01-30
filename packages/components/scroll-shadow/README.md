@@ -1,4 +1,4 @@
-# @heroui/scroll-shadow
+# @vezham/scroll-shadow
 
 A component that applies top and bottom shadows when content overflows on scroll.
 
@@ -7,18 +7,18 @@ Please refer to the [documentation](https://heroui.com/docs/components/listbox) 
 ## Installation
 
 ```sh
-yarn add @heroui/scroll-shadow
+yarn add @vezham/scroll-shadow
 # or
-npm i @heroui/scroll-shadow
+npm i @vezham/scroll-shadow
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/heroui-inc/heroui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/vezham/heroui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/heroui-inc/heroui/blob/master/LICENSE).
+[MIT license](https://github.com/vezham/heroui/blob/master/LICENSE).

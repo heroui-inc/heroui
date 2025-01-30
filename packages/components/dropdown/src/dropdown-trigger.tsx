@@ -1,4 +1,4 @@
-import {PopoverTrigger} from "@heroui/popover";
+import {PopoverTrigger} from "@vezham/popover";
 
 import {useDropdownContext} from "./dropdown-context";
 
