@@ -21,6 +21,7 @@ interface ToastRegionProps<T> extends AriaToastRegionProps {
   maxVisibleToasts: number;
   toastOffset?: number;
   toastProps?: ToastProps;
+  defaultTimout?: number;
 }
 
 export function ToastRegion<T extends ToastProps>({
@@ -30,6 +31,7 @@ export function ToastRegion<T extends ToastProps>({
   maxVisibleToasts,
   toastOffset,
   toastProps = {},
+  defaultTimout,
   ...props
 }: ToastRegionProps<T>) {
   const ref = useRef(null);
@@ -88,6 +90,7 @@ export function ToastRegion<T extends ToastProps>({
               state={toastQueue}
               toast={toast}
               {...mergeProps(toastProps, toast.content)}
+              defaultTimeout={defaultTimout}
               disableAnimation={disableAnimation}
               heights={heights}
               index={index}

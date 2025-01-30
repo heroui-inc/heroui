@@ -108,6 +108,7 @@ interface Props<T> extends HTMLHeroUIProps<"div">, ToastProps {
     | "left-top"
     | "center-top";
   toastOffset?: number;
+  defaultTimeout?: number;
 }
 
 export type UseToastProps<T = ToastProps> = Props<T> &
@@ -143,6 +144,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     toastOffset = 0,
     motionProps,
     timeout,
+    defaultTimeout,
     icon,
     onClose,
     ...otherProps
@@ -173,10 +175,13 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const progressBarRef = useRef<HTMLDivElement>(null);
   const pausedTime = useRef<number>(0);
   const timeElapsed = useRef<number>(0);
+  const isProgessVisible = !!timeout;
+  const closeTimeout =
+    timeout ?? (defaultTimeout && isFinite(defaultTimeout)) ? defaultTimeout : undefined;
 
   useEffect(() => {
     const updateProgress = (timestamp: number) => {
-      if (!timeout) {
+      if (!closeTimeout) {
         return;
       }
 
@@ -195,13 +200,13 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       const elapsed = timestamp - startTime.current + pausedTime.current;
 
       timeElapsed.current = elapsed;
-      if (timeElapsed.current >= timeout) {
+      if (timeElapsed.current >= closeTimeout) {
         state.close(toast.key);
       }
 
-      progressRef.current = Math.min((elapsed / timeout) * 100, 100);
+      progressRef.current = Math.min((elapsed / closeTimeout) * 100, 100);
 
-      if (progressBarRef.current) {
+      if (progressBarRef.current && isProgessVisible) {
         progressBarRef.current.style.width = `${progressRef.current}%`;
       }
 
@@ -217,7 +222,16 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [timeout, state, isToastHovered, index, total, isRegionExpanded]);
+  }, [
+    closeTimeout,
+    timeout,
+    defaultTimeout,
+    state,
+    isToastHovered,
+    index,
+    total,
+    isRegionExpanded,
+  ]);
 
   const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
 
