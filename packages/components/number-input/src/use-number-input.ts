@@ -1,8 +1,9 @@
 import type {NumberInputVariantProps, SlotsToClasses, NumberInputSlots} from "@heroui/theme";
 import type {AriaNumberFieldProps} from "@react-types/numberfield";
 import type {NumberFieldStateOptions} from "@react-stately/numberfield";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useFocusRing} from "@react-aria/focus";
 import {numberInput} from "@heroui/theme";
@@ -197,13 +198,10 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     onPress: handleClear,
   });
 
-  const labelPlacement = useMemo<NumberInputVariantProps["labelPlacement"]>(() => {
-    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, label]);
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const errorMessage =
     typeof props.errorMessage === "function"
