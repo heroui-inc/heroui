@@ -48,15 +48,15 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@react-stately/utils": "3.10.5",
-    "@react-aria/utils": "3.26.0",
+    "@react-aria/utils": "3.27.0",
     "@heroui/button": "workspace:*"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "clean-package": "2.2.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
   },
   "clean-package": "../../../clean-package.config.json"
 }
