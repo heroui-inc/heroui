@@ -51,6 +51,7 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/motion": "workspace:*",
     "@heroui/internationalized-date": "workspace:*",
+    "@heroui/react-aria-i18n": "workspace:*",
     "@react-aria/datepicker": "3.13.0",
     "@react-aria/i18n": "3.12.5",
     "@react-aria/utils": "3.27.0",

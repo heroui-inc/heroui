@@ -1419,6 +1419,9 @@ importers:
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
