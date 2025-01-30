@@ -1,4 +1,4 @@
-import type {SupportedCalendars} from "./types";
+import type {SpinnerVariants, SupportedCalendars} from "./types";
 import type {Calendar} from "@internationalized/date";
 import type {DateValue} from "@react-types/datepicker";
 
@@ -87,6 +87,11 @@ export type ProviderContextProps = {
    * @default all calendars
    */
   createCalendar?: (calendar: SupportedCalendars) => Calendar | null;
+  /**
+   * The default variant of the spinner.
+   * @default default
+   */
+  spinnerVariant?: SpinnerVariants;
 };
 
 export const [ProviderContext, useProviderContext] = createContext<ProviderContextProps>({

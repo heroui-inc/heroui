@@ -2785,6 +2785,9 @@ importers:
       '@heroui/shared-utils':
         specifier: workspace:*
         version: link:../../utilities/shared-utils
+      '@heroui/system':
+        specifier: workspace:*
+        version: link:../../core/system
       '@heroui/system-rsc':
         specifier: workspace:*
         version: link:../../core/system-rsc

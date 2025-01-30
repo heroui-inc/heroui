@@ -7,7 +7,7 @@ export interface SpinnerProps extends UseSpinnerProps {}
 const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
   const {slots, classNames, label, variant, getSpinnerProps} = useSpinner({...props});
 
-  if (variant === "dots" || variant === "dots-blink") {
+  if (variant === "wave" || variant === "dots") {
     return (
       <div ref={ref} {...getSpinnerProps()}>
         <div className={slots.wrapper({class: classNames?.wrapper})}>
@@ -28,14 +28,14 @@ const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
     );
   }
 
-  if (variant === "star") {
+  if (variant === "spinner") {
     return (
       <div ref={ref} {...getSpinnerProps()}>
         <div className={slots.wrapper({class: classNames?.wrapper})}>
           {[...new Array(12)].map((_, index) => (
             <i
               key={`star-${index}`}
-              className={slots.bars({class: classNames?.bars})}
+              className={slots.spinnerBars({class: classNames?.spinnerBars})}
               style={
                 {
                   "--bar-index": index,

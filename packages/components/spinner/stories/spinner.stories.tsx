@@ -30,7 +30,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["default", "gradient", "star", "dots", "dots-blink"],
+      options: ["default", "gradient", "spinner", "wave", "dots"],
     },
   },
   decorators: [
@@ -51,9 +51,9 @@ const VariantsTemplate = (args: SpinnerProps) => {
     <div className="flex flex-wrap items-end gap-8 py-4">
       <Spinner {...args} label="default" variant="default" />
       <Spinner {...args} label="gradient" variant="gradient" />
-      <Spinner {...args} label="star" variant="star" />
+      <Spinner {...args} label="spinner" variant="spinner" />
+      <Spinner {...args} label="wave" variant="wave" />
       <Spinner {...args} label="dots" variant="dots" />
-      <Spinner {...args} label="dots-blink" variant="dots-blink" />
     </div>
   );
 };

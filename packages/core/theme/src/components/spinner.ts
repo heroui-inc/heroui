@@ -22,7 +22,7 @@ const spinner = tv({
     circle1: "absolute w-full h-full rounded-full",
     circle2: "absolute w-full h-full rounded-full",
     dots: "relative rounded-full mx-auto",
-    bars: [
+    spinnerBars: [
       "absolute",
       "animate-fade-out",
       "rounded-full",
@@ -62,49 +62,49 @@ const spinner = tv({
         circle1: "border-b-current",
         circle2: "border-b-current",
         dots: "bg-current",
-        bars: "bg-current",
+        spinnerBars: "bg-current",
       },
       white: {
         circle1: "border-b-white",
         circle2: "border-b-white",
         dots: "bg-white",
-        bars: "bg-white",
+        spinnerBars: "bg-white",
       },
       default: {
         circle1: "border-b-default",
         circle2: "border-b-default",
         dots: "bg-default",
-        bars: "bg-default",
+        spinnerBars: "bg-default",
       },
       primary: {
         circle1: "border-b-primary",
         circle2: "border-b-primary",
         dots: "bg-primary",
-        bars: "bg-primary",
+        spinnerBars: "bg-primary",
       },
       secondary: {
         circle1: "border-b-secondary",
         circle2: "border-b-secondary",
         dots: "bg-secondary",
-        bars: "bg-secondary",
+        spinnerBars: "bg-secondary",
       },
       success: {
         circle1: "border-b-success",
         circle2: "border-b-success",
         dots: "bg-success",
-        bars: "bg-success",
+        spinnerBars: "bg-success",
       },
       warning: {
         circle1: "border-b-warning",
         circle2: "border-b-warning",
         dots: "bg-warning",
-        bars: "bg-warning",
+        spinnerBars: "bg-warning",
       },
       danger: {
         circle1: "border-b-danger",
         circle2: "border-b-danger",
         dots: "bg-danger",
-        bars: "bg-danger",
+        spinnerBars: "bg-danger",
       },
     },
     labelColor: {
@@ -158,15 +158,15 @@ const spinner = tv({
         ],
         circle2: ["hidden"],
       },
-      dots: {
+      wave: {
         wrapper: "translate-y-3/4",
         dots: ["animate-sway", "spinner-dot-animation"],
       },
-      "dots-blink": {
+      dots: {
         wrapper: "translate-y-2/4",
         dots: ["animate-blink", "spinner-dot-blink-animation"],
       },
-      star: {},
+      spinner: {},
     },
   },
   defaultVariants: {
@@ -185,42 +185,42 @@ const spinner = tv({
     {variant: "gradient", color: "warning", class: {circle1: "to-warning"}},
     {variant: "gradient", color: "danger", class: {circle1: "to-danger"}},
     {
-      variant: "dots",
+      variant: "wave",
       size: "sm",
       class: {
         wrapper: "w-5 h-5",
       },
     },
     {
-      variant: "dots",
+      variant: "wave",
       size: "md",
       class: {
         wrapper: "w-8 h-8",
       },
     },
     {
-      variant: "dots",
+      variant: "wave",
       size: "lg",
       class: {
         wrapper: "w-12 h-12",
       },
     },
     {
-      variant: "dots-blink",
+      variant: "dots",
       size: "sm",
       class: {
         wrapper: "w-5 h-5",
       },
     },
     {
-      variant: "dots-blink",
+      variant: "dots",
       size: "md",
       class: {
         wrapper: "w-8 h-8",
       },
     },
     {
-      variant: "dots-blink",
+      variant: "dots",
       size: "lg",
       class: {
         wrapper: "w-12 h-12",

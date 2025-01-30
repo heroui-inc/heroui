@@ -70,8 +70,8 @@ Spinner express an unspecified wait time or display the length of a process.
 - **wrapper**: The wrapper of the circles.
 - **circle1**: The first circle of the spinner component. (Effective only when variant is `default` or `gradient`)
 - **circle2**: The second circle of the spinner component. (Effective only when variant is `default` or `gradient`)
-- **dots**: Dots of the spinner component. (Effective only when variant is `dots` or `dots-blink`)
-- **bars**: Bars of the spinner component. (Effective only when variant is `bars`)
+- **dots**: Dots of the spinner component. (Effective only when variant is `wave` or `dots`)
+- **spinnerBars**: Bars of the spinner component. (Effective only when variant is `spinner`)
 - **label**: The label content.
 
 <Spacer y={4} />
@@ -102,7 +102,7 @@ Spinner express an unspecified wait time or display the length of a process.
     },
     {
       attribute: "variant",
-      type: "default | gradient | dots | dots-blink | star",
+      type: "default | gradient | wave | dots | spinner",
       description: "The variant of the spinner",
       default: "default"
     },
@@ -114,7 +114,7 @@ Spinner express an unspecified wait time or display the length of a process.
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<'base' | 'wrapper' | 'circle1' | 'circle2' | 'dots' | 'bars' | 'label', string>>",
+      type: "Partial<Record<'base' | 'wrapper' | 'circle1' | 'circle2' | 'dots' | 'spinnerBars' | 'label', string>>",
       description: "Allows to set custom class names for the spinner slots.",
       default: "-"
     }
