@@ -39,8 +39,8 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
   },
   "clean-package": "../../../clean-package.config.json",
   "tsup": {
@@ -52,15 +52,13 @@
     ]
   },
   "dependencies": {
-    "@heroui/react-utils": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-aria-i18n": "workspace:*",
-    "@heroui/motion": "workspace:*",
-    "@heroui/system-rsc": "workspace:*",
     "@heroui/internationalized-date": "workspace:*",
-    "@react-aria/overlays": "3.24.0",
-    "@react-aria/utils": "3.26.0",
+    "@heroui/react-utils": "workspace:*",
+    "@heroui/react-aria-i18n": "workspace:*",
+    "@heroui/system-rsc": "workspace:*",
+    "@react-aria/overlays": "3.25.0",
+    "@react-aria/utils": "3.27.0",
     "@react-stately/utils": "3.10.5",
-    "@react-types/datepicker": "3.9.0"
+    "@react-types/datepicker": "3.10.0"
   }
 }

@@ -7,6 +7,7 @@ import {
   mapPropsVariants,
   PropGetter,
   SharedSelection,
+  useLabelPlacement,
   useProviderContext,
 } from "@heroui/system";
 import {select} from "@heroui/theme";
@@ -346,13 +347,10 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   const {focusProps, isFocused, isFocusVisible} = useFocusRing();
   const {isHovered, hoverProps} = useHover({isDisabled: originalProps.isDisabled});
 
-  const labelPlacement = useMemo<SelectVariantProps["labelPlacement"]>(() => {
-    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, label]);
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const hasPlaceholder = !!placeholder;
   const shouldLabelBeOutside =

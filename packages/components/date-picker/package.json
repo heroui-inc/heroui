@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.0",
-    "@heroui/theme": ">=2.4.0",
+    "@heroui/system": ">=2.4.8",
+    "@heroui/theme": ">=2.4.7",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
@@ -51,14 +51,14 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/motion": "workspace:*",
     "@heroui/internationalized-date": "workspace:*",
-    "@react-aria/datepicker": "3.12.0",
-    "@heroui/react-aria-i18n": "workspace:*",
-    "@react-aria/utils": "3.26.0",
-    "@react-stately/datepicker": "3.11.0",
-    "@react-stately/overlays": "3.6.12",
+    "@react-aria/datepicker": "3.13.0",
+    "@react-aria/i18n": "3.12.5",
+    "@react-aria/utils": "3.27.0",
+    "@react-stately/datepicker": "3.12.0",
+    "@react-stately/overlays": "3.6.13",
     "@react-stately/utils": "3.10.5",
-    "@react-types/datepicker": "3.9.0",
-    "@react-types/shared": "3.26.0"
+    "@react-types/datepicker": "3.10.0",
+    "@react-types/shared": "3.27.0"
   },
   "devDependencies": {
     "@heroui/radio": "workspace:*",
@@ -66,8 +66,8 @@
     "@heroui/test-utils": "workspace:*",
     "@heroui/theme": "workspace:*",
     "clean-package": "2.2.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
   },
   "clean-package": "../../../clean-package.config.json"
 }

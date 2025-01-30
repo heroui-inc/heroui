@@ -45,11 +45,11 @@
     "@heroui/popover": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-aria/focus": "3.19.0",
-    "@react-aria/menu": "3.16.0",
-    "@react-aria/utils": "3.26.0",
-    "@react-stately/menu": "3.9.0",
-    "@react-types/menu": "3.9.13"
+    "@react-aria/focus": "3.19.1",
+    "@react-aria/menu": "3.17.0",
+    "@react-aria/utils": "3.27.0",
+    "@react-stately/menu": "3.9.1",
+    "@react-types/menu": "3.9.14"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",
@@ -61,8 +61,8 @@
     "@heroui/theme": "workspace:*",
     "@heroui/user": "workspace:*",
     "clean-package": "2.2.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
   },
   "clean-package": "../../../clean-package.config.json"
 }
