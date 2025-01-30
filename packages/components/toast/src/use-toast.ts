@@ -206,8 +206,10 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       progressRef.current = Math.min((elapsed / timeout) * 100, 100);
 
-      if (progressBarRef.current && shouldShowTimeoutProgess) {
-        progressBarRef.current.style.width = `${progressRef.current}%`;
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${
+          shouldShowTimeoutProgess ? progressRef.current : 0
+        }%`;
       }
 
       if (progressRef.current < 100) {
