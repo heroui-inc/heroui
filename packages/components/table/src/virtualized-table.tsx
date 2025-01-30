@@ -1,6 +1,6 @@
 import {useCallback, useLayoutEffect, useRef, useState} from "react";
-import {Spacer} from "@nextui-org/spacer";
-import {forwardRef} from "@nextui-org/system";
+import {Spacer} from "@heroui/spacer";
+import {forwardRef} from "@heroui/system";
 import {useVirtualizer} from "@tanstack/react-virtual";
 
 import {UseTableProps, useTable} from "./use-table";
