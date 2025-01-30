@@ -93,7 +93,7 @@ const Template = (args: ToastProps) => {
   );
 };
 
-const TimeoutTemplate = (args: ToastProps) => {
+const ShowTimeoutProgressTemplate = (args: ToastProps) => {
   return (
     <>
       <ToastProvider placement={args.placement} />
@@ -374,8 +374,8 @@ export const PromiseToast = {
   },
 };
 
-export const WithTimeout = {
-  render: TimeoutTemplate,
+export const ShowTimeoutProgress = {
+  render: ShowTimeoutProgressTemplate,
   args: {
     ...defaultProps,
   },

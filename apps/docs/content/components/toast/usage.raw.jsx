@@ -81,7 +81,7 @@ export default function App() {
           });
         }}
       >
-        With Timeout(3000ms)
+        Show Timeout Progress (3000ms)
       </Button>
 
       <Button
