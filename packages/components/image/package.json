@@ -1,6 +1,6 @@
 {
   "name": "@vezham/image",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simple image component",
   "keywords": [
     "image"

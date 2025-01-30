@@ -1,6 +1,6 @@
 {
   "name": "@vezham/navbar",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A responsive navigation header positioned on top side of your page that includes support for branding, links, navigation, collapse and more.",
   "keywords": [
     "navbar"

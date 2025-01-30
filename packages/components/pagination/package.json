@@ -1,6 +1,6 @@
 {
   "name": "@vezham/pagination",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The Pagination component allows you to display active page and navigate between multiple pages.",
   "keywords": [
     "pagination"

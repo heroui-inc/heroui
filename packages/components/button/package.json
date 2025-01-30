@@ -1,6 +1,6 @@
 {
   "name": "@vezham/button",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Buttons allow users to perform actions and choose with a single tap.",
   "keywords": [
     "button"

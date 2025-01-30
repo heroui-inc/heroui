@@ -1,6 +1,6 @@
 {
   "name": "@vezham/code",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Code is a component used to display inline code.",
   "keywords": [
     "code"

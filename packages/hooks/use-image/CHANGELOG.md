@@ -1,5 +1,12 @@
 # @vezham/use-image
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @vezham/react-utils@0.0.1
+
 ## 2.1.3
 
 ### Patch Changes

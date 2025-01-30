@@ -1,6 +1,6 @@
 {
   "name": "@vezham/select",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A select displays a collapsible list of options and allows a user to select one of them.",
   "keywords": [
     "select"

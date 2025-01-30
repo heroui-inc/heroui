@@ -1,5 +1,13 @@
 # @vezham/system
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @vezham/system-rsc@0.0.0
+  - @vezham/react-utils@0.0.1
+
 ## 2.4.7
 
 ### Patch Changes

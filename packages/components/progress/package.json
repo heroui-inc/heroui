@@ -1,6 +1,6 @@
 {
   "name": "@vezham/progress",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Progress bars show either determinate or indeterminate progress of an operation over time.",
   "keywords": [
     "progress"

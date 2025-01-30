@@ -1,5 +1,19 @@
 # @vezham/date-picker
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`66efa0a`](https://github.com/vezham/heroui/commit/66efa0a08efa96c884829bb38325ec4c799c6e22), [`cddba82`](https://github.com/vezham/heroui/commit/cddba8281cb161d0a8afb42e20c05094974af981)]:
+  - @vezham/shared-utils@0.0.1
+  - @vezham/calendar@0.0.1
+  - @vezham/button@0.0.1
+  - @vezham/date-input@0.0.1
+  - @vezham/form@0.0.1
+  - @vezham/popover@0.0.1
+  - @vezham/aria-utils@0.0.1
+  - @vezham/react-utils@0.0.1
+
 ## 2.3.10
 
 ### Patch Changes

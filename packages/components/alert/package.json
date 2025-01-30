@@ -1,6 +1,6 @@
 {
   "name": "@vezham/alert",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
   "keywords": [
     "alert"

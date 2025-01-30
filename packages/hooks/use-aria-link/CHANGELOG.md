@@ -1,5 +1,12 @@
 # @vezham/use-aria-link
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`66efa0a`](https://github.com/vezham/heroui/commit/66efa0a08efa96c884829bb38325ec4c799c6e22)]:
+  - @vezham/shared-utils@0.0.1
+
 ## 2.2.6
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@vezham/spacer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A flexible spacer component designed to create consistent spacing and maintain alignment in your layout.",
   "keywords": [
     "spacer"
