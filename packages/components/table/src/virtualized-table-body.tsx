@@ -164,6 +164,6 @@ const VirtualizedTableBody = forwardRef<"tbody", VirtualizedTableBodyProps>((pro
   );
 });
 
-VirtualizedTableBody.displayName = "NextUI.VirtualizedTableBody";
+VirtualizedTableBody.displayName = "HeroUI.VirtualizedTableBody";
 
 export default VirtualizedTableBody;

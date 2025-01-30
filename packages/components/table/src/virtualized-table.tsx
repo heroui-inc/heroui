@@ -150,6 +150,6 @@ const VirtualizedTable = forwardRef<"table", TableProps>((props, ref) => {
   );
 });
 
-VirtualizedTable.displayName = "NextUI.VirtualizedTable";
+VirtualizedTable.displayName = "HeroUI.VirtualizedTable";
 
 export default VirtualizedTable;
