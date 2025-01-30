@@ -84,9 +84,7 @@ const Section = ({
           variant,
           classNames: {
             ...classNames,
-            inputWrapper: clsx(
-              variant === "bordered" ? `${borderClassName} border-${color}-200` : "",
-            ),
+            inputWrapper: clsx(variant === "bordered" ? `${borderClassName} border-${color}` : ""),
           },
           isDisabled: false,
           radius,
