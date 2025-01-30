@@ -89,6 +89,10 @@ export interface ToastProps extends ToastVariantProps {
    * props that will be passed to the m.div
    */
   motionProps?: MotionProps;
+  /**
+   * should apply styles to indicate timeout progress
+   */
+  shouldShowTimeoutProgess?: boolean;
 }
 
 interface Props<T> extends HTMLHeroUIProps<"div">, ToastProps {
@@ -108,7 +112,6 @@ interface Props<T> extends HTMLHeroUIProps<"div">, ToastProps {
     | "left-top"
     | "center-top";
   toastOffset?: number;
-  defaultTimeout?: number;
 }
 
 export type UseToastProps<T = ToastProps> = Props<T> &
@@ -143,8 +146,8 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     setHeights,
     toastOffset = 0,
     motionProps,
-    timeout,
-    defaultTimeout,
+    timeout = 6000,
+    shouldShowTimeoutProgess = false,
     icon,
     onClose,
     ...otherProps
@@ -175,13 +178,10 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const progressBarRef = useRef<HTMLDivElement>(null);
   const pausedTime = useRef<number>(0);
   const timeElapsed = useRef<number>(0);
-  const isProgessVisible = !!timeout;
-  const closeTimeout =
-    timeout ?? (defaultTimeout && isFinite(defaultTimeout)) ? defaultTimeout : undefined;
 
   useEffect(() => {
     const updateProgress = (timestamp: number) => {
-      if (!closeTimeout) {
+      if (!timeout) {
         return;
       }
 
@@ -200,13 +200,13 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       const elapsed = timestamp - startTime.current + pausedTime.current;
 
       timeElapsed.current = elapsed;
-      if (timeElapsed.current >= closeTimeout) {
+      if (timeElapsed.current >= timeout) {
         state.close(toast.key);
       }
 
-      progressRef.current = Math.min((elapsed / closeTimeout) * 100, 100);
+      progressRef.current = Math.min((elapsed / timeout) * 100, 100);
 
-      if (progressBarRef.current && isProgessVisible) {
+      if (progressBarRef.current && shouldShowTimeoutProgess) {
         progressBarRef.current.style.width = `${progressRef.current}%`;
       }
 
@@ -222,16 +222,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [
-    closeTimeout,
-    timeout,
-    defaultTimeout,
-    state,
-    isToastHovered,
-    index,
-    total,
-    isRegionExpanded,
-  ]);
+  }, [timeout, shouldShowTimeoutProgess, state, isToastHovered, index, total, isRegionExpanded]);
 
   const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
 

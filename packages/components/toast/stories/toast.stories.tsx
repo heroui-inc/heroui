@@ -103,6 +103,7 @@ const TimeoutTemplate = (args: ToastProps) => {
             title: "Toast Title",
             description: "Toast Description",
             timeout: 3000,
+            shouldShowTimeoutProgess: true,
             ...args,
           });
         }}

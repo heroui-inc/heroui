@@ -241,9 +241,9 @@ Toast has the following slots:
     },
     {
       attribute: "timeout",
-      type: "number | undefined",
+      type: "number",
       description: "Time in milliseconds after which the toast will be closed", 
-      default: "undefined"
+      default: "6000ms"
     },
     {
       attribute: "promise",
@@ -274,6 +274,12 @@ Toast has the following slots:
       type: "boolean",
       description: "Hides closeButton when true",
       default: "false"
+    },
+    {
+      attribute: "shouldShowTimeoutProgress",
+      type: "boolean",
+      description: "Whether to indicate the timeout progress or not",
+      default: "false",
     },
     {
       attribute: "classNames",
@@ -311,12 +317,6 @@ Toast has the following slots:
       type: "number",
       description: "offset distance from the top or bottom",
       default: "0"
-    },
-    {
-      attribute: "defaultTimer",
-      type: "number",
-      description: "Default time in milliseconds after which the toast auto-closes",
-      deafult: "6000ms"
     },
     {
       attribute: "toastProps",
