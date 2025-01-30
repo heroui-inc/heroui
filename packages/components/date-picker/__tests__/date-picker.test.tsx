@@ -794,13 +794,12 @@ describe("DatePicker", () => {
 
     it("supports validate function", async () => {
       const {getByRole, getByTestId} = render(
-        <Form data-testid="form">
+        <Form data-testid="form" validationBehavior="native">
           <DatePicker
             defaultValue={new CalendarDate(2020, 2, 3)}
             label="Value"
             name="date"
             validate={(v) => (v.year < 2022 ? "Invalid value" : null)}
-            validationBehavior="native"
           />
         </Form>,
       );
@@ -842,8 +841,8 @@ describe("DatePicker", () => {
         };
 
         return (
-          <Form validationErrors={serverErrors} onSubmit={onSubmit}>
-            <DatePicker label="Value" name="date" validationBehavior="native" />
+          <Form validationBehavior="native" validationErrors={serverErrors} onSubmit={onSubmit}>
+            <DatePicker label="Value" name="date" />
             <button data-testid="submit" type="submit">
               Submit
             </button>
@@ -882,7 +881,7 @@ describe("DatePicker", () => {
     describe("validationBehavior=aria", () => {
       it("supports minValue and maxValue", async () => {
         const {getByRole} = render(
-          <Form data-testid="form">
+          <Form data-testid="form" validationBehavior="aria">
             <DatePicker
               defaultValue={new CalendarDate(2019, 2, 3)}
               label="Date"
@@ -915,7 +914,7 @@ describe("DatePicker", () => {
 
       it("supports validate function", async () => {
         const {getByRole} = render(
-          <Form data-testid="form">
+          <Form data-testid="form" validationBehavior="aria">
             <DatePicker
               defaultValue={new CalendarDate(2020, 2, 3)}
               label="Value"
@@ -942,7 +941,7 @@ describe("DatePicker", () => {
 
       it("supports server validation", async () => {
         const {getByRole} = render(
-          <Form validationErrors={{value: "Invalid value"}}>
+          <Form validationBehavior="aria" validationErrors={{value: "Invalid value"}}>
             <DatePicker defaultValue={new CalendarDate(2020, 2, 3)} label="Value" name="value" />
           </Form>,
         );

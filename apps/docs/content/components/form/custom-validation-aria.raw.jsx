@@ -1,4 +1,4 @@
-import {Form, Input, Button} from "@heroui/react";
+import {Form, Input, Button} from "@heroui-org/react";
 
 export default function App() {
   const onSubmit = (e) => {
@@ -6,7 +6,7 @@ export default function App() {
   };
 
   return (
-    <Form className="w-full max-w-xs" onSubmit={onSubmit}>
+    <Form className="w-full max-w-xs" validationBehavior="aria" onSubmit={onSubmit}>
       <Input
         isRequired
         label="Username"
