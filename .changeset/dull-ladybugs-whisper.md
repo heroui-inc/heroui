@@ -2,4 +2,4 @@
 "@heroui/theme": patch
 ---
 
-Fix tabs slots "tab" rename to "tabWrapper" -- Breaking Change (#4552)
+Fix tabs slots "wrapper" rename to "tabWrapper" -- Breaking Change (#4552)
