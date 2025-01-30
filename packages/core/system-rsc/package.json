@@ -38,11 +38,11 @@
     "@heroui/theme": ">=2.4.0"
   },
   "devDependencies": {
-    "react": "^18.3.0",
-    "tailwind-variants": "^0.3.0",
     "@heroui/theme": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
+    "react": "18.3.0",
+    "tailwind-variants": "^0.3.0",
     "clean-package": "2.2.0"
   },
   "dependencies": {
