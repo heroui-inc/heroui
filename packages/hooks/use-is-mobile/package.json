@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-is-mobile",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A hook that returns whether the device is mobile or not",
   "keywords": [
     "use-is-mobile"

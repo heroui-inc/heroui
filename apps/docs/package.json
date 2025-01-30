@@ -1,6 +1,6 @@
 {
   "name": "@vezham/docs",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "rimraf .contentlayer && concurrently \"contentlayer2 dev\" \"next dev\"",

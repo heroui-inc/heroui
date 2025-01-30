@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-update-effect",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "React effect hook that invokes only on update",
   "keywords": [
     "use-update-effect"

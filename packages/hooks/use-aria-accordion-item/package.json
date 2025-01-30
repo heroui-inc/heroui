@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-aria-accordion-item",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Internal impl for react aria accordion item",
   "keywords": [
     "use-aria-accordion-item"

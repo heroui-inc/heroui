@@ -1,6 +1,6 @@
 {
   "name": "@vezham/badge",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Badges are used as a small numerical value or status descriptor for UI elements.",
   "keywords": [
     "badge"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@vezham/theme": ">=0.0.1",
-    "@vezham/system": ">=0.0.1"
+    "@vezham/theme": ">=0.0.0",
+    "@vezham/system": ">=0.0.0"
   },
   "dependencies": {
     "@vezham/shared-utils": "workspace:*",

@@ -1,6 +1,6 @@
 {
   "name": "@vezham/form",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A form is a group of inputs that allows users submit data to a server and supports field validation errors.",
   "keywords": [
     "form"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@vezham/system": ">=0.0.1",
-    "@vezham/theme": ">=0.0.1",
+    "@vezham/system": ">=0.0.0",
+    "@vezham/theme": ">=0.0.0",
     "react": ">=18",
     "react-dom": ">=18"
   },

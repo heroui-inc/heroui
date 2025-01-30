@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-disclosure",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "The hook in charge of managing modals",
   "keywords": [
     "use-disclosure"

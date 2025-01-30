@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-resize",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Hook that adds an event listener to the resize window event",
   "keywords": [
     "use-resize"

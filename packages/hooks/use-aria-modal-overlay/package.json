@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-aria-modal-overlay",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A custom implementation of react aria modal overlay, this removes the prevent scroll",
   "keywords": [
     "use-aria-modal-overlay"

@@ -1,6 +1,6 @@
 {
   "name": "@vezham/input-otp",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "keywords": [
     "input-otp"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@vezham/theme": ">=0.0.1",
-    "@vezham/system": ">=0.0.1"
+    "@vezham/theme": ">=0.0.0",
+    "@vezham/system": ">=0.0.0"
   },
   "dependencies": {
     "@vezham/form": "workspace:*",

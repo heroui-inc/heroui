@@ -1,6 +1,6 @@
 {
   "name": "@vezham/test-utils",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A set of utilities for react testing",
   "keywords": [
     "test-utils"

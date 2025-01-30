@@ -1,6 +1,6 @@
 {
   "name": "@vezham/shared-icons",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Internal icons set, commonly used in the components stories",
   "keywords": [
     "icons-utils"

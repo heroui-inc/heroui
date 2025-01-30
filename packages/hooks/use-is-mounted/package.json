@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-is-mounted",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "This hook can be used to render client-based components or run client logic",
   "keywords": [
     "use-is-mounted"

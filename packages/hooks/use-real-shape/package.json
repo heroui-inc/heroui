@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-real-shape",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Hook that returns the real dimensions of an element",
   "keywords": [
     "use-real-shape"

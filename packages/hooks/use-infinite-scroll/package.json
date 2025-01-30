@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-infinite-scroll",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A hook for handling infinite scroll based on the IntersectionObserver API",
   "keywords": [
     "use-infinite-scroll"

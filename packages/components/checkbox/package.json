@@ -1,6 +1,6 @@
 {
   "name": "@vezham/checkbox",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.",
   "keywords": [
     "checkbox"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@vezham/system": ">=0.0.1",
-    "@vezham/theme": ">=0.0.1",
+    "@vezham/system": ">=0.0.0",
+    "@vezham/theme": ">=0.0.0",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
