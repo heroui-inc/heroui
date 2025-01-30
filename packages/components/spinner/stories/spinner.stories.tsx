@@ -2,7 +2,7 @@ import React from "react";
 import {Meta} from "@storybook/react";
 import {spinner} from "@heroui/theme";
 
-import {Spinner} from "../src";
+import {Spinner, SpinnerProps} from "../src";
 
 export default {
   title: "Components/Spinner",
@@ -46,18 +46,14 @@ const defaultProps = {
   ...spinner.defaultVariants,
 };
 
-const VariantsTemplate = () => {
+const VariantsTemplate = (args: SpinnerProps) => {
   return (
     <div className="flex flex-wrap items-end gap-8 py-4">
-      <Spinner classNames={{label: "text-primary-400 mt-4"}} label="default" variant="default" />
-      <Spinner classNames={{label: "text-primary-400 mt-4"}} label="gradient" variant="gradient" />
-      <Spinner classNames={{label: "text-primary-400 mt-4"}} label="star" variant="star" />
-      <Spinner classNames={{label: "text-primary-400 mt-4"}} label="dots" variant="dots" />
-      <Spinner
-        classNames={{label: "text-primary-400 mt-4"}}
-        label="dots-blink"
-        variant="dots-blink"
-      />
+      <Spinner {...args} label="default" variant="default" />
+      <Spinner {...args} label="gradient" variant="gradient" />
+      <Spinner {...args} label="star" variant="star" />
+      <Spinner {...args} label="dots" variant="dots" />
+      <Spinner {...args} label="dots-blink" variant="dots-blink" />
     </div>
   );
 };
@@ -78,7 +74,9 @@ export const WithLabel = {
 export const Variants = {
   args: {
     ...defaultProps,
-    className: "h-full w-full",
+    classNames: {
+      label: "text-primary-400 mt-4",
+    },
   },
 
   render: VariantsTemplate,
