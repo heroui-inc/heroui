@@ -2,7 +2,7 @@ import {ForwardedRef, ReactElement, useId, useState, useEffect, useCallback} fro
 import {LayoutGroup} from "framer-motion";
 import {forwardRef} from "@heroui/system";
 import {EllipsisIcon} from "@heroui/shared-icons";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, debounce} from "@heroui/shared-utils";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
 
 import {UseTabsProps, useTabs} from "./use-tabs";
@@ -162,6 +162,11 @@ const Tabs = forwardRef(function Tabs<T extends object>(
               <button
                 aria-label="Show more tabs"
                 className="flex items-center justify-center w-10 h-8 hover:bg-default-100 rounded-small transition-colors"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    setIsDropdownOpen(true);
+                  }
+                }}
               >
                 <EllipsisIcon className="w-5 h-5" />
                 <span className="sr-only">More tabs</span>
@@ -170,6 +175,11 @@ const Tabs = forwardRef(function Tabs<T extends object>(
             <DropdownMenu
               aria-label="Hidden tabs"
               onAction={(key) => handleTabSelect(key as string)}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setIsDropdownOpen(false);
+                }
+              }}
             >
               {hiddenTabs.map((tab) => (
                 <DropdownItem key={tab.key}>{tab.title}</DropdownItem>

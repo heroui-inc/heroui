@@ -415,27 +415,41 @@ describe("Tabs", () => {
   };
 
   const mockTabPositions = (container: HTMLElement | null) => {
+    const CONTAINER_WIDTH = 200;
+    const TAB_WIDTH = 100;
+    const VISIBLE_TABS = 2;
+
     if (!container) return;
 
     // Mock getBoundingClientRect for container
-    const containerRect = {left: 0, right: 200};
+    const containerRect = {left: 0, right: CONTAINER_WIDTH};
 
-    jest
+    const containerSpy = jest
       .spyOn(container, "getBoundingClientRect")
       .mockImplementation(() => containerRect as DOMRect);
 
     // Mock tab elements positions
     const tabs = container.querySelectorAll("[data-key]");
+    const spies: jest.SpyInstance[] = [];
 
     tabs.forEach((tab, index) => {
       if (!(tab instanceof HTMLElement)) return;
 
-      const isHidden = index >= 2; // First 2 tabs visible, rest hidden
-      const left = isHidden ? 210 : index * 100;
-      const right = left + 100;
+      const isHidden = index >= VISIBLE_TABS;
+      const left = isHidden ? CONTAINER_WIDTH + TAB_WIDTH : index * TAB_WIDTH;
+      const right = left + TAB_WIDTH;
 
-      jest.spyOn(tab, "getBoundingClientRect").mockImplementation(() => ({left, right} as DOMRect));
+      spies.push(
+        jest
+          .spyOn(tab, "getBoundingClientRect")
+          .mockImplementation(() => ({left, right} as DOMRect)),
+      );
     });
+
+    return () => {
+      containerSpy.mockRestore();
+      spies.forEach((spy) => spy.mockRestore());
+    };
   };
 
   it("should show overflow menu when tabs overflow", () => {
