@@ -1,7 +1,7 @@
 import * as React from "react";
 import {render} from "@testing-library/react";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {spy, shouldIgnoreReactWarning} from "@nextui-org/test-utils";
+import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
 import {
   Navbar,

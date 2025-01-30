@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
 import {render, fireEvent} from "@testing-library/react";
-import {shouldIgnoreReactWarning, spy} from "@nextui-org/test-utils";
+import {shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
 
 import {Modal, ModalContent, ModalBody, ModalHeader, ModalFooter, useDraggable} from "../src";

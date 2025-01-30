@@ -1,6 +1,6 @@
 import * as React from "react";
 import {render} from "@testing-library/react";
-import {spy, shouldIgnoreReactWarning} from "@nextui-org/test-utils";
+import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
 import {Pagination} from "../src";
 

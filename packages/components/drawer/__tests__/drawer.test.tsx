@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import * as React from "react";
 import {render, fireEvent} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {spy, shouldIgnoreReactWarning} from "@nextui-org/test-utils";
+import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
 import {Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter} from "../src";
 
