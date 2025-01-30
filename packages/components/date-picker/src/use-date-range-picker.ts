@@ -1,28 +1,27 @@
 import type {DateValue} from "@internationalized/date";
-import type {DateInputVariantProps} from "@nextui-org/theme";
-import type {TimeInputProps} from "@nextui-org/date-input";
-import type {ButtonProps} from "@nextui-org/button";
-import type {RangeCalendarProps} from "@nextui-org/calendar";
-import type {PopoverProps} from "@nextui-org/popover";
+import type {TimeInputProps} from "@heroui/date-input";
+import type {ButtonProps} from "@heroui/button";
+import type {RangeCalendarProps} from "@heroui/calendar";
+import type {PopoverProps} from "@heroui/popover";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {AriaDateRangePickerProps} from "@react-types/datepicker";
 import type {DateRangePickerState} from "@react-stately/datepicker";
 import type {UseDatePickerBaseProps} from "./use-date-picker-base";
-import type {PropGetter} from "@nextui-org/system";
+import type {PropGetter} from "@heroui/system";
 import type {DateRangePickerFieldProps} from "./date-range-picker-field";
-import type {DateInputGroupProps} from "@nextui-org/date-input";
-import type {DateRangePickerSlots, SlotsToClasses} from "@nextui-org/theme";
-import type {DateInputProps} from "@nextui-org/date-input";
+import type {DateInputGroupProps} from "@heroui/date-input";
+import type {DateRangePickerSlots, SlotsToClasses} from "@heroui/theme";
+import type {DateInputProps} from "@heroui/date-input";
 
-import {useProviderContext} from "@nextui-org/system";
+import {useLabelPlacement, useProviderContext} from "@heroui/system";
 import {useMemo, useRef} from "react";
 import {useDateRangePickerState} from "@react-stately/datepicker";
 import {useDateRangePicker as useAriaDateRangePicker} from "@react-aria/datepicker";
-import {clsx, dataAttr, objectToDeps} from "@nextui-org/shared-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
-import {dateRangePicker, dateInput, cn} from "@nextui-org/theme";
-import {FormContext, useSlottedContext} from "@nextui-org/form";
-import {ariaShouldCloseOnInteractOutside} from "@nextui-org/aria-utils";
+import {dateRangePicker, dateInput, cn} from "@heroui/theme";
+import {FormContext, useSlottedContext} from "@heroui/form";
+import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
 import {useDatePickerBase} from "./use-date-picker-base";
 interface Props<T extends DateValue>
@@ -60,6 +59,7 @@ export type UseDateRangePickerProps<T extends DateValue> = Props<T> & AriaDateRa
 
 export function useDateRangePicker<T extends DateValue>({
   as,
+  label,
   isInvalid: isInvalidProp,
   description,
   startContent,
@@ -143,16 +143,10 @@ export function useDateRangePicker<T extends DateValue>({
 
   const showTimeField = !!timeGranularity;
 
-  const labelPlacement = useMemo<DateInputVariantProps["labelPlacement"]>(() => {
-    if (
-      (!originalProps.labelPlacement || originalProps.labelPlacement === "inside") &&
-      !originalProps.label
-    ) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, originalProps.label]);
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
 
@@ -395,7 +389,7 @@ export function useDateRangePicker<T extends DateValue>({
   const getDateInputGroupProps = () => {
     return {
       as,
-      label: originalProps.label,
+      label,
       description,
       endContent,
       errorMessage,
@@ -423,7 +417,7 @@ export function useDateRangePicker<T extends DateValue>({
 
   return {
     state,
-    label: originalProps.label,
+    label,
     slots,
     classNames,
     startContent,

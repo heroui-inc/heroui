@@ -16,7 +16,7 @@ import {
   Pagination,
   extendVariants,
   PaginationItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {useFilter} from "@react-aria/i18n";
 import {useEffect, useMemo, useRef, useState} from "react";
 import {useSearchParams} from "next/navigation";
@@ -390,7 +390,7 @@ const usersData = [
   },
 ];
 
-export default function NextUIPerf() {
+export default function HeroUIPerf() {
   const [textA, setTextA] = useState<string>("");
   const [textB, setTextB] = useState<string>("");
   const [textC, setTextC] = useState<string>("");
@@ -430,7 +430,7 @@ export default function NextUIPerf() {
         autoCorrect="off"
         className="z-10 sticky top-1"
         placeholder="Search..."
-        spellCheck={false}
+        spellCheck="false"
         startContent={<SearchLinearIcon className="text-default-400" size={18} strokeWidth="2" />}
         type="text"
         onValueChange={setInputValue}
