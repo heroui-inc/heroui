@@ -63,6 +63,7 @@ export const HeroUIProvider: React.FC<HeroUIProviderProps> = ({
   // then they will be set in `use-date-input.ts` or `use-calendar-base.ts`
   defaultDates,
   createCalendar,
+  spinnerVariant,
   ...otherProps
 }) => {
   let contents = children;
@@ -87,6 +88,7 @@ export const HeroUIProvider: React.FC<HeroUIProviderProps> = ({
       disableRipple,
       validationBehavior,
       labelPlacement,
+      spinnerVariant,
     };
   }, [
     createCalendar,
@@ -96,6 +98,7 @@ export const HeroUIProvider: React.FC<HeroUIProviderProps> = ({
     disableRipple,
     validationBehavior,
     labelPlacement,
+    spinnerVariant,
   ]);
 
   return (
