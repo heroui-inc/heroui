@@ -1,5 +1,5 @@
 ---
-"@heroui/calendar": major
+"@heroui/calendar": patch
 ---
 
 ### Changes
