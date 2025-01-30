@@ -40,8 +40,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@vezham/theme": ">=2.4.0",
-    "@vezham/system": ">=2.4.0"
+    "@vezham/theme": ">=0.0.1",
+    "@vezham/system": ">=0.0.1"
   },
   "dependencies": {
     "@vezham/react-utils": "workspace:*",
