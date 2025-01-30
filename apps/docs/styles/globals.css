@@ -3,7 +3,6 @@
 @import './ads.css';
 
 @import 'tailwindcss';
-@import './theme.css';
 
 @config '../tailwind.config.js';
 
