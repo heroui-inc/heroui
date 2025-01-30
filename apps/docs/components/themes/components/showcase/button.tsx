@@ -49,7 +49,6 @@ const Section = ({
   borderWidthValue: Border;
 }) => {
   const variants = ["solid", "shadow", "bordered", "flat", "faded", "ghost"];
-  let className = "px-6 min-w-16 h-10 text-small";
 
   let borderClass = "border-medium";
 
@@ -59,43 +58,31 @@ const Section = ({
     borderClass = "border-large";
   }
 
-  switch (scaling) {
-    case 90: {
-      className = clsx("px-4 min-w-12 h-8 text-[0.7rem]");
-      break;
-    }
-    case 95: {
-      className = "px-5 min-w-14 h-9 text-tiny";
-      break;
-    }
-    case 100: {
-      className = "px-6 min-w-16 h-10 text-small";
-      break;
-    }
-    case 105: {
-      className = "px-7 min-w-18 h-11 text-medium";
-      break;
-    }
-    case 110: {
-      className = "px-8 min-w-20 h-12 text-medium";
-      break;
-    }
-  }
+  const scalingClasses = {
+    90: "px-4 min-w-12 h-8 text-[0.7rem]",
+    95: "px-5 min-w-14 h-9 text-tiny",
+    100: "px-6 min-w-16 h-10 text-small",
+    105: "px-7 min-w-18 h-11 text-medium",
+    110: "px-8 min-w-20 h-12 text-medium",
+  };
+  const className = scalingClasses[scaling] || scalingClasses[100];
 
   return (
     <div key={color} className="flex flex-col gap-y-4">
-      {variants.map((variant) =>
-        cloneElement(<SectionBase />, {
-          color,
-          radius,
-          className: clsx(
+      {variants.map((variant) => (
+        <SectionBase
+          key={variant}
+          className={clsx(
             className,
             variant === "bordered" || variant === "faded" || variant === "ghost" ? borderClass : "",
-          ),
-          isDisabled: false,
-          variant,
-        }),
-      )}
+          )}
+          color={color}
+          isDisabled={false}
+          radius={radius}
+          //@ts-ignore
+          variant={variant}
+        />
+      ))}
       {cloneElement(<SectionBase />, {
         color,
         radius,

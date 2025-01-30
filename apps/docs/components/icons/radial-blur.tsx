@@ -2,6 +2,7 @@ import {IconSvgProps} from "@/types";
 
 export const RadialBlur = ({size = 24, width, height, ...props}: IconSvgProps) => (
   <svg
+    aria-label="Radial blur"
     focusable="false"
     height={size || height}
     viewBox="0 0 20 20"

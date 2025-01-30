@@ -18,7 +18,7 @@ export function ConfigSection({children, id, title, icon, toolTip}: Configuratio
         <div>{title}</div>
         {toolTip ? (
           <Tooltip className="bg-default-200" content={toolTip}>
-            <Button isIconOnly className="min-w-4 w-4 h-4">
+            <Button isIconOnly aria-label={`${title}`} className="min-w-4 w-4 h-4">
               <InfoCircleIcon className="h-4 w-4 opacity-40 fill-current" />
             </Button>
           </Tooltip>

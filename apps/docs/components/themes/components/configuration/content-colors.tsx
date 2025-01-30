@@ -13,7 +13,7 @@ interface BaseColorsProps {
 }
 
 export function ContentColors({config, theme}: BaseColorsProps) {
-  const {setConentColor} = useThemeBuilder();
+  const {setContentColor} = useThemeBuilder();
 
   return (
     <ConfigSection
@@ -26,25 +26,25 @@ export function ContentColors({config, theme}: BaseColorsProps) {
         hexColor={config[theme].contentColor.content1}
         type="content1"
         onChange={(hexColor) => setCssContentColor(1, hexColor)}
-        onClose={(hexColor) => setConentColor({content1: hexColor}, theme)}
+        onClose={(hexColor) => setContentColor({content1: hexColor}, theme)}
       />
       <ColorPicker
         hexColor={config[theme].contentColor.content2}
         type="content2"
         onChange={(hexColor) => setCssContentColor(2, hexColor)}
-        onClose={(hexColor) => setConentColor({content2: hexColor}, theme)}
+        onClose={(hexColor) => setContentColor({content2: hexColor}, theme)}
       />
       <ColorPicker
         hexColor={config[theme].contentColor.content3}
         type="content3"
         onChange={(hexColor) => setCssContentColor(3, hexColor)}
-        onClose={(hexColor) => setConentColor({content3: hexColor}, theme)}
+        onClose={(hexColor) => setContentColor({content3: hexColor}, theme)}
       />
       <ColorPicker
         hexColor={config[theme].contentColor.content4}
         type="content4"
         onChange={(hexColor) => setCssContentColor(4, hexColor)}
-        onClose={(hexColor) => setConentColor({content4: hexColor}, theme)}
+        onClose={(hexColor) => setContentColor({content4: hexColor}, theme)}
       />
     </ConfigSection>
   );

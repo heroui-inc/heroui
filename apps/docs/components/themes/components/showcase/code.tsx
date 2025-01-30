@@ -1,4 +1,3 @@
-import {cloneElement} from "react";
 import {CodeProps, Code as HeroUICode} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
@@ -60,7 +59,7 @@ const Section = ({
 
   return (
     <div key={color} className="flex flex-col gap-y-4">
-      {cloneElement(<SectionBase />, {color, radius, className})}
+      <SectionBase className={className} color={color} radius={radius} />
     </div>
   );
 };

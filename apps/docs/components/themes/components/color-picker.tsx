@@ -47,6 +47,7 @@ export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProp
         <PopoverTrigger>
           <Button
             fullWidth
+            aria-label={`Change ${type} color`}
             className={clsx(getColor(type), "rounded-lg min-w-9 w-9 h-9 border border-[#A1A1A7]")}
             size="sm"
             style={{

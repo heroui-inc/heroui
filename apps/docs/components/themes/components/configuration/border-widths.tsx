@@ -5,29 +5,27 @@ import EditableButton from "./editable-button";
 
 import {Crop} from "@/components/icons/crop";
 
+const BORDER_WIDTHS = [
+  {title: "thin", className: "rounded-tl-md border-t-1 border-l-1"},
+  {title: "medium", className: "rounded-tl-md border-t-2 border-l-2"},
+  {title: "thick", className: "rounded-tl-md border-t-4 border-l-4"},
+] as const;
+
 export function BorderWidths() {
   const {borderWidthValue, setBorderWidthValue} = useThemeBuilder();
 
   return (
     <ConfigSection icon={<Crop className="w-5 h-5" />} title="Border width">
-      <EditableButton
-        className="rounded-tl-md border-t-1 border-l-1"
-        setValue={setBorderWidthValue}
-        title="thin"
-        value={borderWidthValue}
-      />
-      <EditableButton
-        className="rounded-tl-md border-t-2 border-l-2"
-        setValue={setBorderWidthValue}
-        title="medium"
-        value={borderWidthValue}
-      />
-      <EditableButton
-        className="rounded-tl-md border-t-4 border-l-4"
-        setValue={setBorderWidthValue}
-        title="thick"
-        value={borderWidthValue}
-      />
+      {BORDER_WIDTHS.map(({title, className}) => (
+        <EditableButton
+          key={title}
+          aria-label={`Set border width to ${title}`}
+          className={className}
+          setValue={setBorderWidthValue}
+          title={title}
+          value={borderWidthValue}
+        />
+      ))}
     </ConfigSection>
   );
 }

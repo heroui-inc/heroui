@@ -1,14 +1,20 @@
 import {Button} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
+type FontName = "inter" | "roboto" | "outfit" | "lora";
 interface FontButtonProps {
-  title: any;
+  title: FontName;
   className: string;
   value: string;
-  setValue: (value: any) => void;
+  setValue: (value: string) => void;
 }
 
-function getFontStyle(fontName) {
+interface FontStyle {
+  fontFamily: string;
+  letterSpacing?: string;
+}
+
+function getFontStyle(fontName: FontName): FontStyle {
   switch (fontName) {
     case "inter":
       return {fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em"};
@@ -19,7 +25,7 @@ function getFontStyle(fontName) {
     case "lora":
       return {fontFamily: "'Lora', serif"};
     default:
-      return {};
+      return {fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em"};
   }
 }
 

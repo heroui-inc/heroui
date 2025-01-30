@@ -1,11 +1,8 @@
-import {useState} from "react";
 import {Button, Tooltip} from "@heroui/react";
 import {Icon} from "@iconify/react/dist/offline";
 import SunIcon from "@iconify/icons-solar/sun-linear";
 import MoonIcon from "@iconify/icons-solar/moon-linear";
-import CopyIcon from "@iconify/icons-solar/copy-linear";
 import UndoLeftIcon from "@iconify/icons-solar/undo-left-linear";
-import CheckCircleIcon from "@iconify/icons-solar/check-circle-linear";
 
 import {ThemeType} from "../../types";
 
@@ -17,7 +14,6 @@ interface ActionsProps {
 }
 
 export function Actions({theme, onCopy, onResetTheme, onToggleTheme}: ActionsProps) {
-  const [copied, setCopied] = useState(false);
   const isLight = theme === "light";
 
   /**
@@ -25,9 +21,6 @@ export function Actions({theme, onCopy, onResetTheme, onToggleTheme}: ActionsPro
    */
   function handleCopyConfig() {
     navigator.clipboard.writeText(JSON.stringify(onCopy(), null, 2));
-
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
   }
 
   return (
@@ -48,11 +41,7 @@ export function Actions({theme, onCopy, onResetTheme, onToggleTheme}: ActionsPro
       </Tooltip>
       <Tooltip content="Copy configuration">
         <Button isIconOnly color="secondary" size="sm" variant="flat" onClick={handleCopyConfig}>
-          {copied ? (
-            <Icon className="text-lg" icon={CheckCircleIcon} />
-          ) : (
-            <Icon className="text-lg" icon={CopyIcon} />
-          )}
+          Copy
         </Button>
       </Tooltip>
     </div>

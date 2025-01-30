@@ -2,6 +2,7 @@ import {IconSvgProps} from "@/types";
 
 export const CropMinimalistic = ({size = 24, width, height, ...props}: IconSvgProps) => (
   <svg
+    aria-label="Minimalistic Crop"
     focusable="false"
     height={size || height}
     viewBox="0 0 20 20"
@@ -20,6 +21,7 @@ export const CropMinimalistic = ({size = 24, width, height, ...props}: IconSvgPr
 
 export const Crop = ({size = 24, width, height, ...props}: IconSvgProps) => (
   <svg
+    aria-label="Crop"
     focusable="false"
     height={size || height}
     viewBox="0 0 20 20"

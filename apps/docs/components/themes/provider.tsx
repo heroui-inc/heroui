@@ -27,7 +27,7 @@ export interface ThemeBuilderContextProps {
     theme: ThemeType,
     sync: boolean,
   ) => void;
-  setConentColor: (newConfig: Partial<ConfigColors["contentColor"]>, theme: ThemeType) => void;
+  setContentColor: (newConfig: Partial<ConfigColors["contentColor"]>, theme: ThemeType) => void;
   setBorderWidth: (newConfig: Partial<ConfigLayout["borderWidth"]>) => void;
   setBaseColor: (
     newConfig: Partial<ConfigColors["baseColor"]>,
@@ -68,7 +68,7 @@ const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   setOtherParams: () => {},
   setRadius: () => {},
   setDefaultColor: () => {},
-  setConentColor: () => {},
+  setContentColor: () => {},
   setRadiusValue: () => {},
   setBorderWidthValue: () => {},
   setTemplateTheme: () => {},
@@ -192,7 +192,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
     );
   };
 
-  const setConentColor = (newConfig: Partial<ConfigColors["contentColor"]>, theme: ThemeType) => {
+  const setContentColor = (newConfig: Partial<ConfigColors["contentColor"]>, theme: ThemeType) => {
     setConfig((prev) => ({
       ...prev,
       [theme]: {
@@ -321,7 +321,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         setOtherParams,
         setRadius,
         setDefaultColor,
-        setConentColor,
+        setContentColor,
         setRadiusValue,
         setBorderWidthValue,
         setTemplateTheme,

@@ -14,7 +14,10 @@ const SectionBase = ({
 }: {
   color?: Color;
   isDisabled?: boolean;
-  classNames?: any;
+  classNames?: {
+    wrapper?: string;
+    thumb?: string;
+  };
 }) => {
   return (
     <Switch
@@ -84,7 +87,7 @@ export const SwitchComponent = () => {
   const {scaling} = useThemeBuilder();
 
   return (
-    <ShowcaseComponent name="Chip">
+    <ShowcaseComponent name="Switch">
       {colors.map((color, idx) => (
         <Section key={idx} color={color} scaling={scaling} />
       ))}

@@ -23,6 +23,8 @@ const SectionBase = ({
   isDisabled?: boolean;
   classNames?: any;
 }) => {
+  const items = ["Home", "Music", "Artist", "Album", "Song"];
+
   return (
     <HeroUIBreadcrumbs
       classNames={classNames}
@@ -30,11 +32,9 @@ const SectionBase = ({
       isDisabled={isDisabled}
       variant={variant}
     >
-      <HeroUIBreadcrumbsItem>Home</HeroUIBreadcrumbsItem>
-      <HeroUIBreadcrumbsItem>Music</HeroUIBreadcrumbsItem>
-      <HeroUIBreadcrumbsItem>Artist</HeroUIBreadcrumbsItem>
-      <HeroUIBreadcrumbsItem>Album</HeroUIBreadcrumbsItem>
-      <HeroUIBreadcrumbsItem>Song</HeroUIBreadcrumbsItem>
+      {items.map((item, index) => (
+        <HeroUIBreadcrumbsItem key={index}>{item}</HeroUIBreadcrumbsItem>
+      ))}
     </HeroUIBreadcrumbs>
   );
 };

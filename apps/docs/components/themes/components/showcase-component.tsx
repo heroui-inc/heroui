@@ -8,19 +8,19 @@ interface ShowcaseComponentProps {
   name: string;
 }
 
-function getFontStyle(fontName) {
-  switch (fontName) {
-    case "inter":
-      return {fontFamily: "'Inter', sans-serif"};
-    case "roboto":
-      return {fontFamily: "'Roboto', sans-serif"};
-    case "outfit":
-      return {fontFamily: "'Outfit', sans-serif"};
-    case "lora":
-      return {fontFamily: "'Lora', serif"};
-    default:
-      return {};
-  }
+type FontName = "inter" | "roboto" | "outfit" | "lora";
+
+const FONT_CONFIGS: Record<FontName, {family: string; type: "sans-serif" | "serif"}> = {
+  inter: {family: "Inter", type: "sans-serif"},
+  roboto: {family: "Roboto", type: "sans-serif"},
+  outfit: {family: "Outfit", type: "sans-serif"},
+  lora: {family: "Lora", type: "serif"},
+};
+
+function getFontStyle(fontName: FontName) {
+  const config = FONT_CONFIGS[fontName];
+
+  return config ? {fontFamily: `'${config.family}', ${config.type}`} : {};
 }
 
 export function ShowcaseComponent({children, id, name}: ShowcaseComponentProps) {
