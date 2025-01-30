@@ -43,7 +43,6 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/internationalized-date": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
-    "@heroui/framer-utils": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/button": "workspace:*",
     "@heroui/dom-animation": "workspace:*",

@@ -85,7 +85,6 @@
     "@heroui/calendar": "workspace:*",
     "@heroui/date-input": "workspace:*",
     "@heroui/date-picker": "workspace:*",
-    "@heroui/framer-utils": "workspace:*",
     "@heroui/drawer": "workspace:*",
     "@heroui/form": "workspace:*",
     "@heroui/alert": "workspace:*",

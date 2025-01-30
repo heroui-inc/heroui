@@ -52,6 +52,7 @@
     ]
   },
   "dependencies": {
+    "@heroui/motion": "workspace:*",
     "@heroui/internationalized-date": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/react-aria-i18n": "workspace:*",

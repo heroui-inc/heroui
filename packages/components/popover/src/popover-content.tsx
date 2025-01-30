@@ -3,7 +3,7 @@ import type {HTMLMotionProps} from "@heroui/motion";
 
 import {DOMAttributes, ReactNode, useMemo, useRef} from "react";
 import {DismissButton} from "@react-aria/overlays";
-import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
+import {TRANSITION_VARIANTS} from "@heroui/motion";
 import {m, LazyMotion} from "@heroui/motion";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {getTransformOrigins} from "@heroui/aria-utils";
