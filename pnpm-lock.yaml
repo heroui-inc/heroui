@@ -3184,6 +3184,9 @@ importers:
       '@heroui/modal':
         specifier: workspace:*
         version: link:../../components/modal
+      '@heroui/motion':
+        specifier: workspace:*
+        version: link:../../external/motion
       '@heroui/navbar':
         specifier: workspace:*
         version: link:../../components/navbar
