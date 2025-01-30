@@ -1,11 +1,6 @@
 export * from "framer-motion";
 
-export type {
-  TransitionConfig,
-  TransitionEndConfig,
-  TransitionProperties,
-  Variants,
-} from "./transition-utils";
+export type {TransitionConfig, TransitionEndConfig, TransitionProperties} from "./transition-utils";
 
 export {TRANSITION_EASINGS, TRANSITION_DEFAULTS, TRANSITION_VARIANTS} from "./transition-utils";
 

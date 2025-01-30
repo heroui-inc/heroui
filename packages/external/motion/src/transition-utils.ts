@@ -21,7 +21,7 @@ type TargetResolver<P = {}> = (props: P & TransitionProperties) => TargetAndTran
 
 type Variant<P = {}> = TargetAndTransition | TargetResolver<P>;
 
-export type Variants<P = {}> = Record<
+type Variants<P = {}> = Record<
   string,
   {
     enter: Variant<P>;
