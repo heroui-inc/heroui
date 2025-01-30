@@ -1,7 +1,7 @@
-import Radius from "./radius.raw.jsx?raw";
+import App from "./radius.raw.jsx?raw";
 
 const react = {
-  "/App.jsx": Radius,
+  "/App.jsx": App,
 };
 
 export default {

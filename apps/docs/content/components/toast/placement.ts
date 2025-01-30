@@ -1,7 +1,7 @@
-import Position from "./placement.raw.jsx?raw";
+import App from "./placement.raw.jsx?raw";
 
 const react = {
-  "/App.jsx": Position,
+  "/App.jsx": App,
 };
 
 export default {

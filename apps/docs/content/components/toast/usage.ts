@@ -1,7 +1,7 @@
-import Types from "./usage.raw.jsx?raw";
+import App from "./usage.raw.jsx?raw";
 
 const react = {
-  "/App.jsx": Types,
+  "/App.jsx": App,
 };
 
 export default {

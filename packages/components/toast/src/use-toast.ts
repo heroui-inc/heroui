@@ -6,7 +6,7 @@ import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
 import {ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
 import {useToast as useToastAria, AriaToastProps} from "@react-aria/toast";
-import {mergeProps} from "@react-aria/utils";
+import {chain, mergeProps} from "@react-aria/utils";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {MotionProps} from "framer-motion";
 import {useHover} from "@react-aria/interactions";
@@ -20,7 +20,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * title of the toast
    */
-  title?: string;
+  title?: ReactNode;
   /**
    * description of the toast
    */
@@ -95,14 +95,14 @@ export interface ToastProps extends ToastVariantProps {
   shouldShowTimeoutProgess?: boolean;
 }
 
-interface Props<T> extends HTMLHeroUIProps<"div">, ToastProps {
+interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
   toast: QueuedToast<T>;
   index: number;
   total: number;
   state: ToastState<T>;
   heights: number[];
   setHeights: (val: number[]) => void;
-  disableAnimation: boolean;
+  disableAnimation?: boolean;
   isRegionExpanded: boolean;
   placement?:
     | "right-bottom"
@@ -430,7 +430,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       className: slots.closeButton({class: classNames?.closeButton}),
       "aria-label": "closeButton",
       "data-hidden": dataAttr(hideCloseButton),
-      ...mergeProps(props, closeButtonProps, {onPress: onClose}),
+      ...mergeProps(props, closeButtonProps, {
+        onPress: chain(() => {
+          setTimeout(() => document.body.focus(), 0);
+        }, onClose),
+      }),
     }),
     [closeButtonProps, onClose],
   );

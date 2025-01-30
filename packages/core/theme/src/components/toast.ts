@@ -61,7 +61,7 @@ const toast = tv({
       "data-[placement=center-top]:top-0 data-[placement=center-top]:left-0 data-[placement=center-top]:right-0 w-full sm:data-[placement=center-top]:w-max sm:data-[placement=center-top]:mx-auto",
     ],
     closeButton: [
-      "opacity-0 p-0 group-hover:opacity-100 w-6 h-6 min-w-4 absolute -right-2 -top-2 items-center justify-center bg-transparent text-default-400 hover:text-default-600 border border-3 border-transparent",
+      "opacity-0 pointer-events-none group-hover:pointer-events-auto p-0 group-hover:opacity-100 w-6 h-6 min-w-4 absolute -right-2 -top-2 items-center justify-center bg-transparent text-default-400 hover:text-default-600 border border-3 border-transparent",
       "data-[hidden=true]:hidden",
     ],
     closeIcon: ["rounded-full w-full h-full p-0.5 border border-default-400 bg-default-100"],
@@ -381,5 +381,8 @@ const toast = tv({
 
 export type ToastVariantProps = VariantProps<typeof toast>;
 export type ToastSlots = keyof ReturnType<typeof toast>;
+
+export type ToastRegionVariantProps = VariantProps<typeof toastRegion>;
+export type ToastRegionSlots = keyof ReturnType<typeof toastRegion>;
 
 export {toast, toastRegion};

@@ -1,7 +1,7 @@
-import Color from "./color.raw.jsx?raw";
+import App from "./color.raw.jsx?raw";
 
 const react = {
-  "/App.jsx": Color,
+  "/App.jsx": App,
 };
 
 export default {

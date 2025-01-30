@@ -3,12 +3,12 @@ import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
-import {toastRegion} from "@heroui/theme";
+import {toastRegion, ToastRegionVariantProps} from "@heroui/theme";
 
 import Toast from "./toast";
 import {ToastProps} from "./use-toast";
 
-interface ToastRegionProps<T> extends AriaToastRegionProps {
+interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps {
   toastQueue: ToastState<T>;
   placement?:
     | "right-bottom"
@@ -17,7 +17,6 @@ interface ToastRegionProps<T> extends AriaToastRegionProps {
     | "right-top"
     | "left-top"
     | "center-top";
-  disableAnimation: boolean;
   maxVisibleToasts: number;
   toastOffset?: number;
   toastProps?: ToastProps;

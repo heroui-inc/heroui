@@ -169,7 +169,8 @@ Toast has the following slots:
 - `description`: The description element
 - `icon`: The icon element
 - `loadingIcon`: The icon to be displayed until `promise` is resolved/rejected.
-- `content`: The wrapper for the title, description and icon content
+- `content`: The wrapper for the title, description and icon content.
+- `motionDiv`: The motion.div for the FramerMotion.
 - `progressTrack`: The track of the progressBar.
 - `progressIndicator`: The indicator of the progressBar.
 - `closeButton`: The close button element
@@ -193,7 +194,7 @@ Toast has the following slots:
   data={[
     {
       attribute: "title",
-      type: "string",
+      type: "ReactNode",
       description: "The alert title",
       default: "-"
     },
@@ -243,7 +244,7 @@ Toast has the following slots:
       attribute: "timeout",
       type: "number",
       description: "Time in milliseconds after which the toast will be closed", 
-      default: "6000ms"
+      default: "6000"
     },
     {
       attribute: "promise",

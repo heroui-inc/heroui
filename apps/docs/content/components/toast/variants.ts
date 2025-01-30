@@ -1,7 +1,7 @@
-import Variants from "./variants.raw.jsx?raw";
+import App from "./variants.raw.jsx?raw";
 
 const react = {
-  "/App.jsx": Variants,
+  "/App.jsx": App,
 };
 
 export default {
