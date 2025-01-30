@@ -1,4 +1,3 @@
-import {cloneElement} from "react";
 import {
   BreadcrumbsProps,
   Breadcrumbs as HeroUIBreadcrumbs,
@@ -7,7 +6,6 @@ import {
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {getBorderWidth} from "../../utils/shared";
 import {Border} from "../../types";
 
 type Color = BreadcrumbsProps["color"];
@@ -48,12 +46,17 @@ const Section = ({
   scaling: number;
   borderWidthValue: Border;
 }) => {
-  const variants = ["bordered", "light", "solid"];
+  const variants = ["bordered", "light", "solid", "solid"];
   const disabled = [false, false, false, true];
   let classNames = {base: "text-small"};
 
-  const border = getBorderWidth(borderWidthValue);
-  const borderClassName = `border-${border}`;
+  let borderClass = "border-medium";
+
+  if (borderWidthValue === "thin") {
+    borderClass = "border-small";
+  } else if (borderWidthValue === "thick") {
+    borderClass = "border-large";
+  }
 
   switch (scaling) {
     case 90: {
@@ -80,17 +83,18 @@ const Section = ({
 
   return (
     <div className="flex flex-col gap-y-4">
-      {variants.map((variant, idx) =>
-        cloneElement(<SectionBase key={idx} />, {
-          color: color,
-          variant,
-          classNames: {
+      {variants.map((variant, idx) => (
+        <SectionBase
+          key={idx}
+          classNames={{
             ...classNames,
-            list: variant === "bordered" ? borderClassName : "",
-          },
-          isDisabled: disabled[idx],
-        }),
-      )}
+            list: variant === "bordered" && borderClass,
+          }}
+          color={color}
+          isDisabled={disabled[idx]}
+          variant={variant as BreadcrumbsProps["variant"]}
+        />
+      ))}
     </div>
   );
 };

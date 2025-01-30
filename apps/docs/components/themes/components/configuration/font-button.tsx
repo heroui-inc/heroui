@@ -1,12 +1,13 @@
 import {Button} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
-type FontName = "inter" | "roboto" | "outfit" | "lora";
+import {FontName, FontType} from "../../types";
+
 interface FontButtonProps {
   title: FontName;
   className: string;
   value: string;
-  setValue: (value: string) => void;
+  setValue: (value: FontType) => void;
 }
 
 interface FontStyle {

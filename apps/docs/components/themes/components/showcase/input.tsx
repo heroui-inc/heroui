@@ -1,11 +1,9 @@
-import {cloneElement} from "react";
 import {InputProps, Input} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
 import {Border, HeroUIScaling} from "../../types";
-import {getBorderWidth} from "../../utils/shared";
 
 type Color = InputProps["color"];
 type Radius = InputProps["radius"];
@@ -50,8 +48,13 @@ const Section = ({
   const variants = ["flat", "bordered", "faded", "underlined"];
   let classNames = {base: "h-10 w-[340px]", label: "text-small"};
 
-  const border = getBorderWidth(borderWidthValue);
-  const borderClassName = `border-${border}`;
+  let borderClass = "border-medium";
+
+  if (borderWidthValue === "thin") {
+    borderClass = "border-small";
+  } else if (borderWidthValue === "thick") {
+    borderClass = "border-large";
+  }
 
   switch (scaling) {
     case 90: {
@@ -77,26 +80,27 @@ const Section = ({
   }
 
   return (
-    <div key={color} className="flex flex-col gap-y-4">
-      {variants.map((variant, idx) =>
-        cloneElement(<SectionBase key={idx} />, {
-          color,
-          variant,
-          classNames: {
+    <div key={color} className="flex flex-col gap-y-4 w-auto h-auto">
+      {variants.map((variant, idx) => (
+        <SectionBase
+          key={idx}
+          classNames={{
             ...classNames,
-            inputWrapper: clsx(variant === "bordered" ? `${borderClassName} border-${color}` : ""),
-          },
-          isDisabled: false,
-          radius,
-        }),
-      )}
-      {cloneElement(<SectionBase />, {
-        color,
-        classNames,
-        variant: "flat",
-        isDisabled: true,
-        radius,
-      })}
+            inputWrapper: clsx(clsx(variant === "bordered" && borderClass)),
+          }}
+          color={color}
+          isDisabled={false}
+          radius={radius}
+          variant={variant as Variant}
+        />
+      ))}
+      <SectionBase
+        classNames={classNames}
+        color={color}
+        isDisabled={true}
+        radius={radius}
+        variant="flat"
+      />
     </div>
   );
 };

@@ -45,6 +45,7 @@ export type Variant =
 export type Radius = "none" | "sm" | "md" | "lg" | "full";
 export type HeroUIScaling = 90 | 95 | 100 | 105 | 110;
 export type Border = "thin" | "medium" | "thick";
+export type FontName = "inter" | "roboto" | "outfit" | "lora";
 
 // Themes
 export type ThemeType = "light" | "dark";

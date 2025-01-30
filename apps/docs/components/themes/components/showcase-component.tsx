@@ -1,14 +1,13 @@
 import {Divider} from "@heroui/react";
 
 import {useThemeBuilder} from "../provider";
+import {FontName} from "../types";
 
 interface ShowcaseComponentProps {
   children: React.ReactElement | React.ReactElement[];
   id?: string;
   name: string;
 }
-
-type FontName = "inter" | "roboto" | "outfit" | "lora";
 
 const FONT_CONFIGS: Record<FontName, {family: string; type: "sans-serif" | "serif"}> = {
   inter: {family: "Inter", type: "sans-serif"},
