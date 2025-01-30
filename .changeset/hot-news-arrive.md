@@ -7,7 +7,6 @@
 "@heroui/dom-animation": patch
 "@heroui/breadcrumbs": patch
 "@heroui/date-picker": patch
-"@heroui/framer-utils": patch
 "@heroui/date-input": patch
 "@heroui/pagination": patch
 "@heroui/accordion": patch
