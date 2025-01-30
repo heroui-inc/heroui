@@ -1,6 +1,6 @@
 {
   "name": "@vezham/date-input",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A date input allows users to enter and edit date and time values using a keyboard.",
   "keywords": [
     "date-field"

@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-pagination",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "State management hook for Pagination component, it lets you manage pagination with controlled and uncontrolled state",
   "keywords": [
     "use-pagination"

@@ -1,6 +1,6 @@
 {
   "name": "@vezham/form",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A form is a group of inputs that allows users submit data to a server and supports field validation errors.",
   "keywords": [
     "form"

@@ -1,5 +1,58 @@
 # @vezham/react
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`cddba82`](https://github.com/vezham/heroui/commit/cddba8281cb161d0a8afb42e20c05094974af981)]:
+  - @vezham/calendar@0.0.1
+  - @vezham/accordion@0.0.1
+  - @vezham/alert@0.0.1
+  - @vezham/autocomplete@0.0.1
+  - @vezham/avatar@0.0.1
+  - @vezham/badge@0.0.1
+  - @vezham/breadcrumbs@0.0.1
+  - @vezham/button@0.0.1
+  - @vezham/card@0.0.1
+  - @vezham/checkbox@0.0.1
+  - @vezham/chip@0.0.1
+  - @vezham/code@0.0.1
+  - @vezham/date-input@0.0.1
+  - @vezham/date-picker@0.0.1
+  - @vezham/divider@0.0.1
+  - @vezham/drawer@0.0.1
+  - @vezham/dropdown@0.0.1
+  - @vezham/form@0.0.1
+  - @vezham/image@0.0.1
+  - @vezham/input@0.0.1
+  - @vezham/input-otp@0.0.1
+  - @vezham/kbd@0.0.1
+  - @vezham/link@0.0.1
+  - @vezham/listbox@0.0.1
+  - @vezham/menu@0.0.1
+  - @vezham/modal@0.0.1
+  - @vezham/navbar@0.0.1
+  - @vezham/pagination@0.0.1
+  - @vezham/popover@0.0.1
+  - @vezham/progress@0.0.1
+  - @vezham/radio@0.0.1
+  - @vezham/ripple@0.0.1
+  - @vezham/scroll-shadow@0.0.1
+  - @vezham/select@0.0.1
+  - @vezham/skeleton@0.0.1
+  - @vezham/slider@0.0.1
+  - @vezham/snippet@0.0.1
+  - @vezham/spacer@0.0.1
+  - @vezham/spinner@0.0.1
+  - @vezham/switch@0.0.1
+  - @vezham/table@0.0.1
+  - @vezham/tabs@0.0.1
+  - @vezham/tooltip@0.0.1
+  - @vezham/user@0.0.1
+  - @vezham/theme@0.0.1
+  - @vezham/framer-utils@0.0.1
+  - @vezham/system@0.0.1
+
 ## 2.6.14
 
 ### Patch Changes

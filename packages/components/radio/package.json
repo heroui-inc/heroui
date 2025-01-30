@@ -1,6 +1,6 @@
 {
   "name": "@vezham/radio",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Radios allow users to select a single option from a list of mutually exclusive options.",
   "keywords": [
     "radio"

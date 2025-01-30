@@ -1,6 +1,6 @@
 {
   "name": "@vezham/skeleton",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Skeleton is used to display the loading state of some component.",
   "keywords": [
     "skeleton"

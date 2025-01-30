@@ -1,5 +1,11 @@
 # @vezham/shared-utils
 
+## 0.0.1
+
+### Patch Changes
+
+- [#4600](https://github.com/heroui-inc/heroui/pull/4600) [`66efa0a`](https://github.com/vezham/heroui/commit/66efa0a08efa96c884829bb38325ec4c799c6e22) Thanks [@wingkwong](https://github.com/wingkwong)! - update brand name
+
 ## 2.1.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@vezham/use-data-scroll-overflow",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A hook to add data attributes when the element has top or bottom scroll.",
   "keywords": [
     "use-data-scroll-overflow"

@@ -1,5 +1,12 @@
 # @vezham/use-real-shape
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @vezham/react-utils@0.0.1
+
 ## 2.1.4
 
 ### Patch Changes

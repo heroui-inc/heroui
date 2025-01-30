@@ -1,5 +1,22 @@
 # @vezham/autocomplete
 
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`66efa0a`](https://github.com/vezham/heroui/commit/66efa0a08efa96c884829bb38325ec4c799c6e22)]:
+  - @vezham/shared-utils@0.0.1
+  - @vezham/button@0.0.1
+  - @vezham/form@0.0.1
+  - @vezham/input@0.0.1
+  - @vezham/listbox@0.0.1
+  - @vezham/popover@0.0.1
+  - @vezham/scroll-shadow@0.0.1
+  - @vezham/spinner@0.0.1
+  - @vezham/use-aria-button@0.0.1
+  - @vezham/aria-utils@0.0.1
+  - @vezham/react-utils@0.0.1
+
 ## 2.3.11
 
 ### Patch Changes

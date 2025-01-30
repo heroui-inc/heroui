@@ -1,6 +1,6 @@
 {
   "name": "@vezham/snippet",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Display a snippet of copyable code for the command line.",
   "keywords": [
     "snippet"

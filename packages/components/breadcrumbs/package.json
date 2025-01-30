@@ -1,6 +1,6 @@
 {
   "name": "@vezham/breadcrumbs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Breadcrumbs display a hierarchy of links to the current page or resource in an application.",
   "keywords": [
     "breadcrumbs"
