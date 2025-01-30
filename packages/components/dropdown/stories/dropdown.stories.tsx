@@ -1,16 +1,16 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {dropdown, popover} from "@nextui-org/theme";
-import {Button} from "@nextui-org/button";
-import {Avatar} from "@nextui-org/avatar";
-import {User} from "@nextui-org/user";
+import {dropdown, popover} from "@heroui/theme";
+import {Button} from "@heroui/button";
+import {Avatar} from "@heroui/avatar";
+import {User} from "@heroui/user";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
-} from "@nextui-org/shared-icons";
-import {clsx} from "@nextui-org/shared-utils";
+} from "@heroui/shared-icons";
+import {clsx} from "@heroui/shared-utils";
 
 import {
   Dropdown,
@@ -97,6 +97,11 @@ export default {
     children: {
       control: {
         disable: true,
+      },
+    },
+    shouldBlockScroll: {
+      control: {
+        type: "boolean",
       },
     },
   },
@@ -812,6 +817,46 @@ export const WithFallbackPlacements = {
         <Template {...args} label="placement: right" placement="right" />
         <Template {...args} label="placement: left" placement="left" />
       </div>
+    </div>
+  ),
+};
+
+export const WithShouldBlockScroll = {
+  render: (args) => {
+    return (
+      <div className="flex gap-8">
+        <Template {...args} label="shouldBlockScroll: false" shouldBlockScroll={false} />
+        <Template {...args} label="shouldBlockScroll: true" shouldBlockScroll={true} />
+      </div>
+    );
+  },
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const Placements = {
+  args: {
+    ...defaultProps,
+  },
+  render: (args) => (
+    <div className="inline-grid grid-cols-3 gap-4">
+      <Template {...args} label="Top Start" placement="top-start" />
+      <Template {...args} label="Top" placement="top" />
+      <Template {...args} label="Top End" placement="top-end" />
+
+      <Template {...args} label="Bottom Start" placement="bottom-start" />
+      <Template {...args} label="Bottom" placement="bottom" />
+      <Template {...args} label="Bottom End" placement="bottom-end" />
+
+      <Template {...args} label="Right Start" placement="right-start" />
+      <Template {...args} label="Right" placement="right" />
+      <Template {...args} label="Right End" placement="right-end" />
+
+      <Template {...args} label="Left Start" placement="left-start" />
+      <Template {...args} label="Left" placement="left" />
+      <Template {...args} label="Left End" placement="left-end" />
     </div>
   ),
 };

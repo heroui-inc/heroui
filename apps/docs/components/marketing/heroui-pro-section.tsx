@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Chip} from "@nextui-org/react";
+import {Button, Chip} from "@heroui/react";
 import {useEffect, useState} from "react";
 import {useTheme} from "next-themes";
 
@@ -10,7 +10,7 @@ import Marquee from "./marquee";
 
 import {useIsMobile} from "@/hooks/use-media-query";
 
-export const NextUIProSection = () => {
+export const HeroUIProSection = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export const NextUIProSection = () => {
           </div>
           <p className={subtitle({class: "pr-12 text-foreground-500"})}>
             Premade templates of over 210+ beautiful and responsive components, professionally
-            created by the team behind NextUI.
+            created by the team behind HeroUI.
           </p>
           <div className="mt-4 text-foreground-600 font-medium">
             <div className="flex gap-x-4 items-center">
@@ -121,11 +121,11 @@ export const NextUIProSection = () => {
               as={"a"}
               className="px-6 flex items-center"
               color="primary"
-              href="https://nextui.pro?utm_source=nextui.org&utm_medium=nextui-homepage-section"
+              href="https://heroui.pro?utm_source=heroui.com&utm_medium=heroui-homepage-section"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Explore NextUI Pro
+              Explore HeroUI Pro
               <svg
                 fill="none"
                 height="21"

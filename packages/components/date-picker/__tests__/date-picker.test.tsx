@@ -7,11 +7,11 @@ import {
   shouldIgnoreReactWarning,
   triggerPress,
   warnSpy,
-} from "@nextui-org/test-utils";
+} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
 import {CalendarDate, CalendarDateTime} from "@internationalized/date";
-import {NextUIProvider} from "@nextui-org/system";
-import {Form} from "@nextui-org/form";
+import {HeroUIProvider} from "@heroui/system";
+import {Form} from "@heroui/form";
 
 import {DatePicker as DatePickerBase, DatePickerProps} from "../src";
 
@@ -37,7 +37,7 @@ const DatePickerWithLocale = React.forwardRef(
     const {locale, ...otherProps} = props;
 
     return (
-      <NextUIProvider locale={locale}>
+      <HeroUIProvider locale={locale}>
         <DatePickerBase
           {...otherProps}
           ref={ref}
@@ -45,7 +45,7 @@ const DatePickerWithLocale = React.forwardRef(
           labelPlacement="outside"
           shouldForceLeadingZeros={false}
         />
-      </NextUIProvider>
+      </HeroUIProvider>
     );
   },
 );
