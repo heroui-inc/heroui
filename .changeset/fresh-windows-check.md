@@ -2,4 +2,4 @@
 "@heroui/table": patch
 ---
 
-Virtualization support added to Table component
+Virtualization support added to Table component (#3697)
