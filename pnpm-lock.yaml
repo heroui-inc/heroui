@@ -346,9 +346,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.1
         version: 3.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.23.0
         version: 3.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -766,6 +763,9 @@ importers:
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -793,9 +793,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.1
         version: 3.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.23.0
         version: 3.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1071,9 +1068,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.1
         version: 3.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.23.0
         version: 3.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1355,9 +1349,6 @@ importers:
       '@react-aria/datepicker':
         specifier: 3.13.0
         version: 3.13.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/utils':
         specifier: 3.27.0
         version: 3.27.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1434,9 +1425,6 @@ importers:
       '@react-aria/datepicker':
         specifier: 3.13.0
         version: 3.13.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/utils':
         specifier: 3.27.0
         version: 3.27.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)

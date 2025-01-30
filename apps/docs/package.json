@@ -43,7 +43,6 @@
     "@mapbox/rehype-prism": "^0.6.0",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@react-aria/focus": "3.19.1",
-    "@react-aria/i18n": "3.12.5",
     "@react-aria/interactions": "3.23.0",
     "@react-aria/selection": "3.22.0",
     "@react-aria/ssr": "3.9.7",
