@@ -11,7 +11,6 @@ import {AriaTabListProps, useTabList} from "@react-aria/tabs";
 import {mergeProps} from "@react-aria/utils";
 import {CollectionProps} from "@heroui/aria-utils";
 import {CollectionChildren} from "@react-types/shared";
-import {HTMLMotionProps} from "@heroui/motion";
 
 export interface Props extends Omit<HTMLHeroUIProps, "children"> {
   /**
@@ -21,7 +20,7 @@ export interface Props extends Omit<HTMLHeroUIProps, "children"> {
   /**
    * The props to modify the cursor motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"span">;
+  motionProps?: any; // FIXME(motion): HTMLMotionProps<"span">
   /**
    * Whether the tabs selection should occur on press up instead of press down.
    * @default true
@@ -77,7 +76,7 @@ export type ValuesType<T = object> = {
   listRef?: RefObject<HTMLElement>;
   shouldSelectOnPressUp?: boolean;
   classNames?: SlotsToClasses<TabsSlots>;
-  motionProps?: HTMLMotionProps<"span">;
+  motionProps?: any; // FIXME(motion): HTMLMotionProps<"span">
   disableAnimation?: boolean;
   isDisabled?: boolean;
 };

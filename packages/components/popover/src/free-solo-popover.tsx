@@ -10,7 +10,7 @@
 import * as React from "react";
 import {DismissButton, Overlay} from "@react-aria/overlays";
 import {forwardRef} from "@heroui/system";
-import {HTMLMotionProps, LazyMotion, m} from "@heroui/motion";
+import {LazyMotion, m} from "@heroui/motion";
 import {mergeProps} from "@react-aria/utils";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {TRANSITION_VARIANTS} from "@heroui/motion";
@@ -135,7 +135,7 @@ const FreeSoloPopover = forwardRef<"div", FreeSoloPopoverProps>(
             exit="exit"
             initial="exit"
             variants={TRANSITION_VARIANTS.fade}
-            {...(getBackdropProps() as HTMLMotionProps<"div">)}
+            {...(getBackdropProps() as any)} // FIXME(motion): HTMLMotionProps<"div">
           />
         </LazyMotion>
       );

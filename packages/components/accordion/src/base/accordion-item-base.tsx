@@ -4,7 +4,6 @@ import {As} from "@heroui/system";
 import {ItemProps, BaseItem} from "@heroui/aria-utils";
 import {FocusableProps, PressEvents} from "@react-types/shared";
 import {ReactNode, MouseEventHandler} from "react";
-import {HTMLMotionProps} from "@heroui/motion";
 
 export type AccordionItemIndicatorProps = {
   /**
@@ -51,7 +50,7 @@ export interface Props<T extends object = {}>
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"section">;
+  motionProps?: any; // FIXME(motion): HTMLMotionProps<"section">;
   /**
    * Whether to keep the accordion content mounted when collapsed.
    * @default false
