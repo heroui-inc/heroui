@@ -1,6 +1,7 @@
 import type {RippleType} from "./use-ripple";
 import type {FC} from "react";
 import type {HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLMotionProps} from "@heroui/motion";
 
 import {AnimatePresence, m, LazyMotion} from "@heroui/motion";
 import {clamp} from "@heroui/shared-utils";
@@ -8,7 +9,7 @@ import {clamp} from "@heroui/shared-utils";
 export interface RippleProps extends HTMLHeroUIProps<"span"> {
   ripples: RippleType[];
   color?: string;
-  motionProps?: any; // FIXME(motion): HTMLMotionProps<"span">
+  motionProps?: Omit<HTMLMotionProps<"span">, "ref">;
   style?: React.CSSProperties;
   onClear: (key: React.Key) => void;
 }

@@ -1,5 +1,6 @@
 import type {PopoverVariantProps, SlotsToClasses, PopoverSlots} from "@heroui/theme";
 import type {PressEvent} from "@react-types/shared";
+import type {HTMLMotionProps} from "@heroui/motion";
 
 import {RefObject, Ref, useEffect} from "react";
 import {ReactRef, useDOMRef} from "@heroui/react-utils";
@@ -49,7 +50,7 @@ export interface Props extends HTMLHeroUIProps<"div"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: any; // FIXME(motion): HTMLMotionProps<"div">
+  motionProps?: Omit<HTMLMotionProps<"div">, "ref">;
   /**
    * The container element in which the overlay portal will be placed.
    * @default document.body

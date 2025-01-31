@@ -1,4 +1,5 @@
 import type {AriaDialogProps} from "@react-aria/dialog";
+import type {HTMLMotionProps} from "@heroui/motion";
 
 import {cloneElement, isValidElement, ReactNode, useMemo, useCallback} from "react";
 import {DismissButton} from "@react-aria/overlays";
@@ -92,10 +93,7 @@ const ModalContent = (props: ModalContentProps) => {
           exit="exit"
           initial="exit"
           variants={TRANSITION_VARIANTS.fade}
-          {
-            // FIXME(motion): HTMLMotionProps<"div">
-            ...(getBackdropProps() as any)
-          }
+          {...(getBackdropProps() as Omit<HTMLMotionProps<"div">, "ref">)}
         />
       </LazyMotion>
     );
