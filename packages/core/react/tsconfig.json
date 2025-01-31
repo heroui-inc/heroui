@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "allowJs": true,
     "paths": {
-      "tailwind-variants": ["../../../node_modules/tailwind-variants"],,
+      "tailwind-variants": ["../../../node_modules/tailwind-variants"],
       "@react-aria/interactions": ["../../../node_modules/@react-aria/interactions"]
     }
   },
