@@ -2583,9 +2583,6 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
-      framer-motion:
-        specifier: 11.9.0
-        version: 11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react:
         specifier: 18.3.0
         version: 18.3.0
@@ -10469,20 +10466,6 @@ packages:
   fragment-cache@0.2.1:
     resolution: {integrity: sha512-GMBAbW9antB8iZRHLoGw0b3HANt57diZYFO/HL1JGIC1MjKrdmhxvrJbupnVvpys0zsz7yBApXdQyfepKly2kA==}
     engines: {node: '>=0.10.0'}
-
-  framer-motion@11.9.0:
-    resolution: {integrity: sha512-nCfGxvsQecVLjjYDu35G2F5ls+ArE3FBfhxV0RSiisMaUKqteq5DMBFNRKwMyVj+VqKTNhawt+BV480YCHKFlQ==}
-    peerDependencies:
-      '@emotion/is-prop-valid': '*'
-      react: 18.3.0
-      react-dom: 18.3.0
-    peerDependenciesMeta:
-      '@emotion/is-prop-valid':
-        optional: true
-      react:
-        optional: true
-      react-dom:
-        optional: true
 
   framer-motion@12.0.6:
     resolution: {integrity: sha512-LmrXbXF6Vv5WCNmb+O/zn891VPZrH7XbsZgRLBROw6kFiP+iTK49gxTv2Ur3F0Tbw6+sy9BVtSqnWfMUpH+6nA==}
@@ -23789,14 +23772,6 @@ snapshots:
   fragment-cache@0.2.1:
     dependencies:
       map-cache: 0.2.2
-
-  framer-motion@11.9.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
-    dependencies:
-      tslib: 2.8.1
-    optionalDependencies:
-      '@emotion/is-prop-valid': 1.3.1
-      react: 18.3.0
-      react-dom: 18.3.0(react@18.3.0)
 
   framer-motion@12.0.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
