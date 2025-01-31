@@ -59,7 +59,7 @@
     "@react-aria/utils": "3.27.0",
     "@react-aria/visually-hidden": "3.8.19",
     "@react-types/shared": "3.27.0",
-    "@tanstack/react-virtual": "3.11.2"
+    "@tanstack/react-virtual": "3.11.3"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",

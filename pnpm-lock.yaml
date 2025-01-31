@@ -377,8 +377,8 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       '@tanstack/react-virtual':
-        specifier: 3.11.2
-        version: 3.11.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: 3.11.3
+        version: 3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@vercel/analytics':
         specifier: ^1.4.1
         version: 1.4.1(next@14.3.0-canary.43(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react@18.3.0)
@@ -1940,8 +1940,8 @@ importers:
         specifier: 3.27.0
         version: 3.27.0(react@18.3.0)
       '@tanstack/react-virtual':
-        specifier: 3.11.2
-        version: 3.11.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: 3.11.3
+        version: 3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
     devDependencies:
       '@heroui/avatar':
         specifier: workspace:*
@@ -2565,8 +2565,8 @@ importers:
         specifier: 3.27.0
         version: 3.27.0(react@18.3.0)
       '@tanstack/react-virtual':
-        specifier: 3.11.2
-        version: 3.11.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: 3.11.3
+        version: 3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
     devDependencies:
       '@heroui/avatar':
         specifier: workspace:*
@@ -2905,8 +2905,8 @@ importers:
         specifier: 3.10.4
         version: 3.10.4(react@18.3.0)
       '@tanstack/react-virtual':
-        specifier: 3.11.2
-        version: 3.11.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: 3.11.3
+        version: 3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
     devDependencies:
       '@heroui/button':
         specifier: workspace:*
@@ -7802,14 +7802,14 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
-  '@tanstack/react-virtual@3.11.2':
-    resolution: {integrity: sha512-OuFzMXPF4+xZgx8UzJha0AieuMihhhaWG0tCqpp6tDzlFwOmNBPYMuLOtMJ1Tr4pXLHmgjcWhG6RlknY2oNTdQ==}
+  '@tanstack/react-virtual@3.11.3':
+    resolution: {integrity: sha512-vCU+OTylXN3hdC8RKg68tPlBPjjxtzon7Ys46MgrSLE+JhSjSTPvoQifV6DQJeJmA8Q3KT6CphJbejupx85vFw==}
     peerDependencies:
       react: 18.3.0
       react-dom: 18.3.0
 
-  '@tanstack/virtual-core@3.11.2':
-    resolution: {integrity: sha512-vTtpNt7mKCiZ1pwU9hfKPhpdVO2sVzFQsxoVBGtOSHxlrRRzYr8iQ2TlwbAcRYCcEiZ9ECAM8kBzH0v2+VzfKw==}
+  '@tanstack/virtual-core@3.11.3':
+    resolution: {integrity: sha512-v2mrNSnMwnPJtcVqNvV0c5roGCBqeogN8jDtgtuHCphdwBasOZ17x8UV8qpHUh+u0MLfX43c0uUHKje0s+Zb0w==}
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -20371,13 +20371,13 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.14(ts-node@10.9.2(@swc/core@1.10.6(@swc/helpers@0.5.15))(@types/node@20.2.5)(typescript@5.7.2))
 
-  '@tanstack/react-virtual@3.11.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
+  '@tanstack/react-virtual@3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@tanstack/virtual-core': 3.11.2
+      '@tanstack/virtual-core': 3.11.3
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  '@tanstack/virtual-core@3.11.2': {}
+  '@tanstack/virtual-core@3.11.3': {}
 
   '@testing-library/dom@10.4.0':
     dependencies:
