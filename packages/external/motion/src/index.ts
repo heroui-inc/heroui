@@ -1,4 +1,4 @@
-export * from "framer-motion";
+export * from "motion/react";
 
 export type {TransitionConfig, TransitionEndConfig, TransitionProperties} from "./transition-utils";
 
