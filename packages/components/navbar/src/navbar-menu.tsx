@@ -69,6 +69,7 @@ const NavbarMenu = forwardRef<"ul", NavbarMenuProps>((props, ref) => {
               exit="exit"
               initial="exit"
               style={{
+                // @ts-expect-error
                 "--navbar-height": typeof height === "number" ? `${height}px` : height,
                 ...style,
               }}
