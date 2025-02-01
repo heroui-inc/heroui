@@ -40,7 +40,8 @@
           "key": "forms",
           "title": "Forms",
           "keywords": "forms, form validation, heroui",
-          "path": "/docs/guide/forms.mdx"
+          "path": "/docs/guide/forms.mdx",
+          "updated": true
         },
         {
           "key": "nextui-to-heroui",
@@ -210,7 +211,8 @@
           "key": "checkbox",
           "title": "Checkbox",
           "keywords": "checkbox, binary choice, selection control, toggle",
-          "path": "/docs/components/checkbox.mdx"
+          "path": "/docs/components/checkbox.mdx",
+          "updated": true
         },
         {
           "key": "checkbox-group",
@@ -290,20 +292,22 @@
           "key": "input",
           "title": "Input",
           "keywords": "input, text box, form field, data entry",
-          "path": "/docs/components/input.mdx"
+          "path": "/docs/components/input.mdx",
+          "updated": true
         },
         {
           "key": "input-otp",
           "title": "Input OTP",
           "keywords": "input, otp, auth, verification code",
           "path": "/docs/components/input-otp.mdx",
-          "newPost": true
+          "updated": true
         },
         {
           "key": "kbd",
           "title": "Kbd",
           "keywords": "keyboard input, shortcut, keys, user input display",
-          "path": "/docs/components/kbd.mdx"
+          "path": "/docs/components/kbd.mdx",
+          "updated": true
         },
         {
           "key": "link",
@@ -400,7 +404,8 @@
           "key": "spinner",
           "title": "Spinner",
           "keywords": "spinner, loading, activity indicator, processing signal",
-          "path": "/docs/components/spinner.mdx"
+          "path": "/docs/components/spinner.mdx",
+          "updated": true
         },
         {
           "key": "switch",
@@ -418,7 +423,8 @@
           "key": "tabs",
           "title": "Tabs",
           "keywords": "tabs, section navigation, categorized content, tabbed interface",
-          "path": "/docs/components/tabs.mdx"
+          "path": "/docs/components/tabs.mdx",
+          "updated": true
         },
         {
           "key": "toast",
@@ -469,7 +475,8 @@
           "key": "heroui-provider",
           "title": "HeroUIProvider",
           "keywords": "api references, heroui, api, heroui provider",
-          "path": "/docs/api-references/heroui-provider.mdx"
+          "path": "/docs/api-references/heroui-provider.mdx",
+          "updated": true
         }
       ]
     }
