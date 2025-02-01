@@ -133,7 +133,7 @@
     "tsup": "8.3.5",
     "tsx": "^4.19.2",
     "turbo": "1.6.3",
-    "typescript": "^5.5.0",
+    "typescript": "^5.7.3",
     "webpack": "^5.53.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^3.3.11",

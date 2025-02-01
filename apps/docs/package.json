@@ -136,7 +136,7 @@
     "prettier": "^2.7.1",
     "tailwindcss": "3.4.14",
     "tsx": "^3.8.2",
-    "typescript": "^5.5.0",
+    "typescript": "^5.7.3",
     "uuid": "^8.3.2"
   },
   "pnpm": {
