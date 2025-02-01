@@ -38,12 +38,12 @@
   },
   "dependencies": {
     "@heroui/use-callback-ref": "workspace:*",
-    "@react-aria/utils": "3.26.0",
+    "@react-aria/utils": "3.27.0",
     "@react-stately/utils": "3.10.5"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "react": "^18.3.0"
   },
   "clean-package": "../../../clean-package.config.json",
   "tsup": {
