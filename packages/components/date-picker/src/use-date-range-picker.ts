@@ -46,6 +46,8 @@ interface Props<T extends DateValue>
    *    separator: "separator-classes",
    *    bottomContent: "bottom-content-classes",
    *    timeInputWrapper: "time-input-wrapper-classes",
+   *    timeInputLabel: "time-input-label-classes",
+   *    timeInput: "time-input-classes",
    *    helperWrapper: "helper-wrapper-classes",
    *    description: "description-classes",
    *    errorMessage: "error-message-classes",
