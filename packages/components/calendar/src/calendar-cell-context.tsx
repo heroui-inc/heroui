@@ -2,7 +2,7 @@ import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {CalendarDate} from "@internationalized/date";
 import type {DOMAttributes} from "@react-types/shared";
 
-import {createContext} from "@nextui-org/react-utils";
+import {createContext} from "@heroui/react-utils";
 
 export interface CalendarCellContextType {
   // Core date and state

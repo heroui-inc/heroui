@@ -1,10 +1,10 @@
-import type {HTMLNextUIProps} from "@nextui-org/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
 import React from "react";
 
 import {useCalendarContext} from "./calendar-context";
 
-interface Props extends HTMLNextUIProps<"div"> {
+interface Props extends HTMLHeroUIProps<"div"> {
   children: React.ReactNode;
 }
 
