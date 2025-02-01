@@ -111,8 +111,7 @@
         {
           "key": "layout",
           "title": "Layout",
-          "path": "/docs/customization/layout.mdx",
-          "updated": true
+          "path": "/docs/customization/layout.mdx"
         },
         {
           "key": "colors",
@@ -132,8 +131,7 @@
         {
           "key": "dark-mode",
           "title": "Dark mode",
-          "path": "/docs/customization/dark-mode.mdx",
-          "updated": true
+          "path": "/docs/customization/dark-mode.mdx"
         },
         {
           "key": "override-styles",
@@ -163,8 +161,7 @@
           "key": "autocomplete",
           "title": "Autocomplete",
           "keywords": "autocomplete, auto suggest, search, typeahead",
-          "path": "/docs/components/autocomplete.mdx",
-          "updated": true
+          "path": "/docs/components/autocomplete.mdx"
         },
         {
           "key": "alert",
@@ -195,8 +192,7 @@
           "key": "button",
           "title": "Button",
           "keywords": "button, interactive, action trigger, click events",
-          "path": "/docs/components/button.mdx",
-          "updated": true
+          "path": "/docs/components/button.mdx"
         },
         {
           "key": "calendar",
@@ -214,15 +210,13 @@
           "key": "checkbox",
           "title": "Checkbox",
           "keywords": "checkbox, binary choice, selection control, toggle",
-          "path": "/docs/components/checkbox.mdx",
-          "updated": true
+          "path": "/docs/components/checkbox.mdx"
         },
         {
           "key": "checkbox-group",
           "title": "Checkbox Group",
           "keywords": "checkbox group, binary choice, selection control, toggle",
-          "path": "/docs/components/checkbox-group.mdx",
-          "updated": true
+          "path": "/docs/components/checkbox-group.mdx"
         },
         {
           "key": "chip",
@@ -296,8 +290,7 @@
           "key": "input",
           "title": "Input",
           "keywords": "input, text box, form field, data entry",
-          "path": "/docs/components/input.mdx",
-          "updated": true
+          "path": "/docs/components/input.mdx"
         },
         {
           "key": "input-otp",
@@ -322,15 +315,13 @@
           "key": "listbox",
           "title": "Listbox",
           "keywords": "listbox, selection, option list, multiple choice",
-          "path": "/docs/components/listbox.mdx",
-          "updated": true
+          "path": "/docs/components/listbox.mdx"
         },
         {
           "key": "modal",
           "title": "Modal",
           "keywords": "modal, dialog box, popup, overlay, content focus",
-          "path": "/docs/components/modal.mdx",
-          "updated": true
+          "path": "/docs/components/modal.mdx"
         },
         {
           "key": "navbar",
@@ -379,8 +370,7 @@
           "key": "select",
           "title": "Select",
           "keywords": "select, selection, option list, multiple choice",
-          "path": "/docs/components/select.mdx",
-          "updated": true
+          "path": "/docs/components/select.mdx"
         },
         {
           "key": "skeleton",
@@ -416,8 +406,7 @@
           "key": "switch",
           "title": "Switch",
           "keywords": "switch, toggle, binary input, on/off control",
-          "path": "/docs/components/switch.mdx",
-          "updated": true
+          "path": "/docs/components/switch.mdx"
         },
         {
           "key": "table",
@@ -442,8 +431,7 @@
           "key": "textarea",
           "title": "Textarea",
           "keywords": "textarea, multi-line text input, large text field, form control",
-          "path": "/docs/components/textarea.mdx",
-          "updated": true
+          "path": "/docs/components/textarea.mdx"
         },
         {
           "key": "time-input",
@@ -475,15 +463,13 @@
           "key": "cli-api",
           "title": "HeroUI CLI",
           "keywords": "api references, heroui, api, cli",
-          "path": "/docs/api-references/cli-api.mdx",
-          "updated": true
+          "path": "/docs/api-references/cli-api.mdx"
         },
         {
           "key": "heroui-provider",
           "title": "HeroUIProvider",
           "keywords": "api references, heroui, api, heroui provider",
-          "path": "/docs/api-references/heroui-provider.mdx",
-          "updated": true
+          "path": "/docs/api-references/heroui-provider.mdx"
         }
       ]
     }
