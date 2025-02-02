@@ -1,10 +1,11 @@
 import * as React from "react";
-import {render, act} from "@testing-library/react";
+import {render, act, fireEvent, waitFor} from "@testing-library/react";
 
 import {Image} from "../src";
 
 const src = "https://via.placeholder.com/300x450";
 const fallbackSrc = "https://via.placeholder.com/300x450";
+const loadingSrc = "/images/local-image-small.jpg";
 
 describe("Image", () => {
   it("should render correctly", () => {
@@ -26,7 +27,34 @@ describe("Image", () => {
     expect(wrapper.getByRole("img")).toBeInstanceOf(HTMLImageElement);
   });
 
-  test("renders image if there is no fallback behavior defined", async () => {
+  test("renders loading source while loading the image.", async () => {
+    const wrapper = render(<Image loadingSrc={loadingSrc} src={src} />);
+    const imageParent = wrapper.getByRole("img").parentElement;
+
+    expect(imageParent?.getAttribute("data-testid")).toEqual("heroUI/image_parent");
+
+    const computedStyle = window.getComputedStyle(imageParent!);
+
+    expect(computedStyle.backgroundImage).toBe(`url(${loadingSrc})`);
+  });
+
+  test("renders fallback source if src is wrong or not found.", async () => {
+    const onError = jest.fn();
+    const wrapper = render(
+      <Image alt="test" fallbackSrc={fallbackSrc} src="wrong-src-address" onError={onError} />,
+    );
+    const imageParent = wrapper.getByRole("img").parentElement;
+
+    fireEvent.error(wrapper.getByRole("img"));
+    await waitFor(() => expect(onError).toHaveBeenCalled(), {timeout: 5_000});
+    expect(imageParent?.getAttribute("data-testid")).toEqual("heroUI/image_parent");
+
+    const computedStyle = window.getComputedStyle(imageParent!);
+
+    expect(computedStyle.backgroundImage).toBe(`url(${fallbackSrc})`);
+  }, 6_000);
+
+  test("renders image if there is no loading or fallback behavior defined", async () => {
     const wrapper = render(<Image src={src} />);
 
     expect(wrapper.getByRole("img")).toHaveAttribute("src", src);
