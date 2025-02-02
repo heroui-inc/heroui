@@ -25,12 +25,12 @@ export const HeroUIProSection = () => {
 
   if (isDarkMode) {
     imgSrc = isMobile
-      ? "/images/nextuipro-section-background@mobile.webp"
-      : "/images/nextuipro-section-background.webp";
+      ? "/images/herouipro-section-background@mobile.webp"
+      : "/images/herouipro-section-background.webp";
   } else {
     imgSrc = isMobile
-      ? "/images/nextuipro-section-background-light@mobile.webp"
-      : "/images/nextuipro-section-background-light.webp";
+      ? "/images/herouipro-section-background-light@mobile.webp"
+      : "/images/herouipro-section-background-light.webp";
   }
 
   const mobileClassName: string = isDarkMode
