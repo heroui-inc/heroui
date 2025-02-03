@@ -46,7 +46,7 @@ const input = tv({
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
       "file:cursor-pointer file:bg-transparent file:border-0",
-      "autofill:bg-transparent bg-clip-text",
+      "[&:-webkit-autofill]:[transition:background-color_0s_ease-in-out_10000s]",
     ],
     clearButton: [
       "p-2",
