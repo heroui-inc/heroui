@@ -1206,6 +1206,43 @@ importers:
         specifier: 18.3.0
         version: 18.3.0(react@18.3.0)
 
+  packages/components/carousel:
+    dependencies:
+      '@heroui/button':
+        specifier: workspace:*
+        version: link:../button
+      '@heroui/react-utils':
+        specifier: workspace:*
+        version: link:../../utilities/react-utils
+      '@heroui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@heroui/shared-utils':
+        specifier: workspace:*
+        version: link:../../utilities/shared-utils
+      embla-carousel-react:
+        specifier: 8.5.2
+        version: 8.5.2(react@18.3.0)
+    devDependencies:
+      '@heroui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@heroui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      embla-carousel:
+        specifier: 8.5.2
+        version: 8.5.2
+      react:
+        specifier: 18.3.0
+        version: 18.3.0
+      react-dom:
+        specifier: 18.3.0
+        version: 18.3.0(react@18.3.0)
+
   packages/components/checkbox:
     dependencies:
       '@heroui/form':
@@ -9927,6 +9964,19 @@ packages:
 
   electron-to-chromium@1.5.78:
     resolution: {integrity: sha512-UmwIt7HRKN1rsJfddG5UG7rCTCTAKoS9JeOy/R0zSenAyaZ8SU3RuXlwcratxhdxGRNpk03iq8O7BA3W7ibLVw==}
+
+  embla-carousel-react@8.5.2:
+    resolution: {integrity: sha512-Tmx+uY3MqseIGdwp0ScyUuxpBgx5jX1f7od4Cm5mDwg/dptEiTKf9xp6tw0lZN2VA9JbnVMl/aikmbc53c6QFA==}
+    peerDependencies:
+      react: 18.3.0
+
+  embla-carousel-reactive-utils@8.5.2:
+    resolution: {integrity: sha512-QC8/hYSK/pEmqEdU1IO5O+XNc/Ptmmq7uCB44vKplgLKhB/l0+yvYx0+Cv0sF6Ena8Srld5vUErZkT+yTahtDg==}
+    peerDependencies:
+      embla-carousel: 8.5.2
+
+  embla-carousel@8.5.2:
+    resolution: {integrity: sha512-xQ9oVLrun/eCG/7ru3R+I5bJ7shsD8fFwLEY7yPe27/+fDHCNj0OT5EoG5ZbFyOxOcG6yTwW8oTz/dWyFnyGpg==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -22690,6 +22740,18 @@ snapshots:
   eastasianwidth@0.2.0: {}
 
   electron-to-chromium@1.5.78: {}
+
+  embla-carousel-react@8.5.2(react@18.3.0):
+    dependencies:
+      embla-carousel: 8.5.2
+      embla-carousel-reactive-utils: 8.5.2(embla-carousel@8.5.2)
+      react: 18.3.0
+
+  embla-carousel-reactive-utils@8.5.2(embla-carousel@8.5.2):
+    dependencies:
+      embla-carousel: 8.5.2
+
+  embla-carousel@8.5.2: {}
 
   emittery@0.13.1: {}
 
