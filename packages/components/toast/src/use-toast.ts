@@ -180,6 +180,12 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const timeElapsed = useRef<number>(0);
 
   useEffect(() => {
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = "0%";
+    }
+  }, []);
+
+  useEffect(() => {
     const updateProgress = (timestamp: number) => {
       if (!timeout) {
         return;
