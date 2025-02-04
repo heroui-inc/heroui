@@ -726,7 +726,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     (props = {}) => {
       return {
         ...props,
-        role: "button",
+        type: "button",
         tabIndex: -1,
         "aria-label": "clear selection",
         "data-slot": "clear-button",
