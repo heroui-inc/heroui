@@ -1123,12 +1123,15 @@ describe("Select", () => {
 
     await user.click(listboxItems[1]);
 
+    expect(select).toHaveTextContent("Favorite AnimalZebra");
+
     const clearButton = select.querySelectorAll("button")[0];
 
     await user.click(clearButton);
 
-    // If the test fails, text content should have been 'Favorite Animalzebra'
     expect(select).toHaveTextContent("Favorite Animal");
+
+    expect(select).not.toHaveTextContent("Favorite Animalzebra");
   });
 });
 
