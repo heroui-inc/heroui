@@ -40,7 +40,7 @@ export default function DocsLayout({children}: DocsLayoutProps) {
         />
       </div>
 
-      <ScriptProviders isKapaEnabled={false} />
+      <ScriptProviders />
     </>
   );
 }

@@ -38,12 +38,13 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0"
+    "@heroui/theme": ">=2.4.7"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-utils": "workspace:*"
+    "@heroui/react-utils": "workspace:*",
+    "@heroui/system": "workspace:*"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
