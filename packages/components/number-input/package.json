@@ -7,7 +7,7 @@
     "number",
     "numeric input"
   ],
-  "author": "WK Wong <wingkwong.code@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
