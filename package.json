@@ -3,10 +3,7 @@
   "private": true,
   "version": "2.0.0",
   "license": "MIT",
-  "author": {
-    "name": "Junior Garcia",
-    "email": "jrgarciadev@gmail.com"
-  },
+  "author": "HeroUI <support@heroui.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/heroui-inc/heroui"
