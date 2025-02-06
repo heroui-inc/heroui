@@ -1,7 +1,7 @@
 {
   "name": "@heroui/motion",
   "version": "2.0.0",
-  "description": "Mirror package of framer-motion",
+  "description": "Mirror package of motion",
   "keywords": [
     "hero ui",
     "motion"
@@ -37,7 +37,7 @@
   "dependencies": {
     "@heroui/use-measure": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "motion": "12.0.6"
+    "motion": "12.3.1"
   },
   "devDependencies": {
     "clean-package": "2.2.0"
