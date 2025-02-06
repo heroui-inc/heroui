@@ -59,7 +59,6 @@ export default function App() {
   return (
     <Form
       className="w-full justify-center items-center space-y-4"
-      validationBehavior="native"
       validationErrors={errors}
       onReset={() => setSubmitted(null)}
       onSubmit={onSubmit}

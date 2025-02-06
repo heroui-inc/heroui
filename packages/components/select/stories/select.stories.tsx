@@ -381,7 +381,7 @@ const MirrorTemplate = ({color, variant, ...args}: SelectProps) => (
 
 const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
   <div className="w-full flex flex-col items-center gap-12">
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>Without placeholder</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select color={color} label="Select an animal" variant={variant} {...args}>
@@ -407,7 +407,7 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         </Select>
       </div>
     </div>
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>With placeholder</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select
@@ -441,7 +441,7 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         </Select>
       </div>
     </div>
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>With placeholder and description</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select

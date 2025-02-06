@@ -8,6 +8,7 @@ import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {Button} from "@heroui/button";
 import {chain, mergeProps} from "@react-aria/utils";
 import {AnimatePresence, LazyMotion, MotionConfig} from "framer-motion";
+import {useLocale} from "@react-aria/i18n";
 import {ResizablePanel} from "@heroui/framer-utils";
 
 import {ChevronLeftIcon} from "./chevron-left";
@@ -70,10 +71,14 @@ export function CalendarBase(props: CalendarBaseProps) {
 
   const [direction, setDirection] = useState<number>(0);
 
+  const {direction: localeDirection} = useLocale();
+
   const currentMonth = state.visibleRange.start;
 
   const headers: React.ReactNode[] = [];
   const calendars: React.ReactNode[] = [];
+
+  const isRTL = localeDirection === "rtl";
 
   for (let i = 0; i < visibleMonths; i++) {
     let d = currentMonth.add({months: i});
@@ -82,8 +87,10 @@ export function CalendarBase(props: CalendarBaseProps) {
       <Fragment key={`calendar-header-${i}`}>
         {i === 0 && (
           <Button
-            {...prevButtonProps}
-            onPress={chain(prevButtonProps.onPress, () => setDirection(-1))}
+            {...(isRTL ? nextButtonProps : prevButtonProps)}
+            onPress={chain(isRTL ? nextButtonProps.onPress : prevButtonProps.onPress, () =>
+              setDirection(-1),
+            )}
           >
             <ChevronLeftIcon />
           </Button>
@@ -96,8 +103,10 @@ export function CalendarBase(props: CalendarBaseProps) {
         />
         {i === visibleMonths - 1 && (
           <Button
-            {...nextButtonProps}
-            onPress={chain(nextButtonProps.onPress, () => setDirection(1))}
+            {...(isRTL ? prevButtonProps : nextButtonProps)}
+            onPress={chain(isRTL ? prevButtonProps.onPress : nextButtonProps.onPress, () =>
+              setDirection(1),
+            )}
           >
             <ChevronRightIcon />
           </Button>

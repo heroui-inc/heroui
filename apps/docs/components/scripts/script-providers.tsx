@@ -2,7 +2,7 @@ import * as React from "react";
 import Script from "next/script";
 
 
-export function ScriptProviders({isKapaEnabled}: {isKapaEnabled?: boolean}) {
+export function ScriptProviders({isKapaEnabled = true}: {isKapaEnabled?: boolean}) {
   if (!isKapaEnabled) return null;
 
   return (

@@ -7,13 +7,13 @@
 </br>
 <p align="center">
   <a href="https://github.com/heroui-inc/heroui/blob/main/LICENSE">
-    <img src="https://img.shields.io/npm/l/@nextui-org/react?style=flat" alt="License">
+    <img src="https://img.shields.io/npm/l/@heroui/react?style=flat" alt="License">
   </a>
   <a href="https://codecov.io/gh/jrgarciadev/nextui">
     <img src="https://codecov.io/gh/jrgarciadev/nextui/branch/main/graph/badge.svg?token=QJF2QKR5N4" alt="codecov badge">
   </a>
   <!-- <a href="https://github.com/heroui-inc/heroui/actions/workflows/main.yaml">
-    <img src="https://github.com/heroui-inc/heroui/actions/workflows/main.yaml/badge.svg" alt="CI/CD nextui">
+    <img src="https://github.com/heroui-inc/heroui/actions/workflows/main.yaml/badge.svg" alt="CI/CD heroui">
   </a> -->
   <a href="https://www.npmjs.com/package/@heroui/react">
     <img src="https://img.shields.io/npm/dm/@heroui/react.svg?style=flat-round" alt="npm downloads">
