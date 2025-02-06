@@ -63,7 +63,6 @@ export default function App() {
                 Upgrade
               </Button>
             ),
-            variant: "faded",
           });
         }}
       >
