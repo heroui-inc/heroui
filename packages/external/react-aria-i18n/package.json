@@ -6,7 +6,7 @@
     "hero ui",
     "@react-aria/i18n"
   ],
-  "author": "WK Wong <wingkwong.code@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
