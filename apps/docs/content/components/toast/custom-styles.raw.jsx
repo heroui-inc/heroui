@@ -19,7 +19,6 @@ const CustomToastComponent = () => {
               "rounded-md",
               "flex flex-col items-start",
               "before:bg-primary border-primary-200 dark:border-primary-100",
-              ,
             ]),
             icon: "w-6 h-6 fill-current",
           },
@@ -33,6 +32,7 @@ const CustomToastComponent = () => {
               </Button>
             </div>
           ),
+          color: "primary",
         });
       }}
     >

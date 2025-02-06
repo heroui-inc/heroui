@@ -381,6 +381,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "aria-label": "toast",
       onTransitionEnd: () => {
         if (toast.animation === "exiting") {
+          const updatedHeights = heights;
+
+          updatedHeights.splice(index, 1);
+          setHeights([...updatedHeights]);
+
           state.remove(toast.key);
         }
       },
@@ -514,6 +519,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
           setDrag(false);
 
           if (shouldCloseToast(offsetX, offsetY)) {
+            const updatedHeights = heights;
+
+            updatedHeights.splice(index, 1);
+            setHeights([...updatedHeights]);
+
             state.close(toast.key);
             state.remove(toast.key);
 
@@ -566,6 +576,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       setDrag,
       shouldCloseToast,
       slots,
+      toastOffset,
     ],
   );
 
