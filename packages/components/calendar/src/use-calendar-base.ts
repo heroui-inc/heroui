@@ -193,7 +193,9 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
 
   const globalContext = useProviderContext();
 
-  const {locale} = useLocale();
+  const {locale, direction} = useLocale();
+
+  const isRTL = direction === "rtl";
 
   const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
 
@@ -266,6 +268,7 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
         isRange: !!originalProps.isRange,
         isHeaderWrapperExpanded: isHeaderExpanded,
         className,
+        isRTL,
       }),
     [objectToDeps(variantProps), showMonthAndYearPickers, isHeaderExpanded, className],
   );

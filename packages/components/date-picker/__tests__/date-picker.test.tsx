@@ -242,7 +242,7 @@ describe("DatePicker", () => {
     it("should apply custom dateInput classNames", function () {
       const {getByText} = render(
         <DatePicker
-          dateInputClassNames={{
+          classNames={{
             inputWrapper: "border-green-500",
             label: "text-green-500",
           }}
