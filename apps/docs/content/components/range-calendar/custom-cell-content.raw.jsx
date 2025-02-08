@@ -3,7 +3,7 @@ import {
   CalendarCellContent,
   CalendarCellHeader,
   CalendarCellBody,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 export default function App() {
   return (
