@@ -150,7 +150,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     isInvalid,
     validationErrors,
     validationDetails,
-  } = useAriaNumberInput(originalProps, state, domRef);
+  } = useAriaNumberInput({...originalProps, validationBehavior}, state, domRef);
 
   const inputValue = isNaN(state.numberValue) ? "" : state.numberValue;
 
