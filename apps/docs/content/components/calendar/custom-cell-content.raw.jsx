@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Calendar,
-  CalendarCellContent,
-  CalendarCellHeader,
-  CalendarCellBody,
-} from "@nextui-org/react";
+import {Calendar, CalendarCellContent, CalendarCellHeader, CalendarCellBody} from "@heroui/react";
 
 export default function App() {
   return (
