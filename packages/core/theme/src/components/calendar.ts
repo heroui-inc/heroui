@@ -96,8 +96,8 @@ const calendar = tv({
           // "data-[selected=true]:data-[range-selection=true]:bg-transparent",
 
           // start (pseudo)
-          "data-[range-start=true]:before:rounded-l-full",
-          "data-[selection-start=true]:before:rounded-l-full",
+          "data-[range-start=true]:before:rounded-s-full",
+          "data-[selection-start=true]:before:rounded-s-full",
           "data-[range-start=true]:before:w-8",
           "data-[selection-start=true]:before:w-8",
           "data-[range-start=true]:before:justify-self-center",
@@ -108,8 +108,8 @@ const calendar = tv({
           "data-[selection-start=true]:after:justify-self-end",
 
           // end (pseudo)
-          "data-[range-end=true]:before:rounded-r-full",
-          "data-[selection-end=true]:before:rounded-r-full",
+          "data-[range-end=true]:before:rounded-e-full",
+          "data-[selection-end=true]:before:rounded-e-full",
           "data-[range-end=true]:before:w-8",
           "data-[selection-end=true]:before:w-8",
           "data-[range-end=true]:before:justify-self-center",
@@ -172,12 +172,20 @@ const calendar = tv({
         pickerItem: "transition-opacity",
       },
     },
+    isRTL: {
+      true: {
+        nextButton: "order-1",
+        prevButton: "order-3",
+      },
+      false: {},
+    },
   },
   defaultVariants: {
     color: "primary",
     showShadow: false,
     hideDisabledDates: false,
     showMonthAndYearPickers: false,
+    isRTL: false,
   },
   compoundVariants: [
     // !isRange & colors --> Calendar
