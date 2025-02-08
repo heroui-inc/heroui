@@ -498,7 +498,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         className: slots.stepperButton({
           class: clsx(classNames?.stepperButton, props?.className),
         }),
-        // TODO: check press props & focus props
         ...mergeProps(incrementButtonProps, props),
       };
     },
@@ -514,7 +513,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         className: slots.stepperButton({
           class: clsx(classNames?.stepperButton, props?.className),
         }),
-        // TODO: check press props & focus props
         ...mergeProps(decrementButtonProps, props),
       };
     },
