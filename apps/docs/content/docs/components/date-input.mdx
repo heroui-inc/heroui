@@ -415,6 +415,12 @@ import {parseZonedDateTime} from "@internationalized/date";
       type: "boolean",
       description: "Whether to disable animations.",
       default: "false"
+    },
+    {
+      attribute: "classNames",
+      type: "Partial<Record<\"base\" | \"label\" | \"inputWrapper\" | \"input\" | \"segment\" | \"helperWrapper\" | \"description\" | \"errorMessage\", string>>",
+      description: "Allows to set custom class names for the date-input slots.",
+      default: "-"
     }
   ]}
 />

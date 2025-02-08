@@ -107,6 +107,7 @@ const calendar = tv({
           "data-[range-start=true]:after:justify-self-end",
           "data-[selection-start=true]:after:justify-self-end",
 
+
           // end (pseudo)
           "data-[range-end=true]:before:rounded-e-full",
           "data-[selection-end=true]:before:rounded-e-full",
