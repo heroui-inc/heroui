@@ -20,10 +20,21 @@ describe("Image", () => {
           imageOnload = fn;
           this._onload = fn;
         },
+        configurable: true,
       });
     }
 
     trackImageOnload();
+  });
+
+  afterAll(() => {
+    // Restore original Image prototype
+    delete window.Image.prototype._onload;
+    Object.defineProperty(window.Image.prototype, "onload", {
+      value: null,
+      writable: true,
+      configurable: true,
+    });
   });
 
   it("should render correctly", () => {
@@ -82,10 +93,20 @@ describe("Image", () => {
           imageOnerror = fn;
           this._onerror = fn;
         },
+        configurable: true,
       });
     }
 
     trackImageOnerror();
+
+    const cleanup = () => {
+      delete window.Image.prototype._onerror;
+      Object.defineProperty(window.Image.prototype, "onerror", {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+    };
 
     const onError = jest.fn();
     const wrapper = render(
@@ -105,6 +126,7 @@ describe("Image", () => {
 
     expect(computedStyle.backgroundImage).toBe(`url(${fallbackSrc})`);
     wrapper.unmount();
+    cleanup();
   });
 
   test("renders image if there is no loading or fallback behavior defined", async () => {
