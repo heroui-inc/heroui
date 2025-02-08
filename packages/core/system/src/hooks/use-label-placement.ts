@@ -3,7 +3,7 @@ import {useMemo} from "react";
 import {useProviderContext} from "../provider-context";
 
 export function useLabelPlacement(props: {
-  labelPlacement?: "inside" | "outside" | "outside-left" | "outside-top";
+  labelPlacement?: "inside" | "outside" | "outside-left";
   label?: React.ReactNode;
 }) {
   const globalContext = useProviderContext();
