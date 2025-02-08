@@ -110,7 +110,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     endContent,
     onClear,
     onChange,
-    validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "aria",
+    validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     innerWrapperRef: innerWrapperRefProp,
     onValueChange,
     hideStepper,

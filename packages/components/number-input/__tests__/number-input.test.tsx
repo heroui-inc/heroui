@@ -326,8 +326,8 @@ describe("NumberInput with React Hook Form", () => {
     describe("validationBehavior=native", () => {
       it("supports isRequired", async () => {
         const {getByTestId} = render(
-          <Form data-testid="form">
-            <NumberInput isRequired data-testid="input" label="Name" validationBehavior="native" />
+          <Form data-testid="form" validationBehavior="native">
+            <NumberInput isRequired data-testid="input" label="Name" />
           </Form>,
         );
 
@@ -360,13 +360,12 @@ describe("NumberInput with React Hook Form", () => {
 
       it("supports validate function", async () => {
         const {getByTestId} = render(
-          <Form data-testid="form">
+          <Form data-testid="form" validationBehavior="native">
             <NumberInput
               data-testid="input"
               defaultValue={1234}
               label="Name"
               validate={(v) => (v === 1234 ? "Invalid amount" : null)}
-              validationBehavior="native"
             />
           </Form>,
         );
@@ -408,13 +407,13 @@ describe("NumberInput with React Hook Form", () => {
           };
 
           return (
-            <Form data-testid="form" validationErrors={serverErrors} onSubmit={onSubmit}>
-              <NumberInput
-                data-testid="input"
-                label="Name"
-                name="name"
-                validationBehavior="native"
-              />
+            <Form
+              data-testid="form"
+              validationBehavior="native"
+              validationErrors={serverErrors}
+              onSubmit={onSubmit}
+            >
+              <NumberInput data-testid="input" label="Name" name="name" />
               <button data-testid="submit" type="submit">
                 Submit
               </button>
@@ -464,7 +463,7 @@ describe("NumberInput with React Hook Form", () => {
     describe('validationBehavior="aria"', () => {
       it("supports validate function", async () => {
         const {getByTestId} = render(
-          <Form data-testid="form">
+          <Form data-testid="form" validationBehavior="aria">
             <NumberInput
               data-testid="input"
               defaultValue={1234}
@@ -489,7 +488,7 @@ describe("NumberInput with React Hook Form", () => {
 
       it("supports server validation", async () => {
         const {getByTestId} = render(
-          <Form validationErrors={{name: "Invalid amount"}}>
+          <Form validationBehavior="aria" validationErrors={{name: "Invalid amount"}}>
             <NumberInput data-testid="input" label="Name" name="name" />
           </Form>,
         );
