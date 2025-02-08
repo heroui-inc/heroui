@@ -91,7 +91,7 @@
         {
           "key": "laravel",
           "title": "Laravel",
-          "keywords": "laravel, nextui",
+          "keywords": "laravel, heroui",
           "path": "/docs/frameworks/laravel.mdx",
           "newPost": true
         }
