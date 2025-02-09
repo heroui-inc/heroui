@@ -1,3 +1,4 @@
+import React from "react";
 import {Button, Form, NumberInput} from "@heroui/react";
 
 export default function App() {
