@@ -1,5 +1,6 @@
 import {ForwardedRef, ReactElement, useId, useState, useEffect, useCallback} from "react";
 import {LayoutGroup} from "framer-motion";
+import {Button} from "@heroui/button";
 import {forwardRef} from "@heroui/system";
 import {EllipsisIcon} from "@heroui/shared-icons";
 import {clsx, dataAttr, debounce} from "@heroui/shared-utils";
@@ -84,13 +85,21 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
       if (!tabElement) return;
 
-      tabElement.scrollIntoView({
+      const tabBounds = tabElement.getBoundingClientRect();
+      const tabListBounds = tabList.getBoundingClientRect();
+
+      const targetScrollPosition =
+        tabList.scrollLeft +
+        (tabBounds.left - tabListBounds.left) -
+        tabListBounds.width / 2 +
+        tabBounds.width / 2;
+
+      tabList.scrollTo({
+        left: targetScrollPosition,
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     },
-    [tabListProps.ref],
+    [tabList],
   );
 
   const handleTabSelect = useCallback(
@@ -142,7 +151,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     <>
       <div
         {...getBaseProps()}
-        className={clsx("relative flex w-full items-center", getBaseProps().className)}
+        className={clsx("relative flex w-full items-center gap-2", getBaseProps().className)}
       >
         <Component
           {...tabListProps}
@@ -159,9 +168,9 @@ const Tabs = forwardRef(function Tabs<T extends object>(
         {showOverflow && (
           <Dropdown>
             <DropdownTrigger>
-              <button
+              <Button
                 aria-label="Show more tabs"
-                className="flex items-center justify-center w-10 h-8 hover:bg-default-100 rounded-small transition-colors"
+                className="flex items-center justify-center hover:bg-default-100 rounded-small transition-colors px-0 min-w-8"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     setIsDropdownOpen(true);
@@ -170,7 +179,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
               >
                 <EllipsisIcon className="w-5 h-5" />
                 <span className="sr-only">More tabs</span>
-              </button>
+              </Button>
             </DropdownTrigger>
             <DropdownMenu
               aria-label="Hidden tabs"
