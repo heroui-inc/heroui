@@ -454,11 +454,9 @@ importers:
       react:
         specifier: 18.3.0
         version: 18.3.0
-        specifier: 18.2.0
-        version: 18.2.0
       react-colorful:
         specifier: ^5.6.1
-        version: 5.6.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 5.6.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react-dom:
         specifier: 18.3.0
         version: 18.3.0(react@18.3.0)
@@ -524,7 +522,7 @@ importers:
         version: 5.0.0
       usehooks-ts:
         specifier: 3.1.0
-        version: 3.1.0(react@18.2.0)
+        version: 3.1.0(react@18.3.0)
       values.js:
         specifier: ^2.1.1
         version: 2.1.1
@@ -13486,8 +13484,8 @@ packages:
   react-colorful@5.6.1:
     resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
     peerDependencies:
-      react: 18.2.0
-      react-dom: 18.2.0
+      react: 18.3.0
+      react-dom: 18.3.0
 
   react-devtools-inline@4.4.0:
     resolution: {integrity: sha512-ES0GolSrKO8wsKbsEkVeiR/ZAaHQTY4zDh1UW8DImVmm8oaGLl3ijJDvSGe+qDRKPZdPRnDtWWnSvvrgxXdThQ==}
@@ -27404,10 +27402,10 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-colorful@5.6.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-colorful@5.6.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.0
+      react-dom: 18.3.0(react@18.3.0)
 
   react-devtools-inline@4.4.0:
     dependencies:
