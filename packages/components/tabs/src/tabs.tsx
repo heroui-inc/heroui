@@ -3,8 +3,9 @@ import {LayoutGroup} from "framer-motion";
 import {Button} from "@heroui/button";
 import {forwardRef} from "@heroui/system";
 import {EllipsisIcon} from "@heroui/shared-icons";
-import {clsx, dataAttr, debounce} from "@heroui/shared-utils";
+import {debounce} from "@heroui/shared-utils";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
+import {clsx} from "@heroui/shared-utils";
 
 import {UseTabsProps, useTabs} from "./use-tabs";
 import Tab from "./tab";
@@ -131,6 +132,8 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     };
   }, [checkOverflow]);
 
+  const MoreIcon = props.moreIcon || EllipsisIcon;
+
   const tabsProps = {
     state,
     listRef: values.listRef,
@@ -149,20 +152,8 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
   const renderTabs = (
     <>
-      <div
-        {...getBaseProps()}
-        className={clsx("relative flex w-full items-center gap-2", getBaseProps().className)}
-      >
-        <Component
-          {...tabListProps}
-          className={clsx(
-            "relative flex overflow-x-auto scrollbar-hide",
-            showOverflow ? "w-[calc(100%-32px)]" : "w-full",
-            tabListProps.className,
-          )}
-          data-has-overflow={dataAttr(showOverflow)}
-          onScroll={checkOverflow}
-        >
+      <div {...getBaseProps()}>
+        <Component {...tabListProps} onScroll={checkOverflow}>
           {layoutGroupEnabled ? <LayoutGroup id={layoutId}>{tabs}</LayoutGroup> : tabs}
         </Component>
         {showOverflow && (
@@ -170,14 +161,14 @@ const Tabs = forwardRef(function Tabs<T extends object>(
             <DropdownTrigger>
               <Button
                 aria-label="Show more tabs"
-                className="flex items-center justify-center hover:bg-default-100 rounded-small transition-colors px-0 min-w-8"
+                className={clsx(values.slots.moreButton(), values.classNames?.moreButton)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     setIsDropdownOpen(true);
                   }
                 }}
               >
-                <EllipsisIcon className="w-5 h-5" />
+                <MoreIcon className={clsx(values.slots.moreIcon(), values.classNames?.moreIcon)} />
                 <span className="sr-only">More tabs</span>
               </Button>
             </DropdownTrigger>
