@@ -100,6 +100,15 @@ const TabsWithNavigationButtonTemplate = (args: TabsProps) => (
         </Tab>
       ))}
     </Tabs>
+
+    <div className="my-4">Tabs with 1000 items</div>
+    <Tabs aria-label="Tabs with many items" {...args}>
+      {[...Array(1000)].map((_, index) => (
+        <Tab key={`tab-${index + 1}`} title={`Tab ${index + 1}`}>
+          <Lorem count={1} sentenceUpperBound={5} />
+        </Tab>
+      ))}
+    </Tabs>
   </>
 );
 

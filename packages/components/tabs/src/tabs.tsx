@@ -174,6 +174,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
             </DropdownTrigger>
             <DropdownMenu
               aria-label="Hidden tabs"
+              className="max-h-[300px] overflow-y-auto"
               onAction={(key) => handleTabSelect(key as string)}
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
