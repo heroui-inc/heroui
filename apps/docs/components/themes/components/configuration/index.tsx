@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useMemo} from "react";
 import {
   Card,
   CardBody,
@@ -93,8 +93,8 @@ export default function Configuration() {
     navigator.clipboard.writeText(JSON.stringify(generatePluginConfig(config), null, 2));
   }
 
-  return (
-    <>
+  const DesktopView = useMemo(() => {
+    return (
       <Card className="h-auto w-[350px] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
         <CardHeader className="flex justify-between p-6 pb-4">
           <div className="flex gap-x-4 items-center">
@@ -159,6 +159,20 @@ export default function Configuration() {
           </div>
         </CardFooter>
       </Card>
+    );
+  }, [
+    config,
+    handleCopy,
+    handleResetTheme,
+    selectedTemplate,
+    syncIcon,
+    syncThemes,
+    theme,
+    templateTheme,
+  ]);
+
+  const MobileView = useMemo(() => {
+    return (
       <div className="md:hidden w-screen fixed bottom-0 right-0 left-0 z-40 bg-default-100 overflow-hidden rounded-t-full shadow-inner">
         <Button
           disableRipple
@@ -410,6 +424,22 @@ export default function Configuration() {
           </DrawerContent>
         </Drawer>
       </div>
+    );
+  }, [
+    config,
+    handleCopy,
+    isDrawerOpen,
+    selectedSection,
+    syncIcon,
+    syncThemes,
+    theme,
+    templateTheme,
+  ]);
+
+  return (
+    <>
+      {DesktopView}
+      {MobileView}
     </>
   );
 }
