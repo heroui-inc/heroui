@@ -1,6 +1,7 @@
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "../utils/tv";
+import {colorVariants} from "../utils";
 
 const toastRegion = tv({
   slots: {
@@ -85,7 +86,7 @@ const toast = tv({
     },
     variant: {
       flat: "bg-content1 border border-default-100",
-      solid: "bg-default text-default-foreground",
+      solid: colorVariants.solid.default,
       bordered: "bg-background border border-default-200",
     },
     color: {
@@ -314,66 +315,66 @@ const toast = tv({
       variant: "solid",
       color: "foreground",
       class: {
-        base: "bg-foreground text-background",
+        base: colorVariants.solid.foreground,
         closeButton: "text-foreground-400 hover:text-foreground-600",
         closeIcon: "border border-foreground-400 bg-foreground-100",
-        title: "text-background-600",
-        description: "text-background-500",
+        title: "text-background",
+        description: "text-background",
       },
     },
     {
       variant: "solid",
       color: "primary",
       class: {
-        base: "bg-primary-100 text-primary-600",
+        base: colorVariants.solid.primary,
         closeButton: "text-primary-400 hover:text-primary-600",
         closeIcon: "border border-primary-400 bg-primary-100",
-        title: "text-primary-600",
-        description: "text-primary-500",
+        title: "text-primary-foreground",
+        description: "text-primary-foreground",
       },
     },
     {
       variant: "solid",
       color: "secondary",
       class: {
-        base: "bg-secondary-100 text-secondary-600",
+        base: colorVariants.solid.secondary,
         closeButton: "text-secondary-400 hover:text-secondary-600",
         closeIcon: "border border-secondary-400 bg-secondary-100",
-        title: "text-secondary-600",
-        description: "text-secondary-500",
+        title: "text-secondary-foreground",
+        description: "text-secondary-foreground",
       },
     },
     {
       variant: "solid",
       color: "success",
       class: {
-        base: "bg-success-100 text-success-600",
+        base: colorVariants.solid.success,
         closeButton: "text-success-400 hover:text-success-600",
         closeIcon: "border border-success-400 bg-success-100",
-        title: "text-success-600",
-        description: "text-success-500",
+        title: "text-success-foreground",
+        description: "text-success-foreground",
       },
     },
     {
       variant: "solid",
       color: "warning",
       class: {
-        base: "bg-warning-100 text-warning-600",
+        base: colorVariants.solid.warning,
         closeButton: "text-warning-400 hover:text-warning-600",
         closeIcon: "border border-warning-400 bg-warning-100",
-        title: "text-warning-600",
-        description: "text-warning-500",
+        title: "text-warning-foreground",
+        description: "text-warning-foreground",
       },
     },
     {
       variant: "solid",
       color: "danger",
       class: {
-        base: "bg-danger-100 text-danger-600",
+        base: colorVariants.solid.danger,
         closeButton: "text-danger-400 hover:text-danger-600",
         closeIcon: "border border-danger-400 bg-danger-100",
-        title: "text-danger-600",
-        description: "text-danger-500",
+        title: "text-danger-foreground",
+        description: "text-danger-foreground",
       },
     },
   ],
