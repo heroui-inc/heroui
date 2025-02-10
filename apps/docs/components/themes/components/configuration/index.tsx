@@ -170,7 +170,6 @@ export default function Configuration() {
         >
           <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer group-hover:bg-default-500" />
           <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
-          <div className="h-1 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
         </Button>
         <Drawer
           hideCloseButton
@@ -407,15 +406,6 @@ export default function Configuration() {
               <Button fullWidth className="text-white" color="primary" onPress={handleCopy}>
                 Copy Theme
               </Button>
-              <div className="text-tiny mt-2 text-background-500">
-                Learn how to setup your theme{" "}
-                <Link
-                  className="text-background-800 text-tiny underline cursor-pointer"
-                  href="/docs/customization/theme"
-                >
-                  here
-                </Link>
-              </div>
             </div>
           </DrawerContent>
         </Drawer>
