@@ -26,7 +26,7 @@ const EditableButton = ({title, className, value, setValue}: EditableButtonProps
           className,
         )}
       />
-      <div className="relative text-sm text-default-500">
+      <div className="relative text-sm font-medium leading-5 text-default-500">
         <div className="">{title}</div>
       </div>
     </Button>

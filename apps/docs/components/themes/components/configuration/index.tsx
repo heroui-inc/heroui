@@ -95,20 +95,20 @@ export default function Configuration() {
 
   return (
     <>
-      <Card className="h-auto w-[40vw] lg:w-[35vw] xl:w-[25vw] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
-        <CardHeader className="flex justify-between px-6 py-4">
+      <Card className="h-auto w-[350px] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
+        <CardHeader className="flex justify-between p-6 pb-4">
           <div className="flex gap-x-4 items-center">
-            <div className="text-xl font-medium text-default-800 ">Theme</div>
+            <div className="text-2xl font-medium leading-8 text-default-800 ">Theme</div>
             <Button
-              className="text-tiny bg-default-100 flex items-center"
+              className="text-tiny h-9 bg-default-100 flex items-center"
               size="sm"
               onPress={handleResetTheme}
             >
               Reset
-              <RotateLeftLinearIcon className="h-3 w-3" />
+              <RotateLeftLinearIcon className="h-4 w-4" />
             </Button>
           </div>
-          <div>
+          <div className="h-9">
             <ThemeSwitch />
           </div>
         </CardHeader>

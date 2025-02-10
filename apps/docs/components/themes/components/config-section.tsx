@@ -13,7 +13,7 @@ interface ConfigurationSectionProps {
 export function ConfigSection({children, id, title, icon, toolTip}: ConfigurationSectionProps) {
   return (
     <div id={id}>
-      <div className="text-[#71717A] dark:text-[#A1A1AA] text-lg flex gap-1.5 items-center">
+      <div className="text-[#71717A] dark:text-[#A1A1AA] text-lg font-medium leading-7 flex gap-1.5 items-center">
         <div>{icon}</div>
         <div>{title}</div>
         {toolTip ? (
