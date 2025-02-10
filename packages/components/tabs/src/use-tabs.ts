@@ -47,10 +47,7 @@ export interface Props extends Omit<HTMLHeroUIProps, "children"> {
    * }} />
    * ``
    */
-  classNames?: SlotsToClasses<TabsSlots> & {
-    moreButton?: string;
-    moreIcon?: string;
-  };
+  classNames?: SlotsToClasses<TabsSlots>;
   /**
    * The position of the tabs.
    * @default 'top'
