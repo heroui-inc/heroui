@@ -38,7 +38,11 @@ const Table = forwardRef<"table", TableProps>((props, ref) => {
 
   const {isVirtualized, rowHeight = 40, maxTableHeight = 600} = props;
 
-  const shouldVirtualize = values.collection.size > 50 || isVirtualized;
+  // TODO: remove this after testing the table on production, users can only
+  // enable the virtualization if the passed `isVirtualized` prop is true
+  // const shouldVirtualize = values.collection.size > 50 || isVirtualized;
+
+  const shouldVirtualize = isVirtualized;
 
   const Wrapper = useCallback(
     ({children}: {children: JSX.Element}) => {
