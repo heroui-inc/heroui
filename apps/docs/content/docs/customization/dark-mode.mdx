@@ -57,7 +57,7 @@ Install `next-themes` in your project.
 
 Wrap your app with the `ThemeProvider` component from `next-themes`.
 
-Go to your `app/providers.tsx` or `app/providers.jsx` (create it if it doesn't exist) and wrap the 
+Go to your `app/providers.tsx` or `app/providers.jsx` (create it if it doesn't exist) and wrap the
 Component with the `HeroUIProvider` and the `next-themes` provider components.
 
 
@@ -112,7 +112,7 @@ export function ThemeSwitcher() {
 };
 ```
 
-> **Note**: You can use any theme name you want, but make sure it exists in your 
+> **Note**: You can use any theme name you want, but make sure it exists in your
 `tailwind.config.js` file. See [Create Theme](/docs/customization/create-theme) for more details.
 
 </Steps>
@@ -187,10 +187,10 @@ export const ThemeSwitcher = () => {
 
 ## Using use-theme hook
 
-In case you're using plain React with [Vite](/docs/frameworks/vite) or [Create React App](https://create-react-app.dev/) 
+In case you're using plain React with [Vite](/docs/frameworks/vite) or [Create React App](https://create-react-app.dev/)
 you can use the [@heroui/use-theme](https://github.com/heroui-inc/heroui/tree/canary/packages/hooks/use-theme) hook to switch between themes.
 
-<Steps> 
+<Steps>
 
 ### Install @heroui/use-theme
 
@@ -202,7 +202,25 @@ Install `@heroui/use-theme` in your project.
     yarn: 'yarn add @heroui/use-theme',
     pnpm: 'pnpm add @heroui/use-theme',
   }}
-/> 
+/>
+
+### Add the current theme to the main element
+
+```jsx
+// App.tsx or App.jsx
+import React from "react";
+import {useTheme} from "@heroui/use-theme";
+
+export default function App() {
+  const {theme} = useTheme();
+
+  return (
+    <main className={`${theme} text-foreground bg-background`}>
+      <App />
+    </main>
+  )
+}
+```
 
 ### Add the theme switcher
 

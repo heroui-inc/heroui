@@ -52,18 +52,7 @@ export function useStackblitz(props: UseSandpackProps) {
   "dependencies": {
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    ${Object.entries(
-      omit(dependencies as any, [
-        "react",
-        "react-dom",
-        "react-dom/client",
-        "@vitejs/plugin-react",
-        "vite",
-        "autoprefixer",
-        "postcss",
-        "tailwindcss",
-      ]),
-    )
+    ${Object.entries(omit(dependencies as any, ["react", "react-dom"]))
       .map(([key, value]) => `"${key}": "${value}"`)
       .join(",\n    ")}
   },
