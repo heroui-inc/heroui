@@ -197,12 +197,14 @@ const numberInput = tv({
     labelPlacement: {
       outside: {
         mainWrapper: "flex flex-col",
+        stepperButton: "min-w-3 w-3 h-3",
       },
       "outside-left": {
         base: "flex-row items-center flex-nowrap data-[has-helper=true]:items-start",
         inputWrapper: "flex-1",
         mainWrapper: "flex flex-col",
         label: "relative text-foreground pe-2 ps-2 pointer-events-auto",
+        stepperButton: "min-w-3 w-3 h-3",
       },
       inside: {
         label: "cursor-text",
@@ -807,6 +809,7 @@ const numberInput = tv({
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+        stepperButton: "min-4 w-4 h-4",
       },
     },
     // outside-left & size & hasHelper
@@ -829,6 +832,7 @@ const numberInput = tv({
       size: "lg",
       class: {
         label: "group-data-[has-helper=true]:pt-4",
+        stepperButton: "min-4 w-4 h-4",
       },
     },
     // text truncate labelPlacement=[inside,outside]
