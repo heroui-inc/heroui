@@ -52,7 +52,7 @@
     "flat": "^5.0.2",
     "clsx": "^1.2.1",
     "tailwind-variants": "0.3.0",
-    "tailwind-merge": "2.5.4",
+    "tailwind-merge": "3.0.1",
     "@heroui/shared-utils": "workspace:*"
   },
   "peerDependencies": {
