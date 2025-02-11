@@ -409,7 +409,6 @@ export const WithErrorMessageFunction = {
     ...defaultProps,
     min: "0",
     max: "100",
-    type: "number",
     isRequired: true,
     label: "Number",
     validationBehavior: "native",
