@@ -20,7 +20,7 @@ const ValueButton = ({
       aria-checked={value === currentValue}
       aria-label={`Select ${value}${endContent ?? ""}`}
       className={clsx(
-        "group h-auto w-auto rounded-md p-0.5 px-1 text-medium font-normal",
+        "group h-auto w-auto rounded-md p-0.5 px-1 text-sm font-normal",
         value === currentValue ? "border-foreground" : "",
       )}
       role="radio"

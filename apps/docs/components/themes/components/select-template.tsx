@@ -24,8 +24,8 @@ export function SelectTemplate({name, onChange}: SelectTemplateProps) {
 
   return (
     <>
-      <div className="text-[#71717A] dark:text-[#A1A1AA] text-lg leading-7 font-medium flex gap-1.5 items-center">
-        <MirrorLeft className="w-5 h-5 fill-current" />
+      <div className="text-[#71717A] dark:text-[#A1A1AA] text-md leading-7 font-medium flex gap-1.5 items-center">
+        <MirrorLeft className="w-4 h-4 fill-current" />
         <div>Prebuilt Themes</div>
       </div>
       <Select
@@ -38,6 +38,7 @@ export function SelectTemplate({name, onChange}: SelectTemplateProps) {
           <SelectItem
             key={template.name}
             startContent={<Swatch colors={template.value.light.baseColor} />}
+            // @ts-ignore
             value={index}
           >
             {template.label}

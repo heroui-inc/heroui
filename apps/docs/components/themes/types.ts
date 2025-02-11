@@ -124,6 +124,6 @@ export interface Template {
   value: Config;
 }
 
-export type TemplateType = "coffee" | "emerald" | "heroui";
+export type TemplateType = "coffee" | "emerald" | "heroui" | "elegant" | "modern" | "retro";
 
 export type FontType = "inter" | "roboto" | "outfit" | "lora";

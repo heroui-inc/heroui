@@ -47,7 +47,7 @@ const FontButton = ({title, value, setValue}: FontButtonProps) => {
       <div className="font-medium text-2xl" style={style}>
         Ag12
       </div>
-      <div className="relative text-sm text-default-500">
+      <div className="relative text-tiny text-default-500">
         <div className="">{title}</div>
       </div>
     </Button>

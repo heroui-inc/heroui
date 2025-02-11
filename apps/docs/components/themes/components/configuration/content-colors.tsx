@@ -1,3 +1,5 @@
+import {Tooltip} from "@heroui/react";
+
 import {baseColorsId} from "../../constants";
 import {setCssContentColor} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
@@ -17,35 +19,51 @@ export function ContentColors({config, theme}: BaseColorsProps) {
 
   return (
     <ConfigSection
-      icon={<PaletteRound className="w-5 h-5" />}
+      icon={<PaletteRound className="w-4 h-4" />}
       id={baseColorsId}
       title="Content colors"
-      toolTip="content1, content2, content3, content4 colors"
     >
-      <ColorPicker
-        hexColor={config[theme].contentColor.content1}
-        type="content1"
-        onChange={(hexColor) => setCssContentColor(1, hexColor)}
-        onClose={(hexColor) => setContentColor({content1: hexColor}, theme)}
-      />
-      <ColorPicker
-        hexColor={config[theme].contentColor.content2}
-        type="content2"
-        onChange={(hexColor) => setCssContentColor(2, hexColor)}
-        onClose={(hexColor) => setContentColor({content2: hexColor}, theme)}
-      />
-      <ColorPicker
-        hexColor={config[theme].contentColor.content3}
-        type="content3"
-        onChange={(hexColor) => setCssContentColor(3, hexColor)}
-        onClose={(hexColor) => setContentColor({content3: hexColor}, theme)}
-      />
-      <ColorPicker
-        hexColor={config[theme].contentColor.content4}
-        type="content4"
-        onChange={(hexColor) => setCssContentColor(4, hexColor)}
-        onClose={(hexColor) => setContentColor({content4: hexColor}, theme)}
-      />
+      <Tooltip content={"content-1"}>
+        <div>
+          <ColorPicker
+            isBordered
+            hexColor={config[theme].contentColor.content1}
+            type="content1"
+            onChange={(hexColor) => setCssContentColor(1, hexColor)}
+            onClose={(hexColor) => setContentColor({content1: hexColor}, theme)}
+          />
+        </div>
+      </Tooltip>
+      <Tooltip content={"content-2"}>
+        <div>
+          <ColorPicker
+            hexColor={config[theme].contentColor.content2}
+            type="content2"
+            onChange={(hexColor) => setCssContentColor(2, hexColor)}
+            onClose={(hexColor) => setContentColor({content2: hexColor}, theme)}
+          />
+        </div>
+      </Tooltip>
+      <Tooltip content={"content-3"}>
+        <div>
+          <ColorPicker
+            hexColor={config[theme].contentColor.content3}
+            type="content3"
+            onChange={(hexColor) => setCssContentColor(3, hexColor)}
+            onClose={(hexColor) => setContentColor({content3: hexColor}, theme)}
+          />
+        </div>
+      </Tooltip>
+      <Tooltip content={"content-4"}>
+        <div>
+          <ColorPicker
+            hexColor={config[theme].contentColor.content4}
+            type="content4"
+            onChange={(hexColor) => setCssContentColor(4, hexColor)}
+            onClose={(hexColor) => setContentColor({content4: hexColor}, theme)}
+          />
+        </div>
+      </Tooltip>
     </ConfigSection>
   );
 }

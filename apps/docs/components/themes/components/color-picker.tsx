@@ -14,9 +14,16 @@ interface ColorPickerProps {
   type: ColorPickerType;
   onChange: (hexColor: string) => void;
   onClose: (hexColor: string) => void;
+  isBordered?: boolean;
 }
 
-export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProps) {
+export function ColorPicker({
+  hexColor,
+  type,
+  onChange,
+  onClose,
+  isBordered = false,
+}: ColorPickerProps) {
   const [selectedColor, setSelectedColor] = useState(hexColor);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +55,11 @@ export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProp
           <Button
             fullWidth
             aria-label={`Change ${type} color`}
-            className={clsx(getColor(type), "rounded-lg min-w-9 w-9 h-9 border border-[#A1A1A7]")}
+            className={clsx(
+              getColor(type),
+              "rounded-lg min-w-9 w-9 h-9",
+              isBordered && "border border-black/10 dark:border-white/10",
+            )}
             size="sm"
             style={{
               color: ["background", "foreground", "focus", "overlay"].includes(type)

@@ -15,7 +15,7 @@ import {useTheme} from "next-themes";
 import {useLocalStorage} from "usehooks-ts";
 import {Icon} from "@iconify/react/dist/offline";
 import LinkSquareIcon from "@iconify/icons-solar/link-square-linear";
-import {ArrowLeftIcon, ChevronIcon, CloseIcon} from "@heroui/shared-icons";
+import {ArrowLeftIcon, ChevronIcon, ChevronUpIcon, CloseIcon} from "@heroui/shared-icons";
 import {clsx} from "@heroui/shared-utils";
 
 import {useThemeBuilder} from "../../provider";
@@ -96,9 +96,9 @@ export default function Configuration() {
   const DesktopView = useMemo(() => {
     return (
       <Card className="h-auto w-[350px] hidden md:block md:fixed right-3 top-28 z-30 mx-auto m-3">
-        <CardHeader className="flex justify-between p-6 pb-4">
+        <CardHeader className="flex justify-between p-4 pb-3">
           <div className="flex gap-x-4 items-center">
-            <div className="text-2xl font-medium leading-8 text-default-800 ">Theme</div>
+            <div className="text-xl font-medium leading-8 text-default-800 ">Theme</div>
             <Button
               className="text-tiny h-9 bg-default-100 flex items-center"
               size="sm"
@@ -113,7 +113,7 @@ export default function Configuration() {
           </div>
         </CardHeader>
         <Divider className="bg-default-100" />
-        <CardBody className="flex flex-col p-4 px-6 h-[50vh] overflow-y-scroll pb-6 scrollbar-hide">
+        <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-y-scroll pb-6 scrollbar-hide">
           <ScrollShadow className="py-1 scrollbar-hide" orientation="vertical">
             <SelectTemplate
               name={selectedTemplate?.name ?? null}
@@ -177,13 +177,15 @@ export default function Configuration() {
         <Button
           disableRipple
           isIconOnly
-          className="bg-default-100 group hover:text-default-600 text-default-400 left-1/2 transform -translate-x-1/2 w-full h-6 flex-col pb-2"
+          className="bg-default-100 group hover:text-default-600 text-default-400 left-1/2 transform -translate-x-1/2 w-full flex-col"
           onPress={() => {
             setIsDrawerOpen(!isDrawerOpen);
           }}
         >
-          <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer group-hover:bg-default-500" />
-          <div className="h-0.5 w-10 bg-default-400 rounded-full cursor-pointer mt-0.5 group-hover:bg-default-500" />
+          <ChevronUpIcon
+            className="w-6 h-6 text-default-400 group-hover:text-default-500"
+            strokeWidth={2}
+          />
         </Button>
         <Drawer
           hideCloseButton
@@ -245,7 +247,7 @@ export default function Configuration() {
                             setSelectedSection("color");
                           }}
                         >
-                          <Filters className="h-5 w-5" />
+                          <Filters className="h-4 w-4" />
                           <span className="mx-2 w-14 text-base">Colors</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
@@ -255,7 +257,7 @@ export default function Configuration() {
                             setSelectedSection("radius");
                           }}
                         >
-                          <Crop className="h-5 w-5" />
+                          <Crop className="h-4 w-4" />
                           <span className="mx-2 text-base">Radius</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
@@ -265,7 +267,7 @@ export default function Configuration() {
                             setSelectedSection("borderWidths");
                           }}
                         >
-                          <CropMinimalistic className="h-5 w-5" />
+                          <CropMinimalistic className="h-4 w-4" />
                           <span className="mx-2 w-14 text-base">Border</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
@@ -275,7 +277,7 @@ export default function Configuration() {
                             setSelectedSection("opacity");
                           }}
                         >
-                          <RadialBlur className="h-5 w-5" />
+                          <RadialBlur className="h-4 w-4" />
                           <span className="mx-2 w-14 text-base">Opacity</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
@@ -285,7 +287,7 @@ export default function Configuration() {
                             setSelectedSection("font");
                           }}
                         >
-                          <RadialBlur className="h-5 w-5" />
+                          <RadialBlur className="h-4 w-4" />
                           <span className="mx-2 w-14 text-base">Font</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
@@ -312,7 +314,7 @@ export default function Configuration() {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-5 w-5" />
+                        <ArrowLeftIcon className="h-4 w-4" />
                       </Button>
                       <div className="flex flex-col gap-y-4 h-auto p-4">
                         <DefaultColors config={config} theme={theme} />
@@ -337,7 +339,7 @@ export default function Configuration() {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-5 w-5" />
+                        <ArrowLeftIcon className="h-4 w-4" />
                       </Button>
                       <div className="p-4">
                         <Radiuses />
@@ -354,7 +356,7 @@ export default function Configuration() {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-5 w-5" />
+                        <ArrowLeftIcon className="h-4 w-4" />
                       </Button>
                       <div className="p-4">
                         <BorderWidths />
@@ -371,7 +373,7 @@ export default function Configuration() {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-5 w-5" />
+                        <ArrowLeftIcon className="h-4 w-4" />
                       </Button>
                       <div className="p-4">
                         <Fonts />
@@ -388,7 +390,7 @@ export default function Configuration() {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-5 w-5" />
+                        <ArrowLeftIcon className="h-4 w-4" />
                       </Button>
                       <div className="p-4">
                         <DisableOpacity config={config} />
@@ -405,7 +407,7 @@ export default function Configuration() {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-5 w-5" />
+                        <ArrowLeftIcon className="h-4 w-4" />
                       </Button>
                       <div className="p-4">
                         <Scaling />

@@ -17,9 +17,9 @@ export function DefaultColors({config, theme}: DefaultColorsProp) {
 
   return (
     <ConfigSection
-      icon={<PaletteRound className="h-5 w-5" />}
+      icon={<PaletteRound className="h-4 w-4" />}
       id={defaultColorsId}
-      title="Default Colors"
+      title="Default Color"
     >
       <ColorPicker
         hexColor={config[theme].defaultColor.default}

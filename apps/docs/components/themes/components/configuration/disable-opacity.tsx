@@ -20,7 +20,7 @@ export function DisableOpacity({config}: DisableOpacityProps) {
   };
 
   return (
-    <ConfigSection icon={<RadialBlur className="h-5 w-5" />} title="Disable Opacity">
+    <ConfigSection icon={<RadialBlur className="h-4 w-4" />} title="Disable Opacity">
       <ValueButton
         currentValue={config.layout.otherParams.disabledOpacity}
         setValue={(value) => {
