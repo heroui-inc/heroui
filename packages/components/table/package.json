@@ -53,7 +53,8 @@
     "@react-stately/table": "3.13.1",
     "@react-stately/virtualizer": "4.2.1",
     "@react-types/grid": "3.2.11",
-    "@react-types/table": "3.10.4"
+    "@react-types/table": "3.10.4",
+    "@tanstack/react-virtual": "3.11.3"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
