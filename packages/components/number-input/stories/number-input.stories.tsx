@@ -244,17 +244,6 @@ export const WithWheelDisabled = {
   },
 };
 
-export const HorizontalStepper = {
-  render: Template,
-
-  args: {
-    ...defaultProps,
-    steps: "horizontal",
-    label: "Horizontal Stepper",
-    description: "Set `steps` to `horizontal` to show the stepper horizontally.",
-  },
-};
-
 export const WithFormatOptions = {
   render: Template,
 
