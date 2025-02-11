@@ -423,7 +423,8 @@
           "key": "table",
           "title": "Table",
           "keywords": "table, data display, grid, spreadsheet",
-          "path": "/docs/components/table.mdx"
+          "path": "/docs/components/table.mdx",
+          "updated": true
         },
         {
           "key": "tabs",
@@ -436,7 +437,7 @@
           "title": "Toast",
           "keywords": "toast, notification, message",
           "path": "/docs/components/toast.mdx",
-          "comingSoon": true
+          "newPost": true
         },
         {
           "key": "textarea",
