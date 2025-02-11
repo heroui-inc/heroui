@@ -9,6 +9,7 @@ export function ScriptProviders({isKapaEnabled = true}: {isKapaEnabled?: boolean
     <>
       <Script
         defer
+        data-button-position-left="20px"
         data-modal-disclaimer="This is a custom LLM for HeroUI with access to all developer docs (heroui.com/docs) and GitHub Issues and PRs (github.com/heroui-inc/heroui)."
         data-modal-example-questions="How do I install for Next.js?,How do I customize primary color?"
         data-project-color="#000000"
