@@ -350,7 +350,7 @@ export const EndContent = {
     ...defaultProps,
     variant: "bordered",
     label: "Price",
-    placeholde: "0.00",
+    placeholder: "0.00",
     endContent: (
       <div className="pointer-events-none flex items-center">
         <span className="text-default-400 text-sm">€</span>
