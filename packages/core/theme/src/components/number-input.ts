@@ -142,11 +142,21 @@ const numberInput = tv({
     },
     color: {
       default: {},
-      primary: {},
-      secondary: {},
-      success: {},
-      warning: {},
-      danger: {},
+      primary: {
+        stepperButton: "text-primary",
+      },
+      secondary: {
+        stepperButton: "text-secondary",
+      },
+      success: {
+        stepperButton: "text-success",
+      },
+      warning: {
+        stepperButton: "text-warning",
+      },
+      danger: {
+        stepperButton: "text-danger",
+      },
     },
     size: {
       sm: {
