@@ -30,10 +30,10 @@ export const retro: Config = {
   },
   dark: {
     defaultColor: {
-      default: "#2D1E12",
+      default: "#a58956",
     },
     baseColor: {
-      primary: "#8C6F17",
+      primary: "#FFD34E",
       secondary: "#EE457E",
       success: "#4CAF50",
       warning: "#FF9800",

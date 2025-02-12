@@ -10,7 +10,7 @@ interface SwatchProps {
 
 export default function Swatch({colors, className, innerClassName}: SwatchProps) {
   return (
-    <div className={clsx("flex h-6 rounded-lg", className)}>
+    <div className={clsx("flex h-6 border border-default-400", className)}>
       {Object.entries(colors).map(([key, value]) => (
         <div key={key} className={clsx("w-2 h-full", innerClassName)} style={{background: value}} />
       ))}
