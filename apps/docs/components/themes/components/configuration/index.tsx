@@ -264,7 +264,7 @@ export default function Configuration() {
                           }}
                         >
                           <Filters className="h-4 w-4" />
-                          <span className="mx-2 w-14 text-base">Colors</span>{" "}
+                          <span className="mx-2 w-14 text-sm sm:text-base">Colors</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
@@ -274,7 +274,7 @@ export default function Configuration() {
                           }}
                         >
                           <Crop className="h-4 w-4" />
-                          <span className="mx-2 text-base">Radius</span>{" "}
+                          <span className="mx-2 text-sm sm:text-base">Radius</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
@@ -284,7 +284,7 @@ export default function Configuration() {
                           }}
                         >
                           <CropMinimalistic className="h-4 w-4" />
-                          <span className="mx-2 w-14 text-base">Border</span>{" "}
+                          <span className="mx-2 w-14 text-sm sm:text-base">Border</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
@@ -294,7 +294,7 @@ export default function Configuration() {
                           }}
                         >
                           <RadialBlur className="h-4 w-4" />
-                          <span className="mx-2 w-14 text-base">Opacity</span>{" "}
+                          <span className="mx-2 w-14 text-sm sm:text-base">Opacity</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
@@ -304,7 +304,7 @@ export default function Configuration() {
                           }}
                         >
                           <RadialBlur className="h-4 w-4" />
-                          <span className="mx-2 w-14 text-base">Font</span>{" "}
+                          <span className="mx-2 w-14 text-sm sm:text-base">Font</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
@@ -314,7 +314,7 @@ export default function Configuration() {
                           }}
                         >
                           <ScalingIcon className="h-6 w-6" />
-                          <span className="mx-2 w-20 text-base">Scaling</span>{" "}
+                          <span className="mx-2 w-20 text-sm sm:text-base">Scaling</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                       </div>
