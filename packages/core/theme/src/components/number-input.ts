@@ -81,6 +81,7 @@ const numberInput = tv({
       "w-5",
       "h-5",
       "overflow-visible",
+      "data-[pressed=true]:opacity-70",
     ],
     stepperWrapper: ["flex", "flex-col", "ps-1", "h-full", "justify-center"],
     helperWrapper: "hidden group-data-[has-helper=true]:flex py-2 relative flex-col gap-1.5",
