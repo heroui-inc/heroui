@@ -31,6 +31,9 @@ export function SelectTemplate({name, onChange, currentTheme}: SelectTemplatePro
       </div>
       <Select
         className="my-3"
+        classNames={{
+          trigger: "bg-default-200",
+        }}
         placeholder="Select a theme"
         selectedKeys={name === null ? [] : [name]}
         onChange={handleChange}

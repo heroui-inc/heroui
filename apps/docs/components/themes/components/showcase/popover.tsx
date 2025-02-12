@@ -17,7 +17,7 @@ const SectionBase = ({
   className?: string;
 }) => {
   return (
-    <Popover color={color} placement="right" radius={radius}>
+    <Popover color={color === "foreground" ? "default" : color} placement="right" radius={radius}>
       <PopoverTrigger>
         <Button color={color === "foreground" ? "default" : color}>Open Popover</Button>
       </PopoverTrigger>

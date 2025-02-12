@@ -6,6 +6,7 @@ import {useThemeBuilder} from "../../provider";
 import {Config, ThemeType} from "../../types";
 import {ColorPicker} from "../color-picker";
 import {ConfigSection} from "../config-section";
+import {templates} from "../../templates";
 
 import {Filters} from "@/components/icons";
 
@@ -26,7 +27,9 @@ export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
           <ColorPicker
             hexColor={config[theme].baseColor.primary}
             type="primary"
-            onChange={(hexColor) => setCssColor("primary", hexColor, theme)}
+            onChange={(hexColor) =>
+              setCssColor("primary", hexColor, templates[0].value[theme].baseColor.primary, theme)
+            }
             onClose={(hexColor) => setBaseColor({primary: hexColor}, theme, syncThemes)}
           />
         </div>
@@ -36,7 +39,14 @@ export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
           <ColorPicker
             hexColor={config[theme].baseColor.secondary}
             type="secondary"
-            onChange={(hexColor) => setCssColor("secondary", hexColor, theme)}
+            onChange={(hexColor) =>
+              setCssColor(
+                "secondary",
+                hexColor,
+                templates[0].value[theme].baseColor.secondary,
+                theme,
+              )
+            }
             onClose={(hexColor) => setBaseColor({secondary: hexColor}, theme, syncThemes)}
           />
         </div>
@@ -46,7 +56,9 @@ export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
           <ColorPicker
             hexColor={config[theme].baseColor.success}
             type="success"
-            onChange={(hexColor) => setCssColor("success", hexColor, theme)}
+            onChange={(hexColor) =>
+              setCssColor("success", hexColor, templates[0].value[theme].baseColor.success, theme)
+            }
             onClose={(hexColor) => setBaseColor({success: hexColor}, theme, syncThemes)}
           />
         </div>
@@ -56,7 +68,9 @@ export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
           <ColorPicker
             hexColor={config[theme].baseColor.warning}
             type="warning"
-            onChange={(hexColor) => setCssColor("warning", hexColor, theme)}
+            onChange={(hexColor) =>
+              setCssColor("warning", hexColor, templates[0].value[theme].baseColor.warning, theme)
+            }
             onClose={(hexColor) => setBaseColor({warning: hexColor}, theme, syncThemes)}
           />
         </div>
@@ -66,7 +80,9 @@ export function BaseColors({config, syncThemes, theme}: BrandColorsProps) {
           <ColorPicker
             hexColor={config[theme].baseColor.danger}
             type="danger"
-            onChange={(hexColor) => setCssColor("danger", hexColor, theme)}
+            onChange={(hexColor) =>
+              setCssColor("danger", hexColor, templates[0].value[theme].baseColor.danger, theme)
+            }
             onClose={(hexColor) => setBaseColor({danger: hexColor}, theme, syncThemes)}
           />
         </div>

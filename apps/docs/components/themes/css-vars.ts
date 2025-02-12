@@ -3,13 +3,24 @@ import {readableColor} from "color2k";
 import {colorsId, baseColorsId, showcaseId, otherColorsId, defaultColorsId} from "./constants";
 import {ColorPickerType, Config, ConfigLayout, ThemeType, ThemeColor} from "./types";
 import {generateThemeColor, hexToHsl} from "./utils/colors";
+import {templates} from "./templates";
 
-export function setCssColor(colorType: ColorPickerType, value: string, theme: ThemeType) {
+export function setCssColor(
+  colorType: ColorPickerType,
+  value: string,
+  heroUIValue: string,
+  theme: ThemeType,
+) {
   const baseColorEl = document.getElementById(colorsId);
   const commonColorsEl = document.getElementById(baseColorsId);
   const showcaseEl = document.getElementById(showcaseId);
   const defaultColorEl = document.getElementById(defaultColorsId);
+  const appContainer = document.getElementById("app-container");
+  const configurationContainer = document.getElementById("configuration-container");
+  const htmlEl = document.documentElement;
+
   const themeColor = generateThemeColor(value, colorType, theme);
+  const heroThemeColor = generateThemeColor(heroUIValue, colorType, theme);
 
   if (!baseColorEl || !commonColorsEl || !showcaseEl || !defaultColorEl) {
     // eslint-disable-next-line no-console
@@ -20,17 +31,24 @@ export function setCssColor(colorType: ColorPickerType, value: string, theme: Th
 
   Object.keys(themeColor).forEach((key) => {
     const value = hexToHsl(themeColor[key as keyof ThemeColor]);
+    const heroValue = hexToHsl(heroThemeColor[key as keyof ThemeColor]);
 
     if (key === "DEFAULT") {
       baseColorEl.style.setProperty(`--heroui-${colorType}`, value);
       commonColorsEl.style.setProperty(`--heroui-${colorType}`, value);
       showcaseEl.style.setProperty(`--heroui-${colorType}`, value);
       defaultColorEl.style.setProperty(`--heroui-${colorType}`, value);
+      appContainer?.style.setProperty(`--heroui-${colorType}`, heroValue);
+      configurationContainer?.style.setProperty(`--heroui-${colorType}`, heroValue);
+      htmlEl.style.setProperty(`--heroui-${colorType}`, value);
     } else {
       baseColorEl.style.setProperty(`--heroui-${colorType}-${key}`, value);
       commonColorsEl.style.setProperty(`--heroui-${colorType}-${key}`, value);
       showcaseEl.style.setProperty(`--heroui-${colorType}-${key}`, value);
       defaultColorEl.style.setProperty(`--heroui-${colorType}`, value);
+      appContainer?.style.setProperty(`--heroui-${colorType}-${key}`, heroValue);
+      configurationContainer?.style.setProperty(`--heroui-${colorType}-${key}`, heroValue);
+      htmlEl.style.setProperty(`--heroui-${colorType}-${key}`, value);
     }
   });
 }
@@ -68,10 +86,14 @@ export function setCssBorderWidth(type: keyof ConfigLayout["borderWidth"], value
   el?.style.setProperty(`--heroui-border-width-${type}`, `${value}px`);
 }
 
-export function setCssContentColor(level: 1 | 2 | 3 | 4, value: string) {
+export function setCssContentColor(level: 1 | 2 | 3 | 4, value: string, heroValue: string) {
   const showcaseEl = document.getElementById(showcaseId);
   const baseColorEl = document.getElementById(baseColorsId);
+  const configurationContainer = document.getElementById("configuration-container");
+  const htmlEl = document.documentElement;
+
   const hslValue = hexToHsl(value);
+  const heroHslValue = hexToHsl(heroValue);
 
   showcaseEl?.style.setProperty(`--heroui-content${level}`, hslValue);
   showcaseEl?.style.setProperty(
@@ -82,6 +104,15 @@ export function setCssContentColor(level: 1 | 2 | 3 | 4, value: string) {
   baseColorEl?.style.setProperty(
     `--heroui-content${level}-foreground`,
     hexToHsl(readableColor(value)),
+  );
+
+  htmlEl.style.setProperty(`--heroui-content${level}`, hslValue);
+  htmlEl.style.setProperty(`--heroui-content${level}-foreground`, hexToHsl(readableColor(value)));
+
+  configurationContainer?.style.setProperty(`--heroui-content${level}`, heroHslValue);
+  configurationContainer?.style.setProperty(
+    `--heroui-content${level}-foreground`,
+    hexToHsl(readableColor(heroValue)),
   );
 }
 
@@ -123,17 +154,68 @@ export function setAllCssVars(config: Config, theme: ThemeType) {
     return;
   }
 
-  setCssColor("default", config[theme].defaultColor.default, theme);
-  setCssColor("primary", config[theme].baseColor.primary, theme);
-  setCssColor("secondary", config[theme].baseColor.secondary, theme);
-  setCssColor("success", config[theme].baseColor.success, theme);
-  setCssColor("warning", config[theme].baseColor.warning, theme);
-  setCssColor("danger", config[theme].baseColor.danger, theme);
-  setCssColor("foreground", config[theme].layoutColor.foreground, theme);
-  setCssContentColor(1, config[theme].contentColor.content1);
-  setCssContentColor(2, config[theme].contentColor.content2);
-  setCssContentColor(3, config[theme].contentColor.content3);
-  setCssContentColor(4, config[theme].contentColor.content4);
+  setCssColor(
+    "default",
+    config[theme].defaultColor.default,
+    templates[0].value[theme].defaultColor.default,
+    theme,
+  );
+  setCssColor(
+    "primary",
+    config[theme].baseColor.primary,
+    templates[0].value[theme].baseColor.primary,
+    theme,
+  );
+  setCssColor(
+    "secondary",
+    config[theme].baseColor.secondary,
+    templates[0].value[theme].baseColor.secondary,
+    theme,
+  );
+  setCssColor(
+    "success",
+    config[theme].baseColor.success,
+    templates[0].value[theme].baseColor.success,
+    theme,
+  );
+  setCssColor(
+    "warning",
+    config[theme].baseColor.warning,
+    templates[0].value[theme].baseColor.warning,
+    theme,
+  );
+  setCssColor(
+    "danger",
+    config[theme].baseColor.danger,
+    templates[0].value[theme].baseColor.danger,
+    theme,
+  );
+  setCssColor(
+    "foreground",
+    config[theme].layoutColor.foreground,
+    templates[0].value[theme].layoutColor.foreground,
+    theme,
+  );
+  setCssContentColor(
+    1,
+    config[theme].contentColor.content1,
+    templates[0].value[theme].contentColor.content1,
+  );
+  setCssContentColor(
+    2,
+    config[theme].contentColor.content2,
+    templates[0].value[theme].contentColor.content2,
+  );
+  setCssContentColor(
+    3,
+    config[theme].contentColor.content3,
+    templates[0].value[theme].contentColor.content3,
+  );
+  setCssContentColor(
+    4,
+    config[theme].contentColor.content4,
+    templates[0].value[theme].contentColor.content4,
+  );
   setCssBackground(config[theme].layoutColor.background);
   setCssFontSize("tiny", config.layout.fontSize.tiny);
   setCssFontSize("small", config.layout.fontSize.small);

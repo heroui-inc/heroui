@@ -1,6 +1,7 @@
 import {defaultColorsId} from "../../constants";
 import {setCssColor} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
+import {templates} from "../../templates";
 import {Config, ThemeType} from "../../types";
 import {ColorPicker} from "../color-picker";
 import {ConfigSection} from "../config-section";
@@ -24,7 +25,9 @@ export function DefaultColors({config, theme}: DefaultColorsProp) {
       <ColorPicker
         hexColor={config[theme].defaultColor.default}
         type="default"
-        onChange={(hexColor) => setCssColor("default", hexColor, theme)}
+        onChange={(hexColor) =>
+          setCssColor("default", hexColor, templates[0].value[theme].defaultColor.default, theme)
+        }
         onClose={(hexColor) => setDefaultColor({default: hexColor}, theme, false)}
       />
     </ConfigSection>

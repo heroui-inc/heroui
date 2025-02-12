@@ -76,14 +76,15 @@ export default function Configuration() {
   }, [config, theme, prevTheme]);
 
   useEffect(() => {
-    const template = templates[0];
+    return () => {
+      const template = templates[0];
 
-    setConfiguration(template.value, theme, syncThemes);
-    setAllCssVars(template.value, theme);
-    setSelectedTemplate(template);
-    setTemplateTheme(template.name);
-  }, [currentTheme]);
-
+      setConfiguration(template.value, theme, syncThemes);
+      setAllCssVars(template.value, theme);
+      setSelectedTemplate(template);
+      setTemplateTheme(template.name);
+    };
+  }, []);
   /**
    * Reset the theme to the default one.
    */
@@ -110,7 +111,7 @@ export default function Configuration() {
           <div className="flex gap-x-4 items-center">
             <div className="text-xl font-medium leading-8 text-default-800 ">Theme</div>
             <Button
-              className="text-tiny h-9 bg-default-100 flex items-center"
+              className="text-tiny h-9 bg-default-200 flex items-center"
               size="sm"
               onPress={handleResetTheme}
             >
@@ -122,7 +123,7 @@ export default function Configuration() {
             <ThemeSwitch />
           </div>
         </CardHeader>
-        <Divider className="bg-default-100" />
+        <Divider className="bg-default-200" />
         <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-y-scroll pb-6 scrollbar-hide">
           <ScrollShadow className="py-1 scrollbar-hide" orientation="vertical">
             <SelectTemplate
@@ -154,7 +155,7 @@ export default function Configuration() {
             </div>
           </ScrollShadow>
         </CardBody>
-        <Divider className="bg-default-100" />
+        <Divider className="bg-default-200" />
         <CardFooter className="flex flex-col h-auto">
           <Button fullWidth className="text-white" color="primary" onPress={handleCopy}>
             Copy Theme
@@ -456,9 +457,9 @@ export default function Configuration() {
   ]);
 
   return (
-    <>
+    <div id="configuration-container">
       {DesktopView}
       {MobileView}
-    </>
+    </div>
   );
 }
