@@ -10,7 +10,7 @@ export interface NumberInputStepperProps extends Omit<ButtonProps, keyof AriaBut
 
 const NumberInputStepper = ({direction, ...otherProps}: NumberInputStepperProps) => {
   return (
-    <Button isIconOnly {...otherProps}>
+    <Button disableRipple isIconOnly {...otherProps}>
       {direction == "up" ? <ChevronUpIcon /> : <ChevronDownIcon />}
     </Button>
   );
