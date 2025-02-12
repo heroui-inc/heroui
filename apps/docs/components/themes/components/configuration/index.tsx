@@ -75,6 +75,15 @@ export default function Configuration() {
     }
   }, [config, theme, prevTheme]);
 
+  useEffect(() => {
+    const template = templates[0];
+
+    setConfiguration(template.value, theme, syncThemes);
+    setAllCssVars(template.value, theme);
+    setSelectedTemplate(template);
+    setTemplateTheme(template.name);
+  }, [currentTheme]);
+
   /**
    * Reset the theme to the default one.
    */
