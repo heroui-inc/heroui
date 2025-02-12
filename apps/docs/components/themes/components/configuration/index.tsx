@@ -58,6 +58,7 @@ export default function Configuration() {
   const [selectedSection, setSelectedSection] = useState<
     "none" | "color" | "radius" | "font" | "opacity" | "scaling" | "borderWidths"
   >("none");
+  const {theme: currentTheme} = useTheme();
 
   /**
    * Update the CSS variables and the configuration when the theme changes.
@@ -116,6 +117,7 @@ export default function Configuration() {
         <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-y-scroll pb-6 scrollbar-hide">
           <ScrollShadow className="py-1 scrollbar-hide" orientation="vertical">
             <SelectTemplate
+              currentTheme={currentTheme}
               name={selectedTemplate?.name ?? null}
               onChange={(template) => {
                 setConfiguration(template.value, theme, syncThemes);
@@ -169,6 +171,7 @@ export default function Configuration() {
     syncThemes,
     theme,
     templateTheme,
+    currentTheme,
   ]);
 
   const MobileView = useMemo(() => {
@@ -225,7 +228,11 @@ export default function Configuration() {
                       >
                         <Swatch
                           className="h-full"
-                          colors={template.value.light.baseColor}
+                          colors={
+                            currentTheme === "dark"
+                              ? template.value.dark.baseColor
+                              : template.value.light.baseColor
+                          }
                           innerClassName="w-4"
                         />
                       </Button>
@@ -436,6 +443,7 @@ export default function Configuration() {
     syncThemes,
     theme,
     templateTheme,
+    currentTheme,
   ]);
 
   return (

@@ -10,9 +10,10 @@ import {MirrorLeft} from "@/components/icons";
 interface SelectTemplateProps {
   name: TemplateType | null;
   onChange: (template: Template) => void;
+  currentTheme: string | undefined;
 }
 
-export function SelectTemplate({name, onChange}: SelectTemplateProps) {
+export function SelectTemplate({name, onChange, currentTheme}: SelectTemplateProps) {
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value as TemplateType;
     const template = templates.find((template) => template.name === value);
@@ -37,7 +38,15 @@ export function SelectTemplate({name, onChange}: SelectTemplateProps) {
         {templates.map((template, index) => (
           <SelectItem
             key={template.name}
-            startContent={<Swatch colors={template.value.light.baseColor} />}
+            startContent={
+              <Swatch
+                colors={
+                  currentTheme === "dark"
+                    ? template.value.dark.baseColor
+                    : template.value.light.baseColor
+                }
+              />
+            }
             // @ts-ignore
             value={index}
           >
