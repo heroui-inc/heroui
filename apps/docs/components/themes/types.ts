@@ -45,7 +45,7 @@ export type Variant =
 export type Radius = "none" | "sm" | "md" | "lg" | "full";
 export type HeroUIScaling = 90 | 95 | 100 | 105 | 110;
 export type Border = "thin" | "medium" | "thick";
-export type FontName = "inter" | "roboto" | "outfit" | "lora";
+export type FontName = "Inter" | "Roboto" | "Outfit" | "Lora";
 
 // Themes
 export type ThemeType = "light" | "dark";
@@ -126,4 +126,4 @@ export interface Template {
 
 export type TemplateType = "coffee" | "emerald" | "heroui" | "elegant" | "modern" | "retro";
 
-export type FontType = "inter" | "roboto" | "outfit" | "lora";
+export type FontType = "Inter" | "Roboto" | "Outfit" | "Lora";

@@ -6,7 +6,7 @@ import {FontName, FontType} from "../../types";
 interface FontButtonProps {
   title: FontName;
   className: string;
-  value: string;
+  value: string | undefined;
   setValue: (value: FontType) => void;
 }
 
@@ -15,18 +15,21 @@ interface FontStyle {
   letterSpacing?: string;
 }
 
-function getFontStyle(fontName: FontName): FontStyle {
+function getFontStyle(fontName: FontName | undefined): FontStyle {
+  if (!fontName) {
+    return {fontFamily: "'Inter', sans-serif"};
+  }
   switch (fontName) {
-    case "inter":
-      return {fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em"};
-    case "roboto":
+    case "Inter":
+      return {fontFamily: "'Inter', sans-serif"};
+    case "Roboto":
       return {fontFamily: "'Roboto', sans-serif"};
-    case "outfit":
-      return {fontFamily: "'Outfit', sans-serif", letterSpacing: "0.05em"};
-    case "lora":
+    case "Outfit":
+      return {fontFamily: "'Outfit', sans-serif"};
+    case "Lora":
       return {fontFamily: "'Lora', serif"};
     default:
-      return {fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em"};
+      return {fontFamily: "'Inter', sans-serif"};
   }
 }
 

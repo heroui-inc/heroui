@@ -1,8 +1,9 @@
-import {Divider} from "@heroui/react";
+import {cn, Divider} from "@heroui/react";
 import Link from "next/link";
+import {Inter, Roboto, Outfit, Lora} from "next/font/google";
 
 import {useThemeBuilder} from "../provider";
-import {FontName} from "../types";
+import {FontName, TemplateType} from "../types";
 
 interface ShowcaseComponentProps {
   children: React.ReactElement | React.ReactElement[];
@@ -10,25 +11,35 @@ interface ShowcaseComponentProps {
   name: string;
 }
 
-const FONT_CONFIGS: Record<FontName, {family: string; type: "sans-serif" | "serif"}> = {
-  inter: {family: "Inter", type: "sans-serif"},
-  roboto: {family: "Roboto", type: "sans-serif"},
-  outfit: {family: "Outfit", type: "sans-serif"},
-  lora: {family: "Lora", type: "serif"},
+const inter = Inter({subsets: ["latin"], weight: ["400", "700"]});
+const roboto = Roboto({subsets: ["latin"], weight: ["400", "700"]});
+const outfit = Outfit({subsets: ["latin"], weight: ["400", "700"]});
+const lora = Lora({subsets: ["latin"], weight: ["400", "700"]});
+
+const FONT_CONFIGS: Record<FontName, {className: string}> = {
+  Inter: {className: inter.className},
+  Roboto: {className: roboto.className},
+  Outfit: {className: outfit.className},
+  Lora: {className: lora.className},
 };
 
-function getFontStyle(fontName: FontName) {
-  const config = FONT_CONFIGS[fontName];
+const getFontClass = (templateTheme: TemplateType) => {
+  if (templateTheme === "elegant") {
+    return "font-mono";
+  }
 
-  return config ? {fontFamily: `'${config.family}', ${config.type}`} : {};
-}
+  return FONT_CONFIGS["Inter"]?.className || "";
+};
 
 export function ShowcaseComponent({children, id, name}: ShowcaseComponentProps) {
-  const {font} = useThemeBuilder();
-  const style = getFontStyle(font);
+  const {font, templateTheme} = useThemeBuilder();
+  const fontClass = font ? FONT_CONFIGS[font]?.className || "" : getFontClass(templateTheme);
 
   return (
-    <div className="bg-background text-foreground py-6 p-4 rounded-lg group" id={id} style={style}>
+    <div
+      className={cn("bg-background text-foreground py-6 p-4 rounded-lg group", fontClass)}
+      id={id}
+    >
       <div className="flex items-center gap-x-4">
         <span className="text-xl font-medium text-black dark:text-white">{name}</span>
         <Link

@@ -9,7 +9,7 @@ export const elegant: Config = {
       default: "#8f8f8f",
     },
     baseColor: {
-      primary: "#FFFFFF",
+      primary: "#000000",
       secondary: "#d1c4e9",
       success: "#81c784",
       warning: "#ffb74d",
@@ -30,10 +30,10 @@ export const elegant: Config = {
   },
   dark: {
     defaultColor: {
-      default: "#1a1a1a",
+      default: "#8f8f8f",
     },
     baseColor: {
-      primary: "#a6a39a",
+      primary: "#FFFFFF",
       secondary: "#5e5e5e",
       success: "#388e3c",
       warning: "#f57c00",

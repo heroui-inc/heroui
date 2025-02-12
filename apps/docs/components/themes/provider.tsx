@@ -19,7 +19,7 @@ export interface ThemeBuilderContextProps {
   radiusValue: Radius;
   borderWidthValue: Border;
   templateTheme: TemplateType;
-  font: FontType;
+  font: FontType | undefined;
   scaling: HeroUIScaling;
   resetConfig: (theme: ThemeType, sync: boolean) => Config;
   setLayoutColor: (
@@ -56,7 +56,7 @@ const ThemeBuilderContext = createContext<ThemeBuilderContextProps>({
   radiusValue: "md",
   borderWidthValue: "thick",
   templateTheme: "heroui",
-  font: "inter",
+  font: undefined,
   scaling: 100,
   resetConfig: () => initialConfig,
   setLayoutColor: () => {},
@@ -86,7 +86,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
   const [radiusValue, setRadiusValue] = useState<Radius>("sm");
   const [borderWidthValue, setBorderWidthValue] = useState<Border>("thin");
   const [templateTheme, setTemplateTheme] = useState<TemplateType>("heroui");
-  const [font, setFont] = useState<FontType>("inter");
+  const [font, setFont] = useState<FontType | undefined>(undefined);
   const [scaling, setScaling] = useState<HeroUIScaling>(100);
 
   const setConfiguration = (newConfig: Config, theme: ThemeType, sync: boolean) => {
