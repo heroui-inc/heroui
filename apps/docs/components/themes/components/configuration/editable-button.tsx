@@ -12,8 +12,8 @@ const EditableButton = ({title, className, value, setValue}: EditableButtonProps
   return (
     <Button
       className={clsx(
-        "group h-auto py-4 flex flex-col justify-between gap-y-2 min-w-auto w-auto",
-        value === title ? "border-foreground" : "",
+        "group h-auto py-4 flex flex-col justify-between gap-y-2 min-w-auto w-auto border-black/20 dark:border-white/20",
+        value === title ? "border-black/60 dark:border-white/60" : "",
       )}
       variant="bordered"
       onPress={() => {
@@ -22,11 +22,11 @@ const EditableButton = ({title, className, value, setValue}: EditableButtonProps
     >
       <div
         className={clsx(
-          "h-7 w-7 border-t-2 border-l-2 border-primary-500 bg-gradient-to-b from-[#0077ff1A] to-[#92c5ff00]",
+          "h-7 w-7 border-t-2 border-l-2 border-blue-400 bg-gradient-to-b from-[#0077ff1A] to-[#92c5ff00]",
           className,
         )}
       />
-      <div className="relative text-tiny font-medium leading-5 text-default-500">
+      <div className="relative text-tiny font-medium leading-5 text-black/40 dark:text-white/40">
         <div className="">{title}</div>
       </div>
     </Button>

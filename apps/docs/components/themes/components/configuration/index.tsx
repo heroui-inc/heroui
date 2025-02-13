@@ -186,17 +186,17 @@ export default function Configuration() {
 
   const MobileView = useMemo(() => {
     return (
-      <div className="md:hidden w-screen fixed bottom-0 right-0 left-0 z-40 bg-default-100 overflow-hidden rounded-t-full shadow-inner">
+      <div className="md:hidden w-screen fixed bottom-0 right-0 left-0 z-40 dark:bg-[#18181B] bg-[#ffffff] overflow-hidden rounded-t-full shadow-inner">
         <Button
           disableRipple
           isIconOnly
-          className="bg-default-100 group hover:text-default-600 text-default-400 left-1/2 transform -translate-x-1/2 w-full flex-col"
+          className="dark:bg-[#18181B] bg-[#d4d4d8] group hover:text-default-600 text-default-400 left-1/2 transform -translate-x-1/2 w-full flex-col"
           onPress={() => {
             setIsDrawerOpen(!isDrawerOpen);
           }}
         >
           <ChevronUpIcon
-            className="w-6 h-6 text-default-400 group-hover:text-default-500"
+            className="w-6 h-6 dark:text-white/20 text-black/20 group-hover:text-black/80 group-hover:dark:text-white/80"
             strokeWidth={2}
           />
         </Button>
@@ -208,10 +208,10 @@ export default function Configuration() {
             setIsDrawerOpen(false);
           }}
         >
-          <DrawerContent className="backdrop-blur-2xl max-h-[56rem]">
+          <DrawerContent className="backdrop-blur-2xl dark:bg-[#18181B] bg-[#ffffff] max-h-[56rem]">
             <Button
               isIconOnly
-              className="group fixed top-0 right-0 bg-default-100 hover:bg-default-200 z-50 min-w-8 w-8 h-8 rounded-full m-1"
+              className="group fixed top-0 right-0 dark:bg-white/60 bg-[#d4d4d8] data-[hover=true]:bg-black/30 dark:data-[hover=true]:bg-white/80 z-50 min-w-8 w-8 h-8 rounded-full m-1"
               onPress={() => {
                 setIsDrawerOpen(false);
                 setSelectedSection("none");
@@ -246,7 +246,9 @@ export default function Configuration() {
                           innerClassName="w-4"
                         />
                       </Button>
-                      <div className="text-sm text-default-500 my-1">{template.name}</div>
+                      <div className="text-sm dark:text-white/60 text-black/60 my-1">
+                        {template.name}
+                      </div>
                     </div>
                   );
                 })}
@@ -259,7 +261,7 @@ export default function Configuration() {
                     <>
                       <div className="w-full grid grid-cols-4 gap-4 flex-wrap items-center justify-around pt-20">
                         <Button
-                          className="col-span-2 h-14 flex items-center justify-center sm:justify-around gap-x-3"
+                          className="col-span-2 h-14 flex items-center justify-center sm:justify-around gap-x-3 dark:bg-[#3f3f46] bg-[#d4d4d8] dark:text-white"
                           onPress={() => {
                             setSelectedSection("color");
                           }}
@@ -269,7 +271,7 @@ export default function Configuration() {
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 flex items-center justify-center sm:justify-around gap-x-3"
+                          className="col-span-2 h-14 flex items-center justify-center sm:justify-around gap-x-3 dark:bg-[#3f3f46] bg-[#d4d4d8] dark:text-white"
                           onPress={() => {
                             setSelectedSection("radius");
                           }}
@@ -279,7 +281,7 @@ export default function Configuration() {
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3 dark:bg-[#3f3f46] bg-[#d4d4d8] dark:text-white"
                           onPress={() => {
                             setSelectedSection("borderWidths");
                           }}
@@ -289,7 +291,7 @@ export default function Configuration() {
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3 dark:bg-[#3f3f46] bg-[#d4d4d8] dark:text-white"
                           onPress={() => {
                             setSelectedSection("opacity");
                           }}
@@ -299,7 +301,7 @@ export default function Configuration() {
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3 dark:bg-[#3f3f46] bg-[#d4d4d8] dark:text-white"
                           onPress={() => {
                             setSelectedSection("font");
                           }}
@@ -309,7 +311,7 @@ export default function Configuration() {
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around gap-x-3 dark:bg-[#3f3f46] bg-[#d4d4d8] dark:text-white"
                           onPress={() => {
                             setSelectedSection("scaling");
                           }}
@@ -325,13 +327,13 @@ export default function Configuration() {
                     <div className="w-full h-auto">
                       <Button
                         isIconOnly
-                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        className="absolute left-3 top-1 text-black/60 dark:text-white/60 dark:data-[hover=true]:bg-white/20 data-[hover=true]:bg-black/10 cursor-pointer"
                         variant="light"
                         onPress={() => {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-5 w-5" strokeWidth={2} />
                       </Button>
                       <div className="flex flex-col gap-y-4 h-auto p-4">
                         <DefaultColors config={config} theme={theme} />
@@ -350,13 +352,13 @@ export default function Configuration() {
                     <div className="w-full h-full">
                       <Button
                         isIconOnly
-                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        className="absolute left-3 top-1 text-black/60 dark:text-white/60 dark:data-[hover=true]:bg-white/20 data-[hover=true]:bg-black/10 cursor-pointer"
                         variant="light"
                         onPress={() => {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-5 w-5" strokeWidth={2} />
                       </Button>
                       <div className="p-4">
                         <Radiuses />
@@ -367,13 +369,13 @@ export default function Configuration() {
                     <div className="w-full h-full">
                       <Button
                         isIconOnly
-                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        className="absolute left-3 top-1 text-black/60 dark:text-white/60 dark:data-[hover=true]:bg-white/20 data-[hover=true]:bg-black/10 cursor-pointer"
                         variant="light"
                         onPress={() => {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-5 w-5" strokeWidth={2} />
                       </Button>
                       <div className="p-4">
                         <BorderWidths />
@@ -384,13 +386,13 @@ export default function Configuration() {
                     <div className="w-full h-full">
                       <Button
                         isIconOnly
-                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        className="absolute left-3 top-1 text-black/60 dark:text-white/60 dark:data-[hover=true]:bg-white/20 data-[hover=true]:bg-black/10 cursor-pointer"
                         variant="light"
                         onPress={() => {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-5 w-5" strokeWidth={2} />
                       </Button>
                       <div className="p-4">
                         <Fonts />
@@ -401,13 +403,13 @@ export default function Configuration() {
                     <div className="w-full h-full">
                       <Button
                         isIconOnly
-                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        className="absolute left-3 top-1 text-black/60 dark:text-white/60 dark:data-[hover=true]:bg-white/20 data-[hover=true]:bg-black/10 cursor-pointer"
                         variant="light"
                         onPress={() => {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-5 w-5" strokeWidth={2} />
                       </Button>
                       <div className="p-4">
                         <DisableOpacity config={config} />
@@ -418,13 +420,13 @@ export default function Configuration() {
                     <div className="w-full h-full">
                       <Button
                         isIconOnly
-                        className="absolute left-3 top-1 text-default-400 hover:text-default-600 cursor-pointer"
+                        className="absolute left-3 top-1 text-black/60 dark:text-white/60 dark:data-[hover=true]:bg-white/20 data-[hover=true]:bg-black/10 cursor-pointer"
                         variant="light"
                         onPress={() => {
                           setSelectedSection("none");
                         }}
                       >
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-5 w-5" strokeWidth={2} />
                       </Button>
                       <div className="p-4">
                         <Scaling />
@@ -435,8 +437,8 @@ export default function Configuration() {
               </ScrollShadow>
             </div>
             <Divider className="my-2 p-0" />
-            <div className="flex flex-col items-center px-8">
-              <Button fullWidth className="text-white" color="primary" onPress={handleCopy}>
+            <div className="flex flex-col items-center px-8 pb-4">
+              <Button fullWidth className="text-white bg-blue-500" onPress={handleCopy}>
                 Copy Theme
               </Button>
             </div>

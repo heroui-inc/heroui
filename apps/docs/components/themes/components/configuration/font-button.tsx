@@ -39,18 +39,18 @@ const FontButton = ({title, value, setValue}: FontButtonProps) => {
   return (
     <Button
       className={clsx(
-        "group h-24 flex flex-col justify-center items-center gap-y-2 px-0",
-        value === title ? "border-foreground" : "",
+        "group h-24 flex flex-col justify-center items-center gap-y-2 px-0 border-black/20 dark:border-white/20",
+        value === title ? "border-black/60 dark:border-white/60" : "",
       )}
       variant="bordered"
       onPress={() => {
         setValue(title);
       }}
     >
-      <div className="font-medium text-2xl" style={style}>
+      <div className="font-medium text-2xl text-black/60 dark:text-white/80" style={style}>
         Ag12
       </div>
-      <div className="relative text-tiny text-default-500">
+      <div className="relative text-tiny text-black/40 dark:text-white/60">
         <div className="">{title}</div>
       </div>
     </Button>
