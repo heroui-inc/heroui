@@ -6,7 +6,7 @@ import {
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border} from "../../types";
+import {Border, Radius} from "../../types";
 
 type Color = BreadcrumbsProps["color"];
 
@@ -15,11 +15,13 @@ const SectionBase = ({
   variant,
   isDisabled,
   classNames,
+  radius,
 }: {
   color?: BreadcrumbsProps["color"];
   variant?: BreadcrumbsProps["variant"];
   isDisabled?: boolean;
   classNames?: any;
+  radius?: Radius;
 }) => {
   const items = ["Home", "Music", "Artist", "Album", "Song"];
 
@@ -28,6 +30,7 @@ const SectionBase = ({
       classNames={classNames}
       color={color}
       isDisabled={isDisabled}
+      radius={radius}
       variant={variant}
     >
       {items.map((item, index) => (
@@ -41,10 +44,12 @@ const Section = ({
   color,
   scaling,
   borderWidthValue,
+  radiusValue,
 }: {
   color: Color;
   scaling: number;
   borderWidthValue: Border;
+  radiusValue: Radius;
 }) => {
   const variants = ["bordered", "light", "solid", "solid"];
   const disabled = [false, false, false, true];
@@ -92,6 +97,7 @@ const Section = ({
           }}
           color={color}
           isDisabled={disabled[idx]}
+          radius={radiusValue}
           variant={variant as BreadcrumbsProps["variant"]}
         />
       ))}
@@ -101,12 +107,18 @@ const Section = ({
 
 export const BreadCrumbs = () => {
   const colors: Color[] = ["foreground", "primary", "secondary", "success", "warning", "danger"];
-  const {scaling, borderWidthValue} = useThemeBuilder();
+  const {scaling, borderWidthValue, radiusValue} = useThemeBuilder();
 
   return (
     <ShowcaseComponent name="BreadCrumbs">
       {colors.map((color, idx) => (
-        <Section key={idx} borderWidthValue={borderWidthValue} color={color} scaling={scaling} />
+        <Section
+          key={idx}
+          borderWidthValue={borderWidthValue}
+          color={color}
+          radiusValue={radiusValue}
+          scaling={scaling}
+        />
       ))}
     </ShowcaseComponent>
   );
