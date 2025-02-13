@@ -58,23 +58,23 @@ const Section = ({
 
   switch (scaling) {
     case 90: {
-      classNames = {base: "h-8 w-[300px]", label: "text-tiny"};
+      classNames = {base: "h-8 min-w-0 w-[190px]", label: "text-tiny"};
       break;
     }
     case 95: {
-      classNames = {base: "h-8 w-[320px]", label: "text-tiny"};
+      classNames = {base: "h-8 min-w-0 w-[210px]", label: "text-tiny"};
       break;
     }
     case 100: {
-      classNames = {base: "h-10 w-[340px]", label: "text-small"};
+      classNames = {base: "h-10 min-w-0 w-[230px]", label: "text-small"};
       break;
     }
     case 105: {
-      classNames = {base: "h-12 w-[360px]", label: "text-medium"};
+      classNames = {base: "h-12 min-w-0 w-[250px]", label: "text-medium"};
       break;
     }
     case 110: {
-      classNames = {base: "h-12 w-[380px]", label: "text-medium"};
+      classNames = {base: "h-12 min-w-0 w-[270px]", label: "text-medium"};
       break;
     }
   }

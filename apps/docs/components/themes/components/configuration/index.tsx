@@ -259,63 +259,63 @@ export default function Configuration() {
                     <>
                       <div className="w-full grid grid-cols-4 gap-4 flex-wrap items-center justify-around pt-20">
                         <Button
-                          className="col-span-2 h-14 flex items-center justify-around gap-x-3"
+                          className="col-span-2 h-14 flex items-center justify-center sm:justify-around gap-x-3"
                           onPress={() => {
                             setSelectedSection("color");
                           }}
                         >
-                          <Filters className="h-4 w-4" />
+                          <Filters className="h-4 w-4 hidden sm:flex" />
                           <span className="mx-2 w-14 text-sm sm:text-base">Colors</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 flex items-center justify-around gap-x-3"
+                          className="col-span-2 h-14 flex items-center justify-center sm:justify-around gap-x-3"
                           onPress={() => {
                             setSelectedSection("radius");
                           }}
                         >
-                          <Crop className="h-4 w-4" />
-                          <span className="mx-2 text-sm sm:text-base">Radius</span>{" "}
+                          <Crop className="h-4 w-4 hidden sm:flex" />
+                          <span className="mx-2 w-14 text-sm sm:text-base">Radius</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("borderWidths");
                           }}
                         >
-                          <CropMinimalistic className="h-4 w-4" />
+                          <CropMinimalistic className="h-4 w-4 hidden sm:flex" />
                           <span className="mx-2 w-14 text-sm sm:text-base">Border</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("opacity");
                           }}
                         >
-                          <RadialBlur className="h-4 w-4" />
+                          <RadialBlur className="h-4 w-4 hidden sm:flex" />
                           <span className="mx-2 w-14 text-sm sm:text-base">Opacity</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around  gap-x-3"
                           onPress={() => {
                             setSelectedSection("font");
                           }}
                         >
-                          <RadialBlur className="h-4 w-4" />
+                          <RadialBlur className="h-4 w-4 hidden sm:flex" />
                           <span className="mx-2 w-14 text-sm sm:text-base">Font</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                         <Button
-                          className="col-span-2 h-14 text-lg flex items-center justify-around  gap-x-3"
+                          className="col-span-2 h-14 text-lg flex items-center justify-center sm:justify-around gap-x-3"
                           onPress={() => {
                             setSelectedSection("scaling");
                           }}
                         >
-                          <ScalingIcon className="h-6 w-6" />
-                          <span className="mx-2 w-20 text-sm sm:text-base">Scaling</span>{" "}
+                          <ScalingIcon className="h-6 w-6 hidden sm:flex" />
+                          <span className="mx-2 w-14 text-sm sm:text-base">Scaling</span>{" "}
                           <ChevronIcon className="h-5 w-5 rotate-180" />
                         </Button>
                       </div>
