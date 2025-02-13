@@ -45,9 +45,16 @@ import {RadialBlur} from "@/components/icons/radial-blur";
 import {Scaling as ScalingIcon} from "@/components/icons/scaling";
 
 export default function Configuration() {
+  const {
+    config,
+    resetConfig,
+    setConfiguration,
+    templateTheme,
+    setTemplateTheme,
+    setRadiusValue,
+    setBorderWidthValue,
+  } = useThemeBuilder();
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
-  const {config, resetConfig, setConfiguration, templateTheme, setTemplateTheme} =
-    useThemeBuilder();
   const themeProps = useTheme();
   const theme = themeProps.theme as ThemeType;
   const prevTheme = usePrevious(theme);
@@ -85,6 +92,12 @@ export default function Configuration() {
       setTemplateTheme(template.name);
     };
   }, []);
+
+  useEffect(() => {
+    setRadiusValue(templateTheme === "elegant" ? "none" : "md");
+    setBorderWidthValue(templateTheme === "elegant" ? "thin" : "medium");
+  }, [templateTheme]);
+
   /**
    * Reset the theme to the default one.
    */
@@ -128,7 +141,7 @@ export default function Configuration() {
           <ScrollShadow className="py-1 scrollbar-hide" orientation="vertical">
             <SelectTemplate
               currentTheme={currentTheme}
-              name={selectedTemplate?.name ?? null}
+              name={selectedTemplate?.name ?? templateTheme}
               onChange={(template) => {
                 setConfiguration(template.value, theme, syncThemes);
                 setAllCssVars(template.value, theme);
@@ -226,7 +239,7 @@ export default function Configuration() {
                     <div key={template.name} className="flex flex-col items-center px-2">
                       <Button
                         className={clsx(
-                          "p-0 min-w-0 w-auto h-12 rounded-md gap-0",
+                          "p-0 min-w-0 w-auto h-12 border border-black/5 gap-0",
                           templateTheme === template.name ? "outline-2 outline-foreground-800" : "",
                         )}
                         onPress={() => {
@@ -240,8 +253,14 @@ export default function Configuration() {
                           className="h-full"
                           colors={
                             currentTheme === "dark"
-                              ? template.value.dark.baseColor
-                              : template.value.light.baseColor
+                              ? {
+                                  background: template.value.dark.layoutColor.background,
+                                  ...template.value.dark.baseColor,
+                                }
+                              : {
+                                  background: template.value.light.layoutColor.background,
+                                  ...template.value.light.baseColor,
+                                }
                           }
                           innerClassName="w-4"
                         />

@@ -47,13 +47,21 @@ export function SelectTemplate({name, onChange, currentTheme}: SelectTemplatePro
               "data-[hover=true]:bg-white text-black data-[hover=true]:text-black data-[selectable=true]:focus:bg-[#F4F4F5] data-[selectable=true]:focus:text-black",
             )}
             startContent={
-              <Swatch
-                colors={
-                  currentTheme === "dark"
-                    ? template.value.dark.baseColor
-                    : template.value.light.baseColor
-                }
-              />
+              <div className="border border-black/5">
+                <Swatch
+                  colors={
+                    currentTheme === "dark"
+                      ? {
+                          background: template.value.dark.layoutColor.background,
+                          ...template.value.dark.baseColor,
+                        }
+                      : {
+                          background: template.value.light.layoutColor.background,
+                          ...template.value.light.baseColor,
+                        }
+                  }
+                />
+              </div>
             }
             // @ts-ignore
             value={index}

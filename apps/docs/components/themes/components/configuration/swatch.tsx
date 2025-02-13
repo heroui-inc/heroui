@@ -3,7 +3,7 @@ import {clsx} from "@heroui/shared-utils";
 import {ConfigColors} from "../../types";
 
 interface SwatchProps {
-  colors: ConfigColors["baseColor"];
+  colors: {background: string} & ConfigColors["baseColor"];
   className?: string;
   innerClassName?: string;
 }
