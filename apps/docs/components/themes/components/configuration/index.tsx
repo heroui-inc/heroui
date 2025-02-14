@@ -133,12 +133,12 @@ export default function Configuration() {
             </Button>
           </div>
           <div className="h-9">
-            <ThemeSwitch />
+            <ThemeSwitch classNames={{wrapper: "dark:!text-default-500"}} />
           </div>
         </CardHeader>
         <Divider className="bg-default-200" />
-        <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-y-scroll pb-6 scrollbar-hide">
-          <ScrollShadow className="py-1 scrollbar-hide" orientation="vertical">
+        <CardBody className="flex flex-col p-4 px-6 h-[60vh] overflow-y-scroll scrollbar-hide">
+          <ScrollShadow className="pt-1 pb-6 scrollbar-hide" orientation="vertical">
             <SelectTemplate
               currentTheme={currentTheme}
               name={selectedTemplate?.name ?? templateTheme}
@@ -160,9 +160,9 @@ export default function Configuration() {
               />
               <ContentColors config={config} theme={theme} />
               <LayoutColors config={config} syncThemes={syncThemes} theme={theme} />
+              <Fonts />
               <Radiuses />
               <BorderWidths />
-              <Fonts />
               <Scaling />
               <DisableOpacity config={config} />
             </div>
@@ -173,7 +173,7 @@ export default function Configuration() {
           <Button fullWidth className="text-white" color="primary" onPress={handleCopy}>
             Copy Theme
           </Button>
-          <div className="text-tiny mt-2 text-default-500">
+          <div className="text-tiny mt-2 text-default-600">
             Learn how to setup your theme{" "}
             <Link
               className="text-default-800 text-tiny underline cursor-pointer"
@@ -224,7 +224,7 @@ export default function Configuration() {
           <DrawerContent className="backdrop-blur-2xl dark:bg-[#18181B] bg-[#ffffff] max-h-[56rem]">
             <Button
               isIconOnly
-              className="group fixed top-0 right-0 dark:bg-white/60 bg-[#d4d4d8] data-[hover=true]:bg-black/30 dark:data-[hover=true]:bg-white/80 z-50 min-w-8 w-8 h-8 rounded-full m-1"
+              className="group fixed top-0 right-0 dark:bg-white/10 bg-[#d4d4d8] data-[hover=true]:bg-black/30 dark:data-[hover=true]:bg-white/20 z-50 min-w-8 w-8 h-8 rounded-full m-1"
               onPress={() => {
                 setIsDrawerOpen(false);
                 setSelectedSection("none");

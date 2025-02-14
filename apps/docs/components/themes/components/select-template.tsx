@@ -47,7 +47,7 @@ export function SelectTemplate({name, onChange, currentTheme}: SelectTemplatePro
               "data-[hover=true]:bg-white text-black data-[hover=true]:text-black data-[selectable=true]:focus:bg-[#F4F4F5] data-[selectable=true]:focus:text-black",
             )}
             startContent={
-              <div className="border border-black/5">
+              <div className="border border-black/5 dark:border-white/5">
                 <Swatch
                   colors={
                     currentTheme === "dark"

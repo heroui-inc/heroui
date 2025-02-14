@@ -27,7 +27,6 @@ export function LayoutColors({config, syncThemes, theme}: OtherColorsProps) {
       <Tooltip content="background">
         <div>
           <ColorPicker
-            isBordered
             hexColor={config[theme].layoutColor.background}
             type="background"
             onChange={(hexColor) => setCssOtherColor("background", hexColor)}

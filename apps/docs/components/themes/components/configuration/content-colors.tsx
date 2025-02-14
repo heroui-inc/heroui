@@ -27,7 +27,6 @@ export function ContentColors({config, theme}: BaseColorsProps) {
       <Tooltip content={"content-1"}>
         <div>
           <ColorPicker
-            isBordered
             hexColor={config[theme].contentColor.content1}
             type="content1"
             onChange={(hexColor) =>

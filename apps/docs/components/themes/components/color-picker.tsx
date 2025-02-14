@@ -14,16 +14,9 @@ interface ColorPickerProps {
   type: ColorPickerType;
   onChange: (hexColor: string) => void;
   onClose: (hexColor: string) => void;
-  isBordered?: boolean;
 }
 
-export function ColorPicker({
-  hexColor,
-  type,
-  onChange,
-  onClose,
-  isBordered = false,
-}: ColorPickerProps) {
+export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProps) {
   const [selectedColor, setSelectedColor] = useState(hexColor);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +51,7 @@ export function ColorPicker({
             className={clsx(
               getColor(type),
               "rounded-lg min-w-9 w-9 h-9",
-              isBordered && "border border-black/10 dark:border-white/10",
+              "border border-black/10 dark:border-white/10",
             )}
             size="sm"
             style={{
