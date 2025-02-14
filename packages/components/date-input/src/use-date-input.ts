@@ -204,9 +204,8 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
         ...variantProps,
         disableAnimation,
         labelPlacement,
-        className,
       }),
-    [objectToDeps(variantProps), disableAnimation, labelPlacement, className],
+    [objectToDeps(variantProps), disableAnimation, labelPlacement],
   );
 
   const getLabelProps: PropGetter = (props) => {

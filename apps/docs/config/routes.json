@@ -92,7 +92,7 @@
         {
           "key": "laravel",
           "title": "Laravel",
-          "keywords": "laravel, nextui",
+          "keywords": "laravel, heroui",
           "path": "/docs/frameworks/laravel.mdx",
           "newPost": true
         }
@@ -432,7 +432,7 @@
           "title": "Toast",
           "keywords": "toast, notification, message",
           "path": "/docs/components/toast.mdx",
-          "comingSoon": true
+          "newPost": true
         },
         {
           "key": "textarea",
