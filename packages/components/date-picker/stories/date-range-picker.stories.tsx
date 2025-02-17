@@ -799,3 +799,11 @@ export const CustomStyles = {
     },
   },
 };
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
+  },
+};

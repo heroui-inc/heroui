@@ -693,3 +693,11 @@ export const WithDateInputClassNames = {
     description: "Please enter your birth date",
   },
 };
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
+  },
+};
