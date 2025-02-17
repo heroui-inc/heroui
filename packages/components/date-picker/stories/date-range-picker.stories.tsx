@@ -71,6 +71,10 @@ export default {
       },
       options: ["aria", "native"],
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
   decorators: [
     (Story) => (

@@ -44,6 +44,10 @@ export default {
         type: "boolean",
       },
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
 } as Meta<typeof Calendar>;
 
