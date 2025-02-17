@@ -1211,6 +1211,9 @@ importers:
       '@heroui/button':
         specifier: workspace:*
         version: link:../button
+      '@heroui/image':
+        specifier: workspace:*
+        version: link:../image
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils

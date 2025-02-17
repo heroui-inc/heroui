@@ -44,6 +44,7 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/button": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
+    "@heroui/image": "workspace:*",
     "embla-carousel-react": "8.5.2"
   },
   "devDependencies": {

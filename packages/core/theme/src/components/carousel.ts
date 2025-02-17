@@ -1,142 +1,49 @@
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "../utils/tv";
-import {groupDataFocusVisibleClasses, hiddenInputClasses} from "../utils";
 
 const carousel = tv({
   slots: {
-    base: "group relative max-w-fit inline-flex items-center justify-start cursor-pointer touch-none tap-highlight-transparent select-none",
-    wrapper: [
-      "px-1",
-      "relative",
-      "inline-flex",
-      "items-center",
-      "justify-start",
-      "flex-shrink-0",
-      "overflow-hidden",
-      "bg-default-200",
-      "rounded-full",
-      // focus ring
-      ...groupDataFocusVisibleClasses,
-    ],
-    thumb: [
-      "z-10",
-      "flex",
-      "items-center",
-      "justify-center",
-      "bg-white",
-      "shadow-small",
-      "rounded-full",
-      "origin-right",
-      "pointer-events-none",
-    ],
-    hiddenInput: hiddenInputClasses,
-    startContent: "z-0 absolute start-1.5 text-current",
-    endContent: "z-0 absolute end-1.5 text-default-600",
-    thumbIcon: "text-black",
-    label: "relative text-foreground select-none ms-2",
+    base: "w-fit flex flex-col gap-2 overflow-hidden",
+    wrapper: "relative",
+    nextSlideButton:
+      "z-10 min-w-0 min-h-0 w-auto h-auto px-2.5 py-2.5 absolute top-1/2 -translate-y-1/2 right-2",
+    prevSlideButton:
+      "z-10 min-w-0 min-h-0 w-auto h-auto px-2.5 py-2.5 absolute top-1/2 -translate-y-1/2 left-2",
+    slideControlIcon: "w-5 h-5",
+    slideContainer: "relative overflow-hidden w-96 h-96 rounded-lg",
+    slideWrapper: "flex h-full gap-2",
+    indicatorWrapper: "absolute left-1/2 -translate-x-1/2 bottom-3 flex gap-1",
+    indicator:
+      "min-w-0 flex-none w-2 h-2 border border-default-500 rounded-full bg-default-200 data-[selected=true]:bg-default-500",
+    thumbnailContainer: "overflow-hidden w-96 px-2",
+    thumbnailWrapper: "flex gap-x-3",
   },
   variants: {
     color: {
-      default: {
-        wrapper: [
-          "group-data-[selected=true]:bg-default-400",
-          "group-data-[selected=true]:text-default-foreground",
-        ],
-      },
-      primary: {
-        wrapper: [
-          "group-data-[selected=true]:bg-primary",
-          "group-data-[selected=true]:text-primary-foreground",
-        ],
-      },
-      secondary: {
-        wrapper: [
-          "group-data-[selected=true]:bg-secondary",
-          "group-data-[selected=true]:text-secondary-foreground",
-        ],
-      },
-      success: {
-        wrapper: [
-          "group-data-[selected=true]:bg-success",
-          "group-data-[selected=true]:text-success-foreground",
-        ],
-      },
-      warning: {
-        wrapper: [
-          "group-data-[selected=true]:bg-warning",
-          "group-data-[selected=true]:text-warning-foreground",
-        ],
-      },
-      danger: {
-        wrapper: [
-          "group-data-[selected=true]:bg-danger",
-          "data-[selected=true]:text-danger-foreground",
-        ],
-      },
+      default: {},
+      primary: {},
+      secondary: {},
+      success: {},
+      warning: {},
+      danger: {},
     },
     size: {
-      sm: {
-        wrapper: "w-10 h-6",
-        thumb: [
-          "w-4 h-4 text-tiny",
-          //selected
-          "group-data-[selected=true]:ms-4",
-        ],
-        endContent: "text-tiny",
-        startContent: "text-tiny",
-        label: "text-small",
-      },
-      md: {
-        wrapper: "w-12 h-7",
-        thumb: [
-          "w-5 h-5 text-small",
-          //selected
-          "group-data-[selected=true]:ms-5",
-        ],
-        endContent: "text-small",
-        startContent: "text-small",
-        label: "text-medium",
-      },
-      lg: {
-        wrapper: "w-14 h-8",
-        thumb: [
-          "w-6 h-6 text-medium",
-          //selected
-          "group-data-[selected=true]:ms-6",
-        ],
-        endContent: "text-medium",
-        startContent: "text-medium",
-        label: "text-large",
-      },
+      sm: {},
+      md: {},
+      lg: {},
     },
     isDisabled: {
       true: {
         base: "opacity-disabled pointer-events-none",
       },
     },
-    disableAnimation: {
-      true: {
-        wrapper: "transition-none",
-        thumb: "transition-none",
-      },
-      false: {
-        wrapper: "transition-background",
-        thumb: "transition-all",
-        startContent: [
-          "opacity-0",
-          "scale-50",
-          "transition-transform-opacity",
-          "group-data-[selected=true]:scale-100",
-          "group-data-[selected=true]:opacity-100",
-        ],
-        endContent: [
-          "opacity-100",
-          "transition-transform-opacity",
-          "group-data-[selected=true]:translate-x-3",
-          "group-data-[selected=true]:opacity-0",
-        ],
-      },
+    radius: {
+      none: "",
+      sm: "",
+      md: "",
+      lg: "",
+      full: "",
     },
   },
   defaultVariants: {
@@ -144,32 +51,27 @@ const carousel = tv({
     size: "md",
     isDisabled: false,
   },
-  compoundVariants: [
-    {
-      disableAnimation: false,
-      size: "sm",
-      class: {
-        thumb: ["group-data-[pressed=true]:w-5", "group-data-[selected]:group-data-[pressed]:ml-3"],
-      },
-    },
-    {
-      disableAnimation: false,
-      size: "md",
-      class: {
-        thumb: ["group-data-[pressed=true]:w-6", "group-data-[selected]:group-data-[pressed]:ml-4"],
-      },
-    },
-    {
-      disableAnimation: false,
-      size: "lg",
-      class: {
-        thumb: ["group-data-[pressed=true]:w-7", "group-data-[selected]:group-data-[pressed]:ml-5"],
-      },
-    },
-  ],
+});
+
+const carouselItem = tv({
+  slots: {
+    base: "min-w-0 flex-none w-full h-full rounded-lg overflow-hidden",
+  },
+});
+
+const carouselThumb = tv({
+  slots: {
+    base: [
+      "min-w-0 flex-none w-16 h-16 my-2 rounded-xl bg-background",
+      "outline outline-default-200 data-[selected=true]:outline-none",
+      "data-[selected=true]:ring-2 data-[selected=true]:ring-offset-1",
+      "data-[selected=true]:ring-offset-background data-[selected=true]:ring-primary",
+      "transition-ring duration-300",
+    ],
+  },
 });
 
 export type CarouselVariantProps = VariantProps<typeof carousel>;
 export type CarouselSlots = keyof ReturnType<typeof carousel>;
 
-export {carousel};
+export {carousel, carouselItem, carouselThumb};
