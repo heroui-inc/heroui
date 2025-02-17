@@ -117,6 +117,12 @@ By default, the Calendar displays a single month. The `visibleMonths` prop allow
 
 <CodeDemo title="Visible Months" files={calendarContent.visibleMonths} />
 
+### Custom first day of week
+
+By default, the first day of the week is automatically set based on the current locale. This can be changed by setting the `firstDayOfWeek` prop to `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, or `'sat'`.
+
+<CodeDemo title="Visible Months" files={calendarContent.firstDayOfWeek} />
+
 ### Page Behaviour
 
 By default, when pressing the next or previous buttons, pagination will advance by the `visibleMonths` value. This behavior can be changed to page by single months instead, by setting `pageBehavior` to `single`.
