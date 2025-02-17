@@ -414,3 +414,11 @@ export const Presets = {
     ...defaultProps,
   },
 };
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
+  },
+};
