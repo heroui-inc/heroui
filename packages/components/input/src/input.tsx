@@ -83,7 +83,7 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
       return (
         <div {...getMainWrapperProps()}>
           <div {...getInputWrapperProps()}>
-            {!isOutsideLeft && !isOutsideTop ? labelContent : null!}
+            {!isOutsideLeft && !isOutsideTop ? labelContent : null}
             {innerWrapper}
           </div>
           {helperWrapper}
