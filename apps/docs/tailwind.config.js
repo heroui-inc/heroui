@@ -348,7 +348,15 @@ module.exports = {
       maxWidth: {
         "8xl": "90rem", // 1440px
       },
-    },
+      utilities: {
+        '.scrollbar-hide': {
+          'scrollbar-width': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }
+      },
+    }
   },
   plugins: [
     heroui({

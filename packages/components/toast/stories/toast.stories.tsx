@@ -13,6 +13,10 @@ export default {
       control: {type: "select"},
       options: ["flat", "bordered", "solid"],
     },
+    severity: {
+      control: {type: "select"},
+      options: ["default", "primary", "secondary", "success", "warning", "danger"],
+    },
     color: {
       control: {type: "select"},
       options: ["default", "foreground", "primary", "secondary", "success", "warning", "danger"],
@@ -37,12 +41,12 @@ export default {
     placement: {
       control: {type: "select"},
       options: [
-        "right-bottom",
-        "left-bottom",
-        "center-bottom",
-        "right-top",
-        "left-top",
-        "center-top",
+        "bottom-right",
+        "bottom-left",
+        "bottom-center",
+        "top-right",
+        "top-left",
+        "top-center",
       ],
     },
     hideCloseButton: {
@@ -192,7 +196,7 @@ const PromiseToastTemplate = (args: ToastProps) => {
             addToast({
               title: "Toast Title",
               description: "Toast Displayed Successfully",
-              promise: new Promise((resolve) => setTimeout(resolve, 4000)),
+              promise: new Promise((resolve) => setTimeout(resolve, 5000)),
               ...args,
             });
           }}

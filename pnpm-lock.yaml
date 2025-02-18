@@ -379,6 +379,9 @@ importers:
       '@tanstack/react-virtual':
         specifier: 3.11.3
         version: 3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@types/lodash':
+        specifier: ^4.17.15
+        version: 4.17.15
       '@vercel/analytics':
         specifier: ^1.4.1
         version: 1.4.1(next@14.3.0-canary.43(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react@18.3.0)
@@ -415,6 +418,9 @@ importers:
       hast-util-to-html:
         specifier: 9.0.3
         version: 9.0.3
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       marked:
         specifier: ^5.1.0
         version: 5.1.2
@@ -454,6 +460,9 @@ importers:
       react:
         specifier: 18.3.0
         version: 18.3.0
+      react-colorful:
+        specifier: ^5.6.1
+        version: 5.6.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react-dom:
         specifier: 18.3.0
         version: 18.3.0(react@18.3.0)
@@ -520,6 +529,9 @@ importers:
       usehooks-ts:
         specifier: 3.1.0
         version: 3.1.0(react@18.3.0)
+      values.js:
+        specifier: ^2.1.1
+        version: 2.1.1
       zustand:
         specifier: 5.0.1
         version: 5.0.1(@types/react@18.2.8)(react@18.3.0)(use-sync-external-store@1.4.0(react@18.3.0))
@@ -2211,6 +2223,76 @@ importers:
         specifier: 0.13.0
         version: 0.13.0(react@18.3.0)
 
+  packages/components/number-input:
+    dependencies:
+      '@heroui/button':
+        specifier: workspace:*
+        version: link:../button
+      '@heroui/form':
+        specifier: workspace:*
+        version: link:../form
+      '@heroui/react-utils':
+        specifier: workspace:*
+        version: link:../../utilities/react-utils
+      '@heroui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@heroui/shared-utils':
+        specifier: workspace:*
+        version: link:../../utilities/shared-utils
+      '@heroui/use-safe-layout-effect':
+        specifier: workspace:*
+        version: link:../../hooks/use-safe-layout-effect
+      '@react-aria/focus':
+        specifier: 3.19.1
+        version: 3.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/i18n':
+        specifier: 3.12.5
+        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/interactions':
+        specifier: 3.23.0
+        version: 3.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/numberfield':
+        specifier: 3.11.10
+        version: 3.11.10(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/utils':
+        specifier: 3.27.0
+        version: 3.27.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-stately/numberfield':
+        specifier: 3.9.9
+        version: 3.9.9(react@18.3.0)
+      '@react-stately/utils':
+        specifier: 3.10.5
+        version: 3.10.5(react@18.3.0)
+      '@react-types/button':
+        specifier: 3.10.2
+        version: 3.10.2(react@18.3.0)
+      '@react-types/numberfield':
+        specifier: 3.8.8
+        version: 3.8.8(react@18.3.0)
+      '@react-types/shared':
+        specifier: 3.27.0
+        version: 3.27.0(react@18.3.0)
+    devDependencies:
+      '@heroui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@heroui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 18.3.0
+        version: 18.3.0
+      react-dom:
+        specifier: 18.3.0
+        version: 18.3.0(react@18.3.0)
+      react-hook-form:
+        specifier: ^7.51.3
+        version: 7.54.2(react@18.3.0)
+
   packages/components/pagination:
     dependencies:
       '@heroui/react-utils':
@@ -3278,6 +3360,9 @@ importers:
       '@heroui/navbar':
         specifier: workspace:*
         version: link:../../components/navbar
+      '@heroui/number-input':
+        specifier: workspace:*
+        version: link:../../components/number-input
       '@heroui/pagination':
         specifier: workspace:*
         version: link:../../components/pagination
@@ -7005,6 +7090,12 @@ packages:
       react: 18.3.0
       react-dom: 18.3.0
 
+  '@react-aria/numberfield@3.11.10':
+    resolution: {integrity: sha512-bYbTfO9NbAKMFOfEGGs+lvlxk0I9L0lU3WD2PFQZWdaoBz9TCkL+vK0fJk1zsuKaVjeGsmHP9VesBPRmaP0MiA==}
+    peerDependencies:
+      react: 18.3.0
+      react-dom: 18.3.0
+
   '@react-aria/overlays@3.25.0':
     resolution: {integrity: sha512-UEqJJ4duowrD1JvwXpPZreBuK79pbyNjNxFUVpFSskpGEJe3oCWwsSDKz7P1O7xbx5OYp+rDiY8fk/sE5rkaKw==}
     peerDependencies:
@@ -7183,6 +7274,11 @@ packages:
     peerDependencies:
       react: 18.3.0
 
+  '@react-stately/numberfield@3.9.9':
+    resolution: {integrity: sha512-hZsLiGGHTHmffjFymbH1qVmA633rU2GNjMFQTuSsN4lqqaP8fgxngd5pPCoTCUFEkUgWjdHenw+ZFByw8lIE+g==}
+    peerDependencies:
+      react: 18.3.0
+
   '@react-stately/overlays@3.6.13':
     resolution: {integrity: sha512-WsU85Gf/b+HbWsnnYw7P/Ila3wD+C37Uk/WbU4/fHgJ26IEOWsPE6wlul8j54NZ1PnLNhV9Fn+Kffi+PaJMQXQ==}
     peerDependencies:
@@ -7311,6 +7407,11 @@ packages:
 
   '@react-types/menu@3.9.14':
     resolution: {integrity: sha512-RJW/S8IPwbRuohJ/A9HJ7W8QaAY816tm7Nv6+H/TLXG76zu2AS5vEgq+0TcCAWvJJwUdLDpJWJMlo0iIoIBtcg==}
+    peerDependencies:
+      react: 18.3.0
+
+  '@react-types/numberfield@3.8.8':
+    resolution: {integrity: sha512-825JPppxDaWh0Zxb0Q+wSslgRQYOtQPCAuhszPuWEy6d2F/M+hLR+qQqvQm9+LfMbdwiTg6QK5wxdWFCp2t7jw==}
     peerDependencies:
       react: 18.3.0
 
@@ -8053,6 +8154,9 @@ packages:
 
   '@types/lodash@4.17.14':
     resolution: {integrity: sha512-jsxagdikDiDBeIRaPYtArcT8my4tN1og7MtMRquFT3XNA6axxyHDRUemqDz/taRDdOUn0GnGHRCuff4q48sW9A==}
+
+  '@types/lodash@4.17.15':
+    resolution: {integrity: sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw==}
 
   '@types/marked@5.0.2':
     resolution: {integrity: sha512-OucS4KMHhFzhz27KxmWg7J+kIYqyqoW5kdIEI319hqARQQUTqhao3M/F+uFnDXD0Rg72iDDZxZNxq5gvctmLlg==}
@@ -10955,6 +11059,10 @@ packages:
   header-case@2.0.4:
     resolution: {integrity: sha512-H/vuk5TEEVZwrR0lp2zed9OCo1uAILMlx0JEMgC26rzyJJ3N1v6XkwHHXJQdR2doSjcGPM6OKPYoJgf0plJ11Q==}
 
+  hex-rgb@4.3.0:
+    resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
+    engines: {node: '>=6'}
+
   homedir-polyfill@1.0.3:
     resolution: {integrity: sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA==}
     engines: {node: '>=0.10.0'}
@@ -12530,6 +12638,9 @@ packages:
   mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
 
+  mix-css-color@0.2.0:
+    resolution: {integrity: sha512-mZugANySFPE21tjELbQddhC6HAZNzqp7gDxmW8fJFURSWtJ0nuXU26dyrb/1AR6ZYxdEAtW2bbWT9QnRtI6Jzg==}
+
   mixin-deep@1.3.2:
     resolution: {integrity: sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==}
     engines: {node: '>=0.10.0'}
@@ -13010,6 +13121,12 @@ packages:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
 
+  parse-css-color@0.1.2:
+    resolution: {integrity: sha512-z7v/tf0edGsnlm9VONQtH+u/YVrdUqZXrSBzqM13scef8Abl2VyZfYsZaJoyb/AyY4SIxtoJChSQ4MURHfY3Sg==}
+
+  parse-css-color@0.2.0:
+    resolution: {integrity: sha512-uWQyuOe+SMxnUgHf4mjdn2C/YzA1tOW+uU8Z2UiV3qnao9ZFnvYeyzeoU7TNv8NLIJo0PiRkETW48QNJZ4IA9g==}
+
   parse-entities@2.0.0:
     resolution: {integrity: sha512-kkywGpCcRYhqQIchaWqZ875wzpS/bMKhz5HnN3p7wveJTkTtyAB/AlnS0f8DFSqYW1T82t6yEAkEcB+A1I3MbQ==}
 
@@ -13415,6 +13532,9 @@ packages:
     resolution: {integrity: sha512-FLpr4flz5xZTSJxSeaheeMKN/EDzMdK7b8PTOC6a5PYFKTucWbdqjgqaEyH0shFiSJrVB1+Qqi4Tk19ccU6Aug==}
     engines: {node: '>=12.20'}
 
+  pure-color@1.3.0:
+    resolution: {integrity: sha512-QFADYnsVoBMw1srW7OVKEYjG+MbIa49s54w1MA1EDY6r2r/sTcKKYqRX1f4GYvnXP7eN/Pe9HFcX+hwzmrXRHA==}
+
   pure-rand@6.1.0:
     resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
 
@@ -13458,6 +13578,12 @@ packages:
   rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
+
+  react-colorful@5.6.1:
+    resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
+    peerDependencies:
+      react: 18.3.0
+      react-dom: 18.3.0
 
   react-devtools-inline@4.4.0:
     resolution: {integrity: sha512-ES0GolSrKO8wsKbsEkVeiR/ZAaHQTY4zDh1UW8DImVmm8oaGLl3ijJDvSGe+qDRKPZdPRnDtWWnSvvrgxXdThQ==}
@@ -15141,6 +15267,9 @@ packages:
   validate-npm-package-name@5.0.1:
     resolution: {integrity: sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+
+  values.js@2.1.1:
+    resolution: {integrity: sha512-pI6dKW3kv7BR/WzS0NvIuxegeH1r8gk8y6BuXrIYGVccynmUsUZPhSpTfkt39VBHyciD7WZi+lM+7Zyamowzeg==}
 
   vfile-location@5.0.3:
     resolution: {integrity: sha512-5yXvWDEgqeiYiBe1lbxYF7UMAIm/IcopxMHrMQDq3nvKcjPKIhZklUKL+AE7J7uApI4kwe2snsK+eI6UTj9EHg==}
@@ -19226,6 +19355,22 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
+  '@react-aria/numberfield@3.11.10(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
+    dependencies:
+      '@react-aria/i18n': 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/interactions': 3.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/spinbutton': 3.6.11(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/textfield': 3.16.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/utils': 3.27.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-stately/form': 3.1.1(react@18.3.0)
+      '@react-stately/numberfield': 3.9.9(react@18.3.0)
+      '@react-types/button': 3.10.2(react@18.3.0)
+      '@react-types/numberfield': 3.8.8(react@18.3.0)
+      '@react-types/shared': 3.27.0(react@18.3.0)
+      '@swc/helpers': 0.5.15
+      react: 18.3.0
+      react-dom: 18.3.0(react@18.3.0)
+
   '@react-aria/overlays@3.25.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
       '@react-aria/focus': 3.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -19577,6 +19722,15 @@ snapshots:
       '@swc/helpers': 0.5.15
       react: 18.3.0
 
+  '@react-stately/numberfield@3.9.9(react@18.3.0)':
+    dependencies:
+      '@internationalized/number': 3.6.0
+      '@react-stately/form': 3.1.1(react@18.3.0)
+      '@react-stately/utils': 3.10.5(react@18.3.0)
+      '@react-types/numberfield': 3.8.8(react@18.3.0)
+      '@swc/helpers': 0.5.15
+      react: 18.3.0
+
   '@react-stately/overlays@3.6.13(react@18.3.0)':
     dependencies:
       '@react-stately/utils': 3.10.5(react@18.3.0)
@@ -19752,6 +19906,11 @@ snapshots:
   '@react-types/menu@3.9.14(react@18.3.0)':
     dependencies:
       '@react-types/overlays': 3.8.12(react@18.3.0)
+      '@react-types/shared': 3.27.0(react@18.3.0)
+      react: 18.3.0
+
+  '@react-types/numberfield@3.8.8(react@18.3.0)':
+    dependencies:
       '@react-types/shared': 3.27.0(react@18.3.0)
       react: 18.3.0
 
@@ -20589,6 +20748,8 @@ snapshots:
       '@types/lodash': 4.17.14
 
   '@types/lodash@4.17.14': {}
+
+  '@types/lodash@4.17.15': {}
 
   '@types/marked@5.0.2': {}
 
@@ -24124,6 +24285,8 @@ snapshots:
       capital-case: 1.0.4
       tslib: 2.8.1
 
+  hex-rgb@4.3.0: {}
+
   homedir-polyfill@1.0.3:
     dependencies:
       parse-passwd: 1.0.0
@@ -26215,6 +26378,11 @@ snapshots:
 
   mitt@3.0.1: {}
 
+  mix-css-color@0.2.0:
+    dependencies:
+      parse-css-color: 0.1.2
+      pure-color: 1.3.0
+
   mixin-deep@1.3.2:
     dependencies:
       for-in: 1.0.2
@@ -26867,6 +27035,16 @@ snapshots:
     dependencies:
       callsites: 3.1.0
 
+  parse-css-color@0.1.2:
+    dependencies:
+      color-name: 1.1.4
+      hex-rgb: 4.3.0
+
+  parse-css-color@0.2.0:
+    dependencies:
+      color-name: 1.1.4
+      hex-rgb: 4.3.0
+
   parse-entities@2.0.0:
     dependencies:
       character-entities: 1.2.4
@@ -27310,6 +27488,8 @@ snapshots:
     dependencies:
       escape-goat: 4.0.0
 
+  pure-color@1.3.0: {}
+
   pure-rand@6.1.0: {}
 
   querystring@0.2.0: {}
@@ -27351,6 +27531,11 @@ snapshots:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
+
+  react-colorful@5.6.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+    dependencies:
+      react: 18.3.0
+      react-dom: 18.3.0(react@18.3.0)
 
   react-devtools-inline@4.4.0:
     dependencies:
@@ -29435,6 +29620,12 @@ snapshots:
       spdx-expression-parse: 3.0.1
 
   validate-npm-package-name@5.0.1: {}
+
+  values.js@2.1.1:
+    dependencies:
+      mix-css-color: 0.2.0
+      parse-css-color: 0.2.0
+      pure-color: 1.3.0
 
   vfile-location@5.0.3:
     dependencies:

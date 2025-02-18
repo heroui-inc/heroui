@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0"
+    "@heroui/theme": ">=2.4.6"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

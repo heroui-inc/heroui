@@ -127,7 +127,7 @@ describe("Toast", () => {
   it("should work with placement", async () => {
     const wrapper = render(
       <>
-        <ToastProvider placement="left-bottom" />
+        <ToastProvider placement="bottom-left" />
         <button
           data-testid="button"
           onClick={() => {
@@ -144,7 +144,7 @@ describe("Toast", () => {
 
     const region = wrapper.getByRole("region");
 
-    expect(region).toHaveAttribute("data-placement", "left-bottom");
+    expect(region).toHaveAttribute("data-placement", "bottom-left");
   });
 
   it("should have loading-icon when promise prop is passed.", async () => {

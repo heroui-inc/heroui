@@ -284,7 +284,7 @@ Toast has the following slots:
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<\"base\" | \"content\" | \"title\" | \"description\" | \"icon\" | \"loadingIcon\" | \"progressTrack\" | \"progressIndicator\ | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
+      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingIcon\" | \"progressTrack\" | \"progressIndicator\ | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
       description: "Allows to set custom class names for the toast slots.",
       default: "-"
     }
@@ -303,9 +303,15 @@ Toast has the following slots:
     },
     {
       attribute: "placement", 
-      type: "right-bottom" | "left-bottom" | "center-bottom" | "right-top" | "left-top" | "center-top",
+      type: "bottom-right" | "bottom-left" | "bottom-center" | "top-right" | "top-left" | "top-center",
       description: "The placement of the toast.",
-      default: "right-bottom"
+      default: "bottom-right"
+    },
+    {
+      attribute: "severity", 
+      type: "default | primary | secondary | success | warning | danger",
+      description: "The severity of the toast. This changes the icon of the toast without having to change the color.",
+      default: "default"
     },
     {
       attribute: "disableAnimation", 
