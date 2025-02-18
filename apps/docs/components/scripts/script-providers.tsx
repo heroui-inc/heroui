@@ -1,15 +1,38 @@
+"use client";
+
 import * as React from "react";
 import Script from "next/script";
+import { usePathname } from "next/navigation";
+
+export function ScriptProviders({ isKapaEnabled = true }: { isKapaEnabled?: boolean }) {
+  const pathname = usePathname();
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  React.useEffect(() => {
+    function hideKapa() {
+    const kapaElements = document.querySelectorAll('[id^="kapa-"]');
+    const display = pathname === "/docs/components/toast" ? "none" : "block";
 
 
-export function ScriptProviders({isKapaEnabled = true}: {isKapaEnabled?: boolean}) {
-  if (!isKapaEnabled) return null;
+      kapaElements.forEach((element) => (element as HTMLElement).style.display = display);
+    }
+
+    setTimeout(() => {
+      hideKapa();
+    }, 500);
+  }, [pathname, isMounted]);
+
+  if (!isKapaEnabled) {
+    return null;
+  }
 
   return (
-    <>
       <Script
         defer
-        data-button-position-left="20px"
         data-modal-disclaimer="This is a custom LLM for HeroUI with access to all developer docs (heroui.com/docs) and GitHub Issues and PRs (github.com/heroui-inc/heroui)."
         data-modal-example-questions="How do I install for Next.js?,How do I customize primary color?"
         data-project-color="#000000"
@@ -19,6 +42,5 @@ export function ScriptProviders({isKapaEnabled = true}: {isKapaEnabled?: boolean
         src="https://widget.kapa.ai/kapa-widget.bundle.js"
         strategy="afterInteractive"
       />
-    </>
   );
 }

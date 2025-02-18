@@ -38,7 +38,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.7"
+    "@heroui/theme": ">=2.4.6"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",

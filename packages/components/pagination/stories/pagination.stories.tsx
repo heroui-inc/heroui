@@ -3,6 +3,7 @@ import {Meta} from "@storybook/react";
 import {button, pagination} from "@heroui/theme";
 import {cn} from "@heroui/theme";
 import {ChevronIcon} from "@heroui/shared-icons";
+import {useLocale} from "@react-aria/i18n";
 
 import {Pagination, PaginationItemRenderProps, PaginationItemType, usePagination} from "../src";
 
@@ -138,6 +139,10 @@ export const Controlled = () => {
 };
 
 export const CustomItems = () => {
+  const {direction} = useLocale();
+
+  const isRTL = direction === "rtl";
+
   const renderItem = ({
     ref,
     value,
@@ -150,7 +155,7 @@ export const CustomItems = () => {
     if (value === PaginationItemType.NEXT) {
       return (
         <button className={cn(className, "bg-default-200")} onClick={onNext}>
-          <ChevronIcon className="rotate-180" />
+          <ChevronIcon className={cn({"rotate-180": !isRTL})} />
         </button>
       );
     }
@@ -158,7 +163,7 @@ export const CustomItems = () => {
     if (value === PaginationItemType.PREV) {
       return (
         <button className={cn(className, "bg-default-200")} onClick={onPrevious}>
-          <ChevronIcon />
+          <ChevronIcon className={cn({"rotate-180": isRTL})} />
         </button>
       );
     }
@@ -217,6 +222,10 @@ export const CustomWithHooks = () => {
     boundaries: 10,
   });
 
+  const {direction} = useLocale();
+
+  const isRTL = direction === "rtl";
+
   return (
     <div className="flex flex-col gap-2">
       <p>Active page: {activePage}</p>
@@ -226,7 +235,7 @@ export const CustomWithHooks = () => {
             return (
               <li key={page} aria-label="next page" className="w-4 h-4">
                 <button className="w-full h-full bg-default-200 rounded-full" onClick={onNext}>
-                  <ChevronIcon className="rotate-180" />
+                  <ChevronIcon className={cn({"rotate-180": !isRTL})} />
                 </button>
               </li>
             );
@@ -236,7 +245,7 @@ export const CustomWithHooks = () => {
             return (
               <li key={page} aria-label="previous page" className="w-4 h-4">
                 <button className="w-full h-full bg-default-200 rounded-full" onClick={onPrevious}>
-                  <ChevronIcon />
+                  <ChevronIcon className={cn({"rotate-180": isRTL})} />
                 </button>
               </li>
             );

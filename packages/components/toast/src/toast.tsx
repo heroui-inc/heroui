@@ -18,6 +18,7 @@ const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 export interface ToastProps extends UseToastProps {}
 
 const iconMap = {
+  default: InfoFilledIcon,
   primary: InfoFilledIcon,
   secondary: InfoFilledIcon,
   success: SuccessIcon,
@@ -27,6 +28,7 @@ const iconMap = {
 
 const Toast = forwardRef<"div", ToastProps>((props, ref) => {
   const {
+    severity,
     Component,
     icon,
     loadingIcon,
@@ -39,6 +41,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     progressBarRef,
     classNames,
     slots,
+    getWrapperProps,
     isProgressBarVisible,
     getToastProps,
     getContentProps,
@@ -56,7 +59,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
   });
 
   const customIcon = icon && isValidElement(icon) ? cloneElement(icon, getIconProps()) : null;
-  const IconComponent = iconMap[color] || iconMap.primary;
+  const IconComponent = severity ? iconMap[severity] : iconMap[color] || iconMap.default;
   const customLoadingIcon =
     loadingIcon && isValidElement(loadingIcon)
       ? cloneElement(loadingIcon, getLoadingIconProps())
@@ -76,15 +79,15 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
 
   const toastContent = (
     <Component ref={domRef} {...getToastProps()}>
-      <main {...getContentProps()}>
+      <div {...getContentProps()}>
         {hideIcon && !isLoading
           ? null
           : loadingIconComponent || customIcon || <IconComponent {...getIconProps()} />}
-        <div>
+        <div {...getWrapperProps()}>
           <div {...getTitleProps()}>{props.toast.content.title}</div>
           <div {...getDescriptionProps()}>{props.toast.content.description}</div>
         </div>
-      </main>
+      </div>
       {isProgressBarVisible && (
         <div className={slots.progressTrack({class: classNames?.progressTrack})}>
           <div
