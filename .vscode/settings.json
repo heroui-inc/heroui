@@ -5,8 +5,9 @@
     "source.fixAll.eslint": "explicit"
   },
   "tailwindCSS.experimental.configFile": {
-    "packages/storybook/tailwind.config.js": ["packages/core/theme/**/*", "packages/components/**/*"],
-    "apps/docs/tailwind.config.js": "apps/docs/**/*"
+    "apps/docs/styles/globals.css": "apps/docs/**/*",
+    "packages/storybook/.storybook/style.css": ["packages/core/theme/**/*", "packages/components/**/*"],
+
   },
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
