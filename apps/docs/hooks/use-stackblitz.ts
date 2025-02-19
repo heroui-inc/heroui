@@ -72,7 +72,7 @@ export function useStackblitz(props: UseSandpackProps) {
     "@vitejs/plugin-react": "4.3.4",
     "vite": "6.0.6",
     "postcss": "8.5.1",
-    "tailwindcss": "4.0.0",
+    "tailwindcss": "^4.0.6",
     "@tailwindcss/postcss": "4.0.0",
     "@tailwindcss/vite": "4.0.0"
   },
