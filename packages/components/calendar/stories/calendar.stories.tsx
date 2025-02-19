@@ -52,6 +52,10 @@ export default {
         type: "boolean",
       },
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
 } as Meta<typeof Calendar>;
 
@@ -491,5 +495,13 @@ export const ReducedMotion = {
   render: ReducedMotionTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
   },
 };

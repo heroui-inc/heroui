@@ -1,11 +1,11 @@
 {
   "name": "@heroui/form",
-  "version": "2.1.9",
+  "version": "2.1.12",
   "description": "A form is a group of inputs that allows users submit data to a server and supports field validation errors.",
   "keywords": [
     "form"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.0",
-    "@heroui/theme": ">=2.4.0",
+    "@heroui/system": ">=2.4.7",
+    "@heroui/theme": ">=2.4.6",
     "react": ">=18",
     "react-dom": ">=18"
   },

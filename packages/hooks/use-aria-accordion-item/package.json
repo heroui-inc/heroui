@@ -1,11 +1,11 @@
 {
   "name": "@heroui/use-aria-accordion-item",
-  "version": "2.2.3",
+  "version": "2.2.6",
   "description": "Internal impl for react aria accordion item",
   "keywords": [
     "use-aria-accordion-item"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

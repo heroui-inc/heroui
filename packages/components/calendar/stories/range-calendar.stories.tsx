@@ -49,6 +49,10 @@ export default {
       },
       options: ["narrow", "short", "long"],
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
 } as Meta<typeof RangeCalendar>;
 
@@ -497,6 +501,14 @@ export const Presets = {
   render: PresetsTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
   },
 };
 

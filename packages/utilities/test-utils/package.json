@@ -1,11 +1,11 @@
 {
   "name": "@heroui/test-utils",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "A set of utilities for react testing",
   "keywords": [
     "test-utils"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

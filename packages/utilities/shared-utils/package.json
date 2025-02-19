@@ -1,11 +1,11 @@
 {
   "name": "@heroui/shared-utils",
-  "version": "2.1.3",
+  "version": "2.1.6",
   "description": "A set of HeroUI utilities",
   "keywords": [
     "system"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -48,6 +48,9 @@
       "esm"
     ],
     "splitting": false,
-    "entry": ["src/demi/react18", "src/demi/react19"]
+    "entry": [
+      "src/demi/react18",
+      "src/demi/react19"
+    ]
   }
 }
