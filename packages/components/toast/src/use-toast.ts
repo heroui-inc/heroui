@@ -100,7 +100,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * should apply styles to indicate timeout progress
    */
-  shouldShowTimeoutProgess?: boolean;
+  shouldShowTimeoutProgress?: boolean;
   /**
    * The severity of the toast. This changes the icon without having to change the color.
    * @default "default"
@@ -154,7 +154,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     toastOffset = 0,
     motionProps,
     timeout = 6000,
-    shouldShowTimeoutProgess = false,
+    shouldShowTimeoutProgress = false,
     icon,
     onClose,
     severity,
@@ -222,7 +222,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       if (progressBarRef.current) {
         progressBarRef.current.style.width = `${
-          shouldShowTimeoutProgess ? progressRef.current : 0
+          shouldShowTimeoutProgress ? progressRef.current : 0
         }%`;
       }
 
@@ -238,7 +238,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [timeout, shouldShowTimeoutProgess, state, isToastHovered, index, total, isRegionExpanded]);
+  }, [timeout, shouldShowTimeoutProgress, state, isToastHovered, index, total, isRegionExpanded]);
 
   const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
 
