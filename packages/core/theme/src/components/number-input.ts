@@ -656,7 +656,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_8px)]",
         ],
       },
     },
@@ -665,7 +665,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px)]",
         ],
       },
     },
@@ -675,7 +675,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px)]",
         ],
       },
     },
@@ -717,7 +717,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_8px_-_var(borderWidth.medium))]",
         ],
       },
     },
@@ -728,7 +728,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(borderWidth.medium))]",
         ],
       },
     },
@@ -739,7 +739,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(borderWidth.medium))]",
         ],
       },
     },
@@ -750,7 +750,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_5px)]",
         ],
       },
     },
@@ -760,7 +760,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_3.5px)]",
         ],
       },
     },
@@ -771,7 +771,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_4px)]",
         ],
       },
     },
@@ -783,9 +783,9 @@ const numberInput = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(fontSize.tiny)/2_+_16px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]",
+        base: "data-[has-label=true]:mt-[calc(theme(--heroui-font-size-small)_+_8px)]",
       },
     },
     {
@@ -796,9 +796,9 @@ const numberInput = tv({
           "start-3",
           "end-auto",
           "text-small",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]",
+        base: "data-[has-label=true]:mt-[calc(theme(--heroui-font-size-small)_+_10px)]",
       },
     },
     {
@@ -809,9 +809,9 @@ const numberInput = tv({
           "start-3",
           "end-auto",
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+        base: "data-[has-label=true]:mt-[calc(theme(--heroui-font-size-small)_+_12px)]",
         stepperButton: "min-4 w-4 h-4",
       },
     },
