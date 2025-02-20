@@ -100,6 +100,16 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
     );
   };
 
+  const setTemplate = (template: TemplateType) => {
+    setTemplateTheme(template);
+    setConfig((prev) => {
+      return {
+        ...prev,
+        name: template,
+      };
+    });
+  };
+
   const resetConfig = (theme: ThemeType, sync: boolean) => {
     let newConfig = initialConfig;
 
@@ -216,14 +226,14 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
             ...prev,
             light: {
               ...prev.light,
-              otherColor: {
+              layoutColor: {
                 ...prev.light.layoutColor,
                 ...newConfig,
               },
             },
             dark: {
               ...prev.dark,
-              otherColor: {
+              layoutColor: {
                 ...prev.dark.layoutColor,
                 ...newConfig,
               },
@@ -233,7 +243,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
             ...prev,
             [theme]: {
               ...prev[theme],
-              otherColor: {
+              layoutColor: {
                 ...prev[theme].layoutColor,
                 ...newConfig,
               },
@@ -324,7 +334,7 @@ export default function ThemeBuilderProvider({children}: ThemeBuilderProviderPro
         setContentColor,
         setRadiusValue,
         setBorderWidthValue,
-        setTemplateTheme,
+        setTemplateTheme: setTemplate,
         setFont,
         setScaling,
       }}

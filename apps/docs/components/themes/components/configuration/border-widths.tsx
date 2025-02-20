@@ -15,7 +15,7 @@ export function BorderWidths() {
   const {borderWidthValue, setBorderWidthValue} = useThemeBuilder();
 
   return (
-    <ConfigSection icon={<Crop className="w-4 h-4" />} title="Border width">
+    <ConfigSection visualPurposeOnly icon={<Crop className="w-4 h-4" />} title="Border width">
       {BORDER_WIDTHS.map(({title, className}) => (
         <EditableButton
           key={title}
