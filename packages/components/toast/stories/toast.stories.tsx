@@ -49,6 +49,9 @@ export default {
         "top-center",
       ],
     },
+    maxVisibleToasts: {
+      control: {type: "number"},
+    },
     hideCloseButton: {
       control: {
         type: "boolean",
@@ -80,7 +83,7 @@ const defaultProps = {
 const Template = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div>
         <Button
           onPress={() => {
@@ -100,7 +103,7 @@ const Template = (args: ToastProps) => {
 const ShowTimeoutProgressTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <Button
         onPress={() => {
           addToast({
@@ -121,7 +124,7 @@ const ShowTimeoutProgressTemplate = (args: ToastProps) => {
 const WithEndContentTemplate = (args) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <Button
         onPress={() => {
           addToast({
@@ -147,7 +150,7 @@ const WithEndContentTemplate = (args) => {
 const PlacementTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div>
         <Button
           onPress={() => {
@@ -168,7 +171,11 @@ const PlacementTemplate = (args: ToastProps) => {
 const DisableAnimationTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider disableAnimation={true} placement={args.placement} />
+      <ToastProvider
+        disableAnimation={true}
+        maxVisibleToasts={args.maxVisibleToasts}
+        placement={args.placement}
+      />
       <div>
         <Button
           onPress={() => {
@@ -189,7 +196,7 @@ const DisableAnimationTemplate = (args: ToastProps) => {
 const PromiseToastTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div>
         <Button
           onPress={() => {
@@ -265,7 +272,7 @@ const CustomToastTemplate = (args) => {
 
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div className="flex gap-2">
         {colors.map((color, idx) => (
           <CustomToastComponent key={idx} color={color} />
@@ -279,6 +286,7 @@ const CustomCloseButtonTemplate = (args) => {
   return (
     <>
       <ToastProvider
+        maxVisibleToasts={args.maxVisibleToasts}
         placement={args.placement}
         toastProps={{
           classNames: {

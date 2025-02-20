@@ -488,7 +488,9 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "data-drag-value": number;
       className: string;
     } => {
-      const comparingValue = isRegionExpanded ? maxVisibleToasts - 1 : 2;
+      const comparingValue = isRegionExpanded
+        ? maxVisibleToasts - 1
+        : Math.min(2, maxVisibleToasts - 1);
       const isCloseToEnd = total - index - 1 <= comparingValue;
       const dragDirection = placement === "bottom-center" || placement === "top-center" ? "y" : "x";
       const dragConstraints = {left: 0, right: 0, top: 0, bottom: 0};
