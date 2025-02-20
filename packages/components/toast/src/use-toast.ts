@@ -119,6 +119,7 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
   isRegionExpanded: boolean;
   placement?: ToastPlacement;
   toastOffset?: number;
+  maxVisibleToasts: number;
 }
 
 export type UseToastProps<T = ToastProps> = Props<T> &
@@ -158,6 +159,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     icon,
     onClose,
     severity,
+    maxVisibleToasts,
     ...otherProps
   } = props;
 
@@ -486,7 +488,8 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "data-drag-value": number;
       className: string;
     } => {
-      const isCloseToEnd = total - index - 1 <= 2;
+      const comparingValue = isRegionExpanded ? maxVisibleToasts - 1 : 2;
+      const isCloseToEnd = total - index - 1 <= comparingValue;
       const dragDirection = placement === "bottom-center" || placement === "top-center" ? "y" : "x";
       const dragConstraints = {left: 0, right: 0, top: 0, bottom: 0};
       const dragElastic = getDragElasticConstraints(placement);
@@ -593,6 +596,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       shouldCloseToast,
       slots,
       toastOffset,
+      maxVisibleToasts,
     ],
   );
 
