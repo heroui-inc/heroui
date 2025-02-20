@@ -1,6 +1,6 @@
 # @heroui/system
 
-NextUI system primitives, here you can find the `extendVariants` utility, `HeroUIProvider` and some other utilities.
+HeroUI system primitives, here you can find the `extendVariants` utility, `HeroUIProvider` and some other utilities.
 
 Please refer to the [documentation](https://heroui.com) for more information.
 

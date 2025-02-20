@@ -1,11 +1,11 @@
 {
   "name": "@heroui/alert",
-  "version": "2.2.10",
+  "version": "2.2.13",
   "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
   "keywords": [
     "alert"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "contributors": [
     "Abhinav Agarwal <abhinavagrawl700@gmail.com>",
     "WK Wong <wingkwong.code@gmail.com>"
@@ -40,8 +40,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0",
-    "@heroui/system": ">=2.4.0"
+    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.7"
   },
   "dependencies": {
     "@heroui/react-utils": "workspace:*",

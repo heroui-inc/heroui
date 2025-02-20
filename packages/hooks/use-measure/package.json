@@ -1,11 +1,11 @@
 {
   "name": "@heroui/use-measure",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "Hook that measure and track a element dimensions",
   "keywords": [
     "use-measure"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

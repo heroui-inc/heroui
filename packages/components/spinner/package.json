@@ -1,13 +1,13 @@
 {
   "name": "@heroui/spinner",
-  "version": "2.2.7",
+  "version": "2.2.10",
   "description": "Loaders express an unspecified wait time or display the length of a process.",
   "keywords": [
     "loading",
     "spinner",
     "progress"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -38,7 +38,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.7"
+    "@heroui/theme": ">=2.4.6"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",

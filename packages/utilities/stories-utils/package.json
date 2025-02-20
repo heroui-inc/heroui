@@ -1,11 +1,11 @@
 {
   "name": "@heroui/stories-utils",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "A list of utilities for storybook' stories.",
   "keywords": [
     "stories-utils"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
