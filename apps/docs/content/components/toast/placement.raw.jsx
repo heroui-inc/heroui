@@ -9,25 +9,25 @@ export default function App() {
       <ToastProvider placement={placement} toastOffset={placement.includes("top") ? 60 : 0} />
       <div className="flex flex-wrap gap-2">
         {[
-          "top-left",
-          "top-center",
-          "top-right",
-          "bottom-left",
-          "bottom-center",
-          "bottom-right",
+          ["Top Left", "top-left"],
+          ["Top Center", "top-center"],
+          ["Top Right", "top-right"],
+          ["Bottom Left", "bottom-left"],
+          ["Bottom Center", "bottom-center"],
+          ["Bottom Right", "bottom-right"],
         ].map((position) => (
           <Button
-            key={position}
+            key={position[1]}
             variant={"flat"}
             onPress={() => {
-              setPlacement(position);
+              setPlacement(position[1]);
               addToast({
                 title: "Toast title",
                 description: "Toast displayed successfully",
               });
             }}
           >
-            {position}
+            {position[0]}
           </Button>
         ))}
       </div>
