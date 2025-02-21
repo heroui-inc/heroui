@@ -2,4 +2,4 @@
 "@heroui/input": patch
 ---
 
-- FIX: #4850 esc key to clear input value
+- add missing logic to handle esc key to clear input value (#4850)
