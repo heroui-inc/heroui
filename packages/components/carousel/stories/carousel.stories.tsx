@@ -24,6 +24,11 @@ export default {
         type: "boolean",
       },
     },
+    disableAnimation: {
+      control: {
+        type: "boolean",
+      },
+    },
   },
 } as Meta<typeof Carousel>;
 

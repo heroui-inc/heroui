@@ -14,7 +14,6 @@ const Carousel = forwardRef<"div", CarouselProps>((props, ref) => {
     slidesCount,
     slots,
     selected,
-    thumbRadius,
     mainRef,
     thumbnailRef,
     onThumbClick,
@@ -22,6 +21,7 @@ const Carousel = forwardRef<"div", CarouselProps>((props, ref) => {
     getPrevSlideButtonProps,
     getNextSlideButtonProps,
     getIndicatorProps,
+    getCarouselThumbProps,
   } = useCarousel({...props, ref});
 
   return (
@@ -54,9 +54,9 @@ const Carousel = forwardRef<"div", CarouselProps>((props, ref) => {
         <div className={slots.thumbnailWrapper()}>
           {Array.from({length: slidesCount}).map((_, index) => (
             <CarouselThumb
+              {...getCarouselThumbProps()}
               key={index}
               index={index}
-              radius={thumbRadius}
               selectedSlide={selected}
               onClick={() => {
                 onThumbClick(index);

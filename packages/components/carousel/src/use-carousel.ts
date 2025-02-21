@@ -6,10 +6,10 @@ import type {
 } from "@heroui/theme";
 import type {EmblaCarouselType} from "embla-carousel";
 
-import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
 import {carousel} from "@heroui/theme";
 import {ReactRef, useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, objectToDeps} from "@heroui/shared-utils";
 import {ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -57,25 +57,32 @@ interface Props extends HTMLHeroUIProps<"div"> {
 export type UseCarouselProps = Props & CarouselVariantProps;
 
 export function useCarousel(originalProps: UseCarouselProps) {
-  const {
-    ref,
-    as,
-    className,
-    children,
-    slidesCount,
-    thumbRadius,
-    classNames,
-    loop = false,
-  } = originalProps;
+  const [props, variantProps] = mapPropsVariants(originalProps, carousel.variantKeys);
+
+  const {ref, as, className, children, slidesCount, thumbRadius, classNames, loop = false} = props;
+
+  const globalContext = useProviderContext();
+
+  const disableAnimation = globalContext?.disableAnimation ?? originalProps.disableAnimation;
+  const size = originalProps.size ?? "md";
+  const duration = disableAnimation ? 0 : undefined;
+
   const [selected, setSelected] = useState(0);
 
   const Component = as || "div";
 
   const domRef = useDOMRef(ref);
 
-  const slots = useMemo(() => carousel({}), []);
+  const slots = useMemo(
+    () =>
+      carousel({
+        ...variantProps,
+        disableAnimation,
+      }),
+    [objectToDeps(variantProps)],
+  );
 
-  const [mainRef, mainRefApi] = useEmblaCarousel({loop}) as [
+  const [mainRef, mainRefApi] = useEmblaCarousel({loop, duration}) as [
     (instance: HTMLElement | null) => void,
     EmblaCarouselType | undefined,
   ];
@@ -147,6 +154,16 @@ export function useCarousel(originalProps: UseCarouselProps) {
     [slots],
   );
 
+  const getCarouselThumbProps: PropGetter = useCallback(
+    (props = {}) => ({
+      radius: thumbRadius,
+      size,
+      disableAnimation,
+      ...props,
+    }),
+    [thumbRadius, size, disableAnimation],
+  );
+
   return {
     Component,
     slots,
@@ -156,7 +173,6 @@ export function useCarousel(originalProps: UseCarouselProps) {
     selected,
     mainRef,
     mainRefApi,
-    thumbRadius,
     thumbnailRef,
     setSelected,
     onThumbClick,
@@ -164,6 +180,7 @@ export function useCarousel(originalProps: UseCarouselProps) {
     getNextSlideButtonProps,
     getPrevSlideButtonProps,
     getIndicatorProps,
+    getCarouselThumbProps,
   };
 }
 

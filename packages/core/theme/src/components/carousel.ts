@@ -21,21 +21,33 @@ const carousel = tv({
   },
   variants: {
     size: {
-      sm: {},
-      md: {},
-      lg: {},
+      sm: {
+        slideContainer: "w-60 h-60",
+        slideControlIcon: "w-3 h-3",
+        nextSlideButton: "px-2 py-2 rounded-md",
+        prevSlideButton: "px-2 py-2 rounded-md",
+        thumbnailContainer: "w-60 px-1",
+        thumbnailWrapper: "gap-x-2",
+      },
+      md: {
+        slideContainer: "w-72 h-72",
+        slideControlIcon: "w-4 h-4",
+        nextSlideButton: "px-2 py-2 rounded-md",
+        prevSlideButton: "px-2 py-2 rounded-md",
+        thumbnailContainer: "w-72 px-2.5",
+        thumbnailWrapper: "gap-x-2",
+      },
+      lg: "",
+    },
+    disableAnimation: {
+      true: {
+        slideWrapper: "transition-none",
+      },
+      false: "",
     },
     isDisabled: {
-      true: {
-        base: "opacity-disabled pointer-events-none",
-      },
-    },
-    radius: {
-      none: "",
-      sm: "",
-      md: "",
-      lg: "",
-      full: "",
+      true: "opacity-disabled pointer-events-none",
+      false: "ponter-events-auto",
     },
   },
   defaultVariants: {
@@ -60,7 +72,6 @@ const carouselThumb = tv({
       "outline outline-default-200 data-[selected=true]:outline-none",
       "data-[selected=true]:ring-2 data-[selected=true]:ring-offset-1",
       "data-[selected=true]:ring-offset-background data-[selected=true]:ring-primary",
-      "transition-ring duration-300",
     ],
   },
   variants: {
@@ -71,6 +82,19 @@ const carouselThumb = tv({
       lg: "rounded-lg",
       xl: "rounded-xl",
       full: "rounded-full",
+    },
+    size: {
+      sm: "w-10 h-10",
+      md: "w-12 h-12",
+      lg: "w-16 h-16",
+    },
+    disableAnimation: {
+      true: "transition-none",
+      false: "transition-ring duration-300",
+    },
+    isDisabled: {
+      true: "opacity-disabled pointer-events-none",
+      false: "ponter-events-auto",
     },
   },
   defaultVariants: {
