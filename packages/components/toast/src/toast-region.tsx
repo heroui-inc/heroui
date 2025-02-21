@@ -74,7 +74,11 @@ export function ToastRegion<T extends ToastProps>({
           return null;
         }
 
-        if (total - index <= 4 || (isHovered && total - index <= maxVisibleToasts + 1)) {
+        if (
+          disableAnimation ||
+          total - index <= 4 ||
+          (isHovered && total - index <= maxVisibleToasts + 1)
+        ) {
           return (
             <Toast
               key={toast.key}
@@ -85,6 +89,7 @@ export function ToastRegion<T extends ToastProps>({
               heights={heights}
               index={index}
               isRegionExpanded={isHovered || isTouched}
+              maxVisibleToasts={maxVisibleToasts}
               placement={placement}
               setHeights={setHeights}
               toastOffset={toastOffset}
