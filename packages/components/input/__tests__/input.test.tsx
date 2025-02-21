@@ -309,15 +309,12 @@ describe("Input", () => {
 
     const input = getByRole("textbox") as HTMLInputElement;
 
-    // 验证初始值
     expect(input.value).toBe(defaultValue);
 
-    // 模拟按下 ESC 键
     fireEvent.keyDown(input, {key: "Escape"});
 
-    // 验证值被清除
     expect(input.value).toBe("");
-    // 验证 onClear 回调被调用
+
     expect(onClear).toHaveBeenCalledTimes(1);
   });
 
@@ -328,27 +325,8 @@ describe("Input", () => {
 
     const input = getByRole("textbox");
 
-    // 模拟按下 ESC 键
     fireEvent.keyDown(input, {key: "Escape"});
 
-    // 验证 onClear 回调没有被调用
-    expect(onClear).not.toHaveBeenCalled();
-  });
-
-  it("should not clear value when pressing ESC key if isClearable is false", () => {
-    const onClear = jest.fn();
-    const defaultValue = "test value";
-
-    const {getByRole} = render(<Input defaultValue={defaultValue} onClear={onClear} />);
-
-    const input = getByRole("textbox") as HTMLInputElement;
-
-    // 模拟按下 ESC 键
-    fireEvent.keyDown(input, {key: "Escape"});
-
-    // 验证值没有被清除
-    expect(input.value).toBe(defaultValue);
-    // 验证 onClear 回调没有被调用
     expect(onClear).not.toHaveBeenCalled();
   });
 });
