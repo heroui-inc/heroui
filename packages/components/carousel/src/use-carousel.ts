@@ -65,7 +65,7 @@ export function useCarousel(originalProps: UseCarouselProps) {
 
   const disableAnimation = globalContext?.disableAnimation ?? originalProps.disableAnimation;
   const size = originalProps.size ?? "md";
-  const duration = disableAnimation ? 0 : undefined;
+  const duration = disableAnimation ? 0 : 25;
 
   const [selected, setSelected] = useState(0);
 
