@@ -1,5 +1,5 @@
 ---
-"@heroui/input": major
+"@heroui/input": patch
 ---
 
-- FIX: #4850
+- FIX: #4850 esc key to clear input value
