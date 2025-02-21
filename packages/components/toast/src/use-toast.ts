@@ -195,9 +195,18 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     }
   }, []);
 
+  const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
+
+  useEffect(() => {
+    if (!promiseProp) return;
+    promiseProp.finally(() => {
+      setIsLoading(false);
+    });
+  }, [promiseProp]);
+
   useEffect(() => {
     const updateProgress = (timestamp: number) => {
-      if (!timeout) {
+      if (!timeout || isLoading) {
         return;
       }
 
@@ -240,16 +249,16 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [timeout, shouldShowTimeoutProgess, state, isToastHovered, index, total, isRegionExpanded]);
-
-  const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
-
-  useEffect(() => {
-    if (!promiseProp) return;
-    promiseProp.finally(() => {
-      setIsLoading(false);
-    });
-  }, [promiseProp]);
+  }, [
+    timeout,
+    shouldShowTimeoutProgess,
+    state,
+    isToastHovered,
+    index,
+    total,
+    isRegionExpanded,
+    isLoading,
+  ]);
 
   const Component = as || "div";
   const loadingIcon: ReactNode = icon;
