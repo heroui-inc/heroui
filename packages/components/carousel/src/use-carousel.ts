@@ -18,10 +18,39 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * Ref to the DOM node.
    */
   ref?: ReactRef<HTMLElement | null>;
+  /**
+   * The content of the carousel. Should be composed of CarouselItem components.
+   */
   children: ReactNode;
+  /**
+   * The total number of slides in the carousel
+   */
   slidesCount: number;
+  /**
+   * The border radius of the thumbnail items
+   */
   thumbRadius?: CarouselThumbVariantProps["radius"];
+  /**
+   * Classname or List of classes to change the classNames of the element.
+   * if `className` is passed, it will be added to the base slot.
+   *
+   * @example
+   * ```ts
+   * <Carousel classNames={{
+   *    base: "base-classes",
+   *    wrapper: "wrapper-classes",
+   *    slideContainer: "container-classes",
+   *    slideWrapper: "slides-classes",
+   *    thumbnailContainer: "thumbs-container-classes",
+   *    thumbnailWrapper: "thumbs-wrapper-classes"
+   * }} />
+   * ```
+   */
   classNames?: SlotsToClasses<CarouselSlots>;
+  /**
+   * Whether the carousel should loop back to the beginning when reaching the end
+   * @default false
+   */
   loop?: boolean;
 }
 

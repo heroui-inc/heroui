@@ -48,6 +48,8 @@ const carousel = tv({
 const carouselItem = tv({
   slots: {
     base: "min-w-0 flex-none w-full h-full rounded-lg overflow-hidden bg-default-50 data-[loaded=false]:animate-pulse m-1",
+    image:
+      "flex object-cover w-full h-full transition-opacity !duration-500 opacity-0 data-[loaded=true]:opacity-100",
   },
 });
 
