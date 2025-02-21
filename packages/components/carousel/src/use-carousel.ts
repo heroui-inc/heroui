@@ -1,4 +1,9 @@
-import type {CarouselSlots, CarouselVariantProps, SlotsToClasses} from "@heroui/theme";
+import type {
+  CarouselSlots,
+  CarouselThumbVariantProps,
+  CarouselVariantProps,
+  SlotsToClasses,
+} from "@heroui/theme";
 import type {EmblaCarouselType} from "embla-carousel";
 
 import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
@@ -15,13 +20,24 @@ interface Props extends HTMLHeroUIProps<"div"> {
   ref?: ReactRef<HTMLElement | null>;
   children: ReactNode;
   slidesCount: number;
+  thumbRadius?: CarouselThumbVariantProps["radius"];
   classNames?: SlotsToClasses<CarouselSlots>;
+  loop?: boolean;
 }
 
 export type UseCarouselProps = Props & CarouselVariantProps;
 
 export function useCarousel(originalProps: UseCarouselProps) {
-  const {ref, as, className, children, slidesCount, classNames} = originalProps;
+  const {
+    ref,
+    as,
+    className,
+    children,
+    slidesCount,
+    thumbRadius,
+    classNames,
+    loop = false,
+  } = originalProps;
   const [selected, setSelected] = useState(0);
 
   const Component = as || "div";
@@ -30,7 +46,7 @@ export function useCarousel(originalProps: UseCarouselProps) {
 
   const slots = useMemo(() => carousel({}), []);
 
-  const [mainRef, mainRefApi] = useEmblaCarousel({}) as [
+  const [mainRef, mainRefApi] = useEmblaCarousel({loop}) as [
     (instance: HTMLElement | null) => void,
     EmblaCarouselType | undefined,
   ];
@@ -111,6 +127,7 @@ export function useCarousel(originalProps: UseCarouselProps) {
     selected,
     mainRef,
     mainRefApi,
+    thumbRadius,
     thumbnailRef,
     setSelected,
     onThumbClick,

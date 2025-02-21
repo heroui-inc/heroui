@@ -1,4 +1,6 @@
-import {carouselThumb} from "@heroui/theme";
+import {objectToDeps} from "@heroui/shared-utils";
+import {mapPropsVariants} from "@heroui/system";
+import {carouselThumb, CarouselThumbVariantProps} from "@heroui/theme";
 import {useEffect, useMemo} from "react";
 
 interface CaurouselThumbProps {
@@ -7,8 +9,20 @@ interface CaurouselThumbProps {
   onClick: () => void;
 }
 
-export const CarouselThumb = ({index, selectedSlide, onClick}: CaurouselThumbProps) => {
-  const slots = useMemo(() => carouselThumb({}), []);
+type UseCarouselThumbProps = CaurouselThumbProps & CarouselThumbVariantProps;
+
+export const CarouselThumb = (originalProps: UseCarouselThumbProps) => {
+  const [props, variantProps] = mapPropsVariants(originalProps, carouselThumb.variantKeys);
+
+  const slots = useMemo(
+    () =>
+      carouselThumb({
+        ...variantProps,
+      }),
+    [objectToDeps(variantProps)],
+  );
+
+  const {index, selectedSlide, onClick} = props;
 
   useEffect(() => {
     const thumb = document.getElementById(`thumb-${index}`);

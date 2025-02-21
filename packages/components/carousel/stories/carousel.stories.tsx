@@ -8,13 +8,12 @@ export default {
   title: "Components/Carousel",
   component: Carousel,
   argTypes: {
-    color: {
-      control: {type: "select"},
-      options: ["default", "primary", "secondary", "success", "warning", "danger"],
+    loop: {
+      control: {type: "boolean"},
     },
-    radius: {
+    thumbRadius: {
       control: {type: "select"},
-      options: ["none", "sm", "md", "lg", "full"],
+      options: ["none", "sm", "md", "lg", "xl", "full"],
     },
     size: {
       control: {type: "select"},
@@ -34,12 +33,12 @@ const defaultProps = {
 
 const Template = (args: CarouselProps) => (
   <Carousel {...args} slidesCount={6}>
-    <CarouselItem image="https://www.heroui.com/images/card-example-6.jpeg" index={0} />
-    <CarouselItem image="https://www.heroui.com/images/card-example-6.jpeg" index={1} />
-    <CarouselItem image="https://www.heroui.com/images/card-example-6.jpeg" index={2} />
-    <CarouselItem image="https://www.heroui.com/images/card-example-6.jpeg" index={3} />
-    <CarouselItem image="https://www.heroui.com/images/card-example-6.jpeg" index={4} />
-    <CarouselItem image="https://www.heroui.com/images/card-example-6.jpeg" index={5} />
+    <CarouselItem image="https://picsum.photos/200" index={0} />
+    <CarouselItem image="https://picsum.photos/200" index={1} />
+    <CarouselItem image="https://picsum.photos/200" index={2} />
+    <CarouselItem image="https://picsum.photos/200" index={3} />
+    <CarouselItem image="https://picsum.photos/200" index={4} />
+    <CarouselItem image="https://picsum.photos/200" index={5} />
   </Carousel>
 );
 
