@@ -1,7 +1,7 @@
 ---
 title: "HeroUI v2.7.0"
 description: "New Toast component, NumberInput, Theme Generator, and lots of bug fixes and improvements."
-date: "2025-02-18"
+date: "2025-02-19"
 image: "/blog/v2.7.0.jpg"
 tags: ["heroui", "v2.7.0", "release", "toast", "improvements", "theme"]
 author:
@@ -31,7 +31,7 @@ HeroUI version **v2.7.0** introduces the highly anticipated Toast component, alo
 ## What's New in v2.7.0?
 
 - [Toast Component](#toast-component) - A new toast notification system with rich features
-- [NumberInput Component](#numbaerinput-component) - A new input component specifically designed for numerical values
+- [NumberInput Component](#numberinput-component) - A new input component specifically designed for numerical values
 - [New Spinner Variants](#new-spinner-variants) - Enhanced spinner component with new design variants
 - [Theme Generator](#theme-generator) - A powerful web-based tool for creating and customizing your themes
 - [Table Virtualization](#table-virtualization) - Performance improvements for large datasets in Table component
@@ -152,7 +152,7 @@ For more examples and detailed documentation about the Spinner component, visit 
 
 ## Theme Generator
 
-The new Theme Generator is a powerful web-based tool that allows you to create and customize your themes visually. Based on the amazing work by [xylish7](https://github.com/xylish7) in the [nextui-theme-generator](https://github.com/xylish7/nextui-theme-generator) project (huge thanks!), our Theme Generator provides a seamless experience for theme customization. Simply visit our [Theme Generator](/themes) to:
+The new Theme Generator is a powerful web-based tool that allows you to create and customize your themes visually. Simply visit our [Theme Generator](/themes) to:
 
 - Create custom color schemes
 - Preview components with your theme in real-time
@@ -232,7 +232,7 @@ import {HeroUIProvider} from "@heroui/react";
 function App() {
   return (
     <HeroUIProvider spinnerVariant="simple">
-      {/* All components will use the "simple" spinner variant by default */}
+      {/* All components will use the dots spinner variant by default */}
     </HeroUIProvider>
   );
 }
