@@ -1,8 +1,8 @@
 # @heroui/drawer
 
-A Quick description of the component
+Used to render a content that slides in from the side of the screen.
 
-> This is an internal utility, not intended for public usage.
+Please refer to the [documentation](https://heroui.com/docs/components/drawer) for more information.
 
 ## Installation
 
