@@ -156,16 +156,41 @@ const OffsetTemplate = (args: TooltipProps) => (
   </div>
 );
 
-const MultipleTemplate = (args: TooltipProps) => (
-  <div className="flex gap-2">
-    <Tooltip {...args} content="Tooltip 1" delay={1000}>
-      <Button>Hover me (delay 1000ms)</Button>
-    </Tooltip>
-    <Tooltip {...args} content="Tooltip 2">
-      <Button>Then hover me</Button>
-    </Tooltip>
-  </div>
-);
+const MultipleTemplate = (args: TooltipProps) => {
+  const ManyTooltipComponent = ({
+    content,
+    tooltipProps,
+  }: {
+    content: React.ReactNode;
+    tooltipProps: TooltipProps;
+  }) => {
+    return (
+      <Tooltip {...tooltipProps} closeDelay={0} content={content} openDelay={0}>
+        <Button>Hover me</Button>
+      </Tooltip>
+    );
+  };
+
+  const tooltipIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="flex gap-2">
+        <Tooltip {...args} content="Tooltip 1" delay={1000}>
+          <Button>Hover me (delay 1000ms)</Button>
+        </Tooltip>
+        <Tooltip {...args} content="Tooltip 2">
+          <Button>Then hover me</Button>
+        </Tooltip>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
+        {tooltipIndex.map((index) => (
+          <ManyTooltipComponent key={index} content={`Tooltip ${index}`} tooltipProps={args} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const PlacementsTemplate = (args: TooltipProps) => {
   return (
@@ -262,35 +287,6 @@ const ControlledTemplate = (args: TooltipProps) => {
     </div>
   );
 };
-
-const ManyTemplate = (args: TooltipProps) => (
-  <div className="flex flex-col gap-2">
-    <Tooltip {...args} closeDelay={0} content="Tooltip 1" openDelay={0}>
-      <Button>Hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 2" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 3" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 4" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 5" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 6" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 7" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-    <Tooltip {...args} closeDelay={0} content="Tooltip 8" openDelay={0}>
-      <Button>Then hover me</Button>
-    </Tooltip>
-  </div>
-);
 
 export const Default = {
   args: {
@@ -422,13 +418,5 @@ export const Disabled = {
   args: {
     ...defaultProps,
     isDisabled: true,
-  },
-};
-
-export const Many = {
-  render: ManyTemplate,
-
-  args: {
-    ...defaultProps,
   },
 };
