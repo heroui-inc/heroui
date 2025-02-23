@@ -283,8 +283,12 @@ We're building an exciting new application that will revolutionize frontend deve
 ## Breaking Changes
 
 - Renamed `wrapper` slot to `tabWrapper` in Tabs component
-- Deprecated `dateInputClassNames` in favor of new styling approach
-- Replaced directional terms `left` & `right` with `start` & `end` for better RTL support
+- Deprecated `dateInputClassNames` in favor of new styling approach. The existing styles can be moved to `classNames` instead. 
+- Replaced directional terms `left` & `right` with `start` & `end` for better RTL support.
+- `ListboxItem`, `SelectItem` & AutocompleteItem no longer accept a `value` prop.
+- Spinner component is no longer a server component. If you are using global import, you need to add `use client` directive.
+- For those users using `@internationalized/date`, please bump to `3.7.0` to avoid incompatibility errors.
+- For those users using `@react-aria/i18n`, please bump to `3.12.5` to avoid incompatibility errors.
 
 ## Release Changes
 
