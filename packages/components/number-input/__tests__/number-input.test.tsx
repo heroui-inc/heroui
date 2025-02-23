@@ -241,19 +241,6 @@ describe("NumberInput", () => {
     expect(stepperButton).toBeNull();
   });
 
-  it("should trigger onChange", async () => {
-    const onChange = jest.fn();
-
-    const {container} = render(<NumberInput label="test number input" onChange={onChange} />);
-
-    const input = container.querySelector("input") as HTMLInputElement;
-
-    await user.click(input);
-    await user.keyboard("1024");
-
-    expect(onChange).toHaveBeenCalledTimes(4);
-  });
-
   it("should emit onChange", async () => {
     const onChange = jest.fn();
 
