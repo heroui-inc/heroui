@@ -1,4 +1,4 @@
-import {Form, Input, Button} from "@nextui-org/react";
+import {Form, Input, Button} from "@heroui/react";
 
 export default function App() {
   const [action, setAction] = React.useState(null);
@@ -6,7 +6,6 @@ export default function App() {
   return (
     <Form
       className="w-full max-w-xs flex flex-col gap-4"
-      validationBehavior="native"
       onReset={() => setAction("reset")}
       onSubmit={(e) => {
         e.preventDefault();

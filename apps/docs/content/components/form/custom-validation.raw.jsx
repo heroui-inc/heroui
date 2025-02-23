@@ -1,4 +1,4 @@
-import {Form, Input, Button} from "@nextui-org/react";
+import {Form, Input, Button} from "@heroui/react";
 
 export default function App() {
   const onSubmit = (e) => {
@@ -6,7 +6,7 @@ export default function App() {
   };
 
   return (
-    <Form className="w-full max-w-xs" validationBehavior="native" onSubmit={onSubmit}>
+    <Form className="w-full max-w-xs" onSubmit={onSubmit}>
       <Input
         isRequired
         label="Username"

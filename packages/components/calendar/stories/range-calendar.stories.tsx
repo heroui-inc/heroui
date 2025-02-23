@@ -2,7 +2,7 @@ import type {RangeValue, DateValue} from "../src";
 
 import React from "react";
 import {Meta} from "@storybook/react";
-import {calendar} from "@nextui-org/theme";
+import {calendar} from "@heroui/theme";
 import {
   today,
   getLocalTimeZone,
@@ -14,9 +14,9 @@ import {
   endOfWeek,
 } from "@internationalized/date";
 import {I18nProvider, useLocale} from "@react-aria/i18n";
-import {Button, ButtonGroup} from "@nextui-org/button";
-import {Radio, RadioGroup} from "@nextui-org/radio";
-import {cn} from "@nextui-org/theme";
+import {Button, ButtonGroup} from "@heroui/button";
+import {Radio, RadioGroup} from "@heroui/radio";
+import {cn} from "@heroui/theme";
 
 import {RangeCalendar, RangeCalendarProps} from "../src";
 
@@ -41,6 +41,10 @@ export default {
         type: "select",
       },
       options: ["narrow", "short", "long"],
+    },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
     },
   },
 } as Meta<typeof RangeCalendar>;
@@ -412,5 +416,13 @@ export const Presets = {
   render: PresetsTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
   },
 };

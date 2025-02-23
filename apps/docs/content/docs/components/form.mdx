@@ -20,11 +20,11 @@ A form is a group of inputs that allows users to submit data to a server, with s
 <PackageManagers
   showGlobalInstallWarning
   commands={{
-    cli: "npx nextui-cli@latest add form",
-    npm: "npm install @nextui-org/form",
-    yarn: "yarn add @nextui-org/form",
-    pnpm: "pnpm add @nextui-org/form",
-    bun: "bun add @nextui-org/form",
+    cli: "npx heroui-cli@latest add form",
+    npm: "npm install @heroui/form",
+    yarn: "yarn add @heroui/form",
+    pnpm: "pnpm add @heroui/form",
+    bun: "bun add @heroui/form",
   }}
 />
 
@@ -32,8 +32,8 @@ A form is a group of inputs that allows users to submit data to a server, with s
 
 <ImportTabs
   commands={{
-    main: 'import {Form} from "@nextui-org/react";',
-    individual: 'import {Form} from "@nextui-org/form";',
+    main: 'import {Form} from "@heroui/react";',
+    individual: 'import {Form} from "@heroui/form";',
   }}
 />
 
@@ -46,7 +46,7 @@ A form is a group of inputs that allows users to submit data to a server, with s
 A `Form` is a container for input elements and submit/reset buttons, with support for validation messages. When labeled with `aria-label` or `aria-labelledby`, it becomes a navigable [form landmark](https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html) for assistive technology.
 
 ```tsx
-import {Form, Button} from '@nextui-org/react';
+import {Form, Button} from '@heroui/react';
 
 <Form>
   {/* ... */}
@@ -72,11 +72,12 @@ See the [Forms](/docs/guide/forms) guide to learn more about form validation, in
 
 ### Validation Behavior
 
-`Form` validation uses ARIA attributes by default, but can be switched to native HTML validation by setting `validationBehavior="native"`. ARIA validation shows realtime errors without blocking submission. This can be set at the form or field level.
+`Form` validation uses native validation behavior by default, but can be switched to ARIA validation by setting `validationBehavior="aria"`. ARIA validation shows realtime errors without blocking submission. This can be set at the form or field level.
+To set the default behavior at the app level, you can change the form defaults for your entire app using [HeroUI Provider](/docs/api-references/heroui-provider).
 
 
 ```tsx
-<Form validationBehavior="native">
+<Form validationBehavior="aria">
   <Input
     isRequired
     name="username"
@@ -95,7 +96,7 @@ See the [Forms](/docs/guide/forms) guide to learn more about form validation, in
 </Form>
 ```
 
-<CodeDemo title="Validation Behavior" files={formContent.customValidation} />
+<CodeDemo title="Validation Behavior" files={formContent.customValidationAria} />
 
 ## Accessibility
 
@@ -123,7 +124,7 @@ See the [Forms](/docs/guide/forms) guide to learn more about form validation, in
       type: "'native' | 'aria'",
       description:
         "Whether to use native HTML form validation to prevent form submission when a field value is missing or invalid, or mark fields as required or invalid via ARIA.",
-      default: "aria",
+      default: "native",
     },
     {
       attribute: "validationErrors",

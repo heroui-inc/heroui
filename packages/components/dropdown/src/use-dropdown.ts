@@ -1,22 +1,21 @@
-import type {PopoverProps} from "@nextui-org/popover";
+import type {PopoverProps} from "@heroui/popover";
 import type {MenuTriggerType} from "@react-types/menu";
 import type {Ref} from "react";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {useProviderContext} from "@nextui-org/system";
+import {useProviderContext} from "@heroui/system";
 import {useMenuTriggerState} from "@react-stately/menu";
 import {useMenuTrigger} from "@react-aria/menu";
-import {dropdown} from "@nextui-org/theme";
-import {clsx} from "@nextui-org/shared-utils";
-import {ReactRef, mergeRefs} from "@nextui-org/react-utils";
-import {ariaShouldCloseOnInteractOutside, toReactAriaPlacement} from "@nextui-org/aria-utils";
+import {dropdown} from "@heroui/theme";
+import {clsx} from "@heroui/shared-utils";
+import {ReactRef, mergeRefs} from "@heroui/react-utils";
+import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 import {useMemo, useRef} from "react";
 import {mergeProps} from "@react-aria/utils";
-import {MenuProps} from "@nextui-org/menu";
+import {MenuProps} from "@heroui/menu";
 import {CollectionElement} from "@react-types/shared";
-import {useOverlayPosition} from "@react-aria/overlays";
 
-interface Props extends HTMLNextUIProps<"div"> {
+interface Props extends HTMLHeroUIProps<"div"> {
   /**
    * Type of overlay that is opened by the trigger.
    */
@@ -78,8 +77,6 @@ const getCloseOnSelect = <T extends object>(
   return props?.closeOnSelect;
 };
 
-const DEFAULT_PLACEMENT = "bottom";
-
 export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
   const globalContext = useProviderContext();
 
@@ -92,17 +89,13 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
     isDisabled,
     type = "menu",
     trigger = "press",
-    placement: placementProp = DEFAULT_PLACEMENT,
+    placement = "bottom",
     closeOnSelect = true,
     shouldBlockScroll = true,
     classNames: classNamesProp,
     disableAnimation = globalContext?.disableAnimation ?? false,
     onClose,
     className,
-    containerPadding = 12,
-    offset = 7,
-    crossOffset = 0,
-    shouldFlip = true,
     ...otherProps
   } = props;
 
@@ -131,24 +124,13 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
     menuTriggerRef,
   );
 
-  const classNames = useMemo(
+  const styles = useMemo(
     () =>
       dropdown({
         className,
       }),
     [className],
   );
-
-  const {placement} = useOverlayPosition({
-    isOpen: state.isOpen,
-    targetRef: triggerRef,
-    overlayRef: popoverRef,
-    placement: toReactAriaPlacement(placementProp),
-    offset,
-    crossOffset,
-    shouldFlip,
-    containerPadding,
-  });
 
   const onMenuAction = (menuCloseOnSelect?: boolean) => {
     if (menuCloseOnSelect !== undefined && !menuCloseOnSelect) {
@@ -164,7 +146,7 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
 
     return {
       state,
-      placement: placement || DEFAULT_PLACEMENT,
+      placement,
       ref: popoverRef,
       disableAnimation,
       shouldBlockScroll,
@@ -174,7 +156,7 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
       classNames: {
         ...classNamesProp,
         ...props.classNames,
-        content: clsx(classNames, classNamesProp?.content, props.className),
+        content: clsx(styles, classNamesProp?.content, props.className),
       },
       shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
         ? popoverProps.shouldCloseOnInteractOutside
@@ -213,7 +195,6 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
     Component,
     menuRef,
     menuProps,
-    classNames,
     closeOnSelect,
     onClose: state.close,
     autoFocus: state.focusStrategy || true,
@@ -224,13 +205,10 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
   };
 }
 
-// export type UseDropdownReturn = ReturnType<typeof useDropdown>;
-
 export type UseDropdownReturn = {
   Component: string | React.ElementType;
   menuRef: React.RefObject<HTMLUListElement>;
   menuProps: any;
-  classNames: string;
   closeOnSelect: boolean;
   onClose: () => void;
   autoFocus: any;

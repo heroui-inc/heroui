@@ -11,10 +11,10 @@ import {
   ariaHideOutside,
   toReactAriaPlacement,
   ariaShouldCloseOnInteractOutside,
-} from "@nextui-org/aria-utils";
+} from "@heroui/aria-utils";
 import {OverlayTriggerState} from "@react-stately/overlays";
 import {mergeProps} from "@react-aria/utils";
-import {useSafeLayoutEffect} from "@nextui-org/use-safe-layout-effect";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 
 export interface Props {
   /**
@@ -42,9 +42,16 @@ export interface Props {
    * @default true
    */
   shouldCloseOnScroll?: boolean;
+  /**
+   * Whether to close the overlay when the user interacts outside it.
+   * @default true
+   */
+  isDismissable?: boolean;
 }
 
-export type ReactAriaPopoverProps = Props & Omit<AriaPopoverProps, "placement"> & AriaOverlayProps;
+export type ReactAriaPopoverProps = Props &
+  Omit<AriaPopoverProps, "placement"> &
+  Omit<AriaOverlayProps, "isDismissable">;
 
 /**
  * Provides the behavior and accessibility implementation for a popover component.

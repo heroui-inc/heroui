@@ -1,16 +1,57 @@
-# @nextui-org/stories-utils
+# @heroui/stories-utils
+
+## 2.1.5
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+## 2.1.4
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+## 2.1.3
+
+### Patch Changes
+
+- [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - v2.7.0
+  - Tailwind variants upgraded to the latest version, classnames adjusted, tests fixed
+  - Bump RA versions
+  - Various package updates and improvements across the HeroUI component library
+  - Fixed reversed navigation behavior of nextButton and prevButton in the RTL calendar (#4541)
+  - Adding support for global labelPlacement prop (ENG-1694)
+  - Avoid showing onClick deprecation warning for internal onClick (#4549, #4546)
+  - Fixed unexpected scrollShadow on virtualized listbox (#4553)
+  - Fix SelectItem, ListboxItem, and AutocompleteItem not to accept value props (#2283)
+  - New Components and Features:
+    - Introduce NumberInput component
+    - Introduce Toast component (#2560)
+  - Various improvements and bug fixes across components:
+    - Enhanced accessibility features and ARIA support
+    - Updated component styling and theme configurations
+    - Performance optimizations and code cleanup
+    - RTL support improvements
+    - Better type safety and prop validation
+
+## 2.1.2
+
+### Patch Changes
+
+- [#4594](https://github.com/heroui-inc/heroui/pull/4594) [`7ebe0e6`](https://github.com/heroui-inc/heroui/commit/7ebe0e664feb777fe0cad311312d0e02b899319e) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Org name changed
 
 ## 2.1.1
 
 ### Patch Changes
 
-- [`d6eee4a`](https://github.com/nextui-org/nextui/commit/d6eee4a8767556152f47f06dcf04940951abc5af) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - v2.6.2
+- [`d6eee4a`](https://github.com/heroui-inc/heroui/commit/d6eee4a8767556152f47f06dcf04940951abc5af) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - v2.6.2
 
 ## 2.1.0
 
 ### Minor Changes
 
-- [`5786897`](https://github.com/nextui-org/nextui/commit/5786897b9950d95c12351dacd2fb41bb1e298201) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - This release includes several improvements and bug fixes:
+- [`5786897`](https://github.com/heroui-inc/heroui/commit/5786897b9950d95c12351dacd2fb41bb1e298201) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - This release includes several improvements and bug fixes:
 
   - Updated react-aria version across all components
   - Improved Drawer styles and transitions
@@ -38,13 +79,13 @@
 
 ### Patch Changes
 
-- [#3512](https://github.com/nextui-org/nextui/pull/3512) [`2d2d300a1`](https://github.com/nextui-org/nextui/commit/2d2d300a12dbe20ca7ebd125daf3dce74efcbf34) Thanks [@wingkwong](https://github.com/wingkwong)! - fix conflicting versions in npm
+- [#3512](https://github.com/heroui-inc/heroui/pull/3512) [`2d2d300a1`](https://github.com/heroui-inc/heroui/commit/2d2d300a12dbe20ca7ebd125daf3dce74efcbf34) Thanks [@wingkwong](https://github.com/wingkwong)! - fix conflicting versions in npm
 
 ## 2.0.2
 
 ### Patch Changes
 
-- [#2618](https://github.com/nextui-org/nextui/pull/2618) [`dc0bcf13a`](https://github.com/nextui-org/nextui/commit/dc0bcf13a5e9aa0450938bcca47cd4c696066f14) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - - Calendar component added
+- [#2618](https://github.com/heroui-inc/heroui/pull/2618) [`dc0bcf13a`](https://github.com/heroui-inc/heroui/commit/dc0bcf13a5e9aa0450938bcca47cd4c696066f14) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - - Calendar component added
 
   - objectToDeps function applied all across components
   - `useMeasure` hook added
@@ -53,10 +94,10 @@
   - `ResizablePanel` component added to `framer-utils`
   - `test-utils` updated
 
-- [#2648](https://github.com/nextui-org/nextui/pull/2648) [`abf532b54`](https://github.com/nextui-org/nextui/commit/abf532b548235689fb37a3e79f07776ff52f6caf) Thanks [@wingkwong](https://github.com/wingkwong)! - Fixed an issue where a warning was triggered in the Select component when `defaultSelectedKeys` were used and items were still loading (#2605).
+- [#2648](https://github.com/heroui-inc/heroui/pull/2648) [`abf532b54`](https://github.com/heroui-inc/heroui/commit/abf532b548235689fb37a3e79f07776ff52f6caf) Thanks [@wingkwong](https://github.com/wingkwong)! - Fixed an issue where a warning was triggered in the Select component when `defaultSelectedKeys` were used and items were still loading (#2605).
 
 ## 2.0.1
 
 ### Patch Changes
 
-- [`25e86fb41`](https://github.com/nextui-org/nextui/commit/25e86fb41770d3cdae6dfdb79306b78fa02d8187) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - New version v2.2.0
+- [`25e86fb41`](https://github.com/heroui-inc/heroui/commit/25e86fb41770d3cdae6dfdb79306b78fa02d8187) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - New version v2.2.0

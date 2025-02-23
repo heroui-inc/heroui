@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {button, inputOtp} from "@nextui-org/theme";
+import {button, inputOtp} from "@heroui/theme";
 import {Controller, useForm} from "react-hook-form";
 import {ValidationResult} from "@react-types/shared";
-import {Button} from "@nextui-org/button";
-import {Form} from "@nextui-org/form";
+import {Button} from "@heroui/button";
+import {Form} from "@heroui/form";
 
 import {InputOtp} from "../src";
 
@@ -129,7 +129,6 @@ const RequiredTemplate = (args) => {
         length={4}
         name="otp"
         placeholder="Enter code"
-        validationBehavior="native"
         {...args}
       />
       <Button size="sm" type="submit" variant="bordered">

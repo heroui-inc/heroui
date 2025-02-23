@@ -1,4 +1,4 @@
-import {Button, Form, Input} from "@nextui-org/react";
+import {Button, Form, Input} from "@heroui/react";
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -16,12 +16,7 @@ export default function App() {
   };
 
   return (
-    <Form
-      className="w-full max-w-xs"
-      validationBehavior="native"
-      validationErrors={errors}
-      onSubmit={onSubmit}
-    >
+    <Form className="w-full max-w-xs" validationErrors={errors} onSubmit={onSubmit}>
       <Input
         isRequired
         isDisabled={isLoading}

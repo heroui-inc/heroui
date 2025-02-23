@@ -20,11 +20,11 @@ A range calendar consists of a grouping element containing one or more date grid
 <PackageManagers
   showGlobalInstallWarning
   commands={{
-    cli: "npx nextui-cli@latest add calendar",
-    npm: "npm install @nextui-org/calendar",
-    yarn: "yarn add @nextui-org/calendar",
-    pnpm: "pnpm add @nextui-org/calendar",
-    bun: "bun add @nextui-org/calendar",
+    cli: "npx heroui-cli@latest add calendar",
+    npm: "npm install @heroui/calendar",
+    yarn: "yarn add @heroui/calendar",
+    pnpm: "pnpm add @heroui/calendar",
+    bun: "bun add @heroui/calendar",
   }}
 />
 
@@ -32,8 +32,8 @@ A range calendar consists of a grouping element containing one or more date grid
 
 <ImportTabs
   commands={{
-    main: 'import {RangeCalendar} from "@nextui-org/react";',
-    individual: 'import {RangeCalendar} from "@nextui-org/calendar";',
+    main: 'import {RangeCalendar} from "@heroui/react";',
+    individual: 'import {RangeCalendar} from "@heroui/calendar";',
   }}
 />
 
@@ -124,6 +124,12 @@ Calendar supports selecting dates in many calendar systems used around the world
 By default, the Calendar displays a single month. The `visibleMonths` prop allows displaying up to 3 months at a time.
 
 <CodeDemo title="Visible Months" files={rangeCalendarContent.visibleMonths} />
+
+### Custom first day of week
+
+By default, the first day of the week is automatically set based on the current locale. This can be changed by setting the `firstDayOfWeek` prop to `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, or `'sat'`.
+
+<CodeDemo title="Custom first day of week" files={rangeCalendarContent.firstDayOfWeek} />
 
 ### Page Behaviour
 
@@ -244,6 +250,12 @@ Here's the example to customize `topContent` and `bottomContent` to have some pr
       type: "number",
       description: "The number of months to display at once. Up to 3 months are supported. Passing a number greater than 1 will disable the showMonthAndYearPickers prop.",
       default: "1"
+    },
+    {
+      attribute: "firstDayOfWeek",
+      type: "sun | mon | tue | wed | thu | fri | sat",
+      description: "The day that starts the week.",
+      default: "-"
     },
     {
       attribute: "focusedValue",

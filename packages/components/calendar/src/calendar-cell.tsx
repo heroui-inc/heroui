@@ -1,26 +1,28 @@
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
-import type {CalendarSlots, SlotsToClasses, CalendarReturnType} from "@nextui-org/theme";
+import type {CalendarSlots, SlotsToClasses, CalendarReturnType} from "@heroui/theme";
 
 import {CalendarDate, getDayOfWeek, isSameDay, isSameMonth, isToday} from "@internationalized/date";
 import {AriaCalendarCellProps, useCalendarCell} from "@react-aria/calendar";
-import {HTMLNextUIProps} from "@nextui-org/system";
+import {HTMLHeroUIProps} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
 import {useLocale} from "@react-aria/i18n";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useRef} from "react";
-import {dataAttr} from "@nextui-org/shared-utils";
+import {dataAttr} from "@heroui/shared-utils";
 
-export interface CalendarCellProps extends HTMLNextUIProps<"td">, AriaCalendarCellProps {
+export interface CalendarCellProps extends HTMLHeroUIProps<"td">, AriaCalendarCellProps {
   state: CalendarState | RangeCalendarState;
   isPickerVisible?: boolean;
   slots?: CalendarReturnType;
   classNames?: SlotsToClasses<CalendarSlots>;
   currentMonth: CalendarDate;
+  firstDayOfWeek?: "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
 }
 
 export function CalendarCell(originalProps: CalendarCellProps) {
-  const {state, slots, isPickerVisible, currentMonth, classNames, ...props} = originalProps;
+  const {state, slots, isPickerVisible, currentMonth, classNames, firstDayOfWeek, ...props} =
+    originalProps;
 
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -53,7 +55,8 @@ export function CalendarCell(originalProps: CalendarCellProps) {
   const isSelectionEnd =
     isSelected && highlightedRange ? isSameDay(props.date, highlightedRange.end) : false;
   const {locale} = useLocale();
-  const dayOfWeek = getDayOfWeek(props.date, locale);
+
+  const dayOfWeek = getDayOfWeek(props.date, locale, firstDayOfWeek);
   const isRangeStart =
     isSelected && (isFirstSelectedAfterDisabled || dayOfWeek === 0 || props.date.day === 1);
   const isRangeEnd =

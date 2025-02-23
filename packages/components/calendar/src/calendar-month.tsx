@@ -1,26 +1,27 @@
 import {CalendarDate, endOfMonth, getWeeksInMonth} from "@internationalized/date";
 import {CalendarPropsBase} from "@react-types/calendar";
-import {HTMLNextUIProps} from "@nextui-org/system";
+import {HTMLHeroUIProps} from "@heroui/system";
 import {useLocale} from "@react-aria/i18n";
 import {useCalendarGrid} from "@react-aria/calendar";
 import {m} from "framer-motion";
-import {dataAttr, getInertValue} from "@nextui-org/shared-utils";
+import {dataAttr, getInertValue} from "@heroui/shared-utils";
 
 import {CalendarCell} from "./calendar-cell";
 import {slideVariants} from "./calendar-transitions";
 import {useCalendarContext} from "./calendar-context";
 
-export interface CalendarMonthProps extends HTMLNextUIProps<"table">, CalendarPropsBase {
+export interface CalendarMonthProps extends HTMLHeroUIProps<"table">, CalendarPropsBase {
   startDate: CalendarDate;
   currentMonth: number;
   direction: number;
 }
 
 export function CalendarMonth(props: CalendarMonthProps) {
-  const {startDate, direction, currentMonth} = props;
+  const {startDate, direction, currentMonth, firstDayOfWeek} = props;
 
   const {locale} = useLocale();
-  const weeksInMonth = getWeeksInMonth(startDate, locale);
+
+  const weeksInMonth = getWeeksInMonth(startDate, locale, firstDayOfWeek);
 
   const {state, slots, weekdayStyle, isHeaderExpanded, disableAnimation, classNames} =
     useCalendarContext();
@@ -30,6 +31,7 @@ export function CalendarMonth(props: CalendarMonthProps) {
       ...props,
       weekdayStyle,
       endDate: endOfMonth(startDate),
+      firstDayOfWeek,
     },
     state,
   );
@@ -52,6 +54,7 @@ export function CalendarMonth(props: CalendarMonthProps) {
               classNames={classNames}
               currentMonth={startDate}
               date={date}
+              firstDayOfWeek={firstDayOfWeek}
               isPickerVisible={isHeaderExpanded}
               slots={slots}
               state={state}

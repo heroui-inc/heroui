@@ -1,4 +1,4 @@
-import {Button, InputOtp, Form} from "@nextui-org/react";
+import {Button, InputOtp, Form} from "@heroui/react";
 
 export default function App() {
   const [otp, setOtp] = React.useState("");
@@ -6,7 +6,6 @@ export default function App() {
   return (
     <Form
       className="flex w-full flex-col items-start gap-4"
-      validationBehavior="native"
       onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -21,7 +20,6 @@ export default function App() {
         length={4}
         name="otp"
         placeholder="Enter code"
-        validationBehavior="native"
       />
       <Button size="sm" type="submit" variant="bordered">
         Submit

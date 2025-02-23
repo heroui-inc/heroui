@@ -4,22 +4,15 @@ import type {ValidationResult} from "@react-types/shared";
 import React, {ChangeEvent} from "react";
 import {useForm} from "react-hook-form";
 import {Meta} from "@storybook/react";
-import {select, button} from "@nextui-org/theme";
-import {PetBoldIcon, SelectorIcon} from "@nextui-org/shared-icons";
-import {Avatar} from "@nextui-org/avatar";
-import {Chip} from "@nextui-org/chip";
-import {Button} from "@nextui-org/button";
+import {select, button} from "@heroui/theme";
+import {PetBoldIcon, SelectorIcon} from "@heroui/shared-icons";
+import {Avatar} from "@heroui/avatar";
+import {Chip} from "@heroui/chip";
+import {Button} from "@heroui/button";
 import {Selection} from "@react-types/shared";
-import {useInfiniteScroll} from "@nextui-org/use-infinite-scroll";
-import {
-  Pokemon,
-  usePokemonList,
-  animalsData,
-  usersData,
-  Animal,
-  User,
-} from "@nextui-org/stories-utils";
-import {Form} from "@nextui-org/form";
+import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
+import {Pokemon, usePokemonList, animalsData, usersData, Animal, User} from "@heroui/stories-utils";
+import {Form} from "@heroui/form";
 
 import {Select, SelectedItems, SelectItem, SelectProps, SelectSection} from "../src";
 
@@ -76,11 +69,7 @@ const defaultProps = {
   ...select.defaultVariants,
 };
 
-const items = animalsData.map((item) => (
-  <SelectItem key={item.value} value={item.value}>
-    {item.label}
-  </SelectItem>
-));
+const items = animalsData.map((item) => <SelectItem key={item.value}>{item.label}</SelectItem>);
 
 const Template = ({color, variant, ...args}: SelectProps) => (
   <Select className="max-w-xs" color={color} label="Favorite Animal" variant={variant} {...args}>
@@ -392,7 +381,7 @@ const MirrorTemplate = ({color, variant, ...args}: SelectProps) => (
 
 const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
   <div className="w-full flex flex-col items-center gap-12">
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>Without placeholder</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select color={color} label="Select an animal" variant={variant} {...args}>
@@ -418,7 +407,7 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         </Select>
       </div>
     </div>
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>With placeholder</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select
@@ -452,7 +441,7 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         </Select>
       </div>
     </div>
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>With placeholder and description</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select
@@ -892,10 +881,8 @@ const LargeDatasetTemplate = (args: SelectProps & {numItems: number}) => {
   return (
     <div className="flex w-full max-w-full py-20 xl:px-32 lg:px-20 px-20">
       <Select label={`Select from ${args.numItems} items`} {...args}>
-        {largeDataset.map((item, index) => (
-          <SelectItem key={index} value={item.value}>
-            {item.label}
-          </SelectItem>
+        {largeDataset.map((item) => (
+          <SelectItem key={item.value}>{item.label}</SelectItem>
         ))}
       </Select>
     </div>
@@ -1494,4 +1481,24 @@ export const ValidationBehaviorAria = {
   args: {
     ...defaultProps,
   },
+};
+
+export const PopoverTopOrBottom = {
+  args: {
+    ...defaultProps,
+  },
+  render: (args) => (
+    <div className="relative h-screen w-screen">
+      <div className="absolute top-0 p-8">
+        <div className="w-48">
+          <Template {...args} />
+        </div>
+      </div>
+      <div className="absolute top-1/2 p-8">
+        <div className="w-48">
+          <Template {...args} />
+        </div>
+      </div>
+    </div>
+  ),
 };

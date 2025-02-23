@@ -1,27 +1,27 @@
-import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@nextui-org/theme";
+import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaTimeFieldProps, TimeValue} from "@react-types/datepicker";
-import type {ReactRef} from "@nextui-org/react-utils";
+import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
 
 import {useLocale} from "@react-aria/i18n";
 import {mergeProps} from "@react-aria/utils";
-import {PropGetter, useProviderContext} from "@nextui-org/system";
-import {HTMLNextUIProps, mapPropsVariants} from "@nextui-org/system";
-import {useDOMRef} from "@nextui-org/react-utils";
+import {PropGetter, useLabelPlacement, useProviderContext} from "@heroui/system";
+import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
+import {useDOMRef} from "@heroui/react-utils";
 import {useTimeField as useAriaTimeField} from "@react-aria/datepicker";
 import {useTimeFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr} from "@nextui-org/shared-utils";
-import {dateInput} from "@nextui-org/theme";
+import {objectToDeps, clsx, dataAttr} from "@heroui/shared-utils";
+import {dateInput} from "@heroui/theme";
 import {useMemo} from "react";
-import {FormContext, useSlottedContext} from "@nextui-org/form";
+import {FormContext, useSlottedContext} from "@heroui/form";
 
-type NextUIBaseProps<T extends TimeValue> = Omit<
-  HTMLNextUIProps<"div">,
+type HeroUIBaseProps<T extends TimeValue> = Omit<
+  HTMLHeroUIProps<"div">,
   keyof AriaTimeFieldProps<T> | "onChange"
 >;
 
-interface Props<T extends TimeValue> extends NextUIBaseProps<T> {
+interface Props<T extends TimeValue> extends HeroUIBaseProps<T> {
   /**
    * Ref to the DOM node.
    */
@@ -133,16 +133,10 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
 
   const baseStyles = clsx(classNames?.base, className);
 
-  const labelPlacement = useMemo<DateInputVariantProps["labelPlacement"]>(() => {
-    if (
-      (!originalProps.labelPlacement || originalProps.labelPlacement === "inside") &&
-      !props.label
-    ) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, props.label]);
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
 
@@ -152,9 +146,8 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
         ...variantProps,
         disableAnimation,
         labelPlacement,
-        className,
       }),
-    [objectToDeps(variantProps), labelPlacement, disableAnimation, className],
+    [objectToDeps(variantProps), labelPlacement, disableAnimation],
   );
 
   const getLabelProps: PropGetter = (props) => {

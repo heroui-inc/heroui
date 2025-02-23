@@ -2,9 +2,9 @@ import type {ValidationResult} from "@react-types/shared";
 
 import React from "react";
 import {Meta} from "@storybook/react";
-import {checkbox} from "@nextui-org/theme";
-import {button} from "@nextui-org/theme";
-import {Form} from "@nextui-org/form";
+import {checkbox} from "@heroui/theme";
+import {button} from "@heroui/theme";
+import {Form} from "@heroui/form";
 
 import {CheckboxGroup, Checkbox, CheckboxGroupProps} from "../src";
 
@@ -153,12 +153,7 @@ const ServerValidationTemplate = (args: CheckboxGroupProps) => {
       validationErrors={serverErrors}
       onSubmit={onSubmit}
     >
-      <CheckboxGroup
-        {...args}
-        label="Agree to the following"
-        name="terms"
-        validationBehavior="native"
-      >
+      <CheckboxGroup {...args} label="Agree to the following" name="terms">
         <Checkbox value="terms">Terms and conditions</Checkbox>
         <Checkbox value="cookies">Cookies</Checkbox>
         <Checkbox value="privacy">Privacy policy</Checkbox>

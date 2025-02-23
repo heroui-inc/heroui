@@ -1,27 +1,27 @@
-import type {CalendarReturnType, CalendarVariantProps} from "@nextui-org/theme";
+import type {CalendarReturnType, CalendarVariantProps} from "@heroui/theme";
 import type {CalendarPropsBase as AriaCalendarPropsBase} from "@react-types/calendar";
-import type {CalendarSlots, SlotsToClasses} from "@nextui-org/theme";
+import type {CalendarSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCalendarGridProps} from "@react-aria/calendar";
 import type {AriaButtonProps} from "@react-types/button";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
-import type {ButtonProps} from "@nextui-org/button";
-import type {SupportedCalendars} from "@nextui-org/system";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ButtonProps} from "@heroui/button";
+import type {SupportedCalendars} from "@heroui/system";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
 
 import {createCalendar, Calendar, CalendarDate, DateFormatter} from "@internationalized/date";
-import {mapPropsVariants, useProviderContext} from "@nextui-org/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
-import {calendar} from "@nextui-org/theme";
+import {calendar} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
-import {ReactRef, useDOMRef} from "@nextui-org/react-utils";
+import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@react-aria/i18n";
-import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@nextui-org/shared-utils";
+import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 
-type NextUIBaseProps = Omit<HTMLNextUIProps<"div">, keyof AriaCalendarPropsBase | "onChange">;
+type HeroUIBaseProps = Omit<HTMLHeroUIProps<"div">, keyof AriaCalendarPropsBase | "onChange">;
 
-interface Props extends NextUIBaseProps {
+interface Props extends HeroUIBaseProps {
   /**
    * Ref to the DOM node.
    */
@@ -65,6 +65,10 @@ interface Props extends NextUIBaseProps {
    * @default true
    */
   showHelper?: boolean;
+  /**
+   * The day that starts the week.
+   */
+  firstDayOfWeek?: "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
   /**
    * Whether the calendar header is expanded. This is only available if the `showMonthAndYearPickers` prop is set to `true`.
    * @default false
@@ -111,7 +115,7 @@ interface Props extends NextUIBaseProps {
    *
    * This way, only GregorianCalendar is imported, and the other calendar implementations can be tree-shaken.
    *
-   * You can also use the NextUIProvider to provide the createCalendar function to all nested components.
+   * You can also use the HeroUIProvider to provide the createCalendar function to all nested components.
    *
    * @default all calendars
    */
@@ -188,7 +192,9 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
 
   const globalContext = useProviderContext();
 
-  const {locale} = useLocale();
+  const {locale, direction} = useLocale();
+
+  const isRTL = direction === "rtl";
 
   const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
 
@@ -205,6 +211,7 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     topContent,
     bottomContent,
     showHelper = true,
+    firstDayOfWeek,
     calendarWidth = 256,
     visibleMonths: visibleMonthsProp = 1,
     weekdayStyle = "narrow",
@@ -261,6 +268,7 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
         isRange: !!originalProps.isRange,
         isHeaderWrapperExpanded: isHeaderExpanded,
         className,
+        isRTL,
       }),
     [objectToDeps(variantProps), showMonthAndYearPickers, isHeaderExpanded, className],
   );
@@ -323,6 +331,7 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     maxValue,
     baseProps,
     showHelper,
+    firstDayOfWeek,
     weekdayStyle,
     visibleMonths,
     visibleDuration,
