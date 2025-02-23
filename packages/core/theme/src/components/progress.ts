@@ -27,8 +27,8 @@ const progress = tv(
       label: "",
       labelWrapper: "flex justify-between",
       value: "",
-      track: "z-0 relative bg-default-300/50 overflow-hidden",
-      indicator: "h-full",
+      track: "z-0 relative bg-default-300/50 overflow-hidden rtl:rotate-180",
+      indicator: "h-full rtl:origin-right ltr:origin-left",
     },
     variants: {
       color: {
@@ -97,7 +97,13 @@ const progress = tv(
       },
       isIndeterminate: {
         true: {
-          indicator: ["absolute", "w-full", "origin-left", "animate-indeterminate-bar"],
+          indicator: [
+            "absolute",
+            "w-full",
+            "rtl:origin-right",
+            "ltr:origin-left",
+            "animate-indeterminate-bar",
+          ],
         },
       },
       isDisabled: {
