@@ -240,6 +240,47 @@ describe("NumberInput", () => {
 
     expect(stepperButton).toBeNull();
   });
+
+  it("should trigger onChange", async () => {
+    const onChange = jest.fn();
+
+    const {container} = render(<NumberInput label="test number input" onChange={onChange} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("1024");
+
+    expect(onChange).toHaveBeenCalledTimes(4);
+  });
+
+  it("should emit onChange", async () => {
+    const onChange = jest.fn();
+
+    const {container} = render(<NumberInput label="test number input" onChange={onChange} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("1024");
+
+    expect(onChange).toHaveBeenCalledTimes(4);
+  });
+
+  it("should emit onChange with keyboard up & down key", async () => {
+    const onChange = jest.fn();
+
+    const {container} = render(<NumberInput label="test number input" onChange={onChange} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("[ArrowUp]");
+    await user.keyboard("[ArrowUp]");
+    expect(onChange).toHaveBeenCalledTimes(2);
+    await user.keyboard("[ArrowDown]");
+    expect(onChange).toHaveBeenCalledTimes(3);
+  });
 });
 
 describe("NumberInput with React Hook Form", () => {
@@ -503,7 +544,6 @@ describe("NumberInput with React Hook Form", () => {
 
         await user.tab();
         await user.keyboard("1234");
-        await user.tab();
       });
     });
   });

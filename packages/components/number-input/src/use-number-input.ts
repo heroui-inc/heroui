@@ -136,7 +136,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     ...originalProps,
     validationBehavior,
     locale,
-    onChange: onValueChange,
+    onChange: chain(onValueChange, onChange),
   });
 
   const {
