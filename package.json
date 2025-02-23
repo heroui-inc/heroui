@@ -10,8 +10,8 @@
   },
   "scripts": {
     "dev": "pnpm sb",
-    "build": "turbo build --filter=!@heroui/docs --filter=!@heroui/storybook",
-    "build:fast": "turbo build:fast --filter=!@heroui/docs --filter=!@heroui/storybook",
+    "build": "turbo build --filter='!@heroui/docs' --filter='!@heroui/storybook' --filter='!@heroui/stories-utils' --filter='!@heroui/test-utils'",
+    "build:fast": "turbo build:fast --filter='!@heroui/docs' --filter='!@heroui/storybook' --filter='!@heroui/stories-utils' --filter='!@heroui/test-utils'",
     "dev:docs": "turbo dev --filter=@heroui/docs",
     "build:docs": "turbo build --filter=@heroui/docs",
     "build:docs-meta": "node ./scripts/update-index-docs.js",
