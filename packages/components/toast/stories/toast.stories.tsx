@@ -2,6 +2,14 @@ import React, {useEffect} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@heroui/modal";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
 
@@ -217,6 +225,45 @@ const PromiseToastTemplate = (args: ToastProps) => {
   );
 };
 
+const WithToastFromModalTemplate = (args) => {
+  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+      <Modal {...args} isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Toast from Modal</ModalHeader>
+          <ModalBody>
+            <div>Press &quot;Show Toast&quot; to launch a toast.</div>
+          </ModalBody>
+          <ModalFooter>
+            <Button onPress={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <div className="flex gap-4">
+        <div>
+          <Button onPress={onOpen}>Open Modal</Button>
+        </div>
+        <div>
+          <Button
+            onPress={() => {
+              addToast({
+                title: "Toast Title",
+                description: "Toast Displayed Successfully",
+                ...args,
+              });
+            }}
+          >
+            Show Toast
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+};
+
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
@@ -404,6 +451,13 @@ export const Placement = {
 
 export const WithEndContent = {
   render: WithEndContentTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithToastFromModal = {
+  render: WithToastFromModalTemplate,
   args: {
     ...defaultProps,
   },
