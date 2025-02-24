@@ -1,8 +1,6 @@
 # @heroui/carousel
 
-A Quick description of the component
-
-> This is an internal utility, not intended for public usage.
+The Carousel Component is a a series of content items (like images) in a rotating slideshow, allowing users to navigate through them sequentially
 
 ## Installation
 
