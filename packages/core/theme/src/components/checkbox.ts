@@ -80,9 +80,9 @@ const checkbox = tv({
       sm: {
         wrapper: [
           "w-4 h-4 me-2",
-          "rounded-[calc(theme(borderRadius.medium)*0.5)]",
-          "before:rounded-[calc(theme(borderRadius.medium)*0.5)]",
-          "after:rounded-[calc(theme(borderRadius.medium)*0.5)]",
+          "rounded-[calc(var(--heroui-radius-medium)*0.5)]",
+          "before:rounded-[calc(var(--heroui-radius-medium)*0.5)]",
+          "after:rounded-[calc(var(--heroui-radius-medium)*0.5)]",
         ],
         label: "text-small",
         icon: "w-3 h-2",
@@ -90,9 +90,9 @@ const checkbox = tv({
       md: {
         wrapper: [
           "w-5 h-5 me-2",
-          "rounded-[calc(theme(borderRadius.medium)*0.6)]",
-          "before:rounded-[calc(theme(borderRadius.medium)*0.6)]",
-          "after:rounded-[calc(theme(borderRadius.medium)*0.6)]",
+          "rounded-[calc(var(--heroui-radius-medium)*0.6)]",
+          "before:rounded-[calc(var(--heroui-radius-medium)*0.6)]",
+          "after:rounded-[calc(var(--heroui-radius-medium)*0.6)]",
         ],
         label: "text-medium",
         icon: "w-4 h-3",
@@ -100,9 +100,9 @@ const checkbox = tv({
       lg: {
         wrapper: [
           "w-6 h-6 me-2",
-          "rounded-[calc(theme(borderRadius.medium)*0.7)]",
-          "before:rounded-[calc(theme(borderRadius.medium)*0.7)]",
-          "after:rounded-[calc(theme(borderRadius.medium)*0.7)]",
+          "rounded-[calc(var(--heroui-radius-medium)*0.7)]",
+          "before:rounded-[calc(var(--heroui-radius-medium)*0.7)]",
+          "after:rounded-[calc(var(--heroui-radius-medium)*0.7)]",
         ],
         label: "text-large",
         icon: "w-5 h-4",
@@ -114,23 +114,23 @@ const checkbox = tv({
       },
       sm: {
         wrapper: [
-          "rounded-[calc(theme(borderRadius.medium)*0.5)]",
-          "before:rounded-[calc(theme(borderRadius.medium)*0.5)]",
-          "after:rounded-[calc(theme(borderRadius.medium)*0.5)]",
+          "rounded-[calc(var(--heroui-radius-medium)*0.5)]",
+          "before:rounded-[calc(var(--heroui-radius-medium)*0.5)]",
+          "after:rounded-[calc(var(--heroui-radius-medium)*0.5)]",
         ],
       },
       md: {
         wrapper: [
-          "rounded-[calc(theme(borderRadius.medium)*0.6)]",
-          "before:rounded-[calc(theme(borderRadius.medium)*0.6)]",
-          "after:rounded-[calc(theme(borderRadius.medium)*0.6)]",
+          "rounded-[calc(var(--heroui-radius-medium)*0.6)]",
+          "before:rounded-[calc(var(--heroui-radius-medium)*0.6)]",
+          "after:rounded-[calc(var(--heroui-radius-medium)*0.6)]",
         ],
       },
       lg: {
         wrapper: [
-          "rounded-[calc(theme(borderRadius.medium)*0.7)]",
-          "before:rounded-[calc(theme(borderRadius.medium)*0.7)]",
-          "after:rounded-[calc(theme(borderRadius.medium)*0.7)]",
+          "rounded-[calc(var(--heroui-radius-medium)*0.7)]",
+          "before:rounded-[calc(var(--heroui-radius-medium)*0.7)]",
+          "after:rounded-[calc(var(--heroui-radius-medium)*0.7)]",
         ],
       },
       full: {

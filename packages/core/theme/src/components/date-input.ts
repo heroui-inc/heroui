@@ -165,12 +165,12 @@ const dateInput = tv({
     },
     labelPlacement: {
       outside: {
-        base: "flex flex-col data-[has-helper=true]:pb-[calc(theme(fontSize.tiny)_+8px)] gap-y-1.5",
+        base: "flex flex-col data-[has-helper=true]:pb-[calc(var(--heroui-font-size-tiny)_+8px)] gap-y-1.5",
         label: "w-full text-foreground",
         helperWrapper: "absolute top-[calc(100%_+_2px)] start-0",
       },
       "outside-left": {
-        base: "flex-row items-center data-[has-helper=true]:pb-[calc(theme(fontSize.tiny)_+_8px)] gap-x-2 flex-nowrap",
+        base: "flex-row items-center data-[has-helper=true]:pb-[calc(var(--heroui-font-size-tiny)_+_8px)] gap-x-2 flex-nowrap",
         label: "relative text-foreground",
         inputWrapper: "relative flex-1",
         helperWrapper: "absolute top-[calc(100%_+_2px)] start-0",

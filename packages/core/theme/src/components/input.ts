@@ -773,7 +773,7 @@ const input = tv({
           "text-tiny",
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-tiny)/2_+_16px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(--heroui-font-size-small)_+_8px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
       },
     },
     {
@@ -787,7 +787,7 @@ const input = tv({
           "text-small",
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(--heroui-font-size-small)_+_10px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_10px)]",
       },
     },
     {
@@ -801,7 +801,7 @@ const input = tv({
           "text-medium",
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(--heroui-font-size-small)_+_12px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
       },
     },
     // outside-left & size & hasHelper
