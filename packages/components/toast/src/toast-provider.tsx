@@ -73,5 +73,6 @@ export const closeAll = () => {
 
   keys.map((key) => {
     globalToastQueue?.close(key);
+    globalToastQueue?.remove(key);
   });
 };
