@@ -203,7 +203,7 @@ const select = tv({
           "rtl:origin-top-right",
           "!duration-200",
           "!ease-out",
-          "transition-[transform,color,left,opacity]",
+          "transition-[transform,color,left,opacity,translate,scale]",
           "motion-reduce:transition-none",
         ],
         selectorIcon: "transition-transform duration-150 ease motion-reduce:transition-none",

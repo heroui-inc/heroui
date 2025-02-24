@@ -262,7 +262,7 @@ const numberInput = tv({
           "!duration-200",
           "!ease-out",
           "motion-reduce:transition-none",
-          "transition-[transform,color,left,opacity]",
+          "transition-[transform,color,left,opacity,translate,scale]",
         ],
         clearButton: [
           "scale-90",

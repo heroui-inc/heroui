@@ -237,10 +237,10 @@ const input = tv({
         inputWrapper: "transition-background motion-reduce:transition-none !duration-150",
         label: [
           "will-change-auto",
-          "duration-200",
-          "ease-out",
+          "!duration-200",
+          "!ease-out",
           "motion-reduce:transition-none",
-          "transition-[transform,color,left,opacity]",
+          "transition-[transform,color,left,opacity,translate,scale]",
         ],
         clearButton: [
           "scale-90",
