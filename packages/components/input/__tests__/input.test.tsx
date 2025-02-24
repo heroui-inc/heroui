@@ -301,7 +301,7 @@ describe("Input", () => {
     expect(onClear).toHaveBeenCalledTimes(0);
   });
 
-  it("should clear value when pressing ESC key", async () => {
+  it("should clear value when isClearable and pressing ESC key", async () => {
     const onClear = jest.fn();
     const defaultValue = "test value";
 
@@ -328,6 +328,18 @@ describe("Input", () => {
     fireEvent.keyDown(input, {key: "Escape"});
 
     expect(onClear).not.toHaveBeenCalled();
+  });
+
+  it("should not clear value when pressing ESC key if input is isClearable", () => {
+    const defaultValue = "test value";
+
+    const {getByRole} = render(<Input defaultValue={defaultValue} />);
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe("test value");
   });
 });
 
