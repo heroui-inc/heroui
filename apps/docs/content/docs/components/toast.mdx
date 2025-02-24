@@ -168,7 +168,7 @@ Toast has the following slots:
 - `title`: The title element
 - `description`: The description element
 - `icon`: The icon element
-- `loadingIcon`: The icon to be displayed until `promise` is resolved/rejected.
+- `loadingComponent`: The component to be displayed until `promise` is resolved/rejected.
 - `content`: The wrapper for the title, description and icon content.
 - `motionDiv`: The motion.div for the FramerMotion.
 - `progressTrack`: The track of the progressBar.
@@ -253,9 +253,9 @@ Toast has the following slots:
       default: "undefined"
     },
     {
-      attribute: "loadingIcon", 
+      attribute: "loadingComponent", 
       type: "ReactNode",
-      description: "The loading icon for toasts with promise prop - overrides the default loading icon",
+      description: "The loading component for toasts with promise prop - overrides the default loading component",
       default: "-"
     },
     {
@@ -284,7 +284,7 @@ Toast has the following slots:
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingIcon\" | \"progressTrack\" | \"progressIndicator\ | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
+      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingComponent\" | \"progressTrack\" | \"progressIndicator\ | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
       description: "Allows to set custom class names for the toast slots.",
       default: "-"
     }
