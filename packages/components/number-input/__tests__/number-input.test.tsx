@@ -243,15 +243,10 @@ describe("NumberInput", () => {
 
   it("should clear value when isClearable and pressing ESC key", async () => {
     const onClear = jest.fn();
-    const defaultValue = 1234;
+    const defaultValue = 12;
 
     const {container} = render(
-      <NumberInput
-        isClearable
-        defaultValue={defaultValue}
-        formatOptions={{useGrouping: false}}
-        onClear={onClear}
-      />,
+      <NumberInput isClearable defaultValue={defaultValue} onClear={onClear} />,
     );
 
     const input = container.querySelector("input") as HTMLInputElement;
@@ -275,11 +270,9 @@ describe("NumberInput", () => {
   });
 
   it("should not clear value when pressing ESC key without isClearable", () => {
-    const defaultValue = 1234;
+    const defaultValue = 12;
 
-    const {container} = render(
-      <NumberInput defaultValue={defaultValue} formatOptions={{useGrouping: false}} />,
-    );
+    const {container} = render(<NumberInput defaultValue={defaultValue} />);
 
     const input = container.querySelector("input") as HTMLInputElement;
 
