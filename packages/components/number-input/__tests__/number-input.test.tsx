@@ -240,7 +240,48 @@ describe("NumberInput", () => {
 
     expect(stepperButton).toBeNull();
   });
+  
+  it("should clear value when isClearable and pressing ESC key", async () => {
+    const onClear = jest.fn();
+    const defaultValue = 12;
 
+    const {container} = render(
+      <NumberInput isClearable defaultValue={defaultValue} onClear={onClear} />,
+    );
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue.toString());
+
+    fireEvent.keyDown(input, {key: "Escape"});
+    expect(input.value).toBe("");
+    expect(onClear).toHaveBeenCalledTimes(1);
+  });
+  
+  it("should not clear value when pressing ESC key if input is empty", () => {
+    const onClear = jest.fn();
+
+    const {container} = render(<NumberInput isClearable onClear={onClear} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    fireEvent.keyDown(input, {key: "Escape"});
+    expect(onClear).not.toHaveBeenCalled();
+  });
+  
+   it("should not clear value when pressing ESC key without isClearable", () => {
+    const defaultValue = 12;
+
+    const {container} = render(<NumberInput defaultValue={defaultValue} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue.toString());
+
+    fireEvent.keyDown(input, {key: "Escape"});
+    expect(input.value).toBe(defaultValue.toString());
+  });
+  
   it("should emit onChange", async () => {
     const onChange = jest.fn();
 

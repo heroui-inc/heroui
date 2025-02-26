@@ -300,6 +300,47 @@ describe("Input", () => {
 
     expect(onClear).toHaveBeenCalledTimes(0);
   });
+
+  it("should clear value when isClearable and pressing ESC key", async () => {
+    const onClear = jest.fn();
+    const defaultValue = "test value";
+
+    const {getByRole} = render(<Input isClearable defaultValue={defaultValue} onClear={onClear} />);
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue);
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe("");
+
+    expect(onClear).toHaveBeenCalledTimes(1);
+  });
+
+  it("should not clear value when pressing ESC key if input is empty", () => {
+    const onClear = jest.fn();
+
+    const {getByRole} = render(<Input isClearable defaultValue="" onClear={onClear} />);
+
+    const input = getByRole("textbox");
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(onClear).not.toHaveBeenCalled();
+  });
+
+  it("should not clear value when pressing ESC key if input is isClearable", () => {
+    const defaultValue = "test value";
+
+    const {getByRole} = render(<Input defaultValue={defaultValue} />);
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe("test value");
+  });
 });
 
 describe("Input with React Hook Form", () => {
