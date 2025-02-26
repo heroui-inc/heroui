@@ -156,7 +156,12 @@ export const Support: FC<SupportProps> = ({sponsors = []}) => {
             contributions will help to make HeroUI better.
           </p>
           <Spacer y={12} />
-          <FeaturesGrid features={supportAccounts} />
+          <FeaturesGrid
+            classNames={{
+              base: "flex justify-center",
+            }}
+            features={supportAccounts}
+          />
           <div
             ref={sonarRef}
             className="relative mt-32 md:mt-60 w-full flex items-center justify-center"

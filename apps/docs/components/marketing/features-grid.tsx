@@ -9,7 +9,7 @@ import {LinkIcon} from "@heroui/shared-icons";
 
 const styles = tv({
   slots: {
-    base: "flex justify-center",
+    base: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4",
     card: "border-transparent bg-white/5 dark:bg-default-400/10 backdrop-blur-lg backdrop-saturate-[1.8]",
     header: "gap-2 pb-0",
     body: "",
