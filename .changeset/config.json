@@ -15,8 +15,6 @@
   },
   "ignore": [
     "@heroui/docs",
-    "@heroui/storybook",
-    "@heroui/stories-utils",
-    "@heroui/test-utils"
+    "@heroui/storybook"
   ]
 }
