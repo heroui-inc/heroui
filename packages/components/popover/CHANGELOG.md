@@ -1,5 +1,12 @@
 # @heroui/popover
 
+## 2.3.14
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.14
+
 ## 2.3.13
 
 ### Patch Changes

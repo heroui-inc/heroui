@@ -1,5 +1,12 @@
 # @heroui/input-otp
 
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.13
+
 ## 2.1.12
 
 ### Patch Changes

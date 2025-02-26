@@ -1,5 +1,13 @@
 # @heroui/button
 
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies [[`2186f6d`](https://github.com/heroui-inc/heroui/commit/2186f6da23679c5cf63ea03c9c6df9ca6df92ad9)]:
+  - @heroui/spinner@2.2.11
+  - @heroui/ripple@2.2.11
+
 ## 2.2.13
 
 ### Patch Changes
