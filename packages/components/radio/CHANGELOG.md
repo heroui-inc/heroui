@@ -1,5 +1,12 @@
 # @heroui/radio
 
+## 2.3.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.13
+
 ## 2.3.12
 
 ### Patch Changes

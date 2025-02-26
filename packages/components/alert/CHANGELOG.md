@@ -1,5 +1,12 @@
 # @heroui/alert
 
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.14
+
 ## 2.2.13
 
 ### Patch Changes
