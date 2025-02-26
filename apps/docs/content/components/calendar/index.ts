@@ -10,6 +10,7 @@ import invalidDate from "./invalid-date";
 import withMonthAndYearPicker from "./with-month-and-year-picker";
 import internationalCalendars from "./international-calendars";
 import visibleMonths from "./visible-months";
+import firstDayOfWeek from "./first-day-of-week";
 import pageBehaviour from "./page-behaviour";
 import presets from "./presets";
 
@@ -26,6 +27,7 @@ export const calendarContent = {
   withMonthAndYearPicker,
   internationalCalendars,
   visibleMonths,
+  firstDayOfWeek,
   pageBehaviour,
   presets,
 };

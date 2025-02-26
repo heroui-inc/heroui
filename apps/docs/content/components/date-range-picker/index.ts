@@ -17,6 +17,7 @@ import minAndMaxDate from "./min-and-max-date";
 import internationalCalendar from "./international-calendar";
 import unavailableDates from "./unavailable-dates";
 import visibleMonth from "./visible-month";
+import firstDayOfWeek from "./first-day-of-week";
 import pageBehavior from "./page-behavior";
 import nonContigous from "./non-contiguous";
 import presets from "./presets";
@@ -43,6 +44,7 @@ export const dateRangePickerContent = {
   internationalCalendar,
   unavailableDates,
   visibleMonth,
+  firstDayOfWeek,
   pageBehavior,
   nonContigous,
   presets,

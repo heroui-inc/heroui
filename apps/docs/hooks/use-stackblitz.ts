@@ -11,10 +11,11 @@ export interface UseSandpackProps {
 
 const viteConfig = `import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
 });
 `;
 
@@ -52,16 +53,28 @@ export function useStackblitz(props: UseSandpackProps) {
   "dependencies": {
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    ${Object.entries(omit(dependencies as any, ["react", "react-dom"]))
+    ${Object.entries(
+      omit(dependencies as any, [
+        "react",
+        "react-dom",
+        "react-dom/client",
+        "@vitejs/plugin-react",
+        "vite",
+        "autoprefixer",
+        "postcss",
+        "tailwindcss",
+      ]),
+    )
       .map(([key, value]) => `"${key}": "${value}"`)
       .join(",\n    ")}
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.3.4",
     "vite": "6.0.6",
-    "autoprefixer": "10.4.20",
-    "postcss": "8.4.49",
-    "tailwindcss": "3.4.17"
+    "postcss": "8.5.1",
+    "tailwindcss": "^4.0.6",
+    "@tailwindcss/postcss": "4.0.0",
+    "@tailwindcss/vite": "4.0.0"
   },
   "main": "/index.jsx"
 }`;
