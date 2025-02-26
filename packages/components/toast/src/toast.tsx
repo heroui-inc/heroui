@@ -69,7 +69,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
         <Spinner
           aria-label="loadingIcon"
           classNames={{wrapper: getLoadingIconProps().className}}
-          color={color ?? "default"}
+          color={"current"}
         />
       )
     : null;

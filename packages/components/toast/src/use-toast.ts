@@ -100,7 +100,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * should apply styles to indicate timeout progress
    */
-  shouldShowTimeoutProgess?: boolean;
+  shouldShowTimeoutProgress?: boolean;
   /**
    * The severity of the toast. This changes the icon without having to change the color.
    * @default "default"
@@ -119,6 +119,7 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
   isRegionExpanded: boolean;
   placement?: ToastPlacement;
   toastOffset?: number;
+  maxVisibleToasts: number;
 }
 
 export type UseToastProps<T = ToastProps> = Props<T> &
@@ -154,10 +155,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     toastOffset = 0,
     motionProps,
     timeout = 6000,
-    shouldShowTimeoutProgess = false,
+    shouldShowTimeoutProgress = false,
     icon,
     onClose,
     severity,
+    maxVisibleToasts,
     ...otherProps
   } = props;
 
@@ -193,9 +195,18 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     }
   }, []);
 
+  const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
+
+  useEffect(() => {
+    if (!promiseProp) return;
+    promiseProp.finally(() => {
+      setIsLoading(false);
+    });
+  }, [promiseProp]);
+
   useEffect(() => {
     const updateProgress = (timestamp: number) => {
-      if (!timeout) {
+      if (!timeout || isLoading) {
         return;
       }
 
@@ -222,7 +233,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       if (progressBarRef.current) {
         progressBarRef.current.style.width = `${
-          shouldShowTimeoutProgess ? progressRef.current : 0
+          shouldShowTimeoutProgress ? progressRef.current : 0
         }%`;
       }
 
@@ -238,16 +249,16 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [timeout, shouldShowTimeoutProgess, state, isToastHovered, index, total, isRegionExpanded]);
-
-  const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
-
-  useEffect(() => {
-    if (!promiseProp) return;
-    promiseProp.finally(() => {
-      setIsLoading(false);
-    });
-  }, [promiseProp]);
+  }, [
+    timeout,
+    shouldShowTimeoutProgress,
+    state,
+    isToastHovered,
+    index,
+    total,
+    isRegionExpanded,
+    isLoading,
+  ]);
 
   const Component = as || "div";
   const loadingIcon: ReactNode = icon;
@@ -486,7 +497,10 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "data-drag-value": number;
       className: string;
     } => {
-      const isCloseToEnd = total - index - 1 <= 2;
+      const comparingValue = isRegionExpanded
+        ? maxVisibleToasts - 1
+        : Math.min(2, maxVisibleToasts - 1);
+      const isCloseToEnd = total - index - 1 <= comparingValue;
       const dragDirection = placement === "bottom-center" || placement === "top-center" ? "y" : "x";
       const dragConstraints = {left: 0, right: 0, top: 0, bottom: 0};
       const dragElastic = getDragElasticConstraints(placement);
@@ -593,6 +607,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       shouldCloseToast,
       slots,
       toastOffset,
+      maxVisibleToasts,
     ],
   );
 
