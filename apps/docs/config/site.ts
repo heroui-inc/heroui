@@ -35,7 +35,7 @@ export const siteConfig = {
     twitter: "https://x.com/hero_ui",
     docs: "https://heroui.com",
     discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
+    sponsor: "https://opencollective.com/heroui",
     portfolio: "https://jrgarciadev.com",
   },
 };
