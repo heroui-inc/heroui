@@ -62,39 +62,44 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
   const {ref: tooltipRef, id, style, ...otherTooltipProps} = getTooltipProps();
 
   const animatedContent = (
-    <div ref={tooltipRef} id={id} style={style}>
-      <LazyMotion features={domAnimation}>
-        <m.div
-          animate="enter"
-          exit="exit"
-          initial="exit"
-          variants={TRANSITION_VARIANTS.scaleSpring}
-          {...mergeProps(motionProps, otherTooltipProps)}
-          style={{
-            ...getTransformOrigins(placement),
-          }}
-        >
-          <Component {...getTooltipContentProps()}>{content}</Component>
-        </m.div>
-      </LazyMotion>
+    <div key={`${id}-tooltip-content`} ref={tooltipRef} id={id} style={style}>
+      <m.div
+        key={`${id}-tooltip-inner`}
+        animate="enter"
+        exit="exit"
+        initial="exit"
+        variants={TRANSITION_VARIANTS.scaleSpring}
+        {...mergeProps(motionProps, otherTooltipProps)}
+        style={{
+          ...getTransformOrigins(placement),
+        }}
+      >
+        <Component {...getTooltipContentProps()}>{content}</Component>
+      </m.div>
     </div>
   );
 
   return (
     <>
       {trigger}
-      {disableAnimation && isOpen ? (
-        <OverlayContainer portalContainer={portalContainer}>
-          <div ref={tooltipRef} id={id} style={style} {...otherTooltipProps}>
-            <Component {...getTooltipContentProps()}>{content}</Component>
-          </div>
-        </OverlayContainer>
+      {disableAnimation ? (
+        isOpen && (
+          <OverlayContainer portalContainer={portalContainer}>
+            <div ref={tooltipRef} id={id} style={style} {...otherTooltipProps}>
+              <Component {...getTooltipContentProps()}>{content}</Component>
+            </div>
+          </OverlayContainer>
+        )
       ) : (
-        <AnimatePresence>
-          {isOpen ? (
-            <OverlayContainer portalContainer={portalContainer}>{animatedContent}</OverlayContainer>
-          ) : null}
-        </AnimatePresence>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence>
+            {isOpen && (
+              <OverlayContainer portalContainer={portalContainer}>
+                {animatedContent}
+              </OverlayContainer>
+            )}
+          </AnimatePresence>
+        </LazyMotion>
       )}
     </>
   );
