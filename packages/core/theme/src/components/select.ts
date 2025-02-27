@@ -60,6 +60,7 @@ const select = tv({
           "data-[hover=true]:bg-default-200",
           "group-data-[focus=true]:bg-default-200",
         ],
+        clearButton: "mb-4",
       },
       faded: {
         trigger: [
@@ -69,6 +70,7 @@ const select = tv({
           "data-[hover=true]:border-default-400 data-[focus=true]:border-default-400 data-[open=true]:border-default-400",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
+        clearButton: "mb-4",
       },
       bordered: {
         trigger: [
@@ -79,6 +81,7 @@ const select = tv({
           "data-[focus=true]:border-default-foreground",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
+        clearButton: "mb-4",
       },
       underlined: {
         trigger: [
@@ -105,6 +108,7 @@ const select = tv({
           "data-[focus=true]:after:w-full",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
+        clearButton: "mb-4 me-2",
       },
     },
     color: {
@@ -140,7 +144,7 @@ const select = tv({
       lg: {
         trigger: "h-12 min-h-12 rounded-large",
         value: "text-medium",
-        clearButton: "text-large",
+        clearButton: "mb-5 text-large",
       },
     },
     radius: {
@@ -163,10 +167,12 @@ const select = tv({
     labelPlacement: {
       outside: {
         base: "flex flex-col",
+        clearButton: "mb-0",
       },
       "outside-left": {
         base: "flex-row items-center flex-nowrap data-[has-helper=true]:items-start",
         label: "relative pe-2 text-foreground",
+        clearButton: "mb-0",
       },
       inside: {
         label: "text-tiny cursor-pointer",
