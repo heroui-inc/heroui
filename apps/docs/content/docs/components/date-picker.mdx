@@ -119,9 +119,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.6.0",
-    yarn: "yarn add @internationalized/date@3.6.0",
-    pnpm: "pnpm add @internationalized/date@3.6.0",
+    npm: "npm install @internationalized/date@3.7.0",
+    yarn: "yarn add @internationalized/date@3.7.0",
+    pnpm: "pnpm add @internationalized/date@3.7.0",
   }}
 />
 
@@ -144,9 +144,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    yarn: "yarn add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    pnpm: "pnpm add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
+    npm: "npm install @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    yarn: "yarn add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    pnpm: "pnpm add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
   }}
 />
 
@@ -168,9 +168,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.6.0",
-    yarn: "yarn add @internationalized/date@3.6.0",
-    pnpm: "pnpm add @internationalized/date@3.6.0",
+    npm: "npm install @internationalized/date@3.7.0",
+    yarn: "yarn add @internationalized/date@3.7.0",
+    pnpm: "pnpm add @internationalized/date@3.7.0",
   }}
 />
 
@@ -192,9 +192,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    yarn: "yarn add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    pnpm: "pnpm add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
+    npm: "npm install @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    yarn: "yarn add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    pnpm: "pnpm add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
   }}
 />
 
@@ -214,9 +214,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    yarn: "yarn add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    pnpm: "pnpm add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
+    npm: "npm install @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    yarn: "yarn add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    pnpm: "pnpm add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
   }}
 />
 
@@ -233,6 +233,12 @@ By default, the calendar popover displays a single month. The `visibleMonths` pr
 
 <CodeDemo title="Visible Months" files={datePickerContent.visibleMonth} />
 
+### Custom first day of week
+
+By default, the first day of the week is automatically set based on the current locale. This can be changed by setting the `firstDayOfWeek` prop to `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, or `'sat'`.
+
+<CodeDemo title="Custom first day of week" files={datePickerContent.firstDayOfWeek} />
+
 ### Page Behavior
 
 By default, when pressing the next or previous buttons, pagination will advance by the `visibleMonths` value. This behavior can be changed to page by single months instead, by setting `pageBehavior` to `single`.
@@ -246,9 +252,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    yarn: "yarn add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
-    pnpm: "pnpm add @internationalized/date@3.6.0 @react-aria/i18n@3.12.4",
+    npm: "npm install @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    yarn: "yarn add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
+    pnpm: "pnpm add @internationalized/date@3.7.0 @react-aria/i18n@3.12.5",
   }}
 />
 
@@ -436,6 +442,12 @@ import {I18nProvider} from "@react-aria/i18n";
       default: "1"
     },
     {
+      attribute: "firstDayOfWeek",
+      type: "sun | mon | tue | wed | thu | fri | sat",
+      description: "The day that starts the week.",
+      default: "-"
+    },
+    {
       attribute: "selectorIcon",
       type: "ReactNode",
       description: "The icon to toggle the date picker popover. Usually a calendar icon.",
@@ -488,7 +500,55 @@ import {I18nProvider} from "@react-aria/i18n";
       type: "boolean",
       description: "Whether to always show leading zeros in the month, day, and hour fields.",
       default: "true"
-    }
+    },
+    {
+      attribute: "CalendarBottomContent",
+      type: "ReactNode",
+      description: "Bottom content to be rendered in the calendar component.",
+      default: "-"
+    },
+    {
+      attribute: "showMonthAndYearPickers",
+      type: "boolean | undefined",
+      description: "Whether the calendar should show month and year pickers.",
+      default: "false"
+    },
+    {
+      attribute: "popoverProps",
+      type: "PopoverProps | undefined",
+      description: "Props to be passed to the popover component.",
+      default: `{ placement: "bottom", triggerScaleOnOpen: false, offset: 13 }`
+    },
+    {
+      attribute: "selectorButtonProps",
+      type: "ButtonProps | undefined",
+      description: "Props to be passed to the selector button component.",
+      default: `{ size: "sm", variant: "light", radius: "full", isIconOnly: true }`
+    },
+    {
+      attribute: "calendarProps",
+      type: "CalendarProps | undefined",
+      description: "Props to be passed to the calendar component.",
+      default: `{ size: "sm", variant: "light", radius: "full", isIconOnly: true }`
+    },
+    {
+      attribute: "timeInputProps",
+      type: "TimeInputProps | undefined",
+      description: "Props to be passed to the time input component.",
+      default: `{ size: "sm", variant: "light", radius: "full", isIconOnly: true }`
+    },
+    {
+      attribute: "disableAnimation",
+      type: "boolean",
+      description: "Whether to disable all animations in the date picker. Including the DateInput, Button, Calendar, and Popover.",
+      default: "false"
+    },
+    {
+      attribute: "classNames",
+      type: `Partial<Record<"base" | "selectorButton" | "selectorIcon" | "popoverContent" | "calendar" | "calendarContent" | "timeInputLabel" | "timeInput", string>>`,
+      description: "Allows to set custom class names for the date-picker slots. You can also pass Date Input classNames here.",
+      default: "-"
+    },
   ]}
 />
 

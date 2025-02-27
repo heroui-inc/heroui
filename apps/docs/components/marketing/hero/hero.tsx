@@ -34,18 +34,16 @@ export const Hero = () => {
         <div className="flex justify-center w-full md:hidden">
           <Chip
             as={NextLink}
-            className="bg-foreground-100/50 border-1 hover:bg-foreground-100/80 border-foreground-200/50 cursor-pointer"
+            className="bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
             classNames={{
               content: "font-semibold text-foreground text-xs ",
             }}
             color="primary"
-            href="/blog/introducing-heroui"
+            href="/blog/v2.7.0"
             variant="flat"
-            onClick={() =>
-              handlePressAnnouncement("Introducing HeroUI", "/blog/introducing-heroui")
-            }
+            onClick={() => handlePressAnnouncement("HeroUI v2.7.0", "/blog/v2.7.0")}
           >
-            Introducing HeroUI&nbsp;
+            HeroUI v2.7.0&nbsp;
             <span aria-label="emoji" role="img">
               🔥
             </span>

@@ -70,6 +70,10 @@ export default {
       },
       options: ["aria", "native"],
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
   decorators: [
     (Story) => (
@@ -683,7 +687,7 @@ export const WithDateInputClassNames = {
   render: Template,
   args: {
     ...defaultProps,
-    dateInputClassNames: {
+    classNames: {
       base: "bg-gray-200 p-2 rounded-md",
       label: "text-blue-400 font-semibold",
       inputWrapper: "border-3 border-solid border-blue-400 p-2 rounded-md",
@@ -691,5 +695,13 @@ export const WithDateInputClassNames = {
     },
     isRequired: true,
     description: "Please enter your birth date",
+  },
+};
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
   },
 };

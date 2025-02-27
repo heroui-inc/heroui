@@ -116,21 +116,11 @@ export default function App() {
           name="country"
           placeholder="Select country"
         >
-          <SelectItem key="ar" value="ar">
-            Argentina
-          </SelectItem>
-          <SelectItem key="us" value="us">
-            United States
-          </SelectItem>
-          <SelectItem key="ca" value="ca">
-            Canada
-          </SelectItem>
-          <SelectItem key="uk" value="uk">
-            United Kingdom
-          </SelectItem>
-          <SelectItem key="au" value="au">
-            Australia
-          </SelectItem>
+          <SelectItem key="ar">Argentina</SelectItem>
+          <SelectItem key="us">United States</SelectItem>
+          <SelectItem key="ca">Canada</SelectItem>
+          <SelectItem key="uk">United Kingdom</SelectItem>
+          <SelectItem key="au">Australia</SelectItem>
         </Select>
 
         <Checkbox

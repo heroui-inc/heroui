@@ -3,7 +3,6 @@ import type {Key, ReactNode, Ref} from "react";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {objectToDeps, Timer} from "@heroui/shared-utils";
-import {useLocale} from "@react-aria/i18n";
 import {
   UsePaginationProps as UseBasePaginationProps,
   PaginationItemValue,
@@ -195,10 +194,6 @@ export function usePagination(originalProps: UsePaginationProps) {
 
   const cursorTimer = useRef<Timer>();
 
-  const {direction} = useLocale();
-
-  const isRTL = direction === "rtl";
-
   const disableAnimation =
     originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
   const disableCursorAnimation = originalProps?.disableCursorAnimation ?? disableAnimation ?? false;
@@ -298,6 +293,7 @@ export function usePagination(originalProps: UsePaginationProps) {
     }
     activePageRef.current = activePage;
   }, [
+    page,
     activePage,
     disableAnimation,
     disableCursorAnimation,
@@ -320,7 +316,7 @@ export function usePagination(originalProps: UsePaginationProps) {
   const baseStyles = clsx(classNames?.base, className);
 
   const onNext = () => {
-    if (loop && activePage === (isRTL ? 1 : total)) {
+    if (loop && activePage === total) {
       return first();
     }
 
@@ -328,7 +324,7 @@ export function usePagination(originalProps: UsePaginationProps) {
   };
 
   const onPrevious = () => {
-    if (loop && activePage === (isRTL ? total : 1)) {
+    if (loop && activePage === 1) {
       return last();
     }
 

@@ -32,6 +32,7 @@ import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 import {CollectionChildren, ValidationError} from "@react-types/shared";
 import {FormContext, useSlottedContext} from "@heroui/form";
+import {usePreventScroll} from "@react-aria/overlays";
 
 export type SelectedItemProps<T = object> = {
   /** A unique key for the item. */
@@ -399,16 +400,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         isClearable,
         labelPlacement,
         disableAnimation,
-        className,
       }),
-    [
-      objectToDeps(variantProps),
-      isInvalid,
-      isClearable,
-      labelPlacement,
-      disableAnimation,
-      className,
-    ],
+    [objectToDeps(variantProps), isInvalid, labelPlacement, disableAnimation],
   );
 
   // scroll the listbox to the selected item
@@ -429,6 +422,10 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       }
     }
   }, [state.isOpen, disableAnimation]);
+
+  usePreventScroll({
+    isDisabled: !state.isOpen,
+  });
 
   const errorMessage =
     typeof props.errorMessage === "function"
@@ -516,6 +513,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         isRequired: originalProps?.isRequired,
         autoComplete: originalProps?.autoComplete,
         isDisabled: originalProps?.isDisabled,
+        form: originalProps?.form,
         onChange,
         ...props,
       } as HiddenSelectProps<T>),
