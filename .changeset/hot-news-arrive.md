@@ -4,6 +4,7 @@
 "@heroui/scroll-shadow": patch
 "@heroui/react-aria-i18n": patch
 "@heroui/autocomplete": patch
+"@heroui/number-input": patch
 "@heroui/dom-animation": patch
 "@heroui/breadcrumbs": patch
 "@heroui/date-picker": patch
