@@ -7,7 +7,7 @@ import {forwardRef, Fragment, useState} from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {Button} from "@heroui/button";
 import {chain, mergeProps} from "@react-aria/utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {AnimatePresence, LazyMotion, MotionConfig, ResizablePanel} from "@heroui/motion";
 
 import {ChevronLeftIcon} from "./chevron-left";

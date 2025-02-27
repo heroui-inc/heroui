@@ -2210,6 +2210,9 @@ importers:
       '@heroui/form':
         specifier: workspace:*
         version: link:../form
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -2225,9 +2228,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.19.1
         version: 3.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.5
-        version: 3.12.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.23.0
         version: 3.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
