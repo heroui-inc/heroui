@@ -354,12 +354,17 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Escape" && inputValue && (isClearable || onClear)) {
+      if (
+        e.key === "Escape" &&
+        inputValue &&
+        (isClearable || onClear) &&
+        !originalProps.isReadOnly
+      ) {
         setInputValue("");
         onClear?.();
       }
     },
-    [inputValue, setInputValue, onClear, isClearable],
+    [inputValue, setInputValue, onClear, isClearable, originalProps.isReadOnly],
   );
 
   const getInputProps: PropGetter = useCallback(

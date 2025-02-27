@@ -341,6 +341,25 @@ describe("Input", () => {
 
     expect(input.value).toBe("test value");
   });
+
+  it("should not clear value when pressing ESC key if input is readonly", () => {
+    const onClear = jest.fn();
+    const defaultValue = "test value";
+
+    const {getByRole} = render(
+      <Input isClearable isReadOnly defaultValue={defaultValue} onClear={onClear} />,
+    );
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue);
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe(defaultValue);
+
+    expect(onClear).not.toHaveBeenCalled();
+  });
 });
 
 describe("Input with React Hook Form", () => {

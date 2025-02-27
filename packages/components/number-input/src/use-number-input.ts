@@ -241,12 +241,17 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Escape" && inputValue && (isClearable || onClear)) {
+      if (
+        e.key === "Escape" &&
+        inputValue &&
+        (isClearable || onClear) &&
+        !originalProps.isReadOnly
+      ) {
         state.setInputValue("");
         onClear?.();
       }
     },
-    [inputValue, state.setInputValue, onClear, isClearable],
+    [inputValue, state.setInputValue, onClear, isClearable, originalProps.isReadOnly],
   );
 
   const getBaseProps: PropGetter = useCallback(
