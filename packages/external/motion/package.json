@@ -37,7 +37,7 @@
   "dependencies": {
     "@heroui/use-measure": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "motion": "12.3.1"
+    "motion": "12.4.7"
   },
   "devDependencies": {
     "clean-package": "2.2.0"
