@@ -334,7 +334,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ),
         "aria-readonly": dataAttr(originalProps.isReadOnly),
         onChange: chain(inputProps.onChange, onChange),
-        onKeyDown: chain(props.onKeyDown, handleKeyDown),
+        onKeyDown: chain(inputProps.onKeyDown, props.onKeyDown, handleKeyDown),
         ref: domRef,
       };
     },

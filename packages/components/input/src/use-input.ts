@@ -385,7 +385,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         ),
         "aria-readonly": dataAttr(originalProps.isReadOnly),
         onChange: chain(inputProps.onChange, onChange),
-        onKeyDown: chain(props.onKeyDown, handleKeyDown),
+        onKeyDown: chain(inputProps.onKeyDown, props.onKeyDown, handleKeyDown),
         ref: domRef,
       };
     },
