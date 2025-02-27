@@ -39,6 +39,7 @@
 "@heroui/modal": patch
 "@heroui/radio": patch
 "@heroui/table": patch
+"@heroui/toast": patch
 "@heroui/card": patch
 "@heroui/chip": patch
 "@heroui/code": patch
