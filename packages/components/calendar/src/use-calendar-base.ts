@@ -71,6 +71,10 @@ interface Props extends HeroUIBaseProps {
    */
   showHelper?: boolean;
   /**
+   * The day that starts the week.
+   */
+  firstDayOfWeek?: "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
+  /**
    * Whether the calendar header is expanded. This is only available if the `showMonthAndYearPickers` prop is set to `true`.
    * @default false
    */
@@ -212,6 +216,7 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     topContent,
     bottomContent,
     showHelper = true,
+    firstDayOfWeek,
     calendarWidth = 256,
     visibleMonths: visibleMonthsProp = 1,
     weekdayStyle = "narrow",
@@ -331,6 +336,7 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     maxValue,
     baseProps,
     showHelper,
+    firstDayOfWeek,
     weekdayStyle,
     visibleMonths,
     visibleDuration,

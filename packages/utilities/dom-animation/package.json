@@ -1,11 +1,11 @@
 {
   "name": "@heroui/dom-animation",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "Dom Animation from Framer Motion for dynamic import",
   "keywords": [
     "dom-animation"
   ],
-  "author": "WK Wong <wingkwong.code@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

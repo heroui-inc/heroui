@@ -1,11 +1,11 @@
 {
   "name": "@heroui/use-is-mounted",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "This hook can be used to render client-based components or run client logic",
   "keywords": [
     "use-is-mounted"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

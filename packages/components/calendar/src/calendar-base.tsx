@@ -32,6 +32,7 @@ export interface CalendarBaseProps extends HTMLHeroUIProps<"div"> {
   errorMessageProps: HTMLAttributes<HTMLElement>;
   calendarRef: RefObject<HTMLDivElement>;
   errorMessage?: ReactNode;
+  firstDayOfWeek?: "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
 }
 
 /**
@@ -62,6 +63,7 @@ export function CalendarBase(props: CalendarBaseProps) {
     errorMessageProps,
     calendarRef: ref,
     errorMessage,
+    firstDayOfWeek,
     ...otherProps
   } = props;
 
@@ -119,6 +121,7 @@ export function CalendarBase(props: CalendarBaseProps) {
         key={`calendar-month-${i}`}
         currentMonth={currentMonth.month}
         direction={direction}
+        firstDayOfWeek={firstDayOfWeek}
         startDate={d}
       />
     );

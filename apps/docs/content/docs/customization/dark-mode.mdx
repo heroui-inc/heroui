@@ -204,24 +204,6 @@ Install `@heroui/use-theme` in your project.
   }}
 /> 
 
-### Add the current theme to the main element
-
-```jsx
-// App.tsx or App.jsx
-import React from "react";
-import {useTheme} from "@heroui/use-theme";
-
-export default function App() {
-  const {theme} = useTheme();
-
-  return (
-    <main className={`${theme} text-foreground bg-background`}>
-      <App />
-    </main>
-  )
-}
-```
-
 ### Add the theme switcher
 
 Add the theme switcher to your app.

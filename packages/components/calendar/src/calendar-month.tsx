@@ -17,10 +17,11 @@ export interface CalendarMonthProps extends HTMLHeroUIProps<"table">, CalendarPr
 }
 
 export function CalendarMonth(props: CalendarMonthProps) {
-  const {startDate, direction, currentMonth} = props;
+  const {startDate, direction, currentMonth, firstDayOfWeek} = props;
 
   const {locale} = useLocale();
-  const weeksInMonth = getWeeksInMonth(startDate, locale);
+
+  const weeksInMonth = getWeeksInMonth(startDate, locale, firstDayOfWeek);
 
   const {state, slots, weekdayStyle, isHeaderExpanded, disableAnimation, classNames} =
     useCalendarContext();
@@ -30,6 +31,7 @@ export function CalendarMonth(props: CalendarMonthProps) {
       ...props,
       weekdayStyle,
       endDate: endOfMonth(startDate),
+      firstDayOfWeek,
     },
     state,
   );
@@ -52,6 +54,7 @@ export function CalendarMonth(props: CalendarMonthProps) {
               classNames={classNames}
               currentMonth={startDate}
               date={date}
+              firstDayOfWeek={firstDayOfWeek}
               isPickerVisible={isHeaderExpanded}
               slots={slots}
               state={state}

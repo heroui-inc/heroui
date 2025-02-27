@@ -1,11 +1,11 @@
 {
   "name": "@heroui/modal",
-  "version": "2.2.8",
+  "version": "2.2.11",
   "description": "Displays a dialog with a custom content that requires attention or provides additional information.",
   "keywords": [
     "modal"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0",
-    "@heroui/system": ">=2.4.0"
+    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.7"
   },
   "dependencies": {
     "@heroui/use-disclosure": "workspace:*",

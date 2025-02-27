@@ -1,11 +1,11 @@
 {
   "name": "@heroui/shared-icons",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "Internal icons set, commonly used in the components stories",
   "keywords": [
     "icons-utils"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

@@ -54,7 +54,8 @@
     "@react-stately/tree": "3.8.7",
     "@rehooks/local-storage": "^2.4.5",
     "@stackblitz/sdk": "^1.11.0",
-    "@tanstack/react-virtual": "3.11.2",
+    "@tanstack/react-virtual": "3.11.3",
+    "@types/lodash": "^4.17.15",
     "@vercel/analytics": "^1.4.1",
     "canvas-confetti": "^1.9.2",
     "clsx": "^1.2.1",
@@ -66,6 +67,7 @@
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-to-html": "9.0.3",
+    "lodash": "^4.17.21",
     "marked": "^5.1.0",
     "match-sorter": "8.0.0",
     "mini-svg-data-uri": "1.4.4",
@@ -79,6 +81,7 @@
     "prism-react-renderer": "^1.2.1",
     "querystring": "^0.2.1",
     "react": "18.3.0",
+    "react-colorful": "^5.6.1",
     "react-dom": "18.3.0",
     "react-hook-form": "^7.51.3",
     "react-icons": "^4.10.1",
@@ -101,6 +104,7 @@
     "unified": "^11.0.5",
     "unist-util-visit": "5.0.0",
     "usehooks-ts": "3.1.0",
+    "values.js": "^2.1.1",
     "zustand": "5.0.1"
   },
   "devDependencies": {
@@ -126,8 +130,8 @@
     "algoliasearch": "^4.10.3",
     "autoprefixer": "10.4.20",
     "dotenv": "^16.0.1",
-    "eslint-config-next": "15.0.3",
     "esbuild-plugin-raw": "0.1.8",
+    "eslint-config-next": "15.0.3",
     "markdown-toc": "^1.2.0",
     "mdx-bundler": "10.0.3",
     "next-sitemap": "4.2.3",
@@ -136,7 +140,7 @@
     "prettier": "^2.7.1",
     "tailwindcss": "3.4.14",
     "tsx": "^3.8.2",
-    "typescript": "^5.5.0",
+    "typescript": "^5.7.3",
     "uuid": "^8.3.2"
   },
   "pnpm": {

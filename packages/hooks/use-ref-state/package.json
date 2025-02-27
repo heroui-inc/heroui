@@ -1,11 +1,11 @@
 {
   "name": "@heroui/use-ref-state",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "description": "Hook for saving the state in a ref value",
   "keywords": [
     "use-ref-state"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
