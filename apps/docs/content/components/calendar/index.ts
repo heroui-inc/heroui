@@ -13,6 +13,7 @@ import visibleMonths from "./visible-months";
 import firstDayOfWeek from "./first-day-of-week";
 import pageBehaviour from "./page-behaviour";
 import presets from "./presets";
+import customCellContent from "./custom-cell-content";
 
 export const calendarContent = {
   usage,
@@ -30,4 +31,5 @@ export const calendarContent = {
   firstDayOfWeek,
   pageBehaviour,
   presets,
+  customCellContent,
 };
