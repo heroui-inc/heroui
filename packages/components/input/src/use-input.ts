@@ -376,7 +376,12 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-has-start-content": dataAttr(hasStartContent),
         "data-has-end-content": dataAttr(!!endContent),
         className: slots.input({
-          class: clsx(classNames?.input, isFilled ? "is-filled" : "", isMultiline ? "pe-0" : ""),
+          class: clsx(
+            classNames?.input,
+            isFilled ? "is-filled" : "",
+            isMultiline ? "pe-0" : "",
+            type === "password" ? "[&::-ms-reveal]:hidden" : "",
+          ),
         }),
         ...mergeProps(
           focusProps,
