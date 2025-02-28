@@ -19,4 +19,4 @@ export type SupportedCalendars =
 /**
  * Spinner Variants
  */
-export type SpinnerVariants = "default" | "gradient" | "wave" | "dots" | "spinner";
+export type SpinnerVariants = "default" | "simple" | "gradient" | "wave" | "dots" | "spinner";

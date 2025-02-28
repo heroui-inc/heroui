@@ -125,6 +125,12 @@ By default, the Calendar displays a single month. The `visibleMonths` prop allow
 
 <CodeDemo title="Visible Months" files={rangeCalendarContent.visibleMonths} />
 
+### Custom first day of week
+
+By default, the first day of the week is automatically set based on the current locale. This can be changed by setting the `firstDayOfWeek` prop to `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, or `'sat'`.
+
+<CodeDemo title="Custom first day of week" files={rangeCalendarContent.firstDayOfWeek} />
+
 ### Page Behaviour
 
 By default, when pressing the next or previous buttons, pagination will advance by the `visibleMonths` value. This behavior can be changed to page by single months instead, by setting `pageBehavior` to `single`.
@@ -244,6 +250,12 @@ Here's the example to customize `topContent` and `bottomContent` to have some pr
       type: "number",
       description: "The number of months to display at once. Up to 3 months are supported. Passing a number greater than 1 will disable the showMonthAndYearPickers prop.",
       default: "1"
+    },
+    {
+      attribute: "firstDayOfWeek",
+      type: "sun | mon | tue | wed | thu | fri | sat",
+      description: "The day that starts the week.",
+      default: "-"
     },
     {
       attribute: "focusedValue",

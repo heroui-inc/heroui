@@ -66,6 +66,12 @@ By default, the calendar popover displays a single month. The `visibleMonths` pr
 
 <CodeDemo title="Visible Months" files={dateRangePickerContent.visibleMonth} />
 
+### Custom first day of week
+
+By default, the first day of the week is automatically set based on the current locale. This can be changed by setting the `firstDayOfWeek` prop to `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, or `'sat'`.
+
+<CodeDemo title="Custom first day of week" files={dateRangePickerContent.firstDayOfWeek} />
+
 ### Page Behavior
 
 By default, when pressing the next or previous buttons, pagination will advance by the `visibleMonths` value. This behavior can be changed to page by single months instead, by setting `pageBehavior` to `single`.
@@ -529,6 +535,12 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
       type: "number",
       description: "The number of months to display at once. Up to 3 months are supported.",
       default: "1"
+    },
+    {
+      attribute: "firstDayOfWeek",
+      type: "sun | mon | tue | wed | thu | fri | sat",
+      description: "The day that starts the week.",
+      default: "-"
     },
     {
       attribute: "autoFocus",

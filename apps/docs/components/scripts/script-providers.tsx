@@ -15,7 +15,7 @@ export function ScriptProviders({ isKapaEnabled = true }: { isKapaEnabled?: bool
   React.useEffect(() => {
     function hideKapa() {
     const kapaElements = document.querySelectorAll('[id^="kapa-"]');
-    const display = pathname === "/docs/components/toast" ? "none" : "block";
+    const display = pathname === "/docs/components/toast" || pathname === "/blog/v2.7.0" ? "none" : "block";
 
 
       kapaElements.forEach((element) => (element as HTMLElement).style.display = display);

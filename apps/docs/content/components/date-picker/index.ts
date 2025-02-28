@@ -18,6 +18,7 @@ import minAndMaxDate from "./min-and-max-date";
 import internationalCalendar from "./international-calendar";
 import unavailableDates from "./unavailable-dates";
 import visibleMonth from "./visible-month";
+import firstDayOfWeek from "./first-day-of-week";
 import pageBehavior from "./page-behavior";
 import preset from "./preset";
 
@@ -42,6 +43,7 @@ export const datePickerContent = {
   internationalCalendar,
   unavailableDates,
   visibleMonth,
+  firstDayOfWeek,
   pageBehavior,
   preset,
 };
