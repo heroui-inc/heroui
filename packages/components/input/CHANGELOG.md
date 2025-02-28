@@ -1,5 +1,11 @@
 # @heroui/input
 
+## 2.4.15
+
+### Patch Changes
+
+- [#4892](https://github.com/heroui-inc/heroui/pull/4892) [`6453149`](https://github.com/heroui-inc/heroui/commit/645314954309f2bffa2b387f68c07d63d09fed43) Thanks [@linyonglu](https://github.com/linyonglu)! - add missing logic to handle esc key to clear input / number-input value (#4850)
+
 ## 2.4.14
 
 ### Patch Changes

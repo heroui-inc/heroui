@@ -1,5 +1,21 @@
 # @heroui/react
 
+## 2.7.4
+
+### Patch Changes
+
+- Updated dependencies [[`6453149`](https://github.com/heroui-inc/heroui/commit/645314954309f2bffa2b387f68c07d63d09fed43)]:
+  - @heroui/input@2.4.15
+  - @heroui/number-input@2.0.5
+  - @heroui/accordion@2.2.11
+  - @heroui/autocomplete@2.3.16
+  - @heroui/drawer@2.2.11
+  - @heroui/modal@2.2.11
+  - @heroui/navbar@2.2.12
+  - @heroui/popover@2.3.14
+  - @heroui/select@2.4.14
+  - @heroui/tabs@2.2.11
+
 ## 2.7.3
 
 ### Patch Changes
