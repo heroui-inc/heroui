@@ -1,7 +1,7 @@
 import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
 
-import {ToastRegion} from "./toast-region";
+import {RegionProps, ToastRegion} from "./toast-region";
 import {ToastProps, ToastPlacement} from "./use-toast";
 
 let globalToastQueue: ToastQueue<ToastProps> | null = null;
@@ -12,6 +12,7 @@ interface ToastProviderProps {
   disableAnimation?: boolean;
   toastProps?: ToastProps;
   toastOffset?: number;
+  regionProps?: RegionProps;
 }
 
 export const getToastQueue = () => {
@@ -31,6 +32,7 @@ export const ToastProvider = ({
   maxVisibleToasts = 3,
   toastOffset = 0,
   toastProps = {},
+  regionProps,
 }: ToastProviderProps) => {
   const toastQueue = useToastQueue(getToastQueue());
   const globalContext = useProviderContext();
@@ -48,6 +50,7 @@ export const ToastProvider = ({
       toastOffset={toastOffset}
       toastProps={toastProps}
       toastQueue={toastQueue}
+      {...regionProps}
     />
   );
 };

@@ -3,12 +3,23 @@ import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
-import {toastRegion, ToastRegionVariantProps} from "@heroui/theme";
+import {
+  SlotsToClasses,
+  toastRegion,
+  ToastRegionSlots,
+  ToastRegionVariantProps,
+} from "@heroui/theme";
+import {clsx} from "@heroui/shared-utils";
 
 import Toast from "./toast";
 import {ToastProps, ToastPlacement} from "./use-toast";
 
-interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps {
+export interface RegionProps {
+  className?: string;
+  classNames?: SlotsToClasses<ToastRegionSlots>;
+}
+
+interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps, RegionProps {
   toastQueue: ToastState<T>;
   placement?: ToastPlacement;
   maxVisibleToasts: number;
@@ -23,6 +34,8 @@ export function ToastRegion<T extends ToastProps>({
   maxVisibleToasts,
   toastOffset,
   toastProps = {},
+  className,
+  classNames,
   ...props
 }: ToastRegionProps<T>) {
   const ref = useRef(null);
@@ -40,6 +53,8 @@ export function ToastRegion<T extends ToastProps>({
       }),
     [disableAnimation],
   );
+
+  const baseStyles = clsx(className, classNames?.base);
 
   useEffect(() => {
     function handleTouchOutside(event: TouchEvent) {
@@ -65,7 +80,7 @@ export function ToastRegion<T extends ToastProps>({
     <div
       {...mergeProps(regionProps, hoverProps)}
       ref={ref}
-      className={slots.base()}
+      className={slots.base({class: clsx(baseStyles, classNames?.base)})}
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
