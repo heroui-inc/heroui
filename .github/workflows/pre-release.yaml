@@ -13,7 +13,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   prerelease:
     name: changesets pre-release
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     timeout-minutes: 30
     permissions:
       contents: write
