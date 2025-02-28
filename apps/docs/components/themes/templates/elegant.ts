@@ -4,6 +4,7 @@ import {initialLayout} from "../constants";
 import {Config} from "../types";
 
 export const elegant: Config = {
+  name: "elegant",
   light: {
     defaultColor: {
       default: "#8f8f8f",
