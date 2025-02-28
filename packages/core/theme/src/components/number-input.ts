@@ -656,7 +656,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px)]",
         ],
       },
     },
@@ -717,7 +717,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_8px_-_var(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -728,7 +728,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -739,7 +739,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -750,7 +750,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_5px)]",
         ],
       },
     },
@@ -783,7 +783,7 @@ const numberInput = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(fontSize.tiny)/2_+_16px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-tiny)/2_+_16px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
       },

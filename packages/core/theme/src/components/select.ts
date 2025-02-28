@@ -23,7 +23,7 @@ const select = tv({
     trigger:
       "relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-xs outline-hidden tap-highlight-transparent",
     innerWrapper:
-      "inline-flex h-fit w-[calc(100%_-_var(spacing.6))] min-h-4 items-center gap-1.5 box-border",
+      "inline-flex h-fit w-[calc(100%_-theme(spacing.6))] min-h-4 items-center gap-1.5 box-border",
     selectorIcon: "absolute end-3 w-4 h-4",
     spinner: "absolute end-3",
     value: ["text-foreground-500", "font-normal", "w-full", "text-start"],
@@ -584,7 +584,9 @@ const select = tv({
       isMultiline: false,
       size: "sm",
       class: {
-        label: ["group-data-[filled=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_8px)]"],
+        label: [
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px)]",
+        ],
         innerWrapper: "group-data-[has-label=true]:pt-4",
       },
     },
@@ -619,7 +621,7 @@ const select = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_8px_-_var(borderWidth.medium))]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -630,7 +632,7 @@ const select = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(borderWidth.medium))]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -642,7 +644,7 @@ const select = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(borderWidth.medium))]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -653,7 +655,9 @@ const select = tv({
       isMultiline: false,
       size: "sm",
       class: {
-        label: ["group-data-[filled=true]:-translate-y-[calc(50%_+_var(fontSize.tiny)/2_-_5px)]"],
+        label: [
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_5px)]",
+        ],
       },
     },
     {
@@ -688,7 +692,7 @@ const select = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_var(fontSize.tiny)/2_+_16px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-tiny)/2_+_16px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
       },
