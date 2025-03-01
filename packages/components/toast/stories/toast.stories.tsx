@@ -232,34 +232,32 @@ const WithToastFromModalTemplate = (args) => {
   return (
     <>
       <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
-      <Modal {...args} isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
         <ModalContent>
           <ModalHeader>Toast from Modal</ModalHeader>
           <ModalBody>
             <div>Press &quot;Show Toast&quot; to launch a toast.</div>
           </ModalBody>
           <ModalFooter>
-            <Button onPress={onClose}>Close</Button>
+            <div className="flex gap-4">
+              <Button
+                onPress={() => {
+                  addToast({
+                    title: "Toast Title",
+                    description: "Toast Displayed Successfully",
+                    ...args,
+                  });
+                }}
+              >
+                Show Toast
+              </Button>
+              <Button onPress={onClose}>Close</Button>
+            </div>
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <div className="flex gap-4">
-        <div>
-          <Button onPress={onOpen}>Open Modal</Button>
-        </div>
-        <div>
-          <Button
-            onPress={() => {
-              addToast({
-                title: "Toast Title",
-                description: "Toast Displayed Successfully",
-                ...args,
-              });
-            }}
-          >
-            Show Toast
-          </Button>
-        </div>
+      <div className="flex">
+        <Button onPress={onOpen}>Open Modal</Button>
       </div>
     </>
   );

@@ -1,14 +1,11 @@
+import type {SlotsToClasses, ToastRegionSlots, ToastRegionVariantProps} from "@heroui/theme";
+
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
-import {
-  SlotsToClasses,
-  toastRegion,
-  ToastRegionSlots,
-  ToastRegionVariantProps,
-} from "@heroui/theme";
+import {toastRegion} from "@heroui/theme";
 import {clsx} from "@heroui/shared-utils";
 
 import Toast from "./toast";
@@ -80,7 +77,7 @@ export function ToastRegion<T extends ToastProps>({
     <div
       {...mergeProps(regionProps, hoverProps)}
       ref={ref}
-      className={slots.base({class: clsx(baseStyles, classNames?.base)})}
+      className={slots.base({class: clsx(baseStyles)})}
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
