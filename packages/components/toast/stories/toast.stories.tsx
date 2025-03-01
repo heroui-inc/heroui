@@ -2,6 +2,15 @@ import React, {useEffect} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@heroui/modal";
+import {Spinner} from "@heroui/spinner";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
 
@@ -217,6 +226,43 @@ const PromiseToastTemplate = (args: ToastProps) => {
   );
 };
 
+const WithToastFromModalTemplate = (args) => {
+  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+      <Modal isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Toast from Modal</ModalHeader>
+          <ModalBody>
+            <div>Press &quot;Show Toast&quot; to launch a toast.</div>
+          </ModalBody>
+          <ModalFooter>
+            <div className="flex gap-4">
+              <Button
+                onPress={() => {
+                  addToast({
+                    title: "Toast Title",
+                    description: "Toast Displayed Successfully",
+                    ...args,
+                  });
+                }}
+              >
+                Show Toast
+              </Button>
+              <Button onPress={onClose}>Close</Button>
+            </div>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <div className="flex">
+        <Button onPress={onOpen}>Open Modal</Button>
+      </div>
+    </>
+  );
+};
+
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
@@ -388,6 +434,14 @@ export const PromiseToast = {
   },
 };
 
+export const PromiseWithCustomLoadingComponent = {
+  render: PromiseToastTemplate,
+  args: {
+    ...defaultProps,
+    loadingComponent: <Spinner variant="spinner" />,
+  },
+};
+
 export const ShowTimeoutProgress = {
   render: ShowTimeoutProgressTemplate,
   args: {
@@ -404,6 +458,13 @@ export const Placement = {
 
 export const WithEndContent = {
   render: WithEndContentTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithToastFromModal = {
+  render: WithToastFromModalTemplate,
   args: {
     ...defaultProps,
   },

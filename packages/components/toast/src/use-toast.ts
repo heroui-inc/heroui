@@ -49,7 +49,7 @@ export interface ToastProps extends ToastVariantProps {
    *    content: "content-classes"
    *    description: "description-classes"
    *    title: "title-classes"
-   *    loadingIcon: "loading-icon-classes",
+   *    loadingComponent: "loading-component-classes",
    *    icon: "icon-classes",
    *    progressTrack: "progress-track-classes",
    *    progressIndicator: "progress-indicator-classes",
@@ -73,9 +73,9 @@ export interface ToastProps extends ToastVariantProps {
    */
   closeIcon?: ReactNode | ((props: any) => ReactNode);
   /**
-   * Icon to be displayed in the loading toast - overrides the loading icon
+   * Component to be displayed in the loading toast - overrides the default loading component
    */
-  loadingIcon?: ReactNode;
+  loadingComponent?: ReactNode;
   /**
    * Whether the toast-icon should be hidden.
    * @default false
@@ -160,6 +160,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     onClose,
     severity,
     maxVisibleToasts,
+    loadingComponent,
     ...otherProps
   } = props;
 
@@ -261,7 +262,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   ]);
 
   const Component = as || "div";
-  const loadingIcon: ReactNode = icon;
 
   const domRef = useDOMRef(ref);
   const baseStyles = clsx(className, classNames?.base);
@@ -433,9 +433,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     [],
   );
 
-  const getLoadingIconProps: PropGetter = useCallback(
+  const getLoadingComponentProps: PropGetter = useCallback(
     (props = {}) => ({
-      className: slots.loadingIcon({class: classNames?.loadingIcon}),
+      className: slots.loadingComponent({class: classNames?.loadingComponent}),
+      color: "current",
+      size: "sm",
       ...props,
     }),
     [],
@@ -616,7 +618,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     title,
     description,
     icon,
-    loadingIcon,
+    loadingComponent,
     domRef,
     severity,
     closeIcon,
@@ -639,7 +641,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     getIconProps,
     getMotionDivProps,
     getCloseIconProps,
-    getLoadingIconProps,
+    getLoadingComponentProps,
     progressBarRef,
     endContent,
     slots,
