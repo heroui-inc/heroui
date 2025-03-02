@@ -1,5 +1,26 @@
 # @heroui/table
 
+## 2.2.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/checkbox@2.3.14
+  - @heroui/spacer@2.2.11
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-icons@2.1.6
+  - @heroui/shared-utils@2.1.7
+
+## 2.2.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/checkbox@2.3.13
+  - @heroui/spacer@2.2.10
+
 ## 2.2.12
 
 ### Patch Changes

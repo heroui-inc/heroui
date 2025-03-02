@@ -1,5 +1,16 @@
 # @heroui/aria-utils
 
+## 2.2.12
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/system@2.4.11
+  - @heroui/react-rsc-utils@2.1.6
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.11
 
 ### Patch Changes

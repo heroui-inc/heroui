@@ -1,5 +1,39 @@
 # @heroui/autocomplete
 
+## 2.3.16
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/button@2.2.15
+  - @heroui/form@2.1.14
+  - @heroui/input@2.4.15
+  - @heroui/listbox@2.3.14
+  - @heroui/popover@2.3.15
+  - @heroui/scroll-shadow@2.3.10
+  - @heroui/spinner@2.2.12
+  - @heroui/use-aria-button@2.2.9
+  - @heroui/use-safe-layout-effect@2.1.6
+  - @heroui/aria-utils@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-icons@2.1.6
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.15
+
+### Patch Changes
+
+- Updated dependencies [[`2186f6d`](https://github.com/heroui-inc/heroui/commit/2186f6da23679c5cf63ea03c9c6df9ca6df92ad9), [`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9)]:
+  - @heroui/spinner@2.2.11
+  - @heroui/input@2.4.14
+  - @heroui/button@2.2.14
+  - @heroui/popover@2.3.14
+  - @heroui/form@2.1.13
+  - @heroui/listbox@2.3.13
+  - @heroui/scroll-shadow@2.3.9
+
 ## 2.3.14
 
 ### Patch Changes

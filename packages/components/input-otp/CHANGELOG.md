@@ -1,5 +1,23 @@
 # @heroui/input-otp
 
+## 2.1.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/form@2.1.14
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.13
+
 ## 2.1.12
 
 ### Patch Changes

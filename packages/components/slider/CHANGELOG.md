@@ -1,5 +1,16 @@
 # @heroui/slider
 
+## 2.4.12
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/tooltip@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
 ## 2.4.11
 
 ### Patch Changes

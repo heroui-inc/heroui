@@ -19,7 +19,7 @@ function generateThemeColorsConfig(config: Config, theme: ThemeType) {
     warning: generateThemeColor(config[theme].baseColor.warning, "warning", "light"),
     danger: generateThemeColor(config[theme].baseColor.danger, "danger", "light"),
     background: config[theme].layoutColor.background,
-    foreground: generateThemeColor(config[theme].layoutColor.foreground, "foreground", "light"),
+    foreground: config[theme].layoutColor.foreground,
     content1: {
       DEFAULT: config[theme].contentColor.content1,
       foreground: readableColor(config[theme].contentColor.content1),

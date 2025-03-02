@@ -1,5 +1,26 @@
 # @heroui/button
 
+## 2.2.15
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/ripple@2.2.12
+  - @heroui/spinner@2.2.12
+  - @heroui/use-aria-button@2.2.9
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies [[`2186f6d`](https://github.com/heroui-inc/heroui/commit/2186f6da23679c5cf63ea03c9c6df9ca6df92ad9)]:
+  - @heroui/spinner@2.2.11
+  - @heroui/ripple@2.2.11
+
 ## 2.2.13
 
 ### Patch Changes

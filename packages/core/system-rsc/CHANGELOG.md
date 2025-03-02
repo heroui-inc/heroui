@@ -1,5 +1,11 @@
 # @heroui/system-rsc
 
+## 2.3.10
+
+### Patch Changes
+
+- v2.7.4
+
 ## 2.3.9
 
 ### Patch Changes

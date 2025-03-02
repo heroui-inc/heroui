@@ -1,5 +1,14 @@
 # @heroui/use-callback-ref
 
+## 2.1.6
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/use-safe-layout-effect@2.1.6
+
 ## 2.1.5
 
 ### Patch Changes

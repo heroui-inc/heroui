@@ -1,7 +1,7 @@
 ---
 title: "HeroUI v2.7.0"
 description: "New Toast component, NumberInput, Theme Generator, and lots of bug fixes and improvements."
-date: "2025-02-19"
+date: "2025-02-18"
 image: "/blog/v2.7.0.jpg"
 tags: ["heroui", "v2.7.0", "release", "toast", "improvements", "theme"]
 author:
@@ -31,7 +31,7 @@ HeroUI version **v2.7.0** introduces the highly anticipated Toast component, alo
 ## What's New in v2.7.0?
 
 - [Toast Component](#toast-component) - A new toast notification system with rich features
-- [NumberInput Component](#numberinput-component) - A new input component specifically designed for numerical values
+- [NumberInput Component](#numbaerinput-component) - A new input component specifically designed for numerical values
 - [New Spinner Variants](#new-spinner-variants) - Enhanced spinner component with new design variants
 - [Theme Generator](#theme-generator) - A powerful web-based tool for creating and customizing your themes
 - [Table Virtualization](#table-virtualization) - Performance improvements for large datasets in Table component
@@ -114,9 +114,12 @@ function Example() {
 }
 ```
 
+<Spacer y={2} />
+
 <CodeDemo
   title="Simple Usage"
   files={simpleToast}
+  showEditor={false}
 />
 
 
@@ -152,7 +155,7 @@ For more examples and detailed documentation about the Spinner component, visit 
 
 ## Theme Generator
 
-The new Theme Generator is a powerful web-based tool that allows you to create and customize your themes visually. Simply visit our [Theme Generator](/themes) to:
+The new Theme Generator is a powerful web-based tool that allows you to create and customize your themes visually. Based on the amazing work by [xylish7](https://github.com/xylish7) in the [nextui-theme-generator](https://github.com/xylish7/nextui-theme-generator) project (huge thanks!), our Theme Generator provides a seamless experience for theme customization. Simply visit our [Theme Generator](/themes) to:
 
 - Create custom color schemes
 - Preview components with your theme in real-time
@@ -232,7 +235,7 @@ import {HeroUIProvider} from "@heroui/react";
 function App() {
   return (
     <HeroUIProvider spinnerVariant="simple">
-      {/* All components will use the dots spinner variant by default */}
+      {/* All components will use the "simple" spinner variant by default */}
     </HeroUIProvider>
   );
 }
@@ -283,8 +286,12 @@ We're building an exciting new application that will revolutionize frontend deve
 ## Breaking Changes
 
 - Renamed `wrapper` slot to `tabWrapper` in Tabs component
-- Deprecated `dateInputClassNames` in favor of new styling approach
-- Replaced directional terms `left` & `right` with `start` & `end` for better RTL support
+- Deprecated `dateInputClassNames` in favor of new styling approach. The existing styles can be moved to `classNames` instead. 
+- Replaced directional terms `left` & `right` with `start` & `end` for better RTL support.
+- `ListboxItem`, `SelectItem` & AutocompleteItem no longer accept a `value` prop.
+- Spinner component is no longer a server component. If you are using global import, you need to add `use client` directive.
+- For those users using `@internationalized/date`, please bump to `3.7.0` to avoid incompatibility errors.
+- For those users using `@react-aria/i18n`, please bump to `3.12.5` to avoid incompatibility errors.
 
 ## Release Changes
 
@@ -353,7 +360,7 @@ We're building an exciting new application that will revolutionize frontend deve
 - Rebranding by [@jrgarciadev](https://github.com/jrgarciadev), [@macci001](https://github.com/macci001), [@plbstl](https://github.com/plbstl) in [PR #4594](https://github.com/heroui-inc/heroui/pull/4594), [PR #4620](https://github.com/heroui-inc/heroui/pull/4620), [PR #4645](https://github.com/heroui-inc/heroui/pull/4645)
 - Updated author in package.json by [@wingkwong](https://github.com/wingkwong) in [#4800](https://github.com/heroui-inc/heroui/pull/4800)
 
-For more details about this release, check out our [GitHub release page](https://github.com/heroui-inc/heroui/releases/tag/v2.7.0). 
+For more details about this release, check out our [GitHub release page](https://github.com/heroui-inc/heroui/releases/tag/%40heroui%2Freact%402.7.0). 
 
 
 Special thanks to HeroUI Team members [@wingkwong](https://github.com/wingkwong), [@macci001](https://github.com/macci001), [@vinroger](https://github.com/vinroger),

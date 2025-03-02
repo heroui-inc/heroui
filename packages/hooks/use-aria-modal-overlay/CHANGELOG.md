@@ -1,5 +1,11 @@
 # @heroui/use-aria-modal-overlay
 
+## 2.2.8
+
+### Patch Changes
+
+- v2.7.4
+
 ## 2.2.7
 
 ### Patch Changes

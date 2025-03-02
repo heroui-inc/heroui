@@ -1,5 +1,25 @@
 # @heroui/date-input
 
+## 2.3.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/form@2.1.14
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.13
+
+### Patch Changes
+
+- [#4901](https://github.com/heroui-inc/heroui/pull/4901) [`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9) Thanks [@wingkwong](https://github.com/wingkwong)! - update peerDependencies (#4901)
+
+- Updated dependencies []:
+  - @heroui/form@2.1.13
+
 ## 2.3.12
 
 ### Patch Changes

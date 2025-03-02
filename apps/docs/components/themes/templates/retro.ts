@@ -4,6 +4,7 @@ import {initialLayout} from "../constants";
 import {Config} from "../types";
 
 export const retro: Config = {
+  name: "retro",
   light: {
     defaultColor: {
       default: "#ffcf77",

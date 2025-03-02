@@ -1,5 +1,20 @@
 # @heroui/theme
 
+## 2.4.11
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/shared-utils@2.1.7
+
+## 2.4.10
+
+### Patch Changes
+
+- [#4922](https://github.com/heroui-inc/heroui/pull/4922) [`2774a1b`](https://github.com/heroui-inc/heroui/commit/2774a1b3513e2a046c538a2982a438f56608bbf2) Thanks [@wingkwong](https://github.com/wingkwong)! - fix broken start & end content in breadcrumb (#4921)
+
 ## 2.4.9
 
 ### Patch Changes

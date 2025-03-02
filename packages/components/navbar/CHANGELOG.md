@@ -1,5 +1,18 @@
 # @heroui/navbar
 
+## 2.2.13
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/use-scroll-position@2.1.6
+  - @heroui/dom-animation@2.1.6
+  - @heroui/framer-utils@2.1.11
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.12
 
 ### Patch Changes

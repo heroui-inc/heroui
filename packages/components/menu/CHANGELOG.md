@@ -1,5 +1,18 @@
 # @heroui/menu
 
+## 2.2.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/divider@2.2.10
+  - @heroui/use-is-mobile@2.2.7
+  - @heroui/aria-utils@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.13
 
 ### Patch Changes

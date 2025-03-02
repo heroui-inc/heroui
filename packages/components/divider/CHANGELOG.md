@@ -1,5 +1,16 @@
 # @heroui/divider
 
+## 2.2.10
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/system-rsc@2.3.10
+  - @heroui/react-rsc-utils@2.1.6
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.9
 
 ### Patch Changes

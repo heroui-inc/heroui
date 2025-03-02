@@ -1,5 +1,16 @@
 # @heroui/ripple
 
+## 2.2.12
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/dom-animation@2.1.6
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.11
 
 ### Patch Changes
