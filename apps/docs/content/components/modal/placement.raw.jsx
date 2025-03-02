@@ -1,10 +1,10 @@
+import {useState} from "react";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  ModalProps,
   Button,
   useDisclosure,
   RadioGroup,
@@ -13,22 +13,27 @@ import {
 
 export default function App() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [scrollBehavior, setScrollBehavior] =
-    React.useState < ModalProps["scrollBehavior"] > "inside";
+  const [modalPlacement, setModalPlacement] = useState("auto");
 
   return (
-    <div className="flex flex-col gap-2">
-      <Button onPress={onOpen}>Open Modal</Button>
+    <div className="flex px-10 min-h-[80vh] justify-center items-center flex-col gap-4">
+      <Button className="max-w-fit" onPress={onOpen}>
+        Open Modal
+      </Button>
       <RadioGroup
-        label="Select scroll behavior"
+        label="Select modal placement"
         orientation="horizontal"
-        value={scrollBehavior}
-        onValueChange={setScrollBehavior}
+        value={modalPlacement}
+        onValueChange={setModalPlacement}
       >
-        <Radio value="inside">inside</Radio>
-        <Radio value="outside">outside</Radio>
+        <Radio value="auto">auto</Radio>
+        <Radio value="top">top</Radio>
+        <Radio value="bottom">bottom</Radio>
+        <Radio value="center">center</Radio>
+        <Radio value="top-center">top-center</Radio>
+        <Radio value="bottom-center">bottom-center</Radio>
       </RadioGroup>
-      <Modal isOpen={isOpen} scrollBehavior={scrollBehavior} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} placement={modalPlacement} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -43,58 +48,6 @@ export default function App() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
                   risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
                   quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor
-                  adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit
-                  officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-                  deserunt nostrud ad veniam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-                  risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-                  quam. Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis
-                  sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit
-                  incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod
-                  et. Culpa deserunt nostrud ad veniam.
-                </p>
-                <p>
-                  Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia
-                  eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt nisi
-                  consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-                  deserunt nostrud ad veniam. Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
-                  hendrerit risus, sed porttitor quam. Magna exercitation reprehenderit magna aute
-                  tempor cupidatat consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
-                  do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod
-                  pariatur proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-                  risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-                  quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor
-                  adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit
-                  officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-                  deserunt nostrud ad veniam.
-                </p>
-                <p>
-                  Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia
-                  eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt nisi
-                  consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-                  deserunt nostrud ad veniam. Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
-                  hendrerit risus, sed porttitor quam. Magna exercitation reprehenderit magna aute
-                  tempor cupidatat consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
-                  do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod
-                  pariatur proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
                 </p>
               </ModalBody>
               <ModalFooter>

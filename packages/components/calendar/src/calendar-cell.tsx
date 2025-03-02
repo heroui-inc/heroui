@@ -17,10 +17,12 @@ export interface CalendarCellProps extends HTMLHeroUIProps<"td">, AriaCalendarCe
   slots?: CalendarReturnType;
   classNames?: SlotsToClasses<CalendarSlots>;
   currentMonth: CalendarDate;
+  firstDayOfWeek?: "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
 }
 
 export function CalendarCell(originalProps: CalendarCellProps) {
-  const {state, slots, isPickerVisible, currentMonth, classNames, ...props} = originalProps;
+  const {state, slots, isPickerVisible, currentMonth, classNames, firstDayOfWeek, ...props} =
+    originalProps;
 
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -53,7 +55,8 @@ export function CalendarCell(originalProps: CalendarCellProps) {
   const isSelectionEnd =
     isSelected && highlightedRange ? isSameDay(props.date, highlightedRange.end) : false;
   const {locale} = useLocale();
-  const dayOfWeek = getDayOfWeek(props.date, locale);
+
+  const dayOfWeek = getDayOfWeek(props.date, locale, firstDayOfWeek);
   const isRangeStart =
     isSelected && (isFirstSelectedAfterDisabled || dayOfWeek === 0 || props.date.day === 1);
   const isRangeEnd =

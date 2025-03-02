@@ -1,11 +1,11 @@
 {
   "name": "@heroui/select",
-  "version": "2.4.10",
+  "version": "2.4.15",
   "description": "A select displays a collapsible list of options and allows a user to select one of them.",
   "keywords": [
     "select"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.8",
-    "@heroui/theme": ">=2.4.7",
+    "@heroui/system": ">=2.4.10",
+    "@heroui/theme": ">=2.4.9",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -55,11 +55,12 @@
     "@heroui/form": "workspace:*",
     "@react-aria/focus": "3.19.1",
     "@react-aria/form": "3.0.12",
+    "@react-aria/overlays": "3.25.0",
     "@react-aria/interactions": "3.23.0",
     "@react-aria/utils": "3.27.0",
     "@react-aria/visually-hidden": "3.8.19",
     "@react-types/shared": "3.27.0",
-    "@tanstack/react-virtual": "3.11.2"
+    "@tanstack/react-virtual": "3.11.3"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",
