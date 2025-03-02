@@ -108,7 +108,7 @@ export const Indeterminate = {
 
   args: {
     ...defaultProps,
-    size: "xs",
+    size: "sm",
     radius: "none",
     isIndeterminate: true,
   },
