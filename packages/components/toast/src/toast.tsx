@@ -7,13 +7,13 @@ import {
   SuccessIcon,
   WarningIcon,
 } from "@heroui/shared-icons";
-import {AnimatePresence, m, LazyMotion} from "framer-motion";
+import {AnimatePresence, m, LazyMotion} from "@heroui/motion";
 import {cloneElement, isValidElement} from "react";
 import {Spinner} from "@heroui/spinner";
 
 import {UseToastProps, useToast} from "./use-toast";
 
-const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
+const loadFeatures = () => import("@heroui/motion").then((res) => res.domMax);
 
 export interface ToastProps extends UseToastProps {}
 

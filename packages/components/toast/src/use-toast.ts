@@ -8,7 +8,7 @@ import {ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, use
 import {useToast as useToastAria, AriaToastProps} from "@react-aria/toast";
 import {chain, mergeProps} from "@react-aria/utils";
 import {QueuedToast, ToastState} from "@react-stately/toast";
-import {MotionProps} from "framer-motion";
+import {MotionProps} from "@heroui/motion";
 import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 

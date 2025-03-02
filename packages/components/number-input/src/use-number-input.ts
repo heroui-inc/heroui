@@ -9,7 +9,7 @@ import {useFocusRing} from "@react-aria/focus";
 import {numberInput} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
 import {useNumberFieldState} from "@react-stately/numberfield";
 import {useNumberField as useAriaNumberInput} from "@react-aria/numberfield";
