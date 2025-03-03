@@ -3157,6 +3157,9 @@ importers:
       '@heroui/button':
         specifier: workspace:*
         version: link:../button
+      '@heroui/drawer':
+        specifier: workspace:*
+        version: link:../drawer
       '@heroui/modal':
         specifier: workspace:*
         version: link:../modal

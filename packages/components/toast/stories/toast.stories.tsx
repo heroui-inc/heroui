@@ -10,6 +10,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@heroui/modal";
+import {Drawer, DrawerContent} from "@heroui/drawer";
 import {Spinner} from "@heroui/spinner";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
@@ -226,12 +227,18 @@ const PromiseToastTemplate = (args: ToastProps) => {
   );
 };
 
-const WithToastFromModalTemplate = (args) => {
+const WithToastFromOverlayTemplate = (args) => {
   const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+  const {
+    isOpen: isDrawerOpen,
+    onOpen: onDrawerOpen,
+    onOpenChange: onDrawerOpenChange,
+  } = useDisclosure({defaultOpen: args.defaultOpen});
 
   return (
     <>
       <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+
       <Modal isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
         <ModalContent>
           <ModalHeader>Toast from Modal</ModalHeader>
@@ -243,7 +250,7 @@ const WithToastFromModalTemplate = (args) => {
               <Button
                 onPress={() => {
                   addToast({
-                    title: "Toast Title",
+                    title: "Toast from modal",
                     description: "Toast Displayed Successfully",
                     ...args,
                   });
@@ -256,8 +263,27 @@ const WithToastFromModalTemplate = (args) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <div className="flex">
+
+      <Drawer isOpen={isDrawerOpen} onOpenChange={onDrawerOpenChange}>
+        <DrawerContent className="p-4">
+          <Button
+            className="w-fit"
+            onPress={() => {
+              addToast({
+                title: "Toast from drawer",
+                description: "Toast Displayed Successfully",
+                ...args,
+              });
+            }}
+          >
+            Show Toast
+          </Button>
+        </DrawerContent>
+      </Drawer>
+
+      <div className="flex gap-x-2">
         <Button onPress={onOpen}>Open Modal</Button>
+        <Button onPress={onDrawerOpen}>Open Drawer</Button>
       </div>
     </>
   );
@@ -463,8 +489,8 @@ export const WithEndContent = {
   },
 };
 
-export const WithToastFromModal = {
-  render: WithToastFromModalTemplate,
+export const ToastFromOverlay = {
+  render: WithToastFromOverlayTemplate,
   args: {
     ...defaultProps,
   },
