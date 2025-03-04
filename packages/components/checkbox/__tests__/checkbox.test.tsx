@@ -146,6 +146,16 @@ describe("Checkbox", () => {
     expect(onChange).toHaveBeenCalled();
   });
 
+  it('should work correctly with "form" prop', () => {
+    const wrapper = render(
+      <Checkbox data-testid="checkbox-test" form="test-form-id">
+        Option
+      </Checkbox>,
+    );
+
+    expect(wrapper.container.querySelector("input")).toHaveAttribute("form", "test-form-id");
+  });
+
   describe("validation", () => {
     describe("validationBehavior=native", () => {
       it("supports isRequired", async () => {
