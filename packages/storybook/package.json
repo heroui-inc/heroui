@@ -1,7 +1,7 @@
 {
   "name": "@heroui/storybook",
-  "version": "2.0.0",
-  "description": "The HeroUI react components storybook ",
+  "version": "3.0.0",
+  "description": "The HeroUI v3 react components storybook ",
   "keywords": [
     "storybook"
   ],

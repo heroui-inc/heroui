@@ -5,12 +5,9 @@ import type {StorybookConfig} from "@storybook/react-vite";
 const config: StorybookConfig = {
   stories: [
     "./welcome.mdx",
-    "../../components/**/stories/**/*.stories.@(js|jsx|ts|tsx)",
-    "../../core/theme/stories/*.stories.@(js|jsx|ts|tsx)",
+    "../../react/src/components/**/*.stories.@(js|jsx|ts|tsx)",
   ],
-
   staticDirs: ["../public"],
-
   addons: [
     getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("@storybook/addon-essentials"),
@@ -33,11 +30,9 @@ const config: StorybookConfig = {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
-
   core: {
     disableTelemetry: true,
   },
-
   typescript: {
     reactDocgen: false,
   },

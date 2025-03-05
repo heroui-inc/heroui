@@ -1,0 +1,62 @@
+{
+  "name": "@heroui/react",
+  "version": "3.0.0",
+  "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS.",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
+  "license": "MIT",
+  "keywords": [
+    "next",
+    "next ui",
+    "hero ui",
+    "components",
+    "modern components",
+    "react components",
+    "react ui"
+  ],
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "storybook": {
+    "title": "HeroUI",
+    "url": "https://storybook.heroui.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "directory": "packages/core/react"
+  },
+  "bugs": {
+    "url": "https://github.com/heroui-inc/heroui/issues"
+  },
+  "scripts": {
+    "build": "tsup --dts",
+    "dev": "pnpm build:fast --watch",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "build:fast": "tsup",
+    "prepack": "clean-package",
+    "postbuild": "node src/scripts/postbuild.js",
+    "prebuild": "node src/scripts/prebuild.js",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "react-aria-components": "^1.6.0",
+    "tailwind-variants": "^0.3.1"
+  },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0",
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
+  },
+  "clean-package": "../../../clean-package.config.json"
+}
