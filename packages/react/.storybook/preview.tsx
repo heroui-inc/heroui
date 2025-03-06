@@ -1,26 +1,29 @@
 import React from "react";
 import {themes} from "@storybook/theming";
-import {HeroUIProvider} from "@heroui/system/src/provider";
 import type {Preview} from "@storybook/react";
+import {withThemeByClassName} from "@storybook/addon-themes";
 
 import "./style.css";
-import {withStrictModeSwitcher} from "./addons/react-strict-mode";
 
 const decorators: Preview["decorators"] = [
+  withThemeByClassName({
+    themes: {
+      light: "",
+      dark: "dark",
+    },
+    defaultTheme: "light",
+  }),
   (Story, {globals: {locale, disableAnimation, labelPlacement}}) => {
     const direction =
       // @ts-ignore
       locale && new Intl.Locale(locale)?.textInfo?.direction === "rtl" ? "rtl" : undefined;
 
     return (
-      <HeroUIProvider locale={locale} disableAnimation={disableAnimation} labelPlacement={labelPlacement}>
-        <div className="bg-dark" lang={locale} dir={direction}>
-          <Story />
-        </div>
-      </HeroUIProvider>
+      <div lang={locale} className="h-screen max-h-[calc(100dvh-28px))] rounded w-full flex flex-col justify-center items-center bg-background text-foreground" dir={direction}>
+        <Story />
+      </div>
     );
   },
-  ...(process.env.NODE_ENV !== "production" ? [withStrictModeSwitcher] : []),
 ];
 
 const commonTheme = {

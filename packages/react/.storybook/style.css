@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@source "../src";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+  /* Base Colors */
+  --background: oklch(100% 0 0);
+  --foreground:oklch(14.48% 0 0);
+  --primary: oklch(17.3% 0 0);
+  --primary-foreground: oklch(93.7% 0 0);
+  --primary-flat: oklch(94.91% 0 0);
+  --primary-flat-foreground: oklch(14.48% 0 0);
+  --danger-background: oklch(52.39% 0.2037 10.67);
+  --danger-foreground: oklch(99.11% 0 0);
+
+  /* Misc colors */
+  --stroke:  oklch(87.11% 0.0055 286.29);
+  --focus: oklch(0% 0 0 / 50%);
+
+  /* Layout */
+  --radius: 0.875rem; /* 12px */
+}
+
+.dark, [data-theme="dark"] {
+  /* Base Colors */
+  --background: oklch(0% 0 0);
+  --foreground: oklch(99.11% 0 0);
+  --primary: oklch(96.12% 0 0);
+  --primary-foreground: oklch(21.78% 0 0);
+  --primary-flat: oklch(32.5% 0 0);
+  --primary-flat-foreground: oklch(99.11% 0 0);
+  --danger-background: oklch(52.39% 0.2037 10.67);
+  --danger-foreground: oklch(99.11% 0 0);
+
+  /* Misc colors */
+  --stroke: oklch(44.19% 0.0146 285.79);
+  --focus: oklch(100% 0 0 / 50%);
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-flat: var(--primary-flat);
+  --color-primary-flat-foreground: var(--primary-flat-foreground);
+  --color-stroke: var(--stroke);
+  --color-danger-background: var(--danger-background);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-focus: var(--focus);
+  
+  /* Layout */
+  --radius: var(--radius);
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}

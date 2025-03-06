@@ -38,6 +38,9 @@
     "build": "tsup --dts",
     "dev": "pnpm build:fast --watch",
     "clean": "rimraf dist .turbo",
+    "sb:dev": "pnpm storybook dev -p 6006",
+    "sb:build": "pnpm storybook build",
+    "sb:start": "pnpm dlx http-server storybook-static",
     "typecheck": "tsc --noEmit",
     "build:fast": "tsup",
     "prepack": "clean-package",
@@ -46,6 +49,8 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.2",
+    "@storybook/addon-themes": "^8.6.4",
     "react-aria-components": "^1.6.0",
     "tailwind-variants": "^0.3.1"
   },
@@ -54,9 +59,27 @@
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.4",
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/addon-links": "^8.6.4",
+    "@storybook/builder-vite": "^8.6.4",
+    "@storybook/cli": "^8.6.4",
+    "@storybook/manager-api": "^8.6.4",
+    "@storybook/preview-api": "^8.6.4",
+    "@storybook/react": "^8.6.4",
+    "@storybook/react-vite": "^8.6.4",
+    "@storybook/theming": "^8.6.4",
+    "@tailwindcss/postcss": "^4.0.10",
+    "@tailwindcss/vite": "^4.0.10",
+    "@vitejs/plugin-react": "^4.3.3",
     "clean-package": "2.2.0",
     "react": "18.3.0",
-    "react-dom": "18.3.0"
+    "react-dom": "18.3.0",
+    "remark-gfm": "^4.0.0",
+    "storybook": "^8.6.4",
+    "storybook-dark-mode": "^4.0.2",
+    "tailwindcss": "^4.0.10",
+    "vite": "^5.4.11"
   },
   "clean-package": "../../../clean-package.config.json"
 }

@@ -1,14 +1,15 @@
 import {forwardRef} from "react";
 import {tv, VariantProps} from "tailwind-variants";
+import {Slot} from "@radix-ui/react-slot";
 
-const buttonVariants = tv({
+export const buttonVariants = tv({
   base: [
     // Base
-    "relative isolate whitespace-nowrap inline-flex items-baseline justify-center gap-x-2 rounded-lg border text-base/6 font-semibold",
+    "relative isolate whitespace-nowrap inline-flex rounded items-baseline justify-center gap-x-2 border border-transparent font-medium",
     // Sizing
-    "px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] sm:text-sm/6",
+    "px-[calc(--spacing(4)-1px)] py-[calc(--spacing(2)-1px)] sm:text-sm/6",
     // Focus
-    "focus:outline-hidden data-focus:outline data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500",
+    "outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus:ring-offset-background focus-visible:ring-focus",
     // Disabled
     "data-disabled:opacity-50",
     // Icon
@@ -16,33 +17,43 @@ const buttonVariants = tv({
   ],
   variants: {
     variant: {
-      default: "",
-      flat: "",
-      bordered: "",
-      light: "",
-    },
-    color: {
-      primary: "bg-primary text-primary-foreground",
+      solid: "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/85",
+      flat: "bg-primary-flat text-primary-flat-foreground hover:bg-primary-flat/80 active:bg-primary-flat/75",
+      ghost: "hover:bg-primary-flat active:bg-primary-flat/75",
+      bordered: "border-stroke hover:bg-primary-flat/50 active:bg-primary-flat/75",
+      link: "underline-offset-4 hover:underline active:opacity-75 focus-visible:underline",
+      danger:
+        "bg-danger-background text-danger-foreground hover:bg-danger-background/90 active:bg-danger-background/85",
     },
   },
   defaultVariants: {
-    variant: "default",
-    color: "primary",
+    variant: "solid",
   },
+  compoundVariants: [
+    {
+      variant: ["solid", "flat", "bordered", "ghost", "danger"],
+      className: "active:scale-[0.98]",
+    },
+  ],
 });
 
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonVariants;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  ButtonVariants & {
+    asChild?: boolean;
+  };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({className, children, ...props}, ref) => {
+  ({className, children, variant, asChild, ...props}, ref) => {
+    const Component = asChild ? Slot : "button";
+
     return (
-      <button ref={ref} className={buttonVariants({variant: "default", className})} {...props}>
+      <Component ref={ref} className={buttonVariants({variant, className})} {...props}>
         {children}
-      </button>
+      </Component>
     );
   },
 );
 
-Button.displayName = "Button";
+Button.displayName = "HeroUI.Button";
