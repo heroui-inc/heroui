@@ -5,7 +5,7 @@ import {Slot} from "@radix-ui/react-slot";
 export const buttonVariants = tv({
   base: [
     // Base
-    "relative isolate whitespace-nowrap inline-flex rounded items-baseline justify-center gap-x-2 border-[length:var(--stroke-width)] border-transparent font-medium",
+    "relative isolate select-none whitespace-nowrap inline-flex rounded items-baseline justify-center gap-x-2 border-[length:var(--stroke-width)] border-transparent font-medium",
     // Sizing
     "px-[calc(--spacing(4)-1px)] py-[calc(--spacing(2)-1px)] sm:text-sm/6",
     // Focus
