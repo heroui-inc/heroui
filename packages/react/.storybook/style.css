@@ -21,6 +21,7 @@
 
   /* Layout */
   --radius: 0.875rem; /* 12px */
+  --stroke-width: 1px;
 }
 
 .dark, [data-theme="dark"] {
@@ -51,9 +52,10 @@
   --color-danger-background: var(--danger-background);
   --color-danger-foreground: var(--danger-foreground);
   --color-focus: var(--focus);
-  
+
   /* Layout */
   --radius: var(--radius);
+  --stroke-width: var(--stroke-width);
 }
 
 @layer base {
