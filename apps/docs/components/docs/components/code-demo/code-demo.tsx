@@ -2,8 +2,10 @@
 
 import React, {useCallback, useMemo, useRef, useState} from "react";
 import dynamic from "next/dynamic";
-import {Button, Skeleton, Spinner, Tab, Tabs} from "@heroui/react";
+import {addToast, Button, Skeleton, Spinner, Tab, Tabs} from "@heroui/react";
 import {useInView} from "framer-motion";
+import {usePostHog} from "posthog-js/react";
+import {usePathname} from "next/navigation";
 
 import {useCodeDemo, UseCodeDemoProps} from "./use-code-demo";
 import WindowResizer, {WindowResizerProps} from "./window-resizer";
@@ -76,6 +78,9 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
     once: true,
     margin: "600px",
   });
+
+  const pathname = usePathname();
+  const posthog = usePostHog();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -170,30 +175,41 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
     return true;
   }, [showTabs, showPreview, showEditor]);
 
-  const isComponentsPage = window ? window.location.pathname.includes("/components/") : false;
+  const isComponentsPage = pathname.includes("/components/");
 
-  const handleOpenInChat = async () => {
+  const handleOpenInChat = useCallback(async () => {
     setIsLoading(true);
 
-    const path = window.location.pathname.split("/components/")[1];
-    const capitalizedPath = path.charAt(0).toUpperCase() + path.slice(1);
+    const component = pathname.split("/components/")[1];
+
+    posthog.capture("CodeDemo - Open in Chat", {
+      component,
+      demo: title,
+    });
+
+    const capitalizedPath = component.charAt(0).toUpperCase() + component.slice(1);
     const {data, error} = await openInChat({title: `${capitalizedPath} - ${title}`, files});
 
     setIsLoading(false);
-    if (error || !data) {
-      // TODO: toast conflicts with docs toast provider
-      // addToast({
-      //   title: "Error",
-      //   description: error ?? "Unknown error",
-      // });
 
-      alert(error ?? "Unknown error");
+    if (error || !data) {
+      posthog.capture("CodeDemo - Open in Chat Error", {
+        component,
+        demo: title,
+        error: error ?? "Unknown error",
+      });
+
+      addToast({
+        title: "Error",
+        description: error ?? "Unknown error",
+        color: "danger",
+      });
 
       return;
     }
 
     window.open(data, "_blank");
-  };
+  }, [pathname, title, files, posthog]);
 
   return (
     <div ref={ref} className="flex flex-col gap-2 relative">
