@@ -1,3 +1,4 @@
+import {flushSync} from "react-dom";
 import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
 
@@ -18,7 +19,17 @@ export const getToastQueue = () => {
   if (!globalToastQueue) {
     globalToastQueue = new ToastQueue({
       maxVisibleToasts: Infinity,
-      hasExitAnimation: true,
+      wrapUpdate: (fn: () => void): void => {
+        if ("startViewTransition" in document) {
+          document
+            .startViewTransition(() => {
+              flushSync(fn);
+            })
+            .ready.catch(() => {});
+        } else {
+          fn();
+        }
+      },
     });
   }
 
@@ -56,12 +67,7 @@ export const addToast = ({...props}: ToastProps & ToastOptions) => {
   if (!globalToastQueue) {
     return;
   }
-
-  const options: Partial<ToastOptions> = {
-    priority: props?.priority,
-  };
-
-  globalToastQueue.add(props, options);
+  globalToastQueue.add(props);
 };
 
 export const closeAll = () => {
