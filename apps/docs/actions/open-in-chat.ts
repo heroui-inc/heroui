@@ -2,17 +2,11 @@
 
 import {SandpackFiles} from "@codesandbox/sandpack-react/types";
 
+import {parseDependencies} from "@/components/docs/components/code-demo/parse-dependencies";
+
 const importReact = 'import React from "react";';
 
-export const openInChat = async ({
-  title,
-  files,
-  dependencies,
-}: {
-  title?: string;
-  files: SandpackFiles;
-  dependencies?: {name: string; version: string}[];
-}) => {
+export const openInChat = async ({title, files}: {title?: string; files: SandpackFiles}) => {
   try {
     // assumes one file for now
     let content = files["/App.jsx"];
@@ -32,6 +26,8 @@ export const openInChat = async ({
     ) {
       content = `${importReact}\n${content}\n`;
     }
+
+    const dependencies = parseDependencies(content);
 
     const response = await fetch(`${process.env.CHAT_API_URL}/import`, {
       method: "POST",
