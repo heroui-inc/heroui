@@ -46,10 +46,10 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
     "@heroui/spinner": "workspace:*",
-    "@react-aria/toast": "3.0.0-beta.19",
-    "@react-aria/utils": "3.27.0",
-    "@react-aria/interactions": "3.23.0",
-    "@react-stately/toast": "3.0.0-beta.7",
+    "@react-aria/toast": "3.0.0",
+    "@react-aria/utils": "3.28.0",
+    "@react-aria/interactions": "3.24.0",
+    "@react-stately/toast": "3.0.0",
     "@react-stately/utils": "3.10.5"
   },
   "devDependencies": {

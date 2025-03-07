@@ -46,13 +46,13 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
     "@tanstack/react-virtual": "3.11.3",
-    "@react-aria/utils": "3.27.0",
-    "@react-aria/listbox": "3.14.0",
-    "@react-stately/list": "3.11.2",
-    "@react-aria/focus": "3.19.1",
-    "@react-aria/interactions": "3.23.0",
-    "@react-types/menu": "3.9.14",
-    "@react-types/shared": "3.27.0"
+    "@react-aria/utils": "3.28.0",
+    "@react-aria/listbox": "3.14.1",
+    "@react-stately/list": "3.12.0",
+    "@react-aria/focus": "3.20.0",
+    "@react-aria/interactions": "3.24.0",
+    "@react-types/menu": "3.9.15",
+    "@react-types/shared": "3.28.0"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",

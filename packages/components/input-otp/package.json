@@ -43,13 +43,13 @@
     "@heroui/form": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/utils": "3.27.0",
-    "@react-aria/form": "3.0.12",
+    "@react-aria/utils": "3.28.0",
+    "@react-aria/form": "3.0.13",
     "@react-stately/utils": "3.10.5",
-    "@react-stately/form": "3.1.1",
-    "@react-types/textfield": "3.11.0",
+    "@react-stately/form": "3.1.2",
+    "@react-types/textfield": "3.12.0",
     "input-otp": "1.4.1",
-    "@react-aria/focus": "3.19.1"
+    "@react-aria/focus": "3.20.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
