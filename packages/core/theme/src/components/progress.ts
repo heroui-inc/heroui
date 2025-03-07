@@ -97,7 +97,7 @@ const progress = tv(
       },
       isIndeterminate: {
         true: {
-          indicator: ["absolute", "w-full", "animate-indeterminate-bar"],
+          indicator: ["absolute", "w-full", "origin-left", "animate-indeterminate-bar"],
         },
       },
       isDisabled: {
