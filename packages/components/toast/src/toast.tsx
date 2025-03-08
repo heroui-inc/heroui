@@ -31,7 +31,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     severity,
     Component,
     icon,
-    loadingComponent,
+    loadingIcon,
     domRef,
     endContent,
     color,
@@ -51,7 +51,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     getIconProps,
     getMotionDivProps,
     getCloseIconProps,
-    getLoadingComponentProps,
+    getLoadingIconProps,
     isLoading,
   } = useToast({
     ...props,
@@ -60,15 +60,16 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
 
   const customIcon = icon && isValidElement(icon) ? cloneElement(icon, getIconProps()) : null;
   const IconComponent = severity ? iconMap[severity] : iconMap[color] || iconMap.default;
-  const customLoadingComponent =
-    loadingComponent && isValidElement(loadingComponent)
-      ? cloneElement(loadingComponent, getLoadingComponentProps())
+  const customLoadingIcon =
+    loadingIcon && isValidElement(loadingIcon)
+      ? cloneElement(loadingIcon, getLoadingIconProps())
       : null;
   const loadingIconComponent = isLoading
-    ? customLoadingComponent || (
+    ? customLoadingIcon || (
         <Spinner
           aria-label="loadingIcon"
-          classNames={{wrapper: getLoadingComponentProps().className}}
+          classNames={{wrapper: getLoadingIconProps().className}}
+          color={"current"}
         />
       )
     : null;
