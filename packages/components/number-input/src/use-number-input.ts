@@ -136,7 +136,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     ...originalProps,
     validationBehavior,
     locale,
-    onChange: onValueChange,
+    onChange: chain(onValueChange, onChange),
   });
 
   const {
@@ -239,6 +239,21 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     [objectToDeps(variantProps), isInvalid, isClearable, hasStartContent, disableAnimation],
   );
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (
+        e.key === "Escape" &&
+        inputValue &&
+        (isClearable || onClear) &&
+        !originalProps.isReadOnly
+      ) {
+        state.setInputValue("");
+        onClear?.();
+      }
+    },
+    [inputValue, state.setInputValue, onClear, isClearable, originalProps.isReadOnly],
+  );
+
   const getBaseProps: PropGetter = useCallback(
     (props = {}) => {
       return {
@@ -324,6 +339,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ),
         "aria-readonly": dataAttr(originalProps.isReadOnly),
         onChange: chain(inputProps.onChange, onChange),
+        onKeyDown: chain(inputProps.onKeyDown, props.onKeyDown, handleKeyDown),
         ref: domRef,
       };
     },
@@ -339,6 +355,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       originalProps.isReadOnly,
       originalProps.isRequired,
       onChange,
+      handleKeyDown,
     ],
   );
 

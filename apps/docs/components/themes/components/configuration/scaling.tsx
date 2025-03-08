@@ -10,7 +10,7 @@ export function Scaling() {
   const scaleValues = [90, 95, 100, 105, 110];
 
   return (
-    <ConfigSection icon={<ScalingIcon className="h-4 w-4" />} title="Scaling">
+    <ConfigSection visualPurposeOnly icon={<ScalingIcon className="h-4 w-4" />} title="Scaling">
       {scaleValues.map((value) => (
         <ValueButton
           key={value}

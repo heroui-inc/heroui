@@ -708,6 +708,7 @@ const numberInput = tv({
       size: ["sm", "md"],
       class: {
         label: "text-small",
+        stepperButton: "before:h-6",
       },
     },
     // inside & size & [faded, bordered]
@@ -786,6 +787,7 @@ const numberInput = tv({
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-tiny)/2_+_16px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
+        stepperButton: "before:h-4",
       },
     },
     {
@@ -812,7 +814,7 @@ const numberInput = tv({
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
-        stepperButton: "min-4 w-4 h-4",
+        stepperButton: "min-4 w-4 h-4 before:h-6",
       },
     },
     // outside-left & size & hasHelper
@@ -821,6 +823,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: "group-data-[has-helper=true]:pt-2",
+        stepperButton: "before:h-4",
       },
     },
     {
@@ -828,6 +831,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: "group-data-[has-helper=true]:pt-3",
+        stepperButton: "before:h-4",
       },
     },
     {
@@ -835,7 +839,7 @@ const numberInput = tv({
       size: "lg",
       class: {
         label: "group-data-[has-helper=true]:pt-4",
-        stepperButton: "min-4 w-4 h-4",
+        stepperButton: "min-4 w-4 h-4 before:h-6",
       },
     },
     // text truncate labelPlacement=[inside,outside]

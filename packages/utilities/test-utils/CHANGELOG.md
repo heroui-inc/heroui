@@ -1,5 +1,11 @@
 # @heroui/test-utils
 
+## 2.1.6
+
+### Patch Changes
+
+- v2.7.4
+
 ## 2.1.5
 
 ### Patch Changes

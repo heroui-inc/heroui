@@ -52,3 +52,5 @@ export const postcssConfig = `module.exports = {
 
 export const stylesConfig = `@import "tailwindcss";
 @config "./tailwind.config.js";`;
+
+export const npmrcConfig = `public-hoist-pattern[]=*@heroui/*`;

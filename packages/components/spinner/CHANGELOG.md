@@ -1,5 +1,34 @@
 # @heroui/spinner
 
+## 2.2.13
+
+### Patch Changes
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/system-rsc@2.3.11
+  - @heroui/system@2.4.12
+
+## 2.2.12
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/system@2.4.11
+  - @heroui/system-rsc@2.3.10
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.2.11
+
+### Patch Changes
+
+- [#4904](https://github.com/heroui-inc/heroui/pull/4904) [`2186f6d`](https://github.com/heroui-inc/heroui/commit/2186f6da23679c5cf63ea03c9c6df9ca6df92ad9) Thanks [@wingkwong](https://github.com/wingkwong)! - add `use client` directive in tsup (#4903)
+
+- Updated dependencies []:
+  - @heroui/system-rsc@2.3.9
+
 ## 2.2.10
 
 ### Patch Changes

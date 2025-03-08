@@ -68,6 +68,7 @@ export function useHiddenSelect<T>(
     isDisabled = data.isDisabled,
     selectionMode,
     onChange,
+    form,
   } = props;
   let {validationBehavior, isRequired, isInvalid} = data;
   let {visuallyHiddenProps} = useVisuallyHidden();
@@ -92,6 +93,7 @@ export function useHiddenSelect<T>(
       style: {display: "none"},
     },
     selectProps: {
+      form,
       autoComplete,
       disabled: isDisabled,
       "aria-invalid": isInvalid || undefined,
@@ -117,7 +119,7 @@ export function useHiddenSelect<T>(
  * form autofill, mobile form navigation, and native form submission.
  */
 export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
-  let {state, triggerRef, selectRef, label, name, isDisabled} = props;
+  let {state, triggerRef, selectRef, label, name, isDisabled, form} = props;
 
   let {containerProps, selectProps} = useHiddenSelect({...props, selectRef}, state, triggerRef);
 
@@ -151,6 +153,7 @@ export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
       <input
         autoComplete={selectProps.autoComplete}
         disabled={isDisabled}
+        form={form}
         name={name}
         type="hidden"
         value={[...state.selectedKeys].join(",") ?? ""}
