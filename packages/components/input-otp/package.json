@@ -1,6 +1,6 @@
 {
   "name": "@heroui/input-otp",
-  "version": "2.1.15",
+  "version": "2.1.16-beta.0",
   "description": "",
   "keywords": [
     "input-otp"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.13-beta.0",
+    "@heroui/system": ">=2.4.13-beta.0"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
