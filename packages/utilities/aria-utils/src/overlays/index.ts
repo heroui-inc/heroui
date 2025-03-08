@@ -8,5 +8,5 @@ export {
   getArrowPlacement,
 } from "./utils";
 
-export {ariaHideOutside} from "./ariaHideOutside";
+export {ariaHideOutside, keepVisible} from "./ariaHideOutside";
 export {ariaShouldCloseOnInteractOutside} from "./ariaShouldCloseOnInteractOutside";
