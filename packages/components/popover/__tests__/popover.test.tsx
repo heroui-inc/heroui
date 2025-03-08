@@ -254,9 +254,9 @@ describe("Popover", () => {
 
     await act(async () => {
       // open popover
-      await user.click(trigger);
+      await user.pointer({target: trigger, keys: "[MouseLeft>]"});
       // close popover
-      await user.click(trigger);
+      await user.pointer({target: trigger, keys: "[/MouseLeft]"});
       // assert that the focus is restored back to trigger
       expect(trigger).toHaveFocus();
     });
