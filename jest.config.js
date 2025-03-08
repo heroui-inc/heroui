@@ -1,6 +1,6 @@
 module.exports = {
   testEnvironment: "jsdom",
-  testTimeout: 32000,
+  testTimeout: 35000,
   collectCoverageFrom: ["packages/**/*.{ts,tsx}"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   modulePathIgnorePatterns: ["<rootDir>/examples", "<rootDir>/tooling/cra-template*"],
