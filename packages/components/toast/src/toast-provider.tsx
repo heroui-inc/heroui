@@ -1,4 +1,3 @@
-import {flushSync} from "react-dom";
 import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
 
@@ -20,17 +19,6 @@ export const getToastQueue = () => {
   if (!globalToastQueue) {
     globalToastQueue = new ToastQueue({
       maxVisibleToasts: Infinity,
-      wrapUpdate: (fn: () => void): void => {
-        if ("startViewTransition" in document) {
-          document
-            .startViewTransition(() => {
-              flushSync(fn);
-            })
-            .ready.catch(() => {});
-        } else {
-          fn();
-        }
-      },
     });
   }
 
