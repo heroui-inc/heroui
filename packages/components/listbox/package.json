@@ -1,6 +1,6 @@
 {
   "name": "@heroui/listbox",
-  "version": "2.3.14",
+  "version": "2.3.15",
   "description": "A listbox displays a list of options and allows a user to select one or more of them.",
   "keywords": [
     "listbox"

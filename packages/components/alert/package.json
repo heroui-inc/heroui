@@ -1,6 +1,6 @@
 {
   "name": "@heroui/alert",
-  "version": "2.2.15",
+  "version": "2.2.16",
   "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
   "keywords": [
     "alert"
