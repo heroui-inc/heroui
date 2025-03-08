@@ -95,15 +95,15 @@ const slider = tv({
       },
       sm: {
         thumb:
-          "rounded-[calc(theme(borderRadius.small)/2)] after:rounded-[calc(theme(borderRadius.small)/3)]",
+          "rounded-[calc(var(--heroui-radius-small)/2)] after:rounded-[calc(var(--heroui-radius-small)/3)]",
       },
       md: {
         thumb:
-          "rounded-[calc(theme(borderRadius.medium)/2)] after:rounded-[calc(theme(borderRadius.medium)/3)]",
+          "rounded-[calc(var(--heroui-radius-medium)/2)] after:rounded-[calc(var(--heroui-radius-medium)/3)]",
       },
       lg: {
         thumb:
-          "rounded-[calc(theme(borderRadius.large)/1.5)] after:rounded-[calc(theme(borderRadius.large)/2)]",
+          "rounded-[calc(var(--heroui-radius-large)/1.5)] after:rounded-[calc(var(--heroui-radius-large)/2)]",
       },
       full: {
         thumb: "rounded-full after:rounded-full",
