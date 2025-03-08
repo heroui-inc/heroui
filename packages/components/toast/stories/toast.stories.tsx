@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
+import {Spinner} from "@heroui/spinner";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
 
@@ -385,6 +386,14 @@ export const PromiseToast = {
   render: PromiseToastTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const PromiseWithCustomLoadingComponent = {
+  render: PromiseToastTemplate,
+  args: {
+    ...defaultProps,
+    loadingComponent: <Spinner variant="spinner" />,
   },
 };
 
