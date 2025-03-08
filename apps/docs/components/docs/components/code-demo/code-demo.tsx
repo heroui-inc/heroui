@@ -1,14 +1,18 @@
 "use client";
 
-import React, {useCallback, useMemo, useRef} from "react";
+import React, {useCallback, useMemo, useRef, useState} from "react";
 import dynamic from "next/dynamic";
-import {Skeleton, Tab, Tabs} from "@heroui/react";
+import {addToast, Button, Skeleton, Spinner, Tab, Tabs} from "@heroui/react";
 import {useInView} from "framer-motion";
+import {usePostHog} from "posthog-js/react";
+import {usePathname} from "next/navigation";
 
 import {useCodeDemo, UseCodeDemoProps} from "./use-code-demo";
 import WindowResizer, {WindowResizerProps} from "./window-resizer";
 
 import {GradientBoxProps} from "@/components/gradient-box";
+import {SmallLogo} from "@/components/heroui-logo";
+import {openInChat} from "@/actions/open-in-chat";
 
 const DynamicReactLiveDemo = dynamic(
   () => import("./react-live-demo").then((m) => m.ReactLiveDemo),
@@ -74,6 +78,11 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
     once: true,
     margin: "600px",
   });
+
+  const pathname = usePathname();
+  const posthog = usePostHog();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {noInline, code} = useCodeDemo({
     files,
@@ -166,24 +175,83 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
     return true;
   }, [showTabs, showPreview, showEditor]);
 
+  const isComponentsPage = pathname.includes("/components/");
+
+  const handleOpenInChat = useCallback(async () => {
+    setIsLoading(true);
+
+    const component = pathname.split("/components/")[1];
+
+    posthog.capture("CodeDemo - Open in Chat", {
+      component,
+      demo: title,
+    });
+
+    const capitalizedPath = component.charAt(0).toUpperCase() + component.slice(1);
+    const {data, error} = await openInChat({title: `${capitalizedPath} - ${title}`, files});
+
+    setIsLoading(false);
+
+    if (error || !data) {
+      posthog.capture("CodeDemo - Open in Chat Error", {
+        component,
+        demo: title,
+        error: error ?? "Unknown error",
+      });
+
+      addToast({
+        title: "Error",
+        description: error ?? "Unknown error",
+        color: "danger",
+      });
+
+      return;
+    }
+
+    window.open(data, "_blank");
+  }, [pathname, title, files, posthog]);
+
   return (
-    <div ref={ref} className="flex flex-col gap-2">
+    <div ref={ref} className="flex flex-col gap-2 relative">
       {shouldRenderTabs ? (
-        <Tabs
-          disableAnimation
-          aria-label="Code demo tabs"
-          classNames={{
-            panel: "pt-0",
-          }}
-          variant="underlined"
-        >
-          <Tab key="preview" title="Preview">
-            {previewContent}
-          </Tab>
-          <Tab key="code" title="Code">
-            {editorContent}
-          </Tab>
-        </Tabs>
+        <>
+          <Tabs
+            disableAnimation
+            aria-label="Code demo tabs"
+            classNames={{
+              panel: "pt-0",
+            }}
+            variant="underlined"
+          >
+            <Tab key="preview" title="Preview">
+              {previewContent}
+            </Tab>
+            <Tab key="code" title="Code">
+              {editorContent}
+            </Tab>
+          </Tabs>
+          {isComponentsPage && (
+            <Button
+              className="absolute right-0 top-1"
+              isDisabled={isLoading}
+              size="sm"
+              variant="bordered"
+              onPress={handleOpenInChat}
+            >
+              Open in Chat{" "}
+              {isLoading ? (
+                <Spinner
+                  classNames={{wrapper: "h-4 w-4"}}
+                  color="current"
+                  size="sm"
+                  variant="simple"
+                />
+              ) : (
+                <SmallLogo className="w-4 h-4" />
+              )}
+            </Button>
+          )}
+        </>
       ) : (
         <>
           {previewContent}

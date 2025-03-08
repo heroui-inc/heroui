@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 
 import {notFound} from "next/navigation";
 import {allDocs} from "contentlayer2/generated";
-import {Link} from "@heroui/react";
+import {Link, ToastProvider} from "@heroui/react";
 
 import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";
@@ -104,6 +104,8 @@ export default async function DocPage({params}: DocPageProps) {
           <DocsToc headings={headings} />
         </div>
       )}
+      {/* toast page has its own provider*/}
+      {doc.title !== "Toast" && <ToastProvider />}
     </>
   );
 }
