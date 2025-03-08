@@ -1,5 +1,15 @@
 # @heroui/use-image
 
+## 2.1.8-beta.1
+
+### Patch Changes
+
+- [`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix deployment
+
+- Updated dependencies [[`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9)]:
+  - @heroui/use-safe-layout-effect@2.1.7-beta.1
+  - @heroui/react-utils@2.1.9-beta.1
+
 ## 2.1.8-beta.0
 
 ### Patch Changes
