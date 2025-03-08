@@ -1,6 +1,6 @@
 {
   "name": "@heroui/menu",
-  "version": "2.2.15",
+  "version": "2.2.16-beta.0",
   "description": "A menu displays a list of options and allows a user to select one or more of them.",
   "keywords": [
     "menu"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.13-beta.0",
+    "@heroui/system": ">=2.4.13-beta.0"
   },
   "dependencies": {
     "@heroui/divider": "workspace:*",
