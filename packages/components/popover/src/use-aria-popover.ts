@@ -119,7 +119,7 @@ export function useReactAriaPopover(
     containerPadding,
     placement: toReactAriaPlacement(placementProp),
     offset: showArrow ? offset + 3 : offset,
-    onClose: isNonModal && shouldCloseOnScroll ? state.close : () => {},
+    onClose: isNonModal && !isSubmenu && shouldCloseOnScroll ? state.close : () => {},
   });
 
   useSafeLayoutEffect(() => {
