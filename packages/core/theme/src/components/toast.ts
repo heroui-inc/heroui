@@ -5,7 +5,7 @@ import {colorVariants} from "../utils";
 
 const toastRegion = tv({
   slots: {
-    base: "relative z-[100]",
+    base: "relative z-50",
   },
   variants: {
     disableAnimation: {

@@ -2,15 +2,6 @@ import React, {useEffect} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@heroui/modal";
-import {Drawer, DrawerContent} from "@heroui/drawer";
 import {Spinner} from "@heroui/spinner";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
@@ -227,68 +218,6 @@ const PromiseToastTemplate = (args: ToastProps) => {
   );
 };
 
-const WithToastFromOverlayTemplate = (args) => {
-  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
-  const {
-    isOpen: isDrawerOpen,
-    onOpen: onDrawerOpen,
-    onOpenChange: onDrawerOpenChange,
-  } = useDisclosure({defaultOpen: args.defaultOpen});
-
-  return (
-    <>
-      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
-
-      <Modal isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
-        <ModalContent>
-          <ModalHeader>Toast from Modal</ModalHeader>
-          <ModalBody>
-            <div>Press &quot;Show Toast&quot; to launch a toast.</div>
-          </ModalBody>
-          <ModalFooter>
-            <div className="flex gap-4">
-              <Button
-                onPress={() => {
-                  addToast({
-                    title: "Toast from modal",
-                    description: "Toast Displayed Successfully",
-                    ...args,
-                  });
-                }}
-              >
-                Show Toast
-              </Button>
-              <Button onPress={onClose}>Close</Button>
-            </div>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
-      <Drawer isOpen={isDrawerOpen} onOpenChange={onDrawerOpenChange}>
-        <DrawerContent className="p-4">
-          <Button
-            className="w-fit"
-            onPress={() => {
-              addToast({
-                title: "Toast from drawer",
-                description: "Toast Displayed Successfully",
-                ...args,
-              });
-            }}
-          >
-            Show Toast
-          </Button>
-        </DrawerContent>
-      </Drawer>
-
-      <div className="flex gap-x-2">
-        <Button onPress={onOpen}>Open Modal</Button>
-        <Button onPress={onDrawerOpen}>Open Drawer</Button>
-      </div>
-    </>
-  );
-};
-
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
@@ -484,13 +413,6 @@ export const Placement = {
 
 export const WithEndContent = {
   render: WithEndContentTemplate,
-  args: {
-    ...defaultProps,
-  },
-};
-
-export const ToastFromOverlay = {
-  render: WithToastFromOverlayTemplate,
   args: {
     ...defaultProps,
   },
