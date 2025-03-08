@@ -51,7 +51,7 @@ export function ToastRegion<T extends ToastProps>({
     [disableAnimation],
   );
 
-  const baseStyles = clsx(className, classNames?.base);
+  const baseStyles = clsx(classNames?.base, className);
 
   useEffect(() => {
     function handleTouchOutside(event: TouchEvent) {
@@ -77,7 +77,7 @@ export function ToastRegion<T extends ToastProps>({
     <div
       {...mergeProps(regionProps, hoverProps)}
       ref={ref}
-      className={slots.base({class: clsx(baseStyles)})}
+      className={slots.base({class: baseStyles})}
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
