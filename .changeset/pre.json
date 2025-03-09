@@ -91,6 +91,7 @@
     "@heroui/test-utils": "2.1.6"
   },
   "changesets": [
+    "old-garlics-stare",
     "quiet-colts-add"
   ]
 }
