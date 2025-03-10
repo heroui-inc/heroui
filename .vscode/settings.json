@@ -7,7 +7,6 @@
   "tailwindCSS.experimental.configFile": {
     "apps/docs/styles/globals.css": "apps/docs/**/*",
     "packages/storybook/.storybook/style.css": ["packages/core/theme/**/*", "packages/components/**/*"],
-
   },
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
