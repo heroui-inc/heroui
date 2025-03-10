@@ -232,7 +232,7 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
           </Tabs>
           {isComponentsPage && (
             <Button
-              className="absolute right-0 top-1"
+              className="absolute right-1 top-1 border-1"
               isDisabled={isLoading}
               size="sm"
               variant="bordered"
