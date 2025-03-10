@@ -18,7 +18,7 @@ import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
-import {useHover} from "@react-aria/interactions";
+import {useHover, usePress} from "@react-aria/interactions";
 import {PopoverProps} from "@heroui/popover";
 import {ScrollShadowProps} from "@heroui/scroll-shadow";
 import {
@@ -137,6 +137,11 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"select">, keyof SelectVariantPr
    */
   onSelectionChange?: (keys: SharedSelection) => void;
   /**
+   * Callback fired when the value is cleared.
+   * if you pass this prop, the clear button will be shown.
+   */
+  onClear?: () => void;
+  /**
    * A function that returns an error message if a given value is invalid.
    * Validation errors are displayed to the user when the form is submitted
    * if `validationBehavior="native"`. For realtime validation, use the `isInvalid`
@@ -230,6 +235,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     classNames,
     validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     hideEmptyContent = false,
+    onClear,
     ...otherProps
   } = props;
 
@@ -341,11 +347,23 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     triggerRef,
   );
 
+  const handleClear = useCallback(() => {
+    state.setSelectedKeys(new Set([]));
+    onClear?.();
+    domRef.current?.focus();
+  }, [onClear, state]);
+
+  const {pressProps: clearPressProps} = usePress({
+    isDisabled: !!originalProps?.isDisabled,
+    onPress: handleClear,
+  });
+
   const isInvalid = originalProps.isInvalid || validationState === "invalid" || isAriaInvalid;
 
   const {isPressed, buttonProps} = useAriaButton(triggerProps, triggerRef);
 
   const {focusProps, isFocused, isFocusVisible} = useFocusRing();
+  const {focusProps: clearFocusProps, isFocusVisible: isClearButtonFocusVisible} = useFocusRing();
   const {isHovered, hoverProps} = useHover({isDisabled: originalProps.isDisabled});
 
   const labelPlacement = useLabelPlacement({
@@ -360,6 +378,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       (!(hasPlaceholder || !!description) || !!originalProps.isMultiline));
   const shouldLabelBeInside = labelPlacement === "inside";
   const isOutsideLeft = labelPlacement === "outside-left";
+  const isClearable = originalProps.isClearable;
 
   const isFilled =
     state.isOpen ||
@@ -378,6 +397,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       select({
         ...variantProps,
         isInvalid,
+        isClearable,
         labelPlacement,
         disableAnimation,
       }),
@@ -700,6 +720,22 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     [slots, spinnerRef, spinnerProps, classNames?.spinner],
   );
 
+  const getClearButtonProps: PropGetter = useCallback(
+    (props = {}) => {
+      return {
+        ...props,
+        type: "button",
+        tabIndex: -1,
+        "aria-label": "clear selection",
+        "data-slot": "clear-button",
+        "data-focus-visible": dataAttr(isClearButtonFocusVisible),
+        className: slots.clearButton({class: clsx(classNames?.clearButton, props?.className)}),
+        ...mergeProps(clearPressProps, clearFocusProps),
+      };
+    },
+    [slots, isClearButtonFocusVisible, clearPressProps, clearFocusProps, classNames?.clearButton],
+  );
+
   // store the data to be used in useHiddenSelect
   selectData.set(state, {
     isDisabled: originalProps?.isDisabled,
@@ -733,6 +769,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     shouldLabelBeInside,
     isInvalid,
     errorMessage,
+    isClearable,
+    getClearButtonProps,
     getBaseProps,
     getTriggerProps,
     getLabelProps,
