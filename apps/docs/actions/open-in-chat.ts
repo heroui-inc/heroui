@@ -18,6 +18,8 @@ export const openInChat = async ({title, files}: {title?: string; files: Sandpac
       };
     }
 
+    const dependencies = parseDependencies(content);
+
     // Check if the file content includes 'React' import statements, if not, add it
     if (
       content.includes("React.") &&
@@ -26,8 +28,6 @@ export const openInChat = async ({title, files}: {title?: string; files: Sandpac
     ) {
       content = `${importReact}\n${content}\n`;
     }
-
-    const dependencies = parseDependencies(content);
 
     const response = await fetch(`${process.env.CHAT_API_URL}/import`, {
       method: "POST",
