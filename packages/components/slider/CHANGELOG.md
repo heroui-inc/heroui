@@ -1,5 +1,12 @@
 # @heroui/slider
 
+## 2.4.14-beta.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/tooltip@2.2.14-beta.2
+
 ## 2.4.14-beta.1
 
 ### Patch Changes

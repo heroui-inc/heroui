@@ -1,5 +1,13 @@
 # @heroui/table
 
+## 2.2.16-beta.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/checkbox@2.3.16-beta.2
+  - @heroui/spacer@2.2.13-beta.1
+
 ## 2.2.16-beta.1
 
 ### Patch Changes
