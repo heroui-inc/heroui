@@ -55,7 +55,9 @@ export const openInChat = async ({title, files}: {title?: string; files: Sandpac
       error: null,
       data: `${process.env.CHAT_URL}${
         result.path
-      }?utm_source=open-in-chat&utm_content=${encodeURIComponent(title ?? "unknown")}`,
+      }&utm_source=heroui.com&utm_medium=open-in-chat&utm_content=${encodeURIComponent(
+        title ?? "unknown",
+      )}`,
     };
   } catch (error) {
     return {error: error, data: null};
