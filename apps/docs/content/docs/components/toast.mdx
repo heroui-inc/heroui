@@ -180,7 +180,7 @@ Toast has the following slots:
 ## Accessibility
 
 - Toast has role of `alert`
-- All Toasts are present in ToastRegion.
+- All Toasts are present in `ToastRegion`.
 - Close button has aria-label="Close" by default
 - When no toast are present, ToastRegion is removed from the DOM
 
@@ -259,12 +259,6 @@ Toast has the following slots:
       default: "-"
     },
     {
-      attribute: "priority",
-      type: "number | undefined",
-      description: "Priority at which the toast will be displayed",
-      default: "undefined",
-    },
-    {
       attribute: "hideIcon",
       type: "boolean",
       description: "Hides icon when true",
@@ -331,9 +325,27 @@ Toast has the following slots:
       description: "Props to be passed to all toasts",
       default: "-"
     },
+    {
+      attribute: "regionProps",
+      type: "ToastRegionProps",
+      description: "Props to be passed to toast region",
+      default: "-"
+    },
   ]}
 />
 
+### ToastRegion Props
+
+<APITable
+  data={[
+    {
+      attribute: "classNames",
+      type: "Partial<Record<\"base\", string>>",
+      description: "Allows to set custom class names for the toast region slots.",
+      default: "-"
+    }
+  ]}
+/>
 
 ### Toast Events
 

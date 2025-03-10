@@ -1,5 +1,12 @@
 # @heroui/spacer
 
+## 2.2.12
+
+### Patch Changes
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/system-rsc@2.3.11
+
 ## 2.2.11
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # @heroui/autocomplete
 
+## 2.3.17
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`58128c4`](https://github.com/heroui-inc/heroui/commit/58128c403e014315d96fbcb428c3b2a1e2ed9cf6), [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/input@2.4.16
+  - @heroui/use-aria-button@2.2.10
+  - @heroui/aria-utils@2.2.13
+  - @heroui/listbox@2.3.15
+  - @heroui/popover@2.3.16
+  - @heroui/button@2.2.16
+  - @heroui/form@2.1.15
+  - @heroui/scroll-shadow@2.3.10
+  - @heroui/spinner@2.2.13
+
 ## 2.3.16
 
 ### Patch Changes
