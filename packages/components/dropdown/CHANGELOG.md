@@ -1,5 +1,18 @@
 # @heroui/dropdown
 
+## 2.3.17-beta.3
+
+### Patch Changes
+
+- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
+
+- Updated dependencies [[`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5)]:
+  - @heroui/shared-utils@2.1.8-beta.2
+  - @heroui/react-utils@2.1.9-beta.2
+  - @heroui/aria-utils@2.2.14-beta.3
+  - @heroui/popover@2.3.17-beta.3
+  - @heroui/menu@2.2.16-beta.3
+
 ## 2.3.17-beta.2
 
 ### Patch Changes

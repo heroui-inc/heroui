@@ -1,5 +1,17 @@
 # @heroui/form
 
+## 2.1.16-beta.3
+
+### Patch Changes
+
+- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
+
+- Updated dependencies [[`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5)]:
+  - @heroui/shared-utils@2.1.8-beta.2
+  - @heroui/react-utils@2.1.9-beta.2
+  - @heroui/system@2.4.13-beta.3
+  - @heroui/theme@2.4.13-beta.3
+
 ## 2.1.16-beta.2
 
 ### Patch Changes
