@@ -1,5 +1,14 @@
 # @heroui/use-real-shape
 
+## 2.1.9-beta.2
+
+### Patch Changes
+
+- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
+
+- Updated dependencies [[`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5)]:
+  - @heroui/react-utils@2.1.9-beta.2
+
 ## 2.1.9-beta.1
 
 ### Patch Changes
