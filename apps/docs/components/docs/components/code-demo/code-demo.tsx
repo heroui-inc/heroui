@@ -202,6 +202,8 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
       demo: title,
     });
 
+    const newTab = window.open(undefined, "_blank");
+
     const {data, error} = await openInChat({
       component,
       title,
@@ -213,6 +215,7 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
     setIsLoading(false);
 
     if (error || !data) {
+      if (newTab) newTab.close();
       posthog.capture("CodeDemo - Open in Chat Error", {
         component,
         demo: title,
@@ -228,7 +231,7 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
       return;
     }
 
-    window.open(data, "_blank");
+    if (newTab) newTab.location.href = data;
   }, [pathname, title, files, posthog]);
 
   return (
