@@ -32,7 +32,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * description of the toast
    */
-  description?: string;
+  description?: ReactNode;
   /**
    * Promise based on which the notification will be styled.
    */
