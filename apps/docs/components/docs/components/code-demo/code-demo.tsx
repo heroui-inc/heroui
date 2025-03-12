@@ -9,6 +9,7 @@ import {usePathname} from "next/navigation";
 
 import {useCodeDemo, UseCodeDemoProps} from "./use-code-demo";
 import WindowResizer, {WindowResizerProps} from "./window-resizer";
+import {parseDependencies} from "./parse-dependencies";
 
 import {GradientBoxProps} from "@/components/gradient-box";
 import {SmallLogo} from "@/components/heroui-logo";
@@ -180,15 +181,34 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
   const handleOpenInChat = useCallback(async () => {
     setIsLoading(true);
 
+    // assume doc demo files are all App.jsx
+    const content = files["/App.jsx"];
+
+    if (!content || typeof content !== "string") {
+      addToast({
+        title: "Error",
+        description: "Invalid demo content",
+        color: "danger",
+      });
+
+      return;
+    }
+
     const component = pathname.split("/components/")[1];
+    const dependencies = parseDependencies(content);
 
     posthog.capture("CodeDemo - Open in Chat", {
       component,
       demo: title,
     });
 
-    const capitalizedPath = component.charAt(0).toUpperCase() + component.slice(1);
-    const {data, error} = await openInChat({title: `${capitalizedPath} - ${title}`, files});
+    const {data, error} = await openInChat({
+      component,
+      title,
+      content,
+      dependencies,
+      useWrapper: !asIframe,
+    });
 
     setIsLoading(false);
 

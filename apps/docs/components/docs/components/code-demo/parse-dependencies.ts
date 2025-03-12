@@ -6,7 +6,7 @@ const importRegex = /^(import\s+(?!type\s+\{)[\s\S]*?;)/gm;
 export const parseDependencies = (content: string) => {
   const dependencies: {name: string; version: string}[] = [];
 
-  // by dedfault, react and heroui packages are installed in heroui chat templates
+  // by default, react and heroui packages are installed already
   const installedPackages = {
     React,
     ...HeroUI,

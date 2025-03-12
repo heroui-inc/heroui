@@ -1,25 +1,23 @@
 "use server";
 
-import {SandpackFiles} from "@codesandbox/sandpack-react/types";
-
-import {parseDependencies} from "@/components/docs/components/code-demo/parse-dependencies";
+import {toKebabCase, toPascalCase} from "@/components/docs/components/code-demo/utils";
 
 const importReact = 'import React from "react";';
 
-export const openInChat = async ({title, files}: {title?: string; files: SandpackFiles}) => {
+export const openInChat = async ({
+  component,
+  title,
+  content,
+  dependencies,
+  useWrapper,
+}: {
+  component: string;
+  title?: string;
+  content: string;
+  dependencies: {name: string; version: string}[];
+  useWrapper: boolean;
+}) => {
   try {
-    // assumes one file for now
-    let content = files["/App.jsx"];
-
-    if (!content || typeof content !== "string") {
-      return {
-        error: "Content is not a string",
-        data: null,
-      };
-    }
-
-    const dependencies = parseDependencies(content);
-
     // Check if the file content includes 'React' import statements, if not, add it
     if (
       content.includes("React.") &&
@@ -29,6 +27,16 @@ export const openInChat = async ({title, files}: {title?: string; files: Sandpac
       content = `${importReact}\n${content}\n`;
     }
 
+    let files: Record<string, string> = {
+      "src/App.tsx": content,
+    };
+
+    const fullName = `${component.charAt(0).toUpperCase() + component.slice(1)} - ${title}`;
+
+    if (useWrapper) {
+      files = getFilesWithWrapper(fullName, content);
+    }
+
     const response = await fetch(`${process.env.CHAT_API_URL}/import`, {
       method: "POST",
       headers: {
@@ -36,8 +44,8 @@ export const openInChat = async ({title, files}: {title?: string; files: Sandpac
         Authorization: `Bearer ${process.env.IMPORT_API_KEY}`,
       },
       body: JSON.stringify({
-        title,
-        content,
+        title: `${component.charAt(0).toUpperCase() + component.slice(1)} - ${title}`,
+        files,
         dependencies,
       }),
     });
@@ -62,4 +70,31 @@ export const openInChat = async ({title, files}: {title?: string; files: Sandpac
   } catch (error) {
     return {error: error, data: null};
   }
+};
+
+const getFilesWithWrapper = (name: string, content: string) => {
+  const pascalName = toPascalCase(name);
+  const kebabName = toKebabCase(name);
+
+  // Replace the export default function name
+  const updatedContent = content.replace(
+    "export default function App()",
+    `export default function ${pascalName}()`,
+  );
+
+  const wrapperContent = `import ${pascalName} from "./components/${kebabName}";
+
+export default function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6">
+      <${pascalName} />
+    </div>
+  );
+}
+`;
+
+  return {
+    [`src/components/${kebabName}.tsx`]: updatedContent,
+    [`src/App.tsx`]: wrapperContent,
+  };
 };
