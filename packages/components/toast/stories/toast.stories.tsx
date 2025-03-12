@@ -291,11 +291,11 @@ const WithToastFromOverlayTemplate = (args) => {
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
-    primary: "before:bg-primary border-primary-200 dark:border-primary-100",
-    secondary: "before:bg-secondary border-secondary-200 dark:border-secondary-100",
-    success: "before:bg-success border-success-200 dark:border-success-100",
-    warning: "before:bg-warning border-warning-200 dark:border-warning-100",
-    danger: "before:bg-danger border-danger-200 dark:border-danger-100",
+    primary: "border-primary-200 dark:border-primary-100 border-l-primary",
+    secondary: "border-secondary-200 dark:border-secondary-100 border-l-secondary",
+    success: "border-success-200 dark:border-success-100 border-l-success",
+    warning: "border-warning-200 dark:border-warning-100 border-l-warning",
+    danger: "border-danger-200 dark:border-danger-100 border-l-danger",
   };
 
   return (
@@ -310,11 +310,7 @@ const CustomToastComponent = (args) => {
             classNames: {
               base: cn([
                 "bg-default-50 dark:bg-background shadow-sm",
-                "border-1",
-                "relative before:content-[''] before:absolute before:z-10",
-                "before:left-0 before:top-[-1px] before:bottom-[-1px] before:w-1",
-                "rounded-l-none border-l-0",
-                "rounded-md",
+                "border border-l-8 rounded-md rounded-l-none",
                 "flex flex-col items-start",
                 colorMap[color],
               ]),
