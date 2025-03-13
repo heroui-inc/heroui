@@ -8,7 +8,7 @@ export const parseDependencies = (content: string) => {
 
   // by default, react and heroui packages are installed already
   const installedPackages = {
-    React,
+    ...React,
     ...HeroUI,
   } as Record<string, unknown>;
 
