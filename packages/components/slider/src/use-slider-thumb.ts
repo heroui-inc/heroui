@@ -48,6 +48,11 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * Function to render the thumb. It can be used to add a tooltip or custom icon.
    */
   renderThumb?: UseSliderProps["renderThumb"];
+  /**
+   * @internal
+   * Whether the slider has fixed value (min and max are the same)
+   */
+  isFixedValue?: boolean;
 }
 
 export type UseSliderThumbProps = Props & AriaSliderThumbProps & SliderVariantProps;
@@ -66,6 +71,7 @@ export function useSliderThumb(props: UseSliderThumbProps) {
     showTooltip,
     formatOptions,
     renderThumb,
+    isFixedValue = false,
     ...otherProps
   } = props;
 
@@ -88,11 +94,11 @@ export function useSliderThumb(props: UseSliderThumbProps) {
   );
 
   const {hoverProps, isHovered} = useHover({
-    isDisabled: state.isDisabled,
+    isDisabled: state.isDisabled || isFixedValue,
   });
   const {focusProps, isFocusVisible} = useFocusRing();
   const {pressProps, isPressed} = usePress({
-    isDisabled: state.isDisabled,
+    isDisabled: state.isDisabled || isFixedValue,
   });
 
   const getThumbProps: PropGetter = (props = {}) => {
@@ -104,6 +110,7 @@ export function useSliderThumb(props: UseSliderThumbProps) {
       "data-dragging": dataAttr(isDragging),
       "data-focused": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocusVisible),
+      "data-fixed-value": dataAttr(isFixedValue),
       ...mergeProps(thumbProps, pressProps, hoverProps, otherProps),
       className,
       ...props,
@@ -120,7 +127,10 @@ export function useSliderThumb(props: UseSliderThumbProps) {
       placement: tooltipProps?.placement ? tooltipProps?.placement : isVertical ? "right" : "top",
       content: tooltipProps?.content ? tooltipProps?.content : value,
       updatePositionDeps: [isDragging, isHovered, value],
-      isOpen: tooltipProps?.isOpen !== undefined ? tooltipProps?.isOpen : isHovered || isDragging,
+      isOpen:
+        tooltipProps?.isOpen !== undefined
+          ? tooltipProps?.isOpen
+          : (isHovered || isDragging) && !isFixedValue,
     } as TooltipProps;
   };
 
@@ -135,7 +145,7 @@ export function useSliderThumb(props: UseSliderThumbProps) {
   return {
     Component,
     index,
-    showTooltip,
+    showTooltip: showTooltip && !isFixedValue,
     renderThumb,
     getThumbProps,
     getTooltipProps,

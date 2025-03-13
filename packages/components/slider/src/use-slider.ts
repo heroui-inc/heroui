@@ -173,6 +173,8 @@ export function useSlider(originalProps: UseSliderProps) {
     ...otherProps
   } = props;
 
+  const isFixedValue = minValue === maxValue;
+
   const Component = as || "div";
   const shouldFilterDOMProps = typeof Component === "string";
   const disableAnimation =
@@ -202,7 +204,7 @@ export function useSlider(originalProps: UseSliderProps) {
   const state = useSliderState({
     ...otherProps,
     value: validatedValue,
-    isDisabled: originalProps?.isDisabled ?? false,
+    isDisabled: originalProps?.isDisabled,
     orientation,
     step,
     minValue,
@@ -248,19 +250,32 @@ export function useSlider(originalProps: UseSliderProps) {
     [objectToDeps(variantProps), isVertical, disableAnimation, hasSingleThumb, hasMarks],
   );
 
+  const getThumbPercent = (index: number) => {
+    if (isFixedValue) return 0;
+
+    return state.getThumbPercent(index);
+  };
+
+  const getValuePercent = (value: number) => {
+    if (isFixedValue) return 0;
+
+    return state.getValuePercent(value);
+  };
+
   const [startOffset, endOffset] = [
     state.values.length > 1
-      ? state.getThumbPercent(0)
+      ? getThumbPercent(0)
       : fillOffset !== undefined
-      ? state.getValuePercent(fillOffset)
+      ? getValuePercent(fillOffset)
       : 0,
-    state.getThumbPercent(state.values.length - 1),
+    getThumbPercent(state.values.length - 1),
   ].sort();
 
-  const value =
-    state.values.length === 1
-      ? numberFormatter.format(state.values[0])
-      : numberFormatter.formatRange(state.values[0], state.values[state.values.length - 1]);
+  const value = isFixedValue
+    ? numberFormatter.format(minValue)
+    : state.values.length === 1
+    ? numberFormatter.format(state.values[0])
+    : numberFormatter.formatRange(state.values[0], state.values[state.values.length - 1]);
 
   const steps = showSteps ? Math.floor((maxValue - minValue) / step) + 1 : 0;
 
@@ -270,6 +285,7 @@ export function useSlider(originalProps: UseSliderProps) {
       "data-orientation": state.orientation,
       "data-slot": "base",
       "data-hover": isHovered,
+      "data-fixed-value": isFixedValue,
       className: slots.base({class: baseStyles}),
       ...mergeProps(
         groupProps,
@@ -360,13 +376,14 @@ export function useSlider(originalProps: UseSliderProps) {
       tooltipProps,
       showTooltip,
       renderThumb,
+      isFixedValue,
       formatOptions: tooltipValueFormatOptions,
       className: slots.thumb({class: classNames?.thumb}),
     } as SliderThumbProps;
   };
 
   const getStepProps = (index: number) => {
-    const percent = state.getValuePercent(index * step + minValue);
+    const percent = isFixedValue ? 0 : state.getValuePercent(index * step + minValue);
 
     return {
       className: slots.step({class: classNames?.step}),
@@ -379,7 +396,7 @@ export function useSlider(originalProps: UseSliderProps) {
   };
 
   const getMarkProps = (mark: SliderStepMark) => {
-    const percent = state.getValuePercent(mark.value);
+    const percent = isFixedValue ? 0 : state.getValuePercent(mark.value);
 
     return {
       className: slots.mark({class: classNames?.mark}),
@@ -394,6 +411,12 @@ export function useSlider(originalProps: UseSliderProps) {
       onMouseDown: (e: React.MouseEvent) => e.stopPropagation(),
       onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
       onClick: (e: any) => {
+        if (isFixedValue) {
+          e.stopPropagation();
+
+          return;
+        }
+
         e.stopPropagation();
         if (state.values.length === 1) {
           state.setThumbPercent(0, percent);
