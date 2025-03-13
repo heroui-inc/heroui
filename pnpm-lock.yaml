@@ -1353,6 +1353,49 @@ importers:
         specifier: 18.3.0
         version: 18.3.0(react@18.3.0)
 
+  packages/components/color-picker:
+    dependencies:
+      '@heroui/react-utils':
+        specifier: workspace:*
+        version: link:../../utilities/react-utils
+      '@heroui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@heroui/shared-utils':
+        specifier: workspace:*
+        version: link:../../utilities/shared-utils
+      '@react-aria/focus':
+        specifier: 3.20.0
+        version: 3.20.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/interactions':
+        specifier: 3.24.0
+        version: 3.24.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/utils':
+        specifier: 3.28.0
+        version: 3.28.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-types/checkbox':
+        specifier: 3.9.2
+        version: 3.9.2(react@18.3.0)
+    devDependencies:
+      '@heroui/avatar':
+        specifier: workspace:*
+        version: link:../avatar
+      '@heroui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@heroui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 18.3.0
+        version: 18.3.0
+      react-dom:
+        specifier: 18.3.0
+        version: 18.3.0(react@18.3.0)
+
   packages/components/date-input:
     dependencies:
       '@heroui/form':
@@ -3321,6 +3364,9 @@ importers:
       '@heroui/code':
         specifier: workspace:*
         version: link:../../components/code
+      '@heroui/color-picker':
+        specifier: workspace:*
+        version: link:../../components/color-picker
       '@heroui/date-input':
         specifier: workspace:*
         version: link:../../components/date-input
