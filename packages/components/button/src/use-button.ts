@@ -177,6 +177,8 @@ export function useButton(props: UseButtonProps) {
         filterDOMProps(props),
       ),
       className: styles,
+      // Fixes the icon shift issue in the safari. To be added in the button.ts once we have the support for translateZ in tailwind.
+      style: {transform: "translateZ(0)"},
     }),
     [
       isLoading,
