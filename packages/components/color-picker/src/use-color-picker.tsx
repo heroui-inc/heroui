@@ -1,9 +1,9 @@
 import type {ColorPickerVariantProps, ColorPickerSlots, SlotsToClasses} from "@heroui/theme";
 
-import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter} from "@heroui/system";
 import {colorPicker} from "@heroui/theme";
 import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {useMemo, useState} from "react";
 import {InputProps} from "@heroui/input";
 import {ButtonProps} from "@heroui/button";
@@ -28,7 +28,10 @@ export function useColorPicker(originalProps: UseColorPickerProps) {
   const [copied, setCopied] = useState(false);
   const {copy} = useClipboard();
 
-  const {children, classNames, className} = props;
+  const {classNames, className, as, ref, ...otherProps} = props;
+
+  const Component = as || "div";
+  const domRef = useDOMRef(ref);
 
   const baseStyles = clsx(classNames?.base, className);
 
@@ -40,14 +43,23 @@ export function useColorPicker(originalProps: UseColorPickerProps) {
     [objectToDeps(variantProps)],
   );
 
-  const getColorPickerProps = (): InputProps => {
+  const getColorPickerProps: PropGetter = () => {
     return {
+      ref: domRef,
       className: slots.base({class: baseStyles}),
+      ...otherProps,
+    };
+  };
+
+  const getInputProps = (): InputProps => {
+    return {
       value: colorValue.replace("#", ""),
       maxLength: 6,
       minLength: 6,
+      className: slots.input({class: classNames?.input}),
       classNames: {
-        input: "w-16 font-medium text-md me-2",
+        base: slots.input({class: classNames?.input}),
+        input: "w-20 font-medium text-md me-2",
         inputWrapper: "p-2",
         label: "hidden",
       },
@@ -60,8 +72,8 @@ export function useColorPicker(originalProps: UseColorPickerProps) {
 
   const getCopyButtonProps = (): ButtonProps => {
     return {
+      className: slots.copyBtn({class: classNames?.copyBtn}),
       isIconOnly: true,
-      className: "p-0 size-7 min-w-7",
       radius: "sm",
       variant: "bordered",
     };
@@ -90,7 +102,8 @@ export function useColorPicker(originalProps: UseColorPickerProps) {
     return {
       type: "color",
       value: colorValue,
-      className: "color-swatch border-none rounded-md p-0 cursor-pointer size-6",
+      className:
+        "color-swatch:border-none color-swatch:p-0 color-swatch-wrapper:border-none color-swatch-wrapper:p-0 moz-color-swatch:border-none moz-color-swatch:p-0 border-none rounded-md p-0 cursor-pointer size-6",
       onChange: (e) => setColorValue(e.target.value),
     };
   };
@@ -106,8 +119,8 @@ export function useColorPicker(originalProps: UseColorPickerProps) {
   };
 
   return {
+    Component,
     colorValue,
-    children,
     slots,
     classNames,
     copied,
@@ -117,6 +130,7 @@ export function useColorPicker(originalProps: UseColorPickerProps) {
     handleCopyToClipboard,
     getTooltipButtonProps,
     getInnerWrapperProps,
+    getInputProps,
   };
 }
 

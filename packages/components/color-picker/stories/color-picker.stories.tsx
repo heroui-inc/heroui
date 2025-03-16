@@ -31,6 +31,16 @@ export default {
       },
       options: ["sm", "md", "lg"],
     },
+    isDisabled: {
+      control: {
+        type: "boolean",
+      },
+    },
+    fullWidth: {
+      control: {
+        type: "boolean",
+      },
+    },
   },
 } as Meta<typeof ColorPicker>;
 
@@ -42,5 +52,19 @@ const defaultProps = {
 export const Default = {
   args: {
     ...defaultProps,
+  },
+};
+
+export const IsDisabled = {
+  args: {
+    ...defaultProps,
+    isDisabled: true,
+  },
+};
+
+export const FullWidth = {
+  args: {
+    ...defaultProps,
+    fullWidth: true,
   },
 };

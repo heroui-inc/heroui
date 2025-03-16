@@ -4,17 +4,17 @@ import {tv} from "../utils/tv";
 
 const colorPicker = tv({
   slots: {
-    base: ["w-fit", "flex", "outline-none", "box-border"],
-    content: [],
+    base: ["w-fit", "h-fit", "flex", "outline-none", "overflow-hidden"],
+    input: ["w-fit"],
+    copyBtn: ["p-0", "size-7", "min-w-7"],
   },
   variants: {
     variant: {
-      solid: {},
-      bordered: {},
-      light: {},
-      flat: {},
-      faded: {},
-      shadow: {},
+      solid: "",
+      bordered: {
+        base: "border-medium bg-transparent",
+      },
+      light: "bg-transparent",
     },
     color: {
       default: {},
@@ -26,40 +26,44 @@ const colorPicker = tv({
     },
     size: {
       sm: {
-        base: "px-1 h-6 text-tiny",
+        base: "",
       },
       md: {
-        base: "px-1 h-7 text-small",
+        base: "",
       },
       lg: {
-        base: "px-2 h-8 text-medium",
+        base: "",
       },
     },
     radius: {
       none: {
         base: "rounded-none",
+        input: "rounded-none",
       },
       sm: {
         base: "rounded-small",
+        input: "rounded-small",
       },
       md: {
         base: "rounded-medium",
+        input: "rounded-medium",
       },
       lg: {
         base: "rounded-large",
+        input: "rounded-large",
       },
       full: {
         base: "rounded-full",
+        input: "rounded-full",
       },
     },
-    hasStartContent: {
-      true: {},
-    },
-    hasEndContent: {
-      true: {},
-    },
     isDisabled: {
-      true: {base: "opacity-disabled pointer-events-none"},
+      true: {
+        base: "opacity-disabled pointer-events-none",
+      },
+    },
+    fullWidth: {
+      true: {base: "w-full", input: "w-full"},
     },
   },
   defaultVariants: {
@@ -68,6 +72,7 @@ const colorPicker = tv({
     size: "md",
     radius: "sm",
     isDisabled: false,
+    fullWidth: false,
   },
   compoundVariants: [],
 });

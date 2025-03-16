@@ -12,6 +12,11 @@ export default {
   ],
   darkMode: "class",
   plugins: [
+    function ({addVariant}) {
+      addVariant("color-swatch", "&::-webkit-color-swatch");
+      addVariant("color-swatch-wrapper", "&::-webkit-color-swatch-wrapper");
+      addVariant("moz-color-swatch", "&::-moz-color-swatch");
+    },
     heroui({
       addCommonColors: true,
       themes: {

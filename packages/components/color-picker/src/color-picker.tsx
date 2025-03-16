@@ -12,35 +12,39 @@ export interface ColorPickerProps extends UseColorPickerProps {}
 
 const ColorPicker = forwardRef<"input", ColorPickerProps>((props, ref) => {
   const {
+    Component,
     getColorPickerProps,
     getColorInputProps,
     handleCopyToClipboard,
     getCopyButtonProps,
     getTooltipButtonProps,
     getInnerWrapperProps,
+    getInputProps,
   } = useColorPicker({
     ...props,
     ref,
   });
 
   return (
-    <Input
-      endContent={
-        <Tooltip {...getTooltipButtonProps()}>
-          <Button
-            startContent={<CopyDocumentBulkIcon onClick={handleCopyToClipboard} />}
-            {...getCopyButtonProps()}
-          />
-        </Tooltip>
-      }
-      startContent={
-        <div slot="inner-wrapper" {...getInnerWrapperProps()}>
-          <input {...getColorInputProps()} />
-          <span className="font-bold text-xl">#</span>
-        </div>
-      }
-      {...getColorPickerProps()}
-    />
+    <Component {...getColorPickerProps()}>
+      <Input
+        endContent={
+          <Tooltip {...getTooltipButtonProps()}>
+            <Button
+              startContent={<CopyDocumentBulkIcon onClick={handleCopyToClipboard} />}
+              {...getCopyButtonProps()}
+            />
+          </Tooltip>
+        }
+        startContent={
+          <div slot="inner-wrapper" {...getInnerWrapperProps()}>
+            <input {...getColorInputProps()} />
+            <span className="font-bold text-xl">#</span>
+          </div>
+        }
+        {...getInputProps()}
+      />
+    </Component>
   );
 });
 

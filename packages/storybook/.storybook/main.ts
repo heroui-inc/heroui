@@ -5,7 +5,9 @@ import type {StorybookConfig} from "@storybook/react-vite";
 const config: StorybookConfig = {
   stories: [
     "./welcome.mdx",
-    "../../components/**/stories/**/*.stories.@(js|jsx|ts|tsx)",
+    //! TODO: this is just for faster refreshing, revert before merging
+    "../../components/color-picker/stories/**/*.stories.@(js|jsx|ts|tsx)",
+    "../../components/button/stories/**/*.stories.@(js|jsx|ts|tsx)",
     "../../core/theme/stories/*.stories.@(js|jsx|ts|tsx)",
   ],
 
