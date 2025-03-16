@@ -1,12 +1,18 @@
 import {Meta} from "@storybook/react";
 import {colorPicker} from "@heroui/theme";
 
-import {ColorPicker, ColorPickerProps} from "../src";
+import {ColorPicker} from "../src";
 
 export default {
   title: "Components/ColorPicker",
   component: ColorPicker,
   argTypes: {
+    variant: {
+      control: {
+        type: "select",
+      },
+      options: ["solid", "bordered", "light"],
+    },
     color: {
       control: {
         type: "select",
@@ -36,19 +42,5 @@ const defaultProps = {
 export const Default = {
   args: {
     ...defaultProps,
-  },
-};
-
-const HiddenOverflowTemplate = (args: ColorPickerProps) => (
-  <div className="">
-    <ColorPicker {...args} />
-  </div>
-);
-
-export const HiddenOverflow = {
-  render: HiddenOverflowTemplate,
-  args: {
-    ...defaultProps,
-    children: "Hello World!",
   },
 };

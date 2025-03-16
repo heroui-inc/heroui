@@ -1,4 +1,4 @@
-# @nextui-org/color-picker
+# @heroui/color-picker
 
 A Color Picker is an input component that allows users to select a color from a color swatch box.
 
@@ -8,7 +8,9 @@ Please refer to the [documentation](https://heroui.com/docs/components/color-pic
 
 ```sh
 yarn add @heroui/color-picker
+
 # or
+
 npm i @heroui/color-picker
 ```
 
