@@ -49,7 +49,7 @@
           "keywords": "migrate, nextui, hero, heroui",
           "path": "/docs/guide/nextui-to-heroui.mdx"
         },
-         {
+        {
           "key": "figma",
           "title": "Figma",
           "keywords": "figma, design, ui kit",
@@ -471,7 +471,8 @@
           "key": "cli-api",
           "title": "HeroUI CLI",
           "keywords": "api references, heroui, api, cli",
-          "path": "/docs/api-references/cli-api.mdx"
+          "path": "/docs/api-references/cli-api.mdx",
+          "updated": true
         },
         {
           "key": "heroui-provider",
