@@ -13,6 +13,7 @@ import visibleMonths from "./visible-months";
 import firstDayOfWeek from "./first-day-of-week";
 import pageBehaviour from "./page-behaviour";
 import presets from "./presets";
+import customCellContent from "./custom-cell-content";
 import withMonthAndYearPicker from "./with-month-and-year-picker";
 
 export const rangeCalendarContent = {
@@ -31,5 +32,6 @@ export const rangeCalendarContent = {
   firstDayOfWeek,
   pageBehaviour,
   presets,
+  customCellContent,
   withMonthAndYearPicker,
 };
