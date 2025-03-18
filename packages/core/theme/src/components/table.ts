@@ -145,6 +145,24 @@ const table = tv({
     radius: {
       none: {
         wrapper: "rounded-none",
+        th: [
+          "!rounded-none",
+          "first:!rounded-none",
+          "last:!rounded-none",
+          "before:!rounded-none",
+          "group-data-[odd=true]/tr:before:!rounded-none",
+          "group-data-[odd=true]/tr:first:before:!rounded-none",
+          "group-data-[odd=true]/tr:last:before:!rounded-none",
+        ],
+        td: [
+          "!rounded-none",
+          "first:!rounded-none",
+          "last:!rounded-none",
+          "before:!rounded-none",
+          "group-data-[odd=true]/tr:before:!rounded-none",
+          "group-data-[odd=true]/tr:first:before:!rounded-none",
+          "group-data-[odd=true]/tr:last:before:!rounded-none",
+        ],
       },
       sm: {
         wrapper: "rounded-small",
