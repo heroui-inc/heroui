@@ -396,24 +396,13 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "data-placement": placement,
       "data-drag-value": dragValue,
       "data-toast": true,
-      "data-animation": toast.animation,
       "aria-label": "toast",
-      onTransitionEnd: () => {
-        if (toast.animation === "exiting") {
-          const updatedHeights = heights;
-
-          updatedHeights.splice(index, 1);
-          setHeights([...updatedHeights]);
-
-          state.remove(toast.key);
-        }
-      },
       style: {
         opacity: opacityValue,
       },
       ...mergeProps(props, otherProps, toastProps, hoverProps),
     }),
-    [slots, classNames, toastProps, hoverProps, toast, toast.animation, toast.key, opacityValue],
+    [slots, classNames, toastProps, hoverProps, toast, toast.key, opacityValue],
   );
 
   const getWrapperProps: PropGetter = useCallback(
@@ -555,7 +544,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
             setHeights([...updatedHeights]);
 
             state.close(toast.key);
-            state.remove(toast.key);
 
             return;
           }

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-accordion-item",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "Internal impl for react aria accordion item",
   "keywords": [
     "use-aria-accordion-item"
@@ -34,10 +34,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/button": "3.11.1",
-    "@react-aria/focus": "3.19.1",
-    "@react-stately/tree": "3.8.7",
-    "@react-types/shared": "3.27.0"
+    "@react-aria/button": "3.12.0",
+    "@react-aria/focus": "3.20.0",
+    "@react-stately/tree": "3.8.8",
+    "@react-types/shared": "3.28.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"
