@@ -129,7 +129,7 @@
     "shelljs": "^0.8.4",
     "tsup": "8.3.5",
     "tsx": "^4.19.2",
-    "turbo": "1.6.3",
+    "turbo": "2.4.4",
     "typescript": "^5.7.3",
     "webpack": "^5.53.0",
     "webpack-bundle-analyzer": "^4.4.2",

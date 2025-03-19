@@ -4,6 +4,7 @@ import {initialLayout} from "../constants";
 import {Config} from "../types";
 
 export const coffee: Config = {
+  name: "coffee",
   light: {
     defaultColor: {
       default: "#b4afa8",

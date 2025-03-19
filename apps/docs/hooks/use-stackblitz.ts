@@ -39,7 +39,17 @@ export function useStackblitz(props: UseSandpackProps) {
     typescriptStrict,
   });
 
-  const transformFiles = mapKeys(filesData, (_, key) => key.replace(/^\//, ""));
+  // in stackblitz, npm will be used to install dependencies
+  // it doesn't need `public-hoist-pattern[]=*@heroui/*`
+  const filteredFilesData = Object.keys(filesData)
+    .filter((k) => k !== ".npmrc")
+    .reduce((o, k) => {
+      o[k] = filesData[k];
+
+      return o;
+    }, {});
+
+  const transformFiles = mapKeys(filteredFilesData, (_, key) => key.replace(/^\//, ""));
 
   const dependencies = {...customSetup.dependencies, ...customSetup.devDependencies};
 

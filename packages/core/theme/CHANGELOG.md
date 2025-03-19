@@ -1,5 +1,28 @@
 # @heroui/theme
 
+## 2.4.12
+
+### Patch Changes
+
+- [#4968](https://github.com/heroui-inc/heroui/pull/4968) [`e9c67fa`](https://github.com/heroui-inc/heroui/commit/e9c67fa6caf62fa835474d009b86cf722b08b66d) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed stepper button pseudo height in number-input (#4920)
+
+- [#5001](https://github.com/heroui-inc/heroui/pull/5001) [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d) Thanks [@macci001](https://github.com/macci001)! - Toast should be above the modal(#4898).
+
+## 2.4.11
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/shared-utils@2.1.7
+
+## 2.4.10
+
+### Patch Changes
+
+- [#4922](https://github.com/heroui-inc/heroui/pull/4922) [`2774a1b`](https://github.com/heroui-inc/heroui/commit/2774a1b3513e2a046c538a2982a438f56608bbf2) Thanks [@wingkwong](https://github.com/wingkwong)! - fix broken start & end content in breadcrumb (#4921)
+
 ## 2.4.9
 
 ### Patch Changes

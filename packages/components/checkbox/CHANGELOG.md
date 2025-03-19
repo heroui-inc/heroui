@@ -1,5 +1,34 @@
 # @heroui/checkbox
 
+## 2.3.15
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/form@2.1.15
+
+## 2.3.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/form@2.1.14
+  - @heroui/use-callback-ref@2.1.6
+  - @heroui/use-safe-layout-effect@2.1.6
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.13
+
 ## 2.3.12
 
 ### Patch Changes
