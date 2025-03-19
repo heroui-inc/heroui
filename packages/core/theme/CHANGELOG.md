@@ -1,5 +1,13 @@
 # @heroui/theme
 
+## 2.4.12
+
+### Patch Changes
+
+- [#4968](https://github.com/heroui-inc/heroui/pull/4968) [`e9c67fa`](https://github.com/heroui-inc/heroui/commit/e9c67fa6caf62fa835474d009b86cf722b08b66d) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed stepper button pseudo height in number-input (#4920)
+
+- [#5001](https://github.com/heroui-inc/heroui/pull/5001) [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d) Thanks [@macci001](https://github.com/macci001)! - Toast should be above the modal(#4898).
+
 ## 2.4.11
 
 ### Patch Changes

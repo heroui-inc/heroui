@@ -1,5 +1,18 @@
 # @heroui/toast
 
+## 2.0.6
+
+### Patch Changes
+
+- [#5003](https://github.com/heroui-inc/heroui/pull/5003) [`1f95899`](https://github.com/heroui-inc/heroui/commit/1f9589943af2e6910fc6a4b4bce53e47b91f4a61) Thanks [@wingkwong](https://github.com/wingkwong)! - tmp fix for unexpected toast animation
+
+- [#5001](https://github.com/heroui-inc/heroui/pull/5001) [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d) Thanks [@macci001](https://github.com/macci001)! - Toast should be above the modal(#4898).
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies []:
+  - @heroui/spinner@2.2.13
+
 ## 2.0.5
 
 ### Patch Changes

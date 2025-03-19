@@ -49,7 +49,7 @@ export const HeroUIChatBanner = () => {
       <div className="flex w-full items-center justify-between md:justify-center gap-x-3">
         <a
           className="text-small flex items-end sm:text-[0.93rem] text-foreground hover:opacity-80 transition-opacity"
-          href="https://heroui.pro?utm_source=heroui.com&utm_medium=top-banner"
+          href="https://heroui.chat?utm_source=heroui.com&utm_medium=top-banner"
           rel="noopener noreferrer"
           target="_blank"
           onClick={handleClick}

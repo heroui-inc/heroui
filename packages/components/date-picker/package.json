@@ -1,6 +1,6 @@
 {
   "name": "@heroui/date-picker",
-  "version": "2.3.15",
+  "version": "2.3.16",
   "description": "A date picker combines a DateInput and a Calendar popover to allow users to enter or select a date and time value.",
   "keywords": [
     "date-picker"
@@ -51,14 +51,14 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-aria/datepicker": "3.13.0",
-    "@react-aria/i18n": "3.12.5",
-    "@react-aria/utils": "3.27.0",
-    "@react-stately/datepicker": "3.12.0",
-    "@react-stately/overlays": "3.6.13",
+    "@react-aria/datepicker": "3.14.0",
+    "@react-aria/i18n": "3.12.6",
+    "@react-aria/utils": "3.28.0",
+    "@react-stately/datepicker": "3.13.0",
+    "@react-stately/overlays": "3.6.14",
     "@react-stately/utils": "3.10.5",
-    "@react-types/datepicker": "3.10.0",
-    "@react-types/shared": "3.27.0"
+    "@react-types/datepicker": "3.11.0",
+    "@react-types/shared": "3.28.0"
   },
   "devDependencies": {
     "@heroui/radio": "workspace:*",

@@ -1,5 +1,12 @@
 # @heroui/framer-utils
 
+## 2.1.12
+
+### Patch Changes
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/system@2.4.12
+
 ## 2.1.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @heroui/use-aria-button
 
+## 2.2.10
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
 ## 2.2.9
 
 ### Patch Changes

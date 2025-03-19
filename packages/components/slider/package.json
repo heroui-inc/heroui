@@ -1,6 +1,6 @@
 {
   "name": "@heroui/slider",
-  "version": "2.4.12",
+  "version": "2.4.13",
   "description": "A slider allows a user to select one or more values within a range.",
   "keywords": [
     "slider"
@@ -43,13 +43,13 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/tooltip": "workspace:*",
-    "@react-aria/focus": "3.19.1",
-    "@react-aria/i18n": "3.12.5",
-    "@react-aria/interactions": "3.23.0",
-    "@react-aria/slider": "3.7.15",
-    "@react-aria/utils": "3.27.0",
-    "@react-aria/visually-hidden": "3.8.19",
-    "@react-stately/slider": "3.6.1"
+    "@react-aria/focus": "3.20.0",
+    "@react-aria/i18n": "3.12.6",
+    "@react-aria/interactions": "3.24.0",
+    "@react-aria/slider": "3.7.16",
+    "@react-aria/utils": "3.28.0",
+    "@react-aria/visually-hidden": "3.8.20",
+    "@react-stately/slider": "3.6.2"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
