@@ -49,6 +49,7 @@ export * from "@heroui/drawer";
 export * from "@heroui/input-otp";
 export * from "@heroui/number-input";
 export * from "@heroui/toast";
+export * from "@heroui/color-picker";
 
 /**
  * React Aria - Exports
