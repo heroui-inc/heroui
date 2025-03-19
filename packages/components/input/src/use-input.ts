@@ -14,7 +14,6 @@ import {useMemo, Ref, useCallback, useState} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
 import {useTextField} from "@react-aria/textfield";
 import {FormContext, useSlottedContext} from "@heroui/form";
-import {warn} from "@heroui/shared-utils";
 
 export interface Props<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement>
   extends Omit<HTMLHeroUIProps<"input">, keyof InputVariantProps> {
@@ -228,31 +227,8 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
 
   const isInvalid = validationState === "invalid" || isAriaInvalid;
 
-  /**
-   * Following code is not used because adding 'outside-top' to
-   * 'use-label-placement' hook breaks other component.
-   *  Folowing code is replaced with the old way of computing
-   * 'labelPlacement' for 'input' component.
-   *
-   *  const labelPlacement = useLabelPlacement({
-   *       labelPlacement: originalProps.labelPlacement,
-   *       label,
-   *     });
-   */
-
+  // TODO: not using useLabelPlacement because `outside-top` doesn't support in other components.
   const labelPlacement = useMemo<InputVariantProps["labelPlacement"]>(() => {
-    if (isFileTypeInput) {
-      // if `labelPlacement` is not defined, choose `outside` instead
-      // since the default value `inside` is not supported in file input
-      if (!originalProps.labelPlacement) return "outside";
-      // throw a warning if `labelPlacement` is `inside`
-      // and change it to `outside`
-      if (originalProps.labelPlacement === "inside") {
-        warn("Input with file type doesn't support inside label. Converting to outside ...");
-
-        return "outside";
-      }
-    }
     if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
       return "outside";
     }
