@@ -3,20 +3,26 @@ import {addToast, Button} from "@heroui/react";
 export default function App() {
   return (
     <div className="flex flex-wrap gap-2">
-      {["none", "sm", "md", "lg", "full"].map((radius) => (
+      {[
+        ["None", "none"],
+        ["Small", "sm"],
+        ["Medium", "md"],
+        ["Large", "lg"],
+        ["Full", "full"],
+      ].map((radius) => (
         <Button
-          key={radius}
-          radius={radius}
+          key={radius[1]}
+          radius={radius[1]}
           variant={"flat"}
           onPress={() =>
             addToast({
               title: "Toast title",
               description: "Toast displayed successfully",
-              radius: radius,
+              radius: radius[1],
             })
           }
         >
-          {radius}
+          {radius[0]}
         </Button>
       ))}
     </div>

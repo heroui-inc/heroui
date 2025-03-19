@@ -1,5 +1,14 @@
 # @heroui/use-infinite-scroll
 
+## 2.2.7
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.6
 
 ### Patch Changes

@@ -493,6 +493,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         isRequired: originalProps?.isRequired,
         autoComplete: originalProps?.autoComplete,
         isDisabled: originalProps?.isDisabled,
+        form: originalProps?.form,
         onChange,
         ...props,
       } as HiddenSelectProps<T>),

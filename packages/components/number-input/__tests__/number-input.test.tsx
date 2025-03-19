@@ -240,6 +240,91 @@ describe("NumberInput", () => {
 
     expect(stepperButton).toBeNull();
   });
+
+  it("should clear value when isClearable and pressing ESC key", async () => {
+    const onClear = jest.fn();
+    const defaultValue = 12;
+
+    const {container} = render(
+      <NumberInput isClearable defaultValue={defaultValue} onClear={onClear} />,
+    );
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue.toString());
+
+    fireEvent.keyDown(input, {key: "Escape"});
+    expect(input.value).toBe("");
+    expect(onClear).toHaveBeenCalledTimes(1);
+  });
+
+  it("should not clear value when pressing ESC key if input is empty", () => {
+    const onClear = jest.fn();
+
+    const {container} = render(<NumberInput isClearable onClear={onClear} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    fireEvent.keyDown(input, {key: "Escape"});
+    expect(onClear).not.toHaveBeenCalled();
+  });
+
+  it("should not clear value when pressing ESC key without isClearable", () => {
+    const defaultValue = 12;
+
+    const {container} = render(<NumberInput defaultValue={defaultValue} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue.toString());
+
+    fireEvent.keyDown(input, {key: "Escape"});
+    expect(input.value).toBe(defaultValue.toString());
+  });
+
+  it("should not clear value when pressing ESC key if input is readonly", () => {
+    const onClear = jest.fn();
+    const defaultValue = 42;
+
+    const {container} = render(<NumberInput isReadOnly defaultValue={defaultValue} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue.toString());
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe(defaultValue.toString());
+    expect(onClear).not.toHaveBeenCalled();
+  });
+
+  it("should emit onChange", async () => {
+    const onChange = jest.fn();
+
+    const {container} = render(<NumberInput label="test number input" onChange={onChange} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("1024");
+
+    expect(onChange).toHaveBeenCalledTimes(4);
+  });
+
+  it("should emit onChange with keyboard up & down key", async () => {
+    const onChange = jest.fn();
+
+    const {container} = render(<NumberInput label="test number input" onChange={onChange} />);
+
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("[ArrowUp]");
+    await user.keyboard("[ArrowUp]");
+    expect(onChange).toHaveBeenCalledTimes(2);
+    await user.keyboard("[ArrowDown]");
+    expect(onChange).toHaveBeenCalledTimes(3);
+  });
 });
 
 describe("NumberInput with React Hook Form", () => {
@@ -503,7 +588,6 @@ describe("NumberInput with React Hook Form", () => {
 
         await user.tab();
         await user.keyboard("1234");
-        await user.tab();
       });
     });
   });

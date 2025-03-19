@@ -4,9 +4,9 @@ export default function App() {
   return (
     <div className="flex flex-wrap gap-2">
       {[
-        ["solid", "solid"],
-        ["bordered", "bordered"],
-        ["flat", "faded"],
+        ["Solid", "solid"],
+        ["Bordered", "bordered"],
+        ["Flat", "faded"],
       ].map((variant) => (
         <Button
           key={variant[0]}
@@ -17,7 +17,7 @@ export default function App() {
               title: "Toast title",
               description: "Toast displayed successfully",
               // @ts-ignore
-              variant: variant[0],
+              variant: variant[0].toLowerCase(),
               color: "secondary",
             })
           }

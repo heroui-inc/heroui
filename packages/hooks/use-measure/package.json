@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-measure",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Hook that measure and track a element dimensions",
   "keywords": [
     "use-measure"

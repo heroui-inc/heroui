@@ -5,7 +5,14 @@ import {useLocalStorage} from "usehooks-ts";
 
 import {HighlightedLines} from "./types";
 import {getHighlightedLines, getFileName} from "./utils";
-import {stylesConfig, postcssConfig, tailwindConfig, getHtmlFile, rootFile} from "./entries";
+import {
+  stylesConfig,
+  postcssConfig,
+  tailwindConfig,
+  npmrcConfig,
+  getHtmlFile,
+  rootFile,
+} from "./entries";
 
 export interface UseSandpackProps {
   files?: SandpackFiles;
@@ -205,6 +212,10 @@ export const useSandpack = ({
       },
       "styles.css": {
         code: stylesConfig,
+        hidden: true,
+      },
+      ".npmrc": {
+        code: npmrcConfig,
         hidden: true,
       },
     },
