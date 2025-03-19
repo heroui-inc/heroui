@@ -1,11 +1,11 @@
 {
   "name": "@heroui/react-utils",
-  "version": "2.1.4",
+  "version": "2.1.8",
   "description": "A set of utilities for react on client side",
   "keywords": [
     "react-utils"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

@@ -54,3 +54,5 @@ export const postcssConfig = `module.exports = {
 export const stylesConfig = `@tailwind base;
 @tailwind components;
 @tailwind utilities;`;
+
+export const npmrcConfig = `public-hoist-pattern[]=*@heroui/*`;

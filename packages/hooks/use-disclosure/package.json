@@ -1,11 +1,11 @@
 {
   "name": "@heroui/use-disclosure",
-  "version": "2.2.3",
+  "version": "2.2.8",
   "description": "The hook in charge of managing modals",
   "keywords": [
     "use-disclosure"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@heroui/use-callback-ref": "workspace:*",
-    "@react-aria/utils": "3.27.0",
+    "@react-aria/utils": "3.28.0",
     "@react-stately/utils": "3.10.5"
   },
   "devDependencies": {

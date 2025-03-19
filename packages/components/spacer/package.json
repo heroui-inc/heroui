@@ -1,11 +1,11 @@
 {
   "name": "@heroui/spacer",
-  "version": "2.2.7",
+  "version": "2.2.12",
   "description": "A flexible spacer component designed to create consistent spacing and maintain alignment in your layout.",
   "keywords": [
     "spacer"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.0"
+    "@heroui/theme": ">=2.4.6"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",

@@ -1,7 +1,7 @@
 import {Button, Link} from "@heroui/react";
 
 import {sectionWrapper} from "@/components/primitives";
-import {Story2DesignLogo, CodeRabbitLogo} from "@/components/icons/sponsors";
+import {Story2DesignLogo, CodeRabbitLogo, MochiiAILogo} from "@/components/icons/sponsors";
 import {HeartFilledIcon} from "@/components/icons";
 import {siteConfig} from "@/config/site";
 import {Sponsor, SponsorItem} from "@/components/marketing/sponsor-item";
@@ -16,6 +16,11 @@ const sponsors: Sponsor[] = [
     name: "CodeRabbit",
     href: "https://coderabbit.ai/?utm_source=heroui&utm_marketing=oss",
     logo: <CodeRabbitLogo />,
+  },
+  {
+    name: "Mochii.AI",
+    href: "https://www.mochii.ai/?utm_source=heroui&utm_marketing=oss",
+    logo: <MochiiAILogo />,
   },
 ];
 

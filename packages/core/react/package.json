@@ -1,8 +1,8 @@
 {
   "name": "@heroui/react",
-  "version": "2.6.14",
+  "version": "2.7.5",
   "description": "🚀 Beautiful and modern React UI library.",
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "keywords": [
@@ -89,7 +89,9 @@
     "@heroui/drawer": "workspace:*",
     "@heroui/form": "workspace:*",
     "@heroui/alert": "workspace:*",
-    "@react-aria/visually-hidden": "3.8.19"
+    "@heroui/number-input": "workspace:*",
+    "@heroui/toast": "workspace:*",
+    "@react-aria/visually-hidden": "3.8.20"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",

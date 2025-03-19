@@ -1,11 +1,11 @@
 {
   "name": "@heroui/calendar",
-  "version": "2.2.10",
+  "version": "2.2.16",
   "description": "A calendar displays one or more date grids and allows users to select a single date.",
   "keywords": [
     "calendar"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.0",
-    "@heroui/theme": ">=2.4.7",
+    "@heroui/system": ">=2.4.7",
+    "@heroui/theme": ">=2.4.6",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -49,17 +49,17 @@
     "@heroui/button": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
     "@internationalized/date": "3.7.0",
-    "@react-aria/calendar": "3.7.0",
-    "@react-aria/focus": "3.19.1",
-    "@react-aria/i18n": "3.12.5",
-    "@react-stately/calendar": "3.7.0",
-    "@react-types/button": "3.10.2",
-    "@react-aria/visually-hidden": "3.8.19",
-    "@react-aria/utils": "3.27.0",
+    "@react-aria/calendar": "3.7.1",
+    "@react-aria/focus": "3.20.0",
+    "@react-aria/i18n": "3.12.6",
+    "@react-stately/calendar": "3.7.1",
+    "@react-types/button": "3.11.0",
+    "@react-aria/visually-hidden": "3.8.20",
+    "@react-aria/utils": "3.28.0",
     "@react-stately/utils": "3.10.5",
-    "@react-types/calendar": "3.6.0",
-    "@react-aria/interactions": "3.23.0",
-    "@react-types/shared": "3.27.0",
+    "@react-types/calendar": "3.6.1",
+    "@react-aria/interactions": "3.24.0",
+    "@react-types/shared": "3.28.0",
     "scroll-into-view-if-needed": "3.0.10",
     "@types/lodash.debounce": "^4.0.7"
   },

@@ -55,3 +55,20 @@ export const joinCode = (filesCode: FileCode[]) => {
 export const getFileName = (filePath: string) => {
   return filePath?.split(".")?.[0]?.replace(/\W/g, "");
 };
+
+export const toPascalCase = (str: string) => {
+  const cleanStr = str.replace(/[^a-zA-Z0-9\s]/g, "");
+
+  return cleanStr
+    .split(/\s+/)
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join("");
+};
+
+export const toKebabCase = (str: string) => {
+  const cleanStr = str.replace(/[^a-zA-Z0-9\s]/g, "");
+
+  return cleanStr.toLowerCase().split(/\s+/).join("-");
+};

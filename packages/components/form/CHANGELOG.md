@@ -1,5 +1,86 @@
 # @heroui/form
 
+## 2.1.15
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`e9c67fa`](https://github.com/heroui-inc/heroui/commit/e9c67fa6caf62fa835474d009b86cf722b08b66d), [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d), [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/theme@2.4.12
+  - @heroui/system@2.4.12
+
+## 2.1.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/system@2.4.11
+  - @heroui/theme@2.4.11
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies [[`2774a1b`](https://github.com/heroui-inc/heroui/commit/2774a1b3513e2a046c538a2982a438f56608bbf2)]:
+  - @heroui/theme@2.4.10
+
+## 2.1.12
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+- Updated dependencies []:
+  - @heroui/shared-utils@2.1.6
+  - @heroui/react-utils@2.1.7
+  - @heroui/system@2.4.10
+  - @heroui/theme@2.4.9
+
+## 2.1.11
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+- Updated dependencies []:
+  - @heroui/system@2.4.9
+  - @heroui/theme@2.4.8
+  - @heroui/react-utils@2.1.6
+  - @heroui/shared-utils@2.1.5
+
+## 2.1.10
+
+### Patch Changes
+
+- [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - v2.7.0
+  - Tailwind variants upgraded to the latest version, classnames adjusted, tests fixed
+  - Bump RA versions
+  - Various package updates and improvements across the HeroUI component library
+  - Fixed reversed navigation behavior of nextButton and prevButton in the RTL calendar (#4541)
+  - Adding support for global labelPlacement prop (ENG-1694)
+  - Avoid showing onClick deprecation warning for internal onClick (#4549, #4546)
+  - Fixed unexpected scrollShadow on virtualized listbox (#4553)
+  - Fix SelectItem, ListboxItem, and AutocompleteItem not to accept value props (#2283)
+  - New Components and Features:
+    - Introduce NumberInput component
+    - Introduce Toast component (#2560)
+  - Various improvements and bug fixes across components:
+    - Enhanced accessibility features and ARIA support
+    - Updated component styling and theme configurations
+    - Performance optimizations and code cleanup
+    - RTL support improvements
+    - Better type safety and prop validation
+- Updated dependencies [[`f51d645`](https://github.com/heroui-inc/heroui/commit/f51d645d3d98ca2cc9ebcc89627959766fecc234), [`09241fa`](https://github.com/heroui-inc/heroui/commit/09241faa4b63765b7721ba9b473e3465b6d5e503), [`ccdc076`](https://github.com/heroui-inc/heroui/commit/ccdc07629f07110975cfb80a47c91263a61c0c49), [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5)]:
+  - @heroui/theme@2.4.7
+  - @heroui/system@2.4.8
+  - @heroui/react-utils@2.1.5
+  - @heroui/shared-utils@2.1.4
+
 ## 2.1.9
 
 ### Patch Changes

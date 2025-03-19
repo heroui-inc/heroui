@@ -1,5 +1,135 @@
 # @heroui/autocomplete
 
+## 2.3.17
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`58128c4`](https://github.com/heroui-inc/heroui/commit/58128c403e014315d96fbcb428c3b2a1e2ed9cf6), [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/input@2.4.16
+  - @heroui/use-aria-button@2.2.10
+  - @heroui/aria-utils@2.2.13
+  - @heroui/listbox@2.3.15
+  - @heroui/popover@2.3.16
+  - @heroui/button@2.2.16
+  - @heroui/form@2.1.15
+  - @heroui/scroll-shadow@2.3.10
+  - @heroui/spinner@2.2.13
+
+## 2.3.16
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/button@2.2.15
+  - @heroui/form@2.1.14
+  - @heroui/input@2.4.15
+  - @heroui/listbox@2.3.14
+  - @heroui/popover@2.3.15
+  - @heroui/scroll-shadow@2.3.10
+  - @heroui/spinner@2.2.12
+  - @heroui/use-aria-button@2.2.9
+  - @heroui/use-safe-layout-effect@2.1.6
+  - @heroui/aria-utils@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-icons@2.1.6
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.15
+
+### Patch Changes
+
+- Updated dependencies [[`2186f6d`](https://github.com/heroui-inc/heroui/commit/2186f6da23679c5cf63ea03c9c6df9ca6df92ad9), [`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9)]:
+  - @heroui/spinner@2.2.11
+  - @heroui/input@2.4.14
+  - @heroui/button@2.2.14
+  - @heroui/popover@2.3.14
+  - @heroui/form@2.1.13
+  - @heroui/listbox@2.3.13
+  - @heroui/scroll-shadow@2.3.9
+
+## 2.3.14
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+- Updated dependencies []:
+  - @heroui/use-safe-layout-effect@2.1.5
+  - @heroui/scroll-shadow@2.3.9
+  - @heroui/shared-icons@2.1.5
+  - @heroui/shared-utils@2.1.6
+  - @heroui/use-aria-button@2.2.8
+  - @heroui/react-utils@2.1.7
+  - @heroui/aria-utils@2.2.11
+  - @heroui/listbox@2.3.13
+  - @heroui/popover@2.3.13
+  - @heroui/spinner@2.2.10
+  - @heroui/button@2.2.13
+  - @heroui/input@2.4.13
+  - @heroui/form@2.1.12
+
+## 2.3.13
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+- Updated dependencies []:
+  - @heroui/button@2.2.12
+  - @heroui/form@2.1.11
+  - @heroui/input@2.4.12
+  - @heroui/listbox@2.3.12
+  - @heroui/popover@2.3.12
+  - @heroui/scroll-shadow@2.3.8
+  - @heroui/spinner@2.2.9
+  - @heroui/use-aria-button@2.2.7
+  - @heroui/use-safe-layout-effect@2.1.4
+  - @heroui/aria-utils@2.2.10
+  - @heroui/react-utils@2.1.6
+  - @heroui/shared-icons@2.1.4
+  - @heroui/shared-utils@2.1.5
+
+## 2.3.12
+
+### Patch Changes
+
+- [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - v2.7.0
+  - Tailwind variants upgraded to the latest version, classnames adjusted, tests fixed
+  - Bump RA versions
+  - Various package updates and improvements across the HeroUI component library
+  - Fixed reversed navigation behavior of nextButton and prevButton in the RTL calendar (#4541)
+  - Adding support for global labelPlacement prop (ENG-1694)
+  - Avoid showing onClick deprecation warning for internal onClick (#4549, #4546)
+  - Fixed unexpected scrollShadow on virtualized listbox (#4553)
+  - Fix SelectItem, ListboxItem, and AutocompleteItem not to accept value props (#2283)
+  - New Components and Features:
+    - Introduce NumberInput component
+    - Introduce Toast component (#2560)
+  - Various improvements and bug fixes across components:
+    - Enhanced accessibility features and ARIA support
+    - Updated component styling and theme configurations
+    - Performance optimizations and code cleanup
+    - RTL support improvements
+    - Better type safety and prop validation
+- Updated dependencies [[`f51d645`](https://github.com/heroui-inc/heroui/commit/f51d645d3d98ca2cc9ebcc89627959766fecc234), [`88b9cbe`](https://github.com/heroui-inc/heroui/commit/88b9cbeddde4fee3f84c5422d55cd9b64e9025e0), [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5)]:
+  - @heroui/spinner@2.2.8
+  - @heroui/input@2.4.11
+  - @heroui/button@2.2.11
+  - @heroui/form@2.1.10
+  - @heroui/listbox@2.3.11
+  - @heroui/popover@2.3.11
+  - @heroui/scroll-shadow@2.3.7
+  - @heroui/use-aria-button@2.2.6
+  - @heroui/use-safe-layout-effect@2.1.3
+  - @heroui/aria-utils@2.2.9
+  - @heroui/react-utils@2.1.5
+  - @heroui/shared-icons@2.1.3
+  - @heroui/shared-utils@2.1.4
+
 ## 2.3.11
 
 ### Patch Changes

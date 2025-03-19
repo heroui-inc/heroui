@@ -3,18 +3,15 @@
   "private": true,
   "version": "2.0.0",
   "license": "MIT",
-  "author": {
-    "name": "Junior Garcia",
-    "email": "jrgarciadev@gmail.com"
-  },
+  "author": "HeroUI <support@heroui.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/heroui-inc/heroui"
   },
   "scripts": {
     "dev": "pnpm sb",
-    "build": "turbo build --filter=!@heroui/docs --filter=!@heroui/storybook",
-    "build:fast": "turbo build:fast --filter=!@heroui/docs --filter=!@heroui/storybook",
+    "build": "turbo build --filter='!@heroui/docs' --filter='!@heroui/storybook' --filter='!@heroui/stories-utils' --filter='!@heroui/test-utils'",
+    "build:fast": "turbo build:fast --filter='!@heroui/docs' --filter='!@heroui/storybook' --filter='!@heroui/stories-utils' --filter='!@heroui/test-utils'",
     "dev:docs": "turbo dev --filter=@heroui/docs",
     "build:docs": "turbo build --filter=@heroui/docs",
     "build:docs-meta": "node ./scripts/update-index-docs.js",
@@ -132,8 +129,8 @@
     "shelljs": "^0.8.4",
     "tsup": "8.3.5",
     "tsx": "^4.19.2",
-    "turbo": "1.6.3",
-    "typescript": "^5.5.0",
+    "turbo": "2.4.4",
+    "typescript": "^5.7.3",
     "webpack": "^5.53.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^3.3.11",

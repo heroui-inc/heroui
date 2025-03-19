@@ -95,7 +95,6 @@ export function useAriaButton(
   } else {
     additionalProps = {
       role: "button",
-      tabIndex: isDisabled ? undefined : 0,
       href: elementType === "a" && !isDisabled ? href : undefined,
       target: elementType === "a" ? target : undefined,
       type: elementType === "input" ? type : undefined,
@@ -161,6 +160,7 @@ export function useAriaButton(
       "aria-expanded": props["aria-expanded"],
       "aria-controls": props["aria-controls"],
       "aria-pressed": props["aria-pressed"],
+      "aria-current": props["aria-current"],
       onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
         if (type === "button" && isMobile) {
           // Avoid firing onClick event twice since it's handled in handlePress

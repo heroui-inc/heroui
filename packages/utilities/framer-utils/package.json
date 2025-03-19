@@ -1,11 +1,11 @@
 {
   "name": "@heroui/framer-utils",
-  "version": "2.1.7",
+  "version": "2.1.12",
   "description": "A set of framer motion transitions for react",
   "keywords": [
     "framer-utils"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
+  "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",

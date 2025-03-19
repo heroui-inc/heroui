@@ -1,5 +1,120 @@
 # @heroui/date-picker
 
+## 2.3.16
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/date-input@2.3.15
+  - @heroui/aria-utils@2.2.13
+  - @heroui/calendar@2.2.16
+  - @heroui/popover@2.3.16
+  - @heroui/button@2.2.16
+  - @heroui/form@2.1.15
+
+## 2.3.15
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/button@2.2.15
+  - @heroui/calendar@2.2.15
+  - @heroui/date-input@2.3.14
+  - @heroui/form@2.1.14
+  - @heroui/popover@2.3.15
+  - @heroui/aria-utils@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-icons@2.1.6
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.14
+
+### Patch Changes
+
+- [#4901](https://github.com/heroui-inc/heroui/pull/4901) [`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9) Thanks [@wingkwong](https://github.com/wingkwong)! - update peerDependencies (#4901)
+
+- Updated dependencies [[`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9)]:
+  - @heroui/date-input@2.3.13
+  - @heroui/button@2.2.14
+  - @heroui/popover@2.3.14
+  - @heroui/calendar@2.2.14
+  - @heroui/form@2.1.13
+
+## 2.3.13
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+- Updated dependencies []:
+  - @heroui/shared-icons@2.1.5
+  - @heroui/shared-utils@2.1.6
+  - @heroui/date-input@2.3.12
+  - @heroui/react-utils@2.1.7
+  - @heroui/aria-utils@2.2.11
+  - @heroui/calendar@2.2.13
+  - @heroui/popover@2.3.13
+  - @heroui/button@2.2.13
+  - @heroui/form@2.1.12
+
+## 2.3.12
+
+### Patch Changes
+
+- Fix v2.7.0 release
+
+- Updated dependencies []:
+  - @heroui/button@2.2.12
+  - @heroui/calendar@2.2.12
+  - @heroui/date-input@2.3.11
+  - @heroui/form@2.1.11
+  - @heroui/popover@2.3.12
+  - @heroui/aria-utils@2.2.10
+  - @heroui/react-utils@2.1.6
+  - @heroui/shared-icons@2.1.4
+  - @heroui/shared-utils@2.1.5
+
+## 2.3.11
+
+### Patch Changes
+
+- [#4852](https://github.com/heroui-inc/heroui/pull/4852) [`446dd0b`](https://github.com/heroui-inc/heroui/commit/446dd0bfdede990c672e7b24fd10ac99fa8d4686) Thanks [@wingkwong](https://github.com/wingkwong)! - add `firstDayOfWeek`
+
+- [`88b9cbe`](https://github.com/heroui-inc/heroui/commit/88b9cbeddde4fee3f84c5422d55cd9b64e9025e0) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix peer depts
+
+- [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - v2.7.0
+  - Tailwind variants upgraded to the latest version, classnames adjusted, tests fixed
+  - Bump RA versions
+  - Various package updates and improvements across the HeroUI component library
+  - Fixed reversed navigation behavior of nextButton and prevButton in the RTL calendar (#4541)
+  - Adding support for global labelPlacement prop (ENG-1694)
+  - Avoid showing onClick deprecation warning for internal onClick (#4549, #4546)
+  - Fixed unexpected scrollShadow on virtualized listbox (#4553)
+  - Fix SelectItem, ListboxItem, and AutocompleteItem not to accept value props (#2283)
+  - New Components and Features:
+    - Introduce NumberInput component
+    - Introduce Toast component (#2560)
+  - Various improvements and bug fixes across components:
+    - Enhanced accessibility features and ARIA support
+    - Updated component styling and theme configurations
+    - Performance optimizations and code cleanup
+    - RTL support improvements
+    - Better type safety and prop validation
+- Updated dependencies [[`446dd0b`](https://github.com/heroui-inc/heroui/commit/446dd0bfdede990c672e7b24fd10ac99fa8d4686), [`88b9cbe`](https://github.com/heroui-inc/heroui/commit/88b9cbeddde4fee3f84c5422d55cd9b64e9025e0), [`4ff87ca`](https://github.com/heroui-inc/heroui/commit/4ff87ca7afccd2c3db0b145156a8357b2b51e7b5)]:
+  - @heroui/calendar@2.2.11
+  - @heroui/date-input@2.3.10
+  - @heroui/button@2.2.11
+  - @heroui/form@2.1.10
+  - @heroui/popover@2.3.11
+  - @heroui/aria-utils@2.2.9
+  - @heroui/react-utils@2.1.5
+  - @heroui/shared-icons@2.1.3
+  - @heroui/shared-utils@2.1.4
+
 ## 2.3.10
 
 ### Patch Changes
