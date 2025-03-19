@@ -6,7 +6,6 @@ const {default: flattenColorPalette} = require("tailwindcss/lib/util/flattenColo
 
 // get tailwindcss default config
 const defaultTheme = require("tailwindcss/defaultTheme");
-const twColors = require("tailwindcss/colors.js");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
