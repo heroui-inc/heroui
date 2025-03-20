@@ -311,11 +311,15 @@ export function useSlider(originalProps: UseSliderProps) {
   };
 
   const getTrackProps: PropGetter = (props = {}) => {
+    const fillWidth = (endOffset - startOffset) * 100;
+
     return {
       ref: trackRef,
       "data-slot": "track",
       "data-thumb-hidden": !!originalProps?.hideThumb,
       "data-vertical": isVertical,
+      "data-fill-start": fillWidth > 0,
+      "data-fill-end": fillWidth == 100,
       className: slots.track({class: classNames?.track}),
       ...trackProps,
       ...props,
