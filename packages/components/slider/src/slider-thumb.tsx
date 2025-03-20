@@ -5,13 +5,7 @@ import {VisuallyHidden} from "@react-aria/visually-hidden";
 
 import {UseSliderThumbProps, useSliderThumb} from "./use-slider-thumb";
 
-export interface SliderThumbProps extends UseSliderThumbProps {
-  /**
-   * @internal
-   * Whether the slider has fixed value (min and max are the same)
-   */
-  isFixedValue?: boolean;
-}
+export interface SliderThumbProps extends UseSliderThumbProps {}
 
 const SliderThumb = forwardRef<"div", SliderThumbProps>((props, ref) => {
   const {

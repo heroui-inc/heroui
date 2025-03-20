@@ -262,20 +262,32 @@ export function useSlider(originalProps: UseSliderProps) {
     return state.getValuePercent(value);
   };
 
+  const stateValues = useMemo(() => {
+    if (isFixedValue) {
+      return state.values.filter((val) => !Number.isNaN(val));
+    }
+
+    return state.values;
+  }, [isFixedValue, state.values]);
+
+  if (isFixedValue && stateValues.length === 0) {
+    stateValues.push(minValue);
+  }
+
   const [startOffset, endOffset] = [
-    state.values.length > 1
+    stateValues.length > 1
       ? getThumbPercent(0)
       : fillOffset !== undefined
       ? getValuePercent(fillOffset)
       : 0,
-    getThumbPercent(state.values.length - 1),
+    getThumbPercent(stateValues.length - 1),
   ].sort();
 
   const value = isFixedValue
     ? numberFormatter.format(minValue)
-    : state.values.length === 1
-    ? numberFormatter.format(state.values[0])
-    : numberFormatter.formatRange(state.values[0], state.values[state.values.length - 1]);
+    : stateValues.length === 1
+    ? numberFormatter.format(stateValues[0])
+    : numberFormatter.formatRange(stateValues[0], stateValues[stateValues.length - 1]);
 
   const steps = showSteps ? Math.floor((maxValue - minValue) / step) + 1 : 0;
 
@@ -320,7 +332,7 @@ export function useSlider(originalProps: UseSliderProps) {
     return {
       "data-slot": "value",
       className: slots.value({class: classNames?.value}),
-      children: getValue && typeof getValue === "function" ? getValue(state.values) : value,
+      children: getValue && typeof getValue === "function" ? getValue(stateValues) : value,
       ...outputProps,
       ...props,
     };
@@ -418,11 +430,11 @@ export function useSlider(originalProps: UseSliderProps) {
         }
 
         e.stopPropagation();
-        if (state.values.length === 1) {
+        if (stateValues.length === 1) {
           state.setThumbPercent(0, percent);
         } else {
-          const leftThumbVal = state.values[0];
-          const rightThumbVal = state.values[1];
+          const leftThumbVal = stateValues[0];
+          const rightThumbVal = stateValues[1];
 
           if (mark.value < leftThumbVal) {
             state.setThumbPercent(0, percent);
