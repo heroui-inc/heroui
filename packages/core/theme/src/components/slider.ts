@@ -311,11 +311,12 @@ const slider = tv({
           "w-7 mx-[calc((theme(spacing.7)-theme(spacing.5))/2)] border-y-[calc(theme(spacing.7)/2)]",
       },
     },
-    // color && !isVertical && hasSingleThumb
+    // color && !isVertical && hasSingleThumb & !hideThumb
     {
       color: "foreground",
       isVertical: false,
       hasSingleThumb: true,
+      hideThumb: false,
       class: {
         track: "border-s-foreground",
       },
@@ -324,6 +325,7 @@ const slider = tv({
       color: "primary",
       isVertical: false,
       hasSingleThumb: true,
+      hideThumb: false,
       class: {
         track: "border-s-primary",
       },
@@ -332,6 +334,7 @@ const slider = tv({
       color: "secondary",
       isVertical: false,
       hasSingleThumb: true,
+      hideThumb: false,
       class: {
         track: "border-s-secondary",
       },
@@ -340,6 +343,7 @@ const slider = tv({
       color: "success",
       isVertical: false,
       hasSingleThumb: true,
+      hideThumb: false,
       class: {
         track: "border-s-success",
       },
@@ -348,6 +352,7 @@ const slider = tv({
       color: "warning",
       isVertical: false,
       hasSingleThumb: true,
+      hideThumb: false,
       class: {
         track: "border-s-warning",
       },
@@ -356,8 +361,53 @@ const slider = tv({
       color: "danger",
       isVertical: false,
       hasSingleThumb: true,
+      hideThumb: false,
       class: {
         track: "border-s-danger",
+      },
+    },
+    // color && hideThumb
+    {
+      color: "foreground",
+      hideThumb: true,
+      class: {
+        track:
+          "data-[fill-start=true]:border-s-foreground data-[fill-end=true]:border-e-foreground",
+      },
+    },
+    {
+      color: "primary",
+      hideThumb: true,
+      class: {
+        track: "data-[fill-start=true]:border-s-primary data-[fill-end=true]:border-e-primary",
+      },
+    },
+    {
+      color: "secondary",
+      hideThumb: true,
+      class: {
+        track: "data-[fill-start=true]:border-s-secondary data-[fill-end=true]:border-e-secondary",
+      },
+    },
+    {
+      color: "success",
+      hideThumb: true,
+      class: {
+        track: "data-[fill-start=true]:border-s-success data-[fill-end=true]:border-e-success",
+      },
+    },
+    {
+      color: "warning",
+      hideThumb: true,
+      class: {
+        track: "data-[fill-start=true]:border-s-warning data-[fill-end=true]:border-e-warning",
+      },
+    },
+    {
+      color: "danger",
+      hideThumb: true,
+      class: {
+        track: "data-[fill-start=true]:border-s-danger data-[fill-end=true]:border-e-danger",
       },
     },
     // color && isVertical && hasSingleThumb
