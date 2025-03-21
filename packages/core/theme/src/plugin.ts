@@ -33,20 +33,30 @@ const resolveConfig = (
     variants: {name: string; definition: string[]}[];
     utilities: Record<string, Record<string, any>>;
     colors: Record<string, string>;
+    baseStyles: Record<string, Record<string, any>>;
   } = {
     variants: [],
     utilities: {},
     colors: {},
+    baseStyles: {},
   };
 
   for (const [themeName, {extend, layout, colors}] of Object.entries(themes)) {
     let cssSelector = `.${themeName}`;
     const scheme = themeName === "light" || themeName === "dark" ? themeName : extend;
+    let baseSelector = "";
 
     // if the theme is the default theme, add the selector to the root element
     if (themeName === defaultTheme) {
-      cssSelector = `${cssSelector}`;
+      baseSelector = `:root, [data-theme=${themeName}]`;
     }
+
+    baseSelector &&
+      (resolved.baseStyles[baseSelector] = scheme
+        ? {
+            "color-scheme": scheme,
+          }
+        : {});
 
     resolved.utilities[cssSelector] = scheme
       ? {
@@ -82,6 +92,8 @@ const resolveConfig = (
 
         // set the css variable in "@layer utilities"
         resolved.utilities[cssSelector]![herouiColorVariable] = `${h} ${s}% ${l}%`;
+        baseSelector &&
+          (resolved.baseStyles[baseSelector]![herouiColorVariable] = `${h} ${s}% ${l}%`);
         // set the dynamic color in tailwind config theme.colors
         resolved.colors[colorName] = `hsl(var(${herouiColorVariable}) / ${
           defaultAlphaValue ?? "<alpha-value>"
@@ -105,6 +117,7 @@ const resolveConfig = (
           const nestedLayoutVariable = `${layoutVariablePrefix}-${nestedKey}`;
 
           resolved.utilities[cssSelector]![nestedLayoutVariable] = nestedValue;
+          baseSelector && (resolved.baseStyles[baseSelector]![nestedLayoutVariable] = nestedValue);
         }
       } else {
         // Handle opacity values and other singular layout values
@@ -114,6 +127,7 @@ const resolveConfig = (
             : value;
 
         resolved.utilities[cssSelector]![layoutVariablePrefix] = formattedValue;
+        baseSelector && (resolved.baseStyles[baseSelector]![layoutVariablePrefix] = formattedValue);
       }
     }
   }
@@ -140,6 +154,9 @@ const corePlugin = (
           ...baseStyles(prefix),
         },
       });
+
+      // add the base styles to "@layer base"
+      addBase({...resolved?.baseStyles});
 
       // add the css variables to "@layer utilities"
       addUtilities({...resolved?.utilities, ...utilities});
