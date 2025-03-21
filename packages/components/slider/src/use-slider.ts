@@ -14,7 +14,7 @@ import {ReactNode, useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
 import {mergeProps} from "@react-aria/utils";
 import {AriaSliderProps, useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, warn} from "@heroui/shared-utils";
 import {TooltipProps} from "@heroui/tooltip";
 import {useHover} from "@react-aria/interactions";
 import {ValueBase} from "@react-types/shared";
@@ -173,6 +173,12 @@ export function useSlider(originalProps: UseSliderProps) {
     ...otherProps
   } = props;
 
+  const isFixedValue = minValue === maxValue;
+
+  if (isFixedValue) {
+    warn("Min and max values should not be the same. This may cause unexpected behavior.");
+  }
+
   const Component = as || "div";
   const shouldFilterDOMProps = typeof Component === "string";
   const disableAnimation =
@@ -248,19 +254,24 @@ export function useSlider(originalProps: UseSliderProps) {
     [objectToDeps(variantProps), isVertical, disableAnimation, hasSingleThumb, hasMarks],
   );
 
+  const stateValues = useMemo(() => {
+    return state.values;
+  }, [state.values]);
+
   const [startOffset, endOffset] = [
-    state.values.length > 1
+    stateValues.length > 1
       ? state.getThumbPercent(0)
       : fillOffset !== undefined
       ? state.getValuePercent(fillOffset)
       : 0,
-    state.getThumbPercent(state.values.length - 1),
+    state.getThumbPercent(stateValues.length - 1),
   ].sort();
 
-  const value =
-    state.values.length === 1
-      ? numberFormatter.format(state.values[0])
-      : numberFormatter.formatRange(state.values[0], state.values[state.values.length - 1]);
+  const value = isFixedValue
+    ? numberFormatter.format(minValue)
+    : stateValues.length === 1
+    ? numberFormatter.format(stateValues[0])
+    : numberFormatter.formatRange(stateValues[0], stateValues[stateValues.length - 1]);
 
   const steps = showSteps ? Math.floor((maxValue - minValue) / step) + 1 : 0;
 
@@ -304,7 +315,7 @@ export function useSlider(originalProps: UseSliderProps) {
     return {
       "data-slot": "value",
       className: slots.value({class: classNames?.value}),
-      children: getValue && typeof getValue === "function" ? getValue(state.values) : value,
+      children: getValue && typeof getValue === "function" ? getValue(stateValues) : value,
       ...outputProps,
       ...props,
     };
@@ -360,6 +371,7 @@ export function useSlider(originalProps: UseSliderProps) {
       tooltipProps,
       showTooltip,
       renderThumb,
+      isFixedValue,
       formatOptions: tooltipValueFormatOptions,
       className: slots.thumb({class: classNames?.thumb}),
     } as SliderThumbProps;
@@ -395,11 +407,16 @@ export function useSlider(originalProps: UseSliderProps) {
       onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
       onClick: (e: any) => {
         e.stopPropagation();
-        if (state.values.length === 1) {
+
+        if (isFixedValue) {
+          return;
+        }
+
+        if (stateValues.length === 1) {
           state.setThumbPercent(0, percent);
         } else {
-          const leftThumbVal = state.values[0];
-          const rightThumbVal = state.values[1];
+          const leftThumbVal = stateValues[0];
+          const rightThumbVal = stateValues[1];
 
           if (mark.value < leftThumbVal) {
             state.setThumbPercent(0, percent);
