@@ -1,5 +1,16 @@
 # @heroui/slider
 
+## 2.4.14-beta.4
+
+### Patch Changes
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a)]:
+  - @heroui/shared-utils@2.1.8-beta.3
+  - @heroui/react-utils@2.1.9-beta.3
+  - @heroui/tooltip@2.2.14-beta.4
+
 ## 2.4.14-beta.3
 
 ### Patch Changes

@@ -1,5 +1,26 @@
 # @heroui/autocomplete
 
+## 2.3.18-beta.4
+
+### Patch Changes
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a)]:
+  - @heroui/use-safe-layout-effect@2.1.7-beta.3
+  - @heroui/scroll-shadow@2.3.11-beta.3
+  - @heroui/shared-icons@2.1.7-beta.3
+  - @heroui/shared-utils@2.1.8-beta.3
+  - @heroui/use-aria-button@2.2.11-beta.3
+  - @heroui/react-utils@2.1.9-beta.3
+  - @heroui/aria-utils@2.2.14-beta.4
+  - @heroui/listbox@2.3.16-beta.4
+  - @heroui/popover@2.3.17-beta.4
+  - @heroui/spinner@2.2.14-beta.4
+  - @heroui/button@2.2.17-beta.4
+  - @heroui/input@2.4.17-beta.4
+  - @heroui/form@2.1.16-beta.4
+
 ## 2.3.18-beta.3
 
 ### Patch Changes

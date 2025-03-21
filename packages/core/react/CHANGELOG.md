@@ -1,5 +1,62 @@
 # @heroui/react
 
+## 2.7.6-beta.4
+
+### Patch Changes
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a)]:
+  - @heroui/scroll-shadow@2.3.11-beta.3
+  - @heroui/autocomplete@2.3.18-beta.4
+  - @heroui/number-input@2.0.7-beta.4
+  - @heroui/breadcrumbs@2.2.13-beta.3
+  - @heroui/date-picker@2.3.17-beta.4
+  - @heroui/framer-utils@2.1.13-beta.4
+  - @heroui/date-input@2.3.16-beta.4
+  - @heroui/pagination@2.2.15-beta.3
+  - @heroui/accordion@2.2.14-beta.4
+  - @heroui/input-otp@2.1.16-beta.4
+  - @heroui/calendar@2.2.17-beta.4
+  - @heroui/checkbox@2.3.16-beta.4
+  - @heroui/dropdown@2.3.17-beta.4
+  - @heroui/progress@2.2.13-beta.3
+  - @heroui/skeleton@2.2.11-beta.3
+  - @heroui/divider@2.2.12-beta.3
+  - @heroui/listbox@2.3.16-beta.4
+  - @heroui/popover@2.3.17-beta.4
+  - @heroui/snippet@2.2.18-beta.4
+  - @heroui/spinner@2.2.14-beta.4
+  - @heroui/tooltip@2.2.14-beta.4
+  - @heroui/avatar@2.2.13-beta.3
+  - @heroui/button@2.2.17-beta.4
+  - @heroui/drawer@2.2.14-beta.4
+  - @heroui/navbar@2.2.15-beta.4
+  - @heroui/ripple@2.2.13-beta.3
+  - @heroui/select@2.4.17-beta.4
+  - @heroui/slider@2.4.14-beta.4
+  - @heroui/spacer@2.2.13-beta.3
+  - @heroui/switch@2.2.15-beta.3
+  - @heroui/alert@2.2.17-beta.4
+  - @heroui/badge@2.2.11-beta.3
+  - @heroui/image@2.2.11-beta.3
+  - @heroui/input@2.4.17-beta.4
+  - @heroui/modal@2.2.14-beta.4
+  - @heroui/radio@2.3.16-beta.4
+  - @heroui/table@2.2.16-beta.4
+  - @heroui/toast@2.0.7-beta.4
+  - @heroui/card@2.2.16-beta.3
+  - @heroui/chip@2.2.13-beta.3
+  - @heroui/code@2.2.13-beta.3
+  - @heroui/form@2.1.16-beta.4
+  - @heroui/link@2.2.14-beta.3
+  - @heroui/menu@2.2.16-beta.4
+  - @heroui/tabs@2.2.14-beta.4
+  - @heroui/user@2.2.13-beta.3
+  - @heroui/kbd@2.2.13-beta.3
+  - @heroui/system@2.4.13-beta.4
+  - @heroui/theme@2.4.13-beta.4
+
 ## 2.7.6-beta.3
 
 ### Patch Changes
