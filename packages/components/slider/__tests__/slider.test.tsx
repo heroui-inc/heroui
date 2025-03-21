@@ -70,13 +70,8 @@ describe("Slider", () => {
     );
 
     const slider = getByRole("slider");
-    const group = getByRole("group");
     const output = getByRole("status");
 
-    expect(slider).toHaveProperty("min", "10");
-    expect(slider).toHaveProperty("max", "10");
-
-    expect(group).toHaveAttribute("data-fixed-value", "true");
     expect(slider).not.toHaveAttribute("disabled");
 
     expect(slider).toHaveAttribute("aria-valuetext", "10");
