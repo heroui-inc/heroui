@@ -518,7 +518,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...mergeProps(incrementButtonProps, props),
       };
     },
-    [slots],
+    [slots, incrementButtonProps, classNames?.stepperButton],
   );
 
   const getStepperDecreaseButtonProps: PropGetter = useCallback(
@@ -533,7 +533,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...mergeProps(decrementButtonProps, props),
       };
     },
-    [slots],
+    [slots, decrementButtonProps, classNames?.stepperButton],
   );
 
   return {
