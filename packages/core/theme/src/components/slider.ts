@@ -311,65 +311,9 @@ const slider = tv({
           "w-7 mx-[calc((theme(spacing.7)-theme(spacing.5))/2)] border-y-[calc(theme(spacing.7)/2)]",
       },
     },
-    // color && !isVertical && hasSingleThumb & !hideThumb
+    // color && !isVertical
     {
       color: "foreground",
-      isVertical: false,
-      hasSingleThumb: true,
-      hideThumb: false,
-      class: {
-        track: "border-s-foreground",
-      },
-    },
-    {
-      color: "primary",
-      isVertical: false,
-      hasSingleThumb: true,
-      hideThumb: false,
-      class: {
-        track: "border-s-primary",
-      },
-    },
-    {
-      color: "secondary",
-      isVertical: false,
-      hasSingleThumb: true,
-      hideThumb: false,
-      class: {
-        track: "border-s-secondary",
-      },
-    },
-    {
-      color: "success",
-      isVertical: false,
-      hasSingleThumb: true,
-      hideThumb: false,
-      class: {
-        track: "border-s-success",
-      },
-    },
-    {
-      color: "warning",
-      isVertical: false,
-      hasSingleThumb: true,
-      hideThumb: false,
-      class: {
-        track: "border-s-warning",
-      },
-    },
-    {
-      color: "danger",
-      isVertical: false,
-      hasSingleThumb: true,
-      hideThumb: false,
-      class: {
-        track: "border-s-danger",
-      },
-    },
-    // color && !isVertical && hideThumb
-    {
-      color: "foreground",
-      hideThumb: true,
       isVertical: false,
       class: {
         track:
@@ -378,7 +322,6 @@ const slider = tv({
     },
     {
       color: "primary",
-      hideThumb: true,
       isVertical: false,
       class: {
         track: "data-[fill-start=true]:border-s-primary data-[fill-end=true]:border-e-primary",
@@ -386,7 +329,6 @@ const slider = tv({
     },
     {
       color: "secondary",
-      hideThumb: true,
       isVertical: false,
       class: {
         track: "data-[fill-start=true]:border-s-secondary data-[fill-end=true]:border-e-secondary",
@@ -394,7 +336,6 @@ const slider = tv({
     },
     {
       color: "success",
-      hideThumb: true,
       isVertical: false,
       class: {
         track: "data-[fill-start=true]:border-s-success data-[fill-end=true]:border-e-success",
@@ -402,7 +343,6 @@ const slider = tv({
     },
     {
       color: "warning",
-      hideThumb: true,
       isVertical: false,
       class: {
         track: "data-[fill-start=true]:border-s-warning data-[fill-end=true]:border-e-warning",
@@ -410,16 +350,14 @@ const slider = tv({
     },
     {
       color: "danger",
-      hideThumb: true,
       isVertical: false,
       class: {
         track: "data-[fill-start=true]:border-s-danger data-[fill-end=true]:border-e-danger",
       },
     },
-    // color && isVertical && hideThumb
+    // color && isVertical
     {
       color: "foreground",
-      hideThumb: true,
       isVertical: true,
       class: {
         track:
@@ -428,7 +366,6 @@ const slider = tv({
     },
     {
       color: "primary",
-      hideThumb: true,
       isVertical: true,
       class: {
         track: "data-[fill-start=true]:border-b-primary data-[fill-end=true]:border-t-primary",
@@ -436,7 +373,6 @@ const slider = tv({
     },
     {
       color: "secondary",
-      hideThumb: true,
       isVertical: true,
       class: {
         track: "data-[fill-start=true]:border-b-secondary data-[fill-end=true]:border-t-secondary",
@@ -444,7 +380,6 @@ const slider = tv({
     },
     {
       color: "success",
-      hideThumb: true,
       isVertical: true,
       class: {
         track: "data-[fill-start=true]:border-b-success data-[fill-end=true]:border-t-success",
@@ -452,7 +387,6 @@ const slider = tv({
     },
     {
       color: "warning",
-      hideThumb: true,
       isVertical: true,
       class: {
         track: "data-[fill-start=true]:border-b-warning data-[fill-end=true]:border-t-warning",
@@ -460,7 +394,6 @@ const slider = tv({
     },
     {
       color: "danger",
-      hideThumb: true,
       isVertical: true,
       class: {
         track: "data-[fill-start=true]:border-b-danger data-[fill-end=true]:border-t-danger",
