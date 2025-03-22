@@ -81,7 +81,7 @@ export function ToastRegion<T extends ToastProps>({
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
-      {toastQueue.visibleToasts.map((toast: QueuedToast<ToastProps>, index) => {
+      {[...toastQueue.visibleToasts].reverse().map((toast: QueuedToast<ToastProps>, index) => {
         if (disableAnimation && total - index > maxVisibleToasts) {
           return null;
         }

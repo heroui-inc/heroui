@@ -3139,14 +3139,14 @@ importers:
         specifier: 3.24.0
         version: 3.24.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/toast':
-        specifier: 3.0.0-beta.19
-        version: 3.0.0-beta.19(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: 3.0.0
+        version: 3.0.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/utils':
         specifier: 3.28.0
         version: 3.28.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-stately/toast':
-        specifier: 3.0.0-beta.7
-        version: 3.0.0-beta.7(react@18.3.0)
+        specifier: 3.0.0
+        version: 3.0.0(react@18.3.0)
       '@react-stately/utils':
         specifier: 3.10.5
         version: 3.10.5(react@18.3.0)
@@ -7064,8 +7064,8 @@ packages:
       react: 18.3.0
       react-dom: 18.3.0
 
-  '@react-aria/landmark@3.0.0-beta.18':
-    resolution: {integrity: sha512-jFtWL7TYZrKucWNDx6ppUkGSqS2itkjhyLo9MIFqEg2mi4Lc2EoUjI/Gw9xMT+IJgebTcdQeXJpPskspl3Pojg==}
+  '@react-aria/landmark@3.0.1':
+    resolution: {integrity: sha512-rsbpmDfI8wmTcsOCaLdI2WuvM4z4yBZyOhMSdIxzKxxD0XPM03BBlegPqxZ/VisSwvXT8VB38r5STzmpH3ocLg==}
     peerDependencies:
       react: 18.3.0
       react-dom: 18.3.0
@@ -7163,8 +7163,8 @@ packages:
       react: 18.3.0
       react-dom: 18.3.0
 
-  '@react-aria/toast@3.0.0-beta.19':
-    resolution: {integrity: sha512-LCMTcmSmum5CzBk+DIec66q6pJGEl+InQPJdsby7QG/row0ka6wHPvul78HVseN7dzg6G3xVjvHtVPOixkuegA==}
+  '@react-aria/toast@3.0.0':
+    resolution: {integrity: sha512-KDbJy8BFNTjc9ABEVWrgiAFRtGHSkRPv2AK4b7Yv1sQ3ePuZ0BIUtn2DQODNAFbLs/Z/OgoqLYMOORqL3Ti7pQ==}
     peerDependencies:
       react: 18.3.0
       react-dom: 18.3.0
@@ -7189,6 +7189,12 @@ packages:
 
   '@react-aria/utils@3.28.0':
     resolution: {integrity: sha512-FfpvpADk61OvEnFe37k6jF1zr5gtafIPN9ccJRnPCTqrzuExag01mGi+wX/hWyFK0zAe1OjWf1zFOX3FsFvikg==}
+    peerDependencies:
+      react: 18.3.0
+      react-dom: 18.3.0
+
+  '@react-aria/utils@3.28.1':
+    resolution: {integrity: sha512-mnHFF4YOVu9BRFQ1SZSKfPhg3z+lBRYoW5mLcYTQihbKhz48+I1sqRkP7ahMITr8ANH3nb34YaMME4XWmK2Mgg==}
     peerDependencies:
       react: 18.3.0
       react-dom: 18.3.0
@@ -7317,8 +7323,8 @@ packages:
     peerDependencies:
       react: 18.3.0
 
-  '@react-stately/toast@3.0.0-beta.7':
-    resolution: {integrity: sha512-+KDkaOS5Y4ApOfiP0HHij4ySwAd1VM9/pI4rVTyHrzkp0R2Q0eBxZ74MpWMpVfJa2lSjb/qEm60tqJ3A+4R/cQ==}
+  '@react-stately/toast@3.0.0':
+    resolution: {integrity: sha512-g7e4hNO9E6kOqyBeLRAfZBihp1EIQikmaH3Uj/OZJXKvIDKJlNlpvwstUIcmEuEzqA1Uru78ozxIVWh3pg9ubg==}
     peerDependencies:
       react: 18.3.0
 
@@ -19312,9 +19318,9 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  '@react-aria/landmark@3.0.0-beta.18(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
+  '@react-aria/landmark@3.0.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@react-aria/utils': 3.28.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/utils': 3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared': 3.28.0(react@18.3.0)
       '@swc/helpers': 0.5.15
       react: 18.3.0
@@ -19524,13 +19530,13 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  '@react-aria/toast@3.0.0-beta.19(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
+  '@react-aria/toast@3.0.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
       '@react-aria/i18n': 3.12.6(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions': 3.24.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/landmark': 3.0.0-beta.18(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/landmark': 3.0.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/utils': 3.28.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-stately/toast': 3.0.0-beta.7(react@18.3.0)
+      '@react-stately/toast': 3.0.0(react@18.3.0)
       '@react-types/button': 3.11.0(react@18.3.0)
       '@react-types/shared': 3.28.0(react@18.3.0)
       '@swc/helpers': 0.5.15
@@ -19570,6 +19576,17 @@ snapshots:
       react-dom: 18.3.0(react@18.3.0)
 
   '@react-aria/utils@3.28.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
+    dependencies:
+      '@react-aria/ssr': 3.9.7(react@18.3.0)
+      '@react-stately/flags': 3.1.0
+      '@react-stately/utils': 3.10.5(react@18.3.0)
+      '@react-types/shared': 3.28.0(react@18.3.0)
+      '@swc/helpers': 0.5.15
+      clsx: 2.1.1
+      react: 18.3.0
+      react-dom: 18.3.0(react@18.3.0)
+
+  '@react-aria/utils@3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
       '@react-aria/ssr': 3.9.7(react@18.3.0)
       '@react-stately/flags': 3.1.0
@@ -19803,7 +19820,7 @@ snapshots:
       '@swc/helpers': 0.5.15
       react: 18.3.0
 
-  '@react-stately/toast@3.0.0-beta.7(react@18.3.0)':
+  '@react-stately/toast@3.0.0(react@18.3.0)':
     dependencies:
       '@swc/helpers': 0.5.15
       react: 18.3.0
