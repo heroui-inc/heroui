@@ -191,11 +191,16 @@ export function useSlider(originalProps: UseSliderProps) {
   const {direction} = useLocale();
 
   const clampValue = useCallback(
-    (valueToClamp: number) => Math.min(Math.max(valueToClamp, minValue), maxValue),
-    [minValue, maxValue],
+    (valueToClamp: number) => {
+      if (isFixedValue) return minValue;
+
+      return Math.min(Math.max(valueToClamp, minValue), maxValue);
+    },
+    [minValue, maxValue, isFixedValue],
   );
 
   const validatedValue = useMemo(() => {
+    if (isFixedValue) return minValue;
     if (valueProp === undefined) return undefined;
 
     if (Array.isArray(valueProp)) {
@@ -203,11 +208,12 @@ export function useSlider(originalProps: UseSliderProps) {
     }
 
     return clampValue(valueProp);
-  }, [valueProp, clampValue]);
+  }, [valueProp, clampValue, isFixedValue, minValue]);
 
   const state = useSliderState({
     ...otherProps,
     value: validatedValue,
+    defaultValue: isFixedValue ? minValue : otherProps.defaultValue,
     isDisabled: originalProps?.isDisabled ?? false,
     orientation,
     step,
@@ -254,23 +260,19 @@ export function useSlider(originalProps: UseSliderProps) {
     [objectToDeps(variantProps), isVertical, disableAnimation, hasSingleThumb, hasMarks],
   );
 
-  const stateValues = useMemo(() => {
-    return state.values;
-  }, [state.values]);
-
   const [startOffset, endOffset] = [
-    stateValues.length > 1
+    state.values.length > 1
       ? state.getThumbPercent(0)
       : fillOffset !== undefined
       ? state.getValuePercent(fillOffset)
       : 0,
-    state.getThumbPercent(stateValues.length - 1),
+    state.getThumbPercent(state.values.length - 1),
   ].sort();
 
   const value =
-    stateValues.length === 1
-      ? numberFormatter.format(stateValues[0])
-      : numberFormatter.formatRange(stateValues[0], stateValues[stateValues.length - 1]);
+    state.values.length === 1
+      ? numberFormatter.format(state.values[0])
+      : numberFormatter.formatRange(state.values[0], state.values[state.values.length - 1]);
 
   const steps = showSteps ? Math.floor((maxValue - minValue) / step) + 1 : 0;
 
@@ -314,7 +316,7 @@ export function useSlider(originalProps: UseSliderProps) {
     return {
       "data-slot": "value",
       className: slots.value({class: classNames?.value}),
-      children: getValue && typeof getValue === "function" ? getValue(stateValues) : value,
+      children: getValue && typeof getValue === "function" ? getValue(state.values) : value,
       ...outputProps,
       ...props,
     };
@@ -408,11 +410,11 @@ export function useSlider(originalProps: UseSliderProps) {
         e.stopPropagation();
         if (isFixedValue) return;
 
-        if (stateValues.length === 1) {
+        if (state.values.length === 1) {
           state.setThumbPercent(0, percent);
         } else {
-          const leftThumbVal = stateValues[0];
-          const rightThumbVal = stateValues[1];
+          const leftThumbVal = state.values[0];
+          const rightThumbVal = state.values[1];
 
           if (mark.value < leftThumbVal) {
             state.setThumbPercent(0, percent);
