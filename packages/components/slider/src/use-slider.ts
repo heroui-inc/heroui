@@ -214,8 +214,8 @@ export function useSlider(originalProps: UseSliderProps) {
     minValue,
     maxValue,
     numberFormatter,
-    onChange,
-    onChangeEnd,
+    onChange: isFixedValue ? () => {} : onChange,
+    onChangeEnd: isFixedValue ? () => {} : onChangeEnd,
   });
 
   const tooltipProps: Partial<TooltipProps> = {
@@ -267,11 +267,10 @@ export function useSlider(originalProps: UseSliderProps) {
     state.getThumbPercent(stateValues.length - 1),
   ].sort();
 
-  const value = isFixedValue
-    ? numberFormatter.format(minValue)
-    : stateValues.length === 1
-    ? numberFormatter.format(stateValues[0])
-    : numberFormatter.formatRange(stateValues[0], stateValues[stateValues.length - 1]);
+  const value =
+    stateValues.length === 1
+      ? numberFormatter.format(stateValues[0])
+      : numberFormatter.formatRange(stateValues[0], stateValues[stateValues.length - 1]);
 
   const steps = showSteps ? Math.floor((maxValue - minValue) / step) + 1 : 0;
 
@@ -407,10 +406,7 @@ export function useSlider(originalProps: UseSliderProps) {
       onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
       onClick: (e: any) => {
         e.stopPropagation();
-
-        if (isFixedValue) {
-          return;
-        }
+        if (isFixedValue) return;
 
         if (stateValues.length === 1) {
           state.setThumbPercent(0, percent);
