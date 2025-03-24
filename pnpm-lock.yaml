@@ -3671,6 +3671,9 @@ importers:
 
   packages/hooks/use-aria-modal-overlay:
     dependencies:
+      '@heroui/use-aria-overlay':
+        specifier: workspace:*
+        version: link:../use-aria-overlay
       '@react-aria/overlays':
         specifier: 3.26.0
         version: 3.26.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
