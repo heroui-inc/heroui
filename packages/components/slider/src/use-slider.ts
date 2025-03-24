@@ -192,15 +192,14 @@ export function useSlider(originalProps: UseSliderProps) {
 
   const clampValue = useCallback(
     (valueToClamp: number) => {
-      if (isFixedValue) return minValue;
-
       return Math.min(Math.max(valueToClamp, minValue), maxValue);
     },
-    [minValue, maxValue, isFixedValue],
+    [minValue, maxValue],
   );
 
   const validatedValue = useMemo(() => {
     if (isFixedValue) return minValue;
+
     if (valueProp === undefined) return undefined;
 
     if (Array.isArray(valueProp)) {
@@ -213,15 +212,15 @@ export function useSlider(originalProps: UseSliderProps) {
   const state = useSliderState({
     ...otherProps,
     value: validatedValue,
-    defaultValue: isFixedValue ? minValue : otherProps.defaultValue,
+    defaultValue: otherProps.defaultValue,
     isDisabled: originalProps?.isDisabled ?? false,
     orientation,
     step,
     minValue,
     maxValue,
     numberFormatter,
-    onChange: isFixedValue ? () => {} : onChange,
-    onChangeEnd: isFixedValue ? () => {} : onChangeEnd,
+    onChange,
+    onChangeEnd,
   });
 
   const tooltipProps: Partial<TooltipProps> = {
@@ -372,7 +371,6 @@ export function useSlider(originalProps: UseSliderProps) {
       tooltipProps,
       showTooltip,
       renderThumb,
-      isFixedValue,
       formatOptions: tooltipValueFormatOptions,
       className: slots.thumb({class: classNames?.thumb}),
     } as SliderThumbProps;

@@ -65,28 +65,18 @@ describe("Slider", () => {
   });
 
   it("should handle fixed value when minValue and maxValue are the same", async () => {
-    const onChangeMock = jest.fn();
-
     const {getByRole} = render(
-      <Slider
-        aria-label="Fixed Slider"
-        label="Fixed Value"
-        maxValue={10}
-        minValue={10}
-        onChange={onChangeMock}
-      />,
+      <Slider aria-label="Fixed Slider" label="Fixed Value" maxValue={10} minValue={10} />,
     );
 
     const slider = getByRole("slider");
     const output = getByRole("status");
 
-    expect(slider).not.toHaveAttribute("disabled");
     expect(slider).toHaveAttribute("aria-valuetext", "10");
     expect(output).toHaveTextContent("10");
     expect(output).not.toHaveTextContent("NaN");
 
     await userEvent.click(slider);
-    expect(onChangeMock).not.toHaveBeenCalled();
 
     await userEvent.type(slider, "{arrowright}");
     expect(slider).toHaveAttribute("aria-valuetext", "10");
