@@ -102,7 +102,7 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
   // Handle clicking outside the overlay to close it
   useInteractOutside({
     isDisabled: !(isDismissable && isOpen),
-    onInteractOutside,
+    onInteractOutside: isDismissable && isOpen ? onInteractOutside : undefined,
     onInteractOutsideStart,
     ref,
   });
