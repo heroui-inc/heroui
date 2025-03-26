@@ -3202,6 +3202,9 @@ importers:
       '@heroui/shared-utils':
         specifier: workspace:*
         version: link:../../utilities/shared-utils
+      '@heroui/use-aria-overlay':
+        specifier: workspace:*
+        version: link:../../hooks/use-aria-overlay
       '@heroui/use-safe-layout-effect':
         specifier: workspace:*
         version: link:../../hooks/use-safe-layout-effect
