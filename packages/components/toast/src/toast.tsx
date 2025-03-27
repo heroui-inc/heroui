@@ -7,13 +7,11 @@ import {
   SuccessIcon,
   WarningIcon,
 } from "@heroui/shared-icons";
-import {AnimatePresence, m, LazyMotion} from "framer-motion";
+import {m} from "framer-motion";
 import {cloneElement, isValidElement} from "react";
 import {Spinner} from "@heroui/spinner";
 
 import {UseToastProps, useToast} from "./use-toast";
-
-const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 
 export interface ToastProps extends UseToastProps {}
 
@@ -108,21 +106,17 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       {disableAnimation ? (
         toastContent
       ) : (
-        <LazyMotion features={loadFeatures}>
-          <AnimatePresence>
-            <m.div {...getMotionDivProps()}>
-              <m.div
-                key={"inner-div"}
-                animate={{opacity: 1}}
-                exit={{opacity: 0}}
-                initial={{opacity: 0}}
-                transition={{duration: 0.25, ease: "easeOut", delay: 0.1}}
-              >
-                {toastContent}
-              </m.div>
-            </m.div>
-          </AnimatePresence>
-        </LazyMotion>
+        <m.div {...getMotionDivProps()}>
+          <m.div
+            key={"inner-div"}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            initial={{opacity: 0}}
+            transition={{duration: 0.25, ease: "easeOut", delay: 0.1}}
+          >
+            {toastContent}
+          </m.div>
+        </m.div>
       )}
     </>
   );
