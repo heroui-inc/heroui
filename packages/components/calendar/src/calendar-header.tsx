@@ -2,7 +2,7 @@ import type {ButtonProps} from "@heroui/button";
 import type {CalendarDate} from "@internationalized/date";
 
 import {HTMLHeroUIProps} from "@heroui/system";
-import {useDateFormatter} from "@react-aria/i18n";
+import {useDateFormatter, useLocale} from "@react-aria/i18n";
 import {m} from "framer-motion";
 import {Button} from "@heroui/button";
 import {useCallback} from "react";
@@ -32,6 +32,9 @@ export function CalendarHeader(props: CalendarHeaderProps) {
     classNames,
   } = useCalendarContext();
 
+  // Get the current locale to ensure proper calendar system is used
+  const {locale} = useLocale();
+
   const monthAndYearDateFormatter = useDateFormatter({
     month: "long",
     era:
@@ -41,6 +44,7 @@ export function CalendarHeader(props: CalendarHeaderProps) {
     calendar: currentMonth.calendar.identifier,
     timeZone: state.timeZone,
     year: "numeric",
+    locale, // Explicitly pass the locale to ensure proper internationalization
   });
 
   const monthDateContent = monthAndYearDateFormatter.format(date.toDate(state.timeZone));

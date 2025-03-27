@@ -1,7 +1,7 @@
 import type {CalendarDate} from "@internationalized/date";
 import type {PressEvent} from "@react-types/shared";
 
-import {useDateFormatter} from "@react-aria/i18n";
+import {useDateFormatter, useLocale} from "@react-aria/i18n";
 import {HTMLHeroUIProps} from "@heroui/system";
 import {useCallback, useRef, useEffect} from "react";
 import {debounce} from "@heroui/shared-utils";
@@ -31,6 +31,9 @@ export function useCalendarPicker(props: CalendarPickerProps) {
   const {slots, state, headerRef, isHeaderExpanded, setIsHeaderExpanded, classNames} =
     useCalendarContext();
 
+  // Get the current locale to ensure proper calendar system is used
+  const {locale} = useLocale();
+
   const highlightRef = useRef<HTMLDivElement>(null);
   const yearsListRef = useRef<HTMLDivElement>(null);
   const monthsListRef = useRef<HTMLDivElement>(null);
@@ -46,11 +49,13 @@ export function useCalendarPicker(props: CalendarPickerProps) {
         : undefined,
     calendar: currentMonth.calendar.identifier,
     timeZone: state.timeZone,
+    locale, // Explicitly pass the locale to ensure proper internationalization
   });
 
   const yearDateFormatter = useDateFormatter({
     year: "numeric",
     timeZone: state.timeZone,
+    locale, // Explicitly pass the locale to ensure proper internationalization
   });
 
   // Used for the year/month pickers
