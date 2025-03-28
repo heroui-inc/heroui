@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
@@ -12,7 +12,7 @@ import {
 } from "@heroui/modal";
 import {Drawer, DrawerContent} from "@heroui/drawer";
 
-import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
+import {Toast, ToastProps, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
 export default {
   title: "Components/Toast",
@@ -393,6 +393,35 @@ const CustomCloseButtonTemplate = (args) => {
   );
 };
 
+const CloseToastTemplate = (args: ToastProps) => {
+  const [toastKey, setToastKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    const key = addToast({
+      title: "Toast Title",
+      timeout: Infinity,
+      ...args,
+    });
+
+    setToastKey(key);
+  }, []);
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+      <div>
+        <Button
+          onPress={() => {
+            closeToast(toastKey);
+          }}
+        >
+          Close toast
+        </Button>
+      </div>
+    </>
+  );
+};
+
 export const Default = {
   render: Template,
   args: {
@@ -493,6 +522,13 @@ export const CustomStyles = {
 
 export const CustomCloseButton = {
   render: CustomCloseButtonTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const CloseToast = {
+  render: CloseToastTemplate,
   args: {
     ...defaultProps,
   },

@@ -8,6 +8,7 @@ export type {ToastProps} from "./toast";
 export {useToast} from "./use-toast";
 export {addToast} from "./toast-provider";
 export {closeAll} from "./toast-provider";
+export {closeToast} from "./toast-provider";
 
 // export component
 export {Toast};
