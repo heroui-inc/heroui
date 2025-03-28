@@ -346,4 +346,59 @@ describe("Accordion", () => {
 
     expect(getByRole("separator")).toHaveClass("bg-rose-500");
   });
+
+  it("should scroll to content when scrollOnOpen is true", async () => {
+    const scrollIntoViewMock = jest.fn();
+
+    Element.prototype.scrollIntoView = scrollIntoViewMock;
+
+    const wrapper = render(
+      <Accordion scrollOnOpen>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const first = wrapper.getByTestId("item-1");
+    const firstButton = first.querySelector("button") as HTMLElement;
+
+    await user.click(firstButton);
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    });
+
+    expect(scrollIntoViewMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        behavior: "smooth",
+        block: "nearest",
+      }),
+    );
+
+    jest.restoreAllMocks();
+  });
+
+  it("should apply custom transition duration", async () => {
+    const wrapper = render(
+      <Accordion disableAnimation={false} transitionDuration={500}>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const first = wrapper.getByTestId("item-1");
+    const firstButton = first.querySelector("button") as HTMLElement;
+
+    await user.click(firstButton);
+
+    const content = first.querySelector("section");
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    });
+
+    expect(content).toBeInTheDocument();
+  });
 });

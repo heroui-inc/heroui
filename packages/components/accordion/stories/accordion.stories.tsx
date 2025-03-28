@@ -1,22 +1,22 @@
 import type {Selection} from "@react-types/shared";
 
-import React from "react";
-import {Meta} from "@storybook/react";
-import {accordionItem, button} from "@heroui/theme";
+import {Avatar} from "@heroui/avatar";
+import {Button} from "@heroui/button";
+import {Input, Textarea} from "@heroui/input";
 import {
   AnchorIcon,
-  MoonIcon,
-  SunIcon,
   InfoIcon,
-  ShieldSecurityIcon,
-  MonitorMobileIcon,
   InvalidCardIcon,
+  MonitorMobileIcon,
+  MoonIcon,
+  ShieldSecurityIcon,
+  SunIcon,
 } from "@heroui/shared-icons";
-import {Avatar} from "@heroui/avatar";
-import {Input, Textarea} from "@heroui/input";
-import {Button} from "@heroui/button";
+import {accordionItem, button} from "@heroui/theme";
+import {Meta} from "@storybook/react";
+import React from "react";
 
-import {Accordion, AccordionProps, AccordionItem, AccordionItemProps} from "../src";
+import {Accordion, AccordionItem, AccordionItemProps, AccordionProps} from "../src";
 
 export default {
   title: "Components/Accordion",
@@ -376,6 +376,57 @@ const WithFormTemplate = (args: AccordionProps) => {
   );
 };
 
+const WithScrollOnOpenTemplate = (args: AccordionProps) => (
+  <div className="h-96 overflow-auto p-4 border rounded">
+    <h3 className="text-xl font-bold mb-6">Scroll container</h3>
+    <div className="mb-96">
+      <p className="mb-6">Scroll down to see the accordion</p>
+    </div>
+    <Accordion {...args} scrollOnOpen>
+      <AccordionItem key="1" aria-label="Accordion 1" title="Scroll on open (try opening this)">
+        <div className="p-4">
+          <p className="mb-4">{defaultContent}</p>
+          <Button color="primary">This will be scrolled into view</Button>
+        </div>
+      </AccordionItem>
+      <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
+        {defaultContent}
+      </AccordionItem>
+      <AccordionItem key="3" aria-label="Accordion 3" title="Accordion 3">
+        {defaultContent}
+      </AccordionItem>
+    </Accordion>
+  </div>
+);
+
+const WithCustomTransitionDurationTemplate = (args: AccordionProps) => (
+  <div className="flex flex-col gap-8">
+    <div>
+      <h3 className="mb-2 font-medium">Fast Transition (150ms)</h3>
+      <Accordion {...args} transitionDuration={150}>
+        <AccordionItem key="1" aria-label="Accordion 1" title="Fast transition accordion">
+          {defaultContent}
+        </AccordionItem>
+        <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
+          {defaultContent}
+        </AccordionItem>
+      </Accordion>
+    </div>
+
+    <div>
+      <h3 className="mb-2 font-medium">Slow Transition (800ms)</h3>
+      <Accordion {...args} transitionDuration={800}>
+        <AccordionItem key="1" aria-label="Accordion 1" title="Slow transition accordion">
+          {defaultContent}
+        </AccordionItem>
+        <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
+          {defaultContent}
+        </AccordionItem>
+      </Accordion>
+    </div>
+  </div>
+);
+
 export const Default = {
   render: Template,
 
@@ -523,6 +574,22 @@ export const Controlled = {
 
 export const CustomWithClassNames = {
   render: CustomWithClassNamesTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithScrollOnOpen = {
+  render: WithScrollOnOpenTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithCustomTransitionDuration = {
+  render: WithCustomTransitionDurationTemplate,
 
   args: {
     ...defaultProps,

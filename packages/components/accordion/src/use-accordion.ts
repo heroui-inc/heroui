@@ -45,6 +45,16 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * The accordion items classNames.
    */
   itemClasses?: AccordionItemProps["classNames"];
+  /**
+   * Whether to automatically scroll to the content when an accordion item is expanded.
+   * @default false
+   */
+  scrollOnOpen?: boolean;
+  /**
+   * Custom duration for the expand/collapse animation in milliseconds.
+   * @default 300
+   */
+  transitionDuration?: number;
 }
 
 export type UseAccordionProps<T extends object = {}> = Props &
@@ -71,6 +81,8 @@ export type ValuesType<T extends object = {}> = {
   keepContentMounted?: Props["keepContentMounted"];
   disableIndicatorAnimation?: AccordionItemProps["disableAnimation"];
   motionProps?: AccordionItemProps["motionProps"];
+  scrollOnOpen?: boolean;
+  transitionDuration?: number;
 };
 
 export function useAccordion<T extends object>(props: UseAccordionProps<T>) {
@@ -103,6 +115,8 @@ export function useAccordion<T extends object>(props: UseAccordionProps<T>) {
     disableAnimation = globalContext?.disableAnimation ?? false,
     disableIndicatorAnimation = false,
     itemClasses,
+    scrollOnOpen = false,
+    transitionDuration = 300,
     ...otherProps
   } = props;
 
@@ -195,6 +209,8 @@ export function useAccordion<T extends object>(props: UseAccordionProps<T>) {
       disableAnimation,
       keepContentMounted,
       disableIndicatorAnimation,
+      scrollOnOpen,
+      transitionDuration,
     }),
     [
       focusedKey,
@@ -209,6 +225,8 @@ export function useAccordion<T extends object>(props: UseAccordionProps<T>) {
       state.expandedKeys.size,
       state.disabledKeys.size,
       motionProps,
+      scrollOnOpen,
+      transitionDuration,
     ],
   );
 
@@ -244,6 +262,8 @@ export function useAccordion<T extends object>(props: UseAccordionProps<T>) {
     disableAnimation,
     handleFocusChanged,
     itemClasses,
+    scrollOnOpen,
+    transitionDuration,
   };
 }
 
