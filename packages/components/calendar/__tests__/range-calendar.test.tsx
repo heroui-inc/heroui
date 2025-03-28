@@ -4,6 +4,7 @@ import {render, act, fireEvent} from "@testing-library/react";
 import {CalendarDate} from "@internationalized/date";
 import {keyCodes, triggerPress, pointerMap, type} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
+import {I18nProvider} from "@react-aria/i18n";
 
 import {RangeCalendar as RangeCalendarCalendarBase, RangeCalendarProps} from "../src";
 
@@ -751,6 +752,27 @@ describe("RangeCalendar", () => {
 
       expect(start).toEqual(new CalendarDate(2019, 6, 22));
       expect(end).toEqual(new CalendarDate(2019, 6, 25));
+    });
+  });
+
+  describe("Internationalization", () => {
+    it("should translate month names correctly with minValue set", () => {
+      const {getByRole} = render(
+        <I18nProvider locale="fr-FR">
+          <RangeCalendar
+            defaultValue={{
+              start: new CalendarDate(2019, 6, 10),
+              end: new CalendarDate(2019, 6, 15),
+            }}
+            minValue={new CalendarDate(2019, 6, 5)}
+          />
+        </I18nProvider>,
+      );
+
+      const heading = getByRole("heading");
+
+      // In French, June is "juin"
+      expect(heading).toHaveTextContent("juin 2019");
     });
   });
 });
