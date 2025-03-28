@@ -66,10 +66,6 @@ export default {
         type: "boolean",
       },
     },
-    motionProps: {
-      control: "object",
-      description: "Custom properties for Framer Motion",
-    },
   },
   decorators: [
     (Story) => (
