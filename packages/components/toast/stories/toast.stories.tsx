@@ -17,11 +17,6 @@ import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
 export default {
   title: "Components/Toast",
   component: Toast,
-  args: {
-    motionProps: {
-      exit: {opacity: 0, y: -300, x: -500, transition: {duration: 1, ease: "easeInOut"}},
-    },
-  },
   argTypes: {
     variant: {
       control: {type: "select"},
