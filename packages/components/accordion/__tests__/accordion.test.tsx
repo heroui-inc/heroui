@@ -1,9 +1,9 @@
-import "@testing-library/jest-dom";
-import * as React from "react";
-import {act, render} from "@testing-library/react";
-import {focus, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
-import userEvent, {UserEvent} from "@testing-library/user-event";
 import {Input} from "@heroui/input";
+import {focus, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
+import "@testing-library/jest-dom";
+import {act, render} from "@testing-library/react";
+import userEvent, {UserEvent} from "@testing-library/user-event";
+import * as React from "react";
 
 import {Accordion, AccordionItem} from "../src";
 
@@ -380,8 +380,9 @@ describe("Accordion", () => {
   });
 
   it("should apply custom transition duration", async () => {
+    const customDuration = 500;
     const wrapper = render(
-      <Accordion disableAnimation={false} transitionDuration={500}>
+      <Accordion disableAnimation={false} transitionDuration={customDuration}>
         <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
           Accordion Item 1 description
         </AccordionItem>
@@ -395,10 +396,16 @@ describe("Accordion", () => {
 
     const content = first.querySelector("section");
 
+    expect(content).toBeInTheDocument();
+    // During animation the opacity changes from 0 to 1, reaching number close to 1 on the end
+    expect(content).toHaveAttribute("style", expect.stringMatching("opacity: 0"));
+
+    // Allow framer-motion time to apply animation styles
     await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 50));
+      await new Promise((resolve) => setTimeout(resolve, customDuration + 10));
     });
 
-    expect(content).toBeInTheDocument();
+    // Match opacity values between 0.98 and 1 (inclusive)
+    expect(content).toHaveAttribute("style", expect.stringMatching(/opacity: (0\.9[8-9]\d*|1)/));
   });
 });
