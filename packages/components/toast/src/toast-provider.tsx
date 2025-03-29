@@ -67,7 +67,7 @@ export const addToast = ({...props}: ToastProps & ToastOptions) => {
   return globalToastQueue.add(props);
 };
 
-export const closeToast = (key) => {
+export const closeToast = (key: string) => {
   if (!globalToastQueue) {
     return;
   }
