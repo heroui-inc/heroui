@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
@@ -394,28 +394,41 @@ const CustomCloseButtonTemplate = (args) => {
 };
 
 const CloseToastTemplate = (args: ToastProps) => {
-  const [toastKey, setToastKey] = useState<string | null>(null);
-
-  useEffect(() => {
-    const key = addToast({
-      title: "Toast Title",
-      timeout: Infinity,
-      ...args,
-    });
-
-    setToastKey(key);
-  }, []);
+  const [toastKey, setToastKey] = useState<string[]>([]);
 
   return (
     <>
       <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
-      <div>
+      <div className="flex flex-wrap gap-2">
         <Button
           onPress={() => {
-            closeToast(toastKey);
+            const key = addToast({
+              title: "New Toast",
+              timeout: Infinity,
+            });
+
+            if (!key) return;
+            setToastKey((prev) => [...prev, key]);
           }}
         >
-          Close toast
+          Add Toast
+        </Button>
+        <Button
+          onPress={() => {
+            if (toastKey.length == 0) return;
+            closeToast(toastKey[toastKey.length - 1]);
+            setToastKey((prev) => prev.slice(0, prev.length - 1));
+          }}
+        >
+          Close The Last Toast
+        </Button>
+        <Button
+          onPress={() => {
+            closeAll();
+            setToastKey([]);
+          }}
+        >
+          Close All Toast
         </Button>
       </div>
     </>

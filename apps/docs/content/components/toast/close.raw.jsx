@@ -13,6 +13,7 @@ export default function App() {
             timeout: Infinity,
           });
 
+          if (!key) return;
           setToastKey((prev) => [...prev, key]);
         }}
       >
