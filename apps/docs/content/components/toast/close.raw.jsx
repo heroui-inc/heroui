@@ -16,7 +16,7 @@ export default function App() {
           setToastKey((prev) => [...prev, key]);
         }}
       >
-        Create Toast
+        Add Toast
       </Button>
       <Button
         onPress={() => {
