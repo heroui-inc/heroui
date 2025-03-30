@@ -91,7 +91,7 @@
     "@heroui/alert": "workspace:*",
     "@heroui/number-input": "workspace:*",
     "@heroui/toast": "workspace:*",
-    "@react-aria/visually-hidden": "3.8.20"
+    "@react-aria/visually-hidden": "3.8.21"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",

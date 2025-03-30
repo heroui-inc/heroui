@@ -1,8 +1,11 @@
 import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
+import {AnimatePresence, LazyMotion} from "framer-motion";
 
 import {RegionProps, ToastRegion} from "./toast-region";
 import {ToastProps, ToastPlacement} from "./use-toast";
+
+const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 
 let globalToastQueue: ToastQueue<ToastProps> | null = null;
 
@@ -37,20 +40,22 @@ export const ToastProvider = ({
   const globalContext = useProviderContext();
   const disableAnimation = disableAnimationProp ?? globalContext?.disableAnimation ?? false;
 
-  if (toastQueue.visibleToasts.length == 0) {
-    return null;
-  }
-
   return (
-    <ToastRegion
-      disableAnimation={disableAnimation}
-      maxVisibleToasts={maxVisibleToasts}
-      placement={placement}
-      toastOffset={toastOffset}
-      toastProps={toastProps}
-      toastQueue={toastQueue}
-      {...regionProps}
-    />
+    <LazyMotion features={loadFeatures}>
+      <AnimatePresence>
+        {toastQueue.visibleToasts.length > 0 ? (
+          <ToastRegion
+            disableAnimation={disableAnimation}
+            maxVisibleToasts={maxVisibleToasts}
+            placement={placement}
+            toastOffset={toastOffset}
+            toastProps={toastProps}
+            toastQueue={toastQueue}
+            {...regionProps}
+          />
+        ) : null}
+      </AnimatePresence>
+    </LazyMotion>
   );
 };
 
