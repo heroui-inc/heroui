@@ -1,5 +1,27 @@
 # @heroui/toast
 
+## 2.0.7-beta.4
+
+### Patch Changes
+
+- [#5121](https://github.com/heroui-inc/heroui/pull/5121) [`ca5babc`](https://github.com/heroui-inc/heroui/commit/ca5babcbb95b82ff40d9640034206b9018e1105c) Thanks [@alex-gavr](https://github.com/alex-gavr)! - - Use LazyMotion and AnimatePresence in ToastProvider to support exit animations.
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
+  Changing the type of description prop to ReactNode(#5033).
+
+- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
+
+- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
+  - @heroui/shared-icons@2.1.7-beta.3
+  - @heroui/shared-utils@2.1.8-beta.3
+  - @heroui/react-utils@2.1.9-beta.3
+  - @heroui/use-is-mobile@2.2.8-beta.3
+  - @heroui/spinner@2.2.14-beta.4
+
 ## 2.0.7-beta.3
 
 ### Patch Changes

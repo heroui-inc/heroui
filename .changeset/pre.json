@@ -91,9 +91,18 @@
     "@heroui/test-utils": "2.1.6"
   },
   "changesets": [
+    "clever-moles-divide",
+    "friendly-balloons-rest",
+    "funny-yaks-smoke",
+    "gold-candles-run",
+    "light-hairs-complain",
     "old-garlics-stare",
+    "olive-laws-compare",
+    "purple-seahorses-sin",
     "quiet-colts-add",
+    "strange-ears-leave",
     "thick-spoons-vanish",
+    "twelve-plants-smoke",
     "wicked-planets-smell"
   ]
 }

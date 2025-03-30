@@ -1,5 +1,23 @@
 # @heroui/theme
 
+## 2.4.13-beta.4
+
+### Patch Changes
+
+- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- [#5098](https://github.com/heroui-inc/heroui/pull/5098) [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9) Thanks [@wingkwong](https://github.com/wingkwong)! - fix input with type=color style (#5083)
+
+- [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
+  Changing the type of description prop to ReactNode(#5033).
+
+- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
+
+- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
+  - @heroui/shared-utils@2.1.8-beta.3
+
 ## 2.4.13-beta.3
 
 ### Patch Changes

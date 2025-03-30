@@ -1,5 +1,15 @@
 # @heroui/use-aria-modal-overlay
 
+## 2.2.10-beta.3
+
+### Patch Changes
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
+
 ## 2.2.10-beta.2
 
 ### Patch Changes

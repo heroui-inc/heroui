@@ -1,5 +1,21 @@
 # @heroui/form
 
+## 2.1.16-beta.4
+
+### Patch Changes
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
+
+- Updated dependencies [[`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef), [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9), [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1), [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
+  - @heroui/theme@2.4.13-beta.4
+  - @heroui/shared-utils@2.1.8-beta.3
+  - @heroui/react-utils@2.1.9-beta.3
+  - @heroui/system@2.4.13-beta.4
+
 ## 2.1.16-beta.3
 
 ### Patch Changes

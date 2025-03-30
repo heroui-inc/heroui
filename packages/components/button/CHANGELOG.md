@@ -1,5 +1,24 @@
 # @heroui/button
 
+## 2.2.17-beta.4
+
+### Patch Changes
+
+- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
+
+- [#5051](https://github.com/heroui-inc/heroui/pull/5051) [`9247f74`](https://github.com/heroui-inc/heroui/commit/9247f7423334b8db4194f31488119efddc28961f) Thanks [@macci001](https://github.com/macci001)! - Fix for the button icon shift in safari(#4133).
+
+- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
+  - @heroui/shared-utils@2.1.8-beta.3
+  - @heroui/use-aria-button@2.2.11-beta.3
+  - @heroui/react-utils@2.1.9-beta.3
+  - @heroui/spinner@2.2.14-beta.4
+  - @heroui/ripple@2.2.13-beta.3
+
 ## 2.2.17-beta.3
 
 ### Patch Changes
