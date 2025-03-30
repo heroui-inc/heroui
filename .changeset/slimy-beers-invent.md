@@ -2,4 +2,4 @@
 "@heroui/toast": minor
 ---
 
-Enable programmatically closing a toast with specific key
+Enable programmatically closing a toast with a specific key

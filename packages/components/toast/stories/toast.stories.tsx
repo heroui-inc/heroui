@@ -428,7 +428,7 @@ const CloseToastTemplate = (args: ToastProps) => {
             setToastKey([]);
           }}
         >
-          Close All Toast
+          Close All Toasts
         </Button>
       </div>
     </>

@@ -34,7 +34,7 @@ export default function App() {
           setToastKey([]);
         }}
       >
-        Close All Toast
+        Close All Toasts
       </Button>
     </div>
   );
