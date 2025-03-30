@@ -3,9 +3,17 @@ import type {
   ForwardRefExoticComponent,
   JSXElementConstructor,
   PropsWithoutRef,
-  ReactElement,
   RefAttributes,
+  Ref,
 } from "react";
+
+type ElementRef<C extends JSXElementConstructor<any>> = C extends ForwardRefExoticComponent<infer P>
+  ? P extends {ref?: Ref<infer R>}
+    ? R
+    : never
+  : C extends new (...args: any) => any
+  ? InstanceType<C>
+  : never;
 
 type SlotsClassValue<S> = {
   [K in keyof S]?: ClassValue;
@@ -25,7 +33,9 @@ type GetSuggestedValues<S> = S extends undefined ? ClassValue : SlotsClassValue<
 
 type SuggestedVariants<CP, S> = {
   [K in keyof CP]?: ValidateSubtype<CP[K], string> extends "true"
-    ? {[K2 in CP[K]]?: GetSuggestedValues<S>}
+    ? {
+        [K2 in Extract<CP[K], string | number | symbol>]?: GetSuggestedValues<S>;
+      }
     : ValidateSubtype<CP[K], boolean> extends "true"
     ? {
         true?: GetSuggestedValues<S>;
@@ -54,7 +64,7 @@ type CompoundVariants<V, SV> = Array<VariantValue<V, SV> & ClassProp<ClassValue>
 type Options = {
   /**
    * Whether to merge the class names with `tailwind-merge` library.
-   * It avoids to have duplicate tailwind classes. (Recommended)
+   * It avoids duplicate tailwind classes. (Recommended)
    * @see https://github.com/dcastil/tailwind-merge/blob/v1.8.1/README.md
    * @default true
    */
@@ -64,6 +74,10 @@ type Options = {
    * @see https://github.com/dcastil/tailwind-merge/blob/v1.8.1/docs/configuration.md
    */
   twMergeConfig?: any;
+};
+
+type MergedProps<CP, V> = CP & {
+  [K in keyof V]?: StringToBoolean<Extract<keyof V[K], string | number | symbol>>;
 };
 
 export type ExtendVariantProps = {
@@ -96,14 +110,7 @@ export type ExtendVariants = {
       slots?: S;
     },
     opts?: Options,
-  ): ForwardRefExoticComponent<
-    PropsWithoutRef<{
-      [key in keyof CP | keyof V]?:
-        | (key extends keyof CP ? CP[key] : never)
-        | (key extends keyof V ? StringToBoolean<keyof V[key]> : never);
-    }> &
-      RefAttributes<ReactElement>
-  >;
+  ): ForwardRefExoticComponent<PropsWithoutRef<MergedProps<CP, V>> & RefAttributes<ElementRef<C>>>;
 };
 
 // main function
