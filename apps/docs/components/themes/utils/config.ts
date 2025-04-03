@@ -12,14 +12,14 @@ function generateLayoutConfig(config: Config): HeroUIPluginConfig["layout"] {
 
 function generateThemeColorsConfig(config: Config, theme: ThemeType) {
   return {
-    default: generateThemeColor(config[theme].defaultColor.default, "default", "light"),
-    primary: generateThemeColor(config[theme].baseColor.primary, "primary", "light"),
-    secondary: generateThemeColor(config[theme].baseColor.secondary, "secondary", "light"),
-    success: generateThemeColor(config[theme].baseColor.success, "success", "light"),
-    warning: generateThemeColor(config[theme].baseColor.warning, "warning", "light"),
-    danger: generateThemeColor(config[theme].baseColor.danger, "danger", "light"),
+    default: generateThemeColor(config[theme].defaultColor.default, "default", theme),
+    primary: generateThemeColor(config[theme].baseColor.primary, "primary", theme),
+    secondary: generateThemeColor(config[theme].baseColor.secondary, "secondary", theme),
+    success: generateThemeColor(config[theme].baseColor.success, "success", theme),
+    warning: generateThemeColor(config[theme].baseColor.warning, "warning", theme),
+    danger: generateThemeColor(config[theme].baseColor.danger, "danger", theme),
     background: config[theme].layoutColor.background,
-    foreground: generateThemeColor(config[theme].layoutColor.foreground, "foreground", "light"),
+    foreground: config[theme].layoutColor.foreground,
     content1: {
       DEFAULT: config[theme].contentColor.content1,
       foreground: readableColor(config[theme].contentColor.content1),

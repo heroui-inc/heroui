@@ -57,6 +57,7 @@ export interface ThemeColor extends ColorShades {
 
 // Configuration
 export interface Config {
+  name: TemplateType;
   light: ConfigColors;
   dark: ConfigColors;
   layout: ConfigLayout;

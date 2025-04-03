@@ -47,6 +47,12 @@ const PopoverTrigger = (props: PopoverTriggerProps) => {
     return triggerChildren?.[0] !== undefined;
   }, [triggerChildren]);
 
+  if (!hasHeroUIButton) {
+    // delete `preventFocusOnPress` introduced from useMenuTrigger
+    // to avoid passing it to non-HeroUI Button components
+    delete restProps["preventFocusOnPress"];
+  }
+
   return cloneElement(
     child,
     mergeProps(restProps, hasHeroUIButton ? {onPress, isDisabled} : buttonProps),

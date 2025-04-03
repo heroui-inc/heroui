@@ -105,6 +105,7 @@ export const initialLayout: ConfigLayout = {
 };
 
 export const initialConfig: Config = {
+  name: "heroui",
   light: initialLightTheme,
   dark: initialDarkTheme,
   layout: initialLayout,

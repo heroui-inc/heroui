@@ -1,5 +1,49 @@
 # @heroui/date-picker
 
+## 2.3.16
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/date-input@2.3.15
+  - @heroui/aria-utils@2.2.13
+  - @heroui/calendar@2.2.16
+  - @heroui/popover@2.3.16
+  - @heroui/button@2.2.16
+  - @heroui/form@2.1.15
+
+## 2.3.15
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/button@2.2.15
+  - @heroui/calendar@2.2.15
+  - @heroui/date-input@2.3.14
+  - @heroui/form@2.1.14
+  - @heroui/popover@2.3.15
+  - @heroui/aria-utils@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-icons@2.1.6
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.14
+
+### Patch Changes
+
+- [#4901](https://github.com/heroui-inc/heroui/pull/4901) [`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9) Thanks [@wingkwong](https://github.com/wingkwong)! - update peerDependencies (#4901)
+
+- Updated dependencies [[`09a2b73`](https://github.com/heroui-inc/heroui/commit/09a2b7387056e176417404dbf7edb4cfb8c880a9)]:
+  - @heroui/date-input@2.3.13
+  - @heroui/button@2.2.14
+  - @heroui/popover@2.3.14
+  - @heroui/calendar@2.2.14
+  - @heroui/form@2.1.13
+
 ## 2.3.13
 
 ### Patch Changes

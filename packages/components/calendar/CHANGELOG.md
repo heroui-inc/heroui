@@ -1,5 +1,38 @@
 # @heroui/calendar
 
+## 2.2.16
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/use-aria-button@2.2.10
+  - @heroui/button@2.2.16
+  - @heroui/framer-utils@2.1.12
+
+## 2.2.15
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/button@2.2.15
+  - @heroui/use-aria-button@2.2.9
+  - @heroui/dom-animation@2.1.6
+  - @heroui/framer-utils@2.1.11
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-icons@2.1.6
+  - @heroui/shared-utils@2.1.7
+
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.14
+
 ## 2.2.13
 
 ### Patch Changes
