@@ -156,41 +156,25 @@ const OffsetTemplate = (args: TooltipProps) => (
   </div>
 );
 
-const MultipleTemplate = (args: TooltipProps) => {
-  const ManyTooltipComponent = ({
-    content,
-    tooltipProps,
-  }: {
-    content: React.ReactNode;
-    tooltipProps: TooltipProps;
-  }) => {
-    return (
-      <Tooltip {...tooltipProps} closeDelay={0} content={content} openDelay={0}>
-        <Button>Hover me</Button>
+const MultipleTemplate = (args: TooltipProps) => (
+  <div className="flex flex-col gap-5">
+    <div className="flex gap-2">
+      <Tooltip {...args} content="Tooltip 1" delay={1000}>
+        <Button>Hover me (delay 1000ms)</Button>
       </Tooltip>
-    );
-  };
-
-  const tooltipIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-
-  return (
-    <div className="flex flex-col gap-5">
-      <div className="flex gap-2">
-        <Tooltip {...args} content="Tooltip 1" delay={1000}>
-          <Button>Hover me (delay 1000ms)</Button>
-        </Tooltip>
-        <Tooltip {...args} content="Tooltip 2">
-          <Button>Then hover me</Button>
-        </Tooltip>
-      </div>
-      <div className="grid grid-cols-3 gap-2">
-        {tooltipIndex.map((index) => (
-          <ManyTooltipComponent key={index} content={`Tooltip ${index}`} tooltipProps={args} />
-        ))}
-      </div>
+      <Tooltip {...args} content="Tooltip 2">
+        <Button>Then hover me</Button>
+      </Tooltip>
     </div>
-  );
-};
+    <div className="grid grid-cols-3 gap-2">
+      {Array.from({length: 21}).map((_, index) => (
+        <Tooltip {...args} key={index} closeDelay={0} content={`Tooltip ${index}`} openDelay={0}>
+          <Button>Hover me</Button>
+        </Tooltip>
+      ))}
+    </div>
+  </div>
+);
 
 const PlacementsTemplate = (args: TooltipProps) => {
   return (
