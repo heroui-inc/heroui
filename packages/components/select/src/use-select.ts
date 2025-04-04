@@ -367,7 +367,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     !!originalProps.isMultiline;
   const hasValue = !!state.selectedItems?.length;
   const hasLabel = !!label;
-  const hasLabelOutside = hasLabel && shouldLabelBeOutside && hasPlaceholder;
+  const hasLabelOutside = hasLabel && (isOutsideLeft || (shouldLabelBeOutside && hasPlaceholder));
 
   const baseStyles = clsx(classNames?.base, className);
 
