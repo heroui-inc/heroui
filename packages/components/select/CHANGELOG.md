@@ -1,5 +1,23 @@
 # @heroui/select
 
+## 2.4.17
+
+### Patch Changes
+
+- [#5147](https://github.com/heroui-inc/heroui/pull/5147) [`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix select styles for label & helper text (#5413)
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1)]:
+  - @heroui/use-aria-multiselect@2.4.10
+  - @heroui/use-aria-button@2.2.11
+  - @heroui/aria-utils@2.2.14
+  - @heroui/listbox@2.3.16
+  - @heroui/popover@2.3.17
+  - @heroui/form@2.1.16
+  - @heroui/scroll-shadow@2.3.11
+  - @heroui/spinner@2.2.14
+
 ## 2.4.16
 
 ### Patch Changes

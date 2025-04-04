@@ -1,5 +1,15 @@
 # @heroui/menu
 
+## 2.2.16
+
+### Patch Changes
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1)]:
+  - @heroui/aria-utils@2.2.14
+  - @heroui/divider@2.2.11
+
 ## 2.2.15
 
 ### Patch Changes

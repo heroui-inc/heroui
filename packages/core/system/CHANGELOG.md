@@ -1,5 +1,14 @@
 # @heroui/system
 
+## 2.4.13
+
+### Patch Changes
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies []:
+  - @heroui/system-rsc@2.3.11
+
 ## 2.4.12
 
 ### Patch Changes

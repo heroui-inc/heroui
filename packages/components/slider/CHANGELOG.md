@@ -1,5 +1,16 @@
 # @heroui/slider
 
+## 2.4.14
+
+### Patch Changes
+
+- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1), [`1aab518`](https://github.com/heroui-inc/heroui/commit/1aab518086b64672918086a684b206c360744c0e)]:
+  - @heroui/tooltip@2.2.14
+
 ## 2.4.13
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # @heroui/modal
 
+## 2.2.14
+
+### Patch Changes
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1)]:
+  - @heroui/use-aria-modal-overlay@2.2.10
+  - @heroui/use-aria-button@2.2.11
+  - @heroui/use-disclosure@2.2.9
+  - @heroui/use-draggable@2.1.9
+  - @heroui/framer-utils@2.1.13
+
 ## 2.2.13
 
 ### Patch Changes
