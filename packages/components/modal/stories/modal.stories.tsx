@@ -8,6 +8,7 @@ import {Input} from "@heroui/input";
 import {Checkbox} from "@heroui/checkbox";
 import {Link} from "@heroui/link";
 import {Switch} from "@heroui/switch";
+import {Autocomplete, AutocompleteItem} from "@heroui/autocomplete";
 import {MailFilledIcon, LockFilledIcon} from "@heroui/shared-icons";
 import Lorem from "react-lorem-component";
 
@@ -265,6 +266,108 @@ const DraggableOverflowTemplate = (args: ModalProps) => {
   );
 };
 
+const ModalWithAutocompleteTemplate = (args: ModalProps) => {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [inputValue, setInputValue] = React.useState();
+  const [value, setValue] = React.useState();
+
+  const animals = [
+    {
+      label: "Cat",
+      key: "cat",
+      description: "The second most popular pet in the world",
+    },
+    {
+      label: "Dog",
+      key: "dog",
+      description: "The most popular pet in the world",
+    },
+    {
+      label: "Elephant",
+      key: "elephant",
+      description: "The largest land animal",
+    },
+    {label: "Lion", key: "lion", description: "The king of the jungle"},
+    {label: "Tiger", key: "tiger", description: "The largest cat species"},
+    {label: "Giraffe", key: "giraffe", description: "The tallest land animal"},
+    {
+      label: "Dolphin",
+      key: "dolphin",
+      description: "A widely distributed and diverse group of aquatic mammals",
+    },
+    {
+      label: "Penguin",
+      key: "penguin",
+      description: "A group of aquatic flightless birds",
+    },
+    {
+      label: "Zebra",
+      key: "zebra",
+      description: "A several species of African equids",
+    },
+    {
+      label: "Shark",
+      key: "shark",
+      description: "A group of elasmobranch fish characterized by a cartilaginous skeleton",
+    },
+    {
+      label: "Whale",
+      key: "whale",
+      description: "Diverse group of fully aquatic placental marine mammals",
+    },
+    {
+      label: "Otter",
+      key: "otter",
+      description: "A carnivorous mammal in the subfamily Lutrinae",
+    },
+    {
+      label: "Crocodile",
+      key: "crocodile",
+      description: "A large semiaquatic reptile",
+    },
+  ];
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Button onPress={onOpen}>Open Modal</Button>
+
+      <Modal {...args} isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalBody>
+                <Autocomplete
+                  inputValue={inputValue}
+                  items={animals}
+                  label="Favorite Animal"
+                  placeholder="Search an animal"
+                  selectedKey={value}
+                  onInputChange={setInputValue}
+                  onSelectionChange={(nextValue) => {
+                    setInputValue(nextValue);
+                    setValue(nextValue);
+                  }}
+                >
+                  {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+                </Autocomplete>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+};
+
 export const Default = {
   render: Template,
 
@@ -365,6 +468,13 @@ export const WithShouldBlockScroll = {
     );
   },
 
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithAutocomplete = {
+  render: ModalWithAutocompleteTemplate,
   args: {
     ...defaultProps,
   },

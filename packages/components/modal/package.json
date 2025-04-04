@@ -59,6 +59,7 @@
     "@react-types/overlays": "3.8.13"
   },
   "devDependencies": {
+    "@heroui/autocomplete": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
     "@heroui/input": "workspace:*",
