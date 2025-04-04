@@ -17,6 +17,8 @@ const select = tv({
       "subpixel-antialiased",
       "text-small",
       "text-foreground-500",
+      "pointer-events-none",
+      "group-data-[has-label-outside=true]:pointer-events-auto",
     ],
     mainWrapper: "w-full flex flex-col",
     trigger:
