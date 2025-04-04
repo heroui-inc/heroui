@@ -1,6 +1,6 @@
 {
   "name": "@heroui/kbd",
-  "version": "2.2.12",
+  "version": "2.2.13",
   "description": "The keyboard key components indicates which key or set of keys used to execute a specificv  action",
   "keywords": [
     "kbd"
