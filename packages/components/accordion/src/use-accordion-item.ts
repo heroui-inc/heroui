@@ -35,6 +35,16 @@ export interface Props<T extends object> extends HTMLHeroUIProps<"div"> {
    * Callback fired when the focus state changes.
    */
   onFocusChange?: (isFocused: boolean, key?: React.Key) => void;
+  /**
+   * Whether to automatically scroll to the content when expanded.
+   * @default false
+   */
+  scrollOnOpen?: boolean;
+  /**
+   * Custom duration for the expand/collapse animation in milliseconds.
+   * @default 300
+   */
+  transitionDuration?: number;
 }
 
 export type UseAccordionItemProps<T extends object = {}> = Props<T> &
@@ -64,6 +74,8 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
     disableAnimation = globalContext?.disableAnimation ?? false,
     keepContentMounted = false,
     disableIndicatorAnimation = false,
+    scrollOnOpen = false,
+    transitionDuration = 300,
     HeadingComponent = as || "h2",
     onPress,
     onPressStart,
@@ -269,6 +281,8 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
     keepContentMounted,
     disableAnimation,
     motionProps,
+    scrollOnOpen,
+    transitionDuration,
     getBaseProps,
     getHeadingProps,
     getButtonProps,
