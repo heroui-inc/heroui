@@ -1,14 +1,42 @@
 {
+  "npm.packageManager": "pnpm",
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
   "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.workingDirectories": [{"mode": "auto"}],
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "tailwindCSS.experimental.configFile": {
-    "packages/storybook/tailwind.config.js": ["packages/core/theme/**/*", "packages/components/**/*"],
-    "apps/docs/tailwind.config.js": "apps/docs/**/*"
+  "files.associations": {
+    "**/.vscode/*.json": "jsonc"
   },
+  "[html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.classAttributes": ["className", "classNames", "clsx", "cn"],
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
+  "tailwindCSS.experimental.configFile": {
+    "packages/storybook/styles/globals.css": ["packages/react/**", "packages/storybook/**"]
+  }
 }

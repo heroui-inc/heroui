@@ -1,21 +1,20 @@
 import type {ButtonProps} from "./button";
-
-import {Meta} from "@storybook/react";
+import type {Meta} from "@storybook/react";
 
 import {Button} from "./button";
 
 export default {
-  title: "Components/Button",
-  component: Button,
   argTypes: {
     variant: {
       control: "select",
       options: ["solid", "flat", "ghost", "bordered", "link"],
     },
   },
+  component: Button,
+  title: "Components/Button",
 } as Meta<typeof Button>;
 
-const Template = (_: ButtonProps) => (
+const Template = (_props: ButtonProps) => (
   <div className="flex gap-3">
     <Button>Buy now</Button>
     <Button variant="flat">Add to wishlist</Button>
@@ -27,7 +26,6 @@ const Template = (_: ButtonProps) => (
 );
 
 export const Default = {
-  render: Template,
-
   args: {},
+  render: Template,
 };

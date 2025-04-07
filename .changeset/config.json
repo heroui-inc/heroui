@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "heroui-inc/heroui" }
+    {
+      "repo": "heroui-inc/heroui"
+    }
   ],
   "commit": false,
   "fixed": [],
@@ -10,11 +12,8 @@
   "access": "public",
   "baseBranch": "canary",
   "updateInternalDependencies": "patch",
+  "ignore": ["@heroui/docs", "@heroui/storybook"],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
-  },
-  "ignore": [
-    "@heroui/docs",
-    "@heroui/storybook"
-  ]
+  }
 }

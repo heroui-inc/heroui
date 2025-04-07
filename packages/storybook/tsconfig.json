@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@heroui/standard/tsconfig/react.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve"
+  },
+  "include": [".storybook", "vite.config.ts"],
+  "exclude": ["node_modules"]
+}

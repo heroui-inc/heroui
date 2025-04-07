@@ -1,12 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@heroui/standard/tsconfig/react.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "allowJs": true,
-    "paths": {
-      "tailwind-variants": ["../../node_modules/tailwind-variants"]
-    }
+    "jsx": "preserve"
   },
-  "include": ["src", "index.ts"],
-  "exclude": ["src/scripts/**", "src/index.ts.backup"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
