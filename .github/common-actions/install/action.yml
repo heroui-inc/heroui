@@ -4,15 +4,35 @@ description: "Sets up Node.js and runs install"
 runs:
   using: composite
   steps:
-    - name: Install dependencies
+    - name: Setup pnpm
       uses: pnpm/action-setup@v4
+      with:
+        run_install: false
 
-    - name: Setup Node.js
+    - name: Setup node
       uses: actions/setup-node@v4
       with:
-        node-version-file: ".nvmrc"
+        cache: 'pnpm'
+        check-latest: true
+        node-version-file: '.nvmrc'
         registry-url: "https://registry.npmjs.org"
-        cache: "pnpm"
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
 
     - name: Setup Git User
       shell: bash
@@ -20,6 +40,3 @@ runs:
         git config --global user.email "jrgarciadev@gmail.com"
         git config --global user.name "Junior Garcia"
 
-    - name: Install dependencies
-      shell: bash
-      run: pnpm install

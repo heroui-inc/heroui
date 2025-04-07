@@ -1,66 +1,74 @@
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# cache
+.turbo
+.cache
+.swc
 
 # dependencies
 node_modules
-/.pnp
+.pnp
 .pnp.js
 
 # testing
-/coverage
 coverage
+__snapshots__
 
 # next.js
-/.next/
-.next/
-/out/
+.next
+out
+.vercel
 
 # production
-/build
-dist/
-storybook-static
-/packages/storybook/public/tailwind.css
-
-# misc
-.DS_Store
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.production
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+build
+dist
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.yarn-integrity
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# envs
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env*
+.env*.local
+.env*.local
+.env*.staging
+.env*.production
+!.env.example
+
+# idea
 .idea
-.now
-dist
-esm
-examples/**/yarn.lock
-examples/**/out
-examples/**/.next
-packages/**/*.backup
-packages/**/*.backup.ts
 
-.vercel
+# temporary
+.temp
 
-# ignore sitemap
-apps/**/sitemap.xml
-apps/**/sitemap-0.xml
-
-# turbo
-.turbo
-packages/**/.turbo
+# fumadocs
+.source
 
 # content layer
 .contentlayer
+.content-collections
+
+# sitemaps
+sitemap*.xml
+
+# vite
+vite.config.ts.timestamp-*
+
+# storybook
+*storybook.log
+storybook-static
+
+# misc
+.DS_Store
+*.pem
