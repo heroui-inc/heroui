@@ -1,44 +1,10 @@
 # @heroui/use-pagination
 
-## 2.2.10-beta.3
+## 2.2.10
 
 ### Patch Changes
-
-- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
 
 - [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
-
-- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
-
-- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
-  - @heroui/shared-utils@2.1.8-beta.3
-
-## 2.2.10-beta.2
-
-### Patch Changes
-
-- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
-
-- Updated dependencies [[`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5)]:
-  - @heroui/shared-utils@2.1.8-beta.2
-
-## 2.2.10-beta.1
-
-### Patch Changes
-
-- [`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix deployment
-
-- Updated dependencies [[`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9)]:
-  - @heroui/shared-utils@2.1.8-beta.1
-
-## 2.2.10-beta.0
-
-### Patch Changes
-
-- [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - TailwindCSS v4
-
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/shared-utils@2.1.8-beta.0
 
 ## 2.2.9
 

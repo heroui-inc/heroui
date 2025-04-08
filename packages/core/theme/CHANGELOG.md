@@ -1,55 +1,17 @@
 # @heroui/theme
 
-## 2.4.13-beta.4
+## 2.4.13
 
 ### Patch Changes
 
-- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
+- [#5147](https://github.com/heroui-inc/heroui/pull/5147) [`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix select styles for label & helper text (#5413)
 
-- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
 
 - [#5098](https://github.com/heroui-inc/heroui/pull/5098) [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9) Thanks [@wingkwong](https://github.com/wingkwong)! - fix input with type=color style (#5083)
 
 - [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
   Changing the type of description prop to ReactNode(#5033).
-
-- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
-
-- Updated dependencies [[`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
-  - @heroui/shared-utils@2.1.8-beta.3
-
-## 2.4.13-beta.3
-
-### Patch Changes
-
-- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
-
-- Updated dependencies [[`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5)]:
-  - @heroui/shared-utils@2.1.8-beta.2
-
-## 2.4.13-beta.2
-
-### Patch Changes
-
-- [`3bf722a`](https://github.com/heroui-inc/heroui/commit/3bf722aa2f297a00c654024bc92eba2aadf4d369) Thanks [@winchesHe](https://github.com/winchesHe)! - Revert to use previous tailwind-merge version
-
-## 2.4.13-beta.1
-
-### Patch Changes
-
-- [`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix deployment
-
-- Updated dependencies [[`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9)]:
-  - @heroui/shared-utils@2.1.8-beta.1
-
-## 2.4.13-beta.0
-
-### Patch Changes
-
-- [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - TailwindCSS v4
-
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/shared-utils@2.1.8-beta.0
 
 ## 2.4.12
 

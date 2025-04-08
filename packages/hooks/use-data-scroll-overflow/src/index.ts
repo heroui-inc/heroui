@@ -142,6 +142,7 @@ export function useDataScrollOverflow(props: UseDataScrollOverflowProps = {}) {
     };
 
     // auto
+    checkOverflow();
     el.addEventListener("scroll", checkOverflow, true);
 
     // controlled

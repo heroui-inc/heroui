@@ -1,64 +1,14 @@
 # @heroui/form
 
-## 2.1.16-beta.4
+## 2.1.16
 
 ### Patch Changes
-
-- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
 
 - [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
 
-- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
-
-- Updated dependencies [[`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef), [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a), [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9), [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1), [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8), [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f)]:
-  - @heroui/theme@2.4.13-beta.4
-  - @heroui/shared-utils@2.1.8-beta.3
-  - @heroui/react-utils@2.1.9-beta.3
-  - @heroui/system@2.4.13-beta.4
-
-## 2.1.16-beta.3
-
-### Patch Changes
-
-- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
-
-- Updated dependencies [[`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5)]:
-  - @heroui/shared-utils@2.1.8-beta.2
-  - @heroui/react-utils@2.1.9-beta.2
-  - @heroui/system@2.4.13-beta.3
-  - @heroui/theme@2.4.13-beta.3
-
-## 2.1.16-beta.2
-
-### Patch Changes
-
-- Updated dependencies [[`3bf722a`](https://github.com/heroui-inc/heroui/commit/3bf722aa2f297a00c654024bc92eba2aadf4d369)]:
-  - @heroui/system@2.4.13-beta.2
-  - @heroui/theme@2.4.13-beta.2
-
-## 2.1.16-beta.1
-
-### Patch Changes
-
-- [`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix deployment
-
-- Updated dependencies [[`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9)]:
-  - @heroui/shared-utils@2.1.8-beta.1
-  - @heroui/react-utils@2.1.9-beta.1
-  - @heroui/system@2.4.13-beta.1
-  - @heroui/theme@2.4.13-beta.1
-
-## 2.1.16-beta.0
-
-### Patch Changes
-
-- [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - TailwindCSS v4
-
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/theme@2.4.13-beta.0
-  - @heroui/system@2.4.13-beta.0
-  - @heroui/react-utils@2.1.9-beta.0
-  - @heroui/shared-utils@2.1.8-beta.0
+- Updated dependencies [[`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a), [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef), [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9), [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1), [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8)]:
+  - @heroui/theme@2.4.13
+  - @heroui/system@2.4.13
 
 ## 2.1.15
 
