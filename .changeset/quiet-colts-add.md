@@ -47,7 +47,7 @@
 "@heroui/toast": patch
 "@heroui/tooltip": patch
 "@heroui/user": patch
-"@heroui/react": patch
+"@heroui/react": minor
 "@heroui/system": patch
 "@heroui/use-aria-accordion": patch
 "@heroui/use-aria-accordion-item": patch
