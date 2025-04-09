@@ -1,5 +1,13 @@
 # @heroui/system
 
+## 2.4.14-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
+  - @heroui/react-utils@2.1.10-beta.0
+  - @heroui/system-rsc@2.3.13-beta.0
+
 ## 2.4.13
 
 ### Patch Changes
