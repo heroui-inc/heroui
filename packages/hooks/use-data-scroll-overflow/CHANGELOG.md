@@ -1,5 +1,11 @@
 # @heroui/use-data-scroll-overflow
 
+## 2.2.8
+
+### Patch Changes
+
+- [#5139](https://github.com/heroui-inc/heroui/pull/5139) [`51a0808`](https://github.com/heroui-inc/heroui/commit/51a0808824e59e2cca7c2d7aac2b0340b443705e) Thanks [@wingkwong](https://github.com/wingkwong)! - add missing `checkOverflow` (#4867)
+
 ## 2.2.7
 
 ### Patch Changes

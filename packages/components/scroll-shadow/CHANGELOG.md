@@ -1,5 +1,12 @@
 # @heroui/scroll-shadow
 
+## 2.3.11
+
+### Patch Changes
+
+- Updated dependencies [[`51a0808`](https://github.com/heroui-inc/heroui/commit/51a0808824e59e2cca7c2d7aac2b0340b443705e)]:
+  - @heroui/use-data-scroll-overflow@2.2.8
+
 ## 2.3.10
 
 ### Patch Changes

@@ -157,13 +157,22 @@ const OffsetTemplate = (args: TooltipProps) => (
 );
 
 const MultipleTemplate = (args: TooltipProps) => (
-  <div className="flex gap-2">
-    <Tooltip {...args} content="Tooltip 1" delay={1000}>
-      <Button>Hover me (delay 1000ms)</Button>
-    </Tooltip>
-    <Tooltip {...args} content="Tooltip 2">
-      <Button>Then hover me</Button>
-    </Tooltip>
+  <div className="flex flex-col gap-5">
+    <div className="flex gap-2">
+      <Tooltip {...args} content="Tooltip 1" delay={1000}>
+        <Button>Hover me (delay 1000ms)</Button>
+      </Tooltip>
+      <Tooltip {...args} content="Tooltip 2">
+        <Button>Then hover me</Button>
+      </Tooltip>
+    </div>
+    <div className="grid grid-cols-3 gap-2">
+      {Array.from({length: 21}).map((_, index) => (
+        <Tooltip {...args} key={index} closeDelay={0} content={`Tooltip ${index}`} openDelay={0}>
+          <Button>Hover me</Button>
+        </Tooltip>
+      ))}
+    </div>
   </div>
 );
 
