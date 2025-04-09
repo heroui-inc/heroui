@@ -76,6 +76,14 @@ const AutocompleteExample = (props: Partial<AutocompleteProps> = {}) => (
 describe("Autocomplete", () => {
   let user: UserEvent;
 
+  beforeAll(async () => {
+    jest.useFakeTimers({advanceTimers: true}).setSystemTime(new Date("2025-01-01"));
+  });
+
+  afterAll(async () => {
+    jest.useRealTimers();
+  });
+
   beforeEach(() => {
     user = userEvent.setup();
   });

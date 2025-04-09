@@ -71,6 +71,7 @@ export function useAriaButton(
     onPress,
     onPressStart,
     onPressEnd,
+    onPressUp,
     onPressChange,
     // @ts-ignore - undocumented
     preventFocusOnPress,
@@ -134,6 +135,7 @@ export function useAriaButton(
   let {pressProps, isPressed} = usePress({
     onPressStart,
     onPressEnd,
+    onPressUp,
     onPressChange,
     onPress: handlePress,
     isDisabled,
