@@ -50,7 +50,7 @@ const link = tv({
         "after:transition-background",
         "after:absolute",
       ],
-      false: "hover:opacity-80 active:opacity-disabled transition-opacity",
+      false: "hover:opacity-hover active:opacity-disabled transition-opacity",
     },
     isDisabled: {
       true: "opacity-disabled cursor-default pointer-events-none",
