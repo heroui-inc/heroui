@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
-import {act, render} from "@testing-library/react";
+import {act, render, waitFor} from "@testing-library/react";
 import {focus, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
 import userEvent, {UserEvent} from "@testing-library/user-event";
 import {Input} from "@heroui/input";
@@ -289,8 +289,11 @@ describe("Accordion", () => {
     const button2 = item2.querySelector("button") as HTMLElement;
 
     await user.click(button2);
-    expect(item1.querySelector("[role='region']")).toBeInTheDocument();
-    expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
   });
 
   it("should support keepContentMounted={false}", async () => {
@@ -315,8 +318,11 @@ describe("Accordion", () => {
     const button2 = item2.querySelector("button") as HTMLElement;
 
     await user.click(button2);
-    expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
-    expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
   });
 
   it("should support keepContentMounted={true} & disableAnimation={true}", async () => {
@@ -341,8 +347,11 @@ describe("Accordion", () => {
     const button2 = item2.querySelector("button") as HTMLElement;
 
     await user.click(button2);
-    expect(item1.querySelector("[role='region']")).toBeInTheDocument();
-    expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
   });
 
   it("should support keepContentMounted={false} & disableAnimation={true}", async () => {
@@ -367,8 +376,11 @@ describe("Accordion", () => {
     const button2 = item2.querySelector("button") as HTMLElement;
 
     await user.click(button2);
-    expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
-    expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
   });
 
   it("should handle arrow key navigation within Input inside AccordionItem", async () => {
