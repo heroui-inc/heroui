@@ -55,6 +55,11 @@ export default {
         type: "boolean",
       },
     },
+    isClearable: {
+      control: {
+        type: "boolean",
+      },
+    },
   },
   decorators: [
     (Story) => (
@@ -1375,6 +1380,14 @@ export const CustomItemHeight = {
     isVirtualized: true,
     maxListboxHeight: 400,
     itemHeight: 40,
+  },
+};
+
+export const Clearable = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    isClearable: true,
   },
 };
 
