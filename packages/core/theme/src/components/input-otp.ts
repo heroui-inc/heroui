@@ -57,10 +57,11 @@ const inputOtp = tv({
         segment: ["bg-default-100", "border-medium"],
       },
       bordered: {
-        segment: ["border-medium"],
+        segment: ["bg-background", "border-medium"],
       },
       underlined: {
         segment: [
+          "bg-background",
           "shadow-none",
           "relative",
           "box-border",
