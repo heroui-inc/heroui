@@ -1,5 +1,14 @@
 # @heroui/aria-utils
 
+## 2.2.15-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
+  - @heroui/react-rsc-utils@2.1.8-beta.0
+  - @heroui/shared-utils@2.1.9-beta.0
+  - @heroui/system@2.4.14-beta.0
+
 ## 2.2.14
 
 ### Patch Changes

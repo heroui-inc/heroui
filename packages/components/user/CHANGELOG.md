@@ -1,5 +1,18 @@
 # @heroui/user
 
+## 2.2.14-beta.0
+
+### Patch Changes
+
+- [#5166](https://github.com/heroui-inc/heroui/pull/5166) [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+
+- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
+  - @heroui/shared-utils@2.1.9-beta.0
+  - @heroui/react-utils@2.1.10-beta.0
+  - @heroui/avatar@2.2.14-beta.0
+  - @heroui/theme@2.4.14-beta.0
+  - @heroui/system@2.4.14-beta.0
+
 ## 2.2.13
 
 ### Patch Changes

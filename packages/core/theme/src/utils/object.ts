@@ -51,6 +51,6 @@ export const flattenThemeObject = <TTarget>(obj: TTarget) =>
   removeDefaultKeys(
     flatten(obj, {
       safe: true,
-      delimiter: "",
+      delimiter: "-",
     }) as Object,
   );
