@@ -3,7 +3,7 @@
 import NextLink from "next/link";
 
 const PH_INFO = {
-  description: "Join the conversation and help us get #1 Product of the Day! ↗",
+  description: "Join the conversation and help us get #1 Product of the Week! ↗",
   title: "Live on Product Hunt!",
   url: "https://ph.heroui.chat?utm_source=heroui.chat&utm_medium=callout",
 };
