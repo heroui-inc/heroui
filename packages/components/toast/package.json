@@ -46,11 +46,11 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
     "@heroui/spinner": "workspace:*",
-    "@react-aria/toast": "3.0.1",
-    "@react-aria/utils": "3.28.1",
-    "@react-aria/interactions": "3.24.1",
-    "@react-stately/toast": "3.0.0",
-    "@react-stately/utils": "3.10.5"
+    "@react-aria/toast": "3.0.2",
+    "@react-aria/utils": "3.28.2",
+    "@react-aria/interactions": "3.25.0",
+    "@react-stately/toast": "3.1.0",
+    "@react-stately/utils": "3.10.6"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",
