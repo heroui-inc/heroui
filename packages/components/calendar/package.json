@@ -57,7 +57,7 @@
     "@react-aria/visually-hidden": "3.8.22",
     "@react-aria/utils": "3.28.2",
     "@react-stately/utils": "3.10.6",
-    "@react-types/calendar": "3.8.0",
+    "@react-types/calendar": "3.7.0",
     "@react-aria/interactions": "3.25.0",
     "@react-types/shared": "3.29.0",
     "scroll-into-view-if-needed": "3.0.10",
