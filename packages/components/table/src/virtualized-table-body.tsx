@@ -157,7 +157,7 @@ const VirtualizedTableBody = forwardRef<"tbody", VirtualizedTableBodyProps>((pro
           </TableRow>
         );
       })}
-      <tr />
+
       {loadingContent}
       {emptyContent}
     </Component>
