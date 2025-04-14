@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
@@ -13,6 +13,7 @@ import {
 import {Drawer, DrawerContent} from "@heroui/drawer";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
+import {closeToast} from "../src/toast-provider";
 
 export default {
   title: "Components/Toast",
@@ -393,6 +394,47 @@ const CustomCloseButtonTemplate = (args) => {
   );
 };
 
+const CloseWithToastKeyTemplate = (args) => {
+  const [keys, setKeys] = useState<string[]>([]);
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={1} placement={args.placement} />
+      <div className="flex gap-x-2">
+        <Button
+          onPress={() => {
+            const toastKey = addToast({
+              title: "Toast Title",
+              description: "Toast Description",
+            });
+
+            if (toastKey) {
+              keys.push(toastKey);
+
+              setKeys([...keys]);
+            }
+          }}
+        >
+          Toast
+        </Button>
+        <Button
+          onPress={() => {
+            if (keys.length === 0) {
+              return;
+            }
+
+            closeToast(keys[keys.length - 1]);
+            keys.pop();
+            setKeys([...keys]);
+          }}
+        >
+          Remove Toast
+        </Button>
+      </div>
+    </>
+  );
+};
+
 export const Default = {
   render: Template,
   args: {
@@ -431,6 +473,13 @@ export const WithCustomIcon = {
         </g>
       </svg>
     ),
+  },
+};
+
+export const CloseWithToastKey = {
+  render: CloseWithToastKeyTemplate,
+  args: {
+    ...defaultProps,
   },
 };
 

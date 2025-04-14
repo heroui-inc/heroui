@@ -42,6 +42,7 @@ export function ToastRegion<T extends ToastProps>({
   });
 
   const [isTouched, setIsTouched] = useState(false);
+  const [isAnyToastRemoved, setIsAnyToastRemoved] = useState(false);
 
   const slots = useMemo(
     () =>
@@ -100,10 +101,12 @@ export function ToastRegion<T extends ToastProps>({
               disableAnimation={disableAnimation}
               heights={heights}
               index={index}
+              isAnyToastRemoved={isAnyToastRemoved}
               isRegionExpanded={isHovered || isTouched}
               maxVisibleToasts={maxVisibleToasts}
               placement={placement}
               setHeights={setHeights}
+              setIsAnyToastRemoved={setIsAnyToastRemoved}
               toastOffset={toastOffset}
               total={total}
             />
