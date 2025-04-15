@@ -120,8 +120,6 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
   placement?: ToastPlacement;
   toastOffset?: number;
   maxVisibleToasts: number;
-  isAnyToastRemoved: boolean;
-  setIsAnyToastRemoved: (value: boolean) => void;
 }
 
 export type UseToastProps<T = ToastProps> = Props<T> &
@@ -162,8 +160,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     onClose,
     severity,
     maxVisibleToasts,
-    isAnyToastRemoved,
-    setIsAnyToastRemoved,
     ...otherProps
   } = props;
 
@@ -392,20 +388,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     opacityValue = Math.max(0, 1 - dragValue / (SWIPE_THRESHOLD_X + 20));
   }
 
-  const [shouldHavePseudoElements, setShouldHavePseudoElements] = useState(isAnyToastRemoved);
-
-  useEffect(() => {
-    if (isAnyToastRemoved) {
-      setShouldHavePseudoElements(true);
-    }
-
-    const id = setTimeout(() => setShouldHavePseudoElements(false), 300);
-
-    return () => {
-      clearTimeout(id);
-    };
-  }, [isAnyToastRemoved]);
-
   const getToastProps: PropGetter = useCallback(
     (props = {}) => {
       const aboveToastHeight = index + 1 < total ? heights[index + 1] : 0;
@@ -429,7 +411,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         "data-toast": true,
         "aria-label": "toast",
         "data-toast-exiting": dataAttr(isToastExiting),
-        "data-pseudo-visible": dataAttr(shouldHavePseudoElements),
         onTransitionEnd: () => {
           if (isToastExiting) {
             const updatedHeights = heights;
@@ -438,7 +419,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
             setHeights([...updatedHeights]);
 
             state.close(toast.key);
-            setIsAnyToastRemoved(false);
           }
         },
         style: {
@@ -459,8 +439,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       isToastExiting,
       state,
       toast.key,
-      shouldHavePseudoElements,
-      setIsAnyToastRemoved,
     ],
   );
 
@@ -521,13 +499,12 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       ...mergeProps(props, {
         onPress: chain(() => {
           setIsToastExiting(true);
-          setIsAnyToastRemoved(true);
 
           setTimeout(() => document.body.focus(), 0);
         }, onClose),
       }),
     }),
-    [setIsToastExiting, onClose, state, toast, setIsAnyToastRemoved],
+    [setIsToastExiting, onClose, state, toast],
   );
 
   const getCloseIconProps: PropGetter = useCallback(
@@ -606,13 +583,9 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
             setHeights([...updatedHeights]);
 
             state.close(toast.key);
-            setIsAnyToastRemoved(false);
 
             return;
           }
-
-          setIsAnyToastRemoved(false);
-          setShouldHavePseudoElements(false);
           setDragValue(0);
         },
         onDrag: (_, info) => {
@@ -633,7 +606,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
           }
         },
         onDragStart: () => {
-          setIsAnyToastRemoved(true);
           setDrag(true);
         },
         "data-drag": dataAttr(drag),
@@ -663,9 +635,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       slots,
       toastOffset,
       maxVisibleToasts,
-      isAnyToastRemoved,
-      setIsAnyToastRemoved,
-      setShouldHavePseudoElements,
     ],
   );
 
