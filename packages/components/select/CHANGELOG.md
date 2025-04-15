@@ -1,5 +1,25 @@
 # @heroui/select
 
+## 2.4.18-beta.1
+
+### Patch Changes
+
+- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.1
+  - @heroui/use-aria-multiselect@2.4.11-beta.0
+  - @heroui/scroll-shadow@2.3.12-beta.1
+  - @heroui/shared-icons@2.1.8-beta.1
+  - @heroui/shared-utils@2.1.9-beta.1
+  - @heroui/use-aria-button@2.2.12-beta.1
+  - @heroui/react-utils@2.1.10-beta.1
+  - @heroui/aria-utils@2.2.15-beta.1
+  - @heroui/listbox@2.3.17-beta.1
+  - @heroui/popover@2.3.18-beta.1
+  - @heroui/spinner@2.2.15-beta.1
+  - @heroui/form@2.1.17-beta.1
+
 ## 2.4.18-beta.0
 
 ### Patch Changes

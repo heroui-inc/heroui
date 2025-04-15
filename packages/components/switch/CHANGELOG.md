@@ -1,5 +1,16 @@
 # @heroui/switch
 
+## 2.2.16-beta.1
+
+### Patch Changes
+
+- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.1
+  - @heroui/shared-utils@2.1.9-beta.1
+  - @heroui/react-utils@2.1.10-beta.1
+
 ## 2.2.16-beta.0
 
 ### Patch Changes
