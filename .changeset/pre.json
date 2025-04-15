@@ -91,6 +91,7 @@
     "@heroui/test-utils": "2.1.7"
   },
   "changesets": [
-    "quiet-colts-add"
+    "quiet-colts-add",
+    "tidy-mails-sing"
   ]
 }

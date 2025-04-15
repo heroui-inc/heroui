@@ -1,5 +1,20 @@
 # @heroui/calendar
 
+## 2.2.18-beta.1
+
+### Patch Changes
+
+- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
+  - @heroui/dom-animation@2.1.8-beta.1
+  - @heroui/framer-utils@2.1.14-beta.1
+  - @heroui/shared-icons@2.1.8-beta.1
+  - @heroui/shared-utils@2.1.9-beta.1
+  - @heroui/use-aria-button@2.2.12-beta.1
+  - @heroui/react-utils@2.1.10-beta.1
+  - @heroui/button@2.2.18-beta.1
+
 ## 2.2.18-beta.0
 
 ### Patch Changes
