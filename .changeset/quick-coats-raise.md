@@ -2,4 +2,4 @@
 "@heroui/theme": patch
 ---
 
-Utilize `hover-opacity` in <Link> component (#5169)
+Utilize `hover-opacity` in Link & Breadcrumb component (#5169)
