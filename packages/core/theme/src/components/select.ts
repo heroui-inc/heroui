@@ -693,8 +693,8 @@ const select = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
-          "group-data-[has-helper=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_26px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+var(--heroui-font-size-tiny)/2_+_16px)]",
+          "group-data-[has-helper=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_26px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
       },
@@ -707,8 +707,8 @@ const select = tv({
         label: [
           "start-3",
           "text-small",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
-          "group-data-[has-helper=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_30px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
+          "group-data-[has-helper=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_30px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_10px)]",
       },
@@ -721,8 +721,8 @@ const select = tv({
         label: [
           "start-3",
           "text-medium",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
-          "group-data-[has-helper=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_34px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
+          "group-data-[has-helper=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_34px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
       },
