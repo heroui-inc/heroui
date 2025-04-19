@@ -1,5 +1,20 @@
 # @heroui/button
 
+## 2.2.18
+
+### Patch Changes
+
+- [#5209](https://github.com/heroui-inc/heroui/pull/5209) [`53295ca`](https://github.com/heroui-inc/heroui/commit/53295ca9dc7a1310485e1574fd28110b6cbf5ebd) Thanks [@wingkwong](https://github.com/wingkwong)! - fix button icon focus behaviour on click (#5200)
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/use-aria-button@2.2.12
+  - @heroui/ripple@2.2.13
+  - @heroui/spinner@2.2.15
+  - @heroui/react-utils@2.1.9
+
 ## 2.2.17
 
 ### Patch Changes

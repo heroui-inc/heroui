@@ -1,5 +1,22 @@
 # @heroui/accordion
 
+## 2.2.15
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- [#5172](https://github.com/heroui-inc/heroui/pull/5172) [`531518f`](https://github.com/heroui-inc/heroui/commit/531518f2ef0d146f5ab499c10057deac29e094b6) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed keepContentMounted with disableAnimation (#5157)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/use-aria-accordion@2.2.10
+  - @heroui/dom-animation@2.1.7
+  - @heroui/shared-utils@2.1.8
+  - @heroui/aria-utils@2.2.15
+  - @heroui/divider@2.2.12
+  - @heroui/framer-utils@2.1.14
+  - @heroui/react-utils@2.1.9
+
 ## 2.2.14
 
 ### Patch Changes

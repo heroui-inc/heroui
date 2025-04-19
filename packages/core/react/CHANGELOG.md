@@ -1,5 +1,62 @@
 # @heroui/react
 
+## 2.7.7
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`53295ca`](https://github.com/heroui-inc/heroui/commit/53295ca9dc7a1310485e1574fd28110b6cbf5ebd), [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e), [`f223e1f`](https://github.com/heroui-inc/heroui/commit/f223e1ff634ee5c97e6e88e2d74ab002132fa19e), [`99a5bc2`](https://github.com/heroui-inc/heroui/commit/99a5bc2f4caa7d5468c629c30286935b5e5fa833), [`531518f`](https://github.com/heroui-inc/heroui/commit/531518f2ef0d146f5ab499c10057deac29e094b6), [`8bd8783`](https://github.com/heroui-inc/heroui/commit/8bd878341e8c26493f7cf1bc59c5d66a824f15f8)]:
+  - @heroui/button@2.2.18
+  - @heroui/autocomplete@2.3.19
+  - @heroui/number-input@2.0.8
+  - @heroui/breadcrumbs@2.2.14
+  - @heroui/date-picker@2.3.18
+  - @heroui/date-input@2.3.17
+  - @heroui/pagination@2.2.16
+  - @heroui/accordion@2.2.15
+  - @heroui/input-otp@2.1.17
+  - @heroui/calendar@2.2.18
+  - @heroui/checkbox@2.3.17
+  - @heroui/dropdown@2.3.18
+  - @heroui/progress@2.2.14
+  - @heroui/divider@2.2.12
+  - @heroui/listbox@2.3.17
+  - @heroui/popover@2.3.18
+  - @heroui/snippet@2.2.19
+  - @heroui/tooltip@2.2.15
+  - @heroui/avatar@2.2.14
+  - @heroui/drawer@2.2.15
+  - @heroui/navbar@2.2.16
+  - @heroui/select@2.4.18
+  - @heroui/slider@2.4.15
+  - @heroui/switch@2.2.16
+  - @heroui/alert@2.2.18
+  - @heroui/input@2.4.18
+  - @heroui/modal@2.2.15
+  - @heroui/radio@2.3.17
+  - @heroui/table@2.2.17
+  - @heroui/toast@2.0.8
+  - @heroui/card@2.2.17
+  - @heroui/chip@2.2.14
+  - @heroui/form@2.1.17
+  - @heroui/link@2.2.15
+  - @heroui/menu@2.2.17
+  - @heroui/tabs@2.2.15
+  - @heroui/user@2.2.14
+  - @heroui/kbd@2.2.14
+  - @heroui/system@2.4.14
+  - @heroui/theme@2.4.14
+  - @heroui/skeleton@2.2.11
+  - @heroui/ripple@2.2.13
+  - @heroui/badge@2.2.11
+  - @heroui/code@2.2.13
+  - @heroui/image@2.2.11
+  - @heroui/scroll-shadow@2.3.12
+  - @heroui/spacer@2.2.13
+  - @heroui/spinner@2.2.15
+  - @heroui/framer-utils@2.1.14
+
 ## 2.7.6
 
 ### Patch Changes

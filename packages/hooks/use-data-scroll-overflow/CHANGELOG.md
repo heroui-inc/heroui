@@ -1,5 +1,12 @@
 # @heroui/use-data-scroll-overflow
 
+## 2.2.9
+
+### Patch Changes
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+
 ## 2.2.8
 
 ### Patch Changes
