@@ -1,5 +1,12 @@
 # @heroui/use-real-shape
 
+## 2.1.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/react-utils@2.1.9
+
 ## 2.1.8
 
 ### Patch Changes
