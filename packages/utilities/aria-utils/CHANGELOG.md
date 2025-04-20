@@ -1,5 +1,16 @@
 # @heroui/aria-utils
 
+## 2.2.15-beta.2
+
+### Patch Changes
+
+- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+
+- Updated dependencies [[`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0)]:
+  - @heroui/react-rsc-utils@2.1.8-beta.2
+  - @heroui/shared-utils@2.1.9-beta.2
+  - @heroui/system@2.4.14-beta.2
+
 ## 2.2.15-beta.1
 
 ### Patch Changes

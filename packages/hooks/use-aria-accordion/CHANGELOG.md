@@ -1,5 +1,11 @@
 # @heroui/use-aria-accordion
 
+## 2.2.10-beta.1
+
+### Patch Changes
+
+- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+
 ## 2.2.10-beta.0
 
 ### Patch Changes
