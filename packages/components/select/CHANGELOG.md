@@ -1,5 +1,25 @@
 # @heroui/select
 
+## 2.4.18-beta.2
+
+### Patch Changes
+
+- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+
+- Updated dependencies [[`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.2
+  - @heroui/use-aria-multiselect@2.4.11-beta.1
+  - @heroui/scroll-shadow@2.3.12-beta.2
+  - @heroui/shared-icons@2.1.8-beta.2
+  - @heroui/shared-utils@2.1.9-beta.2
+  - @heroui/use-aria-button@2.2.12-beta.2
+  - @heroui/react-utils@2.1.10-beta.2
+  - @heroui/aria-utils@2.2.15-beta.2
+  - @heroui/listbox@2.3.17-beta.2
+  - @heroui/popover@2.3.18-beta.2
+  - @heroui/spinner@2.2.15-beta.2
+  - @heroui/form@2.1.17-beta.2
+
 ## 2.4.18-beta.1
 
 ### Patch Changes
