@@ -37,7 +37,7 @@ const dateInput = tv({
       "data-[invalid=true]:focus:bg-danger-400/50 dark:data-[invalid=true]:focus:bg-danger-400/20",
       "data-[invalid=true]:data-[editable=true]:focus:text-danger",
     ],
-    helperWrapper: "hidden group-data-[has-helper=true]:flex p-1 relative flex-col gap-1.5",
+    helperWrapper: "hidden group-data-[has-helper=true]:flex p-1 flex-col gap-1.5",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
   },
@@ -167,13 +167,13 @@ const dateInput = tv({
       outside: {
         base: "flex flex-col data-[has-helper=true]:pb-[calc(theme(fontSize.tiny)_+8px)] gap-y-1.5",
         label: "w-full text-foreground",
-        helperWrapper: "absolute top-[calc(100%_+_2px)] start-0",
+        helperWrapper: "top-[calc(100%_+_2px)] start-0",
       },
       "outside-left": {
-        base: "flex-row items-center data-[has-helper=true]:pb-[calc(theme(fontSize.tiny)_+_8px)] gap-x-2 flex-nowrap",
-        label: "relative text-foreground",
+        base: "flex-row items-top data-[has-helper=true]:pb-[calc(theme(fontSize.tiny)_+_8px)] gap-x-2 flex-nowrap",
+        label: "relative whitespace-nowrap text-foreground",
         inputWrapper: "relative flex-1",
-        helperWrapper: "absolute top-[calc(100%_+_2px)] start-0",
+        helperWrapper: "top-[calc(100%_+_2px)] start-0",
       },
       inside: {
         label: "w-full text-tiny cursor-text",
