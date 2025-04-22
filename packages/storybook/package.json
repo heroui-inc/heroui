@@ -26,15 +26,15 @@
     "@storybook/react": "8.6.12",
     "@storybook/react-vite": "8.6.12",
     "@storybook/theming": "8.6.12",
-    "@tailwindcss/postcss": "4.1.3",
-    "@tailwindcss/vite": "4.1.3",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
-    "@vitejs/plugin-react": "4.3.4",
+    "@tailwindcss/postcss": "4.1.4",
+    "@tailwindcss/vite": "4.1.4",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
+    "@vitejs/plugin-react": "4.4.1",
     "postcss": "8.5.3",
     "react-scan": "0.3.3",
     "storybook": "8.6.12",
-    "tailwindcss": "4.1.3",
-    "vite": "6.2.5"
+    "tailwindcss": "4.1.4",
+    "vite": "6.3.2"
   }
 }

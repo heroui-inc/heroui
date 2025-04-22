@@ -4,7 +4,7 @@ import preset from "@heroui/standard/prettier/base.mjs";
 const config = {
   ...preset,
   plugins: ["prettier-plugin-tailwindcss"],
-  tailwindAttributes: ["classNames"],
+  tailwindAttributes: ["className", "classNames"],
   tailwindFunctions: ["tv", "clsx", "cn"],
 };
 

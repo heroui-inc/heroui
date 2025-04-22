@@ -1,0 +1,23 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "collect-json-reports": {
+      "cache": false
+    },
+    "merge-json-reports": {
+      "dependsOn": ["collect-json-reports"],
+      "inputs": ["coverage/raw/**"],
+      "outputs": ["coverage/merged/**"]
+    },
+    "build": {
+      "dependsOn": ["merge-json-reports"],
+      "inputs": ["coverage/merge"],
+      "outputs": ["coverage/report/**"]
+    },
+    "start": {
+      "dependsOn": ["report"],
+      "cache": false
+    }
+  }
+}

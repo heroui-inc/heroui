@@ -1,0 +1,19 @@
+{
+  "name": "@heroui/vitest",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "collect-json-reports": "node dist/scripts/collect-json-outputs.js",
+    "merge-json-reports": "nyc merge coverage/raw coverage/merged/merged-coverage.json",
+    "build": "storybook build",
+    "start": "storybook start"
+  },
+  "devDependencies": {
+    "@heroui/standard": "workspace:*",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "glob": "11.0.1"
+  }
+}
