@@ -8,6 +8,7 @@ import type {ButtonProps} from "@heroui/button";
 import type {SupportedCalendars} from "@heroui/system";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
+import type {CalendarIdentifier} from "@internationalized/date";
 
 import {createCalendar, Calendar, CalendarDate, DateFormatter} from "@internationalized/date";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
@@ -196,7 +197,9 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
 
   const isRTL = direction === "rtl";
 
-  const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
+  const calendarProp = createCalendar(
+    new DateFormatter(locale).resolvedOptions().calendar as CalendarIdentifier,
+  );
 
   // by default, we are using gregorian calendar with possible years in [1900, 2099]
   // however, some locales such as `th-TH-u-ca-buddhist` using different calendar making the years out of bound

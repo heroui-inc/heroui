@@ -54,7 +54,11 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   const content = useMemo(() => {
     if (disableAnimation) {
-      return <div {...getContentProps()}>{children}</div>;
+      if (keepContentMounted) {
+        return <div {...getContentProps()}>{children}</div>;
+      }
+
+      return isOpen && <div {...getContentProps()}>{children}</div>;
     }
 
     const transitionVariants: Variants = {

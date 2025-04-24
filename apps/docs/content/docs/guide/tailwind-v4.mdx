@@ -5,7 +5,7 @@ description: Learn how to migrate your Tailwind v4 project to HeroUI.
 
 # Tailwind v4
 
-TailwindCSS v4 is now available in Beta! This guide will help you migrate your existing TailwindCSS v4 project to HeroUI.
+TailwindCSS v4 is now available in Beta! This guide will help you migrate your existing TailwindCSS v4 project to HeroUI. The demonstration is available at https://beta.heroui.com/.
 
 ---
 
@@ -32,14 +32,46 @@ TailwindCSS v4 is now available in Beta! This guide will help you migrate your e
 
 ### Update CSS Import
 
+#### Without `tailwind.config.js`
+
+Since Tailwind v4 favors a CSS-first approach, `tailwind.config.js` will not be required. 
+
+Create `hero.ts` file
+
+```tsx
+// hero.ts
+import { heroui } from "@heroui/react";
+export default heroui();
+```
+
+Update your main css file
+
 ```diff-js
-// tailwind.config.js
+// your main css file
 - @tailwind base;
 - @tailwind components;
 - @tailwind utilities;
 
 + @import "tailwindcss";
-+ @config "../../tailwind.config.js"
++ @plugin './hero.ts';
+// Note: You may need to change the path to fit your project structure
++ @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
++ @custom-variant dark (&:is(.dark *));
+```
+
+#### With `tailwind.config.js`
+
+In Tailwind v4, `tailwind.config.js` is still supported for backward compatibility. If you still need to use it, you can load it explicity as below.
+
+```diff-js
+// your main css file
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
++ @import "tailwindcss";
+// Note: You may need to change the path to fit your project structure
++ @config "../../tailwind.config.js";
 ```
 
 ### Update PostCSS Configuration
