@@ -1,5 +1,7 @@
 import type {GridNode} from "@react-types/grid";
+import type {ReactNode, ReactElement} from "react";
 
+import {cloneElement, isValidElement} from "react";
 import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {clsx, dataAttr} from "@heroui/shared-utils";
@@ -18,13 +20,17 @@ export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"
   state: ValuesType["state"];
   classNames?: ValuesType["classNames"];
   /**
+   * Custom Icon to be displayed in the table header - overrides the default chevron one
+   */
+  sortIcon?: ReactNode | ((props: any) => ReactNode);
+  /**
    * The table node to render.
    */
   node: GridNode<T>;
 }
 
 const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) => {
-  const {as, className, state, node, slots, classNames, ...otherProps} = props;
+  const {as, className, state, node, slots, classNames, sortIcon, ...otherProps} = props;
 
   const Component = as || "th";
   const shouldFilterDOMProps = typeof Component === "string";
@@ -40,6 +46,18 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
   const {hideHeader, align, ...columnProps} = node.props;
 
   const allowsSorting = columnProps.allowsSorting;
+
+  const sortIconProps = {
+    "aria-hidden": true,
+    "data-direction": state.sortDescriptor?.direction,
+    "data-visible": dataAttr(state.sortDescriptor?.column === node.key),
+    className: slots.sortIcon?.({class: classNames?.sortIcon}),
+  };
+
+  const customSortIcon =
+    sortIcon && isValidElement(sortIcon)
+      ? cloneElement(sortIcon as ReactElement, sortIconProps)
+      : null;
 
   return (
     <Component
@@ -60,15 +78,7 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
       className={slots.th?.({align, class: thStyles})}
     >
       {hideHeader ? <VisuallyHidden>{node.rendered}</VisuallyHidden> : node.rendered}
-      {allowsSorting && (
-        <ChevronDownIcon
-          aria-hidden="true"
-          className={slots.sortIcon?.({class: classNames?.sortIcon})}
-          data-direction={state.sortDescriptor?.direction}
-          data-visible={dataAttr(state.sortDescriptor?.column === node.key)}
-          strokeWidth={3}
-        />
-      )}
+      {allowsSorting && (customSortIcon || <ChevronDownIcon strokeWidth={3} {...sortIconProps} />)}
     </Component>
   );
 });
