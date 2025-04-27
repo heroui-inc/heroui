@@ -13,6 +13,7 @@ export * from "./ellipsis";
 export * from "./forward";
 export * from "./sun";
 export * from "./sun-filled";
+export * from "./sort";
 export * from "./mail";
 export * from "./mail-filled";
 export * from "./moon";
