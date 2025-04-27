@@ -55,9 +55,9 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
   };
 
   const customSortIcon =
-    sortIcon && isValidElement(sortIcon)
-      ? cloneElement(sortIcon as ReactElement, sortIconProps)
-      : null;
+    typeof sortIcon === "function"
+      ? sortIcon(sortIconProps)
+      : isValidElement(sortIcon) && cloneElement(sortIcon as ReactElement, sortIconProps);
 
   return (
     <Component
