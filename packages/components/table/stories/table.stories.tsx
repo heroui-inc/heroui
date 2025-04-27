@@ -7,7 +7,7 @@ import {Button} from "@heroui/button";
 import {Spinner} from "@heroui/spinner";
 import {Pagination} from "@heroui/pagination";
 import {Tooltip} from "@heroui/tooltip";
-import {EditIcon, DeleteIcon, EyeIcon} from "@heroui/shared-icons";
+import {EditIcon, DeleteIcon, EyeIcon, SortIcon} from "@heroui/shared-icons";
 import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
 import {useAsyncList} from "@react-stately/data";
 import useSWR from "swr";
@@ -1062,6 +1062,15 @@ export const Sortable = {
 
   args: {
     ...defaultProps,
+  },
+};
+
+export const CustomSortIcon = {
+  render: SortableTemplate,
+
+  args: {
+    ...defaultProps,
+    sortIcon: SortIcon,
   },
 };
 
