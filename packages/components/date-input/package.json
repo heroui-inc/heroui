@@ -1,6 +1,6 @@
 {
   "name": "@heroui/date-input",
-  "version": "2.3.17",
+  "version": "2.3.18",
   "description": "A date input allows users to enter and edit date and time values using a keyboard.",
   "keywords": [
     "date-field"

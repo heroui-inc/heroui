@@ -1,5 +1,18 @@
 # @heroui/slider
 
+## 2.4.16
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/tooltip@2.2.16
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-utils@2.1.9
+
 ## 2.4.15
 
 ### Patch Changes

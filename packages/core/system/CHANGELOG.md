@@ -1,5 +1,17 @@
 # @heroui/system
 
+## 2.4.15
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/system-rsc@2.3.13
+  - @heroui/react-utils@2.1.10
+
 ## 2.4.14
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/drawer",
-  "version": "2.2.15",
+  "version": "2.2.16",
   "description": "Used to render a content that slides in from the side of the screen.",
   "keywords": [
     "drawer"

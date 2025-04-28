@@ -1,6 +1,6 @@
 {
   "name": "@heroui/pagination",
-  "version": "2.2.16",
+  "version": "2.2.17",
   "description": "The Pagination component allows you to display active page and navigate between multiple pages.",
   "keywords": [
     "pagination"

@@ -1,5 +1,20 @@
 # @heroui/toast
 
+## 2.0.9
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/spinner@2.2.16
+  - @heroui/use-is-mobile@2.2.9
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
+
 ## 2.0.8
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # @heroui/calendar
 
+## 2.2.19
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/button@2.2.19
+  - @heroui/use-aria-button@2.2.13
+  - @heroui/dom-animation@2.1.8
+  - @heroui/framer-utils@2.1.15
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
+
 ## 2.2.18
 
 ### Patch Changes
