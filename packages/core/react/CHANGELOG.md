@@ -11,6 +11,11 @@
   - @heroui/breadcrumbs@2.2.14
   - @heroui/autocomplete@2.3.19
   - @heroui/number-input@2.0.8
+- Updated dependencies [[`53295ca`](https://github.com/heroui-inc/heroui/commit/53295ca9dc7a1310485e1574fd28110b6cbf5ebd), [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e), [`f223e1f`](https://github.com/heroui-inc/heroui/commit/f223e1ff634ee5c97e6e88e2d74ab002132fa19e), [`99a5bc2`](https://github.com/heroui-inc/heroui/commit/99a5bc2f4caa7d5468c629c30286935b5e5fa833), [`531518f`](https://github.com/heroui-inc/heroui/commit/531518f2ef0d146f5ab499c10057deac29e094b6), [`8bd8783`](https://github.com/heroui-inc/heroui/commit/8bd878341e8c26493f7cf1bc59c5d66a824f15f8)]:
+  - @heroui/button@2.2.18
+  - @heroui/autocomplete@2.3.19
+  - @heroui/number-input@2.0.8
+  - @heroui/breadcrumbs@2.2.14
   - @heroui/date-picker@2.3.18
   - @heroui/date-input@2.3.17
   - @heroui/pagination@2.2.16
