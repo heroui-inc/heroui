@@ -1,5 +1,5 @@
 ---
-"@heroui/toast": patch
+"@heroui/theme": patch
 ---
 
-Remove the bottom extenstion of the toast
+Remove the bottom extenstion of the toast (#5231)
