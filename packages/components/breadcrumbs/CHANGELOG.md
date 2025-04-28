@@ -1,5 +1,17 @@
 # @heroui/breadcrumbs
 
+## 2.2.14
+
+### Patch Changes
+
+- [#5239](https://github.com/heroui-inc/heroui/pull/5239) [`a61f57b`](https://github.com/heroui-inc/heroui/commit/a61f57bbf7b553f1779c600f73ac996cab2eff8d) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed missing key for ellipsisItem in breadcrumbs (#4973)
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/react-utils@2.1.9
+
 ## 2.2.13
 
 ### Patch Changes
