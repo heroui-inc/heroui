@@ -67,7 +67,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * Icon to be displayed in the toast - overrides the default icon
    */
-  icon?: ReactNode;
+  icon?: ReactNode | ((props: any) => ReactNode);
   /**
    * Icon to be displayed in the close button - overrides the default close icon
    */
@@ -75,7 +75,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * Icon to be displayed in the loading toast - overrides the loading icon
    */
-  loadingIcon?: ReactNode;
+  loadingIcon?: ReactNode | ((props: any) => ReactNode);
   /**
    * Whether the toast-icon should be hidden.
    * @default false
@@ -157,6 +157,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     timeout = 6000,
     shouldShowTimeoutProgress = false,
     icon,
+    loadingIcon,
     onClose,
     severity,
     maxVisibleToasts,
@@ -261,7 +262,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   ]);
 
   const Component = as || "div";
-  const loadingIcon: ReactNode = icon;
 
   const domRef = useDOMRef(ref);
   const baseStyles = clsx(className, classNames?.base);
