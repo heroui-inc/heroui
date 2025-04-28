@@ -192,6 +192,21 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
         "data-disabled": dataAttr(isDisabled),
         "data-slot": "content",
         className: slots.content({class: classNames?.content}),
+        onClickCapture: (e) => {
+          const target = e.target;
+
+          if (target instanceof HTMLElement) {
+            // Check if the element is focusable and not disabled
+            const isFocusable = target.tabIndex >= 0;
+            const isNotDisabled = !target.hasAttribute("disabled");
+            const hasFocusMethod = typeof target.focus === "function";
+
+            if (isFocusable && isNotDisabled && hasFocusMethod) {
+              e.stopPropagation();
+              target.focus();
+            }
+          }
+        },
         ...mergeProps(regionProps, props),
       };
     },

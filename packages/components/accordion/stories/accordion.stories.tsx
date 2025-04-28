@@ -461,6 +461,15 @@ export const WithForm = {
   },
 };
 
+export const WithFormAndOpenAccordion = {
+  render: WithFormTemplate,
+
+  args: {
+    ...defaultProps,
+    defaultSelectedKeys: ["1"],
+  },
+};
+
 export const CustomMotion = {
   render: Template,
 
