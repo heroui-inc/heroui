@@ -1,5 +1,64 @@
 # @heroui/react
 
+## 2.8.0-beta.3
+
+### Minor Changes
+
+- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+
+### Patch Changes
+
+- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
+  - @heroui/scroll-shadow@2.3.14-beta.0
+  - @heroui/autocomplete@2.3.21-beta.0
+  - @heroui/number-input@2.0.10-beta.0
+  - @heroui/breadcrumbs@2.2.16-beta.0
+  - @heroui/date-picker@2.3.20-beta.0
+  - @heroui/date-input@2.3.19-beta.0
+  - @heroui/pagination@2.2.18-beta.0
+  - @heroui/accordion@2.2.17-beta.0
+  - @heroui/calendar@2.2.20-beta.0
+  - @heroui/checkbox@2.3.19-beta.0
+  - @heroui/dropdown@2.3.20-beta.0
+  - @heroui/progress@2.2.16-beta.0
+  - @heroui/skeleton@2.2.13-beta.0
+  - @heroui/divider@2.2.14-beta.0
+  - @heroui/listbox@2.3.19-beta.0
+  - @heroui/popover@2.3.20-beta.0
+  - @heroui/snippet@2.2.21-beta.0
+  - @heroui/spinner@2.2.17-beta.0
+  - @heroui/tooltip@2.2.17-beta.0
+  - @heroui/avatar@2.2.16-beta.0
+  - @heroui/button@2.2.20-beta.0
+  - @heroui/drawer@2.2.17-beta.0
+  - @heroui/navbar@2.2.18-beta.0
+  - @heroui/ripple@2.2.15-beta.0
+  - @heroui/select@2.4.20-beta.0
+  - @heroui/slider@2.4.17-beta.0
+  - @heroui/spacer@2.2.15-beta.0
+  - @heroui/switch@2.2.18-beta.0
+  - @heroui/alert@2.2.20-beta.0
+  - @heroui/badge@2.2.13-beta.0
+  - @heroui/image@2.2.13-beta.0
+  - @heroui/input@2.4.20-beta.0
+  - @heroui/modal@2.2.17-beta.0
+  - @heroui/radio@2.3.19-beta.0
+  - @heroui/table@2.2.19-beta.0
+  - @heroui/toast@2.0.10-beta.0
+  - @heroui/card@2.2.19-beta.0
+  - @heroui/chip@2.2.16-beta.0
+  - @heroui/code@2.2.15-beta.0
+  - @heroui/form@2.1.19-beta.0
+  - @heroui/link@2.2.17-beta.0
+  - @heroui/menu@2.2.19-beta.0
+  - @heroui/tabs@2.2.17-beta.0
+  - @heroui/user@2.2.16-beta.0
+  - @heroui/kbd@2.2.16-beta.0
+  - @heroui/theme@2.4.16-beta.0
+  - @heroui/input-otp@2.1.19-beta.0
+  - @heroui/system@2.4.16-beta.0
+  - @heroui/framer-utils@2.1.16-beta.0
+
 ## 2.8.0-beta.2
 
 ### Patch Changes
@@ -58,8 +117,6 @@
   - @heroui/theme@2.4.14-beta.2
 
 ## 2.8.0-beta.1
-
-
 
 ### Patch Changes
 
@@ -174,7 +231,7 @@
   - @heroui/theme@2.4.14-beta.0
   - @heroui/framer-utils@2.1.14-beta.0
   - @heroui/system@2.4.14-beta.0
-  
+
 ## 2.7.8
 
 ### Patch Changes

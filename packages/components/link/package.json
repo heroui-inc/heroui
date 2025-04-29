@@ -1,6 +1,6 @@
 {
   "name": "@heroui/link",
-  "version": "2.2.16",
+  "version": "2.2.17-beta.0",
   "description": "Links allow users to click their way from page to page. This component is styled to resemble a hyperlink and semantically renders an &lt;a&gt;",
   "keywords": [
     "link"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.14-beta.0",
-    "@heroui/system": ">=2.4.14-beta.0"
+    "@heroui/theme": ">=2.4.16-beta.0",
+    "@heroui/system": ">=2.4.16-beta.0"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",

@@ -90,5 +90,7 @@
     "@heroui/stories-utils": "2.1.7",
     "@heroui/test-utils": "2.1.7"
   },
-  "changesets": []
+  "changesets": [
+    "sour-starfishes-confess"
+  ]
 }
