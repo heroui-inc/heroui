@@ -1,16 +1,18 @@
 # @heroui/use-draggable
 
-## 2.1.10-beta.1
+## 2.1.11
 
 ### Patch Changes
 
-- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
 
-## 2.1.10-beta.0
+  v2.7.7
+
+## 2.1.10
 
 ### Patch Changes
 
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
 
 ## 2.1.9
 

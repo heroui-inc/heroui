@@ -1,53 +1,39 @@
 # @heroui/accordion
 
-## 2.2.15-beta.2
+## 2.2.16
 
 ### Patch Changes
 
-- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
 
-- Updated dependencies [[`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0)]:
-  - @heroui/use-aria-accordion@2.2.10-beta.1
-  - @heroui/dom-animation@2.1.8-beta.2
-  - @heroui/framer-utils@2.1.14-beta.2
-  - @heroui/shared-icons@2.1.8-beta.2
-  - @heroui/shared-utils@2.1.9-beta.2
-  - @heroui/react-utils@2.1.10-beta.2
-  - @heroui/aria-utils@2.2.15-beta.2
-  - @heroui/divider@2.2.13-beta.2
+  v2.7.7
 
-## 2.2.15-beta.1
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/divider@2.2.13
+  - @heroui/use-aria-accordion@2.2.11
+  - @heroui/aria-utils@2.2.16
+  - @heroui/dom-animation@2.1.8
+  - @heroui/framer-utils@2.1.15
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
 
-### Patch Changes
-
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
-
-- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
-  - @heroui/use-aria-accordion@2.2.10-beta.0
-  - @heroui/dom-animation@2.1.8-beta.1
-  - @heroui/framer-utils@2.1.14-beta.1
-  - @heroui/shared-icons@2.1.8-beta.1
-  - @heroui/shared-utils@2.1.9-beta.1
-  - @heroui/react-utils@2.1.10-beta.1
-  - @heroui/aria-utils@2.2.15-beta.1
-  - @heroui/divider@2.2.13-beta.1
-
-## 2.2.15-beta.0
+## 2.2.15
 
 ### Patch Changes
 
-- [#5166](https://github.com/heroui-inc/heroui/pull/5166) [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
 
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/dom-animation@2.1.8-beta.0
-  - @heroui/shared-icons@2.1.8-beta.0
-  - @heroui/shared-utils@2.1.9-beta.0
-  - @heroui/react-utils@2.1.10-beta.0
-  - @heroui/divider@2.2.13-beta.0
-  - @heroui/theme@2.4.14-beta.0
-  - @heroui/aria-utils@2.2.15-beta.0
-  - @heroui/framer-utils@2.1.14-beta.0
-  - @heroui/system@2.4.14-beta.0
+- [#5172](https://github.com/heroui-inc/heroui/pull/5172) [`531518f`](https://github.com/heroui-inc/heroui/commit/531518f2ef0d146f5ab499c10057deac29e094b6) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed keepContentMounted with disableAnimation (#5157)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/use-aria-accordion@2.2.10
+  - @heroui/dom-animation@2.1.7
+  - @heroui/shared-utils@2.1.8
+  - @heroui/aria-utils@2.2.15
+  - @heroui/divider@2.2.12
+  - @heroui/framer-utils@2.1.14
+  - @heroui/react-utils@2.1.9
 
 ## 2.2.14
 

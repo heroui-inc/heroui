@@ -1,32 +1,26 @@
 # @heroui/system
 
-## 2.4.14-beta.2
+## 2.4.15
 
 ### Patch Changes
 
-- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
 
-- Updated dependencies [[`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0)]:
-  - @heroui/react-utils@2.1.10-beta.2
-  - @heroui/system-rsc@2.3.13-beta.2
+  v2.7.7
 
-## 2.4.14-beta.1
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/system-rsc@2.3.13
+  - @heroui/react-utils@2.1.10
 
-### Patch Changes
-
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
-
-- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
-  - @heroui/react-utils@2.1.10-beta.1
-  - @heroui/system-rsc@2.3.13-beta.1
-
-## 2.4.14-beta.0
+## 2.4.14
 
 ### Patch Changes
 
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/react-utils@2.1.10-beta.0
-  - @heroui/system-rsc@2.3.13-beta.0
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/system-rsc@2.3.12
+  - @heroui/react-utils@2.1.9
 
 ## 2.4.13
 

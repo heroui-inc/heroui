@@ -1,39 +1,27 @@
 # @heroui/progress
 
-## 2.2.14-beta.2
+## 2.2.15
 
 ### Patch Changes
 
-- [`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0) Thanks [@winchesHe](https://github.com/winchesHe)! - Pre release with some improvements and bugfixes
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
 
-- Updated dependencies [[`4024c75`](https://github.com/heroui-inc/heroui/commit/4024c75d96409dc4959f7485bf61411d5e0096b0)]:
-  - @heroui/shared-utils@2.1.9-beta.2
-  - @heroui/react-utils@2.1.10-beta.2
-  - @heroui/use-is-mounted@2.1.8-beta.2
+  v2.7.7
 
-## 2.2.14-beta.1
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/use-is-mounted@2.1.7
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-utils@2.1.9
 
-### Patch Changes
-
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
-
-- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
-  - @heroui/shared-utils@2.1.9-beta.1
-  - @heroui/react-utils@2.1.10-beta.1
-  - @heroui/use-is-mounted@2.1.8-beta.1
-
-## 2.2.14-beta.0
+## 2.2.14
 
 ### Patch Changes
 
-- [#5166](https://github.com/heroui-inc/heroui/pull/5166) [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
 
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/shared-utils@2.1.9-beta.0
-  - @heroui/react-utils@2.1.10-beta.0
-  - @heroui/use-is-mounted@2.1.8-beta.0
-  - @heroui/theme@2.4.14-beta.0
-  - @heroui/system@2.4.14-beta.0
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/react-utils@2.1.9
 
 ## 2.2.13
 
