@@ -61,7 +61,7 @@ const input = tv({
       "outline-none",
       "select-none",
       "opacity-0",
-      "hover:!opacity-100",
+      "md:hover:!opacity-100",
       "cursor-pointer",
       "active:!opacity-70",
       "rounded-full",
