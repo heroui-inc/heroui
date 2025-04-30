@@ -7,7 +7,7 @@ import {dataAttr} from "@heroui/shared-utils";
 
 export interface DateInputGroupProps extends ValidationResult, HelpTextProps {
   children?: ReactElement | ReactElement[];
-  shouldLabelBeOutside?: boolean;
+  shouldLabelBeOutside?: false | "outside" | "outside-left";
   label?: ReactNode;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
@@ -80,16 +80,31 @@ export const DateInputGroup = forwardRef<"div", DateInputGroupProps>((props, ref
   return (
     <Component {...otherProps} ref={ref} data-has-helper={dataAttr(hasHelper)}>
       {shouldLabelBeOutside ? labelContent : null}
-      <div {...groupProps}>
-        {!shouldLabelBeOutside ? labelContent : null}
-        <div {...wrapperProps}>
-          {startContent}
-          {children}
-          {endContent}
+      {shouldLabelBeOutside === "outside-left" ? (
+        <div>
+          <div {...groupProps}>
+            {!shouldLabelBeOutside ? labelContent : null}
+            <div {...wrapperProps}>
+              {startContent}
+              {children}
+              {endContent}
+            </div>
+          </div>
+          {helperWrapper}
         </div>
-        {shouldLabelBeOutside ? helperWrapper : null}
-      </div>
-      {!shouldLabelBeOutside ? helperWrapper : null}
+      ) : (
+        <>
+          <div {...groupProps}>
+            {!shouldLabelBeOutside ? labelContent : null}
+            <div {...wrapperProps}>
+              {startContent}
+              {children}
+              {endContent}
+            </div>
+          </div>
+          {helperWrapper}
+        </>
+      )}
     </Component>
   );
 });
