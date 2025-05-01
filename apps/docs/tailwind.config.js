@@ -68,8 +68,8 @@ module.exports = {
       spacing: {
         'toast-gap': 'var(--toast-gap)',
       },
-      typography: (theme) => ({
-        DEFAULT: {
+      typography: () => ({
+        light: {
           css: {
             color: "hsl(var(--heroui-foreground))",
             maxWidth: "none",
