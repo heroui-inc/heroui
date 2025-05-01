@@ -61,7 +61,6 @@ const input = tv({
       "outline-none",
       "select-none",
       "opacity-0",
-      "md:hover:!opacity-100",
       "cursor-pointer",
       "active:!opacity-70",
       "rounded-full",
@@ -143,13 +142,13 @@ const input = tv({
       md: {
         inputWrapper: "h-10 min-h-10 rounded-medium",
         input: "text-small",
-        clearButton: "text-large",
+        clearButton: "text-large hover:!opacity-100",
       },
       lg: {
         label: "text-medium",
         inputWrapper: "h-12 min-h-12 rounded-large",
         input: "text-medium",
-        clearButton: "text-large",
+        clearButton: "text-large hover:!opacity-100",
       },
     },
     radius: {
