@@ -1,4 +1,5 @@
 import type {SlotsToClasses, ToastSlots, ToastVariantProps} from "@heroui/theme";
+import type {DOMAttributes} from "react";
 
 import {HTMLHeroUIProps, PropGetter, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {toast as toastTheme} from "@heroui/theme";
@@ -67,15 +68,15 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * Icon to be displayed in the toast - overrides the default icon
    */
-  icon?: ReactNode | ((props: any) => ReactNode);
+  icon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Icon to be displayed in the close button - overrides the default close icon
    */
-  closeIcon?: ReactNode | ((props: any) => ReactNode);
+  closeIcon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Icon to be displayed in the loading toast - overrides the loading icon
    */
-  loadingIcon?: ReactNode | ((props: any) => ReactNode);
+  loadingIcon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Whether the toast-icon should be hidden.
    * @default false
