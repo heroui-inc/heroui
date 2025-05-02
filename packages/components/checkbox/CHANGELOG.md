@@ -1,5 +1,16 @@
 # @heroui/checkbox
 
+## 2.3.19-beta.0
+
+### Patch Changes
+
+- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+
+- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
+  - @heroui/form@2.1.19-beta.0
+  - @heroui/theme@2.4.16-beta.0
+  - @heroui/system@2.4.16-beta.0
+
 ## 2.3.18
 
 ### Patch Changes

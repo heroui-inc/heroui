@@ -1,5 +1,14 @@
 # @heroui/input-otp
 
+## 2.1.19-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
+  - @heroui/form@2.1.19-beta.0
+  - @heroui/theme@2.4.16-beta.0
+  - @heroui/system@2.4.16-beta.0
+
 ## 2.1.18
 
 ### Patch Changes
