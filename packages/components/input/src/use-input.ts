@@ -1,13 +1,7 @@
 import type {InputVariantProps, SlotsToClasses, InputSlots} from "@heroui/theme";
 import type {AriaTextFieldOptions} from "@react-aria/textfield";
 
-import {
-  HTMLHeroUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useLabelPlacement,
-  useProviderContext,
-} from "@heroui/system";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {AriaTextFieldProps} from "@react-types/textfield";
 import {useFocusRing} from "@react-aria/focus";
@@ -233,10 +227,14 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
 
   const isInvalid = validationState === "invalid" || isAriaInvalid;
 
-  const labelPlacement = useLabelPlacement({
-    labelPlacement: originalProps.labelPlacement,
-    label,
-  });
+  // TODO: not using useLabelPlacement because `outside-top` doesn't support in other components.
+  const labelPlacement = useMemo<InputVariantProps["labelPlacement"]>(() => {
+    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
+      return "outside";
+    }
+
+    return originalProps.labelPlacement ?? "inside";
+  }, [originalProps.labelPlacement, label]);
 
   const errorMessage =
     typeof props.errorMessage === "function"
@@ -247,17 +245,26 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
   const hasHelper = !!description || !!errorMessage;
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const isOutsideLeft = labelPlacement === "outside-left";
+  const isOutsideTop = labelPlacement === "outside-top";
+
+  const shouldLabelBeOutside =
+    // label is outside only when some placeholder is there
+    labelPlacement === "outside" ||
+    // label is outside regardless of placeholder
+    isOutsideLeft ||
+    isOutsideTop;
+
   const shouldLabelBeInside = labelPlacement === "inside";
   const isPlaceholderShown = domRef.current
     ? (!domRef.current.value || domRef.current.value === "" || !inputValue || inputValue === "") &&
       hasPlaceholder
     : false;
-  const isOutsideLeft = labelPlacement === "outside-left";
 
   const hasStartContent = !!startContent;
   const isLabelOutside = shouldLabelBeOutside
-    ? labelPlacement === "outside-left" ||
+    ? isOutsideLeft ||
+      isOutsideTop ||
       hasPlaceholder ||
       (labelPlacement === "outside" && hasStartContent)
     : false;
@@ -554,6 +561,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
     hasStartContent,
     isLabelOutside,
     isOutsideLeft,
+    isOutsideTop,
     isLabelOutsideAsPlaceholder,
     shouldLabelBeOutside,
     shouldLabelBeInside,
