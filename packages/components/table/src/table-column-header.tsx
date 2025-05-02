@@ -15,6 +15,13 @@ import {useHover} from "@react-aria/interactions";
 import {ValuesType} from "./use-table";
 
 // @internal
+export type SortIconProps = {
+  "aria-hidden"?: boolean;
+  "data-direction"?: "ascending" | "descending";
+  "data-visible"?: boolean | "true" | "false";
+  className?: string;
+};
+
 export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"> {
   slots: ValuesType["slots"];
   state: ValuesType["state"];
@@ -22,7 +29,7 @@ export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"
   /**
    * Custom Icon to be displayed in the table header - overrides the default chevron one
    */
-  sortIcon?: ReactNode | ((props: any) => ReactNode);
+  sortIcon?: ReactNode | ((props: SortIconProps) => ReactNode);
   /**
    * The table node to render.
    */
