@@ -1,5 +1,14 @@
 # @heroui/input
 
+## 2.4.20-beta.1
+
+### Patch Changes
+
+- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
+
+- Updated dependencies [[`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300)]:
+  - @heroui/form@2.1.19-beta.1
+
 ## 2.4.20-beta.0
 
 ### Patch Changes

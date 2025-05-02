@@ -1,5 +1,11 @@
 # @heroui/pagination
 
+## 2.2.18-beta.1
+
+### Patch Changes
+
+- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
+
 ## 2.2.18-beta.0
 
 ### Patch Changes

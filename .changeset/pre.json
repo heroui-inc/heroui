@@ -91,6 +91,7 @@
     "@heroui/test-utils": "2.1.7"
   },
   "changesets": [
+    "slimy-lobsters-peel",
     "strange-coats-carry"
   ]
 }
