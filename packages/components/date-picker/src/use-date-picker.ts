@@ -16,7 +16,6 @@ import {AriaDatePickerProps, useDatePicker as useAriaDatePicker} from "@react-ar
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
 import {useDatePickerBase} from "./use-date-picker-base";
 
@@ -193,9 +192,6 @@ export function useDatePicker<T extends DateValue>({
           ),
         }),
       },
-      shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-        ? popoverProps.shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, popoverTriggerRef, state),
     };
   };
 
