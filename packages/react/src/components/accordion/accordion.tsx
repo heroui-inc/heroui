@@ -1,5 +1,6 @@
 "use client";
 
+import type {AccordionVariants} from "./accordion.styles";
 import type {Ref} from "react";
 import type {
   ButtonProps,
@@ -9,33 +10,43 @@ import type {
 } from "react-aria-components";
 
 import React from "react";
-import {Button, Disclosure, DisclosureGroup, DisclosurePanel, Heading} from "react-aria-components";
+import {
+  Button,
+  Disclosure,
+  DisclosureGroup,
+  Heading as DisclosureHeading,
+  DisclosurePanel,
+} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 
 import {slots} from "./accordion.styles";
 
-interface AccordionProps extends DisclosureGroupProps {
+/* -------------------------------------------------------------------------------------------------
+ * Accordion
+ * -----------------------------------------------------------------------------------------------*/
+
+interface AccordionProps extends DisclosureGroupProps, AccordionVariants {
   ref?: Ref<HTMLDivElement>;
 }
 
-const Accordion = ({children, className, ref, ...props}: AccordionProps) => {
+const Accordion = ({children, className, ref, variant, ...props}: AccordionProps) => {
   return (
     <DisclosureGroup
       ref={ref}
       data-slot="accordion"
       {...props}
-      className={composeTwRenderProps(className, slots.base())}
+      className={composeTwRenderProps(className, slots.base({variant}))}
     >
-      {(values) => (
-        <div data-slot="accordion-content">
-          {typeof children === "function" ? children(values) : children}
-        </div>
-      )}
+      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
     </DisclosureGroup>
   );
 };
+
+Accordion.displayName = "HeroUI.Accordion";
+
+/* -----------------------------------------------------------------------------------------------*/
 
 interface AccordionItemProps extends DisclosureProps {
   ref?: React.Ref<HTMLDivElement>;
@@ -54,47 +65,88 @@ const AccordionItem = ({className, ref, ...props}: AccordionItemProps) => {
   );
 };
 
-interface AccordionTriggerProps extends ButtonProps {
-  ref?: React.Ref<HTMLButtonElement>;
-  icon?: React.ReactNode;
+/* -----------------------------------------------------------------------------------------------*/
+
+interface AccordionIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
+  className?: string;
 }
 
-const AccordionTrigger = ({className, icon, ref, ...props}: AccordionTriggerProps) => {
+const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorProps) => {
+  if (children && React.isValidElement(children)) {
+    return React.cloneElement(
+      children as React.ReactElement<{className?: string; "data-slot"?: string}>,
+      {
+        ...props,
+        className: slots.indicator({className}),
+        "data-slot": "accordion-indicator",
+      },
+    );
+  }
+
   return (
-    <Heading className={slots.heading()} data-slot="accordion-trigger-heading">
-      <Button
-        ref={ref}
-        className={composeTwRenderProps(className, slots.trigger())}
-        data-slot="accordion-trigger"
-        slot="trigger"
-        {...props}
-      >
-        {(values) => (
-          <>
-            {typeof props.children === "function" ? props.children(values) : props.children}
-            {icon && React.isValidElement(icon) ? (
-              React.cloneElement(
-                icon as React.ReactElement<{className?: string; "data-slot"?: string}>,
-                {
-                  className: slots.chevron(),
-                  "data-slot": "accordion-chevron",
-                },
-              )
-            ) : (
-              <IconChevronDown className={slots.chevron()} data-slot="accordion-chevron" />
-            )}
-          </>
-        )}
-      </Button>
-    </Heading>
+    <IconChevronDown
+      className={slots.indicator({className})}
+      data-slot="accordion-indicator"
+      {...props}
+    />
   );
 };
 
-interface AccordionContentProps extends DisclosurePanelProps {
+/* -----------------------------------------------------------------------------------------------*/
+
+interface AccordionHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  className?: string;
+}
+
+const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
+  return (
+    <DisclosureHeading
+      className={slots.heading({className})}
+      data-slot="accordion-heading"
+      {...props}
+    />
+  );
+};
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface AccordionTriggerProps extends ButtonProps {
+  ref?: React.Ref<HTMLButtonElement>;
+}
+
+const AccordionTrigger = ({className, ref, ...props}: AccordionTriggerProps) => {
+  return (
+    <Button
+      ref={ref}
+      className={composeTwRenderProps(className, slots.trigger())}
+      data-slot="accordion-trigger"
+      slot="trigger"
+      {...props}
+    >
+      {(values) => (
+        <>{typeof props.children === "function" ? props.children(values) : props.children}</>
+      )}
+    </Button>
+  );
+};
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+const AccordionBody = ({className, ...props}: AccordionBodyProps) => {
+  return <div className={slots.body({className})} data-slot="accordion-body" {...props} />;
+};
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface AccordionPanelProps extends DisclosurePanelProps {
   ref?: React.Ref<HTMLDivElement>;
 }
 
-const AccordionContent = ({className, ref, ...props}: AccordionContentProps) => {
+const AccordionPanel = ({children, className, ref, ...props}: AccordionPanelProps) => {
   return (
     <DisclosurePanel
       ref={ref}
@@ -102,18 +154,28 @@ const AccordionContent = ({className, ref, ...props}: AccordionContentProps) => 
       data-slot="accordion-content"
       {...props}
     >
-      <div className={slots.innerContent()} data-slot="accordion-content-inner">
-        {props.children}
-      </div>
+      {children}
     </DisclosurePanel>
   );
 };
 
+/* -----------------------------------------------------------------------------------------------*/
+
 const Root = Accordion;
 const Item = AccordionItem;
-const Header = Heading;
+const Heading = AccordionHeading;
 const Trigger = AccordionTrigger;
-const Content = AccordionContent;
+const Panel = AccordionPanel;
+const Indicator = AccordionIndicator;
+const Body = AccordionBody;
 
-export {Root, Item, Header, Trigger, Content};
-export type {AccordionProps, AccordionItemProps, AccordionTriggerProps, AccordionContentProps};
+export {Root, Item, Heading, Trigger, Panel, Indicator, Body};
+
+export type {
+  AccordionProps,
+  AccordionItemProps,
+  AccordionTriggerProps,
+  AccordionPanelProps,
+  AccordionIndicatorProps,
+  AccordionBodyProps,
+};

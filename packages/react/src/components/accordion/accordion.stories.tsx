@@ -1,63 +1,105 @@
 import type {AccordionProps} from "./accordion";
 import type {Meta} from "@storybook/react";
 
+import {Icon} from "@iconify/react";
+
 import {Accordion} from "./index";
 
 export default {
   argTypes: {
-    variant: {},
+    allowsMultipleExpanded: {
+      control: {
+        type: "boolean",
+      },
+    },
+    isDisabled: {
+      control: {
+        type: "boolean",
+      },
+    },
+    variant: {
+      control: {
+        type: "select",
+      },
+      options: ["default", "outline"],
+    },
   },
   component: Accordion.Root,
   title: "Components/Accordion",
 } as Meta<typeof Accordion>;
 
-const Template = (_props: AccordionProps) => (
-  <Accordion.Root>
-    <Accordion.Item>
-      <Accordion.Trigger>How do I place an order?</Accordion.Trigger>
-      <Accordion.Content>
-        Browse our products, add items to your cart, and proceed to checkout. You&apos;ll need to
-        provide shipping and payment information to complete your purchase.
-      </Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Trigger>Can I modify or cancel my order?</Accordion.Trigger>
-      <Accordion.Content>
-        Yes, you can modify or cancel your order before it&apos;s shipped. Once your order is
-        processed, you can&apos;t make changes.
-      </Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Trigger>What payment methods do you accept?</Accordion.Trigger>
-      <Accordion.Content>
-        We accept all major credit cards, including Visa, Mastercard, and American Express.
-      </Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Trigger>How much does shipping cost?</Accordion.Trigger>
-      <Accordion.Content>
-        Shipping costs vary based on your location and the size of your order. We offer free
-        shipping for orders over $50.
-      </Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Trigger>Do you ship internationally?</Accordion.Trigger>
-      <Accordion.Content>
-        Yes, we ship to most countries. Please check our shipping rates and policies for more
-        information.
-      </Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Trigger>How do I request a refund?</Accordion.Trigger>
-      <Accordion.Content>
-        If you&apos;re not satisfied with your purchase, you can request a refund within 30 days of
-        purchase. Please contact our customer support team for assistance.
-      </Accordion.Content>
-    </Accordion.Item>
-  </Accordion.Root>
+const defaultArgs: AccordionProps = {
+  allowsMultipleExpanded: false,
+  isDisabled: false,
+  variant: "default",
+};
+
+const Wrapper = ({children}: {children: React.ReactNode}) => (
+  <div className="w-full max-w-md">{children}</div>
+);
+
+const items = [
+  {
+    content:
+      "Browse our products, add items to your cart, and proceed to checkout. You'll need to provide shipping and payment information to complete your purchase.",
+    icon: "gravity-ui:shopping-bag",
+    title: "How do I place an order?",
+  },
+  {
+    content:
+      "Yes, you can modify or cancel your order before it's shipped. Once your order is processed, you can't make changes.",
+    icon: "gravity-ui:receipt",
+    title: "Can I modify or cancel my order?",
+  },
+  {
+    content: "We accept all major credit cards, including Visa, Mastercard, and American Express.",
+    icon: "gravity-ui:credit-card",
+    title: "What payment methods do you accept?",
+  },
+  {
+    content:
+      "Shipping costs vary based on your location and the size of your order. We offer free shipping for orders over $50.",
+    icon: "gravity-ui:box",
+    title: "How much does shipping cost?",
+  },
+  {
+    content:
+      "Yes, we ship to most countries. Please check our shipping rates and policies for more information.",
+    icon: "gravity-ui:planet-earth",
+    title: "Do you ship internationally?",
+  },
+  {
+    content:
+      "If you're not satisfied with your purchase, you can request a refund within 30 days of purchase. Please contact our customer support team for assistance.",
+    icon: "gravity-ui:arrows-rotate-left",
+    title: "How do I request a refund?",
+  },
+];
+
+const Template = (props: AccordionProps) => (
+  <Wrapper>
+    <Accordion.Root {...props}>
+      {items.map((item, index) => (
+        <Accordion.Item key={index}>
+          <Accordion.Heading>
+            <Accordion.Trigger>
+              {item.icon ? <Icon className="text-muted mr-3 size-4" icon={item.icon} /> : null}
+              {item.title}
+              <Accordion.Indicator />
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>{item.content}</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
+      ))}
+    </Accordion.Root>
+  </Wrapper>
 );
 
 export const Default = {
-  args: {},
+  args: {
+    ...defaultArgs,
+  },
   render: Template,
 };

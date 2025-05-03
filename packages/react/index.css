@@ -24,10 +24,11 @@
 
     /* Misc colors */
     --border: oklch(0 0 0 / 10%);
-    --focus: oklch(0% 0 0 / 50%);
+    --focus: oklch(0% 0 0 / 20%);
 
     /* Layout */
     --border-width: 1px;
+    --disabled-opacity: 0.5;
 
     --radius: 0.875rem; /* 12px */
     --radius-xs: calc(var(--radius) * 0.5);
