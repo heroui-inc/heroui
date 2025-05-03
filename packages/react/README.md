@@ -32,6 +32,65 @@ Visit [https://heroui.com/docs](https://heroui.com/docs) to view the full docume
 
 Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the storybook for all components.
 
+## Components Status
+
+### Batch 1
+
+- [ ] button (in progress)
+- [ ] link (in progress)
+- [ ] text-field
+- [ ] text-area
+- [ ] menu/dropdown
+- [ ] select
+- [ ] checkbox
+  - [ ] checkbox-group
+- [ ] radio
+  - [ ] radio-group
+- [ ] switch
+  - [ ] switch-group
+- [ ] chip
+- [ ] slider
+- [ ] kbd
+- [ ] separator
+
+### Batch 2
+
+- [ ] avatar
+- [ ] tooltip
+- [ ] loading
+- [ ] input otp
+- [ ] calendar
+- [ ] date picker
+- [ ] alert
+- [ ] toast
+- [ ] card
+- [ ] gradient-blur
+- [ ] overlay
+- [ ] modal / dialog
+- [ ] tabs
+- [x] accordion
+- [ ] carousel
+- [ ] scroll shadow
+- [ ] scroll blur
+- [ ] avatar group
+- [ ] listbox
+
+### Batch 3 (to do)
+
+- [ ] breadcrumb
+- [ ] command
+- [ ] drawer
+- [ ] pagination
+- [ ] progress
+- [ ] scroll
+- [ ] table
+- [ ] chart
+- [ ] sheet (side)
+- [ ] navbar
+- [ ] sidebar
+- [ ] app shell
+- [ ] file uploader
+
 ## Canary Release
 
 Canary versions are available after every merge into `canary` branch. You can install the packages with the tag `canary` in npm to use the latest changes before the next production release.

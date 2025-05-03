@@ -3,7 +3,7 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {focusRing} from "../../utils/compose";
+import {focusRingClasses} from "../../utils/compose";
 
 export const accordionVariants = tv({
   slots: {
@@ -15,7 +15,7 @@ export const accordionVariants = tv({
     panel: "",
     trigger: [
       /* Focus State */
-      focusRing,
+      focusRingClasses,
       /* Base Styles */
       "hover:bg-base-subtle duration-50 flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color]",
       /* Expanded State */

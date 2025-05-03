@@ -14,7 +14,8 @@
 @layer base {
   :root {
     /* Base Colors */
-    --background: oklch(100% 0 0);
+    /* --background: oklch(100% 0 0); */
+    --background: oklch(0.95 0 0);
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
 
@@ -34,6 +35,7 @@
     /* Misc colors */
     --border: oklch(0 0 0 / 10%);
     --focus: oklch(0% 0 0 / 20%);
+    --link: var(--foreground);
 
     /* Layout */
     --border-width: 1px;
@@ -141,6 +143,7 @@
 
   --color-border: var(--border);
   --color-focus: var(--focus);
+  --color-link: var(--link);
 
   --color-base-subtle: var(--base-subtle);
 }

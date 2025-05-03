@@ -10,7 +10,13 @@ function composeTwRenderProps<T>(
   return composeRenderProps(className, (className) => twMerge(tailwind, className));
 }
 
-const focusRing =
-  "focus-visible:ring-focus focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+const focusRingClasses =
+  "focus-visible:ring-focus focus-visible:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 
-export {composeTwRenderProps, focusRing};
+const disabledClasses =
+  "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-[var(--disabled-opacity)]";
+
+const ariaDisabledClasses =
+  "aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-[var(--disabled-opacity)]";
+
+export {composeTwRenderProps, focusRingClasses, disabledClasses, ariaDisabledClasses};
