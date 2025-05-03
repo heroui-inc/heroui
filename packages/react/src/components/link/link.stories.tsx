@@ -18,7 +18,7 @@ export default {
 } as Meta<typeof Link>;
 
 const Template = (_props: LinkProps) => (
-  <div className="flex gap-4">
+  <div className="flex items-center gap-4">
     <Link href="#">
       Call to action <LinkIcon className="text-muted absolute -right-2 top-1" />
     </Link>
