@@ -9,16 +9,26 @@ export default {
   argTypes: {
     color: {
       control: "select",
-      options: ["default", "success", "warning", "danger"],
+      options: ["default", "success", "warning", "danger", "accent"],
+    },
+    variant: {
+      control: "select",
+      options: ["primary", "secondary", "tertiary"],
     },
   },
   component: Chip,
   title: "Components/Chip",
 } as Meta<typeof Chip>;
 
+const defaultArgs: ChipProps = {
+  children: "Label",
+  color: "accent",
+  variant: "secondary",
+};
+
 const Template = (_props: ChipProps) => (
   <div className="flex items-center gap-3">
-    <Chip>Label</Chip>
+    <Chip {...defaultArgs}>Label</Chip>
   </div>
 );
 
@@ -52,17 +62,39 @@ const StatusesTemplate = (_props: ChipProps) => (
   </div>
 );
 
+const VariantsTemplate = (props: ChipProps) => (
+  <div className="flex items-center gap-3">
+    <Chip {...props} color="accent">
+      Accent
+    </Chip>
+    <Chip {...props} color="success">
+      Success
+    </Chip>
+    <Chip {...props} color="warning">
+      Warning
+    </Chip>
+    <Chip {...props} color="danger">
+      Danger
+    </Chip>
+  </div>
+);
+
 export const Default = {
-  args: {},
+  args: defaultArgs,
   render: Template,
 };
 
 export const WithIcon = {
-  args: {},
+  args: defaultArgs,
   render: WithIconTemplate,
 };
 
 export const Statuses = {
-  args: {},
+  args: defaultArgs,
   render: StatusesTemplate,
+};
+
+export const Variants = {
+  args: defaultArgs,
+  render: VariantsTemplate,
 };

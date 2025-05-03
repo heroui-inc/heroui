@@ -37,10 +37,10 @@
     --success: oklch(0.55 0.1241 153.51);
     --success-foreground: oklch(99.11% 0 0);
 
-    --warning: oklch(0.56 0.1166 74.99);
+    --warning: oklch(0.67 0.1428 72.73);
     --warning-foreground: oklch(99.11% 0 0);
 
-    --danger: oklch(0.5 0.185 30.1);
+    --danger: oklch(0.59 0.2228 29.94);
     --danger-foreground: oklch(99.11% 0 0);
 
     /* Misc colors */
@@ -98,7 +98,7 @@
     --danger-foreground: oklch(0.1 0.02 0);
 
     /* Misc colors */
-    --border: oklch(1 0 0 / 10%);
+    --border: oklch(1 0 0 / 16%);
     --focus: oklch(100% 0 0 / 50%);
   }
 }
@@ -154,6 +154,9 @@
   --color-panel: var(--panel);
 
   --color-muted: var(--muted);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);

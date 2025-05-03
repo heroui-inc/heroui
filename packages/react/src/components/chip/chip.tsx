@@ -9,9 +9,9 @@ interface ChipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color">,
   children: React.ReactNode;
 }
 
-const Chip = ({children, className, color, ...props}: ChipProps) => {
+const Chip = ({children, className, color, variant, ...props}: ChipProps) => {
   return (
-    <span {...props} className={chipVariants({className, color})}>
+    <span {...props} className={chipVariants({className, color, variant})}>
       {children}
     </span>
   );
