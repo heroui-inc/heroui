@@ -8,6 +8,7 @@
     "build:analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "typecheck": "contentlayer2 build && tsc --noEmit",
     "preinstall": "node preinstall.js",
     "build:sponsors": "tsx scripts/build-sponsors.ts",
