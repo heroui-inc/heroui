@@ -7,7 +7,7 @@ import {focusRingClasses} from "../../utils/compose";
 
 export const accordionVariants = tv({
   slots: {
-    base: "bg-panel w-full",
+    base: "w-full",
     body: "text-muted px-4 pb-4 pt-0",
     heading: "flex",
     indicator: "text-muted ml-auto size-4 shrink-0 transition duration-300",
@@ -17,7 +17,7 @@ export const accordionVariants = tv({
       /* Focus State */
       focusRingClasses,
       /* Base Styles */
-      "hover:bg-base-subtle duration-50 flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color]",
+      "hover:bg-base duration-50 flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color]",
       /* Expanded State */
       "[&[aria-expanded=true]_[data-accordion-indicator]]:-rotate-180",
       /* Disabled State */
@@ -28,7 +28,7 @@ export const accordionVariants = tv({
     variant: {
       default: {},
       outline: {
-        base: "shadow-sm/5 rounded-lg border",
+        base: "bg-panel shadow-sm/5 rounded-lg border",
         item: "first:[&_[data-accordion-trigger]]:rounded-t-lg last:[&_[data-accordion-trigger]]:rounded-b-lg",
       },
     },

@@ -54,9 +54,7 @@ export const buttonVariants = tv({
     },
     variant: {
       bordered: ["border-stroke hover:bg-primary-flat/50 active:bg-primary-flat/75"],
-      danger: [
-        "bg-danger-background text-danger-foreground hover:bg-danger-background/90 active:bg-danger-background/85",
-      ],
+      danger: ["bg-danger text-danger-foreground hover:bg-danger/90 active:bg-danger/85"],
       flat: [
         "bg-primary-flat text-primary-flat-foreground hover:bg-primary-flat/80 active:bg-primary-flat/75",
       ],
