@@ -17,5 +17,7 @@ const Chip = ({children, className, color, ...props}: ChipProps) => {
   );
 };
 
-export {Chip};
+Chip.displayName = "HeroUI.Chip";
+
 export type {ChipProps};
+export {Chip};

@@ -7,11 +7,11 @@ import {Button as ButtonPrimitive, composeRenderProps} from "react-aria-componen
 
 import {buttonVariants} from "./button.styles";
 
-export interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
+interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
   ref?: Ref<HTMLButtonElement>;
 }
 
-export const Button = ({children, className, ref, variant, ...rest}: ButtonProps) => {
+const Button = ({children, className, ref, variant, ...rest}: ButtonProps) => {
   const _className = useMemo(() => {
     return composeRenderProps(className, (className, renderProps) => {
       return buttonVariants({...renderProps, className, variant});
@@ -26,3 +26,6 @@ export const Button = ({children, className, ref, variant, ...rest}: ButtonProps
 };
 
 Button.displayName = "HeroUI.Button";
+
+export type {ButtonProps};
+export {Button};

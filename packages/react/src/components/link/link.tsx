@@ -23,5 +23,7 @@ const Link = ({className, ref, ...props}: LinkProps) => {
   );
 };
 
+Link.displayName = "HeroUI.Link";
+
 export type {LinkProps};
 export {Link};
