@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "../../react/index.css";
 
-@source "../../react/src/components";
+@source "../../react/src";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

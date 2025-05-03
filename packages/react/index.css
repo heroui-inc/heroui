@@ -11,6 +11,7 @@
     --foreground: oklch(14.48% 0 0);
 
     --muted: var(--color-neutral-500); /* from tailwind */
+    --scrollbar: var(--color-neutral-200);
 
     --primary: oklch(17.3% 0 0);
     --primary-foreground: oklch(93.7% 0 0);
@@ -38,6 +39,10 @@
     --radius-2xl: calc(var(--radius) * 1.5);
     --radius-3xl: calc(var(--radius) * 2);
     --radius-4xl: calc(var(--radius) * 3);
+
+    /* Font sizes */
+    --mobile-font-size: 16px;
+    --desktop-font-size: 14px;
   }
 
   .dark,
@@ -47,6 +52,7 @@
     --foreground: oklch(99.11% 0 0);
 
     --muted: var(--color-neutral-300); /* from tailwind */
+    --scrollbar: var(--color-neutral-800);
 
     --primary: oklch(96.12% 0 0);
     --primary-foreground: oklch(21.78% 0 0);
@@ -86,12 +92,19 @@
      * Scrollbar
      */
     scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
+    scrollbar-color: var(--scrollbar) transparent;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
+    font-size: var(--mobile-font-size);
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: var(--desktop-font-size);
+    }
   }
 }
 
