@@ -1,3 +1,10 @@
+/**
+ * Toggling dark mode manually
+ * Docs: https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
+ */
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
 /*
 * Uncomment the following line to use the Inter font when not working on a Next.js project.
 * @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');

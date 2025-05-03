@@ -34,6 +34,7 @@
     "postcss": "8.5.3",
     "react-scan": "0.3.3",
     "storybook": "8.6.12",
+    "storybook-dark-mode": "4.0.2",
     "tailwindcss": "4.1.4",
     "vite": "6.3.2"
   }

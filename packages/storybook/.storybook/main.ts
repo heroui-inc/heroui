@@ -10,6 +10,7 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("storybook-dark-mode"),
     join(__dirname, "addons/i18n/register"),
     join(__dirname, "addons/strict-mode/register"),
   ],

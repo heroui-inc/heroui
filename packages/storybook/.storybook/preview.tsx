@@ -1,6 +1,7 @@
 import type {Preview} from "@storybook/react";
 
 import {configureActions} from "@storybook/addon-actions";
+import {themes} from "@storybook/theming";
 import React from "react";
 
 import {withInternationalization} from "./addons/i18n/decorator";
@@ -20,6 +21,27 @@ const parameters: Preview["parameters"] = {
       date: /Date$/,
     },
   },
+  darkMode: {
+    classTarget: "html",
+    current: "dark",
+    dark: {
+      ...themes.dark,
+      appBg: "#161616",
+      appBorderRadius: 14,
+      appContentBg: "black",
+      background: "black",
+      barBg: "black",
+      brandImage: "/dark-logo.svg",
+    },
+    darkClass: "dark",
+    light: {
+      ...themes.light,
+      appBorderRadius: 14,
+      brandImage: "/light-logo.svg",
+    },
+    lightClass: "light",
+    stylePreview: true,
+  },
   layout: "fullscreen",
   options: {
     storySort: {
@@ -35,10 +57,7 @@ const decorators: Preview["decorators"] = [
   withInternationalization,
   (Story) => {
     return (
-      <div
-        className="bg-background text-foreground flex h-full w-full items-center justify-center"
-        id="root"
-      >
+      <div className="flex h-full w-full items-center justify-center" id="root">
         <Story />
       </div>
     );
