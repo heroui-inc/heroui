@@ -7,7 +7,7 @@ import {focusRing} from "../../utils/compose";
 
 export const accordionVariants = tv({
   slots: {
-    base: "w-full",
+    base: "bg-panel w-full",
     body: "text-muted px-4 pb-4 pt-0",
     heading: "flex",
     indicator: "text-muted ml-auto size-4 shrink-0 transition duration-300",

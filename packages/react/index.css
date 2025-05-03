@@ -16,6 +16,7 @@
     /* Base Colors */
     --background: oklch(100% 0 0);
     --foreground: oklch(14.48% 0 0);
+    --panel: oklch(100% 0 0);
 
     --muted: var(--color-neutral-500); /* from tailwind */
     --scrollbar: var(--color-neutral-200);
@@ -57,6 +58,7 @@
     /* Base Colors */
     --background: oklch(0% 0 0);
     --foreground: oklch(99.11% 0 0);
+    --panel: oklch(0.22 0 0);
 
     --muted: var(--color-neutral-300); /* from tailwind */
     --scrollbar: var(--color-neutral-800);
@@ -125,6 +127,7 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
 
   --color-muted: var(--muted);
 
