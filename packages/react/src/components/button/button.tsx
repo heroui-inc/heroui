@@ -1,11 +1,11 @@
-import type {ButtonVariants} from "./button.style";
+import type {ButtonVariants} from "./button.styles";
 import type {Ref} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {useMemo} from "react";
 import {Button as ButtonPrimitive, composeRenderProps} from "react-aria-components";
 
-import {buttonVariants} from "./button.style";
+import {buttonVariants} from "./button.styles";
 
 export interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
   ref?: Ref<HTMLButtonElement>;

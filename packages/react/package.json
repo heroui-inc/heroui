@@ -37,6 +37,7 @@
   "dependencies": {
     "react-aria-components": "1.8.0",
     "tailwind-variants": "1.0.0",
+    "tailwind-merge": "3.0.2",
     "tailwindcss-react-aria-components": "2.0.0"
   },
   "devDependencies": {
