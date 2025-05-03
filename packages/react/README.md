@@ -37,7 +37,7 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
 ### Batch 1
 
 - [ ] button (in progress)
-- [ ] link (in progress)
+- [x] link
 - [ ] text-field
 - [ ] text-area
 - [ ] menu/dropdown
