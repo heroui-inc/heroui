@@ -48,6 +48,7 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/button": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
+    "@heroui/shared-utils": "workspace:*",
     "@react-aria/calendar": "3.8.0",
     "@react-aria/focus": "3.20.2",
     "@react-stately/calendar": "3.8.0",

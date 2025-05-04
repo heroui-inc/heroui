@@ -1071,6 +1071,9 @@ importers:
       '@heroui/shared-icons':
         specifier: workspace:*
         version: link:../../utilities/shared-icons
+      '@heroui/shared-utils':
+        specifier: workspace:*
+        version: link:../../utilities/shared-utils
       '@heroui/use-aria-button':
         specifier: workspace:*
         version: link:../../hooks/use-aria-button
