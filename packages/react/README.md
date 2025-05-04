@@ -57,7 +57,7 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
 
 - [x] avatar
 - [x] avatar group
-- [ ] tooltip
+- [x] tooltip
 - [x] spinner
 - [ ] input otp
 - [ ] calendar
@@ -77,6 +77,7 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
 
 ### Batch 3 (to do)
 
+- [ ] skeleton
 - [ ] breadcrumb
 - [ ] command
 - [ ] drawer
