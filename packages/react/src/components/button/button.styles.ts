@@ -3,7 +3,7 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {disabledClasses} from "../../utils/compose";
+import {disabledClasses, focusRingClasses} from "../../utils/compose";
 
 export const buttonVariants = tv({
   base: [
@@ -21,6 +21,7 @@ export const buttonVariants = tv({
     "[&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:my-0.5 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:self-center sm:[&_svg]:my-1 sm:[&_svg]:size-4",
     // pending
     "data-pending:pointer-events-none",
+    focusRingClasses,
     disabledClasses,
   ],
   compoundVariants: [
@@ -56,10 +57,12 @@ export const buttonVariants = tv({
     variant: {
       danger: "bg-danger text-danger-foreground hover:bg-danger/90 active:bg-danger/85",
       ghost: "hover:bg-accent-soft",
-      primary: "bg-accent text-accent-foreground hover:bg-accent/90 active:bg-accent/85",
+      primary:
+        "bg-accent text-accent-foreground hover:bg-accent/90 active:bg-accent/85 data-[pressed]:bg-accent/80",
       secondary:
-        "bg-accent-soft text-accent-soft-foreground hover:bg-accent-soft/80 active:bg-accent-soft/75",
-      tertiary: "bg-base border-border hover:bg-base-foreground/5",
+        "bg-accent-soft text-accent-soft-foreground hover:bg-accent-soft/80 active:bg-accent-soft/75 data-[pressed]:bg-accent-soft/80",
+      tertiary:
+        "bg-base border-border hover:bg-base-foreground/5 active:bg-base-foreground/5 data-[pressed]:bg-base-foreground/10",
     },
   },
 });
