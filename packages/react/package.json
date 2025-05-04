@@ -38,7 +38,8 @@
     "@radix-ui/react-avatar": "1.1.7",
     "react-aria-components": "1.8.0",
     "tailwind-merge": "3.0.2",
-    "tailwind-variants": "1.0.0"
+    "tailwind-variants": "1.0.0",
+    "tw-animate-css": "1.2.9"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",

@@ -183,6 +183,12 @@ importers:
       tailwind-variants:
         specifier: 1.0.0
         version: 1.0.0(tailwindcss@4.1.4)
+      tailwindcss-react-aria-components:
+        specifier: 2.0.0
+        version: 2.0.0(tailwindcss@4.1.4)
+      tw-animate-css:
+        specifier: 1.2.9
+        version: 1.2.9
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
@@ -6624,6 +6630,11 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
+  tailwindcss-react-aria-components@2.0.0:
+    resolution: {integrity: sha512-l8YdpXX//qx0Mz2bW3YKLjboTQxR3zLrFhlHniAIn+mTwVM1yvT0Jp7Pn3eFrqi+qtOMmcJzXaF2rsKezSr0SQ==}
+    peerDependencies:
+      tailwindcss: ^4.0.0
+
   tailwindcss@4.1.4:
     resolution: {integrity: sha512-1ZIUqtPITFbv/DxRmDr5/agPqJwF69d24m9qmM1939TJehgY539CtzeZRjbLt5G6fSy/7YqqYsfvoTEw9xUI2A==}
 
@@ -6786,6 +6797,9 @@ packages:
   turbo@2.5.0:
     resolution: {integrity: sha512-PvSRruOsitjy6qdqwIIyolv99+fEn57gP6gn4zhsHTEcCYgXPhv6BAxzAjleS8XKpo+Y582vTTA9nuqYDmbRuA==}
     hasBin: true
+
+  tw-animate-css@1.2.9:
+    resolution: {integrity: sha512-9O4k1at9pMQff9EAcCEuy1UNO43JmaPQvq+0lwza9Y0BQ6LB38NiMj+qHqjoQf40355MX+gs6wtlR6H9WsSXFg==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -14819,6 +14833,10 @@ snapshots:
       tailwind-merge: 3.0.2
       tailwindcss: 4.1.4
 
+  tailwindcss-react-aria-components@2.0.0(tailwindcss@4.1.4):
+    dependencies:
+      tailwindcss: 4.1.4
+
   tailwindcss@4.1.4: {}
 
   tapable@2.2.1: {}
@@ -14965,6 +14983,8 @@ snapshots:
       turbo-linux-arm64: 2.5.0
       turbo-windows-64: 2.5.0
       turbo-windows-arm64: 2.5.0
+
+  tw-animate-css@1.2.9: {}
 
   type-check@0.4.0:
     dependencies:

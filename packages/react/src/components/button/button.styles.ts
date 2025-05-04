@@ -54,12 +54,12 @@ export const buttonVariants = tv({
       sm: "h-9 px-[calc(--spacing(3)-1px)] text-sm md:h-8 [&_svg]:size-4",
     },
     variant: {
-      danger: ["bg-danger text-danger-foreground hover:bg-danger/90 active:bg-danger/85"],
-      primary: ["bg-accent text-accent-foreground hover:bg-accent/90 active:bg-accent/85"],
-      secondary: [
+      danger: "bg-danger text-danger-foreground hover:bg-danger/90 active:bg-danger/85",
+      ghost: "hover:bg-accent-soft",
+      primary: "bg-accent text-accent-foreground hover:bg-accent/90 active:bg-accent/85",
+      secondary:
         "bg-accent-soft text-accent-soft-foreground hover:bg-accent-soft/80 active:bg-accent-soft/75",
-      ],
-      tertiary: ["bg-base border-border hover:bg-base-foreground/5"],
+      tertiary: "bg-base border-border hover:bg-base-foreground/5",
     },
   },
 });

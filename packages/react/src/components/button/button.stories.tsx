@@ -41,6 +41,9 @@ const Template = ({isDisabled, size}: ButtonProps) => (
     <Button isDisabled={isDisabled} size={size} variant="tertiary">
       Tertiary
     </Button>
+    <Button isDisabled={isDisabled} size={size} variant="ghost">
+      Ghost
+    </Button>
     <Button isDisabled={isDisabled} size={size} variant="danger">
       Danger
     </Button>

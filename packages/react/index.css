@@ -1,3 +1,5 @@
+@import "tw-animate-css";
+
 /**
  * Toggling dark mode manually
  * Docs: https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
@@ -95,7 +97,7 @@
     --danger-foreground: oklch(0% 0 0);
 
     /* Misc colors */
-    --border: oklch(1 0 0 / 20%);
+    --border: oklch(1 0 0 / 12%);
     --focus: oklch(100% 0 0 / 50%);
   }
 }
