@@ -70,7 +70,7 @@ const TemplateWithIcon = ({isDisabled, size}: ButtonProps) => (
 
 const TemplateWithIconOnly = ({isDisabled, size, variant}: ButtonProps) => (
   <div className="flex gap-3">
-    <Button isIconOnly isDisabled={isDisabled} size={size} variant={variant}>
+    <Button isIconOnly isDisabled={isDisabled} size={size} variant={variant ?? "tertiary"}>
       <Icon icon="gravity-ui:ellipsis" />
     </Button>
   </div>
@@ -96,7 +96,7 @@ const TemplateWithLoadingState = ({size, variant}: ButtonProps) => {
   };
 
   return (
-    <Button isPending={isLoading} size={size} variant={variant} onPress={handlePress}>
+    <Button isPending={isLoading} size={size} variant={variant ?? "tertiary"} onPress={handlePress}>
       {({isPending}) => (
         <>
           {isPending ? <Spinner /> : <Icon icon="gravity-ui:paperclip" />}
