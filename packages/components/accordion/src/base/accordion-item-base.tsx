@@ -4,7 +4,7 @@ import type {HTMLMotionProps} from "@heroui/motion";
 import {As} from "@heroui/system";
 import {ItemProps, BaseItem} from "@heroui/aria-utils";
 import {FocusableProps, PressEvents} from "@react-types/shared";
-import {ReactNode, MouseEventHandler} from "react";
+import {ReactNode} from "react";
 
 export type AccordionItemIndicatorProps = {
   /**
@@ -61,7 +61,7 @@ export interface Props<T extends object = {}>
    * The native button click event handler.
    * @deprecated - use `onPress` instead.
    */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: PressEvents["onClick"];
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.

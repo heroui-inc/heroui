@@ -1,6 +1,6 @@
 {
   "name": "@heroui/ripple",
-  "version": "2.2.12",
+  "version": "2.2.14",
   "description": "A simple implementation to display a ripple animation when the source component is clicked",
   "keywords": [
     "ripple"
