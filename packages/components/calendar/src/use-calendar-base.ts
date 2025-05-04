@@ -1,6 +1,10 @@
-import type {CalendarReturnType, CalendarVariantProps} from "@heroui/theme";
+import type {
+  CalendarReturnType,
+  CalendarVariantProps,
+  CalendarSlots,
+  SlotsToClasses,
+} from "@heroui/theme";
 import type {CalendarPropsBase as AriaCalendarPropsBase} from "@react-types/calendar";
-import type {CalendarSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCalendarGridProps} from "@react-aria/calendar";
 import type {AriaButtonProps} from "@react-types/button";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
@@ -8,7 +12,7 @@ import type {ButtonProps} from "@heroui/button";
 import type {SupportedCalendars} from "@heroui/system";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
-import type {CalendarIdentifier} from "@internationalized/date";
+import type {CalendarIdentifier} from "@heroui/internationalized-date";
 
 import {
   createCalendar,
