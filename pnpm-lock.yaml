@@ -778,6 +778,9 @@ importers:
       '@heroui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@heroui/react-aria-i18n':
+        specifier: workspace:*
+        version: link:../../external/react-aria-i18n
       '@heroui/react-utils':
         specifier: workspace:*
         version: link:../../utilities/react-utils
@@ -805,9 +808,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.20.2
         version: 3.20.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.8
-        version: 3.12.8(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.25.0
         version: 3.25.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1080,9 +1080,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.20.2
         version: 3.20.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.8
-        version: 3.12.8(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.25.0
         version: 3.25.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -2231,9 +2228,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.20.2
         version: 3.20.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.8
-        version: 3.12.8(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.25.0
         version: 3.25.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
