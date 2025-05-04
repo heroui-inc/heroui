@@ -13,6 +13,7 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
     classNames,
     isBlurred,
     isZoomed,
+    isError,
     fallbackSrc,
     removeWrapper,
     disableSkeleton,
@@ -40,6 +41,19 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
       <div {...getWrapperProps()}>
         {isZoomed ? zoomed : img}
         {cloneElement(img, getBlurredImgProps())}
+      </div>
+    );
+  }
+
+  if (isError && fallbackSrc) {
+    const errorImgStyle =
+      "relative z-10 shadow-black/5 shadow-none transition-transform-opacity motion-reduce:transition-none !duration-300 rounded-large";
+
+    const errorImgWrapper = "relative shadow-black/5 shadow-none rounded-large w-max";
+
+    return (
+      <div className={errorImgWrapper}>
+        <img alt={img.props.alt} className={errorImgStyle} src={fallbackSrc as string} />
       </div>
     );
   }

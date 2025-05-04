@@ -111,6 +111,7 @@ export function useImage(originalProps: UseImageProps) {
   const isImgLoaded = imageStatus === "loaded" && !isLoadingProp;
   const isLoading = imageStatus === "loading" || isLoadingProp;
   const isZoomed = originalProps.isZoomed;
+  const isError = imageStatus === "failed";
 
   const Component = as || "img";
 
@@ -204,6 +205,7 @@ export function useImage(originalProps: UseImageProps) {
     removeWrapper,
     isZoomed,
     isLoading,
+    isError,
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
