@@ -38,6 +38,7 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
 
 - [ ] button (in progress)
 - [x] link
+- [x] chip
 - [ ] text-field
 - [ ] text-area
 - [ ] menu/dropdown
@@ -48,14 +49,14 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
   - [ ] radio-group
 - [ ] switch
   - [ ] switch-group
-- [ ] chip
 - [ ] slider
 - [ ] kbd
 - [ ] separator
 
 ### Batch 2
 
-- [ ] avatar
+- [x] avatar
+- [x] avatar group
 - [ ] tooltip
 - [x] spinner
 - [ ] input otp
@@ -72,7 +73,6 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
 - [ ] carousel
 - [ ] scroll shadow
 - [ ] scroll blur
-- [ ] avatar group
 - [ ] listbox
 
 ### Batch 3 (to do)
