@@ -35,16 +35,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "1.1.7",
     "react-aria-components": "1.8.0",
-    "tailwind-variants": "1.0.0",
-    "tailwind-merge": "3.0.2"
+    "tailwind-merge": "3.0.2",
+    "tailwind-variants": "1.0.0"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
+    "@iconify/react": "5.2.1",
     "@storybook/react": "8.6.12",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "@iconify/react": "5.2.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwindcss": "4.1.4"

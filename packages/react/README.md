@@ -57,7 +57,7 @@ Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the 
 
 - [ ] avatar
 - [ ] tooltip
-- [ ] loading
+- [x] spinner
 - [ ] input otp
 - [ ] calendar
 - [ ] date picker
