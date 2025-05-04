@@ -14,11 +14,11 @@ interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
 }
 
 const Button = React.forwardRef<React.ElementRef<typeof ButtonPrimitive>, ButtonProps>(
-  ({children, className, variant, ...rest}, ref) => {
+  ({children, className, isIconOnly, size, variant, ...rest}, ref) => {
     return (
       <ButtonPrimitive
         ref={ref}
-        className={composeTwRenderProps(className, buttonVariants({variant}))}
+        className={composeTwRenderProps(className, buttonVariants({isIconOnly, size, variant}))}
         {...rest}
       >
         {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
