@@ -7,11 +7,11 @@ export default {
   argTypes: {
     color: {
       control: "select",
-      options: ["accent", "base", "danger", "success", "warning"],
+      options: ["accent", "current", "danger", "success", "warning"],
     },
     size: {
       control: "select",
-      options: ["extra-large", "large", "medium", "small"],
+      options: ["lg", "md", "sm", "xl"],
     },
   },
   component: Spinner,
@@ -20,12 +20,12 @@ export default {
 
 const defaultArgs: SpinnerProps = {
   color: "accent",
-  size: "small",
+  size: "sm",
 };
 
-const Template = (_props: SpinnerProps) => (
+const Template = (props: SpinnerProps) => (
   <div className="flex items-center gap-3">
-    <Spinner {...defaultArgs} />
+    <Spinner {...props} />
   </div>
 );
 
