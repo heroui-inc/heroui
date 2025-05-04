@@ -346,9 +346,6 @@ importers:
       '@react-aria/focus':
         specifier: 3.20.2
         version: 3.20.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-aria/i18n':
-        specifier: 3.12.8
-        version: 3.12.8(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/interactions':
         specifier: 3.25.0
         version: 3.25.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
