@@ -69,7 +69,7 @@ module.exports = {
         'toast-gap': 'var(--toast-gap)',
       },
       typography: () => ({
-        light: {
+        DEFAULT: {
           css: {
             color: "hsl(var(--heroui-foreground))",
             maxWidth: "none",
