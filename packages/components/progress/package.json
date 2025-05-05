@@ -1,6 +1,6 @@
 {
   "name": "@heroui/progress",
-  "version": "2.2.14-beta.1",
+  "version": "2.2.16-beta.1",
   "description": "Progress bars show either determinate or indeterminate progress of an operation over time.",
   "keywords": [
     "progress"
@@ -36,17 +36,17 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.14-beta.0",
-    "@heroui/system": ">=2.4.14-beta.0"
+    "@heroui/theme": ">=2.4.16-beta.0",
+    "@heroui/system": ">=2.4.16-beta.0"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-is-mounted": "workspace:*",
-    "@react-aria/i18n": "3.12.7",
-    "@react-aria/progress": "3.4.21",
-    "@react-aria/utils": "3.28.1",
-    "@react-types/progress": "3.5.10"
+    "@react-aria/i18n": "3.12.8",
+    "@react-aria/progress": "3.4.22",
+    "@react-aria/utils": "3.28.2",
+    "@react-types/progress": "3.5.11"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

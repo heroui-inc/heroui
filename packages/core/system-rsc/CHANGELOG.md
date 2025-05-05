@@ -1,48 +1,33 @@
 # @heroui/system-rsc
 
-## 2.3.13-beta.1
+## 2.3.14-beta.1
 
 ### Patch Changes
 
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
 
-## 2.3.13-beta.0
-
-### Patch Changes
-
-- [#5166](https://github.com/heroui-inc/heroui/pull/5166) [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
-
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/theme@2.4.14-beta.0
-
-## 2.3.12-beta.3
+## 2.3.14-beta.0
 
 ### Patch Changes
 
-- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
+- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
 
-- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
+- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
+  - @heroui/theme@2.4.16-beta.0
 
-## 2.3.12-beta.2
-
-### Patch Changes
-
-- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
-
-## 2.3.12-beta.1
+## 2.3.13
 
 ### Patch Changes
 
-- [`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix deployment
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
 
-## 2.3.12-beta.0
+  v2.7.7
+
+## 2.3.12
 
 ### Patch Changes
 
-- [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - TailwindCSS v4
-
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/theme@2.4.13-beta.0
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
 
 ## 2.3.11
 

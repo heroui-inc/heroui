@@ -187,9 +187,9 @@ export const useSandpack = ({
     entry: entryFile,
     devDependencies: {
       postcss: "^8.4.21",
-      tailwindcss: "^4.1.3",
-      "@tailwindcss/postcss": "^4.1.3",
-      "@tailwindcss/vite": "^4.1.3",
+      tailwindcss: "4.1.3",
+      "@tailwindcss/postcss": "4.1.3",
+      "@tailwindcss/vite": "4.1.3",
       vite: "6.0.6",
     },
   };

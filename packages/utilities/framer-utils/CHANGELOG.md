@@ -1,24 +1,41 @@
 # @heroui/framer-utils
 
-## 2.1.14-beta.1
+## 2.1.16-beta.1
 
 ### Patch Changes
 
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
 
-- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
-  - @heroui/shared-utils@2.1.9-beta.1
-  - @heroui/use-measure@2.1.8-beta.1
-  - @heroui/system@2.4.14-beta.1
+- Updated dependencies [[`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300)]:
+  - @heroui/system@2.4.16-beta.1
 
-## 2.1.14-beta.0
+## 2.1.16-beta.0
 
 ### Patch Changes
 
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/shared-utils@2.1.9-beta.0
-  - @heroui/use-measure@2.1.8-beta.0
-  - @heroui/system@2.4.14-beta.0
+- Updated dependencies []:
+  - @heroui/system@2.4.16-beta.0
+
+## 2.1.15
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/system@2.4.15
+  - @heroui/use-measure@2.1.7
+  - @heroui/shared-utils@2.1.9
+
+## 2.1.14
+
+### Patch Changes
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/system@2.4.14
 
 ## 2.1.13
 

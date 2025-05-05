@@ -1,42 +1,12 @@
 # @heroui/use-ref-state
 
-## 2.1.8-beta.1
+## 2.1.7
 
 ### Patch Changes
 
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
 
-## 2.1.8-beta.0
-
-### Patch Changes
-
-- [#5166](https://github.com/heroui-inc/heroui/pull/5166) [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
-
-## 2.1.7-beta.3
-
-### Patch Changes
-
-- [#5090](https://github.com/heroui-inc/heroui/pull/5090) [`8adf46a`](https://github.com/heroui-inc/heroui/commit/8adf46ac4fb5ef78dc555d94e16f6ad108821e3a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix add default styles
-
-- [`0013e4a`](https://github.com/heroui-inc/heroui/commit/0013e4a357d1a5c495e364502623385ba1b0447f) Thanks [@winchesHe](https://github.com/winchesHe)! - Merge origin canary to beta
-
-## 2.1.7-beta.2
-
-### Patch Changes
-
-- [`d93004e`](https://github.com/heroui-inc/heroui/commit/d93004e0a63fafd3b1dd3c3adec797baa38d75a5) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix tailwind merge config
-
-## 2.1.7-beta.1
-
-### Patch Changes
-
-- [`92ed806`](https://github.com/heroui-inc/heroui/commit/92ed806cbd14b21df423ca4e71f4b91696cbe4b9) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - Fix deployment
-
-## 2.1.7-beta.0
-
-### Patch Changes
-
-- [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - TailwindCSS v4
+  v2.7.7
 
 ## 2.1.6
 

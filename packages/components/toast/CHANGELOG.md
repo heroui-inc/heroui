@@ -1,32 +1,51 @@
 # @heroui/toast
 
-## 2.0.8-beta.1
+## 2.0.10-beta.1
 
 ### Patch Changes
 
-- [`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
 
-- Updated dependencies [[`0ee8956`](https://github.com/heroui-inc/heroui/commit/0ee8956cd96806a2299ef88007691807513325fa)]:
-  - @heroui/shared-icons@2.1.8-beta.1
-  - @heroui/shared-utils@2.1.9-beta.1
-  - @heroui/react-utils@2.1.10-beta.1
-  - @heroui/use-is-mobile@2.2.9-beta.1
-  - @heroui/spinner@2.2.15-beta.1
+- Updated dependencies [[`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300)]:
+  - @heroui/spinner@2.2.17-beta.1
 
-## 2.0.8-beta.0
+## 2.0.10-beta.0
 
 ### Patch Changes
 
-- [#5166](https://github.com/heroui-inc/heroui/pull/5166) [`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
 
-- Updated dependencies [[`3eeb600`](https://github.com/heroui-inc/heroui/commit/3eeb6005cc51c7e0249939554d57d0ab3af66a25)]:
-  - @heroui/shared-icons@2.1.8-beta.0
-  - @heroui/shared-utils@2.1.9-beta.0
-  - @heroui/react-utils@2.1.10-beta.0
-  - @heroui/use-is-mobile@2.2.9-beta.0
-  - @heroui/spinner@2.2.15-beta.0
-  - @heroui/theme@2.4.14-beta.0
-  - @heroui/system@2.4.14-beta.0
+- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
+  - @heroui/spinner@2.2.17-beta.0
+  - @heroui/theme@2.4.16-beta.0
+  - @heroui/system@2.4.16-beta.0
+
+## 2.0.9
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/spinner@2.2.16
+  - @heroui/use-is-mobile@2.2.9
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
+
+## 2.0.8
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/use-is-mobile@2.2.8
+  - @heroui/spinner@2.2.15
+  - @heroui/react-utils@2.1.9
 
 ## 2.0.7
 

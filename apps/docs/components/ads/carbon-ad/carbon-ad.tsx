@@ -11,7 +11,7 @@ import {useIsMounted} from "@/hooks/use-is-mounted";
 import {__PROD__, __ENABLE_ADS__} from "@/utils";
 
 const EA_PROVIDER_RATIO = 0.85;
-const PRODUCT_HUNT_ENABLED = true;
+const PRODUCT_HUNT_ENABLED = false;
 
 const PH_INFO = {
   description: "Join the conversation and help us get #1 Product of the Week! ↗",
