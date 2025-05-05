@@ -205,7 +205,7 @@ export function useImage(originalProps: UseImageProps) {
       className: slots.errorImg({class: className}),
       src: fallbackSrc,
     };
-  }, [isError]);
+  }, [slots, className, fallbackSrc, isError]);
 
   return {
     Component,
