@@ -96,7 +96,6 @@ describe("Calendar", () => {
     });
 
     it("should focus the selected date if autoFocus is set", () => {
-      // eslint-disable-next-line jsx-a11y/no-autofocus
       const wrapper = render(<Calendar autoFocus value={new CalendarDate(2024, 3, 31)} />);
 
       const selectedDate = wrapper.getByLabelText("Selected", {exact: false});

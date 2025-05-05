@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react/display-name */
 import {Code, Button, Tooltip} from "@heroui/react";
 import {useState} from "react";
 import NextLink from "next/link";

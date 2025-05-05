@@ -242,7 +242,7 @@ export function useSnippet(originalProps: UseSnippetProps) {
         className: slots.copyButton({
           class: clsx(classNames?.copyButton),
         }),
-      } as ButtonProps),
+      }) as ButtonProps,
     [
       slots,
       isFocusVisible,

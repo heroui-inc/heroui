@@ -60,7 +60,6 @@ const ErrorMessageFunctionTemplate = (args) => {
   });
 
   const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
     alert("Submitted value: " + JSON.stringify(data));
   };
 

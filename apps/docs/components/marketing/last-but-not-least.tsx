@@ -1,5 +1,3 @@
-/* eslint-disable react/display-name */
-
 import {title, subtitle, titleWrapper, sectionWrapper} from "@/components/primitives";
 import {FeaturesGrid} from "@/components/marketing/features-grid";
 import landingContent from "@/content/landing";
