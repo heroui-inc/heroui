@@ -198,7 +198,7 @@ export function useImage(originalProps: UseImageProps) {
     return {
       className: slots.errorWrapper({class: className}),
     };
-  }, [isError]);
+  }, [slots, className, isError]);
 
   const getErrorImageProps = useCallback<PropGetter>(() => {
     return {
