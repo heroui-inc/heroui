@@ -123,13 +123,8 @@ export function useImage(originalProps: UseImageProps) {
           ? `${props.width}px`
           : props.width
         : "fit-content",
-      h: props.height
-        ? typeof props.height === "number"
-          ? `${props.height}px`
-          : props.height
-        : "auto",
     };
-  }, [props?.width, props?.height]);
+  }, [props?.width]);
 
   const showFallback = (!src || !isImgLoaded) && !!fallbackSrc;
   const showSkeleton = isLoading && !disableSkeleton;
