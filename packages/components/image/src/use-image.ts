@@ -23,7 +23,7 @@ interface Props extends HTMLHeroUIProps<"img"> {
   /**
    * A fallback image.
    */
-  fallbackSrc?: React.ReactNode;
+  fallbackSrc?: string;
   /**
    * Whether to disable the loading skeleton.
    * @default false
@@ -111,6 +111,7 @@ export function useImage(originalProps: UseImageProps) {
   const isImgLoaded = imageStatus === "loaded" && !isLoadingProp;
   const isLoading = imageStatus === "loading" || isLoadingProp;
   const isZoomed = originalProps.isZoomed;
+  const isError = !isLoading && imageStatus === "failed" ? true : false;
 
   const Component = as || "img";
 
@@ -193,6 +194,19 @@ export function useImage(originalProps: UseImageProps) {
     };
   }, [slots, src, classNames?.blurredImg]);
 
+  const getErrorWrapperProps = useCallback<PropGetter>(() => {
+    return {
+      className: slots.errorWrapper({class: className}),
+    };
+  }, [slots, className, isError]);
+
+  const getErrorImageProps = useCallback<PropGetter>(() => {
+    return {
+      className: slots.errorImg({class: className}),
+      src: fallbackSrc,
+    };
+  }, [slots, className, fallbackSrc, isError]);
+
   return {
     Component,
     domRef,
@@ -204,9 +218,13 @@ export function useImage(originalProps: UseImageProps) {
     removeWrapper,
     isZoomed,
     isLoading,
+    showFallback,
+    isError,
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
+    getErrorWrapperProps,
+    getErrorImageProps,
   };
 }
 
