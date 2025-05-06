@@ -116,7 +116,7 @@ export function useImage(originalProps: UseImageProps) {
 
   const domRef = useDOMRef(ref);
 
-  const {w, h} = useMemo(() => {
+  const {w} = useMemo(() => {
     return {
       w: props.width
         ? typeof props.width === "number"
@@ -162,7 +162,6 @@ export function useImage(originalProps: UseImageProps) {
       style: {
         // img has `height: auto` by default
         // passing the custom height here to override if it is specified
-        ...(otherProps?.height && {height: h}),
         ...props.style,
         ...otherProps.style,
       },
