@@ -68,7 +68,7 @@
     "@heroui/theme": "workspace:*",
     "@heroui/radio": "workspace:*",
     "@heroui/test-utils": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

@@ -135,7 +135,7 @@ const FreeSoloPopover = forwardRef<"div", FreeSoloPopoverProps>(
             exit="exit"
             initial="exit"
             variants={TRANSITION_VARIANTS.fade}
-            {...(getBackdropProps() as HTMLMotionProps<"div">)}
+            {...(getBackdropProps() as Omit<HTMLMotionProps<"div">, "ref">)}
           />
         </LazyMotion>
       );
