@@ -16,8 +16,8 @@
 @layer base {
   :root {
     /* Base Colors */
-    --background: oklch(100% 0 0);
-    /* --background: oklch(0.95 0 0); */
+    /* --background: oklch(100% 0 0); */
+    --background: oklch(0.95 0 0);
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
 
@@ -180,4 +180,25 @@
 
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
+
+  /* Calculated Variables */
+  --color-accent-hover: color-mix(
+    in oklab,
+    var(--color-accent) 90%,
+    var(--color-accent-foreground) 20%
+  );
+
+  --color-accent-soft-hover: color-mix(
+    in oklab,
+    var(--color-accent-soft) 10%,
+    var(--color-accent-soft-foreground) 18%
+  );
+
+  --color-base-hover: color-mix(in oklab, var(--color-base) 90%, var(--color-base-foreground) 5%);
+
+  --color-danger-hover: color-mix(
+    in oklab,
+    var(--color-danger) 90%,
+    var(--color-danger-foreground) 10%
+  );
 }

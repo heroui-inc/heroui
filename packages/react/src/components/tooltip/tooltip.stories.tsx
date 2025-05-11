@@ -51,12 +51,27 @@ const defaultArgs: Omit<TooltipContentProps, "children"> = {
 const Template = (props: TooltipContentProps) => (
   <div className="flex items-center gap-3">
     <Tooltip.Root delay={0}>
+      <Button isIconOnly variant="tertiary">
+        <Icon icon="gravity-ui:circle-info" />
+      </Button>
+      <Tooltip.Content {...props}>
+        <Tooltip.Arrow />
+        <p>Tooltip content</p>
+      </Tooltip.Content>
+    </Tooltip.Root>
+  </div>
+);
+
+const TemplateWithTrigger = (props: TooltipContentProps) => (
+  <div className="flex items-center gap-3">
+    <Tooltip.Root delay={0}>
       <Tooltip.Trigger aria-label="Tooltip trigger">
-        <Button isIconOnly variant="tertiary">
+        <div className="bg-accent-soft rounded-full p-2">
           <Icon icon="gravity-ui:circle-info" />
-        </Button>
+        </div>
       </Tooltip.Trigger>
       <Tooltip.Content {...props}>
+        <Tooltip.Arrow />
         <p>Tooltip content</p>
       </Tooltip.Content>
     </Tooltip.Root>
@@ -66,4 +81,9 @@ const Template = (props: TooltipContentProps) => (
 export const Default = {
   args: defaultArgs,
   render: Template,
+};
+
+export const WithTrigger = {
+  args: defaultArgs,
+  render: TemplateWithTrigger,
 };
