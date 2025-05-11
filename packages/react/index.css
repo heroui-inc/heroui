@@ -22,6 +22,12 @@
     --panel: oklch(100% 0 0);
 
     --muted: var(--color-neutral-500);
+    --muted-foreground: var(--color-neutral-400);
+
+    /* --surface: var(--color-neutral-100); */
+    --surface: oklch(1 0 0);
+    --surface-foreground: var(--foreground);
+
     --scrollbar: var(--color-neutral-300);
 
     --base: var(--color-neutral-50);
@@ -57,19 +63,14 @@
     --radius-panel: 0.5rem; /* 8px Popover / Card / Modal */
     --radius-panel-inner: calc(var(--radius-panel) * 0.5); /* 4px */
 
-    /* Tailwind Radius */
-    --radius-xs: calc(var(--radius) * 0.25);
-    --radius-sm: calc(var(--radius) * 0.5);
-    --radius-md: calc(var(--radius) * 0.75);
-    --radius-lg: calc(var(--radius) * 1);
-    --radius-xl: calc(var(--radius) * 1.5);
-    --radius-2xl: calc(var(--radius) * 2);
-    --radius-3xl: calc(var(--radius) * 3);
-    --radius-4xl: calc(var(--radius) * 4);
-
     /* Font sizes */
     --mobile-font-size: 16px;
     --desktop-font-size: 14px;
+
+    /* Shadows */
+    --shadow-border:
+      0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
+      0 0px 1px 0px rgba(0, 0, 0, 0.3);
   }
 
   .dark,
@@ -80,6 +81,11 @@
     --panel: oklch(0.22 0 0);
 
     --muted: var(--color-neutral-300);
+    --muted-foreground: var(--color-neutral-400);
+
+    --surface: var(--color-neutral-900);
+    --surface-foreground: var(--color-neutral-200);
+
     --scrollbar: var(--color-neutral-800);
 
     --base: var(--color-neutral-900);
@@ -104,6 +110,12 @@
     /* Misc colors */
     --border: oklch(1 0 0 / 12%);
     --focus: oklch(100% 0 0 / 50%);
+    --link: var(--foreground);
+
+    /* Shadows */
+    --shadow-border:
+      0px 0px 5px 0px rgb(0 0 0 / 0.05), 0px 2px 10px 0px rgb(0 0 0 / 0.2),
+      inset 0px 0px 1px 0px rgb(var(--foreground) / 0.2);
   }
 }
 
@@ -158,6 +170,10 @@
   --color-panel: var(--panel);
 
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -181,24 +197,35 @@
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
 
+  --shadow-border: var(--shadow-border);
+
   /* Calculated Variables */
+
+  /* Colors */
   --color-accent-hover: color-mix(
     in oklab,
     var(--color-accent) 90%,
     var(--color-accent-foreground) 20%
   );
-
   --color-accent-soft-hover: color-mix(
     in oklab,
     var(--color-accent-soft) 10%,
     var(--color-accent-soft-foreground) 18%
   );
-
   --color-base-hover: color-mix(in oklab, var(--color-base) 90%, var(--color-base-foreground) 5%);
-
   --color-danger-hover: color-mix(
     in oklab,
     var(--color-danger) 90%,
     var(--color-danger-foreground) 10%
   );
+
+  /* Radius */
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: calc(var(--radius) * 1);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
 }

@@ -98,6 +98,8 @@ export default defineConfig([
           html: true,
         },
       ],
+      "sort-keys": "off",
+      "sort-keys-fix/sort-keys-fix": "off",
     },
     settings: {
       react: {

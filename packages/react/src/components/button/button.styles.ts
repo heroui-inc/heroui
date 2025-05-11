@@ -56,7 +56,7 @@ export const buttonVariants = tv({
     variant: {
       danger:
         "bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-hover data-[pressed]:bg-danger-hover",
-      ghost: "hover:bg-accent-soft",
+      ghost: "hover:bg-accent-soft data-[pressed]:bg-accent-soft",
       primary:
         "bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-hover data-[pressed]:bg-accent-hover",
       secondary: [
