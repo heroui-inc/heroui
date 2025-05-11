@@ -9,11 +9,7 @@ export default {
   argTypes: {
     color: {
       control: "select",
-      options: ["default", "success", "warning", "danger", "accent"],
-    },
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "tertiary"],
+      options: ["accent", "base", "success", "warning", "danger"],
     },
   },
   component: Avatar.Root,
@@ -22,21 +18,21 @@ export default {
 
 const defaultArgs: AvatarProps = {};
 
-const Template = (_props: AvatarProps) => (
+const Template = ({color}: AvatarProps) => (
   <div className="flex items-start gap-4">
     <div className="flex flex-col gap-4">
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Fallback>PG</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Fallback>JR</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Fallback>
           <Icon icon="gravity-ui:person" />
         </Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Fallback>
           <Icon icon="gravity-ui:person-gear" />
         </Avatar.Fallback>
@@ -44,60 +40,60 @@ const Template = (_props: AvatarProps) => (
     </div>
 
     <div className="flex flex-col gap-4">
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image alt="John Doe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
         <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="Junior Garcia"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
         />
         <Avatar.Fallback delayMs={600}>JG</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="Junior Garcia"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
         />
         <Avatar.Fallback delayMs={600}>JG</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image alt="Paul" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=8" />
         <Avatar.Fallback delayMs={600}>PG</Avatar.Fallback>
       </Avatar.Root>
     </div>
 
     <div className="flex flex-col gap-4">
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="Red"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
         />
         <Avatar.Fallback>R</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="Orange"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg"
         />
         <Avatar.Fallback>O</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="Green"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg"
         />
         <Avatar.Fallback>G</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="White"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/white.jpg"
         />
         <Avatar.Fallback>W</Avatar.Fallback>
       </Avatar.Root>
-      <Avatar.Root>
+      <Avatar.Root color={color}>
         <Avatar.Image
           alt="Black"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg"

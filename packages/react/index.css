@@ -22,7 +22,7 @@
     --panel: oklch(100% 0 0);
 
     --muted: var(--color-neutral-500);
-    --scrollbar: var(--color-neutral-200);
+    --scrollbar: var(--color-neutral-300);
 
     --base: var(--color-neutral-50);
     --base-foreground: var(--color-neutral-600);
@@ -52,7 +52,12 @@
     --border-width: 1px;
     --disabled-opacity: 0.5;
 
+    /* Base Radius */
     --radius: 0.75rem; /* 12px */
+    --radius-panel: 0.5rem; /* 8px Popover / Card / Modal */
+    --radius-panel-inner: calc(var(--radius-panel) * 0.5); /* 4px */
+
+    /* Tailwind Radius */
     --radius-xs: calc(var(--radius) * 0.25);
     --radius-sm: calc(var(--radius) * 0.5);
     --radius-md: calc(var(--radius) * 0.75);

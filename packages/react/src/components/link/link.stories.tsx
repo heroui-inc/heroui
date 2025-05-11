@@ -7,12 +7,7 @@ import {LinkIcon} from "../icons";
 import {Link} from "./link";
 
 export default {
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "underline", "block"],
-    },
-  },
+  argTypes: {},
   component: Link,
   title: "Components/Link",
 } as Meta<typeof Link>;
@@ -29,7 +24,7 @@ const Template = (_props: LinkProps) => (
       href="https://heroui.com"
       target="_blank"
       className={(renderProps) =>
-        buttonVariants({...renderProps, className: "hover:no-underline", variant: "solid"})
+        buttonVariants({...renderProps, className: "hover:no-underline", variant: "ghost"})
       }
     >
       Call to action

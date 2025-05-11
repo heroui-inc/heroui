@@ -26,6 +26,7 @@ export const chipVariants = tv({
       tertiary: "bg-transparent",
     },
   },
+  // Add "base"
   compoundVariants: [
     {
       className: "bg-accent text-accent-foreground",

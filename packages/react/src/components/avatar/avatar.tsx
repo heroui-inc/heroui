@@ -22,11 +22,11 @@ const AvatarContext = createContext<{slots?: ReturnType<typeof avatarVariants>}>
  * Avatar
  * -----------------------------------------------------------------------------------------------*/
 
-interface AvatarProps extends AvatarPrimitiveProps, AvatarVariants {}
+interface AvatarProps extends Omit<AvatarPrimitiveProps, "color">, AvatarVariants {}
 
 const Avatar = React.forwardRef<React.ElementRef<typeof AvatarRootPrimitive>, AvatarProps>(
-  ({children, className, ...props}, ref) => {
-    const slots = React.useMemo(() => avatarVariants(), []);
+  ({children, className, color, size, ...props}, ref) => {
+    const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
 
     return (
       <AvatarContext.Provider value={{slots}}>
@@ -57,11 +57,13 @@ AvatarImage.displayName = "HeroUI.AvatarImage";
 
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarFallbackPrimitive>,
-  React.ComponentPropsWithoutRef<typeof AvatarFallbackPrimitive>
->(({className, ...props}, ref) => {
+  React.ComponentPropsWithoutRef<typeof AvatarFallbackPrimitive> & {color?: AvatarVariants["color"]}
+>(({className, color, ...props}, ref) => {
   const {slots} = React.useContext(AvatarContext);
 
-  return <AvatarFallbackPrimitive ref={ref} className={slots?.fallback({className})} {...props} />;
+  return (
+    <AvatarFallbackPrimitive ref={ref} className={slots?.fallback({className, color})} {...props} />
+  );
 });
 
 AvatarFallback.displayName = "HeroUI.AvatarFallback";

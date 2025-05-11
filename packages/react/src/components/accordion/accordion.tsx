@@ -17,6 +17,7 @@ import {
   DisclosurePanel,
 } from "react-aria-components";
 
+import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 
@@ -31,8 +32,13 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
 interface AccordionProps extends DisclosureGroupProps, AccordionVariants {}
 
 const Accordion = React.forwardRef<React.ElementRef<typeof DisclosureGroup>, AccordionProps>(
-  ({children, className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => accordionVariants({variant}), [variant]);
+  ({children, className, ...originalProps}, ref) => {
+    const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
+
+    const slots = React.useMemo(
+      () => accordionVariants({...(variantProps as AccordionVariants)}),
+      [objectToDeps(variantProps)],
+    );
 
     return (
       <AccordionContext.Provider value={{slots}}>
@@ -40,7 +46,7 @@ const Accordion = React.forwardRef<React.ElementRef<typeof DisclosureGroup>, Acc
           ref={ref}
           data-accordion
           {...props}
-          className={composeTwRenderProps(className, slots.base({variant}))}
+          className={composeTwRenderProps(className, slots.base())}
         >
           {(values) => <>{typeof children === "function" ? children(values) : children}</>}
         </DisclosureGroup>

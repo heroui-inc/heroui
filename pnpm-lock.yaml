@@ -183,9 +183,6 @@ importers:
       tailwind-variants:
         specifier: 1.0.0
         version: 1.0.0(tailwindcss@4.1.4)
-      tailwindcss-react-aria-components:
-        specifier: 2.0.0
-        version: 2.0.0(tailwindcss@4.1.4)
       tw-animate-css:
         specifier: 1.2.9
         version: 1.2.9
@@ -6629,11 +6626,6 @@ packages:
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
-
-  tailwindcss-react-aria-components@2.0.0:
-    resolution: {integrity: sha512-l8YdpXX//qx0Mz2bW3YKLjboTQxR3zLrFhlHniAIn+mTwVM1yvT0Jp7Pn3eFrqi+qtOMmcJzXaF2rsKezSr0SQ==}
-    peerDependencies:
-      tailwindcss: ^4.0.0
 
   tailwindcss@4.1.4:
     resolution: {integrity: sha512-1ZIUqtPITFbv/DxRmDr5/agPqJwF69d24m9qmM1939TJehgY539CtzeZRjbLt5G6fSy/7YqqYsfvoTEw9xUI2A==}
@@ -14831,10 +14823,6 @@ snapshots:
   tailwind-variants@1.0.0(tailwindcss@4.1.4):
     dependencies:
       tailwind-merge: 3.0.2
-      tailwindcss: 4.1.4
-
-  tailwindcss-react-aria-components@2.0.0(tailwindcss@4.1.4):
-    dependencies:
       tailwindcss: 4.1.4
 
   tailwindcss@4.1.4: {}
