@@ -106,7 +106,6 @@ export const WithValueFormatting = {
   args: {
     ...defaultProps,
     label: "Loading...",
-    size: "xl",
     value: 70,
     color: "warning",
     showValueLabel: true,
@@ -119,7 +118,6 @@ export const CustomClassnames = {
 
   args: {
     ...defaultProps,
-    size: "xl",
     strokeWidth: 4,
     value: 70,
     showValueLabel: true,
