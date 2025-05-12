@@ -341,10 +341,10 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
 
   // focus selected item or first non-disabled item
   useEffect(() => {
-    let keyToFocus;
+    let keyToFocus: React.Key | null;
 
     if (
-      state.selectedKey != null &&
+      state.selectedKey !== null &&
       state.collection.getItem(state.selectedKey) &&
       !state.disabledKeys.has(state.selectedKey)
     ) {
