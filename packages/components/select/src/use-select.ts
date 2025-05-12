@@ -372,10 +372,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   });
 
   const hasPlaceholder = !!placeholder;
-  const shouldLabelBeOutside =
-    labelPlacement === "outside-left" ||
-    (labelPlacement === "outside" &&
-      (!(hasPlaceholder || !!description) || !!originalProps.isMultiline));
+  const shouldLabelBeOutside = labelPlacement === "outside-left" || labelPlacement === "outside";
   const shouldLabelBeInside = labelPlacement === "inside";
   const isOutsideLeft = labelPlacement === "outside-left";
   const isClearable = originalProps.isClearable;
@@ -389,6 +386,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     !!originalProps.isMultiline;
   const hasValue = !!state.selectedItems?.length;
   const hasLabel = !!label;
+  const hasLabelOutside = hasLabel && (isOutsideLeft || (shouldLabelBeOutside && hasPlaceholder));
 
   const baseStyles = clsx(classNames?.base, className);
 
@@ -452,12 +450,13 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       "data-has-label": dataAttr(hasLabel),
       "data-has-helper": dataAttr(hasHelper),
       "data-invalid": dataAttr(isInvalid),
+      "data-has-label-outside": dataAttr(hasLabelOutside),
       className: slots.base({
         class: clsx(baseStyles, props.className),
       }),
       ...props,
     }),
-    [slots, hasHelper, hasValue, hasLabel, isFilled, baseStyles],
+    [slots, hasHelper, hasValue, hasLabel, hasLabelOutside, isFilled, baseStyles],
   );
 
   const getTriggerProps: PropGetter = useCallback(

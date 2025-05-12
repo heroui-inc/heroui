@@ -7,7 +7,7 @@ import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from 
 import {useFocusRing} from "@react-aria/focus";
 import {Node} from "@react-types/shared";
 import {filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps, removeEvents, warn} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, removeEvents} from "@heroui/shared-utils";
 import {useOption} from "@react-aria/listbox";
 import {mergeProps} from "@react-aria/utils";
 import {useHover, usePress} from "@react-aria/interactions";
@@ -45,7 +45,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     onPressStart,
     onPressEnd,
     onPressChange,
-    onClick: deprecatedOnClick,
+    onClick,
     shouldHighlightOnFocus,
     hideSelectedIcon = false,
     isReadOnly = false,
@@ -67,16 +67,10 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
 
   const isMobile = useIsMobile();
 
-  if (deprecatedOnClick && typeof deprecatedOnClick === "function") {
-    warn(
-      "onClick is deprecated, please use onPress instead. See: https://github.com/heroui-inc/heroui/issues/4292",
-      "ListboxItem",
-    );
-  }
-
   const {pressProps, isPressed} = usePress({
     ref: domRef,
     isDisabled: isDisabled,
+    onClick,
     onPress,
     onPressUp,
     onPressStart,
@@ -130,9 +124,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
   const getItemProps: PropGetter = (props = {}) => ({
     ref: domRef,
     ...mergeProps(
-      {
-        onClick: deprecatedOnClick,
-      },
       itemProps,
       isReadOnly ? {} : mergeProps(focusProps, pressProps),
       hoverProps,
