@@ -202,7 +202,6 @@ export const DisableAnimation = {
 export const WithThumbIcon = {
   args: {
     ...defaultProps,
-    size: "xl",
     thumbIcon: (props: SwitchThumbIconProps) =>
       props.isSelected ? (
         <SunFilledIcon className={props.className} />
@@ -217,7 +216,6 @@ export const WithIcons = {
 
   args: {
     ...defaultProps,
-    size: "xl",
   },
 };
 
