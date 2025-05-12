@@ -23,7 +23,6 @@ const createExtendNoSlotsComponent = (styles: ExtendVariantProps = {}) =>
       ...styles?.variants,
     },
     defaultVariants: {
-      size: "xl",
       ...styles?.defaultVariants,
     },
     compoundVariants: styles?.compoundVariants ?? [
