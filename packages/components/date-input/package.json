@@ -1,6 +1,6 @@
 {
   "name": "@heroui/date-input",
-  "version": "2.3.16",
+  "version": "2.3.18",
   "description": "A date input allows users to enter and edit date and time values using a keyboard.",
   "keywords": [
     "date-field"
@@ -43,13 +43,13 @@
     "@heroui/form": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@internationalized/date": "3.7.0",
-    "@react-aria/datepicker": "3.14.1",
-    "@react-aria/i18n": "3.12.7",
-    "@react-stately/datepicker": "3.13.0",
-    "@react-types/datepicker": "3.11.0",
-    "@react-types/shared": "3.28.0",
-    "@react-aria/utils": "3.28.1"
+    "@internationalized/date": "3.8.0",
+    "@react-aria/datepicker": "3.14.2",
+    "@react-aria/i18n": "3.12.8",
+    "@react-stately/datepicker": "3.14.0",
+    "@react-types/datepicker": "3.12.0",
+    "@react-types/shared": "3.29.0",
+    "@react-aria/utils": "3.28.2"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",

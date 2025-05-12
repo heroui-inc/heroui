@@ -200,7 +200,6 @@ export function useButton(props: UseButtonProps) {
           // @ts-ignore
           "aria-hidden": true,
           focusable: false,
-          tabIndex: -1,
         })
       : null;
 

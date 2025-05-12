@@ -1,5 +1,47 @@
 # @heroui/autocomplete
 
+## 2.3.20
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/button@2.2.19
+  - @heroui/form@2.1.18
+  - @heroui/input@2.4.19
+  - @heroui/listbox@2.3.18
+  - @heroui/popover@2.3.19
+  - @heroui/scroll-shadow@2.3.13
+  - @heroui/spinner@2.2.16
+  - @heroui/use-aria-button@2.2.13
+  - @heroui/use-safe-layout-effect@2.1.7
+  - @heroui/aria-utils@2.2.16
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
+
+## 2.3.19
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`53295ca`](https://github.com/heroui-inc/heroui/commit/53295ca9dc7a1310485e1574fd28110b6cbf5ebd), [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/button@2.2.18
+  - @heroui/shared-utils@2.1.8
+  - @heroui/use-aria-button@2.2.12
+  - @heroui/aria-utils@2.2.15
+  - @heroui/listbox@2.3.17
+  - @heroui/popover@2.3.18
+  - @heroui/input@2.4.18
+  - @heroui/form@2.1.17
+  - @heroui/scroll-shadow@2.3.12
+  - @heroui/spinner@2.2.15
+  - @heroui/react-utils@2.1.9
+
 ## 2.3.18
 
 ### Patch Changes

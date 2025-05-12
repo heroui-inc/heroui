@@ -1,6 +1,6 @@
 {
   "name": "@heroui/number-input",
-  "version": "2.0.7",
+  "version": "2.0.9",
   "description": "The numeric input component is designed for users to enter a number, and increase or decrease the value using stepper buttons",
   "keywords": [
     "input",
@@ -48,16 +48,16 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/focus": "3.20.1",
-    "@react-aria/i18n": "3.12.7",
-    "@react-aria/interactions": "3.24.1",
-    "@react-aria/numberfield": "3.11.12",
-    "@react-aria/utils": "3.28.1",
-    "@react-stately/utils": "3.10.5",
-    "@react-stately/numberfield": "3.9.10",
-    "@react-types/shared": "3.28.0",
-    "@react-types/numberfield": "3.8.9",
-    "@react-types/button": "3.11.0"
+    "@react-aria/focus": "3.20.2",
+    "@react-aria/i18n": "3.12.8",
+    "@react-aria/interactions": "3.25.0",
+    "@react-aria/numberfield": "3.11.13",
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/utils": "3.10.6",
+    "@react-stately/numberfield": "3.9.11",
+    "@react-types/shared": "3.29.0",
+    "@react-types/numberfield": "3.8.10",
+    "@react-types/button": "3.12.0"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",

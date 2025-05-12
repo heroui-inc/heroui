@@ -1,5 +1,31 @@
 # @heroui/input-otp
 
+## 2.1.18
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/form@2.1.18
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-utils@2.1.9
+
+## 2.1.17
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- [#5179](https://github.com/heroui-inc/heroui/pull/5179) [`99a5bc2`](https://github.com/heroui-inc/heroui/commit/99a5bc2f4caa7d5468c629c30286935b5e5fa833) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed input-otp variants on segment background
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/form@2.1.17
+  - @heroui/react-utils@2.1.9
+
 ## 2.1.16
 
 ### Patch Changes

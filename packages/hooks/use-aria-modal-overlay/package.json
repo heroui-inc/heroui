@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-modal-overlay",
-  "version": "2.2.10",
+  "version": "2.2.12",
   "description": "A custom implementation of react aria modal overlay, this removes the prevent scroll",
   "keywords": [
     "use-aria-modal-overlay"
@@ -34,10 +34,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/overlays": "3.26.1",
-    "@react-aria/utils": "3.28.1",
-    "@react-stately/overlays": "3.6.14",
-    "@react-types/shared": "3.28.0"
+    "@react-aria/overlays": "3.27.0",
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/overlays": "3.6.15",
+    "@react-types/shared": "3.29.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",

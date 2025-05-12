@@ -1,6 +1,6 @@
 {
   "name": "@heroui/react",
-  "version": "2.7.6",
+  "version": "2.7.8",
   "description": "🚀 Beautiful and modern React UI library.",
   "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
@@ -91,7 +91,7 @@
     "@heroui/alert": "workspace:*",
     "@heroui/number-input": "workspace:*",
     "@heroui/toast": "workspace:*",
-    "@react-aria/visually-hidden": "3.8.21"
+    "@react-aria/visually-hidden": "3.8.22"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",

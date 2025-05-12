@@ -1,6 +1,6 @@
 {
   "name": "@heroui/input",
-  "version": "2.4.17",
+  "version": "2.4.19",
   "description": "The input component is designed for capturing user input within a text field.",
   "keywords": [
     "input"
@@ -45,13 +45,13 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/focus": "3.20.1",
-    "@react-aria/interactions": "3.24.1",
-    "@react-aria/textfield": "3.17.1",
-    "@react-aria/utils": "3.28.1",
-    "@react-stately/utils": "3.10.5",
-    "@react-types/shared": "3.28.0",
-    "@react-types/textfield": "3.12.0",
+    "@react-aria/focus": "3.20.2",
+    "@react-aria/interactions": "3.25.0",
+    "@react-aria/textfield": "3.17.2",
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/utils": "3.10.6",
+    "@react-types/shared": "3.29.0",
+    "@react-types/textfield": "3.12.1",
     "react-textarea-autosize": "^8.5.3"
   },
   "devDependencies": {
