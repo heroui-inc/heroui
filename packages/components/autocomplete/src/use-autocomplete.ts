@@ -339,7 +339,10 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     }
   }, [inputRef.current]);
 
-  // focus selected item or first non-disabled item
+  // Ensure the focused item in the dropdown correctly reflects the
+  // selected key when the component mounts or relevant state changes.
+  // This fixes a bug where focus incorrectly defaulted to the first item
+  // when a value was pre-selected (e.g., via defaultValue or filtering).
   useEffect(() => {
     let keyToFocus: React.Key | null;
 
