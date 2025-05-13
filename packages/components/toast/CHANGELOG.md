@@ -1,5 +1,45 @@
 # @heroui/toast
 
+## 2.0.9
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/spinner@2.2.16
+  - @heroui/use-is-mobile@2.2.9
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
+
+## 2.0.8
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/use-is-mobile@2.2.8
+  - @heroui/spinner@2.2.15
+  - @heroui/react-utils@2.1.9
+
+## 2.0.7
+
+### Patch Changes
+
+- [#5121](https://github.com/heroui-inc/heroui/pull/5121) [`ca5babc`](https://github.com/heroui-inc/heroui/commit/ca5babcbb95b82ff40d9640034206b9018e1105c) Thanks [@alex-gavr](https://github.com/alex-gavr)! - - Use LazyMotion and AnimatePresence in ToastProvider to support exit animations.
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
+  Changing the type of description prop to ReactNode(#5033).
+- Updated dependencies []:
+  - @heroui/spinner@2.2.14
+
 ## 2.0.6
 
 ### Patch Changes
