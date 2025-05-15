@@ -1,5 +1,11 @@
 # @heroui/use-aria-multiselect
 
+## 2.4.13-beta.0
+
+### Patch Changes
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
 ## 2.4.12
 
 ### Patch Changes
