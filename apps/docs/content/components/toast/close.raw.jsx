@@ -7,6 +7,7 @@ export default function App() {
   return (
     <div className="flex flex-wrap gap-2">
       <Button
+        variant="flat"
         onPress={() => {
           const key = addToast({
             title: "New Toast",
@@ -20,6 +21,7 @@ export default function App() {
         Add Toast
       </Button>
       <Button
+        variant="flat"
         onPress={() => {
           if (toastKey.length == 0) return;
           closeToast(toastKey[toastKey.length - 1]);
@@ -29,6 +31,7 @@ export default function App() {
         Close The Last Toast
       </Button>
       <Button
+        variant="flat"
         onPress={() => {
           closeAll();
           setToastKey([]);
