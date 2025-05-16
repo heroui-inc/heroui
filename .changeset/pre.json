@@ -91,7 +91,11 @@
     "@heroui/test-utils": "2.1.7"
   },
   "changesets": [
+    "poor-experts-leave",
+    "quiet-colts-add",
+    "slimy-beers-invent",
     "slimy-lobsters-peel",
-    "strange-coats-carry"
+    "strange-coats-carry",
+    "tidy-mails-sing"
   ]
 }
