@@ -1,24 +1,26 @@
-import type {RippleProps} from "@heroui/ripple";
-import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {ButtonVariantProps} from "@heroui/theme";
 import type {AriaButtonProps} from "@heroui/use-aria-button";
 import type {ReactNode} from "react";
+import type {RippleProps} from "@heroui/ripple";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {filterDOMProps, ReactRef, useDOMRef} from "@heroui/react-utils";
-import {useRipple} from "@heroui/ripple";
-import {dataAttr} from "@heroui/shared-utils";
-import {SpinnerProps} from "@heroui/spinner";
 import {useProviderContext} from "@heroui/system";
-import {button} from "@heroui/theme";
-import {useAriaButton} from "@heroui/use-aria-button";
+import {dataAttr} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
+import {MouseEventHandler, useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
-import {PressEvent, useHover} from "@react-aria/interactions";
 import {chain, mergeProps} from "@react-aria/utils";
-import {cloneElement, isValidElement, MouseEventHandler, useCallback, useMemo} from "react";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {button} from "@heroui/theme";
+import {isValidElement, cloneElement, useMemo} from "react";
+import {useAriaButton} from "@heroui/use-aria-button";
+import {PressEvent, useHover} from "@react-aria/interactions";
+import {SpinnerProps} from "@heroui/spinner";
+import {useRipple} from "@heroui/ripple";
 
 import {useButtonGroupContext} from "./button-group-context";
 
-interface Props extends Omit<HTMLHeroUIProps<"button">, "disabled"> {
+interface Props extends HTMLHeroUIProps<"button"> {
   /**
    * Ref to the DOM node.
    */
@@ -85,7 +87,8 @@ export function useButton(props: UseButtonProps) {
     color = groupContext?.color ?? "default",
     variant = groupContext?.variant ?? "solid",
     disableAnimation = groupContext?.disableAnimation ?? globalContext?.disableAnimation ?? false,
-    isDisabled: isDisabledProp = groupContext?.isDisabled ?? false,
+    disabled,
+    isDisabled: isDisabledProp = groupContext?.isDisabled,
     isIconOnly = groupContext?.isIconOnly ?? false,
     spinnerPlacement = "start",
     onPress,
@@ -103,8 +106,9 @@ export function useButton(props: UseButtonProps) {
   const {isFocusVisible, isFocused, focusProps} = useFocusRing({
     autoFocus,
   });
+  const isDisabled = isDisabledProp !== undefined ? isDisabledProp : disabled ?? false;
 
-  const isDisabled = isDisabledProp || isLoading;
+  const isActuallyDisabled = isDisabled || isLoading;
 
   const styles = useMemo(
     () =>
@@ -114,7 +118,7 @@ export function useButton(props: UseButtonProps) {
         variant,
         radius,
         fullWidth,
-        isDisabled,
+        isDisabled: isActuallyDisabled,
         isInGroup,
         disableAnimation,
         isIconOnly,
@@ -126,7 +130,7 @@ export function useButton(props: UseButtonProps) {
       variant,
       radius,
       fullWidth,
-      isDisabled,
+      isActuallyDisabled,
       isInGroup,
       isIconOnly,
       disableAnimation,
@@ -138,16 +142,16 @@ export function useButton(props: UseButtonProps) {
 
   const handlePress = useCallback(
     (e: PressEvent) => {
-      if (disableRipple || isDisabled || disableAnimation) return;
+      if (disableRipple || isActuallyDisabled || disableAnimation) return;
       domRef.current && onRipplePressHandler(e);
     },
-    [disableRipple, isDisabled, disableAnimation, domRef, onRipplePressHandler],
+    [disableRipple, isActuallyDisabled, disableAnimation, domRef, onRipplePressHandler],
   );
 
   const {buttonProps: ariaButtonProps, isPressed} = useAriaButton(
     {
       elementType: as,
-      isDisabled,
+      isDisabled: isActuallyDisabled,
       onPress: chain(onPress, handlePress),
       onClick,
       ...otherProps,
@@ -155,11 +159,11 @@ export function useButton(props: UseButtonProps) {
     domRef,
   );
 
-  const {isHovered, hoverProps} = useHover({isDisabled});
+  const {isHovered, hoverProps} = useHover({isDisabled: isActuallyDisabled});
 
   const getButtonProps: PropGetter = useCallback(
     (props = {}) => ({
-      "data-disabled": dataAttr(isDisabled),
+      "data-disabled": dataAttr(isActuallyDisabled),
       "data-focus": dataAttr(isFocused),
       "data-pressed": dataAttr(isPressed),
       "data-focus-visible": dataAttr(isFocusVisible),
@@ -178,7 +182,7 @@ export function useButton(props: UseButtonProps) {
     }),
     [
       isLoading,
-      isDisabled,
+      isActuallyDisabled,
       isFocused,
       isPressed,
       shouldFilterDOMProps,

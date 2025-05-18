@@ -57,6 +57,28 @@ describe("Button", () => {
 
     expect(onPress).not.toHaveBeenCalled();
   });
+  it("should ignore events when only disabled prop is set", async () => {
+    const onPress = jest.fn();
+    const {getByRole} = render(<Button disableRipple disabled onPress={onPress} />);
+
+    const button = getByRole("button");
+
+    await user.click(button);
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+  it("should prioritize isDisabled over disabled (isDisabled=false, disabled=true)", async () => {
+    const onPress = jest.fn();
+    const {getByRole} = render(
+      <Button disableRipple disabled isDisabled={false} onPress={onPress} />,
+    );
+
+    const button = getByRole("button");
+
+    await user.click(button);
+
+    expect(onPress).toHaveBeenCalled();
+  });
 
   it("should renders with start icon", () => {
     const wrapper = render(
