@@ -57,6 +57,7 @@ describe("Button", () => {
 
     expect(onPress).not.toHaveBeenCalled();
   });
+
   it("should ignore events when only disabled prop is set", async () => {
     const onPress = jest.fn();
     const {getByRole} = render(<Button disableRipple disabled onPress={onPress} />);
@@ -67,6 +68,7 @@ describe("Button", () => {
 
     expect(onPress).not.toHaveBeenCalled();
   });
+
   it("should prioritize isDisabled over disabled (isDisabled=false, disabled=true)", async () => {
     const onPress = jest.fn();
     const {getByRole} = render(
