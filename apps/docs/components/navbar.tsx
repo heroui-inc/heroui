@@ -143,7 +143,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
                 content: "font-medium text-default-500 text-xs",
               }}
             >
-              {currentVersion}
+              v{currentVersion}
             </Chip>
           </motion.div>
         )}

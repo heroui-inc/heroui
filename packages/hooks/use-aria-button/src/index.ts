@@ -10,9 +10,8 @@ import {
   RefObject,
 } from "react";
 import {AriaButtonProps as BaseAriaButtonProps} from "@react-types/button";
-import {DOMAttributes, PressEvent} from "@react-types/shared";
-import {warn} from "@heroui/shared-utils";
-import {filterDOMProps, isAndroid, isIOS, mergeProps} from "@react-aria/utils";
+import {DOMAttributes} from "@react-types/shared";
+import {filterDOMProps, mergeProps} from "@react-aria/utils";
 import {useFocusable} from "@react-aria/focus";
 import {usePress} from "@react-aria/interactions";
 
@@ -76,14 +75,12 @@ export function useAriaButton(
     preventFocusOnPress,
     // @ts-ignore - undocumented
     allowFocusWhenDisabled,
-    // @ts-ignore
-    onClick: deprecatedOnClick,
+    onClick,
     href,
     target,
     rel,
     type = "button",
     allowTextSelectionOnPress,
-    role,
   } = props;
   let additionalProps;
 
@@ -104,38 +101,12 @@ export function useAriaButton(
     };
   }
 
-  let isMobile = isIOS() || isAndroid();
-
-  if (
-    deprecatedOnClick &&
-    typeof deprecatedOnClick === "function" &&
-    // bypass since onClick is passed from <Link as={Button} /> internally
-    role !== "link" &&
-    // bypass since onClick is passed from useDisclosure's `getButtonProps` internally
-    !(props.hasOwnProperty("aria-expanded") && props.hasOwnProperty("aria-controls"))
-  ) {
-    warn(
-      "onClick is deprecated, please use onPress instead. See: https://github.com/heroui-inc/heroui/issues/4292",
-      "useButton",
-    );
-  }
-
-  const handlePress = (e: PressEvent) => {
-    // On mobile devices, we need to call onClick directly since react-aria's usePress hook
-    // only supports onPress events as of https://github.com/adobe/react-spectrum/commit/1d5def8a
-    // This ensures backwards compatibility for onClick handlers on mobile
-    // See: https://github.com/heroui-inc/heroui/issues/4292
-    if (isMobile) {
-      deprecatedOnClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
-    }
-    onPress?.(e);
-  };
-
   let {pressProps, isPressed} = usePress({
+    onClick,
     onPressStart,
     onPressEnd,
     onPressChange,
-    onPress: handlePress,
+    onPress,
     isDisabled,
     preventFocusOnPress,
     allowTextSelectionOnPress,
@@ -161,14 +132,6 @@ export function useAriaButton(
       "aria-controls": props["aria-controls"],
       "aria-pressed": props["aria-pressed"],
       "aria-current": props["aria-current"],
-      onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (type === "button" && isMobile) {
-          // Avoid firing onClick event twice since it's handled in handlePress
-          return;
-        }
-
-        deprecatedOnClick?.(e);
-      },
     }),
   };
 }

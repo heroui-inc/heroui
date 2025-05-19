@@ -382,6 +382,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-filled-within": dataAttr(isFilledWithin),
         "data-has-start-content": dataAttr(hasStartContent),
         "data-has-end-content": dataAttr(!!endContent),
+        "data-type": type,
         className: slots.input({
           class: clsx(
             classNames?.input,
