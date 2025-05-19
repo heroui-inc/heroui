@@ -36,7 +36,7 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
   if (isError || showFallback) {
     return (
       <div {...getErrorWrapperProps()}>
-        <img alt={img.props.alt} {...getErrorImageProps()} />
+        <Component {...getErrorImageProps()} />
       </div>
     );
   }
