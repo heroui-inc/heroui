@@ -691,6 +691,32 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     [slots, classNames?.mainWrapper],
   );
 
+  const getEndWrapperProps: PropGetter = useCallback(
+    (props = {}) => {
+      return {
+        ...props,
+        "data-slot": "endWrapper",
+        className: slots.endWrapper({
+          class: clsx(classNames?.endWrapper, props?.className),
+        }),
+      };
+    },
+    [slots, classNames?.endWrapper],
+  );
+
+  const getEndContentProps: PropGetter = useCallback(
+    (props = {}) => {
+      return {
+        ...props,
+        "data-slot": "end-content",
+        className: slots.endWrapper({
+          class: clsx(classNames?.endContent, props?.className),
+        }),
+      };
+    },
+    [slots, classNames?.endContent],
+  );
+
   const getErrorMessageProps: PropGetter = useCallback(
     (props = {}) => {
       return {
@@ -785,6 +811,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     getDescriptionProps,
     getErrorMessageProps,
     getSelectorIconProps,
+    getEndWrapperProps,
+    getEndContentProps,
   };
 }
 

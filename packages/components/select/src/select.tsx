@@ -56,6 +56,8 @@ const Select = forwardRef(function Select<T extends object>(
     getSelectorIconProps,
     isClearable,
     getClearButtonProps,
+    getEndWrapperProps,
+    getEndContentProps,
   } = useSelect<T>({...props, ref});
 
   const labelContent = label ? <label {...getLabelProps()}>{label}</label> : null;
@@ -73,15 +75,15 @@ const Select = forwardRef(function Select<T extends object>(
   const end = useMemo(() => {
     if (clearButton) {
       return (
-        <div className="flex end-18">
+        <div {...getEndWrapperProps()}>
           {clearButton}
-          {endContent && <span className="ms-3">{endContent}</span>}
+          {endContent && <span {...getEndContentProps()}>{endContent}</span>}
         </div>
       );
     }
 
-    return endContent && <span className="mb-4">{endContent}</span>;
-  }, [clearButton, endContent]);
+    return endContent && <span {...getEndContentProps()}>{endContent}</span>;
+  }, [clearButton, endContent, getEndWrapperProps, getEndContentProps]);
 
   const helperWrapper = useMemo(() => {
     const shouldShowError = isInvalid && errorMessage;

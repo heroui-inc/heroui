@@ -500,6 +500,20 @@ const StartContentTemplate = ({color, variant, ...args}: SelectProps) => (
   </Select>
 );
 
+const EndContentTemplate = ({color, variant, ...args}: SelectProps) => (
+  <Select
+    className="max-w-xs"
+    color={color}
+    defaultSelectedKeys={["cat"]}
+    endContent={<PetBoldIcon />}
+    label="Favorite Animal"
+    variant={variant}
+    {...args}
+  >
+    {items}
+  </Select>
+);
+
 const EmptyTemplate = ({color, variant, ...args}: SelectProps) => (
   <div className="w-full justify-center flex gap-2">
     <Select
@@ -1077,6 +1091,14 @@ export const AsyncLoading = {
 
 export const StartContent = {
   render: StartContentTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const EndContent = {
+  render: EndContentTemplate,
 
   args: {
     ...defaultProps,

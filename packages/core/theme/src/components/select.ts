@@ -52,6 +52,8 @@ const select = tv({
     helperWrapper: "p-1 flex relative flex-col gap-1.5 group-data-[has-helper=true]:flex",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
+    endWrapper: "flex end-18",
+    endContent: "",
   },
   variants: {
     variant: {
@@ -191,6 +193,10 @@ const select = tv({
     isClearable: {
       true: {
         clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
+        endContent: "ms-3",
+      },
+      false: {
+        endContent: "mb-4",
       },
     },
     isDisabled: {
