@@ -111,7 +111,7 @@ export function useImage(originalProps: UseImageProps) {
   const isImgLoaded = imageStatus === "loaded" && !isLoadingProp;
   const isLoading = imageStatus === "loading" || isLoadingProp;
   const isZoomed = originalProps.isZoomed;
-  const isError = !isLoading && imageStatus === "failed" ? true : false;
+  const isError = !isLoading && imageStatus;
 
   const Component = as || "img";
 
@@ -204,6 +204,7 @@ export function useImage(originalProps: UseImageProps) {
     return {
       className: slots.errorImg({class: className}),
       src: fallbackSrc,
+      alt: props.alt,
     };
   }, [slots, className, fallbackSrc, isError]);
 
