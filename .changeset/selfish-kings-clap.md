@@ -3,4 +3,4 @@
 "@heroui/theme": patch
 ---
 
-add 'outside-top' prop to input
+add 'outside-top' prop to input (#3058)
