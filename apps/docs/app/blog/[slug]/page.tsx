@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 
 import {notFound} from "next/navigation";
 import {allBlogPosts} from "contentlayer2/generated";
-import {Link, User} from "@heroui/react";
+import {Link, Spacer, User} from "@heroui/react";
 import {format, parseISO} from "date-fns";
 import NextLink from "next/link";
 import {Balancer} from "react-wrap-balancer";
@@ -12,6 +12,7 @@ import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";
 import {Route} from "@/libs/docs/page";
 import {ChevronRightLinearIcon} from "@/components/icons";
+import {CarbonAd} from "@/components/ads/carbon-ad";
 
 interface BlogPostProps {
   params: {
@@ -99,6 +100,10 @@ export default async function DocPage({params}: BlogPostProps) {
           <ChevronRightLinearIcon className="rotate-180 inline-block mr-1" size={15} />
           Back to blog
         </Link>
+
+        <CarbonAd />
+
+        <Spacer y={4} />
 
         <time className="block text-small mb-2 text-default-500" dateTime={post.date}>
           {format(parseISO(post.date), "LLLL d, yyyy")}

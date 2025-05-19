@@ -2,6 +2,15 @@ import React, {useEffect} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@heroui/modal";
+import {Drawer, DrawerContent} from "@heroui/drawer";
 import {Spinner} from "@heroui/spinner";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
@@ -206,7 +215,7 @@ const PromiseToastTemplate = (args: ToastProps) => {
               description: "Toast Displayed Successfully",
               promise: new Promise((resolve) => setTimeout(resolve, 3000)),
               timeout: 3000,
-              shouldShowTimeoutProgess: false,
+              shouldShowTimeoutProgress: false,
               ...args,
             });
           }}
@@ -218,14 +227,76 @@ const PromiseToastTemplate = (args: ToastProps) => {
   );
 };
 
+const WithToastFromOverlayTemplate = (args) => {
+  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+  const {
+    isOpen: isDrawerOpen,
+    onOpen: onDrawerOpen,
+    onOpenChange: onDrawerOpenChange,
+  } = useDisclosure({defaultOpen: args.defaultOpen});
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+
+      <Modal isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Toast from Modal</ModalHeader>
+          <ModalBody>
+            <div>Press &quot;Show Toast&quot; to launch a toast.</div>
+          </ModalBody>
+          <ModalFooter>
+            <div className="flex gap-4">
+              <Button
+                onPress={() => {
+                  addToast({
+                    title: "Toast from modal",
+                    description: "Toast Displayed Successfully",
+                    ...args,
+                  });
+                }}
+              >
+                Show Toast
+              </Button>
+              <Button onPress={onClose}>Close</Button>
+            </div>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Drawer isOpen={isDrawerOpen} onOpenChange={onDrawerOpenChange}>
+        <DrawerContent className="p-4">
+          <Button
+            className="w-fit"
+            onPress={() => {
+              addToast({
+                title: "Toast from drawer",
+                description: "Toast Displayed Successfully",
+                ...args,
+              });
+            }}
+          >
+            Show Toast
+          </Button>
+        </DrawerContent>
+      </Drawer>
+
+      <div className="flex gap-x-2">
+        <Button onPress={onOpen}>Open Modal</Button>
+        <Button onPress={onDrawerOpen}>Open Drawer</Button>
+      </div>
+    </>
+  );
+};
+
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
-    primary: "before:bg-primary border-primary-200 dark:border-primary-100",
-    secondary: "before:bg-secondary border-secondary-200 dark:border-secondary-100",
-    success: "before:bg-success border-success-200 dark:border-success-100",
-    warning: "before:bg-warning border-warning-200 dark:border-warning-100",
-    danger: "before:bg-danger border-danger-200 dark:border-danger-100",
+    primary: "border-primary-200 dark:border-primary-100 border-l-primary",
+    secondary: "border-secondary-200 dark:border-secondary-100 border-l-secondary",
+    success: "border-success-200 dark:border-success-100 border-l-success",
+    warning: "border-warning-200 dark:border-warning-100 border-l-warning",
+    danger: "border-danger-200 dark:border-danger-100 border-l-danger",
   };
 
   return (
@@ -240,11 +311,7 @@ const CustomToastComponent = (args) => {
             classNames: {
               base: cn([
                 "bg-default-50 dark:bg-background shadow-sm",
-                "border-1",
-                "relative before:content-[''] before:absolute before:z-10",
-                "before:left-0 before:top-[-1px] before:bottom-[-1px] before:w-1",
-                "rounded-l-none border-l-0",
-                "rounded-md",
+                "border border-l-8 rounded-md rounded-l-none",
                 "flex flex-col items-start",
                 colorMap[color],
               ]),
@@ -261,6 +328,7 @@ const CustomToastComponent = (args) => {
               </div>
             ),
             color: color,
+            ...args,
           });
         }}
       >
@@ -413,6 +481,13 @@ export const Placement = {
 
 export const WithEndContent = {
   render: WithEndContentTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const ToastFromOverlay = {
+  render: WithToastFromOverlayTemplate,
   args: {
     ...defaultProps,
   },

@@ -1,4 +1,4 @@
-import {cloneElement, useMemo} from "react";
+import {cloneElement, isValidElement, useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 import {ChevronRightIcon, EllipsisIcon} from "@heroui/shared-icons";
 import {warn} from "@heroui/shared-utils";
@@ -90,7 +90,7 @@ const Breadcrumbs = forwardRef<"div", BreadcrumbsProps>((props, ref) => {
 
     return [
       ...items.slice(0, itemsBeforeCollapse),
-      ellipsisItem,
+      isValidElement(ellipsisItem) && cloneElement(ellipsisItem, {key: "ellipsis-item"}),
       ...items.slice(items.length - itemsAfterCollapse, items.length),
     ];
   }, [

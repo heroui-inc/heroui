@@ -2,7 +2,8 @@
 import * as React from "react";
 import {render, act, fireEvent} from "@testing-library/react";
 import {CalendarDate} from "@internationalized/date";
-import {keyCodes, triggerPress, type} from "@heroui/test-utils";
+import {keyCodes, triggerPress, pointerMap, type} from "@heroui/test-utils";
+import userEvent from "@testing-library/user-event";
 
 import {RangeCalendar as RangeCalendarCalendarBase, RangeCalendarProps} from "../src";
 
@@ -25,9 +26,13 @@ const RangeCalendar = React.forwardRef(
 RangeCalendar.displayName = "RangeCalendar";
 
 describe("RangeCalendar", () => {
+  let user;
+
   beforeAll(() => {
+    user = userEvent.setup({delay: null, pointerMap});
     jest.useFakeTimers();
   });
+
   afterEach(() => {
     act(() => {
       jest.runAllTimers();
@@ -195,7 +200,7 @@ describe("RangeCalendar", () => {
 
       let nextButton = getByTestId("next-button");
 
-      triggerPress(nextButton);
+      await user.click(nextButton);
 
       selected = getAllByLabelText("selected", {exact: false}).filter(
         (cell) => cell.getAttribute("aria-disabled") !== "true",
@@ -232,7 +237,7 @@ describe("RangeCalendar", () => {
 
       let prevButton = getByTestId("prev-button");
 
-      triggerPress(prevButton);
+      await user.click(prevButton);
 
       expect(heading).toHaveTextContent("June 2019");
       gridCells = getAllByRole("gridcell").filter(
