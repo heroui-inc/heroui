@@ -1,6 +1,7 @@
 import type {PopoverVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {AriaTooltipProps} from "@react-types/tooltip";
 import type {OverlayTriggerProps} from "@react-types/overlays";
+import type {AriaOverlayProps} from "@react-aria/overlays";
 import type {HTMLMotionProps} from "framer-motion";
 import type {OverlayOptions} from "@heroui/aria-utils";
 
@@ -8,7 +9,7 @@ import {ReactNode, Ref, useId, useImperativeHandle} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
 import {mergeProps} from "@react-aria/utils";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
-import {useOverlayPosition, AriaOverlayProps} from "@react-aria/overlays";
+import {useOverlayPosition} from "@react-aria/overlays";
 import {useAriaOverlay} from "@heroui/use-aria-overlay";
 import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
 import {popover} from "@heroui/theme";
