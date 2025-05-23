@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
@@ -12,7 +12,7 @@ import {
 } from "@heroui/modal";
 import {Drawer, DrawerContent} from "@heroui/drawer";
 
-import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
+import {Toast, ToastProps, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
 export default {
   title: "Components/Toast",
@@ -393,6 +393,48 @@ const CustomCloseButtonTemplate = (args) => {
   );
 };
 
+const CloseToastTemplate = (args: ToastProps) => {
+  const [toastKey, setToastKey] = useState<string[]>([]);
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+      <div className="flex flex-wrap gap-2">
+        <Button
+          onPress={() => {
+            const key = addToast({
+              title: "New Toast",
+              timeout: Infinity,
+            });
+
+            if (!key) return;
+            setToastKey((prev) => [...prev, key]);
+          }}
+        >
+          Add Toast
+        </Button>
+        <Button
+          onPress={() => {
+            if (toastKey.length == 0) return;
+            closeToast(toastKey[toastKey.length - 1]);
+            setToastKey((prev) => prev.slice(0, prev.length - 1));
+          }}
+        >
+          Close The Last Toast
+        </Button>
+        <Button
+          onPress={() => {
+            closeAll();
+            setToastKey([]);
+          }}
+        >
+          Close All Toasts
+        </Button>
+      </div>
+    </>
+  );
+};
+
 export const Default = {
   render: Template,
   args: {
@@ -493,6 +535,13 @@ export const CustomStyles = {
 
 export const CustomCloseButton = {
   render: CustomCloseButtonTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const CloseToast = {
+  render: CloseToastTemplate,
   args: {
     ...defaultProps,
   },

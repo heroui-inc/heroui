@@ -120,7 +120,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
       }
       startContent={
         <SearchLinearIcon
-          className="text-base text-default-400 pointer-events-none flex-shrink-0"
+          className="text-base text-default-400 pointer-events-none shrink-0"
           size={16}
           strokeWidth={2}
         />
@@ -161,7 +161,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     <HeroUINavbar
       ref={ref}
       className={clsx({
-        "z-[100001]": isMenuOpen,
+        "z-100001": isMenuOpen,
       })}
       classNames={{
         base: "bg-white/[.90] dark:bg-black/[.65]",
@@ -218,14 +218,14 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         <NavbarItem className="flex h-full items-center">
           <ThemeSwitch
             classNames={{
-              wrapper: "!text-default-500 dark:!text-default-500",
+              wrapper: "text-default-500! dark:text-default-500!",
             }}
           />
         </NavbarItem>
         <NavbarItem className="flex h-full items-center">
           <button
             className={clsx(
-              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-none",
+              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-hidden",
               // focus ring
               ...dataFocusVisibleClasses,
             )}
@@ -335,7 +335,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
           <ThemeSwitch
             className="border-1 border-default-200 rounded-full h-full min-w-10 min-h-10 flex items-center justify-center"
             classNames={{
-              wrapper: "!text-default-400 dark:!text-default-500",
+              wrapper: "text-default-400! dark:text-default-500!",
             }}
           />
         </NavbarItem>

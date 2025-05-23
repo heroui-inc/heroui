@@ -23,16 +23,16 @@ const packageManagers: PackageManager[] = [
     icon: <CLIBoldIcon className="text-lg text-default-600 dark:text-default-400" />,
   },
   {
+    name: "pnpm",
+    icon: <PnpmIcon className="text-[#F69220]" />,
+  },
+  {
     name: "npm",
     icon: <NpmSmallIcon className="text-[#E53E3E]" />,
   },
   {
     name: "yarn",
     icon: <YarnIcon className="text-[#2C8EBB]" />,
-  },
-  {
-    name: "pnpm",
-    icon: <PnpmIcon className="text-[#F69220]" />,
   },
   {
     name: "bun",
