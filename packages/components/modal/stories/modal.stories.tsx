@@ -268,64 +268,6 @@ const DraggableOverflowTemplate = (args: ModalProps) => {
 
 const ModalWithAutocompleteTemplate = (args: ModalProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [inputValue, setInputValue] = React.useState();
-  const [value, setValue] = React.useState();
-
-  const animals = [
-    {
-      label: "Cat",
-      key: "cat",
-      description: "The second most popular pet in the world",
-    },
-    {
-      label: "Dog",
-      key: "dog",
-      description: "The most popular pet in the world",
-    },
-    {
-      label: "Elephant",
-      key: "elephant",
-      description: "The largest land animal",
-    },
-    {label: "Lion", key: "lion", description: "The king of the jungle"},
-    {label: "Tiger", key: "tiger", description: "The largest cat species"},
-    {label: "Giraffe", key: "giraffe", description: "The tallest land animal"},
-    {
-      label: "Dolphin",
-      key: "dolphin",
-      description: "A widely distributed and diverse group of aquatic mammals",
-    },
-    {
-      label: "Penguin",
-      key: "penguin",
-      description: "A group of aquatic flightless birds",
-    },
-    {
-      label: "Zebra",
-      key: "zebra",
-      description: "A several species of African equids",
-    },
-    {
-      label: "Shark",
-      key: "shark",
-      description: "A group of elasmobranch fish characterized by a cartilaginous skeleton",
-    },
-    {
-      label: "Whale",
-      key: "whale",
-      description: "Diverse group of fully aquatic placental marine mammals",
-    },
-    {
-      label: "Otter",
-      key: "otter",
-      description: "A carnivorous mammal in the subfamily Lutrinae",
-    },
-    {
-      label: "Crocodile",
-      key: "crocodile",
-      description: "A large semiaquatic reptile",
-    },
-  ];
 
   return (
     <div className="flex flex-col gap-2">
@@ -337,19 +279,26 @@ const ModalWithAutocompleteTemplate = (args: ModalProps) => {
             <>
               <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
               <ModalBody>
-                <Autocomplete
-                  inputValue={inputValue}
-                  items={animals}
-                  label="Favorite Animal"
-                  placeholder="Search an animal"
-                  selectedKey={value}
-                  onInputChange={setInputValue}
-                  onSelectionChange={(nextValue) => {
-                    setInputValue(nextValue);
-                    setValue(nextValue);
-                  }}
-                >
-                  {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+                <Autocomplete label="Favorite Animal">
+                  <AutocompleteItem key="red_panda">Red Panda</AutocompleteItem>
+                  <AutocompleteItem key="cat">Cat</AutocompleteItem>
+                  <AutocompleteItem key="dog">Dog</AutocompleteItem>
+                  <AutocompleteItem key="crocodile">Crocodile</AutocompleteItem>
+                  <AutocompleteItem key="elephant">Elephant</AutocompleteItem>
+                  <AutocompleteItem key="lion">Lion</AutocompleteItem>
+                  <AutocompleteItem key="tiger">Tiger</AutocompleteItem>
+                  <AutocompleteItem key="aardvark">Aardvark</AutocompleteItem>
+                  <AutocompleteItem key="kangaroo">Kangaroo</AutocompleteItem>
+                  <AutocompleteItem key="koala">Koala</AutocompleteItem>
+                  <AutocompleteItem key="panda">Panda</AutocompleteItem>
+                  <AutocompleteItem key="giraffe">Giraffe</AutocompleteItem>
+                  <AutocompleteItem key="otter">Otter</AutocompleteItem>
+                  <AutocompleteItem key="snake">Snake</AutocompleteItem>
+                  <AutocompleteItem key="dolphin">Dolphin</AutocompleteItem>
+                  <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+                  <AutocompleteItem key="whale">Whale</AutocompleteItem>
+                  <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+                  <AutocompleteItem key="shark">Shark</AutocompleteItem>
                 </Autocomplete>
               </ModalBody>
               <ModalFooter>
