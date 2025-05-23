@@ -16,16 +16,16 @@
 @layer base {
   :root {
     /* Base Colors */
-    /* --background: oklch(100% 0 0); */
-    --background: oklch(0.95 0 0);
+    --background: oklch(100% 0 0);
+    /* --background: oklch(0.95 0 0); */
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
 
     --muted: var(--color-neutral-500);
     --muted-foreground: var(--color-neutral-400);
 
-    /* --surface: var(--color-neutral-100); */
-    --surface: oklch(1 0 0);
+    --surface: var(--color-neutral-100);
+    /* --surface: oklch(1 0 0); */
     --surface-foreground: var(--foreground);
 
     --scrollbar: var(--color-neutral-300);
@@ -104,8 +104,8 @@
     --warning: oklch(0.85 0.1414 77.88);
     --warning-foreground: oklch(0.1 0.02 0);
 
-    --danger: oklch(0.69 0.1801 26.45);
-    --danger-foreground: oklch(0% 0 0);
+    --danger: oklch(0.61 0.1998 29.94);
+    --danger-foreground: oklch(0.99 0 0);
 
     /* Misc colors */
     --border: oklch(1 0 0 / 12%);
