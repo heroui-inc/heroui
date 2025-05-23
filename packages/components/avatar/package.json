@@ -43,9 +43,9 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-image": "workspace:*",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/utils": "3.28.2"
+    "@react-aria/interactions": "3.25.1",
+    "@react-aria/focus": "3.20.3",
+    "@react-aria/utils": "3.29.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
