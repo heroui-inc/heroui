@@ -1,5 +1,61 @@
 # @heroui/react
 
+## 2.8.0-beta.6
+
+### Patch Changes
+
+- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+
+- Updated dependencies [[`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`224b53c`](https://github.com/heroui-inc/heroui/commit/224b53caad8a9a1ff37884edbc1256c953583db9), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6)]:
+  - @heroui/autocomplete@2.3.21-beta.3
+  - @heroui/number-input@2.0.10-beta.3
+  - @heroui/breadcrumbs@2.2.16-beta.3
+  - @heroui/date-picker@2.3.20-beta.3
+  - @heroui/date-input@2.3.19-beta.3
+  - @heroui/pagination@2.2.18-beta.3
+  - @heroui/accordion@2.2.17-beta.3
+  - @heroui/input-otp@2.1.19-beta.3
+  - @heroui/calendar@2.2.20-beta.3
+  - @heroui/checkbox@2.3.19-beta.3
+  - @heroui/dropdown@2.3.20-beta.3
+  - @heroui/progress@2.2.16-beta.3
+  - @heroui/divider@2.2.14-beta.3
+  - @heroui/listbox@2.3.19-beta.3
+  - @heroui/popover@2.3.20-beta.3
+  - @heroui/snippet@2.2.21-beta.3
+  - @heroui/tooltip@2.2.17-beta.3
+  - @heroui/avatar@2.2.16-beta.3
+  - @heroui/button@2.2.20-beta.3
+  - @heroui/navbar@2.2.18-beta.3
+  - @heroui/select@2.4.20-beta.3
+  - @heroui/slider@2.4.17-beta.3
+  - @heroui/switch@2.2.18-beta.3
+  - @heroui/alert@2.2.20-beta.3
+  - @heroui/input@2.4.20-beta.3
+  - @heroui/modal@2.2.17-beta.3
+  - @heroui/radio@2.3.19-beta.3
+  - @heroui/table@2.2.19-beta.3
+  - @heroui/toast@2.0.10-beta.3
+  - @heroui/card@2.2.19-beta.3
+  - @heroui/chip@2.2.16-beta.3
+  - @heroui/form@2.1.19-beta.3
+  - @heroui/link@2.2.17-beta.3
+  - @heroui/menu@2.2.19-beta.3
+  - @heroui/tabs@2.2.17-beta.3
+  - @heroui/user@2.2.16-beta.3
+  - @heroui/kbd@2.2.16-beta.3
+  - @heroui/system@2.4.16-beta.3
+  - @heroui/drawer@2.2.17-beta.3
+  - @heroui/badge@2.2.13-beta.2
+  - @heroui/skeleton@2.2.13-beta.2
+  - @heroui/code@2.2.15-beta.3
+  - @heroui/spacer@2.2.15-beta.3
+  - @heroui/spinner@2.2.17-beta.3
+  - @heroui/image@2.2.13-beta.2
+  - @heroui/ripple@2.2.15-beta.2
+  - @heroui/scroll-shadow@2.3.14-beta.2
+  - @heroui/framer-utils@2.1.16-beta.3
+
 ## 2.8.0-beta.5
 
 ### Minor Changes

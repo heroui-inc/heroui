@@ -1,5 +1,11 @@
 # @heroui/system-rsc
 
+## 2.3.14-beta.3
+
+### Patch Changes
+
+- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+
 ## 2.3.14-beta.2
 
 ### Patch Changes

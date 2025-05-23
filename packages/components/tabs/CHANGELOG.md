@@ -1,5 +1,15 @@
 # @heroui/tabs
 
+## 2.2.17-beta.3
+
+### Patch Changes
+
+- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+
+- Updated dependencies [[`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6)]:
+  - @heroui/aria-utils@2.2.17-beta.3
+  - @heroui/framer-utils@2.1.16-beta.3
+
 ## 2.2.17-beta.2
 
 ### Patch Changes

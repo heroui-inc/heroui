@@ -1,5 +1,23 @@
 # @heroui/select
 
+## 2.4.20-beta.3
+
+### Patch Changes
+
+- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+
+- [#5100](https://github.com/heroui-inc/heroui/pull/5100) [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: overlay & interactOutside
+
+- Updated dependencies [[`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6)]:
+  - @heroui/use-aria-multiselect@2.4.13-beta.1
+  - @heroui/use-aria-button@2.2.14-beta.1
+  - @heroui/aria-utils@2.2.17-beta.3
+  - @heroui/listbox@2.3.19-beta.3
+  - @heroui/popover@2.3.20-beta.3
+  - @heroui/form@2.1.19-beta.3
+  - @heroui/spinner@2.2.17-beta.3
+  - @heroui/scroll-shadow@2.3.14-beta.2
+
 ## 2.4.20-beta.2
 
 ### Patch Changes
