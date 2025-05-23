@@ -1,9 +1,9 @@
 {
-  "name": "@heroui/use-aria-modal-overlay",
-  "version": "2.2.13-beta.0",
-  "description": "A custom implementation of react aria modal overlay, this removes the prevent scroll",
+  "name": "@heroui/use-aria-overlay",
+  "version": "2.0.0",
+  "description": "A custom implementation of react aria overlay",
   "keywords": [
-    "use-aria-modal-overlay"
+    "use-aria-overlay"
   ],
   "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
@@ -19,7 +19,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heroui-inc/heroui.git",
-    "directory": "packages/hooks/use-aria-modal-overlay"
+    "directory": "packages/hooks/use-aria-overlay"
   },
   "bugs": {
     "url": "https://github.com/heroui-inc/heroui/issues"
@@ -34,20 +34,19 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@heroui/use-aria-overlay": "workspace:*",
-    "@react-aria/overlays": "3.27.0",
-    "@react-aria/utils": "3.28.2",
-    "@react-stately/overlays": "3.6.15",
-    "@react-types/shared": "3.29.0"
+    "@react-aria/focus": "3.20.3",
+    "@react-aria/interactions": "3.25.1",
+    "@react-aria/overlays": "3.27.1",
+    "@react-types/shared": "3.29.1"
   },
   "peerDependencies": {
-    "react": ">=18 || >=19.0.0-rc.0",
-    "react-dom": ">=18 || >=19.0.0-rc.0"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "18.3.0",
-    "react-dom": "18.3.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "clean-package": "../../../clean-package.config.json",
   "tsup": {
