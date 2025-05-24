@@ -1,5 +1,16 @@
 # @heroui/input
 
+## 2.4.20-beta.3
+
+### Patch Changes
+
+- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+
+- [#5161](https://github.com/heroui-inc/heroui/pull/5161) [`224b53c`](https://github.com/heroui-inc/heroui/commit/224b53caad8a9a1ff37884edbc1256c953583db9) Thanks [@dklymenk](https://github.com/dklymenk)! - fix `Input` accessibility label duplication (#5150)
+
+- Updated dependencies [[`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963)]:
+  - @heroui/form@2.1.19-beta.3
+
 ## 2.4.20-beta.2
 
 ### Patch Changes
