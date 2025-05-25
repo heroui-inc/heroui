@@ -1,5 +1,5 @@
 ---
-"@heroui/date-picker": minor
+"@heroui/date-picker": patch
 ---
 
-fix date-range-picker preset (#5309)
+fix date-range-picker error state (#5309)
