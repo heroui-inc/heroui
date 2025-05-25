@@ -1,7 +1,13 @@
 import type {InputVariantProps, SlotsToClasses, InputSlots} from "@heroui/theme";
 import type {AriaTextFieldOptions} from "@react-aria/textfield";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {
+  HTMLHeroUIProps,
+  mapPropsVariants,
+  PropGetter,
+  useProviderContext,
+  useInputLabelPlacement,
+} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {AriaTextFieldProps} from "@react-types/textfield";
 import {useFocusRing} from "@react-aria/focus";
@@ -227,14 +233,10 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
 
   const isInvalid = validationState === "invalid" || isAriaInvalid;
 
-  // TODO: not using useLabelPlacement because `outside-top` doesn't support in other components.
-  const labelPlacement = useMemo<InputVariantProps["labelPlacement"]>(() => {
-    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, label]);
+  const labelPlacement = useInputLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const errorMessage =
     typeof props.errorMessage === "function"
