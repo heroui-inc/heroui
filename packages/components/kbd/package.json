@@ -1,6 +1,6 @@
 {
   "name": "@heroui/kbd",
-  "version": "2.2.15",
+  "version": "2.2.16-beta.3",
   "description": "The keyboard key components indicates which key or set of keys used to execute a specificv  action",
   "keywords": [
     "kbd"
@@ -36,13 +36,13 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.6"
+    "@heroui/theme": ">=2.4.16-beta.0"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/utils": "3.28.2"
+    "@react-aria/utils": "3.29.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

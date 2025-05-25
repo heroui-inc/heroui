@@ -21,7 +21,6 @@ import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {dateRangePicker, dateInput, cn} from "@heroui/theme";
 import {FormContext, useSlottedContext} from "@heroui/form";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
 import {useDatePickerBase} from "./use-date-picker-base";
 interface Props<T extends DateValue>
@@ -216,10 +215,6 @@ export function useDateRangePicker<T extends DateValue>({
             props.className,
           ),
         }),
-        shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-          ? popoverProps.shouldCloseOnInteractOutside
-          : (element: Element) =>
-              ariaShouldCloseOnInteractOutside(element, popoverTriggerRef, state),
       },
     } as PopoverProps;
   };

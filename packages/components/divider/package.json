@@ -1,6 +1,6 @@
 {
   "name": "@heroui/divider",
-  "version": "2.2.13",
+  "version": "2.2.14-beta.3",
   "description": ". A separator is a visual divider between two groups of content",
   "keywords": [
     "divider"
@@ -36,13 +36,13 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.6"
+    "@heroui/theme": ">=2.4.16-beta.0"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-rsc-utils": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
-    "@react-types/shared": "3.29.0"
+    "@react-types/shared": "3.29.1"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
