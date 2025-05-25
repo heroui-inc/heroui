@@ -127,11 +127,10 @@ export function useDateRangePicker<T extends DateValue>({
 
   // Force revalidation when value changes programmatically
   useEffect(() => {
-    if (state.value) {
       // Trigger revalidation to sync React Aria's internal validation state
       // with the new programmatically set value
       state.commitValidation();
-    }
+  
   }, [state.value, state.commitValidation]);
 
   const isInvalid = isInvalidProp || isAriaInvalid;
