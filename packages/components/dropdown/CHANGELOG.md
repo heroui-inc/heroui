@@ -1,5 +1,14 @@
 # @heroui/dropdown
 
+## 2.3.20-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/menu@2.2.19-beta.4
+  - @heroui/popover@2.3.20-beta.4
+  - @heroui/aria-utils@2.2.17-beta.4
+
 ## 2.3.20-beta.3
 
 ### Patch Changes

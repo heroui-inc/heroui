@@ -1,5 +1,13 @@
 # @heroui/button
 
+## 2.2.20-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/ripple@2.2.15-beta.2
+  - @heroui/spinner@2.2.17-beta.4
+
 ## 2.2.20-beta.3
 
 ### Patch Changes

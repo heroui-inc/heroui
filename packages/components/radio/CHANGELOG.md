@@ -1,5 +1,12 @@
 # @heroui/radio
 
+## 2.3.19-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.19-beta.4
+
 ## 2.3.19-beta.3
 
 ### Patch Changes

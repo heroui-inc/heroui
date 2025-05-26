@@ -1,5 +1,14 @@
 # @heroui/popover
 
+## 2.3.20-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.20-beta.4
+  - @heroui/aria-utils@2.2.17-beta.4
+  - @heroui/framer-utils@2.1.16-beta.4
+
 ## 2.3.20-beta.3
 
 ### Patch Changes

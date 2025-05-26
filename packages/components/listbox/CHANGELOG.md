@@ -1,5 +1,13 @@
 # @heroui/listbox
 
+## 2.3.19-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/aria-utils@2.2.17-beta.4
+  - @heroui/divider@2.2.14-beta.3
+
 ## 2.3.19-beta.3
 
 ### Patch Changes
