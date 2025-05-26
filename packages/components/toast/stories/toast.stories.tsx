@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from "@heroui/modal";
 import {Drawer, DrawerContent} from "@heroui/drawer";
+import {Spinner} from "@heroui/spinner";
 
 import {Toast, ToastProps, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
@@ -495,6 +496,14 @@ export const PromiseToast = {
   render: PromiseToastTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const PromiseWithCustomLoadingComponent = {
+  render: PromiseToastTemplate,
+  args: {
+    ...defaultProps,
+    loadingComponent: <Spinner variant="spinner" />,
   },
 };
 
