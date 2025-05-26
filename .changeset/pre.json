@@ -92,10 +92,12 @@
     "@heroui/use-aria-overlay": "2.0.0"
   },
   "changesets": [
+    "hot-lobsters-collect",
     "kind-icons-talk",
     "light-cups-melt",
     "poor-experts-leave",
     "quiet-colts-add",
+    "selfish-kings-clap",
     "slimy-beers-invent",
     "slimy-lobsters-peel",
     "strange-coats-carry",

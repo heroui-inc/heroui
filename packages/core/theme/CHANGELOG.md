@@ -1,5 +1,11 @@
 # @heroui/theme
 
+## 2.4.16-beta.3
+
+### Patch Changes
+
+- [#4775](https://github.com/heroui-inc/heroui/pull/4775) [`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f) Thanks [@abhinav700](https://github.com/abhinav700)! - add 'outside-top' prop to input (#3058)
+
 ## 2.4.16-beta.2
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @heroui/autocomplete
 
+## 2.3.21-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.20-beta.4
+  - @heroui/form@2.1.19-beta.4
+  - @heroui/input@2.4.20-beta.4
+  - @heroui/listbox@2.3.19-beta.4
+  - @heroui/popover@2.3.20-beta.4
+  - @heroui/scroll-shadow@2.3.14-beta.2
+  - @heroui/spinner@2.2.17-beta.4
+  - @heroui/aria-utils@2.2.17-beta.4
+
 ## 2.3.21-beta.3
 
 ### Patch Changes
