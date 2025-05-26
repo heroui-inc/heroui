@@ -291,7 +291,8 @@
           "key": "input",
           "title": "Input",
           "keywords": "input, text box, form field, data entry",
-          "path": "/docs/components/input.mdx"
+          "path": "/docs/components/input.mdx",
+          "updated": true
         },
         {
           "key": "input-otp",
@@ -429,7 +430,8 @@
           "key": "toast",
           "title": "Toast",
           "keywords": "toast, notification, message",
-          "path": "/docs/components/toast.mdx"
+          "path": "/docs/components/toast.mdx",
+          "updated": true
         },
         {
           "key": "textarea",
