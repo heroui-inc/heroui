@@ -1,5 +1,11 @@
 # @heroui/date-picker
 
+## 2.3.20
+
+### Patch Changes
+
+- [#5317](https://github.com/heroui-inc/heroui/pull/5317) [`d40c744`](https://github.com/heroui-inc/heroui/commit/d40c744f46f14c2212bd4c9ba116bb866c368426) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - fix date-range-picker error state (#5309)
+
 ## 2.3.19
 
 ### Patch Changes
