@@ -3,4 +3,4 @@
 "@heroui/theme": patch
 ---
 
-Fixing the spinner and renaming loadingIcon to loadingComponent.
+Renaming loadingIcon to loadingComponent.

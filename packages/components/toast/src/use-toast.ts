@@ -463,7 +463,15 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     (props = {}) => ({
       className: slots.loadingComponent({class: classNames?.loadingComponent}),
       color: "current",
-      size: "sm",
+      ...props,
+    }),
+    [],
+  );
+
+  const getSpinnerComponentProps: PropGetter = useCallback(
+    (props = {}) => ({
+      classNames: {wrapper: slots.loadingComponent({class: classNames?.loadingComponent})},
+      color: "current",
       ...props,
     }),
     [],
@@ -669,6 +677,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     getMotionDivProps,
     getCloseIconProps,
     getLoadingComponentProps,
+    getSpinnerComponentProps,
     progressBarRef,
     endContent,
     slots,

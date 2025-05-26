@@ -50,6 +50,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     getMotionDivProps,
     getCloseIconProps,
     getLoadingComponentProps,
+    getSpinnerComponentProps,
     isLoading,
   } = useToast({
     ...props,
@@ -63,12 +64,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       ? cloneElement(loadingComponent, getLoadingComponentProps())
       : null;
   const loadingIconComponent = isLoading
-    ? customLoadingComponent || (
-        <Spinner
-          aria-label="loadingIcon"
-          classNames={{wrapper: getLoadingComponentProps().className}}
-        />
-      )
+    ? customLoadingComponent || <Spinner aria-label="loadingIcon" {...getSpinnerComponentProps()} />
     : null;
 
   const customCloseIcon =
