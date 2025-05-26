@@ -15,12 +15,26 @@ Divider is a component that separates content in a page.
 
 <CarbonAd/>
 
+## Installation
+
+<PackageManagers
+  showGlobalInstallWarning
+  commands={{
+    cli: "npx heroui-cli@latest add divider",
+    npm: "npm install @heroui/divider",
+    yarn: "yarn add @heroui/divider",
+    pnpm: "pnpm add @heroui/divider",
+    bun: "bun add @heroui/divider"
+  }}
+/>
+
+
 ## Import
 
 <ImportTabs
   commands={{
-    main: 'import {Divider} from "@nextui-org/react";',
-    individual: 'import {Divider} from "@nextui-org/divider";',
+    main: 'import {Divider} from "@heroui/react";',
+    individual: 'import {Divider} from "@heroui/divider";',
   }}
 />
 
@@ -51,6 +65,13 @@ Divider is a component that separates content in a page.
 
 ### Divider Props
 
-| Attribute   | Type                       | Description                     | Default      |
-| ----------- | -------------------------- | ------------------------------- | ------------ |
-| orientation | `horizontal` \| `vertical` | The orientation of the divider. | `horizontal` |
+<APITable
+  data={[
+    {
+      attribute: "orientation",
+      type: "`horizontal` | `vertical`",
+      description: "The orientation of the divider.",
+      default: "`horizontal`"
+    }
+  ]}
+/>

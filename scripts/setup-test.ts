@@ -1,4 +1,5 @@
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import { configure } from "@testing-library/react";
 
 const {getComputedStyle} = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);
@@ -29,3 +30,13 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   unobserve: jest.fn(),
   disconnect: jest.fn(),
 }));
+
+global.console.error = jest.fn().mockImplementation((message) => {
+  if (message && typeof message === "string" && message.includes("Warning: `ReactDOMTestUtils.act`")) {
+    return;
+  }
+});
+
+configure({
+  reactStrictMode: process.env.STRICT_MODE === "true",
+});

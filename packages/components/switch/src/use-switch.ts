@@ -1,16 +1,15 @@
-import type {ToggleVariantProps, ToggleSlots, SlotsToClasses} from "@nextui-org/theme";
-import type {FocusableRef} from "@react-types/shared";
+import type {ToggleVariantProps, ToggleSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaSwitchProps} from "@react-aria/switch";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {ReactNode, Ref, useCallback, useId, useRef, useState} from "react";
-import {mapPropsVariants} from "@nextui-org/system";
+import {ReactNode, Ref, useCallback, useId, useRef} from "react";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {mergeRefs} from "@heroui/react-utils";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useHover} from "@react-aria/interactions";
-import {usePress} from "@nextui-org/use-aria-press";
-import {toggle} from "@nextui-org/theme";
+import {toggle} from "@heroui/theme";
 import {chain, mergeProps} from "@react-aria/utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
-import {useFocusableRef} from "@nextui-org/react-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {useSwitch as useReactAriaSwitch} from "@react-aria/switch";
 import {useMemo} from "react";
 import {useToggleState} from "@react-stately/toggle";
@@ -23,11 +22,12 @@ export type SwitchThumbIconProps = {
   isSelected: boolean;
   className: string;
 };
-interface Props extends HTMLNextUIProps<"input"> {
+
+interface Props extends HTMLHeroUIProps<"input"> {
   /**
    * Ref to the DOM node.
    */
-  ref?: Ref<HTMLElement>;
+  ref?: Ref<HTMLInputElement>;
   /**
    * The label of the switch.
    */
@@ -76,6 +76,8 @@ export type UseSwitchProps = Omit<Props, "defaultChecked"> &
   ToggleVariantProps;
 
 export function useSwitch(originalProps: UseSwitchProps = {}) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, toggle.variantKeys);
 
   const {
@@ -100,8 +102,12 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
 
   const Component = as || "label";
 
-  const inputRef = useRef(null);
-  const domRef = useFocusableRef(ref as FocusableRef<HTMLLabelElement>, inputRef);
+  const domRef = useRef<HTMLLabelElement>(null);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const disableAnimation =
+    originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
   const labelId = useId();
 
@@ -139,11 +145,17 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
 
   const state = useToggleState(ariaSwitchProps);
 
-  const {
-    inputProps,
-    isPressed: isPressedKeyboard,
-    isReadOnly,
-  } = useReactAriaSwitch(ariaSwitchProps, state, inputRef);
+  // if we use `react-hook-form`, it will set the switch value using the ref in register
+  // i.e. setting ref.current.checked to true or false which is uncontrolled
+  // hence, sync the state with `ref.current.checked`
+  useSafeLayoutEffect(() => {
+    if (!inputRef.current) return;
+    const isInputRefChecked = !!inputRef.current.checked;
+
+    state.setSelected(isInputRefChecked);
+  }, [inputRef.current]);
+
+  const {inputProps, isPressed, isReadOnly} = useReactAriaSwitch(ariaSwitchProps, state, inputRef);
   const {focusProps, isFocused, isFocusVisible} = useFocusRing({autoFocus: inputProps.autoFocus});
   const {hoverProps, isHovered} = useHover({
     isDisabled: inputProps.disabled,
@@ -151,24 +163,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
 
   const isInteractionDisabled = ariaSwitchProps.isDisabled || isReadOnly;
 
-  // Handle press state for full label. Keyboard press state is returned by useSwitch
-  // since it is handled on the <input> element itself.
-  const [isPressed, setPressed] = useState(false);
-  const {pressProps} = usePress({
-    isDisabled: isInteractionDisabled,
-    onPressStart(e) {
-      if (e.pointerType !== "keyboard") {
-        setPressed(true);
-      }
-    },
-    onPressEnd(e) {
-      if (e.pointerType !== "keyboard") {
-        setPressed(false);
-      }
-    },
-  });
-
-  const pressed = isInteractionDisabled ? false : isPressed || isPressedKeyboard;
+  const pressed = isInteractionDisabled ? false : isPressed;
 
   const isSelected = inputProps.checked;
   const isDisabled = inputProps.disabled;
@@ -177,15 +172,16 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
     () =>
       toggle({
         ...variantProps,
+        disableAnimation,
       }),
-    [...Object.values(variantProps)],
+    [objectToDeps(variantProps), disableAnimation],
   );
 
   const baseStyles = clsx(classNames?.base, className);
 
   const getBaseProps: PropGetter = (props) => {
     return {
-      ...mergeProps(hoverProps, pressProps, otherProps, props),
+      ...mergeProps(hoverProps, otherProps, props),
       ref: domRef,
       className: slots.base({class: clsx(baseStyles, props?.className)}),
       "data-disabled": dataAttr(isDisabled),
@@ -212,8 +208,9 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
   const getInputProps: PropGetter = (props = {}) => {
     return {
       ...mergeProps(inputProps, focusProps, props),
-      ref: inputRef,
+      ref: mergeRefs(inputRef, ref),
       id: inputProps.id,
+      className: slots.hiddenInput({class: classNames?.hiddenInput}),
       onChange: chain(onChange, inputProps.onChange),
     };
   };

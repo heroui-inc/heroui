@@ -1,9 +1,10 @@
 import type {GridNode} from "@react-types/grid";
+import type {TableColumnProps} from "./base";
 
 import {Key, useMemo} from "react";
-import {forwardRef, HTMLNextUIProps} from "@nextui-org/system";
-import {useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 import {useTableCell} from "@react-aria/table";
 import {mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
@@ -11,7 +12,7 @@ import {useFocusRing} from "@react-aria/focus";
 import {ValuesType} from "./use-table";
 
 // @internal
-export interface TableCellProps<T = object> extends HTMLNextUIProps<"td"> {
+export interface TableCellProps<T = object> extends HTMLHeroUIProps<"td"> {
   /**
    * The key of the table row.
    */
@@ -49,6 +50,8 @@ const TableCell = forwardRef<"td", TableCellProps>((props, ref) => {
     );
   }, [node.rendered]);
 
+  const columnProps: TableColumnProps<unknown> = node.column?.props || {};
+
   return (
     <Component
       ref={domRef}
@@ -62,13 +65,13 @@ const TableCell = forwardRef<"td", TableCellProps>((props, ref) => {
         }),
         otherProps,
       )}
-      className={slots.td?.({class: tdStyles})}
+      className={slots.td?.({align: columnProps.align, class: tdStyles})}
     >
       {cell}
     </Component>
   );
 });
 
-TableCell.displayName = "NextUI.TableCell";
+TableCell.displayName = "HeroUI.TableCell";
 
 export default TableCell;

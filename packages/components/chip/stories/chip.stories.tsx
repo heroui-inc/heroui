@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {chip} from "@nextui-org/theme";
-import {Avatar} from "@nextui-org/avatar";
-import {CheckIcon} from "@nextui-org/shared-icons";
+import {chip} from "@heroui/theme";
+import {Avatar} from "@heroui/avatar";
+import {CheckIcon} from "@heroui/shared-icons";
 
-import {Chip} from "../src";
+import {Chip, ChipProps} from "../src";
 
 export default {
   title: "Components/Chip",

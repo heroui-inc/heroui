@@ -1,10 +1,13 @@
-import {Listbox} from "@nextui-org/listbox";
-import {FreeSoloPopover} from "@nextui-org/popover";
-import {ChevronDownIcon} from "@nextui-org/shared-icons";
-import {Spinner} from "@nextui-org/spinner";
-import {forwardRef} from "@nextui-org/system";
-import {ScrollShadow} from "@nextui-org/scroll-shadow";
-import {cloneElement, ForwardedRef, ReactElement, Ref, useMemo} from "react";
+import type {ForwardedRef, ReactElement} from "react";
+
+import {Listbox} from "@heroui/listbox";
+import {FreeSoloPopover} from "@heroui/popover";
+import {ChevronDownIcon} from "@heroui/shared-icons";
+import {Spinner} from "@heroui/spinner";
+import {useMemo} from "react";
+import {forwardRef} from "@heroui/system";
+import {ScrollShadow} from "@heroui/scroll-shadow";
+import {cloneElement} from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {AnimatePresence} from "framer-motion";
 
@@ -13,7 +16,12 @@ import {UseSelectProps, useSelect} from "./use-select";
 
 interface Props<T> extends UseSelectProps<T> {}
 
-function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectElement>) {
+export type SelectProps<T extends object = object> = Props<T>;
+
+const Select = forwardRef(function Select<T extends object>(
+  props: SelectProps<T>,
+  ref: ForwardedRef<HTMLSelectElement>,
+) {
   const {
     Component,
     state,
@@ -24,6 +32,7 @@ function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectE
     selectorIcon = <ChevronDownIcon />,
     description,
     errorMessage,
+    isInvalid,
     startContent,
     endContent,
     placeholder,
@@ -52,19 +61,23 @@ function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectE
   const clonedIcon = cloneElement(selectorIcon as ReactElement, getSelectorIconProps());
 
   const helperWrapper = useMemo(() => {
-    if (!hasHelper) return null;
+    const shouldShowError = isInvalid && errorMessage;
+    const hasContent = shouldShowError || description;
+
+    if (!hasHelper || !hasContent) return null;
 
     return (
       <div {...getHelperWrapperProps()}>
-        {errorMessage ? (
+        {shouldShowError ? (
           <div {...getErrorMessageProps()}>{errorMessage}</div>
-        ) : description ? (
+        ) : (
           <div {...getDescriptionProps()}>{description}</div>
-        ) : null}
+        )}
       </div>
     );
   }, [
     hasHelper,
+    isInvalid,
     errorMessage,
     description,
     getHelperWrapperProps,
@@ -73,7 +86,7 @@ function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectE
   ]);
 
   const renderSelectedItem = useMemo(() => {
-    if (!state.selectedItems) return placeholder;
+    if (!state.selectedItems?.length) return placeholder;
 
     if (renderValue && typeof renderValue === "function") {
       const mappedItems = [...state.selectedItems].map((item) => ({
@@ -103,7 +116,7 @@ function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectE
   const popoverContent = useMemo(
     () =>
       state.isOpen ? (
-        <FreeSoloPopover {...getPopoverProps()} state={state} triggerRef={triggerRef}>
+        <FreeSoloPopover {...getPopoverProps()}>
           <ScrollShadow {...getListboxWrapperProps()}>
             <Listbox {...getListboxProps()} />
           </ScrollShadow>
@@ -121,10 +134,10 @@ function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectE
           {!shouldLabelBeOutside ? labelContent : null}
           <div {...getInnerWrapperProps()}>
             {startContent}
-            <span {...getValueProps()}>
-              {renderSelectedItem}
-              {state.selectedItems && <VisuallyHidden>,</VisuallyHidden>}
-            </span>
+            <span {...getValueProps()}>{renderSelectedItem}</span>
+            {endContent && state.selectedItems && (
+              <VisuallyHidden elementType="span">,</VisuallyHidden>
+            )}
             {endContent}
           </div>
           {renderIndicator}
@@ -134,11 +147,6 @@ function Select<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLSelectE
       {disableAnimation ? popoverContent : <AnimatePresence>{popoverContent}</AnimatePresence>}
     </div>
   );
-}
+}) as <T extends object>(props: SelectProps<T>) => ReactElement;
 
-export type SelectProps<T = object> = Props<T> & {ref?: Ref<HTMLElement>};
-
-// forwardRef doesn't support generic parameters, so cast the result to the correct type
-export default forwardRef(Select) as <T = object>(props: SelectProps<T>) => ReactElement;
-
-Select.displayName = "NextUI.Select";
+export default Select;

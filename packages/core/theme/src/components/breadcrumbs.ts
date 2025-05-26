@@ -17,13 +17,12 @@ const breadcrumbItem = tv({
       "flex gap-1 items-center",
       "cursor-pointer",
       "whitespace-nowrap",
-      "line-clamp-1",
       "outline-none",
       "tap-highlight-transparent",
       // focus ring
       ...dataFocusVisibleClasses,
     ],
-    separator: "text-default-400 px-1",
+    separator: "text-default-400 px-1 rtl:rotate-180",
   },
   variants: {
     color: {
@@ -85,7 +84,7 @@ const breadcrumbItem = tv({
         item: "cursor-default",
       },
       false: {
-        item: ["hover:opacity-80", "active:opacity-disabled"],
+        item: ["hover:opacity-hover", "active:opacity-disabled"],
       },
     },
     isDisabled: {
@@ -108,7 +107,6 @@ const breadcrumbItem = tv({
     color: "foreground",
     underline: "hover",
     isDisabled: false,
-    disableAnimation: false,
   },
   compoundVariants: [
     // isCurrent && color

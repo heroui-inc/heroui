@@ -1,7 +1,11 @@
+import type {ValidationResult} from "@react-types/shared";
+
 import React from "react";
 import {Meta} from "@storybook/react";
-import {input} from "@nextui-org/theme";
-import {SendFilledIcon, PlusFilledIcon} from "@nextui-org/shared-icons";
+import {input} from "@heroui/theme";
+import {SendFilledIcon, PlusFilledIcon} from "@heroui/shared-icons";
+import {button} from "@heroui/theme";
+import {Form} from "@heroui/form";
 
 import {Textarea, TextAreaProps} from "../src";
 
@@ -48,6 +52,12 @@ export default {
       control: {
         type: "boolean",
       },
+    },
+    validationBehavior: {
+      control: {
+        type: "select",
+      },
+      options: ["aria", "native"],
     },
   },
   decorators: [
@@ -99,6 +109,24 @@ const MaxRowsTemplate = (args: TextAreaProps) => (
   </div>
 );
 
+const FormTemplate = (args: TextAreaProps) => (
+  <form
+    className="w-full max-w-xl flex flex-row items-end gap-4"
+    onSubmit={(e) => {
+      alert(`Submitted value: ${e.target["textarea"].value}`);
+      e.preventDefault();
+    }}
+  >
+    <div className="w-full max-w-[440px]">
+      <Textarea name="textarea" {...args} />
+    </div>
+
+    <button className={button({color: "primary"})} type="submit">
+      Submit
+    </button>
+  </form>
+);
+
 export const Default = {
   render: Template,
 
@@ -125,7 +153,7 @@ export const FullRounded = {
 };
 
 export const Required = {
-  render: Template,
+  render: FormTemplate,
 
   args: {
     ...defaultProps,
@@ -186,6 +214,29 @@ export const WithEndContent = {
   },
 };
 
+const ServerValidationTemplate = (args: TextAreaProps) => {
+  const [serverErrors, setServerErrors] = React.useState({});
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setServerErrors({
+      comment: "Please provide a valid comment.",
+    });
+  };
+
+  return (
+    <Form
+      className="flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <Textarea {...args} label="Comment" name="comment" />
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+    </Form>
+  );
+};
+
 export const Controlled = {
   render: ControlledTemplate,
 
@@ -217,7 +268,59 @@ export const WithErrorMessage = {
 
   args: {
     ...defaultProps,
+    IsInvalid: true,
     errorMessage: "Please enter a valid description",
+  },
+};
+
+export const WithErrorMessageFunction = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    isRequired: true,
+    minLength: "10",
+    maxLength: "",
+    label: "Comment",
+    placeholder: "Enter your comment (10-100 characters)",
+    errorMessage: (value: ValidationResult) => {
+      if (value.validationDetails.tooLong) {
+        return "Comment is too short. Min 10 characters.";
+      }
+      if (value.validationDetails.tooShort) {
+        return "Comment is too long. Max 100 characters.";
+      }
+      if (value.validationDetails.valueMissing) {
+        return "Comment is required";
+      }
+    },
+  },
+};
+
+export const WithValidation = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    validate: (value) => {
+      if (value.length < 10) {
+        return "Comment is too short. Min 10 characters.";
+      }
+      if (value.length > 100) {
+        return "Comment is too long. Max 100 characters.";
+      }
+    },
+    isRequired: true,
+    label: "Comment",
+    placeholder: "Enter your comment (10-100 characters)",
+  },
+};
+
+export const WithServerValidation = {
+  render: ServerValidationTemplate,
+
+  args: {
+    ...defaultProps,
   },
 };
 
@@ -229,5 +332,17 @@ export const IsInvalid = {
     isInvalid: true,
     defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     errorMessage: "Please enter a valid description",
+  },
+};
+
+export const Clearable = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    placeholder: "Enter your description",
+    defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    // eslint-disable-next-line no-console
+    onClear: () => console.log("textarea cleared"),
   },
 };

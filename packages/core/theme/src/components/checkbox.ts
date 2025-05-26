@@ -1,7 +1,7 @@
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "../utils/tv";
-import {groupDataFocusVisibleClasses} from "../utils";
+import {groupDataFocusVisibleClasses, hiddenInputClasses} from "../utils";
 
 /**
  * Checkbox wrapper **Tailwind Variants** component
@@ -21,7 +21,7 @@ import {groupDataFocusVisibleClasses} from "../utils";
  */
 const checkbox = tv({
   slots: {
-    base: "group relative max-w-fit inline-flex items-center justify-start cursor-pointer tap-highlight-transparent p-2 -m-2",
+    base: "group relative max-w-fit inline-flex items-center justify-start cursor-pointer tap-highlight-transparent p-2 -m-2 select-none",
     wrapper: [
       "relative",
       "inline-flex",
@@ -51,7 +51,8 @@ const checkbox = tv({
       // focus ring
       ...groupDataFocusVisibleClasses,
     ],
-    icon: "z-10 w-4 h-3 opacity-0 group-data-[selected=true]:opacity-100",
+    hiddenInput: hiddenInputClasses,
+    icon: "z-10 w-4 h-3 opacity-0 group-data-[selected=true]:opacity-100 pointer-events-none",
     label: "relative text-foreground select-none",
   },
   variants: {
@@ -78,7 +79,7 @@ const checkbox = tv({
     size: {
       sm: {
         wrapper: [
-          "w-4 h-4 mr-2",
+          "w-4 h-4 me-2",
           "rounded-[calc(theme(borderRadius.medium)*0.5)]",
           "before:rounded-[calc(theme(borderRadius.medium)*0.5)]",
           "after:rounded-[calc(theme(borderRadius.medium)*0.5)]",
@@ -88,7 +89,7 @@ const checkbox = tv({
       },
       md: {
         wrapper: [
-          "w-5 h-5 mr-2",
+          "w-5 h-5 me-2",
           "rounded-[calc(theme(borderRadius.medium)*0.6)]",
           "before:rounded-[calc(theme(borderRadius.medium)*0.6)]",
           "after:rounded-[calc(theme(borderRadius.medium)*0.6)]",
@@ -98,7 +99,7 @@ const checkbox = tv({
       },
       lg: {
         wrapper: [
-          "w-6 h-6 mr-2",
+          "w-6 h-6 me-2",
           "rounded-[calc(theme(borderRadius.medium)*0.7)]",
           "before:rounded-[calc(theme(borderRadius.medium)*0.7)]",
           "after:rounded-[calc(theme(borderRadius.medium)*0.7)]",
@@ -189,7 +190,6 @@ const checkbox = tv({
     size: "md",
     isDisabled: false,
     lineThrough: false,
-    disableAnimation: false,
   },
 });
 
@@ -235,7 +235,6 @@ const checkboxGroup = tv({
   defaultVariants: {
     isInvalid: false,
     isRequired: false,
-    disableAnimation: false,
   },
 });
 

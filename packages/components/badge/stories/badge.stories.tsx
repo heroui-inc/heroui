@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {badge} from "@nextui-org/theme";
-import {Avatar} from "@nextui-org/avatar";
-import {CheckIcon} from "@nextui-org/shared-icons";
-import {Switch} from "@nextui-org/switch";
-import {Notification, CartIcon} from "@nextui-org/shared-icons";
+import {badge} from "@heroui/theme";
+import {Avatar} from "@heroui/avatar";
+import {CheckIcon} from "@heroui/shared-icons";
+import {Switch} from "@heroui/switch";
+import {Notification, CartIcon} from "@heroui/shared-icons";
 
 import {Badge, BadgeProps} from "../src";
 
@@ -65,15 +65,22 @@ const defaultProps = {
   content: 5,
 };
 
-const Template = (args: BadgeProps) => (
-  <Badge {...args}>
-    <Avatar
-      isBordered={args.classNames?.badge?.includes("bottom")}
-      radius={args.shape === "rectangle" ? "lg" : "full"}
-      src="https://i.pravatar.cc/300?u=a042581f4e29026709d"
-    />
-  </Badge>
-);
+const Template = (args: BadgeProps) => {
+  const classNamesBadge = args.classNames?.badge;
+  const isBordered = Array.isArray(classNamesBadge)
+    ? classNamesBadge?.some((c) => (c as string).includes("bottom"))
+    : (classNamesBadge as string)?.includes("bottom");
+
+  return (
+    <Badge {...args}>
+      <Avatar
+        isBordered={isBordered}
+        radius={args.shape === "rectangle" ? "lg" : "full"}
+        src="https://i.pravatar.cc/300?u=a042581f4e29026709d"
+      />
+    </Badge>
+  );
+};
 
 const ShapesTemplate = (args: BadgeProps) => (
   <div className="flex gap-4 items-center">

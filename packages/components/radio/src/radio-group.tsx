@@ -1,4 +1,4 @@
-import {forwardRef} from "@nextui-org/system";
+import {forwardRef} from "@heroui/system";
 
 import {RadioGroupProvider} from "./radio-group-context";
 import {UseRadioGroupProps, useRadioGroup} from "./use-radio-group";
@@ -12,6 +12,7 @@ const RadioGroup = forwardRef<"div", RadioGroupProps>((props, ref) => {
     label,
     context,
     description,
+    isInvalid,
     errorMessage,
     getGroupProps,
     getLabelProps,
@@ -26,7 +27,7 @@ const RadioGroup = forwardRef<"div", RadioGroupProps>((props, ref) => {
       <div {...getWrapperProps()}>
         <RadioGroupProvider value={context}>{children}</RadioGroupProvider>
       </div>
-      {errorMessage ? (
+      {isInvalid && errorMessage ? (
         <div {...getErrorMessageProps()}>{errorMessage}</div>
       ) : description ? (
         <div {...getDescriptionProps()}>{description}</div>
@@ -35,6 +36,6 @@ const RadioGroup = forwardRef<"div", RadioGroupProps>((props, ref) => {
   );
 });
 
-RadioGroup.displayName = "NextUI.RadioGroup";
+RadioGroup.displayName = "HeroUI.RadioGroup";
 
 export default RadioGroup;

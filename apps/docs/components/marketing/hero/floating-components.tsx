@@ -9,8 +9,8 @@ import {
   Switch,
   Spinner,
   Pagination,
-} from "@nextui-org/react";
-import {MoonFilledIcon, SunFilledIcon} from "@nextui-org/shared-icons";
+} from "@heroui/react";
+import {MoonFilledIcon, SunFilledIcon} from "@heroui/shared-icons";
 import {useTheme} from "next-themes";
 import NextImage from "next/image";
 
@@ -19,7 +19,7 @@ import {FloatingTabs} from "./floating-tabs";
 import {UserTwitterCard} from "@/components/demos/user-twitter-card";
 import {useIsMounted} from "@/hooks/use-is-mounted";
 import {useMediaQuery} from "@/hooks/use-media-query";
-import {NextUILogo} from "@/components/nextui-logo";
+import {HeroUILogo} from "@/components/heroui-logo";
 
 export const FloatingComponents: React.FC<{}> = () => {
   const {theme, setTheme} = useTheme();
@@ -50,9 +50,9 @@ export const FloatingComponents: React.FC<{}> = () => {
         />
 
         <Input
-          className="absolute -top-[130px] -right-[120px] animate-[levitate_10s_ease_infinite] w-[200px]"
+          className="absolute -top-[60px] -right-[80px] animate-[levitate_10s_ease_infinite] w-[200px]"
           color="secondary"
-          defaultValue="NextUI"
+          defaultValue="HeroUI"
           label="Input"
           labelPlacement="outside"
           variant="bordered"
@@ -61,13 +61,13 @@ export const FloatingComponents: React.FC<{}> = () => {
 
         <Card
           isFooterBlurred
-          className="absolute -top-[260px] right-[100px] h-[120px] animate-[levitate_12s_ease_infinite_1s] z-0 max-w-fit"
+          className="absolute -top-[270px] right-[100px] h-[120px] animate-[levitate_12s_ease_infinite_1s] z-0 max-w-fit"
         >
           <Image
             alt="Professional camera"
             as={NextImage}
             className="object-cover -translate-y-12 h-[100%]"
-            height={120}
+            height={180}
             src="/images/card-example-6.webp"
             width={120}
           />
@@ -79,18 +79,18 @@ export const FloatingComponents: React.FC<{}> = () => {
 
         <FloatingTabs />
 
-        <UserTwitterCard className="absolute left-[80px] -top-[80px] animate-[levitate_16s_ease_infinite] border-none" />
+        <UserTwitterCard className="absolute left-[30px] -top-[80px] animate-[levitate_16s_ease_infinite] border-none" />
 
         <Card
-          className="absolute right-[110px] -top-[60px] animate-[levitate_18s_ease_infinite] z-10 max-w-fit border-none"
+          className="absolute right-[150px] -top-[50px] animate-[levitate_18s_ease_infinite] z-10 max-w-fit border-none"
           shadow="lg"
         >
           <CardBody>
-            <NextUILogo small size={60} />
+            <HeroUILogo small size={60} />
           </CardBody>
         </Card>
 
-        <div className="absolute z-10 -top-[40px] -right-[230px] animate-[levitate_14s_ease_infinite_1s]">
+        <div className="absolute z-10 -top-[120px] -right-[90px] animate-[levitate_14s_ease_infinite_1s]">
           <Pagination
             isCompact
             showControls
@@ -107,7 +107,7 @@ export const FloatingComponents: React.FC<{}> = () => {
           <Tooltip
             className="text-sm animate-[levitate_14s_ease_infinite]"
             color="secondary"
-            content="Developers love Next.js"
+            content="Build beautiful apps faster"
             isOpen={!isTablet}
             placement="top"
             style={{

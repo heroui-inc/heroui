@@ -23,12 +23,15 @@ import {dataFocusVisibleClasses, groupDataFocusVisibleClasses} from "../utils";
  */
 const input = tv({
   slots: {
-    base: "group flex flex-col",
+    base: "group flex flex-col data-[hidden=true]:hidden",
     label: [
       "absolute",
       "z-10",
       "pointer-events-none",
       "origin-top-left",
+      "flex-shrink-0",
+      // Using RTL here as Tailwind CSS doesn't support `start` and `end` logical properties for transforms yet.
+      "rtl:origin-top-right",
       "subpixel-antialiased",
       "block",
       "text-small",
@@ -42,14 +45,18 @@ const input = tv({
       "w-full font-normal bg-transparent !outline-none placeholder:text-foreground-500 focus-visible:outline-none",
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
+      "data-[type=color]:rounded-none",
+      "file:cursor-pointer file:bg-transparent file:border-0",
+      "autofill:bg-transparent bg-clip-text",
     ],
     clearButton: [
       "p-2",
       "-m-2",
       "z-10",
-      "hidden",
       "absolute",
-      "right-3",
+      "end-3",
+      "start-auto",
+      "pointer-events-none",
       "appearance-none",
       "outline-none",
       "select-none",
@@ -79,7 +86,7 @@ const input = tv({
           "bg-default-100",
           "border-medium",
           "border-default-200",
-          "data-[hover=true]:border-default-400",
+          "data-[hover=true]:border-default-400 focus-within:border-default-400",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
       },
@@ -129,17 +136,18 @@ const input = tv({
     size: {
       sm: {
         label: "text-tiny",
-        inputWrapper: "h-unit-8 min-h-unit-8 px-2 rounded-small",
+        inputWrapper: "h-8 min-h-8 px-2 rounded-small",
         input: "text-small",
         clearButton: "text-medium",
       },
       md: {
-        inputWrapper: "h-unit-10 min-h-unit-10 rounded-medium",
+        inputWrapper: "h-10 min-h-10 rounded-medium",
         input: "text-small",
         clearButton: "text-large",
       },
       lg: {
-        inputWrapper: "h-unit-12 min-h-unit-12 rounded-large",
+        label: "text-medium",
+        inputWrapper: "h-12 min-h-12 rounded-large",
         input: "text-medium",
         clearButton: "text-large",
       },
@@ -169,10 +177,10 @@ const input = tv({
         base: "flex-row items-center flex-nowrap data-[has-helper=true]:items-start",
         inputWrapper: "flex-1",
         mainWrapper: "flex flex-col",
-        label: "relative text-foreground pr-2",
+        label: "relative text-foreground pe-2 ps-2 pointer-events-auto",
       },
       inside: {
-        label: "text-tiny cursor-text",
+        label: "cursor-text",
         inputWrapper: "flex-col items-start justify-center gap-0",
         innerWrapper: "group-data-[has-label=true]:items-end",
       },
@@ -181,11 +189,16 @@ const input = tv({
       true: {
         base: "w-full",
       },
+      false: {},
     },
     isClearable: {
       true: {
-        input: "peer pr-6",
-        clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
+        input: "peer pe-6 input-search-cancel-button-none",
+        clearButton: [
+          "peer-data-[filled=true]:pointer-events-auto",
+          "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
+          "peer-data-[filled=true]:scale-100",
+        ],
       },
     },
     isDisabled: {
@@ -203,7 +216,7 @@ const input = tv({
     },
     isRequired: {
       true: {
-        label: "after:content-['*'] after:text-danger after:ml-0.5",
+        label: "after:content-['*'] after:text-danger after:ms-0.5",
       },
     },
     isMultiline: {
@@ -212,6 +225,7 @@ const input = tv({
         inputWrapper: "!h-auto",
         innerWrapper: "items-start group-data-[has-label=true]:items-start",
         input: "resize-none data-[hide-scroll=true]:scrollbar-hide",
+        clearButton: "absolute top-2 right-2 rtl:right-auto rtl:left-2 z-10",
       },
     },
     disableAnimation: {
@@ -229,7 +243,14 @@ const input = tv({
           "motion-reduce:transition-none",
           "transition-[transform,color,left,opacity]",
         ],
-        clearButton: ["transition-opacity", "motion-reduce:transition-none"],
+        clearButton: [
+          "scale-90",
+          "ease-out",
+          "duration-150",
+          "transition-[opacity,transform]",
+          "motion-reduce:transition-none",
+          "motion-reduce:scale-100",
+        ],
       },
     },
   },
@@ -238,10 +259,8 @@ const input = tv({
     color: "default",
     size: "md",
     fullWidth: true,
-    labelPlacement: "inside",
     isDisabled: false,
     isMultiline: false,
-    disableAnimation: false,
   },
   compoundVariants: [
     // flat & color
@@ -257,8 +276,8 @@ const input = tv({
       color: "primary",
       class: {
         inputWrapper: [
-          "bg-primary-50",
-          "data-[hover=true]:bg-primary-100",
+          "bg-primary-100",
+          "data-[hover=true]:bg-primary-50",
           "text-primary",
           "group-data-[focus=true]:bg-primary-50",
           "placeholder:text-primary",
@@ -272,9 +291,9 @@ const input = tv({
       color: "secondary",
       class: {
         inputWrapper: [
-          "bg-secondary-50",
+          "bg-secondary-100",
           "text-secondary",
-          "data-[hover=true]:bg-secondary-100",
+          "data-[hover=true]:bg-secondary-50",
           "group-data-[focus=true]:bg-secondary-50",
           "placeholder:text-secondary",
         ],
@@ -287,12 +306,12 @@ const input = tv({
       color: "success",
       class: {
         inputWrapper: [
-          "bg-success-50",
+          "bg-success-100",
           "text-success-600",
           "dark:text-success",
           "placeholder:text-success-600",
           "dark:placeholder:text-success",
-          "data-[hover=true]:bg-success-100",
+          "data-[hover=true]:bg-success-50",
           "group-data-[focus=true]:bg-success-50",
         ],
         input: "placeholder:text-success-600 dark:placeholder:text-success",
@@ -304,12 +323,12 @@ const input = tv({
       color: "warning",
       class: {
         inputWrapper: [
-          "bg-warning-50",
+          "bg-warning-100",
           "text-warning-600",
           "dark:text-warning",
           "placeholder:text-warning-600",
           "dark:placeholder:text-warning",
-          "data-[hover=true]:bg-warning-100",
+          "data-[hover=true]:bg-warning-50",
           "group-data-[focus=true]:bg-warning-50",
         ],
         input: "placeholder:text-warning-600 dark:placeholder:text-warning",
@@ -321,12 +340,12 @@ const input = tv({
       color: "danger",
       class: {
         inputWrapper: [
-          "bg-danger-50",
+          "bg-danger-100",
           "text-danger",
           "dark:text-danger-500",
           "placeholder:text-danger",
           "dark:placeholder:text-danger-500",
-          "data-[hover=true]:bg-danger-100",
+          "data-[hover=true]:bg-danger-50",
           "group-data-[focus=true]:bg-danger-50",
         ],
         input: "placeholder:text-danger dark:placeholder:text-danger-500",
@@ -532,9 +551,9 @@ const input = tv({
       variant: "flat",
       class: {
         inputWrapper: [
-          "bg-danger-50",
-          "data-[hover=true]:bg-danger-100",
-          "group-data-[focus=true]:bg-danger-50",
+          "!bg-danger-50",
+          "data-[hover=true]:!bg-danger-100",
+          "group-data-[focus=true]:!bg-danger-50",
         ],
       },
     },
@@ -542,14 +561,14 @@ const input = tv({
       isInvalid: true,
       variant: "bordered",
       class: {
-        inputWrapper: "!border-danger group-data-[focus=true]:border-danger",
+        inputWrapper: "!border-danger group-data-[focus=true]:!border-danger",
       },
     },
     {
       isInvalid: true,
       variant: "underlined",
       class: {
-        inputWrapper: "after:bg-danger",
+        inputWrapper: "after:!bg-danger",
       },
     },
     // size & labelPlacement
@@ -571,7 +590,6 @@ const input = tv({
       labelPlacement: "inside",
       size: "lg",
       class: {
-        label: "text-small",
         inputWrapper: "h-16 py-2.5 gap-0",
       },
     },
@@ -591,24 +609,18 @@ const input = tv({
         label: ["group-data-[filled-within=true]:pointer-events-auto"],
       },
     },
-    // labelPlacement=[outside,outside-left]
-    {
-      labelPlacement: ["outside", "outside-left"],
-      class: {
-        input: "h-full",
-      },
-    },
+    // labelPlacement=[outside] & isMultiline
     {
       labelPlacement: "outside",
       isMultiline: false,
       class: {
-        base: "group relative justify-end",
+        base: "relative justify-end",
         label: [
           "pb-0",
           "z-20",
           "top-1/2",
           "-translate-y-1/2",
-          "group-data-[filled-within=true]:left-0",
+          "group-data-[filled-within=true]:start-0",
         ],
       },
     },
@@ -758,7 +770,7 @@ const input = tv({
       isMultiline: false,
       class: {
         label: [
-          "left-2",
+          "start-2",
           "text-tiny",
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
         ],
@@ -771,7 +783,8 @@ const input = tv({
       isMultiline: false,
       class: {
         label: [
-          "left-3",
+          "start-3",
+          "end-auto",
           "text-small",
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
         ],
@@ -784,7 +797,8 @@ const input = tv({
       isMultiline: false,
       class: {
         label: [
-          "left-3",
+          "start-3",
+          "end-auto",
           "text-medium",
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
         ],
@@ -859,6 +873,18 @@ const input = tv({
       radius: "full",
       class: {
         inputWrapper: "data-[has-multiple-rows=true]:rounded-large",
+      },
+    },
+    // isClearable & isMultiline
+    {
+      isClearable: true,
+      isMultiline: true,
+      class: {
+        clearButton: [
+          "group-data-[has-value=true]:opacity-70 group-data-[has-value=true]:block",
+          "group-data-[has-value=true]:scale-100",
+          "group-data-[has-value=true]:pointer-events-auto",
+        ],
       },
     },
   ],

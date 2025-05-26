@@ -1,5 +1,6 @@
 import {useMemo, useCallback, useState, useEffect} from "react";
-import {range} from "@nextui-org/shared-utils";
+import {useLocale} from "@react-aria/i18n";
+import {range} from "@heroui/shared-utils";
 
 export enum PaginationItemType {
   DOTS = "dots",
@@ -56,6 +57,10 @@ export function usePagination(props: UsePaginationProps) {
   } = props;
   const [activePage, setActivePage] = useState(page || initialPage);
 
+  const {direction} = useLocale();
+
+  const isRTL = direction === "rtl";
+
   const onChangeActivePage = (newPage: number) => {
     setActivePage(newPage);
     onChange && onChange(newPage);
@@ -77,7 +82,7 @@ export function usePagination(props: UsePaginationProps) {
         onChangeActivePage(pageNumber);
       }
     },
-    [total, activePage],
+    [total, activePage, onChangeActivePage],
   );
 
   const next = () => setPage(activePage + 1);
@@ -93,7 +98,7 @@ export function usePagination(props: UsePaginationProps) {
 
       return range;
     },
-    [showControls],
+    [isRTL, showControls],
   );
 
   const paginationRange = useMemo((): PaginationItemValue[] => {

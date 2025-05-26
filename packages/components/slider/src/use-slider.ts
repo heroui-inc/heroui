@@ -1,15 +1,21 @@
-import type {SliderSlots, SliderVariantProps, SlotsToClasses} from "@nextui-org/theme";
+import type {SliderSlots, SliderVariantProps, SlotsToClasses} from "@heroui/theme";
 
-import {DOMAttributes, HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {slider} from "@nextui-org/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
+import {
+  DOMAttributes,
+  HTMLHeroUIProps,
+  mapPropsVariants,
+  PropGetter,
+  useProviderContext,
+} from "@heroui/system";
+import {slider} from "@heroui/theme";
+import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useSliderState} from "@react-stately/slider";
 import {ReactNode, useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
 import {mergeProps} from "@react-aria/utils";
 import {AriaSliderProps, useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx} from "@nextui-org/shared-utils";
-import {TooltipProps} from "@nextui-org/tooltip";
+import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {TooltipProps} from "@heroui/tooltip";
 import {useHover} from "@react-aria/interactions";
 import {ValueBase} from "@react-types/shared";
 
@@ -23,7 +29,7 @@ export type SliderStepMark = {
 
 export type SliderRenderThumbProps = DOMAttributes<HTMLDivElement> & {index?: number};
 
-interface Props extends HTMLNextUIProps<"div"> {
+interface Props extends HTMLHeroUIProps<"div"> {
   /**
    * Ref to the DOM node.
    */
@@ -96,7 +102,7 @@ interface Props extends HTMLNextUIProps<"div"> {
   classNames?: SlotsToClasses<SliderSlots>;
   /**
    * Tooltip props.
-   * @see [Tooltip](https://nextui.org/components/tooltip) for more details.
+   * @see [Tooltip](https://heroui.com/components/tooltip) for more details.
    * @default {
    *  offset: 15,
    *  delay: 0,
@@ -133,6 +139,8 @@ export type UseSliderProps = Omit<Props, keyof ValueBase<SliderValue>> &
   SliderVariantProps;
 
 export function useSlider(originalProps: UseSliderProps) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, slider.variantKeys);
 
   const {
@@ -167,6 +175,8 @@ export function useSlider(originalProps: UseSliderProps) {
 
   const Component = as || "div";
   const shouldFilterDOMProps = typeof Component === "string";
+  const disableAnimation =
+    originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
   const domRef = useDOMRef(ref);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -231,11 +241,11 @@ export function useSlider(originalProps: UseSliderProps) {
       slider({
         ...variantProps,
         hasMarks,
+        disableAnimation,
         hasSingleThumb,
         isVertical,
-        className,
       }),
-    [...Object.values(variantProps), isVertical, hasSingleThumb, hasMarks, className],
+    [objectToDeps(variantProps), isVertical, disableAnimation, hasSingleThumb, hasMarks],
   );
 
   const [startOffset, endOffset] = [
@@ -301,11 +311,22 @@ export function useSlider(originalProps: UseSliderProps) {
   };
 
   const getTrackProps: PropGetter = (props = {}) => {
+    const fillWidth = (endOffset - startOffset) * 100;
+
     return {
       ref: trackRef,
       "data-slot": "track",
       "data-thumb-hidden": !!originalProps?.hideThumb,
       "data-vertical": isVertical,
+      ...(hasSingleThumb
+        ? {
+            "data-fill-start": fillWidth > 0,
+            "data-fill-end": fillWidth == 100,
+          }
+        : {
+            "data-fill-start": startOffset == 0,
+            "data-fill-end": startOffset * 100 + fillWidth == 100,
+          }),
       className: slots.track({class: classNames?.track}),
       ...trackProps,
       ...props,
@@ -377,6 +398,30 @@ export function useSlider(originalProps: UseSliderProps) {
       "data-in-range": percent <= endOffset && percent >= startOffset,
       style: {
         [isVertical ? "bottom" : direction === "rtl" ? "right" : "left"]: `${percent * 100}%`,
+      },
+      // avoid `onDownTrack` is being called since when you click the mark,
+      // `onDownTrack` will calculate the percent based on the position you click
+      // the calculated value will be set instead of the actual value defined in `marks`
+      onMouseDown: (e: React.MouseEvent) => e.stopPropagation(),
+      onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
+      onClick: (e: any) => {
+        e.stopPropagation();
+        if (state.values.length === 1) {
+          state.setThumbPercent(0, percent);
+        } else {
+          const leftThumbVal = state.values[0];
+          const rightThumbVal = state.values[1];
+
+          if (mark.value < leftThumbVal) {
+            state.setThumbPercent(0, percent);
+          } else if (mark.value > rightThumbVal) {
+            state.setThumbPercent(1, percent);
+          } else if (Math.abs(mark.value - leftThumbVal) < Math.abs(mark.value - rightThumbVal)) {
+            state.setThumbPercent(0, percent);
+          } else {
+            state.setThumbPercent(1, percent);
+          }
+        }
       },
     };
   };

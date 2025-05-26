@@ -1,0 +1,414 @@
+---
+title: "Time Input"
+description: "A time input allows users to enter and edit time values using a keyboard. Each part of a time value is displayed in an individually editable segment."
+---
+
+import {timeInputContent} from "@/content/components/time-input";
+
+# Time Input
+
+The `TimeInput` component consists of a label, and a group of segments representing each unit of a time (e.g. hours, minutes, and seconds). Each segment is individually focusable and editable by the user, by typing or using the arrow keys to increment and decrement the value. This approach allows values to be formatted and parsed correctly regardless of the locale or time format, and offers an easy and error-free way to edit times using the keyboard.
+
+<ComponentLinks component="date-input" storybook="timeinput" reactAriaHook="useTimeField" />
+
+---
+
+<CarbonAd/>
+
+## Installation
+
+<PackageManagers
+  showGlobalInstallWarning
+  commands={{
+    cli: "npx heroui-cli@latest add date-input",
+    npm: "npm install @heroui/date-input",
+    yarn: "yarn add @heroui/date-input",
+    pnpm: "pnpm add @heroui/date-input",
+    bun: "bun add @heroui/date-input"
+  }}
+/>
+
+
+## Import
+
+<ImportTabs
+  commands={{
+    main: 'import {TimeInput} from "@heroui/react";',
+    individual: 'import {TimeInput} from "@heroui/date-input";',
+  }}
+/>
+
+## Usage
+
+A `TimeInput` displays a placeholder by default. An initial, uncontrolled value can be provided to the TimeField using the defaultValue prop. Alternatively, a controlled value can be provided using the value prop.
+
+Time values are provided using objects in the `@internationalized/date` package. This library handles correct international date and time manipulation across calendars, time zones, and other localization concerns.
+
+`TimeInput` only supports selecting times, but values with date components are also accepted. By default, `TimeInput` will emit `Time` objects in the onChange event, but if a `CalendarDateTime` or `ZonedDateTime` object is passed as the `value` or `defaultValue`, values of that type will be emitted, changing only the time and preserving the date components.
+
+<CodeDemo title="Usage" files={timeInputContent.usage} />
+
+### Required
+
+`TimeInput` supports the `isRequired` prop to ensure the user enters a value, as well as minimum and maximum values, and custom client and server-side validation.
+
+<CodeDemo title="Required" files={timeInputContent.required} />
+
+### Disabled
+
+The `isDisabled` boolean prop makes `TimeInput` disabled. Inputs cannot be focused or selected.
+
+<CodeDemo title="Disabled" files={timeInputContent.disabled} />
+
+### Read Only
+
+The `isReadOnly` boolean prop makes `TimeInput`'s value immutable. Unlike `isDisabled`, `TimeInput` remains focusable.
+
+<CodeDemo title="Readonly" files={timeInputContent.readonly} />
+
+### Without Label
+
+`TimeInput` supports the `label` prop to show or not show the label.
+
+<CodeDemo title="Without Label" files={timeInputContent.withoutLabel} />
+
+### With Description
+
+A description for the field. Provides a hint such as specific requirements for what to choose.
+
+<CodeDemo title="With Description" files={timeInputContent.withDescription} />
+
+### With Error Message
+
+You can combine the `isInvalid` and `errorMessage` properties to show an invalid input.
+
+<CodeDemo title="With Error Message" files={timeInputContent.errorMessage} />
+
+You can also pass an error message as a function. This allows for dynamic error message handling based on the [ValidationResult](https://github.com/adobe/react-spectrum/blob/1cacbf1d438675feb3859fee54b17e620b458d9c/packages/%40react-types/shared/src/inputs.d.ts#L44-L51).
+
+<CodeDemo title="With Error Message Function" files={timeInputContent.errorMessageFunction} />
+
+
+### Label Placement
+
+The label's overall position relative to the element it is labeling.
+
+<CodeDemo title="Label Placement" files={timeInputContent.labelPlacement} />
+
+### Start Content
+
+If you want to display some content before the time inputs, you can set the `startContent` property.
+
+<CodeDemo title="Start Content" files={timeInputContent.startContent} />
+
+### End Content
+
+If you want to display some content after the time inputs, you can set the `endContent` property.
+
+<CodeDemo title="End Content" files={timeInputContent.endContent} />
+
+### Controlled
+
+An initial, uncontrolled value can be provided to the `TimeInput` using the `defaultValue` prop. A controlled value can be provided using the `value` prop.
+
+<CodeDemo title="Controlled" files={timeInputContent.controlled} />
+
+### Time Zones
+
+`TimeInput` is time zone aware when a `ZonedDateTime` object is provided as the value. In this case, the time zone abbreviation is displayed, and time zone concerns such as daylight saving time are taken into account when the value is manipulated.
+
+In most cases, your data will come from and be sent to a server as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) formatted string. [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/) includes functions for parsing strings in multiple formats into ZonedDateTime objects. Which format you use will depend on what information you need to store.
+
+- `parseZonedDateTime` – This function parses a date with an explicit time zone and optional UTC offset attached (e.g. `2021-11-07T00:45[America/Los_Angeles]` or `2021-11-07T00:45-07:00[America/Los_Angeles]`). This format preserves the maximum amount of information. If the exact local time and time zone that a user selected is important, use this format. Storing the time zone and offset that was selected rather than converting to UTC ensures that the local time is correct regardless of daylight saving rule changes (e.g. if a locale abolishes DST). Examples where this applies include calendar events, reminders, and other times that occur in a particular location.
+- `parseAbsolute` – This function parses an absolute date and time that occurs at the same instant at all locations on Earth. It can be represented in UTC (e.g. `2021-11-07T07:45:00Z`), or stored with a particular offset (e.g. `2021-11-07T07:45:00-07:00`). A time zone identifier, e.g. America/Los_Angeles, must be passed, and the result will be converted into that time zone. Absolute times are the best way to represent events that occurred in the past, or future events where an exact time is needed, regardless of time zone.
+- `parseAbsoluteToLocal` – This function parses an absolute date and time into the current user's local time zone. It is a shortcut for parseAbsolute, and accepts the same formats.
+
+<CodeDemo title="Time Zones" files={timeInputContent.timezones} />
+
+### Granularity
+
+The `granularity` prop allows you to control the smallest unit that is displayed by TimeInput. By default, times are displayed with "minute" granularity. More granular time values can be displayed by setting the granularity prop to "second".
+
+<CodeDemo title="Granularity" files={timeInputContent.granularity} />
+
+### Min Time Value
+
+The `minValue` prop allows you to validate time value before a certain time.
+
+<CodeDemo title="Min Time Value" files={timeInputContent.minTimeValue} />
+
+### Max Time Value
+
+The `maxValue` prop allows you to validate time value before a certain time.
+
+<CodeDemo title="Max Time Value" files={timeInputContent.maxTimeValue} />
+
+### Placeholder Value
+
+When no value is set, a placeholder is shown. The format of the placeholder is influenced by the `granularity` and `placeholderValue` props. placeholderValue also controls the default values of each segment when the user first interacts with them, e.g. using the up and down arrow keys. By default, the placeholderValue is midnight, but you can set it to a more appropriate value if needed.
+
+<CodeDemo title="Placeholder Value" files={timeInputContent.placeholderValue} />
+
+### Hide Time Zone
+
+When a `ZonedDateTime` object is provided as the value to `TimeInput`, the time zone abbreviation is displayed by default. However, if this is displayed elsewhere or implicit based on the usecase, it can be hidden using the `hideTimeZone` option.
+
+<CodeDemo title="Hide Time Zone" files={timeInputContent.hideTimeZone} />
+
+### Hour Cycle
+
+By default, `TimeInput` displays times in either 12 or 24 hour hour format depending on the user's locale. However, this can be overridden using the `hourCycle` prop if needed for a specific usecase. This example forces `TimeInput` to use 24-hour time, regardless of the locale.
+
+<CodeDemo title="Hour Cycle" files={timeInputContent.hourCycle} />
+
+## Slots
+
+- **base**: Input wrapper, it handles alignment, placement, and general appearance.
+- **label**: Label of the time input, it is the one that is displayed above, inside or left of the time input.
+- **inputWrapper**: Wraps the `label` (when it is inside) and the `innerWrapper`.
+- **input**: The time input element.
+- **innerWrapper**: Wraps the segments, the `startContent` and the `endContent`.
+- **segment**: The segment of input elements.
+- **helperWrapper**: The wrapper of the helper text. This wraps the helper text and the error message.
+- **description**: The description of the time input.
+- **errorMessage**: The error message of the time input.
+
+<Spacer y={4} />
+
+## Data Attributes
+
+`TimeInput` has the following attributes on the `base` element:
+
+- **data-has-helper**:
+  When the time input has description or error message. Based on `description` or `errorMessage` props.
+- **data-required**:
+  When the time input is required. Based on `isRequired` prop.
+- **data-disabled**:
+  When the time input is disabled. Based on `isDisabled` prop.
+- **data-readonly**:
+  When the time input is readonly. Based on `isReadOnly` prop.
+- **data-invalid**:
+  When the time input is invalid. Based on `isInvalid` prop.
+- **data-has-start-content**:
+  When the time input has start content. Based on `startContent` prop.
+- **data-has-end-content**:
+  When the time input has end content. Based on `endContent` prop.
+
+<Spacer y={4} />
+
+## Accessibility
+
+- Support for locale-specific formatting, number systems, hour cycles, and right-to-left layout.
+- Times can optionally include a time zone. All modifications follow time zone rules such as daylight saving time.
+- Each time unit is displayed as an individually focusable and editable segment, which allows users an easy way to edit times using the keyboard, in any format and locale.
+- Time segments are editable using an easy to use numeric keypad, and all interactions are accessible using touch-based screen readers.
+
+<Spacer y={4} />
+
+## API
+
+### TimeInput Props
+
+<APITable
+  data={[
+    {
+      attribute: "label",
+      type: "ReactNode",
+      description: "The content to display as the label.",
+      default: "-"
+    },
+    {
+      attribute: "name",
+      type: "string",
+      description: "The name of the time input element, used when submitting an HTML form.",
+      default: "-"
+    },
+    {
+      attribute: "value",
+      type: "TimeValue | null",
+      description: "The current value (controlled).",
+      default: "-"
+    },
+    {
+      attribute: "defaultValue",
+      type: "TimeValue | null",
+      description: "The default value (uncontrolled).",
+      default: "-"
+    },
+    {
+      attribute: "variant",
+      type: "flat | bordered | faded | underlined",
+      description: "The variant of the time input.",
+      default: "flat"
+    },
+    {
+      attribute: "color",
+      type: "default | primary | secondary | success | warning | danger",
+      description: "The color of the time input.",
+      default: "default"
+    },
+    {
+      attribute: "size",
+      type: "sm | md | lg",
+      description: "The size of the time input.",
+      default: "md"
+    },
+    {
+      attribute: "radius",
+      type: "none | sm | md | lg | full",
+      description: "The radius of the time input.",
+      default: "-"
+    },
+    {
+      attribute: "hourCycle",
+      type: "12 | 24",
+      description: "Whether to display the time in 12 or 24 hour format. By default, this is determined by the user's locale.",
+      default: "-"
+    },
+    {
+      attribute: "granularity",
+      type: "hour | minute | second",
+      description: "Determines the smallest unit that is displayed in the time picker.",
+      default: "minute"
+    },
+    {
+      attribute: "hideTimeZone",
+      type: "boolean",
+      description: "Whether to hide the time zone abbreviation.",
+      default: "-"
+    },
+    {
+      attribute: "labelPlacement",
+      type: "inside | outside | outside-left",
+      description: "The position of the label.",
+      default: "inside"
+    },
+    {
+      attribute: "shouldForceLeadingZeros",
+      type: "boolean",
+      description: "Whether to always show leading zeros in the hour field. By default, this is determined by the user's locale.",
+      default: "true"
+    },
+    {
+      attribute: "placeholderValue",
+      type: "TimeValue",
+      description: "A placeholder time that influences the format of the placeholder shown when no value is selected.",
+      default: "-"
+    },
+    {
+      attribute: "minValue",
+      type: "TimeValue",
+      description: "The minimum allowed time that a user may select.",
+      default: "-"
+    },
+    {
+      attribute: "maxValue",
+      type: "TimeValue",
+      description: "The maximum allowed time that a user may select.",
+      default: "-"
+    },
+    {
+      attribute: "isDisabled",
+      type: "boolean",
+      description: "Whether the time input is disabled.",
+      default: "-"
+    },
+    {
+      attribute: "isReadOnly",
+      type: "boolean",
+      description: "Whether the time input can be selected but not changed by the user.",
+      default: "-"
+    },
+    {
+      attribute: "isRequired",
+      type: "boolean",
+      description: "Whether user time input is required on the time input before form submission.",
+      default: "-"
+    },
+    {
+      attribute: "isInvalid",
+      type: "boolean",
+      description: "Whether the time input is invalid.",
+      default: "-"
+    },
+    {
+      attribute: "autoFocus",
+      type: "boolean",
+      description: "Whether the element should receive focus on render.",
+      default: "-"
+    },
+    {
+      attribute: "description",
+      type: "ReactNode",
+      description: "A description for the field. Provides a hint such as specific requirements for what to choose.",
+      default: "-"
+    },
+    {
+      attribute: "errorMessage",
+      type: "ReactNode | (v: ValidationResult) => ReactNode",
+      description: "An error message for the field.",
+      default: "-"
+    },
+    {
+      attribute: "validate",
+      type: "(value: MappedTimeValue<TimeValue>) => ValidationError | true | null | undefined",
+      description: "Validate input values when committing (e.g. on blur), returning error messages for invalid values.",
+      default: "-"
+    },
+    {
+      attribute: "validationBehavior",
+      type: "native | aria",
+      description: "Whether to use native HTML form validation or ARIA validation. When wrapped in a Form component, the default is `aria`. Otherwise, the default is `native`.",
+      default: "native"
+    },
+    {
+      attribute: "disableAnimation",
+      type: "boolean",
+      description: "Whether to disable the animation of the time input.",
+      default: "-"
+    },
+    {
+      attribute: "classNames",
+      type: "Partial<Record<\"base\" | \"label\" | \"inputWrapper\" | \"innerWrapper\" | \"segment\" | \"helperWrapper\" | \"input\" | \"description\" | \"errorMessage\", string>>",
+      description: "Allows to set custom class names for the time input slots.",
+      default: "-"
+    }
+  ]}
+/>
+
+### TimeInput Events
+
+<APITable
+  data={[
+    {
+      attribute: "onFocus",
+      type: "(e: FocusEvent<Target>) => void",
+      description: "Handler that is called when the element receives focus."
+    },
+    {
+      attribute: "onBlur",
+      type: "(e: FocusEvent<Target>) => void",
+      description: "Handler that is called when the element loses focus."
+    },
+    {
+      attribute: "onFocusChange",
+      type: "(isFocused: boolean) => void",
+      description: "Handler that is called when the element's focus status changes."
+    },
+    {
+      attribute: "onKeyDown",
+      type: "(e: KeyboardEvent) => void",
+      description: "Handler that is called when a key is pressed."
+    },
+    {
+      attribute: "onKeyUp",
+      type: "(e: KeyboardEvent) => void",
+      description: "Handler that is called when a key is released."
+    },
+    {
+      attribute: "onChange",
+      type: "(value: MappedTimeValue<TimeValue>) => void",
+      description: "Handler that is called when the value changes."
+    }
+  ]}
+/>

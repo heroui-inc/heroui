@@ -1,8 +1,8 @@
 import type {Metadata} from "next";
 
 import {notFound} from "next/navigation";
-import {allDocs} from "contentlayer/generated";
-import {Link} from "@nextui-org/react";
+import {allDocs} from "contentlayer2/generated";
+import {Link, ToastProvider} from "@heroui/react";
 
 import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";
@@ -83,7 +83,8 @@ export default async function DocPage({params}: DocPageProps) {
   if (!doc) {
     notFound();
   }
-  const editUrl = `${GITHUB_URL}/${REPO_NAME}/edit/${TAG}/${CONTENT_PATH}${currentRoute?.path}`;
+
+  const editUrl = `${GITHUB_URL}/${REPO_NAME}/edit/${TAG}${CONTENT_PATH}${currentRoute?.path}`;
 
   return (
     <>
@@ -99,10 +100,12 @@ export default async function DocPage({params}: DocPageProps) {
         </footer>
       </div>
       {headings && headings.length > 0 && (
-        <div className="hidden z-10 xl:flex xl:col-span-2 mt-8 pl-4">
+        <div className="hidden z-10 xl:flex xl:col-span-2 mt-8 pl-0">
           <DocsToc headings={headings} />
         </div>
       )}
+      {/* toast page has its own provider*/}
+      {doc.title !== "Toast" && <ToastProvider />}
     </>
   );
 }

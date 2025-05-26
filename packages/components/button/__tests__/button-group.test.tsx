@@ -26,7 +26,7 @@ describe("ButtonGroup", () => {
     const handler = jest.fn();
     const wrapper = render(
       <ButtonGroup isDisabled={true}>
-        <Button disableRipple data-testid="button-test" onClick={handler}>
+        <Button disableRipple data-testid="button-test" onPress={handler}>
           action
         </Button>
       </ButtonGroup>,
@@ -35,7 +35,7 @@ describe("ButtonGroup", () => {
     let button = wrapper.getByTestId("button-test");
 
     userEvent.click(button);
-    expect(handler).toBeCalledTimes(0);
+    expect(handler).toHaveBeenCalledTimes(0);
   });
 
   it("should render different variants", () => {

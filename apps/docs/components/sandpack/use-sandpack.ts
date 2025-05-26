@@ -5,7 +5,14 @@ import {useLocalStorage} from "usehooks-ts";
 
 import {HighlightedLines} from "./types";
 import {getHighlightedLines, getFileName} from "./utils";
-import {stylesConfig, postcssConfig, tailwindConfig, getHtmlFile, rootFile} from "./entries";
+import {
+  stylesConfig,
+  postcssConfig,
+  tailwindConfig,
+  npmrcConfig,
+  getHtmlFile,
+  rootFile,
+} from "./entries";
 
 export interface UseSandpackProps {
   files?: SandpackFiles;
@@ -70,8 +77,8 @@ export const useSandpack = ({
   }, {});
 
   let dependencies = {
-    "framer-motion": "10.12.16",
-    "@nextui-org/react": "latest",
+    "framer-motion": "11.9.0",
+    "@heroui/react": "latest",
   };
 
   // sort files by dependency
@@ -100,13 +107,17 @@ export const useSandpack = ({
       let fileContent = files[key] as string;
 
       // Check if the file content includes 'React' import statements, if not, add it
-      if (!fileContent.includes("from 'react'") && !fileContent.includes('from "react"')) {
+      if (
+        fileContent.includes("React.") &&
+        !fileContent.includes("from 'react'") &&
+        !fileContent.includes('from "react"')
+      ) {
         fileContent = `${importReact}\n${fileContent}\n`;
       }
 
       // Check if file content includes any other dependencies, if yes, add it to dependencies
       const importRegex = /import .* from ["'](.*)["']/g;
-      let match;
+      let match: RegExpExecArray | null;
 
       while ((match = importRegex.exec(fileContent)) !== null) {
         const dependencyName = match[1];
@@ -127,31 +138,31 @@ export const useSandpack = ({
   /**
    * Uncomment this logic when specific imports are needed
    */
-  // const nextUIComponents = useMemo(
+  // const heroUIComponents = useMemo(
   //   () =>
-  //     Object.values(getNextUIComponents(sortedFiles) || {}).flatMap((e) =>
+  //     Object.values(getHeroUIComponents(sortedFiles) || {}).flatMap((e) =>
   //       e.split(",").map((name) => name.replace(/"/g, "")),
   //     ),
   //   [sortedFiles],
   // );
 
-  // const hasComponents = !isEmpty(nextUIComponents);
+  // const hasComponents = !isEmpty(heroUIComponents);
 
   // const dependencies = useMemo(() => {
   //   let deps = {
-  //     "framer-motion": "10.12.16",
+  //     "framer-motion": "11.9.0",
   //   };
 
   //   if (hasComponents) {
   //     let deps = {
-  //       "@nextui-org/theme": "dev-v2",
-  //       "@nextui-org/system": "dev-v2",
+  //       "@heroui/theme": "canary",
+  //       "@heroui/system": "canary",
   //     };
 
-  //     nextUIComponents.forEach((component) => {
+  //     heroUIComponents.forEach((component) => {
   //       deps = {
   //         ...deps,
-  //         [`@nextui-org/${component}`]: "dev-v2",
+  //         [`@heroui/${component}`]: "canary",
   //       };
   //     });
 
@@ -160,22 +171,22 @@ export const useSandpack = ({
 
   //   return {
   //     ...deps,
-  //     "@nextui-org/react": "dev-v2",
+  //     "@heroui/react": "canary",
   //   };
-  // }, [hasComponents, nextUIComponents, component]);
+  // }, [hasComponents, heroUIComponents, component]);
 
   // const tailwindConfigFile = useMemo(
-  //   () => (hasComponents ? updateTailwindConfig(tailwindConfig, nextUIComponents) : tailwindConfig),
-  //   [tailwindConfig, nextUIComponents],
+  //   () => (hasComponents ? updateTailwindConfig(tailwindConfig, heroUIComponents) : tailwindConfig),
+  //   [tailwindConfig, heroUIComponents],
   // );
 
   const customSetup = {
     dependencies,
     entry: entryFile,
     devDependencies: {
-      autoprefixer: "^10.4.14",
-      postcss: "^8.4.21",
-      tailwindcss: "^3.2.7",
+      autoprefixer: "10.4.20",
+      postcss: "8.4.49",
+      tailwindcss: "3.4.17",
     },
   };
 
@@ -201,6 +212,10 @@ export const useSandpack = ({
       },
       "styles.css": {
         code: stylesConfig,
+        hidden: true,
+      },
+      ".npmrc": {
+        code: npmrcConfig,
         hidden: true,
       },
     },

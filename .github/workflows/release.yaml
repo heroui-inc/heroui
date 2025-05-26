@@ -6,7 +6,7 @@ on:
       - ".changeset/**"
       - "packages/**"
     branches:
-      - main
+      - canary
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,21 +14,31 @@ concurrency:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
+    timeout-minutes: 30
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         uses: ./.github/common-actions/install
 
-      - name: Build
-        run: pnpm build
-
       - name: Tests
         run: pnpm test
 
+      - name: Build
+        id: build
+        continue-on-error: false
+        # Custom turbo build failure information
+        run: |
+          pnpm build || {
+            echo "Turbo build failed with exit code $?"
+            exit 1
+          }
+
       - name: Create Release Pull Request or Publish to NPM
+        # Run only if the build is successful
+        if: steps.build.outcome == 'success'
         id: changesets
         uses: changesets/action@v1
         with:
@@ -41,12 +51,13 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create @dev release
-        if: steps.changesets.outputs.published != 'true'
+      - name: Create canary release
+        if: steps.build.outcome == 'success' && steps.changesets.outputs.published != 'true'
+        timeout-minutes: 15
         run: |
-          git checkout main
-          pnpm version:dev
-          pnpm release:dev
+          git checkout canary
+          pnpm version:canary
+          pnpm release:canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

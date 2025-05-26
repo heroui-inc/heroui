@@ -1,21 +1,20 @@
 import type {AriaRadioProps} from "@react-types/radio";
-import type {RadioVariantProps, RadioSlots, SlotsToClasses} from "@nextui-org/theme";
+import type {RadioVariantProps, RadioSlots, SlotsToClasses} from "@heroui/theme";
 
-import {Ref, ReactNode, useCallback, useId, useState} from "react";
+import {Ref, ReactNode, useCallback, useId} from "react";
 import {useMemo, useRef} from "react";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
-import {usePress} from "@nextui-org/use-aria-press";
-import {radio} from "@nextui-org/theme";
+import {radio} from "@heroui/theme";
 import {useRadio as useReactAriaRadio} from "@react-aria/radio";
-import {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
-import {__DEV__, warn, clsx, dataAttr} from "@nextui-org/shared-utils";
-import {useDOMRef} from "@nextui-org/react-utils";
+import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
+import {__DEV__, warn, clsx, dataAttr} from "@heroui/shared-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {chain, mergeProps} from "@react-aria/utils";
 
 import {useRadioGroupContext} from "./radio-group-context";
 
-interface Props extends Omit<HTMLNextUIProps<"input">, keyof RadioVariantProps> {
+interface Props extends Omit<HTMLHeroUIProps<"input">, keyof RadioVariantProps> {
   /**
    * Ref to the DOM node.
    */
@@ -52,6 +51,7 @@ export type UseRadioProps = Omit<Props, "defaultChecked"> &
   RadioVariantProps;
 
 export function useRadio(props: UseRadioProps) {
+  const globalContext = useProviderContext();
   const groupContext = useRadioGroupContext();
 
   const {
@@ -65,7 +65,7 @@ export function useRadio(props: UseRadioProps) {
     size = groupContext?.size ?? "md",
     color = groupContext?.color ?? "primary",
     isDisabled: isDisabledProp = groupContext?.isDisabled ?? false,
-    disableAnimation = groupContext?.disableAnimation ?? false,
+    disableAnimation = groupContext?.disableAnimation ?? globalContext?.disableAnimation ?? false,
     onChange = groupContext?.onChange,
     autoFocus = false,
     className,
@@ -87,38 +87,38 @@ export function useRadio(props: UseRadioProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const labelId = useId();
+  const descriptionId = useId();
 
   const isRequired = useMemo(() => groupContext.isRequired ?? false, [groupContext.isRequired]);
   const isInvalid = groupContext.isInvalid;
 
   const ariaRadioProps = useMemo(() => {
-    const ariaLabel =
-      otherProps["aria-label"] || typeof children === "string" ? (children as string) : undefined;
     const ariaDescribedBy =
-      otherProps["aria-describedby"] || typeof description === "string"
-        ? (description as string)
-        : undefined;
+      [otherProps["aria-describedby"], descriptionId].filter(Boolean).join(" ") || undefined;
 
     return {
       id,
       isRequired,
       isDisabled: isDisabledProp,
-      "aria-label": ariaLabel,
+      "aria-label": otherProps["aria-label"],
       "aria-labelledby": otherProps["aria-labelledby"] || labelId,
       "aria-describedby": ariaDescribedBy,
     };
-  }, [labelId, id, isDisabledProp, isRequired]);
+  }, [
+    id,
+    isDisabledProp,
+    isRequired,
+    description,
+    otherProps["aria-label"],
+    otherProps["aria-labelledby"],
+    otherProps["aria-describedby"],
+    descriptionId,
+  ]);
 
-  const {
-    inputProps,
-    isDisabled,
-    isSelected,
-    isPressed: isPressedKeyboard,
-  } = useReactAriaRadio(
+  const {inputProps, isDisabled, isSelected, isPressed} = useReactAriaRadio(
     {
       value,
-      children,
-      ...groupContext,
+      children: typeof children === "function" ? true : children,
       ...ariaRadioProps,
     },
     groupContext.groupState,
@@ -130,29 +130,11 @@ export function useRadio(props: UseRadioProps) {
   });
 
   const interactionDisabled = isDisabled || inputProps.readOnly;
-
-  // Handle press state for full label. Keyboard press state is returned by useCheckbox
-  // since it is handled on the <input> element itself.
-  const [isPressed, setPressed] = useState(false);
-  const {pressProps} = usePress({
-    isDisabled: interactionDisabled,
-    onPressStart(e) {
-      if (e.pointerType !== "keyboard") {
-        setPressed(true);
-      }
-    },
-    onPressEnd(e) {
-      if (e.pointerType !== "keyboard") {
-        setPressed(false);
-      }
-    },
-  });
-
   const {hoverProps, isHovered} = useHover({
     isDisabled: interactionDisabled,
   });
 
-  const pressed = interactionDisabled ? false : isPressed || isPressedKeyboard;
+  const pressed = interactionDisabled ? false : isPressed;
 
   const slots = useMemo(
     () =>
@@ -184,7 +166,7 @@ export function useRadio(props: UseRadioProps) {
         "data-hover-unselected": dataAttr(isHovered && !isSelected),
         "data-readonly": dataAttr(inputProps.readOnly),
         "aria-required": dataAttr(isRequired),
-        ...mergeProps(hoverProps, pressProps, otherProps),
+        ...mergeProps(hoverProps, otherProps),
       };
     },
     [
@@ -218,14 +200,13 @@ export function useRadio(props: UseRadioProps) {
   const getInputProps: PropGetter = useCallback(
     (props = {}) => {
       return {
-        ...props,
         ref: inputRef,
-        required: isRequired,
-        ...mergeProps(inputProps, focusProps),
+        ...mergeProps(props, inputProps, focusProps),
+        className: slots.hiddenInput({class: classNames?.hiddenInput}),
         onChange: chain(inputProps.onChange, onChange),
       };
     },
-    [inputProps, focusProps, isRequired, onChange],
+    [inputProps, focusProps, onChange],
   );
 
   const getLabelProps: PropGetter = useCallback(
@@ -253,22 +234,30 @@ export function useRadio(props: UseRadioProps) {
     [slots, classNames?.control],
   );
 
+  const getDescriptionProps: PropGetter = useCallback(
+    (props = {}) => ({
+      ...props,
+      id: descriptionId,
+      className: slots.description({class: classNames?.description}),
+    }),
+    [slots, classNames?.description],
+  );
+
   return {
     Component,
     children,
-    slots,
-    classNames,
-    description,
     isSelected,
     isDisabled,
     isInvalid,
     isFocusVisible,
+    description,
     getBaseProps,
     getWrapperProps,
     getInputProps,
     getLabelProps,
     getLabelWrapperProps,
     getControlProps,
+    getDescriptionProps,
   };
 }
 

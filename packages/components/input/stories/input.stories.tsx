@@ -1,15 +1,20 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import type {ValidationResult} from "@react-types/shared";
+
 import React from "react";
 import {Meta} from "@storybook/react";
-import {input} from "@nextui-org/theme";
+import {input} from "@heroui/theme";
 import {
   MailFilledIcon,
   EyeFilledIcon,
   EyeSlashFilledIcon,
   SearchIcon,
   CloseFilledIcon,
-} from "@nextui-org/shared-icons";
+} from "@heroui/shared-icons";
+import {button} from "@heroui/theme";
+import {useForm} from "react-hook-form";
+import {Form} from "@heroui/form";
 
 import {Input, InputProps, useInput} from "../src";
 
@@ -52,6 +57,12 @@ export default {
         type: "boolean",
       },
     },
+    validationBehavior: {
+      control: {
+        type: "select",
+      },
+      options: ["aria", "native"],
+    },
   },
   decorators: [
     (Story) => (
@@ -78,6 +89,21 @@ const MirrorTemplate = (args) => (
     <Input {...args} />
     <Input {...args} placeholder="Enter your email" />
   </div>
+);
+
+const FormTemplate = (args) => (
+  <form
+    className="w-full max-w-xl flex flex-row items-end gap-4"
+    onSubmit={(e) => {
+      alert(`Submitted value: ${e.target["example"].value}`);
+      e.preventDefault();
+    }}
+  >
+    <Input {...args} name="example" />
+    <button className={button({color: "primary"})} type="submit">
+      Submit
+    </button>
+  </form>
 );
 
 const PasswordTemplate = (args) => {
@@ -112,7 +138,7 @@ const PasswordTemplate = (args) => {
 const RegexValidationTemplate = (args) => {
   const [value, setValue] = React.useState("");
 
-  const validateEmail = (value) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+  const validateEmail = (value) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
 
   const validationState = React.useMemo(() => {
     if (value === "") return undefined;
@@ -199,7 +225,7 @@ const StartContentTemplate = (args) => (
     <Input
       {...args}
       label="Website"
-      placeholder="nextui.org"
+      placeholder="heroui.com"
       startContent={
         <div className="pointer-events-none flex items-center">
           <span className="text-default-400 text-sm">https://</span>
@@ -238,7 +264,7 @@ const EndContentTemplate = (args) => (
         </div>
       }
       label="Website"
-      placeholder="nextui"
+      placeholder="heroui"
       type="url"
     />
   </div>
@@ -253,7 +279,7 @@ const StartAndEndContentTemplate = (args) => (
           <span className="text-default-400 text-sm">@gmail.com</span>
         </div>
       }
-      placeholder="nextui"
+      placeholder="heroui"
       startContent={
         <MailFilledIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
       }
@@ -293,7 +319,7 @@ const StartAndEndContentTemplate = (args) => (
         </div>
       }
       label="Website"
-      placeholder="nextui"
+      placeholder="heroui"
       startContent={
         <div className="pointer-events-none flex items-center">
           <span className="text-default-400 text-sm">https://</span>
@@ -318,6 +344,8 @@ const InputTypesTemplate = (args) => (
     <Input {...args} label="Month" placeholder="Enter your month" type="month" />
     <Input {...args} label="Week" placeholder="Enter your week" type="week" />
     <Input {...args} label="Range" placeholder="Enter your range" type="range" />
+    <Input {...args} label="Single File" type="file" />
+    <Input {...args} multiple label="Multiple Files" type="file" />
   </div>
 );
 
@@ -456,6 +484,61 @@ const CustomWithHooksTemplate = (args: InputProps) => {
   );
 };
 
+const WithReactHookFormTemplate = (args: InputProps) => {
+  const {
+    register,
+    formState: {errors},
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      withDefaultValue: "wkw",
+      withoutDefaultValue: "",
+      requiredField: "",
+    },
+  });
+
+  const onSubmit = (data: any) => {
+    // eslint-disable-next-line no-console
+    console.log(data);
+    alert("Submitted value: " + JSON.stringify(data));
+  };
+
+  return (
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <Input isClearable label="With default value" {...register("withDefaultValue")} />
+      <Input {...args} label="Without default value" {...register("withoutDefaultValue")} />
+      <Input {...args} label="Required" {...register("requiredField", {required: true})} />
+      {errors.requiredField && <span className="text-danger">This field is required</span>}
+      <button className={button({class: "w-fit"})} type="submit">
+        Submit
+      </button>
+    </form>
+  );
+};
+
+const ServerValidationTemplate = (args: InputProps) => {
+  const [serverErrors, setServerErrors] = React.useState({});
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setServerErrors({
+      username: "Please provide a valid username.",
+    });
+  };
+
+  return (
+    <Form
+      className="flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <Input {...args} label="Username" name="username" />
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+    </Form>
+  );
+};
+
 export const Default = {
   render: MirrorTemplate,
 
@@ -465,7 +548,7 @@ export const Default = {
 };
 
 export const Required = {
-  render: MirrorTemplate,
+  render: FormTemplate,
 
   args: {
     ...defaultProps,
@@ -478,7 +561,7 @@ export const Disabled = {
 
   args: {
     ...defaultProps,
-    defaultValue: "junior@nextui.org",
+    defaultValue: "junior@heroui.com",
     variant: "faded",
     isDisabled: true,
   },
@@ -489,7 +572,7 @@ export const ReadOnly = {
 
   args: {
     ...defaultProps,
-    defaultValue: "junior@nextui.org",
+    defaultValue: "junior@heroui.com",
     variant: "bordered",
     isReadOnly: true,
   },
@@ -541,7 +624,7 @@ export const Clearable = {
     ...defaultProps,
     variant: "bordered",
     placeholder: "Enter your email",
-    defaultValue: "junior@nextui.org",
+    defaultValue: "junior@heroui.com",
     // eslint-disable-next-line no-console
     onClear: () => console.log("input cleared"),
   },
@@ -581,7 +664,58 @@ export const WithErrorMessage = {
 
   args: {
     ...defaultProps,
+    isInvalid: true,
     errorMessage: "Please enter a valid email address",
+  },
+};
+
+export const WithErrorMessageFunction = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    min: "0",
+    max: "100",
+    type: "number",
+    isRequired: true,
+    label: "Number",
+    placeholder: "Enter a number(0-100)",
+    errorMessage: (value: ValidationResult) => {
+      if (value.validationDetails.rangeOverflow) {
+        return "Value is too high";
+      }
+      if (value.validationDetails.rangeUnderflow) {
+        return "Value is too low";
+      }
+      if (value.validationDetails.valueMissing) {
+        return "Value is required";
+      }
+    },
+  },
+};
+
+export const WithValidation = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    type: "number",
+    validate: (value) => {
+      if (value < 0 || value > 100) {
+        return "Value must be between 0 and 100";
+      }
+    },
+    isRequired: true,
+    label: "Number",
+    placeholder: "Enter a number(0-100)",
+  },
+};
+
+export const WithServerValidation = {
+  render: ServerValidationTemplate,
+
+  args: {
+    ...defaultProps,
   },
 };
 
@@ -643,5 +777,13 @@ export const CustomWithHooks = {
     startContent: (
       <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
     ),
+  },
+};
+
+export const WithReactHookForm = {
+  render: WithReactHookFormTemplate,
+
+  args: {
+    ...defaultProps,
   },
 };

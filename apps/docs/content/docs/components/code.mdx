@@ -15,12 +15,26 @@ Code is a component used to display inline code.
 
 <CarbonAd/>
 
+## Installation
+
+<PackageManagers
+  showGlobalInstallWarning
+  commands={{
+    cli: "npx heroui-cli@latest add code",
+    npm: "npm install @heroui/code",
+    yarn: "yarn add @heroui/code",
+    pnpm: "pnpm add @heroui/code",
+    bun: "bun add @heroui/code"
+  }}
+/>
+
+
 ## Import
 
 <ImportTabs
   commands={{
-    main: 'import {Code} from "@nextui-org/react";',
-    individual: 'import {Code} from "@nextui-org/code";',
+    main: 'import {Code} from "@heroui/react";',
+    individual: 'import {Code} from "@heroui/code";',
   }}
 />
 
@@ -36,15 +50,37 @@ Code is a component used to display inline code.
 
 <CodeDemo title="Colors" files={codeContent.colors} />
 
-<Spacer y={4} />{" "}
+<Spacer y={4} />
 
 ## API
 
 ### Code Props
 
-| Attribute | Type                                                                        | Description              | Default   |
-| --------- | --------------------------------------------------------------------------- | ------------------------ | --------- |
-| children  | `ReactNode`                                                                 | The content of the code. | -         |
-| size      | `sm` \| `md` \| `lg`                                                        | The size of the code.    | `sm`      |
-| color     | `default` \| `primary` \| `secondary` \| `success` \| `warning` \| `danger` | The color of the code.   | `default` |
-| radius    | `none` \| `sm` \| `md` \| `lg` \| `full`                                    | The radius of the code.  | `sm`      |
+<APITable
+  data={[
+    {
+      attribute: "children",
+      type: "ReactNode",
+      description: "The content of the code.",
+      default: "-"
+    },
+    {
+      attribute: "size",
+      type: "sm | md | lg",
+      description: "The size of the code.",
+      default: "sm"
+    },
+    {
+      attribute: "color",
+      type: "default | primary | secondary | success | warning | danger",
+      description: "The color of the code.",
+      default: "default"
+    },
+    {
+      attribute: "radius",
+      type: "none | sm | md | lg | full",
+      description: "The radius of the code.",
+      default: "sm"
+    }
+  ]}
+/>

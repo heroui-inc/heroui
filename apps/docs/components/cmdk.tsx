@@ -4,17 +4,18 @@
 import {Command} from "cmdk";
 import {useEffect, useState, FC, useMemo, useCallback, useRef} from "react";
 import {matchSorter} from "match-sorter";
-import {Button, ButtonProps, Kbd, Modal, ModalContent} from "@nextui-org/react";
-import {CloseIcon} from "@nextui-org/shared-icons";
+import {Button, ButtonProps, Kbd, Modal, ModalContent} from "@heroui/react";
+import {CloseIcon} from "@heroui/shared-icons";
 import {tv} from "tailwind-variants";
 import {usePathname, useRouter} from "next/navigation";
 import MultiRef from "react-multi-ref";
-import {clsx} from "@nextui-org/shared-utils";
+import {clsx} from "@heroui/shared-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {isAppleDevice, isWebKit} from "@react-aria/utils";
 import {create} from "zustand";
-import {intersectionBy, isEmpty} from "lodash";
+import {isEmpty, intersectionBy} from "@heroui/shared-utils";
 import {writeStorage, useLocalStorage} from "@rehooks/local-storage";
+import {usePostHog} from "posthog-js/react";
 
 import {
   DocumentCodeBoldIcon,
@@ -25,7 +26,6 @@ import {
 
 import searchData from "@/config/search-meta.json";
 import {useUpdateEffect} from "@/hooks/use-update-effect";
-import {trackEvent} from "@/utils/va";
 
 const hideOnPaths = ["examples"];
 
@@ -139,6 +139,8 @@ export const Cmdk: FC<{}> = () => {
 
   const {isOpen, onClose, onOpen} = useCmdkStore();
 
+  const posthog = usePostHog();
+
   const [recentSearches] = useLocalStorage<SearchResultItem[]>(RECENT_SEARCHES_KEY);
 
   const addToRecentSearches = (item: SearchResultItem) => {
@@ -154,6 +156,16 @@ export const Cmdk: FC<{}> = () => {
     }
   };
 
+  const prioritizeFirstLevelItems = (a: SearchResultItem, b: SearchResultItem) => {
+    if (a.type === "lvl1") {
+      return -1;
+    } else if (b.type === "lvl1") {
+      return 1;
+    }
+
+    return 0;
+  };
+
   const results = useMemo<SearchResultItem[]>(
     function getResults() {
       if (query.length < 2) return [];
@@ -165,18 +177,28 @@ export const Cmdk: FC<{}> = () => {
       if (words.length === 1) {
         return matchSorter(data, query, {
           keys: MATCH_KEYS,
+          sorter: (matches) => {
+            matches.sort((a, b) => prioritizeFirstLevelItems(a.item, b.item));
+
+            return matches;
+          },
         }).slice(0, MAX_RESULTS);
       }
 
       const matchesForEachWord = words.map((word) =>
         matchSorter(data, word, {
           keys: MATCH_KEYS,
+          sorter: (matches) => {
+            matches.sort((a, b) => prioritizeFirstLevelItems(a.item, b.item));
+
+            return matches;
+          },
         }),
       );
 
       const matches = intersectionBy(...matchesForEachWord, "objectID").slice(0, MAX_RESULTS);
 
-      trackEvent("Cmdk - Search", {
+      posthog.capture("Cmdk - Search", {
         name: "cmdk - search",
         action: "search",
         category: "cmdk",
@@ -199,7 +221,7 @@ export const Cmdk: FC<{}> = () => {
         e.preventDefault();
         isOpen ? onClose() : onOpen();
 
-        trackEvent("Cmdk - Open/Close", {
+        posthog.capture("Cmdk - Open/Close", {
           name: "cmdk - open/close",
           action: "keydown",
           category: "cmdk",
@@ -221,7 +243,7 @@ export const Cmdk: FC<{}> = () => {
       router.push(item.url);
       addToRecentSearches(item);
 
-      trackEvent("Cmdk - ItemSelect", {
+      posthog.capture("Cmdk - ItemSelect", {
         name: item.content,
         action: "click",
         category: "cmdk",
@@ -410,8 +432,8 @@ export const Cmdk: FC<{}> = () => {
             </Kbd>
           </div>
           <Command.List ref={listRef} className={slots.list()} role="listbox">
-            {query.length > 0 && (
-              <Command.Empty>
+            <Command.Empty>
+              {query.length > 0 && (
                 <div className={slots.emptyWrapper()}>
                   <div>
                     <p>No results for &quot;{query}&quot;</p>
@@ -424,8 +446,8 @@ export const Cmdk: FC<{}> = () => {
                     )}
                   </div>
                 </div>
-              </Command.Empty>
-            )}
+              )}
+            </Command.Empty>
 
             {isEmpty(query) &&
               (isEmpty(recentSearches) ? (

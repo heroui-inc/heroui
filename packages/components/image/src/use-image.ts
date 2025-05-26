@@ -1,16 +1,16 @@
-import type {ImageVariantProps, SlotsToClasses, ImageSlots} from "@nextui-org/theme";
+import type {ImageVariantProps, SlotsToClasses, ImageSlots} from "@heroui/theme";
 
 import {ImgHTMLAttributes, useCallback} from "react";
-import {HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {image} from "@nextui-org/theme";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
-import {ReactRef} from "@nextui-org/react-utils";
-import {useImage as useImageBase} from "@nextui-org/use-image";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {image} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
+import {useImage as useImageBase} from "@heroui/use-image";
 import {useMemo} from "react";
 type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>;
 
-interface Props extends HTMLNextUIProps<"img"> {
+interface Props extends HTMLHeroUIProps<"img"> {
   /**
    * Ref to the DOM node.
    */
@@ -70,6 +70,8 @@ interface Props extends HTMLNextUIProps<"img"> {
 export type UseImageProps = Props & ImageVariantProps;
 
 export function useImage(originalProps: UseImageProps) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, image.variantKeys);
 
   const {
@@ -103,6 +105,9 @@ export function useImage(originalProps: UseImageProps) {
     crossOrigin,
   });
 
+  const disableAnimation =
+    originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
+
   const isImgLoaded = imageStatus === "loaded" && !isLoadingProp;
   const isLoading = imageStatus === "loading" || isLoadingProp;
   const isZoomed = originalProps.isZoomed;
@@ -111,15 +116,20 @@ export function useImage(originalProps: UseImageProps) {
 
   const domRef = useDOMRef(ref);
 
-  const {w} = useMemo(() => {
+  const {w, h} = useMemo(() => {
     return {
       w: props.width
         ? typeof props.width === "number"
           ? `${props.width}px`
           : props.width
         : "fit-content",
+      h: props.height
+        ? typeof props.height === "number"
+          ? `${props.height}px`
+          : props.height
+        : "auto",
     };
-  }, [props?.width]);
+  }, [props?.width, props?.height]);
 
   const showFallback = (!src || !isImgLoaded) && !!fallbackSrc;
   const showSkeleton = isLoading && !disableSkeleton;
@@ -128,9 +138,10 @@ export function useImage(originalProps: UseImageProps) {
     () =>
       image({
         ...variantProps,
+        disableAnimation,
         showSkeleton,
       }),
-    [...Object.values(variantProps), showSkeleton],
+    [objectToDeps(variantProps), disableAnimation, showSkeleton],
   );
 
   const baseStyles = clsx(className, classNames?.img);
@@ -148,6 +159,13 @@ export function useImage(originalProps: UseImageProps) {
       sizes,
       crossOrigin,
       ...otherProps,
+      style: {
+        // img has `height: auto` by default
+        // passing the custom height here to override if it is specified
+        ...(otherProps?.height && {height: h}),
+        ...props.style,
+        ...otherProps.style,
+      },
     };
   };
 
@@ -165,7 +183,7 @@ export function useImage(originalProps: UseImageProps) {
         maxWidth: w,
       },
     };
-  }, [slots, showFallback, fallbackSrc, classNames?.wrapper]);
+  }, [slots, showFallback, fallbackSrc, classNames?.wrapper, w]);
 
   const getBlurredImgProps = useCallback<PropGetter>(() => {
     return {

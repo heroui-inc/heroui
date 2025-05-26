@@ -1,19 +1,20 @@
-import {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {AccordionItemVariantProps} from "@heroui/theme";
+
+import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
-import {accordionItem} from "@nextui-org/theme";
-import {clsx, callAllHandlers, dataAttr} from "@nextui-org/shared-utils";
-import {ReactRef, useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
-import {NodeWithProps} from "@nextui-org/aria-utils";
-import {useReactAriaAccordionItem} from "@nextui-org/use-aria-accordion";
+import {accordionItem} from "@heroui/theme";
+import {clsx, callAllHandlers, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {NodeWithProps} from "@heroui/aria-utils";
+import {useReactAriaAccordionItem} from "@heroui/use-aria-accordion";
 import {useCallback, useMemo} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
-import {useHover} from "@react-aria/interactions";
-import {usePress} from "@nextui-org/use-aria-press";
+import {useHover, usePress} from "@react-aria/interactions";
 import {TreeState} from "@react-stately/tree";
 
 import {AccordionItemBaseProps} from "./base/accordion-item-base";
 
-export interface Props<T extends object> extends HTMLNextUIProps<"div"> {
+export interface Props<T extends object> extends HTMLHeroUIProps<"div"> {
   /**
    * Ref to the DOM node.
    */
@@ -37,9 +38,12 @@ export interface Props<T extends object> extends HTMLNextUIProps<"div"> {
 }
 
 export type UseAccordionItemProps<T extends object = {}> = Props<T> &
+  AccordionItemVariantProps &
   Omit<AccordionItemBaseProps, "onFocusChange">;
 
 export function useAccordionItem<T extends object = {}>(props: UseAccordionItemProps<T>) {
+  const globalContext = useProviderContext();
+
   const {ref, as, item, onFocusChange} = props;
 
   const {
@@ -52,13 +56,15 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
     startContent,
     motionProps,
     focusedKey,
+    variant,
     isCompact = false,
     classNames: classNamesProp = {},
     isDisabled: isDisabledProp = false,
     hideIndicator = false,
-    disableAnimation = false,
+    disableAnimation = globalContext?.disableAnimation ?? false,
     keepContentMounted = false,
     disableIndicatorAnimation = false,
+    HeadingComponent = as || "h2",
     onPress,
     onPressStart,
     onPressEnd,
@@ -112,7 +118,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
     () => ({
       ...classNamesProp,
     }),
-    [...Object.values(classNamesProp)],
+    [objectToDeps(classNamesProp)],
   );
 
   const slots = useMemo(
@@ -123,8 +129,9 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
         hideIndicator,
         disableAnimation,
         disableIndicatorAnimation,
+        variant,
       }),
-    [isCompact, isDisabled, hideIndicator, disableAnimation, disableIndicatorAnimation],
+    [isCompact, isDisabled, hideIndicator, disableAnimation, disableIndicatorAnimation, variant],
   );
 
   const baseStyles = clsx(classNames?.base, className);
@@ -134,6 +141,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
       return {
         "data-open": dataAttr(isOpen),
         "data-disabled": dataAttr(isDisabled),
+        "data-slot": "base",
         className: slots.base({class: baseStyles}),
         ...mergeProps(
           filterDOMProps(otherProps, {
@@ -155,6 +163,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
       "data-disabled": dataAttr(isDisabled),
       "data-hover": dataAttr(isHovered),
       "data-pressed": dataAttr(isPressed),
+      "data-slot": "trigger",
       className: slots.trigger({class: classNames?.trigger}),
       onFocus: callAllHandlers(
         handleFocus,
@@ -170,8 +179,9 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
         otherProps.onBlur,
         item.props?.onBlur,
       ),
-      ...mergeProps(buttonProps, hoverProps, pressProps, props),
-      onClick: chain(pressProps.onClick, onClick),
+      ...mergeProps(buttonProps, hoverProps, pressProps, props, {
+        onClick: chain(pressProps.onClick, onClick),
+      }),
     };
   };
 
@@ -180,6 +190,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
       return {
         "data-open": dataAttr(isOpen),
         "data-disabled": dataAttr(isDisabled),
+        "data-slot": "content",
         className: slots.content({class: classNames?.content}),
         ...mergeProps(regionProps, props),
       };
@@ -193,6 +204,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
         "aria-hidden": dataAttr(true),
         "data-open": dataAttr(isOpen),
         "data-disabled": dataAttr(isDisabled),
+        "data-slot": "indicator",
         className: slots.indicator({class: classNames?.indicator}),
         ...props,
       };
@@ -205,6 +217,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
       return {
         "data-open": dataAttr(isOpen),
         "data-disabled": dataAttr(isDisabled),
+        "data-slot": "heading",
         className: slots.heading({class: classNames?.heading}),
         ...props,
       };
@@ -217,6 +230,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
       return {
         "data-open": dataAttr(isOpen),
         "data-disabled": dataAttr(isDisabled),
+        "data-slot": "title",
         className: slots.title({class: classNames?.title}),
         ...props,
       };
@@ -229,6 +243,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
       return {
         "data-open": dataAttr(isOpen),
         "data-disabled": dataAttr(isDisabled),
+        "data-slot": "subtitle",
         className: slots.subtitle({class: classNames?.subtitle}),
         ...props,
       };
@@ -238,6 +253,7 @@ export function useAccordionItem<T extends object = {}>(props: UseAccordionItemP
 
   return {
     Component,
+    HeadingComponent,
     item,
     slots,
     classNames,

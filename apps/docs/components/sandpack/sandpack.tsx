@@ -3,8 +3,10 @@
 import {FC, useRef} from "react";
 import {SandpackProvider, SandpackLayout, SandpackPreview} from "@codesandbox/sandpack-react";
 
+import {StackblitzButton} from "../stackblitz-button";
+
 import {SandpackCodeViewer} from "./code-viewer";
-import {nextuiTheme} from "./theme";
+import {herouiTheme} from "./theme";
 import {UseSandpackProps, useSandpack} from "./use-sandpack";
 import {BugReportButton} from "./bugreport-button";
 import {CopyButton} from "./copy-button";
@@ -17,7 +19,6 @@ export interface SandpackProps extends UseSandpackProps {
   showEditor?: boolean;
   showCopyCode?: boolean;
   showReportBug?: boolean;
-  defaultExpanded?: boolean;
   showOpenInCodeSandbox?: boolean;
   children?: React.ReactNode;
 }
@@ -29,7 +30,6 @@ export const Sandpack: FC<SandpackProps> = ({
   typescriptStrict = false,
   showPreview = false,
   showEditor = true,
-  defaultExpanded = false,
   showOpenInCodeSandbox = true,
   showReportBug = true,
   showCopyCode = true,
@@ -51,7 +51,7 @@ export const Sandpack: FC<SandpackProps> = ({
       customSetup={customSetup}
       files={files}
       template={sandpackTemplate}
-      theme={nextuiTheme}
+      theme={herouiTheme}
     >
       <SandpackLayout
         style={{
@@ -66,7 +66,6 @@ export const Sandpack: FC<SandpackProps> = ({
               <SandpackCodeViewer
                 containerRef={editorContainerRef}
                 decorators={decorators}
-                defaultExpanded={defaultExpanded}
                 highlightedLines={highlightedLines}
                 showTabs={showTabs}
               />
@@ -75,6 +74,18 @@ export const Sandpack: FC<SandpackProps> = ({
               {showReportBug && <BugReportButton />}
               {showCopyCode && <CopyButton />}
               {!showPreview && showOpenInCodeSandbox && <CodeSandboxButton />}
+              {!showPreview && showOpenInCodeSandbox && (
+                <StackblitzButton
+                  isIconOnly
+                  as="span"
+                  className="dark:text-zinc-500 text-white"
+                  files={files}
+                  size="sm"
+                  title="Open in Stackblitz"
+                  typescriptStrict={typescriptStrict}
+                  variant="light"
+                />
+              )}
             </div>
             {hasTypescript && sandpackTemplate && (
               <LanguageSelector template={sandpackTemplate} onChange={setCurrentTemplate} />

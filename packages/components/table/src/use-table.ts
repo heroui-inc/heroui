@@ -1,9 +1,4 @@
-import type {
-  TableVariantProps,
-  SlotsToClasses,
-  TableReturnType,
-  TableSlots,
-} from "@nextui-org/theme";
+import type {TableVariantProps, SlotsToClasses, TableReturnType, TableSlots} from "@heroui/theme";
 import type {Layout} from "@react-stately/virtualizer";
 import type {SelectionBehavior, DisabledBehavior, Node} from "@react-types/shared";
 import type {TableState, TableStateProps} from "@react-stately/table";
@@ -12,18 +7,18 @@ import type {TableCollection} from "@react-types/table";
 import {ReactNode, Key, useCallback} from "react";
 import {useTableState} from "@react-stately/table";
 import {AriaTableProps, useTable as useReactAriaTable} from "@react-aria/table";
-import {HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {table} from "@nextui-org/theme";
-import {useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {table} from "@heroui/theme";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {mergeProps} from "@react-aria/utils";
-import {clsx} from "@nextui-org/shared-utils";
-import {ReactRef} from "@nextui-org/react-utils";
+import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
 import {useMemo} from "react";
-import {CheckboxProps} from "@nextui-org/checkbox";
+import {CheckboxProps} from "@heroui/checkbox";
 
 type TableContentPlacement = "inside" | "outside";
 
-interface Props<T> extends HTMLNextUIProps<"table"> {
+interface Props<T> extends HTMLHeroUIProps<"table"> {
   /**
    * Ref to the DOM node.
    */
@@ -86,6 +81,11 @@ interface Props<T> extends HTMLNextUIProps<"table"> {
    */
   disableAnimation?: boolean;
   /**
+   * Whether to disable the keyboard navigation functionality.
+   * @default false
+   */
+  isKeyboardNavigationDisabled?: boolean;
+  /**
    * Props to be passed to the checkboxes.
    */
   checkboxesProps?: CheckboxProps;
@@ -118,7 +118,7 @@ interface Props<T> extends HTMLNextUIProps<"table"> {
 
 export type UseTableProps<T = object> = Props<T> &
   TableStateProps<T> &
-  Omit<AriaTableProps<T>, "layout"> &
+  Omit<AriaTableProps, "layout"> &
   TableVariantProps;
 
 export type ValuesType<T = object> = {
@@ -140,6 +140,8 @@ export type ValuesType<T = object> = {
 };
 
 export function useTable<T extends object>(originalProps: UseTableProps<T>) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, table.variantKeys);
 
   const {
@@ -149,9 +151,9 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
     children,
     className,
     classNames,
-    layoutNode,
     removeWrapper = false,
-    disableAnimation = false,
+    disableAnimation = globalContext?.disableAnimation ?? false,
+    isKeyboardNavigationDisabled = false,
     selectionMode = "none",
     topContentPlacement = "inside",
     bottomContentPlacement = "inside",
@@ -179,9 +181,16 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
     showSelectionCheckboxes,
   });
 
+  if (isKeyboardNavigationDisabled && !state.isKeyboardNavigationDisabled) {
+    state.setKeyboardNavigationDisabled(true);
+  }
+
   const {collection} = state;
 
-  const {gridProps} = useReactAriaTable<T>({...originalProps, layout: layoutNode}, state, domRef);
+  // Exclude the layout prop because it has a name conflict and is deprecated in useTable.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {layout, ...otherOriginalProps} = originalProps;
+  const {gridProps} = useReactAriaTable<T>({...otherOriginalProps}, state, domRef);
 
   const isSelectable = selectionMode !== "none";
   const isMultiSelectable = selectionMode === "multiple";
@@ -193,7 +202,7 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
         isSelectable,
         isMultiSelectable,
       }),
-    [...Object.values(variantProps), isSelectable, isMultiSelectable],
+    [objectToDeps(variantProps), isSelectable, isMultiSelectable],
   );
 
   const baseStyles = clsx(classNames?.base, className);
@@ -262,6 +271,9 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
         }),
         props,
       ),
+      // avoid typeahead debounce wait for input / textarea
+      // so that typing with space won't be blocked
+      onKeyDownCapture: undefined,
       ref: domRef,
       className: slots.table({class: clsx(classNames?.table, props?.className)}),
     }),

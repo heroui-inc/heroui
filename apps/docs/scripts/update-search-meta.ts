@@ -54,7 +54,7 @@ async function getMDXMeta(file: string) {
 
 
   const result:ResultType[] = [];
-  const title = !!frontMatter.title ? frontMatter.title : "";
+  const title = frontMatter.title || "";
 
   result.push({
     content: title,
@@ -96,7 +96,7 @@ async function getSearchMeta(saveMode: "algolia" | "local" = "local") {
       .filter((file: any) => file.endsWith(".mdx"));
 
     for (const file of files) {
-      let result = [];
+      let result: ResultType[] = [];
 
       try {
         result = await getMDXMeta(file);
@@ -123,7 +123,7 @@ async function getSearchMeta(saveMode: "algolia" | "local" = "local") {
         fs.writeFileSync(outPath, json);
 
 
-      console.log("[NextUI] Search meta is ready ✅");
+      console.log("[HeroUI] Search meta is ready ✅");
 
       return;
     }
@@ -151,7 +151,7 @@ async function getSearchMeta(saveMode: "algolia" | "local" = "local") {
       safe: true,
     });
 
-    console.log("[NextUI] Search meta is ready ✅");
+    console.log("[HeroUI] Search meta is ready ✅");
   } catch (error) {
     console.error(`[ERROR 🔥]:`, error);
   }

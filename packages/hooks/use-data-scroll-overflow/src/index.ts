@@ -1,4 +1,4 @@
-import {capitalize} from "@nextui-org/shared-utils";
+import {capitalize} from "@heroui/shared-utils";
 import {useEffect, useRef} from "react";
 
 export type ScrollOverflowVisibility =
@@ -112,12 +112,22 @@ export function useDataScrollOverflow(props: UseDataScrollOverflowProps = {}) {
         {type: "horizontal", prefix: "left", suffix: "right"},
       ];
 
+      const listbox = el.querySelector('ul[data-slot="list"]');
+
+      // in virtualized listbox, el.scrollHeight is the height of the visible listbox
+      const scrollHeight = +(
+        listbox?.getAttribute("data-virtual-scroll-height") ?? el.scrollHeight
+      );
+
+      // in virtualized listbox, el.scrollTop is always 0
+      const scrollTop = +(listbox?.getAttribute("data-virtual-scroll-top") ?? el.scrollTop);
+
       for (const {type, prefix, suffix} of directions) {
         if (overflowCheck === type || overflowCheck === "both") {
-          const hasBefore = type === "vertical" ? el.scrollTop > offset : el.scrollLeft > offset;
+          const hasBefore = type === "vertical" ? scrollTop > offset : el.scrollLeft > offset;
           const hasAfter =
             type === "vertical"
-              ? el.scrollTop + el.clientHeight + offset < el.scrollHeight
+              ? scrollTop + el.clientHeight + offset < scrollHeight
               : el.scrollLeft + el.clientWidth + offset < el.scrollWidth;
 
           setAttributes(type, hasBefore, hasAfter, prefix, suffix);
@@ -126,14 +136,14 @@ export function useDataScrollOverflow(props: UseDataScrollOverflowProps = {}) {
     };
 
     const clearOverflow = () => {
-      ["top", "bottom", "topBottom", "left", "right", "leftRight"].forEach((attr) => {
+      ["top", "bottom", "top-bottom", "left", "right", "left-right"].forEach((attr) => {
         el.removeAttribute(`data-${attr}-scroll`);
       });
     };
 
     // auto
     checkOverflow();
-    el.addEventListener("scroll", checkOverflow);
+    el.addEventListener("scroll", checkOverflow, true);
 
     // controlled
     if (visibility !== "auto") {
@@ -152,7 +162,7 @@ export function useDataScrollOverflow(props: UseDataScrollOverflowProps = {}) {
     }
 
     return () => {
-      el.removeEventListener("scroll", checkOverflow);
+      el.removeEventListener("scroll", checkOverflow, true);
       clearOverflow();
     };
   }, [...updateDeps, isEnabled, visibility, overflowCheck, onVisibilityChange, domRef]);

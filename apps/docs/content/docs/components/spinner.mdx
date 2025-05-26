@@ -15,12 +15,26 @@ Spinner express an unspecified wait time or display the length of a process.
 
 <CarbonAd/>
 
+## Installation
+
+<PackageManagers
+  showGlobalInstallWarning
+  commands={{
+    cli: "npx heroui-cli@latest add spinner",
+    npm: "npm install @heroui/spinner",
+    yarn: "yarn add @heroui/spinner",
+    pnpm: "pnpm add @heroui/spinner",
+    bun: "bun add @heroui/spinner"
+  }}
+/>
+
+
 ## Import
 
 <ImportTabs
   commands={{
-    main: 'import {Spinner} from "@nextui-org/react";',
-    individual: 'import {Spinner} from "@nextui-org/spinner";',
+    main: 'import {Spinner} from "@heroui/react";',
+    individual: 'import {Spinner} from "@heroui/spinner";',
   }}
 />
 
@@ -46,24 +60,63 @@ Spinner express an unspecified wait time or display the length of a process.
 
 <CodeDemo title="Label colors" files={spinnerContent.labelColors} />
 
+### Variants
+
+<CodeDemo title="Variants" files={spinnerContent.variants} />
+
 ## Slots
 
 - **base**: The base slot of the spinner, it wraps the circles and the label.
 - **wrapper**: The wrapper of the circles.
-- **circle1**: The first circle of the spinner.
-- **circle2**: The second circle of the spinner.
+- **circle1**: The first circle of the spinner component. (Effective only when variant is `default` or `gradient`)
+- **circle2**: The second circle of the spinner component. (Effective only when variant is `default` or `gradient`)
+- **dots**: Dots of the spinner component. (Effective only when variant is `wave` or `dots`)
+- **spinnerBars**: Bars of the spinner component. (Effective only when variant is `spinner`)
 - **label**: The label content.
 
-<Spacer y={4} />{" "}
+<Spacer y={4} />
 
 ## API
 
-### Circular Progress Props
+### Spinner Props
 
-| Attribute  | Type                                                                        | Description                                             | Default   |
-| ---------- | --------------------------------------------------------------------------- | ------------------------------------------------------- | --------- |
-| label      | `string`                                                                    | The content to display as the label.                    | -         |
-| size       | `sm` \| `md` \| `lg`                                                        | The size of the spinner circles.                        | `md`      |
-| color      | `default` \| `primary` \| `secondary` \| `success` \| `warning` \| `danger` | The color of the spinner circles.                       | `primary` |
-| labelColor | `default` \| `primary` \| `secondary` \| `success` \| `warning` \| `danger` | The color of the label.                                 | `default` |
-| classNames | `Record<"base"｜"wrapper"｜"circle1"｜"circle2"｜"label", string>`          | Allows to set custom class names for the spinner slots. | -         |
+<APITable
+  data={[
+    {
+      attribute: "label",
+      type: "string",
+      description: "The content to display as the label.",
+      default: "-"
+    },
+    {
+      attribute: "size", 
+      type: "sm | md | lg",
+      description: "The size of the spinner circles.",
+      default: "md"
+    },
+    {
+      attribute: "color",
+      type: "default | primary | secondary | success | warning | danger",
+      description: "The color of the spinner circles.",
+      default: "primary"
+    },
+    {
+      attribute: "variant",
+      type: "default | simple | gradient | wave | dots | spinner",
+      description: "The variant of the spinner",
+      default: "default"
+    },
+    {
+      attribute: "labelColor",
+      type: "default | primary | secondary | success | warning | danger", 
+      description: "The color of the label.",
+      default: "default"
+    },
+    {
+      attribute: "classNames",
+      type: "Partial<Record<'base' | 'wrapper' | 'circle1' | 'circle2' | 'dots' | 'spinnerBars' | 'label', string>>",
+      description: "Allows to set custom class names for the spinner slots.",
+      default: "-"
+    }
+  ]}
+/>

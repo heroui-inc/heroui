@@ -12,70 +12,7 @@ export type FontThemeUnit = BaseThemeUnit & {
   tiny?: string;
 };
 
-export const spacingScaleKeys = [
-  "0",
-  "xs",
-  "sm",
-  "md",
-  "lg",
-  "xl",
-  "2xl",
-  "3xl",
-  "4xl",
-  "5xl",
-  "6xl",
-  "7xl",
-  "8xl",
-  "9xl",
-  "1",
-  "2",
-  "3",
-  "3.5",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "20",
-  "24",
-  "28",
-  "32",
-  "36",
-  "40",
-  "44",
-  "48",
-  "52",
-  "56",
-  "60",
-  "64",
-  "72",
-  "80",
-  "96",
-];
-
-export const mappedSpacingScaleKeys = spacingScaleKeys.map((key) => `unit-${key}`);
-
-export type SpacingScaleKeys = (typeof spacingScaleKeys)[number];
-
-export type SpacingScale = Partial<Record<SpacingScaleKeys, string>>;
-
 export interface LayoutTheme {
-  /**
-   * Base unit token that defines a consistent spacing scale across the components.
-   *
-   * @default 4 (px)
-   */
-  spacingUnit?: number;
   /**
    * The default font size applied across the components.
    *
@@ -170,17 +107,17 @@ export type ConfigTheme = {
 export type ConfigThemes = Record<string, ConfigTheme>;
 
 /**
- * The NextUI config.
- * @see https://nextui.org/docs/customization/customize-theme
+ * The HeroUI config.
+ * @see https://heroui.com/docs/customization/customize-theme
  */
-export type NextUIPluginConfig = {
+export type HeroUIPluginConfig = {
   /**
    * The prefix for the css variables.
-   * @default "nextui"
+   * @default "heroui"
    */
   prefix?: string;
   /**
-   * If true, the common nextui colors (e.g. "blue", "green", "purple") will not be extended on the theme.
+   * If true, the common heroui colors (e.g. "blue", "green", "purple") will not be extended on the theme.
    * @default false
    */
   addCommonColors?: boolean;

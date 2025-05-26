@@ -1,6 +1,10 @@
+import type {ValidationResult} from "@react-types/shared";
+
 import React from "react";
 import {Meta} from "@storybook/react";
-import {checkbox} from "@nextui-org/theme";
+import {checkbox} from "@heroui/theme";
+import {button} from "@heroui/theme";
+import {Form} from "@heroui/form";
 
 import {CheckboxGroup, Checkbox, CheckboxGroupProps} from "../src";
 
@@ -35,6 +39,12 @@ export default {
       control: {
         type: "boolean",
       },
+    },
+    validationBehavior: {
+      control: {
+        type: "select",
+      },
+      options: ["aria", "native"],
     },
   },
 } as Meta<typeof Checkbox>;
@@ -78,6 +88,83 @@ const InvalidTemplate = (args: CheckboxGroupProps) => {
   );
 };
 
+const FormTemplate = (args: CheckboxGroupProps) => {
+  return (
+    <form
+      className="flex flex-col items-start gap-2"
+      onSubmit={(e) => {
+        const formData = new FormData(e.currentTarget);
+        const selectedCities = formData.getAll("favorite-cities");
+
+        alert(`Submitted values: ${selectedCities.join(", ")}`);
+        e.preventDefault();
+      }}
+    >
+      <CheckboxGroup {...args} label="Select cities" name="favorite-cities">
+        <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
+        <Checkbox value="sydney">Sydney</Checkbox>
+        <Checkbox value="san-francisco">San Francisco</Checkbox>
+        <Checkbox value="london">London</Checkbox>
+        <Checkbox value="tokyo">Tokyo</Checkbox>
+      </CheckboxGroup>
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+    </form>
+  );
+};
+
+const ControlledTemplate = (args: CheckboxGroupProps) => {
+  const [selected, setSelected] = React.useState<string[]>(["buenos-aires"]);
+
+  React.useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("Checkbox ", selected);
+  }, [selected]);
+
+  return (
+    <div className="flex flex-col gap-2">
+      <CheckboxGroup {...args} label="Select cities" value={selected} onValueChange={setSelected}>
+        <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
+        <Checkbox value="sydney">Sydney</Checkbox>
+        <Checkbox value="san-francisco">San Francisco</Checkbox>
+        <Checkbox value="london">London</Checkbox>
+        <Checkbox value="tokyo">Tokyo</Checkbox>
+      </CheckboxGroup>
+      <p className="text-default-500">Selected: {selected.join(", ")}</p>
+    </div>
+  );
+};
+
+const ServerValidationTemplate = (args: CheckboxGroupProps) => {
+  const [serverErrors, setServerErrors] = React.useState({});
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setServerErrors({
+      terms: "Please select a valid animal.",
+    });
+  };
+
+  return (
+    <Form
+      className="flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <CheckboxGroup {...args} label="Agree to the following" name="terms">
+        <Checkbox value="terms">Terms and conditions</Checkbox>
+        <Checkbox value="cookies">Cookies</Checkbox>
+        <Checkbox value="privacy">Privacy policy</Checkbox>
+      </CheckboxGroup>
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+    </Form>
+  );
+};
+
 export const Default = {
   render: Template,
 
@@ -101,6 +188,14 @@ export const DefaultValue = {
     ...defaultProps,
     label: "Select cities",
     defaultValue: ["buenos-aires", "london"],
+  },
+};
+
+export const Controlled = {
+  render: ControlledTemplate,
+
+  args: {
+    ...defaultProps,
   },
 };
 
@@ -153,7 +248,46 @@ export const WithErrorMessage = {
 
   args: {
     ...defaultProps,
+    isInvalid: true,
     errorMessage: "The selected cities cannot be visited at the same time",
+  },
+};
+
+export const WithErrorMessageFunction = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    isRequired: true,
+    errorMessage: (value: ValidationResult) => {
+      if (value.validationDetails.valueMissing) {
+        return "At least one option must be selected";
+      }
+    },
+  },
+};
+
+export const WithValidation = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    description: "Please select at least 2 options",
+    validate: (value: string[]) => {
+      if (value.length < 2) {
+        return "You must select at least 2 options";
+      }
+
+      return null;
+    },
+  },
+};
+
+export const WithServerValidation = {
+  render: ServerValidationTemplate,
+
+  args: {
+    ...defaultProps,
   },
 };
 
@@ -163,5 +297,14 @@ export const DisableAnimation = {
   args: {
     label: "Select cities",
     disableAnimation: true,
+  },
+};
+
+export const IsRequired = {
+  render: FormTemplate,
+
+  args: {
+    ...defaultProps,
+    isRequired: true,
   },
 };

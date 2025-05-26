@@ -1,11 +1,11 @@
 import type {GridNode} from "@react-types/grid";
 
-import {forwardRef, HTMLNextUIProps} from "@nextui-org/system";
-import {useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 import {useTableColumnHeader} from "@react-aria/table";
 import {mergeProps} from "@react-aria/utils";
-import {ChevronDownIcon} from "@nextui-org/shared-icons";
+import {ChevronDownIcon} from "@heroui/shared-icons";
 import {useFocusRing} from "@react-aria/focus";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {useHover} from "@react-aria/interactions";
@@ -13,7 +13,7 @@ import {useHover} from "@react-aria/interactions";
 import {ValuesType} from "./use-table";
 
 // @internal
-export interface TableColumnHeaderProps<T = object> extends HTMLNextUIProps<"th"> {
+export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"> {
   slots: ValuesType["slots"];
   state: ValuesType["state"];
   classNames?: ValuesType["classNames"];
@@ -37,7 +37,7 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
 
   const {isFocusVisible, focusProps} = useFocusRing();
   const {isHovered, hoverProps} = useHover({});
-  const {hideHeader, ...columnProps} = node.props;
+  const {hideHeader, align, ...columnProps} = node.props;
 
   const allowsSorting = columnProps.allowsSorting;
 
@@ -57,7 +57,7 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
         allowsSorting ? hoverProps : {},
         otherProps,
       )}
-      className={slots.th?.({class: thStyles})}
+      className={slots.th?.({align, class: thStyles})}
     >
       {hideHeader ? <VisuallyHidden>{node.rendered}</VisuallyHidden> : node.rendered}
       {allowsSorting && (
@@ -73,6 +73,6 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
   );
 });
 
-TableColumnHeader.displayName = "NextUI.TableColumnHeader";
+TableColumnHeader.displayName = "HeroUI.TableColumnHeader";
 
 export default TableColumnHeader;

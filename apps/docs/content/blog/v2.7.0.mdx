@@ -1,0 +1,384 @@
+---
+title: "HeroUI v2.7.0"
+description: "New Toast component, NumberInput, Theme Generator, and lots of bug fixes and improvements."
+date: "2025-02-18"
+image: "/blog/v2.7.0.jpg"
+tags: ["heroui", "v2.7.0", "release", "toast", "improvements", "theme"]
+author:
+  name: "Junior Garcia"
+  username: "@jrgarciadev"
+  link: "https://x.com/jrgarciadev"
+  avatar: "/avatars/junior-garcia.jpeg"
+---
+
+import spinnerVariantsContent from "@/content/components/spinner/variants.ts";
+import toastUsage from "@/content/components/toast/usage.ts";
+import simpleToast from "@/content/components/toast/simple.ts";
+import numberInputContent from "@/content/components/number-input/description.ts";
+import tableVirtualizationContent from "@/content/components/table/virtualization.ts";
+
+
+<img
+  src="/blog/v2.7.0_2x.jpg"
+  width={700}
+  height={350}
+  alt="HeroUI v2.7.0"
+  className="w-full border border-transparent dark:border-default-200/50 object-fit rounded-xl shadow-lg"
+/>
+
+HeroUI version **v2.7.0** introduces the highly anticipated Toast component, along with exciting new features including NumberInput component, Theme Generator, new Spinner variants, Table virtualization support, and numerous improvements and bug fixes.
+
+## What's New in v2.7.0?
+
+- [Toast Component](#toast-component) - A new toast notification system with rich features
+- [NumberInput Component](#numbaerinput-component) - A new input component specifically designed for numerical values
+- [New Spinner Variants](#new-spinner-variants) - Enhanced spinner component with new design variants
+- [Theme Generator](#theme-generator) - A powerful web-based tool for creating and customizing your themes
+- [Table Virtualization](#table-virtualization) - Performance improvements for large datasets in Table component
+- [New Global Props](#new-global-props) - New global configuration options for label placement and spinner variant
+- [Keyboard Support](#keyboard-support) - Enhanced keyboard support with fn, win, and alt keys
+- [Type Improvements](#type-improvements) - Better TypeScript support and exported types
+- [What's Next?](#whats-next) - Upcoming features and improvements
+- [Breaking Changes](#breaking-changes) - Important changes that may affect existing implementations
+- [Release Changes](#release-changes) - Detailed list of features, documentation updates, bug fixes and enhancements
+
+<Spacer y={4} />
+
+**Upgrade today by using one of the following methods**:
+
+1. Upgrading HeroUI using the `cli`
+
+<PackageManagers
+  commands={{
+    cli: "heroui upgrade --all",
+    npm: "npx heroui-cli@latest upgrade --all",
+  }}
+/>
+
+2. Upgrading HeroUI using package managers
+
+<PackageManagers
+  commands={{
+    npm: "npm install @heroui/react@latest",
+    pnpm: "pnpm add @heroui/react@latest",
+    yarn: "yarn add @heroui/react@latest",
+    bun: "bun add @heroui/react@latest",
+  }}
+/>
+
+<Spacer y={4} />
+
+## Toast Component
+
+The new Toast component provides a flexible and accessible way to show temporary notifications in your application. It comes with built-in support for different placements, variants, and animations. Inspired by [Sonner](https://sonner.emilkowal.ski/), our Toast component brings a beautiful, minimal, and customizable notification system to HeroUI.
+
+### Setup
+
+First, add the `ToastProvider` to your application:
+
+```tsx
+// app/providers.tsx
+import {HeroUIProvider, ToastProvider} from '@heroui/react'
+// for individual components use the following import
+// import {ToastProvider} from '@heroui/toast'
+
+
+export default function Providers({children}) {
+  return (
+    <HeroUIProvider>
+      <ToastProvider />
+        {children}
+    </HeroUIProvider>
+  )
+}
+```
+
+### Basic Usage
+
+```tsx
+import {Button, addToast} from "@heroui/react";
+
+function Example() {
+  return (
+    <Button 
+      onPress={() => {
+        addToast({
+          title: "Success",
+          description: "Your changes have been saved successfully.",
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+}
+```
+
+<Spacer y={2} />
+
+<CodeDemo
+  title="Simple Usage"
+  files={simpleToast}
+  showEditor={false}
+/>
+
+
+### Features
+
+- Multiple placement options (top, bottom, left, right, center)
+- Different variants (solid, bordered, flat)
+- Custom timeout duration
+- Progress indicator
+- Promise support for loading states
+- Customizable icons and styling
+- Accessibility built-in
+
+<CodeDemo title="Toast Examples" files={toastUsage} />
+
+For more examples and detailed documentation about the Toast component, visit our [Toast documentation](/docs/components/toast).
+
+## NumberInput Component
+
+A new specialized input component for numerical values with built-in validation, formatting, and keyboard controls.
+
+<CodeDemo title="Number Input Usage" files={numberInputContent} />
+
+For more examples and detailed documentation about the NumberInput component, visit our [NumberInput documentation](/docs/components/number-input).
+
+## New Spinner Variants
+
+The Spinner component now includes new design variants, offering more options for loading states in your applications.
+
+<CodeDemo title="New Spinner Variants" files={spinnerVariantsContent} />
+
+For more examples and detailed documentation about the Spinner component, visit our [Spinner documentation](/docs/components/spinner).
+
+## Theme Generator
+
+The new Theme Generator is a powerful web-based tool that allows you to create and customize your themes visually. Based on the amazing work by [xylish7](https://github.com/xylish7) in the [nextui-theme-generator](https://github.com/xylish7/nextui-theme-generator) project (huge thanks!), our Theme Generator provides a seamless experience for theme customization. Simply visit our [Theme Generator](/themes) to:
+
+- Create custom color schemes
+- Preview components with your theme in real-time
+- Generate the theme code automatically
+- Export your theme configuration
+- Test different color combinations
+- Ensure proper contrast and accessibility
+
+This tool makes it easier than ever to maintain consistent design across your application without having to write theme configuration manually.
+
+For more information about theming and customization, visit our [Theme documentation](/docs/customization/customize-theme).
+
+## Table Virtualization
+
+The Table component now supports virtualization, significantly improving performance when working with large datasets.
+
+```tsx
+import {Table} from "@heroui/react";
+
+function Example() {
+  return (
+    <Table
+      isVirtualized
+      itemHeight={50} // Required for virtualization
+    >
+      {/* Table content */}
+    </Table>
+  );
+}
+```
+
+<CodeDemo title="Table Virtualization" files={tableVirtualizationContent} />
+
+For more examples and detailed documentation about the Table component, visit our [Table documentation](/docs/components/table).
+
+## New Global Props
+
+We've added new global configuration options to the `HeroUIProvider` that allow you to set default behaviors across your application:
+
+#### Label Placement
+
+You can now set a global default for label placement across all form-based components. This affects components that have the `labelPlacement` property, including:
+
+- Input
+- Select
+- Autocomplete
+- DatePicker
+- DateRangePicker
+- TimeInput
+- NumberInput
+- And more...
+
+```tsx
+import {HeroUIProvider} from "@heroui/react";
+
+function App() {
+  return (
+    <HeroUIProvider labelPlacement="outside">
+      {/* All form components will have outside labels by default */}
+    </HeroUIProvider>
+  );
+}
+```
+
+#### Spinner Variant
+
+You can set a global default spinner variant that will be used by all components that show loading states, including:
+
+- Select
+- Autocomplete
+- Button
+- And other components that use loading indicators
+
+```tsx
+import {HeroUIProvider} from "@heroui/react";
+
+function App() {
+  return (
+    <HeroUIProvider spinnerVariant="simple">
+      {/* All components will use the "simple" spinner variant by default */}
+    </HeroUIProvider>
+  );
+}
+```
+
+You can combine multiple global props to maintain consistent behavior throughout your application:
+
+```tsx
+import {HeroUIProvider} from "@heroui/react";
+
+function App() {
+  return (
+    <HeroUIProvider 
+      labelPlacement="outside"
+      spinnerVariant="simple"
+    >
+      {/* Your app content */}
+    </HeroUIProvider>
+  );
+}
+```
+
+For more information about global configuration options, visit our [Provider documentation](/docs/api-references/heroui-provider).
+
+## Keyboard Support
+
+Enhanced keyboard support with the addition of `fn`, `win`, and `alt` keys for better accessibility and user interaction.
+
+## Type Improvements
+
+Better TypeScript support with exported `PressEvent` type for `onPress` event handling:
+
+```tsx
+import type {PressEvent} from "@heroui/react";
+
+function handlePress(e: PressEvent) {
+  // Your press event handler
+}
+```
+
+## What's Next?
+
+We're actively working on **Tailwind CSS v4** support! You can check out our beta version at [beta.heroui.com](https://beta.heroui.com). 
+
+We're building an exciting new application that will revolutionize frontend development with HeroUI, making your workflow smoother than ever. Stay tuned for updates! 🔥
+
+
+## Breaking Changes
+
+- Renamed `wrapper` slot to `tabWrapper` in Tabs component
+- Deprecated `dateInputClassNames` in favor of new styling approach. The existing styles can be moved to `classNames` instead. 
+- Replaced directional terms `left` & `right` with `start` & `end` for better RTL support.
+- `ListboxItem`, `SelectItem` & AutocompleteItem no longer accept a `value` prop.
+- Spinner component is no longer a server component. If you are using global import, you need to add `use client` directive.
+- For those users using `@internationalized/date`, please bump to `3.7.0` to avoid incompatibility errors.
+- For those users using `@react-aria/i18n`, please bump to `3.12.5` to avoid incompatibility errors.
+
+## Release Changes
+
+<Spacer y={1} />
+
+### Features 🚀
+
+- Added Toast component with rich features and customization options by [@macci001](https://github.com/macci001) in [PR #4437](https://github.com/heroui-inc/heroui/pull/4437)
+- Added NumberInput component by [@wingkwong](https://github.com/wingkwong) in [#4475](https://github.com/heroui-inc/heroui/pull/4475)
+- Added `fn`, `win`, and `alt` keys by [@winchesHe](https://github.com/winchesHe) in [PR #4638](https://github.com/heroui-inc/heroui/pull/4638)
+- Added global `labelPlacement` prop by [@macci001](https://github.com/macci001) in [PR #4346](https://github.com/heroui-inc/heroui/pull/4346)
+- Added new Spinner variants by [@Peter561](https://github.com/Peter561) in [#4555](https://github.com/heroui-inc/heroui/pull/4555)
+- Added Virtualization to Table by [@vinroger](https://github.com/vinroger) in [#4285](https://github.com/heroui-inc/heroui/pull/4285)
+- Added Theme Generator by [@macci001](https://github.com/macci001) in [PR #4626](https://github.com/heroui-inc/heroui/pull/4626)
+- Exported PressEvent for onPress event typing by [@ryo-manba](https://github.com/ryo-manba) in [PR #4819](https://github.com/heroui-inc/heroui/pull/4819)
+
+### Documentation 📘
+
+- Fixed custom implementation preview for checkbox & checkbox-group by [@wingkwong](https://github.com/wingkwong) in [#4610](https://github.com/heroui-inc/heroui/pull/4610)
+- Fixed small typos and added clarifying language in Modal by [@millmason](https://github.com/millmason) in [#4629](https://github.com/heroui-inc/heroui/pull/4629)
+- Fixed Tab usage example by [@ryo-manba](https://github.com/ryo-manba) in [PR #4821](https://github.com/heroui-inc/heroui/pull/4821)
+- Fixed horizontal scrolling example in scroll-shadow by [@ryo-manba](https://github.com/ryo-manba) in [PR #4820](https://github.com/heroui-inc/heroui/pull/4820)
+- Added note about itemHeight for virtualization by [@ryo-manba](https://github.com/ryo-manba) in [PR #4822](https://github.com/heroui-inc/heroui/pull/4822)
+- Removed dropdown menu width by [@wingkwong](https://github.com/wingkwong) in [#4757](https://github.com/heroui-inc/heroui/pull/4757)
+- Added TypeScript examples to show Selection type usage by [@wingkwong](https://github.com/wingkwong) in [#4793](https://github.com/heroui-inc/heroui/pull/4793)
+
+### Bug Fixes 🐛
+
+- Fixed missing shadow none by [@wingkwong](https://github.com/wingkwong) in [#4587](https://github.com/heroui-inc/heroui/pull/4587)
+- Fixed function components cannot be given refs by [@wingkwong](https://github.com/wingkwong) in [#4614](https://github.com/heroui-inc/heroui/pull/4614)
+- Fixed image loading after props change by [@wingkwong](https://github.com/wingkwong) in [#4523](https://github.com/heroui-inc/heroui/pull/4523)
+- Fixed unexpected scrollShadow on virtualized listbox by [@wingkwong](https://github.com/wingkwong) in [#4784](https://github.com/heroui-inc/heroui/pull/4784)
+- Fixed missing clear button with file input type by [@wingkwong](https://github.com/wingkwong) in [#4599](https://github.com/heroui-inc/heroui/pull/4599)
+- Fixed labelPlacement in Select by [@wingkwong](https://github.com/wingkwong) in [#4597](https://github.com/heroui-inc/heroui/pull/4597)
+- Fixed deprecation warning triggered by internal onClick by [@wingkwong](https://github.com/wingkwong) in [#4557](https://github.com/heroui-inc/heroui/pull/4557)
+- Fixed controlled page after delay in Pagination by [@wingkwong](https://github.com/wingkwong) in [#4536](https://github.com/heroui-inc/heroui/pull/4536)
+- Fixed accessing element.ref was removed in React 19 issue by [@wingkwong](https://github.com/wingkwong) in [#4531](https://github.com/heroui-inc/heroui/pull/4531)
+- Fixed missing press events to usePress by [@wingkwong](https://github.com/wingkwong) in [#4812](https://github.com/heroui-inc/heroui/pull/4812)
+- Fixed stroke in CheckboxIcon by [@wingkwong](https://github.com/wingkwong) in [#4811](https://github.com/heroui-inc/heroui/pull/4811)
+- Fixed portalContainer error on NavbarMenu by [@Peter561](https://github.com/Peter561) in [#4506](https://github.com/heroui-inc/heroui/pull/4506)
+- Fixed default validation behaviour in Form by [@Peter561](https://github.com/Peter561) in [#4425](https://github.com/heroui-inc/heroui/pull/4425)
+- Fixed RTL navigation in Calendar by [@MarufSharifi](https://github.com/MarufSharifi) in [PR #4565](https://github.com/heroui-inc/heroui/pull/4565)
+- Fixed inert value in next15 by [@winchesHe](https://github.com/winchesHe) in [PR #4491](https://github.com/heroui-inc/heroui/pull/4491)
+- Fixed dismissable default value by [@winchesHe](https://github.com/winchesHe) in [PR #4524](https://github.com/heroui-inc/heroui/pull/4524)
+- Fixed input height in innerWrapper in Select by [@ShrinidhiUpadhyaya](https://github.com/ShrinidhiUpadhyaya) in [PR #4512](https://github.com/heroui-inc/heroui/pull/4512)
+- Fixed SelectItem, ListboxItem, and AutocompleteItem not to accept value props by [@ryo-manba](https://github.com/ryo-manba) in [PR #4653](https://github.com/heroui-inc/heroui/pull/4653)
+- Fixed border radius in Table when isMultiSelectable by [@Adee1499](https://github.com/Adee1499) in [PR #4808](https://github.com/heroui-inc/heroui/pull/4808)
+
+### Enhancements ✨
+
+- Upgraded Tailwind Variants by [@jrgarciadev](https://github.com/jrgarciadev) in [PR #4386](https://github.com/heroui-inc/heroui/pull/4386)
+- Renamed `wrapper` slot to `tabWrapper` by [@winchesHe](https://github.com/winchesHe) in [PR #4636](https://github.com/heroui-inc/heroui/pull/4636)
+- Removed unnecessary className passing to tv and made naming consistent by [@wingkwong](https://github.com/wingkwong) in [#4558](https://github.com/heroui-inc/heroui/pull/4558)
+- Removed cursor-hit in hiddenInputClasses by [@Layouwen](https://github.com/Layouwen) in [#4474](https://github.com/heroui-inc/heroui/pull/4474)
+- Removed unnecessary `shouldBlockScroll` prop in Tooltip by [@wingkwong](https://github.com/wingkwong) in [#4539](https://github.com/heroui-inc/heroui/pull/4539)
+- Replaced left & right by start & end to support RTL by [@wingkwong](https://github.com/wingkwong) in [#4782](https://github.com/heroui-inc/heroui/pull/4782)
+
+### Chore ⚙️
+
+- Added `pkg-pr-new` by [@winchesHe](https://github.com/winchesHe) in [PR #4540](https://github.com/heroui-inc/heroui/pull/4540)
+- Added Input interaction tests by [@Peter561](https://github.com/Peter561) in [#4579](https://github.com/heroui-inc/heroui/pull/4579)
+- Added data-slot attributes to Accordion by [@Hova25](https://github.com/Hova25) in [#4832](https://github.com/heroui-inc/heroui/pull/4832)
+- Removed feature request from issue template (moved to Discussion) by [@wingkwong](https://github.com/wingkwong) in [#4661](https://github.com/heroui-inc/heroui/pull/4661)
+- Removed Kapa AI in Toast page by [@macci001](https://github.com/macci001) in [PR #4833](https://github.com/heroui-inc/heroui/pull/4833)
+- Deprecated dateInputClassNames by [@wingkwong](https://github.com/wingkwong) in [#4780](https://github.com/heroui-inc/heroui/pull/4780)
+- Rebranding by [@jrgarciadev](https://github.com/jrgarciadev), [@macci001](https://github.com/macci001), [@plbstl](https://github.com/plbstl) in [PR #4594](https://github.com/heroui-inc/heroui/pull/4594), [PR #4620](https://github.com/heroui-inc/heroui/pull/4620), [PR #4645](https://github.com/heroui-inc/heroui/pull/4645)
+- Updated author in package.json by [@wingkwong](https://github.com/wingkwong) in [#4800](https://github.com/heroui-inc/heroui/pull/4800)
+
+For more details about this release, check out our [GitHub release page](https://github.com/heroui-inc/heroui/releases/tag/%40heroui%2Freact%402.7.0). 
+
+
+Special thanks to HeroUI Team members [@wingkwong](https://github.com/wingkwong), [@macci001](https://github.com/macci001), [@vinroger](https://github.com/vinroger),
+[@ryo-manba](https://github.com/ryo-manba), [@winchesHe](https://github.com/winchesHe), [@tianenpang](https://github.com/tianenpang) and contributors for their contributions to this release.
+
+<Spacer y={6} />
+
+Thanks for reading and happy coding! 🚀
+
+---
+
+## Community
+
+We're excited to see the community adopt NextUI, raise issues, and provide feedback.
+Whether it's a feature request, bug report, or a project to showcase, please get involved!
+
+<Community />
+
+## Contributing
+
+PR's on HeroUI are always welcome, please see our [contribution guidelines](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.

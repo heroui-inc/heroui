@@ -4,25 +4,24 @@
 import {
   Button,
   Image,
-  Link as NextUILink,
+  Link as HeroUILink,
   Dropdown,
   DropdownSection,
-  DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Tooltip,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {useInView} from "framer-motion";
-import {clsx} from "@nextui-org/shared-utils";
+import {clsx} from "@heroui/shared-utils";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
-} from "@nextui-org/shared-icons";
+} from "@heroui/shared-icons";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import {useEffect, useRef, useState} from "react";
+import {Fragment, useEffect, useRef, useState} from "react";
 
 import {FeaturesGrid} from "./features-grid";
 
@@ -79,6 +78,8 @@ export const A11yOtb = () => {
 
   const ref = useRef<any>(null);
 
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
   const isMobile = useIsMobile();
 
   const isInView = useInView(ref, {
@@ -101,15 +102,15 @@ export const A11yOtb = () => {
             </div>
           </div>
           <p className={subtitle()}>
-            NextUI components are built on top of&nbsp;
-            <NextUILink
+            HeroUI components are built on top of&nbsp;
+            <HeroUILink
               isExternal
               className="text-xl text-default-500 font-light [&>svg]:ml-1"
               href="https://react-spectrum.adobe.com/react-aria/"
               underline="always"
             >
               React Aria
-            </NextUILink>
+            </HeroUILink>
             &nbsp;ensuring exceptional accessibility support as a top priority.
           </p>
         </div>
@@ -155,22 +156,28 @@ export const A11yOtb = () => {
                 <InfoBoldIcon className="rotate-180" />
               </Button>
             </Tooltip>
+            <Button
+              ref={triggerRef}
+              className="bg-success-50"
+              color="success"
+              variant="flat"
+              onPress={() => setIsDropdownOpen((prevOpenState) => !prevOpenState)}
+            >
+              {isMobile ? "Click me" : "Actions"}
+            </Button>
             {ref.current && (
               <Dropdown
                 className="shadow-xl"
                 closeOnSelect={true}
+                isDismissable={false}
                 isOpen={isDropdownOpen}
                 placement="bottom"
                 portalContainer={ref.current}
                 shouldBlockScroll={false}
                 shouldFlip={isMobile}
-                onOpenChange={(open) => setIsDropdownOpen(open)}
+                triggerRef={triggerRef}
               >
-                <DropdownTrigger>
-                  <Button className="bg-success-50" color="success" variant="flat">
-                    {isMobile ? "Click me" : "Actions"}
-                  </Button>
-                </DropdownTrigger>
+                <Fragment />
                 <DropdownMenu
                   aria-label="Actions"
                   closeOnSelect={true}

@@ -1,17 +1,17 @@
 import type {ListboxItemBaseProps} from "./base/listbox-item-base";
+import type {MenuItemVariantProps} from "@heroui/theme";
 
 import {useMemo, useRef, useCallback} from "react";
-import {listboxItem} from "@nextui-org/theme";
-import {HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
+import {listboxItem} from "@heroui/theme";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
 import {Node} from "@react-types/shared";
-import {filterDOMProps} from "@nextui-org/react-utils";
-import {clsx, dataAttr, removeEvents} from "@nextui-org/shared-utils";
+import {filterDOMProps} from "@heroui/react-utils";
+import {clsx, dataAttr, objectToDeps, removeEvents} from "@heroui/shared-utils";
 import {useOption} from "@react-aria/listbox";
 import {mergeProps} from "@react-aria/utils";
-import {useHover} from "@react-aria/interactions";
-import {usePress} from "@nextui-org/use-aria-press";
-import {useIsMobile} from "@nextui-org/use-is-mobile";
+import {useHover, usePress} from "@react-aria/interactions";
+import {useIsMobile} from "@heroui/use-is-mobile";
 import {ListState} from "@react-stately/list";
 
 interface Props<T extends object> extends ListboxItemBaseProps<T> {
@@ -20,9 +20,12 @@ interface Props<T extends object> extends ListboxItemBaseProps<T> {
 }
 
 export type UseListboxItemProps<T extends object> = Props<T> &
-  Omit<HTMLNextUIProps<"li">, keyof Props<T>>;
+  Omit<HTMLHeroUIProps<"li">, keyof Props<T>> &
+  MenuItemVariantProps;
 
 export function useListboxItem<T extends object>(originalProps: UseListboxItemProps<T>) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, listboxItem.variantKeys);
 
   const {
@@ -38,6 +41,10 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     classNames,
     autoFocus,
     onPress,
+    onPressUp,
+    onPressStart,
+    onPressEnd,
+    onPressChange,
     onClick,
     shouldHighlightOnFocus,
     hideSelectedIcon = false,
@@ -45,7 +52,8 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     ...otherProps
   } = props;
 
-  const disableAnimation = originalProps.disableAnimation;
+  const disableAnimation =
+    originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
   const domRef = useRef<HTMLLIElement>(null);
 
@@ -62,7 +70,12 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
   const {pressProps, isPressed} = usePress({
     ref: domRef,
     isDisabled: isDisabled,
+    onClick,
     onPress,
+    onPressUp,
+    onPressStart,
+    onPressEnd,
+    onPressChange,
   });
 
   const {isHovered, hoverProps} = useHover({
@@ -92,8 +105,10 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
         ...variantProps,
         isDisabled,
         disableAnimation,
+        hasTitleTextChild: typeof rendered === "string",
+        hasDescriptionTextChild: typeof description === "string",
       }),
-    [...Object.values(variantProps), isDisabled, disableAnimation],
+    [objectToDeps(variantProps), isDisabled, disableAnimation, rendered, description],
   );
 
   const baseStyles = clsx(classNames?.base, className);
@@ -102,18 +117,13 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     itemProps = removeEvents(itemProps);
   }
 
-  const isHighlighted = useMemo(() => {
-    if (shouldHighlightOnFocus && isFocused) {
-      return true;
-    }
-
-    return isMobile ? isHovered || isPressed : isHovered;
-  }, [isHovered, isPressed, isFocused, isMobile, shouldHighlightOnFocus]);
+  const isHighlighted =
+    (shouldHighlightOnFocus && isFocused) ||
+    (isMobile ? isHovered || isPressed : isHovered || (isFocused && !isFocusVisible));
 
   const getItemProps: PropGetter = (props = {}) => ({
     ref: domRef,
     ...mergeProps(
-      {onClick},
       itemProps,
       isReadOnly ? {} : mergeProps(focusProps, pressProps),
       hoverProps,

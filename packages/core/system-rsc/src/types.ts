@@ -2,6 +2,8 @@
  * Part of this code is taken from @chakra-ui/system ❤️
  */
 
+import {Selection as AriaSharedSelection} from "@react-types/shared";
+
 export type As<Props = any> = React.ElementType<Props>;
 export type DOMElements = keyof JSX.IntrinsicElements;
 export type CapitalizedDOMElements = Capitalize<DOMElements>;
@@ -68,7 +70,7 @@ export type PropsOf<T extends As> = React.ComponentPropsWithoutRef<T> & {
 
 export type Merge<M, N> = N extends Record<string, unknown> ? M : Omit<M, keyof N> & N;
 
-export type HTMLNextUIProps<T extends As = "div", OmitKeys extends keyof any = never> = Omit<
+export type HTMLHeroUIProps<T extends As = "div", OmitKeys extends keyof any = never> = Omit<
   PropsOf<T>,
   "ref" | "color" | "slot" | "size" | "defaultChecked" | "defaultValue" | OmitKeys
 > & {
@@ -79,3 +81,8 @@ export type PropGetter<P = Record<string, unknown>, R = DOMAttributes> = (
   props?: Merge<DOMAttributes, P>,
   ref?: React.Ref<any>,
 ) => R & React.RefAttributes<any>;
+
+export type SharedSelection = AriaSharedSelection & {
+  anchorKey?: string;
+  currentKey?: string;
+};

@@ -15,12 +15,26 @@ Spacer is a component used to add space between components.
 
 <CarbonAd/>
 
+## Installation
+
+<PackageManagers
+  showGlobalInstallWarning
+  commands={{
+    cli: "npx heroui-cli@latest add spacer",
+    npm: "npm install @heroui/spacer",
+    yarn: "yarn add @heroui/spacer",
+    pnpm: "pnpm add @heroui/spacer",
+    bun: "bun add @heroui/spacer"
+  }}
+/>
+
+
 ## Import
 
 <ImportTabs
   commands={{
-    main: 'import {Spacer} from "@nextui-org/react";',
-    individual: 'import {Spacer} from "@nextui-org/spacer";',
+    main: 'import {Spacer} from "@heroui/react";',
+    individual: 'import {Spacer} from "@heroui/spacer";',
   }}
 />
 
@@ -28,7 +42,7 @@ Spacer is a component used to add space between components.
 
 <CodeDemo title="Usage" files={spacerContent.usage} />
 
-> **Note**: The `x` and `y` values are based on [Tailwind Spacing Scale](https://tailwindcss.com/docs/space)
+> **Note**: The `x` and `y` values are based on [Tailwind Spacing Scale](https://v3.tailwindcss.com/docs/space)
 
 <Spacer y={4}/>  
 
@@ -36,15 +50,25 @@ Spacer is a component used to add space between components.
 
 ### Spacer Props
 
-| Attribute | Type             | Description      | Default |
-| --------- | ---------------- | ---------------- | ------- |
-| x         | [Space](#spaces) | The x axis space | `1`     |
-| y         | [Space](#spaces) | The y axis space | `1`     |
+<APITable
+  data={[
+    {
+      attribute: "x",
+      type: "Space",
+      description: "The x axis space",
+      default: "1"
+    },
+    {
+      attribute: "y", 
+      type: "Space",
+      description: "The y axis space",
+      default: "1"
+    }
+  ]}
+/>
 
-### Spaces
+### Types
 
 ```ts
-type Space = 0 | "px" | 2 | 1 | 0.5 | 1.5 | 2.5 | 3 | 3.5 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 16 | 20 | 24 | 28 | 32 | 36 | 40 | 44 | 48 | 52 | 56 | 60 | 64 | 72 | 80 | 96;
+type Space = 0 | "px" | 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 16 | 20 | 24 | 28 | 32 | 36 | 40 | 44 | 48 | 52 | 56 | 60 | 64 | 72 | 80 | 96;
 ```
-
-

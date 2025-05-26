@@ -1,12 +1,12 @@
 {
-  "name": "@nextui-org/menu",
-  "version": "2.0.17",
+  "name": "@heroui/menu",
+  "version": "2.2.18",
   "description": "A menu displays a list of options and allows a user to select one or more of them.",
   "keywords": [
     "menu"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
-  "homepage": "https://nextui.org",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
   "sideEffects": false,
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextui-org/nextui.git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
     "directory": "packages/components/menu"
   },
   "bugs": {
-    "url": "https://github.com/nextui-org/nextui/issues"
+    "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -34,34 +34,34 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "@nextui-org/theme": ">=2.1.0",
-    "@nextui-org/system": ">=2.0.0"
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0",
+    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.7"
   },
   "dependencies": {
-    "@nextui-org/divider": "workspace:*",
-    "@nextui-org/aria-utils": "workspace:*",
-    "@nextui-org/use-is-mobile": "workspace:*",
-    "@nextui-org/shared-utils": "workspace:*",
-    "@nextui-org/react-utils": "workspace:*",
-    "@nextui-org/use-aria-press": "workspace:*",
-    "@react-aria/menu": "^3.11.1",
-    "@react-aria/utils": "^3.21.1",
-    "@react-stately/menu": "^3.5.6",
-    "@react-stately/tree": "^3.7.3",
-    "@react-aria/focus": "^3.14.3",
-    "@react-aria/interactions": "^3.19.1",
-    "@react-types/menu": "^3.9.5",
-    "@react-types/shared": "^3.21.0"
+    "@heroui/divider": "workspace:*",
+    "@heroui/aria-utils": "workspace:*",
+    "@heroui/use-is-mobile": "workspace:*",
+    "@heroui/shared-utils": "workspace:*",
+    "@heroui/react-utils": "workspace:*",
+    "@react-aria/focus": "3.20.2",
+    "@react-aria/interactions": "3.25.0",
+    "@react-aria/menu": "3.18.2",
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/menu": "3.9.3",
+    "@react-stately/tree": "3.8.9",
+    "@react-types/menu": "3.10.0",
+    "@react-types/shared": "3.29.0"
   },
   "devDependencies": {
-    "@nextui-org/theme": "workspace:*",
-    "@nextui-org/system": "workspace:*",
+    "@heroui/theme": "workspace:*",
+    "@heroui/system": "workspace:*",
+    "@heroui/test-utils": "workspace:*",
+    "@heroui/shared-icons": "workspace:*",
     "clean-package": "2.2.0",
-    "@nextui-org/shared-icons": "workspace:*",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
   },
   "clean-package": "../../../clean-package.config.json"
 }

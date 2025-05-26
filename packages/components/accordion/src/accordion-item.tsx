@@ -1,16 +1,21 @@
-import {forwardRef} from "@nextui-org/system";
+import type {Variants} from "framer-motion";
+
+import {forwardRef} from "@heroui/system";
 import {useMemo, ReactNode} from "react";
-import {ChevronIcon} from "@nextui-org/shared-icons";
-import {AnimatePresence, motion, useWillChange} from "framer-motion";
-import {TRANSITION_VARIANTS} from "@nextui-org/framer-transitions";
+import {ChevronIcon} from "@heroui/shared-icons";
+import {AnimatePresence, LazyMotion, m, useWillChange} from "framer-motion";
+import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 
 import {UseAccordionItemProps, useAccordionItem} from "./use-accordion-item";
 
 export interface AccordionItemProps extends UseAccordionItemProps {}
 
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
+
 const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   const {
     Component,
+    HeadingComponent,
     classNames,
     slots,
     indicator,
@@ -35,7 +40,7 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   const willChange = useWillChange();
 
-  const indicatorContent = useMemo<ReactNode | null>(() => {
+  const indicatorContent = useMemo<ReactNode>(() => {
     if (typeof indicator === "function") {
       return indicator({indicator: <ChevronIcon />, isOpen, isDisabled});
     }
@@ -49,35 +54,54 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   const content = useMemo(() => {
     if (disableAnimation) {
-      return <div {...getContentProps()}>{children}</div>;
+      if (keepContentMounted) {
+        return <div {...getContentProps()}>{children}</div>;
+      }
+
+      return isOpen && <div {...getContentProps()}>{children}</div>;
     }
 
+    const transitionVariants: Variants = {
+      exit: {...TRANSITION_VARIANTS.collapse.exit, overflowY: "hidden"},
+      enter: {...TRANSITION_VARIANTS.collapse.enter, overflowY: "unset"},
+    };
+
     return keepContentMounted ? (
-      <motion.section
-        key="accordion-content"
-        animate={isOpen ? "enter" : "exit"}
-        exit="exit"
-        initial="exit"
-        style={{overflowY: "hidden", willChange}}
-        variants={TRANSITION_VARIANTS.collapse}
-        {...motionProps}
-      >
-        <div {...getContentProps()}>{children}</div>
-      </motion.section>
+      <LazyMotion features={domAnimation}>
+        <m.section
+          key="accordion-content"
+          animate={isOpen ? "enter" : "exit"}
+          exit="exit"
+          initial="exit"
+          style={{willChange}}
+          variants={transitionVariants}
+          onKeyDown={(e) => {
+            e.stopPropagation();
+          }}
+          {...motionProps}
+        >
+          <div {...getContentProps()}>{children}</div>
+        </m.section>
+      </LazyMotion>
     ) : (
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.section
-            key="accordion-content"
-            animate="enter"
-            exit="exit"
-            initial="exit"
-            style={{overflowY: "hidden", willChange}}
-            variants={TRANSITION_VARIANTS.collapse}
-            {...motionProps}
-          >
-            <div {...getContentProps()}>{children}</div>
-          </motion.section>
+          <LazyMotion features={domAnimation}>
+            <m.section
+              key="accordion-content"
+              animate="enter"
+              exit="exit"
+              initial="exit"
+              style={{willChange}}
+              variants={transitionVariants}
+              onKeyDown={(e) => {
+                e.stopPropagation();
+              }}
+              {...motionProps}
+            >
+              <div {...getContentProps()}>{children}</div>
+            </m.section>
+          </LazyMotion>
         )}
       </AnimatePresence>
     );
@@ -85,7 +109,7 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   return (
     <Component {...getBaseProps()}>
-      <h2 {...getHeadingProps()}>
+      <HeadingComponent {...getHeadingProps()}>
         <button {...getButtonProps()}>
           {startContent && (
             <div className={slots.startContent({class: classNames?.startContent})}>
@@ -100,12 +124,12 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
             <span {...getIndicatorProps()}>{indicatorComponent}</span>
           )}
         </button>
-      </h2>
+      </HeadingComponent>
       {content}
     </Component>
   );
 });
 
-AccordionItem.displayName = "NextUI.AccordionItem";
+AccordionItem.displayName = "HeroUI.AccordionItem";
 
 export default AccordionItem;

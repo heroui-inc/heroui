@@ -1,62 +1,69 @@
 "use client";
 
 import NextLink from "next/link";
-import {Button, Link} from "@nextui-org/react";
-import {ArrowRightIcon} from "@nextui-org/shared-icons";
+import {Button, Link, Chip, Snippet} from "@heroui/react";
+import {ArrowRightIcon} from "@heroui/shared-icons";
 import dynamic from "next/dynamic";
+import {usePostHog} from "posthog-js/react";
 
 import {FloatingComponents} from "./floating-components";
 
-import {title, subtitle} from "@/components/primitives";
 import {GithubIcon} from "@/components/icons";
-import {trackEvent} from "@/utils/va";
+import {title, subtitle} from "@/components/primitives";
+import {siteConfig} from "@/config/site";
 
 const BgLooper = dynamic(() => import("./bg-looper").then((mod) => mod.BgLooper), {
   ssr: false,
 });
 
 export const Hero = () => {
-  // const handlePressAnnouncement = (name: string, url: string) => {
-  //   trackEvent("NavbarItem", {
-  //     name,
-  //     action: "press",
-  //     category: "home - gero",
-  //     data: url,
-  //   });
-  // };
+  const posthog = usePostHog();
+
+  const handlePressAnnouncement = (name: string, url: string) => {
+    posthog.capture("NavbarItem", {
+      name,
+      action: "press",
+      category: "home - hero",
+      data: url,
+    });
+  };
 
   return (
     <section className="flex relative overflow-hidden lg:overflow-visible w-full flex-nowrap justify-between items-center h-[calc(100vh_-_64px)] 2xl:h-[calc(84vh_-_64px)]">
-      <div className="flex relative z-20 flex-col gap-6 w-full lg:w-1/2 xl:mt-10">
-        <div className="w-full flex justify-center md:hidden">
-          {/* <Chip
+      <div className="relative z-20 flex flex-col w-full gap-6 lg:w-1/2 xl:mt-10">
+        <div className="flex justify-center w-full md:hidden">
+          <Chip
             as={NextLink}
-            className="w-full hover:bg-default-100 border-default-200/80 dark:border-default-100/80 transition-colors cursor-pointer"
-            color="secondary"
-            href="/blog/v2.2.0"
-            variant="dot"
-            onClick={() => handlePressAnnouncement("Introducing v2.2.0", "/blog/v2.2.0")}
+            className="bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
+            classNames={{
+              content: "font-semibold text-foreground text-xs ",
+            }}
+            color="primary"
+            href="/blog/v2.7.0"
+            variant="flat"
+            onClick={() => handlePressAnnouncement("HeroUI v2.7.0", "/blog/v2.7.0")}
           >
-            Introducing v2.2.0&nbsp;
-            <span aria-label="rocket emoji" role="img">
-              🚀
+            HeroUI v2.7.0&nbsp;
+            <span aria-label="emoji" role="img">
+              🔥
             </span>
-          </Chip> */}
+          </Chip>
         </div>
-        <div className="text-center leading-8 md:leading-10 md:text-left">
+        <div className="leading-8 text-center md:leading-10 md:text-left">
           <div className="inline-block">
             <h1 className={title()}>Make&nbsp;</h1>
             <h1 className={title({color: "violet"})}>beautiful&nbsp;</h1>
           </div>
           <h1 className={title()}>websites regardless of your design experience.</h1>
         </div>
-        <h2 className={subtitle({fullWidth: true, class: "text-center md:text-left"})}>
-          Beautiful, fast and modern React UI library.
+        <h2 className={subtitle({fullWidth: true, class: "text-center md:text-left lg:pr-8"})}>
+          Beautiful, fast and modern React UI library for building accessible and customizable web
+          applications.
         </h2>
-        <div className="flex flex-col md:flex-row items-center gap-4">
+        <div className="flex flex-col items-center gap-4 md:flex-row">
           <Button
             as={NextLink}
-            className="w-full md:w-auto"
+            className="w-full md:h-11 md:w-auto"
             color="primary"
             endContent={
               <ArrowRightIcon
@@ -68,7 +75,7 @@ export const Hero = () => {
             radius="full"
             size="lg"
             onPress={() => {
-              trackEvent("Hero - Get Started", {
+              posthog.capture("Hero - Get Started", {
                 name: "Get Started",
                 action: "click",
                 category: "landing-page",
@@ -78,27 +85,42 @@ export const Hero = () => {
           >
             Get Started
           </Button>
-
+          <Snippet
+            className="hidden w-full rounded-full md:flex sm:w-auto"
+            copyButtonProps={{
+              radius: "full",
+            }}
+            onCopy={() => {
+              posthog.capture("Hero - Copy Install Command", {
+                name: "Copy",
+                action: "click",
+                category: "landing-page",
+                data: "npx heroui-cli@latest init",
+              });
+            }}
+          >
+            npx heroui-cli@latest init
+          </Snippet>
           <Button
             fullWidth
             isExternal
             as={Link}
-            className="w-full md:w-auto"
-            href="https://github.com/nextui-org/nextui"
+            className="w-full md:hidden"
+            href={siteConfig.links.github}
             radius="full"
             size="lg"
             startContent={<GithubIcon />}
             variant="bordered"
             onPress={() => {
-              trackEvent("Hero - Github", {
+              posthog.capture("Hero - Github", {
                 name: "Github",
                 action: "click",
                 category: "landing-page",
-                data: "https://github.com/nextui-org/nextui",
+                data: siteConfig.links.github,
               });
             }}
           >
-            Github
+            GitHub
           </Button>
         </div>
       </div>

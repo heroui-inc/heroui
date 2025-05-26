@@ -1,12 +1,13 @@
-import type {SpinnerVariantProps, SpinnerSlots, SlotsToClasses} from "@nextui-org/theme";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system-rsc";
+import type {SpinnerVariantProps, SpinnerSlots, SlotsToClasses} from "@heroui/theme";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
 
-import {mapPropsVariants} from "@nextui-org/system-rsc";
-import {spinner} from "@nextui-org/theme";
-import {clsx} from "@nextui-org/shared-utils";
+import {mapPropsVariants} from "@heroui/system-rsc";
+import {spinner} from "@heroui/theme";
+import {clsx, objectToDeps} from "@heroui/shared-utils";
 import {useMemo, useCallback, Ref} from "react";
+import {useProviderContext} from "@heroui/system";
 
-interface Props extends HTMLNextUIProps<"div"> {
+interface Props extends HTMLHeroUIProps<"div"> {
   /**
    * Ref to the DOM node.
    */
@@ -38,9 +39,12 @@ export type UseSpinnerProps = Props & SpinnerVariantProps;
 export function useSpinner(originalProps: UseSpinnerProps) {
   const [props, variantProps] = mapPropsVariants(originalProps, spinner.variantKeys);
 
+  const globalContext = useProviderContext();
+  const variant = originalProps?.variant ?? globalContext?.spinnerVariant ?? "default";
+
   const {children, className, classNames, label: labelProp, ...otherProps} = props;
 
-  const slots = useMemo(() => spinner({...variantProps}), [...Object.values(variantProps)]);
+  const slots = useMemo(() => spinner({...variantProps}), [objectToDeps(variantProps)]);
 
   const baseStyles = clsx(classNames?.base, className);
 
@@ -65,7 +69,7 @@ export function useSpinner(originalProps: UseSpinnerProps) {
     [ariaLabel, slots, baseStyles, otherProps],
   );
 
-  return {label, slots, classNames, getSpinnerProps};
+  return {label, slots, classNames, variant, getSpinnerProps};
 }
 
 export type UseSpinnerReturn = ReturnType<typeof useSpinner>;

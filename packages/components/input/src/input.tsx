@@ -1,6 +1,6 @@
-import {CloseFilledIcon} from "@nextui-org/shared-icons";
+import {CloseFilledIcon} from "@heroui/shared-icons";
 import {useMemo} from "react";
-import {forwardRef} from "@nextui-org/system";
+import {forwardRef} from "@heroui/system";
 
 import {UseInputProps, useInput} from "./use-input";
 
@@ -19,6 +19,7 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
     isOutsideLeft,
     shouldLabelBeOutside,
     errorMessage,
+    isInvalid,
     getBaseProps,
     getLabelProps,
     getInputProps,
@@ -35,26 +36,30 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
 
   const end = useMemo(() => {
     if (isClearable) {
-      return <span {...getClearButtonProps()}>{endContent || <CloseFilledIcon />}</span>;
+      return <button {...getClearButtonProps()}>{endContent || <CloseFilledIcon />}</button>;
     }
 
     return endContent;
   }, [isClearable, getClearButtonProps]);
 
   const helperWrapper = useMemo(() => {
-    if (!hasHelper) return null;
+    const shouldShowError = isInvalid && errorMessage;
+    const hasContent = shouldShowError || description;
+
+    if (!hasHelper || !hasContent) return null;
 
     return (
       <div {...getHelperWrapperProps()}>
-        {errorMessage ? (
+        {shouldShowError ? (
           <div {...getErrorMessageProps()}>{errorMessage}</div>
-        ) : description ? (
+        ) : (
           <div {...getDescriptionProps()}>{description}</div>
-        ) : null}
+        )}
       </div>
     );
   }, [
     hasHelper,
+    isInvalid,
     errorMessage,
     description,
     getHelperWrapperProps,
@@ -63,19 +68,11 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
   ]);
 
   const innerWrapper = useMemo(() => {
-    if (startContent || end) {
-      return (
-        <div {...getInnerWrapperProps()}>
-          {startContent}
-          <input {...getInputProps()} />
-          {end}
-        </div>
-      );
-    }
-
     return (
       <div {...getInnerWrapperProps()}>
+        {startContent}
         <input {...getInputProps()} />
+        {end}
       </div>
     );
   }, [startContent, end, getInputProps, getInnerWrapperProps]);
@@ -124,6 +121,6 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
   );
 });
 
-Input.displayName = "NextUI.Input";
+Input.displayName = "HeroUI.Input";
 
 export default Input;

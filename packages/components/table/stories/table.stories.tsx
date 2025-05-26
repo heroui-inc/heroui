@@ -1,14 +1,14 @@
 import React, {useMemo} from "react";
 import {Meta} from "@storybook/react";
-import {table} from "@nextui-org/theme";
-import {User} from "@nextui-org/user";
-import {Chip, ChipProps} from "@nextui-org/chip";
-import {Button} from "@nextui-org/button";
-import {Spinner} from "@nextui-org/spinner";
-import {Pagination} from "@nextui-org/pagination";
-import {Tooltip} from "@nextui-org/tooltip";
-import {EditIcon, DeleteIcon, EyeIcon} from "@nextui-org/shared-icons";
-import {useInfiniteScroll} from "@nextui-org/use-infinite-scroll";
+import {table} from "@heroui/theme";
+import {User} from "@heroui/user";
+import {Chip, ChipProps} from "@heroui/chip";
+import {Button} from "@heroui/button";
+import {Spinner} from "@heroui/spinner";
+import {Pagination} from "@heroui/pagination";
+import {Tooltip} from "@heroui/tooltip";
+import {EditIcon, DeleteIcon, EyeIcon} from "@heroui/shared-icons";
+import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
 import {useAsyncList} from "@react-stately/data";
 import useSWR from "swr";
 
@@ -22,6 +22,7 @@ import {
   TableProps,
   getKeyValue,
 } from "../src";
+import {Switch} from "../../switch/src";
 
 export default {
   title: "Components/Table",
@@ -119,6 +120,14 @@ type SWCharacter = {
   birth_year: string;
 };
 
+const generateRows = (rowCount: number) => {
+  return Array.from({length: rowCount}, (_, index) => ({
+    key: index.toString(),
+    name: `Item ${index + 1}`,
+    value: `Value ${index + 1}`,
+  }));
+};
+
 const StaticTemplate = (args: TableProps) => (
   <Table aria-label="Example static collection table" {...args}>
     <TableHeader>
@@ -146,6 +155,46 @@ const StaticTemplate = (args: TableProps) => (
         <TableCell>William Howard</TableCell>
         <TableCell>Community Manager</TableCell>
         <TableCell>Vacation</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
+
+const TableWithSwitchTemplate = (args: TableProps) => (
+  <Table aria-label="Table with Switch" {...args}>
+    <TableHeader>
+      <TableColumn>NAME</TableColumn>
+      <TableColumn>ROLE</TableColumn>
+      <TableColumn>ACTIVE</TableColumn>
+    </TableHeader>
+    <TableBody>
+      <TableRow key="1">
+        <TableCell>Tony Reichert</TableCell>
+        <TableCell>CEO</TableCell>
+        <TableCell>
+          <Switch />
+        </TableCell>
+      </TableRow>
+      <TableRow key="2">
+        <TableCell>Zoey Lang</TableCell>
+        <TableCell>Technical Lead</TableCell>
+        <TableCell>
+          <Switch />
+        </TableCell>
+      </TableRow>
+      <TableRow key="3">
+        <TableCell>Jane Fisher</TableCell>
+        <TableCell>Senior Developer</TableCell>
+        <TableCell>
+          <Switch />
+        </TableCell>
+      </TableRow>
+      <TableRow key="4">
+        <TableCell>William Howard</TableCell>
+        <TableCell>Community Manager</TableCell>
+        <TableCell>
+          <Switch />
+        </TableCell>
       </TableRow>
     </TableBody>
   </Table>
@@ -394,7 +443,7 @@ const CustomCellWithClassnamesTemplate = (args: TableProps) => {
           <User
             avatarProps={{radius: "lg", src: user.avatar}}
             classNames={{
-              description: "text-white/60",
+              description: "text-default-400",
             }}
             description={user.email}
             name={cellValue}
@@ -406,16 +455,16 @@ const CustomCellWithClassnamesTemplate = (args: TableProps) => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-white/60">{user.team}</p>
+            <p className="text-bold text-sm capitalize text-default-400">{user.team}</p>
           </div>
         );
       case "status":
         return (
           <Chip
-            className="capitalize bg-black/20 font-semibold"
+            className="capitalize font-semibold"
             color={statusColorMap[user.status]}
             size="sm"
-            variant="light"
+            variant="flat"
           >
             {cellValue}
           </Chip>
@@ -424,12 +473,12 @@ const CustomCellWithClassnamesTemplate = (args: TableProps) => {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip color="foreground" content="Details">
-              <span className="text-lg text-white/70 cursor-pointer active:opacity-50">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <EyeIcon />
               </span>
             </Tooltip>
             <Tooltip color="foreground" content="Edit user">
-              <span className="text-lg text-white/70 cursor-pointer active:opacity-50">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <EditIcon />
               </span>
             </Tooltip>
@@ -871,6 +920,38 @@ const InfinitePaginationTemplate = (args: TableProps) => {
   );
 };
 
+const VirtualizedTemplate = (args: TableProps & {rowCount: number}) => {
+  const {rowCount, ...rest} = args;
+  const rows = generateRows(rowCount);
+  const columns = [
+    {key: "name", label: "Name"},
+    {key: "value", label: "Value"},
+  ];
+
+  return (
+    <div>
+      <Table
+        aria-label="Example of virtualized table with a large dataset"
+        {...rest}
+        isVirtualized
+        maxTableHeight={300}
+        rowHeight={40}
+      >
+        <TableHeader columns={columns}>
+          {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+        </TableHeader>
+        <TableBody items={rows}>
+          {(item) => (
+            <TableRow key={item.key}>
+              {(columnKey) => <TableCell>{item[columnKey]}</TableCell>}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
+
 export const Default = {
   render: StaticTemplate,
 
@@ -1038,13 +1119,13 @@ export const CustomWithClassNames = {
     ...defaultProps,
     classNames: {
       base: ["max-w-3xl", "bg-gradient-to-br", "from-purple-500", "to-indigo-900/90", "shadow-xl"],
-      th: ["bg-transparent", "text-white/70", "border-b", "border-white/10"],
+      th: ["bg-transparent", "text-default-700", "border-b", "border-default"],
       td: [
         "py-4",
         "text-sm",
-        "text-white/90",
+        "text-default-700",
         "border-b",
-        "border-white/10",
+        "border-default",
         "group-data-[last=true]:border-b-0",
       ],
     },
@@ -1059,5 +1140,39 @@ export const DisableAnimation = {
     selectionMode: "multiple",
     color: "secondary",
     disableAnimation: true,
+  },
+};
+
+export const TableWithSwitch = {
+  render: TableWithSwitchTemplate,
+  args: {
+    ...defaultProps,
+    selectionMode: "multiple",
+  },
+};
+
+export const Virtualized = {
+  render: VirtualizedTemplate,
+  args: {
+    ...defaultProps,
+    className: "max-w-3xl",
+    rowCount: 500,
+  },
+};
+
+export const VirtualizedWithHeaderSticky = {
+  ...Virtualized,
+  args: {
+    ...Virtualized.args,
+    isHeaderSticky: true,
+  },
+};
+
+export const TenThousandRows = {
+  render: VirtualizedTemplate,
+  args: {
+    ...defaultProps,
+    className: "max-w-3xl",
+    rowCount: 10000,
   },
 };

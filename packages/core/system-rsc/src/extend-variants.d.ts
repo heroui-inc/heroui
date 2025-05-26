@@ -1,5 +1,11 @@
 import type {ClassValue, StringToBoolean, OmitUndefined, ClassProp} from "tailwind-variants";
-import type {ForwardRefRenderFunction, JSXElementConstructor, ReactElement} from "react";
+import type {
+  ForwardRefExoticComponent,
+  JSXElementConstructor,
+  PropsWithoutRef,
+  ReactElement,
+  RefAttributes,
+} from "react";
 
 type SlotsClassValue<S> = {
   [K in keyof S]?: ClassValue;
@@ -33,6 +39,7 @@ type ComposeVariants<CP, S> = SuggestedVariants<CP, S> | Variants<S>;
 type VariantValue<V, SV> = {
   [K in keyof V | keyof SV]?:
     | (K extends keyof V ? StringToBoolean<keyof V[K]> : never)
+    | (K extends keyof V ? StringToBoolean<keyof V[K]>[] : never)
     | (K extends keyof SV
         ? ValidateSubtype<SV[K], object> extends "true"
           ? keyof OmitUndefined<SV[K]>
@@ -47,7 +54,7 @@ type CompoundVariants<V, SV> = Array<VariantValue<V, SV> & ClassProp<ClassValue>
 type Options = {
   /**
    * Whether to merge the class names with `tailwind-merge` library.
-   * It's avoid to have duplicate tailwind classes. (Recommended)
+   * It avoids to have duplicate tailwind classes. (Recommended)
    * @see https://github.com/dcastil/tailwind-merge/blob/v1.8.1/README.md
    * @default true
    */
@@ -89,13 +96,13 @@ export type ExtendVariants = {
       slots?: S;
     },
     opts?: Options,
-  ): ForwardRefRenderFunction<
-    ReactElement,
-    {
+  ): ForwardRefExoticComponent<
+    PropsWithoutRef<{
       [key in keyof CP | keyof V]?:
         | (key extends keyof CP ? CP[key] : never)
         | (key extends keyof V ? StringToBoolean<keyof V[key]> : never);
-    }
+    }> &
+      RefAttributes<ReactElement>
   >;
 };
 

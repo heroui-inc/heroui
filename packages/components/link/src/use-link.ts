@@ -1,17 +1,18 @@
 import type {AriaLinkProps} from "@react-types/link";
-import type {LinkVariantProps} from "@nextui-org/theme";
+import type {LinkVariantProps} from "@heroui/theme";
+import type {MouseEventHandler} from "react";
 
-import {link} from "@nextui-org/theme";
-import {useAriaLink} from "@nextui-org/use-aria-link";
-import {HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {useDOMRef} from "@nextui-org/react-utils";
+import {link} from "@heroui/theme";
+import {useAriaLink} from "@heroui/use-aria-link";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useDOMRef} from "@heroui/react-utils";
 import {useFocusRing} from "@react-aria/focus";
-import {dataAttr} from "@nextui-org/shared-utils";
-import {ReactRef} from "@nextui-org/react-utils";
+import {dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
 import {useMemo, useCallback} from "react";
 import {mergeProps} from "@react-aria/utils";
 
-interface Props extends HTMLNextUIProps<"a">, LinkVariantProps {
+interface Props extends HTMLHeroUIProps<"a">, LinkVariantProps {
   /**
    * Ref to the DOM node.
    */
@@ -31,11 +32,19 @@ interface Props extends HTMLNextUIProps<"a">, LinkVariantProps {
    * @default <LinkIcon />
    */
   anchorIcon?: React.ReactNode;
+  /**
+   * The native link click event handler.
+   * use `onPress` instead.
+   * @deprecated
+   */
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export type UseLinkProps = Props & AriaLinkProps;
 
 export function useLink(originalProps: UseLinkProps) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, link.variantKeys);
 
   const {
@@ -57,7 +66,10 @@ export function useLink(originalProps: UseLinkProps) {
   const Component = as || "a";
 
   const domRef = useDOMRef(ref);
+  const disableAnimation =
+    originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
+  // use `@heroui/use-aria-link` to suppress onClick deprecation warning
   const {linkProps} = useAriaLink(
     {
       ...otherProps,
@@ -81,25 +93,26 @@ export function useLink(originalProps: UseLinkProps) {
     otherProps.target = otherProps.target ?? "_blank";
   }
 
-  const classNames = useMemo(
+  const styles = useMemo(
     () =>
       link({
         ...variantProps,
+        disableAnimation,
         className,
       }),
-    [...Object.values(variantProps), className],
+    [objectToDeps(variantProps), disableAnimation, className],
   );
 
   const getLinkProps: PropGetter = useCallback(() => {
     return {
       ref: domRef,
-      className: classNames,
+      className: styles,
       "data-focus": dataAttr(isFocused),
       "data-disabled": dataAttr(originalProps.isDisabled),
       "data-focus-visible": dataAttr(isFocusVisible),
       ...mergeProps(focusProps, linkProps, otherProps),
     };
-  }, [classNames, isFocused, isFocusVisible, focusProps, linkProps, otherProps]);
+  }, [styles, isFocused, isFocusVisible, focusProps, linkProps, otherProps]);
 
   return {Component, children, anchorIcon, showAnchorIcon, getLinkProps};
 }

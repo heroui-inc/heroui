@@ -1,12 +1,13 @@
-import type {CodeVariantProps} from "@nextui-org/theme";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system-rsc";
+import type {CodeVariantProps} from "@heroui/theme";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
 
-import {code} from "@nextui-org/theme";
-import {mapPropsVariants} from "@nextui-org/system-rsc";
-import {ReactRef} from "@nextui-org/react-utils";
+import {code} from "@heroui/theme";
+import {mapPropsVariants} from "@heroui/system-rsc";
+import {ReactRef} from "@heroui/react-utils";
 import {useMemo} from "react";
+import {objectToDeps} from "@heroui/shared-utils";
 
-export interface UseCodeProps extends HTMLNextUIProps<"code">, CodeVariantProps {
+export interface UseCodeProps extends HTMLHeroUIProps<"code">, CodeVariantProps {
   /**
    * Ref to the DOM node.
    */
@@ -20,18 +21,18 @@ export function useCode(originalProps: UseCodeProps) {
 
   const Component = as || "code";
 
-  const classNames = useMemo(
+  const styles = useMemo(
     () =>
       code({
         ...variantProps,
         className,
       }),
-    [...Object.values(variantProps), className],
+    [objectToDeps(variantProps), className],
   );
 
   const getCodeProps: PropGetter = () => {
     return {
-      className: classNames,
+      className: styles,
       ...otherProps,
     };
   };

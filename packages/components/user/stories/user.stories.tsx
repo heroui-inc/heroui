@@ -1,6 +1,6 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {Link} from "@nextui-org/link";
+import {Link} from "@heroui/link";
 
 import {User} from "../src";
 
@@ -58,7 +58,7 @@ export const WithLinkDescription = {
   args: {
     name: "Junior Garcia",
     description: (
-      <Link href="https://twitter.com/jrgarciadev" size="sm">
+      <Link href="https://x.com/jrgarciadev" size="sm">
         @jrgarciadev
       </Link>
     ),

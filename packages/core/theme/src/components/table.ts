@@ -1,7 +1,7 @@
 import type {VariantProps} from "tailwind-variants";
 
-import {tv} from "../utils/tv";
 import {dataFocusVisibleClasses} from "../utils";
+import {tv} from "../utils/tv";
 
 /**
  * Table **Tailwind Variants** component
@@ -55,23 +55,22 @@ const table = tv({
     ],
     table: "min-w-full h-auto",
     thead: "[&>tr]:first:rounded-lg",
-    tbody: "",
-    tr: ["group", "outline-none", ...dataFocusVisibleClasses],
+    tbody: "after:block",
+    tr: ["group/tr", "outline-none", ...dataFocusVisibleClasses],
     th: [
-      "group",
+      "group/th",
       "px-3",
       "h-10",
-      "text-left",
+      "text-start",
       "align-middle",
       "bg-default-100",
       "whitespace-nowrap",
       "text-foreground-500",
       "text-tiny",
       "font-semibold",
-      "first:rounded-l-lg",
-      "last:rounded-r-lg",
+      "first:rounded-s-lg",
+      "last:rounded-e-lg",
       "outline-none",
-      "data-[sortable=true]:transition-colors",
       "data-[sortable=true]:cursor-pointer",
       "data-[hover=true]:text-foreground-400",
       ...dataFocusVisibleClasses,
@@ -96,18 +95,19 @@ const table = tv({
       "before:opacity-0",
       "data-[selected=true]:before:opacity-100",
       // disabled
-      "group-data-[disabled=true]:text-foreground-300",
+      "group-data-[disabled=true]/tr:text-foreground-300",
+      "group-data-[disabled=true]/tr:cursor-not-allowed",
     ],
     tfoot: "",
     sortIcon: [
-      "ml-2",
+      "ms-2",
       "mb-px",
       "opacity-0",
       "text-inherit",
       "inline-block",
       "transition-transform-opacity",
       "data-[visible=true]:opacity-100",
-      "group-data-[hover=true]:opacity-100",
+      "group-data-[hover=true]/th:opacity-100",
       "data-[direction=ascending]:rotate-180",
     ],
     emptyWrapper: "text-foreground-400 align-middle text-center h-40",
@@ -116,7 +116,7 @@ const table = tv({
   variants: {
     color: {
       default: {
-        td: "before:bg-default/40 data-[selected=true]:text-default-foreground",
+        td: "before:bg-default/60 data-[selected=true]:text-default-foreground",
       },
       primary: {
         td: "before:bg-primary/20 data-[selected=true]:text-primary",
@@ -178,8 +178,9 @@ const table = tv({
     isStriped: {
       true: {
         td: [
-          "group-data-[odd=true]:before:bg-default-100",
-          "group-data-[odd=true]:before:opacity-100",
+          "group-data-[odd=true]/tr:before:bg-default-100",
+          "group-data-[odd=true]/tr:before:opacity-100",
+          "group-data-[odd=true]/tr:before:-z-10",
         ],
       },
     },
@@ -198,8 +199,8 @@ const table = tv({
       true: {
         tr: "cursor-default",
         td: [
-          "group-aria-[selected=false]:group-data-[hover=true]:before:bg-default-100",
-          "group-aria-[selected=false]:group-data-[hover=true]:before:opacity-70",
+          "group-aria-[selected=false]/tr:group-data-[hover=true]/tr:before:bg-default-100",
+          "group-aria-[selected=false]/tr:group-data-[hover=true]/tr:before:opacity-70",
         ],
       },
     },
@@ -207,17 +208,17 @@ const table = tv({
       true: {
         td: [
           // first
-          "group-data-[first=true]:first:before:rounded-tl-lg",
-          "group-data-[first=true]:last:before:rounded-tr-lg",
+          "group-data-[first=true]/tr:first:before:rounded-ss-lg",
+          "group-data-[first=true]/tr:last:before:rounded-se-lg",
           // middle
-          "group-data-[middle=true]:before:rounded-none",
+          "group-data-[middle=true]/tr:before:rounded-none",
           // last
-          "group-data-[last=true]:first:before:rounded-bl-lg",
-          "group-data-[last=true]:last:before:rounded-br-lg",
+          "group-data-[last=true]/tr:first:before:rounded-es-lg",
+          "group-data-[last=true]/tr:last:before:rounded-ee-lg",
         ],
       },
       false: {
-        td: ["first:before:rounded-l-lg", "last:before:rounded-r-lg"],
+        td: ["first:before:rounded-s-lg", "last:before:rounded-e-lg"],
       },
     },
     fullWidth: {
@@ -225,6 +226,20 @@ const table = tv({
         base: "w-full",
         wrapper: "w-full",
         table: "w-full",
+      },
+    },
+    align: {
+      start: {
+        th: "text-start",
+        td: "text-start",
+      },
+      center: {
+        th: "text-center",
+        td: "text-center",
+      },
+      end: {
+        th: "text-end",
+        td: "text-end",
       },
     },
   },
@@ -237,8 +252,52 @@ const table = tv({
     hideHeader: false,
     isStriped: false,
     fullWidth: true,
-    disableAnimation: false,
+    align: "start",
   },
+  compoundVariants: [
+    {
+      isStriped: true,
+      color: "default",
+      class: {
+        td: "group-data-[odd=true]/tr:data-[selected=true]/tr:before:bg-default/60",
+      },
+    },
+    {
+      isStriped: true,
+      color: "primary",
+      class: {
+        td: "group-data-[odd=true]/tr:data-[selected=true]/tr:before:bg-primary/20",
+      },
+    },
+    {
+      isStriped: true,
+      color: "secondary",
+      class: {
+        td: "group-data-[odd=true]/tr:data-[selected=true]/tr:before:bg-secondary/20",
+      },
+    },
+    {
+      isStriped: true,
+      color: "success",
+      class: {
+        td: "group-data-[odd=true]/tr:data-[selected=true]/tr:before:bg-success/20",
+      },
+    },
+    {
+      isStriped: true,
+      color: "warning",
+      class: {
+        td: "group-data-[odd=true]/tr:data-[selected=true]/tr:before:bg-warning/20",
+      },
+    },
+    {
+      isStriped: true,
+      color: "danger",
+      class: {
+        td: "group-data-[odd=true]/tr:data-[selected=true]/tr:before:bg-danger/20",
+      },
+    },
+  ],
 });
 
 export type TableVariantProps = VariantProps<typeof table>;

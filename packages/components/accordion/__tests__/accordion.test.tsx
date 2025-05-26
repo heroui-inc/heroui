@@ -1,11 +1,23 @@
+import "@testing-library/jest-dom";
 import * as React from "react";
-import {act, render} from "@testing-library/react";
-import {focus} from "@nextui-org/test-utils";
-import userEvent from "@testing-library/user-event";
+import {act, render, waitFor} from "@testing-library/react";
+import {focus, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
+import userEvent, {UserEvent} from "@testing-library/user-event";
+import {Input} from "@heroui/input";
 
 import {Accordion, AccordionItem} from "../src";
 
 describe("Accordion", () => {
+  let user: UserEvent;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render correctly", () => {
     const wrapper = render(
       <Accordion>
@@ -14,6 +26,12 @@ describe("Accordion", () => {
     );
 
     expect(() => wrapper.unmount()).not.toThrow();
+
+    if (shouldIgnoreReactWarning(spy)) {
+      return;
+    }
+
+    expect(spy).toHaveBeenCalledTimes(0);
   });
 
   it("ref should be forwarded", () => {
@@ -68,6 +86,25 @@ describe("Accordion", () => {
     expect(wrapper.getAllByRole("button")[0]).toBeDisabled();
   });
 
+  it("should hide the accordion item when the hidden prop is set", () => {
+    const wrapper = render(
+      <Accordion>
+        <AccordionItem key="1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" hidden title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+        <AccordionItem key="3" title="Accordion Item 3">
+          Accordion Item 3 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    expect(wrapper.getAllByRole("button")).toHaveLength(2);
+    expect(wrapper.getAllByRole("separator")).toHaveLength(1);
+  });
+
   it("should expand the accordion item when clicked", async () => {
     const wrapper = render(
       <Accordion disableAnimation>
@@ -85,9 +122,7 @@ describe("Accordion", () => {
 
     expect(button).toHaveAttribute("aria-expanded", "false");
 
-    await act(async () => {
-      await userEvent.click(button);
-    });
+    await user.click(button);
 
     expect(button).toHaveAttribute("aria-expanded", "true");
   });
@@ -127,18 +162,12 @@ describe("Accordion", () => {
     const second = wrapper.getByTestId("item-2");
     const secondButton = second.querySelector("button") as HTMLElement;
 
-    act(() => {
-      focus(firstButton);
-    });
-
-    await act(async () => {
-      await userEvent.keyboard("[ArrowDown]");
-    });
+    await focus(firstButton);
+    await user.keyboard("[ArrowDown]");
     expect(secondButton).toHaveFocus();
 
-    await act(async () => {
-      await userEvent.keyboard("[ArrowUp]");
-    });
+    await user.keyboard("[ArrowUp]");
+
     expect(firstButton).toHaveFocus();
   });
 
@@ -164,14 +193,10 @@ describe("Accordion", () => {
       focus(secondButton);
     });
 
-    await act(async () => {
-      await userEvent.keyboard("[Home]");
-    });
+    await user.keyboard("[Home]");
     expect(firstButton).toHaveFocus();
 
-    await act(async () => {
-      await userEvent.keyboard("[End]");
-    });
+    await user.keyboard("[End]");
     expect(secondButton).toHaveFocus();
   });
 
@@ -197,9 +222,7 @@ describe("Accordion", () => {
       focus(firstButton);
     });
 
-    await act(async () => {
-      await userEvent.keyboard("[Tab]");
-    });
+    await user.keyboard("[Tab]");
     expect(secondButton).toHaveFocus();
   });
 
@@ -240,14 +263,11 @@ describe("Accordion", () => {
 
     expect(button).toHaveAttribute("aria-expanded", "false");
 
-    await act(async () => {
-      await userEvent.click(button);
-    });
-
+    await user.click(button);
     expect(button).toHaveAttribute("aria-expanded", "true");
   });
 
-  it("should support keepContentMounted", async () => {
+  it("should support keepContentMounted={true}", async () => {
     const wrapper = render(
       <Accordion keepContentMounted>
         <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
@@ -264,18 +284,156 @@ describe("Accordion", () => {
 
     expect(item1.querySelector("[role='region']")).toBeInTheDocument();
 
-    await act(async () => {
-      await userEvent.click(button);
-    });
-
+    await user.click(button);
     const item2 = wrapper.getByTestId("item-2");
     const button2 = item2.querySelector("button") as HTMLElement;
 
-    await act(async () => {
-      await userEvent.click(button2);
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
     });
+  });
+
+  it("should support keepContentMounted={false}", async () => {
+    const wrapper = render(
+      <Accordion keepContentMounted={false}>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const item1 = wrapper.getByTestId("item-1");
+    const button = item1.querySelector("button") as HTMLElement;
+
+    expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+
+    await user.click(button);
+    const item2 = wrapper.getByTestId("item-2");
+    const button2 = item2.querySelector("button") as HTMLElement;
+
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
+  });
+
+  it("should support keepContentMounted={true} & disableAnimation={true}", async () => {
+    const wrapper = render(
+      <Accordion disableAnimation keepContentMounted>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const item1 = wrapper.getByTestId("item-1");
+    const button = item1.querySelector("button") as HTMLElement;
 
     expect(item1.querySelector("[role='region']")).toBeInTheDocument();
-    expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+
+    await user.click(button);
+    const item2 = wrapper.getByTestId("item-2");
+    const button2 = item2.querySelector("button") as HTMLElement;
+
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
+  });
+
+  it("should support keepContentMounted={false} & disableAnimation={true}", async () => {
+    const wrapper = render(
+      <Accordion disableAnimation keepContentMounted={false}>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const item1 = wrapper.getByTestId("item-1");
+    const button = item1.querySelector("button") as HTMLElement;
+
+    expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+
+    await user.click(button);
+    const item2 = wrapper.getByTestId("item-2");
+    const button2 = item2.querySelector("button") as HTMLElement;
+
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
+  });
+
+  it("should handle arrow key navigation within Input inside AccordionItem", async () => {
+    const wrapper = render(
+      <Accordion defaultExpandedKeys={["1"]}>
+        <AccordionItem key="1" title="Accordion Item 1">
+          <Input label="name" type="text" />
+        </AccordionItem>
+        <AccordionItem key="2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const input = wrapper.getByLabelText("name");
+
+    const firstButton = await wrapper.getByRole("button", {name: "Accordion Item 1"});
+
+    act(() => {
+      focus(firstButton);
+    });
+
+    await user.keyboard("[Tab]");
+    expect(input).toHaveFocus();
+
+    await user.keyboard("aaa");
+    expect(input).toHaveValue("aaa");
+
+    await user.keyboard("[ArrowLeft]");
+    await user.keyboard("b");
+    expect(input).toHaveValue("aaba");
+
+    await user.keyboard("[ArrowRight]");
+    await user.keyboard("c");
+    expect(input).toHaveValue("aabac");
+  });
+
+  it("should pass dividerProps to divider", () => {
+    const {getByRole} = render(
+      <Accordion
+        dividerProps={{
+          className: "bg-rose-500",
+        }}
+      >
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    expect(getByRole("separator")).toHaveClass("bg-rose-500");
   });
 });

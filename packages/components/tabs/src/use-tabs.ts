@@ -1,19 +1,19 @@
-import type {TabsVariantProps, SlotsToClasses, TabsSlots, TabsReturnType} from "@nextui-org/theme";
+import type {TabsVariantProps, SlotsToClasses, TabsSlots, TabsReturnType} from "@heroui/theme";
 
-import {HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {tabs} from "@nextui-org/theme";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx} from "@nextui-org/shared-utils";
-import {ReactRef, filterDOMProps} from "@nextui-org/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {tabs} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef, filterDOMProps} from "@heroui/react-utils";
 import {useMemo, RefObject, useCallback} from "react";
 import {TabListState, TabListStateOptions, useTabListState} from "@react-stately/tabs";
 import {AriaTabListProps, useTabList} from "@react-aria/tabs";
 import {mergeProps} from "@react-aria/utils";
-import {CollectionProps} from "@nextui-org/aria-utils";
+import {CollectionProps} from "@heroui/aria-utils";
 import {CollectionChildren} from "@react-types/shared";
 import {HTMLMotionProps} from "framer-motion";
 
-export interface Props extends Omit<HTMLNextUIProps, "children"> {
+export interface Props extends Omit<HTMLHeroUIProps, "children"> {
   /**
    * Ref to the DOM node.
    */
@@ -47,6 +47,21 @@ export interface Props extends Omit<HTMLNextUIProps, "children"> {
    * ``
    */
   classNames?: SlotsToClasses<TabsSlots>;
+  /**
+   * The position of the tabs.
+   * @default 'top'
+   */
+  placement?: "top" | "bottom" | "start" | "end";
+  /**
+   * Whether the tabs are vertical it will invalidate the placement prop when the value is true.
+   * @default false
+   */
+  isVertical?: boolean;
+  /**
+   * Whether to destroy inactive tab panel when switching tabs. Inactive tab panels are inert and cannot be interacted with.
+   * @default true
+   */
+  destroyInactiveTabPanel?: boolean;
 }
 
 export type UseTabsProps<T> = Props &
@@ -68,6 +83,8 @@ export type ValuesType<T = object> = {
 };
 
 export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, tabs.variantKeys);
 
   const {
@@ -77,8 +94,10 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     classNames,
     children,
     disableCursorAnimation,
-    shouldSelectOnPressUp = true,
     motionProps,
+    isVertical = false,
+    shouldSelectOnPressUp = true,
+    destroyInactiveTabPanel = true,
     ...otherProps
   } = props;
 
@@ -87,19 +106,23 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
 
   const domRef = useDOMRef(ref);
 
+  const disableAnimation =
+    originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
+
   const state = useTabListState<T>({
     children: children as CollectionChildren<T>,
     ...otherProps,
   });
-  const {tabListProps} = useTabList<T>(otherProps, state, domRef);
+  const {tabListProps} = useTabList<T>(otherProps as AriaTabListProps<T>, state, domRef);
 
   const slots = useMemo(
     () =>
       tabs({
         ...variantProps,
-        className,
+        disableAnimation,
+        ...(isVertical ? {placement: "start"} : {}),
       }),
-    [...Object.values(variantProps), className],
+    [objectToDeps(variantProps), disableAnimation, isVertical],
   );
 
   const baseStyles = clsx(classNames?.base, className);
@@ -110,20 +133,20 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
       slots,
       classNames,
       motionProps,
+      disableAnimation,
       listRef: domRef,
       shouldSelectOnPressUp,
       disableCursorAnimation,
       isDisabled: originalProps?.isDisabled,
-      disableAnimation: originalProps?.disableAnimation,
     }),
     [
       state,
       slots,
       domRef,
       motionProps,
+      disableAnimation,
       disableCursorAnimation,
       shouldSelectOnPressUp,
-      originalProps?.disableAnimation,
       originalProps?.isDisabled,
       classNames,
     ],
@@ -143,6 +166,18 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     [baseStyles, otherProps, slots],
   );
 
+  const placement = (variantProps as Props).placement ?? (isVertical ? "start" : "top");
+  const getWrapperProps: PropGetter = useCallback(
+    (props) => ({
+      "data-slot": "tabWrapper",
+      className: slots.tabWrapper({class: clsx(classNames?.tabWrapper, props?.className)}),
+      "data-placement": placement,
+      "data-vertical":
+        isVertical || placement === "start" || placement === "end" ? "vertical" : "horizontal",
+    }),
+    [classNames, slots, placement, isVertical],
+  );
+
   const getTabListProps: PropGetter = useCallback(
     (props) => ({
       ref: domRef,
@@ -158,8 +193,10 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     domRef,
     state,
     values,
+    destroyInactiveTabPanel,
     getBaseProps,
     getTabListProps,
+    getWrapperProps,
   };
 }
 

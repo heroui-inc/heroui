@@ -1,6 +1,6 @@
-import {forwardRef} from "@nextui-org/system";
+import {forwardRef} from "@heroui/system";
 import {LayoutGroup} from "framer-motion";
-import {Divider} from "@nextui-org/divider";
+import {Divider} from "@heroui/divider";
 import {Fragment, Key, useCallback, useMemo} from "react";
 
 import {UseAccordionProps, useAccordion} from "./use-accordion";
@@ -19,6 +19,7 @@ const AccordionGroup = forwardRef<"div", AccordionProps>((props, ref) => {
     disableAnimation,
     handleFocusChanged: handleFocusChangedProps,
     itemClasses,
+    dividerProps,
   } = useAccordion({
     ...props,
     ref,
@@ -36,12 +37,16 @@ const AccordionGroup = forwardRef<"div", AccordionProps>((props, ref) => {
         <Fragment key={item.key}>
           <AccordionItem
             item={item}
+            variant={props.variant}
             onFocusChange={handleFocusChanged}
             {...values}
             {...item.props}
             classNames={classNames}
           />
-          {!isSplitted && showDivider && index < state.collection.size - 1 && <Divider />}
+          {!item.props.hidden &&
+            !isSplitted &&
+            showDivider &&
+            index < state.collection.size - 1 && <Divider {...dividerProps} />}
         </Fragment>
       );
     });
@@ -54,6 +59,6 @@ const AccordionGroup = forwardRef<"div", AccordionProps>((props, ref) => {
   );
 });
 
-AccordionGroup.displayName = "NextUI.Accordion";
+AccordionGroup.displayName = "HeroUI.Accordion";
 
 export default AccordionGroup;

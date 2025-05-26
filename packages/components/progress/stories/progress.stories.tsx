@@ -1,6 +1,6 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {progress} from "@nextui-org/theme";
+import {progress} from "@heroui/theme";
 
 import {Progress, ProgressProps} from "../src";
 
@@ -108,7 +108,7 @@ export const Indeterminate = {
 
   args: {
     ...defaultProps,
-    size: "xs",
+    size: "sm",
     radius: "none",
     isIndeterminate: true,
   },
@@ -120,5 +120,17 @@ export const Striped = {
   args: {
     ...defaultProps,
     isStriped: true,
+  },
+};
+
+export const CustomSlots = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    classNames: {
+      indicator: "bg-[#14708A] rounded-[4px]",
+      track: "bg-red-500 rounded-[4px]",
+    },
   },
 };

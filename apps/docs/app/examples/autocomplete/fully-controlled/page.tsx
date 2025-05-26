@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {Autocomplete, AutocompleteItem, MenuTriggerAction} from "@nextui-org/react";
+import {Autocomplete, AutocompleteItem, MenuTriggerAction} from "@heroui/react";
 import {useFilter} from "@react-aria/i18n";
 
 const animals = [
@@ -53,7 +53,7 @@ export default function Page() {
 
   // Specify how each of the Autocomplete values should change when an
   // option is selected from the list box
-  const onSelectionChange = (key: React.Key) => {
+  const onSelectionChange = (key: React.Key | null) => {
     setFieldState((prevState) => {
       let selectedItem = prevState.items.find((option) => option.value === key);
 

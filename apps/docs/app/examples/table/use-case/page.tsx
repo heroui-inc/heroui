@@ -20,10 +20,10 @@ import {
   ChipProps,
   Pagination,
   SortDescriptor,
-} from "@nextui-org/react";
-import {ChevronDownIcon, SearchIcon} from "@nextui-org/shared-icons";
+} from "@heroui/react";
+import {ChevronDownIcon, SearchIcon} from "@heroui/shared-icons";
 import {useCallback, useMemo, useState} from "react";
-import {capitalize} from "lodash";
+import {capitalize} from "@heroui/shared-utils";
 
 import {PlusLinearIcon} from "@/components/icons";
 import {VerticalDotsIcon} from "@/components/icons/vertical-dots";
@@ -112,7 +112,7 @@ const users = [
     age: "29",
     avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
     email: "brian.kim@example.com",
-    status: "Active",
+    status: "active",
   },
   {
     id: 7,
@@ -296,7 +296,7 @@ export default function Page() {
     return filteredUsers;
   }, [users, filterValue, statusFilter]);
 
-  const pages = Math.ceil(filteredItems.length / rowsPerPage);
+  const pages = Math.ceil(filteredItems.length / rowsPerPage) || 1;
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -352,9 +352,9 @@ export default function Page() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownItem key="view">View</DropdownItem>
+                <DropdownItem key="edit">Edit</DropdownItem>
+                <DropdownItem key="delete">Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>

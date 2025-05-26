@@ -1,15 +1,15 @@
 import {useMemo, ReactNode} from "react";
-import {forwardRef} from "@nextui-org/system";
 
 import {UseMenuItemProps, useMenuItem} from "./use-menu-item";
 import {MenuSelectedIcon} from "./menu-selected-icon";
 
-export interface MenuItemProps<T extends object = object> extends UseMenuItemProps<T> {}
+export interface MenuItemProps<T extends object = object>
+  extends Omit<UseMenuItemProps<T>, "hasDescriptionTextChild" | "hasTitleTextChild"> {}
 
 /**
  * @internal
  */
-const MenuItem = forwardRef<"li", MenuItemProps>((props, _) => {
+const MenuItem = (props: MenuItemProps) => {
   const {
     Component,
     slots,
@@ -32,7 +32,7 @@ const MenuItem = forwardRef<"li", MenuItemProps>((props, _) => {
     getSelectedIconProps,
   } = useMenuItem(props);
 
-  const selectedContent = useMemo<ReactNode | null>(() => {
+  const selectedContent = useMemo<ReactNode>(() => {
     const defaultIcon = (
       <MenuSelectedIcon disableAnimation={disableAnimation} isSelected={isSelected} />
     );
@@ -64,8 +64,8 @@ const MenuItem = forwardRef<"li", MenuItemProps>((props, _) => {
       {endContent}
     </Component>
   );
-});
+};
 
-MenuItem.displayName = "NextUI.MenuItem";
+MenuItem.displayName = "HeroUI.MenuItem";
 
 export default MenuItem;

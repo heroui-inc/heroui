@@ -2,19 +2,19 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "nextui-org/nextui" }
+    { "repo": "heroui-inc/heroui" }
   ],
   "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
-  "baseBranch": "main",
+  "baseBranch": "canary",
   "updateInternalDependencies": "patch",
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
   "ignore": [
-    "@nextui-org/docs",
-    "@nextui-org/storybook"
+    "@heroui/docs",
+    "@heroui/storybook"
   ]
 }

@@ -1,9 +1,10 @@
-import {PaginationItemValue} from "@nextui-org/use-pagination";
+import {PaginationItemValue} from "@heroui/use-pagination";
 import {useCallback} from "react";
-import {forwardRef} from "@nextui-org/system";
-import {PaginationItemType} from "@nextui-org/use-pagination";
-import {ChevronIcon, EllipsisIcon, ForwardIcon} from "@nextui-org/shared-icons";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {useLocale} from "@react-aria/i18n";
+import {forwardRef} from "@heroui/system";
+import {PaginationItemType} from "@heroui/use-pagination";
+import {ChevronIcon, EllipsisIcon, ForwardIcon} from "@heroui/shared-icons";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 
 import {UsePaginationProps, usePagination} from "./use-pagination";
 import PaginationItem from "./pagination-item";
@@ -35,6 +36,72 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
     getCursorProps,
   } = usePagination({...props, ref});
 
+  const {direction} = useLocale();
+
+  const isRTL = direction === "rtl";
+
+  const renderChevronIcon = useCallback(
+    (key: PaginationItemType) => {
+      if (
+        (key === PaginationItemType.PREV && !isRTL) ||
+        (key === PaginationItemType.NEXT && isRTL)
+      ) {
+        return <ChevronIcon />;
+      }
+
+      return (
+        <ChevronIcon
+          className={slots.chevronNext({
+            class: classNames?.chevronNext,
+          })}
+        />
+      );
+    },
+    [slots, isRTL],
+  );
+
+  const renderPrevItem = useCallback(
+    (value: PaginationItemValue) => {
+      return (
+        <PaginationItem
+          key={PaginationItemType.PREV}
+          className={slots.prev({
+            class: classNames?.prev,
+          })}
+          data-slot="prev"
+          getAriaLabel={getItemAriaLabel}
+          isDisabled={!loop && activePage === 1}
+          value={value}
+          onPress={onPrevious}
+        >
+          {renderChevronIcon(PaginationItemType.PREV)}
+        </PaginationItem>
+      );
+    },
+    [slots, classNames, loop, activePage, isRTL, total, getItemAriaLabel, onPrevious],
+  );
+
+  const renderNextItem = useCallback(
+    (value: PaginationItemValue) => {
+      return (
+        <PaginationItem
+          key={PaginationItemType.NEXT}
+          className={slots.next({
+            class: clsx(classNames?.next),
+          })}
+          data-slot="next"
+          getAriaLabel={getItemAriaLabel}
+          isDisabled={!loop && activePage === total}
+          value={value}
+          onPress={onNext}
+        >
+          {renderChevronIcon(PaginationItemType.NEXT)}
+        </PaginationItem>
+      );
+    },
+    [slots, classNames, loop, activePage, isRTL, total, getItemAriaLabel, onNext],
+  );
+
   const renderItem = useCallback(
     (value: PaginationItemValue, index: number) => {
       const isBefore = index < range.indexOf(activePage);
@@ -61,14 +128,8 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
         }
 
         const itemChildren: Record<PaginationItemType, React.ReactNode> = {
-          [PaginationItemType.PREV]: <ChevronIcon />,
-          [PaginationItemType.NEXT]: (
-            <ChevronIcon
-              className={slots.chevronNext({
-                class: classNames?.chevronNext,
-              })}
-            />
-          ),
+          [PaginationItemType.PREV]: renderChevronIcon(PaginationItemType.PREV),
+          [PaginationItemType.NEXT]: renderChevronIcon(PaginationItemType.NEXT),
           [PaginationItemType.DOTS]: (
             <>
               <EllipsisIcon className={slots?.ellipsis({class: classNames?.ellipsis})} />
@@ -106,42 +167,10 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
       }
 
       if (value === PaginationItemType.PREV) {
-        return (
-          <PaginationItem
-            key={PaginationItemType.PREV}
-            className={slots.prev({
-              class: classNames?.prev,
-            })}
-            data-slot="prev"
-            getAriaLabel={getItemAriaLabel}
-            isDisabled={!loop && activePage === 1}
-            value={value}
-            onPress={onPrevious}
-          >
-            <ChevronIcon />
-          </PaginationItem>
-        );
+        return renderPrevItem(value);
       }
       if (value === PaginationItemType.NEXT) {
-        return (
-          <PaginationItem
-            key={PaginationItemType.NEXT}
-            className={slots.next({
-              class: clsx(classNames?.next),
-            })}
-            data-slot="next"
-            getAriaLabel={getItemAriaLabel}
-            isDisabled={!loop && activePage === total}
-            value={value}
-            onPress={onNext}
-          >
-            <ChevronIcon
-              className={slots.chevronNext({
-                class: classNames?.chevronNext,
-              })}
-            />
-          </PaginationItem>
-        );
+        return renderNextItem(value);
       }
 
       if (value === PaginationItemType.DOTS) {
@@ -163,7 +192,7 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
             <EllipsisIcon className={slots?.ellipsis({class: classNames?.ellipsis})} />
             <ForwardIcon
               className={slots?.forwardIcon({class: classNames?.forwardIcon})}
-              data-before={dataAttr(isBefore)}
+              data-before={dataAttr(isRTL ? !isBefore : isBefore)}
             />
           </PaginationItem>
         );
@@ -175,7 +204,24 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
         </PaginationItem>
       );
     },
-    [activePage, dotsJump, getItemProps, loop, range, renderItemProp, slots, classNames, total],
+    [
+      isRTL,
+      activePage,
+      dotsJump,
+      getItemProps,
+      loop,
+      range,
+      renderItemProp,
+      slots,
+      classNames,
+      total,
+      getItemAriaLabel,
+      onNext,
+      onPrevious,
+      setPage,
+      renderPrevItem,
+      renderNextItem,
+    ],
   );
 
   return (
@@ -188,6 +234,6 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
   );
 });
 
-Pagination.displayName = "NextUI.Pagination";
+Pagination.displayName = "HeroUI.Pagination";
 
 export default Pagination;

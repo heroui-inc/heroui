@@ -1,10 +1,10 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {button, link, tabs} from "@nextui-org/theme";
+import {button, link, tabs} from "@heroui/theme";
 import Lorem from "react-lorem-component";
-import {Input} from "@nextui-org/input";
-import {Button} from "@nextui-org/button";
-import {Card, CardBody} from "@nextui-org/card";
+import {Input} from "@heroui/input";
+import {Button} from "@heroui/button";
+import {Card, CardBody} from "@heroui/card";
 import {
   AlignVerticallyBoldIcon,
   AlignHorizontallyBoldIcon,
@@ -12,7 +12,7 @@ import {
   AlignLeftBoldIcon,
   AlignRightBoldIcon,
   AlignTopBoldIcon,
-} from "@nextui-org/shared-icons";
+} from "@heroui/shared-icons";
 
 import {Tabs, Tab, TabsProps} from "../src";
 
@@ -205,7 +205,7 @@ const WithFormTemplate = (args: TabsProps) => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen">
-      <Card className="w-full w-[340px] h-[400px]">
+      <Card className="w-[340px] h-[400px]">
         <CardBody>
           <Tabs
             aria-label="Tabs form"
@@ -313,6 +313,38 @@ export const ManualKeyboardActivation = {
   args: {
     ...defaultProps,
     keyboardActivation: "manual",
+  },
+};
+
+export const Placement = {
+  render: StaticTemplate,
+
+  args: {
+    placement: "top",
+  },
+  argTypes: {
+    placement: {
+      options: ["top", "bottom", "start", "end"],
+      control: {
+        type: "inline-radio",
+      },
+    },
+    isVertical: {
+      type: "boolean",
+    },
+  },
+};
+
+export const Vertical = {
+  render: StaticTemplate,
+
+  args: {
+    isVertical: true,
+  },
+  argTypes: {
+    isVertical: {
+      type: "boolean",
+    },
   },
 };
 

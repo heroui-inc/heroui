@@ -1,15 +1,15 @@
-import type {KbdVariantProps, KbdSlots, SlotsToClasses} from "@nextui-org/theme";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system-rsc";
+import type {KbdVariantProps, KbdSlots, SlotsToClasses} from "@heroui/theme";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
 
-import {mapPropsVariants} from "@nextui-org/system-rsc";
-import {kbd} from "@nextui-org/theme";
-import {clsx} from "@nextui-org/shared-utils";
-import {ReactRef} from "@nextui-org/react-utils";
+import {mapPropsVariants} from "@heroui/system-rsc";
+import {kbd} from "@heroui/theme";
+import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
 import {useMemo} from "react";
 
 import {KbdKey} from "./utils";
 
-interface Props extends HTMLNextUIProps<"kbd"> {
+interface Props extends HTMLHeroUIProps<"kbd"> {
   /**
    * Ref to the DOM node.
    */
@@ -48,7 +48,7 @@ export function useKbd(originalProps: UseKbdProps) {
       kbd({
         ...variantProps,
       }),
-    [...Object.values(variantProps)],
+    [objectToDeps(variantProps)],
   );
 
   const baseStyles = clsx(classNames?.base, className);

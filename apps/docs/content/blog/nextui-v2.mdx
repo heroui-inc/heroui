@@ -7,7 +7,7 @@ tags: ["nextui", "tailwindcss", "react", "nextjs", "react-server-components"]
 author:
   name: "Junior Garcia"
   username: "@jrgarciadev"
-  link: "https://twitter.com/jrgarciadev"
+  link: "https://x.com/jrgarciadev"
   avatar: "/avatars/junior-garcia.jpeg"
 ---
 
@@ -60,21 +60,26 @@ into React Server Components issues.
 NextUI v2.0 comes with a TailwindCSS plugin that enables the customization and addition of default themes.
 This plugin allows you to customize colors and layouts tokens that are used by NextUI components.
 
-```js {8,13-14}
+<Blockquote color="primary">
+**Note**: If you are using pnpm and monorepo architecture, please make sure you are pointing to the ROOT `node_modules`
+</Blockquote>
+
+```js {9,14-15}
 // tailwind.config.js
-const {nextui} = require("@nextui-org/react");
+const {heroui} = require("@heroui/react");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     // ...
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    // make sure it's pointing to the ROOT node_module
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [heroui()],
 };
 ```
 
@@ -86,12 +91,12 @@ Thanks to the switch to TailwindCSS, **NextUI v2.0** now supports React Server C
 improves performance and allows you to use it with the latest versions of [React](https://reactjs.org/) and
 [Next.js](https://nextjs.org/).
 
-NextUI components already include the `use client;` directive so you can import them directly 
+NextUI components already include the `use client;` directive so you can import them directly
 in your React Server Components (RSC).
 
 ```jsx
 // app/page.tsx
-import {Button} from "@nextui-org/button";
+import {Button} from "@heroui/button";
 
 export default function Page() {
   return (
@@ -223,9 +228,9 @@ you're actually using.
 
 <PackageManagers
   commands={{
-    npm: "npm i @nextui-org/button",
-    yarn: "yarn add @nextui-org/button",
-    pnpm: "pnpm add @nextui-org/button",
+    npm: "npm i @heroui/button",
+    yarn: "yarn add @heroui/button",
+    pnpm: "pnpm add @heroui/button",
   }}
 />
 
@@ -240,17 +245,17 @@ by just adding the `dark` class to the `body` / `html` or `main` tag.
 // main.tsx or main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {NextUIProvider} from "@nextui-org/react";
+import {HeroUIProvider} from "@heroui/react";
 import App from "./App";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <NextUIProvider>
+    <HeroUIProvider>
       <main className="dark text-foreground bg-background">
         <App />
       </main>
-    </NextUIProvider>
+    </HeroUIProvider>
   </React.StrictMode>,
 );
 ```
@@ -322,4 +327,4 @@ Whether it's a feature request, bug report, or a project to showcase, please get
 
 ## Contributing
 
-PR's on NextUI are always welcome, please see our [contribution guidelines](https://github.com/nextui-org/nextui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.
+PR's on HeroUI are always welcome, please see our [contribution guidelines](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.

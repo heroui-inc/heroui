@@ -2,12 +2,13 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React from "react";
 import {Meta} from "@storybook/react";
-import {modal} from "@nextui-org/theme";
-import {Button} from "@nextui-org/button";
-import {Input} from "@nextui-org/input";
-import {Checkbox} from "@nextui-org/checkbox";
-import {Link} from "@nextui-org/link";
-import {MailFilledIcon, LockFilledIcon} from "@nextui-org/shared-icons";
+import {modal} from "@heroui/theme";
+import {Button} from "@heroui/button";
+import {Input} from "@heroui/input";
+import {Checkbox} from "@heroui/checkbox";
+import {Link} from "@heroui/link";
+import {Switch} from "@heroui/switch";
+import {MailFilledIcon, LockFilledIcon} from "@heroui/shared-icons";
 import Lorem from "react-lorem-component";
 
 import {
@@ -18,6 +19,7 @@ import {
   ModalFooter,
   ModalProps,
   useDisclosure,
+  useDraggable,
 } from "../src";
 
 export default {
@@ -62,10 +64,15 @@ export default {
         disable: true,
       },
     },
+    shouldBlockScroll: {
+      control: {
+        type: "boolean",
+      },
+    },
   },
   decorators: [
     (Story) => (
-      <div className="flex items-center justify-center w-screen h-screen">
+      <div className="flex justify-center items-center w-screen h-screen">
         <Story />
       </div>
     ),
@@ -74,7 +81,6 @@ export default {
 
 const defaultProps = {
   ...modal.defaultVariants,
-  disableAnimation: false,
   isDismissable: true,
   isKeyboardDismissDisabled: false,
 };
@@ -152,7 +158,7 @@ const InsideScrollTemplate = (args: ModalProps) => {
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalBody>
-            <Lorem count={5} />
+            <Lorem count={10} />
           </ModalBody>
           <ModalFooter>
             <Button onPress={onClose}>Close</Button>
@@ -173,7 +179,7 @@ const OutsideScrollTemplate = (args: ModalProps) => {
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalBody>
-            <Lorem count={5} />
+            <Lorem count={10} />
           </ModalBody>
           <ModalFooter>
             <Button onPress={onClose}>Close</Button>
@@ -201,6 +207,60 @@ const OpenChangeTemplate = (args: ModalProps) => {
         </ModalContent>
       </Modal>
       <p className="text-sm">isOpen: {isOpen ? "true" : "false"}</p>
+    </div>
+  );
+};
+const DraggableTemplate = (args: ModalProps) => {
+  const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
+  const targetRef = React.useRef(null);
+
+  const {moveProps} = useDraggable({targetRef});
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Button onPress={onOpen}>Open Modal</Button>
+      <Modal {...args} ref={targetRef} isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader {...moveProps}>Modal Title</ModalHeader>
+          <ModalBody>
+            <Lorem count={1} />
+          </ModalBody>
+          <ModalFooter>
+            <Button onPress={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+};
+const DraggableOverflowTemplate = (args: ModalProps) => {
+  const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
+  const targetRef = React.useRef(null);
+  const [disableDraggable, setDisableDraggable] = React.useState(false);
+  const [canOverflow, setCanOverflow] = React.useState(true);
+
+  const {moveProps} = useDraggable({targetRef, isDisabled: disableDraggable, canOverflow});
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Button onPress={onOpen}>Open Modal</Button>
+      <Switch isSelected={disableDraggable} onValueChange={setDisableDraggable}>
+        Disable Draggable
+      </Switch>
+      <Switch isSelected={canOverflow} onValueChange={setCanOverflow}>
+        Overflow viewport
+      </Switch>
+      <Modal {...args} ref={targetRef} isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader {...moveProps}>Modal Title</ModalHeader>
+          <ModalBody>
+            <Lorem count={1} />
+          </ModalBody>
+          <ModalFooter>
+            <Button onPress={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
@@ -276,5 +336,36 @@ export const CustomMotion = {
         },
       },
     },
+  },
+};
+
+export const Draggable = {
+  render: DraggableTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const DraggableOverflow = {
+  render: DraggableOverflowTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithShouldBlockScroll = {
+  render: (args) => {
+    return (
+      <div className="flex gap-8">
+        <Template {...args} label="shouldBlockScroll: false" shouldBlockScroll={false} />
+        <Template {...args} label="shouldBlockScroll: true" shouldBlockScroll={true} />
+      </div>
+    );
+  },
+
+  args: {
+    ...defaultProps,
   },
 };

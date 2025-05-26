@@ -1,10 +1,10 @@
 import {parseToRgba, readableColor} from "color2k";
-import {Button, Tooltip} from "@nextui-org/react";
-import {commonColors, semanticColors} from "@nextui-org/theme";
-import {useClipboard} from "@nextui-org/use-clipboard";
+import {Button, Tooltip} from "@heroui/react";
+import {commonColors, semanticColors} from "@heroui/theme";
+import {useClipboard} from "@heroui/use-clipboard";
 import {useState} from "react";
 import {useTheme} from "next-themes";
-import {get, isEmpty} from "lodash";
+import {get, isEmpty} from "@heroui/shared-utils";
 
 type ColorsItem = {
   color: string;
@@ -20,7 +20,7 @@ type SwatchColors = {
 
 type SwatchSetProps = {
   colors: SwatchColors[];
-  isSematic?: boolean;
+  isSemantic?: boolean;
 };
 
 const scaleIndexMap: Record<number, string> = {
@@ -90,7 +90,7 @@ const Swatch = ({color, scale}: {color: string; scale?: string}) => {
   );
 };
 
-const SematicSwatch = ({
+const SemanticSwatch = ({
   color,
   className,
   textClassName,
@@ -106,7 +106,7 @@ const SematicSwatch = ({
   let value: string = "";
   const [colorName, colorScale] = color.split("-");
 
-  let currentPalette = get(semanticColors, theme ?? "", {});
+  const currentPalette = get(semanticColors, theme ?? "", {});
 
   if (!colorScale) {
     value = get(currentPalette, `${colorName}.DEFAULT`, "");
@@ -139,15 +139,15 @@ const SematicSwatch = ({
   );
 };
 
-const SwatchSet = ({colors, isSematic = false}: SwatchSetProps) => (
+const SwatchSet = ({colors, isSemantic = false}: SwatchSetProps) => (
   <div className="flex flex-row flex-wrap items-center justify-center">
     {colors.map(({title, items}) => (
       <div key={title} className="flex flex-col items-start w-full h-full">
         <h2 className="text-xl font-bold text-foreground">{title}</h2>
         <div className="flex flex-row flex-wrap items-center justify-start w-full h-full px-4 py-1">
           {items.map((c, index) =>
-            isSematic ? (
-              <SematicSwatch
+            isSemantic ? (
+              <SemanticSwatch
                 key={`${c.color}-${index}`}
                 className={c.className}
                 color={c.color}
@@ -218,7 +218,7 @@ export const CommonColors = () => {
 export const SemanticColors = () => {
   return (
     <SwatchSet
-      isSematic
+      isSemantic
       colors={[
         {
           title: "Layout",

@@ -1,12 +1,12 @@
 {
-  "name": "@nextui-org/input",
-  "version": "2.1.16",
+  "name": "@heroui/input",
+  "version": "2.4.19",
   "description": "The input component is designed for capturing user input within a text field.",
   "keywords": [
     "input"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
-  "homepage": "https://nextui.org",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
   "sideEffects": false,
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextui-org/nextui.git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
     "directory": "packages/components/input"
   },
   "bugs": {
-    "url": "https://github.com/nextui-org/nextui/issues"
+    "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -34,30 +34,33 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "@nextui-org/theme": ">=2.1.0",
-    "@nextui-org/system": ">=2.0.0"
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0",
+    "@heroui/theme": ">=2.4.12",
+    "@heroui/system": ">=2.4.10"
   },
   "dependencies": {
-    "@nextui-org/react-utils": "workspace:*",
-    "@nextui-org/shared-icons": "workspace:*",
-    "@nextui-org/shared-utils": "workspace:*",
-    "@react-aria/focus": "^3.14.3",
-    "@react-aria/interactions": "^3.19.1",
-    "@react-aria/textfield": "^3.12.2",
-    "@react-aria/utils": "^3.21.1",
-    "@react-stately/utils": "^3.8.0",
-    "@react-types/shared": "^3.21.0",
-    "@react-types/textfield": "^3.8.1",
-    "react-textarea-autosize": "^8.5.2"
+    "@heroui/form": "workspace:*",
+    "@heroui/react-utils": "workspace:*",
+    "@heroui/shared-icons": "workspace:*",
+    "@heroui/shared-utils": "workspace:*",
+    "@heroui/use-safe-layout-effect": "workspace:*",
+    "@react-aria/focus": "3.20.2",
+    "@react-aria/interactions": "3.25.0",
+    "@react-aria/textfield": "3.17.2",
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/utils": "3.10.6",
+    "@react-types/shared": "3.29.0",
+    "@react-types/textfield": "3.12.1",
+    "react-textarea-autosize": "^8.5.3"
   },
   "devDependencies": {
-    "@nextui-org/theme": "workspace:*",
-    "@nextui-org/system": "workspace:*",
+    "@heroui/system": "workspace:*",
+    "@heroui/theme": "workspace:*",
     "clean-package": "2.2.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.0",
+    "react-dom": "18.3.0",
+    "react-hook-form": "^7.51.3"
   },
   "clean-package": "../../../clean-package.config.json"
 }

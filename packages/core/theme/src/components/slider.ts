@@ -144,7 +144,7 @@ const slider = tv({
         track: "h-full border-y-transparent",
         labelWrapper: "flex-col justify-center items-center",
         step: ["left-1/2", "-translate-x-1/2", "translate-y-1/2"],
-        mark: ["left-1/2", "ml-1", "translate-x-1/2", "-translate-y-1/2"],
+        mark: ["left-1/2", "ml-1", "translate-x-1/2", "translate-y-1/2"],
       },
       false: {
         thumb: "top-1/2",
@@ -166,6 +166,7 @@ const slider = tv({
     hasMarks: {
       true: {
         base: "mb-5",
+        mark: "cursor-pointer",
       },
       false: {},
     },
@@ -185,7 +186,7 @@ const slider = tv({
     hideThumb: {
       true: {
         thumb: "sr-only",
-        track: "overflow-hidden cursor-pointer",
+        track: "cursor-pointer",
       },
     },
     hasSingleThumb: {
@@ -266,7 +267,7 @@ const slider = tv({
       isVertical: false,
       class: {
         track:
-          "h-1 my-[calc((theme(spacing.5)-theme(spacing.1))/2)] data-[thumb-hidden=false]:border-x-[calc(theme(spacing.5)/2)]",
+          "h-1 my-[calc((theme(spacing.5)-theme(spacing.1))/2)] border-x-[calc(theme(spacing.5)/2)]",
       },
     },
     {
@@ -274,7 +275,7 @@ const slider = tv({
       isVertical: false,
       class: {
         track:
-          "h-3 my-[calc((theme(spacing.6)-theme(spacing.3))/2)] data-[thumb-hidden=false]:border-x-[calc(theme(spacing.6)/2)]",
+          "h-3 my-[calc((theme(spacing.6)-theme(spacing.3))/2)] border-x-[calc(theme(spacing.6)/2)]",
       },
     },
     {
@@ -282,7 +283,7 @@ const slider = tv({
       isVertical: false,
       class: {
         track:
-          "h-7 my-[calc((theme(spacing.7)-theme(spacing.5))/2)] data-[thumb-hidden=false]:border-x-[calc(theme(spacing.7)/2)]",
+          "h-7 my-[calc((theme(spacing.7)-theme(spacing.5))/2)] border-x-[calc(theme(spacing.7)/2)]",
       },
     },
     // size && isVertical
@@ -291,7 +292,7 @@ const slider = tv({
       isVertical: true,
       class: {
         track:
-          "w-1 mx-[calc((theme(spacing.5)-theme(spacing.1))/2)] data-[thumb-hidden=false]:border-y-[calc(theme(spacing.5)/2)]",
+          "w-1 mx-[calc((theme(spacing.5)-theme(spacing.1))/2)] border-y-[calc(theme(spacing.5)/2)]",
       },
     },
     {
@@ -299,7 +300,7 @@ const slider = tv({
       isVertical: true,
       class: {
         track:
-          "w-3 mx-[calc((theme(spacing.6)-theme(spacing.3))/2)] data-[thumb-hidden=false]:border-y-[calc(theme(spacing.6)/2)]",
+          "w-3 mx-[calc((theme(spacing.6)-theme(spacing.3))/2)] border-y-[calc(theme(spacing.6)/2)]",
       },
     },
     {
@@ -307,105 +308,95 @@ const slider = tv({
       isVertical: true,
       class: {
         track:
-          "w-7 mx-[calc((theme(spacing.7)-theme(spacing.5))/2)] data-[thumb-hidden=false]:border-y-[calc(theme(spacing.7)/2)]",
+          "w-7 mx-[calc((theme(spacing.7)-theme(spacing.5))/2)] border-y-[calc(theme(spacing.7)/2)]",
       },
     },
-    // color && !isVertical && hasSingleThumb
+    // color && !isVertical
     {
       color: "foreground",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-foreground",
+        track:
+          "data-[fill-start=true]:border-s-foreground data-[fill-end=true]:border-e-foreground",
       },
     },
     {
       color: "primary",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-primary",
+        track: "data-[fill-start=true]:border-s-primary data-[fill-end=true]:border-e-primary",
       },
     },
     {
       color: "secondary",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-secondary",
+        track: "data-[fill-start=true]:border-s-secondary data-[fill-end=true]:border-e-secondary",
       },
     },
     {
       color: "success",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-success",
+        track: "data-[fill-start=true]:border-s-success data-[fill-end=true]:border-e-success",
       },
     },
     {
       color: "warning",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-warning",
+        track: "data-[fill-start=true]:border-s-warning data-[fill-end=true]:border-e-warning",
       },
     },
     {
       color: "danger",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-danger",
+        track: "data-[fill-start=true]:border-s-danger data-[fill-end=true]:border-e-danger",
       },
     },
-    // color && isVertical && hasSingleThumb
+    // color && isVertical
     {
       color: "foreground",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-foreground",
+        track:
+          "data-[fill-start=true]:border-b-foreground data-[fill-end=true]:border-t-foreground",
       },
     },
     {
       color: "primary",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-primary",
+        track: "data-[fill-start=true]:border-b-primary data-[fill-end=true]:border-t-primary",
       },
     },
     {
       color: "secondary",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-secondary",
+        track: "data-[fill-start=true]:border-b-secondary data-[fill-end=true]:border-t-secondary",
       },
     },
     {
       color: "success",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-success",
+        track: "data-[fill-start=true]:border-b-success data-[fill-end=true]:border-t-success",
       },
     },
     {
       color: "warning",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-warning",
+        track: "data-[fill-start=true]:border-b-warning data-[fill-end=true]:border-t-warning",
       },
     },
     {
       color: "danger",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-danger",
+        track: "data-[fill-start=true]:border-b-danger data-[fill-end=true]:border-t-danger",
       },
     },
   ],
@@ -417,7 +408,6 @@ const slider = tv({
     hideThumb: false,
     isDisabled: false,
     disableThumbScale: false,
-    disableAnimation: false,
     showOutline: false,
   },
 });

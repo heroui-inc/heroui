@@ -1,21 +1,22 @@
-import type {PaginationSlots, PaginationVariantProps, SlotsToClasses} from "@nextui-org/theme";
-import type {Timer} from "@nextui-org/shared-utils";
+import type {PaginationSlots, PaginationVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {Key, ReactNode, Ref} from "react";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
+import {objectToDeps, Timer} from "@heroui/shared-utils";
 import {
   UsePaginationProps as UseBasePaginationProps,
   PaginationItemValue,
   PaginationItemType,
-} from "@nextui-org/use-pagination";
+} from "@heroui/use-pagination";
 import {useEffect, useRef, useMemo} from "react";
-import {mapPropsVariants} from "@nextui-org/system";
-import {usePagination as useBasePagination} from "@nextui-org/use-pagination";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {usePagination as useBasePagination} from "@heroui/use-pagination";
 import scrollIntoView from "scroll-into-view-if-needed";
-import {pagination} from "@nextui-org/theme";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {pagination} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 import {PressEvent} from "@react-types/shared";
+import {useIntersectionObserver} from "@heroui/use-intersection-observer";
 
 export type PaginationItemRenderProps = {
   /**
@@ -106,7 +107,7 @@ export type PaginationItemRenderProps = {
   getAriaLabel?: (page?: PaginationItemValue) => string | undefined;
 };
 
-interface Props extends Omit<HTMLNextUIProps<"nav">, "onChange"> {
+interface Props extends Omit<HTMLHeroUIProps<"nav">, "onChange"> {
   /**
    * Ref to the DOM node.
    */
@@ -162,6 +163,8 @@ export type UsePaginationProps = Props & UseBasePaginationProps & PaginationVari
 export const CURSOR_TRANSITION_TIMEOUT = 300; // in ms
 
 export function usePagination(originalProps: UsePaginationProps) {
+  const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, pagination.variantKeys);
 
   const {
@@ -190,6 +193,10 @@ export function usePagination(originalProps: UsePaginationProps) {
   const itemsRef = useRef<Map<number, HTMLElement>>();
 
   const cursorTimer = useRef<Timer>();
+
+  const disableAnimation =
+    originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
+  const disableCursorAnimation = originalProps?.disableCursorAnimation ?? disableAnimation ?? false;
 
   function getItemsRefMap() {
     if (!itemsRef.current) {
@@ -267,17 +274,30 @@ export function usePagination(originalProps: UsePaginationProps) {
     onChange,
   });
 
+  // check if the pagination component is visible
+  const [setRef, isVisible] = useIntersectionObserver();
+
+  useEffect(() => {
+    if (domRef.current) {
+      setRef(domRef.current);
+    }
+  }, [domRef.current]);
+
   const activePageRef = useRef(activePage);
 
   useEffect(() => {
-    if (activePage && !originalProps.disableAnimation) {
+    // when the pagination component is invisible, scroll offset will be wrong
+    // thus, only scroll to the active page if the pagination component is visible
+    if (activePage && !disableAnimation && isVisible) {
       scrollTo(activePage, activePage === activePageRef.current);
     }
     activePageRef.current = activePage;
   }, [
+    page,
     activePage,
-    originalProps.disableAnimation,
-    originalProps.disableCursorAnimation,
+    disableAnimation,
+    disableCursorAnimation,
+    isVisible,
     originalProps.dotsJump,
     originalProps.isCompact,
     originalProps.showControls,
@@ -287,10 +307,10 @@ export function usePagination(originalProps: UsePaginationProps) {
     () =>
       pagination({
         ...variantProps,
-        disableCursorAnimation:
-          originalProps.disableCursorAnimation || originalProps.disableAnimation,
+        disableAnimation,
+        disableCursorAnimation,
       }),
-    [...Object.values(variantProps)],
+    [objectToDeps(variantProps), disableCursorAnimation, disableAnimation],
   );
 
   const baseStyles = clsx(classNames?.base, className);
@@ -395,8 +415,8 @@ export function usePagination(originalProps: UsePaginationProps) {
     range,
     activePage,
     getItemRef,
-    disableCursorAnimation: originalProps.disableCursorAnimation,
-    disableAnimation: originalProps.disableAnimation,
+    disableAnimation,
+    disableCursorAnimation,
     setPage,
     onPrevious,
     onNext,

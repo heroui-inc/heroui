@@ -1,10 +1,15 @@
 import * as React from "react";
 import {render, fireEvent, act} from "@testing-library/react";
-import {Button} from "@nextui-org/button";
+import {Button} from "@heroui/button";
+import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
 import {Tooltip} from "../src";
 
 describe("Tooltip", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should throw error if no children is passed", () => {
     const spy = jest.spyOn(console, "warn").mockImplementation(() => {});
 
@@ -21,6 +26,10 @@ describe("Tooltip", () => {
     );
 
     expect(() => wrapper.unmount()).not.toThrow();
+
+    if (!shouldIgnoreReactWarning(spy)) {
+      expect(spy).toHaveBeenCalledTimes(0);
+    }
   });
 
   it("ref should be forwarded", () => {

@@ -1,25 +1,38 @@
-import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@nextui-org/theme";
+import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {HiddenSelectProps} from "./hidden-select";
 
-import {DOMAttributes, HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {select} from "@nextui-org/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
+import {
+  DOMAttributes,
+  HTMLHeroUIProps,
+  mapPropsVariants,
+  PropGetter,
+  SharedSelection,
+  useLabelPlacement,
+  useProviderContext,
+} from "@heroui/system";
+import {select} from "@heroui/theme";
+import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useMemo, useCallback, useRef, Key, ReactNode, useEffect} from "react";
-import {ListboxProps} from "@nextui-org/listbox";
-import {useAriaButton} from "@nextui-org/use-aria-button";
+import {ListboxProps} from "@heroui/listbox";
+import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {useHover} from "@react-aria/interactions";
-import {PopoverProps} from "@nextui-org/popover";
-import {ScrollShadowProps} from "@nextui-org/scroll-shadow";
+import {PopoverProps} from "@heroui/popover";
+import {ScrollShadowProps} from "@heroui/scroll-shadow";
 import {
   MultiSelectProps,
+  MultiSelectState,
   useMultiSelect,
   useMultiSelectState,
-} from "@nextui-org/use-aria-multiselect";
-import {SpinnerProps} from "@nextui-org/spinner";
-import {CollectionChildren} from "@react-types/shared";
+} from "@heroui/use-aria-multiselect";
+import {SpinnerProps} from "@heroui/spinner";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
+import {CollectionChildren, ValidationError} from "@react-types/shared";
+import {FormContext, useSlottedContext} from "@heroui/form";
+import {usePreventScroll} from "@react-aria/overlays";
 
 export type SelectedItemProps<T = object> = {
   /** A unique key for the item. */
@@ -40,7 +53,7 @@ export type SelectedItemProps<T = object> = {
 
 export type SelectedItems<T = object> = Array<SelectedItemProps<T>>;
 
-interface Props<T> extends Omit<HTMLNextUIProps<"select">, keyof SelectVariantProps> {
+interface Props<T> extends Omit<HTMLHeroUIProps<"select">, keyof SelectVariantProps> {
   /**
    * Ref to the DOM node.
    */
@@ -119,33 +132,88 @@ interface Props<T> extends Omit<HTMLNextUIProps<"select">, keyof SelectVariantPr
    * Classes object to style the select and its children.
    */
   classNames?: SlotsToClasses<SelectSlots>;
+  /**
+   * Handler that is called when the selection changes.
+   */
+  onSelectionChange?: (keys: SharedSelection) => void;
+  /**
+   * A function that returns an error message if a given value is invalid.
+   * Validation errors are displayed to the user when the form is submitted
+   * if `validationBehavior="native"`. For realtime validation, use the `isInvalid`
+   * prop instead.
+   */
+  validate?: (value: string | string[]) => ValidationError | true | null | undefined;
 }
 
-export type UseSelectProps<T> = Omit<Props<T>, keyof MultiSelectProps<T>> &
-  MultiSelectProps<T> &
-  SelectVariantProps;
+interface SelectData {
+  isDisabled?: boolean;
+  isRequired?: boolean;
+  isInvalid?: boolean;
+  name?: string;
+  validationBehavior?: "aria" | "native";
+}
+
+export const selectData = new WeakMap<MultiSelectState<any>, SelectData>();
+
+export type UseSelectProps<T> = Omit<
+  Props<T>,
+  keyof Omit<MultiSelectProps<T>, "onSelectionChange">
+> &
+  Omit<MultiSelectProps<T>, "onSelectionChange"> &
+  SelectVariantProps & {
+    /**
+     * The height of each item in the listbox.
+     * For dataset with sections, the itemHeight must be the height of each item (including padding, border, margin).
+     * This is required for virtualized listboxes to calculate the height of each item.
+     * @default 36
+     */
+    itemHeight?: number;
+    /**
+     * The max height of the listbox (which will be rendered in a popover).
+     * This is required for virtualized listboxes to set the maximum height of the listbox.
+     */
+    maxListboxHeight?: number;
+    /**
+     * Whether to enable virtualization of the listbox items.
+     * By default, virtualization is automatically enabled when the number of items is greater than 50.
+     * @default undefined
+     */
+    isVirtualized?: boolean;
+    /**
+     * Whether the listbox will be prevented from opening when there are no items.
+     * @default false
+     */
+    hideEmptyContent?: boolean;
+  };
 
 export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
+  const globalContext = useProviderContext();
+  const {validationBehavior: formValidationBehavior} = useSlottedContext(FormContext) || {};
+
   const [props, variantProps] = mapPropsVariants(originalProps, select.variantKeys);
-  const disableAnimation = originalProps.disableAnimation ?? false;
+
+  const disableAnimation =
+    originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
   const {
     ref,
     as,
-    isOpen,
     label,
     name,
     isLoading,
     selectorIcon,
+    isOpen,
     defaultOpen,
     onOpenChange,
     startContent,
     endContent,
     description,
-    errorMessage,
     renderValue,
     onSelectionChange,
     placeholder,
+    isVirtualized,
+    itemHeight = 36,
+    maxListboxHeight = 256,
     children,
     disallowEmptySelection = false,
     selectionMode = "single",
@@ -160,6 +228,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     onClose,
     className,
     classNames,
+    validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
+    hideEmptyContent = false,
     ...otherProps
   } = props;
 
@@ -204,15 +274,18 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   const listBoxRef = useRef<HTMLUListElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  const state = useMultiSelectState<T>({
+  let state = useMultiSelectState<T>({
     ...props,
     isOpen,
     selectionMode,
     disallowEmptySelection,
+    validationBehavior,
     children: children as CollectionChildren<T>,
-    isRequired: originalProps?.isRequired,
-    isDisabled: originalProps?.isDisabled,
+    isRequired: originalProps.isRequired,
+    isDisabled: originalProps.isDisabled,
+    isInvalid: originalProps.isInvalid,
     defaultOpen,
+    hideEmptyContent,
     onOpenChange: (open) => {
       onOpenChange?.(open);
       if (!open) {
@@ -221,57 +294,80 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     },
     onSelectionChange: (keys) => {
       onSelectionChange?.(keys);
-      if (onChange && typeof onChange === "function" && domRef.current) {
-        const event = {
+      if (onChange && typeof onChange === "function") {
+        onChange({
           target: {
-            ...domRef.current,
+            ...(domRef.current && {
+              ...domRef.current,
+              name: domRef.current.name,
+            }),
             value: Array.from(keys).join(","),
-            name: domRef.current.name,
           },
-        } as React.ChangeEvent<HTMLSelectElement>;
-
-        onChange(event);
+        } as React.ChangeEvent<HTMLSelectElement>);
       }
+      state.commitValidation();
     },
   });
 
-  const {labelProps, triggerProps, valueProps, menuProps, descriptionProps, errorMessageProps} =
-    useMultiSelect(
-      {...props, disallowEmptySelection, isDisabled: originalProps?.isDisabled},
-      state,
-      triggerRef,
-    );
+  state = {
+    ...state,
+    ...(originalProps.isDisabled && {
+      disabledKeys: new Set([...state.collection.getKeys()]),
+    }),
+  };
+
+  // if we use `react-hook-form`, it will set the native select value using the ref in register
+  // i.e. setting ref.current.value to something which is uncontrolled
+  // hence, sync the state with `ref.current.value`
+  useSafeLayoutEffect(() => {
+    if (!domRef.current?.value) return;
+
+    state.setSelectedKeys(new Set([...state.selectedKeys, domRef.current.value]));
+  }, [domRef.current]);
+
+  const {
+    labelProps,
+    triggerProps,
+    valueProps,
+    menuProps,
+    descriptionProps,
+    errorMessageProps,
+    isInvalid: isAriaInvalid,
+    validationErrors,
+    validationDetails,
+  } = useMultiSelect(
+    {...props, disallowEmptySelection, isDisabled: originalProps.isDisabled},
+    state,
+    triggerRef,
+  );
+
+  const isInvalid = originalProps.isInvalid || validationState === "invalid" || isAriaInvalid;
 
   const {isPressed, buttonProps} = useAriaButton(triggerProps, triggerRef);
 
   const {focusProps, isFocused, isFocusVisible} = useFocusRing();
-  const {isHovered, hoverProps} = useHover({isDisabled: originalProps?.isDisabled});
+  const {isHovered, hoverProps} = useHover({isDisabled: originalProps.isDisabled});
 
-  const labelPlacement = useMemo<SelectVariantProps["labelPlacement"]>(() => {
-    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
-      return "outside";
-    }
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, label]);
-
-  const hasHelper = !!description || !!errorMessage;
   const hasPlaceholder = !!placeholder;
-  const isInvalid = validationState === "invalid" || originalProps.isInvalid;
-  const shouldLabelBeOutside =
-    labelPlacement === "outside-left" ||
-    (labelPlacement === "outside" && (hasPlaceholder || !!originalProps.isMultiline));
+  const shouldLabelBeOutside = labelPlacement === "outside-left" || labelPlacement === "outside";
   const shouldLabelBeInside = labelPlacement === "inside";
+  const isOutsideLeft = labelPlacement === "outside-left";
 
   const isFilled =
     state.isOpen ||
     hasPlaceholder ||
-    !!state.selectedItems ||
+    !!state.selectedItems?.length ||
     !!startContent ||
     !!endContent ||
     !!originalProps.isMultiline;
-  const hasValue = !!state.selectedItems;
+  const hasValue = !!state.selectedItems?.length;
   const hasLabel = !!label;
+  const hasLabelOutside = hasLabel && (isOutsideLeft || (shouldLabelBeOutside && hasPlaceholder));
 
   const baseStyles = clsx(classNames?.base, className);
 
@@ -281,9 +377,9 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...variantProps,
         isInvalid,
         labelPlacement,
-        className,
+        disableAnimation,
       }),
-    [...Object.values(variantProps), isInvalid, labelPlacement, className],
+    [objectToDeps(variantProps), isInvalid, labelPlacement, disableAnimation],
   );
 
   // scroll the listbox to the selected item
@@ -305,6 +401,17 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     }
   }, [state.isOpen, disableAnimation]);
 
+  usePreventScroll({
+    isDisabled: !state.isOpen,
+  });
+
+  const errorMessage =
+    typeof props.errorMessage === "function"
+      ? props.errorMessage({isInvalid, validationErrors, validationDetails})
+      : props.errorMessage || validationErrors?.join(" ");
+
+  const hasHelper = !!description || !!errorMessage;
+
   // apply the same with to the popover as the select
   useEffect(() => {
     if (state.isOpen && popoverRef.current && triggerRef.current) {
@@ -322,12 +429,14 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       "data-has-value": dataAttr(hasValue),
       "data-has-label": dataAttr(hasLabel),
       "data-has-helper": dataAttr(hasHelper),
+      "data-invalid": dataAttr(isInvalid),
+      "data-has-label-outside": dataAttr(hasLabelOutside),
       className: slots.base({
         class: clsx(baseStyles, props.className),
       }),
       ...props,
     }),
-    [slots, hasHelper, hasValue, hasLabel, isFilled, baseStyles],
+    [slots, hasHelper, hasValue, hasLabel, hasLabelOutside, isFilled, baseStyles],
   );
 
   const getTriggerProps: PropGetter = useCallback(
@@ -383,6 +492,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         isRequired: originalProps?.isRequired,
         autoComplete: originalProps?.autoComplete,
         isDisabled: originalProps?.isDisabled,
+        form: originalProps?.form,
         onChange,
         ...props,
       } as HiddenSelectProps<T>),
@@ -427,25 +537,46 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       className: slots.listboxWrapper({
         class: clsx(classNames?.listboxWrapper, props?.className),
       }),
+      style: {
+        maxHeight: maxListboxHeight ?? 256,
+        ...props.style,
+      },
       ...mergeProps(slotsProps.scrollShadowProps, props),
     }),
-    [slots.listboxWrapper, classNames?.listboxWrapper, slotsProps.scrollShadowProps],
+    [
+      slots.listboxWrapper,
+      classNames?.listboxWrapper,
+      slotsProps.scrollShadowProps,
+      maxListboxHeight,
+    ],
   );
 
   const getListboxProps = (props: any = {}) => {
+    const shouldVirtualize = isVirtualized ?? state.collection.size > 50;
+
     return {
       state,
       ref: listBoxRef,
+      isVirtualized: shouldVirtualize,
+      virtualization: shouldVirtualize
+        ? {
+            maxListboxHeight,
+            itemHeight,
+          }
+        : undefined,
       "data-slot": "listbox",
       className: slots.listbox({
         class: clsx(classNames?.listbox, props?.className),
       }),
+      scrollShadowProps: slotsProps.scrollShadowProps,
       ...mergeProps(slotsProps.listboxProps, props, menuProps),
     } as ListboxProps;
   };
 
   const getPopoverProps = useCallback(
     (props: DOMAttributes = {}) => {
+      const popoverProps = mergeProps(slotsProps.popoverProps, props);
+
       return {
         state,
         triggerRef,
@@ -458,12 +589,15 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
             class: clsx(classNames?.popoverContent, props.className),
           }),
         },
-        ...mergeProps(slotsProps.popoverProps, props),
+        ...popoverProps,
         offset:
           state.selectedItems && state.selectedItems.length > 0
             ? // forces the popover to update its position when the selected items change
               state.selectedItems.length * 0.00000001 + (slotsProps.popoverProps?.offset || 0)
             : slotsProps.popoverProps?.offset,
+        shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
+          ? popoverProps.shouldCloseOnInteractOutside
+          : (element: Element) => ariaShouldCloseOnInteractOutside(element, domRef, state),
       } as PopoverProps;
     },
     [
@@ -483,7 +617,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       "data-open": dataAttr(state.isOpen),
       className: slots.selectorIcon({class: classNames?.selectorIcon}),
     }),
-    [slots, classNames?.selectorIcon, state?.isOpen],
+    [slots, classNames?.selectorIcon, state.isOpen],
   );
 
   const getInnerWrapperProps: PropGetter = useCallback(
@@ -542,7 +676,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       return {
         ...props,
         ...errorMessageProps,
-        "data-slot": "errorMessage",
+        "data-slot": "error-message",
         className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
       };
     },
@@ -565,6 +699,15 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     [slots, spinnerRef, spinnerProps, classNames?.spinner],
   );
 
+  // store the data to be used in useHiddenSelect
+  selectData.set(state, {
+    isDisabled: originalProps?.isDisabled,
+    isRequired: originalProps?.isRequired,
+    name: originalProps?.name,
+    isInvalid,
+    validationBehavior,
+  });
+
   return {
     Component,
     domRef,
@@ -578,15 +721,17 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     endContent,
     description,
     selectorIcon,
-    errorMessage,
     hasHelper,
     labelPlacement,
     hasPlaceholder,
     renderValue,
     selectionMode,
     disableAnimation,
+    isOutsideLeft,
     shouldLabelBeOutside,
     shouldLabelBeInside,
+    isInvalid,
+    errorMessage,
     getBaseProps,
     getTriggerProps,
     getLabelProps,

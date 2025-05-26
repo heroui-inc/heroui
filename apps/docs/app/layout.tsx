@@ -1,18 +1,17 @@
 import "@/styles/globals.css";
 import "@/styles/sandpack.css";
-import {Metadata} from "next";
-import {clsx} from "@nextui-org/shared-utils";
-import {Analytics} from "@vercel/analytics/react";
+import {Metadata, Viewport} from "next";
+import {clsx} from "@heroui/shared-utils";
+import {Analytics} from "@vercel/analytics/next";
 
 import {Providers} from "./providers";
 
 import {Cmdk} from "@/components/cmdk";
 import manifest from "@/config/routes.json";
 import {siteConfig} from "@/config/site";
-import {fontSans} from "@/config/fonts";
+import {fonts} from "@/config/fonts";
 import {Navbar} from "@/components/navbar";
 import {Footer} from "@/components/footer";
-import {__PROD__} from "@/utils";
 import {ProBanner} from "@/components/pro-banner";
 
 export const metadata: Metadata = {
@@ -24,8 +23,9 @@ export const metadata: Metadata = {
   keywords: [
     "React",
     "Next.js",
-    "Tailwind CSS",
     "NextUI",
+    "Tailwind CSS",
+    "HeroUI",
     "React Aria",
     "Server Components",
     "React Components",
@@ -34,10 +34,6 @@ export const metadata: Metadata = {
     "UI Library",
     "UI Framework",
     "UI Design System",
-  ],
-  themeColor: [
-    {media: "(prefers-color-scheme: light)", color: "white"},
-    {media: "(prefers-color-scheme: dark)", color: "black"},
   ],
   icons: {
     icon: "/favicon.ico",
@@ -49,36 +45,51 @@ export const metadata: Metadata = {
   openGraph: siteConfig.openGraph,
   authors: [
     {
-      name: "jrgarciadev",
-      url: "https://jrgarciadev.com",
+      name: "hero_ui",
+      url: "https://x.com/hero_ui",
     },
   ],
-  creator: "jrgarciadev",
+  creator: "heroui-inc",
   alternates: {
-    canonical: "https://nextui.org",
+    canonical: "https://heroui.com",
     types: {
-      "application/rss+xml": [{url: "https://nextui.org/feed.xml", title: "NextUI RSS Feed"}],
+      "application/rss+xml": [{url: "https://heroui.com/feed.xml", title: "HeroUI RSS Feed"}],
     },
   },
-  viewport:
-    "viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    {color: "#f4f4f5", media: "(prefers-color-scheme: light)"},
+    {color: "#111111", media: "(prefers-color-scheme: dark)"},
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html suppressHydrationWarning dir="ltr" lang="en">
       <head />
-      <body className={clsx("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+      <body
+        className={clsx(
+          "min-h-screen bg-background font-sans antialiased",
+          fonts.sans.variable,
+          fonts.mono.variable,
+        )}
+      >
         <Providers themeProps={{attribute: "class", defaultTheme: "dark"}}>
           <div className="relative flex flex-col" id="app-container">
             <ProBanner />
             <Navbar mobileRoutes={manifest.mobileRoutes} routes={manifest.routes} />
             {children}
+            <Analytics mode="production" />
             <Footer />
           </div>
           <Cmdk />
         </Providers>
-        {__PROD__ && <Analytics />}
       </body>
     </html>
   );

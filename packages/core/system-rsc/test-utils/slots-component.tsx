@@ -1,10 +1,13 @@
-import type {HTMLNextUIProps} from "../src/types";
+import type {HTMLHeroUIProps} from "../src/types";
+import type {VariantProps} from "@heroui/theme";
 
 import React, {useMemo} from "react";
-import {SlotsToClasses, tv, type VariantProps} from "@nextui-org/theme";
-import {filterDOMProps, ReactRef, useDOMRef} from "@nextui-org/react-utils";
+import {SlotsToClasses, tv} from "@heroui/theme";
+import {filterDOMProps, ReactRef, useDOMRef} from "@heroui/react-utils";
+import {objectToDeps} from "@heroui/shared-utils";
+import clsx from "clsx";
 
-import {cn, forwardRef, mapPropsVariants} from "../src/utils";
+import {forwardRef, mapPropsVariants} from "../src/utils";
 
 const card = tv({
   slots: {
@@ -13,7 +16,7 @@ const card = tv({
       "flex-col",
       "relative",
       "overflow-hidden",
-      "height-auto",
+      "h-auto",
       "outline-none",
       "text-foreground",
       "box-border",
@@ -155,7 +158,7 @@ const card = tv({
 type CardVariantProps = VariantProps<typeof card>;
 type CardSlots = keyof ReturnType<typeof card>;
 
-interface CardProps extends HTMLNextUIProps, CardVariantProps {
+interface CardProps extends HTMLHeroUIProps, CardVariantProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   children: React.ReactNode;
@@ -168,9 +171,9 @@ export const Card = forwardRef<"div", CardProps>((originalProps, ref) => {
 
   const {header, footer, className, children, classNames, ...otherProps} = props;
 
-  const styles = useMemo(() => card({...variantProps}), [...Object.values(variantProps)]);
+  const styles = useMemo(() => card({...variantProps}), [objectToDeps(variantProps)]);
 
-  const baseStyles = cn(classNames?.base, className);
+  const baseStyles = clsx(classNames?.base, className);
 
   const domRef = useDOMRef(ref);
 

@@ -1,12 +1,8 @@
-import type {ReactNode} from "react";
-
-import {forwardRef} from "@nextui-org/system-rsc";
+import {forwardRef} from "@heroui/system";
 
 import {UseBadgeProps, useBadge} from "./use-badge";
 
-export interface BadgeProps extends UseBadgeProps {
-  children: ReactNode;
-}
+export interface BadgeProps extends UseBadgeProps {}
 
 const Badge = forwardRef<"span", BadgeProps>((props, ref) => {
   const {Component, children, content, slots, classNames, getBadgeProps} = useBadge({
@@ -23,6 +19,6 @@ const Badge = forwardRef<"span", BadgeProps>((props, ref) => {
   );
 });
 
-Badge.displayName = "NextUI.Badge";
+Badge.displayName = "HeroUI.Badge";
 
 export default Badge;

@@ -3,15 +3,15 @@ name: QA
 on:
   pull_request:
     branches:
-      - main
+      - canary
 
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         uses: ./.github/common-actions/install
@@ -21,10 +21,10 @@ jobs:
 
   tests:
     name: Tests
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         uses: ./.github/common-actions/install
@@ -34,10 +34,10 @@ jobs:
 
   eslint:
     name: ESLint
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         uses: ./.github/common-actions/install
@@ -47,10 +47,10 @@ jobs:
 
   types:
     name: TypeScript
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         uses: ./.github/common-actions/install
@@ -60,13 +60,30 @@ jobs:
 
   prettier:
     name: Prettier
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         uses: ./.github/common-actions/install
 
       - name: Run prettier
         run: pnpm format:check
+
+  continuous-release:
+    name: Continuous Release
+    if: github.repository == 'heroui-inc/heroui'
+    runs-on: heroui-runner
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Release
+        run: pnpx pkg-pr-new publish --compact --pnpm './packages/components/*' './packages/core/*' './packages/hooks/*' './packages/utilities/*'

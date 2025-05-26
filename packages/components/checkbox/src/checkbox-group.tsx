@@ -1,4 +1,4 @@
-import {forwardRef} from "@nextui-org/system";
+import {forwardRef} from "@heroui/system";
 
 import {CheckboxGroupProvider} from "./checkbox-group-context";
 import {UseCheckboxGroupProps, useCheckboxGroup} from "./use-checkbox-group";
@@ -11,6 +11,7 @@ const CheckboxGroup = forwardRef<"div", CheckboxGroupProps>((props, ref) => {
     context,
     label,
     description,
+    isInvalid,
     errorMessage,
     getGroupProps,
     getLabelProps,
@@ -25,7 +26,7 @@ const CheckboxGroup = forwardRef<"div", CheckboxGroupProps>((props, ref) => {
       <div {...getWrapperProps()}>
         <CheckboxGroupProvider value={context}>{children}</CheckboxGroupProvider>
       </div>
-      {errorMessage ? (
+      {isInvalid && errorMessage ? (
         <div {...getErrorMessageProps()}>{errorMessage}</div>
       ) : description ? (
         <div {...getDescriptionProps()}>{description}</div>
@@ -34,6 +35,6 @@ const CheckboxGroup = forwardRef<"div", CheckboxGroupProps>((props, ref) => {
   );
 });
 
-CheckboxGroup.displayName = "NextUI.CheckboxGroup";
+CheckboxGroup.displayName = "HeroUI.CheckboxGroup";
 
 export default CheckboxGroup;

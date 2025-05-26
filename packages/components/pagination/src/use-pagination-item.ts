@@ -1,17 +1,16 @@
 import type {Ref} from "react";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {LinkDOMProps, PressEvent} from "@react-types/shared";
 
 import {useMemo} from "react";
-import {PaginationItemValue} from "@nextui-org/use-pagination";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {PaginationItemValue} from "@heroui/use-pagination";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 import {chain, mergeProps, shouldClientNavigate, useRouter} from "@react-aria/utils";
-import {usePress} from "@nextui-org/use-aria-press";
-import {filterDOMProps, useDOMRef} from "@nextui-org/react-utils";
-import {useHover} from "@react-aria/interactions";
+import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
+import {useHover, usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
 
-interface Props extends Omit<HTMLNextUIProps<"li">, "onClick"> {
+interface Props extends Omit<HTMLHeroUIProps<"li">, "onClick"> {
   /**
    * Ref to the DOM node.
    */
@@ -35,7 +34,7 @@ interface Props extends Omit<HTMLNextUIProps<"li">, "onClick"> {
    * @param e MouseEvent
    * @deprecated Use `onPress` instead.
    */
-  onClick?: HTMLNextUIProps<"li">["onClick"];
+  onClick?: HTMLHeroUIProps<"li">["onClick"];
   /**
    * Callback fired when the item is clicked.
    * @param e PressEvent
@@ -118,10 +117,11 @@ export function usePaginationItem(props: UsePaginationItemProps) {
           e.currentTarget.href &&
           // If props are applied to a router Link component, it may have already prevented default.
           !e.isDefaultPrevented() &&
-          shouldClientNavigate(e.currentTarget, e)
+          shouldClientNavigate(e.currentTarget, e) &&
+          props.href
         ) {
           e.preventDefault();
-          router.open(e.currentTarget, e);
+          router.open(e.currentTarget, e, props.href, props.routerOptions);
         }
       },
     };

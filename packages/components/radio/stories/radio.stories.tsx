@@ -1,8 +1,11 @@
+import type {ValidationResult} from "@react-types/shared";
+
 import React from "react";
 import {Meta} from "@storybook/react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {radio, button} from "@nextui-org/theme";
-import {clsx} from "@nextui-org/shared-utils";
+import {radio, button} from "@heroui/theme";
+import {clsx} from "@heroui/shared-utils";
+import {Form} from "@heroui/form";
 
 import {
   RadioGroup,
@@ -34,6 +37,12 @@ export default {
       control: {
         type: "boolean",
       },
+    },
+    validationBehavior: {
+      control: {
+        type: "select",
+      },
+      options: ["aria", "native"],
     },
   },
 } as Meta<typeof RadioGroup>;
@@ -85,13 +94,15 @@ const Template = (args: RadioGroupProps) => {
 
   return args.isRequired ? (
     <form
-      className="flex flex-col items-start gap-4"
+      className="flex flex-col items-start gap-2"
       onSubmit={(e) => {
+        alert(`Submitted value: ${e.target["sample"].value}`);
         e.preventDefault();
-        alert("Submitted!");
       }}
     >
-      <RadioGroup {...args}>{items}</RadioGroup>
+      <RadioGroup {...args} name="sample">
+        {items}
+      </RadioGroup>
       <button className={button({color: "primary"})} type="submit">
         Submit
       </button>
@@ -129,16 +140,16 @@ const InvalidTemplate = (args: RadioGroupProps) => {
   const items = (
     <>
       <Radio value="A" {...radioProps.a}>
-        Option A
+        Option A (Invalid)
       </Radio>
       <Radio value="B" {...radioProps.b}>
-        Option B
+        Option B (Valid)
       </Radio>
       <Radio value="C" {...radioProps.c}>
-        Option C
+        Option C (Valid)
       </Radio>
       <Radio value="D" {...radioProps.d}>
-        Option D
+        Option D (Invalid)
       </Radio>
     </>
   );
@@ -147,7 +158,7 @@ const InvalidTemplate = (args: RadioGroupProps) => {
 
   return args.isRequired ? (
     <form
-      className="flex flex-col items-start gap-4"
+      className="flex flex-col items-start gap-2"
       onSubmit={(e) => {
         e.preventDefault();
         alert("Submitted!");
@@ -192,6 +203,35 @@ const ControlledTemplate = (args: RadioGroupProps) => {
       </RadioGroup>
       <p className="text-default-500">Selected: {selectedItem}</p>
     </div>
+  );
+};
+
+const ServerValidationTemplate = (args: RadioGroupProps) => {
+  const [serverErrors, setServerErrors] = React.useState({});
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setServerErrors({
+      option: "You must choose an option.",
+    });
+  };
+
+  delete args.isInvalid;
+
+  return (
+    <Form
+      className="flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <RadioGroup {...args} label="Choose one option" name="option">
+        <Radio value="option1">Option 1</Radio>
+        <Radio value="option2">Option 2</Radio>
+        <Radio value="option3">Option 3</Radio>
+      </RadioGroup>
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+    </Form>
   );
 };
 
@@ -255,8 +295,45 @@ export const WithErrorMessage = {
   args: {
     ...defaultProps,
     isRequired: true,
-    validationState: "invalid",
+    isInvalid: true,
     errorMessage: "The selected option is invalid",
+  },
+};
+
+export const WithErrorMessageFunction = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    isRequired: true,
+    errorMessage: (value: ValidationResult) => {
+      if (value.validationDetails.valueMissing) {
+        return "Please select an option";
+      }
+    },
+  },
+};
+
+export const WithValidation = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    isRequired: true,
+    description: "Please select an option",
+    validate: (value: string) => {
+      if (value === "A") {
+        return "Option A is not allowed";
+      }
+    },
+  },
+};
+
+export const WithServerValidation = {
+  render: ServerValidationTemplate,
+
+  args: {
+    ...defaultProps,
   },
 };
 

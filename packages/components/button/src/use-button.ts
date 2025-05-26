@@ -1,25 +1,26 @@
-import type {ButtonVariantProps} from "@nextui-org/theme";
-import type {AriaButtonProps} from "@nextui-org/use-aria-button";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {ButtonVariantProps} from "@heroui/theme";
+import type {AriaButtonProps} from "@heroui/use-aria-button";
 import type {ReactNode} from "react";
-import type {RippleProps} from "@nextui-org/ripple";
+import type {RippleProps} from "@heroui/ripple";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {dataAttr} from "@nextui-org/shared-utils";
-import {ReactRef} from "@nextui-org/react-utils";
+import {useProviderContext} from "@heroui/system";
+import {dataAttr} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
 import {MouseEventHandler, useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
 import {chain, mergeProps} from "@react-aria/utils";
-import {useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
-import {button} from "@nextui-org/theme";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {button} from "@heroui/theme";
 import {isValidElement, cloneElement, useMemo} from "react";
-import {useAriaButton} from "@nextui-org/use-aria-button";
-import {useHover} from "@react-aria/interactions";
-import {SpinnerProps} from "@nextui-org/spinner";
-import {useRipple} from "@nextui-org/ripple";
+import {useAriaButton} from "@heroui/use-aria-button";
+import {PressEvent, useHover} from "@react-aria/interactions";
+import {SpinnerProps} from "@heroui/spinner";
+import {useRipple} from "@heroui/ripple";
 
 import {useButtonGroupContext} from "./button-group-context";
 
-interface Props extends HTMLNextUIProps<"button"> {
+interface Props extends HTMLHeroUIProps<"button"> {
   /**
    * Ref to the DOM node.
    */
@@ -39,7 +40,7 @@ interface Props extends HTMLNextUIProps<"button"> {
   endContent?: ReactNode;
   /**
    * Spinner to display when loading.
-   * @see https://nextui.org/components/spinner
+   * @see https://heroui.com/components/spinner
    */
   spinner?: ReactNode;
   /**
@@ -55,6 +56,7 @@ interface Props extends HTMLNextUIProps<"button"> {
   /**
    * The native button click event handler.
    * use `onPress` instead.
+   * @deprecated
    */
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
@@ -65,6 +67,7 @@ export type UseButtonProps = Props &
 
 export function useButton(props: UseButtonProps) {
   const groupContext = useButtonGroupContext();
+  const globalContext = useProviderContext();
   const isInGroup = !!groupContext;
 
   const {
@@ -76,16 +79,16 @@ export function useButton(props: UseButtonProps) {
     autoFocus,
     className,
     spinner,
+    isLoading = false,
+    disableRipple: disableRippleProp = false,
     fullWidth = groupContext?.fullWidth ?? false,
+    radius = groupContext?.radius,
     size = groupContext?.size ?? "md",
     color = groupContext?.color ?? "default",
     variant = groupContext?.variant ?? "solid",
-    disableAnimation = groupContext?.disableAnimation ?? false,
-    radius = groupContext?.radius,
-    disableRipple = groupContext?.disableRipple ?? false,
+    disableAnimation = groupContext?.disableAnimation ?? globalContext?.disableAnimation ?? false,
     isDisabled: isDisabledProp = groupContext?.isDisabled ?? false,
     isIconOnly = groupContext?.isIconOnly ?? false,
-    isLoading = false,
     spinnerPlacement = "start",
     onPress,
     onClick,
@@ -96,6 +99,8 @@ export function useButton(props: UseButtonProps) {
   const shouldFilterDOMProps = typeof Component === "string";
 
   const domRef = useDOMRef(ref);
+
+  const disableRipple = (disableRippleProp || globalContext?.disableRipple) ?? disableAnimation;
 
   const {isFocusVisible, isFocused, focusProps} = useFocusRing({
     autoFocus,
@@ -131,22 +136,22 @@ export function useButton(props: UseButtonProps) {
     ],
   );
 
-  const {onClick: onRippleClickHandler, onClear: onClearRipple, ripples} = useRipple();
+  const {onPress: onRipplePressHandler, onClear: onClearRipple, ripples} = useRipple();
 
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePress = useCallback(
+    (e: PressEvent) => {
       if (disableRipple || isDisabled || disableAnimation) return;
-      domRef.current && onRippleClickHandler(e);
+      domRef.current && onRipplePressHandler(e);
     },
-    [disableRipple, isDisabled, disableAnimation, domRef, onRippleClickHandler],
+    [disableRipple, isDisabled, disableAnimation, domRef, onRipplePressHandler],
   );
 
   const {buttonProps: ariaButtonProps, isPressed} = useAriaButton(
     {
       elementType: as,
       isDisabled,
-      onPress,
-      onClick: chain(onClick, handleClick),
+      onPress: chain(onPress, handlePress),
+      onClick,
       ...otherProps,
     } as AriaButtonProps,
     domRef,
@@ -171,6 +176,7 @@ export function useButton(props: UseButtonProps) {
         }),
         filterDOMProps(props),
       ),
+      className: styles,
     }),
     [
       isLoading,
@@ -184,6 +190,7 @@ export function useButton(props: UseButtonProps) {
       focusProps,
       hoverProps,
       otherProps,
+      styles,
     ],
   );
 
@@ -193,7 +200,6 @@ export function useButton(props: UseButtonProps) {
           // @ts-ignore
           "aria-hidden": true,
           focusable: false,
-          tabIndex: -1,
         })
       : null;
 
