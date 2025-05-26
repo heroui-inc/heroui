@@ -1,14 +1,14 @@
 import React, {useMemo} from "react";
 import {Meta} from "@storybook/react";
-import {table} from "@nextui-org/theme";
-import {User} from "@nextui-org/user";
-import {Chip, ChipProps} from "@nextui-org/chip";
-import {Button} from "@nextui-org/button";
-import {Spinner} from "@nextui-org/spinner";
-import {Pagination} from "@nextui-org/pagination";
-import {Tooltip} from "@nextui-org/tooltip";
-import {EditIcon, DeleteIcon, EyeIcon} from "@nextui-org/shared-icons";
-import {useInfiniteScroll} from "@nextui-org/use-infinite-scroll";
+import {table} from "@heroui/theme";
+import {User} from "@heroui/user";
+import {Chip, ChipProps} from "@heroui/chip";
+import {Button} from "@heroui/button";
+import {Spinner} from "@heroui/spinner";
+import {Pagination} from "@heroui/pagination";
+import {Tooltip} from "@heroui/tooltip";
+import {EditIcon, DeleteIcon, EyeIcon} from "@heroui/shared-icons";
+import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
 import {useAsyncList} from "@react-stately/data";
 import useSWR from "swr";
 
@@ -118,6 +118,14 @@ type SWCharacter = {
   height: string;
   mass: string;
   birth_year: string;
+};
+
+const generateRows = (rowCount: number) => {
+  return Array.from({length: rowCount}, (_, index) => ({
+    key: index.toString(),
+    name: `Item ${index + 1}`,
+    value: `Value ${index + 1}`,
+  }));
 };
 
 const StaticTemplate = (args: TableProps) => (
@@ -912,6 +920,38 @@ const InfinitePaginationTemplate = (args: TableProps) => {
   );
 };
 
+const VirtualizedTemplate = (args: TableProps & {rowCount: number}) => {
+  const {rowCount, ...rest} = args;
+  const rows = generateRows(rowCount);
+  const columns = [
+    {key: "name", label: "Name"},
+    {key: "value", label: "Value"},
+  ];
+
+  return (
+    <div>
+      <Table
+        aria-label="Example of virtualized table with a large dataset"
+        {...rest}
+        isVirtualized
+        maxTableHeight={300}
+        rowHeight={40}
+      >
+        <TableHeader columns={columns}>
+          {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+        </TableHeader>
+        <TableBody items={rows}>
+          {(item) => (
+            <TableRow key={item.key}>
+              {(columnKey) => <TableCell>{item[columnKey]}</TableCell>}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
+
 export const Default = {
   render: StaticTemplate,
 
@@ -1108,5 +1148,31 @@ export const TableWithSwitch = {
   args: {
     ...defaultProps,
     selectionMode: "multiple",
+  },
+};
+
+export const Virtualized = {
+  render: VirtualizedTemplate,
+  args: {
+    ...defaultProps,
+    className: "max-w-3xl",
+    rowCount: 500,
+  },
+};
+
+export const VirtualizedWithHeaderSticky = {
+  ...Virtualized,
+  args: {
+    ...Virtualized.args,
+    isHeaderSticky: true,
+  },
+};
+
+export const TenThousandRows = {
+  render: VirtualizedTemplate,
+  args: {
+    ...defaultProps,
+    className: "max-w-3xl",
+    rowCount: 10000,
   },
 };

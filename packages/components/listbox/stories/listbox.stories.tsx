@@ -2,19 +2,19 @@ import type {Selection} from "@react-types/shared";
 
 import React, {Key} from "react";
 import {Meta} from "@storybook/react";
-import {menuItem} from "@nextui-org/theme";
+import {menuItem} from "@heroui/theme";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
   ChevronRightIcon,
-} from "@nextui-org/shared-icons";
-import {usersData} from "@nextui-org/stories-utils";
-import {Avatar} from "@nextui-org/avatar";
-import {Chip} from "@nextui-org/chip";
-import {clsx} from "@nextui-org/shared-utils";
-import {ScrollShadow} from "@nextui-org/scroll-shadow";
+} from "@heroui/shared-icons";
+import {usersData} from "@heroui/stories-utils";
+import {Avatar} from "@heroui/avatar";
+import {Chip} from "@heroui/chip";
+import {clsx} from "@heroui/shared-utils";
+import {ScrollShadow} from "@heroui/scroll-shadow";
 
 import {Listbox, ListboxItem, ListboxSection, ListboxProps} from "../src";
 
@@ -174,7 +174,9 @@ const Template = ({color, variant, ...args}: ListboxProps) => (
     onAction={(key: Key) => alert(key)}
     {...args}
   >
-    <ListboxItem key="new">New file</ListboxItem>
+    <ListboxItem key="new" onPress={() => alert("[onPress] New file")}>
+      New file
+    </ListboxItem>
     <ListboxItem key="copy">Copy link</ListboxItem>
     <ListboxItem key="edit">Edit file</ListboxItem>
     <ListboxItem key="delete" className="text-danger" color="danger">
@@ -634,7 +636,7 @@ const CustomWithClassNamesTemplate = ({color, variant, disableAnimation, ...args
         <div className="flex flex-col gap-1">
           <span>Releases</span>
           <div className="px-2 py-1 rounded-small bg-default-100 group-data-[hover=true]:bg-default-200">
-            <span className="text-tiny text-default-600">@nextui-org/react@2.0.10</span>
+            <span className="text-tiny text-default-600">@heroui/react@2.0.10</span>
             <div className="flex gap-2 text-tiny">
               <span className="text-default-500">49 minutes ago</span>
               <span className="text-success">Latest</span>
@@ -676,6 +678,57 @@ const CustomWithClassNamesTemplate = ({color, variant, disableAnimation, ...args
         License
       </ListboxItem>
     </Listbox>
+  );
+};
+
+interface LargeDatasetSchema {
+  label: string;
+  value: string;
+  description: string;
+}
+
+function generateLargeDataset(n: number): LargeDatasetSchema[] {
+  const dataset: LargeDatasetSchema[] = [];
+  const items = [
+    "Cat",
+    "Dog",
+    "Elephant",
+    "Lion",
+    "Tiger",
+    "Giraffe",
+    "Dolphin",
+    "Penguin",
+    "Zebra",
+    "Shark",
+    "Whale",
+    "Otter",
+    "Crocodile",
+  ];
+
+  for (let i = 0; i < n; i++) {
+    const item = items[i % items.length];
+
+    dataset.push({
+      label: `${item}${i}`,
+      value: `${item.toLowerCase()}${i}`,
+      description: "Sample description",
+    });
+  }
+
+  return dataset;
+}
+
+const LargeDatasetTemplate = (args: ListboxProps & {numItems: number}) => {
+  const largeDataset = generateLargeDataset(args.numItems);
+
+  return (
+    <div className="flex w-full max-w-full py-20 px-20">
+      <Listbox label={`Select from ${args.numItems} items`} {...args}>
+        {largeDataset.map((item, index) => (
+          <ListboxItem key={index}>{item.label}</ListboxItem>
+        ))}
+      </Listbox>
+    </div>
   );
 };
 
@@ -780,5 +833,57 @@ export const CustomWithClassNames = {
 
   args: {
     ...defaultProps,
+  },
+};
+
+export const OneThousandList = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    numItems: 1000,
+    isVirtualized: true,
+    virtualization: {
+      maxListboxHeight: 400,
+      itemHeight: 20,
+    },
+  },
+};
+
+export const TenThousandList = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    numItems: 10000,
+    isVirtualized: true,
+    virtualization: {
+      maxListboxHeight: 400,
+      itemHeight: 20,
+    },
+  },
+};
+
+export const CustomMaxListboxHeight = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    numItems: 1000,
+    isVirtualized: true,
+    virtualization: {
+      maxListboxHeight: 600,
+      itemHeight: 20,
+    },
+  },
+};
+
+export const CustomItemHeight = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    numItems: 1000,
+    isVirtualized: true,
+    virtualization: {
+      itemHeight: 40,
+      maxListboxHeight: 600,
+    },
   },
 };

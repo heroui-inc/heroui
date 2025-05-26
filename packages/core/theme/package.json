@@ -1,7 +1,7 @@
 {
-  "name": "@nextui-org/theme",
-  "version": "2.2.11",
-  "description": "The default theme for NextUI components",
+  "name": "@heroui/theme",
+  "version": "2.4.15",
+  "description": "The default theme for HeroUI components",
   "keywords": [
     "theme",
     "theming",
@@ -11,8 +11,8 @@
     "classNames",
     "css"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
-  "homepage": "https://nextui.org",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
   "sideEffects": false,
@@ -30,11 +30,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextui-org/nextui.git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
     "directory": "packages/core/theme"
   },
   "bugs": {
-    "url": "https://github.com/nextui-org/nextui/issues"
+    "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -47,30 +47,21 @@
   },
   "dependencies": {
     "color": "^4.2.3",
-    "color2k": "^2.0.2",
+    "color2k": "^2.0.3",
     "deepmerge": "4.3.1",
     "flat": "^5.0.2",
-    "lodash.foreach": "^4.5.0",
-    "lodash.get": "^4.4.2",
-    "lodash.kebabcase": "^4.1.1",
-    "lodash.mapkeys": "^4.6.0",
-    "lodash.omit": "^4.5.0",
     "clsx": "^1.2.1",
-    "tailwind-variants": "^0.1.20",
-    "tailwind-merge": "^1.14.0"
+    "tailwind-variants": "0.3.0",
+    "tailwind-merge": "2.5.4",
+    "@heroui/shared-utils": "workspace:*"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.4.0"
   },
   "devDependencies": {
-    "@types/color": "^3.0.3",
+    "@types/color": "^4.2.0",
     "@types/flat": "^5.0.2",
-    "@types/lodash.foreach": "^4.5.7",
-    "@types/lodash.get": "^4.4.7",
-    "@types/lodash.kebabcase": "^4.1.7",
-    "@types/lodash.mapkeys": "^4.6.7",
-    "@types/lodash.omit": "^4.5.7",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "^3.4.16",
     "clean-package": "2.2.0"
   },
   "tsup": {

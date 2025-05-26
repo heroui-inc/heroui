@@ -25,7 +25,7 @@ export interface AccordionItemAria {
 }
 
 /**
- * @deprecated use useReactAriaAccordionItem instead from @nextui-org/use-aria-accordion
+ * @deprecated use useReactAriaAccordionItem instead from @heroui/use-aria-accordion
  */
 export function useAriaAccordionItem<T>(
   props: AccordionItemAriaProps<T>,
@@ -55,7 +55,7 @@ export function useAriaAccordionItem<T>(
       if (!manager.canSelectItem(key)) {
         return;
       }
-      manager.select(key, e);
+      manager.select(key, e as any);
       state.toggleKey(key);
     },
     [key, manager],

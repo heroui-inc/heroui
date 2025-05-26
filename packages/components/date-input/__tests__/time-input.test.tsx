@@ -3,7 +3,7 @@ import * as React from "react";
 import {fireEvent, render} from "@testing-library/react";
 import {Time, ZonedDateTime} from "@internationalized/date";
 import {TimeValue} from "@react-types/datepicker";
-import {pointerMap, triggerPress} from "@nextui-org/test-utils";
+import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
 
 import {TimeInput as TimeInputBase, TimeInputProps} from "../src";
@@ -368,14 +368,27 @@ describe("TimeInput", () => {
 
   describe(`Validation (validationBehavior="aria")`, () => {
     it("should display errorMessage when timeValue is less than the minimum (controlled)", () => {
-      render(<TimeInput label="Time" minValue={new Time(9)} value={new Time(8)} />);
+      render(
+        <TimeInput
+          label="Time"
+          minValue={new Time(9)}
+          validationBehavior="aria"
+          value={new Time(8)}
+        />,
+      );
 
       expect(document.querySelector("[data-slot=error-message]")).toBeVisible();
     });
 
     it("should display errorMessage when timeValue is less than the minimum (uncontrolled)", async () => {
       const {getAllByRole} = render(
-        <TimeInput defaultValue={new Time(9)} label="Time" minValue={new Time(9)} name="time" />,
+        <TimeInput
+          defaultValue={new Time(9)}
+          label="Time"
+          minValue={new Time(9)}
+          name="time"
+          validationBehavior="aria"
+        />,
       );
 
       const input = document.querySelector("input[name=time]");
@@ -392,14 +405,27 @@ describe("TimeInput", () => {
     });
 
     it("should display errorMessage when timeValue is greater than the maximum (controlled)", () => {
-      render(<TimeInput label="Time" maxValue={new Time(17)} value={new Time(18)} />);
+      render(
+        <TimeInput
+          label="Time"
+          maxValue={new Time(17)}
+          validationBehavior="aria"
+          value={new Time(18)}
+        />,
+      );
 
       expect(document.querySelector("[data-slot=error-message]")).toBeVisible();
     });
 
     it("should display errorMessage when timeValue is greater than the maximum (uncontrolled)", async () => {
       const {getAllByRole} = render(
-        <TimeInput defaultValue={new Time(17)} label="Time" maxValue={new Time(17)} name="time" />,
+        <TimeInput
+          defaultValue={new Time(17)}
+          label="Time"
+          maxValue={new Time(17)}
+          name="time"
+          validationBehavior="aria"
+        />,
       );
 
       const input = document.querySelector("input[name=time]");

@@ -1,22 +1,18 @@
-import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@nextui-org/theme";
+import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@heroui/theme";
 
-import {
-  HTMLNextUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useProviderContext,
-} from "@nextui-org/system";
-import {navbar} from "@nextui-org/theme";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx, dataAttr, objectToDeps} from "@nextui-org/shared-utils";
-import {ReactRef} from "@nextui-org/react-utils";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {navbar} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef} from "@heroui/react-utils";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {mergeProps, useResizeObserver} from "@react-aria/utils";
-import {useScrollPosition} from "@nextui-org/use-scroll-position";
+import {useScrollPosition} from "@heroui/use-scroll-position";
 import {useControlledState} from "@react-stately/utils";
 import {HTMLMotionProps} from "framer-motion";
+import {usePreventScroll} from "@react-aria/overlays";
 
-interface Props extends HTMLNextUIProps<"nav"> {
+interface Props extends HTMLHeroUIProps<"nav"> {
   /**
    * Ref to the DOM node.
    */
@@ -47,6 +43,11 @@ interface Props extends HTMLNextUIProps<"nav"> {
    * @default false
    */
   shouldHideOnScroll?: boolean;
+  /**
+   * Whether the navbar should block scroll when the menu is open or not.
+   * @default false
+   */
+  shouldBlockScroll?: boolean;
   /**
    * Whether the navbar parent scroll event should be listened to or not.
    * @default false
@@ -102,6 +103,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
     height = "4rem",
     shouldHideOnScroll = false,
     disableScrollHandler = false,
+    shouldBlockScroll = true,
     onScrollPositionChange,
     isMenuOpen: isMenuOpenProp,
     isMenuDefaultOpen,
@@ -146,10 +148,19 @@ export function useNavbar(originalProps: UseNavbarProps) {
     }
   };
 
+  usePreventScroll({
+    isDisabled: !(shouldBlockScroll && isMenuOpen),
+  });
+
   useResizeObserver({
     ref: domRef,
     onResize: () => {
       const currentWidth = domRef.current?.offsetWidth;
+      const scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      if (currentWidth && currentWidth + scrollWidth == prevWidth.current) {
+        return;
+      }
 
       if (currentWidth !== prevWidth.current) {
         updateWidth();

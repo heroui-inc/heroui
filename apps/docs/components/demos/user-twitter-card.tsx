@@ -1,15 +1,14 @@
 "use client";
 
-import {useState, FC} from "react";
-import {Card, CardHeader, Button, Avatar, CardBody, CardFooter} from "@nextui-org/react";
-import {clsx} from "@nextui-org/shared-utils";
-import NextImage from "next/image";
+import {useState} from "react";
+import {Card, CardHeader, Button, Avatar, CardBody, CardFooter} from "@heroui/react";
+import {clsx} from "@heroui/shared-utils";
 
 interface UserTwitterCardProps {
   className?: string;
 }
 
-export const UserTwitterCard: FC<UserTwitterCardProps> = ({className}) => {
+export const UserTwitterCard = ({className}: UserTwitterCardProps) => {
   const [isFollowed, setIsFollowed] = useState(false);
 
   return (
@@ -18,7 +17,6 @@ export const UserTwitterCard: FC<UserTwitterCardProps> = ({className}) => {
         <div className="flex gap-5">
           <Avatar
             isBordered
-            ImgComponent={NextImage}
             alt="Zoey Lang"
             imgProps={{
               width: 40,
@@ -46,7 +44,7 @@ export const UserTwitterCard: FC<UserTwitterCardProps> = ({className}) => {
       </CardHeader>
       <CardBody className="px-3 py-0">
         <p className="text-sm pl-px text-default-400">
-          Full-stack developer, @getnextui lover she/her&nbsp;
+          Full-stack developer, @hero_ui lover she/her&nbsp;
           <span aria-label="confetti" role="img">
             🎉
           </span>

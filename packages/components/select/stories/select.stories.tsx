@@ -4,21 +4,15 @@ import type {ValidationResult} from "@react-types/shared";
 import React, {ChangeEvent} from "react";
 import {useForm} from "react-hook-form";
 import {Meta} from "@storybook/react";
-import {select, button} from "@nextui-org/theme";
-import {PetBoldIcon, SelectorIcon} from "@nextui-org/shared-icons";
-import {Avatar} from "@nextui-org/avatar";
-import {Chip} from "@nextui-org/chip";
-import {Button} from "@nextui-org/button";
+import {select, button} from "@heroui/theme";
+import {PetBoldIcon, SelectorIcon} from "@heroui/shared-icons";
+import {Avatar} from "@heroui/avatar";
+import {Chip} from "@heroui/chip";
+import {Button} from "@heroui/button";
 import {Selection} from "@react-types/shared";
-import {useInfiniteScroll} from "@nextui-org/use-infinite-scroll";
-import {
-  Pokemon,
-  usePokemonList,
-  animalsData,
-  usersData,
-  Animal,
-  User,
-} from "@nextui-org/stories-utils";
+import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
+import {Pokemon, usePokemonList, animalsData, usersData, Animal, User} from "@heroui/stories-utils";
+import {Form} from "@heroui/form";
 
 import {Select, SelectedItems, SelectItem, SelectProps, SelectSection} from "../src";
 
@@ -75,11 +69,7 @@ const defaultProps = {
   ...select.defaultVariants,
 };
 
-const items = animalsData.map((item) => (
-  <SelectItem key={item.value} value={item.value}>
-    {item.label}
-  </SelectItem>
-));
+const items = animalsData.map((item) => <SelectItem key={item.value}>{item.label}</SelectItem>);
 
 const Template = ({color, variant, ...args}: SelectProps) => (
   <Select className="max-w-xs" color={color} label="Favorite Animal" variant={variant} {...args}>
@@ -277,6 +267,100 @@ const FormTemplate = ({color, variant, ...args}: SelectProps) => {
   );
 };
 
+const ServerValidationTemplate = (args: SelectProps) => {
+  const [submittedData, setSubmittedData] = React.useState<{animal: string} | null>(null);
+  const [serverErrors, setServerErrors] = React.useState({});
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const value = formData.get("animal");
+
+    if (!value) {
+      setServerErrors({
+        animal: "Please select a valid value",
+      });
+
+      return;
+    }
+
+    if (!value || (value !== "cat" && value !== "dog")) {
+      setServerErrors({
+        animal: "Please select a cat or dog",
+      });
+    } else {
+      setServerErrors({});
+      setSubmittedData({animal: value});
+    }
+  };
+
+  return (
+    <Form
+      className="w-full flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <Select isRequired {...args} className="max-w-xs" label="Favorite Animal" name="animal">
+        {items}
+      </Select>
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+      {submittedData && (
+        <div className="text-small text-default-500">
+          You submitted: <code>{JSON.stringify(submittedData)}</code>
+        </div>
+      )}
+    </Form>
+  );
+};
+
+const ServerValidationTemplateWithMultiple = (args: SelectProps) => {
+  const [submittedData, setSubmittedData] = React.useState<{animals: string[]} | null>(null);
+  const [serverErrors, setServerErrors] = React.useState({});
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const values = formData.getAll("animals");
+
+    if (!values.length || !values.every((v) => v === "cat" || v === "dog")) {
+      setServerErrors({
+        animals: "Please select only cats and/or dogs",
+      });
+    } else {
+      setServerErrors({});
+      setSubmittedData({animals: values as string[]});
+    }
+  };
+
+  return (
+    <Form
+      className="w-full flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <Select
+        {...args}
+        className="max-w-xs"
+        label="Favorite Animals"
+        name="animals"
+        selectionMode="multiple"
+      >
+        {items}
+      </Select>
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+      {submittedData && (
+        <div className="text-small text-default-500">
+          You submitted: <code>{JSON.stringify(submittedData)}</code>
+        </div>
+      )}
+    </Form>
+  );
+};
+
 const MirrorTemplate = ({color, variant, ...args}: SelectProps) => (
   <div className="w-full max-w-xl flex flex-row gap-4">
     <Select className="max-w-xs" color={color} label="Select an animal" variant={variant} {...args}>
@@ -297,7 +381,7 @@ const MirrorTemplate = ({color, variant, ...args}: SelectProps) => (
 
 const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
   <div className="w-full flex flex-col items-center gap-12">
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>Without placeholder</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select color={color} label="Select an animal" variant={variant} {...args}>
@@ -323,7 +407,7 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         </Select>
       </div>
     </div>
-    <div className="w-full max-w-2xl flex flex-col gap-3">
+    <div className="w-full max-w-5xl flex flex-col gap-3">
       <h3>With placeholder</h3>
       <div className="w-full flex flex-row items-end gap-4">
         <Select
@@ -357,6 +441,43 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         </Select>
       </div>
     </div>
+    <div className="w-full max-w-5xl flex flex-col gap-3">
+      <h3>With placeholder and description</h3>
+      <div className="w-full flex flex-row items-end gap-4">
+        <Select
+          color={color}
+          description="Select your favorite animal"
+          label="Favorite Animal"
+          placeholder="Select an animal"
+          variant={variant}
+          {...args}
+        >
+          {items}
+        </Select>
+        <Select
+          color={color}
+          description="Select your favorite animal"
+          label="Favorite Animal"
+          placeholder="Select an animal"
+          variant={variant}
+          {...args}
+          labelPlacement="outside"
+        >
+          {items}
+        </Select>
+        <Select
+          color={color}
+          description="Select your favorite animal"
+          label="Favorite Animal"
+          placeholder="Select an animal"
+          variant={variant}
+          {...args}
+          labelPlacement="outside-left"
+        >
+          {items}
+        </Select>
+      </div>
+    </div>
   </div>
 );
 
@@ -372,6 +493,31 @@ const StartContentTemplate = ({color, variant, ...args}: SelectProps) => (
   >
     {items}
   </Select>
+);
+
+const EmptyTemplate = ({color, variant, ...args}: SelectProps) => (
+  <div className="w-full justify-center flex gap-2">
+    <Select
+      hideEmptyContent
+      className="max-w-xs"
+      color={color}
+      label="Hide empty content"
+      variant={variant}
+      {...args}
+    >
+      {[]}
+    </Select>
+    <Select
+      className="max-w-xs"
+      color={color}
+      hideEmptyContent={false}
+      label="Show empty content"
+      variant={variant}
+      {...args}
+    >
+      {[]}
+    </Select>
+  </div>
 );
 
 const CustomItemsTemplate = ({color, variant, ...args}: SelectProps<User>) => (
@@ -692,6 +838,164 @@ const ScrollableContainerTemplate = (args: SelectProps) => {
   );
 };
 
+interface LargeDatasetSchema {
+  label: string;
+  value: string;
+  description: string;
+}
+
+function generateLargeDataset(n: number): LargeDatasetSchema[] {
+  const dataset: LargeDatasetSchema[] = [];
+  const items = [
+    "Cat",
+    "Dog",
+    "Elephant",
+    "Lion",
+    "Tiger",
+    "Giraffe",
+    "Dolphin",
+    "Penguin",
+    "Zebra",
+    "Shark",
+    "Whale",
+    "Otter",
+    "Crocodile",
+  ];
+
+  for (let i = 0; i < n; i++) {
+    const item = items[i % items.length];
+
+    dataset.push({
+      label: `${item}${i}`,
+      value: `${item.toLowerCase()}${i}`,
+      description: "Sample description",
+    });
+  }
+
+  return dataset;
+}
+
+const LargeDatasetTemplate = (args: SelectProps & {numItems: number}) => {
+  const largeDataset = generateLargeDataset(args.numItems);
+
+  return (
+    <div className="flex w-full max-w-full py-20 xl:px-32 lg:px-20 px-20">
+      <Select label={`Select from ${args.numItems} items`} {...args}>
+        {largeDataset.map((item) => (
+          <SelectItem key={item.value}>{item.label}</SelectItem>
+        ))}
+      </Select>
+    </div>
+  );
+};
+
+const ValidationBehaviorAriaTemplate = (args: SelectProps) => {
+  // Custom validation example
+  const CustomValidationExample = () => {
+    return (
+      <Select
+        {...args}
+        className="max-w-xs"
+        label="Favorite Animal"
+        placeholder="Select an animal"
+        validate={(value) => {
+          if (typeof value === "string" && value === "penguin") {
+            return "Penguins are not allowed";
+          }
+
+          return null;
+        }}
+        validationBehavior="aria"
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>
+    );
+  };
+
+  //Custom validation example multiple
+  const CustomValidationExampleMultiple = () => {
+    return (
+      <Select
+        {...args}
+        className="max-w-xs"
+        label="Favorite Animal"
+        placeholder="Select an animal"
+        selectionMode="multiple"
+        validate={(value) => {
+          if (Array.isArray(value) && value.includes("penguin")) {
+            return "Penguins are not allowed";
+          }
+
+          return null;
+        }}
+        validationBehavior="aria"
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>
+    );
+  };
+
+  // Server validation example
+  const ServerValidationExample = () => {
+    const [serverErrors, setServerErrors] = React.useState({});
+
+    const onSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      const formData = new FormData(e.target as HTMLFormElement);
+      const value = formData.get("animal");
+
+      if (value === "penguin") {
+        setServerErrors({
+          animal: "Server says: No penguins allowed!",
+        });
+      } else {
+        setServerErrors({});
+      }
+    };
+
+    return (
+      <Form
+        className="w-full flex flex-col items-start gap-2"
+        validationErrors={serverErrors}
+        onSubmit={onSubmit}
+      >
+        <Select className="max-w-xs" label="Select Animal" name="animal" validationBehavior="aria">
+          <SelectItem key="penguin">Penguin</SelectItem>
+          <SelectItem key="zebra">Zebra</SelectItem>
+          <SelectItem key="shark">Shark</SelectItem>
+        </Select>
+        <button className={button({color: "primary"})} type="submit">
+          Validate
+        </button>
+      </Form>
+    );
+  };
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <h3 className="text-default-500">Custom Validation</h3>
+        <p className="text-small text-default-400">Try selecting a penguin</p>
+        <CustomValidationExample />
+      </div>
+      <div className="flex flex-col gap-2">
+        <h3 className="text-default-500">Custom Validation Multiple</h3>
+        <p className="text-small text-default-400">Try selecting a penguin</p>
+        <CustomValidationExampleMultiple />
+      </div>
+      <div className="flex flex-col gap-2">
+        <h3 className="text-default-500">Server Validation</h3>
+        <p className="text-small text-default-400">Select a penguin and click validate</p>
+        <ServerValidationExample />
+      </div>
+    </div>
+  );
+};
+
 export const Default = {
   render: MirrorTemplate,
 
@@ -768,6 +1072,14 @@ export const AsyncLoading = {
 
 export const StartContent = {
   render: StartContentTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const EmptyContent = {
+  render: EmptyTemplate,
 
   args: {
     ...defaultProps,
@@ -904,6 +1216,22 @@ export const WithReactHookForm = {
   },
 };
 
+export const WithServerValidation = {
+  render: ServerValidationTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithServerValidationMultiple = {
+  render: ServerValidationTemplateWithMultiple,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
 export const WithScrollableContainer = {
   render: ScrollableContainerTemplate,
 
@@ -1005,4 +1333,172 @@ export const CustomStyles = {
       ));
     },
   },
+};
+
+export const OneThousandList = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    placeholder: "Select an item...",
+    numItems: 1000,
+    isVirtualized: true,
+  },
+};
+
+export const TenThousandList = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    placeholder: "Select an item...",
+    numItems: 10000,
+    isVirtualized: true,
+  },
+};
+
+export const CustomMaxListboxHeight = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    placeholder: "Select an item...",
+    numItems: 1000,
+    isVirtualized: true,
+    maxListboxHeight: 400,
+  },
+};
+
+export const CustomItemHeight = {
+  render: LargeDatasetTemplate,
+  args: {
+    ...defaultProps,
+    placeholder: "Select an item...",
+    numItems: 1000,
+    isVirtualized: true,
+    maxListboxHeight: 400,
+    itemHeight: 40,
+  },
+};
+
+const AVATAR_DECORATIONS: {[key: string]: string[]} = {
+  arcane: ["jinx", "atlas-gauntlets", "flame-chompers", "fishbones", "hexcore", "shimmer"],
+  anime: ["cat-ears", "heart-bloom", "in-love", "in-tears", "soul-leaving-body", "starry-eyed"],
+  "lofi-vibes": ["chromawave", "cozy-cat", "cozy-headphones", "doodling", "rainy-mood"],
+  valorant: [
+    "a-hint-of-clove",
+    "blade-storm",
+    "cypher",
+    "frag-out",
+    "omen-cowl",
+    "reyna-leer",
+    "vct-supernova",
+    "viper",
+    "yoru",
+    "carnalito2",
+    "a-hint-of-clove2",
+    "blade-storm2",
+    "cypher2",
+    "frag-out2",
+    "omen-cowl2",
+    "reyna-leer2",
+    "vct-supernova2",
+    "viper2",
+    "yoru2",
+    "carnalito3",
+    "a-hint-of-clove3",
+    "blade-storm3",
+    "cypher3",
+    "frag-out3",
+    "omen-cowl3",
+    "reyna-leer3",
+    "vct-supernova3",
+    "viper3",
+    "yoru3",
+    "carnalito4",
+    "a-hint-of-clove4",
+    "blade-storm4",
+    "cypher4",
+    "frag-out4",
+    "omen-cowl4",
+    "reyna-leer4",
+    "vct-supernova4",
+    "viper4",
+    "yoru4",
+  ],
+  spongebob: [
+    "flower-clouds",
+    "gary-the-snail",
+    "imagination",
+    "musclebob",
+    "sandy-cheeks",
+    "spongebob",
+  ],
+  arcade: ["clyde-invaders", "hot-shot", "joystick", "mallow-jump", "pipedream", "snake"],
+  "street-fighter": ["akuma", "cammy", "chun-li", "guile", "juri", "ken", "m.bison", "ryu"],
+};
+
+export const NonVirtualizedVsVirtualizedWithSections = {
+  render: () => {
+    const SelectComponent = ({isVirtualized}: {isVirtualized: boolean}) => (
+      <Select
+        disallowEmptySelection
+        className="max-w-xs"
+        color="secondary"
+        defaultSelectedKeys={["jinx"]}
+        isVirtualized={isVirtualized}
+        label={`Avatar Decoration ${isVirtualized ? "(Virtualized)" : "(Non-virtualized)"}`}
+        selectedKeys={["jinx"]}
+        selectionMode="single"
+        variant="bordered"
+      >
+        {Object.keys(AVATAR_DECORATIONS).map((key) => (
+          <SelectSection
+            key={key}
+            classNames={{
+              heading: "uppercase text-secondary",
+            }}
+            title={key}
+          >
+            {AVATAR_DECORATIONS[key].map((item) => (
+              <SelectItem key={item} className="capitalize" color="secondary" variant="bordered">
+                {item.replace(/-/g, " ")}
+              </SelectItem>
+            ))}
+          </SelectSection>
+        ))}
+      </Select>
+    );
+
+    return (
+      <div className="flex gap-4 w-full">
+        <SelectComponent isVirtualized={false} />
+        <SelectComponent isVirtualized={true} />
+      </div>
+    );
+  },
+};
+
+export const ValidationBehaviorAria = {
+  render: ValidationBehaviorAriaTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const PopoverTopOrBottom = {
+  args: {
+    ...defaultProps,
+  },
+  render: (args) => (
+    <div className="relative h-screen w-screen">
+      <div className="absolute top-0 p-8">
+        <div className="w-48">
+          <Template {...args} />
+        </div>
+      </div>
+      <div className="absolute top-1/2 p-8">
+        <div className="w-48">
+          <Template {...args} />
+        </div>
+      </div>
+    </div>
+  ),
 };

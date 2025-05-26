@@ -1,21 +1,18 @@
 import type {MenuItemBaseProps} from "./base/menu-item-base";
-import type {Node} from "@react-types/shared";
+import type {MenuItemVariantProps} from "@heroui/theme";
+import type {Node, PressEvent} from "@react-types/shared";
 
 import {useMemo, useRef, useCallback} from "react";
-import {menuItem} from "@nextui-org/theme";
-import {
-  HTMLNextUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useProviderContext,
-} from "@nextui-org/system";
+import {menuItem} from "@heroui/theme";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
 import {TreeState} from "@react-stately/tree";
-import {clsx, dataAttr, objectToDeps, removeEvents} from "@nextui-org/shared-utils";
-import {useAriaMenuItem} from "@nextui-org/use-aria-menu";
+import {clsx, dataAttr, objectToDeps, removeEvents} from "@heroui/shared-utils";
+import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
+import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
-import {useIsMobile} from "@nextui-org/use-is-mobile";
-import {filterDOMProps} from "@nextui-org/react-utils";
+import {useIsMobile} from "@heroui/use-is-mobile";
+import {filterDOMProps} from "@heroui/react-utils";
 
 interface Props<T extends object> extends MenuItemBaseProps<T> {
   item: Node<T>;
@@ -23,7 +20,8 @@ interface Props<T extends object> extends MenuItemBaseProps<T> {
 }
 
 export type UseMenuItemProps<T extends object> = Props<T> &
-  Omit<HTMLNextUIProps<"li">, keyof Props<T>>;
+  Omit<HTMLHeroUIProps<"li">, keyof Props<T>> &
+  MenuItemVariantProps;
 
 export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>) {
   const globalContext = useProviderContext();
@@ -44,16 +42,19 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     classNames,
     onAction,
     autoFocus,
-    onClick,
     onPress,
     onPressStart,
     onPressUp,
     onPressEnd,
     onPressChange,
+    onHoverStart: hoverStartProp,
+    onHoverChange,
+    onHoverEnd,
     hideSelectedIcon = false,
     isReadOnly = false,
     closeOnSelect,
     onClose,
+    onClick,
     ...otherProps
   } = props;
 
@@ -67,7 +68,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
 
   const {rendered, key} = item;
 
-  const isDisabled = state.disabledKeys.has(key) || originalProps.isDisabled;
+  const isDisabledProp = state.disabledKeys.has(key) || originalProps.isDisabled;
   const isSelectable = state.selectionManager.selectionMode !== "none";
 
   const isMobile = useIsMobile();
@@ -76,11 +77,19 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     autoFocus,
   });
 
+  const handlePress = useCallback(
+    (e: PressEvent) => {
+      onClick?.(e as unknown as React.MouseEvent<HTMLLIElement | HTMLAnchorElement>);
+      onPress?.(e);
+    },
+    [onClick, onPress],
+  );
+
   const {
-    isHovered,
     isPressed,
     isFocused,
     isSelected,
+    isDisabled,
     menuItemProps,
     labelProps,
     descriptionProps,
@@ -89,9 +98,8 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     {
       key,
       onClose,
-      isDisabled,
-      onPress,
-      onClick,
+      isDisabled: isDisabledProp,
+      onPress: handlePress,
       onPressStart,
       onPressUp,
       onPressEnd,
@@ -105,6 +113,21 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     domRef,
   );
 
+  // `useMenuItem` from react-aria doesn't expose `isHovered`
+  // hence, cover the logic here
+  let {hoverProps, isHovered} = useHover({
+    isDisabled,
+    onHoverStart(e) {
+      if (!AriaIsFocusVisible()) {
+        state.selectionManager.setFocused(true);
+        state.selectionManager.setFocusedKey(key);
+      }
+      hoverStartProp?.(e);
+    },
+    onHoverChange,
+    onHoverEnd,
+  });
+
   let itemProps = menuItemProps;
 
   const slots = useMemo(
@@ -113,8 +136,10 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
         ...variantProps,
         isDisabled,
         disableAnimation,
+        hasTitleTextChild: typeof rendered === "string",
+        hasDescriptionTextChild: typeof description === "string",
       }),
-    [objectToDeps(variantProps), isDisabled, disableAnimation],
+    [objectToDeps(variantProps), isDisabled, disableAnimation, rendered, description],
   );
 
   const baseStyles = clsx(classNames?.base, className);
@@ -131,6 +156,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
         enabled: shouldFilterDOMProps,
       }),
       itemProps,
+      hoverProps,
       props,
     ),
     "data-focus": dataAttr(isFocused),

@@ -1,35 +1,38 @@
-import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@nextui-org/theme";
+import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {HiddenSelectProps} from "./hidden-select";
 
 import {
   DOMAttributes,
-  HTMLNextUIProps,
+  HTMLHeroUIProps,
   mapPropsVariants,
   PropGetter,
   SharedSelection,
+  useLabelPlacement,
   useProviderContext,
-} from "@nextui-org/system";
-import {select} from "@nextui-org/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@nextui-org/react-utils";
+} from "@heroui/system";
+import {select} from "@heroui/theme";
+import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useMemo, useCallback, useRef, Key, ReactNode, useEffect} from "react";
-import {ListboxProps} from "@nextui-org/listbox";
-import {useAriaButton} from "@nextui-org/use-aria-button";
+import {ListboxProps} from "@heroui/listbox";
+import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@nextui-org/shared-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {useHover} from "@react-aria/interactions";
-import {PopoverProps} from "@nextui-org/popover";
-import {ScrollShadowProps} from "@nextui-org/scroll-shadow";
+import {PopoverProps} from "@heroui/popover";
+import {ScrollShadowProps} from "@heroui/scroll-shadow";
 import {
   MultiSelectProps,
   MultiSelectState,
   useMultiSelect,
   useMultiSelectState,
-} from "@nextui-org/use-aria-multiselect";
-import {SpinnerProps} from "@nextui-org/spinner";
-import {useSafeLayoutEffect} from "@nextui-org/use-safe-layout-effect";
-import {ariaShouldCloseOnInteractOutside} from "@nextui-org/aria-utils";
-import {CollectionChildren} from "@react-types/shared";
+} from "@heroui/use-aria-multiselect";
+import {SpinnerProps} from "@heroui/spinner";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
+import {CollectionChildren, ValidationError} from "@react-types/shared";
+import {FormContext, useSlottedContext} from "@heroui/form";
+import {usePreventScroll} from "@react-aria/overlays";
 
 export type SelectedItemProps<T = object> = {
   /** A unique key for the item. */
@@ -50,7 +53,7 @@ export type SelectedItemProps<T = object> = {
 
 export type SelectedItems<T = object> = Array<SelectedItemProps<T>>;
 
-interface Props<T> extends Omit<HTMLNextUIProps<"select">, keyof SelectVariantProps> {
+interface Props<T> extends Omit<HTMLHeroUIProps<"select">, keyof SelectVariantProps> {
   /**
    * Ref to the DOM node.
    */
@@ -133,11 +136,19 @@ interface Props<T> extends Omit<HTMLNextUIProps<"select">, keyof SelectVariantPr
    * Handler that is called when the selection changes.
    */
   onSelectionChange?: (keys: SharedSelection) => void;
+  /**
+   * A function that returns an error message if a given value is invalid.
+   * Validation errors are displayed to the user when the form is submitted
+   * if `validationBehavior="native"`. For realtime validation, use the `isInvalid`
+   * prop instead.
+   */
+  validate?: (value: string | string[]) => ValidationError | true | null | undefined;
 }
 
 interface SelectData {
   isDisabled?: boolean;
   isRequired?: boolean;
+  isInvalid?: boolean;
   name?: string;
   validationBehavior?: "aria" | "native";
 }
@@ -149,10 +160,35 @@ export type UseSelectProps<T> = Omit<
   keyof Omit<MultiSelectProps<T>, "onSelectionChange">
 > &
   Omit<MultiSelectProps<T>, "onSelectionChange"> &
-  SelectVariantProps;
+  SelectVariantProps & {
+    /**
+     * The height of each item in the listbox.
+     * For dataset with sections, the itemHeight must be the height of each item (including padding, border, margin).
+     * This is required for virtualized listboxes to calculate the height of each item.
+     * @default 36
+     */
+    itemHeight?: number;
+    /**
+     * The max height of the listbox (which will be rendered in a popover).
+     * This is required for virtualized listboxes to set the maximum height of the listbox.
+     */
+    maxListboxHeight?: number;
+    /**
+     * Whether to enable virtualization of the listbox items.
+     * By default, virtualization is automatically enabled when the number of items is greater than 50.
+     * @default undefined
+     */
+    isVirtualized?: boolean;
+    /**
+     * Whether the listbox will be prevented from opening when there are no items.
+     * @default false
+     */
+    hideEmptyContent?: boolean;
+  };
 
 export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   const globalContext = useProviderContext();
+  const {validationBehavior: formValidationBehavior} = useSlottedContext(FormContext) || {};
 
   const [props, variantProps] = mapPropsVariants(originalProps, select.variantKeys);
 
@@ -175,6 +211,9 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     renderValue,
     onSelectionChange,
     placeholder,
+    isVirtualized,
+    itemHeight = 36,
+    maxListboxHeight = 256,
     children,
     disallowEmptySelection = false,
     selectionMode = "single",
@@ -189,6 +228,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     onClose,
     className,
     classNames,
+    validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
+    hideEmptyContent = false,
     ...otherProps
   } = props;
 
@@ -238,10 +279,13 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     isOpen,
     selectionMode,
     disallowEmptySelection,
+    validationBehavior,
     children: children as CollectionChildren<T>,
     isRequired: originalProps.isRequired,
     isDisabled: originalProps.isDisabled,
+    isInvalid: originalProps.isInvalid,
     defaultOpen,
+    hideEmptyContent,
     onOpenChange: (open) => {
       onOpenChange?.(open);
       if (!open) {
@@ -261,6 +305,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
           },
         } as React.ChangeEvent<HTMLSelectElement>);
       }
+      state.commitValidation();
     },
   });
 
@@ -303,18 +348,13 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   const {focusProps, isFocused, isFocusVisible} = useFocusRing();
   const {isHovered, hoverProps} = useHover({isDisabled: originalProps.isDisabled});
 
-  const labelPlacement = useMemo<SelectVariantProps["labelPlacement"]>(() => {
-    if ((!originalProps.labelPlacement || originalProps.labelPlacement === "inside") && !label) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, label]);
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const hasPlaceholder = !!placeholder;
-  const shouldLabelBeOutside =
-    labelPlacement === "outside-left" ||
-    (labelPlacement === "outside" && (hasPlaceholder || !!originalProps.isMultiline));
+  const shouldLabelBeOutside = labelPlacement === "outside-left" || labelPlacement === "outside";
   const shouldLabelBeInside = labelPlacement === "inside";
   const isOutsideLeft = labelPlacement === "outside-left";
 
@@ -327,6 +367,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     !!originalProps.isMultiline;
   const hasValue = !!state.selectedItems?.length;
   const hasLabel = !!label;
+  const hasLabelOutside = hasLabel && (isOutsideLeft || (shouldLabelBeOutside && hasPlaceholder));
 
   const baseStyles = clsx(classNames?.base, className);
 
@@ -337,9 +378,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         isInvalid,
         labelPlacement,
         disableAnimation,
-        className,
       }),
-    [objectToDeps(variantProps), isInvalid, labelPlacement, disableAnimation, className],
+    [objectToDeps(variantProps), isInvalid, labelPlacement, disableAnimation],
   );
 
   // scroll the listbox to the selected item
@@ -360,6 +400,10 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       }
     }
   }, [state.isOpen, disableAnimation]);
+
+  usePreventScroll({
+    isDisabled: !state.isOpen,
+  });
 
   const errorMessage =
     typeof props.errorMessage === "function"
@@ -386,12 +430,13 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       "data-has-label": dataAttr(hasLabel),
       "data-has-helper": dataAttr(hasHelper),
       "data-invalid": dataAttr(isInvalid),
+      "data-has-label-outside": dataAttr(hasLabelOutside),
       className: slots.base({
         class: clsx(baseStyles, props.className),
       }),
       ...props,
     }),
-    [slots, hasHelper, hasValue, hasLabel, isFilled, baseStyles],
+    [slots, hasHelper, hasValue, hasLabel, hasLabelOutside, isFilled, baseStyles],
   );
 
   const getTriggerProps: PropGetter = useCallback(
@@ -447,6 +492,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         isRequired: originalProps?.isRequired,
         autoComplete: originalProps?.autoComplete,
         isDisabled: originalProps?.isDisabled,
+        form: originalProps?.form,
         onChange,
         ...props,
       } as HiddenSelectProps<T>),
@@ -491,19 +537,38 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       className: slots.listboxWrapper({
         class: clsx(classNames?.listboxWrapper, props?.className),
       }),
+      style: {
+        maxHeight: maxListboxHeight ?? 256,
+        ...props.style,
+      },
       ...mergeProps(slotsProps.scrollShadowProps, props),
     }),
-    [slots.listboxWrapper, classNames?.listboxWrapper, slotsProps.scrollShadowProps],
+    [
+      slots.listboxWrapper,
+      classNames?.listboxWrapper,
+      slotsProps.scrollShadowProps,
+      maxListboxHeight,
+    ],
   );
 
   const getListboxProps = (props: any = {}) => {
+    const shouldVirtualize = isVirtualized ?? state.collection.size > 50;
+
     return {
       state,
       ref: listBoxRef,
+      isVirtualized: shouldVirtualize,
+      virtualization: shouldVirtualize
+        ? {
+            maxListboxHeight,
+            itemHeight,
+          }
+        : undefined,
       "data-slot": "listbox",
       className: slots.listbox({
         class: clsx(classNames?.listbox, props?.className),
       }),
+      scrollShadowProps: slotsProps.scrollShadowProps,
       ...mergeProps(slotsProps.listboxProps, props, menuProps),
     } as ListboxProps;
   };
@@ -611,7 +676,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       return {
         ...props,
         ...errorMessageProps,
-        "data-slot": "errorMessage",
+        "data-slot": "error-message",
         className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
       };
     },
@@ -639,8 +704,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     isDisabled: originalProps?.isDisabled,
     isRequired: originalProps?.isRequired,
     name: originalProps?.name,
-    // TODO: Future enhancement to support "aria" validation behavior.
-    validationBehavior: "native",
+    isInvalid,
+    validationBehavior,
   });
 
   return {

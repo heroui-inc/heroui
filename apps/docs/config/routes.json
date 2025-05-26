@@ -2,46 +2,65 @@
   "routes": [
     {
       "key": "guide",
-      "title": "Guide",
+      "title": "Getting Started",
       "defaultOpen": true,
-      "keywords": "guide, getting started, start, nextui",
+      "keywords": "guide, getting started, start, heroui",
       "routes": [
         {
           "key": "introduction",
           "title": "Introduction",
-          "keywords": "introduction, nextui",
+          "keywords": "introduction, heroui",
           "path": "/docs/guide/introduction.mdx"
+        },
+        {
+          "key": "design-principles",
+          "title": "Design Principles",
+          "keywords": "design principles, heroui",
+          "path": "/docs/guide/design-principles.mdx"
         },
         {
           "key": "installation",
           "title": "Installation",
-          "keywords": "getting started, installation, start, nextui",
+          "keywords": "getting started, installation, start, heroui",
           "path": "/docs/guide/installation.mdx"
         },
         {
           "key": "cli",
           "title": "CLI",
           "keywords": "cli, command line interface",
-          "path": "/docs/guide/cli.mdx",
-          "newPost": true
-        },
-        {
-          "key": "design-principles",
-          "title": "Design Principles",
-          "keywords": "design principles, nextui",
-          "path": "/docs/guide/design-principles.mdx"
+          "path": "/docs/guide/cli.mdx"
         },
         {
           "key": "routing",
           "title": "Routing",
-          "keywords": "client side routing, routing, browser routing, nextui, next.js router, react router, remix router",
+          "keywords": "client side routing, routing, browser routing, heroui, next.js router, react router, remix router",
           "path": "/docs/guide/routing.mdx"
         },
         {
-          "key": "upgrade-to-v2",
-          "title": "Upgrade to v2",
-          "keywords": "upgrade, v2, nextui",
-          "path": "/docs/guide/upgrade-to-v2.mdx"
+          "key": "forms",
+          "title": "Forms",
+          "keywords": "forms, form validation, heroui",
+          "path": "/docs/guide/forms.mdx",
+          "updated": true
+        },
+        {
+          "key": "tailwind-v4",
+          "title": "Tailwind v4",
+          "keywords": "migrate, tailwind, v4, heroui",
+          "path": "/docs/guide/tailwind-v4.mdx",
+          "newPost": true
+        },
+        {
+          "key": "nextui-to-heroui",
+          "title": "NextUI to HeroUI",
+          "keywords": "migrate, nextui, hero, heroui",
+          "path": "/docs/guide/nextui-to-heroui.mdx"
+        },
+        {
+          "key": "figma",
+          "title": "Figma",
+          "keywords": "figma, design, ui kit",
+          "path": "/docs/guide/figma.mdx"
         }
       ]
     },
@@ -49,38 +68,44 @@
       "key": "frameworks",
       "title": "Frameworks",
       "defaultOpen": true,
-      "keywords": "frameworks, nextjs + nextui, vite + nextui, remix + nextui, astro + nextui",
+      "keywords": "frameworks, nextjs + heroui, vite + heroui, remix + heroui, astro + heroui",
       "routes": [
         {
           "key": "nextjs",
           "title": "Next.js",
-          "keywords": "nextjs, nextui, next.js",
+          "keywords": "nextjs, heroui, next.js",
           "path": "/docs/frameworks/nextjs.mdx"
         },
         {
           "key": "vite",
           "title": "Vite",
-          "keywords": "vite, nextui",
+          "keywords": "vite, heroui",
           "path": "/docs/frameworks/vite.mdx"
         },
         {
           "key": "remix",
           "title": "Remix",
-          "keywords": "remix, nextui",
+          "keywords": "remix, heroui",
           "path": "/docs/frameworks/remix.mdx"
         },
         {
           "key": "astro",
           "title": "Astro",
-          "keywords": "astro, nextui",
+          "keywords": "astro, heroui",
           "path": "/docs/frameworks/astro.mdx"
+        },
+        {
+          "key": "laravel",
+          "title": "Laravel",
+          "keywords": "laravel, nextui",
+          "path": "/docs/frameworks/laravel.mdx"
         }
       ]
     },
     {
       "key": "customization",
       "title": "Customization",
-      "keywords": "customization, nextui, themes, colors, dark mode, override styles",
+      "keywords": "customization, heroui, themes, colors, dark mode, override styles",
       "defaultOpen": true,
       "routes": [
         {
@@ -91,8 +116,7 @@
         {
           "key": "layout",
           "title": "Layout",
-          "path": "/docs/customization/layout.mdx",
-          "updated": true
+          "path": "/docs/customization/layout.mdx"
         },
         {
           "key": "colors",
@@ -145,6 +169,12 @@
           "path": "/docs/components/autocomplete.mdx"
         },
         {
+          "key": "alert",
+          "title": "Alert",
+          "keywords": "alert, notification, message",
+          "path": "/docs/components/alert.mdx"
+        },
+        {
           "key": "avatar",
           "title": "Avatar",
           "keywords": "avatar, profile picture, user representation, identity",
@@ -154,8 +184,7 @@
           "key": "badge",
           "title": "Badge",
           "keywords": "badge, markers, status indication, count display",
-          "path": "/docs/components/badge.mdx",
-          "updated": true
+          "path": "/docs/components/badge.mdx"
         },
         {
           "key": "breadcrumbs",
@@ -173,8 +202,7 @@
           "key": "calendar",
           "title": "Calendar",
           "keywords": "calendar, date picker, month picker, year picker",
-          "path": "/docs/components/calendar.mdx",
-          "newPost": true
+          "path": "/docs/components/calendar.mdx"
         },
         {
           "key": "card",
@@ -217,22 +245,19 @@
           "key": "date-input",
           "title": "Date Input",
           "keywords": "date-input, time, input, timezone",
-          "path": "/docs/components/date-input.mdx",
-          "newPost": true
+          "path": "/docs/components/date-input.mdx"
         },
         {
           "key": "date-picker",
           "title": "Date Picker",
           "keywords": "date-picker, time, input, timezone",
-          "path": "/docs/components/date-picker.mdx",
-          "newPost": true
+          "path": "/docs/components/date-picker.mdx"
         },
         {
           "key": "date-range-picker",
           "title": "Date Range Picker",
           "keywords": "date-range-picker, date-picker, time, input, timezone",
-          "path": "/docs/components/date-range-picker.mdx",
-          "newPost": true
+          "path": "/docs/components/date-range-picker.mdx"
         },
         {
           "key": "divider",
@@ -247,6 +272,18 @@
           "path": "/docs/components/dropdown.mdx"
         },
         {
+          "key": "drawer",
+          "title": "Drawer",
+          "keywords": "drawer, panel, slide, overlay",
+          "path": "/docs/components/drawer.mdx"
+        },
+        {
+          "key": "form",
+          "title": "Form",
+          "keywords": "forms, form validation, heroui",
+          "path": "/docs/components/form.mdx"
+        },
+        {
           "key": "image",
           "title": "Image",
           "keywords": "image, media, picture, photo, graphic display",
@@ -256,13 +293,22 @@
           "key": "input",
           "title": "Input",
           "keywords": "input, text box, form field, data entry",
-          "path": "/docs/components/input.mdx"
+          "path": "/docs/components/input.mdx",
+          "updated": true
+        },
+        {
+          "key": "input-otp",
+          "title": "Input OTP",
+          "keywords": "input, otp, auth, verification code",
+          "path": "/docs/components/input-otp.mdx",
+          "updated": true
         },
         {
           "key": "kbd",
           "title": "Kbd",
           "keywords": "keyboard input, shortcut, keys, user input display",
-          "path": "/docs/components/kbd.mdx"
+          "path": "/docs/components/kbd.mdx",
+          "updated": true
         },
         {
           "key": "link",
@@ -289,6 +335,13 @@
           "path": "/docs/components/navbar.mdx"
         },
         {
+          "key": "number-input",
+          "title": "Number Input",
+          "keywords": "input, numeric input, number input",
+          "path": "/docs/components/number-input.mdx",
+          "newPost": true
+        },
+        {
           "key": "pagination",
           "title": "Pagination",
           "keywords": "pagination, page navigation, content division, browsing control",
@@ -310,14 +363,14 @@
           "key": "radio-group",
           "title": "Radio Group",
           "keywords": "radio group, selection set, option selection, exclusive choices",
-          "path": "/docs/components/radio-group.mdx"
+          "path": "/docs/components/radio-group.mdx",
+          "updated": true
         },
         {
           "key": "range-calendar",
           "title": "Range Calendar",
           "keywords": "range calendar, date picker, month picker, year picker",
-          "path": "/docs/components/range-calendar.mdx",
-          "newPost": true
+          "path": "/docs/components/range-calendar.mdx"
         },
         {
           "key": "scroll-shadow",
@@ -335,8 +388,7 @@
           "key": "skeleton",
           "title": "Skeleton",
           "keywords": "skeleton, loading state, placeholder, content preview",
-          "path": "/docs/components/skeleton.mdx",
-          "updated": true
+          "path": "/docs/components/skeleton.mdx"
         },
         {
           "key": "slider",
@@ -360,7 +412,8 @@
           "key": "spinner",
           "title": "Spinner",
           "keywords": "spinner, loading, activity indicator, processing signal",
-          "path": "/docs/components/spinner.mdx"
+          "path": "/docs/components/spinner.mdx",
+          "updated": true
         },
         {
           "key": "switch",
@@ -372,7 +425,8 @@
           "key": "table",
           "title": "Table",
           "keywords": "table, data display, grid, spreadsheet",
-          "path": "/docs/components/table.mdx"
+          "path": "/docs/components/table.mdx",
+          "updated": true
         },
         {
           "key": "tabs",
@@ -380,6 +434,13 @@
           "keywords": "tabs, section navigation, categorized content, tabbed interface",
           "path": "/docs/components/tabs.mdx",
           "updated": true
+        },
+        {
+          "key": "toast",
+          "title": "Toast",
+          "keywords": "toast, notification, message",
+          "path": "/docs/components/toast.mdx",
+          "newPost": true
         },
         {
           "key": "textarea",
@@ -391,15 +452,13 @@
           "key": "time-input",
           "title": "Time Input",
           "keywords": "timeinput, time, input, timezone",
-          "path": "/docs/components/time-input.mdx",
-          "newPost": true
+          "path": "/docs/components/time-input.mdx"
         },
         {
           "key": "tooltip",
           "title": "Tooltip",
           "keywords": "tooltip, hint, descriptive message, hover info",
-          "path": "/docs/components/tooltip.mdx",
-          "updated": true
+          "path": "/docs/components/tooltip.mdx"
         },
         {
           "key": "user",
@@ -413,20 +472,20 @@
       "key": "api-references",
       "title": "API References",
       "defaultOpen": true,
-      "keywords": "api references, nextui, api",
+      "keywords": "api references, heroui, api",
       "routes": [
         {
           "key": "cli-api",
-          "title": "NextUI CLI",
-          "keywords": "api references, nextui, api, cli",
+          "title": "HeroUI CLI",
+          "keywords": "api references, heroui, api, cli",
           "path": "/docs/api-references/cli-api.mdx",
           "updated": true
         },
         {
-          "key": "nextui-provider",
-          "title": "NextUI Provider",
-          "keywords": "api references, nextui, api, nextui provider",
-          "path": "/docs/api-references/nextui-provider.mdx",
+          "key": "heroui-provider",
+          "title": "HeroUIProvider",
+          "keywords": "api references, heroui, api, heroui provider",
+          "path": "/docs/api-references/heroui-provider.mdx",
           "updated": true
         }
       ]
@@ -437,36 +496,36 @@
       "key": "getting-started",
       "title": "Getting Started",
       "defaultOpen": true,
-      "keywords": "getting started, main routes, blog, docs, components, nextui",
+      "keywords": "getting started, main routes, blog, docs, components, heroui",
       "routes": [
         {
           "key": "docs",
           "title": "Documentation",
-          "keywords": "documentation, guide, nextui",
+          "keywords": "documentation, guide, heroui",
           "path": "/docs/guide/introduction.mdx"
         },
         {
           "key": "components",
           "title": "Components",
-          "keywords": "components, nextui",
+          "keywords": "components, heroui",
           "path": "/docs/components/avatar"
         },
         {
           "key": "blog",
           "title": "Blog",
-          "keywords": "blog, nextui, news, updates",
+          "keywords": "blog, heroui, news, updates",
           "path": "/blog"
         },
         {
           "key": "figma",
           "title": "Figma",
-          "keywords": "figma, nextui, design, ui kit",
-          "path": "/figma"
+          "keywords": "figma, heroui, design, ui kit",
+          "path": "/docs/guide/figma.mdx"
         },
         {
           "key": "roadmap",
           "title": "Roadmap",
-          "keywords": "roadmap, nextui",
+          "keywords": "roadmap, heroui",
           "path": "#"
         }
       ]

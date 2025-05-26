@@ -20,11 +20,11 @@ Input is a component that allows users to enter text. It can be used to get user
 <PackageManagers
   showGlobalInstallWarning
   commands={{
-    cli: "npx nextui-cli@latest add input",
-    npm: "npm install @nextui-org/input",
-    yarn: "yarn add @nextui-org/input",
-    pnpm: "pnpm add @nextui-org/input",
-    bun: "bun add @nextui-org/input"
+    cli: "npx heroui-cli@latest add input",
+    npm: "npm install @heroui/input",
+    yarn: "yarn add @heroui/input",
+    pnpm: "pnpm add @heroui/input",
+    bun: "bun add @heroui/input"
   }}
 />
 
@@ -33,8 +33,8 @@ Input is a component that allows users to enter text. It can be used to get user
 
 <ImportTabs
   commands={{
-    main: 'import {Input} from "@nextui-org/react";',
-    individual: 'import {Input} from "@nextui-org/input";',
+    main: 'import {Input} from "@heroui/react";',
+    individual: 'import {Input} from "@heroui/input";',
   }}
 />
 
@@ -122,8 +122,45 @@ You can use the `value` and `onValueChange` properties to control the input valu
 
 <CodeDemo title="Controlled" files={inputContent.controlled} />
 
-> **Note**: NextUI `Input` also supports native events like `onChange`, useful for form libraries
+> **Note**: HeroUI `Input` also supports native events like `onChange`, useful for form libraries
 > such as [Formik](https://formik.org/) and [React Hook Form](https://react-hook-form.com/).
+
+### With Form
+
+`Input` can be used with a `Form` component to leverage form state management. For more on form and validation behaviors, see the [Forms](/docs/guide/forms) guide.
+
+#### Built-in Validation
+
+`Input` supports the following [native HTML constraints](https://developer.mozilla.org/docs/Web/HTML/Constraint_validation):
+
+- `isRequired` indicates that a field must have a value before the form can be submitted.
+- `minLength` and `maxLength` specify the minimum and length of text input.
+- `pattern` provides a custom regular expression that a text input must conform to.
+- `type="email"` and `type="url"` provide built-in validation for email addresses and URLs.
+
+When using native validation, error messages can be customized by passing a function to `errorMessage` and checking the [ValidityState](https://developer.mozilla.org/docs/Web/API/ValidityState) of `validationDetails`.
+
+<CodeDemo title="Built-in Validation" files={inputContent.builtInValidation} />
+
+#### Custom Validation
+
+In addition to built-in constraints, you can provide a function to the `validate` property for custom validation.
+
+<CodeDemo title="Custom Validation" files={inputContent.customValidation} />
+
+#### Realtime Validation
+
+If you want to display validation errors while the user is typing, you can control the field value and use the `isInvalid` prop along with the `errorMessage` prop.
+
+<CodeDemo title="Realtime Validation" files={inputContent.realTimeValidation} />
+
+#### Server Validation
+
+Client-side validation provides immediate feedback, but you should also validate data on the server to ensure accuracy and security.
+HeroUI allows you to display server-side validation errors by using the `validationErrors` prop in the `Form` component.
+This prop should be an object where each key is the field `name` and the value is the error message.
+
+<CodeDemo title="Server Validation" files={inputContent.serverValidation} />
 
 ## Slots
 
@@ -194,39 +231,206 @@ In case you need to customize the input even further, you can use the `useInput`
 
 ### Input Props
 
-| Attribute          | Type                                                                                                                                                                   | Description                                                                                                                                                   | Default   |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| children           | `ReactNode`                                                                                                                                                            | The content of the input.                                                                                                                                     | -         |
-| variant            | `flat` \| `bordered` \| `faded` \| `underlined`                                                                                                                        | The variant of the input.                                                                                                                                     | `flat`    |
-| color              | `default` \| `primary` \| `secondary` \| `success` \| `warning` \| `danger`                                                                                            | The color of the input.                                                                                                                                       | `default` |
-| size               | `sm` \| `md` \| `lg`                                                                                                                                                   | The size of the input.                                                                                                                                        | `md`      |
-| radius             | `none` \| `sm` \| `md` \| `lg` \| `full`                                                                                                                               | The radius of the input.                                                                                                                                      | -         |
-| label              | `ReactNode`                                                                                                                                                            | The content to display as the label.                                                                                                                          | -         |
-| value              | `string`                                                                                                                                                               | The current value of the input (controlled).                                                                                                                  | -         |
-| defaultValue       | `string`                                                                                                                                                               | The default value of the input (uncontrolled).                                                                                                                | -         |
-| placeholder        | `string`                                                                                                                                                               | The placeholder of the input.                                                                                                                                 | -         |
-| description        | `ReactNode`                                                                                                                                                            | A description for the input. Provides a hint such as specific requirements for what to choose.                                                                | -         |
-| errorMessage       | `ReactNode` \| `((v: ValidationResult) => ReactNode)`                                                                                                                  | An error message for the input. It is only shown when `isInvalid` is set to `true`                                                                            | -         |
-| validate           | `(value: string) => ValidationError ｜ true ｜ null ｜ undefined`                                                                                                       | Validate input values when committing (e.g. on blur), returning error messages for invalid values. Validation errors are displayed upon form submission if `validationBehavior` is set to `native`. For real-time validation, use the `isInvalid` prop.| -         |
-| validationBehavior | `native` \| `aria`                                                                                                                                                     | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA.| `aria`    |
-| startContent       | `ReactNode`                                                                                                                                                            | Element to be rendered in the left side of the input.                                                                                                         | -         |
-| endContent         | `ReactNode`                                                                                                                                                            | Element to be rendered in the right side of the input.                                                                                                        | -         |
-| labelPlacement     | `inside` \| `outside` \| `outside-left`                                                                                                                                | The position of the label.                                                                                                                                    | `inside`  |
-| fullWidth          | `boolean`                                                                                                                                                              | Whether the input should take up the width of its parent.                                                                                                     | `true`    |
-| isClearable        | `boolean`                                                                                                                                                              | Whether the input should have a clear button.                                                                                                                 | `false`   |
-| isRequired         | `boolean`                                                                                                                                                              | Whether user input is required on the input before form submission.                                                                                           | `false`   |
-| isReadOnly         | `boolean`                                                                                                                                                              | Whether the input can be selected but not changed by the user.                                                                                                |           |
-| isDisabled         | `boolean`                                                                                                                                                              | Whether the input is disabled.                                                                                                                                | `false`   |
-| isInvalid          | `boolean`                                                                                                                                                              | Whether the input is invalid.                                                                                                                                 | `false`   |
-| baseRef            | `RefObject<HTMLDivElement>`                                                                                                                                            | The ref to the base element.                                                                                                                                  | -         |
-| validationState    | `valid` \| `invalid`                                                                                                                                                   | Whether the input should display its "valid" or "invalid" visual styling. (**Deprecated**) use **isInvalid** instead.                                         | -         |
-| disableAnimation   | `boolean`                                                                                                                                                              | Whether the input should be animated.                                                                                                                         | `false`   |
-| classNames         | `Record<"base"｜ "label"｜ "inputWrapper"｜ "innerWrapper"｜ "mainWrapper" ｜ "input" ｜ "clearButton" ｜ "helperWrapper" ｜ "description" ｜ "errorMessage", string>`    | Allows to set custom class names for the Input slots.                                                                                                         | -         |
+<APITable
+  data={[
+    {
+      attribute: "children",
+      type: "ReactNode",
+      description: "The content of the input.",
+      default: "-"
+    },
+    {
+      attribute: "variant",
+      type: "flat | bordered | faded | underlined",
+      description: "The variant of the input.",
+      default: "flat"
+    },
+    {
+      attribute: "color",
+      type: "default | primary | secondary | success | warning | danger",
+      description: "The color of the input.",
+      default: "default"
+    },
+    {
+      attribute: "size",
+      type: "sm | md | lg",
+      description: "The size of the input.",
+      default: "md"
+    },
+    {
+      attribute: "radius",
+      type: "none | sm | md | lg | full",
+      description: "The radius of the input.",
+      default: "-"
+    },
+    {
+      attribute: "label",
+      type: "ReactNode",
+      description: "The content to display as the label.",
+      default: "-"
+    },
+    {
+      attribute: "value",
+      type: "string",
+      description: "The current value of the input (controlled).",
+      default: "-"
+    },
+    {
+      attribute: "defaultValue",
+      type: "string",
+      description: "The default value of the input (uncontrolled).",
+      default: "-"
+    },
+    {
+      attribute: "placeholder",
+      type: "string",
+      description: "The placeholder of the input.",
+      default: "-"
+    },
+    {
+      attribute: "description",
+      type: "ReactNode",
+      description: "A description for the input. Provides a hint such as specific requirements for what to choose.",
+      default: "-"
+    },
+    {
+      attribute: "errorMessage",
+      type: "ReactNode | ((v: ValidationResult) => ReactNode)",
+      description: "An error message for the input. It is only shown when isInvalid is set to true",
+      default: "-"
+    },
+    {
+      attribute: "validate",
+      type: "(value: string) => ValidationError | true | null | undefined",
+      description: "Validate input values when committing (e.g. on blur), returning error messages for invalid values.",
+      default: "-"
+    },
+    {
+      attribute: "validationBehavior",
+      type: "native | aria",
+      description: "Whether to use native HTML form validation or ARIA validation. When wrapped in a Form component, the default is `aria`. Otherwise, the default is `native`.",
+      default: "native"
+    },
+    {
+      attribute: "minLength",
+      type: "number",
+      description: "The minimum length of the text input.",
+      default: "-"
+    },
+    {
+      attribute: "maxLength",
+      type: "number",
+      description: "The maximum length of the text input.",
+      default: "-"
+    },
+    {
+      attribute: "pattern",
+      type: "string",
+      description: "A regular expression that the input value is checked against.",
+      default: "-"
+    },
+    {
+      attribute: "type",
+      type: "text | email | url | password | tel | search | file",
+      description: "The type of the input.",
+      default: "text"
+    },
+    {
+      attribute: "startContent",
+      type: "ReactNode",
+      description: "Element to be rendered in the left side of the input.",
+      default: "-"
+    },
+    {
+      attribute: "endContent",
+      type: "ReactNode",
+      description: "Element to be rendered in the right side of the input.",
+      default: "-"
+    },
+    {
+      attribute: "labelPlacement",
+      type: "inside | outside | outside-left",
+      description: "The position of the label.",
+      default: "inside"
+    },
+    {
+      attribute: "fullWidth",
+      type: "boolean",
+      description: "Whether the input should take up the width of its parent.",
+      default: "true"
+    },
+    {
+      attribute: "isClearable",
+      type: "boolean",
+      description: "Whether the input should have a clear button.",
+      default: "false"
+    },
+    {
+      attribute: "isRequired",
+      type: "boolean",
+      description: "Whether user input is required on the input before form submission.",
+      default: "false"
+    },
+    {
+      attribute: "isReadOnly",
+      type: "boolean",
+      description: "Whether the input can be selected but not changed by the user.",
+      default: "false"
+    },
+    {
+      attribute: "isDisabled",
+      type: "boolean",
+      description: "Whether the input is disabled.",
+      default: "false"
+    },
+    {
+      attribute: "isInvalid",
+      type: "boolean",
+      description: "Whether the input is invalid.",
+      default: "false"
+    },
+    {
+      attribute: "baseRef",
+      type: "RefObject<HTMLDivElement>",
+      description: "The ref to the base element.",
+      default: "-"
+    },
+    {
+      attribute: "disableAnimation",
+      type: "boolean",
+      description: "Whether the input should be animated.",
+      default: "false"
+    },
+    {
+      attribute: "classNames",
+      type: "Partial<Record<'base' | 'label' | 'inputWrapper' | 'innerWrapper' | 'mainWrapper' | 'input' | 'clearButton' | 'helperWrapper' | 'description' | 'errorMessage', string>>",
+      description: "Allows to set custom class names for the Input slots.",
+      default: "-"
+    }
+  ]}
+/>
 
 ### Input Events
 
-| Attribute     | Type                                  | Description                                                                                                                         |
-| ------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| onChange      | `React.ChangeEvent<HTMLInputElement>` | Handler that is called when the element's value changes. You can pull out the new value by accessing `event.target.value` (string). |
-| onValueChange | `(value: string) => void`             | Handler that is called when the element's value changes.                                                                            |
-| onClear       | `() => void`                          | Handler that is called when the clear button is clicked.                                                                            |
+<APITable
+  data={[
+    {
+      attribute: "onChange",
+      type: "React.ChangeEvent<HTMLInputElement>",
+      description: "Handler that is called when the element's value changes. You can pull out the new value by accessing event.target.value (string).",
+      default: "-"
+    },
+    {
+      attribute: "onValueChange",
+      type: "(value: string) => void",
+      description: "Handler that is called when the element's value changes.",
+      default: "-"
+    },
+    {
+      attribute: "onClear",
+      type: "() => void",
+      description: "Handler that is called when the clear button is clicked.",
+      default: "-"
+    }
+  ]}
+/>

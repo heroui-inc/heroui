@@ -1,16 +1,16 @@
 import type {AriaTabPanelProps} from "@react-aria/tabs";
 
 import {Key} from "@react-types/shared";
-import {forwardRef, HTMLNextUIProps} from "@nextui-org/system";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx} from "@nextui-org/shared-utils";
+import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, getInertValue} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {useTabPanel} from "@react-aria/tabs";
 import {useFocusRing} from "@react-aria/focus";
 
 import {ValuesType} from "./use-tabs";
 
-interface Props extends HTMLNextUIProps<"div"> {
+interface Props extends HTMLHeroUIProps<"div"> {
   /**
    * Whether to destroy inactive tab panel when switching tabs.
    * Inactive tab panels are inert and cannot be interacted with.
@@ -69,7 +69,9 @@ const TabPanel = forwardRef<"div", TabPanelProps>((props, ref) => {
       data-focus={isFocused}
       data-focus-visible={isFocusVisible}
       data-inert={!isSelected ? "true" : undefined}
-      inert={!isSelected ? "true" : undefined}
+      // makes the browser ignore the element and its children when tabbing
+      // @ts-ignore
+      inert={getInertValue(!isSelected)}
       {...(isSelected && mergeProps(tabPanelProps, focusProps, otherProps))}
       className={slots.panel?.({class: tabPanelStyles})}
       data-slot="panel"
@@ -79,6 +81,6 @@ const TabPanel = forwardRef<"div", TabPanelProps>((props, ref) => {
   );
 });
 
-TabPanel.displayName = "NextUI.TabPanel";
+TabPanel.displayName = "HeroUI.TabPanel";
 
 export default TabPanel;

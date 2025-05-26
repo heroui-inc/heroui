@@ -1,15 +1,15 @@
 import {useMemo, ReactNode} from "react";
-import {forwardRef} from "@nextui-org/system";
 
 import {UseListboxItemProps, useListboxItem} from "./use-listbox-item";
 import {ListboxSelectedIcon} from "./listbox-selected-icon";
 
-export interface ListboxItemProps<T extends object = object> extends UseListboxItemProps<T> {}
+export interface ListboxItemProps<T extends object = object>
+  extends Omit<UseListboxItemProps<T>, "hasDescriptionTextChild" | "hasTitleTextChild"> {}
 
 /**
  * @internal
  */
-const ListboxItem = forwardRef<"li", ListboxItemProps>((props, _) => {
+const ListboxItem = (props: ListboxItemProps) => {
   const {
     Component,
     rendered,
@@ -29,7 +29,7 @@ const ListboxItem = forwardRef<"li", ListboxItemProps>((props, _) => {
     getSelectedIconProps,
   } = useListboxItem(props);
 
-  const selectedContent = useMemo<ReactNode | null>(() => {
+  const selectedContent = useMemo<ReactNode>(() => {
     const defaultIcon = (
       <ListboxSelectedIcon disableAnimation={disableAnimation} isSelected={isSelected} />
     );
@@ -60,8 +60,8 @@ const ListboxItem = forwardRef<"li", ListboxItemProps>((props, _) => {
       {endContent}
     </Component>
   );
-});
+};
 
-ListboxItem.displayName = "NextUI.ListboxItem";
+ListboxItem.displayName = "HeroUI.ListboxItem";
 
 export default ListboxItem;

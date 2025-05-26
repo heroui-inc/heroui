@@ -1,13 +1,13 @@
-import type {DateInputReturnType, DateInputSlots, SlotsToClasses} from "@nextui-org/theme";
+import type {DateInputReturnType, DateInputSlots, SlotsToClasses} from "@heroui/theme";
 
-import {HTMLNextUIProps} from "@nextui-org/system";
+import {HTMLHeroUIProps} from "@heroui/system";
 import {useDateSegment} from "@react-aria/datepicker";
 import {DateFieldState, DateSegment} from "@react-stately/datepicker";
 import {mergeProps} from "@react-aria/utils";
 import {useRef} from "react";
-import {dataAttr} from "@nextui-org/shared-utils";
+import {dataAttr} from "@heroui/shared-utils";
 
-export interface DateInputSegmentProps extends HTMLNextUIProps<"div"> {
+export interface DateInputSegmentProps extends HTMLHeroUIProps<"div"> {
   state: DateFieldState;
   segment: DateSegment;
   slots: DateInputReturnType;
@@ -22,13 +22,7 @@ export const DateInputSegment: React.FC<DateInputSegmentProps> = ({
   ...otherProps
 }) => {
   const ref = useRef(null);
-
   let {segmentProps} = useDateSegment(segment, state, ref);
-
-  // @ts-expect-error autoCapitalize is not a valid prop
-  // Removing autoCapitalize as it causes bugs in Firefox.
-  // See: https://github.com/adobe/react-spectrum/issues/5599
-  delete segmentProps.autoCapitalize;
 
   return (
     <div

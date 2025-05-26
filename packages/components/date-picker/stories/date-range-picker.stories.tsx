@@ -1,6 +1,8 @@
+import type {MappedDateValue} from "@react-types/datepicker";
+
 import React from "react";
 import {Meta} from "@storybook/react";
-import {dateInput, button} from "@nextui-org/theme";
+import {dateInput, button} from "@heroui/theme";
 import {
   endOfMonth,
   endOfWeek,
@@ -16,9 +18,11 @@ import {
 import {RangeValue, ValidationResult} from "@react-types/shared";
 import {DateValue} from "@react-types/datepicker";
 import {I18nProvider, useDateFormatter, useLocale} from "@react-aria/i18n";
-import {Button, ButtonGroup} from "@nextui-org/button";
-import {Radio, RadioGroup} from "@nextui-org/radio";
-import {cn} from "@nextui-org/theme";
+import {Button, ButtonGroup} from "@heroui/button";
+import {Radio, RadioGroup, RadioProps} from "@heroui/radio";
+import {cn} from "@heroui/theme";
+import {Form} from "@heroui/form";
+import {MoonIcon, SunIcon} from "@heroui/shared-icons";
 
 import {DateRangePicker, DateRangePickerProps} from "../src";
 
@@ -67,6 +71,10 @@ export default {
       },
       options: ["aria", "native"],
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
   decorators: [
     (Story) => (
@@ -89,9 +97,9 @@ const FormTemplate = (args: DateRangePickerProps) => (
     className="flex flex-col gap-2 w-full"
     onSubmit={(e) => {
       e.preventDefault();
-      alert(
-        `Submitted: start -> ${e.target["start-date"].value} end -> ${e.target["end-date"].value}`,
-      );
+      const form = e.target as HTMLFormElement;
+
+      alert(`Submitted: start -> ${form["start-date"].value} end -> ${form["end-date"].value}`);
     }}
   >
     <DateRangePicker {...args} endName="end-date" startName="start-date" />
@@ -110,7 +118,7 @@ const LabelPlacementTemplate = (args: DateRangePickerProps) => (
 );
 
 const ControlledTemplate = (args: DateRangePickerProps) => {
-  const [value, setValue] = React.useState<RangeValue<DateValue>>({
+  const [value, setValue] = React.useState<RangeValue<DateValue> | null>({
     start: parseDate("2024-04-01"),
     end: parseDate("2024-04-08"),
   });
@@ -173,7 +181,7 @@ const TimeZonesTemplate = (args: DateRangePickerProps) => (
 );
 
 const GranularityTemplate = (args: DateRangePickerProps) => {
-  let [date, setDate] = React.useState<RangeValue<DateValue>>({
+  let [date, setDate] = React.useState<RangeValue<DateValue> | null>({
     start: parseAbsoluteToLocal("2024-04-01T18:45:22Z"),
     end: parseAbsoluteToLocal("2024-04-08T19:15:22Z"),
   });
@@ -201,7 +209,7 @@ const GranularityTemplate = (args: DateRangePickerProps) => {
 };
 
 const InternationalCalendarsTemplate = (args: DateRangePickerProps) => {
-  let [date, setDate] = React.useState<RangeValue<DateValue>>({
+  let [date, setDate] = React.useState<RangeValue<DateValue> | null>({
     start: parseAbsoluteToLocal("2021-04-01T18:45:22Z"),
     end: parseAbsoluteToLocal("2021-04-14T19:15:22Z"),
   });
@@ -267,7 +275,7 @@ const PresetsTemplate = (args: DateRangePickerProps) => {
     end: today(getLocalTimeZone()).add({days: 7}),
   };
 
-  const [value, setValue] = React.useState<RangeValue<DateValue>>(defaultDate);
+  const [value, setValue] = React.useState<RangeValue<DateValue> | null>(defaultDate);
 
   let {locale} = useLocale();
   let formatter = useDateFormatter({dateStyle: "full"});
@@ -282,7 +290,7 @@ const PresetsTemplate = (args: DateRangePickerProps) => {
     end: endOfMonth(now.add({months: 1})),
   };
 
-  const CustomRadio = (props) => {
+  const CustomRadio = (props: RadioProps) => {
     const {children, ...otherProps} = props;
 
     return (
@@ -376,10 +384,113 @@ const PresetsTemplate = (args: DateRangePickerProps) => {
   );
 };
 
+const ServerValidationTemplate = (args: DateRangePickerProps) => {
+  const [serverErrors, setServerErrors] = React.useState({});
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setServerErrors({
+      startDate: "Please select a valid start date.",
+      endDate: "Please select a valid end date.",
+    });
+  };
+
+  return (
+    <Form
+      className="flex flex-col items-start gap-2"
+      validationErrors={serverErrors}
+      onSubmit={onSubmit}
+    >
+      <DateRangePicker {...args} endName="endDate" label="Date range" startName="startDate" />
+      <button className={button({color: "primary"})} type="submit">
+        Submit
+      </button>
+    </Form>
+  );
+};
+
+const StartAndEndContentTemplate = (args: DateRangePickerProps) => {
+  return (
+    <div className="flex flex-col gap-4 w-full max-w-sm">
+      <DateRangePicker {...args} endContent={<MoonIcon />} label="With end content" />
+      <DateRangePicker {...args} label="With start content" startContent={<SunIcon />} />
+      <DateRangePicker
+        {...args}
+        endContent={<MoonIcon />}
+        label="With start and end content"
+        startContent={<SunIcon />}
+      />
+    </div>
+  );
+};
+
+const selectorButtonPlacementTemplate = (args: DateRangePickerProps) => (
+  <div className="w-full max-w-xl flex flex-col items-start gap-4">
+    <DateRangePicker
+      {...args}
+      label="start inside"
+      labelPlacement="inside"
+      selectorButtonPlacement="start"
+    />
+    <DateRangePicker
+      {...args}
+      label="start outside"
+      labelPlacement="outside"
+      selectorButtonPlacement="start"
+    />
+    <DateRangePicker
+      {...args}
+      label="start outside-left"
+      labelPlacement="outside-left"
+      selectorButtonPlacement="start"
+    />
+    <DateRangePicker
+      {...args}
+      label="start inside with start content"
+      labelPlacement="inside"
+      selectorButtonPlacement="start"
+      startContent={<MoonIcon />}
+    />
+
+    <DateRangePicker
+      {...args}
+      label="end inside"
+      labelPlacement="inside"
+      selectorButtonPlacement="end"
+    />
+    <DateRangePicker
+      {...args}
+      label="end outside"
+      labelPlacement="outside"
+      selectorButtonPlacement="end"
+    />
+    <DateRangePicker
+      {...args}
+      label="end outside-left"
+      labelPlacement="outside-left"
+      selectorButtonPlacement="end"
+    />
+    <DateRangePicker
+      {...args}
+      endContent={<MoonIcon />}
+      label="end inside with end content"
+      labelPlacement="inside"
+      selectorButtonPlacement="end"
+    />
+  </div>
+);
+
 export const Default = {
   render: Template,
   args: {
     ...defaultProps,
+  },
+};
+
+export const WithMonthAndYearPickers = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    showMonthAndYearPickers: true,
   },
 };
 
@@ -623,7 +734,7 @@ export const WithValidation = {
 
   args: {
     ...defaultProps,
-    validate: (value) => {
+    validate: (value: RangeValue<MappedDateValue<DateValue>>) => {
       if (!value || !value.start || !value.end) {
         return "Please enter a valid date range";
       }
@@ -634,6 +745,27 @@ export const WithValidation = {
       }
     },
     label: "Date Range (Year 2024 or later)",
+  },
+};
+
+export const WithServerValidation = {
+  render: ServerValidationTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithStartAndEndContent = {
+  render: StartAndEndContentTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const selectorButtonPlacement = {
+  render: selectorButtonPlacementTemplate,
+  args: {
+    ...defaultProps,
   },
 };
 
@@ -669,5 +801,13 @@ export const CustomStyles = {
         ],
       },
     },
+  },
+};
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
   },
 };

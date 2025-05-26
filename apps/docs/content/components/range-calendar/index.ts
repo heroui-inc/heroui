@@ -10,8 +10,10 @@ import invalidDate from "./invalid-date";
 import nonContiguousRanges from "./non-contiguous-ranges";
 import internationalCalendars from "./international-calendars";
 import visibleMonths from "./visible-months";
+import firstDayOfWeek from "./first-day-of-week";
 import pageBehaviour from "./page-behaviour";
 import presets from "./presets";
+import withMonthAndYearPicker from "./with-month-and-year-picker";
 
 export const rangeCalendarContent = {
   usage,
@@ -26,6 +28,8 @@ export const rangeCalendarContent = {
   nonContiguousRanges,
   internationalCalendars,
   visibleMonths,
+  firstDayOfWeek,
   pageBehaviour,
   presets,
+  withMonthAndYearPicker,
 };

@@ -1,25 +1,20 @@
-import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@nextui-org/theme";
+import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@heroui/theme";
 import type {HTMLMotionProps} from "framer-motion";
 
 import {AriaModalOverlayProps} from "@react-aria/overlays";
-import {useAriaModalOverlay} from "@nextui-org/use-aria-modal-overlay";
+import {useAriaModalOverlay} from "@heroui/use-aria-modal-overlay";
 import {useCallback, useId, useRef, useState, useMemo, ReactNode} from "react";
-import {modal} from "@nextui-org/theme";
-import {
-  HTMLNextUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useProviderContext,
-} from "@nextui-org/system";
-import {useAriaButton} from "@nextui-org/use-aria-button";
+import {modal} from "@heroui/theme";
+import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@nextui-org/shared-utils";
-import {ReactRef, useDOMRef} from "@nextui-org/react-utils";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {useOverlayTriggerState} from "@react-stately/overlays";
 import {OverlayTriggerProps} from "@react-stately/overlays";
 import {mergeRefs, mergeProps} from "@react-aria/utils";
 
-interface Props extends HTMLNextUIProps<"section"> {
+interface Props extends HTMLHeroUIProps<"section"> {
   /**
    * Ref to the DOM node.
    */
@@ -74,9 +69,17 @@ interface Props extends HTMLNextUIProps<"section"> {
    * ```
    */
   classNames?: SlotsToClasses<ModalSlots>;
+  /**
+   * Whether to close the overlay when the user interacts outside it.
+   * @default true
+   */
+  isDismissable?: boolean;
 }
 
-export type UseModalProps = Props & OverlayTriggerProps & AriaModalOverlayProps & ModalVariantProps;
+export type UseModalProps = Props &
+  OverlayTriggerProps &
+  Omit<AriaModalOverlayProps, "isDismissable"> &
+  ModalVariantProps;
 
 export function useModal(originalProps: UseModalProps) {
   const globalContext = useProviderContext();
@@ -88,7 +91,6 @@ export function useModal(originalProps: UseModalProps) {
     as,
     className,
     classNames,
-
     isOpen,
     defaultOpen,
     onOpenChange,
@@ -162,6 +164,7 @@ export function useModal(originalProps: UseModalProps) {
     "data-open": dataAttr(state.isOpen),
     "data-dismissable": dataAttr(isDismissable),
     "aria-modal": dataAttr(true),
+    "data-placement": originalProps?.placement ?? "right",
     "aria-labelledby": headerMounted ? headerId : undefined,
     "aria-describedby": bodyMounted ? bodyId : undefined,
   });

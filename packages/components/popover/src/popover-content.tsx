@@ -2,34 +2,32 @@ import type {AriaDialogProps} from "@react-aria/dialog";
 import type {HTMLMotionProps} from "framer-motion";
 
 import {DOMAttributes, ReactNode, useMemo, useRef} from "react";
-import {forwardRef} from "@nextui-org/system";
-import {RemoveScroll} from "react-remove-scroll";
 import {DismissButton} from "@react-aria/overlays";
-import {TRANSITION_VARIANTS} from "@nextui-org/framer-utils";
-import {m, domAnimation, LazyMotion} from "framer-motion";
-import {HTMLNextUIProps} from "@nextui-org/system";
-import {getTransformOrigins} from "@nextui-org/aria-utils";
+import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
+import {m, LazyMotion} from "framer-motion";
+import {HTMLHeroUIProps} from "@heroui/system";
+import {getTransformOrigins} from "@heroui/aria-utils";
 import {useDialog} from "@react-aria/dialog";
 
 import {usePopoverContext} from "./popover-context";
 
 export interface PopoverContentProps
   extends AriaDialogProps,
-    Omit<HTMLNextUIProps, "children" | "role"> {
+    Omit<HTMLHeroUIProps, "children" | "role"> {
   children: ReactNode | ((titleProps: DOMAttributes<HTMLElement>) => ReactNode);
 }
 
-const PopoverContent = forwardRef<"div", PopoverContentProps>((props, _) => {
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
+
+const PopoverContent = (props: PopoverContentProps) => {
   const {as, children, className, ...otherProps} = props;
 
   const {
     Component: OverlayComponent,
-    isOpen,
     placement,
     backdrop,
     motionProps,
     disableAnimation,
-    shouldBlockScroll,
     getPopoverProps,
     getDialogProps,
     getBackdropProps,
@@ -82,8 +80,11 @@ const PopoverContent = forwardRef<"div", PopoverContentProps>((props, _) => {
     );
   }, [backdrop, disableAnimation, getBackdropProps]);
 
+  const style = placement
+    ? getTransformOrigins(placement === "center" ? "top" : placement)
+    : undefined;
   const contents = (
-    <RemoveScroll enabled={shouldBlockScroll && isOpen} removeScrollBar={false}>
+    <>
       {disableAnimation ? (
         content
       ) : (
@@ -92,9 +93,7 @@ const PopoverContent = forwardRef<"div", PopoverContentProps>((props, _) => {
             animate="enter"
             exit="exit"
             initial="initial"
-            style={{
-              ...getTransformOrigins(placement === "center" ? "top" : placement),
-            }}
+            style={style}
             variants={TRANSITION_VARIANTS.scaleSpringOpacity}
             {...motionProps}
           >
@@ -102,7 +101,7 @@ const PopoverContent = forwardRef<"div", PopoverContentProps>((props, _) => {
           </m.div>
         </LazyMotion>
       )}
-    </RemoveScroll>
+    </>
   );
 
   return (
@@ -111,8 +110,8 @@ const PopoverContent = forwardRef<"div", PopoverContentProps>((props, _) => {
       {contents}
     </div>
   );
-});
+};
 
-PopoverContent.displayName = "NextUI.PopoverContent";
+PopoverContent.displayName = "HeroUI.PopoverContent";
 
 export default PopoverContent;

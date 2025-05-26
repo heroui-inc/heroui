@@ -1,23 +1,26 @@
 "use client";
 
 import NextLink from "next/link";
-import {Button, Link, Chip, Snippet} from "@nextui-org/react";
-import {ArrowRightIcon} from "@nextui-org/shared-icons";
+import {Button, Link, Chip, Snippet} from "@heroui/react";
+import {ArrowRightIcon} from "@heroui/shared-icons";
 import dynamic from "next/dynamic";
+import {usePostHog} from "posthog-js/react";
 
 import {FloatingComponents} from "./floating-components";
 
 import {GithubIcon} from "@/components/icons";
 import {title, subtitle} from "@/components/primitives";
-import {trackEvent} from "@/utils/va";
+import {siteConfig} from "@/config/site";
 
 const BgLooper = dynamic(() => import("./bg-looper").then((mod) => mod.BgLooper), {
   ssr: false,
 });
 
 export const Hero = () => {
+  const posthog = usePostHog();
+
   const handlePressAnnouncement = (name: string, url: string) => {
-    trackEvent("NavbarItem", {
+    posthog.capture("NavbarItem", {
       name,
       action: "press",
       category: "home - hero",
@@ -31,15 +34,18 @@ export const Hero = () => {
         <div className="flex justify-center w-full md:hidden">
           <Chip
             as={NextLink}
-            className="transition-colors cursor-pointer bg-default-100/50 hover:bg-default-100 border-default-200/80 dark:border-default-100/80"
-            color="default"
-            href="/blog/v2.3.0"
-            variant="dot"
-            onClick={() => handlePressAnnouncement("New version v2.4.0", "/blog/v2.4.0")}
+            className="bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
+            classNames={{
+              content: "font-semibold text-foreground text-xs ",
+            }}
+            color="primary"
+            href="/blog/v2.7.0"
+            variant="flat"
+            onClick={() => handlePressAnnouncement("HeroUI v2.7.0", "/blog/v2.7.0")}
           >
-            New version v2.4.0&nbsp;
+            HeroUI v2.7.0&nbsp;
             <span aria-label="emoji" role="img">
-              🚀
+              🔥
             </span>
           </Chip>
         </div>
@@ -50,8 +56,9 @@ export const Hero = () => {
           </div>
           <h1 className={title()}>websites regardless of your design experience.</h1>
         </div>
-        <h2 className={subtitle({fullWidth: true, class: "text-center md:text-left"})}>
-          Beautiful, fast and modern React UI library.
+        <h2 className={subtitle({fullWidth: true, class: "text-center md:text-left lg:pr-8"})}>
+          Beautiful, fast and modern React UI library for building accessible and customizable web
+          applications.
         </h2>
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Button
@@ -68,7 +75,7 @@ export const Hero = () => {
             radius="full"
             size="lg"
             onPress={() => {
-              trackEvent("Hero - Get Started", {
+              posthog.capture("Hero - Get Started", {
                 name: "Get Started",
                 action: "click",
                 category: "landing-page",
@@ -84,32 +91,32 @@ export const Hero = () => {
               radius: "full",
             }}
             onCopy={() => {
-              trackEvent("Hero - Copy Install Command", {
+              posthog.capture("Hero - Copy Install Command", {
                 name: "Copy",
                 action: "click",
                 category: "landing-page",
-                data: "npx nextui-cli@latest init",
+                data: "npx heroui-cli@latest init",
               });
             }}
           >
-            npx nextui-cli@latest init
+            npx heroui-cli@latest init
           </Snippet>
           <Button
             fullWidth
             isExternal
             as={Link}
             className="w-full md:hidden"
-            href="https://github.com/nextui-org/nextui"
+            href={siteConfig.links.github}
             radius="full"
             size="lg"
             startContent={<GithubIcon />}
             variant="bordered"
             onPress={() => {
-              trackEvent("Hero - Github", {
+              posthog.capture("Hero - Github", {
                 name: "Github",
                 action: "click",
                 category: "landing-page",
-                data: "https://github.com/nextui-org/nextui",
+                data: siteConfig.links.github,
               });
             }}
           >

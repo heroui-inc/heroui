@@ -1,12 +1,11 @@
 "use client";
 
 import React, {ReactNode} from "react";
+import {usePostHog} from "posthog-js/react";
 import {tv} from "tailwind-variants";
-import {Card, CardHeader, CardBody, LinkProps, SlotsToClasses} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, LinkProps, SlotsToClasses} from "@heroui/react";
 import {useRouter} from "next/navigation";
-import {LinkIcon} from "@nextui-org/shared-icons";
-
-import {trackEvent} from "@/utils/va";
+import {LinkIcon} from "@heroui/shared-icons";
 
 const styles = tv({
   slots: {
@@ -17,7 +16,7 @@ const styles = tv({
     iconWrapper:
       "flex justify-center p-2 rounded-full items-center bg-secondary-100/80 text-pink-500",
     title: "text-base font-semibold",
-    description: "font-normal text-base text-default-500",
+    description: "font-normal text-medium text-default-500",
   },
 });
 
@@ -37,10 +36,12 @@ interface FeaturesGridProps {
 export const FeaturesGrid: React.FC<FeaturesGridProps> = ({features, classNames, ...props}) => {
   const router = useRouter();
 
+  const posthog = usePostHog();
+
   const slots = styles();
 
   const handleClick = (feat: Feature) => {
-    trackEvent("FeaturesGrid - Click", {
+    posthog.capture("FeaturesGrid - Click", {
       name: feat.title,
       action: "click",
       category: "docs",

@@ -1,15 +1,15 @@
 import type {AriaButtonProps} from "@react-types/button";
-import type {As, HTMLNextUIProps} from "@nextui-org/system";
-import type {ButtonProps} from "@nextui-org/button";
+import type {As, HTMLHeroUIProps} from "@heroui/system";
+import type {ButtonProps} from "@heroui/button";
 import type {HTMLAttributes, ReactNode, RefObject} from "react";
 
-import {Fragment} from "react";
-import {useState} from "react";
+import {forwardRef, Fragment, useState} from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {Button} from "@nextui-org/button";
+import {Button} from "@heroui/button";
 import {chain, mergeProps} from "@react-aria/utils";
-import {AnimatePresence, LazyMotion, domAnimation, MotionConfig} from "framer-motion";
-import {ResizablePanel} from "@nextui-org/framer-utils";
+import {AnimatePresence, LazyMotion, MotionConfig} from "framer-motion";
+import {useLocale} from "@react-aria/i18n";
+import {ResizablePanel} from "@heroui/framer-utils";
 
 import {ChevronLeftIcon} from "./chevron-left";
 import {ChevronRightIcon} from "./chevron-right";
@@ -19,7 +19,9 @@ import {CalendarHeader} from "./calendar-header";
 import {CalendarPicker} from "./calendar-picker";
 import {useCalendarContext} from "./calendar-context";
 
-export interface CalendarBaseProps extends HTMLNextUIProps<"div"> {
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
+
+export interface CalendarBaseProps extends HTMLHeroUIProps<"div"> {
   Component?: As;
   showHelper?: boolean;
   topContent?: ReactNode;
@@ -31,7 +33,23 @@ export interface CalendarBaseProps extends HTMLNextUIProps<"div"> {
   errorMessageProps: HTMLAttributes<HTMLElement>;
   calendarRef: RefObject<HTMLDivElement>;
   errorMessage?: ReactNode;
+  firstDayOfWeek?: "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
 }
+
+/**
+ * Avoid this framer-motion warning:
+ * Function components cannot be given refs.
+ * Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+ *
+ * @see https://www.framer.com/motion/animate-presence/###mode
+ */
+const PopLayoutWrapper = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  (props, ref) => {
+    return <div ref={ref} {...props} />;
+  },
+);
+
+PopLayoutWrapper.displayName = "HeroUI - PopLayoutWrapper";
 
 export function CalendarBase(props: CalendarBaseProps) {
   const {
@@ -46,6 +64,7 @@ export function CalendarBase(props: CalendarBaseProps) {
     errorMessageProps,
     calendarRef: ref,
     errorMessage,
+    firstDayOfWeek,
     ...otherProps
   } = props;
 
@@ -54,10 +73,14 @@ export function CalendarBase(props: CalendarBaseProps) {
 
   const [direction, setDirection] = useState<number>(0);
 
+  const {direction: localeDirection} = useLocale();
+
   const currentMonth = state.visibleRange.start;
 
   const headers: React.ReactNode[] = [];
   const calendars: React.ReactNode[] = [];
+
+  const isRTL = localeDirection === "rtl";
 
   for (let i = 0; i < visibleMonths; i++) {
     let d = currentMonth.add({months: i});
@@ -66,8 +89,10 @@ export function CalendarBase(props: CalendarBaseProps) {
       <Fragment key={`calendar-header-${i}`}>
         {i === 0 && (
           <Button
-            {...prevButtonProps}
-            onPress={chain(prevButtonProps.onPress, () => setDirection(-1))}
+            {...(isRTL ? nextButtonProps : prevButtonProps)}
+            onPress={chain(isRTL ? nextButtonProps.onPress : prevButtonProps.onPress, () =>
+              setDirection(-1),
+            )}
           >
             <ChevronLeftIcon />
           </Button>
@@ -80,8 +105,10 @@ export function CalendarBase(props: CalendarBaseProps) {
         />
         {i === visibleMonths - 1 && (
           <Button
-            {...nextButtonProps}
-            onPress={chain(nextButtonProps.onPress, () => setDirection(1))}
+            {...(isRTL ? prevButtonProps : nextButtonProps)}
+            onPress={chain(isRTL ? prevButtonProps.onPress : nextButtonProps.onPress, () =>
+              setDirection(1),
+            )}
           >
             <ChevronRightIcon />
           </Button>
@@ -95,6 +122,7 @@ export function CalendarBase(props: CalendarBaseProps) {
         key={`calendar-month-${i}`}
         currentMonth={currentMonth.month}
         direction={direction}
+        firstDayOfWeek={firstDayOfWeek}
         startDate={d}
       />
     );
@@ -151,11 +179,11 @@ export function CalendarBase(props: CalendarBaseProps) {
           data-slot="content"
         >
           <AnimatePresence custom={direction} initial={false} mode="popLayout">
-            <>
+            <PopLayoutWrapper>
               <MotionConfig transition={transition}>
                 <LazyMotion features={domAnimation}>{calendarContent}</LazyMotion>
               </MotionConfig>
-            </>
+            </PopLayoutWrapper>
           </AnimatePresence>
         </ResizablePanel>
       )}

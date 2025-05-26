@@ -1,26 +1,27 @@
-import type {AutocompleteVariantProps, SlotsToClasses, AutocompleteSlots} from "@nextui-org/theme";
-import type {DOMAttributes, HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {AutocompleteVariantProps, SlotsToClasses, AutocompleteSlots} from "@heroui/theme";
+import type {DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {mapPropsVariants, useProviderContext} from "@nextui-org/system";
-import {useSafeLayoutEffect} from "@nextui-org/use-safe-layout-effect";
-import {autocomplete} from "@nextui-org/theme";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {autocomplete} from "@heroui/theme";
 import {useFilter} from "@react-aria/i18n";
 import {FilterFn, useComboBoxState} from "@react-stately/combobox";
-import {ReactRef, useDOMRef} from "@nextui-org/react-utils";
+import {ReactRef, useDOMRef} from "@heroui/react-utils";
 import {ReactNode, useEffect, useMemo, useRef} from "react";
 import {ComboBoxProps} from "@react-types/combobox";
-import {PopoverProps} from "@nextui-org/popover";
-import {ListboxProps} from "@nextui-org/listbox";
-import {InputProps} from "@nextui-org/input";
-import {clsx, dataAttr, objectToDeps} from "@nextui-org/shared-utils";
-import {ScrollShadowProps} from "@nextui-org/scroll-shadow";
+import {PopoverProps} from "@heroui/popover";
+import {ListboxProps} from "@heroui/listbox";
+import {InputProps} from "@heroui/input";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {ScrollShadowProps} from "@heroui/scroll-shadow";
 import {chain, mergeProps} from "@react-aria/utils";
-import {ButtonProps} from "@nextui-org/button";
+import {ButtonProps} from "@heroui/button";
 import {AsyncLoadable, PressEvent} from "@react-types/shared";
 import {useComboBox} from "@react-aria/combobox";
-import {ariaShouldCloseOnInteractOutside} from "@nextui-org/aria-utils";
+import {FormContext, useSlottedContext} from "@heroui/form";
+import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
-interface Props<T> extends Omit<HTMLNextUIProps<"input">, keyof ComboBoxProps<T>> {
+interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>> {
   /**
    * Ref to the DOM node.
    */
@@ -110,16 +111,34 @@ interface Props<T> extends Omit<HTMLNextUIProps<"input">, keyof ComboBoxProps<T>
    * Callback fired when the select menu is closed.
    */
   onClose?: () => void;
+  /**
+   * Whether to enable virtualization of the listbox items.
+   * By default, virtualization is automatically enabled when the number of items is greater than 50.
+   * @default undefined
+   */
+  isVirtualized?: boolean;
 }
 
 export type UseAutocompleteProps<T> = Props<T> &
   Omit<InputProps, "children" | "value" | "isClearable" | "defaultValue" | "classNames"> &
   ComboBoxProps<T> &
   AsyncLoadable &
-  AutocompleteVariantProps;
+  AutocompleteVariantProps & {
+    /**
+     * The height of each item in the listbox.
+     * This is required for virtualized listboxes to calculate the height of each item.
+     */
+    itemHeight?: number;
+    /**
+     * The max height of the listbox (which will be rendered in a popover).
+     * This is required for virtualized listboxes to set the maximum height of the listbox.
+     */
+    maxListboxHeight?: number;
+  };
 
 export function useAutocomplete<T extends object>(originalProps: UseAutocompleteProps<T>) {
   const globalContext = useProviderContext();
+  const {validationBehavior: formValidationBehavior} = useSlottedContext(FormContext) || {};
 
   const [props, variantProps] = mapPropsVariants(originalProps, autocomplete.variantKeys);
   const disableAnimation =
@@ -158,7 +177,10 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     clearButtonProps = {},
     showScrollIndicators = true,
     allowsCustomValue = false,
-    validationBehavior = globalContext?.validationBehavior ?? "aria",
+    isVirtualized,
+    maxListboxHeight = 256,
+    itemHeight = 32,
+    validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     className,
     classNames,
     errorMessage,
@@ -363,9 +385,8 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         ...variantProps,
         isClearable,
         disableAnimation,
-        className,
       }),
-    [objectToDeps(variantProps), isClearable, disableAnimation, className],
+    [objectToDeps(variantProps), isClearable, disableAnimation],
   );
 
   const getBaseProps: PropGetter = () => ({
@@ -396,13 +417,9 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       onPress: (e: PressEvent) => {
         slotsProps.clearButtonProps?.onPress?.(e);
         if (state.selectedItem) {
-          state.setInputValue("");
           state.setSelectedKey(null);
-        } else {
-          if (allowsCustomValue) {
-            state.setInputValue("");
-          }
         }
+        state.setInputValue("");
         state.open();
       },
       "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
@@ -411,12 +428,19 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       }),
     } as ButtonProps);
 
+  // prevent use-input's useFormValidation hook from overwriting use-autocomplete's useFormValidation hook when there are uncommitted validation errors
+  // see https://github.com/heroui-inc/heroui/pull/4452
+  const hasUncommittedValidation =
+    validationBehavior === "native" &&
+    state.displayValidation.isInvalid === false &&
+    state.realtimeValidation.isInvalid === true;
+
   const getInputProps = () =>
     ({
       ...otherProps,
       ...inputProps,
       ...slotsProps.inputProps,
-      isInvalid,
+      isInvalid: hasUncommittedValidation ? undefined : isInvalid,
       validationBehavior,
       errorMessage:
         typeof errorMessage === "function"
@@ -425,14 +449,26 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
     } as unknown as InputProps);
 
-  const getListBoxProps = () =>
-    ({
+  const getListBoxProps = () => {
+    // Use isVirtualized prop if defined, otherwise fallback to default behavior
+    const shouldVirtualize = isVirtualized ?? state.collection.size > 50;
+
+    return {
       state,
       ref: listBoxRef,
+      isVirtualized: shouldVirtualize,
+      virtualization: shouldVirtualize
+        ? {
+            maxListboxHeight,
+            itemHeight,
+          }
+        : undefined,
+      scrollShadowProps: slotsProps.scrollShadowProps,
       ...mergeProps(slotsProps.listboxProps, listBoxProps, {
         shouldHighlightOnFocus: true,
       }),
-    } as ListboxProps);
+    } as ListboxProps;
+  };
 
   const getPopoverProps = (props: DOMAttributes = {}) => {
     const popoverProps = mergeProps(slotsProps.popoverProps, props);
@@ -445,6 +481,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       triggerType: "listbox",
       ...popoverProps,
       classNames: {
+        ...slotsProps.popoverProps?.classNames,
         content: slots.popoverContent({
           class: clsx(
             classNames?.popoverContent,
@@ -479,6 +516,9 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         props?.className,
       ),
     }),
+    style: {
+      maxHeight: originalProps.maxListboxHeight ?? 256,
+    },
   });
 
   const getEndContentWrapperProps: PropGetter = (props: any = {}) => ({

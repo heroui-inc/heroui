@@ -41,8 +41,7 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
     onPress,
     onPressStart,
     onPressEnd,
-    // @ts-ignore
-    onClick: deprecatedOnClick,
+    onClick,
     isDisabled,
     ...otherProps
   } = props;
@@ -55,8 +54,16 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
       tabIndex: !isDisabled ? 0 : undefined,
     };
   }
+
   let {focusableProps} = useFocusable(props, ref);
-  let {pressProps, isPressed} = usePress({onPress, onPressStart, onPressEnd, isDisabled, ref});
+  let {pressProps, isPressed} = usePress({
+    onClick,
+    onPress,
+    onPressStart,
+    onPressEnd,
+    isDisabled,
+    ref,
+  });
   let domProps = filterDOMProps(otherProps, {labelable: true, isLink: elementType === "a"});
   let interactionHandlers = mergeProps(focusableProps, pressProps);
   let router = useRouter();
@@ -71,9 +78,6 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
       "aria-current": props["aria-current"],
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         pressProps.onClick?.(e);
-        if (deprecatedOnClick) {
-          deprecatedOnClick(e);
-        }
 
         // If a custom router is provided, prevent default and forward if this link should client navigate.
         if (

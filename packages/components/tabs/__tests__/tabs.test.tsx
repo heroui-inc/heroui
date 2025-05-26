@@ -1,7 +1,8 @@
 import * as React from "react";
 import {act, render, fireEvent, within} from "@testing-library/react";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {focus} from "@nextui-org/test-utils";
+import {focus} from "@heroui/test-utils";
+import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
 import {Tabs, Tab, TabsProps} from "../src";
 
@@ -45,10 +46,6 @@ function getPlacementTemplate(position: TabsProps["placement"]) {
   );
 }
 
-// e.g. console.error Warning: Function components cannot be given refs.
-// Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
-const spy = jest.spyOn(console, "error").mockImplementation(() => {});
-
 describe("Tabs", () => {
   let user: UserEvent;
 
@@ -76,7 +73,9 @@ describe("Tabs", () => {
 
     expect(() => wrapper.unmount()).not.toThrow();
 
-    expect(spy).toHaveBeenCalledTimes(0);
+    if (!shouldIgnoreReactWarning(spy)) {
+      expect(spy).toHaveBeenCalledTimes(0);
+    }
   });
 
   it("should render correctly (dynamic)", () => {
@@ -387,6 +386,19 @@ describe("Tabs", () => {
     expect(tab1).toHaveFocus();
 
     expect(input).toHaveValue("23");
+  });
+
+  test("should forward ref to the tab item", () => {
+    const ref = React.createRef<HTMLButtonElement>();
+
+    render(
+      <Tabs aria-label="Tabs static test">
+        <Tab key="item1" tabRef={ref} title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+      </Tabs>,
+    );
+    expect(ref.current).not.toBeNull();
   });
 
   it("Tab click should be handled", async () => {

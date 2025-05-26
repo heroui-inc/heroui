@@ -2,7 +2,7 @@ import type {RangeValue, DateValue} from "../src";
 
 import React from "react";
 import {Meta} from "@storybook/react";
-import {calendar} from "@nextui-org/theme";
+import {calendar} from "@heroui/theme";
 import {
   today,
   getLocalTimeZone,
@@ -14,9 +14,9 @@ import {
   endOfWeek,
 } from "@internationalized/date";
 import {I18nProvider, useLocale} from "@react-aria/i18n";
-import {Button, ButtonGroup} from "@nextui-org/button";
-import {Radio, RadioGroup} from "@nextui-org/radio";
-import {cn} from "@nextui-org/theme";
+import {Button, ButtonGroup} from "@heroui/button";
+import {Radio, RadioGroup} from "@heroui/radio";
+import {cn} from "@heroui/theme";
 
 import {RangeCalendar, RangeCalendarProps} from "../src";
 
@@ -42,10 +42,12 @@ export default {
       },
       options: ["narrow", "short", "long"],
     },
+    firstDayOfWeek: {
+      control: "select",
+      options: [undefined, "sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+    },
   },
 } as Meta<typeof RangeCalendar>;
-
-delete calendar.defaultVariants?.showMonthAndYearPickers;
 
 const defaultProps = {
   ...calendar.defaultVariants,
@@ -60,7 +62,7 @@ const ControlledTemplate = (args: RangeCalendarProps) => {
     end: today(getLocalTimeZone()).add({weeks: 1}),
   };
 
-  let [value, setValue] = React.useState<RangeValue<DateValue>>(defaultValue);
+  let [value, setValue] = React.useState<RangeValue<DateValue> | null>(defaultValue);
 
   return (
     <div className="flex flex-wrap gap-4">
@@ -143,7 +145,7 @@ const ControlledFocusedValueTemplate = (args: RangeCalendarProps) => {
 };
 
 const InvalidDatesTemplate = (args: RangeCalendarProps) => {
-  let [date, setDate] = React.useState<RangeValue<DateValue>>({
+  let [date, setDate] = React.useState<RangeValue<DateValue> | null>({
     start: today(getLocalTimeZone()),
     end: today(getLocalTimeZone()).add({weeks: 1}),
   });
@@ -174,12 +176,12 @@ const InternationalCalendarsTemplate = (args: RangeCalendarProps) => {
 };
 
 const PresetsTemplate = (args: RangeCalendarProps) => {
-  let [value, setValue] = React.useState<RangeValue<DateValue>>({
+  let [value, setValue] = React.useState<RangeValue<DateValue> | null>({
     start: today(getLocalTimeZone()),
     end: today(getLocalTimeZone()).add({weeks: 1, days: 3}),
   });
 
-  let [focusedValue, setFocusedValue] = React.useState<DateValue>(today(getLocalTimeZone()));
+  let [focusedValue, setFocusedValue] = React.useState<DateValue | null>(today(getLocalTimeZone()));
 
   let {locale} = useLocale();
 
@@ -378,6 +380,14 @@ export const InvalidDates = {
   },
 };
 
+export const WithMonthAndYearPickers = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    showMonthAndYearPickers: true,
+  },
+};
+
 export const InternationalCalendars = {
   render: InternationalCalendarsTemplate,
   args: {
@@ -406,5 +416,13 @@ export const Presets = {
   render: PresetsTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const FirstDayOfWeek = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    firstDayOfWeek: "mon",
   },
 };

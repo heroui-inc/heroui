@@ -1,22 +1,22 @@
-import type {PaginationSlots, PaginationVariantProps, SlotsToClasses} from "@nextui-org/theme";
+import type {PaginationSlots, PaginationVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {Key, ReactNode, Ref} from "react";
-import type {HTMLNextUIProps, PropGetter} from "@nextui-org/system";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {objectToDeps, Timer} from "@nextui-org/shared-utils";
-import {useLocale} from "@react-aria/i18n";
+import {objectToDeps, Timer} from "@heroui/shared-utils";
 import {
   UsePaginationProps as UseBasePaginationProps,
   PaginationItemValue,
   PaginationItemType,
-} from "@nextui-org/use-pagination";
+} from "@heroui/use-pagination";
 import {useEffect, useRef, useMemo} from "react";
-import {mapPropsVariants, useProviderContext} from "@nextui-org/system";
-import {usePagination as useBasePagination} from "@nextui-org/use-pagination";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {usePagination as useBasePagination} from "@heroui/use-pagination";
 import scrollIntoView from "scroll-into-view-if-needed";
-import {pagination} from "@nextui-org/theme";
-import {useDOMRef} from "@nextui-org/react-utils";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {pagination} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr} from "@heroui/shared-utils";
 import {PressEvent} from "@react-types/shared";
+import {useIntersectionObserver} from "@heroui/use-intersection-observer";
 
 export type PaginationItemRenderProps = {
   /**
@@ -107,7 +107,7 @@ export type PaginationItemRenderProps = {
   getAriaLabel?: (page?: PaginationItemValue) => string | undefined;
 };
 
-interface Props extends Omit<HTMLNextUIProps<"nav">, "onChange"> {
+interface Props extends Omit<HTMLHeroUIProps<"nav">, "onChange"> {
   /**
    * Ref to the DOM node.
    */
@@ -194,10 +194,6 @@ export function usePagination(originalProps: UsePaginationProps) {
 
   const cursorTimer = useRef<Timer>();
 
-  const {direction} = useLocale();
-
-  const isRTL = direction === "rtl";
-
   const disableAnimation =
     originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
   const disableCursorAnimation = originalProps?.disableCursorAnimation ?? disableAnimation ?? false;
@@ -278,17 +274,30 @@ export function usePagination(originalProps: UsePaginationProps) {
     onChange,
   });
 
+  // check if the pagination component is visible
+  const [setRef, isVisible] = useIntersectionObserver();
+
+  useEffect(() => {
+    if (domRef.current) {
+      setRef(domRef.current);
+    }
+  }, [domRef.current]);
+
   const activePageRef = useRef(activePage);
 
   useEffect(() => {
-    if (activePage && !disableAnimation) {
+    // when the pagination component is invisible, scroll offset will be wrong
+    // thus, only scroll to the active page if the pagination component is visible
+    if (activePage && !disableAnimation && isVisible) {
       scrollTo(activePage, activePage === activePageRef.current);
     }
     activePageRef.current = activePage;
   }, [
+    page,
     activePage,
     disableAnimation,
     disableCursorAnimation,
+    isVisible,
     originalProps.dotsJump,
     originalProps.isCompact,
     originalProps.showControls,
@@ -307,7 +316,7 @@ export function usePagination(originalProps: UsePaginationProps) {
   const baseStyles = clsx(classNames?.base, className);
 
   const onNext = () => {
-    if (loop && activePage === (isRTL ? 1 : total)) {
+    if (loop && activePage === total) {
       return first();
     }
 
@@ -315,7 +324,7 @@ export function usePagination(originalProps: UsePaginationProps) {
   };
 
   const onPrevious = () => {
-    if (loop && activePage === (isRTL ? total : 1)) {
+    if (loop && activePage === 1) {
       return last();
     }
 

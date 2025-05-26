@@ -14,7 +14,8 @@ concurrency:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
+    timeout-minutes: 30
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -22,13 +23,22 @@ jobs:
       - name: Install
         uses: ./.github/common-actions/install
 
-      - name: Build
-        run: pnpm build
-
       - name: Tests
         run: pnpm test
 
+      - name: Build
+        id: build
+        continue-on-error: false
+        # Custom turbo build failure information
+        run: |
+          pnpm build || {
+            echo "Turbo build failed with exit code $?"
+            exit 1
+          }
+
       - name: Create Release Pull Request or Publish to NPM
+        # Run only if the build is successful
+        if: steps.build.outcome == 'success'
         id: changesets
         uses: changesets/action@v1
         with:
@@ -41,17 +51,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Sync files from canary to main branch if a publish happens
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/owner/repo/dispatches \
-            -d '{"event_type":"sync-canary-to-main"}'
-
       - name: Create canary release
-        if: steps.changesets.outputs.published != 'true'
+        if: steps.build.outcome == 'success' && steps.changesets.outputs.published != 'true'
+        timeout-minutes: 15
         run: |
           git checkout canary
           pnpm version:canary

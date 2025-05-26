@@ -1,0 +1,62 @@
+{
+  "name": "@heroui/alert",
+  "version": "2.2.19",
+  "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
+  "keywords": [
+    "alert"
+  ],
+  "author": "HeroUI <support@heroui.com>",
+  "contributors": [
+    "Abhinav Agarwal <abhinavagrawl700@gmail.com>",
+    "WK Wong <wingkwong.code@gmail.com>"
+  ],
+  "homepage": "https://heroui.com",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "directory": "packages/components/alert"
+  },
+  "bugs": {
+    "url": "https://github.com/heroui-inc/heroui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "dev": "pnpm build:fast --watch",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "build:fast": "tsup src",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0",
+    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.7"
+  },
+  "dependencies": {
+    "@heroui/react-utils": "workspace:*",
+    "@heroui/shared-icons": "workspace:*",
+    "@heroui/shared-utils": "workspace:*",
+    "@react-stately/utils": "3.10.6",
+    "@react-aria/utils": "3.28.2",
+    "@heroui/button": "workspace:*"
+  },
+  "devDependencies": {
+    "@heroui/system": "workspace:*",
+    "@heroui/theme": "workspace:*",
+    "clean-package": "2.2.0",
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
+  },
+  "clean-package": "../../../clean-package.config.json"
+}

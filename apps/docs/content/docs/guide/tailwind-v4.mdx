@@ -1,0 +1,125 @@
+---
+title: Tailwind v4
+description: Learn how to migrate your Tailwind v4 project to HeroUI.
+---
+
+# Tailwind v4
+
+TailwindCSS v4 is now available in Beta! This guide will help you migrate your existing TailwindCSS v4 project to HeroUI. The demonstration is available at https://beta.heroui.com/.
+
+---
+
+<CarbonAd/>
+
+## Migration Steps
+
+1. Follow the [official Tailwind v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide)
+2. Install the `beta` version of HeroUI
+
+
+
+<PackageManagers
+  commands={{
+    cli: "npx heroui-cli@latest upgrade --all --beta",
+    pnpm: "pnpm install @heroui/react@beta",
+    npm: "npm install @heroui/react@beta",
+    yarn: "yarn install @heroui/react@beta",
+    bun: "bun install @heroui/react@beta"
+  }}
+/>
+
+3. Configure HeroUI with the new Tailwind v4 syntax
+
+### Update CSS Import
+
+#### Without `tailwind.config.js`
+
+Since Tailwind v4 favors a CSS-first approach, `tailwind.config.js` will not be required. 
+
+Create `hero.ts` file
+
+```tsx
+// hero.ts
+import { heroui } from "@heroui/react";
+export default heroui();
+```
+
+Update your main css file
+
+```diff-js
+// your main css file
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
++ @import "tailwindcss";
++ @plugin './hero.ts';
+// Note: You may need to change the path to fit your project structure
++ @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
++ @custom-variant dark (&:is(.dark *));
+```
+
+#### With `tailwind.config.js`
+
+In Tailwind v4, `tailwind.config.js` is still supported for backward compatibility. If you still need to use it, you can load it explicity as below.
+
+```diff-js
+// your main css file
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
++ @import "tailwindcss";
+// Note: You may need to change the path to fit your project structure
++ @config "../../tailwind.config.js";
+```
+
+### Update PostCSS Configuration
+
+```diff-js
+// postcss.config.js
+- export default {
+-   plugins: {
+-     tailwindcss: {},
+-     autoprefixer: {},
+-   },
+- };
+
++ export default {
++   plugins: {
++     "@tailwindcss/postcss": {},
++   },
++ };
+```
+
+### Update Vite Configuration (Vite Projects Only)
+
+```diff-js
+// vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
++ import tailwindcss from "@tailwindcss/vite"
+
+export default defineConfig({
+-  plugins: [react(), tsconfigPaths()],
++  plugins: [react(), tsconfigPaths(), tailwindcss()],
+})
+```
+
+## Verification
+
+After migration, verify that:
+1. Your styles are being applied correctly
+2. The build process completes without errors
+3. HeroUI components render as expected
+
+<Blockquote color="primary">
+  Make sure to check the Tailwind v4 documentation for any breaking changes that might affect your existing styles.
+</Blockquote>
+
+## Need Help?
+
+If you encounter any issues during migration, please:
+- Join our [Discord community](https://discord.gg/9b6yyZKmH4)
+- [Open an issue](https://github.com/heroui-inc/heroui/issues) on our GitHub repository

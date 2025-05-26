@@ -1,20 +1,22 @@
 "use client";
 
 import {BlogPost} from "contentlayer2/generated";
-import {Card, CardFooter, CardBody, CardHeader, Link, Avatar, Image} from "@nextui-org/react";
+import {Card, CardFooter, CardBody, CardHeader, Link, Avatar, Image} from "@heroui/react";
 import Balancer from "react-wrap-balancer";
 import {format, parseISO} from "date-fns";
 import NextLink from "next/link";
 import {AnimatePresence, motion} from "framer-motion";
+import {usePostHog} from "posthog-js/react";
 
 import {useIsMounted} from "@/hooks/use-is-mounted";
-import {trackEvent} from "@/utils/va";
 
 const BlogPostCard = (post: BlogPost) => {
   const isMounted = useIsMounted();
 
+  const posthog = usePostHog();
+
   const handlePress = () => {
-    trackEvent("BlogPostCard - Selection", {
+    posthog.capture("BlogPostCard - Selection", {
       name: post.title,
       action: "click",
       category: "blog",
@@ -32,6 +34,7 @@ const BlogPostCard = (post: BlogPost) => {
           transition={{duration: 0.3}}
         >
           <Card
+            disableRipple
             isBlurred
             as={NextLink}
             className="p-2 h-full border-transparent text-start bg-white/5 dark:bg-default-400/10 backdrop-blur-lg backdrop-saturate-[1.8]"
@@ -42,7 +45,7 @@ const BlogPostCard = (post: BlogPost) => {
             <CardHeader>
               <Link
                 as={NextLink}
-                className="font-semibold "
+                className="font-semibold text-foreground"
                 href={post.url}
                 size="lg"
                 underline="hover"

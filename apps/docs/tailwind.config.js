@@ -1,12 +1,11 @@
-const {nextui} = require("@nextui-org/theme/plugin");
-const {commonColors} = require("@nextui-org/theme/colors");
+const {heroui} = require("@heroui/theme/plugin");
+const {commonColors} = require("@heroui/theme/colors");
 const svgToDataUri = require("mini-svg-data-uri");
 const plugin = require("tailwindcss/plugin");
 const {default: flattenColorPalette} = require("tailwindcss/lib/util/flattenColorPalette");
 
 // get tailwindcss default config
 const defaultTheme = require("tailwindcss/defaultTheme");
-const twColors = require("tailwindcss/colors.js");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -17,7 +16,7 @@ module.exports = {
     "./layouts/**/*.{js,ts,jsx,tsx,mdx}",
     "./libs/**/*.{js,ts,jsx,tsx,mdx}",
     "./content/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -62,17 +61,20 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
+        mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
         serif: defaultTheme.fontFamily.serif,
-        mono: defaultTheme.fontFamily.mono,
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      spacing: {
+        'toast-gap': 'var(--toast-gap)',
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: "hsl(var(--nextui-foreground))",
+            color: "hsl(var(--heroui-foreground))",
             maxWidth: "none",
             hr: {
               marginTop: "2em",
@@ -100,7 +102,7 @@ module.exports = {
             },
             "h3 a": {
               fontSize: "1.25rem !important",
-              fontWeight: theme("fontWeight.medium"),
+              fontWeight: theme("fontWeight.bold"),
             },
             "h2 small, h3 small, h4 small": {
               fontFamily: theme("fontFamily.mono").join(", "),
@@ -118,6 +120,9 @@ module.exports = {
             "h4 small": {
               fontSize: theme("fontSize.sm")[0],
               ...theme("fontSize.sm")[1],
+            },
+            "h4 a": {
+              fontWeight: theme("fontWeight.bold"),
             },
             "h2, h3, h4": {
               "scroll-margin-top": "var(--scroll-mt)",
@@ -147,8 +152,8 @@ module.exports = {
               fontWeight: "inherit",
             },
             strong: {
-              color: "hsl(var(--nextui-strong))",
-              fontWeight: theme("fontWeight.semibold"),
+              color: "hsl(var(--heroui-foreground))",
+              fontWeight: theme("fontWeight.bold"),
             },
             "a strong": {
               color: "inherit",
@@ -168,7 +173,7 @@ module.exports = {
               display: "flex",
               fontSize: theme("fontSize.sm")[0],
               backgroundColor: "transparent",
-              fontWeight: theme("fontWeight.light"),
+              fontWeight: theme("fontWeight.medium"),
               padding: 0,
               margin: 0,
             },
@@ -226,31 +231,31 @@ module.exports = {
         },
         dark: {
           css: {
-            color: "hsl(var(--nextui-default-700))",
+            color: "hsl(var(--heroui-default-700))",
             strong: {
-              color: "hsl(var(--nextui-cyan-500))",
+              color: "hsl(var(--heroui-cyan-500))",
             },
           },
         },
         neutral: {
           css: {
-            "--tw-prose-body": "hsl(var(--nextui-default-700))",
-            "--tw-prose-headings": "hsl(var(--nextui-foreground))",
-            "--tw-prose-lead": "hsl(var(--nextui-default-600))",
-            "--tw-prose-links": "hsl(var(--nextui-default-900))",
-            "--tw-prose-bold": "hsl(var(--nextui-default-900))",
-            "--tw-prose-counters": "hsl(var(--nextui-default-500))",
-            "--tw-prose-bullets": "hsl(var(--nextui-default-300))",
-            "--tw-prose-hr": "hsl(var(--nextui-default-200))",
-            "--tw-prose-quotes": "hsl(var(--nextui-default-900))",
-            "--tw-prose-quote-borders": "hsl(var(--nextui-default-200))",
-            "--tw-prose-captions": "hsl(var(--nextui-default-500))",
-            "--tw-prose-code": "hsl(var(--nextui-default-900))",
-            "--tw-prose-pre-code": "hsl(var(--nextui-default-200))",
-            "--tw-prose-pre-bg": "hsl(var(--nextui-default-800))",
-            "--tw-prose-th-borders": "hsl(var(--nextui-default-300))",
-            "--tw-prose-td-borders": "hsl(var(--nextui-default-200))",
-            "--tw-prose-invert-body": "hsl(var(--nextui-default-300))",
+            "--tw-prose-body": "hsl(var(--heroui-default-700))",
+            "--tw-prose-headings": "hsl(var(--heroui-foreground))",
+            "--tw-prose-lead": "hsl(var(--heroui-default-600))",
+            "--tw-prose-links": "hsl(var(--heroui-default-900))",
+            "--tw-prose-bold": "hsl(var(--heroui-default-900))",
+            "--tw-prose-counters": "hsl(var(--heroui-default-500))",
+            "--tw-prose-bullets": "hsl(var(--heroui-default-300))",
+            "--tw-prose-hr": "hsl(var(--heroui-default-200))",
+            "--tw-prose-quotes": "hsl(var(--heroui-default-900))",
+            "--tw-prose-quote-borders": "hsl(var(--heroui-default-200))",
+            "--tw-prose-captions": "hsl(var(--heroui-default-500))",
+            "--tw-prose-code": "hsl(var(--heroui-default-900))",
+            "--tw-prose-pre-code": "hsl(var(--heroui-default-200))",
+            "--tw-prose-pre-bg": "hsl(var(--heroui-default-800))",
+            "--tw-prose-th-borders": "hsl(var(--heroui-default-300))",
+            "--tw-prose-td-borders": "hsl(var(--heroui-default-200))",
+            "--tw-prose-invert-body": "hsl(var(--heroui-default-300))",
             "--tw-prose-invert-headings": commonColors.white,
             "--tw-prose-invert-lead": theme("twColors.neutral[400]"),
             "--tw-prose-invert-links": commonColors.white,
@@ -262,7 +267,7 @@ module.exports = {
             "--tw-prose-invert-quote-borders": theme("twColors.neutral[700]"),
             "--tw-prose-invert-captions": theme("twColors.neutral[400]"),
             "--tw-prose-invert-code": commonColors.white,
-            "--tw-prose-invert-pre-code": "hsl(var(--nextui-default-300))",
+            "--tw-prose-invert-pre-code": "hsl(var(--heroui-default-300))",
             "--tw-prose-invert-pre-bg": "rgb(0 0 0 / 50%)",
             "--tw-prose-invert-th-borders": theme("twColors.neutral[600]"),
             "--tw-prose-invert-td-borders": theme("twColors.neutral[700]"),
@@ -316,6 +321,18 @@ module.exports = {
             backgroundPosition: "-200% center",
           },
         },
+        "scrolling-banner": {
+          from: {transform: "translateX(0)"},
+          to: {transform: "translateX(calc(-50% - var(--gap)/2))"},
+        },
+        "scrolling-banner-vertical": {
+          from: {transform: "translateY(0)"},
+          to: {transform: "translateY(calc(-50% - var(--gap)/2))"},
+        },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
       },
       animation: {
         heartbeat: "heartbeat 1s ease-in-out infinite",
@@ -323,16 +340,30 @@ module.exports = {
         expand: "expand 6s ease-out infinite both",
         "expand-opacity": "expand-opacity 6s linear infinite both",
         "text-gradient": "text-gradient 4s linear 0s infinite normal forwards running",
+        "scrolling-banner": "scrolling-banner var(--duration) linear infinite",
+        "scrolling-banner-vertical": "scrolling-banner-vertical var(--duration) linear infinite",
+        fadeIn: "fadeIn 0.5s ease-in-out forwards",
       },
-    },
+      maxWidth: {
+        "8xl": "90rem", // 1440px
+      },
+      utilities: {
+        '.scrollbar-hide': {
+          'scrollbar-width': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }
+      },
+    }
   },
   plugins: [
-    nextui({
+    heroui({
       addCommonColors: true,
       themes: {
         light: {
           colors: {
-            "code-background": "#363449",
+            "code-background": "#262b36",
             strong: "#ff4ecd",
             "code-mdx": "#ff4ecd",
           },
@@ -340,7 +371,7 @@ module.exports = {
         dark: {
           colors: {
             strong: "#06B7DB",
-            "code-background": "#0D0B0B",
+            "code-background": "#111113",
             "code-mdx": "#06B7DB",
           },
         },

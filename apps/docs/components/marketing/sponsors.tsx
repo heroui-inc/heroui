@@ -1,7 +1,7 @@
-import {Button, Link} from "@nextui-org/react";
+import {Button, Link} from "@heroui/react";
 
 import {sectionWrapper} from "@/components/primitives";
-import {Story2DesignLogo, CodeRabbitLogo, ScrumbuissLogo} from "@/components/icons/sponsors";
+import {Story2DesignLogo, CodeRabbitLogo, MochiiAILogo} from "@/components/icons/sponsors";
 import {HeartFilledIcon} from "@/components/icons";
 import {siteConfig} from "@/config/site";
 import {Sponsor, SponsorItem} from "@/components/marketing/sponsor-item";
@@ -9,18 +9,18 @@ import {Sponsor, SponsorItem} from "@/components/marketing/sponsor-item";
 const sponsors: Sponsor[] = [
   {
     name: "story.to.design",
-    href: "https://story.to.design?utm_source=nextui&utm_marketing=partnership",
+    href: "https://story.to.design?utm_source=heroui&utm_marketing=partnership",
     logo: <Story2DesignLogo className="pt-1" />,
   },
   {
     name: "CodeRabbit",
-    href: "https://coderabbit.ai/?utm_source=nextui&utm_marketing=oss",
+    href: "https://coderabbit.ai/?utm_source=heroui&utm_marketing=oss",
     logo: <CodeRabbitLogo />,
   },
   {
-    name: "Scrumbuiss",
-    href: "https://www.scrumbuiss.com/?utm_source=nextui&utm_marketing=oss",
-    logo: <ScrumbuissLogo />,
+    name: "Mochii.AI",
+    href: "https://www.mochii.ai/?utm_source=heroui&utm_marketing=oss",
+    logo: <MochiiAILogo />,
   },
 ];
 

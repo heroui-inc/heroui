@@ -6,13 +6,12 @@ import {
   Button,
   ModalContent,
   ModalHeader,
-  Link as NextUILink,
+  Link as HeroUILink,
   ModalBody,
   ModalFooter,
   Skeleton,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Link from "next/link";
-import {toLower} from "lodash";
 
 import {CodeWindow} from "@/components/code-window";
 import {useIsMobile} from "@/hooks/use-media-query";
@@ -30,8 +29,8 @@ export const DemoCodeModal: FC<DemoCodeModalProps> = ({isOpen, code, title, subt
 
   const isMobile = useIsMobile();
 
-  const lowerTitle = toLower(title);
-  const fileName = `${toLower(lowerTitle)}.tsx`;
+  const lowerTitle = title.toLowerCase();
+  const fileName = `${lowerTitle}.tsx`;
 
   return (
     <Modal
@@ -57,9 +56,9 @@ export const DemoCodeModal: FC<DemoCodeModalProps> = ({isOpen, code, title, subt
               <>
                 This is an example of how to use the {lowerTitle} component, for more information
                 please visit the&nbsp;
-                <NextUILink as={Link} href={`/docs/components/${lowerTitle}`}>
+                <HeroUILink as={Link} href={`/docs/components/${lowerTitle}`}>
                   {lowerTitle}
-                </NextUILink>
+                </HeroUILink>
                 &nbsp;docs.
               </>
             )}

@@ -20,11 +20,11 @@ Display user information with avatar and name.
 <PackageManagers
   showGlobalInstallWarning
   commands={{
-    cli: "npx nextui-cli@latest add user",
-    npm: "npm install @nextui-org/user",
-    yarn: "yarn add @nextui-org/user",
-    pnpm: "pnpm add @nextui-org/user",
-    bun: "bun add @nextui-org/user"
+    cli: "npx heroui-cli@latest add user",
+    npm: "npm install @heroui/user",
+    yarn: "yarn add @heroui/user",
+    pnpm: "pnpm add @heroui/user",
+    bun: "bun add @heroui/user"
   }}
 />
 
@@ -33,8 +33,8 @@ Display user information with avatar and name.
 
 <ImportTabs
   commands={{
-    main: 'import {User} from "@nextui-org/react";',
-    individual: 'import {User} from "@nextui-org/user";',
+    main: 'import {User} from "@heroui/react";',
+    individual: 'import {User} from "@heroui/user";',
   }}
 />
 
@@ -72,10 +72,37 @@ Display user information with avatar and name.
 
 ### User Props
 
-| Attribute   | Type                                                          | Description                                                                                | Default |
-| ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------- |
-| name        | `string`                                                      | The name of the user.                                                                      | -       |
-| description | `ReactNode`                                                   | The description component.                                                                 | -       |
-| isFocusable | `boolean`                                                     | Whether the user is focusable. This is useful when using `Dropdown` or similar components. | `false` |
-| avatarProps | [AvatarProps](/docs/components/avatar#avatar-props)           | The avatar component props. The `name` is passed by default.                               | -       |
-| classNames  | `Record<"base"｜ "wrapper"｜ "name"｜ "description", string>` | Allows to set custom class names for the user slots.                                       | -       |
+<APITable
+  data={[
+    {
+      attribute: "name",
+      type: "string",
+      description: "The name of the user.",
+      default: "-"
+    },
+    {
+      attribute: "description", 
+      type: "ReactNode",
+      description: "The description component.",
+      default: "-"
+    },
+    {
+      attribute: "isFocusable",
+      type: "boolean", 
+      description: "Whether the user is focusable. This is useful when using `Dropdown` or similar components.",
+      default: "false"
+    },
+    {
+      attribute: "avatarProps",
+      type: "AvatarProps",
+      description: "The avatar component props. The `name` is passed by default.",
+      default: "-"
+    },
+    {
+      attribute: "classNames",
+      type: "Partial<Record<\"base\" | \"wrapper\" | \"name\" | \"description\", string>>",
+      description: "Allows to set custom class names for the user slots.",
+      default: "-"
+    }
+  ]}
+/>

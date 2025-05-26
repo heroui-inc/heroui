@@ -1,14 +1,16 @@
 import type {Variants} from "framer-motion";
 
-import {forwardRef} from "@nextui-org/system";
+import {forwardRef} from "@heroui/system";
 import {useMemo, ReactNode} from "react";
-import {ChevronIcon} from "@nextui-org/shared-icons";
-import {AnimatePresence, LazyMotion, domAnimation, m, useWillChange} from "framer-motion";
-import {TRANSITION_VARIANTS} from "@nextui-org/framer-utils";
+import {ChevronIcon} from "@heroui/shared-icons";
+import {AnimatePresence, LazyMotion, m, useWillChange} from "framer-motion";
+import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 
 import {UseAccordionItemProps, useAccordionItem} from "./use-accordion-item";
 
 export interface AccordionItemProps extends UseAccordionItemProps {}
+
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
 
 const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   const {
@@ -38,7 +40,7 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   const willChange = useWillChange();
 
-  const indicatorContent = useMemo<ReactNode | null>(() => {
+  const indicatorContent = useMemo<ReactNode>(() => {
     if (typeof indicator === "function") {
       return indicator({indicator: <ChevronIcon />, isOpen, isDisabled});
     }
@@ -52,7 +54,11 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   const content = useMemo(() => {
     if (disableAnimation) {
-      return <div {...getContentProps()}>{children}</div>;
+      if (keepContentMounted) {
+        return <div {...getContentProps()}>{children}</div>;
+      }
+
+      return isOpen && <div {...getContentProps()}>{children}</div>;
     }
 
     const transitionVariants: Variants = {
@@ -124,6 +130,6 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   );
 });
 
-AccordionItem.displayName = "NextUI.AccordionItem";
+AccordionItem.displayName = "HeroUI.AccordionItem";
 
 export default AccordionItem;

@@ -1,12 +1,12 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {navbar} from "@nextui-org/theme";
-import {Link} from "@nextui-org/link";
-import {Button} from "@nextui-org/button";
-import {Avatar} from "@nextui-org/avatar";
-import {Input} from "@nextui-org/input";
+import {navbar} from "@heroui/theme";
+import {Link} from "@heroui/link";
+import {Button} from "@heroui/button";
+import {Avatar} from "@heroui/avatar";
+import {Input} from "@heroui/input";
 import Lorem from "react-lorem-component";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/dropdown";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
 import {
   ChevronDown,
   Lock,
@@ -16,7 +16,7 @@ import {
   TagUser,
   Scale,
   SearchIcon,
-} from "@nextui-org/shared-icons";
+} from "@heroui/shared-icons";
 
 import {
   Navbar,
@@ -46,6 +46,11 @@ export default {
       options: ["sm", "md", "lg", "xl", "2xl", "full"],
     },
     isBlurred: {
+      control: {
+        type: "boolean",
+      },
+    },
+    shouldBlockScroll: {
       control: {
         type: "boolean",
       },
@@ -260,7 +265,6 @@ const WithDropdownTemplate = (args: NavbarProps) => {
             </NavbarItem>
             <DropdownMenu
               aria-label="ACME features"
-              className="w-[340px]"
               itemClasses={{
                 base: "gap-4",
                 wrapper: "py-3",
@@ -268,42 +272,35 @@ const WithDropdownTemplate = (args: NavbarProps) => {
             >
               <DropdownItem
                 key="autoscaling"
-                description="ACME scales apps to meet user demand, automagically, based on load."
+                description="ACME scales apps based on demand and load"
                 startContent={icons.scale}
               >
                 Autoscaling
               </DropdownItem>
               <DropdownItem
-                key="safe_and_sound"
-                description="A secure mission control, without the policy headache. Permissions, 2FA, and more."
-                startContent={icons.lock}
-              >
-                Safe and Sound
-              </DropdownItem>
-              <DropdownItem
                 key="usage_metrics"
-                description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
+                description="Real-time metrics to debug issues"
                 startContent={icons.activity}
               >
                 Usage Metrics
               </DropdownItem>
               <DropdownItem
                 key="production_ready"
-                description="ACME runs on ACME, join us and others serving requests at web scale."
+                description="ACME runs on ACME, join us at web scale"
                 startContent={icons.flash}
               >
                 Production Ready
               </DropdownItem>
               <DropdownItem
                 key="99_uptime"
-                description="Applications stay on the grid with high availability and high uptime guarantees."
+                description="High availability and uptime guarantees"
                 startContent={icons.server}
               >
                 +99% Uptime
               </DropdownItem>
               <DropdownItem
                 key="supreme_support"
-                description="Overcome any challenge with a supporting team ready to respond."
+                description="Support team ready to respond"
                 startContent={icons.user}
               >
                 +Supreme Support
@@ -610,6 +607,21 @@ export const WithAvatarUser = {
 
 export const WithSearchInput = {
   render: WithSearchInputTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithShouldBlockScroll = {
+  render: (args) => {
+    return (
+      <div className="flex gap-8 w-[1024px]">
+        <WithMenuTemplate {...args} label="shouldBlockScroll: false" shouldBlockScroll={false} />
+        <WithMenuTemplate {...args} label="shouldBlockScroll: true" shouldBlockScroll={true} />
+      </div>
+    );
+  },
 
   args: {
     ...defaultProps,

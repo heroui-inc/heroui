@@ -1,12 +1,13 @@
 {
-  "name": "@nextui-org/storybook",
+  "name": "@heroui/storybook",
   "version": "2.0.0",
-  "description": "The NextUI react components storybook ",
+  "description": "The HeroUI react components storybook ",
   "keywords": [
     "storybook"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
-  "homepage": "https://nextui.org",
+  "type": "module",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
   "sideEffects": true,
@@ -18,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextui-org/nextui.git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
     "directory": "packages/components/storybook"
   },
   "bugs": {
-    "url": "https://github.com/nextui-org/nextui/issues"
+    "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
     "dev": "pnpm storybook dev -p 6006",
@@ -30,30 +31,31 @@
     "start": "pnpm dlx http-server storybook-static"
   },
   "dependencies": {
-    "@nextui-org/react": "workspace:*",
-    "@nextui-org/system": "workspace:*",
-    "@nextui-org/theme": "workspace:*",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@heroui/react": "workspace:*",
+    "@heroui/system": "workspace:*",
+    "@heroui/theme": "workspace:*",
+    "react": "18.3.0",
+    "react-dom": "18.3.0"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^7.4.6",
-    "@storybook/addon-actions": "^7.4.6",
-    "@storybook/addon-docs": "^7.4.6",
-    "@storybook/addon-essentials": "^7.4.6",
-    "@storybook/addon-links": "^7.4.6",
-    "@storybook/addon-mdx-gfm": "^7.4.6",
-    "@storybook/cli": "^7.4.6",
-    "@storybook/manager-api": "^7.6.17",
-    "@storybook/preview-api": "^7.6.17",
-    "@storybook/react": "^7.4.6",
-    "@storybook/react-vite": "^7.4.6",
-    "@storybook/theming": "^7.4.6",
+    "@storybook/addon-a11y": "^8.5.0",
+    "@storybook/addon-actions": "^8.5.0",
+    "@storybook/addon-docs": "^8.5.0",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/addon-links": "^8.5.0",
+    "@storybook/cli": "^8.5.0",
+    "@storybook/manager-api": "^8.5.0",
+    "@storybook/preview-api": "^8.5.0",
+    "@storybook/react": "^8.5.0",
+    "@storybook/react-vite": "^8.5.0",
+    "@storybook/theming": "^8.5.0",
+    "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.13",
-    "storybook": "^7.4.6",
-    "storybook-dark-mode": "^3.0.1",
+    "remark-gfm": "^4.0.0",
+    "storybook": "^8.5.0",
+    "storybook-dark-mode": "^4.0.2",
     "tailwindcss": "^3.3.5",
-    "vite": "^4.4.7"
+    "vite": "^5.4.11"
   },
   "tsup": {
     "clean": true,

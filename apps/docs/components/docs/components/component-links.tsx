@@ -1,10 +1,10 @@
-import {Button, ButtonProps, Code, Link, Tooltip} from "@nextui-org/react";
+import {Button, ButtonProps, Code, Link, Tooltip} from "@heroui/react";
 import {ReactNode} from "react";
 import Balancer from "react-wrap-balancer";
+import {usePostHog} from "posthog-js/react";
 
 import {GithubIcon, NpmIcon, AdobeIcon, StorybookIcon, NextJsIcon} from "@/components/icons";
 import {COMPONENT_PATH, COMPONENT_THEME_PATH} from "@/libs/github/constants";
-import {trackEvent} from "@/utils/va";
 
 export interface ComponentLinksProps {
   component: string;
@@ -26,10 +26,12 @@ const ButtonLink = ({
   href: string;
   tooltip?: string | ReactNode;
 }) => {
+  const posthog = usePostHog();
+
   const handlePress = () => {
     if (!href) return;
 
-    trackEvent("ComponentLinks - Click", {
+    posthog.capture("ComponentLinks - Click", {
       category: "docs",
       action: "click",
       data: href || "",
@@ -76,7 +78,7 @@ export const ComponentLinks = ({
   return (
     <div className="flex flex-wrap gap-3 mt-6">
       <ButtonLink
-        href={`https://storybook.nextui.org/?path=/story/components-${
+        href={`https://storybook.heroui.com/?path=/story/components-${
           storybook || component
         }--default`}
         startContent={<StorybookIcon className="text-lg text-[#ff4785]" />}
@@ -84,10 +86,10 @@ export const ComponentLinks = ({
         Storybook
       </ButtonLink>
       <ButtonLink
-        href={`https://www.npmjs.com/package/@nextui-org/${npm || component}`}
+        href={`https://www.npmjs.com/package/@heroui/${npm || component}`}
         startContent={<NpmIcon className="text-2xl text-[#E53E3E]" />}
       >
-        {`@nextui-org/${npm || component}`}
+        {`@heroui/${npm || component}`}
       </ButtonLink>
       {reactAriaHook && (
         <ButtonLink

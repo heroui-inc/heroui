@@ -1,26 +1,19 @@
 import type {DateValue, AriaCalendarProps} from "@react-types/calendar";
-import type {ButtonProps} from "@nextui-org/button";
+import type {ButtonProps} from "@heroui/button";
 import type {CalendarState} from "@react-stately/calendar";
 
 import {useMemo, useRef} from "react";
-import {filterDOMProps} from "@nextui-org/react-utils";
+import {filterDOMProps} from "@heroui/react-utils";
 import {useCalendar as useAriaCalendar} from "@react-aria/calendar";
 import {useCalendarState} from "@react-stately/calendar";
 import {createCalendar} from "@internationalized/date";
-import {clsx} from "@nextui-org/shared-utils";
+import {clsx} from "@heroui/shared-utils";
 import {chain, mergeProps} from "@react-aria/utils";
 
 import {ContextType, useCalendarBase, UseCalendarBaseProps} from "./use-calendar-base";
 import {CalendarBaseProps} from "./calendar-base";
 
-interface Props extends UseCalendarBaseProps {
-  /**
-   * Props for the button picker, which is used to select the month, year and expand the header.
-   */
-  buttonPickerProps?: ButtonProps;
-}
-
-export type UseCalendarProps<T extends DateValue> = Props & AriaCalendarProps<T>;
+export type UseCalendarProps<T extends DateValue> = UseCalendarBaseProps & AriaCalendarProps<T>;
 
 export function useCalendar<T extends DateValue>({
   buttonPickerProps: buttonPickerPropsProp,
@@ -36,6 +29,7 @@ export function useCalendar<T extends DateValue>({
     minValue,
     maxValue,
     showHelper,
+    firstDayOfWeek,
     weekdayStyle,
     visibleDuration,
     baseProps,
@@ -85,6 +79,7 @@ export function useCalendar<T extends DateValue>({
       ...baseProps,
       Component,
       showHelper,
+      firstDayOfWeek,
       topContent,
       bottomContent,
       buttonPickerProps,

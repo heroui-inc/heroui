@@ -5,24 +5,20 @@
 
 import Color from "color";
 import plugin from "tailwindcss/plugin.js";
-import get from "lodash.get";
-import omit from "lodash.omit";
-import forEach from "lodash.foreach";
-import mapKeys from "lodash.mapkeys";
-import kebabCase from "lodash.kebabcase";
 import deepMerge from "deepmerge";
+import {omit, kebabCase, mapKeys} from "@heroui/shared-utils";
 
 import {semanticColors, commonColors} from "./colors";
 import {animations} from "./animations";
 import {utilities} from "./utilities";
 import {flattenThemeObject} from "./utils/object";
 import {isBaseTheme} from "./utils/theme";
-import {ConfigTheme, ConfigThemes, DefaultThemeType, NextUIPluginConfig} from "./types";
+import {ConfigTheme, ConfigThemes, DefaultThemeType, HeroUIPluginConfig} from "./types";
 import {lightLayout, darkLayout, defaultLayout} from "./default-layout";
 import {baseStyles} from "./utils/classes";
 import {DEFAULT_TRANSITION_DURATION} from "./utilities/transition";
 
-const DEFAULT_PREFIX = "nextui";
+const DEFAULT_PREFIX = "heroui";
 
 const parsedColorsCache: Record<string, number[]> = {};
 
@@ -63,7 +59,7 @@ const resolveConfig = (
     // flatten color definitions
     const flatColors = flattenThemeObject(colors) as Record<string, string>;
 
-    const flatLayout = layout ? mapKeys(layout, (value, key) => kebabCase(key)) : {};
+    const flatLayout = layout ? mapKeys(layout, (_, key) => kebabCase(key)) : {};
 
     // resolved.variants
     resolved.variants.push({
@@ -84,30 +80,30 @@ const resolveConfig = (
         parsedColorsCache[colorValue] = parsedColor;
 
         const [h, s, l, defaultAlphaValue] = parsedColor;
-        const nextuiColorVariable = `--${prefix}-${colorName}`;
-        const nextuiOpacityVariable = `--${prefix}-${colorName}-opacity`;
+        const herouiColorVariable = `--${prefix}-${colorName}`;
+        const herouiOpacityVariable = `--${prefix}-${colorName}-opacity`;
 
         // set the css variable in "@layer utilities"
-        resolved.utilities[cssSelector]![nextuiColorVariable] = `${h} ${s}% ${l}%`;
+        resolved.utilities[cssSelector]![herouiColorVariable] = `${h} ${s}% ${l}%`;
         // if an alpha value was provided in the color definition, store it in a css variable
         if (typeof defaultAlphaValue === "number") {
-          resolved.utilities[cssSelector]![nextuiOpacityVariable] = defaultAlphaValue.toFixed(2);
+          resolved.utilities[cssSelector]![herouiOpacityVariable] = defaultAlphaValue.toFixed(2);
         }
         // set the dynamic color in tailwind config theme.colors
         resolved.colors[colorName] = ({opacityVariable, opacityValue}) => {
           // if the opacity is set  with a slash (e.g. bg-primary/90), use the provided value
           if (!isNaN(+opacityValue)) {
-            return `hsl(var(${nextuiColorVariable}) / ${opacityValue})`;
+            return `hsl(var(${herouiColorVariable}) / ${opacityValue})`;
           }
           // if no opacityValue was provided (=it is not parsable to a number)
-          // the nextuiOpacityVariable (opacity defined in the color definition rgb(0, 0, 0, 0.5)) should have the priority
+          // the herouiOpacityVariable (opacity defined in the color definition rgb(0, 0, 0, 0.5)) should have the priority
           // over the tw class based opacity(e.g. "bg-opacity-90")
           // This is how tailwind behaves as for v3.2.4
           if (opacityVariable) {
-            return `hsl(var(${nextuiColorVariable}) / var(${nextuiOpacityVariable}, var(${opacityVariable})))`;
+            return `hsl(var(${herouiColorVariable}) / var(${herouiOpacityVariable}, var(${opacityVariable})))`;
           }
 
-          return `hsl(var(${nextuiColorVariable}) / var(${nextuiOpacityVariable}, 1))`;
+          return `hsl(var(${herouiColorVariable}) / var(${herouiOpacityVariable}, 1))`;
         };
       } catch (error: any) {
         // eslint-disable-next-line no-console
@@ -151,6 +147,9 @@ const corePlugin = (
   addCommonColors: boolean,
 ) => {
   const resolved = resolveConfig(themes, defaultTheme, prefix);
+
+  const createStripeGradient = (stripeColor: string, backgroundColor: string) =>
+    `linear-gradient(45deg,  hsl(var(--${prefix}-${stripeColor})) 25%,  hsl(var(--${prefix}-${backgroundColor})) 25%,  hsl(var(--${prefix}-${backgroundColor})) 50%,  hsl(var(--${prefix}-${stripeColor})) 50%,  hsl(var(--${prefix}-${stripeColor})) 75%,  hsl(var(--${prefix}-${backgroundColor})) 75%,  hsl(var(--${prefix}-${backgroundColor})))`;
 
   return plugin(
     ({addBase, addUtilities, addVariant}) => {
@@ -216,9 +215,16 @@ const corePlugin = (
             medium: `var(--${prefix}-box-shadow-medium)`,
             large: `var(--${prefix}-box-shadow-large)`,
           },
+          backgroundSize: {
+            "stripe-size": "1.25rem 1.25rem",
+          },
           backgroundImage: {
-            "stripe-gradient":
-              "linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent)",
+            "stripe-gradient-default": createStripeGradient("default-200", "default-400"),
+            "stripe-gradient-primary": createStripeGradient("primary-200", "primary"),
+            "stripe-gradient-secondary": createStripeGradient("secondary-200", "secondary"),
+            "stripe-gradient-success": createStripeGradient("success-200", "success"),
+            "stripe-gradient-warning": createStripeGradient("warning-200", "warning"),
+            "stripe-gradient-danger": createStripeGradient("danger-200", "danger"),
           },
           transitionDuration: {
             0: "0ms",
@@ -236,7 +242,7 @@ const corePlugin = (
   );
 };
 
-export const nextui = (config: NextUIPluginConfig = {}): ReturnType<typeof plugin> => {
+export const heroui = (config: HeroUIPluginConfig = {}): ReturnType<typeof plugin> => {
   const {
     themes: themeObject = {},
     defaultTheme = "light",
@@ -246,8 +252,8 @@ export const nextui = (config: NextUIPluginConfig = {}): ReturnType<typeof plugi
     addCommonColors = false,
   } = config;
 
-  const userLightColors = get(themeObject, "light.colors", {});
-  const userDarkColors = get(themeObject, "dark.colors", {});
+  const userLightColors = themeObject?.light?.colors || {};
+  const userDarkColors = themeObject?.dark?.colors || {};
 
   const defaultLayoutObj =
     userLayout && typeof userLayout === "object"
@@ -268,27 +274,27 @@ export const nextui = (config: NextUIPluginConfig = {}): ReturnType<typeof plugi
   // get other themes from the config different from light and dark
   let otherThemes = omit(themeObject, ["light", "dark"]) || {};
 
-  forEach(otherThemes, ({extend, colors, layout}, themeName) => {
+  Object.entries(otherThemes).forEach(([themeName, {extend, colors, layout}]) => {
     const baseTheme = extend && isBaseTheme(extend) ? extend : defaultExtendTheme;
 
-    if (colors && typeof colors === "object") {
-      otherThemes[themeName].colors = deepMerge(semanticColors[baseTheme], colors);
-    }
-    if (layout && typeof layout === "object") {
-      otherThemes[themeName].layout = deepMerge(
-        extend ? baseLayouts[extend] : defaultLayoutObj,
-        layout,
-      );
-    }
+    const baseColors = semanticColors[baseTheme];
+
+    otherThemes[themeName].colors =
+      colors && typeof colors === "object" ? deepMerge(baseColors, colors) : baseColors;
+
+    const baseLayout = extend ? baseLayouts[extend] : defaultLayoutObj;
+
+    otherThemes[themeName].layout =
+      layout && typeof layout === "object" ? deepMerge(baseLayout, layout) : baseLayout;
   });
 
   const light: ConfigTheme = {
-    layout: deepMerge(baseLayouts.light, get(themeObject, "light.layout", {})),
+    layout: deepMerge(baseLayouts.light, themeObject?.light?.layout || {}),
     colors: deepMerge(semanticColors.light, userLightColors),
   };
 
   const dark = {
-    layout: deepMerge(baseLayouts.dark, get(themeObject, "dark.layout", {})),
+    layout: deepMerge(baseLayouts.dark, themeObject?.dark?.layout || {}),
     colors: deepMerge(semanticColors.dark, userDarkColors),
   };
 

@@ -5,9 +5,8 @@
 import {FocusableElement} from "@react-types/shared";
 import React, {ReactNode, RefObject} from "react";
 import {useFormReset} from "@react-aria/utils";
-import {useInteractionModality} from "@react-aria/interactions";
 import {useVisuallyHidden} from "@react-aria/visually-hidden";
-import {MultiSelectProps, MultiSelectState} from "@nextui-org/use-aria-multiselect";
+import {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
 import {useFormValidation} from "@react-aria/form";
 
 import {selectData} from "./use-select";
@@ -62,15 +61,16 @@ export function useHiddenSelect<T>(
   triggerRef: RefObject<FocusableElement>,
 ) {
   let data = selectData.get(state) || {};
+
   let {
     autoComplete,
     name = data.name,
     isDisabled = data.isDisabled,
     selectionMode,
     onChange,
+    form,
   } = props;
-  let {validationBehavior, isRequired} = data;
-  let modality = useInteractionModality();
+  let {validationBehavior, isRequired, isInvalid} = data;
   let {visuallyHiddenProps} = useVisuallyHidden();
 
   useFormReset(props.selectRef!, state.selectedKeys, state.setSelectedKeys);
@@ -90,26 +90,17 @@ export function useHiddenSelect<T>(
       ["data-a11y-ignore"]: "aria-hidden-focus",
     },
     inputProps: {
-      type: "text",
-      tabIndex: modality == null || state.isFocused || state.isOpen ? -1 : 0,
-      autoComplete,
-      value: [...state.selectedKeys].join(",") ?? "",
-      required: isRequired,
-      style: {fontSize: 16},
-      onFocus: () => triggerRef.current?.focus(),
-      disabled: isDisabled,
-      // The onChange is handled by the `select` element. This avoids the `form` with input `value`
-      // and no `onChange` warning.
-      onChange: () => {},
+      style: {display: "none"},
     },
     selectProps: {
+      form,
+      autoComplete,
+      disabled: isDisabled,
+      "aria-invalid": isInvalid || undefined,
+      "aria-required": (isRequired && validationBehavior === "aria") || undefined,
+      required: isRequired && validationBehavior === "native",
       name,
       tabIndex: -1,
-      autoComplete,
-      // TODO: Address validation for cases where an option is selected and then deselected.
-      // required: validationBehavior === "native" && isRequired,
-      disabled: isDisabled,
-      size: state.collection.size,
       value:
         selectionMode === "multiple"
           ? [...state.selectedKeys].map((k) => String(k))
@@ -128,13 +119,9 @@ export function useHiddenSelect<T>(
  * form autofill, mobile form navigation, and native form submission.
  */
 export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
-  let {state, triggerRef, selectRef, label, name, isDisabled} = props;
+  let {state, triggerRef, selectRef, label, name, isDisabled, form} = props;
 
-  let {containerProps, inputProps, selectProps} = useHiddenSelect(
-    {...props, selectRef},
-    state,
-    triggerRef,
-  );
+  let {containerProps, selectProps} = useHiddenSelect({...props, selectRef}, state, triggerRef);
 
   // If used in a <form>, use a hidden input so the value can be submitted to a server.
   // If the collection isn't too big, use a hidden <select> element for this so that browser
@@ -142,7 +129,6 @@ export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
   if (state.collection.size <= 300) {
     return (
       <div {...containerProps} data-testid="hidden-select-container">
-        <input {...inputProps} />
         <label>
           {label}
           <select {...selectProps} ref={selectRef}>
@@ -167,6 +153,7 @@ export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
       <input
         autoComplete={selectProps.autoComplete}
         disabled={isDisabled}
+        form={form}
         name={name}
         type="hidden"
         value={[...state.selectedKeys].join(",") ?? ""}

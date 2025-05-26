@@ -1,29 +1,32 @@
-import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@nextui-org/theme";
+import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaDateFieldProps} from "@react-types/datepicker";
-import type {SupportedCalendars} from "@nextui-org/system";
-import type {DateValue, Calendar} from "@internationalized/date";
-import type {ReactRef} from "@nextui-org/react-utils";
+import type {SupportedCalendars} from "@heroui/system";
+import type {DateValue} from "@react-types/datepicker";
+import type {Calendar} from "@internationalized/date";
+import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
+import type {CalendarIdentifier} from "@internationalized/date";
 
 import {useLocale} from "@react-aria/i18n";
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
 import {mergeProps} from "@react-aria/utils";
-import {PropGetter, useProviderContext} from "@nextui-org/system";
-import {HTMLNextUIProps, mapPropsVariants} from "@nextui-org/system";
-import {useDOMRef} from "@nextui-org/react-utils";
+import {PropGetter, useLabelPlacement, useProviderContext} from "@heroui/system";
+import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
+import {useDOMRef} from "@heroui/react-utils";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr, getGregorianYearOffset} from "@nextui-org/shared-utils";
-import {dateInput, cn} from "@nextui-org/theme";
+import {objectToDeps, clsx, dataAttr, getGregorianYearOffset} from "@heroui/shared-utils";
+import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
+import {FormContext, useSlottedContext} from "@heroui/form";
 
-type NextUIBaseProps<T extends DateValue> = Omit<
-  HTMLNextUIProps<"div">,
+type HeroUIBaseProps<T extends DateValue> = Omit<
+  HTMLHeroUIProps<"div">,
   keyof AriaDateFieldProps<T> | "onChange"
 >;
 
-interface Props<T extends DateValue> extends NextUIBaseProps<T> {
+interface Props<T extends DateValue> extends HeroUIBaseProps<T> {
   /**
    * Ref to the DOM node.
    */
@@ -82,7 +85,7 @@ interface Props<T extends DateValue> extends NextUIBaseProps<T> {
    *
    * This way, only GregorianCalendar is imported, and the other calendar implementations can be tree-shaken.
    *
-   * You can also use the NextUIProvider to provide the createCalendar function to all nested components.
+   * You can also use the HeroUIProvider to provide the createCalendar function to all nested components.
    *
    * @default all calendars
    */
@@ -114,12 +117,15 @@ export type UseDateInputProps<T extends DateValue> = Props<T> &
 
 export function useDateInput<T extends DateValue>(originalProps: UseDateInputProps<T>) {
   const globalContext = useProviderContext();
+  const {validationBehavior: formValidationBehavior} = useSlottedContext(FormContext) || {};
 
   const [props, variantProps] = mapPropsVariants(originalProps, dateInput.variantKeys);
 
   const {locale} = useLocale();
 
-  const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
+  const calendarProp = createCalendar(
+    new DateFormatter(locale).resolvedOptions().calendar as CalendarIdentifier,
+  );
 
   // by default, we are using gregorian calendar with possible years in [1900, 2099]
   // however, some locales such as `th-TH-u-ca-buddhist` using different calendar making the years out of bound
@@ -143,7 +149,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     innerWrapperProps: innerWrapperPropsProp,
     errorMessageProps: errorMessagePropsProp,
     descriptionProps: descriptionPropsProp,
-    validationBehavior = globalContext?.validationBehavior ?? "aria",
+    validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     shouldForceLeadingZeros = true,
     minValue = globalContext?.defaultDates?.minDate ??
       new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
@@ -188,16 +194,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
 
   const isInvalid = isInvalidProp || ariaIsInvalid;
 
-  const labelPlacement = useMemo<DateInputVariantProps["labelPlacement"]>(() => {
-    if (
-      (!originalProps.labelPlacement || originalProps.labelPlacement === "inside") &&
-      !props.label
-    ) {
-      return "outside";
-    }
-
-    return originalProps.labelPlacement ?? "inside";
-  }, [originalProps.labelPlacement, props.label]);
+  const labelPlacement = useLabelPlacement({
+    labelPlacement: originalProps.labelPlacement,
+    label,
+  });
 
   const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
 
@@ -207,9 +207,8 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
         ...variantProps,
         disableAnimation,
         labelPlacement,
-        className,
       }),
-    [objectToDeps(variantProps), disableAnimation, labelPlacement, className],
+    [objectToDeps(variantProps), disableAnimation, labelPlacement],
   );
 
   const getLabelProps: PropGetter = (props) => {

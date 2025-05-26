@@ -1,18 +1,23 @@
-import {forwardRef} from "@nextui-org/system";
-import {FreeSoloPopover} from "@nextui-org/popover";
-import {ScrollShadow} from "@nextui-org/scroll-shadow";
-import {ChevronDownIcon, CloseIcon} from "@nextui-org/shared-icons";
-import {Listbox} from "@nextui-org/listbox";
-import {Button} from "@nextui-org/button";
-import {Input} from "@nextui-org/input";
-import {ForwardedRef, ReactElement, Ref} from "react";
+import {forwardRef} from "@heroui/system";
+import {FreeSoloPopover} from "@heroui/popover";
+import {ScrollShadow} from "@heroui/scroll-shadow";
+import {ChevronDownIcon, CloseIcon} from "@heroui/shared-icons";
+import {Listbox} from "@heroui/listbox";
+import {Button} from "@heroui/button";
+import {Input} from "@heroui/input";
+import {ForwardedRef, ReactElement} from "react";
 import {AnimatePresence} from "framer-motion";
 
 import {UseAutocompleteProps, useAutocomplete} from "./use-autocomplete";
 
 interface Props<T> extends UseAutocompleteProps<T> {}
 
-function Autocomplete<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLInputElement>) {
+export type AutocompleteProps<T extends object = object> = Props<T>;
+
+const Autocomplete = forwardRef(function Autocomplete<T extends object>(
+  props: AutocompleteProps<T>,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const {
     Component,
     isOpen,
@@ -57,13 +62,6 @@ function Autocomplete<T extends object>(props: Props<T>, ref: ForwardedRef<HTMLI
       {disableAnimation ? popoverContent : <AnimatePresence>{popoverContent}</AnimatePresence>}
     </Component>
   );
-}
+}) as <T extends object>(props: AutocompleteProps<T>) => ReactElement;
 
-export type AutocompleteProps<T extends object = object> = Props<T> & {ref?: Ref<HTMLElement>};
-
-// forwardRef doesn't support generic parameters, so cast the result to the correct type
-export default forwardRef(Autocomplete) as <T extends object>(
-  props: AutocompleteProps<T>,
-) => ReactElement;
-
-Autocomplete.displayName = "NextUI.Autocomplete";
+export default Autocomplete;

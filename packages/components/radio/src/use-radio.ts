@@ -1,20 +1,20 @@
 import type {AriaRadioProps} from "@react-types/radio";
-import type {RadioVariantProps, RadioSlots, SlotsToClasses} from "@nextui-org/theme";
+import type {RadioVariantProps, RadioSlots, SlotsToClasses} from "@heroui/theme";
 
-import {Ref, ReactNode, useCallback, useId, useState} from "react";
+import {Ref, ReactNode, useCallback, useId} from "react";
 import {useMemo, useRef} from "react";
 import {useFocusRing} from "@react-aria/focus";
-import {useHover, usePress} from "@react-aria/interactions";
-import {radio} from "@nextui-org/theme";
+import {useHover} from "@react-aria/interactions";
+import {radio} from "@heroui/theme";
 import {useRadio as useReactAriaRadio} from "@react-aria/radio";
-import {HTMLNextUIProps, PropGetter, useProviderContext} from "@nextui-org/system";
-import {__DEV__, warn, clsx, dataAttr} from "@nextui-org/shared-utils";
-import {useDOMRef} from "@nextui-org/react-utils";
+import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
+import {__DEV__, warn, clsx, dataAttr} from "@heroui/shared-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {chain, mergeProps} from "@react-aria/utils";
 
 import {useRadioGroupContext} from "./radio-group-context";
 
-interface Props extends Omit<HTMLNextUIProps<"input">, keyof RadioVariantProps> {
+interface Props extends Omit<HTMLHeroUIProps<"input">, keyof RadioVariantProps> {
   /**
    * Ref to the DOM node.
    */
@@ -115,12 +115,7 @@ export function useRadio(props: UseRadioProps) {
     descriptionId,
   ]);
 
-  const {
-    inputProps,
-    isDisabled,
-    isSelected,
-    isPressed: isPressedKeyboard,
-  } = useReactAriaRadio(
+  const {inputProps, isDisabled, isSelected, isPressed} = useReactAriaRadio(
     {
       value,
       children: typeof children === "function" ? true : children,
@@ -135,29 +130,11 @@ export function useRadio(props: UseRadioProps) {
   });
 
   const interactionDisabled = isDisabled || inputProps.readOnly;
-
-  // Handle press state for full label. Keyboard press state is returned by useCheckbox
-  // since it is handled on the <input> element itself.
-  const [isPressed, setPressed] = useState(false);
-  const {pressProps} = usePress({
-    isDisabled: interactionDisabled,
-    onPressStart(e) {
-      if (e.pointerType !== "keyboard") {
-        setPressed(true);
-      }
-    },
-    onPressEnd(e) {
-      if (e.pointerType !== "keyboard") {
-        setPressed(false);
-      }
-    },
-  });
-
   const {hoverProps, isHovered} = useHover({
     isDisabled: interactionDisabled,
   });
 
-  const pressed = interactionDisabled ? false : isPressed || isPressedKeyboard;
+  const pressed = interactionDisabled ? false : isPressed;
 
   const slots = useMemo(
     () =>
@@ -189,7 +166,7 @@ export function useRadio(props: UseRadioProps) {
         "data-hover-unselected": dataAttr(isHovered && !isSelected),
         "data-readonly": dataAttr(inputProps.readOnly),
         "aria-required": dataAttr(isRequired),
-        ...mergeProps(hoverProps, pressProps, otherProps),
+        ...mergeProps(hoverProps, otherProps),
       };
     },
     [
@@ -225,6 +202,7 @@ export function useRadio(props: UseRadioProps) {
       return {
         ref: inputRef,
         ...mergeProps(props, inputProps, focusProps),
+        className: slots.hiddenInput({class: classNames?.hiddenInput}),
         onChange: chain(inputProps.onChange, onChange),
       };
     },

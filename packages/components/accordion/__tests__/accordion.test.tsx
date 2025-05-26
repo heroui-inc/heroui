@@ -1,14 +1,11 @@
+import "@testing-library/jest-dom";
 import * as React from "react";
-import {act, render} from "@testing-library/react";
-import {focus} from "@nextui-org/test-utils";
+import {act, render, waitFor} from "@testing-library/react";
+import {focus, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
 import userEvent, {UserEvent} from "@testing-library/user-event";
-import {Input} from "@nextui-org/input";
+import {Input} from "@heroui/input";
 
 import {Accordion, AccordionItem} from "../src";
-
-// e.g. console.error Warning: Function components cannot be given refs.
-// Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
-const spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
 describe("Accordion", () => {
   let user: UserEvent;
@@ -29,6 +26,10 @@ describe("Accordion", () => {
     );
 
     expect(() => wrapper.unmount()).not.toThrow();
+
+    if (shouldIgnoreReactWarning(spy)) {
+      return;
+    }
 
     expect(spy).toHaveBeenCalledTimes(0);
   });
@@ -266,7 +267,7 @@ describe("Accordion", () => {
     expect(button).toHaveAttribute("aria-expanded", "true");
   });
 
-  it("should support keepContentMounted", async () => {
+  it("should support keepContentMounted={true}", async () => {
     const wrapper = render(
       <Accordion keepContentMounted>
         <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
@@ -288,8 +289,98 @@ describe("Accordion", () => {
     const button2 = item2.querySelector("button") as HTMLElement;
 
     await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
+  });
+
+  it("should support keepContentMounted={false}", async () => {
+    const wrapper = render(
+      <Accordion keepContentMounted={false}>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const item1 = wrapper.getByTestId("item-1");
+    const button = item1.querySelector("button") as HTMLElement;
+
+    expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+
+    await user.click(button);
+    const item2 = wrapper.getByTestId("item-2");
+    const button2 = item2.querySelector("button") as HTMLElement;
+
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
+  });
+
+  it("should support keepContentMounted={true} & disableAnimation={true}", async () => {
+    const wrapper = render(
+      <Accordion disableAnimation keepContentMounted>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const item1 = wrapper.getByTestId("item-1");
+    const button = item1.querySelector("button") as HTMLElement;
+
     expect(item1.querySelector("[role='region']")).toBeInTheDocument();
-    expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+
+    await user.click(button);
+    const item2 = wrapper.getByTestId("item-2");
+    const button2 = item2.querySelector("button") as HTMLElement;
+
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
+  });
+
+  it("should support keepContentMounted={false} & disableAnimation={true}", async () => {
+    const wrapper = render(
+      <Accordion disableAnimation keepContentMounted={false}>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+        <AccordionItem key="2" data-testid="item-2" title="Accordion Item 2">
+          Accordion Item 2 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const item1 = wrapper.getByTestId("item-1");
+    const button = item1.querySelector("button") as HTMLElement;
+
+    expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+
+    await user.click(button);
+    const item2 = wrapper.getByTestId("item-2");
+    const button2 = item2.querySelector("button") as HTMLElement;
+
+    await user.click(button2);
+
+    await waitFor(() => {
+      expect(item1.querySelector("[role='region']")).not.toBeInTheDocument();
+      expect(item2.querySelector("[role='region']")).toBeInTheDocument();
+    });
   });
 
   it("should handle arrow key navigation within Input inside AccordionItem", async () => {

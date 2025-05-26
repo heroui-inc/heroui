@@ -1,24 +1,23 @@
 "use client";
 
-import {FC, useEffect, useState} from "react";
-import {ChevronIcon} from "@nextui-org/shared-icons";
+import {FC, useEffect, useState, useRef, useMemo, useLayoutEffect} from "react";
+import {usePostHog} from "posthog-js/react";
+import {ChevronIcon} from "@heroui/shared-icons";
 import {CollectionBase, Expandable, MultipleSelection, Node, ItemProps} from "@react-types/shared";
-import {BaseItem} from "@nextui-org/aria-utils";
-import React, {useRef, useMemo} from "react";
+import {BaseItem} from "@heroui/aria-utils";
 import {useFocusRing} from "@react-aria/focus";
 import {TreeState, useTreeState} from "@react-stately/tree";
 import {useSelectableCollection} from "@react-aria/selection";
 import {usePress} from "@react-aria/interactions";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
+import {clsx, dataAttr, debounce, isEmpty} from "@heroui/shared-utils";
 import {
   SpacerProps,
   Spacer,
-  Link as NextUILink,
+  Link as HeroUILink,
   Chip,
   dataFocusVisibleClasses,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Link from "next/link";
-import {isEmpty} from "lodash";
 import {usePathname, useRouter} from "next/navigation";
 
 import {ScrollArea} from "../scroll-area";
@@ -27,11 +26,6 @@ import {getRoutePaths} from "./utils";
 
 import {Route} from "@/libs/docs/page";
 import {TreeKeyboardDelegate} from "@/utils/tree-keyboard-delegate";
-import {trackEvent} from "@/utils/va";
-import {FbFeedbackButton} from "@/components/featurebase/fb-feedback-button";
-import {FbChangelogButton} from "@/components/featurebase/fb-changelog-button";
-import {FbRoadmapLink} from "@/components/featurebase/fb-roadmap-link";
-import {openFeedbackWidget} from "@/utils/featurebase";
 import emitter from "@/libs/emitter";
 
 export interface Props<T> extends Omit<ItemProps<T>, "title">, Route {
@@ -66,6 +60,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
 
   const router = useRouter();
   const pathname = usePathname();
+  const posthog = usePostHog();
 
   const paths = item.props.path
     ? getRoutePaths(item.props.path, item.props?.tag)
@@ -109,7 +104,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       } else {
         router.push(paths.pathname);
 
-        trackEvent("SidebarDocs", {
+        posthog.capture("SidebarDocs", {
           category: "docs",
           action: "click",
           data: paths.pathname || "",
@@ -120,28 +115,11 @@ function TreeItem<T>(props: TreeItemProps<T>) {
 
   const {focusProps, isFocused, isFocusVisible} = useFocusRing();
 
-  const renderFeaturebaseComponent = (key: string) => {
-    if (key === "roadmap")
-      return <FbRoadmapLink className={cn} innerClassName="opacity-80 dark:opacity-60" />;
-    if (key === "changelog")
-      return (
-        <NextUILink as={Link} className={cn} color="foreground" href="#">
-          <FbChangelogButton />
-        </NextUILink>
-      );
-
-    return (
-      <NextUILink as={Link} className={cn} color="foreground" href="#" onClick={openFeedbackWidget}>
-        <FbFeedbackButton />
-      </NextUILink>
-    );
-  };
-
   const renderComponent = () => {
     if (hasChildNodes) {
       return (
         <span className="flex items-center gap-3">
-          <span>{rendered}</span>
+          <span className="font-medium sm:text-sm">{rendered}</span>
           <ChevronIcon
             className={clsx("transition-transform", {
               "-rotate-90": isExpanded,
@@ -151,14 +129,18 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       );
     }
 
-    if (typeof key === "string" && ["changelog", "feedback", "roadmap"].includes(key)) {
-      return renderFeaturebaseComponent(key);
-    }
-
     return (
-      <NextUILink as={Link} className={clsx(cn)} color="foreground" href={paths.pathname}>
+      <HeroUILink
+        as={item.props?.comingSoon ? "div" : Link}
+        className={clsx(cn, {
+          "pointer-events-none": item.props?.comingSoon,
+        })}
+        color="foreground"
+        href={item.props?.comingSoon ? "#" : paths.pathname}
+      >
         <span
           className={clsx(
+            "sm:text-sm",
             isSelected
               ? "text-primary font-medium dark:text-foreground"
               : "opacity-80 dark:opacity-60",
@@ -171,7 +153,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
         </span>
         {isUpdated && (
           <Chip
-            className="ml-1 py-1 text-tiny text-default-400 bg-default-100/50"
+            className="ml-1 py-1 font-medium text-tiny text-default-500 dark:text-default-400 bg-default-100 dark:bg-default-100/50"
             color="default"
             size="sm"
             variant="flat"
@@ -180,16 +162,26 @@ function TreeItem<T>(props: TreeItemProps<T>) {
           </Chip>
         )}
         {isNew && (
-          <Chip className="ml-1 py-1 text-tiny" color="primary" size="sm" variant="flat">
+          <Chip
+            className="font-medium ml-1 py-1 text-tiny"
+            color="primary"
+            size="sm"
+            variant="flat"
+          >
             New
           </Chip>
         )}
         {item.props?.comingSoon && (
-          <Chip className="ml-1 py-1 text-tiny" color="default" size="sm" variant="flat">
+          <Chip
+            className="font-medium ml-1 py-1 text-tiny"
+            color="secondary"
+            size="sm"
+            variant="flat"
+          >
             Coming soon
           </Chip>
         )}
-      </NextUILink>
+      </HeroUILink>
     );
   };
 
@@ -200,8 +192,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       aria-expanded={dataAttr(hasChildNodes ? isExpanded : undefined)}
       aria-selected={dataAttr(isSelected)}
       className={clsx(
-        "flex flex-col gap-3outline-none w-full tap-highlight-transparent",
-
+        "flex flex-col outline-none w-full tap-highlight-transparent",
         hasChildNodes ? "mb-4" : "first:mt-4",
         // focus ring
         ...dataFocusVisibleClasses,
@@ -210,7 +201,12 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       data-focused={isFocused}
       role="treeitem"
     >
-      <div className="flex items-center gap-3 cursor-pointer" {...pressProps}>
+      <div
+        className={clsx("flex items-center gap-3 cursor-pointer", {
+          "pointer-events-none": item.props?.comingSoon,
+        })}
+        {...(item.props?.comingSoon ? {} : pressProps)}
+      >
         <Spacer x={spaceLeft} />
         {renderComponent()}
         {/* Workaround to avoid scrollbar overlapping */}
@@ -245,6 +241,8 @@ function Tree<T extends object>(props: CollectionBase<T> & Expandable & Multiple
 
   let ref = useRef<HTMLDivElement>(null);
 
+  const scrollViewPortRef = useRef<HTMLDivElement>(null);
+
   let keyboardDelegate = useMemo(
     // @ts-expect-error
     () => new TreeKeyboardDelegate(state.collection, state.disabledKeys),
@@ -257,12 +255,36 @@ function Tree<T extends object>(props: CollectionBase<T> & Expandable & Multiple
     keyboardDelegate,
   });
 
+  /*  Handle scroll preservation */
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedPosition = sessionStorage.getItem("docsSidebarScrollPosition");
+
+      if (savedPosition && scrollViewPortRef.current) {
+        scrollViewPortRef.current.scrollTop = Number(savedPosition);
+      }
+    }
+  }, []);
+
+  const handleScroll = () => {
+    if (typeof window !== "undefined" && scrollViewPortRef.current) {
+      sessionStorage.setItem(
+        "docsSidebarScrollPosition",
+        scrollViewPortRef.current.scrollTop.toString(),
+      );
+    }
+  };
+
+  const debouncedHandleScroll = debounce(handleScroll, 200);
+
   return (
     <ScrollArea
       ref={ref}
-      className="h-full lg:max-h-[calc(100vh_-_64px)]"
+      className="h-full max-w-[90%] lg:max-h-[calc(100vh_-_64px)]"
       role="tree"
       {...collectionProps}
+      scrollViewPortRef={scrollViewPortRef}
+      onScroll={debouncedHandleScroll}
     >
       {[...state.collection].map((item) => {
         if (item.type === "section") {
@@ -319,7 +341,7 @@ export const DocsSidebar: FC<DocsSidebarProps> = ({routes, slug, tag, className}
         )}
       </Tree>
     );
-  }, [routes]);
+  }, [routes, slug, tag]);
 
   return (
     <div

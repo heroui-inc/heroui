@@ -1,12 +1,12 @@
 import type {KeyboardDelegate} from "@react-types/shared";
 
 import {AriaListBoxProps, useListBox as useAriaListbox} from "@react-aria/listbox";
-import {HTMLNextUIProps, PropGetter, useProviderContext} from "@nextui-org/system";
-import {listbox, ListboxVariantProps, ListboxSlots, SlotsToClasses} from "@nextui-org/theme";
+import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
+import {listbox, ListboxVariantProps, ListboxSlots, SlotsToClasses} from "@heroui/theme";
 import {ListState, useListState} from "@react-stately/list";
-import {filterDOMProps, ReactRef, useDOMRef} from "@nextui-org/react-utils";
+import {filterDOMProps, ReactRef, useDOMRef} from "@heroui/react-utils";
 import {ReactNode, useMemo} from "react";
-import {clsx} from "@nextui-org/shared-utils";
+import {clsx} from "@heroui/shared-utils";
 
 import {ListboxItemProps} from "./listbox-item";
 
@@ -30,7 +30,7 @@ interface AriaListBoxOptions<T> extends AriaListBoxProps<T> {
   shouldHighlightOnFocus?: boolean;
 }
 
-interface Props<T> extends Omit<HTMLNextUIProps<"ul">, "children"> {
+interface Props<T> extends Omit<HTMLHeroUIProps<"ul">, "children"> {
   /**
    * Ref to the DOM node.
    */
@@ -131,7 +131,7 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
 
   const {listBoxProps} = useAriaListbox({...props, onAction}, state, domRef);
 
-  const slots = useMemo(() => listbox({className}), [className]);
+  const slots = useMemo(() => listbox(), []);
 
   const baseStyles = clsx(classNames?.base, className);
 

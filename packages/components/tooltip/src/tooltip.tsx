@@ -1,15 +1,17 @@
-import {forwardRef} from "@nextui-org/system";
+import {forwardRef} from "@heroui/system";
 import {OverlayContainer} from "@react-aria/overlays";
-import {AnimatePresence, m, LazyMotion, domAnimation} from "framer-motion";
-import {TRANSITION_VARIANTS} from "@nextui-org/framer-utils";
-import {warn} from "@nextui-org/shared-utils";
+import {AnimatePresence, m, LazyMotion} from "framer-motion";
+import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
+import {warn} from "@heroui/shared-utils";
 import {Children, cloneElement, isValidElement} from "react";
-import {getTransformOrigins} from "@nextui-org/aria-utils";
+import {getTransformOrigins} from "@heroui/aria-utils";
 import {mergeProps} from "@react-aria/utils";
 
 import {UseTooltipProps, useTooltip} from "./use-tooltip";
 
 export interface TooltipProps extends Omit<UseTooltipProps, "disableTriggerFocus" | "backdrop"> {}
+
+const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
 
 const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
   const {
@@ -46,7 +48,11 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
         ref?: React.Ref<any>;
       };
 
-      trigger = cloneElement(child, getTriggerProps(child.props, child.ref));
+      // Accessing the ref from props, else fallback to element.ref
+      // https://github.com/facebook/react/pull/28348
+      const childRef = child.props.ref ?? (child as any).ref;
+
+      trigger = cloneElement(child, getTriggerProps(child.props, childRef));
     }
   } catch (error) {
     trigger = <span />;
@@ -56,44 +62,49 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
   const {ref: tooltipRef, id, style, ...otherTooltipProps} = getTooltipProps();
 
   const animatedContent = (
-    <div ref={tooltipRef} id={id} style={style}>
-      <LazyMotion features={domAnimation}>
-        <m.div
-          animate="enter"
-          exit="exit"
-          initial="exit"
-          variants={TRANSITION_VARIANTS.scaleSpring}
-          {...mergeProps(motionProps, otherTooltipProps)}
-          style={{
-            ...getTransformOrigins(placement),
-          }}
-        >
-          <Component {...getTooltipContentProps()}>{content}</Component>
-        </m.div>
-      </LazyMotion>
+    <div key={`${id}-tooltip-content`} ref={tooltipRef} id={id} style={style}>
+      <m.div
+        key={`${id}-tooltip-inner`}
+        animate="enter"
+        exit="exit"
+        initial="exit"
+        variants={TRANSITION_VARIANTS.scaleSpring}
+        {...mergeProps(motionProps, otherTooltipProps)}
+        style={{
+          ...getTransformOrigins(placement),
+        }}
+      >
+        <Component {...getTooltipContentProps()}>{content}</Component>
+      </m.div>
     </div>
   );
 
   return (
     <>
       {trigger}
-      {disableAnimation && isOpen ? (
-        <OverlayContainer portalContainer={portalContainer}>
-          <div ref={tooltipRef} id={id} style={style} {...otherTooltipProps}>
-            <Component {...getTooltipContentProps()}>{content}</Component>
-          </div>
-        </OverlayContainer>
+      {disableAnimation ? (
+        isOpen && (
+          <OverlayContainer portalContainer={portalContainer}>
+            <div ref={tooltipRef} id={id} style={style} {...otherTooltipProps}>
+              <Component {...getTooltipContentProps()}>{content}</Component>
+            </div>
+          </OverlayContainer>
+        )
       ) : (
-        <AnimatePresence>
-          {isOpen ? (
-            <OverlayContainer portalContainer={portalContainer}>{animatedContent}</OverlayContainer>
-          ) : null}
-        </AnimatePresence>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence>
+            {isOpen && (
+              <OverlayContainer portalContainer={portalContainer}>
+                {animatedContent}
+              </OverlayContainer>
+            )}
+          </AnimatePresence>
+        </LazyMotion>
       )}
     </>
   );
 });
 
-Tooltip.displayName = "NextUI.Tooltip";
+Tooltip.displayName = "HeroUI.Tooltip";
 
 export default Tooltip;

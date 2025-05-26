@@ -1,13 +1,9 @@
-import type {
-  AccordionItemVariantProps,
-  AccordionItemSlots,
-  SlotsToClasses,
-} from "@nextui-org/theme";
+import type {AccordionItemVariantProps, AccordionItemSlots, SlotsToClasses} from "@heroui/theme";
 
-import {As} from "@nextui-org/system";
-import {ItemProps, BaseItem} from "@nextui-org/aria-utils";
+import {As} from "@heroui/system";
+import {ItemProps, BaseItem} from "@heroui/aria-utils";
 import {FocusableProps, PressEvents} from "@react-types/shared";
-import {ReactNode, MouseEventHandler} from "react";
+import {ReactNode} from "react";
 import {HTMLMotionProps} from "framer-motion";
 
 export type AccordionItemIndicatorProps = {
@@ -33,18 +29,18 @@ export interface Props<T extends object = {}>
   /**
    * The content of the component.
    */
-  children?: ReactNode | null;
+  children?: ReactNode;
   /**
    * The accordion item title.
    */
-  title?: ReactNode | string;
+  title?: ReactNode;
   /**
    * The accordion item subtitle.
    */
-  subtitle?: ReactNode | string;
+  subtitle?: ReactNode;
   /**
    * The accordion item `expanded` indicator, it's usually an arrow icon.
-   * If you pass a function, NextUI will expose the current indicator and the open status,
+   * If you pass a function, HeroUI will expose the current indicator and the open status,
    * In case you want to use a custom indicator or modify the current one.
    */
   indicator?: ReactNode | ((props: AccordionItemIndicatorProps) => ReactNode) | null;
@@ -65,7 +61,7 @@ export interface Props<T extends object = {}>
    * The native button click event handler.
    * @deprecated - use `onPress` instead.
    */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: PressEvents["onClick"];
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.

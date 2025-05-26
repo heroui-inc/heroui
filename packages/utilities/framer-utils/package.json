@@ -1,12 +1,12 @@
 {
-  "name": "@nextui-org/framer-utils",
-  "version": "2.0.25",
+  "name": "@heroui/framer-utils",
+  "version": "2.1.15",
   "description": "A set of framer motion transitions for react",
   "keywords": [
     "framer-utils"
   ],
-  "author": "Junior Garcia <jrgarciadev@gmail.com>",
-  "homepage": "https://nextui.org",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
   "license": "MIT",
   "main": "src/index.ts",
   "sideEffects": false,
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextui-org/nextui.git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
     "directory": "packages/utilities/framer-utils"
   },
   "bugs": {
-    "url": "https://github.com/nextui-org/nextui/issues"
+    "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
     "build": "tsup src --dts",
@@ -34,20 +34,20 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "framer-motion": ">=10.17.0"
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0",
+    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1"
   },
   "dependencies": {
-    "@nextui-org/system": "workspace:*",
-    "@nextui-org/use-measure": "workspace:*",
-    "@nextui-org/shared-utils": "workspace:*"
+    "@heroui/system": "workspace:*",
+    "@heroui/use-measure": "workspace:*",
+    "@heroui/shared-utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "18.3.0",
+    "react-dom": "18.3.0",
     "clean-package": "2.2.0",
-    "framer-motion": "^11.0.22"
+    "framer-motion": "11.9.0"
   },
   "clean-package": "../../../clean-package.config.json"
 }

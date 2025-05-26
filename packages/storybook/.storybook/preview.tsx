@@ -1,36 +1,35 @@
 import React from "react";
 import {themes} from "@storybook/theming";
-import {NextUIProvider} from "@nextui-org/system/src/provider";
+import {HeroUIProvider} from "@heroui/system/src/provider";
 import type {Preview} from "@storybook/react";
 
 import "./style.css";
-import { withStrictModeSwitcher } from "./addons/react-strict-mode";
+import {withStrictModeSwitcher} from "./addons/react-strict-mode";
 
 const decorators: Preview["decorators"] = [
-  (Story, {globals: {locale, disableAnimation}}) => {
+  (Story, {globals: {locale, disableAnimation, labelPlacement}}) => {
     const direction =
       // @ts-ignore
       locale && new Intl.Locale(locale)?.textInfo?.direction === "rtl" ? "rtl" : undefined;
 
     return (
-      <NextUIProvider locale={locale} disableAnimation={disableAnimation}>
+      <HeroUIProvider locale={locale} disableAnimation={disableAnimation} labelPlacement={labelPlacement}>
         <div className="bg-dark" lang={locale} dir={direction}>
           <Story />
         </div>
-      </NextUIProvider>
+      </HeroUIProvider>
     );
   },
   ...(process.env.NODE_ENV !== "production" ? [withStrictModeSwitcher] : []),
 ];
 
 const commonTheme = {
-  brandTitle: "NextUI",
-  brandUrl: "https://nextui.org",
+  brandTitle: "HeroUI",
+  brandUrl: "https://heroui.com",
   brandTarget: "_self",
 };
 
 const parameters: Preview["parameters"] = {
-  actions: {argTypesRegex: "^on[A-Z].*"},
   options: {
     storySort: {
       method: "alphabetical",
@@ -128,12 +127,25 @@ const globalTypes: Preview["globalTypes"] = {
       ],
     },
   },
+  labelPlacement: {
+    name: "Label Placement",
+    description: "Position of label.",
+    toolbar: {
+      icon: "component",
+      items: [
+        {value: "inside", title: "Inside"},
+        {value: "outside", title: "Outside"},
+        {value: "outside-left", title: "Outside Left"},
+      ],
+    },
+  }
 };
 
 const preview: Preview = {
   decorators,
   parameters,
   globalTypes,
+  tags: ["autodocs"],
 };
 
 export default preview;

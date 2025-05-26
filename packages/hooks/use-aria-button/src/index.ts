@@ -18,6 +18,8 @@ import {usePress} from "@react-aria/interactions";
 export type AriaButtonProps<T extends ElementType = "button"> = BaseAriaButtonProps<T> & {
   /** Whether text selection should be enabled on the pressable element. */
   allowTextSelectionOnPress?: boolean;
+  /** The role of the button element. */
+  role?: string;
 };
 
 export interface ButtonAria<T> {
@@ -73,8 +75,7 @@ export function useAriaButton(
     preventFocusOnPress,
     // @ts-ignore - undocumented
     allowFocusWhenDisabled,
-    // @ts-ignore
-    onClick: deprecatedOnClick,
+    onClick,
     href,
     target,
     rel,
@@ -91,8 +92,7 @@ export function useAriaButton(
   } else {
     additionalProps = {
       role: "button",
-      tabIndex: isDisabled ? undefined : 0,
-      href: elementType === "a" && isDisabled ? undefined : href,
+      href: elementType === "a" && !isDisabled ? href : undefined,
       target: elementType === "a" ? target : undefined,
       type: elementType === "input" ? type : undefined,
       disabled: elementType === "input" ? isDisabled : undefined,
@@ -102,6 +102,7 @@ export function useAriaButton(
   }
 
   let {pressProps, isPressed} = usePress({
+    onClick,
     onPressStart,
     onPressEnd,
     onPressChange,
@@ -130,9 +131,7 @@ export function useAriaButton(
       "aria-expanded": props["aria-expanded"],
       "aria-controls": props["aria-controls"],
       "aria-pressed": props["aria-pressed"],
-      onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
-        deprecatedOnClick?.(e);
-      },
+      "aria-current": props["aria-current"],
     }),
   };
 }

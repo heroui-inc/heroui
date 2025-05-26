@@ -1,5 +1,5 @@
 ---
-"@nextui-org/tabs": patch
+"@heroui/tabs": patch
 ---
 
-add click handling for tab items in tests and implementation
+fixed click handling for tab items
