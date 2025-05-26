@@ -462,6 +462,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const getLoadingComponentProps: PropGetter = useCallback(
     (props = {}) => ({
       className: slots.loadingComponent({class: classNames?.loadingComponent}),
+      "aria-label": "loadingIcon",
       color: "current",
       ...props,
     }),
@@ -471,6 +472,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const getSpinnerComponentProps: PropGetter = useCallback(
     (props = {}) => ({
       classNames: {wrapper: slots.loadingComponent({class: classNames?.loadingComponent})},
+      "aria-label": "loadingIcon",
       color: "current",
       ...props,
     }),

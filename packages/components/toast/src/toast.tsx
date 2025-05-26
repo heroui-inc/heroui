@@ -64,7 +64,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       ? cloneElement(loadingComponent, getLoadingComponentProps())
       : null;
   const loadingIconComponent = isLoading
-    ? customLoadingComponent || <Spinner aria-label="loadingIcon" {...getSpinnerComponentProps()} />
+    ? customLoadingComponent || <Spinner {...getSpinnerComponentProps()} />
     : null;
 
   const customCloseIcon =
