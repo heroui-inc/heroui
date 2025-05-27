@@ -53,7 +53,7 @@ const select = tv({
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
     endWrapper: "flex end-18",
-    endContent: "",
+    endContent: "mb-4",
   },
   variants: {
     variant: {
@@ -192,11 +192,7 @@ const select = tv({
     },
     isClearable: {
       true: {
-        clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
-        endContent: "ms-3",
-      },
-      false: {
-        endContent: "mb-4",
+        clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block me-3",
       },
     },
     isDisabled: {

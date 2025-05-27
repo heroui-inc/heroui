@@ -350,7 +350,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   const handleClear = useCallback(() => {
     state.setSelectedKeys(new Set([]));
     onClear?.();
-    domRef.current?.focus();
+    triggerRef.current?.focus();
   }, [onClear, state]);
 
   const {pressProps: clearPressProps} = usePress({
@@ -695,7 +695,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     (props = {}) => {
       return {
         ...props,
-        "data-slot": "endWrapper",
+        "data-slot": "end-wrapper",
         className: slots.endWrapper({
           class: clsx(classNames?.endWrapper, props?.className),
         }),
@@ -709,7 +709,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       return {
         ...props,
         "data-slot": "end-content",
-        className: slots.endWrapper({
+        className: slots.endContent({
           class: clsx(classNames?.endContent, props?.className),
         }),
       };
