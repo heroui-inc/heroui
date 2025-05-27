@@ -8,7 +8,7 @@ import {dataAttr} from "@heroui/shared-utils";
 export interface DateInputGroupProps extends ValidationResult, HelpTextProps {
   children?: ReactElement | ReactElement[];
   shouldLabelBeOutside?: boolean;
-  labelPlacement?: "inside" | "outside" | "outside-left"
+  labelPlacement?: "inside" | "outside" | "outside-left";
   label?: ReactNode;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
