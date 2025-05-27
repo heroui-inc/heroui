@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-onchange */
 "use client";
 
 import {

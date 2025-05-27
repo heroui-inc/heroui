@@ -99,11 +99,11 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
     validationState,
     isInvalid: isInvalidProp = validationState
       ? validationState === "invalid"
-      : groupContext?.isInvalid ?? false,
+      : (groupContext?.isInvalid ?? false),
     isIndeterminate = false,
     validationBehavior = isInGroup
       ? groupContext.validationBehavior
-      : formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
+      : (formValidationBehavior ?? globalContext?.validationBehavior ?? "native"),
     defaultSelected,
     classNames,
     className,
@@ -330,7 +330,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
         isIndeterminate,
         disableAnimation,
         className: slots.icon({class: classNames?.icon}),
-      } as CheckboxIconProps),
+      }) as CheckboxIconProps,
     [slots, classNames?.icon, isSelected, isIndeterminate, disableAnimation],
   );
 

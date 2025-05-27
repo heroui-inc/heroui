@@ -48,7 +48,7 @@ async function build() {
   // make sure the sponsors directory exists
   try {
     await fs.access(sponsorsDir);
-  } catch (error) {
+  } catch {
     await fs.mkdir(sponsorsDir, { recursive: true });
   }
   await Promise.all([buildSponsors()])
