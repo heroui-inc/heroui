@@ -28,6 +28,7 @@ export * from "./eye-filled";
 export * from "./eye-slash-filled";
 export * from "./search";
 export * from "./lock-filled";
+export * from "./loading";
 export * from "./edit";
 export * from "./delete";
 export * from "./eye";
