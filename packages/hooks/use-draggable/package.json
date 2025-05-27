@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-draggable",
-  "version": "2.1.9",
+  "version": "2.1.11",
   "description": "This hook can provide drag and drop interaction",
   "keywords": [
     "use-draggable"
@@ -50,6 +50,6 @@
     ]
   },
   "dependencies": {
-    "@react-aria/interactions": "3.24.1"
+    "@react-aria/interactions": "3.25.0"
   }
 }

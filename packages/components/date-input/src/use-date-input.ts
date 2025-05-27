@@ -6,6 +6,7 @@ import type {Calendar} from "@internationalized/date";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
+import type {CalendarIdentifier} from "@internationalized/date";
 
 import {useLocale} from "@react-aria/i18n";
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
@@ -122,7 +123,9 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
 
   const {locale} = useLocale();
 
-  const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
+  const calendarProp = createCalendar(
+    new DateFormatter(locale).resolvedOptions().calendar as CalendarIdentifier,
+  );
 
   // by default, we are using gregorian calendar with possible years in [1900, 2099]
   // however, some locales such as `th-TH-u-ca-buddhist` using different calendar making the years out of bound

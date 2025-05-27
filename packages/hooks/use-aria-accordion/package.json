@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-accordion",
-  "version": "2.2.9",
+  "version": "2.2.11",
   "description": "React-aria useAccordion hooks with custom implementations",
   "keywords": [
     "use-aria-accordion"
@@ -34,13 +34,13 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/button": "3.12.1",
-    "@react-aria/focus": "3.20.1",
-    "@react-aria/selection": "3.23.1",
-    "@react-aria/utils": "3.28.1",
-    "@react-stately/tree": "3.8.8",
+    "@react-aria/button": "3.13.0",
+    "@react-aria/focus": "3.20.2",
+    "@react-aria/selection": "3.24.0",
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/tree": "3.8.9",
     "@react-types/accordion": "3.0.0-alpha.26",
-    "@react-types/shared": "3.28.0"
+    "@react-types/shared": "3.29.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-disclosure",
-  "version": "2.2.9",
+  "version": "2.2.11",
   "description": "The hook in charge of managing modals",
   "keywords": [
     "use-disclosure"
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@heroui/use-callback-ref": "workspace:*",
-    "@react-aria/utils": "3.28.1",
-    "@react-stately/utils": "3.10.5"
+    "@react-aria/utils": "3.28.2",
+    "@react-stately/utils": "3.10.6"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

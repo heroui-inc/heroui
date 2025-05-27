@@ -1,6 +1,6 @@
 {
   "name": "@heroui/alert",
-  "version": "2.2.17",
+  "version": "2.2.19",
   "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
   "keywords": [
     "alert"
@@ -47,8 +47,8 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-stately/utils": "3.10.5",
-    "@react-aria/utils": "3.28.1",
+    "@react-stately/utils": "3.10.6",
+    "@react-aria/utils": "3.28.2",
     "@heroui/button": "workspace:*"
   },
   "devDependencies": {
