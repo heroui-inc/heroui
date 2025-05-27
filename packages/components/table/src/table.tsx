@@ -28,6 +28,7 @@ const Table = forwardRef<"table", TableProps>((props, ref) => {
     bottomContentPlacement,
     bottomContent,
     removeWrapper,
+    sortIcon,
     getBaseProps,
     getWrapperProps,
     getTableProps,
@@ -101,6 +102,7 @@ const Table = forwardRef<"table", TableProps>((props, ref) => {
                         classNames={values.classNames}
                         node={column}
                         slots={values.slots}
+                        sortIcon={sortIcon}
                         state={values.state}
                       />
                     ),
