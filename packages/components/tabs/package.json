@@ -59,7 +59,7 @@
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react-lorem-component": "0.13.0",
     "@heroui/card": "workspace:*",
     "@heroui/input": "workspace:*",

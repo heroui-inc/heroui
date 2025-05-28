@@ -57,7 +57,7 @@ interface Props extends HTMLHeroUIProps<"nav"> {
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    * This motion is only available if the `shouldHideOnScroll` prop is set to `true`.
    */
-  motionProps?: HTMLMotionProps<"nav">;
+  motionProps?: Omit<HTMLMotionProps<"nav">, "ref">;
   /**
    * The event handler for the menu open state.
    * @param isOpen boolean

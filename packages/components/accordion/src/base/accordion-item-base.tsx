@@ -51,7 +51,7 @@ export interface Props<T extends object = {}>
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"section">;
+  motionProps?: Omit<HTMLMotionProps<"section">, "ref">;
   /**
    * Whether to keep the accordion content mounted when collapsed.
    * @default false
