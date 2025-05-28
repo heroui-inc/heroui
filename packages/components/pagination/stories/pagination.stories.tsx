@@ -3,7 +3,7 @@ import {Meta} from "@storybook/react";
 import {button, pagination} from "@heroui/theme";
 import {cn} from "@heroui/theme";
 import {ChevronIcon} from "@heroui/shared-icons";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 
 import {Pagination, PaginationItemRenderProps, PaginationItemType, usePagination} from "../src";
 

@@ -1,11 +1,11 @@
 import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
-import {AnimatePresence, LazyMotion} from "framer-motion";
+import {AnimatePresence, LazyMotion} from "@heroui/motion";
 
 import {RegionProps, ToastRegion} from "./toast-region";
 import {ToastProps, ToastPlacement} from "./use-toast";
 
-const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
+const loadFeatures = () => import("@heroui/motion").then((res) => res.domMax);
 
 let globalToastQueue: ToastQueue<ToastProps> | null = null;
 

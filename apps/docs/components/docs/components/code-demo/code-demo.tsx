@@ -3,7 +3,7 @@
 import React, {useCallback, useMemo, useRef, useState} from "react";
 import dynamic from "next/dynamic";
 import {addToast, Button, Skeleton, Spinner, Tab, Tabs} from "@heroui/react";
-import {useInView} from "framer-motion";
+import {useInView} from "@heroui/motion";
 import {usePostHog} from "posthog-js/react";
 import {usePathname} from "next/navigation";
 
