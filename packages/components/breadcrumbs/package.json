@@ -43,11 +43,11 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/breadcrumbs": "3.5.23",
-    "@react-aria/utils": "3.28.2",
-    "@react-types/breadcrumbs": "3.7.12",
-    "@react-types/shared": "3.29.0"
+    "@react-aria/focus": "3.20.3",
+    "@react-aria/breadcrumbs": "3.5.24",
+    "@react-aria/utils": "3.29.0",
+    "@react-types/breadcrumbs": "3.7.13",
+    "@react-types/shared": "3.29.1"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
