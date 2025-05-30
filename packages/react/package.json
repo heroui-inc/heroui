@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@radix-ui/react-avatar": "1.1.7",
+    "@radix-ui/react-slot": "1.2.3",
     "react-aria-components": "1.8.0",
     "tailwind-merge": "3.0.2",
     "tailwind-variants": "1.0.0",
