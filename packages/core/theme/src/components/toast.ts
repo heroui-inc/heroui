@@ -43,7 +43,7 @@ const toast = tv({
       "my-1",
       "w-full sm:w-[356px]",
       "min-h-4",
-      
+
       "before:content-['']",
       "before:absolute",
       "before:left-0",
@@ -53,7 +53,7 @@ const toast = tv({
       "before:z-[-1]",
       "before:pointer-events-auto",
       "before:bg-transparent",
-      
+
       "after:content-['']",
       "after:absolute",
       "after:left-0",
