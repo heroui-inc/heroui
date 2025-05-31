@@ -59,7 +59,6 @@ const toast = tv({
       "after:left-0",
       "after:right-0",
       "after:h-[var(--bottom-extension,16px)]",
-      "after:bottom-[calc(-1*var(--bottom-extension,16px))]",
       "after:z-[-1]",
       "after:pointer-events-auto",
       "after:bg-transparent",
