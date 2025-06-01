@@ -1,4 +1,4 @@
-# Core
+# @heroui/core
 
 This package contains the core functionality and base components that form the foundation of the HeroUI library.
 
@@ -9,6 +9,12 @@ This package contains the core functionality and base components that form the f
 - Theme configuration
 - Type definitions
 - Common utilities
+
+## Installation
+
+```bash
+pnpm add @heroui/core
+```
 
 ## Usage
 

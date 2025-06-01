@@ -1,4 +1,4 @@
-# Utilities
+# @heroui/utilities
 
 This package contains utility functions and helpers that can be used across the HeroUI ecosystem.
 
@@ -10,9 +10,15 @@ This package contains utility functions and helpers that can be used across the 
 - Validation helpers
 - Testing utilities
 
+## Installation
+
+```bash
+pnpm add @heroui/utilities
+```
+
 ## Usage
 
-```tsx
+```js
 import { formatDate, validateEmail } from '@heroui/utilities';
 
 // Format a date

@@ -1,4 +1,4 @@
-# Components
+# @heroui/components
 
 This package contains reusable UI components for the HeroUI library. These components are designed to be modular, accessible, and customizable.
 
@@ -10,6 +10,12 @@ This package contains reusable UI components for the HeroUI library. These compo
 - Fully accessible (WCAG compliant)
 - Customizable through props
 - Responsive design
+
+## Installation
+
+```bash
+pnpm add @heroui/components
+```
 
 ## Usage
 
