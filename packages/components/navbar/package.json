@@ -1,6 +1,6 @@
 {
   "name": "@heroui/navbar",
-  "version": "2.2.17",
+  "version": "2.2.18",
   "description": "A responsive navigation header positioned on top side of your page that includes support for branding, links, navigation, collapse and more.",
   "keywords": [
     "navbar"
@@ -46,12 +46,12 @@
     "@heroui/framer-utils": "workspace:*",
     "@heroui/use-scroll-position": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/button": "3.13.0",
-    "@react-aria/overlays": "3.27.0",
-    "@react-aria/utils": "3.28.2",
-    "@react-stately/toggle": "3.8.3",
+    "@react-aria/focus": "3.20.3",
+    "@react-aria/interactions": "3.25.1",
+    "@react-aria/button": "3.13.1",
+    "@react-aria/overlays": "3.27.1",
+    "@react-aria/utils": "3.29.0",
+    "@react-stately/toggle": "3.8.4",
     "@react-stately/utils": "3.10.6"
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "@heroui/link": "workspace:*",
     "@heroui/test-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react-lorem-component": "0.13.0",
     "clean-package": "2.2.0",
     "react": "18.3.0",

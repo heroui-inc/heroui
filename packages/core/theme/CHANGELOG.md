@@ -1,5 +1,11 @@
 # @heroui/theme
 
+## 2.4.16
+
+### Patch Changes
+
+- [#5252](https://github.com/heroui-inc/heroui/pull/5252) [`ee4d2eb`](https://github.com/heroui-inc/heroui/commit/ee4d2ebe257319ce1dd14dd96b545f27bd92d56c) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Fixed the clear button rendering for smaller devices (#5069)
+
 ## 2.4.15
 
 ### Patch Changes

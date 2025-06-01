@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import {clsx} from "@heroui/shared-utils";
 import * as Components from "@heroui/react";
 import {Language} from "prism-react-renderer";

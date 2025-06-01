@@ -92,7 +92,7 @@ export const CarbonAd: React.FC<unknown> = () => {
               setShowEthicalAds(true);
             }
           });
-        } catch (error) {
+        } catch {
           loadCarbonAds();
         }
       } else {

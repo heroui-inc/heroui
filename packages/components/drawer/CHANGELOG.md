@@ -1,5 +1,13 @@
 # @heroui/drawer
 
+## 2.2.17
+
+### Patch Changes
+
+- Updated dependencies [[`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/modal@2.2.17
+  - @heroui/framer-utils@2.1.16
+
 ## 2.2.16
 
 ### Patch Changes

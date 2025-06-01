@@ -1,3 +1,5 @@
+import type {ReactElement} from "react";
+
 import {forwardRef} from "@heroui/system";
 import {Button, ButtonProps} from "@heroui/button";
 import {
@@ -56,12 +58,19 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     ref,
   });
 
-  const customIcon = icon && isValidElement(icon) ? cloneElement(icon, getIconProps()) : null;
+  const customIcon =
+    typeof icon === "function"
+      ? icon(getIconProps())
+      : isValidElement(icon) && cloneElement(icon as ReactElement, getIconProps());
+
   const IconComponent = severity ? iconMap[severity] : iconMap[color] || iconMap.default;
+
   const customLoadingIcon =
-    loadingIcon && isValidElement(loadingIcon)
-      ? cloneElement(loadingIcon, getLoadingIconProps())
-      : null;
+    typeof loadingIcon === "function"
+      ? loadingIcon(getLoadingIconProps())
+      : isValidElement(loadingIcon) &&
+        cloneElement(loadingIcon as ReactElement, getLoadingIconProps());
+
   const loadingIconComponent = isLoading
     ? customLoadingIcon || (
         <Spinner
@@ -73,7 +82,9 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     : null;
 
   const customCloseIcon =
-    closeIcon && isValidElement(closeIcon) ? cloneElement(closeIcon, {}) : null;
+    typeof closeIcon === "function"
+      ? closeIcon({})
+      : isValidElement(closeIcon) && cloneElement(closeIcon as ReactElement, {});
 
   const toastContent = (
     <Component ref={domRef} {...getToastProps()}>

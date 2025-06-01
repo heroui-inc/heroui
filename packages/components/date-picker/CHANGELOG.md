@@ -1,5 +1,24 @@
 # @heroui/date-picker
 
+## 2.3.20
+
+### Patch Changes
+
+- [#5317](https://github.com/heroui-inc/heroui/pull/5317) [`d40c744`](https://github.com/heroui-inc/heroui/commit/d40c744f46f14c2212bd4c9ba116bb866c368426) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - fix date-range-picker error state (#5309)
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
+
+- Updated dependencies [[`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0), [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/shared-icons@2.1.8
+  - @heroui/date-input@2.3.19
+  - @heroui/aria-utils@2.2.17
+  - @heroui/calendar@2.2.20
+  - @heroui/popover@2.3.20
+  - @heroui/button@2.2.20
+  - @heroui/form@2.1.19
+
 ## 2.3.19
 
 ### Patch Changes

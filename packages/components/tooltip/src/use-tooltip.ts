@@ -52,7 +52,7 @@ interface Props extends Omit<HTMLHeroUIProps, "content"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"div">;
+  motionProps?: Omit<HTMLMotionProps<"div">, "ref">;
   /**
    * The container element in which the overlay portal will be placed.
    * @default document.body
