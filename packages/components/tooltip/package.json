@@ -47,13 +47,13 @@
     "@heroui/framer-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/overlays": "3.27.0",
-    "@react-aria/tooltip": "3.8.2",
-    "@react-aria/utils": "3.28.2",
-    "@react-stately/tooltip": "3.5.3",
-    "@react-types/overlays": "3.8.14",
-    "@react-types/tooltip": "3.4.16"
+    "@react-aria/interactions": "3.25.1",
+    "@react-aria/overlays": "3.27.1",
+    "@react-aria/tooltip": "3.8.3",
+    "@react-aria/utils": "3.29.0",
+    "@react-stately/tooltip": "3.5.4",
+    "@react-types/overlays": "3.8.15",
+    "@react-types/tooltip": "3.4.17"
   },
   "devDependencies": {
     "@heroui/button": "workspace:*",
