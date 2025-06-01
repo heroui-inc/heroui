@@ -1,5 +1,19 @@
 # @heroui/tabs
 
+## 2.2.17
+
+### Patch Changes
+
+- [#3917](https://github.com/heroui-inc/heroui/pull/3917) [`718dc24`](https://github.com/heroui-inc/heroui/commit/718dc24ff591adcba67ad11c2f8a49540cea1cce) Thanks [@liaoyinglong](https://github.com/liaoyinglong)! - fixed click handling for tab items
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
+
+- Updated dependencies [[`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/aria-utils@2.2.17
+  - @heroui/framer-utils@2.1.16
+
 ## 2.2.16
 
 ### Patch Changes
