@@ -349,6 +349,26 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     state.selectionManager.setFocusedKey(key);
   }, [state.collection, state.disabledKeys]);
 
+  // scroll the listbox to the selected item
+  useEffect(() => {
+    if (state.isOpen && popoverRef.current && listBoxRef.current) {
+      let selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
+      let scrollShadow = scrollShadowRef.current;
+
+      if (selectedItem && scrollShadow && selectedItem.parentElement) {
+        let scrollShadowRect = scrollShadow?.getBoundingClientRect();
+        let scrollShadowHeight = scrollShadowRect.height;
+
+        scrollShadow.scrollTop =
+          selectedItem.parentElement.offsetTop -
+          scrollShadowHeight / 2 +
+          selectedItem.parentElement.clientHeight / 2;
+
+        state.selectionManager.setFocusedKey(state.selectedKey);
+      }
+    }
+  }, [state.isOpen, disableAnimation]);
+
   useEffect(() => {
     if (isOpen) {
       // apply the same with to the popover as the select
