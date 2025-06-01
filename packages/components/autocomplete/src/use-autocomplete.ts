@@ -339,15 +339,27 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     }
   }, [inputRef.current]);
 
-  // focus first non-disabled item
+  // Ensure the focused item in the dropdown correctly reflects the
+  // selected key when the component mounts or relevant state changes.
   useEffect(() => {
-    let key = state.collection.getFirstKey();
+    let keyToFocus: React.Key | null;
 
-    while (key && state.disabledKeys.has(key)) {
-      key = state.collection.getKeyAfter(key);
+    if (
+      state.selectedKey !== null &&
+      state.collection.getItem(state.selectedKey) &&
+      !state.disabledKeys.has(state.selectedKey)
+    ) {
+      keyToFocus = state.selectedKey;
+    } else {
+      let firstAvailableKey = state.collection.getFirstKey();
+
+      while (firstAvailableKey && state.disabledKeys.has(firstAvailableKey)) {
+        firstAvailableKey = state.collection.getKeyAfter(firstAvailableKey);
+      }
+      keyToFocus = firstAvailableKey;
     }
-    state.selectionManager.setFocusedKey(key);
-  }, [state.collection, state.disabledKeys]);
+    state.selectionManager.setFocusedKey(keyToFocus);
+  }, [state.collection, state.disabledKeys, state.selectedKey]);
 
   // scroll the listbox to the selected item
   useEffect(() => {
