@@ -79,7 +79,7 @@ export const DateInputGroup = forwardRef<"div", DateInputGroupProps>((props, ref
     descriptionProps,
   ]);
 
-  const DateInputContent = (
+  const dateInputContent = (
     <div {...groupProps}>
       {!shouldLabelBeOutside ? labelContent : null}
       <div {...wrapperProps}>
@@ -95,12 +95,12 @@ export const DateInputGroup = forwardRef<"div", DateInputGroupProps>((props, ref
       {shouldLabelBeOutside ? labelContent : null}
       {labelPlacement === "outside-left" ? (
         <div>
-          {DateInputContent}
+          {dateInputContent}
           {helperWrapper}
         </div>
       ) : (
         <>
-          {DateInputContent}
+          {dateInputContent}
           {helperWrapper}
         </>
       )}
