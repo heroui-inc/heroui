@@ -254,7 +254,7 @@ export const WithReactHookForm = {
 export const CustomIconFunction = {
   args: {
     ...defaultProps,
-    // eslint-disable-next-line react/display-name
+
     icon: (props: CheckboxIconProps) => <CloseIcon {...props} />,
   },
 };
