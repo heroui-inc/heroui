@@ -495,7 +495,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         form: originalProps?.form,
         onChange,
         ...props,
-      } as HiddenSelectProps<T>),
+      }) as HiddenSelectProps<T>,
     [
       state,
       selectionMode,
