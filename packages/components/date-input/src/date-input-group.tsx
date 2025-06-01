@@ -80,15 +80,15 @@ export const DateInputGroup = forwardRef<"div", DateInputGroupProps>((props, ref
   ]);
 
   const DateInputContent = (
-  <div {...groupProps}>
-    {!shouldLabelBeOutside ? labelContent : null}
-    <div {...wrapperProps}>
-      {startContent}
-      {children}
-      {endContent}
+    <div {...groupProps}>
+      {!shouldLabelBeOutside ? labelContent : null}
+      <div {...wrapperProps}>
+        {startContent}
+        {children}
+        {endContent}
+      </div>
     </div>
-  </div>
-);
+  );
 
   return (
     <Component {...otherProps} ref={ref} data-has-helper={dataAttr(hasHelper)}>
