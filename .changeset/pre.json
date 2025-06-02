@@ -91,5 +91,15 @@
     "@heroui/stories-utils": "2.1.8-beta.0",
     "@heroui/test-utils": "2.1.8-beta.0"
   },
-  "changesets": []
+  "changesets": [
+    "kind-icons-talk",
+    "light-cups-melt",
+    "poor-experts-leave",
+    "quiet-colts-add",
+    "slimy-beers-invent",
+    "slimy-lobsters-peel",
+    "strange-coats-carry",
+    "sweet-radios-brake",
+    "tidy-mails-sing"
+  ]
 }
