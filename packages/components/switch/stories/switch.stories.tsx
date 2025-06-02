@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React from "react";
 import {Meta} from "@storybook/react";
 import {toggle} from "@heroui/theme";
@@ -202,7 +201,6 @@ export const DisableAnimation = {
 export const WithThumbIcon = {
   args: {
     ...defaultProps,
-    size: "xl",
     thumbIcon: (props: SwitchThumbIconProps) =>
       props.isSelected ? (
         <SunFilledIcon className={props.className} />
@@ -217,7 +215,6 @@ export const WithIcons = {
 
   args: {
     ...defaultProps,
-    size: "xl",
   },
 };
 

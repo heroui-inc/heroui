@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system",
-  "version": "2.4.16-beta.3",
+  "version": "2.4.16",
   "description": "HeroUI system primitives",
   "keywords": [
     "system"
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react": "18.3.0",
     "react-dom": "18.3.0"
   },

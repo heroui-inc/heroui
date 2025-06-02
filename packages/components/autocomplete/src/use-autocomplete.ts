@@ -148,8 +148,8 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     originalProps.disableClearable !== undefined
       ? !originalProps.disableClearable
       : originalProps.isReadOnly
-      ? false
-      : originalProps.isClearable;
+        ? false
+        : originalProps.isClearable;
 
   const {
     ref,
@@ -338,15 +338,47 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     }
   }, [inputRef.current]);
 
-  // focus first non-disabled item
+  // Ensure the focused item in the dropdown correctly reflects the
+  // selected key when the component mounts or relevant state changes.
   useEffect(() => {
-    let key = state.collection.getFirstKey();
+    let keyToFocus: React.Key | null;
 
-    while (key && state.disabledKeys.has(key)) {
-      key = state.collection.getKeyAfter(key);
+    if (
+      state.selectedKey !== null &&
+      state.collection.getItem(state.selectedKey) &&
+      !state.disabledKeys.has(state.selectedKey)
+    ) {
+      keyToFocus = state.selectedKey;
+    } else {
+      let firstAvailableKey = state.collection.getFirstKey();
+
+      while (firstAvailableKey && state.disabledKeys.has(firstAvailableKey)) {
+        firstAvailableKey = state.collection.getKeyAfter(firstAvailableKey);
+      }
+      keyToFocus = firstAvailableKey;
     }
-    state.selectionManager.setFocusedKey(key);
-  }, [state.collection, state.disabledKeys]);
+    state.selectionManager.setFocusedKey(keyToFocus);
+  }, [state.collection, state.disabledKeys, state.selectedKey]);
+
+  // scroll the listbox to the selected item
+  useEffect(() => {
+    if (state.isOpen && popoverRef.current && listBoxRef.current) {
+      let selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
+      let scrollShadow = scrollShadowRef.current;
+
+      if (selectedItem && scrollShadow && selectedItem.parentElement) {
+        let scrollShadowRect = scrollShadow?.getBoundingClientRect();
+        let scrollShadowHeight = scrollShadowRect.height;
+
+        scrollShadow.scrollTop =
+          selectedItem.parentElement.offsetTop -
+          scrollShadowHeight / 2 +
+          selectedItem.parentElement.clientHeight / 2;
+
+        state.selectionManager.setFocusedKey(state.selectedKey);
+      }
+    }
+  }, [state.isOpen, disableAnimation]);
 
   useEffect(() => {
     if (isOpen) {
@@ -402,7 +434,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       className: slots.selectorButton({
         class: clsx(classNames?.selectorButton, slotsProps.selectorButtonProps?.className),
       }),
-    } as ButtonProps);
+    }) as ButtonProps;
 
   const getClearButtonProps = () =>
     ({
@@ -425,7 +457,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       className: slots.clearButton({
         class: clsx(classNames?.clearButton, slotsProps.clearButtonProps?.className),
       }),
-    } as ButtonProps);
+    }) as ButtonProps;
 
   // prevent use-input's useFormValidation hook from overwriting use-autocomplete's useFormValidation hook when there are uncommitted validation errors
   // see https://github.com/heroui-inc/heroui/pull/4452
@@ -446,7 +478,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           ? errorMessage({isInvalid, validationErrors, validationDetails})
           : errorMessage || validationErrors?.join(" "),
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
-    } as unknown as InputProps);
+    }) as unknown as InputProps;
 
   const getListBoxProps = () => {
     // Use isVirtualized prop if defined, otherwise fallback to default behavior

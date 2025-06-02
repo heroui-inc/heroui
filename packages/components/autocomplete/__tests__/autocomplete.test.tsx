@@ -948,3 +948,129 @@ describe("Autocomplete with React Hook Form", () => {
     expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("focusedKey management with selected key", () => {
+  let user: UserEvent;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
+  it("should set focusedKey to the first non-disabled item when selectedKey is null", async () => {
+    const wrapper = render(
+      <Autocomplete
+        aria-label="Favorite Animal"
+        data-testid="autocomplete"
+        disabledKeys={["penguin"]}
+        label="Favorite Animal"
+      >
+        <AutocompleteItem key="penguin" isDisabled>
+          Penguin
+        </AutocompleteItem>
+        <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+        <AutocompleteItem key="shark">Shark</AutocompleteItem>
+      </Autocomplete>,
+    );
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
+
+    // open the select listbox
+    await user.click(autocomplete);
+
+    const options = wrapper.getAllByRole("option");
+
+    // first non-disabled item is zebra
+    const optionItem = options[1];
+
+    expect(optionItem).toHaveAttribute("data-focus", "true");
+  });
+
+  it("should set focusedKey to the item's key when an item is selected", async () => {
+    const wrapper = render(
+      <Autocomplete aria-label="Favorite Animal" data-testid="autocomplete" label="Favorite Animal">
+        <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+        <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+        <AutocompleteItem key="shark">Shark</AutocompleteItem>
+      </Autocomplete>,
+    );
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
+
+    // open the select listbox
+    await user.click(autocomplete);
+
+    // select the target item using keyboard
+    await user.keyboard("penguin");
+    await user.keyboard("{Enter}");
+    await user.click(autocomplete);
+
+    const options = wrapper.getAllByRole("option");
+    const optionItem = options[0];
+
+    expect(optionItem).toHaveAttribute("data-focus", "true");
+  });
+
+  it("should set focusedKey to the item's key when selectedKey prop is passed", async () => {
+    const wrapper = render(
+      <Autocomplete
+        aria-label="Favorite Animal"
+        data-testid="autocomplete"
+        label="Favorite Animal"
+        selectedKey="penguin"
+      >
+        <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+        <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+        <AutocompleteItem key="shark">Shark</AutocompleteItem>
+      </Autocomplete>,
+    );
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
+
+    // open the select listbox
+    await user.click(autocomplete);
+
+    const options = wrapper.getAllByRole("option");
+    const optionItem = options[0];
+
+    expect(optionItem).toHaveAttribute("data-focus", "true");
+  });
+
+  it("should set focusedKey to the default item's key when using react-hook-form defaultValues", async () => {
+    const {result} = renderHook(() =>
+      useForm({
+        defaultValues: {
+          withDefaultValue: "zebra",
+          withoutDefaultValue: "",
+          requiredField: "",
+        },
+      }),
+    );
+
+    const {register} = result.current;
+
+    const wrapper = render(
+      <form>
+        <Autocomplete
+          {...register("withDefaultValue")}
+          aria-label="Favorite Animal"
+          data-testid="autocomplete"
+          label="Favorite Animal"
+        >
+          <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+          <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+          <AutocompleteItem key="shark">Shark</AutocompleteItem>
+        </Autocomplete>
+      </form>,
+    );
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
+
+    // open the select listbox
+    await user.click(autocomplete);
+
+    const options = wrapper.getAllByRole("option");
+    const optionItem = options[1];
+
+    expect(optionItem).toHaveAttribute("data-focus", "true");
+  });
+});

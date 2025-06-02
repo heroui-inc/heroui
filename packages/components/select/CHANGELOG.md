@@ -1,74 +1,25 @@
 # @heroui/select
 
-## 2.4.20-beta.3
+## 2.4.20
 
 ### Patch Changes
 
-- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+- [#5286](https://github.com/heroui-inc/heroui/pull/5286) [`74e4dec`](https://github.com/heroui-inc/heroui/commit/74e4deca9a5e24207076c9af3738dd1f4baecc09) Thanks [@wingkwong](https://github.com/wingkwong)! - persist last selected item position (#5282)
 
-- [#5100](https://github.com/heroui-inc/heroui/pull/5100) [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: overlay & interactOutside
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
 
-- Updated dependencies [[`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6)]:
-  - @heroui/use-aria-multiselect@2.4.13-beta.1
-  - @heroui/use-aria-button@2.2.14-beta.1
-  - @heroui/aria-utils@2.2.17-beta.3
-  - @heroui/listbox@2.3.19-beta.3
-  - @heroui/popover@2.3.20-beta.3
-  - @heroui/form@2.1.19-beta.3
-  - @heroui/spinner@2.2.17-beta.3
-  - @heroui/scroll-shadow@2.3.14-beta.2
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
 
-## 2.4.20-beta.2
-
-### Patch Changes
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
-
-- Updated dependencies [[`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
-  - @heroui/use-safe-layout-effect@2.1.8-beta.0
-  - @heroui/scroll-shadow@2.3.14-beta.2
-  - @heroui/shared-icons@2.1.8-beta.0
-  - @heroui/shared-utils@2.1.10-beta.0
-  - @heroui/react-utils@2.1.11-beta.0
-  - @heroui/listbox@2.3.19-beta.2
-  - @heroui/popover@2.3.20-beta.2
-  - @heroui/spinner@2.2.17-beta.2
-  - @heroui/form@2.1.19-beta.2
-  - @heroui/use-aria-multiselect@2.4.13-beta.0
-  - @heroui/use-aria-button@2.2.14-beta.0
-  - @heroui/aria-utils@2.2.17-beta.2
-
-## 2.4.20-beta.1
-
-### Patch Changes
-
-- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
-
-- Updated dependencies [[`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300)]:
-  - @heroui/scroll-shadow@2.3.14-beta.1
-  - @heroui/aria-utils@2.2.17-beta.1
-  - @heroui/listbox@2.3.19-beta.1
-  - @heroui/popover@2.3.20-beta.1
-  - @heroui/spinner@2.2.17-beta.1
-  - @heroui/form@2.1.19-beta.1
-
-## 2.4.20-beta.0
-
-### Patch Changes
-
-- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
-
-- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
-  - @heroui/scroll-shadow@2.3.14-beta.0
-  - @heroui/listbox@2.3.19-beta.0
-  - @heroui/popover@2.3.20-beta.0
-  - @heroui/spinner@2.2.17-beta.0
-  - @heroui/form@2.1.19-beta.0
-  - @heroui/theme@2.4.16-beta.0
-  - @heroui/system@2.4.16-beta.0
-  - @heroui/aria-utils@2.2.17-beta.0
+- Updated dependencies [[`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0), [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/shared-icons@2.1.8
+  - @heroui/use-aria-multiselect@2.4.13
+  - @heroui/use-aria-button@2.2.14
+  - @heroui/aria-utils@2.2.17
+  - @heroui/listbox@2.3.19
+  - @heroui/popover@2.3.20
+  - @heroui/form@2.1.19
+  - @heroui/scroll-shadow@2.3.13
+  - @heroui/spinner@2.2.17
 
 ## 2.4.19
 

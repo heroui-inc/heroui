@@ -1,55 +1,17 @@
 # @heroui/tooltip
 
-## 2.2.17-beta.3
+## 2.2.17
 
 ### Patch Changes
 
-- [#5303](https://github.com/heroui-inc/heroui/pull/5303) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@github-actions](https://github.com/apps/github-actions)! - bump RA versions
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
 
-- [#5100](https://github.com/heroui-inc/heroui/pull/5100) [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: overlay & interactOutside
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
 
-- Updated dependencies [[`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6)]:
-  - @heroui/aria-utils@2.2.17-beta.3
-  - @heroui/use-aria-overlay@2.0.1-beta.0
-  - @heroui/framer-utils@2.1.16-beta.3
-
-## 2.2.17-beta.2
-
-### Patch Changes
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
-
-- Updated dependencies [[`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
-  - @heroui/use-safe-layout-effect@2.1.8-beta.0
-  - @heroui/dom-animation@2.1.9-beta.0
-  - @heroui/shared-utils@2.1.10-beta.0
-  - @heroui/react-utils@2.1.11-beta.0
-  - @heroui/framer-utils@2.1.16-beta.2
-  - @heroui/aria-utils@2.2.17-beta.2
-
-## 2.2.17-beta.1
-
-### Patch Changes
-
-- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
-
-- Updated dependencies [[`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300)]:
-  - @heroui/framer-utils@2.1.16-beta.1
-  - @heroui/aria-utils@2.2.17-beta.1
-
-## 2.2.17-beta.0
-
-### Patch Changes
-
-- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
-
-- Updated dependencies [[`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3)]:
-  - @heroui/theme@2.4.16-beta.0
-  - @heroui/system@2.4.16-beta.0
-  - @heroui/aria-utils@2.2.17-beta.0
-  - @heroui/framer-utils@2.1.16-beta.0
+- Updated dependencies [[`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/aria-utils@2.2.17
+  - @heroui/dom-animation@2.1.9
+  - @heroui/framer-utils@2.1.16
 
 ## 2.2.16
 

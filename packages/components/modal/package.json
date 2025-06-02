@@ -1,6 +1,6 @@
 {
   "name": "@heroui/modal",
-  "version": "2.2.17-beta.3",
+  "version": "2.2.17",
   "description": "Displays a dialog with a custom content that requires attention or provides additional information.",
   "keywords": [
     "modal"
@@ -69,7 +69,7 @@
     "@heroui/switch": "workspace:*",
     "@heroui/test-utils": "workspace:*",
     "react-lorem-component": "0.13.0",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

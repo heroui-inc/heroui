@@ -1,6 +1,6 @@
 {
   "name": "@heroui/select",
-  "version": "2.4.20-beta.3",
+  "version": "2.4.20",
   "description": "A select displays a collapsible list of options and allows a user to select one of them.",
   "keywords": [
     "select"
@@ -75,7 +75,7 @@
     "@react-aria/i18n": "3.12.9",
     "@react-stately/data": "3.13.0",
     "clean-package": "2.2.0",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react": "18.3.0",
     "react-dom": "18.3.0",
     "react-hook-form": "^7.51.3"

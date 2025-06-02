@@ -1,12 +1,10 @@
 # @heroui/shared-icons
 
-## 2.1.8-beta.0
+## 2.1.8
 
 ### Patch Changes
 
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [#5246](https://github.com/heroui-inc/heroui/pull/5246) [`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0) Thanks [@wingkwong](https://github.com/wingkwong)! - support render icons by function in Toast
 
 ## 2.1.7
 

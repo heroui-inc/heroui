@@ -123,8 +123,8 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
               ? activePage - dotsJump
               : 1
             : activePage + dotsJump <= total
-            ? activePage + dotsJump
-            : total;
+              ? activePage + dotsJump
+              : total;
         }
 
         const itemChildren: Record<PaginationItemType, React.ReactNode> = {

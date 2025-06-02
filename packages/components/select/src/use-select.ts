@@ -381,25 +381,6 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     [objectToDeps(variantProps), isInvalid, labelPlacement, disableAnimation],
   );
 
-  // scroll the listbox to the selected item
-  useEffect(() => {
-    if (state.isOpen && popoverRef.current && listBoxRef.current) {
-      let selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
-      let scrollShadow = scrollShadowRef.current;
-
-      // scroll the listbox to the selected item
-      if (selectedItem && scrollShadow && selectedItem.parentElement) {
-        let scrollShadowRect = scrollShadow?.getBoundingClientRect();
-        let scrollShadowHeight = scrollShadowRect.height;
-
-        scrollShadow.scrollTop =
-          selectedItem.parentElement.offsetTop -
-          scrollShadowHeight / 2 +
-          selectedItem.parentElement.clientHeight / 2;
-      }
-    }
-  }, [state.isOpen, disableAnimation]);
-
   usePreventScroll({
     isDisabled: !state.isOpen,
   });
@@ -494,7 +475,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         form: originalProps?.form,
         onChange,
         ...props,
-      } as HiddenSelectProps<T>),
+      }) as HiddenSelectProps<T>,
     [
       state,
       selectionMode,

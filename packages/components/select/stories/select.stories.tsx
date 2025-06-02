@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import type {ValidationResult} from "@react-types/shared";
 
 import React, {ChangeEvent} from "react";

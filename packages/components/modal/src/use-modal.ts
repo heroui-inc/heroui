@@ -22,7 +22,7 @@ interface Props extends HTMLHeroUIProps<"section"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"section">;
+  motionProps?: Omit<HTMLMotionProps<"section">, "ref">;
   /**
    * Determines whether to hide the modal close button.
    * @default false
