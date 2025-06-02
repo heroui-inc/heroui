@@ -1,5 +1,26 @@
 # @heroui/select
 
+## 2.4.20
+
+### Patch Changes
+
+- [#5286](https://github.com/heroui-inc/heroui/pull/5286) [`74e4dec`](https://github.com/heroui-inc/heroui/commit/74e4deca9a5e24207076c9af3738dd1f4baecc09) Thanks [@wingkwong](https://github.com/wingkwong)! - persist last selected item position (#5282)
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
+
+- Updated dependencies [[`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0), [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/shared-icons@2.1.8
+  - @heroui/use-aria-multiselect@2.4.13
+  - @heroui/use-aria-button@2.2.14
+  - @heroui/aria-utils@2.2.17
+  - @heroui/listbox@2.3.19
+  - @heroui/popover@2.3.20
+  - @heroui/form@2.1.19
+  - @heroui/scroll-shadow@2.3.13
+  - @heroui/spinner@2.2.17
+
 ## 2.4.19
 
 ### Patch Changes

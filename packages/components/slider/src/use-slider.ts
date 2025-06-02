@@ -252,8 +252,8 @@ export function useSlider(originalProps: UseSliderProps) {
     state.values.length > 1
       ? state.getThumbPercent(0)
       : fillOffset !== undefined
-      ? state.getValuePercent(fillOffset)
-      : 0,
+        ? state.getValuePercent(fillOffset)
+        : 0,
     state.getThumbPercent(state.values.length - 1),
   ].sort();
 

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/framer-utils",
-  "version": "2.1.15",
+  "version": "2.1.16",
   "description": "A set of framer motion transitions for react",
   "keywords": [
     "framer-utils"
@@ -47,7 +47,7 @@
     "react": "18.3.0",
     "react-dom": "18.3.0",
     "clean-package": "2.2.0",
-    "framer-motion": "11.9.0"
+    "framer-motion": "11.18.2"
   },
   "clean-package": "../../../clean-package.config.json"
 }

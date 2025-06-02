@@ -80,7 +80,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
   });
 
   const handleClick = () => {
-    chain(onClick, tabProps.onClick);
+    chain(onClick, tabProps.onClick)();
 
     if (!domRef?.current || !listRef?.current) return;
 

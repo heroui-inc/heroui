@@ -20,7 +20,7 @@ export const getSponsors = async () => {
     );
 
     return sponsors as Sponsor[];
-  } catch (error) {
+  } catch {
     return __PROD__ ? [] : mockData;
   }
 };

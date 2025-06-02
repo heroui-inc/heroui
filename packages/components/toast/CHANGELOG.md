@@ -1,5 +1,17 @@
 # @heroui/toast
 
+## 2.0.10
+
+### Patch Changes
+
+- [#5246](https://github.com/heroui-inc/heroui/pull/5246) [`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0) Thanks [@wingkwong](https://github.com/wingkwong)! - support render icons by function in Toast
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0)]:
+  - @heroui/shared-icons@2.1.8
+  - @heroui/spinner@2.2.17
+
 ## 2.0.9
 
 ### Patch Changes
