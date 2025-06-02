@@ -49,7 +49,7 @@
     "@heroui/toast": "2.0.10",
     "@heroui/tooltip": "2.2.17",
     "@heroui/user": "2.2.16",
-    "@heroui/react": "2.7.9",
+    "@heroui/react": "2.8.0-beta.6",
     "@heroui/system": "2.4.16",
     "@heroui/system-rsc": "2.3.14",
     "@heroui/theme": "2.4.16",
