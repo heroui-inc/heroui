@@ -14,7 +14,7 @@ import {ReactNode, useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
 import {mergeProps} from "@react-aria/utils";
 import {AriaSliderProps, useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, warn} from "@heroui/shared-utils";
 import {TooltipProps} from "@heroui/tooltip";
 import {useHover} from "@react-aria/interactions";
 import {ValueBase} from "@react-types/shared";
@@ -173,6 +173,12 @@ export function useSlider(originalProps: UseSliderProps) {
     ...otherProps
   } = props;
 
+  const isFixedValue = minValue === maxValue;
+
+  if (isFixedValue) {
+    warn("Min and max values should not be the same. This may cause unexpected behavior.");
+  }
+
   const Component = as || "div";
   const shouldFilterDOMProps = typeof Component === "string";
   const disableAnimation =
@@ -185,11 +191,15 @@ export function useSlider(originalProps: UseSliderProps) {
   const {direction} = useLocale();
 
   const clampValue = useCallback(
-    (valueToClamp: number) => Math.min(Math.max(valueToClamp, minValue), maxValue),
+    (valueToClamp: number) => {
+      return Math.min(Math.max(valueToClamp, minValue), maxValue);
+    },
     [minValue, maxValue],
   );
 
   const validatedValue = useMemo(() => {
+    if (isFixedValue) return minValue;
+
     if (valueProp === undefined) return undefined;
 
     if (Array.isArray(valueProp)) {
@@ -197,11 +207,12 @@ export function useSlider(originalProps: UseSliderProps) {
     }
 
     return clampValue(valueProp);
-  }, [valueProp, clampValue]);
+  }, [valueProp, clampValue, isFixedValue, minValue]);
 
   const state = useSliderState({
     ...otherProps,
     value: validatedValue,
+    defaultValue: otherProps.defaultValue,
     isDisabled: originalProps?.isDisabled ?? false,
     orientation,
     step,
@@ -406,6 +417,8 @@ export function useSlider(originalProps: UseSliderProps) {
       onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
       onClick: (e: any) => {
         e.stopPropagation();
+        if (isFixedValue) return;
+
         if (state.values.length === 1) {
           state.setThumbPercent(0, percent);
         } else {
