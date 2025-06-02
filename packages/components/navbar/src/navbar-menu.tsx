@@ -19,7 +19,7 @@ export interface NavbarMenuProps extends HTMLHeroUIProps<"ul"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"ul">;
+  motionProps?: Omit<HTMLMotionProps<"ul">, "ref">;
 }
 
 const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);

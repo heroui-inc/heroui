@@ -1,6 +1,6 @@
 {
   "name": "@heroui/accordion",
-  "version": "2.2.17-beta.3",
+  "version": "2.2.17",
   "description": "Collapse display a list of high-level options that can expand/collapse to reveal more information.",
   "keywords": [
     "react",
@@ -70,7 +70,7 @@
     "@heroui/avatar": "workspace:*",
     "@heroui/input": "workspace:*",
     "@heroui/test-utils": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

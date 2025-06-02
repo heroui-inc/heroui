@@ -153,7 +153,7 @@ export function objectToDeps(obj: Extractable) {
 
   try {
     return JSON.stringify(obj);
-  } catch (e) {
+  } catch {
     return "";
   }
 }

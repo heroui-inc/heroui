@@ -210,7 +210,7 @@ export const Cmdk: FC<{}> = () => {
     [query],
   );
 
-  const items = !isEmpty(results) ? results : recentSearches ?? [];
+  const items = !isEmpty(results) ? results : (recentSearches ?? []);
 
   // Toggle the menu when ⌘K / CTRL K is pressed
   useEffect(() => {

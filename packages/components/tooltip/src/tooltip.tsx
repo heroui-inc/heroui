@@ -54,7 +54,7 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
 
       trigger = cloneElement(child, getTriggerProps(child.props, childRef));
     }
-  } catch (error) {
+  } catch {
     trigger = <span />;
     warn("Tooltip must have only one child node. Please, check your code.");
   }
