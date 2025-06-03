@@ -1,6 +1,6 @@
 {
   "name": "@heroui/chip",
-  "version": "2.2.16",
+  "version": "2.2.17-beta.0",
   "description": "Chips help people enter information, make selections, filter content, or trigger actions.",
   "keywords": [
     "chip"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.16-beta.0",
-    "@heroui/system": ">=2.4.16-beta.0"
+    "@heroui/theme": ">=2.4.17-beta.0",
+    "@heroui/system": ">=2.4.17-beta.0"
   },
   "dependencies": {
     "@heroui/shared-icons": "workspace:*",

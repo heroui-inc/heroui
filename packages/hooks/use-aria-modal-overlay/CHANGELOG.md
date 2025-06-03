@@ -1,5 +1,20 @@
 # @heroui/use-aria-modal-overlay
 
+## 2.2.14-beta.0
+
+### Patch Changes
+
+- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@macci001](https://github.com/macci001)! - bump RA versions
+
+- [#5348](https://github.com/heroui-inc/heroui/pull/5348) [`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251) Thanks [@github-actions](https://github.com/apps/github-actions)! - sync with 2.7.9 changes
+
+- [#5100](https://github.com/heroui-inc/heroui/pull/5100) [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: overlay & interactOutside
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6)]:
+  - @heroui/use-aria-overlay@2.0.1-beta.1
+
 ## 2.2.13
 
 ### Patch Changes
