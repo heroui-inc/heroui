@@ -1,5 +1,74 @@
 # @heroui/react
 
+## 2.8.0-beta.7
+
+### Minor Changes
+
+- [#5348](https://github.com/heroui-inc/heroui/pull/5348) [`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251) Thanks [@github-actions](https://github.com/apps/github-actions)! - sync with 2.7.9 changes
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
+
+- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
+
+- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`f86098e`](https://github.com/heroui-inc/heroui/commit/f86098edcb92e01676fb3b52da9fbbff48ff1d7c) Thanks [@macci001](https://github.com/macci001)! - TailwindCSS v4
+
+### Patch Changes
+
+- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@macci001](https://github.com/macci001)! - bump RA versions
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f), [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`224b53c`](https://github.com/heroui-inc/heroui/commit/224b53caad8a9a1ff37884edbc1256c953583db9), [`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251), [`2bf0a42`](https://github.com/heroui-inc/heroui/commit/2bf0a4243a4e02356477a8da2275dba4e299e55f), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f), [`9a32ae1`](https://github.com/heroui-inc/heroui/commit/9a32ae11735a2d23d1f2678c4a229dcb340c419f), [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300), [`f86098e`](https://github.com/heroui-inc/heroui/commit/f86098edcb92e01676fb3b52da9fbbff48ff1d7c), [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
+  - @heroui/system@2.4.17-beta.0
+  - @heroui/autocomplete@2.3.22-beta.0
+  - @heroui/number-input@2.0.11-beta.0
+  - @heroui/breadcrumbs@2.2.17-beta.0
+  - @heroui/date-picker@2.3.21-beta.0
+  - @heroui/date-input@2.3.20-beta.0
+  - @heroui/pagination@2.2.19-beta.0
+  - @heroui/accordion@2.2.18-beta.0
+  - @heroui/input-otp@2.1.20-beta.0
+  - @heroui/calendar@2.2.21-beta.0
+  - @heroui/checkbox@2.3.20-beta.0
+  - @heroui/dropdown@2.3.21-beta.0
+  - @heroui/progress@2.2.17-beta.0
+  - @heroui/divider@2.2.15-beta.0
+  - @heroui/listbox@2.3.20-beta.0
+  - @heroui/popover@2.3.21-beta.0
+  - @heroui/snippet@2.2.22-beta.0
+  - @heroui/tooltip@2.2.18-beta.0
+  - @heroui/avatar@2.2.17-beta.0
+  - @heroui/button@2.2.21-beta.0
+  - @heroui/navbar@2.2.19-beta.0
+  - @heroui/select@2.4.21-beta.0
+  - @heroui/slider@2.4.18-beta.0
+  - @heroui/switch@2.2.19-beta.0
+  - @heroui/alert@2.2.21-beta.0
+  - @heroui/input@2.4.21-beta.0
+  - @heroui/modal@2.2.18-beta.0
+  - @heroui/radio@2.3.20-beta.0
+  - @heroui/table@2.2.20-beta.0
+  - @heroui/toast@2.0.11-beta.0
+  - @heroui/card@2.2.20-beta.0
+  - @heroui/chip@2.2.17-beta.0
+  - @heroui/form@2.1.20-beta.0
+  - @heroui/link@2.2.18-beta.0
+  - @heroui/menu@2.2.20-beta.0
+  - @heroui/tabs@2.2.18-beta.0
+  - @heroui/user@2.2.17-beta.0
+  - @heroui/kbd@2.2.17-beta.0
+  - @heroui/scroll-shadow@2.3.14-beta.3
+  - @heroui/framer-utils@2.1.17-beta.0
+  - @heroui/skeleton@2.2.13-beta.3
+  - @heroui/spinner@2.2.18-beta.0
+  - @heroui/drawer@2.2.18-beta.0
+  - @heroui/ripple@2.2.16-beta.0
+  - @heroui/spacer@2.2.16-beta.0
+  - @heroui/badge@2.2.13-beta.3
+  - @heroui/image@2.2.13-beta.3
+  - @heroui/code@2.2.16-beta.0
+  - @heroui/theme@2.4.17-beta.0
+
 ## 2.8.0-beta.6
 
 ### Patch Changes
