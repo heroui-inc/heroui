@@ -2,46 +2,70 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {focusRingClasses} from "../../utils/compose";
+import {disabledClasses, focusRingClasses} from "../../utils/compose";
 
 export const alertVariants = tv({
   defaultVariants: {
     variant: "default",
   },
   slots: {
-    action: ["rounded-lg px-3.5 py-2 text-sm", focusRingClasses],
-    base: [
-      "bg-base w-full rounded-lg",
-      "border-foreground/10 border",
-      "flex flex-row items-center justify-start gap-4 p-4",
+    action: [
+      "select-none rounded-lg px-3.5 py-2 text-sm font-medium",
+      "transition-colors duration-150",
+      focusRingClasses,
+      disabledClasses,
     ],
-    close: ["text-muted h-fit p-1", focusRingClasses],
-    content: ["flex-grow"],
-    description: ["text-muted text-sm"],
-    icon: ["flex items-center justify-center"],
-    title: ["text-sm font-medium"],
+    base: [
+      "bg-panel w-full rounded-lg",
+      "flex flex-row items-center justify-start gap-4 p-4",
+      "border-foreground/10 border",
+    ],
+    close: [
+      "text-muted h-fit rounded-sm p-1",
+      "transition-colors duration-150",
+      "hover:bg-base active:bg-base data-[pressed]:bg-base",
+      "hover:text-foreground active:text-foreground data-[pressed]:text-foreground",
+      focusRingClasses,
+      disabledClasses,
+    ],
+    content: "flex-grow",
+    description: "text-muted text-sm",
+    icon: "flex select-none items-center justify-center",
+    title: "text-sm font-medium",
   },
   variants: {
     variant: {
       danger: {
-        action: ["bg-danger text-danger-foreground"],
-        icon: ["text-danger"],
-        title: ["text-danger"],
+        action: [
+          "bg-danger text-danger-foreground",
+          "hover:bg-danger-hover active:bg-danger-hover data-[pressed]:bg-danger-hover",
+        ],
+        icon: "text-danger",
+        title: "text-danger",
       },
       default: {
-        action: ["bg-accent-soft text-accent-soft-foreground"],
-        icon: ["text-foreground"],
-        title: ["text-foreground"],
+        action: [
+          "bg-accent-soft text-accent-soft-foreground",
+          "hover:bg-accent-soft-hover active:bg-accent-soft-hover data-[pressed]:bg-accent-soft-hover",
+        ],
+        icon: "text-foreground",
+        title: "text-foreground",
       },
       success: {
-        action: ["bg-success text-success-foreground"],
-        icon: ["text-success"],
-        title: ["text-success"],
+        action: [
+          "bg-success text-success-foreground",
+          "hover:bg-success-hover active:bg-success-hover data-[pressed]:bg-success-hover",
+        ],
+        icon: "text-success",
+        title: "text-success",
       },
       warning: {
-        action: ["bg-warning text-warning-foreground"],
-        icon: ["text-warning"],
-        title: ["text-warning"],
+        action: [
+          "bg-warning text-warning-foreground",
+          "hover:bg-warning-hover active:bg-warning-hover data-[pressed]:bg-warning-hover",
+        ],
+        icon: "text-warning",
+        title: "text-warning",
       },
     },
   },

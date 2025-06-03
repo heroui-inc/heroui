@@ -17,7 +17,6 @@
   :root {
     /* Base Colors */
     --background: oklch(100% 0 0);
-    /* --background: oklch(0.95 0 0); */
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
 
@@ -25,7 +24,6 @@
     --muted-foreground: var(--color-neutral-400);
 
     --surface: var(--color-neutral-100);
-    /* --surface: oklch(1 0 0); */
     --surface-foreground: var(--foreground);
 
     --scrollbar: var(--color-neutral-300);
@@ -49,7 +47,7 @@
     --danger: oklch(0.59 0.2228 29.94);
     --danger-foreground: oklch(99.11% 0 0);
 
-    /* Misc colors */
+    /* Misc Colors */
     --border: oklch(0 0 0 / 15%);
     --focus: oklch(0% 0 0 / 20%);
     --link: var(--foreground);
@@ -58,16 +56,15 @@
     --border-width: 1px;
     --disabled-opacity: 0.5;
 
-    /* Base Radius */
+    /* Radius */
     --radius: 0.75rem; /* 12px */
-    --radius-panel: 0.5rem; /* 8px Popover / Card / Modal */
-    --radius-panel-inner: calc(var(--radius-panel) * 0.5); /* 4px */
+    --radius-panel: 0.5rem;
+    --radius-panel-inner: calc(var(--radius-panel) * 0.5);
 
-    /* Font sizes */
-    --mobile-font-size: 16px;
-    --desktop-font-size: 14px;
+    /* Font Sizes */
+    --font-size-base: clamp(14px, 1vw + 0.5rem, 16px);
 
-    /* Shadows */
+    /* Shadow */
     --shadow-border:
       0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
       0 0px 1px 0px rgba(0, 0, 0, 0.3);
@@ -107,63 +104,24 @@
     --danger: oklch(0.61 0.1998 29.94);
     --danger-foreground: oklch(0.99 0 0);
 
-    /* Misc colors */
+    /* Misc Colors */
     --border: oklch(1 0 0 / 12%);
     --focus: oklch(100% 0 0 / 50%);
     --link: var(--foreground);
 
-    /* Shadows */
+    /* Shadow */
     --shadow-border:
-      0px 0px 5px 0px rgb(0 0 0 / 0.05), 0px 2px 10px 0px rgb(0 0 0 / 0.2),
-      inset 0px 0px 1px 0px rgb(var(--foreground) / 0.2);
-  }
-}
-
-@variant dark (&:is(.dark *));
-
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--border, currentColor);
-  }
-}
-
-@layer base {
-  * {
-    font-feature-settings: "cv11", "ss01";
-    font-variation-settings: "opsz" 850;
-    text-rendering: optimizeLegibility;
-
-    /*
-     * Scrollbar
-     */
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar) transparent;
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-size: var(--mobile-font-size);
-  }
-
-  @media (min-width: 768px) {
-    body {
-      font-size: var(--desktop-font-size);
-    }
+      0 0 5px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.2),
+      inset 0 0 1px rgba(var(--foreground), 0.2);
   }
 }
 
 @theme inline {
   /* Recommended font is: Inter, Sathosi, Geist */
-  /*--font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",*/
-  /*"Segoe UI Symbol", "Noto Color Emoji";*/
+  /* --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
 
   /* Recommended font is: Geist Mono */
-  /*--font-mono: var(--font-geist), 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace';*/
+  /* --font-mono: var(--font-geist), 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'; */
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -202,6 +160,7 @@
   /* Calculated Variables */
 
   /* Colors */
+  --color-base-hover: color-mix(in oklab, var(--color-base) 90%, var(--color-base-foreground) 5%);
   --color-accent-hover: color-mix(
     in oklab,
     var(--color-accent) 90%,
@@ -212,7 +171,16 @@
     var(--color-accent-soft) 10%,
     var(--color-accent-soft-foreground) 18%
   );
-  --color-base-hover: color-mix(in oklab, var(--color-base) 90%, var(--color-base-foreground) 5%);
+  --color-success-hover: color-mix(
+    in oklab,
+    var(--color-success) 90%,
+    var(--color-success-foreground) 10%
+  );
+  --color-warning-hover: color-mix(
+    in oklab,
+    var(--color-warning) 90%,
+    var(--color-warning-foreground) 10%
+  );
   --color-danger-hover: color-mix(
     in oklab,
     var(--color-danger) 90%,
@@ -228,4 +196,34 @@
   --radius-2xl: calc(var(--radius) * 2);
   --radius-3xl: calc(var(--radius) * 3);
   --radius-4xl: calc(var(--radius) * 4);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border, currentColor);
+  }
+
+  *,
+  ::after,
+  ::before {
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 850;
+    text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar) transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--font-size-base);
+  }
 }
