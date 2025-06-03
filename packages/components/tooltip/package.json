@@ -46,6 +46,7 @@
     "@heroui/aria-utils": "workspace:*",
     "@heroui/framer-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
+    "@heroui/use-aria-overlay": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
     "@react-aria/interactions": "3.25.1",
     "@react-aria/overlays": "3.27.1",
