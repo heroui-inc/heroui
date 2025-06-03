@@ -4,7 +4,7 @@ import type {OverlayTriggerProps} from "@react-types/overlays";
 import type {HTMLMotionProps} from "framer-motion";
 import type {OverlayOptions} from "@heroui/aria-utils";
 
-import {ReactNode, Ref, useId, useImperativeHandle} from "react";
+import {ReactNode, Ref, useId, useImperativeHandle, useState, useEffect, useRef} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
 import {mergeProps} from "@react-aria/utils";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
@@ -14,7 +14,7 @@ import {popover} from "@heroui/theme";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {ReactRef, mergeRefs} from "@heroui/react-utils";
 import {createDOMRef} from "@heroui/react-utils";
-import {useMemo, useRef, useCallback} from "react";
+import {useMemo, useCallback} from "react";
 import {toReactAriaPlacement, getArrowPlacement} from "@heroui/aria-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 
@@ -126,26 +126,82 @@ export function useTooltip(originalProps: UseTooltipProps) {
   const disableAnimation =
     originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
+  // Custom delay handling when respectDelay is true
+  const [customIsOpen, setCustomIsOpen] = useState(false);
+  const customDelayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const customCloseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const state = useTooltipTriggerState({
-    delay,
-    closeDelay,
+    delay: 0, // Always disable React Stately delay to use custom delay
+    closeDelay: 0, // Always disable React Stately closeDelay to use custom delay
     isDisabled,
     defaultOpen,
     isOpen: isOpenProp,
     onOpenChange: (isOpen) => {
-      onOpenChange?.(isOpen);
-      if (!isOpen) {
-        onClose?.();
+      // Handle custom delay logic
+      if (isOpen) {
+        // Clear any existing timeouts
+        if (customDelayTimeoutRef.current) {
+          clearTimeout(customDelayTimeoutRef.current);
+        }
+        if (customCloseTimeoutRef.current) {
+          clearTimeout(customCloseTimeoutRef.current);
+          customCloseTimeoutRef.current = null;
+        }
+
+        if (delay > 0) {
+          // Apply custom delay
+          customDelayTimeoutRef.current = setTimeout(() => {
+            setCustomIsOpen(true);
+            onOpenChange?.(true);
+          }, delay);
+        } else {
+          // No delay, show immediately
+          setCustomIsOpen(true);
+          onOpenChange?.(true);
+        }
+      } else {
+        // Handle closing with custom close delay
+        if (customDelayTimeoutRef.current) {
+          clearTimeout(customDelayTimeoutRef.current);
+          customDelayTimeoutRef.current = null;
+        }
+
+        if (closeDelay > 0) {
+          customCloseTimeoutRef.current = setTimeout(() => {
+            setCustomIsOpen(false);
+            onOpenChange?.(false);
+            onClose?.();
+          }, closeDelay);
+        } else {
+          // No close delay, hide immediately
+          setCustomIsOpen(false);
+          onOpenChange?.(false);
+          onClose?.();
+        }
       }
     },
   });
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (customDelayTimeoutRef.current) {
+        clearTimeout(customDelayTimeoutRef.current);
+      }
+      if (customCloseTimeoutRef.current) {
+        clearTimeout(customCloseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const triggerRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const tooltipId = useId();
 
-  const isOpen = state.isOpen && !isDisabled;
+  // Use custom isOpen state when respectDelay is true, otherwise use React Stately's state
+  const isOpen = customIsOpen && !isDisabled;
 
   // Sync ref with overlayRef from passed ref.
   useImperativeHandle(ref, () =>
