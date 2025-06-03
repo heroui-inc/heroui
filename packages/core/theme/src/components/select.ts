@@ -192,7 +192,8 @@ const select = tv({
     },
     isClearable: {
       true: {
-        clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block me-3",
+        clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
+        endContent: "ms-3",
       },
     },
     isDisabled: {
