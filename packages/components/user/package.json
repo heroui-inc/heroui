@@ -43,8 +43,8 @@
     "@heroui/avatar": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/focus": "3.20.3",
-    "@react-aria/utils": "3.29.0"
+    "@react-aria/focus": "3.20.4",
+    "@react-aria/utils": "3.29.1"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
