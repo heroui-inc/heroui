@@ -68,11 +68,11 @@ importers:
         specifier: ^2.1.0
         version: 2.2.0
       '@react-types/link':
-        specifier: 3.6.1
-        version: 3.6.1(react@18.3.0)
+        specifier: 3.6.2
+        version: 3.6.2(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.29.1
-        version: 3.29.1(react@18.3.0)
+        specifier: 3.30.0
+        version: 3.30.0(react@18.3.0)
       '@storybook/react':
         specifier: ^8.4.5
         version: 8.4.7(react-dom@18.3.0(react@18.3.0))(react@18.3.0)(storybook@8.5.0(prettier@3.5.3))(typescript@5.7.3)
@@ -7621,11 +7621,6 @@ packages:
     peerDependencies:
       react: 18.3.0
 
-  '@react-types/link@3.6.1':
-    resolution: {integrity: sha512-IZDSc10AuVKe7V8Te+3q8d220oANE4N43iljQe3yHg7GZOfH/51bv8FPUukreLs1t2fgtGeNAzG71Ep+j/jXIw==}
-    peerDependencies:
-      react: 18.3.0
-
   '@react-types/link@3.6.2':
     resolution: {integrity: sha512-CtCexoupcaFHJdVPRUpJ83uxK1U0bd9x9DhwRFMqqfPHufICkQkETIw2KIeZXRvMUMi2CSG/81XXy6K0K1MtNw==}
     peerDependencies:
@@ -7663,11 +7658,6 @@ packages:
 
   '@react-types/select@3.9.13':
     resolution: {integrity: sha512-R7zwck353RV60gZimZ8pDKaj50aEtGzU8gk0jC3aBkfzSUKFJ6jq1DJdqyVQSwXdmPDd9iuketeIUIpEO2teoA==}
-    peerDependencies:
-      react: 18.3.0
-
-  '@react-types/shared@3.29.1':
-    resolution: {integrity: sha512-KtM+cDf2CXoUX439rfEhbnEdAgFZX20UP2A35ypNIawR7/PFFPjQDWyA2EnClCcW/dLWJDEPX2U8+EJff8xqmQ==}
     peerDependencies:
       react: 18.3.0
 
@@ -20629,11 +20619,6 @@ snapshots:
       '@react-types/shared': 3.30.0(react@18.3.0)
       react: 18.3.0
 
-  '@react-types/link@3.6.1(react@18.3.0)':
-    dependencies:
-      '@react-types/shared': 3.30.0(react@18.3.0)
-      react: 18.3.0
-
   '@react-types/link@3.6.2(react@18.3.0)':
     dependencies:
       '@react-types/shared': 3.30.0(react@18.3.0)
@@ -20673,10 +20658,6 @@ snapshots:
   '@react-types/select@3.9.13(react@18.3.0)':
     dependencies:
       '@react-types/shared': 3.30.0(react@18.3.0)
-      react: 18.3.0
-
-  '@react-types/shared@3.29.1(react@18.3.0)':
-    dependencies:
       react: 18.3.0
 
   '@react-types/shared@3.30.0(react@18.3.0)':
