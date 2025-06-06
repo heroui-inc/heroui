@@ -54,13 +54,12 @@
     ]
   },
   "dependencies": {
-    "@internationalized/date": "3.8.1",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/i18n": "3.12.9",
     "@heroui/system-rsc": "workspace:*",
+    "@react-aria/i18n": "3.12.9",
     "@react-aria/overlays": "3.27.1",
     "@react-aria/utils": "3.29.0",
     "@react-stately/utils": "3.10.6",
-    "@react-types/datepicker": "3.12.1"
+    "@react-types/calendar": "3.7.2"
   }
 }

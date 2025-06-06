@@ -3469,9 +3469,6 @@ importers:
       '@heroui/system-rsc':
         specifier: workspace:*
         version: link:../system-rsc
-      '@internationalized/date':
-        specifier: 3.8.1
-        version: 3.8.1
       '@react-aria/i18n':
         specifier: 3.12.9
         version: 3.12.9(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -3484,9 +3481,9 @@ importers:
       '@react-stately/utils':
         specifier: 3.10.6
         version: 3.10.6(react@18.3.0)
-      '@react-types/datepicker':
-        specifier: 3.12.1
-        version: 3.12.1(react@18.3.0)
+      '@react-types/calendar':
+        specifier: 3.7.2
+        version: 3.7.2(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -6144,6 +6141,9 @@ packages:
   '@internationalized/date@3.8.1':
     resolution: {integrity: sha512-PgVE6B6eIZtzf9Gu5HvJxRK3ufUFz9DhspELuhW/N0GuMGMTLvPQNRkHP2hTuP9lblOk+f+1xi96sPiPXANXAA==}
 
+  '@internationalized/date@3.8.2':
+    resolution: {integrity: sha512-/wENk7CbvLbkUvX1tu0mwq49CVkkWpkXubGel6birjRPyo6uQ4nQpnq5xZu823zRCwwn82zgHrvgF1vZyvmVgA==}
+
   '@internationalized/message@3.1.7':
     resolution: {integrity: sha512-gLQlhEW4iO7DEFPf/U7IrIdA3UyLGS0opeqouaFwlMObLUzwexRjbygONHDVbC9G9oFLXsLyGKYkJwqXw/QADg==}
 
@@ -7591,6 +7591,11 @@ packages:
     peerDependencies:
       react: 18.3.0
 
+  '@react-types/calendar@3.7.2':
+    resolution: {integrity: sha512-Bp6fZo52fZdUjYbtJXcaLQ0jWEOeSoyZVwNyN5G6BmPyLP5nHxMPF+R1MPFR0fdpSI4/Sk78gWzoTuU5eOVQLw==}
+    peerDependencies:
+      react: 18.3.0
+
   '@react-types/checkbox@3.9.4':
     resolution: {integrity: sha512-fU3Q1Nw+zbXKm68ba8V7cQzpiX0rIiAUKrBTl2BK97QiTlGBDvMCf4TfEuaNoGbJq+gx+X3n/3yr6c3IAb0ZIg==}
     peerDependencies:
@@ -7663,6 +7668,11 @@ packages:
 
   '@react-types/shared@3.29.1':
     resolution: {integrity: sha512-KtM+cDf2CXoUX439rfEhbnEdAgFZX20UP2A35ypNIawR7/PFFPjQDWyA2EnClCcW/dLWJDEPX2U8+EJff8xqmQ==}
+    peerDependencies:
+      react: 18.3.0
+
+  '@react-types/shared@3.30.0':
+    resolution: {integrity: sha512-COIazDAx1ncDg046cTJ8SFYsX8aS3lB/08LDnbkH/SkdYrFPWDlXMrO/sUam8j1WWM+PJ+4d1mj7tODIKNiFog==}
     peerDependencies:
       react: 18.3.0
 
@@ -18353,6 +18363,10 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.15
 
+  '@internationalized/date@3.8.2':
+    dependencies:
+      '@swc/helpers': 0.5.15
+
   '@internationalized/message@3.1.7':
     dependencies:
       '@swc/helpers': 0.5.15
@@ -20585,6 +20599,12 @@ snapshots:
       '@react-types/shared': 3.29.1(react@18.3.0)
       react: 18.3.0
 
+  '@react-types/calendar@3.7.2(react@18.3.0)':
+    dependencies:
+      '@internationalized/date': 3.8.2
+      '@react-types/shared': 3.30.0(react@18.3.0)
+      react: 18.3.0
+
   '@react-types/checkbox@3.9.4(react@18.3.0)':
     dependencies:
       '@react-types/shared': 3.29.1(react@18.3.0)
@@ -20661,6 +20681,10 @@ snapshots:
       react: 18.3.0
 
   '@react-types/shared@3.29.1(react@18.3.0)':
+    dependencies:
+      react: 18.3.0
+
+  '@react-types/shared@3.30.0(react@18.3.0)':
     dependencies:
       react: 18.3.0
 
