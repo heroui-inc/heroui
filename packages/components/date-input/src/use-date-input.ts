@@ -1,8 +1,6 @@
 import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaDateFieldProps} from "@react-types/datepicker";
-import type {SupportedCalendars} from "@heroui/system";
-import type {DateValue} from "@react-types/datepicker";
-import type {Calendar} from "@internationalized/date";
+import type {DateValue, SpectrumDatePickerBase} from "@react-types/datepicker";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
@@ -89,7 +87,7 @@ interface Props<T extends DateValue> extends HeroUIBaseProps<T> {
    *
    * @default all calendars
    */
-  createCalendar?: (calendar: SupportedCalendars) => Calendar | null;
+  createCalendar?: SpectrumDatePickerBase<DateValue>["createCalendar"];
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.
