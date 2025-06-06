@@ -137,7 +137,7 @@ const ControlledFocusedValueTemplate = (args: CalendarProps) => {
 };
 
 const InvalidDateTemplate = (args: CalendarProps) => {
-  let [date, setDate] = React.useState<DateValue | null>(today(getLocalTimeZone()));
+  let [date, setDate] = React.useState<DateValue>(today(getLocalTimeZone()));
   let {locale} = useLocale();
   let isInvalid = isWeekend(date, locale);
 
