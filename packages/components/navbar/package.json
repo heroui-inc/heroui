@@ -46,13 +46,13 @@
     "@heroui/framer-utils": "workspace:*",
     "@heroui/use-scroll-position": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/focus": "3.20.3",
-    "@react-aria/interactions": "3.25.1",
-    "@react-aria/button": "3.13.1",
-    "@react-aria/overlays": "3.27.1",
-    "@react-aria/utils": "3.29.0",
-    "@react-stately/toggle": "3.8.4",
-    "@react-stately/utils": "3.10.6"
+    "@react-aria/focus": "3.20.4",
+    "@react-aria/interactions": "3.25.2",
+    "@react-aria/button": "3.13.2",
+    "@react-aria/overlays": "3.27.2",
+    "@react-aria/utils": "3.29.1",
+    "@react-stately/toggle": "3.8.5",
+    "@react-stately/utils": "3.10.7"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
