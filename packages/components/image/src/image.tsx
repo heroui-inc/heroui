@@ -13,12 +13,16 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
     classNames,
     isBlurred,
     isZoomed,
+    isError,
     fallbackSrc,
     removeWrapper,
+    showFallback,
     disableSkeleton,
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
+    getErrorWrapperProps,
+    getErrorImageProps,
   } = useImage({
     ...props,
     ref,
@@ -28,6 +32,13 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
 
   if (removeWrapper) {
     return img;
+  }
+  if (isError || showFallback) {
+    return (
+      <div {...getErrorWrapperProps()}>
+        <Component {...getErrorImageProps()} />
+      </div>
+    );
   }
 
   const zoomed = (
