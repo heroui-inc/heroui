@@ -1,6 +1,9 @@
 import {dirname, join} from "path";
 import remarkGfm from "remark-gfm";
 import type {StorybookConfig} from "@storybook/react-vite";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
