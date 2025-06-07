@@ -3,7 +3,6 @@
 import React, {useCallback, useEffect} from "react";
 import Script from "next/script";
 
-
 import carbonOptimize from "./carbon-optimize";
 
 import {loadScript} from "@/utils/scripts";
@@ -42,8 +41,6 @@ export const CarbonAd: React.FC<unknown> = () => {
   }, []);
 
   useEffect(() => {
- 
-
     const shouldShowEthicalAds = Math.random() < EA_PROVIDER_RATIO;
 
     let loadCarbon: any = null;
