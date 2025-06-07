@@ -1,4 +1,6 @@
 ---
+"@heroui/date-input": patch
+"@heroui/input-otp": patch
 "@heroui/theme": patch
 ---
 
