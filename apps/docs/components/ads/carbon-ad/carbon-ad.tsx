@@ -2,7 +2,7 @@
 
 import React, {useCallback, useEffect} from "react";
 import Script from "next/script";
-import Image from "next/image";
+import {Image} from "@heroui/react";
 
 import carbonOptimize from "./carbon-optimize";
 
@@ -109,7 +109,6 @@ export const CarbonAd: React.FC<unknown> = () => {
   if (PRODUCT_HUNT_ENABLED) {
     return (
       <div className="px-2 not-prose hover:opacity-80 transition-[opacity] duration-200 carbon-ad-container max-h-[100px] min-h-[100px] h-[100px] m-0 p-0">
-        Add commentMore actions
         <a
           className="group flex items-center flex gap-2 h-full"
           href={PH_INFO.url}
