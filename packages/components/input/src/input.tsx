@@ -1,8 +1,10 @@
+import type {UseInputProps} from "./use-input";
+
 import {CloseFilledIcon} from "@heroui/shared-icons";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
-import {UseInputProps, useInput} from "./use-input";
+import {useInput} from "./use-input";
 
 export interface InputProps extends Omit<UseInputProps, "isMultiline"> {}
 

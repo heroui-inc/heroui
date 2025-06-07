@@ -12,13 +12,14 @@ import type {ButtonProps} from "@heroui/button";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
 import type {CalendarIdentifier} from "@internationalized/date";
+import type {ReactRef} from "@heroui/react-utils";
 
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
 import {calendar} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@react-aria/i18n";
 import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";

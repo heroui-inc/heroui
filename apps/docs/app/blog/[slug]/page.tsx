@@ -1,4 +1,5 @@
 import type {Metadata} from "next";
+import type {Route} from "@/libs/docs/page";
 
 import {notFound} from "next/navigation";
 import {allBlogPosts} from "contentlayer2/generated";
@@ -10,7 +11,6 @@ import {Balancer} from "react-wrap-balancer";
 import {__DEV__, __PREVIEW__} from "@/utils";
 import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";
-import {Route} from "@/libs/docs/page";
 import {ChevronRightLinearIcon} from "@/components/icons";
 import {CarbonAd} from "@/components/ads/carbon-ad";
 

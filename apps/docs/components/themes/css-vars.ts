@@ -1,7 +1,8 @@
+import type {ColorPickerType, Config, ConfigLayout, ThemeType, ThemeColor} from "./types";
+
 import {readableColor} from "color2k";
 
 import {colorsId, baseColorsId, showcaseId, otherColorsId, defaultColorsId} from "./constants";
-import {ColorPickerType, Config, ConfigLayout, ThemeType, ThemeColor} from "./types";
 import {generateThemeColor, hexToHsl} from "./utils/colors";
 import {templates} from "./templates";
 

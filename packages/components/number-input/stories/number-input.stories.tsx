@@ -1,12 +1,13 @@
 import type {ValidationResult} from "@react-types/shared";
+import type {Meta} from "@storybook/react";
+import type {NumberInputProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {button} from "@heroui/theme";
 import {Form} from "@heroui/form";
 import {numberInput} from "@heroui/theme";
 
-import {NumberInput, NumberInputProps} from "../src";
+import {NumberInput} from "../src";
 
 export default {
   title: "Components/NumberInput",

@@ -1,15 +1,19 @@
 import type {SlotsToClasses, ToastSlots, ToastVariantProps} from "@heroui/theme";
 import type {DOMAttributes} from "react";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {AriaToastProps} from "@react-aria/toast";
+import type {QueuedToast, ToastState} from "@react-stately/toast";
+import type {MotionProps} from "framer-motion";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {HTMLHeroUIProps, PropGetter, mapPropsVariants, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {toast as toastTheme} from "@heroui/theme";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
-import {ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
-import {useToast as useToastAria, AriaToastProps} from "@react-aria/toast";
+import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
+import {useToast as useToastAria} from "@react-aria/toast";
 import {chain, mergeProps} from "@react-aria/utils";
-import {QueuedToast, ToastState} from "@react-stately/toast";
-import {MotionProps} from "framer-motion";
 import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 

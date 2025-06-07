@@ -1,5 +1,9 @@
 "use client";
 
+import type {UseCodeDemoProps} from "./use-code-demo";
+import type {WindowResizerProps} from "./window-resizer";
+import type {GradientBoxProps} from "@/components/gradient-box";
+
 import React, {useCallback, useMemo, useRef, useState} from "react";
 import dynamic from "next/dynamic";
 import {addToast, Button, Skeleton, Spinner, Tab, Tabs} from "@heroui/react";
@@ -7,11 +11,10 @@ import {useInView} from "framer-motion";
 import {usePostHog} from "posthog-js/react";
 import {usePathname} from "next/navigation";
 
-import {useCodeDemo, UseCodeDemoProps} from "./use-code-demo";
-import WindowResizer, {WindowResizerProps} from "./window-resizer";
+import {useCodeDemo} from "./use-code-demo";
+import WindowResizer from "./window-resizer";
 import {parseDependencies} from "./parse-dependencies";
 
-import {GradientBoxProps} from "@/components/gradient-box";
 import {SmallLogo} from "@/components/heroui-logo";
 import {openInChat} from "@/actions/open-in-chat";
 
