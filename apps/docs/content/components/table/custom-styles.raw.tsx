@@ -1,4 +1,7 @@
-import React, {SVGProps} from "react";
+import type {SVGProps} from "react";
+import type {Selection, ChipProps, SortDescriptor} from "@heroui/react";
+
+import React from "react";
 import {
   Table,
   TableHeader,
@@ -15,9 +18,6 @@ import {
   Chip,
   User,
   Pagination,
-  Selection,
-  ChipProps,
-  SortDescriptor,
 } from "@heroui/react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {

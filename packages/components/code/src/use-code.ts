@@ -1,9 +1,9 @@
 import type {CodeVariantProps} from "@heroui/theme";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
+import type {ReactRef} from "@heroui/react-utils";
 
 import {code} from "@heroui/theme";
 import {mapPropsVariants} from "@heroui/system-rsc";
-import {ReactRef} from "@heroui/react-utils";
 import {useMemo} from "react";
 import {objectToDeps} from "@heroui/shared-utils";
 

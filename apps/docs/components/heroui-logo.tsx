@@ -1,7 +1,8 @@
+import type {IconSvgProps} from "@/types";
+
 import React from "react";
 import {cn} from "@heroui/theme";
 
-import {IconSvgProps} from "@/types";
 import {dataAttr} from "@/utils";
 export interface LogoProps extends IconSvgProps {
   auto?: boolean;

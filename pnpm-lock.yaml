@@ -3469,9 +3469,6 @@ importers:
       '@heroui/system-rsc':
         specifier: workspace:*
         version: link:../system-rsc
-      '@internationalized/date':
-        specifier: 3.8.2
-        version: 3.8.2
       '@react-aria/i18n':
         specifier: 3.12.10
         version: 3.12.10(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -3484,9 +3481,9 @@ importers:
       '@react-stately/utils':
         specifier: 3.10.7
         version: 3.10.7(react@18.3.0)
-      '@react-types/datepicker':
-        specifier: 3.12.2
-        version: 3.12.2(react@18.3.0)
+      '@react-types/calendar':
+        specifier: 3.7.2
+        version: 3.7.2(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0

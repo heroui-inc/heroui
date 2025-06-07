@@ -1,12 +1,14 @@
+import type {Meta} from "@storybook/react";
+import type {CardProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {card} from "@heroui/theme";
 import {Link} from "@heroui/link";
 import {Button} from "@heroui/button";
 import {Code} from "@heroui/code";
 import {Image} from "@heroui/image";
 
-import {Card, CardBody, CardHeader, CardFooter, CardProps} from "../src";
+import {Card, CardBody, CardHeader, CardFooter} from "../src";
 
 export default {
   title: "Components/Card",

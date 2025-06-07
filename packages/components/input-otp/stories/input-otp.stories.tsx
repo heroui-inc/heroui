@@ -1,8 +1,9 @@
+import type {Meta} from "@storybook/react";
+import type {ValidationResult} from "@react-types/shared";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {button, inputOtp} from "@heroui/theme";
 import {Controller, useForm} from "react-hook-form";
-import {ValidationResult} from "@react-types/shared";
 import {Button} from "@heroui/button";
 import {Form} from "@heroui/form";
 

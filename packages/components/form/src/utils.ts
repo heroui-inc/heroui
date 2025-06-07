@@ -4,9 +4,10 @@
  */
 
 import type {CSSProperties, ForwardedRef, ReactNode} from "react";
+import type {Context} from "react";
+import type {RefObject, DOMProps as SharedDOMProps} from "@react-types/shared";
 
-import {Context, useContext, useMemo} from "react";
-import {RefObject, DOMProps as SharedDOMProps} from "@react-types/shared";
+import {useContext, useMemo} from "react";
 import {mergeProps, mergeRefs, useObjectRef} from "@react-aria/utils";
 export const DEFAULT_SLOT = Symbol("default");
 

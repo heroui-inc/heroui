@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {DropdownProps, DropdownMenuProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {dropdown, popover} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {Avatar} from "@heroui/avatar";
@@ -12,15 +14,7 @@ import {
 } from "@heroui/shared-icons";
 import {clsx} from "@heroui/shared-utils";
 
-import {
-  Dropdown,
-  DropdownSection,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  DropdownProps,
-  DropdownMenuProps,
-} from "../src";
+import {Dropdown, DropdownSection, DropdownTrigger, DropdownMenu, DropdownItem} from "../src";
 
 export default {
   title: "Components/Dropdown",

@@ -1,9 +1,11 @@
 "use client";
 // Inspired by https://github.dev/modulz/stitches-site code demo
+import type {CodeBlockProps} from "./code-block";
+
 import React from "react";
 import rangeParser from "parse-numeric-range";
 
-import CodeBlock, {CodeBlockProps} from "./code-block";
+import CodeBlock from "./code-block";
 
 import {CopyButton} from "@/components";
 

@@ -1,5 +1,7 @@
+import type {SelectedItems} from "@heroui/react";
+
 import React from "react";
-import {Select, SelectItem, Avatar, Chip, SelectedItems} from "@heroui/react";
+import {Select, SelectItem, Avatar, Chip} from "@heroui/react";
 
 export const users = [
   {

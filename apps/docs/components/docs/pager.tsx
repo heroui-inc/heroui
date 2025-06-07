@@ -1,5 +1,7 @@
 "use client";
 
+import type {Route} from "@/libs/docs/page";
+
 import * as React from "react";
 import {Link} from "@heroui/react";
 import {usePostHog} from "posthog-js/react";
@@ -8,7 +10,6 @@ import {ChevronIcon} from "@heroui/shared-icons";
 
 import manifest from "@/config/routes.json";
 import {removeFromLast} from "@/utils";
-import {Route} from "@/libs/docs/page";
 import {useDocsRoute} from "@/hooks/use-docs-route";
 
 export interface FooterNavProps {

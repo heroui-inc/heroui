@@ -1,9 +1,10 @@
+import type {Config, ThemeType} from "../../types";
+
 import {Tooltip} from "@heroui/react";
 
 import {baseColorsId} from "../../constants";
 import {setCssContentColor} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
-import {Config, ThemeType} from "../../types";
 import {templates} from "../../templates";
 import {ColorPicker} from "../color-picker";
 import {ConfigSection} from "../config-section";

@@ -1,5 +1,5 @@
-import {Project} from "@stackblitz/sdk";
-import {SandpackFiles} from "@codesandbox/sandpack-react/types";
+import type {Project} from "@stackblitz/sdk";
+import type {SandpackFiles} from "@codesandbox/sandpack-react/types";
 
 import {mapKeys, omit} from "@/../../packages/utilities/shared-utils/src";
 import {useSandpack} from "@/components/sandpack/use-sandpack";

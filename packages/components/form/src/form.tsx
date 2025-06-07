@@ -1,9 +1,10 @@
 import type {ForwardedRef} from "react";
+import type {FormProps} from "./base-form";
 
 import {useProviderContext} from "@heroui/system";
 import {forwardRef} from "react";
 
-import {Form as AriaForm, FormProps} from "./base-form";
+import {Form as AriaForm} from "./base-form";
 
 export const Form = forwardRef(function Form(props: FormProps, ref: ForwardedRef<HTMLFormElement>) {
   const globalContext = useProviderContext();

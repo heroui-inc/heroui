@@ -1,6 +1,5 @@
-import {SandpackPredefinedTemplate, SandpackFiles} from "@codesandbox/sandpack-react";
-
-import {HighlightedLines, HighlightedLine} from "./types";
+import type {SandpackPredefinedTemplate, SandpackFiles} from "@codesandbox/sandpack-react";
+import type {HighlightedLines, HighlightedLine} from "./types";
 
 const getLines = (lines?: string): HighlightedLine => {
   const [start, end] = lines?.includes("-") ? lines?.split("-") : [0, 0];

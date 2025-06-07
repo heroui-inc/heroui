@@ -2,11 +2,13 @@
  * Based on @react-aria/select with some modifications to support required attribute and
  * custom input/select props.
  */
-import {FocusableElement} from "@react-types/shared";
-import React, {ReactNode, RefObject} from "react";
+import type {FocusableElement} from "@react-types/shared";
+import type {ReactNode, RefObject} from "react";
+import type {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
+
+import React from "react";
 import {useFormReset} from "@react-aria/utils";
 import {useVisuallyHidden} from "@react-aria/visually-hidden";
-import {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
 import {useFormValidation} from "@react-aria/form";
 
 import {selectData} from "./use-select";

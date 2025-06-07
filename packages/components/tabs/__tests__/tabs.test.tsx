@@ -1,10 +1,13 @@
+import type {UserEvent} from "@testing-library/user-event";
+import type {TabsProps} from "../src";
+
 import * as React from "react";
 import {act, render, fireEvent, within} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {focus} from "@heroui/test-utils";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
-import {Tabs, Tab, TabsProps} from "../src";
+import {Tabs, Tab} from "../src";
 
 type Item = {
   id: string;

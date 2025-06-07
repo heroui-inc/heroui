@@ -1,7 +1,7 @@
-import {HeroUIPluginConfig} from "@heroui/theme";
-import {readableColor} from "color2k";
+import type {HeroUIPluginConfig} from "@heroui/theme";
+import type {Config, ThemeType} from "../types";
 
-import {Config, ThemeType} from "../types";
+import {readableColor} from "color2k";
 
 import {generateThemeColor} from "./colors";
 function generateLayoutConfig(config: Config): HeroUIPluginConfig["layout"] {

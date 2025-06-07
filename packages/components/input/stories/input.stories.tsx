@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import type {ValidationResult} from "@react-types/shared";
+import type {Meta} from "@storybook/react";
+import type {InputProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {input} from "@heroui/theme";
 import {
   MailFilledIcon,
@@ -16,7 +17,7 @@ import {button} from "@heroui/theme";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
 
-import {Input, InputProps, useInput} from "../src";
+import {Input, useInput} from "../src";
 
 export default {
   title: "Components/Input",

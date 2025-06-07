@@ -1,4 +1,5 @@
-import {Meta} from "@storybook/react";
+import type {Meta} from "@storybook/react";
+
 import {code} from "@heroui/theme";
 
 import {Code} from "../src";

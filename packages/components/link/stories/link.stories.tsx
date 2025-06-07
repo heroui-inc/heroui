@@ -1,11 +1,12 @@
 import type {VariantProps} from "@heroui/theme";
+import type {Meta} from "@storybook/react";
+import type {LinkProps} from "../src";
 
-import {Meta} from "@storybook/react";
 import React, {useState} from "react";
 import {tv} from "@heroui/theme";
 import {link} from "@heroui/theme";
 
-import {Link, LinkProps} from "../src";
+import {Link} from "../src";
 
 export default {
   title: "Components/Link",

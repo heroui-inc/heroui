@@ -1,6 +1,6 @@
 import type {CalendarPickerProps} from "./use-calendar-picker";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {HTMLHeroUIProps} from "@heroui/system";
 import {useCallback} from "react";
 import {getInertValue} from "@heroui/shared-utils";
 

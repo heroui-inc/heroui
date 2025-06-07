@@ -1,5 +1,6 @@
 import type {GridNode} from "@react-types/grid";
 import type {TableRowProps as BaseTableRowProps} from "./base/table-row";
+import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
@@ -9,8 +10,6 @@ import {mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useMemo} from "react";
-
-import {ValuesType} from "./use-table";
 
 // @internal
 export interface TableRowProps<T = object> extends Omit<BaseTableRowProps, "children"> {

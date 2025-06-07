@@ -1,5 +1,7 @@
+import type {SubmitHandler} from "react-hook-form";
+
 import {InputOtp} from "@heroui/react";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 import {Button} from "@heroui/react";
 
 interface FormValues {

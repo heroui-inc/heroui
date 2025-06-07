@@ -1,6 +1,8 @@
 import type {DateValue} from "@internationalized/date";
+import type {ForwardedRef, ReactElement} from "react";
+import type {UseDatePickerProps} from "./use-date-picker";
 
-import {ForwardedRef, ReactElement, useMemo} from "react";
+import {useMemo} from "react";
 import {cloneElement, isValidElement} from "react";
 import {forwardRef} from "@heroui/system";
 import {Button} from "@heroui/button";
@@ -10,7 +12,7 @@ import {Calendar} from "@heroui/calendar";
 import {AnimatePresence} from "framer-motion";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
 
-import {UseDatePickerProps, useDatePicker} from "./use-date-picker";
+import {useDatePicker} from "./use-date-picker";
 
 export interface Props<T extends DateValue> extends UseDatePickerProps<T> {
   /**

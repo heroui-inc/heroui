@@ -1,7 +1,9 @@
 import type {ReactElement} from "react";
+import type {ButtonProps} from "@heroui/button";
+import type {UseToastProps} from "./use-toast";
 
 import {forwardRef} from "@heroui/system";
-import {Button, ButtonProps} from "@heroui/button";
+import {Button} from "@heroui/button";
 import {
   CloseIcon,
   DangerIcon,
@@ -13,7 +15,7 @@ import {m} from "framer-motion";
 import {cloneElement, isValidElement} from "react";
 import {Spinner} from "@heroui/spinner";
 
-import {UseToastProps, useToast} from "./use-toast";
+import {useToast} from "./use-toast";
 
 export interface ToastProps extends UseToastProps {}
 

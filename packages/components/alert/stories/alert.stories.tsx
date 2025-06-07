@@ -1,9 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {AlertProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {alert, cn} from "@heroui/theme";
 import {Button} from "@heroui/button";
 
-import {Alert, AlertProps} from "../src";
+import {Alert} from "../src";
 
 export default {
   title: "Components/Alert",

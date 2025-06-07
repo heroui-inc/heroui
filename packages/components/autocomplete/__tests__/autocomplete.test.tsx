@@ -1,12 +1,15 @@
 import "@testing-library/jest-dom";
+import type {UserEvent} from "@testing-library/user-event";
+import type {AutocompleteProps} from "../src";
+
 import * as React from "react";
 import {within, render, renderHook, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
 
-import {Autocomplete, AutocompleteItem, AutocompleteProps, AutocompleteSection} from "../src";
+import {Autocomplete, AutocompleteItem, AutocompleteSection} from "../src";
 import {Modal, ModalContent, ModalBody, ModalHeader, ModalFooter} from "../../modal/src";
 
 type Item = {

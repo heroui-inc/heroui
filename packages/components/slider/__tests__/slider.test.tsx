@@ -1,8 +1,11 @@
+import type {UserEvent} from "@testing-library/user-event";
+import type {SliderValue} from "../src";
+
 import * as React from "react";
 import {render, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
-import {Slider, SliderValue} from "../src";
+import {Slider} from "../src";
 
 describe("Slider", () => {
   let user: UserEvent;

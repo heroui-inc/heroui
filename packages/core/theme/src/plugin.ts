@@ -3,6 +3,8 @@
  * @see https://github.com/L-Blondy/tw-colors
  */
 
+import type {ConfigTheme, ConfigThemes, DefaultThemeType, HeroUIPluginConfig} from "./types";
+
 import Color from "color";
 import plugin from "tailwindcss/plugin.js";
 import deepMerge from "deepmerge";
@@ -13,7 +15,6 @@ import {animations} from "./animations";
 import {utilities} from "./utilities";
 import {flattenThemeObject} from "./utils/object";
 import {isBaseTheme} from "./utils/theme";
-import {ConfigTheme, ConfigThemes, DefaultThemeType, HeroUIPluginConfig} from "./types";
 import {lightLayout, darkLayout, defaultLayout} from "./default-layout";
 import {baseStyles} from "./utils/classes";
 import {DEFAULT_TRANSITION_DURATION} from "./utilities/transition";

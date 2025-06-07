@@ -1,3 +1,5 @@
+import type {FontName, TemplateType} from "../types";
+
 import {cn, Divider} from "@heroui/react";
 import Link from "next/link";
 import {Inter, Roboto, Outfit, Lora} from "next/font/google";
@@ -6,7 +8,6 @@ import {useTheme} from "next-themes";
 import {readableColor} from "color2k";
 
 import {useThemeBuilder} from "../provider";
-import {FontName, TemplateType} from "../types";
 
 interface ShowcaseComponentProps {
   children: React.ReactElement | React.ReactElement[];

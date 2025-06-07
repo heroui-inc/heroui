@@ -1,9 +1,11 @@
-import {ReactNode} from "react";
+import type {ReactNode} from "react";
+import type {UseModalProps} from "./use-modal";
+
 import {AnimatePresence} from "framer-motion";
 import {Overlay} from "@react-aria/overlays";
 import {forwardRef} from "@heroui/system";
 
-import {UseModalProps, useModal} from "./use-modal";
+import {useModal} from "./use-modal";
 import {ModalProvider} from "./modal-context";
 
 export interface ModalProps extends UseModalProps {

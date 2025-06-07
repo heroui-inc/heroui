@@ -1,6 +1,8 @@
+import type {UseDividerProps} from "./use-divider";
+
 import {forwardRef} from "@heroui/system-rsc";
 
-import {UseDividerProps, useDivider} from "./use-divider";
+import {useDivider} from "./use-divider";
 
 export interface DividerProps extends Omit<UseDividerProps, "children"> {}
 

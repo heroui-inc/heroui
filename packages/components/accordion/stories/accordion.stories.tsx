@@ -1,7 +1,8 @@
 import type {Selection} from "@react-types/shared";
+import type {Meta} from "@storybook/react";
+import type {AccordionProps, AccordionItemProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {accordionItem, button} from "@heroui/theme";
 import {
   AnchorIcon,
@@ -16,7 +17,7 @@ import {Avatar} from "@heroui/avatar";
 import {Input, Textarea} from "@heroui/input";
 import {Button} from "@heroui/button";
 
-import {Accordion, AccordionProps, AccordionItem, AccordionItemProps} from "../src";
+import {Accordion, AccordionItem} from "../src";
 
 export default {
   title: "Components/Accordion",

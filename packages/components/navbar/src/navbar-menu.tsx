@@ -1,7 +1,10 @@
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLMotionProps} from "framer-motion";
+
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr} from "@heroui/shared-utils";
-import {AnimatePresence, HTMLMotionProps, LazyMotion, m} from "framer-motion";
+import {AnimatePresence, LazyMotion, m} from "framer-motion";
 import {mergeProps} from "@react-aria/utils";
 import {Overlay} from "@react-aria/overlays";
 import React from "react";

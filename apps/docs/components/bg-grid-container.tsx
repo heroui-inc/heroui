@@ -1,4 +1,5 @@
-import {ReactNode, FC} from "react";
+import type {ReactNode, FC} from "react";
+
 import {clsx} from "@heroui/shared-utils";
 export interface BgGridContainerProps {
   showGradient?: boolean;

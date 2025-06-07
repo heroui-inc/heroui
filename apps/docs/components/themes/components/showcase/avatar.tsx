@@ -1,10 +1,12 @@
+import type {AvatarProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {AvatarProps, Avatar as HeroUIAvatar} from "@heroui/react";
+import {Avatar as HeroUIAvatar} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 import {getBorderWidth} from "../../utils/shared";
 
 type Color = AvatarProps["color"];

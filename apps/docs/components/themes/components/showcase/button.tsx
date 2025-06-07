@@ -1,10 +1,12 @@
+import type {ButtonProps} from "@heroui/react";
+import type {Border} from "../../types";
+
 import {cloneElement} from "react";
-import {ButtonProps, Button as HeroUIButton} from "@heroui/react";
+import {Button as HeroUIButton} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border} from "../../types";
 
 type Color = ButtonProps["color"];
 type Radius = ButtonProps["radius"];

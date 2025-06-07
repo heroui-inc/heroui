@@ -1,7 +1,9 @@
+import type {UseImageProps} from "./use-image";
+
 import {cloneElement} from "react";
 import {forwardRef} from "@heroui/system";
 
-import {UseImageProps, useImage} from "./use-image";
+import {useImage} from "./use-image";
 
 export interface ImageProps extends Omit<UseImageProps, "showSkeleton"> {}
 
