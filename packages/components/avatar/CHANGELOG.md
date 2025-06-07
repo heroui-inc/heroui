@@ -1,5 +1,11 @@
 # @heroui/avatar
 
+## 2.2.17
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
 ## 2.2.16
 
 ### Patch Changes

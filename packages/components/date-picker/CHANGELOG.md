@@ -1,5 +1,19 @@
 # @heroui/date-picker
 
+## 2.3.21
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f)]:
+  - @heroui/date-input@2.3.20
+  - @heroui/aria-utils@2.2.18
+  - @heroui/calendar@2.2.21
+  - @heroui/popover@2.3.21
+  - @heroui/button@2.2.21
+  - @heroui/form@2.1.20
+
 ## 2.3.20
 
 ### Patch Changes
