@@ -11,7 +11,7 @@ import {useIsMounted} from "@/hooks/use-is-mounted";
 import {__PROD__, __ENABLE_ADS__} from "@/utils";
 
 const EA_PROVIDER_RATIO = 0.85;
-const INTERNAL_AD_ENABLED = true;
+const INTERNAL_AD_ENABLED = false;
 
 const INTERNAL_AD_INFO = {
   description: "Join our hackathon, $6k in prizes + 3 months of HeroUI Chat Pro! ↗",
@@ -111,7 +111,7 @@ export const CarbonAd: React.FC<unknown> = () => {
     return (
       <div className="px-2 not-prose hover:opacity-80 transition-[opacity] duration-200 carbon-ad-container max-h-[100px] min-h-[100px] h-[100px] m-0 p-0">
         <a
-          className="group flex items-center flex gap-4 h-full"
+          className="group flex items-center gap-4 h-full"
           href={INTERNAL_AD_INFO.url}
           rel="noopener noreferrer"
           target="_blank"
