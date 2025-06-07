@@ -22,10 +22,6 @@ interface AriaListBoxOptions<T> extends AriaListBoxProps<T> {
    * Whether the listbox items should use virtual focus instead of being focused directly.
    */
   shouldUseVirtualFocus?: boolean;
-  /** Whether selection should occur on press up instead of press down. */
-  shouldSelectOnPressUp?: boolean;
-  /** Whether options should be focused when the user hovers over them. */
-  shouldFocusOnHover?: boolean;
   /** Whether the item should display the same "hover" styles as when it is focused. */
   shouldHighlightOnFocus?: boolean;
 }
