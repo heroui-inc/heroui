@@ -171,9 +171,16 @@ describe("Autocomplete", () => {
     expect(autocomplete).toHaveFocus();
   });
 
-  it("should clear value after clicking clear button", async () => {
+  it("should clear the value and onClear is triggered", async () => {
+    const onClear = jest.fn();
+
     const wrapper = render(
-      <Autocomplete aria-label="Favorite Animal" data-testid="autocomplete" label="Favorite Animal">
+      <Autocomplete
+        aria-label="Favorite Animal"
+        data-testid="autocomplete"
+        label="Favorite Animal"
+        onClear={onClear}
+      >
         <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
         <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
         <AutocompleteItem key="shark">Shark</AutocompleteItem>
@@ -203,6 +210,9 @@ describe("Autocomplete", () => {
 
     // click the clear button
     await user.click(clearButton);
+
+    // onClear is triggered
+    expect(onClear).toHaveBeenCalledTimes(1);
 
     // assert that the input has empty value
     expect(autocomplete).toHaveValue("");
