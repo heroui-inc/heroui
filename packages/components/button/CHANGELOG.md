@@ -1,5 +1,16 @@
 # @heroui/button
 
+## 2.2.21
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f)]:
+  - @heroui/use-aria-button@2.2.15
+  - @heroui/spinner@2.2.18
+  - @heroui/ripple@2.2.15
+
 ## 2.2.20
 
 ### Patch Changes

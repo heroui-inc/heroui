@@ -1,5 +1,12 @@
 # @heroui/code
 
+## 2.2.16
+
+### Patch Changes
+
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f)]:
+  - @heroui/system-rsc@2.3.15
+
 ## 2.2.15
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/input",
-  "version": "2.4.20",
+  "version": "2.4.21",
   "description": "The input component is designed for capturing user input within a text field.",
   "keywords": [
     "input"
