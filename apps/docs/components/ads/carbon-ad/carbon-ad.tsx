@@ -118,9 +118,7 @@ export const CarbonAd: React.FC<unknown> = () => {
           <Image
             alt="Product Hunt"
             className="m-0 w-[80px] h-[80px] object-cover"
-            height={80}
             src="/product-hunt.png"
-            width={80}
           />
           <div className="flex flex-col gap-0.5 pointer-events-none">
             <div className="text-small md:text-medium font-medium no-underline">
