@@ -59,7 +59,6 @@
     "@react-aria/i18n": "3.12.10",
     "@react-aria/overlays": "3.27.2",
     "@react-aria/utils": "3.29.1",
-    "@react-stately/utils": "3.10.7",
     "@react-types/calendar": "3.7.2"
   }
 }

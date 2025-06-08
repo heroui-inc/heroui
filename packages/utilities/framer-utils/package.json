@@ -40,8 +40,7 @@
   },
   "dependencies": {
     "@heroui/system": "workspace:*",
-    "@heroui/use-measure": "workspace:*",
-    "@heroui/shared-utils": "workspace:*"
+    "@heroui/use-measure": "workspace:*"
   },
   "devDependencies": {
     "react": "18.3.0",

@@ -39,7 +39,6 @@
     "@heroui/theme": ">=2.4.6"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*",
     "@heroui/react-rsc-utils": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
     "@react-types/shared": "3.30.0"

@@ -40,8 +40,7 @@
     "@heroui/system": ">=2.4.7"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-utils": "workspace:*"
+    "@heroui/shared-utils": "workspace:*"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

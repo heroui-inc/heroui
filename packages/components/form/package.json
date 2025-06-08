@@ -40,8 +40,6 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@heroui/react-utils": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@react-aria/utils": "3.29.1",
