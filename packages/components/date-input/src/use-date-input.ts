@@ -302,6 +302,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       validationDetails,
       validationErrors,
       shouldLabelBeOutside,
+      labelPlacement,
       "data-slot": "base",
       "data-required": dataAttr(originalProps.isRequired),
       "data-disabled": dataAttr(originalProps.isDisabled),
