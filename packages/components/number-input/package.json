@@ -38,8 +38,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/system": ">=2.4.16",
-    "@heroui/theme": ">=2.4.9"
+    "@heroui/system": ">=2.4.10",
+    "@heroui/theme": ">=2.4.16"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
