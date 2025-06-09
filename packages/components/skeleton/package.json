@@ -1,6 +1,6 @@
 {
   "name": "@heroui/skeleton",
-  "version": "2.2.12",
+  "version": "2.2.13",
   "description": "Skeleton is used to display the loading state of some component.",
   "keywords": [
     "skeleton"

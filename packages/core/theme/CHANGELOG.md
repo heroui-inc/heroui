@@ -1,5 +1,15 @@
 # @heroui/theme
 
+## 2.4.17
+
+### Patch Changes
+
+- [#5350](https://github.com/heroui-inc/heroui/pull/5350) [`ace931b`](https://github.com/heroui-inc/heroui/commit/ace931b44db98c227bd4a36bd26c4db8de7d5bf6) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Consistent helperWrapper padding (#5338)
+
+- [#5349](https://github.com/heroui-inc/heroui/pull/5349) [`ff4b1b2`](https://github.com/heroui-inc/heroui/commit/ff4b1b23936412fdb1c762434d673f7b6935ac51) Thanks [@anuj-kuralkar](https://github.com/anuj-kuralkar)! - fixed inconsistent isInvalid styling between Input, InputOtp and DateInput in faded variant (#5339)
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
 ## 2.4.16
 
 ### Patch Changes
