@@ -1,9 +1,10 @@
 import type {DateValue} from "@internationalized/date";
 import type {ForwardedRef, ReactElement} from "react";
+import type {UseDateInputProps} from "./use-date-input";
 
 import {forwardRef} from "@heroui/system";
 
-import {UseDateInputProps, useDateInput} from "./use-date-input";
+import {useDateInput} from "./use-date-input";
 import {DateInputGroup} from "./date-input-group";
 import {DateInputField} from "./date-input-field";
 

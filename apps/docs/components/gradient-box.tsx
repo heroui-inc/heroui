@@ -1,5 +1,8 @@
-import {ReactNode, forwardRef} from "react";
-import {tv, VariantProps} from "tailwind-variants";
+import type {ReactNode} from "react";
+import type {VariantProps} from "tailwind-variants";
+
+import {forwardRef} from "react";
+import {tv} from "tailwind-variants";
 
 const styles = tv({
   base: "flex relative w-full h-auto",

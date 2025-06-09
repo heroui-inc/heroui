@@ -1,5 +1,7 @@
+import type {ButtonProps} from "@heroui/react";
+
 import {forwardRef} from "react";
-import {Button, ButtonProps} from "@heroui/react";
+import {Button} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 export interface PreviewButtonProps extends ButtonProps {

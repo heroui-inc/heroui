@@ -1,14 +1,15 @@
 import type {AriaLinkProps} from "@react-types/link";
 import type {LinkVariantProps} from "@heroui/theme";
 import type {MouseEventHandler} from "react";
+import type {ReactRef} from "@heroui/react-utils";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {link} from "@heroui/theme";
 import {useAriaLink} from "@heroui/use-aria-link";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useFocusRing} from "@react-aria/focus";
 import {dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
 import {useMemo, useCallback} from "react";
 import {mergeProps} from "@react-aria/utils";
 

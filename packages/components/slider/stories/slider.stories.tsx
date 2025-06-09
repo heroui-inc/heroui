@@ -1,11 +1,13 @@
+import type {Meta} from "@storybook/react";
+import type {SliderProps, SliderValue} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {slider} from "@heroui/theme";
 import {InfoIcon, VolumeHighBoldIcon, VolumeLowBoldIcon} from "@heroui/shared-icons";
 import {Tooltip} from "@heroui/tooltip";
 import {cn} from "@heroui/theme";
 
-import {Slider, SliderProps, SliderValue} from "../src";
+import {Slider} from "../src";
 
 export default {
   title: "Components/Slider",

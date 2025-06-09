@@ -1,8 +1,10 @@
 import "@testing-library/jest-dom";
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {act, render, waitFor} from "@testing-library/react";
 import {focus, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {Input} from "@heroui/input";
 
 import {Accordion, AccordionItem} from "../src";

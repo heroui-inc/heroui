@@ -46,8 +46,7 @@
     "@react-aria/focus": "3.20.4",
     "@react-aria/breadcrumbs": "3.5.25",
     "@react-aria/utils": "3.29.1",
-    "@react-types/breadcrumbs": "3.7.14",
-    "@react-types/shared": "3.30.0"
+    "@react-types/breadcrumbs": "3.7.14"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

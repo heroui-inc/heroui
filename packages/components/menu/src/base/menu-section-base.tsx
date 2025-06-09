@@ -1,9 +1,9 @@
 import type {MenuSectionSlots, SlotsToClasses} from "@heroui/theme";
+import type {SectionProps} from "@heroui/aria-utils";
+import type {DividerProps} from "@heroui/divider";
+import type {MenuItemProps} from "../menu-item";
 
-import {BaseSection, SectionProps} from "@heroui/aria-utils";
-import {DividerProps} from "@heroui/divider";
-
-import {MenuItemProps} from "../menu-item";
+import {BaseSection} from "@heroui/aria-utils";
 
 export interface MenuSectionBaseProps<T extends object = {}> extends SectionProps<"ul", T> {
   /**
