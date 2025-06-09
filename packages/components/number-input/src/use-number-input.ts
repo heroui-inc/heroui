@@ -99,6 +99,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   const {
     ref,
     as,
+    type,
     label,
     baseRef,
     wrapperRef,
@@ -539,6 +540,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   return {
     Component,
     classNames,
+    type,
     domRef,
     label,
     description,
