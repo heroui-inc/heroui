@@ -112,6 +112,11 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>
    */
   onClose?: () => void;
   /**
+   * Callback fired when the value is cleared.
+   * if you pass this prop, the clear button will be shown.
+   */
+  onClear?: () => void;
+  /**
    * Whether to enable virtualization of the listbox items.
    * By default, virtualization is automatically enabled when the number of items is greater than 50.
    * @default undefined
@@ -186,6 +191,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     errorMessage,
     onOpenChange,
     onClose,
+    onClear,
     isReadOnly = false,
     ...otherProps
   } = props;
@@ -453,6 +459,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         }
         state.setInputValue("");
         state.open();
+        onClear?.();
       },
       "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
       className: slots.clearButton({
