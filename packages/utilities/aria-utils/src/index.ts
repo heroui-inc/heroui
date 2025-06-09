@@ -8,6 +8,7 @@ export {isNonContiguousSelectionModifier, isCtrlKeyPressed} from "./utils";
 export {
   ariaHideOutside,
   ariaShouldCloseOnInteractOutside,
+  keepVisible,
   getTransformOrigins,
   toReactAriaPlacement,
   toOverlayPlacement,

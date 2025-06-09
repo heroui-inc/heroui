@@ -1,5 +1,28 @@
 # @heroui/switch
 
+## 2.2.15
+
+### Patch Changes
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+## 2.2.14
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+## 2.2.13
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/use-safe-layout-effect@2.1.6
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
 ## 2.2.12
 
 ### Patch Changes

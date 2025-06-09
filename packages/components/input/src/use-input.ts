@@ -352,6 +352,21 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
     [slots, isLabelHovered, labelProps, classNames?.label],
   );
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (
+        e.key === "Escape" &&
+        inputValue &&
+        (isClearable || onClear) &&
+        !originalProps.isReadOnly
+      ) {
+        setInputValue("");
+        onClear?.();
+      }
+    },
+    [inputValue, setInputValue, onClear, isClearable, originalProps.isReadOnly],
+  );
+
   const getInputProps: PropGetter = useCallback(
     (props = {}) => {
       return {
@@ -360,8 +375,14 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-filled-within": dataAttr(isFilledWithin),
         "data-has-start-content": dataAttr(hasStartContent),
         "data-has-end-content": dataAttr(!!endContent),
+        "data-type": type,
         className: slots.input({
-          class: clsx(classNames?.input, isFilled ? "is-filled" : "", isMultiline ? "pe-0" : ""),
+          class: clsx(
+            classNames?.input,
+            isFilled ? "is-filled" : "",
+            isMultiline ? "pe-0" : "",
+            type === "password" ? "[&::-ms-reveal]:hidden" : "",
+          ),
         }),
         ...mergeProps(
           focusProps,
@@ -375,6 +396,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         ),
         "aria-readonly": dataAttr(originalProps.isReadOnly),
         onChange: chain(inputProps.onChange, onChange),
+        onKeyDown: chain(inputProps.onKeyDown, props.onKeyDown, handleKeyDown),
         ref: domRef,
       };
     },
@@ -392,6 +414,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
       originalProps.isReadOnly,
       originalProps.isRequired,
       onChange,
+      handleKeyDown,
     ],
   );
 

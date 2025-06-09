@@ -1,14 +1,22 @@
+import type {SlotsToClasses, ToastRegionSlots, ToastRegionVariantProps} from "@heroui/theme";
+
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
 import {QueuedToast, ToastState} from "@react-stately/toast";
 import {useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
-import {toastRegion, ToastRegionVariantProps} from "@heroui/theme";
+import {toastRegion} from "@heroui/theme";
+import {clsx} from "@heroui/shared-utils";
 
 import Toast from "./toast";
 import {ToastProps, ToastPlacement} from "./use-toast";
 
-interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps {
+export interface RegionProps {
+  className?: string;
+  classNames?: SlotsToClasses<ToastRegionSlots>;
+}
+
+interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps, RegionProps {
   toastQueue: ToastState<T>;
   placement?: ToastPlacement;
   maxVisibleToasts: number;
@@ -23,6 +31,8 @@ export function ToastRegion<T extends ToastProps>({
   maxVisibleToasts,
   toastOffset,
   toastProps = {},
+  className,
+  classNames,
   ...props
 }: ToastRegionProps<T>) {
   const ref = useRef(null);
@@ -40,6 +50,8 @@ export function ToastRegion<T extends ToastProps>({
       }),
     [disableAnimation],
   );
+
+  const baseStyles = clsx(classNames?.base, className);
 
   useEffect(() => {
     function handleTouchOutside(event: TouchEvent) {
@@ -65,16 +77,20 @@ export function ToastRegion<T extends ToastProps>({
     <div
       {...mergeProps(regionProps, hoverProps)}
       ref={ref}
-      className={slots.base()}
+      className={slots.base({class: baseStyles})}
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
-      {toastQueue.visibleToasts.map((toast: QueuedToast<ToastProps>, index) => {
+      {[...toastQueue.visibleToasts].reverse().map((toast: QueuedToast<ToastProps>, index) => {
         if (disableAnimation && total - index > maxVisibleToasts) {
           return null;
         }
 
-        if (total - index <= 4 || (isHovered && total - index <= maxVisibleToasts + 1)) {
+        if (
+          disableAnimation ||
+          total - index <= 4 ||
+          (isHovered && total - index <= maxVisibleToasts + 1)
+        ) {
           return (
             <Toast
               key={toast.key}
@@ -85,6 +101,7 @@ export function ToastRegion<T extends ToastProps>({
               heights={heights}
               index={index}
               isRegionExpanded={isHovered || isTouched}
+              maxVisibleToasts={maxVisibleToasts}
               placement={placement}
               setHeights={setHeights}
               toastOffset={toastOffset}

@@ -1,5 +1,41 @@
 # @heroui/theme
 
+## 2.4.13
+
+### Patch Changes
+
+- [#5147](https://github.com/heroui-inc/heroui/pull/5147) [`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix select styles for label & helper text (#5413)
+
+- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
+
+- [#5098](https://github.com/heroui-inc/heroui/pull/5098) [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9) Thanks [@wingkwong](https://github.com/wingkwong)! - fix input with type=color style (#5083)
+
+- [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
+  Changing the type of description prop to ReactNode(#5033).
+
+## 2.4.12
+
+### Patch Changes
+
+- [#4968](https://github.com/heroui-inc/heroui/pull/4968) [`e9c67fa`](https://github.com/heroui-inc/heroui/commit/e9c67fa6caf62fa835474d009b86cf722b08b66d) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed stepper button pseudo height in number-input (#4920)
+
+- [#5001](https://github.com/heroui-inc/heroui/pull/5001) [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d) Thanks [@macci001](https://github.com/macci001)! - Toast should be above the modal(#4898).
+
+## 2.4.11
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/shared-utils@2.1.7
+
+## 2.4.10
+
+### Patch Changes
+
+- [#4922](https://github.com/heroui-inc/heroui/pull/4922) [`2774a1b`](https://github.com/heroui-inc/heroui/commit/2774a1b3513e2a046c538a2982a438f56608bbf2) Thanks [@wingkwong](https://github.com/wingkwong)! - fix broken start & end content in breadcrumb (#4921)
+
 ## 2.4.9
 
 ### Patch Changes

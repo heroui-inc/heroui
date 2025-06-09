@@ -1,5 +1,48 @@
 # @heroui/dropdown
 
+## 2.3.17
+
+### Patch Changes
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1)]:
+  - @heroui/aria-utils@2.2.14
+  - @heroui/popover@2.3.17
+  - @heroui/menu@2.2.16
+
+## 2.3.16
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/aria-utils@2.2.13
+  - @heroui/popover@2.3.16
+  - @heroui/menu@2.2.15
+
+## 2.3.15
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/menu@2.2.14
+  - @heroui/popover@2.3.15
+  - @heroui/aria-utils@2.2.12
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.3.14
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/popover@2.3.14
+  - @heroui/menu@2.2.13
+
 ## 2.3.13
 
 ### Patch Changes
