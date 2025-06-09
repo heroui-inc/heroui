@@ -277,15 +277,15 @@ export const heroui = (config: HeroUIPluginConfig = {}): ReturnType<typeof plugi
   Object.entries(otherThemes).forEach(([themeName, {extend, colors, layout}]) => {
     const baseTheme = extend && isBaseTheme(extend) ? extend : defaultExtendTheme;
 
-    if (colors && typeof colors === "object") {
-      otherThemes[themeName].colors = deepMerge(semanticColors[baseTheme], colors);
-    }
-    if (layout && typeof layout === "object") {
-      otherThemes[themeName].layout = deepMerge(
-        extend ? baseLayouts[extend] : defaultLayoutObj,
-        layout,
-      );
-    }
+    const baseColors = semanticColors[baseTheme];
+
+    otherThemes[themeName].colors =
+      colors && typeof colors === "object" ? deepMerge(baseColors, colors) : baseColors;
+
+    const baseLayout = extend ? baseLayouts[extend] : defaultLayoutObj;
+
+    otherThemes[themeName].layout =
+      layout && typeof layout === "object" ? deepMerge(baseLayout, layout) : baseLayout;
   });
 
   const light: ConfigTheme = {

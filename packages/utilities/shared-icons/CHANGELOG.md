@@ -1,5 +1,19 @@
 # @heroui/shared-icons
 
+## 2.1.8
+
+### Patch Changes
+
+- [#5246](https://github.com/heroui-inc/heroui/pull/5246) [`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0) Thanks [@wingkwong](https://github.com/wingkwong)! - support render icons by function in Toast
+
+## 2.1.7
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
 ## 2.1.6
 
 ### Patch Changes

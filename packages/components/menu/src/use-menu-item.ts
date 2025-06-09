@@ -7,7 +7,7 @@ import {menuItem} from "@heroui/theme";
 import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
 import {TreeState} from "@react-stately/tree";
-import {clsx, dataAttr, objectToDeps, removeEvents, warn} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, removeEvents} from "@heroui/shared-utils";
 import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
 import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
@@ -54,7 +54,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     isReadOnly = false,
     closeOnSelect,
     onClose,
-    onClick: deprecatedOnClick,
+    onClick,
     ...otherProps
   } = props;
 
@@ -77,19 +77,12 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     autoFocus,
   });
 
-  if (deprecatedOnClick && typeof deprecatedOnClick === "function") {
-    warn(
-      "onClick is deprecated, please use onPress instead. See: https://github.com/heroui-inc/heroui/issues/4292",
-      "MenuItem",
-    );
-  }
-
   const handlePress = useCallback(
     (e: PressEvent) => {
-      deprecatedOnClick?.(e as unknown as React.MouseEvent<HTMLLIElement | HTMLAnchorElement>);
+      onClick?.(e as unknown as React.MouseEvent<HTMLLIElement | HTMLAnchorElement>);
       onPress?.(e);
     },
-    [deprecatedOnClick, onPress],
+    [onClick, onPress],
   );
 
   const {

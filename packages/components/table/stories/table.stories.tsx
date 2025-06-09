@@ -1160,6 +1160,14 @@ export const Virtualized = {
   },
 };
 
+export const VirtualizedWithHeaderSticky = {
+  ...Virtualized,
+  args: {
+    ...Virtualized.args,
+    isHeaderSticky: true,
+  },
+};
+
 export const TenThousandRows = {
   render: VirtualizedTemplate,
   args: {

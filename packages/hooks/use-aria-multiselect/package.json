@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-multiselect",
-  "version": "2.4.10",
+  "version": "2.4.13",
   "description": "Provides the behavior and accessibility implementation for a multi-select component.",
   "keywords": [
     "use-aria-multiselect"
@@ -34,20 +34,20 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/i18n": "3.12.7",
-    "@react-aria/interactions": "3.24.1",
-    "@react-aria/label": "3.7.16",
-    "@react-aria/listbox": "3.14.2",
-    "@react-aria/menu": "3.18.1",
-    "@react-aria/selection": "3.23.1",
-    "@react-aria/utils": "3.28.1",
-    "@react-stately/form": "3.1.2",
-    "@react-stately/list": "3.12.0",
-    "@react-stately/menu": "3.9.2",
-    "@react-types/button": "3.11.0",
-    "@react-types/overlays": "3.8.13",
-    "@react-types/select": "3.9.10",
-    "@react-types/shared": "3.28.0"
+    "@react-aria/i18n": "3.12.10",
+    "@react-aria/interactions": "3.25.2",
+    "@react-aria/label": "3.7.19",
+    "@react-aria/listbox": "3.14.5",
+    "@react-aria/menu": "3.18.4",
+    "@react-aria/selection": "3.24.2",
+    "@react-aria/utils": "3.29.1",
+    "@react-stately/form": "3.1.5",
+    "@react-stately/list": "3.12.3",
+    "@react-stately/menu": "3.9.5",
+    "@react-types/button": "3.12.2",
+    "@react-types/overlays": "3.8.16",
+    "@react-types/select": "3.9.13",
+    "@react-types/shared": "3.30.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",

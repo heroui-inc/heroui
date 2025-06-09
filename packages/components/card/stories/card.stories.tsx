@@ -329,7 +329,6 @@ const PrimaryActionTemplate = (args: CardProps) => {
   return (
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
       {list.map((item, index) => (
-        // eslint-disable-next-line no-console
         <Card {...args} key={index} isPressable onPress={() => handlePress(item)}>
           <CardBody className="p-0">
             <img
@@ -352,12 +351,10 @@ const PressableTemplate = (args: CardProps) => {
   // Both events should be fired when clicking on the card
 
   const handlePress = () => {
-    // eslint-disable-next-line no-console
     alert("card pressed");
   };
 
   const onClick = () => {
-    // eslint-disable-next-line no-console
     alert("card clicked");
   };
 

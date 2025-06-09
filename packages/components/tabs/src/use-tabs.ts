@@ -22,7 +22,7 @@ export interface Props extends Omit<HTMLHeroUIProps, "children"> {
   /**
    * The props to modify the cursor motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"span">;
+  motionProps?: Omit<HTMLMotionProps<"span">, "ref">;
   /**
    * Whether the tabs selection should occur on press up instead of press down.
    * @default true
@@ -82,7 +82,7 @@ export type ValuesType<T = object> = {
   listRef?: RefObject<HTMLElement>;
   shouldSelectOnPressUp?: boolean;
   classNames?: SlotsToClasses<TabsSlots>;
-  motionProps?: HTMLMotionProps<"span">;
+  motionProps?: Omit<HTMLMotionProps<"span">, "ref">;
   disableAnimation?: boolean;
   isDisabled?: boolean;
 };
