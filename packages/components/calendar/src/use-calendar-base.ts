@@ -4,7 +4,7 @@ import type {CalendarSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCalendarGridProps} from "@react-aria/calendar";
 import type {AriaButtonProps} from "@react-types/button";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
-import type {Calendar, CalendarIdentifier} from "@internationalized/date";
+import type {DateValue, Calendar, CalendarIdentifier} from "@internationalized/date";
 import type {ButtonProps} from "@heroui/button";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
@@ -223,9 +223,9 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     isHeaderDefaultExpanded,
     onHeaderExpandedChange = () => {},
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
-    minValue = globalContext?.defaultDates?.minDate ??
+    minValue = (globalContext?.defaultDates?.minDate as DateValue) ??
       new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = globalContext?.defaultDates?.maxDate ??
+    maxValue = (globalContext?.defaultDates?.maxDate as DateValue) ??
       new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
     prevButtonProps: prevButtonPropsProp,
     nextButtonProps: nextButtonPropsProp,
