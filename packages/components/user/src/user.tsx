@@ -1,7 +1,9 @@
+import type {UseUserProps} from "./use-user";
+
 import {forwardRef} from "@heroui/system";
 import {Avatar} from "@heroui/avatar";
 
-import {UseUserProps, useUser} from "./use-user";
+import {useUser} from "./use-user";
 
 export interface UserProps extends UseUserProps {}
 

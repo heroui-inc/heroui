@@ -1,6 +1,6 @@
 {
   "name": "@heroui/tooltip",
-  "version": "2.2.17",
+  "version": "2.2.18",
   "description": "A React Component for rendering dynamically positioned Tooltips",
   "keywords": [
     "tooltip"
@@ -47,7 +47,6 @@
     "@heroui/framer-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/interactions": "3.25.2",
     "@react-aria/overlays": "3.27.2",
     "@react-aria/tooltip": "3.8.4",
     "@react-aria/utils": "3.29.1",

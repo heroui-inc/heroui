@@ -1,6 +1,6 @@
 {
   "name": "@heroui/calendar",
-  "version": "2.2.20",
+  "version": "2.2.21",
   "description": "A calendar displays one or more date grids and allows users to select a single date.",
   "keywords": [
     "calendar"
@@ -60,8 +60,7 @@
     "@react-types/calendar": "3.7.2",
     "@react-aria/interactions": "3.25.2",
     "@react-types/shared": "3.30.0",
-    "scroll-into-view-if-needed": "3.0.10",
-    "@types/lodash.debounce": "^4.0.7"
+    "scroll-into-view-if-needed": "3.0.10"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",

@@ -7,16 +7,19 @@
  * @internal
  */
 
+import type {HTMLMotionProps} from "framer-motion";
+import type {UsePopoverProps, UsePopoverReturn} from "./use-popover";
+
 import * as React from "react";
 import {DismissButton, Overlay} from "@react-aria/overlays";
 import {forwardRef} from "@heroui/system";
-import {HTMLMotionProps, LazyMotion, m} from "framer-motion";
+import {LazyMotion, m} from "framer-motion";
 import {mergeProps} from "@react-aria/utils";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 import {useDialog} from "@react-aria/dialog";
 
-import {usePopover, UsePopoverProps, UsePopoverReturn} from "./use-popover";
+import {usePopover} from "./use-popover";
 
 const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
 

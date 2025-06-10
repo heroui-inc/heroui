@@ -1,6 +1,6 @@
 {
   "name": "@heroui/button",
-  "version": "2.2.20",
+  "version": "2.2.21",
   "description": "Buttons allow users to perform actions and choose with a single tap.",
   "keywords": [
     "button"
@@ -46,12 +46,10 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/ripple": "workspace:*",
     "@heroui/spinner": "workspace:*",
-    "@react-aria/button": "3.13.2",
     "@react-aria/interactions": "3.25.2",
     "@react-aria/utils": "3.29.1",
     "@react-aria/focus": "3.20.4",
-    "@react-types/shared": "3.30.0",
-    "@react-types/button": "3.12.2"
+    "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

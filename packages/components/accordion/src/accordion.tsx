@@ -1,9 +1,12 @@
+import type {Key} from "react";
+import type {UseAccordionProps} from "./use-accordion";
+
 import {forwardRef} from "@heroui/system";
 import {LayoutGroup} from "framer-motion";
 import {Divider} from "@heroui/divider";
-import {Fragment, Key, useCallback, useMemo} from "react";
+import {Fragment, useCallback, useMemo} from "react";
 
-import {UseAccordionProps, useAccordion} from "./use-accordion";
+import {useAccordion} from "./use-accordion";
 import AccordionItem from "./accordion-item";
 
 export interface AccordionProps extends UseAccordionProps {}

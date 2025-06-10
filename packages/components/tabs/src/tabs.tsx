@@ -1,4 +1,7 @@
-import {ForwardedRef, ReactElement, useId, useState, useEffect, useCallback} from "react";
+import type {ForwardedRef, ReactElement} from "react";
+import type {UseTabsProps} from "./use-tabs";
+
+import {useId, useState, useEffect, useCallback} from "react";
 import {LayoutGroup} from "framer-motion";
 import {Button} from "@heroui/button";
 import {forwardRef} from "@heroui/system";
@@ -7,7 +10,7 @@ import {debounce} from "@heroui/shared-utils";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
 import {clsx} from "@heroui/shared-utils";
 
-import {UseTabsProps, useTabs} from "./use-tabs";
+import {useTabs} from "./use-tabs";
 import Tab from "./tab";
 import TabPanel from "./tab-panel";
 

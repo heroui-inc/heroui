@@ -1,7 +1,7 @@
 // We had to copy this file from @react-aria/button because of the console.warn
 // once they fix it we can remove this file and use the original one
 
-import {
+import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   ElementType,
@@ -9,8 +9,9 @@ import {
   InputHTMLAttributes,
   RefObject,
 } from "react";
-import {AriaButtonProps as BaseAriaButtonProps} from "@react-types/button";
-import {DOMAttributes} from "@react-types/shared";
+import type {AriaButtonProps as BaseAriaButtonProps} from "@react-types/button";
+import type {DOMAttributes} from "@react-types/shared";
+
 import {filterDOMProps, mergeProps} from "@react-aria/utils";
 import {useFocusable} from "@react-aria/focus";
 import {usePress} from "@react-aria/interactions";

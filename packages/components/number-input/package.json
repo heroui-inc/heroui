@@ -1,6 +1,6 @@
 {
   "name": "@heroui/number-input",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "The numeric input component is designed for users to enter a number, and increase or decrease the value using stepper buttons",
   "keywords": [
     "input",
@@ -53,7 +53,6 @@
     "@react-aria/interactions": "3.25.2",
     "@react-aria/numberfield": "3.11.15",
     "@react-aria/utils": "3.29.1",
-    "@react-stately/utils": "3.10.7",
     "@react-stately/numberfield": "3.9.13",
     "@react-types/shared": "3.30.0",
     "@react-types/numberfield": "3.8.12",

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/radio",
-  "version": "2.3.19",
+  "version": "2.3.20",
   "description": "Radios allow users to select a single option from a list of mutually exclusive options.",
   "keywords": [
     "radio"
@@ -55,8 +55,6 @@
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
-    "@heroui/button": "workspace:*",
-    "@heroui/test-utils": "workspace:*",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

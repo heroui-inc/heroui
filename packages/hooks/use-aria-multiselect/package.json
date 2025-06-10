@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-multiselect",
-  "version": "2.4.13",
+  "version": "2.4.14",
   "description": "Provides the behavior and accessibility implementation for a multi-select component.",
   "keywords": [
     "use-aria-multiselect"
@@ -46,7 +46,6 @@
     "@react-stately/menu": "3.9.5",
     "@react-types/button": "3.12.2",
     "@react-types/overlays": "3.8.16",
-    "@react-types/select": "3.9.13",
     "@react-types/shared": "3.30.0"
   },
   "peerDependencies": {

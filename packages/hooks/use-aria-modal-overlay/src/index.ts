@@ -1,14 +1,15 @@
+import type {AriaModalOverlayProps, ModalOverlayAria} from "@react-aria/overlays";
+import type {OverlayTriggerState} from "@react-stately/overlays";
+import type {RefObject} from "react";
+
 import {
   ariaHideOutside,
-  AriaModalOverlayProps,
-  ModalOverlayAria,
   useOverlay,
   usePreventScroll,
   useOverlayFocusContain,
 } from "@react-aria/overlays";
 import {mergeProps} from "@react-aria/utils";
-import {OverlayTriggerState} from "@react-stately/overlays";
-import {RefObject, useEffect} from "react";
+import {useEffect} from "react";
 
 export interface UseAriaModalOverlayProps extends AriaModalOverlayProps {}
 
