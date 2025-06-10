@@ -223,10 +223,10 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     isHeaderDefaultExpanded,
     onHeaderExpandedChange = () => {},
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
-    minValue = (globalContext?.defaultDates?.minDate as DateValue) ??
-      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = (globalContext?.defaultDates?.maxDate as DateValue) ??
-      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
+    minValue = (globalContext?.defaultDates?.minDate ??
+      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1)) as DateValue,
+    maxValue = (globalContext?.defaultDates?.maxDate ??
+      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31)) as DateValue,
     prevButtonProps: prevButtonPropsProp,
     nextButtonProps: nextButtonPropsProp,
     errorMessage,

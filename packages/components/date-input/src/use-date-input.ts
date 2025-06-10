@@ -149,10 +149,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     descriptionProps: descriptionPropsProp,
     validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     shouldForceLeadingZeros = true,
-    minValue = (globalContext?.defaultDates?.minDate as DateValue) ??
-      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = (globalContext?.defaultDates?.maxDate as DateValue) ??
-      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
+    minValue = (globalContext?.defaultDates?.minDate ??
+      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1)) as DateValue,
+    maxValue = (globalContext?.defaultDates?.maxDate ??
+      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31)) as DateValue,
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
     isInvalid: isInvalidProp = validationState ? validationState === "invalid" : false,
     errorMessage,
