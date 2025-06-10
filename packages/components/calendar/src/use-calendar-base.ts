@@ -1,17 +1,13 @@
 import type {CalendarReturnType, CalendarVariantProps} from "@heroui/theme";
-import type {
-  CalendarPropsBase as AriaCalendarPropsBase,
-  DateValue,
-  SpectrumCalendarProps,
-} from "@react-types/calendar";
+import type {CalendarPropsBase as AriaCalendarPropsBase} from "@react-types/calendar";
 import type {CalendarSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCalendarGridProps} from "@react-aria/calendar";
 import type {AriaButtonProps} from "@react-types/button";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {Calendar, CalendarIdentifier} from "@internationalized/date";
 import type {ButtonProps} from "@heroui/button";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
-import type {CalendarIdentifier} from "@internationalized/date";
 import type {ReactRef} from "@heroui/react-utils";
 
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
@@ -124,7 +120,7 @@ interface Props extends HeroUIBaseProps {
    *
    * @default all calendars
    */
-  createCalendar?: SpectrumCalendarProps<DateValue>["createCalendar"];
+  createCalendar?: (identifier: CalendarIdentifier) => Calendar;
   /**
    * The style of weekday names to display in the calendar grid header,
    * e.g. single letter, abbreviation, or full day name.
