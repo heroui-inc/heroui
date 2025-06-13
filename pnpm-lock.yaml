@@ -3244,9 +3244,6 @@ importers:
       '@react-aria/utils':
         specifier: 3.29.1
         version: 3.29.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-types/calendar':
-        specifier: 3.7.2
-        version: 3.7.2(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
