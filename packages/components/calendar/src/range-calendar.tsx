@@ -1,9 +1,10 @@
 import type {DateValue} from "@heroui/internationalized-date";
 import type {ForwardedRef, ReactElement} from "react";
+import type {UseRangeCalendarProps} from "./use-range-calendar";
 
 import {forwardRef} from "@heroui/system";
 
-import {UseRangeCalendarProps, useRangeCalendar} from "./use-range-calendar";
+import {useRangeCalendar} from "./use-range-calendar";
 import {CalendarProvider} from "./calendar-context";
 import {CalendarBase} from "./calendar-base";
 

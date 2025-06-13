@@ -1,6 +1,8 @@
+import type {DateValue} from "@heroui/internationalized-date";
+
 import React from "react";
 import {DatePicker} from "@heroui/react";
-import {DateValue, parseAbsoluteToLocal} from "@heroui/internationalized-date";
+import {parseAbsoluteToLocal} from "@heroui/internationalized-date";
 import {I18nProvider} from "@heroui/react-aria-i18n";
 
 export default function App() {

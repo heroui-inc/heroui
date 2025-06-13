@@ -1,3 +1,5 @@
+import type {ColorPickerType, ThemeType} from "../types";
+
 import {useEffect, useState} from "react";
 import {Button, Popover, PopoverContent, PopoverTrigger} from "@heroui/react";
 import {HexColorInput, HexColorPicker} from "react-colorful";
@@ -6,7 +8,6 @@ import {readableColor} from "color2k";
 import {useTheme} from "next-themes";
 import {clsx} from "@heroui/shared-utils";
 
-import {ColorPickerType, ThemeType} from "../types";
 import {colorValuesToRgb, getColorWeight} from "../utils/colors";
 
 interface ColorPickerProps {

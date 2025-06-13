@@ -1,5 +1,7 @@
-import {AriaLinkProps} from "@react-types/link";
-import {DOMAttributes, FocusableElement} from "@react-types/shared";
+import type {AriaLinkProps} from "@react-types/link";
+import type {DOMAttributes, FocusableElement} from "@react-types/shared";
+import type {RefObject} from "react";
+
 import {
   filterDOMProps,
   mergeProps,
@@ -7,7 +9,6 @@ import {
   shouldClientNavigate,
   useLinkProps,
 } from "@react-aria/utils";
-import {RefObject} from "react";
 import {useFocusable} from "@react-aria/focus";
 import {usePress} from "@react-aria/interactions";
 

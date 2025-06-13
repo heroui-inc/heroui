@@ -1,6 +1,6 @@
-import {Variants} from "@heroui/motion";
+import type {Variants, Transition} from "@heroui/motion";
 
-export const transition = {
+export const transition: Transition = {
   type: "spring",
   bounce: 0,
   duration: 0.3,

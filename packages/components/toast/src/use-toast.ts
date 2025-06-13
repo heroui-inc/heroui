@@ -1,14 +1,19 @@
 import type {SlotsToClasses, ToastSlots, ToastVariantProps} from "@heroui/theme";
+import type {DOMAttributes} from "react";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {AriaToastProps} from "@react-aria/toast";
+import type {QueuedToast, ToastState} from "@react-stately/toast";
+import type {MotionProps} from "@heroui/motion";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {HTMLHeroUIProps, PropGetter, mapPropsVariants, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {toast as toastTheme} from "@heroui/theme";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
-import {ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
-import {useToast as useToastAria, AriaToastProps} from "@react-aria/toast";
+import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
+import {useToast as useToastAria} from "@react-aria/toast";
 import {chain, mergeProps} from "@react-aria/utils";
-import {QueuedToast, ToastState} from "@react-stately/toast";
-import {MotionProps} from "@heroui/motion";
 import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 
@@ -67,15 +72,15 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * Icon to be displayed in the toast - overrides the default icon
    */
-  icon?: ReactNode;
+  icon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Icon to be displayed in the close button - overrides the default close icon
    */
-  closeIcon?: ReactNode | ((props: any) => ReactNode);
+  closeIcon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Icon to be displayed in the loading toast - overrides the loading icon
    */
-  loadingIcon?: ReactNode;
+  loadingIcon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Whether the toast-icon should be hidden.
    * @default false
@@ -157,6 +162,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     timeout = 6000,
     shouldShowTimeoutProgress = false,
     icon,
+    loadingIcon,
     onClose,
     severity,
     maxVisibleToasts,
@@ -261,7 +267,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   ]);
 
   const Component = as || "div";
-  const loadingIcon: ReactNode = icon;
 
   const domRef = useDOMRef(ref);
   const baseStyles = clsx(className, classNames?.base);

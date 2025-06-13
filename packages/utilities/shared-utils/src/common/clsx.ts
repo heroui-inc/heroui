@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow-restricted-names */
-/* eslint-disable no-plusplus */
 function toVal(mix: any) {
   var k,
     y,

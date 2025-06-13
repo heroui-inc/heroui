@@ -35,7 +35,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/i18n": "3.12.8"
+    "@react-aria/i18n": "3.12.10"
   },
   "devDependencies": {
     "clean-package": "2.2.0"

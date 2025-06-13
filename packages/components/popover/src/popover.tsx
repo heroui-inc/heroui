@@ -1,9 +1,12 @@
-import {Children, ReactNode} from "react";
+import type {ReactNode} from "react";
+import type {UsePopoverProps} from "./use-popover";
+
+import {Children} from "react";
 import {forwardRef} from "@heroui/system";
 import {Overlay} from "@react-aria/overlays";
 import {AnimatePresence} from "@heroui/motion";
 
-import {UsePopoverProps, usePopover} from "./use-popover";
+import {usePopover} from "./use-popover";
 import {PopoverProvider} from "./popover-context";
 
 export interface PopoverProps extends UsePopoverProps {

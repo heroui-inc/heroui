@@ -1,4 +1,6 @@
 import type {TabItemProps as BaseTabItemProps} from "./base/tab-item-base";
+import type {Node} from "@react-types/shared";
+import type {ValuesType} from "./use-tabs";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps, mergeRefs} from "@heroui/react-utils";
@@ -6,13 +8,10 @@ import {clsx, dataAttr} from "@heroui/shared-utils";
 import {chain, mergeProps} from "@react-aria/utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
-import {Node} from "@react-types/shared";
 import {useTab} from "@react-aria/tabs";
 import {useHover} from "@react-aria/interactions";
 import {m, domMax, LazyMotion} from "@heroui/motion";
 import {useIsMounted} from "@heroui/use-is-mounted";
-
-import {ValuesType} from "./use-tabs";
 
 export interface TabItemProps<T extends object = object> extends BaseTabItemProps<T> {
   item: Node<T>;
@@ -80,7 +79,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
   });
 
   const handleClick = () => {
-    chain(onClick, tabProps.onClick);
+    chain(onClick, tabProps.onClick)();
 
     if (!domRef?.current || !listRef?.current) return;
 

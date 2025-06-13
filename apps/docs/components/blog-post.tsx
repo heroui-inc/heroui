@@ -1,6 +1,7 @@
 "use client";
 
-import {BlogPost} from "contentlayer2/generated";
+import type {BlogPost} from "contentlayer2/generated";
+
 import {Card, CardFooter, CardBody, CardHeader, Link, Avatar, Image} from "@heroui/react";
 import Balancer from "react-wrap-balancer";
 import {format, parseISO} from "date-fns";

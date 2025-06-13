@@ -1,4 +1,5 @@
 import type {ForwardedRef, ReactElement} from "react";
+import type {UseSelectProps} from "./use-select";
 
 import {Listbox} from "@heroui/listbox";
 import {FreeSoloPopover} from "@heroui/popover";
@@ -12,7 +13,7 @@ import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {AnimatePresence} from "@heroui/motion";
 
 import {HiddenSelect} from "./hidden-select";
-import {UseSelectProps, useSelect} from "./use-select";
+import {useSelect} from "./use-select";
 
 interface Props<T> extends UseSelectProps<T> {}
 

@@ -1,25 +1,22 @@
 import type {SliderSlots, SliderVariantProps, SlotsToClasses} from "@heroui/theme";
+import type {DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {AriaSliderProps} from "@react-aria/slider";
+import type {TooltipProps} from "@heroui/tooltip";
+import type {ValueBase} from "@react-types/shared";
+import type {SliderThumbProps} from "./slider-thumb";
 
-import {
-  DOMAttributes,
-  HTMLHeroUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useProviderContext,
-} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {slider} from "@heroui/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useSliderState} from "@react-stately/slider";
-import {ReactNode, useCallback, useMemo, useRef} from "react";
+import {useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@heroui/react-aria-i18n";
 import {mergeProps} from "@react-aria/utils";
-import {AriaSliderProps, useSlider as useAriaSlider} from "@react-aria/slider";
+import {useSlider as useAriaSlider} from "@react-aria/slider";
 import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {TooltipProps} from "@heroui/tooltip";
 import {useHover} from "@react-aria/interactions";
-import {ValueBase} from "@react-types/shared";
-
-import {SliderThumbProps} from "./slider-thumb";
 
 export type SliderValue = number | number[];
 export type SliderStepMark = {
@@ -252,8 +249,8 @@ export function useSlider(originalProps: UseSliderProps) {
     state.values.length > 1
       ? state.getThumbPercent(0)
       : fillOffset !== undefined
-      ? state.getValuePercent(fillOffset)
-      : 0,
+        ? state.getValuePercent(fillOffset)
+        : 0,
     state.getThumbPercent(state.values.length - 1),
   ].sort();
 

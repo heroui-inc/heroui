@@ -1,10 +1,12 @@
+import type {UseNavbarProps} from "./use-navbar";
+
 import {forwardRef} from "@heroui/system";
 import {pickChildren} from "@heroui/react-utils";
 import {LazyMotion, m} from "@heroui/motion";
 import {mergeProps} from "@react-aria/utils";
 
 import {hideOnScrollVariants} from "./navbar-transitions";
-import {UseNavbarProps, useNavbar} from "./use-navbar";
+import {useNavbar} from "./use-navbar";
 import {NavbarProvider} from "./navbar-context";
 import NavbarMenu from "./navbar-menu";
 

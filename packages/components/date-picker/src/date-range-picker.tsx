@@ -1,6 +1,8 @@
 import type {DateValue} from "@heroui/internationalized-date";
+import type {ForwardedRef, ReactElement} from "react";
+import type {UseDateRangePickerProps} from "./use-date-range-picker";
 
-import {ForwardedRef, ReactElement, useMemo} from "react";
+import {useMemo} from "react";
 import {cloneElement, isValidElement} from "react";
 import {forwardRef} from "@heroui/system";
 import {Button} from "@heroui/button";
@@ -11,7 +13,7 @@ import {AnimatePresence} from "@heroui/motion";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
 
 import DateRangePickerField from "./date-range-picker-field";
-import {UseDateRangePickerProps, useDateRangePicker} from "./use-date-range-picker";
+import {useDateRangePicker} from "./use-date-range-picker";
 
 export interface Props<T extends DateValue> extends UseDateRangePickerProps<T> {
   /**

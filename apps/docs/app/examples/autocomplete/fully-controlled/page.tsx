@@ -1,7 +1,9 @@
 "use client";
 
+import type {MenuTriggerAction} from "@heroui/react";
+
 import * as React from "react";
-import {Autocomplete, AutocompleteItem, MenuTriggerAction} from "@heroui/react";
+import {Autocomplete, AutocompleteItem} from "@heroui/react";
 import {useFilter} from "@heroui/react-aria-i18n";
 
 const animals = [

@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react/display-name */
 import {Button, Link} from "@heroui/react";
 import NextLink from "next/link";
 

@@ -1,9 +1,12 @@
-import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
+import type {ToastOptions} from "@react-stately/toast";
+import type {RegionProps} from "./toast-region";
+import type {ToastProps, ToastPlacement} from "./use-toast";
+
+import {ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
 import {AnimatePresence, LazyMotion} from "@heroui/motion";
 
-import {RegionProps, ToastRegion} from "./toast-region";
-import {ToastProps, ToastPlacement} from "./use-toast";
+import {ToastRegion} from "./toast-region";
 
 const loadFeatures = () => import("@heroui/motion").then((res) => res.domMax);
 

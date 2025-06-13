@@ -1,6 +1,6 @@
 {
   "name": "@heroui/drawer",
-  "version": "2.2.16",
+  "version": "2.2.18",
   "description": "Used to render a content that slides in from the side of the screen.",
   "keywords": [
     "drawer"
@@ -55,11 +55,9 @@
     "@heroui/button": "workspace:*",
     "@heroui/avatar": "workspace:*",
     "@heroui/link": "workspace:*",
-    "@heroui/switch": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-disclosure": "workspace:*",
     "@heroui/test-utils": "workspace:*",
-    "react-lorem-component": "0.13.0",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

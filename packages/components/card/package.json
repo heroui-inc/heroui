@@ -1,6 +1,6 @@
 {
   "name": "@heroui/card",
-  "version": "2.2.18",
+  "version": "2.2.20",
   "description": "Card is a container for text, photos, and actions in the context of a single subject.",
   "keywords": [
     "card"
@@ -44,11 +44,10 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/ripple": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/utils": "3.28.2",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/button": "3.13.0",
-    "@react-types/shared": "3.29.0"
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/utils": "3.29.1",
+    "@react-aria/interactions": "3.25.3",
+    "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/input-otp",
-  "version": "2.1.18",
+  "version": "2.1.20",
   "description": "",
   "keywords": [
     "input-otp"
@@ -36,20 +36,20 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@heroui/theme": ">=2.4.13",
+    "@heroui/theme": ">=2.4.16",
     "@heroui/system": ">=2.4.7"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/utils": "3.28.2",
-    "@react-aria/form": "3.0.15",
-    "@react-stately/utils": "3.10.6",
-    "@react-stately/form": "3.1.3",
-    "@react-types/textfield": "3.12.1",
+    "@react-aria/utils": "3.29.1",
+    "@react-aria/form": "3.0.18",
+    "@react-stately/utils": "3.10.7",
+    "@react-stately/form": "3.1.5",
+    "@react-types/textfield": "3.12.3",
     "input-otp": "1.4.1",
-    "@react-aria/focus": "3.20.2"
+    "@react-aria/focus": "3.20.5"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

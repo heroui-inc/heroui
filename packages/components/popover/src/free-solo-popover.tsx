@@ -8,6 +8,7 @@
  */
 
 import type {HTMLMotionProps} from "@heroui/motion";
+import type {UsePopoverProps, UsePopoverReturn} from "./use-popover";
 
 import * as React from "react";
 import {DismissButton, Overlay} from "@react-aria/overlays";
@@ -17,7 +18,7 @@ import {mergeProps} from "@react-aria/utils";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {useDialog} from "@react-aria/dialog";
 
-import {usePopover, UsePopoverProps, UsePopoverReturn} from "./use-popover";
+import {usePopover} from "./use-popover";
 
 const domAnimation = () => import("@heroui/dom-animation").then((res) => res.default);
 

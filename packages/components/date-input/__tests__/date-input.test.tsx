@@ -1,16 +1,14 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {DateInputProps} from "../src";
+import type {DateValue} from "@heroui/internationalized-date";
+
 import * as React from "react";
 import {fireEvent, render} from "@testing-library/react";
-import {
-  CalendarDate,
-  CalendarDateTime,
-  DateValue,
-  ZonedDateTime,
-} from "@heroui/internationalized-date";
+import {CalendarDate, CalendarDateTime, ZonedDateTime} from "@heroui/internationalized-date";
 import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
 
-import {DateInput as DateInputBase, DateInputProps} from "../src";
+import {DateInput as DateInputBase} from "../src";
 
 /**
  * Custom date-input to disable animations and avoid issues with react-motion and jest

@@ -1,4 +1,6 @@
-import {Variants, TRANSITION_EASINGS} from "@heroui/motion";
+import type {Variants} from "@heroui/motion";
+
+import {TRANSITION_EASINGS} from "@heroui/motion";
 
 export const hideOnScrollVariants: Variants = {
   visible: {

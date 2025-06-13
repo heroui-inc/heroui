@@ -1,8 +1,10 @@
+import type {MenuProps} from "@heroui/menu";
+import type {ForwardedRef, ReactElement} from "react";
+
 import {PopoverContent} from "@heroui/popover";
 import {FocusScope} from "@react-aria/focus";
 import {forwardRef} from "@heroui/system";
-import {Menu, MenuProps} from "@heroui/menu";
-import {ForwardedRef, ReactElement} from "react";
+import {Menu} from "@heroui/menu";
 
 import {useDropdownContext} from "./dropdown-context";
 

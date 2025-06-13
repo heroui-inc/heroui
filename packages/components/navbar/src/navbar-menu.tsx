@@ -1,6 +1,7 @@
 import type {HTMLMotionProps} from "@heroui/motion";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr} from "@heroui/shared-utils";
 import {AnimatePresence, LazyMotion, m} from "@heroui/motion";
