@@ -11,7 +11,7 @@ import {
   SuccessIcon,
   WarningIcon,
 } from "@heroui/shared-icons";
-import {m} from "framer-motion";
+import {m} from "@heroui/motion";
 import {cloneElement, isValidElement} from "react";
 import {Spinner} from "@heroui/spinner";
 

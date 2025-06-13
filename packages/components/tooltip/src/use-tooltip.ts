@@ -1,8 +1,8 @@
 import type {PopoverVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {AriaTooltipProps} from "@react-types/tooltip";
 import type {OverlayTriggerProps} from "@react-types/overlays";
-import type {HTMLMotionProps} from "framer-motion";
 import type {OverlayOptions} from "@heroui/aria-utils";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {ReactNode, Ref} from "react";
 import type {AriaOverlayProps} from "@react-aria/overlays";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";

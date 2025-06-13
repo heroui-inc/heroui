@@ -1,4 +1,4 @@
-import type {Target, TargetAndTransition, Transition} from "framer-motion";
+import type {Target, TargetAndTransition, Transition} from "motion/react";
 
 type WithMotionState<P> = Partial<Record<"enter" | "exit", P>>;
 
@@ -21,7 +21,7 @@ type TargetResolver<P = {}> = (props: P & TransitionProperties) => TargetAndTran
 
 type Variant<P = {}> = TargetAndTransition | TargetResolver<P>;
 
-export type Variants<P = {}> = Record<
+type Variants<P = {}> = Record<
   string,
   {
     enter: Variant<P>;
@@ -66,7 +66,7 @@ export const TRANSITION_VARIANTS: Variants = {
       transform: "scale(0.85)",
       opacity: 0,
       transition: {
-        type: "easeOut",
+        ease: TRANSITION_EASINGS.easeOut,
         duration: 0.15,
       },
     },
@@ -89,7 +89,7 @@ export const TRANSITION_VARIANTS: Variants = {
       opacity: 0,
       transform: "scale(0.96)",
       transition: {
-        type: "easeOut",
+        ease: TRANSITION_EASINGS.easeOut,
         bounce: 0,
         duration: 0.15,
       },
@@ -162,7 +162,7 @@ export const TRANSITION_VARIANTS: Variants = {
           duration: 0.3,
         },
         opacity: {
-          easings: "ease",
+          ease: TRANSITION_EASINGS.ease,
           duration: 0.4,
         },
       },
@@ -171,7 +171,7 @@ export const TRANSITION_VARIANTS: Variants = {
       opacity: 0,
       height: 0,
       transition: {
-        easings: "ease",
+        ease: TRANSITION_EASINGS.ease,
         duration: 0.3,
       },
     },

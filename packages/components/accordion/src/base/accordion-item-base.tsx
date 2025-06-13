@@ -1,9 +1,9 @@
 import type {AccordionItemVariantProps, AccordionItemSlots, SlotsToClasses} from "@heroui/theme";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {As} from "@heroui/system";
 import type {ItemProps} from "@heroui/aria-utils";
 import type {FocusableProps, PressEvents} from "@react-types/shared";
 import type {ReactNode} from "react";
-import type {HTMLMotionProps} from "framer-motion";
 
 import {BaseItem} from "@heroui/aria-utils";
 

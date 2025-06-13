@@ -36,7 +36,6 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "@heroui/theme": ">=2.4.6",
     "@heroui/system": ">=2.4.7"
   },
@@ -45,9 +44,9 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/ripple": "workspace:*",
-    "@react-aria/focus": "3.20.4",
+    "@react-aria/focus": "3.20.5",
     "@react-aria/utils": "3.29.1",
-    "@react-aria/interactions": "3.25.2",
+    "@react-aria/interactions": "3.25.3",
     "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
@@ -58,7 +57,6 @@
     "@heroui/button": "workspace:*",
     "@heroui/avatar": "workspace:*",
     "@heroui/image": "workspace:*",
-    "framer-motion": "11.18.2",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

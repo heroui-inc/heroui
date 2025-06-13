@@ -58,4 +58,4 @@ export {VisuallyHidden} from "@react-aria/visually-hidden";
 /**
  * Individual exports
  */
-export {ResizablePanel} from "@heroui/framer-utils";
+export {ResizablePanel} from "@heroui/motion";

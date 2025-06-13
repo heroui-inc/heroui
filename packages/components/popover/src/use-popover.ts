@@ -1,6 +1,6 @@
 import type {PopoverVariantProps, SlotsToClasses, PopoverSlots} from "@heroui/theme";
-import type {HTMLMotionProps} from "framer-motion";
 import type {PressEvent} from "@react-types/shared";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {RefObject, Ref} from "react";
 import type {ReactRef} from "@heroui/react-utils";
 import type {OverlayTriggerState} from "@react-stately/overlays";

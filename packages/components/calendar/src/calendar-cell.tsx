@@ -2,12 +2,12 @@ import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {CalendarSlots, SlotsToClasses, CalendarReturnType} from "@heroui/theme";
 import type {AriaCalendarCellProps} from "@react-aria/calendar";
 import type {HTMLHeroUIProps} from "@heroui/system";
-import type {CalendarDate} from "@internationalized/date";
+import type {CalendarDate} from "@heroui/internationalized-date";
 
-import {getDayOfWeek, isSameDay, isSameMonth, isToday} from "@internationalized/date";
 import {useCalendarCell} from "@react-aria/calendar";
+import {getDayOfWeek, isSameDay, isSameMonth, isToday} from "@heroui/internationalized-date";
 import {mergeProps} from "@react-aria/utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useRef} from "react";

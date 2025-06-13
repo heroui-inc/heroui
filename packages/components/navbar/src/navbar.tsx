@@ -2,7 +2,7 @@ import type {UseNavbarProps} from "./use-navbar";
 
 import {forwardRef} from "@heroui/system";
 import {pickChildren} from "@heroui/react-utils";
-import {LazyMotion, m} from "framer-motion";
+import {LazyMotion, m} from "@heroui/motion";
 import {mergeProps} from "@react-aria/utils";
 
 import {hideOnScrollVariants} from "./navbar-transitions";

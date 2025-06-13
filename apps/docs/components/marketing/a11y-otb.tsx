@@ -10,7 +10,7 @@ import {
   DropdownItem,
   Tooltip,
 } from "@heroui/react";
-import {useInView} from "framer-motion";
+import {useInView} from "@heroui/motion";
 import {clsx} from "@heroui/shared-utils";
 import {
   AddNoteBulkIcon,

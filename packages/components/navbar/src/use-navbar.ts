@@ -1,6 +1,6 @@
 import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@heroui/theme";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {ReactRef} from "@heroui/react-utils";
-import type {HTMLMotionProps} from "framer-motion";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";

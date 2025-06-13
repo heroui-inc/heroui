@@ -36,7 +36,6 @@
   "peerDependencies": {
     "@heroui/system": ">=2.4.10",
     "@heroui/theme": ">=2.4.12",
-    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
@@ -52,13 +51,14 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/use-aria-multiselect": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
+    "@heroui/motion": "workspace:*",
     "@heroui/form": "workspace:*",
-    "@react-aria/focus": "3.20.4",
-    "@react-aria/form": "3.0.17",
-    "@react-aria/overlays": "3.27.2",
-    "@react-aria/interactions": "3.25.2",
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/form": "3.0.18",
+    "@react-aria/overlays": "3.27.3",
+    "@react-aria/interactions": "3.25.3",
     "@react-aria/utils": "3.29.1",
-    "@react-aria/visually-hidden": "3.8.24",
+    "@react-aria/visually-hidden": "3.8.25",
     "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
@@ -70,8 +70,9 @@
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
+    "@heroui/react-aria-i18n": "workspace:*",
+    "@react-stately/data": "3.13.1",
     "clean-package": "2.2.0",
-    "framer-motion": "11.18.2",
     "react": "18.3.0",
     "react-dom": "18.3.0",
     "react-hook-form": "^7.51.3"

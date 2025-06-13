@@ -7,7 +7,7 @@ import type {AriaListBoxOptions} from "@react-aria/listbox";
 import type {FocusEvent, HTMLAttributes, RefObject, Key} from "react";
 import type {ValidationResult} from "@react-types/shared";
 
-import {useCollator} from "@react-aria/i18n";
+import {useCollator} from "@heroui/react-aria-i18n";
 import {setInteractionModality} from "@react-aria/interactions";
 import {useField} from "@react-aria/label";
 import {useMenuTrigger} from "@react-aria/menu";

@@ -14,7 +14,7 @@ import {useHover, usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
 import {mergeProps} from "@react-aria/utils";
 import {dataAttr} from "@heroui/shared-utils";
-import {useNumberFormatter} from "@react-aria/i18n";
+import {useNumberFormatter} from "@heroui/react-aria-i18n";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**

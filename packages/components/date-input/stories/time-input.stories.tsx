@@ -1,6 +1,7 @@
 import type {Meta} from "@storybook/react";
 import type {ValidationResult} from "@react-types/shared";
 import type {TimeInputProps, TimeInputValue as TimeValue} from "../src";
+import type {ValidationResult} from "@react-types/shared";
 
 import React from "react";
 import {dateInput, button} from "@heroui/theme";
@@ -10,8 +11,8 @@ import {
   parseZonedDateTime,
   Time,
   ZonedDateTime,
-} from "@internationalized/date";
-import {useDateFormatter} from "@react-aria/i18n";
+} from "@heroui/internationalized-date";
+import {useDateFormatter} from "@heroui/react-aria-i18n";
 
 import {TimeInput} from "../src";
 

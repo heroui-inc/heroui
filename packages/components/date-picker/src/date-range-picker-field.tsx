@@ -5,13 +5,13 @@ import type {DateInputProps} from "@heroui/date-input";
 import type {DateValue} from "@react-types/datepicker";
 import type {ForwardedRef, ReactElement} from "react";
 
-import {createCalendar} from "@internationalized/date";
+import {createCalendar} from "@heroui/internationalized-date";
 import {forwardRef, useRef} from "react";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
 import {DateInputSegment} from "@heroui/date-input";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {mergeProps} from "@react-aria/utils";
 
 type HeroUIBaseProps<T extends DateValue> = Omit<

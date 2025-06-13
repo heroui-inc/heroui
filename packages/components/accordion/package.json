@@ -42,7 +42,6 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "@heroui/theme": ">=2.4.6",
     "@heroui/system": ">=2.4.7"
   },
@@ -51,14 +50,15 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@heroui/framer-utils": "workspace:*",
     "@heroui/divider": "workspace:*",
     "@heroui/use-aria-accordion": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/interactions": "3.25.2",
-    "@react-aria/focus": "3.20.4",
+    "@heroui/motion": "workspace:*",
+    "@react-aria/interactions": "3.25.3",
+    "@react-aria/focus": "3.20.5",
     "@react-aria/utils": "3.29.1",
     "@react-stately/tree": "3.9.0",
+    "@react-aria/button": "3.13.3",
     "@react-types/accordion": "3.0.0-alpha.26",
     "@react-types/shared": "3.30.0"
   },
@@ -69,7 +69,6 @@
     "@heroui/avatar": "workspace:*",
     "@heroui/input": "workspace:*",
     "@heroui/test-utils": "workspace:*",
-    "framer-motion": "11.18.2",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

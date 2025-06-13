@@ -2,7 +2,7 @@ import type {PaginationItemValue} from "@heroui/use-pagination";
 import type {UsePaginationProps} from "./use-pagination";
 
 import {useCallback} from "react";
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {forwardRef} from "@heroui/system";
 import {PaginationItemType} from "@heroui/use-pagination";
 import {ChevronIcon, EllipsisIcon, ForwardIcon} from "@heroui/shared-icons";

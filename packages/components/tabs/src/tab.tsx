@@ -10,7 +10,7 @@ import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
 import {useTab} from "@react-aria/tabs";
 import {useHover} from "@react-aria/interactions";
-import {m, domMax, LazyMotion} from "framer-motion";
+import {m, domMax, LazyMotion} from "@heroui/motion";
 import {useIsMounted} from "@heroui/use-is-mounted";
 
 export interface TabItemProps<T extends object = object> extends BaseTabItemProps<T> {
