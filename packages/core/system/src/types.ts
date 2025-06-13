@@ -7,236 +7,152 @@ export type SpinnerVariants = "default" | "simple" | "gradient" | "wave" | "dots
  * Interationalized Date
  * Retrieved from `@internationalized/date` to avoid importing the entire package.
  */
-export interface CalendarDate {
+export abstract class CalendarDate {
   /** The calendar system associated with this date, e.g. Gregorian. */
-  readonly calendar: Calendar;
+  abstract readonly calendar: Calendar;
   /** The calendar era for this date, e.g. "BC" or "AD". */
-  readonly era: string;
+  abstract readonly era: string;
   /** The year of this date within the era. */
-  readonly year: number;
+  abstract readonly year: number;
   /**
    * The month number within the year. Note that some calendar systems such as Hebrew
    * may have a variable number of months per year. Therefore, month numbers may not
    * always correspond to the same month names in different years.
    */
-  readonly month: number;
+  abstract readonly month: number;
   /** The day number within the month. */
-  readonly day: number;
-  constructor(year: number, month: number, day: number);
-  constructor(era: string, year: number, month: number, day: number);
-  constructor(calendar: Calendar, year: number, month: number, day: number);
-  constructor(calendar: Calendar, era: string, year: number, month: number, day: number);
+  abstract readonly day: number;
   /** Returns a copy of this date. */
-  copy(): CalendarDate;
+  abstract copy(): CalendarDate;
   /** Returns a new `CalendarDate` with the given duration added to it. */
-  add(duration: DateDuration): CalendarDate;
+  abstract add(duration: DateDuration): CalendarDate;
   /** Returns a new `CalendarDate` with the given duration subtracted from it. */
-  subtract(duration: DateDuration): CalendarDate;
+  abstract subtract(duration: DateDuration): CalendarDate;
   /** Returns a new `CalendarDate` with the given fields set to the provided values. Other fields will be constrained accordingly. */
-  set(fields: DateFields): CalendarDate;
+  abstract set(fields: DateFields): CalendarDate;
   /**
    * Returns a new `CalendarDate` with the given field adjusted by a specified amount.
    * When the resulting value reaches the limits of the field, it wraps around.
    */
-  cycle(field: DateField, amount: number, options?: CycleOptions): CalendarDate;
+  abstract cycle(field: DateField, amount: number, options?: CycleOptions): CalendarDate;
   /** Converts the date to a native JavaScript Date object, with the time set to midnight in the given time zone. */
-  toDate(timeZone: string): Date;
+  abstract toDate(timeZone: string): Date;
   /** Converts the date to an ISO 8601 formatted string. */
-  toString(): string;
+  abstract toString(): string;
   /** Compares this date with another. A negative result indicates that this date is before the given one, and a positive date indicates that it is after. */
-  compare(b: AnyCalendarDate): number;
+  abstract compare(b: AnyCalendarDate): number;
 }
 
-export interface CalendarDateTime {
+export abstract class CalendarDateTime {
   /** The calendar system associated with this date, e.g. Gregorian. */
-  readonly calendar: Calendar;
+  abstract readonly calendar: Calendar;
   /** The calendar era for this date, e.g. "BC" or "AD". */
-  readonly era: string;
+  abstract readonly era: string;
   /** The year of this date within the era. */
-  readonly year: number;
+  abstract readonly year: number;
   /**
    * The month number within the year. Note that some calendar systems such as Hebrew
    * may have a variable number of months per year. Therefore, month numbers may not
    * always correspond to the same month names in different years.
    */
-  readonly month: number;
+  abstract readonly month: number;
   /** The day number within the month. */
-  readonly day: number;
+  abstract readonly day: number;
   /** The hour in the day, numbered from 0 to 23. */
-  readonly hour: number;
+  abstract readonly hour: number;
   /** The minute in the hour. */
-  readonly minute: number;
+  abstract readonly minute: number;
   /** The second in the minute. */
-  readonly second: number;
+  abstract readonly second: number;
   /** The millisecond in the second. */
-  readonly millisecond: number;
-  constructor(
-    year: number,
-    month: number,
-    day: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
-  constructor(
-    era: string,
-    year: number,
-    month: number,
-    day: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
-  constructor(
-    calendar: Calendar,
-    year: number,
-    month: number,
-    day: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
-  constructor(
-    calendar: Calendar,
-    era: string,
-    year: number,
-    month: number,
-    day: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
+  abstract readonly millisecond: number;
   /** Returns a copy of this date. */
-  copy(): CalendarDateTime;
+  abstract copy(): CalendarDateTime;
   /** Returns a new `CalendarDateTime` with the given duration added to it. */
-  add(duration: DateTimeDuration): CalendarDateTime;
+  abstract add(duration: DateTimeDuration): CalendarDateTime;
   /** Returns a new `CalendarDateTime` with the given duration subtracted from it. */
-  subtract(duration: DateTimeDuration): CalendarDateTime;
+  abstract subtract(duration: DateTimeDuration): CalendarDateTime;
   /** Returns a new `CalendarDateTime` with the given fields set to the provided values. Other fields will be constrained accordingly. */
-  set(fields: DateFields & TimeFields): CalendarDateTime;
+  abstract set(fields: DateFields & TimeFields): CalendarDateTime;
   /**
    * Returns a new `CalendarDateTime` with the given field adjusted by a specified amount.
    * When the resulting value reaches the limits of the field, it wraps around.
    */
-  cycle(field: DateField | TimeField, amount: number, options?: CycleTimeOptions): CalendarDateTime;
+  abstract cycle(
+    field: DateField | TimeField,
+    amount: number,
+    options?: CycleTimeOptions,
+  ): CalendarDateTime;
   /** Converts the date to a native JavaScript Date object in the given time zone. */
-  toDate(timeZone: string, disambiguation?: Disambiguation): Date;
+  abstract toDate(timeZone: string, disambiguation?: Disambiguation): Date;
   /** Converts the date to an ISO 8601 formatted string. */
-  toString(): string;
+  abstract toString(): string;
   /** Compares this date with another. A negative result indicates that this date is before the given one, and a positive date indicates that it is after. */
-  compare(b: CalendarDate | CalendarDateTime | ZonedDateTime): number;
+  abstract compare(b: CalendarDate | CalendarDateTime | ZonedDateTime): number;
 }
 
-export interface ZonedDateTime {
+export abstract class ZonedDateTime {
   /** The calendar system associated with this date, e.g. Gregorian. */
-  readonly calendar: Calendar;
+  abstract readonly calendar: Calendar;
   /** The calendar era for this date, e.g. "BC" or "AD". */
-  readonly era: string;
+  abstract readonly era: string;
   /** The year of this date within the era. */
-  readonly year: number;
+  abstract readonly year: number;
   /**
    * The month number within the year. Note that some calendar systems such as Hebrew
    * may have a variable number of months per year. Therefore, month numbers may not
    * always correspond to the same month names in different years.
    */
-  readonly month: number;
+  abstract readonly month: number;
   /** The day number within the month. */
-  readonly day: number;
+  abstract readonly day: number;
   /** The hour in the day, numbered from 0 to 23. */
-  readonly hour: number;
+  abstract readonly hour: number;
   /** The minute in the hour. */
-  readonly minute: number;
+  abstract readonly minute: number;
   /** The second in the minute. */
-  readonly second: number;
+  abstract readonly second: number;
   /** The millisecond in the second. */
-  readonly millisecond: number;
+  abstract readonly millisecond: number;
   /** The IANA time zone identifier that this date and time is represented in. */
-  readonly timeZone: string;
+  abstract readonly timeZone: string;
   /** The UTC offset for this time, in milliseconds. */
-  readonly offset: number;
-  constructor(
-    year: number,
-    month: number,
-    day: number,
-    timeZone: string,
-    offset: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
-  constructor(
-    era: string,
-    year: number,
-    month: number,
-    day: number,
-    timeZone: string,
-    offset: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
-  constructor(
-    calendar: Calendar,
-    year: number,
-    month: number,
-    day: number,
-    timeZone: string,
-    offset: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
-  constructor(
-    calendar: Calendar,
-    era: string,
-    year: number,
-    month: number,
-    day: number,
-    timeZone: string,
-    offset: number,
-    hour?: number,
-    minute?: number,
-    second?: number,
-    millisecond?: number,
-  );
+  abstract readonly offset: number;
   /** Returns a copy of this date. */
-  copy(): ZonedDateTime;
+  abstract copy(): ZonedDateTime;
   /** Returns a new `ZonedDateTime` with the given duration added to it. */
-  add(duration: DateTimeDuration): ZonedDateTime;
+  abstract add(duration: DateTimeDuration): ZonedDateTime;
   /** Returns a new `ZonedDateTime` with the given duration subtracted from it. */
-  subtract(duration: DateTimeDuration): ZonedDateTime;
+  abstract subtract(duration: DateTimeDuration): ZonedDateTime;
   /** Returns a new `ZonedDateTime` with the given fields set to the provided values. Other fields will be constrained accordingly. */
-  set(fields: DateFields & TimeFields, disambiguation?: Disambiguation): ZonedDateTime;
+  abstract set(fields: DateFields & TimeFields, disambiguation?: Disambiguation): ZonedDateTime;
   /**
    * Returns a new `ZonedDateTime` with the given field adjusted by a specified amount.
    * When the resulting value reaches the limits of the field, it wraps around.
    */
-  cycle(field: DateField | TimeField, amount: number, options?: CycleTimeOptions): ZonedDateTime;
+  abstract cycle(
+    field: DateField | TimeField,
+    amount: number,
+    options?: CycleTimeOptions,
+  ): ZonedDateTime;
   /** Converts the date to a native JavaScript Date object. */
-  toDate(): Date;
+  abstract toDate(): Date;
   /** Converts the date to an ISO 8601 formatted string, including the UTC offset and time zone identifier. */
-  toString(): string;
+  abstract toString(): string;
   /** Converts the date to an ISO 8601 formatted string in UTC. */
-  toAbsoluteString(): string;
+  abstract toAbsoluteString(): string;
   /** Compares this date with another. A negative result indicates that this date is before the given one, and a positive date indicates that it is after. */
-  compare(b: CalendarDate | CalendarDateTime | ZonedDateTime): number;
+  abstract compare(b: CalendarDate | CalendarDateTime | ZonedDateTime): number;
 }
 
 /** An interface that is compatible with any object with date fields. */
-export interface AnyCalendarDate {
-  readonly calendar: Calendar;
-  readonly era: string;
-  readonly year: number;
-  readonly month: number;
-  readonly day: number;
-  copy(): this;
+export abstract class AnyCalendarDate {
+  abstract readonly calendar: Calendar;
+  abstract readonly era: string;
+  abstract readonly year: number;
+  abstract readonly month: number;
+  abstract readonly day: number;
+  abstract copy(): this;
 }
 
 export type CalendarIdentifier =
