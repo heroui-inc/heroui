@@ -1,6 +1,6 @@
 import type {ValidationResult} from "@react-types/shared";
 import type {Meta} from "@storybook/react";
-import type {TextAreaProps} from "../src";
+import type {TextareaProps} from "../src";
 
 import React from "react";
 import {input} from "@heroui/theme";
@@ -77,13 +77,13 @@ const defaultProps = {
   placeholder: "Enter your description",
 };
 
-const Template = (args: TextAreaProps) => (
+const Template = (args: TextareaProps) => (
   <div className="w-full max-w-[440px]">
     <Textarea {...args} />
   </div>
 );
 
-const ControlledTemplate = (args: TextAreaProps) => {
+const ControlledTemplate = (args: TextareaProps) => {
   const [value, setValue] = React.useState("");
 
   return (
@@ -94,7 +94,7 @@ const ControlledTemplate = (args: TextAreaProps) => {
   );
 };
 
-const MinRowsTemplate = (args: TextAreaProps) => (
+const MinRowsTemplate = (args: TextareaProps) => (
   <div className="w-full max-w-xl flex flex-row gap-4">
     <Textarea {...args} description="Default minRows is 3" />
     <Textarea {...args} description="minRows is 5" minRows={5} />
@@ -102,7 +102,7 @@ const MinRowsTemplate = (args: TextAreaProps) => (
   </div>
 );
 
-const MaxRowsTemplate = (args: TextAreaProps) => (
+const MaxRowsTemplate = (args: TextareaProps) => (
   <div className="w-full max-w-xl flex flex-row gap-4">
     <Textarea {...args} description="Default maxRows is 8" />
     <Textarea {...args} description="maxRows is 5" maxRows={5} />
@@ -110,7 +110,7 @@ const MaxRowsTemplate = (args: TextAreaProps) => (
   </div>
 );
 
-const FormTemplate = (args: TextAreaProps) => (
+const FormTemplate = (args: TextareaProps) => (
   <form
     className="w-full max-w-xl flex flex-row items-end gap-4"
     onSubmit={(e) => {
@@ -215,7 +215,7 @@ export const WithEndContent = {
   },
 };
 
-const ServerValidationTemplate = (args: TextAreaProps) => {
+const ServerValidationTemplate = (args: TextareaProps) => {
   const [serverErrors, setServerErrors] = React.useState({});
   const onSubmit = (e) => {
     e.preventDefault();
