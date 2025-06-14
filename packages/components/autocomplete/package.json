@@ -52,7 +52,7 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/combobox": "3.12.4",
+    "@react-aria/combobox": "3.12.5",
     "@react-aria/i18n": "3.12.10",
     "@react-aria/utils": "3.29.1",
     "@react-stately/combobox": "3.10.6",

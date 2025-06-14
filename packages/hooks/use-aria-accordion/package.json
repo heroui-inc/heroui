@@ -34,9 +34,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/button": "3.13.2",
-    "@react-aria/focus": "3.20.4",
-    "@react-aria/selection": "3.24.2",
+    "@react-aria/button": "3.13.3",
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/selection": "3.24.3",
     "@react-stately/tree": "3.9.0",
     "@react-types/accordion": "3.0.0-alpha.26",
     "@react-types/shared": "3.30.0"
