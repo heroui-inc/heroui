@@ -1,9 +1,10 @@
 import type {SelectProps} from "../src";
+import type {UserEvent} from "@testing-library/user-event";
 
 import "@testing-library/jest-dom";
 import * as React from "react";
 import {render, renderHook, waitFor, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";

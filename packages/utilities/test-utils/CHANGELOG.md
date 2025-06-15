@@ -1,5 +1,11 @@
 # @heroui/test-utils
 
+## 2.1.8
+
+### Patch Changes
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
 ## 2.1.7
 
 ### Patch Changes

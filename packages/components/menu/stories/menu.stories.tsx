@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {MenuProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {menuItem} from "@heroui/theme";
 import {
   AddNoteBulkIcon,
@@ -9,7 +11,7 @@ import {
 } from "@heroui/shared-icons";
 import {clsx} from "@heroui/shared-utils";
 
-import {Menu, MenuItem, MenuSection, MenuProps} from "../src";
+import {Menu, MenuItem, MenuSection} from "../src";
 
 export default {
   title: "Components/Menu",

@@ -1,7 +1,9 @@
+import type {UseCheckboxGroupProps} from "./use-checkbox-group";
+
 import {forwardRef} from "@heroui/system";
 
 import {CheckboxGroupProvider} from "./checkbox-group-context";
-import {UseCheckboxGroupProps, useCheckboxGroup} from "./use-checkbox-group";
+import {useCheckboxGroup} from "./use-checkbox-group";
 
 export interface CheckboxGroupProps extends UseCheckboxGroupProps {}
 

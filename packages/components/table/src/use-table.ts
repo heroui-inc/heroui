@@ -3,18 +3,21 @@ import type {Layout} from "@react-stately/virtualizer";
 import type {SelectionBehavior, DisabledBehavior, Node} from "@react-types/shared";
 import type {TableState, TableStateProps} from "@react-stately/table";
 import type {TableCollection} from "@react-types/table";
+import type {ReactNode, Key} from "react";
+import type {AriaTableProps} from "@react-aria/table";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {CheckboxProps} from "@heroui/checkbox";
 
-import {ReactNode, Key, useCallback} from "react";
+import {useCallback} from "react";
 import {useTableState} from "@react-stately/table";
-import {AriaTableProps, useTable as useReactAriaTable} from "@react-aria/table";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useTable as useReactAriaTable} from "@react-aria/table";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {table} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {mergeProps} from "@react-aria/utils";
 import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
 import {useMemo} from "react";
-import {CheckboxProps} from "@heroui/checkbox";
 
 type TableContentPlacement = "inside" | "outside";
 

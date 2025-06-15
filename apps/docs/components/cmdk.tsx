@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 "use client";
 
+import type {FC} from "react";
+import type {ButtonProps} from "@heroui/react";
+
 import {Command} from "cmdk";
-import {useEffect, useState, FC, useMemo, useCallback, useRef} from "react";
+import {useEffect, useState, useMemo, useCallback, useRef} from "react";
 import {matchSorter} from "match-sorter";
-import {Button, ButtonProps, Kbd, Modal, ModalContent} from "@heroui/react";
+import {Button, Kbd, Modal, ModalContent} from "@heroui/react";
 import {CloseIcon} from "@heroui/shared-icons";
 import {tv} from "tailwind-variants";
 import {usePathname, useRouter} from "next/navigation";
@@ -210,7 +213,7 @@ export const Cmdk: FC<{}> = () => {
     [query],
   );
 
-  const items = !isEmpty(results) ? results : recentSearches ?? [];
+  const items = !isEmpty(results) ? results : (recentSearches ?? []);
 
   // Toggle the menu when ⌘K / CTRL K is pressed
   useEffect(() => {

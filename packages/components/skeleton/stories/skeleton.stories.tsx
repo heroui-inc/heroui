@@ -1,10 +1,12 @@
+import type {Meta} from "@storybook/react";
+import type {SkeletonProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {skeleton} from "@heroui/theme";
 import {Card} from "@heroui/card";
 import {Button} from "@heroui/button";
 
-import {Skeleton, SkeletonProps} from "../src";
+import {Skeleton} from "../src";
 
 export default {
   title: "Components/Skeleton",

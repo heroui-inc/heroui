@@ -1,4 +1,4 @@
-import {IconSvgProps} from "@/types";
+import type {IconSvgProps} from "@/types";
 
 export const PaletteIcon = ({size = 24, width, height, ...props}: IconSvgProps) => (
   <svg

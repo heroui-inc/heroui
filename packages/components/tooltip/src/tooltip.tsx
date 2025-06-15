@@ -1,3 +1,5 @@
+import type {UseTooltipProps} from "./use-tooltip";
+
 import {forwardRef} from "@heroui/system";
 import {OverlayContainer} from "@react-aria/overlays";
 import {AnimatePresence, m, LazyMotion} from "framer-motion";
@@ -7,7 +9,7 @@ import {Children, cloneElement, isValidElement} from "react";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {mergeProps} from "@react-aria/utils";
 
-import {UseTooltipProps, useTooltip} from "./use-tooltip";
+import {useTooltip} from "./use-tooltip";
 
 export interface TooltipProps extends Omit<UseTooltipProps, "disableTriggerFocus" | "backdrop"> {}
 
@@ -54,7 +56,7 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
 
       trigger = cloneElement(child, getTriggerProps(child.props, childRef));
     }
-  } catch (error) {
+  } catch {
     trigger = <span />;
     warn("Tooltip must have only one child node. Please, check your code.");
   }

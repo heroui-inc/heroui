@@ -1,9 +1,11 @@
+import type {UseTableProps} from "./use-table";
+
 import {useCallback, useLayoutEffect, useRef, useState} from "react";
 import {Spacer} from "@heroui/spacer";
 import {forwardRef} from "@heroui/system";
 import {useVirtualizer} from "@tanstack/react-virtual";
 
-import {UseTableProps, useTable} from "./use-table";
+import {useTable} from "./use-table";
 import TableRowGroup from "./table-row-group";
 import TableHeaderRow from "./table-header-row";
 import TableColumnHeader from "./table-column-header";

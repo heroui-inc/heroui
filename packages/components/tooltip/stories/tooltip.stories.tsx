@@ -1,9 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {TooltipProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {popover} from "@heroui/theme";
 import {Button} from "@heroui/button";
 
-import {Tooltip, TooltipProps} from "../src";
+import {Tooltip} from "../src";
 
 export default {
   title: "Components/Tooltip",
