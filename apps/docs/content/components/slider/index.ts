@@ -24,6 +24,7 @@ import renderRangeThumb from "./render-range-thumb";
 import renderLabel from "./render-label";
 import renderValue from "./render-value";
 import customStyles from "./custom-styles";
+import customTooltip from "./custom-tooltip";
 
 export const sliderContent = {
   usage,
@@ -37,6 +38,7 @@ export const sliderContent = {
   range,
   fillOffset,
   tooltip,
+  customTooltip,
   outline,
   disableThumbScale,
   valueFormatting,

@@ -117,6 +117,15 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * Overrides default formatted number.
    */
   getValue?: (value: SliderValue) => string;
+
+  /**
+   * A function that returns the content to display as the tooltip label. (in analogy to getValue)
+   * @param value - The value of the slider, array or single number.
+   * @param index - The index of the thumb, if multiple thumbs are used.
+   * In addition to formatting with tooltipValueFormatOptions if number is returned.
+   */
+  getTooltipValue?: (value: SliderValue, index?: number) => string | number;
+
   /**
    * Function to render the label.
    */
@@ -165,6 +174,7 @@ export function useSlider(originalProps: UseSliderProps) {
     onChange,
     onChangeEnd,
     getValue,
+    getTooltipValue,
     tooltipValueFormatOptions = formatOptions,
     tooltipProps: userTooltipProps = {},
     ...otherProps
@@ -366,6 +376,7 @@ export function useSlider(originalProps: UseSliderProps) {
       orientation,
       isVertical,
       tooltipProps,
+      getTooltipValue,
       showTooltip,
       renderThumb,
       formatOptions: tooltipValueFormatOptions,
