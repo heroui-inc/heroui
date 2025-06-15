@@ -92,6 +92,10 @@ interface Props<T> extends HTMLHeroUIProps<"table"> {
    * Props to be passed to the checkboxes.
    */
   checkboxesProps?: CheckboxProps;
+  /**
+   * Custom Icon to be displayed in the table header - overrides the default chevron one
+   */
+  sortIcon?: ReactNode | ((props: any) => ReactNode);
   /** Handler that is called when a user performs an action on the row. */
   onRowAction?: (key: Key) => void;
   /** Handler that is called when a user performs an action on the cell. */
@@ -167,6 +171,7 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
     checkboxesProps,
     topContent,
     bottomContent,
+    sortIcon,
     onRowAction,
     onCellAction,
     ...otherProps
@@ -295,6 +300,7 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
     removeWrapper,
     topContentPlacement,
     bottomContentPlacement,
+    sortIcon,
     getBaseProps,
     getWrapperProps,
     getTableProps,
