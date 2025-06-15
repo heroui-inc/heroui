@@ -1,6 +1,6 @@
 {
   "name": "@heroui/ripple",
-  "version": "2.2.15",
+  "version": "2.2.16",
   "description": "A simple implementation to display a ripple animation when the source component is clicked",
   "keywords": [
     "ripple"
@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-utils": "workspace:*",
     "@heroui/dom-animation": "workspace:*"
   },
   "devDependencies": {

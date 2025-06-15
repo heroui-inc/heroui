@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {TabsProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {button, link, tabs} from "@heroui/theme";
 import Lorem from "react-lorem-component";
 import {Input} from "@heroui/input";
@@ -14,7 +16,7 @@ import {
   AlignTopBoldIcon,
 } from "@heroui/shared-icons";
 
-import {Tabs, Tab, TabsProps} from "../src";
+import {Tabs, Tab} from "../src";
 
 export default {
   title: "Components/Tabs",

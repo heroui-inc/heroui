@@ -1,15 +1,18 @@
+import type {VirtualItem} from "@tanstack/react-virtual";
+import type {Node} from "@react-types/shared";
+import type {ScrollShadowProps} from "@heroui/scroll-shadow";
+import type {VirtualizationProps} from "./listbox";
+import type {UseListboxReturn} from "./use-listbox";
+
 import {useMemo, useRef, useState} from "react";
 import {mergeProps} from "@react-aria/utils";
-import {useVirtualizer, VirtualItem} from "@tanstack/react-virtual";
+import {useVirtualizer} from "@tanstack/react-virtual";
 import {isEmpty} from "@heroui/shared-utils";
-import {Node} from "@react-types/shared";
-import {ScrollShadowProps, useScrollShadow} from "@heroui/scroll-shadow";
+import {useScrollShadow} from "@heroui/scroll-shadow";
 import {filterDOMProps} from "@heroui/react-utils";
 
 import ListboxItem from "./listbox-item";
 import ListboxSection from "./listbox-section";
-import {VirtualizationProps} from "./listbox";
-import {UseListboxReturn} from "./use-listbox";
 
 interface Props extends UseListboxReturn {
   isVirtualized?: boolean;

@@ -1,5 +1,6 @@
+import type {Meta} from "@storybook/react";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {parseToRgba, readableColor} from "color2k";
 
 import {commonColors} from "../src/colors";

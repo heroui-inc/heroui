@@ -1,10 +1,12 @@
+import type {Meta} from "@storybook/react";
+import type {CircularProgressProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {circularProgress} from "@heroui/theme";
 import {Card, CardBody, CardFooter} from "@heroui/card";
 import {Chip} from "@heroui/chip";
 
-import {CircularProgress, CircularProgressProps} from "../src";
+import {CircularProgress} from "../src";
 
 export default {
   title: "Components/CircularProgress",

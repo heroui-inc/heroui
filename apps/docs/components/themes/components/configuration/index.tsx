@@ -1,3 +1,5 @@
+import type {Config, Template, ThemeType} from "../../types";
+
 import {useEffect, useState, useMemo} from "react";
 import {
   Card,
@@ -20,7 +22,6 @@ import {ArrowLeftIcon, ChevronIcon, ChevronUpIcon, CloseIcon} from "@heroui/shar
 import {clsx} from "@heroui/shared-utils";
 
 import {useThemeBuilder} from "../../provider";
-import {Config, Template, ThemeType} from "../../types";
 import {configKey, syncThemesKey, initialConfig} from "../../constants";
 import {SelectTemplate} from "../select-template";
 import {generatePluginConfig} from "../../utils/config";

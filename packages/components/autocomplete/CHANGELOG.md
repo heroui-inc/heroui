@@ -1,5 +1,28 @@
 # @heroui/autocomplete
 
+## 2.3.22
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+- [#5365](https://github.com/heroui-inc/heroui/pull/5365) [`f1abe16`](https://github.com/heroui-inc/heroui/commit/f1abe161b18f165b22b1ab33bf7c6f718a4fb3fe) Thanks [@wingkwong](https://github.com/wingkwong)! - support onClear in Autocomplete (#5297)
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - remove unused dependencies
+
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56)]:
+  - @heroui/aria-utils@2.2.18
+  - @heroui/listbox@2.3.20
+  - @heroui/popover@2.3.21
+  - @heroui/button@2.2.21
+  - @heroui/input@2.4.21
+  - @heroui/form@2.1.20
+  - @heroui/scroll-shadow@2.3.14
+  - @heroui/shared-icons@2.1.9
+  - @heroui/react-utils@2.1.11
+
 ## 2.3.21
 
 ### Patch Changes

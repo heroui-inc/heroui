@@ -1,9 +1,12 @@
+import type {UserEvent} from "@testing-library/user-event";
+import type {RadioGroupProps} from "../src";
+
 import * as React from "react";
 import {act, render} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {Form} from "@heroui/form";
 
-import {RadioGroup, Radio, RadioGroupProps} from "../src";
+import {RadioGroup, Radio} from "../src";
 
 describe("Radio", () => {
   let user: UserEvent;

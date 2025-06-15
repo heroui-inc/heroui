@@ -1,4 +1,4 @@
-import {Route, RouteContext} from "@/libs/docs/page";
+import type {Route, RouteContext} from "@/libs/docs/page";
 
 const getRouteContext = (
   routes: Route[],

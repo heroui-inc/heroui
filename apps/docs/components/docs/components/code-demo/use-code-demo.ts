@@ -1,8 +1,8 @@
-import {FileCode} from "./types";
+import type {FileCode} from "./types";
+import type {SandpackProps} from "@/components/sandpack";
+
 import {scope} from "./react-live-demo";
 import {transformCode, joinCode, getFileName} from "./utils";
-
-import {SandpackProps} from "@/components/sandpack";
 
 export interface UseCodeDemoProps extends SandpackProps {
   code?: string;
