@@ -55,6 +55,9 @@ export interface TextareaProps extends Omit<UseInputProps<HTMLTextAreaElement>, 
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
 }
 
+/** @deprecated – use `TextareaProps` (camel-cased “area”).  Will be removed in the next major. */
+export type TextAreaProps = TextareaProps;
+
 const Textarea = forwardRef<"textarea", TextareaProps>(
   (
     {
