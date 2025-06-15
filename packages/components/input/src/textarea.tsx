@@ -23,7 +23,7 @@ export type TextareaHeightChangeMeta = {
   rowHeight: number;
 };
 
-export interface TextAreaProps extends Omit<UseInputProps<HTMLTextAreaElement>, OmittedInputProps> {
+export interface TextareaProps extends Omit<UseInputProps<HTMLTextAreaElement>, OmittedInputProps> {
   /**
    * Whether the textarea should automatically grow vertically to accomodate content.
    * @default false
@@ -55,7 +55,10 @@ export interface TextAreaProps extends Omit<UseInputProps<HTMLTextAreaElement>, 
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
 }
 
-const Textarea = forwardRef<"textarea", TextAreaProps>(
+/** @deprecated – use `TextareaProps` (camel-cased “area”).  Will be removed in the next major. */
+export type TextAreaProps = TextareaProps;
+
+const Textarea = forwardRef<"textarea", TextareaProps>(
   (
     {
       style,
