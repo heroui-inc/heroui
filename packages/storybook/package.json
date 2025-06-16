@@ -31,7 +31,6 @@
     "start": "pnpm dlx http-server storybook-static"
   },
   "dependencies": {
-    "@heroui/react": "workspace:*",
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "react": "18.3.0",
@@ -39,7 +38,6 @@
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^8.5.0",
-    "@storybook/addon-actions": "^8.5.0",
     "@storybook/addon-docs": "^8.5.0",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-links": "^8.5.0",

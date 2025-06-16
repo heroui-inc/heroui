@@ -1,6 +1,8 @@
 import type {GridNode} from "@react-types/grid";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {ValuesType} from "./use-table";
 
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {clsx, dataAttr} from "@heroui/shared-utils";
 import {useTableColumnHeader} from "@react-aria/table";
@@ -9,8 +11,6 @@ import {ChevronDownIcon} from "@heroui/shared-icons";
 import {useFocusRing} from "@react-aria/focus";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {useHover} from "@react-aria/interactions";
-
-import {ValuesType} from "./use-table";
 
 // @internal
 export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"> {

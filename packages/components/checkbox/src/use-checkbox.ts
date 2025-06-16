@@ -1,9 +1,10 @@
 import type {CheckboxVariantProps, CheckboxSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCheckboxProps} from "@react-types/checkbox";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactNode, Ref} from "react";
 
 import {useProviderContext} from "@heroui/system";
-import {ReactNode, Ref, useCallback, useId} from "react";
+import {useCallback, useId} from "react";
 import {useMemo, useRef} from "react";
 import {useToggleState} from "@react-stately/toggle";
 import {checkbox} from "@heroui/theme";

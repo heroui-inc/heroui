@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {ToastProps} from "../src";
+
 import {useEffect, useState} from "react";
-import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {
@@ -13,7 +15,7 @@ import {
 import {Drawer, DrawerContent} from "@heroui/drawer";
 import {LoadingIcon, AvatarIcon, CloseIcon} from "@heroui/shared-icons";
 
-import {Toast, ToastProps, ToastProvider, addToast, closeToast, closeAll} from "../src";
+import {Toast, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
 export default {
   title: "Components/Toast",

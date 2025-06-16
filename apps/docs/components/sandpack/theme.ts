@@ -1,4 +1,4 @@
-import {SandpackTheme} from "@codesandbox/sandpack-react";
+import type {SandpackTheme} from "@codesandbox/sandpack-react";
 
 export const herouiTheme: SandpackTheme = {
   colors: {

@@ -60,10 +60,6 @@ const dateInput = tv({
           "border-medium",
           "border-default-200",
           "hover:border-default-400",
-          // isInvalid=true
-          "group-data-[invalid=true]:bg-danger-50",
-          "group-data-[invalid=true]:hover:bg-danger-100",
-          "group-data-[invalid=true]:focus-within:hover:bg-danger-50",
         ],
       },
       bordered: {

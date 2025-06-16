@@ -1,4 +1,4 @@
-import {AriaLabelingProps, DOMProps} from "@react-types/shared";
+import type {AriaLabelingProps, DOMProps} from "@react-types/shared";
 
 import {DOMPropNames, DOMEventNames} from "./dom-props";
 

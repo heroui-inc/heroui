@@ -1,4 +1,5 @@
 import type {Metadata} from "next";
+import type {Route} from "@/libs/docs/page";
 
 import {notFound} from "next/navigation";
 import {allDocs} from "contentlayer2/generated";
@@ -7,7 +8,6 @@ import {Link, ToastProvider} from "@heroui/react";
 import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";
 import {DocsPager, DocsToc} from "@/components/docs";
-import {Route} from "@/libs/docs/page";
 import {GITHUB_URL, REPO_NAME} from "@/libs/github/constants";
 import {CONTENT_PATH, TAG} from "@/libs/docs/config";
 import {getHeadings} from "@/libs/docs/utils";

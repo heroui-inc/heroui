@@ -1,10 +1,11 @@
+import type {SandpackFiles, SandpackPredefinedTemplate} from "@codesandbox/sandpack-react";
+import type {HighlightedLines} from "./types";
+
 import {useMemo} from "react";
-import {SandpackFiles, SandpackPredefinedTemplate} from "@codesandbox/sandpack-react";
 import {useTheme} from "next-themes";
 import {useLocalStorage} from "usehooks-ts";
 import {omit} from "lodash";
 
-import {HighlightedLines} from "./types";
 import {getHighlightedLines, getFileName} from "./utils";
 import {
   stylesConfig,

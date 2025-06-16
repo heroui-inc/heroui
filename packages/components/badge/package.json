@@ -1,6 +1,6 @@
 {
   "name": "@heroui/badge",
-  "version": "2.2.13-beta.3",
+  "version": "2.2.13",
   "description": "Badges are used as a small numerical value or status descriptor for UI elements.",
   "keywords": [
     "badge"

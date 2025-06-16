@@ -1,8 +1,10 @@
+import type {UseButtonProps} from "./use-button";
+
 import {Spinner} from "@heroui/spinner";
 import {Ripple} from "@heroui/ripple";
 import {forwardRef} from "@heroui/system";
 
-import {UseButtonProps, useButton} from "./use-button";
+import {useButton} from "./use-button";
 
 export interface ButtonProps extends UseButtonProps {}
 

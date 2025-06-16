@@ -1,6 +1,8 @@
+import type {UseSpacerProps} from "./use-spacer";
+
 import {forwardRef} from "@heroui/system-rsc";
 
-import {UseSpacerProps, useSpacer} from "./use-spacer";
+import {useSpacer} from "./use-spacer";
 
 export interface SpacerProps extends UseSpacerProps {}
 

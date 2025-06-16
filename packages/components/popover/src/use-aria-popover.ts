@@ -1,17 +1,11 @@
-import {RefObject, useEffect} from "react";
-import {
-  AriaPopoverProps,
-  PopoverAria,
-  useOverlayPosition,
-  AriaOverlayProps,
-} from "@react-aria/overlays";
-import {
-  OverlayPlacement,
-  ariaHideOutside,
-  keepVisible,
-  toReactAriaPlacement,
-} from "@heroui/aria-utils";
-import {OverlayTriggerState} from "@react-stately/overlays";
+import type {RefObject} from "react";
+import type {AriaPopoverProps, PopoverAria, AriaOverlayProps} from "@react-aria/overlays";
+import type {OverlayPlacement} from "@heroui/aria-utils";
+import type {OverlayTriggerState} from "@react-stately/overlays";
+
+import {ariaHideOutside, keepVisible, toReactAriaPlacement} from "@heroui/aria-utils";
+import {useOverlayPosition} from "@react-aria/overlays";
+import {useEffect} from "react";
 import {mergeProps} from "@react-aria/utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useAriaOverlay} from "@heroui/use-aria-overlay";

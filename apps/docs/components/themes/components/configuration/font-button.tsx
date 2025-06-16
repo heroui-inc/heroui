@@ -1,7 +1,7 @@
+import type {FontName, FontType} from "../../types";
+
 import {Button} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
-
-import {FontName, FontType} from "../../types";
 
 interface FontButtonProps {
   title: FontName;
