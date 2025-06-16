@@ -6,7 +6,7 @@ import type {AutocompleteProps} from "../src";
 
 import React from "react";
 import {useForm} from "react-hook-form";
-import {useFilter} from "@react-aria/i18n";
+import {useFilter} from "@heroui/react-aria-i18n";
 import {autocomplete, input, button} from "@heroui/theme";
 import {usePokemonList, animalsData, usersData} from "@heroui/stories-utils";
 import {useAsyncList} from "@react-stately/data";

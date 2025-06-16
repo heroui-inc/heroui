@@ -4,7 +4,7 @@ import type {UsePopoverProps} from "./use-popover";
 import {Children} from "react";
 import {forwardRef} from "@heroui/system";
 import {Overlay} from "@react-aria/overlays";
-import {AnimatePresence} from "framer-motion";
+import {AnimatePresence} from "@heroui/motion";
 
 import {usePopover} from "./use-popover";
 import {PopoverProvider} from "./popover-context";

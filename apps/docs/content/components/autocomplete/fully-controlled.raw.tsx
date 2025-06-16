@@ -2,7 +2,7 @@ import type {MenuTriggerAction} from "@heroui/react";
 
 import React from "react";
 import {Autocomplete, AutocompleteItem} from "@heroui/react";
-import {useFilter} from "@react-aria/i18n";
+import {useFilter} from "@heroui/react-aria-i18n";
 
 export type FieldState = {
   selectedKey: React.Key | null;

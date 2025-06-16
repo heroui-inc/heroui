@@ -5,7 +5,7 @@ import type {PropGetter} from "@heroui/system";
 import {drawer} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
 import {useCallback, useMemo} from "react";
-import {TRANSITION_EASINGS} from "@heroui/framer-utils";
+import {TRANSITION_EASINGS} from "@heroui/motion";
 import {clsx, isEmpty} from "@heroui/shared-utils";
 
 interface Props extends Omit<ModalProps, "placement" | "scrollBehavior" | "children"> {

@@ -1,4 +1,4 @@
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/internationalized-date";
 import type {ForwardedRef, ReactElement} from "react";
 import type {UseDateRangePickerProps} from "./use-date-range-picker";
 
@@ -9,7 +9,7 @@ import {Button} from "@heroui/button";
 import {TimeInput, DateInputGroup} from "@heroui/date-input";
 import {FreeSoloPopover} from "@heroui/popover";
 import {RangeCalendar} from "@heroui/calendar";
-import {AnimatePresence} from "framer-motion";
+import {AnimatePresence} from "@heroui/motion";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
 
 import DateRangePickerField from "./date-range-picker-field";

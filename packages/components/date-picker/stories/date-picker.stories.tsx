@@ -1,6 +1,6 @@
 import type {MappedDateValue} from "@react-types/datepicker";
 import type {Meta} from "@storybook/react";
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/internationalized-date";
 import type {RadioProps} from "@heroui/radio";
 import type {ValidationResult} from "@react-types/shared";
 import type {DatePickerProps} from "../src";
@@ -17,8 +17,8 @@ import {
   startOfMonth,
   startOfWeek,
   today,
-} from "@internationalized/date";
-import {I18nProvider, useDateFormatter, useLocale} from "@react-aria/i18n";
+} from "@heroui/internationalized-date";
+import {I18nProvider, useDateFormatter, useLocale} from "@heroui/react-aria-i18n";
 import {Button, ButtonGroup} from "@heroui/button";
 import {Radio, RadioGroup} from "@heroui/radio";
 import {cn} from "@heroui/theme";

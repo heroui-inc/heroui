@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import type {TimeValue} from "@react-types/datepicker";
 import type {TimeInputProps} from "../src";
+import type {TimeValue} from "@react-types/datepicker";
 
 import * as React from "react";
 import {fireEvent, render} from "@testing-library/react";
-import {Time, ZonedDateTime} from "@internationalized/date";
+import {Time, ZonedDateTime} from "@heroui/internationalized-date";
 import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
 

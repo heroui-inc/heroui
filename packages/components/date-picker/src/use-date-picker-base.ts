@@ -1,4 +1,4 @@
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/internationalized-date";
 import type {AriaDatePickerBaseProps} from "@react-types/datepicker";
 import type {DateInputProps, TimeInputProps} from "@heroui/date-input";
 import type {ButtonProps} from "@heroui/button";
@@ -15,7 +15,7 @@ import {useCallback} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
 import {useDOMRef} from "@heroui/react-utils";
-import {useLocalizedStringFormatter} from "@react-aria/i18n";
+import {useLocalizedStringFormatter} from "@heroui/react-aria-i18n";
 import {useControlledState} from "@react-stately/utils";
 
 import intlMessages from "../intl/messages";

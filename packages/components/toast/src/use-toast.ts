@@ -4,7 +4,7 @@ import type {ReactRef} from "@heroui/react-utils";
 import type {ReactNode} from "react";
 import type {AriaToastProps} from "@react-aria/toast";
 import type {QueuedToast, ToastState} from "@react-stately/toast";
-import type {MotionProps} from "framer-motion";
+import type {MotionProps} from "@heroui/motion";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";

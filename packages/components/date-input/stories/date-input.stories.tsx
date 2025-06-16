@@ -1,5 +1,5 @@
 import type {Meta} from "@storybook/react";
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/internationalized-date";
 import type {ValidationResult} from "@react-types/shared";
 import type {DateInputProps} from "../src";
 
@@ -13,9 +13,9 @@ import {
   parseDate,
   parseZonedDateTime,
   today,
-} from "@internationalized/date";
+} from "@heroui/internationalized-date";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
-import {useDateFormatter, I18nProvider} from "@react-aria/i18n";
+import {useDateFormatter, I18nProvider} from "@heroui/react-aria-i18n";
 
 import {DateInput} from "../src";
 

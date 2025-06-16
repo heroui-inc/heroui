@@ -6,7 +6,7 @@ import type {DateInputGroupProps} from "./date-input-group";
 import type {PropGetter} from "@heroui/system";
 import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {useLocale} from "@react-aria/i18n";
+import {useLocale} from "@heroui/react-aria-i18n";
 import {mergeProps} from "@react-aria/utils";
 import {useLabelPlacement, useProviderContext} from "@heroui/system";
 import {mapPropsVariants} from "@heroui/system";

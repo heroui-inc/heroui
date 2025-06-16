@@ -1,5 +1,5 @@
 import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@heroui/theme";
-import type {HTMLMotionProps} from "framer-motion";
+import type {HTMLMotionProps} from "@heroui/motion";
 import type {AriaModalOverlayProps} from "@react-aria/overlays";
 import type {ReactNode} from "react";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";

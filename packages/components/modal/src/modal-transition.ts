@@ -1,6 +1,8 @@
-import {TRANSITION_EASINGS} from "@heroui/framer-utils";
+import type {Variants} from "@heroui/motion";
 
-export const scaleInOut = {
+import {TRANSITION_EASINGS} from "@heroui/motion";
+
+export const scaleInOut: Variants = {
   enter: {
     scale: "var(--scale-enter)",
     y: "var(--slide-enter)",

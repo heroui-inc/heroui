@@ -2,7 +2,7 @@
 
 import type {FC} from "react";
 
-import {useInView} from "framer-motion";
+import {useInView} from "@heroui/motion";
 import {useRef, useEffect, useState, useCallback} from "react";
 import {Button, cn, Spinner, Tooltip} from "@heroui/react";
 

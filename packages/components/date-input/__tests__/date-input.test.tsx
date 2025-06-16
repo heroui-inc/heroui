@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import type {DateInputProps} from "../src";
-import type {DateValue} from "@internationalized/date";
+import type {DateValue} from "@heroui/internationalized-date";
 
 import * as React from "react";
 import {fireEvent, render} from "@testing-library/react";
-import {CalendarDate, CalendarDateTime, ZonedDateTime} from "@internationalized/date";
+import {CalendarDate, CalendarDateTime, ZonedDateTime} from "@heroui/internationalized-date";
 import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
 

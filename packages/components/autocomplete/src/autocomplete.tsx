@@ -8,7 +8,7 @@ import {ChevronDownIcon, CloseIcon} from "@heroui/shared-icons";
 import {Listbox} from "@heroui/listbox";
 import {Button} from "@heroui/button";
 import {Input} from "@heroui/input";
-import {AnimatePresence} from "framer-motion";
+import {AnimatePresence} from "@heroui/motion";
 
 import {useAutocomplete} from "./use-autocomplete";
 
