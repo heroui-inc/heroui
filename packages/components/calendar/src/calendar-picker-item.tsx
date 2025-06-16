@@ -1,6 +1,6 @@
 import type {AriaButtonProps} from "@heroui/use-aria-button";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {HTMLHeroUIProps} from "@heroui/system";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useHover} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";

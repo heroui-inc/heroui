@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {Meta} from "@storybook/react";
+import type {DrawerProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {drawer} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {Input} from "@heroui/input";
@@ -12,7 +14,7 @@ import {Avatar, AvatarGroup} from "@heroui/avatar";
 import {MailFilledIcon, LockFilledIcon} from "@heroui/shared-icons";
 import {useDisclosure} from "@heroui/use-disclosure";
 
-import {Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, DrawerProps} from "../src";
+import {Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter} from "../src";
 
 export default {
   title: "Components/Drawer",

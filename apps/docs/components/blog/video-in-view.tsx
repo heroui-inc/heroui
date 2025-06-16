@@ -1,8 +1,9 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 "use client";
 
+import type {FC} from "react";
+
 import {useInView} from "framer-motion";
-import {useRef, FC, useEffect, useState, useCallback} from "react";
+import {useRef, useEffect, useState, useCallback} from "react";
 import {Button, cn, Spinner, Tooltip} from "@heroui/react";
 
 import {PlayBoldIcon, PauseBoldIcon} from "@/components/icons";

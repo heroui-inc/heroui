@@ -1,7 +1,9 @@
+import type {UseRadioGroupProps} from "./use-radio-group";
+
 import {forwardRef} from "@heroui/system";
 
 import {RadioGroupProvider} from "./radio-group-context";
-import {UseRadioGroupProps, useRadioGroup} from "./use-radio-group";
+import {useRadioGroup} from "./use-radio-group";
 
 export interface RadioGroupProps extends Omit<UseRadioGroupProps, "defaultChecked"> {}
 

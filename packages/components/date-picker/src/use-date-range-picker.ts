@@ -14,7 +14,7 @@ import type {DateRangePickerSlots, SlotsToClasses} from "@heroui/theme";
 import type {DateInputProps} from "@heroui/date-input";
 
 import {useLabelPlacement, useProviderContext} from "@heroui/system";
-import {useMemo, useRef} from "react";
+import {useMemo, useRef, useEffect} from "react";
 import {useDateRangePickerState} from "@react-stately/datepicker";
 import {useDateRangePicker as useAriaDateRangePicker} from "@react-aria/datepicker";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
@@ -124,6 +124,13 @@ export function useDateRangePicker<T extends DateValue>({
     errorMessageProps,
     isInvalid: isAriaInvalid,
   } = useAriaDateRangePicker({...originalProps, validationBehavior}, state, domRef);
+
+  // Force revalidation when value changes programmatically
+  useEffect(() => {
+    // Trigger revalidation to sync React Aria's internal validation state
+    // with the new programmatically set value
+    state.commitValidation();
+  }, [state.value, state.commitValidation]);
 
   const isInvalid = isInvalidProp || isAriaInvalid;
 

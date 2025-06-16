@@ -1,6 +1,8 @@
+import type {UsePaginationItemProps} from "./use-pagination-item";
+
 import {forwardRef} from "@heroui/system";
 
-import {usePaginationItem, UsePaginationItemProps} from "./use-pagination-item";
+import {usePaginationItem} from "./use-pagination-item";
 
 export interface PaginationItemProps extends UsePaginationItemProps {}
 

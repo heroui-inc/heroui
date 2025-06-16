@@ -3,16 +3,20 @@ import type {AriaTooltipProps} from "@react-types/tooltip";
 import type {OverlayTriggerProps} from "@react-types/overlays";
 import type {HTMLMotionProps} from "framer-motion";
 import type {OverlayOptions} from "@heroui/aria-utils";
+import type {ReactNode, Ref} from "react";
+import type {AriaOverlayProps} from "@react-aria/overlays";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {ReactNode, Ref, useId, useImperativeHandle} from "react";
+import {useId, useImperativeHandle} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
 import {mergeProps} from "@react-aria/utils";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
-import {useOverlayPosition, useOverlay, AriaOverlayProps} from "@react-aria/overlays";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useOverlayPosition, useOverlay} from "@react-aria/overlays";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {popover} from "@heroui/theme";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, mergeRefs} from "@heroui/react-utils";
+import {mergeRefs} from "@heroui/react-utils";
 import {createDOMRef} from "@heroui/react-utils";
 import {useMemo, useRef, useCallback} from "react";
 import {toReactAriaPlacement, getArrowPlacement} from "@heroui/aria-utils";
@@ -52,7 +56,7 @@ interface Props extends Omit<HTMLHeroUIProps, "content"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"div">;
+  motionProps?: Omit<HTMLMotionProps<"div">, "ref">;
   /**
    * The container element in which the overlay portal will be placed.
    * @default document.body

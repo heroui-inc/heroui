@@ -1,6 +1,6 @@
-import {colors} from "@heroui/theme";
+import type {ConfigColors, Config, ConfigLayout} from "./types";
 
-import {ConfigColors, Config, ConfigLayout} from "./types";
+import {colors} from "@heroui/theme";
 
 // Colors
 export const defaultDarkColorWeight = 20;

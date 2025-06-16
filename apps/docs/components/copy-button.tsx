@@ -1,4 +1,5 @@
-import {ButtonProps} from "@heroui/react";
+import type {ButtonProps} from "@heroui/react";
+
 import {useClipboard} from "@heroui/use-clipboard";
 import {memo} from "react";
 

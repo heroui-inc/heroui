@@ -1,9 +1,11 @@
+import type {CheckboxProps} from "@heroui/react";
+import type {HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {CheckboxProps, Checkbox as HeroUICheckbox} from "@heroui/react";
+import {Checkbox as HeroUICheckbox} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {HeroUIScaling} from "../../types";
 
 type Color = CheckboxProps["color"];
 type Radius = CheckboxProps["radius"];

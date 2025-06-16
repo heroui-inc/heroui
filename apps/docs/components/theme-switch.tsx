@@ -1,8 +1,10 @@
 "use client";
 
-import {FC, ChangeEvent} from "react";
+import type {FC, ChangeEvent} from "react";
+import type {SwitchProps} from "@heroui/react";
+
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {SwitchProps, useSwitch} from "@heroui/react";
+import {useSwitch} from "@heroui/react";
 import {useTheme} from "next-themes";
 import {clsx} from "@heroui/shared-utils";
 import {useIsSSR} from "@react-aria/ssr";

@@ -1,9 +1,11 @@
-import {InputProps, Input} from "@heroui/react";
+import type {InputProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
+import {Input} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 
 type Color = InputProps["color"];
 type Radius = InputProps["radius"];

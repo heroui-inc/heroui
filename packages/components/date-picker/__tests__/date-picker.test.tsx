@@ -1,4 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {DatePickerProps} from "../src";
+
 import * as React from "react";
 import {render, act, fireEvent, waitFor, within} from "@testing-library/react";
 import {
@@ -13,7 +15,7 @@ import {CalendarDate, CalendarDateTime} from "@internationalized/date";
 import {HeroUIProvider} from "@heroui/system";
 import {Form} from "@heroui/form";
 
-import {DatePicker as DatePickerBase, DatePickerProps} from "../src";
+import {DatePicker as DatePickerBase} from "../src";
 
 /**
  * Custom date-picker to disable animations and avoid issues with react-motion and jest

@@ -1,4 +1,4 @@
-import {IconSvgProps} from "./types";
+import type {IconSvgProps} from "./types";
 
 export const ChevronLeftIcon = (props: IconSvgProps) => (
   <svg

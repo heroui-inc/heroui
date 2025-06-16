@@ -1,7 +1,8 @@
-import {HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {TableBodyProps as TableBodyBaseProps} from "@react-types/table";
+import type {ReactNode} from "react";
+
 import {TableBody as TableBodyBase} from "@react-stately/table";
-import {TableBodyProps as TableBodyBaseProps} from "@react-types/table";
-import {ReactNode} from "react";
 
 export interface TableBodyProps<T>
   extends TableBodyBaseProps<T>,

@@ -1,4 +1,5 @@
-import {SlotProps} from "input-otp";
+import type {SlotProps} from "input-otp";
+
 import {useMemo} from "react";
 import {clsx, dataAttr} from "@heroui/shared-utils";
 import {cn} from "@heroui/theme";

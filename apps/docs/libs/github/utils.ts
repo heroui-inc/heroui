@@ -7,7 +7,7 @@ export interface GithubError extends Error {
 function getErrorText(res: Response) {
   try {
     return res.text();
-  } catch (err) {
+  } catch {
     return res.statusText;
   }
 }

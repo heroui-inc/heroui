@@ -1,9 +1,10 @@
 "use client";
 
+import type {ThemeProviderProps} from "next-themes";
+
 import * as React from "react";
 import {HeroUIProvider} from "@heroui/react";
 import {ThemeProvider as NextThemesProvider} from "next-themes";
-import {ThemeProviderProps} from "next-themes";
 import {useRouter} from "next/navigation";
 import {useEffect} from "react";
 import posthog from "posthog-js";

@@ -1,12 +1,7 @@
-import {DOMRefValue, FocusableRef, FocusableRefValue} from "@react-types/shared";
-import {
-  Ref,
-  RefObject,
-  MutableRefObject,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import type {DOMRefValue, FocusableRef, FocusableRefValue} from "@react-types/shared";
+import type {Ref, RefObject, MutableRefObject} from "react";
+
+import {useImperativeHandle, useLayoutEffect, useRef} from "react";
 
 export function canUseDOM(): boolean {
   return !!(typeof window !== "undefined" && window.document && window.document.createElement);

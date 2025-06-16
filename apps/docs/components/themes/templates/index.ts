@@ -1,4 +1,4 @@
-import {Template} from "../types";
+import type {Template} from "../types";
 
 import {coffee} from "./coffee";
 import {emerald} from "./emerald";

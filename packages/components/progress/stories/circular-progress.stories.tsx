@@ -1,10 +1,12 @@
+import type {Meta} from "@storybook/react";
+import type {CircularProgressProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {circularProgress} from "@heroui/theme";
 import {Card, CardBody, CardFooter} from "@heroui/card";
 import {Chip} from "@heroui/chip";
 
-import {CircularProgress, CircularProgressProps} from "../src";
+import {CircularProgress} from "../src";
 
 export default {
   title: "Components/CircularProgress",
@@ -106,7 +108,6 @@ export const WithValueFormatting = {
   args: {
     ...defaultProps,
     label: "Loading...",
-    size: "xl",
     value: 70,
     color: "warning",
     showValueLabel: true,
@@ -119,7 +120,6 @@ export const CustomClassnames = {
 
   args: {
     ...defaultProps,
-    size: "xl",
     strokeWidth: 4,
     value: 70,
     showValueLabel: true,

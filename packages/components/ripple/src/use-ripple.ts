@@ -1,6 +1,8 @@
+import type React from "react";
+import type {PressEvent} from "@react-types/shared";
+
 import {getUniqueID} from "@heroui/shared-utils";
-import React, {useCallback, useState} from "react";
-import {PressEvent} from "@react-types/shared";
+import {useCallback, useState} from "react";
 
 export type RippleType = {
   key: React.Key;

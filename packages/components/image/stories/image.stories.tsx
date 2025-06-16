@@ -1,8 +1,10 @@
+import type {Meta} from "@storybook/react";
+import type {ImageProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {image} from "@heroui/theme";
 
-import {Image, ImageProps} from "../src";
+import {Image} from "../src";
 
 export default {
   title: "Components/Image",

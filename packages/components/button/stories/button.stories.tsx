@@ -1,9 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {ButtonProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {button} from "@heroui/theme";
 import {Camera, HeadphonesIcon, Notification} from "@heroui/shared-icons";
 
-import {Button, ButtonProps} from "../src";
+import {Button} from "../src";
 
 export default {
   title: "Components/Button",

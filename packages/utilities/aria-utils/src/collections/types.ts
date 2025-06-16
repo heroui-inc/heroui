@@ -1,6 +1,6 @@
-import {CollectionBase} from "@react-types/shared";
-import {ReactElement, ReactNode} from "react";
-import {PartialNode} from "@react-stately/collections";
+import type {CollectionBase} from "@react-types/shared";
+import type {ReactElement, ReactNode} from "react";
+import type {PartialNode} from "@react-stately/collections";
 
 export interface CollectionProps<T> extends Omit<CollectionBase<T>, "children" | "items"> {
   items?: T[];

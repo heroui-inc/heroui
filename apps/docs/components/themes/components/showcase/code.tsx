@@ -1,8 +1,10 @@
-import {CodeProps, Code as HeroUICode} from "@heroui/react";
+import type {CodeProps} from "@heroui/react";
+import type {HeroUIScaling} from "../../types";
+
+import {Code as HeroUICode} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {HeroUIScaling} from "../../types";
 
 type Color = CodeProps["color"];
 type Radius = CodeProps["radius"];

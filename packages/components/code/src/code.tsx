@@ -1,6 +1,8 @@
+import type {UseCodeProps} from "./use-code";
+
 import {forwardRef} from "@heroui/system-rsc";
 
-import {useCode, UseCodeProps} from "./use-code";
+import {useCode} from "./use-code";
 
 export interface CodeProps extends UseCodeProps {}
 

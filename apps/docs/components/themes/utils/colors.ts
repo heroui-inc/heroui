@@ -1,8 +1,9 @@
+import type {ColorShades, ThemeType, ThemeColor, ColorPickerType} from "../types";
+
 import {swapColorValues} from "@heroui/theme/src/utils/object";
 import {readableColor} from "color2k";
 import Values from "values.js";
 
-import {ColorShades, ThemeType, ThemeColor, ColorPickerType} from "../types";
 import {colorWeight, defaultDarkColorWeight, defaultLightColorWeight} from "../constants";
 
 /**

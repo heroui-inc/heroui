@@ -1,8 +1,9 @@
-/* eslint-disable react/display-name */
-import React from "react";
-import {Meta} from "@storybook/react";
+import type {Meta} from "@storybook/react";
+import type {AvatarGroupProps} from "../src";
 
-import {Avatar, AvatarGroup, AvatarGroupProps} from "../src";
+import React from "react";
+
+import {Avatar, AvatarGroup} from "../src";
 
 export default {
   title: "Components/AvatarGroup",

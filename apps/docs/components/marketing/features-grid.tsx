@@ -1,9 +1,12 @@
 "use client";
 
-import React, {ReactNode} from "react";
+import type {ReactNode} from "react";
+import type {LinkProps, SlotsToClasses} from "@heroui/react";
+
+import React from "react";
 import {usePostHog} from "posthog-js/react";
 import {tv} from "tailwind-variants";
-import {Card, CardHeader, CardBody, LinkProps, SlotsToClasses} from "@heroui/react";
+import {Card, CardHeader, CardBody} from "@heroui/react";
 import {useRouter} from "next/navigation";
 import {LinkIcon} from "@heroui/shared-icons";
 

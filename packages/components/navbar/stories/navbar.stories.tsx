@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {NavbarProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {navbar} from "@heroui/theme";
 import {Link} from "@heroui/link";
 import {Button} from "@heroui/button";
@@ -26,7 +28,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  NavbarProps,
 } from "../src";
 
 export default {

@@ -1,5 +1,6 @@
+import type {Meta} from "@storybook/react";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {Activity, Camera} from "@heroui/shared-icons";
 import {avatar} from "@heroui/theme";
 

@@ -1,10 +1,12 @@
+import type {ChipProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {ChipProps, Chip as HeroUIChip} from "@heroui/react";
+import {Chip as HeroUIChip} from "@heroui/react";
 import {clsx} from "@heroui/shared-utils";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 
 type Color = ChipProps["color"];
 type Radius = ChipProps["radius"];

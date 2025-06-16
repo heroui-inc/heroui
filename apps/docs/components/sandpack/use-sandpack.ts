@@ -1,9 +1,10 @@
+import type {SandpackFiles, SandpackPredefinedTemplate} from "@codesandbox/sandpack-react";
+import type {HighlightedLines} from "./types";
+
 import {useMemo} from "react";
-import {SandpackFiles, SandpackPredefinedTemplate} from "@codesandbox/sandpack-react";
 import {useTheme} from "next-themes";
 import {useLocalStorage} from "usehooks-ts";
 
-import {HighlightedLines} from "./types";
 import {getHighlightedLines, getFileName} from "./utils";
 import {
   stylesConfig,
@@ -77,7 +78,7 @@ export const useSandpack = ({
   }, {});
 
   let dependencies = {
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "@heroui/react": "latest",
   };
 
@@ -150,7 +151,7 @@ export const useSandpack = ({
 
   // const dependencies = useMemo(() => {
   //   let deps = {
-  //     "framer-motion": "11.9.0",
+  //     "framer-motion": "11.18.2",
   //   };
 
   //   if (hasComponents) {

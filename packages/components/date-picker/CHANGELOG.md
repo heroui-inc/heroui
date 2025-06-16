@@ -1,5 +1,44 @@
 # @heroui/date-picker
 
+## 2.3.21
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - remove unused dependencies
+
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f), [`ff4b1b2`](https://github.com/heroui-inc/heroui/commit/ff4b1b23936412fdb1c762434d673f7b6935ac51), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56)]:
+  - @heroui/date-input@2.3.20
+  - @heroui/aria-utils@2.2.18
+  - @heroui/calendar@2.2.21
+  - @heroui/popover@2.3.21
+  - @heroui/button@2.2.21
+  - @heroui/form@2.1.20
+  - @heroui/shared-icons@2.1.9
+  - @heroui/react-utils@2.1.11
+
+## 2.3.20
+
+### Patch Changes
+
+- [#5317](https://github.com/heroui-inc/heroui/pull/5317) [`d40c744`](https://github.com/heroui-inc/heroui/commit/d40c744f46f14c2212bd4c9ba116bb866c368426) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - fix date-range-picker error state (#5309)
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
+
+- Updated dependencies [[`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0), [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/shared-icons@2.1.8
+  - @heroui/date-input@2.3.19
+  - @heroui/aria-utils@2.2.17
+  - @heroui/calendar@2.2.20
+  - @heroui/popover@2.3.20
+  - @heroui/button@2.2.20
+  - @heroui/form@2.1.19
+
 ## 2.3.19
 
 ### Patch Changes

@@ -75,8 +75,8 @@ export async function drag(
         y: from.y + delta.y,
       }
     : inTo
-    ? getCoords(inTo)
-    : null;
+      ? getCoords(inTo)
+      : null;
 
   if (to === null) throw new Error("You must provide either `delta` or `to`");
 

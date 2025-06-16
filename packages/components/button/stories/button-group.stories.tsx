@@ -1,8 +1,10 @@
+import type {Meta} from "@storybook/react";
+import type {ButtonGroupProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {button, buttonGroup} from "@heroui/theme";
 
-import {Button, ButtonGroup, ButtonGroupProps} from "../src";
+import {Button, ButtonGroup} from "../src";
 
 export default {
   title: "Components/ButtonGroup",

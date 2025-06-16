@@ -1,5 +1,6 @@
-/* eslint-disable jsx-a11y/no-onchange */
 "use client";
+
+import type {Selection, ChipProps, SortDescriptor} from "@heroui/react";
 
 import {
   Table,
@@ -14,12 +15,9 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Selection,
   Chip,
   User,
-  ChipProps,
   Pagination,
-  SortDescriptor,
 } from "@heroui/react";
 import {ChevronDownIcon, SearchIcon} from "@heroui/shared-icons";
 import {useCallback, useMemo, useState} from "react";

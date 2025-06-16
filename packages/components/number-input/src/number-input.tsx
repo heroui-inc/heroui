@@ -1,11 +1,15 @@
+import type {UseNumberInputProps} from "./use-number-input";
+
 import {CloseFilledIcon} from "@heroui/shared-icons";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
-import {UseNumberInputProps, useNumberInput} from "./use-number-input";
+import {useNumberInput} from "./use-number-input";
 import NumberInputStepper from "./number-input-stepper";
 
-export interface NumberInputProps extends UseNumberInputProps {}
+export interface NumberInputProps extends Omit<UseNumberInputProps, "type"> {
+  type?: "number";
+}
 
 const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
   const {

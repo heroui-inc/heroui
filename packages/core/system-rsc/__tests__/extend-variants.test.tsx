@@ -1,7 +1,9 @@
+import type {ExtendVariantProps} from "../src/extend-variants";
+
 import React from "react";
 import {render, screen} from "@testing-library/react";
 
-import {extendVariants, ExtendVariantProps} from "../src/extend-variants";
+import {extendVariants} from "../src/extend-variants";
 import {Button} from "../test-utils/extend-components";
 import {Card} from "../test-utils/slots-component";
 

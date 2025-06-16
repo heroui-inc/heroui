@@ -101,7 +101,7 @@ async function getSearchMeta(saveMode: "algolia" | "local" = "local") {
       try {
         result = await getMDXMeta(file);
         json.push(...result);
-      } catch (error) {}
+      } catch {}
     }
 
     if (saveMode === "local") {

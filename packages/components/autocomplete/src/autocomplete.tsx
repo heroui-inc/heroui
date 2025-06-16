@@ -1,3 +1,6 @@
+import type {ForwardedRef, ReactElement} from "react";
+import type {UseAutocompleteProps} from "./use-autocomplete";
+
 import {forwardRef} from "@heroui/system";
 import {FreeSoloPopover} from "@heroui/popover";
 import {ScrollShadow} from "@heroui/scroll-shadow";
@@ -5,10 +8,9 @@ import {ChevronDownIcon, CloseIcon} from "@heroui/shared-icons";
 import {Listbox} from "@heroui/listbox";
 import {Button} from "@heroui/button";
 import {Input} from "@heroui/input";
-import {ForwardedRef, ReactElement} from "react";
 import {AnimatePresence} from "framer-motion";
 
-import {UseAutocompleteProps, useAutocomplete} from "./use-autocomplete";
+import {useAutocomplete} from "./use-autocomplete";
 
 interface Props<T> extends UseAutocompleteProps<T> {}
 

@@ -1,4 +1,4 @@
-import {LayoutTheme} from "./types";
+import type {LayoutTheme} from "./types";
 
 export const defaultLayout: LayoutTheme = {
   dividerWeight: "1px",

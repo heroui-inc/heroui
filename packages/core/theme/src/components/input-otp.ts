@@ -409,12 +409,7 @@ const inputOtp = tv({
       variant: "faded",
       isInvalid: true,
       class: {
-        segment: [
-          "bg-danger-50",
-          "text-danger",
-          "border-danger-200",
-          "data-[active=true]:border-danger-400",
-        ],
+        segment: ["text-danger"],
         caret: ["bg-danger"],
       },
     },

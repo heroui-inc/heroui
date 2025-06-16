@@ -1,6 +1,6 @@
-import {clsx} from "@heroui/shared-utils";
+import type {ConfigColors} from "../../types";
 
-import {ConfigColors} from "../../types";
+import {clsx} from "@heroui/shared-utils";
 
 interface SwatchProps {
   colors: {background: string} & ConfigColors["baseColor"];

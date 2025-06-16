@@ -1,6 +1,9 @@
-import {useMemo, ReactNode} from "react";
+import type {ReactNode} from "react";
+import type {UseListboxItemProps} from "./use-listbox-item";
 
-import {UseListboxItemProps, useListboxItem} from "./use-listbox-item";
+import {useMemo} from "react";
+
+import {useListboxItem} from "./use-listbox-item";
 import {ListboxSelectedIcon} from "./listbox-selected-icon";
 
 export interface ListboxItemProps<T extends object = object>

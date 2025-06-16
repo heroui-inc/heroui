@@ -1,7 +1,9 @@
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {act, render, fireEvent} from "@testing-library/react";
 import {Button} from "@heroui/button";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {keyCodes, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
 import {User} from "@heroui/user";
 import {Image} from "@heroui/image";
