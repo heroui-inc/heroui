@@ -1,23 +1,17 @@
 # @heroui/aria-utils
 
-## 2.2.18-beta.0
+## 2.2.18
 
 ### Patch Changes
 
-- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@macci001](https://github.com/macci001)! - bump RA versions
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
 
-- [#5348](https://github.com/heroui-inc/heroui/pull/5348) [`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251) Thanks [@github-actions](https://github.com/apps/github-actions)! - sync with 2.7.9 changes
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
 
-- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - remove unused dependencies
 
-- [#5100](https://github.com/heroui-inc/heroui/pull/5100) [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: overlay & interactOutside
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
-
-- Updated dependencies [[`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f), [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963), [`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
-  - @heroui/system@2.4.17-beta.0
-  - @heroui/react-rsc-utils@2.1.8-beta.1
-  - @heroui/shared-utils@2.1.10-beta.1
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56)]:
+  - @heroui/system@2.4.17
 
 ## 2.2.17
 

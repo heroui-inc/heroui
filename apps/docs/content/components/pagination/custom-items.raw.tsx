@@ -1,5 +1,8 @@
-import React, {SVGProps} from "react";
-import {cn, Pagination, PaginationItemType, PaginationItemRenderProps} from "@heroui/react";
+import type {SVGProps} from "react";
+import type {PaginationItemRenderProps} from "@heroui/react";
+
+import React from "react";
+import {cn, Pagination, PaginationItemType} from "@heroui/react";
 
 type IconSvgProps = SVGProps<SVGSVGElement>;
 

@@ -1,35 +1,26 @@
 import type {SelectSlots, SelectVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {HiddenSelectProps} from "./hidden-select";
+import type {DOMAttributes, HTMLHeroUIProps, PropGetter, SharedSelection} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {Key, ReactNode} from "react";
+import type {ListboxProps} from "@heroui/listbox";
+import type {PopoverProps} from "@heroui/popover";
+import type {ScrollShadowProps} from "@heroui/scroll-shadow";
+import type {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
+import type {SpinnerProps} from "@heroui/spinner";
+import type {CollectionChildren, ValidationError} from "@react-types/shared";
 
-import {
-  DOMAttributes,
-  HTMLHeroUIProps,
-  mapPropsVariants,
-  PropGetter,
-  SharedSelection,
-  useLabelPlacement,
-  useProviderContext,
-} from "@heroui/system";
+import {mapPropsVariants, useLabelPlacement, useProviderContext} from "@heroui/system";
 import {select} from "@heroui/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {useMemo, useCallback, useRef, Key, ReactNode, useEffect} from "react";
-import {ListboxProps} from "@heroui/listbox";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {useMemo, useCallback, useRef, useEffect} from "react";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
 import {useHover} from "@react-aria/interactions";
-import {PopoverProps} from "@heroui/popover";
-import {ScrollShadowProps} from "@heroui/scroll-shadow";
-import {
-  MultiSelectProps,
-  MultiSelectState,
-  useMultiSelect,
-  useMultiSelectState,
-} from "@heroui/use-aria-multiselect";
-import {SpinnerProps} from "@heroui/spinner";
+import {useMultiSelect, useMultiSelectState} from "@heroui/use-aria-multiselect";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {CollectionChildren, ValidationError} from "@react-types/shared";
 import {FormContext, useSlottedContext} from "@heroui/form";
 import {usePreventScroll} from "@react-aria/overlays";
 

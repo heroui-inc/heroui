@@ -1,14 +1,12 @@
 # @heroui/use-intersection-observer
 
-## 2.2.13-beta.0
+## 2.2.13
 
 ### Patch Changes
 
-- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`3f6dc33`](https://github.com/heroui-inc/heroui/commit/3f6dc33ca08fe4ad9add70394741fbb96f38d963) Thanks [@macci001](https://github.com/macci001)! - bump RA versions
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
 
-- [#5348](https://github.com/heroui-inc/heroui/pull/5348) [`706e7ec`](https://github.com/heroui-inc/heroui/commit/706e7ecf59b0b8906ac88e05ef8a15a4efc59251) Thanks [@github-actions](https://github.com/apps/github-actions)! - sync with 2.7.9 changes
-
-- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - remove unused dependencies
 
 ## 2.2.12
 

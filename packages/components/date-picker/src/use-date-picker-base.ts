@@ -6,11 +6,13 @@ import type {CalendarProps} from "@heroui/calendar";
 import type {PopoverProps} from "@heroui/popover";
 import type {ReactNode} from "react";
 import type {ValueBase} from "@react-types/shared";
+import type {DatePickerVariantProps} from "@heroui/theme";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
 import {dataAttr} from "@heroui/shared-utils";
-import {dateInput, DatePickerVariantProps} from "@heroui/theme";
+import {dateInput} from "@heroui/theme";
 import {useCallback} from "react";
-import {HTMLHeroUIProps, mapPropsVariants, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
 import {useDOMRef} from "@heroui/react-utils";
 import {useLocalizedStringFormatter} from "@react-aria/i18n";

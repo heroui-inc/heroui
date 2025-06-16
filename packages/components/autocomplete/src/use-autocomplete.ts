@@ -1,22 +1,25 @@
 import type {AutocompleteVariantProps, SlotsToClasses, AutocompleteSlots} from "@heroui/theme";
 import type {DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {FilterFn} from "@react-stately/combobox";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {ComboBoxProps} from "@react-types/combobox";
+import type {PopoverProps} from "@heroui/popover";
+import type {ListboxProps} from "@heroui/listbox";
+import type {InputProps} from "@heroui/input";
+import type {ScrollShadowProps} from "@heroui/scroll-shadow";
+import type {ButtonProps} from "@heroui/button";
+import type {AsyncLoadable, PressEvent} from "@react-types/shared";
 
-import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {autocomplete} from "@heroui/theme";
-import {useFilter} from "@react-aria/i18n";
-import {FilterFn, useComboBoxState} from "@react-stately/combobox";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
-import {ReactNode, useEffect, useMemo, useRef} from "react";
-import {ComboBoxProps} from "@react-types/combobox";
-import {PopoverProps} from "@heroui/popover";
-import {ListboxProps} from "@heroui/listbox";
-import {InputProps} from "@heroui/input";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ScrollShadowProps} from "@heroui/scroll-shadow";
 import {chain, mergeProps} from "@react-aria/utils";
-import {ButtonProps} from "@heroui/button";
-import {AsyncLoadable, PressEvent} from "@react-types/shared";
+import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {useEffect, useMemo, useRef} from "react";
+import {useDOMRef} from "@heroui/react-utils";
+import {useComboBoxState} from "@react-stately/combobox";
+import {useFilter} from "@react-aria/i18n";
+import {autocomplete} from "@heroui/theme";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useComboBox} from "@react-aria/combobox";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
@@ -111,6 +114,11 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>
    */
   onClose?: () => void;
   /**
+   * Callback fired when the value is cleared.
+   * if you pass this prop, the clear button will be shown.
+   */
+  onClear?: () => void;
+  /**
    * Whether to enable virtualization of the listbox items.
    * By default, virtualization is automatically enabled when the number of items is greater than 50.
    * @default undefined
@@ -185,6 +193,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     errorMessage,
     onOpenChange,
     onClose,
+    onClear,
     isReadOnly = false,
     ...otherProps
   } = props;
@@ -452,6 +461,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         }
         state.setInputValue("");
         state.open();
+        onClear?.();
       },
       "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
       className: slots.clearButton({

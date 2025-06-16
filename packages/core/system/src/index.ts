@@ -27,7 +27,6 @@ export {
   extendVariants,
 } from "@heroui/system-rsc";
 
-export type {SupportedCalendars} from "./types";
 export type {HeroUIProviderProps} from "./provider";
 export type {ProviderContextProps} from "./provider-context";
 

@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {SwitchProps, SwitchThumbIconProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {toggle} from "@heroui/theme";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {SunFilledIcon, MoonFilledIcon} from "@heroui/shared-icons";
@@ -7,7 +9,7 @@ import {clsx} from "@heroui/shared-utils";
 import {button} from "@heroui/theme";
 import {useForm} from "react-hook-form";
 
-import {Switch, SwitchProps, SwitchThumbIconProps, useSwitch} from "../src";
+import {Switch, useSwitch} from "../src";
 
 export default {
   title: "Components/Switch",

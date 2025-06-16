@@ -1,6 +1,8 @@
+import type {UseBadgeProps} from "./use-badge";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseBadgeProps, useBadge} from "./use-badge";
+import {useBadge} from "./use-badge";
 
 export interface BadgeProps extends UseBadgeProps {}
 

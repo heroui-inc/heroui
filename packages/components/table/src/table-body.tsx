@@ -1,4 +1,7 @@
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {ValuesType} from "./use-table";
+
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr} from "@heroui/shared-utils";
 import {useTableRowGroup} from "@react-aria/table";
@@ -9,7 +12,6 @@ import {useMemo} from "react";
 import TableRow from "./table-row";
 import TableCell from "./table-cell";
 import TableCheckboxCell from "./table-checkbox-cell";
-import {ValuesType} from "./use-table";
 
 // @internal
 export interface TableBodyProps extends HTMLHeroUIProps<"tbody"> {

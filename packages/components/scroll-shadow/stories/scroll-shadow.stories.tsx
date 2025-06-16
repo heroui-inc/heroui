@@ -1,14 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {ScrollShadowProps, ScrollShadowOrientation, ScrollShadowVisibility} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {scrollShadow, button} from "@heroui/theme";
 import Lorem from "react-lorem-component";
 
-import {
-  ScrollShadow,
-  ScrollShadowProps,
-  ScrollShadowOrientation,
-  ScrollShadowVisibility,
-} from "../src";
+import {ScrollShadow} from "../src";
 
 export default {
   title: "Components/ScrollShadow",

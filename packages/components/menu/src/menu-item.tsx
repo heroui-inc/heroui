@@ -1,6 +1,9 @@
-import {useMemo, ReactNode} from "react";
+import type {ReactNode} from "react";
+import type {UseMenuItemProps} from "./use-menu-item";
 
-import {UseMenuItemProps, useMenuItem} from "./use-menu-item";
+import {useMemo} from "react";
+
+import {useMenuItem} from "./use-menu-item";
 import {MenuSelectedIcon} from "./menu-selected-icon";
 
 export interface MenuItemProps<T extends object = object>

@@ -1,6 +1,6 @@
 import type {As, RightJoinProps, PropsOf, InternalForwardRefRenderFunction} from "./types";
+import type * as React from "react";
 
-import * as React from "react";
 import {forwardRef as baseForwardRef} from "react";
 
 export function forwardRef<
