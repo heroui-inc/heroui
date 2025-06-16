@@ -1,12 +1,14 @@
+import type {SandpackFiles} from "@codesandbox/sandpack-react/types";
+import type {ButtonProps} from "@/../../packages/components/button/src";
+
 import React, {forwardRef} from "react";
 import stackblitzSdk from "@stackblitz/sdk";
-import {SandpackFiles} from "@codesandbox/sandpack-react/types";
 
 import {StackblitzIcon} from "./icons";
 
 import {useStackblitz} from "@/hooks/use-stackblitz";
 import {Tooltip} from "@/../../packages/components/tooltip/src";
-import {Button, ButtonProps} from "@/../../packages/components/button/src";
+import {Button} from "@/../../packages/components/button/src";
 
 export interface StackblitzButtonProps extends ButtonProps {
   files: SandpackFiles;

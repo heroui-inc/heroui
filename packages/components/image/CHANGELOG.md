@@ -1,5 +1,15 @@
 # @heroui/image
 
+## 2.2.13
+
+### Patch Changes
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+- Updated dependencies [[`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56)]:
+  - @heroui/react-utils@2.1.11
+  - @heroui/use-image@2.1.10
+
 ## 2.2.12
 
 ### Patch Changes

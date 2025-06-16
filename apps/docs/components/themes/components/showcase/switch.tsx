@@ -1,9 +1,11 @@
+import type {SwitchProps} from "@heroui/react";
+import type {HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {SwitchProps, Switch} from "@heroui/react";
+import {Switch} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {HeroUIScaling} from "../../types";
 
 type Color = SwitchProps["color"];
 

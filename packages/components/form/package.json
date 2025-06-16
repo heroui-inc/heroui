@@ -1,6 +1,6 @@
 {
   "name": "@heroui/form",
-  "version": "2.1.19",
+  "version": "2.1.20",
   "description": "A form is a group of inputs that allows users submit data to a server and supports field validation errors.",
   "keywords": [
     "form"
@@ -40,14 +40,12 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@heroui/react-utils": "workspace:*",
-    "@heroui/shared-utils": "workspace:*",
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
-    "@react-aria/utils": "3.29.0",
-    "@react-types/shared": "3.29.1",
-    "@react-stately/form": "3.1.4",
-    "@react-types/form": "3.7.12"
+    "@react-aria/utils": "3.29.1",
+    "@react-types/shared": "3.30.0",
+    "@react-stately/form": "3.1.5",
+    "@react-types/form": "3.7.13"
   },
   "devDependencies": {
     "@heroui/button": "workspace:*",

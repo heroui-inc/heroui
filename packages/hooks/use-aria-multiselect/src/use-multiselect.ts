@@ -3,16 +3,17 @@ import type {
   MultiSelectState,
 } from "./use-multiselect-state";
 import type {AriaButtonProps} from "@react-types/button";
+import type {AriaListBoxOptions} from "@react-aria/listbox";
+import type {FocusEvent, HTMLAttributes, RefObject, Key} from "react";
+import type {ValidationResult} from "@react-types/shared";
 
 import {useCollator} from "@react-aria/i18n";
 import {setInteractionModality} from "@react-aria/interactions";
 import {useField} from "@react-aria/label";
-import {AriaListBoxOptions} from "@react-aria/listbox";
 import {useMenuTrigger} from "@react-aria/menu";
 import {ListKeyboardDelegate, useTypeSelect} from "@react-aria/selection";
 import {chain, filterDOMProps, mergeProps, useId} from "@react-aria/utils";
-import {FocusEvent, HTMLAttributes, RefObject, useMemo, Key} from "react";
-import {ValidationResult} from "@react-types/shared";
+import {useMemo} from "react";
 
 export type MultiSelectProps<T> = MultiSelectStateProps<T>;
 

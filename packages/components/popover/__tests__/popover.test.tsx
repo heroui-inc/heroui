@@ -1,7 +1,9 @@
 import "@testing-library/jest-dom";
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {render, fireEvent, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {Button} from "@heroui/button";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
