@@ -21,6 +21,7 @@ import {createDOMRef} from "@heroui/react-utils";
 import {useMemo, useRef, useCallback} from "react";
 import {toReactAriaPlacement, getArrowPlacement} from "@heroui/aria-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {useAriaOverlay} from "@heroui/use-aria-overlay";
 
 interface Props extends Omit<HTMLHeroUIProps, "content"> {
   /**
