@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@heroui/use-aria-overlay": "workspace:*",
-    "@react-aria/overlays": "3.27.2",
+    "@react-aria/overlays": "3.27.3",
     "@react-aria/utils": "3.29.1",
     "@react-stately/overlays": "3.6.17"
   },
