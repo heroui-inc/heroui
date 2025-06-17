@@ -45,7 +45,7 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-aria-link": "workspace:*",
     "@react-aria/utils": "3.29.1",
-    "@react-aria/focus": "3.20.4",
+    "@react-aria/focus": "3.20.5",
     "@react-types/link": "3.6.2"
   },
   "devDependencies": {
