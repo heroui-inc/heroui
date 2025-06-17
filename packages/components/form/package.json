@@ -34,7 +34,7 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.7",
+    "@heroui/system": ">=2.4.17",
     "@heroui/theme": ">=2.4.6",
     "react": ">=18",
     "react-dom": ">=18"
