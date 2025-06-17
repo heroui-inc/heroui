@@ -1,5 +1,13 @@
 # @heroui/use-aria-overlay
 
+## 2.0.1-beta.2
+
+### Patch Changes
+
+- [#5392](https://github.com/heroui-inc/heroui/pull/5392) [`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5100](https://github.com/heroui-inc/heroui/pull/5100) [`5600730`](https://github.com/heroui-inc/heroui/commit/56007303b9885162dcc8a35e808bc19dbfec70f6) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: overlay & interactOutside
+
 ## 2.0.1-beta.1
 
 ### Patch Changes
