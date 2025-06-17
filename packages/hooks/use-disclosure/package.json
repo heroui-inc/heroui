@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-disclosure",
-  "version": "2.2.13",
+  "version": "2.2.14-beta.0",
   "description": "The hook in charge of managing modals",
   "keywords": [
     "use-disclosure"
