@@ -37,7 +37,7 @@
     "react": ">=18",
     "react-dom": ">=18",
     "@heroui/theme": ">=2.4.16",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/system": ">=2.4.17"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
