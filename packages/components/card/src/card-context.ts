@@ -1,6 +1,6 @@
-import {createContext} from "@heroui/react-utils";
+import type {ContextType} from "./use-card";
 
-import {ContextType} from "./use-card";
+import {createContext} from "@heroui/react-utils";
 
 export const [CardProvider, useCardContext] = createContext<ContextType>({
   name: "CardContext",

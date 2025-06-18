@@ -1,15 +1,17 @@
+import type {Node} from "@react-types/shared";
+import type {ListState} from "@react-stately/list";
+import type {ListboxItemProps} from "./listbox-item";
+import type {ListboxSectionBaseProps} from "./base/listbox-section-base";
+
 import {listboxSection} from "@heroui/theme";
-import {Node} from "@react-types/shared";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
 import {clsx} from "@heroui/shared-utils";
 import {Divider} from "@heroui/divider";
-import {ListState} from "@react-stately/list";
 import {useListBoxSection} from "@react-aria/listbox";
 
-import ListboxItem, {ListboxItemProps} from "./listbox-item";
-import {ListboxSectionBaseProps} from "./base/listbox-section-base";
+import ListboxItem from "./listbox-item";
 
 export interface ListboxSectionProps<T extends object = object> extends ListboxSectionBaseProps {
   item: Node<T>;

@@ -4,18 +4,18 @@ import type {CalendarSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCalendarGridProps} from "@react-aria/calendar";
 import type {AriaButtonProps} from "@react-types/button";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {DateValue, Calendar, CalendarIdentifier} from "@internationalized/date";
 import type {ButtonProps} from "@heroui/button";
-import type {SupportedCalendars} from "@heroui/system";
 import type {CalendarState, RangeCalendarState} from "@react-stately/calendar";
 import type {RefObject, ReactNode} from "react";
-import type {CalendarIdentifier} from "@internationalized/date";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {createCalendar, Calendar, CalendarDate, DateFormatter} from "@internationalized/date";
+import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
 import {calendar} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@react-aria/i18n";
 import {clamp, dataAttr, objectToDeps, getGregorianYearOffset} from "@heroui/shared-utils";
 import {mergeProps} from "@react-aria/utils";
@@ -120,7 +120,7 @@ interface Props extends HeroUIBaseProps {
    *
    * @default all calendars
    */
-  createCalendar?: (calendar: SupportedCalendars) => Calendar | null;
+  createCalendar?: (identifier: CalendarIdentifier) => Calendar;
   /**
    * The style of weekday names to display in the calendar grid header,
    * e.g. single letter, abbreviation, or full day name.
@@ -223,10 +223,10 @@ export function useCalendarBase(originalProps: UseCalendarBasePropsComplete) {
     isHeaderDefaultExpanded,
     onHeaderExpandedChange = () => {},
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
-    minValue = globalContext?.defaultDates?.minDate ??
-      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = globalContext?.defaultDates?.maxDate ??
-      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
+    minValue = (globalContext?.defaultDates?.minDate ??
+      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1)) as DateValue,
+    maxValue = (globalContext?.defaultDates?.maxDate ??
+      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31)) as DateValue,
     prevButtonProps: prevButtonPropsProp,
     nextButtonProps: nextButtonPropsProp,
     errorMessage,

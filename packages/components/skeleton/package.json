@@ -1,6 +1,6 @@
 {
   "name": "@heroui/skeleton",
-  "version": "2.2.12",
+  "version": "2.2.13",
   "description": "Skeleton is used to display the loading state of some component.",
   "keywords": [
     "skeleton"
@@ -37,11 +37,10 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/system": ">=2.4.17"
   },
   "dependencies": {
-    "@heroui/shared-utils": "workspace:*",
-    "@heroui/react-utils": "workspace:*"
+    "@heroui/shared-utils": "workspace:*"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

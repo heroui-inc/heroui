@@ -1,12 +1,13 @@
 import type {MenuItemBaseProps} from "./base/menu-item-base";
 import type {MenuItemVariantProps} from "@heroui/theme";
 import type {Node, PressEvent} from "@react-types/shared";
+import type {TreeState} from "@react-stately/tree";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {useMemo, useRef, useCallback} from "react";
 import {menuItem} from "@heroui/theme";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
-import {TreeState} from "@react-stately/tree";
 import {clsx, dataAttr, objectToDeps, removeEvents} from "@heroui/shared-utils";
 import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
 import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
