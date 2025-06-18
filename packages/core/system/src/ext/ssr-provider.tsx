@@ -1,3 +1,6 @@
+// Partial code from react-spectrum to avoid importing the entire package
+// ref: packages/@react-aria/ssr/src/SSRProvider.tsx
+
 import type {JSX, ReactNode} from "react";
 
 import React, {useContext, useLayoutEffect, useMemo, useRef, useState} from "react";

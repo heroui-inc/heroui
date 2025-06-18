@@ -1,3 +1,6 @@
+// Partial code from react-spectrum to avoid importing the entire package
+// ref: packages/@react-aria/overlays/src/useModal.tsx
+
 import type {
   AriaAttributes,
   AriaRole,

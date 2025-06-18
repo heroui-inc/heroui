@@ -1,3 +1,6 @@
+// Partial code from react-spectrum to avoid importing the entire package
+// ref: packages/@react-aria/i18n/src/context.tsx
+
 import type {ReactNode} from "react";
 
 import React, {useEffect, useMemo, useState} from "react";

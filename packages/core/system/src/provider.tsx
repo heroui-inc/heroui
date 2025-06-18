@@ -1,14 +1,14 @@
-import type {ModalProviderProps} from "./overlay-provider";
+import type {ModalProviderProps} from "./ext/overlay-provider";
+import type {I18nProviderProps} from "./ext/i18n-provider";
 import type {ProviderContextProps} from "./provider-context";
-import type {I18nProviderProps} from "./i18n-provider";
 
 import {RouterProvider} from "@react-aria/utils";
 import {useMemo} from "react";
 import {MotionConfig, MotionGlobalConfig} from "framer-motion";
 
 import {ProviderContext} from "./provider-context";
-import {I18nProvider} from "./i18n-provider";
-import {OverlayProvider} from "./overlay-provider";
+import {I18nProvider} from "./ext/i18n-provider";
+import {OverlayProvider} from "./ext/overlay-provider";
 
 export interface RouterConfig {}
 
