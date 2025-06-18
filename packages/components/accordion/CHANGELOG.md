@@ -1,5 +1,21 @@
 # @heroui/accordion
 
+## 2.2.19-beta.1
+
+### Patch Changes
+
+- [#5398](https://github.com/heroui-inc/heroui/pull/5398) [`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be) Thanks [@wingkwong](https://github.com/wingkwong)! - remove RA dependencies (overlays & utils)
+
+- Updated dependencies [[`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be)]:
+  - @heroui/use-aria-accordion@2.2.14-beta.1
+  - @heroui/dom-animation@2.1.10-beta.1
+  - @heroui/framer-utils@2.1.18-beta.1
+  - @heroui/shared-icons@2.1.10-beta.1
+  - @heroui/shared-utils@2.1.10-beta.3
+  - @heroui/react-utils@2.1.12-beta.1
+  - @heroui/aria-utils@2.2.19-beta.1
+  - @heroui/divider@2.2.16-beta.1
+
 ## 2.2.19-beta.0
 
 ### Patch Changes
