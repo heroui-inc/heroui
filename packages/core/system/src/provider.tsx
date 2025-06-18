@@ -1,15 +1,20 @@
 import type {ModalProviderProps} from "@react-aria/overlays";
 import type {ProviderContextProps} from "./provider-context";
-import type {Href, RouterOptions} from "@react-types/shared";
-import type {I18nProviderProps} from "@react-aria/i18n";
+import type {I18nProviderProps} from "./i18n-provider";
 
-import {I18nProvider} from "@react-aria/i18n";
 import {RouterProvider} from "@react-aria/utils";
 import {OverlayProvider} from "@react-aria/overlays";
 import {useMemo} from "react";
 import {MotionConfig, MotionGlobalConfig} from "framer-motion";
 
 import {ProviderContext} from "./provider-context";
+import {I18nProvider} from "./i18n-provider";
+
+export interface RouterConfig {}
+
+export type Href = RouterConfig extends {href: infer H} ? H : string;
+
+export type RouterOptions = RouterConfig extends {routerOptions: infer O} ? O : never;
 
 export interface HeroUIProviderProps
   extends Omit<ModalProviderProps, "children">,
