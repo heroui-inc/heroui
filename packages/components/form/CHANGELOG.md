@@ -1,5 +1,15 @@
 # @heroui/form
 
+## 2.1.21-beta.1
+
+### Patch Changes
+
+- [#5398](https://github.com/heroui-inc/heroui/pull/5398) [`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be) Thanks [@wingkwong](https://github.com/wingkwong)! - remove RA dependencies (overlays & utils)
+
+- Updated dependencies [[`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be)]:
+  - @heroui/system@2.4.18-beta.1
+  - @heroui/theme@2.4.18-beta.1
+
 ## 2.1.21-beta.0
 
 ### Patch Changes

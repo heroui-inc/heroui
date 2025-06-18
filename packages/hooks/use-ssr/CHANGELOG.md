@@ -1,5 +1,11 @@
 # @heroui/use-ssr
 
+## 2.1.8-beta.3
+
+### Patch Changes
+
+- [#5398](https://github.com/heroui-inc/heroui/pull/5398) [`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be) Thanks [@wingkwong](https://github.com/wingkwong)! - remove RA dependencies (overlays & utils)
+
 ## 2.1.8-beta.2
 
 ### Patch Changes

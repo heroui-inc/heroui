@@ -92,6 +92,7 @@
     "@heroui/test-utils": "2.1.8"
   },
   "changesets": [
+    "honest-dolphins-reflect",
     "hot-lobsters-collect",
     "hungry-deers-develop",
     "light-cups-melt",
