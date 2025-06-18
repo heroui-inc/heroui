@@ -56,7 +56,6 @@
   "dependencies": {
     "@heroui/react-utils": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
-    "@react-aria/overlays": "3.27.3",
     "@react-aria/utils": "3.29.1"
   }
 }
