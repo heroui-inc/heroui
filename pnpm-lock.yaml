@@ -3247,6 +3247,9 @@ importers:
       '@heroui/system-rsc':
         specifier: workspace:*
         version: link:../system-rsc
+      '@react-aria/i18n':
+        specifier: 3.12.10
+        version: 3.12.10(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-aria/utils':
         specifier: 3.29.1
         version: 3.29.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
