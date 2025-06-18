@@ -87,4 +87,4 @@
 "@heroui/theme": patch
 ---
 
-remove RA dependencies (overlays)
+remove RA dependencies (overlays & utils)
