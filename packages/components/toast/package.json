@@ -47,7 +47,6 @@
     "@heroui/use-is-mobile": "workspace:*",
     "@heroui/spinner": "workspace:*",
     "@react-aria/toast": "3.0.5",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/interactions": "3.25.3",
     "@react-stately/toast": "3.1.1"
   },

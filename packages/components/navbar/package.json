@@ -50,7 +50,6 @@
     "@react-aria/interactions": "3.25.3",
     "@react-aria/button": "3.13.3",
     "@react-aria/overlays": "3.27.3",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/toggle": "3.8.5",
     "@react-stately/utils": "3.10.7"
   },

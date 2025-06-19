@@ -48,7 +48,6 @@
     "@react-aria/focus": "3.20.5",
     "@react-aria/interactions": "3.25.3",
     "@react-aria/tabs": "3.10.5",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/tabs": "3.8.3",
     "@react-types/shared": "3.30.0",
     "scroll-into-view-if-needed": "3.0.10"

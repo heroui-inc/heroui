@@ -57,7 +57,6 @@
     "@react-aria/form": "3.0.18",
     "@react-aria/overlays": "3.27.3",
     "@react-aria/interactions": "3.25.3",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/visually-hidden": "3.8.25",
     "@react-types/shared": "3.30.0"
   },

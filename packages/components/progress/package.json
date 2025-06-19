@@ -44,7 +44,6 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-is-mounted": "workspace:*",
     "@react-aria/progress": "3.4.24",
-    "@react-aria/utils": "3.29.1",
     "@react-types/progress": "3.5.13"
   },
   "devDependencies": {

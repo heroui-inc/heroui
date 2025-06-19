@@ -47,7 +47,6 @@
     "@react-aria/i18n": "3.12.10",
     "@react-aria/interactions": "3.25.3",
     "@react-aria/slider": "3.7.21",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/visually-hidden": "3.8.25",
     "@react-stately/slider": "3.6.5"
   },

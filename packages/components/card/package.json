@@ -46,7 +46,6 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/ripple": "workspace:*",
     "@react-aria/focus": "3.20.5",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/interactions": "3.25.3",
     "@react-types/shared": "3.30.0"
   },

@@ -43,7 +43,6 @@
     "@heroui/form": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/form": "3.0.18",
     "@react-stately/utils": "3.10.7",
     "@react-stately/form": "3.1.5",

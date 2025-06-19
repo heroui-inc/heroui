@@ -48,7 +48,6 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@react-stately/utils": "3.10.7",
-    "@react-aria/utils": "3.29.1",
     "@heroui/button": "workspace:*"
   },
   "devDependencies": {

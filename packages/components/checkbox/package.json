@@ -48,7 +48,6 @@
     "@react-aria/checkbox": "3.15.7",
     "@react-aria/focus": "3.20.5",
     "@react-aria/interactions": "3.25.3",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/checkbox": "3.6.15",
     "@react-stately/toggle": "3.8.5",
     "@react-types/checkbox": "3.9.5",

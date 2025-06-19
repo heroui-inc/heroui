@@ -48,7 +48,6 @@
     "@heroui/shared-utils": "workspace:*",
     "@react-aria/focus": "3.20.5",
     "@react-aria/menu": "3.18.5",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/menu": "3.9.5",
     "@react-types/menu": "3.10.2"
   },
