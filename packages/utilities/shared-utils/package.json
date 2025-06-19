@@ -20,7 +20,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heroui-inc/heroui.git",
-    "directory": "packages/core/system"
+    "directory": "packages/utilities/shared-utils"
   },
   "bugs": {
     "url": "https://github.com/heroui-inc/heroui/issues"
