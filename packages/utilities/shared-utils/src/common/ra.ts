@@ -1,3 +1,5 @@
+"use client";
+
 import type {MutableRefObject, Ref} from "react";
 
 import React, {useState, useRef, useEffect, useMemo, useCallback, useContext} from "react";
