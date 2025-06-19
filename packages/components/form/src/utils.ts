@@ -8,7 +8,8 @@ import type {Context} from "react";
 import type {RefObject, DOMProps as SharedDOMProps} from "@react-types/shared";
 
 import {useContext, useMemo} from "react";
-import {mergeProps, mergeRefs, useObjectRef} from "@react-aria/utils";
+import {mergeProps, mergeRefs, useObjectRef} from "@heroui/shared-utils";
+
 export const DEFAULT_SLOT = Symbol("default");
 
 interface SlottedValue<T> {

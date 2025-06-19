@@ -11,8 +11,7 @@ import type {ScrollShadowProps} from "@heroui/scroll-shadow";
 import type {ButtonProps} from "@heroui/button";
 import type {AsyncLoadable, PressEvent} from "@react-types/shared";
 
-import {chain, mergeProps} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useEffect, useMemo, useRef} from "react";
 import {useDOMRef} from "@heroui/react-utils";
 import {useComboBoxState} from "@react-stately/combobox";

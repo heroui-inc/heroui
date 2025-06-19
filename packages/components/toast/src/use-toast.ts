@@ -10,10 +10,9 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {toast as toastTheme} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, isEmpty, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
 import {useToast as useToastAria} from "@react-aria/toast";
-import {chain, mergeProps} from "@react-aria/utils";
 import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 

@@ -9,12 +9,11 @@ import type {ReactRef} from "@heroui/react-utils";
 
 import {card} from "@heroui/theme";
 import {useCallback, useMemo} from "react";
-import {chain, mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps} from "@heroui/react-utils";
 import {useDOMRef} from "@heroui/react-utils";
 import {useRipple} from "@heroui/ripple";

@@ -7,13 +7,12 @@ import type {PropGetter} from "@heroui/system";
 import type {HTMLHeroUIProps} from "@heroui/system";
 
 import {useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
 import {useLabelPlacement, useProviderContext} from "@heroui/system";
 import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useTimeField as useAriaTimeField} from "@react-aria/datepicker";
 import {useTimeFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr} from "@heroui/shared-utils";
+import {objectToDeps, clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {dateInput} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";

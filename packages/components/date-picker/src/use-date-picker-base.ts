@@ -9,11 +9,10 @@ import type {ValueBase} from "@react-types/shared";
 import type {DatePickerVariantProps} from "@heroui/theme";
 import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {dataAttr} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {dateInput} from "@heroui/theme";
 import {useCallback} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
 import {useDOMRef} from "@heroui/react-utils";
 import {useLocalizedStringFormatter} from "@react-aria/i18n";
 import {useControlledState} from "@react-stately/utils";

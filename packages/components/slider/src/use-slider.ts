@@ -13,9 +13,8 @@ import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useSliderState} from "@react-stately/slider";
 import {useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
 import {useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useHover} from "@react-aria/interactions";
 
 export type SliderValue = number | number[];

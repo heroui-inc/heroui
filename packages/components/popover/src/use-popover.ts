@@ -17,8 +17,7 @@ import {getShouldUseAxisPlacement} from "@heroui/aria-utils";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {getArrowPlacement} from "@heroui/aria-utils";
 import {popover} from "@heroui/theme";
-import {mergeProps, mergeRefs} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, mergeProps, mergeRefs} from "@heroui/shared-utils";
 import {useMemo, useCallback, useRef} from "react";
 
 import {useReactAriaPopover} from "./use-aria-popover";

@@ -9,10 +9,9 @@ import type {PressEvent} from "@react-aria/interactions";
 import type {SpinnerProps} from "@heroui/spinner";
 
 import {useProviderContext} from "@heroui/system";
-import {dataAttr} from "@heroui/shared-utils";
+import {dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import {useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
-import {chain, mergeProps} from "@react-aria/utils";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {button} from "@heroui/theme";
 import {isValidElement, cloneElement, useMemo} from "react";
