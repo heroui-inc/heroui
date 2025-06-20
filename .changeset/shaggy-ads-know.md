@@ -13,6 +13,7 @@
 "@heroui/autocomplete": patch
 "@heroui/number-input": patch
 "@heroui/use-update-effect": patch
+"@heroui/use-viewport-size": patch
 "@heroui/dom-animation": patch
 "@heroui/stories-utils": patch
 "@heroui/breadcrumbs": patch
@@ -29,6 +30,7 @@
 "@heroui/accordion": patch
 "@heroui/input-otp": patch
 "@heroui/use-disclosure": patch
+"@heroui/use-form-reset": patch
 "@heroui/use-is-mounted": patch
 "@heroui/use-pagination": patch
 "@heroui/use-real-shape": patch
