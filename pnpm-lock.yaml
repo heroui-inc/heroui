@@ -3660,6 +3660,15 @@ importers:
         specifier: 18.3.0
         version: 18.3.0
 
+  packages/hooks/use-ssr:
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 18.3.0
+        version: 18.3.0
+
   packages/hooks/use-theme:
     devDependencies:
       clean-package:
