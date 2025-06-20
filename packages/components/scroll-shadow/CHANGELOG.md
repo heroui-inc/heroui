@@ -1,5 +1,11 @@
 # @heroui/scroll-shadow
 
+## 2.3.15
+
+### Patch Changes
+
+- [#5374](https://github.com/heroui-inc/heroui/pull/5374) [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed) Thanks [@wingkwong](https://github.com/wingkwong)! - bump system peer dependencies
+
 ## 2.3.14
 
 ### Patch Changes
