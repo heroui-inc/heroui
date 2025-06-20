@@ -19,8 +19,8 @@ import {
   isPatternNumeric,
   chain,
   mergeProps,
-  useFormReset,
 } from "@heroui/shared-utils";
+import {useFormReset} from "@heroui/use-form-reset";
 import {useCallback, useMemo} from "react";
 import {useControlledState} from "@react-stately/utils";
 import {useFormValidationState} from "@react-stately/form";

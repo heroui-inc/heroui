@@ -3,12 +3,13 @@ import type {ReactRef} from "@heroui/react-utils";
 import type {HTMLMotionProps} from "framer-motion";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {navbar} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps, mergeProps, useResizeObserver} from "@heroui/shared-utils";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useScrollPosition} from "@heroui/use-scroll-position";
+import {useResizeObserver} from "@heroui/use-resize";
 import {useControlledState} from "@react-stately/utils";
 import {usePreventScroll} from "@react-aria/overlays";
 
