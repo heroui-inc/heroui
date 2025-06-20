@@ -48,6 +48,7 @@
     "@heroui/scroll-shadow": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
+    "@heroui/use-form-reset": "workspace:*",
     "@heroui/spinner": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/use-aria-multiselect": "workspace:*",

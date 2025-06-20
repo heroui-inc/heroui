@@ -44,6 +44,7 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/framer-utils": "workspace:*",
+    "@heroui/use-resize": "workspace:*",
     "@heroui/use-scroll-position": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
     "@react-aria/focus": "3.20.5",
