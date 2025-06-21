@@ -1,5 +1,12 @@
 # @heroui/checkbox
 
+## 2.3.21-beta.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.21-beta.3
+
 ## 2.3.21-beta.2
 
 ### Patch Changes

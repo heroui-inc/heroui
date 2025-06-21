@@ -1,5 +1,13 @@
 # @heroui/number-input
 
+## 2.0.12-beta.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.22-beta.2
+  - @heroui/form@2.1.21-beta.3
+
 ## 2.0.12-beta.2
 
 ### Patch Changes
