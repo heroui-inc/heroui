@@ -3,7 +3,9 @@ import {addToast, Button, ToastProvider} from "@heroui/react";
 export default function App() {
   return (
     <>
-      <ToastProvider />
+      <div className="fixed z-[100]">
+        <ToastProvider />
+      </div>
       <div className="flex flex-wrap gap-2">
         <Button
           onPress={() => {

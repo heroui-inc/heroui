@@ -79,8 +79,6 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
   });
 
   const handleClick = () => {
-    chain(onClick, tabProps.onClick)();
-
     if (!domRef?.current || !listRef?.current) return;
 
     scrollIntoView(domRef.current, {
@@ -115,7 +113,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
           enabled: shouldFilterDOMProps,
           omitPropNames: new Set(["title"]),
         }),
-        {onClick: handleClick},
+        {onClick: chain(handleClick, onClick, tabProps.onClick)},
       )}
       className={slots.tab?.({class: tabStyles})}
       title={otherProps?.titleValue}
