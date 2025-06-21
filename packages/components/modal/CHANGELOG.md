@@ -1,5 +1,23 @@
 # @heroui/modal
 
+## 2.2.19-beta.2
+
+### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/use-aria-modal-overlay@2.2.15-beta.2
+  - @heroui/use-viewport-size@2.0.0-beta.1
+  - @heroui/dom-animation@2.1.10-beta.2
+  - @heroui/framer-utils@2.1.18-beta.2
+  - @heroui/shared-icons@2.1.10-beta.2
+  - @heroui/shared-utils@2.1.10-beta.4
+  - @heroui/use-aria-button@2.2.16-beta.2
+  - @heroui/react-utils@2.1.12-beta.2
+  - @heroui/use-disclosure@2.2.14-beta.2
+  - @heroui/use-draggable@2.1.14-beta.2
+
 ## 2.2.19-beta.1
 
 ### Patch Changes

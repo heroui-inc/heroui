@@ -1,6 +1,6 @@
 {
   "name": "@heroui/stories-utils",
-  "version": "2.1.8-beta.3",
+  "version": "2.1.8-beta.4",
   "description": "A list of utilities for storybook' stories.",
   "keywords": [
     "stories-utils"

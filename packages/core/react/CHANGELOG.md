@@ -1,5 +1,62 @@
 # @heroui/react
 
+## 2.8.0-beta.10
+
+### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/scroll-shadow@2.3.15-beta.2
+  - @heroui/autocomplete@2.3.23-beta.2
+  - @heroui/number-input@2.0.12-beta.2
+  - @heroui/breadcrumbs@2.2.18-beta.2
+  - @heroui/date-picker@2.3.22-beta.2
+  - @heroui/framer-utils@2.1.18-beta.2
+  - @heroui/date-input@2.3.21-beta.2
+  - @heroui/pagination@2.2.20-beta.2
+  - @heroui/accordion@2.2.19-beta.2
+  - @heroui/input-otp@2.1.21-beta.2
+  - @heroui/calendar@2.2.22-beta.2
+  - @heroui/checkbox@2.3.21-beta.2
+  - @heroui/dropdown@2.3.22-beta.2
+  - @heroui/progress@2.2.18-beta.2
+  - @heroui/skeleton@2.2.14-beta.2
+  - @heroui/divider@2.2.16-beta.2
+  - @heroui/listbox@2.3.21-beta.2
+  - @heroui/popover@2.3.22-beta.2
+  - @heroui/snippet@2.2.23-beta.2
+  - @heroui/spinner@2.2.19-beta.2
+  - @heroui/tooltip@2.2.19-beta.2
+  - @heroui/avatar@2.2.18-beta.2
+  - @heroui/button@2.2.22-beta.2
+  - @heroui/drawer@2.2.19-beta.2
+  - @heroui/navbar@2.2.20-beta.2
+  - @heroui/ripple@2.2.17-beta.2
+  - @heroui/select@2.4.22-beta.2
+  - @heroui/slider@2.4.19-beta.2
+  - @heroui/spacer@2.2.17-beta.2
+  - @heroui/switch@2.2.20-beta.2
+  - @heroui/alert@2.2.22-beta.2
+  - @heroui/badge@2.2.14-beta.2
+  - @heroui/image@2.2.14-beta.2
+  - @heroui/input@2.4.22-beta.2
+  - @heroui/modal@2.2.19-beta.2
+  - @heroui/radio@2.3.21-beta.2
+  - @heroui/table@2.2.21-beta.2
+  - @heroui/toast@2.0.12-beta.2
+  - @heroui/card@2.2.21-beta.2
+  - @heroui/chip@2.2.18-beta.2
+  - @heroui/code@2.2.17-beta.2
+  - @heroui/form@2.1.21-beta.2
+  - @heroui/link@2.2.19-beta.2
+  - @heroui/menu@2.2.21-beta.2
+  - @heroui/tabs@2.2.19-beta.2
+  - @heroui/user@2.2.18-beta.2
+  - @heroui/kbd@2.2.18-beta.2
+  - @heroui/system@2.4.18-beta.2
+  - @heroui/theme@2.4.18-beta.2
+
 ## 2.8.0-beta.9
 
 ### Patch Changes
