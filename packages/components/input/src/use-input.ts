@@ -10,10 +10,17 @@ import {useFocusRing} from "@react-aria/focus";
 import {input} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
-import {clsx, dataAttr, isEmpty, objectToDeps, safeAriaLabel} from "@heroui/shared-utils";
+import {
+  clsx,
+  dataAttr,
+  isEmpty,
+  objectToDeps,
+  safeAriaLabel,
+  chain,
+  mergeProps,
+} from "@heroui/shared-utils";
 import {useControlledState} from "@react-stately/utils";
 import {useMemo, useCallback, useState} from "react";
-import {chain, mergeProps} from "@react-aria/utils";
 import {useTextField} from "@react-aria/textfield";
 import {FormContext, useSlottedContext} from "@heroui/form";
 

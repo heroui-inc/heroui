@@ -12,9 +12,16 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {inputOtp} from "@heroui/theme";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps, isPatternNumeric} from "@heroui/shared-utils";
+import {
+  clsx,
+  dataAttr,
+  objectToDeps,
+  isPatternNumeric,
+  chain,
+  mergeProps,
+} from "@heroui/shared-utils";
+import {useFormReset} from "@heroui/use-form-reset";
 import {useCallback, useMemo} from "react";
-import {chain, mergeProps, useFormReset} from "@react-aria/utils";
 import {useControlledState} from "@react-stately/utils";
 import {useFormValidationState} from "@react-stately/form";
 import {useFormValidation} from "@react-aria/form";

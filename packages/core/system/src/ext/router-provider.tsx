@@ -5,7 +5,7 @@
 import type {Href, RouterOptions, FocusableElement} from "./shared";
 import type {JSX, ReactNode} from "react";
 
-import {createContext, useMemo} from "react";
+import {createContext, useContext, useMemo} from "react";
 
 interface Modifiers {
   metaKey?: boolean;
@@ -202,7 +202,7 @@ export function RouterProvider(props: RouterProviderProps): JSX.Element {
   return <RouterContext.Provider value={ctx}>{children}</RouterContext.Provider>;
 }
 
-function shouldClientNavigate(link: HTMLAnchorElement, modifiers: Modifiers): boolean {
+export function shouldClientNavigate(link: HTMLAnchorElement, modifiers: Modifiers): boolean {
   let target = link.getAttribute("target");
 
   return (
@@ -214,6 +214,10 @@ function shouldClientNavigate(link: HTMLAnchorElement, modifiers: Modifiers): bo
     !modifiers.altKey &&
     !modifiers.shiftKey
   );
+}
+
+export function useRouter(): Router {
+  return useContext(RouterContext);
 }
 
 function openLink(target: HTMLAnchorElement, modifiers: Modifiers, setOpening = true): void {

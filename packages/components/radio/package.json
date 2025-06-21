@@ -46,7 +46,6 @@
     "@react-aria/focus": "3.20.5",
     "@react-aria/interactions": "3.25.3",
     "@react-aria/radio": "3.11.5",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/visually-hidden": "3.8.25",
     "@react-stately/radio": "3.10.14",
     "@react-types/radio": "3.8.10",

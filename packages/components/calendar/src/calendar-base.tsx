@@ -6,7 +6,7 @@ import type {HTMLAttributes, ReactNode, RefObject} from "react";
 import {forwardRef, Fragment, useState} from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {Button} from "@heroui/button";
-import {chain, mergeProps} from "@react-aria/utils";
+import {chain, mergeProps} from "@heroui/shared-utils";
 import {AnimatePresence, LazyMotion, MotionConfig} from "framer-motion";
 import {useLocale} from "@react-aria/i18n";
 import {ResizablePanel} from "@heroui/framer-utils";

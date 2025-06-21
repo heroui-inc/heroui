@@ -10,12 +10,11 @@ import type {ReactRef} from "@heroui/react-utils";
 
 import {useId, useImperativeHandle} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
-import {mergeProps} from "@react-aria/utils";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
 import {useOverlayPosition} from "@react-aria/overlays";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {popover} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {mergeRefs} from "@heroui/react-utils";
 import {createDOMRef} from "@heroui/react-utils";
 import {useMemo, useRef, useCallback} from "react";

@@ -9,8 +9,7 @@ import {filterDOMProps} from "@heroui/react-utils";
 import {useCalendar as useAriaCalendar} from "@react-aria/calendar";
 import {useCalendarState} from "@react-stately/calendar";
 import {createCalendar} from "@internationalized/date";
-import {clsx} from "@heroui/shared-utils";
-import {chain, mergeProps} from "@react-aria/utils";
+import {clsx, chain, mergeProps} from "@heroui/shared-utils";
 
 import {useCalendarBase} from "./use-calendar-base";
 

@@ -53,7 +53,6 @@
     "@heroui/shared-utils": "workspace:*",
     "@react-aria/datepicker": "3.14.5",
     "@react-aria/i18n": "3.12.10",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/datepicker": "3.14.2",
     "@react-stately/utils": "3.10.7",
     "@react-types/datepicker": "3.12.2",

@@ -10,9 +10,8 @@ import {useHover} from "@react-aria/interactions";
 import {radio} from "@heroui/theme";
 import {useRadio as useReactAriaRadio} from "@react-aria/radio";
 import {useProviderContext} from "@heroui/system";
-import {__DEV__, warn, clsx, dataAttr} from "@heroui/shared-utils";
+import {__DEV__, warn, clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import {useDOMRef} from "@heroui/react-utils";
-import {chain, mergeProps} from "@react-aria/utils";
 
 import {useRadioGroupContext} from "./radio-group-context";
 

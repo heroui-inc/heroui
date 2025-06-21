@@ -8,13 +8,18 @@ import type {PropGetter, HTMLHeroUIProps} from "@heroui/system";
 
 import {useLocale} from "@react-aria/i18n";
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
-import {mergeProps} from "@react-aria/utils";
 import {useLabelPlacement, useProviderContext} from "@heroui/system";
 import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr, getGregorianYearOffset} from "@heroui/shared-utils";
+import {
+  objectToDeps,
+  clsx,
+  dataAttr,
+  getGregorianYearOffset,
+  mergeProps,
+} from "@heroui/shared-utils";
 import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";

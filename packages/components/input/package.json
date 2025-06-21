@@ -48,7 +48,6 @@
     "@react-aria/focus": "3.20.5",
     "@react-aria/interactions": "3.25.3",
     "@react-aria/textfield": "3.17.5",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/utils": "3.10.7",
     "@react-types/shared": "3.30.0",
     "@react-types/textfield": "3.12.3",

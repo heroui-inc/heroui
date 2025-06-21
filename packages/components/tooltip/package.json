@@ -50,7 +50,6 @@
     "@heroui/dom-animation": "workspace:*",
     "@react-aria/overlays": "3.27.3",
     "@react-aria/tooltip": "3.8.5",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/tooltip": "3.5.5",
     "@react-types/overlays": "3.8.16",
     "@react-types/tooltip": "3.4.18"

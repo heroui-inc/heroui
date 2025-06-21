@@ -12,10 +12,9 @@ import {modal} from "@heroui/theme";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, mergeRefs, mergeProps} from "@heroui/shared-utils";
 import {useDOMRef} from "@heroui/react-utils";
 import {useOverlayTriggerState} from "@react-stately/overlays";
-import {mergeRefs, mergeProps} from "@react-aria/utils";
 
 interface Props extends HTMLHeroUIProps<"section"> {
   /**

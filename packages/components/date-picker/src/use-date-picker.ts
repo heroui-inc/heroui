@@ -14,8 +14,7 @@ import {useMemo, useRef} from "react";
 import {datePicker} from "@heroui/theme";
 import {useDatePickerState} from "@react-stately/datepicker";
 import {useDatePicker as useAriaDatePicker} from "@react-aria/datepicker";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 import {useDatePickerBase} from "./use-date-picker-base";

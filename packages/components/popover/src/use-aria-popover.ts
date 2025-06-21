@@ -6,7 +6,7 @@ import type {OverlayTriggerState} from "@react-stately/overlays";
 import {ariaHideOutside, keepVisible, toReactAriaPlacement} from "@heroui/aria-utils";
 import {useOverlayPosition} from "@react-aria/overlays";
 import {useEffect} from "react";
-import {mergeProps} from "@react-aria/utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useAriaOverlay} from "@heroui/use-aria-overlay";
 

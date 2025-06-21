@@ -46,7 +46,6 @@
     "@react-aria/focus": "3.20.5",
     "@react-aria/interactions": "3.25.3",
     "@react-aria/switch": "3.7.5",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/visually-hidden": "3.8.25",
     "@react-stately/toggle": "3.8.5"
   },
