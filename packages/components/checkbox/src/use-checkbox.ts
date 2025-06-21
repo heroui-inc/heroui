@@ -1,17 +1,25 @@
 import type {CheckboxVariantProps, CheckboxSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaCheckboxProps} from "@react-types/checkbox";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactNode, Ref} from "react";
 
 import {useProviderContext} from "@heroui/system";
-import {ReactNode, Ref, useCallback, useId} from "react";
+import {useCallback, useId} from "react";
 import {useMemo, useRef} from "react";
 import {useToggleState} from "@react-stately/toggle";
 import {checkbox} from "@heroui/theme";
 import {useCallbackRef} from "@heroui/use-callback-ref";
 import {useHover} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
-import {mergeProps, chain} from "@react-aria/utils";
-import {__DEV__, warn, clsx, dataAttr, safeAriaLabel} from "@heroui/shared-utils";
+import {
+  __DEV__,
+  warn,
+  clsx,
+  dataAttr,
+  safeAriaLabel,
+  mergeProps,
+  chain,
+} from "@heroui/shared-utils";
 import {
   useCheckbox as useReactAriaCheckbox,
   useCheckboxGroupItem as useReactAriaCheckboxGroupItem,
@@ -99,11 +107,11 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
     validationState,
     isInvalid: isInvalidProp = validationState
       ? validationState === "invalid"
-      : groupContext?.isInvalid ?? false,
+      : (groupContext?.isInvalid ?? false),
     isIndeterminate = false,
     validationBehavior = isInGroup
       ? groupContext.validationBehavior
-      : formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
+      : (formValidationBehavior ?? globalContext?.validationBehavior ?? "native"),
     defaultSelected,
     classNames,
     className,
@@ -330,7 +338,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
         isIndeterminate,
         disableAnimation,
         className: slots.icon({class: classNames?.icon}),
-      } as CheckboxIconProps),
+      }) as CheckboxIconProps,
     [slots, classNames?.icon, isSelected, isIndeterminate, disableAnimation],
   );
 

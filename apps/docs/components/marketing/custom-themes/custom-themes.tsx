@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react/display-name */
 import {useMemo, useState} from "react";
 import {Tabs, Tab, Card, CardBody, Image, Button, RadioGroup, Radio} from "@heroui/react";
 import NextLink from "next/link";
@@ -261,7 +260,7 @@ export const CustomThemes = () => {
           />
         </div>
       </div>
-      <div className="h-full dark:md:block absolute hidden -bottom-[10%] -left-[15%] -z-[1]">
+      <div className="h-full dark:md:block absolute hidden -bottom-[10%] -left-[15%] -z-1">
         <Image
           removeWrapper
           alt="custom themes background"

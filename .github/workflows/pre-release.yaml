@@ -28,18 +28,18 @@ jobs:
       - name: Install
         uses: ./.github/common-actions/install
 
+      - name: Check if pre.json exists
+        id: check_if_pre_json_exists
+        uses: andstor/file-existence-action@v3.0.0
+        with:
+          files: ".changeset/pre.json"
+
       - name: Debug condition values
         run: |
           echo "pre.json exists: ${{ steps.check_if_pre_json_exists.outputs.files_exists }}"
           echo "Commit message: ${{ github.event.head_commit.message }}"
           echo "Contains version packages: ${{ contains(github.event.head_commit.message, 'ci(changesets): version packages') }}"
           echo "Full condition would be: ${{ steps.check_if_pre_json_exists.outputs.files_exists == 'true' && contains(github.event.head_commit.message, 'ci(changesets): version packages') }}"
-
-      - name: Check if pre.json exists
-        id: check_if_pre_json_exists
-        uses: andstor/file-existence-action@v3.0.0
-        with:
-          files: ".changeset/pre.json"
 
       - name: Get pre-release changesets
         id: get-pre-release-changesets

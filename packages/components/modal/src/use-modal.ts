@@ -1,18 +1,20 @@
 import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@heroui/theme";
 import type {HTMLMotionProps} from "framer-motion";
+import type {AriaModalOverlayProps} from "@react-aria/overlays";
+import type {ReactNode} from "react";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {OverlayTriggerProps} from "@react-stately/overlays";
 
-import {AriaModalOverlayProps} from "@react-aria/overlays";
 import {useAriaModalOverlay} from "@heroui/use-aria-modal-overlay";
-import {useCallback, useId, useRef, useState, useMemo, ReactNode} from "react";
+import {useCallback, useId, useRef, useState, useMemo} from "react";
 import {modal} from "@heroui/theme";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {clsx, dataAttr, objectToDeps, mergeRefs, mergeProps} from "@heroui/shared-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {useOverlayTriggerState} from "@react-stately/overlays";
-import {OverlayTriggerProps} from "@react-stately/overlays";
-import {mergeRefs, mergeProps} from "@react-aria/utils";
 
 interface Props extends HTMLHeroUIProps<"section"> {
   /**
@@ -22,7 +24,7 @@ interface Props extends HTMLHeroUIProps<"section"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"section">;
+  motionProps?: Omit<HTMLMotionProps<"section">, "ref">;
   /**
    * Determines whether to hide the modal close button.
    * @default false
@@ -172,7 +174,6 @@ export function useModal(originalProps: UseModalProps) {
   const getBackdropProps = useCallback<PropGetter>(
     (props = {}) => ({
       className: slots.backdrop({class: classNames?.backdrop}),
-      onClick: () => state.close(),
       ...underlayProps,
       ...props,
     }),

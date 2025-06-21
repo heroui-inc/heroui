@@ -1,9 +1,10 @@
 import type {SelectProps} from "../src";
+import type {UserEvent} from "@testing-library/user-event";
 
 import "@testing-library/jest-dom";
 import * as React from "react";
 import {render, renderHook, waitFor, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
@@ -771,7 +772,7 @@ describe("Select", () => {
     await user.click(listboxItems[1]);
 
     expect(onChange).toHaveBeenCalledTimes(1);
-  });
+  }, 10000);
 
   it("should place the label outside when labelPlacement is outside and isMultiline enabled", () => {
     const labelContent = "Favorite Animal Label";

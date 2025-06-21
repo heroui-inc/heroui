@@ -1,7 +1,11 @@
 "use client";
 
-import {FC, useMemo, useRef} from "react";
-import {Avatar, AvatarProps, Button, Spacer, Tooltip} from "@heroui/react";
+import type {FC} from "react";
+import type {AvatarProps} from "@heroui/react";
+import type {Sponsor} from "@/libs/docs/sponsors";
+
+import {useMemo, useRef} from "react";
+import {Avatar, Button, Spacer, Tooltip} from "@heroui/react";
 import {clamp} from "@heroui/shared-utils";
 import {usePostHog} from "posthog-js/react";
 
@@ -10,7 +14,7 @@ import {sectionWrapper, titleWrapper, title, subtitle} from "../primitives";
 import {FeaturesGrid} from "./features-grid";
 
 import {OpenCollectiveIcon, PatreonIcon, HeartBoldIcon, PlusLinearIcon} from "@/components/icons";
-import {Sponsor, SPONSOR_TIERS, SPONSOR_COLORS, getTier} from "@/libs/docs/sponsors";
+import {SPONSOR_TIERS, SPONSOR_COLORS, getTier} from "@/libs/docs/sponsors";
 import {SonarPulse} from "@/components/sonar-pulse";
 import {useIsMobile} from "@/hooks/use-media-query";
 
@@ -187,7 +191,7 @@ export const Support: FC<SupportProps> = ({sponsors = []}) => {
                   <Button
                     isIconOnly
                     aria-label="Become a sponsor"
-                    className="z-50 w-auto h-auto bg-gradient-to-b from-[#FF1CF7] to-[#7928CA]"
+                    className="z-50 w-auto h-auto bg-linear-to-b from-[#FF1CF7] to-[#7928CA]"
                     radius="full"
                     onPress={handleBecomeSponsor}
                   >

@@ -1,7 +1,8 @@
 import type {RangeValue, DateValue} from "../src";
+import type {Meta} from "@storybook/react";
+import type {RangeCalendarProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {calendar} from "@heroui/theme";
 import {
   today,
@@ -18,7 +19,7 @@ import {Button, ButtonGroup} from "@heroui/button";
 import {Radio, RadioGroup} from "@heroui/radio";
 import {cn} from "@heroui/theme";
 
-import {RangeCalendar, RangeCalendarProps} from "../src";
+import {RangeCalendar} from "../src";
 
 export default {
   title: "Components/RangeCalendar",

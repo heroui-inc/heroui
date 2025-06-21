@@ -1,8 +1,10 @@
 "use client";
 
-import {FC, ChangeEvent} from "react";
+import type {FC, ChangeEvent} from "react";
+import type {SwitchProps} from "@heroui/react";
+
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {SwitchProps, useSwitch} from "@heroui/react";
+import {useSwitch} from "@heroui/react";
 import {useTheme} from "next-themes";
 import {clsx} from "@heroui/shared-utils";
 import {useIsSSR} from "@react-aria/ssr";
@@ -74,7 +76,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({className, classNames}) => {
               "rounded-lg",
               "flex items-center justify-center",
               "group-data-[selected=true]:bg-transparent",
-              "!text-default-600 dark:!text-default-300",
+              "text-default-600! dark:text-default-300!",
               "pt-0",
               "px-0",
               "mx-0",

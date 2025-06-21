@@ -1,18 +1,16 @@
 import type {TabItemProps as BaseTabItemProps} from "./base/tab-item-base";
+import type {Node} from "@react-types/shared";
+import type {ValuesType} from "./use-tabs";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps, mergeRefs} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
-import {chain, mergeProps} from "@react-aria/utils";
+import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
-import {Node} from "@react-types/shared";
 import {useTab} from "@react-aria/tabs";
 import {useHover} from "@react-aria/interactions";
 import {m, domMax, LazyMotion} from "framer-motion";
 import {useIsMounted} from "@heroui/use-is-mounted";
-
-import {ValuesType} from "./use-tabs";
 
 export interface TabItemProps<T extends object = object> extends BaseTabItemProps<T> {
   item: Node<T>;
@@ -80,8 +78,6 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
   });
 
   const handleClick = () => {
-    chain(onClick, tabProps.onClick);
-
     if (!domRef?.current || !listRef?.current) return;
 
     scrollIntoView(domRef.current, {
@@ -116,7 +112,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
           enabled: shouldFilterDOMProps,
           omitPropNames: new Set(["title"]),
         }),
-        {onClick: handleClick},
+        {onClick: chain(handleClick, onClick, tabProps.onClick)},
       )}
       className={slots.tab?.({class: tabStyles})}
       title={otherProps?.titleValue}

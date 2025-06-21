@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system-rsc",
-  "version": "2.3.13",
+  "version": "2.3.16-beta.2",
   "description": "HeroUI system primitives compatibles with RSC imports",
   "keywords": [
     "system-rsc"
@@ -35,18 +35,18 @@
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.6"
+    "@heroui/theme": ">=2.4.18-beta.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "react": "18.3.0",
-    "tailwind-variants": "^0.3.0",
+    "tailwind-variants": "1.0.0",
     "clean-package": "2.2.0"
   },
   "dependencies": {
-    "@react-types/shared": "3.29.0",
+    "@react-types/shared": "3.30.0",
     "clsx": "^1.2.1"
   },
   "clean-package": "../../../clean-package.config.json",

@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {DropdownProps, DropdownMenuProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {dropdown, popover} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {Avatar} from "@heroui/avatar";
@@ -12,15 +14,7 @@ import {
 } from "@heroui/shared-icons";
 import {clsx} from "@heroui/shared-utils";
 
-import {
-  Dropdown,
-  DropdownSection,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  DropdownProps,
-  DropdownMenuProps,
-} from "../src";
+import {Dropdown, DropdownSection, DropdownTrigger, DropdownMenu, DropdownItem} from "../src";
 
 export default {
   title: "Components/Dropdown",
@@ -368,7 +362,7 @@ const WithStartContentTemplate = ({
   disableAnimation,
   ...args
 }: DropdownProps & DropdownMenuProps) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>
@@ -414,7 +408,7 @@ const WithStartContentTemplate = ({
 };
 
 const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-default-500 pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>
@@ -447,7 +441,7 @@ const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => 
 };
 
 const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>
@@ -497,7 +491,7 @@ const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) =>
 };
 
 const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>

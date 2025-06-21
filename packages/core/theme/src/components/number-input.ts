@@ -86,7 +86,7 @@ const numberInput = tv({
       "data-[pressed=true]:opacity-disabled",
     ],
     stepperWrapper: ["flex", "flex-col", "ps-1", "h-full", "justify-center"],
-    helperWrapper: "hidden group-data-[has-helper=true]:flex py-2 relative flex-col gap-1.5",
+    helperWrapper: "hidden group-data-[has-helper=true]:flex p-1 relative flex-col gap-1.5",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
   },
@@ -262,7 +262,7 @@ const numberInput = tv({
           "!duration-200",
           "!ease-out",
           "motion-reduce:transition-none",
-          "transition-[transform,color,left,opacity]",
+          "transition-[transform,color,left,opacity,translate,scale]",
         ],
         clearButton: [
           "scale-90",
@@ -656,7 +656,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px)]",
         ],
       },
     },
@@ -665,7 +665,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px)]",
         ],
       },
     },
@@ -675,7 +675,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px)]",
         ],
       },
     },
@@ -718,7 +718,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -729,7 +729,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -740,7 +740,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -751,7 +751,7 @@ const numberInput = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_5px)]",
         ],
       },
     },
@@ -761,7 +761,7 @@ const numberInput = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_3.5px)]",
         ],
       },
     },
@@ -772,7 +772,7 @@ const numberInput = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_4px)]",
         ],
       },
     },
@@ -784,9 +784,9 @@ const numberInput = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-tiny)/2_+_16px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
         stepperButton: "before:h-4",
       },
     },
@@ -798,10 +798,9 @@ const numberInput = tv({
           "start-3",
           "end-auto",
           "text-small",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]",
-        stepperButton: "before:h-4",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_10px)]",
       },
     },
     {
@@ -812,9 +811,9 @@ const numberInput = tv({
           "start-3",
           "end-auto",
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
         stepperButton: "min-4 w-4 h-4 before:h-6",
       },
     },

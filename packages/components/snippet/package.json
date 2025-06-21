@@ -1,6 +1,6 @@
 {
   "name": "@heroui/snippet",
-  "version": "2.2.20",
+  "version": "2.2.23-beta.2",
   "description": "Display a snippet of copyable code for the command line.",
   "keywords": [
     "snippet"
@@ -37,8 +37,8 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
-    "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.18-beta.0",
+    "@heroui/system": ">=2.4.18-beta.0"
   },
   "dependencies": {
     "@heroui/button": "workspace:*",
@@ -47,13 +47,12 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-clipboard": "workspace:*",
     "@heroui/tooltip": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/utils": "3.28.2"
+    "@react-aria/focus": "3.20.5"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

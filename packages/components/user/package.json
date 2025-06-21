@@ -1,6 +1,6 @@
 {
   "name": "@heroui/user",
-  "version": "2.2.15",
+  "version": "2.2.18-beta.2",
   "description": "Flexible User Profile Component.",
   "keywords": [
     "user"
@@ -36,15 +36,14 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.18-beta.0",
+    "@heroui/system": ">=2.4.18-beta.0"
   },
   "dependencies": {
     "@heroui/avatar": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/utils": "3.28.2"
+    "@react-aria/focus": "3.20.5"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

@@ -1,9 +1,12 @@
+import type {Meta} from "@storybook/react";
+import type {DateValue} from "@internationalized/date";
+import type {ValidationResult} from "@react-types/shared";
+import type {DateInputProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {dateInput, button} from "@heroui/theme";
 import {
   CalendarDate,
-  DateValue,
   getLocalTimeZone,
   now,
   parseAbsoluteToLocal,
@@ -13,9 +16,8 @@ import {
 } from "@internationalized/date";
 import {CalendarBoldIcon} from "@heroui/shared-icons";
 import {useDateFormatter, I18nProvider} from "@react-aria/i18n";
-import {ValidationResult} from "@react-types/shared";
 
-import {DateInput, DateInputProps} from "../src";
+import {DateInput} from "../src";
 
 export default {
   title: "Components/DateInput",
@@ -237,7 +239,7 @@ export const StartContent = {
     ...defaultProps,
     labelPlacement: "outside",
     startContent: (
-      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };
@@ -249,7 +251,7 @@ export const EndContent = {
     ...defaultProps,
     labelPlacement: "outside",
     endContent: (
-      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };

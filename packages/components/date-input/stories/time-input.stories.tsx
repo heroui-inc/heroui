@@ -1,5 +1,8 @@
+import type {Meta} from "@storybook/react";
+import type {ValidationResult} from "@react-types/shared";
+import type {TimeInputProps, TimeInputValue as TimeValue} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {dateInput, button} from "@heroui/theme";
 import {ClockCircleLinearIcon} from "@heroui/shared-icons";
 import {
@@ -9,9 +12,8 @@ import {
   ZonedDateTime,
 } from "@internationalized/date";
 import {useDateFormatter} from "@react-aria/i18n";
-import {ValidationResult} from "@react-types/shared";
 
-import {TimeInput, TimeInputProps, TimeInputValue as TimeValue} from "../src";
+import {TimeInput} from "../src";
 
 export default {
   title: "Components/TimeInput",
@@ -232,7 +234,7 @@ export const StartContent = {
     ...defaultProps,
     labelPlacement: "outside",
     startContent: (
-      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
+      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };
@@ -244,7 +246,7 @@ export const EndContent = {
     ...defaultProps,
     labelPlacement: "outside",
     endContent: (
-      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
+      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };

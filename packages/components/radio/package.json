@@ -1,6 +1,6 @@
 {
   "name": "@heroui/radio",
-  "version": "2.3.18",
+  "version": "2.3.21-beta.2",
   "description": "Radios allow users to select a single option from a list of mutually exclusive options.",
   "keywords": [
     "radio"
@@ -36,27 +36,24 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.3",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.18-beta.0",
+    "@heroui/system": ">=2.4.18-beta.0"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/radio": "3.11.2",
-    "@react-aria/utils": "3.28.2",
-    "@react-aria/visually-hidden": "3.8.22",
-    "@react-stately/radio": "3.10.12",
-    "@react-types/radio": "3.8.8",
-    "@react-types/shared": "3.29.0"
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/interactions": "3.25.3",
+    "@react-aria/radio": "3.11.5",
+    "@react-aria/visually-hidden": "3.8.25",
+    "@react-stately/radio": "3.10.14",
+    "@react-types/radio": "3.8.10",
+    "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
-    "@heroui/button": "workspace:*",
-    "@heroui/test-utils": "workspace:*",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0"

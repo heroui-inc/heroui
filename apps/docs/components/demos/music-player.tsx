@@ -1,7 +1,10 @@
 "use client";
 
-import {Card, CardBody, Button, Image, Slider, CardProps} from "@heroui/react";
-import {useState, FC} from "react";
+import type {CardProps} from "@heroui/react";
+import type {FC} from "react";
+
+import {Card, CardBody, Button, Image, Slider} from "@heroui/react";
+import {useState} from "react";
 import {clsx} from "@heroui/shared-utils";
 import NextImage from "next/image";
 
@@ -49,7 +52,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
               <Button
                 isIconOnly
                 aria-label="Like"
-                className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
+                className="text-default-900/60 data-hover:bg-foreground/10 -translate-y-2 translate-x-2"
                 radius="full"
                 variant="light"
                 onPress={() => setLiked((v) => !v)}
@@ -82,7 +85,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
               <Button
                 isIconOnly
                 aria-label="Repeat"
-                className="data-[hover]:bg-foreground/10"
+                className="data-hover:bg-foreground/10"
                 radius="full"
                 variant="light"
               >
@@ -91,7 +94,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
               <Button
                 isIconOnly
                 aria-label="Previous"
-                className="data-[hover]:bg-foreground/10"
+                className="data-hover:bg-foreground/10"
                 radius="full"
                 variant="light"
               >
@@ -100,7 +103,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
               <Button
                 isIconOnly
                 aria-label="Play"
-                className="w-auto h-auto data-[hover]:bg-foreground/10"
+                className="w-auto h-auto data-hover:bg-foreground/10"
                 radius="full"
                 variant="light"
               >
@@ -109,7 +112,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
               <Button
                 isIconOnly
                 aria-label="Next"
-                className="data-[hover]:bg-foreground/10"
+                className="data-hover:bg-foreground/10"
                 radius="full"
                 variant="light"
               >
@@ -118,7 +121,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
               <Button
                 isIconOnly
                 aria-label="Shuffle"
-                className="data-[hover]:bg-foreground/10"
+                className="data-hover:bg-foreground/10"
                 radius="full"
                 variant="light"
               >

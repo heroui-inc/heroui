@@ -1,4 +1,4 @@
-import {FileCode} from "./types";
+import type {FileCode} from "./types";
 
 const importRegex = /^(import\s+(?!type\s+\{)[\s\S]*?;)/gm;
 

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/checkbox",
-  "version": "2.3.18",
+  "version": "2.3.21-beta.2",
   "description": "Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.",
   "keywords": [
     "checkbox"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.7",
-    "@heroui/theme": ">=2.4.3",
+    "@heroui/system": ">=2.4.18-beta.0",
+    "@heroui/theme": ">=2.4.18-beta.0",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
@@ -45,23 +45,18 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-callback-ref": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/checkbox": "3.15.4",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/utils": "3.28.2",
-    "@react-aria/visually-hidden": "3.8.22",
-    "@react-stately/checkbox": "3.6.13",
-    "@react-stately/toggle": "3.8.3",
-    "@react-types/checkbox": "3.9.3",
-    "@react-types/shared": "3.29.0"
+    "@react-aria/checkbox": "3.15.7",
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/interactions": "3.25.3",
+    "@react-stately/checkbox": "3.6.15",
+    "@react-stately/toggle": "3.8.5",
+    "@react-types/checkbox": "3.9.5",
+    "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
-    "@heroui/chip": "workspace:*",
-    "@heroui/link": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
-    "@heroui/user": "workspace:*",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0",

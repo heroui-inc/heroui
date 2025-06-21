@@ -1,6 +1,6 @@
 {
   "name": "@heroui/dom-animation",
-  "version": "2.1.8",
+  "version": "2.1.10-beta.2",
   "description": "Dom Animation from Framer Motion for dynamic import",
   "keywords": [
     "dom-animation"
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "framer-motion": "11.9.0"
+    "framer-motion": "11.18.2"
   },
   "clean-package": "../../../clean-package.config.json"
 }

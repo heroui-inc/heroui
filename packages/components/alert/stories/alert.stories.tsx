@@ -1,9 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {AlertProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {alert, cn} from "@heroui/theme";
 import {Button} from "@heroui/button";
 
-import {Alert, AlertProps} from "../src";
+import {Alert} from "../src";
 
 export default {
   title: "Components/Alert",
@@ -151,7 +153,7 @@ const CustomAlert = React.forwardRef<HTMLDivElement, AlertProps>(
           ...classNames,
           base: cn(
             [
-              "bg-default-50 dark:bg-background shadow-sm",
+              "bg-default-50 dark:bg-background shadow-xs",
               "border-1 border-default-200 dark:border-default-100",
               "relative before:content-[''] before:absolute before:z-10",
               "before:left-0 before:top-[-1px] before:bottom-[-1px] before:w-1",

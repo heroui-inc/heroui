@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-ref-state",
-  "version": "2.1.7",
+  "version": "2.1.9-beta.2",
   "description": "Hook for saving the state in a ref value",
   "keywords": [
     "use-ref-state"

@@ -1,8 +1,5 @@
 const {heroui} = require("@heroui/theme/plugin");
 const {commonColors} = require("@heroui/theme/colors");
-const svgToDataUri = require("mini-svg-data-uri");
-const plugin = require("tailwindcss/plugin");
-const {default: flattenColorPalette} = require("tailwindcss/lib/util/flattenColorPalette");
 
 // get tailwindcss default config
 const defaultTheme = require("tailwindcss/defaultTheme");
@@ -71,7 +68,7 @@ module.exports = {
       spacing: {
         'toast-gap': 'var(--toast-gap)',
       },
-      typography: (theme) => ({
+      typography: () => ({
         DEFAULT: {
           css: {
             color: "hsl(var(--heroui-foreground))",
@@ -96,33 +93,33 @@ module.exports = {
               fontSize: "1.125em",
             },
             "h2 a": {
-              fontSize: `${theme("fontSize.2xl")[0]} !important`,
-              fontWeight: theme("fontWeight.semibold"),
-              ...theme("fontSize.2xl")[1],
+              fontSize: 'var(--text-2xl) !important',
+              fontWeight: 'var(--font-semibold)',
+              lineHeight: 'var(--text-2xl--line-height);',
             },
             "h3 a": {
               fontSize: "1.25rem !important",
-              fontWeight: theme("fontWeight.bold"),
+              fontWeight: 'var(--font-bold)',
             },
             "h2 small, h3 small, h4 small": {
-              fontFamily: theme("fontFamily.mono").join(", "),
-              color: theme("colors.slate.500"),
+              fontFamily: 'var(--font-mono); ',
+              color: 'var(--color-slate-500); ',
               fontWeight: 500,
             },
             "h2 small": {
-              fontSize: theme("fontSize.lg")[0],
-              ...theme("fontSize.lg")[1],
+              fontSize: 'var(--text-lg);',
+              lineHeight: 'var(--text-lg--line-height););',
             },
             "h3 small": {
-              fontSize: theme("fontSize.base")[0],
-              ...theme("fontSize.base")[1],
+              fontSize: 'var(--text-base); ',
+              lineHeight: 'var(--text-base--line-height);',
             },
             "h4 small": {
-              fontSize: theme("fontSize.sm")[0],
-              ...theme("fontSize.sm")[1],
+              fontSize: 'var(--text-sm); ',
+              lineHeight: 'var(--text-sm--line-height);',
             },
             "h4 a": {
-              fontWeight: theme("fontWeight.bold"),
+              fontWeight: 'var(--font-bold);',
             },
             "h2, h3, h4": {
               "scroll-margin-top": "var(--scroll-mt)",
@@ -134,7 +131,7 @@ module.exports = {
             "ul > li": {
               marginTop: "0.1em",
               marginBottom: "0.1em",
-              fontWeight: theme("fontWeight.normal"),
+              fontWeight: 'var(--font-normal);',
             },
             "ul > li > *:last-child": {
               marginTop: 0,
@@ -145,7 +142,7 @@ module.exports = {
               marginBottom: "0",
             },
             a: {
-              fontWeight: theme("fontWeight.normal"),
+              fontWeight: 'var(--font-normal);',
             },
             "a code": {
               color: "inherit",
@@ -153,7 +150,7 @@ module.exports = {
             },
             strong: {
               color: "hsl(var(--heroui-foreground))",
-              fontWeight: theme("fontWeight.bold"),
+              fontWeight: 'var(--font-bold);',
             },
             "a strong": {
               color: "inherit",
@@ -166,21 +163,21 @@ module.exports = {
               margin: "0 1px",
             },
             code: {
-              fontWeight: theme("fontWeight.medium"),
+              fontWeight: 'var(--font-medium);',
               fontVariantLigatures: "none",
             },
             pre: {
               display: "flex",
-              fontSize: theme("fontSize.sm")[0],
-              backgroundColor: "transparent",
-              fontWeight: theme("fontWeight.medium"),
+              fontSize: 'var(--text-sm);',
+              backgroundColor: 'transparent',
+              fontWeight: 'var(--font-medium);',
               padding: 0,
               margin: 0,
             },
             p: {
               marginTop: `${12 / 14}em`,
               marginBottom: `${12 / 14}em`,
-              fontWeight: theme("fontWeight.normal"),
+              fontWeight: 'var(--font-normal);',
             },
             "pre code": {
               flex: "none",
@@ -188,15 +185,15 @@ module.exports = {
             },
             table: {
               marginTop: "0px",
-              fontSize: theme("fontSize.sm")[0],
-              lineHeight: theme("fontSize.sm")[1].lineHeight,
+              fontSize: 'var(--text-sm);',
+              lineHeight: 'var(--text-sm--line-height);',
             },
             thead: {
               border: "none",
             },
             "thead th": {
               paddingTop: 0,
-              fontWeight: theme("fontWeight.semibold"),
+              fontWeight: 'var(--font-semibold);',
             },
             "tbody tr": {
               border: "none",
@@ -212,7 +209,7 @@ module.exports = {
               marginTop: `${12 / 14}em`,
             },
             blockquote: {
-              fontWeight: theme("fontWeight.normal"),
+              fontWeight: 'var(--font-normal);',
               fontStyle: "font-normal",
             },
             "code::before": {
@@ -257,20 +254,20 @@ module.exports = {
             "--tw-prose-td-borders": "hsl(var(--heroui-default-200))",
             "--tw-prose-invert-body": "hsl(var(--heroui-default-300))",
             "--tw-prose-invert-headings": commonColors.white,
-            "--tw-prose-invert-lead": theme("twColors.neutral[400]"),
+            "--tw-prose-invert-lead": 'var(--color-neutral-400);',
             "--tw-prose-invert-links": commonColors.white,
             "--tw-prose-invert-bold": commonColors.white,
-            "--tw-prose-invert-counters": theme("twColors.neutral[400]"),
-            "--tw-prose-invert-bullets": theme("twColors.neutral[600]"),
-            "--tw-prose-invert-hr": theme("twColors.neutral[700]"),
-            "--tw-prose-invert-quotes": theme("twColors.neutral[100]"),
-            "--tw-prose-invert-quote-borders": theme("twColors.neutral[700]"),
-            "--tw-prose-invert-captions": theme("twColors.neutral[400]"),
+            "--tw-prose-invert-counters": 'var(--color-neutral-400);',
+            "--tw-prose-invert-bullets": 'var(--color-neutral-600);',
+            "--tw-prose-invert-hr": 'var(--color-neutral-700);',
+            "--tw-prose-invert-quotes": 'var(--color-neutral-100);',
+            "--tw-prose-invert-quote-borders": 'var(--color-neutral-700);',
+            "--tw-prose-invert-captions": 'var(--color-neutral-400);',
             "--tw-prose-invert-code": commonColors.white,
             "--tw-prose-invert-pre-code": "hsl(var(--heroui-default-300))",
             "--tw-prose-invert-pre-bg": "rgb(0 0 0 / 50%)",
-            "--tw-prose-invert-th-borders": theme("twColors.neutral[600]"),
-            "--tw-prose-invert-td-borders": theme("twColors.neutral[700]"),
+            "--tw-prose-invert-th-borders": 'var(--color-neutral-600);',
+            "--tw-prose-invert-td-borders": 'var(--color-neutral-700);',
           },
         },
       }),
@@ -399,19 +396,6 @@ module.exports = {
           },
         },
       },
-    }),
-    require("@tailwindcss/typography"),
-    plugin(function ({matchUtilities, theme}) {
-      matchUtilities(
-        {
-          "bg-grid": (value) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
-            )}")`,
-          }),
-        },
-        {values: flattenColorPalette(theme("backgroundColor")), type: "color"},
-      );
     }),
   ],
 };

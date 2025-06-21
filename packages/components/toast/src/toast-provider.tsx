@@ -1,9 +1,12 @@
-import {ToastOptions, ToastQueue, useToastQueue} from "@react-stately/toast";
+import type {ToastOptions} from "@react-stately/toast";
+import type {RegionProps} from "./toast-region";
+import type {ToastProps, ToastPlacement} from "./use-toast";
+
+import {ToastQueue, useToastQueue} from "@react-stately/toast";
 import {useProviderContext} from "@heroui/system";
 import {AnimatePresence, LazyMotion} from "framer-motion";
 
-import {RegionProps, ToastRegion} from "./toast-region";
-import {ToastProps, ToastPlacement} from "./use-toast";
+import {ToastRegion} from "./toast-region";
 
 const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 
@@ -61,9 +64,17 @@ export const ToastProvider = ({
 
 export const addToast = ({...props}: ToastProps & ToastOptions) => {
   if (!globalToastQueue) {
+    return null;
+  }
+
+  return globalToastQueue.add(props);
+};
+
+export const closeToast = (key: string) => {
+  if (!globalToastQueue) {
     return;
   }
-  globalToastQueue.add(props);
+  globalToastQueue.close(key);
 };
 
 export const closeAll = () => {

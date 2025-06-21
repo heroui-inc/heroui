@@ -1,12 +1,13 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import type {Meta} from "@storybook/react";
+import type {SliderProps, SliderValue} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {slider} from "@heroui/theme";
 import {InfoIcon, VolumeHighBoldIcon, VolumeLowBoldIcon} from "@heroui/shared-icons";
 import {Tooltip} from "@heroui/tooltip";
 import {cn} from "@heroui/theme";
 
-import {Slider, SliderProps, SliderValue} from "../src";
+import {Slider} from "../src";
 
 export default {
   title: "Components/Slider",
@@ -164,7 +165,7 @@ const CustomValueTemplate = (args: SliderProps) => {
             >
               <input
                 aria-label="Temperature"
-                className="px-1 py-0.5 w-12 text-right text-small text-default-700 font-medium bg-default-100 outline-none transition-colors rounded-small border-medium border-transparent hover:border-primary focus:border-primary"
+                className="px-1 py-0.5 w-12 text-right text-small text-default-700 font-medium bg-default-100 outline-hidden transition-colors rounded-small border-medium border-transparent hover:border-primary focus:border-primary"
                 type="text"
                 value={inputValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

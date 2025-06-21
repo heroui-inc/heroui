@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-infinite-scroll",
-  "version": "2.2.9",
+  "version": "2.2.10-beta.4",
   "description": "A hook for handling infinite scroll based on the IntersectionObserver API",
   "keywords": [
     "use-infinite-scroll"

@@ -1,7 +1,9 @@
 import type {Selection} from "@react-types/shared";
+import type {Key} from "react";
+import type {Meta} from "@storybook/react";
+import type {ListboxProps} from "../src";
 
-import React, {Key} from "react";
-import {Meta} from "@storybook/react";
+import React from "react";
 import {menuItem} from "@heroui/theme";
 import {
   AddNoteBulkIcon,
@@ -16,7 +18,7 @@ import {Chip} from "@heroui/chip";
 import {clsx} from "@heroui/shared-utils";
 import {ScrollShadow} from "@heroui/scroll-shadow";
 
-import {Listbox, ListboxItem, ListboxSection, ListboxProps} from "../src";
+import {Listbox, ListboxItem, ListboxSection} from "../src";
 
 const BugIcon = (props) => (
   <svg height="1em" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -271,7 +273,7 @@ const MultipleSelectionTemplate = ({color, variant, ...args}: ListboxProps) => {
 };
 
 const WithStartContentTemplate = ({color, variant, disableAnimation, ...args}: ListboxProps) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Listbox
@@ -304,7 +306,7 @@ const WithStartContentTemplate = ({color, variant, disableAnimation, ...args}: L
 };
 
 const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-default-500 pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
   return (
     <Listbox
@@ -378,7 +380,7 @@ const WithTopContentTemplate = ({color, ...args}) => {
       {(item) => (
         <ListboxItem key={item.id} textValue={item.name}>
           <div className="flex gap-2 items-center">
-            <Avatar alt={item.name} className="flex-shrink-0" size="sm" src={item.avatar} />
+            <Avatar alt={item.name} className="shrink-0" size="sm" src={item.avatar} />
             <div className="flex flex-col">
               <span className="text-small">{item.name}</span>
               <span className="text-tiny text-default-400">{item.email}</span>
@@ -432,7 +434,7 @@ const WithBottomContentTemplate = ({color, ...args}) => {
       {(item) => (
         <ListboxItem key={item.id} textValue={item.name}>
           <div className="flex gap-2 items-center">
-            <Avatar alt={item.name} className="flex-shrink-0" size="sm" src={item.avatar} />
+            <Avatar alt={item.name} className="shrink-0" size="sm" src={item.avatar} />
             <div className="flex flex-col">
               <span className="text-small">{item.name}</span>
               <span className="text-tiny text-default-400">{item.email}</span>
@@ -445,7 +447,7 @@ const WithBottomContentTemplate = ({color, ...args}) => {
 };
 
 const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Listbox
@@ -491,7 +493,7 @@ const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) =>
 };
 
 const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Listbox

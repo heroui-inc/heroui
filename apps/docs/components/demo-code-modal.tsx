@@ -1,6 +1,8 @@
 "use client";
 
-import {FC, useState} from "react";
+import type {FC} from "react";
+
+import {useState} from "react";
 import {
   Modal,
   Button,
@@ -35,8 +37,8 @@ export const DemoCodeModal: FC<DemoCodeModalProps> = ({isOpen, code, title, subt
   return (
     <Modal
       classNames={{
-        backdrop: "z-[100002]", // to appear above the navbar
-        wrapper: "z-[100003]", // to appear above the backdrop
+        backdrop: "z-100002", // to appear above the navbar
+        wrapper: "z-100003", // to appear above the backdrop
       }}
       isOpen={isOpen}
       motionProps={{
@@ -69,7 +71,7 @@ export const DemoCodeModal: FC<DemoCodeModalProps> = ({isOpen, code, title, subt
             <CodeWindow
               showCopy
               showWindowIcons
-              className="min-h-[320px] !h-[60vh] max-h-full"
+              className="min-h-[320px] h-[60vh]! max-h-full"
               language="jsx"
               title={fileName}
               value={code}

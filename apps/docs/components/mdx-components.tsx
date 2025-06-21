@@ -1,7 +1,7 @@
-/* eslint-disable react/display-name */
+import type {Language} from "prism-react-renderer";
+
 import {clsx} from "@heroui/shared-utils";
 import * as Components from "@heroui/react";
-import {Language} from "prism-react-renderer";
 import NextImage from "next/image";
 import {usePostHog} from "posthog-js/react";
 
@@ -252,7 +252,7 @@ export const APITable: React.FC<APITableProps> = ({data}) => {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableRow key={index} className="[&>td]:px-2 [&>td]:py-1.5 [&>td]:first:pt-4">
+            <TableRow key={index} className="[&>td]:px-2 [&>td]:py-1.5 first:[&>td]:pt-4">
               <TableCell className="flex items-center gap-1 font-mono text-small whitespace-nowrap">
                 <InlineCodeChip className={item.deprecated ? "line-through" : ""}>
                   {item.attribute}
@@ -275,7 +275,7 @@ export const APITable: React.FC<APITableProps> = ({data}) => {
                     {/* Mobile popover */}
                     <Components.Popover placement="top">
                       <Components.PopoverTrigger>
-                        <button className="flex items-center gap-1 sm:hidden outline-none">
+                        <button className="flex items-center gap-1 sm:hidden outline-hidden">
                           <InfoCircle className="text-default-400" size={16} />
                         </button>
                       </Components.PopoverTrigger>

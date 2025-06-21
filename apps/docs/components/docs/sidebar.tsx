@@ -1,22 +1,27 @@
 "use client";
 
-import {FC, useEffect, useState, useRef, useMemo, useLayoutEffect} from "react";
+import type {FC} from "react";
+import type {
+  CollectionBase,
+  Expandable,
+  MultipleSelection,
+  Node,
+  ItemProps,
+} from "@react-types/shared";
+import type {TreeState} from "@react-stately/tree";
+import type {SpacerProps} from "@heroui/react";
+import type {Route} from "@/libs/docs/page";
+
+import {useEffect, useState, useRef, useMemo, useLayoutEffect} from "react";
 import {usePostHog} from "posthog-js/react";
 import {ChevronIcon} from "@heroui/shared-icons";
-import {CollectionBase, Expandable, MultipleSelection, Node, ItemProps} from "@react-types/shared";
 import {BaseItem} from "@heroui/aria-utils";
 import {useFocusRing} from "@react-aria/focus";
-import {TreeState, useTreeState} from "@react-stately/tree";
+import {useTreeState} from "@react-stately/tree";
 import {useSelectableCollection} from "@react-aria/selection";
 import {usePress} from "@react-aria/interactions";
 import {clsx, dataAttr, debounce, isEmpty} from "@heroui/shared-utils";
-import {
-  SpacerProps,
-  Spacer,
-  Link as HeroUILink,
-  Chip,
-  dataFocusVisibleClasses,
-} from "@heroui/react";
+import {Spacer, Link as HeroUILink, Chip, dataFocusVisibleClasses} from "@heroui/react";
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
 
@@ -24,7 +29,6 @@ import {ScrollArea} from "../scroll-area";
 
 import {getRoutePaths} from "./utils";
 
-import {Route} from "@/libs/docs/page";
 import {TreeKeyboardDelegate} from "@/utils/tree-keyboard-delegate";
 import emitter from "@/libs/emitter";
 
@@ -192,7 +196,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       aria-expanded={dataAttr(hasChildNodes ? isExpanded : undefined)}
       aria-selected={dataAttr(isSelected)}
       className={clsx(
-        "flex flex-col outline-none w-full tap-highlight-transparent",
+        "flex flex-col outline-hidden w-full tap-highlight-transparent",
         hasChildNodes ? "mb-4" : "first:mt-4",
         // focus ring
         ...dataFocusVisibleClasses,

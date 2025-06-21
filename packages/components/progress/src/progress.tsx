@@ -1,6 +1,8 @@
+import type {UseProgressProps} from "./use-progress";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseProgressProps, useProgress} from "./use-progress";
+import {useProgress} from "./use-progress";
 
 export interface ProgressProps extends UseProgressProps {}
 

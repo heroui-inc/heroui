@@ -1,23 +1,26 @@
 import type {InputVariantProps, SlotsToClasses, InputSlots} from "@heroui/theme";
 import type {AriaTextFieldOptions} from "@react-aria/textfield";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {AriaTextFieldProps} from "@react-types/textfield";
+import type {Ref} from "react";
 
-import {
-  HTMLHeroUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useLabelPlacement,
-  useProviderContext,
-} from "@heroui/system";
+import {mapPropsVariants, useProviderContext, useInputLabelPlacement} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {AriaTextFieldProps} from "@react-types/textfield";
 import {useFocusRing} from "@react-aria/focus";
 import {input} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
-import {clsx, dataAttr, isEmpty, objectToDeps, safeAriaLabel} from "@heroui/shared-utils";
+import {
+  clsx,
+  dataAttr,
+  isEmpty,
+  objectToDeps,
+  safeAriaLabel,
+  chain,
+  mergeProps,
+} from "@heroui/shared-utils";
 import {useControlledState} from "@react-stately/utils";
-import {useMemo, Ref, useCallback, useState} from "react";
-import {chain, mergeProps} from "@react-aria/utils";
+import {useMemo, useCallback, useState} from "react";
 import {useTextField} from "@react-aria/textfield";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
@@ -190,11 +193,9 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
       validationBehavior,
       autoCapitalize: originalProps.autoCapitalize as AutoCapitalize,
       value: inputValue,
-      "aria-label": safeAriaLabel(
-        originalProps["aria-label"],
-        originalProps.label,
-        originalProps.placeholder,
-      ),
+      "aria-label": originalProps.label
+        ? originalProps["aria-label"]
+        : safeAriaLabel(originalProps["aria-label"], originalProps.placeholder),
       inputElementType: isMultiline ? "textarea" : "input",
       onChange: setInputValue,
     },
@@ -233,7 +234,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
 
   const isInvalid = validationState === "invalid" || isAriaInvalid;
 
-  const labelPlacement = useLabelPlacement({
+  const labelPlacement = useInputLabelPlacement({
     labelPlacement: originalProps.labelPlacement,
     label,
   });
@@ -247,17 +248,26 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
   const hasHelper = !!description || !!errorMessage;
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const isOutsideLeft = labelPlacement === "outside-left";
+  const isOutsideTop = labelPlacement === "outside-top";
+
+  const shouldLabelBeOutside =
+    // label is outside only when some placeholder is there
+    labelPlacement === "outside" ||
+    // label is outside regardless of placeholder
+    isOutsideLeft ||
+    isOutsideTop;
+
   const shouldLabelBeInside = labelPlacement === "inside";
   const isPlaceholderShown = domRef.current
     ? (!domRef.current.value || domRef.current.value === "" || !inputValue || inputValue === "") &&
       hasPlaceholder
     : false;
-  const isOutsideLeft = labelPlacement === "outside-left";
 
   const hasStartContent = !!startContent;
   const isLabelOutside = shouldLabelBeOutside
-    ? labelPlacement === "outside-left" ||
+    ? isOutsideLeft ||
+      isOutsideTop ||
       hasPlaceholder ||
       (labelPlacement === "outside" && hasStartContent)
     : false;
@@ -554,6 +564,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
     hasStartContent,
     isLabelOutside,
     isOutsideLeft,
+    isOutsideTop,
     isLabelOutsideAsPlaceholder,
     shouldLabelBeOutside,
     shouldLabelBeInside,

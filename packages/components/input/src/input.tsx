@@ -1,8 +1,10 @@
+import type {UseInputProps} from "./use-input";
+
 import {CloseFilledIcon} from "@heroui/shared-icons";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
-import {UseInputProps, useInput} from "./use-input";
+import {useInput} from "./use-input";
 
 export interface InputProps extends Omit<UseInputProps, "isMultiline"> {}
 
@@ -17,6 +19,7 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
     labelPlacement,
     hasHelper,
     isOutsideLeft,
+    isOutsideTop,
     shouldLabelBeOutside,
     errorMessage,
     isInvalid,
@@ -82,7 +85,7 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
       return (
         <div {...getMainWrapperProps()}>
           <div {...getInputWrapperProps()}>
-            {!isOutsideLeft ? labelContent : null}
+            {!isOutsideLeft && !isOutsideTop ? labelContent : null}
             {innerWrapper}
           </div>
           {helperWrapper}
@@ -115,7 +118,7 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
 
   return (
     <Component {...getBaseProps()}>
-      {isOutsideLeft ? labelContent : null}
+      {isOutsideLeft || isOutsideTop ? labelContent : null}
       {mainWrapper}
     </Component>
   );

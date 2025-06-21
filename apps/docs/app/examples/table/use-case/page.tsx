@@ -1,5 +1,6 @@
-/* eslint-disable jsx-a11y/no-onchange */
 "use client";
+
+import type {Selection, ChipProps, SortDescriptor} from "@heroui/react";
 
 import {
   Table,
@@ -14,12 +15,9 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Selection,
   Chip,
   User,
-  ChipProps,
   Pagination,
-  SortDescriptor,
 } from "@heroui/react";
 import {ChevronDownIcon, SearchIcon} from "@heroui/shared-icons";
 import {useCallback, useMemo, useState} from "react";
@@ -461,7 +459,7 @@ export default function Page() {
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
             <select
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-hidden text-default-400 text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>

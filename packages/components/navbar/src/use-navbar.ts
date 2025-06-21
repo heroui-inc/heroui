@@ -1,15 +1,16 @@
 import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@heroui/theme";
+import type {ReactRef} from "@heroui/react-utils";
+import type {HTMLMotionProps} from "framer-motion";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {navbar} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {mergeProps, useResizeObserver} from "@react-aria/utils";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useScrollPosition} from "@heroui/use-scroll-position";
+import {useResizeObserver} from "@heroui/use-resize";
 import {useControlledState} from "@react-stately/utils";
-import {HTMLMotionProps} from "framer-motion";
 import {usePreventScroll} from "@react-aria/overlays";
 
 interface Props extends HTMLHeroUIProps<"nav"> {
@@ -57,7 +58,7 @@ interface Props extends HTMLHeroUIProps<"nav"> {
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    * This motion is only available if the `shouldHideOnScroll` prop is set to `true`.
    */
-  motionProps?: HTMLMotionProps<"nav">;
+  motionProps?: Omit<HTMLMotionProps<"nav">, "ref">;
   /**
    * The event handler for the menu open state.
    * @param isOpen boolean

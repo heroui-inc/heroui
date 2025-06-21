@@ -1,6 +1,8 @@
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {render, renderHook, fireEvent, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
 
@@ -86,7 +88,37 @@ describe("Input", () => {
     const labelId = container.querySelector("label")?.id;
     const labelledBy = container.querySelector("input")?.getAttribute("aria-labelledby");
 
-    expect(labelledBy?.includes(labelId as string)).toBeTruthy();
+    expect(labelledBy).toBe(labelId);
+  });
+
+  it("should be labelled by placeholder when no label is provided", () => {
+    const {getByRole} = render(<Input placeholder="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by aria-label when no label is provided", () => {
+    const {getByRole} = render(<Input aria-label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label when label is provided", () => {
+    const {getByRole} = render(<Input label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label and aria-label when both label and aria-label are provided", () => {
+    const {getByRole} = render(<Input aria-label="test input" label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label when both label and placeholder are provided", () => {
+    const {getByRole} = render(<Input label="test input" placeholder="test input placeholder" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
   });
 
   it("should have the correct type attribute", () => {

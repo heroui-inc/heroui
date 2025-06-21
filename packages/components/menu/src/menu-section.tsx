@@ -1,15 +1,17 @@
+import type {Node} from "@react-types/shared";
+import type {TreeState} from "@react-stately/tree";
+import type {Key} from "react";
+import type {MenuItemProps} from "./menu-item";
+import type {MenuSectionBaseProps} from "./base/menu-section-base";
+
 import {menuSection} from "@heroui/theme";
-import {Node} from "@react-types/shared";
-import {TreeState} from "@react-stately/tree";
 import {useMenuSection} from "@react-aria/menu";
-import {useMemo, Key} from "react";
+import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, mergeProps} from "@heroui/shared-utils";
 import {Divider} from "@heroui/divider";
 
-import MenuItem, {MenuItemProps} from "./menu-item";
-import {MenuSectionBaseProps} from "./base/menu-section-base";
+import MenuItem from "./menu-item";
 
 export interface MenuSectionProps<T extends object = object> extends MenuSectionBaseProps {
   item: Node<T>;
