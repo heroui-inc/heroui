@@ -1,5 +1,15 @@
 # @heroui/badge
 
+## 2.2.14-beta.2
+
+### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/shared-utils@2.1.10-beta.4
+  - @heroui/react-utils@2.1.12-beta.2
+
 ## 2.2.14-beta.1
 
 ### Patch Changes

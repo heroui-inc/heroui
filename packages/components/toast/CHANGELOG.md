@@ -1,5 +1,18 @@
 # @heroui/toast
 
+## 2.0.12-beta.2
+
+### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/shared-icons@2.1.10-beta.2
+  - @heroui/shared-utils@2.1.10-beta.4
+  - @heroui/react-utils@2.1.12-beta.2
+  - @heroui/use-is-mobile@2.2.11-beta.2
+  - @heroui/spinner@2.2.19-beta.2
+
 ## 2.0.12-beta.1
 
 ### Patch Changes
