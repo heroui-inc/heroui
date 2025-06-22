@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {ToastProps} from "../src";
+
 import {useEffect, useState} from "react";
-import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {
@@ -12,8 +14,9 @@ import {
 } from "@heroui/modal";
 import {Drawer, DrawerContent} from "@heroui/drawer";
 import {Spinner} from "@heroui/spinner";
+import {AvatarIcon, CloseIcon} from "@heroui/shared-icons";
 
-import {Toast, ToastProps, ToastProvider, addToast, closeToast, closeAll} from "../src";
+import {Toast, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
 export default {
   title: "Components/Toast",
@@ -353,7 +356,7 @@ const CustomToastTemplate = (args) => {
   );
 };
 
-const CustomCloseButtonTemplate = (args) => {
+const CustomCloseIconTemplate = (args) => {
   return (
     <>
       <ToastProvider
@@ -368,23 +371,9 @@ const CustomCloseButtonTemplate = (args) => {
       <Button
         onPress={() =>
           addToast({
-            title: "Toast Title",
+            title: "Custom Close Icon",
             description: "Toast Description",
-            closeIcon: (
-              <svg
-                fill="none"
-                height="32"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                width="32"
-              >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            ),
+            closeIcon: CloseIcon,
           })
         }
       >
@@ -451,33 +440,14 @@ export const WithDescription = {
   },
 };
 
-export const WithCustomIcon = {
-  render: Template,
+export const WithEndContent = {
+  render: WithEndContentTemplate,
   args: {
     ...defaultProps,
-    title: "Custom Icon",
-    icon: (
-      <svg height={24} viewBox="0 0 24 24" width={24}>
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeMiterlimit={10}
-          strokeWidth={1.5}
-        >
-          <path
-            d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z"
-            data-name="Stroke 1"
-          />
-          <path d="M11.837 11.174a4.372 4.372 0 10-.031 0z" data-name="Stroke 3" />
-        </g>
-      </svg>
-    ),
   },
 };
 
-export const iconHidden = {
+export const IconHidden = {
   render: Template,
   args: {
     ...defaultProps,
@@ -521,13 +491,6 @@ export const Placement = {
   },
 };
 
-export const WithEndContent = {
-  render: WithEndContentTemplate,
-  args: {
-    ...defaultProps,
-  },
-};
-
 export const ToastFromOverlay = {
   render: WithToastFromOverlayTemplate,
   args: {
@@ -542,8 +505,17 @@ export const CustomStyles = {
   },
 };
 
-export const CustomCloseButton = {
-  render: CustomCloseButtonTemplate,
+export const CustomIcon = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    title: "Custom Icon",
+    icon: AvatarIcon,
+  },
+};
+
+export const CustomCloseIcon = {
+  render: CustomCloseIconTemplate,
   args: {
     ...defaultProps,
   },

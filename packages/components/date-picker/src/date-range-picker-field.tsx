@@ -2,17 +2,17 @@ import type {DateInputReturnType, DateInputSlots, SlotsToClasses} from "@heroui/
 import type {AriaDatePickerProps} from "@react-types/datepicker";
 import type {HTMLHeroUIProps} from "@heroui/system";
 import type {DateInputProps} from "@heroui/date-input";
+import type {DateValue} from "@react-types/datepicker";
+import type {ForwardedRef, ReactElement} from "react";
 
 import {createCalendar} from "@internationalized/date";
 import {forwardRef, useRef} from "react";
-import {DateValue} from "@react-types/datepicker";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
-import {ForwardedRef, ReactElement} from "react";
 import {useDateFieldState} from "@react-stately/datepicker";
 import {DateInputSegment} from "@heroui/date-input";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
+import {mergeProps} from "@heroui/shared-utils";
 
 type HeroUIBaseProps<T extends DateValue> = Omit<
   HTMLHeroUIProps<"div">,

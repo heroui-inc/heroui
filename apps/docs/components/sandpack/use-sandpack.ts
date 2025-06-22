@@ -1,10 +1,11 @@
+import type {SandpackFiles, SandpackPredefinedTemplate} from "@codesandbox/sandpack-react";
+import type {HighlightedLines} from "./types";
+
 import {useMemo} from "react";
-import {SandpackFiles, SandpackPredefinedTemplate} from "@codesandbox/sandpack-react";
 import {useTheme} from "next-themes";
 import {useLocalStorage} from "usehooks-ts";
 import {omit} from "lodash";
 
-import {HighlightedLines} from "./types";
 import {getHighlightedLines, getFileName} from "./utils";
 import {
   stylesConfig,
@@ -79,7 +80,7 @@ export const useSandpack = ({
   }, {});
 
   let dependencies = {
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "@heroui/react": "latest",
   };
 
@@ -152,7 +153,7 @@ export const useSandpack = ({
 
   // const dependencies = useMemo(() => {
   //   let deps = {
-  //     "framer-motion": "11.9.0",
+  //     "framer-motion": "11.18.2",
   //   };
 
   //   if (hasComponents) {
@@ -187,9 +188,9 @@ export const useSandpack = ({
     entry: entryFile,
     devDependencies: {
       postcss: "^8.4.21",
-      tailwindcss: "4.1.3",
-      "@tailwindcss/postcss": "4.1.3",
-      "@tailwindcss/vite": "4.1.3",
+      tailwindcss: "4.1.10",
+      "@tailwindcss/postcss": "4.1.10",
+      "@tailwindcss/vite": "4.1.10",
       vite: "6.0.6",
     },
   };

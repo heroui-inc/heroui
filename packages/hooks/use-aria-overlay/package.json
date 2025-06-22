@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-overlay",
-  "version": "2.0.1-beta.0",
+  "version": "2.0.1-beta.4",
   "description": "A custom implementation of react aria overlay",
   "keywords": [
     "use-aria-overlay"
@@ -34,10 +34,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/focus": "3.20.3",
-    "@react-aria/interactions": "3.25.1",
-    "@react-aria/overlays": "3.27.1",
-    "@react-types/shared": "3.29.1"
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/interactions": "3.25.3",
+    "@react-aria/overlays": "3.27.3",
+    "@react-types/shared": "3.30.0"
   },
   "peerDependencies": {
     "react": ">=18",

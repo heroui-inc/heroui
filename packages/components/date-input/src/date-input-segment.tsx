@@ -1,11 +1,10 @@
 import type {DateInputReturnType, DateInputSlots, SlotsToClasses} from "@heroui/theme";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {DateFieldState, DateSegment} from "@react-stately/datepicker";
 
-import {HTMLHeroUIProps} from "@heroui/system";
 import {useDateSegment} from "@react-aria/datepicker";
-import {DateFieldState, DateSegment} from "@react-stately/datepicker";
-import {mergeProps} from "@react-aria/utils";
 import {useRef} from "react";
-import {dataAttr} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 
 export interface DateInputSegmentProps extends HTMLHeroUIProps<"div"> {
   state: DateFieldState;

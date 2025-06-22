@@ -1,15 +1,16 @@
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {Virtualizer} from "@tanstack/react-virtual";
+import type {ValuesType} from "./use-table";
+
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableRowGroup} from "@react-aria/table";
 import {filterDOMProps} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
-import {Virtualizer} from "@tanstack/react-virtual";
 
 import TableRow from "./table-row";
 import TableCell from "./table-cell";
 import TableCheckboxCell from "./table-checkbox-cell";
-import {ValuesType} from "./use-table";
 
 // @internal
 export interface VirtualizedTableBodyProps extends HTMLHeroUIProps<"tbody"> {

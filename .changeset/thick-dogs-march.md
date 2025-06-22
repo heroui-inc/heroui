@@ -4,22 +4,18 @@
 "@heroui/number-input": patch
 "@heroui/breadcrumbs": patch
 "@heroui/date-picker": patch
-"@heroui/framer-utils": patch
 "@heroui/date-input": patch
 "@heroui/pagination": patch
 "@heroui/accordion": patch
 "@heroui/input-otp": patch
-"@heroui/aria-utils": patch
 "@heroui/calendar": patch
 "@heroui/checkbox": patch
 "@heroui/dropdown": patch
 "@heroui/progress": patch
 "@heroui/skeleton": patch
-"@heroui/divider": patch
 "@heroui/listbox": patch
 "@heroui/popover": patch
 "@heroui/snippet": patch
-"@heroui/spinner": patch
 "@heroui/tooltip": patch
 "@heroui/avatar": patch
 "@heroui/button": patch
@@ -28,7 +24,6 @@
 "@heroui/ripple": patch
 "@heroui/select": patch
 "@heroui/slider": patch
-"@heroui/spacer": patch
 "@heroui/switch": patch
 "@heroui/alert": patch
 "@heroui/badge": patch
@@ -40,17 +35,11 @@
 "@heroui/toast": patch
 "@heroui/card": patch
 "@heroui/chip": patch
-"@heroui/code": patch
 "@heroui/form": patch
 "@heroui/link": patch
 "@heroui/menu": patch
 "@heroui/tabs": patch
 "@heroui/user": patch
-"@heroui/system-rsc": patch
-"@heroui/kbd": patch
-"@heroui/system": patch
-"@heroui/react": minor
-"@heroui/theme": patch
 ---
 
-2.8.0-beta.3
+bump system peer dependencies

@@ -15,7 +15,7 @@ export function isHTMLElement(el: any): el is HTMLElement {
 }
 
 export function getOwnerDocument(node?: Element | null): Document {
-  return isElement(node) ? node.ownerDocument ?? document : document;
+  return isElement(node) ? (node.ownerDocument ?? document) : document;
 }
 
 export function getActiveElement(node?: HTMLElement) {

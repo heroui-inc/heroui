@@ -1,7 +1,8 @@
+import type {Template, TemplateType} from "../types";
+
 import {cn, Select, SelectItem} from "@heroui/react";
 
 import {templates} from "../templates";
-import {Template, TemplateType} from "../types";
 
 import Swatch from "./configuration/swatch";
 

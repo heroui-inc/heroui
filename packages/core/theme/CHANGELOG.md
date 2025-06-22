@@ -1,29 +1,55 @@
 # @heroui/theme
 
-## 2.4.16-beta.2
+## 2.4.18-beta.2
 
 ### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/shared-utils@2.1.10-beta.4
+
+## 2.4.18-beta.1
+
+### Patch Changes
+
+- [#5398](https://github.com/heroui-inc/heroui/pull/5398) [`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be) Thanks [@wingkwong](https://github.com/wingkwong)! - remove RA dependencies (overlays & utils)
+
+- Updated dependencies [[`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be)]:
+  - @heroui/shared-utils@2.1.10-beta.3
+
+## 2.4.18-beta.0
+
+### Patch Changes
+
+- [#5392](https://github.com/heroui-inc/heroui/pull/5392) [`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
 
 - [#5284](https://github.com/heroui-inc/heroui/pull/5284) [`2bf0a42`](https://github.com/heroui-inc/heroui/commit/2bf0a4243a4e02356477a8da2275dba4e299e55f) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix transition scale (#5271)
 
 - [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
 
+- [#4775](https://github.com/heroui-inc/heroui/pull/4775) [`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f) Thanks [@abhinav700](https://github.com/abhinav700)! - add 'outside-top' prop to input (#3058)
+
 - [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
 
-- Updated dependencies [[`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
-  - @heroui/shared-utils@2.1.10-beta.0
+- Updated dependencies [[`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
+  - @heroui/shared-utils@2.1.10-beta.2
 
-## 2.4.16-beta.1
-
-### Patch Changes
-
-- [#5263](https://github.com/heroui-inc/heroui/pull/5263) [`db4bd54`](https://github.com/heroui-inc/heroui/commit/db4bd5437b97e062f896d4122989b834bd6f3300) Thanks [@wingkwong](https://github.com/wingkwong)! - 2.8.0-beta.3
-
-## 2.4.16-beta.0
+## 2.4.17
 
 ### Patch Changes
 
-- [#5254](https://github.com/heroui-inc/heroui/pull/5254) [`d71122b`](https://github.com/heroui-inc/heroui/commit/d71122bd6ecd1f2835ef5412b6f3d020b930b1b3) Thanks [@github-actions](https://github.com/apps/github-actions)! - TailwindCSS v4
+- [#5350](https://github.com/heroui-inc/heroui/pull/5350) [`ace931b`](https://github.com/heroui-inc/heroui/commit/ace931b44db98c227bd4a36bd26c4db8de7d5bf6) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Consistent helperWrapper padding (#5338)
+
+- [#5349](https://github.com/heroui-inc/heroui/pull/5349) [`ff4b1b2`](https://github.com/heroui-inc/heroui/commit/ff4b1b23936412fdb1c762434d673f7b6935ac51) Thanks [@anuj-kuralkar](https://github.com/anuj-kuralkar)! - fixed inconsistent isInvalid styling between Input, InputOtp and DateInput in faded variant (#5339)
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+## 2.4.16
+
+### Patch Changes
+
+- [#5252](https://github.com/heroui-inc/heroui/pull/5252) [`ee4d2eb`](https://github.com/heroui-inc/heroui/commit/ee4d2ebe257319ce1dd14dd96b545f27bd92d56c) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Fixed the clear button rendering for smaller devices (#5069)
 
 ## 2.4.15
 

@@ -1,15 +1,15 @@
 import type {GridNode} from "@react-types/grid";
 import type {TableColumnProps} from "./base";
+import type {Key} from "react";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {ValuesType} from "./use-table";
 
-import {Key, useMemo} from "react";
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {useMemo} from "react";
+import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableCell} from "@react-aria/table";
-import {mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
-
-import {ValuesType} from "./use-table";
 
 // @internal
 export interface TableCellProps<T = object> extends HTMLHeroUIProps<"td"> {

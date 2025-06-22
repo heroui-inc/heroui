@@ -1,15 +1,15 @@
 import type {ToggleVariantProps, ToggleSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaSwitchProps} from "@react-aria/switch";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactNode, Ref} from "react";
 
-import {ReactNode, Ref, useCallback, useId, useRef} from "react";
+import {useCallback, useId, useRef} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {mergeRefs} from "@heroui/react-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useHover} from "@react-aria/interactions";
 import {toggle} from "@heroui/theme";
-import {chain, mergeProps} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useSwitch as useReactAriaSwitch} from "@react-aria/switch";
 import {useMemo} from "react";
 import {useToggleState} from "@react-stately/toggle";

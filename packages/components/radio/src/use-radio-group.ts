@@ -2,18 +2,18 @@ import type {AriaRadioGroupProps} from "@react-types/radio";
 import type {Orientation} from "@react-types/shared";
 import type {ReactRef} from "@heroui/react-utils";
 import type {RadioGroupSlots, SlotsToClasses} from "@heroui/theme";
+import type {RadioGroupState} from "@react-stately/radio";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {RadioProps} from "./index";
 
 import {radioGroup} from "@heroui/theme";
 import {useCallback, useMemo} from "react";
-import {RadioGroupState, useRadioGroupState} from "@react-stately/radio";
+import {useRadioGroupState} from "@react-stately/radio";
 import {useRadioGroup as useReactAriaRadioGroup} from "@react-aria/radio";
-import {HTMLHeroUIProps, PropGetter, useProviderContext} from "@heroui/system";
+import {useProviderContext} from "@heroui/system";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, safeAriaLabel} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {clsx, safeAriaLabel, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
-
-import {RadioProps} from "./index";
 
 interface Props extends Omit<HTMLHeroUIProps<"div">, "onChange"> {
   /**

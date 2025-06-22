@@ -1,3 +1,5 @@
+import {utilities} from "../utilities";
+
 export const COMMON_UNITS = ["small", "medium", "large"];
 
 export const twMergeConfig = {
@@ -18,5 +20,8 @@ export const twMergeConfig = {
       "bg-stripe-gradient-warning",
       "bg-stripe-gradient-danger",
     ],
+    transition: Object.keys(utilities)
+      .filter((key) => key.includes(".transition"))
+      .map((key) => key.replace(".", "")), // remove the dot from the key, .transition-background -> transition-background
   },
 };

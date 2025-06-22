@@ -1,6 +1,6 @@
 {
   "name": "@heroui/navbar",
-  "version": "2.2.18-beta.3",
+  "version": "2.2.20-beta.2",
   "description": "A responsive navigation header positioned on top side of your page that includes support for branding, links, navigation, collapse and more.",
   "keywords": [
     "navbar"
@@ -37,22 +37,22 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
-    "@heroui/theme": ">=2.4.16-beta.0",
-    "@heroui/system": ">=2.4.16-beta.0"
+    "@heroui/theme": ">=2.4.18-beta.0",
+    "@heroui/system": ">=2.4.18-beta.0"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/framer-utils": "workspace:*",
+    "@heroui/use-resize": "workspace:*",
     "@heroui/use-scroll-position": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/focus": "3.20.3",
-    "@react-aria/interactions": "3.25.1",
-    "@react-aria/button": "3.13.1",
-    "@react-aria/overlays": "3.27.1",
-    "@react-aria/utils": "3.29.0",
-    "@react-stately/toggle": "3.8.4",
-    "@react-stately/utils": "3.10.6"
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/interactions": "3.25.3",
+    "@react-aria/button": "3.13.3",
+    "@react-aria/overlays": "3.27.3",
+    "@react-stately/toggle": "3.8.5",
+    "@react-stately/utils": "3.10.7"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
@@ -64,7 +64,7 @@
     "@heroui/link": "workspace:*",
     "@heroui/test-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react-lorem-component": "0.13.0",
     "clean-package": "2.2.0",
     "react": "18.3.0",

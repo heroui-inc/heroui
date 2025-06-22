@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-pagination",
-  "version": "2.2.13-beta.1",
+  "version": "2.2.15-beta.2",
   "description": "State management hook for Pagination component, it lets you manage pagination with controlled and uncontrolled state",
   "keywords": [
     "use-pagination"
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
-    "@react-aria/i18n": "3.12.9"
+    "@react-aria/i18n": "3.12.10"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

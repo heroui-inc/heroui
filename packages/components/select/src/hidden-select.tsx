@@ -2,11 +2,13 @@
  * Based on @react-aria/select with some modifications to support required attribute and
  * custom input/select props.
  */
-import {FocusableElement} from "@react-types/shared";
-import React, {ReactNode, RefObject} from "react";
-import {useFormReset} from "@react-aria/utils";
+import type {FocusableElement} from "@react-types/shared";
+import type {ReactNode, RefObject} from "react";
+import type {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
+
+import React from "react";
+import {useFormReset} from "@heroui/use-form-reset";
 import {useVisuallyHidden} from "@react-aria/visually-hidden";
-import {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
 import {useFormValidation} from "@react-aria/form";
 
 import {selectData} from "./use-select";
@@ -104,7 +106,7 @@ export function useHiddenSelect<T>(
       value:
         selectionMode === "multiple"
           ? [...state.selectedKeys].map((k) => String(k))
-          : [...state.selectedKeys][0] ?? "",
+          : ([...state.selectedKeys][0] ?? ""),
       multiple: selectionMode === "multiple",
       onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
         state.setSelectedKeys(e.target.value);

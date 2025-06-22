@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "@/styles/sandpack.css";
-import {Metadata, Viewport} from "next";
+import type {Metadata, Viewport} from "next";
+
 import {clsx} from "@heroui/shared-utils";
 import {Analytics} from "@vercel/analytics/next";
 
@@ -12,7 +13,7 @@ import {siteConfig} from "@/config/site";
 import {fonts} from "@/config/fonts";
 import {Navbar} from "@/components/navbar";
 import {Footer} from "@/components/footer";
-import {ProBanner} from "@/components/pro-banner";
+import {HeroUIChatBanner} from "@/components/heroui-chat-banner";
 
 export const metadata: Metadata = {
   title: {
@@ -75,14 +76,14 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen text-foreground bg-background font-sans antialiased",
           fonts.sans.variable,
           fonts.mono.variable,
         )}
       >
         <Providers themeProps={{attribute: "class", defaultTheme: "dark"}}>
           <div className="relative flex flex-col" id="app-container">
-            <ProBanner />
+            <HeroUIChatBanner />
             <Navbar mobileRoutes={manifest.mobileRoutes} routes={manifest.routes} />
             {children}
             <Analytics mode="production" />

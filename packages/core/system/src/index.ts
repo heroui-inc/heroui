@@ -27,11 +27,12 @@ export {
   extendVariants,
 } from "@heroui/system-rsc";
 
-export type {SupportedCalendars} from "./types";
 export type {HeroUIProviderProps} from "./provider";
 export type {ProviderContextProps} from "./provider-context";
 
 export {HeroUIProvider} from "./provider";
 export {ProviderContext, useProviderContext} from "./provider-context";
 
-export {useLabelPlacement} from "./hooks";
+export {useLabelPlacement, useInputLabelPlacement} from "./hooks";
+
+export {shouldClientNavigate, useRouter} from "./ext/router-provider";
