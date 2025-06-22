@@ -1,0 +1,132 @@
+---
+title: "HeroUI v2.8.0"
+description: "TailwindCSS v4, improvements and bug fixes."
+date: "2025-06-20"
+image: "/blog/v2.8.0.jpg"
+tags: ["heroui", "v2.8.0", "release", "tailwind v4", "improvements", "theme"]
+author:
+  name: "WK Wong"
+  username: "@wingkwong"
+  link: "https://github.com/wingkwong"
+  avatar: "https://avatars.githubusercontent.com/u/35857179?v=4"
+---
+
+import closeToast from "@/content/components/toast/close.ts";
+
+<img
+  src="/blog/v2.8.0_2x.jpg"
+  width={700}
+  height={350}
+  alt="HeroUI v2.8.0"
+  className="w-full border border-transparent dark:border-default-200/50 object-fit rounded-xl shadow-lg"
+/>
+
+HeroUI version **v2.8.0** introduces TailwindCSS v4, improvements and bug fixes.
+
+## What's New in v2.8.0?
+
+- [TailwindCSS v4](#tailwindcss-v4) - Support for TailwindCSS and upgrades to various dependencies.
+- [Overlay Enhancement](#overlay-enhancement) - Enhanced overlay and outside interactions across multiple components.
+- [Component Enhancement](#component-enhancement) - Enhanced component capabilities.
+- [Package Size Optimization](#package-size-optimization) - Reduce the bundle size for individual packages
+- [What's Next?](#whats-next) - Upcoming features and improvements
+- [Breaking Changes](#breaking-changes) - Important changes that may affect existing implementations
+- [Release Changes](#release-changes) - Detailed list of features, documentation updates, bug fixes and enhancements
+
+<Spacer y={4} />
+
+**Upgrade today by using one of the following methods**:
+
+1. Upgrading HeroUI using the `cli`
+
+<PackageManagers
+  commands={{
+    cli: "heroui upgrade --all",
+    npm: "npx heroui-cli@latest upgrade --all",
+  }}
+/>
+
+2. Upgrading HeroUI using package managers
+
+<PackageManagers
+  commands={{
+    npm: "npm install @heroui/react@latest",
+    pnpm: "pnpm add @heroui/react@latest",
+    yarn: "yarn add @heroui/react@latest",
+    bun: "bun add @heroui/react@latest",
+  }}
+/>
+
+<Spacer y={4} />
+
+## TailwindCSS v4
+
+HeroUI is now compatible with TailwindCSS v4. HeroUI CLI supports to initialize starter templates with Tailwind v4 as well.
+
+To upgrade your existing projects, please refer to [migration guide](/docs/guide/tailwind-v4#migration-steps).
+
+## Overlay Enhancement
+
+The overlay and outside interaction handling for overlays, popovers, modals, dropdowns, selects, and tooltips have been improved to result in more consistent dismissal behaviour. 
+
+## Component Enhancement
+
+### Toast
+
+- The return type of `addToast` has been changed from `void` to `string` where the string value is the unique key value of the newly created toast.
+- A new method `closeToast(key: string): void` has been introduced to accept a key value of `string` type and close the toast with the key.
+
+<CodeDemo
+  title="Simple Usage"
+  files={closeToast}
+/>
+
+### Input
+
+The Input component now features a new label placement option `outside-top`. Previously, labels would always remain inside the input field if there was no placeholder. 
+
+The new `outside-top` option ensures that labels are consistently displayed at the top of the input field, regardless of whether a placeholder is present, similar to the existing `outside-left` placement.
+
+### Select
+
+Two new properties `isClearable`` and `onClear`` have been introduced in the Select component. A clear button is visible when a value is slected and a callback function triggered upon clearing the selection for custom handling.
+
+### Table
+
+The table header previously utilized either a chevron-up or chevron-down icon for sorting, which was not configurable. A new `sortIcon` property has been introduced, allowing users to customize the default sort icon. This icon will only be applied when `allowsSorting` is set to true.
+
+## Package Size Optimization
+
+Optimizations have been made to the sizes of specific individual packages to enhance performance. Please note that these changes are limited to certain packages such as `@heroui/input`, `@heroui/modal`, etc., and do not extend to the global package `@heroui/react`.
+
+## What's Next?
+
+XXXXXX
+
+## Breaking Changes
+
+- The component style have been updated to align TailwindCSS v4.
+- `loadingIcon` now renames to `loadingComponent` in Toast component
+
+## Release Changes
+
+<Spacer y={1} />
+
+Special thanks to HeroUI Team members [@wingkwong](https://github.com/wingkwong), [@macci001](https://github.com/macci001), [@vinroger](https://github.com/vinroger), [@winchesHe](https://github.com/winchesHe), [@tianenpang](https://github.com/tianenpang) and contributors for their contributions to this release.
+
+<Spacer y={6} />
+
+Thanks for reading and happy coding! 🚀
+
+---
+
+## Community
+
+We're excited to see the community adopt NextUI, raise issues, and provide feedback.
+Whether it's a feature request, bug report, or a project to showcase, please get involved!
+
+<Community />
+
+## Contributing
+
+PR's on HeroUI are always welcome, please see our [contribution guidelines](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.
