@@ -220,7 +220,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         startTime.current = timestamp;
       }
 
-      if (isToastHovered || isRegionExpanded || index != 0) {
+      if (isToastHovered || isRegionExpanded || index !== 0) {
         pausedTime.current += timestamp - startTime.current;
         startTime.current = null;
         animationRef.current = requestAnimationFrame(updateProgress);
