@@ -1,3 +1,5 @@
+import type {UseTooltipProps} from "./use-tooltip";
+
 import {forwardRef} from "@heroui/system";
 import {OverlayContainer} from "@react-aria/overlays";
 import {AnimatePresence, m, LazyMotion} from "framer-motion";
@@ -7,7 +9,7 @@ import {Children, cloneElement, isValidElement} from "react";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {mergeProps} from "@react-aria/utils";
 
-import {UseTooltipProps, useTooltip} from "./use-tooltip";
+import {useTooltip} from "./use-tooltip";
 
 export interface TooltipProps extends Omit<UseTooltipProps, "disableTriggerFocus" | "backdrop"> {}
 
@@ -54,7 +56,7 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
 
       trigger = cloneElement(child, getTriggerProps(child.props, childRef));
     }
-  } catch (error) {
+  } catch {
     trigger = <span />;
     warn("Tooltip must have only one child node. Please, check your code.");
   }
@@ -62,39 +64,44 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
   const {ref: tooltipRef, id, style, ...otherTooltipProps} = getTooltipProps();
 
   const animatedContent = (
-    <div ref={tooltipRef} id={id} style={style}>
-      <LazyMotion features={domAnimation}>
-        <m.div
-          animate="enter"
-          exit="exit"
-          initial="exit"
-          variants={TRANSITION_VARIANTS.scaleSpring}
-          {...mergeProps(motionProps, otherTooltipProps)}
-          style={{
-            ...getTransformOrigins(placement),
-          }}
-        >
-          <Component {...getTooltipContentProps()}>{content}</Component>
-        </m.div>
-      </LazyMotion>
+    <div key={`${id}-tooltip-content`} ref={tooltipRef} id={id} style={style}>
+      <m.div
+        key={`${id}-tooltip-inner`}
+        animate="enter"
+        exit="exit"
+        initial="exit"
+        variants={TRANSITION_VARIANTS.scaleSpring}
+        {...mergeProps(motionProps, otherTooltipProps)}
+        style={{
+          ...getTransformOrigins(placement),
+        }}
+      >
+        <Component {...getTooltipContentProps()}>{content}</Component>
+      </m.div>
     </div>
   );
 
   return (
     <>
       {trigger}
-      {disableAnimation && isOpen ? (
-        <OverlayContainer portalContainer={portalContainer}>
-          <div ref={tooltipRef} id={id} style={style} {...otherTooltipProps}>
-            <Component {...getTooltipContentProps()}>{content}</Component>
-          </div>
-        </OverlayContainer>
+      {disableAnimation ? (
+        isOpen && (
+          <OverlayContainer portalContainer={portalContainer}>
+            <div ref={tooltipRef} id={id} style={style} {...otherTooltipProps}>
+              <Component {...getTooltipContentProps()}>{content}</Component>
+            </div>
+          </OverlayContainer>
+        )
       ) : (
-        <AnimatePresence>
-          {isOpen ? (
-            <OverlayContainer portalContainer={portalContainer}>{animatedContent}</OverlayContainer>
-          ) : null}
-        </AnimatePresence>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence>
+            {isOpen && (
+              <OverlayContainer portalContainer={portalContainer}>
+                {animatedContent}
+              </OverlayContainer>
+            )}
+          </AnimatePresence>
+        </LazyMotion>
       )}
     </>
   );

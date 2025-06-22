@@ -8,7 +8,7 @@ export const parseDependencies = (content: string) => {
 
   // by default, react and heroui packages are installed already
   const installedPackages = {
-    React,
+    ...React,
     ...HeroUI,
   } as Record<string, unknown>;
 
@@ -52,6 +52,6 @@ export const parseDependencies = (content: string) => {
 };
 
 const fixedVersions = {
-  "@internationalized/date": "3.7.0",
-  "@react-aria/i18n": "3.12.5",
+  "@internationalized/date": "3.8.2",
+  "@react-aria/i18n": "3.12.10",
 };

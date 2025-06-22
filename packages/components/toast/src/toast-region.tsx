@@ -1,15 +1,16 @@
 import type {SlotsToClasses, ToastRegionSlots, ToastRegionVariantProps} from "@heroui/theme";
+import type {AriaToastRegionProps} from "@react-aria/toast";
+import type {QueuedToast, ToastState} from "@react-stately/toast";
+import type {ToastProps, ToastPlacement} from "./use-toast";
 
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
-import {QueuedToast, ToastState} from "@react-stately/toast";
+import {useToastRegion} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
 import {mergeProps} from "@react-aria/utils";
 import {toastRegion} from "@heroui/theme";
 import {clsx} from "@heroui/shared-utils";
 
 import Toast from "./toast";
-import {ToastProps, ToastPlacement} from "./use-toast";
 
 export interface RegionProps {
   className?: string;
@@ -81,7 +82,7 @@ export function ToastRegion<T extends ToastProps>({
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
-      {toastQueue.visibleToasts.map((toast: QueuedToast<ToastProps>, index) => {
+      {[...toastQueue.visibleToasts].reverse().map((toast: QueuedToast<ToastProps>, index) => {
         if (disableAnimation && total - index > maxVisibleToasts) {
           return null;
         }

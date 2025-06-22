@@ -6,7 +6,10 @@ export default function App() {
 
   return (
     <>
-      <ToastProvider placement={placement} toastOffset={placement.includes("top") ? 60 : 0} />
+      <div className="fixed z-[100]">
+        <ToastProvider placement={placement} toastOffset={placement.includes("top") ? 60 : 0} />
+      </div>
+
       <div className="flex flex-wrap gap-2">
         {[
           ["Top Left", "top-left"],

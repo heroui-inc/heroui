@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-intersection-observer",
-  "version": "2.2.8",
+  "version": "2.2.13",
   "description": "Tracks the intersection of a DOM element and its containing element or the viewport.",
   "keywords": [
     "use-intersection-observer"
@@ -32,12 +32,6 @@
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
-  },
-  "dependencies": {
-    "@react-aria/utils": "3.28.0",
-    "@react-aria/ssr": "3.9.7",
-    "@react-types/shared": "3.28.0",
-    "@react-aria/interactions": "3.24.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

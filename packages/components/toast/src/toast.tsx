@@ -1,5 +1,9 @@
+import type {ReactElement} from "react";
+import type {ButtonProps} from "@heroui/button";
+import type {UseToastProps} from "./use-toast";
+
 import {forwardRef} from "@heroui/system";
-import {Button, ButtonProps} from "@heroui/button";
+import {Button} from "@heroui/button";
 import {
   CloseIcon,
   DangerIcon,
@@ -7,13 +11,11 @@ import {
   SuccessIcon,
   WarningIcon,
 } from "@heroui/shared-icons";
-import {AnimatePresence, m, LazyMotion} from "framer-motion";
+import {m} from "framer-motion";
 import {cloneElement, isValidElement} from "react";
 import {Spinner} from "@heroui/spinner";
 
-import {UseToastProps, useToast} from "./use-toast";
-
-const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
+import {useToast} from "./use-toast";
 
 export interface ToastProps extends UseToastProps {}
 
@@ -58,12 +60,19 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     ref,
   });
 
-  const customIcon = icon && isValidElement(icon) ? cloneElement(icon, getIconProps()) : null;
+  const customIcon =
+    typeof icon === "function"
+      ? icon(getIconProps())
+      : isValidElement(icon) && cloneElement(icon as ReactElement, getIconProps());
+
   const IconComponent = severity ? iconMap[severity] : iconMap[color] || iconMap.default;
+
   const customLoadingIcon =
-    loadingIcon && isValidElement(loadingIcon)
-      ? cloneElement(loadingIcon, getLoadingIconProps())
-      : null;
+    typeof loadingIcon === "function"
+      ? loadingIcon(getLoadingIconProps())
+      : isValidElement(loadingIcon) &&
+        cloneElement(loadingIcon as ReactElement, getLoadingIconProps());
+
   const loadingIconComponent = isLoading
     ? customLoadingIcon || (
         <Spinner
@@ -75,7 +84,9 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
     : null;
 
   const customCloseIcon =
-    closeIcon && isValidElement(closeIcon) ? cloneElement(closeIcon, {}) : null;
+    typeof closeIcon === "function"
+      ? closeIcon({})
+      : isValidElement(closeIcon) && cloneElement(closeIcon as ReactElement, {});
 
   const toastContent = (
     <Component ref={domRef} {...getToastProps()}>
@@ -108,21 +119,17 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       {disableAnimation ? (
         toastContent
       ) : (
-        <LazyMotion features={loadFeatures}>
-          <AnimatePresence>
-            <m.div {...getMotionDivProps()}>
-              <m.div
-                key={"inner-div"}
-                animate={{opacity: 1}}
-                exit={{opacity: 0}}
-                initial={{opacity: 0}}
-                transition={{duration: 0.25, ease: "easeOut", delay: 0.1}}
-              >
-                {toastContent}
-              </m.div>
-            </m.div>
-          </AnimatePresence>
-        </LazyMotion>
+        <m.div {...getMotionDivProps()}>
+          <m.div
+            key={"inner-div"}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            initial={{opacity: 0}}
+            transition={{duration: 0.25, ease: "easeOut", delay: 0.1}}
+          >
+            {toastContent}
+          </m.div>
+        </m.div>
       )}
     </>
   );

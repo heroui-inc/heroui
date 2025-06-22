@@ -1,4 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {CalendarProps} from "../src";
+
 import * as React from "react";
 import {render, act, fireEvent} from "@testing-library/react";
 import {CalendarDate, isWeekend} from "@internationalized/date";
@@ -6,7 +8,7 @@ import {triggerPress, keyCodes} from "@heroui/test-utils";
 import {useLocale} from "@react-aria/i18n";
 import {HeroUIProvider} from "@heroui/system";
 
-import {Calendar as CalendarBase, CalendarProps} from "../src";
+import {Calendar as CalendarBase} from "../src";
 
 /**
  * Custom calendar to disable animations and avoid issues with react-motion and jest
@@ -96,7 +98,6 @@ describe("Calendar", () => {
     });
 
     it("should focus the selected date if autoFocus is set", () => {
-      // eslint-disable-next-line jsx-a11y/no-autofocus
       const wrapper = render(<Calendar autoFocus value={new CalendarDate(2024, 3, 31)} />);
 
       const selectedDate = wrapper.getByLabelText("Selected", {exact: false});

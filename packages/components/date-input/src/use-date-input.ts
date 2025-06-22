@@ -1,17 +1,16 @@
 import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
-import type {AriaDateFieldProps} from "@react-types/datepicker";
-import type {SupportedCalendars} from "@heroui/system";
-import type {DateValue} from "@react-types/datepicker";
-import type {Calendar} from "@internationalized/date";
+import type {AriaDateFieldProps, SpectrumDatePickerBase} from "@react-types/datepicker";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
+import type {DateValue, CalendarIdentifier} from "@internationalized/date";
+import type {PropGetter, HTMLHeroUIProps} from "@heroui/system";
 
 import {useLocale} from "@react-aria/i18n";
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
 import {mergeProps} from "@react-aria/utils";
-import {PropGetter, useLabelPlacement, useProviderContext} from "@heroui/system";
-import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
+import {useLabelPlacement, useProviderContext} from "@heroui/system";
+import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
@@ -88,7 +87,7 @@ interface Props<T extends DateValue> extends HeroUIBaseProps<T> {
    *
    * @default all calendars
    */
-  createCalendar?: (calendar: SupportedCalendars) => Calendar | null;
+  createCalendar?: SpectrumDatePickerBase<DateValue>["createCalendar"];
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.
@@ -122,7 +121,9 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
 
   const {locale} = useLocale();
 
-  const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
+  const calendarProp = createCalendar(
+    new DateFormatter(locale).resolvedOptions().calendar as CalendarIdentifier,
+  );
 
   // by default, we are using gregorian calendar with possible years in [1900, 2099]
   // however, some locales such as `th-TH-u-ca-buddhist` using different calendar making the years out of bound
@@ -148,10 +149,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     descriptionProps: descriptionPropsProp,
     validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     shouldForceLeadingZeros = true,
-    minValue = globalContext?.defaultDates?.minDate ??
-      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = globalContext?.defaultDates?.maxDate ??
-      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
+    minValue = (globalContext?.defaultDates?.minDate ??
+      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1)) as DateValue,
+    maxValue = (globalContext?.defaultDates?.maxDate ??
+      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31)) as DateValue,
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
     isInvalid: isInvalidProp = validationState ? validationState === "invalid" : false,
     errorMessage,

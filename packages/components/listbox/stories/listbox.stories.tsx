@@ -1,7 +1,9 @@
 import type {Selection} from "@react-types/shared";
+import type {Key} from "react";
+import type {Meta} from "@storybook/react";
+import type {ListboxProps} from "../src";
 
-import React, {Key} from "react";
-import {Meta} from "@storybook/react";
+import React from "react";
 import {menuItem} from "@heroui/theme";
 import {
   AddNoteBulkIcon,
@@ -16,7 +18,7 @@ import {Chip} from "@heroui/chip";
 import {clsx} from "@heroui/shared-utils";
 import {ScrollShadow} from "@heroui/scroll-shadow";
 
-import {Listbox, ListboxItem, ListboxSection, ListboxProps} from "../src";
+import {Listbox, ListboxItem, ListboxSection} from "../src";
 
 const BugIcon = (props) => (
   <svg height="1em" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg" {...props}>

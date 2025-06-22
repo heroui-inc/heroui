@@ -1,19 +1,20 @@
 import type {SliderVariantProps} from "@heroui/theme";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {RefObject} from "react";
+import type {AriaSliderThumbProps} from "@react-aria/slider";
+import type {SliderState} from "@react-stately/slider";
+import type {TooltipProps} from "@heroui/tooltip";
+import type {UseSliderProps} from "./use-slider";
 
-import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import {useSliderThumb as useAriaSliderThumb} from "@react-aria/slider";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
-import {RefObject, useRef} from "react";
-import {AriaSliderThumbProps} from "@react-aria/slider";
-import {SliderState} from "@react-stately/slider";
+import {useDOMRef} from "@heroui/react-utils";
+import {useRef} from "react";
 import {useHover, usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
 import {mergeProps} from "@react-aria/utils";
 import {dataAttr} from "@heroui/shared-utils";
-import {TooltipProps} from "@heroui/tooltip";
 import {useNumberFormatter} from "@react-aria/i18n";
-
-import {UseSliderProps} from "./use-slider";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**

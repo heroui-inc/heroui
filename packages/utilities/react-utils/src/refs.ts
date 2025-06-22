@@ -1,6 +1,7 @@
-import * as React from "react";
+import type * as React from "react";
+import type {MutableRefObject} from "react";
+
 import {isFunction} from "@heroui/shared-utils";
-import {MutableRefObject} from "react";
 
 export type ReactRef<T> = React.RefObject<T> | React.MutableRefObject<T> | React.Ref<T>;
 
@@ -21,7 +22,7 @@ export function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
 
   try {
     (ref as MutableRefObject<T>).current = value;
-  } catch (error) {
+  } catch {
     throw new Error(`Cannot assign value '${value}' to ref '${ref}'`);
   }
 }

@@ -1,10 +1,11 @@
 import type {AvatarSlots, AvatarVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {DOMElement, DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
 import {avatar} from "@heroui/theme";
 import {useProviderContext} from "@heroui/system";
 import {mergeProps} from "@react-aria/utils";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {clsx, safeText, dataAttr} from "@heroui/shared-utils";
 import {useFocusRing} from "@react-aria/focus";
 import {useMemo, useCallback} from "react";

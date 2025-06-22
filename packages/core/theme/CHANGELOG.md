@@ -1,5 +1,56 @@
 # @heroui/theme
 
+## 2.4.17
+
+### Patch Changes
+
+- [#5350](https://github.com/heroui-inc/heroui/pull/5350) [`ace931b`](https://github.com/heroui-inc/heroui/commit/ace931b44db98c227bd4a36bd26c4db8de7d5bf6) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Consistent helperWrapper padding (#5338)
+
+- [#5349](https://github.com/heroui-inc/heroui/pull/5349) [`ff4b1b2`](https://github.com/heroui-inc/heroui/commit/ff4b1b23936412fdb1c762434d673f7b6935ac51) Thanks [@anuj-kuralkar](https://github.com/anuj-kuralkar)! - fixed inconsistent isInvalid styling between Input, InputOtp and DateInput in faded variant (#5339)
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+## 2.4.16
+
+### Patch Changes
+
+- [#5252](https://github.com/heroui-inc/heroui/pull/5252) [`ee4d2eb`](https://github.com/heroui-inc/heroui/commit/ee4d2ebe257319ce1dd14dd96b545f27bd92d56c) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Fixed the clear button rendering for smaller devices (#5069)
+
+## 2.4.15
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/shared-utils@2.1.9
+
+## 2.4.14
+
+### Patch Changes
+
+- [#5170](https://github.com/heroui-inc/heroui/pull/5170) [`f223e1f`](https://github.com/heroui-inc/heroui/commit/f223e1ff634ee5c97e6e88e2d74ab002132fa19e) Thanks [@Nathanael-Shermett](https://github.com/Nathanael-Shermett)! - Utilize `hover-opacity` in Link & Breadcrumb component (#5169)
+
+- [#5179](https://github.com/heroui-inc/heroui/pull/5179) [`99a5bc2`](https://github.com/heroui-inc/heroui/commit/99a5bc2f4caa7d5468c629c30286935b5e5fa833) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed input-otp variants on segment background
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+
+## 2.4.13
+
+### Patch Changes
+
+- [#5147](https://github.com/heroui-inc/heroui/pull/5147) [`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix select styles for label & helper text (#5413)
+
+- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
+
+- [#5098](https://github.com/heroui-inc/heroui/pull/5098) [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9) Thanks [@wingkwong](https://github.com/wingkwong)! - fix input with type=color style (#5083)
+
+- [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
+  Changing the type of description prop to ReactNode(#5033).
+
 ## 2.4.12
 
 ### Patch Changes

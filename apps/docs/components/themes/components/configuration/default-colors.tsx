@@ -1,8 +1,9 @@
+import type {Config, ThemeType} from "../../types";
+
 import {defaultColorsId} from "../../constants";
 import {setCssColor} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
 import {templates} from "../../templates";
-import {Config, ThemeType} from "../../types";
 import {ColorPicker} from "../color-picker";
 import {ConfigSection} from "../config-section";
 
