@@ -209,7 +209,6 @@ export function useSlider(originalProps: UseSliderProps) {
   const state = useSliderState({
     ...otherProps,
     value: validatedValue,
-    defaultValue: otherProps.defaultValue,
     isDisabled: originalProps?.isDisabled ?? false,
     orientation,
     step,
