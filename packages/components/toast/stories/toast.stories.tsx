@@ -469,14 +469,6 @@ export const PromiseToast = {
   },
 };
 
-export const PromiseWithCustomLoadingComponent = {
-  render: PromiseToastTemplate,
-  args: {
-    ...defaultProps,
-    loadingComponent: <Spinner variant="spinner" />,
-  },
-};
-
 export const ShowTimeoutProgress = {
   render: ShowTimeoutProgressTemplate,
   args: {
@@ -511,6 +503,15 @@ export const CustomIcon = {
     ...defaultProps,
     title: "Custom Icon",
     icon: AvatarIcon,
+  },
+};
+
+export const CustomLoadingComponent = {
+  render: PromiseToastTemplate,
+  args: {
+    ...defaultProps,
+    title: "Custom Loading Icon",
+    loadingComponent: <Spinner variant="spinner" />,
   },
 };
 
