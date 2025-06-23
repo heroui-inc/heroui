@@ -202,6 +202,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   }, []);
 
   const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
+  const [isToastExiting, setIsToastExiting] = useState(false);
 
   useEffect(() => {
     if (!promiseProp) return;
@@ -220,7 +221,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         startTime.current = timestamp;
       }
 
-      if (isToastHovered || isRegionExpanded || index !== 0) {
+      if (isToastHovered || isRegionExpanded) {
         pausedTime.current += timestamp - startTime.current;
         startTime.current = null;
         animationRef.current = requestAnimationFrame(updateProgress);
@@ -232,7 +233,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       timeElapsed.current = elapsed;
       if (timeElapsed.current >= timeout) {
-        state.close(toast.key);
+        setIsToastExiting(true);
       }
 
       progressRef.current = Math.min((elapsed / timeout) * 100, 100);
@@ -264,6 +265,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     total,
     isRegionExpanded,
     isLoading,
+    setIsToastExiting,
   ]);
 
   const Component = as || "div";
@@ -283,7 +285,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   }, []);
 
   const [initialHeight, setInitialHeight] = useState<number>(0);
-  const [isToastExiting, setIsToastExiting] = useState(false);
 
   // Following was inspired from sonner ❤️
   useLayoutEffect(() => {
