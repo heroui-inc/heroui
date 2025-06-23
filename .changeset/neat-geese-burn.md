@@ -2,4 +2,4 @@
 "@heroui/theme": patch
 ---
 
-fix(table): header and isStriped missing radius
+fix(table): fix missing radius styles in th and td in Table (#4988)
