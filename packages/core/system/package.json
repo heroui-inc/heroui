@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system",
-  "version": "2.4.17",
+  "version": "2.4.18",
   "description": "HeroUI system primitives",
   "keywords": [
     "system"
@@ -57,8 +57,7 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
     "@react-aria/i18n": "3.12.10",
-    "@react-aria/overlays": "3.27.2",
-    "@react-aria/utils": "3.29.1",
-    "@react-types/calendar": "3.7.2"
+    "@react-aria/overlays": "3.27.3",
+    "@react-aria/utils": "3.29.1"
   }
 }

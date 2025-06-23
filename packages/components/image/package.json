@@ -1,6 +1,6 @@
 {
   "name": "@heroui/image",
-  "version": "2.2.13",
+  "version": "2.2.14",
   "description": "A simple image component",
   "keywords": [
     "image"
@@ -37,7 +37,7 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/system": ">=2.4.17"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
