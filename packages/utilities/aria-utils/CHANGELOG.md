@@ -1,5 +1,12 @@
 # @heroui/aria-utils
 
+## 2.2.19
+
+### Patch Changes
+
+- Updated dependencies [[`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed), [`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf)]:
+  - @heroui/system@2.4.18
+
 ## 2.2.18
 
 ### Patch Changes
