@@ -1,11 +1,12 @@
 import type {AriaDialogProps} from "@react-aria/dialog";
 import type {HTMLMotionProps} from "framer-motion";
+import type {DOMAttributes, ReactNode} from "react";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
-import {DOMAttributes, ReactNode, useMemo, useRef} from "react";
+import {useMemo, useRef} from "react";
 import {DismissButton} from "@react-aria/overlays";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 import {m, LazyMotion} from "framer-motion";
-import {HTMLHeroUIProps} from "@heroui/system";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {useDialog} from "@react-aria/dialog";
 
@@ -74,7 +75,7 @@ const PopoverContent = (props: PopoverContentProps) => {
           exit="exit"
           initial="exit"
           variants={TRANSITION_VARIANTS.fade}
-          {...(getBackdropProps() as HTMLMotionProps<"div">)}
+          {...(getBackdropProps() as Omit<HTMLMotionProps<"div">, "ref">)}
         />
       </LazyMotion>
     );

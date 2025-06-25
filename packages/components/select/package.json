@@ -1,6 +1,6 @@
 {
   "name": "@heroui/select",
-  "version": "2.4.16",
+  "version": "2.4.22",
   "description": "A select displays a collapsible list of options and allows a user to select one of them.",
   "keywords": [
     "select"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.10",
-    "@heroui/theme": ">=2.4.9",
+    "@heroui/system": ">=2.4.17",
+    "@heroui/theme": ">=2.4.12",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -53,29 +53,25 @@
     "@heroui/use-aria-multiselect": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/form": "workspace:*",
-    "@react-aria/focus": "3.20.0",
-    "@react-aria/form": "3.0.13",
-    "@react-aria/overlays": "3.26.0",
-    "@react-aria/interactions": "3.24.0",
-    "@react-aria/utils": "3.28.0",
-    "@react-aria/visually-hidden": "3.8.20",
-    "@react-types/shared": "3.28.0",
-    "@tanstack/react-virtual": "3.11.3"
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/form": "3.0.18",
+    "@react-aria/overlays": "3.27.3",
+    "@react-aria/interactions": "3.25.3",
+    "@react-aria/utils": "3.29.1",
+    "@react-aria/visually-hidden": "3.8.25",
+    "@react-types/shared": "3.30.0"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",
     "@heroui/button": "workspace:*",
     "@heroui/chip": "workspace:*",
-    "@heroui/input": "workspace:*",
     "@heroui/stories-utils": "workspace:*",
     "@heroui/test-utils": "workspace:*",
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
-    "@react-aria/i18n": "3.12.6",
-    "@react-stately/data": "3.12.2",
     "clean-package": "2.2.0",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react": "18.3.0",
     "react-dom": "18.3.0",
     "react-hook-form": "^7.51.3"

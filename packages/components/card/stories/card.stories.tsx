@@ -1,12 +1,14 @@
+import type {Meta} from "@storybook/react";
+import type {CardProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {card} from "@heroui/theme";
 import {Link} from "@heroui/link";
 import {Button} from "@heroui/button";
 import {Code} from "@heroui/code";
 import {Image} from "@heroui/image";
 
-import {Card, CardBody, CardHeader, CardFooter, CardProps} from "../src";
+import {Card, CardBody, CardHeader, CardFooter} from "../src";
 
 export default {
   title: "Components/Card",
@@ -329,7 +331,6 @@ const PrimaryActionTemplate = (args: CardProps) => {
   return (
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
       {list.map((item, index) => (
-        // eslint-disable-next-line no-console
         <Card {...args} key={index} isPressable onPress={() => handlePress(item)}>
           <CardBody className="p-0">
             <img
@@ -352,12 +353,10 @@ const PressableTemplate = (args: CardProps) => {
   // Both events should be fired when clicking on the card
 
   const handlePress = () => {
-    // eslint-disable-next-line no-console
     alert("card pressed");
   };
 
   const onClick = () => {
-    // eslint-disable-next-line no-console
     alert("card clicked");
   };
 

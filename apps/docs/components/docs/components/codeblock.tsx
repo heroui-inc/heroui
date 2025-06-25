@@ -102,7 +102,7 @@ const CodeBlockHighlight = ({
         // due to display: contents on the scrollable child element, this div will also scroll
         // this causes the intersection observer to trigger if scrolled far enough horizontally
         // set the width to fit-content to prevent this div from going off screen
-        width: "fit-content",
+        width: "w-full",
       }}
     >
       {isVisible ? (
@@ -152,7 +152,7 @@ const CodeBlockHighlight = ({
                         "px-2": showLines,
                       },
                       {
-                        "before:to-code-background before:absolute before:left-0 before:z-0 before:h-full before:w-full before:bg-gradient-to-r before:from-white/10 before:content-[''] before:pointer-events-none":
+                        "before:to-code-background before:absolute before:left-0 before:z-0 before:h-full before:w-full before:bg-linear-to-r before:from-white/10 before:content-[''] before:pointer-events-none":
                           shouldHighlightLine(i),
                       },
                     )}

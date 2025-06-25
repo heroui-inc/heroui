@@ -1,14 +1,19 @@
 import type {SlotsToClasses, ToastSlots, ToastVariantProps} from "@heroui/theme";
+import type {DOMAttributes} from "react";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {AriaToastProps} from "@react-aria/toast";
+import type {QueuedToast, ToastState} from "@react-stately/toast";
+import type {MotionProps} from "framer-motion";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {HTMLHeroUIProps, PropGetter, mapPropsVariants, useProviderContext} from "@heroui/system";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {toast as toastTheme} from "@heroui/theme";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
-import {ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
-import {useToast as useToastAria, AriaToastProps} from "@react-aria/toast";
+import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
+import {useToast as useToastAria} from "@react-aria/toast";
 import {chain, mergeProps} from "@react-aria/utils";
-import {QueuedToast, ToastState} from "@react-stately/toast";
-import {MotionProps} from "framer-motion";
 import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 
@@ -32,7 +37,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * description of the toast
    */
-  description?: string;
+  description?: ReactNode;
   /**
    * Promise based on which the notification will be styled.
    */
@@ -67,15 +72,15 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * Icon to be displayed in the toast - overrides the default icon
    */
-  icon?: ReactNode;
+  icon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Icon to be displayed in the close button - overrides the default close icon
    */
-  closeIcon?: ReactNode | ((props: any) => ReactNode);
+  closeIcon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Icon to be displayed in the loading toast - overrides the loading icon
    */
-  loadingIcon?: ReactNode;
+  loadingIcon?: ReactNode | ((props: DOMAttributes<HTMLElement>) => ReactNode);
   /**
    * Whether the toast-icon should be hidden.
    * @default false
@@ -157,6 +162,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     timeout = 6000,
     shouldShowTimeoutProgress = false,
     icon,
+    loadingIcon,
     onClose,
     severity,
     maxVisibleToasts,
@@ -261,11 +267,10 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   ]);
 
   const Component = as || "div";
-  const loadingIcon: ReactNode = icon;
 
   const domRef = useDOMRef(ref);
   const baseStyles = clsx(className, classNames?.base);
-  const {toastProps, contentProps, titleProps, descriptionProps, closeButtonProps} = useToastAria(
+  const {toastProps, contentProps, titleProps, descriptionProps} = useToastAria(
     props,
     state,
     domRef,
@@ -278,10 +283,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   }, []);
 
   const [initialHeight, setInitialHeight] = useState<number>(0);
+  const [isToastExiting, setIsToastExiting] = useState(false);
 
   // Following was inspired from sonner ❤️
   useLayoutEffect(() => {
-    if (!domRef.current || !mounted) {
+    if (!domRef.current || !mounted || isToastExiting) {
       return;
     }
     const toastNode = domRef.current;
@@ -304,7 +310,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       updatedHeights.push(newHeight);
     }
     setHeights(updatedHeights);
-  }, [mounted, total, setHeights, index]);
+  }, [mounted, total, setHeights, index, isToastExiting]);
 
   let liftHeight = 4;
 
@@ -388,21 +394,57 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   }
 
   const getToastProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ref: domRef,
-      className: slots.base({class: clsx(baseStyles, classNames?.base)}),
-      "data-has-title": dataAttr(!isEmpty(title)),
-      "data-has-description": dataAttr(!isEmpty(description)),
-      "data-placement": placement,
-      "data-drag-value": dragValue,
-      "data-toast": true,
-      "aria-label": "toast",
-      style: {
-        opacity: opacityValue,
-      },
-      ...mergeProps(props, otherProps, toastProps, hoverProps),
-    }),
-    [slots, classNames, toastProps, hoverProps, toast, toast.key, opacityValue],
+    (props = {}) => {
+      const aboveToastHeight = index + 1 < total ? heights[index + 1] : 0;
+      const belowToastHeight = index - 1 >= 0 ? heights[index - 1] : 0;
+
+      const topExtension = aboveToastHeight ? Math.ceil(aboveToastHeight / 2) + 8 : 16;
+      const bottomExtension = belowToastHeight ? Math.ceil(belowToastHeight / 2) + 8 : 16;
+
+      const pseudoElementStyles = {
+        "--top-extension": `${topExtension}px`,
+        "--bottom-extension": `${bottomExtension}px`,
+      };
+
+      return {
+        ref: domRef,
+        className: slots.base({class: clsx(baseStyles, classNames?.base)}),
+        "data-has-title": dataAttr(!isEmpty(title)),
+        "data-has-description": dataAttr(!isEmpty(description)),
+        "data-placement": placement,
+        "data-drag-value": dragValue,
+        "data-toast": true,
+        "aria-label": "toast",
+        "data-toast-exiting": dataAttr(isToastExiting),
+        onTransitionEnd: () => {
+          if (isToastExiting) {
+            const updatedHeights = heights;
+
+            updatedHeights.splice(index, 1);
+            setHeights([...updatedHeights]);
+
+            state.close(toast.key);
+          }
+        },
+        style: {
+          opacity: opacityValue,
+          ...pseudoElementStyles,
+        },
+        ...mergeProps(props, otherProps, toastProps, hoverProps),
+      };
+    },
+    [
+      slots,
+      classNames,
+      toastProps,
+      hoverProps,
+      toast,
+      toast.key,
+      opacityValue,
+      isToastExiting,
+      state,
+      toast.key,
+    ],
   );
 
   const getWrapperProps: PropGetter = useCallback(
@@ -459,13 +501,15 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       className: slots.closeButton({class: classNames?.closeButton}),
       "aria-label": "closeButton",
       "data-hidden": dataAttr(hideCloseButton),
-      ...mergeProps(props, closeButtonProps, {
+      ...mergeProps(props, {
         onPress: chain(() => {
+          setIsToastExiting(true);
+
           setTimeout(() => document.body.focus(), 0);
         }, onClose),
       }),
     }),
-    [closeButtonProps, onClose],
+    [setIsToastExiting, onClose, state, toast],
   );
 
   const getCloseIconProps: PropGetter = useCallback(
@@ -578,11 +622,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       };
     },
     [
-      closeButtonProps,
       total,
       index,
       placement,
       isRegionExpanded,
+      isToastExiting,
       liftHeight,
       multiplier,
       initialHeight,

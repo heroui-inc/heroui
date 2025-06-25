@@ -1,6 +1,8 @@
+import type {UseScrollShadowProps} from "./use-scroll-shadow";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseScrollShadowProps, useScrollShadow} from "./use-scroll-shadow";
+import {useScrollShadow} from "./use-scroll-shadow";
 
 export interface ScrollShadowProps extends UseScrollShadowProps {}
 

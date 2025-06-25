@@ -1,5 +1,124 @@
 # @heroui/select
 
+## 2.4.22
+
+### Patch Changes
+
+- [#5382](https://github.com/heroui-inc/heroui/pull/5382) [`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5374](https://github.com/heroui-inc/heroui/pull/5374) [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed) Thanks [@wingkwong](https://github.com/wingkwong)! - bump system peer dependencies
+
+- Updated dependencies [[`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf), [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed)]:
+  - @heroui/use-aria-multiselect@2.4.15
+  - @heroui/use-aria-button@2.2.16
+  - @heroui/listbox@2.3.21
+  - @heroui/popover@2.3.22
+  - @heroui/scroll-shadow@2.3.15
+  - @heroui/form@2.1.21
+  - @heroui/spinner@2.2.19
+  - @heroui/aria-utils@2.2.19
+
+## 2.4.21
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - remove unused dependencies
+
+- Updated dependencies [[`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56)]:
+  - @heroui/use-aria-multiselect@2.4.14
+  - @heroui/use-aria-button@2.2.15
+  - @heroui/aria-utils@2.2.18
+  - @heroui/listbox@2.3.20
+  - @heroui/popover@2.3.21
+  - @heroui/form@2.1.20
+  - @heroui/scroll-shadow@2.3.14
+  - @heroui/shared-icons@2.1.9
+  - @heroui/react-utils@2.1.11
+  - @heroui/spinner@2.2.18
+
+## 2.4.20
+
+### Patch Changes
+
+- [#5286](https://github.com/heroui-inc/heroui/pull/5286) [`74e4dec`](https://github.com/heroui-inc/heroui/commit/74e4deca9a5e24207076c9af3738dd1f4baecc09) Thanks [@wingkwong](https://github.com/wingkwong)! - persist last selected item position (#5282)
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5287](https://github.com/heroui-inc/heroui/pull/5287) [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump framer-motion version
+
+- Updated dependencies [[`8df9716`](https://github.com/heroui-inc/heroui/commit/8df9716dfa29926237682b73df59e8018843e9c0), [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/shared-icons@2.1.8
+  - @heroui/use-aria-multiselect@2.4.13
+  - @heroui/use-aria-button@2.2.14
+  - @heroui/aria-utils@2.2.17
+  - @heroui/listbox@2.3.19
+  - @heroui/popover@2.3.20
+  - @heroui/form@2.1.19
+  - @heroui/scroll-shadow@2.3.13
+  - @heroui/spinner@2.2.17
+
+## 2.4.19
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/form@2.1.18
+  - @heroui/listbox@2.3.18
+  - @heroui/popover@2.3.19
+  - @heroui/scroll-shadow@2.3.13
+  - @heroui/spinner@2.2.16
+  - @heroui/use-aria-button@2.2.13
+  - @heroui/use-aria-multiselect@2.4.12
+  - @heroui/use-safe-layout-effect@2.1.7
+  - @heroui/aria-utils@2.2.16
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-icons@2.1.7
+  - @heroui/shared-utils@2.1.9
+
+## 2.4.18
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/use-aria-multiselect@2.4.11
+  - @heroui/shared-utils@2.1.8
+  - @heroui/use-aria-button@2.2.12
+  - @heroui/aria-utils@2.2.15
+  - @heroui/listbox@2.3.17
+  - @heroui/popover@2.3.18
+  - @heroui/form@2.1.17
+  - @heroui/scroll-shadow@2.3.12
+  - @heroui/spinner@2.2.15
+  - @heroui/react-utils@2.1.9
+
+## 2.4.17
+
+### Patch Changes
+
+- [#5147](https://github.com/heroui-inc/heroui/pull/5147) [`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix select styles for label & helper text (#5413)
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1)]:
+  - @heroui/use-aria-multiselect@2.4.10
+  - @heroui/use-aria-button@2.2.11
+  - @heroui/aria-utils@2.2.14
+  - @heroui/listbox@2.3.16
+  - @heroui/popover@2.3.17
+  - @heroui/form@2.1.16
+  - @heroui/scroll-shadow@2.3.11
+  - @heroui/spinner@2.2.14
+
 ## 2.4.16
 
 ### Patch Changes

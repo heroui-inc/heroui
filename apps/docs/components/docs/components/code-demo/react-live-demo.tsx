@@ -1,3 +1,6 @@
+import type {SandpackFiles} from "@codesandbox/sandpack-react/types";
+import type {GradientBoxProps} from "@/components/gradient-box";
+
 import React from "react";
 import {LivePreview, LiveProvider, LiveError} from "react-live";
 import {clsx} from "@heroui/shared-utils";
@@ -5,10 +8,9 @@ import * as HeroUI from "@heroui/react";
 import * as intlDateUtils from "@internationalized/date";
 import * as reactAriaI18n from "@react-aria/i18n";
 import * as reactHookFormBase from "react-hook-form";
-import {SandpackFiles} from "@codesandbox/sandpack-react/types";
 
 import {BgGridContainer} from "@/components/bg-grid-container";
-import {GradientBox, GradientBoxProps} from "@/components/gradient-box";
+import {GradientBox} from "@/components/gradient-box";
 import {CopyButton} from "@/components/copy-button";
 import {StackblitzButton} from "@/components/stackblitz-button";
 import {PreviewButton} from "@/components/preview-button";

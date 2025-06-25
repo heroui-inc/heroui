@@ -1,6 +1,4 @@
-import type {SpinnerVariants, SupportedCalendars} from "./types";
-import type {Calendar} from "@internationalized/date";
-import type {DateValue} from "@react-types/datepicker";
+import type {SpinnerVariants, Calendar, DateValue, CalendarIdentifier} from "./types";
 
 import {createContext} from "@heroui/react-utils";
 
@@ -86,7 +84,7 @@ export type ProviderContextProps = {
    *
    * @default all calendars
    */
-  createCalendar?: (calendar: SupportedCalendars) => Calendar | null;
+  createCalendar?: (identifier: CalendarIdentifier) => Calendar;
   /**
    * The default variant of the spinner.
    * @default default

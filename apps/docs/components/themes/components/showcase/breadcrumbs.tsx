@@ -1,12 +1,13 @@
+import type {BreadcrumbsProps} from "@heroui/react";
+import type {Border, Radius} from "../../types";
+
 import {
-  BreadcrumbsProps,
   Breadcrumbs as HeroUIBreadcrumbs,
   BreadcrumbItem as HeroUIBreadcrumbsItem,
 } from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, Radius} from "../../types";
 
 type Color = BreadcrumbsProps["color"];
 

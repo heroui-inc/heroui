@@ -3,19 +3,21 @@ import type {AriaButtonProps} from "@heroui/use-aria-button";
 import type {ReactNode} from "react";
 import type {RippleProps} from "@heroui/ripple";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {MouseEventHandler} from "react";
+import type {PressEvent} from "@react-aria/interactions";
+import type {SpinnerProps} from "@heroui/spinner";
 
 import {useProviderContext} from "@heroui/system";
 import {dataAttr} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
-import {MouseEventHandler, useCallback} from "react";
+import {useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
 import {chain, mergeProps} from "@react-aria/utils";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {button} from "@heroui/theme";
 import {isValidElement, cloneElement, useMemo} from "react";
 import {useAriaButton} from "@heroui/use-aria-button";
-import {PressEvent, useHover} from "@react-aria/interactions";
-import {SpinnerProps} from "@heroui/spinner";
+import {useHover} from "@react-aria/interactions";
 import {useRipple} from "@heroui/ripple";
 
 import {useButtonGroupContext} from "./button-group-context";
@@ -200,7 +202,6 @@ export function useButton(props: UseButtonProps) {
           // @ts-ignore
           "aria-hidden": true,
           focusable: false,
-          tabIndex: -1,
         })
       : null;
 

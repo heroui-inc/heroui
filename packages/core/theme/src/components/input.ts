@@ -45,6 +45,7 @@ const input = tv({
       "w-full font-normal bg-transparent !outline-none placeholder:text-foreground-500 focus-visible:outline-none",
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
+      "data-[type=color]:rounded-none",
       "file:cursor-pointer file:bg-transparent file:border-0",
       "autofill:bg-transparent bg-clip-text",
     ],
@@ -60,7 +61,6 @@ const input = tv({
       "outline-none",
       "select-none",
       "opacity-0",
-      "hover:!opacity-100",
       "cursor-pointer",
       "active:!opacity-70",
       "rounded-full",
@@ -142,13 +142,13 @@ const input = tv({
       md: {
         inputWrapper: "h-10 min-h-10 rounded-medium",
         input: "text-small",
-        clearButton: "text-large",
+        clearButton: "text-large hover:!opacity-100",
       },
       lg: {
         label: "text-medium",
         inputWrapper: "h-12 min-h-12 rounded-large",
         input: "text-medium",
-        clearButton: "text-large",
+        clearButton: "text-large hover:!opacity-100",
       },
     },
     radius: {

@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {ToastProps} from "../src";
+
 import React, {useEffect} from "react";
-import {Meta} from "@storybook/react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {
@@ -11,8 +13,9 @@ import {
   useDisclosure,
 } from "@heroui/modal";
 import {Drawer, DrawerContent} from "@heroui/drawer";
+import {LoadingIcon, AvatarIcon, CloseIcon} from "@heroui/shared-icons";
 
-import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
+import {Toast, ToastProvider, addToast, closeAll} from "../src";
 
 export default {
   title: "Components/Toast",
@@ -291,11 +294,11 @@ const WithToastFromOverlayTemplate = (args) => {
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
-    primary: "before:bg-primary border-primary-200 dark:border-primary-100",
-    secondary: "before:bg-secondary border-secondary-200 dark:border-secondary-100",
-    success: "before:bg-success border-success-200 dark:border-success-100",
-    warning: "before:bg-warning border-warning-200 dark:border-warning-100",
-    danger: "before:bg-danger border-danger-200 dark:border-danger-100",
+    primary: "border-primary-200 dark:border-primary-100 border-l-primary",
+    secondary: "border-secondary-200 dark:border-secondary-100 border-l-secondary",
+    success: "border-success-200 dark:border-success-100 border-l-success",
+    warning: "border-warning-200 dark:border-warning-100 border-l-warning",
+    danger: "border-danger-200 dark:border-danger-100 border-l-danger",
   };
 
   return (
@@ -310,11 +313,7 @@ const CustomToastComponent = (args) => {
             classNames: {
               base: cn([
                 "bg-default-50 dark:bg-background shadow-sm",
-                "border-1",
-                "relative before:content-[''] before:absolute before:z-10",
-                "before:left-0 before:top-[-1px] before:bottom-[-1px] before:w-1",
-                "rounded-l-none border-l-0",
-                "rounded-md",
+                "border border-l-8 rounded-md rounded-l-none",
                 "flex flex-col items-start",
                 colorMap[color],
               ]),
@@ -356,7 +355,7 @@ const CustomToastTemplate = (args) => {
   );
 };
 
-const CustomCloseButtonTemplate = (args) => {
+const CustomCloseIconTemplate = (args) => {
   return (
     <>
       <ToastProvider
@@ -371,23 +370,9 @@ const CustomCloseButtonTemplate = (args) => {
       <Button
         onPress={() =>
           addToast({
-            title: "Toast Title",
+            title: "Custom Close Icon",
             description: "Toast Description",
-            closeIcon: (
-              <svg
-                fill="none"
-                height="32"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                width="32"
-              >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            ),
+            closeIcon: CloseIcon,
           })
         }
       >
@@ -412,33 +397,14 @@ export const WithDescription = {
   },
 };
 
-export const WithCustomIcon = {
-  render: Template,
+export const WithEndContent = {
+  render: WithEndContentTemplate,
   args: {
     ...defaultProps,
-    title: "Custom Icon",
-    icon: (
-      <svg height={24} viewBox="0 0 24 24" width={24}>
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeMiterlimit={10}
-          strokeWidth={1.5}
-        >
-          <path
-            d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z"
-            data-name="Stroke 1"
-          />
-          <path d="M11.837 11.174a4.372 4.372 0 10-.031 0z" data-name="Stroke 3" />
-        </g>
-      </svg>
-    ),
   },
 };
 
-export const iconHidden = {
+export const IconHidden = {
   render: Template,
   args: {
     ...defaultProps,
@@ -474,13 +440,6 @@ export const Placement = {
   },
 };
 
-export const WithEndContent = {
-  render: WithEndContentTemplate,
-  args: {
-    ...defaultProps,
-  },
-};
-
 export const ToastFromOverlay = {
   render: WithToastFromOverlayTemplate,
   args: {
@@ -495,8 +454,26 @@ export const CustomStyles = {
   },
 };
 
-export const CustomCloseButton = {
-  render: CustomCloseButtonTemplate,
+export const CustomIcon = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    title: "Custom Icon",
+    icon: AvatarIcon,
+  },
+};
+
+export const CustomLoadingIcon = {
+  render: PromiseToastTemplate,
+  args: {
+    ...defaultProps,
+    title: "Custom Loading Icon",
+    loadingIcon: LoadingIcon,
+  },
+};
+
+export const CustomCloseIcon = {
+  render: CustomCloseIconTemplate,
   args: {
     ...defaultProps,
   },

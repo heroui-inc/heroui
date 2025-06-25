@@ -4,7 +4,7 @@ const fs = require('fs')
 function tryRequirePkg(pkg) {
   try {
     return require(pkg);
-  } catch (e) {
+  } catch {
     return null;
   }
 }

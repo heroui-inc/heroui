@@ -84,7 +84,7 @@ const breadcrumbItem = tv({
         item: "cursor-default",
       },
       false: {
-        item: ["hover:opacity-80", "active:opacity-disabled"],
+        item: ["hover:opacity-hover", "active:opacity-disabled"],
       },
     },
     isDisabled: {
