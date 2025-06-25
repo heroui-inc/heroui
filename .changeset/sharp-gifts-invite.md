@@ -1,4 +1,5 @@
 ---
+"@heroui/avatar": patch
 "@heroui/image": patch
 "@heroui/use-image": patch
 ---
