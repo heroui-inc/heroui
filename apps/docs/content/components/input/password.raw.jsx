@@ -71,7 +71,7 @@ export default function App() {
       endContent={
         <button
           aria-label="toggle password visibility"
-          className="focus:outline-hidden"
+          className="focus:outline-solid outline-transparent"
           type="button"
           onClick={toggleVisibility}
         >
