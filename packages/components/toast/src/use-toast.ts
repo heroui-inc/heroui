@@ -393,8 +393,16 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       const aboveToastHeight = index + 1 < total ? heights[index + 1] : 0;
       const belowToastHeight = index - 1 >= 0 ? heights[index - 1] : 0;
 
-      const topExtension = aboveToastHeight ? Math.ceil(aboveToastHeight / 2) + 8 : 16;
-      const bottomExtension = belowToastHeight ? Math.ceil(belowToastHeight / 2) + 8 : 16;
+      const topExtension = isRegionExpanded
+        ? 8
+        : aboveToastHeight
+        ? Math.ceil(aboveToastHeight / 2) + 8
+        : 16;
+      const bottomExtension = isRegionExpanded
+        ? 8
+        : belowToastHeight
+        ? Math.ceil(belowToastHeight / 2) + 8
+        : 16;
 
       const pseudoElementStyles = {
         "--top-extension": `${topExtension}px`,
