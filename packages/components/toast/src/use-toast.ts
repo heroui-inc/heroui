@@ -447,6 +447,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       isToastExiting,
       state,
       toast.key,
+      isRegionExpanded,
     ],
   );
 
