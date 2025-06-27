@@ -29,7 +29,7 @@ const dateInput = tv({
     ], // this wraps the input and the start/end content
     segment: [
       "group first:-ml-0.5 [&:not(:first-child)]:-ml-1 px-0.5 my-auto box-content tabular-nums text-start",
-      "inline-block outline-hidden focus:shadow-xs rounded-md",
+      "inline-block outline-solid outline-transparent focus:shadow-xs rounded-md",
       "text-foreground-500 data-[editable=true]:text-foreground",
       "data-[editable=true]:data-[placeholder=true]:text-foreground-500",
       // isInvalid=true

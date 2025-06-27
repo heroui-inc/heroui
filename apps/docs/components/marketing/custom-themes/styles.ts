@@ -59,7 +59,7 @@ export const shopCartStyles = tv({
       "text-sm",
       "rounded-full",
       // focus ring
-      "group-data-[focus-visible=true]:outline-hidden",
+      "group-data-[focus-visible=true]:outline-solid outline-transparent",
       "group-data-[focus-visible=true]:ring-2",
       "group-data-[focus-visible=true]:ring-focus",
       "group-data-[focus-visible=true]:ring-offset-2",

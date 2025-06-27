@@ -11,7 +11,7 @@ const inputOtp = tv({
       "absolute",
       "inset-0",
       "border-none",
-      "outline-hidden",
+      "outline-solid outline-transparent",
       "bg-transparent",
       "text-transparent",
     ],

@@ -38,7 +38,7 @@ const toast = tv({
       "relative",
       "z-50",
       "box-border",
-      "outline-none",
+      "outline-solid outline-transparent",
       "p-3 sm:mx-1",
       "my-1",
       "w-full sm:w-[356px]",

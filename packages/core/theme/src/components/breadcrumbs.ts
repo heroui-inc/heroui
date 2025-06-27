@@ -18,7 +18,7 @@ const breadcrumbItem = tv({
       "cursor-pointer",
       "whitespace-nowrap",
       "line-clamp-1",
-      "outline-hidden",
+      "outline-solid outline-transparent",
       "tap-highlight-transparent",
       // focus ring
       ...dataFocusVisibleClasses,
