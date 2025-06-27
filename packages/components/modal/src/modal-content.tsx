@@ -1,15 +1,16 @@
 import type {AriaDialogProps} from "@react-aria/dialog";
 import type {HTMLMotionProps} from "framer-motion";
+import type {ReactNode} from "react";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {KeyboardEvent} from "react";
 
-import {cloneElement, isValidElement, ReactNode, useMemo, useCallback} from "react";
+import {cloneElement, isValidElement, useMemo, useCallback} from "react";
 import {DismissButton} from "@react-aria/overlays";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 import {CloseIcon} from "@heroui/shared-icons";
 import {LazyMotion, m} from "framer-motion";
 import {useDialog} from "@react-aria/dialog";
 import {chain, mergeProps, useViewportSize} from "@react-aria/utils";
-import {HTMLHeroUIProps} from "@heroui/system";
-import {KeyboardEvent} from "react";
 
 import {useModalContext} from "./modal-context";
 import {scaleInOut} from "./modal-transition";
@@ -94,7 +95,7 @@ const ModalContent = (props: ModalContentProps) => {
           exit="exit"
           initial="exit"
           variants={TRANSITION_VARIANTS.fade}
-          {...(getBackdropProps() as HTMLMotionProps<"div">)}
+          {...(getBackdropProps() as Omit<HTMLMotionProps<"div">, "ref">)}
         />
       </LazyMotion>
     );

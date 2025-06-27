@@ -1,13 +1,16 @@
 "use client";
 
-import {FC, useRef} from "react";
+import type {FC} from "react";
+import type {UseSandpackProps} from "./use-sandpack";
+
+import {useRef} from "react";
 import {SandpackProvider, SandpackLayout, SandpackPreview} from "@codesandbox/sandpack-react";
 
 import {StackblitzButton} from "../stackblitz-button";
 
 import {SandpackCodeViewer} from "./code-viewer";
 import {herouiTheme} from "./theme";
-import {UseSandpackProps, useSandpack} from "./use-sandpack";
+import {useSandpack} from "./use-sandpack";
 import {BugReportButton} from "./bugreport-button";
 import {CopyButton} from "./copy-button";
 import {CodeSandboxButton} from "./codesandbox-button";

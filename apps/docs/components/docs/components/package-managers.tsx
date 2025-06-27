@@ -1,7 +1,9 @@
 "use client";
 
+import type {Key} from "react";
+
 import {Tabs, Tab, Snippet, Code} from "@heroui/react";
-import {Key, useState} from "react";
+import {useState} from "react";
 
 import Codeblock from "./codeblock";
 import {Blockquote} from "./blockquote";

@@ -1,4 +1,7 @@
-import React, {SVGProps} from "react";
+import type {SVGProps} from "react";
+import type {Selection, ChipProps, SortDescriptor} from "@heroui/react";
+
+import React from "react";
 import {
   Table,
   TableHeader,
@@ -15,9 +18,6 @@ import {
   Chip,
   User,
   Pagination,
-  Selection,
-  ChipProps,
-  SortDescriptor,
 } from "@heroui/react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
@@ -398,7 +398,7 @@ export default function App() {
     return filteredUsers;
   }, [users, filterValue, statusFilter]);
 
-  const pages = Math.ceil(filteredItems.length / rowsPerPage);
+  const pages = Math.ceil(filteredItems.length / rowsPerPage) || 1;
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;

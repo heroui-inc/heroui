@@ -9,7 +9,7 @@ import {clamp} from "@heroui/shared-utils";
 export interface RippleProps extends HTMLHeroUIProps<"span"> {
   ripples: RippleType[];
   color?: string;
-  motionProps?: HTMLMotionProps<"span">;
+  motionProps?: Omit<HTMLMotionProps<"span">, "ref">;
   style?: React.CSSProperties;
   onClear: (key: React.Key) => void;
 }

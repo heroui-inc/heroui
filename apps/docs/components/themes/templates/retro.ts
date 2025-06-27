@@ -1,7 +1,8 @@
+import type {Config} from "../types";
+
 import {colors} from "@heroui/theme";
 
 import {initialLayout} from "../constants";
-import {Config} from "../types";
 
 export const retro: Config = {
   name: "retro",

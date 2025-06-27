@@ -1,7 +1,9 @@
+import type {UseAvatarGroupProps} from "./use-avatar-group";
+
 import {forwardRef} from "@heroui/system";
 
 import {AvatarGroupProvider} from "./avatar-group-context";
-import {useAvatarGroup, UseAvatarGroupProps} from "./use-avatar-group";
+import {useAvatarGroup} from "./use-avatar-group";
 import Avatar from "./avatar";
 
 export interface AvatarGroupProps extends UseAvatarGroupProps {}

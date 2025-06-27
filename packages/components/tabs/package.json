@@ -1,6 +1,6 @@
 {
   "name": "@heroui/tabs",
-  "version": "2.2.14",
+  "version": "2.2.19",
   "description": "Tabs organize content into multiple sections and allow users to navigate between them.",
   "keywords": [
     "tabs"
@@ -38,28 +38,25 @@
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.7"
+    "@heroui/system": ">=2.4.17"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/aria-utils": "workspace:*",
-    "@heroui/framer-utils": "workspace:*",
     "@heroui/use-is-mounted": "workspace:*",
-    "@heroui/use-update-effect": "workspace:*",
-    "@react-aria/focus": "3.20.2",
-    "@react-aria/interactions": "3.25.0",
-    "@react-aria/tabs": "3.10.2",
-    "@react-aria/utils": "3.28.2",
-    "@react-stately/tabs": "3.8.1",
-    "@react-types/shared": "3.29.0",
-    "@react-types/tabs": "3.3.14",
+    "@react-aria/focus": "3.20.5",
+    "@react-aria/interactions": "3.25.3",
+    "@react-aria/tabs": "3.10.5",
+    "@react-aria/utils": "3.29.1",
+    "@react-stately/tabs": "3.8.3",
+    "@react-types/shared": "3.30.0",
     "scroll-into-view-if-needed": "3.0.10"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react-lorem-component": "0.13.0",
     "@heroui/card": "workspace:*",
     "@heroui/input": "workspace:*",
