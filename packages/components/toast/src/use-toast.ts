@@ -396,13 +396,13 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       const topExtension = isRegionExpanded
         ? 8
         : aboveToastHeight
-        ? Math.ceil(aboveToastHeight / 2) + 8
-        : 16;
+          ? Math.ceil(aboveToastHeight / 2) + 8
+          : 16;
       const bottomExtension = isRegionExpanded
         ? 8
         : belowToastHeight
-        ? Math.ceil(belowToastHeight / 2) + 8
-        : 16;
+          ? Math.ceil(belowToastHeight / 2) + 8
+          : 16;
 
       const pseudoElementStyles = {
         "--top-extension": `${topExtension}px`,
