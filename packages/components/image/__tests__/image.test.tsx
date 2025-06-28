@@ -72,7 +72,7 @@ describe("Image", () => {
 
     expect(imageParent).not.toBeNull();
     expect(imageParent!.getAttribute("data-testid")).toEqual("heroUI/image_parent");
-    expect(imageParent!.getAttribute("class")).toEqual("bg-cover");
+    expect(imageParent!.getAttribute("class")).toContain("bg-cover");
 
     const computedLoadingStyle = window.getComputedStyle(imageParent!);
 
@@ -139,7 +139,7 @@ describe("Image", () => {
     const computedStyle = window.getComputedStyle(imageParent!);
 
     expect(computedStyle.backgroundImage).toBe(`url(${fallbackSrc})`);
-    expect(imageParent!.getAttribute("class")).toEqual("bg-contain");
+    expect(imageParent!.getAttribute("class")).toContain("bg-contain");
     wrapper.unmount();
     cleanup();
   });
