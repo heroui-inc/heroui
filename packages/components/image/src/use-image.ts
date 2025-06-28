@@ -2,7 +2,7 @@ import type {ImageVariantProps, SlotsToClasses, ImageSlots} from "@heroui/theme"
 
 import {ImgHTMLAttributes, useCallback} from "react";
 import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {image} from "@heroui/theme";
+import {cn, image} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {ReactRef} from "@heroui/react-utils";
@@ -206,15 +206,21 @@ export function useImage(originalProps: UseImageProps) {
 
   const getLoadingImgProps = useCallback<PropGetter>(() => {
     return {
-      className: slots.loadingImg({class: classNames?.loadingImg}),
+      className: cn(
+        slots.wrapper({class: classNames?.wrapper}),
+        slots.loadingImg({class: classNames?.loadingImg}),
+      ),
     };
-  }, [slots, src, classNames?.loadingImg]);
+  }, [cn, slots, classNames?.wrapper, classNames?.loadingImg]);
 
   const getFallbackImgProps = useCallback<PropGetter>(() => {
     return {
-      className: slots.fallbackImg({class: classNames?.fallbackImg}),
+      className: cn(
+        slots.wrapper({class: classNames?.wrapper}),
+        slots.fallbackImg({class: classNames?.fallbackImg}),
+      ),
     };
-  }, [slots, src, classNames?.fallbackImg]);
+  }, [cn, slots, classNames?.wrapper, classNames?.fallbackImg]);
 
   return {
     Component,
