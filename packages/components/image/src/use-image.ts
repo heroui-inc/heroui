@@ -137,7 +137,7 @@ export function useImage(originalProps: UseImageProps) {
     };
   }, [props?.width, props?.height]);
 
-  const showLoading = isLoading && !!loadingSrc;
+  const showCustomLoading = isLoading && !!loadingSrc;
   const showFallback = (isFailed || !src || !isImgLoaded) && !!fallbackSrc;
   const showSkeleton = isLoading && !disableSkeleton && !loadingSrc;
 
@@ -177,7 +177,7 @@ export function useImage(originalProps: UseImageProps) {
   };
 
   const getWrapperProps = useCallback<PropGetter>(() => {
-    const wrapperStyle = showLoading
+    const wrapperStyle = showCustomLoading
       ? {
           backgroundImage: `url(${loadingSrc})`,
         }
@@ -194,7 +194,7 @@ export function useImage(originalProps: UseImageProps) {
         maxWidth: w,
       },
     };
-  }, [slots, showLoading, showFallback, showSkeleton, fallbackSrc, classNames?.wrapper, w]);
+  }, [slots, showCustomLoading, showFallback, showSkeleton, fallbackSrc, classNames?.wrapper, w]);
 
   const getBlurredImgProps = useCallback<PropGetter>(() => {
     return {

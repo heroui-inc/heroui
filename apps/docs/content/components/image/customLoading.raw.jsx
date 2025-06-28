@@ -5,8 +5,8 @@ export default function App() {
     <Image
       alt="HeroUI Image with custom loading"
       height={200}
-      loadingSrc="https://via.placeholder.com/300x200"
-      src="https://app.requestly.io/delay/1000/https://nextui-docs-v2.vercel.app/images/fruit-4.jpeg"
+      loadingSrc="https://tse4.mm.bing.net/th/id/OIP.12UpAuSiygkASTHDo8hrpQHaHa?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+      src="https://app.requestly.io/delay/2000/https://heroui.com/images/hero-card-complete.jpeg"
       width={300}
     />
   );
