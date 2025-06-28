@@ -60,11 +60,19 @@ describe("Image", () => {
 
   test("renders an image while loading the src image. When loading finished, renders the src image.", async () => {
     const onLoad = jest.fn();
-    const wrapper = render(<Image loadingSrc={loadingSrc} src={src} onLoad={onLoad} />);
+    const wrapper = render(
+      <Image
+        classNames={{loadingImg: "bg-cover"}}
+        loadingSrc={loadingSrc}
+        src={src}
+        onLoad={onLoad}
+      />,
+    );
     const imageParent = wrapper.getByRole("img").parentElement;
 
     expect(imageParent).not.toBeNull();
     expect(imageParent!.getAttribute("data-testid")).toEqual("heroUI/image_parent");
+    expect(imageParent!.getAttribute("class")).toEqual("bg-cover");
 
     const computedLoadingStyle = window.getComputedStyle(imageParent!);
 
@@ -110,7 +118,13 @@ describe("Image", () => {
 
     const onError = jest.fn();
     const wrapper = render(
-      <Image alt="test" fallbackSrc={fallbackSrc} src="wrong-src-address" onError={onError} />,
+      <Image
+        alt="test"
+        classNames={{fallbackImg: "bg-contain"}}
+        fallbackSrc={fallbackSrc}
+        src="wrong-src-address"
+        onError={onError}
+      />,
     );
     const imageParent = wrapper.getByRole("img").parentElement;
 
@@ -125,6 +139,7 @@ describe("Image", () => {
     const computedStyle = window.getComputedStyle(imageParent!);
 
     expect(computedStyle.backgroundImage).toBe(`url(${fallbackSrc})`);
+    expect(imageParent!.getAttribute("class")).toEqual("bg-contain");
     wrapper.unmount();
     cleanup();
   });
