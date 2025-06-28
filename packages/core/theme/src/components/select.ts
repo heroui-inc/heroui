@@ -800,6 +800,36 @@ const select = tv({
         label: ["pe-2", "max-w-full", "text-ellipsis", "overflow-hidden"],
       },
     },
+    {
+      labelPlacement: ["outside", "outside-left"],
+      isClearable: true,
+      class: {
+        endContent: ["mt-4"],
+        clearButton: ["mt-4"],
+      },
+    },
+    {
+      isClearable: true,
+      variant: ["underlined"],
+      class: {
+        clearButton: ["relative left-2"],
+        endContent: ["me-2"],
+      },
+    },
+    {
+      isClearable: false,
+      labelPlacement: ["outside", "outside-left"],
+      class: {
+        endContent: ["mt-4"],
+      },
+    },
+    {
+      isClearable: false,
+      variant: ["underlined"],
+      class: {
+        endContent: ["me-2"],
+      },
+    },
   ],
 });
 
