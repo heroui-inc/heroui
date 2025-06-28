@@ -158,6 +158,7 @@ export const Fallback = {
     radius: "lg",
     src: "wrong-src-address",
     fallbackSrc: "/images/placeholder_300x450.png",
+    classNames: {fallbackImg: "bg-cover"},
     disableSkeleton: false,
   },
 };
@@ -173,5 +174,6 @@ export const CustomLoadingAndFallback = {
     src: "wrong-src-address",
     loadingSrc: "/images/placeholder_300x450.png",
     fallbackSrc: "/images/local-image-small.jpg",
+    classNames: {loadingImg: "bg-contain", fallbackImg: "bg-cover"},
   },
 };
