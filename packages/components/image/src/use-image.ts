@@ -204,6 +204,18 @@ export function useImage(originalProps: UseImageProps) {
     };
   }, [slots, src, classNames?.blurredImg]);
 
+  const getLoadingImgProps = useCallback<PropGetter>(() => {
+    return {
+      className: slots.loadingImg({class: classNames?.loadingImg}),
+    };
+  }, [slots, src, classNames?.loadingImg]);
+
+  const getFallbackImgProps = useCallback<PropGetter>(() => {
+    return {
+      className: slots.fallbackImg({class: classNames?.fallbackImg}),
+    };
+  }, [slots, src, classNames?.fallbackImg]);
+
   return {
     Component,
     domRef,
@@ -216,9 +228,12 @@ export function useImage(originalProps: UseImageProps) {
     removeWrapper,
     isZoomed,
     isLoading,
+    isFailed,
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
+    getLoadingImgProps,
+    getFallbackImgProps,
   };
 }
 
