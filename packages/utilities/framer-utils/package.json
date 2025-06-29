@@ -1,6 +1,6 @@
 {
   "name": "@heroui/framer-utils",
-  "version": "2.1.18-beta.2",
+  "version": "2.1.18",
   "description": "A set of framer motion transitions for react",
   "keywords": [
     "framer-utils"
