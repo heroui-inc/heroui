@@ -94,6 +94,7 @@
     "@heroui/use-viewport-size": "2.0.0-beta.0"
   },
   "changesets": [
+    "gold-plants-ring",
     "honest-dolphins-reflect",
     "hot-lobsters-collect",
     "hungry-deers-develop",
@@ -106,6 +107,8 @@
     "shaggy-ads-know",
     "six-flowers-do",
     "slimy-beers-invent",
+    "soft-rice-prove",
+    "soft-weeks-sell",
     "sweet-radios-brake",
     "thick-dogs-march",
     "tidy-mails-sing"

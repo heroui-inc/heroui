@@ -1,5 +1,14 @@
 # @heroui/toast
 
+## 2.0.12-beta.3
+
+### Patch Changes
+
+- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`ecffb26`](https://github.com/heroui-inc/heroui/commit/ecffb26320da15824356dbccb33d8627326a4b7c) Thanks [@macci001](https://github.com/macci001)! - Renaming loadingIcon to loadingComponent.
+
+- Updated dependencies []:
+  - @heroui/spinner@2.2.19-beta.2
+
 ## 2.0.12-beta.2
 
 ### Patch Changes
