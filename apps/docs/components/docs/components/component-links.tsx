@@ -1,5 +1,7 @@
-import {Button, ButtonProps, Code, Link, Tooltip} from "@heroui/react";
-import {ReactNode} from "react";
+import type {ButtonProps} from "@heroui/react";
+import type {ReactNode} from "react";
+
+import {Button, Code, Link, Tooltip} from "@heroui/react";
 import Balancer from "react-wrap-balancer";
 import {usePostHog} from "posthog-js/react";
 

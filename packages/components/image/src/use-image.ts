@@ -1,11 +1,13 @@
 import type {ImageVariantProps, SlotsToClasses, ImageSlots} from "@heroui/theme";
+import type {ImgHTMLAttributes} from "react";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {ImgHTMLAttributes, useCallback} from "react";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useCallback} from "react";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {cn, image} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
 import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
 import {useImage as useImageBase} from "@heroui/use-image";
 import {useMemo} from "react";
 type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -182,10 +184,10 @@ export function useImage(originalProps: UseImageProps) {
           backgroundImage: `url(${loadingSrc})`,
         }
       : showFallback && !showSkeleton
-      ? {
-          backgroundImage: `url(${fallbackSrc})`,
-        }
-      : {};
+        ? {
+            backgroundImage: `url(${fallbackSrc})`,
+          }
+        : {};
 
     return {
       className: slots.wrapper({class: classNames?.wrapper}),

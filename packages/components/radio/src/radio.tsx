@@ -1,6 +1,8 @@
+import type {UseRadioProps} from "./use-radio";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseRadioProps, useRadio} from "./use-radio";
+import {useRadio} from "./use-radio";
 
 export interface RadioProps extends UseRadioProps {}
 

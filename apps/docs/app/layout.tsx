@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "@/styles/sandpack.css";
-import {Metadata, Viewport} from "next";
+import type {Metadata, Viewport} from "next";
+
 import {clsx} from "@heroui/shared-utils";
 import {Analytics} from "@vercel/analytics/next";
 
@@ -75,7 +76,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen text-foreground bg-background font-sans antialiased",
           fonts.sans.variable,
           fonts.mono.variable,
         )}

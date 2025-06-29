@@ -1,8 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {ChipProps} from "@heroui/chip";
+import type {TableProps} from "../src";
+
 import React, {useMemo} from "react";
-import {Meta} from "@storybook/react";
 import {table} from "@heroui/theme";
 import {User} from "@heroui/user";
-import {Chip, ChipProps} from "@heroui/chip";
+import {Chip} from "@heroui/chip";
 import {Button} from "@heroui/button";
 import {Spinner} from "@heroui/spinner";
 import {Pagination} from "@heroui/pagination";
@@ -12,16 +15,7 @@ import {useInfiniteScroll} from "@heroui/use-infinite-scroll";
 import {useAsyncList} from "@react-stately/data";
 import useSWR from "swr";
 
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableProps,
-  getKeyValue,
-} from "../src";
+import {Table, TableHeader, TableColumn, TableBody, TableCell, TableRow, getKeyValue} from "../src";
 import {Switch} from "../../switch/src";
 
 export default {
@@ -1157,6 +1151,14 @@ export const Virtualized = {
     ...defaultProps,
     className: "max-w-3xl",
     rowCount: 500,
+  },
+};
+
+export const VirtualizedWithHeaderSticky = {
+  ...Virtualized,
+  args: {
+    ...Virtualized.args,
+    isHeaderSticky: true,
   },
 };
 

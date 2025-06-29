@@ -1,4 +1,4 @@
-import {RefObject} from "react";
+import type {RefObject} from "react";
 
 /**
  * Used to handle the outside interaction for popover-based components

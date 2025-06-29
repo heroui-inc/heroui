@@ -27,7 +27,6 @@ export default function App() {
       </ListboxWrapper>
       <div className="flex flex-col gap-2">
         <RadioGroup
-          color={selectedVariant}
           defaultValue="solid"
           label="Select listbox item variant"
           orientation="horizontal"

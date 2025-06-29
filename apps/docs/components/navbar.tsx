@@ -1,6 +1,9 @@
 "use client";
 
-import {useRef, useState, FC, ReactNode, useMemo, useCallback} from "react";
+import type {FC, ReactNode} from "react";
+import type {Route} from "@/libs/docs/page";
+
+import {useRef, useState, useMemo, useCallback} from "react";
 import {
   link,
   Navbar as HeroUINavbar,
@@ -30,7 +33,6 @@ import {FbRoadmapLink} from "./featurebase/fb-roadmap-link";
 
 import {currentVersion} from "@/utils/version";
 import {siteConfig} from "@/config/site";
-import {Route} from "@/libs/docs/page";
 import {LargeLogo, SmallLogo, ThemeSwitch} from "@/components";
 import {GithubIcon, SearchLinearIcon} from "@/components/icons";
 import {useIsMounted} from "@/hooks/use-is-mounted";
@@ -143,7 +145,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
                 content: "font-medium text-default-500 text-xs",
               }}
             >
-              {currentVersion}
+              v{currentVersion}
             </Chip>
           </motion.div>
         )}

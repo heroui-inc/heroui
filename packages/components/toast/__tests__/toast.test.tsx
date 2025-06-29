@@ -1,6 +1,8 @@
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {render, screen} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
 import {addToast, ToastProvider} from "../src";
 
@@ -114,14 +116,12 @@ describe("Toast", () => {
     await user.click(button);
 
     const initialCloseButtons = wrapper.getAllByRole("button");
-    const initialButtonLength = initialCloseButtons.length;
 
     await user.click(initialCloseButtons[0]);
 
-    const finalCloseButtons = wrapper.getAllByRole("button");
-    const finalButtonLength = finalCloseButtons.length;
+    const toast = wrapper.getAllByRole("alertdialog")[0]! as HTMLElement;
 
-    expect(initialButtonLength).toEqual(finalButtonLength + 1);
+    expect(toast).toHaveAttribute("data-toast-exiting", "true");
   });
 
   it("should work with placement", async () => {

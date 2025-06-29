@@ -1,6 +1,8 @@
+import type {UseSpinnerProps} from "./use-spinner";
+
 import {forwardRef} from "@heroui/system-rsc";
 
-import {UseSpinnerProps, useSpinner} from "./use-spinner";
+import {useSpinner} from "./use-spinner";
 
 export interface SpinnerProps extends UseSpinnerProps {}
 

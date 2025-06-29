@@ -1,22 +1,18 @@
 import type {InputVariantProps, SlotsToClasses, InputSlots} from "@heroui/theme";
 import type {AriaTextFieldOptions} from "@react-aria/textfield";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {AriaTextFieldProps} from "@react-types/textfield";
+import type {Ref} from "react";
 
-import {
-  HTMLHeroUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useLabelPlacement,
-  useProviderContext,
-} from "@heroui/system";
+import {mapPropsVariants, useLabelPlacement, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {AriaTextFieldProps} from "@react-types/textfield";
 import {useFocusRing} from "@react-aria/focus";
 import {input} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
 import {clsx, dataAttr, isEmpty, objectToDeps, safeAriaLabel} from "@heroui/shared-utils";
 import {useControlledState} from "@react-stately/utils";
-import {useMemo, Ref, useCallback, useState} from "react";
+import {useMemo, useCallback, useState} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
 import {useTextField} from "@react-aria/textfield";
 import {FormContext, useSlottedContext} from "@heroui/form";
@@ -375,6 +371,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-filled-within": dataAttr(isFilledWithin),
         "data-has-start-content": dataAttr(hasStartContent),
         "data-has-end-content": dataAttr(!!endContent),
+        "data-type": type,
         className: slots.input({
           class: clsx(
             classNames?.input,
