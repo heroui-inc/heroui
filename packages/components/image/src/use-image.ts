@@ -105,6 +105,7 @@ export function useImage(originalProps: UseImageProps) {
     srcSet,
     sizes,
     crossOrigin,
+    shouldBypassImageLoad: as !== undefined,
   });
 
   const disableAnimation =
