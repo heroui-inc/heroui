@@ -67,6 +67,25 @@ describe("Slider", () => {
     expect(slider).toHaveProperty("max", "20");
   });
 
+  it("should handle fixed value when minValue and maxValue are the same", async () => {
+    const {getByRole} = render(
+      <Slider aria-label="Fixed Slider" label="Fixed Value" maxValue={10} minValue={10} />,
+    );
+
+    const slider = getByRole("slider");
+    const output = getByRole("status");
+
+    expect(slider).toHaveAttribute("aria-valuetext", "10");
+    expect(output).toHaveTextContent("10");
+    expect(output).not.toHaveTextContent("NaN");
+
+    await userEvent.click(slider);
+
+    await userEvent.type(slider, "{arrowright}");
+    expect(slider).toHaveAttribute("aria-valuetext", "10");
+    expect(output).toHaveTextContent("10");
+  });
+
   it("should support isDisabled", async function () {
     const {getByRole, getAllByRole} = render(
       <div>
