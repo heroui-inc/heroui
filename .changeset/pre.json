@@ -94,20 +94,20 @@
     "@heroui/test-utils": "2.1.9-beta.2"
   },
   "changesets": [
+    "gold-plants-ring",
     "honest-dolphins-reflect",
     "hot-lobsters-collect",
     "hungry-deers-develop",
     "light-cups-melt",
-    "nervous-icons-draw",
-    "olive-hairs-listen",
     "poor-experts-leave",
     "quiet-colts-add",
     "selfish-kings-clap",
     "shaggy-ads-know",
-    "six-flowers-do",
     "slimy-beers-invent",
+    "soft-rice-prove",
+    "soft-weeks-sell",
     "sweet-radios-brake",
-    "thick-dogs-march",
-    "tidy-mails-sing"
+    "tidy-mails-sing",
+    "tiny-maps-obey"
   ]
 }

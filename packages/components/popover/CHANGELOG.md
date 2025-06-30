@@ -1,5 +1,23 @@
 # @heroui/popover
 
+## 2.3.23-beta.0
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.5
+  - @heroui/dom-animation@2.1.10-beta.3
+  - @heroui/use-aria-overlay@2.0.1-beta.5
+  - @heroui/shared-utils@2.1.10-beta.5
+  - @heroui/use-aria-button@2.2.17-beta.0
+  - @heroui/react-utils@2.1.12-beta.3
+  - @heroui/aria-utils@2.2.20-beta.0
+  - @heroui/button@2.2.23-beta.0
+  - @heroui/system@2.4.19-beta.0
+  - @heroui/framer-utils@2.1.19-beta.0
+
 ## 2.3.22
 
 ### Patch Changes
