@@ -21,7 +21,7 @@ export const SmallLogoOutlined: React.FC<LogoProps> = ({
   ...props
 }) => (
   <svg
-    className={cn("data-[auto=true]:sm:hidden block text-foreground", className)}
+    className={cn("sm:data-[auto=true]:hidden block text-foreground", className)}
     data-auto={dataAttr(auto)}
     fill="none"
     height={height || size || 25}
@@ -51,7 +51,7 @@ export const SmallLogo: React.FC<LogoProps> = ({
   ...props
 }) => (
   <svg
-    className={cn("data-[auto=true]:sm:hidden block text-foreground", className)}
+    className={cn("sm:data-[auto=true]:hidden block text-foreground", className)}
     data-auto={dataAttr(auto)}
     fill="none"
     height={height || size || 25}
@@ -74,7 +74,7 @@ export const SmallLogo: React.FC<LogoProps> = ({
 export const LargeLogo: React.FC<LogoProps> = ({auto, className, ...props}) => (
   <svg
     className={cn(
-      "data-[auto=true]:hidden data-[auto=true]:sm:block block text-foreground",
+      "data-[auto=true]:hidden sm:data-[auto=true]:block block text-foreground",
       className,
     )}
     data-auto={dataAttr(auto)}

@@ -8,8 +8,7 @@ import {menuSection} from "@heroui/theme";
 import {useMenuSection} from "@react-aria/menu";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, mergeProps} from "@heroui/shared-utils";
 import {Divider} from "@heroui/divider";
 
 import MenuItem from "./menu-item";

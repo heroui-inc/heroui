@@ -15,8 +15,7 @@ import {useTable as useReactAriaTable} from "@react-aria/table";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {table} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo} from "react";
 
 type TableContentPlacement = "inside" | "outside";

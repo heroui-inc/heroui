@@ -4,10 +4,9 @@ import {forwardRef} from "@heroui/system";
 import {OverlayContainer} from "@react-aria/overlays";
 import {AnimatePresence, m, LazyMotion} from "framer-motion";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
-import {warn} from "@heroui/shared-utils";
+import {warn, mergeProps} from "@heroui/shared-utils";
 import {Children, cloneElement, isValidElement} from "react";
 import {getTransformOrigins} from "@heroui/aria-utils";
-import {mergeProps} from "@react-aria/utils";
 
 import {useTooltip} from "./use-tooltip";
 

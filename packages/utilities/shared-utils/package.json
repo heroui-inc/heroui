@@ -1,6 +1,6 @@
 {
   "name": "@heroui/shared-utils",
-  "version": "2.1.9",
+  "version": "2.1.10-beta.5",
   "description": "A set of HeroUI utilities",
   "keywords": [
     "system"
@@ -20,7 +20,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heroui-inc/heroui.git",
-    "directory": "packages/core/system"
+    "directory": "packages/utilities/shared-utils"
   },
   "bugs": {
     "url": "https://github.com/heroui-inc/heroui/issues"

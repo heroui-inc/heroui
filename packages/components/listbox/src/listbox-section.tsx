@@ -6,8 +6,7 @@ import type {ListboxSectionBaseProps} from "./base/listbox-section-base";
 import {listboxSection} from "@heroui/theme";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, mergeProps} from "@heroui/shared-utils";
 import {Divider} from "@heroui/divider";
 import {useListBoxSection} from "@react-aria/listbox";
 

@@ -38,7 +38,7 @@ const toast = tv({
       "relative",
       "z-50",
       "box-border",
-      "outline-none",
+      "outline-solid outline-transparent",
       "p-3 sm:mx-1",
       "my-1",
       "w-full sm:w-[356px]",
@@ -71,7 +71,7 @@ const toast = tv({
     title: ["text-sm", "me-4", "font-medium", "text-foreground"],
     description: ["text-sm", "me-4", "text-default-500"],
     icon: ["w-6 h-6 flex-none fill-current"],
-    loadingIcon: ["w-6 h-6 flex-none fill-current"],
+    loadingComponent: ["w-6 h-6 flex-none fill-current"],
     content: ["flex flex-grow flex-row gap-x-4 items-center relative"],
     progressTrack: ["absolute inset-0 pointer-events-none bg-transparent overflow-hidden"],
     progressIndicator: ["h-full bg-default-400 opacity-20"],
@@ -99,7 +99,7 @@ const toast = tv({
     size: {
       sm: {
         icon: "w-5 h-5",
-        loadingIcon: "w-5 h-5",
+        loadingComponent: "w-5 h-5",
       },
       md: {},
       lg: {},

@@ -16,12 +16,10 @@ import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useMemo, useCallback, useRef, useEffect} from "react";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useHover} from "@react-aria/interactions";
 import {useMultiSelect, useMultiSelectState} from "@heroui/use-aria-multiselect";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 import {usePreventScroll} from "@react-aria/overlays";
 
@@ -567,9 +565,6 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
             ? // forces the popover to update its position when the selected items change
               state.selectedItems.length * 0.00000001 + (slotsProps.popoverProps?.offset || 0)
             : slotsProps.popoverProps?.offset,
-        shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-          ? popoverProps.shouldCloseOnInteractOutside
-          : (element: Element) => ariaShouldCloseOnInteractOutside(element, domRef, state),
       } as PopoverProps;
     },
     [

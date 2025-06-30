@@ -4,9 +4,8 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, mergeProps} from "@heroui/shared-utils";
 import {useTableHeaderRow} from "@react-aria/table";
-import {mergeProps} from "@react-aria/utils";
 
 // @internal
 export interface TableHeaderRowProps<T = object> extends HTMLHeroUIProps<"tr"> {

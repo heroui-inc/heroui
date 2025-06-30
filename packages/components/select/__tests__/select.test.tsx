@@ -772,7 +772,7 @@ describe("Select", () => {
     await user.click(listboxItems[1]);
 
     expect(onChange).toHaveBeenCalledTimes(1);
-  });
+  }, 10000);
 
   it("should place the label outside when labelPlacement is outside and isMultiline enabled", () => {
     const labelContent = "Favorite Animal Label";

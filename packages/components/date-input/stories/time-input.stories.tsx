@@ -234,7 +234,7 @@ export const StartContent = {
     ...defaultProps,
     labelPlacement: "outside",
     startContent: (
-      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
+      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };
@@ -246,7 +246,7 @@ export const EndContent = {
     ...defaultProps,
     labelPlacement: "outside",
     endContent: (
-      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
+      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };

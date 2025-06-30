@@ -156,6 +156,7 @@ export default defineConfig([globalIgnores([
         }],
 
         "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+
         "@typescript-eslint/consistent-type-imports": ["error", {
             fixStyle: "inline-type-imports",
         }],

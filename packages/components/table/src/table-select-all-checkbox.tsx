@@ -4,9 +4,8 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableColumnHeader, useTableSelectAllCheckbox} from "@react-aria/table";
-import {mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
 import {Checkbox} from "@heroui/checkbox";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
