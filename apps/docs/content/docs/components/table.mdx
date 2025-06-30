@@ -127,6 +127,7 @@ In case you don't want to render the header, you can use the `hideHeader` prop.
 
 By default the table is wrapped in a `div` element with a small shadow effect and a border radius.
 You can use the `removeWrapper` prop to remove the wrapper and only render the table.
+However, the `removeWrapper` prop has no effect on a virtualized table, as the wrapper is required to manage its height.
 
 <CodeDemo title="Without Wrapper" files={tableContent.withoutWrapper} />
 
@@ -538,7 +539,7 @@ You can customize the `Table` component by passing custom Tailwind CSS classes t
     {
       attribute: "removeWrapper",
       type: "boolean",
-      description: "Whether the table base container should not be rendered.",
+      description: "Whether the base container should not be rendered for a non-virtualized table.",
       default: "false"
     },
     {

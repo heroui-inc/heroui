@@ -29,7 +29,6 @@ const VirtualizedTable = forwardRef<"table", TableProps>((props, ref) => {
     topContentPlacement,
     bottomContentPlacement,
     bottomContent,
-    removeWrapper,
     getBaseProps,
     getWrapperProps,
     getTableProps,
@@ -42,10 +41,6 @@ const VirtualizedTable = forwardRef<"table", TableProps>((props, ref) => {
 
   const Wrapper = useCallback(
     ({children}: {children: JSX.Element}) => {
-      if (removeWrapper) {
-        return children;
-      }
-
       return (
         <BaseComponent
           {...getWrapperProps()}
@@ -57,7 +52,7 @@ const VirtualizedTable = forwardRef<"table", TableProps>((props, ref) => {
         </BaseComponent>
       );
     },
-    [removeWrapper, getWrapperProps, maxTableHeight],
+    [getWrapperProps, maxTableHeight],
   );
 
   const items = [...collection.body.childNodes];
