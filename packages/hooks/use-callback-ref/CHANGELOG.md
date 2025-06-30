@@ -1,5 +1,14 @@
 # @heroui/use-callback-ref
 
+## 2.1.8-beta.5
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.5
+
 ## 2.1.8-beta.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/modal",
-  "version": "2.2.19",
+  "version": "2.2.20-beta.0",
   "description": "Displays a dialog with a custom content that requires attention or provides additional information.",
   "keywords": [
     "modal"
@@ -38,7 +38,7 @@
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "@heroui/theme": ">=2.4.18-beta.0",
-    "@heroui/system": ">=2.4.18-beta.0"
+    "@heroui/system": ">=2.4.19-beta.0"
   },
   "dependencies": {
     "@heroui/use-disclosure": "workspace:*",

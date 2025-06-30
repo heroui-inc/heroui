@@ -1,5 +1,20 @@
 # @heroui/theme
 
+## 2.4.18-beta.3
+
+### Patch Changes
+
+- [#5421](https://github.com/heroui-inc/heroui/pull/5421) [`f62f49c`](https://github.com/heroui-inc/heroui/commit/f62f49c096727133ecf38719115aa4cdbed25a13) Thanks [@winchesHe](https://github.com/winchesHe)! - fix outline styles (#5266)
+
+- [#5417](https://github.com/heroui-inc/heroui/pull/5417) [`6086ab0`](https://github.com/heroui-inc/heroui/commit/6086ab084abc4b44533dc71025a327ee46ea8948) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed transition (#5409)
+
+- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`ecffb26`](https://github.com/heroui-inc/heroui/commit/ecffb26320da15824356dbccb33d8627326a4b7c) Thanks [@macci001](https://github.com/macci001)! - Renaming loadingIcon to loadingComponent.
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/shared-utils@2.1.10-beta.5
+
 ## 2.4.18-beta.2
 
 ### Patch Changes

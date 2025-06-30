@@ -1,6 +1,6 @@
 {
   "name": "@heroui/slider",
-  "version": "2.4.19",
+  "version": "2.4.20-beta.0",
   "description": "A slider allows a user to select one or more values within a range.",
   "keywords": [
     "slider"
@@ -37,7 +37,7 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "@heroui/theme": ">=2.4.18-beta.0",
-    "@heroui/system": ">=2.4.18-beta.0"
+    "@heroui/system": ">=2.4.19-beta.0"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",

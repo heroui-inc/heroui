@@ -1,6 +1,6 @@
 {
   "name": "@heroui/form",
-  "version": "2.1.21",
+  "version": "2.1.22-beta.0",
   "description": "A form is a group of inputs that allows users submit data to a server and supports field validation errors.",
   "keywords": [
     "form"
@@ -34,7 +34,7 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.18-beta.0",
+    "@heroui/system": ">=2.4.19-beta.0",
     "@heroui/theme": ">=2.4.18-beta.0",
     "react": ">=18",
     "react-dom": ">=18"

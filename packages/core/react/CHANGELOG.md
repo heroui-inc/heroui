@@ -1,5 +1,62 @@
 # @heroui/react
 
+## 2.8.0-beta.11
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`f62f49c`](https://github.com/heroui-inc/heroui/commit/f62f49c096727133ecf38719115aa4cdbed25a13), [`6086ab0`](https://github.com/heroui-inc/heroui/commit/6086ab084abc4b44533dc71025a327ee46ea8948), [`ecffb26`](https://github.com/heroui-inc/heroui/commit/ecffb26320da15824356dbccb33d8627326a4b7c), [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/theme@2.4.18-beta.3
+  - @heroui/toast@2.0.13-beta.0
+  - @heroui/scroll-shadow@2.3.16-beta.0
+  - @heroui/autocomplete@2.3.24-beta.0
+  - @heroui/number-input@2.0.13-beta.0
+  - @heroui/breadcrumbs@2.2.19-beta.0
+  - @heroui/date-picker@2.3.23-beta.0
+  - @heroui/date-input@2.3.22-beta.0
+  - @heroui/pagination@2.2.21-beta.0
+  - @heroui/accordion@2.2.20-beta.0
+  - @heroui/input-otp@2.1.22-beta.0
+  - @heroui/calendar@2.2.23-beta.0
+  - @heroui/checkbox@2.3.22-beta.0
+  - @heroui/dropdown@2.3.23-beta.0
+  - @heroui/progress@2.2.19-beta.0
+  - @heroui/skeleton@2.2.15-beta.0
+  - @heroui/divider@2.2.16-beta.3
+  - @heroui/listbox@2.3.22-beta.0
+  - @heroui/popover@2.3.23-beta.0
+  - @heroui/snippet@2.2.24-beta.0
+  - @heroui/spinner@2.2.20-beta.0
+  - @heroui/tooltip@2.2.20-beta.0
+  - @heroui/avatar@2.2.19-beta.0
+  - @heroui/button@2.2.23-beta.0
+  - @heroui/drawer@2.2.20-beta.0
+  - @heroui/navbar@2.2.21-beta.0
+  - @heroui/ripple@2.2.18-beta.0
+  - @heroui/select@2.4.23-beta.0
+  - @heroui/slider@2.4.20-beta.0
+  - @heroui/spacer@2.2.17-beta.3
+  - @heroui/switch@2.2.21-beta.0
+  - @heroui/alert@2.2.23-beta.0
+  - @heroui/badge@2.2.15-beta.0
+  - @heroui/image@2.2.15-beta.0
+  - @heroui/input@2.4.23-beta.0
+  - @heroui/modal@2.2.20-beta.0
+  - @heroui/radio@2.3.22-beta.0
+  - @heroui/table@2.2.22-beta.0
+  - @heroui/card@2.2.22-beta.0
+  - @heroui/chip@2.2.19-beta.0
+  - @heroui/code@2.2.17-beta.3
+  - @heroui/form@2.1.22-beta.0
+  - @heroui/link@2.2.20-beta.0
+  - @heroui/menu@2.2.22-beta.0
+  - @heroui/tabs@2.2.20-beta.0
+  - @heroui/user@2.2.19-beta.0
+  - @heroui/kbd@2.2.18-beta.3
+  - @heroui/system@2.4.19-beta.0
+  - @heroui/framer-utils@2.1.19-beta.0
+
 ## 2.8.0-beta.10
 
 ### Patch Changes
