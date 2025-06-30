@@ -137,11 +137,21 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
   const {isHovered, hoverProps} = useHover({isDisabled});
   const disableAnimation = disableAnimationProp ?? globalContext?.disableAnimation ?? false;
 
-  const imageStatus = useImage({src, onError, ignoreFallback});
+  const isHeroImage =
+    (typeof ImgComponent === "object" && (ImgComponent as any)?.displayName?.includes("HeroUI")) ??
+    false;
+
+  const imageStatus = useImage({
+    src,
+    onError,
+    ignoreFallback,
+    shouldBypassImageLoad: as !== undefined || !isHeroImage,
+  });
 
   const isImgLoaded = imageStatus === "loaded";
 
-  const shouldFilterDOMProps = typeof ImgComponent === "string";
+  // if the ImgComponent is not a HeroUI component, we need to filter out `disableAnimation`
+  const shouldFilterDOMProps = !isHeroImage;
 
   /**
    * Fallback avatar applies under 2 conditions:
