@@ -142,20 +142,6 @@ const table = tv({
         table: "table-fixed",
       },
     },
-    radius: {
-      none: {
-        wrapper: "rounded-none",
-      },
-      sm: {
-        wrapper: "rounded-small",
-      },
-      md: {
-        wrapper: "rounded-medium",
-      },
-      lg: {
-        wrapper: "rounded-large",
-      },
-    },
     shadow: {
       none: {
         wrapper: "shadow-none",
@@ -219,6 +205,34 @@ const table = tv({
       },
       false: {
         td: ["first:before:rounded-s-lg", "last:before:rounded-e-lg"],
+      },
+    },
+    radius: {
+      none: {
+        wrapper: "rounded-none",
+        th: [
+          "first:rounded-s-none",
+          "first:before:rounded-s-none",
+          "last:rounded-e-none",
+          "last:before:rounded-e-none",
+        ],
+        td: [
+          "first:before:rounded-s-none",
+          "last:before:rounded-e-none",
+          "group-data-[first=true]/tr:first:before:rounded-ss-none",
+          "group-data-[first=true]/tr:last:before:rounded-se-none",
+          "group-data-[last=true]/tr:first:before:rounded-es-none",
+          "group-data-[last=true]/tr:last:before:rounded-ee-none",
+        ],
+      },
+      sm: {
+        wrapper: "rounded-small",
+      },
+      md: {
+        wrapper: "rounded-medium",
+      },
+      lg: {
+        wrapper: "rounded-large",
       },
     },
     fullWidth: {
