@@ -395,11 +395,8 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
   const getToastProps: PropGetter = useCallback(
     (props = {}) => {
-      const aboveToastHeight = index + 1 < total ? heights[index + 1] : 0;
-      const belowToastHeight = index - 1 >= 0 ? heights[index - 1] : 0;
-
-      const topExtension = aboveToastHeight ? Math.ceil(aboveToastHeight / 2) + 8 : 16;
-      const bottomExtension = belowToastHeight ? Math.ceil(belowToastHeight / 2) + 8 : 16;
+      const topExtension = 16;
+      const bottomExtension = 16;
 
       const pseudoElementStyles = {
         "--top-extension": `${topExtension}px`,
