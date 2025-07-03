@@ -247,6 +247,20 @@ import {useAsyncList} from "@react-stately/data";
 > Note that we passed the `isLoading` and `loadingContent` props to `TableBody` to
 > render a loading state while the data is being fetched.
 
+### Sort Icon
+
+You can override the default sort icon by specifying `sortIcon`. This prop is only applied when `allowsSorting` is `true`.
+
+<CodeDemo
+  asIframe
+  title="Sort Icon"
+  resizeEnabled={false}
+  displayMode="visible"
+  files={tableContent.sortIcon}
+  previewHeight="520px"
+  iframeSrc="/examples/table/sort-icon"
+/>
+
 ### Loading more data
 
 Table allows you to add a custom component at the end of the table, on the example below we are
