@@ -1,5 +1,50 @@
 # @heroui/divider
 
+## 2.2.16-beta.3
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/react-rsc-utils@2.1.9-beta.3
+  - @heroui/system-rsc@2.3.16-beta.3
+
+## 2.2.16-beta.2
+
+### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/react-rsc-utils@2.1.9-beta.2
+  - @heroui/system-rsc@2.3.16-beta.2
+
+## 2.2.16-beta.1
+
+### Patch Changes
+
+- [#5398](https://github.com/heroui-inc/heroui/pull/5398) [`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be) Thanks [@wingkwong](https://github.com/wingkwong)! - remove RA dependencies (overlays & utils)
+
+- Updated dependencies [[`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be)]:
+  - @heroui/react-rsc-utils@2.1.9-beta.1
+  - @heroui/system-rsc@2.3.16-beta.1
+
+## 2.2.16-beta.0
+
+### Patch Changes
+
+- [#5392](https://github.com/heroui-inc/heroui/pull/5392) [`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b), [`2bf0a42`](https://github.com/heroui-inc/heroui/commit/2bf0a4243a4e02356477a8da2275dba4e299e55f), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
+  - @heroui/system-rsc@2.3.16-beta.0
+  - @heroui/theme@2.4.18-beta.0
+  - @heroui/react-rsc-utils@2.1.9-beta.0
+
 ## 2.2.15
 
 ### Patch Changes

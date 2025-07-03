@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - canary
+      - beta/release-next
 
 jobs:
   build:

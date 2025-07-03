@@ -97,7 +97,7 @@ export const PhBanner = () => {
             Get 30% off
             <Icon
               aria-hidden="true"
-              className="outline-none transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
+              className="outline-solid outline-transparent transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
               icon={arrowRightIcon}
               width={16}
             />

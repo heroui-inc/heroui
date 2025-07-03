@@ -1,22 +1,25 @@
 import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
-import type {AriaDateFieldProps} from "@react-types/datepicker";
-import type {DateValue, SpectrumDatePickerBase} from "@react-types/datepicker";
+import type {AriaDateFieldProps, SpectrumDatePickerBase} from "@react-types/datepicker";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
-import type {CalendarIdentifier} from "@internationalized/date";
-import type {PropGetter} from "@heroui/system";
-import type {HTMLHeroUIProps} from "@heroui/system";
+import type {DateValue, CalendarIdentifier} from "@internationalized/date";
+import type {PropGetter, HTMLHeroUIProps} from "@heroui/system";
 
 import {useLocale} from "@react-aria/i18n";
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
-import {mergeProps} from "@react-aria/utils";
 import {useLabelPlacement, useProviderContext} from "@heroui/system";
 import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr, getGregorianYearOffset} from "@heroui/shared-utils";
+import {
+  objectToDeps,
+  clsx,
+  dataAttr,
+  getGregorianYearOffset,
+  mergeProps,
+} from "@heroui/shared-utils";
 import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";
@@ -151,10 +154,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     descriptionProps: descriptionPropsProp,
     validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     shouldForceLeadingZeros = true,
-    minValue = globalContext?.defaultDates?.minDate ??
-      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = globalContext?.defaultDates?.maxDate ??
-      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
+    minValue = (globalContext?.defaultDates?.minDate ??
+      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1)) as DateValue,
+    maxValue = (globalContext?.defaultDates?.maxDate ??
+      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31)) as DateValue,
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
     isInvalid: isInvalidProp = validationState ? validationState === "invalid" : false,
     errorMessage,

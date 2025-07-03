@@ -9,17 +9,15 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {AriaDialogProps} from "@react-aria/dialog";
 import type {ReactAriaPopoverProps} from "./use-aria-popover";
 
-import {useEffect} from "react";
 import {useDOMRef} from "@heroui/react-utils";
 import {useOverlayTriggerState} from "@react-stately/overlays";
 import {useFocusRing} from "@react-aria/focus";
-import {ariaHideOutside, useOverlayTrigger, usePreventScroll} from "@react-aria/overlays";
+import {useOverlayTrigger, usePreventScroll} from "@react-aria/overlays";
 import {getShouldUseAxisPlacement} from "@heroui/aria-utils";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {getArrowPlacement} from "@heroui/aria-utils";
 import {popover} from "@heroui/theme";
-import {mergeProps, mergeRefs} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, mergeProps, mergeRefs} from "@heroui/shared-utils";
 import {useMemo, useCallback, useRef} from "react";
 
 import {useReactAriaPopover} from "./use-aria-popover";
@@ -308,12 +306,6 @@ export function usePopover(originalProps: UsePopoverProps) {
     }),
     [slots, state.isOpen, classNames, underlayProps],
   );
-
-  useEffect(() => {
-    if (state.isOpen && domRef?.current) {
-      return ariaHideOutside([domRef?.current]);
-    }
-  }, [state.isOpen, domRef]);
 
   return {
     state,

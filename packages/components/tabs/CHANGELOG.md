@@ -1,5 +1,31 @@
 # @heroui/tabs
 
+## 2.2.20-beta.0
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/shared-utils@2.1.10-beta.5
+  - @heroui/react-utils@2.1.12-beta.3
+  - @heroui/use-is-mounted@2.1.8-beta.5
+  - @heroui/aria-utils@2.2.20-beta.0
+  - @heroui/system@2.4.19-beta.0
+
+## 2.2.19
+
+### Patch Changes
+
+- [#5378](https://github.com/heroui-inc/heroui/pull/5378) [`dd63b83`](https://github.com/heroui-inc/heroui/commit/dd63b83b6b1a1e69e0f77970f471cd2c957f47dd) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tabs handleClick (#5357)
+
+- [#5382](https://github.com/heroui-inc/heroui/pull/5382) [`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5374](https://github.com/heroui-inc/heroui/pull/5374) [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed) Thanks [@wingkwong](https://github.com/wingkwong)! - bump system peer dependencies
+
+- Updated dependencies []:
+  - @heroui/aria-utils@2.2.19
+
 ## 2.2.18
 
 ### Patch Changes

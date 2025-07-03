@@ -11,8 +11,7 @@ import type {ScrollShadowProps} from "@heroui/scroll-shadow";
 import type {ButtonProps} from "@heroui/button";
 import type {AsyncLoadable, PressEvent} from "@react-types/shared";
 
-import {chain, mergeProps} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useEffect, useMemo, useRef} from "react";
 import {useDOMRef} from "@heroui/react-utils";
 import {useComboBoxState} from "@react-stately/combobox";
@@ -22,7 +21,6 @@ import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useComboBox} from "@react-aria/combobox";
 import {FormContext, useSlottedContext} from "@heroui/form";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
 interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>> {
   /**
@@ -532,9 +530,6 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           ),
         }),
       },
-      shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-        ? popoverProps.shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, inputWrapperRef, state),
       // when the popover is open, the focus should be on input instead of dialog
       // therefore, we skip dialog focus here
       disableDialogFocus: true,

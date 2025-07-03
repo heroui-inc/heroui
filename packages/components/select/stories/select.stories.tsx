@@ -535,7 +535,7 @@ const CustomItemsTemplate = ({color, variant, ...args}: SelectProps<User>) => (
       {(item) => (
         <SelectItem key={item.id} textValue={item.name}>
           <div className="flex gap-2 items-center">
-            <Avatar alt={item.name} className="flex-shrink-0" size="sm" src={item.avatar} />
+            <Avatar alt={item.name} className="shrink-0" size="sm" src={item.avatar} />
             <div className="flex flex-col">
               <span className="text-small">{item.name}</span>
               <span className="text-tiny text-default-400">{item.email}</span>
@@ -556,7 +556,7 @@ const CustomItemsTemplate = ({color, variant, ...args}: SelectProps<User>) => (
       {(item) => (
         <SelectItem key={item.id} textValue={item.name}>
           <div className="flex gap-2 items-center">
-            <Avatar alt={item.name} className="flex-shrink-0" size="sm" src={item.avatar} />
+            <Avatar alt={item.name} className="shrink-0" size="sm" src={item.avatar} />
             <div className="flex flex-col">
               <span className="text-small">{item.name}</span>
               <span className="text-tiny text-default-400">{item.email}</span>
@@ -687,7 +687,7 @@ const CustomStylesTemplate = ({color, variant, ...args}: SelectProps<User>) => {
       {(item) => (
         <SelectItem key={item.id} textValue={item.name}>
           <div className="flex gap-2 items-center">
-            <Avatar alt={item.name} className="flex-shrink-0" size="sm" src={item.avatar} />
+            <Avatar alt={item.name} className="shrink-0" size="sm" src={item.avatar} />
             <div className="flex flex-col">
               <span className="text-small">{item.name}</span>
               <span className="text-tiny text-default-400">{item.email}</span>
@@ -1296,12 +1296,7 @@ export const CustomRenderValue = {
     renderValue: (items: SelectedItems<User>) => {
       return items.map((item) => (
         <div key={item.key} className="flex items-center gap-2">
-          <Avatar
-            alt={item.data?.name}
-            className="flex-shrink-0"
-            size="sm"
-            src={item.data?.avatar}
-          />
+          <Avatar alt={item.data?.name} className="shrink-0" size="sm" src={item.data?.avatar} />
           <div className="flex flex-col">
             <span>{item.data?.name}</span>
             <span className="text-default-500 text-tiny">({item.data?.email})</span>
@@ -1321,12 +1316,7 @@ export const CustomStyles = {
     renderValue: (items: SelectedItems<User>) => {
       return items.map((item) => (
         <div key={item.key} className="flex items-center gap-2">
-          <Avatar
-            alt={item.data?.name}
-            className="flex-shrink-0"
-            size="sm"
-            src={item.data?.avatar}
-          />
+          <Avatar alt={item.data?.name} className="shrink-0" size="sm" src={item.data?.avatar} />
           <div className="flex flex-col">
             <span>{item.data?.name}</span>
             <span className="text-default-500 text-tiny">({item.data?.email})</span>

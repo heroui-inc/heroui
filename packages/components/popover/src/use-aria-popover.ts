@@ -3,16 +3,12 @@ import type {AriaPopoverProps, PopoverAria, AriaOverlayProps} from "@react-aria/
 import type {OverlayPlacement} from "@heroui/aria-utils";
 import type {OverlayTriggerState} from "@react-stately/overlays";
 
-import {
-  ariaHideOutside,
-  keepVisible,
-  toReactAriaPlacement,
-  ariaShouldCloseOnInteractOutside,
-} from "@heroui/aria-utils";
-import {useOverlay, useOverlayPosition} from "@react-aria/overlays";
+import {ariaHideOutside, keepVisible, toReactAriaPlacement} from "@heroui/aria-utils";
+import {useOverlayPosition} from "@react-aria/overlays";
 import {useEffect} from "react";
-import {mergeProps} from "@react-aria/utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {useAriaOverlay} from "@heroui/use-aria-overlay";
 
 export interface Props {
   /**
@@ -85,16 +81,16 @@ export function useReactAriaPopover(
 
   const isSubmenu = otherProps["trigger"] === "SubmenuTrigger";
 
-  const {overlayProps, underlayProps} = useOverlay(
+  const {overlayProps, underlayProps} = useAriaOverlay(
     {
       isOpen: state.isOpen,
       onClose: state.close,
       shouldCloseOnBlur,
       isDismissable: isDismissable || isSubmenu,
       isKeyboardDismissDisabled,
-      shouldCloseOnInteractOutside: shouldCloseOnInteractOutside
-        ? shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, triggerRef, state),
+      shouldCloseOnInteractOutside:
+        shouldCloseOnInteractOutside || ((el) => !triggerRef.current?.contains(el)),
+      disableOutsideEvents: !isNonModal,
     },
     popoverRef,
   );

@@ -88,7 +88,37 @@ describe("Input", () => {
     const labelId = container.querySelector("label")?.id;
     const labelledBy = container.querySelector("input")?.getAttribute("aria-labelledby");
 
-    expect(labelledBy?.includes(labelId as string)).toBeTruthy();
+    expect(labelledBy).toBe(labelId);
+  });
+
+  it("should be labelled by placeholder when no label is provided", () => {
+    const {getByRole} = render(<Input placeholder="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by aria-label when no label is provided", () => {
+    const {getByRole} = render(<Input aria-label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label when label is provided", () => {
+    const {getByRole} = render(<Input label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label and aria-label when both label and aria-label are provided", () => {
+    const {getByRole} = render(<Input aria-label="test input" label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label when both label and placeholder are provided", () => {
+    const {getByRole} = render(<Input label="test input" placeholder="test input placeholder" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
   });
 
   it("should have the correct type attribute", () => {

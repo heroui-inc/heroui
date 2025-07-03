@@ -1,5 +1,45 @@
 # @heroui/select
 
+## 2.4.23-beta.0
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.5
+  - @heroui/use-aria-multiselect@2.4.16-beta.0
+  - @heroui/scroll-shadow@2.3.16-beta.0
+  - @heroui/shared-icons@2.1.10-beta.3
+  - @heroui/shared-utils@2.1.10-beta.5
+  - @heroui/use-aria-button@2.2.17-beta.0
+  - @heroui/react-utils@2.1.12-beta.3
+  - @heroui/use-form-reset@2.0.0-beta.2
+  - @heroui/aria-utils@2.2.20-beta.0
+  - @heroui/listbox@2.3.22-beta.0
+  - @heroui/popover@2.3.23-beta.0
+  - @heroui/spinner@2.2.20-beta.0
+  - @heroui/form@2.1.22-beta.0
+  - @heroui/system@2.4.19-beta.0
+
+## 2.4.22
+
+### Patch Changes
+
+- [#5382](https://github.com/heroui-inc/heroui/pull/5382) [`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5374](https://github.com/heroui-inc/heroui/pull/5374) [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed) Thanks [@wingkwong](https://github.com/wingkwong)! - bump system peer dependencies
+
+- Updated dependencies [[`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf), [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed)]:
+  - @heroui/use-aria-multiselect@2.4.15
+  - @heroui/use-aria-button@2.2.16
+  - @heroui/listbox@2.3.21
+  - @heroui/popover@2.3.22
+  - @heroui/scroll-shadow@2.3.15
+  - @heroui/form@2.1.21
+  - @heroui/spinner@2.2.19
+  - @heroui/aria-utils@2.2.19
+
 ## 2.4.21
 
 ### Patch Changes

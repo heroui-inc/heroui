@@ -4,8 +4,7 @@ import type {ValuesType} from "./use-tabs";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps, mergeRefs} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
-import {chain, mergeProps} from "@react-aria/utils";
+import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
 import {useTab} from "@react-aria/tabs";
@@ -79,8 +78,6 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
   });
 
   const handleClick = () => {
-    chain(onClick, tabProps.onClick)();
-
     if (!domRef?.current || !listRef?.current) return;
 
     scrollIntoView(domRef.current, {
@@ -115,7 +112,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
           enabled: shouldFilterDOMProps,
           omitPropNames: new Set(["title"]),
         }),
-        {onClick: handleClick},
+        {onClick: chain(handleClick, onClick, tabProps.onClick)},
       )}
       className={slots.tab?.({class: tabStyles})}
       title={otherProps?.titleValue}
