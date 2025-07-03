@@ -12,7 +12,8 @@ export const accordionVariants = tv({
     heading: "flex",
     indicator: "text-muted ml-auto size-4 shrink-0 transition duration-300",
     item: "border-b last:border-b-0",
-    panel: "",
+    panel:
+      "h-0 opacity-0 transition-[height,opacity] duration-300 ease-out [&[aria-hidden=false]]:h-[var(--panel-height)] [&[aria-hidden=false]]:opacity-100",
     trigger: [
       /* Focus State */
       focusRingClasses,

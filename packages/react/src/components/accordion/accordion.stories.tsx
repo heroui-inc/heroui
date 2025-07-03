@@ -35,7 +35,7 @@ const defaultArgs: AccordionProps = {
 };
 
 const Wrapper = ({children}: {children: React.ReactNode}) => (
-  <div className="w-full max-w-md">{children}</div>
+  <div className="flex h-full w-full">{children}</div>
 );
 
 const items = [
@@ -102,6 +102,7 @@ const Template = (props: AccordionProps) => (
 export const Default = {
   args: {
     ...defaultArgs,
+    allowsMultipleExpanded: true,
   },
   render: Template,
 };

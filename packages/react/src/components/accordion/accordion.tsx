@@ -1,6 +1,7 @@
 "use client";
 
 import type {AccordionVariants} from "./accordion.styles";
+import type {CSSProperties} from "react";
 import type {
   ButtonProps,
   DisclosureGroupProps,
@@ -8,7 +9,7 @@ import type {
   DisclosureProps,
 } from "react-aria-components";
 
-import React, {createContext, useContext} from "react";
+import React, {createContext, useContext, useRef} from "react";
 import {
   Button,
   Disclosure,
@@ -17,8 +18,10 @@ import {
   DisclosurePanel,
 } from "react-aria-components";
 
+import {useHeightCalculator} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
+import {useMergeRef} from "../../utils/mergeRef";
 import {IconChevronDown} from "../icons";
 
 import {accordionVariants} from "./accordion.styles";
@@ -193,13 +196,21 @@ const AccordionPanel = React.forwardRef<
   AccordionPanelProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
+  const accordionPanelRef = useRef<HTMLDivElement>(null);
+  const {height: panelHeight} = useHeightCalculator(accordionPanelRef);
+  const mergedRef = useMergeRef(accordionPanelRef, ref);
 
   return (
     <DisclosurePanel
-      ref={ref}
+      ref={mergedRef}
       data-accordion-panel
       className={composeTwRenderProps(className, slots?.panel())}
       {...props}
+      style={
+        {
+          "--panel-height": `${panelHeight}px`,
+        } as CSSProperties
+      }
     >
       {children}
     </DisclosurePanel>
