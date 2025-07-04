@@ -14,13 +14,18 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
     slots,
     classNames,
     isBlurred,
+    isLoading,
+    isFailed,
     isZoomed,
+    loadingSrc,
     fallbackSrc,
     removeWrapper,
     disableSkeleton,
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
+    getLoadingImgProps,
+    getFallbackImgProps,
   } = useImage({
     ...props,
     ref,
@@ -47,8 +52,16 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
   }
 
   // when zoomed or showSkeleton, we need to wrap the image
-  if (isZoomed || !disableSkeleton || fallbackSrc) {
-    return <div {...getWrapperProps()}> {isZoomed ? zoomed : img}</div>;
+  if (isZoomed || !disableSkeleton || loadingSrc || fallbackSrc) {
+    return (
+      <div
+        {...getWrapperProps()}
+        {...(isLoading && loadingSrc ? getLoadingImgProps() : {})}
+        {...(isFailed && fallbackSrc ? getFallbackImgProps() : {})}
+      >
+        {isZoomed ? zoomed : img}
+      </div>
+    );
   }
 
   return img;
