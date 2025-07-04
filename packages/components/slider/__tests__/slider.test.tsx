@@ -370,3 +370,156 @@ describe("Slider", () => {
     expect(rightSlider).toHaveAttribute("aria-valuetext", "0.8");
   });
 });
+
+describe("Slider with getTooltipValue", () => {
+  describe("getTooltipValue precedence", () => {
+    it("should use tooltipProps.content over getTooltipValue if both are provided", async () => {
+      const getTooltipValue = jest.fn((value) => `Custom: ${value}`);
+      const {getByRole, findByRole} = render(
+        <Slider
+          showTooltip
+          aria-label="Value slider"
+          defaultValue={30}
+          getTooltipValue={getTooltipValue}
+          tooltipProps={{content: "Static Tooltip"}}
+        />,
+      );
+
+      const slider = getByRole("slider");
+
+      act(() => {
+        slider.focus();
+      });
+
+      const tooltip = await findByRole("tooltip");
+
+      expect(tooltip).toHaveTextContent("Static Tooltip");
+      // getTooltipValue should not be called when tooltipProps.content is set
+      expect(getTooltipValue).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("string return value", () => {
+    it("should display string from getTooltipValue for single thumb", async () => {
+      const getTooltipValue = jest.fn((value) => `Value: ${value}`);
+      const {getByRole, findByRole} = render(
+        <Slider
+          showTooltip
+          aria-label="Single value slider"
+          defaultValue={50}
+          getTooltipValue={getTooltipValue}
+        />,
+      );
+
+      const slider = getByRole("slider");
+
+      act(() => {
+        slider.focus();
+      });
+
+      const tooltip = await findByRole("tooltip");
+
+      expect(tooltip).toHaveTextContent("Value: 50");
+      expect(getTooltipValue).toHaveBeenCalledWith(50);
+    });
+
+    it("should display string from getTooltipValue for multi-thumb", async () => {
+      const getTooltipValue = jest.fn((value, index) => `Thumb ${index}: ${value[index]}`);
+      const {getAllByRole, findByText} = render(
+        <Slider
+          showTooltip
+          aria-label="Range slider"
+          defaultValue={[25, 75]}
+          getTooltipValue={getTooltipValue}
+        />,
+      );
+
+      const sliders = getAllByRole("slider");
+
+      // Focus first thumb
+      act(() => {
+        sliders[0].focus();
+      });
+
+      let tooltip = await findByText("Thumb 0: 25");
+
+      expect(tooltip).toBeInTheDocument();
+      expect(getTooltipValue).toHaveBeenCalledWith([25, 75], 0);
+
+      // Focus second thumb
+      act(() => {
+        sliders[1].focus();
+      });
+
+      tooltip = await findByText("Thumb 1: 75");
+      expect(tooltip).toBeInTheDocument();
+      expect(getTooltipValue).toHaveBeenCalledWith([25, 75], 1);
+    });
+  });
+
+  describe("number return value", () => {
+    it("should display formatted number using tooltipValueFormatOptions for single thumb", async () => {
+      const getTooltipValue = jest.fn((value) => value);
+      const {getByRole, findByRole} = render(
+        <Slider
+          showTooltip
+          defaultValue={50}
+          getTooltipValue={getTooltipValue}
+          tooltipValueFormatOptions={{style: "percent", minimumFractionDigits: 0}}
+        />,
+      );
+
+      const slider = getByRole("slider");
+
+      act(() => {
+        slider.focus();
+      });
+
+      const tooltip = await findByRole("tooltip");
+
+      expect(tooltip).toHaveTextContent("5,000%");
+      expect(getTooltipValue).toHaveBeenCalledWith(50);
+    });
+
+    it("should fall back to formatOptions if tooltipValueFormatOptions is not provided", async () => {
+      const getTooltipValue = jest.fn((value) => value);
+      const {getByRole, findByRole} = render(
+        <Slider
+          showTooltip
+          defaultValue={50}
+          formatOptions={{style: "currency", currency: "USD"}}
+          getTooltipValue={getTooltipValue}
+        />,
+      );
+
+      const slider = getByRole("slider");
+
+      act(() => {
+        slider.focus();
+      });
+
+      const tooltip = await findByRole("tooltip");
+
+      expect(tooltip).toHaveTextContent("$50.00");
+      expect(getTooltipValue).toHaveBeenCalledWith(50);
+    });
+
+    it("should display plain number if no format options are provided", async () => {
+      const getTooltipValue = jest.fn((value) => value);
+      const {getByRole, findByRole} = render(
+        <Slider showTooltip defaultValue={50} getTooltipValue={getTooltipValue} />,
+      );
+
+      const slider = getByRole("slider");
+
+      act(() => {
+        slider.focus();
+      });
+
+      const tooltip = await findByRole("tooltip");
+
+      expect(tooltip).toHaveTextContent("50");
+      expect(getTooltipValue).toHaveBeenCalledWith(50);
+    });
+  });
+});
