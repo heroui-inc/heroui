@@ -763,7 +763,7 @@ const select = tv({
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
       },
     },
-    // outside-left & size & hasHelper
+    // outside-left & size
     {
       labelPlacement: "outside-left",
       size: "sm",
@@ -800,20 +800,13 @@ const select = tv({
         label: ["pe-2", "max-w-full", "text-ellipsis", "overflow-hidden"],
       },
     },
+    // isClearable & labelPlacement
     {
       labelPlacement: ["outside", "outside-left"],
       isClearable: true,
       class: {
         endContent: ["mt-4"],
-        clearButton: ["mt-4"],
-      },
-    },
-    {
-      isClearable: true,
-      variant: ["underlined"],
-      class: {
-        clearButton: ["relative left-2"],
-        endContent: ["me-2"],
+        clearButton: ["group-data-[has-end-content=true]:mt-4"],
       },
     },
     {
@@ -823,11 +816,28 @@ const select = tv({
         endContent: ["mt-4"],
       },
     },
+    // isClearable + variant
+    {
+      isClearable: true,
+      variant: ["underlined"],
+      class: {
+        clearButton: ["relative group-data-[has-end-content=true]:left-2"],
+        endContent: ["me-2"],
+      },
+    },
     {
       isClearable: false,
       variant: ["underlined"],
       class: {
         endContent: ["me-2"],
+      },
+    },
+    // isClearable + size
+    {
+      isClearable: true,
+      size: "sm",
+      class: {
+        endContent: "ms-2",
       },
     },
   ],
