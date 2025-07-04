@@ -87,6 +87,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
     children,
     icon,
     name,
+    form,
     isRequired,
     isReadOnly: isReadOnlyProp = false,
     autoFocus = false,
@@ -151,6 +152,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
   const ariaCheckboxProps = useMemo(
     () => ({
       name,
+      form,
       value,
       children,
       autoFocus,
@@ -167,6 +169,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
     }),
     [
       name,
+      form,
       value,
       children,
       autoFocus,
@@ -313,6 +316,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
       ...mergeProps(inputProps, focusProps),
       className: slots.hiddenInput({class: classNames?.hiddenInput}),
       onChange: chain(inputProps.onChange, handleCheckboxChange),
+      form: form,
     };
   }, [inputProps, focusProps, handleCheckboxChange, classNames?.hiddenInput]);
 

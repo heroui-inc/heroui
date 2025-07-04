@@ -210,6 +210,56 @@ const WithFormTemplate = (args: CheckboxProps) => {
   );
 };
 
+const SeparateFromFormTemplate = (args: CheckboxProps) => {
+  const [submitted, setSubmitted] = React.useState<{[key: string]: FormDataEntryValue} | null>(
+    null,
+  );
+  const [result, setResult] = React.useState<string | undefined>(undefined);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+
+    if (data.terms == "true") {
+      setResult("Submitted value: true");
+    } else {
+      setResult("Checkbox is not checked");
+    }
+
+    setSubmitted(data);
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <Checkbox
+        isRequired
+        classNames={{
+          label: "text-small",
+        }}
+        form="heroui-form"
+        name="terms"
+        validationBehavior="aria"
+        value="true"
+        onValueChange={() => setResult(undefined)}
+        {...args}
+      >
+        This checkbox might be anywhere
+      </Checkbox>
+      <Form id="heroui-form" onSubmit={onSubmit}>
+        {result && <span className="text-small">{result}</span>}
+        <button className={button({class: "w-fit"})} type="submit">
+          Submit
+        </button>
+        {submitted && (
+          <div className="text-small text-default-500 mt-4">
+            Submitted data: <pre>{JSON.stringify(submitted, null, 2)}</pre>
+          </div>
+        )}
+      </Form>
+    </div>
+  );
+};
+
 export const Default = {
   args: {
     ...defaultProps,
@@ -308,6 +358,14 @@ export const Required = {
 
 export const WithForm = {
   render: WithFormTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const SeparateFromForm = {
+  render: SeparateFromFormTemplate,
 
   args: {
     ...defaultProps,
