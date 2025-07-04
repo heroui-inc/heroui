@@ -351,6 +351,10 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   // Ensure the focused item in the dropdown correctly reflects the
   // selected key when the component mounts or relevant state changes.
   useEffect(() => {
+    if (!state.isOpen) {
+      return;
+    }
+
     let keyToFocus: React.Key | null;
 
     if (
@@ -368,7 +372,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       keyToFocus = firstAvailableKey;
     }
     state.selectionManager.setFocusedKey(keyToFocus);
-  }, [state.collection, state.disabledKeys, state.selectedKey]);
+  }, [state.collection, state.disabledKeys, state.selectedKey, state.isOpen]);
 
   // scroll the listbox to the selected item
   useEffect(() => {
@@ -477,8 +481,8 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     state.displayValidation.isInvalid === false &&
     state.realtimeValidation.isInvalid === true;
 
-  const getInputProps = () =>
-    ({
+  const getInputProps = () => {
+    const baseInputProps = {
       ...otherProps,
       ...inputProps,
       ...slotsProps.inputProps,
@@ -489,7 +493,27 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           ? errorMessage({isInvalid, validationErrors, validationDetails})
           : errorMessage || validationErrors?.join(" "),
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
-    }) as unknown as InputProps;
+    } as unknown as InputProps;
+
+    // override the onBlur behavior to prevent auto-selection when input is empty
+    const originalOnBlur = baseInputProps.onBlur;
+
+    baseInputProps.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      // if the input is empty when blurring, clear any focused key to prevent auto-selection
+      if (state.inputValue === "" && state.isOpen) {
+        state.selectionManager.setFocusedKey(null);
+        if (state.selectedKey !== null) {
+          state.setSelectedKey(null);
+        }
+      }
+
+      if (originalOnBlur) {
+        originalOnBlur(e);
+      }
+    };
+
+    return baseInputProps;
+  };
 
   const getListBoxProps = () => {
     // Use isVirtualized prop if defined, otherwise fallback to default behavior
