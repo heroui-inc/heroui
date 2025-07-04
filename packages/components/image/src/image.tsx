@@ -55,7 +55,6 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
   if (isZoomed || !disableSkeleton || loadingSrc || fallbackSrc) {
     return (
       <div
-        data-testid="heroUI/image_parent"
         {...getWrapperProps()}
         {...(isLoading && loadingSrc ? getLoadingImgProps() : {})}
         {...(isFailed && fallbackSrc ? getFallbackImgProps() : {})}

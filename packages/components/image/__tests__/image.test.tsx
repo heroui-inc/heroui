@@ -41,7 +41,6 @@ describe("Image", () => {
     const wrapper = render(<Image />);
 
     expect(() => wrapper.unmount()).not.toThrow();
-    wrapper.unmount();
   });
 
   it("ref should be forwarded", () => {
@@ -55,7 +54,6 @@ describe("Image", () => {
     const wrapper = render(<Image fallbackSrc={fallbackSrc} src={src} />);
 
     expect(wrapper.getByRole("img")).toBeInstanceOf(HTMLImageElement);
-    wrapper.unmount();
   });
 
   test("renders an image while loading the src image. When loading finished, renders the src image.", async () => {
@@ -71,7 +69,6 @@ describe("Image", () => {
     const imageParent = wrapper.getByRole("img").parentElement;
 
     expect(imageParent).not.toBeNull();
-    expect(imageParent!.getAttribute("data-testid")).toEqual("heroUI/image_parent");
     expect(imageParent!.getAttribute("class")).toContain("bg-cover");
 
     const computedLoadingStyle = window.getComputedStyle(imageParent!);
@@ -86,26 +83,25 @@ describe("Image", () => {
 
     expect(onLoad).toHaveBeenCalled();
     expect(computedLoadedStyle.backgroundImage).toBe("");
-    wrapper.unmount();
   });
 
   test("renders fallback source if src is wrong or not found.", async () => {
-    let imageOnerror: any = null;
+    let imageOnError: any = null;
 
-    function trackImageOnerror() {
+    function trackImageOnError() {
       Object.defineProperty(window.Image.prototype, "onerror", {
         get() {
           return this._onload;
         },
         set(fn) {
-          imageOnerror = fn;
+          imageOnError = fn;
           this._onerror = fn;
         },
         configurable: true,
       });
     }
 
-    trackImageOnerror();
+    trackImageOnError();
 
     const cleanup = () => {
       delete window.Image.prototype._onerror;
@@ -129,10 +125,9 @@ describe("Image", () => {
     const imageParent = wrapper.getByRole("img").parentElement;
 
     expect(imageParent).not.toBeNull();
-    expect(imageParent!.getAttribute("data-testid")).toEqual("heroUI/image_parent");
 
     act(() => {
-      imageOnerror();
+      imageOnError();
     });
 
     expect(onError).toHaveBeenCalled();
@@ -140,7 +135,6 @@ describe("Image", () => {
 
     expect(computedStyle.backgroundImage).toBe(`url(${fallbackSrc})`);
     expect(imageParent!.getAttribute("class")).toContain("bg-contain");
-    wrapper.unmount();
     cleanup();
   });
 
@@ -148,14 +142,12 @@ describe("Image", () => {
     const wrapper = render(<Image src={src} />);
 
     expect(wrapper.getByRole("img")).toHaveAttribute("src", src);
-    wrapper.unmount();
   });
 
   test("should render a wrapper when isZoomed or isBlurred is true", () => {
     const wrapper = render(<Image isBlurred isZoomed src={src} />);
 
     expect(wrapper.getByRole("img").parentElement).toBeInstanceOf(HTMLDivElement);
-    wrapper.unmount();
   });
 
   test("should render a blurred image when isBlurred is true", () => {
@@ -163,7 +155,6 @@ describe("Image", () => {
     const blurredImage = wrapper.getByRole("img").nextElementSibling;
 
     expect(blurredImage).toBeInstanceOf(HTMLImageElement);
-    wrapper.unmount();
   });
 
   test("should fire onload", () => {
@@ -177,7 +168,6 @@ describe("Image", () => {
 
     expect(wrapper.getByRole("img")).toHaveAttribute("src", src);
     expect(onLoad).toHaveBeenCalled();
-    wrapper.unmount();
   });
 
   test("should disable aspect ratio if height is set", () => {
@@ -198,6 +188,5 @@ describe("Image", () => {
     expect(getComputedStyle(images[1]).height).toBe("40px");
     expect(getComputedStyle(images[2]).height).toBe("50px");
     expect(getComputedStyle(images[3]).height).toBe("60px");
-    wrapper.unmount();
   });
 });

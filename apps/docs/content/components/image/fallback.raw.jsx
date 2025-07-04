@@ -5,7 +5,7 @@ export default function App() {
     <Image
       alt="HeroUI Image with fallback"
       classNames={{fallbackImg: "bg-center"}}
-      fallbackSrc="https://app.requestly.io/delay/3000/https://tse3.mm.bing.net/th/id/OIP.IMYEa-ECkbVQ66EO1LCUDwHaHa?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+      fallbackSrc="https://heroui.com/images/fruit-4.jpeg"
       height={200}
       src="wrong-image-address"
       width={300}

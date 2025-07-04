@@ -175,7 +175,7 @@ export const CustomLoadingAndFallback = {
     radius: "lg",
     src: "wrong-src-address",
     loadingSrc: "/images/placeholder_300x450.png",
-    fallbackSrc: "/images/local-image-small.jpg",
+    fallbackSrc: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6",
     classNames: {loadingImg: "bg-contain", fallbackImg: "bg-cover"},
   },
 };
