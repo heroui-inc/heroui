@@ -402,6 +402,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
 
   const hasHelper = !!description || !!errorMessage;
 
+  const hasEndContent = !!endContent;
+
   // apply the same with to the popover as the select
   useEffect(() => {
     if (state.isOpen && popoverRef.current && triggerRef.current) {
@@ -419,6 +421,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       "data-has-value": dataAttr(hasValue),
       "data-has-label": dataAttr(hasLabel),
       "data-has-helper": dataAttr(hasHelper),
+      "data-has-end-content": dataAttr(hasEndContent),
       "data-invalid": dataAttr(isInvalid),
       "data-has-label-outside": dataAttr(hasLabelOutside),
       className: slots.base({
