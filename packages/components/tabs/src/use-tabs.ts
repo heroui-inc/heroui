@@ -7,6 +7,7 @@ import type {CollectionProps} from "@heroui/aria-utils";
 import type {CollectionChildren} from "@react-types/shared";
 import type {HTMLMotionProps} from "framer-motion";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ElementType} from "react";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {tabs} from "@heroui/theme";
@@ -67,6 +68,10 @@ export interface Props extends Omit<HTMLHeroUIProps, "children"> {
    * @default true
    */
   destroyInactiveTabPanel?: boolean;
+  /**
+   * Custom icon for the show more button
+   */
+  moreIcon?: ElementType;
 }
 
 export type UseTabsProps<T> = Props &
