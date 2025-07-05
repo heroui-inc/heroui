@@ -1,5 +1,13 @@
 # @heroui/accordion
 
+## 2.2.20-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/divider@2.2.16-beta.3
+
 ## 2.2.20-beta.0
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @heroui/shared-icons
 
+## 2.1.10-beta.4
+
+### Patch Changes
+
+- [#5243](https://github.com/heroui-inc/heroui/pull/5243) [`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b) Thanks [@wingkwong](https://github.com/wingkwong)! - support custom sort icon in Table (#5223)
+
 ## 2.1.10-beta.3
 
 ### Patch Changes
