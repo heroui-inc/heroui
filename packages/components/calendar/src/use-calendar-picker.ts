@@ -36,6 +36,7 @@ export function useCalendarPicker(props: CalendarPickerProps) {
 
   const monthsItemsRef = useRef<ItemsRefMap>();
   const yearsItemsRef = useRef<ItemsRefMap>();
+  const focusedDateRef = useRef<CalendarDate>(state.focusedDate);
 
   const monthDateFormatter = useDateFormatter({
     month: "long",
@@ -85,7 +86,6 @@ export function useCalendarPicker(props: CalendarPickerProps) {
   const handleListScroll = useCallback(
     (e: Event, highlightEl: HTMLElement | null, list: CalendarPickerListType) => {
       if (!(e.target instanceof HTMLElement) || !highlightEl) return;
-
       const map = getItemsRefMap(list === "months" ? monthsItemsRef : yearsItemsRef);
 
       const items = Array.from(map.entries());
@@ -123,12 +123,17 @@ export function useCalendarPicker(props: CalendarPickerProps) {
 
       const [itemValue] = closestItem;
 
-      let date = state.focusedDate.set(list === "months" ? {month: itemValue} : {year: itemValue});
+      const current = focusedDateRef.current;
+      const updatedDate = current.set(list === "months" ? {month: itemValue} : {year: itemValue});
 
-      state.setFocusedDate(date);
+      state.setFocusedDate(updatedDate);
     },
-    [state, isHeaderExpanded],
+    [isHeaderExpanded],
   );
+
+  useEffect(() => {
+    focusedDateRef.current = state.focusedDate;
+  }, [state.focusedDate]);
 
   // scroll to the selected month/year when the component is mounted/opened/closed
   useEffect(() => {
