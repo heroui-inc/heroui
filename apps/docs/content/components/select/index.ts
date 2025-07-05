@@ -9,6 +9,7 @@ import variants from "./variants";
 import radius from "./radius";
 import labelPlacements from "./label-placements";
 import startContent from "./start-content";
+import endContent from "./end-content";
 import itemStartContent from "./item-start-content";
 import asyncLoadingItems from "./async-loading-items";
 import withoutScrollShadow from "./without-scroll-shadow";
@@ -47,6 +48,7 @@ export const selectContent = {
   asyncLoadingItems,
   description,
   startContent,
+  endContent,
   itemStartContent,
   withoutScrollShadow,
   errorMessage,
