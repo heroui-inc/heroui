@@ -1,7 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {Meta} from "@storybook/react";
+import type {ModalProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {modal} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {Input} from "@heroui/input";
@@ -17,7 +18,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  ModalProps,
   useDisclosure,
   useDraggable,
 } from "../src";

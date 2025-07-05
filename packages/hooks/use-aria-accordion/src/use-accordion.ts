@@ -1,7 +1,8 @@
-import {AriaAccordionProps} from "@react-types/accordion";
-import {ButtonHTMLAttributes, RefObject} from "react";
-import {DOMAttributes, Node} from "@react-types/shared";
-import {TreeState} from "@react-stately/tree";
+import type {AriaAccordionProps} from "@react-types/accordion";
+import type {ButtonHTMLAttributes, RefObject} from "react";
+import type {DOMAttributes, Node} from "@react-types/shared";
+import type {TreeState} from "@react-stately/tree";
+
 import {useSelectableList} from "@react-aria/selection";
 
 export interface AccordionAria {

@@ -1,14 +1,16 @@
 "use client";
 
-import {FC, useRef, useEffect, useState} from "react";
+import type {FC} from "react";
+import type {Heading} from "@/libs/docs/utils";
+
+import {useRef, useEffect, useState} from "react";
 import {clsx} from "@heroui/shared-utils";
 import {Divider, Spacer} from "@heroui/react";
 import {ChevronCircleTopLinearIcon} from "@heroui/shared-icons";
 import scrollIntoView from "scroll-into-view-if-needed";
 
-import {PHCallout} from "./ph-callout";
+import {HeroUIProCallout} from "./heroui-pro-callout";
 
-import {Heading} from "@/libs/docs/utils";
 import {useScrollSpy} from "@/hooks/use-scroll-spy";
 import {useScrollPosition} from "@/hooks/use-scroll-position";
 import emitter from "@/libs/emitter";
@@ -124,7 +126,7 @@ export const DocsToc: FC<DocsTocProps> = ({headings}) => {
           </li>
         </ul>
       </div>
-      <PHCallout />
+      <HeroUIProCallout />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import {pointerKey} from "@testing-library/user-event/system/pointer/shared";
+import type {pointerKey} from "@testing-library/user-event/system/pointer/shared";
 
 /**
  * Object containing key codes for various keyboard keys.

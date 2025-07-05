@@ -1,13 +1,14 @@
 import type {ValidationResult} from "@react-types/shared";
+import type {Meta} from "@storybook/react";
+import type {TextAreaProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {input} from "@heroui/theme";
 import {SendFilledIcon, PlusFilledIcon} from "@heroui/shared-icons";
 import {button} from "@heroui/theme";
 import {Form} from "@heroui/form";
 
-import {Textarea, TextAreaProps} from "../src";
+import {Textarea} from "../src";
 
 export default {
   title: "Components/Textarea",

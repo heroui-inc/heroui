@@ -9,7 +9,7 @@ async function getData() {
     return {
       sponsors,
     };
-  } catch (error) {
+  } catch {
     throw new Error("Failed to fetch data");
   }
 }

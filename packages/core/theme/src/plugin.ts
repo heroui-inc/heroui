@@ -3,6 +3,8 @@
  * @see https://github.com/L-Blondy/tw-colors
  */
 
+import type {ConfigTheme, ConfigThemes, DefaultThemeType, HeroUIPluginConfig} from "./types";
+
 import Color from "color";
 import plugin from "tailwindcss/plugin.js";
 import deepMerge from "deepmerge";
@@ -13,7 +15,6 @@ import {animations} from "./animations";
 import {utilities} from "./utilities";
 import {flattenThemeObject} from "./utils/object";
 import {isBaseTheme} from "./utils/theme";
-import {ConfigTheme, ConfigThemes, DefaultThemeType, HeroUIPluginConfig} from "./types";
 import {lightLayout, darkLayout, defaultLayout} from "./default-layout";
 import {baseStyles} from "./utils/classes";
 import {DEFAULT_TRANSITION_DURATION} from "./utilities/transition";
@@ -277,15 +278,15 @@ export const heroui = (config: HeroUIPluginConfig = {}): ReturnType<typeof plugi
   Object.entries(otherThemes).forEach(([themeName, {extend, colors, layout}]) => {
     const baseTheme = extend && isBaseTheme(extend) ? extend : defaultExtendTheme;
 
-    if (colors && typeof colors === "object") {
-      otherThemes[themeName].colors = deepMerge(semanticColors[baseTheme], colors);
-    }
-    if (layout && typeof layout === "object") {
-      otherThemes[themeName].layout = deepMerge(
-        extend ? baseLayouts[extend] : defaultLayoutObj,
-        layout,
-      );
-    }
+    const baseColors = semanticColors[baseTheme];
+
+    otherThemes[themeName].colors =
+      colors && typeof colors === "object" ? deepMerge(baseColors, colors) : baseColors;
+
+    const baseLayout = extend ? baseLayouts[extend] : defaultLayoutObj;
+
+    otherThemes[themeName].layout =
+      layout && typeof layout === "object" ? deepMerge(baseLayout, layout) : baseLayout;
   });
 
   const light: ConfigTheme = {

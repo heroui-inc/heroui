@@ -1,10 +1,12 @@
-import {cloneElement, useMemo} from "react";
+import type {UseBreadcrumbsProps} from "./use-breadcrumbs";
+
+import {cloneElement, isValidElement, useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 import {ChevronRightIcon, EllipsisIcon} from "@heroui/shared-icons";
 import {warn} from "@heroui/shared-utils";
 import {chain} from "@react-aria/utils";
 
-import {UseBreadcrumbsProps, useBreadcrumbs} from "./use-breadcrumbs";
+import {useBreadcrumbs} from "./use-breadcrumbs";
 
 export interface BreadcrumbsProps extends UseBreadcrumbsProps {}
 
@@ -90,7 +92,7 @@ const Breadcrumbs = forwardRef<"div", BreadcrumbsProps>((props, ref) => {
 
     return [
       ...items.slice(0, itemsBeforeCollapse),
-      ellipsisItem,
+      isValidElement(ellipsisItem) && cloneElement(ellipsisItem, {key: "ellipsis-item"}),
       ...items.slice(items.length - itemsAfterCollapse, items.length),
     ];
   }, [

@@ -57,10 +57,11 @@ const inputOtp = tv({
         segment: ["bg-default-100", "border-medium"],
       },
       bordered: {
-        segment: ["border-medium"],
+        segment: ["bg-background", "border-medium"],
       },
       underlined: {
         segment: [
+          "bg-background",
           "shadow-none",
           "relative",
           "box-border",
@@ -408,12 +409,7 @@ const inputOtp = tv({
       variant: "faded",
       isInvalid: true,
       class: {
-        segment: [
-          "bg-danger-50",
-          "text-danger",
-          "border-danger-200",
-          "data-[active=true]:border-danger-400",
-        ],
+        segment: ["text-danger"],
         caret: ["bg-danger"],
       },
     },

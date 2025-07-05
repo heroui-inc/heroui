@@ -11,10 +11,10 @@ import {useIsMounted} from "@/hooks/use-is-mounted";
 import {__PROD__, __ENABLE_ADS__} from "@/utils";
 
 const EA_PROVIDER_RATIO = 0.85;
-const PRODUCT_HUNT_ENABLED = true;
+const PRODUCT_HUNT_ENABLED = false;
 
 const PH_INFO = {
-  description: "Join the conversation and help us get #1 Product of the Day! ↗",
+  description: "Join the conversation and help us get #1 Product of the Week! ↗",
   title: "We're live on Product Hunt! (30% OFF)",
   url: "https://ph.heroui.chat?utm_source=heroui.chat&utm_medium=banner",
 };
@@ -91,7 +91,7 @@ export const CarbonAd: React.FC<unknown> = () => {
               setShowEthicalAds(true);
             }
           });
-        } catch (error) {
+        } catch {
           loadCarbonAds();
         }
       } else {

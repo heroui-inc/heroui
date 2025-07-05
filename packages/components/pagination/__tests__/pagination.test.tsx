@@ -94,8 +94,8 @@ describe("Pagination", () => {
         this.thresholds = Array.isArray(this.options?.threshold)
           ? this.options.threshold
           : this.options?.threshold != null
-          ? [this.options.threshold]
-          : [0];
+            ? [this.options.threshold]
+            : [0];
         this.disconnect = jest.fn();
         this.observe = jest.fn();
         this.unobserve = jest.fn();

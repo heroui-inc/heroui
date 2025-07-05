@@ -1,4 +1,4 @@
-import {ParsedUrlQuery} from "querystring";
+import type {ParsedUrlQuery} from "querystring";
 
 import {marked} from "marked";
 import Slugger from "github-slugger";

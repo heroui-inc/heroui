@@ -2,6 +2,7 @@ import type {NumberInputVariantProps, SlotsToClasses, NumberInputSlots} from "@h
 import type {AriaNumberFieldProps} from "@react-types/numberfield";
 import type {NumberFieldStateOptions} from "@react-stately/numberfield";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {Ref} from "react";
 
 import {useLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
@@ -13,7 +14,7 @@ import {useLocale} from "@react-aria/i18n";
 import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
 import {useNumberFieldState} from "@react-stately/numberfield";
 import {useNumberField as useAriaNumberInput} from "@react-aria/numberfield";
-import {useMemo, Ref, useCallback, useState} from "react";
+import {useMemo, useCallback, useState} from "react";
 import {chain, mergeProps} from "@react-aria/utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
@@ -99,6 +100,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   const {
     ref,
     as,
+    type,
     label,
     baseRef,
     wrapperRef,
@@ -539,6 +541,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   return {
     Component,
     classNames,
+    type,
     domRef,
     label,
     description,
