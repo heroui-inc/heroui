@@ -145,8 +145,8 @@
     }
   },
   "engines": {
-    "node": ">=20.x",
-    "pnpm": ">=9.x"
+    "pnpm": ">=10.x",
+    "node": ">=22.x"
   },
-  "packageManager": "pnpm@9.6.0"
+  "packageManager": "pnpm@10.6.2"
 }
