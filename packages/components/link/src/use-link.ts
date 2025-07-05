@@ -53,6 +53,7 @@ export function useLink(originalProps: UseLinkProps) {
     as,
     children,
     anchorIcon,
+    href,
     isExternal = false,
     showAnchorIcon = false,
     autoFocus = false,
@@ -74,6 +75,7 @@ export function useLink(originalProps: UseLinkProps) {
   const {linkProps} = useAriaLink(
     {
       ...otherProps,
+      href,
       onPress,
       onPressStart,
       onPressEnd,
@@ -111,6 +113,8 @@ export function useLink(originalProps: UseLinkProps) {
       "data-focus": dataAttr(isFocused),
       "data-disabled": dataAttr(originalProps.isDisabled),
       "data-focus-visible": dataAttr(isFocusVisible),
+      // The `href` prop may be routerized by useAriaLink, so we may merge over top of it
+      href,
       ...mergeProps(focusProps, linkProps, otherProps),
     };
   }, [styles, isFocused, isFocusVisible, focusProps, linkProps, otherProps]);
