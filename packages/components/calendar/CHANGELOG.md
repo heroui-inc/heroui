@@ -1,5 +1,15 @@
 # @heroui/calendar
 
+## 2.2.23-beta.1
+
+### Patch Changes
+
+- [#5151](https://github.com/heroui-inc/heroui/pull/5151) [`e3c2795`](https://github.com/heroui-inc/heroui/commit/e3c279514c289d1962dee9ef2055e3a88aa4f245) Thanks [@aakashahpl](https://github.com/aakashahpl)! - Replace rectangle intersection detection with center-point distance calculation to make the calendar picker more resilient when browser zoom is changed. The new approach finds the closest picker item to the highlight element's center, preventing mismatches between displayed and selected year / month. (#5117)
+
+- Updated dependencies [[`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/button@2.2.23-beta.0
+
 ## 2.2.23-beta.0
 
 ### Patch Changes

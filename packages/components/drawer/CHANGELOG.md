@@ -1,5 +1,12 @@
 # @heroui/drawer
 
+## 2.2.20-beta.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/modal@2.2.20-beta.1
+
 ## 2.2.20-beta.0
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @heroui/theme
 
+## 2.4.18-beta.4
+
+### Patch Changes
+
+- [#5062](https://github.com/heroui-inc/heroui/pull/5062) [`be697f7`](https://github.com/heroui-inc/heroui/commit/be697f77f5f6f8be439c72bd0e2155fd94eefeea) Thanks [@kaishuige](https://github.com/kaishuige)! - fixed missing radius styles in th and td in Table (#4988)
+
+- [#5245](https://github.com/heroui-inc/heroui/pull/5245) [`e1a0d9d`](https://github.com/heroui-inc/heroui/commit/e1a0d9d53d34cdb59a1aaf3f553f7d54fbf6f60d) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Remove the bottom extenstion of the toast (#5231)
+
+- [#4785](https://github.com/heroui-inc/heroui/pull/4785) [`bd5ad76`](https://github.com/heroui-inc/heroui/commit/bd5ad766115d64307b08faef7ce8401afe24cb46) Thanks [@abhinav700](https://github.com/abhinav700)! - add `isClearable` and `onClear` prop to Select component (#2239)
+
 ## 2.4.18-beta.3
 
 ### Patch Changes

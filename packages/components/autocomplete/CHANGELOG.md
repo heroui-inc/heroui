@@ -1,5 +1,20 @@
 # @heroui/autocomplete
 
+## 2.3.24-beta.1
+
+### Patch Changes
+
+- [#5427](https://github.com/heroui-inc/heroui/pull/5427) [`cbeda74`](https://github.com/heroui-inc/heroui/commit/cbeda74dfa4c6c9027b213ba1e6ad987a2cb6218) Thanks [@wingkwong](https://github.com/wingkwong)! - do not render selector button if selector icon is null (#5423)
+
+- Updated dependencies [[`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/button@2.2.23-beta.0
+  - @heroui/input@2.4.23-beta.1
+  - @heroui/listbox@2.3.22-beta.0
+  - @heroui/form@2.1.22-beta.1
+  - @heroui/popover@2.3.23-beta.0
+  - @heroui/scroll-shadow@2.3.16-beta.0
+
 ## 2.3.24-beta.0
 
 ### Patch Changes
