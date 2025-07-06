@@ -1,5 +1,12 @@
 # @heroui/user
 
+## 2.2.19-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`44c4395`](https://github.com/heroui-inc/heroui/commit/44c4395d3c800ff86a47fcf5b497f99e42e92865)]:
+  - @heroui/avatar@2.2.19-beta.1
+
 ## 2.2.19-beta.0
 
 ### Patch Changes

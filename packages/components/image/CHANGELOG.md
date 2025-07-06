@@ -1,5 +1,14 @@
 # @heroui/image
 
+## 2.2.15-beta.1
+
+### Patch Changes
+
+- [#5417](https://github.com/heroui-inc/heroui/pull/5417) [`44c4395`](https://github.com/heroui-inc/heroui/commit/44c4395d3c800ff86a47fcf5b497f99e42e92865) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed image src double fetch issue (#3847)
+
+- Updated dependencies [[`44c4395`](https://github.com/heroui-inc/heroui/commit/44c4395d3c800ff86a47fcf5b497f99e42e92865)]:
+  - @heroui/use-image@2.1.11-beta.4
+
 ## 2.2.15-beta.0
 
 ### Patch Changes
