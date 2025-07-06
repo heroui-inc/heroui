@@ -86,6 +86,7 @@ export function useCalendarPicker(props: CalendarPickerProps) {
   const handleListScroll = useCallback(
     (e: Event, highlightEl: HTMLElement | null, list: CalendarPickerListType) => {
       if (!(e.target instanceof HTMLElement) || !highlightEl) return;
+
       const map = getItemsRefMap(list === "months" ? monthsItemsRef : yearsItemsRef);
 
       const items = Array.from(map.entries());
@@ -98,6 +99,7 @@ export function useCalendarPicker(props: CalendarPickerProps) {
       };
 
       let closestItem: [number, HTMLElement] | null = null;
+
       let minDistance = Infinity;
 
       for (const [value, itemEl] of items) {
@@ -123,8 +125,9 @@ export function useCalendarPicker(props: CalendarPickerProps) {
 
       const [itemValue] = closestItem;
 
-      const current = focusedDateRef.current;
-      const updatedDate = current.set(list === "months" ? {month: itemValue} : {year: itemValue});
+      const updatedDate = focusedDateRef.current.set(
+        list === "months" ? {month: itemValue} : {year: itemValue},
+      );
 
       state.setFocusedDate(updatedDate);
     },
