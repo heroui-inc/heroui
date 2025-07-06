@@ -13,7 +13,8 @@ import {
   useDisclosure,
 } from "@heroui/modal";
 import {Drawer, DrawerContent} from "@heroui/drawer";
-import {LoadingIcon, AvatarIcon, CloseIcon} from "@heroui/shared-icons";
+import {Spinner} from "@heroui/spinner";
+import {AvatarIcon, CloseIcon} from "@heroui/shared-icons";
 
 import {Toast, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
@@ -505,12 +506,12 @@ export const CustomIcon = {
   },
 };
 
-export const CustomLoadingIcon = {
+export const CustomLoadingComponent = {
   render: PromiseToastTemplate,
   args: {
     ...defaultProps,
     title: "Custom Loading Icon",
-    loadingIcon: LoadingIcon,
+    loadingComponent: <Spinner variant="spinner" />,
   },
 };
 

@@ -57,6 +57,11 @@ export default {
         type: "boolean",
       },
     },
+    isClearable: {
+      control: {
+        type: "boolean",
+      },
+    },
   },
   decorators: [
     (Story) => (
@@ -490,6 +495,20 @@ const StartContentTemplate = ({color, variant, ...args}: SelectProps) => (
     defaultSelectedKeys={["cat"]}
     label="Favorite Animal"
     startContent={<PetBoldIcon />}
+    variant={variant}
+    {...args}
+  >
+    {items}
+  </Select>
+);
+
+const EndContentTemplate = ({color, variant, ...args}: SelectProps) => (
+  <Select
+    className="max-w-xs"
+    color={color}
+    defaultSelectedKeys={["cat"]}
+    endContent={<PetBoldIcon />}
+    label="Favorite Animal"
     variant={variant}
     {...args}
   >
@@ -1080,6 +1099,14 @@ export const StartContent = {
   },
 };
 
+export const EndContent = {
+  render: EndContentTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
 export const EmptyContent = {
   render: EmptyTemplate,
 
@@ -1367,6 +1394,14 @@ export const CustomItemHeight = {
     isVirtualized: true,
     maxListboxHeight: 400,
     itemHeight: 40,
+  },
+};
+
+export const Clearable = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    isClearable: true,
   },
 };
 

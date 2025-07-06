@@ -1,6 +1,6 @@
 {
   "name": "@heroui/spinner",
-  "version": "2.2.19-beta.2",
+  "version": "2.2.20-beta.0",
   "description": "Loaders express an unspecified wait time or display the length of a process.",
   "keywords": [
     "loading",

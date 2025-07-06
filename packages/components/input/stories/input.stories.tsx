@@ -300,7 +300,7 @@ const StartAndEndContentTemplate = (args) => (
             Currency
           </label>
           <select
-            className="outline-hidden border-0 bg-transparent text-default-400 text-sm"
+            className="outline-solid outline-transparent border-0 bg-transparent text-default-400 text-sm"
             id="currency"
             name="currency"
           >

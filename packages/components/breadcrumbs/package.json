@@ -1,6 +1,6 @@
 {
   "name": "@heroui/breadcrumbs",
-  "version": "2.2.18-beta.2",
+  "version": "2.2.19-beta.0",
   "description": "Breadcrumbs display a hierarchy of links to the current page or resource in an application.",
   "keywords": [
     "breadcrumbs"
@@ -37,7 +37,7 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "@heroui/theme": ">=2.4.18-beta.0",
-    "@heroui/system": ">=2.4.18-beta.0"
+    "@heroui/system": ">=2.4.19-beta.0"
   },
   "dependencies": {
     "@heroui/react-utils": "workspace:*",
