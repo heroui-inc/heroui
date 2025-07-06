@@ -12,8 +12,7 @@ import {useRadioGroupState} from "@react-stately/radio";
 import {useRadioGroup as useReactAriaRadioGroup} from "@react-aria/radio";
 import {useProviderContext} from "@heroui/system";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, safeAriaLabel} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {clsx, safeAriaLabel, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 interface Props extends Omit<HTMLHeroUIProps<"div">, "onChange"> {

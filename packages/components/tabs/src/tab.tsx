@@ -4,8 +4,7 @@ import type {ValuesType} from "./use-tabs";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps, mergeRefs} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
-import {chain, mergeProps} from "@react-aria/utils";
+import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
 import {useTab} from "@react-aria/tabs";

@@ -19,3 +19,21 @@ export function useLabelPlacement(props: {
     return labelPlacement;
   }, [props.labelPlacement, globalLabelPlacement, props.label]);
 }
+
+export function useInputLabelPlacement(props: {
+  labelPlacement?: "inside" | "outside" | "outside-left" | "outside-top";
+  label?: React.ReactNode;
+}) {
+  const globalContext = useProviderContext();
+  const globalLabelPlacement = globalContext?.labelPlacement;
+
+  return useMemo(() => {
+    const labelPlacement = props.labelPlacement ?? globalLabelPlacement ?? "inside";
+
+    if (labelPlacement === "inside" && !props.label) {
+      return "outside";
+    }
+
+    return labelPlacement;
+  }, [props.labelPlacement, globalLabelPlacement, props.label]);
+}

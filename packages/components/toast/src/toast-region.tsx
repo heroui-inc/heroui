@@ -6,9 +6,8 @@ import type {ToastProps, ToastPlacement} from "./use-toast";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useToastRegion} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
-import {mergeProps} from "@react-aria/utils";
 import {toastRegion} from "@heroui/theme";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, mergeProps} from "@heroui/shared-utils";
 
 import Toast from "./toast";
 

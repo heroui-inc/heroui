@@ -5,12 +5,11 @@ import type {ReactRef} from "@heroui/react-utils";
 import type {PressEvent} from "@react-types/shared";
 
 import {mapPropsVariants} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
 import {usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
 import {chip} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo, isValidElement, cloneElement} from "react";
 
 export interface UseChipProps extends HTMLHeroUIProps, ChipVariantProps {

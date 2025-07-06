@@ -44,7 +44,7 @@ const ButtonLink = ({
     <Button
       isExternal
       as={Link}
-      className="!text-small py-4 bg-default-100 dark:bg-default-50 text-default-700"
+      className="text-small! py-4 bg-default-100 dark:bg-default-50 text-default-700"
       href={href}
       size="sm"
       startContent={startContent}

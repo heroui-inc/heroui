@@ -14,7 +14,7 @@ import * as React from "react";
 import {DismissButton, Overlay} from "@react-aria/overlays";
 import {forwardRef} from "@heroui/system";
 import {LazyMotion, m} from "framer-motion";
-import {mergeProps} from "@react-aria/utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {getTransformOrigins} from "@heroui/aria-utils";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 import {useDialog} from "@react-aria/dialog";

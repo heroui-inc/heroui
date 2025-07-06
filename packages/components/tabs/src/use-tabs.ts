@@ -11,12 +11,11 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {tabs} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps} from "@heroui/react-utils";
 import {useMemo, useCallback} from "react";
 import {useTabListState} from "@react-stately/tabs";
 import {useTabList} from "@react-aria/tabs";
-import {mergeProps} from "@react-aria/utils";
 
 export interface Props extends Omit<HTMLHeroUIProps, "children"> {
   /**
