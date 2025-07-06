@@ -67,7 +67,7 @@ const Select = forwardRef(function Select<T extends object>(
 
   const clearButton = useMemo(() => {
     if (isClearable && state.selectedItems?.length) {
-      return <button {...getClearButtonProps()}>{<CloseFilledIcon />}</button>;
+      return <span {...getClearButtonProps()}>{<CloseFilledIcon />}</span>;
     }
 
     return null;
