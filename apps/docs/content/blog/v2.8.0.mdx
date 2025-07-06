@@ -12,6 +12,9 @@ author:
 ---
 
 import closeToast from "@/content/components/toast/close.ts";
+import inputLabelPlacement from "@/content/components/input/label-placements.ts";
+import selectIsClearable from "@/content/components/select/is-clearable.ts";
+import selectEndContent from "@/content/components/select/end-content.ts";
 
 <img
   src="/blog/v2.8.0_2x.jpg"
@@ -75,11 +78,9 @@ The overlay and outside interaction handling for overlays, popovers, modals, dro
 
 - The return type of `addToast` has been changed from `void` to `string` where the string value is the unique key value of the newly created toast.
 - A new method `closeToast(key: string): void` has been introduced to accept a key value of `string` type and close the toast with the key.
+- The Toast closing order was updated from LIFO to FIFO.
 
-<CodeDemo
-  title="Simple Usage"
-  files={closeToast}
-/>
+<CodeDemo title="Close Toast" files={closeToast} showEditor={false}/>
 
 ### Input
 
@@ -87,9 +88,17 @@ The Input component now features a new label placement option `outside-top`. Pre
 
 The new `outside-top` option ensures that labels are consistently displayed at the top of the input field, regardless of whether a placeholder is present, similar to the existing `outside-left` placement.
 
+<CodeDemo title="Label Placement" files={inputLabelPlacement} />
+
 ### Select
 
-Two new properties `isClearable`` and `onClear`` have been introduced in the Select component. A clear button is visible when a value is slected and a callback function triggered upon clearing the selection for custom handling.
+Two new properties `isClearable` and `onClear` have been introduced in the Select component. A clear button is visible when a value is slected and a callback function triggered upon clearing the selection for custom handling.
+
+<CodeDemo title="Clearable" files={selectIsClearable} />
+
+`endContent` has been introduced in the Select component.
+
+<CodeDemo title="End Content" files={selectEndContent} />
 
 ### Table
 
