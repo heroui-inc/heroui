@@ -1,5 +1,26 @@
 # @heroui/select
 
+## 2.4.23-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.6
+  - @heroui/use-aria-multiselect@2.4.16-beta.1
+  - @heroui/scroll-shadow@2.3.16-beta.1
+  - @heroui/shared-icons@2.1.10-beta.5
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/use-aria-button@2.2.17-beta.1
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/use-form-reset@2.0.0-beta.3
+  - @heroui/aria-utils@2.2.20-beta.1
+  - @heroui/listbox@2.3.22-beta.1
+  - @heroui/popover@2.3.23-beta.1
+  - @heroui/spinner@2.2.20-beta.1
+  - @heroui/form@2.1.22-beta.2
+
 ## 2.4.23-beta.1
 
 ### Patch Changes

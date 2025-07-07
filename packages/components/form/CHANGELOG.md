@@ -1,5 +1,16 @@
 # @heroui/form
 
+## 2.1.22-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/system@2.4.19-beta.1
+  - @heroui/theme@2.4.18-beta.5
+
 ## 2.1.22-beta.1
 
 ### Patch Changes
