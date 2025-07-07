@@ -355,7 +355,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       return;
     }
 
-    let keyToFocus: React.Key | null;
+    let keyToFocus: React.Key | null = null;
 
     if (
       state.selectedKey !== null &&
@@ -363,7 +363,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       !state.disabledKeys.has(state.selectedKey)
     ) {
       keyToFocus = state.selectedKey;
-    } else {
+    } else if (state.inputValue && state.inputValue.length > 0) {
       let firstAvailableKey = state.collection.getFirstKey();
 
       while (firstAvailableKey && state.disabledKeys.has(firstAvailableKey)) {
@@ -372,7 +372,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       keyToFocus = firstAvailableKey;
     }
     state.selectionManager.setFocusedKey(keyToFocus);
-  }, [state.collection, state.disabledKeys, state.selectedKey, state.isOpen]);
+  }, [state.collection, state.disabledKeys, state.selectedKey, state.isOpen, state.inputValue]);
 
   // scroll the listbox to the selected item
   useEffect(() => {
@@ -482,7 +482,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     state.realtimeValidation.isInvalid === true;
 
   const getInputProps = () => {
-    const baseInputProps = {
+    return {
       ...otherProps,
       ...inputProps,
       ...slotsProps.inputProps,
@@ -494,25 +494,6 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           : errorMessage || validationErrors?.join(" "),
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
     } as unknown as InputProps;
-
-    // override the onBlur behavior to prevent auto-selection when input is empty
-    const originalOnBlur = baseInputProps.onBlur;
-
-    baseInputProps.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      // if the input is empty when blurring, clear any focused key to prevent auto-selection
-      if (state.inputValue === "" && state.isOpen) {
-        state.selectionManager.setFocusedKey(null);
-        if (state.selectedKey !== null) {
-          state.setSelectedKey(null);
-        }
-      }
-
-      if (originalOnBlur) {
-        originalOnBlur(e);
-      }
-    };
-
-    return baseInputProps;
   };
 
   const getListBoxProps = () => {
