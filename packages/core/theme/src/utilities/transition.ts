@@ -36,7 +36,7 @@ export default {
     "transition-duration": DEFAULT_TRANSITION_DURATION,
   },
   ".transition-transform-opacity": {
-    "transition-property": "transform, scale, opacity",
+    "transition-property": "transform, scale, opacity rotate",
     "transition-timing-function": "ease",
     "transition-duration": DEFAULT_TRANSITION_DURATION,
   },
