@@ -3,7 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import type {AutocompleteProps} from "../src";
 
 import * as React from "react";
-import {within, render, renderHook, act} from "@testing-library/react";
+import {within, render, renderHook, act, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
@@ -961,7 +961,7 @@ describe("focusedKey management with selected key", () => {
     user = userEvent.setup();
   });
 
-  it("should set focusedKey to the first non-disabled item when selectedKey is null", async () => {
+  it("should not auto-focus any item when selectedKey is null and input is empty", async () => {
     const wrapper = render(
       <Autocomplete
         aria-label="Favorite Animal"
@@ -984,10 +984,10 @@ describe("focusedKey management with selected key", () => {
 
     const options = wrapper.getAllByRole("option");
 
-    // first non-disabled item is zebra
-    const optionItem = options[1];
-
-    expect(optionItem).toHaveAttribute("data-focus", "true");
+    // no option should be focused when input is empty and no selection
+    options.forEach((option) => {
+      expect(option).not.toHaveAttribute("data-focus", "true");
+    });
   });
 
   it("should set focusedKey to the item's key when an item is selected", async () => {
@@ -1077,5 +1077,70 @@ describe("focusedKey management with selected key", () => {
     const optionItem = options[1];
 
     expect(optionItem).toHaveAttribute("data-focus", "true");
+  });
+});
+
+describe("Autocomplete - Blur Behavior", () => {
+  let user: UserEvent;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
+  const animals = [
+    {key: "cat", label: "Cat"},
+    {key: "dog", label: "Dog"},
+    {key: "elephant", label: "Elephant"},
+  ];
+
+  const renderAutocomplete = (props = {}) => {
+    return render(
+      <Autocomplete
+        data-testid="autocomplete"
+        label="Favorite Animal"
+        placeholder="Select an animal"
+        {...props}
+      >
+        {animals.map((animal) => (
+          <AutocompleteItem key={animal.key}>{animal.label}</AutocompleteItem>
+        ))}
+      </Autocomplete>,
+    );
+  };
+
+  it("should not auto-select first option when tabbing away from empty input", async () => {
+    renderAutocomplete();
+
+    const input = screen.getByRole("combobox");
+
+    await user.click(input);
+
+    expect(screen.getByRole("listbox")).toBeInTheDocument();
+
+    // tab away from the input while it's empty
+    await user.tab();
+
+    // verify no option was selected and input remains empty
+    expect(input).toHaveValue("");
+    expect(input).not.toHaveAttribute("aria-activedescendant");
+  });
+
+  it("should preserve selection when tabbing away from non-empty input", async () => {
+    renderAutocomplete();
+
+    const input = screen.getByRole("combobox");
+
+    await user.click(input);
+    await user.type(input, "Cat");
+
+    const catOption = screen.getByText("Cat");
+
+    await user.click(catOption);
+
+    expect(input).toHaveValue("Cat");
+
+    await user.tab();
+
+    expect(input).toHaveValue("Cat");
   });
 });
