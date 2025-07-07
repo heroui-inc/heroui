@@ -1,5 +1,11 @@
 # @heroui/use-aria-multiselect
 
+## 2.4.16-beta.1
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
 ## 2.4.16-beta.0
 
 ### Patch Changes

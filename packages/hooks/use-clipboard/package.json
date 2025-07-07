@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-clipboard",
-  "version": "2.1.9-beta.5",
+  "version": "2.1.9-beta.6",
   "description": "Wrapper around navigator.clipboard with feedback timeout",
   "keywords": [
     "use-clipboard"

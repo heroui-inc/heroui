@@ -1,5 +1,14 @@
 # @heroui/use-callback-ref
 
+## 2.1.8-beta.6
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.6
+
 ## 2.1.8-beta.5
 
 ### Patch Changes
