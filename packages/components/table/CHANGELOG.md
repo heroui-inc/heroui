@@ -1,5 +1,39 @@
 # @heroui/table
 
+## 2.2.22-beta.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/checkbox@2.3.22-beta.3
+  - @heroui/spacer@2.2.17-beta.4
+
+## 2.2.22-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-icons@2.1.10-beta.5
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/checkbox@2.3.22-beta.2
+  - @heroui/spacer@2.2.17-beta.4
+
+## 2.2.22-beta.1
+
+### Patch Changes
+
+- [#5243](https://github.com/heroui-inc/heroui/pull/5243) [`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b) Thanks [@wingkwong](https://github.com/wingkwong)! - support custom sort icon in Table (#5223)
+
+- [#5428](https://github.com/heroui-inc/heroui/pull/5428) [`ae61608`](https://github.com/heroui-inc/heroui/commit/ae61608e4d8c42e5328f70a2ceab46283ee7fb93) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `removeWrapper` from virtualized table (#4995)
+
+- Updated dependencies [[`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/checkbox@2.3.22-beta.1
+  - @heroui/spacer@2.2.17-beta.3
+
 ## 2.2.22-beta.0
 
 ### Patch Changes

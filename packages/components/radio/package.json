@@ -1,6 +1,6 @@
 {
   "name": "@heroui/radio",
-  "version": "2.3.22-beta.0",
+  "version": "2.3.22-beta.3",
   "description": "Radios allow users to select a single option from a list of mutually exclusive options.",
   "keywords": [
     "radio"

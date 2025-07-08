@@ -1,5 +1,45 @@
 # @heroui/date-picker
 
+## 2.3.23-beta.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.23-beta.1
+  - @heroui/calendar@2.2.23-beta.2
+  - @heroui/date-input@2.3.22-beta.3
+  - @heroui/form@2.1.22-beta.3
+  - @heroui/popover@2.3.23-beta.1
+
+## 2.3.23-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-icons@2.1.10-beta.5
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/date-input@2.3.22-beta.2
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/aria-utils@2.2.20-beta.1
+  - @heroui/calendar@2.2.23-beta.2
+  - @heroui/popover@2.3.23-beta.1
+  - @heroui/button@2.2.23-beta.1
+  - @heroui/form@2.1.22-beta.2
+
+## 2.3.23-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`e3c2795`](https://github.com/heroui-inc/heroui/commit/e3c279514c289d1962dee9ef2055e3a88aa4f245), [`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/calendar@2.2.23-beta.1
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/button@2.2.23-beta.0
+  - @heroui/date-input@2.3.22-beta.1
+  - @heroui/form@2.1.22-beta.1
+  - @heroui/popover@2.3.23-beta.0
+
 ## 2.3.23-beta.0
 
 ### Patch Changes

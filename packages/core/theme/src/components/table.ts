@@ -88,6 +88,7 @@ const table = tv({
       "[&>*]:relative",
       ...dataFocusVisibleClasses,
       // before content for selection
+      "before:pointer-events-none",
       "before:content-['']",
       "before:absolute",
       "before:z-0",

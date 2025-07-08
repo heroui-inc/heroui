@@ -1,5 +1,30 @@
 # @heroui/form
 
+## 2.1.22-beta.3
+
+### Patch Changes
+
+- Updated dependencies [[`7d23120`](https://github.com/heroui-inc/heroui/commit/7d23120f91e8af81b6fa3804a239a7807f1b45bf), [`2d76d32`](https://github.com/heroui-inc/heroui/commit/2d76d32e0b14f86d08e4d53617d11af46e069c9c)]:
+  - @heroui/theme@2.4.18-beta.6
+
+## 2.1.22-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/system@2.4.19-beta.1
+  - @heroui/theme@2.4.18-beta.5
+
+## 2.1.22-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`be697f7`](https://github.com/heroui-inc/heroui/commit/be697f77f5f6f8be439c72bd0e2155fd94eefeea), [`e1a0d9d`](https://github.com/heroui-inc/heroui/commit/e1a0d9d53d34cdb59a1aaf3f553f7d54fbf6f60d), [`bd5ad76`](https://github.com/heroui-inc/heroui/commit/bd5ad766115d64307b08faef7ce8401afe24cb46)]:
+  - @heroui/theme@2.4.18-beta.4
+
 ## 2.1.22-beta.0
 
 ### Patch Changes

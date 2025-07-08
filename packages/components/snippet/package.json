@@ -1,6 +1,6 @@
 {
   "name": "@heroui/snippet",
-  "version": "2.2.24-beta.0",
+  "version": "2.2.24-beta.2",
   "description": "Display a snippet of copyable code for the command line.",
   "keywords": [
     "snippet"

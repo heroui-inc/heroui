@@ -1,5 +1,25 @@
 # @heroui/avatar
 
+## 2.2.19-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/use-image@2.1.11-beta.5
+
+## 2.2.19-beta.1
+
+### Patch Changes
+
+- [#5417](https://github.com/heroui-inc/heroui/pull/5417) [`44c4395`](https://github.com/heroui-inc/heroui/commit/44c4395d3c800ff86a47fcf5b497f99e42e92865) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed image src double fetch issue (#3847)
+
+- Updated dependencies [[`44c4395`](https://github.com/heroui-inc/heroui/commit/44c4395d3c800ff86a47fcf5b497f99e42e92865)]:
+  - @heroui/use-image@2.1.11-beta.4
+
 ## 2.2.19-beta.0
 
 ### Patch Changes

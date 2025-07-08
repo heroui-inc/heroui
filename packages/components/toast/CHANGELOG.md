@@ -1,5 +1,30 @@
 # @heroui/toast
 
+## 2.0.13-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-icons@2.1.10-beta.5
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/use-is-mobile@2.2.11-beta.4
+  - @heroui/spinner@2.2.20-beta.1
+
+## 2.0.13-beta.1
+
+### Patch Changes
+
+- [#5405](https://github.com/heroui-inc/heroui/pull/5405) [`9ed4c29`](https://github.com/heroui-inc/heroui/commit/9ed4c292323388934b5e63aad30c04a00c1526de) Thanks [@adi-ray](https://github.com/adi-ray)! - Fix toast items closing in reverse order. Toasts now close in proper FIFO instead of LIFO (#5096)
+
+- [#5245](https://github.com/heroui-inc/heroui/pull/5245) [`e1a0d9d`](https://github.com/heroui-inc/heroui/commit/e1a0d9d53d34cdb59a1aaf3f553f7d54fbf6f60d) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Remove the bottom extenstion of the toast (#5231)
+
+- Updated dependencies [[`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/spinner@2.2.20-beta.0
+
 ## 2.0.13-beta.0
 
 ### Patch Changes

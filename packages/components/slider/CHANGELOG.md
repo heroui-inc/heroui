@@ -1,5 +1,25 @@
 # @heroui/slider
 
+## 2.4.20-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/tooltip@2.2.20-beta.1
+
+## 2.4.20-beta.1
+
+### Patch Changes
+
+- [#5044](https://github.com/heroui-inc/heroui/pull/5044) [`5ec88ea`](https://github.com/heroui-inc/heroui/commit/5ec88ea816b6487333350746eb5f500dc1827f53) Thanks [@kaishuige](https://github.com/kaishuige)! - fixed slider component NaN values when min and max are the same value (#5014)
+
+- Updated dependencies []:
+  - @heroui/tooltip@2.2.20-beta.0
+
 ## 2.4.20-beta.0
 
 ### Patch Changes

@@ -1,5 +1,32 @@
 # @heroui/theme
 
+## 2.4.18-beta.6
+
+### Patch Changes
+
+- [#5454](https://github.com/heroui-inc/heroui/pull/5454) [`7d23120`](https://github.com/heroui-inc/heroui/commit/7d23120f91e8af81b6fa3804a239a7807f1b45bf) Thanks [@Priyadharshini0101](https://github.com/Priyadharshini0101)! - fix text selection in table (#5413)
+
+- [#5449](https://github.com/heroui-inc/heroui/pull/5449) [`2d76d32`](https://github.com/heroui-inc/heroui/commit/2d76d32e0b14f86d08e4d53617d11af46e069c9c) Thanks [@winchesHe](https://github.com/winchesHe)! - fix rotate transition (#5441)
+
+## 2.4.18-beta.5
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+
+## 2.4.18-beta.4
+
+### Patch Changes
+
+- [#5062](https://github.com/heroui-inc/heroui/pull/5062) [`be697f7`](https://github.com/heroui-inc/heroui/commit/be697f77f5f6f8be439c72bd0e2155fd94eefeea) Thanks [@kaishuige](https://github.com/kaishuige)! - fixed missing radius styles in th and td in Table (#4988)
+
+- [#5245](https://github.com/heroui-inc/heroui/pull/5245) [`e1a0d9d`](https://github.com/heroui-inc/heroui/commit/e1a0d9d53d34cdb59a1aaf3f553f7d54fbf6f60d) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Remove the bottom extenstion of the toast (#5231)
+
+- [#4785](https://github.com/heroui-inc/heroui/pull/4785) [`bd5ad76`](https://github.com/heroui-inc/heroui/commit/bd5ad766115d64307b08faef7ce8401afe24cb46) Thanks [@abhinav700](https://github.com/abhinav700)! - add `isClearable` and `onClear` prop to Select component (#2239)
+
 ## 2.4.18-beta.3
 
 ### Patch Changes

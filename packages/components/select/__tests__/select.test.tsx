@@ -933,17 +933,11 @@ describe("Select", () => {
       </Select>,
     );
 
-    const select = wrapper.getByTestId("select");
-
     let listboxItems = wrapper.getAllByRole("option");
 
     await user.click(listboxItems[1]);
 
-    const buttons = select.querySelectorAll("button");
-
-    expect(buttons.length).toEqual(1);
-
-    const clearButton = buttons[0];
+    const clearButton = document.querySelector("[data-slot=clear-button]")!;
 
     expect(clearButton).not.toBeNull();
   });
@@ -1051,13 +1045,11 @@ describe("Select", () => {
       </Select>,
     );
 
-    const select = wrapper.getByTestId("select");
-
     let listboxItems = wrapper.getAllByRole("option");
 
     await user.click(listboxItems[1]);
 
-    const clearButton = select.querySelectorAll("button")[0];
+    const clearButton = document.querySelector("[data-slot=clear-button]")!;
 
     await user.click(clearButton);
 
