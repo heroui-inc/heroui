@@ -15,6 +15,7 @@ import closeToast from "@/content/components/toast/close.ts";
 import inputLabelPlacement from "@/content/components/input/label-placements.ts";
 import selectIsClearable from "@/content/components/select/is-clearable.ts";
 import selectEndContent from "@/content/components/select/end-content.ts";
+import tableSortIcon from "@/content/components/table/sort-icon.ts";
 
 <img
   src="/blog/v2.8.0_2x.jpg"
@@ -103,6 +104,16 @@ Two new properties `isClearable` and `onClear` have been introduced in the Selec
 ### Table
 
 The table header previously utilized either a chevron-up or chevron-down icon for sorting, which was not configurable. A new `sortIcon` property has been introduced, allowing users to customize the default sort icon. This icon will only be applied when `allowsSorting` is set to true.
+
+<CodeDemo
+  asIframe
+  title="Sort Icon"
+  resizeEnabled={false}
+  displayMode="visible"
+  files={tableSortIcon}
+  previewHeight="520px"
+  iframeSrc="/examples/table/sort-icon"
+/>
 
 ## Package Size Optimization
 
