@@ -4,7 +4,7 @@ export default function App() {
   return (
     <Image
       alt="HeroUI Image with fallback"
-      classNames={{fallbackImg: "bg-center"}}
+      classNames={{fallbackImgWrapper: "bg-center bg-cover"}}
       fallbackSrc="https://heroui.com/images/fruit-4.jpeg"
       height={200}
       src="wrong-image-address"

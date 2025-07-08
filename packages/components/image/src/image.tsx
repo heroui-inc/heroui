@@ -24,8 +24,8 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
-    getLoadingImgProps,
-    getFallbackImgProps,
+    getLoadingImgWrapperProps,
+    getFallbackImgWrapperProps,
   } = useImage({
     ...props,
     ref,
@@ -56,8 +56,8 @@ const Image = forwardRef<"img", ImageProps>((props, ref) => {
     return (
       <div
         {...getWrapperProps()}
-        {...(isLoading && loadingSrc ? getLoadingImgProps() : {})}
-        {...(isFailed && fallbackSrc ? getFallbackImgProps() : {})}
+        {...(isLoading && loadingSrc ? getLoadingImgWrapperProps() : {})}
+        {...(isFailed && fallbackSrc ? getFallbackImgWrapperProps() : {})}
       >
         {isZoomed ? zoomed : img}
       </div>

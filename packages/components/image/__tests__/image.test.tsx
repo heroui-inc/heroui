@@ -60,7 +60,7 @@ describe("Image", () => {
     const onLoad = jest.fn();
     const wrapper = render(
       <Image
-        classNames={{loadingImg: "bg-cover"}}
+        classNames={{loadingImgWrapper: "bg-cover"}}
         loadingSrc={loadingSrc}
         src={src}
         onLoad={onLoad}
@@ -116,7 +116,7 @@ describe("Image", () => {
     const wrapper = render(
       <Image
         alt="test"
-        classNames={{fallbackImg: "bg-contain"}}
+        classNames={{fallbackImgWrapper: "bg-contain"}}
         fallbackSrc={fallbackSrc}
         src="wrong-src-address"
         onError={onError}

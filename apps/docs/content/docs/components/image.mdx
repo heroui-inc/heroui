@@ -98,6 +98,8 @@ you can use it with HeroUI `Image` component as well.
 - **wrapper**: Image wrapper, it handles alignment, placement, and general appearance.
 - **zoomedWrapper**: The wrapper slot for the zoomed image it avoids the image content to overflow the parent container.
 - **blurredImg**: The wrapper slot for the duplicated blurred image.
+- **loadingImgWrapper**: Applies styles to the "wrapper" only in the loading state.
+- **fallbackImgWrapper**: Applies styles to the the "wrapper" only in the failed state.
 
 <Spacer y={4} />
 
@@ -199,7 +201,7 @@ you can use it with HeroUI `Image` component as well.
     },
     {
       attribute: "classNames",
-      type: 'Partial<Record<"img" | "wrapper" | "zoomedWrapper" | "blurredImg", string>>',
+      type: 'Partial<Record<"img" | "wrapper" | "zoomedWrapper" | "blurredImg" | "loadingImgWrapper" | "fallbackImgWrapper", string>>',
       description: "Allows to set custom class names for the image slots.",
       default: "-"
     }

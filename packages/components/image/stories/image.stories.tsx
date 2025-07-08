@@ -160,7 +160,7 @@ export const Fallback = {
     radius: "lg",
     src: "wrong-src-address",
     fallbackSrc: "/images/placeholder_300x450.png",
-    classNames: {fallbackImg: "bg-cover"},
+    classNames: {fallbackImgWrapper: "bg-cover"},
     disableSkeleton: false,
   },
 };
@@ -176,6 +176,6 @@ export const CustomLoadingAndFallback = {
     src: "wrong-src-address",
     loadingSrc: "/images/placeholder_300x450.png",
     fallbackSrc: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6",
-    classNames: {loadingImg: "bg-contain", fallbackImg: "bg-cover"},
+    classNames: {loadingImgWrapper: "bg-contain", fallbackImgWrapper: "bg-cover"},
   },
 };

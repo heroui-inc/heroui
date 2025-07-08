@@ -206,23 +206,23 @@ export function useImage(originalProps: UseImageProps) {
     };
   }, [slots, src, classNames?.blurredImg]);
 
-  const getLoadingImgProps = useCallback<PropGetter>(() => {
+  const getLoadingImgWrapperProps = useCallback<PropGetter>(() => {
     return {
       className: cn(
         slots.wrapper({class: classNames?.wrapper}),
-        slots.loadingImg({class: classNames?.loadingImg}),
+        slots.loadingImgWrapper({class: classNames?.loadingImgWrapper}),
       ),
     };
-  }, [cn, slots, classNames?.wrapper, classNames?.loadingImg]);
+  }, [cn, slots, classNames?.wrapper, classNames?.loadingImgWrapper]);
 
-  const getFallbackImgProps = useCallback<PropGetter>(() => {
+  const getFallbackImgWrapperProps = useCallback<PropGetter>(() => {
     return {
       className: cn(
         slots.wrapper({class: classNames?.wrapper}),
-        slots.fallbackImg({class: classNames?.fallbackImg}),
+        slots.fallbackImgWrapper({class: classNames?.fallbackImgWrapper}),
       ),
     };
-  }, [cn, slots, classNames?.wrapper, classNames?.fallbackImg]);
+  }, [cn, slots, classNames?.wrapper, classNames?.fallbackImgWrapper]);
 
   return {
     Component,
@@ -240,8 +240,8 @@ export function useImage(originalProps: UseImageProps) {
     getImgProps,
     getWrapperProps,
     getBlurredImgProps,
-    getLoadingImgProps,
-    getFallbackImgProps,
+    getLoadingImgWrapperProps,
+    getFallbackImgWrapperProps,
   };
 }
 

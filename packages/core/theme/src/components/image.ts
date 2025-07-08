@@ -37,8 +37,8 @@ const image = tv({
       "opacity-30",
       "translate-y-1",
     ],
-    loadingImg: "",
-    fallbackImg: "",
+    loadingImgWrapper: "",
+    fallbackImgWrapper: "",
   },
   variants: {
     radius: {
