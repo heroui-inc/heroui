@@ -2686,6 +2686,34 @@ importers:
         specifier: 18.3.0
         version: 18.3.0(react@18.3.0)
 
+  packages/components/step-progress:
+    dependencies:
+      '@heroui/react-utils':
+        specifier: workspace:*
+        version: link:../../utilities/react-utils
+      '@heroui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@heroui/shared-utils':
+        specifier: workspace:*
+        version: link:../../utilities/shared-utils
+    devDependencies:
+      '@heroui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@heroui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 18.3.0
+        version: 18.3.0
+      react-dom:
+        specifier: 18.3.0
+        version: 18.3.0(react@18.3.0)
+
   packages/components/switch:
     dependencies:
       '@heroui/react-utils':
@@ -3186,6 +3214,9 @@ importers:
       '@heroui/spinner':
         specifier: workspace:*
         version: link:../../components/spinner
+      '@heroui/step-progress':
+        specifier: workspace:*
+        version: link:../../components/step-progress
       '@heroui/switch':
         specifier: workspace:*
         version: link:../../components/switch

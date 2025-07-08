@@ -58,6 +58,7 @@
     "@heroui/radio": "workspace:*",
     "@heroui/snippet": "workspace:*",
     "@heroui/spinner": "workspace:*",
+    "@heroui/step-progress": "workspace:*",
     "@heroui/switch": "workspace:*",
     "@heroui/tooltip": "workspace:*",
     "@heroui/user": "workspace:*",

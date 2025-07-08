@@ -1,5 +1,4 @@
 // only for development purpose, this directive is added by tsup at build time
-"use client";
 
 export * from "@heroui/system";
 export * from "@heroui/theme";
@@ -48,6 +47,7 @@ export * from "@heroui/alert";
 export * from "@heroui/drawer";
 export * from "@heroui/input-otp";
 export * from "@heroui/number-input";
+export * from "@heroui/step-progress";
 export * from "@heroui/toast";
 
 /**
