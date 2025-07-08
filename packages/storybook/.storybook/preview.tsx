@@ -106,6 +106,7 @@ const locales = [
 
 const globalTypes: Preview["globalTypes"] = {
   locale: {
+    description: "Locale",
     toolbar: {
       icon: "globe",
       items: locales.map((locale) => ({
@@ -129,7 +130,7 @@ const globalTypes: Preview["globalTypes"] = {
   },
   labelPlacement: {
     name: "Label Placement",
-    description: "Position of label.",
+    description: "Position of label",
     toolbar: {
       icon: "component",
       items: [
