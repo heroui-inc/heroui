@@ -1,5 +1,13 @@
 # @heroui/theme
 
+## 2.4.18-beta.6
+
+### Patch Changes
+
+- [#5454](https://github.com/heroui-inc/heroui/pull/5454) [`7d23120`](https://github.com/heroui-inc/heroui/commit/7d23120f91e8af81b6fa3804a239a7807f1b45bf) Thanks [@Priyadharshini0101](https://github.com/Priyadharshini0101)! - fix text selection in table (#5413)
+
+- [#5449](https://github.com/heroui-inc/heroui/pull/5449) [`2d76d32`](https://github.com/heroui-inc/heroui/commit/2d76d32e0b14f86d08e4d53617d11af46e069c9c) Thanks [@winchesHe](https://github.com/winchesHe)! - fix rotate transition (#5441)
+
 ## 2.4.18-beta.5
 
 ### Patch Changes
