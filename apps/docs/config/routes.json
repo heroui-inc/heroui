@@ -376,7 +376,8 @@
           "key": "select",
           "title": "Select",
           "keywords": "select, selection, option list, multiple choice",
-          "path": "/docs/components/select.mdx"
+          "path": "/docs/components/select.mdx",
+          "updated": true
         },
         {
           "key": "skeleton",
@@ -418,7 +419,8 @@
           "key": "table",
           "title": "Table",
           "keywords": "table, data display, grid, spreadsheet",
-          "path": "/docs/components/table.mdx"
+          "path": "/docs/components/table.mdx",
+          "updated": true
         },
         {
           "key": "tabs",
