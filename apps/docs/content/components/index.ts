@@ -35,3 +35,4 @@ export * from "./autocomplete";
 export * from "./alert";
 export * from "./drawer";
 export * from "./number-input";
+export * from "./step-progress";
