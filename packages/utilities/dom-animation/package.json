@@ -1,6 +1,6 @@
 {
   "name": "@heroui/dom-animation",
-  "version": "2.1.10-beta.4",
+  "version": "2.1.10-beta.5",
   "description": "Dom Animation from Framer Motion for dynamic import",
   "keywords": [
     "dom-animation"
