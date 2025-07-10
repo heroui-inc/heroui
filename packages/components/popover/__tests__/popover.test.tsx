@@ -129,9 +129,9 @@ describe("Popover", () => {
 
     const content = wrapper.getByTestId("content-test");
 
-    act(() => {
-      content.blur();
-    });
+    expect(content).toHaveFocus();
+
+    fireEvent.keyDown(content, {key: "Escape"});
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });
