@@ -1,5 +1,22 @@
 # @heroui/date-picker
 
+## 2.3.23-beta.4
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/shared-icons@2.1.10-beta.6
+  - @heroui/shared-utils@2.1.10-beta.7
+  - @heroui/date-input@2.3.22-beta.4
+  - @heroui/react-utils@2.1.12-beta.5
+  - @heroui/aria-utils@2.2.20-beta.2
+  - @heroui/calendar@2.2.23-beta.3
+  - @heroui/popover@2.3.23-beta.2
+  - @heroui/button@2.2.23-beta.2
+  - @heroui/form@2.1.22-beta.4
+
 ## 2.3.23-beta.3
 
 ### Patch Changes
