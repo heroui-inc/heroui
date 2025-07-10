@@ -1,5 +1,16 @@
 # @heroui/progress
 
+## 2.2.19-beta.2
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/shared-utils@2.1.10-beta.7
+  - @heroui/react-utils@2.1.12-beta.5
+  - @heroui/use-is-mounted@2.1.8-beta.7
+
 ## 2.2.19-beta.1
 
 ### Patch Changes

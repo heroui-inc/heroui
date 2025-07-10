@@ -1,5 +1,14 @@
 # @heroui/use-disclosure
 
+## 2.2.14-beta.5
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/use-callback-ref@2.1.8-beta.7
+
 ## 2.2.14-beta.4
 
 ### Patch Changes
