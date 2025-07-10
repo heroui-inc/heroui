@@ -2109,6 +2109,9 @@ importers:
       '@react-aria/interactions':
         specifier: 3.25.3
         version: 3.25.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/utils':
+        specifier: 3.29.1
+        version: 3.29.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       scroll-into-view-if-needed:
         specifier: 3.0.10
         version: 3.0.10
@@ -3163,6 +3166,12 @@ importers:
       '@react-aria/i18n':
         specifier: 3.12.10
         version: 3.12.10(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/overlays':
+        specifier: 3.27.3
+        version: 3.27.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-aria/utils':
+        specifier: 3.29.1
+        version: 3.29.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
