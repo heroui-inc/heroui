@@ -1,5 +1,11 @@
 # @heroui/use-theme
 
+## 2.1.10-beta.6
+
+### Patch Changes
+
+- [`4ea4d48`](https://github.com/heroui-inc/heroui/commit/4ea4d48e03d821d7f3e004e0180b8e6fc260e3f3) Thanks [@wingkwong](https://github.com/wingkwong)! - fix incorrect target theme (#5469)
+
 ## 2.1.10-beta.5
 
 ### Patch Changes
