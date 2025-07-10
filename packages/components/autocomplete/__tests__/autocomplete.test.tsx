@@ -3,7 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import type {AutocompleteProps} from "../src";
 
 import * as React from "react";
-import {within, render, renderHook, act} from "@testing-library/react";
+import {within, render, renderHook, act, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
@@ -79,11 +79,11 @@ const AutocompleteExample = (props: Partial<AutocompleteProps> = {}) => (
 describe("Autocomplete", () => {
   let user: UserEvent;
 
-  beforeAll(async () => {
+  beforeAll(() => {
     jest.useFakeTimers({advanceTimers: true}).setSystemTime(new Date("2025-01-01"));
   });
 
-  afterAll(async () => {
+  afterAll(() => {
     jest.useRealTimers();
   });
 
@@ -476,13 +476,17 @@ describe("Autocomplete", () => {
     await user.click(autocomplete);
 
     // assert that the autocomplete listbox is open
-    expect(autocomplete).toHaveAttribute("aria-expanded", "true");
+    await waitFor(() => {
+      expect(autocomplete).toHaveAttribute("aria-expanded", "true");
+    });
 
     // click outside the autocomplete component
     await user.click(document.body);
 
     // assert that the autocomplete listbox is closed
-    expect(autocomplete).toHaveAttribute("aria-expanded", "false");
+    await waitFor(() => {
+      expect(autocomplete).toHaveAttribute("aria-expanded", "false");
+    });
   });
 
   it("should set the input after selection", async () => {
