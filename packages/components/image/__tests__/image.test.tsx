@@ -29,9 +29,9 @@ describe("Image", () => {
 
   afterAll(() => {
     // Restore original Image prototype
-    delete window.Image.prototype._onload;
+    window.Image.prototype._onload = undefined;
     Object.defineProperty(window.Image.prototype, "onload", {
-      value: null,
+      value: undefined,
       writable: true,
       configurable: true,
     });
@@ -104,9 +104,9 @@ describe("Image", () => {
     trackImageOnError();
 
     const cleanup = () => {
-      delete window.Image.prototype._onerror;
+      window.Image.prototype._onload = undefined;
       Object.defineProperty(window.Image.prototype, "onerror", {
-        value: null,
+        value: undefined,
         writable: true,
         configurable: true,
       });
