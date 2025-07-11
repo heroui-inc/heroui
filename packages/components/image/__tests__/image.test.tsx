@@ -8,7 +8,7 @@ const fallbackSrc = "https://via.placeholder.com/300x200";
 const loadingSrc = "/images/local-image-small.jpg";
 
 describe("Image", () => {
-  let imageOnload: any = null;
+  let imageOnLoad: any = null;
 
   beforeAll(() => {
     function trackImageOnLoad() {
@@ -17,7 +17,7 @@ describe("Image", () => {
           return this._onload;
         },
         set(fn) {
-          imageOnload = fn;
+          imageOnLoad = fn;
           this._onload = fn;
         },
         configurable: true,
@@ -76,7 +76,7 @@ describe("Image", () => {
     expect(computedLoadingStyle.backgroundImage).toBe(`url(${loadingSrc})`);
 
     act(() => {
-      imageOnload();
+      imageOnLoad();
     });
 
     const computedLoadedStyle = window.getComputedStyle(imageParent!);
@@ -163,7 +163,7 @@ describe("Image", () => {
     const wrapper = render(<Image fallbackSrc={fallbackSrc} src={src} onLoad={onLoad} />);
 
     act(() => {
-      imageOnload();
+      imageOnLoad();
     });
 
     expect(wrapper.getByRole("img")).toHaveAttribute("src", src);
