@@ -40,8 +40,7 @@
           "key": "forms",
           "title": "Forms",
           "keywords": "forms, form validation, heroui",
-          "path": "/docs/guide/forms.mdx",
-          "updated": true
+          "path": "/docs/guide/forms.mdx"
         },
         {
           "key": "tailwind-v4",
@@ -214,8 +213,7 @@
           "key": "checkbox",
           "title": "Checkbox",
           "keywords": "checkbox, binary choice, selection control, toggle",
-          "path": "/docs/components/checkbox.mdx",
-          "updated": true
+          "path": "/docs/components/checkbox.mdx"
         },
         {
           "key": "checkbox-group",
@@ -300,15 +298,13 @@
           "key": "input-otp",
           "title": "Input OTP",
           "keywords": "input, otp, auth, verification code",
-          "path": "/docs/components/input-otp.mdx",
-          "updated": true
+          "path": "/docs/components/input-otp.mdx"
         },
         {
           "key": "kbd",
           "title": "Kbd",
           "keywords": "keyboard input, shortcut, keys, user input display",
-          "path": "/docs/components/kbd.mdx",
-          "updated": true
+          "path": "/docs/components/kbd.mdx"
         },
         {
           "key": "link",
@@ -338,8 +334,7 @@
           "key": "number-input",
           "title": "Number Input",
           "keywords": "input, numeric input, number input",
-          "path": "/docs/components/number-input.mdx",
-          "newPost": true
+          "path": "/docs/components/number-input.mdx"
         },
         {
           "key": "pagination",
@@ -363,8 +358,7 @@
           "key": "radio-group",
           "title": "Radio Group",
           "keywords": "radio group, selection set, option selection, exclusive choices",
-          "path": "/docs/components/radio-group.mdx",
-          "updated": true
+          "path": "/docs/components/radio-group.mdx"
         },
         {
           "key": "range-calendar",
@@ -382,7 +376,8 @@
           "key": "select",
           "title": "Select",
           "keywords": "select, selection, option list, multiple choice",
-          "path": "/docs/components/select.mdx"
+          "path": "/docs/components/select.mdx",
+          "updated": true
         },
         {
           "key": "skeleton",
@@ -412,8 +407,7 @@
           "key": "spinner",
           "title": "Spinner",
           "keywords": "spinner, loading, activity indicator, processing signal",
-          "path": "/docs/components/spinner.mdx",
-          "updated": true
+          "path": "/docs/components/spinner.mdx"
         },
         {
           "key": "switch",
@@ -432,15 +426,14 @@
           "key": "tabs",
           "title": "Tabs",
           "keywords": "tabs, section navigation, categorized content, tabbed interface",
-          "path": "/docs/components/tabs.mdx",
-          "updated": true
+          "path": "/docs/components/tabs.mdx"
         },
         {
           "key": "toast",
           "title": "Toast",
           "keywords": "toast, notification, message",
           "path": "/docs/components/toast.mdx",
-          "newPost": true
+          "updated": true
         },
         {
           "key": "textarea",
@@ -478,15 +471,13 @@
           "key": "cli-api",
           "title": "HeroUI CLI",
           "keywords": "api references, heroui, api, cli",
-          "path": "/docs/api-references/cli-api.mdx",
-          "updated": true
+          "path": "/docs/api-references/cli-api.mdx"
         },
         {
           "key": "heroui-provider",
           "title": "HeroUIProvider",
           "keywords": "api references, heroui, api, heroui provider",
-          "path": "/docs/api-references/heroui-provider.mdx",
-          "updated": true
+          "path": "/docs/api-references/heroui-provider.mdx"
         }
       ]
     }
