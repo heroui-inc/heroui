@@ -1,5 +1,11 @@
 # @heroui/use-theme
 
+## 2.1.10-beta.7
+
+### Patch Changes
+
+- [`f527ad6`](https://github.com/heroui-inc/heroui/commit/f527ad685c31f7bbe1ac97cb41c8b07e45bbe95a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix use-theme logic
+
 ## 2.1.10-beta.6
 
 ### Patch Changes
