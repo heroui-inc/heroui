@@ -1,6 +1,6 @@
 {
   "name": "@heroui/calendar",
-  "version": "2.2.23-beta.3",
+  "version": "2.2.22",
   "description": "A calendar displays one or more date grids and allows users to select a single date.",
   "keywords": [
     "calendar"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.19-beta.0",
-    "@heroui/theme": ">=2.4.18-beta.0",
+    "@heroui/system": ">=2.4.18",
+    "@heroui/theme": ">=2.4.17",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"

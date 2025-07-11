@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-draggable",
-  "version": "2.1.15-beta.1",
+  "version": "2.1.14",
   "description": "This hook can provide drag and drop interaction",
   "keywords": [
     "use-draggable"
