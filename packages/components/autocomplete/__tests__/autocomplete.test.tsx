@@ -3,7 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import type {AutocompleteProps} from "../src";
 
 import * as React from "react";
-import {within, render, renderHook, act, waitFor} from "@testing-library/react";
+import {within, render, renderHook, act} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
@@ -78,14 +78,6 @@ const AutocompleteExample = (props: Partial<AutocompleteProps> = {}) => (
 
 describe("Autocomplete", () => {
   let user: UserEvent;
-
-  beforeAll(() => {
-    jest.useFakeTimers({advanceTimers: true}).setSystemTime(new Date("2025-01-01"));
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
 
   beforeEach(() => {
     user = userEvent.setup();
@@ -419,21 +411,25 @@ describe("Autocomplete", () => {
 
   it("should close listbox when clicking outside autocomplete", async () => {
     const wrapper = render(
-      <Autocomplete
-        aria-label="Favorite Animal"
-        data-testid="close-when-clicking-outside-test"
-        label="Favorite Animal"
-      >
+      <Autocomplete aria-label="Favorite Animal" data-testid="autocomplete" label="Favorite Animal">
         <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
         <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
         <AutocompleteItem key="shark">Shark</AutocompleteItem>
       </Autocomplete>,
     );
 
-    const autocomplete = wrapper.getByTestId("close-when-clicking-outside-test");
+    const {container} = wrapper;
 
-    // open the select listbox
-    await user.click(autocomplete);
+    const selectorButton = container.querySelector(
+      "[data-slot='inner-wrapper'] button:nth-of-type(2)",
+    )!;
+
+    expect(selectorButton).not.toBeNull();
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
+
+    // open the select listbox by clicking selector button
+    await user.click(selectorButton);
 
     // assert that the autocomplete listbox is open
     expect(autocomplete).toHaveAttribute("aria-expanded", "true");
@@ -456,7 +452,7 @@ describe("Autocomplete", () => {
           <ModalBody>
             <Autocomplete
               aria-label="Favorite Animal"
-              data-testid="close-when-clicking-outside-test"
+              data-testid="autocomplete"
               label="Favorite Animal"
             >
               <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
@@ -468,25 +464,27 @@ describe("Autocomplete", () => {
         </ModalContent>
       </Modal>,
     );
+    const modal = wrapper.getByRole("dialog");
 
-    const autocomplete = wrapper.getByTestId("close-when-clicking-outside-test");
+    const selectorButton = modal.querySelector(
+      "[data-slot='inner-wrapper'] button:nth-of-type(2)",
+    )!;
+
+    expect(selectorButton).not.toBeNull();
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
 
     // open the autocomplete listbox
-
-    await user.click(autocomplete);
+    await user.click(selectorButton);
 
     // assert that the autocomplete listbox is open
-    await waitFor(() => {
-      expect(autocomplete).toHaveAttribute("aria-expanded", "true");
-    });
+    expect(autocomplete).toHaveAttribute("aria-expanded", "true");
 
     // click outside the autocomplete component
-    await user.click(document.body);
+    await user.click(modal);
 
     // assert that the autocomplete listbox is closed
-    await waitFor(() => {
-      expect(autocomplete).toHaveAttribute("aria-expanded", "false");
-    });
+    expect(autocomplete).toHaveAttribute("aria-expanded", "false");
   });
 
   it("should set the input after selection", async () => {
@@ -589,7 +587,7 @@ describe("Autocomplete", () => {
     const wrapper = render(
       <Autocomplete
         aria-label="Favorite Animal"
-        data-testid="when-key-equals-textValue"
+        data-testid="autocomplete"
         defaultSelectedKey="cat"
         items={itemsData}
         label="Favorite Animal"
@@ -598,7 +596,7 @@ describe("Autocomplete", () => {
       </Autocomplete>,
     );
 
-    const autocomplete = wrapper.getByTestId("when-key-equals-textValue");
+    const autocomplete = wrapper.getByTestId("autocomplete");
 
     const user = userEvent.setup();
 
@@ -617,12 +615,12 @@ describe("Autocomplete", () => {
 
   it("should work when key equals textValue (controlled)", async () => {
     const wrapper = render(
-      <ControlledAutocomplete data-testid="when-key-equals-textValue" items={itemsData}>
+      <ControlledAutocomplete data-testid="autocomplete" items={itemsData}>
         {(item) => <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>}
       </ControlledAutocomplete>,
     );
 
-    const autocomplete = wrapper.getByTestId("when-key-equals-textValue");
+    const autocomplete = wrapper.getByTestId("autocomplete");
 
     const user = userEvent.setup();
 

@@ -57,7 +57,7 @@ export function useTheme(defaultTheme: Theme = ThemeProps.SYSTEM) {
 
       document.documentElement.classList.remove(theme);
       document.documentElement.classList.add(targetTheme);
-      setThemeState(newTheme);
+      setThemeState(targetTheme);
     },
     [theme],
   );
