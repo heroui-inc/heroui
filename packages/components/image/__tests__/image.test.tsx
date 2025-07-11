@@ -11,7 +11,7 @@ describe("Image", () => {
   let imageOnload: any = null;
 
   beforeAll(() => {
-    function trackImageOnload() {
+    function trackImageOnLoad() {
       Object.defineProperty(window.Image.prototype, "onload", {
         get() {
           return this._onload;
@@ -24,7 +24,7 @@ describe("Image", () => {
       });
     }
 
-    trackImageOnload();
+    trackImageOnLoad();
   });
 
   afterAll(() => {
@@ -91,7 +91,7 @@ describe("Image", () => {
     function trackImageOnError() {
       Object.defineProperty(window.Image.prototype, "onerror", {
         get() {
-          return this._onload;
+          return this._onerror;
         },
         set(fn) {
           imageOnError = fn;
@@ -104,7 +104,7 @@ describe("Image", () => {
     trackImageOnError();
 
     const cleanup = () => {
-      window.Image.prototype._onload = undefined;
+      window.Image.prototype._onerror = undefined;
       Object.defineProperty(window.Image.prototype, "onerror", {
         value: undefined,
         writable: true,
