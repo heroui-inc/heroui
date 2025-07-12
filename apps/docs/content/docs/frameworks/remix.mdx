@@ -166,11 +166,11 @@ export default heroui();
 and add  the following code to your main css file:
 
 ```css
- @import "tailwindcss";
- @plugin './hero.ts';
-// Note: You may need to change the path to fit your project structure
- @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
- @custom-variant dark (&:is(.dark *))
+@import "tailwindcss";
+@plugin './hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *))
 ```
 
 ### Provider Setup
