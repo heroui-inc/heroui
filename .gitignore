@@ -11,6 +11,7 @@ node_modules
 # testing
 coverage
 __snapshots__
+coverage.json
 
 # next.js
 .next

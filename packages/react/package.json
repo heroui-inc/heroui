@@ -35,18 +35,22 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "react-aria-components": "1.7.1",
+    "@radix-ui/react-avatar": "1.1.7",
+    "@radix-ui/react-slot": "1.2.3",
+    "react-aria-components": "1.8.0",
+    "tailwind-merge": "3.0.2",
     "tailwind-variants": "1.0.0",
-    "tailwindcss-react-aria-components": "2.0.0"
+    "tw-animate-css": "1.2.9"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
+    "@iconify/react": "5.2.1",
     "@storybook/react": "8.6.12",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwindcss": "4.1.3"
+    "tailwindcss": "4.1.4"
   },
   "peerDependencies": {
     "react": ">=19.0.0",

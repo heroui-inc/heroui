@@ -53,6 +53,7 @@ export default defineConfig([
       "jsx-a11y/click-events-have-key-events": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
       "jsx-a11y/no-autofocus": "off",
+      "react-hooks/exhaustive-deps": "off",
       "react-refresh/only-export-components": ["warn", {allowConstantExport: true}],
       "react/jsx-boolean-value": [
         "error",
@@ -97,6 +98,8 @@ export default defineConfig([
           html: true,
         },
       ],
+      "sort-keys": "off",
+      "sort-keys-fix/sort-keys-fix": "off",
     },
     settings: {
       react: {
