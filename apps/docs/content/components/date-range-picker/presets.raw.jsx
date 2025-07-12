@@ -95,8 +95,6 @@ export default function App() {
           </ButtonGroup>
         }
         calendarProps={{
-          focusedValue: value.start,
-          onFocusChange: (val) => setValue({...value, start: val}),
           nextButtonProps: {
             variant: "bordered",
           },
