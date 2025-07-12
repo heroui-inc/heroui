@@ -48,7 +48,6 @@
     "@storybook/react-vite": "^8.5.0",
     "@storybook/theming": "^8.5.0",
     "@vitejs/plugin-react": "^4.3.3",
-    "autoprefixer": "^10.4.13",
     "remark-gfm": "^4.0.0",
     "storybook": "^8.5.0",
     "storybook-dark-mode": "^4.0.2",

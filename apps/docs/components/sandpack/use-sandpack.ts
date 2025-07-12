@@ -212,7 +212,6 @@ export const useSandpack = ({
           "react-dom/client",
           "@vitejs/plugin-react",
           "vite",
-          "autoprefixer",
           "postcss",
           "tailwindcss",
           "@tailwindcss/vite",
