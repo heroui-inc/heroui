@@ -51,10 +51,10 @@
     "remark-gfm": "^4.0.0",
     "storybook": "^8.5.0",
     "storybook-dark-mode": "^4.0.2",
-    "tailwindcss": "4.1.10",
+    "tailwindcss": "4.1.11",
     "vite": "^5.4.11",
-    "@tailwindcss/postcss": "4.1.10",
-    "@tailwindcss/vite": "4.1.10"
+    "@tailwindcss/postcss": "4.1.11",
+    "@tailwindcss/vite": "4.1.11"
   },
   "tsup": {
     "clean": true,
