@@ -1,3 +1,4 @@
+import React from "react";
 import {DateRangePicker, Radio, RadioGroup, Button, ButtonGroup, cn} from "@heroui/react";
 import {
   today,
@@ -15,6 +16,7 @@ export default function App() {
     end: today(getLocalTimeZone()).add({days: 7}),
   };
   let [value, setValue] = React.useState(defaultDate);
+  let [focusedValue, setFocusedValue] = React.useState(defaultDate.start);
 
   let {locale} = useLocale();
   let formatter = useDateFormatter({dateStyle: "full"});
@@ -81,20 +83,39 @@ export default function App() {
             variant="bordered"
           >
             <Button
-              onPress={() =>
-                setValue({
+              onPress={() => {
+                const thisWeek = {
                   start: now,
                   end: now.add({days: 7}),
-                })
-              }
+                };
+
+                setValue(thisWeek);
+                setFocusedValue(thisWeek.start);
+              }}
             >
               This week
             </Button>
-            <Button onPress={() => setValue(nextWeek)}>Next week</Button>
-            <Button onPress={() => setValue(nextMonth)}>Next month</Button>
+            <Button
+              onPress={() => {
+                setValue(nextWeek);
+                setFocusedValue(nextWeek.start);
+              }}
+            >
+              Next week
+            </Button>
+            <Button
+              onPress={() => {
+                setValue(nextMonth);
+                setFocusedValue(nextMonth.start);
+              }}
+            >
+              Next month
+            </Button>
           </ButtonGroup>
         }
         calendarProps={{
+          focusedValue: focusedValue,
+          onFocusChange: setFocusedValue,
           nextButtonProps: {
             variant: "bordered",
           },
