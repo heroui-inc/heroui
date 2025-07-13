@@ -64,21 +64,21 @@ HeroUI version **v2.8.0** introduces TailwindCSS v4, improvements and bug fixes.
 
 ## TailwindCSS v4
 
-HeroUI is now compatible with TailwindCSS v4. HeroUI CLI supports to initialize starter templates with Tailwind v4 as well.
+HeroUI is now compatible with TailwindCSS v4. With this update, HeroUI CLI has also been enhanced to support initializing new starter templates pre-configured with TailwindCSS v4. 
 
 To upgrade your existing projects, please refer to [migration guide](/docs/guide/tailwind-v4#migration-steps).
 
 ## Overlay Enhancement
 
-The overlay and outside interaction handling for overlays, popovers, modals, dropdowns, selects, and tooltips have been improved to result in more consistent dismissal behaviour. 
+The handling of overlay and outside interaction for components such as Popover, Modal, Dropdown, Select, and Tooltip have been improved to ensure consistent dismissal behaviour.
 
 ## Component Enhancement
 
 ### Toast
 
-- The return type of `addToast` has been changed from `void` to `string` where the string value is the unique key value of the newly created toast.
-- A new method `closeToast(key: string): void` has been introduced to accept a key value of `string` type and close the toast with the key.
-- The Toast closing order was updated from LIFO to FIFO.
+- The return type of `addToast` has been changed from `void` to `string` where the returned string value is the unique key value of the newly created toast.
+- A new method `closeToast(key: string): void` has been introduced to accept a key value of `string` type and provide a way to close the specific toast with its unique key programmatically.
+- The Toast closing order has been updated from Last In, First Out (LIFO) to First In, First Out (FIFO).
 
 <CodeDemo title="Close Toast" files={closeToast} showEditor={false}/>
 
@@ -148,4 +148,4 @@ Whether it's a feature request, bug report, or a project to showcase, please get
 
 ## Contributing
 
-PR's on HeroUI are always welcome, please see our [contribution guidelines](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.
+PRs on HeroUI are always welcome, please see our [contribution guidelines](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.
