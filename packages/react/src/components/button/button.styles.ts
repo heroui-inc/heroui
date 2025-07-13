@@ -16,6 +16,8 @@ export const buttonVariants = tv({
     "font-medium",
     // sizing
     "px-[calc(--spacing(4)-1px)]",
+    // cursor
+    "cursor-pointer",
     // icon
     "[&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:my-0.5 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:self-center sm:[&_svg]:my-1 sm:[&_svg]:size-4",
     // pending

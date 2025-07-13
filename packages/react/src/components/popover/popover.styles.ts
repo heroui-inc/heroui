@@ -10,7 +10,7 @@ export const popoverVariants = tv({
     base: [tooltipBase, "p-0"],
     dialog: ["p-3", focusRingClasses],
     heading: "font-medium",
-    trigger: [focusRingClasses],
+    trigger: ["cursor-pointer", focusRingClasses],
   },
 });
 

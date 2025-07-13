@@ -171,12 +171,18 @@ importers:
 
   packages/react:
     dependencies:
+      '@internationalized/date':
+        specifier: 3.8.2
+        version: 3.8.2
       '@radix-ui/react-avatar':
         specifier: 1.1.7
         version: 1.1.7(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-slot':
         specifier: 1.2.3
         version: 1.2.3(@types/react@19.1.2)(react@19.1.0)
+      input-otp:
+        specifier: 1.4.2
+        version: 1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-aria-components:
         specifier: 1.8.0
         version: 1.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1211,8 +1217,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@internationalized/date@3.8.0':
-    resolution: {integrity: sha512-J51AJ0fEL68hE4CwGPa6E0PO6JDaVLd8aln48xFCSy7CZkZc96dGEGmLs2OEEbBxcsVZtfrqkXJwI2/MSG8yKw==}
+  '@internationalized/date@3.8.2':
+    resolution: {integrity: sha512-/wENk7CbvLbkUvX1tu0mwq49CVkkWpkXubGel6birjRPyo6uQ4nQpnq5xZu823zRCwwn82zgHrvgF1vZyvmVgA==}
 
   '@internationalized/message@3.1.7':
     resolution: {integrity: sha512-gLQlhEW4iO7DEFPf/U7IrIdA3UyLGS0opeqouaFwlMObLUzwexRjbygONHDVbC9G9oFLXsLyGKYkJwqXw/QADg==}
@@ -4952,6 +4958,12 @@ packages:
   inline-style-parser@0.2.4:
     resolution: {integrity: sha512-0aO8FkhNZlj/ZIbNi7Lxxr12obT7cL1moPfE4tg1LkX7LlLfC6DeX4l2ZEud1ukP9jNQyNnfzQVqwbwmAATY4Q==}
 
+  input-otp@1.4.2:
+    resolution: {integrity: sha512-l3jWwYNvrEa6NTCt7BECfCm48GvwuZzkoeG3gBL2w4CHeOXW3eKFmf9UNYkNfYc3mxMrthMnxjIE07MT0zLBQA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
+
   internal-slot@1.1.0:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
     engines: {node: '>= 0.4'}
@@ -7941,7 +7953,7 @@ snapshots:
   '@img/sharp-win32-x64@0.34.1':
     optional: true
 
-  '@internationalized/date@3.8.0':
+  '@internationalized/date@3.8.2':
     dependencies:
       '@swc/helpers': 0.5.17
 
@@ -8618,7 +8630,7 @@ snapshots:
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.14.4
       '@parcel/workers': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.17))
-      '@swc/helpers': 0.5.15
+      '@swc/helpers': 0.5.17
       browserslist: 4.24.4
       nullthrows: 1.1.1
       regenerator-runtime: 0.14.1
@@ -9236,7 +9248,7 @@ snapshots:
 
   '@react-aria/calendar@3.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@react-aria/i18n': 3.12.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/interactions': 3.25.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/live-announcer': 3.4.2
@@ -9317,7 +9329,7 @@ snapshots:
 
   '@react-aria/datepicker@3.14.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@internationalized/number': 3.6.1
       '@internationalized/string': 3.2.6
       '@react-aria/focus': 3.20.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -9430,7 +9442,7 @@ snapshots:
 
   '@react-aria/i18n@3.12.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@internationalized/message': 3.1.7
       '@internationalized/number': 3.6.1
       '@internationalized/string': 3.2.6
@@ -9832,7 +9844,7 @@ snapshots:
 
   '@react-stately/calendar@3.8.0(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@react-stately/utils': 3.10.6(react@19.1.0)
       '@react-types/calendar': 3.7.0(react@19.1.0)
       '@react-types/shared': 3.29.0(react@19.1.0)
@@ -9888,7 +9900,7 @@ snapshots:
 
   '@react-stately/datepicker@3.14.0(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@internationalized/string': 3.2.6
       '@react-stately/form': 3.1.3(react@19.1.0)
       '@react-stately/overlays': 3.6.15(react@19.1.0)
@@ -10102,7 +10114,7 @@ snapshots:
 
   '@react-types/calendar@3.7.0(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@react-types/shared': 3.29.0(react@19.1.0)
       react: 19.1.0
 
@@ -10124,7 +10136,7 @@ snapshots:
 
   '@react-types/datepicker@3.12.0(react@19.1.0)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@react-types/calendar': 3.7.0(react@19.1.0)
       '@react-types/overlays': 3.8.14(react@19.1.0)
       '@react-types/shared': 3.29.0(react@19.1.0)
@@ -12711,6 +12723,11 @@ snapshots:
 
   inline-style-parser@0.2.4: {}
 
+  input-otp@1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   internal-slot@1.1.0:
     dependencies:
       es-errors: 1.3.0
@@ -14054,7 +14071,7 @@ snapshots:
 
   react-aria-components@1.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.8.2
       '@internationalized/string': 3.2.6
       '@react-aria/autocomplete': 3.0.0-beta.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/collections': 3.0.0-rc.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)

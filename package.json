@@ -25,6 +25,10 @@
     "lint:docs": "turbo lint --filter=@heroui/docs",
     "lint:react": "turbo lint --filter=@heroui/react",
     "lint:storybook": "turbo lint --filter=@heroui/storybook",
+    "typecheck": "turbo typecheck",
+    "typecheck:docs": "turbo typecheck --filter=@heroui/docs",
+    "typecheck:react": "turbo typecheck --filter=@heroui/react",
+    "typecheck:storybook": "turbo typecheck --filter=@heroui/storybook",
     "changeset:canary": "changeset pre enter canary",
     "changeset:beta": "changeset pre enter beta",
     "version": "changeset version",
@@ -78,7 +82,7 @@
     "vitest": "3.1.2"
   },
   "engines": {
-    "node": ">=22.x",
+    "node": ">=20.x",
     "pnpm": ">=10.x"
   },
   "packageManager": "pnpm@10.9.0"

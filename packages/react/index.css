@@ -37,6 +37,11 @@
     --accent-soft: var(--color-neutral-200);
     --accent-soft-foreground: var(--color-neutral-700);
 
+    /* Surface Levels */
+    --surface-1: oklch(100% 0 0);
+    --surface-2: var(--color-neutral-50);
+    --surface-3: var(--color-neutral-100);
+
     /* Status Colors */
     --success: oklch(0.55 0.1241 153.51);
     --success-foreground: oklch(99.11% 0 0);
@@ -93,6 +98,11 @@
 
     --accent-soft: var(--color-neutral-800);
     --accent-soft-foreground: var(--color-neutral-200);
+
+    /* Surface Levels */
+    --surface-1: oklch(0.22 0 0);
+    --surface-2: var(--color-neutral-900);
+    --surface-3: var(--color-neutral-800);
 
     /* Status Colors */
     --success: oklch(0.8 0.1561 154);
@@ -154,6 +164,11 @@
 
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
+
+  /* Surface Levels */
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
 
   --shadow-border: var(--shadow-border);
 
@@ -225,5 +240,17 @@
     background-color: var(--background);
     color: var(--foreground);
     font-size: var(--font-size-base);
+  }
+}
+
+@layer utilities {
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  .animate-blink {
+    animation: blink 1s ease-in-out infinite;
   }
 }

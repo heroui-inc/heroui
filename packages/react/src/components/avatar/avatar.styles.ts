@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys */
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";

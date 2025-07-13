@@ -7,7 +7,8 @@
     "dev": "storybook dev --host 127.0.0.1 --port 6006 --no-open",
     "build": "storybook build",
     "start": "storybook start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "19.1.0",
