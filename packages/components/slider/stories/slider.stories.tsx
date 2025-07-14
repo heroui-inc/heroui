@@ -309,6 +309,67 @@ export const WithTooltip = {
   },
 };
 
+export const WithCustomTooltipTimeFormat = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    label: "Video Progress (value in ms, tooltip as hh:mm:ss)",
+    defaultValue: 3665000, // 1 hour, 1 minute, 5 seconds
+    minValue: 0,
+    maxValue: 7200000, // 2 hours
+    step: 1000, // 1-second steps
+    showTooltip: true,
+    getTooltipValue: (value: SliderValue) => {
+      let milliseconds = typeof value === "number" ? value : Array.isArray(value) ? value[0] : 0;
+
+      if (isNaN(milliseconds) || milliseconds < 0) {
+        milliseconds = 0;
+      }
+
+      let totalSeconds = Math.floor(milliseconds / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+
+      totalSeconds %= 3600;
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      const pad = (num: number) => String(num).padStart(2, "0");
+
+      return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    },
+    tooltipProps: {
+      placement: "top",
+    },
+  },
+};
+
+export const WithCustomTooltipMultiThumb = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    label: "Price Range with Custom Tooltips",
+    defaultValue: [30, 70],
+    minValue: 0,
+    maxValue: 100,
+    step: 1,
+    showTooltip: true,
+    getTooltipValue: (value: SliderValue, index?: number) => {
+      if (Array.isArray(value) && index !== undefined) {
+        return `Thumb ${index === 0 ? "Start" : "End"}: $${value[index]}`;
+      }
+      // For single value, though this story is for multi-thumb
+      if (typeof value === "number") {
+        return `$${value}`;
+      }
+
+      return "";
+    },
+    tooltipProps: {
+      placement: "top",
+    },
+  },
+};
+
 export const ThumbHidden = {
   render: Template,
   args: {
