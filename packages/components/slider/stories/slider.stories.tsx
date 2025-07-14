@@ -355,11 +355,11 @@ export const WithCustomTooltipMultiThumb = {
     showTooltip: true,
     getTooltipValue: (value: SliderValue, index?: number) => {
       if (Array.isArray(value) && index !== undefined) {
-        return `Thumb ${index === 0 ? "Start" : "End"}: 💲${value[index]}`;
+        return `Thumb ${index === 0 ? "Start" : "End"}: $${value[index]}`;
       }
       // For single value, though this story is for multi-thumb
       if (typeof value === "number") {
-        return `💲${value}`;
+        return `$${value}`;
       }
 
       return "";
