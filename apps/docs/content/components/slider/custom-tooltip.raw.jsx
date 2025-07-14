@@ -27,12 +27,13 @@ export default function App() {
     // The slider's main value will be formatted using default or formatOptions
     // The tooltip will use the hh:mm:ss format from
     <Slider
+      hideValue
       showTooltip
       // Example: 1 hour, 1 minute, 5 seconds in ms
       defaultValue={3665000}
       // Single thumb, SliderValue is a number.
       getTooltipValuegetTooltipValue={(value) => formatMillisecondsToHHMMSS(value)}
-      label="Video Duration (Tooltip: hh:mm:ss)"
+      label="Video Duration (hh:mm:ss)"
       // Example: 2 hours in ms
       maxValue={7200000}
       // 1-second steps
