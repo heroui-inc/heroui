@@ -313,7 +313,7 @@ export const WithCustomTooltipTimeFormat = {
   render: Template,
   args: {
     ...defaultProps,
-    label: "Video Progress (value in ms, tooltip as ss:mm:hh)",
+    label: "Video Progress (value in ms, tooltip as hh:mm:ss)",
     defaultValue: 3665000, // 1 hour, 1 minute, 5 seconds
     minValue: 0,
     maxValue: 7200000, // 2 hours

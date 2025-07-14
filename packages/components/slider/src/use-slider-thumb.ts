@@ -114,7 +114,8 @@ export function useSliderThumb(props: UseSliderThumbProps) {
       "data-dragging": dataAttr(isDragging),
       "data-focused": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocusVisible),
-      "aria-label": props["aria-label"] || `Slider thumb ${index ? `${index + 1}` : ""}`,
+      "aria-label":
+        props["aria-label"] || `Slider thumb ${index !== undefined ? `${index + 1}` : ""}`,
       ...mergeProps(thumbProps, pressProps, hoverProps, otherProps),
       className,
       ...props,
@@ -123,7 +124,7 @@ export function useSliderThumb(props: UseSliderThumbProps) {
 
   const getTooltipProps = () => {
     const stateValue = tooltipProps?.content
-      ? undefined
+      ? tooltipProps.content
       : getTooltipValue
         ? state.values.length === 1
           ? getTooltipValue(state.values[index ?? 0])

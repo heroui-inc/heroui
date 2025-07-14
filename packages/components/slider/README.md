@@ -36,7 +36,7 @@ Please refer to the [documentation](https://heroui.com/docs/components/slider) f
 {/* Example for time formatting */}
 <Slider
   showTooltip
-  label="Duration (ms to ss:mm:hh)"
+  label="Duration (ms to hh:mm:ss)"
   defaultValue={3665000} // e.g., 1 hour, 1 minute, 5 seconds
   maxValue={7200000}   // e.g., 2 hours
   step={1000}           // 1-second steps
@@ -56,7 +56,7 @@ Please refer to the [documentation](https://heroui.com/docs/components/slider) f
 
     const pad = (num) => String(num).padStart(2, '0');
 
-    return `${pad(seconds)}:${pad(minutes)}:${pad(hours)}`;
+    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   }}
 />
 ```
