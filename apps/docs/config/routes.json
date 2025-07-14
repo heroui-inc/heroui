@@ -389,7 +389,8 @@
           "key": "slider",
           "title": "Slider",
           "keywords": "slider, range input, value selector, sliding control",
-          "path": "/docs/components/slider.mdx"
+          "path": "/docs/components/slider.mdx",
+          "updated": true
         },
         {
           "key": "snippet",
