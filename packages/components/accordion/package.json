@@ -1,6 +1,6 @@
 {
   "name": "@heroui/accordion",
-  "version": "2.2.19",
+  "version": "2.2.20",
   "description": "Collapse display a list of high-level options that can expand/collapse to reveal more information.",
   "keywords": [
     "react",
