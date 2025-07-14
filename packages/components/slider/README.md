@@ -14,52 +14,6 @@ Please refer to the [documentation](https://heroui.com/docs/components/slider) f
 
 *Note: `SliderValue` is typically `number | number[]`.*
 
-### Usage Examples
-
-**Example with `getTooltipValue`:**
-
-```jsx
-<Slider
-  showTooltip
-  getTooltipValue={(value) => `Value: ${value}`}
-/>
-
-<Slider
-  showTooltip
-  defaultValue={0.5}
-  maxValue={1}
-  step={0.01}
-  getTooltipValue={(value) => value} // Returns a number
-  tooltipValueFormatOptions={{ style: 'percent' }} // Formats the number as a percentage
-/>
-
-{/* Example for time formatting */}
-<Slider
-  showTooltip
-  label="Duration (ms to hh:mm:ss)"
-  defaultValue={3665000} // e.g., 1 hour, 1 minute, 5 seconds
-  maxValue={7200000}   // e.g., 2 hours
-  step={1000}           // 1-second steps
-  getTooltipValue={(value) => {
-    // Ensure value is treated as a number
-    let milliseconds = typeof value === 'number' ? value : (Array.isArray(value) ? value[0] : 0);
-
-    if (isNaN(milliseconds) || milliseconds < 0) {
-      milliseconds = 0;
-    }
-
-    let totalSeconds = Math.floor(milliseconds / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    totalSeconds %= 3600;
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-
-    const pad = (num) => String(num).padStart(2, '0');
-
-    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-  }}
-/>
-```
 
 ## Installation
 
