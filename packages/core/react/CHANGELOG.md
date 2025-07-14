@@ -1,5 +1,136 @@
 # @heroui/react
 
+## 0.0.0
+
+### Minor Changes
+
+- [#5473](https://github.com/heroui-inc/heroui/pull/5473) [`c59b2a9`](https://github.com/heroui-inc/heroui/commit/c59b2a9fe1fe9fead3681dc527f49a567226af4b) Thanks [@wingkwong](https://github.com/wingkwong)! - ## Consolidated Changes
+
+  ### Major Update
+
+  - TailwindCSS v4
+
+  ### Bug Fixes & Improvements
+
+  #### Theme & Styling
+
+  - fix rotate transition (#5441)
+  - fix incorrect target theme (#5469)
+  - fixed missing radius styles in th and td in Table (#4988)
+  - fixed transition (#5409)
+  - fix text selection in table (#5413)
+  - Fix transition scale (#5271)
+  - fix outline styles (#5266)
+
+  #### Components
+
+  **Toast**
+
+  - Renaming loadingIcon to loadingComponent
+  - Fix toast items closing in reverse order. Toasts now close in proper FIFO instead of LIFO (#5096)
+  - Remove the bottom extension of the toast (#5231)
+  - Enable programmatically closing a toast with a specific key (#5084)
+
+  **Slider**
+
+  - introduce `getTooltipValue` prop for custom tooltip value (#4741)
+  - fixed slider component NaN values when min and max are the same value (#5014)
+
+  **Select**
+
+  - add `isClearable` and `onClear` prop to Select component (#2239)
+
+  **Calendar**
+
+  - Replace rectangle intersection detection with center-point distance calculation to make the calendar picker more resilient when browser zoom is changed. The new approach finds the closest picker item to the highlight element's center, preventing mismatches between displayed and selected year / month. (#5117)
+
+  **Input**
+
+  - fix `Input` accessibility label duplication (#5150)
+
+  **Date Input**
+
+  - add 'outside-top' prop to input (#3058)
+
+  **Table**
+
+  - support custom sort icon in Table (#5223)
+  - remove `removeWrapper` from virtualized table (#4995)
+
+  **Autocomplete**
+
+  - do not render selector button if selector icon is null (#5423)
+
+  **Image & Avatar**
+
+  - fixed image src double fetch issue (#3847)
+
+  #### System & Core
+
+  - add useInputLabelPlacement
+  - remove `@heroui/aria-utils` dependency
+
+  #### Hooks & Utilities
+
+  - fix use-theme logic
+  - Fix skeleton animate
+  - bump RA versions
+  - Draggable modal will be scrollable in mobile devices (#5280)
+  - refactor: overlay & interactOutside
+
+### Patch Changes
+
+- Updated dependencies [[`c59b2a9`](https://github.com/heroui-inc/heroui/commit/c59b2a9fe1fe9fead3681dc527f49a567226af4b)]:
+  - @heroui/scroll-shadow@0.0.0
+  - @heroui/autocomplete@0.0.0
+  - @heroui/number-input@0.0.0
+  - @heroui/breadcrumbs@0.0.0
+  - @heroui/date-picker@0.0.0
+  - @heroui/framer-utils@0.0.0
+  - @heroui/date-input@0.0.0
+  - @heroui/pagination@0.0.0
+  - @heroui/accordion@0.0.0
+  - @heroui/input-otp@0.0.0
+  - @heroui/calendar@0.0.0
+  - @heroui/checkbox@0.0.0
+  - @heroui/dropdown@0.0.0
+  - @heroui/progress@0.0.0
+  - @heroui/skeleton@0.0.0
+  - @heroui/divider@0.0.0
+  - @heroui/listbox@0.0.0
+  - @heroui/popover@0.0.0
+  - @heroui/snippet@0.0.0
+  - @heroui/spinner@0.0.0
+  - @heroui/tooltip@0.0.0
+  - @heroui/avatar@0.0.0
+  - @heroui/button@0.0.0
+  - @heroui/drawer@0.0.0
+  - @heroui/navbar@0.0.0
+  - @heroui/ripple@0.0.0
+  - @heroui/select@0.0.0
+  - @heroui/slider@0.0.0
+  - @heroui/spacer@0.0.0
+  - @heroui/switch@0.0.0
+  - @heroui/alert@0.0.0
+  - @heroui/badge@0.0.0
+  - @heroui/image@0.0.0
+  - @heroui/input@0.0.0
+  - @heroui/modal@0.0.0
+  - @heroui/radio@0.0.0
+  - @heroui/table@0.0.0
+  - @heroui/toast@0.0.0
+  - @heroui/card@0.0.0
+  - @heroui/chip@0.0.0
+  - @heroui/code@0.0.0
+  - @heroui/form@0.0.0
+  - @heroui/link@0.0.0
+  - @heroui/menu@0.0.0
+  - @heroui/tabs@0.0.0
+  - @heroui/user@0.0.0
+  - @heroui/kbd@0.0.0
+  - @heroui/system@0.0.0
+  - @heroui/theme@0.0.0
+
 ## 0.0.0-canary-20250714211511
 
 ### Minor Changes

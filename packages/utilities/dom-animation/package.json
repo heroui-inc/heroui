@@ -1,6 +1,6 @@
 {
   "name": "@heroui/dom-animation",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "Dom Animation from Framer Motion for dynamic import",
   "keywords": [
     "dom-animation"

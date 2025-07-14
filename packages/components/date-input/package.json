@@ -1,6 +1,6 @@
 {
   "name": "@heroui/date-input",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "A date input allows users to enter and edit date and time values using a keyboard.",
   "keywords": [
     "date-field"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": "0.0.0-canary-20250714211511",
-    "@heroui/theme": "0.0.0-canary-20250714211511",
+    "@heroui/system": "0.0.0",
+    "@heroui/theme": "0.0.0",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system-rsc",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "HeroUI system primitives compatibles with RSC imports",
   "keywords": [
     "system-rsc"
@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": "0.0.0-canary-20250714211511"
+    "@heroui/theme": "0.0.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-ref-state",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "Hook for saving the state in a ref value",
   "keywords": [
     "use-ref-state"

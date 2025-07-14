@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-clipboard",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "Wrapper around navigator.clipboard with feedback timeout",
   "keywords": [
     "use-clipboard"

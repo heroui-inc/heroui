@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-real-shape",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "Hook that returns the real dimensions of an element",
   "keywords": [
     "use-real-shape"

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-callback-ref",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "React hook to persist any value between renders, but keeps it up-to-date if it changes.",
   "keywords": [
     "use-callback-ref"

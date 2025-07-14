@@ -1,6 +1,6 @@
 {
   "name": "@heroui/input-otp",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "",
   "keywords": [
     "input-otp"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@heroui/theme": "0.0.0-canary-20250714211511",
-    "@heroui/system": "0.0.0-canary-20250714211511"
+    "@heroui/theme": "0.0.0",
+    "@heroui/system": "0.0.0"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",

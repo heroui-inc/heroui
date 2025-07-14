@@ -1,6 +1,6 @@
 {
   "name": "@heroui/spacer",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "A flexible spacer component designed to create consistent spacing and maintain alignment in your layout.",
   "keywords": [
     "spacer"
@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": "0.0.0-canary-20250714211511"
+    "@heroui/theme": "0.0.0"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",

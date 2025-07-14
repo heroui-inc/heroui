@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-overlay",
-  "version": "0.0.0-canary-20250714211511",
+  "version": "0.0.0",
   "description": "A custom implementation of react aria overlay",
   "keywords": [
     "use-aria-overlay"
