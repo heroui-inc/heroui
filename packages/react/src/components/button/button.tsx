@@ -1,3 +1,5 @@
+"use client";
+
 import type {ButtonVariants} from "./button.styles";
 import type {Ref} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";

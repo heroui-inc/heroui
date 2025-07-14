@@ -11,6 +11,9 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@heroui/react": "workspace:*",
+    "@iconify-json/gravity-ui": "1.2.5",
+    "@iconify/react": "6.0.0",
     "fumadocs-core": "15.2.9",
     "fumadocs-mdx": "11.6.1",
     "fumadocs-ui": "15.2.9",

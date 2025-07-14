@@ -1,5 +1,77 @@
 @import "tailwindcss";
+@plugin "@heroui/react/plugin";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+/* HeroUI Base Styles */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border, currentColor);
+  }
+
+  *,
+  ::after,
+  ::before {
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 850;
+    text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar) transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--font-size-base);
+  }
+}
+
+@layer utilities {
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .animate-blink {
+    animation: blink 1s ease-in-out infinite;
+  }
+}
+
 @source '../../node_modules/fumadocs-ui/dist/**/*.js';
+@source "@heroui/react/dist*.js";
+@source "../**/*.{ts,tsx,js,jsx}";
+
+/* Custom Theme Override Example - Customize HeroUI with your brand colors */
+:root {
+  /* Override accent colors with your brand */
+  /* --accent: oklch(0.7 0.25 260); */
+  /* --accent-foreground: oklch(0.98 0 0); */
+
+  /* Or use your existing Tailwind color scale */
+  /* --accent: var(--color-blue-600); */
+  /* --accent-soft: var(--color-blue-100); */
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* --accent: oklch(0.75 0.2 260); */
+  }
+}

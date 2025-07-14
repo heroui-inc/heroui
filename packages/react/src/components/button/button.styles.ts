@@ -15,7 +15,7 @@ export const buttonVariants = tv({
     // font
     "font-medium",
     // sizing
-    "px-[calc(--spacing(4)-1px)]",
+    "px-4",
     // cursor
     "cursor-pointer",
     // icon
@@ -53,7 +53,7 @@ export const buttonVariants = tv({
     size: {
       lg: "h-11 md:h-10",
       md: "h-10 md:h-9",
-      sm: "h-9 px-[calc(--spacing(3)-1px)] text-sm md:h-8 [&_svg]:size-4",
+      sm: "h-9 px-3 text-sm md:h-8 [&_svg]:size-4",
     },
     variant: {
       danger:

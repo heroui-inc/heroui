@@ -1,4 +1,59 @@
 @import "tailwindcss";
 @import "../../react/index.css";
 
-@source "../../react/src";
+@source "../../react/dist/**/*.js";
+
+/* Storybook-specific styles */
+@layer base {
+  /* Background pattern for glass themes */
+  [data-theme="light-glass"],
+  [data-theme="dark-glass"] {
+    #storybook-docs,
+    #storybook-preview-wrapper {
+      position: relative;
+    }
+    
+    #storybook-docs::before,
+    #storybook-preview-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 35px,
+          rgba(255, 255, 255, 0.05) 35px,
+          rgba(255, 255, 255, 0.05) 70px
+        ),
+        linear-gradient(
+          135deg,
+          oklch(0.7 0.15 250) 0%,
+          oklch(0.5 0.2 300) 50%,
+          oklch(0.6 0.15 350) 100%
+        );
+    }
+  }
+  
+  /* Dark glass specific gradient */
+  [data-theme="dark-glass"] {
+    #storybook-docs::before,
+    #storybook-preview-wrapper::before {
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 35px,
+          rgba(255, 255, 255, 0.03) 35px,
+          rgba(255, 255, 255, 0.03) 70px
+        ),
+        linear-gradient(
+          135deg,
+          oklch(0.2 0.15 250) 0%,
+          oklch(0.15 0.2 300) 50%,
+          oklch(0.25 0.15 350) 100%
+        );
+    }
+  }
+}

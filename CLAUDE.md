@@ -385,6 +385,10 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Run `pnpm changeset` to document changes
    - Follow semantic versioning
 
+## Icon Library
+
+**IMPORTANT**: HeroUI uses Iconify with gravity-ui as the default icon set.
+
 ## Important Notes
 
 - Always prefer editing existing files over creating new ones
@@ -417,3 +421,29 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Map Figma component names to appropriate React Aria primitives
    - Use Figma assets (icons, images) directly from the MCP Server
    - Implement styles based on Figma design tokens and specifications
+
+## Library Documentation with Context7 MCP
+
+**IMPORTANT**: We have the Context7 MCP server available (https://github.com/upstash/context7) for accessing up-to-date library documentation.
+
+### When to Use Context7
+
+Use Context7 MCP when working with external libraries, especially:
+- **Tailwind CSS v4**: When working with Tailwind CSS v4 features, use Context7 to get the latest documentation at https://context7.com/context7/tailwindcss
+- **Fumadocs**: When working on the documentation site in `apps/docs/`, use Context7 to get the latest Fumadocs framework documentation
+- **Next.js**: For Next.js specific features and APIs used in the docs app
+- Any other third-party libraries where up-to-date documentation is needed
+
+### How to Use Context7
+
+1. First, resolve the library ID using `mcp__context7__resolve-library-id`
+2. Then fetch documentation using `mcp__context7__get-library-docs` with the resolved ID
+3. This ensures you're always working with the latest documentation rather than outdated information
+
+### Example Usage Areas
+
+- Implementing new documentation features in `apps/docs/`
+- Configuring Fumadocs settings in `source.config.ts`
+- Working with MDX components and layouts
+- Setting up search functionality
+- Implementing documentation navigation and structure

@@ -1,0 +1,56 @@
+/**
+ * Light Glass theme
+ * Glassmorphism variant of light theme
+ */
+
+/* Theme variables only - no selectors */
+--background: oklch(100% 0 0 / 60%);
+--foreground: oklch(14.48% 0 0);
+--panel: oklch(100% 0 0 / 70%);
+
+/* Surface with glass effect */
+--surface: oklch(100% 0 0 / 40%);
+--surface-foreground: var(--foreground);
+
+--scrollbar: oklch(0 0 0 / 20%);
+
+--base: oklch(100% 0 0 / 50%);
+--base-foreground: oklch(14.48% 0 0 / 90%);
+
+--accent: oklch(0.14 0 0 / 90%);
+--accent-foreground: oklch(0.99 0 0);
+
+--accent-soft: oklch(0 0 0 / 8%);
+--accent-soft-foreground: oklch(14.48% 0 0 / 80%);
+
+--muted: oklch(0 0 0 / 40%);
+--muted-foreground: oklch(0 0 0 / 60%);
+
+/* Surface Levels with transparency */
+--surface-1: oklch(100% 0 0 / 60%);
+--surface-2: oklch(100% 0 0 / 50%);
+--surface-3: oklch(100% 0 0 / 40%);
+
+/* Status Colors */
+--success: oklch(0.55 0.1241 153.51);
+--success-foreground: oklch(99.11% 0 0);
+
+--warning: oklch(0.67 0.1428 72.73);
+--warning-foreground: oklch(99.11% 0 0);
+
+--danger: oklch(0.59 0.2228 29.94);
+--danger-foreground: oklch(99.11% 0 0);
+
+/* Borders with transparency */
+--border: oklch(0 0 0 / 10%);
+--focus: oklch(0% 0 0 / 15%);
+--link: var(--foreground);
+
+/* Glass-specific effects */
+--blur: 10px;
+--blur-soft: 5px;
+--blur-strong: 20px;
+--depth: 1;
+
+/* Enhanced shadow for glass effect */
+--shadow-border: 0 0px 10px 0px rgba(0, 0, 0, 0.03), 0 2px 20px 0px rgba(0, 0, 0, 0.08), 0 0px 1px 0px rgba(0, 0, 0, 0.2);

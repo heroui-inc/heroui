@@ -7,6 +7,8 @@ import React from "react";
 import {withInternationalization} from "./addons/i18n/decorator";
 import {withReactScan} from "./addons/react-scan/decorator";
 import {withReactStrictMode} from "./addons/strict-mode/decorator";
+import {withTheme} from "./addons/theme/decorator";
+import {themeGlobalType} from "./addons/theme/preview";
 
 import "../styles/globals.css";
 
@@ -23,7 +25,7 @@ const parameters: Preview["parameters"] = {
   },
   darkMode: {
     classTarget: "html",
-    current: "dark",
+    current: "light",
     dark: {
       ...themes.dark,
       appBg: "#161616",
@@ -54,6 +56,7 @@ const parameters: Preview["parameters"] = {
 const decorators: Preview["decorators"] = [
   withReactScan,
   withReactStrictMode,
+  withTheme,
   withInternationalization,
   (Story) => {
     return (
@@ -67,6 +70,9 @@ const decorators: Preview["decorators"] = [
 const preview: Preview = {
   decorators,
   parameters,
+  globalTypes: {
+    ...themeGlobalType,
+  },
   tags: ["autodocs"],
 };
 

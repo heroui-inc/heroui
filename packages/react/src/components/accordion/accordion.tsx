@@ -18,7 +18,7 @@ import {
   DisclosurePanel,
 } from "react-aria-components";
 
-import {useHeightCalculator} from "../../hooks";
+import {useMeasuredHeight} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 import {useMergeRef} from "../../utils/mergeRef";
@@ -197,7 +197,7 @@ const AccordionPanel = React.forwardRef<
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
   const accordionPanelRef = useRef<HTMLDivElement>(null);
-  const {height: panelHeight} = useHeightCalculator(accordionPanelRef);
+  const {height: panelHeight} = useMeasuredHeight(accordionPanelRef);
   const mergedRef = useMergeRef(accordionPanelRef, ref);
 
   return (

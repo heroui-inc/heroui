@@ -22,6 +22,7 @@
     "start:docs": "turbo start --filter=@heroui/docs",
     "start:storybook": "turbo start --filter=@heroui/storybook",
     "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix",
     "lint:docs": "turbo lint --filter=@heroui/docs",
     "lint:react": "turbo lint --filter=@heroui/react",
     "lint:storybook": "turbo lint --filter=@heroui/storybook",

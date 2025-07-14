@@ -18,7 +18,7 @@ export const accordionVariants = tv({
       /* Focus State */
       focusRingClasses,
       /* Base Styles */
-      "hover:bg-base duration-50 flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color] cursor-pointer",
+      "hover:bg-base duration-50 flex flex-1 cursor-pointer items-center justify-between px-4 py-4 text-left font-medium transition-[background-color]",
       /* Expanded State */
       "[&[aria-expanded=true]_[data-accordion-indicator]]:-rotate-180",
       /* Disabled State */
