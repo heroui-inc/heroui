@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-data-scroll-overflow",
-  "version": "2.2.10",
+  "version": "0.0.0-canary-20250714211511",
   "description": "A hook to add data attributes when the element has top or bottom scroll.",
   "keywords": [
     "use-data-scroll-overflow"

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/code",
-  "version": "2.2.16",
+  "version": "0.0.0-canary-20250714211511",
   "description": "Code is a component used to display inline code.",
   "keywords": [
     "code"
@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.17"
+    "@heroui/theme": "0.0.0-canary-20250714211511"
   },
   "dependencies": {
     "@heroui/system-rsc": "workspace:*",

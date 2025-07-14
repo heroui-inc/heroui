@@ -1,6 +1,6 @@
 {
   "name": "@heroui/user",
-  "version": "2.2.18",
+  "version": "0.0.0-canary-20250714211511",
   "description": "Flexible User Profile Component.",
   "keywords": [
     "user"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.17",
-    "@heroui/system": ">=2.4.18"
+    "@heroui/theme": "0.0.0-canary-20250714211511",
+    "@heroui/system": "0.0.0-canary-20250714211511"
   },
   "dependencies": {
     "@heroui/avatar": "workspace:*",

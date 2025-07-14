@@ -1,5 +1,91 @@
 # @heroui/tabs
 
+## 0.0.0-canary-20250714211511
+
+### Patch Changes
+
+- ## Consolidated Changes
+
+  ### Major Update
+
+  - TailwindCSS v4
+
+  ### Bug Fixes & Improvements
+
+  #### Theme & Styling
+
+  - fix rotate transition (#5441)
+  - fix incorrect target theme (#5469)
+  - fixed missing radius styles in th and td in Table (#4988)
+  - fixed transition (#5409)
+  - fix text selection in table (#5413)
+  - Fix transition scale (#5271)
+  - fix outline styles (#5266)
+
+  #### Components
+
+  **Toast**
+
+  - Renaming loadingIcon to loadingComponent
+  - Fix toast items closing in reverse order. Toasts now close in proper FIFO instead of LIFO (#5096)
+  - Remove the bottom extension of the toast (#5231)
+  - Enable programmatically closing a toast with a specific key (#5084)
+
+  **Slider**
+
+  - introduce `getTooltipValue` prop for custom tooltip value (#4741)
+  - fixed slider component NaN values when min and max are the same value (#5014)
+
+  **Select**
+
+  - add `isClearable` and `onClear` prop to Select component (#2239)
+
+  **Calendar**
+
+  - Replace rectangle intersection detection with center-point distance calculation to make the calendar picker more resilient when browser zoom is changed. The new approach finds the closest picker item to the highlight element's center, preventing mismatches between displayed and selected year / month. (#5117)
+
+  **Input**
+
+  - fix `Input` accessibility label duplication (#5150)
+
+  **Date Input**
+
+  - add 'outside-top' prop to input (#3058)
+
+  **Table**
+
+  - support custom sort icon in Table (#5223)
+  - remove `removeWrapper` from virtualized table (#4995)
+
+  **Autocomplete**
+
+  - do not render selector button if selector icon is null (#5423)
+
+  **Image & Avatar**
+
+  - fixed image src double fetch issue (#3847)
+
+  #### System & Core
+
+  - add useInputLabelPlacement
+  - remove `@heroui/aria-utils` dependency
+
+  #### Hooks & Utilities
+
+  - fix use-theme logic
+  - Fix skeleton animate
+  - bump RA versions
+  - Draggable modal will be scrollable in mobile devices (#5280)
+  - refactor: overlay & interactOutside
+
+- Updated dependencies []:
+  - @heroui/shared-utils@0.0.0-canary-20250714211511
+  - @heroui/react-utils@0.0.0-canary-20250714211511
+  - @heroui/use-is-mounted@0.0.0-canary-20250714211511
+  - @heroui/aria-utils@0.0.0-canary-20250714211511
+  - @heroui/system@0.0.0-canary-20250714211511
+  - @heroui/theme@0.0.0-canary-20250714211511
+
 ## 2.2.20-beta.2
 
 ### Patch Changes

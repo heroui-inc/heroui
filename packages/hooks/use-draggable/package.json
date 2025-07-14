@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-draggable",
-  "version": "2.1.14",
+  "version": "0.0.0-canary-20250714211511",
   "description": "This hook can provide drag and drop interaction",
   "keywords": [
     "use-draggable"

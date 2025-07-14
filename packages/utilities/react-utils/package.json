@@ -1,6 +1,6 @@
 {
   "name": "@heroui/react-utils",
-  "version": "2.1.11",
+  "version": "0.0.0-canary-20250714211511",
   "description": "A set of utilities for react on client side",
   "keywords": [
     "react-utils"

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/shared-icons",
-  "version": "2.1.9",
+  "version": "0.0.0-canary-20250714211511",
   "description": "Internal icons set, commonly used in the components stories",
   "keywords": [
     "icons-utils"

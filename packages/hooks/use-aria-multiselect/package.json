@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-aria-multiselect",
-  "version": "2.4.15",
+  "version": "0.0.0-canary-20250714211511",
   "description": "Provides the behavior and accessibility implementation for a multi-select component.",
   "keywords": [
     "use-aria-multiselect"

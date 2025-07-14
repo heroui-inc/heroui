@@ -1,6 +1,6 @@
 {
   "name": "@heroui/use-disclosure",
-  "version": "2.2.13",
+  "version": "0.0.0-canary-20250714211511",
   "description": "The hook in charge of managing modals",
   "keywords": [
     "use-disclosure"

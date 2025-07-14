@@ -1,6 +1,6 @@
 {
   "name": "@heroui/dropdown",
-  "version": "2.3.22",
+  "version": "0.0.0-canary-20250714211511",
   "description": "A dropdown displays a list of actions or options that a user can choose.",
   "keywords": [
     "dropdown"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.18",
-    "@heroui/theme": ">=2.4.17",
+    "@heroui/system": "0.0.0-canary-20250714211511",
+    "@heroui/theme": "0.0.0-canary-20250714211511",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
