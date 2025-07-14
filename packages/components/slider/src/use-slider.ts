@@ -13,9 +13,8 @@ import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useSliderState} from "@react-stately/slider";
 import {useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
 import {useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, mergeProps, objectToDeps, warn} from "@heroui/shared-utils";
 import {useHover} from "@react-aria/interactions";
 
 export type SliderValue = number | number[];
@@ -117,6 +116,15 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * Overrides default formatted number.
    */
   getValue?: (value: SliderValue) => string;
+
+  /**
+   * A function that returns the content to display as the tooltip label. (in analogy to getValue)
+   * @param value - The value of the slider, array or single number.
+   * @param index - The index of the thumb, if multiple thumbs are used.
+   * In addition to formatting with tooltipValueFormatOptions if number is returned.
+   */
+  getTooltipValue?: (value: SliderValue, index?: number) => string | number;
+
   /**
    * Function to render the label.
    */
@@ -165,10 +173,17 @@ export function useSlider(originalProps: UseSliderProps) {
     onChange,
     onChangeEnd,
     getValue,
+    getTooltipValue,
     tooltipValueFormatOptions = formatOptions,
     tooltipProps: userTooltipProps = {},
     ...otherProps
   } = props;
+
+  const isFixedValue = minValue === maxValue;
+
+  if (isFixedValue) {
+    warn("Min and max values should not be the same. This may cause unexpected behavior.");
+  }
 
   const Component = as || "div";
   const shouldFilterDOMProps = typeof Component === "string";
@@ -182,11 +197,15 @@ export function useSlider(originalProps: UseSliderProps) {
   const {direction} = useLocale();
 
   const clampValue = useCallback(
-    (valueToClamp: number) => Math.min(Math.max(valueToClamp, minValue), maxValue),
+    (valueToClamp: number) => {
+      return Math.min(Math.max(valueToClamp, minValue), maxValue);
+    },
     [minValue, maxValue],
   );
 
   const validatedValue = useMemo(() => {
+    if (isFixedValue) return minValue;
+
     if (valueProp === undefined) return undefined;
 
     if (Array.isArray(valueProp)) {
@@ -194,7 +213,7 @@ export function useSlider(originalProps: UseSliderProps) {
     }
 
     return clampValue(valueProp);
-  }, [valueProp, clampValue]);
+  }, [valueProp, clampValue, isFixedValue, minValue]);
 
   const state = useSliderState({
     ...otherProps,
@@ -366,6 +385,7 @@ export function useSlider(originalProps: UseSliderProps) {
       orientation,
       isVertical,
       tooltipProps,
+      getTooltipValue,
       showTooltip,
       renderThumb,
       formatOptions: tooltipValueFormatOptions,
@@ -403,6 +423,8 @@ export function useSlider(originalProps: UseSliderProps) {
       onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
       onClick: (e: any) => {
         e.stopPropagation();
+        if (isFixedValue) return;
+
         if (state.values.length === 1) {
           state.setThumbPercent(0, percent);
         } else {

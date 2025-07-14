@@ -15,8 +15,7 @@ import {useTable as useReactAriaTable} from "@react-aria/table";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {table} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {clsx, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo} from "react";
 
 type TableContentPlacement = "inside" | "outside";
@@ -92,6 +91,10 @@ interface Props<T> extends HTMLHeroUIProps<"table"> {
    * Props to be passed to the checkboxes.
    */
   checkboxesProps?: CheckboxProps;
+  /**
+   * Custom Icon to be displayed in the table header - overrides the default chevron one
+   */
+  sortIcon?: ReactNode | ((props: any) => ReactNode);
   /** Handler that is called when a user performs an action on the row. */
   onRowAction?: (key: Key) => void;
   /** Handler that is called when a user performs an action on the cell. */
@@ -167,6 +170,7 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
     checkboxesProps,
     topContent,
     bottomContent,
+    sortIcon,
     onRowAction,
     onCellAction,
     ...otherProps
@@ -295,6 +299,7 @@ export function useTable<T extends object>(originalProps: UseTableProps<T>) {
     removeWrapper,
     topContentPlacement,
     bottomContentPlacement,
+    sortIcon,
     getBaseProps,
     getWrapperProps,
     getTableProps,

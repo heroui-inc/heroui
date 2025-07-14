@@ -8,10 +8,9 @@ import {useMemo, useRef, useCallback} from "react";
 import {menuItem} from "@heroui/theme";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps, removeEvents} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
 import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
 import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
-import {mergeProps} from "@react-aria/utils";
 import {useIsMobile} from "@heroui/use-is-mobile";
 import {filterDOMProps} from "@heroui/react-utils";
 

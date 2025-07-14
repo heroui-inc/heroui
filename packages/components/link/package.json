@@ -36,15 +36,14 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.6",
-    "@heroui/system": ">=2.4.17"
+    "@heroui/theme": ">=2.4.17",
+    "@heroui/system": ">=2.4.18"
   },
   "dependencies": {
     "@heroui/shared-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-aria-link": "workspace:*",
-    "@react-aria/utils": "3.29.1",
     "@react-aria/focus": "3.20.5",
     "@react-types/link": "3.6.2"
   },

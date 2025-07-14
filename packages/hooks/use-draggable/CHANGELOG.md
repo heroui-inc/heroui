@@ -1,5 +1,17 @@
 # @heroui/use-draggable
 
+## 2.1.15-beta.1
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+## 2.1.15-beta.0
+
+### Patch Changes
+
+- [#5444](https://github.com/heroui-inc/heroui/pull/5444) [`6d7f986`](https://github.com/heroui-inc/heroui/commit/6d7f98697bde6d0616dd1e244fb5c577f17f5d37) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Draggable modal will be scrollable in mobile devices (#5280)
+
 ## 2.1.14
 
 ### Patch Changes

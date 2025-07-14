@@ -1,5 +1,23 @@
 # @heroui/use-aria-multiselect
 
+## 2.4.16-beta.2
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+## 2.4.16-beta.1
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+## 2.4.16-beta.0
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
 ## 2.4.15
 
 ### Patch Changes

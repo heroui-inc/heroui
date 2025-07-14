@@ -362,7 +362,7 @@ const WithStartContentTemplate = ({
   disableAnimation,
   ...args
 }: DropdownProps & DropdownMenuProps) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>
@@ -408,7 +408,7 @@ const WithStartContentTemplate = ({
 };
 
 const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-default-500 pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>
@@ -441,7 +441,7 @@ const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => 
 };
 
 const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>
@@ -491,7 +491,7 @@ const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) =>
 };
 
 const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Dropdown {...args} disableAnimation={disableAnimation}>

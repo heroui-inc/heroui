@@ -239,7 +239,7 @@ export const StartContent = {
     ...defaultProps,
     labelPlacement: "outside",
     startContent: (
-      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };
@@ -251,7 +251,7 @@ export const EndContent = {
     ...defaultProps,
     labelPlacement: "outside",
     endContent: (
-      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+      <CalendarBoldIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
     ),
   },
 };

@@ -10,7 +10,8 @@ import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
 import {CloseIcon} from "@heroui/shared-icons";
 import {LazyMotion, m} from "framer-motion";
 import {useDialog} from "@react-aria/dialog";
-import {chain, mergeProps, useViewportSize} from "@react-aria/utils";
+import {chain, mergeProps} from "@heroui/shared-utils";
+import {useViewportSize} from "@heroui/use-viewport-size";
 
 import {useModalContext} from "./modal-context";
 import {scaleInOut} from "./modal-transition";

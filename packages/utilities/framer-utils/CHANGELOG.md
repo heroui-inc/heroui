@@ -1,5 +1,33 @@
 # @heroui/framer-utils
 
+## 2.1.19-beta.2
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/use-measure@2.1.8-beta.7
+  - @heroui/system@2.4.19-beta.2
+
+## 2.1.19-beta.1
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/use-measure@2.1.8-beta.6
+  - @heroui/system@2.4.19-beta.1
+
+## 2.1.19-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/use-measure@2.1.8-beta.5
+  - @heroui/system@2.4.19-beta.0
+
 ## 2.1.18
 
 ### Patch Changes

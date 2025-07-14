@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.17",
-    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.18",
+    "@heroui/theme": ">=2.4.17",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -54,7 +54,6 @@
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@react-aria/combobox": "3.12.5",
     "@react-aria/i18n": "3.12.10",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/combobox": "3.10.6",
     "@react-types/combobox": "3.13.6",
     "@react-types/shared": "3.30.0"

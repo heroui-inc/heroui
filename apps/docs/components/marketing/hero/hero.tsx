@@ -39,11 +39,11 @@ export const Hero = () => {
               content: "font-semibold text-foreground text-xs ",
             }}
             color="primary"
-            href="/blog/v2.7.0"
+            href="/blog/v2.8.0"
             variant="flat"
-            onClick={() => handlePressAnnouncement("HeroUI v2.7.0", "/blog/v2.7.0")}
+            onClick={() => handlePressAnnouncement("HeroUI v2.8.0", "/blog/v2.8.0")}
           >
-            HeroUI v2.7.0&nbsp;
+            HeroUI v2.8.0&nbsp;
             <span aria-label="emoji" role="img">
               🔥
             </span>
@@ -67,7 +67,7 @@ export const Hero = () => {
             color="primary"
             endContent={
               <ArrowRightIcon
-                className="group-data-[hover=true]:translate-x-0.5 outline-none transition-transform"
+                className="group-data-[hover=true]:translate-x-0.5 outline-solid outline-transparent transition-transform"
                 strokeWidth={2}
               />
             }

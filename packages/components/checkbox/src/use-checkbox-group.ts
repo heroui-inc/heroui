@@ -8,12 +8,11 @@ import type {CheckboxProps} from "./index";
 
 import {useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
-import {chain, mergeProps} from "@react-aria/utils";
 import {checkboxGroup} from "@heroui/theme";
 import {useCheckboxGroup as useReactAriaCheckboxGroup} from "@react-aria/checkbox";
 import {useCheckboxGroupState} from "@react-stately/checkbox";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, safeAriaLabel} from "@heroui/shared-utils";
+import {clsx, safeAriaLabel, chain, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 interface Props extends HTMLHeroUIProps<"div"> {
