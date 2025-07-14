@@ -24,20 +24,16 @@ export default function App() {
   };
 
   return (
-    // The slider's main value will be formatted using default or formatOptions
-    // The tooltip will use the hh:mm:ss format from
     <Slider
       hideValue
       showTooltip
-      // Example: 1 hour, 1 minute, 5 seconds in ms
-      defaultValue={3665000}
-      // Single thumb, SliderValue is a number.
-      getTooltipValuegetTooltipValue={(value) => formatMillisecondsToHHMMSS(value)}
+      defaultValue={3665000} // Example: 1 hour, 1 minute, 5 seconds in ms
+      getTooltipValue={(value) => formatMillisecondsToHHMMSS(value)} //Single thumb, SliderValue is a number.
       label="Video Duration (hh:mm:ss)"
-      // Example: 2 hours in ms
-      maxValue={7200000}
-      // 1-second steps
-      step={1000}
+      maxValue={7200000} // Example: 2 hours in ms
+      step={1000} // 1-second steps
+      // The slider's main value will be formatted using default or formatOptions
+      // The tooltip will use the hh:mm:ss format from getTooltipValue
     />
   );
 }
