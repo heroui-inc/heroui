@@ -7,9 +7,8 @@ import type {ValuesType} from "./use-table";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableCell} from "@react-aria/table";
-import {mergeProps} from "@react-aria/utils";
 import {useFocusRing} from "@react-aria/focus";
 
 // @internal

@@ -9,9 +9,8 @@ import {useAriaLink} from "@heroui/use-aria-link";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useFocusRing} from "@react-aria/focus";
-import {dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo, useCallback} from "react";
-import {mergeProps} from "@react-aria/utils";
 
 interface Props extends HTMLHeroUIProps<"a">, LinkVariantProps {
   /**

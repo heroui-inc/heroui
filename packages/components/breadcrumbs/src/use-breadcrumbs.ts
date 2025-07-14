@@ -9,10 +9,9 @@ import {Children} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {breadcrumbs} from "@heroui/theme";
 import {filterDOMProps, pickChildren, useDOMRef} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
 import {useBreadcrumbs as useAriaBreadcrumbs} from "@react-aria/breadcrumbs";
 import {useMemo} from "react";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 
 import BreadcrumbItem from "./breadcrumb-item";
 

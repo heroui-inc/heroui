@@ -4,9 +4,8 @@ import type {ReactRef} from "@heroui/react-utils";
 
 import {avatar} from "@heroui/theme";
 import {useProviderContext} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, safeText, dataAttr} from "@heroui/shared-utils";
+import {clsx, safeText, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useFocusRing} from "@react-aria/focus";
 import {useMemo, useCallback} from "react";
 import {useImage} from "@heroui/use-image";
@@ -138,11 +137,21 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
   const {isHovered, hoverProps} = useHover({isDisabled});
   const disableAnimation = disableAnimationProp ?? globalContext?.disableAnimation ?? false;
 
-  const imageStatus = useImage({src, onError, ignoreFallback});
+  const isHeroImage =
+    (typeof ImgComponent === "object" && (ImgComponent as any)?.displayName?.includes("HeroUI")) ??
+    false;
+
+  const imageStatus = useImage({
+    src,
+    onError,
+    ignoreFallback,
+    shouldBypassImageLoad: as !== undefined || !isHeroImage,
+  });
 
   const isImgLoaded = imageStatus === "loaded";
 
-  const shouldFilterDOMProps = typeof ImgComponent === "string";
+  // if the ImgComponent is not a HeroUI component, we need to filter out `disableAnimation`
+  const shouldFilterDOMProps = !isHeroImage;
 
   /**
    * Fallback avatar applies under 2 conditions:

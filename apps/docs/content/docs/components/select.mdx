@@ -105,10 +105,15 @@ You can change the position of the label by setting the `labelPlacement` propert
 
 ### Start Content
 
-You can use the `startContent` and `endContent` properties to add content to the start and end of
-the select.
+You can use the `startContent` properties to add content to the start of the select.
 
 <CodeDemo title="Start Content" files={selectContent.startContent} />
+
+### End Content
+
+You can use the `endContent` properties to add content to the end of the select.
+
+<CodeDemo title="End Content" files={selectContent.endContent} />
 
 ### Item Start & End Content
 
@@ -147,6 +152,12 @@ You can add a description to the select by passing the `description` property.
 You can combine the `isInvalid` and `errorMessage` properties to show an invalid select.
 
 <CodeDemo title="With Error Message" files={selectContent.errorMessage} />
+
+### Clear Button
+
+If you pass the `isClearable` property to the select, it will have a clear button which will be visible only when a value is selected.
+
+<CodeDemo title="Clear Button" files={selectContent.isClearable} />
 
 ### Controlled
 
@@ -317,6 +328,9 @@ If you need to submit a specific `value` instead of the `key` during form submis
 - **helperWrapper**: The wrapper of the helper text. This wraps the helper text and the error message.
 - **description**: The description of the select.
 - **errorMessage**: The error message of the select.
+- **clearButton**: Clear button for select. Displayed when `isClearable` prop is true.
+- **endWrapper**: Wrapper for endContent and clear button.
+- **endContent**: end Content for select component.
 
 ## Data Attributes
 
@@ -575,6 +589,12 @@ If you need to submit a specific `value` instead of the `key` during form submis
       default: "false"
     },
     {
+      attribute: "isClearable",
+      type: "boolean",
+      description: "Whether clear button is visible or not.",
+      default: "false"
+    },
+    {
       attribute: "validationState",
       type: "valid | invalid",
       description: "Whether the select should display its \"valid\" or \"invalid\" visual styling. (Deprecated) use isInvalid instead.",
@@ -664,6 +684,11 @@ If you need to submit a specific `value` instead of the `key` during form submis
       type: "(keys: \"all\" | Set<React.Key> & {anchorKey?: string; currentKey?: string}) => void",
       description: "Callback fired when the selected keys change.",
       default: "-"
+    },
+    {
+      attribute: "onClear",
+      type: "() => void",
+      description: "Handler that is called when the clear button is clicked."
     },
     {
       attribute: "onChange",

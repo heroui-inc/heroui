@@ -18,7 +18,7 @@ export const focusVisibleClasses = [
 ];
 
 export const dataFocusVisibleClasses = [
-  "outline-none",
+  "outline-solid outline-transparent",
   "data-[focus-visible=true]:z-10",
   "data-[focus-visible=true]:outline-2",
   "data-[focus-visible=true]:outline-focus",
@@ -26,7 +26,7 @@ export const dataFocusVisibleClasses = [
 ];
 
 export const groupDataFocusVisibleClasses = [
-  "outline-none",
+  "outline-solid outline-transparent",
   "group-data-[focus-visible=true]:z-10",
   "group-data-[focus-visible=true]:ring-2",
   "group-data-[focus-visible=true]:ring-focus",
@@ -35,7 +35,7 @@ export const groupDataFocusVisibleClasses = [
 ];
 
 export const ringClasses = [
-  "outline-none",
+  "outline-solid outline-transparent",
   "ring-2",
   "ring-focus",
   "ring-offset-2",
@@ -60,12 +60,14 @@ export const absoluteFullClasses = ["absolute", "inset-0"];
  * It includes classes for different variants like default, primary, secondary, etc.
  */
 export const collapseAdjacentVariantBorders = {
-  default: ["[&+.border-medium.border-default]:ms-[calc(theme(borderWidth.medium)*-1)]"],
-  primary: ["[&+.border-medium.border-primary]:ms-[calc(theme(borderWidth.medium)*-1)]"],
-  secondary: ["[&+.border-medium.border-secondary]:ms-[calc(theme(borderWidth.medium)*-1)]"],
-  success: ["[&+.border-medium.border-success]:ms-[calc(theme(borderWidth.medium)*-1)]"],
-  warning: ["[&+.border-medium.border-warning]:ms-[calc(theme(borderWidth.medium)*-1)]"],
-  danger: ["[&+.border-medium.border-danger]:ms-[calc(theme(borderWidth.medium)*-1)]"],
+  default: ["[&+.border-medium.border-default]:ms-[calc(var(--heroui-border-width-medium)*-1)]"],
+  primary: ["[&+.border-medium.border-primary]:ms-[calc(var(--heroui-border-width-medium)*-1)]"],
+  secondary: [
+    "[&+.border-medium.border-secondary]:ms-[calc(var(--heroui-border-width-medium)*-1)]",
+  ],
+  success: ["[&+.border-medium.border-success]:ms-[calc(var(--heroui-border-width-medium)*-1)]"],
+  warning: ["[&+.border-medium.border-warning]:ms-[calc(var(--heroui-border-width-medium)*-1)]"],
+  danger: ["[&+.border-medium.border-danger]:ms-[calc(var(--heroui-border-width-medium)*-1)]"],
 };
 
 export const hiddenInputClasses = [

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/popover",
-  "version": "2.3.22",
+  "version": "2.3.23",
   "description": "A popover is an overlay element positioned relative to a trigger.",
   "keywords": [
     "popover"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.17",
-    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.18",
+    "@heroui/theme": ">=2.4.17",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -47,12 +47,12 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
+    "@heroui/use-aria-overlay": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
     "@react-aria/dialog": "3.5.27",
     "@react-aria/focus": "3.20.5",
     "@react-aria/overlays": "3.27.3",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/overlays": "3.6.17",
     "@react-types/overlays": "3.8.16"
   },

@@ -1,26 +1,26 @@
 import type {PopoverVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {AriaTooltipProps} from "@react-types/tooltip";
 import type {OverlayTriggerProps} from "@react-types/overlays";
+import type {AriaOverlayProps} from "@react-aria/overlays";
 import type {HTMLMotionProps} from "framer-motion";
 import type {OverlayOptions} from "@heroui/aria-utils";
 import type {ReactNode, Ref} from "react";
-import type {AriaOverlayProps} from "@react-aria/overlays";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {ReactRef} from "@heroui/react-utils";
 
 import {useId, useImperativeHandle} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
-import {mergeProps} from "@react-aria/utils";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
-import {useOverlayPosition, useOverlay} from "@react-aria/overlays";
+import {useOverlayPosition} from "@react-aria/overlays";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {popover} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {mergeRefs} from "@heroui/react-utils";
 import {createDOMRef} from "@heroui/react-utils";
 import {useMemo, useRef, useCallback} from "react";
 import {toReactAriaPlacement, getArrowPlacement} from "@heroui/aria-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {useAriaOverlay} from "@heroui/use-aria-overlay";
 
 interface Props extends Omit<HTMLHeroUIProps, "content"> {
   /**
@@ -195,7 +195,7 @@ export function useTooltip(originalProps: UseTooltipProps) {
     updatePosition();
   }, updatePositionDeps);
 
-  const {overlayProps} = useOverlay(
+  const {overlayProps} = useAriaOverlay(
     {
       isOpen: isOpen,
       onClose: state.close,

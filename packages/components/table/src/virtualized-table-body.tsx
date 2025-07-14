@@ -4,10 +4,9 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableRowGroup} from "@react-aria/table";
 import {filterDOMProps} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
 
 import TableRow from "./table-row";
 import TableCell from "./table-cell";

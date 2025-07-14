@@ -10,11 +10,9 @@ import {useProviderContext} from "@heroui/system";
 import {useMenuTriggerState} from "@react-stately/menu";
 import {useMenuTrigger} from "@react-aria/menu";
 import {dropdown} from "@heroui/theme";
-import {clsx} from "@heroui/shared-utils";
+import {clsx, mergeProps} from "@heroui/shared-utils";
 import {mergeRefs} from "@heroui/react-utils";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 import {useMemo, useRef} from "react";
-import {mergeProps} from "@react-aria/utils";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**
@@ -159,9 +157,6 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
         ...props.classNames,
         content: clsx(styles, classNamesProp?.content, props.className),
       },
-      shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-        ? popoverProps.shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, triggerRef, state),
     };
   };
 

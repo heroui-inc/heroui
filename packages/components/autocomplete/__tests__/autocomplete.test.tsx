@@ -411,21 +411,25 @@ describe("Autocomplete", () => {
 
   it("should close listbox when clicking outside autocomplete", async () => {
     const wrapper = render(
-      <Autocomplete
-        aria-label="Favorite Animal"
-        data-testid="close-when-clicking-outside-test"
-        label="Favorite Animal"
-      >
+      <Autocomplete aria-label="Favorite Animal" data-testid="autocomplete" label="Favorite Animal">
         <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
         <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
         <AutocompleteItem key="shark">Shark</AutocompleteItem>
       </Autocomplete>,
     );
 
-    const autocomplete = wrapper.getByTestId("close-when-clicking-outside-test");
+    const {container} = wrapper;
 
-    // open the select listbox
-    await user.click(autocomplete);
+    const selectorButton = container.querySelector(
+      "[data-slot='inner-wrapper'] button:nth-of-type(2)",
+    )!;
+
+    expect(selectorButton).not.toBeNull();
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
+
+    // open the select listbox by clicking selector button
+    await user.click(selectorButton);
 
     // assert that the autocomplete listbox is open
     expect(autocomplete).toHaveAttribute("aria-expanded", "true");
@@ -448,7 +452,7 @@ describe("Autocomplete", () => {
           <ModalBody>
             <Autocomplete
               aria-label="Favorite Animal"
-              data-testid="close-when-clicking-outside-test"
+              data-testid="autocomplete"
               label="Favorite Animal"
             >
               <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
@@ -460,18 +464,24 @@ describe("Autocomplete", () => {
         </ModalContent>
       </Modal>,
     );
+    const modal = wrapper.getByRole("dialog");
 
-    const autocomplete = wrapper.getByTestId("close-when-clicking-outside-test");
+    const selectorButton = modal.querySelector(
+      "[data-slot='inner-wrapper'] button:nth-of-type(2)",
+    )!;
+
+    expect(selectorButton).not.toBeNull();
+
+    const autocomplete = wrapper.getByTestId("autocomplete");
 
     // open the autocomplete listbox
-
-    await user.click(autocomplete);
+    await user.click(selectorButton);
 
     // assert that the autocomplete listbox is open
     expect(autocomplete).toHaveAttribute("aria-expanded", "true");
 
     // click outside the autocomplete component
-    await user.click(document.body);
+    await user.click(modal);
 
     // assert that the autocomplete listbox is closed
     expect(autocomplete).toHaveAttribute("aria-expanded", "false");
@@ -577,7 +587,7 @@ describe("Autocomplete", () => {
     const wrapper = render(
       <Autocomplete
         aria-label="Favorite Animal"
-        data-testid="when-key-equals-textValue"
+        data-testid="autocomplete"
         defaultSelectedKey="cat"
         items={itemsData}
         label="Favorite Animal"
@@ -586,7 +596,7 @@ describe("Autocomplete", () => {
       </Autocomplete>,
     );
 
-    const autocomplete = wrapper.getByTestId("when-key-equals-textValue");
+    const autocomplete = wrapper.getByTestId("autocomplete");
 
     const user = userEvent.setup();
 
@@ -605,12 +615,12 @@ describe("Autocomplete", () => {
 
   it("should work when key equals textValue (controlled)", async () => {
     const wrapper = render(
-      <ControlledAutocomplete data-testid="when-key-equals-textValue" items={itemsData}>
+      <ControlledAutocomplete data-testid="autocomplete" items={itemsData}>
         {(item) => <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>}
       </ControlledAutocomplete>,
     );
 
-    const autocomplete = wrapper.getByTestId("when-key-equals-textValue");
+    const autocomplete = wrapper.getByTestId("autocomplete");
 
     const user = userEvent.setup();
 

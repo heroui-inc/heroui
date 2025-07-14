@@ -9,6 +9,7 @@ import {Input} from "@heroui/input";
 import {Checkbox} from "@heroui/checkbox";
 import {Link} from "@heroui/link";
 import {Switch} from "@heroui/switch";
+import {Autocomplete, AutocompleteItem} from "@heroui/autocomplete";
 import {MailFilledIcon, LockFilledIcon} from "@heroui/shared-icons";
 import Lorem from "react-lorem-component";
 
@@ -94,7 +95,7 @@ const content = (
           <Input
             autoFocus
             endContent={
-              <MailFilledIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+              <MailFilledIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
             }
             label="Email"
             placeholder="Enter your email"
@@ -102,7 +103,7 @@ const content = (
           />
           <Input
             endContent={
-              <LockFilledIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+              <LockFilledIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
             }
             label="Password"
             placeholder="Enter your password"
@@ -265,6 +266,57 @@ const DraggableOverflowTemplate = (args: ModalProps) => {
   );
 };
 
+const ModalWithAutocompleteTemplate = (args: ModalProps) => {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Button onPress={onOpen}>Open Modal</Button>
+
+      <Modal {...args} isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalBody>
+                <Autocomplete label="Favorite Animal">
+                  <AutocompleteItem key="red_panda">Red Panda</AutocompleteItem>
+                  <AutocompleteItem key="cat">Cat</AutocompleteItem>
+                  <AutocompleteItem key="dog">Dog</AutocompleteItem>
+                  <AutocompleteItem key="crocodile">Crocodile</AutocompleteItem>
+                  <AutocompleteItem key="elephant">Elephant</AutocompleteItem>
+                  <AutocompleteItem key="lion">Lion</AutocompleteItem>
+                  <AutocompleteItem key="tiger">Tiger</AutocompleteItem>
+                  <AutocompleteItem key="aardvark">Aardvark</AutocompleteItem>
+                  <AutocompleteItem key="kangaroo">Kangaroo</AutocompleteItem>
+                  <AutocompleteItem key="koala">Koala</AutocompleteItem>
+                  <AutocompleteItem key="panda">Panda</AutocompleteItem>
+                  <AutocompleteItem key="giraffe">Giraffe</AutocompleteItem>
+                  <AutocompleteItem key="otter">Otter</AutocompleteItem>
+                  <AutocompleteItem key="snake">Snake</AutocompleteItem>
+                  <AutocompleteItem key="dolphin">Dolphin</AutocompleteItem>
+                  <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+                  <AutocompleteItem key="whale">Whale</AutocompleteItem>
+                  <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+                  <AutocompleteItem key="shark">Shark</AutocompleteItem>
+                </Autocomplete>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+};
+
 export const Default = {
   render: Template,
 
@@ -365,6 +417,13 @@ export const WithShouldBlockScroll = {
     );
   },
 
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithAutocomplete = {
+  render: ModalWithAutocompleteTemplate,
   args: {
     ...defaultProps,
   },

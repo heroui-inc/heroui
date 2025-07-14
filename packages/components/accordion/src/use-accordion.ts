@@ -12,7 +12,7 @@ import {useProviderContext} from "@heroui/system";
 import {filterDOMProps} from "@heroui/react-utils";
 import React, {useCallback} from "react";
 import {useTreeState} from "@react-stately/tree";
-import {mergeProps} from "@react-aria/utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {accordion} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
 import {useMemo, useState} from "react";

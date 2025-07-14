@@ -57,7 +57,7 @@ const Autocomplete = forwardRef(function Autocomplete<T extends object>(
         endContent={
           <div {...getEndContentWrapperProps()}>
             {endContent || <Button {...getClearButtonProps()}>{clearIcon}</Button>}
-            <Button {...getSelectorButtonProps()}>{selectorIcon}</Button>
+            {selectorIcon && <Button {...getSelectorButtonProps()}>{selectorIcon}</Button>}
           </div>
         }
       />

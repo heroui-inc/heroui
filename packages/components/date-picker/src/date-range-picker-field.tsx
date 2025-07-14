@@ -12,7 +12,7 @@ import {useDateFieldState} from "@react-stately/datepicker";
 import {DateInputSegment} from "@heroui/date-input";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
+import {mergeProps} from "@heroui/shared-utils";
 
 type HeroUIBaseProps<T extends DateValue> = Omit<
   HTMLHeroUIProps<"div">,
