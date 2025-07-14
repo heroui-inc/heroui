@@ -1,1 +1,1 @@
-export {useLabelPlacement} from "./use-label-placement";
+export {useLabelPlacement, useInputLabelPlacement} from "./use-label-placement";

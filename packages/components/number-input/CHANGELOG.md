@@ -1,5 +1,77 @@
 # @heroui/number-input
 
+## 2.0.13-beta.4
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.7
+  - @heroui/shared-icons@2.1.10-beta.6
+  - @heroui/shared-utils@2.1.10-beta.7
+  - @heroui/react-utils@2.1.12-beta.5
+  - @heroui/button@2.2.23-beta.2
+  - @heroui/form@2.1.22-beta.4
+
+## 2.0.13-beta.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.23-beta.1
+  - @heroui/form@2.1.22-beta.3
+
+## 2.0.13-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.6
+  - @heroui/shared-icons@2.1.10-beta.5
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/react-utils@2.1.12-beta.4
+  - @heroui/button@2.2.23-beta.1
+  - @heroui/form@2.1.22-beta.2
+
+## 2.0.13-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`a95feca`](https://github.com/heroui-inc/heroui/commit/a95feca4586ca0a61e13ad03c16fab112160a02b)]:
+  - @heroui/shared-icons@2.1.10-beta.4
+  - @heroui/button@2.2.23-beta.0
+  - @heroui/form@2.1.22-beta.1
+
+## 2.0.13-beta.0
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/use-safe-layout-effect@2.1.8-beta.5
+  - @heroui/shared-icons@2.1.10-beta.3
+  - @heroui/shared-utils@2.1.10-beta.5
+  - @heroui/react-utils@2.1.12-beta.3
+  - @heroui/button@2.2.23-beta.0
+  - @heroui/form@2.1.22-beta.0
+  - @heroui/system@2.4.19-beta.0
+
+## 2.0.12
+
+### Patch Changes
+
+- [#5382](https://github.com/heroui-inc/heroui/pull/5382) [`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5374](https://github.com/heroui-inc/heroui/pull/5374) [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed) Thanks [@wingkwong](https://github.com/wingkwong)! - bump system peer dependencies
+
+- Updated dependencies [[`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf), [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed)]:
+  - @heroui/button@2.2.22
+  - @heroui/form@2.1.21
+
 ## 2.0.11
 
 ### Patch Changes

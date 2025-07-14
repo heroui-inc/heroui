@@ -9,4 +9,3 @@ export {
 } from "./utils";
 
 export {ariaHideOutside, keepVisible} from "./ariaHideOutside";
-export {ariaShouldCloseOnInteractOutside} from "./ariaShouldCloseOnInteractOutside";

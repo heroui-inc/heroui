@@ -1,5 +1,6 @@
 export const animations = {
   animation: {
+    shimmer: "shimmer 2s infinite",
     "drip-expand": "drip-expand 420ms linear",
     "spinner-ease-spin": "spinner-spin 0.8s ease infinite",
     "spinner-linear-spin": "spinner-spin 0.8s linear infinite",
@@ -14,7 +15,7 @@ export const animations = {
   keyframes: {
     shimmer: {
       "100%": {
-        transform: "translateX(100%)",
+        transform: "translateX(200%)",
       },
     },
     "spinner-spin": {

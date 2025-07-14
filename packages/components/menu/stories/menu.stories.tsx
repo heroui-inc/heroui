@@ -141,7 +141,7 @@ const WithShortcutTemplate = ({color, variant, ...args}) => (
 );
 
 const WithStartContentTemplate = ({color, variant, disableAnimation, ...args}: MenuProps) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Menu
@@ -183,7 +183,7 @@ const WithStartContentTemplate = ({color, variant, disableAnimation, ...args}: M
 };
 
 const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-default-500 pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-default-500 pointer-events-none shrink-0";
 
   return (
     <Menu
@@ -216,7 +216,7 @@ const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => 
 };
 
 const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Menu
@@ -266,7 +266,7 @@ const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) =>
 };
 
 const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
-  const iconClasses = "text-2xl text-secondary pointer-events-none flex-shrink-0";
+  const iconClasses = "text-2xl text-secondary pointer-events-none shrink-0";
 
   return (
     <Menu

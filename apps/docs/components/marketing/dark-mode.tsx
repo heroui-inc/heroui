@@ -45,7 +45,7 @@ export const DarkMode = () => {
                   <Button
                     isIconOnly
                     aria-label="Show code"
-                    className="text-white/70 dark:text-black/70 data-[hover]:bg-foreground/10"
+                    className="text-white/70 dark:text-black/70 data-hover:bg-foreground/10"
                     radius="full"
                     variant="light"
                     onPress={() => setIsModalOpen(true)}
@@ -56,7 +56,7 @@ export const DarkMode = () => {
                 <ThemeSwitch
                   classNames={{
                     base: "mt-1 bg-transparent rounded-xl",
-                    wrapper: "!text-white/70 dark:!text-black/70",
+                    wrapper: "text-white/70! dark:text-black/70!",
                   }}
                 />
               </div>

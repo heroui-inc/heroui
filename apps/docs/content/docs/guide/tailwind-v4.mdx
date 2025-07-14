@@ -5,7 +5,7 @@ description: Learn how to migrate your Tailwind v4 project to HeroUI.
 
 # Tailwind v4
 
-TailwindCSS v4 is now available in Beta! This guide will help you migrate your existing TailwindCSS v4 project to HeroUI. The demonstration is available at https://beta.heroui.com/.
+TailwindCSS v4 is now available since 2.8.0! This guide will help you migrate your existing TailwindCSS v4 project to HeroUI.
 
 ---
 
@@ -14,17 +14,15 @@ TailwindCSS v4 is now available in Beta! This guide will help you migrate your e
 ## Migration Steps
 
 1. Follow the [official Tailwind v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide)
-2. Install the `beta` version of HeroUI
-
-
+2. Upgrade HeroUI version
 
 <PackageManagers
   commands={{
-    cli: "npx heroui-cli@latest upgrade --all --beta",
-    pnpm: "pnpm install @heroui/react@beta",
-    npm: "npm install @heroui/react@beta",
-    yarn: "yarn install @heroui/react@beta",
-    bun: "bun install @heroui/react@beta"
+    cli: "npx heroui-cli@latest upgrade --all",
+    pnpm: "pnpm install @heroui/react@latest",
+    npm: "npm install @heroui/react@latest",
+    yarn: "yarn add @heroui/react@latest",
+    bun: "bun install @heroui/react@latest"
   }}
 />
 
@@ -34,7 +32,7 @@ TailwindCSS v4 is now available in Beta! This guide will help you migrate your e
 
 #### Without `tailwind.config.js`
 
-Since Tailwind v4 favors a CSS-first approach, `tailwind.config.js` will not be required. 
+Since Tailwind v4 favors a CSS-first approach, `tailwind.config.js` will not be required.
 
 Create `hero.ts` file
 
