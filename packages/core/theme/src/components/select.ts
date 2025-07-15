@@ -22,7 +22,7 @@ const select = tv({
     ],
     mainWrapper: "w-full flex flex-col",
     trigger:
-      "relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-xs outline-solid outline-transparent tap-highlight-transparent",
+      "relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-xs outline-hidden tap-highlight-transparent",
     innerWrapper:
       "inline-flex h-fit w-[calc(100%_-theme(spacing.6))] min-h-4 items-center gap-1.5 box-border",
     selectorIcon: "absolute end-3 w-4 h-4",

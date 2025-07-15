@@ -1,5 +1,11 @@
 # @heroui/theme
 
+## 2.4.19
+
+### Patch Changes
+
+- [#5486](https://github.com/heroui-inc/heroui/pull/5486) [`8ddc6e7`](https://github.com/heroui-inc/heroui/commit/8ddc6e795e56b7ecaac94bb0bbf99a7147dc027b) Thanks [@wingkwong](https://github.com/wingkwong)! - use `outline-hidden` which is equivalent to `outline-none` in v3 (#5485)
+
 ## 2.4.18
 
 ### Patch Changes

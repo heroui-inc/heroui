@@ -77,7 +77,7 @@ const navbar = tv({
       "justify-center",
       "w-6",
       "h-full",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "rounded-small",
       "tap-highlight-transparent",
       // focus ring
