@@ -63,7 +63,7 @@ const cmdk = tv({
       "h-14",
       "font-sans",
       "text-lg",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "rounded-none",
       "bg-transparent",
       "text-default-700",

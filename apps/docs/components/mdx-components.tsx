@@ -275,7 +275,7 @@ export const APITable: React.FC<APITableProps> = ({data}) => {
                     {/* Mobile popover */}
                     <Components.Popover placement="top">
                       <Components.PopoverTrigger>
-                        <button className="flex items-center gap-1 sm:hidden outline-solid outline-transparent">
+                        <button className="flex items-center gap-1 sm:hidden outline-hidden">
                           <InfoCircle className="text-default-400" size={16} />
                         </button>
                       </Components.PopoverTrigger>

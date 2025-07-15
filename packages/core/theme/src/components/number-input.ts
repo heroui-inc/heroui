@@ -42,7 +42,7 @@ const numberInput = tv({
       "relative w-full inline-flex tap-highlight-transparent flex-row items-center shadow-sm px-3 gap-3",
     innerWrapper: "inline-flex w-full items-center h-full box-border",
     input: [
-      "w-full font-normal bg-transparent !outline-solid outline-transparent placeholder:text-foreground-500 focus-visible:outline-solid outline-transparent",
+      "w-full font-normal bg-transparent !outline-hidden placeholder:text-foreground-500 focus-visible:outline-hidden",
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
       "autofill:bg-transparent bg-clip-text",
@@ -55,7 +55,7 @@ const numberInput = tv({
       "start-auto",
       "pointer-events-none",
       "appearance-none",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "select-none",
       "opacity-0",
       "hover:!opacity-100",

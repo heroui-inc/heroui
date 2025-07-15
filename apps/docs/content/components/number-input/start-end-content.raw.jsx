@@ -21,7 +21,7 @@ export default function App() {
               </label>
               <select
                 aria-label="Select currency"
-                className="outline-solid outline-transparent border-0 bg-transparent text-default-400 text-small"
+                className="outline-hidden border-0 bg-transparent text-default-400 text-small"
                 defaultValue="USD"
                 id="currency"
                 name="currency"

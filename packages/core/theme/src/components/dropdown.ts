@@ -58,7 +58,7 @@ const dropdownItem = tv({
       "h-full",
       "box-border",
       "rounded-small",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "cursor-pointer",
       "tap-highlight-transparent",
       "data-[pressed=true]:opacity-70",
