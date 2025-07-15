@@ -43,7 +43,7 @@ const modal = tv({
       "w-full",
       "box-border",
       "bg-content1",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "mx-1",
       "my-1",
       "sm:mx-6",
@@ -56,7 +56,7 @@ const modal = tv({
     closeButton: [
       "absolute",
       "appearance-none",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "select-none",
       "top-1",
       "end-1",

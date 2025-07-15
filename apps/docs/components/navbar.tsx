@@ -227,7 +227,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         <NavbarItem className="flex h-full items-center">
           <button
             className={clsx(
-              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-solid outline-transparent",
+              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-hidden",
               // focus ring
               ...dataFocusVisibleClasses,
             )}

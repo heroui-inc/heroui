@@ -44,7 +44,7 @@ const tabs = tv({
       "relative",
       "justify-center",
       "items-center",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "cursor-pointer",
       "transition-opacity",
       "tap-highlight-transparent",
@@ -67,7 +67,7 @@ const tabs = tv({
     panel: [
       "py-3",
       "px-1",
-      "outline-solid outline-transparent",
+      "outline-hidden",
       "data-[inert=true]:hidden",
       // focus ring
       ...dataFocusVisibleClasses,
