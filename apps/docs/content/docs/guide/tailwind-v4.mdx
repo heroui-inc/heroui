@@ -44,7 +44,7 @@ export default heroui();
 
 Update your main css file
 
-```diff-js
+```diff-css
 // your main css file
 - @tailwind base;
 - @tailwind components;
@@ -52,7 +52,7 @@ Update your main css file
 
 + @import "tailwindcss";
 + @plugin './hero.ts';
-// Note: You may need to change the path to fit your project structure
+/* Note: You may need to change the path to fit your project structure */
 + @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 + @custom-variant dark (&:is(.dark *));
 ```
@@ -61,14 +61,14 @@ Update your main css file
 
 In Tailwind v4, `tailwind.config.js` is still supported for backward compatibility. If you still need to use it, you can load it explicity as below.
 
-```diff-js
+```diff-css
 // your main css file
 - @tailwind base;
 - @tailwind components;
 - @tailwind utilities;
 
 + @import "tailwindcss";
-// Note: You may need to change the path to fit your project structure
+/* Note: You may need to change the path to fit your project structure */
 + @config "../../tailwind.config.js";
 ```
 
