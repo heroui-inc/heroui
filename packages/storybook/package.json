@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "tw-animate-css": "^1.3.5",
+    "@heroui/react": "workspace:*"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",

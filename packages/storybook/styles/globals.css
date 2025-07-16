@@ -1,59 +1,29 @@
 @import "tailwindcss";
-@import "../../react/index.css";
+@plugin "@heroui/react/plugin";
 
-@source "../../react/dist/**/*.js";
+/* With advanced options */
+/* 
+ @plugin "@heroui/react/plugin" {
+  themes: "light --default, dark --prefersdark";
+  colorscheme: "dark";
+  default: true;
+  prefersdark: true;
+  name: "dark";
+}
+*/
 
-/* Storybook-specific styles */
-@layer base {
-  /* Background pattern for glass themes */
-  [data-theme="light-glass"],
-  [data-theme="dark-glass"] {
-    #storybook-docs,
-    #storybook-preview-wrapper {
-      position: relative;
-    }
-    
-    #storybook-docs::before,
-    #storybook-preview-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: 
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 35px,
-          rgba(255, 255, 255, 0.05) 35px,
-          rgba(255, 255, 255, 0.05) 70px
-        ),
-        linear-gradient(
-          135deg,
-          oklch(0.7 0.15 250) 0%,
-          oklch(0.5 0.2 300) 50%,
-          oklch(0.6 0.15 350) 100%
-        );
-    }
-  }
-  
-  /* Dark glass specific gradient */
-  [data-theme="dark-glass"] {
-    #storybook-docs::before,
-    #storybook-preview-wrapper::before {
-      background: 
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 35px,
-          rgba(255, 255, 255, 0.03) 35px,
-          rgba(255, 255, 255, 0.03) 70px
-        ),
-        linear-gradient(
-          135deg,
-          oklch(0.2 0.15 250) 0%,
-          oklch(0.15 0.2 300) 50%,
-          oklch(0.25 0.15 350) 100%
-        );
-    }
-  }
+/* Important: This source is important to make sure storybook styles are compiled */
+@source "../../react/**/*.{ts,tsx,js,jsx}";
+
+/* Custom theme overrides - Just use CSS! */
+:root {
+  /* Your values */
+  /* --radius: 2.5rem; */
+}
+
+/* Dark theme overrides sing data-theme or class */
+[data-theme="dark"],
+.dark {
+  /* Your values */
+  /* --radius: 0.5rem; */
 }

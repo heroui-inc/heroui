@@ -3,11 +3,15 @@
  * Auto-generated - DO NOT EDIT
  */
 
-import type {CssInJs} from "../functions/pluginOptionsHandler";
+// import type {CssInJs} from "../functions/pluginOptionsHandler";
+
+type CssInJs = {
+  [key: string]: string | string[] | CssInJs | CssInJs[];
+};
 
 // Theme definitions
 const themes = {
-  "light": {
+  light: {
     "--background": "oklch(100% 0 0)",
     "--foreground": "oklch(14.48% 0 0)",
     "--panel": "oklch(100% 0 0)",
@@ -36,9 +40,10 @@ const themes = {
     "--surface-1": "oklch(100% 0 0)",
     "--surface-2": "var(--color-neutral-50)",
     "--surface-3": "var(--color-neutral-100)",
-    "--shadow-border": "0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06), 0 0px 1px 0px rgba(0, 0, 0, 0.3)"
+    "--shadow-border":
+      "0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06), 0 0px 1px 0px rgba(0, 0, 0, 0.3)",
   },
-  "dark": {
+  dark: {
     "--background": "oklch(0% 0 0)",
     "--foreground": "oklch(99.11% 0 0)",
     "--panel": "oklch(0.22 0 0)",
@@ -67,7 +72,8 @@ const themes = {
     "--surface-1": "oklch(0.22 0 0)",
     "--surface-2": "var(--color-neutral-900)",
     "--surface-3": "var(--color-neutral-800)",
-    "--shadow-border": "0 0 5px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.2)"
+    "--shadow-border":
+      "0 0 5px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.2)",
   },
   "light-glass": {
     "--background": "oklch(100% 0 0 / 60%)",
@@ -98,10 +104,11 @@ const themes = {
     "--surface-1": "oklch(100% 0 0 / 60%)",
     "--surface-2": "oklch(100% 0 0 / 50%)",
     "--surface-3": "oklch(100% 0 0 / 40%)",
-    "--shadow-border": "0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06), 0 0px 1px 0px rgba(0, 0, 0, 0.3)",
+    "--shadow-border":
+      "0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06), 0 0px 1px 0px rgba(0, 0, 0, 0.3)",
     "--blur": "10px",
     "--blur-soft": "5px",
-    "--blur-strong": "20px"
+    "--blur-strong": "20px",
   },
   "dark-glass": {
     "--background": "oklch(0% 0 0 / 60%)",
@@ -132,21 +139,22 @@ const themes = {
     "--surface-1": "oklch(0% 0 0 / 60%)",
     "--surface-2": "oklch(0% 0 0 / 50%)",
     "--surface-3": "oklch(0% 0 0 / 40%)",
-    "--shadow-border": "0 0 5px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.2)",
+    "--shadow-border":
+      "0 0 5px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.2)",
     "--blur": "10px",
     "--blur-soft": "5px",
-    "--blur-strong": "20px"
-  }
+    "--blur-strong": "20px",
+  },
 };
 
 // Convert theme objects to CSS variables format
 function convertThemeToCss(theme: Record<string, string>): CssInJs {
   const cssVars: CssInJs = {};
-  
+
   Object.entries(theme).forEach(([key, value]) => {
     cssVars[key] = value;
   });
-  
+
   return cssVars;
 }
 

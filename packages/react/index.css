@@ -1,73 +1,28 @@
 @import "tailwindcss";
+/* @import "tw-animate-css"; */
 
 /**
- * Toggling dark mode manually
- * Docs: https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
- */
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
-
-/*
-* Uncomment the following line to use the Inter font when not working on a Next.js project.
-* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-* Then replace var(--font-inter) to Inter
-*/
-
-/* 
- * Theme variables are automatically injected by the HeroUI plugin
+ * HeroUI v3 Plugin
  * 
- * Available CSS variables you can customize:
- * - Colors: --background, --foreground, --accent, --success, --warning, --danger
- * - UI: --border, --focus, --link, --panel, --surface
- * - Layout: --radius, --radius-panel
+ * All theme variables, base styles, and utilities are now provided by the plugin.
  * 
- * See THEME-CUSTOMIZATION.md for full customization guide
+ * Basic usage:
+ * @plugin "@heroui/react/plugin"
+ * 
+ * With theme configuration:
+ * @plugin "@heroui/react/plugin" {
+ *   themes: light --default, dark --prefersdark;
+ * }
+ * 
+ * Create custom theme:
+ * @plugin "@heroui/react/plugin" {
+ *   name: "mytheme";
+ *   default: true;
+ *   prefersdark: false;
+ *   colorScheme: light;
+ *   
+ *   --background: oklch(98% 0.02 240);
+ *   --foreground: oklch(20% 0.05 240);
+ *   // ... more CSS variables
+ * }
  */
-
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--border, currentColor);
-  }
-
-  *,
-  ::after,
-  ::before {
-    font-feature-settings: "cv11", "ss01";
-    font-variation-settings: "opsz" 850;
-    text-rendering: optimizeLegibility;
-    font-synthesis-weight: none;
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar) transparent;
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-size: var(--font-size-base);
-  }
-}
-
-@layer utilities {
-  @keyframes blink {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .animate-blink {
-    animation: blink 1s ease-in-out infinite;
-  }
-}

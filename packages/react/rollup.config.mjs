@@ -28,13 +28,6 @@ const componentEntries = componentDirs.reduce((acc, dir) => {
 const input = {
   index: "src/index.ts",
   ...componentEntries,
-  // Add other important exports
-  "components/icons": "src/components/icons.tsx",
-  "hooks/index": "src/hooks/index.ts",
-  "theme/index": "src/theme/index.ts",
-  "utils/index": "src/utils/index.ts",
-  "functions/pluginOptionsHandler": "src/functions/pluginOptionsHandler.ts",
-  "functions/variables": "src/functions/variables.ts",
 };
 
 const external = [
@@ -93,17 +86,6 @@ export default defineConfig([
     input: "src/plugin.ts",
     output: {
       file: "dist/plugin.js",
-      format: "es",
-      sourcemap: false, // Disable sourcemaps
-    },
-    external: [],
-    plugins,
-  },
-  // Theme plugin build (bundled)
-  {
-    input: "src/plugin-theme.ts",
-    output: {
-      file: "dist/theme.js",
       format: "es",
       sourcemap: false, // Disable sourcemaps
     },

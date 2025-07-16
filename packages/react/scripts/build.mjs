@@ -6,7 +6,7 @@ import {fileURLToPath} from "url";
 import fs from "fs-extra";
 
 import {generateTypes} from "./build-types.mjs";
-import {generateThemes} from "./generate-themes.mjs";
+// import {generateThemes} from "./generate-themes.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -144,7 +144,7 @@ async function copyStaticFiles() {
 async function main() {
   try {
     await clean();
-    await generateThemes(); // Generate themes before build
+    // await generateThemes(); // Generate themes before build
     await build();
     await generateTypes();
     await addUseClientDirective();

@@ -13,6 +13,7 @@ export * from "./fieldset";
 export * from "./form";
 export * from "./label";
 export * from "./link";
+export * from "./listbox";
 export * from "./tooltip";
 export * from "./spinner";
 export * from "./popover";

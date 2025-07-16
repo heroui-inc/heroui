@@ -67,6 +67,7 @@
     "@babel/core": "7.28.0",
     "@babel/preset-react": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
+    "tw-animate-css": "^1.3.5",
     "@heroui/standard": "workspace:*",
     "@iconify/react": "5.2.1",
     "@rollup/plugin-babel": "6.0.4",

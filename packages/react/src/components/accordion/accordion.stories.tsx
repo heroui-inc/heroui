@@ -2,6 +2,7 @@ import type {AccordionProps} from "./accordion";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
+import React from "react";
 
 import {Accordion} from "./index";
 
@@ -35,7 +36,9 @@ const defaultArgs: AccordionProps = {
 };
 
 const Wrapper = ({children}: {children: React.ReactNode}) => (
-  <div className="flex h-full w-full">{children}</div>
+  <div data-animation-off className="w-full max-w-md">
+    {children}
+  </div>
 );
 
 const items = [

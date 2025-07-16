@@ -10,15 +10,16 @@ export const accordionVariants = tv({
     base: "w-full",
     body: "text-muted px-4 pb-4 pt-0",
     heading: "flex",
-    indicator: "text-muted ml-auto size-4 shrink-0 transition duration-300",
+    indicator:
+      "text-muted animation-off:transition-none ml-auto size-4 shrink-0 transition-transform duration-300",
     item: "border-b last:border-b-0",
     panel:
-      "h-0 opacity-0 transition-[height,opacity] duration-300 ease-out [&[aria-hidden=false]]:h-[var(--panel-height)] [&[aria-hidden=false]]:opacity-100",
+      "animation-off:transition-none h-0 opacity-0 transition-[height,opacity] duration-200 ease-out [&[aria-hidden=false]]:h-[var(--panel-height)] [&[aria-hidden=false]]:opacity-100",
     trigger: [
       /* Focus State */
       focusRingClasses,
       /* Base Styles */
-      "hover:bg-base duration-50 flex flex-1 cursor-pointer items-center justify-between px-4 py-4 text-left font-medium transition-[background-color]",
+      "hover:bg-base duration-50 animation-off:transition-none flex flex-1 cursor-pointer items-center justify-between px-4 py-4 text-left font-medium transition-[background-color]",
       /* Expanded State */
       "[&[aria-expanded=true]_[data-accordion-indicator]]:-rotate-180",
       /* Disabled State */
@@ -30,7 +31,7 @@ export const accordionVariants = tv({
       default: {},
       outline: {
         base: "bg-panel shadow-sm/5 rounded-lg border",
-        item: "first:[&_[data-accordion-trigger]]:rounded-t-lg last:[&_[data-accordion-trigger]]:rounded-b-lg",
+        item: "last:[&:not(:has([data-accordion-trigger][aria-expanded=true]))_[data-accordion-trigger]]:rounded-b-lg first:[&_[data-accordion-trigger]]:rounded-t-lg",
       },
     },
   },

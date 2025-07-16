@@ -392,6 +392,7 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 ## Important Notes
 
 - Always prefer editing existing files over creating new ones
+- **NEVER** create documentation files (*.md, *.mdx, README files) unless explicitly requested by the user
 - Follow the established component patterns and conventions
 - Ensure accessibility with React Aria Components
 - Maintain TypeScript type safety
