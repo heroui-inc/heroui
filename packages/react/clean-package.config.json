@@ -1,5 +1,5 @@
 {
-  "remove": ["devDependencies", "scripts", "clean-package", "exports"],
+  "remove": ["devDependencies", "scripts", "clean-package"],
   "replace": {
     "main": "./dist/index.js",
     "module": "./dist/index.js",
