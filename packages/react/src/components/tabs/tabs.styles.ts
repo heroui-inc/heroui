@@ -17,7 +17,7 @@ export const tabsVariants = tv({
     ],
     tab: [
       // Base styles
-      "relative w-full cursor-pointer rounded-md text-center font-medium outline-none",
+      "cursor-interactive relative w-full rounded-md text-center font-medium outline-none",
       // Orientation styles
       "group-data-[orientation=horizontal]:px-3 group-data-[orientation=horizontal]:py-1",
       "group-data-[orientation=vertical]:px-4 group-data-[orientation=vertical]:py-2",

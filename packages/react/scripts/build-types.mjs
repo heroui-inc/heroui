@@ -12,16 +12,27 @@ async function generateTypes() {
   console.log("📝 Generating TypeScript declarations...");
 
   // Create a temporary tsconfig for building types only
+  // Don't extend the base tsconfig because it has noEmit: true
   const tsconfigBuild = {
-    extends: "./tsconfig.json",
     compilerOptions: {
+      target: "ESNext",
+      module: "ESNext",
+      moduleResolution: "bundler",
+      lib: ["DOM", "DOM.Iterable", "ESNext"],
+      jsx: "react-jsx",
       declaration: true,
       declarationMap: false,
       emitDeclarationOnly: true,
       outDir: "./dist",
       rootDir: "./src",
       skipLibCheck: true,
-      noEmit: false,
+      strict: true,
+      esModuleInterop: true,
+      forceConsistentCasingInFileNames: true,
+      resolveJsonModule: true,
+      isolatedModules: true,
+      allowSyntheticDefaultImports: true,
+      baseUrl: ".",
     },
     include: ["src"],
     exclude: ["node_modules", "**/*.stories.*", "**/*.test.*", "dist", ".rollup.cache"],
@@ -34,6 +45,7 @@ async function generateTypes() {
 
   try {
     // Run TypeScript compiler
+    console.log("Running tsc with tsconfig.build.json...");
     execSync("npx tsc --project tsconfig.build.json", {
       stdio: "inherit",
       cwd: rootDir,

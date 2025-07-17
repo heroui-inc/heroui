@@ -17,7 +17,7 @@ export const buttonVariants = tv({
     // sizing
     "px-4",
     // cursor
-    "cursor-pointer",
+    "cursor-interactive",
     // icon
     "[&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:my-0.5 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:self-center sm:[&_svg]:my-1 sm:[&_svg]:size-4",
     // pending

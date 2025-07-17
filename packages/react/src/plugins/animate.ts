@@ -151,6 +151,7 @@ export const animationThemeValues = {
   }),
   animationTimingFunction: ({theme}: {theme: (path: string) => any}) => ({
     ...theme("transitionTimingFunction"),
+    spring: "cubic-bezier(0.155, 1.105, 0.295, 1.12)",
   }),
   animationFillMode: {
     none: "none",

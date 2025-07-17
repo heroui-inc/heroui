@@ -19,6 +19,9 @@
 :root {
   /* Your values */
   /* --radius: 2.5rem; */
+
+  /* Use OS-native cursor for interactive elements (macOS style) */
+  /* --cursor: default; */
 }
 
 /* Dark theme overrides sing data-theme or class */
@@ -26,4 +29,5 @@
 .dark {
   /* Your values */
   /* --radius: 0.5rem; */
+  /* --cursor: default; */
 }

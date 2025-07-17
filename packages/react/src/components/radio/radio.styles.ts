@@ -6,7 +6,7 @@ import {focusRingClasses} from "../../utils/compose";
 
 export const radioVariants = tv({
   slots: {
-    base: "group flex cursor-pointer items-center gap-3",
+    base: "cursor-interactive group flex items-center gap-3",
     wrapper: [
       "relative inline-flex h-4 w-4 shrink-0 items-center justify-center",
       "rounded-full border-2",

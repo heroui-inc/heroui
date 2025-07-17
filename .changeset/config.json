@@ -12,7 +12,7 @@
   "access": "public",
   "baseBranch": "canary",
   "updateInternalDependencies": "patch",
-  "ignore": ["@heroui/docs", "@heroui/storybook"],
+  "ignore": ["@heroui/docs", "@heroui/storybook", "@heroui/vitest"],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   }

@@ -7,7 +7,7 @@ import {ariaDisabledClasses, focusRingClasses} from "../../utils/compose";
 
 export const linkVariants = tv({
   base: [
-    "text-link relative inline-flex h-fit cursor-pointer items-center gap-1",
+    "text-link cursor-interactive relative inline-flex h-fit items-center gap-1",
     "decoration-link/50 underline-offset-4 transition-all hover:underline",
     focusRingClasses,
     ariaDisabledClasses,

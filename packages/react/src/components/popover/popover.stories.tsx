@@ -167,3 +167,40 @@ export const WithCustomContent = {
   args: defaultArgs,
   render: TemplateWithCustomContent,
 };
+
+const SpringAnimationTemplate = (props: PopoverContentProps) => (
+  <div className="flex flex-col items-center gap-8 p-8">
+    <h1 className="text-xl font-semibold">Popover with Spring Animation</h1>
+    <p className="text-muted-foreground text-sm">
+      The popover now uses a spring easing function for a more dynamic feel
+    </p>
+
+    <div className="flex items-center gap-8">
+      <Popover.Root>
+        <Button>Click for Spring Animation</Button>
+        <Popover.Content {...props}>
+          <Popover.Dialog>
+            <Popover.Arrow />
+            <Popover.Heading>Spring Animation 🎉</Popover.Heading>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Notice the subtle bounce effect when the popover appears and disappears.
+            </p>
+            <p className="text-muted-foreground mt-4 text-xs">
+              Easing: cubic-bezier(0.155, 1.105, 0.295, 1.12)
+            </p>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover.Root>
+    </div>
+
+    <div className="text-muted-foreground space-y-1 text-xs">
+      <p>Animation classes applied:</p>
+      <code className="bg-surface rounded px-2 py-1 text-xs">ease-spring duration-200</code>
+    </div>
+  </div>
+);
+
+export const SpringAnimation = {
+  args: defaultArgs,
+  render: SpringAnimationTemplate,
+};

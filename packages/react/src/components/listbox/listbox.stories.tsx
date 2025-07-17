@@ -200,6 +200,43 @@ export const SimpleList: Story = {
   ),
 };
 
+export const CustomCheckIcon: Story = {
+  render: () => (
+    <ListBox.Root aria-label="Options with custom check" selectionMode="single">
+      <ListBox.Item id="new">
+        {({isSelected}) => (
+          <>
+            New file
+            <ListBox.ItemIndicator isSelected={isSelected}>
+              <Icon className="size-4" icon="gravity-ui:check" />
+            </ListBox.ItemIndicator>
+          </>
+        )}
+      </ListBox.Item>
+      <ListBox.Item id="open">
+        {({isSelected}) => (
+          <>
+            Open
+            <ListBox.ItemIndicator isSelected={isSelected}>
+              <Icon className="size-4" icon="gravity-ui:check" />
+            </ListBox.ItemIndicator>
+          </>
+        )}
+      </ListBox.Item>
+      <ListBox.Item id="save">
+        {({isSelected}) => (
+          <>
+            Save
+            <ListBox.ItemIndicator isSelected={isSelected}>
+              <Icon className="size-4" icon="gravity-ui:check" />
+            </ListBox.ItemIndicator>
+          </>
+        )}
+      </ListBox.Item>
+    </ListBox.Root>
+  ),
+};
+
 export const Controlled: Story = {
   render: () => {
     const [selected, setSelected] = React.useState<Set<React.Key>>(new Set(["2"]));

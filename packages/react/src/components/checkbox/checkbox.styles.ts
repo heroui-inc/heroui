@@ -4,7 +4,7 @@ import {tv} from "tailwind-variants";
 
 export const checkboxVariants = tv({
   slots: {
-    base: "group flex cursor-pointer items-center gap-3",
+    base: "cursor-interactive group flex items-center gap-3",
     wrapper: [
       "relative inline-flex h-4 w-4 shrink-0 items-center justify-center",
       "rounded-[5px]",

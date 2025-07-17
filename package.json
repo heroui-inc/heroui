@@ -1,7 +1,7 @@
 {
   "name": "heroui",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.0.0-alpha.3",
   "license": "MIT",
   "author": {
     "name": "HeroUI",
@@ -30,8 +30,10 @@
     "typecheck:docs": "turbo typecheck --filter=@heroui/docs",
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
     "typecheck:storybook": "turbo typecheck --filter=@heroui/storybook",
+    "changeset:alpha": "changeset pre enter alpha",
     "changeset:canary": "changeset pre enter canary",
     "changeset:beta": "changeset pre enter beta",
+    "changeset:exit": "changeset pre exit",
     "version": "changeset version",
     "release": "changeset publish",
     "version:canary": "changeset version --snapshot canary",
@@ -42,6 +44,7 @@
     "postinstall": "husky"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.29.2",
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
@@ -52,6 +55,7 @@
     "@types/node": "22.14.1",
     "@typescript-eslint/eslint-plugin": "8.31.0",
     "@typescript-eslint/parser": "8.31.0",
+    "clean-package": "2.2.0",
     "commitlint-plugin-function-rules": "4.0.1",
     "eslint": "9.25.1",
     "eslint-config-next": "15.3.1",

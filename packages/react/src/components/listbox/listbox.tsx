@@ -6,7 +6,6 @@ import type {
   ListBoxProps as ListBoxPrimitiveProps,
 } from "react-aria-components";
 
-import {Icon} from "@iconify/react";
 import React from "react";
 import {
   Collection,
@@ -95,7 +94,7 @@ const ListBoxItemIndicator = React.forwardRef<HTMLSpanElement, ListBoxItemIndica
         className={slots?.itemIndicator({className})}
         data-visible={isSelected || undefined}
       >
-        {children || <Icon className="size-4" icon="gravity-ui:check" />}
+        {children}
       </span>
     );
   },

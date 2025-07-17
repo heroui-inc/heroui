@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 
 import babel from "@rollup/plugin-babel";
-import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import {defineConfig} from "rollup";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
@@ -46,7 +45,6 @@ const plugins = [
   resolve({
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   }),
-  commonjs(),
   babel({
     babelHelpers: "bundled",
     presets: [["@babel/preset-react", {runtime: "automatic"}], "@babel/preset-typescript"],
@@ -70,9 +68,16 @@ export default defineConfig([
       preserveModules: true,
       preserveModulesRoot: "src",
       sourcemap: false, // Disable sourcemaps
+      // Optimize for tree shaking
+      exports: "named",
+      hoistTransitiveImports: false,
     },
     external,
     plugins,
+    treeshake: {
+      moduleSideEffects: false,
+      propertyReadSideEffects: false,
+    },
     onwarn(warning, warn) {
       // Ignore "use client" directive warnings
       if (warning.code === "MODULE_LEVEL_DIRECTIVE") {

@@ -336,6 +336,32 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Map Figma component pieces to React Aria components and plan the compound structure
    - Plan how to adapt it to follow Radix UI's compound component pattern
 
+   **Component Creation - ALWAYS USE THE SCRIPT**:
+   ```bash
+   # Navigate to packages/react directory
+   cd packages/react
+   
+   # Use the add:component script
+   pnpm add:component ComponentName
+   
+   # Examples:
+   pnpm add:component Menu
+   pnpm add:component Select
+   pnpm add:component DatePicker
+   ```
+   
+   This script will:
+   - Create all necessary files with proper structure
+   - Add the export to `src/components/index.ts`
+   - Generate boilerplate following HeroUI patterns
+   - Set up the component with TypeScript and proper exports
+   
+   After creating the component:
+   ```bash
+   # Build to update package.json exports automatically
+   pnpm build
+   ```
+
    **Implementation Steps**:
    - Study existing HeroUI components (accordion, alert) to understand the compound pattern
    - Use React Aria Components as the foundation for accessibility

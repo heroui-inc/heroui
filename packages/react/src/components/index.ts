@@ -23,7 +23,6 @@ export * from "./slider";
 export * from "./text-field";
 export * from "./text";
 export * from "./input-otp";
-export * from "./theme-switcher";
 
 //  ===================================
 //  Icons

@@ -1,23 +1,12 @@
 {
   "name": "@heroui/react",
-  "version": "3.0.0",
-  "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS.",
+  "version": "3.0.0-alpha.3",
+  "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS 4.0.",
   "license": "MIT",
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./plugin": "./dist/plugin.js",
-    "./theme": "./dist/theme.js",
-    "./package.json": "./package.json"
-  },
   "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "keywords": [
@@ -30,11 +19,7 @@
     "react ui"
   ],
   "files": [
-    "dist",
-    "src/plugin.ts",
-    "src/themes",
-    "heroui-theme.css",
-    "index.css"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -49,11 +34,17 @@
   },
   "scripts": {
     "dev": "rollup -c rollup.config.mjs --watch",
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build.mjs --tsc",
     "build:fast": "node scripts/build.mjs",
+    "add:component": "node scripts/add-component.mjs",
+    "test:tree-shaking": "node scripts/test-tree-shaking.mjs",
+    "test:tree": "pnpm run test:tree-shaking",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepack": "node scripts/generate-exports.mjs && clean-package",
+    "postpack": "clean-package restore"
   },
+  "clean-package": "./clean-package.config.json",
   "dependencies": {
     "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.7",
@@ -67,7 +58,6 @@
     "@babel/core": "7.28.0",
     "@babel/preset-react": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
-    "tw-animate-css": "^1.3.5",
     "@heroui/standard": "workspace:*",
     "@iconify/react": "5.2.1",
     "@rollup/plugin-babel": "6.0.4",
@@ -94,5 +84,109 @@
     "react-dom": ">=19.0.0",
     "tailwindcss": ">=4.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./plugin": "./dist/plugin.js",
+    "./package.json": "./package.json",
+    "./accordion": {
+      "import": "./dist/components/accordion/index.js",
+      "types": "./dist/components/accordion/index.d.ts"
+    },
+    "./alert": {
+      "import": "./dist/components/alert/index.js",
+      "types": "./dist/components/alert/index.d.ts"
+    },
+    "./avatar": {
+      "import": "./dist/components/avatar/index.js",
+      "types": "./dist/components/avatar/index.d.ts"
+    },
+    "./button": {
+      "import": "./dist/components/button/index.js",
+      "types": "./dist/components/button/index.d.ts"
+    },
+    "./calendar": {
+      "import": "./dist/components/calendar/index.js",
+      "types": "./dist/components/calendar/index.d.ts"
+    },
+    "./card": {
+      "import": "./dist/components/card/index.js",
+      "types": "./dist/components/card/index.d.ts"
+    },
+    "./checkbox": {
+      "import": "./dist/components/checkbox/index.js",
+      "types": "./dist/components/checkbox/index.d.ts"
+    },
+    "./chip": {
+      "import": "./dist/components/chip/index.js",
+      "types": "./dist/components/chip/index.d.ts"
+    },
+    "./description": {
+      "import": "./dist/components/description/index.js",
+      "types": "./dist/components/description/index.d.ts"
+    },
+    "./fieldset": {
+      "import": "./dist/components/fieldset/index.js",
+      "types": "./dist/components/fieldset/index.d.ts"
+    },
+    "./form": {
+      "import": "./dist/components/form/index.js",
+      "types": "./dist/components/form/index.d.ts"
+    },
+    "./input-otp": {
+      "import": "./dist/components/input-otp/index.js",
+      "types": "./dist/components/input-otp/index.d.ts"
+    },
+    "./label": {
+      "import": "./dist/components/label/index.js",
+      "types": "./dist/components/label/index.d.ts"
+    },
+    "./link": {
+      "import": "./dist/components/link/index.js",
+      "types": "./dist/components/link/index.d.ts"
+    },
+    "./listbox": {
+      "import": "./dist/components/listbox/index.js",
+      "types": "./dist/components/listbox/index.d.ts"
+    },
+    "./popover": {
+      "import": "./dist/components/popover/index.js",
+      "types": "./dist/components/popover/index.d.ts"
+    },
+    "./radio": {
+      "import": "./dist/components/radio/index.js",
+      "types": "./dist/components/radio/index.d.ts"
+    },
+    "./slider": {
+      "import": "./dist/components/slider/index.js",
+      "types": "./dist/components/slider/index.d.ts"
+    },
+    "./spinner": {
+      "import": "./dist/components/spinner/index.js",
+      "types": "./dist/components/spinner/index.d.ts"
+    },
+    "./switch": {
+      "import": "./dist/components/switch/index.js",
+      "types": "./dist/components/switch/index.d.ts"
+    },
+    "./tabs": {
+      "import": "./dist/components/tabs/index.js",
+      "types": "./dist/components/tabs/index.d.ts"
+    },
+    "./text": {
+      "import": "./dist/components/text/index.js",
+      "types": "./dist/components/text/index.d.ts"
+    },
+    "./text-field": {
+      "import": "./dist/components/text-field/index.js",
+      "types": "./dist/components/text-field/index.d.ts"
+    },
+    "./tooltip": {
+      "import": "./dist/components/tooltip/index.js",
+      "types": "./dist/components/tooltip/index.d.ts"
+    }
+  }
 }

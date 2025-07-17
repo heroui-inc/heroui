@@ -74,3 +74,9 @@ storybook-static
 # misc
 .DS_Store
 *.pem
+
+# bundle size reports
+bundle-sizes.json
+
+# clean-package backups
+.package.json.backup

@@ -6,7 +6,7 @@ export const listboxVariants = tv({
   slots: {
     base: "relative w-full min-w-[250px] max-w-[360px]",
     item: [
-      "group relative flex min-h-9 w-full cursor-pointer items-center gap-3 rounded-xl px-2 py-1.5",
+      "cursor-interactive group relative flex min-h-9 w-full items-center gap-3 rounded-xl px-2 py-1.5",
       "outline-none transition-colors",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "data-[focused]:outline-none",

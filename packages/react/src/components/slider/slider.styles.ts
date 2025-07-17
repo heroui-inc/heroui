@@ -24,7 +24,7 @@ export const sliderVariants = tv({
       "bg-gray-5",
       "rounded-full",
       "grow",
-      "cursor-pointer",
+      "cursor-interactive",
       "data-[disabled]:cursor-not-allowed",
       "data-[disabled]:opacity-50",
       // Horizontal

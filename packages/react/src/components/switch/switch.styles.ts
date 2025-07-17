@@ -6,7 +6,7 @@ import {focusRingClasses} from "../../utils/compose";
 
 export const switchVariants = tv({
   slots: {
-    base: "group inline-flex cursor-pointer items-center gap-3",
+    base: "cursor-interactive group inline-flex items-center gap-3",
     control: [
       "relative inline-flex h-6 w-11 shrink-0 items-center",
       "rounded-full border-2",
