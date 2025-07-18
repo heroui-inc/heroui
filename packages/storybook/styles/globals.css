@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@plugin "@heroui/react/plugin";
+@plugin "@heroui/react/plugin" {
+  logs: false;
+}
 
 /* With advanced options */
 /* 
@@ -9,6 +11,7 @@
   default: true;
   prefersdark: true;
   name: "dark";
+  logs: false;
 }
 */
 

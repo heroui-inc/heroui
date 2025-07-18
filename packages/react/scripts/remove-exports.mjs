@@ -9,22 +9,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 
 async function removeExports() {
-  console.log("🔧 Removing exports from package.json...");
+  console.log("🔧 Restoring base exports in package.json...");
 
   const packageJsonPath = path.join(rootDir, "package.json");
   const packageJson = await fs.readJson(packageJsonPath);
 
-  // Remove exports field
-  if (packageJson.exports) {
-    delete packageJson.exports;
+  // Restore base exports only (remove component exports)
+  const baseExports = {
+    ".": {
+      import: "./src/index.ts",
+    },
+    "./plugin": "./src/plugin.ts",
+    "./package.json": "./package.json",
+  };
 
-    // Write updated package.json
-    await fs.writeJson(packageJsonPath, packageJson, {spaces: 2});
+  packageJson.exports = baseExports;
 
-    console.log("✅ Removed exports from package.json");
-  } else {
-    console.log("ℹ️  No exports field found in package.json");
-  }
+  // Write updated package.json
+  await fs.writeJson(packageJsonPath, packageJson, {spaces: 2});
+
+  console.log("✅ Restored base exports in package.json");
 }
 
 removeExports().catch((error) => {

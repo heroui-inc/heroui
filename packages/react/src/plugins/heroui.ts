@@ -8,6 +8,9 @@ import type {PluginAPI} from "tailwindcss/plugin";
 
 import plugin from "tailwindcss/plugin";
 
+import {Logger} from "../utils/logger";
+import {HEROUI_VERSION} from "../version";
+
 import {animationThemeValues, setupAnimations} from "./animate";
 
 // Type for CSS-in-JS objects that Tailwind accepts
@@ -25,12 +28,58 @@ interface PluginOptions {
   // For selecting built-in themes
   themes?: string | false | "all";
   prefix?: string;
+  // Control logging output
+  logs?: boolean;
   // For creating custom themes (legacy mode)
   name?: string;
   default?: boolean;
   prefersdark?: boolean;
   colorScheme?: "light" | "dark";
   [key: string]: any; // For CSS variables
+}
+
+/**
+ * Get the package version
+ */
+function getPackageVersion(): {
+  version: string;
+  isPrerelease: boolean;
+  prereleaseType?: string;
+} {
+  const version = HEROUI_VERSION;
+
+  // Check if it's a prerelease version (alpha, beta, rc, etc.)
+  const isPrerelease = version.includes("-");
+  let prereleaseType: string | undefined;
+
+  if (isPrerelease) {
+    if (version.includes("-alpha")) prereleaseType = "alpha";
+    else if (version.includes("-beta")) prereleaseType = "beta";
+    else if (version.includes("-rc")) prereleaseType = "release candidate";
+    else prereleaseType = "prerelease";
+  }
+
+  return {isPrerelease, prereleaseType, version};
+}
+
+/**
+ * Show prerelease warning if applicable
+ */
+function handlePrereleaseWarning(logger: Logger): void {
+  const {isPrerelease, prereleaseType, version} = getPackageVersion();
+
+  if (isPrerelease) {
+    logger.newline();
+    logger.divider("=", 80);
+    logger.warn("IMPORTANT!");
+    logger.warn(`You are using a ${prereleaseType} version [@heroui/react@v${version}]`);
+    logger.warn("This version may contain bugs and breaking changes.");
+    logger.warn("Use in production at your own risk!");
+    logger.divider("=", 80);
+    logger.newline();
+  }
+
+  logger.newline();
 }
 
 // Default theme definitions
@@ -154,6 +203,14 @@ function parseThemes(themesOption: string | false | "all" | undefined): ParsedTh
 const heroUI = plugin.withOptions(
   function (options: PluginOptions = {}) {
     return function ({addBase, addUtilities, addVariant, matchUtilities, theme}: PluginAPI) {
+      const {logs = process.env["NODE_ENV"] !== "production"} = options;
+
+      // Initialize logger
+      const logger = new Logger({enabled: logs});
+
+      // Handle prerelease warning and version info
+      handlePrereleaseWarning(logger);
+
       // Check if this is a custom theme creation
       if (options.name) {
         // Custom theme mode

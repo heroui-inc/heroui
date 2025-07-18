@@ -1,6 +1,6 @@
 {
   "name": "@heroui/react",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.6",
   "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS 4.0.",
   "license": "MIT",
   "sideEffects": false,
@@ -23,6 +23,13 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./plugin": "./src/plugin.ts",
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",

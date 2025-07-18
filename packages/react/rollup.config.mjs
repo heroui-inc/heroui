@@ -9,6 +9,18 @@ import postcss from "rollup-plugin-postcss";
 
 const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
 
+// Custom plugin to replace version placeholder
+const replaceVersion = () => ({
+  name: "replace-version",
+  transform(code, id) {
+    if (id.includes("version.ts") || id.includes("version.js")) {
+      return code.replace("__HEROUI_VERSION__", packageJson.version);
+    }
+
+    return null;
+  },
+});
+
 // Get all component directories
 const componentDirs = fs.readdirSync("./src/components").filter((file) => {
   const fullPath = path.join("./src/components", file);
@@ -45,6 +57,7 @@ const plugins = [
   resolve({
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   }),
+  replaceVersion(),
   babel({
     babelHelpers: "bundled",
     presets: [["@babel/preset-react", {runtime: "automatic"}], "@babel/preset-typescript"],
@@ -93,6 +106,7 @@ export default defineConfig([
       file: "dist/plugin.js",
       format: "es",
       sourcemap: false, // Disable sourcemaps
+      exports: "default",
     },
     external: [],
     plugins,
