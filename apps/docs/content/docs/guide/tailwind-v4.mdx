@@ -34,15 +34,17 @@ TailwindCSS v4 is now available since 2.8.0! This guide will help you migrate yo
 
 Since Tailwind v4 favors a CSS-first approach, `tailwind.config.js` will not be required.
 
-Create `hero.ts` file
+Create `hero.ts` file to export `heroui` plugin.
 
 ```tsx
 // hero.ts
 import { heroui } from "@heroui/react";
+// or import from theme package if you are using individual packages.
+// import { heroui } from "@heroui/theme";
 export default heroui();
 ```
 
-Update your main css file
+Update your main css file as below
 
 ```diff-css
 /* your main css file */
@@ -73,6 +75,9 @@ In Tailwind v4, `tailwind.config.js` is still supported for backward compatibili
 ```
 
 ### Update PostCSS Configuration
+
+- `tailwindcss` was a PostCSS plugin in v3 and now it is in `@tailwindcss/postcss` package.
+- `autoprefixer` is no longer required as prefixing is handled automatically.
 
 ```diff-js
 // postcss.config.js
@@ -108,7 +113,7 @@ export default defineConfig({
 ## Verification
 
 After migration, verify that:
-1. Your styles are being applied correctly
+1. Your styles are being applied correctly. Make sure all TailwindCSS v4 breaking changes are handled
 2. The build process completes without errors
 3. HeroUI components render as expected
 
