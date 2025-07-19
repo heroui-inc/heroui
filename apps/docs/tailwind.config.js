@@ -108,7 +108,7 @@ module.exports = {
             },
             "h2 small": {
               fontSize: 'var(--text-lg);',
-              lineHeight: 'var(--text-lg--line-height););',
+              lineHeight: 'var(--text-lg--line-height);',
             },
             "h3 small": {
               fontSize: 'var(--text-base); ',
