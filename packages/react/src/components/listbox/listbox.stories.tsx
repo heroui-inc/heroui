@@ -7,20 +7,20 @@ import {Avatar} from "../avatar";
 
 import * as ListBox from "./listbox";
 
-const meta: Meta<typeof ListBox.Root> = {
+const meta: Meta<typeof ListBox> = {
   title: "Components/ListBox",
-  component: ListBox.Root,
+  component: ListBox,
   parameters: {
     layout: "centered",
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof ListBox.Root>;
+type Story = StoryObj<typeof ListBox>;
 
 export const Default: Story = {
   render: () => (
-    <ListBox.Root aria-label="Users" selectionMode="single">
+    <ListBox aria-label="Users" selectionMode="single">
       <ListBox.Item id="1" textValue="Bob">
         <Avatar.Root size="sm">
           <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
@@ -54,13 +54,13 @@ export const Default: Story = {
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
       </ListBox.Item>
-    </ListBox.Root>
+    </ListBox>
   ),
 };
 
 export const DangerVariant: Story = {
   render: () => (
-    <ListBox.Root aria-label="Delete users" selectionMode="single" variant="danger">
+    <ListBox aria-label="Delete users" selectionMode="single" variant="danger">
       <ListBox.Item id="1" textValue="Bob">
         <Avatar.Root size="sm">
           <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
@@ -94,13 +94,13 @@ export const DangerVariant: Story = {
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
       </ListBox.Item>
-    </ListBox.Root>
+    </ListBox>
   ),
 };
 
 export const WithDisabledItems: Story = {
   render: () => (
-    <ListBox.Root aria-label="Users" selectionMode="single">
+    <ListBox aria-label="Users" selectionMode="single">
       <ListBox.Item id="1" textValue="Bob">
         <Avatar.Root size="sm">
           <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
@@ -134,13 +134,13 @@ export const WithDisabledItems: Story = {
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
       </ListBox.Item>
-    </ListBox.Root>
+    </ListBox>
   ),
 };
 
 export const MultiSelect: Story = {
   render: () => (
-    <ListBox.Root aria-label="Select team members" selectionMode="multiple">
+    <ListBox aria-label="Select team members" selectionMode="multiple">
       <ListBox.Item id="1" textValue="Bob">
         <Avatar.Root size="sm">
           <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
@@ -181,13 +181,13 @@ export const MultiSelect: Story = {
           <span className="text-xs text-neutral-500">sarah@email.com</span>
         </div>
       </ListBox.Item>
-    </ListBox.Root>
+    </ListBox>
   ),
 };
 
 export const SimpleList: Story = {
   render: () => (
-    <ListBox.Root aria-label="Options" selectionMode="single">
+    <ListBox aria-label="Options" selectionMode="single">
       <ListBox.Item id="new">New file</ListBox.Item>
       <ListBox.Item id="open">Open</ListBox.Item>
       <ListBox.Item id="save">Save</ListBox.Item>
@@ -196,13 +196,13 @@ export const SimpleList: Story = {
         Print
       </ListBox.Item>
       <ListBox.Item id="exit">Exit</ListBox.Item>
-    </ListBox.Root>
+    </ListBox>
   ),
 };
 
 export const CustomCheckIcon: Story = {
   render: () => (
-    <ListBox.Root aria-label="Options with custom check" selectionMode="single">
+    <ListBox aria-label="Options with custom check" selectionMode="single">
       <ListBox.Item id="new">
         {({isSelected}) => (
           <>
@@ -233,7 +233,7 @@ export const CustomCheckIcon: Story = {
           </>
         )}
       </ListBox.Item>
-    </ListBox.Root>
+    </ListBox>
   ),
 };
 
@@ -243,7 +243,7 @@ export const Controlled: Story = {
 
     return (
       <div className="space-y-4">
-        <ListBox.Root
+        <ListBox
           aria-label="Users"
           selectedKeys={selected}
           selectionMode="single"
@@ -279,7 +279,7 @@ export const Controlled: Story = {
               <span className="text-xs text-neutral-500">martha@email.com</span>
             </div>
           </ListBox.Item>
-        </ListBox.Root>
+        </ListBox>
         <p className="text-sm text-neutral-500">
           Selected: {selected.size > 0 ? Array.from(selected).join(", ") : "None"}
         </p>

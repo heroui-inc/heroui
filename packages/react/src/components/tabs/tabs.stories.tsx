@@ -11,19 +11,19 @@ const meta = {
       options: ["default", "line"],
     },
   },
-  component: Tabs.Root,
+  component: Tabs,
   parameters: {
     layout: "centered",
   },
   title: "Components/Tabs",
-} satisfies Meta<typeof Tabs.Root>;
+} satisfies Meta<typeof Tabs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const DefaultTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs.Root {...args}>
+    <Tabs {...args}>
       <Tabs.TabList aria-label="Example tabs">
         <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
         <Tabs.Tab id="tab2">Tab 2</Tabs.Tab>
@@ -32,7 +32,7 @@ const DefaultTemplate = (args: Story["args"]) => (
       <Tabs.TabPanel id="tab1">Content for tab 1</Tabs.TabPanel>
       <Tabs.TabPanel id="tab2">Content for tab 2</Tabs.TabPanel>
       <Tabs.TabPanel id="tab3">Content for tab 3</Tabs.TabPanel>
-    </Tabs.Root>
+    </Tabs>
   </div>
 );
 
@@ -70,7 +70,7 @@ export const VerticalSurface: Story = {
 
 const DisabledTabTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs.Root {...args}>
+    <Tabs {...args}>
       <Tabs.TabList aria-label="Example tabs with disabled tab">
         <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
         <Tabs.Tab isDisabled id="tab2">
@@ -81,7 +81,7 @@ const DisabledTabTemplate = (args: Story["args"]) => (
       <Tabs.TabPanel id="tab1">Content for tab 1</Tabs.TabPanel>
       <Tabs.TabPanel id="tab2">Content for tab 2</Tabs.TabPanel>
       <Tabs.TabPanel id="tab3">Content for tab 3</Tabs.TabPanel>
-    </Tabs.Root>
+    </Tabs>
   </div>
 );
 
@@ -94,7 +94,7 @@ export const WithDisabledTab: Story = {
 
 const DefaultSelectedTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs.Root defaultSelectedKey="tab2" {...args}>
+    <Tabs defaultSelectedKey="tab2" {...args}>
       <Tabs.TabList aria-label="Example tabs with default selection">
         <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
         <Tabs.Tab id="tab2">Tab 2 (Default)</Tabs.Tab>
@@ -103,7 +103,7 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
       <Tabs.TabPanel id="tab1">Content for tab 1</Tabs.TabPanel>
       <Tabs.TabPanel id="tab2">Content for tab 2</Tabs.TabPanel>
       <Tabs.TabPanel id="tab3">Content for tab 3</Tabs.TabPanel>
-    </Tabs.Root>
+    </Tabs>
   </div>
 );
 

@@ -7,11 +7,11 @@ import {Field, FieldGroup, Fieldset, Legend} from "../fieldset";
 import {Label} from "../label";
 import {Text} from "../text";
 
-import {Checkbox} from "./checkbox";
+import {Checkbox} from "./index";
 
-const meta: Meta<typeof Checkbox.Root> = {
+const meta: Meta<typeof Checkbox> = {
   title: "Components/Checkbox",
-  component: Checkbox.Root,
+  component: Checkbox,
   parameters: {
     layout: "centered",
   },
@@ -19,14 +19,14 @@ const meta: Meta<typeof Checkbox.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Checkbox.Root>;
+type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
   render: () => (
     <div className="flex items-center gap-3">
-      <Checkbox.Root id="subscribe">
+      <Checkbox id="subscribe">
         <Checkbox.Indicator />
-      </Checkbox.Root>
+      </Checkbox>
       <Label htmlFor="subscribe">Subscribe to newsletter</Label>
     </div>
   ),
@@ -34,20 +34,20 @@ export const Default: Story = {
 
 export const WithLabelAsChild: Story = {
   render: () => (
-    <Checkbox.Root>
+    <Checkbox>
       <Checkbox.Indicator />
       <Label>Subscribe to newsletter</Label>
-    </Checkbox.Root>
+    </Checkbox>
   ),
 };
 
 export const WithLabelAndDescription: Story = {
   render: () => (
-    <Checkbox.Root>
+    <Checkbox>
       <Checkbox.Indicator />
       <Label>Postal mail</Label>
       <Description>Receive notifications via postal mail</Description>
-    </Checkbox.Root>
+    </Checkbox>
   ),
 };
 
@@ -65,82 +65,82 @@ export const DesignStates: Story = {
         <div className="text-muted-foreground text-xs">Disabled</div>
 
         {/* Unselected row */}
-        <Checkbox.Root>
+        <Checkbox>
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
         <div className="[&>*]:data-[hovered=true]:border-accent-hover">
-          <Checkbox.Root data-hovered>
+          <Checkbox data-hovered>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
         <div className="[&>*]:data-[pressed=true]:scale-[0.97]">
-          <Checkbox.Root data-pressed>
+          <Checkbox data-pressed>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
         <div className="[&>*]:data-[focus-visible=true]:border-2">
-          <Checkbox.Root data-focus-visible>
+          <Checkbox data-focus-visible>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
-        <Checkbox.Root isInvalid>
+        <Checkbox isInvalid>
           <Checkbox.Indicator />
-        </Checkbox.Root>
-        <Checkbox.Root isDisabled>
+        </Checkbox>
+        <Checkbox isDisabled>
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
 
         {/* Selected row */}
-        <Checkbox.Root defaultSelected>
+        <Checkbox defaultSelected>
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
         <div className="[&>*]:data-[hovered=true]:bg-accent-hover">
-          <Checkbox.Root data-hovered defaultSelected>
+          <Checkbox data-hovered defaultSelected>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
         <div className="[&>*]:data-[pressed=true]:scale-[0.97]">
-          <Checkbox.Root data-pressed defaultSelected>
+          <Checkbox data-pressed defaultSelected>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
         <div className="[&>*]:data-[focus-visible=true]:border-2">
-          <Checkbox.Root data-focus-visible defaultSelected>
+          <Checkbox data-focus-visible defaultSelected>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
-        <Checkbox.Root defaultSelected isInvalid>
+        <Checkbox defaultSelected isInvalid>
           <Checkbox.Indicator />
-        </Checkbox.Root>
-        <Checkbox.Root defaultSelected isDisabled>
+        </Checkbox>
+        <Checkbox defaultSelected isDisabled>
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
 
         {/* Indeterminate row */}
-        <Checkbox.Root isIndeterminate>
+        <Checkbox isIndeterminate>
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
         <div className="[&>*]:data-[hovered=true]:bg-accent-hover">
-          <Checkbox.Root data-hovered isIndeterminate>
+          <Checkbox data-hovered isIndeterminate>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
         <div className="[&>*]:data-[pressed=true]:scale-[0.97]">
-          <Checkbox.Root data-pressed isIndeterminate>
+          <Checkbox data-pressed isIndeterminate>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
         <div className="[&>*]:data-[focus-visible=true]:border-2">
-          <Checkbox.Root data-focus-visible isIndeterminate>
+          <Checkbox data-focus-visible isIndeterminate>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
         </div>
-        <Checkbox.Root isIndeterminate isInvalid>
+        <Checkbox isIndeterminate isInvalid>
           <Checkbox.Indicator />
-        </Checkbox.Root>
-        <Checkbox.Root isDisabled isIndeterminate>
+        </Checkbox>
+        <Checkbox isDisabled isIndeterminate>
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
       </div>
     </div>
   ),
@@ -153,21 +153,21 @@ export const States: Story = {
         <h3 className="mb-3 text-sm font-medium">Selection States</h3>
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <Checkbox.Root id="unchecked">
+            <Checkbox id="unchecked">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="unchecked">Unchecked</Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root defaultSelected id="checked">
+            <Checkbox defaultSelected id="checked">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="checked">Checked</Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root isIndeterminate id="indeterminate">
+            <Checkbox isIndeterminate id="indeterminate">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="indeterminate">Indeterminate</Label>
           </div>
         </div>
@@ -177,33 +177,33 @@ export const States: Story = {
         <h3 className="mb-3 text-sm font-medium">Interactive States</h3>
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <Checkbox.Root isDisabled id="disabled">
+            <Checkbox isDisabled id="disabled">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label disabled htmlFor="disabled">
               Disabled
             </Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root defaultSelected isDisabled id="disabled-checked">
+            <Checkbox defaultSelected isDisabled id="disabled-checked">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label disabled htmlFor="disabled-checked">
               Disabled and checked
             </Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root isDisabled isIndeterminate id="disabled-indeterminate">
+            <Checkbox isDisabled isIndeterminate id="disabled-indeterminate">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label disabled htmlFor="disabled-indeterminate">
               Disabled and indeterminate
             </Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root defaultSelected isReadOnly id="readonly">
+            <Checkbox defaultSelected isReadOnly id="readonly">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="readonly">Read only</Label>
           </div>
         </div>
@@ -213,21 +213,21 @@ export const States: Story = {
         <h3 className="mb-3 text-sm font-medium">Validation States</h3>
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <Checkbox.Root isInvalid id="invalid">
+            <Checkbox isInvalid id="invalid">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="invalid">Invalid</Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root defaultSelected isInvalid id="invalid-checked">
+            <Checkbox defaultSelected isInvalid id="invalid-checked">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="invalid-checked">Invalid and checked</Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox.Root isIndeterminate isInvalid id="invalid-indeterminate">
+            <Checkbox isIndeterminate isInvalid id="invalid-indeterminate">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="invalid-indeterminate">Invalid and indeterminate</Label>
           </div>
         </div>
@@ -249,9 +249,9 @@ export const Controlled: Story = {
     return (
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="terms-controlled" isSelected={isSelected} onChange={setIsSelected}>
+          <Checkbox id="terms-controlled" isSelected={isSelected} onChange={setIsSelected}>
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="terms-controlled">I agree to the terms and conditions</Label>
         </div>
         <p className="text-muted-foreground text-sm">
@@ -265,9 +265,9 @@ export const Controlled: Story = {
 export const Uncontrolled: Story = {
   render: () => (
     <div className="flex items-center gap-3">
-      <Checkbox.Root defaultSelected id="marketing">
+      <Checkbox defaultSelected id="marketing">
         <Checkbox.Indicator />
-      </Checkbox.Root>
+      </Checkbox>
       <Label htmlFor="marketing">Receive marketing emails</Label>
     </div>
   ),
@@ -276,9 +276,9 @@ export const Uncontrolled: Story = {
 export const WithExternalLabel: Story = {
   render: () => (
     <div className="flex items-center gap-3">
-      <Checkbox.Root id="terms">
+      <Checkbox id="terms">
         <Checkbox.Indicator />
-      </Checkbox.Root>
+      </Checkbox>
       <Label htmlFor="terms">Accept terms and conditions</Label>
     </div>
   ),
@@ -287,9 +287,9 @@ export const WithExternalLabel: Story = {
 export const WithDescription: Story = {
   render: () => (
     <div className="flex gap-3">
-      <Checkbox.Root className="mt-0.5" id="notifications">
+      <Checkbox className="mt-0.5" id="notifications">
         <Checkbox.Indicator />
-      </Checkbox.Root>
+      </Checkbox>
       <div className="flex flex-col gap-1">
         <Label htmlFor="notifications">Email notifications</Label>
         <Description>Get notified when someone mentions you</Description>
@@ -301,9 +301,9 @@ export const WithDescription: Story = {
 export const WithFieldComponent: Story = {
   render: () => (
     <Field variant="checkbox">
-      <Checkbox.Root>
+      <Checkbox>
         <Checkbox.Indicator />
-      </Checkbox.Root>
+      </Checkbox>
       <div>
         <Label>Email notifications</Label>
         <Description>Get notified when someone mentions you</Description>
@@ -318,24 +318,24 @@ export const CleanFieldsetPattern: Story = {
       <Legend>Preferences</Legend>
       <FieldGroup>
         <Field variant="checkbox">
-          <Checkbox.Root name="marketing">
+          <Checkbox name="marketing">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Marketing emails</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root defaultSelected name="updates">
+          <Checkbox defaultSelected name="updates">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div>
             <Label>Product updates</Label>
             <Description>New features and improvements</Description>
           </div>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root name="security">
+          <Checkbox name="security">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Security alerts</Label>
         </Field>
       </FieldGroup>
@@ -345,16 +345,16 @@ export const CleanFieldsetPattern: Story = {
 
 export const CheckboxOnly: Story = {
   render: () => (
-    <Checkbox.Root aria-label="Select item">
+    <Checkbox aria-label="Select item">
       <Checkbox.Indicator />
-    </Checkbox.Root>
+    </Checkbox>
   ),
 };
 
 export const CustomIcon: Story = {
   render: () => (
     <div className="flex items-center gap-3">
-      <Checkbox.Root id="custom-icon">
+      <Checkbox id="custom-icon">
         <Checkbox.Indicator>
           {(isIndeterminate) =>
             isIndeterminate ? (
@@ -372,7 +372,7 @@ export const CustomIcon: Story = {
             )
           }
         </Checkbox.Indicator>
-      </Checkbox.Root>
+      </Checkbox>
       <Label htmlFor="custom-icon">Custom icon checkbox</Label>
     </div>
   ),
@@ -399,27 +399,27 @@ export const Indeterminate: Story = {
     return (
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3">
-          <Checkbox.Root
+          <Checkbox
             id="select-all"
             isIndeterminate={isIndeterminate}
             isSelected={isAllSelected}
             onChange={handleParentChange}
           >
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="select-all">Select all</Label>
         </div>
         <div className="ml-6 flex flex-col gap-2">
           {allOptions.map((option) => (
             <div key={option} className="flex items-center gap-3">
-              <Checkbox.Root
+              <Checkbox
                 id={option}
                 isSelected={checkedItems.includes(option)}
                 value={option}
                 onChange={(isSelected) => handleChildChange(option, isSelected)}
               >
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor={option}>
                 {option.charAt(0).toUpperCase() + option.slice(1).replace(/\d+/, " $&")}
               </Label>
@@ -444,9 +444,9 @@ export const FormIntegration: Story = {
     return (
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="newsletter" name="subscribe" value="yes">
+          <Checkbox id="newsletter" name="subscribe" value="yes">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="newsletter">Subscribe to our newsletter</Label>
         </div>
         <button
@@ -464,9 +464,9 @@ export const Required: Story = {
   render: () => (
     <form className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
-        <Checkbox.Root isRequired id="agree">
+        <Checkbox isRequired id="agree">
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
         <Label required htmlFor="agree">
           I agree to the terms and conditions
         </Label>
@@ -484,10 +484,10 @@ export const Required: Story = {
 export const RequiredWithChildLabel: Story = {
   render: () => (
     <form className="flex flex-col gap-4">
-      <Checkbox.Root isRequired>
+      <Checkbox isRequired>
         <Checkbox.Indicator />
         <Label required>I agree to the terms and conditions</Label>
-      </Checkbox.Root>
+      </Checkbox>
       <button
         className="bg-accent text-accent-foreground hover:bg-accent-hover rounded-md px-4 py-2"
         type="submit"
@@ -505,27 +505,27 @@ export const WithFieldset: Story = {
       <Text>Select how you&apos;d like to receive updates from us.</Text>
       <FieldGroup>
         <Field variant="checkbox">
-          <Checkbox.Root defaultSelected name="notifications" value="email">
+          <Checkbox defaultSelected name="notifications" value="email">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div>
             <Label>Email notifications</Label>
             <Description>Get updates about your account via email</Description>
           </div>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root name="notifications" value="sms">
+          <Checkbox name="notifications" value="sms">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div>
             <Label>SMS notifications</Label>
             <Description>Receive text messages for important alerts</Description>
           </div>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root defaultSelected name="notifications" value="push">
+          <Checkbox defaultSelected name="notifications" value="push">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div>
             <Label>Push notifications</Label>
             <Description>Get instant updates on your device</Description>

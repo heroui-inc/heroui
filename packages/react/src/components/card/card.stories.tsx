@@ -5,11 +5,11 @@ import React from "react";
 import {Button} from "../button";
 import {Link} from "../link";
 
-import {Card} from "./card";
+import {Card} from "./index";
 
 const meta = {
   title: "Components/Card",
-  component: Card.Root,
+  component: Card,
   parameters: {
     layout: "centered",
   },
@@ -19,7 +19,7 @@ const meta = {
       options: ["1", "2", "3"],
     },
   },
-} satisfies Meta<typeof Card.Root>;
+} satisfies Meta<typeof Card>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -29,7 +29,7 @@ export const Default: Story = {
     className: "w-[400px]",
   },
   render: (args) => (
-    <Card.Root {...args}>
+    <Card {...args}>
       <Card.Header>
         <Card.Title>Card Title</Card.Title>
         <Card.Description>Card description goes here</Card.Description>
@@ -37,7 +37,7 @@ export const Default: Story = {
       <Card.Content>
         <p>This is the card content. You can add any content here.</p>
       </Card.Content>
-    </Card.Root>
+    </Card>
   ),
 };
 
@@ -46,7 +46,7 @@ export const WithFooter: Story = {
     className: "w-[400px]",
   },
   render: (args) => (
-    <Card.Root {...args}>
+    <Card {...args}>
       <Card.Header>
         <Card.Title>Become an Acme Creator!</Card.Title>
         <Card.Description>
@@ -56,7 +56,7 @@ export const WithFooter: Story = {
       <Card.Footer>
         <Button>Call to action</Button>
       </Card.Footer>
-    </Card.Root>
+    </Card>
   ),
 };
 
@@ -65,7 +65,7 @@ export const WithImage: Story = {
     className: "w-[400px]",
   },
   render: (args) => (
-    <Card.Root {...args}>
+    <Card {...args}>
       <Card.Image
         alt="Mountains"
         className="h-[200px]"
@@ -77,7 +77,7 @@ export const WithImage: Story = {
           Explore the stunning mountain landscapes and breathtaking views.
         </Card.Description>
       </Card.Header>
-    </Card.Root>
+    </Card>
   ),
 };
 
@@ -86,7 +86,7 @@ export const LoginForm: Story = {
     className: "w-[400px]",
   },
   render: (args) => (
-    <Card.Root {...args}>
+    <Card {...args}>
       <Card.Header>
         <Card.Title>Login</Card.Title>
         <Card.Description>Enter your credentials to access your account</Card.Description>
@@ -123,14 +123,14 @@ export const LoginForm: Story = {
           Forgot password?
         </Link>
       </Card.Footer>
-    </Card.Root>
+    </Card>
   ),
 };
 
 export const SurfaceVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
-      <Card.Root className="w-[400px]" surface="1">
+      <Card className="w-[400px]" surface="1">
         <Card.Header>
           <Card.Title>Surface Level 1</Card.Title>
           <Card.Description>This card uses surface level 1 (default)</Card.Description>
@@ -138,9 +138,9 @@ export const SurfaceVariants: Story = {
         <Card.Content>
           <p>Content goes here</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
 
-      <Card.Root className="w-[400px]" surface="2">
+      <Card className="w-[400px]" surface="2">
         <Card.Header>
           <Card.Title>Surface Level 2</Card.Title>
           <Card.Description>This card uses surface level 2</Card.Description>
@@ -148,9 +148,9 @@ export const SurfaceVariants: Story = {
         <Card.Content>
           <p>Content goes here</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
 
-      <Card.Root className="w-[400px]" surface="3">
+      <Card className="w-[400px]" surface="3">
         <Card.Header>
           <Card.Title>Surface Level 3</Card.Title>
           <Card.Description>This card uses surface level 3</Card.Description>
@@ -158,33 +158,33 @@ export const SurfaceVariants: Story = {
         <Card.Content>
           <p>Content goes here</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
     </div>
   ),
 };
 
 export const NestedCards: Story = {
   render: () => (
-    <Card.Root className="w-[600px]">
+    <Card className="w-[600px]">
       <Card.Header>
         <Card.Title>Parent Card</Card.Title>
         <Card.Description>This card contains nested cards</Card.Description>
       </Card.Header>
       <Card.Content className="flex flex-col gap-4">
-        <Card.Root surface="2">
+        <Card surface="2">
           <Card.Header>
             <Card.Title>Nested Card 1</Card.Title>
             <Card.Description>This is a nested card with surface level 2</Card.Description>
           </Card.Header>
-        </Card.Root>
-        <Card.Root surface="3">
+        </Card>
+        <Card surface="3">
           <Card.Header>
             <Card.Title>Nested Card 2</Card.Title>
             <Card.Description>This is another nested card with surface level 3</Card.Description>
           </Card.Header>
-        </Card.Root>
+        </Card>
       </Card.Content>
-    </Card.Root>
+    </Card>
   ),
 };
 
@@ -193,7 +193,7 @@ export const AsChild: Story = {
     className: "w-[400px]",
   },
   render: (args) => (
-    <Card.Root {...args} asChild>
+    <Card {...args} asChild>
       <article>
         <Card.Header>
           <Card.Title asChild>
@@ -207,6 +207,6 @@ export const AsChild: Story = {
           <p>The root element is an article tag, and the title is an h2 tag.</p>
         </Card.Content>
       </article>
-    </Card.Root>
+    </Card>
   ),
 };

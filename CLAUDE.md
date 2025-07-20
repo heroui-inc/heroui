@@ -279,17 +279,17 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 
    // Usage:
    <div className="flex items-center gap-3">
-     <Checkbox.Root id="terms">
+     <Checkbox id="terms">
        <Checkbox.Indicator />
-     </Checkbox.Root>
+     </Checkbox>
      <Label htmlFor="terms">Accept terms</Label>
    </div>
 
    // With description:
    <div className="flex gap-3">
-     <Checkbox.Root className="mt-0.5" id="notifications">
+     <Checkbox className="mt-0.5" id="notifications">
        <Checkbox.Indicator />
-     </Checkbox.Root>
+     </Checkbox>
      <div className="flex flex-col gap-1">
        <Label htmlFor="notifications">Email notifications</Label>
        <Description>Get notified when someone mentions you</Description>
@@ -366,7 +366,7 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Study existing HeroUI components (accordion, alert) to understand the compound pattern
    - Use React Aria Components as the foundation for accessibility
    - Transform React Aria's API to match Radix UI patterns:
-     - Single component → Multiple exported parts (Root, Item, Trigger, Content, etc.)
+     - Single component → Multiple exported parts (Item, Trigger, Content, etc.)
      - Props-based API → Composition-based API
      - Internal state → Context-based state sharing
    - Create Context for sharing styles across component parts
@@ -385,14 +385,38 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    </CheckboxGroup>
 
    // HeroUI: Compound pattern
-   <CheckboxGroup.Root value={selected} onValueChange={setSelected}>
+   <CheckboxGroup value={selected} onValueChange={setSelected}>
      <CheckboxGroup.Label>Options</CheckboxGroup.Label>
      <CheckboxGroup.Item value="1">
        <CheckboxGroup.Indicator />
        <CheckboxGroup.Label>Option 1</CheckboxGroup.Label>
      </CheckboxGroup.Item>
-   </CheckboxGroup.Root>
+   </CheckboxGroup>
    ```
+
+   **Example of a compound component exports**
+    ```typescript
+    const CompoundAccordion = Object.assign(Accordion, {
+      Item: AccordionItem,
+      Heading: AccordionHeading,
+      Trigger: AccordionTrigger,
+      Panel: AccordionPanel,
+      Indicator: AccordionIndicator,
+      Body: AccordionBody,
+    });
+
+    export type {
+      AccordionProps,
+      AccordionItemProps,
+      AccordionTriggerProps,
+      AccordionPanelProps,
+      AccordionIndicatorProps,
+      AccordionBodyProps,
+    };
+
+    export default CompoundAccordion;
+    ```
+  **IMPORTANT**: The compound component should be exported as the default export.
 
 2. **Testing**:
 

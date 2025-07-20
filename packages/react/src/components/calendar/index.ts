@@ -1,4 +1,4 @@
-export * as Calendar from "./calendar";
+export {default as Calendar} from "./calendar";
 export type {
   CalendarRootProps,
   CalendarHeaderProps,

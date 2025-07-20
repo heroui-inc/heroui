@@ -42,15 +42,15 @@ export default {
       ],
     },
   },
-  component: Popover.Root,
+  component: Popover,
   title: "Components/Popover",
-} as Meta<typeof Popover.Root>;
+} as Meta<typeof Popover>;
 
 const defaultArgs: Omit<PopoverContentProps, "children"> = {};
 
 const Template = (props: PopoverContentProps) => (
   <div className="flex items-center gap-3">
-    <Popover.Root>
+    <Popover>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -60,13 +60,13 @@ const Template = (props: PopoverContentProps) => (
           <p>This is the popover content</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover.Root>
+    </Popover>
   </div>
 );
 
 const TemplateWithArrow = (props: PopoverContentProps) => (
   <div className="flex items-center gap-3">
-    <Popover.Root>
+    <Popover>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -77,7 +77,7 @@ const TemplateWithArrow = (props: PopoverContentProps) => (
           <p>This is the popover content</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover.Root>
+    </Popover>
   </div>
 );
 
@@ -86,7 +86,7 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
 
   return (
     <div className="flex items-center gap-3">
-      <Popover.Root>
+      <Popover>
         <Popover.Trigger aria-label="Popover trigger">
           <div className="flex items-center gap-2">
             <Avatar.Root size="sm">
@@ -148,7 +148,7 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
             </div>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
   );
 };
@@ -176,7 +176,7 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
     </p>
 
     <div className="flex items-center gap-8">
-      <Popover.Root>
+      <Popover>
         <Button>Click for Spring Animation</Button>
         <Popover.Content {...props}>
           <Popover.Dialog>
@@ -190,7 +190,7 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
             </p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
 
     <div className="text-muted-foreground space-y-1 text-xs">

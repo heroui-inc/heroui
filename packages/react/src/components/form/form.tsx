@@ -49,7 +49,7 @@ const FormRoot = React.forwardRef<React.ElementRef<typeof FormPrimitive>, FormRo
   },
 );
 
-FormRoot.displayName = "HeroUI.Form.Root";
+FormRoot.displayName = "HeroUI.Form";
 
 /* ------------------------------------------------------------------------------------------------
  * Form Section
@@ -101,6 +101,11 @@ FormActions.displayName = "HeroUI.Form.Actions";
  * Exports
  * --------------------------------------------------------------------------------------------- */
 
-export {FormRoot as Root, FormSection as Section, FormActions as Actions};
+const CompoundForm = Object.assign(FormRoot, {
+  Section: FormSection,
+  Actions: FormActions,
+});
 
-export type {FormRootProps, FormSectionProps, FormActionsProps};
+export default CompoundForm;
+
+export type {FormRootProps, FormRootProps as FormProps, FormSectionProps, FormActionsProps};

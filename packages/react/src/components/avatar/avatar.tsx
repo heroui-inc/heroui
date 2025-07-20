@@ -70,10 +70,11 @@ AvatarFallback.displayName = "HeroUI.AvatarFallback";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const Root = Avatar;
-const Image = AvatarImage;
-const Fallback = AvatarFallback;
-
-export {Root, Image, Fallback};
+const CompoundAvatar = Object.assign(Avatar, {
+  Image: AvatarImage,
+  Fallback: AvatarFallback,
+});
 
 export type {AvatarProps, AvatarImageProps, AvatarFallbackProps};
+
+export default CompoundAvatar;

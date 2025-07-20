@@ -65,7 +65,7 @@ const TextFieldRoot = React.forwardRef<
   );
 });
 
-TextFieldRoot.displayName = "HeroUI.TextField.Root";
+TextFieldRoot.displayName = "HeroUI.TextField";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -201,20 +201,18 @@ TextFieldError.displayName = "HeroUI.TextField.Error";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const TextField = Object.assign(
-  {},
-  {
-    Root: TextFieldRoot,
-    Label: TextFieldLabel,
-    Input: TextFieldInput,
-    TextArea: TextFieldTextArea,
-    Description: TextFieldDescription,
-    Error: TextFieldError,
-  },
-);
+const CompoundTextField = Object.assign(TextFieldRoot, {
+  Label: TextFieldLabel,
+  Input: TextFieldInput,
+  TextArea: TextFieldTextArea,
+  Description: TextFieldDescription,
+  Error: TextFieldError,
+});
+
+export default CompoundTextField;
 
 export type {
-  TextFieldRootProps,
+  TextFieldRootProps as TextFieldProps,
   TextFieldLabelProps,
   TextFieldInputProps,
   TextFieldTextAreaProps,

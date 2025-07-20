@@ -25,7 +25,7 @@ export default {
       options: ["default", "outline"],
     },
   },
-  component: Accordion.Root,
+  component: Accordion,
   title: "Components/Accordion",
 } as Meta<typeof Accordion>;
 
@@ -81,7 +81,7 @@ const items = [
 
 const Template = (props: AccordionProps) => (
   <Wrapper>
-    <Accordion.Root {...props}>
+    <Accordion {...props}>
       {items.map((item, index) => (
         <Accordion.Item key={index}>
           <Accordion.Heading>
@@ -98,7 +98,7 @@ const Template = (props: AccordionProps) => (
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion.Root>
+    </Accordion>
   </Wrapper>
 );
 

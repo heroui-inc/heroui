@@ -65,7 +65,7 @@ const SliderRoot = React.forwardRef<React.ElementRef<typeof SliderPrimitive>, Sl
   },
 );
 
-SliderRoot.displayName = "HeroUI.Slider.Root";
+SliderRoot.displayName = "HeroUI.Slider";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Header
@@ -239,22 +239,19 @@ SliderMarks.displayName = "HeroUI.Slider.Marks";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const Slider = Object.assign(
-  {},
-  {
-    Root: SliderRoot,
-    Header: SliderHeader,
-    Label: SliderLabel,
-    Output: SliderOutput,
-    Track: SliderTrack,
-    Fill: SliderFill,
-    Thumb: SliderThumb,
-    Marks: SliderMarks,
-  },
-);
+const CompoundSlider = Object.assign(SliderRoot, {
+  Header: SliderHeader,
+  Label: SliderLabel,
+  Output: SliderOutput,
+  Track: SliderTrack,
+  Fill: SliderFill,
+  Thumb: SliderThumb,
+  Marks: SliderMarks,
+});
 
 export type {
   SliderRootProps,
+  SliderRootProps as SliderProps,
   SliderHeaderProps,
   SliderLabelProps,
   SliderOutputProps,
@@ -263,3 +260,5 @@ export type {
   SliderThumbProps,
   SliderMarksProps,
 };
+
+export default CompoundSlider;

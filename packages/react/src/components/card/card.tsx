@@ -167,18 +167,14 @@ CardImage.displayName = "HeroUI.Card.Image";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const Card = Object.assign(
-  {},
-  {
-    Root: CardRoot,
-    Header: CardHeader,
-    Title: CardTitle,
-    Description: CardDescription,
-    Content: CardContent,
-    Footer: CardFooter,
-    Image: CardImage,
-  },
-);
+const CompoundCard = Object.assign(CardRoot, {
+  Header: CardHeader,
+  Title: CardTitle,
+  Description: CardDescription,
+  Content: CardContent,
+  Footer: CardFooter,
+  Image: CardImage,
+});
 
 export type {
   CardRootProps,
@@ -189,3 +185,5 @@ export type {
   CardFooterProps,
   CardImageProps,
 };
+
+export default CompoundCard;

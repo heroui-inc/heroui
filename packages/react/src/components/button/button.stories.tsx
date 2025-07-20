@@ -2,7 +2,7 @@ import type {ButtonProps} from "./button";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import {useState} from "react";
+import React, {useState} from "react";
 
 import {Spinner} from "../spinner";
 

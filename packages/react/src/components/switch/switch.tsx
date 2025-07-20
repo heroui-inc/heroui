@@ -40,7 +40,7 @@ const SwitchGroupRoot = React.forwardRef<HTMLDivElement, SwitchGroupRootProps>(
   },
 );
 
-SwitchGroupRoot.displayName = "HeroUI.SwitchGroup.Root";
+SwitchGroupRoot.displayName = "HeroUI.SwitchGroup";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -92,7 +92,7 @@ const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, Sw
   },
 );
 
-SwitchRoot.displayName = "HeroUI.Switch.Root";
+SwitchRoot.displayName = "HeroUI.Switch";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -130,27 +130,23 @@ SwitchLabel.displayName = "HeroUI.Switch.Label";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const Switch = Object.assign(
-  {},
-  {
-    Root: SwitchRoot,
-    Control: SwitchControl,
-    Label: SwitchLabel,
-  },
-);
+const CompoundSwitch = Object.assign(SwitchRoot, {
+  Control: SwitchControl,
+  Label: SwitchLabel,
+});
 
-export const SwitchGroup = Object.assign(
-  {},
-  {
-    Root: SwitchGroupRoot,
-    Items: SwitchGroupItems,
-  },
-);
+const CompoundSwitchGroup = Object.assign(SwitchGroupRoot, {
+  Items: SwitchGroupItems,
+});
 
 export type {
   SwitchGroupRootProps,
+  SwitchGroupRootProps as SwitchGroupProps,
   SwitchGroupItemsProps,
   SwitchRootProps,
+  SwitchRootProps as SwitchProps,
   SwitchControlProps,
   SwitchLabelProps,
 };
+
+export {CompoundSwitch as Switch, CompoundSwitchGroup as SwitchGroup};

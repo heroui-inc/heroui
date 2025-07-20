@@ -6,7 +6,7 @@ import zlib from "zlib";
 
 import fs from "fs-extra";
 
-import {generateTypes} from "./build-types.mjs";
+import {generateTypes} from "./generate-types.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -82,26 +82,6 @@ async function addUseClientDirective() {
 
     if (!content.startsWith('"use client"') && !content.startsWith("'use client'")) {
       await fs.writeFile(file, `"use client";\n${content}`);
-    }
-  }
-
-  // Also add to specific files that need it
-  const otherClientFiles = [
-    path.join(distDir, "hooks/index.js"),
-    path.join(distDir, "hooks/use-measured-height.js"),
-    path.join(distDir, "theme/index.js"),
-    path.join(distDir, "theme/themes.js"),
-    path.join(distDir, "utils/compose.js"),
-    path.join(distDir, "utils/mergeRef.js"),
-  ];
-
-  for (const file of otherClientFiles) {
-    if (await fs.pathExists(file)) {
-      const content = await fs.readFile(file, "utf-8");
-
-      if (!content.startsWith('"use client"') && !content.startsWith("'use client'")) {
-        await fs.writeFile(file, `"use client";\n${content}`);
-      }
     }
   }
 

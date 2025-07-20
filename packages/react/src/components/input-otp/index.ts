@@ -1,6 +1,7 @@
-export * as InputOTP from "./input-otp";
+export {default as InputOTP} from "./input-otp";
 export type {
   InputOTPRootProps,
+  InputOTPProps,
   InputOTPGroupProps,
   InputOTPSlotProps,
   InputOTPSeparatorProps,

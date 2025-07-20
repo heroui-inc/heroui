@@ -209,12 +209,13 @@ const AlertClose: AlertClose = (props) => {
 
 AlertClose.displayName = "HeroUI.Alert.Close";
 
-export {
-  AlertRoot as Root,
-  AlertIcon as Icon,
-  AlertTitle as Title,
-  AlertDescription as Description,
-  AlertAction as Action,
-  AlertClose as Close,
-  AlertContent as Content,
-};
+const CompoundAlert = Object.assign(AlertRoot, {
+  Icon: AlertIcon,
+  Title: AlertTitle,
+  Description: AlertDescription,
+  Action: AlertAction,
+  Close: AlertClose,
+  Content: AlertContent,
+});
+
+export default CompoundAlert;

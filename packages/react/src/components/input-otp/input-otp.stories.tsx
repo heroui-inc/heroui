@@ -8,9 +8,9 @@ import {Text} from "../text";
 
 import {InputOTP} from "./input-otp";
 
-const meta: Meta<typeof InputOTP.Root> = {
+const meta: Meta<typeof InputOTP> = {
   title: "Components/InputOTP",
-  component: InputOTP.Root,
+  component: InputOTP,
   parameters: {
     layout: "centered",
   },
@@ -28,11 +28,11 @@ const meta: Meta<typeof InputOTP.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof InputOTP.Root>;
+type Story = StoryObj<typeof InputOTP>;
 
 export const Default: Story = {
   render: (args) => (
-    <InputOTP.Root {...args} maxLength={6}>
+    <InputOTP {...args} maxLength={6}>
       <InputOTP.Group>
         <InputOTP.Slot />
         <InputOTP.Slot />
@@ -44,7 +44,7 @@ export const Default: Story = {
         <InputOTP.Slot />
         <InputOTP.Slot />
       </InputOTP.Group>
-    </InputOTP.Root>
+    </InputOTP>
   ),
 };
 
@@ -53,7 +53,7 @@ export const WithLabel: Story = {
     <div className="w-[280px]">
       <Label>Verify account</Label>
       <Description size="sm">We&apos;ve sent a code to a****@gmail.com</Description>
-      <InputOTP.Root {...args} maxLength={6}>
+      <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />
           <InputOTP.Slot />
@@ -65,7 +65,7 @@ export const WithLabel: Story = {
           <InputOTP.Slot />
           <InputOTP.Slot />
         </InputOTP.Group>
-      </InputOTP.Root>
+      </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
         <Text size="xs" variant="muted">
           Didn&apos;t receive a code?
@@ -80,7 +80,7 @@ export const Required: Story = {
   render: (args) => (
     <div className="w-[280px]">
       <Label required>Verify account</Label>
-      <InputOTP.Root {...args} maxLength={6}>
+      <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />
           <InputOTP.Slot />
@@ -92,21 +92,21 @@ export const Required: Story = {
           <InputOTP.Slot />
           <InputOTP.Slot />
         </InputOTP.Group>
-      </InputOTP.Root>
+      </InputOTP>
     </div>
   ),
 };
 
 export const FourDigits: Story = {
   render: (args) => (
-    <InputOTP.Root {...args} maxLength={4}>
+    <InputOTP {...args} maxLength={4}>
       <InputOTP.Group>
         <InputOTP.Slot />
         <InputOTP.Slot />
         <InputOTP.Slot />
         <InputOTP.Slot />
       </InputOTP.Group>
-    </InputOTP.Root>
+    </InputOTP>
   ),
 };
 
@@ -117,7 +117,7 @@ export const Invalid: Story = {
   render: (args) => (
     <div className="w-[280px]">
       <Label>Verify account</Label>
-      <InputOTP.Root {...args} maxLength={6}>
+      <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />
           <InputOTP.Slot />
@@ -129,7 +129,7 @@ export const Invalid: Story = {
           <InputOTP.Slot />
           <InputOTP.Slot />
         </InputOTP.Group>
-      </InputOTP.Root>
+      </InputOTP>
       <Text className="px-1 pt-1" size="xs" variant="danger">
         Invalid code, please try again
       </Text>
@@ -144,7 +144,7 @@ export const Disabled: Story = {
   render: (args) => (
     <div className="w-[280px]">
       <Label disabled>Verify account</Label>
-      <InputOTP.Root {...args} maxLength={6}>
+      <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />
           <InputOTP.Slot />
@@ -156,7 +156,7 @@ export const Disabled: Story = {
           <InputOTP.Slot />
           <InputOTP.Slot />
         </InputOTP.Group>
-      </InputOTP.Root>
+      </InputOTP>
     </div>
   ),
 };
@@ -165,7 +165,7 @@ export const WithPattern: Story = {
   render: (args) => (
     <div className="w-[280px]">
       <Label>Enter code (numbers only)</Label>
-      <InputOTP.Root {...args} maxLength={6} pattern="^[0-9]+$">
+      <InputOTP {...args} maxLength={6} pattern="^[0-9]+$">
         <InputOTP.Group>
           <InputOTP.Slot />
           <InputOTP.Slot />
@@ -177,7 +177,7 @@ export const WithPattern: Story = {
           <InputOTP.Slot />
           <InputOTP.Slot />
         </InputOTP.Group>
-      </InputOTP.Root>
+      </InputOTP>
     </div>
   ),
 };
@@ -190,7 +190,7 @@ export const OnComplete: Story = {
     return (
       <div className="w-[280px]">
         <Label>Verify account</Label>
-        <InputOTP.Root
+        <InputOTP
           {...args}
           maxLength={6}
           value={value}
@@ -212,7 +212,7 @@ export const OnComplete: Story = {
             <InputOTP.Slot />
             <InputOTP.Slot />
           </InputOTP.Group>
-        </InputOTP.Root>
+        </InputOTP>
         {!!isComplete && (
           <Text className="mt-2" size="sm" variant="success">
             Code submitted successfully!

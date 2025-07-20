@@ -1,4 +1,6 @@
-import {Alert} from ".";
+import React from "react";
+
+import {Alert} from "./index";
 
 export default {
   argTypes: {},
@@ -10,7 +12,7 @@ const defaultArgs = {};
 
 const Template = () => (
   <div className="flex w-full max-w-[500px] flex-col gap-6">
-    <Alert.Root>
+    <Alert>
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -18,9 +20,9 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert.Root>
+    </Alert>
 
-    <Alert.Root variant="success">
+    <Alert variant="success">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -28,9 +30,9 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert.Root>
+    </Alert>
 
-    <Alert.Root variant="warning">
+    <Alert variant="warning">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -38,9 +40,9 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert.Root>
+    </Alert>
 
-    <Alert.Root variant="danger">
+    <Alert variant="danger">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -48,7 +50,7 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert.Root>
+    </Alert>
   </div>
 );
 

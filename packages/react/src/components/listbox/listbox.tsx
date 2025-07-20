@@ -44,7 +44,7 @@ const ListBoxRootInner = React.forwardRef<HTMLDivElement, ListBoxRootProps<objec
   },
 );
 
-ListBoxRootInner.displayName = "HeroUI.ListBox.Root";
+ListBoxRootInner.displayName = "HeroUI.ListBox";
 
 const ListBoxRoot = ListBoxRootInner as <T extends object>(
   props: ListBoxRootProps<T> & React.RefAttributes<HTMLDivElement>,
@@ -102,9 +102,12 @@ const ListBoxItemIndicator = React.forwardRef<HTMLSpanElement, ListBoxItemIndica
 
 ListBoxItemIndicator.displayName = "HeroUI.ListBox.ItemIndicator";
 
-export {
-  ListBoxRoot as Root,
-  ListBoxItem as Item,
-  ListBoxItemIndicator as ItemIndicator,
+const CompoundListBox = Object.assign(ListBoxRoot, {
+  Item: ListBoxItem,
+  ItemIndicator: ListBoxItemIndicator,
   Collection,
-};
+});
+
+export default CompoundListBox;
+export type {ListBoxRootProps as ListBoxProps};
+export {ListBoxRoot, ListBoxItem, ListBoxItemIndicator, Collection};

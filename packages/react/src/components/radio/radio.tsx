@@ -49,7 +49,7 @@ const RadioGroupRoot = React.forwardRef<
   );
 });
 
-RadioGroupRoot.displayName = "HeroUI.RadioGroup.Root";
+RadioGroupRoot.displayName = "HeroUI.RadioGroup";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -104,7 +104,7 @@ const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, Radi
   },
 );
 
-RadioRoot.displayName = "HeroUI.Radio.Root";
+RadioRoot.displayName = "HeroUI.Radio";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -142,27 +142,23 @@ RadioLabel.displayName = "HeroUI.Radio.Label";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const Radio = Object.assign(
-  {},
-  {
-    Root: RadioRoot,
-    Indicator: RadioIndicator,
-    Label: RadioLabel,
-  },
-);
+const CompoundRadio = Object.assign(RadioRoot, {
+  Indicator: RadioIndicator,
+  Label: RadioLabel,
+});
 
-export const RadioGroup = Object.assign(
-  {},
-  {
-    Root: RadioGroupRoot,
-    Items: RadioGroupItems,
-  },
-);
+const CompoundRadioGroup = Object.assign(RadioGroupRoot, {
+  Items: RadioGroupItems,
+});
 
 export type {
   RadioGroupRootProps,
+  RadioGroupRootProps as RadioGroupProps,
   RadioGroupItemsProps,
   RadioRootProps,
+  RadioRootProps as RadioProps,
   RadioIndicatorProps,
   RadioLabelProps,
 };
+
+export {CompoundRadio as Radio, CompoundRadioGroup as RadioGroup};

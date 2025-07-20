@@ -11,9 +11,9 @@ import {TextField} from "../text-field/text-field";
 
 import * as Form from "./form";
 
-const meta: Meta<typeof Form.Root> = {
+const meta: Meta<typeof Form> = {
   title: "Components/Form",
-  component: Form.Root,
+  component: Form,
   parameters: {
     layout: "centered",
   },
@@ -34,11 +34,11 @@ const meta: Meta<typeof Form.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Form.Root>;
+type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {
   render: (args) => (
-    <Form.Root className="w-96 space-y-4" {...args}>
+    <Form className="w-96 space-y-4" {...args}>
       <TextField.Root isRequired name="username" type="text">
         <TextField.Label>Username</TextField.Label>
         <TextField.Input />
@@ -58,13 +58,13 @@ export const Default: Story = {
           Reset
         </Button>
       </Form.Actions>
-    </Form.Root>
+    </Form>
   ),
 };
 
 export const WithSections: Story = {
   render: (args) => (
-    <Form.Root className="w-96" {...args}>
+    <Form className="w-96" {...args}>
       <Form.Section>
         <h3 className="mb-3 text-lg font-semibold">Account Information</h3>
         <div className="space-y-4">
@@ -110,7 +110,7 @@ export const WithSections: Story = {
           Cancel
         </Button>
       </Form.Actions>
-    </Form.Root>
+    </Form>
   ),
 };
 
@@ -119,7 +119,7 @@ export const WithValidation: Story = {
     const [errors, setErrors] = React.useState<Record<string, string>>({});
 
     return (
-      <Form.Root
+      <Form
         className="w-96 space-y-4"
         validationBehavior="aria"
         validationErrors={errors}
@@ -174,14 +174,14 @@ export const WithValidation: Story = {
         <Form.Actions>
           <Button type="submit">Create Account</Button>
         </Form.Actions>
-      </Form.Root>
+      </Form>
     );
   },
 };
 
 export const ComplexForm: Story = {
   render: (args) => (
-    <Form.Root className="w-[600px]" {...args}>
+    <Form className="w-[600px]" {...args}>
       <Form.Section>
         <h2 className="mb-6 text-2xl font-bold">User Registration</h2>
 
@@ -243,26 +243,26 @@ export const ComplexForm: Story = {
         <div className="space-y-3">
           <fieldset className="space-y-2">
             <legend className="mb-2 text-sm font-medium">Contact Method</legend>
-            <RadioGroup.Root name="contactMethod">
+            <RadioGroup name="contactMethod">
               <div className="flex items-center gap-3">
-                <Radio.Root id="contact-email" value="email">
+                <Radio id="contact-email" value="email">
                   <Radio.Indicator />
-                </Radio.Root>
+                </Radio>
                 <Label htmlFor="contact-email">Email</Label>
               </div>
               <div className="flex items-center gap-3">
-                <Radio.Root id="contact-phone" value="phone">
+                <Radio id="contact-phone" value="phone">
                   <Radio.Indicator />
-                </Radio.Root>
+                </Radio>
                 <Label htmlFor="contact-phone">Phone</Label>
               </div>
               <div className="flex items-center gap-3">
-                <Radio.Root id="contact-both" value="both">
+                <Radio id="contact-both" value="both">
                   <Radio.Indicator />
-                </Radio.Root>
+                </Radio>
                 <Label htmlFor="contact-both">Both</Label>
               </div>
-            </RadioGroup.Root>
+            </RadioGroup>
           </fieldset>
 
           <div className="space-y-2 pt-2">
@@ -289,7 +289,7 @@ export const ComplexForm: Story = {
         </Button>
         <Button type="submit">Register</Button>
       </Form.Actions>
-    </Form.Root>
+    </Form>
   ),
 };
 
@@ -298,7 +298,7 @@ export const DisabledForm: Story = {
     isDisabled: true,
   },
   render: (args) => (
-    <Form.Root className="w-96 space-y-4" {...args}>
+    <Form className="w-96 space-y-4" {...args}>
       <TextField.Root name="username" type="text">
         <TextField.Label>Username</TextField.Label>
         <TextField.Input defaultValue="johndoe" />
@@ -319,13 +319,13 @@ export const DisabledForm: Story = {
       <Form.Actions>
         <Button type="submit">Submit</Button>
       </Form.Actions>
-    </Form.Root>
+    </Form>
   ),
 };
 
 export const InlineErrors: Story = {
   render: (args) => (
-    <Form.Root
+    <Form
       className="w-96 space-y-4"
       validationBehavior="aria"
       validationErrors={{
@@ -355,6 +355,6 @@ export const InlineErrors: Story = {
       <Form.Actions>
         <Button type="submit">Continue</Button>
       </Form.Actions>
-    </Form.Root>
+    </Form>
   ),
 };

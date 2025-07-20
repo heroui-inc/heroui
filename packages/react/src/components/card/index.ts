@@ -1,4 +1,4 @@
-export * as Card from "./card";
+export {default as Card} from "./card";
 export type {
   CardRootProps,
   CardHeaderProps,

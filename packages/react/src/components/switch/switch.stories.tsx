@@ -4,9 +4,9 @@ import React from "react";
 
 import {Switch, SwitchGroup} from "./switch";
 
-const meta: Meta<typeof Switch.Root> = {
+const meta: Meta<typeof Switch> = {
   title: "Components/Switch",
-  component: Switch.Root,
+  component: Switch,
   parameters: {
     layout: "centered",
   },
@@ -14,32 +14,32 @@ const meta: Meta<typeof Switch.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Switch.Root>;
+type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       <Switch.Control />
       <Switch.Label>Enable notifications</Switch.Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
-    <Switch.Root isDisabled>
+    <Switch isDisabled>
       <Switch.Control />
       <Switch.Label>Enable notifications</Switch.Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const DefaultSelected: Story = {
   render: () => (
-    <Switch.Root defaultSelected>
+    <Switch defaultSelected>
       <Switch.Control />
       <Switch.Label>Enable notifications</Switch.Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
@@ -49,10 +49,10 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <Switch.Root isSelected={isSelected} onChange={setIsSelected}>
+        <Switch isSelected={isSelected} onChange={setIsSelected}>
           <Switch.Control />
           <Switch.Label>Enable notifications</Switch.Label>
-        </Switch.Root>
+        </Switch>
         <p className="text-muted-foreground text-sm">Switch is {isSelected ? "on" : "off"}</p>
       </div>
     );
@@ -61,67 +61,67 @@ export const Controlled: Story = {
 
 export const WithoutLabel: Story = {
   render: () => (
-    <Switch.Root aria-label="Enable notifications">
+    <Switch aria-label="Enable notifications">
       <Switch.Control />
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const LabelBefore: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       <Switch.Label>Enable notifications</Switch.Label>
       <Switch.Control />
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const Group: Story = {
   render: () => (
-    <SwitchGroup.Root>
+    <SwitchGroup>
       <SwitchGroup.Items>
-        <Switch.Root name="notifications">
+        <Switch name="notifications">
           <Switch.Control />
           <Switch.Label>Allow Notifications</Switch.Label>
-        </Switch.Root>
-        <Switch.Root name="marketing">
+        </Switch>
+        <Switch name="marketing">
           <Switch.Control />
           <Switch.Label>Marketing emails</Switch.Label>
-        </Switch.Root>
-        <Switch.Root name="social">
+        </Switch>
+        <Switch name="social">
           <Switch.Control />
           <Switch.Label>Social media updates</Switch.Label>
-        </Switch.Root>
+        </Switch>
       </SwitchGroup.Items>
-    </SwitchGroup.Root>
+    </SwitchGroup>
   ),
 };
 
 export const GroupHorizontal: Story = {
   render: () => (
-    <SwitchGroup.Root orientation="horizontal">
+    <SwitchGroup orientation="horizontal">
       <SwitchGroup.Items>
-        <Switch.Root name="notifications">
+        <Switch name="notifications">
           <Switch.Control />
           <Switch.Label>Notifications</Switch.Label>
-        </Switch.Root>
-        <Switch.Root name="marketing">
+        </Switch>
+        <Switch name="marketing">
           <Switch.Control />
           <Switch.Label>Marketing</Switch.Label>
-        </Switch.Root>
-        <Switch.Root name="social">
+        </Switch>
+        <Switch name="social">
           <Switch.Control />
           <Switch.Label>Social</Switch.Label>
-        </Switch.Root>
+        </Switch>
       </SwitchGroup.Items>
-    </SwitchGroup.Root>
+    </SwitchGroup>
   ),
 };
 
 export const WithDescription: Story = {
   render: () => (
     <div className="max-w-sm">
-      <Switch.Root>
+      <Switch>
         <div className="flex gap-3">
           <Switch.Control />
           <div className="flex flex-col gap-1">
@@ -131,30 +131,30 @@ export const WithDescription: Story = {
             </p>
           </div>
         </div>
-      </Switch.Root>
+      </Switch>
     </div>
   ),
 };
 
 export const CustomStyling: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       <Switch.Control className="h-7 w-12 data-[selected=true]:bg-green-500" />
       <Switch.Label className="text-lg font-medium">Custom styled switch</Switch.Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const RenderProps: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       {({isSelected}) => (
         <>
           <Switch.Control />
           <Switch.Label>{isSelected ? "Enabled" : "Disabled"}</Switch.Label>
         </>
       )}
-    </Switch.Root>
+    </Switch>
   ),
 };
 
@@ -173,22 +173,22 @@ export const Form: Story = {
 
     return (
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <SwitchGroup.Root>
+        <SwitchGroup>
           <SwitchGroup.Items>
-            <Switch.Root name="notifications" value="on">
+            <Switch name="notifications" value="on">
               <Switch.Control />
               <Switch.Label>Enable notifications</Switch.Label>
-            </Switch.Root>
-            <Switch.Root defaultSelected name="newsletter" value="on">
+            </Switch>
+            <Switch defaultSelected name="newsletter" value="on">
               <Switch.Control />
               <Switch.Label>Subscribe to newsletter</Switch.Label>
-            </Switch.Root>
-            <Switch.Root name="marketing" value="on">
+            </Switch>
+            <Switch name="marketing" value="on">
               <Switch.Control />
               <Switch.Label>Receive marketing updates</Switch.Label>
-            </Switch.Root>
+            </Switch>
           </SwitchGroup.Items>
-        </SwitchGroup.Root>
+        </SwitchGroup>
         <button
           className="bg-accent text-accent-foreground hover:bg-accent-hover mt-4 rounded-md px-4 py-2 text-sm font-medium"
           type="submit"

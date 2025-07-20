@@ -4,9 +4,9 @@ import React from "react";
 
 import {Slider} from "./slider";
 
-const meta: Meta<typeof Slider.Root> = {
+const meta: Meta<typeof Slider> = {
   title: "Components/Slider",
-  component: Slider.Root,
+  component: Slider,
   parameters: {
     layout: "centered",
   },
@@ -30,11 +30,11 @@ const meta: Meta<typeof Slider.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Slider.Root>;
+type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {
   render: (args) => (
-    <Slider.Root defaultValue={50} {...args}>
+    <Slider defaultValue={50} {...args}>
       {({state}) => (
         <>
           <Slider.Header>
@@ -47,7 +47,7 @@ export const Default: Story = {
           </Slider.Track>
         </>
       )}
-    </Slider.Root>
+    </Slider>
   ),
 };
 
@@ -56,7 +56,7 @@ export const Disabled: Story = {
     isDisabled: true,
   },
   render: (args) => (
-    <Slider.Root defaultValue={30} {...args}>
+    <Slider defaultValue={30} {...args}>
       {({state}) => (
         <>
           <Slider.Header>
@@ -69,13 +69,13 @@ export const Disabled: Story = {
           </Slider.Track>
         </>
       )}
-    </Slider.Root>
+    </Slider>
   ),
 };
 
 export const WithMarks: Story = {
   render: () => (
-    <Slider.Root defaultValue={50} step={25}>
+    <Slider defaultValue={50} step={25}>
       {({state}) => (
         <>
           <Slider.Header>
@@ -93,7 +93,7 @@ export const WithMarks: Story = {
           </Slider.Marks>
         </>
       )}
-    </Slider.Root>
+    </Slider>
   ),
 };
 
@@ -102,7 +102,7 @@ export const Range: Story = {
     const [value, setValue] = React.useState([20, 80]);
 
     return (
-      <Slider.Root value={value} onChange={(newValue) => setValue(newValue as number[])}>
+      <Slider value={value} onChange={(newValue) => setValue(newValue as number[])}>
         <Slider.Header>
           <Slider.Label>Title</Slider.Label>
           <Slider.Output />
@@ -122,7 +122,7 @@ export const Range: Story = {
           <span>50%</span>
           <span>80%</span>
         </Slider.Marks>
-      </Slider.Root>
+      </Slider>
     );
   },
 };
@@ -133,7 +133,7 @@ export const Controlled: Story = {
 
     return (
       <div className="space-y-4">
-        <Slider.Root value={value} onChange={(newValue) => setValue(newValue as number)}>
+        <Slider value={value} onChange={(newValue) => setValue(newValue as number)}>
           <Slider.Header>
             <Slider.Label>Price</Slider.Label>
             <Slider.Output />
@@ -142,7 +142,7 @@ export const Controlled: Story = {
             <Slider.Fill percentage={value} />
             <Slider.Thumb />
           </Slider.Track>
-        </Slider.Root>
+        </Slider>
         <p className="text-gray-11 text-sm">External value: {value}</p>
       </div>
     );
@@ -154,7 +154,7 @@ export const Examples: Story = {
     <div className="space-y-8">
       {/* Light theme example */}
       <div className="rounded-lg bg-white p-6 shadow-sm">
-        <Slider.Root defaultValue={50} maxValue={100000}>
+        <Slider defaultValue={50} maxValue={100000}>
           {({state}) => (
             <>
               <Slider.Header>
@@ -167,12 +167,12 @@ export const Examples: Story = {
               </Slider.Track>
             </>
           )}
-        </Slider.Root>
+        </Slider>
       </div>
 
       {/* Dark theme example */}
       <div className="bg-gray-12 rounded-lg p-6">
-        <Slider.Root
+        <Slider
           className="[&_[data-slider-output]]:text-gray-3 [&_[data-slider-track]]:bg-gray-9 [&_[data-slider-fill]]:bg-white [&_[data-slider-label]]:text-white [&_[data-slider-thumb]]:border-white"
           defaultValue={50}
           maxValue={100000}
@@ -189,7 +189,7 @@ export const Examples: Story = {
               </Slider.Track>
             </>
           )}
-        </Slider.Root>
+        </Slider>
       </div>
     </div>
   ),
@@ -200,7 +200,7 @@ export const SingleWithMarks: Story = {
     const [value, setValue] = React.useState(50);
 
     return (
-      <Slider.Root
+      <Slider
         maxValue={100}
         minValue={0}
         step={25}
@@ -220,7 +220,7 @@ export const SingleWithMarks: Story = {
           <span>50%</span>
           <span>80%</span>
         </Slider.Marks>
-      </Slider.Root>
+      </Slider>
     );
   },
 };
@@ -234,7 +234,7 @@ export const Vertical: Story = {
     ),
   ],
   render: () => (
-    <Slider.Root className="h-full" defaultValue={60} orientation="vertical">
+    <Slider className="h-full" defaultValue={60} orientation="vertical">
       {({state}) => (
         <>
           <Slider.Label>Volume</Slider.Label>
@@ -245,13 +245,13 @@ export const Vertical: Story = {
           </Slider.Track>
         </>
       )}
-    </Slider.Root>
+    </Slider>
   ),
 };
 
 export const WithSteps: Story = {
   render: () => (
-    <Slider.Root defaultValue={50} maxValue={100} minValue={0} step={10}>
+    <Slider defaultValue={50} maxValue={100} minValue={0} step={10}>
       {({state}) => (
         <>
           <Slider.Header>
@@ -271,6 +271,6 @@ export const WithSteps: Story = {
           </div>
         </>
       )}
-    </Slider.Root>
+    </Slider>
   ),
 };

@@ -2,11 +2,11 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {TextField} from "./text-field";
+import {TextField} from "./index";
 
-const meta: Meta<typeof TextField.Root> = {
+const meta: Meta<typeof TextField> = {
   title: "Components/TextField",
-  component: TextField.Root,
+  component: TextField,
   parameters: {
     layout: "centered",
   },
@@ -19,10 +19,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <div className="w-80">
-      <TextField.Root>
+      <TextField>
         <TextField.Label>Your name</TextField.Label>
         <TextField.Input placeholder="John" />
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -30,10 +30,10 @@ export const Default: Story = {
 export const Required: Story = {
   render: () => (
     <div className="w-80">
-      <TextField.Root isRequired>
+      <TextField isRequired>
         <TextField.Label isRequired>Your name</TextField.Label>
         <TextField.Input placeholder="John" />
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -41,11 +41,11 @@ export const Required: Story = {
 export const WithDescription: Story = {
   render: () => (
     <div className="w-80">
-      <TextField.Root>
+      <TextField>
         <TextField.Label isRequired>Your name</TextField.Label>
         <TextField.Input placeholder="John" />
         <TextField.Description>We'll never share this with anyone else</TextField.Description>
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -53,11 +53,11 @@ export const WithDescription: Story = {
 export const Invalid: Story = {
   render: () => (
     <div className="w-80">
-      <TextField.Root isInvalid>
+      <TextField isInvalid>
         <TextField.Label isRequired>Your age</TextField.Label>
         <TextField.Input placeholder="18" type="number" />
         <TextField.Error>Please enter a valid age</TextField.Error>
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -65,11 +65,11 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   render: () => (
     <div className="w-80">
-      <TextField.Root isDisabled>
+      <TextField isDisabled>
         <TextField.Label>Your name</TextField.Label>
         <TextField.Input placeholder="John" />
         <TextField.Description>We'll never share this with anyone else</TextField.Description>
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -77,11 +77,11 @@ export const Disabled: Story = {
 export const TextArea: Story = {
   render: () => (
     <div className="w-80">
-      <TextField.Root>
+      <TextField>
         <TextField.Label>Your message</TextField.Label>
         <TextField.TextArea placeholder="Tell us more about yourself..." />
         <TextField.Description>Min 50 characters</TextField.Description>
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -89,20 +89,20 @@ export const TextArea: Story = {
 export const InputTypes: Story = {
   render: () => (
     <div className="flex w-80 flex-col gap-4">
-      <TextField.Root>
+      <TextField>
         <TextField.Label>Your age</TextField.Label>
         <TextField.Input placeholder="18" type="number" />
-      </TextField.Root>
+      </TextField>
 
-      <TextField.Root>
+      <TextField>
         <TextField.Label>Your password</TextField.Label>
         <TextField.Input placeholder="••••••••" type="password" />
-      </TextField.Root>
+      </TextField>
 
-      <TextField.Root>
+      <TextField>
         <TextField.Label>Your email</TextField.Label>
         <TextField.Input placeholder="john@example.com" type="email" />
-      </TextField.Root>
+      </TextField>
     </div>
   ),
 };
@@ -113,7 +113,7 @@ export const Controlled: Story = {
 
     return (
       <div className="w-80">
-        <TextField.Root>
+        <TextField>
           <TextField.Label>Your name</TextField.Label>
           <TextField.Input
             placeholder="John"
@@ -121,7 +121,7 @@ export const Controlled: Story = {
             onChange={(e) => setValue(e.target.value)}
           />
           <TextField.Description>Character count: {value.length}</TextField.Description>
-        </TextField.Root>
+        </TextField>
       </div>
     );
   },
@@ -134,7 +134,7 @@ export const WithValidation: Story = {
 
     return (
       <div className="w-80">
-        <TextField.Root isInvalid={isInvalid}>
+        <TextField isInvalid={isInvalid}>
           <TextField.Label isRequired>Username</TextField.Label>
           <TextField.Input
             placeholder="john_doe"
@@ -146,7 +146,7 @@ export const WithValidation: Story = {
           ) : (
             <TextField.Description>Choose a unique username</TextField.Description>
           )}
-        </TextField.Root>
+        </TextField>
       </div>
     );
   },

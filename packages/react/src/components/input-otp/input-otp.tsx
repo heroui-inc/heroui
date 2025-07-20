@@ -61,7 +61,7 @@ const InputOTPRoot = React.forwardRef<HTMLInputElement, InputOTPRootProps>(
   },
 );
 
-InputOTPRoot.displayName = "HeroUI.InputOTP.Root";
+InputOTPRoot.displayName = "HeroUI.InputOTP";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -168,14 +168,12 @@ InputOTPSeparator.displayName = "HeroUI.InputOTP.Separator";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const InputOTP = Object.assign(
-  {},
-  {
-    Root: InputOTPRoot,
-    Group: InputOTPGroup,
-    Slot: InputOTPSlot,
-    Separator: InputOTPSeparator,
-  },
-);
+const CompoundInputOTP = Object.assign(InputOTPRoot, {
+  Group: InputOTPGroup,
+  Slot: InputOTPSlot,
+  Separator: InputOTPSeparator,
+});
 
-export type {InputOTPRootProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};
+export type {InputOTPRootProps, InputOTPRootProps as InputOTPProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};
+
+export default CompoundInputOTP;

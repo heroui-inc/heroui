@@ -52,7 +52,7 @@ const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsPr
   },
 );
 
-TabsRoot.displayName = "HeroUI.TabsRoot";
+TabsRoot.displayName = "HeroUI.Tabs";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -127,7 +127,11 @@ TabPanel.displayName = "HeroUI.TabPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const Root = TabsRoot;
+const CompoundTabs = Object.assign(TabsRoot, {
+  List: TabList,
+  Tab: Tab,
+  Panel: TabPanel,
+});
 
-export {Root, TabList, Tab, TabPanel};
+export default CompoundTabs;
 export type {TabsProps, TabListProps, TabProps, TabPanelProps};

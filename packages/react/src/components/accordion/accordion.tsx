@@ -221,15 +221,14 @@ AccordionPanel.displayName = "HeroUI.AccordionPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const Root = Accordion;
-const Item = AccordionItem;
-const Heading = AccordionHeading;
-const Trigger = AccordionTrigger;
-const Panel = AccordionPanel;
-const Indicator = AccordionIndicator;
-const Body = AccordionBody;
-
-export {Root, Item, Heading, Trigger, Panel, Indicator, Body};
+const CompoundAccordion = Object.assign(Accordion, {
+  Item: AccordionItem,
+  Heading: AccordionHeading,
+  Trigger: AccordionTrigger,
+  Panel: AccordionPanel,
+  Indicator: AccordionIndicator,
+  Body: AccordionBody,
+});
 
 export type {
   AccordionProps,
@@ -239,3 +238,5 @@ export type {
   AccordionIndicatorProps,
   AccordionBodyProps,
 };
+
+export default CompoundAccordion;

@@ -52,7 +52,7 @@ const CheckboxGroupRoot = React.forwardRef<
   );
 });
 
-CheckboxGroupRoot.displayName = "HeroUI.CheckboxGroup.Root";
+CheckboxGroupRoot.displayName = "HeroUI.CheckboxGroup";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -112,7 +112,7 @@ const CheckboxRoot = React.forwardRef<
   );
 });
 
-CheckboxRoot.displayName = "HeroUI.Checkbox.Root";
+CheckboxRoot.displayName = "HeroUI.Checkbox";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -182,27 +182,21 @@ const CheckboxIndeterminateIcon = () => (
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const Checkbox = Object.assign(
-  {},
-  {
-    Root: CheckboxRoot,
-    Indicator: CheckboxIndicator,
-    Icon: CheckboxDefaultIcon,
-    IndeterminateIcon: CheckboxIndeterminateIcon,
-  },
-);
+const CompoundCheckbox = Object.assign(CheckboxRoot, {
+  Indicator: CheckboxIndicator,
+  Icon: CheckboxDefaultIcon,
+  IndeterminateIcon: CheckboxIndeterminateIcon,
+});
 
-export const CheckboxGroup = Object.assign(
-  {},
-  {
-    Root: CheckboxGroupRoot,
-    Items: CheckboxGroupItems,
-  },
-);
+const CompoundCheckboxGroup = Object.assign(CheckboxGroupRoot, {
+  Items: CheckboxGroupItems,
+});
+
+export {CompoundCheckbox as Checkbox, CompoundCheckboxGroup as CheckboxGroup};
 
 export type {
-  CheckboxGroupRootProps,
+  CheckboxGroupRootProps as CheckboxGroupProps,
   CheckboxGroupItemsProps,
-  CheckboxRootProps,
+  CheckboxRootProps as CheckboxProps,
   CheckboxIndicatorProps,
 };

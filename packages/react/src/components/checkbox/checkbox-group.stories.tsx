@@ -6,11 +6,11 @@ import {Description} from "../description";
 import {Field, FieldError} from "../fieldset";
 import {Label} from "../label";
 
-import {Checkbox, CheckboxGroup} from "./checkbox";
+import {Checkbox, CheckboxGroup} from "./index";
 
-const meta: Meta<typeof CheckboxGroup.Root> = {
+const meta: Meta<typeof CheckboxGroup> = {
   title: "Components/CheckboxGroup",
-  component: CheckboxGroup.Root,
+  component: CheckboxGroup,
   parameters: {
     layout: "centered",
   },
@@ -18,90 +18,90 @@ const meta: Meta<typeof CheckboxGroup.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof CheckboxGroup.Root>;
+type Story = StoryObj<typeof CheckboxGroup>;
 
 export const Default: Story = {
   render: () => (
-    <CheckboxGroup.Root>
+    <CheckboxGroup>
       <Label>Favorite sports</Label>
       <CheckboxGroup.Items>
         <Field variant="checkbox">
-          <Checkbox.Root value="soccer">
+          <Checkbox value="soccer">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Soccer</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="baseball">
+          <Checkbox value="baseball">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Baseball</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="basketball">
+          <Checkbox value="basketball">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Basketball</Label>
         </Field>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
 export const WithDescription: Story = {
   render: () => (
-    <CheckboxGroup.Root>
+    <CheckboxGroup>
       <Label>Notifications</Label>
       <Description>Choose how you want to be notified</Description>
       <CheckboxGroup.Items>
         <Field variant="checkbox">
-          <Checkbox.Root value="email">
+          <Checkbox value="email">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Email</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="sms">
+          <Checkbox value="sms">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>SMS</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="push">
+          <Checkbox value="push">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Push notifications</Label>
         </Field>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
 export const DefaultValue: Story = {
   render: () => (
-    <CheckboxGroup.Root defaultValue={["email", "push"]}>
+    <CheckboxGroup defaultValue={["email", "push"]}>
       <Label>Communication preferences</Label>
       <CheckboxGroup.Items>
         <Field variant="checkbox">
-          <Checkbox.Root value="email">
+          <Checkbox value="email">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Email updates</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="sms">
+          <Checkbox value="sms">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Text messages</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="push">
+          <Checkbox value="push">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Push notifications</Label>
         </Field>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
@@ -111,35 +111,35 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <CheckboxGroup.Root value={selected} onChange={setSelected}>
+        <CheckboxGroup value={selected} onChange={setSelected}>
           <Label>Hobbies</Label>
           <CheckboxGroup.Items>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="reading" value="reading">
+              <Checkbox id="reading" value="reading">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="reading">Reading</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="gaming" value="gaming">
+              <Checkbox id="gaming" value="gaming">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="gaming">Gaming</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="traveling" value="traveling">
+              <Checkbox id="traveling" value="traveling">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="traveling">Traveling</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="cooking" value="cooking">
+              <Checkbox id="cooking" value="cooking">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="cooking">Cooking</Label>
             </div>
           </CheckboxGroup.Items>
-        </CheckboxGroup.Root>
+        </CheckboxGroup>
         <p className="text-muted-foreground text-sm">
           Selected: {selected.length > 0 ? selected.join(", ") : "none"}
         </p>
@@ -150,117 +150,117 @@ export const Controlled: Story = {
 
 export const Horizontal: Story = {
   render: () => (
-    <CheckboxGroup.Root orientation="horizontal">
+    <CheckboxGroup orientation="horizontal">
       <Label>Select features</Label>
       <CheckboxGroup.Items>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="feature1" value="feature1">
+          <Checkbox id="feature1" value="feature1">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="feature1">Feature 1</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="feature2" value="feature2">
+          <Checkbox id="feature2" value="feature2">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="feature2">Feature 2</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="feature3" value="feature3">
+          <Checkbox id="feature3" value="feature3">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="feature3">Feature 3</Label>
         </div>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
-    <CheckboxGroup.Root isDisabled defaultValue={["option1"]}>
+    <CheckboxGroup isDisabled defaultValue={["option1"]}>
       <Label>Disabled options</Label>
       <CheckboxGroup.Items>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="option1" value="option1">
+          <Checkbox id="option1" value="option1">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="option1">Option 1</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="option2" value="option2">
+          <Checkbox id="option2" value="option2">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="option2">Option 2</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="option3" value="option3">
+          <Checkbox id="option3" value="option3">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="option3">Option 3</Label>
         </div>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
 export const DisabledIndividual: Story = {
   render: () => (
-    <CheckboxGroup.Root>
+    <CheckboxGroup>
       <Label>Mixed availability</Label>
       <CheckboxGroup.Items>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="available" value="available">
+          <Checkbox id="available" value="available">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="available">Available option</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root isDisabled id="unavailable" value="unavailable">
+          <Checkbox isDisabled id="unavailable" value="unavailable">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label disabled htmlFor="unavailable">
             Unavailable option
           </Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root isDisabled id="coming-soon" value="coming-soon">
+          <Checkbox isDisabled id="coming-soon" value="coming-soon">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label disabled htmlFor="coming-soon">
             Coming soon
           </Label>
         </div>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
 export const ReadOnly: Story = {
   render: () => (
-    <CheckboxGroup.Root isReadOnly defaultValue={["agreed", "understood"]}>
+    <CheckboxGroup isReadOnly defaultValue={["agreed", "understood"]}>
       <Label>Review only</Label>
       <CheckboxGroup.Items>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="agreed" value="agreed">
+          <Checkbox id="agreed" value="agreed">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="agreed">Terms agreed</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="understood" value="understood">
+          <Checkbox id="understood" value="understood">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="understood">Privacy policy understood</Label>
         </div>
         <div className="flex items-center gap-3">
-          <Checkbox.Root id="newsletter-readonly" value="newsletter">
+          <Checkbox id="newsletter-readonly" value="newsletter">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label htmlFor="newsletter-readonly">Newsletter subscription</Label>
         </div>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
@@ -280,37 +280,37 @@ export const WithValidation: Story = {
           }
         }}
       >
-        <CheckboxGroup.Root isInvalid={selected.length < 2} value={selected} onChange={setSelected}>
+        <CheckboxGroup isInvalid={selected.length < 2} value={selected} onChange={setSelected}>
           <Label required>Select your interests (at least 2)</Label>
           <Description>Choose topics you'd like to receive updates about</Description>
           <CheckboxGroup.Items>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="technology" value="technology">
+              <Checkbox id="technology" value="technology">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="technology">Technology</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="design" value="design">
+              <Checkbox id="design" value="design">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="design">Design</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="business" value="business">
+              <Checkbox id="business" value="business">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="business">Business</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="marketing" value="marketing">
+              <Checkbox id="marketing" value="marketing">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="marketing">Marketing</Label>
             </div>
           </CheckboxGroup.Items>
           <FieldError>Please select at least 2 interests</FieldError>
-        </CheckboxGroup.Root>
+        </CheckboxGroup>
         <button
           className="bg-accent text-accent-foreground hover:bg-accent-hover rounded-md px-4 py-2"
           type="submit"
@@ -324,13 +324,13 @@ export const WithValidation: Story = {
 
 export const ComplexLabels: Story = {
   render: () => (
-    <CheckboxGroup.Root>
+    <CheckboxGroup>
       <Label>Subscription tiers</Label>
       <CheckboxGroup.Items className="gap-4">
         <div className="flex gap-3">
-          <Checkbox.Root className="mt-1" id="basic-tier" value="basic">
+          <Checkbox className="mt-1" id="basic-tier" value="basic">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div className="flex flex-col gap-1">
             <Label className="font-medium" htmlFor="basic-tier">
               Basic Plan
@@ -339,9 +339,9 @@ export const ComplexLabels: Story = {
           </div>
         </div>
         <div className="flex gap-3">
-          <Checkbox.Root className="mt-1" id="pro-tier" value="pro">
+          <Checkbox className="mt-1" id="pro-tier" value="pro">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div className="flex flex-col gap-1">
             <Label className="font-medium" htmlFor="pro-tier">
               Pro Plan
@@ -350,9 +350,9 @@ export const ComplexLabels: Story = {
           </div>
         </div>
         <div className="flex gap-3">
-          <Checkbox.Root className="mt-1" id="enterprise-tier" value="enterprise">
+          <Checkbox className="mt-1" id="enterprise-tier" value="enterprise">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div className="flex flex-col gap-1">
             <Label className="font-medium" htmlFor="enterprise-tier">
               Enterprise Plan
@@ -361,7 +361,7 @@ export const ComplexLabels: Story = {
           </div>
         </div>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };
 
@@ -377,29 +377,29 @@ export const FormIntegration: Story = {
 
     return (
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <CheckboxGroup.Root name="preferences">
+        <CheckboxGroup name="preferences">
           <Label>Email preferences</Label>
           <CheckboxGroup.Items>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="updates" value="updates">
+              <Checkbox id="updates" value="updates">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="updates">Product updates</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="newsletter-form" value="newsletter">
+              <Checkbox id="newsletter-form" value="newsletter">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="newsletter-form">Newsletter</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="offers" value="offers">
+              <Checkbox id="offers" value="offers">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="offers">Special offers</Label>
             </div>
           </CheckboxGroup.Items>
-        </CheckboxGroup.Root>
+        </CheckboxGroup>
         <button
           className="bg-accent text-accent-foreground hover:bg-accent-hover rounded-md px-4 py-2"
           type="submit"
@@ -413,35 +413,35 @@ export const FormIntegration: Story = {
 
 export const CleanPattern: Story = {
   render: () => (
-    <CheckboxGroup.Root defaultValue={["product"]}>
+    <CheckboxGroup defaultValue={["product"]}>
       <Label>Email Preferences</Label>
       <Description>Select the types of emails you'd like to receive</Description>
       <CheckboxGroup.Items>
         <Field variant="checkbox">
-          <Checkbox.Root value="product">
+          <Checkbox value="product">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div>
             <Label>Product updates</Label>
             <Description>New features and improvements</Description>
           </div>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="marketing">
+          <Checkbox value="marketing">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <Label>Marketing emails</Label>
         </Field>
         <Field variant="checkbox">
-          <Checkbox.Root value="security">
+          <Checkbox value="security">
             <Checkbox.Indicator />
-          </Checkbox.Root>
+          </Checkbox>
           <div>
             <Label>Security alerts</Label>
             <Description>Important notifications about your account</Description>
           </div>
         </Field>
       </CheckboxGroup.Items>
-    </CheckboxGroup.Root>
+    </CheckboxGroup>
   ),
 };

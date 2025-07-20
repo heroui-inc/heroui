@@ -255,19 +255,15 @@ CalendarCell.displayName = "HeroUI.Calendar.Cell";
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export const Calendar = Object.assign(
-  {},
-  {
-    Root: CalendarRoot,
-    Header: CalendarHeader,
-    Heading: CalendarHeading,
-    NavButton: CalendarNavButton,
-    Grid: CalendarGrid,
-    GridHeader: CalendarGridHeader,
-    HeaderCell: CalendarHeaderCell,
-    Cell: CalendarCell,
-  },
-);
+const CompoundCalendar = Object.assign(CalendarRoot, {
+  Header: CalendarHeader,
+  Heading: CalendarHeading,
+  NavButton: CalendarNavButton,
+  Grid: CalendarGrid,
+  GridHeader: CalendarGridHeader,
+  HeaderCell: CalendarHeaderCell,
+  Cell: CalendarCell,
+});
 
 export type {
   CalendarRootProps,
@@ -279,3 +275,5 @@ export type {
   CalendarHeaderCellProps,
   CalendarCellProps,
 };
+
+export default CompoundCalendar;
