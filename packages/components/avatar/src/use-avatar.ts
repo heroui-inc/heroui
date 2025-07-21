@@ -160,7 +160,6 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
    *
    * In this case, we'll show either the name avatar or default avatar
    */
-  const showFallback = (!src || !isImgLoaded) && showFallbackProp;
 
   const slots = useMemo(
     () =>
@@ -236,7 +235,8 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
     classNames,
     fallback,
     isImgLoaded,
-    showFallback,
+    imageStatus,
+    showFallback: showFallbackProp,
     ignoreFallback,
     getInitials,
     getAvatarProps,

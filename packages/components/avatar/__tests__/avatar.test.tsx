@@ -104,4 +104,88 @@ describe("Avatar - fallback + loading strategy", () => {
 
     expect(container.querySelector("svg")).toBeInTheDocument();
   });
+
+  test("should render fallback when image fails to load", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const {container} = render(
+      <Avatar name="Junior" src="https://avatars.githubusercontent.com/u/30373425" />,
+    );
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Should show initials when image fails to load
+    expect(container.querySelector("span")).toHaveTextContent("Jun");
+  });
+
+  test("should render fallback when image fails to load with showFallback=true", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const {container} = render(
+      <Avatar showFallback name="Junior" src="https://avatars.githubusercontent.com/u/30373425" />,
+    );
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Should show initials when image fails to load
+    expect(container.querySelector("span")).toHaveTextContent("Jun");
+  });
+
+  test("should show fallback when no src is provided", () => {
+    const {container} = render(<Avatar name="Junior" />);
+
+    // Should show initials when no src is provided
+    expect(container.querySelector("span")).toHaveTextContent("Jun");
+  });
+
+  test("should not show fallback during loading when showFallback=false", async () => {
+    const mock = mocks.image();
+
+    // Simulate loaded to test that fallback is not shown when image loads successfully
+    mock.simulate("loaded");
+
+    const {container} = render(
+      <Avatar
+        name="Junior"
+        showFallback={false}
+        src="https://avatars.githubusercontent.com/u/30373425"
+      />,
+    );
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Should not show initials when image loads successfully and showFallback is false
+    expect(container.querySelector("span")).not.toHaveTextContent("Jun");
+  });
+
+  test("should show fallback when image fails to load even with showFallback=false", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const {container} = render(
+      <Avatar
+        name="Junior"
+        showFallback={false}
+        src="https://avatars.githubusercontent.com/u/30373425"
+      />,
+    );
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Should show initials when image fails to load, even with showFallback=false
+    expect(container.querySelector("span")).toHaveTextContent("Jun");
+  });
 });

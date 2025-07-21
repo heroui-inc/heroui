@@ -19,6 +19,7 @@ const Avatar = forwardRef<"span", AvatarProps>((props, ref) => {
     slots,
     name,
     showFallback,
+    imageStatus,
     fallback: fallbackComponent,
     getInitials,
     getAvatarProps,
@@ -29,7 +30,11 @@ const Avatar = forwardRef<"span", AvatarProps>((props, ref) => {
   });
 
   const fallback = useMemo(() => {
-    if (!showFallback && src) return null;
+    // Don't show fallback if image is loaded successfully
+    if (src && imageStatus === "loaded") return null;
+
+    // Don't show fallback if showFallback is false and we have a src that's still loading
+    if (!showFallback && src && imageStatus === "loading") return null;
 
     if (fallbackComponent) {
       return (
@@ -48,7 +53,7 @@ const Avatar = forwardRef<"span", AvatarProps>((props, ref) => {
         {icon}
       </span>
     );
-  }, [showFallback, src, fallbackComponent, name, classNames]);
+  }, [showFallback, src, imageStatus, fallbackComponent, name, classNames]);
 
   return (
     <Component {...getAvatarProps()}>
