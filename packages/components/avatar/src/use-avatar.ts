@@ -145,7 +145,7 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
     src,
     onError,
     ignoreFallback,
-    shouldBypassImageLoad: as !== undefined,
+    shouldBypassImageLoad: as !== undefined || isHeroImage,
   });
 
   const isImgLoaded = imageStatus === "loaded";
