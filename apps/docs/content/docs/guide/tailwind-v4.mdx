@@ -34,25 +34,27 @@ TailwindCSS v4 is now available since 2.8.0! This guide will help you migrate yo
 
 Since Tailwind v4 favors a CSS-first approach, `tailwind.config.js` will not be required.
 
-Create `hero.ts` file
+Create `hero.ts` file to export `heroui` plugin.
 
 ```tsx
 // hero.ts
 import { heroui } from "@heroui/react";
+// or import from theme package if you are using individual packages.
+// import { heroui } from "@heroui/theme";
 export default heroui();
 ```
 
-Update your main css file
+Update your main css file as below
 
-```diff-js
-// your main css file
+```diff-css
+/* your main css file */
 - @tailwind base;
 - @tailwind components;
 - @tailwind utilities;
 
 + @import "tailwindcss";
 + @plugin './hero.ts';
-// Note: You may need to change the path to fit your project structure
+/* Note: You may need to change the path to fit your project structure */
 + @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 + @custom-variant dark (&:is(.dark *));
 ```
@@ -61,18 +63,21 @@ Update your main css file
 
 In Tailwind v4, `tailwind.config.js` is still supported for backward compatibility. If you still need to use it, you can load it explicity as below.
 
-```diff-js
-// your main css file
+```diff-css
+/* your main css file */
 - @tailwind base;
 - @tailwind components;
 - @tailwind utilities;
 
 + @import "tailwindcss";
-// Note: You may need to change the path to fit your project structure
+/* Note: You may need to change the path to fit your project structure */
 + @config "../../tailwind.config.js";
 ```
 
 ### Update PostCSS Configuration
+
+- `tailwindcss` was a PostCSS plugin in v3 and now it is in `@tailwindcss/postcss` package.
+- `autoprefixer` is no longer required as prefixing is handled automatically.
 
 ```diff-js
 // postcss.config.js
