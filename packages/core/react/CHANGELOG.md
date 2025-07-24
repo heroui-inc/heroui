@@ -1,5 +1,12 @@
 # @heroui/react
 
+## 2.8.2
+
+### Patch Changes
+
+- Updated dependencies [[`9dceb11`](https://github.com/heroui-inc/heroui/commit/9dceb116ce1a260e099be738af9f175446823d53)]:
+  - @heroui/number-input@2.0.15
+
 ## 2.8.1
 
 ### Patch Changes
