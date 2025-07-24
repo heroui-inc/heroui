@@ -24,7 +24,7 @@ import {colorVariants} from "../utils";
  */
 const alert = tv({
   slots: {
-    base: "flex flex-grow flex-row w-full items-start py-3 px-4 gap-x-1",
+    base: "flex flex-grow flex-row w-full items-center py-3 px-4 gap-x-1",
     mainWrapper:
       "h-full flex-grow min-h-10 ms-2 flex flex-col box-border items-start text-inherit justify-center",
     title: "text-small w-full font-medium block text-inherit leading-5",
@@ -82,7 +82,7 @@ const alert = tv({
     },
     hasContent: {
       false: {
-        base: "items-start",
+        base: "items-center",
         mainWrapper: "justify-center items-center",
       },
     },
