@@ -48,11 +48,11 @@
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/use-aria-overlay": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/overlays": "3.27.3",
-    "@react-aria/tooltip": "3.8.5",
-    "@react-stately/tooltip": "3.5.5",
-    "@react-types/overlays": "3.8.16",
-    "@react-types/tooltip": "3.4.18"
+    "@react-aria/overlays": "3.28.0",
+    "@react-aria/tooltip": "3.8.6",
+    "@react-stately/tooltip": "3.5.6",
+    "@react-types/overlays": "3.9.0",
+    "@react-types/tooltip": "3.4.19"
   },
   "devDependencies": {
     "@heroui/button": "workspace:*",
