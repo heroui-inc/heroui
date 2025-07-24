@@ -1,5 +1,11 @@
 # @heroui/number-input
 
+## 2.0.15
+
+### Patch Changes
+
+- [#5484](https://github.com/heroui-inc/heroui/pull/5484) [`9dceb11`](https://github.com/heroui-inc/heroui/commit/9dceb116ce1a260e099be738af9f175446823d53) Thanks [@wulimao49](https://github.com/wulimao49)! - Fixed NumberInput label class being incorrectly mixed into the description (#5489).
+
 ## 2.0.14
 
 ### Patch Changes
