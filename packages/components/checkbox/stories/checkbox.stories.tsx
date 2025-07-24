@@ -237,7 +237,7 @@ const SeparateFromFormTemplate = (args: CheckboxProps) => {
           label: "text-small",
         }}
         form="heroui-form"
-        name="terms"
+        name="checkbox"
         validationBehavior="aria"
         value="true"
         onValueChange={() => setResult(undefined)}

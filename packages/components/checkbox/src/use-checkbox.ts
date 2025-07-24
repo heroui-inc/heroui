@@ -152,7 +152,6 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
   const ariaCheckboxProps = useMemo(
     () => ({
       name,
-      form,
       value,
       children,
       autoFocus,
@@ -169,7 +168,6 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
     }),
     [
       name,
-      form,
       value,
       children,
       autoFocus,
