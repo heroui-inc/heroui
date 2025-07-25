@@ -309,97 +309,15 @@ export default function App() {
 
 ## TanStack
 
-To use [TanStack Router](https://tanstack.com/router/latest) with HeroUI, render HeroUI's RouterProvider inside your root route. 
-Use `router.navigate` in the `navigate` prop, and `router.buildLocation` in the `useHref` prop.
+To use [TanStack Router](https://tanstack.com/router/latest), use the [createLink](https://tanstack.com/router/latest/docs/framework/react/guide/custom-link) function to wrap each HeroUI component as a link. `RouterProvider` is not needed.
 
 ```tsx
 // app/root.tsx
-import type {NavigateOptions, ToOptions} from '@tanstack/react-router';
+import {createLink} from '@tanstack/react-router';
+import {Link as HeroUILink, DropdownItem} from '@heroui/react';
 
-import {useRouter} from '@tanstack/react-router';
-import {HeroUIProvider} from "@heroui/react";
-
-
-declare module "@react-types/shared" {
-  interface RouterConfig {
-    href: ToOptions['to'];
-    routerOptions: Omit<NavigateOptions, keyof ToOptions>;
-  }
-}
-
-function RootRoute() {
-  let router = useRouter();
-
-  return (
-    <HeroUIProvider
-      navigate={(to, options) => router.navigate({to, ...options})}
-      useHref={(to) => router.buildLocation({to}).href}
-    >
-      {/* You app here... */}
-    </HeroUIProvider>
-  );
-}
-```
-
-## Usage examples
-
-Now that you have set up the `HeroUIProvider` in your app, you can use the `href` prop in the `Tabs`,
-`Listbox` and `Dropdown` items to navigate between pages.
-
-The [Link](/docs/components/link) component will also use the `navigate` function from the
-`HeroUIProvider` to navigate between pages.
-
-```jsx
-import {
-  Tabs,
-  Tab,
-  Listbox,
-  ListboxItem,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-  Link,
-} from "@heroui/react";
-
-function App() {
-  return (
-    <>
-      <Tabs aria-label="Navigation">
-        <Tab key="home" href="/home">
-          Home
-        </Tab>
-        <Tab key="about" href="/about">
-          About
-        </Tab>
-      </Tabs>
-      <Listbox aria-label="Navigation">
-        <ListboxItem key="home" href="/home">
-          Home
-        </ListboxItem>
-        <ListboxItem key="about" href="/about">
-          About
-        </ListboxItem>
-      </Listbox>
-      <Dropdown>
-        <DropdownTrigger>
-          <Button>Open</Button>
-        </DropdownTrigger>
-        <DropdownMenu aria-label="Navigation">
-          <DropdownItem key="home" href="/home">
-            Home
-          </DropdownItem>
-          <DropdownItem key="about" href="/about">
-            About
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-      <Link href="/home">Home</Link>
-      <Link href="/about">About</Link>
-    </>
-  );
-}
+export const Link = createLink(HeroUILink);
+export const DropdownItemLink = createLink(DropdownItem);
 ```
 
 <Spacer y={2} />
