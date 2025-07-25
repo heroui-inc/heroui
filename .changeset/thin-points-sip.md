@@ -2,4 +2,4 @@
 "@heroui/popover": patch
 ---
 
-fix(popover): add null check to PopoverContent children to fix arrow glitch (#4142)
+fix(popover): arrow glitch in popover content (#4142)
