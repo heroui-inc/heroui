@@ -47,16 +47,16 @@ const PopoverContent = (props: PopoverContentProps) => {
 
   const Component = as || OverlayComponent || "div";
 
-  const content = (
+  const content = children && (
     <>
       {!isNonModal && <DismissButton onDismiss={onClose} />}
-      {children && (
+      {
         <Component {...dialogProps}>
           <div {...getContentProps({className})}>
             {typeof children === "function" ? children(titleProps) : children}
           </div>
         </Component>
-      )}
+      }
       <DismissButton onDismiss={onClose} />
     </>
   );
