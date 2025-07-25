@@ -41,7 +41,6 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
     disableAnimation,
     disableCursorAnimation,
     shouldSelectOnPressUp,
-    onClick,
     tabRef,
     ...otherProps
   } = props;
@@ -111,8 +110,11 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
         filterDOMProps(otherProps, {
           enabled: shouldFilterDOMProps,
           omitPropNames: new Set(["title"]),
+          // onClick is now from `tabProps`.
+          // omit it to avoid executing onClick it twice.
+          omitEventNames: new Set(["onClick"]),
         }),
-        {onClick: chain(handleClick, onClick, tabProps.onClick)},
+        {onClick: chain(handleClick, tabProps.onClick)},
       )}
       className={slots.tab?.({class: tabStyles})}
       title={otherProps?.titleValue}

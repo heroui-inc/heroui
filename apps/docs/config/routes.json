@@ -34,7 +34,8 @@
           "key": "routing",
           "title": "Routing",
           "keywords": "client side routing, routing, browser routing, heroui, next.js router, react router, remix router",
-          "path": "/docs/guide/routing.mdx"
+          "path": "/docs/guide/routing.mdx",
+          "updated": true
         },
         {
           "key": "forms",
