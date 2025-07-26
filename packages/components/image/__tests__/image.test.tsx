@@ -4,9 +4,39 @@ import {render, act} from "@testing-library/react";
 import {Image} from "../src";
 
 const src = "https://via.placeholder.com/300x450";
-const fallbackSrc = "https://via.placeholder.com/300x450";
+const fallbackSrc = "https://via.placeholder.com/300x200";
+const loadingSrc = "/images/local-image-small.jpg";
 
 describe("Image", () => {
+  let imageOnLoad: any = null;
+
+  beforeAll(() => {
+    function trackImageOnLoad() {
+      Object.defineProperty(window.Image.prototype, "onload", {
+        get() {
+          return this._onload;
+        },
+        set(fn) {
+          imageOnLoad = fn;
+          this._onload = fn;
+        },
+        configurable: true,
+      });
+    }
+
+    trackImageOnLoad();
+  });
+
+  afterAll(() => {
+    // Restore original Image prototype
+    window.Image.prototype._onload = undefined;
+    Object.defineProperty(window.Image.prototype, "onload", {
+      value: undefined,
+      writable: true,
+      configurable: true,
+    });
+  });
+
   it("should render correctly", () => {
     const wrapper = render(<Image />);
 
@@ -26,7 +56,89 @@ describe("Image", () => {
     expect(wrapper.getByRole("img")).toBeInstanceOf(HTMLImageElement);
   });
 
-  test("renders image if there is no fallback behavior defined", async () => {
+  test("renders an image while loading the src image. When loading finished, renders the src image.", async () => {
+    const onLoad = jest.fn();
+    const wrapper = render(
+      <Image
+        classNames={{loadingImgWrapper: "bg-cover"}}
+        loadingSrc={loadingSrc}
+        src={src}
+        onLoad={onLoad}
+      />,
+    );
+    const imageParent = wrapper.getByRole("img").parentElement;
+
+    expect(imageParent).not.toBeNull();
+    expect(imageParent!.getAttribute("class")).toContain("bg-cover");
+
+    const computedLoadingStyle = window.getComputedStyle(imageParent!);
+
+    expect(computedLoadingStyle.backgroundImage).toBe(`url(${loadingSrc})`);
+
+    act(() => {
+      imageOnLoad();
+    });
+
+    const computedLoadedStyle = window.getComputedStyle(imageParent!);
+
+    expect(onLoad).toHaveBeenCalled();
+    expect(computedLoadedStyle.backgroundImage).toBe("");
+  });
+
+  test("renders fallback source if src is wrong or not found.", async () => {
+    let imageOnError: any = null;
+
+    function trackImageOnError() {
+      Object.defineProperty(window.Image.prototype, "onerror", {
+        get() {
+          return this._onerror;
+        },
+        set(fn) {
+          imageOnError = fn;
+          this._onerror = fn;
+        },
+        configurable: true,
+      });
+    }
+
+    trackImageOnError();
+
+    const cleanup = () => {
+      window.Image.prototype._onerror = undefined;
+      Object.defineProperty(window.Image.prototype, "onerror", {
+        value: undefined,
+        writable: true,
+        configurable: true,
+      });
+    };
+
+    const onError = jest.fn();
+    const wrapper = render(
+      <Image
+        alt="test"
+        classNames={{fallbackImgWrapper: "bg-contain"}}
+        fallbackSrc={fallbackSrc}
+        src="wrong-src-address"
+        onError={onError}
+      />,
+    );
+    const imageParent = wrapper.getByRole("img").parentElement;
+
+    expect(imageParent).not.toBeNull();
+
+    act(() => {
+      imageOnError();
+    });
+
+    expect(onError).toHaveBeenCalled();
+    const computedStyle = window.getComputedStyle(imageParent!);
+
+    expect(computedStyle.backgroundImage).toBe(`url(${fallbackSrc})`);
+    expect(imageParent!.getAttribute("class")).toContain("bg-contain");
+    cleanup();
+  });
+
+  test("renders image if there is no loading or fallback behavior defined", async () => {
     const wrapper = render(<Image src={src} />);
 
     expect(wrapper.getByRole("img")).toHaveAttribute("src", src);
@@ -46,28 +158,12 @@ describe("Image", () => {
   });
 
   test("should fire onload", () => {
-    let imageOnload: any = null;
-
-    function trackImageOnload() {
-      Object.defineProperty(window.Image.prototype, "onload", {
-        get() {
-          return this._onload;
-        },
-        set(fn) {
-          imageOnload = fn;
-          this._onload = fn;
-        },
-      });
-    }
-
-    trackImageOnload();
-
     const onLoad = jest.fn();
 
     const wrapper = render(<Image fallbackSrc={fallbackSrc} src={src} onLoad={onLoad} />);
 
     act(() => {
-      imageOnload();
+      imageOnLoad();
     });
 
     expect(wrapper.getByRole("img")).toHaveAttribute("src", src);
