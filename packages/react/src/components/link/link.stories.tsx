@@ -1,10 +1,11 @@
 import type {LinkProps} from "./link";
 import type {Meta} from "@storybook/react";
 
-import {buttonVariants} from "../button";
+import React from "react";
+
 import {LinkIcon} from "../icons";
 
-import {Link} from "./link";
+import {Link} from "./index";
 
 export default {
   argTypes: {},
@@ -20,7 +21,7 @@ const Template = (_props: LinkProps) => (
     <Link isDisabled href="#">
       Call to action <LinkIcon className="text-muted absolute -right-2 top-1" />
     </Link>
-    <Link
+    {/* <Link
       href="https://heroui.com"
       target="_blank"
       className={(renderProps) =>
@@ -28,7 +29,7 @@ const Template = (_props: LinkProps) => (
       }
     >
       Call to action
-    </Link>
+    </Link> */}
   </div>
 );
 

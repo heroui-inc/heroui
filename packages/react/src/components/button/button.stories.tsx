@@ -6,7 +6,7 @@ import React, {useState} from "react";
 
 import {Spinner} from "../spinner";
 
-import {Button} from "./button";
+import {Button} from "./index";
 
 export default {
   argTypes: {

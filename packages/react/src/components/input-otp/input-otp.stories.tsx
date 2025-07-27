@@ -6,14 +6,9 @@ import {Description} from "../description";
 import {Label} from "../label";
 import {Text} from "../text";
 
-import {InputOTP} from "./input-otp";
+import {InputOTP} from "./index";
 
 const meta: Meta<typeof InputOTP> = {
-  title: "Components/InputOTP",
-  component: InputOTP,
-  parameters: {
-    layout: "centered",
-  },
   argTypes: {
     isDisabled: {
       control: "boolean",
@@ -25,6 +20,11 @@ const meta: Meta<typeof InputOTP> = {
       control: "number",
     },
   },
+  component: InputOTP,
+  parameters: {
+    layout: "centered",
+  },
+  title: "Components/InputOTP",
 };
 
 export default meta;

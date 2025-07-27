@@ -2,14 +2,19 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Slider} from "./slider";
+import {Slider} from "./index";
 
 const meta: Meta<typeof Slider> = {
-  title: "Components/Slider",
-  component: Slider,
-  parameters: {
-    layout: "centered",
+  argTypes: {
+    isDisabled: {
+      control: {type: "boolean"},
+    },
+    orientation: {
+      control: {type: "select"},
+      options: ["horizontal", "vertical"],
+    },
   },
+  component: Slider,
   decorators: [
     (Story) => (
       <div className="w-96 p-8">
@@ -17,16 +22,11 @@ const meta: Meta<typeof Slider> = {
       </div>
     ),
   ],
-  tags: ["autodocs"],
-  argTypes: {
-    orientation: {
-      control: {type: "select"},
-      options: ["horizontal", "vertical"],
-    },
-    isDisabled: {
-      control: {type: "boolean"},
-    },
+  parameters: {
+    layout: "centered",
   },
+  tags: ["autodocs"],
+  title: "Components/Slider",
 };
 
 export default meta;

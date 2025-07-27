@@ -7,23 +7,31 @@ import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 import React from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps, createClassBuilder} from "../../utils";
+import {composeTwRenderProps, tv} from "../../utils";
 
 // Create button class builder with complete class name mappings
-const getButtonClasses = createClassBuilder({
+const getButtonClasses = tv({
   base: "button",
+  defaultVariants: {
+    isIconOnly: false,
+    size: "md",
+    variant: "primary",
+  },
   variants: {
+    isIconOnly: {
+      true: "button--icon-only",
+    },
     size: {
-      sm: "button--sm",
-      md: "button--md",
       lg: "button--lg",
+      md: "button--md",
+      sm: "button--sm",
     },
     variant: {
+      danger: "button--danger",
+      ghost: "button--ghost",
       primary: "button--primary",
       secondary: "button--secondary",
       tertiary: "button--tertiary",
-      ghost: "button--ghost",
-      danger: "button--danger",
     },
   },
 });
@@ -31,24 +39,16 @@ const getButtonClasses = createClassBuilder({
 // Extract variant props using the VariantProps utility
 type ButtonVariants = VariantProps<typeof getButtonClasses>;
 
-// Extract individual types for export if needed
-export type ButtonSize = ButtonVariants["size"];
-export type ButtonVariant = ButtonVariants["variant"];
-
 interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
   ref?: Ref<HTMLButtonElement>;
-  isIconOnly?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({children, className, isIconOnly = false, size = "md", variant = "primary", ...rest}, ref) => {
+  ({children, className, isIconOnly, size, variant, ...rest}, ref) => {
     return (
       <ButtonPrimitive
         ref={ref}
-        className={composeTwRenderProps(
-          className,
-          getButtonClasses({size, variant}, {"icon-only": isIconOnly}),
-        )}
+        className={composeTwRenderProps(className, getButtonClasses({isIconOnly, size, variant}))}
         {...rest}
       >
         {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}

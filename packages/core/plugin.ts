@@ -45,6 +45,7 @@ export interface PluginOptions {
    * Prefix for all HeroUI classes
    * @default ""
    * @example "heroui-"
+   * @important ⚠️ In Progress - Still not supported by the components class builder
    */
   prefix?: string;
   /**
