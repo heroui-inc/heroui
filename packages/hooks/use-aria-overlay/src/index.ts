@@ -65,6 +65,7 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
           e.preventDefault();
         }
       }
+      onHide();
     }
   };
 
@@ -76,7 +77,6 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
           e.preventDefault();
         }
       }
-
       onHide();
     }
   };
