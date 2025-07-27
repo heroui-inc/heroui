@@ -1,0 +1,50 @@
+/* HeroUI Glass Light Theme */
+color-scheme: light;
+/* Base Colors - glass effect with transparency */
+--background: oklch(100% 0 0 / 0.9);
+--foreground: oklch(14.48% 0 0);
+--panel: oklch(100% 0 0 / 0.6);
+
+--muted: var(--color-neutral-500);
+--muted-foreground: var(--color-neutral-400);
+
+--surface: oklch(100% 0 0 / 0.3);
+--surface-foreground: var(--foreground);
+
+--scrollbar: var(--color-neutral-300);
+
+--base: oklch(100% 0 0 / 0.2);
+--base-foreground: var(--color-neutral-600);
+--base-hover: oklch(100% 0 0 / 0.3);
+
+--accent: oklch(0.14 0 0 / 0.9);
+--accent-foreground: oklch(0.99 0 0);
+--accent-hover: oklch(0.22 0 0 / 0.9);
+
+--accent-soft: oklch(0% 0 0 / 0.1);
+--accent-soft-foreground: var(--color-neutral-700);
+--accent-soft-hover: oklch(0% 0 0 / 0.15);
+
+/* Status Colors - slightly transparent */
+--success: oklch(0.55 0.1241 153.51 / 0.9);
+--success-foreground: oklch(99.11% 0 0);
+
+--warning: oklch(0.67 0.1428 72.73 / 0.9);
+--warning-foreground: oklch(99.11% 0 0);
+
+--danger: oklch(0.59 0.2228 29.94 / 0.9);
+--danger-foreground: oklch(99.11% 0 0);
+--danger-hover: oklch(0.53 0.2 29.94 / 0.9);
+
+/* Misc Colors */
+--border: oklch(0 0 0 / 10%);
+--focus: oklch(0% 0 0 / 20%);
+--link: var(--foreground);
+
+/* Shadow - glass effect shadow */
+--shadow-border:
+  0 0px 5px 0px rgba(0, 0, 0, 0.05), 0 2px 15px 0px rgba(0, 0, 0, 0.08),
+  0 0px 1px 0px rgba(255, 255, 255, 0.5) inset;
+
+/* Backdrop blur for glass effect */
+--backdrop-blur: blur(12px);

@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "turbo dev --filter=@heroui/storybook",
     "dev:docs": "turbo dev --filter=@heroui/docs",
-    "build": "turbo build",
+    "build": "turbo build --filter=@heroui/core --filter=@heroui/react",
     "build:docs": "turbo build --filter=@heroui/docs",
     "build:react": "turbo build --filter=@heroui/react",
     "build:storybook": "turbo build --filter=@heroui/storybook",
@@ -41,7 +41,7 @@
     "clean": "pnpm clean:cache && pnpm i",
     "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name 'pnpm-lock.yaml' \\) -type d -prune -exec rm -rf '{}' +",
     "upli": "pnpm up --filter \"./**\"  -L -i",
-    "postinstall": "husky"
+    "postinstall": "husky install && pnpm --filter @heroui/core build"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.5.1",

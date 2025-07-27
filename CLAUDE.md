@@ -449,6 +449,67 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 - Use the commit convention to avoid git hook failures
 - Run lint and type checks before committing: `pnpm lint && pnpm typecheck`
 
+## Tailwind CSS Class Detection Rules
+
+**CRITICAL**: Tailwind CSS scans files as plain text and requires complete class names to be statically detectable.
+
+### Key Rules:
+
+1. **Never construct class names dynamically**
+   
+   ❌ **BAD** - Dynamic string concatenation:
+   ```jsx
+   // These patterns will NOT work:
+   <div className={`text-${color}-600`} />
+   <button className={`bg-${variant}-500`} />
+   <span className={`button--${size}`} />
+   ```
+   
+   ✅ **GOOD** - Complete class names:
+   ```jsx
+   // Use complete strings or object mappings:
+   <div className={error ? 'text-red-600' : 'text-green-600'} />
+   ```
+
+2. **Use object mappings for dynamic classes**
+   
+   ❌ **BAD** - Props in template literals:
+   ```jsx
+   function Button({ color }) {
+     return <button className={`bg-${color}-600 hover:bg-${color}-500`} />
+   }
+   ```
+   
+   ✅ **GOOD** - Map props to complete classes:
+   ```jsx
+   function Button({ color }) {
+     const colorVariants = {
+       blue: "bg-blue-600 hover:bg-blue-500",
+       red: "bg-red-600 hover:bg-red-500",
+     };
+     return <button className={colorVariants[color]} />
+   }
+   ```
+
+3. **For BEM-style classes, use complete mappings**
+   
+   ✅ **GOOD** - Complete class name mappings:
+   ```jsx
+   const sizeClasses = {
+     sm: "button--sm",
+     md: "button--md",
+     lg: "button--lg",
+   };
+   
+   // Use the mapping:
+   className={sizeClasses[size]}
+   ```
+
+### Why This Matters:
+- Tailwind generates CSS only for classes it can detect in your source files
+- Dynamic concatenation prevents Tailwind from finding the complete class names
+- Missing classes = missing styles in production
+
 ## Figma Integration & MCP Server Rules
 
 ### Figma Dev Mode MCP Server
@@ -498,3 +559,59 @@ Use Context7 MCP when working with external libraries, especially:
 - Working with MDX components and layouts
 - Setting up search functionality
 - Implementing documentation navigation and structure
+
+## GitHub Repository Search with Grep MCP
+
+**IMPORTANT**: We have the Grep MCP server available for searching over a million public GitHub repositories to find real-world code examples and patterns.
+
+### When to Use Grep MCP
+
+Use the Grep MCP (`mcp__grep__searchGitHub`) when tackling complex problems that require:
+- **Real-world implementation examples**: Finding how other developers solve similar problems
+- **Best practices and patterns**: Discovering production-ready code patterns
+- **Library usage examples**: Understanding how specific APIs or libraries are used in practice
+- **Complex integrations**: Seeing how different libraries work together
+- **Error handling patterns**: Learning from battle-tested error handling approaches
+
+### How to Use Grep MCP
+
+The Grep MCP searches for **literal code patterns**, not keywords. Use actual code syntax:
+
+**Good examples**:
+- `'useState('` - Find React hooks usage
+- `'import { tv } from "tailwind-variants"'` - Find tailwind-variants imports
+- `'forwardRef<'` - Find forwardRef usage patterns
+- `'(?s)useEffect\\(\\(\\) => {.*return.*}'` - Find useEffect with cleanup (regex)
+
+**Bad examples**:
+- `'react best practices'` - This is a keyword, not code
+- `'how to use tailwind'` - Use actual import statements instead
+
+### Example Use Cases
+
+1. **Complex Component Patterns**:
+   - Search: `'compound.*component'` with language=['TypeScript', 'TSX']
+   - Find how others implement compound component patterns
+
+2. **Accessibility Implementations**:
+   - Search: `'AriaProps'` or `'useAriaLabel'`
+   - Discover accessibility patterns in React apps
+
+3. **Monorepo Configurations**:
+   - Search: `'pnpm-workspace.yaml'` with path='pnpm-workspace.yaml'
+   - Study monorepo setups similar to HeroUI
+
+4. **Tailwind CSS v4 Patterns**:
+   - Search: `'@import "tailwindcss"'` with language=['CSS']
+   - Find Tailwind CSS v4 usage patterns
+
+5. **React Aria Components Usage**:
+   - Search: `'from "react-aria-components"'`
+   - See how others integrate React Aria Components
+
+### Best Practices
+
+- Use language filters to narrow results (e.g., `language=['TypeScript', 'TSX']`)
+- Use regex patterns with `useRegexp=true` for flexible matching
+- Filter by well-known repositories for quality examples (e.g., `repo='vercel/'`)
+- Combine with file path filters for specific file types

@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Generated files
+*.generated.js
+*.generated.ts
+
+# IDE
+.idea
+.vscode
+
+# OS
+.DS_Store 

@@ -1,26 +1,54 @@
 "use client";
 
-import type {ButtonVariants} from "./button.styles";
+import type {VariantProps} from "../../utils";
 import type {Ref} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import React from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps, createClassBuilder} from "../../utils";
 
-import {buttonVariants} from "./button.styles";
+// Create button class builder with complete class name mappings
+const getButtonClasses = createClassBuilder({
+  base: "button",
+  variants: {
+    size: {
+      sm: "button--sm",
+      md: "button--md",
+      lg: "button--lg",
+    },
+    variant: {
+      primary: "button--primary",
+      secondary: "button--secondary",
+      tertiary: "button--tertiary",
+      ghost: "button--ghost",
+      danger: "button--danger",
+    },
+  },
+});
+
+// Extract variant props using the VariantProps utility
+type ButtonVariants = VariantProps<typeof getButtonClasses>;
+
+// Extract individual types for export if needed
+export type ButtonSize = ButtonVariants["size"];
+export type ButtonVariant = ButtonVariants["variant"];
 
 interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
   ref?: Ref<HTMLButtonElement>;
+  isIconOnly?: boolean;
 }
 
-const Button = React.forwardRef<React.ElementRef<typeof ButtonPrimitive>, ButtonProps>(
-  ({children, className, isIconOnly, size, variant, ...rest}, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({children, className, isIconOnly = false, size = "md", variant = "primary", ...rest}, ref) => {
     return (
       <ButtonPrimitive
         ref={ref}
-        className={composeTwRenderProps(className, buttonVariants({isIconOnly, size, variant}))}
+        className={composeTwRenderProps(
+          className,
+          getButtonClasses({size, variant}, {"icon-only": isIconOnly}),
+        )}
         {...rest}
       >
         {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}

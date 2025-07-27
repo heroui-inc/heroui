@@ -1,0 +1,57 @@
+/* Button component styles */
+
+/* Base button styles */
+.button {
+  @apply cursor-(--cursor-interactive) focus-visible:ring-focus focus-visible:ring-offset-background disabled:cursor-(--cursor-disabled) disabled:opacity-(--disabled-opacity) aria-disabled:cursor-(--cursor-disabled) aria-disabled:opacity-(--disabled-opacity) relative isolate inline-flex origin-center select-none items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium transition-[transform,background-color] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none aria-disabled:pointer-events-none data-[pending]:pointer-events-none [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:my-0.5 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:self-center sm:[&_svg]:my-1 sm:[&_svg]:size-4;
+}
+
+/* Size variants */
+.button--sm {
+  @apply h-9 px-3 text-sm md:h-8 [&_svg]:size-4;
+}
+
+.button--md {
+  @apply h-10 md:h-9;
+}
+
+.button--lg {
+  @apply h-11 md:h-10;
+}
+
+/* Color variants */
+.button--primary {
+  @apply bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-hover data-[pressed=true]:bg-accent-hover;
+}
+
+.button--secondary {
+  @apply bg-accent-soft text-accent-soft-foreground hover:bg-accent-soft-hover active:bg-accent-soft-hover data-[pressed=true]:bg-accent-soft-hover;
+}
+
+.button--tertiary {
+  @apply border-border bg-base hover:bg-base-hover active:bg-base-hover data-[pressed=true]:bg-base-hover;
+}
+
+.button--ghost {
+  @apply hover:bg-accent-soft data-[pressed=true]:bg-accent-soft bg-transparent;
+}
+
+.button--danger {
+  @apply bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-hover data-[pressed=true]:bg-danger-hover;
+}
+
+/* Icon-only modifier */
+.button--icon-only {
+  @apply p-0;
+}
+
+.button--icon-only.button--sm {
+  @apply w-9 md:w-8;
+}
+
+.button--icon-only.button--md {
+  @apply w-10 md:w-9;
+}
+
+.button--icon-only.button--lg {
+  @apply w-11 md:w-10;
+}

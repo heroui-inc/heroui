@@ -51,6 +51,7 @@
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
+    "@heroui/core": "workspace:*",
     "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.7",
     "@radix-ui/react-slot": "1.2.3",

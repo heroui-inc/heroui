@@ -174,6 +174,12 @@ const CompoundInputOTP = Object.assign(InputOTPRoot, {
   Separator: InputOTPSeparator,
 });
 
-export type {InputOTPRootProps, InputOTPRootProps as InputOTPProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};
+export type {
+  InputOTPRootProps,
+  InputOTPRootProps as InputOTPProps,
+  InputOTPGroupProps,
+  InputOTPSlotProps,
+  InputOTPSeparatorProps,
+};
 
 export default CompoundInputOTP;

@@ -1,0 +1,10 @@
+{
+  "extends": "@heroui/standard/tsconfig/node.json",
+  "compilerOptions": {
+    "incremental": false,
+    "moduleResolution": "bundler",
+    "module": "ESNext"
+  },
+  "include": ["src", "tsup.config.ts"],
+  "exclude": ["dist", "node_modules"]
+}

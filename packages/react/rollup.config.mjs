@@ -108,7 +108,20 @@ export default defineConfig([
       sourcemap: false, // Disable sourcemaps
       exports: "default",
     },
-    external: [],
-    plugins,
+    external: [
+      // Only exclude peer dependencies for the plugin build
+      /^react($|\/)/,
+      /^react-dom($|\/)/,
+      /^tailwindcss($|\/)/,
+    ],
+    plugins: [
+      resolve({
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        // Resolve @heroui/core imports
+        preferBuiltins: false,
+        browser: true,
+      }),
+      ...plugins.slice(1), // Skip peerDepsExternal for plugin build
+    ],
   },
 ]);

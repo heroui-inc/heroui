@@ -1,0 +1,68 @@
+{
+  "name": "@heroui/core",
+  "version": "3.0.0-alpha.6",
+  "description": "HeroUI core styles and Tailwind plugin",
+  "author": "Hero Group <contact@heroui.com> (https://heroui.com)",
+  "homepage": "https://heroui.com",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:css": "node scripts/build-css.mjs",
+    "build": "pnpm clean:ts && pnpm build:css && tsup",
+    "predev": "pnpm build:css",
+    "dev": "concurrently \"node scripts/build-css.mjs --watch\" \"tsup --watch\" --kill-others",
+    "prebuild": "pnpm build:css",
+    "postbuild": "echo '✅ Build completed successfully'",
+    "clean": "rm -rf dist .turbo",
+    "clean:ts": "rm -f dist/*.js dist/*.d.ts dist/*.map dist/chunk-*",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "clean-package": "./clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "esnext",
+    "format": [
+      "esm"
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": false,
+    "minify": true,
+    "dts": true
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@heroui/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@heroui/standard": "workspace:*",
+    "@types/node": "22.10.2",
+    "chokidar": "^3.5.3",
+    "clean-package": "2.2.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.15.0",
+    "glob": "^11.0.0",
+    "postcss": "^8.4.49",
+    "postcss-import": "^16.1.0",
+    "postcss-js": "^4.0.1",
+    "postcss-nested": "^7.0.2",
+    "rimraf": "6.0.1",
+    "tailwindcss": "^4.1.4",
+    "tsup": "8.4.0"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=4.0.0"
+  }
+}

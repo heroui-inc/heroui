@@ -1,0 +1,33 @@
+/* Backdrop utilities */
+
+.backdrop-blur {
+  @apply backdrop-blur-[var(--backdrop-blur)];
+}
+
+.backdrop-blur-sm {
+  @apply backdrop-blur-sm;
+}
+
+.backdrop-blur-md {
+  @apply backdrop-blur-md;
+}
+
+.backdrop-blur-lg {
+  @apply backdrop-blur-lg;
+}
+
+.backdrop-blur-xl {
+  @apply backdrop-blur-xl;
+}
+
+.backdrop-blur-2xl {
+  @apply backdrop-blur-2xl;
+}
+
+.backdrop-blur-3xl {
+  @apply backdrop-blur-3xl;
+}
+
+.backdrop-blur-none {
+  @apply backdrop-blur-none;
+}

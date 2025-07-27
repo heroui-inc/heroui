@@ -1,0 +1,50 @@
+/* HeroUI Default Light Theme */
+color-scheme: light;
+
+/* Base Colors */
+--background: oklch(100% 0 0);
+--foreground: oklch(14.48% 0 0);
+--panel: oklch(100% 0 0);
+
+--radius: 0.75rem;
+
+--muted: var(--color-neutral-500);
+--muted-foreground: var(--color-neutral-400);
+
+--surface: var(--color-neutral-100);
+--surface-foreground: var(--foreground);
+
+--scrollbar: var(--color-neutral-300);
+
+--base: var(--color-neutral-50);
+--base-foreground: var(--color-neutral-600);
+--base-hover: var(--color-neutral-100);
+
+--accent: oklch(0.14 0 0);
+--accent-foreground: oklch(0.99 0 0);
+--accent-hover: oklch(0.22 0 0);
+
+--accent-soft: var(--color-neutral-200);
+--accent-soft-foreground: var(--color-neutral-700);
+--accent-soft-hover: var(--color-neutral-300);
+
+/* Status Colors */
+--success: oklch(0.55 0.1241 153.51);
+--success-foreground: oklch(99.11% 0 0);
+
+--warning: oklch(0.67 0.1428 72.73);
+--warning-foreground: oklch(99.11% 0 0);
+
+--danger: oklch(0.59 0.2228 29.94);
+--danger-foreground: oklch(99.11% 0 0);
+--danger-hover: oklch(0.53 0.2 29.94);
+
+/* Misc Colors */
+--border: oklch(0 0 0 / 15%);
+--focus: oklch(0% 0 0 / 20%);
+--link: var(--foreground);
+
+/* Shadow */
+--shadow-border:
+  0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
+  0 0px 1px 0px rgba(0, 0, 0, 0.3);

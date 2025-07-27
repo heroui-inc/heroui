@@ -7,9 +7,9 @@ import {Checkbox} from "../checkbox";
 import {Description} from "../description";
 import {Label} from "../label";
 import {Radio, RadioGroup} from "../radio";
-import {TextField} from "../text-field/text-field";
+import {TextField} from "../text-field";
 
-import * as Form from "./form";
+import {Form} from "./index";
 
 const meta: Meta<typeof Form> = {
   title: "Components/Form",
@@ -39,18 +39,18 @@ type Story = StoryObj<typeof Form>;
 export const Default: Story = {
   render: (args) => (
     <Form className="w-96 space-y-4" {...args}>
-      <TextField.Root isRequired name="username" type="text">
+      <TextField isRequired name="username" type="text">
         <TextField.Label>Username</TextField.Label>
         <TextField.Input />
         <TextField.Error />
-      </TextField.Root>
+      </TextField>
 
-      <TextField.Root isRequired name="email" type="email">
+      <TextField isRequired name="email" type="email">
         <TextField.Label>Email</TextField.Label>
         <TextField.Input />
         <TextField.Description>We&apos;ll never share your email</TextField.Description>
         <TextField.Error />
-      </TextField.Root>
+      </TextField>
 
       <Form.Actions>
         <Button type="submit">Submit</Button>
@@ -68,17 +68,17 @@ export const WithSections: Story = {
       <Form.Section>
         <h3 className="mb-3 text-lg font-semibold">Account Information</h3>
         <div className="space-y-4">
-          <TextField.Root isRequired name="username" type="text">
+          <TextField isRequired name="username" type="text">
             <TextField.Label>Username</TextField.Label>
             <TextField.Input />
             <TextField.Error />
-          </TextField.Root>
+          </TextField>
 
-          <TextField.Root isRequired name="email" type="email">
+          <TextField isRequired name="email" type="email">
             <TextField.Label>Email</TextField.Label>
             <TextField.Input />
             <TextField.Error />
-          </TextField.Root>
+          </TextField>
         </div>
       </Form.Section>
 
@@ -86,16 +86,16 @@ export const WithSections: Story = {
         <h3 className="mb-3 text-lg font-semibold">Preferences</h3>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <Checkbox.Root id="newsletter">
+            <Checkbox id="newsletter">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <Label htmlFor="newsletter">Subscribe to newsletter</Label>
           </div>
 
           <div className="flex items-center gap-3">
-            <Checkbox.Root id="notifications">
+            <Checkbox id="notifications">
               <Checkbox.Indicator />
-            </Checkbox.Root>
+            </Checkbox>
             <div className="space-y-1">
               <Label htmlFor="notifications">Email notifications</Label>
               <Description>Get notified when someone mentions you</Description>
@@ -152,24 +152,24 @@ export const WithValidation: Story = {
         }}
         {...args}
       >
-        <TextField.Root isRequired name="username" type="text">
+        <TextField isRequired name="username" type="text">
           <TextField.Label>Username</TextField.Label>
           <TextField.Input />
           <TextField.Error />
-        </TextField.Root>
+        </TextField>
 
-        <TextField.Root isRequired name="email" type="email">
+        <TextField isRequired name="email" type="email">
           <TextField.Label>Email</TextField.Label>
           <TextField.Input />
           <TextField.Error />
-        </TextField.Root>
+        </TextField>
 
-        <TextField.Root isRequired minLength={8} name="password" type="password">
+        <TextField isRequired minLength={8} name="password" type="password">
           <TextField.Label>Password</TextField.Label>
           <TextField.Input />
           <TextField.Description>Must be at least 8 characters</TextField.Description>
           <TextField.Error />
-        </TextField.Root>
+        </TextField>
 
         <Form.Actions>
           <Button type="submit">Create Account</Button>
@@ -186,31 +186,31 @@ export const ComplexForm: Story = {
         <h2 className="mb-6 text-2xl font-bold">User Registration</h2>
 
         <div className="grid grid-cols-2 gap-4">
-          <TextField.Root isRequired name="firstName" type="text">
+          <TextField isRequired name="firstName" type="text">
             <TextField.Label>First Name</TextField.Label>
             <TextField.Input />
             <TextField.Error />
-          </TextField.Root>
+          </TextField>
 
-          <TextField.Root isRequired name="lastName" type="text">
+          <TextField isRequired name="lastName" type="text">
             <TextField.Label>Last Name</TextField.Label>
             <TextField.Input />
             <TextField.Error />
-          </TextField.Root>
+          </TextField>
         </div>
 
         <div className="mt-4 space-y-4">
-          <TextField.Root isRequired name="email" type="email">
+          <TextField isRequired name="email" type="email">
             <TextField.Label>Email Address</TextField.Label>
             <TextField.Input />
             <TextField.Error />
-          </TextField.Root>
+          </TextField>
 
-          <TextField.Root name="phone" type="tel">
+          <TextField name="phone" type="tel">
             <TextField.Label>Phone Number</TextField.Label>
             <TextField.Input placeholder="+1 (555) 000-0000" />
             <TextField.Description>Optional</TextField.Description>
-          </TextField.Root>
+          </TextField>
         </div>
       </Form.Section>
 
@@ -218,21 +218,21 @@ export const ComplexForm: Story = {
         <h3 className="mb-3 text-lg font-semibold">Address Information</h3>
 
         <div className="space-y-4">
-          <TextField.Root name="street" type="text">
+          <TextField name="street" type="text">
             <TextField.Label>Street Address</TextField.Label>
             <TextField.Input />
-          </TextField.Root>
+          </TextField>
 
           <div className="grid grid-cols-2 gap-4">
-            <TextField.Root name="city" type="text">
+            <TextField name="city" type="text">
               <TextField.Label>City</TextField.Label>
               <TextField.Input />
-            </TextField.Root>
+            </TextField>
 
-            <TextField.Root name="zipCode" type="text">
+            <TextField name="zipCode" type="text">
               <TextField.Label>ZIP Code</TextField.Label>
               <TextField.Input />
-            </TextField.Root>
+            </TextField>
           </div>
         </div>
       </Form.Section>
@@ -267,16 +267,16 @@ export const ComplexForm: Story = {
 
           <div className="space-y-2 pt-2">
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="terms">
+              <Checkbox id="terms">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="terms">I agree to the terms and conditions</Label>
             </div>
 
             <div className="flex items-center gap-3">
-              <Checkbox.Root id="privacy">
+              <Checkbox id="privacy">
                 <Checkbox.Indicator />
-              </Checkbox.Root>
+              </Checkbox>
               <Label htmlFor="privacy">I have read the privacy policy</Label>
             </div>
           </div>
@@ -299,20 +299,20 @@ export const DisabledForm: Story = {
   },
   render: (args) => (
     <Form className="w-96 space-y-4" {...args}>
-      <TextField.Root name="username" type="text">
+      <TextField name="username" type="text">
         <TextField.Label>Username</TextField.Label>
         <TextField.Input defaultValue="johndoe" />
-      </TextField.Root>
+      </TextField>
 
-      <TextField.Root name="email" type="email">
+      <TextField name="email" type="email">
         <TextField.Label>Email</TextField.Label>
         <TextField.Input defaultValue="john@example.com" />
-      </TextField.Root>
+      </TextField>
 
       <div className="flex items-center gap-3">
-        <Checkbox.Root defaultSelected id="disabled-checkbox">
+        <Checkbox defaultSelected id="disabled-checkbox">
           <Checkbox.Indicator />
-        </Checkbox.Root>
+        </Checkbox>
         <Label htmlFor="disabled-checkbox">Remember me</Label>
       </div>
 
@@ -334,23 +334,23 @@ export const InlineErrors: Story = {
       }}
       {...args}
     >
-      <TextField.Root isInvalid name="username" type="text">
+      <TextField isInvalid name="username" type="text">
         <TextField.Label>Username</TextField.Label>
         <TextField.Input defaultValue="admin" />
         <TextField.Error />
-      </TextField.Root>
+      </TextField>
 
-      <TextField.Root isInvalid name="email" type="email">
+      <TextField isInvalid name="email" type="email">
         <TextField.Label>Email</TextField.Label>
         <TextField.Input defaultValue="invalid-email" />
         <TextField.Error />
-      </TextField.Root>
+      </TextField>
 
-      <TextField.Root name="password" type="password">
+      <TextField name="password" type="password">
         <TextField.Label>Password</TextField.Label>
         <TextField.Input />
         <TextField.Description>Choose a strong password</TextField.Description>
-      </TextField.Root>
+      </TextField>
 
       <Form.Actions>
         <Button type="submit">Continue</Button>

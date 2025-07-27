@@ -1,0 +1,11 @@
+{
+  "remove": ["devDependencies", "scripts", "clean-package"],
+  "replace": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "sideEffects": false
+  },
+  "backupPath": ".package.json.backup"
+}

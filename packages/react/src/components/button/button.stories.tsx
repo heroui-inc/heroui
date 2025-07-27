@@ -19,7 +19,7 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "tertiary", "danger"],
+      options: ["primary", "secondary", "tertiary", "ghost", "danger"],
     },
   },
   component: Button,
