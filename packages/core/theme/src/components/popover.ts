@@ -81,7 +81,7 @@ const popover = tv({
       "justify-center",
       "box-border",
       "subpixel-antialiased",
-      "outline-hidden",
+      "outline-solid outline-transparent",
       "box-border",
     ],
     trigger: ["z-10"],

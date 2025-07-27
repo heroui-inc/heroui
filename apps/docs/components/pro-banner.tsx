@@ -105,7 +105,7 @@ export const ProBanner = () => {
             HeroUI Pro
             <Icon
               aria-hidden="true"
-              className="outline-hidden transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
+              className="outline-solid outline-transparent transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
               icon={arrowRightIcon}
               width={16}
             />

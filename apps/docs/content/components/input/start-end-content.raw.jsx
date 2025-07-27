@@ -110,7 +110,7 @@ export default function App() {
                 Currency
               </label>
               <select
-                className="outline-hidden border-0 bg-transparent text-default-400 text-small"
+                className="outline-solid outline-transparent border-0 bg-transparent text-default-400 text-small"
                 id="currency"
                 name="currency"
               >

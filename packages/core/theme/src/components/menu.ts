@@ -12,7 +12,7 @@ import {dataFocusVisibleClasses} from "../utils";
 const menu = tv({
   slots: {
     base: "w-full relative flex flex-col gap-1 p-1 overflow-clip",
-    list: "w-full flex flex-col gap-0.5 outline-hidden",
+    list: "w-full flex flex-col gap-0.5 outline-solid outline-transparent",
     emptyContent: [
       "h-10",
       "px-2",
@@ -63,7 +63,7 @@ const menuItem = tv({
       "box-border",
       "rounded-small",
       "subpixel-antialiased",
-      "outline-hidden",
+      "outline-solid outline-transparent",
       "cursor-pointer",
       "tap-highlight-transparent",
       // focus ring
