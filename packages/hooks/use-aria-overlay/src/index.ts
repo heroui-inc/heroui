@@ -37,17 +37,17 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
 
   // Add the overlay ref to the stack of visible overlays on mount, and remove on unmount.
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !visibleOverlays.includes(ref)) {
       visibleOverlays.push(ref);
+
+      return () => {
+        let index = visibleOverlays.indexOf(ref);
+
+        if (index >= 0) {
+          visibleOverlays.splice(index, 1);
+        }
+      };
     }
-
-    return () => {
-      const index = visibleOverlays.indexOf(ref);
-
-      if (index >= 0) {
-        visibleOverlays.splice(index, 1);
-      }
-    };
   }, [isOpen, ref]);
 
   // Only hide the overlay when it is the topmost visible overlay in the stack
@@ -65,19 +65,10 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
           e.preventDefault();
         }
       }
-
-      // For consistency with React Aria, toggle the combobox/menu on mouse down, but touch up.
-      if (e.pointerType !== "touch") {
-        onHide();
-      }
     }
   };
 
   const onInteractOutside = (e: PointerEvent) => {
-    if (e.pointerType !== "touch") {
-      return;
-    }
-
     if (!shouldCloseOnInteractOutside || shouldCloseOnInteractOutside(e.target as Element)) {
       if (visibleOverlays[visibleOverlays.length - 1] === ref) {
         if (disableOutsideEvents) {
