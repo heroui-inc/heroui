@@ -479,8 +479,8 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     state.displayValidation.isInvalid === false &&
     state.realtimeValidation.isInvalid === true;
 
-  const getInputProps = () => {
-    return {
+  const getInputProps = () =>
+    ({
       ...otherProps,
       ...inputProps,
       ...slotsProps.inputProps,
@@ -491,8 +491,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           ? errorMessage({isInvalid, validationErrors, validationDetails})
           : errorMessage || validationErrors?.join(" "),
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
-    } as unknown as InputProps;
-  };
+    }) as unknown as InputProps;
 
   const getListBoxProps = () => {
     // Use isVirtualized prop if defined, otherwise fallback to default behavior
