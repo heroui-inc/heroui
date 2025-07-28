@@ -369,3 +369,40 @@ it("should close popover on scroll when shouldCloseOnScroll is false", async () 
   // assert that the popover is still open
   expect(popover).toHaveAttribute("aria-expanded", "true");
 });
+
+it("should display popover content only after content is ready", async () => {
+  jest.useFakeTimers();
+
+  const TestComponent = () => {
+    const [content, setContent] = React.useState("");
+
+    React.useEffect(() => {
+      const timer = setTimeout(() => {
+        setContent("test content");
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+    return (
+      <Popover defaultOpen>
+        <PopoverTrigger>
+          <Button data-testid="trigger">Open popover</Button>
+        </PopoverTrigger>
+        <PopoverContent data-testid="content-test">{content}</PopoverContent>
+      </Popover>
+    );
+  };
+
+  const wrapper = render(<TestComponent />);
+
+  expect(wrapper.queryByTestId("content-test")).not.toBeInTheDocument();
+
+  act(() => {
+    jest.advanceTimersByTime(1000);
+  });
+
+  expect(wrapper.getByTestId("content-test")).toBeInTheDocument();
+
+  jest.useRealTimers();
+});

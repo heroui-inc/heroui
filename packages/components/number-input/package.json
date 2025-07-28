@@ -39,7 +39,7 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "@heroui/system": ">=2.4.18",
-    "@heroui/theme": ">=2.4.17"
+    "@heroui/theme": ">=2.4.19"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
@@ -48,14 +48,14 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/focus": "3.20.5",
-    "@react-aria/i18n": "3.12.10",
-    "@react-aria/interactions": "3.25.3",
-    "@react-aria/numberfield": "3.11.16",
-    "@react-stately/numberfield": "3.9.13",
-    "@react-types/shared": "3.30.0",
-    "@react-types/numberfield": "3.8.12",
-    "@react-types/button": "3.12.2"
+    "@react-aria/focus": "3.21.0",
+    "@react-aria/i18n": "3.12.11",
+    "@react-aria/interactions": "3.25.4",
+    "@react-aria/numberfield": "3.12.0",
+    "@react-stately/numberfield": "3.10.0",
+    "@react-types/shared": "3.31.0",
+    "@react-types/numberfield": "3.8.13",
+    "@react-types/button": "3.13.0"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",
