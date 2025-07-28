@@ -42,7 +42,8 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "react": "18.3.0",
-    "tailwind-variants": "1.0.0",
+    "tailwind-variants": "2.0.1",
+    "tailwind-merge": "3.3.1",
     "clean-package": "2.2.0"
   },
   "dependencies": {
