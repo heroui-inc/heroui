@@ -469,6 +469,9 @@ importers:
       swr:
         specifier: 2.2.5
         version: 2.2.5(react@18.3.0)
+      tailwind-merge:
+        specifier: 3.3.1
+        version: 3.3.1
       tailwind-variants:
         specifier: 2.0.1
         version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11)
