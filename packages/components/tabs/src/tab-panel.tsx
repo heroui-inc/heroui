@@ -5,8 +5,7 @@ import type {ValuesType} from "./use-tabs";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, getInertValue} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {clsx, getInertValue, mergeProps} from "@heroui/shared-utils";
 import {useTabPanel} from "@react-aria/tabs";
 import {useFocusRing} from "@react-aria/focus";
 

@@ -11,8 +11,15 @@ import {checkbox} from "@heroui/theme";
 import {useCallbackRef} from "@heroui/use-callback-ref";
 import {useHover} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
-import {mergeProps, chain} from "@react-aria/utils";
-import {__DEV__, warn, clsx, dataAttr, safeAriaLabel} from "@heroui/shared-utils";
+import {
+  __DEV__,
+  warn,
+  clsx,
+  dataAttr,
+  safeAriaLabel,
+  mergeProps,
+  chain,
+} from "@heroui/shared-utils";
 import {
   useCheckbox as useReactAriaCheckbox,
   useCheckboxGroupItem as useReactAriaCheckboxGroupItem,

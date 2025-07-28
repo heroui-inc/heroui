@@ -71,6 +71,7 @@ export function useAriaButton(
     onPress,
     onPressStart,
     onPressEnd,
+    onPressUp,
     onPressChange,
     // @ts-ignore - undocumented
     preventFocusOnPress,
@@ -106,6 +107,7 @@ export function useAriaButton(
     onClick,
     onPressStart,
     onPressEnd,
+    onPressUp,
     onPressChange,
     onPress,
     isDisabled,

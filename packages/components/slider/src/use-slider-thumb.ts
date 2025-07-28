@@ -5,15 +5,14 @@ import type {RefObject} from "react";
 import type {AriaSliderThumbProps} from "@react-aria/slider";
 import type {SliderState} from "@react-stately/slider";
 import type {TooltipProps} from "@heroui/tooltip";
-import type {UseSliderProps} from "./use-slider";
+import type {SliderValue, UseSliderProps} from "./use-slider";
 
 import {useSliderThumb as useAriaSliderThumb} from "@react-aria/slider";
 import {useDOMRef} from "@heroui/react-utils";
 import {useRef} from "react";
 import {useHover, usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
-import {mergeProps} from "@react-aria/utils";
-import {dataAttr} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useNumberFormatter} from "@react-aria/i18n";
 
 interface Props extends HTMLHeroUIProps<"div"> {
@@ -45,6 +44,14 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * @internal
    */
   tooltipProps?: UseSliderProps["tooltipProps"];
+
+  /**
+   * A function that returns the content to display as the tooltip label. (in analogy to getValue)
+   * @param value - The value of the slider, array or single number.
+   * @param index - The index of the thumb, if multiple thumbs are used.
+   * In addition to formatting with tooltipValueFormatOptions if number is returned.
+   */
+  getTooltipValue?: (value: SliderValue, index?: number) => string | number;
   /**
    * Function to render the thumb. It can be used to add a tooltip or custom icon.
    */
@@ -65,6 +72,7 @@ export function useSliderThumb(props: UseSliderThumbProps) {
     tooltipProps,
     isVertical,
     showTooltip,
+    getTooltipValue,
     formatOptions,
     renderThumb,
     ...otherProps
@@ -105,6 +113,8 @@ export function useSliderThumb(props: UseSliderThumbProps) {
       "data-dragging": dataAttr(isDragging),
       "data-focused": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocusVisible),
+      "aria-label":
+        props["aria-label"] || `Slider thumb ${index !== undefined ? `${index + 1}` : ""}`,
       ...mergeProps(thumbProps, pressProps, hoverProps, otherProps),
       className,
       ...props,
@@ -112,16 +122,30 @@ export function useSliderThumb(props: UseSliderThumbProps) {
   };
 
   const getTooltipProps = () => {
-    const value = numberFormatter
-      ? numberFormatter.format(state.values[index ?? 0])
-      : state.values[index ?? 0];
+    const stateValue = tooltipProps?.content
+      ? tooltipProps.content
+      : getTooltipValue
+        ? state.values.length === 1
+          ? getTooltipValue(state.values[index ?? 0])
+          : getTooltipValue(state.values, index ?? 0)
+        : state.values[index ?? 0];
+
+    const value =
+      numberFormatter && typeof stateValue === "number"
+        ? numberFormatter.format(stateValue)
+        : stateValue;
 
     return {
       ...tooltipProps,
       placement: tooltipProps?.placement ? tooltipProps?.placement : isVertical ? "right" : "top",
       content: tooltipProps?.content ? tooltipProps?.content : value,
-      updatePositionDeps: [isDragging, isHovered, value],
-      isOpen: tooltipProps?.isOpen !== undefined ? tooltipProps?.isOpen : isHovered || isDragging,
+      updatePositionDeps: [isDragging, isHovered, isFocused, isFocusVisible, value],
+      isOpen:
+        tooltipProps?.isOpen !== undefined
+          ? tooltipProps?.isOpen
+          : isHovered || isDragging || isFocused || isFocusVisible,
+      role: "tooltip",
+      "aria-label": `Current value: ${value}`,
     } as TooltipProps;
   };
 

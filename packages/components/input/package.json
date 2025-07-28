@@ -1,6 +1,6 @@
 {
   "name": "@heroui/input",
-  "version": "2.4.22",
+  "version": "2.4.24",
   "description": "The input component is designed for capturing user input within a text field.",
   "keywords": [
     "input"
@@ -36,8 +36,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.12",
-    "@heroui/system": ">=2.4.17"
+    "@heroui/theme": ">=2.4.17",
+    "@heroui/system": ">=2.4.18"
   },
   "dependencies": {
     "@heroui/form": "workspace:*",
@@ -48,7 +48,6 @@
     "@react-aria/focus": "3.20.5",
     "@react-aria/interactions": "3.25.3",
     "@react-aria/textfield": "3.17.5",
-    "@react-aria/utils": "3.29.1",
     "@react-stately/utils": "3.10.7",
     "@react-types/shared": "3.30.0",
     "@react-types/textfield": "3.12.3",

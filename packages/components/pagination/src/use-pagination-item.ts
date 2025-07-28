@@ -4,8 +4,8 @@ import type {LinkDOMProps, PressEvent} from "@react-types/shared";
 import type {PaginationItemValue} from "@heroui/use-pagination";
 
 import {useMemo} from "react";
-import {clsx, dataAttr} from "@heroui/shared-utils";
-import {chain, mergeProps, shouldClientNavigate, useRouter} from "@react-aria/utils";
+import {shouldClientNavigate, useRouter} from "@react-aria/utils";
+import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useHover, usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";

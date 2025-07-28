@@ -56,7 +56,7 @@ const table = tv({
     table: "min-w-full h-auto",
     thead: "[&>tr]:first:rounded-lg",
     tbody: "after:block",
-    tr: ["group/tr", "outline-none", ...dataFocusVisibleClasses],
+    tr: ["group/tr", "outline-hidden", ...dataFocusVisibleClasses],
     th: [
       "group/th",
       "px-3",
@@ -70,7 +70,7 @@ const table = tv({
       "font-semibold",
       "first:rounded-s-lg",
       "last:rounded-e-lg",
-      "outline-none",
+      "outline-hidden",
       "data-[sortable=true]:cursor-pointer",
       "data-[hover=true]:text-foreground-400",
       ...dataFocusVisibleClasses,
@@ -83,11 +83,12 @@ const table = tv({
       "whitespace-normal",
       "text-small",
       "font-normal",
-      "outline-none",
+      "outline-hidden",
       "[&>*]:z-1",
       "[&>*]:relative",
       ...dataFocusVisibleClasses,
       // before content for selection
+      "before:pointer-events-none",
       "before:content-['']",
       "before:absolute",
       "before:z-0",
@@ -140,20 +141,6 @@ const table = tv({
       },
       fixed: {
         table: "table-fixed",
-      },
-    },
-    radius: {
-      none: {
-        wrapper: "rounded-none",
-      },
-      sm: {
-        wrapper: "rounded-small",
-      },
-      md: {
-        wrapper: "rounded-medium",
-      },
-      lg: {
-        wrapper: "rounded-large",
       },
     },
     shadow: {
@@ -219,6 +206,34 @@ const table = tv({
       },
       false: {
         td: ["first:before:rounded-s-lg", "last:before:rounded-e-lg"],
+      },
+    },
+    radius: {
+      none: {
+        wrapper: "rounded-none",
+        th: [
+          "first:rounded-s-none",
+          "first:before:rounded-s-none",
+          "last:rounded-e-none",
+          "last:before:rounded-e-none",
+        ],
+        td: [
+          "first:before:rounded-s-none",
+          "last:before:rounded-e-none",
+          "group-data-[first=true]/tr:first:before:rounded-ss-none",
+          "group-data-[first=true]/tr:last:before:rounded-se-none",
+          "group-data-[last=true]/tr:first:before:rounded-es-none",
+          "group-data-[last=true]/tr:last:before:rounded-ee-none",
+        ],
+      },
+      sm: {
+        wrapper: "rounded-small",
+      },
+      md: {
+        wrapper: "rounded-medium",
+      },
+      lg: {
+        wrapper: "rounded-large",
       },
     },
     fullWidth: {

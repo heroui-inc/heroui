@@ -51,7 +51,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["inside", "outside", "outside-left"],
+      options: ["inside", "outside", "outside-left", "outside-top"],
     },
     isDisabled: {
       control: {
@@ -176,15 +176,16 @@ const LabelPlacementTemplate = (args) => (
   <div className="w-full flex flex-col items-center gap-12">
     <div className="flex flex-col gap-3">
       <h3>Without placeholder</h3>
-      <div className="w-full max-w-xl flex flex-row items-end gap-4">
+      <div className="w-full flex flex-row items-end gap-4">
         <Input {...args} description="inside" />
         <Input {...args} description="outside" labelPlacement="outside" />
         <Input {...args} description="outside-left" labelPlacement="outside-left" />
+        <Input {...args} description="outside-top" labelPlacement="outside-top" />
       </div>
     </div>
     <div className="flex flex-col gap-3">
       <h3>With placeholder</h3>
-      <div className="w-full max-w-xl flex flex-row items-end gap-4">
+      <div className="w-full flex flex-row items-end gap-4">
         <Input {...args} description="inside" placeholder="Enter your email" />
         <Input
           {...args}
@@ -198,6 +199,12 @@ const LabelPlacementTemplate = (args) => (
           labelPlacement="outside-left"
           placeholder="Enter your email"
         />
+        <Input
+          {...args}
+          description="outside-top"
+          labelPlacement="outside-top"
+          placeholder="Enter your email"
+        />
       </div>
     </div>
   </div>
@@ -209,7 +216,7 @@ const StartContentTemplate = (args) => (
       {...args}
       // placeholder="you@example.com"
       startContent={
-        <MailFilledIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+        <MailFilledIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
       }
     />
     <Input
@@ -242,7 +249,7 @@ const EndContentTemplate = (args) => (
     <Input
       {...args}
       endContent={
-        <MailFilledIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+        <MailFilledIcon className="text-2xl text-default-400 pointer-events-none shrink-0" />
       }
       placeholder="you@example.com"
     />
@@ -282,7 +289,7 @@ const StartAndEndContentTemplate = (args) => (
       }
       placeholder="heroui"
       startContent={
-        <MailFilledIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
+        <MailFilledIcon className="text-xl text-default-400 pointer-events-none shrink-0" />
       }
     />
     <Input
@@ -293,7 +300,7 @@ const StartAndEndContentTemplate = (args) => (
             Currency
           </label>
           <select
-            className="outline-none border-0 bg-transparent text-default-400 text-sm"
+            className="outline-hidden border-0 bg-transparent text-default-400 text-sm"
             id="currency"
             name="currency"
           >
@@ -359,7 +366,7 @@ const CustomWithClassNamesTemplate = (args) => (
         inputWrapper: [
           "bg-slate-100",
           "border",
-          "shadow",
+          "shadow-sm",
           "hover:bg-slate-200",
           "focus-within:!bg-slate-100",
           "dark:bg-slate-900",
@@ -388,9 +395,7 @@ const CustomWithClassNamesTemplate = (args) => (
       }
       labelPlacement="outside"
       placeholder="Quick search..."
-      startContent={
-        <SearchIcon className="text-xl text-slate-400 pointer-events-none flex-shrink-0" />
-      }
+      startContent={<SearchIcon className="text-xl text-slate-400 pointer-events-none shrink-0" />}
     />
   </div>
 );
@@ -776,7 +781,7 @@ export const CustomWithHooks = {
     type: "search",
     placeholder: "Type to search...",
     startContent: (
-      <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+      <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none shrink-0" />
     ),
   },
 };

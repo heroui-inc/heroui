@@ -7,10 +7,9 @@ import type {ReactRef} from "@heroui/react-utils";
 import {useMemo, useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
 import {user} from "@heroui/theme";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps} from "@heroui/react-utils";
 import {useDOMRef} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
 interface Props {
   /**
    * Ref to the DOM node.

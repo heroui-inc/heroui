@@ -372,7 +372,7 @@ export const StartAndEndContent = {
           Currency
         </label>
         <select
-          className="outline-none border-0 bg-transparent text-default-400 text-sm"
+          className="outline-hidden border-0 bg-transparent text-default-400 text-sm"
           id="currency"
           name="currency"
         >

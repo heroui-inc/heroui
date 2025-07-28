@@ -5,7 +5,6 @@ import type {HTMLHeroUIProps} from "@heroui/system";
 import {useDateFormatter} from "@react-aria/i18n";
 import {useCallback, useRef, useEffect} from "react";
 import {debounce} from "@heroui/shared-utils";
-import {areRectsIntersecting} from "@heroui/react-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 
 import {getMonthsInYear, getYearRange} from "./utils";
@@ -37,6 +36,7 @@ export function useCalendarPicker(props: CalendarPickerProps) {
 
   const monthsItemsRef = useRef<ItemsRefMap>();
   const yearsItemsRef = useRef<ItemsRefMap>();
+  const focusedDateRef = useRef<CalendarDate>(state.focusedDate);
 
   const monthDateFormatter = useDateFormatter({
     month: "long",
@@ -85,33 +85,58 @@ export function useCalendarPicker(props: CalendarPickerProps) {
 
   const handleListScroll = useCallback(
     (e: Event, highlightEl: HTMLElement | null, list: CalendarPickerListType) => {
-      if (!(e.target instanceof HTMLElement)) return;
+      if (!(e.target instanceof HTMLElement) || !highlightEl) return;
 
       const map = getItemsRefMap(list === "months" ? monthsItemsRef : yearsItemsRef);
 
-      const items = Array.from(map.values());
+      const items = Array.from(map.entries());
 
-      const item = items.find((itemEl) => {
-        const rect1 = itemEl.getBoundingClientRect();
-        const rect2 = highlightEl?.getBoundingClientRect();
+      const highlightRect = highlightEl.getBoundingClientRect();
 
-        if (!rect2) {
-          return false;
+      const highlightCenter = {
+        x: highlightRect.left + highlightRect.width / 2,
+        y: highlightRect.top + highlightRect.height / 2,
+      };
+
+      let closestItem: [number, HTMLElement] | null = null;
+
+      let minDistance = Infinity;
+
+      for (const [value, itemEl] of items) {
+        const itemRect = itemEl.getBoundingClientRect();
+        const itemCenter = {
+          x: itemRect.left + itemRect.width / 2,
+          y: itemRect.top + itemRect.height / 2,
+        };
+
+        // Calculate distance between centers
+        const distance = Math.sqrt(
+          Math.pow(highlightCenter.x - itemCenter.x, 2) +
+            Math.pow(highlightCenter.y - itemCenter.y, 2),
+        );
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestItem = [value, itemEl];
         }
+      }
 
-        return areRectsIntersecting(rect1, rect2);
-      });
+      if (!closestItem) return;
 
-      const itemValue = Number(item?.getAttribute("data-value"));
+      const [itemValue] = closestItem;
 
-      if (!itemValue) return;
+      const updatedDate = focusedDateRef.current.set(
+        list === "months" ? {month: itemValue} : {year: itemValue},
+      );
 
-      let date = state.focusedDate.set(list === "months" ? {month: itemValue} : {year: itemValue});
-
-      state.setFocusedDate(date);
+      state.setFocusedDate(updatedDate);
     },
-    [state, isHeaderExpanded],
+    [isHeaderExpanded],
   );
+
+  useEffect(() => {
+    focusedDateRef.current = state.focusedDate;
+  }, [state.focusedDate]);
 
   // scroll to the selected month/year when the component is mounted/opened/closed
   useEffect(() => {

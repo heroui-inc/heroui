@@ -11,11 +11,10 @@ import {numberInput} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
 import {useLocale} from "@react-aria/i18n";
-import {clsx, dataAttr, isEmpty, objectToDeps} from "@heroui/shared-utils";
+import {clsx, dataAttr, isEmpty, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useNumberFieldState} from "@react-stately/numberfield";
 import {useNumberField as useAriaNumberInput} from "@react-aria/numberfield";
 import {useMemo, useCallback, useState} from "react";
-import {chain, mergeProps} from "@react-aria/utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputVariantProps> {
@@ -459,7 +458,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         ...descriptionProps,
         "data-slot": "description",
-        className: slots.description({class: clsx(classNames?.label, props?.className)}),
+        className: slots.description({class: clsx(classNames?.description, props?.className)}),
       };
     },
     [slots, classNames?.description],

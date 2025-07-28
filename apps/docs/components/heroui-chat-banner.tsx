@@ -80,7 +80,7 @@ export const HeroUIChatBanner = () => {
             HeroUI Chat
             <Icon
               aria-hidden="true"
-              className="outline-none transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
+              className="outline-hidden transition-transform group-hover:translate-x-0.5 [&>path]:stroke-[2px]"
               icon={arrowRightIcon}
               width={16}
             />
