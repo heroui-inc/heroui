@@ -3,6 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import * as React from "react";
 import {render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Listbox, ListboxItem, ListboxSection} from "../src";
 
@@ -344,5 +345,59 @@ describe("Listbox", () => {
     expect(onPressUp).toHaveBeenCalled();
 
     expect(onPressChange).toHaveBeenCalled();
+  });
+
+  it("should render option as an anchor if option has href prop", () => {
+    const {getByRole} = render(
+      <Listbox aria-label="Actions">
+        <ListboxItem key="new" href="#">
+          New file
+        </ListboxItem>
+      </Listbox>,
+    );
+
+    const option = getByRole("option");
+
+    expect(option).toHaveAttribute("href", "#");
+    expect(option.tagName).toEqual("A");
+  });
+
+  it("should call navigate function when HeroUIProvider has navigation set", async () => {
+    const navigate = jest.fn();
+    const {getByRole} = render(
+      <HeroUIProvider navigate={navigate}>
+        <Listbox aria-label="Actions">
+          <ListboxItem key="new" href="#">
+            New file
+          </ListboxItem>
+        </Listbox>
+      </HeroUIProvider>,
+    );
+
+    const option = getByRole("option");
+
+    await user.click(option);
+
+    expect(navigate).toHaveBeenCalled();
+  });
+
+  it("should not call navigate function if it's not inside HeroUIProvider", async () => {
+    const navigate = jest.fn();
+    const {getByRole} = render(
+      <>
+        <HeroUIProvider navigate={navigate}>child</HeroUIProvider>
+        <Listbox aria-label="Actions">
+          <ListboxItem key="new" href="#">
+            New file
+          </ListboxItem>
+        </Listbox>
+      </>,
+    );
+
+    const option = getByRole("option");
+
+    await user.click(option);
+
+    expect(navigate).not.toHaveBeenCalled();
   });
 });

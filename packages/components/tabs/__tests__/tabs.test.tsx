@@ -6,6 +6,7 @@ import {act, render, fireEvent, within} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {focus} from "@heroui/test-utils";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Tabs, Tab} from "../src";
 
@@ -434,5 +435,59 @@ describe("Tabs", () => {
     await user.click(tab2);
     expect(item2Click).toHaveBeenCalledTimes(2);
     expect(tab2).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("should render tab as an anchor if tab has href prop", () => {
+    const {getByTestId} = render(
+      <Tabs>
+        <Tab key="item1" data-testid="item1" href="#" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const option = getByTestId("item1");
+
+    expect(option).toHaveAttribute("href", "#");
+    expect(option.tagName).toEqual("A");
+  });
+
+  it("should call navigate function when HeroUIProvider has navigation set", async () => {
+    const navigate = jest.fn();
+    const {getByTestId} = render(
+      <HeroUIProvider navigate={navigate}>
+        <Tabs>
+          <Tab key="item1" data-testid="item1" href="#" title="Item 1">
+            <div>Content 1</div>
+          </Tab>
+        </Tabs>
+      </HeroUIProvider>,
+    );
+
+    const tab1 = getByTestId("item1");
+
+    await user.click(tab1);
+
+    expect(navigate).toHaveBeenCalled();
+  });
+
+  it("should not call navigate function if it's not inside HeroUIProvider", async () => {
+    const navigate = jest.fn();
+    const {getByTestId} = render(
+      <>
+        <HeroUIProvider navigate={navigate}>child</HeroUIProvider>
+        <Tabs>
+          <Tab key="item1" data-testid="item1" href="#" title="Item 1">
+            <div>Content 1</div>
+          </Tab>
+        </Tabs>
+      </>,
+    );
+
+    const tab1 = getByTestId("item1");
+
+    await user.click(tab1);
+
+    expect(navigate).not.toHaveBeenCalled();
   });
 });

@@ -8,6 +8,7 @@ import {keyCodes, shouldIgnoreReactWarning, spy} from "@heroui/test-utils";
 import {User} from "@heroui/user";
 import {Image} from "@heroui/image";
 import {Avatar} from "@heroui/avatar";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, DropdownSection} from "../src";
 
@@ -871,5 +872,86 @@ describe("Dropdown", () => {
 
       expect(onOpenChange).toHaveBeenCalledTimes(2);
     });
+  });
+
+  it("should render tab as an anchor if tab has href prop", () => {
+    const {getAllByRole} = render(
+      <Dropdown isOpen>
+        <DropdownTrigger>
+          <Button data-testid="trigger-test">Trigger</Button>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Actions" selectionMode="single">
+          <DropdownItem key="docs" href="#">
+            Documentation
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>,
+    );
+
+    const menuItems = getAllByRole("menuitemradio");
+
+    expect(menuItems.length).toBe(1);
+
+    const menuItem1 = menuItems[0];
+
+    expect(menuItem1).toHaveAttribute("href", "#");
+    expect(menuItem1.tagName).toEqual("A");
+  });
+
+  it("should call navigate function when HeroUIProvider has navigation set", async () => {
+    const navigate = jest.fn();
+    const {getAllByRole} = render(
+      <HeroUIProvider navigate={navigate}>
+        <Dropdown isOpen>
+          <DropdownTrigger>
+            <Button data-testid="trigger-test">Trigger</Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Actions" selectionMode="single">
+            <DropdownItem key="docs" href="#">
+              Documentation
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </HeroUIProvider>,
+    );
+
+    const menuItems = getAllByRole("menuitemradio");
+
+    expect(menuItems.length).toBe(1);
+
+    const menuItem1 = menuItems[0];
+
+    await user.click(menuItem1);
+
+    expect(navigate).toHaveBeenCalled();
+  });
+
+  it("should not call navigate function if it's not inside HeroUIProvider", async () => {
+    const navigate = jest.fn();
+    const {getAllByRole} = render(
+      <>
+        <HeroUIProvider navigate={navigate}>child</HeroUIProvider>
+        <Dropdown isOpen>
+          <DropdownTrigger>
+            <Button data-testid="trigger-test">Trigger</Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Actions" selectionMode="single">
+            <DropdownItem key="docs" href="#">
+              Documentation
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </>,
+    );
+
+    const menuItems = getAllByRole("menuitemradio");
+
+    expect(menuItems.length).toBe(1);
+
+    const menuItem1 = menuItems[0];
+
+    await user.click(menuItem1);
+
+    expect(navigate).not.toHaveBeenCalled();
   });
 });

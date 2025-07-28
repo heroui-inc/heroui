@@ -3,6 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import * as React from "react";
 import {render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Link} from "../src";
 
@@ -83,5 +84,36 @@ describe("Link", () => {
     );
 
     expect(container.querySelector("button")?.getAttribute("role")).toBe("link");
+  });
+
+  it("should call navigate function when HeroUIProvider has navigation set", async () => {
+    const navigate = jest.fn();
+    const {getByRole} = render(
+      <HeroUIProvider navigate={navigate}>
+        <Link href="#">Link</Link>
+      </HeroUIProvider>,
+    );
+
+    const link = getByRole("link");
+
+    await user.click(link);
+
+    expect(navigate).toHaveBeenCalled();
+  });
+
+  it("should not call navigate function if it's not inside HeroUIProvider", async () => {
+    const navigate = jest.fn();
+    const {getByRole} = render(
+      <>
+        <HeroUIProvider navigate={navigate}>child</HeroUIProvider>
+        <Link href="#">Link</Link>
+      </>,
+    );
+
+    const link = getByRole("link");
+
+    await user.click(link);
+
+    expect(navigate).not.toHaveBeenCalled();
   });
 });
