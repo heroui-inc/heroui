@@ -8,6 +8,7 @@ import {useToastRegion} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
 import {toastRegion} from "@heroui/theme";
 import {clsx, mergeProps} from "@heroui/shared-utils";
+import {AnimatePresence} from "framer-motion";
 
 import Toast from "./toast";
 
@@ -81,37 +82,39 @@ export function ToastRegion<T extends ToastProps>({
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
-      {[...toastQueue.visibleToasts].reverse().map((toast: QueuedToast<ToastProps>, index) => {
-        if (disableAnimation && total - index > maxVisibleToasts) {
+      <AnimatePresence>
+        {[...toastQueue.visibleToasts].reverse().map((toast: QueuedToast<ToastProps>, index) => {
+          if (disableAnimation && total - index > maxVisibleToasts) {
+            return null;
+          }
+
+          if (
+            disableAnimation ||
+            total - index <= 4 ||
+            (isHovered && total - index <= maxVisibleToasts + 1)
+          ) {
+            return (
+              <Toast
+                key={toast.key}
+                state={toastQueue}
+                toast={toast}
+                {...mergeProps(toastProps, toast.content)}
+                disableAnimation={disableAnimation}
+                heights={heights}
+                index={index}
+                isRegionExpanded={isHovered || isTouched}
+                maxVisibleToasts={maxVisibleToasts}
+                placement={placement}
+                setHeights={setHeights}
+                toastOffset={toastOffset}
+                total={total}
+              />
+            );
+          }
+
           return null;
-        }
-
-        if (
-          disableAnimation ||
-          total - index <= 4 ||
-          (isHovered && total - index <= maxVisibleToasts + 1)
-        ) {
-          return (
-            <Toast
-              key={toast.key}
-              state={toastQueue}
-              toast={toast}
-              {...mergeProps(toastProps, toast.content)}
-              disableAnimation={disableAnimation}
-              heights={heights}
-              index={index}
-              isRegionExpanded={isHovered || isTouched}
-              maxVisibleToasts={maxVisibleToasts}
-              placement={placement}
-              setHeights={setHeights}
-              toastOffset={toastOffset}
-              total={total}
-            />
-          );
-        }
-
-        return null;
-      })}
+        })}
+      </AnimatePresence>
     </div>
   );
 }
