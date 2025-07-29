@@ -22,7 +22,7 @@ export function mockImage() {
       return name in this;
     }
     getAttribute(name: string) {
-      return name in this ? (this as any)[name] : null;
+      return name in this ? this[name] : null;
     }
     constructor() {
       setTimeout(() => {
