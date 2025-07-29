@@ -469,9 +469,12 @@ importers:
       swr:
         specifier: 2.2.5
         version: 2.2.5(react@18.3.0)
+      tailwind-merge:
+        specifier: 3.3.1
+        version: 3.3.1
       tailwind-variants:
-        specifier: 1.0.0
-        version: 1.0.0(tailwindcss@4.1.11)
+        specifier: 2.0.1
+        version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11)
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -3210,9 +3213,12 @@ importers:
       react:
         specifier: 18.3.0
         version: 18.3.0
+      tailwind-merge:
+        specifier: 3.3.1
+        version: 3.3.1
       tailwind-variants:
-        specifier: 1.0.0
-        version: 1.0.0(tailwindcss@4.1.11)
+        specifier: 2.0.1
+        version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11)
 
   packages/core/theme:
     dependencies:
@@ -3235,11 +3241,11 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       tailwind-merge:
-        specifier: 3.0.2
-        version: 3.0.2
+        specifier: 3.3.1
+        version: 3.3.1
       tailwind-variants:
-        specifier: 1.0.0
-        version: 1.0.0(tailwindcss@4.1.11)
+        specifier: 2.0.1
+        version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11)
     devDependencies:
       '@types/color':
         specifier: ^4.2.0
@@ -14280,14 +14286,18 @@ packages:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tailwind-merge@3.0.2:
-    resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
+  tailwind-merge@3.3.1:
+    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
-  tailwind-variants@1.0.0:
-    resolution: {integrity: sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA==}
+  tailwind-variants@2.0.1:
+    resolution: {integrity: sha512-1wt8c4PWO3jbZcKGBrjIV8cehWarREw1C2os0k8Mcq0nof/CbafNhUUjb0LRWiiRfAvDK6v1deswtHLsygKglw==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
+      tailwind-merge: '>=3.0.0'
       tailwindcss: '*'
+    peerDependenciesMeta:
+      tailwind-merge:
+        optional: true
 
   tailwindcss@4.1.11:
     resolution: {integrity: sha512-2E9TBm6MDD/xKYe+dvJZAmg3yxIEDNRc0jwlNyDg/4Fil2QcSLjFKGVff0lAf1jjeaArlG/M75Ey/EYr/OJtBA==}
@@ -28238,12 +28248,13 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.2.7
 
-  tailwind-merge@3.0.2: {}
+  tailwind-merge@3.3.1: {}
 
-  tailwind-variants@1.0.0(tailwindcss@4.1.11):
+  tailwind-variants@2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11):
     dependencies:
-      tailwind-merge: 3.0.2
       tailwindcss: 4.1.11
+    optionalDependencies:
+      tailwind-merge: 3.3.1
 
   tailwindcss@4.1.11: {}
 
