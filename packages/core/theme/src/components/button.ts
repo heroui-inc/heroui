@@ -29,7 +29,7 @@ const button = tv({
     "justify-center",
     "box-border",
     "appearance-none",
-    "outline-hidden",
+    "outline-solid outline-transparent",
     "select-none",
     "whitespace-nowrap",
     "min-w-max",

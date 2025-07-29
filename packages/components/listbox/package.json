@@ -1,6 +1,6 @@
 {
   "name": "@heroui/listbox",
-  "version": "2.3.22",
+  "version": "2.3.23",
   "description": "A listbox displays a list of options and allows a user to select one or more of them.",
   "keywords": [
     "listbox"
@@ -46,11 +46,11 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
     "@tanstack/react-virtual": "3.11.3",
-    "@react-aria/listbox": "3.14.6",
-    "@react-stately/list": "3.12.3",
-    "@react-aria/focus": "3.20.5",
-    "@react-aria/interactions": "3.25.3",
-    "@react-types/shared": "3.30.0"
+    "@react-aria/listbox": "3.14.7",
+    "@react-stately/list": "3.12.4",
+    "@react-aria/focus": "3.21.0",
+    "@react-aria/interactions": "3.25.4",
+    "@react-types/shared": "3.31.0"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",

@@ -1,5 +1,15 @@
 # @heroui/system-rsc
 
+## 2.3.17
+
+### Patch Changes
+
+- [#5531](https://github.com/heroui-inc/heroui/pull/5531) [`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec) Thanks [@wingkwong](https://github.com/wingkwong)! - use outline-solid outline-transparent to perverse focus ring styles (#5530)
+
+- [#5538](https://github.com/heroui-inc/heroui/pull/5538) [`139fc94`](https://github.com/heroui-inc/heroui/commit/139fc94e2ac0a4a112fdb18bb340994dc3656f70) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants version
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
 ## 2.3.16
 
 ### Patch Changes

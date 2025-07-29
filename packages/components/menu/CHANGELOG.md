@@ -1,5 +1,16 @@
 # @heroui/menu
 
+## 2.2.23
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/aria-utils@2.2.21
+  - @heroui/use-is-mobile@2.2.12
+  - @heroui/divider@2.2.17
+
 ## 2.2.22
 
 ### Patch Changes

@@ -458,7 +458,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         ...descriptionProps,
         "data-slot": "description",
-        className: slots.description({class: clsx(classNames?.label, props?.className)}),
+        className: slots.description({class: clsx(classNames?.description, props?.className)}),
       };
     },
     [slots, classNames?.description],

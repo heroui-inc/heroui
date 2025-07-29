@@ -1,5 +1,15 @@
 # @heroui/snippet
 
+## 2.2.25
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/tooltip@2.2.21
+  - @heroui/button@2.2.24
+
 ## 2.2.24
 
 ### Patch Changes

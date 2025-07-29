@@ -1,6 +1,6 @@
 {
   "name": "@heroui/alert",
-  "version": "2.2.23",
+  "version": "2.2.24",
   "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
   "keywords": [
     "alert"
@@ -40,14 +40,14 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.17",
+    "@heroui/theme": ">=2.4.19",
     "@heroui/system": ">=2.4.18"
   },
   "dependencies": {
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-stately/utils": "3.10.7",
+    "@react-stately/utils": "3.10.8",
     "@heroui/button": "workspace:*"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/menu",
-  "version": "2.2.22",
+  "version": "2.2.23",
   "description": "A menu displays a list of options and allows a user to select one or more of them.",
   "keywords": [
     "menu"
@@ -45,12 +45,12 @@
     "@heroui/use-is-mobile": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/focus": "3.20.5",
-    "@react-aria/interactions": "3.25.3",
-    "@react-aria/menu": "3.18.5",
-    "@react-stately/tree": "3.9.0",
-    "@react-types/menu": "3.10.2",
-    "@react-types/shared": "3.30.0"
+    "@react-aria/focus": "3.21.0",
+    "@react-aria/interactions": "3.25.4",
+    "@react-aria/menu": "3.19.0",
+    "@react-stately/tree": "3.9.1",
+    "@react-types/menu": "3.10.3",
+    "@react-types/shared": "3.31.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

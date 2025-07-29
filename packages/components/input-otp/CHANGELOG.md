@@ -1,5 +1,14 @@
 # @heroui/input-otp
 
+## 2.1.24
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/form@2.1.24
+
 ## 2.1.23
 
 ### Patch Changes

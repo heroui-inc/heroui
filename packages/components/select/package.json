@@ -1,6 +1,6 @@
 {
   "name": "@heroui/select",
-  "version": "2.4.24",
+  "version": "2.4.25",
   "description": "A select displays a collapsible list of options and allows a user to select one of them.",
   "keywords": [
     "select"
@@ -54,12 +54,12 @@
     "@heroui/use-aria-multiselect": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/form": "workspace:*",
-    "@react-aria/focus": "3.20.5",
-    "@react-aria/form": "3.0.18",
-    "@react-aria/overlays": "3.27.3",
-    "@react-aria/interactions": "3.25.3",
-    "@react-aria/visually-hidden": "3.8.25",
-    "@react-types/shared": "3.30.0"
+    "@react-aria/focus": "3.21.0",
+    "@react-aria/form": "3.1.0",
+    "@react-aria/overlays": "3.28.0",
+    "@react-aria/interactions": "3.25.4",
+    "@react-aria/visually-hidden": "3.8.26",
+    "@react-types/shared": "3.31.0"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",

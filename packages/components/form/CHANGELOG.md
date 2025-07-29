@@ -1,5 +1,15 @@
 # @heroui/form
 
+## 2.1.24
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec), [`139fc94`](https://github.com/heroui-inc/heroui/commit/139fc94e2ac0a4a112fdb18bb340994dc3656f70), [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b), [`a83e3fb`](https://github.com/heroui-inc/heroui/commit/a83e3fb5a01c3ba25c309ee1f67b836c2f299dfb)]:
+  - @heroui/theme@2.4.20
+  - @heroui/system@2.4.20
+
 ## 2.1.23
 
 ### Patch Changes
