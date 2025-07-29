@@ -1,5 +1,20 @@
 # @heroui/popover
 
+## 2.3.24
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- [#5504](https://github.com/heroui-inc/heroui/pull/5504) [`5eb6868`](https://github.com/heroui-inc/heroui/commit/5eb686843bd277a33586a6ea9a11d240080e2c9d) Thanks [@nicck1](https://github.com/nicck1)! - fix(popover): arrow glitch in popover content (#4142)
+
+- Updated dependencies [[`8dc4bab`](https://github.com/heroui-inc/heroui/commit/8dc4bab4ec98c77c1a0b9d8cb2f3abc5fdfb4793), [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/use-aria-overlay@2.0.2
+  - @heroui/use-aria-button@2.2.18
+  - @heroui/aria-utils@2.2.21
+  - @heroui/button@2.2.24
+  - @heroui/framer-utils@2.1.20
+
 ## 2.3.23
 
 ### Patch Changes

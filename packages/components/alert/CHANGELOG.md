@@ -1,5 +1,16 @@
 # @heroui/alert
 
+## 2.2.24
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- [#5512](https://github.com/heroui-inc/heroui/pull/5512) [`a83e3fb`](https://github.com/heroui-inc/heroui/commit/a83e3fb5a01c3ba25c309ee1f67b836c2f299dfb) Thanks [@wingkwong](https://github.com/wingkwong)! - vertically center alert icon / endContent (#2678)
+
+- Updated dependencies [[`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/button@2.2.24
+
 ## 2.2.23
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @heroui/use-aria-modal-overlay
 
+## 2.2.17
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`8dc4bab`](https://github.com/heroui-inc/heroui/commit/8dc4bab4ec98c77c1a0b9d8cb2f3abc5fdfb4793), [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/use-aria-overlay@2.0.2
+
 ## 2.2.16
 
 ### Patch Changes

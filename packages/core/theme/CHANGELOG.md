@@ -1,5 +1,15 @@
 # @heroui/theme
 
+## 2.4.20
+
+### Patch Changes
+
+- [#5531](https://github.com/heroui-inc/heroui/pull/5531) [`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec) Thanks [@wingkwong](https://github.com/wingkwong)! - use outline-solid outline-transparent to perverse focus ring styles (#5530)
+
+- [#5538](https://github.com/heroui-inc/heroui/pull/5538) [`139fc94`](https://github.com/heroui-inc/heroui/commit/139fc94e2ac0a4a112fdb18bb340994dc3656f70) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants version
+
+- [#5512](https://github.com/heroui-inc/heroui/pull/5512) [`a83e3fb`](https://github.com/heroui-inc/heroui/commit/a83e3fb5a01c3ba25c309ee1f67b836c2f299dfb) Thanks [@wingkwong](https://github.com/wingkwong)! - vertically center alert icon / endContent (#2678)
+
 ## 2.4.19
 
 ### Patch Changes

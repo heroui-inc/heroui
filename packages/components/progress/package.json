@@ -1,6 +1,6 @@
 {
   "name": "@heroui/progress",
-  "version": "2.2.19",
+  "version": "2.2.20",
   "description": "Progress bars show either determinate or indeterminate progress of an operation over time.",
   "keywords": [
     "progress"
