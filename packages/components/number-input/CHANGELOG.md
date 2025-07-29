@@ -1,5 +1,19 @@
 # @heroui/number-input
 
+## 2.0.15
+
+### Patch Changes
+
+- [#5531](https://github.com/heroui-inc/heroui/pull/5531) [`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec) Thanks [@wingkwong](https://github.com/wingkwong)! - use outline-solid outline-transparent to perverse focus ring styles (#5530)
+
+- [#5484](https://github.com/heroui-inc/heroui/pull/5484) [`9dceb11`](https://github.com/heroui-inc/heroui/commit/9dceb116ce1a260e099be738af9f175446823d53) Thanks [@wulimao49](https://github.com/wulimao49)! - Fixed NumberInput label class being incorrectly mixed into the description (#5489).
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/button@2.2.24
+  - @heroui/form@2.1.24
+
 ## 2.0.14
 
 ### Patch Changes

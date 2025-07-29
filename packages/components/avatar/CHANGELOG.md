@@ -1,5 +1,13 @@
 # @heroui/avatar
 
+## 2.2.20
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- [#5519](https://github.com/heroui-inc/heroui/pull/5519) [`2cb6ecf`](https://github.com/heroui-inc/heroui/commit/2cb6ecff9363952db24da01130ec13fe04388cfb) Thanks [@wingkwong](https://github.com/wingkwong)! - fix broken fallbacks in avatar (#5506)
+
 ## 2.2.19
 
 ### Patch Changes

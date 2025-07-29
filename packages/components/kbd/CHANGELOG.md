@@ -1,5 +1,12 @@
 # @heroui/kbd
 
+## 2.2.19
+
+### Patch Changes
+
+- Updated dependencies [[`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec), [`139fc94`](https://github.com/heroui-inc/heroui/commit/139fc94e2ac0a4a112fdb18bb340994dc3656f70), [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b)]:
+  - @heroui/system-rsc@2.3.17
+
 ## 2.2.18
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # @heroui/autocomplete
 
+## 2.3.26
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec), [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b), [`5eb6868`](https://github.com/heroui-inc/heroui/commit/5eb686843bd277a33586a6ea9a11d240080e2c9d)]:
+  - @heroui/input@2.4.25
+  - @heroui/aria-utils@2.2.21
+  - @heroui/listbox@2.3.23
+  - @heroui/popover@2.3.24
+  - @heroui/button@2.2.24
+  - @heroui/form@2.1.24
+  - @heroui/scroll-shadow@2.3.16
+
 ## 2.3.25
 
 ### Patch Changes
