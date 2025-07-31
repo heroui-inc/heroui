@@ -1,83 +1,73 @@
-# @heroui/core
+# @heroui/styles
 
-The core HeroUI package containing the Tailwind CSS plugin, themes, and component styles. This package is framework-agnostic and can be used with any JavaScript framework.
+The core HeroUI styles package containing CSS files for components, themes, and utilities. This package provides the foundation for HeroUI's design system using Tailwind CSS v4 and is framework-agnostic.
 
 ## Installation
 
 ```bash
-npm install @heroui/core
+npm install @heroui/styles
 # or
-pnpm add @heroui/core
+pnpm add @heroui/styles
 # or
-yarn add @heroui/core
+yarn add @heroui/styles
 ```
 
 ## Usage
 
 ### Basic Setup
 
-In your `tailwind.config.js`:
-
-```js
-import heroui from "@heroui/core/plugin";
-
-export default {
-  plugins: [
-    heroui({
-      // Options
-    }),
-  ],
-};
-```
-
-Or with Tailwind CSS v4 `@plugin` directive in your CSS:
+Import the HeroUI styles in your main CSS file:
 
 ```css
-@plugin "@heroui/core/plugin";
+@import "@heroui/styles";
 ```
 
-### Plugin Options
+This will import:
 
-| Option    | Type                 | Default       | Description                                              |
-| --------- | -------------------- | ------------- | -------------------------------------------------------- |
-| `theme`   | `string \| false`    | `"default"`   | Theme to use (default, light, dark, or false to disable) |
-| `logs`    | `boolean`            | `true` in dev | Enable/disable console logs                              |
-| `prefix`  | `string`             | `""`          | Prefix for all HeroUI classes                            |
-| `include` | `string \| string[]` | `[]`          | Components to include (empty = all)                      |
-| `exclude` | `string \| string[]` | `[]`          | Components to exclude                                    |
+- Tailwind CSS base styles
+- HeroUI component styles
+- HeroUI utilities
+- Default theme variables
+- Animation utilities from tw-animate-css
 
-### Examples
+### Package Structure
 
-#### Using a Different Theme
+The package exports CSS files organized into:
 
-```js
-heroui({
-  theme: "glass", // or "glass-light", "glass-dark"
-});
+```
+@heroui/styles/
+├── index.css          # Main entry point
+├── base/              # Base styles and CSS variables
+│   └── base.css       # Layout tokens, typography, scrollbar
+├── components/        # Component-specific styles
+│   ├── accordion.css
+│   ├── avatar.css
+│   ├── button.css
+│   ├── chip.css
+│   ├── link.css
+│   ├── popover.css
+│   └── tooltip.css
+├── themes/            # Theme definitions
+│   └── default.css    # Default light/dark theme
+└── utilities/         # Utility classes
+    ├── backdrop.css
+    └── index.css
 ```
 
-#### Adding a Prefix
+### Importing Specific Components
 
-```js
-heroui({
-  prefix: "hui-", // Results in classes like .hui-button
-});
-```
+Instead of importing everything, you can import only what you need:
 
-#### Including Only Specific Components
+```css
+/* Import Tailwind CSS base */
+@import "tailwindcss";
 
-```js
-heroui({
-  include: ["button", "input", "select"],
-});
-```
+/* Import only specific components */
+@import "@heroui/styles/components/button.css" layer(components);
+@import "@heroui/styles/components/chip.css" layer(components);
 
-#### Excluding Components
-
-```js
-heroui({
-  exclude: ["table", "chart"],
-});
+/* Import theme */
+@import "@heroui/styles/themes/default.css" layer(base);
 ```
 
 ### Component Classes
@@ -110,42 +100,94 @@ Components use a BEM-like naming convention:
 <button class="button button--primary button--sm">Small Primary</button>
 ```
 
-### Available Themes
+### Themes
 
-- `default` / `light` - Light theme (default)
-- `dark` - Dark theme with dark mode support
-- `glass` / `glass-light` - Glass morphism light theme
-- `glass-dark` - Glass morphism dark theme
+The default theme provides automatic light/dark mode support:
+
+- **Light mode**: Applied by default to `:root`
+- **Dark mode**: Applied with `.dark` class or `[data-theme="dark"]` attribute
+
+```html
+<!-- Dark mode with class -->
+<html class="dark">
+  <!-- Dark mode with data attribute -->
+  <html data-theme="dark"></html>
+</html>
+```
 
 ### CSS Variables
 
-The plugin provides a comprehensive set of CSS variables for customization:
+The package provides a comprehensive set of CSS variables for customization:
+
+#### Layout Tokens
 
 ```css
 :root {
-  /* Colors */
-  --background: oklch(100% 0 0);
-  --foreground: oklch(14.48% 0 0);
-  --accent: oklch(0.14 0 0);
-  --accent-foreground: oklch(0.99 0 0);
-
   /* Spacing */
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  /* ... etc */
+  --spacing: 0.25rem;
+
+  /* Border */
+  --border-width: 1px;
+  --disabled-opacity: 0.5;
 
   /* Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  --radius: 0.75rem;
+  --radius-panel: 0.5rem;
+  --radius-panel-inner: calc(var(--radius-panel) * 0.5);
 
-  /* And many more... */
+  /* Typography */
+  --font-size-base: 1rem;
+  --font-size-scale-desktop: 0.875;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Cursor */
+  --cursor-interactive: pointer;
+  --cursor-disabled: not-allowed;
 }
 ```
 
+#### Theme Colors
+
+```css
+:root {
+  /* Base Colors */
+  --background: oklch(100% 0 0);
+  --foreground: oklch(14.48% 0 0);
+  --panel: oklch(100% 0 0);
+
+  /* Interactive Colors */
+  --accent: oklch(0.14 0 0);
+  --accent-foreground: oklch(0.99 0 0);
+  --accent-hover: oklch(0.22 0 0);
+
+  /* Status Colors */
+  --success: oklch(0.55 0.1241 153.51);
+  --warning: oklch(0.67 0.1428 72.73);
+  --danger: oklch(0.59 0.2228 29.94);
+
+  /* UI Colors */
+  --border: oklch(0 0 0 / 15%);
+  --focus: oklch(0% 0 0 / 20%);
+  --scrollbar: var(--color-neutral-300);
+}
+```
+
+## Dependencies
+
+- **Tailwind CSS v4+**: Required peer dependency
+- **tw-animate-css**: Provides animation utilities
+
+## Build Output
+
+The package provides:
+
+- `index.css`: Main unminified CSS file
+- `heroui.min.css`: Minified production-ready CSS (generated during build)
+
 ## Framework Integration
 
-This package is designed to work with any framework. For React-specific components, use `@heroui/react` which builds on top of this core package.
+This package is designed to work with any framework. For React-specific components, use `@heroui/react` which builds on top of these core styles.
 
 ## License
 

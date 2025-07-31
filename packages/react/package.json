@@ -28,11 +28,11 @@
     ".": {
       "import": "./src/index.ts"
     },
+    "./package.json": "./package.json",
     "./styles": {
-      "style": "./src/styles.css",
-      "default": "./src/styles.css"
-    },
-    "./package.json": "./package.json"
+      "default": "./src/styles.css",
+      "style": "./src/styles.css"
+    }
   },
   "repository": {
     "type": "git",
