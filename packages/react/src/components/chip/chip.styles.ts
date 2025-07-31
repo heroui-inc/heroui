@@ -1,57 +1,26 @@
-/* eslint-disable sort-keys */
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {focusRingClasses} from "../../utils/compose";
-
 export const chipVariants = tv({
-  base: [
-    "inline-flex items-center gap-x-1.5 rounded-md border px-2 py-0.5 text-sm/5",
-    "bg-base font-medium transition-colors sm:text-xs/5",
-    focusRingClasses,
-  ],
+  base: "chip",
+  defaultVariants: {
+    color: "default",
+    variant: "secondary",
+  },
   variants: {
     color: {
-      accent: "text-accent",
-      danger: "text-danger",
-      base: "text-base-foreground",
-      success: "text-success",
-      warning: "text-warning",
+      accent: "chip--accent",
+      danger: "chip--danger",
+      default: "chip--default",
+      success: "chip--success",
+      warning: "chip--warning",
     },
     variant: {
-      primary: "border-transparent",
-      secondary: "",
-      tertiary: "bg-transparent",
+      primary: "chip--primary",
+      secondary: "chip--secondary",
+      tertiary: "chip--tertiary",
     },
-  },
-  // Add "base"
-  compoundVariants: [
-    {
-      className: "bg-accent text-accent-foreground",
-      color: "accent",
-      variant: "primary",
-    },
-    {
-      className: "bg-success text-success-foreground",
-      color: "success",
-      variant: "primary",
-    },
-    {
-      className: "bg-warning text-warning-foreground",
-      color: "warning",
-      variant: "primary",
-    },
-    {
-      className: "bg-danger text-danger-foreground",
-      color: "danger",
-      variant: "primary",
-    },
-  ],
-  defaultVariants: {
-    color: "base",
-    variant: "secondary",
   },
 });
 

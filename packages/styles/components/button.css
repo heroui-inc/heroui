@@ -1,0 +1,193 @@
+/* Button component styles */
+
+/* Base button styles */
+.button {
+  /* Cursor and pointer events */
+  cursor: var(--cursor-interactive);
+
+  /* Display and layout */
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* 8px */
+
+  /* Box model */
+  padding-left: 1rem; /* 16px */
+  padding-right: 1rem; /* 16px */
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+
+  /* Typography */
+  font-weight: 500;
+  white-space: nowrap;
+  user-select: none;
+
+  /* Transform origin */
+  transform-origin: center;
+
+  /* Transitions */
+  transition-property: transform, background-color;
+  transition-duration: 150ms;
+
+  /* Focus state */
+  /* Focus state */
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    cursor: var(--cursor-disabled);
+    opacity: var(--disabled-opacity);
+  }
+
+  /* Pending state */
+  &[data-pending] {
+    pointer-events: none;
+  }
+
+  /* SVG icon styling */
+  & svg {
+    pointer-events: none;
+    margin-left: calc(0.25rem * -0.5);
+    margin-right: calc(0.25rem * -0.5);
+    margin-top: calc(0.25rem * 0.5);
+    margin-bottom: calc(0.25rem * 0.5);
+    width: 1.25rem; /* 20px */
+    height: 1.25rem; /* 20px */
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* Small screen SVG adjustments */
+  @media (min-width: 640px) {
+    & svg {
+      margin-top: 0.25rem; /* 4px */
+      margin-bottom: 0.25rem; /* 4px */
+      width: 1rem; /* 16px */
+      height: 1rem; /* 16px */
+    }
+  }
+}
+
+/* Size variants */
+.button--sm {
+  height: 2.25rem; /* 36px */
+  padding-left: 0.75rem; /* 12px */
+  padding-right: 0.75rem; /* 12px */
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+
+  & svg {
+    width: 1rem; /* 16px */
+    height: 1rem; /* 16px */
+  }
+
+  @media (min-width: 768px) {
+    height: 2rem; /* 32px */
+  }
+}
+
+.button--md {
+  height: 2.5rem; /* 40px */
+
+  @media (min-width: 768px) {
+    height: 2.25rem; /* 36px */
+  }
+}
+
+.button--lg {
+  height: 2.75rem; /* 44px */
+
+  @media (min-width: 768px) {
+    height: 2.5rem; /* 40px */
+  }
+}
+
+/* Color variants */
+.button--primary {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+
+  &:hover,
+  &:active,
+  &[data-pressed="true"] {
+    background-color: var(--accent-hover);
+  }
+}
+
+.button--secondary {
+  background-color: var(--accent-soft);
+  color: var(--accent-soft-foreground);
+
+  &:hover,
+  &:active,
+  &[data-pressed="true"] {
+    background-color: var(--accent-soft-hover);
+  }
+}
+
+.button--tertiary {
+  border-color: var(--border);
+  background-color: var(--default);
+
+  &:hover,
+  &:active,
+  &[data-pressed="true"] {
+    background-color: var(--default-hover);
+  }
+}
+
+.button--ghost {
+  background-color: transparent;
+
+  &:hover,
+  &[data-pressed="true"] {
+    background-color: var(--accent-soft);
+  }
+}
+
+.button--danger {
+  background-color: var(--danger);
+  color: var(--danger-foreground);
+
+  &:hover,
+  &:active,
+  &[data-pressed="true"] {
+    background-color: var(--danger-hover);
+  }
+}
+
+/* Icon-only modifier */
+.button--icon-only {
+  padding: 0;
+}
+
+.button--icon-only.button--sm {
+  width: 2.25rem; /* 36px */
+
+  @media (min-width: 768px) {
+    width: 2rem; /* 32px */
+  }
+}
+
+.button--icon-only.button--md {
+  width: 2.5rem; /* 40px */
+
+  @media (min-width: 768px) {
+    width: 2.25rem; /* 36px */
+  }
+}
+
+.button--icon-only.button--lg {
+  width: 2.75rem; /* 44px */
+
+  @media (min-width: 768px) {
+    width: 2.5rem; /* 40px */
+  }
+}

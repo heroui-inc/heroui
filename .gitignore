@@ -1,6 +1,7 @@
 # cache
 .turbo
 .cache
+.rollup.cache
 .swc
 
 # dependencies
@@ -73,3 +74,12 @@ storybook-static
 # misc
 .DS_Store
 *.pem
+
+# bundle size reports
+bundle-sizes.json
+
+# clean-package backups
+.package.json.backup
+
+# Generated folder after running `pnpm pack`
+package

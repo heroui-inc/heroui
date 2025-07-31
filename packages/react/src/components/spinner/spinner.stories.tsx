@@ -15,7 +15,7 @@ export default {
     },
   },
   component: Spinner,
-  title: "Components/Spinner",
+  title: "📝 ToDo/Spinner",
 } as Meta<typeof Spinner>;
 
 const defaultArgs: SpinnerProps = {

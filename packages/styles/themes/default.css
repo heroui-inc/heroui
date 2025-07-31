@@ -1,24 +1,14 @@
-@import "tw-animate-css";
-
-/**
- * Toggling dark mode manually
- * Docs: https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
- */
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
-
-/*
-* Uncomment the following line to use the Inter font when not working on a Next.js project.
-* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-* Then replace var(--font-inter) to Inter
-*/
-
 @layer base {
+  /* HeroUI Default Light Theme */
   :root {
+    color-scheme: light;
+
     /* Base Colors */
     --background: oklch(100% 0 0);
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
+
+    --radius: 0.75rem;
 
     --muted: var(--color-neutral-500);
     --muted-foreground: var(--color-neutral-400);
@@ -28,14 +18,17 @@
 
     --scrollbar: var(--color-neutral-300);
 
-    --base: var(--color-neutral-50);
-    --base-foreground: var(--color-neutral-600);
+    --default: var(--color-neutral-50);
+    --default-foreground: var(--color-neutral-600);
+    --default-hover: var(--color-neutral-100);
 
     --accent: oklch(0.14 0 0);
     --accent-foreground: oklch(0.99 0 0);
+    --accent-hover: oklch(0.22 0 0);
 
     --accent-soft: var(--color-neutral-200);
     --accent-soft-foreground: var(--color-neutral-700);
+    --accent-soft-hover: var(--color-neutral-300);
 
     /* Status Colors */
     --success: oklch(0.55 0.1241 153.51);
@@ -46,23 +39,12 @@
 
     --danger: oklch(0.59 0.2228 29.94);
     --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: oklch(0.53 0.2 29.94);
 
     /* Misc Colors */
     --border: oklch(0 0 0 / 15%);
     --focus: oklch(0% 0 0 / 20%);
     --link: var(--foreground);
-
-    /* Layout */
-    --border-width: 1px;
-    --disabled-opacity: 0.5;
-
-    /* Radius */
-    --radius: 0.75rem; /* 12px */
-    --radius-panel: 0.5rem;
-    --radius-panel-inner: calc(var(--radius-panel) * 0.5);
-
-    /* Font Sizes */
-    --font-size-base: clamp(14px, 1vw + 0.5rem, 16px);
 
     /* Shadow */
     --shadow-border:
@@ -72,6 +54,8 @@
 
   .dark,
   [data-theme="dark"] {
+    color-scheme: dark;
+
     /* Base Colors */
     --background: oklch(0% 0 0);
     --foreground: oklch(99.11% 0 0);
@@ -85,14 +69,17 @@
 
     --scrollbar: var(--color-neutral-800);
 
-    --base: var(--color-neutral-900);
-    --base-foreground: var(--color-neutral-200);
+    --default: var(--color-neutral-900);
+    --default-foreground: var(--color-neutral-200);
+    --default-hover: var(--color-neutral-800);
 
     --accent: oklch(0.99 0 0);
     --accent-foreground: oklch(0.22 0 0);
+    --accent-hover: oklch(0.9 0 0);
 
     --accent-soft: var(--color-neutral-800);
     --accent-soft-foreground: var(--color-neutral-200);
+    --accent-soft-hover: var(--color-neutral-700);
 
     /* Status Colors */
     --success: oklch(0.8 0.1561 154);
@@ -103,6 +90,7 @@
 
     --danger: oklch(0.61 0.1998 29.94);
     --danger-foreground: oklch(0.99 0 0);
+    --danger-hover: oklch(0.55 0.18 29.94);
 
     /* Misc Colors */
     --border: oklch(1 0 0 / 12%);
@@ -111,8 +99,7 @@
 
     /* Shadow */
     --shadow-border:
-      0 0 5px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.2),
-      inset 0 0 1px rgba(var(--foreground), 0.2);
+      0 0 0 1px var(--border), 0 5px 10px -3px rgba(0, 0, 0, 0.3), 0 3px 4px -2px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -196,34 +183,4 @@
   --radius-2xl: calc(var(--radius) * 2);
   --radius-3xl: calc(var(--radius) * 3);
   --radius-4xl: calc(var(--radius) * 4);
-}
-
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--border, currentColor);
-  }
-
-  *,
-  ::after,
-  ::before {
-    font-feature-settings: "cv11", "ss01";
-    font-variation-settings: "opsz" 850;
-    text-rendering: optimizeLegibility;
-    font-synthesis-weight: none;
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar) transparent;
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-size: var(--font-size-base);
-  }
 }

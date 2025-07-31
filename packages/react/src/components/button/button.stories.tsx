@@ -2,11 +2,11 @@ import type {ButtonProps} from "./button";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import {useState} from "react";
+import React, {useState} from "react";
 
 import {Spinner} from "../spinner";
 
-import {Button} from "./button";
+import {Button} from "./index";
 
 export default {
   argTypes: {
@@ -19,11 +19,11 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "tertiary", "danger"],
+      options: ["primary", "secondary", "tertiary", "ghost", "danger"],
     },
   },
   component: Button,
-  title: "Components/Button",
+  title: "✅ Ready/Button",
 } as Meta<typeof Button>;
 
 const defaultArgs: ButtonProps = {

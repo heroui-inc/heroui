@@ -1,9 +1,12 @@
 {
   "name": "@heroui/react",
-  "version": "3.0.0",
-  "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS.",
+  "version": "3.0.0-alpha.9",
+  "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS 4.0.",
   "license": "MIT",
   "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
   "keywords": [
@@ -21,6 +24,16 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./package.json": "./package.json",
+    "./styles": {
+      "default": "./src/styles.css",
+      "style": "./src/styles.css"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heroui-inc/heroui.git",
@@ -30,31 +43,55 @@
     "url": "https://github.com/heroui-inc/heroui/issues"
   },
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup",
-    "lint": "eslint ."
+    "dev": "rollup -c rollup.config.mjs --watch",
+    "build": "node scripts/build.mjs --tsc",
+    "build:fast": "node scripts/build.mjs",
+    "add:component": "node scripts/add-component.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "prepack": "node scripts/generate-exports.mjs && clean-package",
+    "postpack": "clean-package restore && node scripts/remove-exports.mjs"
   },
+  "clean-package": "./clean-package.config.json",
   "dependencies": {
+    "@heroui/styles": "workspace:*",
+    "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.7",
     "@radix-ui/react-slot": "1.2.3",
+    "clsx": "2.1.1",
+    "input-otp": "1.4.2",
     "react-aria-components": "1.8.0",
-    "tailwind-merge": "3.0.2",
-    "tailwind-variants": "1.0.0",
-    "tw-animate-css": "1.2.9"
+    "tailwind-variants": "2.1.0"
   },
   "devDependencies": {
+    "@babel/core": "7.28.0",
+    "@babel/preset-react": "7.27.1",
+    "@babel/preset-typescript": "7.27.1",
     "@heroui/standard": "workspace:*",
     "@iconify/react": "5.2.1",
+    "@rollup/plugin-babel": "6.0.4",
+    "@rollup/plugin-commonjs": "28.0.6",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-typescript": "12.1.4",
     "@storybook/react": "8.6.12",
+    "@types/fs-extra": "11.0.4",
+    "@types/glob": "9.0.0",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
+    "fs-extra": "11.3.0",
+    "glob": "11.0.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwindcss": "4.1.4"
+    "rollup": "4.45.0",
+    "rollup-plugin-peer-deps-external": "2.2.4",
+    "rollup-plugin-postcss": "4.0.2",
+    "tailwindcss": "4.1.4",
+    "tsx": "4.20.3"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0",
     "tailwindcss": ">=4.0.0"
-  }
+  },
+  "type": "module"
 }

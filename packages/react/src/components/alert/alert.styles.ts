@@ -12,6 +12,7 @@ export const alertVariants = tv({
     action: [
       "select-none rounded-lg px-3.5 py-2 text-sm font-medium",
       "transition-colors duration-150",
+      "cursor-interactive",
       focusRingClasses,
       disabledClasses,
     ],
@@ -23,8 +24,9 @@ export const alertVariants = tv({
     close: [
       "text-muted h-fit rounded-sm p-1",
       "transition-colors duration-150",
-      "hover:bg-base active:bg-base data-[pressed]:bg-base",
+      "hover:bg-default active:bg-default data-[pressed]:bg-default",
       "hover:text-foreground active:text-foreground data-[pressed]:text-foreground",
+      "cursor-interactive",
       focusRingClasses,
       disabledClasses,
     ],

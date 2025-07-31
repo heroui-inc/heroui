@@ -2,7 +2,7 @@ import type {RefObject} from "react";
 
 import {useEffect, useState} from "react";
 
-export const useHeightCalculator = (ref: RefObject<HTMLDivElement | null>) => {
+export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
   const [height, setHeight] = useState<number | undefined>(undefined);
 
   useEffect(() => {

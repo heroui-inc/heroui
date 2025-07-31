@@ -1,3 +1,5 @@
+"use client";
+
 import type {ButtonVariants} from "./button.styles";
 import type {Ref} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
@@ -5,7 +7,7 @@ import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 import React from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils";
 
 import {buttonVariants} from "./button.styles";
 
@@ -13,7 +15,7 @@ interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
   ref?: Ref<HTMLButtonElement>;
 }
 
-const Button = React.forwardRef<React.ElementRef<typeof ButtonPrimitive>, ButtonProps>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({children, className, isIconOnly, size, variant, ...rest}, ref) => {
     return (
       <ButtonPrimitive

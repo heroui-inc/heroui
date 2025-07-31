@@ -1,0 +1,48 @@
+{
+  "name": "@heroui/styles",
+  "version": "3.0.0-alpha.9",
+  "description": "HeroUI core styles and Tailwind plugin",
+  "author": "HeroUI <support@heroui.com>",
+  "homepage": "https://heroui.com",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.css",
+  "style": "./index.css",
+  "exports": {
+    ".": {
+      "style": "./index.css",
+      "default": "./index.css"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm run build:copy && pnpm run build:minify",
+    "build:copy": "node scripts/copy-css.mjs",
+    "build:minify": "npx @tailwindcss/cli -i ./dist/index.css -o dist/heroui.min.css --minify",
+    "clean": "rm -rf dist .turbo",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "clean-package": "./clean-package.config.json",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "tw-animate-css": "1.3.6"
+  },
+  "devDependencies": {
+    "@heroui/standard": "workspace:*",
+    "@tailwindcss/cli": "^4.1.11",
+    "clean-package": "2.2.0",
+    "eslint": "^9.15.0",
+    "rimraf": "6.0.1",
+    "tailwindcss": "^4.1.4"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=4.0.0"
+  }
+}

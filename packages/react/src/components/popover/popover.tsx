@@ -42,7 +42,7 @@ const PopoverRoot = ({
   );
 };
 
-PopoverRoot.displayName = "HeroUI.PopoverRoot";
+PopoverRoot.displayName = "HeroUI.Popover";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -158,12 +158,13 @@ PopoverHeading.displayName = "HeroUI.PopoverHeading";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const Root = PopoverRoot;
-const Trigger = PopoverTrigger;
-const Dialog = PopoverDialog;
-const Arrow = PopoverArrow;
-const Content = PopoverContent;
-const Heading = PopoverHeading;
+const CompoundPopover = Object.assign(PopoverRoot, {
+  Trigger: PopoverTrigger,
+  Dialog: PopoverDialog,
+  Arrow: PopoverArrow,
+  Content: PopoverContent,
+  Heading: PopoverHeading,
+});
 
-export {Root, Trigger, Content, Heading, Dialog, Arrow};
+export default CompoundPopover;
 export type {PopoverProps, PopoverContentProps};

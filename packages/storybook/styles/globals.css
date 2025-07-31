@@ -1,4 +1,40 @@
-@import "tailwindcss";
-@import "../../react/index.css";
+@import "@heroui/styles";
 
-@source "../../react/src";
+@source "../../react/src/components/**/*.{ts,tsx,js,jsx}";
+
+/* Important: This source is important to make sure storybook styles are compiled */
+
+/* Custom theme overrides - Just use CSS! */
+:root {
+  /* Your values */
+  /* --radius: 2.5rem; */
+
+  /* Use OS-native cursor for interactive elements (macOS style) */
+  --cursor-interactive: default;
+}
+
+/* Dark theme overrides sing data-theme or class */
+[data-theme="dark"],
+.dark {
+  /* Your values */
+  /* --radius: 0.5rem; */
+  /* --cursor: default; */
+
+  --cursor-interactive: pointer;
+}
+
+/* @theme inline { */
+/* Radius */
+/* --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: calc(var(--radius) * 1);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+} */
+
+/* @utility button {
+  @apply rounded-lg;
+} */

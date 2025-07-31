@@ -18,7 +18,7 @@ import {
   DisclosurePanel,
 } from "react-aria-components";
 
-import {useHeightCalculator} from "../../hooks";
+import {useMeasuredHeight} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 import {useMergeRef} from "../../utils/mergeRef";
@@ -197,7 +197,7 @@ const AccordionPanel = React.forwardRef<
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
   const accordionPanelRef = useRef<HTMLDivElement>(null);
-  const {height: panelHeight} = useHeightCalculator(accordionPanelRef);
+  const {height: panelHeight} = useMeasuredHeight(accordionPanelRef);
   const mergedRef = useMergeRef(accordionPanelRef, ref);
 
   return (
@@ -221,15 +221,14 @@ AccordionPanel.displayName = "HeroUI.AccordionPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const Root = Accordion;
-const Item = AccordionItem;
-const Heading = AccordionHeading;
-const Trigger = AccordionTrigger;
-const Panel = AccordionPanel;
-const Indicator = AccordionIndicator;
-const Body = AccordionBody;
-
-export {Root, Item, Heading, Trigger, Panel, Indicator, Body};
+const CompoundAccordion = Object.assign(Accordion, {
+  Item: AccordionItem,
+  Heading: AccordionHeading,
+  Trigger: AccordionTrigger,
+  Panel: AccordionPanel,
+  Indicator: AccordionIndicator,
+  Body: AccordionBody,
+});
 
 export type {
   AccordionProps,
@@ -239,3 +238,5 @@ export type {
   AccordionIndicatorProps,
   AccordionBodyProps,
 };
+
+export default CompoundAccordion;

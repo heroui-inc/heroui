@@ -1,7 +1,7 @@
 {
   "name": "heroui",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.0.0-alpha.3",
   "license": "MIT",
   "author": {
     "name": "HeroUI",
@@ -15,18 +15,25 @@
   "scripts": {
     "dev": "turbo dev --filter=@heroui/storybook",
     "dev:docs": "turbo dev --filter=@heroui/docs",
-    "build": "turbo build",
+    "build": "turbo build --filter=@heroui/core --filter=@heroui/react",
     "build:docs": "turbo build --filter=@heroui/docs",
     "build:react": "turbo build --filter=@heroui/react",
     "build:storybook": "turbo build --filter=@heroui/storybook",
     "start:docs": "turbo start --filter=@heroui/docs",
     "start:storybook": "turbo start --filter=@heroui/storybook",
     "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix",
     "lint:docs": "turbo lint --filter=@heroui/docs",
     "lint:react": "turbo lint --filter=@heroui/react",
     "lint:storybook": "turbo lint --filter=@heroui/storybook",
+    "typecheck": "turbo typecheck",
+    "typecheck:docs": "turbo typecheck --filter=@heroui/docs",
+    "typecheck:react": "turbo typecheck --filter=@heroui/react",
+    "typecheck:storybook": "turbo typecheck --filter=@heroui/storybook",
+    "changeset:alpha": "changeset pre enter alpha",
     "changeset:canary": "changeset pre enter canary",
     "changeset:beta": "changeset pre enter beta",
+    "changeset:exit": "changeset pre exit",
     "version": "changeset version",
     "release": "changeset publish",
     "version:canary": "changeset version --snapshot canary",
@@ -34,9 +41,10 @@
     "clean": "pnpm clean:cache && pnpm i",
     "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name 'pnpm-lock.yaml' \\) -type d -prune -exec rm -rf '{}' +",
     "upli": "pnpm up --filter \"./**\"  -L -i",
-    "postinstall": "husky"
+    "postinstall": "husky install && pnpm --filter @heroui/core build"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.29.2",
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
@@ -47,6 +55,7 @@
     "@types/node": "22.14.1",
     "@typescript-eslint/eslint-plugin": "8.31.0",
     "@typescript-eslint/parser": "8.31.0",
+    "clean-package": "2.2.0",
     "commitlint-plugin-function-rules": "4.0.1",
     "eslint": "9.25.1",
     "eslint-config-next": "15.3.1",
@@ -78,7 +87,7 @@
     "vitest": "3.1.2"
   },
   "engines": {
-    "node": ">=22.x",
+    "node": ">=20.x",
     "pnpm": ">=10.x"
   },
   "packageManager": "pnpm@10.9.0"

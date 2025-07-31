@@ -40,7 +40,7 @@ const TooltipRoot = ({
   );
 };
 
-TooltipRoot.displayName = "HeroUI.TooltipRoot";
+TooltipRoot.displayName = "HeroUI.Tooltip";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -118,10 +118,11 @@ TooltipTrigger.displayName = "HeroUI.TooltipTrigger";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const Root = TooltipRoot;
-const Trigger = TooltipTrigger;
-const Content = TooltipContent;
-const Arrow = TooltipArrow;
+const CompoundTooltip = Object.assign(TooltipRoot, {
+  Trigger: TooltipTrigger,
+  Content: TooltipContent,
+  Arrow: TooltipArrow,
+});
 
-export {Root, Trigger, Content, Arrow};
+export default CompoundTooltip;
 export type {TooltipProps, TooltipContentProps};

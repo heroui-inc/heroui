@@ -2,6 +2,7 @@ import type {AccordionProps} from "./accordion";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
+import React from "react";
 
 import {Accordion} from "./index";
 
@@ -24,8 +25,8 @@ export default {
       options: ["default", "outline"],
     },
   },
-  component: Accordion.Root,
-  title: "Components/Accordion",
+  component: Accordion,
+  title: "✅ Ready/Accordion",
 } as Meta<typeof Accordion>;
 
 const defaultArgs: AccordionProps = {
@@ -35,7 +36,9 @@ const defaultArgs: AccordionProps = {
 };
 
 const Wrapper = ({children}: {children: React.ReactNode}) => (
-  <div className="flex h-full w-full">{children}</div>
+  <div data-animation-off className="w-full max-w-md">
+    {children}
+  </div>
 );
 
 const items = [
@@ -78,7 +81,7 @@ const items = [
 
 const Template = (props: AccordionProps) => (
   <Wrapper>
-    <Accordion.Root {...props}>
+    <Accordion {...props}>
       {items.map((item, index) => (
         <Accordion.Item key={index}>
           <Accordion.Heading>
@@ -87,7 +90,9 @@ const Template = (props: AccordionProps) => (
                 <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
               ) : null}
               {item.title}
-              <Accordion.Indicator />
+              <Accordion.Indicator>
+                <Icon icon="gravity-ui:chevron-down" />
+              </Accordion.Indicator>
             </Accordion.Trigger>
           </Accordion.Heading>
           <Accordion.Panel>
@@ -95,7 +100,7 @@ const Template = (props: AccordionProps) => (
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion.Root>
+    </Accordion>
   </Wrapper>
 );
 

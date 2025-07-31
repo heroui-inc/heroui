@@ -1,36 +1,44 @@
-/* eslint-disable sort-keys */
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
 export const avatarVariants = tv({
+  defaultVariants: {
+    color: "default",
+    size: "md",
+  },
   slots: {
-    base: "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
-    image: "aspect-square h-full w-full",
-    fallback: "bg-base flex h-full w-full items-center justify-center rounded-full border",
+    base: "avatar",
+    fallback: "avatar__fallback",
+    image: "avatar__image",
   },
   variants: {
-    size: {
-      sm: "h-8 w-8",
-      md: "h-10 w-10",
-      lg: "h-12 w-12",
-    },
     color: {
       accent: {
-        fallback: "text-accent",
-      },
-      base: {
-        fallback: "text-base-foreground",
-      },
-      success: {
-        fallback: "text-success",
-      },
-      warning: {
-        fallback: "text-warning",
+        fallback: "avatar__fallback--accent",
       },
       danger: {
-        fallback: "text-danger",
+        fallback: "avatar__fallback--danger",
+      },
+      default: {
+        fallback: "avatar__fallback--default",
+      },
+      success: {
+        fallback: "avatar__fallback--success",
+      },
+      warning: {
+        fallback: "avatar__fallback--warning",
+      },
+    },
+    size: {
+      lg: {
+        base: "avatar--lg",
+      },
+      md: {
+        base: "avatar--md",
+      },
+      sm: {
+        base: "avatar--sm",
       },
     },
   },

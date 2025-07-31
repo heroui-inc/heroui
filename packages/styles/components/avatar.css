@@ -1,0 +1,66 @@
+/* Base avatar styles */
+.avatar {
+  position: relative;
+  display: flex;
+  height: 2.5rem; /* 40px */
+  width: 2.5rem; /* 40px */
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+}
+
+/* Avatar image element */
+.avatar__image {
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  width: 100%;
+}
+
+/* Avatar fallback element */
+.avatar__fallback {
+  background-color: var(--default);
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+}
+
+/* Size modifiers */
+.avatar--sm {
+  height: 2rem; /* 32px */
+  width: 2rem; /* 32px */
+}
+
+.avatar--md {
+  height: 2.5rem; /* 40px */
+  width: 2.5rem; /* 40px */
+}
+
+.avatar--lg {
+  height: 3rem; /* 48px */
+  width: 3rem; /* 48px */
+}
+
+/* Color modifiers for fallback */
+.avatar__fallback--accent {
+  color: var(--accent);
+}
+
+.avatar__fallback--default {
+  color: var(--default-foreground);
+}
+
+.avatar__fallback--success {
+  color: var(--success);
+}
+
+.avatar__fallback--warning {
+  color: var(--warning);
+}
+
+.avatar__fallback--danger {
+  color: var(--danger);
+}

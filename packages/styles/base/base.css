@@ -1,0 +1,68 @@
+/* Layout tokens */
+:root {
+  /* Spacing scale */
+  --spacing: 0.25rem;
+
+  /* Border */
+  --border-width: 1px;
+  --disabled-opacity: 0.5;
+
+  /* Panel specific radius */
+  --radius-panel: 0.5rem;
+  --radius-panel-inner: calc(var(--radius-panel) * 0.5);
+
+  /* Typography */
+  --font-size-base: 1rem;
+  --font-size-scale-desktop: 0.875;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Cursor */
+  --cursor-interactive: pointer;
+  --cursor-disabled: not-allowed;
+}
+
+/* Scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) transparent;
+}
+
+/* Border color inheritance */
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border-color: var(--border, currentColor);
+}
+
+/* Body styles */
+body {
+  background-color: var(--background);
+  font-size: var(--font-size-base);
+  color: var(--foreground);
+}
+
+/* Desktop font scaling */
+@media (min-width: 768px) {
+  body {
+    font-size: calc(var(--font-size-base) * var(--font-size-scale-desktop));
+  }
+}
+
+/* Shared Focus Styles */
+/* Basic focus ring for interactive elements */
+.focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Shared disabled styles */
+.disabled {
+  cursor: var(--cursor-disabled);
+  opacity: var(--disabled-opacity);
+  pointer-events: none;
+}

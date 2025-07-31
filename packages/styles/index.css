@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@import "./base/base.css" layer(base);
+@import "./components/index.css" layer(components);
+@import "./utilities/index.css" layer(utilities);
+@import "./themes/default.css" layer(base);
