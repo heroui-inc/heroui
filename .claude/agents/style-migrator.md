@@ -45,6 +45,9 @@ Create a new `.css` file in `@heroui/core/src/components/` with:
 - Preservation of all responsive modifiers (sm:, md:, lg:, etc.)
 - Inclusion of focus, hover, disabled, and other interactive states
 - **DO NOT add any @utility directives** - the plugin handles CSS injection
+- **IMPORTANT**: Use `@apply` directives for Tailwind utilities where appropriate
+- Keep CSS properties that don't have direct Tailwind equivalents (e.g., `cursor: var(--cursor-interactive)`)
+- Preserve complex CSS functions like `color-mix()` that don't have utility equivalents
 
 **IMPORTANT**: When creating or analyzing CSS files, use the tailwind-v4-css-expert agent to ensure proper Tailwind CSS v4 syntax and patterns. This agent can help with:
 
@@ -109,38 +112,64 @@ Follow the patterns documented in `.claude/guides/tailwindcss-v4-css-guide.md`, 
 Example structure:
 
 ```css
-/* Base component with CSS variables */
+/* Base component styles */
 .component {
-  --component-bg: var(--color-base-200);
-  --component-fg: var(--color-base-content);
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors duration-150;
 
-  @apply inline-flex items-center justify-center;
-  background-color: var(--component-bg);
-  color: var(--component-fg);
+  /* Custom properties that don't have Tailwind equivalents */
+  cursor: var(--cursor-interactive);
+
+  /* Focus state */
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled {
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    cursor: var(--cursor-disabled);
+  }
 }
 
 /* Nested elements */
-.component {
-  & > .component__element {
-    @apply relative block;
-  }
+.component__icon {
+  @apply size-4 shrink-0;
 }
 
-/* Size variants with CSS variables */
+/* Size variants */
 .component--sm {
-  --fontsize: 0.75rem;
-  --padding: 0.5rem;
-  font-size: var(--fontsize);
-  padding: var(--padding);
+  @apply h-8 px-3 text-sm;
+
+  & .component__icon {
+    @apply size-3;
+  }
 }
 
-/* State with modern CSS */
-.component {
-  @media (hover: hover) {
-    &:hover {
-      --component-bg: color-mix(in oklab, var(--component-bg), #000 7%);
-    }
-  }
+.component--lg {
+  @apply h-10 px-5 text-base;
+}
+
+/* Color variants */
+.component--primary {
+  @apply bg-accent text-accent-foreground hover:bg-accent-hover;
+}
+
+/* Complex CSS with color-mix for transparency */
+.component--ghost {
+  @apply hover:bg-accent-soft bg-transparent;
+
+  /* Complex color mixing that doesn't have utility equivalent */
+  text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
+}
+
+/* Animation using tw-animate-css */
+.component[data-entering] {
+  @apply animate-in zoom-in-90 fade-in-0 duration-200 ease-in-out;
+}
+
+.component[data-exiting] {
+  @apply animate-out zoom-out-95 fade-out duration-150 ease-out;
 }
 ```
 

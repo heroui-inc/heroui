@@ -178,7 +178,10 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
     <div className="flex items-center gap-8">
       <Popover>
         <Button>Click for Spring Animation</Button>
-        <Popover.Content {...props}>
+        <Popover.Content
+          {...props}
+          className="data-[entering]:animate-in data-[entering]:zoom-in-90 data-[entering]:fade-in-0 data-[entering]:ease-spring data-[entering]:duration-600"
+        >
           <Popover.Dialog>
             <Popover.Arrow />
             <Popover.Heading>Spring Animation 🎉</Popover.Heading>
@@ -186,16 +189,19 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
               Notice the subtle bounce effect when the popover appears and disappears.
             </p>
             <p className="text-muted-foreground mt-4 text-xs">
-              Easing: cubic-bezier(0.155, 1.105, 0.295, 1.12)
+              Easing: cubic-bezier(0.36, 1.66, 0.04, 1)
             </p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
     </div>
 
-    <div className="text-muted-foreground space-y-1 text-xs">
+    <div className="text-muted-foreground space-y-1 text-center text-xs">
       <p>Animation classes applied:</p>
-      <code className="bg-surface rounded px-2 py-1 text-xs">ease-spring duration-200</code>
+      <code className="bg-surface rounded px-2 py-1 text-xs">
+        data-[entering]:animate-in data-[entering]:zoom-in-90 data-[entering]:fade-in-0
+        data-[entering]:ease-spring data-[entering]:duration-600
+      </code>
     </div>
   </div>
 );

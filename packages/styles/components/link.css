@@ -1,29 +1,12 @@
 /* Base link styles */
 .link {
-  /* Color */
-  color: var(--link);
+  @apply text-link relative inline-flex h-fit items-center gap-1 underline-offset-4 transition-[color,text-decoration-color,opacity] duration-150 hover:underline;
+
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Display and layout */
-  position: relative;
-  display: inline-flex;
-  height: fit-content;
-  align-items: center;
-  gap: 0.25rem; /* 4px */
-
-  /* Text decoration */
+  /* Text decoration color with transparency */
   text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
-  text-underline-offset: 0.25rem; /* 4px */
-
-  /* Transitions */
-  transition-property: color, text-decoration-color, opacity;
-  transition-duration: 150ms;
-
-  /* Hover state */
-  &:hover {
-    text-decoration-line: underline;
-  }
 
   /* Focus state */
   &:focus-visible {
@@ -33,8 +16,7 @@
 
   /* Disabled state */
   &[aria-disabled="true"] {
-    pointer-events: none;
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
     cursor: var(--cursor-disabled);
-    opacity: var(--disabled-opacity);
   }
 }

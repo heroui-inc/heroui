@@ -1,66 +1,48 @@
 /* Base avatar styles */
 .avatar {
-  position: relative;
-  display: flex;
-  height: 2.5rem; /* 40px */
-  width: 2.5rem; /* 40px */
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 9999px;
+  @apply relative flex size-10 shrink-0 overflow-hidden rounded-full;
 }
 
 /* Avatar image element */
 .avatar__image {
-  aspect-ratio: 1 / 1;
-  height: 100%;
-  width: 100%;
+  @apply aspect-square size-full;
 }
 
 /* Avatar fallback element */
 .avatar__fallback {
-  background-color: var(--default);
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  border: 1px solid var(--border);
+  @apply bg-default flex size-full items-center justify-center rounded-full border;
 }
 
 /* Size modifiers */
 .avatar--sm {
-  height: 2rem; /* 32px */
-  width: 2rem; /* 32px */
+  @apply size-8;
 }
 
 .avatar--md {
-  height: 2.5rem; /* 40px */
-  width: 2.5rem; /* 40px */
+  @apply size-10;
 }
 
 .avatar--lg {
-  height: 3rem; /* 48px */
-  width: 3rem; /* 48px */
+  @apply size-12;
 }
 
 /* Color modifiers for fallback */
 .avatar__fallback--accent {
-  color: var(--accent);
+  @apply text-accent;
 }
 
 .avatar__fallback--default {
-  color: var(--default-foreground);
+  @apply text-default-foreground;
 }
 
 .avatar__fallback--success {
-  color: var(--success);
+  @apply text-success;
 }
 
 .avatar__fallback--warning {
-  color: var(--warning);
+  @apply text-warning;
 }
 
 .avatar__fallback--danger {
-  color: var(--danger);
+  @apply text-danger;
 }

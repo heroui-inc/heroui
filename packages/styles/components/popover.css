@@ -2,57 +2,33 @@
 
 /* Base popover styles */
 .popover {
-  /* Background and appearance */
-  background-color: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-
-  /* Shadow */
-  box-shadow: var(--shadow-md);
-
-  /* Layout */
-  padding: 0;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
-
-  /* Animation */
-  will-change: transform;
-
-  /* Dark mode shadow */
-  &:where(.dark, .dark *) {
-    box-shadow: none;
-  }
+  @apply bg-panel rounded-lg border p-0 text-sm shadow-md will-change-transform dark:shadow-none;
 
   /* Entering animations */
   &[data-entering] {
-    animation-name: popover-enter;
-    animation-duration: 400ms;
-    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-    animation-fill-mode: both;
+    @apply animate-in zoom-in-90 fade-in-0 duration-200 ease-out;
 
+    /* Placement-specific translations */
     &[data-placement="top"] {
-      --enter-translate-y: 0.25rem;
+      @apply slide-in-from-bottom-1;
     }
 
     &[data-placement="bottom"] {
-      --enter-translate-y: -0.25rem;
+      @apply slide-in-from-top-1;
     }
 
     &[data-placement="left"] {
-      --enter-translate-x: 0.25rem;
+      @apply slide-in-from-right-1;
     }
 
     &[data-placement="right"] {
-      --enter-translate-x: -0.25rem;
+      @apply slide-in-from-left-1;
     }
   }
 
   /* Exiting animations */
   &[data-exiting] {
-    animation-name: popover-exit;
-    animation-duration: 150ms;
-    animation-timing-function: ease;
-    animation-fill-mode: both;
+    @apply animate-out zoom-out-95 fade-out duration-150 ease-out;
   }
 
   /* Arrow styling */
@@ -77,7 +53,7 @@
 
 /* Popover dialog */
 .popover__dialog {
-  padding: 0.75rem; /* 12px */
+  @apply p-3;
 
   /* Focus ring */
   &:focus-visible {
@@ -88,7 +64,7 @@
 
 /* Popover heading */
 .popover__heading {
-  font-weight: 500;
+  @apply font-medium;
 }
 
 /* Popover trigger */
@@ -99,29 +75,5 @@
   &:focus-visible {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
-  }
-}
-
-/* Animation keyframes */
-@keyframes popover-enter {
-  from {
-    opacity: 0;
-    transform: translate3d(var(--enter-translate-x, 0), var(--enter-translate-y, 0), 0)
-      scale3d(0.9, 0.9, 0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
-  }
-}
-
-@keyframes popover-exit {
-  from {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
-  }
-  to {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scale3d(0.95, 0.95, 0.95);
   }
 }

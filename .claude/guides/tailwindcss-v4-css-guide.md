@@ -36,7 +36,7 @@ The `@apply` directive allows you to compose Tailwind utility classes within you
 
 ```css
 .avatar {
-  @apply relative inline-flex align-middle;
+  @apply relative flex size-10 shrink-0 overflow-hidden rounded-full;
 }
 
 .avatar-group {
@@ -44,16 +44,60 @@ The `@apply` directive allows you to compose Tailwind utility classes within you
 }
 ```
 
+### When to Use @apply
+
+Use `@apply` for properties that have direct Tailwind utility equivalents:
+
+```css
+.button {
+  /* Use @apply for Tailwind utilities */
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors duration-150;
+
+  /* Keep custom CSS for properties without utilities */
+  cursor: var(--cursor-interactive);
+
+  /* Complex CSS functions stay as regular CSS */
+  text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
+}
+```
+
+### Animation with tw-animate-css
+
+For animations, use tw-animate-css utilities with @apply:
+
+```css
+/* Entering animations */
+.tooltip[data-entering] {
+  @apply animate-in zoom-in-90 fade-in-0 duration-200 ease-in-out;
+}
+
+/* Placement-specific animations */
+.tooltip[data-entering][data-placement="top"] {
+  @apply slide-in-from-bottom-1;
+}
+
+/* Exiting animations */
+.tooltip[data-exiting] {
+  @apply animate-out zoom-out-95 fade-out duration-150 ease-out;
+}
+```
+
 ### Complex @apply Examples
 
 ```css
-.menu {
-  @apply flex w-fit flex-col flex-wrap p-2;
-  font-size: 0.875rem;
+/* Combine multiple utilities in one @apply */
+.accordion__trigger {
+  @apply hover:bg-default flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color] duration-[50ms];
 }
 
-.checkbox {
-  @apply text-base-content rounded-selector relative inline-block shrink-0 cursor-pointer appearance-none p-1 align-middle;
+/* Size modifiers with @apply */
+.button--sm {
+  @apply h-9 px-3 text-sm md:h-8;
+}
+
+/* Color variants */
+.button--primary {
+  @apply bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-hover data-[pressed=true]:bg-accent-hover;
 }
 ```
 
@@ -294,52 +338,73 @@ Tailwind CSS v4 embraces CSS custom properties for theming and dynamic values:
 
 ## Best Practices
 
-1. **Use CSS Variables for Theming**: Define component-specific CSS variables that can be overridden
+1. **Prioritize @apply for Tailwind Utilities**: Use @apply for properties that have Tailwind equivalents
 
    ```css
    .component {
-     --component-bg: var(--color-base-100);
-     background-color: var(--component-bg);
+     /* Good: Use @apply for Tailwind utilities */
+     @apply bg-panel rounded-lg border p-4 shadow-md;
+
+     /* Keep custom CSS for non-utility properties */
+     cursor: var(--cursor-interactive);
    }
    ```
 
-2. **Leverage :where() for Specificity Control**: Use `:where()` to keep specificity low
+2. **Keep Focus States Consistent**: Use custom outline styles for focus states
 
    ```css
-   :where(.button) {
-     width: unset;
-   }
-   ```
-
-3. **Combine @apply with Custom CSS**: Mix Tailwind utilities with standard CSS
-
-   ```css
-   .element {
-     @apply flex items-center;
-     gap: 0.75rem;
-     transition: transform 0.2s;
-   }
-   ```
-
-4. **Use Nested Selectors Wisely**: Keep nesting levels reasonable for maintainability
-
-   ```css
-   .parent {
-     & > .child {
-       @apply p-2;
-
-       &:hover {
-         @apply bg-gray-100;
-       }
+   .component {
+     &:focus-visible {
+       outline: 2px solid var(--focus);
+       outline-offset: 2px;
      }
    }
    ```
 
-5. **Modern CSS Features**: Utilize color-mix(), calc(), and other modern CSS functions
+3. **Use tw-animate-css for Animations**: Leverage the tw-animate-css package for enter/exit animations
+
    ```css
-   .element {
-     background: color-mix(in oklab, var(--color-primary) 20%, transparent);
-     padding: calc(var(--spacing) * 2);
+   .popover[data-entering] {
+     @apply animate-in zoom-in-90 fade-in-0 duration-200 ease-out;
+   }
+
+   .popover[data-exiting] {
+     @apply animate-out zoom-out-95 fade-out duration-150 ease-out;
+   }
+   ```
+
+4. **Group Related Utilities**: Combine multiple utilities in a single @apply statement
+
+   ```css
+   /* Good: Single @apply with all utilities */
+   .button {
+     @apply relative inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors duration-150;
+   }
+
+   /* Avoid: Multiple @apply statements */
+   .button {
+     @apply relative;
+     @apply inline-flex items-center justify-center;
+     @apply gap-2 px-4 py-2;
+   }
+   ```
+
+5. **Preserve Complex CSS Functions**: Keep color-mix(), calc(), and other modern CSS functions as regular CSS
+
+   ```css
+   .link {
+     @apply text-link underline-offset-4 hover:underline;
+
+     /* Complex CSS stays as is */
+     text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
+   }
+   ```
+
+6. **Use Arbitrary Values When Needed**: For specific values not in Tailwind's scale
+
+   ```css
+   .component {
+     @apply duration-[400ms] ease-[cubic-bezier(0.34,1.56,0.64,1)];
    }
    ```
 

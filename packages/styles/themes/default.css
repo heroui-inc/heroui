@@ -104,12 +104,6 @@
 }
 
 @theme inline {
-  /* Recommended font is: Inter, Sathosi, Geist */
-  /* --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
-
-  /* Recommended font is: Geist Mono */
-  /* --font-mono: var(--font-geist), 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'; */
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-panel: var(--panel);
@@ -130,8 +124,8 @@
   --color-focus: var(--focus);
   --color-link: var(--link);
 
-  --color-base: var(--base);
-  --color-base-foreground: var(--base-foreground);
+  --color-default: var(--default);
+  --color-default-foreground: var(--default-foreground);
 
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
@@ -147,7 +141,11 @@
   /* Calculated Variables */
 
   /* Colors */
-  --color-base-hover: color-mix(in oklab, var(--color-base) 90%, var(--color-base-foreground) 5%);
+  --color-default-hover: color-mix(
+    in oklab,
+    var(--color-default) 90%,
+    var(--color-default-foreground) 5%
+  );
   --color-accent-hover: color-mix(
     in oklab,
     var(--color-accent) 90%,
@@ -183,4 +181,8 @@
   --radius-2xl: calc(var(--radius) * 2);
   --radius-3xl: calc(var(--radius) * 3);
   --radius-4xl: calc(var(--radius) * 4);
+
+  /* Tranistion Timing Functions  */
+  --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);
+  /* --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1); */
 }

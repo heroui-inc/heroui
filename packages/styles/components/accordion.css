@@ -1,102 +1,71 @@
 /* Base accordion styles */
 .accordion {
-  width: 100%;
+  @apply w-full;
 }
 
 /* Accordion elements */
 .accordion__body {
-  color: var(--muted);
-  padding: 0 1rem 1rem; /* 0 16px 16px */
+  @apply text-muted px-4 pb-4 pt-0;
 }
 
 .accordion__heading {
-  display: flex;
+  @apply flex;
 }
 
 .accordion__indicator {
-  color: var(--muted);
-  margin-left: auto;
-  width: 1rem; /* 16px */
-  height: 1rem; /* 16px */
-  flex-shrink: 0;
-  transition: transform 300ms;
+  @apply text-muted ml-auto size-4 shrink-0 transition duration-300;
 }
 
 .accordion__item {
-  border-bottom: 1px solid var(--border);
-
-  &:last-child {
-    border-bottom: 0;
-  }
+  @apply border-b last:border-b-0;
 }
 
 .accordion__panel {
-  height: 0;
-  opacity: 0;
-  transition:
-    height 200ms ease-out,
-    opacity 200ms ease-out;
-}
+  @apply duration-250 h-0 opacity-0 transition-[height,opacity] ease-out;
 
-.accordion__panel[aria-hidden="false"] {
-  height: var(--panel-height);
-  opacity: 1;
+  &[aria-hidden="false"] {
+    @apply h-[var(--panel-height)] opacity-100;
+  }
 }
 
 .accordion__trigger {
+  /* Base Styles */
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color] duration-[50ms];
+
+  /* Hover State */
+  &:hover {
+    @apply bg-default;
+  }
+
   /* Focus State */
   &:focus-visible {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
 
-  /* Base Styles */
-  background-color: transparent;
-  cursor: var(--cursor-interactive);
-  display: flex;
-  flex: 1 1 0%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem; /* 16px */
-  text-align: left;
-  font-weight: 500;
-  transition: background-color 50ms;
-
-  /* Hover State */
-  &:hover {
-    background-color: var(--default);
-  }
-
   /* Disabled State */
   &:disabled {
-    pointer-events: none;
-    cursor: var(--cursor-disabled);
-    opacity: var(--disabled-opacity);
+    @apply pointer-events-none cursor-not-allowed opacity-[var(--disabled-opacity)];
   }
 }
 
 /* Expanded state for indicator rotation */
 .accordion__trigger[aria-expanded="true"] [data-accordion-indicator] {
-  transform: rotate(-180deg);
+  @apply -rotate-180;
 }
 
 /* Outline variant */
 .accordion--outline {
-  background-color: var(--panel);
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
+  @apply bg-panel rounded-lg border shadow-sm;
 }
 
 .accordion--outline .accordion__item {
   /* Special rounding for first and last items in outline variant */
   &:first-child [data-accordion-trigger] {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
+    @apply rounded-t-lg;
   }
 
   &:last-child:not(:has([data-accordion-trigger][aria-expanded="true"])) [data-accordion-trigger] {
-    border-bottom-left-radius: var(--radius-lg);
-    border-bottom-right-radius: var(--radius-lg);
+    @apply rounded-b-lg;
   }
 }

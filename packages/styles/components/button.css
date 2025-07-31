@@ -2,36 +2,11 @@
 
 /* Base button styles */
 .button {
-  /* Cursor and pointer events */
+  @apply relative isolate inline-flex origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium transition-[transform,background-color] duration-150;
+
+  /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Display and layout */
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem; /* 8px */
-
-  /* Box model */
-  padding-left: 1rem; /* 16px */
-  padding-right: 1rem; /* 16px */
-  border: 1px solid transparent;
-  border-radius: var(--radius-lg);
-
-  /* Typography */
-  font-weight: 500;
-  white-space: nowrap;
-  user-select: none;
-
-  /* Transform origin */
-  transform-origin: center;
-
-  /* Transitions */
-  transition-property: transform, background-color;
-  transition-duration: 150ms;
-
-  /* Focus state */
   /* Focus state */
   &:focus-visible {
     outline: 2px solid var(--focus);
@@ -41,153 +16,72 @@
   /* Disabled state */
   &:disabled,
   &[aria-disabled="true"] {
-    pointer-events: none;
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
     cursor: var(--cursor-disabled);
-    opacity: var(--disabled-opacity);
   }
 
   /* Pending state */
   &[data-pending] {
-    pointer-events: none;
+    @apply pointer-events-none;
   }
 
   /* SVG icon styling */
   & svg {
-    pointer-events: none;
-    margin-left: calc(0.25rem * -0.5);
-    margin-right: calc(0.25rem * -0.5);
-    margin-top: calc(0.25rem * 0.5);
-    margin-bottom: calc(0.25rem * 0.5);
-    width: 1.25rem; /* 20px */
-    height: 1.25rem; /* 20px */
-    flex-shrink: 0;
-    align-self: center;
-  }
-
-  /* Small screen SVG adjustments */
-  @media (min-width: 640px) {
-    & svg {
-      margin-top: 0.25rem; /* 4px */
-      margin-bottom: 0.25rem; /* 4px */
-      width: 1rem; /* 16px */
-      height: 1rem; /* 16px */
-    }
+    @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
 }
 
 /* Size variants */
 .button--sm {
-  height: 2.25rem; /* 36px */
-  padding-left: 0.75rem; /* 12px */
-  padding-right: 0.75rem; /* 12px */
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
+  @apply h-9 px-3 text-sm md:h-8;
 
   & svg {
-    width: 1rem; /* 16px */
-    height: 1rem; /* 16px */
-  }
-
-  @media (min-width: 768px) {
-    height: 2rem; /* 32px */
+    @apply size-4;
   }
 }
 
 .button--md {
-  height: 2.5rem; /* 40px */
-
-  @media (min-width: 768px) {
-    height: 2.25rem; /* 36px */
-  }
+  @apply h-10 md:h-9;
 }
 
 .button--lg {
-  height: 2.75rem; /* 44px */
-
-  @media (min-width: 768px) {
-    height: 2.5rem; /* 40px */
-  }
+  @apply h-11 md:h-10;
 }
 
 /* Color variants */
 .button--primary {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
-
-  &:hover,
-  &:active,
-  &[data-pressed="true"] {
-    background-color: var(--accent-hover);
-  }
+  @apply bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-hover data-[pressed=true]:bg-accent-hover;
 }
 
 .button--secondary {
-  background-color: var(--accent-soft);
-  color: var(--accent-soft-foreground);
-
-  &:hover,
-  &:active,
-  &[data-pressed="true"] {
-    background-color: var(--accent-soft-hover);
-  }
+  @apply bg-accent-soft text-accent-soft-foreground hover:bg-accent-soft-hover active:bg-accent-soft-hover data-[pressed=true]:bg-accent-soft-hover;
 }
 
 .button--tertiary {
-  border-color: var(--border);
-  background-color: var(--default);
-
-  &:hover,
-  &:active,
-  &[data-pressed="true"] {
-    background-color: var(--default-hover);
-  }
+  @apply border-border bg-default hover:bg-default-hover active:bg-default-hover data-[pressed=true]:bg-default-hover;
 }
 
 .button--ghost {
-  background-color: transparent;
-
-  &:hover,
-  &[data-pressed="true"] {
-    background-color: var(--accent-soft);
-  }
+  @apply hover:bg-accent-soft data-[pressed=true]:bg-accent-soft bg-transparent;
 }
 
 .button--danger {
-  background-color: var(--danger);
-  color: var(--danger-foreground);
-
-  &:hover,
-  &:active,
-  &[data-pressed="true"] {
-    background-color: var(--danger-hover);
-  }
+  @apply bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-hover data-[pressed=true]:bg-danger-hover;
 }
 
 /* Icon-only modifier */
 .button--icon-only {
-  padding: 0;
+  @apply p-0;
 }
 
 .button--icon-only.button--sm {
-  width: 2.25rem; /* 36px */
-
-  @media (min-width: 768px) {
-    width: 2rem; /* 32px */
-  }
+  @apply w-9 md:w-8;
 }
 
 .button--icon-only.button--md {
-  width: 2.5rem; /* 40px */
-
-  @media (min-width: 768px) {
-    width: 2.25rem; /* 36px */
-  }
+  @apply w-10 md:w-9;
 }
 
 .button--icon-only.button--lg {
-  width: 2.75rem; /* 44px */
-
-  @media (min-width: 768px) {
-    width: 2.5rem; /* 40px */
-  }
+  @apply w-11 md:w-10;
 }
