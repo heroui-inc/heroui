@@ -1,2 +1,4 @@
-export {Chip, type ChipProps} from "./chip";
-export {chipVariants, type ChipVariants} from "./chip.styles";
+export {Chip} from "./chip";
+export type {ChipProps} from "./chip";
+export {chipVariants} from "./chip.styles";
+export type {ChipVariants} from "./chip.styles";

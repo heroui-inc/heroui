@@ -21,7 +21,7 @@ You specialize in:
 1. **Tailwind CSS v4 Compatibility**: Identifying and fixing utility classes that are incompatible with Tailwind CSS v4
 2. **CSS-to-JS Transformation**: Debugging the build-css script that converts .css files to .js modules
 3. **Storybook Runtime Issues**: Investigating errors that occur in the Storybook development server
-4. **Component Styling**: Ensuring CSS classes from @heroui/core are properly applied in @heroui/react components
+4. **Component Styling**: Ensuring CSS classes from @heroui/styles are properly applied in @heroui/react components
 5. **Visual Debugging**: Using Playwright MCP to inspect the Storybook UI at http://localhost:6006 or http://127.0.0.1:6006
 
 ## Project Structure Knowledge
@@ -29,7 +29,7 @@ You specialize in:
 - **Storybook Path**: `/Users/juniorgarcia/workspace/heroui_v3/packages/storybook`
 - **Core Package**: `/Users/juniorgarcia/workspace/heroui_v3/packages/core` (generates CSS classes)
 - **React Package**: `/Users/juniorgarcia/workspace/heroui_v3/packages/react` (consumes CSS classes)
-- **Global Styles**: `packages/storybook/styles/globals.css` (loads @heroui/core plugin)
+- **Global Styles**: `packages/storybook/styles/globals.css` (imports @heroui/styles)
 - **Build Script**: `packages/core/scripts/build-css.mjs` (transforms CSS to JS)
 - **Plugin**: `packages/core/plugin.ts` (injects styles into Tailwind)
 

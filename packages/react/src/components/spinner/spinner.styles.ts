@@ -3,24 +3,24 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const spinnerVariants = tv({
-  base: "relative animate-spin",
+  base: "spinner",
   defaultVariants: {
     color: "current",
     size: "md",
   },
   variants: {
     color: {
-      accent: "text-accent",
-      current: "text-current",
-      danger: "text-danger",
-      success: "text-success",
-      warning: "text-warning",
+      accent: "spinner--accent",
+      current: "spinner--current",
+      danger: "spinner--danger",
+      success: "spinner--success",
+      warning: "spinner--warning",
     },
     size: {
-      lg: "size-8",
-      md: "size-6",
-      sm: "size-4",
-      xl: "size-10",
+      lg: "spinner--lg",
+      md: "spinner--md",
+      sm: "spinner--sm",
+      xl: "spinner--xl",
     },
   },
 });

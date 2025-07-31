@@ -34,7 +34,7 @@ When presented with a component to migrate:
 
 ### 2. CSS File Creation
 
-Create a new `.css` file in `@heroui/core/src/components/` with:
+Create a new `.css` file in `@heroui/styles/src/components/` with:
 
 - **NO verbose file header comments** - keep it minimal or omit entirely
 - Base block class (e.g., `.chip`) containing all base styles

@@ -1,2 +1,4 @@
 export {default as Accordion} from "./accordion";
-export * from "./accordion.styles";
+export type {AccordionProps} from "./accordion";
+export {accordionVariants} from "./accordion.styles";
+export type {AccordionVariants} from "./accordion.styles";

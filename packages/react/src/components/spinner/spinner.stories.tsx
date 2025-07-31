@@ -17,13 +17,10 @@ export default {
     },
   },
   component: Spinner,
-  title: "📝 ToDo/Spinner",
+  title: "✅ Ready/Spinner",
 } as Meta<typeof Spinner>;
 
-const defaultArgs: SpinnerProps = {
-  color: "accent",
-  size: "sm",
-};
+const defaultArgs: SpinnerProps = {};
 
 const Template = (props: SpinnerProps) => (
   <div className="flex items-center gap-3">
@@ -31,7 +28,63 @@ const Template = (props: SpinnerProps) => (
   </div>
 );
 
+const ColorsTemplate = (props: SpinnerProps) => (
+  <div className="flex items-center gap-8">
+    <div className="flex flex-col items-center gap-2">
+      <Spinner color="accent" {...props} />
+      <span className="text-muted-foreground text-xs">Accent</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner color="current" {...props} />
+      <span className="text-muted-foreground text-xs">Current</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner color="success" {...props} />
+      <span className="text-muted-foreground text-xs">Success</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner color="warning" {...props} />
+      <span className="text-muted-foreground text-xs">Warning</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner color="danger" {...props} />
+      <span className="text-muted-foreground text-xs">Danger</span>
+    </div>
+  </div>
+);
+
+const SizesTemplate = (props: SpinnerProps) => (
+  <div className="flex items-center gap-8">
+    <div className="flex flex-col items-center gap-2">
+      <Spinner size="sm" {...props} />
+      <span className="text-muted-foreground text-xs">Small</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner size="md" {...props} />
+      <span className="text-muted-foreground text-xs">Medium</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner size="lg" {...props} />
+      <span className="text-muted-foreground text-xs">Large</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Spinner size="xl" {...props} />
+      <span className="text-muted-foreground text-xs">Extra Large</span>
+    </div>
+  </div>
+);
+
 export const Default = {
   args: defaultArgs,
   render: Template,
+};
+
+export const Colors = {
+  args: defaultArgs,
+  render: ColorsTemplate,
+};
+
+export const Sizes = {
+  args: defaultArgs,
+  render: SizesTemplate,
 };

@@ -129,7 +129,7 @@ component-name/
 
 **Migration to CSS-based Styling**:
 
-- The `button` component has been migrated to use CSS styles from `@heroui/core/src/components/button.css`
+- The `button` component has been migrated to use CSS styles from `@heroui/styles/src/components/button.css`
 - This approach allows for better customization through CSS utilities and `@utility` directives
 - Other components will gradually be migrated to follow this CSS-based pattern
 - Components use `tv()` from `tailwind-variants` to map variant props to BEM class names

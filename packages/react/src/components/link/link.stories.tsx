@@ -21,15 +21,14 @@ const Template = (_props: LinkProps) => (
     <Link isDisabled href="#">
       Call to action <LinkIcon className="text-muted absolute -right-2 top-1" />
     </Link>
-    {/* <Link
+    <Link
+      className="button button--md button--tertiary relative h-8 pr-5"
       href="https://heroui.com"
+      rel="noopener noreferrer"
       target="_blank"
-      className={(renderProps) =>
-        buttonVariants({...renderProps, className: "hover:no-underline", variant: "ghost"})
-      }
     >
-      Call to action
-    </Link> */}
+      HeroUI <LinkIcon className="absolute right-3 top-1 h-2 w-2 text-inherit" />
+    </Link>
   </div>
 );
 
