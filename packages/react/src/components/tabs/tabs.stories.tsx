@@ -1,6 +1,8 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
-import * as Tabs from "./index";
+import React from "react";
+
+import {Tabs} from "./index";
 
 const meta = {
   argTypes: {
@@ -24,14 +26,14 @@ type Story = StoryObj<typeof meta>;
 const DefaultTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
     <Tabs {...args}>
-      <Tabs.TabList aria-label="Example tabs">
+      <Tabs.List aria-label="Example tabs">
         <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
         <Tabs.Tab id="tab2">Tab 2</Tabs.Tab>
         <Tabs.Tab id="tab3">Tab 3</Tabs.Tab>
-      </Tabs.TabList>
-      <Tabs.TabPanel id="tab1">Content for tab 1</Tabs.TabPanel>
-      <Tabs.TabPanel id="tab2">Content for tab 2</Tabs.TabPanel>
-      <Tabs.TabPanel id="tab3">Content for tab 3</Tabs.TabPanel>
+      </Tabs.List>
+      <Tabs.Panel id="tab1">Content for tab 1</Tabs.Panel>
+      <Tabs.Panel id="tab2">Content for tab 2</Tabs.Panel>
+      <Tabs.Panel id="tab3">Content for tab 3</Tabs.Panel>
     </Tabs>
   </div>
 );
@@ -71,16 +73,16 @@ export const VerticalSurface: Story = {
 const DisabledTabTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
     <Tabs {...args}>
-      <Tabs.TabList aria-label="Example tabs with disabled tab">
+      <Tabs.List aria-label="Example tabs with disabled tab">
         <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
         <Tabs.Tab isDisabled id="tab2">
           Tab 2 (Disabled)
         </Tabs.Tab>
         <Tabs.Tab id="tab3">Tab 3</Tabs.Tab>
-      </Tabs.TabList>
-      <Tabs.TabPanel id="tab1">Content for tab 1</Tabs.TabPanel>
-      <Tabs.TabPanel id="tab2">Content for tab 2</Tabs.TabPanel>
-      <Tabs.TabPanel id="tab3">Content for tab 3</Tabs.TabPanel>
+      </Tabs.List>
+      <Tabs.Panel id="tab1">Content for tab 1</Tabs.Panel>
+      <Tabs.Panel id="tab2">Content for tab 2</Tabs.Panel>
+      <Tabs.Panel id="tab3">Content for tab 3</Tabs.Panel>
     </Tabs>
   </div>
 );
@@ -95,14 +97,14 @@ export const WithDisabledTab: Story = {
 const DefaultSelectedTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
     <Tabs defaultSelectedKey="tab2" {...args}>
-      <Tabs.TabList aria-label="Example tabs with default selection">
+      <Tabs.List aria-label="Example tabs with default selection">
         <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
         <Tabs.Tab id="tab2">Tab 2 (Default)</Tabs.Tab>
         <Tabs.Tab id="tab3">Tab 3</Tabs.Tab>
-      </Tabs.TabList>
-      <Tabs.TabPanel id="tab1">Content for tab 1</Tabs.TabPanel>
-      <Tabs.TabPanel id="tab2">Content for tab 2</Tabs.TabPanel>
-      <Tabs.TabPanel id="tab3">Content for tab 3</Tabs.TabPanel>
+      </Tabs.List>
+      <Tabs.Panel id="tab1">Content for tab 1</Tabs.Panel>
+      <Tabs.Panel id="tab2">Content for tab 2</Tabs.Panel>
+      <Tabs.Panel id="tab3">Content for tab 3</Tabs.Panel>
     </Tabs>
   </div>
 );

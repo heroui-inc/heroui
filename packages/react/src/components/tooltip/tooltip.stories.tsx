@@ -2,6 +2,7 @@ import type {TooltipContentProps} from "./tooltip";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
+import React from "react";
 
 import {Button} from "../button";
 
@@ -41,7 +42,7 @@ export default {
     },
   },
   component: Tooltip,
-  title: "🚧 In Progress/Tooltip",
+  title: "✅ Ready/Tooltip",
 } as Meta<typeof Tooltip>;
 
 const defaultArgs: Omit<TooltipContentProps, "children"> = {

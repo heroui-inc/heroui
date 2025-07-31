@@ -1,6 +1,8 @@
 import type {SpinnerProps} from "./spinner";
 import type {Meta} from "@storybook/react";
 
+import React from "react";
+
 import {Spinner} from "./spinner";
 
 export default {

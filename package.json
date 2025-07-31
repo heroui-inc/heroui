@@ -35,6 +35,7 @@
     "changeset:beta": "changeset pre enter beta",
     "changeset:exit": "changeset pre exit",
     "version": "changeset version",
+    "prerelease": "turbo build --filter=@heroui/styles --filter=@heroui/react",
     "release": "changeset publish",
     "version:canary": "changeset version --snapshot canary",
     "release:canary": "changeset publish --snapshot --no-git-tag --tag canary",

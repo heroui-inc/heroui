@@ -43,7 +43,7 @@ export default {
     },
   },
   component: Popover,
-  title: "🚧 In Progress/Popover",
+  title: "✅ Ready/Popover",
 } as Meta<typeof Popover>;
 
 const defaultArgs: Omit<PopoverContentProps, "children"> = {};
