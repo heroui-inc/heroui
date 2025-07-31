@@ -26,7 +26,7 @@ export default {
     },
   },
   component: Accordion,
-  title: "Components/Accordion",
+  title: "✅ Ready/Accordion",
 } as Meta<typeof Accordion>;
 
 const defaultArgs: AccordionProps = {
@@ -90,7 +90,9 @@ const Template = (props: AccordionProps) => (
                 <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
               ) : null}
               {item.title}
-              <Accordion.Indicator />
+              <Accordion.Indicator>
+                <Icon icon="gravity-ui:chevron-down" />
+              </Accordion.Indicator>
             </Accordion.Trigger>
           </Accordion.Heading>
           <Accordion.Panel>

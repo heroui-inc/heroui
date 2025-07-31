@@ -233,11 +233,11 @@ const CalendarCell = React.forwardRef<HTMLTableCellElement, CalendarCellProps>(
           return (
             <div
               className={slots?.cellButton({
-                isSelected,
-                isHovered,
                 isDisabled,
-                isUnavailable,
+                isHovered,
                 isOutsideMonth,
+                isSelected,
+                isUnavailable,
               })}
             >
               {typeof children === "function" ? children(values) : children || formattedDate}
@@ -256,13 +256,14 @@ CalendarCell.displayName = "HeroUI.Calendar.Cell";
  * -----------------------------------------------------------------------------------------------*/
 
 const CompoundCalendar = Object.assign(CalendarRoot, {
-  Header: CalendarHeader,
-  Heading: CalendarHeading,
-  NavButton: CalendarNavButton,
+  Cell: CalendarCell,
   Grid: CalendarGrid,
   GridHeader: CalendarGridHeader,
+  Header: CalendarHeader,
   HeaderCell: CalendarHeaderCell,
-  Cell: CalendarCell,
+  Heading: CalendarHeading,
+  NavButton: CalendarNavButton,
+  Root: CalendarRoot,
 });
 
 export type {

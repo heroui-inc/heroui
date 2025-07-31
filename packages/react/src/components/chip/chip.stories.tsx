@@ -2,6 +2,7 @@ import type {ChipProps} from "./chip";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
+import React from "react";
 
 import {Chip} from "./chip";
 
@@ -17,7 +18,7 @@ export default {
     },
   },
   component: Chip,
-  title: "Components/Chip",
+  title: "✅ Ready/Chip",
 } as Meta<typeof Chip>;
 
 const defaultArgs: ChipProps = {

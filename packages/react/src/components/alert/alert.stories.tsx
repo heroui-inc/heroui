@@ -5,7 +5,7 @@ import {Alert} from "./index";
 export default {
   argTypes: {},
   component: Alert,
-  title: "Components/Alert",
+  title: "📝 ToDo/Alert",
 };
 
 const defaultArgs = {};

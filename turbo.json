@@ -3,7 +3,9 @@
   "globalDependencies": ["tsconfig.json"],
   "tasks": {
     "dev": {
-      "cache": false
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^dev"]
     },
     "build": {
       "dependsOn": ["^build"],

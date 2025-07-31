@@ -1,0 +1,186 @@
+@layer base {
+  /* HeroUI Default Light Theme */
+  :root {
+    color-scheme: light;
+
+    /* Base Colors */
+    --background: oklch(100% 0 0);
+    --foreground: oklch(14.48% 0 0);
+    --panel: oklch(100% 0 0);
+
+    --radius: 0.75rem;
+
+    --muted: var(--color-neutral-500);
+    --muted-foreground: var(--color-neutral-400);
+
+    --surface: var(--color-neutral-100);
+    --surface-foreground: var(--foreground);
+
+    --scrollbar: var(--color-neutral-300);
+
+    --default: var(--color-neutral-50);
+    --default-foreground: var(--color-neutral-600);
+    --default-hover: var(--color-neutral-100);
+
+    --accent: oklch(0.14 0 0);
+    --accent-foreground: oklch(0.99 0 0);
+    --accent-hover: oklch(0.22 0 0);
+
+    --accent-soft: var(--color-neutral-200);
+    --accent-soft-foreground: var(--color-neutral-700);
+    --accent-soft-hover: var(--color-neutral-300);
+
+    /* Status Colors */
+    --success: oklch(0.55 0.1241 153.51);
+    --success-foreground: oklch(99.11% 0 0);
+
+    --warning: oklch(0.67 0.1428 72.73);
+    --warning-foreground: oklch(99.11% 0 0);
+
+    --danger: oklch(0.59 0.2228 29.94);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: oklch(0.53 0.2 29.94);
+
+    /* Misc Colors */
+    --border: oklch(0 0 0 / 15%);
+    --focus: oklch(0% 0 0 / 20%);
+    --link: var(--foreground);
+
+    /* Shadow */
+    --shadow-border:
+      0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
+      0 0px 1px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Base Colors */
+    --background: oklch(0% 0 0);
+    --foreground: oklch(99.11% 0 0);
+    --panel: oklch(0.22 0 0);
+
+    --muted: var(--color-neutral-300);
+    --muted-foreground: var(--color-neutral-400);
+
+    --surface: var(--color-neutral-900);
+    --surface-foreground: var(--color-neutral-200);
+
+    --scrollbar: var(--color-neutral-800);
+
+    --default: var(--color-neutral-900);
+    --default-foreground: var(--color-neutral-200);
+    --default-hover: var(--color-neutral-800);
+
+    --accent: oklch(0.99 0 0);
+    --accent-foreground: oklch(0.22 0 0);
+    --accent-hover: oklch(0.9 0 0);
+
+    --accent-soft: var(--color-neutral-800);
+    --accent-soft-foreground: var(--color-neutral-200);
+    --accent-soft-hover: var(--color-neutral-700);
+
+    /* Status Colors */
+    --success: oklch(0.8 0.1561 154);
+    --success-foreground: oklch(0.1 0.02 0);
+
+    --warning: oklch(0.85 0.1414 77.88);
+    --warning-foreground: oklch(0.1 0.02 0);
+
+    --danger: oklch(0.61 0.1998 29.94);
+    --danger-foreground: oklch(0.99 0 0);
+    --danger-hover: oklch(0.55 0.18 29.94);
+
+    /* Misc Colors */
+    --border: oklch(1 0 0 / 12%);
+    --focus: oklch(100% 0 0 / 50%);
+    --link: var(--foreground);
+
+    /* Shadow */
+    --shadow-border:
+      0 0 0 1px var(--border), 0 5px 10px -3px rgba(0, 0, 0, 0.3), 0 3px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@theme inline {
+  /* Recommended font is: Inter, Sathosi, Geist */
+  /* --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+
+  /* Recommended font is: Geist Mono */
+  /* --font-mono: var(--font-geist), 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'; */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-foreground: var(--accent-soft-foreground);
+
+  --color-border: var(--border);
+  --color-focus: var(--focus);
+  --color-link: var(--link);
+
+  --color-base: var(--base);
+  --color-base-foreground: var(--base-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  --shadow-border: var(--shadow-border);
+
+  /* Calculated Variables */
+
+  /* Colors */
+  --color-base-hover: color-mix(in oklab, var(--color-base) 90%, var(--color-base-foreground) 5%);
+  --color-accent-hover: color-mix(
+    in oklab,
+    var(--color-accent) 90%,
+    var(--color-accent-foreground) 20%
+  );
+  --color-accent-soft-hover: color-mix(
+    in oklab,
+    var(--color-accent-soft) 10%,
+    var(--color-accent-soft-foreground) 18%
+  );
+  --color-success-hover: color-mix(
+    in oklab,
+    var(--color-success) 90%,
+    var(--color-success-foreground) 10%
+  );
+  --color-warning-hover: color-mix(
+    in oklab,
+    var(--color-warning) 90%,
+    var(--color-warning-foreground) 10%
+  );
+  --color-danger-hover: color-mix(
+    in oklab,
+    var(--color-danger) 90%,
+    var(--color-danger-foreground) 10%
+  );
+
+  /* Radius */
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: calc(var(--radius) * 1);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+}

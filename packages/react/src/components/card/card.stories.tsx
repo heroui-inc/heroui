@@ -8,17 +8,17 @@ import {Link} from "../link";
 import {Card} from "./index";
 
 const meta = {
-  title: "Components/Card",
-  component: Card,
-  parameters: {
-    layout: "centered",
-  },
   argTypes: {
     surface: {
       control: {type: "select"},
       options: ["1", "2", "3"],
     },
   },
+  component: Card,
+  parameters: {
+    layout: "centered",
+  },
+  title: "📝 ToDo/Card",
 } satisfies Meta<typeof Card>;
 
 export default meta;

@@ -3,15 +3,8 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {ariaDisabledClasses, focusRingClasses} from "../../utils/compose";
-
 export const linkVariants = tv({
-  base: [
-    "text-link cursor-interactive relative inline-flex h-fit items-center gap-1",
-    "decoration-link/50 underline-offset-4 transition-all hover:underline",
-    focusRingClasses,
-    ariaDisabledClasses,
-  ],
+  base: "link",
 });
 
 export type LinkVariants = Omit<VariantProps<typeof linkVariants>, keyof LinkRenderProps>;

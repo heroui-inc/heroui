@@ -9,12 +9,12 @@ import {Label} from "../label";
 import {Radio, RadioGroup} from "./radio";
 
 const meta = {
-  title: "Components/RadioGroup",
   component: RadioGroup,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  title: "📝 ToDo/RadioGroup",
 } satisfies Meta<typeof RadioGroup>;
 
 export default meta;

@@ -5,12 +5,12 @@ import React from "react";
 import {TextField} from "./index";
 
 const meta: Meta<typeof TextField> = {
-  title: "Components/TextField",
   component: TextField,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  title: "📝 ToDo/TextField",
 };
 
 export default meta;

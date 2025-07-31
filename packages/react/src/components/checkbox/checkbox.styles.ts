@@ -3,8 +3,17 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const checkboxVariants = tv({
+  defaultVariants: {},
   slots: {
     base: "cursor-interactive group flex items-center gap-3",
+    icon: [
+      "h-3 w-3",
+      "text-accent-foreground",
+      "scale-0 opacity-0",
+      "transition-all duration-200",
+      "group-data-[selected=true]:scale-100 group-data-[selected=true]:opacity-100",
+      "group-data-[indeterminate=true]:scale-100 group-data-[indeterminate=true]:opacity-100",
+    ],
     wrapper: [
       "relative inline-flex h-4 w-4 shrink-0 items-center justify-center",
       "rounded-[5px]",
@@ -12,7 +21,7 @@ export const checkboxVariants = tv({
       "shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]",
 
       // Default unselected state
-      "bg-base border-border/10 border",
+      "bg-default border-border/10 border",
 
       // Hover state - unselected
       "group-data-[hovered=true]:group-data-[selected=false]:border-accent-hover",
@@ -44,14 +53,6 @@ export const checkboxVariants = tv({
       // Disabled state
       "group-data-[disabled=true]:cursor-not-allowed group-data-[disabled=true]:opacity-50",
     ],
-    icon: [
-      "h-3 w-3",
-      "text-accent-foreground",
-      "scale-0 opacity-0",
-      "transition-all duration-200",
-      "group-data-[selected=true]:scale-100 group-data-[selected=true]:opacity-100",
-      "group-data-[indeterminate=true]:scale-100 group-data-[indeterminate=true]:opacity-100",
-    ],
   },
   variants: {
     isDisabled: {
@@ -60,10 +61,12 @@ export const checkboxVariants = tv({
       },
     },
   },
-  defaultVariants: {},
 });
 
 export const checkboxGroupVariants = tv({
+  defaultVariants: {
+    orientation: "vertical",
+  },
   slots: {
     base: "flex flex-col gap-2",
     items: "flex flex-col gap-2",
@@ -77,9 +80,6 @@ export const checkboxGroupVariants = tv({
         items: "flex-col gap-2",
       },
     },
-  },
-  defaultVariants: {
-    orientation: "vertical",
   },
 });
 

@@ -12,25 +12,25 @@ import {TextField} from "../text-field";
 import {Form} from "./index";
 
 const meta: Meta<typeof Form> = {
-  title: "Components/Form",
+  argTypes: {
+    isDisabled: {
+      control: {type: "boolean"},
+      defaultValue: false,
+      description: "Whether the form is disabled",
+    },
+    validationBehavior: {
+      control: {type: "select"},
+      defaultValue: "native",
+      description: "How validation errors are displayed",
+      options: ["native", "aria"],
+    },
+  },
   component: Form,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-    validationBehavior: {
-      control: {type: "select"},
-      options: ["native", "aria"],
-      description: "How validation errors are displayed",
-      defaultValue: "native",
-    },
-    isDisabled: {
-      control: {type: "boolean"},
-      description: "Whether the form is disabled",
-      defaultValue: false,
-    },
-  },
+  title: "📝 ToDo/Form",
 };
 
 export default meta;
@@ -329,8 +329,8 @@ export const InlineErrors: Story = {
       className="w-96 space-y-4"
       validationBehavior="aria"
       validationErrors={{
-        username: "This username is already taken",
         email: "Please enter a valid email address",
+        username: "This username is already taken",
       }}
       {...args}
     >

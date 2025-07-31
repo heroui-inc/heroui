@@ -5,12 +5,12 @@ import React from "react";
 import {Switch, SwitchGroup} from "./switch";
 
 const meta: Meta<typeof Switch> = {
-  title: "Components/Switch",
   component: Switch,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  title: "📝 ToDo/Switch",
 };
 
 export default meta;

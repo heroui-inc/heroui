@@ -1,0 +1,102 @@
+/* Base accordion styles */
+.accordion {
+  width: 100%;
+}
+
+/* Accordion elements */
+.accordion__body {
+  color: var(--muted);
+  padding: 0 1rem 1rem; /* 0 16px 16px */
+}
+
+.accordion__heading {
+  display: flex;
+}
+
+.accordion__indicator {
+  color: var(--muted);
+  margin-left: auto;
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  flex-shrink: 0;
+  transition: transform 300ms;
+}
+
+.accordion__item {
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.accordion__panel {
+  height: 0;
+  opacity: 0;
+  transition:
+    height 200ms ease-out,
+    opacity 200ms ease-out;
+}
+
+.accordion__panel[aria-hidden="false"] {
+  height: var(--panel-height);
+  opacity: 1;
+}
+
+.accordion__trigger {
+  /* Focus State */
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Base Styles */
+  background-color: transparent;
+  cursor: var(--cursor-interactive);
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem; /* 16px */
+  text-align: left;
+  font-weight: 500;
+  transition: background-color 50ms;
+
+  /* Hover State */
+  &:hover {
+    background-color: var(--default);
+  }
+
+  /* Disabled State */
+  &:disabled {
+    pointer-events: none;
+    cursor: var(--cursor-disabled);
+    opacity: var(--disabled-opacity);
+  }
+}
+
+/* Expanded state for indicator rotation */
+.accordion__trigger[aria-expanded="true"] [data-accordion-indicator] {
+  transform: rotate(-180deg);
+}
+
+/* Outline variant */
+.accordion--outline {
+  background-color: var(--panel);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.accordion--outline .accordion__item {
+  /* Special rounding for first and last items in outline variant */
+  &:first-child [data-accordion-trigger] {
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+  }
+
+  &:last-child:not(:has([data-accordion-trigger][aria-expanded="true"])) [data-accordion-trigger] {
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+  }
+}

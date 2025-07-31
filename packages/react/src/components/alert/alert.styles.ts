@@ -24,7 +24,7 @@ export const alertVariants = tv({
     close: [
       "text-muted h-fit rounded-sm p-1",
       "transition-colors duration-150",
-      "hover:bg-base active:bg-base data-[pressed]:bg-base",
+      "hover:bg-default active:bg-default data-[pressed]:bg-default",
       "hover:text-foreground active:text-foreground data-[pressed]:text-foreground",
       "cursor-interactive",
       focusRingClasses,

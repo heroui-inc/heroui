@@ -10,7 +10,7 @@ import {Link} from "./index";
 export default {
   argTypes: {},
   component: Link,
-  title: "Components/Link",
+  title: "✅ Ready/Link",
 } as Meta<typeof Link>;
 
 const Template = (_props: LinkProps) => (

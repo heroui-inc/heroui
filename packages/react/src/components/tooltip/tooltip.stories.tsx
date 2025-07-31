@@ -41,7 +41,7 @@ export default {
     },
   },
   component: Tooltip,
-  title: "Components/Tooltip",
+  title: "🚧 In Progress/Tooltip",
 } as Meta<typeof Tooltip>;
 
 const defaultArgs: Omit<TooltipContentProps, "children"> = {

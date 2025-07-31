@@ -1,26 +1,6 @@
-@import "tailwindcss";
+@import "@heroui/styles";
 
-@plugin "@heroui/core" {
-  theme: "default";
-  prefersdark: true;
-  logs: true;
-}
-
-@source "../../react/**/*.{ts,tsx,js,jsx}";
-
-/* button--primary */
-
-/* With advanced options */
-/* 
- @plugin "@heroui/react/plugin" {
-  themes: "light --default, dark --prefersdark";
-  colorscheme: "dark";
-  default: true;
-  prefersdark: true;
-  name: "dark";
-  logs: false;
-}
-*/
+@source "../../react/src/components/**/*.{ts,tsx,js,jsx}";
 
 /* Important: This source is important to make sure storybook styles are compiled */
 
@@ -39,6 +19,8 @@
   /* Your values */
   /* --radius: 0.5rem; */
   /* --cursor: default; */
+
+  --cursor-interactive: pointer;
 }
 
 /* @theme inline { */

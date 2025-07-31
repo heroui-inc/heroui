@@ -43,7 +43,7 @@ export default {
     },
   },
   component: Popover,
-  title: "Components/Popover",
+  title: "🚧 In Progress/Popover",
 } as Meta<typeof Popover>;
 
 const defaultArgs: Omit<PopoverContentProps, "children"> = {};
@@ -89,10 +89,10 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
       <Popover>
         <Popover.Trigger aria-label="Popover trigger">
           <div className="flex items-center gap-2">
-            <Avatar.Root size="sm">
+            <Avatar size="sm">
               <Avatar.Image alt="Zoe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
               <Avatar.Fallback>Z</Avatar.Fallback>
-            </Avatar.Root>
+            </Avatar>
             <div className="flex flex-col gap-0">
               <p className="text-sm font-medium leading-5">Zoe</p>
               <p className="text-muted text-xs leading-none">zoe@heroui.chat</p>
@@ -104,13 +104,13 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
             <Popover.Heading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Avatar.Root size="md">
+                  <Avatar size="md">
                     <Avatar.Image
                       alt="Zoe"
                       src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
                     />
                     <Avatar.Fallback>Z</Avatar.Fallback>
-                  </Avatar.Root>
+                  </Avatar>
                   <div className="flex h-full flex-col items-start justify-center">
                     <span className="text-sm font-medium">Zoey Lang</span>
                     <span className="text-muted text-sm font-normal leading-4 tracking-tight">

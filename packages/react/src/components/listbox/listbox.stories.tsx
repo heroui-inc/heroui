@@ -8,11 +8,11 @@ import {Avatar} from "../avatar";
 import {ListBox} from "./index";
 
 const meta: Meta<typeof ListBox> = {
-  title: "Components/ListBox",
   component: ListBox,
   parameters: {
     layout: "centered",
   },
+  title: "📝 ToDo/ListBox",
 };
 
 export default meta;

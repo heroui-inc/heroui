@@ -7,16 +7,16 @@ import React from "react";
 import {Calendar} from "./index";
 
 const meta: Meta<typeof Calendar> = {
-  title: "Components/Calendar",
-  component: Calendar,
-  parameters: {
-    layout: "centered",
-  },
   argTypes: {
     isDisabled: {
       control: "boolean",
     },
   },
+  component: Calendar,
+  parameters: {
+    layout: "centered",
+  },
+  title: "📝 ToDo/Calendar",
 };
 
 export default meta;

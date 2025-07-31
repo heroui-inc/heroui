@@ -1,0 +1,21 @@
+{
+  "remove": ["devDependencies", "scripts", "clean-package"],
+  "replace": {
+    "main": "./dist/index.css",
+    "style": "./dist/index.css",
+    "browser": "./dist/heroui.min.css",
+    "exports": {
+      ".": {
+        "style": "./dist/index.css",
+        "default": "./dist/index.css"
+      },
+      "./css": "./dist/index.css",
+      "./base": "./dist/base/base.css",
+      "./components": "./dist/components/index.css",
+      "./themes": "./dist/themes/default.css",
+      "./utilities": "./dist/utilities/index.css",
+      "./package.json": "./package.json"
+    }
+  },
+  "backupPath": ".package.json.backup"
+}

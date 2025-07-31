@@ -9,12 +9,12 @@ import {Label} from "../label";
 import {Checkbox, CheckboxGroup} from "./index";
 
 const meta: Meta<typeof CheckboxGroup> = {
-  title: "Components/CheckboxGroup",
   component: CheckboxGroup,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  title: "📝 ToDo/CheckboxGroup",
 };
 
 export default meta;

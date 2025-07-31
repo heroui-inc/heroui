@@ -10,12 +10,12 @@ import {Text} from "../text";
 import {Field, FieldError, FieldGroup, Fieldset, Legend} from "./fieldset";
 
 const meta: Meta<typeof Fieldset> = {
-  title: "Components/Fieldset",
   component: Fieldset,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  title: "📝 ToDo/Fieldset",
 };
 
 export default meta;

@@ -1,0 +1,40 @@
+/* Base link styles */
+.link {
+  /* Color */
+  color: var(--link);
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Display and layout */
+  position: relative;
+  display: inline-flex;
+  height: fit-content;
+  align-items: center;
+  gap: 0.25rem; /* 4px */
+
+  /* Text decoration */
+  text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
+  text-underline-offset: 0.25rem; /* 4px */
+
+  /* Transitions */
+  transition-property: color, text-decoration-color, opacity;
+  transition-duration: 150ms;
+
+  /* Hover state */
+  &:hover {
+    text-decoration-line: underline;
+  }
+
+  /* Focus state */
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    cursor: var(--cursor-disabled);
+    opacity: var(--disabled-opacity);
+  }
+}

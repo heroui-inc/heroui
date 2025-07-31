@@ -40,7 +40,7 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardRootProps>(
   },
 );
 
-CardRoot.displayName = "HeroUI.Card.Root";
+CardRoot.displayName = "HeroUI.Card";
 
 /* -------------------------------------------------------------------------------------------------
  * CardHeader
@@ -168,12 +168,12 @@ CardImage.displayName = "HeroUI.Card.Image";
  * -----------------------------------------------------------------------------------------------*/
 
 const CompoundCard = Object.assign(CardRoot, {
-  Header: CardHeader,
-  Title: CardTitle,
-  Description: CardDescription,
   Content: CardContent,
+  Description: CardDescription,
   Footer: CardFooter,
+  Header: CardHeader,
   Image: CardImage,
+  Title: CardTitle,
 });
 
 export type {

@@ -29,7 +29,7 @@ interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
   asChild?: boolean;
 }
 
-const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootProps) => {
+const Alert = ({asChild, children, className, variant, ...rest}: AlertRootProps) => {
   const slots = React.useMemo(() => alertVariants({variant}), [variant]);
 
   const Component = asChild ? SlotPrimitive : "div";
@@ -43,7 +43,7 @@ const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootPr
   );
 };
 
-AlertRoot.displayName = "HeroUI.Alert.Root";
+Alert.displayName = "HeroUI.Alert";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Icon
@@ -209,13 +209,13 @@ const AlertClose: AlertClose = (props) => {
 
 AlertClose.displayName = "HeroUI.Alert.Close";
 
-const CompoundAlert = Object.assign(AlertRoot, {
-  Icon: AlertIcon,
-  Title: AlertTitle,
-  Description: AlertDescription,
+const CompoundAlert = Object.assign(Alert, {
   Action: AlertAction,
   Close: AlertClose,
   Content: AlertContent,
+  Description: AlertDescription,
+  Icon: AlertIcon,
+  Title: AlertTitle,
 });
 
 export default CompoundAlert;
