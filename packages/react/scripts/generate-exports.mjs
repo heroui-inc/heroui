@@ -20,8 +20,11 @@ async function generateExports() {
       import: "./dist/index.js",
       types: "./dist/index.d.ts",
     },
-    "./plugin": "./dist/plugin.js",
     "./package.json": "./package.json",
+    "./styles": {
+      default: "./dist/styles.css",
+      style: "./dist/styles.css",
+    },
   };
 
   // Read components directory
@@ -52,7 +55,7 @@ async function generateExports() {
 
   // Sort exports for consistency
   const sortedExports = {};
-  const baseKeys = [".", "./plugin", "./package.json"];
+  const baseKeys = [".", "./styles", "./package.json"];
   const componentKeys = Object.keys(exports)
     .filter((key) => !baseKeys.includes(key))
     .sort();

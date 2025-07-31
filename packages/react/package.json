@@ -28,6 +28,10 @@
     ".": {
       "import": "./src/index.ts"
     },
+    "./styles": {
+      "style": "./src/styles.css",
+      "default": "./src/styles.css"
+    },
     "./package.json": "./package.json"
   },
   "repository": {
@@ -50,6 +54,7 @@
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
+    "@heroui/styles": "workspace:*",
     "@heroui/utils": "workspace:*",
     "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.7",

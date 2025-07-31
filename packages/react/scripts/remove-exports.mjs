@@ -19,8 +19,11 @@ async function removeExports() {
     ".": {
       import: "./src/index.ts",
     },
-    "./plugin": "./src/plugin.ts",
     "./package.json": "./package.json",
+    "./styles": {
+      default: "./src/styles.css",
+      style: "./src/styles.css",
+    },
   };
 
   packageJson.exports = baseExports;

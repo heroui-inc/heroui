@@ -19,7 +19,19 @@ async function clean() {
 
 async function build() {
   console.log("📦 Building with Rollup...");
-  execSync("rollup -c rollup.config.mjs", {stdio: "inherit", cwd: rootDir});
+  execSync("rollup -c rollup.config.mjs", {cwd: rootDir, stdio: "inherit"});
+}
+
+async function buildStyles() {
+  console.log("🎨 Creating styles export...");
+
+  // Simply copy the styles.css file to dist
+  const stylesPath = path.join(rootDir, "src/styles.css");
+  const outputPath = path.join(distDir, "styles.css");
+
+  await fs.copy(stylesPath, outputPath);
+
+  console.log("✅ Styles export created successfully");
 }
 
 async function logComponentCount() {
@@ -92,11 +104,11 @@ async function measureBundleSizes() {
   console.log("📊 Measuring bundle sizes...");
 
   const sizes = {
-    total: {min: 0, gzip: 0},
-    main: {},
-    plugin: {},
     components: {},
     css: {},
+    main: {},
+    plugin: {},
+    total: {gzip: 0, min: 0},
   };
 
   // Helper function to measure file size
@@ -110,8 +122,8 @@ async function measureBundleSizes() {
     const gzipSize = zlib.gzipSync(content, {level: 9}).length / 1000;
 
     return {
-      min: minSize.toFixed(2),
       gzip: gzipSize.toFixed(2),
+      min: minSize.toFixed(2),
     };
   }
 
@@ -163,6 +175,16 @@ async function measureBundleSizes() {
     sizes.total.gzip += parseFloat(cssSize.gzip);
   }
 
+  // Measure styles.css
+  const stylesCssPath = path.join(distDir, "styles.css");
+  const stylesCssSize = await measureFile(stylesCssPath);
+
+  if (stylesCssSize) {
+    sizes.css.styles = stylesCssSize;
+    sizes.total.min += parseFloat(stylesCssSize.min);
+    sizes.total.gzip += parseFloat(stylesCssSize.gzip);
+  }
+
   // Round totals
   sizes.total.min = sizes.total.min.toFixed(2);
   sizes.total.gzip = sizes.total.gzip.toFixed(2);
@@ -184,9 +206,14 @@ async function measureBundleSizes() {
     console.log(`  plugin.js: ${sizes.plugin.min}kb (${sizes.plugin.gzip}kb gzipped)`);
   }
 
-  if (sizes.css.main) {
+  if (sizes.css.main || sizes.css.styles) {
     console.log("\n🎨 CSS:");
-    console.log(`  index.css: ${sizes.css.main.min}kb (${sizes.css.main.gzip}kb gzipped)`);
+    if (sizes.css.main) {
+      console.log(`  index.css: ${sizes.css.main.min}kb (${sizes.css.main.gzip}kb gzipped)`);
+    }
+    if (sizes.css.styles) {
+      console.log(`  styles.css: ${sizes.css.styles.min}kb (${sizes.css.styles.gzip}kb gzipped)`);
+    }
   }
 
   console.log("\n🧩 Components:");
@@ -212,6 +239,7 @@ async function main() {
     await clean();
     // await generateThemes(); // Generate themes before build
     await build();
+    await buildStyles();
     await addUseClientDirective();
 
     if (shouldGenerateTypes) {

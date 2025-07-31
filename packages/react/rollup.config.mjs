@@ -86,13 +86,9 @@ export default defineConfig({
     // Disable sourcemaps
     // Optimize for tree shaking
     exports: "named",
-
     format: "es",
-
     hoistTransitiveImports: false,
-
     preserveModules: true,
-
     preserveModulesRoot: "src",
     sourcemap: false,
   },

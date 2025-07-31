@@ -5,7 +5,18 @@
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "type": "module",
-    "sideEffects": false
+    "sideEffects": false,
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      },
+      "./styles": {
+        "style": "./dist/styles.css",
+        "default": "./dist/styles.css"
+      },
+      "./package.json": "./package.json"
+    }
   },
   "backupPath": ".package.json.backup"
 }

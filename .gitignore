@@ -80,3 +80,6 @@ bundle-sizes.json
 
 # clean-package backups
 .package.json.backup
+
+# Generated folder after running `pnpm pack`
+package
