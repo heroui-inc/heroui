@@ -60,9 +60,9 @@ const plugins = [
   replaceVersion(),
   babel({
     babelHelpers: "bundled",
-    presets: [["@babel/preset-react", {runtime: "automatic"}], "@babel/preset-typescript"],
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
     exclude: "node_modules/**",
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    presets: [["@babel/preset-react", {runtime: "automatic"}], "@babel/preset-typescript"],
   }),
   postcss({
     extract: true,
@@ -71,57 +71,34 @@ const plugins = [
   }),
 ];
 
-export default defineConfig([
-  // Main build for React components
-  {
-    input,
-    output: {
-      dir: "dist",
-      format: "es",
-      preserveModules: true,
-      preserveModulesRoot: "src",
-      sourcemap: false, // Disable sourcemaps
-      // Optimize for tree shaking
-      exports: "named",
-      hoistTransitiveImports: false,
-    },
-    external,
-    plugins,
-    treeshake: {
-      moduleSideEffects: false,
-      propertyReadSideEffects: false,
-    },
-    onwarn(warning, warn) {
-      // Ignore "use client" directive warnings
-      if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
-        return;
-      }
-      warn(warning);
-    },
+export default defineConfig({
+  external,
+  input,
+  onwarn(warning, warn) {
+    // Ignore "use client" directive warnings
+    if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+      return;
+    }
+    warn(warning);
   },
-  // Plugin build (bundled)
-  {
-    input: "src/plugin.ts",
-    output: {
-      file: "dist/plugin.js",
-      format: "es",
-      sourcemap: false, // Disable sourcemaps
-      exports: "default",
-    },
-    external: [
-      // Only exclude peer dependencies for the plugin build
-      /^react($|\/)/,
-      /^react-dom($|\/)/,
-      /^tailwindcss($|\/)/,
-    ],
-    plugins: [
-      resolve({
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-        // Resolve @heroui/core imports
-        preferBuiltins: false,
-        browser: true,
-      }),
-      ...plugins.slice(1), // Skip peerDepsExternal for plugin build
-    ],
+  output: {
+    dir: "dist",
+    // Disable sourcemaps
+    // Optimize for tree shaking
+    exports: "named",
+
+    format: "es",
+
+    hoistTransitiveImports: false,
+
+    preserveModules: true,
+
+    preserveModulesRoot: "src",
+    sourcemap: false,
   },
-]);
+  plugins,
+  treeshake: {
+    moduleSideEffects: false,
+    propertyReadSideEffects: false,
+  },
+});
