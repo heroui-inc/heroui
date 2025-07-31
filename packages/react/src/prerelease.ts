@@ -1,6 +1,10 @@
-import type {Logger} from "@heroui/utils";
-
+import {Logger} from "./utils/logger";
 import {HEROUI_VERSION} from "./version";
+
+const logger = new Logger({
+  enabled: true,
+  prefix: "HeroUI",
+});
 
 /**
  * Get the package version
@@ -29,7 +33,7 @@ function getPackageVersion(): {
 /**
  * Show prerelease warning if applicable
  */
-export function handlePrereleaseWarning(logger: Logger): void {
+export function handlePrereleaseWarning(): void {
   const {isPrerelease, prereleaseType, version} = getPackageVersion();
 
   if (isPrerelease) {

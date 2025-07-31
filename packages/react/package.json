@@ -1,6 +1,6 @@
 {
   "name": "@heroui/react",
-  "version": "3.0.0-alpha.6",
+  "version": "3.0.0-alpha.9",
   "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS 4.0.",
   "license": "MIT",
   "sideEffects": false,
@@ -55,14 +55,13 @@
   "clean-package": "./clean-package.config.json",
   "dependencies": {
     "@heroui/styles": "workspace:*",
-    "@heroui/utils": "workspace:*",
     "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.7",
     "@radix-ui/react-slot": "1.2.3",
     "clsx": "2.1.1",
     "input-otp": "1.4.2",
     "react-aria-components": "1.8.0",
-    "tailwind-variants": "2.0.0"
+    "tailwind-variants": "2.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.28.0",

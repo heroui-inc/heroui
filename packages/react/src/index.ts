@@ -1,16 +1,10 @@
 //  ===================================
 //  Prerelease Warning
 //  ===================================
-import {Logger} from "@heroui/utils";
 
 import {handlePrereleaseWarning} from "./prerelease";
 
-const logger = new Logger({
-  enabled: true,
-  prefix: "HeroUI",
-});
-
-handlePrereleaseWarning(logger);
+handlePrereleaseWarning();
 //  ===================================
 //  Components
 //  ===================================

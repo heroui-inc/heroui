@@ -1,10 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 /**
- * Logger utility for HeroUI plugin
- * Provides consistent logging with colors and prefixes
+ * Logger utility for HeroUI Core
+ * Provides formatted console output with levels and prefixes
  */
 
-/* eslint-disable no-console */
+const colors = {
+  blue: "\x1b[34m",
+  cyan: "\x1b[36m",
+  green: "\x1b[32m",
+  magenta: "\x1b[35m",
+  red: "\x1b[31m",
+  reset: "\x1b[0m",
+  yellow: "\x1b[33m",
+} as const;
 
 type LogLevel = "info" | "success" | "warn" | "error" | "debug";
 
@@ -13,29 +22,20 @@ interface LoggerOptions {
   prefix?: string;
 }
 
-// ANSI color codes for terminal output
-const colors = {
-  reset: "\x1b[0m",
-  bright: "\x1b[1m",
-  dim: "\x1b[2m",
-  // Text colors
-  black: "\x1b[30m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-  white: "\x1b[37m",
-  gray: "\x1b[90m",
-};
-
 const levelColors: Record<LogLevel, string> = {
-  info: colors.cyan,
+  debug: colors.magenta,
+  error: colors.red,
+  info: colors.blue,
   success: colors.green,
   warn: colors.yellow,
-  error: colors.red,
-  debug: colors.gray,
+};
+
+const levelEmojis: Record<LogLevel, string> = {
+  debug: "🔍",
+  error: "❌",
+  info: "ℹ️",
+  success: "✅",
+  warn: "⚠️",
 };
 
 export class Logger {
@@ -43,15 +43,15 @@ export class Logger {
   private prefix: string;
 
   constructor(options: LoggerOptions = {}) {
-    this.enabled = options.enabled !== false;
-    this.prefix = options.prefix || "[heroui]";
+    this.enabled = options.enabled ?? true;
+    this.prefix = options.prefix ?? "HeroUI";
   }
 
   private formatMessage(level: LogLevel, message: string): string {
     const color = levelColors[level];
-    const levelText = level.padEnd(7); // Align level text
+    const emoji = levelEmojis[level];
 
-    return `${color}${this.prefix} ${levelText}${colors.reset}${message}`;
+    return `${color}[${this.prefix}]${colors.reset} ${emoji}  ${message}`;
   }
 
   private log(level: LogLevel, message: string, ...args: any[]): void {
@@ -93,11 +93,11 @@ export class Logger {
 
   divider(char: string = "=", length: number = 80): void {
     if (!this.enabled) return;
-    console.log(colors.gray + char.repeat(length) + colors.reset);
+    console.log(char.repeat(length));
   }
 
   newline(): void {
     if (!this.enabled) return;
-    console.log("");
+    console.log();
   }
 }

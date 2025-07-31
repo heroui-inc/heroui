@@ -189,9 +189,6 @@ importers:
       '@heroui/styles':
         specifier: workspace:*
         version: link:../styles
-      '@heroui/utils':
-        specifier: workspace:*
-        version: link:../utils
       '@internationalized/date':
         specifier: 3.8.2
         version: 3.8.2
@@ -211,8 +208,8 @@ importers:
         specifier: 1.8.0
         version: 1.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-variants:
-        specifier: 2.0.0
-        version: 2.0.0(tailwind-merge@3.2.0)(tailwindcss@4.1.4)
+        specifier: 2.1.0
+        version: 2.1.0(tailwind-merge@3.2.0)(tailwindcss@4.1.4)
     devDependencies:
       '@babel/core':
         specifier: 7.28.0
@@ -395,24 +392,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.4
         version: 4.1.4
-
-  packages/utils:
-    devDependencies:
-      '@heroui/standard':
-        specifier: workspace:*
-        version: link:../standard
-      '@types/node':
-        specifier: 22.10.2
-        version: 22.10.2
-      clean-package:
-        specifier: 2.2.0
-        version: 2.2.0
-      eslint:
-        specifier: ^9.15.0
-        version: 9.25.1(jiti@2.4.2)
-      tsup:
-        specifier: 8.4.0
-        version: 8.4.0(@swc/core@1.11.16(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.3)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.1)
 
   packages/vitest:
     devDependencies:
@@ -3592,9 +3571,6 @@ packages:
 
   '@types/node@20.17.28':
     resolution: {integrity: sha512-DHlH/fNL6Mho38jTy7/JT7sn2wnXI+wULR6PV4gy4VHLVvnrV/d3pHAMQHhc4gjdLmK2ZiPoMxzp6B3yRajLSQ==}
-
-  '@types/node@22.10.2':
-    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
 
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
@@ -7327,8 +7303,8 @@ packages:
   tailwind-merge@3.2.0:
     resolution: {integrity: sha512-FQT/OVqCD+7edmmJpsgCsY820RTD5AkBryuG5IUqR5YQZSdj5xlH5nLgH7YPths7WsLPSpSBNneJdM8aS8aeFA==}
 
-  tailwind-variants@2.0.0:
-    resolution: {integrity: sha512-qXwOfOwrbXsVLgwHypDKQ0bXvqZLyJS5NdgsRFyNi+8NIFuJvx4hDwUFSIwJ3AMMwPlyf2hUGGuLZbT6I6Wldg==}
+  tailwind-variants@2.1.0:
+    resolution: {integrity: sha512-82m0eRex0z6A3GpvfoTCpHr+wWJmbecfVZfP3mqLoDxeya5tN4mYJQZwa5Aw1hRZTedwpu1D2JizYenoEdyD8w==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwind-merge: '>=3.0.0'
@@ -7565,9 +7541,6 @@ packages:
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
-
-  undici-types@6.20.0:
-    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
@@ -11839,10 +11812,6 @@ snapshots:
   '@types/node@20.17.28':
     dependencies:
       undici-types: 6.19.8
-
-  '@types/node@22.10.2':
-    dependencies:
-      undici-types: 6.20.0
 
   '@types/node@22.14.1':
     dependencies:
@@ -16278,7 +16247,7 @@ snapshots:
 
   tailwind-merge@3.2.0: {}
 
-  tailwind-variants@2.0.0(tailwind-merge@3.2.0)(tailwindcss@4.1.4):
+  tailwind-variants@2.1.0(tailwind-merge@3.2.0)(tailwindcss@4.1.4):
     dependencies:
       tailwindcss: 4.1.4
     optionalDependencies:
@@ -16517,8 +16486,6 @@ snapshots:
       which-boxed-primitive: 1.1.1
 
   undici-types@6.19.8: {}
-
-  undici-types@6.20.0: {}
 
   undici-types@6.21.0: {}
 
