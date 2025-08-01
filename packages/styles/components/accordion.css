@@ -32,13 +32,13 @@
   /* Base Styles */
   @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color] duration-[50ms];
 
-  /* Hover State */
-  &:hover {
+  &:hover,
+  &[data-hover="true"] {
     @apply bg-default;
   }
 
-  /* Focus State */
-  &:focus-visible {
+  &:focus-visible,
+  &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }

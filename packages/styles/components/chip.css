@@ -2,8 +2,8 @@
 .chip {
   @apply bg-default inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-sm font-medium leading-5 transition-colors duration-150 sm:text-xs;
 
-  /* Focus state */
-  &:focus-visible {
+  &:focus-visible,
+  &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }

@@ -55,8 +55,8 @@
 .popover__dialog {
   @apply p-3;
 
-  /* Focus ring */
-  &:focus-visible {
+  &:focus-visible,
+  &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
@@ -71,8 +71,8 @@
 .popover__trigger {
   cursor: var(--cursor-interactive);
 
-  /* Focus ring */
-  &:focus-visible {
+  &:focus-visible,
+  &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }

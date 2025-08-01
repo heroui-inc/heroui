@@ -7,8 +7,8 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Focus state */
-  &:focus-visible {
+  &:focus-visible,
+  &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
@@ -50,23 +50,73 @@
 
 /* Color variants */
 .button--primary {
-  @apply bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-hover data-[pressed=true]:bg-accent-hover;
+  @apply bg-accent text-accent-foreground;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-accent-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-hover;
+  }
 }
 
 .button--secondary {
-  @apply bg-accent-soft text-accent-soft-foreground hover:bg-accent-soft-hover active:bg-accent-soft-hover data-[pressed=true]:bg-accent-soft-hover;
+  @apply bg-accent-soft text-accent-soft-foreground;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-accent-soft-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-soft-hover;
+  }
 }
 
 .button--tertiary {
-  @apply border-border bg-default hover:bg-default-hover active:bg-default-hover data-[pressed=true]:bg-default-hover;
+  @apply border-border bg-default;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-default-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
 }
 
 .button--ghost {
-  @apply hover:bg-accent-soft data-[pressed=true]:bg-accent-soft bg-transparent;
+  @apply bg-transparent;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-accent-soft;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-soft;
+  }
 }
 
 .button--danger {
-  @apply bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-hover data-[pressed=true]:bg-danger-hover;
+  @apply bg-danger text-danger-foreground;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-danger-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-danger-hover;
+  }
 }
 
 /* Icon-only modifier */

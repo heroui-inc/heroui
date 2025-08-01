@@ -3,6 +3,7 @@ import type {Meta} from "@storybook/react";
 
 import React from "react";
 
+import {buttonVariants} from "../button/index";
 import {LinkIcon} from "../icons";
 
 import {Link} from "./index";
@@ -22,7 +23,8 @@ const Template = (_props: LinkProps) => (
       Call to action <LinkIcon className="text-muted absolute -right-2 top-1" />
     </Link>
     <Link
-      className="button button--md button--tertiary relative h-8 pr-5"
+      // className="button button--md button--tertiary relative h-8 pr-5"
+      className={buttonVariants({className: "relative h-8 pr-5", size: "md", variant: "tertiary"})}
       href="https://heroui.com"
       rel="noopener noreferrer"
       target="_blank"
