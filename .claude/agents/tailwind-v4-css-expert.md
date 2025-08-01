@@ -90,3 +90,90 @@ You communicate technical concepts clearly and can assist both human developers 
      outline-offset: 2px;
    }
    ```
+
+## CRITICAL: HeroUI Component Patterns
+
+When creating or analyzing HeroUI component CSS files, you MUST enforce these patterns:
+
+### Default Size Pattern (REQUIRED)
+
+All components with size variants MUST follow this pattern:
+
+1. **Base class includes default dimensions** equivalent to `--md` variant
+2. **Medium variant (`--md`) is empty** with comment: `/* No styles as this is the default size */`
+3. **Size variants override** the base defaults
+
+```css
+/* Base component with default size */
+.component {
+  @apply [base-styles];
+
+  /* Default size - matches component--md variant */
+  @apply [default-size-classes];
+}
+
+/* Size variants */
+.component--sm {
+  @apply [small-overrides];
+}
+
+.component--md {
+  /* No styles as this is the default size */
+}
+
+.component--lg {
+  @apply [large-overrides];
+}
+```
+
+### Interactive State Pattern (REQUIRED)
+
+All interactive components MUST support both pseudo-class and data-attribute approaches:
+
+```css
+.component {
+  /* Hover states - both approaches */
+  &:hover,
+  &[data-hover="true"] {
+    @apply [hover-styles];
+  }
+
+  /* Active/pressed states - both approaches */
+  &:active,
+  &[data-pressed="true"] {
+    @apply [active-styles];
+  }
+
+  /* Focus states - comprehensive fallback */
+  &:focus-visible,
+  &:focus:not(:focus-visible),
+  &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled states - both approaches */
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    cursor: var(--cursor-disabled);
+  }
+}
+```
+
+### Pattern Validation
+
+When analyzing CSS files, ensure:
+
+- ✅ Base classes include default sizes (no empty components without size modifiers)
+- ✅ `--md` variants exist but are empty with explanatory comments
+- ✅ Interactive states support both `:hover` and `[data-hover="true"]`
+- ✅ Interactive states support both `:active` and `[data-pressed="true"]`
+- ✅ Focus states include comprehensive fallbacks
+- ✅ All disabled states use both `:disabled` and `[aria-disabled="true"]`
+
+### Examples from HeroUI
+
+- **button.css**: Base `h-10 md:h-9`, empty `.button--md`
+- **avatar.css**: Base `size-10`, empty `.avatar--md`
+- **spinner.css**: Base `size-6`, empty `.spinner--md`

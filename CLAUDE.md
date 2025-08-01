@@ -134,6 +134,42 @@ component-name/
 - Other components will gradually be migrated to follow this CSS-based pattern
 - Components use `tv()` from `tailwind-variants` to map variant props to BEM class names
 
+**Default Size Pattern**:
+
+**CRITICAL**: All components MUST include default sizes in their base classes to prevent broken appearances when no size modifier is specified. Following the daisyui pattern:
+
+- **Base classes** include default dimensions (equivalent to the `--md` variant)
+- **Medium variants** (`--md`) are empty with explanatory comments
+- **Size modifiers** override the defaults when specified
+
+Example implementation:
+
+```css
+/* Base component with default size */
+.avatar {
+  @apply relative flex size-10 shrink-0 overflow-hidden rounded-full;
+  /* size-10 is the default, equivalent to --md */
+}
+
+/* Size variants */
+.avatar--sm {
+  @apply size-8; /* Override default */
+}
+
+.avatar--md {
+  /* No styles as this is the default size */
+}
+
+.avatar--lg {
+  @apply size-12; /* Override default */
+}
+```
+
+This ensures components work properly without explicit size classes:
+
+- `<div className="avatar">` → Works perfectly (size-10)
+- `<div className="avatar avatar--lg">` → Override to large (size-12)
+
 ### Core Component Design Principles
 
 **IMPORTANT**: HeroUI v3 follows a compound component pattern similar to Radix UI, built on top of React Aria Components primitives. This enables maximum flexibility and customization for users.
@@ -668,3 +704,80 @@ The Grep MCP searches for **literal code patterns**, not keywords. Use actual co
 - Use regex patterns with `useRegexp=true` for flexible matching
 - Filter by well-known repositories for quality examples (e.g., `repo='vercel/'`)
 - Combine with file path filters for specific file types
+
+## Agent-Specific Guidelines
+
+### For style-migrator and tailwind-v4-css-expert Agents
+
+When working with HeroUI CSS components, follow these critical patterns:
+
+#### Default Size Implementation
+
+**REQUIRED**: All CSS components MUST follow the default size pattern:
+
+1. **Base classes** include default dimensions equivalent to `--md` variant
+2. **Medium variant** (`--md`) is an empty class with explanatory comment
+3. **Size variants** override the base defaults
+
+**Template for CSS components with size variants:**
+
+```css
+/* Base component styles */
+.component {
+  /* Base styling */
+  @apply [base-styles];
+
+  /* Default size - matches component--md variant */
+  @apply [default-size-classes];
+}
+
+/* Size variants */
+.component--sm {
+  @apply [small-size-overrides];
+}
+
+.component--md {
+  /* No styles as this is the default size */
+}
+
+.component--lg {
+  @apply [large-size-overrides];
+}
+```
+
+#### Pseudo-Class Fallback Pattern
+
+**REQUIRED**: All interactive components MUST include both pseudo-class and data-attribute support:
+
+```css
+/* Interactive states - both approaches */
+.component {
+  /* Hover states */
+  &:hover,
+  &[data-hover="true"] {
+    @apply [hover-styles];
+  }
+
+  /* Active/pressed states */
+  &:active,
+  &[data-pressed="true"] {
+    @apply [active-styles];
+  }
+
+  /* Focus states */
+  &:focus-visible,
+  &:focus:not(:focus-visible),
+  &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+```
+
+#### Component Examples
+
+- **button.css**: Base has `h-10 md:h-9`, empty `.button--md` variant
+- **avatar.css**: Base has `size-10`, empty `.avatar--md` variant
+- **spinner.css**: Base has `size-6`, empty `.spinner--md` variant
+
+These patterns ensure components never appear broken and maintain consistency across the design system.

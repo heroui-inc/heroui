@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium transition-[transform,background-color] duration-150;
+  @apply relative isolate inline-flex h-10 origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium transition-[transform,background-color] duration-150 md:h-9;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -41,7 +41,7 @@
 }
 
 .button--md {
-  @apply h-10 md:h-9;
+  /* No styles as this is the default size */
 }
 
 .button--lg {
@@ -122,14 +122,13 @@
 /* Icon-only modifier */
 .button--icon-only {
   @apply p-0;
+
+  /* Default width - matches removed button--md variant */
+  @apply w-10 md:w-9;
 }
 
 .button--icon-only.button--sm {
   @apply w-9 md:w-8;
-}
-
-.button--icon-only.button--md {
-  @apply w-10 md:w-9;
 }
 
 .button--icon-only.button--lg {

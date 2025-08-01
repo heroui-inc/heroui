@@ -99,6 +99,84 @@ Ensure:
    - Resolving @apply directive problems
    - Understanding CSS nesting or custom properties
 
+## CRITICAL: Default Size Pattern
+
+**REQUIRED**: All components with size variants MUST follow the default size pattern:
+
+### Default Size Implementation Rules
+
+1. **Base class includes default dimensions** equivalent to the `--md` variant
+2. **Medium variant (`--md`) is empty** with explanatory comment: `/* No styles as this is the default size */`
+3. **Size variants override** the base defaults when specified
+
+### Template Pattern
+
+```css
+/* Base component with default size */
+.component {
+  /* Base styling */
+  @apply [base-styles];
+
+  /* Default size - matches component--md variant */
+  @apply [default-size-classes];
+}
+
+/* Size variants */
+.component--sm {
+  @apply [small-size-overrides];
+}
+
+.component--md {
+  /* No styles as this is the default size */
+}
+
+.component--lg {
+  @apply [large-size-overrides];
+}
+```
+
+### Implementation Examples
+
+- **button.css**: Base has `h-10 md:h-9`, empty `.button--md` variant
+- **avatar.css**: Base has `size-10`, empty `.avatar--md` variant
+- **spinner.css**: Base has `size-6`, empty `.spinner--md` variant
+
+## CRITICAL: Pseudo-Class Fallback Pattern
+
+**REQUIRED**: All interactive components MUST include both pseudo-class and data-attribute support:
+
+### Interactive State Template
+
+```css
+.component {
+  /* Hover states - both approaches */
+  &:hover,
+  &[data-hover="true"] {
+    @apply [hover-styles];
+  }
+
+  /* Active/pressed states - both approaches */
+  &:active,
+  &[data-pressed="true"] {
+    @apply [active-styles];
+  }
+
+  /* Focus states - comprehensive fallback */
+  &:focus-visible,
+  &:focus:not(:focus-visible),
+  &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+```
+
+These patterns ensure components:
+
+- Never appear broken without size modifiers
+- Work with both traditional CSS pseudo-classes and React Aria data attributes
+- Maintain consistency across the design system
+
 ## CSS Organization Pattern
 
 Follow the patterns documented in `.claude/guides/tailwindcss-v4-css-guide.md`, particularly:
@@ -114,19 +192,37 @@ Example structure:
 ```css
 /* Base component styles */
 .component {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors duration-150;
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 font-medium transition-colors duration-150;
+
+  /* Default size - matches component--md variant */
+  @apply h-10 py-2;
 
   /* Custom properties that don't have Tailwind equivalents */
   cursor: var(--cursor-interactive);
 
-  /* Focus state */
-  &:focus-visible {
+  /* Hover states - both approaches */
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-accent-soft;
+  }
+
+  /* Active/pressed states - both approaches */
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-soft;
+  }
+
+  /* Focus states - comprehensive fallback */
+  &:focus-visible,
+  &:focus:not(:focus-visible),
+  &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
 
   /* Disabled state */
-  &:disabled {
+  &:disabled,
+  &[aria-disabled="true"] {
     @apply pointer-events-none opacity-[var(--disabled-opacity)];
     cursor: var(--cursor-disabled);
   }
@@ -146,8 +242,12 @@ Example structure:
   }
 }
 
+.component--md {
+  /* No styles as this is the default size */
+}
+
 .component--lg {
-  @apply h-10 px-5 text-base;
+  @apply h-12 px-5 text-base;
 }
 
 /* Color variants */

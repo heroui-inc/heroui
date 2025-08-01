@@ -1,6 +1,6 @@
 /* Base spinner styles */
 .spinner {
-  @apply relative animate-spin;
+  @apply relative size-6 animate-spin;
 }
 
 /* Size variants */
@@ -9,7 +9,7 @@
 }
 
 .spinner--md {
-  @apply size-6;
+  /* No styles as this is the default size */
 }
 
 .spinner--lg {

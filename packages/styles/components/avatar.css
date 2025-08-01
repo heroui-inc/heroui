@@ -19,7 +19,7 @@
 }
 
 .avatar--md {
-  @apply size-10;
+  /* No styles as this is the default size */
 }
 
 .avatar--lg {
