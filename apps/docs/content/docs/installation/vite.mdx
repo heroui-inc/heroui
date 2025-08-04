@@ -1,0 +1,295 @@
+---
+title: Vite
+description: Install HeroUI v3 with Vite
+---
+
+Get started with HeroUI v3 in a Vite project.
+
+## Prerequisites
+
+- Node.js 22 or later
+- A Vite project with React
+
+## Create a New Project
+
+Start by creating a new Vite project with React:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm create vite@latest my-app -- --template react-ts
+    cd my-app
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm create vite my-app --template react-ts
+    cd my-app
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn create vite my-app --template react-ts
+    cd my-app
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun create vite my-app --template react-ts
+    cd my-app
+    ```
+  </Tab>
+</Tabs>
+
+## Install HeroUI and Dependencies
+
+Install HeroUI v3, Tailwind CSS v4, and the Vite plugin:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install @heroui/react tailwindcss
+    npm install -D @tailwindcss/vite
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/react tailwindcss
+    pnpm add -D @tailwindcss/vite
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/react tailwindcss
+    yarn add -D @tailwindcss/vite
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/react tailwindcss
+    bun add -D @tailwindcss/vite
+    ```
+  </Tab>
+</Tabs>
+
+## Configure Vite
+
+Update your `vite.config.ts` to use the Tailwind CSS plugin:
+
+```ts title="vite.config.ts"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+```
+
+## Set Up CSS
+
+Create or update your main CSS file with the required imports:
+
+```css title="src/index.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+<Callout type="warning">
+  **Important**: The import order matters. Always import `tailwindcss` first, then `@heroui/styles`.
+</Callout>
+
+Make sure this CSS file is imported in your main entry file:
+
+```tsx title="src/main.tsx"
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+```
+
+## TypeScript Configuration
+
+If using TypeScript, ensure your `tsconfig.json` includes proper JSX configuration:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+
+## Start Using HeroUI
+
+Now you can start using HeroUI components in your app:
+
+```tsx title="src/App.tsx"
+import { Button, Alert } from '@heroui/react'
+
+function App() {
+  return (
+    <div className="min-h-screen bg-background p-8">
+      <div className="mx-auto max-w-4xl space-y-8">
+        <h1 className="text-4xl font-bold">Welcome to HeroUI + Vite</h1>
+        
+        <Alert>
+          <Alert.Icon />
+          <Alert.Content>
+            <Alert.Title>Setup Complete!</Alert.Title>
+            <Alert.Description>
+              You're ready to build with HeroUI v3 and Vite.
+            </Alert.Description>
+          </Alert.Content>
+        </Alert>
+
+        <div className="flex gap-4">
+          <Button>Primary Button</Button>
+          <Button variant="secondary">Secondary Button</Button>
+          <Button variant="outline">Outline Button</Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+## Run Your Project
+
+Start the development server:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm run dev
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dev
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dev
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun dev
+    ```
+  </Tab>
+</Tabs>
+
+Visit [http://localhost:5173](http://localhost:5173) to see your app.
+
+## Customization
+
+### Theme Variables
+
+You can customize HeroUI's theme by modifying CSS variables:
+
+```css title="src/index.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  /* Colors */
+  --accent: 220 90% 56%;
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  
+  /* Radius */
+  --radius: 0.5rem;
+  
+  /* Typography */
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
+.dark {
+  --accent: 217 91% 60%;
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+}
+```
+
+### Tailwind Configuration
+
+While HeroUI works out of the box with Tailwind CSS v4, you can extend it with custom utilities:
+
+```css title="src/index.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@utility custom-gradient {
+  background: linear-gradient(to right, theme(colors.blue.500), theme(colors.purple.600));
+}
+```
+
+## Troubleshooting
+
+### Build Errors
+
+If you encounter build errors, ensure:
+
+1. You're using Tailwind CSS v4 (not v3)
+2. The CSS imports are in the correct order
+3. All dependencies are properly installed
+
+### Style Issues
+
+If components appear unstyled:
+
+1. Verify `@heroui/styles` is imported after `tailwindcss`
+2. Check that your CSS file is imported in your entry file
+3. Ensure the Tailwind CSS Vite plugin is configured
+
+### TypeScript Errors
+
+For TypeScript errors with HeroUI components:
+
+1. Ensure `jsx` is set to `react-jsx` in tsconfig.json
+2. Update to the latest version of `@heroui/react`
+3. Restart your TypeScript language server
+
+## Example Projects
+
+Check out these example projects:
+
+- [HeroUI Vite Starter](https://github.com/heroui/vite-starter)
+- [HeroUI Demo App](https://github.com/heroui/demo)
+
+## Next Steps
+
+- Explore [Components](/docs/components) to see all available components
+- Learn about [Styling](/docs/handbook/styling) with Tailwind CSS
+- Understand [Composition](/docs/handbook/composition) patterns
+- Add [Animations](/docs/handbook/animation) to your components

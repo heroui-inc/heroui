@@ -1,64 +1,8 @@
 @import "tailwindcss";
-@plugin "@heroui/react/plugin";
-@import "fumadocs-ui/css/neutral.css";
+@import "@heroui/styles";
+@import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
 
-/* HeroUI Base Styles */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
-
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--border, currentColor);
-  }
-
-  *,
-  ::after,
-  ::before {
-    font-feature-settings: "cv11", "ss01";
-    font-variation-settings: "opsz" 850;
-    text-rendering: optimizeLegibility;
-    font-synthesis-weight: none;
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar) transparent;
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-size: var(--font-size-base);
-  }
-}
-
-@layer utilities {
-  @keyframes blink {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .animate-blink {
-    animation: blink 1s ease-in-out infinite;
-  }
-}
-
-@source '../../node_modules/fumadocs-ui/dist/**/*.js';
-@source "@heroui/react/dist*.js";
-@source "../**/*.{ts,tsx,js,jsx}";
-
-/* Custom Theme Override Example - Customize HeroUI with your brand colors */
 :root {
   /* Override accent colors with your brand */
   /* --accent: oklch(0.7 0.25 260); */
@@ -67,11 +11,65 @@
   /* Or use your existing Tailwind color scale */
   /* --accent: var(--color-blue-600); */
   /* --accent-soft: var(--color-blue-100); */
+
+  /* Fumadocs UI */
+  --color-fd-background: #f9f9f9;
+  --color-fd-secondary: #f9f9f9;
+  --color-fd-card: #f9f9f9;
+  --spacing-fd-container: 1120px;
+  --color-fd-border: oklch(0 0 0 / 10%);
 }
 
-/* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    /* --accent: oklch(0.75 0.2 260); */
+[data-theme="dark"],
+.dark {
+  /* Your values */
+  /* --radius: 0.5rem; */
+  /* --cursor: default; */
+  --color-fd-background: #1a1a1a;
+  --color-fd-card: #1a1a1a;
+}
+
+/* To override HeroUI Components Styles */
+/* @utility button {
+  @apply rounded-lg;
+} */
+
+/* Fumadocs UI Components Styles */
+
+#nd-nav {
+  border: none;
+
+  /* Only affects the Docs/Components ul, not the search/theme toggle */
+  ul:first-of-type {
+    padding-top: 4px;
+    gap: 0;
+  }
+
+  ul:last-of-type {
+    li > a:last-of-type {
+      @apply text-foreground ml-1 inline-flex items-center rounded-full border p-1.5;
+    }
+  }
+
+  li > a {
+    color: var(--muted);
+  }
+}
+
+#nd-sidebar {
+  border: none;
+  --radius: 0.5rem;
+  --color-fd-border: transparent;
+  & > :last-child {
+    border-top: none;
+  }
+}
+
+#nd-toc {
+  --color-fd-foreground: transparent;
+  /* Disables the active indicator */
+  [role="none"] {
+    display: none;
+    background: transparent;
   }
 }

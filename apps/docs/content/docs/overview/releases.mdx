@@ -1,0 +1,135 @@
+---
+title: Releases
+description: HeroUI v3 release notes and version history
+---
+
+## Version 3.0.0-alpha.12 (Latest)
+
+*Released: January 2025*
+
+### New Features
+
+- ✨ **Default Size Pattern** - All components now include default sizes in base classes
+- 🎨 **Enhanced Styling System** - Improved CSS-based styling with BEM conventions
+- 📦 **Component Updates** - Updated exports and improved TypeScript definitions
+
+### Components
+
+- Updated all components to follow default size pattern
+- Enhanced component exports for better tree-shaking
+- Improved TypeScript definitions and prop interfaces
+
+### Bug Fixes
+
+- Fixed component appearance issues when no size variant is provided
+- Resolved styling inconsistencies across components
+- Improved accessibility attributes and ARIA support
+
+### Breaking Changes
+
+- Component styling now follows BEM naming convention
+- Some prop names have been standardized across components
+- CSS class structure has been updated for consistency
+
+---
+
+## Version 3.0.0-alpha.11
+
+*Released: December 2024*
+
+### New Features
+
+- 🚀 **Spinner Component** - Added loading spinner with multiple variants
+- 🔧 **Enhanced Build System** - Improved package build and export generation
+- 📱 **Mobile Optimizations** - Better responsive behavior across components
+
+### Components
+
+- **Spinner** - New component with size and variant options
+- **Button** - Enhanced interaction states and focus indicators
+- **Avatar** - Improved image loading and fallback handling
+
+---
+
+## Version 3.0.0-alpha.10
+
+*Released: November 2024*
+
+### New Features
+
+- 🎯 **Prerelease Build Command** - Added build command for alpha releases
+- 🔄 **Animation Enhancements** - Improved Tailwind integration for animations
+- 📋 **Component Export Updates** - Enhanced component exports and documentation
+
+### Components
+
+- Enhanced all components with better animation support
+- Improved component composition patterns
+- Updated TypeScript definitions for better DX
+
+---
+
+## Version 3.0.0-alpha.9
+
+*Released: October 2024*
+
+### New Features
+
+- 🎨 **CSS Migration** - Started migration from TypeScript styles to CSS
+- 🏗️ **Architecture Improvements** - Enhanced component architecture patterns
+- 📚 **Documentation Updates** - Improved component documentation and examples
+
+### Components
+
+- **Button** - Migrated to CSS-based styling system
+- **Alert** - Enhanced compound component structure
+- **Avatar** - Improved size variants and styling options
+
+## Migration Guide
+
+### From Alpha 11 to Alpha 12
+
+1. **Update Dependencies**
+   ```bash
+   npm install @heroui/react@3.0.0-alpha.12
+   ```
+
+2. **CSS Classes**
+   - Component classes now follow BEM convention
+   - Update custom styles to use new class names
+   - Default sizes are now included in base classes
+
+3. **Component Props**
+   - Some prop names have been standardized
+   - Check TypeScript errors for updated prop interfaces
+   - Update component compositions if needed
+
+### From v2 to v3
+
+v3 is a complete rewrite with breaking changes. See our [Migration Guide](/docs/guides/migration) for detailed instructions.
+
+## Release Schedule
+
+HeroUI v3 follows semantic versioning and has a regular release cycle:
+
+- **Alpha Releases** - Weekly during development
+- **Beta Releases** - Monthly with feature freeze
+- **Stable Releases** - Quarterly with full testing
+
+## Changelog
+
+For a complete list of changes, see our [GitHub Releases](https://github.com/heroui/heroui-v3/releases).
+
+## Support Policy
+
+- **Alpha** - Active development, breaking changes expected
+- **Beta** - Feature complete, minor changes only
+- **Stable** - Long-term support with patch releases
+
+## Feedback
+
+We value your feedback on each release:
+
+- **GitHub Issues** - Report bugs and issues
+- **Discussions** - Share feature requests and ideas
+- **Discord** - Join our community for real-time feedback

@@ -1,0 +1,439 @@
+---
+title: Next.js
+description: Install HeroUI v3 with Next.js
+---
+
+Get started with HeroUI v3 in a Next.js project.
+
+## Prerequisites
+
+- Node.js 22 or later
+- A Next.js project (App Router recommended)
+
+## Create a New Project
+
+Start by creating a new Next.js project:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npx create-next-app@latest my-app --typescript --app
+    cd my-app
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm create next-app my-app --typescript --app
+    cd my-app
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn create next-app my-app --typescript --app
+    cd my-app
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun create next-app my-app --typescript --app
+    cd my-app
+    ```
+  </Tab>
+</Tabs>
+
+## Install HeroUI and Dependencies
+
+Install HeroUI v3, Tailwind CSS v4, and PostCSS plugin:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install @heroui/react tailwindcss
+    npm install -D @tailwindcss/postcss
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/react tailwindcss
+    pnpm add -D @tailwindcss/postcss
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/react tailwindcss
+    yarn add -D @tailwindcss/postcss
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/react tailwindcss
+    bun add -D @tailwindcss/postcss
+    ```
+  </Tab>
+</Tabs>
+
+## Configure PostCSS
+
+Create or update your `postcss.config.mjs` file:
+
+```js title="postcss.config.mjs"
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+}
+```
+
+<Callout type="info">
+  Next.js uses PostCSS for CSS processing. The `@tailwindcss/postcss` plugin enables Tailwind CSS v4 support.
+</Callout>
+
+## Set Up Global CSS
+
+Update your global CSS file to import Tailwind CSS and HeroUI styles:
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+<Callout type="warning">
+  **Important**: The import order matters. Always import `tailwindcss` first, then `@heroui/styles`.
+</Callout>
+
+## Update Layout
+
+Ensure your root layout imports the global CSS:
+
+```tsx title="app/layout.tsx"
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'HeroUI + Next.js',
+  description: 'Built with HeroUI v3 and Next.js',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
+  )
+}
+```
+
+## TypeScript Configuration
+
+Next.js should already have proper TypeScript configuration, but verify your `tsconfig.json` includes:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+```
+
+## Start Using HeroUI
+
+Create a simple page using HeroUI components:
+
+```tsx title="app/page.tsx"
+import { Button, Alert, Tabs } from '@heroui/react'
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-background p-8">
+      <div className="mx-auto max-w-4xl space-y-8">
+        <h1 className="text-4xl font-bold">Welcome to HeroUI + Next.js</h1>
+        
+        <Alert>
+          <Alert.Icon />
+          <Alert.Content>
+            <Alert.Title>Setup Complete!</Alert.Title>
+            <Alert.Description>
+              You're ready to build with HeroUI v3 and Next.js App Router.
+            </Alert.Description>
+          </Alert.Content>
+        </Alert>
+
+        <Tabs defaultValue="preview">
+          <Tabs.List>
+            <Tabs.Trigger value="preview">Preview</Tabs.Trigger>
+            <Tabs.Trigger value="code">Code</Tabs.Trigger>
+          </Tabs.List>
+          
+          <Tabs.Content value="preview">
+            <div className="flex gap-4 p-6">
+              <Button>Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+            </div>
+          </Tabs.Content>
+          
+          <Tabs.Content value="code">
+            <pre className="rounded-lg bg-muted p-4">
+              <code>{`<Button>Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>`}</code>
+            </pre>
+          </Tabs.Content>
+        </Tabs>
+      </div>
+    </main>
+  )
+}
+```
+
+## Server Components
+
+HeroUI components are client components. When using them in Server Components, ensure proper client boundaries:
+
+```tsx title="app/components/client-button.tsx"
+'use client'
+
+import { Button } from '@heroui/react'
+
+export function ClientButton() {
+  return (
+    <Button onClick={() => console.log('Clicked!')}>
+      Interactive Button
+    </Button>
+  )
+}
+```
+
+```tsx title="app/page.tsx"
+// This is a Server Component
+import { ClientButton } from './components/client-button'
+
+export default function Page() {
+  return (
+    <div>
+      <h1>Server Component</h1>
+      <ClientButton />
+    </div>
+  )
+}
+```
+
+## Run Your Project
+
+Start the development server:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm run dev
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dev
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dev
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun dev
+    ```
+  </Tab>
+</Tabs>
+
+Visit [http://localhost:3000](http://localhost:3000) to see your app.
+
+## Customization
+
+### Theme Variables
+
+Customize HeroUI's theme using CSS variables:
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  /* Colors */
+  --accent: 220 90% 56%;
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  
+  /* Radius */
+  --radius: 0.5rem;
+  
+  /* Typography */
+  --font-sans: var(--font-inter);
+}
+
+.dark {
+  --accent: 217 91% 60%;
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+}
+```
+
+### Font Optimization
+
+Next.js provides built-in font optimization. Use it with HeroUI:
+
+```tsx title="app/layout.tsx"
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={inter.variable}>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+## Production Build
+
+Build your application for production:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm run build
+    npm run start
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm build
+    pnpm start
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn build
+    yarn start
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun run build
+    bun run start
+    ```
+  </Tab>
+</Tabs>
+
+## Troubleshooting
+
+### PostCSS Configuration Issues
+
+If you see PostCSS errors:
+
+1. Ensure you're using `@tailwindcss/postcss` (not the old `tailwindcss` PostCSS plugin)
+2. Use `.mjs` extension for `postcss.config.mjs`
+3. Restart the Next.js dev server after configuration changes
+
+### Hydration Errors
+
+If you encounter hydration mismatches:
+
+1. Ensure interactive components are wrapped with `'use client'` directive
+2. Avoid using browser-only APIs during server rendering
+3. Use Next.js `dynamic` import with `ssr: false` for client-only components
+
+### CSS Not Loading
+
+If styles aren't applied:
+
+1. Verify imports in `globals.css` are in the correct order
+2. Check that `globals.css` is imported in your root layout
+3. Clear Next.js cache: `rm -rf .next`
+
+### Build Errors
+
+For build-time errors:
+
+1. Ensure all dependencies are installed
+2. Check for TypeScript errors: `npx tsc --noEmit`
+3. Verify Node.js version is 22 or later
+
+## Advanced Configuration
+
+### Turbopack
+
+Enable Turbopack for faster builds:
+
+```json title="package.json"
+{
+  "scripts": {
+    "dev": "next dev --turbo"
+  }
+}
+```
+
+### Static Export
+
+For static site generation:
+
+```js title="next.config.js"
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  // Optional: Add a base path
+  // basePath: '/my-app',
+}
+
+module.exports = nextConfig
+```
+
+## Example Projects
+
+Check out these example projects:
+
+- [HeroUI Next.js Starter](https://github.com/heroui/nextjs-starter)
+- [HeroUI E-commerce Template](https://github.com/heroui/ecommerce-template)
+
+## Next Steps
+
+- Explore [Components](/docs/components) to see all available components
+- Learn about [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) integration
+- Implement [Dark Mode](/docs/handbook/styling#dark-mode) support
+- Add [Animations](/docs/handbook/animation) to your components

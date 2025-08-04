@@ -1,0 +1,95 @@
+---
+title: Quick Start
+description: Get started with HeroUI v3 in minutes
+---
+
+## Framework Setup
+
+Choose your framework for detailed installation instructions:
+
+<Cards>
+  <Card
+    icon={<Icon icon="simple-icons:vite" />}
+    title="Vite"
+    description="Fast build tool with HMR"
+    href="/docs/installation/vite"
+  />
+  <Card
+    icon={<Icon icon="lineicons:nextjs" />}
+    title="Next.js"
+    description="Full-stack React framework"
+    href="/docs/installation/nextjs"
+  />
+</Cards>
+
+## Quick Install
+
+Install HeroUI and required dependencies:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install @heroui/react tailwindcss
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/react tailwindcss
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/react tailwindcss
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/react tailwindcss
+    ```
+  </Tab>
+</Tabs>
+
+## Import Styles
+
+Add to your main CSS file:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+<Callout type="warning">
+  Import order matters. Always import `tailwindcss` first.
+</Callout>
+
+## Use Components
+
+```tsx
+import { Button, Alert } from '@heroui/react';
+
+function App() {
+  return (
+    <Alert>
+      <Alert.Icon />
+      <Alert.Content>
+        <Alert.Title>Ready to go!</Alert.Title>
+        <Alert.Description>
+          Start building with HeroUI components.
+        </Alert.Description>
+      </Alert.Content>
+    </Alert>
+  );
+}
+```
+
+## Requirements
+
+- React 19+
+- Tailwind CSS v4 (required)
+- Node.js 22+
+
+## What's Next?
+
+- [Browse Components](/docs/components) - See all available components
+- [Learn Styling](/docs/handbook/styling) - Customize with Tailwind CSS
+- [Explore Patterns](/docs/handbook/composition) - Master compound components

@@ -136,7 +136,7 @@ component-name/
 
 **Default Size Pattern**:
 
-**CRITICAL**: All components MUST include default sizes in their base classes to prevent broken appearances when no size modifier is specified. Following the daisyui pattern:
+**CRITICAL**: All components MUST include default sizes in their base classes to prevent broken appearances when no size modifier is specified. Following the following pattern:
 
 - **Base classes** include default dimensions (equivalent to the `--md` variant)
 - **Medium variants** (`--md`) are empty with explanatory comments

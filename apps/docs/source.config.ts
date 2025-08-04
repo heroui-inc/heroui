@@ -5,5 +5,9 @@ export const docs = defineDocs({
 });
 
 export default defineConfig({
-  mdxOptions: {},
+  mdxOptions: {
+    providerImportSource: "@/mdx-components",
+    rehypePlugins: [],
+    remarkPlugins: [],
+  },
 });

@@ -1,0 +1,9 @@
+{
+  "title": "Documentation",
+  "pages": [
+    "overview",
+    "installation",
+    "handbook",
+    "components"
+  ]
+}

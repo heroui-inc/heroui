@@ -1,0 +1,89 @@
+---
+title: Installation
+description: Get started with HeroUI v3 in your favorite framework
+---
+
+Get started with HeroUI v3 in minutes with your favorite framework.
+
+HeroUI v3 is a modern React UI library built on top of Tailwind CSS v4. We provide an npm package with pre-built, accessible components that you can use directly in your projects.
+
+## Requirements
+
+- **React** 19+
+- **Tailwind CSS** v4 (required)
+- **Node.js** 22+
+
+## Framework Guides
+
+Choose your framework to get started:
+
+<Cards>
+  <Card
+    icon={<Icon icon="logos:vitejs" />}
+    title="Vite"
+    description="Fast build tool with hot module replacement"
+    href="/docs/installation/vite"
+  />
+  <Card
+    icon={<Icon icon="logos:nextjs" />}
+    title="Next.js"
+    description="Full-stack React framework"
+    href="/docs/installation/nextjs"
+  />
+</Cards>
+
+## Why Tailwind CSS v4?
+
+HeroUI v3 is built specifically for Tailwind CSS v4, leveraging its new features:
+
+- **Modern CSS Architecture**: Better performance and smaller bundle sizes
+- **CSS-based Configuration**: Direct CSS imports without complex configurations
+- **Improved DX**: Faster builds and better error messages
+- **Future-proof**: Built on the latest standards
+
+## What You Get
+
+When you install HeroUI v3, you get:
+
+- **Pre-built Components**: Ready-to-use React components with built-in accessibility
+- **Design System**: Complete set of design tokens and CSS variables
+- **TypeScript Support**: Full type definitions for all components
+- **Compound Components**: Flexible component architecture for maximum customization
+- **Tailwind Integration**: Seamless integration with your Tailwind CSS setup
+
+## Quick Example
+
+Here's what using HeroUI looks like:
+
+```tsx
+import { Button, Alert } from '@heroui/react';
+
+function App() {
+  return (
+    <div className="p-8">
+      <Alert>
+        <Alert.Icon />
+        <Alert.Content>
+          <Alert.Title>Welcome to HeroUI v3</Alert.Title>
+          <Alert.Description>
+            Beautiful, accessible components for your React app.
+          </Alert.Description>
+        </Alert.Content>
+      </Alert>
+      
+      <Button className="mt-4">Get Started</Button>
+    </div>
+  );
+}
+```
+
+## Manual Setup
+
+If you prefer manual setup or need custom configuration:
+
+1. Install dependencies
+2. Configure your build tool for Tailwind CSS v4
+3. Import styles in the correct order
+4. Start using components
+
+See framework-specific guides for detailed instructions.

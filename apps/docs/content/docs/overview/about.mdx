@@ -1,0 +1,123 @@
+---
+title: About
+description: Learn about HeroUI v3's design philosophy and architecture
+---
+
+## Design Philosophy
+
+### Compound Components
+
+Unlike traditional UI libraries that expose monolithic components with dozens of props, HeroUI v3 embraces the compound component pattern popularized by libraries like Radix UI. This approach provides:
+
+- **Maximum Flexibility** - Compose components exactly how you need them
+- **Cleaner APIs** - Each part has a focused, simple interface
+- **Better Customization** - Style and modify individual pieces
+- **Improved Accessibility** - Built-in ARIA relationships between parts
+
+```tsx
+// Traditional approach - limited flexibility
+<Select 
+  options={options}
+  placeholder="Choose option"
+  errorMessage="Required field"
+  helperText="Select one option"
+/>
+
+// HeroUI v3 approach - full control
+<Select>
+  <Select.Label>Choose option</Select.Label>
+  <Select.Trigger>
+    <Select.Value placeholder="Choose option" />
+    <Select.Icon />
+  </Select.Trigger>
+  <Select.Content>
+    {options.map(option => (
+      <Select.Item key={option.value} value={option.value}>
+        {option.label}
+      </Select.Item>
+    ))}
+  </Select.Content>
+  <Select.Description>Select one option</Select.Description>
+  <Select.ErrorMessage>Required field</Select.ErrorMessage>
+</Select>
+```
+
+### Accessibility First
+
+Every component is built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/), ensuring:
+
+- **WCAG 2.1 AA Compliance** - Meet accessibility standards out of the box
+- **Keyboard Navigation** - Full keyboard support for all interactions
+- **Screen Reader Support** - Proper ARIA attributes and announcements
+- **Focus Management** - Logical focus flow and visible focus indicators
+
+### Unstyled by Default
+
+HeroUI v3 components come without built-in styling, giving you complete control:
+
+- **Any CSS Solution** - Use CSS Modules, Styled Components, Emotion, or plain CSS
+- **Design System Integration** - Easily integrate with your existing design tokens
+- **Framework Agnostic** - Works with any styling approach
+- **Performance Focused** - No unused CSS in your bundle
+
+## Technical Architecture
+
+### Built on React Aria Components
+
+React Aria Components provides the accessibility and interaction layer, while HeroUI v3 adds:
+
+- **Compound Structure** - Breaking monolithic components into composable parts
+- **Enhanced TypeScript** - Better type inference and developer experience
+- **Consistent Patterns** - Unified API across all components
+- **Performance Optimizations** - Minimal re-renders and optimal bundle size
+
+### Tailwind CSS v4 Integration
+
+While components are unstyled, HeroUI v3 provides optional Tailwind CSS v4 utilities:
+
+- **BEM-style Classes** - Predictable class naming conventions
+- **Size Variants** - Consistent sizing across components
+- **State Utilities** - Hover, focus, and interaction states
+- **Design Tokens** - Semantic color and spacing scales
+
+### TypeScript Support
+
+Full TypeScript support with:
+
+- **Strict Type Safety** - Catch errors at compile time
+- **IntelliSense** - Full autocomplete and documentation
+- **Generic Components** - Type-safe polymorphic components
+- **Variant Types** - Strongly typed style variants
+
+## Comparison with Other Libraries
+
+| Feature | HeroUI v3 | Radix UI | Headless UI | Chakra UI |
+|---------|-----------|----------|-------------|-----------|
+| Compound Components | ✅ | ✅ | ❌ | ❌ |
+| Unstyled | ✅ | ✅ | ✅ | ❌ |
+| React Aria Foundation | ✅ | ❌ | ❌ | ❌ |
+| TypeScript First | ✅ | ✅ | ✅ | ✅ |
+| Animation Support | ✅ | ❌ | ❌ | ✅ |
+| Tailwind Integration | ✅ | ❌ | ❌ | ❌ |
+
+## Browser Support
+
+HeroUI v3 supports all modern browsers:
+
+- **Chrome** 91+
+- **Firefox** 90+
+- **Safari** 15+
+- **Edge** 91+
+
+## Contributing
+
+HeroUI v3 is open source and we welcome contributions:
+
+- **GitHub** - [heroui/heroui-v3](https://github.com/heroui/heroui-v3)
+- **Issues** - Report bugs and request features
+- **Pull Requests** - Contribute code improvements
+- **Discussions** - Share ideas and ask questions
+
+## License
+
+HeroUI v3 is released under the MIT License.

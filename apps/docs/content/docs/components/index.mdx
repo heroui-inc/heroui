@@ -1,0 +1,317 @@
+---
+title: Components
+description: Explore all HeroUI v3 components with examples and documentation
+---
+
+## Overview
+
+All components are:
+
+- **Accessible by Default** - Built on React Aria Components with WCAG 2.1 AA compliance
+- **Styled by Default** - Beautiful components powered by Tailwind CSS v4
+- **Compound** - Composable parts for flexible layouts
+- **TypeScript Ready** - Full type safety and IntelliSense support
+- **Tree-shakeable** - Import only what you need
+
+## Component Categories
+
+### Form Controls
+
+Interactive components for user input and form handling.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Button"
+    description="Clickable button with variants and loading states"
+    href="/docs/components/button"
+  />
+  <ComponentCard
+    name="Checkbox"
+    description="Checkbox input with compound structure"
+    href="/docs/components/checkbox"
+  />
+  <ComponentCard
+    name="Radio"
+    description="Radio button groups for single selection"
+    href="/docs/components/radio"
+  />
+  <ComponentCard
+    name="Switch"
+    description="Toggle switch for boolean values"
+    href="/docs/components/switch"
+  />
+  <ComponentCard
+    name="Text Field"
+    description="Text input with label and validation"
+    href="/docs/components/text-field"
+  />
+  <ComponentCard
+    name="Slider"
+    description="Range slider for numeric input"
+    href="/docs/components/slider"
+  />
+</ComponentGrid>
+
+### Display
+
+Components for presenting content and information.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Avatar"
+    description="User profile images with fallback support"
+    href="/docs/components/avatar"
+  />
+  <ComponentCard
+    name="Chip"
+    description="Small informational badges and tags"
+    href="/docs/components/chip"
+  />
+  <ComponentCard
+    name="Spinner"
+    description="Loading indicators with multiple variants"
+    href="/docs/components/spinner"
+  />
+  <ComponentCard
+    name="Text"
+    description="Typography component for text content"
+    href="/docs/components/text"
+  />
+</ComponentGrid>
+
+### Layout
+
+Structural components for organizing content.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Card"
+    description="Flexible content container with header and footer"
+    href="/docs/components/card"
+  />
+  <ComponentCard
+    name="Accordion"
+    description="Collapsible content sections"
+    href="/docs/components/accordion"
+  />
+  <ComponentCard
+    name="Tabs"
+    description="Tabbed interface for content organization"
+    href="/docs/components/tabs"
+  />
+</ComponentGrid>
+
+### Feedback
+
+Components for alerts, notifications, and user feedback.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Alert"
+    description="Alert messages with variants and actions"
+    href="/docs/components/alert"
+  />
+  <ComponentCard
+    name="Tooltip"
+    description="Contextual hover information"
+    href="/docs/components/tooltip"
+  />
+</ComponentGrid>
+
+### Overlay
+
+Modal and popup components.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Popover"
+    description="Floating content containers"
+    href="/docs/components/popover"
+  />
+</ComponentGrid>
+
+### Navigation
+
+Components for navigation and interaction.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Link"
+    description="Styled anchor links with variants"
+    href="/docs/components/link"
+  />
+  <ComponentCard
+    name="Listbox"
+    description="Selectable list of options"
+    href="/docs/components/listbox"
+  />
+</ComponentGrid>
+
+### Specialized
+
+Advanced and specialized components.
+
+<ComponentGrid>
+  <ComponentCard
+    name="Calendar"
+    description="Date selection and calendar interface"
+    href="/docs/components/calendar"
+  />
+  <ComponentCard
+    name="Form"
+    description="Form container with validation support"
+    href="/docs/components/form"
+  />
+  <ComponentCard
+    name="Input OTP"
+    description="One-time password input component"
+    href="/docs/components/input-otp"
+  />
+</ComponentGrid>
+
+## Usage Patterns
+
+### Basic Usage
+
+Import and use components directly:
+
+```tsx
+import { Button, Avatar, Alert } from '@heroui/react';
+
+function MyComponent() {
+  return (
+    <div>
+      <Button onPress={() => console.log('clicked')}>
+        Click me
+      </Button>
+      
+      <Avatar>
+        <Avatar.Image src="user.jpg" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      
+      <Alert>
+        <Alert.Icon />
+        <Alert.Content>
+          <Alert.Title>Success!</Alert.Title>
+          <Alert.Description>
+            Your changes have been saved.
+          </Alert.Description>
+        </Alert.Content>
+      </Alert>
+    </div>
+  );
+}
+```
+
+### Compound Pattern
+
+Most components use the compound pattern for flexibility:
+
+```tsx
+import { Accordion } from '@heroui/react';
+
+function FAQ() {
+  return (
+    <Accordion>
+      <Accordion.Item>
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            What is HeroUI v3?
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
+            HeroUI v3 is a modern React UI library built with 
+            accessibility and flexibility in mind.
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+```
+
+### Customizing Components
+
+Components come with default styles but are fully customizable:
+
+```tsx
+// Use built-in variants
+<Button variant="secondary">Secondary Button</Button>
+<Button variant="danger">Danger Button</Button>
+
+// Override with Tailwind CSS classes
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Custom Purple Button
+</Button>
+
+// Mix variants with custom classes
+<Button variant="ghost" className="text-indigo-600">
+  Ghost with Custom Color
+</Button>
+```
+
+## Design Principles
+
+### Accessibility First
+
+Every component includes:
+
+- Proper ARIA attributes and roles
+- Keyboard navigation support
+- Screen reader compatibility
+- Focus management
+- High contrast support
+
+### Flexible Composition
+
+Components are designed for composition:
+
+```tsx
+// Combine components naturally
+<Card>
+  <Card.Header>
+    <div className="flex items-center gap-3">
+      <Avatar>
+        <Avatar.Image src="user.jpg" />
+        <Avatar.Fallback>JD</Avatar.Fallback>
+      </Avatar>
+      <div>
+        <Card.Title>John Doe</Card.Title>
+        <Card.Description>Software Engineer</Card.Description>
+      </div>
+    </div>
+  </Card.Header>
+  <Card.Content>
+    <p>Lorem ipsum dolor sit amet...</p>
+  </Card.Content>
+  <Card.Footer>
+    <Button variant="outline">View Profile</Button>
+    <Button>Message</Button>
+  </Card.Footer>
+</Card>
+```
+
+### Performance Optimized
+
+- Minimal bundle impact through tree-shaking
+- Optimized re-renders with React.memo where appropriate
+- Efficient event handling and state management
+- No runtime CSS generation overhead
+
+## Getting Started
+
+1. **Choose a Component** - Browse the component list above
+2. **Read the Documentation** - Each component has detailed docs with examples
+3. **Copy the Code** - Use the provided examples as starting points
+4. **Customize Styling** - Apply your own CSS or design system
+5. **Compose Freely** - Combine components to build complex interfaces
+
+## Need Help?
+
+- **Examples** - Check the component documentation for real-world examples
+- **Handbook** - Read the [Styling](/docs/handbook/styling), [Animation](/docs/handbook/animation), and [Composition](/docs/handbook/composition) guides
+- **GitHub** - File issues and contribute on [GitHub](https://github.com/heroui/heroui-v3)
+- **Community** - Join our Discord for community support

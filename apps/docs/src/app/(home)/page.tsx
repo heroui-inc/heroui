@@ -1,41 +1,42 @@
-import {Button, Chip} from "@heroui/react";
-import Link from "next/link";
+import {Chip, buttonVariants} from "@heroui/react";
+import Link from "fumadocs-core/link";
+
+import {currentVersion} from "@/utils/version";
+
+const VersionChip = () => {
+  return (
+    <Chip className="bg-default rounded-full">
+      <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent">
+        {currentVersion}
+      </span>
+    </Chip>
+  );
+};
 
 export default function HomePage() {
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="flex h-full flex-1 flex-col">
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center px-4 py-20 text-center">
-        <Chip variant="primary"> 3.0.0-alpha.0</Chip>
-        <h1 className="text-foreground mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-          Build your product,
+      <section className="flex h-full flex-col items-center justify-center px-4 py-20 text-center">
+        <VersionChip />
+        <h1 className="text-foreground mb-6 mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          Beautiful UI components.
           <br />
-          we maintain the UI library
+          No design experience needed.
         </h1>
-        <p className="text-muted-foreground mb-10 max-w-2xl text-lg">
-          Create stunning interfaces with 50% smaller bundle size, lightning-fast native CSS
-          animations, and effortless customization that adapts to your design vision.
+        <p className="text-foreground mb-10 max-w-2xl text-balance text-lg">
+          The component library that&apos;s easier than copy-paste. Fully customizable and always
+          up-to-date, so you can focus on shipping your product.
         </p>
 
-        {/* Demonstrate React components */}
         <div className="mb-8 flex gap-4">
-          <Button variant="primary">Get Started</Button>
-          <Button variant="secondary">Learn More</Button>
+          <Link className={buttonVariants({variant: "primary"})} href="/docs">
+            Explore Docs
+          </Link>
+          <Link className={buttonVariants({variant: "secondary"})} href="/docs">
+            Learn More
+          </Link>
         </div>
-
-        {/* Demonstrate CSS utility classes from the plugin */}
-        <div className="grid max-w-lg grid-cols-3 gap-4">
-          <div className="bg-accent text-accent-foreground rounded-lg p-4">Accent Color</div>
-          <div className="bg-success text-success-foreground rounded-lg p-4">Success Color</div>
-          <div className="bg-warning text-warning-foreground rounded-lg p-4">Warning Color</div>
-        </div>
-
-        <Link
-          className="bg-panel hover:bg-accent-hover text-foreground mt-8 inline-flex items-center rounded-lg px-6 py-3 text-sm font-medium transition-colors"
-          href="/docs"
-        >
-          Explore Docs
-        </Link>
       </section>
     </main>
   );

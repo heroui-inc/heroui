@@ -1,0 +1,659 @@
+---
+title: Animation
+description: Add smooth animations and transitions to HeroUI v3 components
+---
+
+## Overview
+
+HeroUI v3 components are designed to work seamlessly with any animation approach:
+
+- **CSS Transitions** - Simple state-based animations
+- **CSS Animations** - Complex keyframe animations  
+- **JavaScript Libraries** - Framer Motion, React Spring, etc.
+- **Web Animations API** - Native browser animations
+
+## CSS Transitions
+
+### Basic Transitions
+
+Add smooth transitions to component state changes:
+
+```css
+.button {
+  background: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  
+  /* Smooth transitions */
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+```
+
+```tsx
+import { Button } from '@heroui/react';
+
+function AnimatedButton() {
+  return (
+    <Button className="button">
+      Hover me!
+    </Button>
+  );
+}
+```
+
+### Focus Animations
+
+Animate focus indicators for better accessibility:
+
+```css
+.button {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:focus-visible {
+  outline-color: #3b82f6;
+  outline-offset: 4px;
+}
+```
+
+### Loading States
+
+Animate loading states with CSS:
+
+```css
+.button-loading {
+  position: relative;
+  color: transparent;
+}
+
+.button-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+```
+
+```tsx
+import { Button } from '@heroui/react';
+import { useState } from 'react';
+
+function LoadingButton() {
+  const [loading, setLoading] = useState(false);
+  
+  return (
+    <Button 
+      className={`button ${loading ? 'button-loading' : ''}`}
+      onPress={() => setLoading(!loading)}
+    >
+      {loading ? '' : 'Click me'}
+    </Button>
+  );
+}
+```
+
+## CSS Keyframe Animations
+
+### Entrance Animations
+
+Create entrance animations for components:
+
+```css
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.4s ease-out;
+}
+```
+
+```tsx
+import { Alert } from '@heroui/react';
+
+function AnimatedAlert() {
+  return (
+    <Alert className="fade-in-up">
+      <Alert.Title>Success!</Alert.Title>
+      <Alert.Description>
+        Your changes have been saved.
+      </Alert.Description>
+    </Alert>
+  );
+}
+```
+
+### Pulse Animations
+
+Add attention-grabbing pulse effects:
+
+```css
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40%, 43% {
+    transform: translateY(-8px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
+
+.bounce {
+  animation: bounce 1s infinite;
+}
+```
+
+## Framer Motion Integration
+
+### Installation
+
+```bash
+npm install framer-motion
+```
+
+### Basic Motion Components
+
+Wrap HeroUI components with Framer Motion:
+
+```tsx
+import { motion } from 'framer-motion';
+import { Button } from '@heroui/react';
+
+const MotionButton = motion(Button);
+
+function AnimatedButton() {
+  return (
+    <MotionButton
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
+      Click me!
+    </MotionButton>
+  );
+}
+```
+
+### Entrance Animations
+
+Animate components when they enter the viewport:
+
+```tsx
+import { motion, useInView } from 'framer-motion';
+import { Alert } from '@heroui/react';
+import { useRef } from 'react';
+
+function EntranceAlert() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <Alert>
+        <Alert.Title>Welcome!</Alert.Title>
+        <Alert.Description>
+          This alert animates when it comes into view.
+        </Alert.Description>
+      </Alert>
+    </motion.div>
+  );
+}
+```
+
+### Layout Animations
+
+Animate layout changes with `layoutId`:
+
+```tsx
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@heroui/react';
+import { useState } from 'react';
+
+function LayoutAnimation() {
+  const [selected, setSelected] = useState(0);
+  const items = ['Option 1', 'Option 2', 'Option 3'];
+  
+  return (
+    <div className="flex gap-2">
+      {items.map((item, index) => (
+        <div key={index} className="relative">
+          <Button
+            onPress={() => setSelected(index)}
+            className="relative z-10 bg-transparent"
+          >
+            {item}
+          </Button>
+          {selected === index && (
+            <motion.div
+              layoutId="selected"
+              className="absolute inset-0 bg-blue-500 rounded-md"
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Stagger Animations
+
+Animate lists with staggered timing:
+
+```tsx
+import { motion } from 'framer-motion';
+import { Card } from '@heroui/react';
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
+function StaggeredList() {
+  const items = Array.from({ length: 6 }, (_, i) => `Item ${i + 1}`);
+  
+  return (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="grid grid-cols-2 gap-4"
+    >
+      {items.map((text, index) => (
+        <motion.div key={index} variants={item}>
+          <Card>
+            <Card.Content>
+              {text}
+            </Card.Content>
+          </Card>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
+```
+
+## React Spring Integration
+
+### Installation
+
+```bash
+npm install @react-spring/web
+```
+
+### Basic Springs
+
+Create physics-based animations:
+
+```tsx
+import { useSpring, animated } from '@react-spring/web';
+import { Button } from '@heroui/react';
+import { useState } from 'react';
+
+function SpringButton() {
+  const [active, setActive] = useState(false);
+  
+  const springs = useSpring({
+    scale: active ? 1.1 : 1,
+    backgroundColor: active ? '#2563eb' : '#3b82f6',
+    config: { tension: 300, friction: 10 }
+  });
+  
+  return (
+    <animated.div style={springs}>
+      <Button
+        onPressStart={() => setActive(true)}
+        onPressEnd={() => setActive(false)}
+      >
+        Spring Button
+      </Button>
+    </animated.div>
+  );
+}
+```
+
+### Gesture-Based Animations
+
+Combine with @use-gesture for interactive animations:
+
+```bash
+npm install @use-gesture/react
+```
+
+```tsx
+import { useSpring, animated } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
+import { Card } from '@heroui/react';
+
+function DraggableCard() {
+  const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
+  
+  const bind = useDrag(({ offset: [ox, oy] }) => {
+    api.start({ x: ox, y: oy });
+  });
+  
+  return (
+    <animated.div
+      {...bind()}
+      style={{
+        x,
+        y,
+        touchAction: 'none',
+        cursor: 'grab'
+      }}
+    >
+      <Card>
+        <Card.Content>
+          Drag me around!
+        </Card.Content>
+      </Card>
+    </animated.div>
+  );
+}
+```
+
+## Compound Component Animations
+
+### Modal Animations
+
+Animate modal entrance and exit:
+
+```css
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+}
+
+@keyframes overlayEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-overlay {
+  animation: overlayEnter 0.2s ease-out;
+}
+
+.modal-content {
+  animation: modalEnter 0.3s ease-out;
+}
+
+.modal-content[data-exiting="true"] {
+  animation: modalExit 0.2s ease-in;
+}
+```
+
+### Accordion Animations
+
+Animate accordion collapse/expand:
+
+```css
+.accordion-content {
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.accordion-content[data-expanded="false"] {
+  height: 0;
+}
+
+.accordion-trigger {
+  transition: all 0.2s ease-in-out;
+}
+
+.accordion-trigger[data-expanded="true"] {
+  background: #f3f4f6;
+}
+
+.accordion-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.accordion-trigger[data-expanded="true"] .accordion-icon {
+  transform: rotate(180deg);
+}
+```
+
+## Performance Considerations
+
+### Will-Change Property
+
+Optimize animations with `will-change`:
+
+```css
+.button {
+  will-change: transform, background-color;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Remove will-change when not needed */
+.button:not(:hover):not(:focus) {
+  will-change: auto;
+}
+```
+
+### GPU Acceleration
+
+Use transform and opacity for smooth animations:
+
+```css
+/* Good: GPU accelerated */
+.slide-in {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.slide-in.active {
+  transform: translateX(0);
+}
+
+/* Avoid: Layout thrashing */
+.slide-in-bad {
+  left: -100%;
+  transition: left 0.3s ease-out;
+}
+```
+
+### Reduce Motion
+
+Respect user preferences for reduced motion:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  
+  .fade-in-up {
+    animation: none;
+  }
+}
+```
+
+```tsx
+import { useReducedMotion } from 'framer-motion';
+
+function RespectfulAnimation() {
+  const shouldReduceMotion = useReducedMotion();
+  
+  return (
+    <motion.div
+      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+    >
+      Content
+    </motion.div>
+  );
+}
+```
+
+## Common Animation Patterns
+
+### Loading States
+
+```css
+@keyframes skeleton {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton 1.5s infinite linear;
+}
+```
+
+### Hover Effects
+
+```css
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+```
+
+### State Transitions
+
+```css
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.toggle[aria-checked="true"] {
+  background: #3b82f6;
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle[aria-checked="true"]::after {
+  transform: translateX(20px);
+}
+```
+
+## Next Steps
+
+- Explore [Composition](/docs/handbook/composition) patterns
+- Browse [Component](/docs/components) examples
+- Learn about [Styling](/docs/handbook/styling) approaches

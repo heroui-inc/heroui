@@ -4,7 +4,8 @@
     color-scheme: light;
 
     /* Base Colors */
-    --background: oklch(100% 0 0);
+    /* --background: oklch(100% 0 0); */
+    --background: oklch(0.9821 0 0);
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
 
@@ -18,7 +19,7 @@
 
     --scrollbar: var(--color-neutral-300);
 
-    --default: var(--color-neutral-50);
+    --default: var(--color-white);
     --default-foreground: var(--color-neutral-600);
     --default-hover: var(--color-neutral-100);
 
@@ -42,7 +43,7 @@
     --danger-hover: oklch(0.53 0.2 29.94);
 
     /* Misc Colors */
-    --border: oklch(0 0 0 / 15%);
+    --border: oklch(0 0 0 / 10%);
     --focus: oklch(0% 0 0 / 20%);
     --link: var(--foreground);
 

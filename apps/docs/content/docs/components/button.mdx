@@ -1,0 +1,356 @@
+---
+title: Button
+description: A clickable button component with multiple variants and states
+---
+
+## Installation
+
+```bash
+npm install @heroui/react tailwindcss
+```
+
+Note: HeroUI v3 requires Tailwind CSS v4. See the [Quick Start](/docs/overview/quick-start) guide for setup instructions.
+
+## Import
+
+```tsx
+import { Button } from '@heroui/react';
+```
+
+## Usage
+
+### Basic Button
+
+<ComponentPreview>
+  <ButtonBasic />
+  
+```tsx
+import { Button } from '@heroui/react';
+
+function BasicExample() {
+  return (
+    <Button onPress={() => console.log('Button pressed')}>
+      Click me
+    </Button>
+  );
+}
+```
+</ComponentPreview>
+
+### Variants
+
+Buttons come in multiple variants to convey different meanings and importance levels.
+
+<ComponentPreview>
+  <ButtonVariants />
+  
+```tsx
+<div className="flex gap-3">
+  <Button>Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="tertiary">Tertiary</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="danger">Danger</Button>
+</div>
+```
+</ComponentPreview>
+
+### With Icons
+
+Add icons before or after the button text to provide visual context.
+
+<ComponentPreview>
+  <ButtonWithIcons />
+  
+```tsx
+<div className="flex gap-3">
+  <Button>
+    <Icon icon="gravity-ui:globe" />
+    Search
+  </Button>
+  <Button variant="secondary">
+    <Icon icon="gravity-ui:plus" />
+    Add Member
+  </Button>
+  <Button variant="tertiary">
+    <Icon icon="gravity-ui:envelope" />
+    Email
+  </Button>
+  <Button variant="danger">
+    <Icon icon="gravity-ui:trash-bin" />
+    Delete
+  </Button>
+</div>
+```
+</ComponentPreview>
+
+### Icon Only
+
+For compact interfaces, use icon-only buttons.
+
+<ComponentPreview>
+  <ButtonIconOnly />
+  
+```tsx
+<div className="flex gap-3">
+  <Button isIconOnly variant="tertiary">
+    <Icon icon="gravity-ui:ellipsis" />
+  </Button>
+  <Button isIconOnly variant="secondary">
+    <Icon icon="gravity-ui:gear" />
+  </Button>
+  <Button isIconOnly variant="danger">
+    <Icon icon="gravity-ui:trash-bin" />
+  </Button>
+</div>
+```
+</ComponentPreview>
+
+### Loading State
+
+Show loading state with the `isPending` prop and render different content based on the state.
+
+<ComponentPreview>
+  <ButtonLoading />
+  
+```tsx
+import { Button, Spinner } from '@heroui/react';
+
+function LoadingButton() {
+  const [isLoading, setLoading] = useState(false);
+
+  const handlePress = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+
+  return (
+    <Button isPending={isLoading} onPress={handlePress}>
+      {({ isPending }) => (
+        <>
+          {isPending ? <Spinner /> : <Icon icon="gravity-ui:paperclip" />}
+          {isPending ? "Uploading..." : "Upload File"}
+        </>
+      )}
+    </Button>
+  );
+}
+```
+</ComponentPreview>
+
+### Sizes
+
+Buttons are available in three sizes: small, medium (default), and large.
+
+<ComponentPreview>
+  <ButtonSizes />
+  
+```tsx
+<div className="flex items-center gap-3">
+  <Button size="sm">Small</Button>
+  <Button size="md">Medium</Button>
+  <Button size="lg">Large</Button>
+</div>
+```
+</ComponentPreview>
+
+### Disabled State
+
+Disable buttons to prevent interaction.
+
+<ComponentPreview>
+  <ButtonDisabled />
+  
+```tsx
+<div className="flex gap-3">
+  <Button isDisabled>Disabled</Button>
+  <Button variant="secondary" isDisabled>Disabled Secondary</Button>
+</div>
+```
+</ComponentPreview>
+
+### Social Buttons
+
+Create social login buttons with brand icons.
+
+<ComponentPreview>
+  <ButtonSocial />
+  
+```tsx
+<div className="flex w-full max-w-xs flex-col gap-3">
+  <Button variant="tertiary">
+    <Icon icon="devicon:google" />
+    Sign in with Google
+  </Button>
+  <Button variant="tertiary">
+    <Icon icon="mdi:github" />
+    Sign in with GitHub
+  </Button>
+  <Button variant="tertiary">
+    <Icon icon="ion:logo-apple" />
+    Sign in with Apple
+  </Button>
+</div>
+```
+</ComponentPreview>
+
+## Accessibility
+
+### Keyboard Navigation
+
+- **Space** or **Enter** - Activates the button
+- **Tab** - Moves focus to the next focusable element
+- **Shift + Tab** - Moves focus to the previous focusable element
+
+### Screen Reader Support
+
+- Button content is announced to screen readers
+- Loading state is properly communicated
+- Disabled state prevents interaction and is announced
+- ARIA attributes are automatically managed
+
+### Focus Management
+
+- Clear focus indicators for keyboard navigation
+- Focus is maintained appropriately during state changes
+- Focus is managed when buttons are dynamically added/removed
+
+## API Reference
+
+### Button Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | `'primary'` | Visual style variant |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the button |
+| `isDisabled` | `boolean` | `false` | Whether the button is disabled |
+| `isPending` | `boolean` | `false` | Whether the button is in a loading state |
+| `isIconOnly` | `boolean` | `false` | Whether the button contains only an icon |
+| `onPress` | `(e: PressEvent) => void` | - | Handler called when the button is pressed |
+| `children` | `React.ReactNode \| (values: ButtonRenderProps) => React.ReactNode` | - | Button content or render prop |
+
+### ButtonRenderProps
+
+When using the render prop pattern, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isPending` | `boolean` | Whether the button is in a loading state |
+| `isPressed` | `boolean` | Whether the button is currently pressed |
+| `isHovered` | `boolean` | Whether the button is hovered |
+| `isFocused` | `boolean` | Whether the button is focused |
+| `isFocusVisible` | `boolean` | Whether the button should show focus indicator |
+| `isDisabled` | `boolean` | Whether the button is disabled |
+
+## Styling
+
+### CSS Classes
+
+The Button component uses these CSS classes:
+
+- `.button` - Base button styles
+- `.button--{variant}` - Variant-specific styles
+- `.button--{size}` - Size-specific styles
+- `.button--icon-only` - Icon-only button styles
+- `.button--pending` - Loading state styles
+- `.button--disabled` - Disabled state styles
+
+### Custom Styling
+
+```tsx
+import { Button } from '@heroui/react';
+
+function CustomButton() {
+  return (
+    <Button className="bg-purple-500 text-white hover:bg-purple-600">
+      Custom Button
+    </Button>
+  );
+}
+```
+
+### CSS Variables
+
+Customize button appearance using CSS variables:
+
+```css
+.my-button {
+  --button-bg: #3b82f6;
+  --button-text: white;
+  --button-hover-bg: #2563eb;
+  --button-focus-ring: #3b82f6;
+}
+```
+
+## Examples
+
+### Form Submit Button
+
+```tsx
+import { Button, Spinner } from '@heroui/react';
+import { useForm } from 'react-hook-form';
+
+function FormExample() {
+  const { handleSubmit, formState: { isSubmitting } } = useForm();
+
+  const onSubmit = async (data) => {
+    // Submit form data
+    await submitForm(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Form fields */}
+      <Button 
+        type="submit" 
+        isPending={isSubmitting}
+        className="w-full"
+      >
+        {isSubmitting ? (
+          <>
+            <Spinner />
+            Submitting...
+          </>
+        ) : (
+          'Submit Form'
+        )}
+      </Button>
+    </form>
+  );
+}
+```
+
+### Button Group
+
+```tsx
+function ButtonGroup() {
+  const [selected, setSelected] = useState('day');
+
+  const options = [
+    { value: 'day', label: 'Day' },
+    { value: 'week', label: 'Week' },
+    { value: 'month', label: 'Month' },
+    { value: 'year', label: 'Year' }
+  ];
+
+  return (
+    <div className="inline-flex rounded-md shadow-sm" role="group">
+      {options.map((option, index) => (
+        <Button
+          key={option.value}
+          variant={selected === option.value ? 'primary' : 'tertiary'}
+          onPress={() => setSelected(option.value)}
+          className={`
+            ${index === 0 ? 'rounded-r-none' : ''}
+            ${index === options.length - 1 ? 'rounded-l-none' : ''}
+            ${index > 0 && index < options.length - 1 ? 'rounded-none' : ''}
+            ${index > 0 ? '-ml-px' : ''}
+          `}
+        >
+          {option.label}
+        </Button>
+      ))}
+    </div>
+  );
+}
+```

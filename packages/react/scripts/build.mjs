@@ -65,11 +65,12 @@ async function logComponentCount() {
 async function addUseClientDirective() {
   console.log('🔧 Adding "use client" directives...');
 
-  // Find all JS files in the components directory
-  const componentFiles = [];
+  // Find all JS files in the components and hooks directories
+  const clientFiles = [];
   const componentsDir = path.join(distDir, "components");
+  const hooksDir = path.join(distDir, "hooks");
 
-  async function findComponentFiles(dir) {
+  async function findClientFiles(dir) {
     const items = await fs.readdir(dir);
 
     for (const item of items) {
@@ -77,19 +78,23 @@ async function addUseClientDirective() {
       const stat = await fs.stat(fullPath);
 
       if (stat.isDirectory()) {
-        await findComponentFiles(fullPath);
+        await findClientFiles(fullPath);
       } else if (item.endsWith(".js")) {
-        componentFiles.push(fullPath);
+        clientFiles.push(fullPath);
       }
     }
   }
 
   if (await fs.pathExists(componentsDir)) {
-    await findComponentFiles(componentsDir);
+    await findClientFiles(componentsDir);
   }
 
-  // Add "use client" to the beginning of each component file
-  for (const file of componentFiles) {
+  if (await fs.pathExists(hooksDir)) {
+    await findClientFiles(hooksDir);
+  }
+
+  // Add "use client" to the beginning of each file
+  for (const file of clientFiles) {
     const content = await fs.readFile(file, "utf-8");
 
     if (!content.startsWith('"use client"') && !content.startsWith("'use client'")) {
@@ -97,7 +102,7 @@ async function addUseClientDirective() {
     }
   }
 
-  console.log(`✅ Added "use client" to ${componentFiles.length} component files`);
+  console.log(`✅ Added "use client" to ${clientFiles.length} component files`);
 }
 
 async function measureBundleSizes() {

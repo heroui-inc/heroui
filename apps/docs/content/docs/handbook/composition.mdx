@@ -1,0 +1,730 @@
+---
+title: Composition
+description: Master the compound component pattern and advanced composition techniques
+---
+
+## Compound Component Pattern
+
+### What is the Compound Component Pattern?
+
+The compound component pattern breaks complex components into smaller, composable parts that work together. Think of it like HTML elements - a `<select>` contains `<option>` elements, each with a specific role.
+
+```tsx
+// Traditional monolithic approach
+<Select
+  options={[
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' }
+  ]}
+  placeholder="Select fruit"
+  errorMessage="Required"
+/>
+
+// Compound component approach
+<Select>
+  <Select.Label>Choose a fruit</Select.Label>
+  <Select.Trigger>
+    <Select.Value placeholder="Select fruit" />
+    <Select.Icon />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Item value="apple">Apple</Select.Item>
+    <Select.Item value="banana">Banana</Select.Item>
+  </Select.Content>
+  <Select.ErrorMessage>Required</Select.ErrorMessage>
+</Select>
+```
+
+### Benefits
+
+- **Flexibility** - Arrange components exactly how you need
+- **Customization** - Style and modify individual pieces
+- **Composability** - Mix and match parts from different components
+- **Maintainability** - Cleaner, more focused APIs
+
+## Component Anatomy
+
+### Understanding Component Parts
+
+Each HeroUI component is broken down into logical parts:
+
+```tsx
+import { Alert } from '@heroui/react';
+
+function AlertExample() {
+  return (
+    <Alert>              {/* Root container */}
+      <Alert.Icon />     {/* Icon part */}
+      <Alert.Title />    {/* Title part */}
+      <Alert.Description /> {/* Description part */}
+      <Alert.Action />   {/* Action part */}
+      <Alert.Close />    {/* Close part */}
+    </Alert>
+  );
+}
+```
+
+### Common Parts Across Components
+
+Most components share similar part naming:
+
+- **Root** - Main container (sometimes implicit)
+- **Trigger** - Clickable element that opens/activates
+- **Content** - Main content area
+- **Item** - Individual items in lists
+- **Icon** - Icon elements
+- **Label** - Text labels
+- **Description** - Descriptive text
+
+## Basic Composition
+
+### Simple Composition
+
+Combine basic parts to create functional components:
+
+```tsx
+import { Accordion } from '@heroui/react';
+
+function SimpleAccordion() {
+  return (
+    <Accordion>
+      <Accordion.Item id="item-1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            What is HeroUI?
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
+            HeroUI is a modern React UI library built with Tailwind CSS v4.
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+```
+
+### Conditional Composition
+
+Show/hide parts based on state:
+
+```tsx
+import { Alert } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+function ConditionalAlert({ 
+  title, 
+  description, 
+  dismissible = false,
+  onDismiss 
+}) {
+  return (
+    <Alert>
+      <Alert.Icon>
+        <Icon icon="gravity-ui:triangle-exclamation" />
+      </Alert.Icon>
+      <Alert.Content>
+        <Alert.Title>{title}</Alert.Title>
+        {description && (
+          <Alert.Description>{description}</Alert.Description>
+        )}
+      </Alert.Content>
+      {dismissible && (
+        <Alert.Close onPress={onDismiss} />
+      )}
+    </Alert>
+  );
+}
+```
+
+## Advanced Composition
+
+### Nested Composition
+
+Create complex hierarchies by nesting components:
+
+```tsx
+import { Alert, Accordion } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+function FAQSection({ faqs }) {
+  return (
+    <div className="space-y-4">
+      <Alert>
+        <Alert.Icon>
+          <Icon icon="gravity-ui:circle-info" />
+        </Alert.Icon>
+        <Alert.Content>
+          <Alert.Title>Frequently Asked Questions</Alert.Title>
+          <Alert.Description>
+            Find answers to common questions below.
+          </Alert.Description>
+        </Alert.Content>
+      </Alert>
+      
+      <Accordion>
+        {faqs.map((faq, index) => (
+          <Accordion.Item key={index} id={`faq-${index}`}>
+            <Accordion.Heading>
+              <Accordion.Trigger>
+                {faq.question}
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>{faq.answer}</Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
+        ))}
+      </Accordion>
+    </div>
+  );
+}
+```
+
+### Cross-Component Composition
+
+Combine parts from different components:
+
+```tsx
+import { Alert, Button } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+function SuccessNotification({ title, message, action }) {
+  return (
+    <Alert variant="success">
+      <Alert.Icon>
+        <Icon icon="gravity-ui:check" />
+      </Alert.Icon>
+      <Alert.Content>
+        <Alert.Title>{title}</Alert.Title>
+        <Alert.Description>{message}</Alert.Description>
+      </Alert.Content>
+      {action && (
+        <Alert.Action onPress={action.onPress}>
+          {action.label}
+          <Icon icon="gravity-ui:arrow-right" className="w-4 h-4 ml-2" />
+        </Alert.Action>
+      )}
+    </Alert>
+  );
+}
+```
+
+## Render Props Pattern
+
+### Flexible Content Rendering
+
+Use render props for dynamic content:
+
+```tsx
+import { Select } from '@heroui/react';
+
+interface Option {
+  value: string;
+  label: string;
+  description?: string;
+  icon?: React.ReactNode;
+}
+
+function FlexibleSelect({ 
+  options, 
+  renderOption 
+}: {
+  options: Option[];
+  renderOption?: (option: Option) => React.ReactNode;
+}) {
+  return (
+    <Select>
+      <Select.Trigger>
+        <Select.Value placeholder="Choose option" />
+        <Select.Icon />
+      </Select.Trigger>
+      <Select.Content>
+        {options.map(option => (
+          <Select.Item key={option.value} value={option.value}>
+            {renderOption ? renderOption(option) : option.label}
+          </Select.Item>
+        ))}
+      </Select.Content>
+    </Select>
+  );
+}
+
+// Usage with custom rendering
+<FlexibleSelect
+  options={options}
+  renderOption={(option) => (
+    <div className="flex items-center gap-2">
+      {option.icon}
+      <div>
+        <div className="font-medium">{option.label}</div>
+        {option.description && (
+          <div className="text-sm text-gray-500">{option.description}</div>
+        )}
+      </div>
+    </div>
+  )}
+/>
+```
+
+## Polymorphic Components
+
+### Styling Components as Other Components
+
+Use component style variants to make one component look like another:
+
+```tsx
+import { Link, buttonVariants } from '@heroui/react';
+import { LinkIcon } from '../icons';
+
+// Link styled as button using buttonVariants
+function PolymorphicExample() {
+  return (
+    <div className="flex items-center gap-4">
+      {/* Regular link */}
+      <Link href="#">
+        Regular Link
+      </Link>
+      
+      {/* Link styled as button */}
+      <Link 
+        href="https://heroui.com"
+        className={buttonVariants({ size: "md", variant: "tertiary", className: "relative h-8 pr-5" })}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        HeroUI <LinkIcon className="absolute right-3 top-1 h-2 w-2 text-inherit" />
+      </Link>
+      
+      {/* Link with primary button style */}
+      <Link 
+        href="/dashboard"
+        className={buttonVariants({ variant: "primary" })}
+      >
+        Go to Dashboard
+      </Link>
+    </div>
+  );
+}
+```
+
+### The `asChild` Pattern
+
+Some HeroUI components support the `asChild` prop to change the underlying element:
+
+```tsx
+import { Alert } from '@heroui/react';
+
+// Alert component with asChild pattern
+function AsChildExample() {
+  return (
+    <div className="space-y-4">
+      {/* Regular Alert */}
+      <Alert>
+        <Alert.Icon />
+        <Alert.Title>Default Alert</Alert.Title>
+      </Alert>
+      
+      {/* Alert rendered as section */}
+      <Alert asChild>
+        <section className="custom-section">
+          <Alert.Icon />
+          <Alert.Title>Alert as Section</Alert.Title>
+          <Alert.Description>
+            This alert is rendered as a section element
+          </Alert.Description>
+        </section>
+      </Alert>
+      
+      {/* Alert Action with custom element */}
+      <Alert>
+        <Alert.Title>Alert with Custom Action</Alert.Title>
+        <Alert.Action asChild>
+          <a href="/learn-more">Learn More</a>
+        </Alert.Action>
+      </Alert>
+    </div>
+  );
+}
+```
+
+## Context-Based Composition
+
+### Sharing State Between Parts
+
+HeroUI components use React Context internally to share styles and state between parts. Here's how the Accordion component works:
+
+```tsx
+import { Accordion } from '@heroui/react';
+
+// The Accordion component uses context internally to:
+// 1. Share variant styles across all parts
+// 2. Manage expanded/collapsed state
+// 3. Handle animations
+
+function AccordionExample() {
+  return (
+    <Accordion defaultExpandedKeys={["item-1"]}>
+      <Accordion.Item id="item-1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            {/* Trigger receives styles and click handlers from context */}
+            Section 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          {/* Panel receives animation styles from context */}
+          <Accordion.Body>
+            Content for section 1
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      
+      <Accordion.Item id="item-2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Section 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
+            Content for section 2
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+
+// All parts automatically receive consistent styling
+// and behavior through the internal context
+```
+
+## Component Variants
+
+### Variant-Based Composition
+
+Create component variants using composition:
+
+```tsx
+import { Alert } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+const alertVariants = {
+  success: {
+    icon: 'gravity-ui:check',
+    className: 'border-green-200 bg-green-50 text-green-800'
+  },
+  warning: {
+    icon: 'gravity-ui:triangle-exclamation',
+    className: 'border-yellow-200 bg-yellow-50 text-yellow-800'
+  },
+  error: {
+    icon: 'gravity-ui:xmark',
+    className: 'border-red-200 bg-red-50 text-red-800'
+  },
+  info: {
+    icon: 'gravity-ui:circle-info',
+    className: 'border-blue-200 bg-blue-50 text-blue-800'
+  }
+};
+
+function AlertVariant({ 
+  variant = 'info', 
+  title, 
+  description, 
+  ...props 
+}) {
+  const { icon, className } = alertVariants[variant];
+  
+  return (
+    <Alert className={className} {...props}>
+      <Alert.Icon>
+        <Icon icon={icon} />
+      </Alert.Icon>
+      <Alert.Content>
+        <Alert.Title>{title}</Alert.Title>
+        {description && (
+          <Alert.Description>{description}</Alert.Description>
+        )}
+      </Alert.Content>
+    </Alert>
+  );
+}
+```
+
+## Layout Composition
+
+### Flexible Layouts
+
+Create reusable layout patterns:
+
+```tsx
+import { Card } from '@heroui/react';
+
+function FlexCard({ 
+  direction = 'vertical',
+  align = 'start',
+  gap = 'md',
+  children 
+}) {
+  const flexClasses = {
+    direction: {
+      vertical: 'flex-col',
+      horizontal: 'flex-row'
+    },
+    align: {
+      start: 'items-start',
+      center: 'items-center',
+      end: 'items-end'
+    },
+    gap: {
+      sm: 'gap-2',
+      md: 'gap-4',
+      lg: 'gap-6'
+    }
+  };
+  
+  return (
+    <Card>
+      <Card.Content 
+        className={`flex ${flexClasses.direction[direction]} ${flexClasses.align[align]} ${flexClasses.gap[gap]}`}
+      >
+        {children}
+      </Card.Content>
+    </Card>
+  );
+}
+
+// Usage
+<FlexCard direction="horizontal" align="center" gap="lg">
+  <Avatar>
+    <Avatar.Image src="/avatars/john.jpg" alt="John Doe" />
+    <Avatar.Fallback>JD</Avatar.Fallback>
+  </Avatar>
+  <div>
+    <h3>John Doe</h3>
+    <p>Software Engineer</p>
+  </div>
+  <Button>Contact</Button>
+</FlexCard>
+```
+
+### Grid Layouts
+
+```tsx
+import { Card, Chip } from '@heroui/react';
+
+function FeatureGrid({ features }) {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Features</Card.Title>
+        <Card.Description>
+          Everything you need to build modern web applications
+        </Card.Description>
+      </Card.Header>
+      <Card.Content>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature, index) => (
+            <div key={index} className="space-y-2">
+              <div className="flex items-center gap-2">
+                {feature.icon}
+                <h4 className="font-medium">{feature.title}</h4>
+                {feature.isNew && <Chip size="sm">New</Chip>}
+              </div>
+              <p className="text-sm text-gray-600">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Card.Content>
+    </Card>
+  );
+}
+```
+
+## Best Practices
+
+### 1. Keep Parts Focused
+
+Each part should have a single responsibility:
+
+```tsx
+// Good: Focused parts
+<Card>
+  <Card.Header>
+    <Card.Title>Title</Card.Title>
+    <Card.Description>Description</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    Main content
+  </Card.Content>
+</Card>
+
+// Avoid: Mixing concerns
+<Card>
+  <Card.Header>
+    <Card.Title>Title</Card.Title>
+    <Button>Action</Button> {/* Should be in footer or content */}
+  </Card.Header>
+</Card>
+```
+
+### 2. Provide Sensible Defaults
+
+Make common use cases simple:
+
+```tsx
+import { Alert } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+// Simple case - minimal API
+<Alert variant="info">
+  <Alert.Icon />
+  <Alert.Content>
+    <Alert.Title>Simple info message</Alert.Title>
+  </Alert.Content>
+</Alert>
+
+// Complex case - full control with compound parts
+<Alert variant="info">
+  <Alert.Icon>
+    <Icon icon="gravity-ui:circle-info" />
+  </Alert.Icon>
+  <Alert.Content>
+    <Alert.Title>Information</Alert.Title>
+    <Alert.Description>
+      This is a detailed description with more context.
+    </Alert.Description>
+  </Alert.Content>
+  <Alert.Action>
+    View Details
+  </Alert.Action>
+  <Alert.Close />
+</Alert>
+```
+
+### 3. Use Consistent Naming
+
+Follow naming conventions across components:
+
+- `Root` - Main container
+- `Trigger` - Interactive element
+- `Content` - Main content area
+- `Item` - List items
+- `Header`, `Body`, `Footer` - Layout sections
+
+### 4. Support Both Patterns
+
+Allow both compound and traditional usage:
+
+```tsx
+// Compound pattern
+<Alert>
+  <Alert.Icon>
+    <Icon icon="gravity-ui:check" />
+  </Alert.Icon>
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+    <Alert.Description>Task completed</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+## Real-World Examples
+
+### Form with Multiple Components
+
+Complex composition combining various form components:
+
+```tsx
+import { Card, TextField, Button, Alert, Checkbox, Label } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+function ContactForm() {
+  const [submitted, setSubmitted] = React.useState(false);
+  
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Contact Us</Card.Title>
+        <Card.Description>
+          Fill out the form below and we'll get back to you soon.
+        </Card.Description>
+      </Card.Header>
+      <Card.Content>
+        {submitted && (
+          <Alert variant="success" className="mb-4">
+            <Alert.Icon>
+              <Icon icon="gravity-ui:check" />
+            </Alert.Icon>
+            <Alert.Content>
+              <Alert.Title>Message sent successfully!</Alert.Title>
+              <Alert.Description>
+                We'll respond within 24 hours.
+              </Alert.Description>
+            </Alert.Content>
+          </Alert>
+        )}
+        
+        <form className="space-y-4">
+          <TextField>
+            <TextField.Label>Name</TextField.Label>
+            <TextField.Input placeholder="John Doe" />
+          </TextField>
+          
+          <TextField>
+            <TextField.Label>Email</TextField.Label>
+            <TextField.Input type="email" placeholder="john@example.com" />
+            <TextField.Description>
+              We'll use this to contact you
+            </TextField.Description>
+          </TextField>
+          
+          <TextField>
+            <TextField.Label>Message</TextField.Label>
+            <TextField.TextArea 
+              placeholder="Tell us what you need help with..." 
+              rows={4}
+            />
+          </TextField>
+          
+          <div className="flex items-center gap-2">
+            <Checkbox id="newsletter" />
+            <Label htmlFor="newsletter">
+              Subscribe to our newsletter
+            </Label>
+          </div>
+        </form>
+      </Card.Content>
+      <Card.Footer>
+        <Button 
+          variant="outline"
+          onPress={() => setSubmitted(false)}
+        >
+          Cancel
+        </Button>
+        <Button 
+          variant="primary"
+          onPress={() => setSubmitted(true)}
+        >
+          Send Message
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+}
+```
+
+## Next Steps
+
+- Explore [Styling](/docs/handbook/styling) techniques
+- Learn about [Animation](/docs/handbook/animation) 
+- Browse [Component](/docs/components) documentation

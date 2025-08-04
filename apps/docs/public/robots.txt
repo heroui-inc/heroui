@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# LLM-specific endpoints
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Sitemap
+Sitemap: https://heroui.dev/sitemap.xml

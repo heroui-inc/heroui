@@ -1,3 +1,5 @@
+"use client";
+
 import type {RefObject} from "react";
 
 import {useEffect, useState} from "react";

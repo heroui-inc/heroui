@@ -1,13 +1,67 @@
 ---
-title: Hello World
-description: Your first document
+title: HeroUI v3
+description: A modern React UI library built with Tailwind CSS v4
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+## Features
 
-## What is Next?
+- 🎨 **Styled by Default** - Beautiful components with Tailwind CSS v4
+- ♿ **Accessible by Default** - Built on React Aria Components
+- 🧩 **Compound Pattern** - Flexible composition like Radix UI
+- 🎯 **TypeScript First** - Full type safety
+- 🌊 **Tailwind CSS v4 Required** - Built on the latest CSS technology
+- 📦 **Tree-shakeable** - Import only what you need
+
+## Installation
+
+```bash
+npm install @heroui/react tailwindcss
+```
+
+HeroUI v3 is built on Tailwind CSS v4 - both packages are required.
+
+## Quick Links
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+  <Card title="Quick Start" href="/docs/overview/quick-start" />
+  <Card title="Components" href="/docs/components" />
+  <Card title="Styling Guide" href="/docs/handbook/styling" />
+  <Card title="About" href="/docs/overview/about" />
 </Cards>
+
+## Philosophy
+
+HeroUI v3 embraces the compound component pattern, giving you complete control over markup structure while providing robust accessibility features through React Aria Components. Each component is broken down into composable parts that work together seamlessly.
+
+```tsx
+// HeroUI v2 - Monolithic approach
+import {Accordion, AccordionItem} from "@heroui/react";
+
+<Accordion>
+  <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
+    Lorem ipsum dolor sit amet...
+  </AccordionItem>
+  <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
+    Lorem ipsum dolor sit amet...
+  </AccordionItem>
+</Accordion>
+
+// HeroUI v3 - Compound component approach
+import { Accordion } from "@heroui/react";
+
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Heading>
+      <Accordion.Trigger>
+        Accordion 1
+        <Accordion.Indicator />
+      </Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>
+        Lorem ipsum dolor sit amet...
+      </Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
