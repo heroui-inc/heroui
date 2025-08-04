@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable react-refresh/only-export-components */
 // @ts-nocheck
-// @eslint-disable
 
 import type {MDXComponents} from "mdx/types";
 
