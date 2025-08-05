@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium transition-[transform,background-color] duration-150 md:h-9;
+  @apply relative isolate inline-flex h-10 origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium transition-[transform,background-color] duration-150 ease-out md:h-9;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -38,6 +38,11 @@
   & svg {
     @apply size-4;
   }
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.98);
+  }
 }
 
 .button--md {
@@ -46,6 +51,11 @@
 
 .button--lg {
   @apply h-11 md:h-10;
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.96);
+  }
 }
 
 /* Color variants */
@@ -60,6 +70,7 @@
   &:active,
   &[data-pressed="true"] {
     @apply bg-accent-hover;
+    transform: scale(0.97);
   }
 }
 
@@ -74,6 +85,7 @@
   &:active,
   &[data-pressed="true"] {
     @apply bg-accent-soft-hover;
+    transform: scale(0.97);
   }
 }
 
@@ -88,6 +100,7 @@
   &:active,
   &[data-pressed="true"] {
     @apply bg-default-hover;
+    transform: scale(0.97);
   }
 }
 
@@ -102,6 +115,7 @@
   &:active,
   &[data-pressed="true"] {
     @apply bg-accent-soft;
+    transform: scale(0.97);
   }
 }
 
@@ -116,15 +130,13 @@
   &:active,
   &[data-pressed="true"] {
     @apply bg-danger-hover;
+    transform: scale(0.97);
   }
 }
 
 /* Icon-only modifier */
 .button--icon-only {
-  @apply p-0;
-
-  /* Default width - matches removed button--md variant */
-  @apply w-10 md:w-9;
+  @apply w-10 p-0 md:w-9;
 }
 
 .button--icon-only.button--sm {

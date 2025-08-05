@@ -110,6 +110,41 @@ const TemplateWithLoadingState = ({size, variant}: ButtonProps) => {
   );
 };
 
+const SizesTemplate = () => (
+  <div className="flex flex-col gap-6">
+    <div className="flex items-center gap-3">
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+    </div>
+    <div className="flex items-center gap-3">
+      <Button size="sm" variant="secondary">
+        <Icon icon="gravity-ui:plus" />
+        Small
+      </Button>
+      <Button size="md" variant="secondary">
+        <Icon icon="gravity-ui:plus" />
+        Medium
+      </Button>
+      <Button size="lg" variant="secondary">
+        <Icon icon="gravity-ui:plus" />
+        Large
+      </Button>
+    </div>
+    <div className="flex items-center gap-3">
+      <Button isIconOnly size="sm" variant="tertiary">
+        <Icon icon="gravity-ui:ellipsis" />
+      </Button>
+      <Button isIconOnly size="md" variant="tertiary">
+        <Icon icon="gravity-ui:ellipsis" />
+      </Button>
+      <Button isIconOnly size="lg" variant="tertiary">
+        <Icon icon="gravity-ui:ellipsis" />
+      </Button>
+    </div>
+  </div>
+);
+
 const TemplateWithSocialButton = ({size, variant}: ButtonProps) => (
   <div className="flex w-full max-w-xs flex-col gap-3">
     <Button size={size} variant={variant ?? "tertiary"}>
@@ -134,6 +169,10 @@ const TemplateWithSocialButton = ({size, variant}: ButtonProps) => (
 export const Default = {
   args: defaultArgs,
   render: Template,
+};
+
+export const Sizes = {
+  render: SizesTemplate,
 };
 
 export const WithIcon = {
