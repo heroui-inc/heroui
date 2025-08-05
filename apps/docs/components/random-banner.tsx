@@ -19,7 +19,7 @@ export const RandomBanner = () => {
   }, []);
 
   if (showChatBanner === null) {
-    return <div className="h-[47px] sm:h-[46px] border-b border-divider" />;
+    return <div className="h-[47px] border-b border-divider" />;
   }
 
   return showChatBanner ? <HeroUIChatBanner /> : <ProBanner />;
