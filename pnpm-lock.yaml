@@ -2820,9 +2820,6 @@ importers:
       '@heroui/system':
         specifier: workspace:*
         version: link:../../core/system
-      '@heroui/tabs':
-        specifier: workspace:*
-        version: 'link:'
       '@heroui/test-utils':
         specifier: workspace:*
         version: link:../../utilities/test-utils
