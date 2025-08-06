@@ -365,7 +365,6 @@ properties to customize the popover, listbox and input components.
 
 - **base**: The main wrapper of the autocomplete. This wraps the input and popover components.
 - **listboxWrapper**: The wrapper of the listbox. This wraps the listbox component, this slot is used on top of the scroll shadow component.
-- **listbox**: The listbox component. This is the component that wraps the autocomplete items.
 - **popoverContent**: The popover content slot. Use this to modify the popover content styles.
 - **endContentWrapper**: The wrapper of the end content. This wraps the clear button and selector button.
 - **clearButton**: The clear button slot.
@@ -726,12 +725,6 @@ properties to customize the popover, listbox and input components.
       type: "boolean",
       description: "Whether the clear button should be shown.",
       default: "true"
-    },
-    {
-      attribute: "disableClearable",
-      type: "boolean",
-      description: "Whether the clear button should be hidden. (Deprecated) Use isClearable instead.",
-      default: "false"
     },
     {
       attribute: "disableAnimation",
