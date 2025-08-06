@@ -61,6 +61,8 @@
     "@heroui/input": "workspace:*",
     "@heroui/test-utils": "workspace:*",
     "@heroui/button": "workspace:*",
+    "@heroui/modal": "workspace:*",
+    "@heroui/tabs": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "clean-package": "2.2.0",
     "react": "18.3.0",

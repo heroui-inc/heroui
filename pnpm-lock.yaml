@@ -2811,12 +2811,18 @@ importers:
       '@heroui/input':
         specifier: workspace:*
         version: link:../input
+      '@heroui/modal':
+        specifier: workspace:*
+        version: link:../modal
       '@heroui/shared-icons':
         specifier: workspace:*
         version: link:../../utilities/shared-icons
       '@heroui/system':
         specifier: workspace:*
         version: link:../../core/system
+      '@heroui/tabs':
+        specifier: workspace:*
+        version: 'link:'
       '@heroui/test-utils':
         specifier: workspace:*
         version: link:../../utilities/test-utils

@@ -21,6 +21,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     Component,
     values,
     state,
+    domRef,
     destroyInactiveTabPanel,
     getBaseProps,
     getTabListProps,
@@ -32,7 +33,9 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
   const layoutId = useId();
 
-  const layoutGroupEnabled = !props.disableAnimation && !props.disableCursorAnimation;
+  const isInModal = domRef?.current?.closest('[aria-modal="true"]') !== null;
+
+  const layoutGroupEnabled = !props.disableAnimation && !props.disableCursorAnimation && !isInModal;
 
   const tabsProps = {
     state,
