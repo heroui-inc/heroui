@@ -73,6 +73,57 @@ declare module "@react-types/shared" {
 
 <Spacer y={2} />
 
+## Inertia.js
+
+[Inertia](https://inertiajs.com) lets you build single-page apps without building an API, using classic server-side routing. Configure HeroUI to use Inertia's router for client-side navigation.
+
+#### App Setup
+
+Render HeroUIProvider at the app root and forward navigation to router.visit.
+
+```tsx
+import {createRoot} from "react-dom/client";
+import {HeroUIProvider} from "@heroui/react";
+import type {VisitOptions} from "@inertiajs/core";
+import {createInertiaApp, router} from "@inertiajs/react";
+
+declare module "@react-types/shared" {
+  interface RouterConfig {
+    routerOptions: VisitOptions;
+  }
+}
+
+void createInertiaApp({
+  title: (title) => `${title} - My App`,
+  resolve: (name) => {
+    const pages = import.meta.glob("./pages/**/*.tsx", {eager: true});
+
+    return pages[`./pages/${name}.tsx`] as any;
+  },
+  setup({App, el, props}) {
+    const root = createRoot(el);
+
+    root.render(
+      <HeroUIProvider navigate={(path, routerOptions) => router.visit(path, routerOptions)}>
+        <App {...props} />
+      </HeroUIProvider>
+    );
+  },
+});
+```
+
+#### Using routerOptions with Inertia
+
+`routerOptions` are forwarded to `router.visit` as `VisitOptions`.
+
+```tsx
+<Button href="/dashboard" routerOptions={{preserveScroll: true, replace: true}}>
+  Dashboard
+</Button>
+```
+
+<Spacer y={2} />
+
 ## Next.js
 
 #### App Router
@@ -199,7 +250,7 @@ function MyApp({Component, pageProps}: AppProps) {
 export default MyApp;
 ```
 
-When using the [basePath](https://nextjs.org/docs/app/api-reference/next-config-js/basePath) configuration option, 
+When using the [basePath](https://nextjs.org/docs/app/api-reference/next-config-js/basePath) configuration option,
 provide a `useHref` option to the router passed to Provider to prepend it to links automatically.
 
 ```tsx {8}
