@@ -1,4 +1,4 @@
-import {addToast, Button, closeToast, closeAll, ToastProvider} from "@heroui/react";
+import {addToast, Button, closeToast, closeAll} from "@heroui/react";
 import React from "react";
 
 export default function App() {
@@ -6,9 +6,7 @@ export default function App() {
 
   return (
     <>
-      <div className="fixed z-[100]">
-        <ToastProvider />
-      </div>
+      <div className="fixed z-[100]" />
       <div className="flex flex-wrap gap-2">
         <Button
           variant="flat"
