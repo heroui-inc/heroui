@@ -12,7 +12,7 @@ export const labelVariants = tv({
     },
     variant: {
       default: "text-foreground",
-      muted: "text-muted-foreground",
+      muted: "text-muted",
       destructive: "text-destructive",
     },
     required: {

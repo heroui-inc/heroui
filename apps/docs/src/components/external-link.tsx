@@ -15,7 +15,7 @@ export const ExternalLink = React.forwardRef<HTMLAnchorElement, ExternalLinkProp
       <Link
         ref={ref}
         external
-        className={`text-fd-muted-foreground hover:text-fd-accent-foreground data-[active=true]:text-fd-primary relative inline-flex items-center gap-1 p-2 text-sm transition-colors ${className}`}
+        className={`text-muted hover:text-fd-accent-foreground data-[active=true]:text-fd-primary relative inline-flex items-center gap-1 p-2 text-sm transition-colors ${className}`}
         {...props}
       >
         {children}

@@ -13,11 +13,19 @@
   /* --accent-soft: var(--color-blue-100); */
 
   /* Fumadocs UI */
+  --fd-layout-width: 1400px;
   --color-fd-background: #f9f9f9;
+  --color-fd-primary: oklch(0.14 0 0);
   --color-fd-secondary: #f9f9f9;
   --color-fd-card: #f9f9f9;
   --spacing-fd-container: 1120px;
   --color-fd-border: oklch(0 0 0 / 10%);
+  --color-fd-muted-foreground: var(--color-neutral-500);
+  --color-backdrop: rgba(255, 255, 255, 0.4);
+
+  /* Fumadocs UI Animations */
+  --animate-fd-fade-in: custom-fade-in 200ms ease-out forwards;
+  --animate-fd-fade-out: custom-fade-out 150ms ease-out forwards;
 }
 
 [data-theme="dark"],
@@ -25,8 +33,11 @@
   /* Your values */
   /* --radius: 0.5rem; */
   /* --cursor: default; */
+  --color-fd-primary: oklch(0.99 0 0);
   --color-fd-background: #1a1a1a;
   --color-fd-card: #1a1a1a;
+  --color-fd-popover: #383435;
+  --color-backdrop: rgba(0, 0, 0, 0.4);
 }
 
 /* To override HeroUI Components Styles */
@@ -36,8 +47,17 @@
 
 /* Fumadocs UI Components Styles */
 
+#nd-home-layout {
+  #nd-nav {
+    [data-theme-toggle] {
+      display: none;
+    }
+  }
+}
+
 #nd-nav {
   border: none;
+  background-color: transparent;
 
   /* Only affects the Docs/Components ul, not the search/theme toggle */
   ul:first-of-type {
@@ -54,22 +74,99 @@
   li > a {
     color: var(--muted);
   }
-}
 
-#nd-sidebar {
-  border: none;
-  --radius: 0.5rem;
-  --color-fd-border: transparent;
-  & > :last-child {
-    border-top: none;
+  [data-search-full] {
+    @apply bg-default/80 border-border shadow-xs/5 rounded-lg;
+
+    kbd {
+      @apply bg-default-hover border-border;
+    }
+  }
+
+  [aria-label="GitHub"] {
+    @apply w-0 opacity-0;
   }
 }
 
+#nd-sidebar {
+  @apply pt-0;
+  --radius: 0.5rem;
+
+  & > :last-child {
+    border-top: none;
+  }
+
+  [data-radix-scroll-area-viewport] {
+    p:not(:first-child) {
+      @apply mt-4;
+    }
+  }
+}
+
+#nd-subnav {
+  @apply h-13;
+}
+
 #nd-toc {
+  padding-top: 24px;
   --color-fd-foreground: transparent;
   /* Disables the active indicator */
   [role="none"] {
     display: none;
     background: transparent;
   }
+}
+
+/* Scrolling Banner Animations */
+@keyframes scrolling-banner {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}
+
+@keyframes scrolling-banner-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-50% - var(--gap) / 2));
+  }
+}
+
+@keyframes custom-fade-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px) saturate(0%);
+    background-color: transparent;
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px) saturate(180%);
+    background-color: var(--color-backdrop);
+  }
+}
+
+@keyframes custom-fade-out {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+}
+
+/* Animation utility classes */
+.animate-scrolling-banner {
+  animation: scrolling-banner var(--duration) linear infinite;
+}
+
+.animate-scrolling-banner-vertical {
+  animation: scrolling-banner-vertical var(--duration) linear infinite;
 }

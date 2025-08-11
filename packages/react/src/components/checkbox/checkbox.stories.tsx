@@ -57,12 +57,12 @@ export const DesignStates: Story = {
       <h3 className="text-sm font-medium">Design States Preview</h3>
 
       <div className="grid grid-cols-6 items-center gap-4">
-        <div className="text-muted-foreground text-xs">Default</div>
-        <div className="text-muted-foreground text-xs">Hover</div>
-        <div className="text-muted-foreground text-xs">Pressed</div>
-        <div className="text-muted-foreground text-xs">Focus</div>
-        <div className="text-muted-foreground text-xs">Error</div>
-        <div className="text-muted-foreground text-xs">Disabled</div>
+        <div className="text-muted text-xs">Default</div>
+        <div className="text-muted text-xs">Hover</div>
+        <div className="text-muted text-xs">Pressed</div>
+        <div className="text-muted text-xs">Focus</div>
+        <div className="text-muted text-xs">Error</div>
+        <div className="text-muted text-xs">Disabled</div>
 
         {/* Unselected row */}
         <Checkbox>
@@ -234,7 +234,7 @@ export const States: Story = {
       </div>
 
       <div>
-        <p className="text-muted-foreground text-xs">
+        <p className="text-muted text-xs">
           Note: Hover over checkboxes to see hover state. Tab to focus for keyboard navigation.
         </p>
       </div>
@@ -254,7 +254,7 @@ export const Controlled: Story = {
           </Checkbox>
           <Label htmlFor="terms-controlled">I agree to the terms and conditions</Label>
         </div>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted text-sm">
           You have {isSelected ? "agreed" : "not agreed"} to the terms
         </p>
       </div>

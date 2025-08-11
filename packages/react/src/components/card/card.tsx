@@ -1,9 +1,14 @@
 "use client";
 
 import type {CardVariants} from "./card.styles";
+import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components";
+
+import {composeTwRenderProps} from "../../utils";
+import {CloseIcon} from "../icons";
 
 import {cardVariants} from "./card.styles";
 
@@ -164,6 +169,37 @@ const CardImage = React.forwardRef<HTMLImageElement, CardImageProps>(
 CardImage.displayName = "HeroUI.Card.Image";
 
 /* -------------------------------------------------------------------------------------------------
+ * CardClose
+ * -----------------------------------------------------------------------------------------------*/
+
+interface CardCloseProps extends ButtonPrimitiveProps {
+  asChild?: boolean;
+}
+
+const CardCloseButton = React.forwardRef<HTMLButtonElement, CardCloseProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots} = useContext(CardContext);
+
+    return (
+      <ButtonPrimitive
+        ref={ref}
+        data-card-close-button
+        className={composeTwRenderProps(className, slots?.close())}
+        {...props}
+      >
+        {(renderProps) =>
+          typeof children === "function"
+            ? children(renderProps)
+            : (children ?? <CloseIcon data-card-close-icon />)
+        }
+      </ButtonPrimitive>
+    );
+  },
+);
+
+CardCloseButton.displayName = "HeroUI.Card.CloseButton";
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
@@ -174,6 +210,7 @@ const CompoundCard = Object.assign(CardRoot, {
   Header: CardHeader,
   Image: CardImage,
   Title: CardTitle,
+  CloseButton: CardCloseButton,
 });
 
 export type {
@@ -184,6 +221,7 @@ export type {
   CardContentProps,
   CardFooterProps,
   CardImageProps,
+  CardCloseProps,
 };
 
 export default CompoundCard;

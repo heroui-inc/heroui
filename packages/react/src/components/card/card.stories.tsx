@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     surface: {
       control: {type: "select"},
-      options: ["1", "2", "3"],
+      options: ["none", "1", "2", "3"],
     },
   },
   component: Card,
@@ -31,11 +31,13 @@ export const Default: Story = {
   render: (args) => (
     <Card {...args}>
       <Card.Header>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Description>Card description goes here</Card.Description>
+        <Card.Title>Become an Acme Creator!</Card.Title>
+        <Card.Description>
+          Visit heroui.com to sign up today and start earning credits from your fans and followers.
+        </Card.Description>
       </Card.Header>
       <Card.Content>
-        <p>This is the card content. You can add any content here.</p>
+        <Link href="#">Call to action</Link>
       </Card.Content>
     </Card>
   ),

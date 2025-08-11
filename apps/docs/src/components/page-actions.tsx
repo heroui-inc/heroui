@@ -52,7 +52,7 @@ export function PageActions({markdownContent, sourceUrl}: PageActionsProps) {
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2 border-b pb-4">
       <button
-        className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
+        className="text-muted hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
         title="Copy page link for AI chat"
         onClick={handleCopyToClipboard}
       >
@@ -61,7 +61,7 @@ export function PageActions({markdownContent, sourceUrl}: PageActionsProps) {
       </button>
 
       <button
-        className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
+        className="text-muted hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
         title="Open in ChatGPT"
         onClick={handleOpenInChatGPT}
       >
@@ -70,7 +70,7 @@ export function PageActions({markdownContent, sourceUrl}: PageActionsProps) {
       </button>
 
       <button
-        className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
+        className="text-muted hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
         title="Open in Claude"
         onClick={handleOpenInClaude}
       >
@@ -79,7 +79,7 @@ export function PageActions({markdownContent, sourceUrl}: PageActionsProps) {
       </button>
 
       <a
-        className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
+        className="text-muted hover:bg-muted hover:text-foreground inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors"
         href={sourceUrl}
         rel="noopener noreferrer"
         target="_blank"

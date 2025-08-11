@@ -4,24 +4,19 @@
     color-scheme: light;
 
     /* Base Colors */
-    /* --background: oklch(100% 0 0); */
-    --background: oklch(0.9821 0 0);
+    --background: oklch(100% 0 0);
+    /* --background: oklch(0.9821 0 0); */
     --foreground: oklch(14.48% 0 0);
     --panel: oklch(100% 0 0);
 
     --radius: 0.75rem;
 
     --muted: var(--color-neutral-500);
-    --muted-foreground: var(--color-neutral-400);
-
-    --surface: var(--color-neutral-100);
-    --surface-foreground: var(--foreground);
 
     --scrollbar: var(--color-neutral-300);
 
     --default: var(--color-white);
     --default-foreground: var(--color-neutral-600);
-    --default-hover: var(--color-neutral-100);
 
     --accent: oklch(0.14 0 0);
     --accent-foreground: oklch(0.99 0 0);
@@ -62,17 +57,12 @@
     --foreground: oklch(99.11% 0 0);
     --panel: oklch(0.22 0 0);
 
-    --muted: var(--color-neutral-300);
-    --muted-foreground: var(--color-neutral-400);
-
-    --surface: var(--color-neutral-900);
-    --surface-foreground: var(--color-neutral-200);
+    --muted: var(--color-neutral-400);
 
     --scrollbar: var(--color-neutral-800);
 
     --default: var(--color-neutral-900);
     --default-foreground: var(--color-neutral-200);
-    --default-hover: var(--color-neutral-800);
 
     --accent: oklch(0.99 0 0);
     --accent-foreground: oklch(0.22 0 0);
@@ -110,7 +100,6 @@
   --color-panel: var(--panel);
 
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
 
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
@@ -173,6 +162,11 @@
     var(--color-danger-foreground) 10%
   );
 
+  /* Surface Colors */
+  --color-surface-1: var(--color-panel);
+  --color-surface-2: color-mix(in oklab, var(--color-panel) 80%, var(--color-foreground) 3.5%);
+  --color-surface-3: color-mix(in oklab, var(--color-panel) 80%, var(--color-foreground) 9%);
+
   /* Radius */
   --radius-xs: calc(var(--radius) * 0.25);
   --radius-sm: calc(var(--radius) * 0.5);
@@ -182,6 +176,8 @@
   --radius-2xl: calc(var(--radius) * 2);
   --radius-3xl: calc(var(--radius) * 3);
   --radius-4xl: calc(var(--radius) * 4);
+  --radius-panel: var(--radius);
+  --radius-panel-inner: calc(var(--radius) * 0.5);
 
   /* Tranistion Timing Functions  */
   --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);

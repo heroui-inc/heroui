@@ -53,7 +53,7 @@ export const Controlled: Story = {
           <Switch.Control />
           <Switch.Label>Enable notifications</Switch.Label>
         </Switch>
-        <p className="text-muted-foreground text-sm">Switch is {isSelected ? "on" : "off"}</p>
+        <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
       </div>
     );
   },
@@ -126,7 +126,7 @@ export const WithDescription: Story = {
           <Switch.Control />
           <div className="flex flex-col gap-1">
             <Switch.Label>Public profile</Switch.Label>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted text-sm">
               Allow others to see your profile information
             </p>
           </div>

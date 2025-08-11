@@ -1,9 +1,19 @@
 {
   "title": "Documentation",
+  "description": "HeroUI v3 Documentation",
+  "root": true,
   "pages": [
-    "overview",
-    "installation",
-    "handbook",
-    "components"
+    "---Getting Started---",
+    "index",
+    "quick-start",
+    "design-principles",
+    "releases",
+    "---Handbook---",
+    "handbook/styling",
+    "handbook/animation",
+    "handbook/composition",
+    "---Components---",
+    "components/avatar",
+    "components/button"
   ]
 }

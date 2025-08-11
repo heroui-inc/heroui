@@ -57,7 +57,7 @@ function ComponentCard({
   return (
     <a className="hover:bg-muted/50 block rounded-lg border p-4 transition-colors" href={href}>
       <h3 className="mb-2 font-semibold">{name}</h3>
-      <p className="text-muted-foreground text-sm">{description}</p>
+      <p className="text-muted text-sm">{description}</p>
     </a>
   );
 }

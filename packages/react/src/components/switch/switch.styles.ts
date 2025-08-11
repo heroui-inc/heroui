@@ -13,9 +13,9 @@ export const switchVariants = tv({
       "transition-all duration-200",
       focusRingClasses,
       // Default (off) state
-      "border-muted-foreground/30 bg-muted-foreground/20",
+      "border-muted/30 bg-muted/20",
       // Hover state (off)
-      "group-data-[hovered=true]:border-muted-foreground/40 group-data-[hovered=true]:bg-muted-foreground/30",
+      "group-data-[hovered=true]:border-muted/40 group-data-[hovered=true]:bg-muted/30",
       // Pressed state
       "group-data-[pressed=true]:scale-[0.97]",
       // Selected (on) state
@@ -27,7 +27,7 @@ export const switchVariants = tv({
       "group-data-[focus-visible=true]:border-foreground/60",
       // Disabled state
       "group-data-[disabled=true]:cursor-not-allowed group-data-[disabled=true]:opacity-[var(--disabled-opacity)]",
-      "group-data-[disabled=true]:group-data-[hovered=true]:border-muted-foreground/30",
+      "group-data-[disabled=true]:group-data-[hovered=true]:border-muted/30",
     ],
     thumb: [
       "absolute left-0.5 block h-4 w-4",

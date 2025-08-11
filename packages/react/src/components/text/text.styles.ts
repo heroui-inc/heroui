@@ -14,7 +14,7 @@ export const textVariants = tv({
     },
     variant: {
       default: "text-foreground",
-      muted: "text-muted-foreground",
+      muted: "text-muted",
       success: "text-success",
       warning: "text-warning",
       danger: "text-danger",

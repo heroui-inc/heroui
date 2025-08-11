@@ -11,17 +11,20 @@ const cardVariants = tv({
       "border",
       "border-border",
       "bg-surface-1",
-      "shadow-border",
     ],
-    header: ["flex", "flex-col", "gap-1", "p-6"],
+    header: ["flex", "flex-col", "gap-1", "p-4"],
     title: ["text-base", "font-medium", "leading-6", "text-foreground"],
     description: ["text-sm", "text-muted", "leading-5"],
-    content: ["p-6", "pt-0"],
-    footer: ["flex", "items-center", "p-6", "pt-0"],
+    content: ["p-4", "pt-0"],
+    footer: ["flex", "items-center", "p-4", "pt-0"],
     image: ["w-full", "object-cover"],
+    close: "",
   },
   variants: {
     surface: {
+      none: {
+        base: "border-none bg-transparent shadow-none",
+      },
       "1": {
         base: "bg-surface-1",
       },

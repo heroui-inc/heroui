@@ -3,7 +3,7 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const descriptionVariants = tv({
-  base: ["text-muted-foreground text-sm", "transition-colors duration-200"],
+  base: ["text-muted text-sm", "transition-colors duration-200"],
   variants: {
     size: {
       sm: "text-xs",

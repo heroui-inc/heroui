@@ -13,7 +13,7 @@ export const radioVariants = tv({
       "transition-all duration-200",
       focusRingClasses,
       // Default state
-      "border-muted-foreground/50 bg-transparent",
+      "border-muted/50 bg-transparent",
       // Hover state
       "group-data-[hovered=true]:border-foreground/70",
       // Pressed state
@@ -28,7 +28,7 @@ export const radioVariants = tv({
       "group-data-[invalid=true]:group-data-[selected=true]:border-danger",
       // Disabled state
       "group-data-[disabled=true]:cursor-not-allowed group-data-[disabled=true]:opacity-[var(--disabled-opacity)]",
-      "group-data-[disabled=true]:group-data-[hovered=true]:border-muted-foreground/50",
+      "group-data-[disabled=true]:group-data-[hovered=true]:border-muted/50",
     ],
     indicator: [
       "absolute inset-0 m-auto h-1.5 w-1.5",

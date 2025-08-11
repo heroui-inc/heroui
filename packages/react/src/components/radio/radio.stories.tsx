@@ -167,7 +167,7 @@ export const Controlled: Story = {
             </Radio>
           </RadioGroup.Items>
         </RadioGroup>
-        <p className="text-muted-foreground text-sm">Selected: {value}</p>
+        <p className="text-muted text-sm">Selected: {value}</p>
       </div>
     );
   },

@@ -140,7 +140,7 @@ export const Controlled: Story = {
             </div>
           </CheckboxGroup.Items>
         </CheckboxGroup>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted text-sm">
           Selected: {selected.length > 0 ? selected.join(", ") : "none"}
         </p>
       </div>

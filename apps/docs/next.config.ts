@@ -11,6 +11,15 @@ const config: NextConfig = {
   experimental: {
     optimizePackageImports: ["@heroui/react"],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "heroui-assets.nyc3.cdn.digitaloceanspaces.com",
+        pathname: "/**",
+      },
+    ],
+  },
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,

@@ -34,7 +34,7 @@ export const calendarVariants = tv({
     grid: ["w-full", "border-separate", "border-spacing-0"],
     gridHeader: [],
     header: ["flex items-center justify-between", "mb-4", "px-1"],
-    headerCell: ["text-xs font-medium", "text-muted-foreground", "text-center", "pb-2", "h-8 w-9"],
+    headerCell: ["text-xs font-medium", "text-muted", "text-center", "pb-2", "h-8 w-9"],
     heading: ["text-lg font-semibold", "text-foreground", "tracking-[-0.36px]"],
     navButton: [
       "rounded-lg",
@@ -62,7 +62,7 @@ export const calendarVariants = tv({
     },
     isOutsideMonth: {
       true: {
-        cellButton: ["text-muted-foreground/30", "hover:bg-transparent"],
+        cellButton: ["text-muted/30", "hover:bg-transparent"],
       },
     },
     isSelected: {
@@ -76,12 +76,7 @@ export const calendarVariants = tv({
     },
     isUnavailable: {
       true: {
-        cellButton: [
-          "text-muted-foreground/50",
-          "line-through",
-          "cursor-not-allowed",
-          "hover:bg-transparent",
-        ],
+        cellButton: ["text-muted/50", "line-through", "cursor-not-allowed", "hover:bg-transparent"],
       },
     },
     variant: {

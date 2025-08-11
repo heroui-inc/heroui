@@ -38,7 +38,7 @@ export function SpinnerWithLabel() {
       
       <div className="flex flex-col items-center gap-2">
         <Spinner />
-        <span className="text-sm text-muted-foreground">Please wait</span>
+        <span className="text-sm text-muted">Please wait</span>
       </div>
     </div>
   );
