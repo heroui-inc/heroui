@@ -14,9 +14,9 @@ const config: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
         hostname: "heroui-assets.nyc3.cdn.digitaloceanspaces.com",
         pathname: "/**",
+        protocol: "https",
       },
     ],
   },

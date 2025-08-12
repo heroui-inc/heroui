@@ -2,7 +2,8 @@ import {createRelativeLink} from "fumadocs-ui/mdx";
 import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
 
-import {PageActions} from "@/components/page-actions";
+import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
+import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 // import { getGithubLastEdit } from "fumadocs-core/server";
@@ -32,11 +33,19 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         style: "normal",
       }}
     >
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <PageActions
-        sourceUrl={`https://github.com/heroui/heroui-v3/blob/main/apps/docs/content/docs/${params.slug?.join("/") || "index"}.mdx`}
-      />
+      <section className="border-border mb-4 flex flex-col gap-2 border-b">
+        <div className="flex items-center justify-between">
+          <DocsTitle>{page.data.title}</DocsTitle>
+          <div className="flex items-center gap-2">
+            <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
+            <ViewOptions
+              githubUrl={`${siteConfig.links.github}/blob/dev/apps/docs/content/docs/${page.path}`}
+              markdownUrl={`${page.url}.mdx`}
+            />
+          </div>
+        </div>
+        <DocsDescription className="mb-4">{page.data.description}</DocsDescription>
+      </section>
       <DocsBody>
         <MDXContent
           components={getMDXComponents({

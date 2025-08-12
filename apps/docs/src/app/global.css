@@ -20,6 +20,7 @@
   --color-fd-card: #f9f9f9;
   --spacing-fd-container: 1120px;
   --color-fd-border: oklch(0 0 0 / 10%);
+  --color-fd-accent: #e0e0e7;
   --color-fd-muted-foreground: var(--color-neutral-500);
   --color-backdrop: rgba(255, 255, 255, 0.4);
 
@@ -76,7 +77,7 @@
   }
 
   [data-search-full] {
-    @apply bg-default/80 border-border shadow-xs/5 rounded-lg;
+    @apply bg-default border-border shadow-xs/5 rounded-lg;
 
     kbd {
       @apply bg-default-hover border-border;
@@ -90,30 +91,103 @@
 
 #nd-sidebar {
   @apply pt-0;
+
   --radius: 0.5rem;
+
+  @media (min-width: 600px) {
+    --fd-sidebar-width: 240px;
+  }
 
   & > :last-child {
     border-top: none;
   }
 
   [data-radix-scroll-area-viewport] {
+    @apply pt-0.5;
+
     p:not(:first-child) {
       @apply mt-4;
     }
   }
+
+  [data-fd-if-empty] {
+    @apply hidden;
+  }
 }
 
 #nd-subnav {
-  @apply h-13;
+  @apply h-14;
+
+  backdrop-filter: none;
+
+  > div {
+    @apply border-none px-6;
+  }
+
+  [data-search-full] {
+    @apply bg-default border-border shadow-xs/5 rounded-lg;
+
+    kbd {
+      @apply bg-default-hover border-border;
+    }
+  }
+}
+
+#nd-page {
+  @apply gap-10 !pt-8;
+
+  > article {
+    @apply pt-0;
+  }
+}
+
+#nd-docs-layout {
+  background: var(--background);
+  margin-top: 60px;
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-radius: 12px 0 0 0;
+
+  @media (min-width: 600px) {
+    --fd-sidebar-width: 250px;
+  }
 }
 
 #nd-toc {
-  padding-top: 24px;
+  padding-top: 8px;
+  --fd-toc-width: 220px;
   --color-fd-foreground: transparent;
   /* Disables the active indicator */
   [role="none"] {
     display: none;
     background: transparent;
+  }
+
+  @media (min-width: 600px) {
+    --fd-toc-width: 240px;
+  }
+}
+
+#nd-tocnav {
+  border-radius: 0.45rem;
+  box-shadow: 0 0 0 1px var(--color-fd-border);
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 4px;
+  border: none;
+
+  @media (min-width: 600px) {
+    margin-right: 1rem;
+  }
+}
+
+.prose {
+  .shiki {
+    @apply border-none;
+
+    .fd-scroll-container {
+      @apply px-1;
+    }
   }
 }
 

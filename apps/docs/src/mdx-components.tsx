@@ -8,7 +8,8 @@ import type {MDXComponents} from "mdx/types";
 import {Alert, Avatar, Button} from "@heroui/react";
 import {Callout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
-import {Tab, Tabs} from "fumadocs-ui/components/tabs";
+import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
+import * as TabsComponents from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 
 import {ComponentPreview} from "./components/component-preview";
@@ -18,6 +19,7 @@ import * as ButtonExamples from "./examples/button-examples";
 import * as ChipExamples from "./examples/chip-examples";
 import * as LinkExamples from "./examples/link-examples";
 import * as SpinnerExamples from "./examples/spinner-examples";
+import {PackageManagers} from "./mdx-components/package-managers";
 
 // Create icon components using gravity-ui icons
 const AlertTriangle = (props: any) => <Iconify {...props} icon="circle-exclamation-fill" />;
@@ -65,6 +67,7 @@ function ComponentCard({
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
+    ...TabsComponents,
     Alert,
     AlertTriangle,
     Avatar,
@@ -104,6 +107,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     LinkDisabled: LinkExamples.LinkDisabled,
     LinkExternal: LinkExamples.LinkExternal,
     LinkVariants: LinkExamples.LinkVariants,
+    PackageManagers,
     Preview,
     // Spinner Examples
     SpinnerBasic: SpinnerExamples.SpinnerBasic,
@@ -111,10 +115,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     SpinnerSizes: SpinnerExamples.SpinnerSizes,
     SpinnerWithLabel: SpinnerExamples.SpinnerWithLabel,
     Star,
-    Tab,
-    Tabs,
     X,
     XCircle,
+    // HTML `ref` attribute conflicts with `forwardRef`
+    pre: ({ref: _ref, ...props}) => (
+      <CodeBlock {...props}>
+        <Pre>{props.children}</Pre>
+      </CodeBlock>
+    ),
     ...components,
   };
 }
