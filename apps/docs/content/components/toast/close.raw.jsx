@@ -3,12 +3,15 @@ import React from "react";
 
 export default function App() {
   const [toastKey, setToastKey] = React.useState([]);
+  const [isBlogPage, setIsBlogPage] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsBlogPage(window.location.pathname.startsWith("/blog"));
+  }, []);
 
   return (
     <>
-      <div className="fixed z-[100]">
-        <ToastProvider />
-      </div>
+      <div className="fixed z-[100]">{isBlogPage && <ToastProvider />}</div>
       <div className="flex flex-wrap gap-2">
         <Button
           variant="flat"
