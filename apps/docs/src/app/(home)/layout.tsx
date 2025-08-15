@@ -61,6 +61,7 @@ export default function Layout({children}: {children: ReactNode}) {
       // other items
       // ]}
     >
+      <div aria-hidden="true" className="gradient-background home-gradient-background" />
       {children}
     </HomeLayout>
   );

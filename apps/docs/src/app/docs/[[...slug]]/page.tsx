@@ -34,7 +34,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
       }}
     >
       <section className="border-border mb-4 flex flex-col gap-2 border-b">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <DocsTitle>{page.data.title}</DocsTitle>
           <div className="flex items-center gap-2">
             <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
@@ -46,7 +46,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         </div>
         <DocsDescription className="mb-4">{page.data.description}</DocsDescription>
       </section>
-      <DocsBody>
+      <DocsBody className="prose-sm">
         <MDXContent
           components={getMDXComponents({
             // this allows you to link to other pages with relative file paths

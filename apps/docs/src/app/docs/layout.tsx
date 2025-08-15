@@ -22,7 +22,7 @@ export default function Layout({children}: {children: ReactNode}) {
       nav={{
         ...baseOptions.nav,
         children: (
-          <div className="mr-2">
+          <div className="mr-4">
             <VersionSelector />
           </div>
         ),
@@ -30,6 +30,7 @@ export default function Layout({children}: {children: ReactNode}) {
         title: <HeroUILogo />,
       }}
     >
+      <div aria-hidden="true" className="gradient-background docs-gradient-background" />
       {children}
     </DocsLayout>
   );

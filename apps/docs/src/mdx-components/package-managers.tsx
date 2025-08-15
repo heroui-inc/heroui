@@ -17,24 +17,24 @@ type PackageManager = {
 
 const packageManagers: PackageManager[] = [
   {
-    icon: <CLIBoldIcon className="text-default-600 dark:text-default-400 text-lg" />,
+    icon: <CLIBoldIcon className="text-foreground text-lg" />,
     label: "CLI",
     name: "cli",
   },
   {
-    icon: <PnpmIcon className="text-[#F69220]" />,
+    icon: <PnpmIcon className="text-foreground" />,
     name: "pnpm",
   },
   {
-    icon: <NpmSmallIcon className="text-[#E53E3E]" />,
+    icon: <NpmSmallIcon className="text-foreground" />,
     name: "npm",
   },
   {
-    icon: <YarnIcon className="text-[#2C8EBB]" />,
+    icon: <YarnIcon className="text-foreground" />,
     name: "yarn",
   },
   {
-    icon: <BunIcon className="text-lg text-[#FBF0DF]" />,
+    icon: <BunIcon className="text-foreground" />,
     name: "bun",
   },
 ];
@@ -55,12 +55,11 @@ export const PackageManagers = ({commands}: PackageManagersProps) => {
         defaultValue={defaultValue}
       >
         <TabsList className="mb-1 h-10 overflow-x-auto">
-          {packageManagers.map(({icon, label, name}) => {
+          {packageManagers.map(({label, name}) => {
             if (!commands[name]) return null;
 
             return (
               <TabsTrigger key={name} className="flex items-center gap-2" value={name}>
-                {icon}
                 <span>{label || name}</span>
               </TabsTrigger>
             );
@@ -70,7 +69,7 @@ export const PackageManagers = ({commands}: PackageManagersProps) => {
           if (!commands[name]) return null;
 
           return (
-            <TabsContent key={name} value={name}>
+            <TabsContent key={name} className="bg-transparent" value={name}>
               <CodeBlock lang="bash">
                 <Pre className="px-3">{commands[name]}</Pre>
               </CodeBlock>

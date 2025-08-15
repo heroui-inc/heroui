@@ -3,7 +3,7 @@ import Link from "fumadocs-core/link";
 
 import {HomeThemeCustomizer} from "@/components/home-theme-customizer";
 import {SocialLinks} from "@/components/social-links";
-import {ThemeBackground} from "@/components/theme-background";
+// import {ThemeBackground} from "@/components/theme-background";
 import {currentVersion} from "@/utils/version";
 
 const VersionChip = () => {
@@ -18,7 +18,7 @@ const VersionChip = () => {
 export default function HomePage() {
   return (
     <main className="flex h-full flex-1 flex-col">
-      <ThemeBackground />
+      {/* <ThemeBackground /> */}
       {/* Hero Section */}
       <section className="z-10 flex flex-col items-center justify-center py-20 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">

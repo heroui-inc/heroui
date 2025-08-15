@@ -37,20 +37,6 @@
   border-color: var(--border, currentColor);
 }
 
-/* Body styles */
-body {
-  background-color: var(--background);
-  font-size: var(--font-size-base);
-  color: var(--foreground);
-}
-
-/* Desktop font scaling */
-@media (min-width: 768px) {
-  body {
-    font-size: calc(var(--font-size-base) * var(--font-size-scale-desktop));
-  }
-}
-
 /* Shared Focus Styles */
 /* Basic focus ring for interactive elements */
 .focus-ring {
