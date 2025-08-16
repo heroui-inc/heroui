@@ -25,7 +25,3 @@ export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: s
 
   return new NextResponse(await getLLMText(page));
 }
-
-export function generateStaticParams() {
-  return source.generateParams();
-}
