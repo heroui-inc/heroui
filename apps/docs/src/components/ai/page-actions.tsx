@@ -10,6 +10,7 @@ import {tv} from "tailwind-variants";
 import {AnthropicIcon, GithubIcon, OpenAIIcon} from "@/icons/dev";
 import {LinkIcon} from "@/icons/link";
 import {cn} from "@/utils/cn";
+import {__DEV__} from "@/utils/env";
 
 import {Iconify} from "../iconify";
 
@@ -25,19 +26,31 @@ export function LLMCopyButton({
 }) {
   const [isLoading, setLoading] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
-    const cached = cache.get(markdownUrl);
+    // Skip cache in development mode
+    if (!__DEV__) {
+      const cached = cache.get(markdownUrl);
 
-    if (cached) return navigator.clipboard.writeText(cached);
+      if (cached) return navigator.clipboard.writeText(cached);
+    }
+
+    let url = markdownUrl;
+
+    if (markdownUrl === "/docs.mdx") {
+      url = "/docs/index.mdx";
+    }
 
     setLoading(true);
 
     try {
       await navigator.clipboard.write([
         new ClipboardItem({
-          "text/plain": fetch(markdownUrl).then(async (res) => {
+          "text/plain": fetch(url).then(async (res) => {
             const content = await res.text();
 
-            cache.set(markdownUrl, content);
+            // Only cache in production
+            if (!__DEV__) {
+              cache.set(markdownUrl, content);
+            }
 
             return content;
           }),

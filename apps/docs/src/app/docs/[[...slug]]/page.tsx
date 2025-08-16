@@ -1,3 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
+import type {Metadata} from "next";
+
 import {createRelativeLink} from "fumadocs-ui/mdx";
 import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
@@ -44,7 +47,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
             />
           </div>
         </div>
-        <DocsDescription className="mb-4">{page.data.description}</DocsDescription>
+        <DocsDescription className="text-md my-4">{page.data.description}</DocsDescription>
       </section>
       <DocsBody className="prose-sm">
         <MDXContent
@@ -58,11 +61,9 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   );
 }
 
-export async function generateStaticParams() {
-  return source.generateParams();
-}
-
-export async function generateMetadata(props: {params: Promise<{slug?: string[]}>}) {
+export async function generateMetadata(props: {
+  params: Promise<{slug?: string[]}>;
+}): Promise<Metadata> {
   const params = await props.params;
   const page = source.getPage(params.slug);
 
@@ -72,4 +73,8 @@ export async function generateMetadata(props: {params: Promise<{slug?: string[]}
     description: page.data.description,
     title: page.data.title,
   };
+}
+
+export async function generateStaticParams() {
+  return source.generateParams();
 }

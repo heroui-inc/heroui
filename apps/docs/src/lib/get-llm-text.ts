@@ -1,36 +1,34 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable no-console */
-/* eslint-disable unused-imports/no-unused-vars */
-// @ts-nocheck
+import type {Page} from "@/lib/source";
 
-import type {Page} from "fumadocs-core/source";
+import {remarkNpm} from "fumadocs-core/mdx-plugins";
+import {remarkInclude} from "fumadocs-mdx/config";
+import {remarkAutoTypeTable} from "fumadocs-typescript";
+import {remark} from "remark";
+import remarkGfm from "remark-gfm";
+import remarkMdx from "remark-mdx";
 
-export async function getLLMText(page: Page): Promise<string> {
-  try {
-    // Get the MDX content
-    const MDXContent = page.data?.body;
+import {siteConfig} from "@/config/site";
 
-    // Create a structured text representation of the page
-    const sections = [`Page: ${page.data.title}`, `URL: ${page.url}`];
+const processor = remark()
+  .use(remarkMdx)
+  .use(remarkInclude)
+  .use(remarkGfm)
+  .use(remarkAutoTypeTable)
+  .use(remarkNpm);
 
-    if (page.data.description) {
-      sections.push(`Description: ${page.data.description}`);
-    }
+export async function getLLMText(page: Page) {
+  const category = page.slugs[0];
 
-    // Try to get the raw content if available
-    if (page.data?.content) {
-      sections.push(`\nContent:\n${page.data.content}`);
-    } else if (page.data?.raw) {
-      sections.push(`\nContent:\n${page.data.raw}`);
-    } else {
-      // Fallback to basic info if no raw content available
-      sections.push(`\nThis page contains React components and interactive content.`);
-    }
+  const processed = await processor.process({
+    path: page.data._file.absolutePath,
+    value: page.data.content,
+  });
 
-    return sections.join("\n");
-  } catch (error) {
-    console.error(`Error processing page ${page.url}:`, error);
+  return `# HeroUI v3 > ${category} > ${page.data.title}
+URL: ${page.url}
+Source: ${siteConfig.githubRawUrl}/${page.path}
 
-    return `Page: ${page.data.title}\nURL: ${page.url}\nError: Unable to extract content`;
-  }
+${page.data.description}
+        
+${processed.value}`;
 }

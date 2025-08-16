@@ -60,11 +60,10 @@
 
 [data-theme="dark"],
 .dark {
-  #nd-home-layout {
-    #nd-nav {
-      [data-theme-toggle] {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
+  #nd-nav,
+  #nd-subnav {
+    [data-theme-toggle] {
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
 }
@@ -159,7 +158,8 @@
 .dark {
   #nd-subnav {
     [data-search-full] {
-      background: rgba(10, 10, 10, 0.1);
+      background: rgba(10, 10, 10, 0.4);
+      backdrop-filter: blur(5px) saturate(120%);
     }
   }
 }
@@ -256,6 +256,8 @@
   @apply mt-4 gap-10 p-4;
 
   > article {
+    @apply p-8;
+
     position: static;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px) saturate(120%);
@@ -297,16 +299,23 @@
 #nd-tocnav {
   border-radius: 0.45rem;
   top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 6px) !important;
-  box-shadow: 0 0 0 1px var(--color-fd-border);
   margin-right: 1.3rem;
   margin-left: 1.3rem;
   margin-top: 4px;
-  border: none;
-  background: var(--background);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px) saturate(120%);
+  border: 1px solid var(--border);
 
   @media (min-width: 600px) {
     margin-right: 1rem;
+  }
+}
+
+[data-theme="dark"],
+.dark {
+  #nd-tocnav {
+    background: rgba(10, 10, 10, 0.4);
+    border: 1px solid rgba(60, 60, 60, 0.5);
   }
 }
 

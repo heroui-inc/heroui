@@ -12,6 +12,8 @@ export const siteConfig = {
   creator: "@hero_ui",
   description:
     "Beautiful components that stay maintained, so no more copy-pasting outdated code. Fully customizable and always up-to-date to help you ship faster.",
+  githubRawUrl:
+    "https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/content/docs",
   links: {
     discord: "https://discord.gg/9b6yyZKmH4",
     github: "https://github.com/heroui-inc",

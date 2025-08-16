@@ -1,7 +1,8 @@
 import {Chip, buttonVariants} from "@heroui/react";
 import Link from "fumadocs-core/link";
 
-import {HomeThemeCustomizer} from "@/components/home-theme-customizer";
+// TODO:
+// import {HomeThemeCustomizer} from "@/components/home-theme-customizer";
 import {SocialLinks} from "@/components/social-links";
 // import {ThemeBackground} from "@/components/theme-background";
 import {currentVersion} from "@/utils/version";
@@ -17,10 +18,10 @@ const VersionChip = () => {
 
 export default function HomePage() {
   return (
-    <main className="flex h-full flex-1 flex-col">
+    <main className="flex h-[calc(100vh-4rem)] flex-col">
       {/* <ThemeBackground /> */}
       {/* Hero Section */}
-      <section className="z-10 flex flex-col items-center justify-center py-20 text-center">
+      <section className="z-10 flex flex-col items-center pt-20 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">
           <VersionChip />
           <h1 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
@@ -42,9 +43,9 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <HomeThemeCustomizer />
+        {/* <HomeThemeCustomizer /> */}
       </section>
-      <footer className="text-muted absolute bottom-3 z-20 flex w-full flex-row items-center justify-center gap-2">
+      <footer className="text-muted mt-auto flex w-full flex-row flex-wrap items-center justify-center gap-2 py-3">
         <p className="text-sm">
           &copy; {new Date().getFullYear()} NextUI Inc. All rights reserved.
         </p>
