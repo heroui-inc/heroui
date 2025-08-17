@@ -143,11 +143,6 @@ const WithEndContentTemplate = (args) => {
           addToast({
             title: "Toast Title",
             description: "Toast Description",
-            // endContent: (
-            //   <Button color="warning" size="sm" variant="flat">
-            //     Upgrade
-            //   </Button>
-            // ),
             endContent: args.endContent,
             color: "warning",
             variant: "faded",
