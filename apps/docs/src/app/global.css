@@ -1,18 +1,24 @@
+/* ============================================================================
+   IMPORTS
+   ============================================================================ */
+
 @import "tailwindcss";
 @import "@heroui/styles";
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
 
+/* ============================================================================
+   CSS VARIABLES - ROOT & THEMES
+   ============================================================================ */
+
 :root {
-  /* Override accent colors with your brand */
+  /* Brand Accent Colors (Optional Overrides) */
   /* --accent: oklch(0.7 0.25 260); */
   /* --accent-foreground: oklch(0.98 0 0); */
-
-  /* Or use your existing Tailwind color scale */
   /* --accent: var(--color-blue-600); */
   /* --accent-soft: var(--color-blue-100); */
 
-  /* Fumadocs UI */
+  /* Fumadocs UI Variables */
   --fd-layout-width: 1400px;
   --color-fd-background: #f9f9f9;
   --color-fd-primary: oklch(0.14 0 0);
@@ -29,11 +35,14 @@
   --animate-fd-fade-out: custom-fade-out 150ms ease-out forwards;
 }
 
+/* Dark Theme Variables */
 [data-theme="dark"],
 .dark {
-  /* Your values */
+  /* Custom Values (Optional) */
   /* --radius: 0.5rem; */
   /* --cursor: default; */
+
+  /* Fumadocs UI Dark Theme */
   --color-fd-primary: oklch(0.99 0 0);
   --color-fd-background: #1a1a1a;
   --color-fd-card: rgba(40, 40, 40, 0.4);
@@ -43,7 +52,11 @@
   --color-backdrop: rgba(0, 0, 0, 0.4);
 }
 
-/* To override HeroUI Components Styles */
+/* ============================================================================
+   HEROUI COMPONENT OVERRIDES
+   ============================================================================ */
+
+/* HeroUI Component Style Overrides */
 /* @utility button {
   @apply rounded-lg;
 } */
@@ -174,7 +187,8 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: linear-gradient(
+  /* TODO: Add this back in when we have the components showcase */
+  /* background-image: linear-gradient(
     350deg,
     hsl(233deg 24% 86%) 0%,
     hsl(259deg 20% 87%) 10%,
@@ -183,6 +197,24 @@
     hsl(340deg 22% 89%) 52%,
     hsl(354deg 23% 90%) 61%,
     hsl(6deg 23% 90%) 69%,
+    hsl(6deg 22% 91%) 76%,
+    hsl(353deg 21% 92%) 81%,
+    hsl(339deg 19% 93%) 86%,
+    hsl(318deg 16% 93%) 90%,
+    hsl(283deg 15% 94%) 94%,
+    hsl(253deg 19% 95%) 97%,
+    hsl(228deg 26% 96%) 100%
+  ); */
+
+  background-image: linear-gradient(
+    350deg,
+    hsl(0deg 0% 98%) 0%,
+    hsl(11deg 10% 97%) 10%,
+    hsl(11deg 15% 95%) 24%,
+    hsl(11deg 18% 94%) 39%,
+    hsl(11deg 20% 93%) 52%,
+    hsl(11deg 21% 92%) 61%,
+    hsl(11deg 22% 91%) 69%,
     hsl(6deg 22% 91%) 76%,
     hsl(353deg 21% 92%) 81%,
     hsl(339deg 19% 93%) 86%,
@@ -345,6 +377,10 @@
 
       background: rgba(220, 220, 220, 0.2);
     }
+
+    li > code {
+      @apply bg-default;
+    }
   }
 }
 
@@ -363,6 +399,54 @@
         background: rgba(40, 40, 40, 0.4);
       }
     }
+  }
+
+  .docs-code-block {
+    .fd-scroll-container {
+      background: transparent !important;
+    }
+  }
+}
+
+.docs-code-block {
+  @apply m-0 rounded-none border-none pl-2 pr-2 pt-4;
+
+  .fd-scroll-container {
+    @apply rounded-none border-none !bg-transparent p-0;
+  }
+
+  .line {
+    @apply !pl-0;
+  }
+}
+
+.code-tab-wrapper {
+  @apply rounded-lg;
+
+  background: rgba(220, 220, 220, 0.2);
+}
+
+[data-theme="dark"],
+.dark {
+  .code-tab-wrapper {
+    background: rgba(40, 40, 40, 0.4);
+  }
+}
+
+.docs-code-block-line-numbers {
+  code {
+    counter-reset: step;
+    counter-increment: step 0;
+  }
+
+  code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: rgba(115, 138, 148, 0.4);
   }
 }
 

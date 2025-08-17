@@ -6,9 +6,11 @@ import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
 
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
+import {ComponentLinks} from "@/components/component-links";
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
+import {extractLinksFromMDX} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
 export default async function Page(props: {params: Promise<{slug?: string[]}>}) {
@@ -25,6 +27,9 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   //   repo: "heroui",
   //   path: `apps/docs/content/docs/${page.path}`,
   // });
+
+  // Extract links from MDX content
+  const links = extractLinksFromMDX(page.data.content);
 
   return (
     <DocsPage
@@ -48,6 +53,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
           </div>
         </div>
         <DocsDescription className="text-md my-4">{page.data.description}</DocsDescription>
+        {!!links && <ComponentLinks links={links} />}
       </section>
       <DocsBody className="prose-sm">
         <MDXContent

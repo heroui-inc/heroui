@@ -1,0 +1,66 @@
+---
+title: LLMs.txt
+description: Enable AI assistants like Claude, Cursor, and Windsurf to understand HeroUI v3
+icon: face-robot
+---
+
+We provide [LLMs.txt](https://llmstxt.org/) files to make HeroUI v3 documentation accessible to AI coding assistants.
+
+## Available Files
+
+### Core Documentation
+
+- [/llms.txt](https://v3.heroui.com/llms.txt) - Quick reference index
+- [/llms-full.txt](https://v3.heroui.com/llms-full.txt) - Complete HeroUI v3 documentation
+
+### Coming Soon
+
+For limited context windows:
+- `/llms-components.txt` - Component documentation only
+- `/llms-patterns.txt` - Common patterns and recipes
+- `/llms-migration.txt` - Migration guide from v2
+
+## Integration
+
+### Claude Code
+
+Tell Claude to reference the documentation:
+
+```
+Use HeroUI v3 documentation from https://v3.heroui.com/llms.txt
+```
+
+Or add to your project's `.claude` file for automatic loading.
+
+### Cursor
+
+Use the `@Docs` feature to add HeroUI documentation:
+
+```
+@Docs https://v3.heroui.com/llms-full.txt
+```
+
+[Learn more](https://docs.cursor.com/context/@-symbols/@-docs)
+
+### Windsurf
+
+Add to your `.windsurfrules` file:
+
+```
+#docs https://v3.heroui.com/llms-full.txt
+```
+
+[Learn more](https://docs.codeium.com/windsurf/memories#memories-and-rules)
+
+### Other AI Tools
+
+Most AI assistants can reference documentation by URL. Simply provide:
+
+```
+https://v3.heroui.com/llms.txt
+```
+ 
+
+## Contributing
+
+Found an issue with AI-generated code? Help us improve our LLMs.txt files on [GitHub](https://github.com/heroui-inc/heroui).

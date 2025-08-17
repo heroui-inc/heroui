@@ -188,9 +188,7 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
             <p className="text-muted mt-2 text-sm">
               Notice the subtle bounce effect when the popover appears and disappears.
             </p>
-            <p className="text-muted mt-4 text-xs">
-              Easing: cubic-bezier(0.36, 1.66, 0.04, 1)
-            </p>
+            <p className="text-muted mt-4 text-xs">Easing: cubic-bezier(0.36, 1.66, 0.04, 1)</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>

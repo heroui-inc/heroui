@@ -1,215 +1,167 @@
 ---
 title: Button
 description: A clickable button component with multiple variants and states
+links: 
+  rac: Button
+  source: button/button.tsx
+  styles: button.css
+  storybook: button
 ---
-
-## Installation
-
-```bash
-npm install @heroui/react tailwindcss
-```
-
-Note: HeroUI v3 requires Tailwind CSS v4. See the [Quick Start](/docs/overview/quick-start) guide for setup instructions.
-
+ 
 ## Import
 
 ```tsx
-import { Button } from '@heroui/react';
+import {Button} from '@heroui/react';
 ```
 
-## Usage
+### Usage
 
-### Basic Button
-
-<ComponentPreview>
-  <ButtonBasic />
-  
-```tsx
-import { Button } from '@heroui/react';
-
-function BasicExample() {
-  return (
-    <Button onPress={() => console.log('Button pressed')}>
-      Click me
-    </Button>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview 
+  name="button-basic"
+/>
 
 ### Variants
 
-Buttons come in multiple variants to convey different meanings and importance levels.
 
-<ComponentPreview>
-  <ButtonVariants />
-  
-```tsx
-<div className="flex gap-3">
-  <Button>Primary</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="tertiary">Tertiary</Button>
-  <Button variant="ghost">Ghost</Button>
-  <Button variant="danger">Danger</Button>
-</div>
-```
-</ComponentPreview>
+<ComponentPreview 
+  name="button-variants"
+/>
 
 ### With Icons
 
-Add icons before or after the button text to provide visual context.
-
-<ComponentPreview>
-  <ButtonWithIcons />
-  
-```tsx
-<div className="flex gap-3">
-  <Button>
-    <Icon icon="gravity-ui:globe" />
-    Search
-  </Button>
-  <Button variant="secondary">
-    <Icon icon="gravity-ui:plus" />
-    Add Member
-  </Button>
-  <Button variant="tertiary">
-    <Icon icon="gravity-ui:envelope" />
-    Email
-  </Button>
-  <Button variant="danger">
-    <Icon icon="gravity-ui:trash-bin" />
-    Delete
-  </Button>
-</div>
-```
-</ComponentPreview>
+<ComponentPreview 
+  name="button-with-icons"
+/>
 
 ### Icon Only
 
-For compact interfaces, use icon-only buttons.
+<ComponentPreview 
+  name="button-icon-only"
+/>
 
-<ComponentPreview>
-  <ButtonIconOnly />
-  
-```tsx
-<div className="flex gap-3">
-  <Button isIconOnly variant="tertiary">
-    <Icon icon="gravity-ui:ellipsis" />
-  </Button>
-  <Button isIconOnly variant="secondary">
-    <Icon icon="gravity-ui:gear" />
-  </Button>
-  <Button isIconOnly variant="danger">
-    <Icon icon="gravity-ui:trash-bin" />
-  </Button>
-</div>
-```
-</ComponentPreview>
+### Loading
+
+<ComponentPreview 
+  name="button-loading"
+/>
 
 ### Loading State
 
-Show loading state with the `isPending` prop and render different content based on the state.
+<ComponentPreview 
+  name="button-loading-state"
+/>
 
-<ComponentPreview>
-  <ButtonLoading />
-  
+### Sizes
+
+<ComponentPreview 
+  name="button-sizes"
+/>
+
+### Disabled State
+
+
+<ComponentPreview 
+  name="button-disabled"
+/>
+
+### Social Buttons
+
+<ComponentPreview 
+  name="button-social"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
 ```tsx
-import { Button, Spinner } from '@heroui/react';
+import { Button } from '@heroui/react';
 
-function LoadingButton() {
-  const [isLoading, setLoading] = useState(false);
-
-  const handlePress = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
-  };
-
+function CustomButton() {
   return (
-    <Button isPending={isLoading} onPress={handlePress}>
-      {({ isPending }) => (
-        <>
-          {isPending ? <Spinner /> : <Icon icon="gravity-ui:paperclip" />}
-          {isPending ? "Uploading..." : "Upload File"}
-        </>
-      )}
+    <Button className="bg-purple-500 text-white hover:bg-purple-600">
+      Purple Button
     </Button>
   );
 }
 ```
-</ComponentPreview>
 
-### Sizes
+### Customizing the component classes
 
-Buttons are available in three sizes: small, medium (default), and large.
+To customize the Button component classes, you can use the `@layer components` directive. 
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
-<ComponentPreview>
-  <ButtonSizes />
-  
-```tsx
-<div className="flex items-center gap-3">
-  <Button size="sm">Small</Button>
-  <Button size="md">Medium</Button>
-  <Button size="lg">Large</Button>
-</div>
+```css
+@layer components {
+  .button {
+    @apply bg-purple-500 text-white hover:bg-purple-600;
+  }
+
+  .button--icon-only {
+    @apply rounded-lg bg-blue-500;
+  }
+}
 ```
-</ComponentPreview>
 
-### Disabled State
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
-Disable buttons to prevent interaction.
+### Adding custom variants
 
-<ComponentPreview>
-  <ButtonDisabled />
-  
-```tsx
-<div className="flex gap-3">
-  <Button isDisabled>Disabled</Button>
-  <Button variant="secondary" isDisabled>Disabled Secondary</Button>
-</div>
-```
-</ComponentPreview>
+You can extend HeroUI components by wrapping them and adding your own custom variants.  
 
-### Social Buttons
+<ComponentPreview 
+  name="button-custom-variants"
+/>
 
-Create social login buttons with brand icons.
+### CSS Classes
 
-<ComponentPreview>
-  <ButtonSocial />
-  
-```tsx
-<div className="flex w-full max-w-xs flex-col gap-3">
-  <Button variant="tertiary">
-    <Icon icon="devicon:google" />
-    Sign in with Google
-  </Button>
-  <Button variant="tertiary">
-    <Icon icon="mdi:github" />
-    Sign in with GitHub
-  </Button>
-  <Button variant="tertiary">
-    <Icon icon="ion:logo-apple" />
-    Sign in with Apple
-  </Button>
-</div>
-```
-</ComponentPreview>
+The Button component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/button.css)):
+
+#### Base & Size Classes
+- `.button` - Base button styles
+- `.button--sm` - Small size variant
+- `.button--md` - Medium size variant
+- `.button--lg` - Large size variant
+
+#### Variant Classes
+- `.button--primary` 
+- `.button--secondary`
+- `.button--tertiary`
+- `.button--ghost`
+- `.button--danger`
+
+#### Modifier Classes
+- `.button--icon-only`
+- `.button--icon-only.button--sm`
+- `.button--icon-only.button--lg`
+
+### Interactive States
+
+The button supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Hover**: `:hover` or `[data-hover="true"]`
+- **Active/Pressed**: `:active` or `[data-pressed="true"]` (includes scale transform)
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
+- **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
+- **Pending**: `[data-pending]` (no pointer events during loading)
+ 
 
 ## Accessibility
 
-### Keyboard Navigation
+#### Keyboard Navigation
 
 - **Space** or **Enter** - Activates the button
 - **Tab** - Moves focus to the next focusable element
 - **Shift + Tab** - Moves focus to the previous focusable element
 
-### Screen Reader Support
+#### Screen Reader Support
 
 - Button content is announced to screen readers
 - Loading state is properly communicated
 - Disabled state prevents interaction and is announced
 - ARIA attributes are automatically managed
 
-### Focus Management
+#### Focus Management
 
 - Clear focus indicators for keyboard navigation
 - Focus is maintained appropriately during state changes
@@ -242,115 +194,3 @@ When using the render prop pattern, these values are provided:
 | `isFocusVisible` | `boolean` | Whether the button should show focus indicator |
 | `isDisabled` | `boolean` | Whether the button is disabled |
 
-## Styling
-
-### CSS Classes
-
-The Button component uses these CSS classes:
-
-- `.button` - Base button styles
-- `.button--{variant}` - Variant-specific styles
-- `.button--{size}` - Size-specific styles
-- `.button--icon-only` - Icon-only button styles
-- `.button--pending` - Loading state styles
-- `.button--disabled` - Disabled state styles
-
-### Custom Styling
-
-```tsx
-import { Button } from '@heroui/react';
-
-function CustomButton() {
-  return (
-    <Button className="bg-purple-500 text-white hover:bg-purple-600">
-      Custom Button
-    </Button>
-  );
-}
-```
-
-### CSS Variables
-
-Customize button appearance using CSS variables:
-
-```css
-.my-button {
-  --button-bg: #3b82f6;
-  --button-text: white;
-  --button-hover-bg: #2563eb;
-  --button-focus-ring: #3b82f6;
-}
-```
-
-## Examples
-
-### Form Submit Button
-
-```tsx
-import { Button, Spinner } from '@heroui/react';
-import { useForm } from 'react-hook-form';
-
-function FormExample() {
-  const { handleSubmit, formState: { isSubmitting } } = useForm();
-
-  const onSubmit = async (data) => {
-    // Submit form data
-    await submitForm(data);
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Form fields */}
-      <Button 
-        type="submit" 
-        isPending={isSubmitting}
-        className="w-full"
-      >
-        {isSubmitting ? (
-          <>
-            <Spinner />
-            Submitting...
-          </>
-        ) : (
-          'Submit Form'
-        )}
-      </Button>
-    </form>
-  );
-}
-```
-
-### Button Group
-
-```tsx
-function ButtonGroup() {
-  const [selected, setSelected] = useState('day');
-
-  const options = [
-    { value: 'day', label: 'Day' },
-    { value: 'week', label: 'Week' },
-    { value: 'month', label: 'Month' },
-    { value: 'year', label: 'Year' }
-  ];
-
-  return (
-    <div className="inline-flex rounded-md shadow-sm" role="group">
-      {options.map((option, index) => (
-        <Button
-          key={option.value}
-          variant={selected === option.value ? 'primary' : 'tertiary'}
-          onPress={() => setSelected(option.value)}
-          className={`
-            ${index === 0 ? 'rounded-r-none' : ''}
-            ${index === options.length - 1 ? 'rounded-l-none' : ''}
-            ${index > 0 && index < options.length - 1 ? 'rounded-none' : ''}
-            ${index > 0 ? '-ml-px' : ''}
-          `}
-        >
-          {option.label}
-        </Button>
-      ))}
-    </div>
-  );
-}
-```

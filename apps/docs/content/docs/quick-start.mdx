@@ -4,6 +4,11 @@ description: Get started with HeroUI v3 in minutes
 icon: rocket
 ---
 
+## Requirements
+
+- [React 19+](https://reactjs.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+
 ## Framework Setup
 
 Choose your framework for detailed installation instructions:
@@ -23,6 +28,7 @@ Choose your framework for detailed installation instructions:
   />
 </Cards>
 
+
 ## Quick Install
 
 Install HeroUI and required dependencies:
@@ -30,22 +36,22 @@ Install HeroUI and required dependencies:
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
   <Tab value="npm">
     ```bash
-    npm install @heroui/react tailwindcss
+    npm install @heroui/react@alpha
     ```
   </Tab>
   <Tab value="pnpm">
     ```bash
-    pnpm add @heroui/react tailwindcss
+    pnpm add @heroui/react@alpha
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
-    yarn add @heroui/react tailwindcss
+    yarn add @heroui/react@alpha
     ```
   </Tab>
   <Tab value="bun">
     ```bash
-    bun add @heroui/react tailwindcss
+    bun add @heroui/react@alpha
     ```
   </Tab>
 </Tabs>
@@ -66,28 +72,16 @@ Add to your main CSS file:
 ## Use Components
 
 ```tsx
-import { Button, Alert } from '@heroui/react';
+import { Button } from '@heroui/react';
 
 function App() {
   return (
-    <Alert>
-      <Alert.Icon />
-      <Alert.Content>
-        <Alert.Title>Ready to go!</Alert.Title>
-        <Alert.Description>
-          Start building with HeroUI components.
-        </Alert.Description>
-      </Alert.Content>
-    </Alert>
+    <Button>
+      My Button
+    </Button>
   );
 }
 ```
-
-## Requirements
-
-- React 19+
-- Tailwind CSS v4 (required)
-- Node.js 22+
 
 ## What's Next?
 

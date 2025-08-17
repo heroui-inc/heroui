@@ -1,41 +1,53 @@
-"use client";
-
-import {Tab, Tabs} from "fumadocs-ui/components/tabs";
+// import {Pre} from "fumadocs-ui/components/codeblock";
 import * as React from "react";
+
+import {getDemo} from "@/demos";
+import {cn} from "@/utils/cn";
+
+import {ComponentPreviewTabs} from "./component-preview-tabs";
+import {ComponentSource} from "./component-source";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "start" | "end";
+  description?: string;
+  hideCode?: boolean;
+  name: string;
 }
 
 export function ComponentPreview({
   align = "center",
-  children,
   className,
+  description,
+  hideCode = false,
+  name,
   ...props
 }: ComponentPreviewProps) {
-  const [Example, Code, ...Children] = React.Children.toArray(children) as React.ReactElement[];
+  const demo = getDemo(name);
+
+  if (!demo) {
+    return (
+      <div className={cn("my-4 rounded-md border border-red-200 bg-red-50 p-4", className)}>
+        <p className="text-sm text-red-600">
+          Component demo &quot;{name}&quot; not found. Make sure the demo is registered in the demos
+          index.
+        </p>
+      </div>
+    );
+  }
+
+  const Component = demo.component;
 
   return (
-    <div className={className} {...props}>
-      <Tabs className="relative my-4 w-full" items={["Preview", "Code"]}>
-        <Tab value="Preview">
-          <div
-            className={`bg-background flex min-h-[350px] rounded-lg border p-10 ${
-              align === "center" ? "items-center justify-center" : ""
-            } ${align === "start" ? "items-start justify-start" : ""} ${
-              align === "end" ? "items-end justify-end" : ""
-            }`}
-          >
-            {Example}
-          </div>
-        </Tab>
-        <Tab value="Code">
-          <div className="flex flex-col space-y-4">
-            <div className="w-full overflow-auto rounded-md">{Code}</div>
-            {Children?.length ? <div className="rounded-md">{Children}</div> : null}
-          </div>
-        </Tab>
-      </Tabs>
-    </div>
+    <ComponentPreviewTabs
+      align={align}
+      className={className}
+      description={description}
+      hideCode={hideCode}
+      name={name}
+      {...props}
+    >
+      <Component />
+      {!hideCode && !!demo.file && <ComponentSource language="tsx" name={name} title={name} />}
+    </ComponentPreviewTabs>
   );
 }

@@ -1,212 +1,119 @@
 ---
 title: Avatar
-description: A compound component for displaying user profile images with fallback support
+description: Display user profile images with customizable fallback content
+links:
+  radix: avatar
+  source: avatar/avatar.tsx
+  styles: avatar.css
+  storybook: avatar
 ---
-
-## Installation
-
-```bash
-npm install @heroui/react tailwindcss
-```
-
-Note: HeroUI v3 requires Tailwind CSS v4. See the [Quick Start](/docs/overview/quick-start) guide for setup instructions.
 
 ## Import
 
 ```tsx
-import { Avatar } from '@heroui/react';
+import {Avatar} from '@heroui/react';
 ```
 
-## Usage
+### Usage
 
-### Basic Avatar
+<ComponentPreview name="avatar-basic" />
 
-The Avatar component uses a compound pattern with `Avatar.Image` and `Avatar.Fallback` parts.
-
-<ComponentPreview>
-  <AvatarBasic />
-  
-```tsx
-<Avatar>
-  <Avatar.Image
-    src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-    alt="User avatar"
-  />
-  <Avatar.Fallback>JD</Avatar.Fallback>
-</Avatar>
-```
-</ComponentPreview>
-
-### Fallback Only
-
-When no image is provided, only the fallback is displayed.
-
-<ComponentPreview>
-  <AvatarFallback />
-  
-```tsx
-<div className="flex gap-4">
-  <Avatar>
-    <Avatar.Image
-      src="/invalid-image.jpg"
-      alt="User avatar"
-    />
-    <Avatar.Fallback>JD</Avatar.Fallback>
-  </Avatar>
-
-  <Avatar>
-    <Avatar.Fallback>AB</Avatar.Fallback>
-  </Avatar>
-
-  <Avatar>
-    <Avatar.Fallback className="bg-purple-500 text-white">
-      CD
-    </Avatar.Fallback>
-  </Avatar>
-</div>
-```
-</ComponentPreview>
-
-### Fallback with Icons
-
-Use icons as fallback content when no initials are available.
-
-
-```tsx
-import { Icon } from '@iconify/react';
-
-<div className="flex gap-4">
-  <Avatar>
-    <Avatar.Fallback>
-      <Icon icon="gravity-ui:person" />
-    </Avatar.Fallback>
-  </Avatar>
-  <Avatar>
-    <Avatar.Fallback>
-      <Icon icon="gravity-ui:person-gear" />
-    </Avatar.Fallback>
-  </Avatar>
-</div>
-```
-
-### Delayed Fallback
-
-Control when the fallback appears using the `delayMs` prop. This prevents flickering when images load quickly.
-
-
-```tsx
-<Avatar>
-  <Avatar.Image
-    src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
-    alt="User"
-  />
-  <Avatar.Fallback delayMs={600}>JG</Avatar.Fallback>
-</Avatar>
-```
 
 ### Sizes
 
-Avatars are available in three sizes: small, medium (default), and large.
+<ComponentPreview name="avatar-sizes" />
 
-<ComponentPreview>
-  <AvatarSizes />
-  
-```tsx
-<div className="flex items-center gap-4">
-  <Avatar size="sm">
-    <Avatar.Image src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" alt="Small" />
-    <Avatar.Fallback>SM</Avatar.Fallback>
-  </Avatar>
-  <Avatar size="md">
-    <Avatar.Image src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4" alt="Medium" />
-    <Avatar.Fallback>MD</Avatar.Fallback>
-  </Avatar>
-  <Avatar size="lg">
-    <Avatar.Image src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" alt="Large" />
-    <Avatar.Fallback>LG</Avatar.Fallback>
-  </Avatar>
-</div>
-```
-</ComponentPreview>
+### Colors
 
-### Avatar Group
-
-Create avatar groups by overlapping multiple avatars with negative margins.
-
-<ComponentPreview>
-  <AvatarGroup />
-  
-```tsx
-const users = [
-  { name: 'John Doe', src: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=3' },
-  { name: 'Jane Smith', src: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=4' },
-  { name: 'Bob Johnson', src: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=5' },
-  { name: 'Alice Brown', src: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=6' },
-];
-
-<div className="flex -space-x-2">
-  {users.map((user) => (
-    <Avatar
-      key={user.name}
-      className="ring-2 ring-background"
-    >
-      <Avatar.Image src={user.src} alt={user.name} />
-      <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
-    </Avatar>
-  ))}
-  <Avatar className="ring-2 ring-background">
-    <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
-  </Avatar>
-</div>
-```
-</ComponentPreview>
-
-## Compound Parts
-
-### Avatar (Root)
-
-The root container that manages the avatar state and provides context to child components.
-
-### Avatar.Image
-
-Displays the user's profile image. If the image fails to load, the fallback will be shown.
-
-### Avatar.Fallback
-
-Content to display when the image is unavailable or still loading. Can contain text, initials, or icons.
-
-## Accessibility
-
-### Image Alt Text
-
-Always provide meaningful alt text for avatar images:
-
-```tsx
-<Avatar>
-  <Avatar.Image
-    src="user-avatar.jpg"
-    alt="John Doe's profile picture"
-  />
-  <Avatar.Fallback>JD</Avatar.Fallback>
-</Avatar>
-```
+<ComponentPreview name="avatar-colors" />
 
 ### Fallback Content
 
-Ensure fallback content is meaningful:
+<ComponentPreview name="avatar-fallback" />
+
+### Avatar Group
+
+<ComponentPreview name="avatar-group" />
+
+### Custom Styles
+
+<ComponentPreview name="avatar-custom-styles" />
+
+## Styling
+
+### Passing Tailwind CSS classes
 
 ```tsx
-// Good: Meaningful initials
-<Avatar.Fallback>JD</Avatar.Fallback>
+import { Avatar } from '@heroui/react';
 
-// Good: Descriptive icon
-<Avatar.Fallback>
-  <Icon icon="gravity-ui:person" aria-label="User avatar" />
-</Avatar.Fallback>
-
-// Avoid: Generic symbols
-<Avatar.Fallback>?</Avatar.Fallback>
+function CustomAvatar() {
+  return (
+    <Avatar className="size-20">
+      <Avatar.Image src="..." alt="..." />
+      <Avatar.Fallback>XL</Avatar.Fallback>
+    </Avatar>
+  );
+}
 ```
+
+### Customizing the component classes
+
+To customize the Avatar component classes, you can use the `@layer components` directive. 
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .avatar {
+    @apply size-16 border-2 border-primary;
+  }
+
+  .avatar__fallback {
+    @apply bg-gradient-to-br from-purple-500 to-pink-500;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Avatar component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/avatar.css)):
+
+#### Base Classes
+- `.avatar` - Base container with default size (size-10)
+- `.avatar__image` - Image element with aspect-square sizing
+- `.avatar__fallback` - Fallback container with centered content
+
+#### Size Modifiers
+- `.avatar--sm` - Small avatar (size-8)
+- `.avatar--md` - Medium avatar (default, no additional styles)
+- `.avatar--lg` - Large avatar (size-12)
+
+#### Color Modifiers
+- `.avatar__fallback--default` - Default text color
+- `.avatar__fallback--accent` - Accent text color
+- `.avatar__fallback--success` - Success text color
+- `.avatar__fallback--warning` - Warning text color
+- `.avatar__fallback--danger` - Danger text color
+
+## Accessibility
+
+#### Image Alt Text
+
+Always provide meaningful alt text for avatar images to ensure screen readers can describe the content.
+
+#### Screen Reader Support
+
+- The component automatically manages focus and announces image loading states
+- Fallback content is announced when images fail to load
+- The `alt` attribute on `Avatar.Image` provides context for screen readers
+
+#### Best Practices
+
+- Always include descriptive alt text for all avatar images
+- Use meaningful fallbacks like initials or icons that represent the user
+- Maintain consistent sizing for avatars in groups or lists
+- Ensure fallback text has sufficient contrast against the background
 
 ## API Reference
 
@@ -214,9 +121,10 @@ Ensure fallback content is meaningful:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the avatar |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Avatar size |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Fallback color theme |
 | `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Avatar.Image and Avatar.Fallback components |
+| `asChild` | `boolean` | `false` | Render as child element |
 
 ### Avatar.Image Props
 
@@ -224,129 +132,15 @@ Ensure fallback content is meaningful:
 |------|------|---------|-------------|
 | `src` | `string` | - | Image source URL |
 | `alt` | `string` | - | Alternative text for the image |
+| `onLoadingStatusChange` | `(status: 'loading' \| 'loaded' \| 'error') => void` | - | Callback for loading status changes |
 | `className` | `string` | - | Additional CSS classes |
-| `onLoadingStatusChange` | `(status: 'idle' \| 'loading' \| 'loaded' \| 'error') => void` | - | Callback for loading status changes |
+| `asChild` | `boolean` | `false` | Render as child element |
 
 ### Avatar.Fallback Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `delayMs` | `number` | `0` | Delay in milliseconds before showing fallback |
+| `delayMs` | `number` | - | Delay before showing fallback (prevents flash) |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | Override color from parent |
 | `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Fallback content (text, initials, or icons) |
-
-## Styling
-
-### CSS Classes
-
-The Avatar component uses these CSS classes:
-
-- `.avatar` - Base avatar styles
-- `.avatar--{size}` - Size-specific styles
-- `.avatar__image` - Image element styles
-- `.avatar__fallback` - Fallback element styles
-
-### Custom Styling
-
-```tsx
-// Custom avatar with different styling
-<Avatar className="border-2 border-blue-500 shadow-lg">
-  <Avatar.Image src="..." alt="Custom styled avatar" />
-  <Avatar.Fallback className="bg-blue-100 text-blue-700">
-    CS
-  </Avatar.Fallback>
-</Avatar>
-```
-
-### Size Customization
-
-```css
-/* Custom avatar size */
-.avatar-xl {
-  width: 5rem;
-  height: 5rem;
-}
-
-.avatar-xl .avatar__fallback {
-  font-size: 1.5rem;
-}
-```
-
-## Examples
-
-### User Profile Card
-
-```tsx
-import { Avatar, Card } from '@heroui/react';
-
-function UserProfile({ user }) {
-  return (
-    <Card>
-      <Card.Content className="flex items-center gap-4 p-6">
-        <Avatar size="lg">
-          <Avatar.Image src={user.avatar} alt={`${user.name}'s avatar`} />
-          <Avatar.Fallback>
-            {user.name.split(' ').map(n => n[0]).join('')}
-          </Avatar.Fallback>
-        </Avatar>
-        <div>
-          <h3 className="font-semibold">{user.name}</h3>
-          <p className="text-gray-600">{user.role}</p>
-          <p className="text-sm text-gray-500">{user.email}</p>
-        </div>
-      </Card.Content>
-    </Card>
-  );
-}
-```
-
-### Team Members List
-
-```tsx
-function TeamMembersList({ members }) {
-  return (
-    <div className="space-y-4">
-      {members.map((member) => (
-        <div key={member.id} className="flex items-center gap-3">
-          <Avatar>
-            <Avatar.Image src={member.avatar} alt={member.name} />
-            <Avatar.Fallback>
-              {member.name.charAt(0)}
-            </Avatar.Fallback>
-          </Avatar>
-          <div>
-            <p className="font-medium">{member.name}</p>
-            <p className="text-sm text-gray-600">{member.department}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-```
-
-### Avatar with Status Indicator
-
-```tsx
-function AvatarWithStatus({ user, status }) {
-  const statusColors = {
-    online: 'bg-green-500',
-    offline: 'bg-gray-400',
-    busy: 'bg-red-500',
-    away: 'bg-yellow-500'
-  };
-
-  return (
-    <div className="relative">
-      <Avatar>
-        <Avatar.Image src={user.avatar} alt={user.name} />
-        <Avatar.Fallback>{user.initials}</Avatar.Fallback>
-      </Avatar>
-      <div 
-        className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white ${statusColors[status]}`}
-        aria-label={`User is ${status}`}
-      />
-    </div>
-  );
-}
-```
+| `asChild` | `boolean` | `false` | Render as child element | 

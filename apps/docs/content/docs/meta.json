@@ -12,6 +12,8 @@
     "handbook/styling",
     "handbook/animation",
     "handbook/composition",
+    "---UI for Agents---",
+    "llms-txt",
     "---Components---",
     "components/avatar",
     "components/button"

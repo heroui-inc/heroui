@@ -4,7 +4,7 @@
 
 import type {ImgHTMLAttributes, SyntheticEvent} from "react";
 
-import {useRef, useState, useEffect, useCallback} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>;
 
@@ -72,15 +72,15 @@ type ImageEvent = SyntheticEvent<HTMLImageElement, Event>;
  */
 export function useImage(props: UseImageProps = {}) {
   const {
-    onLoad,
-    onError,
-    ignoreFallback,
-    src,
     crossOrigin,
-    srcSet,
-    sizes,
+    ignoreFallback,
     loading,
+    onError,
+    onLoad,
     shouldBypassImageLoad = false,
+    sizes,
+    src,
+    srcSet,
   } = props;
 
   const [isHydrated, setIsHydrated] = useState(false);

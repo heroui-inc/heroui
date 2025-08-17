@@ -462,6 +462,24 @@ const AnthropicIcon: React.FC<IconSvgProps> = ({height, size = 24, width, ...pro
   );
 };
 
+const RadixUIIcon: React.FC<IconSvgProps> = ({height, size = 24, width, ...props}) => {
+  return (
+    <svg
+      fill="currentColor"
+      height={size || height}
+      viewBox="4 0 17 25"
+      width={size || width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M12 25a8 8 0 1 1 0-16v16zM12 0H4v8h8V0zM17 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
 export {
   GithubIcon,
   NextJsIcon,
@@ -482,4 +500,5 @@ export {
   BunIcon,
   OpenAIIcon,
   AnthropicIcon,
+  RadixUIIcon,
 };

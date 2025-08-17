@@ -1,8 +1,10 @@
 ---
 title: Introduction
-description: A modern React UI library built with Tailwind CSS v4
+description: An open-souce UI component library for building beautiful and accessible user interfaces.
 icon: book-open
 ---
+
+HeroUI is an open-source UI library that brings together beautiful components, animations, accessibility, customization, and a great developer experience. Built on [Tailwind CSS v4](https://tailwindcss.com/) and [React Aria Components](https://react-spectrum.adobe.com/react-aria/index.html).  
 
 ## Features
 
@@ -10,64 +12,73 @@ icon: book-open
 - ♿ **Accessible by Default** - Built on React Aria Components
 - 🧩 **Compound Pattern** - Flexible composition like Radix UI
 - 🎯 **TypeScript First** - Full type safety
-- 🌊 **Tailwind CSS v4 Required** - Built on the latest CSS technology
-- 📦 **Tree-shakeable** - Import only what you need
+- 📦 **Tree-shakeable** - Bundle size includes only what you use
+ 
 
-## Installation
+## Vision
 
-<PackageManagers
-  commands={{
-    npm: "npm install @heroui/react@alpha",
-    yarn: "yarn add @heroui/react@alpha",
-    pnpm: "pnpm add @heroui/react@alpha",
-    bun: "bun add @heroui/react@alpha",
-  }}
-/>
+Our vision is to provide high-quality components with beautiful default styles, animations, accessibility, and support for the most used frameworks. In v3, we separated the styles from the implementation. We started by implementing those styles in React and its frameworks, but the goal is to have support for the most widely used ones.
 
-HeroUI v3 is built on Tailwind CSS v4 - both packages are required.
+We're also building HeroUI not only for developers but for AI agents, as we believe AI is excellent at coding but needs help creating great user interfaces (which requires design taste). We're building beautiful component pieces that any AI model can put together to create great products. We're creating a whole ecosystem around HeroUI to give you all the software pieces you need to move faster, including HeroUI for React Native, HeroUI Chat (our platform for building UIs by prompting), UI for LLMs, and more.
 
-## Quick Links
+## Why HeroUI?
 
-<Cards>
-  <Card title="Quick Start" href="/docs/overview/quick-start" />
-  <Card title="Components" href="/docs/components" />
-  <Card title="Styling Guide" href="/docs/handbook/styling" />
-  <Card title="About" href="/docs/overview/about" />
-</Cards>
+HeroUI stands out as the ideal choice for developers who value their time and want to build beautiful, accessible applications without the overhead. Here's why you should choose HeroUI:
 
-## Philosophy
+- **Ship Faster**: Beautiful components out of the box mean you can focus on your product logic, not UI design
+- **Accessibility Without the Complexity**: Built on React Aria, you get WCAG-compliant components without becoming an accessibility expert
+- **Modern Stack**: Tailwind CSS v4 and React 19+ ensure you're building with the latest technologies
+- **Developer Experience First**: Full TypeScript support, predictable APIs, and excellent IDE integration
+- **Flexible Architecture**: Compound component pattern gives you Radix-like flexibility with better defaults
+- **AI-Ready**: Designed to work seamlessly with AI coding assistants, making development even faster
+- **Zero Design Debt**: Professional design system included—no need to hire a designer for MVP
+- **Optimized Bundle Size**: Tree-shaking ensures you only ship what you use
 
-HeroUI v3 embraces the compound component pattern, giving you complete control over markup structure while providing robust accessibility features through React Aria Components. Each component is broken down into composable parts that work together seamlessly.
+### Why not copy-paste?
 
-```tsx
-// HeroUI v2 - Monolithic approach
-import {Accordion, AccordionItem} from "@heroui/react";
+We have no plans to make it copy/paste. We'd rather maintain the library: fix bugs, launch new features, handle breaking changes, update dependencies—all while you're focused on your product. When copy-pasting code, you become responsible for maintaining it. We believe most of the time you only want to modify the styles, and we provide a robust system based on plain CSS and Tailwind that allows you to modify all the slots of the components. You can also decide not to import the styles and apply your own styles to the base components.
 
-<Accordion>
-  <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
-    Lorem ipsum dolor sit amet...
-  </AccordionItem>
-  <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-    Lorem ipsum dolor sit amet...
-  </AccordionItem>
-</Accordion>
+We want to speed up the process of building a product, not slow it down by giving you more code to maintain. We're constantly shipping new features, fixing bugs, improving styles, adjusting the code to support the latest browser capabilities, updating internal dependencies, solving breaking changes, and handling many more maintenance tasks that the end user shouldn't have to do.
 
-// HeroUI v3 - Compound component approach
-import { Accordion } from "@heroui/react";
+### Why React Aria over Radix?
 
-<Accordion>
-  <Accordion.Item>
-    <Accordion.Heading>
-      <Accordion.Trigger>
-        Accordion 1
-        <Accordion.Indicator />
-      </Accordion.Trigger>
-    </Accordion.Heading>
-    <Accordion.Panel>
-      <Accordion.Body>
-        Lorem ipsum dolor sit amet...
-      </Accordion.Body>
-    </Accordion.Panel>
-  </Accordion.Item>
-</Accordion>
-```
+We've been using React Aria even before React Aria Components, using plain hooks in HeroUI v2, and it's an amazing library created by talented people solving really difficult problems in accessibility. It's constantly maintained and driven by the open-source community. It makes the transition from HeroUI v2 to v3 simpler as we maintain the same API conventions (e.g., `isDisabled`, `onPress`). Huge thanks to [Devon Govett](https://x.com/devongovett) and the Adobe team for creating and maintaining this library.
+
+## Tailwind CSS
+
+All components are built with Tailwind CSS v4, which provides a robust set of utility classes for styling. This allows you to quickly and easily customize the appearance of your components without having to write custom CSS.
+
+## FAQ
+
+- Is it free and open source? **Yes, HeroUI is completely free and open source.**
+
+- Is it a design system? **Yes, HeroUI is a comprehensive design system with consistent patterns and guidelines.**
+
+- Does it have a Figma file? **Yes, we will make it public very soon.**
+
+- Is it a component library? **Yes, it's a proper component library—no copy-paste nightmare.**
+
+- Can I use it outside of React? **Yes, the styles can be applied to even just plain HTML. Example: [Tailwind Play](https://play.tailwindcss.com/bl5fXT3rxK)**
+
+- What frameworks are supported? **Anything that supports React is supported.**
+
+- Can I use it with TypeScript? **Yes, everything is written in TypeScript with best-in-class developer experience.**
+
+- Can I use it in my project? **Yes, you can use it for both personal and commercial projects without needing to provide attribution. However, we'd love to see what you build, so if you're up for it, let us know at support@heroui.com.**
+
+## Community
+
+We're excited to see the community adopt HeroUI, raise issues, and provide feedback. Whether it's a feature request, bug report, or a project to showcase, please get involved!
+
+- [Discord](https://discord.gg/9b6yyZKmH4)
+- [X/Twitter](https://x.com/hero_ui)
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+
+## Contributing
+
+PRs on HeroUI are always welcome, please see our [contribution guidelines](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md) to learn how you can contribute to this project.
+
+## License
+
+HeroUI is released under the [MIT License](https://github.com/heroui-inc/heroui/blob/main/LICENSE).
+
