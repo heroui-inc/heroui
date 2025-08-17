@@ -4,7 +4,7 @@
   "root": true,
   "pages": [
     "---Getting Started---",
-    "index",
+    "introduction",
     "quick-start",
     "design-principles",
     "releases",

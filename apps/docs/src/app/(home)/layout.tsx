@@ -14,7 +14,7 @@ export default function Layout({children}: {children: ReactNode}) {
           active: "none",
           on: "nav",
           text: "Docs",
-          url: "/docs",
+          url: "/docs/introduction",
         },
         {
           active: "none",

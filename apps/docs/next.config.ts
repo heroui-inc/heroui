@@ -28,6 +28,30 @@ const config: NextConfig = {
     },
   },
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: "/docs",
+        destination: "/docs/introduction",
+        permanent: true,
+      },
+      {
+        source: "/docs/components",
+        destination: "/docs/components/avatar",
+        permanent: true,
+      },
+      {
+        source: "/components",
+        destination: "/docs/components/avatar",
+        permanent: true,
+      },
+      {
+        source: "/handbook",
+        destination: "/docs/handbook/styling",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {
