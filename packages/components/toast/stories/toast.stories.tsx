@@ -425,6 +425,49 @@ const CloseToastTemplate = (args: ToastProps) => {
   );
 };
 
+const MultiToasterTemplate = (args) => {
+  return (
+    <>
+      <ToastProvider
+        maxVisibleToasts={args.maxVisibleToasts}
+        placement="bottom-left"
+        toasterId="left"
+      />
+      <ToastProvider
+        maxVisibleToasts={args.maxVisibleToasts}
+        placement="bottom-right"
+        toasterId="right"
+      />
+      <div>
+        <Button
+          onPress={() => {
+            addToast({
+              title: "Toast Title",
+              description: "Toast Displayed Successfully",
+              ...args,
+              toasterId: "left",
+            });
+          }}
+        >
+          Show left toast
+        </Button>
+        <Button
+          onPress={() => {
+            addToast({
+              title: "Toast Title",
+              description: "Toast Displayed Successfully",
+              ...args,
+              toasterId: "right",
+            });
+          }}
+        >
+          Show right toast
+        </Button>
+      </div>
+    </>
+  );
+};
+
 export const Default = {
   render: Template,
   args: {
@@ -524,6 +567,13 @@ export const CustomCloseIcon = {
 
 export const CloseToast = {
   render: CloseToastTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const MultiToaster = {
+  render: MultiToasterTemplate,
   args: {
     ...defaultProps,
   },

@@ -110,6 +110,11 @@ export interface ToastProps extends ToastVariantProps {
    * @default "default"
    */
   severity?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  /**
+   * The id of the ToastProvider. The decides which ToastProvider will handle the toast.
+   * @default "heroui"
+   */
+  toasterId?: string;
 }
 
 interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
