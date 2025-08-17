@@ -67,7 +67,7 @@ export interface ToastProps extends ToastVariantProps {
   /**
    * Content to be displayed in the end side of the toast
    */
-  endContent?: ReactNode;
+  endContent?: ReactNode | ((onClose: () => void) => ReactNode);
   /**
    * Icon to be displayed in the toast - overrides the default icon
    */
