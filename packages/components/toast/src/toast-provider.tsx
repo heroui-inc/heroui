@@ -11,7 +11,7 @@ import {ToastRegion} from "./toast-region";
 const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 
 const defaultToasterId = "heroui";
-let globalToastQueues: {[key: string]: ToastQueue<ToastProps> | null} = {};
+let globalToastQueues: Record<string, ToastQueue<ToastProps>> = {};
 
 interface ToastProviderProps {
   maxVisibleToasts?: number;
@@ -23,7 +23,11 @@ interface ToastProviderProps {
   toasterId?: string;
 }
 
-export const getToastQueue = ({toasterId}: {toasterId: string}) => {
+export function getToastQueue(): ToastQueue<ToastProps>;
+export function getToastQueue(args: {toasterId: string}): ToastQueue<ToastProps>;
+export function getToastQueue(args?: {toasterId: string}) {
+  const toasterId = args?.toasterId || defaultToasterId;
+
   if (!globalToastQueues[toasterId]) {
     globalToastQueues[toasterId] = new ToastQueue({
       maxVisibleToasts: Infinity,
@@ -31,7 +35,7 @@ export const getToastQueue = ({toasterId}: {toasterId: string}) => {
   }
 
   return globalToastQueues[toasterId];
-};
+}
 
 export const ToastProvider = ({
   placement = "bottom-right",
@@ -71,18 +75,19 @@ export const addToast = ({toasterId = defaultToasterId, ...props}: ToastProps & 
   return globalToastQueues[toasterId].add(props);
 };
 
-export const closeToast = ({
-  key,
-  toasterId = defaultToasterId,
-}: {
-  key: string;
-  toasterId?: string;
-}) => {
+export function closeToast(key: string): void;
+export function closeToast(args: {key: string; toasterId?: string}): void;
+export function closeToast(args: string | {key: string; toasterId?: string}) {
+  const {key, toasterId} =
+    typeof args === "string"
+      ? {key: args, toasterId: defaultToasterId}
+      : {key: args.key, toasterId: args.toasterId || defaultToasterId};
+
   if (!globalToastQueues[toasterId]) {
     return;
   }
   globalToastQueues[toasterId].close(key);
-};
+}
 
 export const closeAll = (toasterId = defaultToasterId) => {
   if (!globalToastQueues[toasterId]) {
