@@ -134,6 +134,15 @@ You can pass a custom close icon to the toast by passing the `closeIcon` prop an
   files={toastContent.customCloseIcon}
 />
 
+### Multiple ToastProvider
+
+You can have multiple ToastProvider with different configurations and use `toasterId` to distinguish them. By passing `toasterId` to `addToast` function, you can add a toast to the corresponding `ToastProvider`.
+
+<CodeDemo
+    title="Close"
+    files={toastContent.multipleToastProvider}
+/>
+
 ### Global Toast Props
 
 You can pass global toast props to the `ToastProvider` to apply to all toasts.
