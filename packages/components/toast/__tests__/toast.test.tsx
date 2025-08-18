@@ -176,25 +176,25 @@ describe("Toast", () => {
   });
 
   it("should work with multiple ToastProvider", async () => {
-    const left_toaster_id = "left";
-    const left_title = "Left Toast Title";
-    const left_description = "Left Toast Description";
+    const leftToasterId = "left";
+    const leftTitle = "Left Toast Title";
+    const leftDescription = "Left Toast Description";
 
-    const right_toaster_id = "right";
-    const right_title = "Right Toast Title";
-    const right_description = "Right Toast Description";
+    const rightToasterId = "right";
+    const rightTitle = "Right Toast Title";
+    const rightDescription = "Right Toast Description";
 
-    const wrapper = render(
+    render(
       <>
-        <ToastProvider placement="bottom-left" toasterId={left_toaster_id} />
-        <ToastProvider placement="bottom-right" toasterId={right_toaster_id} />
+        <ToastProvider placement="bottom-left" toasterId={leftToasterId} />
+        <ToastProvider placement="bottom-right" toasterId={rightToasterId} />
         <button
           data-testid="left-button"
           onClick={() => {
             addToast({
-              title: left_title,
-              description: left_description,
-              toasterId: left_toaster_id,
+              title: leftTitle,
+              description: leftDescription,
+              toasterId: leftToasterId,
             });
           }}
         >
@@ -204,9 +204,9 @@ describe("Toast", () => {
           data-testid="right-button"
           onClick={() => {
             addToast({
-              title: right_title,
-              description: right_description,
-              toasterId: right_toaster_id,
+              title: rightTitle,
+              description: rightDescription,
+              toasterId: rightToasterId,
             });
           }}
         >
@@ -215,25 +215,34 @@ describe("Toast", () => {
       </>,
     );
 
-    const left_button = wrapper.getByTestId("left-button");
-    const right_button = wrapper.getByTestId("right-button");
+    const leftButton = screen.getByTestId("left-button");
+    const rightButton = screen.getByTestId("right-button");
 
-    await user.click(left_button);
-    await user.click(right_button);
-    const region = screen.getAllByRole("region");
+    await user.click(leftButton);
+    await user.click(rightButton);
+    const regions = await screen.findAllByRole("region");
+
+    expect(regions).toHaveLength(2);
+
+    const leftRegion = regions.find(
+      (region) => region.getAttribute("data-placement") === "bottom-left",
+    );
+    const rightRegion = regions.find(
+      (region) => region.getAttribute("data-placement") === "bottom-right",
+    );
 
     // check for left ToastProvider
-    expect(region[0]).toHaveAttribute("data-placement", "bottom-left");
-    expect(region[0]).toContainHTML(left_title);
-    expect(region[0]).toContainHTML(left_description);
-    expect(region[0]).not.toContainHTML(right_title);
-    expect(region[0]).not.toContainHTML(right_description);
+    expect(leftRegion).toHaveAttribute("data-placement", "bottom-left");
+    expect(leftRegion).toContainHTML(leftTitle);
+    expect(leftRegion).toContainHTML(leftDescription);
+    expect(leftRegion).not.toContainHTML(rightTitle);
+    expect(leftRegion).not.toContainHTML(rightDescription);
 
     // check for right ToastProvider
-    expect(region[1]).toHaveAttribute("data-placement", "bottom-right");
-    expect(region[1]).toContainHTML(right_title);
-    expect(region[1]).toContainHTML(right_description);
-    expect(region[1]).not.toContainHTML(left_title);
-    expect(region[1]).not.toContainHTML(left_description);
+    expect(rightRegion).toHaveAttribute("data-placement", "bottom-right");
+    expect(rightRegion).toContainHTML(rightTitle);
+    expect(rightRegion).toContainHTML(rightDescription);
+    expect(rightRegion).not.toContainHTML(leftTitle);
+    expect(rightRegion).not.toContainHTML(leftDescription);
   });
 });
