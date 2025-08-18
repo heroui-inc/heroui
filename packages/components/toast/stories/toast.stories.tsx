@@ -438,7 +438,7 @@ const MultiToasterTemplate = (args) => {
         placement="bottom-right"
         toasterId="right"
       />
-      <div>
+      <div className="flex flex-wrap gap-2">
         <Button
           onPress={() => {
             addToast({
