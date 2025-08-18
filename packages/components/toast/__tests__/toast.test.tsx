@@ -174,4 +174,66 @@ describe("Toast", () => {
 
     expect(loadingIcon).toBeTruthy();
   });
+
+  it("should work with multiple ToastProvider", async () => {
+    const left_toaster_id = "left";
+    const left_title = "Left Toast Title";
+    const left_description = "Left Toast Description";
+
+    const right_toaster_id = "right";
+    const right_title = "Right Toast Title";
+    const right_description = "Right Toast Description";
+
+    const wrapper = render(
+      <>
+        <ToastProvider placement="bottom-left" toasterId={left_toaster_id} />
+        <ToastProvider placement="bottom-right" toasterId={right_toaster_id} />
+        <button
+          data-testid="left-button"
+          onClick={() => {
+            addToast({
+              title: left_title,
+              description: left_description,
+              toasterId: left_toaster_id,
+            });
+          }}
+        >
+          Show Left Toast
+        </button>
+        <button
+          data-testid="right-button"
+          onClick={() => {
+            addToast({
+              title: right_title,
+              description: right_description,
+              toasterId: right_toaster_id,
+            });
+          }}
+        >
+          Show Right Toast
+        </button>
+      </>,
+    );
+
+    const left_button = wrapper.getByTestId("left-button");
+    const right_button = wrapper.getByTestId("right-button");
+
+    await user.click(left_button);
+    await user.click(right_button);
+    const region = screen.getAllByRole("region");
+
+    // check for left ToastProvider
+    expect(region[0]).toHaveAttribute("data-placement", "bottom-left");
+    expect(region[0]).toContainHTML(left_title);
+    expect(region[0]).toContainHTML(left_description);
+    expect(region[0]).not.toContainHTML(right_title);
+    expect(region[0]).not.toContainHTML(right_description);
+
+    // check for right ToastProvider
+    expect(region[1]).toHaveAttribute("data-placement", "bottom-right");
+    expect(region[1]).toContainHTML(right_title);
+    expect(region[1]).toContainHTML(right_description);
+    expect(region[1]).not.toContainHTML(left_title);
+    expect(region[1]).not.toContainHTML(left_description);
+  });
 });
