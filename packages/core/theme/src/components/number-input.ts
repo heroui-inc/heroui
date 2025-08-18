@@ -849,6 +849,14 @@ const numberInput = tv({
         label: ["pe-2", "max-w-full", "text-ellipsis", "overflow-hidden"],
       },
     },
+    // isClearable & isDisabled
+    {
+      isClearable: true,
+      isDisabled: true,
+      class: {
+        clearButton: "peer-data-[filled=true]:pointer-events-none",
+      },
+    },
   ],
 });
 
