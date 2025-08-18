@@ -1,0 +1,154 @@
+---
+title: Tooltip
+description: Displays informative text when users hover over or focus on an element
+links:
+  rac: Tooltip
+  source: tooltip/tooltip.tsx
+  styles: tooltip.css
+  storybook: tooltip
+---
+
+## Import
+
+```tsx
+import {Tooltip} from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview 
+  name="tooltip-basic"
+/>
+
+### With Arrow
+
+<ComponentPreview 
+  name="tooltip-with-arrow"
+/>
+
+### Placement
+
+<ComponentPreview 
+  name="tooltip-placement"
+/>
+
+### Custom Triggers
+
+<ComponentPreview 
+  name="tooltip-custom-trigger"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Tooltip, Button} from '@heroui/react';
+
+function CustomTooltip() {
+  return (
+    <Tooltip>
+      <Button>Hover me</Button>
+      <Tooltip.Content className="bg-accent text-accent-foreground">
+        <p>Custom styled tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Tooltip component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .tooltip {
+    @apply rounded-xl shadow-lg;
+  }
+  
+  .tooltip__trigger {
+    @apply cursor-help;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Tooltip component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tooltip.css)):
+
+#### Base Classes
+- `.tooltip` - Base tooltip styles with animations
+- `.tooltip__trigger` - Trigger element styles
+
+### Interactive States
+
+The component supports animation states:
+
+- **Entering**: `[data-entering]` - Applied during tooltip appearance
+- **Exiting**: `[data-exiting]` - Applied during tooltip disappearance
+- **Placement**: `[data-placement="*"]` - Applied based on tooltip position
+
+## Accessibility
+
+#### Keyboard Navigation
+
+- Tooltips appear when the trigger element receives keyboard focus
+- Tooltips disappear when focus moves away
+
+#### Screen Reader Support
+
+- Uses `aria-describedby` to associate tooltip with trigger element
+- Automatically manages ARIA relationships between trigger and tooltip
+- Tooltips are announced when the trigger element is focused
+
+#### Focus Management
+
+- Tooltips display when element is focused via keyboard
+- Can be configured to show only on focus using `trigger="focus"` prop
+- Focus ring appears on trigger elements for keyboard navigation
+
+#### Important Considerations
+
+- Tooltips are not shown on touch screen interactions
+- UI should remain usable without tooltips
+- Trigger elements must be focusable and hoverable
+
+## API Reference
+
+### Tooltip Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Trigger element and content |
+| `delay` | `number` | `700` | Delay in milliseconds before showing tooltip |
+| `closeDelay` | `number` | `0` | Delay in milliseconds before hiding tooltip |
+| `trigger` | `"hover" \| "focus"` | `"hover"` | How the tooltip is triggered |
+| `isDisabled` | `boolean` | `false` | Whether the tooltip is disabled |
+
+### Tooltip.Content Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to display in the tooltip |
+| `showArrow` | `boolean` | `false` | Whether to show the arrow indicator |
+| `offset` | `number` | `3` (7 with arrow) | Distance from the trigger element |
+| `placement` | `"top" \| "bottom" \| "left" \| "right"` (and variants) | `"top"` | Placement of the tooltip |
+| `className` | `string` | - | Additional CSS classes |
+
+### Tooltip.Trigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Element that triggers the tooltip |
+| `className` | `string` | - | Additional CSS classes |
+
+### Tooltip.Arrow Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Custom arrow element |
+| `className` | `string` | - | Additional CSS classes |

@@ -1,0 +1,131 @@
+---
+title: Link
+description: A styled anchor component for navigation with built-in icon support
+links:
+  rac: Link
+  source: link/link.tsx
+  styles: link.css
+  storybook: link
+---
+
+## Import
+
+```tsx
+import {Link} from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview 
+  name="link-basic"
+/>
+
+### With Icons
+
+<ComponentPreview 
+  name="link-with-icon"
+/>
+
+### Custom Styling
+
+<ComponentPreview 
+  name="link-styled"
+/>
+
+### Navigation Examples
+
+<ComponentPreview 
+  name="link-navigation"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Link} from '@heroui/react';
+
+function CustomLink() {
+  return (
+    <Link 
+      href="#" 
+      className="text-lg font-bold text-accent hover:text-accent/80"
+    >
+      Custom styled link
+    </Link>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Link component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .link {
+    @apply font-semibold no-underline hover:underline;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Link component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)):
+
+#### Base Classes
+- `.link` - Base link styles with underline on hover
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Disabled**: `:disabled` or `[aria-disabled="true"]`
+
+## Accessibility
+
+#### Keyboard Navigation
+
+- **Enter** - Activates the link
+- **Tab** - Navigate to/from the link
+
+#### Screen Reader Support
+
+- Uses semantic `<a>` element or `role="link"` for JavaScript-handled links
+- Supports `aria-label`, `aria-labelledby`, and `aria-describedby`
+- Exposes disabled state to assistive technology
+
+#### Focus Management
+
+- Supports `autoFocus` prop for automatic focus
+- Provides visible focus ring for keyboard navigation
+- Focus states properly announced to screen readers
+
+## API Reference
+
+### Link Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | - | URL for navigation |
+| `target` | `string` | - | Specifies where to open the linked document |
+| `rel` | `string` | - | Specifies the relationship between documents |
+| `isDisabled` | `boolean` | `false` | Disables link interaction |
+| `showIcon` | `boolean` | `false` | Shows the link icon |
+| `iconPlacement` | `"start" \| "end"` | `"end"` | Position of the icon |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Link content |
+| `onPress` | `(e: PressEvent) => void` | - | Handler called when the link is pressed |
+| `autoFocus` | `boolean` | - | Whether the element should receive focus on render |
+
+### Link.Icon Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props with child element |
+| `children` | `React.ReactNode` | - | Custom icon element |
+| `className` | `string` | - | Additional CSS classes |

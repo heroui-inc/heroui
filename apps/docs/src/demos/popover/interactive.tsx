@@ -1,0 +1,101 @@
+"use client";
+
+import {useState} from "react";
+import {Popover, Button, Avatar, TextField, Label} from "@heroui/react";
+
+export function PopoverInteractive() {
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [comment, setComment] = useState("");
+
+  return (
+    <div className="flex items-center gap-6">
+      {/* User profile popover */}
+      <Popover>
+        <Popover.Trigger aria-label="User profile">
+          <div className="flex items-center gap-2">
+            <Avatar size="sm">
+              <Avatar.Image 
+                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" 
+                alt="Sarah Johnson"
+              />
+              <Avatar.Fallback>SJ</Avatar.Fallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <p className="text-sm font-medium">Sarah Johnson</p>
+              <p className="text-muted text-xs">@sarahj</p>
+            </div>
+          </div>
+        </Popover.Trigger>
+        <Popover.Content className="w-[320px]">
+          <Popover.Dialog>
+            <Popover.Heading>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Avatar size="md">
+                    <Avatar.Image 
+                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" 
+                      alt="Sarah Johnson"
+                    />
+                    <Avatar.Fallback>SJ</Avatar.Fallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-semibold">Sarah Johnson</p>
+                    <p className="text-muted text-sm">@sarahj</p>
+                  </div>
+                </div>
+                <Button 
+                  size="sm" 
+                  variant={isFollowing ? "tertiary" : "primary"}
+                  onPress={() => setIsFollowing(!isFollowing)}
+                  className="rounded-full"
+                >
+                  {isFollowing ? "Following" : "Follow"}
+                </Button>
+              </div>
+            </Popover.Heading>
+            <p className="text-muted mt-3 text-sm">
+              Product designer and creative director. Building beautiful experiences that matter.
+            </p>
+            <div className="mt-3 flex gap-4">
+              <div>
+                <span className="font-semibold">892</span>
+                <span className="text-muted ml-1 text-sm">Following</span>
+              </div>
+              <div>
+                <span className="font-semibold">12.5K</span>
+                <span className="text-muted ml-1 text-sm">Followers</span>
+              </div>
+            </div>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover>
+
+      {/* Comment popover */}
+      <Popover>
+        <Button variant="secondary">Add Comment</Button>
+        <Popover.Content className="w-[300px]">
+          <Popover.Dialog>
+            <Popover.Heading>Add a comment</Popover.Heading>
+            <div className="mt-3 space-y-3">
+              <div>
+                <Label htmlFor="comment">Your comment</Label>
+                <TextField 
+                  id="comment"
+                  value={comment} 
+                  onChange={setComment}
+                  className="mt-1"
+                >
+                  <TextField.Input placeholder="Type your comment..." />
+                </TextField>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button size="sm" variant="tertiary">Cancel</Button>
+                <Button size="sm" variant="primary">Post</Button>
+              </div>
+            </div>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover>
+    </div>
+  );
+}

@@ -15,7 +15,13 @@
     "---UI for Agents---",
     "llms-txt",
     "---Components---",
+    "components/accordion",
     "components/avatar",
-    "components/button"
+    "components/button",
+    "components/chip",
+    "components/link",
+    "components/popover",
+    "components/spinner",
+    "components/tooltip"
   ]
 }

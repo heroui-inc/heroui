@@ -79,16 +79,6 @@ const CompoundLink = Object.assign(LinkRoot, {
   Icon: LinkIconComponent,
 });
 
-/* ------------------------------------------------------------------------------------------------
- * Legacy Link Component (for backward compatibility)
- * --------------------------------------------------------------------------------------------- */
-const Link = React.forwardRef<React.ElementRef<typeof LinkPrimitive>, LinkRootProps>(
-  (props, ref) => {
-    return <LinkRoot ref={ref} {...props} />;
-  },
-);
-
-Link.displayName = "HeroUI.Link";
-
 export type {LinkRootProps as LinkProps, LinkIconProps};
-export {CompoundLink as Link, LinkRoot, LinkIconComponent as LinkIcon};
+
+export default CompoundLink;

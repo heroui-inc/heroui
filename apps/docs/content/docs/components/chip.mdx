@@ -1,0 +1,122 @@
+---
+title: Chip
+description: Small informational badges for displaying labels, statuses, and categories
+links:
+  source: chip/chip.tsx
+  styles: chip.css
+  storybook: chip
+---
+
+## Import
+
+```tsx
+import {Chip} from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview 
+  name="chip-basic"
+/>
+
+### Variants
+
+<ComponentPreview 
+  name="chip-variants"
+/>
+
+### With Icons
+
+<ComponentPreview 
+  name="chip-with-icon"
+/>
+
+### Statuses
+
+<ComponentPreview 
+  name="chip-statuses"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Chip} from '@heroui/react';
+
+function CustomChip() {
+  return (
+    <Chip className="rounded-full px-4 py-2 font-bold">
+      Custom Styled
+    </Chip>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Chip component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .chip {
+    @apply rounded-full text-xs;
+  }
+  
+  .chip--accent {
+    @apply border-accent/20;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Chip component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/chip.css)):
+
+#### Base Classes
+- `.chip` - Base chip styles
+
+#### Color Classes
+- `.chip--accent` - Accent color variant
+- `.chip--danger` - Danger color variant
+- `.chip--default` - Default color variant
+- `.chip--success` - Success color variant
+- `.chip--warning` - Warning color variant
+
+#### Variant Classes
+- `.chip--primary` - Primary variant with filled background
+- `.chip--secondary` - Secondary variant with border
+- `.chip--tertiary` - Tertiary variant with transparent background
+
+#### Compound Variant Classes
+- `.chip--primary.chip--accent` - Primary accent combination
+- `.chip--primary.chip--success` - Primary success combination
+- `.chip--primary.chip--warning` - Primary warning combination
+- `.chip--primary.chip--danger` - Primary danger combination
+
+### Interactive States
+
+The component supports focus visibility:
+
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
+
+## Accessibility
+
+#### Focus Management
+
+- Chips can receive keyboard focus when interactive
+- Focus ring appears on focus-visible for keyboard navigation
+
+## API Reference
+
+### Chip Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to display inside the chip |
+| `className` | `string` | - | Additional CSS classes |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Color variant of the chip |
+| `variant` | `"primary" \| "secondary" \| "tertiary"` | `"secondary"` | Visual style variant |

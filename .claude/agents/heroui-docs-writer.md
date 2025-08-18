@@ -13,7 +13,8 @@ Before creating or updating any documentation, you MUST:
 
 1. **Check Component Implementation**: Always examine the actual component source files in `/packages/react/src/components/[component-name]/`:
    - Read the `.tsx` file to understand the component structure and compound parts
-   - Read the `.stories.tsx` file to see real usage examples
+   - **MANDATORY: Read the `.stories.tsx` file thoroughly** - This is your PRIMARY reference for creating demos
+   - Use the Storybook stories as the basis for your demo examples - adapt the content and structure
    - Read the `.styles.ts` file to understand available variants and styling options
    - Check if the component uses React Aria Components (imports from `react-aria-components`)
 
@@ -54,12 +55,15 @@ Before creating or updating any documentation, you MUST:
 
 1. **First, gather information**:
    - Read component source: `/packages/react/src/components/[component-name]/[component-name].tsx`
+   - **CRITICAL: Read Storybook stories**: `/packages/react/src/components/[component-name]/[component-name].stories.tsx`
+     - Study the Template components and how they structure examples
+     - Note the data items used (e.g., FAQ items, form examples)
+     - Adapt these patterns for your demos - don't just copy, but use as inspiration
    - Check if it imports from `react-aria-components`
    - If yes, WebFetch the React Aria docs: `https://react-spectrum.adobe.com/react-aria/[ComponentName].html`
    - Read CSS file: `/packages/styles/components/[component-name].css`
-   - Read stories: `/packages/react/src/components/[component-name]/[component-name].stories.tsx`
 
-2. **Then create demos and documentation following the structure below**
+2. **Then create demos based on Storybook examples following the structure below**
 
 **Component Documentation Structure (MUST FOLLOW):**
 
@@ -88,29 +92,29 @@ Before creating or updating any documentation, you MUST:
 3. **Demo Files Structure**:
    - Create demo files in `/apps/docs/src/demos/[component-name]/`
    - Each demo should be a separate file (e.g., `basic.tsx`, `variants.tsx`, `sizes.tsx`)
+   - **Base demos on Storybook stories** - adapt the data, structure, and patterns from `.stories.tsx`
    - Export all demos from `index.ts`
    - Register demos in `/apps/docs/src/demos/index.ts` with pattern `component-demo-name`
 
 4. **Demo File Pattern**:
    ```tsx
-   // IMPORTANT: Only add "use client" if the demo uses React hooks (useState, useEffect, useRef, etc.)
-   // HeroUI components already include "use client" internally, so it's NOT needed for simple demos
+   // IMPORTANT: Always add "use client" directive to all demo files to ensure they work correctly
+   "use client";
    
-   // Example WITHOUT "use client" (most demos):
    import {ComponentName} from "@heroui/react";
    import {Icon} from "@iconify/react";  // If icons needed
    
-   export default function ComponentDemo() {
+   export function ComponentDemo() {
      return <ComponentName>Content</ComponentName>;
    }
    
-   // Example WITH "use client" (only when using React hooks):
+   // For demos with React hooks:
    "use client";
    
    import {useState} from "react";
    import {ComponentName} from "@heroui/react";
    
-   export default function ComponentDemo() {
+   export function ComponentDemo() {
      const [value, setValue] = useState("");
      
      return <ComponentName value={value} onChange={setValue}>Content</ComponentName>;
@@ -341,10 +345,7 @@ When using the render prop pattern, these values are provided:
    - **Always use Iconify with gravity-ui icons in all examples**
    - **Verify compound component structure matches actual implementation**
    - **Reference actual Storybook examples for accurate usage patterns**
-   - **"use client" directive rules for demos**:
-     - DO NOT add "use client" for simple component demos
-     - ONLY add "use client" when the demo uses React hooks (useState, useEffect, useRef, etc.)
-     - HeroUI components already have "use client" internally at compilation time
+   - **ALWAYS add "use client" directive to all demo files** - this ensures demos work correctly in the documentation site
 
 **Demo Creation Workflow:**
 
@@ -399,7 +400,8 @@ When using the render prop pattern, these values are provided:
 - [ ] Frontmatter includes all required fields (title, description, links)
 - [ ] All demo files created in `/apps/docs/src/demos/[component-name]/`
 - [ ] Demos registered in `/apps/docs/src/demos/index.ts`
-- [ ] "use client" directive ONLY added to demos that use React hooks
+- [ ] "use client" directive added to ALL demo files
+- [ ] **Demos are based on patterns from Storybook stories**
 - [ ] Component examples match actual implementation in `/packages/react/src/components/`
 - [ ] CSS classes documented match `/packages/styles/components/[component].css`
 - [ ] Interactive States is a SUBsection under CSS Classes section
