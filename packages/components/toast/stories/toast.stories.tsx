@@ -426,42 +426,45 @@ const CloseToastTemplate = (args: ToastProps) => {
 };
 
 const MultiToasterTemplate = (args) => {
+  const topToasterId = "multi-toaster-top";
+  const bottomToasterId = "multi-toaster-bottom";
+
   return (
     <>
       <ToastProvider
         maxVisibleToasts={args.maxVisibleToasts}
-        placement="bottom-left"
-        toasterId="left"
+        placement="top-right"
+        toasterId={topToasterId}
       />
       <ToastProvider
         maxVisibleToasts={args.maxVisibleToasts}
         placement="bottom-right"
-        toasterId="right"
+        toasterId={bottomToasterId}
       />
       <div className="flex flex-wrap gap-2">
         <Button
           onPress={() => {
             addToast({
-              title: "Toast Title",
+              title: "Top Toast Title",
               description: "Toast Displayed Successfully",
               ...args,
-              toasterId: "left",
+              toasterId: topToasterId,
             });
           }}
         >
-          Show left toast
+          Show Top Toast
         </Button>
         <Button
           onPress={() => {
             addToast({
-              title: "Toast Title",
+              title: "Bottom Toast Title",
               description: "Toast Displayed Successfully",
               ...args,
-              toasterId: "right",
+              toasterId: bottomToasterId,
             });
           }}
         >
-          Show right toast
+          Show Bottom Toast
         </Button>
       </div>
     </>
