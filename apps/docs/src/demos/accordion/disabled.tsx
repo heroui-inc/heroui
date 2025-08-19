@@ -4,8 +4,8 @@ import {Accordion} from "@heroui/react";
 
 export function Disabled() {
   return (
-    <div className="flex w-full flex-col gap-8">
-      <div className="space-y-2">
+    <div className="flex w-full flex-col items-center gap-8">
+      <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Entire accordion disabled</h3>
         <Accordion isDisabled className="w-full max-w-md">
           <Accordion.Item>
@@ -38,7 +38,7 @@ export function Disabled() {
         </Accordion>
       </div>
 
-      <div className="space-y-2">
+      <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Individual items disabled</h3>
         <Accordion className="w-full max-w-md">
           <Accordion.Item>

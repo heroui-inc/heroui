@@ -18,6 +18,10 @@
     --default: var(--color-white);
     --default-foreground: var(--color-neutral-600);
 
+    --surface-1: var(--background);
+    --surface-2: var(--color-neutral-100);
+    --surface-3: var(--color-neutral-200);
+
     --accent: oklch(0.14 0 0);
     --accent-foreground: oklch(0.99 0 0);
     --accent-hover: oklch(0.22 0 0);
@@ -64,6 +68,10 @@
     --default: var(--color-neutral-900);
     --default-foreground: var(--color-neutral-200);
 
+    --surface-1: var(--background);
+    --surface-2: var(--color-neutral-900);
+    --surface-3: var(--color-neutral-800);
+
     --accent: oklch(0.99 0 0);
     --accent-foreground: oklch(0.22 0 0);
     --accent-hover: oklch(0.9 0 0);
@@ -101,8 +109,8 @@
 
   --color-muted: var(--muted);
 
-  --color-surface: var(--surface);
-  --color-surface-foreground: var(--surface-foreground);
+  --color-surface: var(--surface-1);
+  --color-surface-foreground: var(--foreground);
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -163,9 +171,24 @@
   );
 
   /* Surface Colors */
-  --color-surface-1: var(--color-panel);
-  --color-surface-2: color-mix(in oklab, var(--color-panel) 80%, var(--color-foreground) 3.5%);
-  --color-surface-3: color-mix(in oklab, var(--color-panel) 80%, var(--color-foreground) 9%);
+  --color-surface-1: var(--surface-1);
+  --color-surface-1-foreground: color-mix(
+    in oklab,
+    var(--color-surface-1) 80%,
+    var(--color-foreground) 3.5%
+  );
+  --color-surface-2: var(--surface-2);
+  --color-surface-2-foreground: color-mix(
+    in oklab,
+    var(--color-surface-2) 80%,
+    var(--color-foreground) 3.5%
+  );
+  --color-surface-3: var(--surface-3);
+  --color-surface-3-foreground: color-mix(
+    in oklab,
+    var(--color-surface-3) 80%,
+    var(--color-foreground) 3.5%
+  );
 
   /* Radius */
   --radius-xs: calc(var(--radius) * 0.25);

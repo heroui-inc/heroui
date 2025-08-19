@@ -21,7 +21,7 @@
 }
 
 .accordion__panel {
-  @apply duration-250 h-0 opacity-0 transition-[height,opacity] ease-out;
+  @apply duration-250 h-0 opacity-0 transition-all ease-out will-change-auto;
 
   &[aria-hidden="false"] {
     @apply h-[var(--panel-height)] opacity-100;

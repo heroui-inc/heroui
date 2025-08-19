@@ -6,7 +6,7 @@ import React from "react";
 import {buttonVariants} from "../button/index";
 import {LinkIcon as LinkIconSvg} from "../icons";
 
-import Link from "./index";
+import {Link} from "./index";
 
 export default {
   argTypes: {},

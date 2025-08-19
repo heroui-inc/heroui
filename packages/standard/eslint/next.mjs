@@ -47,6 +47,7 @@ export default defineConfig([
     },
     rules: {
       "@next/next/no-html-link-for-pages": "off",
+      "@next/next/no-img-element": "off",
       "jsx-a11y/click-events-have-key-events": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
       "jsx-a11y/no-autofocus": "off",

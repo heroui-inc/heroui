@@ -28,7 +28,7 @@ export function CustomIndicator() {
           <Accordion.Trigger>
             Using Caret Icon
             <Accordion.Indicator>
-              <Icon icon="gravity-ui:caret-down" />
+              <Icon icon="gravity-ui:circle-chevron-down" />
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>
@@ -45,7 +45,7 @@ export function CustomIndicator() {
           <Accordion.Trigger>
             Using Arrow Icon
             <Accordion.Indicator>
-              <Icon icon="gravity-ui:arrow-down" />
+              <Icon icon="gravity-ui:chevrons-down" />
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>

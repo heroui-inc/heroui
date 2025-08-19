@@ -9,6 +9,7 @@ export * from "./calendar";
 export * from "./card";
 export * from "./checkbox";
 export * from "./chip";
+export * from "./disclosure";
 export * from "./description";
 export * from "./fieldset";
 export * from "./form";
@@ -23,6 +24,7 @@ export * from "./radio";
 export * from "./slider";
 export * from "./text-field";
 export * from "./text";
+export * from "./tabs";
 export * from "./input-otp";
 
 //  ===================================

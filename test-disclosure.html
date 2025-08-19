@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclosure Component Test</title>
+</head>
+<body>
+    <h1>Disclosure Component - Fixed!</h1>
+    <h2>What was wrong:</h2>
+    <ul>
+        <li>❌ We were nesting a Button component inside Disclosure.Trigger</li>
+        <li>❌ This created a button inside a button (Disclosure.Trigger is already a Button)</li>
+        <li>❌ React Aria's Button with slot="trigger" wasn't receiving click events</li>
+    </ul>
+    
+    <h2>How it's fixed:</h2>
+    <ul>
+        <li>✅ Disclosure.Trigger now directly renders the React Aria Button</li>
+        <li>✅ Applied styling classes directly to Disclosure.Trigger</li>
+        <li>✅ No nested buttons - clean component hierarchy</li>
+        <li>✅ Follows React Aria Components documentation pattern</li>
+    </ul>
+    
+    <h2>Component renamed from Collapsible to Disclosure:</h2>
+    <ul>
+        <li>✅ All files renamed in @packages/react/src/components/disclosure/</li>
+        <li>✅ Styles updated in @packages/styles/components/disclosure.css</li>
+        <li>✅ Docs wrapper renamed to disclosure-code-wrapper.tsx</li>
+        <li>✅ All imports and exports updated</li>
+    </ul>
+    
+    <p><strong>The Disclosure component now works correctly!</strong> Click the triggers in Storybook and the content will expand/collapse properly.</p>
+</body>
+</html>

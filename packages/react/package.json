@@ -28,11 +28,7 @@
     ".": {
       "import": "./src/index.ts"
     },
-    "./package.json": "./package.json",
-    "./styles": {
-      "default": "./src/styles.css",
-      "style": "./src/styles.css"
-    }
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
@@ -54,7 +50,6 @@
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
-    "@heroui/styles": "workspace:*",
     "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.10",
     "@radix-ui/react-slot": "1.2.3",

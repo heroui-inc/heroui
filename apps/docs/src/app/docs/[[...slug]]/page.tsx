@@ -52,7 +52,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
             />
           </div>
         </div>
-        <DocsDescription className="text-md my-4">{page.data.description}</DocsDescription>
+        <DocsDescription className="text-md mb-4 mt-2">{page.data.description}</DocsDescription>
         {!!links && <ComponentLinks links={links} />}
       </section>
       <DocsBody className="prose-sm">

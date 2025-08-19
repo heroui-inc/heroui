@@ -7,7 +7,7 @@ icon: rocket
 ## Requirements
 
 - [React 19+](https://reactjs.org/)
-- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Tailwind CSS v4](https://tailwindcss.com/docs/installation/framework-guides)
 
 ## Framework Setup
 
@@ -36,33 +36,33 @@ Install HeroUI and required dependencies:
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
   <Tab value="npm">
     ```bash
-    npm install @heroui/react@alpha
+    npm i @heroui/styles@alpha @heroui/react@alpha 
     ```
   </Tab>
   <Tab value="pnpm">
     ```bash
-    pnpm add @heroui/react@alpha
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
-    yarn add @heroui/react@alpha
+    yarn add @heroui/styles@alpha @heroui/react@alpha
     ```
   </Tab>
   <Tab value="bun">
     ```bash
-    bun add @heroui/react@alpha
+    bun add @heroui/styles@alpha @heroui/react@alpha
     ```
   </Tab>
 </Tabs>
 
 ## Import Styles
 
-Add to your main CSS file:
+Add to your main CSS file `globals.css`:
 
 ```css
-@import "tailwindcss";
-@import "@heroui/styles";
+@import "tailwindcss"; 
+@import "@heroui/styles"; /* [!code highlight]*/
 ```
 
 <Callout type="warning">
@@ -72,13 +72,13 @@ Add to your main CSS file:
 ## Use Components
 
 ```tsx
-import { Button } from '@heroui/react';
+import { Button } from '@heroui/react'; /* [!code highlight]*/
 
 function App() {
   return (
     <Button>
-      My Button
-    </Button>
+      My Button 
+    </Button> 
   );
 }
 ```

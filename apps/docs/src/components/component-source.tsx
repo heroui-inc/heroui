@@ -7,15 +7,14 @@ import {highlight} from "fumadocs-core/highlight";
 import * as Base from "fumadocs-ui/components/codeblock";
 import * as React from "react";
 
+import {CodeDisclosureWrapper} from "@/components/disclosure-code-wrapper";
 import {getDemo} from "@/demos";
 import {cn} from "@/utils/cn";
-// import {highlightCode} from "@/lib/highlight-code";
-// import {CodeCollapsibleWrapper} from "@/components/code-collapsible-wrapper";
-// import {CopyButton} from "@/components/copy-button";
-// import {getIconForLanguageExtension} from "@/components/icons";
 
 export async function ComponentSource({
   className,
+  // TODO: Disclosure is not ready yet, so we need to use collapsible for now
+  collapsible = false,
   language,
   name,
   showCodeTitle = false,
@@ -27,7 +26,7 @@ export async function ComponentSource({
   language?: string;
   showCodeTitle?: boolean;
   showLineNumbers?: boolean;
-  _collapsible?: boolean;
+  collapsible?: boolean;
 }) {
   if (!name) {
     return null;
@@ -60,35 +59,29 @@ export async function ComponentSource({
 
   const lang = language ?? title?.split(".").pop() ?? "tsx";
 
+  if (!collapsible) {
+    return (
+      <div className={cn("relative", className)}>
+        <CodeBlock
+          code={code}
+          lang={lang}
+          showLineNumbers={showLineNumbers}
+          title={showCodeTitle ? title : undefined}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className={cn("relative", className)}>
+    <CodeDisclosureWrapper className={className}>
       <CodeBlock
         code={code}
         lang={lang}
         showLineNumbers={showLineNumbers}
         title={showCodeTitle ? title : undefined}
       />
-    </div>
+    </CodeDisclosureWrapper>
   );
-
-  // if (!collapsible) {
-  //   return (
-  //     <div className={cn("relative", className)}>
-  //       <ComponentCode
-  //         code={code}
-  //         highlightedCode={highlightedCode}
-  //         language={lang}
-  //         title={title}
-  //       />
-  //     </div>
-  //   );
-  // }
-
-  // return (
-  //   <CodeCollapsibleWrapper className={className}>
-  //     <ComponentCode code={code} highlightedCode={highlightedCode} language={lang} title={title} />
-  //   </CodeCollapsibleWrapper>
-  // );
 }
 
 async function CodeBlock({

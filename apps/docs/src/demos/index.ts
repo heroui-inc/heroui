@@ -1,21 +1,13 @@
 import type {ComponentType} from "react";
 
-// Accordion demos
 import * as AccordionDemos from "./accordion";
-// Avatar demos
 import * as AvatarDemos from "./avatar";
-// Button demos
 import * as ButtonDemos from "./button";
-// Chip demos
 import * as ChipDemos from "./chip";
-// Link demos
 import * as LinkDemos from "./link";
-// Spinner demos
-import * as SpinnerDemos from "./spinner";
-// Tooltip demos
-import * as TooltipDemos from "./tooltip";
-// Popover demos
 import * as PopoverDemos from "./popover";
+import * as SpinnerDemos from "./spinner";
+import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
   component: ComponentType;
@@ -29,13 +21,9 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.Basic,
     file: "accordion/basic.tsx",
   },
-  "accordion-variants": {
-    component: AccordionDemos.Variants,
-    file: "accordion/variants.tsx",
-  },
-  "accordion-with-icons": {
-    component: AccordionDemos.WithIcons,
-    file: "accordion/with-icons.tsx",
+  "accordion-outline": {
+    component: AccordionDemos.Oultine,
+    file: "accordion/outline.tsx",
   },
   "accordion-multiple": {
     component: AccordionDemos.Multiple,
@@ -52,6 +40,10 @@ export const demos: Record<string, DemoItem> = {
   "accordion-faq": {
     component: AccordionDemos.FAQ,
     file: "accordion/faq.tsx",
+  },
+  "accordion-custom-styles": {
+    component: AccordionDemos.CustomStyles,
+    file: "accordion/custom-styles.tsx",
   },
   // Avatar demos
   "avatar-basic": {

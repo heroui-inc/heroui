@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys */
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 import type {NextConfig} from "next";
 
 import {createMDX} from "fumadocs-mdx/next";
@@ -42,7 +40,7 @@ const config: NextConfig = {
       },
       {
         source: "/components",
-        destination: "/docs/components/avatar",
+        destination: "/docs/components/accordion",
         permanent: true,
       },
       {

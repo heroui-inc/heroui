@@ -3,9 +3,9 @@
    ============================================================================ */
 
 @import "tailwindcss";
-@import "@heroui/styles";
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
+@import "@heroui/styles";
 
 /* ============================================================================
    CSS VARIABLES - ROOT & THEMES
@@ -49,6 +49,7 @@
   --color-fd-secondary: #1a1a1a;
   --color-fd-accent: #2c2c2c;
   --color-fd-popover: #383435;
+  --color-fd-border: rgba(255, 255, 255, 0.1);
   --color-backdrop: rgba(0, 0, 0, 0.4);
 }
 
@@ -417,6 +418,18 @@
 
   .line {
     @apply !pl-0;
+  }
+}
+
+.shiki:not(.not-fumadocs-codeblock *) code .highlighted {
+  border-radius: 4px;
+  background-color: #d6d8e3 !important;
+}
+
+[data-theme="dark"],
+.dark {
+  .shiki:not(.not-fumadocs-codeblock *) code .highlighted {
+    background-color: #2d2d2d !important;
   }
 }
 

@@ -1,0 +1,22 @@
+.disclosure {
+  @apply relative;
+}
+
+.disclosure__trigger {
+  @apply inline-flex items-center justify-center;
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    cursor: var(--cursor-disabled);
+  }
+}
+
+.disclosure__content {
+  @apply duration-250 h-0 overflow-hidden opacity-0 transition-[height,opacity] ease-out will-change-auto;
+
+  &[aria-hidden="false"] {
+    @apply h-[var(--content-height)] opacity-100;
+  }
+}

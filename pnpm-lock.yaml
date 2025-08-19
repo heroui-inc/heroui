@@ -234,9 +234,6 @@ importers:
 
   packages/react:
     dependencies:
-      '@heroui/styles':
-        specifier: workspace:*
-        version: link:../styles
       '@internationalized/date':
         specifier: 3.8.2
         version: 3.8.2
