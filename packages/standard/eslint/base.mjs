@@ -141,7 +141,6 @@ export default defineConfig([
           memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
         },
       ],
-      "sort-keys": "off",
       "sort-keys": [
         "error",
         "asc",
@@ -151,7 +150,6 @@ export default defineConfig([
           natural: false,
         },
       ],
-      "sort-keys-fix/sort-keys-fix": "off",
       "sort-keys-fix/sort-keys-fix": "error",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
