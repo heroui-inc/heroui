@@ -110,6 +110,10 @@ export interface ToastProps extends ToastVariantProps {
    * @default "default"
    */
   severity?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  /**
+   * function which is called when toast timesout automatically.
+   */
+  onTimeout?: () => void;
 }
 
 interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
@@ -165,6 +169,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     severity,
     maxVisibleToasts,
     loadingComponent,
+    onTimeout,
     ...otherProps
   } = props;
 
@@ -193,6 +198,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const progressBarRef = useRef<HTMLDivElement>(null);
   const pausedTime = useRef<number>(0);
   const timeElapsed = useRef<number>(0);
+  const wasclosedManually = useRef(false);
 
   useEffect(() => {
     if (progressBarRef.current) {
@@ -232,6 +238,9 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       timeElapsed.current = elapsed;
       if (timeElapsed.current >= timeout) {
+        if (!wasclosedManually.current) {
+          onTimeout?.();
+        }
         setIsToastExiting(true);
       }
 
@@ -265,6 +274,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     isRegionExpanded,
     isLoading,
     setIsToastExiting,
+    onTimeout,
   ]);
 
   const Component = as || "div";
@@ -512,6 +522,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "data-hidden": dataAttr(hideCloseButton),
       ...mergeProps(props, {
         onPress: chain(() => {
+          wasclosedManually.current = true;
           setIsToastExiting(true);
 
           setTimeout(() => document.body.focus(), 0);
