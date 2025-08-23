@@ -65,7 +65,9 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
           e.preventDefault();
         }
       }
-      onHide();
+      if (getOverlayTypeFromRef(ref) !== "modalOrDrawer") {
+        onHide();
+      }
     }
   };
 
@@ -128,6 +130,21 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
     if (e.target === e.currentTarget) {
       e.preventDefault();
     }
+  };
+
+  const getOverlayTypeFromRef = (
+    ref: RefObject<Element>,
+  ): "modalOrDrawer" | "select" | "unknown" => {
+    const el = ref.current;
+
+    if (!el) return "unknown";
+
+    const tag = el.tagName.toLowerCase();
+
+    if (tag === "section") return "modalOrDrawer";
+    if (tag === "div") return "select"; // assumption based on current usage
+
+    return "unknown";
   };
 
   return {
