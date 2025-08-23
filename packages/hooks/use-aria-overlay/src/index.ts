@@ -132,20 +132,30 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
     }
   };
 
-  const getOverlayTypeFromRef = (
-    ref: RefObject<Element>,
-  ): "modalOrDrawer" | "select" | "unknown" => {
+  function getOverlayTypeFromRef(ref: RefObject<Element>): "modalOrDrawer" | "select" | "unknown" {
     const el = ref.current;
 
     if (!el) return "unknown";
 
-    const tag = el.tagName.toLowerCase();
+    const role = (el.getAttribute("role") || "").toLowerCase();
+    const ariaModal = (el.getAttribute("aria-modal") || "").toLowerCase() === "true";
 
-    if (tag === "section") return "modalOrDrawer";
-    if (tag === "div") return "select"; // assumption based on current usage
+    // Dialogs (Modal/Drawer) should close on press release.
+    if (role === "dialog" && ariaModal) return "modalOrDrawer";
+
+    // Select-like/menu-like overlays typically close on press start.
+    if (
+      role === "listbox" ||
+      role === "menu" ||
+      role === "tree" ||
+      role === "grid" ||
+      role === "combobox"
+    ) {
+      return "select";
+    }
 
     return "unknown";
-  };
+  }
 
   return {
     overlayProps: {
