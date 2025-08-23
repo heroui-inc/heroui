@@ -110,4 +110,28 @@ describe("Drawer", () => {
     fireEvent.keyDown(drawer, {key: "Escape"});
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  test("should not close drawer on press start outside, only on release", async () => {
+    const onClose = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <div data-testid="outside">Outside</div>
+        <Drawer isOpen onClose={onClose}>
+          <DrawerContent>
+            <DrawerHeader>Drawer header</DrawerHeader>
+            <DrawerBody>Drawer body</DrawerBody>
+            <DrawerFooter>Drawer footer</DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </>,
+    );
+
+    // Simulate full click outside (press + release)
+    await user.pointer({keys: "[MouseLeft>]", target: document.body});
+    await user.pointer({keys: "[/MouseLeft]", target: document.body});
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
 });

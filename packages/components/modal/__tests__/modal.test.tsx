@@ -215,4 +215,28 @@ describe("Modal", () => {
     expect(document.documentElement.clientHeight).toBe(1080);
     expect(modal.style.transform).toBe("translate(2000px, 1500px)");
   });
+
+  test("should not close modal on press start outside, only on release", async () => {
+    const onClose = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <div data-testid="outside">Outside</div>
+        <Modal isOpen onClose={onClose}>
+          <ModalContent>
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>Modal body</ModalBody>
+            <ModalFooter>Modal footer</ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>,
+    );
+
+    // Simulate full click outside (press + release)
+    await user.pointer({keys: "[MouseLeft>]", target: document.body});
+    await user.pointer({keys: "[/MouseLeft]", target: document.body});
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
 });
