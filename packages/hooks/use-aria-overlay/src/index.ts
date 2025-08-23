@@ -65,7 +65,7 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
           e.preventDefault();
         }
       }
-      if (getOverlayTypeFromRef(ref) !== "modalOrDrawer") {
+      if (getOverlayTypeFromRef(ref) !== "pressEnd") {
         onHide();
       }
     }
@@ -132,7 +132,7 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
     }
   };
 
-  function getOverlayTypeFromRef(ref: RefObject<Element>): "modalOrDrawer" | "select" | "unknown" {
+  function getOverlayTypeFromRef(ref: RefObject<Element>): "pressEnd" | "pressStart" | "unknown" {
     const el = ref.current;
 
     if (!el) return "unknown";
@@ -141,7 +141,13 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
     const ariaModal = (el.getAttribute("aria-modal") || "").toLowerCase() === "true";
 
     // Dialogs (Modal/Drawer) should close on press release.
-    if (role === "dialog" && ariaModal) return "modalOrDrawer";
+    // Include alertdialog and treat missing aria-modal (unless explicitly "false") as modal.
+    if (
+      (role === "dialog" || role === "alertdialog") &&
+      (ariaModal || el.getAttribute("aria-modal") == null)
+    ) {
+      return "pressEnd";
+    }
 
     // Select-like/menu-like overlays typically close on press start.
     if (
@@ -151,7 +157,7 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
       role === "grid" ||
       role === "combobox"
     ) {
-      return "select";
+      return "pressStart";
     }
 
     return "unknown";
