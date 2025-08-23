@@ -198,7 +198,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const progressBarRef = useRef<HTMLDivElement>(null);
   const pausedTime = useRef<number>(0);
   const timeElapsed = useRef<number>(0);
-  const wasclosedManually = useRef(false);
+  const wasClosedManually = useRef(false);
 
   useEffect(() => {
     if (progressBarRef.current) {
@@ -238,7 +238,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       timeElapsed.current = elapsed;
       if (timeElapsed.current >= timeout) {
-        if (!wasclosedManually.current) {
+        if (!wasClosedManually.current) {
           onTimeout?.();
         }
         setIsToastExiting(true);
@@ -522,7 +522,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "data-hidden": dataAttr(hideCloseButton),
       ...mergeProps(props, {
         onPress: chain(() => {
-          wasclosedManually.current = true;
+          wasClosedManually.current = true;
           setIsToastExiting(true);
 
           setTimeout(() => document.body.focus(), 0);
@@ -602,6 +602,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
           setDrag(false);
 
           if (shouldCloseToast(offsetX, offsetY)) {
+            wasClosedManually.current = true;
             const updatedHeights = heights;
 
             updatedHeights.splice(index, 1);
