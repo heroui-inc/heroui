@@ -3,6 +3,7 @@
 import type {TooltipVariants} from "./tooltip.styles";
 import type {TooltipProps as TooltipPrimitiveProps} from "react-aria-components";
 
+import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {
   Focusable as FocusablePrimitive,
@@ -102,14 +103,19 @@ TooltipArrow.displayName = "HeroUI.TooltipArrow";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const TooltipTrigger = ({children, className, ...props}: React.HTMLAttributes<HTMLDivElement>) => {
+interface TooltipTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
+  asChild?: boolean;
+}
+
+const TooltipTrigger = ({asChild = false, children, className, ...props}: TooltipTriggerProps) => {
   const {slots} = useContext(TooltipContext);
+  const Comp = asChild ? SlotPrimitive : "div";
 
   return (
     <FocusablePrimitive>
-      <div data-tooltip-trigger className={slots?.trigger({className})} role="button" {...props}>
+      <Comp data-tooltip-trigger className={slots?.trigger({className})} role="button" {...props}>
         {children}
-      </div>
+      </Comp>
     </FocusablePrimitive>
   );
 };
@@ -125,4 +131,4 @@ const CompoundTooltip = Object.assign(TooltipRoot, {
 });
 
 export default CompoundTooltip;
-export type {TooltipProps, TooltipContentProps};
+export type {TooltipProps, TooltipContentProps, TooltipTriggerProps};

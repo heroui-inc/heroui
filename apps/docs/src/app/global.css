@@ -516,3 +516,7 @@
 .animate-scrolling-banner-vertical {
   animation: scrolling-banner-vertical var(--duration) linear infinite;
 }
+
+@utility mask-to-t {
+  mask: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 1) 100%);
+}

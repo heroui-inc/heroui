@@ -1,5 +1,11 @@
 /* Layout tokens */
 :root {
+  /* Primitive Colors (Do not change between light and dark) */
+  --white: oklch(100% 0 0);
+  --black: oklch(0% 0 0);
+  --snow: oklch(0.9911 0 0);
+  --eclipse: oklch(0.2221 0 0);
+
   /* Spacing scale */
   --spacing: 0.25rem;
 

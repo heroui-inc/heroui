@@ -1,124 +1,360 @@
 ---
 title: Design Principles
-description: Learn about HeroUI v3's design philosophy and architecture
-icon: brush
+description: Core principles that guide HeroUI v3's design and development
+icon: book
 ---
 
-## Design Philosophy
+## Overview
 
-### Compound Components
+HeroUI v3 is built on fundamental principles that prioritize clarity, accessibility, and developer experience. Every decision reflects our commitment to creating a UI library that is both powerful and intuitive.
 
-Unlike traditional UI libraries that expose monolithic components with dozens of props, HeroUI v3 embraces the compound component pattern popularized by libraries like Radix UI. This approach provides:
+## Core Principles
 
-- **Maximum Flexibility** - Compose components exactly how you need them
-- **Cleaner APIs** - Each part has a focused, simple interface
-- **Better Customization** - Style and modify individual pieces
-- **Improved Accessibility** - Built-in ARIA relationships between parts
+### 1. Semantic Intent Over Visual Style
+
+We believe components should communicate their purpose, not just their appearance. HeroUI v3 uses semantic variant names that describe hierarchy and intent rather than visual properties.
+
+![Semantic Intent Hierarchy](https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/semantic-intent.jpg)
+
+#### v2 vs HeroUI v3 Approach
 
 ```tsx
-// Traditional approach - limited flexibility
-<Select 
-  options={options}
-  placeholder="Choose option"
-  errorMessage="Required field"
-  helperText="Select one option"
-/>
+// ❌ Visual-based variants (unclear intent)
+<Button variant="solid">Submit</Button>
+<Button variant="bordered">Cancel</Button>
+<Button variant="flat">Learn More</Button>
 
-// HeroUI v3 approach - full control
-<Select>
-  <Select.Label>Choose option</Select.Label>
-  <Select.Trigger>
-    <Select.Value placeholder="Choose option" />
-    <Select.Icon />
-  </Select.Trigger>
-  <Select.Content>
-    {options.map(option => (
-      <Select.Item key={option.value} value={option.value}>
-        {option.label}
-      </Select.Item>
-    ))}
-  </Select.Content>
-  <Select.Description>Select one option</Select.Description>
-  <Select.ErrorMessage>Required field</Select.ErrorMessage>
-</Select>
+// ✅ Semantic variants (clear hierarchy)
+<Button variant="primary">Submit</Button>
+<Button variant="secondary">Cancel</Button>
+<Button variant="tertiary">Learn More</Button>
 ```
 
-### Accessibility First
+#### Variant Hierarchy System
 
-Every component is built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/), ensuring:
+Inspired by [Uber's Base design system](https://base.uber.com/6d2425e9f/p/756216-button), our variants follow a clear hierarchy:
 
-- **WCAG 2.1 AA Compliance** - Meet accessibility standards out of the box
-- **Keyboard Navigation** - Full keyboard support for all interactions
-- **Screen Reader Support** - Proper ARIA attributes and announcements
-- **Focus Management** - Logical focus flow and visible focus indicators
+| Hierarchy | Emphasis | Usage | Purpose |
+|-----------|----------|-------|---------|
+| **Primary** | High | 1 per context | The most important action to move forward in a flow, acknowledge and dismiss, or finish a task |
+| **Secondary** | Medium | Many | Most actions that are in line with other content |
+| **Tertiary** | Low | A few | Dismissive actions that let users cancel, skip, or exit |
+| **Danger** | High (contextual) | When needed | Destructive actions that require user attention |
 
-### Unstyled by Default
+This pattern simplifies decision-making for both developers and AI agents by making variant selection self-descriptive and intention-based.
 
-HeroUI v3 components come without built-in styling, giving you complete control:
+### 2. Accessibility as Foundation
 
-- **Any CSS Solution** - Use CSS Modules, Styled Components, Emotion, or plain CSS
-- **Design System Integration** - Easily integrate with your existing design tokens
-- **Framework Agnostic** - Works with any styling approach
-- **Performance Focused** - No unused CSS in your bundle
+Every component is built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/), ensuring enterprise-grade accessibility from day one.
 
-## Technical Architecture
+```tsx
+// All components include proper ARIA support automatically
+<TextField>
+  <TextField.Label>Email</TextField.Label>
+  <TextField.Input type="email" />
+  <TextField.Description>We'll never share your email</TextField.Description>
+  <TextField.FieldError>Please enter a valid email</TextField.FieldError>
+</TextField>
+```
 
-### Built on React Aria Components
+**Built-in features:**
+- WCAG 2.1 AA compliance
+- Full keyboard navigation
+- Screen reader optimization
+- Focus management
+- Touch-friendly interactions
 
-React Aria Components provides the accessibility and interaction layer, while HeroUI v3 adds:
+### 3. Composition Over Configuration
 
-- **Compound Structure** - Breaking monolithic components into composable parts
-- **Enhanced TypeScript** - Better type inference and developer experience
-- **Consistent Patterns** - Unified API across all components
-- **Performance Optimizations** - Minimal re-renders and optimal bundle size
+Following Radix UI's proven pattern, HeroUI v3 uses compound components that provide maximum flexibility without complexity.
 
-### Tailwind CSS v4 Integration
+```tsx
+// Full control through composition
+<Alert>
+  <Alert.Icon />
+  <Alert.Content>
+    <Alert.Title>Payment successful</Alert.Title>
+    <Alert.Description>Your order has been confirmed</Alert.Description>
+  </Alert.Content>
+  <Alert.Action>View Order</Alert.Action>
+</Alert>
+```
 
-While components are unstyled, HeroUI v3 provides optional Tailwind CSS v4 utilities:
+**Benefits:**
+- Arrange parts as needed
+- Omit unnecessary elements
+- Add custom content between parts
+- Maintain semantic HTML structure
 
-- **BEM-style Classes** - Predictable class naming conventions
-- **Size Variants** - Consistent sizing across components
-- **State Utilities** - Hover, focus, and interaction states
-- **Design Tokens** - Semantic color and spacing scales
+### 4. Progressive Disclosure
 
-### TypeScript Support
+Start simple, add complexity only when needed. Components work with minimal configuration but scale to complex use cases.
 
-Full TypeScript support with:
+```tsx
+// Simple usage
+<Button>Click me</Button>
 
-- **Strict Type Safety** - Catch errors at compile time
-- **IntelliSense** - Full autocomplete and documentation
-- **Generic Components** - Type-safe polymorphic components
-- **Variant Types** - Strongly typed style variants
+// Progressive enhancement
+<Button variant="primary" size="lg" isLoading>
+  <Icon icon="gravity-ui:check" />
+  Submit Form
+</Button>
 
-## Comparison with Other Libraries
+// Advanced composition
+<Button asChild variant="primary">
+  <Link href="/dashboard">Go to Dashboard</Link>
+</Button>
+```
 
-| Feature | HeroUI v3 | Radix UI | Headless UI | Chakra UI |
-|---------|-----------|----------|-------------|-----------|
-| Compound Components | ✅ | ✅ | ❌ | ❌ |
-| Unstyled | ✅ | ✅ | ✅ | ❌ |
-| React Aria Foundation | ✅ | ❌ | ❌ | ❌ |
-| TypeScript First | ✅ | ✅ | ✅ | ✅ |
-| Animation Support | ✅ | ❌ | ❌ | ✅ |
-| Tailwind Integration | ✅ | ❌ | ❌ | ❌ |
+### 5. Predictable Behavior
 
-## Browser Support
+Components behave consistently across the library with shared patterns and conventions.
 
-HeroUI v3 supports all modern browsers:
+**Consistent patterns:**
+- All components support `className` for styling
+- Compound components use dot notation (`Component.Part`)
+- State is exposed through data attributes (`data-pressed`, `data-hover`)
+- Variants follow the semantic hierarchy system
+- Size variants use standard naming (`sm`, `md`, `lg`, `xl`)
 
-- **Chrome** 91+
-- **Firefox** 90+
-- **Safari** 15+
-- **Edge** 91+
+### 6. Performance by Default
 
-## Contributing
+Every component is optimized for performance without sacrificing functionality.
 
-HeroUI v3 is open source and we welcome contributions:
+**Optimizations:**
+- Minimal re-renders through proper memoization
+- Tree-shakeable exports
+- CSS-in-JS free (no runtime overhead)
+- Lazy loading for heavy components
+- Small bundle size through modular architecture
 
-- **GitHub** - [heroui/heroui-v3](https://github.com/heroui/heroui-v3)
-- **Issues** - Report bugs and request features
-- **Pull Requests** - Contribute code improvements
-- **Discussions** - Share ideas and ask questions
+### 7. Type Safety First
 
-## License
+Full TypeScript support ensures catch errors at compile time, not runtime.
 
-HeroUI v3 is released under the MIT License.
+```tsx
+// Type-safe props with IntelliSense
+<Button 
+  variant="primary"  // ✅ Autocomplete available
+  size="md"         // ✅ Type checked
+  onClick={(e) => {
+    // e is properly typed as MouseEvent
+  }}
+/>
+```
+
+### 8. Separation of Styles and Logic
+
+HeroUI v3 separates visual styles (`@heroui/styles`) from component logic (`@heroui/react`), enabling multiple implementation strategies:
+
+#### Use Styles Anywhere
+
+The styles package works independently, even via CDN without any JavaScript framework:
+
+```html
+<!-- Include HeroUI styles via CDN -->
+<link href="https://cdn.jsdelivr.net/npm/@heroui/styles@3.0.0-alpha.11/dist/heroui.min.css" 
+      rel="stylesheet" 
+      crossorigin="anonymous" />
+
+<!-- Use BEM classes directly in HTML -->
+<div class="space-x-2 p-4">
+  <button class="button button--primary button--md">Primary</button>
+  <button class="button button--secondary button--md">Secondary</button>
+  <button class="button button--tertiary button--md">Tertiary</button>
+  <button class="button button--danger button--md">Danger</button>
+  <button class="button button--ghost button--md">Ghost</button>
+</div>
+```
+
+[Try it on Tailwind Play →](https://play.tailwindcss.com/bl5fXT3rxK)
+
+#### Apply Styles to Any Component
+
+Use style variants with any component through the exported variant functions:
+
+```tsx
+import { Link } from '@heroui/react';
+import { buttonVariants } from '@heroui/react';
+
+// Link component styled as a button
+<Link
+  className={buttonVariants({ 
+    size: "md", 
+    variant: "tertiary",
+    className: "px-3" 
+  })}
+  href="https://heroui.com"
+  target="_blank"
+>
+  HeroUI
+  <Link.Icon className="h-2 w-2" />
+</Link>
+```
+
+#### Multi-Framework Support
+
+This separation enables:
+- **React**: Available now as `@heroui/react`
+- **Vue**: Planned - will use same `@heroui/styles`
+- **Svelte**: Planned - will use same `@heroui/styles`
+- **Solid**: Planned - will use same `@heroui/styles`
+- **Vanilla JS**: Use styles directly with BEM classes
+- **Any Framework**: Apply styles to native elements
+
+### 9. Framework Agnostic Implementation
+
+Components work with any styling solution while maintaining the same behavior:
+
+```tsx
+// Tailwind CSS
+<Button className="bg-blue-500 hover:bg-blue-600">Click</Button>
+
+// CSS Modules
+<Button className={styles.button}>Click</Button>
+
+// Styled Components
+<StyledButton>Click</StyledButton>
+
+// Inline styles
+<Button style={{ backgroundColor: '#3B82F6' }}>Click</Button>
+```
+
+### 10. Developer Experience Excellence
+
+We optimize for developer happiness through clear APIs, helpful error messages, and comprehensive documentation.
+
+**DX features:**
+- Descriptive error messages
+- Rich IntelliSense support
+- Comprehensive examples
+- Copy-paste friendly code
+- Storybook for visual testing
+
+### 11. Open and Extensible
+
+HeroUI v3 is designed to be extended and customized for any use case.
+
+```tsx
+// Extend with custom components
+function CustomButton({ intent, ...props }) {
+  const variant = intent === 'cta' ? 'primary' : 'secondary';
+  return <Button variant={variant} {...props} />;
+}
+
+// Compose with other libraries
+<TooltipProvider>
+  <Tooltip content="Save your work">
+    <Button variant="primary">
+      <Icon icon="gravity-ui:floppy-disk" />
+      Save
+    </Button>
+  </Tooltip>
+</TooltipProvider>
+```
+
+## Design Decisions
+
+### Why Compound Components?
+
+Compound components provide the perfect balance between flexibility and ease of use:
+
+- **Flexibility**: Rearrange, add, or remove parts as needed
+- **Clarity**: Each part has a single, clear responsibility
+- **Maintainability**: Changes to one part don't affect others
+- **Accessibility**: Proper ARIA relationships maintained automatically
+
+### Why React Aria?
+
+React Aria Components provides:
+
+- Battle-tested accessibility from Adobe's Spectrum design system
+- Cross-browser compatibility
+- Mobile and touch support
+- Internationalization ready
+- Maintained by a dedicated team
+
+### Why Semantic Variants?
+
+Semantic variants improve:
+
+- **Decision making**: Clear when to use each variant
+- **Consistency**: Same intent = same variant across components
+- **AI-friendliness**: Self-descriptive for code generation
+- **Maintenance**: Intent doesn't change with visual redesigns
+
+## Comparison with HeroUI v2
+
+| Aspect | HeroUI v2 | HeroUI v3 |
+|--------|-----------|-----------|
+| **Component Pattern** | Single components with many props | Compound components |
+| **Variants** | Visual-based (solid, bordered, flat) | Semantic (primary, secondary, tertiary) |
+| **Styling** | Runtime CSS-in-JS | Zero-runtime CSS |
+| **Accessibility** | Good | Excellent (React Aria powered) |
+| **Bundle Size** | Larger | Smaller (tree-shakeable) |
+| **TypeScript** | Added later | First-class from day one |
+| **Customization** | Props-based | Composition-based |
+
+## Best Practices
+
+### Use Semantic Variants
+
+```tsx
+// ✅ Good: Clear intent
+<Button variant="primary">Save Changes</Button>
+<Button variant="secondary">Preview</Button>
+<Button variant="tertiary">Cancel</Button>
+
+// ❌ Avoid: Mixing visual properties
+<Button className="bg-blue-500 border-2">Save</Button>
+```
+
+### Compose for Complex UI
+
+```tsx
+// ✅ Good: Composed structure
+<Card>
+  <Card.Header>
+    <Card.Title>Settings</Card.Title>
+  </Card.Header>
+  <Card.Content>
+    {/* content */}
+  </Card.Content>
+</Card>
+
+// ❌ Avoid: Everything in props
+<Card title="Settings" content={content} />
+```
+
+### Leverage Type Safety
+
+```tsx
+// ✅ Good: Let TypeScript help
+const handleClick: ButtonProps['onPress'] = (e) => {
+  // Properly typed event
+};
+
+// ❌ Avoid: Any types
+const handleClick = (e: any) => {
+  // Lost type safety
+};
+```
+
+## Future Vision
+
+HeroUI v3 will continue evolving with:
+
+- More compound components
+- Enhanced animation capabilities
+- Improved developer tools
+- Expanded accessibility features
+- Better AI/copilot integration
+
+We're committed to maintaining these principles while pushing the boundaries of what a modern UI library can be.
+
+## Learn More
+
+- [Getting Started](/docs/getting-started) - Start building with HeroUI v3
+- [Components](/docs/components) - Explore all components
+- [Styling](/docs/handbook/styling) - Learn about styling options
+- [Composition](/docs/handbook/composition) - Master component composition

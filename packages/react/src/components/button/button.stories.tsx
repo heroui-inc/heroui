@@ -50,6 +50,16 @@ const Template = ({isDisabled, size}: ButtonProps) => (
   </div>
 );
 
+const TemplateWithAsChild = ({isDisabled, size}: ButtonProps) => (
+  <div className="flex gap-3">
+    <Button asChild isDisabled={isDisabled} size={size}>
+      <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">
+        Google
+      </a>
+    </Button>
+  </div>
+);
+
 const TemplateWithIcon = ({isDisabled, size}: ButtonProps) => (
   <div className="flex gap-3">
     <Button isDisabled={isDisabled} size={size}>
@@ -169,6 +179,11 @@ const TemplateWithSocialButton = ({size, variant}: ButtonProps) => (
 export const Default = {
   args: defaultArgs,
   render: Template,
+};
+
+export const WithAsChild = {
+  args: defaultArgs,
+  render: TemplateWithAsChild,
 };
 
 export const Sizes = {

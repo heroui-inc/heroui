@@ -1,537 +1,360 @@
 ---
 title: Styling
-description: Customize HeroUI v3 components with Tailwind CSS
-icon: palette
+description: Style HeroUI components with CSS, Tailwind, or CSS-in-JS
+icon: brush
 ---
 
-## Philosophy
+## Overview
 
-### Styled by Default with Tailwind CSS v4
+HeroUI components are built on React Aria and provide flexible styling options:
 
-HeroUI v3 components come with beautiful default styles powered by Tailwind CSS v4. Components are ready to use out of the box:
+- **Tailwind CSS** - Use utility classes directly
+- **CSS** - Target BEM classes or data attributes
+- **CSS-in-JS** - Integrate with styled-components, Emotion, etc.
+- **Render props** - Dynamic styling based on component state
 
-```tsx
-import { Button } from '@heroui/react';
+## Basic Styling
 
-// Renders a styled button with HeroUI's design system
-<Button>Click me</Button>
-```
+### Using className
 
-### Built on CSS Variables
-
-The design system uses CSS variables for easy customization:
-
-```css
-:root {
-  --accent: #3b82f6;
-  --background: #ffffff;
-  --foreground: #000000;
-  --radius: 0.5rem;
-}
-```
-
-### Tailwind CSS v4 Required
-
-HeroUI v3 is built on top of Tailwind CSS v4. This is not optional - Tailwind CSS provides the foundation for all component styles.
-
-## CSS Setup
-
-Ensure your CSS file imports both Tailwind CSS and HeroUI styles:
-
-```css
-/* src/index.css */
-@import "tailwindcss";
-@import "@heroui/styles";
-```
-
-**Important**: Always import `tailwindcss` before `@heroui/styles`.
-
-## Styling Approaches
-
-### 1. CSS Classes
-
-The most straightforward approach using CSS classes:
-
-```css
-/* styles.css */
-.my-button {
-  background: #3b82f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.my-button:hover {
-  background: #2563eb;
-}
-
-.my-button:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-```
+All HeroUI components accept `className` props:
 
 ```tsx
-import { Button } from '@heroui/react';
-import './styles.css';
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Custom Button
+</Button>
 
-function MyButton() {
-  return (
-    <Button className="my-button">
-      Click me
-    </Button>
-  );
-}
+<Accordion className="border-2 border-gray-200 rounded-xl">
+  {/* content */}
+</Accordion>
 ```
 
-### 2. Tailwind CSS Classes
+### Using style
 
-Override default styles with Tailwind CSS utilities:
+Components also accept inline styles:
 
 ```tsx
-import { Button } from '@heroui/react';
-
-function CustomButton() {
-  return (
-    <>
-      {/* Use default HeroUI styling */}
-      <Button>Default Button</Button>
-      
-      {/* Override with custom Tailwind classes */}
-      <Button className="bg-purple-500 hover:bg-purple-600">
-        Custom Purple Button
-      </Button>
-    </>
-  );
-}
-```
-
-### 3. CSS Modules
-
-Type-safe styling with CSS Modules:
-
-```css
-/* Button.module.css */
-.button {
-  background: #3b82f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.primary {
-  background: #3b82f6;
-}
-
-.secondary {
-  background: #6b7280;
-}
-
-.large {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.125rem;
-}
-```
-
-```tsx
-import { Button } from '@heroui/react';
-import styles from './Button.module.css';
-import { clsx } from 'clsx';
-
-interface StyledButtonProps {
-  variant?: 'primary' | 'secondary';
-  size?: 'default' | 'large';
-  children: React.ReactNode;
-}
-
-function StyledButton({ variant = 'primary', size = 'default', children }: StyledButtonProps) {
-  return (
-    <Button 
-      className={clsx(
-        styles.button,
-        styles[variant],
-        size === 'large' && styles.large
-      )}
-    >
-      {children}
-    </Button>
-  );
-}
-```
-
-### 4. Styled Components
-
-CSS-in-JS with styled-components:
-
-```tsx
-import { Button } from '@heroui/react';
-import styled from 'styled-components';
-
-const StyledButton = styled(Button)<{ variant?: 'primary' | 'secondary' }>`
-  background: ${props => props.variant === 'secondary' ? '#6b7280' : '#3b82f6'};
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  
-  &:hover {
-    background: ${props => props.variant === 'secondary' ? '#4b5563' : '#2563eb'};
-  }
-  
-  &:focus-visible {
-    outline: 2px solid ${props => props.variant === 'secondary' ? '#6b7280' : '#3b82f6'};
-    outline-offset: 2px;
-  }
-`;
-
-function MyComponent() {
-  return (
-    <div>
-      <StyledButton variant="primary">Primary</StyledButton>
-      <StyledButton variant="secondary">Secondary</StyledButton>
-    </div>
-  );
-}
-```
-
-## BEM CSS Integration
-
-HeroUI v3 provides optional BEM-style CSS classes for consistent styling:
-
-```css
-/* Optional: Import HeroUI's BEM utilities */
-@import "@heroui/styles/components/button.css";
-
-/* Use BEM classes */
-.button {
-  /* Base button styles */
-}
-
-.button--primary {
-  /* Primary variant */
-}
-
-.button--large {
-  /* Large size */
-}
-```
-
-```tsx
-import { Button, buttonVariants } from '@heroui/react';
-
-function BEMButton() {
-  return (
-    <Button className={buttonVariants({ variant: 'primary', size: 'large' })}>
-      BEM Styled Button
-    </Button>
-  );
-}
-```
-
-## Compound Component Styling
-
-Style individual parts of compound components:
-
-```tsx
-import { Alert } from '@heroui/react';
-
-function StyledAlert() {
-  return (
-    <Alert className="border border-yellow-200 bg-yellow-50 p-4 rounded-md">
-      <Alert.Icon className="text-yellow-600 w-5 h-5" />
-      <div className="ml-3">
-        <Alert.Title className="text-yellow-800 font-medium">
-          Warning
-        </Alert.Title>
-        <Alert.Description className="text-yellow-700 mt-1">
-          This is a warning message.
-        </Alert.Description>
-      </div>
-    </Alert>
-  );
-}
+<Button style={{ backgroundColor: '#8B5CF6' }}>
+  Styled Button
+</Button>
 ```
 
 ## State-Based Styling
 
-Style components based on their state using data attributes:
+HeroUI components expose their state through data attributes, similar to CSS pseudo-classes:
 
 ```css
-.my-button {
-  background: #3b82f6;
-  transition: all 0.2s;
+/* Target different states */
+.button[data-hover="true"] {
+  background: var(--accent-hover);
 }
 
-.my-button[data-pressed="true"] {
-  transform: scale(0.95);
+.button[data-pressed="true"] {
+  transform: scale(0.97);
 }
 
-.my-button[data-disabled="true"] {
-  opacity: 0.5;
-  cursor: not-allowed;
+.button[data-focus-visible="true"] {
+  outline: 2px solid var(--focus);
 }
 
-.my-button[data-focus-visible="true"] {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+.accordion__trigger[aria-expanded="true"] {
+  background: var(--accent-soft);
 }
 ```
 
-```tsx
-import { Button } from '@heroui/react';
+## Render Props
 
-function StatefulButton() {
-  return (
-    <Button 
-      className="my-button"
-      isDisabled={false}
-    >
-      Click me
-    </Button>
-  );
+Use render props for dynamic styling based on component state:
+
+```tsx
+// Dynamic classes
+<Button
+  className={({ isPressed }) => 
+    isPressed ? 'bg-blue-600' : 'bg-blue-500'
+  }
+>
+  Press me
+</Button>
+
+// Dynamic content
+<Button>
+  {({ isHovered, isPressed }) => (
+    <>
+      <Icon 
+        icon="mdi:heart" 
+        className={isPressed ? 'text-red-500' : 'text-gray-400'}
+      />
+      <span className={isHovered ? 'underline' : ''}>
+        Like
+      </span>
+    </>
+  )}
+</Button>
+```
+
+## BEM Classes
+
+HeroUI uses BEM methodology for consistent class naming:
+
+```css
+/* Block */
+.button { }
+.accordion { }
+
+/* Element */
+.accordion__trigger { }
+.accordion__panel { }
+
+/* Modifier */
+.button--primary { }
+.button--lg { }
+.accordion--outline { }
+```
+
+### Customizing Components
+
+```css
+@layer components {
+  /* Override button styles */
+  .button {
+    @apply font-semibold uppercase;
+  }
+  
+  .button--primary {
+    @apply bg-indigo-600 hover:bg-indigo-700;
+  }
+  
+  /* Add custom variant */
+  .button--gradient {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500;
+  }
 }
 ```
 
-## Design System Integration
+## Creating Wrapper Components
 
-### Creating a Design System
-
-Build reusable styled components for your design system:
+For reusable custom components, create wrappers:
 
 ```tsx
-// components/Button.tsx
 import { Button as HeroButton, type ButtonProps } from '@heroui/react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const buttonVariants = cva(
-  // Base styles
-  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  'font-medium transition-all',
   {
     variants: {
-      variant: {
-        primary: "bg-blue-500 text-white hover:bg-blue-600 focus-visible:ring-blue-500",
-        secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus-visible:ring-gray-500",
-        outline: "border border-gray-300 bg-transparent hover:bg-gray-50 focus-visible:ring-gray-500",
+      intent: {
+        primary: 'bg-blue-500 hover:bg-blue-600 text-white',
+        secondary: 'bg-gray-200 hover:bg-gray-300',
+        danger: 'bg-red-500 hover:bg-red-600 text-white',
       },
       size: {
-        sm: "h-9 px-3 text-sm",
-        md: "h-10 px-4",
-        lg: "h-11 px-8 text-lg",
+        small: 'text-sm px-2 py-1',
+        medium: 'text-base px-4 py-2',
+        large: 'text-lg px-6 py-3',
       },
     },
     defaultVariants: {
-      variant: "primary",
-      size: "md",
+      intent: 'primary',
+      size: 'medium',
     },
   }
 );
 
-export interface CustomButtonProps 
-  extends ButtonProps, 
-    VariantProps<typeof buttonVariants> {}
+interface ButtonProps 
+  extends Omit<HeroButtonProps, 'variant'>,
+  VariantProps<typeof buttonVariants> {}
 
-export function Button({ 
-  className, 
-  variant, 
-  size, 
-  ...props 
-}: CustomButtonProps) {
+export function Button({ intent, size, className, ...props }: ButtonProps) {
   return (
     <HeroButton
-      className={buttonVariants({ variant, size, className })}
+      className={buttonVariants({ intent, size, className })}
       {...props}
     />
   );
 }
 ```
 
-### Design Tokens
+## CSS-in-JS Integration
 
-Define consistent design tokens:
-
-```css
-:root {
-  /* Colors */
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-secondary: #6b7280;
-  --color-secondary-hover: #4b5563;
-  
-  /* Spacing */
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  
-  /* Border radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  
-  /* Typography */
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.125rem;
-}
-
-.button {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-md);
-}
-
-.button--primary {
-  background: var(--color-primary);
-}
-
-.button--primary:hover {
-  background: var(--color-primary-hover);
-}
-```
-
-## Best Practices
-
-### 1. Consistent Naming
-
-Use consistent class naming conventions:
-
-```css
-/* Good */
-.button { }
-.button--primary { }
-.button--large { }
-
-/* Avoid */
-.btn { }
-.primaryButton { }
-.large-button { }
-```
-
-### 2. Component Composition
-
-Style compound components as cohesive units:
+### Styled Components
 
 ```tsx
-function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      {children}
-    </div>
-  );
-}
+import styled from 'styled-components';
+import { Button } from '@heroui/react';
 
-function CardHeader({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="px-6 py-4 border-b border-gray-200">
-      {children}
-    </div>
-  );
-}
-
-function CardContent({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="px-6 py-4">
-      {children}
-    </div>
-  );
-}
-```
-
-### 3. Accessible Styling
-
-Ensure your styles support accessibility:
-
-```css
-.button {
-  /* Ensure sufficient color contrast */
-  background: #1f2937; /* Dark enough for white text */
+const StyledButton = styled(Button)`
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  border-radius: 8px;
   color: white;
+  padding: 12px 24px;
   
-  /* Clear focus indicators */
-  focus-visible:outline: 2px solid #3b82f6;
-  focus-visible:outline-offset: 2px;
-  
-  /* Don't rely on color alone */
-  border: 2px solid transparent;
-}
-
-.button[aria-pressed="true"] {
-  border-color: #3b82f6; /* Visual indicator beyond color */
-}
+  &:hover {
+    box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
+  }
+`;
 ```
 
-### 4. Performance
+### Emotion
 
-Optimize for performance:
+```tsx
+import { css } from '@emotion/react';
+import { Button } from '@heroui/react';
+
+const buttonStyles = css`
+  background: #8B5CF6;
+  color: white;
+  &:hover {
+    background: #7C3AED;
+  }
+`;
+
+<Button css={buttonStyles}>
+  Emotion Button
+</Button>
+```
+
+## Responsive Design
+
+Use Tailwind's responsive utilities:
+
+```tsx
+<Button className="
+  text-sm md:text-base lg:text-lg
+  px-3 md:px-4 lg:px-6
+">
+  Responsive Button
+</Button>
+```
+
+Or with CSS:
 
 ```css
-/* Use CSS custom properties for dynamic values */
 .button {
-  background: var(--button-bg, #3b82f6);
-  transition: background-color 0.2s; /* Only animate necessary properties */
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
 }
 
-/* Avoid expensive operations */
-.button:hover {
-  /* Good: simple color change */
-  background: #2563eb;
-  
-  /* Avoid: expensive transforms on hover */
-  /* transform: scale(1.05); */
+@media (min-width: 768px) {
+  .button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
 }
 ```
 
-## Theming
+## CSS Modules
 
-### CSS Custom Properties
-
-Create themeable components with CSS custom properties:
+For scoped styles, use CSS Modules:
 
 ```css
-.theme-light {
-  --bg-primary: #ffffff;
-  --text-primary: #1f2937;
-  --border-color: #e5e7eb;
+/* Button.module.css */
+.button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
 }
 
-.theme-dark {
-  --bg-primary: #1f2937;
-  --text-primary: #f3f4f6;
-  --border-color: #374151;
-}
-
-.card {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+.button:hover {
+  transform: translateY(-2px);
 }
 ```
 
 ```tsx
-function ThemedCard() {
-  const [theme, setTheme] = useState('light');
-  
-  return (
-    <div className={`theme-${theme}`}>
-      <Card className="card">
-        <CardContent>
-          This card adapts to the theme!
-        </CardContent>
-      </Card>
-    </div>
-  );
+import styles from './Button.module.css';
+import { Button } from '@heroui/react';
+
+<Button className={styles.button}>
+  Scoped Button
+</Button>
+```
+
+## Performance Tips
+
+### Avoid Inline Functions
+
+```tsx
+// ❌ Creates new function on each render
+<Button className={() => 'bg-blue-500'}>
+  Button
+</Button>
+
+// ✅ Static class
+<Button className="bg-blue-500">
+  Button
+</Button>
+
+// ✅ Memoized function
+const getClassName = useCallback(
+  ({ isPressed }) => isPressed ? 'pressed' : 'normal',
+  []
+);
+
+<Button className={getClassName}>
+  Button
+</Button>
+```
+
+### Use CSS for Animations
+
+Prefer CSS transitions over JavaScript animations when possible:
+
+```css
+/* CSS is more performant */
+.button {
+  transition: transform 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.05);
 }
 ```
+
+## Accessibility
+
+### Focus Indicators
+
+Always provide clear focus indicators:
+
+```css
+.button:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+```
+
+### Color Contrast
+
+Ensure sufficient color contrast (WCAG AA minimum 4.5:1):
+
+```css
+.button {
+  /* Good contrast */
+  background: #1E40AF;
+  color: white;
+}
+```
+
+## Component Classes Reference
+
+### Button
+- `.button` - Base
+- `.button--{variant}` - Variants
+- `.button--{size}` - Sizes
+- `.button--icon-only` - Icon button
+
+### Accordion
+- `.accordion` - Container
+- `.accordion__item` - Item
+- `.accordion__trigger` - Header
+- `.accordion__panel` - Content
+- `.accordion--outline` - Variant
+
+View all component classes in [@heroui/styles/components](https://github.com/heroui-inc/heroui/tree/main/packages/styles/components).
 
 ## Next Steps
 
 - Learn about [Animation](/docs/handbook/animation) techniques
-- Explore [Composition](/docs/handbook/composition) patterns
+- Explore [Theming](/docs/handbook/theming) system
 - Browse [Component](/docs/components) examples

@@ -18,6 +18,10 @@ export const COMPONENT_STYLES_PATH = __PREVIEW__
   ? `${GITHUB_URL}/${REPO_NAME}/tree/feat/v3/packages/styles/components`
   : `${GITHUB_URL}/${REPO_NAME}/tree/main/packages/styles/components`;
 
+export const THEMES_PATH = __PREVIEW__
+  ? `${GITHUB_URL}/${REPO_NAME}/tree/feat/v3/packages/styles/themes`
+  : `${GITHUB_URL}/${REPO_NAME}/tree/main/packages/styles/themes`;
+
 export const STORYBOOK_URL = __PREVIEW__
   ? "https://v3-storybook.heroui.com"
   : "https://storybook.heroui.com";

@@ -1,6 +1,6 @@
 import type {ComponentLinksType} from "@/utils/extract-links";
 
-import {AdobeIcon, GithubIcon, RadixUIIcon, StorybookIcon} from "@/icons/dev";
+import {AdobeIcon, GithubIcon, RadixUIIcon, StorybookIcon, TailwindIcon} from "@/icons/dev";
 import {generateComponentLinks} from "@/utils/extract-links";
 
 export interface ComponentLinksProps {
@@ -17,7 +17,7 @@ const ButtonLink = ({
 }) => {
   return (
     <a
-      className="button button--tertiary button--sm text-muted"
+      className="button button--tertiary button--sm text-foreground/70"
       href={href}
       rel="noopener noreferrer"
       target="_blank"
@@ -67,6 +67,19 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
       {componentLinks.styles ? (
         <ButtonLink href={componentLinks.styles} startContent={<GithubIcon size={20} />}>
           Styles source
+        </ButtonLink>
+      ) : null}
+      {componentLinks.themes ? (
+        <ButtonLink href={componentLinks.themes} startContent={<GithubIcon size={20} />}>
+          Theme source
+        </ButtonLink>
+      ) : null}
+      {componentLinks.tailwind ? (
+        <ButtonLink
+          href={componentLinks.tailwind}
+          startContent={<TailwindIcon className="text-lg text-[#38bdf8]" />}
+        >
+          Tailwind CSS
         </ButtonLink>
       ) : null}
     </div>

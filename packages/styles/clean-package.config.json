@@ -10,10 +10,10 @@
         "default": "./dist/index.css"
       },
       "./css": "./dist/index.css",
-      "./base": "./dist/base/base.css",
-      "./components": "./dist/components/index.css",
-      "./themes": "./dist/themes/default.css",
-      "./utilities": "./dist/utilities/index.css",
+      "./base": "./dist/base",
+      "./components": "./dist/components",
+      "./themes": "./dist/themes",
+      "./utilities": "./dist/utilities",
       "./package.json": "./package.json"
     }
   },
