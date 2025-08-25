@@ -80,7 +80,7 @@ const numberInput = tv({
       "min-w-5",
       "w-5",
       "h-5",
-      "overflow-visible",
+      "overflow-hidden",
       "transition-opacity",
       "data-[hover=true]:opacity-70",
       "data-[pressed=true]:opacity-disabled",
