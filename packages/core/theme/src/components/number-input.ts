@@ -801,6 +801,7 @@ const numberInput = tv({
           "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
         ],
         base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_10px)]",
+        stepperButton: "before:h-4",
       },
     },
     {
