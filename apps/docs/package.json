@@ -29,7 +29,7 @@
     "@heroui/use-infinite-scroll": "workspace:*",
     "@iconify/icons-solar": "1.2.3",
     "@iconify/react": "5.0.2",
-    "@internationalized/date": "3.8.2",
+    "@internationalized/date": "3.9.0",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@react-aria/focus": "3.21.1",
     "@react-aria/i18n": "3.12.12",

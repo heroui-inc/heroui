@@ -314,8 +314,8 @@ importers:
         specifier: 5.0.2
         version: 5.0.2(react@18.3.0)
       '@internationalized/date':
-        specifier: 3.8.2
-        version: 3.8.2
+        specifier: 3.9.0
+        version: 3.9.0
       '@radix-ui/react-scroll-area':
         specifier: ^1.0.5
         version: 1.2.9(@types/react-dom@18.2.4)(@types/react@18.2.8)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -964,8 +964,8 @@ importers:
         specifier: workspace:*
         version: link:../../hooks/use-aria-button
       '@internationalized/date':
-        specifier: 3.8.2
-        version: 3.8.2
+        specifier: 3.9.0
+        version: 3.9.0
       '@react-aria/calendar':
         specifier: 3.9.1
         version: 3.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1221,8 +1221,8 @@ importers:
         specifier: workspace:*
         version: link:../../utilities/shared-utils
       '@internationalized/date':
-        specifier: 3.8.2
-        version: 3.8.2
+        specifier: 3.9.0
+        version: 3.9.0
       '@react-aria/datepicker':
         specifier: 3.15.1
         version: 3.15.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1291,8 +1291,8 @@ importers:
         specifier: workspace:*
         version: link:../../utilities/shared-utils
       '@internationalized/date':
-        specifier: 3.8.2
-        version: 3.8.2
+        specifier: 3.9.0
+        version: 3.9.0
       '@react-aria/datepicker':
         specifier: 3.15.1
         version: 3.15.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -5804,9 +5804,6 @@ packages:
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [win32]
-
-  '@internationalized/date@3.8.2':
-    resolution: {integrity: sha512-/wENk7CbvLbkUvX1tu0mwq49CVkkWpkXubGel6birjRPyo6uQ4nQpnq5xZu823zRCwwn82zgHrvgF1vZyvmVgA==}
 
   '@internationalized/date@3.9.0':
     resolution: {integrity: sha512-yaN3brAnHRD+4KyyOsJyk49XUvj2wtbNACSqg0bz3u8t2VuzhC8Q5dfRnrSxjnnbDb+ienBnkn1TzQfE154vyg==}
@@ -17447,10 +17444,6 @@ snapshots:
 
   '@img/sharp-win32-x64@0.34.2':
     optional: true
-
-  '@internationalized/date@3.8.2':
-    dependencies:
-      '@swc/helpers': 0.5.17
 
   '@internationalized/date@3.9.0':
     dependencies:
