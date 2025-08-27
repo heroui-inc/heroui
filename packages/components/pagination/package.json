@@ -45,10 +45,10 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-intersection-observer": "workspace:*",
     "@heroui/use-pagination": "workspace:*",
-    "@react-aria/utils": "3.30.0",
-    "@react-aria/focus": "3.21.0",
-    "@react-aria/i18n": "3.12.11",
-    "@react-aria/interactions": "3.25.4",
+    "@react-aria/utils": "3.30.1",
+    "@react-aria/focus": "3.21.1",
+    "@react-aria/i18n": "3.12.12",
+    "@react-aria/interactions": "3.25.5",
     "scroll-into-view-if-needed": "3.0.10"
   },
   "devDependencies": {
