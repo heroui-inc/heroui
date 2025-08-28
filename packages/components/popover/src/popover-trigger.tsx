@@ -32,7 +32,7 @@ const PopoverTrigger = (props: PopoverTriggerProps) => {
 
   // Accessing the ref from props, else fallback to element.ref
   // https://github.com/facebook/react/pull/28348
-  const childRef = child.props.ref ?? (child as any).ref;
+  const childRef = child.props.ref ?? child.ref;
 
   const {onPress, isDisabled, ...restProps} = useMemo(() => {
     return getTriggerProps(mergeProps(otherProps, child.props), childRef);

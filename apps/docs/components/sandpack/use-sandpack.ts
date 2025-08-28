@@ -206,7 +206,7 @@ export const useSandpack = ({
       "react": "18.3.1",
       "react-dom": "18.3.1",
       ${Object.entries(
-        omit(dependencies as any, [
+        omit(dependencies, [
           "react",
           "react-dom",
           "react-dom/client",
