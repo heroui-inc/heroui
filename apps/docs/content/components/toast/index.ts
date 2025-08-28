@@ -6,6 +6,7 @@ import placement from "./placement";
 import usage from "./usage";
 import customCloseIcon from "./custom-close-icon";
 import close from "./close";
+import multipleToastProvider from "./multiple-ToastProvider";
 
 export const toastContent = {
   color,
@@ -16,4 +17,5 @@ export const toastContent = {
   placement,
   usage,
   customCloseIcon,
+  multipleToastProvider,
 };

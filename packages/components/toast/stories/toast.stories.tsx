@@ -425,6 +425,52 @@ const CloseToastTemplate = (args: ToastProps) => {
   );
 };
 
+const MultiToasterTemplate = (args) => {
+  const topToasterId = "multi-toaster-top";
+  const bottomToasterId = "multi-toaster-bottom";
+
+  return (
+    <>
+      <ToastProvider
+        maxVisibleToasts={args.maxVisibleToasts}
+        placement="top-right"
+        toasterId={topToasterId}
+      />
+      <ToastProvider
+        maxVisibleToasts={args.maxVisibleToasts}
+        placement="bottom-right"
+        toasterId={bottomToasterId}
+      />
+      <div className="flex flex-wrap gap-2">
+        <Button
+          onPress={() => {
+            addToast({
+              title: "Top Toast Title",
+              description: "Toast Displayed Successfully",
+              ...args,
+              toasterId: topToasterId,
+            });
+          }}
+        >
+          Show Top Toast
+        </Button>
+        <Button
+          onPress={() => {
+            addToast({
+              title: "Bottom Toast Title",
+              description: "Toast Displayed Successfully",
+              ...args,
+              toasterId: bottomToasterId,
+            });
+          }}
+        >
+          Show Bottom Toast
+        </Button>
+      </div>
+    </>
+  );
+};
+
 export const Default = {
   render: Template,
   args: {
@@ -524,6 +570,13 @@ export const CustomCloseIcon = {
 
 export const CloseToast = {
   render: CloseToastTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const MultiToaster = {
+  render: MultiToasterTemplate,
   args: {
     ...defaultProps,
   },

@@ -174,4 +174,75 @@ describe("Toast", () => {
 
     expect(loadingIcon).toBeTruthy();
   });
+
+  it("should work with multiple ToastProvider", async () => {
+    const leftToasterId = "left";
+    const leftTitle = "Left Toast Title";
+    const leftDescription = "Left Toast Description";
+
+    const rightToasterId = "right";
+    const rightTitle = "Right Toast Title";
+    const rightDescription = "Right Toast Description";
+
+    render(
+      <>
+        <ToastProvider placement="bottom-left" toasterId={leftToasterId} />
+        <ToastProvider placement="bottom-right" toasterId={rightToasterId} />
+        <button
+          data-testid="left-button"
+          onClick={() => {
+            addToast({
+              title: leftTitle,
+              description: leftDescription,
+              toasterId: leftToasterId,
+            });
+          }}
+        >
+          Show Left Toast
+        </button>
+        <button
+          data-testid="right-button"
+          onClick={() => {
+            addToast({
+              title: rightTitle,
+              description: rightDescription,
+              toasterId: rightToasterId,
+            });
+          }}
+        >
+          Show Right Toast
+        </button>
+      </>,
+    );
+
+    const leftButton = screen.getByTestId("left-button");
+    const rightButton = screen.getByTestId("right-button");
+
+    await user.click(leftButton);
+    await user.click(rightButton);
+    const regions = await screen.findAllByRole("region");
+
+    expect(regions).toHaveLength(2);
+
+    const leftRegion = regions.find(
+      (region) => region.getAttribute("data-placement") === "bottom-left",
+    );
+    const rightRegion = regions.find(
+      (region) => region.getAttribute("data-placement") === "bottom-right",
+    );
+
+    // check for left ToastProvider
+    expect(leftRegion).toHaveAttribute("data-placement", "bottom-left");
+    expect(leftRegion).toContainHTML(leftTitle);
+    expect(leftRegion).toContainHTML(leftDescription);
+    expect(leftRegion).not.toContainHTML(rightTitle);
+    expect(leftRegion).not.toContainHTML(rightDescription);
+
+    // check for right ToastProvider
+    expect(rightRegion).toHaveAttribute("data-placement", "bottom-right");
+    expect(rightRegion).toContainHTML(rightTitle);
+    expect(rightRegion).toContainHTML(rightDescription);
+    expect(rightRegion).not.toContainHTML(leftTitle);
+    expect(rightRegion).not.toContainHTML(leftDescription);
+  });
 });
