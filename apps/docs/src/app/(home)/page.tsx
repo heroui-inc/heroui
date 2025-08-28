@@ -2,7 +2,6 @@ import {Chip, buttonVariants} from "@heroui/react";
 import Link from "fumadocs-core/link";
 
 // TODO:
-// import {HomeThemeCustomizer} from "@/components/home-theme-customizer";
 import {SocialLinks} from "@/components/social-links";
 // import {ThemeBackground} from "@/components/theme-background";
 import {currentVersion} from "@/utils/version";
@@ -19,7 +18,6 @@ const VersionChip = () => {
 export default function HomePage() {
   return (
     <main className="flex h-[calc(100vh-4rem)] flex-col">
-      {/* <ThemeBackground /> */}
       {/* Hero Section */}
       <section className="z-10 flex flex-col items-center pt-20 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">

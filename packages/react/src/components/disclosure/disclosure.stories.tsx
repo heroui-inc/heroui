@@ -11,24 +11,24 @@ import {Disclosure} from "./index";
 
 export default {
   argTypes: {
-    isExpanded: {
+    isDisabled: {
       control: {
         type: "boolean",
       },
     },
-    isDisabled: {
+    isExpanded: {
       control: {
         type: "boolean",
       },
     },
   },
   component: Disclosure,
-  title: "✅ Ready/Disclosure",
+  title: "📝 ToDo/Disclosure",
 } as Meta<typeof Disclosure>;
 
 const defaultArgs: DisclosureProps = {
-  isExpanded: false,
   isDisabled: false,
+  isExpanded: false,
 };
 
 const Template = (props: DisclosureProps) => {
