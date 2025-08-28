@@ -473,8 +473,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwind-variants:
-        specifier: 2.0.1
-        version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 3.1.0
+        version: 3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -3217,8 +3217,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwind-variants:
-        specifier: 2.0.1
-        version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 3.1.0
+        version: 3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
 
   packages/core/theme:
     dependencies:
@@ -3244,8 +3244,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwind-variants:
-        specifier: 2.0.1
-        version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 3.1.0
+        version: 3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
     devDependencies:
       '@types/color':
         specifier: ^4.2.0
@@ -14296,8 +14296,8 @@ packages:
   tailwind-merge@3.3.1:
     resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
-  tailwind-variants@2.0.1:
-    resolution: {integrity: sha512-1wt8c4PWO3jbZcKGBrjIV8cehWarREw1C2os0k8Mcq0nof/CbafNhUUjb0LRWiiRfAvDK6v1deswtHLsygKglw==}
+  tailwind-variants@3.1.0:
+    resolution: {integrity: sha512-ieiYaEfUr+sNhw/k++dosmZfVA4VIG5bV+G1eGdJSC4FcflqQv0iSIlOLj/RbzRuTu/VrIiNSlwh1esBM3BXUg==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwind-merge: '>=3.0.0'
@@ -28267,7 +28267,7 @@ snapshots:
 
   tailwind-merge@3.3.1: {}
 
-  tailwind-variants@2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12):
+  tailwind-variants@3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12):
     dependencies:
       tailwindcss: 4.1.12
     optionalDependencies:
