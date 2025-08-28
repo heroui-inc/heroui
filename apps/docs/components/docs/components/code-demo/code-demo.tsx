@@ -15,7 +15,6 @@ import {useCodeDemo} from "./use-code-demo";
 import WindowResizer from "./window-resizer";
 import {parseDependencies} from "./parse-dependencies";
 
-import {SmallLogo} from "@/components/heroui-logo";
 import {openInChat} from "@/actions/open-in-chat";
 
 const DynamicReactLiveDemo = dynamic(
@@ -273,9 +272,7 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
                   size="sm"
                   variant="simple"
                 />
-              ) : (
-                <SmallLogo className="w-4 h-4" />
-              )}
+              ) : null}
             </Button>
           )}
         </>

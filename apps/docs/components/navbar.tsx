@@ -33,7 +33,7 @@ import {FbRoadmapLink} from "./featurebase/fb-roadmap-link";
 
 import {currentVersion} from "@/utils/version";
 import {siteConfig} from "@/config/site";
-import {LargeLogo, SmallLogo, ThemeSwitch} from "@/components";
+import {Logo, ThemeSwitch} from "@/components";
 import {GithubIcon, SearchLinearIcon} from "@/components/icons";
 import {useIsMounted} from "@/hooks/use-is-mounted";
 import {DocsSidebar} from "@/components/docs/sidebar";
@@ -182,8 +182,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             href="/"
             onClick={() => handlePressNavbarItem("Home", "/")}
           >
-            <SmallLogo className="w-6 h-6 md:hidden" />
-            <LargeLogo className="h-5 md:h-6" />
+            <Logo className="h-6" />
           </NextLink>
           {versionChip}
           <Chip
