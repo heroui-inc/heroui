@@ -344,7 +344,7 @@ You can customize the `Listbox` items style by using the `itemClasses` prop and 
       type: "boolean",
       description: "Whether keyboard navigation is circular.",
       default: "false"
-    },   
+    },
     {
       attribute: "isVirtualized",
       type: "boolean",
@@ -353,7 +353,7 @@ You can customize the `Listbox` items style by using the `itemClasses` prop and 
     },
     {
       attribute: "virtualization",
-      type: "Record<\"maxListboxHeight\" & \"itemHeight\", number>",
+      type: "Record<\"maxListboxHeight\" & \"itemHeight\", number> & { gap?: number; }",
       description: "Configuration for virtualization, optimizing rendering for large datasets. Required if isVirtualized is set to true.",
       default: "-",
     },

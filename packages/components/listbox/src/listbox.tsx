@@ -12,6 +12,7 @@ import VirtualizedListbox from "./virtualized-listbox";
 export interface VirtualizationProps {
   maxListboxHeight: number;
   itemHeight: number;
+  gap?: number;
 }
 
 interface Props<T> extends UseListboxProps<T> {
