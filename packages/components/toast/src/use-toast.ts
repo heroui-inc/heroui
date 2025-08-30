@@ -434,9 +434,8 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         onTransitionEnd: disableAnimation
           ? undefined
           : () => {
-              if (isToastExiting) {
-                state.close(toast.key);
-              }
+              if (!isToastExiting) return;
+              state.close(toast.key);
             },
         style: {
           opacity: opacityValue,
@@ -456,6 +455,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       isToastExiting,
       state,
       toast.key,
+      disableAnimation,
     ],
   );
 

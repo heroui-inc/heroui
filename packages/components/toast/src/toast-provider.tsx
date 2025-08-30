@@ -68,7 +68,7 @@ export const addToast = ({...props}: ToastProps & ToastOptions) => {
   return globalToastQueue.add(props);
 };
 
-const closingToasts = new Map<string, NodeJS.Timeout>();
+const closingToasts = new Map<string, ReturnType<typeof setTimeout>>();
 
 export const closeToast = (key: string) => {
   if (!globalToastQueue) {
