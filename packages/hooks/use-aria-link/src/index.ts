@@ -6,8 +6,8 @@ import {
   filterDOMProps,
   mergeProps,
   useRouter,
-  shouldClientNavigate,
   useLinkProps,
+  handleLinkClick,
 } from "@react-aria/utils";
 import {useFocusable} from "@react-aria/focus";
 import {usePress} from "@react-aria/interactions";
@@ -79,20 +79,7 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
       "aria-current": props["aria-current"],
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         pressProps.onClick?.(e);
-
-        // If a custom router is provided, prevent default and forward if this link should client navigate.
-        if (
-          !router.isNative &&
-          e.currentTarget instanceof HTMLAnchorElement &&
-          e.currentTarget.href &&
-          // If props are applied to a router Link component, it may have already prevented default.
-          !e.isDefaultPrevented() &&
-          shouldClientNavigate(e.currentTarget, e) &&
-          props.href
-        ) {
-          e.preventDefault();
-          router.open(e.currentTarget, e, props.href, props.routerOptions);
-        }
+        handleLinkClick(e, router, props.href, props.routerOptions);
       },
     }),
   };

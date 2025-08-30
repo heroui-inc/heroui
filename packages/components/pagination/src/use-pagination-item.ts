@@ -4,7 +4,7 @@ import type {LinkDOMProps, PressEvent} from "@react-types/shared";
 import type {PaginationItemValue} from "@heroui/use-pagination";
 
 import {useMemo} from "react";
-import {shouldClientNavigate, useRouter} from "@react-aria/utils";
+import {handleLinkClick, useRouter} from "@react-aria/utils";
 import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useHover, usePress} from "@react-aria/interactions";
@@ -109,20 +109,7 @@ export function usePaginationItem(props: UsePaginationItemProps) {
       className: clsx(className, props.className),
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         chain(pressProps?.onClick, onClick)(e);
-
-        // If a custom router is provided, prevent default and forward if this link should client navigate.
-        if (
-          !router.isNative &&
-          e.currentTarget instanceof HTMLAnchorElement &&
-          e.currentTarget.href &&
-          // If props are applied to a router Link component, it may have already prevented default.
-          !e.isDefaultPrevented() &&
-          shouldClientNavigate(e.currentTarget, e) &&
-          props.href
-        ) {
-          e.preventDefault();
-          router.open(e.currentTarget, e, props.href, props.routerOptions);
-        }
+        handleLinkClick(e, router, props.href, props.routerOptions);
       },
     };
   };
