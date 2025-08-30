@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system-rsc",
-  "version": "2.3.17",
+  "version": "2.3.18",
   "description": "HeroUI system primitives compatibles with RSC imports",
   "keywords": [
     "system-rsc"

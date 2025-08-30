@@ -1,5 +1,16 @@
 # @heroui/pagination
 
+## 2.2.23
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- [#5632](https://github.com/heroui-inc/heroui/pull/5632) [`f8fbe4b`](https://github.com/heroui-inc/heroui/commit/f8fbe4ba222e93308ed5786cee4fa2e5134d5367) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: use handleLinkClick from RA's utils
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1)]:
+  - @heroui/use-pagination@2.2.17
+
 ## 2.2.22
 
 ### Patch Changes

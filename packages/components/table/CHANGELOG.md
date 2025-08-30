@@ -1,5 +1,15 @@
 # @heroui/table
 
+## 2.2.25
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1)]:
+  - @heroui/checkbox@2.3.25
+  - @heroui/spacer@2.2.19
+
 ## 2.2.24
 
 ### Patch Changes

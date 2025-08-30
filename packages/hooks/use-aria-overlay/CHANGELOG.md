@@ -1,5 +1,13 @@
 # @heroui/use-aria-overlay
 
+## 2.0.3
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- [#5624](https://github.com/heroui-inc/heroui/pull/5624) [`b6fda4f`](https://github.com/heroui-inc/heroui/commit/b6fda4fe6fdbdeaff0876eeb602014e666c81ec6) Thanks [@anshumandev2025](https://github.com/anshumandev2025)! - prevent modal/drawer from closing on press instead (#5616)
+
 ## 2.0.2
 
 ### Patch Changes

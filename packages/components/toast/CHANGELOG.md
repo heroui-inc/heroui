@@ -1,5 +1,18 @@
 # @heroui/toast
 
+## 2.0.15
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- [#5647](https://github.com/heroui-inc/heroui/pull/5647) [`e0dc33f`](https://github.com/heroui-inc/heroui/commit/e0dc33f3b696351c822f724df328472559b0c2bc) Thanks [@wingkwong](https://github.com/wingkwong)! - refactor: toast
+
+- [#5637](https://github.com/heroui-inc/heroui/pull/5637) [`afe2f97`](https://github.com/heroui-inc/heroui/commit/afe2f977fcebc84a616a251fd3be301ac81da7ac) Thanks [@anshumandev2025](https://github.com/anshumandev2025)! - show animation when closing all modals (#5620)
+
+- Updated dependencies []:
+  - @heroui/spinner@2.2.22
+
 ## 2.0.14
 
 ### Patch Changes

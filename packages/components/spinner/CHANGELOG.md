@@ -1,5 +1,13 @@
 # @heroui/spinner
 
+## 2.2.22
+
+### Patch Changes
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1), [`6b86a41`](https://github.com/heroui-inc/heroui/commit/6b86a41fe42ecf1830f90b2685a64ff0784a9e14)]:
+  - @heroui/system-rsc@2.3.18
+  - @heroui/system@2.4.21
+
 ## 2.2.21
 
 ### Patch Changes
