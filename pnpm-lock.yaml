@@ -2811,6 +2811,9 @@ importers:
       '@heroui/input':
         specifier: workspace:*
         version: link:../input
+      '@heroui/modal':
+        specifier: workspace:*
+        version: link:../modal
       '@heroui/shared-icons':
         specifier: workspace:*
         version: link:../../utilities/shared-icons
