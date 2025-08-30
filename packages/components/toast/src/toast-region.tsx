@@ -11,6 +11,7 @@ import {clsx, mergeProps} from "@heroui/shared-utils";
 import {AnimatePresence} from "framer-motion";
 
 import Toast from "./toast";
+import {isToastClosing} from "./toast-provider";
 
 export interface RegionProps {
   className?: string;
@@ -93,12 +94,14 @@ export function ToastRegion<T extends ToastProps>({
             total - index <= 4 ||
             (isHovered && total - index <= maxVisibleToasts + 1)
           ) {
+            const isClosing = isToastClosing(toast.key);
+
             return (
               <Toast
                 key={toast.key}
                 state={toastQueue}
                 toast={toast}
-                {...mergeProps(toastProps, toast.content)}
+                {...mergeProps(toastProps, toast.content, {isClosing})}
                 disableAnimation={disableAnimation}
                 heights={heights}
                 index={index}

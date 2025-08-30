@@ -110,6 +110,10 @@ export interface ToastProps extends ToastVariantProps {
    * @default "default"
    */
   severity?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  /**
+   * Whether the toast is being closed programmatically
+   */
+  isClosing?: boolean;
 }
 
 interface Props<T> extends Omit<HTMLHeroUIProps<"div">, "title">, ToastProps {
@@ -165,6 +169,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     severity,
     maxVisibleToasts,
     loadingComponent,
+    isClosing = false,
     ...otherProps
   } = props;
 
@@ -209,6 +214,12 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       setIsLoading(false);
     });
   }, [promiseProp]);
+
+  useEffect(() => {
+    if (isClosing && !isToastExiting) {
+      setIsToastExiting(true);
+    }
+  }, [isClosing, isToastExiting]);
 
   useEffect(() => {
     const updateProgress = (timestamp: number) => {
@@ -287,16 +298,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
   // Following was inspired from sonner ❤️
   useLayoutEffect(() => {
-    if (!domRef.current || !mounted) {
-      return;
-    }
-
-    if (isToastExiting) {
-      const updatedHeights = [...heights];
-
-      updatedHeights[index] = 0;
-      setHeights(updatedHeights);
-
+    if (!domRef.current || !mounted || isToastExiting) {
       return;
     }
 
@@ -325,7 +327,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   let liftHeight = 4;
 
   for (let idx = index + 1; idx < total; idx++) {
-    liftHeight += heights[idx];
+    liftHeight += heights[idx] || 0;
   }
 
   const frontHeight = heights[heights.length - 1];
@@ -585,7 +587,10 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         },
         drag: dragDirection,
         dragConstraints,
-        exit: {opacity: 0},
+        exit: {
+          opacity: 0,
+          transition: {duration: 0.3},
+        },
         initial: {opacity: 0, scale: 1, y: -40 * multiplier},
         transition: {duration: 0.3, ease: "easeOut"},
         variants: toastVariants,
