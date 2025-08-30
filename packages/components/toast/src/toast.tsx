@@ -109,23 +109,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
   );
 
   return (
-    <>
-      {disableAnimation ? (
-        toastContent
-      ) : (
-        <m.div {...getMotionDivProps()}>
-          <m.div
-            key={"inner-div"}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            initial={{opacity: 0}}
-            transition={{duration: 0.25, ease: "easeOut", delay: 0.1}}
-          >
-            {toastContent}
-          </m.div>
-        </m.div>
-      )}
-    </>
+    <>{disableAnimation ? toastContent : <m.div {...getMotionDivProps()}>{toastContent}</m.div>}</>
   );
 });
 
