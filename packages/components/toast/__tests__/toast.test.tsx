@@ -174,4 +174,34 @@ describe("Toast", () => {
 
     expect(loadingIcon).toBeTruthy();
   });
+
+  it("should call onTimeout when toast closes due to timeout", async () => {
+    const onTimeout = jest.fn();
+
+    render(
+      <>
+        <ToastProvider />
+        <button
+          data-testid="button"
+          onClick={() => {
+            addToast({
+              title: "Auto-close",
+              description: "This toast will auto-close",
+              timeout: 500,
+              onTimeout,
+            });
+          }}
+        >
+          Show Toast
+        </button>
+      </>,
+    );
+
+    await user.click(screen.getByTestId("button"));
+
+    // Wait enough time for the timeout and framer-motion exit animations
+    await new Promise((res) => setTimeout(res, 1000));
+
+    expect(onTimeout).toHaveBeenCalledTimes(1);
+  });
 });
