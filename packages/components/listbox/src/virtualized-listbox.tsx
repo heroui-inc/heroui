@@ -103,6 +103,7 @@ const VirtualizedListbox = (props: Props) => {
     count: [...state.collection].length,
     getScrollElement: () => parentRef.current,
     estimateSize: (i) => itemSizes[i],
+    gap: virtualization.gap,
   });
 
   const virtualItems = rowVirtualizer.getVirtualItems();
