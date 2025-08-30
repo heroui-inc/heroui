@@ -349,7 +349,11 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   // Ensure the focused item in the dropdown correctly reflects the
   // selected key when the component mounts or relevant state changes.
   useEffect(() => {
-    let keyToFocus: React.Key | null;
+    if (!state.isOpen) {
+      return;
+    }
+
+    let keyToFocus: React.Key | null = null;
 
     if (
       state.selectedKey !== null &&
@@ -357,7 +361,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       !state.disabledKeys.has(state.selectedKey)
     ) {
       keyToFocus = state.selectedKey;
-    } else {
+    } else if (state.inputValue && state.inputValue.length > 0) {
       let firstAvailableKey = state.collection.getFirstKey();
 
       while (firstAvailableKey && state.disabledKeys.has(firstAvailableKey)) {
@@ -366,7 +370,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       keyToFocus = firstAvailableKey;
     }
     state.selectionManager.setFocusedKey(keyToFocus);
-  }, [state.collection, state.disabledKeys, state.selectedKey]);
+  }, [state.collection, state.disabledKeys, state.selectedKey, state.isOpen, state.inputValue]);
 
   // scroll the listbox to the selected item
   useEffect(() => {
