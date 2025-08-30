@@ -183,6 +183,8 @@ export default defineConfig([
       "**/.cache/**",
       "**/.build/**",
       "**/.vercel/**",
+      "**/.rollup.cache/**",
+      "**/.rollup.cache",
       "**/.changeset/**",
       "**/.DS_Store",
       "**/dist/**",

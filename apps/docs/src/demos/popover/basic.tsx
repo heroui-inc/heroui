@@ -1,6 +1,6 @@
 "use client";
 
-import {Popover, Button} from "@heroui/react";
+import {Button, Popover} from "@heroui/react";
 
 export function PopoverBasic() {
   return (

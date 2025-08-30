@@ -11,20 +11,20 @@ export function ChipStatuses() {
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Default
         </Chip>
-        <Chip variant="primary" color="success">
+        <Chip color="success" variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Active
         </Chip>
-        <Chip variant="primary" color="warning">
+        <Chip color="warning" variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Pending
         </Chip>
-        <Chip variant="primary" color="danger">
+        <Chip color="danger" variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Inactive
         </Chip>
       </div>
-      
+
       <div className="flex items-center gap-3">
         <Chip>
           <Icon icon="gravity-ui:circle-info" width={12} />

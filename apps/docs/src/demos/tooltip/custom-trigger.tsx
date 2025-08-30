@@ -1,6 +1,6 @@
 "use client";
 
-import {Tooltip, Avatar, Chip} from "@heroui/react";
+import {Avatar, Chip, Tooltip} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function TooltipCustomTrigger() {
@@ -9,9 +9,9 @@ export function TooltipCustomTrigger() {
       <Tooltip delay={0}>
         <Tooltip.Trigger aria-label="User avatar">
           <Avatar>
-            <Avatar.Image 
-              src="https://img.heroui.chat/image/avatar?w=400&h=400&u=1" 
+            <Avatar.Image
               alt="John Doe"
+              src="https://img.heroui.chat/image/avatar?w=400&h=400&u=1"
             />
             <Avatar.Fallback>JD</Avatar.Fallback>
           </Avatar>
@@ -40,7 +40,7 @@ export function TooltipCustomTrigger() {
       <Tooltip delay={0}>
         <Tooltip.Trigger aria-label="Info icon">
           <div className="bg-accent-soft rounded-full p-2">
-            <Icon icon="gravity-ui:circle-question" className="text-accent" />
+            <Icon className="text-accent" icon="gravity-ui:circle-question" />
           </div>
         </Tooltip.Trigger>
         <Tooltip.Content showArrow>

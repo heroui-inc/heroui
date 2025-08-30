@@ -1,6 +1,6 @@
 "use client";
 
-import {Popover, Avatar, Chip} from "@heroui/react";
+import {Avatar, Chip, Popover} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function PopoverCustomTrigger() {
@@ -8,11 +8,11 @@ export function PopoverCustomTrigger() {
     <div className="flex items-center gap-6">
       <Popover>
         <Popover.Trigger aria-label="User menu">
-          <div className="flex cursor-pointer items-center gap-2 rounded-lg border p-2 hover:bg-surface">
+          <div className="hover:bg-surface flex cursor-pointer items-center gap-2 rounded-lg border p-2">
             <Avatar size="sm">
-              <Avatar.Image 
-                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=2" 
+              <Avatar.Image
                 alt="Jane Smith"
+                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=2"
               />
               <Avatar.Fallback>JS</Avatar.Fallback>
             </Avatar>
@@ -20,7 +20,7 @@ export function PopoverCustomTrigger() {
               <span className="text-sm font-medium">Jane Smith</span>
               <span className="text-muted text-xs">Admin</span>
             </div>
-            <Icon icon="gravity-ui:chevron-down" className="text-muted ml-2" width={16} />
+            <Icon className="text-muted ml-2" icon="gravity-ui:chevron-down" width={16} />
           </div>
         </Popover.Trigger>
         <Popover.Content className="w-[200px]">

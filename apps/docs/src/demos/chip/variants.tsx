@@ -6,27 +6,57 @@ export function ChipVariants() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
-        <Chip variant="primary" color="default">Primary Default</Chip>
-        <Chip variant="primary" color="accent">Primary Accent</Chip>
-        <Chip variant="primary" color="success">Primary Success</Chip>
-        <Chip variant="primary" color="warning">Primary Warning</Chip>
-        <Chip variant="primary" color="danger">Primary Danger</Chip>
+        <Chip color="default" variant="primary">
+          Primary Default
+        </Chip>
+        <Chip color="accent" variant="primary">
+          Primary Accent
+        </Chip>
+        <Chip color="success" variant="primary">
+          Primary Success
+        </Chip>
+        <Chip color="warning" variant="primary">
+          Primary Warning
+        </Chip>
+        <Chip color="danger" variant="primary">
+          Primary Danger
+        </Chip>
       </div>
-      
+
       <div className="flex items-center gap-3">
-        <Chip variant="secondary" color="default">Secondary Default</Chip>
-        <Chip variant="secondary" color="accent">Secondary Accent</Chip>
-        <Chip variant="secondary" color="success">Secondary Success</Chip>
-        <Chip variant="secondary" color="warning">Secondary Warning</Chip>
-        <Chip variant="secondary" color="danger">Secondary Danger</Chip>
+        <Chip color="default" variant="secondary">
+          Secondary Default
+        </Chip>
+        <Chip color="accent" variant="secondary">
+          Secondary Accent
+        </Chip>
+        <Chip color="success" variant="secondary">
+          Secondary Success
+        </Chip>
+        <Chip color="warning" variant="secondary">
+          Secondary Warning
+        </Chip>
+        <Chip color="danger" variant="secondary">
+          Secondary Danger
+        </Chip>
       </div>
-      
+
       <div className="flex items-center gap-3">
-        <Chip variant="tertiary" color="default">Tertiary Default</Chip>
-        <Chip variant="tertiary" color="accent">Tertiary Accent</Chip>
-        <Chip variant="tertiary" color="success">Tertiary Success</Chip>
-        <Chip variant="tertiary" color="warning">Tertiary Warning</Chip>
-        <Chip variant="tertiary" color="danger">Tertiary Danger</Chip>
+        <Chip color="default" variant="tertiary">
+          Tertiary Default
+        </Chip>
+        <Chip color="accent" variant="tertiary">
+          Tertiary Accent
+        </Chip>
+        <Chip color="success" variant="tertiary">
+          Tertiary Success
+        </Chip>
+        <Chip color="warning" variant="tertiary">
+          Tertiary Warning
+        </Chip>
+        <Chip color="danger" variant="tertiary">
+          Tertiary Danger
+        </Chip>
       </div>
     </div>
   );

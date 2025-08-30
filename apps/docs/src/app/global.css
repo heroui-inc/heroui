@@ -150,6 +150,27 @@
   }
 }
 
+/* External link icon for sidebar links */
+#nd-sidebar a[rel="noreferrer noopener"]::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: -6px;
+  margin-bottom: 8px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+#nd-sidebar a[rel="noreferrer noopener"]:hover::after {
+  opacity: 1;
+}
+
 #nd-subnav {
   @apply h-14;
 

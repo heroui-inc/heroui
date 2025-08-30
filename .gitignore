@@ -83,3 +83,5 @@ bundle-sizes.json
 
 # Generated folder after running `pnpm pack`
 package
+
+storybook-static

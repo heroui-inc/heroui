@@ -1,6 +1,6 @@
 "use client";
 
-import {Tooltip, Button} from "@heroui/react";
+import {Button, Tooltip} from "@heroui/react";
 
 export function TooltipWithArrow() {
   return (

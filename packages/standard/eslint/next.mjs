@@ -6,6 +6,7 @@ import typescriptParser from "@typescript-eslint/parser";
 import {defineConfig} from "eslint/config";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
 import globals from "globals";
 
@@ -43,6 +44,7 @@ export default defineConfig([
     plugins: {
       "jsx-a11y": jsxA11yPlugin,
       react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
       "react-refresh": reactRefreshPlugin,
     },
     rules: {
@@ -52,6 +54,7 @@ export default defineConfig([
       "jsx-a11y/interactive-supports-focus": "warn",
       "jsx-a11y/no-autofocus": "off",
       "no-console": "off",
+      "react-hooks/exhaustive-deps": "off",
       "react-refresh/only-export-components": ["warn", {allowConstantExport: true}],
       "react/jsx-boolean-value": [
         "error",

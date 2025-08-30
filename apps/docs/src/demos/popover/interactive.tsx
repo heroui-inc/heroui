@@ -1,7 +1,7 @@
 "use client";
 
+import {Avatar, Button, Label, Popover, TextField} from "@heroui/react";
 import {useState} from "react";
-import {Popover, Button, Avatar, TextField, Label} from "@heroui/react";
 
 export function PopoverInteractive() {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -14,9 +14,9 @@ export function PopoverInteractive() {
         <Popover.Trigger aria-label="User profile">
           <div className="flex items-center gap-2">
             <Avatar size="sm">
-              <Avatar.Image 
-                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" 
+              <Avatar.Image
                 alt="Sarah Johnson"
+                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
               />
               <Avatar.Fallback>SJ</Avatar.Fallback>
             </Avatar>
@@ -32,9 +32,9 @@ export function PopoverInteractive() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar size="md">
-                    <Avatar.Image 
-                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" 
+                    <Avatar.Image
                       alt="Sarah Johnson"
+                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
                     />
                     <Avatar.Fallback>SJ</Avatar.Fallback>
                   </Avatar>
@@ -43,11 +43,11 @@ export function PopoverInteractive() {
                     <p className="text-muted text-sm">@sarahj</p>
                   </div>
                 </div>
-                <Button 
-                  size="sm" 
+                <Button
+                  className="rounded-full"
+                  size="sm"
                   variant={isFollowing ? "tertiary" : "primary"}
                   onPress={() => setIsFollowing(!isFollowing)}
-                  className="rounded-full"
                 >
                   {isFollowing ? "Following" : "Follow"}
                 </Button>
@@ -79,18 +79,17 @@ export function PopoverInteractive() {
             <div className="mt-3 space-y-3">
               <div>
                 <Label htmlFor="comment">Your comment</Label>
-                <TextField 
-                  id="comment"
-                  value={comment} 
-                  onChange={setComment}
-                  className="mt-1"
-                >
+                <TextField className="mt-1" id="comment" value={comment} onChange={setComment}>
                   <TextField.Input placeholder="Type your comment..." />
                 </TextField>
               </div>
               <div className="flex justify-end gap-2">
-                <Button size="sm" variant="tertiary">Cancel</Button>
-                <Button size="sm" variant="primary">Post</Button>
+                <Button size="sm" variant="tertiary">
+                  Cancel
+                </Button>
+                <Button size="sm" variant="primary">
+                  Post
+                </Button>
               </div>
             </div>
           </Popover.Dialog>

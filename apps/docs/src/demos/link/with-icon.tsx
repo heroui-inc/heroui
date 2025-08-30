@@ -10,22 +10,22 @@ export function LinkWithIcon() {
         Default with icon
         <Link.Icon />
       </Link>
-      
-      <Link showIcon iconPlacement="start" href="#">
+
+      <Link showIcon href="#" iconPlacement="start">
         <Link.Icon />
         Icon at start
       </Link>
-      
+
       <Link showIcon href="#">
         Custom icon
         <Link.Icon>
-          <Icon icon="gravity-ui:arrow-up-right-from-square" className="h-3 w-3" />
+          <Icon className="h-3 w-3" icon="gravity-ui:arrow-up-right-from-square" />
         </Link.Icon>
       </Link>
-      
-      <Link showIcon iconPlacement="start" href="#">
+
+      <Link showIcon href="#" iconPlacement="start">
         <Link.Icon>
-          <Icon icon="gravity-ui:house" className="h-3 w-3" />
+          <Icon className="h-3 w-3" icon="gravity-ui:house" />
         </Link.Icon>
         Home
       </Link>
