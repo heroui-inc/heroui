@@ -65,7 +65,7 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
           e.preventDefault();
         }
       }
-      if (getOverlayTypeFromRef(ref) !== "pressEnd") {
+      if (getOverlayInteractionType(ref) !== "pressEnd") {
         onHide();
       }
     }
@@ -132,31 +132,32 @@ export function useAriaOverlay(props: UseAriaOverlayProps, ref: RefObject<Elemen
     }
   };
 
-  function getOverlayTypeFromRef(ref: RefObject<Element>): "pressEnd" | "pressStart" | "unknown" {
+  /**
+   * Determines the interaction type for overlay dismissal based on the element's ARIA role.
+   * @param ref - Reference to the overlay element
+   * @returns "pressEnd" for dialogs (close on release), "pressStart" for menus (close on press), or "unknown"
+   */
+  function getOverlayInteractionType(
+    ref: RefObject<Element>,
+  ): "pressEnd" | "pressStart" | "unknown" {
     const el = ref.current;
 
     if (!el) return "unknown";
 
     const role = (el.getAttribute("role") || "").toLowerCase();
-    const ariaModal = (el.getAttribute("aria-modal") || "").toLowerCase() === "true";
+    const ariaModalAttr = el.getAttribute("aria-modal");
 
     // Dialogs (Modal/Drawer) should close on press release.
     // Include alertdialog and treat missing aria-modal (unless explicitly "false") as modal.
     if (
       (role === "dialog" || role === "alertdialog") &&
-      (ariaModal || el.getAttribute("aria-modal") == null)
+      (ariaModalAttr === null || ariaModalAttr.toLowerCase() === "true")
     ) {
       return "pressEnd";
     }
 
     // Select-like/menu-like overlays typically close on press start.
-    if (
-      role === "listbox" ||
-      role === "menu" ||
-      role === "tree" ||
-      role === "grid" ||
-      role === "combobox"
-    ) {
+    if (["listbox", "menu", "tree", "grid", "combobox"].includes(role)) {
       return "pressStart";
     }
 
