@@ -1,6 +1,6 @@
 {
   "name": "@heroui/breadcrumbs",
-  "version": "2.2.20",
+  "version": "2.2.21",
   "description": "Breadcrumbs display a hierarchy of links to the current page or resource in an application.",
   "keywords": [
     "breadcrumbs"
