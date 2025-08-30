@@ -222,6 +222,12 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   }, [isClosing, isToastExiting]);
 
   useEffect(() => {
+    if (isToastExiting && disableAnimation) {
+      state.close(toast.key);
+    }
+  }, [isToastExiting, disableAnimation, state, toast.key]);
+
+  useEffect(() => {
     const updateProgress = (timestamp: number) => {
       if (!timeout || isLoading) {
         return;
@@ -425,11 +431,13 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         "data-toast": true,
         "aria-label": "toast",
         "data-toast-exiting": dataAttr(isToastExiting),
-        onTransitionEnd: () => {
-          if (isToastExiting) {
-            state.close(toast.key);
-          }
-        },
+        onTransitionEnd: disableAnimation
+          ? undefined
+          : () => {
+              if (isToastExiting) {
+                state.close(toast.key);
+              }
+            },
         style: {
           opacity: opacityValue,
           ...pseudoElementStyles,
