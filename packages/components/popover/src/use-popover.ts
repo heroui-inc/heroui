@@ -120,6 +120,7 @@ export function usePopover(originalProps: UsePopoverProps) {
     isKeyboardDismissDisabled,
     shouldCloseOnInteractOutside,
     shouldCloseOnScroll,
+    triggerAnchorPoint,
     motionProps,
     className,
     classNames,
@@ -173,6 +174,7 @@ export function usePopover(originalProps: UsePopoverProps) {
       isKeyboardDismissDisabled,
       shouldCloseOnScroll,
       shouldCloseOnInteractOutside,
+      triggerAnchorPoint,
     },
     state,
   );
@@ -201,6 +203,12 @@ export function usePopover(originalProps: UsePopoverProps) {
 
   const baseStyles = clsx(classNames?.base, className);
 
+  const anchorStyles = {
+    "--trigger-anchor-point": triggerAnchorPoint
+      ? `${triggerAnchorPoint.x}px ${triggerAnchorPoint.y}px`
+      : undefined,
+  };
+
   usePreventScroll({
     isDisabled: !(shouldBlockScroll && state.isOpen),
   });
@@ -225,6 +233,7 @@ export function usePopover(originalProps: UsePopoverProps) {
     style: {
       // this prevent the dialog to have a default outline
       outline: "none",
+      ...anchorStyles,
     },
   });
 

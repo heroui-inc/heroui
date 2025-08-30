@@ -41,6 +41,10 @@ export interface Props {
    * @default true
    */
   isDismissable?: boolean;
+  /**
+   * The origin of the target in the overlay's coordinate system. Useful for animations.
+   */
+  triggerAnchorPoint?: {x: number; y: number} | null;
 }
 
 export type ReactAriaPopoverProps = Props &
@@ -100,6 +104,7 @@ export function useReactAriaPopover(
     arrowProps,
     placement,
     updatePosition,
+    triggerAnchorPoint: origin,
   } = useOverlayPosition({
     ...otherProps,
     shouldFlip,
@@ -136,5 +141,6 @@ export function useReactAriaPopover(
     arrowProps,
     underlayProps,
     placement,
+    triggerAnchorPoint: origin,
   };
 }

@@ -82,7 +82,9 @@ export const closeAll = () => {
 
   const keys = globalToastQueue.visibleToasts.map((toast) => toast.key);
 
-  keys.map((key) => {
-    globalToastQueue?.close(key);
+  keys.forEach((key, index) => {
+    setTimeout(() => {
+      globalToastQueue?.close(key);
+    }, index * 100);
   });
 };

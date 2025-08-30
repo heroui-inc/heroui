@@ -24,6 +24,7 @@ const popover = tv({
       "z-0",
       "relative",
       "bg-transparent",
+      "[transform-origin:var(--trigger-anchor-point)]",
       // arrow
       "before:content-['']",
       "before:hidden",

@@ -3,4 +3,4 @@
 "@heroui/theme": patch
 ---
 
-bump tailwindcss version
+chore: bump tailwind-variants version
