@@ -79,7 +79,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     // HTML `ref` attribute conflicts with `forwardRef`
     pre: ({children, ref: _ref, ...props}) => {
       return (
-        <CodeBlock {...props}>
+        <CodeBlock {...props} className="docs-code-block-line-numbers">
           <Pre>{children}</Pre>
         </CodeBlock>
       );

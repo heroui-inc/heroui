@@ -46,6 +46,7 @@ export function CodeBlock({
         className={cn(
           "code-block-wrapper",
           isCollapsed && "mask-to-bottom relative max-h-[300px] overflow-hidden",
+          !isCollapsed && "pb-10",
         )}
       >
         <Base.CodeBlock
