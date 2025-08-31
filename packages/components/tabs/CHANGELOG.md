@@ -1,5 +1,18 @@
 # @heroui/tabs
 
+## 2.2.22
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- [#5582](https://github.com/heroui-inc/heroui/pull/5582) [`8eb269d`](https://github.com/heroui-inc/heroui/commit/8eb269df9e630257447bb7cf7efb60382ffc9212) Thanks [@wingkwong](https://github.com/wingkwong)! - fix unresponsive modal after switching tabs inside (#5543)
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1), [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c)]:
+  - @heroui/aria-utils@2.2.22
+  - @heroui/shared-utils@2.1.11
+  - @heroui/react-utils@2.1.13
+
 ## 2.2.21
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @heroui/use-aria-accordion-item
 
+## 2.2.17
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- [#5539](https://github.com/heroui-inc/heroui/pull/5539) [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c) Thanks [@luislh-dev](https://github.com/luislh-dev)! - Code quality improvements: removed unnecessary type assertions across multiple components and utilities, consolidated imports in Popover module, and enhanced type safety.
+
 ## 2.2.16
 
 ### Patch Changes
