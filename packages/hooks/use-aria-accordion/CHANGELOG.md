@@ -1,5 +1,11 @@
 # @heroui/use-aria-accordion
 
+## 2.2.17
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
 ## 2.2.16
 
 ### Patch Changes

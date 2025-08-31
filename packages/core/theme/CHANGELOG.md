@@ -1,5 +1,20 @@
 # @heroui/theme
 
+## 2.4.21
+
+### Patch Changes
+
+- [#5607](https://github.com/heroui-inc/heroui/pull/5607) [`928383b`](https://github.com/heroui-inc/heroui/commit/928383bcfc5f35a80010c833f655c1355349d0f2) Thanks [@luislh-dev](https://github.com/luislh-dev)! - use peer-data-[filled=true]:pointer-events-none to disable clear button interaction when input is disabled and has content
+
+- [#5638](https://github.com/heroui-inc/heroui/pull/5638) [`3ba7d29`](https://github.com/heroui-inc/heroui/commit/3ba7d29848d8c27c83f0293ef04620a0b3c42a0c) Thanks [@IsDyh01](https://github.com/IsDyh01)! - fix after setting the maximum width at DropdownMenu, if there is a description, an ellipsis will not appear if the text is too long (#5564)
+
+- [#5628](https://github.com/heroui-inc/heroui/pull/5628) [`743505f`](https://github.com/heroui-inc/heroui/commit/743505fbc07fc057775042096bd8454d43d0499b) Thanks [@IsDyh01](https://github.com/IsDyh01)! - set stepperButton height when lablePlacement=outside (#5622)
+
+- [#5635](https://github.com/heroui-inc/heroui/pull/5635) [`6b86a41`](https://github.com/heroui-inc/heroui/commit/6b86a41fe42ecf1830f90b2685a64ff0784a9e14) Thanks [@wingkwong](https://github.com/wingkwong)! - chore: bump tailwind-variants version
+
+- Updated dependencies [[`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c)]:
+  - @heroui/shared-utils@2.1.11
+
 ## 2.4.20
 
 ### Patch Changes

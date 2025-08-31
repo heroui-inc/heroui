@@ -1,5 +1,14 @@
 # @heroui/alert
 
+## 2.2.25
+
+### Patch Changes
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1), [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c)]:
+  - @heroui/button@2.2.25
+  - @heroui/shared-utils@2.1.11
+  - @heroui/react-utils@2.1.13
+
 ## 2.2.24
 
 ### Patch Changes

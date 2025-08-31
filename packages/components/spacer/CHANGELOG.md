@@ -1,5 +1,14 @@
 # @heroui/spacer
 
+## 2.2.19
+
+### Patch Changes
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1), [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c), [`6b86a41`](https://github.com/heroui-inc/heroui/commit/6b86a41fe42ecf1830f90b2685a64ff0784a9e14)]:
+  - @heroui/system-rsc@2.3.18
+  - @heroui/shared-utils@2.1.11
+  - @heroui/react-utils@2.1.13
+
 ## 2.2.18
 
 ### Patch Changes
