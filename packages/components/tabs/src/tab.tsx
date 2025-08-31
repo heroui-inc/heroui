@@ -76,6 +76,8 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
     rerender: true,
   });
 
+  const isInModal = domRef?.current?.closest('[aria-modal="true"]') !== null;
+
   const handleClick = () => {
     if (!domRef?.current || !listRef?.current) return;
 
@@ -120,7 +122,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
       title={otherProps?.titleValue}
       type={Component === "button" ? "button" : undefined}
     >
-      {isSelected && !disableAnimation && !disableCursorAnimation && isMounted ? (
+      {isSelected && !disableAnimation && !disableCursorAnimation && isMounted && !isInModal ? (
         // use synchronous loading for domMax here
         // since lazy loading produces different behaviour
         <LazyMotion features={domMax}>

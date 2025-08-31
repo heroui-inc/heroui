@@ -1,5 +1,12 @@
 # @heroui/use-infinite-scroll
 
+## 2.2.11
+
+### Patch Changes
+
+- Updated dependencies [[`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c)]:
+  - @heroui/shared-utils@2.1.11
+
 ## 2.2.10
 
 ### Patch Changes

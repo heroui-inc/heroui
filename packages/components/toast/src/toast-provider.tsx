@@ -68,11 +68,23 @@ export const addToast = ({...props}: ToastProps & ToastOptions) => {
   return globalToastQueue.add(props);
 };
 
+const closingToasts = new Map<string, ReturnType<typeof setTimeout>>();
+
 export const closeToast = (key: string) => {
   if (!globalToastQueue) {
     return;
   }
-  globalToastQueue.close(key);
+
+  if (closingToasts.has(key)) {
+    return;
+  }
+
+  const timeoutId = setTimeout(() => {
+    closingToasts.delete(key);
+    globalToastQueue?.close(key);
+  }, 300);
+
+  closingToasts.set(key, timeoutId);
 };
 
 export const closeAll = () => {
@@ -80,9 +92,11 @@ export const closeAll = () => {
     return;
   }
 
-  const keys = globalToastQueue.visibleToasts.map((toast) => toast.key);
+  const toasts = [...globalToastQueue.visibleToasts];
 
-  keys.map((key) => {
-    globalToastQueue?.close(key);
+  toasts.forEach((toast) => {
+    closeToast(toast.key);
   });
 };
+
+export const isToastClosing = (key: string) => closingToasts.has(key);

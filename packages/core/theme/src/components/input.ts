@@ -890,6 +890,14 @@ const input = tv({
         ],
       },
     },
+    // isClearable & isDisabled
+    {
+      isClearable: true,
+      isDisabled: true,
+      class: {
+        clearButton: "peer-data-[filled=true]:pointer-events-none",
+      },
+    },
   ],
 });
 

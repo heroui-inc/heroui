@@ -144,7 +144,7 @@ export function useMultiSelect<T>(
         valueId,
         triggerProps["aria-labelledby"],
         triggerProps["aria-label"] && !triggerProps["aria-labelledby"] ? triggerProps.id : null,
-      ].join(","),
+      ].join(" "),
       onFocus(e: FocusEvent) {
         if (state.isFocused) {
           return;

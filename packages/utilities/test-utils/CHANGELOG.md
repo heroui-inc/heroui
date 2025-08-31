@@ -1,5 +1,11 @@
 # @heroui/test-utils
 
+## 2.1.10
+
+### Patch Changes
+
+- [#5539](https://github.com/heroui-inc/heroui/pull/5539) [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c) Thanks [@luislh-dev](https://github.com/luislh-dev)! - Code quality improvements: removed unnecessary type assertions across multiple components and utilities, consolidated imports in Popover module, and enhanced type safety.
+
 ## 2.1.9
 
 ### Patch Changes

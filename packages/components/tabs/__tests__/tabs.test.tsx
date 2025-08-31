@@ -2,10 +2,12 @@ import type {UserEvent} from "@testing-library/user-event";
 import type {TabsProps} from "../src";
 
 import * as React from "react";
-import {act, render, fireEvent, within} from "@testing-library/react";
+import {act, render, fireEvent, within, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {focus} from "@heroui/test-utils";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "@heroui/modal";
+import {Button} from "@heroui/button";
 
 import {Tabs, Tab} from "../src";
 
@@ -434,5 +436,107 @@ describe("Tabs", () => {
     await user.click(tab2);
     expect(item2Click).toHaveBeenCalledTimes(2);
     expect(tab2).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("should allow reopening modal with tabs without blocking", async () => {
+    const TestComponent = () => {
+      const [isOpen, setIsOpen] = React.useState(false);
+
+      return (
+        <>
+          <Button data-testid="open-modal-btn" onPress={() => setIsOpen(true)}>
+            Open Modal
+          </Button>
+          <Modal data-testid="test-modal" isOpen={isOpen} onOpenChange={setIsOpen}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader>Test Modal with Tabs</ModalHeader>
+                  <ModalBody>
+                    <Tabs aria-label="Test tabs" data-testid="modal-tabs">
+                      <Tab key="tab1" data-testid="tab-1" title="Tab 1">
+                        <div data-testid="tab1-content">Content for Tab 1</div>
+                      </Tab>
+                      <Tab key="tab2" data-testid="tab-2" title="Tab 2">
+                        <div data-testid="tab2-content">Content for Tab 2</div>
+                      </Tab>
+                      <Tab key="tab3" data-testid="tab-3" title="Tab 3">
+                        <div data-testid="tab3-content">Content for Tab 3</div>
+                      </Tab>
+                    </Tabs>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button data-testid="close-modal-btn" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+        </>
+      );
+    };
+
+    const {getByTestId, getByRole, queryByRole} = render(<TestComponent />);
+
+    const openButton = getByTestId("open-modal-btn");
+
+    await act(async () => {
+      fireEvent.click(openButton);
+    });
+
+    await waitFor(() => {
+      const modal = getByRole("dialog");
+
+      expect(modal).toBeInTheDocument();
+    });
+
+    const tabButtons = getByRole("dialog").querySelectorAll('[role="tab"]');
+
+    expect(tabButtons).toHaveLength(3);
+
+    await act(async () => {
+      fireEvent.click(tabButtons[1]);
+    });
+
+    await waitFor(() => {
+      expect(tabButtons[1]).toHaveAttribute("aria-selected", "true");
+    });
+
+    const closeButton = getByTestId("close-modal-btn");
+
+    await act(async () => {
+      fireEvent.click(closeButton);
+    });
+
+    await waitFor(
+      () => {
+        expect(queryByRole("dialog")).not.toBeInTheDocument();
+      },
+      {timeout: 1000},
+    );
+
+    await act(async () => {
+      fireEvent.click(openButton);
+    });
+
+    await waitFor(() => {
+      const modal = getByRole("dialog");
+
+      expect(modal).toBeInTheDocument();
+    });
+
+    const newTabButtons = getByRole("dialog").querySelectorAll('[role="tab"]');
+
+    expect(newTabButtons).toHaveLength(3);
+
+    await act(async () => {
+      fireEvent.click(newTabButtons[2]);
+    });
+
+    await waitFor(() => {
+      expect(newTabButtons[2]).toHaveAttribute("aria-selected", "true");
+    });
   });
 });

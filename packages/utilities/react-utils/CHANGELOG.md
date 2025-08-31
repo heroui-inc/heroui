@@ -1,5 +1,12 @@
 # @heroui/react-utils
 
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies [[`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c)]:
+  - @heroui/shared-utils@2.1.11
+
 ## 2.1.12
 
 ### Patch Changes

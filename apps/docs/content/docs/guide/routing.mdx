@@ -316,10 +316,89 @@ To use [TanStack Router](https://tanstack.com/router/latest), use the [createLin
 import {createLink} from '@tanstack/react-router';
 import {Link as HeroUILink, DropdownItem} from '@heroui/react';
 
-export const Link = createLink(HeroUILink);
-export const DropdownItemLink = createLink(DropdownItem);
+
+import {useRouter} from '@tanstack/react-router';
+import {HeroUIProvider} from "@heroui/react";
+
+
+declare module "@react-types/shared" {
+  interface RouterConfig {
+    href: ToOptions['to'];
+    routerOptions: Omit<NavigateOptions, keyof ToOptions>;
+  }
+}
+
+function RootRoute() {
+  let router = useRouter();
+
+  return (
+    <HeroUIProvider
+      navigate={(to, options) => router.navigate({to, ...options})}
+      useHref={(to) => router.buildLocation({to}).href}
+    >
+      {/* You app here... */}
+    </HeroUIProvider>
+  );
+}
 ```
 
-<Spacer y={2} />
+## Usage examples
 
-> For more information about routing in React Aria, visit the [React Aria Routing Guide](https://react-spectrum.adobe.com/react-aria/routing.html).
+Now that you have set up the `HeroUIProvider` in your app, you can use the `href` prop in the `Tabs`,
+`Listbox` and `Dropdown` items to navigate between pages.
+
+The [Link](/docs/components/link) component will also use the `navigate` function from the
+`HeroUIProvider` to navigate between pages.
+
+```jsx
+import {
+  Tabs,
+  Tab,
+  Listbox,
+  ListboxItem,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+  Link,
+} from "@heroui/react";
+
+function App() {
+  return (
+    <>
+      <Tabs aria-label="Navigation">
+        <Tab key="home" href="/home">
+          Home
+        </Tab>
+        <Tab key="about" href="/about">
+          About
+        </Tab>
+      </Tabs>
+      <Listbox aria-label="Navigation">
+        <ListboxItem key="home" href="/home">
+          Home
+        </ListboxItem>
+        <ListboxItem key="about" href="/about">
+          About
+        </ListboxItem>
+      </Listbox>
+      <Dropdown>
+        <DropdownTrigger>
+          <Button>Open</Button>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Navigation">
+          <DropdownItem key="home" href="/home">
+            Home
+          </DropdownItem>
+          <DropdownItem key="about" href="/about">
+            About
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+      <Link href="/home">Home</Link>
+      <Link href="/about">About</Link>
+    </>
+  );
+}
+```
