@@ -6,7 +6,7 @@ export const animations = {
     "spinner-linear-spin": "spinner-spin 0.8s linear infinite",
     sway: "sway 750ms ease infinite",
     blink: "blink 1.4s infinite both",
-    "fade-out": "fade-out 1.2s linear 0s infinite normal none running",
+    "fade-out": "fade-out 1.2s linear calc(var(--bar-index) * 100ms) infinite normal none running",
     "appearance-in": "appearance-in 250ms ease-out normal both",
     "appearance-out": "appearance-out 60ms ease-in normal both",
     "indeterminate-bar":
