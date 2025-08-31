@@ -169,7 +169,7 @@ export function useDatePickerBase<T extends DateValue>(originalProps: UseDatePic
   const disableAnimation =
     originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
-  let stringFormatter = useLocalizedStringFormatter(intlMessages) as any;
+  let stringFormatter = useLocalizedStringFormatter(intlMessages);
 
   const isDefaultColor = originalProps.color === "default" || !originalProps.color;
   const hasMultipleMonths = visibleMonths > 1;
