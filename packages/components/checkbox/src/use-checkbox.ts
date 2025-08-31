@@ -320,8 +320,9 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
       ...mergeProps(inputProps, focusProps),
       className: slots.hiddenInput({class: classNames?.hiddenInput}),
       onChange: chain(inputProps.onChange, handleCheckboxChange),
+      ...(otherProps.form ? {form: otherProps.form} : {}),
     };
-  }, [inputProps, focusProps, handleCheckboxChange, classNames?.hiddenInput]);
+  }, [inputProps, focusProps, handleCheckboxChange, classNames?.hiddenInput, otherProps]);
 
   const getLabelProps: PropGetter = useCallback(
     () => ({
