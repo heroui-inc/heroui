@@ -30,7 +30,7 @@
 
 .accordion__trigger {
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color] duration-[50ms];
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
 
   &:hover,
   &[data-hover="true"] {
@@ -57,6 +57,13 @@
 /* Outline variant */
 .accordion--outline {
   @apply bg-panel rounded-lg border shadow-sm;
+
+  .accordion__trigger {
+    &:hover,
+    &[data-hover="true"] {
+      @apply bg-panel-hover;
+    }
+  }
 }
 
 .accordion--outline .accordion__item {

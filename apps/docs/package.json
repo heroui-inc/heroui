@@ -14,6 +14,9 @@
     "@heroui/react": "workspace:*",
     "@iconify-json/gravity-ui": "1.2.7",
     "@iconify/react": "6.0.0",
+    "@types/color-convert": "2.0.4",
+    "color-convert": "3.1.0",
+    "color2k": "2.0.3",
     "fumadocs-core": "15.6.8",
     "fumadocs-mdx": "11.7.3",
     "fumadocs-typescript": "4.0.6",
@@ -23,7 +26,7 @@
     "next": "15.4.5",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
-    "react-aria-components": "1.11.0",
+    "react-aria-components": "1.12.1",
     "react-dom": "19.1.0",
     "react-wrap-balancer": "1.1.1",
     "remark": "^15.0.1",
@@ -33,7 +36,7 @@
     "remark-rehype": "^11.1.2",
     "shiki": "^3.9.1",
     "tailwind-merge": "3.3.1",
-    "tailwind-variants": "3.0.0",
+    "tailwind-variants": "3.1.0",
     "ts-morph": "^26.0.0"
   },
   "devDependencies": {

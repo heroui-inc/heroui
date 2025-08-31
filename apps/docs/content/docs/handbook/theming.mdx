@@ -9,131 +9,331 @@ links:
 
 ## Overview
 
-HeroUI v3 provides a flexible theming system built on CSS variables and [BEM](https://getbem.com/) class naming. You can customize the entire design system through CSS, from colors and spacing to component-specific styles.
+HeroUI uses CSS variables and [BEM](https://getbem.com/) classes for theming. You can customize everything from colors to component styles using standard CSS.
 
-HeroUI's theming heavily relies on [Tailwind CSS v4's theming strategies](https://tailwindcss.com/docs/theme) and [custom styling approaches](https://tailwindcss.com/docs/adding-custom-styles), leveraging features like CSS layers, theme variables, and the `@theme` directive for a powerful and flexible customization experience.
+The theming system is built on [Tailwind CSS v4](https://tailwindcss.com/docs/theme), using CSS layers and the `@theme` directive.
 
+## Quick Start
 
-## Design Tokens
+### Apply a Theme
 
-HeroUI includes `light` and `dark` themes. Apply them by adding a theme class to `<html>` (or root) and color utilities to `<body>`:
+Add a theme class to your HTML and apply colors to the body:
 
 ```html
-<html className="light" data-theme="light">
-  <body className="bg-background text-foreground">
-    <!-- Your app content -->
+<html class="light" data-theme="light">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
   </body>
 </html>
 ```
 
-### Color System
+### Switch Themes
 
-HeroUI's color system aligns with web standards:
+```html
+<!-- Light theme -->
+<html class="light" data-theme="light">
 
-- **Accent Color**: Following the [browser standard](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color), `--accent` serves as the primary brand color for interactive elements
-- **Base/Gray Colors**: The neutral color palette provides the foundation for UI elements
-- **Surface Levels**: Three surface variables (`--surface-1`, `--surface-2`, `--surface-3`) create visual hierarchy through depth
+<!-- Dark theme -->
+<html class="dark" data-theme="dark">
+```
 
-### Core Variables
-
-HeroUI uses CSS variables defined in two layers:
-
-#### Base Layer
-Located in [@heroui/styles/base/base.css](https://github.com/heroui-inc/heroui/blob/main/packages/styles/base/base.css):
+### Override Colors
 
 ```css
-/* Layout tokens */
+/* app/globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+
 :root {
-  /* Primitive Colors (Do not change between light and dark) */
+  /* Change primary color */
+  --accent: oklch(0.7 0.25 260);
+  
+  /* Change background */
+  --background: #fafafa;
+  --foreground: #0a0a0a;
+}
+
+.dark [data-theme="dark"] {
+  /* Change primary color */
+  --accent: oklch(0.7 0.25 260);
+  
+  /* Change background */
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+}
+```
+
+> **Note**: See [Colors](/docs/handbook/colors) for more information on colors.
+
+### Create a Custom Theme
+
+<CollapsibleCode lang="css" code={`/* src/themes/ocean.css */
+@layer base {
+    /* Ocean Light */
+    [data-theme="ocean"] {
+      color-scheme: light;
+
+      /* Base */
+      --background: oklch(0.985 0.015 225);
+      --foreground: var(--eclipse);
+      --panel: var(--white);
+      --panel-foreground: var(--foreground);
+
+      --radius: 0.75rem;
+
+      --muted: var(--color-neutral-500);
+      --scrollbar: var(--color-neutral-300);
+
+      --default: var(--color-white);
+      --default-foreground: var(--color-neutral-600);
+
+      --surface-1: var(--background);
+      --surface-2: oklch(0.965 0.020 225);
+      --surface-3: oklch(0.930 0.030 225);
+
+      /* Ocean accent */
+      --accent: oklch(0.450 0.150 230);
+      --accent-foreground: var(--snow);
+
+      --accent-soft: oklch(0.920 0.040 230);
+      --accent-soft-foreground: oklch(0.280 0.080 230);
+
+      /* Status (kept compatible) */
+      --success: oklch(0.5503 0.1244 153.56);
+      --success-foreground: var(--snow);
+
+      --warning: oklch(0.7186 0.1521 64.85);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.6259 0.1908 29.19);
+      --danger-foreground: var(--snow);
+
+      /* Misc */
+      --border: oklch(0.50 0.060 230 / 22%);
+      --focus: oklch(0.60 0.150 230 / 35%);
+      --link: var(--accent);
+
+      --shadow-border:
+        0 0px 5px 0px rgba(0, 10, 40, 0.03),
+        0 2px 10px 0px rgba(0, 10, 40, 0.07),
+        0 0px 1px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Ocean Dark */
+    [data-theme="ocean-dark"] {
+      color-scheme: dark;
+
+      /* Base */
+      --background: oklch(0.140 0.020 230);
+      --foreground: var(--snow);
+      --panel: oklch(0.180 0.020 230);
+
+      --muted: var(--color-neutral-400);
+      --scrollbar: var(--color-neutral-800);
+
+      --default: var(--color-neutral-900);
+      --default-foreground: var(--color-neutral-200);
+
+      --surface-1: var(--background);
+      --surface-2: oklch(0.220 0.030 230);
+      --surface-3: oklch(0.280 0.030 230);
+
+      /* Ocean accent */
+      --accent: oklch(0.860 0.080 230);
+      --accent-foreground: var(--eclipse);
+
+      --accent-soft: oklch(0.300 0.050 230);
+      --accent-soft-foreground: var(--color-neutral-200);
+
+      /* Status */
+      --success: oklch(80% 0.1561 154);
+      --success-foreground: var(--eclipse);
+
+      --warning: oklch(85% 0.1414 77.88);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.5798 0.1635 30.83);
+      --danger-foreground: var(--snow);
+
+      /* Misc */
+      --border: oklch(1 0 0 / 12%);
+      --focus: oklch(0.860 0.080 230 / 40%);
+      --link: var(--accent);
+
+      --shadow-border:
+        0 0 0 1px var(--border),
+        0 5px 10px -3px rgba(0, 10, 40, 0.35),
+        0 3px 4px -2px rgba(0, 0, 0, 0.12);
+    }
+}
+`}
+/>
+
+Use your theme:
+
+```css
+/* app/globals.css */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@import "./src/themes/ocean.css" layer(theme); /* [!code highlight]*/
+```
+
+Apply your theme:
+
+```html
+<!-- index.html -->
+
+<!-- Light ocean -->
+<html data-theme="ocean">
+
+<!-- Dark ocean -->
+<html data-theme="ocean-dark">
+```
+
+## Customize Components
+
+### Global Component Styles
+
+Override any component using BEM classes:
+
+```css
+@layer components {
+  /* Customize buttons */
+  .button {
+    @apply font-semibold tracking-wide;
+  }
+  
+  .button--primary {
+    @apply bg-blue-600 hover:bg-blue-700;
+  }
+  
+  /* Customize accordions */
+  .accordion__trigger {
+    @apply text-lg font-bold;
+  }
+}
+```
+
+### Find Component Classes
+
+Each component docs page lists all available classes:
+
+- **Base classes**: `.button`, `.accordion`
+- **Modifiers**: `.button--primary`, `.button--icon-only`
+- **Elements**: `.accordion__trigger`, `.accordion__panel`
+- **States**: `[data-hover="true"]`, `[aria-expanded="true"]`
+
+Example: [Button classes](/docs/components/button#css-classes)
+
+## Import Strategies
+
+### Full Import (Recommended)
+
+Get everything with two lines:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+### Selective Import
+
+Import only what you need:
+
+```css
+/* Define layers */
+@layer theme, base, components, utilities;
+
+/* Base requirements */
+@import "tailwindcss";
+@import "@heroui/styles/base/base.css" layer(base);
+@import "@heroui/styles/themes/default.css" layer(theme);
+
+/* Components (choose one) */
+@import "@heroui/styles/components/index.css" layer(components); /* All */
+/* OR specific components */
+@import "@heroui/styles/components/button.css" layer(components);
+@import "@heroui/styles/components/accordion.css" layer(components);
+```
+
+### Headless Mode
+
+Build your own styles from scratch:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles/base/base.css";
+
+/* Your custom styles */
+.button {
+  /* Your button styles */
+}
+```
+
+## Variables Reference
+
+### Base Variables
+
+These stay constant across all themes:
+
+```css
+:root {
+  /* Colors */
   --white: oklch(100% 0 0);
   --black: oklch(0% 0 0);
   --snow: oklch(0.9911 0 0);
   --eclipse: oklch(0.2221 0 0);
-
-  /* Spacing scale */
+  
+  /* Layout */
   --spacing: 0.25rem;
-
-  /* Border */
+  --radius: 0.75rem;
   --border-width: 1px;
-  --disabled-opacity: 0.5;
-
-  /* Panel specific radius */
-  --radius-panel: 0.5rem;
-  --radius-panel-inner: calc(var(--radius-panel) * 0.5);
-
+  
   /* Typography */
   --font-size-base: 1rem;
-  --font-size-scale-desktop: 0.875;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
-
-  /* Cursor */
-  --cursor-interactive: pointer;
-  --cursor-disabled: not-allowed;
-}
-
-/* Scrollbar styles */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar) transparent;
-}
-
-/* Border color inheritance */
-*,
-::after,
-::before,
-::backdrop,
-::file-selector-button {
-  border-color: var(--border, currentColor);
-}
-
-/* Shared Focus Styles */
-/* Basic focus ring for interactive elements */
-.focus-ring {
-  &:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-}
-
-/* Shared disabled styles */
-.disabled {
-  cursor: var(--cursor-disabled);
-  opacity: var(--disabled-opacity);
-  pointer-events: none;
+  
+  /* States */
+  --disabled-opacity: 0.5; /* Opacity for disabled elements (e.g. buttons)*/
+  --cursor-interactive: pointer; /* Default cursor for interactive elements (e.g. buttons)*/
+  --cursor-disabled: not-allowed; /* Cursor for disabled elements (e.g. buttons)*/
 }
 ```
 
-#### Theme Layer
-Located in [@heroui/styles/themes/default.css](https://github.com/heroui-inc/heroui/blob/main/packages/styles/themes/default.css):
+### Theme Variables
 
-```css
-@layer base {
-  /* HeroUI Default Light Theme */
+These change between `light` and `dark` themes:
+
+<CollapsibleCode lang="css" code={`/* HeroUI Default Theme */
   :root {
     color-scheme: light;
     /* Base Colors */
     --background: var(--white);
     --foreground: var(--eclipse);
     --panel: var(--white);
+    --panel-foreground: var(--foreground);
 
     --radius: 0.75rem;
 
-    /* Gray/Neutral Colors (Base color system) */
     --muted: var(--color-neutral-500);
+
     --scrollbar: var(--color-neutral-300);
+
     --default: var(--color-white);
     --default-foreground: var(--color-neutral-600);
 
-    /* Surface Levels (Content hierarchy) */
-    --surface-1: var(--background);           /* Base level */
-    --surface-2: var(--color-neutral-100);    /* Elevated content */
-    --surface-3: var(--color-neutral-200);    /* Highest elevation */
+    --surface-1: var(--background);
+    --surface-2: var(--color-neutral-100);
+    --surface-3: var(--color-neutral-200);
 
-    /* Primary/Accent Colors (Main brand color) */
-    --accent: var(--color-neutral-950);       /* Primary color */
-    --accent-foreground: var(--snow);         /* Text on primary */
-    --accent-soft: var(--color-neutral-100);  /* Soft primary variant */
+    --accent: var(--color-neutral-950);
+    --accent-foreground: var(--snow);
+
+    --accent-soft: var(--color-neutral-200);
     --accent-soft-foreground: var(--color-neutral-900);
 
     /* Status Colors */
@@ -147,7 +347,7 @@ Located in [@heroui/styles/themes/default.css](https://github.com/heroui-inc/her
     --danger-foreground: var(--snow);
 
     /* Misc Colors */
-    --border: oklch(0 0 0 / 10%);
+    --border: oklch(0 0 0 / 15%);
     --focus: oklch(0% 0 0 / 20%);
     --link: var(--foreground);
 
@@ -166,20 +366,20 @@ Located in [@heroui/styles/themes/default.css](https://github.com/heroui-inc/her
     --foreground: var(--snow);
     --panel: var(--eclipse);
 
-    /* Gray/Neutral Colors (Base color system) */
     --muted: var(--color-neutral-400);
+
     --scrollbar: var(--color-neutral-800);
+
     --default: var(--color-neutral-900);
     --default-foreground: var(--color-neutral-200);
 
-    /* Surface Levels (Content hierarchy) */
     --surface-1: var(--background);
     --surface-2: var(--color-neutral-900);
     --surface-3: var(--color-neutral-800);
 
-    /* Primary/Accent Colors (Main brand color) */
     --accent: var(--color-neutral-50);
     --accent-foreground: var(--eclipse);
+
     --accent-soft: var(--color-neutral-800);
     --accent-soft-foreground: var(--color-neutral-200);
 
@@ -202,12 +402,18 @@ Located in [@heroui/styles/themes/default.css](https://github.com/heroui-inc/her
     --shadow-border:
       0 0 0 1px var(--border), 0 5px 10px -3px rgba(0, 0, 0, 0.3), 0 3px 4px -2px rgba(0, 0, 0, 0.1);
   }
-}
+`}
+/>
 
-@theme inline {
+
+### Calculated Variables (Tailwind)
+
+We use Tailwind to automatically create calculated variables for hover states and radius variants:
+<CollapsibleCode lang="css" code={`@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
 
   --color-muted: var(--muted);
 
@@ -241,6 +447,11 @@ Located in [@heroui/styles/themes/default.css](https://github.com/heroui-inc/her
   /* Calculated Variables */
 
   /* Colors */
+  --color-panel-hover: color-mix(
+    in oklab,
+    var(--color-panel) 90%,
+    var(--color-panel-foreground) 5%
+  );
   --color-default-hover: color-mix(
     in oklab,
     var(--color-default) 90%,
@@ -306,350 +517,15 @@ Located in [@heroui/styles/themes/default.css](https://github.com/heroui-inc/her
 
   /* Tranistion Timing Functions  */
   --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);
+  /* --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1); */
 }
-```
-
-## Understanding Color Naming
-
-### Accent as Primary
-
-HeroUI uses `--accent` as the primary brand color, following the [CSS accent-color](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color) standard. This provides semantic alignment with native browser controls:
-
-```css
-/* Your primary brand color */
---accent: oklch(0.7 0.25 260);
---accent-foreground: var(--white);
-
-/* Used in buttons, links, and interactive elements */
-.button--primary {
-  background: var(--accent);
-  color: var(--accent-foreground);
-}
-```
-
-### Surface Hierarchy
-
-The surface variables create visual depth and content hierarchy:
-
-```css
---surface-1: var(--background);      /* Page background level */
---surface-2: var(--color-neutral-100); /* Cards, panels */
---surface-3: var(--color-neutral-200); /* Nested content, tooltips */
-```
-
-Use surfaces to create visual separation:
-- `surface-1`: Base level, typically the page background
-- `surface-2`: Elevated content like cards and panels
-- `surface-3`: Highest elevation for popovers, tooltips, and modals
-
-## Customizing Variables
-
-### Global Override
-
-Override variables in your root CSS file:
-
-```css
-/* app.css */
-@import "tailwindcss";
-@import "@heroui/styles";
-
-:root {
-  /* Override theme colors */
-  --accent: oklch(0.7 0.25 260);
-  --background: #fafafa;
-  --foreground: #0a0a0a;
-  
-  /* Adjust spacing */
-  --spacing: 0.5rem;
-  
-  /* Custom radius */
-  --radius: 0.5rem;
-}
-```
-
-### Dark Mode
-
-HeroUI includes dark mode variables:
-
-```css
-/* Automatic dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--black);
-    --foreground: var(--snow);
-    --panel: var(--eclipse);
-  }
-}
-
-/* Class-based dark mode */
-.dark {
-  --background: var(--black);
-  --foreground: var(--snow);
-  --accent: var(--color-neutral-50);
-  --border: oklch(1 0 0 / 12%);
-}
-```
-
-### Custom Theme
-
-Create your own theme:
-
-```css
-/* themes/ocean.css */
-.ocean,
-[data-theme="ocean"] {
-  /* Ocean theme colors */
-  --background: oklch(0.98 0.01 210);
-  --foreground: oklch(0.15 0.02 210);
-  --panel: oklch(0.96 0.015 210);
-  
-  /* Accent colors */
-  --accent: oklch(0.6 0.2 210);
-  --accent-foreground: var(--white);
-  --accent-soft: oklch(0.92 0.04 210);
-  --accent-soft-foreground: oklch(0.3 0.15 210);
-  
-  /* Surface colors - layered depth */
-  --surface-1: var(--background);
-  --surface-2: oklch(0.94 0.02 210);
-  --surface-3: oklch(0.90 0.03 210);
-  
-  /* Default colors */
-  --default: oklch(0.95 0.01 210);
-  --default-foreground: oklch(0.4 0.05 210);
-  
-  /* Muted and scrollbar */
-  --muted: oklch(0.55 0.08 210);
-  --scrollbar: oklch(0.85 0.04 210);
-  
-  /* Status colors */
-  --success: oklch(0.7 0.15 150);
-  --success-foreground: var(--white);
-  --warning: oklch(0.75 0.15 45);
-  --warning-foreground: var(--black);
-  --danger: oklch(0.65 0.2 15);
-  --danger-foreground: var(--white);
-  
-  /* Borders & Focus */
-  --border: oklch(0.6 0.05 210 / 15%);
-  --focus: oklch(0.6 0.2 210 / 60%);
-  --link: oklch(0.55 0.18 210);
-  
-  /* Radius - slightly rounded for modern ocean feel */
-  --radius: 1rem;
-  --radius-panel: 1.25rem;
-  --radius-panel-inner: calc(var(--radius-panel) * 0.6);
-  
-  /* Shadows - soft ocean-inspired */
-  --shadow-border: 
-    0 0px 8px 0px oklch(0.5 0.1 210 / 0.08),
-    0 4px 12px 0px oklch(0.5 0.1 210 / 0.12),
-    0 0px 1px 0px oklch(0.5 0.1 210 / 0.25);
-}
-```
-
-Import and use your custom theme:
-
-```css
-/* global.css */
-@layer theme, base, components, utilities;
-
-@import "tailwindcss";
-@import "@heroui/styles";
-
-/* Import custom theme */
-@import "./themes/ocean.css" layer(theme);
-```
-
-## Global Component Styles
-
-Override component styles globally using `@layer components`:
-
-```css
-/* global.css */
-@layer components {
-  /* Button customization */
-  .button {
-    @apply font-semibold tracking-wide;
-  }
-  
-  .button--primary {
-    @apply bg-blue-600 hover:bg-blue-700;
-  }
-  
-  /* Accordion customization */
-  .accordion {
-    @apply border-2 border-gray-200;
-  }
-  
-  .accordion__trigger {
-    @apply text-lg font-bold;
-  }
-}
-```
-
-### Finding Component Classes and States
-
-Each component documentation page lists all available:
-- **BEM classes** (e.g., `.button`, `.button--primary`, `.accordion__trigger`)
-- **Interactive states** (e.g., `[data-hover="true"]`, `[aria-expanded="true"]`)
-- **CSS modifiers** (e.g., `.button--icon-only`, `.accordion--outline`)
-
-For example:
-- [Button documentation](/docs/components/button#css-classes) shows all button classes and states
-- [Accordion documentation](/docs/components/accordion#css-classes) lists accordion elements and variants
-
-View the default styling implementation in the [@heroui/styles/components](https://github.com/heroui-inc/heroui/tree/main/packages/styles/components) directory on GitHub.
-
-For component-specific styling techniques, see the [Styling](/docs/handbook/styling) guide.
-
-## Import Strategies
-
-### Full Import (Default)
-
-Import everything for a complete styled experience:
-
-```css
-@import "tailwindcss";
-@import "@heroui/styles";
-```
-
-### Selective Import
-
-Import only what you need for smaller bundles using Tailwind CSS v4 layer syntax:
-
-```css
-/* Define layers first */
-@layer theme, base, components, utilities;
-
-/* Base Tailwind */
-@import "tailwindcss";
-
-/* Animations (optional) */
-@import "tw-animate-css";
-
-/* Core variables and base styles */
-@import "@heroui/styles/base/base.css" layer(base);
-@import "@heroui/styles/themes/default.css" layer(theme);
-
-/* Import all components at once */
-@import "@heroui/styles/components/index.css" layer(components);
-
-/* OR import individual components */
-@import "@heroui/styles/components/button.css" layer(components);
-@import "@heroui/styles/components/accordion.css" layer(components);
-@import "@heroui/styles/components/avatar.css" layer(components);
-@import "@heroui/styles/components/chip.css" layer(components);
-@import "@heroui/styles/components/link.css" layer(components);
-@import "@heroui/styles/components/popover.css" layer(components);
-@import "@heroui/styles/components/spinner.css" layer(components);
-@import "@heroui/styles/components/tooltip.css" layer(components);
-
-/* Optional utilities */
-@import "@heroui/styles/utilities/index.css" layer(utilities);
-/* OR individual utilities */
-@import "@heroui/styles/utilities/backdrop.css" layer(utilities);
-```
-
-**Note**: 
-- The `layer()` syntax ensures proper CSS cascade and specificity
-- Import `tw-animate-css` if you need animations, or omit it for smaller bundle size
-- Choose between importing all components via `index.css` or individual component files
-
-### Headless Mode
-
-For completely unstyled components, import only the base:
-
-```css
-@import "tailwindcss";
-@import "@heroui/styles/base/base.css";
-
-/* Build your own component styles */
-.button {
-  /* Your custom button styles */
-}
-```
-
-## Best Practices
-
-### 1. Use Semantic Variables
-
-```css
-/* Good: Semantic meaning */
---accent: #5B21B6;
---danger: #DC2626;
-
-/* Avoid: Color names */
---purple: #5B21B6;
---red: #DC2626;
-```
-
-### 2. Layer Your Overrides
-
-```css
-/* 1. Import HeroUI */
-@import "@heroui/styles";
-
-/* 2. Override variables */
-:root {
-  --accent: #5B21B6;
-}
-
-/* 3. Component customization */
-@layer components {
-  .button {
-    text-transform: uppercase;
-  }
-}
-```
-
-### 3. Maintain Consistency
-
-Use the same variables across your app:
-
-```css
-/* Define once */
-:root {
-  --brand-radius: 0.375rem;
-}
-
-/* Use everywhere */
-.button { border-radius: var(--brand-radius); }
-.card { border-radius: var(--brand-radius); }
-.input { border-radius: var(--brand-radius); }
-```
-
-### 4. Document Your Theme
-
-```css
-/* Theme: Ocean Blue
- * Primary: Deep blue for main actions
- * Secondary: Teal for accents
- * Status: Green success, amber warning
- */
-.ocean, 
-[data-theme="ocean"] {
-  --accent: oklch(0.5 0.2 240);       /* Deep blue */
-  --accent-foreground: oklch(0.95 0.01 210);
-  --accent-soft: oklch(0.92 0.04 210);
-  --accent-soft-foreground: oklch(0.3 0.15 210);
-
-  --surface-1: oklch(0.94 0.02 210);
-  --surface-2: oklch(0.90 0.03 210);
-  --surface-3: oklch(0.85 0.04 210);
-
-  --secondary: oklch(0.7 0.15 180);   /* Teal */
-  --secondary-foreground: oklch(0.95 0.01 210);
-  --success: oklch(0.7 0.2 150);      /* Green */
-  --success-foreground: oklch(0.95 0.01 210);
-  --warning: oklch(0.75 0.18 60);     /* Amber */
-  --warning-foreground: oklch(0.95 0.01 210);
-}
-```
+`}
+/>
 
 ## Resources
 
+- [Colors Documentation](/docs/handbook/colors)
+- [Styling Guide](/docs/handbook/styling)
+- [Tailwind CSS v4 Theming](https://tailwindcss.com/docs/theme)
 - [BEM Methodology](https://getbem.com/)
-- [Tailwindcss Colors](https://tailwindcss.com/docs/colors)
-- [Tailwind CSS Layers](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer)
-- [OKLCH Color Space](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl)
+- [OKLCH Color Tool](https://oklch.com)

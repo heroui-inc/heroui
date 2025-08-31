@@ -1,12 +1,16 @@
 import type {ComponentType} from "react";
 
 import * as AccordionDemos from "./accordion";
+import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
+import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
 import * as SpinnerDemos from "./spinner";
+import * as TabsDemos from "./tabs";
+import * as TextFieldDemos from "./text-field";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -44,6 +48,27 @@ export const demos: Record<string, DemoItem> = {
   "accordion-custom-styles": {
     component: AccordionDemos.CustomStyles,
     file: "accordion/custom-styles.tsx",
+  },
+  // Alert demos
+  "alert-basic": {
+    component: AlertDemos.Basic,
+    file: "alert/basic.tsx",
+  },
+  "alert-variants": {
+    component: AlertDemos.Variants,
+    file: "alert/variants.tsx",
+  },
+  "alert-with-action": {
+    component: AlertDemos.WithAction,
+    file: "alert/with-action.tsx",
+  },
+  "alert-dismissible": {
+    component: AlertDemos.Dismissible,
+    file: "alert/dismissible.tsx",
+  },
+  "alert-custom-icon": {
+    component: AlertDemos.CustomIcon,
+    file: "alert/custom-icon.tsx",
   },
   // Avatar demos
   "avatar-basic": {
@@ -111,6 +136,31 @@ export const demos: Record<string, DemoItem> = {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
   },
+  // Checkbox demos
+  "checkbox-basic": {
+    component: CheckboxDemos.Basic,
+    file: "checkbox/basic.tsx",
+  },
+  "checkbox-with-description": {
+    component: CheckboxDemos.WithDescription,
+    file: "checkbox/with-description.tsx",
+  },
+  "checkbox-indeterminate": {
+    component: CheckboxDemos.Indeterminate,
+    file: "checkbox/indeterminate.tsx",
+  },
+  "checkbox-states": {
+    component: CheckboxDemos.States,
+    file: "checkbox/states.tsx",
+  },
+  "checkbox-controlled": {
+    component: CheckboxDemos.Controlled,
+    file: "checkbox/controlled.tsx",
+  },
+  "checkbox-group": {
+    component: CheckboxDemos.Group,
+    file: "checkbox/group.tsx",
+  },
   // Chip demos
   "chip-basic": {
     component: ChipDemos.Basic,
@@ -161,6 +211,56 @@ export const demos: Record<string, DemoItem> = {
   "spinner-usage": {
     component: SpinnerDemos.Usage,
     file: "spinner/usage.tsx",
+  },
+  // Tabs demos
+  "tabs-basic": {
+    component: TabsDemos.Basic,
+    file: "tabs/basic.tsx",
+  },
+  "tabs-variants": {
+    component: TabsDemos.Variants,
+    file: "tabs/variants.tsx",
+  },
+  "tabs-vertical": {
+    component: TabsDemos.Vertical,
+    file: "tabs/vertical.tsx",
+  },
+  "tabs-disabled": {
+    component: TabsDemos.Disabled,
+    file: "tabs/disabled.tsx",
+  },
+  "tabs-controlled": {
+    component: TabsDemos.Controlled,
+    file: "tabs/controlled.tsx",
+  },
+  // TextField demos
+  "text-field-basic": {
+    component: TextFieldDemos.Basic,
+    file: "text-field/basic.tsx",
+  },
+  "text-field-with-description": {
+    component: TextFieldDemos.WithDescription,
+    file: "text-field/with-description.tsx",
+  },
+  "text-field-required": {
+    component: TextFieldDemos.Required,
+    file: "text-field/required.tsx",
+  },
+  "text-field-with-error": {
+    component: TextFieldDemos.WithError,
+    file: "text-field/with-error.tsx",
+  },
+  "text-field-disabled": {
+    component: TextFieldDemos.Disabled,
+    file: "text-field/disabled.tsx",
+  },
+  "text-field-textarea": {
+    component: TextFieldDemos.TextArea,
+    file: "text-field/textarea.tsx",
+  },
+  "text-field-input-types": {
+    component: TextFieldDemos.InputTypes,
+    file: "text-field/input-types.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

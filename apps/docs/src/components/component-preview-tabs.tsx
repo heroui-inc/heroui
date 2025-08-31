@@ -50,7 +50,7 @@ export function ComponentPreviewTabs({
         {!hideCode && !!Code && (
           <Tab className="bg-transparent p-0" value="Code">
             <div className="relative">
-              <div className="code-tab-wrapper max-h-[650px] min-h-[350px] overflow-auto">
+              <div className="code-block-wrapper max-h-[650px] min-h-[350px] overflow-auto">
                 {Code}
               </div>
             </div>

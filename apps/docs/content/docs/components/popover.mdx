@@ -11,7 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {Popover} from '@heroui/react';
+import { Popover } from '@heroui/react';
 ```
 
 ### Usage
@@ -19,6 +19,29 @@ import {Popover} from '@heroui/react';
 <ComponentPreview 
   name="popover-basic"
 />
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import { Popover } from '@heroui/react';
+
+export default () => (
+  <Popover>
+    <Popover.Trigger asChild>
+      <button>Open popover</button>
+    </Popover.Trigger>
+    <Popover.Content>
+      <Popover.Arrow />
+      <Popover.Dialog>
+        <Popover.Heading>Popover title</Popover.Heading>
+        <p>Popover content goes here</p>
+      </Popover.Dialog>
+    </Popover.Content>
+  </Popover>
+)
+```
 
 ### With Arrow
 
@@ -107,33 +130,6 @@ The component supports animation states:
 - **Exiting**: `[data-exiting]` - Applied during popover disappearance
 - **Placement**: `[data-placement="*"]` - Applied based on popover position
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
-
-## Accessibility
-
-#### Keyboard Navigation
-
-- **Escape** - Closes the popover
-- **Tab** - Navigate through focusable elements inside the popover
-- **Enter/Space** - Activates the trigger element
-
-#### Screen Reader Support
-
-- Supports `aria-label` and `aria-labelledby` for semantic labeling
-- Provides semantic association between trigger and popover
-- Content outside the popover is hidden from assistive technologies
-
-#### Focus Management
-
-- Focus moves into the popover when opened
-- Focus returns to the trigger element when closed
-- Focus trap ensures keyboard navigation stays within the popover
-
-#### Important Features
-
-- Automatically positions relative to trigger element
-- Flips placement to avoid overlapping browser window edges
-- Closes when clicking outside the popover
-- Works seamlessly with screen readers and keyboard navigation
 
 ## API Reference
 

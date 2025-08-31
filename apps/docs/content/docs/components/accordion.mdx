@@ -11,14 +11,41 @@ links:
 ## Import
 
 ```tsx
-import {Accordion} from '@heroui/react';
+import { Accordion } from '@heroui/react';
 ```
 
-### Usage
+### Example
 
 <ComponentPreview 
   name="accordion-basic"
 />
+
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import { Accordion } from '@heroui/react';
+
+export default () => (
+  <Accordion>
+    <Accordion.Item>
+      <Accordion.Heading>
+        <Accordion.Trigger>
+          Trigger content
+        </Accordion.Trigger>
+        <Accordion.Indicator />
+      </Accordion.Heading>
+      <Accordion.Panel>
+        <Accordion.Body>
+          Body content
+        </Accordion.Body>
+      </Accordion.Panel>
+    </Accordion.Item>
+  </Accordion>
+)
+```
 
 ### Outline
 
@@ -60,8 +87,7 @@ import {Accordion} from '@heroui/react';
 
 ### Passing Tailwind CSS classes
 
-```tsx
-"use client";
+<CollapsibleCode lang="tsx" code={`"use client";
 
 import {Accordion, cn} from "@heroui/react";
 import {Icon} from "@iconify/react";
@@ -128,8 +154,7 @@ export function CustomStyles() {
       ))}
     </Accordion>
   );
-}
-```
+}`} />
 
 ### Customizing the component classes
 
@@ -182,33 +207,6 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on trigger
 - **Disabled**: `:disabled` or `[aria-disabled="true"]` on trigger
 - **Expanded**: `[aria-expanded="true"]` on trigger
-
-## Accessibility
-
-#### Keyboard Navigation
-
-- **Enter/Space** - Toggle accordion item when trigger is focused
-- **Tab** - Navigate between accordion triggers
-- **Shift + Tab** - Navigate backwards between triggers
-- **Arrow Down** - Move focus to next trigger (when focus is on a trigger)
-- **Arrow Up** - Move focus to previous trigger (when focus is on a trigger)
-- **Home** - Move focus to first trigger
-- **End** - Move focus to last trigger
-
-#### Screen Reader Support
-
-- Announces expanded/collapsed state changes
-- Uses `aria-expanded` attribute on triggers
-- Uses `aria-controls` to associate triggers with panels
-- Supports `role="group"` or `role="region"` for panels
-- Hidden content uses `hidden="until-found"` in supported browsers for better search visibility
-
-#### Focus Management
-
-- Focus ring visible on keyboard navigation
-- Focus remains on trigger after activation
-- Proper focus order maintained within accordion
-- Focus trap not required (content flows naturally)
 
 ## API Reference
 

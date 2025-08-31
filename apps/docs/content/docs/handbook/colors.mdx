@@ -1,0 +1,314 @@
+---
+title: Colors
+description: Color palette and theming system for HeroUI v3
+icon: bucket-paint
+links:
+  themes: true
+  tailwind: theme
+---
+
+import {ColorSwatch, ColorPalette} from "@/components/color-swatch";
+
+HeroUI uses CSS variables for colors that automatically switch between light and dark themes. All colors use the `oklch` color space for better color transitions.
+
+## How It Works
+
+Add a theme class to your HTML and apply colors to the body:
+
+```html
+<html class="light" data-theme="light">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
+  </body>
+</html>
+```
+
+We follow a simple naming pattern:
+- Colors without a suffix are backgrounds (e.g., `--accent`)
+- Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
+
+```tsx
+// This gives you the right background and text colors
+<div className="bg-accent text-accent-foreground">Hello</div>
+```
+
+## Available Colors
+
+### Base Colors
+
+These four colors stay the same in all themes:
+
+<div className="flex flex-wrap gap-6">
+  <ColorSwatch name="White" variable="--white" />
+  <ColorSwatch name="Black" variable="--black" />
+  <ColorSwatch name="Snow" variable="--snow" />
+  <ColorSwatch name="Eclipse" variable="--eclipse" />
+</div>
+
+### Background & Surface
+
+<ColorPalette
+  colors={[
+    { name: "Background", variable: "--background", foreground: "--foreground" },
+    { name: "Foreground", variable: "--foreground" },
+    { name: "Panel", variable: "--panel", foreground: "--panel-foreground" },
+    { name: "Panel Foreground", variable: "--panel-foreground" },
+    { name: "Surface 1", variable: "--surface-1", foreground: "--foreground" },
+    { name: "Surface 2", variable: "--surface-2", foreground: "--foreground" },
+    { name: "Surface 3", variable: "--surface-3", foreground: "--foreground" },
+  ]}
+/>
+
+### Primary Colors
+
+- **Accent**: Your main brand color (used in primary buttons)
+- **Accent Soft**: A lighter version for secondary actions
+
+<ColorPalette
+  colors={[
+    { name: "Accent", variable: "--accent", foreground: "--accent-foreground" },
+    { name: "Accent Foreground", variable: "--accent-foreground" },
+    { name: "Accent Soft", variable: "--accent-soft", foreground: "--accent-soft-foreground" },
+    { name: "Accent Soft Foreground", variable: "--accent-soft-foreground" },
+  ]}
+/>
+
+### Status Colors
+
+For alerts, validation, and status messages:
+
+<ColorPalette
+  colors={[
+    { name: "Success", variable: "--success", foreground: "--success-foreground" },
+    { name: "Success Foreground", variable: "--success-foreground" },
+    { name: "Warning", variable: "--warning", foreground: "--warning-foreground" },
+    { name: "Warning Foreground", variable: "--warning-foreground" },
+    { name: "Danger", variable: "--danger", foreground: "--danger-foreground" },
+    { name: "Danger Foreground", variable: "--danger-foreground" },
+  ]}
+/>
+
+### Other Colors
+
+<ColorPalette
+  colors={[
+    { name: "Default", variable: "--default", foreground: "--default-foreground" },
+    { name: "Default Foreground", variable: "--default-foreground" },
+    { name: "Muted", variable: "--muted", foreground: "--foreground" },
+    { name: "Border", variable: "--border" },
+    { name: "Focus", variable: "--focus" },
+    { name: "Link", variable: "--link" },
+    { name: "Scrollbar", variable: "--scrollbar" },
+  ]}
+/>
+
+## How to Use Colors
+
+### In Your Components
+
+```jsx
+// Use Tailwind classes
+<div className="bg-background text-foreground">
+  <button className="bg-accent text-accent-foreground hover:bg-accent-hover">
+    Click me
+  </button>
+</div>
+```
+
+### In CSS Files
+
+```css title="global.css" 
+/* Direct CSS variables */
+.my-component {
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+/* With @apply and @layer */
+@layer components {
+  @apply bg-accent text-accent-foreground;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-accent-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-hover;
+    transform: scale(0.97);
+  }
+}
+```
+
+## All Color Variables
+
+Complete list for the default theme (more themes coming soon):
+
+### Light Mode
+
+<CollapsibleCode lang="css" code={`:root {
+  /* Primitive Colors (constant across themes) */
+  --white: oklch(100% 0 0);
+  --black: oklch(0% 0 0);
+  --snow: oklch(0.9911 0 0);
+  --eclipse: oklch(0.2221 0 0);
+
+  /* Base Colors */
+  --background: var(--white);
+  --foreground: var(--eclipse);
+  --panel: var(--white);
+  --panel-foreground: var(--foreground);
+
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Gray/Neutral Colors */
+  --muted: var(--color-neutral-500);
+  --scrollbar: var(--color-neutral-300);
+  --default: var(--color-white);
+  --default-foreground: var(--color-neutral-600);
+
+  /* Surface Levels (content hierarchy) */
+  --surface-1: var(--background);           /* Base level */
+  --surface-2: var(--color-neutral-100);    /* Elevated content */
+  --surface-3: var(--color-neutral-200);    /* Highest elevation */
+
+  /* Primary/Accent Colors (main brand color) */
+  --accent: var(--color-neutral-950);       /* Primary color */
+  --accent-foreground: var(--snow);         /* Text on primary */
+  --accent-soft: var(--color-neutral-100);  /* Soft primary variant */
+  --accent-soft-foreground: var(--color-neutral-900);
+
+  /* Status Colors */
+  --success: oklch(0.5503 0.1244 153.56);
+  --success-foreground: var(--snow);
+  
+  --warning: oklch(0.7186 0.1521 64.85);
+  --warning-foreground: var(--eclipse);
+  
+  --danger: oklch(0.6259 0.1908 29.19);
+  --danger-foreground: var(--snow);
+
+  /* Misc Colors */
+  --border: oklch(0 0 0 / 10%);
+  --focus: oklch(0% 0 0 / 20%);
+  --link: var(--foreground);
+
+  /* Shadow */
+  --shadow-border: 
+    0 0px 5px 0px rgba(0, 0, 0, 0.02), 
+    0 2px 10px 0px rgba(0, 0, 0, 0.06),
+    0 0px 1px 0px rgba(0, 0, 0, 0.3);
+}`}
+/>
+
+### Dark Mode
+
+<CollapsibleCode lang="css" code={`.dark,
+[data-theme="dark"] {
+  /* Base Colors */
+  --background: var(--black);
+  --foreground: var(--snow);
+  --panel: var(--eclipse);
+
+  /* Gray/Neutral Colors */
+  --muted: var(--color-neutral-400);
+  --scrollbar: var(--color-neutral-800);
+  --default: var(--color-neutral-900);
+  --default-foreground: var(--color-neutral-200);
+
+  /* Surface Levels */
+  --surface-1: var(--background);
+  --surface-2: var(--color-neutral-900);
+  --surface-3: var(--color-neutral-800);
+
+  /* Primary/Accent Colors */
+  --accent: var(--color-neutral-50);
+  --accent-foreground: var(--eclipse);
+  --accent-soft: var(--color-neutral-800);
+  --accent-soft-foreground: var(--color-neutral-200);
+
+  /* Status Colors */
+  --success: oklch(80% 0.1561 154);
+  --success-foreground: var(--eclipse);
+  
+  --warning: oklch(85% 0.1414 77.88);
+  --warning-foreground: var(--eclipse);
+  
+  --danger: oklch(0.5798 0.1635 30.83);
+  --danger-foreground: var(--snow);
+
+  /* Misc Colors */
+  --border: oklch(1 0 0 / 12%);
+  --focus: oklch(100% 0 0 / 50%);
+  --link: var(--foreground);
+
+  /* Shadow */
+  --shadow-border:
+    0 0 0 1px var(--border), 
+    0 5px 10px -3px rgba(0, 0, 0, 0.3), 
+    0 3px 4px -2px rgba(0, 0, 0, 0.1);
+}
+`}
+/>
+
+## Customizing Colors
+
+### Add Your Own Colors
+
+```css
+:root {
+  --info: oklch(0.6 0.15 210);
+  --info-foreground: oklch(0.98 0 0);
+}
+
+.dark {
+  --info: oklch(0.7 0.12 210);
+  --info-foreground: oklch(0.15 0 0);
+}
+
+/* Make the color available to Tailwind */
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+Now you can use it:
+
+```tsx
+<div className="bg-info text-info-foreground">Info message</div>
+```
+
+### Override Existing Colors
+
+```css
+:root {
+  /* Override default colors */
+  --accent: oklch(0.7 0.15 250);
+  --success: oklch(0.65 0.15 155);
+}
+
+[data-theme="dark"] {
+  /* Override dark theme colors */
+  --accent: oklch(0.8 0.12 250);
+  --success: oklch(0.75 0.12 155);
+}
+```
+
+**Tip**: Convert colors at [oklch.com](https://oklch.com)
+
+## Quick Tips
+
+- Always use color variables, not hard-coded values
+- Use foreground/background pairs for good contrast
+- Test in both light and dark modes
+- The system respects user's theme preference automatically
+
+## Related
+
+- [Theming](/docs/handbook/theming) - Learn about the theming system
+- [Styling](/docs/handbook/styling) - Styling components with CSS
+- [Design Principles](/docs/design-principles) - Understanding HeroUI's design philosophy

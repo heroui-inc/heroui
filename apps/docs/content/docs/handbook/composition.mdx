@@ -187,6 +187,20 @@ export function CustomVariants() {
 }
 ```
 
+
+## With Next.js
+
+Use `asChild` to integrate with Next.js:
+
+```tsx
+import Link from 'next/link';
+import { Button } from '@heroui/react';
+
+<Button asChild variant="primary">
+  <Link href="/dashboard">Dashboard</Link>
+</Button>
+```
+
 ## With React Router
 
 Use `asChild` to integrate with routing libraries:
@@ -199,75 +213,6 @@ import { Button } from '@heroui/react';
   <Link to="/dashboard">Dashboard</Link>
 </Button>
 ```
-
-## Form Integration
-
-Compose with form libraries while maintaining styles:
-
-```tsx
-// With React Hook Form
-<Controller
-  name="agree"
-  control={control}
-  render={({ field }) => (
-    <Checkbox {...field} id="agree">
-      <Checkbox.Indicator />
-    </Checkbox>
-  )}
-/>
-```
-
-## Best Practices
-
-### Do
-
-- Use `asChild` when you need a different element
-- Compose smaller components into larger ones
-- Keep composition simple and readable
-
-### Don't
-
-- Don't nest `asChild` components
-- Don't use `asChild` with multiple children
-- Don't override critical accessibility props
-
-{/* ## Examples
-
-### Navigation Menu */}
-{/* 
-```tsx
-<Menu>
-  <Menu.Trigger asChild>
-    <Button variant="ghost">
-      Menu <ChevronDownIcon />
-    </Button>
-  </Menu.Trigger>
-  <Menu.Content>
-    <Menu.Item asChild>
-      <Link href="/profile">Profile</Link>
-    </Menu.Item>
-    <Menu.Item asChild>
-      <Link href="/settings">Settings</Link>
-    </Menu.Item>
-  </Menu.Content>
-</Menu>
-``` */}
-{/* 
-Card is not supported yet
-### Card with Link
-
-```tsx
-<Card asChild>
-  <Link href="/product/123">
-    <Card.Header>
-      <Card.Title>Product Name</Card.Title>
-    </Card.Header>
-    <Card.Body>
-      Product description...
-    </Card.Body>
-  </Link>
-</Card>
-``` */}
 
 
 ## Next Steps

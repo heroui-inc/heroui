@@ -59,8 +59,8 @@
     "@radix-ui/react-slot": "1.2.3",
     "clsx": "2.1.1",
     "input-otp": "1.4.2",
-    "react-aria-components": "1.11.0",
-    "tailwind-variants": "3.0.0"
+    "react-aria-components": "1.12.1",
+    "tailwind-variants": "3.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.28.0",

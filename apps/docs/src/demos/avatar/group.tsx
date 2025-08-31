@@ -65,21 +65,6 @@ export function Group() {
           <Avatar.Fallback className="text-xs">+{users.length - 3}</Avatar.Fallback>
         </Avatar>
       </div>
-
-      {/* Different size avatar group */}
-      <div className="flex -space-x-3">
-        {users.slice(0, 3).map((user) => (
-          <Avatar key={user.id} className="ring-background ring-2" size="lg">
-            <Avatar.Image alt={user.name} src={user.image} />
-            <Avatar.Fallback>
-              {user.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </Avatar.Fallback>
-          </Avatar>
-        ))}
-      </div>
     </div>
   );
 }

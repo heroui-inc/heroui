@@ -1,0 +1,188 @@
+---
+title: Tabs
+description: Organize content into separate views with tab navigation
+links:
+  rac: Tabs
+  source: tabs/tabs.tsx
+  styles: tabs.css
+  storybook: tabs
+---
+
+## Import
+
+```tsx
+import { Tabs } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview 
+  name="tabs-basic"
+/>
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import { Tabs } from '@heroui/react';
+
+export default () => (
+  <Tabs>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
+      <Tabs.Tab id="tab2">Tab 2</Tabs.Tab>
+      <Tabs.Tab id="tab3">Tab 3</Tabs.Tab>
+    </Tabs.List>
+    <Tabs.Panel id="tab1">
+      Content for tab 1
+    </Tabs.Panel>
+    <Tabs.Panel id="tab2">
+      Content for tab 2
+    </Tabs.Panel>
+    <Tabs.Panel id="tab3">
+      Content for tab 3
+    </Tabs.Panel>
+  </Tabs>
+)
+```
+
+### Variants
+
+<ComponentPreview 
+  name="tabs-variants"
+/>
+
+### Vertical
+
+<ComponentPreview 
+  name="tabs-vertical"
+/>
+
+### Disabled Tab
+
+<ComponentPreview 
+  name="tabs-disabled"
+/>
+
+### Controlled
+
+<ComponentPreview 
+  name="tabs-controlled"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Tabs } from '@heroui/react';
+
+function CustomTabs() {
+  return (
+    <Tabs className="border rounded-lg p-4">
+      <Tabs.List className="gap-4" aria-label="Custom tabs">
+        <Tabs.Tab className="font-bold" id="tab1">
+          Tab 1
+        </Tabs.Tab>
+        <Tabs.Tab className="font-bold" id="tab2">
+          Tab 2
+        </Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel className="mt-6" id="tab1">
+        Content 1
+      </Tabs.Panel>
+      <Tabs.Panel className="mt-6" id="tab2">
+        Content 2
+      </Tabs.Panel>
+    </Tabs>
+  );
+}
+```
+
+### CSS Classes
+
+The Tabs component uses these CSS classes:
+
+#### Base Classes
+- `.tabs` - Base tabs container
+- `.tabs__list` - Tab list container
+- `.tabs__tab` - Individual tab button
+- `.tabs__panel` - Tab panel content
+
+#### Variant Classes
+- `.tabs--default` - Default variant with surface styling
+- `.tabs--line` - Line variant with underline indicator
+
+#### Orientation Classes
+- `.tabs--horizontal` - Horizontal tab layout (default)
+- `.tabs--vertical` - Vertical tab layout
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes:
+
+- **Selected**: `[aria-selected="true"]`
+- **Hover**: `:hover` or `[data-hover="true"]`
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Disabled**: `[aria-disabled="true"]`
+
+## Accessibility
+
+#### Keyboard Navigation
+
+- **Tab** - Move focus to the next focusable element
+- **Shift + Tab** - Move focus to the previous focusable element
+- **Arrow Left/Right** - Navigate between tabs (horizontal orientation)
+- **Arrow Up/Down** - Navigate between tabs (vertical orientation)
+- **Home** - Move focus to the first tab
+- **End** - Move focus to the last tab
+- **Enter/Space** - Select the focused tab
+
+#### Screen Reader Support
+
+- Tab list is announced with its label
+- Selected state is announced for active tab
+- Tab panels are associated with their tabs via ARIA attributes
+- Disabled tabs are properly announced
+
+#### Focus Management
+
+- Focus moves to tab panel content when a tab is selected
+- Focus trap ensures keyboard navigation stays within tabs
+- Focus visible indicators for keyboard navigation
+
+## API Reference
+
+### Tabs Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "line"` | `"default"` | Visual style variant |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Tab layout orientation |
+| `selectedKey` | `string` | - | Controlled selected tab key |
+| `defaultSelectedKey` | `string` | - | Default selected tab key |
+| `onSelectionChange` | `(key: string) => void` | - | Selection change handler |
+| `className` | `string` | - | Additional CSS classes |
+
+### Tabs.List Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `aria-label` | `string` | - | Accessibility label for tab list |
+| `className` | `string` | - | Additional CSS classes |
+
+### Tabs.Tab Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | - | Unique tab identifier |
+| `isDisabled` | `boolean` | `false` | Whether tab is disabled |
+| `className` | `string` | - | Additional CSS classes |
+
+### Tabs.Panel Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | - | Panel identifier matching tab id |
+| `className` | `string` | - | Additional CSS classes |

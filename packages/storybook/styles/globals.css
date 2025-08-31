@@ -13,6 +13,11 @@
   --cursor-interactive: default;
 }
 
+[data-theme="light"],
+.light {
+  --background: #f9f9f9;
+}
+
 /* Dark theme overrides sing data-theme or class */
 [data-theme="dark"],
 .dark {
@@ -38,3 +43,7 @@
 /* @utility button {
   @apply rounded-lg;
 } */
+
+body {
+  background-color: var(--background);
+}

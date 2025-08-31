@@ -25,8 +25,8 @@
     @apply pointer-events-none;
   }
 
-  /* SVG icon styling */
-  & svg {
+  /* SVG icon styling - exclude spinner svgs */
+  & svg:not([data-spinner] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
 }
@@ -35,7 +35,7 @@
 .button--sm {
   @apply h-9 px-3 text-sm md:h-8;
 
-  & svg {
+  & svg:not([data-spinner] svg) {
     @apply size-4;
   }
 

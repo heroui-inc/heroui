@@ -11,7 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {Tooltip} from '@heroui/react';
+import { Tooltip } from '@heroui/react';
 ```
 
 ### Usage
@@ -19,6 +19,26 @@ import {Tooltip} from '@heroui/react';
 <ComponentPreview 
   name="tooltip-basic"
 />
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import { Tooltip } from '@heroui/react';
+
+export default () => (
+  <Tooltip>
+    <Tooltip.Trigger>
+      <button>Hover for tooltip</button>
+    </Tooltip.Trigger>
+    <Tooltip.Content>
+      <Tooltip.Arrow />
+      Helpful information about this element
+    </Tooltip.Content>
+  </Tooltip>
+)
+```
 
 ### With Arrow
 
@@ -91,31 +111,6 @@ The component supports animation states:
 - **Entering**: `[data-entering]` - Applied during tooltip appearance
 - **Exiting**: `[data-exiting]` - Applied during tooltip disappearance
 - **Placement**: `[data-placement="*"]` - Applied based on tooltip position
-
-## Accessibility
-
-#### Keyboard Navigation
-
-- Tooltips appear when the trigger element receives keyboard focus
-- Tooltips disappear when focus moves away
-
-#### Screen Reader Support
-
-- Uses `aria-describedby` to associate tooltip with trigger element
-- Automatically manages ARIA relationships between trigger and tooltip
-- Tooltips are announced when the trigger element is focused
-
-#### Focus Management
-
-- Tooltips display when element is focused via keyboard
-- Can be configured to show only on focus using `trigger="focus"` prop
-- Focus ring appears on trigger elements for keyboard navigation
-
-#### Important Considerations
-
-- Tooltips are not shown on touch screen interactions
-- UI should remain usable without tooltips
-- Trigger elements must be focusable and hoverable
 
 ## API Reference
 

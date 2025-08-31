@@ -11,6 +11,7 @@ import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 
+import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
 import {Iconify} from "./components/iconify";
 import {PackageManagers} from "./mdx-components/package-managers";
@@ -73,12 +74,16 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Star,
     X,
     XCircle,
+    CodeBlock,
+    CollapsibleCode,
     // HTML `ref` attribute conflicts with `forwardRef`
-    pre: ({ref: _ref, ...props}) => (
-      <CodeBlock {...props}>
-        <Pre>{props.children}</Pre>
-      </CodeBlock>
-    ),
+    pre: ({children, ref: _ref, ...props}) => {
+      return (
+        <CodeBlock {...props}>
+          <Pre>{children}</Pre>
+        </CodeBlock>
+      );
+    },
     ...components,
   };
 }

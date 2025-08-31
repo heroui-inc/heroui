@@ -11,7 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {Button} from '@heroui/react';
+import { Button } from '@heroui/react';
 ```
 
 ### Usage
@@ -144,28 +144,6 @@ The button supports both CSS pseudo-classes and data attributes for flexibility:
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
 - **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
 - **Pending**: `[data-pending]` (no pointer events during loading)
- 
-
-## Accessibility
-
-#### Keyboard Navigation
-
-- **Space** or **Enter** - Activates the button
-- **Tab** - Moves focus to the next focusable element
-- **Shift + Tab** - Moves focus to the previous focusable element
-
-#### Screen Reader Support
-
-- Button content is announced to screen readers
-- Loading state is properly communicated
-- Disabled state prevents interaction and is announced
-- ARIA attributes are automatically managed
-
-#### Focus Management
-
-- Clear focus indicators for keyboard navigation
-- Focus is maintained appropriately during state changes
-- Focus is managed when buttons are dynamically added/removed
 
 ## API Reference
 

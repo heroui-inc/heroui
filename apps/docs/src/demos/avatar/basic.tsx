@@ -10,7 +10,14 @@ export function Basic() {
         <Avatar.Fallback>JD</Avatar.Fallback>
       </Avatar>
       <Avatar>
-        <Avatar.Fallback>AB</Avatar.Fallback>
+        <Avatar.Image
+          alt="Blue"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
+        />
+        <Avatar.Fallback>B</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Fallback>JR</Avatar.Fallback>
       </Avatar>
     </div>
   );

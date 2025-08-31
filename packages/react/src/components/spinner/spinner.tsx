@@ -62,6 +62,7 @@ const Spinner = React.forwardRef<React.ElementRef<typeof SpinnerPrimitive>, Spin
   ({className, color, size, ...props}, ref) => {
     return (
       <span
+        data-spinner
         className={spinnerVariants({
           className,
           color,

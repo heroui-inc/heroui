@@ -87,7 +87,7 @@ For animations, use tw-animate-css utilities with @apply:
 ```css
 /* Combine multiple utilities in one @apply */
 .accordion__trigger {
-  @apply hover:bg-default flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color] duration-[50ms];
+  @apply hover:bg-default flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
 }
 
 /* Size modifiers with @apply */

@@ -92,7 +92,7 @@ const TemplateWithIconOnly = ({isDisabled, size, variant}: ButtonProps) => (
 const TemplateWithSpinner = ({size, variant}: ButtonProps) => (
   <div className="flex gap-3">
     <Button isPending size={size} variant={variant}>
-      <Spinner />
+      <Spinner size="sm" />
       Loading
     </Button>
   </div>
@@ -112,7 +112,7 @@ const TemplateWithLoadingState = ({size, variant}: ButtonProps) => {
     <Button isPending={isLoading} size={size} variant={variant ?? "tertiary"} onPress={handlePress}>
       {({isPending}) => (
         <>
-          {isPending ? <Spinner /> : <Icon icon="gravity-ui:paperclip" />}
+          {isPending ? <Spinner size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
           {isLoading ? "Uploading..." : "Upload File"}
         </>
       )}

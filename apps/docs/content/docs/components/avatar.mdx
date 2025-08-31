@@ -11,13 +11,32 @@ links:
 ## Import
 
 ```tsx
-import {Avatar} from '@heroui/react';
+import { Avatar } from '@heroui/react';
 ```
 
 ### Usage
 
 <ComponentPreview name="avatar-basic" />
 
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import { Avatar } from '@heroui/react';
+
+export default () => (
+  <Avatar>
+    <Avatar.Image 
+      src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg" 
+      alt="User avatar" 
+    />
+    <Avatar.Fallback>
+      JD
+    </Avatar.Fallback>
+  </Avatar>
+)
+```
 
 ### Sizes
 
@@ -95,25 +114,6 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 - `.avatar__fallback--success` - Success text color
 - `.avatar__fallback--warning` - Warning text color
 - `.avatar__fallback--danger` - Danger text color
-
-## Accessibility
-
-#### Image Alt Text
-
-Always provide meaningful alt text for avatar images to ensure screen readers can describe the content.
-
-#### Screen Reader Support
-
-- The component automatically manages focus and announces image loading states
-- Fallback content is announced when images fail to load
-- The `alt` attribute on `Avatar.Image` provides context for screen readers
-
-#### Best Practices
-
-- Always include descriptive alt text for all avatar images
-- Use meaningful fallbacks like initials or icons that represent the user
-- Maintain consistent sizing for avatars in groups or lists
-- Ensure fallback text has sufficient contrast against the background
 
 ## API Reference
 

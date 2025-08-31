@@ -1,11 +1,12 @@
 @layer base {
-  /* HeroUI Default Light Theme */
+  /* HeroUI Default Theme */
   :root {
     color-scheme: light;
     /* Base Colors */
     --background: var(--white);
     --foreground: var(--eclipse);
     --panel: var(--white);
+    --panel-foreground: var(--foreground);
 
     --radius: 0.75rem;
 
@@ -23,7 +24,7 @@
     --accent: var(--color-neutral-950);
     --accent-foreground: var(--snow);
 
-    --accent-soft: var(--color-neutral-100);
+    --accent-soft: var(--color-neutral-200);
     --accent-soft-foreground: var(--color-neutral-900);
 
     /* Status Colors */
@@ -37,7 +38,7 @@
     --danger-foreground: var(--snow);
 
     /* Misc Colors */
-    --border: oklch(0 0 0 / 10%);
+    --border: oklch(0 0 0 / 15%);
     --focus: oklch(0% 0 0 / 20%);
     --link: var(--foreground);
 
@@ -98,6 +99,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
 
   --color-muted: var(--muted);
 
@@ -131,6 +133,11 @@
   /* Calculated Variables */
 
   /* Colors */
+  --color-panel-hover: color-mix(
+    in oklab,
+    var(--color-panel) 90%,
+    var(--color-panel-foreground) 5%
+  );
   --color-default-hover: color-mix(
     in oklab,
     var(--color-default) 90%,
