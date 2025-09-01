@@ -187,14 +187,6 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.WithIcon,
     file: "link/with-icon.tsx",
   },
-  "link-styled": {
-    component: LinkDemos.Styled,
-    file: "link/styled.tsx",
-  },
-  "link-navigation": {
-    component: LinkDemos.Navigation,
-    file: "link/navigation.tsx",
-  },
   // Spinner demos
   "spinner-basic": {
     component: SpinnerDemos.Basic,
@@ -207,10 +199,6 @@ export const demos: Record<string, DemoItem> = {
   "spinner-sizes": {
     component: SpinnerDemos.Sizes,
     file: "spinner/sizes.tsx",
-  },
-  "spinner-usage": {
-    component: SpinnerDemos.Usage,
-    file: "spinner/usage.tsx",
   },
   // Tabs demos
   "tabs-basic": {
@@ -291,10 +279,6 @@ export const demos: Record<string, DemoItem> = {
   "popover-placement": {
     component: PopoverDemos.Placement,
     file: "popover/placement.tsx",
-  },
-  "popover-custom-trigger": {
-    component: PopoverDemos.CustomTrigger,
-    file: "popover/custom-trigger.tsx",
   },
   "popover-interactive": {
     component: PopoverDemos.Interactive,

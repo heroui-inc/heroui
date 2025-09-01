@@ -5,6 +5,7 @@ import {createMDX} from "fumadocs-mdx/next";
 const withMDX = createMDX();
 
 const config: NextConfig = {
+  transpilePackages: ["@heroui/react", "@heroui/styles"],
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -252,6 +252,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: 1.2.3
         version: 1.2.3(@types/react@19.1.2)(react@19.1.0)
+      '@react-types/shared':
+        specifier: 3.32.0
+        version: 3.32.0(react@19.1.0)
       clsx:
         specifier: 2.1.1
         version: 2.1.1

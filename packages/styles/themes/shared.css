@@ -1,0 +1,114 @@
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
+
+  --color-muted: var(--muted);
+
+  --color-surface: var(--surface-1);
+  --color-surface-foreground: var(--foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-foreground: var(--accent-soft-foreground);
+
+  --color-border: var(--border);
+  --color-focus: var(--focus);
+  --color-link: var(--link);
+
+  --color-default: var(--default);
+  --color-default-foreground: var(--default-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  --shadow-border: var(--shadow-border);
+
+  /* Calculated Variables */
+
+  /* Colors */
+  --color-panel-hover: color-mix(
+    in oklab,
+    var(--color-panel) 90%,
+    var(--color-panel-foreground) 5%
+  );
+  --color-default-hover: color-mix(
+    in oklab,
+    var(--color-default) 90%,
+    var(--color-default-foreground) 5%
+  );
+  --color-accent-hover: color-mix(
+    in oklab,
+    var(--color-accent) 90%,
+    var(--color-accent-foreground) 20%
+  );
+  --color-accent-soft-hover: color-mix(
+    in oklab,
+    var(--color-accent-soft) 10%,
+    var(--color-accent-soft-foreground) 18%
+  );
+  --color-success-hover: color-mix(
+    in oklab,
+    var(--color-success) 90%,
+    var(--color-success-foreground) 10%
+  );
+  --color-warning-hover: color-mix(
+    in oklab,
+    var(--color-warning) 90%,
+    var(--color-warning-foreground) 10%
+  );
+  --color-danger-hover: color-mix(
+    in oklab,
+    var(--color-danger) 90%,
+    var(--color-danger-foreground) 10%
+  );
+
+  /* Surface Colors */
+  --color-surface-1: var(--surface-1);
+  --color-surface-1-foreground: color-mix(
+    in oklab,
+    var(--color-surface-1) 80%,
+    var(--color-foreground) 3.5%
+  );
+  --color-surface-2: var(--surface-2);
+  --color-surface-2-foreground: color-mix(
+    in oklab,
+    var(--color-surface-2) 80%,
+    var(--color-foreground) 3.5%
+  );
+  --color-surface-3: var(--surface-3);
+  --color-surface-3-foreground: color-mix(
+    in oklab,
+    var(--color-surface-3) 80%,
+    var(--color-foreground) 3.5%
+  );
+
+  /* Radius */
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: calc(var(--radius) * 1);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+  --radius-panel: var(--radius);
+  --radius-panel-inner: calc(var(--radius) * 0.5);
+
+  /* Transition Timing Functions  */
+  --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);
+  --ease-soft-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Animations */
+  --animate-spin-fast: spin 0.75s linear infinite;
+}

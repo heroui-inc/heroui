@@ -1,6 +1,6 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit items-center gap-1 underline-offset-4 transition-[color,text-decoration-color,opacity] duration-150 hover:underline;
+  @apply text-link relative inline-flex h-fit items-center underline-offset-4 transition-[color,text-decoration-color,opacity] duration-150 hover:underline;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -17,5 +17,13 @@
   &[aria-disabled="true"] {
     @apply pointer-events-none opacity-[var(--disabled-opacity)];
     cursor: var(--cursor-disabled);
+  }
+
+  .link__icon {
+    @apply text-muted pointer-events-none inline-flex size-4 shrink-0 items-center justify-center;
+  }
+
+  .link__icon[data-link-default-icon] {
+    @apply pb-1.5;
   }
 }

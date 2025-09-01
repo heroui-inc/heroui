@@ -8,7 +8,7 @@ export function Loading() {
     <Button isPending>
       {({isPending}) => (
         <>
-          {isPending ? <Spinner /> : null}
+          {isPending ? <Spinner size="sm" /> : null}
           Uploading...
         </>
       )}

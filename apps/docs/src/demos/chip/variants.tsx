@@ -3,61 +3,42 @@
 import {Chip} from "@heroui/react";
 
 export function ChipVariants() {
+  const variants = ["primary", "secondary", "tertiary"] as const;
+  const colors = ["default", "accent", "success", "warning", "danger"] as const;
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-3">
-        <Chip color="default" variant="primary">
-          Primary Default
-        </Chip>
-        <Chip color="accent" variant="primary">
-          Primary Accent
-        </Chip>
-        <Chip color="success" variant="primary">
-          Primary Success
-        </Chip>
-        <Chip color="warning" variant="primary">
-          Primary Warning
-        </Chip>
-        <Chip color="danger" variant="primary">
-          Primary Danger
-        </Chip>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <Chip color="default" variant="secondary">
-          Secondary Default
-        </Chip>
-        <Chip color="accent" variant="secondary">
-          Secondary Accent
-        </Chip>
-        <Chip color="success" variant="secondary">
-          Secondary Success
-        </Chip>
-        <Chip color="warning" variant="secondary">
-          Secondary Warning
-        </Chip>
-        <Chip color="danger" variant="secondary">
-          Secondary Danger
-        </Chip>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <Chip color="default" variant="tertiary">
-          Tertiary Default
-        </Chip>
-        <Chip color="accent" variant="tertiary">
-          Tertiary Accent
-        </Chip>
-        <Chip color="success" variant="tertiary">
-          Tertiary Success
-        </Chip>
-        <Chip color="warning" variant="tertiary">
-          Tertiary Warning
-        </Chip>
-        <Chip color="danger" variant="tertiary">
-          Tertiary Danger
-        </Chip>
-      </div>
+    <div className="overflow-x-auto">
+      <table className="w-full">
+        <thead>
+          <tr>
+            <th className="sr-only px-4 py-3 text-left text-sm font-medium">Variant / Color</th>
+            {colors.map((color) => (
+              <th
+                key={color}
+                className="text-muted px-4 py-3 text-center text-sm font-medium capitalize"
+              >
+                {color}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {variants.map((variant) => (
+            <tr key={variant} className="border-border border-t">
+              <td className="text-muted px-4 py-4 text-sm font-medium capitalize">{variant}</td>
+              {colors.map((color) => (
+                <td key={`${variant}-${color}`} className="px-4 py-4 text-center">
+                  <Chip color={color} variant={variant}>
+                    {color === "default"
+                      ? "Default"
+                      : color.charAt(0).toUpperCase() + color.slice(1)}
+                  </Chip>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

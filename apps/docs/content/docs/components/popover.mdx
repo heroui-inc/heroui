@@ -29,14 +29,12 @@ import { Popover } from '@heroui/react';
 
 export default () => (
   <Popover>
-    <Popover.Trigger asChild>
-      <button>Open popover</button>
-    </Popover.Trigger>
+    <Popover.Trigger/>
     <Popover.Content>
       <Popover.Arrow />
       <Popover.Dialog>
-        <Popover.Heading>Popover title</Popover.Heading>
-        <p>Popover content goes here</p>
+        <Popover.Heading/>
+        {/* content goes here */}
       </Popover.Dialog>
     </Popover.Content>
   </Popover>
@@ -53,12 +51,6 @@ export default () => (
 
 <ComponentPreview 
   name="popover-placement"
-/>
-
-### Custom Triggers
-
-<ComponentPreview 
-  name="popover-custom-trigger"
 />
 
 ### Interactive Content

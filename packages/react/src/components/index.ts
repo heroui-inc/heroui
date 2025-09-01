@@ -31,3 +31,16 @@ export * from "./input-otp";
 //  Icons
 //  ===================================
 export * from "./icons";
+
+//  ===================================
+//  Types
+//  ===================================
+export type {
+  Key,
+  Direction,
+  Orientation,
+  PressEvent,
+  PointerType,
+  KeyboardEvent,
+  HoverEvent,
+} from "@react-types/shared";

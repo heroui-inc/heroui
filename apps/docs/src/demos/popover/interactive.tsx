@@ -1,15 +1,13 @@
 "use client";
 
-import {Avatar, Button, Label, Popover, TextField} from "@heroui/react";
+import {Avatar, Button, Popover} from "@heroui/react";
 import {useState} from "react";
 
 export function PopoverInteractive() {
   const [isFollowing, setIsFollowing] = useState(false);
-  const [comment, setComment] = useState("");
 
   return (
     <div className="flex items-center gap-6">
-      {/* User profile popover */}
       <Popover>
         <Popover.Trigger aria-label="User profile">
           <div className="flex items-center gap-2">
@@ -64,32 +62,6 @@ export function PopoverInteractive() {
               <div>
                 <span className="font-semibold">12.5K</span>
                 <span className="text-muted ml-1 text-sm">Followers</span>
-              </div>
-            </div>
-          </Popover.Dialog>
-        </Popover.Content>
-      </Popover>
-
-      {/* Comment popover */}
-      <Popover>
-        <Button variant="secondary">Add Comment</Button>
-        <Popover.Content className="w-[300px]">
-          <Popover.Dialog>
-            <Popover.Heading>Add a comment</Popover.Heading>
-            <div className="mt-3 space-y-3">
-              <div>
-                <Label htmlFor="comment">Your comment</Label>
-                <TextField className="mt-1" id="comment" value={comment} onChange={setComment}>
-                  <TextField.Input placeholder="Type your comment..." />
-                </TextField>
-              </div>
-              <div className="flex justify-end gap-2">
-                <Button size="sm" variant="tertiary">
-                  Cancel
-                </Button>
-                <Button size="sm" variant="primary">
-                  Post
-                </Button>
               </div>
             </div>
           </Popover.Dialog>

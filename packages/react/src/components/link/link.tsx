@@ -7,6 +7,7 @@ import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {Link as LinkPrimitive} from "react-aria-components";
 
+import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {LinkIcon as DefaultLinkIcon} from "../icons";
 
@@ -27,11 +28,8 @@ const LinkContext = createContext<LinkContext>({});
 interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {}
 
 const LinkRoot = React.forwardRef<React.ElementRef<typeof LinkPrimitive>, LinkRootProps>(
-  ({children, className, iconPlacement = "end", showIcon = false, ...props}, ref) => {
-    const slots = React.useMemo(
-      () => linkVariants({showIcon, iconPlacement}),
-      [showIcon, iconPlacement],
-    );
+  ({children, className, ...props}, ref) => {
+    const slots = React.useMemo(() => linkVariants({}), []);
 
     return (
       <LinkContext.Provider value={{slots}}>
@@ -63,8 +61,14 @@ const LinkIconComponent = React.forwardRef<HTMLSpanElement, LinkIconProps>(
     const Component = asChild ? SlotPrimitive : "span";
 
     return (
-      <Component ref={ref} data-link-icon className={slots?.icon({className})} {...rest}>
-        {children ?? <DefaultLinkIcon data-link-default-icon />}
+      <Component
+        ref={ref}
+        data-link-icon
+        className={slots?.icon({className})}
+        data-link-default-icon={dataAttr(!children)}
+        {...rest}
+      >
+        {children ?? <DefaultLinkIcon />}
       </Component>
     );
   },

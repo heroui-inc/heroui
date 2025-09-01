@@ -16,7 +16,7 @@ export function LoadingState() {
     <Button isPending={isLoading} onPress={handlePress}>
       {({isPending}) => (
         <>
-          {isPending ? <Spinner /> : <Icon icon="gravity-ui:paperclip" />}
+          {isPending ? <Spinner size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
           {isPending ? "Uploading..." : "Upload File"}
         </>
       )}

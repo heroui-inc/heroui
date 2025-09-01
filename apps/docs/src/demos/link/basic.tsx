@@ -9,6 +9,7 @@ export function LinkBasic() {
 
       <Link href="https://heroui.com" rel="noopener noreferrer" target="_blank">
         External link to HeroUI
+        <Link.Icon />
       </Link>
 
       <Link isDisabled href="#">

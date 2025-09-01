@@ -13,7 +13,7 @@ export function PopoverWithArrow() {
             <Popover.Arrow />
             <Popover.Heading>Popover with Arrow</Popover.Heading>
             <p className="text-muted mt-2 text-sm">
-              The arrow helps indicate which element triggered the popover.
+              The arrow shows which element triggered the popover.
             </p>
           </Popover.Dialog>
         </Popover.Content>
@@ -26,19 +26,10 @@ export function PopoverWithArrow() {
         <Popover.Content offset={10}>
           <Popover.Dialog>
             <Popover.Arrow />
-            <div className="flex flex-col gap-1">
-              <button className="hover:bg-surface rounded px-3 py-2 text-left text-sm">Edit</button>
-              <button className="hover:bg-surface rounded px-3 py-2 text-left text-sm">
-                Duplicate
-              </button>
-              <button className="hover:bg-surface rounded px-3 py-2 text-left text-sm">
-                Archive
-              </button>
-              <hr className="my-1" />
-              <button className="text-danger hover:bg-danger/10 rounded px-3 py-2 text-left text-sm">
-                Delete
-              </button>
-            </div>
+            <Popover.Heading>Popover with Arrow</Popover.Heading>
+            <p className="text-muted mt-2 text-sm">
+              The arrow shows which element triggered the popover.
+            </p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>

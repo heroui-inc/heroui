@@ -21,16 +21,27 @@
 }
 
 .accordion__panel {
-  @apply duration-250 h-0 opacity-0 transition-all ease-out will-change-auto;
+  /* Hybrid approach: max-height for smooth expansion + GPU-accelerated opacity */
+  @apply ease-soft-in-out max-h-0 overflow-hidden transition-[max-height] duration-[300ms] will-change-[max-height];
+
+  .accordion__body {
+    /* GPU-accelerated opacity and transform for better performance */
+    @apply pointer-events-none transform-none opacity-0 transition-opacity duration-500 will-change-[opacity];
+  }
 
   &[aria-hidden="false"] {
-    @apply h-[var(--panel-height)] opacity-100;
+    /* Use CSS variable for dynamic height */
+    max-height: var(--panel-height, 1000px);
+
+    .accordion__body {
+      @apply pointer-events-auto opacity-100 duration-200;
+    }
   }
 }
 
 .accordion__trigger {
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[100ms] ease-out;
 
   &:hover,
   &[data-hover="true"] {

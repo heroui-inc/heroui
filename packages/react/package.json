@@ -57,6 +57,7 @@
     "@internationalized/date": "3.8.2",
     "@radix-ui/react-avatar": "1.1.10",
     "@radix-ui/react-slot": "1.2.3",
+    "@react-types/shared": "3.32.0",
     "clsx": "2.1.1",
     "input-otp": "1.4.2",
     "react-aria-components": "1.12.1",

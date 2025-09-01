@@ -9,7 +9,7 @@ import type {
   DisclosureProps,
 } from "react-aria-components";
 
-import React, {createContext, useContext, useRef} from "react";
+import React, {createContext, useContext, useEffect, useRef} from "react";
 import {
   Button,
   Disclosure,
@@ -199,6 +199,42 @@ const AccordionPanel = React.forwardRef<
   const accordionPanelRef = useRef<HTMLDivElement>(null);
   const {height: panelHeight} = useMeasuredHeight(accordionPanelRef);
   const mergedRef = useMergeRef(accordionPanelRef, ref);
+
+  // Prevent React Aria from setting hidden="until-found" which breaks animations
+  useEffect(() => {
+    if (!accordionPanelRef.current) return;
+
+    // Create a MutationObserver to watch for hidden attribute changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "hidden" &&
+          accordionPanelRef.current
+        ) {
+          // Remove the hidden attribute if it was set
+          const hiddenValue = accordionPanelRef.current.getAttribute("hidden");
+
+          if (hiddenValue === "until-found" || hiddenValue === "") {
+            accordionPanelRef.current.removeAttribute("hidden");
+          }
+        }
+      });
+    });
+
+    // Start observing for attribute changes
+    observer.observe(accordionPanelRef.current, {
+      attributes: true,
+      attributeFilter: ["hidden"],
+    });
+
+    // Initial cleanup - remove any hidden attribute that might be present
+    accordionPanelRef.current.removeAttribute("hidden");
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <DisclosurePanel

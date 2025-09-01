@@ -13,16 +13,12 @@ export const IconChevronDown = (props: IconProps) => (
   </svg>
 );
 
-export const LinkIcon = ({height = 7, width = 7, ...props}: IconProps) => (
-  <svg
-    aria-hidden="true"
-    fill="currentColor"
-    height={height}
-    viewBox="0 0 6 6"
-    width={width}
-    {...props}
-  >
-    <path d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z" />
+export const LinkIcon = ({height = 9, width = 9, ...props}: IconProps) => (
+  <svg fill="none" height={height} viewBox="0 0 7 7" width={width} {...props}>
+    <path
+      d="M1.20592 6.84333L0.379822 6.01723L4.52594 1.8672H1.37819L1.38601 0.731812H6.48742V5.83714H5.34421L5.35203 2.6933L1.20592 6.84333Z"
+      fill="currentColor"
+    />
   </svg>
 );
 

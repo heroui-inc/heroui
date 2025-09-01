@@ -26,6 +26,8 @@ const Star = (props: any) => <Iconify {...props} icon="star-fill" />;
 
 const Icon = (props: any) => <Iconify {...props} />;
 
+const MAX_LINES_FOR_LINE_NUMBERS = 20;
+
 function Preview({children}: {children: React.ReactNode}) {
   return (
     <div className="bg-background my-6 flex items-center justify-center rounded-lg border p-6">
@@ -100,7 +102,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       lineCount = codeContent.split("\n").length;
 
       // Only add line numbers class if more than 5 lines
-      const className = lineCount > 5 ? "docs-code-block-line-numbers" : undefined;
+      const className =
+        lineCount > MAX_LINES_FOR_LINE_NUMBERS ? "docs-code-block-line-numbers" : undefined;
 
       return (
         <CodeBlock {...props} className={className}>

@@ -1,17 +1,31 @@
 "use client";
 
+import type {Key} from "@heroui/react";
+
 import {Accordion} from "@heroui/react";
 import {Icon} from "@iconify/react";
+import React from "react";
 
 export function CustomIndicator() {
+  const [expandedKeys, setExpandedKeys] = React.useState<Set<Key>>(new Set([""]));
+
   return (
-    <Accordion className="w-full max-w-md" variant="outline">
-      <Accordion.Item>
+    <Accordion
+      className="w-full max-w-md"
+      expandedKeys={expandedKeys}
+      variant="outline"
+      onExpandedChange={setExpandedKeys}
+    >
+      <Accordion.Item id="1">
         <Accordion.Heading>
           <Accordion.Trigger>
             Using Plus/Minus Icon
             <Accordion.Indicator>
-              <Icon icon="gravity-ui:plus" />
+              {expandedKeys.has("1") ? (
+                <Icon icon="gravity-ui:minus" />
+              ) : (
+                <Icon icon="gravity-ui:plus" />
+              )}
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>
@@ -23,7 +37,7 @@ export function CustomIndicator() {
         </Accordion.Panel>
       </Accordion.Item>
 
-      <Accordion.Item>
+      <Accordion.Item id="2">
         <Accordion.Heading>
           <Accordion.Trigger>
             Using Caret Icon
@@ -40,7 +54,7 @@ export function CustomIndicator() {
         </Accordion.Panel>
       </Accordion.Item>
 
-      <Accordion.Item>
+      <Accordion.Item id="3">
         <Accordion.Heading>
           <Accordion.Trigger>
             Using Arrow Icon

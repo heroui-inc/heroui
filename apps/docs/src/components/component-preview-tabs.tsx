@@ -42,6 +42,10 @@ export function ComponentPreviewTabs({
               alignmentClasses[align],
               "flex",
             )}
+            style={{
+              contain: "layout style",
+              isolation: "isolate",
+            }}
           >
             {Component}
           </div>
