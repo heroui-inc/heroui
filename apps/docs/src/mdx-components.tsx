@@ -78,8 +78,32 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CollapsibleCode,
     // HTML `ref` attribute conflicts with `forwardRef`
     pre: ({children, ref: _ref, ...props}) => {
+      // Check if the code has more than 5 lines
+      let lineCount = 1;
+
+      // Extract the text content to count lines
+      const extractText = (node: any): string => {
+        if (typeof node === "string") return node;
+        if (node?.props?.children) {
+          if (Array.isArray(node.props.children)) {
+            return node.props.children.map(extractText).join("");
+          }
+
+          return extractText(node.props.children);
+        }
+
+        return "";
+      };
+
+      const codeContent = extractText(children);
+
+      lineCount = codeContent.split("\n").length;
+
+      // Only add line numbers class if more than 5 lines
+      const className = lineCount > 5 ? "docs-code-block-line-numbers" : undefined;
+
       return (
-        <CodeBlock {...props} className="docs-code-block-line-numbers">
+        <CodeBlock {...props} className={className}>
           <Pre>{children}</Pre>
         </CodeBlock>
       );
