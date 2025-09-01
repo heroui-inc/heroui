@@ -29,35 +29,36 @@ const config: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/docs",
         destination: "/docs/introduction",
         permanent: true,
+        source: "/docs",
       },
       {
-        source: "/docs/components",
         destination: "/docs/components/avatar",
         permanent: true,
+        source: "/docs/components",
       },
       {
-        source: "/components",
         destination: "/docs/components/accordion",
         permanent: true,
+        source: "/components",
       },
       {
-        source: "/handbook",
         destination: "/docs/handbook/styling",
         permanent: true,
+        source: "/handbook",
       },
     ];
   },
   async rewrites() {
     return [
       {
-        source: "/docs/:path*.mdx",
         destination: "/llms.mdx/:path*",
+        source: "/docs/:path*.mdx",
       },
     ];
   },
+  typedRoutes: true,
   typescript: {
     ignoreBuildErrors: true,
   },

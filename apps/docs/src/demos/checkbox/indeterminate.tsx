@@ -1,12 +1,12 @@
 "use client";
 
-import {useState} from "react";
 import {Checkbox, Label} from "@heroui/react";
+import {useState} from "react";
 
 export function Indeterminate() {
   const [selected, setSelected] = useState<string[]>(["option1"]);
   const options = ["option1", "option2", "option3"];
-  
+
   const isIndeterminate = selected.length > 0 && selected.length < options.length;
   const isSelected = selected.length === options.length;
 
@@ -21,21 +21,21 @@ export function Indeterminate() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Checkbox 
+        <Checkbox
           id="select-all"
-          isSelected={isSelected}
           isIndeterminate={isIndeterminate}
+          isSelected={isSelected}
           onChange={handleSelectAll}
         >
           <Checkbox.Indicator>
-            {isIndeterminate && <Checkbox.IndeterminateIcon />}
+            {!!isIndeterminate && <Checkbox.IndeterminateIcon />}
           </Checkbox.Indicator>
         </Checkbox>
-        <Label htmlFor="select-all" className="font-semibold">
+        <Label className="font-semibold" htmlFor="select-all">
           Select all
         </Label>
       </div>
-      
+
       <div className="ml-6 space-y-2">
         {options.map((option) => (
           <div key={option} className="flex items-center gap-3">

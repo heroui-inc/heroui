@@ -1,7 +1,7 @@
 "use client";
 
-import {useState} from "react";
 import {Alert} from "@heroui/react";
+import {useState} from "react";
 
 export function Dismissible() {
   const [isVisible, setIsVisible] = useState(true);
@@ -9,8 +9,8 @@ export function Dismissible() {
   if (!isVisible) {
     return (
       <button
+        className="rounded-lg bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300"
         onClick={() => setIsVisible(true)}
-        className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm"
       >
         Show alert again
       </button>

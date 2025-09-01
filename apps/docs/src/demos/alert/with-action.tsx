@@ -12,9 +12,7 @@ export function WithAction() {
           A new software update is available. Would you like to install it now?
         </Alert.Description>
       </Alert.Content>
-      <Alert.Action onClick={() => console.log("Update clicked")}>
-        Update
-      </Alert.Action>
+      <Alert.Action onClick={() => console.log("Update clicked")}>Update</Alert.Action>
     </Alert>
   );
 }

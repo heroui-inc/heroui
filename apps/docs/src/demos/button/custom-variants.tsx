@@ -5,28 +5,28 @@ import {Button, buttonVariants} from "@heroui/react";
 import {tv} from "tailwind-variants";
 
 const myButtonVariants = tv({
-  extend: buttonVariants,
   base: "text-md text-shadow-lg font-semibold shadow-md data-[pending=true]:opacity-40",
+  defaultVariants: {
+    radius: "full",
+    variant: "primary",
+  },
+  extend: buttonVariants,
   variants: {
     radius: {
+      full: "rounded-full",
       lg: "rounded-lg",
       md: "rounded-md",
       sm: "rounded-sm",
-      full: "rounded-full",
     },
     size: {
-      sm: "h-10 px-4",
-      md: "h-11 px-6",
       lg: "h-12 px-8",
+      md: "h-11 px-6",
+      sm: "h-10 px-4",
       xl: "h-13 px-10",
     },
     variant: {
       primary: "text-white dark:bg-white/10 dark:text-white dark:hover:bg-white/15",
     },
-  },
-  defaultVariants: {
-    radius: "full",
-    variant: "primary",
   },
 });
 

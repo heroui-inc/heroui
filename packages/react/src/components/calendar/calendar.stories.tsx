@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
@@ -45,7 +44,8 @@ export const ControlledValue: Story = {
           {...args}
           aria-label="Event date"
           value={value}
-          onChange={(newValue) => setValue(newValue as any)}
+          // @ts-expect-error TODO: fix the type inference for events
+          onChange={(newValue) => setValue(newValue)}
         >
           <Calendar.Header>
             <Calendar.NavButton slot="previous" />

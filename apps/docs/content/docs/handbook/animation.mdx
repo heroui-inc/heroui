@@ -179,7 +179,7 @@ Always respect user motion preferences:
   .button {
     transition: none;
   }
-  
+
   .animate-* {
     animation: none !important;
   }
@@ -193,7 +193,7 @@ import { useReducedMotion } from 'framer-motion';
 
 function AnimatedCard() {
   const shouldReduceMotion = useReducedMotion();
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

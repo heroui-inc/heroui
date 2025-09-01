@@ -47,7 +47,7 @@ Add a theme class to your HTML and apply colors to the body:
 :root {
   /* Change primary color */
   --accent: oklch(0.7 0.25 260);
-  
+
   /* Change background */
   --background: #fafafa;
   --foreground: #0a0a0a;
@@ -56,7 +56,7 @@ Add a theme class to your HTML and apply colors to the body:
 .dark [data-theme="dark"] {
   /* Change primary color */
   --accent: oklch(0.7 0.25 260);
-  
+
   /* Change background */
   --background: #0a0a0a;
   --foreground: #fafafa;
@@ -205,11 +205,11 @@ Override any component using BEM classes:
   .button {
     @apply font-semibold tracking-wide;
   }
-  
+
   .button--primary {
     @apply bg-blue-600 hover:bg-blue-700;
   }
-  
+
   /* Customize accordions */
   .accordion__trigger {
     @apply text-lg font-bold;
@@ -286,17 +286,17 @@ These stay constant across all themes:
   --black: oklch(0% 0 0);
   --snow: oklch(0.9911 0 0);
   --eclipse: oklch(0.2221 0 0);
-  
+
   /* Layout */
   --spacing: 0.25rem;
   --radius: 0.75rem;
   --border-width: 1px;
-  
+
   /* Typography */
   --font-size-base: 1rem;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
-  
+
   /* States */
   --disabled-opacity: 0.5; /* Opacity for disabled elements (e.g. buttons)*/
   --cursor-interactive: pointer; /* Default cursor for interactive elements (e.g. buttons)*/

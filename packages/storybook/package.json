@@ -5,17 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "storybook dev --host 127.0.0.1 --port 6006 --no-open",
-    "@tailwindcss/cli": "^4.1.11",
     "build": "storybook build",
     "start": "storybook start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
     "@heroui/react": "workspace:*",
-    "@heroui/styles": "workspace:*"
+    "@heroui/styles": "workspace:*",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
@@ -39,7 +38,7 @@
     "react-scan": "0.3.3",
     "storybook": "8.6.12",
     "storybook-dark-mode": "4.0.2",
-    "tailwindcss": "4.1.4",
-    "vite": "6.3.2"
+    "tailwindcss": "4.1.12",
+    "vite": "7.1.4"
   }
 }

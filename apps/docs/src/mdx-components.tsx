@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable react-refresh/only-export-components */
-// @ts-nocheck
-
 import type {MDXComponents} from "mdx/types";
 
 import {Callout} from "fumadocs-ui/components/callout";
@@ -64,6 +59,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Card,
     Cards,
     CheckCircle,
+    CodeBlock,
+    CollapsibleCode,
     ComponentCard,
     ComponentGrid,
     ComponentPreview,
@@ -74,8 +71,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Star,
     X,
     XCircle,
-    CodeBlock,
-    CollapsibleCode,
     // HTML `ref` attribute conflicts with `forwardRef`
     pre: ({children, ref: _ref, ...props}) => {
       // Check if the code has more than 5 lines
