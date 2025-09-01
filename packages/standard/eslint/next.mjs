@@ -55,7 +55,7 @@ export default defineConfig([
       "jsx-a11y/no-autofocus": "off",
       "no-console": "off",
       "react-hooks/exhaustive-deps": "off",
-      "react-refresh/only-export-components": ["warn", {allowConstantExport: true}],
+      "react-refresh/only-export-components": "off",
       "react/jsx-boolean-value": [
         "error",
         "never",
@@ -100,8 +100,6 @@ export default defineConfig([
           html: true,
         },
       ],
-      "sort-keys": "off",
-      "sort-keys-fix/sort-keys-fix": "off",
     },
     settings: {
       react: {
