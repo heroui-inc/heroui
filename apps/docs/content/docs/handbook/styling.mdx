@@ -68,7 +68,7 @@ Use render props for dynamic styling based on component state:
 ```tsx
 // Dynamic classes
 <Button
-  className={({ isPressed }) => 
+  className={({ isPressed }) =>
     isPressed ? 'bg-blue-600' : 'bg-blue-500'
   }
 >
@@ -79,8 +79,8 @@ Use render props for dynamic styling based on component state:
 <Button>
   {({ isHovered, isPressed }) => (
     <>
-      <Icon 
-        icon="gravity-ui:heart" 
+      <Icon
+        icon="gravity-ui:heart"
         className={isPressed ? 'text-red-500' : 'text-neutral-400'}
       />
       <span className={isHovered ? 'underline' : ''}>
@@ -120,11 +120,11 @@ HeroUI uses [BEM methodology](https://getbem.com/) for consistent class naming:
   .button {
     @apply font-semibold uppercase;
   }
-  
+
   .button--primary {
     @apply bg-indigo-600 hover:bg-indigo-700;
   }
-  
+
   /* Add custom variant */
   .button--gradient {
     @apply bg-gradient-to-r from-purple-500 to-pink-500;
@@ -162,7 +162,7 @@ const customButtonVariants = tv({
 });
 
 type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
-interface CustomButtonProps 
+interface CustomButtonProps
   extends Omit<ButtonProps, 'className'>,
   CustomButtonVariants {
   className?: string;
@@ -191,7 +191,7 @@ const StyledButton = styled(Button)`
   border-radius: 8px;
   color: white;
   padding: 12px 24px;
-  
+
   &:hover {
     box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
   }
@@ -209,7 +209,7 @@ const buttonStyles = css`
   border-radius: 8px;
   color: white;
   padding: 12px 24px;
-  
+
   &:hover {
     box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
   }

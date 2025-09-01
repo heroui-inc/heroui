@@ -8,23 +8,23 @@ const items = [
     content:
       "Stay informed about your account activity with real-time notifications. You'll receive instant alerts for important events like transactions, new messages, security updates, and system announcements. ",
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/bell-small.png",
-    title: "Set Up Notifications",
     subtitle: "Receive account activity updates",
+    title: "Set Up Notifications",
   },
   {
     content:
       "Enhance your browsing experience by installing our official browser extension. The extension provides seamless integration with your account, allowing you to receive notifications directly in your browser, quickly access your dashboard, and interact with web3 applications securely. Compatible with Chrome, Firefox, Edge, and Brave browsers.",
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/compass-small.png",
-    title: "Set up Browser Extension",
     subtitle: "Connect you browser to your account",
+    title: "Set up Browser Extension",
   },
   {
     content:
       "Begin your journey into the world of digital collectibles by creating your first NFT. Our intuitive minting process guides you through uploading your artwork, setting metadata, choosing royalty percentages, and deploying to the blockchain. Whether you're an artist, creator, or collector, you'll find all the tools you need to bring your digital assets to life. Your collectibles are stored on IPFS for permanent decentralized storage.",
     iconUrl:
       "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/mint-collective-small.png",
-    title: "Mint Collectible",
     subtitle: "Create your first collectible",
+    title: "Mint Collectible",
   },
 ];
 

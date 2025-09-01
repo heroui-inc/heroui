@@ -15,7 +15,7 @@ export function LinkStyled() {
 
       <Link
         showIcon
-        className={buttonVariants({size: "sm", variant: "secondary", className: "px-3"})}
+        className={buttonVariants({className: "px-3", size: "sm", variant: "secondary"})}
         href="#"
       >
         Button-styled link

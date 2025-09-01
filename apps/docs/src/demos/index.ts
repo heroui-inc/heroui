@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys, sort-keys-fix/sort-keys-fix */
 import type {ComponentType} from "react";
 
 import * as AccordionDemos from "./accordion";

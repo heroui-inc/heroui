@@ -10,13 +10,13 @@ export function Basic() {
         <Tabs.Tab id="analytics">Analytics</Tabs.Tab>
         <Tabs.Tab id="reports">Reports</Tabs.Tab>
       </Tabs.List>
-      <Tabs.Panel id="overview" className="pt-4">
+      <Tabs.Panel className="pt-4" id="overview">
         <p>View your project overview and recent activity.</p>
       </Tabs.Panel>
-      <Tabs.Panel id="analytics" className="pt-4">
+      <Tabs.Panel className="pt-4" id="analytics">
         <p>Track your metrics and analyze performance data.</p>
       </Tabs.Panel>
-      <Tabs.Panel id="reports" className="pt-4">
+      <Tabs.Panel className="pt-4" id="reports">
         <p>Generate and download detailed reports.</p>
       </Tabs.Panel>
     </Tabs>

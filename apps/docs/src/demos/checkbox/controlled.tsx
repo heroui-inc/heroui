@@ -1,7 +1,7 @@
 "use client";
 
-import {useState} from "react";
 import {Checkbox, Label} from "@heroui/react";
+import {useState} from "react";
 
 export function Controlled() {
   const [isSelected, setIsSelected] = useState(false);
@@ -9,16 +9,10 @@ export function Controlled() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Checkbox 
-          id="controlled"
-          isSelected={isSelected}
-          onChange={setIsSelected}
-        >
+        <Checkbox id="controlled" isSelected={isSelected} onChange={setIsSelected}>
           <Checkbox.Indicator />
         </Checkbox>
-        <Label htmlFor="controlled">
-          Controlled checkbox
-        </Label>
+        <Label htmlFor="controlled">Controlled checkbox</Label>
       </div>
       <p className="text-sm text-gray-600">
         Checkbox is: <strong>{isSelected ? "checked" : "unchecked"}</strong>

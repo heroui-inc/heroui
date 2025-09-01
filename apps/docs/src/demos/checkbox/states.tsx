@@ -13,37 +13,41 @@ export function States() {
       </div>
 
       <div className="flex items-center gap-3">
-        <Checkbox id="checked" defaultSelected>
+        <Checkbox defaultSelected id="checked">
           <Checkbox.Indicator />
         </Checkbox>
         <Label htmlFor="checked">Checked</Label>
       </div>
 
       <div className="flex items-center gap-3">
-        <Checkbox id="disabled" isDisabled>
+        <Checkbox isDisabled id="disabled">
           <Checkbox.Indicator />
         </Checkbox>
-        <Label htmlFor="disabled" className="opacity-50">Disabled</Label>
+        <Label className="opacity-50" htmlFor="disabled">
+          Disabled
+        </Label>
       </div>
 
       <div className="flex items-center gap-3">
-        <Checkbox id="disabled-checked" isDisabled defaultSelected>
+        <Checkbox defaultSelected isDisabled id="disabled-checked">
           <Checkbox.Indicator />
         </Checkbox>
-        <Label htmlFor="disabled-checked" className="opacity-50">
+        <Label className="opacity-50" htmlFor="disabled-checked">
           Disabled & Checked
         </Label>
       </div>
 
       <div className="flex items-center gap-3">
-        <Checkbox id="invalid" isInvalid>
+        <Checkbox isInvalid id="invalid">
           <Checkbox.Indicator />
         </Checkbox>
-        <Label htmlFor="invalid" className="text-red-600">Invalid</Label>
+        <Label className="text-red-600" htmlFor="invalid">
+          Invalid
+        </Label>
       </div>
 
       <div className="flex items-center gap-3">
-        <Checkbox id="required" isRequired>
+        <Checkbox isRequired id="required">
           <Checkbox.Indicator />
         </Checkbox>
         <Label htmlFor="required">

@@ -7,18 +7,18 @@ export function Disabled() {
     <Tabs className="w-full max-w-md">
       <Tabs.List aria-label="Tabs with disabled">
         <Tabs.Tab id="active">Active</Tabs.Tab>
-        <Tabs.Tab id="disabled" isDisabled>
+        <Tabs.Tab isDisabled id="disabled">
           Disabled
         </Tabs.Tab>
         <Tabs.Tab id="available">Available</Tabs.Tab>
       </Tabs.List>
-      <Tabs.Panel id="active" className="pt-4">
+      <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
       </Tabs.Panel>
-      <Tabs.Panel id="disabled" className="pt-4">
+      <Tabs.Panel className="pt-4" id="disabled">
         <p>This content cannot be accessed.</p>
       </Tabs.Panel>
-      <Tabs.Panel id="available" className="pt-4">
+      <Tabs.Panel className="pt-4" id="available">
         <p>This tab is also available for selection.</p>
       </Tabs.Panel>
     </Tabs>

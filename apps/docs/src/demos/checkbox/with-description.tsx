@@ -1,6 +1,6 @@
 "use client";
 
-import {Checkbox, Label, Description} from "@heroui/react";
+import {Checkbox, Description, Label} from "@heroui/react";
 
 export function WithDescription() {
   return (
