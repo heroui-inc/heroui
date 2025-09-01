@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export const mapPropsVariants = <T extends Record<string, any>, K extends keyof T>(
   props: T,
   variantKeys?: K[],

@@ -114,7 +114,7 @@ Full TypeScript support with IntelliSense, auto-completion, and compile-time err
 import type { ButtonProps } from '@heroui/react';
 
 // Type-safe props and event handlers
-<Button 
+<Button
   variant="primary"  // Autocomplete: primary | secondary | tertiary | danger | ghost
   size="md"          // Type checked: sm | md | lg
   onPress={(e) => {  // e is properly typed as PressEvent
@@ -130,7 +130,7 @@ interface CustomButtonProps extends Omit<ButtonProps, 'variant'> {
 
 ### 7. Separation of Styles and Logic
 
-Styles (`@heroui/styles`) are separate from logic (`@heroui/react`), enabling use with any framework or vanilla HTML.  
+Styles (`@heroui/styles`) are separate from logic (`@heroui/react`), enabling use with any framework or vanilla HTML.
 
 
 Full Example: [Tailwind Play](https://play.tailwindcss.com/bl5fXT3rxK)
@@ -150,7 +150,7 @@ import { buttonVariants } from '@heroui/react';
   Home
 </Link>
 ```
- 
+
 ### 8. Developer Experience Excellence
 
 Clear APIs, descriptive errors, IntelliSense, AI-friendly markdown docs, and Storybook for visual testing.
@@ -191,7 +191,7 @@ const CTAButton = React.forwardRef<HTMLButtonElement, CTAButtonProps>(
       'secondary-cta': 'secondary',
       'minimal': 'ghost'
     };
-    
+
     return <Button ref={ref} variant={variantMap[intent]} {...props}>
       {children}
     </Button>;

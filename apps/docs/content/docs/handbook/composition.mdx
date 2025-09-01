@@ -9,7 +9,7 @@ icon: layers
 HeroUI uses composition patterns to create flexible, customizable components. This allows you to:
 
 - Change the rendered element or component
-- Compose components together  
+- Compose components together
 - Maintain full control over markup
 
 ## The asChild Prop
@@ -78,10 +78,10 @@ import { Link, buttonVariants } from '@heroui/react';
 
 // Link styled as a tertiary button
 <Link
-  className={buttonVariants({ 
-    size: "md", 
+  className={buttonVariants({
+    size: "md",
     variant: "tertiary",
-    className: "px-3" 
+    className: "px-3"
   })}
   href="https://heroui.com"
   target="_blank"
@@ -91,7 +91,7 @@ import { Link, buttonVariants } from '@heroui/react';
 </Link>
 
 // Native anchor styled as primary button
-<a 
+<a
   className={buttonVariants({ variant: "primary" })}
   href="/dashboard"
 >

@@ -32,15 +32,14 @@
     "access": "public"
   },
   "dependencies": {
-    "tw-animate-css": "1.3.6"
+    "tw-animate-css": "1.3.7"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@tailwindcss/cli": "^4.1.11",
+    "@tailwindcss/cli": "4.1.12",
     "clean-package": "2.2.0",
-    "eslint": "^9.15.0",
     "rimraf": "6.0.1",
-    "tailwindcss": "^4.1.4"
+    "tailwindcss": "4.1.12"
   },
   "peerDependencies": {
     "tailwindcss": ">=4.0.0"

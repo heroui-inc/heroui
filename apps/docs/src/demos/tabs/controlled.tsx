@@ -1,14 +1,14 @@
 "use client";
 
-import {useState} from "react";
 import {Tabs} from "@heroui/react";
+import {useState} from "react";
 
 export function Controlled() {
   const [selectedKey, setSelectedKey] = useState("photos");
 
   return (
     <div className="w-full max-w-md">
-      <p className="text-sm text-gray-600 mb-3">
+      <p className="mb-3 text-sm text-gray-600">
         Selected tab: <strong>{selectedKey}</strong>
       </p>
       <Tabs selectedKey={selectedKey} onSelectionChange={setSelectedKey}>
@@ -17,13 +17,13 @@ export function Controlled() {
           <Tabs.Tab id="music">Music</Tabs.Tab>
           <Tabs.Tab id="videos">Videos</Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel id="photos" className="pt-4">
+        <Tabs.Panel className="pt-4" id="photos">
           <p>Browse your photo collection.</p>
         </Tabs.Panel>
-        <Tabs.Panel id="music" className="pt-4">
+        <Tabs.Panel className="pt-4" id="music">
           <p>Listen to your favorite tracks.</p>
         </Tabs.Panel>
-        <Tabs.Panel id="videos" className="pt-4">
+        <Tabs.Panel className="pt-4" id="videos">
           <p>Watch your video library.</p>
         </Tabs.Panel>
       </Tabs>

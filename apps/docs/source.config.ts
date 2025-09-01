@@ -1,5 +1,5 @@
-import {defineConfig, defineDocs} from "fumadocs-mdx/config";
 import {rehypeCodeDefaultOptions} from "fumadocs-core/mdx-plugins";
+import {defineConfig, defineDocs} from "fumadocs-mdx/config";
 
 export const docs = defineDocs({
   dir: "content/docs",
@@ -11,7 +11,7 @@ export default defineConfig({
     rehypeCodeOptions: {
       ...rehypeCodeDefaultOptions,
       // Preserve meta strings in the output
-      meta: true,
+      // meta: true,
     },
     rehypePlugins: [],
     remarkPlugins: [],

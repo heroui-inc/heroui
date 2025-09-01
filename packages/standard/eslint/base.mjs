@@ -57,6 +57,7 @@ export default defineConfig([
     rules: {
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
       "import/newline-after-import": ["error", {count: 1}],
@@ -195,6 +196,8 @@ export default defineConfig([
       "**/.contentlayer/",
       "**/__snapshots__/**",
       "**/pnpm-lock.yaml",
+      "**/.source/**",
+      "**/next-env.d.ts",
       "!.vscode/**",
       "!scripts/**",
     ],

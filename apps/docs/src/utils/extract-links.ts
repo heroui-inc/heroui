@@ -48,11 +48,11 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`
       : undefined,
     source: links.source ? `${COMPONENT_PATH}/${links.source}` : undefined,
-    styles: links.styles ? `${COMPONENT_STYLES_PATH}/${links.styles}` : undefined,
     storybook: links.storybook
       ? `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`
       : undefined,
-    themes: links.themes ? THEMES_PATH : undefined,
+    styles: links.styles ? `${COMPONENT_STYLES_PATH}/${links.styles}` : undefined,
     tailwind: links.tailwind ? `https://tailwindcss.com/docs/${links.tailwind}` : undefined,
+    themes: links.themes ? THEMES_PATH : undefined,
   };
 }

@@ -8,9 +8,7 @@ export function Basic() {
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>Heads up!</Alert.Title>
-        <Alert.Description>
-          You can add components to your app using the cli.
-        </Alert.Description>
+        <Alert.Description>You can add components to your app using the cli.</Alert.Description>
       </Alert.Content>
     </Alert>
   );

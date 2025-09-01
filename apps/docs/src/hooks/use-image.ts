@@ -102,10 +102,8 @@ export function useImage(props: UseImageProps = {}) {
     imageRef.current.onerror = (error) => {
       flush();
       setStatus("failed");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError?.(error as any);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageRef.current]);
 
   const flush = () => {
@@ -134,7 +132,6 @@ export function useImage(props: UseImageProps = {}) {
     }
 
     return "loading";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading, shouldBypassImageLoad]);
 
   useEffect(() => {

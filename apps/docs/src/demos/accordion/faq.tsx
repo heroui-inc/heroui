@@ -6,44 +6,44 @@ import {Icon} from "@iconify/react";
 export function FAQ() {
   const categories = [
     {
-      title: "General",
       items: [
         {
-          title: "How do I place an order?",
           content:
             "Browse our products, add items to your cart, and proceed to checkout. You'll need to provide shipping and payment information to complete your purchase.",
+          title: "How do I place an order?",
         },
         {
-          title: "Can I modify or cancel my order?",
           content:
             "Yes, you can modify or cancel your order before it's shipped. Once your order is processed, you can't make changes.",
+          title: "Can I modify or cancel my order?",
         },
       ],
+      title: "General",
     },
     {
-      title: "Licensing",
       items: [
         {
-          title: "How do I purchase a license?",
           content:
             "You can purchase a license directly from our website. Select the license type that fits your needs and proceed to checkout.",
+          title: "How do I purchase a license?",
         },
         {
-          title: "What is the difference between a standard and a pro license?",
           content:
             "A standard license is for personal use or small projects, while a pro license includes commercial use rights and priority support.",
+          title: "What is the difference between a standard and a pro license?",
         },
       ],
+      title: "Licensing",
     },
     {
-      title: "Support",
       items: [
         {
-          title: "How do I get support?",
           content:
             "You can reach our support team through the contact form on our website, or email us directly at support@example.com.",
+          title: "How do I get support?",
         },
       ],
+      title: "Support",
     },
   ];
 
