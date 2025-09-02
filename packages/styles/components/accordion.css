@@ -1,6 +1,9 @@
 /* Base accordion styles */
 .accordion {
   @apply w-full;
+
+  /* Performance optimization - contain layout changes */
+  contain: layout style;
 }
 
 /* Accordion elements */
@@ -26,7 +29,7 @@
 
   .accordion__body {
     /* GPU-accelerated opacity and transform for better performance */
-    @apply pointer-events-none transform-none opacity-0 transition-opacity duration-500 will-change-[opacity];
+    @apply pointer-events-none transform-none opacity-0 transition-[opacity] duration-500 will-change-[opacity];
   }
 
   &[aria-hidden="false"] {

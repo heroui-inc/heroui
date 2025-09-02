@@ -13,6 +13,8 @@ HeroUI uses CSS variables for colors that automatically switch between light and
 
 ## How It Works
 
+HeroUI's color system is built on top of Tailwind CSS v4's theme. When you import `@heroui/styles`, it uses Tailwind's built-in color palettes (like `--color-neutral-*`) and maps them to semantic variables.
+
 Add a theme class to your HTML and apply colors to the body:
 
 ```html
@@ -38,7 +40,7 @@ We follow a simple naming pattern:
 
 These four colors stay the same in all themes:
 
-<div className="flex flex-wrap gap-6">
+<div className="flex flex-wrap gap-4 sm:gap-6">
   <ColorSwatch name="White" variable="--white" />
   <ColorSwatch name="Black" variable="--black" />
   <ColorSwatch name="Snow" variable="--snow" />
@@ -61,7 +63,7 @@ These four colors stay the same in all themes:
 
 ### Primary Colors
 
-- **Accent**: Your main brand color (used in primary buttons)
+- **Accent**: Your main brand color (used for primary actions)
 - **Accent Soft**: A lighter version for secondary actions
 
 <ColorPalette
@@ -120,151 +122,177 @@ For alerts, validation, and status messages:
 ```css title="global.css"
 /* Direct CSS variables */
 .my-component {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--accent);
+  color: var(--accent-foreground);
   border: 1px solid var(--border);
 }
 
 /* With @apply and @layer */
 @layer components {
-  @apply bg-accent text-accent-foreground;
+  .button {
+    @apply bg-accent text-accent-foreground;
 
-  &:hover,
-  &[data-hover="true"] {
-    @apply bg-accent-hover;
-  }
+    &:hover,
+    &[data-hover="true"] {
+      @apply bg-accent-hover;
+    }
 
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-accent-hover;
-    transform: scale(0.97);
+    &:active,
+    &[data-pressed="true"] {
+      @apply bg-accent-hover;
+      transform: scale(0.97);
+    }
   }
 }
 ```
 
-## All Color Variables
+## Default Theme
 
-Complete list for the default theme (more themes coming soon):
+The complete theme definition can be found in ([default.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default.css)). This theme automatically switches between light and dark modes based on the `class="dark"` or `data-theme="dark"` attributes.
 
-### Light Mode
+<CollapsibleCode lang="css" code={`@layer base {
+    /* HeroUI Default Theme */
+    :root {
+      color-scheme: light;
 
-<CollapsibleCode lang="css" code={`:root {
-  /* Primitive Colors (constant across themes) */
-  --white: oklch(100% 0 0);
-  --black: oklch(0% 0 0);
-  --snow: oklch(0.9911 0 0);
-  --eclipse: oklch(0.2221 0 0);
+      /* Primitive Colors (Do not change between light and dark) */
+      --white: oklch(100% 0 0);
+      --black: oklch(0% 0 0);
+      --snow: oklch(0.9911 0 0);
+      --eclipse: oklch(0.2221 0 0);
 
-  /* Base Colors */
-  --background: var(--white);
-  --foreground: var(--eclipse);
-  --panel: var(--white);
-  --panel-foreground: var(--foreground);
+      /* Spacing scale */
+      --spacing: 0.25rem;
 
-  /* Radius */
-  --radius: 0.75rem;
+      /* Border */
+      --border-width: 1px;
+      --disabled-opacity: 0.5;
 
-  /* Gray/Neutral Colors */
-  --muted: var(--color-neutral-500);
-  --scrollbar: var(--color-neutral-300);
-  --default: var(--color-white);
-  --default-foreground: var(--color-neutral-600);
+      /* Panel specific radius */
+      --radius-panel: 0.5rem;
+      --radius-panel-inner: calc(var(--radius-panel) * 0.5);
 
-  /* Surface Levels (content hierarchy) */
-  --surface-1: var(--background);           /* Base level */
-  --surface-2: var(--color-neutral-100);    /* Elevated content */
-  --surface-3: var(--color-neutral-200);    /* Highest elevation */
+      /* Typography */
+      --font-size-base: 1rem;
+      --font-size-scale-desktop: 0.875;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
 
-  /* Primary/Accent Colors (main brand color) */
-  --accent: var(--color-neutral-950);       /* Primary color */
-  --accent-foreground: var(--snow);         /* Text on primary */
-  --accent-soft: var(--color-neutral-100);  /* Soft primary variant */
-  --accent-soft-foreground: var(--color-neutral-900);
+      /* Cursor */
+      --cursor-interactive: pointer;
+      --cursor-disabled: not-allowed;
 
-  /* Status Colors */
-  --success: oklch(0.5503 0.1244 153.56);
-  --success-foreground: var(--snow);
+      /* Base Colors */
+      --background: var(--white);
+      --foreground: var(--eclipse);
+      --panel: var(--white);
+      --panel-foreground: var(--foreground);
 
-  --warning: oklch(0.7186 0.1521 64.85);
-  --warning-foreground: var(--eclipse);
+      --radius: 0.75rem;
 
-  --danger: oklch(0.6259 0.1908 29.19);
-  --danger-foreground: var(--snow);
+      --muted: var(--color-neutral-500);
 
-  /* Misc Colors */
-  --border: oklch(0 0 0 / 10%);
-  --focus: oklch(0% 0 0 / 20%);
-  --link: var(--foreground);
+      --scrollbar: var(--color-neutral-300);
 
-  /* Shadow */
-  --shadow-border:
-    0 0px 5px 0px rgba(0, 0, 0, 0.02),
-    0 2px 10px 0px rgba(0, 0, 0, 0.06),
-    0 0px 1px 0px rgba(0, 0, 0, 0.3);
-}`}
-/>
+      --default: var(--color-white);
+      --default-foreground: var(--color-neutral-600);
 
-### Dark Mode
+      --surface-1: var(--background);
+      --surface-2: var(--color-neutral-100);
+      --surface-3: var(--color-neutral-200);
 
-<CollapsibleCode lang="css" code={`.dark,
-[data-theme="dark"] {
-  /* Base Colors */
-  --background: var(--black);
-  --foreground: var(--snow);
-  --panel: var(--eclipse);
+      --accent: var(--color-neutral-950);
+      --accent-foreground: var(--snow);
 
-  /* Gray/Neutral Colors */
-  --muted: var(--color-neutral-400);
-  --scrollbar: var(--color-neutral-800);
-  --default: var(--color-neutral-900);
-  --default-foreground: var(--color-neutral-200);
+      --accent-soft: var(--color-neutral-200);
+      --accent-soft-foreground: var(--color-neutral-900);
 
-  /* Surface Levels */
-  --surface-1: var(--background);
-  --surface-2: var(--color-neutral-900);
-  --surface-3: var(--color-neutral-800);
+      /* Status Colors */
+      --success: oklch(0.5503 0.1244 153.56);
+      --success-foreground: var(--snow);
 
-  /* Primary/Accent Colors */
-  --accent: var(--color-neutral-50);
-  --accent-foreground: var(--eclipse);
-  --accent-soft: var(--color-neutral-800);
-  --accent-soft-foreground: var(--color-neutral-200);
+      --warning: oklch(0.7186 0.1521 64.85);
+      --warning-foreground: var(--eclipse);
 
-  /* Status Colors */
-  --success: oklch(80% 0.1561 154);
-  --success-foreground: var(--eclipse);
+      --danger: oklch(0.6259 0.1908 29.19);
+      --danger-foreground: var(--snow);
 
-  --warning: oklch(85% 0.1414 77.88);
-  --warning-foreground: var(--eclipse);
+      /* Misc Colors */
+      --border: oklch(0 0 0 / 15%);
+      --focus: oklch(0% 0 0 / 20%);
+      --link: var(--foreground);
 
-  --danger: oklch(0.5798 0.1635 30.83);
-  --danger-foreground: var(--snow);
+      /* Shadow */
+      --shadow-border:
+        0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
+        0 0px 1px 0px rgba(0, 0, 0, 0.3);
+    }
 
-  /* Misc Colors */
-  --border: oklch(1 0 0 / 12%);
-  --focus: oklch(100% 0 0 / 50%);
-  --link: var(--foreground);
+    .dark,
+    [data-theme="dark"] {
+      color-scheme: dark;
 
-  /* Shadow */
-  --shadow-border:
-    0 0 0 1px var(--border),
-    0 5px 10px -3px rgba(0, 0, 0, 0.3),
-    0 3px 4px -2px rgba(0, 0, 0, 0.1);
+      /* Base Colors */
+      --background: var(--black);
+      --foreground: var(--snow);
+      --panel: var(--eclipse);
+
+      --muted: var(--color-neutral-400);
+
+      --scrollbar: var(--color-neutral-800);
+
+      --default: var(--color-neutral-900);
+      --default-foreground: var(--color-neutral-200);
+
+      --surface-1: var(--background);
+      --surface-2: var(--color-neutral-900);
+      --surface-3: var(--color-neutral-800);
+
+      --accent: var(--color-neutral-50);
+      --accent-foreground: var(--eclipse);
+
+      --accent-soft: var(--color-neutral-800);
+      --accent-soft-foreground: var(--color-neutral-200);
+
+      /* Status Colors */
+      --success: oklch(80% 0.1561 154);
+      --success-foreground: var(--eclipse);
+
+      --warning: oklch(85% 0.1414 77.88);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.5798 0.1635 30.83);
+      --danger-foreground: var(--snow);
+
+      /* Misc Colors */
+      --border: oklch(1 0 0 / 12%);
+      --focus: oklch(100% 0 0 / 50%);
+      --link: var(--foreground);
+
+      /* Shadow */
+      --shadow-border:
+        0 0 0 1px var(--border), 0 5px 10px -3px rgba(0, 0, 0, 0.3), 0 3px 4px -2px rgba(0, 0, 0, 0.1);
+    }
 }
 `}
 />
+
+> **Note**: Colors like `--color-neutral-*`, `--color-white`, and `--color-black` come from [Tailwind CSS v4's built-in theme](https://tailwindcss.com/docs/colors).
+
 
 ## Customizing Colors
 
 ### Add Your Own Colors
 
 ```css
-:root {
+:root, 
+[data-theme="light"] {
   --info: oklch(0.6 0.15 210);
   --info-foreground: oklch(0.98 0 0);
 }
 
-.dark {
+.dark,
+[data-theme="dark"] {
   --info: oklch(0.7 0.12 210);
   --info-foreground: oklch(0.15 0 0);
 }
@@ -281,6 +309,9 @@ Now you can use it:
 ```tsx
 <div className="bg-info text-info-foreground">Info message</div>
 ```
+
+> **Note**: To learn more about theme variables and how they work in Tailwind CSS v4, see the [Tailwind CSS Theme documentation](https://tailwindcss.com/docs/theme).
+
 
 ### Override Existing Colors
 

@@ -242,7 +242,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 #### 4. **Key Implementation Details**:
 
 1. **Styling with Tailwind Variants**:
-
    - Styles defined in `.styles.ts` files using `tv()` function from `tailwind-variants`
    - **IMPORTANT**: Always import from `tailwind-variants`, never from `@heroui/standard` (which doesn't exist)
    - **CRITICAL**: tailwind-variants already includes `twMerge` functionality, so NEVER manually use `twMerge`
@@ -258,7 +257,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Slot system for complex components
 
 2. **Component Features**:
-
    - Built on React Aria Components for accessibility
    - Use `forwardRef` for all components
    - Display names follow: `HeroUI.ComponentName` or `HeroUI.Component.SubPart`
@@ -275,7 +273,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    ```
 
 4. **Utilities** (`packages/react/src/utils/`):
-
    - `composeTwRenderProps`: Merge Tailwind classes with render props
    - `focusRingClasses`: Consistent focus styling
    - `disabledClasses`: Disabled state styling
@@ -287,14 +284,12 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    **CRITICAL**: React Aria components have different className prop behaviors:
 
    **Components that support render props** (use `composeTwRenderProps`):
-
    - Button, TextField, FieldError, Checkbox, CheckboxGroup
    - Switch, RadioGroup, Radio, Slider (and Track, Thumb, Output)
    - Popover, Tooltip, Tabs (and Tab, TabList, TabPanel)
    - Link, Menu, MenuItem, Accordion (DisclosureGroup)
 
    **Components that ONLY accept string className** (pass className directly):
-
    - Label, Text, Input, TextArea
    - Heading, Dialog, OverlayArrow
 
@@ -323,7 +318,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    **CRITICAL**: HeroUI follows a composition-based approach. Components should reuse existing primitives rather than creating component-specific versions.
 
    **Key Principles**:
-
    - **DO NOT** create component-specific Label, Description, or FieldError components
    - **DO** reuse the existing `Label`, `Description`, and `FieldError` components
    - **DO** use standard HTML composition patterns with `htmlFor`/`id` attributes
@@ -362,7 +356,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    ```
 
    **Components that follow this pattern**:
-
    - Checkbox - uses external Label/Description
    - Radio - uses external Label/Description
    - Switch - uses external Label/Description
@@ -391,10 +384,62 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 
 ## Development Workflow
 
+### Standard Feature Development Process
+
+**IMPORTANT**: When working on any feature or improvement, Claude Code MUST follow this systematic workflow to ensure accuracy and code quality:
+
+1. **Research Phase**:
+   - Thoroughly research the feature/component requirements
+   - Study relevant documentation (React Aria, Tailwind CSS, etc.)
+   - Analyze existing similar implementations in the codebase
+   - Identify all dependencies and integration points
+
+2. **Planning Phase**:
+   - Create a detailed implementation plan with a comprehensive checklist
+   - Break down the task into specific, measurable steps
+   - Include testing and verification steps in the plan
+   - Present the plan for review before proceeding
+
+3. **Review & Correction Phase**:
+   - Review the plan for completeness and accuracy
+   - Make necessary corrections or adjustments
+   - Ensure all edge cases are considered
+   - Confirm the plan aligns with HeroUI patterns and conventions
+
+4. **Execution Phase**:
+   - Start executing the plan step by step
+   - Use the TodoWrite tool to track progress automatically
+   - Mark todos as in_progress when starting a task
+   - Mark todos as completed immediately after finishing each step
+   - Never batch completions - update status in real-time
+
+5. **Verification Phase**:
+   - Manually verify all changes work as expected
+   - Test API calls if backend changes were made
+   - Check frontend rendering and interactions
+   - Run lint and type checks: `pnpm lint && pnpm typecheck`
+   - Ensure all tests pass: `pnpm test`
+
+**Example Workflow**:
+
+```
+User: "Add a new Select component"
+
+Claude:
+1. Research: Studies React Aria Select, existing patterns
+2. Plan: Creates detailed checklist with 15+ items
+3. Review: Presents plan for feedback
+4. Execute: Implements step-by-step with todo updates
+5. Verify: Tests component, runs checks, confirms functionality
+```
+
+This workflow ensures thorough understanding, proper planning, and high-quality implementation with full transparency throughout the process.
+
+### Component Development Workflow
+
 1. **Creating New Components**:
 
    **CRITICAL: Research & Design Phase**:
-
    - **FIRST**: Check the Figma design for the component breakdown (e.g., Menu Container, Menu Item, etc.)
    - **SECOND**: Research the React Aria Components documentation at https://react-spectrum.adobe.com/react-aria/
    - Find the appropriate React Aria primitive (e.g., CheckboxGroup, Dialog, Select, etc.)
@@ -418,7 +463,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    ```
 
    This script will:
-
    - Create all necessary files with proper structure
    - Add the export to `src/components/index.ts`
    - Generate boilerplate following HeroUI patterns
@@ -432,7 +476,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    ```
 
    **Implementation Steps**:
-
    - Study existing HeroUI components (accordion, alert) to understand the compound pattern
    - Use React Aria Components as the foundation for accessibility
    - Transform React Aria's API to match Radix UI patterns:
@@ -492,13 +535,11 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    **IMPORTANT**: The compound component should be exported as the default export.
 
 2. **Testing**:
-
    - Run `pnpm test` for all tests
    - Run `pnpm test <component>` for specific component
    - Ensure all new features have tests
 
 3. **Documentation**:
-
    - Docs live in `apps/docs/content/`
    - Uses MDX format
    - HeroUI components are pre-imported
@@ -596,13 +637,11 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 **IMPORTANT**: When creating components with Figma designs:
 
 1. **Component Breakdown**: Figma designs are already broken down into component pieces (e.g., Menu Container, Menu Item, etc.). Use these as reference for:
-
    - Component structure and naming (adapt to code conventions)
    - Visual styling and spacing
    - Component composition patterns
 
 2. **MCP Server Rules**:
-
    - The Figma Dev Mode MCP Server provides an assets endpoint for images and SVG assets
    - **CRITICAL**: If the Figma MCP Server returns a localhost source for an image or SVG, use that source directly
    - **DO NOT** import or add new icon packages - all assets should come from the Figma payload
@@ -675,22 +714,18 @@ The Grep MCP searches for **literal code patterns**, not keywords. Use actual co
 ### Example Use Cases
 
 1. **Complex Component Patterns**:
-
    - Search: `'compound.*component'` with language=['TypeScript', 'TSX']
    - Find how others implement compound component patterns
 
 2. **Accessibility Implementations**:
-
    - Search: `'AriaProps'` or `'useAriaLabel'`
    - Discover accessibility patterns in React apps
 
 3. **Monorepo Configurations**:
-
    - Search: `'pnpm-workspace.yaml'` with path='pnpm-workspace.yaml'
    - Study monorepo setups similar to HeroUI
 
 4. **Tailwind CSS v4 Patterns**:
-
    - Search: `'@import "tailwindcss"'` with language=['CSS']
    - Find Tailwind CSS v4 usage patterns
 

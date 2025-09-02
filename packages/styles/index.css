@@ -6,5 +6,5 @@
 @import "./base/base.css" layer(base);
 @import "./components/index.css" layer(components);
 @import "./utilities/index.css" layer(utilities);
-@import "./themes/shared.css" layer(theme);
+@import "./themes/theme.css" layer(theme);
 @import "./themes/default.css" layer(theme);

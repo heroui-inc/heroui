@@ -11,7 +11,18 @@ links:
 
 HeroUI uses CSS variables and [BEM](https://getbem.com/) classes for theming. You can customize everything from colors to component styles using standard CSS.
 
-The theming system is built on [Tailwind CSS v4](https://tailwindcss.com/docs/theme), using CSS layers and the `@theme` directive.
+## How It Works
+
+HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss.com/docs/theme)'s theme. When you import `@heroui/styles`, it:
+
+1. Uses Tailwind's built-in color palettes (like `--color-neutral-*`)
+2. Maps them to semantic variables for easier use
+3. Automatically switches between light and dark themes
+4. Uses CSS layers and the `@theme` directive for organization
+
+The system follows a simple naming pattern:
+- Colors without a suffix are backgrounds (e.g., `--accent`)
+- Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
 
 ## Quick Start
 
@@ -45,27 +56,15 @@ Add a theme class to your HTML and apply colors to the body:
 @import "@heroui/styles";
 
 :root {
-  /* Change primary color */
+  /* Override any color variable */
   --accent: oklch(0.7 0.25 260);
-
-  /* Change background */
-  --background: #fafafa;
-  --foreground: #0a0a0a;
-}
-
-.dark [data-theme="dark"] {
-  /* Change primary color */
-  --accent: oklch(0.7 0.25 260);
-
-  /* Change background */
-  --background: #0a0a0a;
-  --foreground: #fafafa;
+  --success: oklch(0.65 0.15 155);
 }
 ```
 
-> **Note**: See [Colors](/docs/handbook/colors) for more information on colors.
+> **Note**: See [Colors](/docs/handbook/colors) for the complete color palette and visual reference.
 
-### Create a Custom Theme
+### Create your own theme
 
 <CollapsibleCode lang="css" code={`/* src/themes/ocean.css */
 @layer base {
@@ -217,6 +216,8 @@ Override any component using BEM classes:
 }
 ```
 
+> **Note**: See [Styling](/docs/handbook/styling) for the complete styling reference.
+
 ### Find Component Classes
 
 Each component docs page lists all available classes:
@@ -250,10 +251,11 @@ Import only what you need:
 /* Base requirements */
 @import "tailwindcss";
 @import "@heroui/styles/base/base.css" layer(base);
+@import "@heroui/styles/themes/theme.css" layer(theme);
 @import "@heroui/styles/themes/default.css" layer(theme);
 
-/* Components (choose one) */
-@import "@heroui/styles/components/index.css" layer(components); /* All */
+/* Components (all components) */
+@import "@heroui/styles/components/index.css" layer(components);
 /* OR specific components */
 @import "@heroui/styles/components/button.css" layer(components);
 @import "@heroui/styles/components/accordion.css" layer(components);
@@ -273,142 +275,52 @@ Build your own styles from scratch:
 }
 ```
 
-## Variables Reference
+## Adding Custom Colors
 
-### Base Variables
-
-These stay constant across all themes:
+You can add your own semantic colors to the theme:
 
 ```css
-:root {
-  /* Colors */
-  --white: oklch(100% 0 0);
-  --black: oklch(0% 0 0);
-  --snow: oklch(0.9911 0 0);
-  --eclipse: oklch(0.2221 0 0);
+/* Define in both light and dark themes */
+:root, 
+[data-theme="light"] {
+  --info: oklch(0.6 0.15 210);
+  --info-foreground: oklch(0.98 0 0);
+}
 
-  /* Layout */
-  --spacing: 0.25rem;
-  --radius: 0.75rem;
-  --border-width: 1px;
+.dark,
+[data-theme="dark"] {
+  --info: oklch(0.7 0.12 210);
+  --info-foreground: oklch(0.15 0 0);
+}
 
-  /* Typography */
-  --font-size-base: 1rem;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-
-  /* States */
-  --disabled-opacity: 0.5; /* Opacity for disabled elements (e.g. buttons)*/
-  --cursor-interactive: pointer; /* Default cursor for interactive elements (e.g. buttons)*/
-  --cursor-disabled: not-allowed; /* Cursor for disabled elements (e.g. buttons)*/
+/* Make the color available to Tailwind */
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 }
 ```
 
-### Theme Variables
+Now use it in your components:
 
-These change between `light` and `dark` themes:
+```tsx
+<div className="bg-info text-info-foreground">Info message</div>
+```
 
-<CollapsibleCode lang="css" code={`/* HeroUI Default Theme */
-  :root {
-    color-scheme: light;
-    /* Base Colors */
-    --background: var(--white);
-    --foreground: var(--eclipse);
-    --panel: var(--white);
-    --panel-foreground: var(--foreground);
+## Variables Reference
 
-    --radius: 0.75rem;
+HeroUI defines three types of variables:
 
-    --muted: var(--color-neutral-500);
+1. **Base Variables**: Non-changing values like `--white`, `--black`, spacing, and typography
+2. **Theme Variables**: Colors that change between light/dark themes
+3. **Calculated Variables**: Automatically generated hover states and size variants
 
-    --scrollbar: var(--color-neutral-300);
-
-    --default: var(--color-white);
-    --default-foreground: var(--color-neutral-600);
-
-    --surface-1: var(--background);
-    --surface-2: var(--color-neutral-100);
-    --surface-3: var(--color-neutral-200);
-
-    --accent: var(--color-neutral-950);
-    --accent-foreground: var(--snow);
-
-    --accent-soft: var(--color-neutral-200);
-    --accent-soft-foreground: var(--color-neutral-900);
-
-    /* Status Colors */
-    --success: oklch(0.5503 0.1244 153.56);
-    --success-foreground: var(--snow);
-
-    --warning: oklch(0.7186 0.1521 64.85);
-    --warning-foreground: var(--eclipse);
-
-    --danger: oklch(0.6259 0.1908 29.19);
-    --danger-foreground: var(--snow);
-
-    /* Misc Colors */
-    --border: oklch(0 0 0 / 15%);
-    --focus: oklch(0% 0 0 / 20%);
-    --link: var(--foreground);
-
-    /* Shadow */
-    --shadow-border:
-      0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
-      0 0px 1px 0px rgba(0, 0, 0, 0.3);
-  }
-
-  .dark,
-  [data-theme="dark"] {
-    color-scheme: dark;
-
-    /* Base Colors */
-    --background: var(--black);
-    --foreground: var(--snow);
-    --panel: var(--eclipse);
-
-    --muted: var(--color-neutral-400);
-
-    --scrollbar: var(--color-neutral-800);
-
-    --default: var(--color-neutral-900);
-    --default-foreground: var(--color-neutral-200);
-
-    --surface-1: var(--background);
-    --surface-2: var(--color-neutral-900);
-    --surface-3: var(--color-neutral-800);
-
-    --accent: var(--color-neutral-50);
-    --accent-foreground: var(--eclipse);
-
-    --accent-soft: var(--color-neutral-800);
-    --accent-soft-foreground: var(--color-neutral-200);
-
-    /* Status Colors */
-    --success: oklch(80% 0.1561 154);
-    --success-foreground: var(--eclipse);
-
-    --warning: oklch(85% 0.1414 77.88);
-    --warning-foreground: var(--eclipse);
-
-    --danger: oklch(0.5798 0.1635 30.83);
-    --danger-foreground: var(--snow);
-
-    /* Misc Colors */
-    --border: oklch(1 0 0 / 12%);
-    --focus: oklch(100% 0 0 / 50%);
-    --link: var(--foreground);
-
-    /* Shadow */
-    --shadow-border:
-      0 0 0 1px var(--border), 0 5px 10px -3px rgba(0, 0, 0, 0.3), 0 3px 4px -2px rgba(0, 0, 0, 0.1);
-  }
-`}
-/>
-
+For a complete reference of all variables and their values, see:
+- [Colors Documentation](/docs/handbook/colors) - Visual color palette and base variables
+- [Default Theme Source](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default.css) - Complete theme implementation
 
 ### Calculated Variables (Tailwind)
 
-We use Tailwind to automatically create calculated variables for hover states and radius variants:
+We use Tailwind's `@theme` directive to automatically create calculated variables for hover states and radius variants:
 <CollapsibleCode lang="css" code={`@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -515,9 +427,13 @@ We use Tailwind to automatically create calculated variables for hover states an
   --radius-panel: var(--radius);
   --radius-panel-inner: calc(var(--radius) * 0.5);
 
-  /* Tranistion Timing Functions  */
+  /* Animation Timing Functions */
   --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);
-  /* --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1); */
+  --ease-soft-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Animations */
+  --animate-spin-fast: spin 0.75s linear infinite;
 }
 `}
 />

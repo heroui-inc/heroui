@@ -2,6 +2,34 @@
   /* HeroUI Default Theme */
   :root {
     color-scheme: light;
+
+    /* Primitive Colors (Do not change between light and dark) */
+    --white: oklch(100% 0 0);
+    --black: oklch(0% 0 0);
+    --snow: oklch(0.9911 0 0);
+    --eclipse: oklch(0.2221 0 0);
+
+    /* Spacing scale */
+    --spacing: 0.25rem;
+
+    /* Border */
+    --border-width: 1px;
+    --disabled-opacity: 0.5;
+
+    /* Panel specific radius */
+    --radius-panel: 0.5rem;
+    --radius-panel-inner: calc(var(--radius-panel) * 0.5);
+
+    /* Typography */
+    --font-size-base: 1rem;
+    --font-size-scale-desktop: 0.875;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+
+    /* Cursor */
+    --cursor-interactive: pointer;
+    --cursor-disabled: not-allowed;
+
     /* Base Colors */
     --background: var(--white);
     --foreground: var(--eclipse);
