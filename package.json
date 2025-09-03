@@ -30,6 +30,7 @@
     "typecheck:docs": "turbo typecheck --filter=@heroui/docs",
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
     "typecheck:storybook": "turbo typecheck --filter=@heroui/storybook",
+    "typegen:docs": "pnpm --filter @heroui/docs typegen",
     "changeset:alpha": "changeset pre enter alpha",
     "changeset:canary": "changeset pre enter canary",
     "changeset:beta": "changeset pre enter beta",

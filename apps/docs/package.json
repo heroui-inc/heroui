@@ -9,13 +9,15 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
-    "postinstall": "fumadocs-mdx"
+    "typegen": "next typegen",
+    "postinstall": "fumadocs-mdx && next typegen"
   },
   "dependencies": {
     "@heroui/react": "workspace:*",
     "@iconify-json/gravity-ui": "1.2.10",
     "@iconify/react": "6.0.1",
     "@types/color-convert": "2.0.4",
+    "@vercel/og": "0.8.5",
     "color-convert": "3.1.0",
     "color2k": "2.0.3",
     "fumadocs-core": "15.6.8",
