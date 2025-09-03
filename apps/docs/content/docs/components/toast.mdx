@@ -134,6 +134,15 @@ You can pass a custom close icon to the toast by passing the `closeIcon` prop an
   files={toastContent.customCloseIcon}
 />
 
+### Custom Close Button in `endContent`
+
+You can also customize a close button in the `endContent` by using the provided `onClose` function inside it.
+
+<CodeDemo
+    title="Custom Close Button in endContent"
+    files={toastContent.customCloseButtonInEndContent}
+/>
+
 ### Global Toast Props
 
 You can pass global toast props to the `ToastProvider` to apply to all toasts.
@@ -237,7 +246,7 @@ Toast has the following slots:
     },
     {
       attribute: "endContent",
-      type: "ReactNode",
+      type: "ReactNode | ((onClose: () => void) => ReactNode)",
       description: "The alert end content", 
       default: "-"
     },

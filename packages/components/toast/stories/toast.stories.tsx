@@ -143,11 +143,7 @@ const WithEndContentTemplate = (args) => {
           addToast({
             title: "Toast Title",
             description: "Toast Description",
-            endContent: (
-              <Button color="warning" size="sm" variant="flat">
-                Upgrade
-              </Button>
-            ),
+            endContent: args.endContent,
             color: "warning",
             variant: "faded",
             ...args,
@@ -444,6 +440,28 @@ export const WithEndContent = {
   render: WithEndContentTemplate,
   args: {
     ...defaultProps,
+    endContent: (
+      <Button color="warning" size="sm" variant="flat">
+        Upgrade
+      </Button>
+    ),
+  },
+};
+
+export const WithEndContentCloseFunction = {
+  render: WithEndContentTemplate,
+  args: {
+    ...defaultProps,
+    endContent: (onClose) => (
+      <>
+        <Button color="warning" size="sm" variant="flat">
+          Upgrade
+        </Button>
+        <Button color="danger" size="sm" variant="flat" onPress={onClose}>
+          Maybe later
+        </Button>
+      </>
+    ),
   },
 };
 
