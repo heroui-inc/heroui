@@ -1,4 +1,4 @@
-import {Button} from "@heroui/react";
+import {Button, addToast} from "@heroui/react";
 
 export default function App() {
   return (
@@ -6,7 +6,7 @@ export default function App() {
       variant="flat"
       onPress={() => {
         addToast({
-          title: "Sucessful!",
+          title: "Successful!",
           endContent: (onClose) => (
             <Button color="danger" size="sm" variant="flat" onPress={onClose}>
               Close
