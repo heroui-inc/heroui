@@ -246,7 +246,7 @@ Toast has the following slots:
     },
     {
       attribute: "endContent",
-      type: "ReactNode",
+      type: "ReactNode | ((onClose: () => void) => ReactNode)",
       description: "The alert end content", 
       default: "-"
     },
