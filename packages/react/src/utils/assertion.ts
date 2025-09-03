@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type Dict<T = any> = Record<string, T>;
 
 export function isArray<T>(value: any): value is Array<T> {
@@ -28,7 +27,7 @@ export function isEmpty(value: any): boolean {
   return false;
 }
 
-type Booleanish = boolean | "true" | "false";
+export type Booleanish = boolean | "true" | "false";
 
 export const dataAttr = (condition: boolean | undefined) =>
   (condition ? "true" : undefined) as Booleanish;

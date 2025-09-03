@@ -1,9 +1,24 @@
+/* Base disclosure styles */
 .disclosure {
   @apply relative;
+
+  /* Performance optimization - contain layout changes */
+  contain: layout style;
+}
+
+.accordion__heading {
+  @apply flex;
 }
 
 .disclosure__trigger {
-  @apply inline-flex items-center justify-center;
+  cursor: var(--cursor-interactive);
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
 
   /* Disabled state */
   &:disabled,
@@ -13,10 +28,30 @@
   }
 }
 
+.disclosure__indicator {
+  @apply ml-auto size-4 shrink-0 text-inherit transition duration-300;
+
+  /* Expanded state for indicator rotation */
+  &[data-expanded="true"] {
+    @apply -rotate-180;
+  }
+}
+
 .disclosure__content {
-  @apply duration-250 h-0 overflow-hidden opacity-0 transition-[height,opacity] ease-out will-change-auto;
+  /* Hybrid approach: max-height for smooth expansion + GPU-accelerated opacity */
+  @apply ease-soft-in-out max-h-0 overflow-hidden transition-[max-height] duration-[300ms] will-change-[max-height];
+
+  /* Inner content with GPU-accelerated opacity and transform */
+  & > * {
+    @apply pointer-events-none transform-none opacity-0 transition-[opacity] duration-500 will-change-[opacity];
+  }
 
   &[aria-hidden="false"] {
-    @apply h-[var(--content-height)] opacity-100;
+    /* Use CSS variable for dynamic height */
+    max-height: var(--content-height, 1000px);
+
+    & > * {
+      @apply pointer-events-auto opacity-100 duration-200;
+    }
   }
 }

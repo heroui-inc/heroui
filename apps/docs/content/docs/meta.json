@@ -25,6 +25,7 @@
     "components/link",
     "components/popover",
     "components/spinner",
-    "components/tooltip"
+    "components/tooltip",
+    "components/disclosure"
   ]
 }

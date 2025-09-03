@@ -23,7 +23,7 @@ export default {
     },
   },
   component: Disclosure,
-  title: "📝 ToDo/Disclosure",
+  title: "✅ Ready/Disclosure",
 } as Meta<typeof Disclosure>;
 
 const defaultArgs: DisclosureProps = {
@@ -37,19 +37,28 @@ const Template = (props: DisclosureProps) => {
   return (
     <div className="w-full max-w-md">
       <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-        <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
-          <span>Toggle content</span>
-          <Icon
-            className="size-4 transition-transform duration-200 data-[state=open]:rotate-180"
-            icon="gravity-ui:chevron-down"
-          />
-        </Disclosure.Trigger>
+        <Disclosure.Heading>
+          <Button slot="trigger" variant="secondary">
+            <Icon icon="gravity-ui:qr-code" />
+            Preview HeroUI Native
+            <Disclosure.Indicator />
+          </Button>
+        </Disclosure.Heading>
         <Disclosure.Content>
-          <div className="mt-4 rounded-lg border p-4">
-            <p className="text-sm">
-              This is the disclosure content. It can contain any React elements including text,
-              images, or other components. The content will animate when expanding and collapsing.
+          <div className="bg-panel rounded-panel mt-4 flex flex-col items-center p-4 text-center">
+            <p className="text-muted text-sm">
+              Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
+            <img
+              alt="Expo Go QR Code"
+              className="max-w-54 aspect-square w-full object-cover"
+              src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+            />
+            <p className="text-muted text-sm">Expo must be installed on your device.</p>
+            <Button className="mt-4" variant="primary">
+              <Icon icon="tabler:brand-apple-filled" />
+              Download on App Store
+            </Button>
           </div>
         </Disclosure.Content>
       </Disclosure>

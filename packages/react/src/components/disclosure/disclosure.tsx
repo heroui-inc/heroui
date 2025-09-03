@@ -1,6 +1,7 @@
 "use client";
 
 import type {DisclosureVariants} from "./disclosure.styles";
+import type {Booleanish} from "../../utils/assertion";
 import type {CSSProperties} from "react";
 import type {
   ButtonProps,
@@ -9,18 +10,25 @@ import type {
 } from "react-aria-components";
 
 import React, {createContext, useContext, useRef} from "react";
-import {Button, DisclosurePanel, Disclosure as DisclosurePrimitive} from "react-aria-components";
+import {
+  Button,
+  Heading as DisclosureHeadingPrimitive,
+  DisclosurePanel,
+  Disclosure as DisclosurePrimitive,
+  DisclosureStateContext,
+} from "react-aria-components";
 
-import {useMeasuredHeight} from "../../hooks";
+import {useMeasuredHeight, usePreventHidden} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
+import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {useMergeRef} from "../../utils/mergeRef";
+import {IconChevronDown} from "../icons";
 
 import {disclosureVariants} from "./disclosure.styles";
 
 const DisclosureContext = createContext<{
   slots?: ReturnType<typeof disclosureVariants>;
-  isExpanded?: boolean;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
@@ -30,7 +38,7 @@ const DisclosureContext = createContext<{
 interface DisclosureProps extends DisclosurePrimitiveProps, DisclosureVariants {}
 
 const Disclosure = React.forwardRef<React.ElementRef<typeof DisclosurePrimitive>, DisclosureProps>(
-  ({children, className, isExpanded, onExpandedChange, ...originalProps}, ref) => {
+  ({children, className, ...originalProps}, ref) => {
     const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
 
     const slots = React.useMemo(
@@ -39,12 +47,10 @@ const Disclosure = React.forwardRef<React.ElementRef<typeof DisclosurePrimitive>
     );
 
     return (
-      <DisclosureContext.Provider value={{slots, isExpanded}}>
+      <DisclosureContext.Provider value={{slots}}>
         <DisclosurePrimitive
           ref={ref}
           data-disclosure
-          isExpanded={isExpanded}
-          onExpandedChange={onExpandedChange}
           {...props}
           className={composeTwRenderProps(className, slots.base())}
         >
@@ -56,6 +62,30 @@ const Disclosure = React.forwardRef<React.ElementRef<typeof DisclosurePrimitive>
 );
 
 Disclosure.displayName = "HeroUI.Disclosure";
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface DisclosureHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  className?: string;
+}
+
+const DisclosureHeading = React.forwardRef<
+  React.ElementRef<typeof DisclosureHeadingPrimitive>,
+  DisclosureHeadingProps
+>(({className, ...props}, ref) => {
+  const {slots} = useContext(DisclosureContext);
+
+  return (
+    <DisclosureHeadingPrimitive
+      ref={ref}
+      data-disclosure-heading
+      className={slots?.heading({className})}
+      {...props}
+    />
+  );
+});
+
+DisclosureHeading.displayName = "HeroUI.DisclosureHeading";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -96,6 +126,8 @@ const DisclosureContent = React.forwardRef<
   const {height: contentHeight} = useMeasuredHeight(contentRef);
   const mergedRef = useMergeRef(contentRef, ref);
 
+  usePreventHidden(contentRef);
+
   return (
     <DisclosurePanel
       ref={mergedRef}
@@ -117,11 +149,61 @@ DisclosureContent.displayName = "HeroUI.DisclosureContent";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundDisclosure = Object.assign(Disclosure, {
-  Trigger: DisclosureTrigger,
-  Content: DisclosureContent,
+interface DisclosureIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
+  className?: string;
+}
+
+const DisclosureIndicator = React.forwardRef<
+  React.ElementRef<typeof IconChevronDown>,
+  DisclosureIndicatorProps
+>(({children, className, ...props}, ref) => {
+  const {isExpanded} = useContext(DisclosureStateContext)!;
+  const {slots} = useContext(DisclosureContext);
+
+  if (children && React.isValidElement(children)) {
+    return React.cloneElement(
+      children as React.ReactElement<{
+        className?: string;
+        "data-disclosure-indicator"?: boolean;
+        "data-expanded"?: Booleanish;
+      }>,
+      {
+        ...props,
+        "data-expanded": dataAttr(isExpanded),
+        className: slots?.indicator({className}),
+        "data-disclosure-indicator": true,
+      },
+    );
+  }
+
+  return (
+    <IconChevronDown
+      ref={ref}
+      data-disclosure-indicator
+      className={slots?.indicator({className})}
+      data-expanded={dataAttr(isExpanded)}
+      {...props}
+    />
+  );
 });
 
-export type {DisclosureProps, DisclosureTriggerProps, DisclosureContentProps};
+DisclosureIndicator.displayName = "HeroUI.DisclosureIndicator";
+
+/* -----------------------------------------------------------------------------------------------*/
+
+const CompoundDisclosure = Object.assign(Disclosure, {
+  Heading: DisclosureHeading,
+  Trigger: DisclosureTrigger,
+  Content: DisclosureContent,
+  Indicator: DisclosureIndicator,
+});
+
+export type {
+  DisclosureProps,
+  DisclosureContentProps,
+  DisclosureHeadingProps,
+  DisclosureTriggerProps,
+  DisclosureIndicatorProps,
+};
 
 export default CompoundDisclosure;

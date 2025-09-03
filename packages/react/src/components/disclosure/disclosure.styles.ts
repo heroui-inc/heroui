@@ -6,8 +6,10 @@ import {tv} from "tailwind-variants";
 export const disclosureVariants = tv({
   slots: {
     base: "disclosure",
+    heading: "disclosure__heading",
     trigger: "disclosure__trigger",
     content: "disclosure__content",
+    indicator: "disclosure__indicator",
   },
   variants: {},
   defaultVariants: {},

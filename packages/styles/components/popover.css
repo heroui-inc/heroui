@@ -71,9 +71,17 @@
 .popover__trigger {
   cursor: var(--cursor-interactive);
 
+  /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    cursor: var(--cursor-disabled);
   }
 }

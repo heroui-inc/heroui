@@ -44,11 +44,11 @@
 
 .accordion__trigger {
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[100ms] ease-out;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[25ms] ease-out;
 
   &:hover,
   &[data-hover="true"] {
-    @apply bg-default;
+    background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
   }
 
   &:focus-visible,

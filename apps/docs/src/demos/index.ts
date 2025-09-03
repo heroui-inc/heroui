@@ -7,6 +7,7 @@ import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
+import * as DisclosureDemos from "./disclosure";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
 import * as SpinnerDemos from "./spinner";
@@ -178,6 +179,11 @@ export const demos: Record<string, DemoItem> = {
   "chip-statuses": {
     component: ChipDemos.Statuses,
     file: "chip/statuses.tsx",
+  },
+  // Disclosure demos
+  "disclosure-basic": {
+    component: DisclosureDemos.Basic,
+    file: "disclosure/basic.tsx",
   },
   // Link demos
   "link-basic": {
