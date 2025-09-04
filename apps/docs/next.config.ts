@@ -2,6 +2,9 @@ import type {NextConfig} from "next";
 
 import {createMDX} from "fumadocs-mdx/next";
 
+// validate environment variables
+import "./env";
+
 const withMDX = createMDX();
 
 const config: NextConfig = {

@@ -1,15 +1,14 @@
-export type SiteConfig = typeof siteConfig;
-
-const baseUrl = "https://alpha.heroui.com";
-const cdnUrl = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com";
+import {__BASE_URL__, __CDN_URL__} from "@/utils/env";
 
 export const siteConfig = {
-  author: {
-    email: "support@heroui.com",
-    name: "HeroUI Chat",
-  },
-  cdnUrl,
-  creator: "@hero_ui",
+  authors: [
+    {
+      name: "hero_ui",
+      url: "https://x.com/hero_ui",
+    },
+  ],
+  cdnUrl: __CDN_URL__,
+  creator: "heroui-inc",
   description:
     "Beautiful components that stay maintained, so no more copy-pasting outdated code. Fully customizable and always up-to-date to help you ship faster.",
   githubRawUrl:
@@ -20,7 +19,9 @@ export const siteConfig = {
     twitter: "https://x.com/hero_ui",
   },
   name: "HeroUI (Previously NextUI) - The design system you don't have to build",
-  ogImage: `${baseUrl}/twitter-card.png`,
-  siteUrl: baseUrl,
+  ogImage: `/images/twitter-card.png`,
+  siteUrl: __BASE_URL__,
   supportEmail: "support@heroui.com",
 };
+
+export type SiteConfig = typeof siteConfig;

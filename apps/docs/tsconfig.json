@@ -5,9 +5,10 @@
     "baseUrl": ".",
     "paths": {
       "@/.source": ["./.source/index.ts"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~env": ["./env.ts"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "env.ts", "next-env.d.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

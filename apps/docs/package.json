@@ -9,15 +9,19 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
+    "typegen": "next typegen",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@heroui/react": "workspace:*",
     "@iconify-json/gravity-ui": "1.2.10",
     "@iconify/react": "6.0.1",
+    "@t3-oss/env-nextjs": "0.13.8",
     "@types/color-convert": "2.0.4",
+    "@vercel/og": "0.8.5",
     "color-convert": "3.1.0",
     "color2k": "2.0.3",
+    "feed": "5.1.0",
     "fumadocs-core": "15.6.8",
     "fumadocs-mdx": "11.7.3",
     "fumadocs-typescript": "4.0.6",
@@ -38,7 +42,8 @@
     "shiki": "3.12.1",
     "tailwind-merge": "3.3.1",
     "tailwind-variants": "3.1.0",
-    "ts-morph": "26.0.0"
+    "ts-morph": "26.0.0",
+    "zod": "4.1.5"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
