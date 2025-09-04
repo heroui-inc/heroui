@@ -1,6 +1,10 @@
+import {__DEV__} from "@/utils/env";
+
 export type SiteConfig = typeof siteConfig;
 
-const baseUrl = "https://alpha.heroui.com";
+// TODO: Load from environment variables
+const baseUrl = __DEV__ ? "http://localhost:3000" : "https://alpha.heroui.com";
+
 const cdnUrl = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com";
 
 export const siteConfig = {

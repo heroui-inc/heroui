@@ -34,6 +34,7 @@ const icons = {
   ...customIcons,
 };
 
+// TODO: Hydration error
 const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...props}, ref) => {
   // Check if it's a gravity-ui icon (no prefix or explicitly in gravity icons)
   const isGravityIcon =
