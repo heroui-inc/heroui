@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen",
-    "postinstall": "fumadocs-mdx && next typegen"
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@heroui/react": "workspace:*",

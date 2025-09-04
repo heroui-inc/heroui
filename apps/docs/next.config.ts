@@ -2,9 +2,6 @@ import type {NextConfig} from "next";
 
 import {createMDX} from "fumadocs-mdx/next";
 
-// TODO: should be removed
-console.log(process.env);
-
 // validate environment variables
 import "./env";
 
