@@ -7,7 +7,7 @@ import path from "path";
 import {notFound} from "next/navigation";
 import {ImageResponse} from "next/og";
 
-import {HeroUIPlainLogo} from "@/components/heroui-plain-logo";
+import {HeroUILogo} from "@/components/heroui-logo";
 import {source} from "@/lib/source";
 
 interface GenerateProps {
@@ -75,15 +75,6 @@ export function generate({...props}: GenerateProps): ReactElement {
         }}
       >
         {props.icon}
-        <p
-          style={{
-            fontSize: "52px",
-            fontWeight: 600,
-          }}
-        >
-          {props.site}
-          HeroUI
-        </p>
       </div>
     </div>
   );
@@ -114,7 +105,7 @@ export const GET = async (_req: Request, {params}: RouteContext<"/og/[...slug]">
         weight: 600,
       },
     ],
-    icon: <HeroUIPlainLogo size={58} />,
+    icon: <HeroUILogo size={58} />,
     title: page.data.title,
   });
 };
