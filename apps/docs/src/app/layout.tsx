@@ -5,7 +5,7 @@ import {RootProvider} from "fumadocs-ui/provider";
 import {Inter} from "next/font/google";
 
 import {siteConfig} from "@/config/site";
-import {getBaseURL} from "@/utils/env";
+import {__BASE_URL__} from "@/utils/env";
 
 import "./global.css";
 
@@ -25,6 +25,7 @@ export default function Layout({children}: {children: ReactNode}) {
 
 export const metadata: Metadata = {
   alternates: {
+    canonical: "/",
     types: {
       "application/rss+xml": [
         {
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
   },
   authors: siteConfig.authors,
   creator: siteConfig.creator,
+  description: siteConfig.description,
   icons: [
     {
       media: "(prefers-color-scheme: light)",
@@ -70,7 +72,22 @@ export const metadata: Metadata = {
     "UI Framework",
     "UI Design System",
   ],
-  metadataBase: getBaseURL(),
+  metadataBase: __BASE_URL__,
+  openGraph: {
+    description: siteConfig.description,
+    images: [
+      {
+        alt: siteConfig.name,
+        height: 630,
+        url: siteConfig.ogImage,
+        width: 1200,
+      },
+    ],
+    locale: "en_US",
+    siteName: siteConfig.name,
+    type: "website",
+    url: "/",
+  },
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,

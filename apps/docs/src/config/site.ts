@@ -1,11 +1,4 @@
-import {__DEV__} from "@/utils/env";
-
-export type SiteConfig = typeof siteConfig;
-
-// TODO: Load from environment variables
-const baseUrl = __DEV__ ? "http://localhost:3000" : "https://alpha.heroui.com";
-
-const cdnUrl = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com";
+import {__BASE_URL__, __CDN_URL__} from "@/utils/env";
 
 export const siteConfig = {
   authors: [
@@ -14,7 +7,7 @@ export const siteConfig = {
       url: "https://x.com/hero_ui",
     },
   ],
-  cdnUrl,
+  cdnUrl: __CDN_URL__,
   creator: "heroui-inc",
   description:
     "Beautiful components that stay maintained, so no more copy-pasting outdated code. Fully customizable and always up-to-date to help you ship faster.",
@@ -26,7 +19,9 @@ export const siteConfig = {
     twitter: "https://x.com/hero_ui",
   },
   name: "HeroUI (Previously NextUI) - The design system you don't have to build",
-  ogImage: `${baseUrl}/twitter-card.png`,
-  siteUrl: baseUrl,
+  ogImage: `/open-graph.png`,
+  siteUrl: __BASE_URL__,
   supportEmail: "support@heroui.com",
 };
+
+export type SiteConfig = typeof siteConfig;

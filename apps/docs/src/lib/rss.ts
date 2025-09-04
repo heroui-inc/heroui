@@ -9,9 +9,9 @@ export const getRSS = () => {
   const feed = new Feed({
     copyright: `${currentYear} NextUI Inc. All rights reserved.`,
     description: siteConfig.description,
-    favicon: `${siteConfig.siteUrl}/favicon.svg`,
+    favicon: `${siteConfig.siteUrl}/favicon-dark.svg`,
     id: siteConfig.siteUrl,
-    image: siteConfig.ogImage,
+    image: `${siteConfig.siteUrl}${siteConfig.ogImage}`,
     language: "en-US",
     link: siteConfig.siteUrl,
     title: siteConfig.name,

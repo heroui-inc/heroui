@@ -1,31 +1,39 @@
 import {env} from "~env";
 
-export const __PROD__ = env.NEXT_PUBLIC_APP_ENV === "production";
 export const __DEV__ = env.NEXT_PUBLIC_APP_ENV === "development";
-export const __PREVIEW__ = env.NEXT_PUBLIC_IS_PREVIEW;
+export const __PREVIEW__ = env.NEXT_PUBLIC_APP_ENV === "preview";
+export const __PROD__ = env.NEXT_PUBLIC_APP_ENV === "production";
 
-export const getBaseURL = (): URL => {
-  // Default to localhost
+const getBaseURL = (): URL => {
+  const [vercelURL, branchURL, productionURL] = env.NEXT_PUBLIC_BASE_DOMAIN_NAME?.split(",") ?? [];
+
+  // default
   let host = "localhost:3000";
 
-  // Dev on vercel
-  if (env.VERCEL_ENV === "development" && env.VERCEL_URL && !__DEV__) {
-    host = env.VERCEL_URL;
+  // dev
+  if (__DEV__ && vercelURL) {
+    host = vercelURL;
   }
 
-  // Preview on vercel
-  if (env.VERCEL_ENV === "preview" && env.VERCEL_URL && !__DEV__) {
-    host = env.VERCEL_URL;
+  // preview
+  if (__PREVIEW__) {
+    // vercel url takes precedence
+    if (vercelURL) host = vercelURL;
+    // branch url will override if present
+    if (branchURL) host = branchURL;
   }
 
-  // Production on vercel
-  if (env.VERCEL_ENV === "production" && env.VERCEL_PROJECT_PRODUCTION_URL && !__PROD__) {
-    host = env.VERCEL_PROJECT_PRODUCTION_URL;
+  // production on vercel
+  if (__PROD__ && productionURL) {
+    host = productionURL;
   }
 
-  // Add protocol
+  // protocol
   const protocol = host.startsWith("localhost") ? "http" : "https";
 
   // Local build/run stays localhost: __DEV__, __PROD__, __PREVIEW__
   return new URL(`${protocol}://${host}`);
 };
+
+export const __BASE_URL__ = getBaseURL();
+export const __CDN_URL__ = env.NEXT_PUBLIC_CDN_URL;
