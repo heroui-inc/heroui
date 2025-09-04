@@ -2,7 +2,6 @@
 
 import type {AccordionVariants} from "./accordion.styles";
 import type {Booleanish} from "../../utils/assertion";
-import type {CSSProperties} from "react";
 import type {
   ButtonProps,
   DisclosureGroupProps,
@@ -20,11 +19,10 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {useMeasuredHeight, usePreventHidden} from "../../hooks";
-import {mapPropsVariants, objectToDeps} from "../../utils";
+import {usePreventHidden} from "../../hooks";
+import {mapPropsVariants, objectToDeps, useMergeRef} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
-import {useMergeRef} from "../../utils/mergeRef";
 import {IconChevronDown} from "../icons";
 
 import {accordionVariants} from "./accordion.styles";
@@ -180,18 +178,19 @@ AccordionTrigger.displayName = "HeroUI.AccordionTrigger";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
-}
+interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const AccordionBody = React.forwardRef<
-  React.ElementRef<typeof DisclosurePanel>,
-  AccordionBodyProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(AccordionContext);
+const AccordionBody = React.forwardRef<React.ElementRef<"div">, AccordionBodyProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots} = useContext(AccordionContext);
 
-  return <div ref={ref} data-accordion-body className={slots?.body({className})} {...props} />;
-});
+    return (
+      <div ref={ref} data-accordion-body className={slots?.body({})} {...props}>
+        <div className={slots?.bodyInner({className})}>{children}</div>
+      </div>
+    );
+  },
+);
 
 AccordionBody.displayName = "HeroUI.AccordionBody";
 
@@ -206,13 +205,12 @@ const AccordionPanel = React.forwardRef<
   AccordionPanelProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
-  const accordionPanelRef = useRef<HTMLDivElement>(null);
-  const {height} = useMeasuredHeight(accordionPanelRef);
-  const mergedRef = useMergeRef(accordionPanelRef, ref);
   const {isExpanded} = useContext(DisclosureStateContext)!;
+  const contentRef = useRef<HTMLDivElement>(null);
+  const mergedRef = useMergeRef(contentRef, ref);
 
   // Prevent React Aria from setting hidden="until-found" which breaks animations
-  usePreventHidden(accordionPanelRef);
+  usePreventHidden(contentRef);
 
   return (
     <DisclosurePanel
@@ -221,11 +219,6 @@ const AccordionPanel = React.forwardRef<
       data-accordion-panel
       className={composeTwRenderProps(className, slots?.panel())}
       data-expanded={dataAttr(isExpanded)}
-      style={
-        {
-          "--disclosure-content-height": `${height}px`,
-        } as CSSProperties
-      }
     >
       {children}
     </DisclosurePanel>

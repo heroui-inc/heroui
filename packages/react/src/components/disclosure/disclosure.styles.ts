@@ -10,6 +10,8 @@ export const disclosureVariants = tv({
     trigger: "disclosure__trigger",
     content: "disclosure__content",
     indicator: "disclosure__indicator",
+    body: "disclosure__body",
+    bodyInner: "disclosure__body-inner",
   },
   variants: {},
   defaultVariants: {},

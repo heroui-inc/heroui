@@ -5,5 +5,6 @@ export type {
   DisclosureContentProps,
   DisclosureHeadingProps,
   DisclosureIndicatorProps,
+  DisclosureBodyContentProps,
 } from "./disclosure";
 export {disclosureVariants, type DisclosureVariants} from "./disclosure.styles";

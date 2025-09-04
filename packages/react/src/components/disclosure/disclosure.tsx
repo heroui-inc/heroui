@@ -2,7 +2,6 @@
 
 import type {DisclosureVariants} from "./disclosure.styles";
 import type {Booleanish} from "../../utils/assertion";
-import type {CSSProperties} from "react";
 import type {
   ButtonProps,
   DisclosurePanelProps,
@@ -18,7 +17,7 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {useMeasuredHeight, usePreventHidden} from "../../hooks";
+import {usePreventHidden} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
@@ -123,7 +122,6 @@ const DisclosureContent = React.forwardRef<
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(DisclosureContext);
   const contentRef = useRef<HTMLDivElement>(null);
-  const {height} = useMeasuredHeight(contentRef);
   const mergedRef = useMergeRef(contentRef, ref);
   const {isExpanded} = useContext(DisclosureStateContext)!;
 
@@ -137,11 +135,6 @@ const DisclosureContent = React.forwardRef<
       className={composeTwRenderProps(className, slots?.content())}
       data-expanded={dataAttr(isExpanded)}
       {...props}
-      style={
-        {
-          "--disclosure-content-height": `${height}px`,
-        } as CSSProperties
-      }
     >
       {children}
     </DisclosurePanel>
@@ -149,6 +142,24 @@ const DisclosureContent = React.forwardRef<
 });
 
 DisclosureContent.displayName = "HeroUI.DisclosureContent";
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface DisclosureBodyContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const DisclosureBody = React.forwardRef<React.ElementRef<"div">, DisclosureBodyContentProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots} = useContext(DisclosureContext);
+
+    return (
+      <div ref={ref} data-disclosure-body className={slots?.body({})} {...props}>
+        <div className={slots?.bodyInner({className})}>{children}</div>
+      </div>
+    );
+  },
+);
+
+DisclosureBody.displayName = "HeroUI.DisclosureBody";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -198,6 +209,7 @@ const CompoundDisclosure = Object.assign(Disclosure, {
   Heading: DisclosureHeading,
   Trigger: DisclosureTrigger,
   Content: DisclosureContent,
+  Body: DisclosureBody,
   Indicator: DisclosureIndicator,
 });
 
@@ -207,6 +219,7 @@ export type {
   DisclosureHeadingProps,
   DisclosureTriggerProps,
   DisclosureIndicatorProps,
+  DisclosureBodyContentProps,
 };
 
 export default CompoundDisclosure;

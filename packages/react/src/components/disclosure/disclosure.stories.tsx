@@ -45,7 +45,7 @@ const Template = (props: DisclosureProps) => {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <div className="bg-panel rounded-panel mt-4 flex flex-col items-center p-4 text-center">
+          <Disclosure.Body className="bg-panel rounded-panel mt-4 flex flex-col items-center p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
@@ -59,7 +59,7 @@ const Template = (props: DisclosureProps) => {
               <Icon icon="tabler:brand-apple-filled" />
               Download on App Store
             </Button>
-          </div>
+          </Disclosure.Body>
         </Disclosure.Content>
       </Disclosure>
     </div>
@@ -88,12 +88,12 @@ const ControlledTemplate = (props: DisclosureProps) => {
           />
         </Disclosure.Trigger>
         <Disclosure.Content>
-          <div className="mt-4 rounded-lg border p-4">
+          <Disclosure.Body className="mt-4 rounded-lg border p-4">
             <p className="text-sm">
               This disclosure is controlled from outside. You can toggle it using the button above
               or by clicking the trigger.
             </p>
-          </div>
+          </Disclosure.Body>
         </Disclosure.Content>
       </Disclosure>
     </div>

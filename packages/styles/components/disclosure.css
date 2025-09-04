@@ -37,20 +37,18 @@
   }
 }
 
+/* Performant Grid-based animation wrapper */
 .disclosure__content {
-  /* Hybrid approach: max-height for smooth expansion + GPU-accelerated opacity */
-  @apply ease-soft-in-out h-0 overflow-hidden transition-[height] duration-300 will-change-[height];
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms var(--ease-soft-in-out);
 
-  /* Inner content with GPU-accelerated opacity and transform */
-  & > * {
-    @apply pointer-events-none opacity-0 transition-[opacity] duration-300 ease-in will-change-[opacity];
+  .disclosure__body {
+    overflow: hidden;
   }
 
+  /* Expanded state */
   &[data-expanded="true"] {
-    @apply h-[var(--disclosure-content-height)];
-
-    & > * {
-      @apply pointer-events-auto opacity-100;
-    }
+    grid-template-rows: 1fr;
   }
 }

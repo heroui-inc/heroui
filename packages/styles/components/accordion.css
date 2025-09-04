@@ -8,6 +8,10 @@
 
 /* Accordion elements */
 .accordion__body {
+  /* Body is now just a wrapper for the grid animation */
+}
+
+.accordion__body-inner {
   @apply text-muted px-4 pb-4 pt-0;
 }
 
@@ -55,19 +59,19 @@
   }
 }
 
+/* Performant Grid-based animation wrapper */
 .accordion__panel {
-  @apply ease-soft-in-out h-0 overflow-hidden transition-[height] duration-300 will-change-[height];
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms var(--ease-soft-in-out);
 
   .accordion__body {
-    @apply pointer-events-none opacity-0 transition-[opacity] duration-300 ease-in will-change-[opacity];
+    overflow: hidden;
   }
 
+  /* Expanded state */
   &[data-expanded="true"] {
-    @apply h-[var(--disclosure-content-height)];
-
-    .accordion__body {
-      @apply pointer-events-auto opacity-100;
-    }
+    grid-template-rows: 1fr;
   }
 }
 
