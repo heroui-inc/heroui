@@ -19,7 +19,7 @@ export const siteConfig = {
     twitter: "https://x.com/hero_ui",
   },
   name: "HeroUI (Previously NextUI) - The design system you don't have to build",
-  ogImage: `/open-graph.png`,
+  ogImage: `/images/twitter-card.png`,
   siteUrl: __BASE_URL__,
   supportEmail: "support@heroui.com",
 };

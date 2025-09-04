@@ -78,9 +78,7 @@ export const metadata: Metadata = {
     images: [
       {
         alt: siteConfig.name,
-        height: 630,
         url: siteConfig.ogImage,
-        width: 1200,
       },
     ],
     locale: "en_US",
