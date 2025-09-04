@@ -110,4 +110,33 @@ describe("Drawer", () => {
     fireEvent.keyDown(drawer, {key: "Escape"});
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it("should apply right offset equal to scrollbar width", () => {
+    Object.defineProperty(window, "innerWidth", {value: 2000});
+    Object.defineProperty(document.documentElement, "clientWidth", {value: 1980});
+
+    const {getByRole} = render(
+      <Drawer isOpen placement="right">
+        <DrawerContent>content</DrawerContent>
+      </Drawer>,
+    );
+    const drawer = getByRole("dialog");
+
+    expect(drawer).toHaveStyle({right: "20px"});
+  });
+
+  it("should not apply right offset equal to scrollbar width when placement is left", () => {
+    Object.defineProperty(window, "innerWidth", {value: 2000});
+    Object.defineProperty(document.documentElement, "clientWidth", {value: 1980});
+
+    const {getByRole} = render(
+      <Drawer isOpen placement="left">
+        <DrawerContent>content</DrawerContent>
+      </Drawer>,
+    );
+
+    const drawer = getByRole("dialog");
+
+    expect(drawer).not.toHaveStyle({right: "20px"});
+  });
 });
