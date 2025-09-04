@@ -1,10 +1,11 @@
-import type {Metadata} from "next";
+import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
 
 import {RootProvider} from "fumadocs-ui/provider";
 import {Inter} from "next/font/google";
 
 import {siteConfig} from "@/config/site";
+import {getBaseURL} from "@/utils/env";
 
 import "./global.css";
 
@@ -23,6 +24,8 @@ export default function Layout({children}: {children: ReactNode}) {
 }
 
 export const metadata: Metadata = {
+  authors: siteConfig.author,
+  creator: siteConfig.creator,
   icons: [
     {
       media: "(prefers-color-scheme: light)",
@@ -57,8 +60,16 @@ export const metadata: Metadata = {
     "UI Framework",
     "UI Design System",
   ],
+  metadataBase: getBaseURL(),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
+};
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  width: "device-width",
 };
