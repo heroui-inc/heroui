@@ -24,7 +24,17 @@ export default function Layout({children}: {children: ReactNode}) {
 }
 
 export const metadata: Metadata = {
-  authors: siteConfig.author,
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        {
+          title: "HeroUI RSS Feed",
+          url: "/rss.xml",
+        },
+      ],
+    },
+  },
+  authors: siteConfig.authors,
   creator: siteConfig.creator,
   icons: [
     {
@@ -65,11 +75,22 @@ export const metadata: Metadata = {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@hero_ui",
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    title: siteConfig.name,
+  },
 };
 
 export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
+  themeColor: [
+    {color: "#f4f4f5", media: "(prefers-color-scheme: light)"},
+    {color: "#111111", media: "(prefers-color-scheme: dark)"},
+  ],
   userScalable: false,
   width: "device-width",
 };

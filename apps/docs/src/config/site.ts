@@ -8,12 +8,14 @@ const baseUrl = __DEV__ ? "http://localhost:3000" : "https://alpha.heroui.com";
 const cdnUrl = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com";
 
 export const siteConfig = {
-  author: {
-    email: "support@heroui.com",
-    name: "HeroUI Chat",
-  },
+  authors: [
+    {
+      name: "hero_ui",
+      url: "https://x.com/hero_ui",
+    },
+  ],
   cdnUrl,
-  creator: "@hero_ui",
+  creator: "heroui-inc",
   description:
     "Beautiful components that stay maintained, so no more copy-pasting outdated code. Fully customizable and always up-to-date to help you ship faster.",
   githubRawUrl:
