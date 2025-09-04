@@ -23,6 +23,7 @@ import {tabsVariants} from "./tabs.styles";
 const TabsContext = createContext<{
   slots?: ReturnType<typeof tabsVariants>;
   orientation?: "horizontal" | "vertical";
+  selectedKey?: React.Key | null;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
@@ -37,13 +38,23 @@ interface TabsProps extends TabsPrimitiveProps, TabsVariants {
 const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsProps>(
   ({children, className, variant, ...props}, ref) => {
     const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
+    const [selectedKey, setSelectedKey] = React.useState<React.Key | null>(
+      props.defaultSelectedKey || null,
+    );
+    const orientation = props.orientation || "horizontal";
 
     return (
-      <TabsContext.Provider value={{slots}}>
+      <TabsContext.Provider
+        value={{slots, orientation, selectedKey: props.selectedKey || selectedKey}}
+      >
         <TabsPrimitive
           {...props}
           ref={ref}
           className={composeTwRenderProps(className, slots.base())}
+          onSelectionChange={(key) => {
+            setSelectedKey(key);
+            props.onSelectionChange?.(key);
+          }}
         >
           {children}
         </TabsPrimitive>
@@ -66,13 +77,15 @@ const TabList = React.forwardRef<React.ElementRef<typeof TabListPrimitive>, TabL
     const {slots} = useContext(TabsContext);
 
     return (
-      <TabListPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tabList())}
-      >
-        {children}
-      </TabListPrimitive>
+      <div className="relative">
+        <TabListPrimitive
+          {...props}
+          ref={ref}
+          className={composeTwRenderProps(className, slots?.tabList())}
+        >
+          {children}
+        </TabListPrimitive>
+      </div>
     );
   },
 );

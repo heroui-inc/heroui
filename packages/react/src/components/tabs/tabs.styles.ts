@@ -26,8 +26,6 @@ export const tabsVariants = tv({
       "data-[disabled=true]:cursor-not-allowed",
       // hover state
       "hover:opacity-70 data-[selected=true]:hover:opacity-100",
-      // pressed state
-      "data-[pressed=true]:scale-[0.98]",
       // transform styles
       "transform-gpu",
       // transition styles
@@ -47,7 +45,7 @@ export const tabsVariants = tv({
       // Orientation styles
       "data-[orientation=horizontal]:mt-4",
       "data-[orientation=vertical]:ml-4",
-      "bg-surface rounded-lg p-4",
+      "bg-surface-1 rounded-lg p-4",
       focusRingClasses,
       "data-[focus-visible]:rounded",
     ],
@@ -57,9 +55,9 @@ export const tabsVariants = tv({
       default: {
         tab: [
           // selected state
-          "data-[selected=true]:bg-background data-[selected=true]:text-foreground data-[selected=true]:shadow-border bg-transparent",
+          "data-[selected=true]:bg-surface-1 data-[selected=true]:text-foreground data-[selected=true]:shadow-border rounded-lg bg-transparent",
         ],
-        tabList: "bg-surface text-surface-foreground/70 rounded-lg p-1",
+        tabList: "bg-surface-2 text-surface-foreground/70 rounded-[calc(var(--radius-lg)+1px)] p-1",
       },
       line: {
         tab: [

@@ -45,7 +45,7 @@ const Template = (props: DisclosureProps) => {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <Disclosure.Body className="bg-panel rounded-panel mt-4 flex flex-col items-center p-4 text-center">
+          <Disclosure.Body className="bg-panel shadow-border rounded-panel mx-2 mb-2 mt-4 flex flex-col items-center p-1 p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>

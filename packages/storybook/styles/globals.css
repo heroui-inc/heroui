@@ -15,7 +15,7 @@
 
 [data-theme="light"],
 .light {
-  --background: #f9f9f9;
+  /* --background: #f9f9f9; */
 }
 
 /* Dark theme overrides sing data-theme or class */
