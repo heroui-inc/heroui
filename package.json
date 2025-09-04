@@ -60,6 +60,7 @@
     "clean-package": "2.2.0",
     "commitlint-plugin-function-rules": "4.0.2",
     "dotenv": "17.2.2",
+    "dotenv-cli": "10.0.0",
     "eslint": "9.34.0",
     "eslint-config-next": "15.5.2",
     "eslint-config-prettier": "10.1.8",
