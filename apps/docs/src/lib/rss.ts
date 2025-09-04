@@ -3,21 +3,24 @@ import {Feed} from "feed";
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 
-export const getRSS = () => {
+export const getRSS = (): string => {
   const currentYear = new Date().getFullYear();
+  const baseUrl = siteConfig.siteUrl;
 
   const feed = new Feed({
     copyright: `${currentYear} NextUI Inc. All rights reserved.`,
     description: siteConfig.description,
-    favicon: `${siteConfig.siteUrl}/favicon-dark.svg`,
-    id: siteConfig.siteUrl,
-    image: `${siteConfig.siteUrl}${siteConfig.ogImage}`,
+    favicon: new URL("/favicon-dark.svg", baseUrl).toString(),
+    id: baseUrl.toString(),
+    image: new URL(siteConfig.ogImage, baseUrl).toString(),
     language: "en-US",
-    link: siteConfig.siteUrl,
+    link: baseUrl.toString(),
     title: siteConfig.name,
   });
 
   for (const page of source.getPages()) {
+    const pageUrl = new URL(page.url, baseUrl); // URL 拼接
+
     feed.addItem({
       author: [
         {
@@ -27,7 +30,7 @@ export const getRSS = () => {
       date: new Date(page.data.lastModified || Date.now()),
       description: page.data.description || "HeroUI documentation page",
       id: page.url,
-      link: `${siteConfig.siteUrl}${page.url}`,
+      link: pageUrl.toString(),
       title: page.data.title,
     });
   }
