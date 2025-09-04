@@ -10,6 +10,7 @@ import * as ChipDemos from "./chip";
 import * as DisclosureDemos from "./disclosure";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
+import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
 import * as TabsDemos from "./tabs";
 import * as TextFieldDemos from "./text-field";
@@ -193,6 +194,23 @@ export const demos: Record<string, DemoItem> = {
   "link-with-icon": {
     component: LinkDemos.WithIcon,
     file: "link/with-icon.tsx",
+  },
+  // Skeleton demos
+  "skeleton-basic": {
+    component: SkeletonDemos.Basic,
+    file: "skeleton/basic.tsx",
+  },
+  "skeleton-text-content": {
+    component: SkeletonDemos.TextContent,
+    file: "skeleton/text-content.tsx",
+  },
+  "skeleton-user-profile": {
+    component: SkeletonDemos.UserProfile,
+    file: "skeleton/user-profile.tsx",
+  },
+  "skeleton-list": {
+    component: SkeletonDemos.List,
+    file: "skeleton/list.tsx",
   },
   // Spinner demos
   "spinner-basic": {

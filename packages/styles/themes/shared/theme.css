@@ -31,7 +31,7 @@
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
 
-  --shadow-border: var(--shadow-border);
+  --shadow-border: var(--shadow-with-border);
 
   /* Calculated Variables */
 
@@ -113,4 +113,11 @@
 
   /* Animations */
   --animate-spin-fast: spin 0.75s linear infinite;
+  --animate-skeleton: skeleton 2s linear infinite;
+
+  @keyframes skeleton {
+    100% {
+      transform: translateX(200%);
+    }
+  }
 }

@@ -1,0 +1,112 @@
+---
+title: Skeleton
+description: Skeleton is a placeholder to show a loading state and the expected shape of a component.
+links:
+  source: skeleton/skeleton.tsx
+  styles: skeleton.css
+  storybook: skeleton
+---
+
+## Import
+
+```tsx
+import { Skeleton } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview 
+  name="skeleton-basic"
+/>
+ 
+
+### Text Content
+
+<ComponentPreview 
+  name="skeleton-text-content"
+/>
+
+### User Profile
+
+<ComponentPreview 
+  name="skeleton-user-profile"
+/>
+
+### List Items
+
+<ComponentPreview 
+  name="skeleton-list"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Skeleton } from '@heroui/react';
+
+function CustomSkeleton() {
+  return (
+    <Skeleton className="h-20 w-32 rounded-full" />
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Skeleton component classes, you can use the `@layer components` directive. 
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .skeleton {
+    @apply bg-gray-200;
+  }
+  
+  .skeleton:before {
+    @apply via-gray-100;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Skeleton component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/skeleton.css)):
+
+#### Base Class
+`.skeleton` - Base skeleton styles with shimmer animation
+
+### Animation
+
+The shimmer effect is created using a CSS gradient animation that moves across the skeleton element:
+
+```css
+.skeleton {
+  @apply bg-surface-3 pointer-events-none relative overflow-hidden rounded-md;
+
+  &:before {
+    @apply animate-skeleton via-surface-2 absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
+  }
+}
+
+@theme inline {
+ --animate-skeleton: skeleton 2s linear infinite;
+
+  @keyframes skeleton {
+    100% {
+      transform: translateX(200%);
+    }
+  }
+}
+```
+
+## API Reference
+
+### Skeleton Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Optional child content |

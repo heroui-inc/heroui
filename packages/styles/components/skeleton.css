@@ -1,0 +1,7 @@
+.skeleton {
+  @apply bg-surface-3 pointer-events-none relative overflow-hidden rounded-md;
+
+  &:before {
+    @apply animate-skeleton via-surface-2 absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
+  }
+}

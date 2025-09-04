@@ -26,6 +26,7 @@ export * from "./text-field";
 export * from "./text";
 export * from "./tabs";
 export * from "./input-otp";
+export * from "./skeleton";
 
 //  ===================================
 //  Icons

@@ -1,6 +1,6 @@
 /* Base avatar styles */
 .avatar {
-  @apply bg-default relative flex size-10 shrink-0 overflow-hidden rounded-full;
+  @apply bg-surface-3 relative flex size-10 shrink-0 overflow-hidden rounded-full;
 }
 
 /* Avatar image element */
