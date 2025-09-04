@@ -1,11 +1,15 @@
 /* Base avatar styles */
 .avatar {
-  @apply relative flex size-10 shrink-0 overflow-hidden rounded-full;
+  @apply bg-default relative flex size-10 shrink-0 overflow-hidden rounded-full;
 }
 
 /* Avatar image element */
 .avatar__image {
-  @apply aspect-square size-full;
+  @apply aspect-square size-full opacity-0 transition-[opacity] duration-300 data-[loaded=true]:opacity-100;
+
+  &[data-loading-status="failed"] {
+    @apply hidden;
+  }
 }
 
 /* Avatar fallback element */
@@ -16,6 +20,10 @@
 /* Size modifiers */
 .avatar--sm {
   @apply size-8;
+
+  .avatar__fallback {
+    @apply text-sm;
+  }
 }
 
 .avatar--md {

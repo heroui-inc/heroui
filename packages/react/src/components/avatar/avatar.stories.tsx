@@ -23,6 +23,62 @@ export default {
 
 const defaultArgs: AvatarProps = {};
 
+const users = [
+  {
+    id: 1,
+    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
+    name: "John",
+  },
+  {
+    id: 2,
+    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=5",
+    name: "Kate",
+  },
+  {
+    id: 3,
+    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=20",
+    name: "Emily",
+  },
+  {
+    id: 4,
+    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=23",
+    name: "Michael",
+  },
+  {
+    id: 5,
+    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=16",
+    name: "Olivia",
+  },
+];
+
+const circles = [
+  {
+    id: 1,
+    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
+    name: "R",
+  },
+  {
+    id: 2,
+    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
+    name: "O",
+  },
+  {
+    id: 3,
+    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
+    name: "G",
+  },
+  {
+    id: 4,
+    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/white.jpg",
+    name: "W",
+  },
+  {
+    id: 5,
+    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg",
+    name: "B",
+  },
+];
+
 const Template = ({color, size}: AvatarProps) => (
   <div className="flex items-start gap-4">
     <div className="flex flex-col gap-4">
@@ -109,61 +165,81 @@ const Template = ({color, size}: AvatarProps) => (
   </div>
 );
 
-const users = [
-  {
-    id: 1,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
-    name: "John",
-  },
-  {
-    id: 2,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=5",
-    name: "Kate",
-  },
-  {
-    id: 3,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=20",
-    name: "Emily",
-  },
-  {
-    id: 4,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=23",
-    name: "Michael",
-  },
-  {
-    id: 5,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=16",
-    name: "Olivia",
-  },
-];
+const TemplateWithDelay = ({
+  color,
+  delay = 300,
+  size,
+}: {
+  delay: number;
+  color: AvatarProps["color"];
+  size: AvatarProps["size"];
+}) => {
+  return (
+    <div className="flex flex-col gap-4">
+      <Avatar color={color} size={size}>
+        <Avatar.Image
+          src={`https://app.requestly.io/delay/${delay}/https://img.heroui.chat/image/avatar?w=400&h=400&u=3`}
+        />
+      </Avatar>
+    </div>
+  );
+};
 
-const circles = [
-  {
-    id: 1,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
-    name: "R",
-  },
-  {
-    id: 2,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
-    name: "O",
-  },
-  {
-    id: 3,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
-    name: "G",
-  },
-  {
-    id: 4,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/white.jpg",
-    name: "W",
-  },
-  {
-    id: 5,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg",
-    name: "B",
-  },
-];
+const TemplateWithColors = () => {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar color="default">
+        <Avatar.Fallback>DF</Avatar.Fallback>
+      </Avatar>
+      <Avatar color="accent">
+        <Avatar.Fallback>AC</Avatar.Fallback>
+      </Avatar>
+      <Avatar color="success">
+        <Avatar.Fallback>SC</Avatar.Fallback>
+      </Avatar>
+      <Avatar color="warning">
+        <Avatar.Fallback>WR</Avatar.Fallback>
+      </Avatar>
+      <Avatar color="danger">
+        <Avatar.Fallback>DG</Avatar.Fallback>
+      </Avatar>
+    </div>
+  );
+};
+
+const FallbackTemplate = () => {
+  return (
+    <div className="flex items-center gap-4">
+      {/* Text fallback */}
+      <Avatar>
+        <Avatar.Fallback>JD</Avatar.Fallback>
+      </Avatar>
+
+      {/* Icon fallback */}
+      <Avatar>
+        <Avatar.Fallback>
+          <Icon icon="gravity-ui:person" />
+        </Avatar.Fallback>
+      </Avatar>
+
+      {/* Fallback with delay */}
+      <Avatar>
+        <Avatar.Image
+          alt="Delayed Avatar"
+          src="https://invalid-url-to-show-fallback.com/image.jpg"
+        />
+        <Avatar.Fallback delayMs={600}>NA</Avatar.Fallback>
+      </Avatar>
+
+      {/* Custom styled fallback */}
+      <Avatar>
+        <Avatar.Fallback className="border-none bg-gradient-to-br from-pink-500 to-purple-500 text-white">
+          GB
+        </Avatar.Fallback>
+      </Avatar>
+    </div>
+  );
+};
 
 const AvatarGroupTemplate = () => {
   return (
@@ -197,6 +273,19 @@ const AvatarGroupTemplate = () => {
 export const Default = {
   args: defaultArgs,
   render: Template,
+};
+
+export const WithDelay = {
+  args: defaultArgs,
+  render: TemplateWithDelay,
+};
+
+export const WithColors = {
+  render: TemplateWithColors,
+};
+
+export const Fallback = {
+  render: FallbackTemplate,
 };
 
 export const Group = {

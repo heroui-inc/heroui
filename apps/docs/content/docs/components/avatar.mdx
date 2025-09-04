@@ -126,8 +126,16 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `src` | `string` | - | Image source URL |
+| `srcSet` | `string` | - | The image `srcset` attribute for responsive images |
+| `sizes` | `string` | - | The image `sizes` attribute for responsive images |
 | `alt` | `string` | - | Alternative text for the image |
-| `onLoadingStatusChange` | `(status: 'loading' \| 'loaded' \| 'error') => void` | - | Callback for loading status changes |
+| `onLoad` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | Callback when the image loads successfully |
+| `onError` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | Callback when there's an error loading the image |
+| `onLoadingStatusChange` | `(status: 'loading' \| 'loaded' \| 'pending' \| 'failed') => void` | - | Callback for loading status changes |
+| `ignoreFallback` | `boolean` | `false` | If `true`, opt out of the fallback logic and use as regular `img` |
+| `shouldBypassImageLoad` | `boolean` | `false` | If `true`, image load will be bypassed and handled by `asChild` component |
+| `crossOrigin` | `'anonymous' \| 'use-credentials'` | - | CORS setting for the image request |
+| `loading` | `'eager' \| 'lazy'` | - | Native lazy loading attribute |
 | `className` | `string` | - | Additional CSS classes |
 | `asChild` | `boolean` | `false` | Render as child element |
 

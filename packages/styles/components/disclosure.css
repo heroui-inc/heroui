@@ -39,19 +39,18 @@
 
 .disclosure__content {
   /* Hybrid approach: max-height for smooth expansion + GPU-accelerated opacity */
-  @apply ease-soft-in-out max-h-0 overflow-hidden transition-[max-height] duration-[300ms] will-change-[max-height];
+  @apply ease-soft-in-out h-0 overflow-hidden transition-[height] duration-300 will-change-[height];
 
   /* Inner content with GPU-accelerated opacity and transform */
   & > * {
-    @apply pointer-events-none transform-none opacity-0 transition-[opacity] duration-500 will-change-[opacity];
+    @apply pointer-events-none opacity-0 transition-[opacity] duration-300 ease-in will-change-[opacity];
   }
 
-  &[aria-hidden="false"] {
-    /* Use CSS variable for dynamic height */
-    max-height: var(--content-height, 1000px);
+  &[data-expanded="true"] {
+    @apply h-[var(--disclosure-content-height)];
 
     & > * {
-      @apply pointer-events-auto opacity-100 duration-200;
+      @apply pointer-events-auto opacity-100;
     }
   }
 }

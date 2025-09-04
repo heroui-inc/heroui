@@ -1,6 +1,7 @@
 "use client";
 
 import type {AccordionVariants} from "./accordion.styles";
+import type {Booleanish} from "../../utils/assertion";
 import type {CSSProperties} from "react";
 import type {
   ButtonProps,
@@ -16,10 +17,12 @@ import {
   DisclosureGroup,
   Heading as DisclosureHeading,
   DisclosurePanel,
+  DisclosureStateContext,
 } from "react-aria-components";
 
 import {useMeasuredHeight, usePreventHidden} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
+import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {useMergeRef} from "../../utils/mergeRef";
 import {IconChevronDown} from "../icons";
@@ -94,12 +97,18 @@ const AccordionIndicator = React.forwardRef<
   AccordionIndicatorProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
+  const {isExpanded} = useContext(DisclosureStateContext)!;
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
-      children as React.ReactElement<{className?: string; "data-accordion-indicator"?: boolean}>,
+      children as React.ReactElement<{
+        className?: string;
+        "data-accordion-indicator"?: boolean;
+        "data-expanded"?: Booleanish;
+      }>,
       {
         ...props,
+        "data-expanded": dataAttr(isExpanded),
         className: slots?.indicator({className}),
         "data-accordion-indicator": true,
       },
@@ -111,6 +120,7 @@ const AccordionIndicator = React.forwardRef<
       ref={ref}
       data-accordion-indicator
       className={slots?.indicator({className})}
+      data-expanded={dataAttr(isExpanded)}
       {...props}
     />
   );
@@ -197,21 +207,23 @@ const AccordionPanel = React.forwardRef<
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
   const accordionPanelRef = useRef<HTMLDivElement>(null);
-  const {height: panelHeight} = useMeasuredHeight(accordionPanelRef);
+  const {height} = useMeasuredHeight(accordionPanelRef);
   const mergedRef = useMergeRef(accordionPanelRef, ref);
+  const {isExpanded} = useContext(DisclosureStateContext)!;
 
   // Prevent React Aria from setting hidden="until-found" which breaks animations
   usePreventHidden(accordionPanelRef);
 
   return (
     <DisclosurePanel
+      {...props}
       ref={mergedRef}
       data-accordion-panel
       className={composeTwRenderProps(className, slots?.panel())}
-      {...props}
+      data-expanded={dataAttr(isExpanded)}
       style={
         {
-          "--panel-height": `${panelHeight}px`,
+          "--disclosure-content-height": `${height}px`,
         } as CSSProperties
       }
     >

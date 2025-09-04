@@ -50,6 +50,7 @@ export default defineConfig([
       storybook: storybookPlugin,
     },
     rules: {
+      "jsx-a11y/alt-text": "off",
       "jsx-a11y/click-events-have-key-events": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
       "jsx-a11y/no-autofocus": "off",

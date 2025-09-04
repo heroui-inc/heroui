@@ -123,9 +123,11 @@ const DisclosureContent = React.forwardRef<
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(DisclosureContext);
   const contentRef = useRef<HTMLDivElement>(null);
-  const {height: contentHeight} = useMeasuredHeight(contentRef);
+  const {height} = useMeasuredHeight(contentRef);
   const mergedRef = useMergeRef(contentRef, ref);
+  const {isExpanded} = useContext(DisclosureStateContext)!;
 
+  // Prevent React Aria from setting hidden="until-found" which breaks animations
   usePreventHidden(contentRef);
 
   return (
@@ -133,10 +135,11 @@ const DisclosureContent = React.forwardRef<
       ref={mergedRef}
       data-disclosure-content
       className={composeTwRenderProps(className, slots?.content())}
+      data-expanded={dataAttr(isExpanded)}
       {...props}
       style={
         {
-          "--content-height": `${contentHeight}px`,
+          "--disclosure-content-height": `${height}px`,
         } as CSSProperties
       }
     >

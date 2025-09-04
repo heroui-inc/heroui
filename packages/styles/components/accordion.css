@@ -17,40 +17,32 @@
 
 .accordion__indicator {
   @apply text-muted ml-auto size-4 shrink-0 transition duration-300;
+
+  /* Expanded state for indicator rotation */
+  &[data-expanded="true"] {
+    @apply -rotate-180;
+  }
 }
 
 .accordion__item {
   @apply border-b last:border-b-0;
 }
 
-.accordion__panel {
-  /* Hybrid approach: max-height for smooth expansion + GPU-accelerated opacity */
-  @apply ease-soft-in-out max-h-0 overflow-hidden transition-[max-height] duration-[300ms] will-change-[max-height];
-
-  .accordion__body {
-    /* GPU-accelerated opacity and transform for better performance */
-    @apply pointer-events-none transform-none opacity-0 transition-[opacity] duration-500 will-change-[opacity];
-  }
-
-  &[aria-hidden="false"] {
-    /* Use CSS variable for dynamic height */
-    max-height: var(--panel-height, 1000px);
-
-    .accordion__body {
-      @apply pointer-events-auto opacity-100 duration-200;
-    }
-  }
-}
-
 .accordion__trigger {
-  /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[25ms] ease-out;
+  cursor: var(--cursor-interactive);
 
+  /* Base Styles */
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[50ms] ease-out;
+
+  /* Hover state */
   &:hover,
-  &[data-hover="true"] {
+  &[data-hover="true"],
+  /* Pressed state */
+  &[data-pressed="true"] {
     background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
   }
 
+  /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
     outline: 2px solid var(--focus);
@@ -63,9 +55,20 @@
   }
 }
 
-/* Expanded state for indicator rotation */
-.accordion__trigger[aria-expanded="true"] [data-accordion-indicator] {
-  @apply -rotate-180;
+.accordion__panel {
+  @apply ease-soft-in-out h-0 overflow-hidden transition-[height] duration-300 will-change-[height];
+
+  .accordion__body {
+    @apply pointer-events-none opacity-0 transition-[opacity] duration-300 ease-in will-change-[opacity];
+  }
+
+  &[data-expanded="true"] {
+    @apply h-[var(--disclosure-content-height)];
+
+    .accordion__body {
+      @apply pointer-events-auto opacity-100;
+    }
+  }
 }
 
 /* Outline variant */

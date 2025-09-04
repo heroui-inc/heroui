@@ -2,13 +2,35 @@
 
 import type {RefObject} from "react";
 
-import {useEffect} from "react";
+import {useIsSSR} from "@react-aria/ssr";
+import {useEffect, useLayoutEffect} from "react";
 
 /**
  * Prevents React Aria from setting hidden="until-found" which breaks animations.
- * Optimized to minimize render delays and animation jank.
+ * Disables the beforematch feature entirely to avoid conflicts.
  */
 export const usePreventHidden = (ref: RefObject<HTMLElement | null>) => {
+  const isSSR = useIsSSR();
+
+  // Disable beforematch feature globally to prevent React Aria from using hidden="until-found"
+  useLayoutEffect(() => {
+    if (!isSSR && "onbeforematch" in document.body) {
+      // Store original handler if it exists
+      const originalHandler = document.body.onbeforematch;
+
+      // Remove the handler to disable the feature
+      delete (document.body as any).onbeforematch;
+
+      return () => {
+        // Restore original handler on cleanup
+        if (originalHandler !== undefined) {
+          document.body.onbeforematch = originalHandler;
+        }
+      };
+    }
+  }, [isSSR]);
+
+  // Fallback: Remove hidden attribute if it still gets set somehow
   useEffect(() => {
     const element = ref.current;
 
@@ -16,35 +38,29 @@ export const usePreventHidden = (ref: RefObject<HTMLElement | null>) => {
       return;
     }
 
-    // Use microtask to ensure minimal delay
-    queueMicrotask(() => {
+    // Immediately remove any existing hidden attribute
+    if (element.hasAttribute("hidden")) {
       element.removeAttribute("hidden");
-    });
+    }
 
-    // Optimize MutationObserver with single check
+    // Watch for any attempts to set hidden attribute
     const observer = new MutationObserver((mutations) => {
-      // Early exit if no hidden attribute changes
-      if (!mutations.some((m) => m.attributeName === "hidden")) {
-        return;
-      }
+      for (const mutation of mutations) {
+        if (mutation.type === "attributes" && mutation.attributeName === "hidden") {
+          const hiddenValue = element.getAttribute("hidden");
 
-      const hiddenValue = element.getAttribute("hidden");
-
-      if (hiddenValue === "until-found" || hiddenValue === "") {
-        // Use RAF to batch DOM updates with browser paint cycle
-        requestAnimationFrame(() => {
-          element.removeAttribute("hidden");
-        });
+          if (hiddenValue !== null) {
+            // Remove it immediately to prevent any visual glitches
+            element.removeAttribute("hidden");
+          }
+        }
       }
     });
 
     observer.observe(element, {
       attributes: true,
       attributeFilter: ["hidden"],
-      // Disable subtree and character data observation for performance
       subtree: false,
-      characterData: false,
-      childList: false,
     });
 
     return () => {
