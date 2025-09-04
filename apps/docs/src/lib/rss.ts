@@ -19,7 +19,7 @@ export const getRSS = (): string => {
   });
 
   for (const page of source.getPages()) {
-    const pageUrl = new URL(page.url, baseUrl); // URL 拼接
+    const pageUrl = new URL(page.url, baseUrl);
 
     feed.addItem({
       author: [
