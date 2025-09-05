@@ -105,11 +105,7 @@
   --radius-panel-inner: calc(var(--radius) * 0.5);
 
   /* Transition Timing Functions  */
-  --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);
-  --ease-soft-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-soft-out: cubic-bezier(0.17, 0.84, 0.44, 1);
-  --ease-soft-in: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: ease;
 
   /* Animations */
   --animate-spin-fast: spin 0.75s linear infinite;

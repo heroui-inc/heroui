@@ -37,7 +37,7 @@ const config: NextConfig = {
         source: "/docs",
       },
       {
-        destination: "/docs/components/avatar",
+        destination: "/docs/components/accordion",
         permanent: true,
         source: "/docs/components",
       },

@@ -35,7 +35,7 @@ export default function HomePage() {
             </Link>
             <Link
               className={buttonVariants({class: "bg-default/50", variant: "tertiary"})}
-              href="/docs"
+              href="/docs/components/accordion"
             >
               View Components
             </Link>

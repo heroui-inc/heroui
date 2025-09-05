@@ -4,8 +4,8 @@
 .button {
   @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium md:h-9;
   transition:
-    transform 150ms ease-out,
-    background-color 100ms ease-out;
+    transform 150ms var(--ease-out),
+    background-color 100ms var(--ease-smooth);
 
   /* Cursor */
   cursor: var(--cursor-interactive);

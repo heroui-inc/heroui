@@ -36,7 +36,7 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[50ms] ease-out;
+  @apply ease-smooth flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[50ms];
 
   /* Hover state */
   &:hover,
@@ -63,7 +63,7 @@
 .accordion__panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms var(--ease-soft-in-out);
+  transition: grid-template-rows 300ms var(--ease-out);
 
   .accordion__body {
     overflow: hidden;
