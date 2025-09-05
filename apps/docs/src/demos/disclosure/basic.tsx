@@ -8,7 +8,7 @@ export function Basic() {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md text-center">
       <Disclosure isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
