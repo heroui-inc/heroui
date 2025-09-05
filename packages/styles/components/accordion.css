@@ -36,7 +36,7 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply ease-smooth flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[50ms];
+  @apply ease-smooth flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[100ms];
 
   /* Hover state */
   &:hover,
