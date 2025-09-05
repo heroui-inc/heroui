@@ -93,4 +93,30 @@ describe("Image", () => {
     expect(getComputedStyle(images[2]).height).toBe("50px");
     expect(getComputedStyle(images[3]).height).toBe("60px");
   });
+
+  test("should render fallback image when main image fails to load", () => {
+    let imageOnError: any = null;
+
+    function trackImageOnError() {
+      Object.defineProperty(window.Image.prototype, "onerror", {
+        get() {
+          return this._onerror;
+        },
+        set(fn) {
+          imageOnError = fn;
+          this._onerror = fn;
+        },
+      });
+    }
+
+    trackImageOnError();
+
+    const wrapper = render(<Image fallbackSrc={fallbackSrc} src={src} />);
+
+    act(() => {
+      imageOnError();
+    });
+
+    expect(wrapper.getByRole("img")).toHaveAttribute("src", fallbackSrc);
+  });
 });

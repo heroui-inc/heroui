@@ -22,6 +22,9 @@ const image = tv({
   slots: {
     wrapper: "relative shadow-black/5",
     zoomedWrapper: "relative overflow-hidden rounded-inherit",
+    errorWrapper: "relative shadow-black/5 shadow-none rounded-large w-max",
+    errorImg:
+      "relative z-10 shadow-black/5 shadow-none transition-transform-opacity motion-reduce:transition-none !duration-300 rounded-large",
     img: "relative z-10 opacity-0 shadow-black/5 data-[loaded=true]:opacity-100",
     blurredImg: [
       "absolute",
