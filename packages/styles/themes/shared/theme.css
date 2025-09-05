@@ -15,6 +15,9 @@
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-foreground: var(--accent-soft-foreground);
 
+  --color-segment: var(--segment);
+  --color-segment-foreground: var(--segment-foreground);
+
   --color-border: var(--border);
   --color-focus: var(--focus);
   --color-link: var(--link);
