@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 export function Basic() {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(true);
 
   return (
     <div className="w-full max-w-md text-center">
