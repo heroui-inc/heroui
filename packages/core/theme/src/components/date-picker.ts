@@ -16,7 +16,7 @@ const datePicker = tv({
     calendar: "w-[calc(var(--visible-months)_*_var(--calendar-width))] shadow-none",
     calendarContent: "w-[calc(var(--visible-months)_*_var(--calendar-width))]",
     timeInputLabel: "font-medium",
-    timeInput: "px-5 pb-4 flex-wrap gap-x-6",
+    timeInput: "px-5 pb-4",
   },
 });
 
