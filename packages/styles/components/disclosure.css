@@ -41,7 +41,7 @@
 .disclosure__content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms var(--ease-soft-in-out);
+  transition: grid-template-rows 300ms var(--ease-out);
 
   .disclosure__body {
     overflow: hidden;

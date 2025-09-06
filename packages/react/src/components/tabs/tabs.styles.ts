@@ -55,7 +55,7 @@ export const tabsVariants = tv({
       default: {
         tab: [
           // selected state
-          "data-[selected=true]:bg-surface-1 data-[selected=true]:text-foreground data-[selected=true]:shadow-border rounded-lg bg-transparent",
+          "data-[selected=true]:bg-segment data-[selected=true]:text-segment-foreground data-[selected=true]:shadow-border rounded-lg bg-transparent",
         ],
         tabList: "bg-surface-2 text-surface-foreground/70 rounded-[calc(var(--radius-lg)+1px)] p-1",
       },
