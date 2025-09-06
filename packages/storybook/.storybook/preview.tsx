@@ -23,6 +23,7 @@ const parameters: Preview["parameters"] = {
       date: /Date$/,
     },
   },
+  // TODO: Docs dark mode
   darkMode: {
     classTarget: "html",
     current: "light",
@@ -33,13 +34,13 @@ const parameters: Preview["parameters"] = {
       appContentBg: "black",
       background: "black",
       barBg: "black",
-      brandImage: "/dark-logo.svg",
+      brandTitle: `<img src="/logo-light.svg" style="width: 120px; height: auto;"/>`
     },
     darkClass: "dark",
     light: {
       ...themes.light,
       appBorderRadius: 14,
-      brandImage: "/light-logo.svg",
+      brandTitle: `<img src="/logo-dark.svg" style="width: 120px; height: auto;"/>`
     },
     lightClass: "light",
     stylePreview: true,

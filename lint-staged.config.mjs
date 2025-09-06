@@ -50,7 +50,9 @@ const lintStaged = {
       // use ESLint with experimental configuration file resolution
       const filesToLint = await removeIgnoredFilesNew(files);
 
-      return [`eslint --flag v10_config_lookup_from_file --max-warnings=0 --fix ${filesToLint}`];
+      return [
+        `eslint --flag v10_config_lookup_from_file --max-warnings=0 --no-warn-ignored --fix ${filesToLint}`,
+      ];
     }
 
     if (LINT_MODE === "Legacy") {
