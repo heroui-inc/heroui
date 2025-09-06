@@ -11,7 +11,7 @@ export function Controlled() {
       <p className="mb-3 text-sm text-gray-600">
         Selected tab: <strong>{selectedKey}</strong>
       </p>
-      <Tabs selectedKey={selectedKey} onSelectionChange={setSelectedKey}>
+      <Tabs selectedKey={selectedKey} onSelectionChange={(key) => setSelectedKey(key as string)}>
         <Tabs.List aria-label="Controlled tabs">
           <Tabs.Tab id="photos">Photos</Tabs.Tab>
           <Tabs.Tab id="music">Music</Tabs.Tab>

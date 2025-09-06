@@ -10,7 +10,7 @@
   /* --radius: 2.5rem; */
 
   /* Use OS-native cursor for interactive elements (macOS style) */
-  --cursor-interactive: default;
+  --cursor-interactive: pointer;
 }
 
 [data-theme="light"],

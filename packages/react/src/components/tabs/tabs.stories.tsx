@@ -5,14 +5,7 @@ import React from "react";
 import {Tabs} from "./index";
 
 const meta = {
-  argTypes: {
-    variant: {
-      control: {
-        type: "select",
-      },
-      options: ["default", "line"],
-    },
-  },
+  argTypes: {},
   component: Tabs,
   parameters: {
     layout: "centered",
@@ -21,6 +14,7 @@ const meta = {
 } satisfies Meta<typeof Tabs>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 const DefaultTemplate = (args: Story["args"]) => (
@@ -37,38 +31,6 @@ const DefaultTemplate = (args: Story["args"]) => (
     </Tabs>
   </div>
 );
-
-export const Default: Story = {
-  args: {
-    children: null,
-  },
-  render: DefaultTemplate,
-};
-
-export const Surface: Story = {
-  args: {
-    children: null,
-    variant: "default",
-  },
-  render: DefaultTemplate,
-};
-
-export const Vertical: Story = {
-  args: {
-    children: null,
-    orientation: "vertical",
-  },
-  render: DefaultTemplate,
-};
-
-export const VerticalSurface: Story = {
-  args: {
-    children: null,
-    orientation: "vertical",
-    variant: "line",
-  },
-  render: DefaultTemplate,
-};
 
 const DisabledTabTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
@@ -87,13 +49,6 @@ const DisabledTabTemplate = (args: Story["args"]) => (
   </div>
 );
 
-export const WithDisabledTab: Story = {
-  args: {
-    children: null,
-  },
-  render: DisabledTabTemplate,
-};
-
 const DefaultSelectedTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
     <Tabs defaultSelectedKey="tab2" {...args}>
@@ -108,6 +63,28 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
     </Tabs>
   </div>
 );
+
+export const Default: Story = {
+  args: {
+    children: null,
+  },
+  render: DefaultTemplate,
+};
+
+export const Vertical: Story = {
+  args: {
+    children: null,
+    orientation: "vertical",
+  },
+  render: DefaultTemplate,
+};
+
+export const WithDisabledTab: Story = {
+  args: {
+    children: null,
+  },
+  render: DisabledTabTemplate,
+};
 
 export const WithDefaultSelectedTab: Story = {
   args: {

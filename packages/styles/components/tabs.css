@@ -1,0 +1,90 @@
+/* Base tabs component */
+.tabs {
+  @apply flex gap-2;
+
+  /* Orientation styles */
+  &[data-orientation="horizontal"] {
+    @apply flex-col;
+  }
+
+  &[data-orientation="vertical"] {
+    @apply flex-row;
+  }
+}
+
+/* Tab list wrapper */
+.tabs__list-wrapper {
+  @apply relative;
+}
+
+/* Tab list container */
+.tabs__list {
+  @apply bg-surface-2 inline-flex rounded-[calc(var(--radius-lg)+1px)] p-1;
+
+  /* Horizontal orientation */
+  &[data-orientation="horizontal"] {
+    @apply w-full flex-row;
+  }
+
+  /* Vertical orientation */
+  &[data-orientation="vertical"] {
+    @apply flex-col gap-1;
+
+    .tabs__tab {
+      @apply min-w-20;
+    }
+  }
+}
+
+/* Individual tab */
+.tabs__tab {
+  cursor: var(--cursor-interactive);
+
+  @apply text-segment-foreground duration-250 relative z-20 flex h-8 w-full items-center justify-center rounded-lg rounded-md text-center font-medium outline-none transition-[color,opacity] ease-out;
+
+  /* Disabled state */
+  &[data-disabled="true"] {
+    @apply cursor-not-allowed opacity-[var(--disabled-opacity)];
+  }
+
+  /* Hover states - both approaches for compatibility */
+  &:not([data-selected="true"]):not([data-disabled="true"]):hover,
+  &[data-hover="true"]:not([data-selected="true"]):not([data-disabled="true"]) {
+    @apply opacity-70;
+  }
+
+  /* Focus states - comprehensive fallback */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Tab panel */
+.tabs__panel {
+  @apply w-full p-2 outline-none;
+
+  /* Orientation spacing */
+  &[data-orientation="horizontal"] {
+    @apply mt-4;
+  }
+
+  &[data-orientation="vertical"] {
+    @apply ml-4;
+  }
+}
+
+/* Tab indicator */
+.tabs__indicator {
+  @apply bg-segment shadow-border pointer-events-none absolute z-10 rounded-lg;
+
+  left: var(--selected-tab-left);
+  width: var(--selected-tab-width);
+  height: var(--selected-tab-height);
+  top: var(--selected-tab-top);
+
+  transition-duration: 250ms;
+  transition-property: left, width, height, top;
+  transition-timing-function: var(--ease-smooth);
+}

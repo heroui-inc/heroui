@@ -8,22 +8,27 @@ import type {
   TabsProps as TabsPrimitiveProps,
 } from "react-aria-components";
 
-import React, {createContext, useContext} from "react";
+import React, {createContext, useContext, useEffect, useRef, useState} from "react";
 import {
   TabList as TabListPrimitive,
+  TabListStateContext,
   TabPanel as TabPanelPrimitive,
   Tab as TabPrimitive,
   Tabs as TabsPrimitive,
 } from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
+import {useMergeRef} from "../../utils/mergeRef";
 
 import {tabsVariants} from "./tabs.styles";
 
 const TabsContext = createContext<{
   slots?: ReturnType<typeof tabsVariants>;
   orientation?: "horizontal" | "vertical";
-  selectedKey?: React.Key | null;
+}>({});
+
+const TabListContext = createContext<{
+  tabsListRef?: React.RefObject<HTMLDivElement | null>;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
@@ -36,25 +41,17 @@ interface TabsProps extends TabsPrimitiveProps, TabsVariants {
 }
 
 const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsProps>(
-  ({children, className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
-    const [selectedKey, setSelectedKey] = React.useState<React.Key | null>(
-      props.defaultSelectedKey || null,
-    );
-    const orientation = props.orientation || "horizontal";
+  ({children, className, orientation = "horizontal", ...props}, ref) => {
+    const slots = React.useMemo(() => tabsVariants(), []);
 
     return (
-      <TabsContext.Provider
-        value={{slots, orientation, selectedKey: props.selectedKey || selectedKey}}
-      >
+      <TabsContext.Provider value={{slots, orientation}}>
         <TabsPrimitive
           {...props}
           ref={ref}
+          data-tabs
           className={composeTwRenderProps(className, slots.base())}
-          onSelectionChange={(key) => {
-            setSelectedKey(key);
-            props.onSelectionChange?.(key);
-          }}
+          orientation={orientation}
         >
           {children}
         </TabsPrimitive>
@@ -75,17 +72,24 @@ interface TabListProps extends TabListPrimitiveProps<object> {
 const TabList = React.forwardRef<React.ElementRef<typeof TabListPrimitive>, TabListProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
+    const tabListRef = useRef<HTMLDivElement>(null);
+
+    const mergedRef = useMergeRef(ref, tabListRef);
 
     return (
-      <div className="relative">
-        <TabListPrimitive
-          {...props}
-          ref={ref}
-          className={composeTwRenderProps(className, slots?.tabList())}
-        >
-          {children}
-        </TabListPrimitive>
-      </div>
+      <TabListContext.Provider value={{tabsListRef: tabListRef}}>
+        <div data-tabs-list-wrapper className={slots?.tabListWrapper()}>
+          <TabListPrimitive
+            {...props}
+            ref={mergedRef}
+            data-tabs-list
+            className={composeTwRenderProps(className, slots?.tabList())}
+          >
+            {children}
+          </TabListPrimitive>
+          <TabIndicator />
+        </div>
+      </TabListContext.Provider>
     );
   },
 );
@@ -104,7 +108,12 @@ const Tab = React.forwardRef<React.ElementRef<typeof TabPrimitive>, TabProps>(
     const {slots} = useContext(TabsContext);
 
     return (
-      <TabPrimitive {...props} ref={ref} className={composeTwRenderProps(className, slots?.tab())}>
+      <TabPrimitive
+        {...props}
+        ref={ref}
+        data-tabs-tab
+        className={composeTwRenderProps(className, slots?.tab())}
+      >
         {children}
       </TabPrimitive>
     );
@@ -128,6 +137,7 @@ const TabPanel = React.forwardRef<React.ElementRef<typeof TabPanelPrimitive>, Ta
       <TabPanelPrimitive
         {...props}
         ref={ref}
+        data-tabs-panel
         className={composeTwRenderProps(className, slots?.tabPanel())}
       >
         {children}
@@ -140,11 +150,67 @@ TabPanel.displayName = "HeroUI.TabPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
+interface TabIndicatorProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const TabIndicator = React.forwardRef<HTMLSpanElement, TabIndicatorProps>(
+  ({className, style, ...props}, ref) => {
+    const {slots} = useContext(TabsContext);
+    const {tabsListRef} = useContext(TabListContext);
+    const state = useContext(TabListStateContext);
+    const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
+
+    useEffect(() => {
+      if (!state?.selectedKey || !tabsListRef?.current) return;
+
+      // Find the selected tab element
+      const selectedTab = tabsListRef.current.querySelector(
+        `[data-key="${state.selectedKey}"]`,
+      ) as HTMLElement;
+
+      if (!selectedTab) return;
+
+      const tabsList = tabsListRef.current;
+      const tabsListRect = tabsList.getBoundingClientRect();
+      const selectedTabRect = selectedTab.getBoundingClientRect();
+
+      const left = selectedTabRect.left - tabsListRect.left;
+      const top = selectedTabRect.top - tabsListRect.top;
+      const width = selectedTabRect.width;
+      const height = selectedTabRect.height;
+
+      setIndicatorStyle({
+        "--selected-tab-left": `${left}px`,
+        "--selected-tab-top": `${top}px`,
+        "--selected-tab-width": `${width}px`,
+        "--selected-tab-height": `${height}px`,
+      } as React.CSSProperties);
+    }, [state?.selectedKey, tabsListRef]);
+
+    return (
+      <span
+        ref={ref}
+        data-tabs-indicator
+        className={slots?.tabsIndicator({className})}
+        style={{...indicatorStyle, ...style}}
+        {...props}
+      />
+    );
+  },
+);
+
+TabIndicator.displayName = "HeroUI.TabIndicator";
+
+/* -----------------------------------------------------------------------------------------------*/
+
 const CompoundTabs = Object.assign(TabsRoot, {
   List: TabList,
   Tab: Tab,
   Panel: TabPanel,
+  Indicator: TabIndicator,
 });
 
 export default CompoundTabs;
-export type {TabsProps, TabListProps, TabProps, TabPanelProps};
+export type {TabsProps, TabListProps, TabProps, TabPanelProps, TabIndicatorProps};
