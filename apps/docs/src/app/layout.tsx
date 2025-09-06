@@ -40,13 +40,6 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   icons: [
     {
-      media: "(prefers-color-scheme: light)",
-      rel: "icon",
-      type: "image/svg",
-      url: "/icons/favicon-dark.svg",
-    },
-    {
-      media: "(prefers-color-scheme: dark)",
       rel: "icon",
       type: "image/svg",
       url: "/icons/favicon.svg",
