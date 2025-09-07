@@ -33,13 +33,9 @@ export default function Layout({children}: {children: ReactNode}) {
         //   url: "/docs/theming",
         // },
         {
-          active: "none",
-          on: "nav",
-          text: "Changelog",
-          url: "/docs/changelog",
-        },
-        {
-          children: <ExternalLink href="#roadmap">Roadmap</ExternalLink>,
+          children: (
+            <ExternalLink href="https://herouiv3.featurebase.app/roadmap">Roadmap</ExternalLink>
+          ),
           on: "all",
           type: "custom",
         },

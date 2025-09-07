@@ -1,5 +1,6 @@
 import {env} from "~env";
 
+export const __IS_PRE_RELEASE__ = true;
 export const __DEV__ = env.NEXT_PUBLIC_APP_ENV === "development";
 export const __PREVIEW__ = env.NEXT_PUBLIC_APP_ENV === "preview";
 export const __PROD__ = env.NEXT_PUBLIC_APP_ENV === "production";

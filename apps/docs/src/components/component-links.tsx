@@ -1,6 +1,13 @@
 import type {ComponentLinksType} from "@/utils/extract-links";
 
-import {AdobeIcon, GithubIcon, RadixUIIcon, StorybookIcon, TailwindIcon} from "@/icons/dev";
+import {
+  AdobeIcon,
+  FigmaIcon,
+  GithubIcon,
+  RadixUIIcon,
+  StorybookIcon,
+  TailwindIcon,
+} from "@/icons/dev";
 import {generateComponentLinks} from "@/utils/extract-links";
 
 export interface ComponentLinksProps {
@@ -38,6 +45,12 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
 
   return (
     <div className="mb-4 flex flex-wrap gap-3">
+      {/* Only the node-id is needed */}
+      {componentLinks.figma ? (
+        <ButtonLink href={componentLinks.figma} startContent={<FigmaIcon className="text-lg" />}>
+          Figma
+        </ButtonLink>
+      ) : null}
       {componentLinks.storybook ? (
         <ButtonLink
           href={`${componentLinks.storybook}--default`}

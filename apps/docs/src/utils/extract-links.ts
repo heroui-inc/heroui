@@ -10,6 +10,7 @@ export interface ComponentLinksType {
   storybook?: string;
   themes?: string;
   tailwind?: string;
+  figma?: string;
   [key: string]: string | undefined;
 }
 
@@ -43,6 +44,9 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
   if (!links) return null;
 
   return {
+    figma: links.figma
+      ? `https://www.figma.com/design/FJUkI8BqC9s6AvrM38Lqag/HeroUI-Figma-Kit-V3--Community?node-id=${links.figma}`
+      : undefined,
     rac: links.rac ? `https://react-spectrum.adobe.com/react-aria/${links.rac}.html` : undefined,
     radix: links.radix
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`

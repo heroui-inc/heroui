@@ -107,8 +107,13 @@ Add a theme class to your HTML and apply colors to the body:
       --danger: oklch(0.6259 0.1908 29.19);
       --danger-foreground: var(--snow);
 
+      /* Component Colors */
+      --segment: var(--white);
+      --segment-foreground: var(--foreground);
+
       /* Misc */
       --border: oklch(0.50 0.060 230 / 22%);
+      --divider: var(--color-neutral-200);
       --focus: oklch(0.60 0.150 230 / 35%);
       --link: var(--accent);
 
@@ -154,8 +159,13 @@ Add a theme class to your HTML and apply colors to the body:
       --danger: oklch(0.5798 0.1635 30.83);
       --danger-foreground: var(--snow);
 
+      /* Component Colors */
+      --segment: oklch(1 0 0 / 16%);
+      --segment-foreground: var(--foreground);
+
       /* Misc */
       --border: oklch(1 0 0 / 12%);
+      --divider: var(--color-neutral-800);
       --focus: oklch(0.860 0.080 230 / 40%);
       --link: var(--accent);
 
@@ -338,7 +348,11 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-foreground: var(--accent-soft-foreground);
 
+  --color-segment: var(--segment);
+  --color-segment-foreground: var(--segment-foreground);
+
   --color-border: var(--border);
+  --color-divider: var(--divider);
   --color-focus: var(--focus);
   --color-link: var(--link);
 
@@ -427,13 +441,12 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
   --radius-panel: var(--radius);
   --radius-panel-inner: calc(var(--radius) * 0.5);
 
-  /* Animation Timing Functions */
-  --ease-spring: cubic-bezier(0.36, 1.66, 0.04, 1);
-  --ease-soft-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
+  /* Transition Timing Functions */
+  --ease-smooth: ease;
 
   /* Animations */
   --animate-spin-fast: spin 0.75s linear infinite;
+  --animate-skeleton: skeleton 2s linear infinite;
 }
 `}
 />
