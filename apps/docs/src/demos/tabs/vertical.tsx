@@ -5,12 +5,15 @@ import {Tabs} from "@heroui/react";
 export function Vertical() {
   return (
     <Tabs className="w-full max-w-lg" orientation="vertical">
-      <Tabs.List aria-label="Vertical tabs">
-        <Tabs.Tab id="account">Account</Tabs.Tab>
-        <Tabs.Tab id="security">Security</Tabs.Tab>
-        <Tabs.Tab id="notifications">Notifications</Tabs.Tab>
-        <Tabs.Tab id="billing">Billing</Tabs.Tab>
-      </Tabs.List>
+      <Tabs.ListWrapper>
+        <Tabs.List aria-label="Vertical tabs">
+          <Tabs.Tab id="account">Account</Tabs.Tab>
+          <Tabs.Tab id="security">Security</Tabs.Tab>
+          <Tabs.Tab id="notifications">Notifications</Tabs.Tab>
+          <Tabs.Tab id="billing">Billing</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Indicator />
+      </Tabs.ListWrapper>
       <Tabs.Panel className="px-4" id="account">
         <h3 className="mb-2 font-semibold">Account Settings</h3>
         <p className="text-sm text-gray-600">Manage your account information and preferences.</p>

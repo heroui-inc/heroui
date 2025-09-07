@@ -127,7 +127,7 @@
 
     /* Shadow */
     --shadow-with-border:
-      0 0 0 1px oklch(1 0 0 / 25%), 0 5px 10px -3px rgba(0, 0, 0, 0.3),
+      0 0 0 1px oklch(1 0 0 / 20%), 0 5px 10px -3px rgba(0, 0, 0, 0.3),
       0 3px 4px -2px rgba(0, 0, 0, 0.1);
   }
 }

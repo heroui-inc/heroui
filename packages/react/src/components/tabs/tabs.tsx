@@ -27,7 +27,7 @@ const TabsContext = createContext<{
   orientation?: "horizontal" | "vertical";
 }>({});
 
-const TabListContext = createContext<{
+const TabListWrapperContext = createContext<{
   tabsListRef?: React.RefObject<HTMLDivElement | null>;
 }>({});
 
@@ -61,6 +61,36 @@ const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsPr
 );
 
 TabsRoot.displayName = "HeroUI.Tabs";
+/* -----------------------------------------------------------------------------------------------*/
+
+interface TabListWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const TabListWrapper = React.forwardRef<React.ElementRef<"div">, TabListWrapperProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots} = useContext(TabsContext);
+
+    const tabListRef = useRef<HTMLDivElement>(null);
+    const mergedRef = useMergeRef(ref, tabListRef);
+
+    return (
+      <TabListWrapperContext.Provider value={{tabsListRef: tabListRef}}>
+        <div
+          data-tabs-list-wrapper
+          className={slots?.tabListWrapper({className})}
+          {...props}
+          ref={mergedRef}
+        >
+          {children}
+        </div>
+      </TabListWrapperContext.Provider>
+    );
+  },
+);
+
+TabListWrapper.displayName = "HeroUI.TabListWrapper";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -72,24 +102,16 @@ interface TabListProps extends TabListPrimitiveProps<object> {
 const TabList = React.forwardRef<React.ElementRef<typeof TabListPrimitive>, TabListProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
-    const tabListRef = useRef<HTMLDivElement>(null);
-
-    const mergedRef = useMergeRef(ref, tabListRef);
 
     return (
-      <TabListContext.Provider value={{tabsListRef: tabListRef}}>
-        <div data-tabs-list-wrapper className={slots?.tabListWrapper()}>
-          <TabListPrimitive
-            {...props}
-            ref={mergedRef}
-            data-tabs-list
-            className={composeTwRenderProps(className, slots?.tabList())}
-          >
-            {children}
-          </TabListPrimitive>
-          <TabIndicator />
-        </div>
-      </TabListContext.Provider>
+      <TabListPrimitive
+        {...props}
+        ref={ref}
+        data-tabs-list
+        className={composeTwRenderProps(className, slots?.tabList())}
+      >
+        {children}
+      </TabListPrimitive>
     );
   },
 );
@@ -158,7 +180,7 @@ interface TabIndicatorProps {
 const TabIndicator = React.forwardRef<HTMLSpanElement, TabIndicatorProps>(
   ({className, style, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
-    const {tabsListRef} = useContext(TabListContext);
+    const {tabsListRef} = useContext(TabListWrapperContext);
     const state = useContext(TabListStateContext);
     const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
 
@@ -206,10 +228,11 @@ TabIndicator.displayName = "HeroUI.TabIndicator";
 /* -----------------------------------------------------------------------------------------------*/
 
 const CompoundTabs = Object.assign(TabsRoot, {
+  ListWrapper: TabListWrapper,
   List: TabList,
   Tab: Tab,
-  Panel: TabPanel,
   Indicator: TabIndicator,
+  Panel: TabPanel,
 });
 
 export default CompoundTabs;

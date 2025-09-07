@@ -27,6 +27,7 @@
     "components/skeleton",
     "components/spinner",
     "components/tooltip",
-    "components/disclosure"
+    "components/disclosure",
+    "components/tabs"
   ]
 }

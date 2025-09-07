@@ -5,11 +5,14 @@ import {Tabs} from "@heroui/react";
 export function Basic() {
   return (
     <Tabs className="w-full max-w-md">
-      <Tabs.List aria-label="Options">
-        <Tabs.Tab id="overview">Overview</Tabs.Tab>
-        <Tabs.Tab id="analytics">Analytics</Tabs.Tab>
-        <Tabs.Tab id="reports">Reports</Tabs.Tab>
-      </Tabs.List>
+      <Tabs.ListWrapper>
+        <Tabs.List aria-label="Options">
+          <Tabs.Tab id="overview">Overview</Tabs.Tab>
+          <Tabs.Tab id="analytics">Analytics</Tabs.Tab>
+          <Tabs.Tab id="reports">Reports</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Indicator />
+      </Tabs.ListWrapper>
       <Tabs.Panel className="pt-4" id="overview">
         <p>View your project overview and recent activity.</p>
       </Tabs.Panel>

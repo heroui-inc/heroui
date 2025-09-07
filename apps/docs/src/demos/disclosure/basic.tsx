@@ -24,7 +24,7 @@ export function Basic() {
             </p>
             <img
               alt="Expo Go QR Code"
-              className="max-w-54 aspect-square w-full object-cover"
+              className="max-w-54 my-2 aspect-square w-full object-cover"
               src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
             />
             <p className="text-muted text-sm">Expo must be installed on your device.</p>

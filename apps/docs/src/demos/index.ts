@@ -230,10 +230,6 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.Basic,
     file: "tabs/basic.tsx",
   },
-  "tabs-variants": {
-    component: TabsDemos.Variants,
-    file: "tabs/variants.tsx",
-  },
   "tabs-vertical": {
     component: TabsDemos.Vertical,
     file: "tabs/vertical.tsx",
@@ -242,9 +238,9 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.Disabled,
     file: "tabs/disabled.tsx",
   },
-  "tabs-controlled": {
-    component: TabsDemos.Controlled,
-    file: "tabs/controlled.tsx",
+  "tabs-custom-styles": {
+    component: TabsDemos.CustomStyles,
+    file: "tabs/custom-styles.tsx",
   },
   // TextField demos
   "text-field-basic": {

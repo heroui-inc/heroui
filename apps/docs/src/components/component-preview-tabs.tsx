@@ -34,11 +34,11 @@ export function ComponentPreviewTabs({
         className="relative w-full border-none bg-transparent p-0"
         items={hideCode ? ["Preview"] : ["Preview", "Code"]}
       >
-        <Tab className="border-border border bg-transparent" value="Preview">
+        <Tab className="border-border overflow-hidden border bg-transparent p-0" value="Preview">
           <div
             data-name={name}
             className={cn(
-              "preview not-prose relative min-h-[350px] w-full rounded-md sm:p-10",
+              "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-md p-4 before:absolute before:inset-0 before:z-[-1] before:bg-white/50 sm:p-10 dark:before:bg-black/10",
               alignmentClasses[align],
               "flex",
             )}
