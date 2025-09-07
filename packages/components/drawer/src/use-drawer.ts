@@ -80,6 +80,9 @@ export function useDrawer(originalProps: UseDrawerProps) {
   );
 
   const getModalProps = useCallback<PropGetter>(() => {
+    const scrollBarWidth =
+      typeof window !== "undefined" ? window.innerWidth - document.documentElement.clientWidth : 0;
+
     return {
       classNames: {
         ...classNames,
@@ -89,6 +92,10 @@ export function useDrawer(originalProps: UseDrawerProps) {
       scrollBehavior,
       size,
       ...otherProps,
+      style: {
+        ...(placement === "right" ? {right: `${scrollBarWidth}px`} : {}),
+        ...(otherProps.style ?? {}),
+      },
     };
   }, [baseStyles, classNames, motionProps, scrollBehavior, size, otherProps]);
 
