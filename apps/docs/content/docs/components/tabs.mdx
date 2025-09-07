@@ -62,30 +62,44 @@ export default () => (
 
 ### Passing Tailwind CSS classes
 
-```tsx
+<CollapsibleCode lang="tsx" code={`
 import { Tabs } from '@heroui/react';
 
 function CustomTabs() {
   return (
-    <Tabs className="border rounded-lg p-4">
-      <Tabs.List className="gap-4" aria-label="Custom tabs">
-        <Tabs.Tab className="font-bold" id="tab1">
-          Tab 1
-        </Tabs.Tab>
-        <Tabs.Tab className="font-bold" id="tab2">
-          Tab 2
-        </Tabs.Tab>
-      </Tabs.List>
-      <Tabs.Panel className="mt-6" id="tab1">
-        Content 1
+    <Tabs className="w-full max-w-lg text-center">
+      <Tabs.ListWrapper>
+        <Tabs.List
+          aria-label="Options"
+          className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
+        >
+          <Tabs.Tab id="daily">Daily</Tabs.Tab>
+          <Tabs.Tab id="weekly">Weekly</Tabs.Tab>
+          <Tabs.Tab id="bi-weekly">Bi-Weekly</Tabs.Tab>
+          <Tabs.Tab id="monthly">Monthly</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Indicator className="bg-accent" />
+      </Tabs.ListWrapper>
+      <Tabs.Panel className="px-4" id="daily">
+        <h3 className="mb-2 font-semibold">Daily</h3>
+        <p className="text-sm text-gray-600">Manage your daily tasks and goals.</p>
       </Tabs.Panel>
-      <Tabs.Panel className="mt-6" id="tab2">
-        Content 2
+      <Tabs.Panel className="px-4" id="weekly">
+        <h3 className="mb-2 font-semibold">Weekly</h3>
+        <p className="text-sm text-gray-600">Manage your weekly tasks and goals.</p>
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="bi-weekly">
+        <h3 className="mb-2 font-semibold">Bi-Weekly</h3>
+        <p className="text-sm text-gray-600">Manage your bi-weekly tasks and goals.</p>
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="monthly">
+        <h3 className="mb-2 font-semibold">Monthly</h3>
+        <p className="text-sm text-gray-600">Manage your monthly tasks and goals.</p>
       </Tabs.Panel>
     </Tabs>
   );
 }
-```
+`} />
 
 ### CSS Classes
 
