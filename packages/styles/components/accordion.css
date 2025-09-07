@@ -63,15 +63,25 @@
 .accordion__panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms var(--ease-out);
+  transition: grid-template-rows 330ms var(--ease-out-quad);
 
   .accordion__body {
     overflow: hidden;
   }
 
+  .accordion__body-inner {
+    opacity: 0;
+    /* Collapse transition */
+    transition: opacity 300ms var(--ease-out-quad);
+  }
+
   /* Expanded state */
   &[data-expanded="true"] {
     grid-template-rows: 1fr;
+
+    .accordion__body-inner {
+      opacity: 1;
+    }
   }
 }
 

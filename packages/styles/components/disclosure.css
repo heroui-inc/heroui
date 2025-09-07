@@ -41,14 +41,24 @@
 .disclosure__content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms var(--ease-out);
+  transition: grid-template-rows 330ms var(--ease-out-quad);
 
   .disclosure__body {
     overflow: hidden;
   }
 
+  .disclosure__body-inner {
+    opacity: 0;
+    /* Collapse transition */
+    transition: opacity 300ms var(--ease-out-quad);
+  }
+
   /* Expanded state */
   &[data-expanded="true"] {
     grid-template-rows: 1fr;
+
+    .disclosure__body-inner {
+      opacity: 1;
+    }
   }
 }

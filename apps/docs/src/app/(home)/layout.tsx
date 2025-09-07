@@ -3,6 +3,7 @@ import type {ReactNode} from "react";
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 
 import {baseOptions} from "@/app/layout.config";
+import {ExternalLink} from "@/components/external-link";
 import {Iconify} from "@/components/iconify";
 
 export default function Layout({children}: {children: ReactNode}) {
@@ -56,7 +57,14 @@ export default function Layout({children}: {children: ReactNode}) {
           active: "none",
           on: "nav",
           text: "Components",
-          url: "/docs/components",
+          url: "/docs/components/accordion",
+        },
+        {
+          children: (
+            <ExternalLink href="https://herouiv3.featurebase.app/roadmap">Roadmap</ExternalLink>
+          ),
+          on: "nav",
+          type: "custom",
         },
         // {
         //   active: "url",
