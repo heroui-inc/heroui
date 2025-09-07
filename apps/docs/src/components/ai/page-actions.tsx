@@ -1,6 +1,5 @@
 "use client";
 
-import {buttonVariants} from "@heroui/react";
 import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 import {ChevronDown} from "lucide-react";
@@ -11,6 +10,7 @@ import {AnthropicIcon, GithubIcon, OpenAIIcon} from "@/icons/dev";
 import {LinkIcon} from "@/icons/link";
 import {cn} from "@/utils/cn";
 import {__DEV__} from "@/utils/env";
+import {docsButtonVariants} from "@/utils/variants";
 
 import {Iconify} from "../iconify";
 
@@ -64,13 +64,9 @@ export function LLMCopyButton({
   return (
     <button
       disabled={isLoading}
-      className={cn(
-        buttonVariants({
-          className: "[&_svg]:text-muted relative gap-2 [&_svg]:size-3.5",
-          size: "sm",
-          variant: "tertiary",
-        }),
-      )}
+      className={docsButtonVariants({
+        className: "[&_svg]:text-muted [&_svg]:size-3.5",
+      })}
       onClick={onClick}
     >
       <Iconify
@@ -137,15 +133,7 @@ export function ViewOptions({
 
   return (
     <Popover>
-      <PopoverTrigger
-        className={cn(
-          buttonVariants({
-            className: "gap-2",
-            size: "sm",
-            variant: "tertiary",
-          }),
-        )}
-      >
+      <PopoverTrigger className={docsButtonVariants()}>
         Open
         <ChevronDown className="text-fd-muted-foreground size-3.5" />
       </PopoverTrigger>

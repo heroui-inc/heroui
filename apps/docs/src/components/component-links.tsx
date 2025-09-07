@@ -9,6 +9,7 @@ import {
   TailwindIcon,
 } from "@/icons/dev";
 import {generateComponentLinks} from "@/utils/extract-links";
+import {docsButtonVariants} from "@/utils/variants";
 
 export interface ComponentLinksProps {
   links?: ComponentLinksType;
@@ -24,7 +25,7 @@ const ButtonLink = ({
 }) => {
   return (
     <a
-      className="button button--tertiary button--sm text-foreground/70"
+      className={docsButtonVariants()}
       href={href}
       rel="noopener noreferrer"
       target="_blank"

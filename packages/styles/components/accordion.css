@@ -63,7 +63,7 @@
 .accordion__panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 330ms var(--ease-out-quad);
+  transition: grid-template-rows 300ms var(--ease-out-quad);
 
   .accordion__body {
     overflow: hidden;
