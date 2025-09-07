@@ -6,7 +6,7 @@
 
   /* Entering animations */
   &[data-entering] {
-    @apply animate-in zoom-in-90 fade-in-0 duration-200 ease-out;
+    @apply animate-in zoom-in-90 fade-in-0 ease-out-quad duration-200;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -28,7 +28,7 @@
 
   /* Exiting animations */
   &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out duration-150 ease-out;
+    @apply animate-out zoom-out-95 fade-out ease-out-quart duration-150;
   }
 
   /* Arrow styling */

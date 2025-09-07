@@ -42,7 +42,7 @@
 .tabs__tab {
   cursor: var(--cursor-interactive);
 
-  @apply text-segment-foreground duration-250 relative z-20 flex h-8 w-full items-center justify-center truncate rounded-lg px-4 text-center font-medium outline-none transition-[color,opacity] ease-out;
+  @apply text-segment-foreground ease-out-quad relative z-20 flex h-8 w-full items-center justify-center truncate rounded-lg px-4 text-center font-medium outline-none transition-[color,opacity] duration-200;
 
   /* Disabled state */
   &[data-disabled="true"] {
