@@ -24,6 +24,7 @@
     "components/chip",
     "components/link",
     "components/popover",
+    "components/separator",
     "components/skeleton",
     "components/spinner",
     "components/tooltip",

@@ -10,6 +10,7 @@ import * as ChipDemos from "./chip";
 import * as DisclosureDemos from "./disclosure";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
+import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
 import * as TabsDemos from "./tabs";
@@ -211,6 +212,19 @@ export const demos: Record<string, DemoItem> = {
   "skeleton-list": {
     component: SkeletonDemos.List,
     file: "skeleton/list.tsx",
+  },
+  // Separator demos
+  "separator-basic": {
+    component: SeparatorDemos.Basic,
+    file: "separator/basic.tsx",
+  },
+  "separator-vertical": {
+    component: SeparatorDemos.Vertical,
+    file: "separator/vertical.tsx",
+  },
+  "separator-with-content": {
+    component: SeparatorDemos.WithContent,
+    file: "separator/with-content.tsx",
   },
   // Spinner demos
   "spinner-basic": {

@@ -16,6 +16,7 @@ export * from "./form";
 export * from "./label";
 export * from "./link";
 export * from "./listbox";
+export * from "./separator";
 export * from "./tooltip";
 export * from "./spinner";
 export * from "./popover";

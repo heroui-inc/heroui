@@ -36,17 +36,18 @@ Before creating or updating any documentation, you MUST:
    - How the component is actually used in stories
 
 5. **Use Correct Icon Library**: HeroUI uses Iconify with gravity-ui icons:
+
    ```tsx
    import { Icon } from '@iconify/react';
-   
+
    // Correct usage:
    <Icon icon="gravity-ui:person" />
    <Icon icon="gravity-ui:chevron-down" />
-   
+
    // NEVER use lucide-react or other icon libraries
    ```
 
-5. **Understand HeroUI v3 Requirements**: 
+6. **Understand HeroUI v3 Requirements**:
    - **HeroUI v3 is built on top of Tailwind CSS v4** - IT IS NOT OPTIONAL
    - **Always require Tailwind CSS v4 installation and setup**
    - **Check the demo project at `/Users/juniorgarcia/workspace/examples/heroui-v3-alpha` for actual usage patterns**
@@ -68,12 +69,13 @@ Before creating or updating any documentation, you MUST:
 **Component Documentation Structure (MUST FOLLOW):**
 
 1. **Frontmatter Structure**:
+
    ```markdown
    ---
    title: ComponentName
    description: A brief one-line description of what the component does
    links:
-     rac: ComponentName  # React Aria Component name (if applicable)
+     rac: ComponentName # React Aria Component name (if applicable)
      source: component-name/component-name.tsx
      styles: component-name.css
      storybook: component-name
@@ -97,34 +99,40 @@ Before creating or updating any documentation, you MUST:
    - Register demos in `/apps/docs/src/demos/index.ts` with pattern `component-demo-name`
 
 4. **Demo File Pattern**:
+
    ```tsx
    // IMPORTANT: Always add "use client" directive to all demo files to ensure they work correctly
    "use client";
-   
+
    import {ComponentName} from "@heroui/react";
-   import {Icon} from "@iconify/react";  // If icons needed
-   
+   import {Icon} from "@iconify/react"; // If icons needed
+
    export function ComponentDemo() {
      return <ComponentName>Content</ComponentName>;
    }
-   
+
    // For demos with React hooks:
-   "use client";
-   
+   ("use client");
+
    import {useState} from "react";
    import {ComponentName} from "@heroui/react";
-   
+
    export function ComponentDemo() {
      const [value, setValue] = useState("");
-     
-     return <ComponentName value={value} onChange={setValue}>Content</ComponentName>;
+
+     return (
+       <ComponentName value={value} onChange={setValue}>
+         Content
+       </ComponentName>
+     );
    }
    ```
 
 5. **ComponentPreview Usage**:
+
    ```markdown
    ### Section Title
-   
+
    <ComponentPreview 
      name="component-demo-name"
    />
@@ -132,12 +140,12 @@ Before creating or updating any documentation, you MUST:
 
 **Component Documentation Pattern (STRICT - Follow Button.mdx exactly):**
 
-```markdown
+````markdown
 ---
 title: ComponentName
 description: Brief one-line description
-links: 
-  rac: ComponentName  # OR radix: component-name if using Radix UI
+links:
+  rac: ComponentName # OR radix: component-name if using Radix UI
   source: component-name/component-name.tsx
   styles: component-name.css
   storybook: component-name
@@ -146,8 +154,9 @@ links:
 ## Import
 
 ```tsx
-import {ComponentName} from '@heroui/react';
+import {ComponentName} from "@heroui/react";
 ```
+````
 
 ### Usage
 
@@ -155,25 +164,23 @@ import {ComponentName} from '@heroui/react';
   name="component-basic"
 />
 
-### Anatomy  # ONLY include for compound components
+### Anatomy # ONLY include for compound components
 
 Import all parts and piece them together.
 
 ```tsx
-import { ComponentName } from '@heroui/react';
+import {ComponentName} from "@heroui/react";
 
 export default () => (
   <ComponentName>
     <ComponentName.Part>
-      <ComponentName.SubPart>
-        Content
-      </ComponentName.SubPart>
+      <ComponentName.SubPart>Content</ComponentName.SubPart>
     </ComponentName.Part>
   </ComponentName>
-)
+);
 ```
 
-### Feature Name  # e.g., Variants, With Icons, Loading, etc.
+### Feature Name # e.g., Variants, With Icons, Loading, etc.
 
 <ComponentPreview 
   name="component-feature"
@@ -202,20 +209,16 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { ComponentName } from '@heroui/react';
+import {ComponentName} from "@heroui/react";
 
 function CustomComponent() {
-  return (
-    <ComponentName className="custom-tailwind-classes">
-      Content
-    </ComponentName>
-  );
+  return <ComponentName className="custom-tailwind-classes">Content</ComponentName>;
 }
 ```
 
 ### Customizing the component classes
 
-To customize the ComponentName component classes, you can use the `@layer components` directive. 
+To customize the ComponentName component classes, you can use the `@layer components` directive.
 <br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
@@ -223,7 +226,7 @@ To customize the ComponentName component classes, you can use the `@layer compon
   .component-name {
     @apply custom-styles;
   }
-  
+
   .component-name--modifier {
     @apply modifier-styles;
   }
@@ -232,7 +235,7 @@ To customize the ComponentName component classes, you can use the `@layer compon
 
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
-### Adding custom variants  # Optional - only if relevant
+### Adding custom variants # Optional - only if relevant
 
 You can extend HeroUI components by wrapping them and adding your own custom variants.
 
@@ -245,17 +248,20 @@ You can extend HeroUI components by wrapping them and adding your own custom var
 The ComponentName component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/component-name.css)):
 
 #### Base & Size Classes
+
 - `.component-name` - Base component styles
 - `.component-name--sm` - Small size variant
 - `.component-name--md` - Medium size variant
 - `.component-name--lg` - Large size variant
 
 #### Variant Classes
+
 - `.component-name--primary`
 - `.component-name--secondary`
 - List other variants...
 
-#### Modifier Classes  # If applicable
+#### Modifier Classes # If applicable
+
 - `.component-name--modifier`
 - `.component-name--modifier.component-name--size`
 
@@ -264,7 +270,7 @@ The ComponentName component uses these CSS classes ([View source styles](https:/
 The component supports both CSS pseudo-classes and data attributes for flexibility:
 
 - **Hover**: `:hover` or `[data-hover="true"]`
-- **Active/Pressed**: `:active` or `[data-pressed="true"]` 
+- **Active/Pressed**: `:active` or `[data-pressed="true"]`
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Disabled**: `:disabled` or `[aria-disabled="true"]`
 
@@ -272,19 +278,20 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ### ComponentName Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `propName` | `type` | `default` | Description |
+| Prop                                            | Type   | Default   | Description |
+| ----------------------------------------------- | ------ | --------- | ----------- |
+| `propName`                                      | `type` | `default` | Description |
 | List all props with backticks around prop names |
 
-### RenderProps  # Only if component supports render props
+### RenderProps # Only if component supports render props
 
 When using the render prop pattern, these values are provided:
 
-| Prop | Type | Description |
-|------|------|-------------|
+| Prop       | Type   | Description |
+| ---------- | ------ | ----------- |
 | `propName` | `type` | Description |
-```
+
+````
 
 **CRITICAL Documentation Rules (MUST FOLLOW):**
 
@@ -348,16 +355,17 @@ When using the render prop pattern, these values are provided:
    ```bash
    # Create demo directory
    mkdir -p /apps/docs/src/demos/component-name
-   
+
    # Create demo files
    touch basic.tsx variants.tsx sizes.tsx index.ts
-   ```
+````
 
 2. **Register Demos**:
    In `/apps/docs/src/demos/index.ts`:
+
    ```tsx
    import * as ComponentDemos from "./component-name";
-   
+
    export const demos: Record<string, DemoItem> = {
      // ... existing demos
      "component-basic": {
@@ -382,6 +390,7 @@ When using the render prop pattern, these values are provided:
    - Users can refer to React Aria docs for accessibility details
 
 **Verification Checklist Before Publishing**:
+
 - [ ] NO redundant component title after frontmatter (goes straight to ## Import)
 - [ ] NO Installation section (users already know how to install)
 - [ ] Usage is a SUBsection (### Usage) under Import, not a main section

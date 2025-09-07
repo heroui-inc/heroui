@@ -19,6 +19,7 @@
   --color-segment-foreground: var(--segment-foreground);
 
   --color-border: var(--border);
+  --color-divider: var(--divider);
   --color-focus: var(--focus);
   --color-link: var(--link);
 

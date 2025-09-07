@@ -71,6 +71,7 @@
 
     /* Misc Colors */
     --border: oklch(0 0 0 / 15%);
+    --divider: var(--color-neutral-200);
     --focus: oklch(0% 0 0 / 20%);
     --link: var(--foreground);
 
@@ -122,6 +123,7 @@
 
     /* Misc Colors */
     --border: oklch(1 0 0 / 12%);
+    --divider: var(--color-neutral-800);
     --focus: oklch(100% 0 0 / 50%);
     --link: var(--foreground);
 
