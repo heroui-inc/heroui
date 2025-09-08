@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.23",
   "description": "🚀 Beautiful and modern React UI library built with Tailwind CSS 4.0.",
   "license": "MIT",
+  "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -94,6 +95,5 @@
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0",
     "tailwindcss": ">=4.0.0"
-  },
-  "type": "module"
+  }
 }
