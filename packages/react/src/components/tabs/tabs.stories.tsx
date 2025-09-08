@@ -1,4 +1,5 @@
 import type {Meta, StoryObj} from "@storybook/react";
+import type {Key} from "react-aria-components";
 
 import React from "react";
 
@@ -111,13 +112,11 @@ const DisabledTabTemplate = (args: Story["args"]) => (
 
 const DefaultSelectedTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs {...args}>
+    <Tabs defaultSelectedKey="default" {...args}>
       <Tabs.ListWrapper>
-        <Tabs.List aria-label="Tabs with disabled">
+        <Tabs.List aria-label="Tabs with default options">
           <Tabs.Tab id="active">Active</Tabs.Tab>
-          <Tabs.Tab isDisabled id="disabled">
-            Disabled
-          </Tabs.Tab>
+          <Tabs.Tab id="default">Default</Tabs.Tab>
           <Tabs.Tab id="available">Available</Tabs.Tab>
         </Tabs.List>
         <Tabs.Indicator />
@@ -125,15 +124,44 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
       <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
       </Tabs.Panel>
-      <Tabs.Panel className="pt-4" id="disabled">
-        <p>This content cannot be accessed.</p>
+      <Tabs.Panel className="pt-4" id="default">
+        <p>This tab is the default selection.</p>
       </Tabs.Panel>
       <Tabs.Panel className="pt-4" id="available">
-        <p>This tab is also available for selection.</p>
+        <p>This tab is available for selection as well.</p>
       </Tabs.Panel>
     </Tabs>
   </div>
 );
+
+const ControlledSelectionTemplate = (args: Story["args"]) => {
+  const [selectedKey, setSelectedKey] = React.useState<Key>("controlled");
+
+  return (
+    <div className="w-[600px]">
+      <p className="my-2">Selected: {selectedKey}</p>
+      <Tabs selectedKey={selectedKey} onSelectionChange={setSelectedKey} {...args}>
+        <Tabs.ListWrapper>
+          <Tabs.List aria-label="Tabs with controlled options">
+            <Tabs.Tab id="active">Active</Tabs.Tab>
+            <Tabs.Tab id="controlled">Controlled</Tabs.Tab>
+            <Tabs.Tab id="available">Available</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Indicator />
+        </Tabs.ListWrapper>
+        <Tabs.Panel className="pt-4" id="active">
+          <p>This tab is active and can be selected.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="controlled">
+          <p>This tab is the controlled selection.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="available">
+          <p>This tab is available for selection as well.</p>
+        </Tabs.Panel>
+      </Tabs>
+    </div>
+  );
+};
 
 const CustomStyleTemplate = (args: Story["args"]) => {
   return (
@@ -183,6 +211,13 @@ export const WithDefaultSelectedTab: Story = {
     children: null,
   },
   render: DefaultSelectedTemplate,
+};
+
+export const WithControlledSelectionTab: Story = {
+  args: {
+    children: null,
+  },
+  render: ControlledSelectionTemplate,
 };
 
 export const WithCustomStyle: Story = {
