@@ -29,3 +29,6 @@ export const STORYBOOK_URL =
   __IS_PRE_RELEASE__ || __PREVIEW__
     ? "https://storybook-v3.heroui.com"
     : "https://storybook.heroui.com";
+
+export const STORYBOOK_STORIES_GROUP =
+  __IS_PRE_RELEASE__ || __PREVIEW__ ? "%E2%9C%85-ready" : "components";
