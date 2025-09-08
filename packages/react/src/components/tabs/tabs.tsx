@@ -187,28 +187,30 @@ const TabIndicator = React.forwardRef<HTMLSpanElement, TabIndicatorProps>(
     useEffect(() => {
       if (!state?.selectedKey || !tabsListRef?.current) return;
 
-      // Find the selected tab element
-      const selectedTab = tabsListRef.current.querySelector(
-        `[data-key="${state.selectedKey}"]`,
-      ) as HTMLElement;
+      const raf = requestAnimationFrame(() => {
+        if (!tabsListRef?.current) return;
 
-      if (!selectedTab) return;
+        // Find the selected tab element
+        const selectedTab = tabsListRef.current.querySelector(
+          `[data-key="${state.selectedKey}"]`,
+        ) as HTMLElement | null;
 
-      const tabsList = tabsListRef.current;
-      const tabsListRect = tabsList.getBoundingClientRect();
-      const selectedTabRect = selectedTab.getBoundingClientRect();
+        if (!selectedTab) return;
 
-      const left = selectedTabRect.left - tabsListRect.left;
-      const top = selectedTabRect.top - tabsListRect.top;
-      const width = selectedTabRect.width;
-      const height = selectedTabRect.height;
+        const selectedTabRect = selectedTab.getBoundingClientRect();
+        const tabsListRect = tabsListRef.current.getBoundingClientRect();
 
-      setIndicatorStyle({
-        "--selected-tab-left": `${left}px`,
-        "--selected-tab-top": `${top}px`,
-        "--selected-tab-width": `${width}px`,
-        "--selected-tab-height": `${height}px`,
-      } as React.CSSProperties);
+        setIndicatorStyle({
+          "--selected-tab-left": `${selectedTabRect.left - tabsListRect.left}px`,
+          "--selected-tab-top": `${selectedTabRect.top - tabsListRect.top}px`,
+          "--selected-tab-width": `${selectedTabRect.width}px`,
+          "--selected-tab-height": `${selectedTabRect.height}px`,
+        } as React.CSSProperties);
+      });
+
+      return () => {
+        cancelAnimationFrame(raf);
+      };
     }, [state?.selectedKey, tabsListRef]);
 
     return (
