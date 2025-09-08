@@ -1,11 +1,9 @@
-import type {Theme} from "@heroui/react";
-
 export const THEME_ADDON_ID = "heroui-theme-addon";
 export const THEME_GLOBAL_TYPE_ID = "heroui-theme";
 export const THEME_PARAM_KEY = "heroui-theme";
 
 export interface ThemeOption {
-  value: Theme | "system";
+  value: string | "system";
   title: string;
   description?: string;
 }
@@ -38,4 +36,4 @@ export const THEME_OPTIONS: ThemeOption[] = [
   },
 ];
 
-export const DEFAULT_THEME: Theme | "system" = "system";
+export const DEFAULT_THEME: string | "system" = "system";
