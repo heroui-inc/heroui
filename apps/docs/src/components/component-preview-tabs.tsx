@@ -28,7 +28,11 @@ export function ComponentPreviewTabs({
   };
 
   return (
-    <div className={cn("group relative my-4 w-full", className)} data-name={name} {...props}>
+    <div
+      className={cn("component-preview-tabs group relative my-4 w-full", className)}
+      data-name={name}
+      {...props}
+    >
       {!!description && <p className="text-muted-foreground mb-2 text-sm">{description}</p>}
       <Tabs
         className="relative w-full border-none bg-transparent p-0"
@@ -38,7 +42,7 @@ export function ComponentPreviewTabs({
           <div
             data-name={name}
             className={cn(
-              "preview not-prose before:bg-default/50 dark:before:bg-default/30 relative min-h-[350px] w-full overflow-hidden rounded-md p-4 before:absolute before:inset-0 before:z-[-1] sm:p-10",
+              "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-md p-4 before:absolute before:inset-0 before:z-[-1] before:bg-white/80 sm:p-10 dark:before:bg-black/30",
               alignmentClasses[align],
               "flex",
             )}

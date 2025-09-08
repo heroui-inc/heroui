@@ -22,13 +22,14 @@
     "components/avatar",
     "components/button",
     "components/chip",
+    "components/disclosure",
+    "components/kbd",
     "components/link",
     "components/popover",
     "components/separator",
     "components/skeleton",
     "components/spinner",
-    "components/tooltip",
-    "components/disclosure",
-    "components/tabs"
+    "components/tabs",
+    "components/tooltip"
   ]
 }

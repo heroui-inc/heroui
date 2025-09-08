@@ -1,0 +1,146 @@
+---
+title: Kbd
+description: Display keyboard shortcuts and key combinations
+links:
+  source: kbd/kbd.tsx
+  styles: kbd.css
+  storybook: kbd
+---
+
+## Import
+
+```tsx
+import {Kbd} from "@heroui/react";
+```
+
+### Usage
+
+<ComponentPreview 
+  name="kbd-basic"
+/>
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import {Kbd} from "@heroui/react";
+
+export default () => (
+  <Kbd>
+    <Kbd.Abbr keyValue="command" />
+    <Kbd.Content>K</Kbd.Content>
+  </Kbd>
+);
+```
+
+### Navigation Keys
+
+<ComponentPreview 
+  name="kbd-navigation-keys"
+/>
+
+### Inline Usage
+
+<ComponentPreview 
+  name="kbd-inline-usage"
+/>
+
+### Instructional Text
+
+<ComponentPreview 
+  name="kbd-instructional-text"
+/>
+
+### Special Keys
+
+<ComponentPreview 
+  name="kbd-special-keys"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Kbd} from "@heroui/react";
+
+function CustomKbd() {
+  return (
+    <Kbd className="bg-gray-100 dark:bg-gray-800">
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Kbd component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .kbd {
+    @apply bg-gray-100 dark:bg-gray-800 border-gray-300;
+  }
+
+  .kbd__abbr {
+    @apply font-bold;
+  }
+
+  .kbd__content {
+    @apply text-sm;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Kbd component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/kbd.css)):
+
+#### Base Classes
+
+- `.kbd` - Base keyboard key styles with background, border, and spacing
+- `.kbd__abbr` - Abbreviation element for modifier keys
+- `.kbd__content` - Content wrapper for key text
+
+## API Reference
+
+### Kbd Props
+
+| Prop        | Type              | Default | Description            |
+| ----------- | ----------------- | ------- | ---------------------- |
+| `children`  | `React.ReactNode` | -       | Content of the key     |
+| `className` | `string`          | -       | Custom CSS classes     |
+
+### Kbd.Abbr Props
+
+| Prop        | Type     | Default | Description                                                                                                                               |
+| ----------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyValue`  | `KbdKey` | -       | The keyboard key to display. Available values include modifier keys and special keys                                                     |
+| `className` | `string` | -       | Custom CSS classes                                                                                                                       |
+
+### Kbd.Content Props
+
+| Prop        | Type              | Default | Description                        |
+| ----------- | ----------------- | ------- | ---------------------------------- |
+| `children`  | `React.ReactNode` | -       | Text content of the key            |
+| `className` | `string`          | -       | Custom CSS classes                 |
+
+### KbdKey Type
+
+Available key values for the `keyValue` prop:
+
+| Modifier Keys | Special Keys | Navigation Keys | Function Keys |
+| ------------- | ------------ | --------------- | ------------- |
+| `command`     | `enter`      | `up`            | `fn`          |
+| `shift`       | `delete`     | `down`          |               |
+| `ctrl`        | `escape`     | `left`          |               |
+| `option`      | `tab`        | `right`         |               |
+| `alt`         | `space`      | `pageup`        |               |
+| `win`         | `capslock`   | `pagedown`      |               |
+|               | `help`       | `home`          |               |
+|               |              | `end`           |               |

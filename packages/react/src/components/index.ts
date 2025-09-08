@@ -13,6 +13,7 @@ export * from "./disclosure";
 export * from "./description";
 export * from "./fieldset";
 export * from "./form";
+export * from "./kbd";
 export * from "./label";
 export * from "./link";
 export * from "./listbox";

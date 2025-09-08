@@ -45,7 +45,7 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
   }
 
   return (
-    <div className="mb-4 flex flex-wrap gap-3">
+    <div className="mb-4 flex flex-wrap gap-2">
       {/* Only the node-id is needed */}
       {componentLinks.figma ? (
         <ButtonLink href={componentLinks.figma} startContent={<FigmaIcon className="text-lg" />}>
