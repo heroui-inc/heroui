@@ -6,9 +6,9 @@ import {notFound} from "next/navigation";
 
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
-import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
+import {DOCS_CONTENT_PATH} from "@/utils/constants";
 import {extractLinksFromMDX} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
@@ -46,7 +46,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
           <div className="flex items-center gap-2">
             <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
             <ViewOptions
-              githubUrl={`${siteConfig.links.github}/blob/dev/apps/docs/content/docs/${page.path}`}
+              githubUrl={`${DOCS_CONTENT_PATH}/${page.path}`}
               markdownUrl={`${page.url}.mdx`}
             />
           </div>
