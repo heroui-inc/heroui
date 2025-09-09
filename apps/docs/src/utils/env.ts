@@ -22,6 +22,9 @@ const getBaseURL = (): URL => {
     if (vercelURL) host = vercelURL;
     // branch url will override if present
     if (branchURL) host = branchURL;
+    // production url will override if present
+    // @see https://vercel.com/docs/environment-variables/system-environment-variables#VERCEL_PROJECT_PRODUCTION_URL
+    if (productionURL) host = productionURL;
   }
 
   // production on vercel
