@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://heroui.com">
-      <img width="20%" src="https://raw.githubusercontent.com/heroui-inc/heroui/main/apps/docs/public/isotipo.png" alt="heorui" />
-      <h1 align="center">HeroUI</h1>
+      <img width="20%" style="border-radius: 30%; border: 2px solid #FFFFFF;" src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4" alt="heroui" />
+      <h1 align="center">HeroUI v3</h1>
   </a>
 </p>
 </br>
@@ -9,12 +9,6 @@
   <a href="https://github.com/heroui-inc/heroui/blob/main/LICENSE">
     <img src="https://img.shields.io/npm/l/@heroui/react?style=flat" alt="License">
   </a>
-  <a href="https://codecov.io/gh/jrgarciadev/nextui">
-    <img src="https://codecov.io/gh/jrgarciadev/nextui/branch/main/graph/badge.svg?token=QJF2QKR5N4" alt="codecov badge">
-  </a>
-  <!-- <a href="https://github.com/heroui-inc/heroui/actions/workflows/main.yaml">
-    <img src="https://github.com/heroui-inc/heroui/actions/workflows/main.yaml/badge.svg" alt="CI/CD heroui">
-  </a> -->
   <a href="https://www.npmjs.com/package/@heroui/react">
     <img src="https://img.shields.io/npm/dm/@heroui/react.svg?style=flat-round" alt="npm downloads">
   </a>
@@ -22,82 +16,23 @@
 
 ## Getting Started
 
-Visit <a aria-label="heroui learn" href="https://heroui.com/learn">https://heroui.com/guide</a> to get started with HeroUI.
+Visit <a aria-label="heroui learn" href="https://v3.heroui.com/docs/quick-start">https://v3.heroui.com/docs/quick-start</a> to get started with HeroUI v3.
 
 ## Documentation
 
-Visit [https://heroui.com/docs](https://heroui.com/docs) to view the full documentation.
+Visit [https://v3.heroui.com/docs](https://v3.heroui.com/docs) to view the full documentation.
 
 ## Storybook
 
-Visit [https://storybook.heroui.com](https://storybook.heroui.com/) to view the storybook for all components.
+Visit [https://storybook-v3.heroui.com](https://storybook-v3.heroui.com/) to view the storybook for all components.
 
-## Components Status
+## Roadmap
 
-### Batch 1
+Visit [https://herouiv3.featurebase.app/roadmap](https://herouiv3.featurebase.app/roadmap) to view the roadmap for HeroUI v3.
 
-- [ ] button (in progress)
-- [x] link
-- [x] chip
-- [ ] text-field
-- [ ] text-area
-- [ ] menu/dropdown
-- [ ] select
-- [ ] checkbox
-  - [ ] checkbox-group
-- [ ] radio
-  - [ ] radio-group
-- [ ] switch
-  - [ ] switch-group
-- [ ] slider
-- [ ] kbd
-- [ ] separator
+## Figma
 
-### Batch 2
-
-- [x] avatar
-- [x] avatar group
-- [x] tooltip
-- [x] spinner
-- [ ] input otp
-- [ ] calendar
-- [ ] date picker
-- [ ] alert
-- [ ] toast
-- [ ] card
-- [ ] gradient-blur
-- [ ] overlay
-- [ ] modal / dialog
-- [ ] tabs
-- [x] accordion
-- [ ] carousel
-- [ ] scroll shadow
-- [ ] scroll blur
-- [ ] listbox
-
-### Batch 3 (to do)
-
-- [ ] skeleton
-- [ ] breadcrumb
-- [ ] command
-- [ ] drawer
-- [ ] pagination
-- [ ] progress
-- [ ] scroll
-- [ ] table
-- [ ] chart
-- [ ] sheet (side)
-- [ ] navbar
-- [ ] sidebar
-- [ ] app shell
-- [ ] file uploader
-
-## Canary Release
-
-Canary versions are available after every merge into `canary` branch. You can install the packages with the tag `canary` in npm to use the latest changes before the next production release.
-
-- [Documentation](https://canary.heroui.com/docs)
-- [Storybook](https://canary-sb.heroui.com)
+Visit [https://www.figma.com/community/file/1546526812159103429](https://www.figma.com/community/file/1546526812159103429) to view the Figma file for HeroUI v3.
 
 ## Community
 
