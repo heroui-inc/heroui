@@ -6,33 +6,18 @@ export const __PREVIEW__ = env.NEXT_PUBLIC_APP_ENV === "preview";
 export const __PROD__ = env.NEXT_PUBLIC_APP_ENV === "production";
 
 const getBaseURL = (): URL => {
-  const [vercelURL, branchURL, productionURL] = env.NEXT_PUBLIC_BASE_DOMAIN_NAME?.split(",") ?? [];
-
-  // default
+  // default - dev
   let host = "localhost:3000";
 
-  // dev
-  if (__DEV__ && vercelURL) {
-    host = vercelURL;
-  }
-
   // preview
-  if (__PREVIEW__) {
-    // vercel url takes precedence
-    if (vercelURL) host = vercelURL;
-    // branch url will override if present
-    if (branchURL) host = branchURL;
-  }
+  if (__PREVIEW__) host = "v3.heroui.com";
 
-  // production on vercel
-  if (__PROD__ && productionURL) {
-    host = productionURL;
-  }
+  // production
+  if (__PROD__) host = "www.heroui.com";
 
   // protocol
   const protocol = host.startsWith("localhost") ? "http" : "https";
 
-  // Local build/run stays localhost: __DEV__, __PROD__, __PREVIEW__
   return new URL(`${protocol}://${host}`);
 };
 
