@@ -73,7 +73,7 @@ const parameters: Preview["parameters"] = {
   },
   darkMode: {
     classTarget: "html",
-    current: "system",
+    current: "light",
     darkClass: "dark",
     lightClass: "light",
     stylePreview: true,
