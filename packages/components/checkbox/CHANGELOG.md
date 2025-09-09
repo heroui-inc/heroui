@@ -1,5 +1,12 @@
 # @heroui/checkbox
 
+## 2.3.26
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.26
+
 ## 2.3.25
 
 ### Patch Changes

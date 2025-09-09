@@ -1,5 +1,13 @@
 # @heroui/snippet
 
+## 2.2.27
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.26
+  - @heroui/tooltip@2.2.23
+
 ## 2.2.26
 
 ### Patch Changes

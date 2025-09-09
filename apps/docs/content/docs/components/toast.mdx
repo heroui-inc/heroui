@@ -47,7 +47,7 @@ The `ToastProvider` must be added to the application before using the `addToast`
 import {HeroUIProvider} from '@heroui/react'
 import {ToastProvider} from "@heroui/toast";
 
-export default function Providers({children}) {
+export function Providers({children}) {
   return (
     <HeroUIProvider>
       <ToastProvider />
@@ -291,7 +291,7 @@ Toast has the following slots:
     },
     {
       attribute: "classNames",
-      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingComponent\" | \"progressTrack\" | \"progressIndicator\ | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
+      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingComponent\" | \"progressTrack\" | \"progressIndicator\" | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
       description: "Allows to set custom class names for the toast slots.",
       default: "-"
     }
