@@ -4,6 +4,18 @@ export const safeText = (text: string): string => {
   return text?.slice(0, 3);
 };
 
+export const safeInitials = (text: string): string => {
+  const initials =
+    text
+      ?.trim()
+      .split(/[\s\-_.]+/)
+      .filter(Boolean)
+      .map((word) => word.charAt(0).toUpperCase())
+      .join("") || "";
+
+  return safeText(initials);
+};
+
 export const safeAriaLabel = (...texts: any[]): string => {
   let ariaLabel = " ";
 
