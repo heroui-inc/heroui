@@ -1,6 +1,7 @@
 import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
 
+import {Analytics} from "@vercel/analytics/next";
 import {RootProvider} from "fumadocs-ui/provider";
 import {Inter} from "next/font/google";
 
@@ -18,6 +19,7 @@ export default function Layout({children}: {children: ReactNode}) {
     <html suppressHydrationWarning className={inter.className} lang="en">
       <body className="flex min-h-screen flex-col">
         <RootProvider>{children}</RootProvider>
+        <Analytics />
       </body>
     </html>
   );

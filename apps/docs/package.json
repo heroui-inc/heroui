@@ -18,6 +18,7 @@
     "@iconify/react": "6.0.1",
     "@t3-oss/env-nextjs": "0.13.8",
     "@types/color-convert": "2.0.4",
+    "@vercel/analytics": "1.5.0",
     "@vercel/og": "0.8.5",
     "color-convert": "3.1.0",
     "color2k": "2.0.3",
