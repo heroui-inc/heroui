@@ -2,10 +2,10 @@ import type {Preview} from "@storybook/react";
 
 import {addons} from "@storybook/preview-api";
 import {configureActions} from "@storybook/addon-actions";
-import {themes} from "@storybook/theming";
+import {themes as theming} from "@storybook/theming";
 import {DocsContainer} from '@storybook/blocks';
 import React, { useEffect, useState } from "react";
-import {DARK_MODE_EVENT_NAME,UPDATE_DARK_MODE_EVENT_NAME} from 'storybook-dark-mode';
+import {DARK_MODE_EVENT_NAME} from 'storybook-dark-mode';
 
 import {withInternationalization} from "./addons/i18n/decorator";
 import {withReactScan} from "./addons/react-scan/decorator";
@@ -18,6 +18,25 @@ configureActions({
 });
 
 const channel = addons.getChannel()
+
+const themes = {
+  dark :{
+    ...theming.dark,
+    appBg: "#1B1B1B",
+    appContentBg: "#1B1B1B",
+    background: "#1B1B1B",
+    barBg: "#1B1B1B",
+    brandTitle: `<img src="/logo-light.svg" style="width: 120px; height: auto;"/>`
+  },
+  light: {
+    ...theming.light,
+    appBg: "#FCFCFC",
+    appContentBg: "#FCFCFC",
+    background: "#FCFCFC",
+    barBg: "#FCFCFC",
+    brandTitle: `<img src="/logo-dark.svg" style="width: 120px; height: auto;"/>`
+  },
+}
 
 const ThemeContainer = (props) => {
   const [curTheme, setCurTheme] = useState<string>()
@@ -58,22 +77,8 @@ const parameters: Preview["parameters"] = {
     darkClass: "dark",
     lightClass: "light",
     stylePreview: true,
-    dark: {
-      ...themes.dark,
-      appBg: "#1B1B1B",
-      appContentBg: "#1B1B1B",
-      background: "#1B1B1B",
-      barBg: "#1B1B1B",
-      brandTitle: `<img src="/logo-light.svg" style="width: 120px; height: auto;"/>`
-    },
-    light: {
-      ...themes.light,
-      appBg: "#FCFCFC",
-      appContentBg: "#FCFCFC",
-      background: "#FCFCFC",
-      barBg: "#FCFCFC",
-      brandTitle: `<img src="/logo-dark.svg" style="width: 120px; height: auto;"/>`
-    },
+    dark: themes.dark,
+    light: themes.light,
   },
   docs: {
     container: ThemeContainer
