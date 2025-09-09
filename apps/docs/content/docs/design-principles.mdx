@@ -184,19 +184,24 @@ Wrap, extend, and customize components to match your needs.
 
 ```tsx
 // Custom wrapper component
-const CTAButton = React.forwardRef<HTMLButtonElement, CTAButtonProps>(
-  ({ intent = 'primary-cta', children, ...props }, ref) => {
-    const variantMap = {
-      'primary-cta': 'primary',
-      'secondary-cta': 'secondary',
-      'minimal': 'ghost'
-    };
+const CTAButton = ({
+  intent = 'primary-cta',
+  children,
+  ref,
+  ...props
+}: CTAButtonProps) => {
+  const variantMap = {
+    'primary-cta': 'primary',
+    'secondary-cta': 'secondary',
+    'minimal': 'ghost'
+  };
 
-    return <Button ref={ref} variant={variantMap[intent]} {...props}>
+  return (
+    <Button ref={ref} variant={variantMap[intent]} {...props}>
       {children}
-    </Button>;
-  }
-);
+    </Button>
+  );
+};
 ```
 
 Or extend with Tailwind Variants:
