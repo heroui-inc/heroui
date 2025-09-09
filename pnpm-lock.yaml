@@ -228,8 +228,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwind-variants:
-        specifier: 3.1.0
-        version: 3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 3.1.1
+        version: 3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       ts-morph:
         specifier: 26.0.0
         version: 26.0.0
@@ -292,8 +292,8 @@ importers:
         specifier: 1.12.1
         version: 1.12.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       tailwind-variants:
-        specifier: 3.1.0
-        version: 3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 3.1.1
+        version: 3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
     devDependencies:
       '@babel/core':
         specifier: 7.28.3
@@ -7534,8 +7534,8 @@ packages:
   tailwind-merge@3.3.1:
     resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
-  tailwind-variants@3.1.0:
-    resolution: {integrity: sha512-ieiYaEfUr+sNhw/k++dosmZfVA4VIG5bV+G1eGdJSC4FcflqQv0iSIlOLj/RbzRuTu/VrIiNSlwh1esBM3BXUg==}
+  tailwind-variants@3.1.1:
+    resolution: {integrity: sha512-ftLXe3krnqkMHsuBTEmaVUXYovXtPyTK7ckEfDRXS8PBZx0bAUas+A0jYxuKA5b8qg++wvQ3d2MQ7l/xeZxbZQ==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwind-merge: '>=3.0.0'
@@ -16551,7 +16551,7 @@ snapshots:
 
   tailwind-merge@3.3.1: {}
 
-  tailwind-variants@3.1.0(tailwind-merge@3.3.1)(tailwindcss@4.1.12):
+  tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.12):
     dependencies:
       tailwindcss: 4.1.12
     optionalDependencies:
