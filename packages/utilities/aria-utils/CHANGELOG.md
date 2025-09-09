@@ -1,5 +1,12 @@
 # @heroui/aria-utils
 
+## 2.2.23
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/system@2.4.22
+
 ## 2.2.22
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @heroui/calendar
 
+## 2.2.26
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/button@2.2.26
+  - @heroui/framer-utils@2.1.22
+
 ## 2.2.25
 
 ### Patch Changes

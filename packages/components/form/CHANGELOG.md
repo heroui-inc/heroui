@@ -1,5 +1,13 @@
 # @heroui/form
 
+## 2.1.26
+
+### Patch Changes
+
+- Updated dependencies [[`f9bf3e3`](https://github.com/heroui-inc/heroui/commit/f9bf3e32c3d56960cc481fd536c8b10d76e79cd0)]:
+  - @heroui/theme@2.4.22
+  - @heroui/system@2.4.22
+
 ## 2.1.25
 
 ### Patch Changes
