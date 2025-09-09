@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://heroui.com">
-      <img width="20%" style="border-radius: 30%; border: 2px solid #FFFFFF;" src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4" alt="heroui" />
+  <a href="https://v3.heroui.com">
+      <img width="20%" src="https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/public/icons/readme-logo.png" alt="heroui v3" />
       <h1 align="center">HeroUI v3</h1>
   </a>
 </p>
