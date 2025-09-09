@@ -45,7 +45,7 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
 
   return {
     figma: links.figma
-      ? `https://www.figma.com/design/FJUkI8BqC9s6AvrM38Lqag/HeroUI-Figma-Kit-V3--Community?node-id=${links.figma}`
+      ? `https://www.figma.com/design/H0xHxBB8qOKjHHAUCsvgHc/HeroUI-Figma-Kit-V3?node-id=${links.figma}`
       : undefined,
     rac: links.rac ? `https://react-spectrum.adobe.com/react-aria/${links.rac}.html` : undefined,
     radix: links.radix
