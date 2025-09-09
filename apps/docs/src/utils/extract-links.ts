@@ -1,12 +1,6 @@
 import matter from "gray-matter";
 
-import {
-  COMPONENT_PATH,
-  COMPONENT_STYLES_PATH,
-  STORYBOOK_STORIES_GROUP,
-  STORYBOOK_URL,
-  THEMES_PATH,
-} from "@/utils/constants";
+import {COMPONENT_PATH, COMPONENT_STYLES_PATH, STORYBOOK_URL, THEMES_PATH} from "@/utils/constants";
 
 export interface ComponentLinksType {
   rac?: string;
@@ -59,7 +53,7 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
       : undefined,
     source: links.source ? `${COMPONENT_PATH}/${links.source}` : undefined,
     storybook: links.storybook
-      ? `${STORYBOOK_URL}/?path=/story/${STORYBOOK_STORIES_GROUP}-${links.storybook}`
+      ? `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`
       : undefined,
     styles: links.styles ? `${COMPONENT_STYLES_PATH}/${links.styles}` : undefined,
     tailwind: links.tailwind ? `https://tailwindcss.com/docs/${links.tailwind}` : undefined,

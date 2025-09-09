@@ -43,7 +43,8 @@
     "clean": "pnpm clean:cache && pnpm i",
     "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name 'pnpm-lock.yaml' \\) -prune -exec rm -rf '{}' +",
     "upli": "pnpm up --filter \"./**\"  -L -i",
-    "postinstall": "husky install && pnpm --filter @heroui/styles build && pnpm typegen:docs"
+    "prepare": "husky",
+    "postinstall": "pnpm --filter @heroui/styles build && pnpm typegen:docs"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.5.1",

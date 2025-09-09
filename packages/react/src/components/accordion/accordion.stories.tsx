@@ -27,7 +27,7 @@ export default {
     },
   },
   component: Accordion,
-  title: "✅ Ready/Accordion",
+  title: "Components/Accordion",
 } as Meta<typeof Accordion>;
 
 const defaultArgs: AccordionProps = {

@@ -23,7 +23,7 @@ export default {
     },
   },
   component: Disclosure,
-  title: "✅ Ready/Disclosure",
+  title: "Components/Disclosure",
 } as Meta<typeof Disclosure>;
 
 const defaultArgs: DisclosureProps = {

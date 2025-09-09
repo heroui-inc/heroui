@@ -5,7 +5,7 @@ import React from "react";
 import {Separator} from "./separator";
 
 const meta: Meta<typeof Separator> = {
-  title: "✅ Ready/Separator",
+  title: "Components/Separator",
   component: Separator,
   parameters: {
     layout: "centered",

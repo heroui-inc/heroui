@@ -3,9 +3,11 @@
 changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
 
 check_run() {
-  if (echo "$changed_files" | grep --quiet "$1"); then
-    printf "\033[36mDetected changes in pnpm-lock.yaml, starting dependency update\033[0m\n"
-    eval "$2"
+  if echo "$changed_files" | grep --quiet "$1"; then
+    printf "\033[32m🔄 [husky] %s changed → running: %s\033[0m\n" "$1" "$2"
+    $2
+  else
+    printf "\033[90m⏭️ [husky] %s unchanged → skipping: %s\033[0m\n" "$1" "$2"
   fi
 }
 
