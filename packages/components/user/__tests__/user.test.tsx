@@ -100,6 +100,6 @@ describe("User", () => {
       />,
     );
 
-    expect(getByRole("img")).toHaveTextContent("WK");
+    expect(getByRole("img")).toHaveTextContent("W");
   });
 });
