@@ -9,8 +9,7 @@ export const siteConfig = {
   ],
   cdnUrl: __CDN_URL__,
   creator: "heroui-inc",
-  description:
-    "Beautiful components that stay maintained, so no more copy-pasting outdated code. Fully customizable and always up-to-date to help you ship faster.",
+  description: "A set of beautiful, customizable components that stay maintained and up to date.",
   githubRawUrl:
     "https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/content/docs",
   links: {
@@ -18,8 +17,8 @@ export const siteConfig = {
     github: "https://github.com/heroui-inc",
     twitter: "https://x.com/hero_ui",
   },
-  name: "HeroUI (Previously NextUI) - The design system you don't have to build",
-  ogImage: `/images/twitter-card.png`,
+  name: "HeroUI v3 (Previously NextUI) - The design system you don't have to build",
+  ogImage: `/images/twitter-card.jpg`,
   siteUrl: __BASE_URL__,
   supportEmail: "support@heroui.com",
 };
