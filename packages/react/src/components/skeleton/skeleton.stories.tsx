@@ -17,7 +17,7 @@ export default {
     },
   },
   component: Skeleton,
-  title: "✅ Ready/Skeleton",
+  title: "Components/Skeleton",
 } as Meta<typeof Skeleton>;
 
 const defaultArgs: SkeletonProps = {};

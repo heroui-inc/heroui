@@ -11,7 +11,7 @@ import {Link} from "./index";
 export default {
   argTypes: {},
   component: Link,
-  title: "✅ Ready/Link",
+  title: "Components/Link",
 } as Meta<typeof Link>;
 
 const DefaultTemplate = (_props: LinkProps) => (

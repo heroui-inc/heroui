@@ -5,7 +5,7 @@ import React from "react";
 import {Kbd} from "./";
 
 const meta: Meta<typeof Kbd> = {
-  title: "✅ Ready/Kbd",
+  title: "Components/Kbd",
   component: Kbd,
   parameters: {
     layout: "centered",

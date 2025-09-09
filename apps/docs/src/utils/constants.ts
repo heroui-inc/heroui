@@ -1,4 +1,4 @@
-import {__IS_PRE_RELEASE__, __PREVIEW__} from "@/utils/env";
+import {__DEV__, __IS_PRE_RELEASE__, __PREVIEW__} from "@/utils/env";
 
 export const GITHUB_URL = "https://github.com";
 
@@ -25,10 +25,8 @@ export const THEMES_PATH =
     ? `${GITHUB_URL}/${REPO_NAME}/tree/feat/v3/packages/styles/themes`
     : `${GITHUB_URL}/${REPO_NAME}/tree/main/packages/styles/themes`;
 
-export const STORYBOOK_URL =
-  __IS_PRE_RELEASE__ || __PREVIEW__
+export const STORYBOOK_URL = __DEV__
+  ? "http://localhost:6006"
+  : __IS_PRE_RELEASE__ || __PREVIEW__
     ? "https://storybook-v3.heroui.com"
     : "https://storybook.heroui.com";
-
-export const STORYBOOK_STORIES_GROUP =
-  __IS_PRE_RELEASE__ || __PREVIEW__ ? "%E2%9C%85-ready" : "components";

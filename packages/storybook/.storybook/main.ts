@@ -19,7 +19,7 @@ export const getStories = () => {
   ).filter((file) => {
     const content = fsReadFileSync(file, "utf-8");
 
-    return /title:\s*["']✅ Ready/.test(content);
+    return /title:\s*["']Components/.test(content);
   });
 
   return readyStories;
