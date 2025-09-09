@@ -19,6 +19,7 @@
     "build:docs": "dotenv -- turbo build --filter=@heroui/docs",
     "build:react": "turbo build --filter=@heroui/react",
     "build:storybook": "dotenv -- turbo build --filter=@heroui/storybook",
+    "build:sb": "dotenv -- pnpm build:storybook",
     "start:docs": "dotenv -- turbo start --filter=@heroui/docs",
     "start:storybook": "dotenv -- turbo start --filter=@heroui/storybook",
     "lint": "turbo lint",
