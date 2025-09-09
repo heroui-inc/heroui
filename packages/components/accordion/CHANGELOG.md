@@ -1,5 +1,14 @@
 # @heroui/accordion
 
+## 2.2.23
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/divider@2.2.19
+  - @heroui/aria-utils@2.2.23
+  - @heroui/framer-utils@2.1.22
+
 ## 2.2.22
 
 ### Patch Changes

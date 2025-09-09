@@ -1,5 +1,11 @@
 # @heroui/system-rsc
 
+## 2.3.19
+
+### Patch Changes
+
+- [#5672](https://github.com/heroui-inc/heroui/pull/5672) [`f9bf3e3`](https://github.com/heroui-inc/heroui/commit/f9bf3e32c3d56960cc481fd536c8b10d76e79cd0) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants version
+
 ## 2.3.18
 
 ### Patch Changes
