@@ -36,6 +36,10 @@
   "tailwindCSS.classFunctions": ["tv", "clsx", "cn"],
   "tailwindCSS.classAttributes": ["className", "classNames"],
   "tailwindCSS.experimental.configFile": {
-    "packages/storybook/styles/globals.css": ["packages/react/**", "packages/storybook/**"]
+    "packages/storybook/styles/globals.css": [
+      "packages/react/**",
+      "packages/storybook/**",
+      "packages/styles/**"
+    ]
   }
 }
