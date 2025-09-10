@@ -108,8 +108,8 @@
     --accent-soft-foreground: var(--color-neutral-200);
 
     /* Status Colors */
-    --success: oklch(1 0 0 / 16%);
-    --success-foreground: var(--eclipse);
+    --success: oklch(0.5503 0.1244 153.56);
+    --success-foreground: var(--snow);
 
     --warning: oklch(85% 0.1414 77.88);
     --warning-foreground: var(--eclipse);
