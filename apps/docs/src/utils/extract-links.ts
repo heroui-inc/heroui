@@ -1,5 +1,6 @@
 import matter from "gray-matter";
 
+import {siteConfig} from "@/config/site";
 import {COMPONENT_PATH, COMPONENT_STYLES_PATH, STORYBOOK_URL, THEMES_PATH} from "@/utils/constants";
 
 export interface ComponentLinksType {
@@ -10,8 +11,8 @@ export interface ComponentLinksType {
   storybook?: string;
   themes?: string;
   tailwind?: string;
-  figma?: string;
-  [key: string]: string | undefined;
+  figma?: boolean;
+  [key: string]: string | boolean | undefined;
 }
 
 /**
@@ -44,9 +45,7 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
   if (!links) return null;
 
   return {
-    figma: links.figma
-      ? `https://www.figma.com/design/H0xHxBB8qOKjHHAUCsvgHc/HeroUI-Figma-Kit-V3?node-id=${links.figma}`
-      : undefined,
+    figma: links.figma ? siteConfig.figmaCommunityFile : undefined,
     rac: links.rac ? `https://react-spectrum.adobe.com/react-aria/${links.rac}.html` : undefined,
     radix: links.radix
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`

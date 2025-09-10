@@ -10,6 +10,7 @@ export const siteConfig = {
   cdnUrl: __CDN_URL__,
   creator: "heroui-inc",
   description: "A set of beautiful, customizable components that stay maintained and up to date.",
+  figmaCommunityFile: "https://www.figma.com/community/file/1546526812159103429",
   githubRawUrl:
     "https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/content/docs",
   links: {
