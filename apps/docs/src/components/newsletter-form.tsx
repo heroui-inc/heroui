@@ -31,12 +31,9 @@ export function NewsletterForm() {
     success: circleCheckIcon,
   };
 
-  const getButtonContentKey = (currentStatus: "idle" | "loading" | "success" | "error") => {
-    if (currentStatus === "idle" || currentStatus === "error") return "subscribe";
-    if (currentStatus === "loading") return "loading";
-    if (currentStatus === "success") return "success";
-
-    return currentStatus;
+  const getButtonContentKey = (status: "idle" | "loading" | "success" | "error") => {
+    if (status === "idle" || status === "error")
+      return status === "idle" || status === "error" ? "subscribe" : status;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
