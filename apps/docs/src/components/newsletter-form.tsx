@@ -1,6 +1,7 @@
 "use client";
 
 import {Spinner} from "@heroui/react";
+import {AnimatePresence, motion} from "motion/react";
 import React from "react";
 
 export function NewsletterForm() {
@@ -18,6 +19,25 @@ export function NewsletterForm() {
       />
     </svg>
   );
+
+  const subscribeButton = {
+    error: "Subscribe",
+    idle: "Subscribe",
+    loading: (
+      <div className="flex w-full items-center justify-center">
+        <Spinner color="current" size="sm" />
+      </div>
+    ),
+    success: circleCheckIcon,
+  };
+
+  const getButtonContentKey = (currentStatus: "idle" | "loading" | "success" | "error") => {
+    if (currentStatus === "idle" || currentStatus === "error") return "subscribe";
+    if (currentStatus === "loading") return "loading";
+    if (currentStatus === "success") return "success";
+
+    return currentStatus;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,17 +112,21 @@ export function NewsletterForm() {
             </div>
           </div>
           <button
-            className="relative flex w-full cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl border border-black/10 bg-[rgba(250,250,250,0.7)] px-3.5 py-2 text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#1b1b1b] transition-opacity duration-200 dark:border-white/10 dark:bg-[rgba(23,23,23,0.7)] dark:text-[#fcfcfc]"
-            disabled={status === "loading"}
+            className="relative flex w-full cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl border border-black/10 bg-[rgba(250,250,250,0.7)] px-3.5 py-2 text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#1b1b1b] transition-opacity duration-200 disabled:cursor-not-allowed dark:border-white/10 dark:bg-[rgba(23,23,23,0.7)] dark:text-[#fcfcfc]"
+            disabled={status === "loading" || status === "success"}
             type="submit"
           >
-            {status === "loading" ? (
-              <Spinner size="sm" />
-            ) : status === "success" ? (
-              circleCheckIcon
-            ) : (
-              "Subscribe"
-            )}
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.span
+                key={getButtonContentKey(status)}
+                animate={{opacity: 1, y: 0}}
+                exit={{opacity: 0, y: 25}}
+                initial={{opacity: 0, y: -25}}
+                transition={{bounce: 0, duration: 0.3, type: "spring"}}
+              >
+                {subscribeButton[status]}
+              </motion.span>
+            </AnimatePresence>
           </button>
         </form>
       </div>
