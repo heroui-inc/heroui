@@ -6,6 +6,7 @@ import {notFound} from "next/navigation";
 
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
+import {NewsletterForm} from "@/components/newsletter-form";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {DOCS_CONTENT_PATH} from "@/utils/constants";
@@ -37,6 +38,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
       // TODO: add github last edit
       // lastUpdate={lastEditTime}
       tableOfContent={{
+        footer: <NewsletterForm />,
         style: "normal",
       }}
     >
