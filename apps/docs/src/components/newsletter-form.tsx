@@ -1,7 +1,8 @@
 "use client";
 
-import {Spinner} from "@heroui/react";
-import {AnimatePresence, motion} from "motion/react";
+import {Button, Spinner} from "@heroui/react";
+import {AnimatePresence, LazyMotion, domAnimation} from "motion/react";
+import * as m from "motion/react-m";
 import React from "react";
 
 export function NewsletterForm() {
@@ -84,7 +85,7 @@ export function NewsletterForm() {
         <form noValidate className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <div className="flex w-full flex-col gap-1">
             <label
-              className={`pb-1 text-sm font-medium tracking-[-0.07px] ${status === "error" ? "text-[#e44c3d] dark:text-[#eb5545]" : "text-foreground"}`}
+              className={`pb-1 text-sm font-medium tracking-[-0.07px] ${status === "error" ? "text-[#e44c3d] dark:text-[#eb5545]" : "text-muted"}`}
               htmlFor="newsletter-email"
             >
               Hero Newsletter
@@ -97,37 +98,42 @@ export function NewsletterForm() {
                 placeholder="name@email.com"
                 type="email"
                 value={email}
-                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-xl border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] backdrop-blur-[50px] focus:outline-none ${
+                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-lg border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] focus:outline-none ${
                   status === "error"
-                    ? "border-[#e44c3d] bg-white/0 dark:border-[#eb5545] dark:bg-black/0"
+                    ? "border-danger bg-white/0 dark:bg-black/0"
                     : "border-black/[0.04] bg-black/[0.07] dark:bg-white/[0.07]"
                 }`}
                 onChange={(e) => setEmail(e.target.value)}
               />
               {status === "error" && (
-                <p className="mt-1 px-1 text-xs text-[#e44c3d] dark:text-[#eb5545]">
-                  {errorMessage}
-                </p>
+                <p className="text-danger mt-1 px-1 text-xs">{errorMessage}</p>
               )}
             </div>
           </div>
-          <button
-            className="relative flex w-full cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl border border-black/10 bg-[rgba(250,250,250,0.7)] px-3.5 py-2 text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#1b1b1b] transition-opacity duration-200 disabled:cursor-not-allowed dark:border-white/10 dark:bg-[rgba(23,23,23,0.7)] dark:text-[#fcfcfc]"
-            disabled={status === "loading" || status === "success"}
+          <Button
+            className="overflow-clip bg-[rgba(250,250,250,0.7)] text-sm transition-all dark:bg-[rgba(23,23,23,0.7)]"
+            isPending={status === "loading" || status === "success"}
             type="submit"
+            variant="tertiary"
+            style={{
+              // @ts-expect-error --disabled-opacity is a css variable
+              "--disabled-opacity": 100,
+            }}
           >
-            <AnimatePresence initial={false} mode="popLayout">
-              <motion.span
-                key={getButtonContentKey(status)}
-                animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, y: 25}}
-                initial={{opacity: 0, y: -25}}
-                transition={{bounce: 0, duration: 0.3, type: "spring"}}
-              >
-                {subscribeButton[status]}
-              </motion.span>
-            </AnimatePresence>
-          </button>
+            <LazyMotion features={domAnimation}>
+              <AnimatePresence initial={false} mode="popLayout">
+                <m.span
+                  key={getButtonContentKey(status)}
+                  animate={{opacity: 1, y: 0}}
+                  exit={{opacity: 0, y: 25}}
+                  initial={{opacity: 0, y: -25}}
+                  transition={{bounce: 0, duration: 0.3, type: "spring"}}
+                >
+                  {subscribeButton[status]}
+                </m.span>
+              </AnimatePresence>
+            </LazyMotion>
+          </Button>
         </form>
       </div>
     </div>
