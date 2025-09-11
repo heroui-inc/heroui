@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["VERCEL_ENV", "STORYBOOK_READY_ONLY"],
+  "globalEnv": ["VERCEL_ENV", "STORYBOOK_READY_ONLY", "LOOPS_API_ENDPOINT", "LOOPS_API_KEY"],
   "tasks": {
     "dev": {
       "cache": false,
