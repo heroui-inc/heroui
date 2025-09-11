@@ -53,7 +53,10 @@ export function NewsletterForm() {
 
     try {
       const response = await fetch("/api/newsletter", {
-        body: JSON.stringify({email}),
+        body: JSON.stringify({
+          email,
+          source: "Subscribe from HeroUI Docs",
+        }),
         headers: {
           "Content-Type": "application/json",
         },

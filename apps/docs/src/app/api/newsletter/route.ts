@@ -4,7 +4,7 @@ import {NextResponse} from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const {email} = await request.json();
+    const {email, source} = await request.json();
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({error: "Please enter a valid email."}, {status: 400});
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const response = await fetch(`${apiEndpoint}/contacts/create`, {
       body: JSON.stringify({
         email,
-        source: "Subscribe from HeroUI Docs",
+        source,
       }),
       headers: {
         Authorization: `Bearer ${apiKey}`,
