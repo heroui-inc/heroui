@@ -98,7 +98,7 @@ export function NewsletterForm() {
                 placeholder="name@email.com"
                 type="email"
                 value={email}
-                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-lg border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] focus:outline-none ${
+                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-lg border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] transition-all duration-150 ease-out focus:outline-none ${
                   status === "error"
                     ? "border-danger bg-white/0 dark:bg-black/0"
                     : "border-black/[0.04] bg-black/[0.07] hover:bg-black/[0.1] dark:bg-white/[0.14] dark:hover:bg-white/[0.18]"
