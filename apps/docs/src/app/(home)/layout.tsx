@@ -42,6 +42,12 @@ export default function Layout({children}: {children: ReactNode}) {
               text: "Roadmap",
               url: "https://herouiv3.featurebase.app/roadmap",
             },
+            {
+              external: true,
+              icon: <Iconify icon="smartphone" />,
+              text: "React Native",
+              url: "https://link.heroui.com/native?ref=heroui-v3",
+            },
           ],
           on: "menu",
           text: "Resources",
