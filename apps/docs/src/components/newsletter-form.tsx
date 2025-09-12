@@ -98,10 +98,10 @@ export function NewsletterForm() {
                 placeholder="name@email.com"
                 type="email"
                 value={email}
-                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-lg border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] focus:outline-none ${
+                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-lg border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] transition-all duration-150 ease-out focus:outline-none ${
                   status === "error"
                     ? "border-danger bg-white/0 dark:bg-black/0"
-                    : "border-black/[0.04] bg-black/[0.07] dark:bg-white/[0.07]"
+                    : "border-black/[0.04] bg-black/[0.07] hover:bg-black/[0.1] dark:bg-white/[0.14] dark:hover:bg-white/[0.18]"
                 }`}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -111,7 +111,7 @@ export function NewsletterForm() {
             </div>
           </div>
           <Button
-            className="overflow-clip bg-[rgba(250,250,250,0.7)] text-sm transition-all dark:bg-[rgba(23,23,23,0.7)]"
+            className="overflow-clip border-black/[0.1] bg-[#FAFAFA]/[0.7] text-sm transition-all hover:bg-[#F5F5F5] dark:border-white/[0.1] dark:bg-[#171717]/[0.7] dark:hover:bg-[#262626]"
             isPending={status === "loading" || status === "success"}
             type="submit"
             variant="tertiary"
