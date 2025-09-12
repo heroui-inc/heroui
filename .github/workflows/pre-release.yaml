@@ -34,18 +34,28 @@ jobs:
         with:
           files: ".changeset/pre.json"
 
-      - name: Debug condition values
-        run: |
-          echo "pre.json exists: ${{ steps.check_if_pre_json_exists.outputs.files_exists }}"
-          echo "Commit message: ${{ github.event.head_commit.message }}"
-          echo "Contains version packages: ${{ contains(github.event.head_commit.message, 'ci(changesets): version packages') }}"
-          echo "Full condition would be: ${{ steps.check_if_pre_json_exists.outputs.files_exists == 'true' && contains(github.event.head_commit.message, 'ci(changesets): version packages') }}"
+          - name: Prepare Release Inputs
+            env:
+              CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+              TAG: ${{ steps.tag_version.outputs.new_tag }}
+            run: |
+              echo "TAG_NAME=$TAG" >> $GITHUB_ENV
+              echo "RELEASE_NAME=Release $TAG" >> $GITHUB_ENV
+              echo "RELEASE_BODY<<EOF" >> $GITHUB_ENV
+              echo "$CHANGELOG" >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
 
-      - name: Get pre-release changesets
-        id: get-pre-release-changesets
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: ".changeset/pre.json"
+          - name: Create Release
+            id: create_release
+            uses: actions/create-release@v1
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              tag_name: ${{ env.TAG_NAME }}
+              release_name: ${{ env.RELEASE_NAME }}
+              body: ${{ env.RELEASE_BODY }}
+              draft: false
+              prerelease: false
           prop_path: "changesets"
 
       - name: Create pre-release PR
