@@ -8,6 +8,7 @@ import * as ButtonDemos from "./button";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as DisclosureDemos from "./disclosure";
+import * as DisclosureGroupDemos from "./disclosure-group";
 import * as KbdDemos from "./kbd";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
@@ -187,6 +188,11 @@ export const demos: Record<string, DemoItem> = {
   "disclosure-basic": {
     component: DisclosureDemos.Basic,
     file: "disclosure/basic.tsx",
+  },
+  // DisclosureGroup demos
+  "disclosure-group-basic": {
+    component: DisclosureGroupDemos.Basic,
+    file: "disclosure-group/basic.tsx",
   },
   // Kbd demos
   "kbd-basic": {

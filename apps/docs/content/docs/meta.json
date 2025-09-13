@@ -24,6 +24,7 @@
     "components/button",
     "components/chip",
     "components/disclosure",
+    "components/disclosure-group",
     "components/kbd",
     "components/link",
     "components/popover",
