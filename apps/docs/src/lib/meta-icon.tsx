@@ -12,7 +12,8 @@ export function createMetaIcon(iconName: string | undefined) {
   if (iconName === "new")
     return (
       <Chip
-        className="text-foreground/90 dark:bg-white/8 bg-black/8 absolute right-[18%] top-1/2 -translate-y-1/2 rounded-full"
+        key={id}
+        className="text-foreground/90 dark:bg-white/8 bg-black/8 absolute right-[22%] top-1/2 h-5 -translate-y-1/2 rounded-full px-1.5 text-[10px]"
         variant="primary"
       >
         New
