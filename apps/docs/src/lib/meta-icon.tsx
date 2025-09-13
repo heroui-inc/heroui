@@ -8,8 +8,8 @@ export function createMetaIcon(iconName: string | undefined) {
 
   const id = uniqueId();
 
-  //  Hacky way to show a new badge
-  if (iconName === "new")
+  //  FIXME: Hacky way to show a new badge
+  if (iconName === "new") {
     return (
       <Chip
         key={id}
@@ -19,6 +19,7 @@ export function createMetaIcon(iconName: string | undefined) {
         New
       </Chip>
     );
+  }
 
   return <Iconify key={id} icon={iconName} />;
 }

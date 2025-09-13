@@ -241,6 +241,10 @@ export const demos: Record<string, DemoItem> = {
     component: SkeletonDemos.List,
     file: "skeleton/list.tsx",
   },
+  "skeleton-animation-types": {
+    component: SkeletonDemos.AnimationTypes,
+    file: "skeleton/animation-types.tsx",
+  },
   // Separator demos
   "separator-basic": {
     component: SeparatorDemos.Basic,

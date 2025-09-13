@@ -16,6 +16,7 @@
 [data-theme="light"],
 .light {
   /* --background: #f9f9f9; */
+  /* -skeleton-default-animation-type: none; */ /* possible values: shimmer, pulse, none */
 }
 
 /* Dark theme overrides sing data-theme or class */
@@ -26,6 +27,7 @@
   /* --cursor: default; */
 
   --cursor-interactive: pointer;
+  /* --skeleton-default-animation-type: shimmer; */ /* possible values: shimmer, pulse, none */
 }
 
 /* @theme inline { */

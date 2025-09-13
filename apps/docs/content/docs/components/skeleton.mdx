@@ -35,11 +35,40 @@ import { Skeleton } from '@heroui/react';
 
 ### List Items
 
-<ComponentPreview 
+<ComponentPreview
   name="skeleton-list"
 />
 
+### Animation Types
+
+<ComponentPreview
+  name="skeleton-animation-types"
+/>
+
 ## Styling
+
+### Global Animation Configuration
+
+You can set a default animation type for all Skeleton components in your application by defining the `--skeleton-default-animation-type` CSS variable:
+
+```css
+/* In your global CSS file */
+:root {
+  /* Possible values: shimmer, pulse, none */
+  --skeleton-default-animation-type: pulse;
+}
+
+/* You can also set different values for light/dark themes */
+.light, [data-theme="light"] {
+  --skeleton-default-animation-type: shimmer;
+}
+
+.dark, [data-theme="dark"] {
+  --skeleton-default-animation-type: pulse;
+}
+```
+
+This global setting will be overridden by the `animationType` prop when specified on individual components.
 
 ### Passing Tailwind CSS classes
 
@@ -55,17 +84,29 @@ function CustomSkeleton() {
 
 ### Customizing the component classes
 
-To customize the Skeleton component classes, you can use the `@layer components` directive. 
+To customize the Skeleton component classes, you can use the `@layer components` directive.
 <br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
+  /* Base skeleton styles */
   .skeleton {
-    @apply bg-gray-200;
+    @apply bg-surface-3/50; /* Change base background */
   }
-  
-  .skeleton:before {
-    @apply via-gray-100;
+
+  /* Shimmer animation gradient */
+  .skeleton--shimmer:before {
+    @apply via-surface-2; /* Change shimmer gradient color */
+  }
+
+  /* Pulse animation */
+  .skeleton--pulse {
+    @apply animate-pulse opacity-75; /* Customize pulse animation */
+  }
+
+  /* No animation variant */
+  .skeleton--none {
+    @apply opacity-50; /* Style for static skeleton */
   }
 }
 ```
@@ -77,23 +118,31 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Skeleton component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/skeleton.css)):
 
 #### Base Class
-`.skeleton` - Base skeleton styles with shimmer animation
+`.skeleton` - Base skeleton styles with background and rounded corners
+
+#### Animation Variant Classes
+- `.skeleton--shimmer` - Adds shimmer animation with gradient effect (default)
+- `.skeleton--pulse` - Adds pulse animation using Tailwind's animate-pulse
+- `.skeleton--none` - No animation, static skeleton
 
 ### Animation
 
-The shimmer effect is created using a CSS gradient animation that moves across the skeleton element:
+The Skeleton component supports three animation types, each with different visual effects:
+
+#### Shimmer Animation
+The shimmer effect creates a gradient that moves across the skeleton element:
 
 ```css
-.skeleton {
-  @apply bg-surface-3 pointer-events-none relative overflow-hidden rounded-md;
-
-  &:before {
-    @apply animate-skeleton via-surface-2 absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
-  }
+.skeleton--shimmer:before {
+  @apply animate-skeleton via-surface-3 absolute inset-0 -translate-x-full
+         bg-gradient-to-r from-transparent to-transparent content-[''];
 }
+```
 
+The shimmer animation is defined in the theme using:
+```css
 @theme inline {
- --animate-skeleton: skeleton 2s linear infinite;
+  --animate-skeleton: skeleton 2s linear infinite;
 
   @keyframes skeleton {
     100% {
@@ -103,11 +152,29 @@ The shimmer effect is created using a CSS gradient animation that moves across t
 }
 ```
 
+#### Pulse Animation
+The pulse animation uses Tailwind's built-in `animate-pulse` utility:
+
+```css
+.skeleton--pulse {
+  @apply animate-pulse;
+}
+```
+
+#### No Animation
+For static skeletons without any animation:
+
+```css
+.skeleton--none {
+  /* No animation styles applied */
+}
+```
+
 ## API Reference
 
 ### Skeleton Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| `animationType` | `"shimmer" \| "pulse" \| "none"` | `"shimmer"` or CSS variable | The animation type for the skeleton. Can be globally configured via `--skeleton-default-animation-type` CSS variable |
 | `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Optional child content |
