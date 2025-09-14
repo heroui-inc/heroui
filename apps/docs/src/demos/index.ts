@@ -194,6 +194,10 @@ export const demos: Record<string, DemoItem> = {
     component: DisclosureGroupDemos.Basic,
     file: "disclosure-group/basic.tsx",
   },
+  "disclosure-group-controlled": {
+    component: DisclosureGroupDemos.Controlled,
+    file: "disclosure-group/controlled.tsx",
+  },
   // Kbd demos
   "kbd-basic": {
     component: KbdDemos.Basic,

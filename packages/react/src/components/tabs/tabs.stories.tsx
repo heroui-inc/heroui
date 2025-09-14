@@ -324,4 +324,5 @@ export const Showcase1: Story = {
     children: null,
   },
   render: Showcase1Template,
+  name: "Showcases/Apple iPhone 17 Pro cameras",
 };
