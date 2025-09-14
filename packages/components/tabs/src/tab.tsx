@@ -9,7 +9,7 @@ import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
 import {useTab} from "@react-aria/tabs";
 import {useHover} from "@react-aria/interactions";
-import {m, domMax, LazyMotion} from "framer-motion";
+import {m, LazyMotion, domMax} from "framer-motion";
 import {useIsMounted} from "@heroui/use-is-mounted";
 
 export interface TabItemProps<T extends object = object> extends BaseTabItemProps<T> {
@@ -122,7 +122,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
       title={otherProps?.titleValue}
       type={Component === "button" ? "button" : undefined}
     >
-      {isSelected && !disableAnimation && !disableCursorAnimation && isMounted && !isInModal ? (
+      {isSelected && !disableAnimation && !disableCursorAnimation && isMounted ? (
         // use synchronous loading for domMax here
         // since lazy loading produces different behaviour
         <LazyMotion features={domMax}>
@@ -130,7 +130,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
             className={slots.cursor({class: classNames?.cursor})}
             data-slot="cursor"
             layoutDependency={false}
-            layoutId="cursor"
+            layoutId={isInModal ? undefined : "cursor"}
             transition={{
               type: "spring",
               bounce: 0.15,
