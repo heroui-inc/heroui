@@ -50,7 +50,8 @@ export function NewsletterForm() {
     setStatus("loading");
 
     try {
-      const response = await fetch("/api/newsletter", {
+      // Loops - newsletter
+      await fetch("/api/newsletter", {
         body: JSON.stringify({
           email,
           source: "Subscribe from HeroUI Docs",
@@ -61,20 +62,23 @@ export function NewsletterForm() {
         method: "POST",
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to subscribe");
-      }
+      // Featurebase - changelog
+      await fetch("/api/changelog", {
+        body: JSON.stringify({
+          email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
 
       setStatus("success");
       setEmail("");
       setTimeout(() => setStatus("idle"), 3000);
     } catch (error) {
       setStatus("error");
-      setErrorMessage(
-        error instanceof Error ? error.message : "Something went wrong. Please try again.",
-      );
+      setErrorMessage("Failed to subscribe. Please try again.");
       setTimeout(() => setStatus("idle"), 3000);
     }
   };
