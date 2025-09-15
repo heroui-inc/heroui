@@ -64,7 +64,7 @@ export function NewsletterForm() {
 
       const newsletterResData = await newsletterResponse.json();
 
-      if (!newsletterResponse.ok) {
+      if (!newsletterResData.success) {
         throw new Error(newsletterResData.error || "Failed to subscribe newsletter");
       }
 
@@ -81,7 +81,7 @@ export function NewsletterForm() {
 
       const changelogResData = await changelogResponse.json();
 
-      if (!changelogResponse.ok) {
+      if (!changelogResData.success) {
         throw new Error(changelogResData.error || "Failed to subscribe changelog");
       }
 
