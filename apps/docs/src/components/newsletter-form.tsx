@@ -50,7 +50,8 @@ export function NewsletterForm() {
     setStatus("loading");
 
     try {
-      const response = await fetch("/api/newsletter", {
+      // Loops - newsletter
+      const newsletterResponse = await fetch("/api/newsletter", {
         body: JSON.stringify({
           email,
           source: "Subscribe from HeroUI Docs",
@@ -61,10 +62,27 @@ export function NewsletterForm() {
         method: "POST",
       });
 
-      const data = await response.json();
+      const newsletterResData = await newsletterResponse.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to subscribe");
+      if (!newsletterResData.success) {
+        throw new Error(newsletterResData.error || "Failed to subscribe newsletter");
+      }
+
+      // Featurebase - changelog
+      const changelogResponse = await fetch("/api/changelog", {
+        body: JSON.stringify({
+          email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+
+      const changelogResData = await changelogResponse.json();
+
+      if (!changelogResData.success) {
+        throw new Error(changelogResData.error || "Failed to subscribe changelog");
       }
 
       setStatus("success");
