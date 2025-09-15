@@ -19,18 +19,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({error: "Featurebase service is not configured."}, {status: 500});
     }
 
-    await fetch(`${apiEndpoint}/changelog/subscribers`, {
+    const response = await fetch(`${apiEndpoint}/changelog/subscribers`, {
       body: JSON.stringify({
         emails: [email],
       }),
       headers: {
-        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        "X-API-Key": `${apiKey}`,
       },
       method: "POST",
     });
 
-    return NextResponse.json({success: true});
+    const res = await response.json();
+
+    return NextResponse.json({success: res.success});
   } catch (error) {
     console.error("Featurebase subscription error:", error);
 
