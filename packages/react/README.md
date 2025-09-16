@@ -1,21 +1,12 @@
 <p align="center">
   <a href="https://v3.heroui.com">
-    <picture>
-      <!-- White logo for dark mode -->
-      <source 
-        media="(prefers-color-scheme: dark)" 
-        srcset="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/hero-web-logo-white.png"
-      >
-      <!-- Black logo for light mode (default fallback) -->
       <img 
         alt="HeroUI v3 logo" 
-        width="40%" 
-        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/hero-web-logo-black.png"
-      >
-    </picture>
+        width="100%" 
+        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/heroui-web-repo.png"
+      />
   </a>
 </p>
-</br>
 <p align="center">
   <a href="https://github.com/heroui-inc/heroui/blob/main/LICENSE">
     <img src="https://img.shields.io/npm/l/@heroui/react?style=flat" alt="License">
@@ -24,6 +15,8 @@
     <img src="https://img.shields.io/npm/dm/@heroui/react.svg?style=flat-round" alt="npm downloads">
   </a>
 </p>
+
+HeroUI is a set of beautiful, customizable, always up-to-date components that help you skip the copy-paste and focus on building.
 
 ## Getting Started
 
