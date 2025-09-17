@@ -1,0 +1,96 @@
+.checkbox {
+  @apply flex items-center gap-3;
+  cursor: var(--cursor-interactive);
+
+  &:disabled,
+  &[aria-disabled="true"],
+  &[data-disabled="true"] {
+    @apply cursor-not-allowed;
+  }
+}
+
+.checkbox-wrapper {
+  @apply relative inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[5px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] transition-all duration-200;
+
+  /* default unselected state  */
+  @apply bg-surface-3 border-border/10 border;
+
+  /* hover state  - unselected  */
+  &[data-hovered="true"][data-selected="false"] {
+    @apply border-accent-hover;
+  }
+  &[data-hovered="true"][data-indeterminate="false"] {
+    @apply border-accent-hover;
+  }
+
+  /* pressed sate  */
+  &[data-pressed="true"] {
+    transform: scale(0.97);
+  }
+
+  /* selected state  */
+  &[data-selected="true"] {
+    @apply bg-accent border-accent-hover border-[0.5px];
+  }
+  /* indetereminate state  */
+  &[data-indeterminate="true"] {
+    @apply bg-accent border-accent-hover border-[0.5px];
+  }
+
+  /* hovered selected  */
+  &[data-hovered="true"][data-selected="true"] {
+    @apply bg-accent-hover;
+  }
+  /* hovered indeterminate  */
+  &[data-hovered="true"][data-indeterminate="true"] {
+    @apply bg-accent-hover;
+  }
+
+  /* Focus state - gray background with focus ring */
+  &[data-focus-visible="true"] {
+    @apply border-2 shadow-[0px_0px_0px_3px_rgba(0,0,0,0.30),0px_0px_0px_0.5px_rgba(0,0,0,0.05)];
+  }
+
+  /* error state unselected  */
+  &[data-invalid="true"][data-selected="false"] {
+    @apply border-danger;
+  }
+  &[data-invalid="true"][data-indeterminate="false"] {
+    @apply border-danger;
+  }
+
+  /* error state selected  */
+  &[data-invalid="true"][data-selected="true"] {
+    @apply bg-danger border-danger border-[0.5px];
+  }
+  &[data-invalid="true"][data-indeterminate="true"] {
+    @apply bg-danger border-danger border-[0.5px];
+  }
+
+  /* Disabled state*/
+  &[data-disabled="true"] {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* Disabled selected/indeterminate - muted gray */
+  &[data-disabled="true"][data-selected="true"] {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  &[data-disabled="true"][data-indeterminate="true"] {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+.checkbox-icon {
+  @apply text-accent-foreground h-3 w-3 scale-0 opacity-0 transition-all duration-200;
+
+  /* Show icon when selected or indeterminate */
+  .checkbox-wrapper[data-selected="true"] & {
+    @apply scale-100 opacity-100;
+  }
+
+  .checkbox-wrapper[data-indeterminate="true"] & {
+    @apply scale-100 opacity-100;
+  }
+}
