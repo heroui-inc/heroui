@@ -78,6 +78,11 @@ interface CheckboxContext {
   slots?: ReturnType<typeof checkboxVariants>;
   isSelected?: boolean;
   isIndeterminate?: boolean;
+  isHovered?: boolean;
+  isPressed?: boolean;
+  isFocusVisible?: boolean;
+  isDisabled?: boolean;
+  isInvalid?: boolean;
 }
 
 const CheckboxContext = createContext<CheckboxContext>({});
@@ -99,11 +104,20 @@ const CheckboxRoot = React.forwardRef<
       data-checkbox
       data-slot="control"
       {...props}
-      className={composeTwRenderProps(className, slots.base())}
+      className={composeTwRenderProps(className, `group ${slots.base()}`)}
     >
       {(values) => (
         <CheckboxContext.Provider
-          value={{isIndeterminate: values.isIndeterminate, isSelected: values.isSelected, slots}}
+          value={{
+            isIndeterminate: values.isIndeterminate,
+            isSelected: values.isSelected,
+            isHovered: values.isHovered,
+            isPressed: values.isPressed,
+            isFocusVisible: values.isFocusVisible,
+            isDisabled: values.isDisabled,
+            isInvalid: values.isInvalid,
+            slots,
+          }}
         >
           {typeof children === "function" ? children(values) : children}
         </CheckboxContext.Provider>
@@ -122,7 +136,16 @@ interface CheckboxIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanEleme
 
 const CheckboxIndicator = React.forwardRef<HTMLSpanElement, CheckboxIndicatorProps>(
   ({children, className, ...props}, ref) => {
-    const {isIndeterminate, isSelected, slots} = useContext(CheckboxContext);
+    const {
+      isDisabled,
+      isFocusVisible,
+      isHovered,
+      isIndeterminate,
+      isInvalid,
+      isPressed,
+      isSelected,
+      slots,
+    } = useContext(CheckboxContext);
 
     const renderIcon = () => {
       if (!isSelected && !isIndeterminate) {
@@ -143,7 +166,19 @@ const CheckboxIndicator = React.forwardRef<HTMLSpanElement, CheckboxIndicatorPro
     };
 
     return (
-      <span ref={ref} data-checkbox-wrapper className={slots?.wrapper({className})} {...props}>
+      <span
+        ref={ref}
+        data-checkbox-wrapper
+        className={slots?.wrapper({className})}
+        {...props}
+        data-disabled={isDisabled}
+        data-focus-visible={isFocusVisible}
+        data-hovered={isHovered}
+        data-indeterminate={isIndeterminate}
+        data-invalid={isInvalid}
+        data-pressed={isPressed}
+        data-selected={isSelected}
+      >
         <span data-checkbox-icon className={slots?.icon()}>
           {renderIcon()}
         </span>
