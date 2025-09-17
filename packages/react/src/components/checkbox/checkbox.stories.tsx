@@ -15,7 +15,7 @@ const meta: Meta<typeof Checkbox> = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  title: "📝 ToDo/Checkbox",
+  title: "Components/Checkbox",
 };
 
 export default meta;
@@ -68,24 +68,23 @@ export const DesignStates: Story = {
         <Checkbox>
           <Checkbox.Indicator />
         </Checkbox>
-        <div className="[&>*]:data-[hovered=true]:border-accent-hover">
-          <Checkbox data-hovered>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
-        <div className="[&>*]:data-[pressed=true]:scale-[0.97]">
-          <Checkbox data-pressed>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
-        <div className="[&>*]:data-[focus-visible=true]:border-2">
-          <Checkbox data-focus-visible>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
+
+        <Checkbox className="[&_[data-checkbox-wrapper]]:!border-accent-hover">
+          <Checkbox.Indicator />
+        </Checkbox>
+
+        <Checkbox className="[&_[data-checkbox-wrapper]]:border-accent-hover [&_[data-checkbox-wrapper]]:!scale-[0.97] [&_[data-checkbox-wrapper]]:border-2">
+          <Checkbox.Indicator />
+        </Checkbox>
+
+        <Checkbox className="[&_[data-checkbox-wrapper]]:!border-2 [&_[data-checkbox-wrapper]]:!shadow-[0px_0px_0px_3px_rgba(0,0,0,0.30),0px_0px_0px_0.5px_rgba(0,0,0,0.05)]">
+          <Checkbox.Indicator />
+        </Checkbox>
+
         <Checkbox isInvalid>
           <Checkbox.Indicator />
         </Checkbox>
+
         <Checkbox isDisabled>
           <Checkbox.Indicator />
         </Checkbox>
@@ -94,24 +93,26 @@ export const DesignStates: Story = {
         <Checkbox defaultSelected>
           <Checkbox.Indicator />
         </Checkbox>
-        <div className="[&>*]:data-[hovered=true]:bg-accent-hover">
-          <Checkbox data-hovered defaultSelected>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
-        <div className="[&>*]:data-[pressed=true]:scale-[0.97]">
-          <Checkbox data-pressed defaultSelected>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
-        <div className="[&>*]:data-[focus-visible=true]:border-2">
-          <Checkbox data-focus-visible defaultSelected>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
+
+        <Checkbox defaultSelected className="[&_[data-checkbox-wrapper]]:!bg-accent-hover">
+          <Checkbox.Indicator />
+        </Checkbox>
+
+        <Checkbox defaultSelected className="[&_[data-checkbox-wrapper]]:!scale-[0.97]">
+          <Checkbox.Indicator />
+        </Checkbox>
+
+        <Checkbox
+          defaultSelected
+          className="[&_[data-checkbox-wrapper]]:!border-2 [&_[data-checkbox-wrapper]]:!shadow-[0px_0px_0px_3px_rgba(0,0,0,0.30),0px_0px_0px_0.5px_rgba(0,0,0,0.05)]"
+        >
+          <Checkbox.Indicator />
+        </Checkbox>
+
         <Checkbox defaultSelected isInvalid>
           <Checkbox.Indicator />
         </Checkbox>
+
         <Checkbox defaultSelected isDisabled>
           <Checkbox.Indicator />
         </Checkbox>
@@ -120,24 +121,26 @@ export const DesignStates: Story = {
         <Checkbox isIndeterminate>
           <Checkbox.Indicator />
         </Checkbox>
-        <div className="[&>*]:data-[hovered=true]:bg-accent-hover">
-          <Checkbox data-hovered isIndeterminate>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
-        <div className="[&>*]:data-[pressed=true]:scale-[0.97]">
-          <Checkbox data-pressed isIndeterminate>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
-        <div className="[&>*]:data-[focus-visible=true]:border-2">
-          <Checkbox data-focus-visible isIndeterminate>
-            <Checkbox.Indicator />
-          </Checkbox>
-        </div>
+
+        <Checkbox isIndeterminate className="[&_[data-checkbox-wrapper]]:!bg-accent-hover">
+          <Checkbox.Indicator />
+        </Checkbox>
+
+        <Checkbox isIndeterminate className="[&_[data-checkbox-wrapper]]:!scale-[0.97]">
+          <Checkbox.Indicator />
+        </Checkbox>
+
+        <Checkbox
+          isIndeterminate
+          className="[&_[data-checkbox-wrapper]]:!border-2 [&_[data-checkbox-wrapper]]:!shadow-[0px_0px_0px_3px_rgba(0,0,0,0.30),0px_0px_0px_0.5px_rgba(0,0,0,0.05)]"
+        >
+          <Checkbox.Indicator />
+        </Checkbox>
+
         <Checkbox isIndeterminate isInvalid>
           <Checkbox.Indicator />
         </Checkbox>
+
         <Checkbox isDisabled isIndeterminate>
           <Checkbox.Indicator />
         </Checkbox>

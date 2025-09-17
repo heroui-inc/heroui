@@ -14,7 +14,7 @@ const meta: Meta<typeof CheckboxGroup> = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  title: "📝 ToDo/CheckboxGroup",
+  title: "Components/CheckboxGroup",
 };
 
 export default meta;
