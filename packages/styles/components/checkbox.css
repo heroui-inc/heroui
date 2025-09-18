@@ -23,7 +23,7 @@
     @apply border-accent-hover;
   }
 
-  /* pressed sate  */
+  /* pressed state  */
   &[data-pressed="true"] {
     transform: scale(0.97);
   }
@@ -32,7 +32,7 @@
   &[data-selected="true"] {
     @apply bg-accent border-accent-hover border-[0.5px];
   }
-  /* indetereminate state  */
+  /* indeterminate state  */
   &[data-indeterminate="true"] {
     @apply bg-accent border-accent-hover border-[0.5px];
   }
