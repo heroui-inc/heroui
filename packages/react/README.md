@@ -1,7 +1,18 @@
 <p align="center">
   <a href="https://v3.heroui.com">
-      <img width="20%" src="https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/public/icons/readme-logo.png" alt="heroui v3" />
-      <h1 align="center">HeroUI v3</h1>
+    <picture>
+      <!-- White logo for dark mode -->
+      <source 
+        media="(prefers-color-scheme: dark)" 
+        srcset="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/hero-web-logo-white.png"
+      >
+      <!-- Black logo for light mode (default fallback) -->
+      <img 
+        alt="HeroUI v3 logo" 
+        width="40%" 
+        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/hero-web-logo-black.png"
+      >
+    </picture>
   </a>
 </p>
 </br>

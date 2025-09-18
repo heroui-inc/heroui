@@ -39,7 +39,8 @@
     "shiki": "3.12.2",
     "tailwind-merge": "3.3.1",
     "tailwind-variants": "3.1.1",
-    "zod": "4.1.9"
+    "zod": "4.1.9",
+    "motion": "12.23.12"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
