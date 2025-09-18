@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  title: "📝 ToDo/Card",
+  title: "Components/Card",
 } satisfies Meta<typeof Card>;
 
 export default meta;
