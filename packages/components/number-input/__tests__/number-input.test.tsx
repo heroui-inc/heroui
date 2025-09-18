@@ -592,5 +592,63 @@ describe("NumberInput with React Hook Form", () => {
         await user.keyboard("1234");
       });
     });
+
+    describe("Backspace behavior with formatted numbers", () => {
+      it("should handle backspace when cursor is between first digit and comma", async () => {
+        const {container} = render(
+          <NumberInput
+            defaultValue={1234}
+            formatOptions={{
+              style: "decimal",
+              useGrouping: true,
+            }}
+            label="test number input"
+          />,
+        );
+
+        const input = container.querySelector("input[type='text']") as HTMLInputElement;
+
+        expect(input.value).toBe("1,234");
+
+        act(() => {
+          input.focus();
+          input.setSelectionRange(1, 1);
+        });
+
+        act(() => {
+          fireEvent.keyDown(input, {key: "Backspace", code: "Backspace"});
+        });
+
+        expect(input.value).toBe("234");
+      });
+
+      it("should handle backspace for other formatted number scenarios", async () => {
+        const {container} = render(
+          <NumberInput
+            defaultValue={1234567}
+            formatOptions={{
+              style: "decimal",
+              useGrouping: true,
+            }}
+            label="test number input"
+          />,
+        );
+
+        const input = container.querySelector("input[type='text']") as HTMLInputElement;
+
+        expect(input.value).toBe("1,234,567");
+
+        act(() => {
+          input.focus();
+          input.setSelectionRange(5, 5);
+        });
+
+        act(() => {
+          fireEvent.keyDown(input, {key: "Backspace", code: "Backspace"});
+        });
+
+        expect(input.value).toBe("123,567");
+      });
+    });
   });
 });

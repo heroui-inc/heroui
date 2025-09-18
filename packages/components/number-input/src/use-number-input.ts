@@ -242,7 +242,43 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const inputElement = e.currentTarget;
+      const {selectionStart, selectionEnd, value} = inputElement;
+
+      // handle backspace when cursor is between first digit and comma
+      // e.g. 1|,234 -> pressing backspace should remove '1' and show '234'
       if (
+        e.key === "Backspace" &&
+        selectionStart !== null &&
+        selectionEnd !== null &&
+        selectionStart === selectionEnd &&
+        selectionStart > 0 &&
+        value[selectionStart] === "," &&
+        value[selectionStart - 1] !== ","
+      ) {
+        e.preventDefault();
+        // e.g. 1,234 -> ,234
+        const newValue = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
+        // e.g. ,234 -> 234
+        const cleanValue = newValue.replace(/[^\d.-]/g, "");
+
+        if (cleanValue === "" || cleanValue === "-") {
+          state.setInputValue("");
+        } else {
+          const numberValue = parseFloat(cleanValue);
+
+          if (!isNaN(numberValue)) {
+            state.setNumberValue(numberValue);
+          }
+        }
+
+        setTimeout(() => {
+          // set the new cursor position
+          const pos = Math.max(0, selectionStart - 1);
+
+          inputElement.setSelectionRange(pos, pos);
+        }, 0);
+      } else if (
         e.key === "Escape" &&
         inputValue &&
         (isClearable || onClear) &&
@@ -252,7 +288,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         onClear?.();
       }
     },
-    [inputValue, state.setInputValue, onClear, isClearable, originalProps.isReadOnly],
+    [inputValue, state, onClear, isClearable, originalProps.isReadOnly],
   );
 
   const getBaseProps: PropGetter = useCallback(
