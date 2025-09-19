@@ -13,9 +13,9 @@ export const switchVariants = tv({
       "transition-all duration-200",
       focusRingClasses,
       // Default (off) state
-      "border-muted/30 bg-muted/20",
+      "border-default/30 bg-default",
       // Hover state (off)
-      "group-data-[hovered=true]:border-muted/40 group-data-[hovered=true]:bg-muted/30",
+      "group-data-[hovered=true]:border-default/40 group-data-[hovered=true]:bg-default/90",
       // Pressed state
       "group-data-[pressed=true]:scale-[0.97]",
       // Selected (on) state
@@ -27,15 +27,15 @@ export const switchVariants = tv({
       "group-data-[focus-visible=true]:border-foreground/60",
       // Disabled state
       "group-data-[disabled=true]:cursor-not-allowed group-data-[disabled=true]:opacity-[var(--disabled-opacity)]",
-      "group-data-[disabled=true]:group-data-[hovered=true]:border-muted/30",
+      "group-data-[disabled=true]:group-data-[hovered=true]:border-default/30",
     ],
     thumb: [
       "absolute left-0.5 block h-4 w-4",
-      "rounded-full bg-white",
+      "bg-default-foreground/20 rounded-full",
       "shadow-sm",
       "transition-transform duration-200",
-      // Selected (on) state - move thumb to right
-      "group-data-[selected=true]:translate-x-5",
+      // Selected (on) state - move thumb to right and change color
+      "group-data-[selected=true]:bg-accent-foreground group-data-[selected=true]:translate-x-5",
       // Pressed state
       "group-data-[pressed=true]:w-5 group-data-[selected=true]:group-data-[pressed=true]:translate-x-4",
     ],
