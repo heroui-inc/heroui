@@ -244,33 +244,42 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       const inputElement = e.currentTarget;
       const {selectionStart, selectionEnd, value} = inputElement;
+      // locale-aware grouping separator
+      const nf = new Intl.NumberFormat(locale, {useGrouping: true});
+      const groupChar = nf.formatToParts(1000).find((p) => p.type === "group")?.value ?? ",";
 
-      // handle backspace when cursor is between first digit and comma
-      // e.g. 1|,234 -> pressing backspace should remove '1' and show '234'
+      // handle backspace when cursor is between a digit and the first group separator
+      // e.g. 1|,234 (en-US) or 1|.234 (de-DE) -> backspace removes the preceding digit if (
       if (
         e.key === "Backspace" &&
+        !originalProps.isReadOnly &&
+        !originalProps.isDisabled &&
         selectionStart !== null &&
         selectionEnd !== null &&
         selectionStart === selectionEnd &&
         selectionStart > 0 &&
-        value[selectionStart] === "," &&
-        value[selectionStart - 1] !== ","
+        value[selectionStart] === groupChar &&
+        value[selectionStart - 1] !== groupChar
       ) {
         e.preventDefault();
         // e.g. 1,234 -> ,234
-        const newValue = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
-        // e.g. ,234 -> 234
-        const cleanValue = newValue.replace(/[^\d.-]/g, "");
+        let normalized = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
 
-        if (cleanValue === "" || cleanValue === "-") {
-          state.setInputValue("");
-        } else {
-          const numberValue = parseFloat(cleanValue);
-
-          if (!isNaN(numberValue)) {
-            state.setNumberValue(numberValue);
-          }
+        // Normalize leading group char so the localized parser can handle it.
+        // Examples: ",234" -> "234", "-,234" -> "-234"
+        if (normalized.startsWith(groupChar)) {
+          normalized = normalized.slice(groupChar.length);
+        } else if (normalized.startsWith("-" + groupChar)) {
+          normalized = "-" + normalized.slice(1 + groupChar.length);
         }
+        state.setInputValue(normalized);
+
+        if (normalized.startsWith(groupChar)) {
+          normalized = normalized.slice(groupChar.length);
+        } else if (normalized.startsWith("-" + groupChar)) {
+          normalized = "-" + normalized.slice(1 + groupChar.length);
+        }
+        state.setInputValue(normalized);
 
         setTimeout(() => {
           // set the new cursor position
