@@ -1,11 +1,12 @@
 "use client";
 
-import type {SwitchGroupVariants} from "./switch.styles";
+import type {SwitchGroupVariants, SwitchVariants} from "./switch.styles";
 import type {SwitchProps as SwitchPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
 
+import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {switchGroupVariants, switchVariants} from "./switch.styles";
@@ -71,10 +72,11 @@ const SwitchContext = createContext<SwitchContext>({});
 interface SwitchRootProps extends SwitchPrimitiveProps {}
 
 const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, SwitchRootProps>(
-  ({children, className, ...props}, ref) => {
+  ({children, className, ...originalProps}, ref) => {
+    const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
     const slots = React.useMemo(
-      () => switchVariants({isDisabled: props.isDisabled}),
-      [props.isDisabled],
+      () => switchVariants({...(variantProps as SwitchVariants)}),
+      [objectToDeps(variantProps)],
     );
 
     return (
