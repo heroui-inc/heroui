@@ -99,12 +99,14 @@ SwitchRoot.displayName = "HeroUI.Switch";
 interface SwitchControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const SwitchControl = React.forwardRef<HTMLSpanElement, SwitchControlProps>(
-  ({className, ...props}, ref) => {
+  ({children, className, ...props}, ref) => {
     const {slots} = useContext(SwitchContext);
 
     return (
       <span ref={ref} data-switch-control className={slots?.control({className})} {...props}>
-        <span data-switch-thumb className={slots?.thumb()} />
+        <span data-switch-thumb className={slots?.thumb()}>
+          {children}
+        </span>
       </span>
     );
   },
