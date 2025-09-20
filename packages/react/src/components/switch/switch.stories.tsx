@@ -133,8 +133,15 @@ export const WithDescription: Story = {
 export const CustomStyling: Story = {
   render: () => (
     <Switch>
-      <Switch.Control className="h-7 w-12 data-[selected=true]:bg-green-500" />
-      <Switch.Label className="text-lg font-medium">Custom styled switch</Switch.Label>
+      {({isSelected}) => (
+        <>
+          <Switch.Control
+            className="h-6 w-12 bg-red-300 data-[selected=true]:bg-green-500"
+            data-selected={isSelected}
+          />
+          <Switch.Label className="text-lg font-medium">Custom styled switch</Switch.Label>
+        </>
+      )}
     </Switch>
   ),
 };
@@ -176,14 +183,13 @@ export const WithIcon: Story = {
         </svg>
       );
     };
+
     return (
       <div className="flex flex-col gap-6">
         <Switch>
-          {({ isSelected }) => (
+          {({isSelected}) => (
             <>
-              <Switch.Control>
-                {isSelected ? <SunIcon /> : <MoonIcon />}
-              </Switch.Control>
+              <Switch.Control>{isSelected ? <SunIcon /> : <MoonIcon />}</Switch.Control>
               <Switch.Label>{isSelected ? "Enabled" : "Disabled"}</Switch.Label>
             </>
           )}
