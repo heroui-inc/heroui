@@ -9,6 +9,8 @@ export const switchVariants = tv({
     thumb: "switch__thumb",
     label: "switch__label",
   },
+  variants: {},
+  defaultVariants: {},
 });
 
 export const switchGroupVariants = tv({
@@ -31,4 +33,5 @@ export const switchGroupVariants = tv({
   },
 });
 
+export type SwitchVariants = VariantProps<typeof switchVariants>;
 export type SwitchGroupVariants = VariantProps<typeof switchGroupVariants>;
