@@ -90,13 +90,12 @@
 
 /* Switch thumb */
 .switch__thumb {
-  @apply bg-default-foreground/[0.5] ease-out-quad flex rounded-full shadow-sm transition-all;
-  @apply ms-0.5 size-5 sm:size-4;
+  @apply bg-default-foreground/[0.5] ease-out-quad ms-0.5 flex size-5 rounded-full shadow-sm transition-all sm:size-4;
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground ms-[calc(100%-20px-2px)] sm:ms-[calc(100%-16px-2px)];
+    @apply bg-accent-foreground ms-[calc(100%-16px-2px)];
   }
 }
 
