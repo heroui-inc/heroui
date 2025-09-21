@@ -90,12 +90,12 @@
 
 /* Switch thumb */
 .switch__thumb {
-  @apply bg-default-foreground/[0.5] ease-out-quad ms-0.5 flex size-5 rounded-full shadow-sm transition-all sm:size-4;
+  @apply bg-default-foreground/[0.5] ease-out-quad absolute left-0.5 flex size-5 rounded-full shadow-sm transition-all sm:size-4;
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground ms-[calc(100%-var(--spacing)*5-2px)] sm:ms-[calc(100%-var(--spacing)*4-2px)];
+    @apply bg-accent-foreground left-[calc(100%-var(--spacing)*5-2px)] sm:left-[calc(100%-var(--spacing)*4-2px)];
   }
 }
 
