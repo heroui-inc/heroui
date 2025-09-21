@@ -91,7 +91,7 @@
 /* Switch thumb */
 .switch__thumb {
   @apply bg-default-foreground/[0.5] ease-out-quad flex rounded-full shadow-sm transition-all;
-  @apply ms-0.5 size-5 sm:ms-0.5 sm:size-4;
+  @apply ms-0.5 size-5 sm:size-4;
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
