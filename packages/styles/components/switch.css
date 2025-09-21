@@ -16,20 +16,21 @@
 
 /* Switch control (track) */
 .switch__control {
-  @apply relative inline-flex h-6 w-10 shrink-0 items-center rounded-full bg-neutral-200 sm:h-5 sm:w-8;
+  @apply relative inline-flex h-6 w-10 shrink-0 items-center rounded-full border bg-neutral-50 sm:h-5 sm:w-8;
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-neutral-900;
+    @apply bg-neutral-950;
   }
 
   /* Hover states */
   .switch:hover &,
   .switch[data-hovered="true"] & {
-    @apply bg-neutral-300;
+    @apply bg-neutral-100;
   }
 
+  /* Hover + Checked states */
   .switch[aria-checked="true"]:hover &,
   .switch[data-selected="true"]:hover &,
   .switch[aria-checked="true"][data-hovered="true"] &,
@@ -39,8 +40,9 @@
 
   /* Pressed / active states */
   .switch:active &,
-  .switch[data-pressed="true"] & {
-    @apply bg-neutral-300;
+  .switch[data-pressed="true"] &,
+  .switch[aria-checked="true"]:active & {
+    @apply bg-neutral-100;
   }
 
   .switch[aria-checked="true"]:active &,
@@ -53,7 +55,7 @@
   /* Focus states */
   .switch:focus-visible &,
   .switch[data-focus-visible="true"] & {
-    @apply outline-none ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-white;
+    @apply outline-none ring-2 ring-neutral-900/30 ring-offset-2;
   }
 
   /* Disabled state */
@@ -61,17 +63,40 @@
   .switch[aria-disabled="true"] & {
     @apply pointer-events-none;
   }
+
+  .dark &,
+  [data-theme="dark"] & {
+    @apply bg-neutral-900;
+
+    /* Selected/checked state */
+    .switch[aria-checked="true"] &,
+    .switch[data-selected="true"] & {
+      @apply bg-neutral-50;
+    }
+
+    /* Hover states */
+    .switch:hover &,
+    .switch[data-hovered="true"] & {
+      @apply bg-neutral-800;
+    }
+
+    /* Hover + Checked states */
+    .switch[aria-checked="true"]:hover &,
+    .switch[data-selected="true"]:hover & {
+      @apply bg-neutral-100;
+    }
+  }
 }
 
 /* Switch thumb */
 .switch__thumb {
-  @apply bg-accent-foreground ease-out-quad absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full shadow-sm transition-all;
+  @apply bg-default-foreground/[0.5] ease-out-quad flex rounded-full shadow-sm transition-all;
   @apply ms-0.5 size-5 sm:ms-0.5 sm:size-4;
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply ms-[calc(100%-20px-2px)] sm:ms-[calc(100%-16px-2px)];
+    @apply bg-accent-foreground ms-[calc(100%-20px-2px)] sm:ms-[calc(100%-16px-2px)];
   }
 }
 
