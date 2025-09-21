@@ -110,6 +110,11 @@
   @apply text-foreground text-base font-medium;
 }
 
+/* Switch icon */
+.switch__icon {
+  @apply rounded-full;
+}
+
 /* Switch Group styles */
 .switch-group {
   @apply flex flex-col gap-6;
