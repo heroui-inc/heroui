@@ -7,6 +7,7 @@ export const switchVariants = tv({
     base: "switch",
     control: "switch__control",
     thumb: "switch__thumb",
+    icon: "switch__icon",
     label: "switch__label",
   },
   variants: {},
