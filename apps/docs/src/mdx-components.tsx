@@ -8,6 +8,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
+import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
 import {PackageManagers} from "./mdx-components/package-managers";
 
@@ -66,6 +67,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentCard,
     ComponentGrid,
     ComponentPreview,
+    DocsImage,
     Icon,
     Info,
     PackageManagers,

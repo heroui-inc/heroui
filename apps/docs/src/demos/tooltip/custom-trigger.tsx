@@ -27,7 +27,7 @@ export function TooltipCustomTrigger() {
 
       <Tooltip delay={0}>
         <Tooltip.Trigger aria-label="Status chip">
-          <Chip color="success">
+          <Chip type="success">
             <Icon icon="gravity-ui:circle-check-fill" width={12} />
             Active
           </Chip>

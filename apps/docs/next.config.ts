@@ -14,6 +14,7 @@ const config: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["@heroui/react"],
+    reactCompiler: true,
   },
   images: {
     remotePatterns: [

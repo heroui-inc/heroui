@@ -21,13 +21,37 @@ export async function CodeBlock({
   title: string | undefined;
   collapsible?: boolean;
 } & CodeBlockProps) {
-  const rendered = await highlight(code, {
-    components: {
-      pre: (props) => <Base.Pre {...props} />,
-    },
-    lang,
-    // other Shiki options
-  });
+  let rendered;
+
+  try {
+    // Trim the code to avoid issues with leading/trailing whitespace
+    const trimmedCode = code?.trim() || "";
+
+    // Skip highlighting for empty code blocks
+    if (!trimmedCode) {
+      rendered = (
+        <Base.Pre>
+          <code />
+        </Base.Pre>
+      );
+    } else {
+      rendered = await highlight(trimmedCode, {
+        components: {
+          pre: (props) => <Base.Pre {...props} />,
+        },
+        lang: lang || "text",
+        // other Shiki options
+      });
+    }
+  } catch (error) {
+    console.error("Syntax highlighting error:", error);
+    // Fallback to plain code block without syntax highlighting
+    rendered = (
+      <Base.Pre>
+        <code>{code}</code>
+      </Base.Pre>
+    );
+  }
 
   return (
     <CodeBlockClient
