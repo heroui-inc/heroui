@@ -3,6 +3,7 @@
   "extends": "@heroui/standard/tsconfig/next.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "jsx": "preserve",
     "paths": {
       "@/.source": ["./.source/index.ts"],
       "@/*": ["./src/*"],

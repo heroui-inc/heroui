@@ -7,18 +7,18 @@ import React from "react";
 
 import {chipVariants} from "./chip.styles";
 
-interface ChipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color">, ChipVariants {
+interface ChipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "type">, ChipVariants {
   className?: string;
   children: React.ReactNode;
   asChild?: boolean;
 }
 
 const Chip = React.forwardRef<React.ElementRef<"span">, ChipProps>(
-  ({asChild = false, children, className, color, variant, ...props}, ref) => {
+  ({asChild = false, children, className, type, variant, ...props}, ref) => {
     const Comp = asChild ? SlotPrimitive : "span";
 
     return (
-      <Comp ref={ref} {...props} className={chipVariants({className, color, variant})}>
+      <Comp ref={ref} {...props} className={chipVariants({className, type, variant})}>
         {children}
       </Comp>
     );

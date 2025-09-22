@@ -7,13 +7,9 @@ import {Skeleton} from "./index";
 
 export default {
   argTypes: {
-    color: {
+    animationType: {
       control: "select",
-      options: ["accent", "default", "success", "warning", "danger"],
-    },
-    size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
+      options: ["shimmer", "pulse", "none"],
     },
   },
   component: Skeleton,
@@ -22,13 +18,13 @@ export default {
 
 const defaultArgs: SkeletonProps = {};
 
-const Template = () => (
+const Template = (props: SkeletonProps) => (
   <div className="bg-surface-1 shadow-border w-[200px] space-y-5 rounded-lg p-4">
-    <Skeleton className="h-24 rounded-lg" />
+    <Skeleton className="h-24 rounded-lg" {...props} />
     <div className="space-y-3">
-      <Skeleton className="h-3 w-3/5 rounded-lg" />
-      <Skeleton className="h-3 w-4/5 rounded-lg" />
-      <Skeleton className="h-3 w-2/5 rounded-lg" />
+      <Skeleton className="h-3 w-3/5 rounded-lg" {...props} />
+      <Skeleton className="h-3 w-4/5 rounded-lg" {...props} />
+      <Skeleton className="h-3 w-2/5 rounded-lg" {...props} />
     </div>
   </div>
 );

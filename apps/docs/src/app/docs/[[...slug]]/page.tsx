@@ -1,3 +1,4 @@
+import type {StatusChipStatus} from "@/components/status-chip";
 import type {Metadata} from "next";
 
 import {createRelativeLink} from "fumadocs-ui/mdx";
@@ -7,11 +8,14 @@ import {notFound} from "next/navigation";
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {NewsletterForm} from "@/components/newsletter-form";
+import StatusChip from "@/components/status-chip";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {DOCS_CONTENT_PATH} from "@/utils/constants";
 import {extractLinksFromMDX} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
+
+const componentStatusIcons = ["preview", "new"];
 
 export default async function Page(props: {params: Promise<{slug?: string[]}>}) {
   const params = await props.params;
@@ -20,6 +24,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   if (!page) notFound();
 
   const MDXContent = page.data.body;
+  const isComponentStatusIcon = page.data.icon && componentStatusIcons.includes(page.data.icon);
 
   // TODO: add github last edit
   // const lastEditTime = await getGithubLastEdit({
@@ -44,7 +49,12 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
     >
       <section className="border-border mb-4 flex flex-col gap-2 border-b">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <DocsTitle>{page.data.title}</DocsTitle>
+          <DocsTitle className="flex items-end gap-2">
+            {page.data.title}
+            {!!isComponentStatusIcon && (
+              <StatusChip className="mb-1.5 w-fit" status={page.data.icon as StatusChipStatus} />
+            )}
+          </DocsTitle>
           <div className="flex items-center gap-2">
             <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
             <ViewOptions

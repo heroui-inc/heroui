@@ -22,14 +22,17 @@
     "components/accordion",
     "components/avatar",
     "components/button",
+    "components/card",
     "components/chip",
     "components/disclosure",
+    "components/disclosure-group",
     "components/kbd",
     "components/link",
     "components/popover",
     "components/separator",
     "components/skeleton",
     "components/spinner",
+    "components/switch",
     "components/tabs",
     "components/tooltip"
   ]

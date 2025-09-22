@@ -5,15 +5,18 @@ import * as AccordionDemos from "./accordion";
 import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
+import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as DisclosureDemos from "./disclosure";
+import * as DisclosureGroupDemos from "./disclosure-group";
 import * as KbdDemos from "./kbd";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
+import * as SwitchDemos from "./switch";
 import * as TabsDemos from "./tabs";
 import * as TextFieldDemos from "./text-field";
 import * as TooltipDemos from "./tooltip";
@@ -141,6 +144,27 @@ export const demos: Record<string, DemoItem> = {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
   },
+  // Card demos
+  "card-default": {
+    component: CardDemos.Default,
+    file: "card/default.tsx",
+  },
+  "card-surfaces": {
+    component: CardDemos.Surfaces,
+    file: "card/surfaces.tsx",
+  },
+  "card-variants": {
+    component: CardDemos.Variants,
+    file: "card/variants.tsx",
+  },
+  "card-nested": {
+    component: CardDemos.Nested,
+    file: "card/nested.tsx",
+  },
+  "card-with-form": {
+    component: CardDemos.WithForm,
+    file: "card/with-form.tsx",
+  },
   // Checkbox demos
   "checkbox-basic": {
     component: CheckboxDemos.Basic,
@@ -187,6 +211,15 @@ export const demos: Record<string, DemoItem> = {
   "disclosure-basic": {
     component: DisclosureDemos.Basic,
     file: "disclosure/basic.tsx",
+  },
+  // DisclosureGroup demos
+  "disclosure-group-basic": {
+    component: DisclosureGroupDemos.Basic,
+    file: "disclosure-group/basic.tsx",
+  },
+  "disclosure-group-controlled": {
+    component: DisclosureGroupDemos.Controlled,
+    file: "disclosure-group/controlled.tsx",
   },
   // Kbd demos
   "kbd-basic": {
@@ -235,6 +268,10 @@ export const demos: Record<string, DemoItem> = {
     component: SkeletonDemos.List,
     file: "skeleton/list.tsx",
   },
+  "skeleton-animation-types": {
+    component: SkeletonDemos.AnimationTypes,
+    file: "skeleton/animation-types.tsx",
+  },
   // Separator demos
   "separator-basic": {
     component: SeparatorDemos.Basic,
@@ -260,6 +297,59 @@ export const demos: Record<string, DemoItem> = {
   "spinner-sizes": {
     component: SpinnerDemos.Sizes,
     file: "spinner/sizes.tsx",
+  },
+  // Switch demos
+  "switch-basic": {
+    component: SwitchDemos.Basic,
+    file: "switch/basic.tsx",
+  },
+  "switch-disabled": {
+    component: SwitchDemos.Disabled,
+    file: "switch/disabled.tsx",
+  },
+  "switch-default-selected": {
+    component: SwitchDemos.DefaultSelected,
+    file: "switch/default-selected.tsx",
+  },
+  "switch-controlled": {
+    component: SwitchDemos.Controlled,
+    file: "switch/controlled.tsx",
+  },
+  "switch-without-label": {
+    component: SwitchDemos.WithoutLabel,
+    file: "switch/without-label.tsx",
+  },
+  "switch-label-position": {
+    component: SwitchDemos.LabelPosition,
+    file: "switch/label-position.tsx",
+  },
+  "switch-with-icon": {
+    component: SwitchDemos.WithIcon,
+    file: "switch/with-icon.tsx",
+  },
+  "switch-with-description": {
+    component: SwitchDemos.WithDescription,
+    file: "switch/with-description.tsx",
+  },
+  "switch-group": {
+    component: SwitchDemos.Group,
+    file: "switch/group.tsx",
+  },
+  "switch-group-horizontal": {
+    component: SwitchDemos.GroupHorizontal,
+    file: "switch/group-horizontal.tsx",
+  },
+  "switch-render-props": {
+    component: SwitchDemos.RenderProps,
+    file: "switch/render-props.tsx",
+  },
+  "switch-form": {
+    component: SwitchDemos.Form,
+    file: "switch/form.tsx",
+  },
+  "switch-custom-styles": {
+    component: SwitchDemos.CustomStyles,
+    file: "switch/custom-styles.tsx",
   },
   // Tabs demos
   "tabs-basic": {
