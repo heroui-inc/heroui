@@ -16,7 +16,7 @@
 
 /* Switch control (track) */
 .switch__control {
-  @apply flex h-6 w-10 shrink-0 items-center rounded-full border bg-neutral-50 sm:h-5 sm:w-8;
+  @apply flex h-[26px] w-[42px] shrink-0 items-center rounded-full border-[0.5px] bg-neutral-50 sm:h-[22px] sm:w-[34px];
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
@@ -95,7 +95,7 @@
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground translate-x-4 sm:translate-x-3;
+    @apply bg-accent-foreground translate-x-[18px] sm:translate-x-[14px];
   }
 }
 
