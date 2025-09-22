@@ -16,7 +16,7 @@
 
 /* Switch control (track) */
 .switch__control {
-  @apply flex h-[26px] w-[42px] shrink-0 items-center rounded-full border-[0.5px] bg-neutral-50 sm:h-[22px] sm:w-[34px];
+  @apply flex h-[24px] w-[40px] shrink-0 items-center rounded-full border-[0.5px] bg-neutral-50 sm:h-[20px] sm:w-[32px];
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
@@ -90,12 +90,12 @@
 
 /* Switch thumb */
 .switch__thumb {
-  @apply bg-default-foreground/[0.5] ease-out-quad flex size-5 translate-x-0.5 rounded-full shadow-sm transition-all sm:size-4;
+  @apply bg-default-foreground/[0.5] flex size-5 translate-x-0.5 rounded-full shadow-sm transition sm:size-4;
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground translate-x-[18px] sm:translate-x-[14px];
+    @apply bg-accent-foreground ease-out-quad translate-x-[17px] sm:translate-x-[13px];
   }
 
   /* Pressed state - scale down */
