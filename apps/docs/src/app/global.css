@@ -72,6 +72,10 @@
   }
 }
 
+.showcase-detail-page #nd-home-layout {
+  padding-top: 0;
+}
+
 [data-theme="dark"],
 .dark {
   #nd-nav,
@@ -251,61 +255,14 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* TODO: Add this back in when we have the components showcase */
-  /* background-image: linear-gradient(
-    350deg,
-    hsl(233deg 24% 86%) 0%,
-    hsl(259deg 20% 87%) 10%,
-    hsl(290deg 16% 87%) 24%,
-    hsl(322deg 19% 88%) 39%,
-    hsl(340deg 22% 89%) 52%,
-    hsl(354deg 23% 90%) 61%,
-    hsl(6deg 23% 90%) 69%,
-    hsl(6deg 22% 91%) 76%,
-    hsl(353deg 21% 92%) 81%,
-    hsl(339deg 19% 93%) 86%,
-    hsl(318deg 16% 93%) 90%,
-    hsl(283deg 15% 94%) 94%,
-    hsl(253deg 19% 95%) 97%,
-    hsl(228deg 26% 96%) 100%
-  ); */
-
   background-image: linear-gradient(
     350deg,
-    hsl(0deg 0% 98%) 0%,
-    hsl(11deg 10% 97%) 10%,
-    hsl(11deg 15% 95%) 24%,
-    hsl(11deg 18% 94%) 39%,
-    hsl(11deg 20% 93%) 52%,
-    hsl(11deg 21% 92%) 61%,
-    hsl(11deg 22% 91%) 69%,
-    hsl(6deg 22% 91%) 76%,
-    hsl(353deg 21% 92%) 81%,
-    hsl(339deg 19% 93%) 86%,
-    hsl(318deg 16% 93%) 90%,
-    hsl(283deg 15% 94%) 94%,
-    hsl(253deg 19% 95%) 97%,
-    hsl(228deg 26% 96%) 100%
-  );
-}
-
-.docs-gradient-background {
-  background-image: linear-gradient(
-    350deg,
-    hsl(0deg 0% 98%) 0%,
-    hsl(11deg 10% 97%) 10%,
-    hsl(11deg 15% 95%) 24%,
-    hsl(11deg 18% 94%) 39%,
-    hsl(11deg 20% 93%) 52%,
-    hsl(11deg 21% 92%) 61%,
-    hsl(11deg 22% 91%) 69%,
-    hsl(6deg 22% 91%) 76%,
-    hsl(353deg 21% 92%) 81%,
-    hsl(339deg 19% 93%) 86%,
-    hsl(318deg 16% 93%) 90%,
-    hsl(283deg 15% 94%) 94%,
-    hsl(253deg 19% 95%) 97%,
-    hsl(228deg 26% 96%) 100%
+    hsl(0 0% 98%) 0%,
+    hsl(11 15% 95%) 24%,
+    hsl(11 21% 92%) 61%,
+    hsl(353 21% 92%) 81%,
+    hsl(318 16% 93%) 90%,
+    hsl(228 26% 96%) 100%
   );
 }
 
@@ -313,28 +270,10 @@
 .dark {
   .gradient-background {
     background-image: linear-gradient(
-      350deg,
-      hsl(0, 0%, 0%) 0%,
-      hsl(354deg 23% 13%) 40%,
-      hsl(290deg 16% 10%) 70%,
-      hsl(259deg 20% 9%) 85%,
-      hsl(233deg 24% 8%) 100%
-    );
-  }
-
-  .docs-gradient-background {
-    background-image: linear-gradient(
-      350deg,
-      hsl(0, 0%, 0%) 0%,
-      hsl(354deg 23% 10% / 70%) 15%,
-      hsl(354deg 23% 13% / 60%) 30%,
-      hsl(340deg 22% 12% / 65%) 40%,
-      hsl(322deg 19% 11% / 65%) 50%,
-      hsl(300deg 18% 10% / 65%) 60%,
-      hsl(290deg 16% 10%) 70%,
-      hsl(275deg 18% 9%) 78%,
-      hsl(259deg 20% 9%) 85%,
-      hsl(246deg 22% 8%) 92%,
+      340deg,
+      hsl(0, 33%, 0%) 0%,
+      hsl(0, 33%, 8%) 40%,
+      hsl(284, 22%, 10%) 70%,
       hsl(233deg 24% 8%) 100%
     );
   }
@@ -596,4 +535,15 @@
     rgba(0, 0, 0, 1) 70%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+
+.showcase-source-wrapper {
+  .code-block-wrapper {
+    background: transparent !important;
+  }
+
+  .fd-scroll-container {
+    max-height: 100%;
+    background: transparent;
+  }
 }

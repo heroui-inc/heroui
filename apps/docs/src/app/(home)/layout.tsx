@@ -66,12 +66,19 @@ export default function Layout({children}: {children: ReactNode}) {
           url: "/docs/components/accordion",
         },
         {
+          active: "nested-url",
+          on: "nav",
+          text: "Showcase",
+          url: "/showcase",
+        },
+        {
           children: (
             <ExternalLink href="https://herouiv3.featurebase.app/roadmap">Roadmap</ExternalLink>
           ),
           on: "nav",
           type: "custom",
         },
+
         // {
         //   active: "url",
         //   text: "Playground",

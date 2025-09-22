@@ -8,7 +8,7 @@ import {Chip} from "./chip";
 
 export default {
   argTypes: {
-    color: {
+    type: {
       control: "select",
       options: ["default", "success", "warning", "danger", "accent"],
     },
@@ -23,7 +23,7 @@ export default {
 
 const defaultArgs: ChipProps = {
   children: "Label",
-  color: "accent",
+  type: "accent",
   variant: "secondary",
 };
 
@@ -48,15 +48,15 @@ const StatusesTemplate = (_props: ChipProps) => (
       <Icon icon="gravity-ui:circle-fill" width={6} />
       Information
     </Chip>
-    <Chip color="success">
+    <Chip type="success">
       <Icon icon="gravity-ui:circle-fill" width={6} />
       Completed
     </Chip>
-    <Chip color="warning">
+    <Chip type="warning">
       <Icon icon="gravity-ui:circle-fill" width={6} />
       Pending
     </Chip>
-    <Chip color="danger">
+    <Chip type="danger">
       <Icon icon="gravity-ui:circle-fill" width={6} />
       Failed
     </Chip>
@@ -65,16 +65,16 @@ const StatusesTemplate = (_props: ChipProps) => (
 
 const VariantsTemplate = (props: ChipProps) => (
   <div className="flex items-center gap-3">
-    <Chip {...props} color="accent">
+    <Chip {...props} type="accent">
       Accent
     </Chip>
-    <Chip {...props} color="success">
+    <Chip {...props} type="success">
       Success
     </Chip>
-    <Chip {...props} color="warning">
+    <Chip {...props} type="warning">
       Warning
     </Chip>
-    <Chip {...props} color="danger">
+    <Chip {...props} type="danger">
       Danger
     </Chip>
   </div>

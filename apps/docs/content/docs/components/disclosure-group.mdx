@@ -1,0 +1,129 @@
+---
+title: DisclosureGroup
+description: Container that manages multiple Disclosure items with coordinated expanded states
+icon: new
+links:
+  rac: DisclosureGroup
+  source: disclosure-group/disclosure-group.tsx
+  styles: disclosure-group.css
+  storybook: disclosure-group
+---
+
+## Import
+
+```tsx
+import {DisclosureGroup} from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="disclosure-group-basic"
+/>
+
+### Controlled
+
+You can control which disclosures are expanded with external navigation controls using the `expandedKeys` and `onExpandedChange` props.
+
+<ComponentPreview
+  name="disclosure-group-controlled"
+/>
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import {DisclosureGroup, Disclosure} from '@heroui/react';
+
+export default () => (
+  <DisclosureGroup>
+    <Disclosure id="item1">
+      <Disclosure.Heading>
+        <Disclosure.Trigger>
+          <Disclosure.Indicator />
+        </Disclosure.Trigger>
+      </Disclosure.Heading>
+      <Disclosure.Content />
+    </Disclosure>
+  </DisclosureGroup>
+)
+```
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {DisclosureGroup, Disclosure} from '@heroui/react';
+
+function CustomDisclosureGroup() {
+  return (
+    <DisclosureGroup className="border rounded-lg p-4 space-y-2">
+      <Disclosure id="first" className="border-b pb-2">
+        <Disclosure.Trigger>Item 1</Disclosure.Trigger>
+        <Disclosure.Content>Content 1</Disclosure.Content>
+      </Disclosure>
+      <Disclosure id="second">
+        <Disclosure.Trigger>Item 2</Disclosure.Trigger>
+        <Disclosure.Content>Content 2</Disclosure.Content>
+      </Disclosure>
+    </DisclosureGroup>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the DisclosureGroup component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .disclosure-group {
+    @apply w-full;
+
+    /* Performance optimization */
+    contain: layout style;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The DisclosureGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/disclosure-group.css)):
+
+#### Base Classes
+- `.disclosure-group` - Base container styles with layout containment
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Disabled**: `:disabled` or `[aria-disabled="true"]` on entire group
+- **Expanded Management**: Automatically manages `[data-expanded]` states on child Disclosure items
+
+## API Reference
+
+### DisclosureGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `expandedKeys` | `Set<Key>` | - | The currently expanded items (controlled) |
+| `defaultExpandedKeys` | `Iterable<Key>` | - | The initially expanded items (uncontrolled) |
+| `onExpandedChange` | `(keys: Set<Key>) => void` | - | Handler called when expanded items change |
+| `allowsMultipleExpanded` | `boolean` | `false` | Whether multiple items can be expanded simultaneously |
+| `isDisabled` | `boolean` | `false` | Whether all disclosures in the group are disabled |
+| `children` | `ReactNode \| RenderFunction` | - | Disclosure items to render |
+| `className` | `string` | - | Additional CSS classes |
+
+### RenderProps
+
+When using the render prop pattern, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `expandedKeys` | `Set<Key>` | Currently expanded item keys |
+| `isDisabled` | `boolean` | Whether the group is disabled |

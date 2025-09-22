@@ -11,6 +11,7 @@ export * from "./checkbox";
 export * from "./chip";
 export * from "./disclosure";
 export * from "./description";
+export * from "./disclosure-group";
 export * from "./fieldset";
 export * from "./form";
 export * from "./kbd";

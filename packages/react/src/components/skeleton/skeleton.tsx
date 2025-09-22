@@ -4,23 +4,35 @@ import type {SkeletonVariants} from "./skeleton.styles";
 
 import React from "react";
 
+import {useCSSVariable} from "../../hooks/use-css-variable";
+
 import {skeletonVariants} from "./skeleton.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Skeleton
  * -----------------------------------------------------------------------------------------------*/
 
-interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement>, SkeletonVariants {}
+interface SkeletonProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
+    SkeletonVariants {}
 
 const Skeleton = React.forwardRef<React.ElementRef<"div">, SkeletonProps>(
-  ({children, className, ...props}, ref) => {
-    const slots = React.useMemo(() => skeletonVariants({}), []);
-
-    return (
-      <div ref={ref} className={slots.base({className})} {...props}>
-        {children}
-      </div>
+  ({animationType, className, ...props}, ref) => {
+    // Use the new hook to get CSS variable value with SSR support
+    const resolvedAnimationType = useCSSVariable(
+      "--skeleton-default-animation-type",
+      animationType,
     );
+
+    const slots = React.useMemo(
+      () =>
+        skeletonVariants({
+          animationType: resolvedAnimationType as SkeletonVariants["animationType"],
+        }),
+      [resolvedAnimationType],
+    );
+
+    return <div ref={ref} className={slots.base({className})} {...props} />;
   },
 );
 

@@ -21,6 +21,9 @@
     "@vercel/analytics": "1.5.0",
     "@vercel/og": "0.8.5",
     "color-convert": "3.1.2",
+    "babel-plugin-react-compiler": "19.1.0-rc.3",
+    "clsx": "2.1.1",
+    "color2k": "2.0.3",
     "feed": "5.1.0",
     "fumadocs-core": "15.6.8",
     "fumadocs-mdx": "11.7.3",
@@ -31,6 +34,7 @@
     "motion": "12.23.14",
     "next": "15.5.3",
     "next-themes": "0.4.6",
+    "next-view-transitions": "0.3.4",
     "react": "19.1.1",
     "react-aria-components": "1.12.2",
     "react-dom": "19.1.1",
@@ -40,7 +44,9 @@
     "shiki": "3.12.2",
     "tailwind-merge": "3.3.1",
     "tailwind-variants": "3.1.1",
-    "zod": "4.1.9"
+    "zod": "4.1.9",
+    "ts-morph": "26.0.0",
+    "usehooks-ts": "3.1.1"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",

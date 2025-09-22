@@ -1,7 +1,17 @@
 .skeleton {
-  @apply bg-surface-3/60 pointer-events-none relative overflow-hidden rounded-md;
+  @apply bg-surface-3/70 pointer-events-none relative overflow-hidden rounded-md;
+}
 
+/* Animation types */
+.skeleton--shimmer {
   &:before {
     @apply animate-skeleton via-surface-3 absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
   }
+}
+
+.skeleton--pulse {
+  @apply animate-pulse;
+}
+
+.skeleton--none {
 }

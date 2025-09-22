@@ -4,7 +4,7 @@ import {Skeleton} from "@heroui/react";
 
 export function Basic() {
   return (
-    <div className="bg-surface-1 shadow-border w-[250px] space-y-5 rounded-lg p-4">
+    <div className="shadow-border w-[250px] space-y-5 rounded-lg bg-transparent p-4">
       <Skeleton className="h-32 rounded-lg" />
       <div className="space-y-3">
         <Skeleton className="h-3 w-3/5 rounded-lg" />

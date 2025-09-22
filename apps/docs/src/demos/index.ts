@@ -9,6 +9,7 @@ import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as DisclosureDemos from "./disclosure";
+import * as DisclosureGroupDemos from "./disclosure-group";
 import * as KbdDemos from "./kbd";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
@@ -210,6 +211,15 @@ export const demos: Record<string, DemoItem> = {
     component: DisclosureDemos.Basic,
     file: "disclosure/basic.tsx",
   },
+  // DisclosureGroup demos
+  "disclosure-group-basic": {
+    component: DisclosureGroupDemos.Basic,
+    file: "disclosure-group/basic.tsx",
+  },
+  "disclosure-group-controlled": {
+    component: DisclosureGroupDemos.Controlled,
+    file: "disclosure-group/controlled.tsx",
+  },
   // Kbd demos
   "kbd-basic": {
     component: KbdDemos.Basic,
@@ -256,6 +266,10 @@ export const demos: Record<string, DemoItem> = {
   "skeleton-list": {
     component: SkeletonDemos.List,
     file: "skeleton/list.tsx",
+  },
+  "skeleton-animation-types": {
+    component: SkeletonDemos.AnimationTypes,
+    file: "skeleton/animation-types.tsx",
   },
   // Separator demos
   "separator-basic": {
