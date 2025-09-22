@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
+import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
@@ -9,6 +10,10 @@ import {Card} from "./index";
 
 const meta = {
   argTypes: {
+    variant: {
+      control: {type: "select"},
+      options: [undefined, "side", "item", "full"],
+    },
     surface: {
       control: {type: "select"},
       options: ["none", "1", "2", "3"],
@@ -30,60 +35,158 @@ export const Default: Story = {
   },
   render: (args) => (
     <Card {...args}>
-      <Card.Header>
-        <Card.Title>Become an Acme Creator!</Card.Title>
-        <Card.Description>
-          Visit heroui.com to sign up today and start earning credits from your fans and followers.
-        </Card.Description>
-      </Card.Header>
-      <Card.Content>
-        <Link href="#">Call to action</Link>
-      </Card.Content>
-    </Card>
-  ),
-};
-
-export const WithFooter: Story = {
-  args: {
-    className: "w-[400px]",
-  },
-  render: (args) => (
-    <Card {...args}>
-      <Card.Header>
-        <Card.Title>Become an Acme Creator!</Card.Title>
-        <Card.Description>
-          Visit heroui.com to sign up today and start earning credits from your fans and followers.
-        </Card.Description>
-      </Card.Header>
+      <Icon className="size-6" icon="gravity-ui:circle-dollar" />
+      <Card.CloseButton />
+      <Card.Details>
+        <Card.Header>
+          <Card.Title>PAYMENT</Card.Title>
+          <Card.Description>You can now withdraw on crypto.</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <Link href="#">Add your wallet in settings to withdraw</Link>
+        </Card.Content>
+      </Card.Details>
       <Card.Footer>
-        <Button>Call to action</Button>
+        <Link href="https://heroui.com" target="_blank">
+          Go to settings
+          <Link.Icon />
+        </Link>
       </Card.Footer>
     </Card>
   ),
 };
 
-export const WithImage: Story = {
-  args: {
-    className: "w-[400px]",
-  },
-  render: (args) => (
-    <Card {...args}>
-      <Card.Image
-        alt="Mountains"
-        className="h-[200px]"
-        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop"
-      />
+export const Surfaces: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <Card className="w-[400px]" surface="none">
+        <Card.Header>
+          <Card.Title>Surface None</Card.Title>
+          <Card.Description>Transparent background with no border</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with no surface styling</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[400px]" surface="1">
+        <Card.Header>
+          <Card.Title>Surface Level 1</Card.Title>
+          <Card.Description>This card uses surface level 1 (default)</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with subtle elevation</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[400px]" surface="2">
+        <Card.Header>
+          <Card.Title>Surface Level 2</Card.Title>
+          <Card.Description>This card uses surface level 2</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with medium elevation</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[400px]" surface="3">
+        <Card.Header>
+          <Card.Title>Surface Level 3</Card.Title>
+          <Card.Description>This card uses surface level 3</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with higher elevation</p>
+        </Card.Content>
+      </Card>
+    </div>
+  ),
+};
+
+export const Variants: Story = {
+  args: {},
+  render: () => (
+    <>
+      <Card className="w-[467px] items-stretch" variant="side">
+        <Card.Image
+          alt="Product"
+          className="aspect-square w-[136px]"
+          src="https://assets.lummi.ai/assets/QmVGaqmCEBtAwTYMYUtn2ocdJcoSjtGbLydnVCGJpbUdHX"
+        />
+        <Card.Details className="gap-3">
+          <Card.Header className="gap-1">
+            <Card.Title>Become an Acme Creator!</Card.Title>
+            <Card.Description>
+              Visit heroui.com to sign up today and start earning credits from your fans and
+              followers.
+            </Card.Description>
+          </Card.Header>
+          <Card.Footer className="mt-auto">
+            <Link href="https://heroui.com" target="_blank">
+              Call to action
+              <Link.Icon />
+            </Link>
+          </Card.Footer>
+        </Card.Details>
+      </Card>
+
+      <div className="flex gap-4">
+        <Card className="w-[200px]" variant="item">
+          <Card.Image
+            alt="Product"
+            className="aspect-square"
+            src="https://assets.lummi.ai/assets/QmVGaqmCEBtAwTYMYUtn2ocdJcoSjtGbLydnVCGJpbUdHX"
+          />
+          <Card.Details>
+            <Card.Footer className="inline-flex items-center justify-between px-2 py-2 pb-1 text-sm">
+              <span>Cars</span>
+              <span className="text-muted">18 pictures</span>
+            </Card.Footer>
+          </Card.Details>
+        </Card>
+        <Card className="w-[200px]" variant="item">
+          <Card.Image
+            alt="Product"
+            className="aspect-square"
+            src="https://assets.lummi.ai/assets/QmVGaqmCEBtAwTYMYUtn2ocdJcoSjtGbLydnVCGJpbUdHX"
+          />
+          <Card.Details>
+            <Card.Footer className="inline-flex items-center justify-between px-2 py-2 pb-1 text-sm">
+              <span>Cars</span>
+              <span className="text-muted">18 pictures</span>
+            </Card.Footer>
+          </Card.Details>
+        </Card>
+      </div>
+    </>
+  ),
+};
+
+export const Nested: Story = {
+  render: () => (
+    <Card className="w-[600px]">
       <Card.Header>
-        <Card.Title>Beautiful Mountains</Card.Title>
-        <Card.Description>
-          Explore the stunning mountain landscapes and breathtaking views.
-        </Card.Description>
+        <Card.Title>Parent Card</Card.Title>
+        <Card.Description>This card contains nested cards</Card.Description>
       </Card.Header>
+      <Card.Content className="flex flex-col gap-4">
+        <Card surface="2">
+          <Card.Header>
+            <Card.Title>Nested Card 1</Card.Title>
+            <Card.Description>This is a nested card with surface level 2</Card.Description>
+          </Card.Header>
+        </Card>
+        <Card surface="3">
+          <Card.Header>
+            <Card.Title>Nested Card 2</Card.Title>
+            <Card.Description>This is another nested card with surface level 3</Card.Description>
+          </Card.Header>
+        </Card>
+      </Card.Content>
     </Card>
   ),
 };
 
-export const LoginForm: Story = {
+export const WithForm: Story = {
   args: {
     className: "w-[400px]",
   },
@@ -129,86 +232,23 @@ export const LoginForm: Story = {
   ),
 };
 
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <Card className="w-[400px]" surface="1">
-        <Card.Header>
-          <Card.Title>Surface Level 1</Card.Title>
-          <Card.Description>This card uses surface level 1 (default)</Card.Description>
-        </Card.Header>
-        <Card.Content>
-          <p>Content goes here</p>
-        </Card.Content>
-      </Card>
-
-      <Card className="w-[400px]" surface="2">
-        <Card.Header>
-          <Card.Title>Surface Level 2</Card.Title>
-          <Card.Description>This card uses surface level 2</Card.Description>
-        </Card.Header>
-        <Card.Content>
-          <p>Content goes here</p>
-        </Card.Content>
-      </Card>
-
-      <Card className="w-[400px]" surface="3">
-        <Card.Header>
-          <Card.Title>Surface Level 3</Card.Title>
-          <Card.Description>This card uses surface level 3</Card.Description>
-        </Card.Header>
-        <Card.Content>
-          <p>Content goes here</p>
-        </Card.Content>
-      </Card>
-    </div>
-  ),
-};
-
-export const NestedCards: Story = {
-  render: () => (
-    <Card className="w-[600px]">
-      <Card.Header>
-        <Card.Title>Parent Card</Card.Title>
-        <Card.Description>This card contains nested cards</Card.Description>
-      </Card.Header>
-      <Card.Content className="flex flex-col gap-4">
-        <Card surface="2">
-          <Card.Header>
-            <Card.Title>Nested Card 1</Card.Title>
-            <Card.Description>This is a nested card with surface level 2</Card.Description>
-          </Card.Header>
-        </Card>
-        <Card surface="3">
-          <Card.Header>
-            <Card.Title>Nested Card 2</Card.Title>
-            <Card.Description>This is another nested card with surface level 3</Card.Description>
-          </Card.Header>
-        </Card>
-      </Card.Content>
-    </Card>
-  ),
-};
-
-export const AsChild: Story = {
-  args: {
-    className: "w-[400px]",
-  },
-  render: (args) => (
-    <Card {...args} asChild>
-      <article>
-        <Card.Header>
-          <Card.Title asChild>
-            <h2>Article Card</h2>
-          </Card.Title>
-          <Card.Description>
-            This card uses semantic HTML elements via the asChild prop
-          </Card.Description>
-        </Card.Header>
-        <Card.Content>
-          <p>The root element is an article tag, and the title is an h2 tag.</p>
-        </Card.Content>
-      </article>
-    </Card>
-  ),
-};
+// export const WithImage: Story = {
+//   args: {
+//     className: "w-[400px]",
+//   },
+//   render: (args) => (
+//     <Card {...args}>
+//       <Card.Image
+//         alt="Mountains"
+//         className="h-[200px]"
+//         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop"
+//       />
+//       <Card.Header>
+//         <Card.Title>Beautiful Mountains</Card.Title>
+//         <Card.Description>
+//           Explore the stunning mountain landscapes and breathtaking views.
+//         </Card.Description>
+//       </Card.Header>
+//     </Card>
+//   ),
+// };
