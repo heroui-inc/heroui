@@ -5,6 +5,7 @@ import * as AccordionDemos from "./accordion";
 import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
+import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as DisclosureDemos from "./disclosure";
@@ -141,6 +142,27 @@ export const demos: Record<string, DemoItem> = {
   "button-with-icons": {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
+  },
+  // Card demos
+  "card-default": {
+    component: CardDemos.Default,
+    file: "card/default.tsx",
+  },
+  "card-surfaces": {
+    component: CardDemos.Surfaces,
+    file: "card/surfaces.tsx",
+  },
+  "card-variants": {
+    component: CardDemos.Variants,
+    file: "card/variants.tsx",
+  },
+  "card-nested": {
+    component: CardDemos.Nested,
+    file: "card/nested.tsx",
+  },
+  "card-with-form": {
+    component: CardDemos.WithForm,
+    file: "card/with-form.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {
