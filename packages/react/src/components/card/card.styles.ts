@@ -4,35 +4,53 @@ import {tv} from "tailwind-variants";
 
 const cardVariants = tv({
   slots: {
-    base: [
-      "relative",
-      "overflow-hidden",
-      "rounded-panel",
-      "border",
-      "border-border",
-      "bg-surface-1",
-    ],
-    header: ["flex", "flex-col", "gap-1", "p-4"],
-    title: ["text-base", "font-medium", "leading-6", "text-foreground"],
-    description: ["text-sm", "text-muted", "leading-5"],
-    content: ["p-4", "pt-0"],
-    footer: ["flex", "items-center", "p-4", "pt-0"],
-    image: ["w-full", "object-cover"],
-    close: "",
+    base: "card",
+    header: "card__header",
+    title: "card__title",
+    description: "card__description",
+    content: "card__content",
+    details: "card__details",
+    footer: "card__footer",
+    image: "card__image",
+    closeButton: "card__close-button",
   },
   variants: {
     surface: {
       none: {
-        base: "border-none bg-transparent shadow-none",
+        base: "card--surface-none",
       },
       "1": {
-        base: "bg-surface-1",
+        base: "card--surface-1",
       },
       "2": {
-        base: "bg-surface-2",
+        base: "card--surface-2",
       },
       "3": {
-        base: "bg-surface-3",
+        base: "card--surface-3",
+      },
+    },
+    variant: {
+      side: {
+        base: "card--side",
+        image: "card__image--side",
+        header: "card__header--side",
+        content: "card__content--side",
+        details: "card__details--side",
+        footer: "card__footer--side",
+      },
+      item: {
+        base: "card--item",
+        image: "card__image--item",
+        details: "card__details--item",
+        footer: "card__footer--item",
+      },
+      full: {
+        base: "card--full",
+        image: "card__image--full",
+        header: "card__header--full",
+        content: "card__content--full",
+        details: "card__details--full",
+        footer: "card__footer--full",
       },
     },
   },

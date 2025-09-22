@@ -5,6 +5,7 @@ import {defineConfig} from "vite";
 export default defineConfig({
   optimizeDeps: {
     include: ["@storybook/theming", "@mdx-js/react"],
+    exclude: ["sb-vite"],
   },
   plugins: [react(), tailwindcss()],
 });

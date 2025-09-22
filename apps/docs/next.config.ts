@@ -9,11 +9,13 @@ import {createMDX} from "fumadocs-mdx/next";
 const withMDX = createMDX();
 
 const config: NextConfig = {
+  compress: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   experimental: {
     optimizePackageImports: ["@heroui/react"],
+    reactCompiler: true,
   },
   images: {
     remotePatterns: [
@@ -62,6 +64,7 @@ const config: NextConfig = {
       },
     ];
   },
+  trailingSlash: false,
   transpilePackages: ["@heroui/react", "@heroui/styles"],
   typedRoutes: true,
   typescript: {
