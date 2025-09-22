@@ -81,7 +81,7 @@ export function ShowcaseItem({
           </video>
         </div>
         {!isMinimal && (
-          <div className="mt-3 flex items-end justify-between px-1">
+          <div className="mt-3 flex w-full items-start justify-between px-1">
             <span className="text-foreground/50 group-hover:text-foreground/80 ease-out-quad text-sm transition-[color] duration-[250ms]">
               {title}
             </span>
