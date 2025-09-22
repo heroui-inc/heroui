@@ -32,6 +32,7 @@
     "components/separator",
     "components/skeleton",
     "components/spinner",
+    "components/switch",
     "components/tabs",
     "components/tooltip"
   ]

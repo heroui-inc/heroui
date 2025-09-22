@@ -1,0 +1,234 @@
+---
+title: Switch
+description: A toggle switch component for boolean states
+icon: new
+links:
+  rac: Switch
+  source: switch/switch.tsx
+  styles: switch.css
+  storybook: switch
+  figma: true
+---
+
+## Import
+
+```tsx
+import { Switch, SwitchGroup } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="switch-basic"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="switch-disabled"
+/>
+
+### Default Selected
+
+<ComponentPreview
+  name="switch-default-selected"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="switch-controlled"
+/>
+
+### Without Label
+
+<ComponentPreview
+  name="switch-without-label"
+/>
+
+### Label Position
+
+<ComponentPreview
+  name="switch-label-position"
+/>
+
+### With Icon
+
+<ComponentPreview
+  name="switch-with-icon"
+/>
+
+### With Description
+
+<ComponentPreview
+  name="switch-with-description"
+/>
+
+### Group
+
+<ComponentPreview
+  name="switch-group"
+/>
+
+### Group Horizontal
+
+<ComponentPreview
+  name="switch-group-horizontal"
+/>
+
+### Render Props
+
+<ComponentPreview
+  name="switch-render-props"
+/>
+
+### Form Integration
+
+<ComponentPreview
+  name="switch-form"
+/>
+
+### Custom Styles
+
+<ComponentPreview
+  name="switch-custom-styles"
+/>
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Switch, Label } from '@heroui/react';
+
+function CustomSwitch() {
+  return (
+    <Switch>
+      {({isSelected}) => (
+        <>
+          <Switch.Control
+            className="h-6 w-9 bg-gray-300 data-[selected=true]:bg-green-500"
+            data-selected={isSelected}
+          >
+            <Switch.Thumb className="bg-white" />
+          </Switch.Control>
+          <Label>Custom styled switch</Label>
+        </>
+      )}
+    </Switch>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Switch component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .switch {
+    @apply inline-flex gap-3 items-center;
+  }
+
+  .switch__control {
+    @apply h-5 w-8 bg-gray-400 data-[selected=true]:bg-blue-500;
+  }
+
+  .switch__thumb {
+    @apply bg-white shadow-sm;
+  }
+
+  .switch__icon {
+    @apply h-3 w-3 text-current;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
+
+#### Base Classes
+- `.switch` - Base switch container
+- `.switch__control` - Switch control track
+- `.switch__thumb` - Switch thumb that moves
+- `.switch__icon` - Optional icon inside the thumb
+
+#### Group Classes
+- `.switch-group` - Switch group container
+- `.switch-group__items` - Container for switch items
+- `.switch-group--horizontal` - Horizontal layout
+- `.switch-group--vertical` - Vertical layout
+
+### Interactive States
+
+The switch supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Selected**: `[data-selected="true"]` (thumb position and background color change)
+- **Hover**: `:hover` or `[data-hover="true"]`
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
+- **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
+- **Pressed**: `:active` or `[data-pressed="true"]`
+
+## API Reference
+
+### Switch Props
+
+Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isSelected` | `boolean` | `false` | Whether the switch is on |
+| `defaultSelected` | `boolean` | `false` | Whether the switch is on by default (uncontrolled) |
+| `isDisabled` | `boolean` | `false` | Whether the switch is disabled |
+| `name` | `string` | - | The name of the input element, used when submitting an HTML form |
+| `value` | `string` | - | The value of the input element, used when submitting an HTML form |
+| `onChange` | `(isSelected: boolean) => void` | - | Handler called when the switch value changes |
+| `onPress` | `(e: PressEvent) => void` | - | Handler called when the switch is pressed |
+| `children` | `React.ReactNode \| (values: SwitchRenderProps) => React.ReactNode` | - | Switch content or render prop |
+
+### SwitchRenderProps
+
+When using the render prop pattern, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isSelected` | `boolean` | Whether the switch is currently on |
+| `isPressed` | `boolean` | Whether the switch is currently pressed |
+| `isHovered` | `boolean` | Whether the switch is hovered |
+| `isFocused` | `boolean` | Whether the switch is focused |
+| `isFocusVisible` | `boolean` | Whether the switch should show focus indicator |
+| `isDisabled` | `boolean` | Whether the switch is disabled |
+
+### SwitchGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
+| `children` | `React.ReactNode` | - | The switch items to render |
+
+### Compound Components
+
+The Switch component is built using compound components for maximum flexibility:
+
+- `Switch` - The root component that provides context
+- `Switch.Control` - The switch track/control element
+- `Switch.Thumb` - The movable thumb element
+- `Switch.Icon` - Optional icon inside the thumb
+
+For grouping switches:
+- `SwitchGroup` - The root group component
+- `SwitchGroup.Items` - Container for switch items
+
+### Accessibility
+
+The Switch component follows the [WAI-ARIA Switch Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/). Key features:
+
+- Keyboard support: Space to toggle
+- Screen reader announcements for state changes
+- Proper ARIA attributes and roles
+- Support for labels and descriptions
+- Form integration with name/value props

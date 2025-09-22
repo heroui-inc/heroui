@@ -1,26 +1,27 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
+import {Icon} from "@iconify/react";
 import React from "react";
+
+import {Button, Description, Label} from "@heroui/react";
 
 import {Switch, SwitchGroup} from "./switch";
 
-const meta: Meta<typeof Switch> = {
+export default {
+  argTypes: {},
   component: Switch,
-  parameters: {
-    layout: "centered",
-  },
-  tags: ["autodocs"],
-  title: "📝 ToDo/Switch",
-};
+  title: "Components/Switch",
+} as Meta<typeof Switch>;
 
-export default meta;
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
   render: () => (
     <Switch>
-      <Switch.Control />
-      <Switch.Label>Enable notifications</Switch.Label>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   ),
 };
@@ -28,8 +29,10 @@ export const Default: Story = {
 export const Disabled: Story = {
   render: () => (
     <Switch isDisabled>
-      <Switch.Control />
-      <Switch.Label>Enable notifications</Switch.Label>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   ),
 };
@@ -37,8 +40,10 @@ export const Disabled: Story = {
 export const DefaultSelected: Story = {
   render: () => (
     <Switch defaultSelected>
-      <Switch.Control />
-      <Switch.Label>Enable notifications</Switch.Label>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   ),
 };
@@ -50,8 +55,10 @@ export const Controlled: Story = {
     return (
       <div className="flex flex-col gap-4">
         <Switch isSelected={isSelected} onChange={setIsSelected}>
-          <Switch.Control />
-          <Switch.Label>Enable notifications</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Enable notifications</Label>
         </Switch>
         <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
       </div>
@@ -62,7 +69,9 @@ export const Controlled: Story = {
 export const WithoutLabel: Story = {
   render: () => (
     <Switch aria-label="Enable notifications">
-      <Switch.Control />
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
     </Switch>
   ),
 };
@@ -70,8 +79,10 @@ export const WithoutLabel: Story = {
 export const LabelBefore: Story = {
   render: () => (
     <Switch>
-      <Switch.Label>Enable notifications</Switch.Label>
-      <Switch.Control />
+      <Label className="text-sm font-normal">Enable notifications</Label>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
     </Switch>
   ),
 };
@@ -81,16 +92,22 @@ export const Group: Story = {
     <SwitchGroup>
       <SwitchGroup.Items>
         <Switch name="notifications">
-          <Switch.Control />
-          <Switch.Label>Allow Notifications</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Allow Notifications</Label>
         </Switch>
         <Switch name="marketing">
-          <Switch.Control />
-          <Switch.Label>Marketing emails</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Marketing emails</Label>
         </Switch>
         <Switch name="social">
-          <Switch.Control />
-          <Switch.Label>Social media updates</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Social media updates</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>
@@ -102,16 +119,22 @@ export const GroupHorizontal: Story = {
     <SwitchGroup orientation="horizontal">
       <SwitchGroup.Items>
         <Switch name="notifications">
-          <Switch.Control />
-          <Switch.Label>Notifications</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Notifications</Label>
         </Switch>
         <Switch name="marketing">
-          <Switch.Control />
-          <Switch.Label>Marketing</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Marketing</Label>
         </Switch>
         <Switch name="social">
-          <Switch.Control />
-          <Switch.Label>Social</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">Social</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>
@@ -123,10 +146,12 @@ export const WithDescription: Story = {
     <div className="max-w-sm">
       <Switch>
         <div className="flex gap-3">
-          <Switch.Control />
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <div className="flex flex-col gap-1">
-            <Switch.Label>Public profile</Switch.Label>
-            <p className="text-muted text-sm">Allow others to see your profile information</p>
+            <Label className="text-sm font-normal">Public profile</Label>
+            <Description>Allow others to see your profile information</Description>
           </div>
         </div>
       </Switch>
@@ -137,10 +162,57 @@ export const WithDescription: Story = {
 export const CustomStyling: Story = {
   render: () => (
     <Switch>
-      <Switch.Control className="h-7 w-12 data-[selected=true]:bg-green-500" />
-      <Switch.Label className="text-lg font-medium">Custom styled switch</Switch.Label>
+      {({isSelected}) => (
+        <>
+          <Switch.Control
+            className="h-[31px] w-[51px] bg-blue-500 transition-all duration-300 data-[selected=true]:bg-cyan-500 data-[selected=true]:shadow-[0_0_12px_rgba(6,182,212,0.5)]"
+            data-selected={isSelected}
+          >
+            <Switch.Thumb
+              className="size-[27px] bg-white shadow-sm transition-all duration-300 data-[selected=true]:translate-x-5 data-[selected=true]:shadow-lg"
+              data-selected={isSelected}
+            >
+              <Switch.Icon>
+                <Icon
+                  className={`size-4 transition-colors ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
+                  icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
+                />
+              </Switch.Icon>
+            </Switch.Thumb>
+          </Switch.Control>
+        </>
+      )}
     </Switch>
   ),
+};
+
+export const WithIcon: Story = {
+  render: () => {
+    return (
+      <Switch>
+        {({isSelected}) => (
+          <>
+            <Switch.Control
+              className="bg-danger data-[selected=true]:bg-success h-[32px] w-[55px]"
+              data-selected={isSelected}
+            >
+              <Switch.Thumb
+                className="size-7 bg-white data-[selected=true]:translate-x-[23px]"
+                data-selected={isSelected}
+              >
+                <Switch.Icon>
+                  <Icon
+                    className={`size-4 transition-colors ${isSelected ? "text-success" : "text-danger"}`}
+                    icon={isSelected ? "gravity-ui:lock-open" : "gravity-ui:lock"}
+                  />
+                </Switch.Icon>
+              </Switch.Thumb>
+            </Switch.Control>
+          </>
+        )}
+      </Switch>
+    );
+  },
 };
 
 export const RenderProps: Story = {
@@ -148,8 +220,10 @@ export const RenderProps: Story = {
     <Switch>
       {({isSelected}) => (
         <>
-          <Switch.Control />
-          <Switch.Label>{isSelected ? "Enabled" : "Disabled"}</Switch.Label>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm font-normal">{isSelected ? "Enabled" : "Disabled"}</Label>
         </>
       )}
     </Switch>
@@ -174,25 +248,28 @@ export const Form: Story = {
         <SwitchGroup>
           <SwitchGroup.Items>
             <Switch name="notifications" value="on">
-              <Switch.Control />
-              <Switch.Label>Enable notifications</Switch.Label>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Label className="text-sm font-normal">Enable notifications</Label>
             </Switch>
             <Switch defaultSelected name="newsletter" value="on">
-              <Switch.Control />
-              <Switch.Label>Subscribe to newsletter</Switch.Label>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Label className="text-sm font-normal">Subscribe to newsletter</Label>
             </Switch>
             <Switch name="marketing" value="on">
-              <Switch.Control />
-              <Switch.Label>Receive marketing updates</Switch.Label>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Label className="text-sm font-normal">Receive marketing updates</Label>
             </Switch>
           </SwitchGroup.Items>
         </SwitchGroup>
-        <button
-          className="bg-accent text-accent-foreground hover:bg-accent-hover mt-4 rounded-md px-4 py-2 text-sm font-medium"
-          type="submit"
-        >
+        <Button className="mt-4" size="sm" type="submit" variant="primary">
           Submit
-        </button>
+        </Button>
       </form>
     );
   },

@@ -1,11 +1,12 @@
 "use client";
 
-import type {SwitchGroupVariants} from "./switch.styles";
+import type {SwitchGroupVariants, SwitchVariants} from "./switch.styles";
 import type {SwitchProps as SwitchPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
 
+import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {switchGroupVariants, switchVariants} from "./switch.styles";
@@ -71,10 +72,11 @@ const SwitchContext = createContext<SwitchContext>({});
 interface SwitchRootProps extends SwitchPrimitiveProps {}
 
 const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, SwitchRootProps>(
-  ({children, className, ...props}, ref) => {
+  ({children, className, ...originalProps}, ref) => {
+    const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
     const slots = React.useMemo(
-      () => switchVariants({isDisabled: props.isDisabled}),
-      [props.isDisabled],
+      () => switchVariants({...(variantProps as SwitchVariants)}),
+      [objectToDeps(variantProps)],
     );
 
     return (
@@ -99,12 +101,12 @@ SwitchRoot.displayName = "HeroUI.Switch";
 interface SwitchControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const SwitchControl = React.forwardRef<HTMLSpanElement, SwitchControlProps>(
-  ({className, ...props}, ref) => {
+  ({children, className, ...props}, ref) => {
     const {slots} = useContext(SwitchContext);
 
     return (
       <span ref={ref} data-switch-control className={slots?.control({className})} {...props}>
-        <span data-switch-thumb className={slots?.thumb()} />
+        {children}
       </span>
     );
   },
@@ -114,17 +116,39 @@ SwitchControl.displayName = "HeroUI.Switch.Control";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface SwitchLabelProps extends React.HTMLAttributes<HTMLSpanElement> {}
+interface SwitchThumbProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
-const SwitchLabel = React.forwardRef<HTMLSpanElement, SwitchLabelProps>(
-  ({className, ...props}, ref) => {
+const SwitchThumb = React.forwardRef<HTMLSpanElement, SwitchThumbProps>(
+  ({children, className, ...props}, ref) => {
     const {slots} = useContext(SwitchContext);
 
-    return <span ref={ref} data-switch-label className={slots?.label({className})} {...props} />;
+    return (
+      <span ref={ref} data-switch-thumb className={slots?.thumb({className})} {...props}>
+        {children}
+      </span>
+    );
   },
 );
 
-SwitchLabel.displayName = "HeroUI.Switch.Label";
+SwitchThumb.displayName = "HeroUI.Switch.Thumb";
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface SwitchIconProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+const SwitchIcon = React.forwardRef<any, SwitchIconProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots} = useContext(SwitchContext);
+
+    return (
+      <span ref={ref} data-switch-icon className={slots?.icon({className})} {...props}>
+        {children}
+      </span>
+    );
+  },
+);
+
+SwitchIcon.displayName = "HeroUI.Switch.Icon";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
@@ -132,7 +156,8 @@ SwitchLabel.displayName = "HeroUI.Switch.Label";
 
 const CompoundSwitch = Object.assign(SwitchRoot, {
   Control: SwitchControl,
-  Label: SwitchLabel,
+  Thumb: SwitchThumb,
+  Icon: SwitchIcon,
 });
 
 const CompoundSwitchGroup = Object.assign(SwitchGroupRoot, {
@@ -146,7 +171,8 @@ export type {
   SwitchRootProps,
   SwitchRootProps as SwitchProps,
   SwitchControlProps,
-  SwitchLabelProps,
+  SwitchThumbProps,
+  SwitchIconProps,
 };
 
 export {CompoundSwitch as Switch, CompoundSwitchGroup as SwitchGroup};

@@ -1,0 +1,139 @@
+/* Switch base styles */
+.switch {
+  @apply inline-flex items-center gap-3;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply opacity-[var(--disabled-opacity)];
+    cursor: var(--cursor-disabled);
+  }
+}
+
+/* Switch control (track) */
+.switch__control {
+  @apply flex h-[26px] w-[42px] shrink-0 items-center rounded-full border-[0.5px] bg-neutral-50 sm:h-[22px] sm:w-[34px];
+
+  /* Selected/checked state */
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
+    @apply bg-neutral-950;
+  }
+
+  /* Hover states */
+  .switch:hover &,
+  .switch[data-hovered="true"] & {
+    @apply bg-neutral-100;
+  }
+
+  /* Hover + Checked states */
+  .switch[aria-checked="true"]:hover &,
+  .switch[data-selected="true"]:hover &,
+  .switch[aria-checked="true"][data-hovered="true"] &,
+  .switch[data-selected="true"][data-hovered="true"] & {
+    @apply bg-neutral-800;
+  }
+
+  /* Pressed / active states */
+  .switch:active &,
+  .switch[data-pressed="true"] &,
+  .switch[aria-checked="true"]:active & {
+    @apply bg-neutral-100;
+  }
+
+  .switch[aria-checked="true"]:active &,
+  .switch[data-selected="true"]:active &,
+  .switch[aria-checked="true"][data-pressed="true"] &,
+  .switch[data-selected="true"][data-pressed="true"] & {
+    @apply bg-neutral-800;
+  }
+
+  /* Focus states */
+  .switch:focus-visible &,
+  .switch[data-focus-visible="true"] & {
+    @apply outline-none ring-2 ring-neutral-900/30 ring-offset-2;
+  }
+
+  /* Disabled state */
+  .switch:disabled &,
+  .switch[aria-disabled="true"] & {
+    @apply pointer-events-none;
+  }
+
+  .dark &,
+  [data-theme="dark"] & {
+    @apply bg-neutral-900;
+
+    /* Selected/checked state */
+    .switch[aria-checked="true"] &,
+    .switch[data-selected="true"] & {
+      @apply bg-neutral-50;
+    }
+
+    /* Hover states */
+    .switch:hover &,
+    .switch[data-hovered="true"] & {
+      @apply bg-neutral-800;
+    }
+
+    /* Hover + Checked states */
+    .switch[aria-checked="true"]:hover &,
+    .switch[data-selected="true"]:hover & {
+      @apply bg-neutral-100;
+    }
+  }
+}
+
+/* Switch thumb */
+.switch__thumb {
+  @apply bg-default-foreground/[0.5] ease-out-quad flex size-5 translate-x-0.5 rounded-full shadow-sm transition-all sm:size-4;
+
+  /* Selected/checked state */
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
+    @apply bg-accent-foreground translate-x-[18px] sm:translate-x-[14px];
+  }
+
+  /* Pressed state - scale down */
+  .switch:active &,
+  .switch[data-pressed="true"] & {
+    @apply scale-[0.98];
+  }
+}
+
+/* Switch thumb */
+.switch__thumb > * {
+  @apply flex size-full items-center justify-center;
+}
+
+/* Switch label */
+.switch__label {
+  @apply text-foreground text-base font-medium;
+}
+
+/* Switch icon */
+.switch__icon {
+  @apply rounded-full;
+}
+
+/* Switch Group styles */
+.switch-group {
+  @apply flex flex-col gap-6;
+}
+
+.switch-group__items {
+  @apply flex gap-4;
+}
+
+/* Orientation modifiers */
+.switch-group--horizontal .switch-group__items {
+  @apply flex-row;
+}
+
+.switch-group--vertical .switch-group__items {
+  @apply flex-col;
+}

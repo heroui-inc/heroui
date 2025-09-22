@@ -6,7 +6,6 @@ export type {
   SwitchRootProps,
   SwitchProps,
   SwitchControlProps,
-  SwitchLabelProps,
 } from "./switch";
 export {switchVariants, switchGroupVariants} from "./switch.styles";
 export type {SwitchGroupVariants} from "./switch.styles";
