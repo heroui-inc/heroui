@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch} from "@heroui/react";
+import {Label, Switch} from "@heroui/react";
 
 export function LabelPosition() {
   return (
@@ -9,10 +9,10 @@ export function LabelPosition() {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Switch.Label>Label after</Switch.Label>
+        <Label>Label after</Label>
       </Switch>
       <Switch>
-        <Switch.Label>Label before</Switch.Label>
+        <Label>Label before</Label>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>

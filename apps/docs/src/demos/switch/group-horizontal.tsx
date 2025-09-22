@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch, SwitchGroup} from "@heroui/react";
+import {Label, Switch, SwitchGroup} from "@heroui/react";
 
 export function GroupHorizontal() {
   return (
@@ -10,19 +10,19 @@ export function GroupHorizontal() {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Label>Notifications</Switch.Label>
+          <Label>Notifications</Label>
         </Switch>
         <Switch name="marketing">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Label>Marketing</Switch.Label>
+          <Label>Marketing</Label>
         </Switch>
         <Switch name="social">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Label>Social</Switch.Label>
+          <Label>Social</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>

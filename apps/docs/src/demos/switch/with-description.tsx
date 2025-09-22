@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch} from "@heroui/react";
+import {Description, Label, Switch} from "@heroui/react";
 
 export function WithDescription() {
   return (
@@ -11,8 +11,8 @@ export function WithDescription() {
             <Switch.Thumb />
           </Switch.Control>
           <div className="flex flex-col gap-1">
-            <Switch.Label>Public profile</Switch.Label>
-            <p className="text-muted text-sm">Allow others to see your profile information</p>
+            <Label>Public profile</Label>
+            <Description>Allow others to see your profile information</Description>
           </div>
         </div>
       </Switch>

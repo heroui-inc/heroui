@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch} from "@heroui/react";
+import {Label, Switch} from "@heroui/react";
 import React from "react";
 
 export function Controlled() {
@@ -12,7 +12,7 @@ export function Controlled() {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Switch.Label>Enable notifications</Switch.Label>
+        <Label>Enable notifications</Label>
       </Switch>
       <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
     </div>

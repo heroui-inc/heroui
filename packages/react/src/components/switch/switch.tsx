@@ -150,20 +150,6 @@ const SwitchIcon = React.forwardRef<any, SwitchIconProps>(
 
 SwitchIcon.displayName = "HeroUI.Switch.Icon";
 
-/* -----------------------------------------------------------------------------------------------*/
-
-interface SwitchLabelProps extends React.HTMLAttributes<HTMLSpanElement> {}
-
-const SwitchLabel = React.forwardRef<HTMLSpanElement, SwitchLabelProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(SwitchContext);
-
-    return <span ref={ref} data-switch-label className={slots?.label({className})} {...props} />;
-  },
-);
-
-SwitchLabel.displayName = "HeroUI.Switch.Label";
-
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
@@ -172,7 +158,6 @@ const CompoundSwitch = Object.assign(SwitchRoot, {
   Control: SwitchControl,
   Thumb: SwitchThumb,
   Icon: SwitchIcon,
-  Label: SwitchLabel,
 });
 
 const CompoundSwitchGroup = Object.assign(SwitchGroupRoot, {
@@ -188,7 +173,6 @@ export type {
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,
-  SwitchLabelProps,
 };
 
 export {CompoundSwitch as Switch, CompoundSwitchGroup as SwitchGroup};

@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch, SwitchGroup} from "@heroui/react";
+import {Label, Switch, SwitchGroup} from "@heroui/react";
 
 export function Group() {
   return (
@@ -10,19 +10,19 @@ export function Group() {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Label>Allow Notifications</Switch.Label>
+          <Label>Allow Notifications</Label>
         </Switch>
         <Switch name="marketing">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Label>Marketing emails</Switch.Label>
+          <Label>Marketing emails</Label>
         </Switch>
         <Switch name="social">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Label>Social media updates</Switch.Label>
+          <Label>Social media updates</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>

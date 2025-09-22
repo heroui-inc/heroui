@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch} from "@heroui/react";
+import {Label, Switch} from "@heroui/react";
 
 export function Basic() {
   return (
@@ -8,7 +8,7 @@ export function Basic() {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Switch.Label>Enable notifications</Switch.Label>
+      <Label>Enable notifications</Label>
     </Switch>
   );
 }
