@@ -97,6 +97,12 @@
   .switch[data-selected="true"] & {
     @apply bg-accent-foreground translate-x-[18px] sm:translate-x-[14px];
   }
+
+  /* Pressed state - scale down */
+  .switch:active &,
+  .switch[data-pressed="true"] & {
+    @apply scale-[0.98];
+  }
 }
 
 /* Switch thumb */
