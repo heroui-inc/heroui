@@ -23,19 +23,19 @@ export function Form() {
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
-            <Label>Enable notifications</Label>
+            <Label className="text-sm font-normal">Enable notifications</Label>
           </Switch>
           <Switch defaultSelected name="newsletter" value="on">
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
-            <Label>Subscribe to newsletter</Label>
+            <Label className="text-sm font-normal">Subscribe to newsletter</Label>
           </Switch>
           <Switch name="marketing" value="on">
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
-            <Label>Receive marketing updates</Label>
+            <Label className="text-sm font-normal">Receive marketing updates</Label>
           </Switch>
         </SwitchGroup.Items>
       </SwitchGroup>

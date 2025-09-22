@@ -8,7 +8,7 @@ export function DefaultSelected() {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label>Enable notifications</Label>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   );
 }

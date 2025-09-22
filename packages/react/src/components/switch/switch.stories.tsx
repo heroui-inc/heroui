@@ -21,7 +21,7 @@ export const Default: Story = {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label>Enable notifications</Label>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   ),
 };
@@ -32,7 +32,7 @@ export const Disabled: Story = {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label>Enable notifications</Label>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   ),
 };
@@ -43,7 +43,7 @@ export const DefaultSelected: Story = {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label>Enable notifications</Label>
+      <Label className="text-sm font-normal">Enable notifications</Label>
     </Switch>
   ),
 };
@@ -58,7 +58,7 @@ export const Controlled: Story = {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Enable notifications</Label>
+          <Label className="text-sm font-normal">Enable notifications</Label>
         </Switch>
         <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
       </div>
@@ -79,7 +79,7 @@ export const WithoutLabel: Story = {
 export const LabelBefore: Story = {
   render: () => (
     <Switch>
-      <Label>Enable notifications</Label>
+      <Label className="text-sm font-normal">Enable notifications</Label>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
@@ -95,19 +95,19 @@ export const Group: Story = {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Allow Notifications</Label>
+          <Label className="text-sm font-normal">Allow Notifications</Label>
         </Switch>
         <Switch name="marketing">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Marketing emails</Label>
+          <Label className="text-sm font-normal">Marketing emails</Label>
         </Switch>
         <Switch name="social">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Social media updates</Label>
+          <Label className="text-sm font-normal">Social media updates</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>
@@ -122,19 +122,19 @@ export const GroupHorizontal: Story = {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Notifications</Label>
+          <Label className="text-sm font-normal">Notifications</Label>
         </Switch>
         <Switch name="marketing">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Marketing</Label>
+          <Label className="text-sm font-normal">Marketing</Label>
         </Switch>
         <Switch name="social">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Social</Label>
+          <Label className="text-sm font-normal">Social</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>
@@ -150,7 +150,7 @@ export const WithDescription: Story = {
             <Switch.Thumb />
           </Switch.Control>
           <div className="flex flex-col gap-1">
-            <Label>Public profile</Label>
+            <Label className="text-sm font-normal">Public profile</Label>
             <Description>Allow others to see your profile information</Description>
           </div>
         </div>
@@ -193,16 +193,16 @@ export const WithIcon: Story = {
         {({isSelected}) => (
           <>
             <Switch.Control
-              className="h-8 w-14 bg-red-200 data-[selected=true]:bg-green-200"
+              className="bg-danger data-[selected=true]:bg-success h-[32px] w-[55px]"
               data-selected={isSelected}
             >
               <Switch.Thumb
-                className="size-7 bg-white data-[selected=true]:translate-x-6"
+                className="size-7 bg-white data-[selected=true]:translate-x-[23px]"
                 data-selected={isSelected}
               >
                 <Switch.Icon>
                   <Icon
-                    className={`size-4 transition-colors ${isSelected ? "text-green-700" : "text-red-700"}`}
+                    className={`size-4 transition-colors ${isSelected ? "text-success" : "text-danger"}`}
                     icon={isSelected ? "gravity-ui:lock-open" : "gravity-ui:lock"}
                   />
                 </Switch.Icon>
@@ -223,7 +223,7 @@ export const RenderProps: Story = {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>{isSelected ? "Enabled" : "Disabled"}</Label>
+          <Label className="text-sm font-normal">{isSelected ? "Enabled" : "Disabled"}</Label>
         </>
       )}
     </Switch>
@@ -251,19 +251,19 @@ export const Form: Story = {
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
-              <Label>Enable notifications</Label>
+              <Label className="text-sm font-normal">Enable notifications</Label>
             </Switch>
             <Switch defaultSelected name="newsletter" value="on">
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
-              <Label>Subscribe to newsletter</Label>
+              <Label className="text-sm font-normal">Subscribe to newsletter</Label>
             </Switch>
             <Switch name="marketing" value="on">
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
-              <Label>Receive marketing updates</Label>
+              <Label className="text-sm font-normal">Receive marketing updates</Label>
             </Switch>
           </SwitchGroup.Items>
         </SwitchGroup>

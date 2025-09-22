@@ -11,7 +11,7 @@ export function WithDescription() {
             <Switch.Thumb />
           </Switch.Control>
           <div className="flex flex-col gap-1">
-            <Label>Public profile</Label>
+            <Label className="text-sm font-normal">Public profile</Label>
             <Description>Allow others to see your profile information</Description>
           </div>
         </div>
