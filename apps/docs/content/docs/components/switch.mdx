@@ -87,6 +87,12 @@ import { Switch, SwitchGroup } from '@heroui/react';
   name="switch-form"
 />
 
+### Custom Styles
+
+<ComponentPreview
+  name="switch-custom-styles"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -130,6 +136,10 @@ To customize the Switch component classes, you can use the `@layer components` d
 
   .switch__thumb {
     @apply bg-white shadow-sm;
+  }
+
+  .switch__icon {
+    @apply h-3 w-3 text-current;
   }
 }
 ```

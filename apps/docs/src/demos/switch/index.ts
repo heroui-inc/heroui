@@ -1,5 +1,6 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
+export {CustomStyles} from "./custom-styles";
 export {DefaultSelected} from "./default-selected";
 export {Disabled} from "./disabled";
 export {Form} from "./form";

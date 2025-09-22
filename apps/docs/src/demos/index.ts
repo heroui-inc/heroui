@@ -325,6 +325,10 @@ export const demos: Record<string, DemoItem> = {
     component: SwitchDemos.Form,
     file: "switch/form.tsx",
   },
+  "switch-custom-styles": {
+    component: SwitchDemos.CustomStyles,
+    file: "switch/custom-styles.tsx",
+  },
   // Tabs demos
   "tabs-basic": {
     component: TabsDemos.Basic,
