@@ -92,7 +92,7 @@ import { Switch, SwitchGroup } from '@heroui/react';
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { Switch } from '@heroui/react';
+import { Switch, Label } from '@heroui/react';
 
 function CustomSwitch() {
   return (
@@ -105,7 +105,7 @@ function CustomSwitch() {
           >
             <Switch.Thumb className="bg-white" />
           </Switch.Control>
-          <Switch.Label>Custom styled switch</Switch.Label>
+          <Label>Custom styled switch</Label>
         </>
       )}
     </Switch>
@@ -145,7 +145,6 @@ The Switch component uses these CSS classes ([View source styles](https://github
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb
-- `.switch__label` - Switch label text
 
 #### Group Classes
 - `.switch-group` - Switch group container
@@ -208,7 +207,6 @@ The Switch component is built using compound components for maximum flexibility:
 - `Switch.Control` - The switch track/control element
 - `Switch.Thumb` - The movable thumb element
 - `Switch.Icon` - Optional icon inside the thumb
-- `Switch.Label` - The label for the switch
 
 For grouping switches:
 - `SwitchGroup` - The root group component
