@@ -263,23 +263,19 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       ) {
         e.preventDefault();
         // e.g. 1,234 -> ,234
-        let normalized = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
+        const newValue = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
+        // e.g. ,234 -> 234
+        const cleanValue = newValue.replace(/[^\d.-]/g, "");
 
-        // Normalize leading group char so the localized parser can handle it.
-        // Examples: ",234" -> "234", "-,234" -> "-234"
-        if (normalized.startsWith(groupChar)) {
-          normalized = normalized.slice(groupChar.length);
-        } else if (normalized.startsWith("-" + groupChar)) {
-          normalized = "-" + normalized.slice(1 + groupChar.length);
-        }
-        state.setInputValue(normalized);
+        if (cleanValue === "" || cleanValue === "-") {
+          state.setInputValue("");
+        } else {
+          const numberValue = parseFloat(cleanValue);
 
-        if (normalized.startsWith(groupChar)) {
-          normalized = normalized.slice(groupChar.length);
-        } else if (normalized.startsWith("-" + groupChar)) {
-          normalized = "-" + normalized.slice(1 + groupChar.length);
+          if (!isNaN(numberValue)) {
+            state.setNumberValue(numberValue);
+          }
         }
-        state.setInputValue(normalized);
 
         setTimeout(() => {
           // set the new cursor position
