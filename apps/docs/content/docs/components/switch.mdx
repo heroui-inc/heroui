@@ -22,6 +22,20 @@ import { Switch, SwitchGroup } from '@heroui/react';
   name="switch-basic"
 />
 
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+<Switch>
+  <Switch.Control>
+    <Switch.Thumb>
+      <Switch.Icon />  {/* Optional */}
+    </Switch.Thumb>
+  </Switch.Control>
+</Switch>
+```
+
 ### Disabled
 
 <ComponentPreview
@@ -209,26 +223,3 @@ When using the render prop pattern, these values are provided:
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
 | `children` | `React.ReactNode` | - | The switch items to render |
-
-### Compound Components
-
-The Switch component is built using compound components for maximum flexibility:
-
-- `Switch` - The root component that provides context
-- `Switch.Control` - The switch track/control element
-- `Switch.Thumb` - The movable thumb element
-- `Switch.Icon` - Optional icon inside the thumb
-
-For grouping switches:
-- `SwitchGroup` - The root group component
-- `SwitchGroup.Items` - Container for switch items
-
-### Accessibility
-
-The Switch component follows the [WAI-ARIA Switch Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/). Key features:
-
-- Keyboard support: Space to toggle
-- Screen reader announcements for state changes
-- Proper ARIA attributes and roles
-- Support for labels and descriptions
-- Form integration with name/value props
