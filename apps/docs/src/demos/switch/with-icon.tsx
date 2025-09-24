@@ -9,13 +9,9 @@ export function WithIcon() {
       {({isSelected}) => (
         <>
           <Switch.Control
-            className="bg-danger data-[selected=true]:bg-success h-[32px] w-[55px]"
-            data-selected={isSelected}
+            className={`bg-danger h-[32px] w-[54px] border-transparent ${isSelected ? "bg-success" : ""}`}
           >
-            <Switch.Thumb
-              className="size-7 bg-white data-[selected=true]:translate-x-[23px]"
-              data-selected={isSelected}
-            >
+            <Switch.Thumb className={`size-7 bg-white ${isSelected ? "translate-x-[23px]" : ""}`}>
               <Switch.Icon>
                 <Icon
                   className={`size-4 transition-colors ${isSelected ? "text-success" : "text-danger"}`}

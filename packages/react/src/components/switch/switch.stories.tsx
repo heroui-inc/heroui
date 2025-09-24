@@ -165,12 +165,10 @@ export const CustomStyling: Story = {
       {({isSelected}) => (
         <>
           <Switch.Control
-            className="h-[31px] w-[51px] bg-blue-500 transition-all duration-300 data-[selected=true]:bg-cyan-500 data-[selected=true]:shadow-[0_0_12px_rgba(6,182,212,0.5)]"
-            data-selected={isSelected}
+            className={`h-[31px] w-[51px] bg-blue-500 transition-all duration-300 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
           >
             <Switch.Thumb
-              className="size-[27px] bg-white shadow-sm transition-all duration-300 data-[selected=true]:translate-x-5 data-[selected=true]:shadow-lg"
-              data-selected={isSelected}
+              className={`size-[27px] bg-white shadow-sm transition-all duration-300 ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
             >
               <Switch.Icon>
                 <Icon
@@ -193,13 +191,9 @@ export const WithIcon: Story = {
         {({isSelected}) => (
           <>
             <Switch.Control
-              className="bg-danger data-[selected=true]:bg-success h-[32px] w-[55px]"
-              data-selected={isSelected}
+              className={`bg-danger h-[32px] w-[54px] border-transparent ${isSelected ? "bg-success" : ""}`}
             >
-              <Switch.Thumb
-                className="size-7 bg-white data-[selected=true]:translate-x-[23px]"
-                data-selected={isSelected}
-              >
+              <Switch.Thumb className={`size-7 bg-white ${isSelected ? "translate-x-[23px]" : ""}`}>
                 <Switch.Icon>
                   <Icon
                     className={`size-4 transition-colors ${isSelected ? "text-success" : "text-danger"}`}
