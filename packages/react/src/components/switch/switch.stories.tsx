@@ -116,7 +116,7 @@ export const Group: Story = {
 
 export const GroupHorizontal: Story = {
   render: () => (
-    <SwitchGroup orientation="horizontal">
+    <SwitchGroup className="overflow-x-auto" orientation="horizontal">
       <SwitchGroup.Items>
         <Switch name="notifications">
           <Switch.Control>

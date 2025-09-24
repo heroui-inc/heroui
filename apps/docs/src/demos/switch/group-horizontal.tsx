@@ -4,7 +4,7 @@ import {Label, Switch, SwitchGroup} from "@heroui/react";
 
 export function GroupHorizontal() {
   return (
-    <SwitchGroup orientation="horizontal">
+    <SwitchGroup className="overflow-x-auto" orientation="horizontal">
       <SwitchGroup.Items>
         <Switch name="notifications">
           <Switch.Control>
