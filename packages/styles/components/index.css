@@ -3,9 +3,11 @@
 @import "./button.css";
 @import "./card.css";
 @import "./chip.css";
+@import "./description.css";
 @import "./disclosure.css";
 @import "./disclosure-group.css";
 @import "./kbd.css";
+@import "./label.css";
 @import "./link.css";
 @import "./popover.css";
 @import "./skeleton.css";
