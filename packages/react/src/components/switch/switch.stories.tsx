@@ -159,20 +159,20 @@ export const WithDescription: Story = {
   ),
 };
 
-export const CustomStyling: Story = {
+export const WithCustomStyles: Story = {
   render: () => (
     <Switch>
       {({isSelected}) => (
         <>
           <Switch.Control
-            className={`h-[31px] w-[51px] bg-blue-500 transition-all duration-300 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
+            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
           >
             <Switch.Thumb
-              className={`size-[27px] bg-white shadow-sm transition-all duration-300 ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
+              className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
             >
               <Switch.Icon>
                 <Icon
-                  className={`size-4 transition-colors ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
+                  className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
                   icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
                 />
               </Switch.Icon>
@@ -191,12 +191,12 @@ export const WithIcon: Story = {
         {({isSelected}) => (
           <>
             <Switch.Control
-              className={`bg-danger h-[32px] w-[54px] border-transparent ${isSelected ? "bg-success" : ""}`}
+              className={`bg-danger h-[31px] w-[51px] border-transparent ${isSelected ? "bg-success" : ""}`}
             >
-              <Switch.Thumb className={`size-7 bg-white ${isSelected ? "translate-x-[23px]" : ""}`}>
+              <Switch.Thumb className={`size-[27px] bg-white ${isSelected ? "translate-x-5" : ""}`}>
                 <Switch.Icon>
                   <Icon
-                    className={`size-4 transition-colors ${isSelected ? "text-success" : "text-danger"}`}
+                    className={`size-4 ${isSelected ? "text-success" : "text-danger"}`}
                     icon={isSelected ? "gravity-ui:lock-open" : "gravity-ui:lock"}
                   />
                 </Switch.Icon>
