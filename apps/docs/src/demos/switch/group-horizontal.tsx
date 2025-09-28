@@ -10,19 +10,19 @@ export function GroupHorizontal() {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm font-normal">Notifications</Label>
+          <Label className="text-sm">Notifications</Label>
         </Switch>
         <Switch name="marketing">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm font-normal">Marketing</Label>
+          <Label className="text-sm">Marketing</Label>
         </Switch>
         <Switch name="social">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm font-normal">Social</Label>
+          <Label className="text-sm">Social</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>
