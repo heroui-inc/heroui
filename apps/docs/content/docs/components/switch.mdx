@@ -121,12 +121,19 @@ function CustomSwitch() {
       {({isSelected}) => (
         <>
           <Switch.Control
-            className="h-6 w-9 bg-gray-300 data-[selected=true]:bg-green-500"
-            data-selected={isSelected}
+            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
           >
-            <Switch.Thumb className="bg-white" />
+            <Switch.Thumb
+              className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
+            >
+              <Switch.Icon>
+                <Icon
+                  className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
+                  icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
+                />
+              </Switch.Icon>
+            </Switch.Thumb>
           </Switch.Control>
-          <Label>Custom styled switch</Label>
         </>
       )}
     </Switch>
