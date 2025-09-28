@@ -5,13 +5,6 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Focus states */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
@@ -24,6 +17,12 @@
 /* Switch control (track) */
 .switch__control {
   @apply bg-default flex h-[24px] w-[40px] shrink-0 items-center rounded-full border-[0.5px] sm:h-[20px] sm:w-[32px];
+
+  /* Focus states */
+  .switch:focus-visible &,
+  .switch[data-focus-visible="true"] & {
+    @apply outline-2 outline-[var(--focus)];
+  }
 
   /* Hover states */
   .switch:hover &,
@@ -40,7 +39,7 @@
   /* Checked states */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent border-accent;
+    @apply bg-accent;
   }
 
   /* Checked + Hover states */
@@ -62,12 +61,15 @@
 
 /* Switch thumb */
 .switch__thumb {
-  @apply bg-foreground/20 flex size-5 translate-x-0.5 rounded-full shadow-sm transition sm:size-4;
+  @apply bg-default-foreground/20 flex size-5 translate-x-0.5 rounded-full shadow-sm sm:size-4;
+  transition:
+    translate 150ms var(--ease-out-quad),
+    background-color 150ms var(--ease-smooth);
 
   /* Selected/checked state */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground ease-out-quad translate-x-[17px] sm:translate-x-[13px];
+    @apply bg-accent-foreground translate-x-[17px] sm:translate-x-[13px];
   }
 
   /* Pressed state - scale down */
