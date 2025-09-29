@@ -10,19 +10,19 @@ export function Group() {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm font-normal">Allow Notifications</Label>
+          <Label className="text-sm">Allow Notifications</Label>
         </Switch>
         <Switch name="marketing">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm font-normal">Marketing emails</Label>
+          <Label className="text-sm">Marketing emails</Label>
         </Switch>
         <Switch name="social">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm font-normal">Social media updates</Label>
+          <Label className="text-sm">Social media updates</Label>
         </Switch>
       </SwitchGroup.Items>
     </SwitchGroup>

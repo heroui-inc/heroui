@@ -33,6 +33,11 @@
   /* Fumadocs UI Animations */
   --animate-fd-fade-in: custom-fade-in 200ms ease-out forwards;
   --animate-fd-fade-out: custom-fade-out 150ms ease-out forwards;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Dark Theme Variables */

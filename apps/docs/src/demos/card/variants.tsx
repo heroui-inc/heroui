@@ -1,46 +1,48 @@
 "use client";
 
-import {Card, Link} from "@heroui/react";
+import {Card} from "@heroui/react";
 
 export function Variants() {
   return (
-    <div className="flex w-full max-w-md flex-col items-start gap-8">
-      {/* Item variant */}
-      <Card className="w-full max-w-[200px]" variant="item">
-        <Card.Image
-          alt="Product"
-          className="aspect-square"
-          src="https://assets.lummi.ai/assets/QmVGaqmCEBtAwTYMYUtn2ocdJcoSjtGbLydnVCGJpbUdHX"
-        />
-        <Card.Details>
-          <Card.Footer className="inline-flex items-center justify-between px-2 py-2 pb-1 text-sm">
-            <span>Cars</span>
-            <span className="text-muted">18 pictures</span>
-          </Card.Footer>
-        </Card.Details>
+    <div className="flex flex-col gap-4">
+      <Card className="w-[320px]" variant="flat">
+        <Card.Header>
+          <Card.Title>Variant Flat</Card.Title>
+          <Card.Description>Transparent background with no border</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with no variant styling</p>
+        </Card.Content>
       </Card>
 
-      <Card className="w-full items-stretch" variant="side">
-        <Card.Image
-          alt="Product"
-          className="aspect-square w-[136px]"
-          src="https://assets.lummi.ai/assets/QmVGaqmCEBtAwTYMYUtn2ocdJcoSjtGbLydnVCGJpbUdHX"
-        />
-        <Card.Details className="gap-3">
-          <Card.Header className="gap-1">
-            <Card.Title>Become an Acme Creator!</Card.Title>
-            <Card.Description>
-              Visit heroui.com to sign up today and start earning credits from your fans and
-              followers.
-            </Card.Description>
-          </Card.Header>
-          <Card.Footer className="mt-auto">
-            <Link href="https://heroui.com" target="_blank">
-              Call to action
-              <Link.Icon />
-            </Link>
-          </Card.Footer>
-        </Card.Details>
+      <Card className="w-[320px]" variant="outlined">
+        <Card.Header>
+          <Card.Title>Variant Outlined</Card.Title>
+          <Card.Description>This card uses outlined variant (default)</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with subtle elevation</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[320px]" variant="elevated">
+        <Card.Header>
+          <Card.Title>Variant Elevated</Card.Title>
+          <Card.Description>This card uses elevated variant</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with medium elevation</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[320px]" variant="filled">
+        <Card.Header>
+          <Card.Title>Variant Filled</Card.Title>
+          <Card.Description>This card uses filled variant</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Content with higher elevation</p>
+        </Card.Content>
       </Card>
     </div>
   );
