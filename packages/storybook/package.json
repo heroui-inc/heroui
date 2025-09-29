@@ -32,7 +32,7 @@
     "@storybook/theming": "8.6.12",
     "@tailwindcss/postcss": "4.1.13",
     "@tailwindcss/vite": "4.1.13",
-    "@types/react": "19.1.13",
+    "@types/react": "19.1.15",
     "@types/react-dom": "19.1.9",
     "@vitejs/plugin-react": "5.0.3",
     "glob": "11.0.3",
