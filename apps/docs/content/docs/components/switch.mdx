@@ -27,13 +27,17 @@ import { Switch, SwitchGroup } from '@heroui/react';
 Import all parts and piece them together.
 
 ```tsx
-<Switch>
-  <Switch.Control>
-    <Switch.Thumb>
-      <Switch.Icon />  {/* Optional */}
-    </Switch.Thumb>
-  </Switch.Control>
-</Switch>
+import {Switch} from '@heroui/react';
+
+export default () => (
+  <Switch>
+    <Switch.Control>
+      <Switch.Thumb>
+        <Switch.Icon />  {/* Optional */}
+      </Switch.Thumb>
+    </Switch.Control>
+  </Switch>
+);
 ```
 
 ### Disabled
