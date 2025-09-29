@@ -9,6 +9,7 @@ export * from "./calendar";
 export * from "./card";
 export * from "./checkbox";
 export * from "./chip";
+export * from "./close-button";
 export * from "./disclosure";
 export * from "./description";
 export * from "./disclosure-group";

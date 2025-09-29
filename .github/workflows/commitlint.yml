@@ -1,0 +1,43 @@
+name: Commitlint
+
+on:
+  push:
+    branches: [main, canary, v3]
+  pull_request:
+    branches: [main, canary, v3]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: ./.github/common-actions/install
+
+      - name: Print versions
+        run: |
+          git --version
+          node --version
+          pnpm --version
+          pnpm commitlint --version
+
+      - name: Run commitlint
+        id: run_commitlint
+        uses: wagoid/commitlint-github-action@v6
+        env:
+          NODE_PATH: ${{ github.workspace }}/node_modules
+        with:
+          configFile: commitlint.config.mjs
+
+      - name: Show outputs
+        if: ${{ always() }}
+        run: echo ${{ toJSON(steps.run_commitlint.outputs.results) }}

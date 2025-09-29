@@ -23,10 +23,6 @@
 
 /* Element - content */
 .card__content {
-}
-
-/* Element - details */
-.card__details {
   @apply flex flex-1 flex-col gap-1;
 }
 
@@ -35,110 +31,19 @@
   @apply flex flex-row items-center;
 }
 
-/* Element - image */
-.card__image {
-  @apply rounded-panel block w-full max-w-full shrink-0 select-none object-cover align-middle;
-}
-
-/* Element - close button */
-.card__close-button {
-  @apply absolute right-4 top-4 isolate z-10 inline-flex origin-center transform-gpu select-none items-center justify-center;
-  @apply size-6 rounded-sm p-1;
-  @apply text-muted bg-transparent;
-
-  transition:
-    transform 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth);
-  cursor: var(--cursor-interactive);
-
-  &:hover,
-  &[data-hover="true"] {
-    @apply bg-accent-soft;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-accent-soft;
-    transform: scale(0.97);
-  }
-
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  &:disabled,
-  &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-    cursor: var(--cursor-disabled);
-  }
-}
-
-/* Modifier - surface */
-.card--surface-none {
+/* Modifier - variant */
+.card--variant-flat {
   @apply border-none bg-transparent shadow-none;
 }
 
-.card--surface-1 {
+.card--variant-outlined {
   @apply bg-surface-1;
 }
 
-.card--surface-2 {
+.card--variant-elevated {
   @apply bg-surface-2;
 }
 
-.card--surface-3 {
+.card--variant-filled {
   @apply bg-surface-3;
-}
-
-/* Modifier - variant */
-.card--side {
-  @apply flex flex-row items-start gap-4;
-}
-
-.card__image--side {
-}
-
-.card__details--side {
-  @apply justify-between;
-}
-
-.card--item {
-  @apply gap-2 p-1;
-}
-
-.card__image--item {
-  border-radius: calc(theme(--radius-panel) - theme(spacing.1));
-}
-
-.card__details--item {
-  @apply gap-2;
-}
-
-.card__footer--item {
-  @apply mt-auto;
-}
-
-.card--full {
-  @apply relative overflow-hidden p-0;
-}
-
-.card__image--full {
-  @apply absolute inset-0 z-10 h-full w-full object-cover;
-}
-
-.card__header--full {
-  @apply relative z-20 p-4 text-white;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
-}
-
-.card__details--full {
-  @apply relative z-20 min-h-48 justify-end p-4 text-white;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-}
-
-.card__content--full,
-.card__footer--full {
-  @apply text-white;
 }

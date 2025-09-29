@@ -8,6 +8,7 @@ import * as ButtonDemos from "./button";
 import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
+import * as CloseButtonDemos from "./close-button";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
 import * as KbdDemos from "./kbd";
@@ -149,21 +150,29 @@ export const demos: Record<string, DemoItem> = {
     component: CardDemos.Default,
     file: "card/default.tsx",
   },
-  "card-surfaces": {
-    component: CardDemos.Surfaces,
-    file: "card/surfaces.tsx",
+  "card-horizontal": {
+    component: CardDemos.Horizontal,
+    file: "card/horizontal.tsx",
   },
   "card-variants": {
     component: CardDemos.Variants,
     file: "card/variants.tsx",
   },
-  "card-nested": {
-    component: CardDemos.Nested,
-    file: "card/nested.tsx",
+  "card-with-avatar": {
+    component: CardDemos.WithAvatar,
+    file: "card/with-avatar.tsx",
   },
   "card-with-form": {
     component: CardDemos.WithForm,
     file: "card/with-form.tsx",
+  },
+  "card-with-image": {
+    component: CardDemos.WithImage,
+    file: "card/with-image.tsx",
+  },
+  "card-with-background-image": {
+    component: CardDemos.WithBackgroundImage,
+    file: "card/with-background-image.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {
@@ -206,6 +215,19 @@ export const demos: Record<string, DemoItem> = {
   "chip-statuses": {
     component: ChipDemos.Statuses,
     file: "chip/statuses.tsx",
+  },
+  // CloseButton demos
+  "close-button-default": {
+    component: CloseButtonDemos.Default,
+    file: "close-button/default.tsx",
+  },
+  "close-button-with-custom-icon": {
+    component: CloseButtonDemos.WithCustomIcon,
+    file: "close-button/with-custom-icon.tsx",
+  },
+  "close-button-interactive": {
+    component: CloseButtonDemos.Interactive,
+    file: "close-button/interactive.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {
