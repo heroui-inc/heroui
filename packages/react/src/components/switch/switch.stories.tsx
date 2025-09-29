@@ -3,7 +3,9 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Button, Description, Label} from "@heroui/react";
+import {Button} from "../button";
+import {Description} from "../description";
+import {Label} from "../label";
 
 import {Switch, SwitchGroup} from "./switch";
 
