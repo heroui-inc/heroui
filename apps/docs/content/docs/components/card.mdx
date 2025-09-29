@@ -1,226 +1,192 @@
 ---
 title: Card
-description: A flexible container component for displaying content with multiple layout variants and surface levels
+description: Flexible container component for grouping related content and actions
 icon: preview
 links:
   source: card/card.tsx
   styles: card.css
   storybook: card
-  figma: true
 ---
 
 ## Import
 
 ```tsx
-import { Card } from '@heroui/react';
+import {Card} from "@heroui/react";
 ```
 
-## Example
+### Usage
 
 <ComponentPreview
   name="card-default"
 />
 
-## Anatomy
+### Anatomy
 
 Import all parts and piece them together.
 
 ```tsx
-<Card>
-  <Card.Header>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Description>Card description</Card.Description>
-  </Card.Header>
-  <Card.Content/>
-  <Card.Footer/>
-</Card>
+import {Card} from "@heroui/react";
+
+export default () => (
+  <Card>
+    <Card.Header>
+      <Card.Title />
+      <Card.Description />
+    </Card.Header>
+    <Card.Content />
+    <Card.Footer />
+  </Card>
+);
 ```
 
-## Surfaces
-
-<ComponentPreview
-  name="card-surfaces"
-/>
-
-## Variants
+### Variants
 
 <ComponentPreview
   name="card-variants"
 />
 
-## Nested
+### Horizontal Layout
 
 <ComponentPreview
-  name="card-nested"
+  name="card-horizontal"
 />
 
-## With Form
+### With Avatar
+
+<ComponentPreview
+  name="card-with-avatar"
+/>
+
+### With Image
+
+<ComponentPreview
+  name="card-with-image"
+/>
+
+### With Background Image
+
+<ComponentPreview
+  name="card-with-background-image"
+/>
+
+### With Form
 
 <ComponentPreview
   name="card-with-form"
 />
 
-## Styling
-
-### Passing Tailwind CSS classes
+## Accessibility
 
 ```tsx
-import { Card } from '@heroui/react';
+// Semantic markup
+<Card role="article" aria-labelledby="card-title">
+  <Card.Header>
+    <Card.Title id="card-title">Article Title</Card.Title>
+  </Card.Header>
+</Card>
 
-function CustomCard() {
-  return (
-    <Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
-      <Card.Header>
-        <Card.Title>Custom Styled Card</Card.Title>
-      </Card.Header>
-    </Card>
-  );
-}
+// Interactive cards
+<Card asChild>
+  <a href="/details" aria-label="View product details">
+    <Card.Title>Product Name</Card.Title>
+  </a>
+</Card>
 ```
 
-### Customizing the component classes
+## Styling
 
-To customize the Card component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+### Component Customization
+
+```tsx
+<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+  <Card.Header>
+    <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
+    <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    <p className="text-blue-800">Content with custom styling</p>
+  </Card.Content>
+</Card>
+```
+
+### CSS Variable Overrides
 
 ```css
-@layer components {
-  .card {
-    @apply shadow-lg border-2 bg-gradient-to-br from-white to-gray-50;
-  }
+/* Override specific variants */
+.card--variant-elevated {
+  @apply bg-gradient-to-br from-blue-50 to-purple-50;
+}
 
-  .card--surface-2 {
-    @apply bg-gradient-to-br from-blue-50 to-purple-50;
-  }
-
-  .card__title {
-    @apply text-xl font-bold text-blue-900;
-  }
+/* Custom element styles */
+.card__title {
+  @apply text-xl font-bold;
 }
 ```
 
-HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+## CSS Classes
 
-### CSS Classes
+Card uses BEM naming for predictable styling:
 
-The Card component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/card.css)):
-
-#### Base Classes
-- `.card` - Base card container
-- `.card__header` - Header section
-- `.card__title` - Title element
-- `.card__description` - Description text
-- `.card__content` - Main content area
-- `.card__details` - Details container (for variants)
-- `.card__footer` - Footer section
-- `.card__image` - Image element
-- `.card__close-button` - Close button
-
-#### Variant Classes
-- `.card--side` - Horizontal layout variant
-- `.card--item` - Compact layout variant
-- `.card--full` - Overlay layout variant
-- `.card--surface-none` - Transparent background surface
-- `.card--surface-1` - Default surface level
-- `.card--surface-2` - Medium surface level
-- `.card--surface-3` - High surface level
-- `.card__image--side` - Image styling for side variant
-- `.card__image--item` - Image styling for item variant
-- `.card__image--full` - Image styling for full variant
-- `.card__header--full` - Header styling for full variant
-- `.card__details--side` - Details styling for side variant
-- `.card__details--item` - Details styling for item variant
-- `.card__details--full` - Details styling for full variant
-- `.card__content--full` - Content styling for full variant
-- `.card__footer--item` - Footer styling for item variant
-- `.card__footer--full` - Footer styling for full variant
-
-### Interactive States
-
-The card close button supports both CSS pseudo-classes and data attributes for flexibility:
-
-- **Hover**: `:hover` or `[data-hover="true"]`
-- **Active/Pressed**: `:active` or `[data-pressed="true"]` (includes scale transform)
-- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
-- **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
+| Class | Description |
+| --- | --- |
+| `.card` | Base container with padding and border |
+| `.card__header` | Header section container |
+| `.card__title` | Title with base font size and weight |
+| `.card__description` | Muted description text |
+| `.card__content` | Flexible content container |
+| `.card__footer` | Footer with row layout |
+| `.card--variant-flat` | Transparent background, no border |
+| `.card--variant-outlined` | Border with subtle background (default) |
+| `.card--variant-elevated` | Slightly elevated with medium background |
+| `.card--variant-filled` | Prominently filled with stronger background |
 
 ## API Reference
 
-### Card Props
+### Card
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'side' \| 'item' \| 'full'` | - | Layout variant for different card styles |
-| `surface` | `'none' \| '1' \| '2' \| '3'` | `'1'` | Surface elevation level for visual hierarchy |
-| `asChild` | `boolean` | `false` | Render as a child element |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Card content |
+| Prop        | Type                                                      | Default      | Description                |
+| ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
+| `variant`   | `"flat" \| "outlined" \| "elevated" \| "filled"`         | `"outlined"` | Visual variant of the card |
+| `asChild`   | `boolean`                         | `false` | Render as a child element  |
+| `className` | `string`                          | -       | Additional CSS classes     |
+| `children`  | `React.ReactNode`                 | -       | Card content               |
 
-### Card.Header Props
+### Card.Header
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as a child element |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Header content |
+| Prop        | Type              | Default | Description               |
+| ----------- | ----------------- | ------- | ------------------------- |
+| `asChild`   | `boolean`         | `false` | Render as a child element |
+| `className` | `string`          | -       | Additional CSS classes    |
+| `children`  | `React.ReactNode` | -       | Header content            |
 
-### Card.Title Props
+### Card.Title
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as a child element (default: h3) |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Title content |
+| Prop        | Type              | Default | Description                      |
+| ----------- | ----------------- | ------- | -------------------------------- |
+| `asChild`   | `boolean`         | `false` | Render as a child element       |
+| `className` | `string`          | -       | Additional CSS classes           |
+| `children`  | `React.ReactNode` | -       | Title content (renders as `h3`) |
 
-### Card.Description Props
+### Card.Description
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as a child element (default: p) |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Description content |
+| Prop        | Type              | Default | Description                     |
+| ----------- | ----------------- | ------- | ------------------------------- |
+| `asChild`   | `boolean`         | `false` | Render as a child element      |
+| `className` | `string`          | -       | Additional CSS classes          |
+| `children`  | `React.ReactNode` | -       | Description content (renders as `p`) |
 
-### Card.Content Props
+### Card.Content
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as a child element |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Main content |
+| Prop        | Type              | Default | Description               |
+| ----------- | ----------------- | ------- | ------------------------- |
+| `asChild`   | `boolean`         | `false` | Render as a child element |
+| `className` | `string`          | -       | Additional CSS classes    |
+| `children`  | `React.ReactNode` | -       | Main content              |
 
-### Card.Details Props
+### Card.Footer
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as a child element |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Details content (used with variants) |
-
-### Card.Footer Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as a child element |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Footer content |
-
-### Card.Image Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | - | Image source URL |
-| `alt` | `string` | - | Alternative text for accessibility |
-| `asChild` | `boolean` | `false` | Render as a child element (default: img) |
-| `className` | `string` | - | Additional CSS classes |
-
-### Card.CloseButton Props
-
-Inherits all props from React Aria's `Button` component:
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `onPress` | `(e: PressEvent) => void` | - | Handler called when button is pressed |
-| `isDisabled` | `boolean` | `false` | Whether the button is disabled |
-| `asChild` | `boolean` | `false` | Render as a child element |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode \| (values: ButtonRenderProps) => React.ReactNode` | `<CloseIcon />` | Button content or render prop |
+| Prop        | Type              | Default | Description               |
+| ----------- | ----------------- | ------- | ------------------------- |
+| `asChild`   | `boolean`         | `false` | Render as a child element |
+| `className` | `string`          | -       | Additional CSS classes    |
+| `children`  | `React.ReactNode` | -       | Footer content            |

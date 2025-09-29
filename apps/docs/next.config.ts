@@ -24,6 +24,11 @@ const config: NextConfig = {
         pathname: "/**",
         protocol: "https",
       },
+      {
+        hostname: "img.heroui.chat",
+        pathname: "/**",
+        protocol: "https",
+      },
     ],
   },
   logging: {
