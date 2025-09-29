@@ -3,15 +3,15 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const descriptionVariants = tv({
-  base: ["text-muted text-sm", "transition-colors duration-200"],
+  base: "description",
   variants: {
     size: {
-      sm: "text-xs",
-      md: "text-sm",
-      lg: "text-base",
+      sm: "description--sm",
+      md: "description--md",
+      lg: "description--lg",
     },
     disabled: {
-      true: "opacity-[var(--disabled-opacity)]",
+      true: "description--disabled",
     },
   },
   defaultVariants: {
