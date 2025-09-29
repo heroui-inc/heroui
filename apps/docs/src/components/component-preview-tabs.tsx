@@ -42,7 +42,7 @@ export function ComponentPreviewTabs({
           <div
             data-name={name}
             className={cn(
-              "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-md p-4 before:absolute before:inset-0 before:z-[-1] before:bg-white/80 sm:p-10 dark:before:bg-black/30",
+              "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-md p-4 before:absolute before:inset-0 before:z-[-1] before:bg-white/80 sm:p-10 dark:before:bg-black/25",
               alignmentClasses[align],
               "flex",
             )}
