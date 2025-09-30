@@ -39,6 +39,7 @@
     "version": "changeset version",
     "prerelease": "turbo build --filter=@heroui/styles --filter=@heroui/react",
     "release": "changeset publish",
+    "release:alpha": "changeset publish --tag alpha",
     "version:canary": "changeset version --snapshot canary",
     "release:canary": "changeset publish --snapshot --no-git-tag --tag canary",
     "clean": "pnpm clean:cache && pnpm i",
