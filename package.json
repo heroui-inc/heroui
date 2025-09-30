@@ -52,7 +52,7 @@
     "release": "changeset publish",
     "version:canary": "changeset version --snapshot canary",
     "release:canary": "changeset publish --snapshot --no-git-tag --tag canary",
-    "postinstall": "husky install && pnpm --filter @nextui-org/theme build"
+    "postinstall": "pnpm --filter @nextui-org/theme build"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
