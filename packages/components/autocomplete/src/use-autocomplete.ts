@@ -446,7 +446,9 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
 
   const getClearButtonProps = () =>
     ({
-      ...mergeProps(buttonProps, slotsProps.clearButtonProps),
+      ...slotsProps.clearButtonProps,
+      preventFocusOnPress: true,
+      excludeFromTabOrder: true,
       // disable original focus and state toggle from react aria
       onPressStart: () => {
         // this is in PressStart for mobile so that touching the clear button doesn't remove focus from
