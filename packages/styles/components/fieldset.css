@@ -1,0 +1,42 @@
+/* Base component styles */
+.fieldset {
+  @apply space-y-6 *:data-[slot=text]:mt-1 [&>*+[data-slot=control]]:mt-6;
+}
+
+/* Legend component */
+.legend {
+  @apply text-foreground text-base font-semibold disabled:opacity-50;
+}
+
+/* Field group component with default spacing */
+.field-group {
+  @apply space-y-8 data-[slot=control]:block;
+}
+
+/* Field group size variants */
+.field-group--sm {
+  @apply space-y-4;
+}
+
+.field-group--md {
+  @apply space-y-6;
+}
+
+.field-group--lg {
+  /* No styles as this is the default spacing */
+}
+
+/* Field component with default variant */
+.field {
+  @apply *:data-[slot=label]:font-medium [&>[data-slot=control]+[data-slot=description]]:mt-3 [&>[data-slot=control]+[data-slot=error]]:mt-3 [&>[data-slot=description]+[data-slot=control]]:mt-3 [&>[data-slot=label]+[data-slot=control]]:mt-3 [&>[data-slot=label]+[data-slot=description]]:mt-1;
+}
+
+/* Field checkbox variant */
+.field--checkbox {
+  @apply flex items-start gap-3 [&>[data-slot=control]+[data-slot=label]]:mt-0 [&>[data-slot=control]+div]:flex [&>[data-slot=control]+div]:flex-col [&>[data-slot=control]+div]:gap-1 [&>[data-slot=control]]:mt-0.5 [&>[data-slot=label]]:mt-0 [&_[data-slot=label]]:font-normal;
+}
+
+/* Field error component */
+.field-error {
+  @apply text-danger mt-1 translate-y-[-4px] text-sm opacity-0 transition-all duration-200 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100;
+}
