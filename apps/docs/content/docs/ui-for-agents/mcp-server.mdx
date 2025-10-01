@@ -1,0 +1,159 @@
+---
+title: MCP Server
+description: Access HeroUI v3 documentation directly in your AI assistant
+icon: preview
+---
+
+The HeroUI MCP Server gives AI assistants direct access to HeroUI v3 component documentation, making it easier to build with HeroUI in AI-powered development environments.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/hero-react-mcp-light-3.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/hero-react-mcp-dark-2.jpg"
+  alt="HeroUI v3 MCP Server"
+/>
+
+
+The MCP server currently supports **@heroui/react v3** only and [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) and is published at `@heroui/react-mcp` on npm. View the source code on [GitHub](https://github.com/heroui-inc/heroui-mcp).
+
+<Callout>
+  As we add more components to HeroUI v3, they'll be available in the MCP server too.
+</Callout>
+
+## Quick Setup
+
+### Cursor
+
+<div className="flex items-center gap-3 mb-4">
+  <a
+    href="cursor://anysphere.cursor-deeplink/mcp/install?name=heroui-react&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBoZXJvdWkvbWNwQGxhdGVzdCJdfQ=="
+    className="button button--tertiary button--sm no-underline bg-default/50 dark:bg-default/30"
+  >
+    <svg viewBox="0 0 466.73 532.09" className="w-5 h-5 fill-current">
+      <path d="M457.43,125.94L244.42,2.96c-6.84-3.95-15.28-3.95-22.12,0L9.3,125.94c-5.75,3.32-9.3,9.46-9.3,16.11v247.99c0,6.65,3.55,12.79,9.3,16.11l213.01,122.98c6.84,3.95,15.28,3.95,22.12,0l213.01-122.98c5.75-3.32,9.3-9.46,9.3-16.11v-247.99c0-6.65-3.55-12.79-9.3-16.11h-.01ZM444.05,151.99l-205.63,356.16c-1.39,2.4-5.06,1.42-5.06-1.36v-233.21c0-4.66-2.49-8.97-6.53-11.31L24.87,145.67c-2.4-1.39-1.42-5.06,1.36-5.06h411.26c5.84,0,9.49,6.33,6.57,11.39h-.01Z"/>
+    </svg>
+    <span className="text-accent">Install in Cursor</span>
+  </a>
+</div>
+
+Or manually add to **Cursor Settings** → **Tools** → **MCP Servers**:
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/mcp@latest"]
+    }
+  }
+}
+```
+
+Alternatively, add the following to your `~/.cursor/mcp.json` file. To learn more, see the [Cursor documentation](https://cursor.com/docs/context/mcp).
+
+### Claude Code
+
+Run this command in your terminal:
+
+```bash
+claude mcp add heroui-react -- npx -y @heroui/mcp@latest
+```
+
+Or manually add to your project's `.mcp.json` file:
+
+```json title=".mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/mcp@latest"]
+    }
+  }
+}
+```
+
+After adding the configuration, restart Claude Code and run `/mcp` to see the HeroUI MCP server in the list. If you see **Connected**, you're ready to use it.
+
+See the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-code/mcp) for more details.
+
+### Windsurf
+
+Add the HeroUI server to your project's `.windsurf/mcp.json` configuration file:
+
+```json title=".windsurf/mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/mcp@latest"]
+    }
+  }
+}
+```
+
+After adding the configuration, restart Windsurf to activate the MCP server.
+
+See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp) for more details.
+
+### VS Code
+
+To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
+
+```json title=".vscode/mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/mcp@latest"]
+    }
+  }
+}
+```
+
+After adding the configuration, open `.vscode/mcp.json` and click **Start** next to the heroui-react server.
+
+See the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) for more details.
+
+## Usage
+
+Once configured, ask your AI assistant questions like:
+
+- "Help me install HeroUI v3 in my Next.js/Vite/Astro app"
+- "Show me all HeroUI components"
+- "What props does the Button component have?"
+- "Give me an example of using the Card component"
+- "Get the source code for the Button component"
+- "Show me the CSS styles for Card"
+- "What are the theme variables for dark mode?"
+
+## Available Tools
+
+The MCP server provides these tools to AI assistants:
+
+| Tool | Description |
+|------|-------------|
+| `installation` | Get complete installation instructions for your specific framework (Next.js, Vite, etc.) and package manager |
+| `list_components` | List all available HeroUI v3 components |
+| `get_component_info` | Get detailed documentation, anatomy, props, and examples for specific components |
+| `get_component_props` | Get detailed props information for HeroUI components |
+| `get_component_examples` | Get usage examples for HeroUI components |
+| `get_component_source_code` | Access the React/TypeScript source code (.tsx files) for components |
+| `get_component_source_styles` | View the CSS styles (.css files) for components |
+| `get_theme_info` | Access theme variables for colors, typography, spacing with light/dark mode support |
+| `get_docs` | Browse the full HeroUI v3 documentation including guides and principles |
+ 
+
+## Troubleshooting
+
+### Requirements
+- Node.js 18 or higher
+- The package will be automatically downloaded when using `npx`
+
+### Need Help?
+- [GitHub Issues](https://github.com/heroui-inc/heroui-mcp/issues)
+- [Discord Community](https://discord.gg/heroui)
+
+## Links
+
+- [npm Package](https://www.npmjs.com/package/@heroui/mcp@latest)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-mcp)
+- [Contributing Guide](https://github.com/heroui-inc/heroui-mcp/blob/main/CONTRIBUTING.md)

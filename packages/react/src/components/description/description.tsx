@@ -12,7 +12,7 @@ interface DescriptionProps extends TextProps, DescriptionVariants {
   ref?: React.Ref<HTMLElement>;
 }
 
-const Description = React.forwardRef<React.ElementRef<typeof Text>, DescriptionProps>(
+const Description = React.forwardRef<HTMLElement, DescriptionProps>(
   ({children, className, disabled, size, ...rest}, ref) => {
     return (
       <Text

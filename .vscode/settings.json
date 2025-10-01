@@ -37,6 +37,7 @@
   "tailwindCSS.classAttributes": ["className", "classNames"],
   "tailwindCSS.experimental.configFile": {
     "packages/storybook/styles/globals.css": [
+      "apps/**",
       "packages/react/**",
       "packages/storybook/**",
       "packages/styles/**"

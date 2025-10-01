@@ -8,7 +8,7 @@ export function Basic() {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label className="text-sm font-normal">Enable notifications</Label>
+      <Label className="text-sm">Enable notifications</Label>
     </Switch>
   );
 }

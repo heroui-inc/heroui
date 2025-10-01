@@ -1,7 +1,7 @@
 import {Chip} from "@heroui/react";
 import * as React from "react";
 
-export type StatusChipStatus = "new" | "preview";
+export type StatusChipStatus = "new" | "preview" | "updated";
 
 interface StatusChipProps {
   status: StatusChipStatus;
@@ -27,6 +27,17 @@ export function StatusChip({className, status}: StatusChipProps) {
         variant="tertiary"
       >
         Preview
+      </Chip>
+    );
+  }
+
+  if (status === "updated") {
+    return (
+      <Chip
+        className={`text-foreground/90 dark:bg-white/8 bg-black/8 h-5 rounded-full px-1.5 text-[10px] ${className || ""}`}
+        variant="primary"
+      >
+        Updated
       </Chip>
     );
   }

@@ -3,20 +3,20 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const fieldsetVariants = tv({
-  base: ["space-y-6", "[&>*+[data-slot=control]]:mt-6", "*:data-[slot=text]:mt-1"],
+  base: "fieldset",
 });
 
 export const legendVariants = tv({
-  base: ["text-base font-semibold", "text-foreground", "disabled:opacity-50"],
+  base: "legend",
 });
 
 export const fieldGroupVariants = tv({
-  base: "space-y-8 data-[slot=control]:block",
+  base: "field-group",
   variants: {
     spacing: {
-      sm: "space-y-4",
-      md: "space-y-6",
-      lg: "space-y-8",
+      sm: "field-group--sm",
+      md: "field-group--md",
+      lg: "field-group--lg",
     },
   },
   defaultVariants: {
@@ -25,27 +25,11 @@ export const fieldGroupVariants = tv({
 });
 
 export const fieldVariants = tv({
-  base: [
-    "[&>[data-slot=label]+[data-slot=control]]:mt-3",
-    "[&>[data-slot=label]+[data-slot=description]]:mt-1",
-    "[&>[data-slot=description]+[data-slot=control]]:mt-3",
-    "[&>[data-slot=control]+[data-slot=description]]:mt-3",
-    "[&>[data-slot=control]+[data-slot=error]]:mt-3",
-    "*:data-[slot=label]:font-medium",
-  ],
+  base: "field",
   variants: {
     variant: {
       default: "",
-      checkbox: [
-        "flex items-start gap-3",
-        "[&>[data-slot=label]]:mt-0",
-        "[&>[data-slot=control]]:mt-0.5",
-        "[&>[data-slot=control]+[data-slot=label]]:mt-0",
-        "[&>[data-slot=control]+div]:flex",
-        "[&>[data-slot=control]+div]:flex-col",
-        "[&>[data-slot=control]+div]:gap-1",
-        "[&_[data-slot=label]]:font-normal",
-      ],
+      checkbox: "field--checkbox",
     },
   },
   defaultVariants: {
@@ -54,15 +38,7 @@ export const fieldVariants = tv({
 });
 
 export const fieldErrorVariants = tv({
-  base: [
-    "text-destructive text-sm",
-    "mt-1",
-    "transition-all duration-200",
-    "opacity-0",
-    "translate-y-[-4px]",
-    "data-[visible=true]:opacity-100",
-    "data-[visible=true]:translate-y-0",
-  ],
+  base: "field-error",
 });
 
 export type FieldsetVariants = VariantProps<typeof fieldsetVariants>;

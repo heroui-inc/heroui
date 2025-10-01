@@ -15,7 +15,7 @@ import {DOCS_CONTENT_PATH} from "@/utils/constants";
 import {extractLinksFromMDX} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
-const componentStatusIcons = ["preview", "new"];
+const componentStatusIcons = ["preview", "new", "updated"];
 
 export default async function Page(props: {params: Promise<{slug?: string[]}>}) {
   const params = await props.params;

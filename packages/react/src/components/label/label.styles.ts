@@ -3,23 +3,23 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const labelVariants = tv({
-  base: ["text-base font-medium", "transition-colors duration-200", "select-none"],
+  base: "label",
   variants: {
     size: {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
+      sm: "label--sm",
+      md: "label--md",
+      lg: "label--lg",
     },
     variant: {
-      default: "text-foreground",
-      muted: "text-muted",
-      destructive: "text-destructive",
+      default: "label--default",
+      muted: "label--muted",
+      destructive: "label--destructive",
     },
     required: {
-      true: "after:text-destructive after:ml-0.5 after:content-['*']",
+      true: "label--required",
     },
     disabled: {
-      true: "cursor-not-allowed opacity-[var(--disabled-opacity)]",
+      true: "label--disabled",
     },
   },
   defaultVariants: {
