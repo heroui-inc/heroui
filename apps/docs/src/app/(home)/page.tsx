@@ -10,7 +10,7 @@ const VersionChip = () => {
   return (
     <Chip className="bg-default/50 dark:border-border rounded-full dark:bg-white/10">
       {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
-      <span className="text-muted">v{currentVersion}</span>
+      <span className="text-muted">v{currentVersion}: MCP Server</span>
     </Chip>
   );
 };

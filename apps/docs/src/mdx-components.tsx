@@ -1,5 +1,6 @@
 import type {MDXComponents} from "mdx/types";
 
+import Link from "fumadocs-core/link";
 import {Callout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
@@ -10,6 +11,7 @@ import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
+import {NewsletterForm} from "./components/newsletter-form";
 import {PackageManagers} from "./mdx-components/package-managers";
 
 // Create icon components using gravity-ui icons
@@ -70,6 +72,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     DocsImage,
     Icon,
     Info,
+    Link,
+    NewsletterForm,
     PackageManagers,
     Preview,
     Star,

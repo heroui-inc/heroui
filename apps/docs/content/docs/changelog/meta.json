@@ -1,0 +1,6 @@
+{
+  "title": "Changelog",
+  "description": "HeroUI v3 Release Notes",
+  "root": false,
+  "pages": ["changelog", "v3-0-0-alpha-32"]
+}

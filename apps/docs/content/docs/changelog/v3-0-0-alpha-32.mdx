@@ -1,0 +1,183 @@
+---
+title: v3.0.0-alpha.32
+description: Card component redesign, CloseButton, MCP Server for AI assistants
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 1, 2025</span>
+</div>
+
+This release adds AI development tools, updates the [Card component](/docs/components/card) API, and improves the developer experience.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+## What's New
+
+### MCP Server
+
+HeroUI now includes an [MCP server](/docs/ui-for-agents/mcp-server) that lets AI assistants like Cursor, Claude Code, and VS Code Copilot access HeroUI v3 documentation and component information directly.
+
+**Quick Setup:**
+
+### Cursor
+
+<div className="flex items-center gap-3 mb-4">
+  <a
+    href="cursor://anysphere.cursor-deeplink/mcp/install?name=heroui-react&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBoZXJvdWkvbWNwQGxhdGVzdCJdfQ=="
+    className="button button--tertiary button--sm no-underline bg-default/50 dark:bg-default/30"
+  >
+    <svg viewBox="0 0 466.73 532.09" className="w-5 h-5 fill-current">
+      <path d="M457.43,125.94L244.42,2.96c-6.84-3.95-15.28-3.95-22.12,0L9.3,125.94c-5.75,3.32-9.3,9.46-9.3,16.11v247.99c0,6.65,3.55,12.79,9.3,16.11l213.01,122.98c6.84,3.95,15.28,3.95,22.12,0l213.01-122.98c5.75-3.32,9.3-9.46,9.3-16.11v-247.99c0-6.65-3.55-12.79-9.3-16.11h-.01ZM444.05,151.99l-205.63,356.16c-1.39,2.4-5.06,1.42-5.06-1.36v-233.21c0-4.66-2.49-8.97-6.53-11.31L24.87,145.67c-2.4-1.39-1.42-5.06,1.36-5.06h411.26c5.84,0,9.49,6.33,6.57,11.39h-.01Z"/>
+    </svg>
+    <span className="text-accent">Install in Cursor</span>
+  </a>
+</div>
+
+Or manually add to **Cursor Settings** → **Tools** → **MCP Servers**:
+
+```json
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/mcp@latest"]
+    }
+  }
+}
+```
+
+### Claude Code
+
+Run this command in your terminal:
+
+```bash
+claude mcp add heroui-react -- npx -y @heroui/mcp@latest
+```
+
+[Learn more](/docs/ui-for-agents/mcp-server)
+
+### Card Component API Redesign
+
+The [Card component](/docs/components/card) has been updated with a new variant system that makes it more flexible.
+
+**Breaking Changes:**
+- Replaced `surface` prop with new `variant` system
+- Removed `Card.Image`, `Card.Details`, and `Card.CloseButton` (use composition instead)
+- New variants: `flat`, `outlined`, `elevated`, `filled`
+
+**Before:**
+```tsx
+<Card surface="1">
+  <Card.Image src="/image.jpg" />
+  <Card.Details>
+    <Card.Title>Old Card</Card.Title>
+  </Card.Details>
+</Card>
+```
+
+**After:**
+```tsx
+<Card variant="outlined">
+  <Card.Header>
+    <img src="/image.jpg" alt="Card image" />
+  </Card.Header>
+  <Card.Body>
+    <Card.Title>New Card</Card.Title>
+  </Card.Body>
+</Card>
+```
+
+**New Features:**
+- Horizontal layout support
+- Avatar integration
+- Background image support
+- Improved accessibility with semantic HTML
+
+[View Card documentation](/docs/components/card)
+
+### CloseButton Component
+
+Added a [CloseButton component](/docs/components/close-button) for closing dialogs, modals, and other dismissible elements.
+
+```tsx
+import {CloseButton} from "@heroui/react";
+
+// Basic usage
+<CloseButton onPress={() => console.log("Closed")} />
+
+// With custom icon
+<CloseButton>
+  <XMarkIcon className="size-4" />
+</CloseButton>
+```
+
+## Documentation Improvements
+
+### UI for Agents
+- **[MCP Server documentation](/docs/ui-for-agents/mcp-server)** for development with AI assistants
+- **[llms.txt](/docs/ui-for-agents/llms-txt)** file for LLM-friendly documentation
+- Setup guides for popular AI coding tools
+
+### Component Documentation
+- **[Card](/docs/components/card)**: Rewrote documentation with anatomy, variants, and more examples
+- **[Switch](/docs/components/switch)**: Added anatomy diagrams and better examples
+- **[CloseButton](/docs/components/close-button)**: New documentation with usage examples
+
+
+## Migration Guide
+
+### Card Component Migration
+
+1. **Update variant prop:**
+   - `surface="1"` → `variant="flat"`
+   - `surface="2"` → `variant="outlined"`
+   - `surface="3"` → `variant="elevated"`
+   - `surface="4"` → `variant="filled"`
+   - Custom surfaces → Use new variant system
+
+2. **Update component structure:**
+   - Replace `Card.Image` with `<img>` in `Card.Header`
+   - Replace `Card.Details` with `Card.Body`
+   - Move `Card.CloseButton` to use new `CloseButton` component
+
+3. **Update imports:**
+   ```tsx
+   // Add CloseButton if needed
+   import {Card, CloseButton} from "@heroui/react";
+   ```
+
+## Links
+
+- [GitHub PR #5747](https://github.com/heroui-inc/heroui/pull/5747)
+- [MCP Server Documentation](/docs/ui-for-agents/mcp-server)
+- [Card Component Guide](/docs/components/card)
+- [CloseButton Component](/docs/components/close-button)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
