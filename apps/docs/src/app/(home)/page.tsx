@@ -1,17 +1,22 @@
-import {Chip, buttonVariants} from "@heroui/react";
+import {buttonVariants} from "@heroui/react";
 import Link from "fumadocs-core/link";
 
 // TODO:
+import {Iconify} from "@/components/iconify";
 import {SocialLinks} from "@/components/social-links";
 // import {ThemeBackground} from "@/components/theme-background";
 import {currentVersion} from "@/utils/version";
 
 const VersionChip = () => {
   return (
-    <Chip className="bg-default/50 dark:border-border rounded-full dark:bg-white/10">
+    <Link
+      className="chip bg-default/50 dark:border-border hover:bg-default/40 dark:hover:bg-default/20 rounded-full dark:bg-white/10"
+      href="/docs/changelog"
+    >
+      <Iconify className="text-muted" icon="sparkles" />
       {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
       <span className="text-muted">v{currentVersion}: MCP Server</span>
-    </Chip>
+    </Link>
   );
 };
 
