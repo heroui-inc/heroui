@@ -64,7 +64,7 @@ const tabs = tv({
       "text-default-500",
       "group-data-[selected=true]:text-foreground",
     ],
-    cursor: "absolute z-0 bg-white transition-all duration-300 left-0 top-0 w-0 h-0",
+    cursor: "absolute z-0 bg-white transition-all duration-300",
     panel: [
       "py-3",
       "px-1",
