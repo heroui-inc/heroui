@@ -1,8 +1,7 @@
 import type {ForwardedRef, ReactElement} from "react";
 import type {UseTabsProps} from "./use-tabs";
 
-import {useId} from "react";
-import {LayoutGroup} from "framer-motion";
+import {useRef} from "react";
 import {forwardRef} from "@heroui/system";
 
 import {useTabs} from "./use-tabs";
@@ -26,16 +25,11 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     getBaseProps,
     getTabListProps,
     getWrapperProps,
+    getTabCursorProps,
   } = useTabs<T>({
     ...props,
     ref,
   });
-
-  const layoutId = useId();
-
-  const isInModal = domRef?.current?.closest('[aria-modal="true"]') !== null;
-
-  const layoutGroupEnabled = !props.disableAnimation && !props.disableCursorAnimation && !isInModal;
 
   const tabsProps = {
     state,
@@ -43,21 +37,51 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     slots: values.slots,
     classNames: values.classNames,
     isDisabled: values.isDisabled,
-    motionProps: values.motionProps,
-    disableAnimation: values.disableAnimation,
     shouldSelectOnPressUp: values.shouldSelectOnPressUp,
-    disableCursorAnimation: values.disableCursorAnimation,
   };
 
   const tabs = [...state.collection].map((item) => (
     <Tab key={item.key} item={item} {...tabsProps} {...item.props} />
   ));
 
+  const selectedItem = state.selectedItem;
+  const selectedKey = selectedItem?.key;
+  const isInitialMount = useRef(true);
+
   const renderTabs = (
     <>
       <div {...getBaseProps()}>
         <Component {...getTabListProps()}>
-          {layoutGroupEnabled ? <LayoutGroup id={layoutId}>{tabs}</LayoutGroup> : tabs}
+          {!values.disableAnimation && !values.disableCursorAnimation && selectedKey != null && (
+            <span
+              {...getTabCursorProps()}
+              ref={(node) => {
+                if (node) {
+                  const selectedTab = domRef.current?.querySelector(
+                    `[data-key="${selectedKey}"]`,
+                  ) as HTMLElement;
+
+                  if (selectedTab && domRef.current) {
+                    const tabRect = selectedTab.getBoundingClientRect();
+                    const parentRect = domRef.current.getBoundingClientRect();
+
+                    if (isInitialMount.current) {
+                      node.style.transition = "none";
+                      isInitialMount.current = false;
+                    } else {
+                      node.style.transition = "";
+                    }
+
+                    node.style.left = `${tabRect.left - parentRect.left}px`;
+                    node.style.top = `${tabRect.top - parentRect.top}px`;
+                    node.style.width = `${tabRect.width}px`;
+                    node.style.height = `${tabRect.height}px`;
+                  }
+                }
+              }}
+            />
+          )}
+          {tabs}
         </Component>
       </div>
       {[...state.collection].map((item) => {

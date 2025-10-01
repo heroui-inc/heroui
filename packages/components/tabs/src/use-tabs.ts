@@ -5,7 +5,6 @@ import type {TabListState, TabListStateOptions} from "@react-stately/tabs";
 import type {AriaTabListProps} from "@react-aria/tabs";
 import type {CollectionProps} from "@heroui/aria-utils";
 import type {CollectionChildren} from "@react-types/shared";
-import type {HTMLMotionProps} from "framer-motion";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
@@ -22,10 +21,6 @@ export interface Props extends Omit<HTMLHeroUIProps, "children"> {
    * Ref to the DOM node.
    */
   ref?: ReactRef<HTMLElement | null>;
-  /**
-   * The props to modify the cursor motion animation. Use the `variants` API to create your own animation.
-   */
-  motionProps?: Omit<HTMLMotionProps<"span">, "ref">;
   /**
    * Whether the tabs selection should occur on press up instead of press down.
    * @default true
@@ -81,7 +76,6 @@ export type ValuesType<T = object> = {
   listRef?: RefObject<HTMLElement>;
   shouldSelectOnPressUp?: boolean;
   classNames?: SlotsToClasses<TabsSlots>;
-  motionProps?: Omit<HTMLMotionProps<"span">, "ref">;
   disableAnimation?: boolean;
   isDisabled?: boolean;
 };
@@ -98,7 +92,6 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     classNames,
     children,
     disableCursorAnimation,
-    motionProps,
     isVertical = false,
     shouldSelectOnPressUp = true,
     destroyInactiveTabPanel = true,
@@ -136,7 +129,6 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
       state,
       slots,
       classNames,
-      motionProps,
       disableAnimation,
       listRef: domRef,
       shouldSelectOnPressUp,
@@ -147,7 +139,6 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
       state,
       slots,
       domRef,
-      motionProps,
       disableAnimation,
       disableCursorAnimation,
       shouldSelectOnPressUp,
@@ -192,6 +183,16 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     [domRef, tabListProps, classNames, slots],
   );
 
+  const getTabCursorProps: PropGetter = useCallback(
+    (props) => ({
+      "data-slot": "cursor",
+      className: slots.cursor({
+        class: clsx(classNames?.cursor, props?.className),
+      }),
+    }),
+    [classNames, slots],
+  );
+
   return {
     Component,
     domRef,
@@ -201,6 +202,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     getBaseProps,
     getTabListProps,
     getWrapperProps,
+    getTabCursorProps,
   };
 }
 
