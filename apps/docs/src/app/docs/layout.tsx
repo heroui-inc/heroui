@@ -13,7 +13,7 @@ export default function Layout({children}: {children: ReactNode}) {
       tree={source.pageTree}
       sidebar={{
         collapsible: false,
-        defaultOpenLevel: 1,
+        defaultOpenLevel: 0,
       }}
       themeSwitch={{
         mode: "light-dark",
