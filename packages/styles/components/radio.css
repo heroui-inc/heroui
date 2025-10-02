@@ -1,0 +1,178 @@
+/* Base radio styles */
+.radio {
+  @apply flex items-center gap-2;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply pointer-events-none;
+    cursor: var(--cursor-disabled);
+  }
+}
+
+/* Radio wrapper */
+.radio__wrapper {
+  @apply bg-default relative inline-flex size-4 shrink-0 items-center justify-center rounded-full border shadow-sm transition-all duration-200;
+
+  /* Focus ring styles */
+  .radio:focus-visible &,
+  .radio[data-focus-visible="true"] & {
+    outline: 2px solid var(--focus);
+  }
+
+  /* Hover state */
+  .radio:hover &,
+  .radio[data-hovered="true"] & {
+    @apply border-foreground/70;
+  }
+
+  /* Pressed state */
+  .radio:active &,
+  .radio[data-pressed="true"] & {
+    @apply scale-[0.97];
+  }
+
+  /* Selected state */
+  .radio[aria-checked="true"] &,
+  .radio[data-selected="true"] & {
+    @apply bg-accent;
+  }
+
+  /* Focused state */
+  .radio[data-focused="true"] &,
+  .radio[data-focus-visible="true"] & {
+    @apply border-foreground;
+  }
+
+  /* Invalid/Error state */
+  .radio[data-invalid="true"] &,
+  .radio[aria-invalid="true"] & {
+    @apply border-danger;
+  }
+
+  /* Invalid + Selected state */
+  .radio[data-invalid="true"][aria-checked="true"] &,
+  .radio[data-invalid="true"][data-selected="true"] &,
+  .radio[aria-invalid="true"][aria-checked="true"] &,
+  .radio[aria-invalid="true"][data-selected="true"] & {
+    @apply border-danger;
+  }
+
+  /* Disabled state */
+  .radio:disabled &,
+  .radio[data-disabled="true"] &,
+  .radio[aria-disabled="true"] & {
+    @apply opacity-[var(--disabled-opacity)];
+    cursor: var(--cursor-disabled);
+  }
+
+  /* Disabled + Hover state */
+  .radio:disabled:hover &,
+  .radio[data-disabled="true"]:hover &,
+  .radio[data-disabled="true"][data-hovered="true"] &,
+  .radio[aria-disabled="true"]:hover &,
+  .radio[aria-disabled="true"][data-hovered="true"] & {
+    @apply border-accent-hover;
+  }
+}
+
+/* Radio indicator */
+.radio__indicator {
+  @apply bg-background absolute inset-0 m-auto size-[6px] scale-0 rounded-full opacity-0 transition-all duration-200;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.05);
+
+  /* Selected state */
+  .radio[aria-checked="true"] &,
+  .radio[data-selected="true"] & {
+    @apply scale-100 opacity-100;
+  }
+
+  /* Pressed state */
+  .radio:active &,
+  .radio[data-pressed="true"] & {
+    @apply size-[8px];
+  }
+
+  /* Error state indicator color */
+  .radio[data-invalid="true"] &,
+  .radio[aria-invalid="true"] & {
+    @apply bg-danger;
+  }
+}
+
+/* Radio label */
+.radio__label {
+  @apply text-foreground select-none transition-colors duration-200;
+
+  /* Disabled state */
+  .radio:disabled &,
+  .radio[data-disabled="true"] &,
+  .radio[aria-disabled="true"] & {
+    @apply opacity-[var(--disabled-opacity)];
+  }
+}
+
+/* Radio Group base styles */
+.radio-group {
+  @apply flex flex-col gap-2;
+}
+
+/* Radio Group items container */
+.radio-group__items {
+  @apply flex flex-col gap-2;
+}
+
+/* Orientation modifiers */
+.radio-group--horizontal .radio-group__items {
+  @apply flex-row gap-4;
+}
+
+.radio-group--vertical .radio-group__items {
+  @apply flex-col gap-2;
+}
+
+/* Disabled modifier for base */
+.radio--disabled {
+  @apply cursor-not-allowed;
+}
+
+/* Size variants */
+.radio--sm {
+  @apply gap-2;
+
+  .radio__wrapper {
+    @apply size-4;
+  }
+
+  .radio__indicator {
+    @apply size-1.5;
+  }
+
+  .radio__label {
+    @apply text-sm;
+  }
+}
+
+.radio--md {
+  /* No styles as this is the default size */
+}
+
+.radio--lg {
+  @apply gap-3;
+
+  .radio__wrapper {
+    @apply size-6;
+  }
+
+  .radio__indicator {
+    @apply size-2.5;
+  }
+
+  .radio__label {
+    @apply text-lg;
+  }
+}
