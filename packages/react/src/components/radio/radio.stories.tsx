@@ -8,17 +8,13 @@ import {Label} from "../label";
 
 import {Radio, RadioGroup} from "./radio";
 
-const meta = {
+export default {
+  argTypes: {},
   component: RadioGroup,
-  parameters: {
-    layout: "centered",
-  },
-  tags: ["autodocs"],
-  title: "📝 ToDo/RadioGroup",
-} satisfies Meta<typeof RadioGroup>;
+  title: "Components/RadioGroup",
+} as Meta<typeof RadioGroup>;
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof RadioGroup>;
 
 export const Default: Story = {
   render: () => (
