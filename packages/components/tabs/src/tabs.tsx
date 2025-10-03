@@ -47,6 +47,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   const selectedItem = state.selectedItem;
   const selectedKey = selectedItem?.key;
   const prevSelectedKey = useRef<typeof selectedKey>(undefined);
+  const prevVariant = useRef(props?.variant);
   const variant = props?.variant;
   const isVertical = props?.isVertical;
 
@@ -113,11 +114,12 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     if (!selectedTab || !domRef.current) return;
 
     const shouldDisableTransition =
-      prevSelectedKey.current === undefined || prevSelectedKey.current === selectedKey;
+      prevSelectedKey.current === undefined || prevVariant.current !== variant;
 
     node.style.transition = shouldDisableTransition ? "none" : "";
 
     prevSelectedKey.current = selectedKey;
+    prevVariant.current = variant;
 
     const parentRect = domRef.current.getBoundingClientRect();
 
