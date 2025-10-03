@@ -334,7 +334,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
             enabled: true,
             labelable: true,
             omitEventNames: new Set(Object.keys(inputProps)),
-            omitPropNames: new Set(["value"]),
+            omitPropNames: new Set(["value", "name"]),
           }),
           props,
         ),
