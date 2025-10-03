@@ -1,5 +1,13 @@
 # @heroui/tooltip
 
+## 2.2.23
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/aria-utils@2.2.23
+  - @heroui/framer-utils@2.1.22
+
 ## 2.2.22
 
 ### Patch Changes
