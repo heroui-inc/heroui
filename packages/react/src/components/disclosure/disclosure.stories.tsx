@@ -35,7 +35,7 @@ const Template = (props: DisclosureProps) => {
   const [isExpanded, setIsExpanded] = React.useState(props.isExpanded ?? false);
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md text-center">
       <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
@@ -45,7 +45,7 @@ const Template = (props: DisclosureProps) => {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <Disclosure.Body className="bg-panel shadow-border rounded-panel mx-2 mb-2 mt-4 flex flex-col items-center p-1 p-4 text-center">
+          <Disclosure.Body className="bg-panel shadow-border rounded-panel mx-2 mb-2 mt-4 flex flex-col items-center p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
