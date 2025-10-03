@@ -50,65 +50,87 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   const variant = props?.variant;
   const isVertical = props?.isVertical;
 
+  const getCursorStyles = (tabRect: DOMRect, relativeLeft: number, relativeTop: number) => {
+    const baseStyles = {
+      left: `${relativeLeft}px`,
+      width: `${tabRect.width}px`,
+    };
+
+    if (variant === "underlined") {
+      return isVertical
+        ? {
+            ...baseStyles,
+            top: `${relativeTop + tabRect.height}px`,
+            height: "",
+          }
+        : {
+            ...baseStyles,
+            top: "",
+            height: "",
+          };
+    }
+
+    if (variant === "bordered") {
+      const borderWidth = 2;
+
+      return {
+        ...baseStyles,
+        top: `${relativeTop - borderWidth}px`,
+        width: `${tabRect.width - borderWidth}px`,
+        height: `${tabRect.height}px`,
+      };
+    }
+
+    return {
+      ...baseStyles,
+      top: `${relativeTop}px`,
+      height: `${tabRect.height}px`,
+    };
+  };
+
+  const updateCursorPosition = (
+    node: HTMLSpanElement,
+    selectedTab: HTMLElement,
+    parentRect: DOMRect,
+  ) => {
+    const tabRect = selectedTab.getBoundingClientRect();
+    const relativeLeft = tabRect.left - parentRect.left;
+    const relativeTop = tabRect.top - parentRect.top;
+
+    const styles = getCursorStyles(tabRect, relativeLeft, relativeTop);
+
+    node.style.left = styles.left;
+    node.style.top = styles.top;
+    node.style.width = styles.width;
+    node.style.height = styles.height;
+  };
+
+  const handleCursorRef = (node: HTMLSpanElement | null) => {
+    if (!node) return;
+
+    const selectedTab = domRef.current?.querySelector(`[data-key="${selectedKey}"]`) as HTMLElement;
+
+    if (!selectedTab || !domRef.current) return;
+
+    const shouldDisableTransition =
+      prevSelectedKey.current === undefined || prevSelectedKey.current === selectedKey;
+
+    node.style.transition = shouldDisableTransition ? "none" : "";
+
+    prevSelectedKey.current = selectedKey;
+
+    const parentRect = domRef.current.getBoundingClientRect();
+
+    updateCursorPosition(node, selectedTab, parentRect);
+  };
+
   const renderTabs = useMemo(
     () => (
       <>
         <div {...getBaseProps()}>
           <Component {...getTabListProps()}>
             {!values.disableAnimation && !values.disableCursorAnimation && selectedKey != null && (
-              <span
-                {...getTabCursorProps()}
-                ref={(node) => {
-                  if (node) {
-                    const selectedTab = domRef.current?.querySelector(
-                      `[data-key="${selectedKey}"]`,
-                    ) as HTMLElement;
-
-                    if (selectedTab && domRef.current) {
-                      const tabRect = selectedTab.getBoundingClientRect();
-                      const parentRect = domRef.current.getBoundingClientRect();
-
-                      if (
-                        prevSelectedKey.current === undefined ||
-                        prevSelectedKey.current === selectedKey
-                      ) {
-                        node.style.transition = "none";
-                      } else {
-                        node.style.transition = "";
-                      }
-                      prevSelectedKey.current = selectedKey;
-
-                      if (variant === "underlined") {
-                        const cursorWidth = tabRect.width;
-
-                        if (isVertical) {
-                          const cursorHeight = tabRect.height;
-
-                          node.style.left = `${tabRect.left - parentRect.left}px`;
-                          node.style.top = `${tabRect.top - parentRect.top + cursorHeight + 4}px`;
-                          node.style.width = `${cursorWidth}px`;
-                          node.style.height = "";
-                        } else {
-                          node.style.left = `${tabRect.left - parentRect.left}px`;
-                          node.style.width = `${cursorWidth}px`;
-                          node.style.top = "";
-                          node.style.height = "";
-                        }
-                      } else if (variant === "bordered") {
-                        node.style.left = `${tabRect.left - parentRect.left}px`;
-                        node.style.top = `${tabRect.top - parentRect.top - 2}px`;
-                        node.style.width = `${tabRect.width}px`;
-                        node.style.height = `${tabRect.height}px`;
-                      } else {
-                        node.style.left = `${tabRect.left - parentRect.left}px`;
-                        node.style.top = `${tabRect.top - parentRect.top}px`;
-                        node.style.width = `${tabRect.width}px`;
-                        node.style.height = `${tabRect.height}px`;
-                      }
-                    }
-                  }
-                }}
-              />
+              <span {...getTabCursorProps()} ref={handleCursorRef} />
             )}
             {tabs}
           </Component>
