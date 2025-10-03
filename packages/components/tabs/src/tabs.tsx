@@ -46,7 +46,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
   const selectedItem = state.selectedItem;
   const selectedKey = selectedItem?.key;
-  const isInitialMount = useRef(true);
+  const prevSelectedKey = useRef<typeof selectedKey>(undefined);
   const variant = props?.variant;
   const isVertical = props?.isVertical;
 
@@ -68,29 +68,28 @@ const Tabs = forwardRef(function Tabs<T extends object>(
                       const tabRect = selectedTab.getBoundingClientRect();
                       const parentRect = domRef.current.getBoundingClientRect();
 
-                      if (isInitialMount.current) {
+                      if (
+                        prevSelectedKey.current === undefined ||
+                        prevSelectedKey.current === selectedKey
+                      ) {
                         node.style.transition = "none";
-                        isInitialMount.current = false;
                       } else {
                         node.style.transition = "";
                       }
+                      prevSelectedKey.current = selectedKey;
 
                       if (variant === "underlined") {
-                        const widthPercent = 0.8;
-                        const tabWidth = tabRect.width;
-                        const cursorWidth = tabWidth * widthPercent;
-                        const leftOffset = (tabWidth - cursorWidth) / 2;
+                        const cursorWidth = tabRect.width;
 
                         if (isVertical) {
-                          const tabHeight = tabRect.height;
-                          const cursorHeight = tabHeight * widthPercent;
+                          const cursorHeight = tabRect.height;
 
-                          node.style.left = `${tabRect.left - parentRect.left + leftOffset}px`;
+                          node.style.left = `${tabRect.left - parentRect.left}px`;
                           node.style.top = `${tabRect.top - parentRect.top + cursorHeight + 4}px`;
                           node.style.width = `${cursorWidth}px`;
                           node.style.height = "";
                         } else {
-                          node.style.left = `${tabRect.left - parentRect.left + leftOffset}px`;
+                          node.style.left = `${tabRect.left - parentRect.left}px`;
                           node.style.width = `${cursorWidth}px`;
                           node.style.top = "";
                           node.style.height = "";
