@@ -405,6 +405,10 @@ describe("NumberInput with React Hook Form", () => {
     expect(hiddenInput1).toHaveValue("1234");
     expect(hiddenInput2).not.toHaveValue();
     expect(hiddenInput3).not.toHaveValue();
+
+    expect(document.querySelectorAll('input[name="requiredField"]')).toHaveLength(1);
+    expect(visibleInput3).not.toHaveAttribute("name");
+    expect(hiddenInput3).toHaveAttribute("name", "requiredField");
   });
 
   it("should not submit form when required field is empty", async () => {
