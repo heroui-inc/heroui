@@ -5,7 +5,7 @@ import type {ReactRef} from "@heroui/react-utils";
 import {avatar} from "@heroui/theme";
 import {useProviderContext} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, safeText, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {clsx, dataAttr, mergeProps, safeInitials} from "@heroui/shared-utils";
 import {useFocusRing} from "@react-aria/focus";
 import {useMemo, useCallback} from "react";
 import {useImage} from "@heroui/use-image";
@@ -117,7 +117,7 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
     isBordered = groupContext?.isBordered ?? false,
     isDisabled = groupContext?.isDisabled ?? false,
     isFocusable = false,
-    getInitials = safeText,
+    getInitials = safeInitials,
     ignoreFallback = false,
     showFallback: showFallbackProp = false,
     ImgComponent = "img",
