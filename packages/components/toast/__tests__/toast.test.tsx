@@ -174,4 +174,69 @@ describe("Toast", () => {
 
     expect(loadingIcon).toBeTruthy();
   });
+
+  it("should call onClose when toast times out", async () => {
+    const onCloseMock = jest.fn();
+
+    const wrapper = render(
+      <>
+        <ToastProvider disableAnimation />
+        <button
+          data-testid="button"
+          onClick={() => {
+            addToast({
+              title: title,
+              description: description,
+              timeout: 500,
+              onClose: onCloseMock,
+            });
+          }}
+        >
+          Show Toast
+        </button>
+      </>,
+    );
+
+    const button = wrapper.getByTestId("button");
+
+    await user.click(button);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("should call onClose when close button is clicked", async () => {
+    const onCloseMock = jest.fn();
+
+    const wrapper = render(
+      <>
+        <ToastProvider disableAnimation maxVisibleToasts={1} />
+        <button
+          data-testid="button"
+          onClick={() => {
+            addToast({
+              title: title,
+              description: description,
+              onClose: onCloseMock,
+            });
+          }}
+        >
+          Show Toast
+        </button>
+      </>,
+    );
+
+    const button = wrapper.getByTestId("button");
+
+    await user.click(button);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const closeButtons = wrapper.getAllByRole("button");
+
+    await user.click(closeButtons[0]);
+
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
+  });
 });
