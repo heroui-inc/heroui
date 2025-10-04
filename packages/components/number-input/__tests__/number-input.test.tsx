@@ -1,7 +1,7 @@
 import type {UserEvent} from "@testing-library/user-event";
 
 import * as React from "react";
-import {render, renderHook, fireEvent, act} from "@testing-library/react";
+import {render, fireEvent, act} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
@@ -330,59 +330,85 @@ describe("NumberInput", () => {
 });
 
 describe("NumberInput with React Hook Form", () => {
-  let input1: HTMLInputElement;
-  let input2: HTMLInputElement;
-  let input3: HTMLInputElement;
+  let hiddenInput1: HTMLInputElement;
+  let hiddenInput2: HTMLInputElement;
+  let hiddenInput3: HTMLInputElement;
+  let visibleInput3: HTMLInputElement;
   let submitButton: HTMLButtonElement;
   let onSubmit: () => void;
 
   beforeEach(() => {
-    const {result} = renderHook(() =>
-      useForm({
-        defaultValues: {
-          withDefaultValue: 1234,
-          withoutDefaultValue: undefined,
-          requiredField: undefined,
-        },
-      }),
-    );
-
-    const {
-      handleSubmit,
-      register,
-      formState: {errors},
-    } = result.current;
-
     onSubmit = jest.fn();
 
-    render(
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <NumberInput isClearable label="With default value" {...register("withDefaultValue")} />
-        <NumberInput
-          data-testid="input-2"
-          label="Without default value"
-          {...register("withoutDefaultValue")}
-        />
-        <NumberInput
-          data-testid="input-3"
-          label="Required"
-          {...register("requiredField", {required: true})}
-        />
-        {errors.requiredField && <span className="text-danger">This field is required</span>}
-        <button type="submit">Submit</button>
-      </form>,
-    );
+    function TestForm() {
+      const {
+        handleSubmit,
+        setValue,
+        watch,
+        register,
+        formState: {errors},
+      } = useForm<{
+        withDefaultValue: number;
+        withoutDefaultValue?: number;
+        requiredField?: number;
+      }>();
 
-    input1 = document.querySelector("input[name=withDefaultValue]")!;
-    input2 = document.querySelector("input[name=withoutDefaultValue]")!;
-    input3 = document.querySelector("input[name=requiredField]")!;
+      React.useEffect(() => {
+        register("withDefaultValue");
+        register("withoutDefaultValue");
+        register("requiredField", {required: true});
+      }, [register]);
+
+      const requiredFieldValue = watch("requiredField");
+
+      return (
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+          <NumberInput
+            isClearable
+            data-testid="input-1"
+            defaultValue={1234}
+            label="With default value"
+            name="withDefaultValue"
+            onValueChange={(value) => setValue("withDefaultValue", value)}
+          />
+          <NumberInput
+            data-testid="input-2"
+            label="Without default value"
+            name="withoutDefaultValue"
+            onValueChange={(value) => setValue("withoutDefaultValue", value)}
+          />
+          <NumberInput
+            data-testid="input-3"
+            label="Required"
+            name="requiredField"
+            value={requiredFieldValue}
+            onValueChange={(value) =>
+              setValue("requiredField", value, {shouldValidate: true, shouldDirty: true})
+            }
+          />
+          {errors.requiredField && <span className="text-danger">This field is required</span>}
+          <button type="submit">Submit</button>
+        </form>
+      );
+    }
+
+    const {getByTestId} = render(<TestForm />);
+
+    hiddenInput1 = document.querySelector("input[name=withDefaultValue][type=hidden]")!;
+    hiddenInput2 = document.querySelector("input[name=withoutDefaultValue][type=hidden]")!;
+    hiddenInput3 = document.querySelector("input[name=requiredField][type=hidden]")!;
+    visibleInput3 = getByTestId("input-3") as HTMLInputElement;
     submitButton = document.querySelector('button[type="submit"]')!;
   });
 
   it("should work with defaultValues", () => {
-    expect(input1).toHaveValue("1234");
-    expect(input2).not.toHaveValue();
-    expect(input3).not.toHaveValue();
+    expect(hiddenInput1).toHaveValue("1234");
+    expect(hiddenInput2).not.toHaveValue();
+    expect(hiddenInput3).not.toHaveValue();
+
+    expect(document.querySelectorAll('input[name="requiredField"]')).toHaveLength(1);
+    expect(visibleInput3).not.toHaveAttribute("name");
+    expect(hiddenInput3).toHaveAttribute("name", "requiredField");
   });
 
   it("should not submit form when required field is empty", async () => {
@@ -394,9 +420,12 @@ describe("NumberInput with React Hook Form", () => {
   });
 
   it("should submit form when required field is not empty", async () => {
-    fireEvent.change(input3, {target: {value: 123}});
-
     const user = userEvent.setup();
+
+    await user.click(visibleInput3);
+    await user.keyboard("123");
+
+    expect(hiddenInput3).toHaveValue("123");
 
     await user.click(submitButton);
 
