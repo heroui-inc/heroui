@@ -10,7 +10,7 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {toast as toastTheme} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, isEmpty, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
+import {clsx, dataAttr, isEmpty, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
 import {useToast as useToastAria} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
@@ -207,6 +207,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
   const [isLoading, setIsLoading] = useState<boolean>(!!promiseProp);
   const [isToastExiting, setIsToastExiting] = useState(false);
+  const hasCalledOnCloseRef = useRef(false);
 
   useEffect(() => {
     if (!promiseProp) return;
@@ -224,8 +225,12 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   useEffect(() => {
     if (isToastExiting && disableAnimation) {
       state.close(toast.key);
+      if (!hasCalledOnCloseRef.current) {
+        hasCalledOnCloseRef.current = true;
+        onClose?.();
+      }
     }
-  }, [isToastExiting, disableAnimation, state, toast.key]);
+  }, [isToastExiting, disableAnimation, state, toast.key, onClose]);
 
   useEffect(() => {
     const updateProgress = (timestamp: number) => {
@@ -436,6 +441,10 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
           : () => {
               if (!isToastExiting) return;
               state.close(toast.key);
+              if (!hasCalledOnCloseRef.current) {
+                hasCalledOnCloseRef.current = true;
+                onClose?.();
+              }
             },
         style: {
           opacity: opacityValue,
@@ -526,14 +535,17 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       "aria-label": "closeButton",
       "data-hidden": dataAttr(hideCloseButton),
       ...mergeProps(props, {
-        onPress: chain(() => {
+        onPress: () => {
           setIsToastExiting(true);
-
+          if (!hasCalledOnCloseRef.current) {
+            hasCalledOnCloseRef.current = true;
+            onClose?.();
+          }
           setTimeout(() => document.body.focus(), 0);
-        }, onClose),
+        },
       }),
     }),
-    [setIsToastExiting, onClose, state, toast],
+    [setIsToastExiting, onClose],
   );
 
   const getCloseIconProps: PropGetter = useCallback(
