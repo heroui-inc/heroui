@@ -58,17 +58,12 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     };
 
     if (variant === "underlined") {
-      return isVertical
-        ? {
-            ...baseStyles,
-            top: `${relativeTop + tabRect.height}px`,
-            height: "",
-          }
-        : {
-            ...baseStyles,
-            top: "",
-            height: "",
-          };
+      return {
+        left: `${relativeLeft + tabRect.width * 0.1}px`,
+        top: `${relativeTop + tabRect.height - 2}px`,
+        width: `${tabRect.width * 0.8}px`,
+        height: "",
+      };
     }
 
     if (variant === "bordered") {
