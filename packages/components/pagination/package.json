@@ -1,6 +1,6 @@
 {
   "name": "@heroui/pagination",
-  "version": "2.2.23",
+  "version": "2.2.24",
   "description": "The Pagination component allows you to display active page and navigate between multiple pages.",
   "keywords": [
     "pagination"
@@ -45,10 +45,10 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-intersection-observer": "workspace:*",
     "@heroui/use-pagination": "workspace:*",
-    "@react-aria/utils": "3.30.1",
-    "@react-aria/focus": "3.21.1",
-    "@react-aria/i18n": "3.12.12",
-    "@react-aria/interactions": "3.25.5",
+    "@react-aria/utils": "3.31.0",
+    "@react-aria/focus": "3.21.2",
+    "@react-aria/i18n": "3.12.13",
+    "@react-aria/interactions": "3.25.6",
     "scroll-into-view-if-needed": "3.0.10"
   },
   "devDependencies": {

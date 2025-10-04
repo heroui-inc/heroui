@@ -1,5 +1,11 @@
 # @heroui/shared-utils
 
+## 2.1.12
+
+### Patch Changes
+
+- [#5677](https://github.com/heroui-inc/heroui/pull/5677) [`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc) Thanks [@IsDyh01](https://github.com/IsDyh01)! - fix getInitials (#5671)
+
 ## 2.1.11
 
 ### Patch Changes

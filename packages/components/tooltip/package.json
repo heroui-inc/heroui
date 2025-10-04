@@ -1,6 +1,6 @@
 {
   "name": "@heroui/tooltip",
-  "version": "2.2.23",
+  "version": "2.2.24",
   "description": "A React Component for rendering dynamically positioned Tooltips",
   "keywords": [
     "tooltip"
@@ -48,11 +48,11 @@
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/use-aria-overlay": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/overlays": "3.29.0",
-    "@react-aria/tooltip": "3.8.7",
-    "@react-stately/tooltip": "3.5.7",
-    "@react-types/overlays": "3.9.1",
-    "@react-types/tooltip": "3.4.20"
+    "@react-aria/overlays": "3.30.0",
+    "@react-aria/tooltip": "3.8.8",
+    "@react-stately/tooltip": "3.5.8",
+    "@react-types/overlays": "3.9.2",
+    "@react-types/tooltip": "3.4.21"
   },
   "devDependencies": {
     "@heroui/button": "workspace:*",

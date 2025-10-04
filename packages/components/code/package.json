@@ -1,6 +1,6 @@
 {
   "name": "@heroui/code",
-  "version": "2.2.20",
+  "version": "2.2.21",
   "description": "Code is a component used to display inline code.",
   "keywords": [
     "code"

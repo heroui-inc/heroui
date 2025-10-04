@@ -31,7 +31,7 @@ describe("Avatar", () => {
   it("should render initials", () => {
     const {container} = render(<Avatar name="Junior" />);
 
-    expect(container.querySelector("span")).toHaveTextContent("Jun");
+    expect(container.querySelector("span")).toHaveTextContent("J");
   });
 
   it('should work with custom "getInitials" function', () => {
@@ -96,7 +96,7 @@ describe("Avatar - fallback + loading strategy", () => {
   test("should render a name avatar if no src", () => {
     const {container} = render(<Avatar name="Junior" />);
 
-    expect(container.querySelector("span")).toHaveTextContent("Jun");
+    expect(container.querySelector("span")).toHaveTextContent("J");
   });
 
   test("should render a default avatar if no name or src", () => {
@@ -118,7 +118,7 @@ describe("Avatar - fallback + loading strategy", () => {
       jest.runAllTimers();
     });
 
-    expect(container.querySelector("span")).toHaveTextContent("Jun");
+    expect(container.querySelector("span")).toHaveTextContent("JG");
   });
 
   test("should render default avatar fallback when image fails to load with no name and showFallback is true", async () => {
@@ -149,7 +149,7 @@ describe("Avatar - fallback + loading strategy", () => {
       jest.runAllTimers();
     });
 
-    expect(container.querySelector("span")).not.toHaveTextContent("Jun");
+    expect(container.querySelector("span")).not.toHaveTextContent("JG");
     expect(container.querySelector("svg")).not.toBeInTheDocument();
   });
 
@@ -166,7 +166,7 @@ describe("Avatar - fallback + loading strategy", () => {
       jest.runAllTimers();
     });
 
-    expect(container.querySelector("span")).not.toHaveTextContent("Jun");
+    expect(container.querySelector("span")).not.toHaveTextContent("JG");
     expect(container.querySelector("svg")).not.toBeInTheDocument();
   });
 });

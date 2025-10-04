@@ -242,7 +242,48 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const inputElement = e.currentTarget;
+      const {selectionStart, selectionEnd, value} = inputElement;
+      // locale-aware grouping separator
+      const nf = new Intl.NumberFormat(locale, {useGrouping: true});
+      const groupChar = nf.formatToParts(1000).find((p) => p.type === "group")?.value ?? ",";
+
+      // handle backspace when cursor is between a digit and the first group separator
+      // e.g. 1|,234 (en-US) or 1|.234 (de-DE) -> backspace removes the preceding digit if (
       if (
+        e.key === "Backspace" &&
+        !originalProps.isReadOnly &&
+        !originalProps.isDisabled &&
+        selectionStart !== null &&
+        selectionEnd !== null &&
+        selectionStart === selectionEnd &&
+        selectionStart > 0 &&
+        value[selectionStart] === groupChar &&
+        value[selectionStart - 1] !== groupChar
+      ) {
+        e.preventDefault();
+        // e.g. 1,234 -> ,234
+        const newValue = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
+        // e.g. ,234 -> 234
+        const cleanValue = newValue.replace(/[^\d.-]/g, "");
+
+        if (cleanValue === "" || cleanValue === "-") {
+          state.setInputValue("");
+        } else {
+          const numberValue = parseFloat(cleanValue);
+
+          if (!isNaN(numberValue)) {
+            state.setNumberValue(numberValue);
+          }
+        }
+
+        setTimeout(() => {
+          // set the new cursor position
+          const pos = Math.max(0, selectionStart - 1);
+
+          inputElement.setSelectionRange(pos, pos);
+        }, 0);
+      } else if (
         e.key === "Escape" &&
         inputValue &&
         (isClearable || onClear) &&
@@ -252,7 +293,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         onClear?.();
       }
     },
-    [inputValue, state.setInputValue, onClear, isClearable, originalProps.isReadOnly],
+    [inputValue, state, onClear, isClearable, originalProps.isReadOnly],
   );
 
   const getBaseProps: PropGetter = useCallback(
@@ -334,7 +375,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
             enabled: true,
             labelable: true,
             omitEventNames: new Set(Object.keys(inputProps)),
-            omitPropNames: new Set(["value"]),
+            omitPropNames: new Set(["value", "name"]),
           }),
           props,
         ),

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system",
-  "version": "2.4.22",
+  "version": "2.4.23",
   "description": "HeroUI system primitives",
   "keywords": [
     "system"
@@ -56,8 +56,8 @@
   "dependencies": {
     "@heroui/react-utils": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
-    "@react-aria/i18n": "3.12.12",
-    "@react-aria/overlays": "3.29.0",
-    "@react-aria/utils": "3.30.1"
+    "@react-aria/i18n": "3.12.13",
+    "@react-aria/overlays": "3.30.0",
+    "@react-aria/utils": "3.31.0"
   }
 }

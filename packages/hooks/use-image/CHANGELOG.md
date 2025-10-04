@@ -1,5 +1,12 @@
 # @heroui/use-image
 
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/react-utils@2.1.14
+
 ## 2.1.12
 
 ### Patch Changes

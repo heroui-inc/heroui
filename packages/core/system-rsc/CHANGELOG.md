@@ -1,5 +1,13 @@
 # @heroui/system-rsc
 
+## 2.3.20
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
+- [#5765](https://github.com/heroui-inc/heroui/pull/5765) [`7537226`](https://github.com/heroui-inc/heroui/commit/7537226b549558ecce05618642209b62d05531e7) Thanks [@wingkwong](https://github.com/wingkwong)! - fix incorrect typing when using ref (#5753) and as (#5754)
+
 ## 2.3.19
 
 ### Patch Changes
