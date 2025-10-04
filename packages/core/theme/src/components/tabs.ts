@@ -24,6 +24,7 @@ const tabs = tv({
   slots: {
     base: "inline-flex",
     tabList: [
+      "relative",
       "flex",
       "p-1",
       "h-fit",
@@ -63,7 +64,15 @@ const tabs = tv({
       "text-default-500",
       "group-data-[selected=true]:text-foreground",
     ],
-    cursor: ["absolute", "z-0", "bg-white"],
+    cursor: [
+      "absolute",
+      "z-0",
+      "bg-white",
+      "will-change-[transform,width,height]",
+      "transition-[left,top,width,height]",
+      "duration-250",
+      "ease-out",
+    ],
     panel: [
       "py-3",
       "px-1",
