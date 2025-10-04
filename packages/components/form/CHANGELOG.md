@@ -1,5 +1,16 @@
 # @heroui/form
 
+## 2.1.27
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
+- Updated dependencies [[`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9), [`c322411`](https://github.com/heroui-inc/heroui/commit/c3224113def3f50ea3f1f46bed9524d89969b901), [`6eba109`](https://github.com/heroui-inc/heroui/commit/6eba109a7fd9854da818c819a55a5ddc59a0fd76), [`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/system@2.4.23
+  - @heroui/theme@2.4.23
+  - @heroui/shared-utils@2.1.12
+
 ## 2.1.26
 
 ### Patch Changes

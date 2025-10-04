@@ -1,5 +1,18 @@
 # @heroui/toast
 
+## 2.0.17
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
+- [#5771](https://github.com/heroui-inc/heroui/pull/5771) [`ed76faa`](https://github.com/heroui-inc/heroui/commit/ed76faacd49a731f4be38b987690e0c7a8f3bd91) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger onClose after toast timeout (#5609)
+
+- Updated dependencies [[`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/shared-utils@2.1.12
+  - @heroui/spinner@2.2.24
+  - @heroui/react-utils@2.1.14
+
 ## 2.0.16
 
 ### Patch Changes

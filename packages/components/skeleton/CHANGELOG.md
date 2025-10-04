@@ -1,5 +1,12 @@
 # @heroui/skeleton
 
+## 2.2.17
+
+### Patch Changes
+
+- Updated dependencies [[`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/shared-utils@2.1.12
+
 ## 2.2.16
 
 ### Patch Changes
