@@ -66,17 +66,6 @@ const Tabs = forwardRef(function Tabs<T extends object>(
       };
     }
 
-    if (variant === "bordered") {
-      const borderWidth = 2;
-
-      return {
-        ...baseStyles,
-        top: `${relativeTop - borderWidth}px`,
-        width: `${tabRect.width - borderWidth}px`,
-        height: `${tabRect.height}px`,
-      };
-    }
-
     return {
       ...baseStyles,
       top: `${relativeTop}px`,
@@ -84,16 +73,13 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     };
   };
 
-  const updateCursorPosition = (
-    node: HTMLSpanElement,
-    selectedTab: HTMLElement,
-    parentRect: DOMRect,
-  ) => {
-    const tabRect = selectedTab.getBoundingClientRect();
-    const relativeLeft = tabRect.left - parentRect.left;
-    const relativeTop = tabRect.top - parentRect.top;
+  const updateCursorPosition = (node: HTMLSpanElement, selectedTab: HTMLElement) => {
+    const tabRect = {
+      width: selectedTab.offsetWidth,
+      height: selectedTab.offsetHeight,
+    } as DOMRect;
 
-    const styles = getCursorStyles(tabRect, relativeLeft, relativeTop);
+    const styles = getCursorStyles(tabRect, selectedTab.offsetLeft, selectedTab.offsetTop);
 
     node.style.left = styles.left;
     node.style.top = styles.top;
@@ -116,9 +102,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     prevSelectedKey.current = selectedKey;
     prevVariant.current = variant;
 
-    const parentRect = domRef.current.getBoundingClientRect();
-
-    updateCursorPosition(node, selectedTab, parentRect);
+    updateCursorPosition(node, selectedTab);
   };
 
   const renderTabs = useMemo(
