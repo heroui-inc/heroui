@@ -1,5 +1,16 @@
 # @heroui/theme
 
+## 2.4.23
+
+### Patch Changes
+
+- [#5752](https://github.com/heroui-inc/heroui/pull/5752) [`c322411`](https://github.com/heroui-inc/heroui/commit/c3224113def3f50ea3f1f46bed9524d89969b901) Thanks [@wingkwong](https://github.com/wingkwong)! - fix: broken `--visual-viewport-height` (#5731)
+
+- [#5705](https://github.com/heroui-inc/heroui/pull/5705) [`6eba109`](https://github.com/heroui-inc/heroui/commit/6eba109a7fd9854da818c819a55a5ddc59a0fd76) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tabs in modal (#5657)
+
+- Updated dependencies [[`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/shared-utils@2.1.12
+
 ## 2.4.22
 
 ### Patch Changes

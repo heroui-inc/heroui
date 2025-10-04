@@ -1,5 +1,11 @@
 # @heroui/use-aria-accordion
 
+## 2.2.18
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
 ## 2.2.17
 
 ### Patch Changes

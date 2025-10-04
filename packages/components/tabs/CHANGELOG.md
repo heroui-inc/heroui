@@ -1,5 +1,18 @@
 # @heroui/tabs
 
+## 2.2.24
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
+- [#5705](https://github.com/heroui-inc/heroui/pull/5705) [`6eba109`](https://github.com/heroui-inc/heroui/commit/6eba109a7fd9854da818c819a55a5ddc59a0fd76) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tabs in modal (#5657)
+
+- Updated dependencies [[`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9), [`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/aria-utils@2.2.24
+  - @heroui/shared-utils@2.1.12
+  - @heroui/react-utils@2.1.14
+
 ## 2.2.23
 
 ### Patch Changes

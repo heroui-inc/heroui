@@ -1,5 +1,62 @@
 # @heroui/react
 
+## 2.8.5
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
+- Updated dependencies [[`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9), [`c322411`](https://github.com/heroui-inc/heroui/commit/c3224113def3f50ea3f1f46bed9524d89969b901), [`736293b`](https://github.com/heroui-inc/heroui/commit/736293b8a6d07ba09517a7ed4feb0154f05262b9), [`6eba109`](https://github.com/heroui-inc/heroui/commit/6eba109a7fd9854da818c819a55a5ddc59a0fd76), [`f13c687`](https://github.com/heroui-inc/heroui/commit/f13c6875dba3fbe708d8d47787079da930efec86), [`7b7190e`](https://github.com/heroui-inc/heroui/commit/7b7190e222701ef74976d5358ea1f6f88378db69), [`ed76faa`](https://github.com/heroui-inc/heroui/commit/ed76faacd49a731f4be38b987690e0c7a8f3bd91), [`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/autocomplete@2.3.29
+  - @heroui/number-input@2.0.18
+  - @heroui/breadcrumbs@2.2.22
+  - @heroui/date-picker@2.3.28
+  - @heroui/date-input@2.3.27
+  - @heroui/pagination@2.2.24
+  - @heroui/accordion@2.2.24
+  - @heroui/input-otp@2.1.27
+  - @heroui/calendar@2.2.27
+  - @heroui/checkbox@2.3.27
+  - @heroui/dropdown@2.3.27
+  - @heroui/progress@2.2.22
+  - @heroui/divider@2.2.20
+  - @heroui/listbox@2.3.26
+  - @heroui/popover@2.3.27
+  - @heroui/snippet@2.2.28
+  - @heroui/tooltip@2.2.24
+  - @heroui/avatar@2.2.22
+  - @heroui/button@2.2.27
+  - @heroui/navbar@2.2.25
+  - @heroui/select@2.4.28
+  - @heroui/slider@2.4.24
+  - @heroui/switch@2.2.24
+  - @heroui/input@2.4.28
+  - @heroui/modal@2.2.24
+  - @heroui/radio@2.3.27
+  - @heroui/table@2.2.27
+  - @heroui/toast@2.0.17
+  - @heroui/card@2.2.25
+  - @heroui/chip@2.2.22
+  - @heroui/form@2.1.27
+  - @heroui/link@2.2.23
+  - @heroui/menu@2.2.26
+  - @heroui/tabs@2.2.24
+  - @heroui/user@2.2.22
+  - @heroui/system@2.4.23
+  - @heroui/theme@2.4.23
+  - @heroui/drawer@2.2.24
+  - @heroui/badge@2.2.17
+  - @heroui/alert@2.2.27
+  - @heroui/skeleton@2.2.17
+  - @heroui/code@2.2.21
+  - @heroui/kbd@2.2.22
+  - @heroui/spacer@2.2.21
+  - @heroui/spinner@2.2.24
+  - @heroui/image@2.2.17
+  - @heroui/ripple@2.2.20
+  - @heroui/scroll-shadow@2.3.18
+  - @heroui/framer-utils@2.1.23
+
 ## 2.8.4
 
 ### Patch Changes
