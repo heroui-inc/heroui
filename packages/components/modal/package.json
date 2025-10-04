@@ -51,10 +51,10 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-aria-modal-overlay": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/dialog": "3.5.29",
-    "@react-aria/focus": "3.21.1",
-    "@react-aria/overlays": "3.29.0",
-    "@react-stately/overlays": "3.6.19"
+    "@react-aria/dialog": "3.5.31",
+    "@react-aria/focus": "3.21.2",
+    "@react-aria/overlays": "3.30.0",
+    "@react-stately/overlays": "3.6.20"
   },
   "devDependencies": {
     "@heroui/autocomplete": "workspace:*",

@@ -142,9 +142,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0",
-    yarn: "yarn add @internationalized/date@3.9.0",
-    pnpm: "pnpm add @internationalized/date@3.9.0",
+    npm: "npm install @internationalized/date@3.10.0",
+    yarn: "yarn add @internationalized/date@3.10.0",
+    pnpm: "pnpm add @internationalized/date@3.10.0",
   }}
 />
 
@@ -167,9 +167,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    yarn: "yarn add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    pnpm: "pnpm add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
+    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
   }}
 />
 
@@ -191,9 +191,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0",
-    yarn: "yarn add @internationalized/date@3.9.0",
-    pnpm: "pnpm add @internationalized/date@3.9.0",
+    npm: "npm install @internationalized/date@3.10.0",
+    yarn: "yarn add @internationalized/date@3.10.0",
+    pnpm: "pnpm add @internationalized/date@3.10.0",
   }}
 />
 
@@ -215,9 +215,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    yarn: "yarn add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    pnpm: "pnpm add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
+    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
   }}
 />
 
@@ -237,9 +237,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    yarn: "yarn add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    pnpm: "pnpm add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
+    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
   }}
 />
 
@@ -262,9 +262,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    yarn: "yarn add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    pnpm: "pnpm add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
+    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
   }}
 />
 
@@ -282,9 +282,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    yarn: "yarn add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
-    pnpm: "pnpm add @internationalized/date@3.9.0 @react-aria/i18n@3.12.12",
+    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
   }}
 />
 
@@ -541,6 +541,12 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
       type: "sun | mon | tue | wed | thu | fri | sat",
       description: "The day that starts the week.",
       default: "-"
+    },
+    {
+      attribute: "selectionAlignment",
+      type: "start | center | end",
+      description: "Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection.",
+      default: "center"
     },
     {
       attribute: "autoFocus",
