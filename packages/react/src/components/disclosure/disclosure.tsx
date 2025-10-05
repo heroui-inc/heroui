@@ -17,7 +17,6 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {usePreventHidden} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
@@ -124,9 +123,6 @@ const DisclosureContent = React.forwardRef<
   const contentRef = useRef<HTMLDivElement>(null);
   const mergedRef = useMergeRef(contentRef, ref);
   const {isExpanded} = useContext(DisclosureStateContext)!;
-
-  // Prevent React Aria from setting hidden="until-found" which breaks animations
-  usePreventHidden(contentRef);
 
   return (
     <DisclosurePanel

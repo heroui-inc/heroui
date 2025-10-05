@@ -11,29 +11,57 @@
   &[aria-disabled="true"] {
     @apply pointer-events-none opacity-[var(--disabled-opacity)];
     cursor: var(--cursor-disabled);
+
+    .switch__thumb {
+      @apply bg-default-foreground/20;
+    }
   }
+}
+
+/* Size variants - default is medium */
+.switch--sm {
+  /* Small size modifier */
+}
+
+.switch--md {
+  /* Medium size - no styles as this is the default */
+}
+
+.switch--lg {
+  /* Large size modifier */
 }
 
 /* Switch control (track) */
 .switch__control {
-  @apply bg-default flex h-[24px] w-[40px] shrink-0 items-center rounded-full border-[0.5px] sm:h-[20px] sm:w-[32px];
+  /* Default size (medium) */
+  @apply bg-surface-3 flex h-[24px] w-[40px] shrink-0 items-center rounded-full sm:h-[20px] sm:w-[32px];
+
+  transition:
+    background-color 150ms var(--ease-smooth),
+    transform 150ms var(--ease-out);
 
   /* Focus states */
   .switch:focus-visible &,
   .switch[data-focus-visible="true"] & {
-    @apply outline-2 outline-[var(--focus)];
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
   }
 
   /* Hover states */
   .switch:hover &,
   .switch[data-hovered="true"] & {
-    @apply bg-default-hover;
+    @apply bg-surface-3/80;
   }
 
   /* Pressed states */
   .switch:active &,
   .switch[data-pressed="true"] & {
-    @apply bg-default-hover;
+    @apply bg-surface-3/80;
+    transform: scale(0.95);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
   }
 
   /* Checked states */
@@ -57,29 +85,92 @@
   .switch[data-selected="true"][data-pressed="true"] & {
     @apply bg-accent-hover;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+/* Size-specific control dimensions */
+.switch--sm .switch__control {
+  @apply h-[18px] w-[36px] sm:h-[16px] sm:w-[28px];
+}
+
+.switch--lg .switch__control {
+  @apply h-[32px] w-[52px] sm:h-[24px] sm:w-[40px];
 }
 
 /* Switch thumb */
 .switch__thumb {
-  @apply bg-default-foreground/20 flex size-5 translate-x-0.5 rounded-full shadow-sm sm:size-4;
+  /* Default size (medium) with margin-based positioning */
+  @apply flex size-5 rounded-full bg-white text-black sm:size-4;
   transition:
-    translate 150ms var(--ease-out-quad),
+    margin 150ms var(--ease-out-quad),
     background-color 150ms var(--ease-smooth);
+  margin-inline-start: 2px;
 
-  /* Selected/checked state */
+  /* Selected/checked state - use margin instead of translate */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground translate-x-[17px] sm:translate-x-[13px];
+    @apply bg-accent-foreground text-accent;
+    margin-inline-start: calc(100% - 18px);
   }
 
-  /* Pressed state - scale down */
+  /* Mobile selected state */
+  @media (max-width: 640px) {
+    .switch[aria-checked="true"] &,
+    .switch[data-selected="true"] & {
+      margin-inline-start: calc(100% - 22px);
+    }
+  }
+
+  /* Pressed state - scale down with width animation */
   .switch:active &,
   .switch[data-pressed="true"] & {
     @apply scale-[0.98];
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
-/* Switch thumb */
+/* Size-specific thumb dimensions */
+.switch--sm .switch__thumb {
+  @apply size-3.5 sm:size-3;
+
+  /* Small selected state positioning */
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
+    margin-inline-start: calc(100% - 14px);
+  }
+
+  @media (max-width: 640px) {
+    .switch[aria-checked="true"] &,
+    .switch[data-selected="true"] & {
+      margin-inline-start: calc(100% - 16px);
+    }
+  }
+}
+
+.switch--lg .switch__thumb {
+  @apply size-7 sm:size-5;
+
+  /* Large selected state positioning */
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
+    margin-inline-start: calc(100% - 22px);
+  }
+
+  @media (max-width: 640px) {
+    .switch[aria-checked="true"] &,
+    .switch[data-selected="true"] & {
+      margin-inline-start: calc(100% - 30px);
+    }
+  }
+}
+
+/* Switch thumb content container */
 .switch__thumb > * {
   @apply flex size-full items-center justify-center;
 }
@@ -87,11 +178,6 @@
 /* Switch label */
 .switch__label {
   @apply text-foreground text-base font-medium;
-}
-
-/* Switch icon */
-.switch__icon {
-  @apply rounded-full;
 }
 
 /* Switch Group styles */

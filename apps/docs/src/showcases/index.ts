@@ -29,3 +29,11 @@ export function getShowcasesByCategory(categoryName: string): ShowcaseItem[] {
 
   return category ? category.items : [];
 }
+
+export function getShowcasesByComponent(componentName: string): ShowcaseItem[] {
+  return showcaseCategories.flatMap((category) =>
+    category.items.filter((item) =>
+      item.components.some((comp) => comp.toLowerCase() === componentName.toLowerCase()),
+    ),
+  );
+}
