@@ -7,11 +7,19 @@ export function Basic() {
     <Tabs className="w-full max-w-md">
       <Tabs.ListWrapper>
         <Tabs.List aria-label="Options">
-          <Tabs.Tab id="overview">Overview</Tabs.Tab>
-          <Tabs.Tab id="analytics">Analytics</Tabs.Tab>
-          <Tabs.Tab id="reports">Reports</Tabs.Tab>
+          <Tabs.Tab id="overview">
+            Overview
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="analytics">
+            Analytics
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="reports">
+            Reports
+            <Tabs.Indicator />
+          </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Indicator />
       </Tabs.ListWrapper>
       <Tabs.Panel className="pt-4" id="overview">
         <p>View your project overview and recent activity.</p>

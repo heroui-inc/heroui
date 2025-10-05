@@ -7,13 +7,19 @@ export function Disabled() {
     <Tabs className="w-full max-w-md">
       <Tabs.ListWrapper>
         <Tabs.List aria-label="Tabs with disabled">
-          <Tabs.Tab id="active">Active</Tabs.Tab>
+          <Tabs.Tab id="active">
+            Active
+            <Tabs.Indicator />
+          </Tabs.Tab>
           <Tabs.Tab isDisabled id="disabled">
             Disabled
+            <Tabs.Indicator />
           </Tabs.Tab>
-          <Tabs.Tab id="available">Available</Tabs.Tab>
+          <Tabs.Tab id="available">
+            Available
+            <Tabs.Indicator />
+          </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Indicator />
       </Tabs.ListWrapper>
       <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>

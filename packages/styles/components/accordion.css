@@ -26,6 +26,10 @@
   &[data-expanded="true"] {
     @apply -rotate-180;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .accordion__item {
@@ -57,31 +61,26 @@
   &:disabled {
     @apply pointer-events-none cursor-not-allowed opacity-[var(--disabled-opacity)];
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
-/* Performant Grid-based animation wrapper */
 .accordion__panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms var(--ease-out-quad);
+  opacity: 0;
+  transition:
+    height 300ms var(--ease-smooth),
+    opacity 340ms var(--ease-out);
+  height: var(--disclosure-panel-height);
+  overflow: clip;
 
-  .accordion__body {
-    overflow: hidden;
-  }
-
-  .accordion__body-inner {
-    opacity: 0;
-    /* Collapse transition */
-    transition: opacity 300ms var(--ease-out-quad);
-  }
-
-  /* Expanded state */
   &[data-expanded="true"] {
-    grid-template-rows: 1fr;
+    opacity: 1;
+  }
 
-    .accordion__body-inner {
-      opacity: 1;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 

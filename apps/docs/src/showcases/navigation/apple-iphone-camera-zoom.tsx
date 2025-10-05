@@ -66,10 +66,10 @@ export default function AppleIPhoneCameraZoom() {
                   id={zoom.toString()}
                 >
                   {zoom} {zoom === "macro" ? "" : "mm"}
+                  <Tabs.Indicator className="rounded-full bg-white shadow-none duration-[320ms]" />
                 </Tabs.Tab>
               ))}
             </Tabs.List>
-            <Tabs.Indicator className="rounded-full bg-white shadow-none duration-[320ms] ease-out" />
           </Tabs.ListWrapper>
         </Tabs>
         <div className="relative h-10 w-10">

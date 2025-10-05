@@ -4,6 +4,10 @@
 
   /* Default size - matches description--md variant */
   @apply text-sm;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Size variants */

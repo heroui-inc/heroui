@@ -4,6 +4,8 @@ import type {ShowcaseItem as ShowcaseItemType} from "@/showcases";
 
 import {chipVariants} from "@heroui/react";
 import Link from "next/link";
+import {useSearchParams} from "next/navigation";
+import {Suspense} from "react";
 import {tv} from "tailwind-variants";
 
 import {ShowcaseItem} from "@/components/showcase-item";
@@ -28,15 +30,37 @@ interface ShowcaseDetailClientProps {
   codePanel: React.ReactNode;
 }
 
-export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: ShowcaseDetailClientProps) {
+function ShowcasesList({showcaseId}: {showcaseId: string}) {
+  const searchParams = useSearchParams();
   const allShowcases = getAllShowcases();
+  const returnUrl = searchParams.get("returnUrl");
+  const queryString = returnUrl ? `?returnUrl=${encodeURIComponent(returnUrl)}` : "";
 
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-4">
+      {allShowcases.map((item) => (
+        <ShowcaseItem
+          key={item.name}
+          isMinimal
+          aria-label={item.title}
+          href={`/showcase/${item.name}${queryString}`}
+          isSelected={item.name === showcaseId}
+          item={item}
+        />
+      ))}
+    </div>
+  );
+}
+
+export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: ShowcaseDetailClientProps) {
   return (
     <section className="bg-background text-foreground relative flex min-h-screen w-screen flex-col overflow-hidden">
       <div aria-hidden="true" className={dotBackground()} />
 
       {/* Header */}
-      <ShowcaseHeader />
+      <Suspense fallback={null}>
+        <ShowcaseHeader />
+      </Suspense>
 
       {/* Main content - horizontal layout */}
       <main className="z-[1] flex flex-1 flex-col">
@@ -51,18 +75,9 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
 
           {/* Showcase List Section - Right Side */}
           <div className="hidden w-24 md:block">
-            <div className="flex h-full flex-col items-center justify-center gap-3 p-4">
-              {allShowcases.map((item) => (
-                <ShowcaseItem
-                  key={item.name}
-                  isMinimal
-                  aria-label={item.title}
-                  href={`/showcase/${item.name}`}
-                  isSelected={item.name === showcaseId}
-                  item={item}
-                />
-              ))}
-            </div>
+            <Suspense fallback={null}>
+              <ShowcasesList showcaseId={showcaseId} />
+            </Suspense>
           </div>
         </div>
 
