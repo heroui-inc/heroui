@@ -8,27 +8,22 @@ import type {
   TabsProps as TabsPrimitiveProps,
 } from "react-aria-components";
 
-import React, {createContext, useContext, useEffect, useRef, useState} from "react";
+import React, {createContext, useContext} from "react";
 import {
+  SelectionIndicator as SelectionIndicatorPrimitive,
   TabList as TabListPrimitive,
-  TabListStateContext,
   TabPanel as TabPanelPrimitive,
   Tab as TabPrimitive,
   Tabs as TabsPrimitive,
 } from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-import {useMergeRef} from "../../utils/mergeRef";
 
 import {tabsVariants} from "./tabs.styles";
 
 const TabsContext = createContext<{
   slots?: ReturnType<typeof tabsVariants>;
   orientation?: "horizontal" | "vertical";
-}>({});
-
-const TabListWrapperContext = createContext<{
-  tabsListRef?: React.RefObject<HTMLDivElement | null>;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
@@ -72,20 +67,15 @@ const TabListWrapper = React.forwardRef<React.ElementRef<"div">, TabListWrapperP
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
 
-    const tabListRef = useRef<HTMLDivElement>(null);
-    const mergedRef = useMergeRef(ref, tabListRef);
-
     return (
-      <TabListWrapperContext.Provider value={{tabsListRef: tabListRef}}>
-        <div
-          data-tabs-list-wrapper
-          className={slots?.tabListWrapper({className})}
-          {...props}
-          ref={mergedRef}
-        >
-          {children}
-        </div>
-      </TabListWrapperContext.Provider>
+      <div
+        data-tabs-list-wrapper
+        className={slots?.tabListWrapper({className})}
+        {...props}
+        ref={ref}
+      >
+        {children}
+      </div>
     );
   },
 );
@@ -120,8 +110,7 @@ TabList.displayName = "HeroUI.TabList";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TabProps extends Omit<TabPrimitiveProps, "children"> {
-  children: React.ReactNode;
+interface TabProps extends TabPrimitiveProps {
   className?: string;
 }
 
@@ -143,6 +132,30 @@ const Tab = React.forwardRef<React.ElementRef<typeof TabPrimitive>, TabProps>(
 );
 
 Tab.displayName = "HeroUI.Tab";
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface TabIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
+  className?: string;
+}
+
+const TabIndicator = React.forwardRef<
+  React.ElementRef<typeof SelectionIndicatorPrimitive>,
+  TabIndicatorProps
+>(({className, ...props}, ref) => {
+  const {slots} = useContext(TabsContext);
+
+  return (
+    <SelectionIndicatorPrimitive
+      ref={ref}
+      data-tabs-indicator
+      className={slots?.tabIndicator({className})}
+      {...props}
+    />
+  );
+});
+
+TabIndicator.displayName = "HeroUI.TabIndicator";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -172,63 +185,6 @@ TabPanel.displayName = "HeroUI.TabPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TabIndicatorProps {
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-const TabIndicator = React.forwardRef<HTMLSpanElement, TabIndicatorProps>(
-  ({className, style, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
-    const {tabsListRef} = useContext(TabListWrapperContext);
-    const state = useContext(TabListStateContext);
-    const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
-
-    useEffect(() => {
-      if (!state?.selectedKey || !tabsListRef?.current) return;
-
-      const raf = requestAnimationFrame(() => {
-        if (!tabsListRef?.current) return;
-
-        // Find the selected tab element
-        const selectedTab = tabsListRef.current.querySelector(
-          `[data-key="${state.selectedKey}"]`,
-        ) as HTMLElement | null;
-
-        if (!selectedTab) return;
-
-        const selectedTabRect = selectedTab.getBoundingClientRect();
-        const tabsListRect = tabsListRef.current.getBoundingClientRect();
-
-        setIndicatorStyle({
-          "--selected-tab-left": `${selectedTabRect.left - tabsListRect.left}px`,
-          "--selected-tab-top": `${selectedTabRect.top - tabsListRect.top}px`,
-          "--selected-tab-width": `${selectedTabRect.width}px`,
-          "--selected-tab-height": `${selectedTabRect.height}px`,
-        } as React.CSSProperties);
-      });
-
-      return () => {
-        cancelAnimationFrame(raf);
-      };
-    }, [state?.selectedKey, tabsListRef]);
-
-    return (
-      <span
-        ref={ref}
-        data-tabs-indicator
-        className={slots?.tabsIndicator({className})}
-        style={{...indicatorStyle, ...style}}
-        {...props}
-      />
-    );
-  },
-);
-
-TabIndicator.displayName = "HeroUI.TabIndicator";
-
-/* -----------------------------------------------------------------------------------------------*/
-
 const CompoundTabs = Object.assign(TabsRoot, {
   ListWrapper: TabListWrapper,
   List: TabList,
@@ -238,4 +194,4 @@ const CompoundTabs = Object.assign(TabsRoot, {
 });
 
 export default CompoundTabs;
-export type {TabsProps, TabListProps, TabProps, TabPanelProps, TabIndicatorProps};
+export type {TabsProps, TabListProps, TabProps, TabPanelProps};

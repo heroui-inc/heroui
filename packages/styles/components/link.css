@@ -26,4 +26,8 @@
   .link__icon[data-link-default-icon] {
     @apply pb-1.5;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }

@@ -5,6 +5,10 @@
 
   /* Default size - matches label--md variant */
   @apply text-base;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Size variants */

@@ -9,8 +9,22 @@ export const switchVariants = tv({
     thumb: "switch__thumb",
     icon: "switch__icon",
   },
-  variants: {},
-  defaultVariants: {},
+  variants: {
+    size: {
+      sm: {
+        base: "switch--sm",
+      },
+      md: {
+        base: "switch--md",
+      },
+      lg: {
+        base: "switch--lg",
+      },
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
 });
 
 export const switchGroupVariants = tv({

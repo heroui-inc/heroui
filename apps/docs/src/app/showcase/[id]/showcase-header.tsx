@@ -1,7 +1,7 @@
 "use client";
 
 import {Button, Kbd, Tooltip} from "@heroui/react";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 
 import {HeroUILogo} from "@/components/heroui-logo";
@@ -12,10 +12,14 @@ import {useShowcase} from "./showcase-wrapper";
 
 export function ShowcaseHeader() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const {isCodeVisible, toggleCode} = useShowcase();
 
+  // Get the returnUrl parameter, default to /showcase if not present
+  const returnUrl = searchParams.get("returnUrl") || "/showcase";
+
   const onClose = () => {
-    router.push("/showcase");
+    router.push(returnUrl);
   };
 
   useEffect(() => {
@@ -30,7 +34,7 @@ export function ShowcaseHeader() {
     return () => {
       document.removeEventListener("keydown", handleEscKey);
     };
-  }, []);
+  }, [returnUrl]);
 
   return (
     <header className="border-border/50 bg-background/50 z-[1] flex items-center justify-between border-b p-4 backdrop-blur-sm">

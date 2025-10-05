@@ -69,7 +69,7 @@ interface SwitchContext {
 
 const SwitchContext = createContext<SwitchContext>({});
 
-interface SwitchRootProps extends SwitchPrimitiveProps {}
+interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
 
 const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, SwitchRootProps>(
   ({children, className, ...originalProps}, ref) => {
