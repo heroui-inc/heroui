@@ -93,7 +93,7 @@
 
 /* Size-specific control dimensions */
 .switch--sm .switch__control {
-  @apply h-[18px] w-[36px] sm:h-[16px] sm:w-[26px];
+  @apply h-[18px] w-[30px] sm:h-[16px] sm:w-[26px];
 }
 
 .switch--lg .switch__control {
