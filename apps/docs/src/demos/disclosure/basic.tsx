@@ -18,13 +18,13 @@ export function Basic() {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <Disclosure.Body className="bg-panel shadow-border rounded-panel mx-2 mb-2 mt-4 flex flex-col items-center p-4 text-center">
+          <Disclosure.Body className="bg-panel shadow-border rounded-panel flex flex-col items-center p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
             <img
               alt="Expo Go QR Code"
-              className="max-w-54 my-2 aspect-square w-full object-cover"
+              className="max-w-54 aspect-square w-full object-cover"
               src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
             />
             <p className="text-muted text-sm">Expo must be installed on your device.</p>
