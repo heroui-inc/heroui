@@ -15,7 +15,7 @@ const VersionChip = () => {
     >
       <Iconify className="text-muted" icon="sparkles" />
       {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
-      <span className="text-muted">v{currentVersion}: Tabs Indicator Redesign</span>
+      <span className="text-muted">v{currentVersion}: RAC Upgrade</span>
     </Link>
   );
 };

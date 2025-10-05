@@ -1,13 +1,13 @@
 ---
 title: v3.0.0-alpha.33
-description: Tabs indicator redesign, switch size variant, related showcase, animation enhancement
+description: RAC upgrade, Tabs indicator redesign, Switch size variant, Related showcase
 ---
 
 <div className="flex items-center gap-3 mb-6">
   <span className="text-sm text-neutral-500 dark:text-neutral-400">October 5, 2025</span>
 </div>
 
-This release introduces a redesigned Tabs indicator, new switch size variant, and related showcases for serveral components, along with enhanced animation support for Disclosure component.
+This release introduces RAC upgrade, a redesigned Tabs indicator, new switch size variant, and related showcases for serveral components.
 
 ## Installation
 
@@ -38,9 +38,15 @@ Update to the latest version:
 
 ## What's New
 
+### RAC Upgrade
+
+The React Aria Components versions have been upgraded to the latest [October 2, 2025 Release](https://react-spectrum.adobe.com/releases/2025-10-02.html).
+
+This upgrade introduces two CSS variables `--disclosure-panel-width` and `--disclosure-panel-height` in [Disclosure](/docs/components/disclosure) and [Disclosure Group](/docs/components/disclosure-group), which are set to the scrollWidth and scrollHeight of the panel when expanding and collapsing.
+
 ### Tabs Indicator Redesign
 
-The [Tabs component](/docs/components/tabs) has been updated with a new structure utilizing React Aria's `SelectionIndicator` under the hood.
+The [Tabs component](/docs/components/tabs) has been updated with a new structure that leverages React Aria's `SelectionIndicator` internally, and now supports server-side rendering (SSR).
 
 **Breaking Changes:**
 
@@ -82,10 +88,6 @@ The [Switch component](/docs/components/switch) has been updated with a new vari
 ### Related showcases
 
 Related showcases have been added in [Button](/docs/components/button), [Disclosure](/docs/components/disclosure), [Disclosure Group](/docs/components/disclosure-group) and [Tabs](/docs/components/tabs). 
-
-### Disclosure Animation
-
-Two CSS variables `--disclosure-panel-width` and `--disclosure-panel-height` have been introduced in [Disclosure](/docs/components/disclosure) and [Disclosure Group](/docs/components/disclosure-group), which are set to the scrollWidth and scrollHeight of the panel when expanding and collapsing.
 
 ## Documentation Improvements
 
