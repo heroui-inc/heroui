@@ -1,0 +1,115 @@
+---
+title: v3.0.0-alpha.33
+description: Tabs indicator redesign, switch size variant, related showcase, animation enhancement
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 5, 2025</span>
+</div>
+
+This release introduces a redesigned Tabs indicator, new switch size variant, and related showcases for serveral components, along with enhanced animation support for Disclosure component.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+## What's New
+
+### Tabs Indicator Redesign
+
+The [Tabs component](/docs/components/tabs) has been updated with a new structure utilizing React Aria's `SelectionIndicator` under the hood.
+
+**Breaking Changes:**
+
+- Moved `Tabs.Indicator` inside each `Tabs.Tab`
+
+**Before:**
+```tsx
+<Tabs>
+  <Tabs.ListWrapper>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab/>
+    </Tabs.List>
+    <Tabs.Indicator />
+  </Tabs.ListWrapper>
+  <Tabs.Panel/>
+</Tabs>
+```
+
+**After:**
+```tsx
+<Tabs>
+  <Tabs.ListWrapper>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab>
+        <Tabs.Indicator />
+      </Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListWrapper>
+  <Tabs.Panel/>
+</Tabs>
+```
+
+### Switch size variants
+
+The [Switch component](/docs/components/switch) has been updated with a new variant `size`. The available options are `sm`, `md` and `lg`.
+
+<ComponentPreview name="switch-sizes" />
+
+### Related showcases
+
+Related showcases have been added in [Button](/docs/components/button), [Disclosure](/docs/components/disclosure), [Disclosure Group](/docs/components/disclosure-group) and [Tabs](/docs/components/tabs). 
+
+### Disclosure Animation
+
+Two CSS variables `--disclosure-panel-width` and `--disclosure-panel-height` have been introduced in [Disclosure](/docs/components/disclosure) and [Disclosure Group](/docs/components/disclosure-group), which are set to the scrollWidth and scrollHeight of the panel when expanding and collapsing.
+
+## Documentation Improvements
+
+### Component Documentation
+- **[Tabs](/docs/components/tabs)**: Updated anatomy, revised examples with new indicator design and added related showcase
+- **[Switch](/docs/components/switch)**: Added size example and revised with-icon example
+- **[Button](/docs/components/button)**, **[Disclosure](/docs/components/disclosure)**, **[Disclosure Group](/docs/components/disclosure-group)**: Added related showcase
+
+## Migration Guide
+
+### Tabs Component Migration
+
+1. **Update component structure:**
+   - move `<Tabs.Indicator />` inside each `<Tabs.Tab />`
+
+## Links
+
+- [GitHub PR #5747](https://github.com/heroui-inc/heroui/pull/5747)
+- [Tabs Component](/docs/components/tabs)
+- [Switch Component](/docs/components/switch)
+- [Button Component](/docs/components/button)
+- [Disclosure Component](/docs/components/disclosure)
+- [Disclosure Group Component](/docs/components/disclosure-group)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
