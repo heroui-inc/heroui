@@ -40,7 +40,12 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply ease-smooth flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[100ms];
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
+
+  transition:
+    background-color 150ms var(--ease-smooth),
+    opacity 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
 
   /* Hover state */
   &:hover,
@@ -53,13 +58,13 @@
   /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled State */
-  &:disabled {
-    @apply pointer-events-none cursor-not-allowed opacity-[var(--disabled-opacity)];
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply status-disabled;
   }
 
   @media (prefers-reduced-motion: reduce) {

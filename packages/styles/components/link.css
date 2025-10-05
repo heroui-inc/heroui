@@ -1,6 +1,13 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit items-center underline-offset-4 transition-[color,text-decoration-color,opacity] duration-150 hover:underline;
+  @apply text-link relative inline-flex h-fit items-center underline-offset-4 hover:underline;
+
+  transition:
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    text-decoration-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out),
+    opacity 150ms var(--ease-smooth);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -9,14 +16,12 @@
 
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled state */
   &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
   }
 
   .link__icon {

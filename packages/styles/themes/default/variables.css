@@ -23,6 +23,9 @@
     /* Small radius for compact components */
     --radius-sm: 0.375rem;
 
+    /* Ring offset - Used for focus ring */
+    --ring-offset-width: 2px;
+
     /* Typography */
     --font-size-base: 1rem;
     --font-size-scale-desktop: 0.875;
@@ -45,8 +48,8 @@
 
     --scrollbar: var(--color-neutral-300);
 
-    --default: var(--color-white);
-    --default-foreground: var(--color-neutral-600);
+    --default: var(--color-neutral-50);
+    --default-foreground: var(--eclipse);
 
     --surface-1: var(--background);
     --surface-2: var(--color-neutral-100);
@@ -82,6 +85,7 @@
     --shadow-with-border:
       0 0px 5px 0px rgba(0, 0, 0, 0.02), 0 2px 10px 0px rgba(0, 0, 0, 0.06),
       0 0px 1px 0px rgba(0, 0, 0, 0.3);
+    --shadow-form-field: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
     /* Skeleton Default Global Animation */
     --skeleton-default-animation-type: shimmer; /* shimmer, pulse, none */
@@ -101,7 +105,7 @@
     --scrollbar: var(--color-neutral-800);
 
     --default: var(--color-neutral-900);
-    --default-foreground: var(--color-neutral-200);
+    --default-foreground: var(--snow);
 
     --surface-1: var(--background);
     --surface-2: var(--color-neutral-900);
@@ -137,5 +141,6 @@
     --shadow-with-border:
       0 0 0 1px oklch(1 0 0 / 15%), 0 5px 10px -3px rgba(0, 0, 0, 0.3),
       0 3px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-form-field: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 }

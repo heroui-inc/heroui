@@ -15,9 +15,6 @@ export const textFieldVariants = tv({
       "bg-neutral-50 backdrop-blur-0",
       "min-h-8",
       "transition-all duration-200",
-      "border border-[rgba(0,0,0,0.01)]",
-      "shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]",
-      "shadow-[0px_0px_0px_0px_inset_rgba(255,255,255,0.1)]",
       focusRingClasses,
     ],
     input: [

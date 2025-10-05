@@ -9,9 +9,6 @@
 /* Base styles */
 @import "./base/base.css" layer(base);
 
-/* Utilities */
-@import "./utilities/index.css" layer(utilities);
-
 /* Base component structures (unstyled) */
 @import "./components/index.css" layer(components);
 
@@ -20,3 +17,6 @@
 
 /* Default theme (variables + component customizations) */
 @import "./themes/default/index.css" layer(theme);
+
+/* Utilities */
+@import "./utilities/index.css";

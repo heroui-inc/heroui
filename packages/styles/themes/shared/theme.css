@@ -36,6 +36,7 @@
   --color-danger-foreground: var(--danger-foreground);
 
   --shadow-border: var(--shadow-with-border);
+  --shadow-field: var(--shadow-form-field);
 
   /* Calculated Variables */
 
@@ -48,7 +49,7 @@
   --color-default-hover: color-mix(
     in oklab,
     var(--color-default) 90%,
-    var(--color-default-foreground) 5%
+    var(--color-default-foreground) 2%
   );
   --color-accent-hover: color-mix(
     in oklab,

@@ -1,7 +1,7 @@
 /* Scrollbar styles */
 * {
-  scrollbar-width: thin;
   scrollbar-color: var(--scrollbar) transparent;
+  scrollbar-width: thin;
 }
 
 /* Border color inheritance */
@@ -11,20 +11,4 @@
 ::backdrop,
 ::file-selector-button {
   border-color: var(--border, currentColor);
-}
-
-/* Shared Focus Styles */
-/* Basic focus ring for interactive elements */
-.focus-ring {
-  &:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-}
-
-/* Shared disabled styles */
-.disabled {
-  cursor: var(--cursor-disabled);
-  opacity: var(--disabled-opacity);
-  pointer-events: none;
 }
