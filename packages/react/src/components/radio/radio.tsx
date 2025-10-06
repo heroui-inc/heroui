@@ -80,13 +80,15 @@ const RadioContext = createContext<RadioContext>({});
 interface RadioRootProps extends RadioPrimitiveProps {
   /** The name of the radio button, used when submitting an HTML form. */
   name?: string;
+  /** The size of the radio button */
+  size?: "sm" | "md" | "lg";
 }
 
 const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, RadioRootProps>(
-  ({children, className, ...props}, ref) => {
+  ({children, className, size = "md", ...props}, ref) => {
     const slots = React.useMemo(
-      () => radioVariants({isDisabled: props.isDisabled}),
-      [props.isDisabled],
+      () => radioVariants({size, isDisabled: props.isDisabled}),
+      [size, props.isDisabled],
     );
 
     return (
@@ -124,27 +126,12 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
 
 RadioIndicator.displayName = "HeroUI.Radio.Indicator";
 
-/* -----------------------------------------------------------------------------------------------*/
-
-interface RadioLabelProps extends React.HTMLAttributes<HTMLSpanElement> {}
-
-const RadioLabel = React.forwardRef<HTMLSpanElement, RadioLabelProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(RadioContext);
-
-    return <span ref={ref} data-radio-label className={slots?.label({className})} {...props} />;
-  },
-);
-
-RadioLabel.displayName = "HeroUI.Radio.Label";
-
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
 const CompoundRadio = Object.assign(RadioRoot, {
   Indicator: RadioIndicator,
-  Label: RadioLabel,
 });
 
 const CompoundRadioGroup = Object.assign(RadioGroupRoot, {
@@ -158,7 +145,6 @@ export type {
   RadioRootProps,
   RadioRootProps as RadioProps,
   RadioIndicatorProps,
-  RadioLabelProps,
 };
 
 export {CompoundRadio as Radio, CompoundRadioGroup as RadioGroup};
