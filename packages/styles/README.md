@@ -131,9 +131,17 @@ The package provides a comprehensive set of CSS variables for customization:
   --disabled-opacity: 0.5;
 
   /* Radius */
-  --radius: 0.75rem;
+  --radius: 1rem;
+
+  /* Panel specific radius */
   --radius-panel: 0.5rem;
   --radius-panel-inner: calc(var(--radius-panel) * 0.5);
+
+  /* Small radius for compact components */
+  --radius-sm: 0.375rem;
+
+  /* Ring offset - Used for focus ring */
+  --ring-offset-width: 2px;
 
   /* Typography */
   --font-size-base: 1rem;
@@ -152,24 +160,51 @@ The package provides a comprehensive set of CSS variables for customization:
 ```css
 :root {
   /* Base Colors */
-  --background: oklch(100% 0 0);
-  --foreground: oklch(14.48% 0 0);
-  --panel: oklch(100% 0 0);
+  --background: var(--white);
+  --foreground: var(--eclipse);
+  --panel: var(--white);
+  --panel-foreground: var(--foreground);
+
+  --muted: var(--color-neutral-500);
+  --scrollbar: var(--color-neutral-300);
+
+  --default: var(--color-neutral-50);
+  --default-foreground: var(--eclipse);
+
+  --surface-1: var(--background);
+  --surface-2: var(--color-neutral-100);
+  --surface-3: var(--color-neutral-200);
 
   /* Interactive Colors */
-  --accent: oklch(0.14 0 0);
-  --accent-foreground: oklch(0.99 0 0);
-  --accent-hover: oklch(0.22 0 0);
+  --accent: var(--color-neutral-950);
+  --accent-foreground: var(--snow);
+
+  --accent-soft: var(--color-neutral-200);
+  --accent-soft-foreground: var(--color-neutral-900);
 
   /* Status Colors */
-  --success: oklch(0.55 0.1241 153.51);
-  --warning: oklch(0.67 0.1428 72.73);
-  --danger: oklch(0.59 0.2228 29.94);
+  --success: oklch(0.5503 0.1244 153.56);
+  --success-foreground: var(--snow);
+
+  --warning: oklch(0.7186 0.1521 64.85);
+  --warning-foreground: var(--eclipse);
+
+  --danger: oklch(0.6259 0.1908 29.19);
+  --danger-foreground: var(--snow);
+
+  /* Component Colors */
+  --segment: var(--white);
+  --segment-foreground: var(--foreground);
 
   /* UI Colors */
   --border: oklch(0 0 0 / 15%);
+  --divider: var(--color-neutral-200);
   --focus: oklch(0% 0 0 / 20%);
-  --scrollbar: var(--color-neutral-300);
+  --link: var(--foreground);
+
+  /* Shadows */
+  --panel-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 ```
 

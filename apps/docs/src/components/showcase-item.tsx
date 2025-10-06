@@ -60,7 +60,7 @@ export function ShowcaseItem({
         )}
         <div
           className={cn(
-            "shadow-border group-hover:drop-shadow-black/15 ease-out-quad h-full w-full overflow-hidden rounded-xl border border-transparent object-cover transition-all duration-[250ms] will-change-transform group-hover:scale-[1.02] group-hover:drop-shadow-xl",
+            "shadow-panel group-hover:drop-shadow-black/15 ease-out-quad h-full w-full overflow-hidden rounded-xl border border-transparent object-cover transition-all duration-[250ms] will-change-transform group-hover:scale-[1.02] group-hover:drop-shadow-xl",
             {
               "aspect-video h-full w-full rounded-lg": isMinimal,
               "border-foreground/60": isSelected,

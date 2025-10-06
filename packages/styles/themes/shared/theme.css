@@ -35,7 +35,7 @@
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
 
-  --shadow-border: var(--border-shadow);
+  --shadow-panel: var(--panel-shadow);
   --shadow-field: var(--field-shadow);
 
   /* Calculated Variables */

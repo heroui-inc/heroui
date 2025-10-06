@@ -91,7 +91,7 @@
 
 /* Tab indicator - React Aria's SelectionIndicator */
 .tabs__indicator {
-  @apply bg-segment shadow-border;
+  @apply bg-segment shadow-panel;
 
   position: absolute;
   top: 0;

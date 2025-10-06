@@ -82,12 +82,12 @@
     --link: var(--foreground);
 
     /* Shadows */
-    --border-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    --panel-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
     /* Shadow used for form fields */
     --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
     /* Skeleton Default Global Animation */
-    --skeleton-default-animation-type: shimmer; /* shimmer, pulse, none */
+    --skeleton-animation: shimmer; /* shimmer, pulse, none */
   }
 
   .dark,
@@ -137,7 +137,7 @@
     --link: var(--foreground);
 
     /* Shadows */
-    --border-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    --panel-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
     --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 }

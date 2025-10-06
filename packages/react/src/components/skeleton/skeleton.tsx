@@ -20,7 +20,7 @@ const Skeleton = React.forwardRef<React.ElementRef<"div">, SkeletonProps>(
   ({animationType, className, ...props}, ref) => {
     // Use the new hook to get CSS variable value with SSR support
     const resolvedAnimationType = useCSSVariable(
-      "--skeleton-default-animation-type",
+      "--skeleton-animation",
       animationType,
     );
 

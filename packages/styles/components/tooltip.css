@@ -2,7 +2,7 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply bg-panel shadow-border origin-[var(--trigger-anchor-point)] rounded-md px-3 py-1 text-sm will-change-transform dark:shadow-none;
+  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-md px-3 py-1 text-sm will-change-transform dark:shadow-none;
 
   /* Entering animations */
   &[data-entering] {

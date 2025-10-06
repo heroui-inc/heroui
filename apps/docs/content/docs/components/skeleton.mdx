@@ -49,22 +49,22 @@ import { Skeleton } from '@heroui/react';
 
 ### Global Animation Configuration
 
-You can set a default animation type for all Skeleton components in your application by defining the `--skeleton-default-animation-type` CSS variable:
+You can set a default animation type for all Skeleton components in your application by defining the `--skeleton-animation` CSS variable:
 
 ```css
 /* In your global CSS file */
 :root {
   /* Possible values: shimmer, pulse, none */
-  --skeleton-default-animation-type: pulse;
+  --skeleton-animation: pulse;
 }
 
 /* You can also set different values for light/dark themes */
 .light, [data-theme="light"] {
-  --skeleton-default-animation-type: shimmer;
+  --skeleton-animation: shimmer;
 }
 
 .dark, [data-theme="dark"] {
-  --skeleton-default-animation-type: pulse;
+  --skeleton-animation: pulse;
 }
 ```
 
@@ -176,5 +176,5 @@ For static skeletons without any animation:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `animationType` | `"shimmer" \| "pulse" \| "none"` | `"shimmer"` or CSS variable | The animation type for the skeleton. Can be globally configured via `--skeleton-default-animation-type` CSS variable |
+| `animationType` | `"shimmer" \| "pulse" \| "none"` | `"shimmer"` or CSS variable | The animation type for the skeleton. Can be globally configured via `--skeleton-animation` CSS variable |
 | `className` | `string` | - | Additional CSS classes |

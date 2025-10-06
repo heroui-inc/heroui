@@ -22,17 +22,17 @@
 [data-theme="light"],
 .light {
   /* --background: #f9f9f9; */
-  /* -skeleton-default-animation-type: none; */ /* possible values: shimmer, pulse, none */
+  /* --skeleton-animation: none; */ /* possible values: shimmer, pulse, none */
 }
 
-/* Dark theme overrides sing data-theme or class */
+/* Dark theme overrides using data-theme or class */
 [data-theme="dark"],
 .dark {
   /* Your values */
   /* --radius: 0.5rem; */
   /* --cursor: default; */
 
-  --cursor-interactive: pointer; /* possible values: shimmer, pulse, none */
+  --cursor-interactive: pointer;
 }
 
 /* @theme inline { */
