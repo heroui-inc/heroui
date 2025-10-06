@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 /** @type {import("prettier").Config} */
 const config = {
   ...preset,
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: ["prettier-plugin-tailwindcss", "prettier-plugin-css-order"],
   tailwindAttributes: ["className", "classNames"],
   tailwindFunctions: ["tv", "clsx", "cn"],
   tailwindStylesheet: path.resolve(__dirname, "./packages/styles/index.css"),

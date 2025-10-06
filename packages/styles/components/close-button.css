@@ -42,6 +42,10 @@
     @apply size-5 shrink-0 self-center;
     @apply -mx-0.5 my-0.5;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Variants */

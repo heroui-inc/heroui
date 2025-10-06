@@ -10,6 +10,10 @@
   &[data-loading-status="failed"] {
     @apply hidden;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Avatar fallback element */

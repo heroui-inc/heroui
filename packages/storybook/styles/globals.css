@@ -9,6 +9,7 @@
   /* Your values */
   /* --radius: 2.5rem; */
 
+  /* --accent: oklch(0.5671 0.209451 257.9449); */
   /* Use OS-native cursor for interactive elements (macOS style) */
   --cursor-interactive: cursor;
 
@@ -31,8 +32,7 @@
   /* --radius: 0.5rem; */
   /* --cursor: default; */
 
-  --cursor-interactive: pointer;
-  /* --skeleton-default-animation-type: shimmer; */ /* possible values: shimmer, pulse, none */
+  --cursor-interactive: pointer; /* possible values: shimmer, pulse, none */
 }
 
 /* @theme inline { */

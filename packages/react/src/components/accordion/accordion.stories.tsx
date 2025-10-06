@@ -37,9 +37,7 @@ const defaultArgs: AccordionProps = {
 };
 
 const Wrapper = ({children, className}: {children: React.ReactNode; className?: string}) => (
-  <div data-animation-off className={cnBase("w-full max-w-md", className)}>
-    {children}
-  </div>
+  <div className={cnBase("w-full max-w-md", className)}>{children}</div>
 );
 
 const items = [

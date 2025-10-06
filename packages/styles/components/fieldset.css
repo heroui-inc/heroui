@@ -39,4 +39,8 @@
 /* Field error component */
 .field-error {
   @apply text-danger mt-1 translate-y-[-4px] text-sm opacity-0 transition-all duration-200 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }

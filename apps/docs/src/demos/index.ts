@@ -341,13 +341,17 @@ export const demos: Record<string, DemoItem> = {
     component: SwitchDemos.WithoutLabel,
     file: "switch/without-label.tsx",
   },
+  "switch-sizes": {
+    component: SwitchDemos.Sizes,
+    file: "switch/sizes.tsx",
+  },
   "switch-label-position": {
     component: SwitchDemos.LabelPosition,
     file: "switch/label-position.tsx",
   },
-  "switch-with-icon": {
-    component: SwitchDemos.WithIcon,
-    file: "switch/with-icon.tsx",
+  "switch-with-icons": {
+    component: SwitchDemos.WithIcons,
+    file: "switch/with-icons.tsx",
   },
   "switch-with-description": {
     component: SwitchDemos.WithDescription,

@@ -32,6 +32,10 @@
   & svg:not([data-spinner] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Size variants */

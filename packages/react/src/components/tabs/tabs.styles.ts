@@ -7,10 +7,10 @@ export const tabsVariants = tv({
   slots: {
     base: "tabs",
     tab: "tabs__tab",
+    tabIndicator: "tabs__indicator",
     tabListWrapper: "tabs__list-wrapper",
     tabList: "tabs__list",
     tabPanel: "tabs__panel",
-    tabsIndicator: "tabs__indicator",
   },
 });
 

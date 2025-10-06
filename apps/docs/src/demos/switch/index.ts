@@ -8,6 +8,7 @@ export {Group} from "./group";
 export {GroupHorizontal} from "./group-horizontal";
 export {LabelPosition} from "./label-position";
 export {RenderProps} from "./render-props";
+export {Sizes} from "./sizes";
 export {WithDescription} from "./with-description";
-export {WithIcon} from "./with-icon";
+export {WithIcons} from "./with-icons";
 export {WithoutLabel} from "./without-label";
