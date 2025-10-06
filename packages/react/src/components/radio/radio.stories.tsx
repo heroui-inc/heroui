@@ -23,15 +23,15 @@ export const Default: Story = {
       <RadioGroup.Items>
         <Radio value="1">
           <Radio.Indicator />
-          <Radio.Label>Option 1</Radio.Label>
+          <Label>Option 1</Label>
         </Radio>
         <Radio value="2">
           <Radio.Indicator />
-          <Radio.Label>Option 2</Radio.Label>
+          <Label>Option 2</Label>
         </Radio>
         <Radio value="3">
           <Radio.Indicator />
-          <Radio.Label>Option 3</Radio.Label>
+          <Label>Option 3</Label>
         </Radio>
       </RadioGroup.Items>
     </RadioGroup>
@@ -40,20 +40,20 @@ export const Default: Story = {
 
 export const Horizontal: Story = {
   render: () => (
-    <RadioGroup defaultValue="small" orientation="horizontal">
-      <Label>Choose size</Label>
+    <RadioGroup defaultValue="1" orientation="horizontal">
+      <Label>Select an option</Label>
       <RadioGroup.Items>
-        <Radio value="small">
+        <Radio value="1">
           <Radio.Indicator />
-          <Radio.Label>Small</Radio.Label>
+          <Label>Option 1</Label>
         </Radio>
-        <Radio value="medium">
+        <Radio value="2">
           <Radio.Indicator />
-          <Radio.Label>Medium</Radio.Label>
+          <Label>Option 2</Label>
         </Radio>
-        <Radio value="large">
+        <Radio value="3">
           <Radio.Indicator />
-          <Radio.Label>Large</Radio.Label>
+          <Label>Option 3</Label>
         </Radio>
       </RadioGroup.Items>
     </RadioGroup>
@@ -68,15 +68,15 @@ export const WithDescription: Story = {
       <RadioGroup.Items>
         <Radio value="basic">
           <Radio.Indicator />
-          <Radio.Label>Basic</Radio.Label>
+          <Label>Basic</Label>
         </Radio>
         <Radio value="premium">
           <Radio.Indicator />
-          <Radio.Label>Premium</Radio.Label>
+          <Label>Premium</Label>
         </Radio>
         <Radio value="business">
           <Radio.Indicator />
-          <Radio.Label>Business</Radio.Label>
+          <Label>Business</Label>
         </Radio>
       </RadioGroup.Items>
     </RadioGroup>
@@ -91,11 +91,11 @@ export const Disabled: Story = {
         <RadioGroup.Items>
           <Radio value="1">
             <Radio.Indicator />
-            <Radio.Label>Option 1</Radio.Label>
+            <Label>Option 1</Label>
           </Radio>
           <Radio value="2">
             <Radio.Indicator />
-            <Radio.Label>Option 2</Radio.Label>
+            <Label>Option 2</Label>
           </Radio>
         </RadioGroup.Items>
       </RadioGroup>
@@ -105,15 +105,15 @@ export const Disabled: Story = {
         <RadioGroup.Items>
           <Radio value="1">
             <Radio.Indicator />
-            <Radio.Label>Option 1</Radio.Label>
+            <Label>Option 1</Label>
           </Radio>
           <Radio isDisabled value="2">
             <Radio.Indicator />
-            <Radio.Label>Option 2 (disabled)</Radio.Label>
+            <Label>Option 2 (disabled)</Label>
           </Radio>
           <Radio value="3">
             <Radio.Indicator />
-            <Radio.Label>Option 3</Radio.Label>
+            <Label>Option 3</Label>
           </Radio>
         </RadioGroup.Items>
       </RadioGroup>
@@ -124,15 +124,25 @@ export const Disabled: Story = {
 export const Invalid: Story = {
   render: () => (
     <RadioGroup isInvalid isRequired>
-      <Label>Select your preference</Label>
+      <Label>Select your plan</Label>
+      <Description>Choose the plan that best fits your needs</Description>
       <RadioGroup.Items>
-        <Radio value="yes">
+        <Radio value="basic">
           <Radio.Indicator />
-          <Radio.Label>Yes</Radio.Label>
+          <Label>Basic</Label>
+          <Description>Includes 100 messages per month and up to 3 themes to set up</Description>
         </Radio>
-        <Radio value="no">
+        <Radio value="premium">
           <Radio.Indicator />
-          <Radio.Label>No</Radio.Label>
+          <Label>Premium</Label>
+          <Description>Includes 200 messages per month and up to 6 themes to set up</Description>
+        </Radio>
+        <Radio value="business">
+          <Radio.Indicator />
+          <Label>Business</Label>
+          <Description>
+            Includes 1,000 messages per month and up to unlimited themes to set up
+          </Description>
         </Radio>
       </RadioGroup.Items>
       <FieldError>Please select an option</FieldError>
@@ -151,15 +161,15 @@ export const Controlled: Story = {
           <RadioGroup.Items>
             <Radio value="red">
               <Radio.Indicator />
-              <Radio.Label>Red</Radio.Label>
+              <Label>Red</Label>
             </Radio>
             <Radio value="green">
               <Radio.Indicator />
-              <Radio.Label>Green</Radio.Label>
+              <Label>Green</Label>
             </Radio>
             <Radio value="blue">
               <Radio.Indicator />
-              <Radio.Label>Blue</Radio.Label>
+              <Label>Blue</Label>
             </Radio>
           </RadioGroup.Items>
         </RadioGroup>
@@ -176,19 +186,43 @@ export const LongLabels: Story = {
       <RadioGroup.Items>
         <Radio value="1">
           <Radio.Indicator />
-          <Radio.Label>
+          <Label>
             I agree to receive marketing emails and understand that I can unsubscribe at any time
-          </Radio.Label>
+          </Label>
         </Radio>
         <Radio value="2">
           <Radio.Indicator />
-          <Radio.Label>
+          <Label>
             I prefer not to receive marketing emails but would like to stay informed about my
             account
-          </Radio.Label>
+          </Label>
         </Radio>
       </RadioGroup.Items>
     </RadioGroup>
+  ),
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <RadioGroup defaultValue="1" orientation="horizontal">
+        <Label>Select an option</Label>
+        <RadioGroup.Items>
+          <Radio size="sm" value="1">
+            <Radio.Indicator />
+            <Label className="text-xs">Small</Label>
+          </Radio>
+          <Radio size="md" value="2">
+            <Radio.Indicator />
+            <Label className="text-sm">Medium</Label>
+          </Radio>
+          <Radio size="lg" value="3">
+            <Radio.Indicator />
+            <Label className="text-base">Large</Label>
+          </Radio>
+        </RadioGroup.Items>
+      </RadioGroup>
+    </div>
   ),
 };
 
@@ -199,11 +233,11 @@ export const CustomStyles: Story = {
       <RadioGroup.Items>
         <Radio className="hover:bg-muted/50 rounded-lg border p-4" value="1">
           <Radio.Indicator />
-          <Radio.Label className="font-semibold">Premium Plan</Radio.Label>
+          <Label className="font-semibold">Premium Plan</Label>
         </Radio>
         <Radio className="hover:bg-muted/50 rounded-lg border p-4" value="2">
           <Radio.Indicator />
-          <Radio.Label className="font-semibold">Basic Plan</Radio.Label>
+          <Label className="font-semibold">Basic Plan</Label>
         </Radio>
       </RadioGroup.Items>
     </RadioGroup>
