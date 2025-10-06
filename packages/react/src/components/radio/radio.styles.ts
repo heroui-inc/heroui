@@ -7,7 +7,6 @@ export const radioVariants = tv({
     base: "radio",
     wrapper: "radio__wrapper",
     indicator: "radio__indicator",
-    label: "radio__label",
   },
   variants: {
     size: {
