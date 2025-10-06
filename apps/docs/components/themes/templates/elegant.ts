@@ -1,8 +1,6 @@
 import type {Config} from "../types";
 
-import {colors} from "@heroui/theme";
-
-import {initialLayout} from "../constants";
+import {initialDarkTheme, initialLayout, initialLightTheme} from "../constants";
 
 export const elegant: Config = {
   name: "elegant",
@@ -20,7 +18,7 @@ export const elegant: Config = {
     layoutColor: {
       foreground: "#4a4a4a",
       background: "#ffffff",
-      overlay: colors.black,
+      overlay: initialLightTheme.layoutColor.overlay,
       focus: "#db924b",
     },
     contentColor: {
@@ -44,7 +42,7 @@ export const elegant: Config = {
     layoutColor: {
       foreground: "#b0b0b0",
       background: "#000000",
-      overlay: colors.white,
+      overlay: initialDarkTheme.layoutColor.overlay,
       focus: "#000000",
     },
     contentColor: {

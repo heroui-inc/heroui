@@ -1,8 +1,6 @@
 import type {Config} from "../types";
 
-import {colors} from "@heroui/theme";
-
-import {initialLayout} from "../constants";
+import {initialDarkTheme, initialLayout, initialLightTheme} from "../constants";
 
 export const coffee: Config = {
   name: "coffee",
@@ -20,7 +18,7 @@ export const coffee: Config = {
     layoutColor: {
       foreground: "#a27225",
       background: "#fffbf6",
-      overlay: colors.black,
+      overlay: initialLightTheme.layoutColor.overlay,
       focus: "#db924b",
     },
     contentColor: {
@@ -45,7 +43,7 @@ export const coffee: Config = {
       foreground: "#c59f60",
       background: "#20161F",
       focus: "#db924b",
-      overlay: colors.white,
+      overlay: initialDarkTheme.layoutColor.overlay,
     },
     contentColor: {
       content1: "#2c1f2b",
