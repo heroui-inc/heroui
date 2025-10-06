@@ -102,7 +102,7 @@
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply flex size-5 rounded-full bg-white text-black sm:size-4;
+  @apply shadow-field flex size-5 rounded-full bg-white text-black sm:size-4;
   transition:
     margin 150ms var(--ease-out-quad),
     background-color 150ms var(--ease-smooth);
