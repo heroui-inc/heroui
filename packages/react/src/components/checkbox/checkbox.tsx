@@ -97,7 +97,6 @@ const CheckboxRoot = React.forwardRef<
     <CheckboxPrimitive
       ref={ref}
       data-checkbox
-      data-slot="control"
       {...props}
       className={composeTwRenderProps(className, slots.base())}
     >

@@ -1,0 +1,23 @@
+.input {
+  @apply bg-default text-foreground shadow-field placeholder:text-muted rounded-lg border px-3 py-2 text-sm outline-none;
+
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-default-hover;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+    background: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}

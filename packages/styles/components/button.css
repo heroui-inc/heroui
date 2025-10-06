@@ -5,27 +5,26 @@
   @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium md:h-9;
   transition:
     transform 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth);
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
 
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
   &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
   }
 
   /* Pending state */
   &[data-pending] {
-    @apply pointer-events-none;
+    @apply status-pending;
   }
 
   /* SVG icon styling - exclude spinner svgs */

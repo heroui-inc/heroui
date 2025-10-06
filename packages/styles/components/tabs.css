@@ -42,13 +42,20 @@
 .tabs__tab {
   position: relative;
   z-index: 1;
-  cursor: var(--cursor-interactive);
 
-  @apply text-segment-foreground ease-out-quad flex h-8 w-full items-center justify-center rounded-lg px-4 text-center font-medium outline-none transition-[color,opacity] duration-200;
+  @apply text-segment-foreground flex h-8 w-full items-center justify-center rounded-lg px-4 text-center font-medium outline-none;
+
+  transition:
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out),
+    opacity 150ms var(--ease-smooth);
 
   /* Disabled state */
-  &[data-disabled="true"] {
-    @apply cursor-not-allowed opacity-[var(--disabled-opacity)];
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
   }
 
   /* Hover states - both approaches for compatibility */
@@ -60,8 +67,7 @@
   /* Focus states - comprehensive fallback */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   @media (prefers-reduced-motion: reduce) {

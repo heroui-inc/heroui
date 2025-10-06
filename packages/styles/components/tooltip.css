@@ -53,9 +53,19 @@
 
 /* Tooltip trigger */
 .tooltip__trigger {
+  transition:
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+
+  cursor: var(--cursor-interactive);
+
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }

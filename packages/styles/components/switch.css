@@ -9,8 +9,7 @@
   &:disabled,
   &[data-disabled="true"],
   &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
 
     .switch__thumb {
       @apply bg-default-foreground/20;
@@ -38,13 +37,13 @@
 
   transition:
     background-color 150ms var(--ease-smooth),
-    transform 150ms var(--ease-out);
+    transform 150ms var(--ease-out),
+    box-shadow 150ms var(--ease-out);
 
   /* Focus states */
   .switch:focus-visible &,
   .switch[data-focus-visible="true"] & {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Hover states */
@@ -93,7 +92,7 @@
 
 /* Size-specific control dimensions */
 .switch--sm .switch__control {
-  @apply h-[18px] w-[36px] sm:h-[16px] sm:w-[28px];
+  @apply h-[18px] w-[30px] sm:h-[16px] sm:w-[26px];
 }
 
 .switch--lg .switch__control {
