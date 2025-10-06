@@ -21,7 +21,7 @@
 .tabs__list {
   @apply bg-surface-2 inline-flex p-1;
 
-  border-radius: calc(var(--radius-lg) + 0.25rem);
+  border-radius: calc(var(--radius-md) + 0.25rem);
 
   /* Horizontal orientation */
   &[data-orientation="horizontal"] {
@@ -100,7 +100,7 @@
   transition-duration: 250ms;
   transition-property: translate, width, height;
   transition-timing-function: var(--ease-out);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   width: 100%;
   height: 100%;
 
