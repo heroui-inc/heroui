@@ -2,7 +2,7 @@
 
 /* Base popover styles */
 .popover {
-  @apply bg-panel origin-[var(--trigger-anchor-point)] rounded-lg border p-0 text-sm shadow-md will-change-transform dark:shadow-none;
+  @apply bg-panel origin-[var(--trigger-anchor-point)] rounded-md border p-0 text-sm shadow-md will-change-transform dark:shadow-none;
 
   /* Entering animations */
   &[data-entering] {

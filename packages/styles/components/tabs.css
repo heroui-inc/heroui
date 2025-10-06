@@ -43,7 +43,7 @@
   position: relative;
   z-index: 1;
 
-  @apply text-segment-foreground flex h-8 w-full items-center justify-center rounded-lg px-4 text-center font-medium outline-none;
+  @apply text-segment-foreground flex h-8 w-full items-center justify-center rounded-md px-4 text-center font-medium outline-none;
 
   transition:
     color 150ms var(--ease-smooth),

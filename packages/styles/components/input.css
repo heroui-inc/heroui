@@ -1,5 +1,5 @@
 .input {
-  @apply bg-default text-foreground shadow-field placeholder:text-muted rounded-lg border px-3 py-2 text-sm outline-none;
+  @apply bg-default text-foreground shadow-field placeholder:text-muted rounded-md border px-3 py-2 text-sm outline-none;
 
   transition:
     background-color 150ms var(--ease-smooth),

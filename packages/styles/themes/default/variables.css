@@ -42,7 +42,7 @@
     --panel: var(--white);
     --panel-foreground: var(--foreground);
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --muted: var(--color-neutral-500);
 
