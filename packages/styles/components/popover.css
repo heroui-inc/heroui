@@ -2,7 +2,7 @@
 
 /* Base popover styles */
 .popover {
-  @apply bg-panel origin-[var(--trigger-anchor-point)] rounded-lg border p-0 text-sm shadow-md will-change-transform dark:shadow-none;
+  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-md p-0 text-sm will-change-transform dark:shadow-none;
 
   /* Entering animations */
   &[data-entering] {
@@ -32,21 +32,21 @@
   }
 
   /* Arrow styling */
-  & [data-overlay-arrow] {
+  & [data-slot="overlay-arrow"] {
     fill: var(--panel);
     stroke: var(--border);
   }
 
   /* Arrow rotation based on placement */
-  &[data-placement="bottom"] [data-overlay-arrow] {
+  &[data-placement="bottom"] [data-slot="overlay-arrow"] {
     rotate: 180deg;
   }
 
-  &[data-placement="left"] [data-overlay-arrow] {
+  &[data-placement="left"] [data-slot="overlay-arrow"] {
     rotate: -90deg;
   }
 
-  &[data-placement="right"] [data-overlay-arrow] {
+  &[data-placement="right"] [data-slot="overlay-arrow"] {
     rotate: 90deg;
   }
 }

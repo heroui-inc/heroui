@@ -35,8 +35,16 @@
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
 
-  --shadow-border: var(--shadow-with-border);
-  --shadow-field: var(--shadow-form-field);
+  --shadow-panel: var(--panel-shadow);
+  --shadow-field: var(--field-shadow);
+
+  /* Form Field Tokens */
+  --color-field: var(--field-background, var(--color-default));
+  --color-field-foreground: var(--field-foreground, var(--color-foreground));
+  --color-field-placeholder: var(--field-placeholder, var(--color-muted));
+  --color-field-border: var(--field-border, var(--color-border));
+  --radius-field: var(--field-radius, var(--radius-md));
+  --border-width-field: var(--field-border-width, var(--border-width));
 
   /* Calculated Variables */
 
@@ -50,11 +58,6 @@
     in oklab,
     var(--color-default) 90%,
     var(--color-default-foreground) 2%
-  );
-  --color-accent-hover: color-mix(
-    in oklab,
-    var(--color-accent) 90%,
-    var(--color-accent-foreground) 20%
   );
   --color-accent-soft-hover: color-mix(
     in oklab,
@@ -75,6 +78,29 @@
     in oklab,
     var(--color-danger) 90%,
     var(--color-danger-foreground) 10%
+  );
+
+  /* Form Field Colors */
+  --color-field-hover: color-mix(
+    in oklab,
+    var(--color-field) 90%,
+    var(--color-field-foreground) 2%
+  );
+  --color-field-focus: transparent;
+  --color-accent-hover: color-mix(
+    in oklab,
+    var(--color-accent) 90%,
+    var(--color-accent-foreground) 20%
+  );
+  --color-field-border-hover: color-mix(
+    in oklab,
+    var(--color-field-border) 88%,
+    var(--color-field-foreground) 8%
+  );
+  --color-field-border-focus: color-mix(
+    in oklab,
+    var(--color-field-border) 74%,
+    var(--color-field-foreground) 22%
   );
 
   /* Surface Colors */

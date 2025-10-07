@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium md:h-9;
+  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent px-4 font-medium md:h-9;
   transition:
     transform 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
@@ -28,7 +28,7 @@
   }
 
   /* SVG icon styling - exclude spinner svgs */
-  & svg:not([data-spinner] svg) {
+  & svg:not([data-slot="spinner"] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
 
@@ -41,7 +41,7 @@
 .button--sm {
   @apply h-9 px-3 text-sm md:h-8;
 
-  & svg:not([data-spinner] svg) {
+  & svg:not([data-slot="spinner"] svg) {
     @apply size-4;
   }
 

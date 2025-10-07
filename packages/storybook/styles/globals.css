@@ -17,22 +17,31 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Overrides light theme field tokens */
+  /* --field-background: var(--color-neutral-200);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--color-neutral-500);
+  --field-border: var(--border);
+  --field-border-width: 0px;
+  --field-radius: calc(var(--radius) * 0.75);
+  --field-shadow: none; */
 }
 
 [data-theme="light"],
 .light {
   /* --background: #f9f9f9; */
-  /* -skeleton-default-animation-type: none; */ /* possible values: shimmer, pulse, none */
+  /* --skeleton-animation: none; */ /* possible values: shimmer, pulse, none */
 }
 
-/* Dark theme overrides sing data-theme or class */
+/* Dark theme overrides using data-theme or class */
 [data-theme="dark"],
 .dark {
   /* Your values */
   /* --radius: 0.5rem; */
   /* --cursor: default; */
 
-  --cursor-interactive: pointer; /* possible values: shimmer, pulse, none */
+  --cursor-interactive: pointer;
 }
 
 /* @theme inline { */
@@ -50,6 +59,10 @@
 /* @utility button {
   @apply rounded-lg;
 } */
+
+@theme inline {
+  /* --color-field-focus: var(--color-neutral-300); */
+}
 
 body {
   background-color: var(--background);

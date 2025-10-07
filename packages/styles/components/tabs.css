@@ -21,7 +21,7 @@
 .tabs__list {
   @apply bg-surface-2 inline-flex p-1;
 
-  border-radius: calc(var(--radius-lg) + 0.25rem);
+  border-radius: calc(var(--radius-md) + 0.25rem);
 
   /* Horizontal orientation */
   &[data-orientation="horizontal"] {
@@ -43,7 +43,7 @@
   position: relative;
   z-index: 1;
 
-  @apply text-segment-foreground flex h-8 w-full items-center justify-center rounded-lg px-4 text-center font-medium outline-none;
+  @apply text-segment-foreground flex h-8 w-full items-center justify-center rounded-md px-4 text-center font-medium outline-none;
 
   transition:
     color 150ms var(--ease-smooth),
@@ -91,7 +91,7 @@
 
 /* Tab indicator - React Aria's SelectionIndicator */
 .tabs__indicator {
-  @apply bg-segment shadow-border;
+  @apply bg-segment shadow-panel;
 
   position: absolute;
   top: 0;
@@ -100,7 +100,7 @@
   transition-duration: 250ms;
   transition-property: translate, width, height;
   transition-timing-function: var(--ease-out);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   width: 100%;
   height: 100%;
 

@@ -35,7 +35,7 @@ const PopoverRoot = ({
 
   return (
     <PopoverContext.Provider value={{slots}}>
-      <PopoverTriggerPrimitive data-popover-root {...props}>
+      <PopoverTriggerPrimitive data-slot="popover-root" {...props}>
         {children}
       </PopoverTriggerPrimitive>
     </PopoverContext.Provider>
@@ -78,22 +78,25 @@ const PopoverArrow = React.forwardRef<
   Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {children?: React.ReactNode}
 >(({children, className, ...props}, ref) => {
   const defaultArrow = (
-    <svg data-overlay-arrow height={12} viewBox="0 0 12 12" width={12}>
+    <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
       <path d="M0 0 L6 6 L12 0" />
     </svg>
   );
 
   const arrow = React.isValidElement(children)
     ? React.cloneElement(
-        children as React.ReactElement<{className?: string; "data-overlay-arrow"?: boolean}>,
+        children as React.ReactElement<{
+          className?: string;
+          "data-slot"?: "overlay-arrow";
+        }>,
         {
-          "data-overlay-arrow": true,
+          "data-slot": "overlay-arrow",
         },
       )
     : defaultArrow;
 
   return (
-    <OverlayArrow ref={ref} data-popover-overlay {...props} className={className}>
+    <OverlayArrow ref={ref} data-slot="popover-overlay" {...props} className={className}>
       {arrow}
     </OverlayArrow>
   );
@@ -112,7 +115,7 @@ const PopoverDialog = React.forwardRef<
   return (
     <DialogPrimitive
       ref={ref}
-      data-popover-dialog
+      data-slot="popover-dialog"
       {...props}
       className={slots?.dialog({className})}
     >
@@ -130,7 +133,12 @@ const PopoverTrigger = ({children, className, ...props}: React.HTMLAttributes<HT
 
   return (
     <PressablePrimitive>
-      <div data-popover-trigger className={slots?.trigger({className})} role="button" {...props}>
+      <div
+        className={slots?.trigger({className})}
+        data-slot="popover-trigger"
+        role="button"
+        {...props}
+      >
         {children}
       </div>
     </PressablePrimitive>

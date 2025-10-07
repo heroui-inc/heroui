@@ -35,7 +35,7 @@ const InputOTPRoot = React.forwardRef<HTMLInputElement, InputOTPRootProps>(
 
     return (
       <InputOTPContext.Provider value={{slots}}>
-        <div data-input-otp className={slots.base({className})}>
+        <div className={slots.base({className})} data-slot="input-otp">
           <OTPInput
             ref={ref}
             disabled={isDisabled}
@@ -82,7 +82,7 @@ const InputOTPGroup = React.forwardRef<HTMLDivElement, InputOTPGroupProps>(
     const {slots: contextSlots} = useContext(InputOTPContext);
 
     return (
-      <div ref={ref} data-input-otp-group className={contextSlots?.group({className})}>
+      <div ref={ref} className={contextSlots?.group({className})} data-slot="input-otp-group">
         {React.Children.map(children, (child, index) => {
           if (React.isValidElement(child) && child.type === InputOTPSlot) {
             const slotData = slots[index];
@@ -124,16 +124,18 @@ const InputOTPSlot = React.forwardRef<HTMLDivElement, InputOTPSlotProps>(
       <div
         ref={ref}
         {...props}
-        data-input-otp-slot
         className={slots?.slot({className, isActive, isFilled: !!char})}
         data-active={isActive || undefined}
+        data-slot="input-otp-slot"
       >
         {char ? (
-          <div data-input-otp-slot-value className={slots?.slotValue()}>
+          <div className={slots?.slotValue()} data-slot="input-otp-slot-value">
             {char}
           </div>
         ) : null}
-        {hasFakeCaret && isActive ? <div data-input-otp-caret className={slots?.caret()} /> : null}
+        {hasFakeCaret && isActive ? (
+          <div className={slots?.caret()} data-slot="input-otp-caret" />
+        ) : null}
       </div>
     );
   },
@@ -154,8 +156,8 @@ const InputOTPSeparator = React.forwardRef<HTMLDivElement, InputOTPSeparatorProp
     return (
       <div
         ref={ref}
-        data-input-otp-separator
         className={slots?.separator({className})}
+        data-slot="input-otp-separator"
         {...props}
       />
     );

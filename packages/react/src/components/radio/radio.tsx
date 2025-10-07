@@ -39,7 +39,7 @@ const RadioGroupRoot = React.forwardRef<
     <RadioGroupContext.Provider value={{slots}}>
       <RadioGroupPrimitive
         ref={ref}
-        data-radio-group
+        data-slot="radio-group"
         {...props}
         className={composeTwRenderProps(className, slots.base())}
       >
@@ -60,7 +60,12 @@ const RadioGroupItems = React.forwardRef<HTMLDivElement, RadioGroupItemsProps>(
     const {slots} = useContext(RadioGroupContext);
 
     return (
-      <div ref={ref} data-radio-group-items className={slots?.items({className})} {...props} />
+      <div
+        ref={ref}
+        className={slots?.items({className})}
+        data-slot="radio-group-items"
+        {...props}
+      />
     );
   },
 );
@@ -95,7 +100,7 @@ const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, Radi
       <RadioContext.Provider value={{slots}}>
         <RadioPrimitive
           ref={ref}
-          data-radio
+          data-slot="radio"
           {...props}
           className={composeTwRenderProps(className, slots.base())}
         >
@@ -117,8 +122,8 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
     const {slots} = useContext(RadioContext);
 
     return (
-      <span ref={ref} data-radio-wrapper className={slots?.wrapper({className})} {...props}>
-        <span data-radio-indicator className={slots?.indicator()} />
+      <span ref={ref} className={slots?.wrapper({className})} data-slot="radio-wrapper" {...props}>
+        <span className={slots?.indicator()} data-slot="radio-indicator" />
       </span>
     );
   },

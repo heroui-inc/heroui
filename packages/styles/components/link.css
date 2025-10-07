@@ -28,7 +28,7 @@
     @apply text-muted pointer-events-none inline-flex size-4 shrink-0 items-center justify-center;
   }
 
-  .link__icon[data-link-default-icon] {
+  .link__icon[data-default-icon="true"] {
     @apply pb-1.5;
   }
 
