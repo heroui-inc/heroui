@@ -19,10 +19,7 @@ interface SkeletonProps
 const Skeleton = React.forwardRef<React.ElementRef<"div">, SkeletonProps>(
   ({animationType, className, ...props}, ref) => {
     // Use the new hook to get CSS variable value with SSR support
-    const resolvedAnimationType = useCSSVariable(
-      "--skeleton-animation",
-      animationType,
-    );
+    const resolvedAnimationType = useCSSVariable("--skeleton-animation", animationType);
 
     const slots = React.useMemo(
       () =>
