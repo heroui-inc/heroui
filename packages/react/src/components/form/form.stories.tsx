@@ -4,8 +4,7 @@ import React from "react";
 
 import {Button} from "../button";
 import {Checkbox} from "../checkbox";
-import {Description} from "../description";
-import {Label} from "../label";
+import {Description, Label} from "../field";
 import {Radio, RadioGroup} from "../radio";
 import {TextField} from "../text-field";
 

@@ -1,38 +1,32 @@
 "use client";
 
 import type {TextFieldVariants} from "./text-field.styles";
+import type {DescriptionProps} from "../description";
+import type {FieldErrorProps} from "../field";
+import type {InputProps} from "../input";
+import type {LabelProps} from "../label";
 import type {
-  FieldErrorProps as FieldErrorPrimitiveProps,
-  InputProps as InputPrimitiveProps,
-  LabelProps as LabelPrimitiveProps,
-  TextAreaProps as TextAreaPrimitiveProps,
   TextFieldProps as TextFieldPrimitiveProps,
-  TextProps as TextPrimitiveProps,
+  TextFieldRenderProps,
 } from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
-import {
-  FieldError as FieldErrorPrimitive,
-  Input as InputPrimitive,
-  Label as LabelPrimitive,
-  TextArea as TextAreaPrimitive,
-  TextField as TextFieldPrimitive,
-  Text as TextPrimitive,
-} from "react-aria-components";
+import {TextField as TextFieldPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
+import {Description} from "../description";
+import {FieldError} from "../field";
+import {Input} from "../input";
+import {Label} from "../label";
 
 import {textFieldVariants} from "./text-field.styles";
 
-/* -------------------------------------------------------------------------------------------------
- * TextField Context
- * -----------------------------------------------------------------------------------------------*/
-
-interface TextFieldContext {
-  slots?: ReturnType<typeof textFieldVariants>;
-}
-
-const TextFieldContext = createContext<TextFieldContext>({});
+const TextFieldContext = createContext<TextFieldRenderProps>({
+  isDisabled: false,
+  isInvalid: false,
+  isReadOnly: false,
+  isRequired: false,
+});
 
 /* -------------------------------------------------------------------------------------------------
  * TextField
@@ -43,25 +37,22 @@ interface TextFieldRootProps extends TextFieldPrimitiveProps, TextFieldVariants 
 const TextFieldRoot = React.forwardRef<
   React.ElementRef<typeof TextFieldPrimitive>,
   TextFieldRootProps
->(({children, className, isDisabled, isInvalid, ...props}, ref) => {
-  const slots = React.useMemo(
-    () => textFieldVariants({isDisabled, isInvalid}),
-    [isDisabled, isInvalid],
-  );
+>(({children, className, ...props}, ref) => {
+  const styles = React.useMemo(() => textFieldVariants({}), []);
 
   return (
-    <TextFieldContext.Provider value={{slots}}>
-      <TextFieldPrimitive
-        ref={ref}
-        data-slot="text-field"
-        isDisabled={isDisabled}
-        isInvalid={isInvalid}
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </TextFieldPrimitive>
-    </TextFieldContext.Provider>
+    <TextFieldPrimitive
+      ref={ref}
+      data-slot="text-field"
+      {...props}
+      className={composeTwRenderProps(className, styles)}
+    >
+      {(values) => (
+        <TextFieldContext.Provider value={values}>
+          {typeof children === "function" ? children(values) : children}
+        </TextFieldContext.Provider>
+      )}
+    </TextFieldPrimitive>
   );
 });
 
@@ -69,131 +60,53 @@ TextFieldRoot.displayName = "HeroUI.TextField";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TextFieldLabelProps extends LabelPrimitiveProps {
-  isRequired?: boolean;
-}
+interface TextFieldLabelProps extends LabelProps {}
 
-const TextFieldLabel = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive>,
-  TextFieldLabelProps
->(({children, className, isRequired, ...props}, ref) => {
-  const {slots} = useContext(TextFieldContext);
+const TextFieldLabel = React.forwardRef<React.ElementRef<typeof Label>, TextFieldLabelProps>(
+  ({...props}, ref) => {
+    const {isDisabled, isInvalid, isRequired} = useContext(TextFieldContext);
 
-  return (
-    <div className={slots?.labelWrapper()} data-slot="text-field-label-wrapper">
-      <LabelPrimitive
+    return (
+      <Label
         ref={ref}
-        data-slot="text-field-label"
+        isDisabled={isDisabled}
+        isInvalid={isInvalid}
+        isRequired={isRequired}
         {...props}
-        className={slots?.label({className})}
       >
-        {children}
-      </LabelPrimitive>
-      {!!isRequired && (
-        <span className={slots?.required()} data-slot="text-field-required">
-          *
-        </span>
-      )}
-    </div>
-  );
-});
+        {props.children}
+      </Label>
+    );
+  },
+);
 
 TextFieldLabel.displayName = "HeroUI.TextField.Label";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TextFieldInputProps extends InputPrimitiveProps {}
+interface TextFieldInputProps extends InputProps {}
 
-const TextFieldInput = React.forwardRef<
-  React.ElementRef<typeof InputPrimitive>,
-  TextFieldInputProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(TextFieldContext);
-
-  return (
-    <div className={slots?.inputWrapper()} data-slot="text-field-input-wrapper">
-      <InputPrimitive
-        ref={ref}
-        data-slot="text-field-input"
-        {...props}
-        className={composeTwRenderProps(className, slots?.input())}
-      />
-    </div>
-  );
-});
+const TextFieldInput = Input;
 
 TextFieldInput.displayName = "HeroUI.TextField.Input";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TextFieldTextAreaProps extends TextAreaPrimitiveProps {}
-
-const TextFieldTextArea = React.forwardRef<
-  React.ElementRef<typeof TextAreaPrimitive>,
-  TextFieldTextAreaProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(TextFieldContext);
-
-  return (
-    <div className={slots?.inputWrapper()} data-slot="text-field-textarea-wrapper">
-      <TextAreaPrimitive
-        ref={ref}
-        data-slot="text-field-textarea"
-        {...props}
-        className={composeTwRenderProps(className, slots?.textarea())}
-      />
-    </div>
-  );
-});
-
-TextFieldTextArea.displayName = "HeroUI.TextField.TextArea";
+// TODO: Add TextArea
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TextFieldDescriptionProps extends TextPrimitiveProps {}
+interface TextFieldDescriptionProps extends DescriptionProps {}
 
-const TextFieldDescription = React.forwardRef<
-  React.ElementRef<typeof TextPrimitive>,
-  TextFieldDescriptionProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(TextFieldContext);
-
-  return (
-    <TextPrimitive
-      ref={ref}
-      data-slot="text-field-description"
-      slot="description"
-      {...props}
-      className={slots?.description({className}) as string}
-    />
-  );
-});
+const TextFieldDescription = Description;
 
 TextFieldDescription.displayName = "HeroUI.TextField.Description";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TextFieldErrorProps extends FieldErrorPrimitiveProps {}
+interface TextFieldErrorProps extends FieldErrorProps {}
 
-const TextFieldError = React.forwardRef<
-  React.ElementRef<typeof FieldErrorPrimitive>,
-  TextFieldErrorProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(TextFieldContext);
-
-  return (
-    <FieldErrorPrimitive
-      ref={ref}
-      data-slot="text-field-error"
-      {...props}
-      className={composeTwRenderProps(className, slots?.error())}
-    >
-      {(renderProps) =>
-        typeof props.children === "function" ? props.children(renderProps) : props.children
-      }
-    </FieldErrorPrimitive>
-  );
-});
+const TextFieldError = FieldError;
 
 TextFieldError.displayName = "HeroUI.TextField.Error";
 
@@ -204,7 +117,7 @@ TextFieldError.displayName = "HeroUI.TextField.Error";
 const CompoundTextField = Object.assign(TextFieldRoot, {
   Label: TextFieldLabel,
   Input: TextFieldInput,
-  TextArea: TextFieldTextArea,
+  // TextArea: TextFieldTextArea, // TODO: Add TextArea
   Description: TextFieldDescription,
   Error: TextFieldError,
 });
@@ -215,7 +128,6 @@ export type {
   TextFieldRootProps as TextFieldProps,
   TextFieldLabelProps,
   TextFieldInputProps,
-  TextFieldTextAreaProps,
   TextFieldDescriptionProps,
   TextFieldErrorProps,
 };

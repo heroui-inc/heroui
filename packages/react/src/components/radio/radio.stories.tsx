@@ -2,9 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Description} from "../description";
-import {FieldError} from "../fieldset";
-import {Label} from "../label";
+import {Description, FieldError, Label} from "../field";
 
 import {Radio, RadioGroup} from "./radio";
 
