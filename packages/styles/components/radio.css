@@ -15,7 +15,7 @@
 
 /* Radio wrapper */
 .radio__wrapper {
-  @apply bg-background relative inline-flex size-4 shrink-0 items-center justify-center rounded-full border shadow-sm;
+  @apply bg-field shadow-field border-field relative inline-flex size-4 shrink-0 items-center justify-center rounded-full border [border-width:var(--border-width-field)];
 
   transition:
     background-color 150ms var(--ease-smooth),
@@ -26,19 +26,19 @@
   /* Focus ring styles */
   .radio:focus-visible &,
   .radio[data-focus-visible="true"] & {
-    @apply status-focused;
+    @apply status-focused border-field-border-focus [border-width:calc(var(--border-width-field)*2)];
   }
 
   /* Hover state */
   .radio:hover &,
   .radio[data-hovered="true"] & {
-    @apply border-accent;
+    @apply border-field-border-hover;
   }
 
   /* Selected state */
   .radio[aria-checked="true"] &,
   .radio[data-selected="true"] & {
-    @apply bg-accent border-accent-hover;
+    @apply bg-accent border-field-border-hover;
   }
 
   /* Invalid/Error state */
@@ -58,7 +58,7 @@
 
 /* Radio indicator */
 .radio__indicator {
-  @apply bg-background absolute inset-0 m-auto size-[6px] rounded-full;
+  @apply bg-field absolute inset-0 m-auto size-[6px] rounded-full;
 
   transition:
     background-color 150ms var(--ease-smooth),
