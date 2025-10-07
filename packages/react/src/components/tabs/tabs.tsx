@@ -44,8 +44,8 @@ const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsPr
         <TabsPrimitive
           {...props}
           ref={ref}
-          data-tabs
           className={composeTwRenderProps(className, slots.base())}
+          data-slot="tabs"
           orientation={orientation}
         >
           {children}
@@ -69,8 +69,8 @@ const TabListWrapper = React.forwardRef<React.ElementRef<"div">, TabListWrapperP
 
     return (
       <div
-        data-tabs-list-wrapper
         className={slots?.tabListWrapper({className})}
+        data-slot="tabs-list-wrapper"
         {...props}
         ref={ref}
       >
@@ -97,8 +97,8 @@ const TabList = React.forwardRef<React.ElementRef<typeof TabListPrimitive>, TabL
       <TabListPrimitive
         {...props}
         ref={ref}
-        data-tabs-list
         className={composeTwRenderProps(className, slots?.tabList())}
+        data-slot="tabs-list"
       >
         {children}
       </TabListPrimitive>
@@ -122,8 +122,8 @@ const Tab = React.forwardRef<React.ElementRef<typeof TabPrimitive>, TabProps>(
       <TabPrimitive
         {...props}
         ref={ref}
-        data-tabs-tab
         className={composeTwRenderProps(className, slots?.tab())}
+        data-slot="tabs-tab"
       >
         {children}
       </TabPrimitive>
@@ -148,8 +148,8 @@ const TabIndicator = React.forwardRef<
   return (
     <SelectionIndicatorPrimitive
       ref={ref}
-      data-tabs-indicator
       className={slots?.tabIndicator({className})}
+      data-slot="tabs-indicator"
       {...props}
     />
   );
@@ -172,8 +172,8 @@ const TabPanel = React.forwardRef<React.ElementRef<typeof TabPanelPrimitive>, Ta
       <TabPanelPrimitive
         {...props}
         ref={ref}
-        data-tabs-panel
         className={composeTwRenderProps(className, slots?.tabPanel())}
+        data-slot="tabs-panel"
       >
         {children}
       </TabPanelPrimitive>

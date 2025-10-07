@@ -32,7 +32,7 @@ const FormRoot = React.forwardRef<React.ElementRef<typeof FormPrimitive>, FormRo
     if (asChild) {
       return (
         <FormContext.Provider value={{slots}}>
-          <SlotPrimitive data-form-root className={slots?.base({className})} {...rest}>
+          <SlotPrimitive className={slots?.base({className})} data-slot="form-root" {...rest}>
             {children}
           </SlotPrimitive>
         </FormContext.Provider>
@@ -41,7 +41,12 @@ const FormRoot = React.forwardRef<React.ElementRef<typeof FormPrimitive>, FormRo
 
     return (
       <FormContext.Provider value={{slots}}>
-        <FormPrimitive ref={ref} data-form-root className={slots.base({className})} {...rest}>
+        <FormPrimitive
+          ref={ref}
+          className={slots.base({className})}
+          data-slot="form-root"
+          {...rest}
+        >
           {children}
         </FormPrimitive>
       </FormContext.Provider>
@@ -65,7 +70,12 @@ const FormSection = React.forwardRef<HTMLDivElement, FormSectionProps>(
     const Component = asChild ? SlotPrimitive : "div";
 
     return (
-      <Component ref={ref} data-form-section className={slots?.section({className})} {...rest}>
+      <Component
+        ref={ref}
+        className={slots?.section({className})}
+        data-slot="form-section"
+        {...rest}
+      >
         {children}
       </Component>
     );
@@ -88,7 +98,12 @@ const FormActions = React.forwardRef<HTMLDivElement, FormActionsProps>(
     const Component = asChild ? SlotPrimitive : "div";
 
     return (
-      <Component ref={ref} data-form-actions className={slots?.actions({className})} {...rest}>
+      <Component
+        ref={ref}
+        className={slots?.actions({className})}
+        data-slot="form-actions"
+        {...rest}
+      >
         {children}
       </Component>
     );

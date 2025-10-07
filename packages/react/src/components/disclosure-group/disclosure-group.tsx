@@ -39,7 +39,7 @@ const DisclosureGroup = React.forwardRef<
     <DisclosureGroupContext.Provider value={{slots}}>
       <DisclosureGroupPrimitive
         ref={ref}
-        data-disclosure-group
+        data-slot="disclosure-group"
         {...props}
         className={composeTwRenderProps(className, slots.base())}
       >

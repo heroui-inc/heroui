@@ -32,7 +32,7 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardRootProps>(
 
     return (
       <CardContext.Provider value={{slots}}>
-        <Comp ref={ref} data-card className={slots.base({className})} {...props}>
+        <Comp ref={ref} className={slots.base({className})} data-slot="card" {...props}>
           {children}
         </Comp>
       </CardContext.Provider>
@@ -55,7 +55,9 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "div";
 
-    return <Comp ref={ref} data-card-header className={slots?.header({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.header({className})} data-slot="card-header" {...props} />
+    );
   },
 );
 
@@ -74,7 +76,9 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "h3";
 
-    return <Comp ref={ref} data-card-title className={slots?.title({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.title({className})} data-slot="card-title" {...props} />
+    );
   },
 );
 
@@ -96,8 +100,8 @@ const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionPr
     return (
       <Comp
         ref={ref}
-        data-card-description
         className={slots?.description({className})}
+        data-slot="card-description"
         {...props}
       />
     );
@@ -119,7 +123,9 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "div";
 
-    return <Comp ref={ref} data-card-content className={slots?.content({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.content({className})} data-slot="card-content" {...props} />
+    );
   },
 );
 
@@ -138,7 +144,9 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "div";
 
-    return <Comp ref={ref} data-card-footer className={slots?.footer({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.footer({className})} data-slot="card-footer" {...props} />
+    );
   },
 );
 

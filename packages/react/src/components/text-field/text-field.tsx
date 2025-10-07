@@ -53,7 +53,7 @@ const TextFieldRoot = React.forwardRef<
     <TextFieldContext.Provider value={{slots}}>
       <TextFieldPrimitive
         ref={ref}
-        data-text-field
+        data-slot="text-field"
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         {...props}
@@ -80,17 +80,17 @@ const TextFieldLabel = React.forwardRef<
   const {slots} = useContext(TextFieldContext);
 
   return (
-    <div data-text-field-label-wrapper className={slots?.labelWrapper()}>
+    <div className={slots?.labelWrapper()} data-slot="text-field-label-wrapper">
       <LabelPrimitive
         ref={ref}
-        data-text-field-label
+        data-slot="text-field-label"
         {...props}
         className={slots?.label({className})}
       >
         {children}
       </LabelPrimitive>
       {!!isRequired && (
-        <span data-text-field-required className={slots?.required()}>
+        <span className={slots?.required()} data-slot="text-field-required">
           *
         </span>
       )}
@@ -111,10 +111,10 @@ const TextFieldInput = React.forwardRef<
   const {slots} = useContext(TextFieldContext);
 
   return (
-    <div data-text-field-input-wrapper className={slots?.inputWrapper()}>
+    <div className={slots?.inputWrapper()} data-slot="text-field-input-wrapper">
       <InputPrimitive
         ref={ref}
-        data-text-field-input
+        data-slot="text-field-input"
         {...props}
         className={composeTwRenderProps(className, slots?.input())}
       />
@@ -135,10 +135,10 @@ const TextFieldTextArea = React.forwardRef<
   const {slots} = useContext(TextFieldContext);
 
   return (
-    <div data-text-field-textarea-wrapper className={slots?.inputWrapper()}>
+    <div className={slots?.inputWrapper()} data-slot="text-field-textarea-wrapper">
       <TextAreaPrimitive
         ref={ref}
-        data-text-field-textarea
+        data-slot="text-field-textarea"
         {...props}
         className={composeTwRenderProps(className, slots?.textarea())}
       />
@@ -161,7 +161,7 @@ const TextFieldDescription = React.forwardRef<
   return (
     <TextPrimitive
       ref={ref}
-      data-text-field-description
+      data-slot="text-field-description"
       slot="description"
       {...props}
       className={slots?.description({className}) as string}
@@ -184,7 +184,7 @@ const TextFieldError = React.forwardRef<
   return (
     <FieldErrorPrimitive
       ref={ref}
-      data-text-field-error
+      data-slot="text-field-error"
       {...props}
       className={composeTwRenderProps(className, slots?.error())}
     >

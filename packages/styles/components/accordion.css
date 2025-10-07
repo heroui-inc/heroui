@@ -103,11 +103,12 @@
 
 .accordion--outline .accordion__item {
   /* Special rounding for first and last items in outline variant */
-  &:first-child [data-accordion-trigger] {
+  &:first-child [data-slot="accordion-trigger"] {
     @apply rounded-t-lg;
   }
 
-  &:last-child:not(:has([data-accordion-trigger][aria-expanded="true"])) [data-accordion-trigger] {
+  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
+    [data-slot="accordion-trigger"] {
     @apply rounded-b-lg;
   }
 }

@@ -11,7 +11,7 @@ const SpinnerPrimitive = React.forwardRef<React.ElementRef<"svg">, React.SVGProp
     const id = useId();
 
     return (
-      <svg ref={ref} data-slot-icon viewBox="0 0 24 24" {...props}>
+      <svg ref={ref} data-slot="spinner-icon" viewBox="0 0 24 24" {...props}>
         <defs>
           <linearGradient
             id={`«data-slot-icon-def-1»-${id}`}
@@ -62,7 +62,7 @@ const Spinner = React.forwardRef<React.ElementRef<typeof SpinnerPrimitive>, Spin
   ({className, color, size, ...props}, ref) => {
     return (
       <span
-        data-spinner
+        data-slot="spinner"
         className={spinnerVariants({
           className,
           color,

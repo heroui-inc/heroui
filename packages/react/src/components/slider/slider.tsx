@@ -53,7 +53,7 @@ const SliderRoot = React.forwardRef<React.ElementRef<typeof SliderPrimitive>, Sl
       <SliderContext.Provider value={{slots, orientation, isDisabled: props.isDisabled}}>
         <SliderPrimitive
           ref={ref}
-          data-slider
+          data-slot="slider"
           orientation={orientation}
           {...props}
           className={composeTwRenderProps(className, slots.base())}
@@ -77,7 +77,9 @@ const SliderHeader = React.forwardRef<HTMLDivElement, SliderHeaderProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(SliderContext);
 
-    return <div ref={ref} data-slider-header className={slots?.header({className})} {...props} />;
+    return (
+      <div ref={ref} className={slots?.header({className})} data-slot="slider-header" {...props} />
+    );
   },
 );
 
@@ -96,8 +98,8 @@ const SliderLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive>, Sl
     return (
       <LabelPrimitive
         ref={ref}
-        data-slider-label
         className={slots?.label({className})}
+        data-slot="slider-label"
         {...props}
       />
     );
@@ -121,8 +123,8 @@ const SliderOutput = React.forwardRef<
   return (
     <SliderOutputPrimitive
       ref={ref}
-      data-slider-output
       className={composeTwRenderProps(className, slots?.output())}
+      data-slot="slider-output"
       {...props}
     />
   );
@@ -145,9 +147,9 @@ const SliderTrack = React.forwardRef<
   return (
     <SliderTrackPrimitive
       ref={ref}
-      data-slider-track
       className={composeTwRenderProps(className, slots?.track())}
       data-disabled={isDisabled || undefined}
+      data-slot="slider-track"
       {...props}
     >
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
@@ -181,9 +183,9 @@ const SliderFill = React.forwardRef<HTMLDivElement, SliderFillProps>(
     return (
       <div
         ref={ref}
-        data-slider-fill
         className={slots?.fill({className})}
         data-disabled={isDisabled || undefined}
+        data-slot="slider-fill"
         style={fillStyle}
         {...props}
       />
@@ -208,8 +210,8 @@ const SliderThumb = React.forwardRef<
   return (
     <SliderThumbPrimitive
       ref={ref}
-      data-slider-thumb
       className={composeTwRenderProps(className, slots?.thumb())}
+      data-slot="slider-thumb"
       {...props}
     >
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
@@ -229,7 +231,9 @@ const SliderMarks = React.forwardRef<HTMLDivElement, SliderMarksProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(SliderContext);
 
-    return <div ref={ref} data-slider-marks className={slots?.marks({className})} {...props} />;
+    return (
+      <div ref={ref} className={slots?.marks({className})} data-slot="slider-marks" {...props} />
+    );
   },
 );
 

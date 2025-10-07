@@ -42,7 +42,7 @@ const CheckboxGroupRoot = React.forwardRef<
     <CheckboxGroupContext.Provider value={{slots}}>
       <CheckboxGroupPrimitive
         ref={ref}
-        data-checkbox-group
+        data-slot="checkbox-group"
         {...props}
         className={composeTwRenderProps(className, slots.base())}
       >
@@ -63,7 +63,12 @@ const CheckboxGroupItems = React.forwardRef<HTMLDivElement, CheckboxGroupItemsPr
     const {slots} = useContext(CheckboxGroupContext);
 
     return (
-      <div ref={ref} data-checkbox-group-items className={slots?.items({className})} {...props} />
+      <div
+        ref={ref}
+        className={slots?.items({className})}
+        data-slot="checkbox-group-items"
+        {...props}
+      />
     );
   },
 );
@@ -96,7 +101,7 @@ const CheckboxRoot = React.forwardRef<
   return (
     <CheckboxPrimitive
       ref={ref}
-      data-checkbox
+      data-slot="checkbox"
       {...props}
       className={composeTwRenderProps(className, slots.base())}
     >
@@ -142,8 +147,13 @@ const CheckboxIndicator = React.forwardRef<HTMLSpanElement, CheckboxIndicatorPro
     };
 
     return (
-      <span ref={ref} data-checkbox-wrapper className={slots?.wrapper({className})} {...props}>
-        <span data-checkbox-icon className={slots?.icon()}>
+      <span
+        ref={ref}
+        className={slots?.wrapper({className})}
+        data-slot="checkbox-wrapper"
+        {...props}
+      >
+        <span className={slots?.icon()} data-slot="checkbox-icon">
           {renderIcon()}
         </span>
       </span>

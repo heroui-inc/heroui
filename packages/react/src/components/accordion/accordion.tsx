@@ -47,7 +47,7 @@ const Accordion = React.forwardRef<React.ElementRef<typeof DisclosureGroup>, Acc
       <AccordionContext.Provider value={{slots}}>
         <DisclosureGroup
           ref={ref}
-          data-accordion
+          data-slot="accordion"
           {...props}
           className={composeTwRenderProps(className, slots.base())}
         >
@@ -71,7 +71,7 @@ const AccordionItem = React.forwardRef<React.ElementRef<typeof Disclosure>, Acco
     return (
       <Disclosure
         ref={ref}
-        data-accordion-item
+        data-slot="accordion-item"
         {...props}
         className={composeTwRenderProps(className, slots?.item())}
       >
@@ -100,14 +100,14 @@ const AccordionIndicator = React.forwardRef<
     return React.cloneElement(
       children as React.ReactElement<{
         className?: string;
-        "data-accordion-indicator"?: boolean;
+        "data-slot"?: "accordion-indicator";
         "data-expanded"?: Booleanish;
       }>,
       {
         ...props,
         "data-expanded": dataAttr(isExpanded),
         className: slots?.indicator({className}),
-        "data-accordion-indicator": true,
+        "data-slot": "accordion-indicator",
       },
     );
   }
@@ -115,9 +115,9 @@ const AccordionIndicator = React.forwardRef<
   return (
     <IconChevronDown
       ref={ref}
-      data-accordion-indicator
       className={slots?.indicator({className})}
       data-expanded={dataAttr(isExpanded)}
+      data-slot="accordion-indicator"
       {...props}
     />
   );
@@ -140,8 +140,8 @@ const AccordionHeading = React.forwardRef<
   return (
     <DisclosureHeading
       ref={ref}
-      data-accordion-heading
       className={slots?.heading({className})}
+      data-slot="accordion-heading"
       {...props}
     />
   );
@@ -160,8 +160,8 @@ const AccordionTrigger = React.forwardRef<React.ElementRef<typeof Button>, Accor
     return (
       <Button
         ref={ref}
-        data-accordion-trigger
         className={composeTwRenderProps(className, slots?.trigger())}
+        data-slot="accordion-trigger"
         slot="trigger"
         {...props}
       >
@@ -184,7 +184,7 @@ const AccordionBody = React.forwardRef<React.ElementRef<"div">, AccordionBodyPro
     const {slots} = useContext(AccordionContext);
 
     return (
-      <div ref={ref} data-accordion-body className={slots?.body({})} {...props}>
+      <div ref={ref} className={slots?.body({})} data-slot="accordion-body" {...props}>
         <div className={slots?.bodyInner({className})}>{children}</div>
       </div>
     );
@@ -212,9 +212,9 @@ const AccordionPanel = React.forwardRef<
     <DisclosurePanel
       {...props}
       ref={mergedRef}
-      data-accordion-panel
       className={composeTwRenderProps(className, slots?.panel())}
       data-expanded={dataAttr(isExpanded)}
+      data-slot="accordion-panel"
     >
       {children}
     </DisclosurePanel>
