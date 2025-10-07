@@ -361,6 +361,10 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
   
     --color-default: var(--default);
     --color-default-foreground: var(--default-foreground);
+    --color-field: var(--field-background, var(--color-default));
+    --color-field-foreground: var(--field-foreground, var(--color-foreground));
+    --color-field-placeholder: var(--field-placeholder, var(--color-muted));
+    --color-field-border: var(--field-border, var(--color-border));
   
     --color-success: var(--success);
     --color-success-foreground: var(--success-foreground);
@@ -373,6 +377,8 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
   
     --shadow-panel: var(--panel-shadow);
     --shadow-field: var(--field-shadow);
+    --radius-field: var(--field-radius, var(--radius-md));
+    --border-width-field: var(--field-border-width, var(--border-width));
   
     /* Calculated Variables */
   
@@ -386,6 +392,16 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
       in oklab,
       var(--color-default) 90%,
       var(--color-default-foreground) 2%
+    );
+    --color-field-hover: color-mix(
+      in oklab,
+      var(--color-field) 88%,
+      var(--color-field-foreground) 8%
+    );
+    --color-field-focus: color-mix(
+      in oklab,
+      var(--color-field) 80%,
+      var(--color-field-foreground) 14%
     );
     --color-accent-hover: color-mix(
       in oklab,
@@ -411,6 +427,16 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
       in oklab,
       var(--color-danger) 90%,
       var(--color-danger-foreground) 10%
+    );
+    --color-field-border-hover: color-mix(
+      in oklab,
+      var(--color-field-border) 88%,
+      var(--color-field-foreground) 8%
+    );
+    --color-field-border-focus: color-mix(
+      in oklab,
+      var(--color-field-border) 74%,
+      var(--color-field-foreground) 22%
     );
   
     /* Surface Colors */
@@ -483,6 +509,8 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
   }
 `}
 />
+
+Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
 
 ## Resources
 

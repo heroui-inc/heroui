@@ -208,6 +208,22 @@ The package provides a comprehensive set of CSS variables for customization:
 }
 ```
 
+#### Field Tokens
+
+```css
+:root {
+  /* Form field defaults */
+  --field-background: var(--default);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-border: var(--border);
+  --field-border-width: var(--border-width);
+  --field-radius: calc(var(--radius) * 0.75);
+}
+```
+
+Providing any of these knobs automatically updates the generated utilities (`bg-field`, `placeholder:text-field-placeholder`, `rounded-field`, etc.) along with the calculated hover/focus variants.
+
 ## Dependencies
 
 - **Tailwind CSS v4+**: Required peer dependency

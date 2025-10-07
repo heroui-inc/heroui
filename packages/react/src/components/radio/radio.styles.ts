@@ -9,20 +9,27 @@ export const radioVariants = tv({
     base: "cursor-interactive group flex items-center gap-3",
     wrapper: [
       "relative inline-flex h-4 w-4 shrink-0 items-center justify-center",
-      "rounded-full border-2",
+      "rounded-full",
       "transition-all duration-200",
+      "border-field border",
+      "[border-width:var(--border-width-field)]",
+      "bg-field",
+      "hover:border-field-border-hover",
+      "hover:bg-field-hover",
+      "shadow-field",
       focusRingClasses,
       // Default state
-      "border-muted/50 bg-transparent",
+      "border-field",
       // Hover state
-      "group-data-[hovered=true]:border-foreground/70",
+      "group-data-[hovered=true]:border-field-border-hover",
       // Pressed state
       "group-data-[pressed=true]:scale-[0.97]",
       // Selected state
       "group-data-[selected=true]:border-accent",
       // Focus state (both focused and focus-visible)
-      "group-data-[focused=true]:border-foreground",
-      "group-data-[focus-visible=true]:border-foreground",
+      "group-data-[focused=true]:border-field-border-focus",
+      "group-data-[focus-visible=true]:border-field-border-focus",
+      "group-data-[focus-visible=true]:[border-width:calc(var(--border-width-field)*2)]",
       // Invalid/Error state
       "group-data-[invalid=true]:border-danger",
       "group-data-[invalid=true]:group-data-[selected=true]:border-danger",

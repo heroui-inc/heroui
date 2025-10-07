@@ -17,6 +17,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Overrides light theme field tokens */
+  /* --field-background: var(--color-neutral-200);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--color-neutral-500);
+  --field-border: var(--border);
+  --field-border-width: 0px;
+  --field-radius: calc(var(--radius) * 0.75);
+  --field-shadow: none; */
 }
 
 [data-theme="light"],
@@ -50,6 +59,10 @@
 /* @utility button {
   @apply rounded-lg;
 } */
+
+@theme inline {
+  /* --color-field-focus: var(--color-neutral-300); */
+}
 
 body {
   background-color: var(--background);

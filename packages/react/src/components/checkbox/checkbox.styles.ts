@@ -16,16 +16,18 @@ export const checkboxVariants = tv({
     ],
     wrapper: [
       "relative inline-flex h-4 w-4 shrink-0 items-center justify-center",
-      "rounded-[5px]",
+      "[border-radius:calc(var(--radius-field)/2)]",
       "transition-all duration-200",
-      "shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]",
-
-      // Default unselected state
-      "bg-default border-border/10 border",
+      "shadow-field",
+      "border-field border",
+      "[border-width:var(--border-width-field)]",
+      "bg-field",
 
       // Hover state - unselected
-      "group-data-[hovered=true]:group-data-[selected=false]:border-accent-hover",
-      "group-data-[hovered=true]:group-data-[indeterminate=false]:border-accent-hover",
+      "group-data-[hovered=true]:group-data-[selected=false]:border-field-border-hover",
+      "group-data-[hovered=true]:group-data-[indeterminate=false]:border-field-border-hover",
+      "group-data-[hovered=true]:group-data-[selected=false]:bg-field-hover",
+      "group-data-[hovered=true]:group-data-[indeterminate=false]:bg-field-hover",
 
       // Pressed state
       "group-data-[pressed=true]:scale-[0.97]",
@@ -39,7 +41,8 @@ export const checkboxVariants = tv({
       "group-data-[hovered=true]:group-data-[indeterminate=true]:bg-accent-hover",
 
       // Focus state
-      "group-data-[focus-visible=true]:border-2",
+      "group-data-[focus-visible=true]:border-field-border-focus",
+      "group-data-[focus-visible=true]:[border-width:calc(var(--border-width-field)*2)]",
       "group-data-[focus-visible=true]:shadow-[0px_0px_0px_3px_rgba(0,0,0,0.30),0px_0px_0px_0.5px_rgba(0,0,0,0.05)]",
 
       // Error state - unselected

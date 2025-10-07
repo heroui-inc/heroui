@@ -61,6 +61,14 @@
     --accent-soft: var(--color-neutral-200);
     --accent-soft-foreground: var(--color-neutral-900);
 
+    /* Form Field Defaults */
+    --field-background: var(--default);
+    --field-foreground: var(--foreground);
+    --field-placeholder: var(--muted);
+    --field-border: var(--border);
+    --field-border-width: var(--border-width);
+    --field-radius: calc(var(--radius) * 0.75);
+
     /* Status Colors */
     --success: oklch(0.5503 0.1244 153.56);
     --success-foreground: var(--snow);
@@ -85,7 +93,6 @@
     --panel-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
     /* Shadow used for form fields */
     --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-
     /* Skeleton Default Global Animation */
     --skeleton-animation: shimmer; /* shimmer, pulse, none */
   }
@@ -115,6 +122,14 @@
 
     --accent-soft: var(--color-neutral-800);
     --accent-soft-foreground: var(--color-neutral-200);
+
+    /* Form Field Defaults */
+    --field-background: var(--default);
+    --field-foreground: var(--foreground);
+    --field-placeholder: var(--muted);
+    --field-border: var(--border);
+    --field-border-width: var(--border-width);
+    --field-radius: calc(var(--radius) * 0.75);
 
     /* Status Colors */
     --success: oklch(0.5503 0.1244 153.56);
