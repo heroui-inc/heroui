@@ -2,7 +2,7 @@
 
 /* Base separator with default horizontal orientation */
 .separator {
-  @apply bg-divider border-b-0 border-t-0;
+  @apply bg-divider shrink-0 border-b-0 border-t-0;
 
   /* Default size - horizontal orientation */
   @apply h-px w-full;
@@ -15,4 +15,32 @@
 
 .separator--vertical {
   @apply h-full w-px;
+}
+
+.separator__container {
+  @apply flex items-center gap-3;
+}
+
+.separator__container--horizontal {
+  @apply w-full flex-row;
+}
+
+.separator__container--vertical {
+  @apply h-full flex-col justify-center;
+}
+
+.separator__line {
+  @apply shrink-0 grow;
+}
+
+.separator__content {
+  @apply text-muted inline-flex items-center justify-center whitespace-nowrap text-center;
+}
+
+.separator__content--horizontal {
+  @apply text-center;
+}
+
+.separator__content--vertical {
+  @apply text-center;
 }
