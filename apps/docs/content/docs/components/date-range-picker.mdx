@@ -362,6 +362,48 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
 
 <Spacer y={4} />
 
+## Troubleshooting
+
+### Common Issues
+
+#### onFocusChange only updates start date
+When using `onFocusChange` in DateRangePicker, make sure to handle both start and end date focus changes properly:
+
+```jsx
+// ❌ Wrong - only updates start date
+onFocusChange: (val) => setValue({...value, start: val}),
+
+// ✅ Correct - handles both start and end focus
+onFocusChange: (val) => {
+  if (val === "start") {
+    setValue({...value, start: val});
+  } else if (val === "end") {
+    setValue({...value, end: val});
+  }
+},
+```
+
+#### Missing React import
+Make sure to import React when using DateRangePicker in your components:
+
+```jsx
+import React from "react";
+import {DateRangePicker} from "@heroui/react";
+```
+
+#### Date range not updating properly
+Ensure you're using the correct value structure for date ranges:
+
+```jsx
+// ✅ Correct structure
+const [value, setValue] = useState({
+  start: today(getLocalTimeZone()),
+  end: today(getLocalTimeZone()).add({days: 7})
+});
+```
+
+<Spacer y={4} />
+
 ## API
 
 ### DateRangePicker Props
@@ -684,7 +726,7 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     {
       attribute: "onFocusChange",
       type: "(isFocused: boolean) => void",
-      description: "Handler that is called when the element's focus status changes.",
+      description: "Handler that is called when the element's focus status changes. **Important**: When using this with DateRangePicker, make sure to handle both start and end date focus changes properly to avoid losing the end date selection.",
       default: "-"
     },
     {

@@ -1,3 +1,4 @@
+import React from "react";
 import {DateRangePicker, Radio, RadioGroup, Button, ButtonGroup, cn} from "@heroui/react";
 import {
   today,
@@ -96,7 +97,13 @@ export default function App() {
         }
         calendarProps={{
           focusedValue: value.start,
-          onFocusChange: (val) => setValue({...value, start: val}),
+          onFocusChange: (val) => {
+            if (val === "start") {
+              setValue({...value, start: val});
+            } else if (val === "end") {
+              setValue({...value, end: val});
+            }
+          },
           nextButtonProps: {
             variant: "bordered",
           },
