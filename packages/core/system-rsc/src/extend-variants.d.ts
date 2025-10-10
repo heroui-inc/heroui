@@ -103,11 +103,11 @@ export type ExtendVariants = {
     },
     opts?: Options,
   ): ForwardRefExoticComponent<
-    PropsWithoutRef<
-      CP & {
-        [key in keyof V]?: StringToBoolean<keyof V[key]>;
-      }
-    > &
+    PropsWithoutRef<{
+      [key in keyof CP | keyof V]?:
+        | (key extends keyof CP ? CP[key] : never)
+        | (key extends keyof V ? StringToBoolean<keyof V[key]> : never);
+    }> &
       RefAttributes<InferRef<C>>
   >;
 };
