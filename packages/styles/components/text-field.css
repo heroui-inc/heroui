@@ -1,0 +1,4 @@
+/* Text field styles */
+.text-field {
+  @apply flex flex-col gap-1;
+}

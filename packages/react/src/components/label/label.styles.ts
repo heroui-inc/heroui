@@ -5,28 +5,20 @@ import {tv} from "tailwind-variants";
 export const labelVariants = tv({
   base: "label",
   variants: {
-    size: {
-      sm: "label--sm",
-      md: "label--md",
-      lg: "label--lg",
-    },
-    variant: {
-      default: "label--default",
-      muted: "label--muted",
-      destructive: "label--destructive",
-    },
-    required: {
+    isRequired: {
       true: "label--required",
     },
-    disabled: {
+    isDisabled: {
       true: "label--disabled",
+    },
+    isInvalid: {
+      true: "label--invalid",
     },
   },
   defaultVariants: {
-    size: "md",
-    variant: "default",
-    required: false,
-    disabled: false,
+    isRequired: false,
+    isDisabled: false,
+    isInvalid: false,
   },
 });
 

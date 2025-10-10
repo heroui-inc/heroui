@@ -1,41 +1,7 @@
 /* Base label styles */
 .label {
   /* Base styling */
-  @apply select-none font-medium transition-colors duration-200;
-
-  /* Default size - matches label--md variant */
-  @apply text-base;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
-/* Size variants */
-.label--sm {
-  @apply text-sm;
-}
-
-.label--md {
-  /* No styles as this is the default size */
-  /* Default size is text-base applied in base class */
-}
-
-.label--lg {
-  @apply text-lg;
-}
-
-/* Variant styles */
-.label--default {
-  @apply text-foreground;
-}
-
-.label--muted {
-  @apply text-muted;
-}
-
-.label--destructive {
-  @apply text-danger;
+  @apply text-foreground text-sm font-medium;
 }
 
 /* State modifiers */
@@ -44,5 +10,9 @@
 }
 
 .label--disabled {
-  @apply cursor-not-allowed opacity-[var(--disabled-opacity)];
+  @apply status-disabled;
+}
+
+.label--invalid {
+  @apply text-danger;
 }

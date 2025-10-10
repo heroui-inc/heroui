@@ -2,8 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Description} from "../description";
-import {Label} from "../label";
+import {Description, Label} from "../field";
 import {Text} from "../text";
 
 import {InputOTP} from "./index";

@@ -3,11 +3,9 @@ import type {Meta, StoryObj} from "@storybook/react";
 import React from "react";
 
 import {Checkbox, CheckboxGroup} from "../checkbox";
-import {Description} from "../description";
-import {Label} from "../label";
 import {Text} from "../text";
 
-import {Field, FieldError, FieldGroup, Fieldset, Legend} from "./fieldset";
+import {Description, Field, FieldError, FieldGroup, Fieldset, Label, Legend} from "./field";
 
 const meta: Meta<typeof Fieldset> = {
   component: Fieldset,
@@ -204,16 +202,16 @@ export const SimpleCheckboxGroup: Story = {
             <Label htmlFor="development">Development</Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox id="marketing-interest" name="interests" value="marketing">
+            <Checkbox id="marketing" name="interests" value="marketing">
               <Checkbox.Indicator />
             </Checkbox>
-            <Label htmlFor="marketing-interest">Marketing</Label>
+            <Label htmlFor="marketing">Marketing</Label>
           </div>
           <div className="flex items-center gap-3">
-            <Checkbox id="sales" name="interests" value="sales">
+            <Checkbox id="business" name="interests" value="business">
               <Checkbox.Indicator />
             </Checkbox>
-            <Label htmlFor="sales">Sales</Label>
+            <Label htmlFor="business">Business</Label>
           </div>
         </FieldGroup>
       </CheckboxGroup>
@@ -221,107 +219,30 @@ export const SimpleCheckboxGroup: Story = {
   ),
 };
 
-export const WithDisabledState: Story = {
+export const RequiredOptions: Story = {
   render: () => (
     <Fieldset className="w-96">
-      <Legend>Feature Access</Legend>
-      <Text>Some features require a premium subscription.</Text>
-      <CheckboxGroup>
+      <Legend>Choose your subscription options</Legend>
+      <Text>Pick at least one option to proceed.</Text>
+      <CheckboxGroup isInvalid>
         <FieldGroup>
-          <div className="flex items-start gap-3">
-            <Checkbox defaultSelected id="basic-features" name="features" value="basic">
+          <Field>
+            <Checkbox value="monthly">
               <Checkbox.Indicator />
             </Checkbox>
-            <div className="flex flex-col gap-1">
-              <Label htmlFor="basic-features">Basic features</Label>
-              <Description>Available to all users.</Description>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <Checkbox isDisabled id="advanced-features" name="features" value="advanced">
+            <Label>Monthly updates</Label>
+            <Description>Stay informed with monthly product news.</Description>
+          </Field>
+          <Field>
+            <Checkbox value="quarterly">
               <Checkbox.Indicator />
             </Checkbox>
-            <div className="flex flex-col gap-1">
-              <Label disabled htmlFor="advanced-features">
-                Advanced features
-              </Label>
-              <Description>Requires premium subscription.</Description>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <Checkbox isDisabled id="beta-features" name="features" value="beta">
-              <Checkbox.Indicator />
-            </Checkbox>
-            <div className="flex flex-col gap-1">
-              <Label disabled htmlFor="beta-features">
-                Beta features
-              </Label>
-              <Description>Coming soon for premium users.</Description>
-            </div>
-          </div>
+            <Label>Quarterly insights</Label>
+            <Description>Receive quarterly reports and metrics.</Description>
+          </Field>
         </FieldGroup>
+        <FieldError>Select at least one option.</FieldError>
       </CheckboxGroup>
-    </Fieldset>
-  ),
-};
-
-export const NestedFieldsets: Story = {
-  render: () => (
-    <Fieldset className="w-[32rem]">
-      <Legend>Account Settings</Legend>
-      <div className="space-y-8">
-        <Fieldset>
-          <Legend className="text-sm">Security</Legend>
-          <CheckboxGroup>
-            <FieldGroup spacing="sm">
-              <div className="flex items-start gap-3">
-                <Checkbox defaultSelected id="2fa" name="security" value="2fa">
-                  <Checkbox.Indicator />
-                </Checkbox>
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="2fa">Two-factor authentication</Label>
-                  <Description>Add an extra layer of security to your account.</Description>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Checkbox id="login-alerts" name="security" value="login_alerts">
-                  <Checkbox.Indicator />
-                </Checkbox>
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="login-alerts">Login alerts</Label>
-                  <Description>Get notified when someone logs into your account.</Description>
-                </div>
-              </div>
-            </FieldGroup>
-          </CheckboxGroup>
-        </Fieldset>
-
-        <Fieldset>
-          <Legend className="text-sm">Privacy</Legend>
-          <CheckboxGroup>
-            <FieldGroup spacing="sm">
-              <div className="flex items-start gap-3">
-                <Checkbox defaultSelected id="activity" name="privacy" value="activity_status">
-                  <Checkbox.Indicator />
-                </Checkbox>
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="activity">Show activity status</Label>
-                  <Description>Let others see when you&apos;re online.</Description>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Checkbox defaultSelected id="receipts" name="privacy" value="read_receipts">
-                  <Checkbox.Indicator />
-                </Checkbox>
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="receipts">Read receipts</Label>
-                  <Description>Let people know when you&apos;ve read their messages.</Description>
-                </div>
-              </div>
-            </FieldGroup>
-          </CheckboxGroup>
-        </Fieldset>
-      </div>
     </Fieldset>
   ),
 };

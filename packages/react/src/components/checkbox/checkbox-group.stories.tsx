@@ -2,9 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Description} from "../description";
-import {Field, FieldError} from "../fieldset";
-import {Label} from "../label";
+import {Description, Field, FieldError, Label} from "../field";
 
 import {Checkbox, CheckboxGroup} from "./index";
 
