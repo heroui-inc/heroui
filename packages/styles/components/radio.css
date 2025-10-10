@@ -11,6 +11,10 @@
   &[aria-disabled="true"] {
     @apply status-disabled;
   }
+
+  @media (max-width: 640px) {
+    @apply flex-row-reverse justify-between;
+  }
 }
 
 /* Radio wrapper */
