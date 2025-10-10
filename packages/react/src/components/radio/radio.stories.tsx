@@ -2,7 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Description, FieldError, Label} from "../field";
+import {Description, Field, FieldError, Label} from "../field";
 
 import {Radio, RadioGroup} from "./radio";
 
@@ -127,20 +127,26 @@ export const Invalid: Story = {
       <RadioGroup.Items>
         <Radio value="basic">
           <Radio.Indicator />
-          <Label>Basic</Label>
-          <Description>Includes 100 messages per month and up to 3 themes to set up</Description>
+          <Field>
+            <Label>Basic</Label>
+            <Description>Includes 100 messages per month and up to 3 themes to set up</Description>
+          </Field>
         </Radio>
         <Radio value="premium">
           <Radio.Indicator />
-          <Label>Premium</Label>
-          <Description>Includes 200 messages per month and up to 6 themes to set up</Description>
+          <Field>
+            <Label>Premium</Label>
+            <Description>Includes 200 messages per month and up to 6 themes to set up</Description>
+          </Field>
         </Radio>
         <Radio value="business">
           <Radio.Indicator />
-          <Label>Business</Label>
-          <Description>
-            Includes 1,000 messages per month and up to unlimited themes to set up
-          </Description>
+          <Field>
+            <Label>Business</Label>
+            <Description>
+              Includes 1,000 messages per month and up to unlimited themes to set up
+            </Description>
+          </Field>
         </Radio>
       </RadioGroup.Items>
       <FieldError>Please select an option</FieldError>
