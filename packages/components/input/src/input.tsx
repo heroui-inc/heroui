@@ -84,9 +84,11 @@ const Input = forwardRef<"input", InputProps>((props, ref) => {
     if (shouldLabelBeOutside) {
       return (
         <div {...getMainWrapperProps()}>
-          <div {...getInputWrapperProps()}>
-            {!isOutsideLeft && !isOutsideTop ? labelContent : null}
-            {innerWrapper}
+          <div style={{position: "relative"}}>
+            <div {...getInputWrapperProps()}>
+              {!isOutsideLeft && !isOutsideTop ? labelContent : null}
+              {innerWrapper}
+            </div>
           </div>
           {helperWrapper}
         </div>

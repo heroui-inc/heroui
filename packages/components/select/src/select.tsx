@@ -154,20 +154,22 @@ const Select = forwardRef(function Select<T extends object>(
   return (
     <div {...getBaseProps()}>
       <HiddenSelect {...getHiddenSelectProps()} />
-      {shouldLabelBeOutside ? labelContent : null}
       <div {...getMainWrapperProps()}>
-        <Component {...getTriggerProps()}>
-          {!shouldLabelBeOutside ? labelContent : null}
-          <div {...getInnerWrapperProps()}>
-            {startContent}
-            <span {...getValueProps()}>{renderSelectedItem}</span>
-            {endContent && state.selectedItems && (
-              <VisuallyHidden elementType="span">,</VisuallyHidden>
-            )}
-            {end}
-          </div>
-          {renderIndicator}
-        </Component>
+        <div style={{position: "relative"}}>
+          {shouldLabelBeOutside ? labelContent : null}
+          <Component {...getTriggerProps()}>
+            {!shouldLabelBeOutside ? labelContent : null}
+            <div {...getInnerWrapperProps()}>
+              {startContent}
+              <span {...getValueProps()}>{renderSelectedItem}</span>
+              {endContent && state.selectedItems && (
+                <VisuallyHidden elementType="span">,</VisuallyHidden>
+              )}
+              {end}
+            </div>
+            {renderIndicator}
+          </Component>
+        </div>
         {helperWrapper}
       </div>
       {disableAnimation ? popoverContent : <AnimatePresence>{popoverContent}</AnimatePresence>}
