@@ -15,6 +15,14 @@
   @media (max-width: 640px) {
     @apply flex-row-reverse justify-between;
   }
+
+  [data-slot="field"] {
+    @apply w-full;
+  }
+
+  [data-slot="field-description"] {
+    @apply text-wrap;
+  }
 }
 
 /* Radio wrapper */
@@ -83,8 +91,16 @@
 .radio-group {
   @apply flex flex-col;
 
-  .label {
+  [data-slot="field"] {
+    @apply w-full;
+  }
+
+  [data-slot="field-label"] {
     @apply text-muted select-none text-sm font-medium md:text-xs;
+  }
+
+  [data-slot="field-description"] {
+    @apply text-wrap;
   }
 }
 
@@ -92,7 +108,7 @@
 .radio-group__items {
   @apply flex flex-col gap-3 py-4;
 
-  .label {
+  [data-slot="field-label"] {
     @apply text-foreground text-sm;
   }
 }
@@ -118,10 +134,6 @@
   .radio__indicator {
     @apply size-1.5;
   }
-
-  .radio__label {
-    @apply text-sm;
-  }
 }
 
 .radio--md {
@@ -137,9 +149,5 @@
 
   .radio__indicator {
     @apply size-2.5;
-  }
-
-  .radio__label {
-    @apply text-lg;
   }
 }
