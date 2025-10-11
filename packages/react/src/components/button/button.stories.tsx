@@ -23,7 +23,7 @@ export default {
     },
   },
   component: Button,
-  title: "Components/Button",
+  title: "Components/Buttons/Button",
 } as Meta<typeof Button>;
 
 const defaultArgs: ButtonProps = {

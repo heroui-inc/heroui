@@ -23,7 +23,7 @@ export default {
     },
   },
   component: Disclosure,
-  title: "Components/Disclosure",
+  title: "Components/Navigation/Disclosure",
 } as Meta<typeof Disclosure>;
 
 const defaultArgs: DisclosureProps = {

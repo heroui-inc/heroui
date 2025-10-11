@@ -7,7 +7,7 @@ import {Input} from "./index";
 export default {
   argTypes: {},
   component: Input,
-  title: "Components/Input",
+  title: "Components/Forms/Input",
 } as Meta<typeof Input>;
 
 type Story = StoryObj<typeof Input>;

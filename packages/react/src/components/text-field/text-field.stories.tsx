@@ -10,7 +10,7 @@ const meta: Meta<typeof TextField> = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  title: "Components/TextField",
+  title: "Components/Forms/TextField",
 };
 
 export default meta;

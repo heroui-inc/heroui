@@ -18,7 +18,7 @@ export default {
     },
   },
   component: Avatar,
-  title: "Components/Avatar",
+  title: "Components/Media/Avatar",
 } as Meta<typeof Avatar>;
 
 const defaultArgs: AvatarProps = {};

@@ -7,7 +7,7 @@ import {TextArea} from "./index";
 export default {
   argTypes: {},
   component: TextArea,
-  title: "Components/Textarea",
+  title: "Components/Forms/Textarea",
 } as Meta<typeof TextArea>;
 
 type Story = StoryObj<typeof TextArea>;

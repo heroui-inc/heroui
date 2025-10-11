@@ -17,7 +17,7 @@ export default {
     },
   },
   component: CloseButton,
-  title: "Components/CloseButton",
+  title: "Components/Buttons/CloseButton",
 } as Meta<typeof CloseButton>;
 
 const defaultArgs: CloseButtonProps = {
