@@ -24,6 +24,7 @@ export * from "./input";
 export * from "./textarea";
 export * from "./text-field";
 export * from "./text";
+export * from "./label";
 export * from "./description";
 export * from "./field-error";
 export * from "./fieldset";
