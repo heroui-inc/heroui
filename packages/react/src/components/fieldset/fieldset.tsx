@@ -1,12 +1,9 @@
 "use client";
 
 import type {FieldsetVariants} from "./fieldset.styles";
-import type {DescriptionProps} from "../description";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
-
-import {Description} from "../description";
 
 import {fieldsetVariants} from "./fieldset.styles";
 
@@ -65,30 +62,6 @@ FieldsetLegend.displayName = "HeroUI.FieldsetLegend";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface FieldsetDescriptionProps extends DescriptionProps {}
-
-const FieldsetDescription = React.forwardRef<
-  React.ElementRef<typeof Description>,
-  FieldsetDescriptionProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(FieldsetContext);
-
-  return (
-    <Description
-      ref={ref}
-      className={slots?.description({className})}
-      data-slot="fieldset-description"
-      {...props}
-    >
-      {props.children}
-    </Description>
-  );
-});
-
-FieldsetDescription.displayName = "HeroUI.Fieldset.Description";
-
-/* -----------------------------------------------------------------------------------------------*/
-
 interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLDivElement>;
   asChild?: boolean;
@@ -143,7 +116,6 @@ FieldsetActions.displayName = "HeroUI.Fieldset.Actions";
 
 const CompoundFieldset = Object.assign(Fieldset, {
   Legend: FieldsetLegend,
-  Description: FieldsetDescription,
   Group: FieldGroup,
   Actions: FieldsetActions,
 });

@@ -4,6 +4,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
+import {Description} from "../description";
 import {Form} from "../form";
 import {TextField} from "../text-field";
 
@@ -40,7 +41,7 @@ export const Default: Story = {
       <Form onSubmit={onSubmit}>
         <Fieldset className="w-96">
           <Fieldset.Legend>Profile Settings</Fieldset.Legend>
-          <Fieldset.Description>Update your profile information.</Fieldset.Description>
+          <Description>Update your profile information.</Description>
           <Fieldset.Group>
             <TextField
               isRequired

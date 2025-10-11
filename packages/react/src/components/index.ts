@@ -31,11 +31,11 @@ export * from "./fieldset";
 export * from "./form";
 
 // in progress
+export * from "./radio-group";
 export * from "./alert";
 export * from "./calendar";
 export * from "./checkbox";
 export * from "./listbox";
-export * from "./radio";
 export * from "./slider";
 export * from "./input-otp";
 

@@ -8,4 +8,8 @@
       @apply hidden;
     }
   }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
 }
