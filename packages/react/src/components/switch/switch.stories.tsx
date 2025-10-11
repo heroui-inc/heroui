@@ -4,14 +4,15 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
-import {Description, Label} from "../field";
+import {Description} from "../description";
+import {Label} from "../label";
 
 import {Switch, SwitchGroup} from "./switch";
 
 export default {
   argTypes: {},
   component: Switch,
-  title: "Components/Switch",
+  title: "Components/Controls/Switch",
 } as Meta<typeof Switch>;
 
 type Story = StoryObj<typeof Switch>;

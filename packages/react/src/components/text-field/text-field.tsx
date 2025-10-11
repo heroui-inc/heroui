@@ -2,9 +2,10 @@
 
 import type {TextFieldVariants} from "./text-field.styles";
 import type {DescriptionProps} from "../description";
-import type {FieldErrorProps} from "../field";
+import type {FieldErrorProps} from "../field-error";
 import type {InputProps} from "../input";
 import type {LabelProps} from "../label";
+import type {TextAreaProps} from "../textarea";
 import type {
   TextFieldProps as TextFieldPrimitiveProps,
   TextFieldRenderProps,
@@ -15,9 +16,10 @@ import {TextField as TextFieldPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {Description} from "../description";
-import {FieldError} from "../field";
+import {FieldError} from "../field-error";
 import {Input} from "../input";
 import {Label} from "../label";
+import {TextArea} from "../textarea";
 
 import {textFieldVariants} from "./text-field.styles";
 
@@ -92,7 +94,11 @@ TextFieldInput.displayName = "HeroUI.TextField.Input";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-// TODO: Add TextArea
+interface TextFieldTextAreaProps extends TextAreaProps {}
+
+const TextFieldTextArea = TextArea;
+
+TextFieldTextArea.displayName = "HeroUI.TextField.TextArea";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -117,7 +123,7 @@ TextFieldError.displayName = "HeroUI.TextField.Error";
 const CompoundTextField = Object.assign(TextFieldRoot, {
   Label: TextFieldLabel,
   Input: TextFieldInput,
-  // TextArea: TextFieldTextArea, // TODO: Add TextArea
+  TextArea: TextFieldTextArea,
   Description: TextFieldDescription,
   Error: TextFieldError,
 });
@@ -129,5 +135,6 @@ export type {
   TextFieldLabelProps,
   TextFieldInputProps,
   TextFieldDescriptionProps,
+  TextFieldTextAreaProps,
   TextFieldErrorProps,
 };

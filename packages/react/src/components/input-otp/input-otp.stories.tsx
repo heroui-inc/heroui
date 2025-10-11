@@ -2,7 +2,8 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Description, Label} from "../field";
+import {Description} from "../description";
+import {Label} from "../label";
 import {Text} from "../text";
 
 import {InputOTP} from "./index";
@@ -78,7 +79,7 @@ export const WithLabel: Story = {
 export const Required: Story = {
   render: (args) => (
     <div className="w-[280px]">
-      <Label required>Verify account</Label>
+      <Label isRequired>Verify account</Label>
       <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />
@@ -142,7 +143,7 @@ export const Disabled: Story = {
   },
   render: (args) => (
     <div className="w-[280px]">
-      <Label disabled>Verify account</Label>
+      <Label isDisabled>Verify account</Label>
       <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />

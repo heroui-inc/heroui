@@ -1,0 +1,117 @@
+/* ==================== Radio Group Styles ==================== */
+
+/* Radio Group base styles */
+.radio-group {
+  @apply flex flex-col;
+
+  [data-slot="radio"] {
+    @apply mt-4;
+  }
+}
+
+/* ==================== Radio (Individual Item) Styles ==================== */
+
+/* Base radio styles */
+.radio {
+  @apply flex items-start gap-3;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  [data-slot="label"] {
+    @apply select-none;
+  }
+
+  [data-slot="description"] {
+    @apply select-none text-wrap;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* Radio control (the circular button) */
+.radio__control {
+  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border [border-width:var(--border-width-field)];
+
+  transition:
+    transform 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Focus ring styles */
+  .radio:focus-visible &,
+  .radio[data-focus-visible="true"] & {
+    @apply status-focused border-field-border-focus [border-width:calc(var(--border-width-field)*2)];
+  }
+
+  /* Hover state */
+  .radio:hover &,
+  .radio[data-hovered="true"] & {
+    @apply border-field-border-hover;
+  }
+
+  /* Selected state */
+  .radio[aria-checked="true"] &,
+  .radio[data-selected="true"] & {
+    @apply bg-accent border-field-border-hover;
+  }
+
+  /* Invalid/Error state */
+  .radio[data-invalid="true"] &,
+  .radio[aria-invalid="true"] & {
+    @apply border-danger;
+  }
+
+  /* Invalid + Selected state */
+  .radio[data-invalid="true"][aria-checked="true"] &,
+  .radio[data-invalid="true"][data-selected="true"] &,
+  .radio[aria-invalid="true"][aria-checked="true"] &,
+  .radio[aria-invalid="true"][data-selected="true"] & {
+    @apply bg-danger border-danger;
+  }
+
+  .radio:active &,
+  .radio[data-pressed="true"] & {
+    @apply scale-[0.95];
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+/* Radio indicator (the inner dot) */
+.radio__indicator {
+  @apply bg-field absolute inset-0 m-auto size-[100%] rounded-full opacity-0;
+
+  transition:
+    opacity 150ms var(--ease-smooth),
+    width 150ms var(--ease-out),
+    height 150ms var(--ease-out);
+
+  .radio[aria-checked="true"] &,
+  .radio[data-selected="true"] & {
+    @apply size-[6px] opacity-100;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+/* Radio content wrapper */
+.radio__content {
+  @apply flex flex-col gap-0;
+}
+
+/* Disabled modifier for base */
+.radio--disabled {
+  @apply status-disabled;
+}

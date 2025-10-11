@@ -27,7 +27,7 @@ export default {
     },
   },
   component: DisclosureGroup,
-  title: "Components/DisclosureGroup",
+  title: "Components/Navigation/DisclosureGroup",
 } as Meta<typeof DisclosureGroup>;
 
 const defaultArgs: DisclosureGroupProps = {

@@ -1,6 +1,6 @@
 /* Base description styles */
 .description {
-  @apply text-muted truncate px-1 text-sm sm:text-xs;
+  @apply text-muted truncate text-sm sm:text-xs;
 }
 
 /* Disabled state */

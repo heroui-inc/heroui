@@ -2,7 +2,8 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent px-4 font-medium md:h-9;
+  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent px-4 text-sm font-medium md:h-9;
+
   transition:
     transform 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
@@ -39,7 +40,7 @@
 
 /* Size variants */
 .button--sm {
-  @apply h-9 px-3 text-sm md:h-8;
+  @apply h-9 px-3 md:h-8;
 
   & svg:not([data-slot="spinner"] svg) {
     @apply size-4;
@@ -56,7 +57,7 @@
 }
 
 .button--lg {
-  @apply h-11 md:h-10;
+  @apply h-11 text-base md:h-10;
 
   &:active,
   &[data-pressed="true"] {

@@ -1,0 +1,15 @@
+/* Base component styles */
+.fieldset {
+  @apply flex flex-col gap-6;
+}
+
+.fieldset__legend {
+  @apply text-foreground text-base font-medium;
+}
+.fieldset_field_group {
+  @apply w-full space-y-4;
+}
+
+.fieldset_actions {
+  @apply flex items-center gap-2 pt-1;
+}

@@ -3,7 +3,6 @@ export type {
   TextFieldProps,
   TextFieldLabelProps,
   TextFieldInputProps,
-  TextFieldTextAreaProps,
   TextFieldDescriptionProps,
   TextFieldErrorProps,
 } from "./text-field";
