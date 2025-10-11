@@ -121,7 +121,7 @@ export const Disabled: Story = {
 
 export const Invalid: Story = {
   render: () => (
-    <RadioGroup isInvalid isRequired>
+    <RadioGroup isInvalid isRequired className="max-w-sm">
       <Label>Select your plan</Label>
       <Description>Choose the plan that best fits your needs</Description>
       <RadioGroup.Items>
@@ -159,26 +159,24 @@ export const Controlled: Story = {
     const [value, setValue] = React.useState("red");
 
     return (
-      <div className="flex flex-col gap-4">
-        <RadioGroup value={value} onChange={setValue}>
-          <Label>Select a color</Label>
-          <RadioGroup.Items>
-            <Radio value="red">
-              <Radio.Indicator />
-              <Label>Red</Label>
-            </Radio>
-            <Radio value="green">
-              <Radio.Indicator />
-              <Label>Green</Label>
-            </Radio>
-            <Radio value="blue">
-              <Radio.Indicator />
-              <Label>Blue</Label>
-            </Radio>
-          </RadioGroup.Items>
-        </RadioGroup>
-        <p className="text-muted text-sm">Selected: {value}</p>
-      </div>
+      <RadioGroup value={value} onChange={setValue}>
+        <Label>Select a color</Label>
+        <RadioGroup.Items>
+          <Radio value="red">
+            <Radio.Indicator />
+            <Label>Red</Label>
+          </Radio>
+          <Radio value="green">
+            <Radio.Indicator />
+            <Label>Green</Label>
+          </Radio>
+          <Radio value="blue">
+            <Radio.Indicator />
+            <Label>Blue</Label>
+          </Radio>
+        </RadioGroup.Items>
+        <Description>Selected: {value}</Description>
+      </RadioGroup>
     );
   },
 };
@@ -232,16 +230,60 @@ export const Sizes: Story = {
 
 export const CustomStyles: Story = {
   render: () => (
-    <RadioGroup defaultValue="1">
-      <Label>Custom styled options</Label>
+    <RadioGroup className="max-w-sm" defaultValue="premium">
+      <Label className="text-base font-semibold">Choose your plan</Label>
+      <Description>Select the perfect plan for your needs and start building today</Description>
       <RadioGroup.Items>
-        <Radio className="hover:bg-muted/50 rounded-lg border p-4" value="1">
-          <Radio.Indicator />
-          <Label className="font-semibold">Premium Plan</Label>
+        <Radio
+          className="rounded-lg border-2 border-slate-200 p-3 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-50"
+          value="starter"
+        >
+          <Radio.Indicator className="group-data-[selected=true]:bg-blue-500" />
+          <Field>
+            <Label>Starter</Label>
+            <Description>Perfect for individuals and small projects</Description>
+            <div className="mt-1 flex items-baseline gap-1">
+              <span className="text-lg font-bold">$9</span>
+              <span className="text-xs text-slate-500">/month</span>
+            </div>
+          </Field>
         </Radio>
-        <Radio className="hover:bg-muted/50 rounded-lg border p-4" value="2">
-          <Radio.Indicator />
-          <Label className="font-semibold">Basic Plan</Label>
+
+        <Radio
+          className="rounded-lg border-2 border-slate-200 p-3 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-50"
+          value="premium"
+        >
+          <Radio.Indicator className="group-data-[selected=true]:bg-blue-500" />
+          <Field className="flex-1">
+            <div className="flex items-center gap-2">
+              <Label className="text-sm font-semibold">Premium</Label>
+              <span className="rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-1.5 py-0.5 text-xs font-bold text-white">
+                Popular
+              </span>
+            </div>
+            <Description>Best for growing teams with advanced tools</Description>
+            <div className="mt-1 flex items-baseline gap-1">
+              <span className="text-lg font-bold">$29</span>
+              <span className="text-xs text-slate-500">/month</span>
+            </div>
+          </Field>
+        </Radio>
+
+        <Radio
+          className="rounded-lg border-2 border-slate-200 p-3 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-50"
+          value="enterprise"
+        >
+          <Radio.Indicator className="group-data-[selected=true]:bg-blue-500" />
+          <Field className="flex-1">
+            <Label className="text-sm font-semibold">Enterprise</Label>
+            <Description className="text-xs">
+              Advanced features with dedicated support and unlimited resources
+            </Description>
+            <div className="mt-1 flex items-baseline gap-1">
+              <span className="text-lg font-bold">$99</span>
+              <span className="text-xs text-slate-500">/month</span>
+            </div>
+          </Field>
         </Radio>
       </RadioGroup.Items>
     </RadioGroup>
