@@ -27,10 +27,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({className, ...res
 
 Input.displayName = "HeroUI.Input";
 
-// Isolated Input exports
 export type {InputProps};
 export {Input};
-
-// RAC Components exports
-export {TextField} from "react-aria-components";
-export type {TextFieldProps} from "react-aria-components";
