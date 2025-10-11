@@ -2,7 +2,9 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Description, Field, FieldError, Label} from "../field";
+import {Description} from "../description";
+import {FieldError} from "../field-error";
+import {Label} from "../label";
 
 import {Checkbox, CheckboxGroup} from "./index";
 
@@ -23,24 +25,18 @@ export const Default: Story = {
     <CheckboxGroup>
       <Label>Favorite sports</Label>
       <CheckboxGroup.Items>
-        <Field variant="checkbox">
-          <Checkbox value="soccer">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Soccer</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="baseball">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Baseball</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="basketball">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Basketball</Label>
-        </Field>
+        <Checkbox value="soccer">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Soccer</Label>
+        <Checkbox value="baseball">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Baseball</Label>
+        <Checkbox value="basketball">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Basketball</Label>
       </CheckboxGroup.Items>
     </CheckboxGroup>
   ),
@@ -52,24 +48,18 @@ export const WithDescription: Story = {
       <Label>Notifications</Label>
       <Description>Choose how you want to be notified</Description>
       <CheckboxGroup.Items>
-        <Field variant="checkbox">
-          <Checkbox value="email">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Email</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="sms">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>SMS</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="push">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Push notifications</Label>
-        </Field>
+        <Checkbox value="email">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Email</Label>
+        <Checkbox value="sms">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>SMS</Label>
+        <Checkbox value="push">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Push notifications</Label>
       </CheckboxGroup.Items>
     </CheckboxGroup>
   ),
@@ -80,24 +70,18 @@ export const DefaultValue: Story = {
     <CheckboxGroup defaultValue={["email", "push"]}>
       <Label>Communication preferences</Label>
       <CheckboxGroup.Items>
-        <Field variant="checkbox">
-          <Checkbox value="email">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Email updates</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="sms">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Text messages</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="push">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Push notifications</Label>
-        </Field>
+        <Checkbox value="email">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Email updates</Label>
+        <Checkbox value="sms">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Text messages</Label>
+        <Checkbox value="push">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Push notifications</Label>
       </CheckboxGroup.Items>
     </CheckboxGroup>
   ),
@@ -217,7 +201,7 @@ export const DisabledIndividual: Story = {
           <Checkbox isDisabled id="unavailable" value="unavailable">
             <Checkbox.Indicator />
           </Checkbox>
-          <Label disabled htmlFor="unavailable">
+          <Label isDisabled htmlFor="unavailable">
             Unavailable option
           </Label>
         </div>
@@ -225,7 +209,7 @@ export const DisabledIndividual: Story = {
           <Checkbox isDisabled id="coming-soon" value="coming-soon">
             <Checkbox.Indicator />
           </Checkbox>
-          <Label disabled htmlFor="coming-soon">
+          <Label isDisabled htmlFor="coming-soon">
             Coming soon
           </Label>
         </div>
@@ -279,7 +263,7 @@ export const WithValidation: Story = {
         }}
       >
         <CheckboxGroup isInvalid={selected.length < 2} value={selected} onChange={setSelected}>
-          <Label required>Select your interests (at least 2)</Label>
+          <Label isRequired>Select your interests (at least 2)</Label>
           <Description>Choose topics you'd like to receive updates about</Description>
           <CheckboxGroup.Items>
             <div className="flex items-center gap-3">
@@ -415,30 +399,24 @@ export const CleanPattern: Story = {
       <Label>Email Preferences</Label>
       <Description>Select the types of emails you'd like to receive</Description>
       <CheckboxGroup.Items>
-        <Field variant="checkbox">
-          <Checkbox value="product">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <div>
-            <Label>Product updates</Label>
-            <Description>New features and improvements</Description>
-          </div>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="marketing">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <Label>Marketing emails</Label>
-        </Field>
-        <Field variant="checkbox">
-          <Checkbox value="security">
-            <Checkbox.Indicator />
-          </Checkbox>
-          <div>
-            <Label>Security alerts</Label>
-            <Description>Important notifications about your account</Description>
-          </div>
-        </Field>
+        <Checkbox value="product">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <div>
+          <Label>Product updates</Label>
+          <Description>New features and improvements</Description>
+        </div>
+        <Checkbox value="marketing">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <Label>Marketing emails</Label>
+        <Checkbox value="security">
+          <Checkbox.Indicator />
+        </Checkbox>
+        <div>
+          <Label>Security alerts</Label>
+          <Description>Important notifications about your account</Description>
+        </div>
       </CheckboxGroup.Items>
     </CheckboxGroup>
   ),

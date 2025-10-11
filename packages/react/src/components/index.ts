@@ -23,15 +23,16 @@ export * from "./tooltip";
 export * from "./input";
 export * from "./textarea";
 export * from "./text-field";
+export * from "./text";
 export * from "./description";
 export * from "./field-error";
-export * from "./text";
+export * from "./fieldset";
+export * from "./form";
 
 // in progress
 export * from "./alert";
 export * from "./calendar";
 export * from "./checkbox";
-export * from "./form";
 export * from "./listbox";
 export * from "./radio";
 export * from "./slider";
