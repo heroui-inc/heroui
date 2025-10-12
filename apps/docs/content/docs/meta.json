@@ -29,6 +29,7 @@
     "components/disclosure-group",
     "components/kbd",
     "components/link",
+    "components/modal",
     "components/popover",
     "components/separator",
     "components/skeleton",

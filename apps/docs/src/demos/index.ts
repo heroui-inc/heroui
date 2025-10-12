@@ -12,6 +12,7 @@ import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
 import * as KbdDemos from "./kbd";
 import * as LinkDemos from "./link";
+import * as ModalDemos from "./modal";
 import * as PopoverDemos from "./popover";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
@@ -250,6 +251,11 @@ export const demos: Record<string, DemoItem> = {
   "link-with-icon": {
     component: LinkDemos.WithIcon,
     file: "link/with-icon.tsx",
+  },
+  // Modal demos
+  "modal-default": {
+    component: ModalDemos.Default,
+    file: "modal/default.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {

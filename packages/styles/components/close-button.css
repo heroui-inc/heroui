@@ -1,0 +1,84 @@
+/* Close Button component styles */
+
+/* Base close button styles */
+.close-button {
+  @apply relative isolate;
+  @apply inline-flex items-center justify-center;
+  @apply rounded-sm border border-transparent;
+  @apply origin-center transform-gpu select-none;
+
+  /* Default size (md) */
+  @apply size-6 p-1;
+
+  transition:
+    transform 150ms var(--ease-smooth),
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth);
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Focus visible state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
+
+    cursor: var(--cursor-disabled);
+  }
+
+  /* Pending state */
+  &[data-pending] {
+    @apply pointer-events-none;
+  }
+
+  /* SVG icon styling*/
+  & svg {
+    @apply pointer-events-none shrink-0 self-center;
+    @apply -mx-0.5 my-0.5 size-5;
+  }
+}
+
+/* Size variants */
+.close-button--sm {
+  @apply size-5 p-0.5;
+
+  & svg {
+    @apply size-4;
+  }
+}
+
+.close-button--md {
+  /* No styles as this is the default size */
+}
+
+.close-button--lg {
+  @apply size-7 p-1.5;
+
+  & svg {
+    @apply size-6;
+  }
+}
+
+/* Variant: default */
+.close-button--default {
+  @apply text-muted bg-transparent;
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply text-foreground bg-default;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply text-foreground bg-default;
+
+    transform: scale(0.97);
+  }
+}

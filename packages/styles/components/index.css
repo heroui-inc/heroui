@@ -3,10 +3,12 @@
 @import "./button.css";
 @import "./card.css";
 @import "./chip.css";
+@import "./close-button.css";
 @import "./disclosure.css";
 @import "./disclosure-group.css";
 @import "./kbd.css";
 @import "./link.css";
+@import "./modal.css";
 @import "./popover.css";
 @import "./skeleton.css";
 @import "./spinner.css";
