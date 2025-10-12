@@ -11,6 +11,7 @@ import {ToastRegion} from "./toast-region";
 const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 
 let globalToastQueue: ToastQueue<ToastProps> | null = null;
+let globalDisableAnimation: boolean = false;
 
 interface ToastProviderProps {
   maxVisibleToasts?: number;
@@ -43,6 +44,9 @@ export const ToastProvider = ({
   const globalContext = useProviderContext();
   const disableAnimation = disableAnimationProp ?? globalContext?.disableAnimation ?? false;
 
+  // Store the disableAnimation setting globally so closeToast can access it
+  globalDisableAnimation = disableAnimation;
+
   return (
     <LazyMotion features={loadFeatures}>
       {toastQueue.visibleToasts.length > 0 && (
@@ -70,12 +74,22 @@ export const addToast = ({...props}: ToastProps & ToastOptions) => {
 
 const closingToasts = new Map<string, ReturnType<typeof setTimeout>>();
 
-export const closeToast = (key: string) => {
+export const closeToast = (key: string, disableAnimation?: boolean) => {
   if (!globalToastQueue) {
     return;
   }
 
   if (closingToasts.has(key)) {
+    return;
+  }
+
+  // Use the global disableAnimation setting if not explicitly provided
+  const shouldDisableAnimation = disableAnimation ?? globalDisableAnimation;
+
+  // If disableAnimation is true, close immediately without delay
+  if (shouldDisableAnimation) {
+    globalToastQueue?.close(key);
+
     return;
   }
 
@@ -87,7 +101,7 @@ export const closeToast = (key: string) => {
   closingToasts.set(key, timeoutId);
 };
 
-export const closeAll = () => {
+export const closeAll = (disableAnimation?: boolean) => {
   if (!globalToastQueue) {
     return;
   }
@@ -95,7 +109,7 @@ export const closeAll = () => {
   const toasts = [...globalToastQueue.visibleToasts];
 
   toasts.forEach((toast) => {
-    closeToast(toast.key);
+    closeToast(toast.key, disableAnimation);
   });
 };
 
