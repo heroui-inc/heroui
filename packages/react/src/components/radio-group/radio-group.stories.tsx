@@ -17,7 +17,7 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const Default: Story = {
   render: () => (
-    <RadioGroup defaultValue="1" name="plan">
+    <RadioGroup defaultValue="premium" name="plan">
       <Label>Plan selection</Label>
       <Description>Choose the plan that best suits your needs</Description>
       <Radio value="basic">
