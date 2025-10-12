@@ -1,0 +1,96 @@
+---
+title: v3.0.0-alpha.34
+description: Introduces RadioGroup component, form field tokens, Storybook reorganization, and data-slot alignment
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 14, 2025</span>
+</div>
+
+This release introduces RadioGroup, form field tokens, reorganizes Storybook, and aligns data-slot markers across components.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+## What's New
+
+### RadioGroup Component (Preview)
+
+Added new [RadioGroup](/docs/components/radio-group) component for selecting a single option from multiple choices.
+
+<ComponentPreview
+  name="radio-group-basic"
+/>
+
+### Form Field Tokens
+
+Introduced form field tokens `--field-*` for consistent styling across form components. See [Theming](/docs/handbook/theming#calculated-variables-tailwind) for the `--field-*` variables.
+
+### Storybook Organization
+
+Reorganized Storybook by category for better navigation and component discovery.
+
+### Skeleton Animation Token
+
+**🚧 Breaking Changes:** Renamed `--skeleton-default-animation-type` to `--skeleton-animation` in [Skeleton](/docs/components/skeleton) for consistency with other component tokens.
+
+### Data-Slot Alignment
+
+Aligned data-slot markers across components for consistent styling and customization. This standardization makes it easier to target specific component parts with CSS selectors and improves the overall developer experience when customizing component styles.
+
+Components now use consistent `data-slot` attributes like:
+- `data-slot="base"` for the root element
+- `data-slot="label"` for label text
+- `data-slot="description"` for description text
+- `data-slot="error"` for error messages
+
+This allows for predictable CSS targeting across all form components:
+
+```css
+.radio {
+  [data-slot="label"] {
+    /* Styles apply to radio labels */
+  }
+}
+``` 
+
+## Migration Guide
+
+### Skeleton Component Migration
+
+1. **Update animation token:**
+   - Replace `--skeleton-default-animation-type` with `--skeleton-animation`
+
+## Links
+
+- [GitHub PR #5780](https://github.com/heroui-inc/heroui/pull/5780)
+- [RadioGroup Component](/docs/components/radio-group)
+- [Skeleton Component](/docs/components/skeleton)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
