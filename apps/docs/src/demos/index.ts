@@ -14,6 +14,7 @@ import * as DisclosureGroupDemos from "./disclosure-group";
 import * as KbdDemos from "./kbd";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
+import * as RadioGroupDemos from "./radio-group";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
@@ -272,6 +273,11 @@ export const demos: Record<string, DemoItem> = {
   "link-with-icon": {
     component: LinkDemos.WithIcon,
     file: "link/with-icon.tsx",
+  },
+  // RadioGroup demos
+  "radio-group-basic": {
+    component: RadioGroupDemos.Basic,
+    file: "radio-group/basic.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {

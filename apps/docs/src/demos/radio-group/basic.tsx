@@ -1,22 +1,9 @@
-import type {Meta, StoryObj} from "@storybook/react";
+"use client";
 
-import React from "react";
+import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 
-import {Description} from "../description";
-import {Label} from "../label";
-
-import {Radio, RadioGroup} from "./radio-group";
-
-export default {
-  argTypes: {},
-  component: RadioGroup,
-  title: "Components/Forms/RadioGroup",
-} as Meta<typeof RadioGroup>;
-
-type Story = StoryObj<typeof RadioGroup>;
-
-export const Default: Story = {
-  render: () => (
+export function Basic() {
+  return (
     <RadioGroup defaultValue="premium" name="plan">
       <Label>Plan selection</Label>
       <Description>Choose the plan that best suits your needs</Description>
@@ -48,5 +35,5 @@ export const Default: Story = {
         </Radio.Content>
       </Radio>
     </RadioGroup>
-  ),
-};
+  );
+}

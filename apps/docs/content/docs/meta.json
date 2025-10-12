@@ -33,6 +33,7 @@
     "components/kbd",
     "components/link",
     "components/popover",
+    "components/radio-group",
     "components/separator",
     "components/skeleton",
     "components/spinner",
