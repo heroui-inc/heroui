@@ -5,7 +5,7 @@
   @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-sm border border-transparent p-1;
 
   transition:
-    transform 150ms var(--ease-smooth),
+    transform 150ms var(--ease-out),
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);

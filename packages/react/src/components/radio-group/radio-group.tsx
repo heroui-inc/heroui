@@ -4,15 +4,10 @@ import type {RadioGroupVariants} from "./radio-group.styles";
 import type {
   RadioGroupProps as RadioGroupPrimitiveProps,
   RadioProps as RadioPrimitiveProps,
-  SelectionIndicatorProps as SelectionIndicatorPrimitiveProps,
 } from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
-import {
-  RadioGroup as RadioGroupPrimitive,
-  Radio as RadioPrimitive,
-  SelectionIndicator as SelectionIndicatorPrimitive,
-} from "react-aria-components";
+import {RadioGroup as RadioGroupPrimitive, Radio as RadioPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 
@@ -100,25 +95,25 @@ RadioControl.displayName = "HeroUI.Radio.Control";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface RadioIndicatorProps extends SelectionIndicatorPrimitiveProps {
+interface RadioIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
   className?: string;
 }
 
-const RadioIndicator = React.forwardRef<
-  React.ElementRef<typeof SelectionIndicatorPrimitive>,
-  RadioIndicatorProps
->(({className, ...props}, ref) => {
-  const {slots} = useContext(RadioContext);
+const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
+  ({className, ...props}, ref) => {
+    const {slots} = useContext(RadioContext);
 
-  return (
-    <SelectionIndicatorPrimitive
-      ref={ref}
-      className={slots?.indicator({className})}
-      data-slot="radio-indicator"
-      {...props}
-    />
-  );
-});
+    return (
+      <span
+        ref={ref}
+        aria-hidden="true"
+        className={slots?.indicator({className})}
+        data-slot="radio-indicator"
+        {...props}
+      />
+    );
+  },
+);
 
 RadioIndicator.displayName = "HeroUI.Radio.Indicator";
 

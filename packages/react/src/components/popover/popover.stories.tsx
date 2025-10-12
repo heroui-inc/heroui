@@ -95,7 +95,7 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
             </Avatar>
             <div className="flex flex-col gap-0">
               <p className="text-sm font-medium leading-5">Zoe</p>
-              <p className="text-muted text-xs leading-none">zoe@heroui.chat</p>
+              <p className="text-muted text-xs leading-none">zoe@heroui.com</p>
             </div>
           </div>
         </Popover.Trigger>
