@@ -38,9 +38,7 @@
 .radio__control {
   @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border [border-width:var(--border-width-field)];
 
-  transition:
-    transform 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+  transition: all 200ms var(--ease-out);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -77,9 +75,9 @@
     @apply bg-danger border-danger;
   }
 
-  .radio:active &,
-  .radio[data-pressed="true"] & {
-    @apply scale-[0.95];
+  .radio:active[data-selected="true"] &,
+  .radio[data-pressed="true"][data-selected="true"] & {
+    @apply bg-accent-hover;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -89,16 +87,21 @@
 
 /* Radio indicator (the inner dot) */
 .radio__indicator {
-  @apply bg-field absolute inset-0 m-auto size-[100%] rounded-full opacity-0;
+  @apply bg-background rounded-full;
 
-  transition:
-    opacity 150ms var(--ease-smooth),
-    width 150ms var(--ease-out),
-    height 150ms var(--ease-out);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  margin: -50%;
+  transition-duration: 500ms;
+  transition-property: scale;
+  transition-timing-function: var(--ease-fluid-out);
 
   .radio[aria-checked="true"] &,
   .radio[data-selected="true"] & {
-    @apply size-[6px] opacity-100;
+    scale: 0.4286; /* 6px */
   }
 
   @media (prefers-reduced-motion: reduce) {

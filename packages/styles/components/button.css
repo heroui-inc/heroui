@@ -5,7 +5,7 @@
   @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent px-4 text-sm font-medium md:h-9;
 
   transition:
-    transform 150ms var(--ease-smooth),
+    transform 150ms var(--ease-out),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 

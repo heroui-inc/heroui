@@ -26,6 +26,11 @@
   --field-border-width: 0px;
   --field-radius: calc(var(--radius) * 0.75);
   --field-shadow: none; */
+
+  /* Way to make components and text bigger on mobile - a11y */
+  /* @media (max-width: 640px) {
+    font-size: 24px;
+  } */
 }
 
 [data-theme="light"],

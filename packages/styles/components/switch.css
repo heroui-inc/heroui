@@ -104,8 +104,8 @@
   /* Default size (medium) with margin-based positioning */
   @apply shadow-field flex size-5 rounded-full bg-white text-black sm:size-4;
   transition:
-    margin 150ms var(--ease-out-quad),
-    background-color 150ms var(--ease-smooth);
+    margin 350ms var(--ease-fluid-out),
+    background-color 200ms var(--ease-out);
   margin-inline-start: 2px;
 
   /* Selected/checked state - use margin instead of translate */
