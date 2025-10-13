@@ -61,3 +61,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger MCP Extraction
+        if: steps.changesets.outputs.published == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.MCP_DISPATCH_TOKEN }}
+          repository: heroui-inc/heroui-mcp
+          event-type: react-version-bump
+          client-payload: |
+            {
+              "triggered_by": "release"
+            }
