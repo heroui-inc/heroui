@@ -539,4 +539,67 @@ describe("Tabs", () => {
       expect(newTabButtons[2]).toHaveAttribute("aria-selected", "true");
     });
   });
+
+  it("should set vertical aria-orientation", () => {
+    const wrapper = render(
+      <Tabs isVertical aria-label="Tabs vertical test" data-testid="tabWrapper">
+        <Tab key="item1" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" title="Item 2">
+          <div>Content 2</div>
+        </Tab>
+        <Tab key="item3" title="Item 3">
+          <div>Content 3</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const tablist = wrapper.getByRole("tablist");
+
+    expect(tablist).toHaveAttribute("aria-orientation", "vertical");
+  });
+
+  it("should allow vertical tabs to navigate with up and down arrows", async () => {
+    const wrapper = render(
+      <Tabs isVertical aria-label="Tabs vertical test" data-testid="tabWrapper">
+        <Tab key="item1" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" title="Item 2">
+          <div>Content 2</div>
+        </Tab>
+        <Tab key="item3" title="Item 3">
+          <div>Content 3</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const tab1 = wrapper.getByRole("tab", {name: "Item 1"});
+    const tab2 = wrapper.getByRole("tab", {name: "Item 2"});
+    const tab3 = wrapper.getByRole("tab", {name: "Item 3"});
+
+    expect(tab1).toHaveAttribute("aria-selected", "true");
+    expect(tab2).toHaveAttribute("aria-selected", "false");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
+
+    act(() => {
+      focus(tab1);
+    });
+
+    await user.keyboard("[ArrowDown]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
+
+    await user.keyboard("[ArrowDown]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "false");
+    expect(tab3).toHaveAttribute("aria-selected", "true");
+
+    await user.keyboard("[ArrowUp]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
+  });
 });

@@ -106,11 +106,19 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
   const disableAnimation =
     originalProps?.disableAnimation ?? globalContext?.disableAnimation ?? false;
 
+  const placement = (variantProps as Props).placement ?? (isVertical ? "start" : "top");
+  const orientation =
+    isVertical || placement === "start" || placement === "end" ? "vertical" : "horizontal";
+
   const state = useTabListState<T>({
     children: children as CollectionChildren<T>,
     ...otherProps,
   });
-  const {tabListProps} = useTabList<T>(otherProps as AriaTabListProps<T>, state, domRef);
+  const {tabListProps} = useTabList<T>(
+    {...(otherProps as AriaTabListProps<T>), orientation},
+    state,
+    domRef,
+  );
 
   const slots = useMemo(
     () =>
@@ -161,7 +169,6 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     [baseStyles, otherProps, slots],
   );
 
-  const placement = (variantProps as Props).placement ?? (isVertical ? "start" : "top");
   const getWrapperProps: PropGetter = useCallback(
     (props) => ({
       "data-slot": "tabWrapper",
@@ -174,13 +181,18 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
   );
 
   const getTabListProps: PropGetter = useCallback(
-    (props) => ({
-      ref: domRef,
-      "data-slot": "tabList",
-      className: slots.tabList({class: clsx(classNames?.tabList, props?.className)}),
-      ...mergeProps(tabListProps, props),
-    }),
-    [domRef, tabListProps, classNames, slots],
+    (props) =>
+      mergeProps(
+        tabListProps,
+        {
+          ref: domRef,
+          "data-slot": "tabList",
+          "aria-orientation": orientation,
+          className: slots.tabList({class: clsx(classNames?.tabList, props?.className)}),
+        },
+        props,
+      ),
+    [domRef, tabListProps, classNames, slots, orientation],
   );
 
   const getTabCursorProps: PropGetter = useCallback(
