@@ -6,7 +6,7 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Input} from "../input";
 import {Label} from "../label";
-import {TextArea} from "../TextArea";
+import {TextArea} from "../textarea";
 
 import {TextField} from "./index";
 
