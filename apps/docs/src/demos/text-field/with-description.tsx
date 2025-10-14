@@ -1,13 +1,13 @@
 "use client";
 
-import {TextField} from "@heroui/react";
+import {Description, Input, Label, TextField} from "@heroui/react";
 
 export function WithDescription() {
   return (
-    <TextField className="w-full max-w-sm">
-      <TextField.Label>Username</TextField.Label>
-      <TextField.Input placeholder="Enter username" />
-      <TextField.Description>Choose a unique username for your account</TextField.Description>
+    <TextField className="w-full max-w-64">
+      <Label>Username</Label>
+      <Input placeholder="Enter username" />
+      <Description>Choose a unique username for your account</Description>
     </TextField>
   );
 }

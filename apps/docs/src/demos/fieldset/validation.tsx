@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Fieldset, TextField} from "@heroui/react";
+import {Button, Description, FieldError, Fieldset, Input, Label, TextField} from "@heroui/react";
 import React from "react";
 
 export function Validation() {
@@ -17,39 +17,41 @@ export function Validation() {
       <Fieldset.Legend>Security</Fieldset.Legend>
       <Fieldset.Group>
         <TextField isRequired isInvalid={passwordTooShort}>
-          <TextField.Label>New password</TextField.Label>
-          <TextField.Input
+          <Label>New password</Label>
+          <Input
             placeholder="••••••••"
             type="password"
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(event.target.value)
+            }
           />
           {passwordTooShort ? (
-            <TextField.Error>Password must be at least 8 characters.</TextField.Error>
+            <FieldError>Password must be at least 8 characters.</FieldError>
           ) : (
-            <TextField.Description>
-              Use a strong password with letters, numbers, and symbols.
-            </TextField.Description>
+            <Description>Use a strong password with letters, numbers, and symbols.</Description>
           )}
         </TextField>
 
         <TextField isRequired isInvalid={confirmationInvalid}>
-          <TextField.Label>Confirm password</TextField.Label>
-          <TextField.Input
+          <Label>Confirm password</Label>
+          <Input
             placeholder="Repeat password"
             type="password"
             value={confirm}
-            onChange={(event) => setConfirm(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setConfirm(event.target.value)
+            }
           />
           {confirmationInvalid ? (
-            <TextField.Error>Passwords must match.</TextField.Error>
+            <FieldError>Passwords must match.</FieldError>
           ) : (
-            <TextField.Description>Re-enter your password to confirm.</TextField.Description>
+            <Description>Re-enter your password to confirm.</Description>
           )}
         </TextField>
       </Fieldset.Group>
       <Fieldset.Actions>
-        <Button color="primary" isDisabled={isSubmitDisabled}>
+        <Button isDisabled={isSubmitDisabled} variant="primary">
           Update password
         </Button>
       </Fieldset.Actions>

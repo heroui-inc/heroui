@@ -1,6 +1,6 @@
 "use client";
 
-import {TextField} from "@heroui/react";
+import {Description, Input, Label, TextArea, TextField} from "@heroui/react";
 import React from "react";
 
 export function Controlled() {
@@ -8,24 +8,24 @@ export function Controlled() {
   const [textareaValue, setTextareaValue] = React.useState("");
 
   return (
-    <div className="flex w-96 flex-col gap-4">
+    <div className="flex w-full max-w-64 flex-col gap-4">
       <TextField>
-        <TextField.Label>Display name</TextField.Label>
-        <TextField.Input
+        <Label>Display name</Label>
+        <Input
           placeholder="Jane"
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
         />
-        <TextField.Description>Characters: {inputValue.length}</TextField.Description>
+        <Description>Characters: {inputValue.length}</Description>
       </TextField>
       <TextField>
-        <TextField.Label>Bio</TextField.Label>
-        <TextField.TextArea
+        <Label>Bio</Label>
+        <TextArea
           placeholder="Tell us about yourself..."
           value={textareaValue}
           onChange={(event) => setTextareaValue(event.target.value)}
         />
-        <TextField.Description>Characters: {textareaValue.length} / 200</TextField.Description>
+        <Description>Characters: {textareaValue.length} / 200</Description>
       </TextField>
     </div>
   );

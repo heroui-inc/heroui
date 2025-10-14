@@ -1,6 +1,6 @@
 "use client";
 
-import {Fieldset, TextField} from "@heroui/react";
+import {Fieldset, Input, Label, TextArea, TextField} from "@heroui/react";
 
 export function Layout() {
   return (
@@ -8,28 +8,28 @@ export function Layout() {
       <Fieldset.Legend>Billing Details</Fieldset.Legend>
       <Fieldset.Group className="grid gap-4 md:grid-cols-2">
         <TextField>
-          <TextField.Label>First name</TextField.Label>
-          <TextField.Input placeholder="Jane" />
+          <Label>First name</Label>
+          <Input placeholder="Jane" />
         </TextField>
         <TextField>
-          <TextField.Label>Last name</TextField.Label>
-          <TextField.Input placeholder="Doe" />
+          <Label>Last name</Label>
+          <Input placeholder="Doe" />
         </TextField>
         <TextField className="md:col-span-2">
-          <TextField.Label>Company name</TextField.Label>
-          <TextField.Input placeholder="Acme Inc." />
+          <Label>Company name</Label>
+          <Input placeholder="Acme Inc." />
         </TextField>
         <TextField className="md:col-span-2">
-          <TextField.Label>Address</TextField.Label>
-          <TextField.TextArea placeholder="123 Main St, Springfield" rows={3} />
+          <Label>Address</Label>
+          <TextArea placeholder="123 Main St, Springfield" rows={3} />
         </TextField>
         <TextField>
-          <TextField.Label>City</TextField.Label>
-          <TextField.Input placeholder="Springfield" />
+          <Label>City</Label>
+          <Input placeholder="Springfield" />
         </TextField>
         <TextField>
-          <TextField.Label>Postal code</TextField.Label>
-          <TextField.Input placeholder="12345" />
+          <Label>Postal code</Label>
+          <Input placeholder="12345" />
         </TextField>
       </Fieldset.Group>
       <Fieldset.Actions className="text-default-500 justify-end text-sm">
