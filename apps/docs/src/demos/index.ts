@@ -6,7 +6,6 @@ import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as CardDemos from "./card";
-import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as DescriptionDemos from "./description";
@@ -181,31 +180,6 @@ export const demos: Record<string, DemoItem> = {
   "card-with-background-image": {
     component: CardDemos.WithBackgroundImage,
     file: "card/with-background-image.tsx",
-  },
-  // Checkbox demos
-  "checkbox-basic": {
-    component: CheckboxDemos.Basic,
-    file: "checkbox/basic.tsx",
-  },
-  "checkbox-with-description": {
-    component: CheckboxDemos.WithDescription,
-    file: "checkbox/with-description.tsx",
-  },
-  "checkbox-indeterminate": {
-    component: CheckboxDemos.Indeterminate,
-    file: "checkbox/indeterminate.tsx",
-  },
-  "checkbox-states": {
-    component: CheckboxDemos.States,
-    file: "checkbox/states.tsx",
-  },
-  "checkbox-controlled": {
-    component: CheckboxDemos.Controlled,
-    file: "checkbox/controlled.tsx",
-  },
-  "checkbox-group": {
-    component: CheckboxDemos.Group,
-    file: "checkbox/group.tsx",
   },
   // Chip demos
   "chip-basic": {
@@ -479,17 +453,9 @@ export const demos: Record<string, DemoItem> = {
     component: TextAreaDemos.Rows,
     file: "textarea/rows.tsx",
   },
-  "textarea-disabled": {
-    component: TextAreaDemos.Disabled,
-    file: "textarea/disabled.tsx",
-  },
   "textarea-controlled": {
     component: TextAreaDemos.Controlled,
     file: "textarea/controlled.tsx",
-  },
-  "textarea-validation": {
-    component: TextAreaDemos.Validation,
-    file: "textarea/validation.tsx",
   },
   // TextField demos
   "text-field-basic": {

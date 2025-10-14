@@ -42,7 +42,7 @@ function CustomInput() {
       <Label htmlFor="custom-input">Project name</Label>
       <Input
         id="custom-input"
-        className="rounded-xl border border-border/70 bg-content1 px-4 py-2 text-sm shadow-sm focus-visible:border-primary"
+        className="rounded-xl border border-border/70 bg-surface-2 px-4 py-2 text-sm shadow-sm focus-visible:border-primary"
         placeholder="New web app"
       />
     </div>
@@ -57,11 +57,11 @@ The base class `.input` powers every instance. Override it once with `@layer com
 ```css
 @layer components {
   .input {
-    @apply rounded-lg border border-border bg-content1 px-4 py-2 text-sm shadow-sm transition-colors;
+    @apply rounded-lg border border-border bg-surface-2 px-4 py-2 text-sm shadow-sm transition-colors;
 
     &:hover,
     &[data-hover="true"] {
-      @apply bg-content2 border-border/80;
+      @apply bg-surface-3 border-border/80;
     }
 
     &:focus-visible,

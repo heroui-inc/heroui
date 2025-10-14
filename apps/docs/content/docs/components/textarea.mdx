@@ -21,27 +21,11 @@ import { TextArea } from '@heroui/react';
 
 ### Controlled
 
-Tie the value to component state for live counters or formatting.
-
 <ComponentPreview name="textarea-controlled" />
 
 ### Rows and Resizing
 
-Adjust `rows` or add inline styles to tune the visible height.
-
 <ComponentPreview name="textarea-rows" />
-
-### Disabled
-
-Prevent editing when a submission is locked or pending.
-
-<ComponentPreview name="textarea-disabled" />
-
-### Validation
-
-Flip `isInvalid` when the message fails validation rules.
-
-<ComponentPreview name="textarea-validation" />
 
 <RelatedComponents component="textarea" />
 
@@ -60,7 +44,7 @@ function CustomTextArea() {
       <Label htmlFor="custom-textarea">Message</Label>
       <TextArea
         id="custom-textarea"
-        className="rounded-xl border border-border/70 bg-content1 px-4 py-3 text-sm leading-6 shadow-sm"
+        className="rounded-xl border border-border/70 bg-surface-2 px-4 py-3 text-sm leading-6 shadow-sm"
         placeholder="Let us know how we can help..."
         rows={5}
         style={{resize: "vertical"}}
@@ -77,11 +61,11 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 ```css
 @layer components {
   .textarea {
-    @apply rounded-xl border border-border bg-content1 px-4 py-3 text-sm leading-6 shadow-sm;
+    @apply rounded-xl border border-border bg-surface-2 px-4 py-3 text-sm leading-6 shadow-sm;
 
     &:hover,
     &[data-hover="true"] {
-      @apply bg-content2 border-border/80;
+      @apply bg-surface-3 border-border/80;
     }
 
     &:focus-visible,
