@@ -102,24 +102,22 @@
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply shadow-field flex size-5 rounded-full bg-white text-black sm:size-4;
+  @apply shadow-field ms-[2px] flex size-5 rounded-full bg-white text-black sm:size-4;
   transition:
     margin 350ms var(--ease-fluid-out),
     background-color 200ms var(--ease-out);
-  margin-inline-start: 2px;
 
   /* Selected/checked state - use margin instead of translate */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground text-accent;
-    margin-inline-start: calc(100% - 18px);
+    @apply bg-accent-foreground text-accent ms-[calc(100%-18px)];
   }
 
   /* Mobile selected state */
   @media (max-width: 640px) {
     .switch[aria-checked="true"] &,
     .switch[data-selected="true"] & {
-      margin-inline-start: calc(100% - 22px);
+      @apply ms-[calc(100%-22px)];
     }
   }
 
@@ -141,13 +139,13 @@
   /* Small selected state positioning */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    margin-inline-start: calc(100% - 14px);
+    @apply ms-[calc(100%-14px)];
   }
 
   @media (max-width: 640px) {
     .switch[aria-checked="true"] &,
     .switch[data-selected="true"] & {
-      margin-inline-start: calc(100% - 16px);
+      @apply ms-[calc(100%-16px)];
     }
   }
 }
@@ -158,13 +156,13 @@
   /* Large selected state positioning */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    margin-inline-start: calc(100% - 22px);
+    @apply ms-[calc(100%-22px)];
   }
 
   @media (max-width: 640px) {
     .switch[aria-checked="true"] &,
     .switch[data-selected="true"] & {
-      margin-inline-start: calc(100% - 30px);
+      @apply ms-[calc(100%-30px)];
     }
   }
 }
