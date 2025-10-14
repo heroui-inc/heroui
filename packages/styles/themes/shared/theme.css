@@ -79,7 +79,6 @@
     var(--color-danger) 90%,
     var(--color-danger-foreground) 10%
   );
-
   /* Form Field Colors */
   --color-field-hover: color-mix(
     in oklab,
@@ -95,7 +94,7 @@
   --color-field-border-hover: color-mix(
     in oklab,
     var(--color-field-border) 88%,
-    var(--color-field-foreground) 8%
+    var(--color-field-foreground) 10%
   );
   --color-field-border-focus: color-mix(
     in oklab,

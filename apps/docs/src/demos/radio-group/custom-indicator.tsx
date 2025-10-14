@@ -2,14 +2,18 @@
 
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 
-export function Basic() {
+export function CustomIndicator() {
   return (
-    <RadioGroup defaultValue="premium" name="plan">
+    <RadioGroup defaultValue="premium" name="plan-custom-indicator">
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
       <Radio value="basic">
         <Radio.Control>
-          <Radio.Indicator />
+          <Radio.Indicator>
+            {({isSelected}) =>
+              isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
+            }
+          </Radio.Indicator>
         </Radio.Control>
         <Radio.Content>
           <Label>Basic Plan</Label>
@@ -18,7 +22,11 @@ export function Basic() {
       </Radio>
       <Radio value="premium">
         <Radio.Control>
-          <Radio.Indicator />
+          <Radio.Indicator>
+            {({isSelected}) =>
+              isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
+            }
+          </Radio.Indicator>
         </Radio.Control>
         <Radio.Content>
           <Label>Premium Plan</Label>
@@ -27,7 +35,11 @@ export function Basic() {
       </Radio>
       <Radio value="business">
         <Radio.Control>
-          <Radio.Indicator />
+          <Radio.Indicator>
+            {({isSelected}) =>
+              isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
+            }
+          </Radio.Indicator>
         </Radio.Control>
         <Radio.Content>
           <Label>Business Plan</Label>

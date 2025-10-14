@@ -4,6 +4,7 @@ import type {RadioGroupVariants} from "./radio-group.styles";
 import type {
   RadioGroupProps as RadioGroupPrimitiveProps,
   RadioProps as RadioPrimitiveProps,
+  RadioRenderProps,
 } from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -45,6 +46,7 @@ RadioGroup.displayName = "HeroUI.RadioGroup";
 
 interface RadioContext {
   slots?: ReturnType<typeof radioVariants>;
+  state?: RadioRenderProps;
 }
 
 const RadioContext = createContext<RadioContext>({});
@@ -59,16 +61,18 @@ const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, Radi
     const slots = React.useMemo(() => radioVariants(), []);
 
     return (
-      <RadioContext.Provider value={{slots}}>
-        <RadioPrimitive
-          ref={ref}
-          data-slot="radio"
-          {...props}
-          className={composeTwRenderProps(className, slots.base())}
-        >
-          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-        </RadioPrimitive>
-      </RadioContext.Provider>
+      <RadioPrimitive
+        ref={ref}
+        data-slot="radio"
+        {...props}
+        className={composeTwRenderProps(className, slots.base())}
+      >
+        {(values) => (
+          <RadioContext.Provider value={{slots, state: values}}>
+            {typeof children === "function" ? children(values) : children}
+          </RadioContext.Provider>
+        )}
+      </RadioPrimitive>
     );
   },
 );
@@ -95,13 +99,16 @@ RadioControl.displayName = "HeroUI.Radio.Control";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface RadioIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
-  className?: string;
+interface RadioIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+  children?: React.ReactNode | ((props: RadioRenderProps) => React.ReactNode);
 }
 
 const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(RadioContext);
+  ({children, className, ...props}, ref) => {
+    const {slots, state} = useContext(RadioContext);
+
+    const content =
+      typeof children === "function" ? children(state ?? ({} as RadioRenderProps)) : children;
 
     return (
       <span
@@ -110,7 +117,9 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
         className={slots?.indicator({className})}
         data-slot="radio-indicator"
         {...props}
-      />
+      >
+        {content}
+      </span>
     );
   },
 );

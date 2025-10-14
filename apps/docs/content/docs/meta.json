@@ -30,6 +30,8 @@
     "components/close-button",
     "components/disclosure",
     "components/disclosure-group",
+    "components/fieldset",
+    "components/input",
     "components/kbd",
     "components/link",
     "components/popover",
@@ -38,6 +40,8 @@
     "components/skeleton",
     "components/spinner",
     "components/switch",
+    "components/text-field",
+    "components/textarea",
     "components/tabs",
     "components/tooltip"
   ]

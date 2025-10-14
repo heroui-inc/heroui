@@ -55,17 +55,6 @@ const CustomIconTemplate = (_props: LinkProps) => (
   </div>
 );
 
-const LegacyCompatibilityTemplate = (_props: LinkProps) => (
-  <div className="flex items-center gap-4">
-    {/* Legacy usage without compound pattern still works */}
-    <Link href="#">Simple link without icon</Link>
-    {/* Can still add icons manually like before */}
-    <Link className="inline-flex items-center gap-1" href="#">
-      Manual icon <LinkIconSvg className="h-3 w-3" />
-    </Link>
-  </div>
-);
-
 const IconPlacementTemplate = (_props: LinkProps) => (
   <div className="flex flex-col gap-4">
     <Link href="#">
@@ -87,11 +76,6 @@ export const Default = {
 export const CustomIcon = {
   args: {},
   render: CustomIconTemplate,
-};
-
-export const LegacyCompatibility = {
-  args: {},
-  render: LegacyCompatibilityTemplate,
 };
 
 export const IconPlacement = {

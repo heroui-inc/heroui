@@ -42,6 +42,7 @@
 .tabs__tab {
   position: relative;
   z-index: 1;
+  cursor: var(--cursor-interactive);
 
   @apply text-segment-foreground flex h-8 w-full items-center justify-center rounded-md px-4 text-center font-medium outline-none;
 
@@ -97,9 +98,9 @@
   top: 0;
   left: 0;
   z-index: -1;
-  transition-duration: 250ms;
+  transition-duration: 500ms;
   transition-property: translate, width, height;
-  transition-timing-function: var(--ease-out);
+  transition-timing-function: var(--ease-fluid-out);
   border-radius: var(--radius-md);
   width: 100%;
   height: 100%;

@@ -1,0 +1,126 @@
+---
+title: TextArea
+description: Multiline text input with React Aria focus management and validation
+icon: new
+links:
+  rac: TextArea
+  source: textarea/textarea.tsx
+  styles: textarea.css
+  storybook: textarea
+---
+
+## Import
+
+```tsx
+import { TextArea } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="textarea-basic" />
+
+### Controlled
+
+Tie the value to component state for live counters or formatting.
+
+<ComponentPreview name="textarea-controlled" />
+
+### Rows and Resizing
+
+Adjust `rows` or add inline styles to tune the visible height.
+
+<ComponentPreview name="textarea-rows" />
+
+### Disabled
+
+Prevent editing when a submission is locked or pending.
+
+<ComponentPreview name="textarea-disabled" />
+
+### Validation
+
+Flip `isInvalid` when the message fails validation rules.
+
+<ComponentPreview name="textarea-validation" />
+
+<RelatedComponents component="textarea" />
+
+<RelatedShowcases component="TextArea" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Label, TextArea} from '@heroui/react';
+
+function CustomTextArea() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor="custom-textarea">Message</Label>
+      <TextArea
+        id="custom-textarea"
+        className="rounded-xl border border-border/70 bg-content1 px-4 py-3 text-sm leading-6 shadow-sm"
+        placeholder="Let us know how we can help..."
+        rows={5}
+        style={{resize: "vertical"}}
+      />
+    </div>
+  );
+}
+```
+
+### Customizing the component classes
+
+Override the shared `.textarea` class once with Tailwind's `@layer components`.
+
+```css
+@layer components {
+  .textarea {
+    @apply rounded-xl border border-border bg-content1 px-4 py-3 text-sm leading-6 shadow-sm;
+
+    &:hover,
+    &[data-hover="true"] {
+      @apply bg-content2 border-border/80;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible="true"] {
+      @apply border-primary ring-2 ring-primary/20;
+    }
+
+    &[data-invalid="true"] {
+      @apply border-danger bg-danger-50/10 text-danger;
+    }
+  }
+}
+```
+
+### CSS Classes
+
+- `.textarea` – Underlying `<textarea>` element styling
+
+### Interactive States
+
+- **Hover**: `:hover` or `[data-hover="true"]`
+- **Focus Visible**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Invalid**: `[data-invalid="true"]`
+- **Disabled**: `:disabled` or `[aria-disabled="true"]`
+
+## API Reference
+
+### TextArea Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Tailwind classes merged with the base styles. |
+| `isDisabled` | `boolean` | `false` | Disables input. |
+| `isReadOnly` | `boolean` | `false` | Prevents editing while keeping focusable. |
+| `isInvalid` | `boolean` | `false` | Marks the field invalid. |
+| `rows` | `number` | `3` | Preferred visible line count. |
+| `value` | `string` | - | Controlled value for the textarea. |
+| `defaultValue` | `string` | - | Initial uncontrolled value. |
+| `onChange` | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | - | Change handler. |
+| `placeholder` | `string` | - | Placeholder text. |
+| `ref` | `React.Ref<HTMLTextAreaElement>` | - | Ref forwarded to the textarea element. |
+| `...TextareaHTMLAttributes<HTMLTextAreaElement>` | - | Additional React Aria textarea props. |

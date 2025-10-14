@@ -20,3 +20,9 @@
 @utility status-pending {
   @apply pointer-events-none;
 }
+
+/* === Border === */
+/* Overrides the default tailwindcss border utility to support variables.css (border-width) */
+@utility border {
+  border-width: var(--border-width);
+}

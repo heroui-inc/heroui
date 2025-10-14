@@ -34,7 +34,7 @@ export function StatusChip({className, status}: StatusChipProps) {
   if (status === "updated") {
     return (
       <Chip
-        className={`text-foreground/90 dark:bg-white/8 bg-black/8 h-5 rounded-full px-1.5 text-[10px] ${className || ""}`}
+        className={`text-muted/90 dark:bg-white/8 bg-black/3 h-5 rounded-full px-1.5 text-[10px] ${className || ""}`}
         variant="primary"
       >
         Updated
