@@ -92,7 +92,7 @@
 
 /* Outline variant */
 .accordion--outline {
-  @apply bg-panel rounded-md border shadow-sm;
+  @apply bg-panel rounded-xl border shadow-sm;
 
   .accordion__trigger {
     &:hover,

@@ -2,15 +2,17 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent px-4 text-sm font-medium md:h-9;
+  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border-transparent px-4 text-sm font-medium md:h-9;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+  /* Border */
+  border-width: var(--border-width);
 
   transition:
     transform 150ms var(--ease-out),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
-
-  /* Cursor */
-  cursor: var(--cursor-interactive);
 
   &:focus-visible,
   &[data-focus-visible="true"] {

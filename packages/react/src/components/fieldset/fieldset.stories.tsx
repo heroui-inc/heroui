@@ -5,8 +5,12 @@ import React from "react";
 
 import {Button} from "../button";
 import {Description} from "../description";
+import {FieldError} from "../field-error";
 import {Form} from "../form";
+import {Input} from "../input";
+import {Label} from "../label";
 import {TextField} from "../text-field";
+import {TextArea} from "../textarea";
 
 import {Fieldset} from "./index";
 
@@ -53,9 +57,9 @@ export const Default: Story = {
                 return null;
               }}
             >
-              <TextField.Label>Name</TextField.Label>
-              <TextField.Input name="name" placeholder="John Doe" />
-              <TextField.Error />
+              <Label>Name</Label>
+              <Input name="name" placeholder="John Doe" />
+              <FieldError />
             </TextField>
             <TextField
               isRequired
@@ -67,9 +71,9 @@ export const Default: Story = {
                 return null;
               }}
             >
-              <TextField.Label>Email</TextField.Label>
-              <TextField.Input name="email" placeholder="john@example.com" type="email" />
-              <TextField.Error />
+              <Label>Email</Label>
+              <Input name="email" placeholder="john@example.com" type="email" />
+              <FieldError />
             </TextField>
             <TextField
               isRequired
@@ -81,10 +85,10 @@ export const Default: Story = {
                 return null;
               }}
             >
-              <TextField.Label>Bio</TextField.Label>
-              <TextField.TextArea name="bio" placeholder="Tell us about yourself..." />
-              <TextField.Description>Minimum 10 characters</TextField.Description>
-              <TextField.Error />
+              <Label>Bio</Label>
+              <TextArea name="bio" placeholder="Tell us about yourself..." />
+              <Description>Minimum 10 characters</Description>
+              <FieldError />
             </TextField>
           </Fieldset.Group>
           <Fieldset.Actions>

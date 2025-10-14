@@ -9,7 +9,7 @@ import type {
   DisclosureProps,
 } from "react-aria-components";
 
-import React, {createContext, useContext, useRef} from "react";
+import React, {createContext, useContext} from "react";
 import {
   Button,
   Disclosure,
@@ -19,7 +19,7 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps, useMergeRef} from "../../utils";
+import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
@@ -205,13 +205,11 @@ const AccordionPanel = React.forwardRef<
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
   const {isExpanded} = useContext(DisclosureStateContext)!;
-  const contentRef = useRef<HTMLDivElement>(null);
-  const mergedRef = useMergeRef(contentRef, ref);
 
   return (
     <DisclosurePanel
       {...props}
-      ref={mergedRef}
+      ref={ref}
       className={composeTwRenderProps(className, slots?.panel())}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-panel"

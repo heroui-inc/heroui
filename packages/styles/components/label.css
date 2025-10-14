@@ -5,14 +5,18 @@
 }
 
 /* State modifiers */
-.label--required {
+.label--required,
+[data-required="true"] .label {
   @apply after:text-danger after:ml-0.5 after:content-['*'];
 }
 
-.label--disabled {
+.label--disabled,
+[data-disabled="true"] .label {
   @apply status-disabled;
 }
 
-.label--invalid {
+.label--invalid,
+[data-invalid="true"] .label,
+[aria-invalid="true"] .label {
   @apply text-danger;
 }

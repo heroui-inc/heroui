@@ -2,7 +2,7 @@
 
 /* Base popover styles */
 .popover {
-  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-md p-0 text-sm will-change-transform dark:shadow-none;
+  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-xl p-0 text-sm will-change-transform dark:shadow-none;
 
   /* Entering animations */
   &[data-entering] {
@@ -33,8 +33,8 @@
 
   /* Arrow styling */
   & [data-slot="overlay-arrow"] {
+    @apply stroke-border/40;
     fill: var(--panel);
-    stroke: var(--border);
   }
 
   /* Arrow rotation based on placement */

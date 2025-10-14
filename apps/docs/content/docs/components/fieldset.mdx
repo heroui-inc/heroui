@@ -21,48 +21,23 @@ import { Fieldset } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and compose them to match your form requirements.
+Import all parts and piece them together.
 
 ```tsx
-import {Button, Description, Fieldset, TextField} from '@heroui/react';
+import {Fieldset} from '@heroui/react';
 
-export default function Example() {
-  return (
-    <Fieldset>
-      <Fieldset.Legend>Profile settings</Fieldset.Legend>
-      <Description>Keep your information up to date.</Description>
-      <Fieldset.Group>
-        <TextField isRequired>
-          <TextField.Label>Name</TextField.Label>
-          <TextField.Input placeholder="Jane Doe" />
-          <TextField.Error />
-        </TextField>
-        <TextField isRequired>
-          <TextField.Label>Email</TextField.Label>
-          <TextField.Input placeholder="jane@example.com" type="email" />
-          <TextField.Error />
-        </TextField>
-      </Fieldset.Group>
-      <Fieldset.Actions>
-        <Button color="primary">Save changes</Button>
-        <Button variant="light">Cancel</Button>
-      </Fieldset.Actions>
-    </Fieldset>
-  );
-}
+export default () => (
+  <Fieldset>
+    <Fieldset.Legend />
+    <Fieldset.Group>
+      {/* form fields go here */}
+    </Fieldset.Group>
+    <Fieldset.Actions>
+      {/* action buttons go here */}
+    </Fieldset.Actions>
+  </Fieldset>
+)
 ```
-
-### Validation
-
-Combine `isInvalid`, `isRequired`, and your own validation logic to surface inline feedback.
-
-<ComponentPreview name="fieldset-validation" />
-
-### Custom Layouts
-
-Use `Fieldset.Group` to control layout. Apply `className` to create responsive grids or stacks.
-
-<ComponentPreview name="fieldset-layout" />
 
 <RelatedComponents component="fieldset" />
 

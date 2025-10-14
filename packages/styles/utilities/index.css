@@ -1,5 +1,4 @@
 /* === Focus Ring === */
-
 @utility focus-ring {
   @apply ring-focus ring-offset-background outline-none ring-2 ring-offset-0;
   /* Overrides the ring offset from the theme variables */
@@ -19,10 +18,4 @@
 
 @utility status-pending {
   @apply pointer-events-none;
-}
-
-/* === Border === */
-/* Overrides the default tailwindcss border utility to support variables.css (border-width) */
-@utility border {
-  border-width: var(--border-width);
 }
