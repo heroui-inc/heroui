@@ -76,7 +76,7 @@
   opacity: 0;
   will-change: height, opacity;
   transition:
-    height 500ms var(--ease-fluid-out),
+    height 420ms var(--ease-fluid-out),
     opacity 340ms var(--ease-out);
   height: var(--disclosure-panel-height);
   overflow: clip;

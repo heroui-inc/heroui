@@ -3,7 +3,6 @@ title: Fieldset
 description: Group related form controls with legends, descriptions, and actions
 icon: new
 links:
-  rac: Fieldset
   source: fieldset/fieldset.tsx
   styles: fieldset.css
   storybook: fieldset
@@ -52,16 +51,16 @@ import {Fieldset, TextField} from '@heroui/react';
 
 function CustomFieldset() {
   return (
-    <Fieldset className="rounded-xl border border-border bg-content2 p-6 shadow-sm">
+    <Fieldset className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
       <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
       <Fieldset.Group className="grid gap-4 md:grid-cols-2">
         <TextField>
-          <TextField.Label>First name</TextField.Label>
-          <TextField.Input className="rounded-large border-border/60" placeholder="Jane" />
+          <Label>First name</Label>
+          <Input className="rounded-full border-border/60" placeholder="Jane" />
         </TextField>
         <TextField>
-          <TextField.Label>Last name</TextField.Label>
-          <TextField.Input className="rounded-large border-border/60" placeholder="Doe" />
+          <Label>Last name</Label>
+          <Input className="rounded-full border-border/60" placeholder="Doe" />
         </TextField>
       </Fieldset.Group>
       <Fieldset.Actions className="justify-end gap-3">
@@ -79,7 +78,7 @@ Use the `@layer components` directive to target Fieldset BEM-style classes.
 ```css
 @layer components {
   .fieldset {
-    @apply gap-5 rounded-xl border border-border/60 bg-content1 p-6 shadow-field;
+    @apply gap-5 rounded-xl border border-border/60 bg-surface-2 p-6 shadow-field;
   }
 
   .fieldset__legend {
@@ -104,13 +103,6 @@ The Fieldset compound component exposes these CSS selectors:
 - `.fieldset__legend` – Legend element
 - `.fieldset_field_group` – Wrapper for grouped fields
 - `.fieldset_actions` – Action bar below the fields
-- `.fieldset__description` – Optional description slot when using `Description`
-
-### Interactive States
-
-- **Disabled**: `fieldset:disabled` (all nested controls inherit the disabled state)
-- **Focus Within**: `fieldset:focus-within` (style the container when any child receives focus)
-- **Invalid**: Targets come from the nested form controls; combine with `[data-invalid="true"]`
 
 ## API Reference
 
@@ -120,10 +112,9 @@ The Fieldset compound component exposes these CSS selectors:
 |------|------|---------|-------------|
 | `asChild` | `boolean` | `false` | Render the fieldset as a custom component via `Slot`. |
 | `className` | `string` | - | Tailwind CSS classes applied to the root element. |
-| `disabled` | `boolean` | `false` | Disables all controls within the fieldset. |
 | `children` | `React.ReactNode` | - | Fieldset content (legend, groups, descriptions, actions). |
 | `ref` | `React.Ref<HTMLFieldSetElement>` | - | Ref forwarded to the fieldset element. |
-| `...HTMLAttributes<HTMLFieldSetElement>` | - | Supports native fieldset attributes and events. |
+| `nativeProps` | `React.HTMLAttributes<HTMLFieldSetElement>` | Supports native fieldset attributes and events. |
 
 ### Fieldset.Legend Props
 
@@ -133,7 +124,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `className` | `string` | - | Tailwind classes for the legend element. |
 | `children` | `React.ReactNode` | - | Legend content, usually plain text. |
 | `ref` | `React.Ref<HTMLLegendElement>` | - | Ref forwarded to the legend element. |
-| `...HTMLAttributes<HTMLLegendElement>` | - | Native legend attributes. |
+| `nativeProps` | `React.HTMLAttributes<HTMLLegendElement>` |  - | Native legend attributes. |
 
 ### Fieldset.Group Props
 
@@ -143,7 +134,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `className` | `string` | - | Layout and spacing classes for grouped fields. |
 | `children` | `React.ReactNode` | - | Form controls to group inside the fieldset. |
 | `ref` | `React.Ref<HTMLDivElement>` | - | Ref forwarded to the group wrapper. |
-| `...HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
+| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
 
 ### Fieldset.Actions Props
 
@@ -153,4 +144,4 @@ The Fieldset compound component exposes these CSS selectors:
 | `className` | `string` | - | Tailwind classes to align action buttons or text. |
 | `children` | `React.ReactNode` | - | Action buttons or helper text. |
 | `ref` | `React.Ref<HTMLDivElement>` | - | Ref forwarded to the actions container. |
-| `...HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
+| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |

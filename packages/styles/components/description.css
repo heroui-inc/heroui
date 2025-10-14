@@ -1,9 +1,4 @@
 /* Base description styles */
 .description {
-  @apply text-muted truncate text-wrap text-sm sm:text-xs;
-}
-
-/* Disabled state */
-.description--disabled {
-  @apply opacity-[var(--disabled-opacity)];
+  @apply text-muted truncate text-wrap text-xs;
 }

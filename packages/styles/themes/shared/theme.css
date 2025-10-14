@@ -133,6 +133,7 @@
   --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
 
   /* Semantic Radius */
+  /* Panel specific radius - used on components like popovers, dropdowns, modals, cards, etc. */
   --radius-panel: var(--radius-xl); /* 0.75rem (12px) */
   --radius-panel-inner: var(--radius-2xl); /* 1rem (16px) */
 

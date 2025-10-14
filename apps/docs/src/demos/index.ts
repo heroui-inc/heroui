@@ -9,11 +9,15 @@ import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
+import * as FieldErrorDemos from "./field-error";
 import * as FieldsetDemos from "./fieldset";
+import * as FormDemos from "./form";
 import * as InputDemos from "./input";
 import * as KbdDemos from "./kbd";
+import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
@@ -246,6 +250,11 @@ export const demos: Record<string, DemoItem> = {
   "disclosure-group-controlled": {
     component: DisclosureGroupDemos.Controlled,
     file: "disclosure-group/controlled.tsx",
+  },
+  // Form demos
+  "form-basic": {
+    component: FormDemos.Basic,
+    file: "form/basic.tsx",
   },
   // Fieldset demos
   "fieldset-basic": {
@@ -552,6 +561,21 @@ export const demos: Record<string, DemoItem> = {
   "popover-interactive": {
     component: PopoverDemos.Interactive,
     file: "popover/interactive.tsx",
+  },
+  // Label demos
+  "label-basic": {
+    component: LabelDemos.Basic,
+    file: "label/basic.tsx",
+  },
+  // Description demos
+  "description-basic": {
+    component: DescriptionDemos.Basic,
+    file: "description/basic.tsx",
+  },
+  // FieldError demos
+  "field-error-basic": {
+    component: FieldErrorDemos.Basic,
+    file: "field-error/basic.tsx",
   },
 };
 
