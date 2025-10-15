@@ -1,0 +1,161 @@
+---
+title: v3.0.0-alpha.34
+description: Introduces Form-based component, form field tokens, Storybook reorganization, and data-slot alignment
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 15, 2025</span>
+</div>
+
+This release introduces Form-based components, form field tokens, reorganizes Storybook, and aligns data-slot markers across components.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+## What's New
+
+### Form-based Components
+
+We've introduced a comprehensive set of form-based components built on React Aria Components, providing accessible and composable building blocks for creating forms. These components include [Description](/docs/components/description), [FieldError](/docs/components/field-error), [Fieldset](/docs/components/fieldset), [Form](/docs/components/form), [Input](/docs/components/input), [Label](/docs/components/label), [RadioGroup](/docs/components/radio-group), [TextField](/docs/components/text-field), and [TextArea](/docs/components/textarea).
+
+#### Description
+
+<ComponentPreview
+  name="description-basic"
+/>
+
+#### FieldError
+
+<ComponentPreview
+  name="field-error-basic"
+/>
+
+#### Fieldset
+
+<ComponentPreview
+  name="fieldset-basic"
+/>
+
+#### Form
+
+<ComponentPreview
+  name="form-basic"
+/>
+
+#### Input
+
+<ComponentPreview
+  name="input-basic"
+/>
+
+#### Label
+
+<ComponentPreview
+  name="label-basic"
+/>
+
+#### RadioGroup
+
+<ComponentPreview
+  name="radio-group-basic"
+/>
+
+#### TextField
+
+<ComponentPreview
+  name="text-field-basic"
+/>
+
+#### TextArea
+
+<ComponentPreview
+  name="textarea-basic"
+/>
+
+### Form Field Tokens
+
+Introduced form field tokens `--field-*` for consistent styling across form components. See [Theming](/docs/handbook/theming#calculated-variables-tailwind) for the `--field-*` variables.
+
+### Storybook Organization
+
+Reorganized Storybook by category for better navigation and component discovery.
+
+### Skeleton Animation Token
+
+**🚧 Breaking Changes:** Renamed `--skeleton-default-animation-type` to `--skeleton-animation` in [Skeleton](/docs/components/skeleton) for consistency with other component tokens.
+
+### Data-Slot Alignment
+
+Aligned data-slot markers across components for consistent styling and customization. This standardization makes it easier to target specific component parts with CSS selectors and improves the overall developer experience when customizing component styles.
+
+Components now use consistent `data-slot` attributes like:
+- `data-slot="base"` for the root element
+- `data-slot="label"` for label text
+- `data-slot="description"` for description text
+- `data-slot="error"` for error messages
+
+This allows for predictable CSS targeting across all form components:
+
+```css
+.radio {
+  [data-slot="label"] {
+    /* Styles apply to radio labels */
+  }
+}
+``` 
+
+## Documentation Improvements
+
+### Component Documentation
+- **[Link](/docs/components/link)**: Added Anatomy, and examples with Icon. Updated Link and Link.Icon props section.
+- **[Description](/docs/components/description)**, **[FieldError](/docs/components/field-error)**, **[Fieldset](/docs/components/fieldset)**, **[Form](/docs/components/form)**, **[Input](/docs/components/input)**, **[Label](/docs/components/label)**, **[RadioGroup](/docs/components/radio-group)**, **[TextField](/docs/components/text-field)**, and **[TextArea](/docs/components/textarea)**: New documentation with usage examples
+
+
+## Migration Guide
+
+### Skeleton Component Migration
+
+1. **Update animation token:**
+   - Replace `--skeleton-default-animation-type` with `--skeleton-animation`
+
+## Links
+
+- [GitHub PR #5780](https://github.com/heroui-inc/heroui/pull/5780)
+- [Description Component](/docs/components/description)
+- [FieldError Component](/docs/components/field-error)
+- [Fieldset Component](/docs/components/fieldset)
+- [Form Component](/docs/components/form)
+- [Input Component](/docs/components/input)
+- [Label Component](/docs/components/label)
+- [RadioGroup Component](/docs/components/radio-group)
+- [TextField Component](/docs/components/text-field)
+- [TextArea Component](/docs/components/textarea)
+- [Skeleton Component](/docs/components/skeleton)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
