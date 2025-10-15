@@ -16,7 +16,10 @@ export const HeroUIProCallout = () => {
   return (
     <div className="relative w-full max-w-[12rem] flex flex-col items-center border border-default/60 hover:border-default/90 rounded-xl py-6 px-2 cursor-pointer">
       <div>
-        <p className="leading-[1.025] tracking-tight text-center text-large font-semibold">
+        <p
+          className="leading-[1.025] tracking-tight text-center text-large font-semibold"
+          id="callout-title"
+        >
           Ship&nbsp;
           <span className="bg-clip-text text-transparent bg-linear-to-b from-[#5EA2EF] to-[#0072F5]">
             faster
@@ -26,7 +29,10 @@ export const HeroUIProCallout = () => {
           <br />
           components
         </p>
-        <p className="text-center text-xs mt-2 px-3 font-medium text-default-500 dark:text-default-400 leading-tight">
+        <p
+          className="text-center text-xs mt-2 px-3 font-medium text-default-500 dark:text-default-400 leading-tight"
+          id="callout-description"
+        >
           Discover 210+ stunning components by HeroUI
         </p>
       </div>
@@ -37,6 +43,7 @@ export const HeroUIProCallout = () => {
         </div>
       </div>
       <NextLink
+        aria-labelledby="callout-title callout-description"
         className="absolute inset-0 z-1"
         href="https://heroui.pro/components?utm_source=heroui.com&utm_medium=callout"
         onClick={handleClick}
