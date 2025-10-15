@@ -1,6 +1,6 @@
 ---
 title: TextArea
-description: Multiline text input with React Aria focus management and validation
+description: Primitive multiline text input component that accepts standard HTML attributes
 icon: new
 links:
   rac: TextArea
@@ -14,6 +14,8 @@ links:
 ```tsx
 import { TextArea } from '@heroui/react';
 ```
+
+> For validation, labels, and error messages, see **[TextField](/docs/components/text-field)**.
 
 ### Usage
 
@@ -95,16 +97,25 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 
 ### TextArea Props
 
+TextArea accepts all standard HTML `<textarea>` attributes plus the following:
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the base styles. |
-| `isDisabled` | `boolean` | `false` | Disables input. |
-| `isReadOnly` | `boolean` | `false` | Prevents editing while keeping focusable. |
-| `isInvalid` | `boolean` | `false` | Marks the field invalid. |
-| `rows` | `number` | `3` | Preferred visible line count. |
+| `rows` | `number` | `3` | Number of visible text lines. |
+| `cols` | `number` | - | Visible width of the text control. |
 | `value` | `string` | - | Controlled value for the textarea. |
 | `defaultValue` | `string` | - | Initial uncontrolled value. |
 | `onChange` | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | - | Change handler. |
 | `placeholder` | `string` | - | Placeholder text. |
+| `disabled` | `boolean` | `false` | Disables the textarea. |
+| `readOnly` | `boolean` | `false` | Makes the textarea read-only. |
+| `required` | `boolean` | `false` | Marks the textarea as required. |
+| `name` | `string` | - | Name for form submission. |
+| `autoComplete` | `string` | - | Autocomplete hint for the browser. |
+| `maxLength` | `number` | - | Maximum number of characters. |
+| `minLength` | `number` | - | Minimum number of characters. |
+| `wrap` | `'soft' \| 'hard'` | - | How text wraps when submitted. |
 | `ref` | `React.Ref<HTMLTextAreaElement>` | - | Ref forwarded to the textarea element. |
-| `...TextareaHTMLAttributes<HTMLTextAreaElement>` | - | Additional React Aria textarea props. |
+
+> For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with TextArea as a child component.

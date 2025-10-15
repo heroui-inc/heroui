@@ -1,6 +1,6 @@
 ---
 title: Input
-description: Accessible single-line text input built on top of React Aria
+description: Primitive single-line text input component that accepts standard HTML attributes
 icon: new
 links:
   rac: Input
@@ -14,6 +14,8 @@ links:
 ```tsx
 import { Input } from '@heroui/react';
 ```
+
+> For validation, labels, and error messages, see **[TextField](/docs/components/text-field)**.
 
 ### Usage
 
@@ -92,16 +94,27 @@ The base class `.input` powers every instance. Override it once with `@layer com
 
 ### Input Props
 
+Input accepts all standard HTML `<input>` attributes plus the following:
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isDisabled` | `boolean` | `false` | Disables user interaction. |
-| `isReadOnly` | `boolean` | `false` | Renders the input read only. |
-| `isInvalid` | `boolean` | `false` | Marks the field as invalid without browser validation. |
-| `type` | `string` | `"text"` | Native input `type` attribute. |
+| `type` | `string` | `"text"` | Input type (text, email, password, number, etc.). |
 | `value` | `string` | - | Controlled value. |
 | `defaultValue` | `string` | - | Uncontrolled initial value. |
 | `onChange` | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - | Change handler. |
 | `placeholder` | `string` | - | Placeholder text. |
+| `disabled` | `boolean` | `false` | Disables the input. |
+| `readOnly` | `boolean` | `false` | Makes the input read-only. |
+| `required` | `boolean` | `false` | Marks the input as required. |
+| `name` | `string` | - | Name for form submission. |
+| `autoComplete` | `string` | - | Autocomplete hint for the browser. |
+| `maxLength` | `number` | - | Maximum number of characters. |
+| `minLength` | `number` | - | Minimum number of characters. |
+| `pattern` | `string` | - | Regex pattern for validation. |
+| `min` | `number \| string` | - | Minimum value (for number/date inputs). |
+| `max` | `number \| string` | - | Maximum value (for number/date inputs). |
+| `step` | `number \| string` | - | Stepping interval (for number inputs). |
 | `ref` | `React.Ref<HTMLInputElement>` | - | Ref forwarded to the input element. |
-| `InputHTMLAttributes` | `React.HTMLAttributes<HTMLInputElement>` | - | Native input props. |
+
+> For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with Input as a child component.
