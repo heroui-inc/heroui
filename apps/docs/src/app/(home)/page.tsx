@@ -10,12 +10,12 @@ import {currentVersion} from "@/utils/version";
 const VersionChip = () => {
   return (
     <Link
-      className="chip bg-default/50 dark:border-border hover:bg-default/40 dark:hover:bg-default/20 rounded-full dark:bg-white/10"
+      className="chip bg-pink-400/8 hover:bg-default/40 rounded-full border-pink-400/20 dark:border-pink-400/10 dark:bg-white/10 dark:hover:bg-pink-400/20"
       href="/docs/changelog"
     >
-      <Iconify className="text-muted" icon="sparkles" />
+      <Iconify className="text-pink-400/90" icon="sparkles" />
       {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
-      <span className="text-muted">v{currentVersion}: Form-based Components</span>
+      <span className="text-pink-400/90">v{currentVersion}: Form Components</span>
     </Link>
   );
 };
