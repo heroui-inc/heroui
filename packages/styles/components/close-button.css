@@ -2,15 +2,16 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate h-6 w-6 p-1;
-  @apply inline-flex items-center justify-center;
-  @apply rounded-sm border border-transparent;
-  @apply origin-center transform-gpu select-none;
+  @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-sm border-transparent p-1;
+
+  /* Border */
+  border-width: var(--border-width);
 
   transition:
-    transform 150ms var(--ease-smooth),
+    transform 150ms var(--ease-out),
     color 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth);
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -18,22 +19,18 @@
   /* Focus visible state */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
   &[aria-disabled="true"] {
-    @apply pointer-events-none;
-    @apply opacity-[var(--disabled-opacity)];
-
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
   }
 
   /* Pending state */
   &[data-pending] {
-    @apply pointer-events-none;
+    @apply status-pending;
   }
 
   /* SVG icon styling*/

@@ -13,6 +13,7 @@ import {ComponentPreview} from "./components/component-preview";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
 import {NewsletterForm} from "./components/newsletter-form";
+import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {PackageManagers} from "./mdx-components/package-managers";
 
@@ -66,6 +67,15 @@ function RelatedShowcases(props: any) {
   );
 }
 
+// Wrapper component for RelatedComponents with Suspense
+function RelatedComponents(props: any) {
+  return (
+    <Suspense fallback={null}>
+      <RelatedComponentsComponent {...props} />
+    </Suspense>
+  );
+}
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -87,6 +97,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     NewsletterForm,
     PackageManagers,
     Preview,
+    RelatedComponents,
     RelatedShowcases,
     Star,
     X,

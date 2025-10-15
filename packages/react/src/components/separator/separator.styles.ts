@@ -3,7 +3,7 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 const separatorVariants = tv({
-  base: "separator shrink-0",
+  base: "separator",
   variants: {
     orientation: {
       horizontal: "separator--horizontal",

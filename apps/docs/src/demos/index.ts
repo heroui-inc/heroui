@@ -6,20 +6,27 @@ import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as CardDemos from "./card";
-import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
+import * as FieldErrorDemos from "./field-error";
+import * as FieldsetDemos from "./fieldset";
+import * as FormDemos from "./form";
+import * as InputDemos from "./input";
 import * as KbdDemos from "./kbd";
+import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
 import * as PopoverDemos from "./popover";
+import * as RadioGroupDemos from "./radio-group";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
 import * as SwitchDemos from "./switch";
 import * as TabsDemos from "./tabs";
 import * as TextFieldDemos from "./text-field";
+import * as TextAreaDemos from "./textarea";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -174,31 +181,6 @@ export const demos: Record<string, DemoItem> = {
     component: CardDemos.WithBackgroundImage,
     file: "card/with-background-image.tsx",
   },
-  // Checkbox demos
-  "checkbox-basic": {
-    component: CheckboxDemos.Basic,
-    file: "checkbox/basic.tsx",
-  },
-  "checkbox-with-description": {
-    component: CheckboxDemos.WithDescription,
-    file: "checkbox/with-description.tsx",
-  },
-  "checkbox-indeterminate": {
-    component: CheckboxDemos.Indeterminate,
-    file: "checkbox/indeterminate.tsx",
-  },
-  "checkbox-states": {
-    component: CheckboxDemos.States,
-    file: "checkbox/states.tsx",
-  },
-  "checkbox-controlled": {
-    component: CheckboxDemos.Controlled,
-    file: "checkbox/controlled.tsx",
-  },
-  "checkbox-group": {
-    component: CheckboxDemos.Group,
-    file: "checkbox/group.tsx",
-  },
   // Chip demos
   "chip-basic": {
     component: ChipDemos.Basic,
@@ -243,6 +225,37 @@ export const demos: Record<string, DemoItem> = {
     component: DisclosureGroupDemos.Controlled,
     file: "disclosure-group/controlled.tsx",
   },
+  // Form demos
+  "form-basic": {
+    component: FormDemos.Basic,
+    file: "form/basic.tsx",
+  },
+  // Fieldset demos
+  "fieldset-basic": {
+    component: FieldsetDemos.Basic,
+    file: "fieldset/basic.tsx",
+  },
+  "fieldset-layout": {
+    component: FieldsetDemos.Layout,
+    file: "fieldset/layout.tsx",
+  },
+  "fieldset-validation": {
+    component: FieldsetDemos.Validation,
+    file: "fieldset/validation.tsx",
+  },
+  // Input demos
+  "input-basic": {
+    component: InputDemos.Basic,
+    file: "input/basic.tsx",
+  },
+  "input-types": {
+    component: InputDemos.Types,
+    file: "input/types.tsx",
+  },
+  "input-controlled": {
+    component: InputDemos.Controlled,
+    file: "input/controlled.tsx",
+  },
   // Kbd demos
   "kbd-basic": {
     component: KbdDemos.Basic,
@@ -269,9 +282,46 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.Basic,
     file: "link/basic.tsx",
   },
-  "link-with-icon": {
-    component: LinkDemos.WithIcon,
-    file: "link/with-icon.tsx",
+  "link-custom-icon": {
+    component: LinkDemos.CustomIcon,
+    file: "link/custom-icon.tsx",
+  },
+  "link-icon-placement": {
+    component: LinkDemos.IconPlacement,
+    file: "link/icon-placement.tsx",
+  },
+  // RadioGroup demos
+  "radio-group-basic": {
+    component: RadioGroupDemos.Basic,
+    file: "radio-group/basic.tsx",
+  },
+  "radio-group-controlled": {
+    component: RadioGroupDemos.Controlled,
+    file: "radio-group/controlled.tsx",
+  },
+  "radio-group-custom-indicator": {
+    component: RadioGroupDemos.CustomIndicator,
+    file: "radio-group/custom-indicator.tsx",
+  },
+  "radio-group-delivery-and-payment": {
+    component: RadioGroupDemos.DeliveryAndPayment,
+    file: "radio-group/delivery-and-payment.tsx",
+  },
+  "radio-group-disabled": {
+    component: RadioGroupDemos.Disabled,
+    file: "radio-group/disabled.tsx",
+  },
+  "radio-group-horizontal": {
+    component: RadioGroupDemos.Horizontal,
+    file: "radio-group/horizontal.tsx",
+  },
+  "radio-group-uncontrolled": {
+    component: RadioGroupDemos.Uncontrolled,
+    file: "radio-group/uncontrolled.tsx",
+  },
+  "radio-group-validation": {
+    component: RadioGroupDemos.Validation,
+    file: "radio-group/validation.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {
@@ -394,6 +444,19 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.CustomStyles,
     file: "tabs/custom-styles.tsx",
   },
+  // TextArea demos
+  "textarea-basic": {
+    component: TextAreaDemos.Basic,
+    file: "textarea/basic.tsx",
+  },
+  "textarea-rows": {
+    component: TextAreaDemos.Rows,
+    file: "textarea/rows.tsx",
+  },
+  "textarea-controlled": {
+    component: TextAreaDemos.Controlled,
+    file: "textarea/controlled.tsx",
+  },
   // TextField demos
   "text-field-basic": {
     component: TextFieldDemos.Basic,
@@ -422,6 +485,14 @@ export const demos: Record<string, DemoItem> = {
   "text-field-input-types": {
     component: TextFieldDemos.InputTypes,
     file: "text-field/input-types.tsx",
+  },
+  "text-field-controlled": {
+    component: TextFieldDemos.Controlled,
+    file: "text-field/controlled.tsx",
+  },
+  "text-field-validation": {
+    component: TextFieldDemos.Validation,
+    file: "text-field/validation.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {
@@ -456,6 +527,21 @@ export const demos: Record<string, DemoItem> = {
   "popover-interactive": {
     component: PopoverDemos.Interactive,
     file: "popover/interactive.tsx",
+  },
+  // Label demos
+  "label-basic": {
+    component: LabelDemos.Basic,
+    file: "label/basic.tsx",
+  },
+  // Description demos
+  "description-basic": {
+    component: DescriptionDemos.Basic,
+    file: "description/basic.tsx",
+  },
+  // FieldError demos
+  "field-error-basic": {
+    component: FieldErrorDemos.Basic,
+    file: "field-error/basic.tsx",
   },
 };
 

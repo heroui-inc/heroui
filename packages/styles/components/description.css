@@ -1,29 +1,4 @@
 /* Base description styles */
 .description {
-  @apply text-muted transition-colors duration-200;
-
-  /* Default size - matches description--md variant */
-  @apply text-sm;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
-/* Size variants */
-.description--sm {
-  @apply text-xs;
-}
-
-.description--md {
-  /* No styles as this is the default size */
-}
-
-.description--lg {
-  @apply text-base;
-}
-
-/* Disabled state */
-.description--disabled {
-  @apply opacity-[var(--disabled-opacity)];
+  @apply text-muted truncate text-wrap text-xs;
 }

@@ -13,7 +13,7 @@ const cssVariableCache = new Map<string, string | undefined>();
  * @example
  * ```jsx
  * function Component() {
- *   const animationType = useCSSVariable('--skeleton-default-animation-type')
+ *   const animationType = useCSSVariable('--skeleton-animation')
  *   // Returns the CSS variable value or undefined (cached by default)
  * }
  * ```

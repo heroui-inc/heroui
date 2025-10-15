@@ -1,33 +1,20 @@
 "use client";
 
-import type {
-  FieldErrorVariants,
-  FieldGroupVariants,
-  FieldVariants,
-  FieldsetVariants,
-  LegendVariants,
-} from "./fieldset.styles";
-import type {FieldErrorProps as FieldErrorPrimitiveProps} from "react-aria-components";
+import type {FieldsetVariants} from "./fieldset.styles";
 
 import {Slot} from "@radix-ui/react-slot";
-import React from "react";
-import {FieldError as FieldErrorPrimitive} from "react-aria-components";
+import React, {createContext, useContext} from "react";
 
-import {composeTwRenderProps} from "../../utils/compose";
-
-import {
-  fieldErrorVariants,
-  fieldGroupVariants,
-  fieldVariants,
-  fieldsetVariants,
-  legendVariants,
-} from "./fieldset.styles";
+import {fieldsetVariants} from "./fieldset.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Fieldset
  * -----------------------------------------------------------------------------------------------*/
 
+const FieldsetContext = createContext<{slots?: ReturnType<typeof fieldsetVariants>}>({});
+
 interface FieldsetProps extends React.HTMLAttributes<HTMLFieldSetElement>, FieldsetVariants {
+  ref?: React.Ref<HTMLFieldSetElement>;
   asChild?: boolean;
 }
 
@@ -35,48 +22,63 @@ const Fieldset = React.forwardRef<HTMLFieldSetElement, FieldsetProps>(
   ({asChild = false, className, ...props}, ref) => {
     const Comp = asChild ? Slot : "fieldset";
 
-    return <Comp ref={ref} className={fieldsetVariants({className})} {...props} />;
+    const slots = React.useMemo(() => fieldsetVariants({}), []);
+
+    return (
+      <FieldsetContext.Provider value={{slots}}>
+        <Comp ref={ref} className={slots?.base({className})} data-slot="fieldset" {...props} />
+      </FieldsetContext.Provider>
+    );
   },
 );
 
 Fieldset.displayName = "HeroUI.Fieldset";
 
-/* -------------------------------------------------------------------------------------------------
- * Legend
- * -----------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------*/
 
-interface LegendProps extends React.HTMLAttributes<HTMLLegendElement>, LegendVariants {
+interface FieldsetLegendProps extends React.HTMLAttributes<HTMLLegendElement> {
+  ref?: React.Ref<HTMLLegendElement>;
   asChild?: boolean;
 }
 
-const Legend = React.forwardRef<HTMLLegendElement, LegendProps>(
+const FieldsetLegend = React.forwardRef<HTMLLegendElement, FieldsetLegendProps>(
   ({asChild = false, className, ...props}, ref) => {
     const Comp = asChild ? Slot : "legend";
 
-    return <Comp ref={ref} className={legendVariants({className})} data-slot="legend" {...props} />;
-  },
-);
-
-Legend.displayName = "HeroUI.Legend";
-
-/* -------------------------------------------------------------------------------------------------
- * FieldGroup
- * -----------------------------------------------------------------------------------------------*/
-
-interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement>, FieldGroupVariants {
-  asChild?: boolean;
-}
-
-const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
-  ({asChild = false, className, spacing, ...props}, ref) => {
-    const Comp = asChild ? Slot : "div";
+    const {slots} = useContext(FieldsetContext);
 
     return (
       <Comp
         ref={ref}
-        className={fieldGroupVariants({spacing, className})}
-        data-slot="control"
+        className={slots?.legend({className})}
+        data-slot="fieldset-legend"
         {...props}
+      />
+    );
+  },
+);
+
+FieldsetLegend.displayName = "HeroUI.FieldsetLegend";
+
+/* -----------------------------------------------------------------------------------------------*/
+
+interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+  ref?: React.Ref<HTMLDivElement>;
+  asChild?: boolean;
+}
+
+const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
+  ({asChild = false, className, ...rest}, ref) => {
+    const Comp = asChild ? Slot : "div";
+
+    const {slots} = useContext(FieldsetContext);
+
+    return (
+      <Comp
+        ref={ref}
+        className={slots?.fieldGroup({className})}
+        data-slot="fieldset-field-group"
+        {...rest}
       />
     );
   },
@@ -84,69 +86,40 @@ const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
 
 FieldGroup.displayName = "HeroUI.FieldGroup";
 
-/* -------------------------------------------------------------------------------------------------
- * Field
- * -----------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------*/
 
-interface FieldProps extends React.HTMLAttributes<HTMLDivElement>, FieldVariants {
+interface FieldsetActionsProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
 
-const Field = React.forwardRef<HTMLDivElement, FieldProps>(
-  ({asChild = false, className, variant, ...props}, ref) => {
-    const Comp = asChild ? Slot : "div";
+const FieldsetActions = React.forwardRef<HTMLDivElement, FieldsetActionsProps>(
+  ({asChild, children, className, ...rest}, ref) => {
+    const Component = asChild ? Slot : "div";
+    const {slots} = useContext(FieldsetContext);
 
     return (
-      <Comp
+      <Component
         ref={ref}
-        className={fieldVariants({variant, className})}
-        data-slot="field"
-        {...props}
-      />
-    );
-  },
-);
-
-Field.displayName = "HeroUI.Field";
-
-/* -------------------------------------------------------------------------------------------------
- * FieldError
- * -----------------------------------------------------------------------------------------------*/
-
-interface FieldErrorProps extends FieldErrorPrimitiveProps, FieldErrorVariants {
-  ref?: React.Ref<HTMLElement>;
-}
-
-const FieldError = React.forwardRef<React.ElementRef<typeof FieldErrorPrimitive>, FieldErrorProps>(
-  ({children, className, ...rest}, ref) => {
-    return (
-      <FieldErrorPrimitive
-        ref={ref}
-        data-visible
-        className={composeTwRenderProps(className, fieldErrorVariants())}
+        className={slots?.actions({className})}
+        data-slot="fieldset-actions"
         {...rest}
       >
-        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
-      </FieldErrorPrimitive>
+        {children}
+      </Component>
     );
   },
 );
 
-FieldError.displayName = "HeroUI.FieldError";
+FieldsetActions.displayName = "HeroUI.Fieldset.Actions";
 
-/* -------------------------------------------------------------------------------------------------
- * Exports
- * -----------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------*/
 
-export {
-  Fieldset,
-  Legend,
-  FieldGroup,
-  Field,
-  FieldError,
-  type FieldsetProps,
-  type LegendProps,
-  type FieldGroupProps,
-  type FieldProps,
-  type FieldErrorProps,
-};
+const CompoundFieldset = Object.assign(Fieldset, {
+  Legend: FieldsetLegend,
+  Group: FieldGroup,
+  Actions: FieldsetActions,
+});
+
+export type {FieldsetProps, FieldsetLegendProps, FieldGroupProps};
+
+export default CompoundFieldset;

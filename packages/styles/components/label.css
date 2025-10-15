@@ -1,48 +1,28 @@
 /* Base label styles */
 .label {
   /* Base styling */
-  @apply select-none font-medium transition-colors duration-200;
-
-  /* Default size - matches label--md variant */
-  @apply text-base;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
+  @apply text-foreground text-sm font-medium;
 }
 
-/* Size variants */
-.label--sm {
-  @apply text-sm;
-}
-
-.label--md {
-  /* No styles as this is the default size */
-  /* Default size is text-base applied in base class */
-}
-
-.label--lg {
-  @apply text-lg;
-}
-
-/* Variant styles */
-.label--default {
-  @apply text-foreground;
-}
-
-.label--muted {
-  @apply text-muted;
-}
-
-.label--destructive {
-  @apply text-danger;
-}
-
-/* State modifiers */
-.label--required {
+/* 
+ * Exclude group-level components (RadioGroup, CheckboxGroup) and radio/checkbox items
+ * to ensure asterisks only appear on atomic form field labels and group labels,
+ * not on individual options within those groups
+ */
+.label--required,
+[data-required="true"]:not([role="group"]):not([role="radiogroup"]):not([role="checkboxgroup"])
+  > .label,
+[data-required="true"]:not([data-slot="radio"]):not([data-slot="checkbox"]) > .label {
   @apply after:text-danger after:ml-0.5 after:content-['*'];
 }
 
-.label--disabled {
-  @apply cursor-not-allowed opacity-[var(--disabled-opacity)];
+.label--disabled,
+[data-disabled="true"] .label {
+  @apply status-disabled;
+}
+
+.label--invalid,
+[data-invalid="true"] .label,
+[aria-invalid="true"] .label {
+  @apply text-danger;
 }

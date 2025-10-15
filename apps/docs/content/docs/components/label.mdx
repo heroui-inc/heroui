@@ -1,0 +1,96 @@
+---
+title: Label
+description: Renders an accessible label associated with form controls
+icon: new
+links:
+  rac: TextField
+  source: label/label.tsx
+  styles: label.css
+  storybook: label
+---
+
+## Import
+
+```tsx
+import { Label } from '@heroui/react';
+```
+
+## Usage
+
+<ComponentPreview
+  name="label-basic"
+/>
+
+<RelatedComponents component="label" />
+
+## API
+
+### Label Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `htmlFor` | `string` | - | The id of the element the label is associated with |
+| `isRequired` | `boolean` | `false` | Whether to display a required indicator |
+| `isDisabled` | `boolean` | `false` | Whether the label is in a disabled state |
+| `isInvalid` | `boolean` | `false` | Whether the label is in an invalid state |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content of the label |
+
+## Accessibility
+
+The Label component is built on the native HTML `<label>` element ([MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)) and follows WAI-ARIA best practices:
+
+- Associates with form controls using the `htmlFor` attribute
+- Provides semantic HTML `<label>` element
+- Supports keyboard navigation when associated with form controls
+- Communicates required and invalid states to screen readers
+- Clicking the label focuses/activates the associated form control
+
+## Styling
+
+### CSS Classes
+
+The Label component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/label.css)):
+
+#### Base Classes
+- `.label` - Base label styles with text styling
+
+#### State Modifier Classes
+- `.label--required` or `[data-required="true"] > .label` - Shows required asterisk indicator
+- `.label--disabled` or `[data-disabled="true"] .label` - Disabled state styling
+- `.label--invalid` or `[data-invalid="true"] .label` or `[aria-invalid="true"] .label` - Invalid state styling (danger/red text color)
+ 
+**Note**: The required asterisk is smartly applied using role and data-slot detection. It excludes:
+- Elements with `role="group"`, `role="radiogroup"`, or `role="checkboxgroup"`
+- Elements with `data-slot="radio"` or `data-slot="checkbox"`
+
+This prevents duplicate asterisks when using group components with required fields.
+
+## Examples
+
+### With Required Indicator
+
+```tsx
+<Label htmlFor="email" isRequired>
+  Email Address
+</Label>
+<Input id="email" type="email" />
+```
+
+### With Disabled State
+
+```tsx
+<Label htmlFor="username" isDisabled>
+  Username
+</Label>
+<Input id="username" isDisabled />
+```
+
+### With Invalid State
+
+```tsx
+<Label htmlFor="password" isInvalid>
+  Password
+</Label>
+<Input id="password" isInvalid />
+```

@@ -28,8 +28,8 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
     if (asChild) {
       return (
         <SlotPrimitive
-          data-close-button
           className={styles}
+          data-slot="close-button"
           slot={slot as string}
           style={style as React.CSSProperties}
           {...rest}
@@ -42,9 +42,9 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
     return (
       <ButtonPrimitive
         ref={ref}
-        data-close-button
         aria-label="Close"
         className={composeTwRenderProps(className, styles)}
+        data-slot="close-button"
         slot={slot}
         style={style}
         {...rest}

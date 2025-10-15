@@ -1,13 +1,13 @@
 "use client";
 
-import {TextField} from "@heroui/react";
+import {Description, Label, TextArea, TextField} from "@heroui/react";
 
-export function TextArea() {
+export function TextAreaExample() {
   return (
-    <TextField className="w-full max-w-sm">
-      <TextField.Label>Message</TextField.Label>
-      <TextField.TextArea placeholder="Write your message here..." rows={4} />
-      <TextField.Description>Maximum 500 characters</TextField.Description>
+    <TextField className="w-full max-w-64">
+      <Label>Message</Label>
+      <TextArea placeholder="Write your message here..." rows={4} />
+      <Description>Maximum 500 characters</Description>
     </TextField>
   );
 }

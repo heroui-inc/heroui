@@ -23,7 +23,7 @@ export default {
     },
   },
   component: Disclosure,
-  title: "Components/Disclosure",
+  title: "Components/Navigation/Disclosure",
 } as Meta<typeof Disclosure>;
 
 const defaultArgs: DisclosureProps = {
@@ -45,7 +45,7 @@ const Template = (props: DisclosureProps) => {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <Disclosure.Body className="bg-panel shadow-border rounded-panel flex flex-col items-center p-2 p-4 text-center">
+          <Disclosure.Body className="bg-panel shadow-panel rounded-panel flex flex-col items-center p-2 p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
