@@ -1,5 +1,4 @@
 /* === Focus Ring === */
-
 @utility focus-ring {
   @apply ring-focus ring-offset-background outline-none ring-2 ring-offset-0;
   /* Overrides the ring offset from the theme variables */

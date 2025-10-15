@@ -2,7 +2,10 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-sm border border-transparent p-1;
+  @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-sm border-transparent p-1;
+
+  /* Border */
+  border-width: var(--border-width);
 
   transition:
     transform 150ms var(--ease-out),

@@ -29,7 +29,6 @@
   --color-fd-accent: #f9f9f9;
   --color-fd-muted-foreground: var(--color-neutral-500);
   --color-backdrop: rgba(255, 255, 255, 0.4);
-
   /* Fumadocs UI Animations */
   --animate-fd-fade-in: custom-fade-in 200ms ease-out forwards;
   --animate-fd-fade-out: custom-fade-out 150ms ease-out forwards;
@@ -64,7 +63,7 @@
 
 /* HeroUI Component Style Overrides */
 /* @utility button {
-  @apply rounded-lg;
+  @apply rounded-sm;
 } */
 
 /* Fumadocs UI Components Styles */
@@ -112,7 +111,7 @@
   }
 
   [data-search-full] {
-    @apply bg-default border-border shadow-xs/5 rounded-lg;
+    @apply bg-default border-border shadow-xs/5 rounded-xl;
 
     kbd {
       @apply bg-default-hover border-border;
@@ -135,8 +134,6 @@
 
 #nd-sidebar {
   @apply pt-0;
-
-  --radius: 0.5rem;
 
   @media (min-width: 600px) {
     --fd-sidebar-width: 240px;
@@ -222,7 +219,7 @@
   }
 
   [data-search-full] {
-    @apply bg-default border-border shadow-xs/5 rounded-lg sm:max-w-[300px] md:max-w-[400px] lg:mr-12;
+    @apply bg-default border-border shadow-xs/5 rounded-xl sm:max-w-[300px] md:max-w-[400px] lg:mr-12;
 
     kbd {
       @apply bg-default-hover border-border;
@@ -446,7 +443,7 @@
 }
 
 .code-block-wrapper {
-  @apply rounded-lg;
+  @apply rounded-xl;
 
   background: rgba(0, 0, 0, 0.04);
 }

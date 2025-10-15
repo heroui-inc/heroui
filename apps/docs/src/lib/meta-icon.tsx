@@ -8,7 +8,12 @@ export function createMetaIcon(iconName: string | undefined) {
   const id = uniqueId();
 
   //  FIXME: Hacky way to show a new badge
-  if (iconName === "new" || iconName === "preview" || iconName === "updated") {
+  if (
+    iconName === "new" ||
+    iconName === "new-dot" ||
+    iconName === "preview" ||
+    iconName === "updated"
+  ) {
     return <StatusChip className="order-last" status={iconName} />;
   }
 

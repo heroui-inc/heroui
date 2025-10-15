@@ -1,4 +1,4 @@
 /* Field error styles */
 .field-error {
-  @apply text-danger truncate px-1 text-sm opacity-0 data-[visible=true]:opacity-100 sm:text-xs;
+  @apply text-danger truncate px-1 text-xs opacity-0 data-[visible=true]:opacity-100;
 }

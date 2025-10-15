@@ -3,7 +3,10 @@
 /* Block */
 .card {
   @apply relative flex flex-col gap-3 overflow-hidden p-4;
-  @apply rounded-panel border-border border;
+  @apply rounded-panel border-border;
+
+  /* Border */
+  border-width: var(--border-width);
 }
 
 /* Element - header */

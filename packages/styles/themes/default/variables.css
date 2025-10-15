@@ -3,6 +3,8 @@
   :root {
     color-scheme: light;
 
+    /* == Common Variables == */
+
     /* Primitive Colors (Do not change between light and dark) */
     --white: oklch(100% 0 0);
     --black: oklch(0% 0 0);
@@ -14,14 +16,8 @@
 
     /* Border */
     --border-width: 1px;
+    --field-border-width: var(--border-width);
     --disabled-opacity: 0.5;
-
-    /* Panel specific radius */
-    --radius-panel: 0.5rem;
-    --radius-panel-inner: calc(var(--radius-panel) * 0.5);
-
-    /* Small radius for compact components */
-    --radius-sm: 0.375rem;
 
     /* Ring offset - Used for focus ring */
     --ring-offset-width: 2px;
@@ -36,13 +32,17 @@
     --cursor-interactive: pointer;
     --cursor-disabled: not-allowed;
 
+    /* Radius */
+    --radius: 0.5rem;
+    --field-radius: calc(var(--radius) * 1.5);
+
+    /* == Light Theme Variables == */
+
     /* Base Colors */
     --background: var(--white);
     --foreground: var(--eclipse);
     --panel: var(--white);
     --panel-foreground: var(--foreground);
-
-    --radius: 1rem;
 
     --muted: var(--color-neutral-500);
 
@@ -66,8 +66,6 @@
     --field-foreground: var(--foreground);
     --field-placeholder: var(--muted);
     --field-border: var(--border);
-    --field-border-width: var(--border-width);
-    --field-radius: calc(var(--radius) * 0.75);
 
     /* Status Colors */
     --success: oklch(0.5503 0.1244 153.56);
@@ -101,6 +99,8 @@
   [data-theme="dark"] {
     color-scheme: dark;
 
+    /* == Dark Theme Variables == */
+
     /* Base Colors */
     --background: var(--black);
     --foreground: var(--snow);
@@ -123,13 +123,7 @@
     --accent-soft: var(--color-neutral-800);
     --accent-soft-foreground: var(--color-neutral-200);
 
-    /* Form Field Defaults */
-    --field-background: var(--default);
-    --field-foreground: var(--foreground);
-    --field-placeholder: var(--muted);
-    --field-border: var(--border);
-    --field-border-width: var(--border-width);
-    --field-radius: calc(var(--radius) * 0.75);
+    /* Form Field Defaults - same as light theme (override as needed) */
 
     /* Status Colors */
     --success: oklch(0.5503 0.1244 153.56);

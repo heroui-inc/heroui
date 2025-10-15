@@ -1,0 +1,75 @@
+---
+title: Description
+description: Provides supplementary text for form fields and other components
+icon: new
+links:
+  rac: TextField
+  source: description/description.tsx
+  styles: description.css
+  storybook: description
+---
+
+## Import
+
+```tsx
+import { Description } from '@heroui/react';
+```
+
+## Usage
+
+<ComponentPreview
+  name="description-basic"
+/>
+
+<RelatedComponents component="description" />
+
+## API
+
+### Description Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content of the description |
+
+## Accessibility
+
+The Description component enhances accessibility by:
+
+- Using semantic HTML that screen readers can identify
+- Providing the `slot="description"` attribute for React Aria integration
+- Supporting proper text contrast ratios
+
+## Styling
+
+The Description component uses the following CSS classes:
+
+- `.description` - Base description styles with `muted` text color
+
+## Examples
+
+### With Form Fields
+
+```tsx
+<div className="flex flex-col gap-1">
+  <Label htmlFor="password">Password</Label>
+  <Input id="password" type="password" aria-describedby="password-description" />
+  <Description id="password-description">
+    Must be at least 8 characters with one uppercase letter
+  </Description>
+</div>
+```
+ 
+### Integration with TextField
+
+```tsx
+import {TextField, Label, Input, Description} from '@heroui/react';
+
+<TextField type="email">
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+  <Description>We'll never share your email</Description>
+</TextField>
+```
+
+When using the [TextField](./text-field) component, accessibility attributes are automatically applied to the label and description.

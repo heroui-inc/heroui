@@ -1,7 +1,7 @@
 ---
 title: RadioGroup
 description: Radio group for selecting a single option from a list
-icon: preview
+icon: new
 links:
   rac: RadioGroup
   source: radio-group/radio-group.tsx
@@ -21,49 +21,81 @@ import { RadioGroup, Radio } from '@heroui/react';
   name="radio-group-basic"
 />
 
+
 ### Anatomy
 
 Import all parts and piece them together.
 
 ```tsx
-import {RadioGroup, Radio, Label, Description} from '@heroui/react';
+import {RadioGroup, Radio, Label, Description, FieldError} from '@heroui/react';
 
 export default () => (
-  <RadioGroup defaultValue="premium" name="plan">
-    <Label>Plan selection</Label>
-    <Description>Choose the plan that best suits your needs</Description>
-    <Radio value="basic">
+  <RadioGroup>
+    <Label />
+    <Description />
+    <Radio value="option1">
       <Radio.Control>
-        <Radio.Indicator />
+        <Radio.Indicator>
+          <span>✓</span> {/* Custom indicator (optional) */}
+        </Radio.Indicator>
       </Radio.Control>
       <Radio.Content>
-        <Label>Basic Plan</Label>
-        <Description>Includes 100 messages per month and up to 3 themes to set up</Description>
+        <Label />
+        <Description />
       </Radio.Content>
     </Radio>
-    <Radio value="premium">
-      <Radio.Control>
-        <Radio.Indicator />
-      </Radio.Control>
-      <Radio.Content>
-        <Label>Premium Plan</Label>
-        <Description>Includes 200 messages per month and up to 6 themes to set up</Description>
-      </Radio.Content>
-    </Radio>
-    <Radio value="business">
-      <Radio.Control>
-        <Radio.Indicator />
-      </Radio.Control>
-      <Radio.Content>
-        <Label>Business Plan</Label>
-        <Description>Unlimited messages and themes</Description>
-      </Radio.Content>
-    </Radio>
+    <FieldError />
   </RadioGroup>
-);
+)
 ```
 
+### Custom Indicator
 
+<ComponentPreview
+  name="radio-group-custom-indicator"
+/>
+
+### Horizontal Orientation
+
+<ComponentPreview
+  name="radio-group-horizontal"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="radio-group-controlled"
+/>
+
+### Uncontrolled
+
+Combine `defaultValue` with `onChange` when you only need to react to updates.
+
+<ComponentPreview
+  name="radio-group-uncontrolled"
+/>
+
+### Validation
+
+<ComponentPreview
+  name="radio-group-validation"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="radio-group-disabled"
+/>
+
+### Delivery & Payment
+
+<ComponentPreview
+  align="start"
+  name="radio-group-delivery-and-payment"
+/>
+
+
+<RelatedShowcases component="RadioGroup" />
 
 ## Styling
 
@@ -201,6 +233,30 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `isDisabled` | `boolean` | `false` | Whether the radio button is disabled |
 | `name` | `string` | - | The name of the radio button, used when submitting an HTML form |
 | `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Radio content or render prop |
+
+### Radio.Control Props
+
+Extends `React.HTMLAttributes<HTMLSpanElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to render inside the control, typically `Radio.Indicator`. |
+
+### Radio.Indicator Props
+
+Extends `React.HTMLAttributes<HTMLSpanElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Optional content or render prop that receives the current radio state. |
+
+### Radio.Content Props
+
+Extends `React.HTMLAttributes<HTMLDivElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content displayed next to the control, usually `Label` and `Description`. |
 
 ### RadioRenderProps
 

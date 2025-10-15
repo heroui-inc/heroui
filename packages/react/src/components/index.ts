@@ -34,7 +34,6 @@ export * from "./form";
 export * from "./radio-group";
 export * from "./alert";
 export * from "./calendar";
-export * from "./checkbox";
 export * from "./listbox";
 export * from "./slider";
 export * from "./input-otp";

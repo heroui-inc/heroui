@@ -1,0 +1,107 @@
+---
+title: Input
+description: Accessible single-line text input built on top of React Aria
+icon: new
+links:
+  rac: Input
+  source: input/input.tsx
+  styles: input.css
+  storybook: input
+---
+
+## Import
+
+```tsx
+import { Input } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="input-basic" />
+
+### Input Types
+
+<ComponentPreview name="input-types" />
+
+### Controlled
+
+<ComponentPreview name="input-controlled" />
+
+<RelatedComponents component="input" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Input, Label} from '@heroui/react';
+
+function CustomInput() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor="custom-input">Project name</Label>
+      <Input
+        id="custom-input"
+        className="rounded-xl border border-border/70 bg-surface-2 px-4 py-2 text-sm shadow-sm focus-visible:border-primary"
+        placeholder="New web app"
+      />
+    </div>
+  );
+}
+```
+
+### Customizing the component classes
+
+The base class `.input` powers every instance. Override it once with `@layer components`.
+
+```css
+@layer components {
+  .input {
+    @apply rounded-lg border border-border bg-surface-2 px-4 py-2 text-sm shadow-sm transition-colors;
+
+    &:hover,
+    &[data-hover="true"] {
+      @apply bg-surface-3 border-border/80;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible="true"] {
+      @apply border-primary ring-2 ring-primary/20;
+    }
+
+    &[data-invalid="true"] {
+      @apply border-danger bg-danger-50/10 text-danger;
+    }
+  }
+}
+```
+
+### CSS Classes
+
+- `.input` – Native input element styling
+
+### Interactive States
+
+- **Hover**: `:hover` or `[data-hover="true"]`
+- **Focus Visible**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Invalid**: `[data-invalid="true"]` (also syncs with `aria-invalid`)
+- **Disabled**: `:disabled` or `[aria-disabled="true"]`
+- **Read Only**: `[aria-readonly="true"]`
+
+## API Reference
+
+### Input Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Tailwind classes merged with the component styles. |
+| `isDisabled` | `boolean` | `false` | Disables user interaction. |
+| `isReadOnly` | `boolean` | `false` | Renders the input read only. |
+| `isInvalid` | `boolean` | `false` | Marks the field as invalid without browser validation. |
+| `type` | `string` | `"text"` | Native input `type` attribute. |
+| `value` | `string` | - | Controlled value. |
+| `defaultValue` | `string` | - | Uncontrolled initial value. |
+| `onChange` | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - | Change handler. |
+| `placeholder` | `string` | - | Placeholder text. |
+| `ref` | `React.Ref<HTMLInputElement>` | - | Ref forwarded to the input element. |
+| `InputHTMLAttributes` | `React.HTMLAttributes<HTMLInputElement>` | - | Native input props. |
