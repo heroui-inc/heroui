@@ -235,14 +235,6 @@ export const demos: Record<string, DemoItem> = {
     component: FieldsetDemos.Basic,
     file: "fieldset/basic.tsx",
   },
-  "fieldset-layout": {
-    component: FieldsetDemos.Layout,
-    file: "fieldset/layout.tsx",
-  },
-  "fieldset-validation": {
-    component: FieldsetDemos.Validation,
-    file: "fieldset/validation.tsx",
-  },
   // Input demos
   "input-basic": {
     component: InputDemos.Basic,

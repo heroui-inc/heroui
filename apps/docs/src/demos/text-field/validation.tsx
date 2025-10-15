@@ -7,33 +7,25 @@ export function Validation() {
   const [username, setUsername] = React.useState("");
   const [bio, setBio] = React.useState("");
 
-  const usernameInvalid = username.length > 0 && username.length < 3;
-  const bioInvalid = bio.length > 0 && bio.length < 20;
+  const isUsernameInvalid = username.length > 0 && username.length < 3;
+  const isBioInvalid = bio.length > 0 && bio.length < 20;
 
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
-      <TextField isRequired isInvalid={usernameInvalid}>
+      <TextField isRequired isInvalid={isUsernameInvalid} name="username" onChange={setUsername}>
         <Label>Username</Label>
-        <Input
-          placeholder="jane_doe"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        {usernameInvalid ? (
+        <Input placeholder="jane_doe" value={username} />
+        {isUsernameInvalid ? (
           <FieldError>Username must be at least 3 characters.</FieldError>
         ) : (
           <Description>Choose a unique username for your profile.</Description>
         )}
       </TextField>
 
-      <TextField isRequired isInvalid={bioInvalid}>
+      <TextField isRequired isInvalid={isBioInvalid} name="bio" onChange={setBio}>
         <Label>Bio</Label>
-        <TextArea
-          placeholder="Tell us about yourself..."
-          value={bio}
-          onChange={(event) => setBio(event.target.value)}
-        />
-        {bioInvalid ? (
+        <TextArea placeholder="Tell us about yourself..." value={bio} />
+        {isBioInvalid ? (
           <FieldError>Bio must contain at least 20 characters.</FieldError>
         ) : (
           <Description>Minimum 20 characters ({bio.length}/20).</Description>

@@ -5,29 +5,29 @@ import {Input, Label, TextField} from "@heroui/react";
 export function InputTypes() {
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
-      <TextField>
+      <TextField name="password" type="password">
         <Label>Password</Label>
-        <Input placeholder="••••••••" type="password" />
+        <Input placeholder="••••••••" />
       </TextField>
 
-      <TextField>
+      <TextField name="age" type="number">
         <Label>Age</Label>
-        <Input max="150" min="0" placeholder="21" type="number" />
+        <Input max="150" min="0" placeholder="21" />
       </TextField>
 
-      <TextField>
+      <TextField name="email" type="email">
         <Label>Email</Label>
-        <Input placeholder="user@example.com" type="email" />
+        <Input placeholder="user@example.com" />
       </TextField>
 
-      <TextField>
+      <TextField name="website" type="url">
         <Label>Website</Label>
-        <Input placeholder="https://example.com" type="url" />
+        <Input placeholder="https://example.com" />
       </TextField>
 
-      <TextField>
+      <TextField name="phone" type="tel">
         <Label>Phone</Label>
-        <Input placeholder="+1 (555) 000-0000" type="tel" />
+        <Input placeholder="+1 (555) 000-0000" />
       </TextField>
     </div>
   );

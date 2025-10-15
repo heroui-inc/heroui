@@ -28,13 +28,14 @@ export function Basic() {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Fieldset className="w-96">
+    <Form className="w-full max-w-96" onSubmit={onSubmit}>
+      <Fieldset>
         <Fieldset.Legend>Profile Settings</Fieldset.Legend>
         <Description>Update your profile information.</Description>
         <Fieldset.Group>
           <TextField
             isRequired
+            name="name"
             validate={(value) => {
               if (value.length < 3) {
                 return "Name must be at least 3 characters";
@@ -44,25 +45,17 @@ export function Basic() {
             }}
           >
             <Label>Name</Label>
-            <Input name="name" placeholder="John Doe" />
+            <Input placeholder="John Doe" />
             <FieldError />
           </TextField>
-          <TextField
-            isRequired
-            validate={(value) => {
-              if (!/^\S+@\S+\.\S+$/.test(value)) {
-                return "Please enter a valid email address";
-              }
-
-              return null;
-            }}
-          >
+          <TextField isRequired name="email" type="email">
             <Label>Email</Label>
-            <Input name="email" placeholder="john@example.com" type="email" />
+            <Input placeholder="john@example.com" />
             <FieldError />
           </TextField>
           <TextField
             isRequired
+            name="bio"
             validate={(value) => {
               if (value.length < 10) {
                 return "Bio must be at least 10 characters";
@@ -72,7 +65,7 @@ export function Basic() {
             }}
           >
             <Label>Bio</Label>
-            <TextArea name="bio" placeholder="Tell us about yourself..." />
+            <TextArea placeholder="Tell us about yourself..." />
             <Description>Minimum 10 characters</Description>
             <FieldError />
           </TextField>

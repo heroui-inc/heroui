@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <TextField>
+    <TextField name="name">
       <Label>Your name</Label>
       <Input className="w-[280px]" placeholder="John" />
     </TextField>
@@ -34,16 +34,16 @@ export const Default: Story = {
 export const WithTextArea: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <TextField>
+      <TextField name="productDescription">
         <Label>Describe your product</Label>
         <TextArea className="w-[280px]" placeholder="My product is..." />
       </TextField>
-      <TextField>
+      <TextField name="detailedDescription">
         <Label>Detailed description</Label>
         <TextArea className="w-[280px]" placeholder="Provide more details..." rows={4} />
         <Description>Minimum 4 rows</Description>
       </TextField>
-      <TextField>
+      <TextField name="review">
         <Label>Review</Label>
         <TextArea
           className="w-[280px]"
@@ -60,11 +60,11 @@ export const WithTextArea: Story = {
 export const Required: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <TextField isRequired>
+      <TextField isRequired name="email" type="email">
         <Label>Email</Label>
         <Input className="w-[280px]" placeholder="john@example.com" />
       </TextField>
-      <TextField isRequired>
+      <TextField isRequired name="address">
         <Label>Delivery address</Label>
         <TextArea className="w-[280px]" placeholder="123 Main St, Anytown, USA" />
         <Description>Make sure to include the zip code</Description>
@@ -76,12 +76,12 @@ export const Required: Story = {
 export const WithDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <TextField>
+      <TextField name="name">
         <Label>Your name</Label>
         <Input className="w-[280px]" placeholder="John" />
         <Description>We'll never share this with anyone else</Description>
       </TextField>
-      <TextField>
+      <TextField name="address">
         <Label>Delivery address</Label>
         <TextArea className="w-[280px]" placeholder="123 Main St, Anytown, USA" />
         <Description>Make sure to include the zip code</Description>
@@ -93,12 +93,12 @@ export const WithDescription: Story = {
 export const Invalid: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <TextField isInvalid isRequired>
+      <TextField isInvalid isRequired name="password" type="password">
         <Label>Your password</Label>
-        <Input className="w-[280px]" type="password" />
+        <Input className="w-[280px]" />
         <FieldError>Password must be longer than 8 characters</FieldError>
       </TextField>
-      <TextField isInvalid isRequired>
+      <TextField isInvalid isRequired name="address">
         <Label>Delivery address</Label>
         <TextArea className="w-[280px]" placeholder="123 Main St, Anytown, USA" />
         <FieldError>The address is invalid</FieldError>
@@ -110,12 +110,12 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <TextField isDisabled>
+      <TextField isDisabled name="name">
         <Label>Your name</Label>
         <Input className="w-[280px]" placeholder="John" />
         <Description>We'll never share this with anyone else</Description>
       </TextField>
-      <TextField isDisabled>
+      <TextField isDisabled name="message">
         <Label>Your message</Label>
         <TextArea className="w-[280px]" placeholder="Tell us more about yourself..." />
         <Description>Min 50 characters</Description>
@@ -127,19 +127,19 @@ export const Disabled: Story = {
 export const InputTypes: Story = {
   render: () => (
     <div className="flex w-80 flex-col gap-4">
-      <TextField>
+      <TextField name="age" type="number">
         <Label>Your age</Label>
-        <Input className="w-[280px]" placeholder="18" type="number" />
+        <Input className="w-[280px]" placeholder="18" />
       </TextField>
 
-      <TextField>
+      <TextField name="password" type="password">
         <Label>Your password</Label>
-        <Input className="w-[280px]" placeholder="••••••••" type="password" />
+        <Input className="w-[280px]" placeholder="••••••••" />
       </TextField>
 
-      <TextField>
+      <TextField name="email" type="email">
         <Label>Your email</Label>
-        <Input className="w-[280px]" placeholder="john@example.com" type="email" />
+        <Input className="w-[280px]" placeholder="john@example.com" />
       </TextField>
     </div>
   ),
@@ -152,23 +152,17 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <TextField>
+        <TextField name="name" onChange={setInputValue}>
           <Label>Your name</Label>
-          <Input
-            className="w-[280px]"
-            placeholder="John"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
+          <Input className="w-[280px]" placeholder="John" value={inputValue} />
           <Description>Character count: {inputValue.length}</Description>
         </TextField>
-        <TextField>
+        <TextField name="bio" onChange={setTextAreaValue}>
           <Label>Your bio</Label>
           <TextArea
             className="w-[280px]"
             placeholder="Tell us about yourself..."
             value={TextAreaValue}
-            onChange={(e) => setTextAreaValue(e.target.value)}
           />
           <Description>Character count: {TextAreaValue.length} / 500</Description>
         </TextField>
@@ -186,28 +180,18 @@ export const WithValidation: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <TextField isRequired isInvalid={isUsernameInvalid}>
+        <TextField isRequired isInvalid={isUsernameInvalid} name="username" onChange={setUsername}>
           <Label>Username</Label>
-          <Input
-            className="w-[280px]"
-            placeholder="john_doe"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <Input className="w-[280px]" placeholder="john_doe" value={username} />
           {isUsernameInvalid ? (
             <FieldError>Username must be at least 3 characters</FieldError>
           ) : (
             <Description>Choose a unique username</Description>
           )}
         </TextField>
-        <TextField isRequired isInvalid={isBioInvalid}>
+        <TextField isRequired isInvalid={isBioInvalid} name="bio" onChange={setBio}>
           <Label>Bio</Label>
-          <TextArea
-            className="w-[280px]"
-            placeholder="Tell us about yourself..."
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-          />
+          <TextArea className="w-[280px]" placeholder="Tell us about yourself..." value={bio} />
           {isBioInvalid ? (
             <FieldError>Bio must be at least 20 characters</FieldError>
           ) : (
