@@ -1,2 +1,3 @@
 export {LinkBasic as Basic} from "./basic";
-export {LinkWithIcon as WithIcon} from "./with-icon";
+export {LinkCustomIcon as CustomIcon} from "./custom-icon";
+export {LinkIconPlacement as IconPlacement} from "./icon-placement";

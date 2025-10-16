@@ -17,7 +17,6 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {usePreventHidden} from "../../hooks";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
@@ -49,7 +48,7 @@ const Disclosure = React.forwardRef<React.ElementRef<typeof DisclosurePrimitive>
       <DisclosureContext.Provider value={{slots}}>
         <DisclosurePrimitive
           ref={ref}
-          data-disclosure
+          data-slot="disclosure"
           {...props}
           className={composeTwRenderProps(className, slots.base())}
         >
@@ -77,8 +76,8 @@ const DisclosureHeading = React.forwardRef<
   return (
     <DisclosureHeadingPrimitive
       ref={ref}
-      data-disclosure-heading
       className={slots?.heading({className})}
+      data-slot="disclosure-heading"
       {...props}
     />
   );
@@ -97,8 +96,8 @@ const DisclosureTrigger = React.forwardRef<React.ElementRef<typeof Button>, Disc
     return (
       <Button
         ref={ref}
-        data-disclosure-trigger
         className={composeTwRenderProps(className, slots?.trigger())}
+        data-slot="disclosure-trigger"
         slot="trigger"
         {...props}
       >
@@ -125,15 +124,12 @@ const DisclosureContent = React.forwardRef<
   const mergedRef = useMergeRef(contentRef, ref);
   const {isExpanded} = useContext(DisclosureStateContext)!;
 
-  // Prevent React Aria from setting hidden="until-found" which breaks animations
-  usePreventHidden(contentRef);
-
   return (
     <DisclosurePanel
       ref={mergedRef}
-      data-disclosure-content
       className={composeTwRenderProps(className, slots?.content())}
       data-expanded={dataAttr(isExpanded)}
+      data-slot="disclosure-content"
       {...props}
     >
       {children}
@@ -152,7 +148,7 @@ const DisclosureBody = React.forwardRef<React.ElementRef<"div">, DisclosureBodyC
     const {slots} = useContext(DisclosureContext);
 
     return (
-      <div ref={ref} data-disclosure-body className={slots?.body({})} {...props}>
+      <div ref={ref} className={slots?.body({})} data-slot="disclosure-body" {...props}>
         <div className={slots?.bodyInner({className})}>{children}</div>
       </div>
     );
@@ -178,14 +174,14 @@ const DisclosureIndicator = React.forwardRef<
     return React.cloneElement(
       children as React.ReactElement<{
         className?: string;
-        "data-disclosure-indicator"?: boolean;
+        "data-slot"?: "disclosure-indicator";
         "data-expanded"?: Booleanish;
       }>,
       {
         ...props,
         "data-expanded": dataAttr(isExpanded),
         className: slots?.indicator({className}),
-        "data-disclosure-indicator": true,
+        "data-slot": "disclosure-indicator",
       },
     );
   }
@@ -193,9 +189,9 @@ const DisclosureIndicator = React.forwardRef<
   return (
     <IconChevronDown
       ref={ref}
-      data-disclosure-indicator
       className={slots?.indicator({className})}
       data-expanded={dataAttr(isExpanded)}
+      data-slot="disclosure-indicator"
       {...props}
     />
   );

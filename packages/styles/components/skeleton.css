@@ -1,5 +1,5 @@
 .skeleton {
-  @apply bg-surface-3/70 pointer-events-none relative overflow-hidden rounded-md;
+  @apply bg-surface-3/70 pointer-events-none relative overflow-hidden rounded-sm;
 }
 
 /* Animation types */

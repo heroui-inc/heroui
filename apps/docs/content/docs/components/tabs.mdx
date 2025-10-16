@@ -18,6 +18,7 @@ import { Tabs } from '@heroui/react';
 ### Usage
 
 <ComponentPreview
+  isBgSolid
   name="tabs-basic"
 />
 
@@ -32,9 +33,10 @@ export default () => (
   <Tabs>
     <Tabs.ListWrapper>
       <Tabs.List aria-label="Options">
-        <Tabs.Tab/>
+        <Tabs.Tab>
+          <Tabs.Indicator />
+        </Tabs.Tab>
       </Tabs.List>
-      <Tabs.Indicator />
     </Tabs.ListWrapper>
     <Tabs.Panel/>
   </Tabs>
@@ -44,20 +46,25 @@ export default () => (
 ### Vertical
 
 <ComponentPreview
+  isBgSolid
   name="tabs-vertical"
 />
 
 ### Disabled Tab
 
 <ComponentPreview
+  isBgSolid
   name="tabs-disabled"
 />
 
 ### Custom Styles
 
 <ComponentPreview
+  isBgSolid
   name="tabs-custom-styles"
 />
+
+<RelatedShowcases component="Tabs" />
 
 ## Styling
 
@@ -79,7 +86,6 @@ function CustomTabs() {
           <Tabs.Tab id="bi-weekly">Bi-Weekly</Tabs.Tab>
           <Tabs.Tab id="monthly">Monthly</Tabs.Tab>
         </Tabs.List>
-        <Tabs.Indicator className="bg-accent" />
       </Tabs.ListWrapper>
       <Tabs.Panel className="px-4" id="daily">
         <h3 className="mb-2 font-semibold">Daily</h3>
@@ -126,7 +132,8 @@ The component supports both CSS pseudo-classes and data attributes:
 - **Hover**: `:hover` or `[data-hover="true"]`
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Disabled**: `[aria-disabled="true"]`
- 
+
+
 
 ## API Reference
 

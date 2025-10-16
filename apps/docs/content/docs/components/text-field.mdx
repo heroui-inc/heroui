@@ -1,6 +1,7 @@
 ---
 title: TextField
-description: Text input fields for forms with labels, descriptions, and error messages
+description: Composition-friendly text fields with labels, descriptions, and inline validation
+icon: new
 links:
   rac: TextField
   source: text-field/text-field.tsx
@@ -17,186 +18,219 @@ import { TextField } from '@heroui/react';
 
 ### Usage
 
-<ComponentPreview
-  name="text-field-basic"
-/>
+<ComponentPreview name="text-field-basic" />
 
 ### Anatomy
 
-Import all parts and piece them together.
-
 ```tsx
-import { TextField } from '@heroui/react';
+import {TextField, Label, Input, Description, FieldError} from '@heroui/react';
 
-export default () => (
-  <TextField>
-    <TextField.Label>Field label</TextField.Label>
-    <TextField.Input placeholder="Enter value" />
-    <TextField.Description>
-      Helper text for the field
-    </TextField.Description>
-    <TextField.Error>
-      Error message when invalid
-    </TextField.Error>
-  </TextField>
-)
+export default function Example() {
+  return (
+    <TextField isRequired>
+      <Label>Display name</Label>
+      <Input placeholder="Jane" />
+      <Description>Visible to other team members.</Description>
+      <FieldError />
+    </TextField>
+  );
+}
 ```
+
+>  **TextField** combines label, input, description, and error into a single accessible component.  
+For standalone inputs, use **[Input](/docs/components/input)** or **[TextArea](/docs/components/textarea)**.
 
 ### With Description
 
-<ComponentPreview
-  name="text-field-with-description"
-/>
+<ComponentPreview name="text-field-with-description" />
 
 ### Required Field
 
-<ComponentPreview
-  name="text-field-required"
-/>
+<ComponentPreview name="text-field-required" />
 
-### With Error
+### Validation
 
-<ComponentPreview
-  name="text-field-with-error"
-/>
+Use `isInvalid` together with `FieldError` to surface validation messages.
+
+<ComponentPreview name="text-field-validation" />
+
+### Controlled
+
+Control the value to synchronize counters, previews, or formatting.
+
+<ComponentPreview name="text-field-controlled" />
+
+### Error Message
+
+<ComponentPreview name="text-field-with-error" />
 
 ### Disabled State
 
-<ComponentPreview
-  name="text-field-disabled"
-/>
+<ComponentPreview name="text-field-disabled" />
 
 ### TextArea
 
-<ComponentPreview
-  name="text-field-textarea"
-/>
+Use [TextArea](/docs/components/textarea) instead of [Input](/docs/components/input) for multiline content.
+
+<ComponentPreview name="text-field-textarea" />
 
 ### Input Types
 
-<ComponentPreview
-  name="text-field-input-types"
-/>
+<ComponentPreview name="text-field-input-types" />
+
+<RelatedComponents component="textfield" />
+
+<RelatedShowcases component="TextField" />
 
 ## Styling
 
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { TextField } from '@heroui/react';
+import {TextField, Label, Input, Description} from '@heroui/react';
 
 function CustomTextField() {
   return (
-    <TextField className="space-y-3">
-      <TextField.Label className="text-lg font-bold">
-        Custom styled field
-      </TextField.Label>
-      <TextField.Input
-        className="border-2 border-blue-500 focus:border-blue-600"
-        placeholder="Custom input"
-      />
-      <TextField.Description className="text-xs italic">
-        With custom styles
-      </TextField.Description>
+    <TextField className="gap-2 rounded-xl border border-border/60 bg-surface-2 p-4 shadow-sm">
+      <Label className="text-sm font-semibold text-default-700">
+        Project name
+      </Label>
+      <Input className="rounded-lg border border-border/60 bg-surface-2 px-3 py-2" />
+      <Description className="text-xs text-default-500">
+        Keep it short and memorable.
+      </Description>
     </TextField>
   );
 }
 ```
 
+### Customizing the component classes
+
+TextField has minimal default styling. Override the `.text-field` class to customize the container styling.
+
+```css
+@layer components {
+  .text-field {
+    @apply flex flex-col gap-1;
+  }
+
+  /* When invalid, the description is hidden automatically */
+  .text-field[data-invalid="true"] [data-slot="description"],
+  .text-field[aria-invalid="true"] [data-slot="description"] {
+    @apply hidden;
+  }
+
+  /* Description has default padding */
+  .text-field [data-slot="description"] {
+    @apply px-1;
+  }
+}
+```
+
 ### CSS Classes
 
-The TextField component uses these CSS classes:
+- `.text-field` – Root container with minimal styling (`flex flex-col gap-1`)
 
-#### Base Classes
-- `.text-field` - Base container styles
-- `.text-field__label` - Label element styles
-- `.text-field__input` - Input element styles
-- `.text-field__textarea` - TextArea element styles
-- `.text-field__description` - Description text styles
-- `.text-field__error` - Error message styles
-
-#### State Classes
-- `.text-field--disabled` - Disabled state styles
-- `.text-field--invalid` - Invalid/error state styles
-- `.text-field--required` - Required field styles
+> **Note:** Child components ([Label](/docs/components/label), [Input](/docs/components/input), [TextArea](/docs/components/textarea), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options.
 
 ### Interactive States
 
-The component supports both CSS pseudo-classes and data attributes:
+TextField automatically manages these data attributes based on its state:
 
-- **Focus**: `:focus` or `[data-focus="true"]`
-- **Focus Within**: `:focus-within` or `[data-focus-within="true"]`
-- **Invalid**: `:invalid` or `[aria-invalid="true"]`
-- **Disabled**: `:disabled` or `[aria-disabled="true"]`
-- **Required**: `:required` or `[aria-required="true"]`
+- **Invalid**: `[data-invalid="true"]` or `[aria-invalid="true"]` - Automatically hides the description slot when invalid
+- **Disabled**: `[data-disabled="true"]` - Applied when `isDisabled` is true
+- **Focus Within**: `[data-focus-within="true"]` - Applied when any child input is focused
+- **Focus Visible**: `[data-focus-visible="true"]` - Applied when focus is visible (keyboard navigation)
 
-## Accessibility
-
-#### Keyboard Navigation
-
-- **Tab** - Move focus to the input field
-- **Shift + Tab** - Move focus to the previous element
-- **Arrow keys** - Navigate within textarea content
-
-#### Screen Reader Support
-
-- Labels are properly associated with input fields
-- Required fields are announced
-- Error messages are announced when present
-- Descriptions provide additional context
-- Invalid state is communicated via ARIA attributes
-
-#### Focus Management
-
-- Clear focus indicators on interactive elements
-- Focus moves naturally through form fields
-- Error messages receive focus when validation fails
+Additional attributes are available through render props (see TextFieldRenderProps below).
 
 ## API Reference
 
 ### TextField Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `isRequired` | `boolean` | `false` | Whether the field is required |
-| `isInvalid` | `boolean` | `false` | Whether the field is invalid |
-| `isDisabled` | `boolean` | `false` | Whether the field is disabled |
-| `className` | `string` | - | Additional CSS classes |
+TextField inherits all props from React Aria's [TextField](https://react-spectrum.adobe.com/react-aria/TextField.html) component.
 
-### TextField.Label Props
+#### Base Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode \| (values: TextFieldRenderProps) => React.ReactNode` | - | Child components (Label, Input, etc.) or render function. |
+| `className` | `string \| (values: TextFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
+| `style` | `React.CSSProperties \| (values: TextFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `id` | `string` | - | The element's unique identifier. |
 
-### TextField.Input Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `type` | `string` | `"text"` | Input type (text, email, password, etc.) |
-| `placeholder` | `string` | - | Placeholder text |
-| `value` | `string` | - | Input value |
-| `onChange` | `(value: string) => void` | - | Change handler |
-| `className` | `string` | - | Additional CSS classes |
-
-### TextField.TextArea Props
+#### Validation Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `rows` | `number` | `3` | Number of visible text lines |
-| `placeholder` | `string` | - | Placeholder text |
-| `value` | `string` | - | TextArea value |
-| `onChange` | `(value: string) => void` | - | Change handler |
-| `className` | `string` | - | Additional CSS classes |
+| `isRequired` | `boolean` | `false` | Whether user input is required before form submission. |
+| `isInvalid` | `boolean` | - | Whether the value is invalid. |
+| `validate` | `(value: string) => ValidationError \| true \| null \| undefined` | - | Custom validation function. |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | Whether to use native HTML form validation or ARIA attributes. |
+| `validationErrors` | `string[]` | - | Server-side validation errors. |
 
-### TextField.Description Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-
-### TextField.Error Props
+#### Value Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
+| `value` | `string` | - | Current value (controlled). |
+| `defaultValue` | `string` | - | Default value (uncontrolled). |
+| `onChange` | `(value: string) => void` | - | Handler called when the value changes. |
+
+#### State Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isDisabled` | `boolean` | - | Whether the input is disabled. |
+| `isReadOnly` | `boolean` | - | Whether the input can be selected but not changed. |
+
+#### Form Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | - | Name of the input element, for HTML form submission. |
+| `autoFocus` | `boolean` | - | Whether the element should receive focus on render. |
+
+#### Accessibility Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `aria-label` | `string` | - | Accessibility label when no visible label is present. |
+| `aria-labelledby` | `string` | - | ID of elements that label this field. |
+| `aria-describedby` | `string` | - | ID of elements that describe this field. |
+| `aria-details` | `string` | - | ID of elements with additional details. |
+
+### Composition Components
+
+TextField works with these separate components that should be imported and used directly:
+
+- **Label** - Field label component from `@heroui/react`
+- **Input** - Single-line text input from `@heroui/react`
+- **TextArea** - Multi-line text input from `@heroui/react`
+- **Description** - Helper text component from `@heroui/react`
+- **FieldError** - Validation error message from `@heroui/react`
+
+Each of these components has its own props API. Use them directly within TextField for composition:
+
+```tsx
+<TextField isRequired isInvalid={hasError}>
+  <Label>Email Address</Label>
+  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+  <Description>We'll never share your email.</Description>
+  <FieldError>Please enter a valid email address.</FieldError>
+</TextField>
+```
+
+### TextFieldRenderProps
+
+When using render props with `className`, `style`, or `children`, these values are available:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isDisabled` | `boolean` | Whether the field is disabled. |
+| `isInvalid` | `boolean` | Whether the field is currently invalid. |
+| `isReadOnly` | `boolean` | Whether the field is read-only. |
+| `isRequired` | `boolean` | Whether the field is required. |
+| `isFocused` | `boolean` | Whether the field is currently focused (DEPRECATED - use `isFocusWithin`). |
+| `isFocusWithin` | `boolean` | Whether any child element is focused. |
+| `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |

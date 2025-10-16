@@ -23,7 +23,7 @@ export default {
     },
   },
   component: Disclosure,
-  title: "Components/Disclosure",
+  title: "Components/Navigation/Disclosure",
 } as Meta<typeof Disclosure>;
 
 const defaultArgs: DisclosureProps = {
@@ -35,7 +35,7 @@ const Template = (props: DisclosureProps) => {
   const [isExpanded, setIsExpanded] = React.useState(props.isExpanded ?? false);
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md text-center">
       <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
@@ -45,7 +45,7 @@ const Template = (props: DisclosureProps) => {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <Disclosure.Body className="bg-panel shadow-border rounded-panel mx-2 mb-2 mt-4 flex flex-col items-center p-1 p-4 text-center">
+          <Disclosure.Body className="bg-panel shadow-panel rounded-panel flex flex-col items-center p-2 p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
@@ -80,7 +80,7 @@ const ControlledTemplate = (props: DisclosureProps) => {
         </Chip>
       </div>
       <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-        <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
+        <Disclosure.Trigger className="mb-2 flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span>Toggle content</span>
           <Icon
             className="size-4 transition-transform duration-200 data-[state=open]:rotate-180"
@@ -88,7 +88,7 @@ const ControlledTemplate = (props: DisclosureProps) => {
           />
         </Disclosure.Trigger>
         <Disclosure.Content>
-          <Disclosure.Body className="mt-4 rounded-lg border p-4">
+          <Disclosure.Body className="rounded-lg border p-4">
             <p className="text-sm">
               This disclosure is controlled from outside. You can toggle it using the button above
               or by clicking the trigger.
@@ -117,32 +117,34 @@ const ProductDetailsTemplate = (props: DisclosureProps) => {
           />
         </Disclosure.Trigger>
         <Disclosure.Content>
-          <div className="mt-4 space-y-4 rounded-lg border p-4">
-            <h3 className="text-lg font-semibold">Product Details</h3>
-            <div className="grid gap-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Material:</span>
-                <span>100% Cotton</span>
+          <Disclosure.Body className="pt-2">
+            <div className="space-y-4 rounded-lg border p-4">
+              <h3 className="text-lg font-semibold">Product Details</h3>
+              <div className="grid gap-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Material:</span>
+                  <span>100% Cotton</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Size:</span>
+                  <span>Medium (38-40)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Color:</span>
+                  <span>Navy Blue</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Care:</span>
+                  <span>Machine wash cold</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Size:</span>
-                <span>Medium (38-40)</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Color:</span>
-                <span>Navy Blue</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Care:</span>
-                <span>Machine wash cold</span>
+              <div className="flex gap-2 pt-2">
+                <Chip color="success">Free Shipping</Chip>
+                <Chip color="accent">1 Year Warranty</Chip>
+                <Chip color="warning">Eco-Friendly</Chip>
               </div>
             </div>
-            <div className="flex gap-2 pt-2">
-              <Chip color="success">Free Shipping</Chip>
-              <Chip color="accent">1 Year Warranty</Chip>
-              <Chip color="warning">Eco-Friendly</Chip>
-            </div>
-          </div>
+          </Disclosure.Body>
         </Disclosure.Content>
       </Disclosure>
     </div>

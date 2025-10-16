@@ -4,19 +4,13 @@ import {tv} from "tailwind-variants";
 
 export const closeButtonVariants = tv({
   base: "close-button",
+  defaultVariants: {
+    variant: "default",
+  },
   variants: {
-    size: {
-      sm: "close-button--sm",
-      md: "close-button--md",
-      lg: "close-button--lg",
-    },
     variant: {
       default: "close-button--default",
     },
-  },
-  defaultVariants: {
-    size: "md",
-    variant: "default",
   },
 });
 

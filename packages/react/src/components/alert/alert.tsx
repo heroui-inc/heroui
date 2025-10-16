@@ -36,7 +36,7 @@ const Alert = ({asChild, children, className, variant, ...rest}: AlertRootProps)
 
   return (
     <AlertContext.Provider value={{slots}}>
-      <Component data-alert-root className={slots?.base({className})} {...rest}>
+      <Component className={slots?.base({className})} data-slot="alert-root" {...rest}>
         {children}
       </Component>
     </AlertContext.Provider>
@@ -58,8 +58,8 @@ const AlertIcon = ({asChild, children, className, ...rest}: AlertIconProps) => {
   const Component = asChild ? SlotPrimitive : "div";
 
   return (
-    <Component data-alert-icon className={slots?.icon({className})} {...rest}>
-      {children ?? <CircleDashedIcon data-alert-default-icon />}
+    <Component className={slots?.icon({className})} data-slot="alert-icon" {...rest}>
+      {children ?? <CircleDashedIcon data-slot="alert-default-icon" />}
     </Component>
   );
 };
@@ -79,7 +79,7 @@ const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps
   const Component = asChild ? SlotPrimitive : "div";
 
   return (
-    <Component data-alert-content className={slots?.content({className})} {...rest}>
+    <Component className={slots?.content({className})} data-slot="alert-content" {...rest}>
       {children}
     </Component>
   );
@@ -100,7 +100,7 @@ const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) =>
   const Component = asChild ? SlotPrimitive : "p";
 
   return (
-    <Component data-alert-title className={slots?.title({className})} {...rest}>
+    <Component className={slots?.title({className})} data-slot="alert-title" {...rest}>
       {children}
     </Component>
   );
@@ -121,7 +121,7 @@ const AlertDescription = ({asChild, children, className, ...rest}: AlertDescript
   const Component = asChild ? SlotPrimitive : "span";
 
   return (
-    <Component data-alert-description className={slots?.description({className})} {...rest}>
+    <Component className={slots?.description({className})} data-slot="alert-description" {...rest}>
       {children}
     </Component>
   );
@@ -147,8 +147,8 @@ const AlertAction: AlertAction = (props) => {
 
     return (
       <ButtonPrimitive
-        data-alert-action
         className={composeTwRenderProps(className, slots?.action?.())}
+        data-slot="alert-action"
         {...rest}
       >
         {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
@@ -159,7 +159,7 @@ const AlertAction: AlertAction = (props) => {
   const {asChild: _asChild, children, className, ...rest} = props;
 
   return (
-    <SlotPrimitive data-alert-action className={slots?.action?.({className})} {...rest}>
+    <SlotPrimitive className={slots?.action?.({className})} data-slot="alert-action" {...rest}>
       {children}
     </SlotPrimitive>
   );
@@ -185,14 +185,14 @@ const AlertClose: AlertClose = (props) => {
 
     return (
       <ButtonPrimitive
-        data-alert-close
         className={composeTwRenderProps(className, slots?.close?.())}
+        data-slot="alert-close"
         {...rest}
       >
         {(renderProps) =>
           typeof children === "function"
             ? children(renderProps)
-            : (children ?? <CloseIcon data-alert-default-close-icon />)
+            : (children ?? <CloseIcon data-slot="alert-default-close-icon" />)
         }
       </ButtonPrimitive>
     );
@@ -201,8 +201,8 @@ const AlertClose: AlertClose = (props) => {
   const {asChild: _asChild, children, className, ...rest} = props;
 
   return (
-    <SlotPrimitive data-alert-close className={slots?.close?.({className})} {...rest}>
-      {children ?? <CloseIcon data-alert-default-close-icon />}
+    <SlotPrimitive className={slots?.close?.({className})} data-slot="alert-close" {...rest}>
+      {children ?? <CloseIcon data-slot="alert-default-close-icon" />}
     </SlotPrimitive>
   );
 };

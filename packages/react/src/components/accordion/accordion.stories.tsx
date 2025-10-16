@@ -27,7 +27,7 @@ export default {
     },
   },
   component: Accordion,
-  title: "Components/Accordion",
+  title: "Components/Navigation/Accordion",
 } as Meta<typeof Accordion>;
 
 const defaultArgs: AccordionProps = {
@@ -37,9 +37,7 @@ const defaultArgs: AccordionProps = {
 };
 
 const Wrapper = ({children, className}: {children: React.ReactNode; className?: string}) => (
-  <div data-animation-off className={cnBase("w-full max-w-md", className)}>
-    {children}
-  </div>
+  <div className={cnBase("w-full max-w-md", className)}>{children}</div>
 );
 
 const items = [

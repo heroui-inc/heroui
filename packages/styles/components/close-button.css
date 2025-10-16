@@ -2,18 +2,16 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate;
-  @apply inline-flex items-center justify-center;
-  @apply rounded-sm border border-transparent;
-  @apply origin-center transform-gpu select-none;
+  @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-sm border-transparent p-1;
 
-  /* Default size (md) */
-  @apply size-6 p-1;
+  /* Border */
+  border-width: var(--border-width);
 
   transition:
-    transform 150ms var(--ease-smooth),
+    transform 150ms var(--ease-out),
     color 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth);
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -21,52 +19,33 @@
   /* Focus visible state */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
   &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
   }
 
   /* Pending state */
   &[data-pending] {
-    @apply pointer-events-none;
+    @apply status-pending;
   }
 
   /* SVG icon styling*/
   & svg {
-    @apply pointer-events-none shrink-0 self-center;
-    @apply -mx-0.5 my-0.5 size-5;
+    @apply pointer-events-none;
+    @apply size-5 shrink-0 self-center;
+    @apply -mx-0.5 my-0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 
-/* Size variants */
-.close-button--sm {
-  @apply size-5 p-0.5;
-
-  & svg {
-    @apply size-4;
-  }
-}
-
-.close-button--md {
-  /* No styles as this is the default size */
-}
-
-.close-button--lg {
-  @apply size-7 p-1.5;
-
-  & svg {
-    @apply size-6;
-  }
-}
-
-/* Variant: default */
+/* Variants */
 .close-button--default {
   @apply text-muted bg-transparent;
 

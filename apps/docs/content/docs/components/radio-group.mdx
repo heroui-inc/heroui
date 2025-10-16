@@ -1,0 +1,275 @@
+---
+title: RadioGroup
+description: Radio group for selecting a single option from a list
+icon: new
+links:
+  rac: RadioGroup
+  source: radio-group/radio-group.tsx
+  styles: radio-group.css
+  storybook: radio-group
+---
+
+## Import
+
+```tsx
+import { RadioGroup, Radio } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="radio-group-basic"
+/>
+
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import {RadioGroup, Radio, Label, Description, FieldError} from '@heroui/react';
+
+export default () => (
+  <RadioGroup>
+    <Label />
+    <Description />
+    <Radio value="option1">
+      <Radio.Control>
+        <Radio.Indicator>
+          <span>✓</span> {/* Custom indicator (optional) */}
+        </Radio.Indicator>
+      </Radio.Control>
+      <Radio.Content>
+        <Label />
+        <Description />
+      </Radio.Content>
+    </Radio>
+    <FieldError />
+  </RadioGroup>
+)
+```
+
+### Custom Indicator
+
+<ComponentPreview
+  name="radio-group-custom-indicator"
+/>
+
+### Horizontal Orientation
+
+<ComponentPreview
+  name="radio-group-horizontal"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="radio-group-controlled"
+/>
+
+### Uncontrolled
+
+Combine `defaultValue` with `onChange` when you only need to react to updates.
+
+<ComponentPreview
+  name="radio-group-uncontrolled"
+/>
+
+### Validation
+
+<ComponentPreview
+  name="radio-group-validation"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="radio-group-disabled"
+/>
+
+### Delivery & Payment
+
+<ComponentPreview
+  isBgSolid
+  align="start"
+  name="radio-group-delivery-and-payment"
+/>
+
+
+<RelatedShowcases component="RadioGroup" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {RadioGroup, Radio, Label, Description} from '@heroui/react';
+
+export default () => (
+  <RadioGroup defaultValue="premium" name="plan">
+    <Label>Plan selection</Label>
+    <Description>Choose the plan that best suits your needs</Description>
+    <Radio
+      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-blue-300 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-500/10"
+      value="basic"
+    >
+      <Radio.Control className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500">
+        <Radio.Indicator />
+      </Radio.Control>
+      <Radio.Content>
+        <Label className="cursor-pointer font-semibold">Basic Plan</Label>
+        <Description className="text-sm">
+          Includes 100 messages per month and up to 3 themes to set up
+        </Description>
+      </Radio.Content>
+    </Radio>
+    <Radio
+      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-purple-300 data-[selected=true]:border-purple-500 data-[selected=true]:bg-purple-500/10"
+      value="premium"
+    >
+      <Radio.Control className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500">
+        <Radio.Indicator />
+      </Radio.Control>
+      <Radio.Content>
+        <Label className="cursor-pointer font-semibold">Premium Plan</Label>
+        <Description className="text-sm">
+          Includes 200 messages per month and up to 6 themes to set up
+        </Description>
+      </Radio.Content>
+    </Radio>
+    <Radio
+      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-emerald-300 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-500/10"
+      value="business"
+    >
+      <Radio.Control className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500">
+        <Radio.Indicator />
+      </Radio.Control>
+      <Radio.Content>
+        <Label className="cursor-pointer font-semibold">Business Plan</Label>
+        <Description className="text-sm">Unlimited messages and themes</Description>
+      </Radio.Content>
+    </Radio>
+  </RadioGroup>
+);
+```
+
+### Customizing the component classes
+
+To customize the RadioGroup component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .radio-group {
+    @apply gap-2;
+  }
+
+  .radio {
+    @apply gap-4 rounded-lg border border-border p-3 hover:bg-surface-hovered;
+  }
+
+  .radio__control {
+    @apply border-2 border-primary;
+  }
+
+  .radio__indicator {
+    @apply bg-primary;
+  }
+
+  .radio__content {
+    @apply gap-1;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The RadioGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/radio-group.css)):
+
+#### Base Classes
+- `.radio-group` - Base radio group container
+- `.radio` - Individual radio item
+- `.radio__control` - Radio control (circular button)
+- `.radio__indicator` - Radio indicator (inner dot)
+- `.radio__content` - Radio content wrapper
+
+#### Modifier Classes
+- `.radio--disabled` - Disabled radio state
+
+### Interactive States
+
+The radio supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Selected**: `[aria-checked="true"]` or `[data-selected="true"]` (indicator appears)
+- **Hover**: `:hover` or `[data-hovered="true"]` (border color changes)
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
+- **Pressed**: `:active` or `[data-pressed="true"]` (scale transform)
+- **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
+- **Invalid**: `[data-invalid="true"]` or `[aria-invalid="true"]` (error border color)
+
+## API Reference
+
+### RadioGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The current value (controlled) |
+| `defaultValue` | `string` | - | The default value (uncontrolled) |
+| `onChange` | `(value: string) => void` | - | Handler called when the value changes |
+| `isDisabled` | `boolean` | `false` | Whether the radio group is disabled |
+| `isRequired` | `boolean` | `false` | Whether the radio group is required |
+| `isReadOnly` | `boolean` | `false` | Whether the radio group is read only |
+| `isInvalid` | `boolean` | `false` | Whether the radio group is in an invalid state |
+| `name` | `string` | - | The name of the radio group, used when submitting an HTML form |
+| `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the radio group |
+| `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | Radio group content or render prop |
+
+### Radio Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The value of the radio button |
+| `isDisabled` | `boolean` | `false` | Whether the radio button is disabled |
+| `name` | `string` | - | The name of the radio button, used when submitting an HTML form |
+| `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Radio content or render prop |
+
+### Radio.Control Props
+
+Extends `React.HTMLAttributes<HTMLSpanElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to render inside the control, typically `Radio.Indicator`. |
+
+### Radio.Indicator Props
+
+Extends `React.HTMLAttributes<HTMLSpanElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Optional content or render prop that receives the current radio state. |
+
+### Radio.Content Props
+
+Extends `React.HTMLAttributes<HTMLDivElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content displayed next to the control, usually `Label` and `Description`. |
+
+### RadioRenderProps
+
+When using the render prop pattern, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isSelected` | `boolean` | Whether the radio is currently selected |
+| `isHovered` | `boolean` | Whether the radio is hovered |
+| `isPressed` | `boolean` | Whether the radio is currently pressed |
+| `isFocused` | `boolean` | Whether the radio is focused |
+| `isFocusVisible` | `boolean` | Whether the radio is keyboard focused |
+| `isDisabled` | `boolean` | Whether the radio is disabled |
+| `isReadOnly` | `boolean` | Whether the radio is read only |
+| `isInvalid` | `boolean` | Whether the radio is in an invalid state |

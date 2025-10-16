@@ -1,7 +1,6 @@
 ---
 title: DisclosureGroup
 description: Container that manages multiple Disclosure items with coordinated expanded states
-icon: new
 links:
   rac: DisclosureGroup
   source: disclosure-group/disclosure-group.tsx
@@ -21,13 +20,6 @@ import {DisclosureGroup} from '@heroui/react';
   name="disclosure-group-basic"
 />
 
-### Controlled
-
-You can control which disclosures are expanded with external navigation controls using the `expandedKeys` and `onExpandedChange` props.
-
-<ComponentPreview
-  name="disclosure-group-controlled"
-/>
 
 ### Anatomy
 
@@ -49,6 +41,18 @@ export default () => (
   </DisclosureGroup>
 )
 ```
+
+### Controlled
+
+You can control which disclosures are expanded with external navigation controls using the `expandedKeys` and `onExpandedChange` props.
+
+<ComponentPreview
+  name="disclosure-group-controlled"
+/>
+
+
+
+<RelatedShowcases component="DisclosureGroup" />
 
 ## Styling
 

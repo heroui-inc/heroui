@@ -2,8 +2,8 @@
   "mode": "pre",
   "tag": "alpha",
   "initialVersions": {
-    "@heroui/react": "3.0.0-alpha.31",
-    "@heroui/styles": "3.0.0-alpha.31"
+    "@heroui/react": "3.0.0-alpha.34",
+    "@heroui/styles": "3.0.0-alpha.34"
   },
   "changesets": ["pink-monkeys-notice"]
 }

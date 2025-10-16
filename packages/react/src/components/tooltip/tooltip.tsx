@@ -34,7 +34,7 @@ const TooltipRoot = ({
 
   return (
     <TooltipContext.Provider value={{slots}}>
-      <TooltipTriggerPrimitive data-tooltip-root {...props}>
+      <TooltipTriggerPrimitive data-slot="tooltip-root" {...props}>
         {children}
       </TooltipTriggerPrimitive>
     </TooltipContext.Provider>
@@ -78,22 +78,25 @@ const TooltipArrow = React.forwardRef<
   Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {children?: React.ReactNode}
 >(({children, className, ...props}, ref) => {
   const defaultArrow = (
-    <svg data-overlay-arrow height={12} viewBox="0 0 12 12" width={12}>
+    <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
       <path d="M0 0 L6 6 L12 0" />
     </svg>
   );
 
   const arrow = React.isValidElement(children)
     ? React.cloneElement(
-        children as React.ReactElement<{className?: string; "data-overlay-arrow"?: boolean}>,
+        children as React.ReactElement<{
+          className?: string;
+          "data-slot"?: "overlay-arrow";
+        }>,
         {
-          "data-overlay-arrow": true,
+          "data-slot": "overlay-arrow",
         },
       )
     : defaultArrow;
 
   return (
-    <OverlayArrow ref={ref} data-tooltip-arrow {...props} className={className}>
+    <OverlayArrow ref={ref} data-slot="tooltip-arrow" {...props} className={className}>
       {arrow}
     </OverlayArrow>
   );
@@ -113,7 +116,12 @@ const TooltipTrigger = ({asChild = false, children, className, ...props}: Toolti
 
   return (
     <FocusablePrimitive>
-      <Comp data-tooltip-trigger className={slots?.trigger({className})} role="button" {...props}>
+      <Comp
+        className={slots?.trigger({className})}
+        data-slot="tooltip-trigger"
+        role="button"
+        {...props}
+      >
         {children}
       </Comp>
     </FocusablePrimitive>

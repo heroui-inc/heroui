@@ -1,15 +1,20 @@
 import type {MDXComponents} from "mdx/types";
 
+import Link from "fumadocs-core/link";
 import {Callout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
+import {Suspense} from "react";
 
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
+import {NewsletterForm} from "./components/newsletter-form";
+import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
+import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {PackageManagers} from "./mdx-components/package-managers";
 
 // Create icon components using gravity-ui icons
@@ -53,6 +58,24 @@ function ComponentCard({
   );
 }
 
+// Wrapper component for RelatedShowcases with Suspense
+function RelatedShowcases(props: any) {
+  return (
+    <Suspense fallback={null}>
+      <RelatedShowcasesComponent {...props} />
+    </Suspense>
+  );
+}
+
+// Wrapper component for RelatedComponents with Suspense
+function RelatedComponents(props: any) {
+  return (
+    <Suspense fallback={null}>
+      <RelatedComponentsComponent {...props} />
+    </Suspense>
+  );
+}
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -70,8 +93,12 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     DocsImage,
     Icon,
     Info,
+    Link,
+    NewsletterForm,
     PackageManagers,
     Preview,
+    RelatedComponents,
+    RelatedShowcases,
     Star,
     X,
     XCircle,

@@ -1,0 +1,28 @@
+/* Base label styles */
+.label {
+  /* Base styling */
+  @apply text-foreground text-sm font-medium;
+}
+
+/* 
+ * Exclude group-level components (RadioGroup, CheckboxGroup) and radio/checkbox items
+ * to ensure asterisks only appear on atomic form field labels and group labels,
+ * not on individual options within those groups
+ */
+.label--required,
+[data-required="true"]:not([role="group"]):not([role="radiogroup"]):not([role="checkboxgroup"])
+  > .label,
+[data-required="true"]:not([data-slot="radio"]):not([data-slot="checkbox"]) > .label {
+  @apply after:text-danger after:ml-0.5 after:content-['*'];
+}
+
+.label--disabled,
+[data-disabled="true"] .label {
+  @apply status-disabled;
+}
+
+.label--invalid,
+[data-invalid="true"] .label,
+[aria-invalid="true"] .label {
+  @apply text-danger;
+}

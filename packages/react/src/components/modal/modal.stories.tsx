@@ -24,7 +24,7 @@ export default {
     // },
   },
   component: Modal,
-  title: "Components/Modal",
+  title: "Components/Overlays/Modal",
 } as Meta<typeof Modal>;
 
 export const Default = () => {

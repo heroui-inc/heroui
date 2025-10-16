@@ -1,44 +1,53 @@
 "use client";
 
 import type {CloseButtonVariants} from "./close-button.styles";
-import type {ComponentRef} from "react";
+import type {Ref} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
-import {forwardRef} from "react";
+import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import React from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils";
 import {CloseIcon} from "../icons";
 
 import {closeButtonVariants} from "./close-button.styles";
 
-export interface CloseButtonProps extends ButtonPrimitiveProps, CloseButtonVariants {
-  /**
-   * The size of the close button.
-   * @default "md"
-   */
-  size?: "sm" | "md" | "lg";
-  /**
-   * The variant of the close button.
-   * @default "default"
-   */
-  variant?: "default";
+interface CloseButtonProps extends ButtonPrimitiveProps, CloseButtonVariants {
+  ref?: Ref<HTMLButtonElement>;
+  asChild?: boolean;
 }
 
-export const CloseButton = forwardRef<ComponentRef<typeof ButtonPrimitive>, CloseButtonProps>(
-  ({children, className, size = "md", variant = "default", ...props}, ref) => {
+const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
+  ({asChild, children, className, slot, style, variant, ...rest}, ref) => {
+    const styles = closeButtonVariants({
+      variant,
+      class: typeof className === "string" ? className : undefined,
+    });
+
+    if (asChild) {
+      return (
+        <SlotPrimitive
+          className={styles}
+          data-slot="close-button"
+          slot={slot as string}
+          style={style as React.CSSProperties}
+          {...rest}
+        >
+          {typeof children === "function" ? children({} as any) : children}
+        </SlotPrimitive>
+      );
+    }
+
     return (
       <ButtonPrimitive
         ref={ref}
-        data-close-button
-        className={composeTwRenderProps(
-          className,
-          closeButtonVariants({
-            size,
-            variant,
-          }),
-        )}
-        {...props}
+        aria-label="Close"
+        className={composeTwRenderProps(className, styles)}
+        data-slot="close-button"
+        slot={slot}
+        style={style}
+        {...rest}
       >
         {(renderProps) =>
           typeof children === "function" ? children(renderProps) : (children ?? <CloseIcon />)
@@ -49,3 +58,6 @@ export const CloseButton = forwardRef<ComponentRef<typeof ButtonPrimitive>, Clos
 );
 
 CloseButton.displayName = "HeroUI.CloseButton";
+
+export type {CloseButtonProps};
+export {CloseButton};

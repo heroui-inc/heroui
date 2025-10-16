@@ -55,7 +55,7 @@ function CalendarRootInner<T extends DateValue = DateValue>(
   return (
     <CalendarContext.Provider value={{slots}}>
       <CalendarPrimitive
-        data-calendar
+        data-slot="calendar"
         isDisabled={isDisabled}
         {...rest}
         className={composeTwRenderProps(className, slots.base())}
@@ -85,7 +85,12 @@ const CalendarHeader = React.forwardRef<HTMLDivElement, CalendarHeaderProps>(
     const {slots} = useContext(CalendarContext);
 
     return (
-      <header ref={ref} data-calendar-header className={slots?.header({className})} {...props}>
+      <header
+        ref={ref}
+        className={slots?.header({className})}
+        data-slot="calendar-header"
+        {...props}
+      >
         {children}
       </header>
     );
@@ -105,7 +110,7 @@ const CalendarHeading = React.forwardRef<HTMLHeadingElement, CalendarHeadingProp
     return (
       <HeadingPrimitive
         ref={ref}
-        data-calendar-heading
+        data-slot="calendar-heading"
         {...props}
         className={slots?.heading({className})}
       />
@@ -128,7 +133,7 @@ const CalendarNavButton = React.forwardRef<HTMLButtonElement, CalendarNavButtonP
     return (
       <ButtonPrimitive
         ref={ref}
-        data-calendar-nav-button
+        data-slot="calendar-nav-button"
         slot={slot}
         {...props}
         className={composeTwRenderProps(className, slots?.navButton())}
@@ -152,7 +157,7 @@ const CalendarGrid = React.forwardRef<HTMLTableElement, CalendarGridProps>(
     return (
       <CalendarGridPrimitive
         ref={ref}
-        data-calendar-grid
+        data-slot="calendar-grid"
         {...props}
         className={slots?.grid({className})}
       >
@@ -180,7 +185,7 @@ const CalendarGridHeader = React.forwardRef<HTMLTableSectionElement, CalendarGri
     return (
       <CalendarGridHeaderPrimitive
         ref={ref}
-        data-calendar-grid-header
+        data-slot="calendar-grid-header"
         {...props}
         className={slots?.gridHeader({className})}
       />
@@ -201,7 +206,7 @@ const CalendarHeaderCell = React.forwardRef<HTMLTableCellElement, CalendarHeader
     return (
       <CalendarHeaderCellPrimitive
         ref={ref}
-        data-calendar-header-cell
+        data-slot="calendar-header-cell"
         {...props}
         className={slots?.headerCell({className})}
       />
@@ -222,7 +227,7 @@ const CalendarCell = React.forwardRef<HTMLTableCellElement, CalendarCellProps>(
     return (
       <CalendarCellPrimitive
         ref={ref}
-        data-calendar-cell
+        data-slot="calendar-cell"
         {...props}
         className={composeTwRenderProps(className, slots?.cell())}
       >

@@ -10,11 +10,18 @@
   &[data-loading-status="failed"] {
     @apply hidden;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Avatar fallback element */
 .avatar__fallback {
-  @apply bg-default flex size-full items-center justify-center rounded-full border;
+  @apply bg-default flex size-full items-center justify-center rounded-full;
+
+  /* Border */
+  border-width: var(--border-width);
 }
 
 /* Size modifiers */

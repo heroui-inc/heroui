@@ -12,12 +12,12 @@ interface LabelProps extends LabelPrimitiveProps, LabelVariants {
   ref?: React.Ref<HTMLLabelElement>;
 }
 
-const Label = React.forwardRef<React.ElementRef<typeof LabelPrimitive>, LabelProps>(
-  ({children, className, disabled, required, size, variant, ...rest}, ref) => {
+const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+  ({children, className, isDisabled, isInvalid, isRequired, ...rest}, ref) => {
     return (
       <LabelPrimitive
         ref={ref}
-        className={labelVariants({size, variant, required, disabled, className})}
+        className={labelVariants({isRequired, isDisabled, isInvalid, className})}
         data-slot="label"
         {...rest}
       >

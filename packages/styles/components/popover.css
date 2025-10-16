@@ -2,7 +2,7 @@
 
 /* Base popover styles */
 .popover {
-  @apply bg-panel origin-[var(--trigger-anchor-point)] rounded-lg border p-0 text-sm shadow-md will-change-transform dark:shadow-none;
+  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-xl p-0 text-sm will-change-transform dark:shadow-none;
 
   /* Entering animations */
   &[data-entering] {
@@ -32,21 +32,21 @@
   }
 
   /* Arrow styling */
-  & [data-overlay-arrow] {
+  & [data-slot="overlay-arrow"] {
+    @apply stroke-border/40;
     fill: var(--panel);
-    stroke: var(--border);
   }
 
   /* Arrow rotation based on placement */
-  &[data-placement="bottom"] [data-overlay-arrow] {
+  &[data-placement="bottom"] [data-slot="overlay-arrow"] {
     rotate: 180deg;
   }
 
-  &[data-placement="left"] [data-overlay-arrow] {
+  &[data-placement="left"] [data-slot="overlay-arrow"] {
     rotate: -90deg;
   }
 
-  &[data-placement="right"] [data-overlay-arrow] {
+  &[data-placement="right"] [data-slot="overlay-arrow"] {
     rotate: 90deg;
   }
 }
@@ -57,8 +57,7 @@
 
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 }
 
@@ -69,19 +68,26 @@
 
 /* Popover trigger */
 .popover__trigger {
+  transition:
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+
   cursor: var(--cursor-interactive);
 
   /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
   &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }

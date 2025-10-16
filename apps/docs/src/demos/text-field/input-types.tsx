@@ -1,33 +1,33 @@
 "use client";
 
-import {TextField} from "@heroui/react";
+import {Input, Label, TextField} from "@heroui/react";
 
 export function InputTypes() {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <TextField>
-        <TextField.Label>Password</TextField.Label>
-        <TextField.Input placeholder="••••••••" type="password" />
+    <div className="flex w-full max-w-64 flex-col gap-4">
+      <TextField name="password" type="password">
+        <Label>Password</Label>
+        <Input placeholder="••••••••" />
       </TextField>
 
-      <TextField>
-        <TextField.Label>Age</TextField.Label>
-        <TextField.Input max="150" min="0" placeholder="21" type="number" />
+      <TextField name="age" type="number">
+        <Label>Age</Label>
+        <Input max="150" min="0" placeholder="21" />
       </TextField>
 
-      <TextField>
-        <TextField.Label>Email</TextField.Label>
-        <TextField.Input placeholder="user@example.com" type="email" />
+      <TextField name="email" type="email">
+        <Label>Email</Label>
+        <Input placeholder="user@example.com" />
       </TextField>
 
-      <TextField>
-        <TextField.Label>Website</TextField.Label>
-        <TextField.Input placeholder="https://example.com" type="url" />
+      <TextField name="website" type="url">
+        <Label>Website</Label>
+        <Input placeholder="https://example.com" />
       </TextField>
 
-      <TextField>
-        <TextField.Label>Phone</TextField.Label>
-        <TextField.Input placeholder="+1 (555) 000-0000" type="tel" />
+      <TextField name="phone" type="tel">
+        <Label>Phone</Label>
+        <Input placeholder="+1 (555) 000-0000" />
       </TextField>
     </div>
   );

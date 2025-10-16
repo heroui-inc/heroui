@@ -1,7 +1,6 @@
 ---
 title: Switch
 description: A toggle switch component for boolean states
-icon: preview
 links:
   rac: Switch
   source: switch/switch.tsx
@@ -21,6 +20,24 @@ import { Switch, SwitchGroup } from '@heroui/react';
 <ComponentPreview
   name="switch-basic"
 />
+
+### Anatomy
+
+Import all parts and piece them together.
+
+```tsx
+import {Switch} from '@heroui/react';
+
+export default () => (
+  <Switch>
+    <Switch.Control>
+      <Switch.Thumb>
+        <Switch.Icon />  {/* Optional */}
+      </Switch.Thumb>
+    </Switch.Control>
+  </Switch>
+);
+```
 
 ### Disabled
 
@@ -46,16 +63,22 @@ import { Switch, SwitchGroup } from '@heroui/react';
   name="switch-without-label"
 />
 
+### Sizes
+
+<ComponentPreview
+  name="switch-sizes"
+/>
+
 ### Label Position
 
 <ComponentPreview
   name="switch-label-position"
 />
 
-### With Icon
+### With Icons
 
 <ComponentPreview
-  name="switch-with-icon"
+  name="switch-with-icons"
 />
 
 ### With Description
@@ -107,12 +130,19 @@ function CustomSwitch() {
       {({isSelected}) => (
         <>
           <Switch.Control
-            className="h-6 w-9 bg-gray-300 data-[selected=true]:bg-green-500"
-            data-selected={isSelected}
+            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
           >
-            <Switch.Thumb className="bg-white" />
+            <Switch.Thumb
+              className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
+            >
+              <Switch.Icon>
+                <Icon
+                  className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
+                  icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
+                />
+              </Switch.Icon>
+            </Switch.Thumb>
           </Switch.Control>
-          <Label>Custom styled switch</Label>
         </>
       )}
     </Switch>
@@ -181,6 +211,7 @@ Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Sw
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | The size of the switch |
 | `isSelected` | `boolean` | `false` | Whether the switch is on |
 | `defaultSelected` | `boolean` | `false` | Whether the switch is on by default (uncontrolled) |
 | `isDisabled` | `boolean` | `false` | Whether the switch is disabled |
@@ -197,11 +228,13 @@ When using the render prop pattern, these values are provided:
 | Prop | Type | Description |
 |------|------|-------------|
 | `isSelected` | `boolean` | Whether the switch is currently on |
-| `isPressed` | `boolean` | Whether the switch is currently pressed |
 | `isHovered` | `boolean` | Whether the switch is hovered |
+| `isPressed` | `boolean` | Whether the switch is currently pressed |
 | `isFocused` | `boolean` | Whether the switch is focused |
-| `isFocusVisible` | `boolean` | Whether the switch should show focus indicator |
+| `isFocusVisible` | `boolean` | Whether the switch is keyboard focused |
 | `isDisabled` | `boolean` | Whether the switch is disabled |
+| `isReadOnly` | `boolean` | Whether the switch is read only |
+| `state` | `-` | State of the switch. |
 
 ### SwitchGroup Props
 
@@ -209,26 +242,3 @@ When using the render prop pattern, these values are provided:
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
 | `children` | `React.ReactNode` | - | The switch items to render |
-
-### Compound Components
-
-The Switch component is built using compound components for maximum flexibility:
-
-- `Switch` - The root component that provides context
-- `Switch.Control` - The switch track/control element
-- `Switch.Thumb` - The movable thumb element
-- `Switch.Icon` - Optional icon inside the thumb
-
-For grouping switches:
-- `SwitchGroup` - The root group component
-- `SwitchGroup.Items` - Container for switch items
-
-### Accessibility
-
-The Switch component follows the [WAI-ARIA Switch Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/). Key features:
-
-- Keyboard support: Space to toggle
-- Screen reader announcements for state changes
-- Proper ARIA attributes and roles
-- Support for labels and descriptions
-- Form integration with name/value props

@@ -33,7 +33,7 @@ const SwitchGroupRoot = React.forwardRef<HTMLDivElement, SwitchGroupRootProps>(
 
     return (
       <SwitchGroupContext.Provider value={{slots}}>
-        <div ref={ref} data-switch-group {...props} className={slots.base({className})}>
+        <div ref={ref} data-slot="switch-group" {...props} className={slots.base({className})}>
           {children}
         </div>
       </SwitchGroupContext.Provider>
@@ -52,7 +52,12 @@ const SwitchGroupItems = React.forwardRef<HTMLDivElement, SwitchGroupItemsProps>
     const {slots} = useContext(SwitchGroupContext);
 
     return (
-      <div ref={ref} data-switch-group-items className={slots?.items({className})} {...props} />
+      <div
+        ref={ref}
+        className={slots?.items({className})}
+        data-slot="switch-group-items"
+        {...props}
+      />
     );
   },
 );
@@ -69,7 +74,7 @@ interface SwitchContext {
 
 const SwitchContext = createContext<SwitchContext>({});
 
-interface SwitchRootProps extends SwitchPrimitiveProps {}
+interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
 
 const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, SwitchRootProps>(
   ({children, className, ...originalProps}, ref) => {
@@ -83,7 +88,7 @@ const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, Sw
       <SwitchContext.Provider value={{slots}}>
         <SwitchPrimitive
           ref={ref}
-          data-switch
+          data-slot="switch"
           {...props}
           className={composeTwRenderProps(className, slots.base())}
         >
@@ -105,7 +110,7 @@ const SwitchControl = React.forwardRef<HTMLSpanElement, SwitchControlProps>(
     const {slots} = useContext(SwitchContext);
 
     return (
-      <span ref={ref} data-switch-control className={slots?.control({className})} {...props}>
+      <span ref={ref} className={slots?.control({className})} data-slot="switch-control" {...props}>
         {children}
       </span>
     );
@@ -123,7 +128,7 @@ const SwitchThumb = React.forwardRef<HTMLSpanElement, SwitchThumbProps>(
     const {slots} = useContext(SwitchContext);
 
     return (
-      <span ref={ref} data-switch-thumb className={slots?.thumb({className})} {...props}>
+      <span ref={ref} className={slots?.thumb({className})} data-slot="switch-thumb" {...props}>
         {children}
       </span>
     );
@@ -141,7 +146,7 @@ const SwitchIcon = React.forwardRef<any, SwitchIconProps>(
     const {slots} = useContext(SwitchContext);
 
     return (
-      <span ref={ref} data-switch-icon className={slots?.icon({className})} {...props}>
+      <span ref={ref} className={slots?.icon({className})} data-slot="switch-icon" {...props}>
         {children}
       </span>
     );

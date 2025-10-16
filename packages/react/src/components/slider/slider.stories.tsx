@@ -173,7 +173,7 @@ export const Examples: Story = {
       {/* Dark theme example */}
       <div className="bg-gray-12 rounded-lg p-6">
         <Slider
-          className="[&_[data-slider-output]]:text-gray-3 [&_[data-slider-track]]:bg-gray-9 [&_[data-slider-fill]]:bg-white [&_[data-slider-label]]:text-white [&_[data-slider-thumb]]:border-white"
+          className="[&_[data-slot=slider-output]]:text-gray-3 [&_[data-slot=slider-track]]:bg-gray-9 [&_[data-slot=slider-fill]]:bg-white [&_[data-slot=slider-label]]:text-white [&_[data-slot=slider-thumb]]:border-white"
           defaultValue={50}
           maxValue={100000}
         >

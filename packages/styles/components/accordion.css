@@ -26,6 +26,10 @@
   &[data-expanded="true"] {
     @apply -rotate-180;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .accordion__item {
@@ -36,7 +40,12 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply ease-smooth flex flex-1 items-center justify-between px-4 py-4 text-left font-medium transition-[background-color,opacity] duration-[100ms];
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
+
+  transition:
+    background-color 150ms var(--ease-smooth),
+    opacity 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
 
   /* Hover state */
   &:hover,
@@ -49,45 +58,41 @@
   /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled State */
-  &:disabled {
-    @apply pointer-events-none cursor-not-allowed opacity-[var(--disabled-opacity)];
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 
-/* Performant Grid-based animation wrapper */
 .accordion__panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms var(--ease-out-quad);
+  opacity: 0;
+  will-change: height, opacity;
+  transition:
+    height 420ms var(--ease-fluid-out),
+    opacity 340ms var(--ease-out);
+  height: var(--disclosure-panel-height);
+  overflow: clip;
 
-  .accordion__body {
-    overflow: hidden;
-  }
-
-  .accordion__body-inner {
-    opacity: 0;
-    /* Collapse transition */
-    transition: opacity 300ms var(--ease-out-quad);
-  }
-
-  /* Expanded state */
   &[data-expanded="true"] {
-    grid-template-rows: 1fr;
+    opacity: 1;
+  }
 
-    .accordion__body-inner {
-      opacity: 1;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 
 /* Outline variant */
 .accordion--outline {
-  @apply bg-panel rounded-lg border shadow-sm;
+  @apply bg-panel rounded-xl border shadow-sm;
 
   .accordion__trigger {
     &:hover,
@@ -99,11 +104,12 @@
 
 .accordion--outline .accordion__item {
   /* Special rounding for first and last items in outline variant */
-  &:first-child [data-accordion-trigger] {
+  &:first-child [data-slot="accordion-trigger"] {
     @apply rounded-t-lg;
   }
 
-  &:last-child:not(:has([data-accordion-trigger][aria-expanded="true"])) [data-accordion-trigger] {
+  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
+    [data-slot="accordion-trigger"] {
     @apply rounded-b-lg;
   }
 }

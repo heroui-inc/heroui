@@ -6,6 +6,5 @@ export type {
   CardDescriptionProps,
   CardContentProps,
   CardFooterProps,
-  CardImageProps,
 } from "./card";
 export {cardVariants, type CardVariants} from "./card.styles";

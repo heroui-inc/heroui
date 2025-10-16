@@ -9,10 +9,10 @@ export function LabelPosition() {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm font-normal">Label after</Label>
+        <Label className="text-sm">Label after</Label>
       </Switch>
       <Switch>
-        <Label className="text-sm font-normal">Label before</Label>
+        <Label className="text-sm">Label before</Label>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>

@@ -1,0 +1,32 @@
+.input {
+  @apply bg-field text-field-foreground shadow-field placeholder:text-field-placeholder rounded-field border px-3 py-2 text-sm outline-none;
+
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  &:hover,
+  &[data-hover="true"] {
+    @apply bg-field-hover;
+    border-color: var(--color-field-border-hover);
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+    border-color: var(--color-field-border-focus);
+    background-color: var(--color-field-focus);
+  }
+
+  &[data-invalid="true"] {
+    @apply border-danger;
+    background-color: var(--color-field-focus);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}

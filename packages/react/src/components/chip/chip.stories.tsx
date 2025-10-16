@@ -18,7 +18,7 @@ export default {
     },
   },
   component: Chip,
-  title: "Components/Chip",
+  title: "Components/DataDisplay/Chip",
 } as Meta<typeof Chip>;
 
 const defaultArgs: ChipProps = {

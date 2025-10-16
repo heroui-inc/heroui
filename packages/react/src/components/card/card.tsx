@@ -1,14 +1,9 @@
 "use client";
 
 import type {CardVariants} from "./card.styles";
-import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
-import {Button as ButtonPrimitive} from "react-aria-components";
-
-import {composeTwRenderProps} from "../../utils";
-import {CloseIcon} from "../icons";
 
 import {cardVariants} from "./card.styles";
 
@@ -31,13 +26,13 @@ interface CardRootProps extends React.HTMLAttributes<HTMLDivElement>, CardVarian
 }
 
 const CardRoot = React.forwardRef<HTMLDivElement, CardRootProps>(
-  ({asChild = false, children, className, surface, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => cardVariants({surface, variant}), [surface, variant]);
+  ({asChild = false, children, className, variant, ...props}, ref) => {
+    const slots = React.useMemo(() => cardVariants({variant}), [variant]);
     const Comp = asChild ? Slot : "div";
 
     return (
       <CardContext.Provider value={{slots}}>
-        <Comp ref={ref} data-card className={slots.base({className})} {...props}>
+        <Comp ref={ref} className={slots.base({className})} data-slot="card" {...props}>
           {children}
         </Comp>
       </CardContext.Provider>
@@ -60,7 +55,9 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "div";
 
-    return <Comp ref={ref} data-card-header className={slots?.header({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.header({className})} data-slot="card-header" {...props} />
+    );
   },
 );
 
@@ -79,7 +76,9 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "h3";
 
-    return <Comp ref={ref} data-card-title className={slots?.title({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.title({className})} data-slot="card-title" {...props} />
+    );
   },
 );
 
@@ -101,8 +100,8 @@ const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionPr
     return (
       <Comp
         ref={ref}
-        data-card-description
         className={slots?.description({className})}
+        data-slot="card-description"
         {...props}
       />
     );
@@ -124,7 +123,9 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "div";
 
-    return <Comp ref={ref} data-card-content className={slots?.content({className})} {...props} />;
+    return (
+      <Comp ref={ref} className={slots?.content({className})} data-slot="card-content" {...props} />
+    );
   },
 );
 
@@ -143,80 +144,13 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
     const {slots} = useContext(CardContext);
     const Comp = asChild ? Slot : "div";
 
-    return <Comp ref={ref} data-card-footer className={slots?.footer({className})} {...props} />;
-  },
-);
-
-CardFooter.displayName = "HeroUI.Card.Footer";
-
-/* -------------------------------------------------------------------------------------------------
- * Card Image
- * -----------------------------------------------------------------------------------------------*/
-
-interface CardImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  asChild?: boolean;
-}
-
-const CardImage = React.forwardRef<HTMLImageElement, CardImageProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "img";
-
-    return <Comp ref={ref} data-card-image className={slots?.image({className})} {...props} />;
-  },
-);
-
-CardImage.displayName = "HeroUI.Card.Image";
-
-/* -------------------------------------------------------------------------------------------------
- * Card Close
- * -----------------------------------------------------------------------------------------------*/
-
-interface CardCloseButtonProps extends ButtonPrimitiveProps {
-  asChild?: boolean;
-}
-
-const CardCloseButton = React.forwardRef<HTMLButtonElement, CardCloseButtonProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-
     return (
-      <ButtonPrimitive
-        ref={ref}
-        data-card-close-button
-        className={composeTwRenderProps(className, slots?.closeButton())}
-        {...props}
-      >
-        {(renderProps) =>
-          typeof children === "function"
-            ? children(renderProps)
-            : (children ?? <CloseIcon data-card-close-icon />)
-        }
-      </ButtonPrimitive>
+      <Comp ref={ref} className={slots?.footer({className})} data-slot="card-footer" {...props} />
     );
   },
 );
 
-CardCloseButton.displayName = "HeroUI.Card.CloseButton";
-
-/* -------------------------------------------------------------------------------------------------
- * Card Details
- * -----------------------------------------------------------------------------------------------*/
-
-interface CardDetailsProps extends React.HTMLAttributes<HTMLDivElement> {
-  asChild?: boolean;
-}
-
-const CardDetails = React.forwardRef<HTMLDivElement, CardDetailsProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "div";
-
-    return <Comp ref={ref} data-card-details className={slots?.details({className})} {...props} />;
-  },
-);
-
-CardDetails.displayName = "HeroUI.Card.Details";
+CardFooter.displayName = "HeroUI.Card.Footer";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
@@ -225,12 +159,9 @@ CardDetails.displayName = "HeroUI.Card.Details";
 const CompoundCard = Object.assign(CardRoot, {
   Content: CardContent,
   Description: CardDescription,
-  Details: CardDetails,
   Footer: CardFooter,
   Header: CardHeader,
-  Image: CardImage,
   Title: CardTitle,
-  CloseButton: CardCloseButton,
 });
 
 export type {
@@ -239,10 +170,7 @@ export type {
   CardTitleProps,
   CardDescriptionProps,
   CardContentProps,
-  CardDetailsProps,
   CardFooterProps,
-  CardImageProps,
-  CardCloseButtonProps,
 };
 
 export default CompoundCard;

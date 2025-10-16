@@ -123,7 +123,7 @@ Add a theme class to your HTML and apply colors to the body:
         0 0px 1px 0px rgba(0, 0, 0, 0.25);
 
       /* Skeleton Default Global Animation */
-      --skeleton-default-animation-type: shimmer; /* Possible values: shimmer, pulse, none */
+      --skeleton-animation: shimmer; /* Possible values: shimmer, pulse, none */
     }
 
     /* Ocean Dark */
@@ -179,7 +179,7 @@ Add a theme class to your HTML and apply colors to the body:
     }
 }
 `}
-/>
+/> 
 
 Use your theme:
 
@@ -334,147 +334,185 @@ For a complete reference of all variables and their values, see:
 ### Calculated Variables (Tailwind)
 
 We use Tailwind's `@theme` directive to automatically create calculated variables for hover states and radius variants:
-<CollapsibleCode lang="css" code={`@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-panel: var(--panel);
-  --color-panel-foreground: var(--panel-foreground);
-
-  --color-muted: var(--muted);
-
-  --color-surface: var(--surface-1);
-  --color-surface-foreground: var(--foreground);
-
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-soft-foreground: var(--accent-soft-foreground);
-
-  --color-segment: var(--segment);
-  --color-segment-foreground: var(--segment-foreground);
-
-  --color-border: var(--border);
-  --color-divider: var(--divider);
-  --color-focus: var(--focus);
-  --color-link: var(--link);
-
-  --color-default: var(--default);
-  --color-default-foreground: var(--default-foreground);
-
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-
-  --color-danger: var(--danger);
-  --color-danger-foreground: var(--danger-foreground);
-
-  --shadow-border: var(--shadow-border);
-
-  /* Calculated Variables */
-
-  /* Colors */
-  --color-panel-hover: color-mix(
-    in oklab,
-    var(--color-panel) 90%,
-    var(--color-panel-foreground) 5%
-  );
-  --color-default-hover: color-mix(
-    in oklab,
-    var(--color-default) 90%,
-    var(--color-default-foreground) 5%
-  );
-  --color-accent-hover: color-mix(
-    in oklab,
-    var(--color-accent) 90%,
-    var(--color-accent-foreground) 20%
-  );
-  --color-accent-soft-hover: color-mix(
-    in oklab,
-    var(--color-accent-soft) 10%,
-    var(--color-accent-soft-foreground) 18%
-  );
-  --color-success-hover: color-mix(
-    in oklab,
-    var(--color-success) 90%,
-    var(--color-success-foreground) 10%
-  );
-  --color-warning-hover: color-mix(
-    in oklab,
-    var(--color-warning) 90%,
-    var(--color-warning-foreground) 10%
-  );
-  --color-danger-hover: color-mix(
-    in oklab,
-    var(--color-danger) 90%,
-    var(--color-danger-foreground) 10%
-  );
-
-  /* Surface Colors */
-  --color-surface-1: var(--surface-1);
-  --color-surface-1-foreground: color-mix(
-    in oklab,
-    var(--color-surface-1) 80%,
-    var(--color-foreground) 3.5%
-  );
-  --color-surface-2: var(--surface-2);
-  --color-surface-2-foreground: color-mix(
-    in oklab,
-    var(--color-surface-2) 80%,
-    var(--color-foreground) 3.5%
-  );
-  --color-surface-3: var(--surface-3);
-  --color-surface-3-foreground: color-mix(
-    in oklab,
-    var(--color-surface-3) 80%,
-    var(--color-foreground) 3.5%
-  );
-
-  /* Radius */
-  --radius-xs: calc(var(--radius) * 0.25);
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: calc(var(--radius) * 0.75);
-  --radius-lg: calc(var(--radius) * 1);
-  --radius-xl: calc(var(--radius) * 1.5);
-  --radius-2xl: calc(var(--radius) * 2);
-  --radius-3xl: calc(var(--radius) * 3);
-  --radius-4xl: calc(var(--radius) * 4);
-  --radius-panel: var(--radius);
-  --radius-panel-inner: calc(var(--radius) * 0.5);
-
-  /* Transition Timing Functions  */
-  --ease-smooth: ease; /* same as transition: ease; */
-
-  /* From smoother to faster quad->circ @made by https://twitter.com/bdc */
-  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
-  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
-  --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
-  --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+<CollapsibleCode lang="css" code={`  @theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-panel: var(--panel);
+    --color-panel-foreground: var(--panel-foreground);
   
-  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
-  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
-  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
- 
-  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
-  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
-  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
-  --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-
-  /* Animations */
-  --animate-spin-fast: spin 0.75s linear infinite;
-  --animate-skeleton: skeleton 2s linear infinite;
-}
+    --color-muted: var(--muted);
+  
+    --color-surface: var(--surface-1);
+    --color-surface-foreground: var(--foreground);
+  
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+  
+    --color-accent-soft: var(--accent-soft);
+    --color-accent-soft-foreground: var(--accent-soft-foreground);
+  
+    --color-segment: var(--segment);
+    --color-segment-foreground: var(--segment-foreground);
+  
+    --color-border: var(--border);
+    --color-divider: var(--divider);
+    --color-focus: var(--focus);
+    --color-link: var(--link);
+  
+    --color-default: var(--default);
+    --color-default-foreground: var(--default-foreground);
+    --color-field: var(--field-background, var(--color-default));
+    --color-field-foreground: var(--field-foreground, var(--color-foreground));
+    --color-field-placeholder: var(--field-placeholder, var(--color-muted));
+    --color-field-border: var(--field-border, var(--color-border));
+  
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+  
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+  
+    --color-danger: var(--danger);
+    --color-danger-foreground: var(--danger-foreground);
+  
+    --shadow-panel: var(--panel-shadow);
+    --shadow-field: var(--field-shadow);
+    --radius-field: var(--field-radius, var(--radius-xl));
+    --border-width-field: var(--field-border-width, var(--border-width));
+  
+    /* Calculated Variables */
+  
+    /* Colors */
+    --color-panel-hover: color-mix(
+      in oklab,
+      var(--color-panel) 90%,
+      var(--color-panel-foreground) 5%
+    );
+    --color-default-hover: color-mix(
+      in oklab,
+      var(--color-default) 90%,
+      var(--color-default-foreground) 2%
+    );
+    --color-field-hover: color-mix(
+      in oklab,
+      var(--color-field) 88%,
+      var(--color-field-foreground) 8%
+    );
+    --color-field-focus: color-mix(
+      in oklab,
+      var(--color-field) 80%,
+      var(--color-field-foreground) 14%
+    );
+    --color-accent-hover: color-mix(
+      in oklab,
+      var(--color-accent) 90%,
+      var(--color-accent-foreground) 20%
+    );
+    --color-accent-soft-hover: color-mix(
+      in oklab,
+      var(--color-accent-soft) 10%,
+      var(--color-accent-soft-foreground) 18%
+    );
+    --color-success-hover: color-mix(
+      in oklab,
+      var(--color-success) 90%,
+      var(--color-success-foreground) 10%
+    );
+    --color-warning-hover: color-mix(
+      in oklab,
+      var(--color-warning) 90%,
+      var(--color-warning-foreground) 10%
+    );
+    --color-danger-hover: color-mix(
+      in oklab,
+      var(--color-danger) 90%,
+      var(--color-danger-foreground) 10%
+    );
+    --color-field-border-hover: color-mix(
+      in oklab,
+      var(--color-field-border) 88%,
+      var(--color-field-foreground) 8%
+    );
+    --color-field-border-focus: color-mix(
+      in oklab,
+      var(--color-field-border) 74%,
+      var(--color-field-foreground) 22%
+    );
+  
+    /* Surface Colors */
+    --color-surface-1: var(--surface-1);
+    --color-surface-1-foreground: color-mix(
+      in oklab,
+      var(--color-surface-1) 80%,
+      var(--color-foreground) 3.5%
+    );
+    --color-surface-2: var(--surface-2);
+    --color-surface-2-foreground: color-mix(
+      in oklab,
+      var(--color-surface-2) 80%,
+      var(--color-foreground) 3.5%
+    );
+    --color-surface-3: var(--surface-3);
+    --color-surface-3-foreground: color-mix(
+      in oklab,
+      var(--color-surface-3) 80%,
+      var(--color-foreground) 3.5%
+    );
+  
+    /* Radius */
+    --radius-xs: calc(var(--radius) * 0.25);
+    --radius-sm: calc(var(--radius) * 0.5);
+    --radius-md: calc(var(--radius) * 0.75);
+    --radius-lg: calc(var(--radius) * 1);
+    --radius-xl: calc(var(--radius) * 1.5);
+    --radius-2xl: calc(var(--radius) * 2);
+    --radius-3xl: calc(var(--radius) * 3);
+    --radius-4xl: calc(var(--radius) * 4);
+    --radius-panel: var(--radius-xl);
+    --radius-panel-inner: var(--radius-2xl);
+  
+    /* Transition Timing Functions  */
+    --ease-smooth: ease; /* same as transition: ease; */
+    /* These custom curves are made by https://twitter.com/bdc */
+  
+    /* From smoother to faster */
+    --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    /* From slower to faster */
+    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+    /* Custom smooth-out curve: fast start, smooth stop - Apple style */
+    --ease-fluid-out: cubic-bezier(0.32, 0.72, 0, 1);
+    /* From slower to faster */
+    --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+    --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+    --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  
+    /* Animations */
+    --animate-spin-fast: spin 0.75s linear infinite;
+    --animate-skeleton: skeleton 2s linear infinite;
+  
+    @keyframes skeleton {
+      100% {
+        transform: translateX(200%);
+      }
+    }
+  }
 `}
 />
+
+Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
 
 ## Resources
 

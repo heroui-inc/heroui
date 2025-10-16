@@ -2,43 +2,49 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-4 font-medium md:h-9;
-  transition:
-    transform 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth);
+  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border-transparent px-4 text-sm font-medium md:h-9;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
+  /* Border */
+  border-width: var(--border-width);
+
+  transition:
+    transform 150ms var(--ease-out),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
 
   &:focus-visible,
   &[data-focus-visible="true"] {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
   &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-[var(--disabled-opacity)];
-    cursor: var(--cursor-disabled);
+    @apply status-disabled;
   }
 
   /* Pending state */
   &[data-pending] {
-    @apply pointer-events-none;
+    @apply status-pending;
   }
 
   /* SVG icon styling - exclude spinner svgs */
-  & svg:not([data-spinner] svg) {
+  & svg:not([data-slot="spinner"] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 
 /* Size variants */
 .button--sm {
-  @apply h-9 px-3 text-sm md:h-8;
+  @apply h-9 px-3 md:h-8;
 
-  & svg:not([data-spinner] svg) {
+  & svg:not([data-slot="spinner"] svg) {
     @apply size-4;
   }
 
@@ -53,7 +59,7 @@
 }
 
 .button--lg {
-  @apply h-11 md:h-10;
+  @apply h-11 text-base md:h-10;
 
   &:active,
   &[data-pressed="true"] {

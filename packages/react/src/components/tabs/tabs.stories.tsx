@@ -12,7 +12,7 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  title: "Components/Tabs",
+  title: "Components/Navigation/Tabs",
 } satisfies Meta<typeof Tabs>;
 
 export default meta;
@@ -25,11 +25,19 @@ const DefaultTemplate = (args: Story["args"]) => {
       <Tabs {...args}>
         <Tabs.ListWrapper>
           <Tabs.List aria-label="Options">
-            <Tabs.Tab id="overview">Overview</Tabs.Tab>
-            <Tabs.Tab id="analytics">Analytics</Tabs.Tab>
-            <Tabs.Tab id="reports">Reports</Tabs.Tab>
+            <Tabs.Tab id="overview">
+              Overview
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="analytics">
+              Analytics
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="reports">
+              Reports
+              <Tabs.Indicator />
+            </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Indicator />
         </Tabs.ListWrapper>
         <Tabs.Panel className="pt-4" id="overview">
           <p>View your project overview and recent activity.</p>
@@ -51,12 +59,23 @@ const VerticalTemplate = (args: Story["args"]) => {
       <Tabs {...args} orientation="vertical">
         <Tabs.ListWrapper>
           <Tabs.List aria-label="Vertical tabs">
-            <Tabs.Tab id="account">Account</Tabs.Tab>
-            <Tabs.Tab id="security">Security</Tabs.Tab>
-            <Tabs.Tab id="notifications">Notifications</Tabs.Tab>
-            <Tabs.Tab id="billing">Billing</Tabs.Tab>
+            <Tabs.Tab id="account">
+              Account
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="security">
+              Security
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="notifications">
+              Notifications
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="billing">
+              Billing
+              <Tabs.Indicator />
+            </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Indicator />
         </Tabs.ListWrapper>
         <Tabs.Panel className="px-4" id="account">
           <h3 className="mb-2 font-semibold">Account Settings</h3>
@@ -90,13 +109,19 @@ const DisabledTabTemplate = (args: Story["args"]) => (
     <Tabs {...args}>
       <Tabs.ListWrapper>
         <Tabs.List aria-label="Tabs with disabled">
-          <Tabs.Tab id="active">Active</Tabs.Tab>
+          <Tabs.Tab id="active">
+            Active
+            <Tabs.Indicator />
+          </Tabs.Tab>
           <Tabs.Tab isDisabled id="disabled">
             Disabled
+            <Tabs.Indicator />
           </Tabs.Tab>
-          <Tabs.Tab id="available">Available</Tabs.Tab>
+          <Tabs.Tab id="available">
+            Available
+            <Tabs.Indicator />
+          </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Indicator />
       </Tabs.ListWrapper>
       <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
@@ -116,11 +141,19 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
     <Tabs defaultSelectedKey="default" {...args}>
       <Tabs.ListWrapper>
         <Tabs.List aria-label="Tabs with default options">
-          <Tabs.Tab id="active">Active</Tabs.Tab>
-          <Tabs.Tab id="default">Default</Tabs.Tab>
-          <Tabs.Tab id="available">Available</Tabs.Tab>
+          <Tabs.Tab id="active">
+            Active
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="default">
+            Default
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="available">
+            Available
+            <Tabs.Indicator />
+          </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Indicator />
       </Tabs.ListWrapper>
       <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
@@ -144,11 +177,19 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
       <Tabs selectedKey={selectedKey} onSelectionChange={setSelectedKey} {...args}>
         <Tabs.ListWrapper>
           <Tabs.List aria-label="Tabs with controlled options">
-            <Tabs.Tab id="active">Active</Tabs.Tab>
-            <Tabs.Tab id="controlled">Controlled</Tabs.Tab>
-            <Tabs.Tab id="available">Available</Tabs.Tab>
+            <Tabs.Tab id="active">
+              Active
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="controlled">
+              Controlled
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="available">
+              Available
+              <Tabs.Indicator />
+            </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Indicator />
         </Tabs.ListWrapper>
         <Tabs.Panel className="pt-4" id="active">
           <p>This tab is active and can be selected.</p>
@@ -173,12 +214,23 @@ const CustomStyleTemplate = (args: Story["args"]) => {
             aria-label="Options"
             className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
           >
-            <Tabs.Tab id="daily">Daily</Tabs.Tab>
-            <Tabs.Tab id="weekly">Weekly</Tabs.Tab>
-            <Tabs.Tab id="bi-weekly">Bi-Weekly</Tabs.Tab>
-            <Tabs.Tab id="monthly">Monthly</Tabs.Tab>
+            <Tabs.Tab id="daily">
+              Daily
+              <Tabs.Indicator className="bg-accent" />
+            </Tabs.Tab>
+            <Tabs.Tab id="weekly">
+              Weekly
+              <Tabs.Indicator className="bg-accent" />
+            </Tabs.Tab>
+            <Tabs.Tab id="bi-weekly">
+              Bi-Weekly
+              <Tabs.Indicator className="bg-accent" />
+            </Tabs.Tab>
+            <Tabs.Tab id="monthly">
+              Monthly
+              <Tabs.Indicator className="bg-accent" />
+            </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Indicator className="bg-accent" />
         </Tabs.ListWrapper>
       </Tabs>
     </div>
@@ -243,10 +295,10 @@ const Showcase1Template = (args: Story["args"]) => {
                   id={zoom.toString()}
                 >
                   {zoom} {zoom === "macro" ? "" : "mm"}
+                  <Tabs.Indicator className="rounded-full bg-white shadow-none duration-[320ms]" />
                 </Tabs.Tab>
               ))}
             </Tabs.List>
-            <Tabs.Indicator className="rounded-full bg-white shadow-none duration-[320ms] ease-out" />
           </Tabs.ListWrapper>
         </Tabs>
         <div className="relative h-10 w-10">

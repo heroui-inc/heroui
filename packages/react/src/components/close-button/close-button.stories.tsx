@@ -1,23 +1,71 @@
+import type {CloseButtonProps} from "./close-button";
 import type {Meta} from "@storybook/react";
 
-import {CloseButton} from "./close-button";
+import {Icon} from "@iconify/react";
+import React, {useState} from "react";
+
+import {CloseButton} from "./index";
 
 export default {
-  argTypes: {},
+  argTypes: {
+    isDisabled: {
+      control: "boolean",
+    },
+    variant: {
+      control: "select",
+      options: ["default"],
+    },
+  },
   component: CloseButton,
-  title: "Components/CloseButton",
+  title: "Components/Buttons/CloseButton",
 } as Meta<typeof CloseButton>;
 
-export const Default = () => <CloseButton />;
+const defaultArgs: CloseButtonProps = {
+  variant: "default",
+  isDisabled: false,
+};
 
-export const Sizes = () => (
-  <div className="flex items-center gap-4">
-    <CloseButton size="sm" />
-    <CloseButton size="md" />
-    <CloseButton size="lg" />
+const Template = (args: CloseButtonProps) => (
+  <div className="flex gap-3">
+    <CloseButton {...args} />
   </div>
 );
 
-export const WithOnPress = () => <CloseButton onPress={() => alert("Close button pressed!")} />;
+const TemplateWithCustomIcon = (args: CloseButtonProps) => (
+  <div className="flex gap-3">
+    <CloseButton {...args}>
+      <Icon icon="gravity-ui:circle-xmark" />
+    </CloseButton>
+  </div>
+);
 
-export const Disabled = () => <CloseButton isDisabled />;
+const InteractiveTemplate = (args: CloseButtonProps) => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-4">
+      <CloseButton
+        {...args}
+        aria-label={`Close (clicked ${count} times)`}
+        onPress={() => setCount(count + 1)}
+      />
+
+      <span className="text-sm">Clicked: {count} times</span>
+    </div>
+  );
+};
+
+export const Default = {
+  args: defaultArgs,
+  render: Template,
+};
+
+export const WithCustomIcon = {
+  args: defaultArgs,
+  render: TemplateWithCustomIcon,
+};
+
+export const Interactive = {
+  args: defaultArgs,
+  render: InteractiveTemplate,
+};

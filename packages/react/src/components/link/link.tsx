@@ -63,12 +63,12 @@ const LinkIconComponent = React.forwardRef<HTMLSpanElement, LinkIconProps>(
     return (
       <Component
         ref={ref}
-        data-link-icon
         className={slots?.icon({className})}
-        data-link-default-icon={dataAttr(!children)}
+        data-default-icon={dataAttr(!children)}
+        data-slot="link-icon"
         {...rest}
       >
-        {children ?? <DefaultLinkIcon />}
+        {children ?? <DefaultLinkIcon data-slot="link-default-icon" />}
       </Component>
     );
   },

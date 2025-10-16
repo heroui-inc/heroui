@@ -1,0 +1,15 @@
+/* Text field styles */
+.text-field {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+}

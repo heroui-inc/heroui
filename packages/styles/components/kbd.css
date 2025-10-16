@@ -1,22 +1,24 @@
 /* Base styles */
 .kbd {
-  @apply bg-surface-2 text-muted border-border inline-flex h-6 items-center space-x-0.5 whitespace-nowrap rounded-md border px-2 text-center font-sans text-sm font-normal rtl:space-x-reverse;
+  @apply bg-surface-2 text-muted border-border inline-flex h-6 items-center space-x-0.5 whitespace-nowrap rounded-sm px-2 text-center font-sans text-sm font-normal rtl:space-x-reverse;
   word-spacing: -0.25rem;
+  /* Border */
+  border-width: var(--border-width);
 }
 
 /* Key abbreviation styles */
 .kbd__abbr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-decoration: none;
 }
 
 /* Content wrapper */
 .kbd__content {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
