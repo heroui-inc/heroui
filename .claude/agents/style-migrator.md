@@ -151,7 +151,7 @@ Ensure:
 .component {
   /* Hover states - both approaches */
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply [hover-styles];
   }
 
@@ -202,7 +202,7 @@ Example structure:
 
   /* Hover states - both approaches */
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-accent-soft;
   }
 

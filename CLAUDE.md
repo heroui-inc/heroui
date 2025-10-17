@@ -789,7 +789,7 @@ When working with HeroUI CSS components, follow these critical patterns:
 .component {
   /* Hover states */
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply [hover-styles];
   }
 

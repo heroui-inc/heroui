@@ -68,7 +68,7 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
     @apply rounded-xl border border-border bg-surface-2 px-4 py-3 text-sm leading-6 shadow-sm;
 
     &:hover,
-    &[data-hover="true"] {
+    &[data-hovered="true"] {
       @apply bg-surface-3 border-border/80;
     }
 
@@ -90,7 +90,7 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 
 ### Interactive States
 
-- **Hover**: `:hover` or `[data-hover="true"]`
+- **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus Visible**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Invalid**: `[data-invalid="true"]`
 - **Disabled**: `:disabled` or `[aria-disabled="true"]`
