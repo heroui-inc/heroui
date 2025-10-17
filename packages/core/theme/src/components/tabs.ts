@@ -85,12 +85,9 @@ const tabs = tv({
   },
   variants: {
     variant: {
-      solid: {
-        cursor: "inset-0",
-      },
+      solid: {},
       light: {
         tabList: "bg-transparent dark:bg-transparent",
-        cursor: "inset-0",
       },
       underlined: {
         tabList: "bg-transparent dark:bg-transparent",
@@ -98,7 +95,6 @@ const tabs = tv({
       },
       bordered: {
         tabList: "bg-transparent dark:bg-transparent border-medium border-default-200 shadow-xs",
-        cursor: "inset-0",
       },
     },
     color: {
