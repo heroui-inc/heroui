@@ -48,6 +48,7 @@ interface CalendarRootProps<T extends DateValue = DateValue>
 
 function CalendarRootInner<T extends DateValue = DateValue>(
   props: CalendarRootProps<T> & React.RefAttributes<HTMLDivElement>,
+  ref?: React.Ref<HTMLDivElement>,
 ) {
   const {children, className, isDisabled, ...rest} = props;
   const slots = React.useMemo(() => calendarVariants({isDisabled}), [isDisabled]);
@@ -55,6 +56,7 @@ function CalendarRootInner<T extends DateValue = DateValue>(
   return (
     <CalendarContext.Provider value={{slots}}>
       <CalendarPrimitive
+        ref={ref}
         data-slot="calendar"
         isDisabled={isDisabled}
         {...rest}
@@ -68,6 +70,7 @@ function CalendarRootInner<T extends DateValue = DateValue>(
 
 const CalendarRoot = React.forwardRef(CalendarRootInner) as <T extends DateValue = DateValue>(
   props: CalendarRootProps<T> & React.RefAttributes<HTMLDivElement>,
+  ref?: React.ComponentRef<typeof CalendarPrimitive>,
 ) => React.ReactElement;
 
 // @ts-expect-error - displayName on generic component
