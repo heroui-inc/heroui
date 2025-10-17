@@ -269,7 +269,7 @@ The ComponentName component uses these CSS classes ([View source styles](https:/
 
 The component supports both CSS pseudo-classes and data attributes for flexibility:
 
-- **Hover**: `:hover` or `[data-hover="true"]`
+- **Hover**: `:hover` or `[data-hovered="true"]`
 - **Active/Pressed**: `:active` or `[data-pressed="true"]`
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Disabled**: `:disabled` or `[aria-disabled="true"]`
