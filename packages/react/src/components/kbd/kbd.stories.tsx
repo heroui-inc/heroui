@@ -2,7 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Kbd} from "./";
+import {Kbd} from "./index";
 
 const meta: Meta<typeof Kbd> = {
   title: "Components/Typography/Kbd",

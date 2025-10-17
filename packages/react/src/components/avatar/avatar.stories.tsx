@@ -1,4 +1,4 @@
-import type {AvatarProps} from "./avatar";
+import type {AvatarProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";

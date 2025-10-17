@@ -1,4 +1,4 @@
-import type {DisclosureGroupProps} from "./disclosure-group";
+import type {DisclosureGroupProps} from "./index";
 import type {ButtonProps} from "@heroui/react";
 import type {Meta} from "@storybook/react";
 import type {SVGProps} from "react";

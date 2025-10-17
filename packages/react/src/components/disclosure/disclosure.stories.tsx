@@ -1,4 +1,4 @@
-import type {DisclosureProps} from "./disclosure";
+import type {DisclosureProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";

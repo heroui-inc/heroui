@@ -52,7 +52,8 @@ export const WithLabel: Story = {
   render: (args) => (
     <div className="w-[280px]">
       <Label>Verify account</Label>
-      <Description size="sm">We&apos;ve sent a code to a****@gmail.com</Description>
+      {/* size="sm" */}
+      <Description>We&apos;ve sent a code to a****@gmail.com</Description>
       <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot />

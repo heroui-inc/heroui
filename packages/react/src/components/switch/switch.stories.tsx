@@ -7,7 +7,7 @@ import {Button} from "../button";
 import {Description} from "../description";
 import {Label} from "../label";
 
-import {Switch, SwitchGroup} from "./switch";
+import {Switch, SwitchGroup} from "./index";
 
 export default {
   argTypes: {},

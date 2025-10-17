@@ -1,4 +1,4 @@
-import type {LinkProps} from "./link";
+import type {LinkProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import React from "react";

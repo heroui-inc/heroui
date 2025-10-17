@@ -1,4 +1,4 @@
-import type {TooltipContentProps} from "./tooltip";
+import type {TooltipContentProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";

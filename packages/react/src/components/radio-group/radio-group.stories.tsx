@@ -10,7 +10,7 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 
-import {Radio, RadioGroup} from "./radio-group";
+import {Radio, RadioGroup} from "./index";
 
 export default {
   argTypes: {},

@@ -1,4 +1,4 @@
-import type {AccordionProps} from "./accordion";
+import type {AccordionProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";

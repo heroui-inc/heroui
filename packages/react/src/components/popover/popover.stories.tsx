@@ -1,4 +1,4 @@
-import type {PopoverContentProps} from "./popover";
+import type {PopoverContentProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
