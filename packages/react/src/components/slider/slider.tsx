@@ -38,7 +38,7 @@ const SliderContext = createContext<SliderContext>({});
 
 interface SliderRootProps extends SliderPrimitiveProps, SliderVariants {}
 
-const SliderRoot = React.forwardRef<React.ElementRef<typeof SliderPrimitive>, SliderRootProps>(
+const SliderRoot = React.forwardRef<React.ComponentRef<typeof SliderPrimitive>, SliderRootProps>(
   ({children, className, orientation = "horizontal", ...props}, ref) => {
     const slots = React.useMemo(
       () =>
@@ -91,7 +91,7 @@ SliderHeader.displayName = "HeroUI.Slider.Header";
 
 interface SliderLabelProps extends React.ComponentProps<typeof LabelPrimitive> {}
 
-const SliderLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive>, SliderLabelProps>(
+const SliderLabel = React.forwardRef<React.ComponentRef<typeof LabelPrimitive>, SliderLabelProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(SliderContext);
 
@@ -115,7 +115,7 @@ SliderLabel.displayName = "HeroUI.Slider.Label";
 interface SliderOutputProps extends React.ComponentProps<typeof SliderOutputPrimitive> {}
 
 const SliderOutput = React.forwardRef<
-  React.ElementRef<typeof SliderOutputPrimitive>,
+  React.ComponentRef<typeof SliderOutputPrimitive>,
   SliderOutputProps
 >(({className, ...props}, ref) => {
   const {slots} = useContext(SliderContext);
@@ -139,7 +139,7 @@ SliderOutput.displayName = "HeroUI.Slider.Output";
 interface SliderTrackProps extends SliderTrackPrimitiveProps {}
 
 const SliderTrack = React.forwardRef<
-  React.ElementRef<typeof SliderTrackPrimitive>,
+  React.ComponentRef<typeof SliderTrackPrimitive>,
   SliderTrackProps
 >(({children, className, ...props}, ref) => {
   const {isDisabled, slots} = useContext(SliderContext);
@@ -202,7 +202,7 @@ SliderFill.displayName = "HeroUI.Slider.Fill";
 interface SliderThumbProps extends SliderThumbPrimitiveProps {}
 
 const SliderThumb = React.forwardRef<
-  React.ElementRef<typeof SliderThumbPrimitive>,
+  React.ComponentRef<typeof SliderThumbPrimitive>,
   SliderThumbProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(SliderContext);

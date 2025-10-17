@@ -76,7 +76,7 @@ const SwitchContext = createContext<SwitchContext>({});
 
 interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
 
-const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, SwitchRootProps>(
+const SwitchRoot = React.forwardRef<React.ComponentRef<typeof SwitchPrimitive>, SwitchRootProps>(
   ({children, className, ...originalProps}, ref) => {
     const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
     const slots = React.useMemo(

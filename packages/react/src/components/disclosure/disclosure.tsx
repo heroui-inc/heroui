@@ -35,29 +35,30 @@ const DisclosureContext = createContext<{
 
 interface DisclosureProps extends DisclosurePrimitiveProps, DisclosureVariants {}
 
-const Disclosure = React.forwardRef<React.ElementRef<typeof DisclosurePrimitive>, DisclosureProps>(
-  ({children, className, ...originalProps}, ref) => {
-    const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
+const Disclosure = React.forwardRef<
+  React.ComponentRef<typeof DisclosurePrimitive>,
+  DisclosureProps
+>(({children, className, ...originalProps}, ref) => {
+  const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
 
-    const slots = React.useMemo(
-      () => disclosureVariants({...(variantProps as DisclosureVariants)}),
-      [objectToDeps(variantProps)],
-    );
+  const slots = React.useMemo(
+    () => disclosureVariants({...(variantProps as DisclosureVariants)}),
+    [objectToDeps(variantProps)],
+  );
 
-    return (
-      <DisclosureContext.Provider value={{slots}}>
-        <DisclosurePrimitive
-          ref={ref}
-          data-slot="disclosure"
-          {...props}
-          className={composeTwRenderProps(className, slots.base())}
-        >
-          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-        </DisclosurePrimitive>
-      </DisclosureContext.Provider>
-    );
-  },
-);
+  return (
+    <DisclosureContext.Provider value={{slots}}>
+      <DisclosurePrimitive
+        ref={ref}
+        data-slot="disclosure"
+        {...props}
+        className={composeTwRenderProps(className, slots.base())}
+      >
+        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      </DisclosurePrimitive>
+    </DisclosureContext.Provider>
+  );
+});
 
 Disclosure.displayName = "HeroUI.Disclosure";
 
@@ -68,7 +69,7 @@ interface DisclosureHeadingProps extends React.HTMLAttributes<HTMLHeadingElement
 }
 
 const DisclosureHeading = React.forwardRef<
-  React.ElementRef<typeof DisclosureHeadingPrimitive>,
+  React.ComponentRef<typeof DisclosureHeadingPrimitive>,
   DisclosureHeadingProps
 >(({className, ...props}, ref) => {
   const {slots} = useContext(DisclosureContext);
@@ -89,25 +90,26 @@ DisclosureHeading.displayName = "HeroUI.DisclosureHeading";
 
 interface DisclosureTriggerProps extends ButtonProps {}
 
-const DisclosureTrigger = React.forwardRef<React.ElementRef<typeof Button>, DisclosureTriggerProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(DisclosureContext);
+const DisclosureTrigger = React.forwardRef<
+  React.ComponentRef<typeof Button>,
+  DisclosureTriggerProps
+>(({className, ...props}, ref) => {
+  const {slots} = useContext(DisclosureContext);
 
-    return (
-      <Button
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.trigger())}
-        data-slot="disclosure-trigger"
-        slot="trigger"
-        {...props}
-      >
-        {(values) => (
-          <>{typeof props.children === "function" ? props.children(values) : props.children}</>
-        )}
-      </Button>
-    );
-  },
-);
+  return (
+    <Button
+      ref={ref}
+      className={composeTwRenderProps(className, slots?.trigger())}
+      data-slot="disclosure-trigger"
+      slot="trigger"
+      {...props}
+    >
+      {(values) => (
+        <>{typeof props.children === "function" ? props.children(values) : props.children}</>
+      )}
+    </Button>
+  );
+});
 
 DisclosureTrigger.displayName = "HeroUI.DisclosureTrigger";
 
@@ -116,7 +118,7 @@ DisclosureTrigger.displayName = "HeroUI.DisclosureTrigger";
 interface DisclosureContentProps extends DisclosurePanelProps {}
 
 const DisclosureContent = React.forwardRef<
-  React.ElementRef<typeof DisclosurePanel>,
+  React.ComponentRef<typeof DisclosurePanel>,
   DisclosureContentProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(DisclosureContext);
@@ -143,7 +145,7 @@ DisclosureContent.displayName = "HeroUI.DisclosureContent";
 
 interface DisclosureBodyContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const DisclosureBody = React.forwardRef<React.ElementRef<"div">, DisclosureBodyContentProps>(
+const DisclosureBody = React.forwardRef<React.ComponentRef<"div">, DisclosureBodyContentProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(DisclosureContext);
 
@@ -164,7 +166,7 @@ interface DisclosureIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const DisclosureIndicator = React.forwardRef<
-  React.ElementRef<typeof IconChevronDown>,
+  React.ComponentRef<typeof IconChevronDown>,
   DisclosureIndicatorProps
 >(({children, className, ...props}, ref) => {
   const {isExpanded} = useContext(DisclosureStateContext)!;

@@ -27,7 +27,7 @@ const LinkContext = createContext<LinkContext>({});
  * --------------------------------------------------------------------------------------------- */
 interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {}
 
-const LinkRoot = React.forwardRef<React.ElementRef<typeof LinkPrimitive>, LinkRootProps>(
+const LinkRoot = React.forwardRef<React.ComponentRef<typeof LinkPrimitive>, LinkRootProps>(
   ({children, className, ...props}, ref) => {
     const slots = React.useMemo(() => linkVariants({}), []);
 

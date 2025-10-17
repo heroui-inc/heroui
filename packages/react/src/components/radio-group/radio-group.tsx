@@ -21,7 +21,7 @@ import {radioGroupVariants, radioVariants} from "./radio-group.styles";
 interface RadioGroupRootProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
 
 const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive>,
+  React.ComponentRef<typeof RadioGroupPrimitive>,
   RadioGroupRootProps
 >(({children, className, ...props}, ref) => {
   const styles = React.useMemo(() => radioGroupVariants(), []);
@@ -56,7 +56,7 @@ interface RadioRootProps extends RadioPrimitiveProps {
   name?: string;
 }
 
-const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, RadioRootProps>(
+const RadioRoot = React.forwardRef<React.ComponentRef<typeof RadioPrimitive>, RadioRootProps>(
   ({children, className, ...props}, ref) => {
     const slots = React.useMemo(() => radioVariants(), []);
 
