@@ -98,6 +98,25 @@ export function useRadioGroup(props: UseRadioGroupProps) {
   const domRef = useDOMRef(ref);
 
   const otherPropsWithOrientation = useMemo<AriaRadioGroupProps>(() => {
+    const handleValueChange: AriaRadioGroupProps["onChange"] = (newValue) => {
+      // Invoke consumer's onValueChange first (controlled usage)
+      onValueChange?.(newValue);
+
+      // Emit a form-friendly event shape if a generic onChange handler is provided
+      // This helps libraries like RHF when users accidentally attach onChange to the group
+      if (typeof onChange === "function") {
+        const eventLike = {
+          target: {
+            name: name,
+            value: newValue,
+          },
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
+
+        // Best effort compatibility: forward a synthetic event
+        onChange(eventLike);
+      }
+    };
+
     return {
       ...otherProps,
       value,
@@ -108,7 +127,7 @@ export function useRadioGroup(props: UseRadioGroupProps) {
       isInvalid: validationState === "invalid" || isInvalidProp,
       orientation,
       validationBehavior,
-      onChange: onValueChange,
+      onChange: handleValueChange,
     };
   }, [
     otherProps,
@@ -122,6 +141,7 @@ export function useRadioGroup(props: UseRadioGroupProps) {
     validationBehavior,
     orientation,
     onValueChange,
+    onChange,
   ]);
 
   const groupState = useRadioGroupState(otherPropsWithOrientation);
