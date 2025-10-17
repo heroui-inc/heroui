@@ -32,39 +32,40 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
  * Accordion
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionProps extends DisclosureGroupProps, AccordionVariants {}
+interface AccordionRootProps extends DisclosureGroupProps, AccordionVariants {}
 
-const Accordion = React.forwardRef<React.ElementRef<typeof DisclosureGroup>, AccordionProps>(
-  ({children, className, ...originalProps}, ref) => {
-    const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
+const AccordionRoot = React.forwardRef<
+  React.ComponentRef<typeof DisclosureGroup>,
+  AccordionRootProps
+>(({children, className, ...originalProps}, ref) => {
+  const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
 
-    const slots = React.useMemo(
-      () => accordionVariants({...(variantProps as AccordionVariants)}),
-      [objectToDeps(variantProps)],
-    );
+  const slots = React.useMemo(
+    () => accordionVariants({...(variantProps as AccordionVariants)}),
+    [objectToDeps(variantProps)],
+  );
 
-    return (
-      <AccordionContext.Provider value={{slots}}>
-        <DisclosureGroup
-          ref={ref}
-          data-slot="accordion"
-          {...props}
-          className={composeTwRenderProps(className, slots.base())}
-        >
-          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-        </DisclosureGroup>
-      </AccordionContext.Provider>
-    );
-  },
-);
+  return (
+    <AccordionContext.Provider value={{slots}}>
+      <DisclosureGroup
+        ref={ref}
+        data-slot="accordion"
+        {...props}
+        className={composeTwRenderProps(className, slots.base())}
+      >
+        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      </DisclosureGroup>
+    </AccordionContext.Provider>
+  );
+});
 
-Accordion.displayName = "HeroUI.Accordion";
+AccordionRoot.displayName = "HeroUI.AccordionRoot";
 
 /* -----------------------------------------------------------------------------------------------*/
 
 interface AccordionItemProps extends DisclosureProps {}
 
-const AccordionItem = React.forwardRef<React.ElementRef<typeof Disclosure>, AccordionItemProps>(
+const AccordionItem = React.forwardRef<React.ComponentRef<typeof Disclosure>, AccordionItemProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(AccordionContext);
 
@@ -90,7 +91,7 @@ interface AccordionIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AccordionIndicator = React.forwardRef<
-  React.ElementRef<typeof IconChevronDown>,
+  React.ComponentRef<typeof IconChevronDown>,
   AccordionIndicatorProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
@@ -132,7 +133,7 @@ interface AccordionHeadingProps extends React.HTMLAttributes<HTMLHeadingElement>
 }
 
 const AccordionHeading = React.forwardRef<
-  React.ElementRef<typeof DisclosureHeading>,
+  React.ComponentRef<typeof DisclosureHeading>,
   AccordionHeadingProps
 >(({className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
@@ -153,7 +154,7 @@ AccordionHeading.displayName = "HeroUI.AccordionHeading";
 
 interface AccordionTriggerProps extends ButtonProps {}
 
-const AccordionTrigger = React.forwardRef<React.ElementRef<typeof Button>, AccordionTriggerProps>(
+const AccordionTrigger = React.forwardRef<React.ComponentRef<typeof Button>, AccordionTriggerProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(AccordionContext);
 
@@ -179,7 +180,7 @@ AccordionTrigger.displayName = "HeroUI.AccordionTrigger";
 
 interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const AccordionBody = React.forwardRef<React.ElementRef<"div">, AccordionBodyProps>(
+const AccordionBody = React.forwardRef<React.ComponentRef<"div">, AccordionBodyProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(AccordionContext);
 
@@ -200,7 +201,7 @@ interface AccordionPanelProps extends DisclosurePanelProps {
 }
 
 const AccordionPanel = React.forwardRef<
-  React.ElementRef<typeof DisclosurePanel>,
+  React.ComponentRef<typeof DisclosurePanel>,
   AccordionPanelProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(AccordionContext);
@@ -223,22 +224,22 @@ AccordionPanel.displayName = "HeroUI.AccordionPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundAccordion = Object.assign(Accordion, {
-  Item: AccordionItem,
-  Heading: AccordionHeading,
-  Trigger: AccordionTrigger,
-  Panel: AccordionPanel,
-  Indicator: AccordionIndicator,
-  Body: AccordionBody,
-});
+export {
+  AccordionRoot,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionPanel,
+  AccordionIndicator,
+  AccordionBody,
+  AccordionHeading,
+};
 
 export type {
-  AccordionProps,
+  AccordionRootProps,
   AccordionItemProps,
   AccordionTriggerProps,
   AccordionPanelProps,
   AccordionIndicatorProps,
   AccordionBodyProps,
+  AccordionHeadingProps,
 };
-
-export default CompoundAccordion;
