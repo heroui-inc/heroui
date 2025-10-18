@@ -3,7 +3,7 @@ import type {UseAccordionItemProps} from "./use-accordion-item";
 import type {ReactNode} from "react";
 
 import {forwardRef} from "@heroui/system";
-import {useMemo, useRef, useEffect} from "react";
+import {useMemo, useRef, useLayoutEffect} from "react";
 import {ChevronIcon} from "@heroui/shared-icons";
 import {AnimatePresence, LazyMotion, m, useWillChange} from "framer-motion";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
@@ -46,18 +46,29 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Handle scrolling to content when opened
-  useEffect(() => {
-    if (isOpen && scrollOnOpen && contentRef.current) {
-      const content = contentRef.current;
+  useLayoutEffect(() => {
+    let frameId: number;
 
-      // Wait for animation to start
-      setTimeout(() => {
-        content.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
+    const content = contentRef.current;
+    const canScroll = isOpen && scrollOnOpen && content;
+
+    if (canScroll) {
+      // Use double RAF to ensure the animation has started and layout is updated
+      frameId = requestAnimationFrame(() => {
+        frameId = requestAnimationFrame(() => {
+          if (canScroll) {
+            content.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            });
+          }
         });
-      }, 50);
+      });
     }
+
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
   }, [isOpen, scrollOnOpen]);
 
   const indicatorContent = useMemo<ReactNode>(() => {
