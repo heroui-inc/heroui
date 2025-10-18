@@ -154,9 +154,11 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const isClearable =
     originalProps.disableClearable !== undefined
       ? !originalProps.disableClearable
-      : originalProps.isReadOnly
+      : originalProps.isDisabled
         ? false
-        : originalProps.isClearable;
+        : originalProps.isReadOnly
+          ? false
+          : originalProps.isClearable;
 
   const {
     ref,
@@ -464,8 +466,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         state.open();
         onClear?.();
       },
-      "data-visible":
-        (!!state.selectedItem || state.inputValue?.length > 0) && !originalProps.isDisabled,
+      "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
       className: slots.clearButton({
         class: clsx(classNames?.clearButton, slotsProps.clearButtonProps?.className),
       }),
