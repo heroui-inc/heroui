@@ -464,7 +464,8 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         state.open();
         onClear?.();
       },
-      "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
+      "data-visible":
+        (!!state.selectedItem || state.inputValue?.length > 0) && !originalProps.isDisabled,
       className: slots.clearButton({
         class: clsx(classNames?.clearButton, slotsProps.clearButtonProps?.className),
       }),
