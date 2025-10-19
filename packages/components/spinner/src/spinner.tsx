@@ -68,7 +68,6 @@ const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
               style={
                 {
                   "--bar-index": index,
-                  animationDelay: `${(index * 0.1)}s`,
                 } as React.CSSProperties
               }
             />

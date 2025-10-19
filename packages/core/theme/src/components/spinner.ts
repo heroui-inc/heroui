@@ -24,7 +24,6 @@ const spinner = tv({
     dots: "relative rounded-full mx-auto",
     spinnerBars: [
       "absolute",
-      "animate-fade-out",
       "rounded-full",
       "w-[25%]",
       "h-[8%]",
