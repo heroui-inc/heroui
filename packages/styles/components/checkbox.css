@@ -1,0 +1,171 @@
+/* ==================== Checkbox Group Styles ==================== */
+
+/* Checkbox Group base styles */
+.checkbox-group {
+  @apply flex flex-col;
+
+  /* Default orientation */
+  &[data-orientation="vertical"] {
+    [data-slot="checkbox"] {
+      @apply mt-4;
+    }
+  }
+
+  &[data-orientation="horizontal"] {
+    @apply flex-row flex-wrap gap-4;
+  }
+}
+
+/* ==================== Checkbox (Individual Item) Styles ==================== */
+
+/* Base checkbox styles */
+.checkbox {
+  @apply flex items-start gap-3 outline-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  [data-slot="label"] {
+    @apply select-none;
+  }
+
+  [data-slot="description"] {
+    @apply select-none text-wrap;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* Checkbox control (the square button) */
+.checkbox__control {
+  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded border outline-none [border-width:var(--border-width-field)];
+
+  transition: all 200ms var(--ease-out);
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Focus ring styles */
+  .checkbox:focus-visible &,
+  .checkbox[data-focus-visible="true"] & {
+    @apply status-focused;
+  }
+
+  /* Hover state */
+  .checkbox:hover &,
+  .checkbox[data-hovered="true"] & {
+    @apply border-field-border-hover;
+  }
+
+  /* Selected state */
+  .checkbox[aria-checked="true"] &,
+  .checkbox[data-selected="true"] & {
+    @apply bg-accent border-transparent;
+  }
+
+  /* Indeterminate state */
+  .checkbox[data-indeterminate="true"] & {
+    @apply bg-accent border-transparent;
+  }
+
+  /* Invalid/Error state */
+  .checkbox[data-invalid="true"] &,
+  .checkbox[aria-invalid="true"] & {
+    @apply border-danger;
+  }
+
+  /* Invalid + Selected state */
+  .checkbox[data-invalid="true"][aria-checked="true"] &,
+  .checkbox[data-invalid="true"][data-selected="true"] &,
+  .checkbox[aria-invalid="true"][aria-checked="true"] &,
+  .checkbox[aria-invalid="true"][data-selected="true"] & {
+    @apply border-danger;
+  }
+
+  /* Invalid + Indeterminate state */
+  .checkbox[data-invalid="true"][data-indeterminate="true"] &,
+  .checkbox[aria-invalid="true"][data-indeterminate="true"] & {
+    @apply border-danger;
+  }
+
+  /* Pressed state */
+  .checkbox:active[data-selected="true"] &,
+  .checkbox[data-pressed="true"][data-selected="true"] & {
+    @apply bg-accent-hover;
+  }
+
+  .checkbox:active[data-indeterminate="true"] &,
+  .checkbox[data-pressed="true"][data-indeterminate="true"] & {
+    @apply bg-accent-hover;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+/* Checkbox indicator (the checkmark or indeterminate line) */
+.checkbox__indicator {
+  @apply absolute inset-0 flex items-center justify-center;
+
+  pointer-events: none;
+}
+
+/* Default checkmark for selected state */
+.checkbox__indicator:empty::before {
+  content: "";
+  @apply bg-background;
+
+  width: 100%;
+  height: 100%;
+  transition-duration: 420ms;
+  transition-property: scale, opacity;
+  transition-timing-function: var(--ease-fluid-out);
+  scale: 0;
+  opacity: 0;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m3 8 3 3 7-7'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+/* Checkmark visible when selected */
+.checkbox[aria-checked="true"] .checkbox__indicator:empty::before,
+.checkbox[data-selected="true"] .checkbox__indicator:empty::before {
+  scale: 1;
+  opacity: 1;
+}
+
+/* Indeterminate line */
+.checkbox[data-indeterminate="true"] .checkbox__indicator:empty::before {
+  scale: 1;
+  opacity: 1;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-width='2' d='M4 8h8'/%3E%3C/svg%3E");
+}
+
+/* Pressed state - slightly larger */
+.checkbox[data-selected="true"][data-pressed="true"] .checkbox__indicator:empty::before,
+.checkbox[data-indeterminate="true"][data-pressed="true"] .checkbox__indicator:empty::before {
+  scale: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkbox__indicator:empty::before {
+    transition: none;
+  }
+}
+
+/* Checkbox content wrapper */
+.checkbox__content {
+  @apply flex flex-col gap-0;
+}
+
+/* Disabled modifier for base */
+.checkbox--disabled {
+  @apply status-disabled;
+}
