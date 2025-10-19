@@ -4,13 +4,11 @@
 .checkbox-group {
   @apply flex flex-col;
 
-  /* Default orientation */
-  &[data-orientation="vertical"] {
-    [data-slot="checkbox"] {
-      @apply mt-4;
-    }
+  [data-slot="checkbox"] {
+    @apply mt-4;
   }
 
+  /* Horizontal orientation */
   &[data-orientation="horizontal"] {
     @apply flex-row flex-wrap gap-4;
   }
