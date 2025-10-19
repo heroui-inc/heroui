@@ -154,9 +154,11 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const isClearable =
     originalProps.disableClearable !== undefined
       ? !originalProps.disableClearable
-      : originalProps.isReadOnly
+      : originalProps.isDisabled
         ? false
-        : originalProps.isClearable;
+        : originalProps.isReadOnly
+          ? false
+          : originalProps.isClearable;
 
   const {
     ref,
