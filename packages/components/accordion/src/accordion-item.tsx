@@ -47,27 +47,31 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
 
   // Handle scrolling to content when opened
   useLayoutEffect(() => {
-    let frameId: number;
+    const frameIds: number[] = [];
 
     const content = contentRef.current;
     const canScroll = isOpen && scrollOnOpen && content;
 
     if (canScroll) {
       // Use double RAF to ensure the animation has started and layout is updated
-      frameId = requestAnimationFrame(() => {
-        frameId = requestAnimationFrame(() => {
-          if (canScroll) {
-            content.scrollIntoView({
-              behavior: "smooth",
-              block: "nearest",
-            });
-          }
-        });
-      });
+      frameIds.push(
+        requestAnimationFrame(() => {
+          frameIds.push(
+            requestAnimationFrame(() => {
+              if (canScroll) {
+                content.scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                });
+              }
+            }),
+          );
+        }),
+      );
     }
 
     return () => {
-      cancelAnimationFrame(frameId);
+      frameIds.forEach(cancelAnimationFrame);
     };
   }, [isOpen, scrollOnOpen]);
 
