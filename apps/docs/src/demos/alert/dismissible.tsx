@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  Alert,
   AlertClose,
   AlertContent,
   AlertDescription,
   AlertIcon,
+  AlertRoot,
   AlertTitle,
 } from "@heroui/react";
 import {useState} from "react";
@@ -25,7 +25,7 @@ export function Dismissible() {
   }
 
   return (
-    <Alert className="max-w-lg">
+    <AlertRoot className="max-w-lg">
       <AlertIcon />
       <AlertContent>
         <AlertTitle>Dismissible Alert</AlertTitle>
@@ -34,6 +34,6 @@ export function Dismissible() {
         </AlertDescription>
       </AlertContent>
       <AlertClose onClick={() => setIsVisible(false)} />
-    </Alert>
+    </AlertRoot>
   );
 }

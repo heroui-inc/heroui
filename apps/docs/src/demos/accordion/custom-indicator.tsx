@@ -3,12 +3,12 @@
 import type {Key} from "@heroui/react";
 
 import {
-  Accordion,
   AccordionBody,
   AccordionHeading,
   AccordionIndicator,
   AccordionItem,
   AccordionPanel,
+  AccordionRoot,
   AccordionTrigger,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
@@ -18,7 +18,7 @@ export function CustomIndicator() {
   const [expandedKeys, setExpandedKeys] = React.useState<Set<Key>>(new Set([""]));
 
   return (
-    <Accordion
+    <AccordionRoot
       className="w-full max-w-md"
       expandedKeys={expandedKeys}
       variant="outline"
@@ -78,6 +78,6 @@ export function CustomIndicator() {
           </AccordionBody>
         </AccordionPanel>
       </AccordionItem>
-    </Accordion>
+    </AccordionRoot>
   );
 }

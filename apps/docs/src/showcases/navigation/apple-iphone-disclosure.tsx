@@ -5,11 +5,11 @@ import type {SVGProps} from "react";
 
 import {
   Button,
-  Disclosure,
   DisclosureBody,
   DisclosureContent,
   DisclosureGroup,
   DisclosureHeading,
+  DisclosureRoot,
   useDisclosureGroupNavigation,
 } from "@heroui/react";
 import React from "react";
@@ -179,7 +179,7 @@ export default function AppleIPhoneDisclosure() {
             onExpandedChange={setExpandedKeys}
           >
             {showcaseItems.map((item) => (
-              <Disclosure key={item.id} aria-label={item.label} id={item.id}>
+              <DisclosureRoot key={item.id} aria-label={item.label} id={item.id}>
                 <DisclosureHeading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
@@ -217,7 +217,7 @@ export default function AppleIPhoneDisclosure() {
                     </p>
                   </DisclosureBody>
                 </DisclosureContent>
-              </Disclosure>
+              </DisclosureRoot>
             ))}
           </DisclosureGroup>
         </div>

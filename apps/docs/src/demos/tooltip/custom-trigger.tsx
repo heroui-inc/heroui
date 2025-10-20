@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  Avatar,
   AvatarFallback,
   AvatarImage,
+  AvatarRoot,
   Chip,
-  Tooltip,
   TooltipArrow,
   TooltipContent,
+  TooltipRoot,
   TooltipTrigger,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
@@ -15,15 +15,15 @@ import {Icon} from "@iconify/react";
 export function TooltipCustomTrigger() {
   return (
     <div className="flex items-center gap-6">
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <TooltipTrigger aria-label="User avatar">
-          <Avatar>
+          <AvatarRoot>
             <AvatarImage
               alt="John Doe"
               src="https://img.heroui.chat/image/avatar?w=400&h=400&u=1"
             />
             <AvatarFallback>JD</AvatarFallback>
-          </Avatar>
+          </AvatarRoot>
         </TooltipTrigger>
         <TooltipContent showArrow>
           <TooltipArrow />
@@ -32,9 +32,9 @@ export function TooltipCustomTrigger() {
             <p className="text-muted text-xs">jane@example.com</p>
           </div>
         </TooltipContent>
-      </Tooltip>
+      </TooltipRoot>
 
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <TooltipTrigger aria-label="Status chip">
           <Chip type="success">
             <Icon icon="gravity-ui:circle-check-fill" width={12} />
@@ -48,9 +48,9 @@ export function TooltipCustomTrigger() {
           </span>
           <p>Jane is currently online</p>
         </TooltipContent>
-      </Tooltip>
+      </TooltipRoot>
 
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <TooltipTrigger aria-label="Info icon">
           <div className="bg-accent-soft rounded-full p-2">
             <Icon className="text-accent" icon="gravity-ui:circle-question" />
@@ -65,7 +65,7 @@ export function TooltipCustomTrigger() {
             </p>
           </div>
         </TooltipContent>
-      </Tooltip>
+      </TooltipRoot>
     </div>
   );
 }

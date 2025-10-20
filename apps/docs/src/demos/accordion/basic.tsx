@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Accordion,
   AccordionBody,
   AccordionHeading,
   AccordionIndicator,
   AccordionItem,
   AccordionPanel,
+  AccordionRoot,
   AccordionTrigger,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
@@ -51,7 +51,7 @@ const items = [
 
 export function Basic() {
   return (
-    <Accordion className="w-full max-w-md">
+    <AccordionRoot className="w-full max-w-md">
       {items.map((item, index) => (
         <AccordionItem key={index}>
           <AccordionHeading>
@@ -70,6 +70,6 @@ export function Basic() {
           </AccordionPanel>
         </AccordionItem>
       ))}
-    </Accordion>
+    </AccordionRoot>
   );
 }

@@ -6,13 +6,13 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 
 export function Disabled() {
   return (
-    <RadioGroup isDisabled defaultValue="pro" name="plan-disabled">
+    <RadioGroupRoot isDisabled defaultValue="pro" name="plan-disabled">
       <Label>Subscription plan</Label>
       <Description>Plan changes are temporarily paused while we roll out updates.</Description>
       <Radio value="starter">
@@ -42,6 +42,6 @@ export function Disabled() {
           <Description>Share access with up to 10 teammates</Description>
         </RadioContent>
       </Radio>
-    </RadioGroup>
+    </RadioGroupRoot>
   );
 }

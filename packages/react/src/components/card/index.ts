@@ -1,7 +1,7 @@
-export {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from "./card";
+export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from "./card";
 
 export type {
-  CardProps,
+  CardRootProps,
   CardHeaderProps,
   CardTitleProps,
   CardDescriptionProps,
@@ -10,3 +10,5 @@ export type {
 } from "./card";
 
 export {cardVariants, type CardVariants} from "./card.styles";
+
+export * as Card from "./slots";

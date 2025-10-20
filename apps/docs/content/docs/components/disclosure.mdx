@@ -12,11 +12,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  Disclosure,
-  DisclosureTrigger,
-  DisclosurePanel
-} from '@heroui/react';
+import { Disclosure } from '@heroui/react';
 ```
 
 ### Usage
@@ -27,20 +23,23 @@ import {
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Disclosure component and access all parts using dot notation.
 
 ```tsx
-import {
-  Disclosure,
-  DisclosureTrigger,
-  DisclosurePanel
-} from '@heroui/react';
+import { Disclosure } from '@heroui/react';
 
 export default () => (
-  <Disclosure>
-    <DisclosureTrigger>Toggle</DisclosureTrigger>
-    <DisclosurePanel>Content</DisclosurePanel>
-  </Disclosure>
+  <Disclosure.Root>
+    <Disclosure.Heading>
+      <Disclosure.Trigger>
+        Toggle
+        <Disclosure.Indicator />
+      </Disclosure.Trigger>
+    </Disclosure.Heading>
+    <Disclosure.Content>
+      <Disclosure.Body>Content</Disclosure.Body>
+    </Disclosure.Content>
+  </Disclosure.Root>
 )
 ```
 
@@ -51,22 +50,23 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {
-  Disclosure,
-  DisclosureTrigger,
-  DisclosurePanel
-} from '@heroui/react';
+import { Disclosure } from '@heroui/react';
 
 function CustomDisclosure() {
   return (
-    <Disclosure className="border rounded-lg p-4">
-      <DisclosureTrigger className="text-lg font-semibold">
-        Click to expand
-      </DisclosureTrigger>
-      <DisclosurePanel className="mt-4 text-gray-600">
-        Hidden content
-      </DisclosurePanel>
-    </Disclosure>
+    <Disclosure.Root className="border rounded-lg p-4">
+      <Disclosure.Heading>
+        <Disclosure.Trigger className="text-lg font-semibold">
+          Click to expand
+          <Disclosure.Indicator />
+        </Disclosure.Trigger>
+      </Disclosure.Heading>
+      <Disclosure.Content>
+        <Disclosure.Body className="mt-4 text-gray-600">
+          Hidden content
+        </Disclosure.Body>
+      </Disclosure.Content>
+    </Disclosure.Root>
   );
 }
 ```

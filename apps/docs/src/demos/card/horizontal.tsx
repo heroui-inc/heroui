@@ -1,10 +1,10 @@
 "use client";
 
-import {Button, Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@heroui/react";
+import {Button, CardDescription, CardFooter, CardHeader, CardRoot, CardTitle} from "@heroui/react";
 
 export function Horizontal() {
   return (
-    <Card className="w-full items-stretch md:flex-row">
+    <CardRoot className="w-full items-stretch md:flex-row">
       <img
         alt="Porsche 911 Golden Edition"
         className="rounded-panel pointer-events-none aspect-square w-full select-none object-cover md:max-w-[136px]"
@@ -34,6 +34,6 @@ export function Horizontal() {
           <Button>Buy Now</Button>
         </CardFooter>
       </div>
-    </Card>
+    </CardRoot>
   );
 }

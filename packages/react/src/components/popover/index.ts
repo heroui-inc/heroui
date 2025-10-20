@@ -1,5 +1,5 @@
 export {
-  Popover,
+  PopoverRoot,
   PopoverTrigger,
   PopoverDialog,
   PopoverArrow,
@@ -7,6 +7,8 @@ export {
   PopoverHeading,
 } from "./popover";
 
-export type {PopoverProps, PopoverContentProps} from "./popover";
+export type {PopoverRootProps, PopoverContentProps} from "./popover";
 
 export {popoverVariants, type PopoverVariants} from "./popover.styles";
+
+export * as Popover from "./slots";

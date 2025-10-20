@@ -10,14 +10,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter
-} from "@heroui/react";
+import { Card } from "@heroui/react";
 ```
 
 ### Usage
@@ -28,27 +21,20 @@ import {
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Card component and access all parts using dot notation.
 
 ```tsx
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter
-} from "@heroui/react";
+import { Card } from "@heroui/react";
 
 export default () => (
-  <Card>
-    <CardHeader>
-      <CardTitle />
-      <CardDescription />
-    </CardHeader>
-    <CardContent />
-    <CardFooter />
-  </Card>
+  <Card.Root>
+    <Card.Header>
+      <Card.Title />
+      <Card.Description />
+    </Card.Header>
+    <Card.Content />
+    <Card.Footer />
+  </Card.Root>
 );
 ```
 
@@ -92,18 +78,18 @@ export default () => (
 
 ```tsx
 // Semantic markup
-<Card role="article" aria-labelledby="card-title">
-  <CardHeader>
-    <CardTitle id="card-title">Article Title</CardTitle>
-  </CardHeader>
-</Card>
+<Card.Root role="article" aria-labelledby="card-title">
+  <Card.Header>
+    <Card.Title id="card-title">Article Title</Card.Title>
+  </Card.Header>
+</Card.Root>
 
 // Interactive cards
-<Card asChild>
+<Card.Root asChild>
   <a href="/details" aria-label="View product details">
-    <CardTitle>Product Name</CardTitle>
+    <Card.Title>Product Name</Card.Title>
   </a>
-</Card>
+</Card.Root>
 ```
 
 ## Styling
@@ -111,15 +97,15 @@ export default () => (
 ### Component Customization
 
 ```tsx
-<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
-  <CardHeader>
-    <CardTitle className="text-blue-900">Custom Styled Card</CardTitle>
-    <CardDescription className="text-blue-700">Custom colors applied</CardDescription>
-  </CardHeader>
-  <CardContent>
+<Card.Root className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+  <Card.Header>
+    <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
+    <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
+  </Card.Header>
+  <Card.Content>
     <p className="text-blue-800">Content with custom styling</p>
-  </CardContent>
-</Card>
+  </Card.Content>
+</Card.Root>
 ```
 
 ### CSS Variable Overrides
@@ -159,7 +145,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
  
 ## API Reference
 
-### Card
+### Card.Root
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
@@ -168,7 +154,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |
 
-### CardHeader
+### Card.Header
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
@@ -176,7 +162,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Header content            |
 
-### CardTitle
+### Card.Title
 
 | Prop        | Type              | Default | Description                      |
 | ----------- | ----------------- | ------- | -------------------------------- |
@@ -184,7 +170,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes           |
 | `children`  | `React.ReactNode` | -       | Title content (renders as `h3`) |
 
-### CardDescription
+### Card.Description
 
 | Prop        | Type              | Default | Description                     |
 | ----------- | ----------------- | ------- | ------------------------------- |
@@ -192,7 +178,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes          |
 | `children`  | `React.ReactNode` | -       | Description content (renders as `p`) |
 
-### CardContent
+### Card.Content
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
@@ -200,7 +186,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Main content              |
 
-### CardFooter
+### Card.Footer
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |

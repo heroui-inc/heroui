@@ -30,12 +30,12 @@ const TabsContext = createContext<{
  * Tabs
  * -----------------------------------------------------------------------------------------------*/
 
-interface TabsProps extends TabsPrimitiveProps, TabsVariants {
+interface TabsRootProps extends TabsPrimitiveProps, TabsVariants {
   children: React.ReactNode;
   className?: string;
 }
 
-const Tabs = ({children, className, orientation = "horizontal", ...props}: TabsProps) => {
+const TabsRoot = ({children, className, orientation = "horizontal", ...props}: TabsRootProps) => {
   const slots = React.useMemo(() => tabsVariants(), []);
 
   return (
@@ -150,10 +150,10 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
 
 /* -----------------------------------------------------------------------------------------------*/
 
-export {Tabs, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
+export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
 
 export type {
-  TabsProps,
+  TabsRootProps,
   TabListWrapperProps,
   TabListProps,
   TabProps,

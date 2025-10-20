@@ -6,13 +6,13 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 
 export function CustomIndicator() {
   return (
-    <RadioGroup defaultValue="premium" name="plan-custom-indicator">
+    <RadioGroupRoot defaultValue="premium" name="plan-custom-indicator">
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
       <Radio value="basic">
@@ -54,6 +54,6 @@ export function CustomIndicator() {
           <Description>Unlimited messages</Description>
         </RadioContent>
       </Radio>
-    </RadioGroup>
+    </RadioGroupRoot>
   );
 }

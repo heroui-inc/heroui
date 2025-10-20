@@ -6,7 +6,7 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 import React from "react";
@@ -16,7 +16,7 @@ export function Controlled() {
 
   return (
     <div className="flex flex-col gap-4">
-      <RadioGroup name="plan-controlled" value={value} onChange={setValue}>
+      <RadioGroupRoot name="plan-controlled" value={value} onChange={setValue}>
         <Label>Subscription plan</Label>
         <Radio value="starter">
           <RadioControl>
@@ -45,7 +45,7 @@ export function Controlled() {
             <Description>Share access with up to 10 teammates</Description>
           </RadioContent>
         </Radio>
-      </RadioGroup>
+      </RadioGroupRoot>
       <p className="text-muted text-sm">
         Selected plan: <span className="font-medium">{value}</span>
       </p>

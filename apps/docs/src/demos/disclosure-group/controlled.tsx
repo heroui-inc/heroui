@@ -2,12 +2,12 @@
 
 import {
   Button,
-  Disclosure,
   DisclosureBody,
   DisclosureContent,
   DisclosureGroup,
   DisclosureHeading,
   DisclosureIndicator,
+  DisclosureRoot,
   Separator,
   useDisclosureGroupNavigation,
 } from "@heroui/react";
@@ -52,7 +52,7 @@ export function Controlled() {
           </div>
         </div>
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure aria-label="Preview HeroUI Native" id="preview">
+          <DisclosureRoot aria-label="Preview HeroUI Native" id="preview">
             <DisclosureHeading>
               <Button
                 slot="trigger"
@@ -85,9 +85,9 @@ export function Controlled() {
                 </Button>
               </DisclosureBody>
             </DisclosureContent>
-          </Disclosure>
+          </DisclosureRoot>
           <Separator className="my-2" />
-          <Disclosure id="download">
+          <DisclosureRoot id="download">
             <DisclosureHeading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -120,7 +120,7 @@ export function Controlled() {
                 </Button>
               </DisclosureBody>
             </DisclosureContent>
-          </Disclosure>
+          </DisclosureRoot>
         </DisclosureGroup>
       </div>
     </div>

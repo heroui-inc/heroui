@@ -6,13 +6,13 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 
 export function Basic() {
   return (
-    <RadioGroup defaultValue="premium" name="plan">
+    <RadioGroupRoot defaultValue="premium" name="plan">
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
       <Radio value="basic">
@@ -42,6 +42,6 @@ export function Basic() {
           <Description>Unlimited messages</Description>
         </RadioContent>
       </Radio>
-    </RadioGroup>
+    </RadioGroupRoot>
   );
 }

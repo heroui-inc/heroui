@@ -1,12 +1,12 @@
 "use client";
 
-import {Button, Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@heroui/react";
+import {Button, CardDescription, CardFooter, CardHeader, CardRoot, CardTitle} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function WithBackgroundImage() {
   return (
     <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
-      <Card className="aspect-[280/337] w-full max-w-[280px]">
+      <CardRoot className="aspect-[280/337] w-full max-w-[280px]">
         {/* Background image */}
         <img
           alt="Happy pet"
@@ -67,9 +67,9 @@ export function WithBackgroundImage() {
             Notify me
           </Button>
         </CardFooter>
-      </Card>
+      </CardRoot>
 
-      <Card className="aspect-[65/56] w-full md:w-[390px]">
+      <CardRoot className="aspect-[65/56] w-full md:w-[390px]">
         {/* Background image */}
         <img
           alt="Beautiful aerial view of Buenos Aires cityscape"
@@ -105,7 +105,7 @@ export function WithBackgroundImage() {
             Map
           </Button>
         </CardFooter>
-      </Card>
+      </CardRoot>
     </div>
   );
 }

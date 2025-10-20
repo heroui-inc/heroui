@@ -6,7 +6,7 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 import React from "react";
@@ -16,7 +16,7 @@ export function Uncontrolled() {
 
   return (
     <div className="flex flex-col gap-4">
-      <RadioGroup
+      <RadioGroupRoot
         defaultValue="pro"
         name="plan-uncontrolled"
         onChange={(nextValue) => setSelection(nextValue)}
@@ -49,7 +49,7 @@ export function Uncontrolled() {
             <Description>Share access with up to 10 teammates</Description>
           </RadioContent>
         </Radio>
-      </RadioGroup>
+      </RadioGroupRoot>
       <p className="text-muted text-sm">
         Last chosen plan: <span className="font-medium">{selection}</span>
       </p>

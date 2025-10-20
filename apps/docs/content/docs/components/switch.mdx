@@ -12,13 +12,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  Switch,
-  SwitchControl,
-  SwitchThumb,
-  SwitchGroup,
-  Label
-} from '@heroui/react';
+import { Switch, Label } from '@heroui/react';
 ```
 
 ### Usage
@@ -29,18 +23,18 @@ import {
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Switch component and access all parts using dot notation.
 
 ```tsx
-import {Switch, SwitchControl, SwitchThumb, Label} from '@heroui/react';
+import { Switch, Label } from '@heroui/react';
 
 export default () => (
-  <Switch>
-    <SwitchControl>
-      <SwitchThumb />
-    </SwitchControl>
+  <Switch.Root>
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
     <Label>Label</Label>
-  </Switch>
+  </Switch.Root>
 );
 ```
 
@@ -204,7 +198,7 @@ The switch supports both CSS pseudo-classes and data attributes for flexibility:
 
 ## API Reference
 
-### Switch Props
+### Switch.Root Props
 
 Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
 
@@ -235,7 +229,7 @@ When using the render prop pattern, these values are provided:
 | `isReadOnly` | `boolean` | Whether the switch is read only |
 | `state` | `-` | State of the switch. |
 
-### SwitchGroup Props
+### Switch.Group Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

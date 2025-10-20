@@ -2,36 +2,36 @@
 
 import {
   Label,
-  Switch,
   SwitchControl,
-  SwitchGroup,
   SwitchGroupItems,
+  SwitchGroupRoot,
+  SwitchRoot,
   SwitchThumb,
 } from "@heroui/react";
 
 export function Group() {
   return (
-    <SwitchGroup>
+    <SwitchGroupRoot>
       <SwitchGroupItems>
-        <Switch name="notifications">
+        <SwitchRoot name="notifications">
           <SwitchControl>
             <SwitchThumb />
           </SwitchControl>
           <Label className="text-sm">Allow Notifications</Label>
-        </Switch>
-        <Switch name="marketing">
+        </SwitchRoot>
+        <SwitchRoot name="marketing">
           <SwitchControl>
             <SwitchThumb />
           </SwitchControl>
           <Label className="text-sm">Marketing emails</Label>
-        </Switch>
-        <Switch name="social">
+        </SwitchRoot>
+        <SwitchRoot name="social">
           <SwitchControl>
             <SwitchThumb />
           </SwitchControl>
           <Label className="text-sm">Social media updates</Label>
-        </Switch>
+        </SwitchRoot>
       </SwitchGroupItems>
-    </SwitchGroup>
+    </SwitchGroupRoot>
   );
 }

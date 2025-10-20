@@ -1,12 +1,12 @@
 "use client";
 
-import {Button, Popover, PopoverArrow, PopoverContent, PopoverDialog} from "@heroui/react";
+import {Button, PopoverArrow, PopoverContent, PopoverDialog, PopoverRoot} from "@heroui/react";
 
 export function PopoverPlacement() {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div />
-      <Popover>
+      <PopoverRoot>
         <Button className="w-full" variant="tertiary">
           Top
         </Button>
@@ -16,10 +16,10 @@ export function PopoverPlacement() {
             <p className="text-sm">Top placement</p>
           </PopoverDialog>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
       <div />
 
-      <Popover>
+      <PopoverRoot>
         <Button className="w-full" variant="tertiary">
           Left
         </Button>
@@ -29,13 +29,13 @@ export function PopoverPlacement() {
             <p className="text-sm">Left placement</p>
           </PopoverDialog>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
 
       <div className="flex items-center justify-center">
         <span className="text-muted text-sm">Click buttons</span>
       </div>
 
-      <Popover>
+      <PopoverRoot>
         <Button className="w-full" variant="tertiary">
           Right
         </Button>
@@ -45,10 +45,10 @@ export function PopoverPlacement() {
             <p className="text-sm">Right placement</p>
           </PopoverDialog>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
 
       <div />
-      <Popover>
+      <PopoverRoot>
         <Button className="w-full" variant="tertiary">
           Bottom
         </Button>
@@ -58,7 +58,7 @@ export function PopoverPlacement() {
             <p className="text-sm">Bottom placement</p>
           </PopoverDialog>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
       <div />
     </div>
   );

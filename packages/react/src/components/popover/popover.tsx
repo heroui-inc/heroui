@@ -17,17 +17,20 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {popoverVariants} from "./popover.styles";
 
-type PopoverProps = React.ComponentProps<typeof PopoverTriggerPrimitive>;
+type PopoverRootProps = React.ComponentProps<typeof PopoverTriggerPrimitive>;
 
 const PopoverContext = createContext<{
   slots?: ReturnType<typeof popoverVariants>;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Popover
+ * Popover Root
  * -----------------------------------------------------------------------------------------------*/
 
-const Popover = ({children, ...props}: React.ComponentProps<typeof PopoverTriggerPrimitive>) => {
+const PopoverRoot = ({
+  children,
+  ...props
+}: React.ComponentProps<typeof PopoverTriggerPrimitive>) => {
   const slots = React.useMemo(() => popoverVariants(), []);
 
   return (
@@ -158,6 +161,6 @@ const PopoverHeading = ({
 
 /* -----------------------------------------------------------------------------------------------*/
 
-export {Popover, PopoverTrigger, PopoverDialog, PopoverArrow, PopoverContent, PopoverHeading};
+export {PopoverRoot, PopoverTrigger, PopoverDialog, PopoverArrow, PopoverContent, PopoverHeading};
 
-export type {PopoverProps, PopoverContentProps};
+export type {PopoverRootProps, PopoverContentProps};

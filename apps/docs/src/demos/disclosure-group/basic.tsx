@@ -2,12 +2,12 @@
 
 import {
   Button,
-  Disclosure,
   DisclosureBody,
   DisclosureContent,
   DisclosureGroup,
   DisclosureHeading,
   DisclosureIndicator,
+  DisclosureRoot,
   Separator,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
@@ -21,7 +21,7 @@ export function Basic() {
     <div className="w-full max-w-md">
       <div className="flex flex-col gap-4 bg-transparent p-4">
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure aria-label="Preview HeroUI Native" id="preview">
+          <DisclosureRoot aria-label="Preview HeroUI Native" id="preview">
             <DisclosureHeading>
               <Button
                 slot="trigger"
@@ -54,9 +54,9 @@ export function Basic() {
                 </Button>
               </DisclosureBody>
             </DisclosureContent>
-          </Disclosure>
+          </DisclosureRoot>
           <Separator className="my-2" />
-          <Disclosure id="download">
+          <DisclosureRoot id="download">
             <DisclosureHeading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -90,7 +90,7 @@ export function Basic() {
                 </Button>
               </DisclosureBody>
             </DisclosureContent>
-          </Disclosure>
+          </DisclosureRoot>
         </DisclosureGroup>
       </div>
     </div>

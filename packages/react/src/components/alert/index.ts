@@ -1,5 +1,5 @@
 export {
-  Alert,
+  AlertRoot,
   AlertIcon,
   AlertContent,
   AlertTitle,
@@ -9,7 +9,7 @@ export {
 } from "./alert";
 
 export type {
-  AlertProps,
+  AlertRootProps,
   AlertIconProps,
   AlertContentProps,
   AlertTitleProps,
@@ -19,3 +19,5 @@ export type {
 } from "./alert";
 
 export {alertVariants, type AlertVariants} from "./alert.styles";
+
+export * as Alert from "./slots";

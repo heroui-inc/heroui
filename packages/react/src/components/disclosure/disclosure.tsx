@@ -29,12 +29,12 @@ const DisclosureContext = createContext<{
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Disclosure
+ * Disclosure Root
  * -----------------------------------------------------------------------------------------------*/
 
-interface DisclosureProps extends DisclosurePrimitiveProps, DisclosureVariants {}
+interface DisclosureRootProps extends DisclosurePrimitiveProps, DisclosureVariants {}
 
-const Disclosure = ({children, className, ...originalProps}: DisclosureProps) => {
+const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
 
   const slots = React.useMemo(
@@ -183,7 +183,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
  * -----------------------------------------------------------------------------------------------*/
 
 export type {
-  DisclosureProps,
+  DisclosureRootProps,
   DisclosureContentProps,
   DisclosureHeadingProps,
   DisclosureTriggerProps,
@@ -192,7 +192,7 @@ export type {
 };
 
 export {
-  Disclosure,
+  DisclosureRoot,
   DisclosureHeading,
   DisclosureTrigger,
   DisclosureContent,

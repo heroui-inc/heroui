@@ -1,10 +1,10 @@
 "use client";
 
-import {Tab, TabIndicator, TabList, TabListWrapper, Tabs} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListWrapper, TabsRoot} from "@heroui/react";
 
 export function CustomStyles() {
   return (
-    <Tabs className="w-full max-w-lg text-center">
+    <TabsRoot className="w-full max-w-lg text-center">
       <TabListWrapper>
         <TabList
           aria-label="Options"
@@ -28,6 +28,6 @@ export function CustomStyles() {
           </Tab>
         </TabList>
       </TabListWrapper>
-    </Tabs>
+    </TabsRoot>
   );
 }

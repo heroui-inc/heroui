@@ -11,13 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverDialog
-} from '@heroui/react';
+import { Popover } from '@heroui/react';
 ```
 
 ### Usage
@@ -28,27 +22,21 @@ import {
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Popover component and access all parts using dot notation.
 
 ```tsx
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverDialog
-} from '@heroui/react';
+import { Popover } from '@heroui/react';
 
 export default () => (
-  <Popover>
-    <PopoverTrigger/>
-    <PopoverContent>
-      <PopoverArrow />
-      <PopoverDialog>
+  <Popover.Root>
+    <Popover.Trigger/>
+    <Popover.Content>
+      <Popover.Arrow />
+      <Popover.Dialog>
         {/* content goes here */}
-      </PopoverDialog>
-    </PopoverContent>
-  </Popover>
+      </Popover.Dialog>
+    </Popover.Content>
+  </Popover.Root>
 )
 ```
 
@@ -75,27 +63,21 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverDialog,
-  Button
-} from '@heroui/react';
+import { Popover, Button } from '@heroui/react';
 
 function CustomPopover() {
   return (
-    <Popover>
-      <PopoverTrigger>
+    <Popover.Root>
+      <Popover.Trigger>
         <Button>Open</Button>
-      </PopoverTrigger>
-      <PopoverContent className="bg-accent text-accent-foreground">
-        <PopoverDialog>
+      </Popover.Trigger>
+      <Popover.Content className="bg-accent text-accent-foreground">
+        <Popover.Dialog>
           <h3>Custom Styled</h3>
           <p>This popover has custom styling</p>
-        </PopoverDialog>
-      </PopoverContent>
-    </Popover>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover.Root>
   );
 }
 ```
@@ -144,7 +126,7 @@ The component supports animation states:
 
 ## API Reference
 
-### Popover Props
+### Popover.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -153,7 +135,7 @@ The component supports animation states:
 | `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
 | `onOpenChange` | `(isOpen: boolean) => void` | - | Called when open state changes |
 
-### PopoverContent Props
+### Popover.Content Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -163,21 +145,21 @@ The component supports animation states:
 | `shouldFlip` | `boolean` | `true` | Whether popover can change orientation to fit |
 | `className` | `string` | - | Additional CSS classes |
 
-### PopoverDialog Props
+### Popover.Dialog Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Dialog content |
 | `className` | `string` | - | Additional CSS classes |
 
-### PopoverTrigger Props
+### Popover.Trigger Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Element that triggers the popover |
 | `className` | `string` | - | Additional CSS classes |
 
-### PopoverArrow Props
+### Popover.Arrow Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

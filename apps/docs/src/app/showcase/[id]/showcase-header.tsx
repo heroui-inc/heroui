@@ -2,11 +2,11 @@
 
 import {
   Button,
-  Kbd,
   KbdContent,
-  Tooltip,
+  KbdRoot,
   TooltipArrow,
   TooltipContent,
+  TooltipRoot,
   TooltipTrigger,
 } from "@heroui/react";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -47,7 +47,7 @@ export function ShowcaseHeader() {
   return (
     <header className="border-border/50 bg-background/50 z-[1] flex items-center justify-between border-b p-4 backdrop-blur-sm">
       <div className="flex flex-1 justify-start">
-        <Tooltip delay={0}>
+        <TooltipRoot delay={0}>
           <TooltipTrigger>
             <Button isIconOnly aria-label="Close" variant="secondary" onPress={onClose}>
               <Iconify className="text-foreground/70" icon="xmark" />
@@ -56,19 +56,19 @@ export function ShowcaseHeader() {
           <TooltipContent className="text-muted px-2 py-0.5 text-xs" offset={7} placement="bottom">
             <TooltipArrow />
             Press{" "}
-            <Kbd>
+            <KbdRoot>
               <KbdContent className="text-xs">Esc</KbdContent>
-            </Kbd>{" "}
+            </KbdRoot>{" "}
             to close
           </TooltipContent>
-        </Tooltip>
+        </TooltipRoot>
       </div>
       <div className="flex flex-1 items-center justify-center">
         <HeroUILogo className="text-foreground/20" />
       </div>
       <div className="flex flex-1 items-center justify-end gap-2">
         <ShowcaseThemeSwitch />
-        <Tooltip delay={1500}>
+        <TooltipRoot delay={1500}>
           <TooltipTrigger>
             <Button
               isIconOnly
@@ -83,7 +83,7 @@ export function ShowcaseHeader() {
             <TooltipArrow />
             <p className="text-muted text-xs">{isCodeVisible ? "Hide code" : "Show code"}</p>
           </TooltipContent>
-        </Tooltip>
+        </TooltipRoot>
         {/* TODO: Add this later */}
         {/* <Button isIconOnly aria-label="Open showcase in new tab" variant="secondary">
           <Iconify className="text-foreground/70" icon="arrow-up-right-from-square" />

@@ -12,14 +12,14 @@ const KbdContext = createContext<{
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Kbd
+ * Kbd Root
  * -----------------------------------------------------------------------------------------------*/
-interface KbdProps extends React.HTMLAttributes<HTMLElement> {
+interface KbdRootProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
   ref?: React.Ref<HTMLElement>;
 }
-const Kbd = ({children, className, ...props}: KbdProps) => {
+const KbdRoot = ({children, className, ...props}: KbdRootProps) => {
   const slots = React.useMemo(() => kbdVariants(), []);
 
   return (
@@ -72,5 +72,5 @@ const KbdContent = ({children, className, ...props}: KbdContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {KbdProps, KbdAbbrProps, KbdContentProps};
-export {Kbd, KbdAbbr, KbdContent};
+export type {KbdRootProps, KbdAbbrProps, KbdContentProps};
+export {KbdRoot, KbdAbbr, KbdContent};

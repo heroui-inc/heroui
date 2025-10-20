@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Accordion,
   AccordionBody,
   AccordionHeading,
   AccordionIndicator,
   AccordionItem,
   AccordionPanel,
+  AccordionRoot,
   AccordionTrigger,
   cn,
 } from "@heroui/react";
@@ -37,7 +37,7 @@ const items = [
 
 export function CustomStyles() {
   return (
-    <Accordion className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="outline">
+    <AccordionRoot className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="outline">
       {items.map((item, index) => (
         <AccordionItem
           key={index}
@@ -70,6 +70,6 @@ export function CustomStyles() {
           </AccordionPanel>
         </AccordionItem>
       ))}
-    </Accordion>
+    </AccordionRoot>
   );
 }

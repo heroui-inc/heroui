@@ -13,11 +13,11 @@ import {fieldsetVariants} from "./fieldset.styles";
 
 const FieldsetContext = createContext<{slots?: ReturnType<typeof fieldsetVariants>}>({});
 
-interface FieldsetProps extends React.ComponentProps<"fieldset">, FieldsetVariants {
+interface FieldsetRootProps extends React.ComponentProps<"fieldset">, FieldsetVariants {
   asChild?: boolean;
 }
 
-const Fieldset = ({asChild = false, className, ...props}: FieldsetProps) => {
+const FieldsetRoot = ({asChild = false, className, ...props}: FieldsetRootProps) => {
   const Comp = asChild ? Slot : "fieldset";
 
   const slots = React.useMemo(() => fieldsetVariants({}), []);
@@ -78,6 +78,6 @@ const FieldsetActions = ({asChild, children, className, ...rest}: FieldsetAction
 
 /* -----------------------------------------------------------------------------------------------*/
 
-export {Fieldset, FieldsetLegend, FieldGroup, FieldsetActions};
+export {FieldsetRoot, FieldsetLegend, FieldGroup, FieldsetActions};
 
-export type {FieldsetProps, FieldsetLegendProps, FieldGroupProps, FieldsetActionsProps};
+export type {FieldsetRootProps, FieldsetLegendProps, FieldGroupProps, FieldsetActionsProps};

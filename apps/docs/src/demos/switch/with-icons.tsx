@@ -1,6 +1,6 @@
 "use client";
 
-import {Switch, SwitchControl, SwitchIcon, SwitchThumb} from "@heroui/react";
+import {SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function WithIcons() {
@@ -35,7 +35,7 @@ export function WithIcons() {
   return (
     <div className="flex gap-3">
       {Object.entries(icons).map(([key, value]) => (
-        <Switch key={key} defaultSelected size="lg">
+        <SwitchRoot key={key} defaultSelected size="lg">
           {({isSelected}) => (
             <>
               <SwitchControl className={isSelected ? value.selectedControlClass : ""}>
@@ -50,7 +50,7 @@ export function WithIcons() {
               </SwitchControl>
             </>
           )}
-        </Switch>
+        </SwitchRoot>
       ))}
     </div>
   );

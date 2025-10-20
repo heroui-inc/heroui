@@ -1,20 +1,20 @@
 "use client";
 
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
+  CardRoot,
   CardTitle,
-  Link,
   LinkIcon,
+  LinkRoot,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function Default() {
   return (
-    <Card className="w-[400px]">
+    <CardRoot className="w-[400px]">
       <Icon
         aria-label="Dollar sign icon"
         className="text-primary size-6"
@@ -29,7 +29,7 @@ export function Default() {
         <p>Add your wallet in settings to withdraw</p>
       </CardContent>
       <CardFooter>
-        <Link
+        <LinkRoot
           aria-label="Go to settings (opens in new tab)"
           href="https://heroui.com"
           rel="noopener noreferrer"
@@ -37,8 +37,8 @@ export function Default() {
         >
           Go to settings
           <LinkIcon aria-hidden="true" />
-        </Link>
+        </LinkRoot>
       </CardFooter>
-    </Card>
+    </CardRoot>
   );
 }

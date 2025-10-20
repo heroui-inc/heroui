@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Accordion,
   AccordionBody,
   AccordionHeading,
   AccordionIndicator,
   AccordionItem,
   AccordionPanel,
+  AccordionRoot,
   AccordionTrigger,
 } from "@heroui/react";
 
@@ -15,7 +15,7 @@ export function Disabled() {
     <div className="flex w-full flex-col items-center gap-8">
       <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Entire accordion disabled</h3>
-        <Accordion isDisabled className="w-full max-w-md">
+        <AccordionRoot isDisabled className="w-full max-w-md">
           <AccordionItem>
             <AccordionHeading>
               <AccordionTrigger>
@@ -43,12 +43,12 @@ export function Disabled() {
               </AccordionBody>
             </AccordionPanel>
           </AccordionItem>
-        </Accordion>
+        </AccordionRoot>
       </div>
 
       <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Individual items disabled</h3>
-        <Accordion className="w-full max-w-md">
+        <AccordionRoot className="w-full max-w-md">
           <AccordionItem>
             <AccordionHeading>
               <AccordionTrigger>
@@ -86,7 +86,7 @@ export function Disabled() {
               <AccordionBody>This item is also active and can be toggled.</AccordionBody>
             </AccordionPanel>
           </AccordionItem>
-        </Accordion>
+        </AccordionRoot>
       </div>
     </div>
   );

@@ -1,19 +1,10 @@
-import type {AccordionProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
 
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
-  AccordionItem,
-  AccordionPanel,
-  AccordionTrigger,
-} from "./index";
+import {Accordion} from "./index";
 
 export default {
   argTypes: {
@@ -34,11 +25,11 @@ export default {
       options: ["default", "outline"],
     },
   },
-  component: Accordion,
+  component: Accordion.Root,
   title: "Components/Navigation/Accordion",
-} as Meta<typeof Accordion>;
+} as Meta<typeof Accordion.Root>;
 
-const defaultArgs: AccordionProps = {
+const defaultArgs: Accordion.RootProps = {
   allowsMultipleExpanded: false,
   isDisabled: false,
   variant: "default",
@@ -86,28 +77,28 @@ const items = [
   },
 ];
 
-const Template = (props: AccordionProps) => (
+const Template = (props: Accordion.RootProps) => (
   <Wrapper>
-    <Accordion {...props}>
+    <Accordion.Root {...props}>
       {items.map((item, index) => (
-        <AccordionItem key={index}>
-          <AccordionHeading>
-            <AccordionTrigger>
+        <Accordion.Item key={index}>
+          <Accordion.Heading>
+            <Accordion.Trigger>
               {item.icon ? (
                 <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
               ) : null}
               {item.title}
-              <AccordionIndicator>
+              <Accordion.Indicator>
                 <Icon icon="gravity-ui:chevron-down" />
-              </AccordionIndicator>
-            </AccordionTrigger>
-          </AccordionHeading>
-          <AccordionPanel>
-            <AccordionBody>{item.content}</AccordionBody>
-          </AccordionPanel>
-        </AccordionItem>
+              </Accordion.Indicator>
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>{item.content}</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
       ))}
-    </Accordion>
+    </Accordion.Root>
   </Wrapper>
 );
 
@@ -179,7 +170,7 @@ const categories = [
   },
 ];
 
-const CustomTemplate = (props: AccordionProps) => (
+const CustomTemplate = (props: Accordion.RootProps) => (
   <div className="flex w-full justify-center px-4 py-8">
     <div className="w-full max-w-2xl">
       <div className="flex flex-col gap-1">
@@ -192,23 +183,23 @@ const CustomTemplate = (props: AccordionProps) => (
         {categories.map((category) => (
           <div key={category.title}>
             <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-            <Accordion {...props} className="w-full" variant="outline">
+            <Accordion.Root {...props} className="w-full" variant="outline">
               {category.items.map((item, index) => (
-                <AccordionItem key={index}>
-                  <AccordionHeading>
-                    <AccordionTrigger>
+                <Accordion.Item key={index}>
+                  <Accordion.Heading>
+                    <Accordion.Trigger>
                       {item.title}
-                      <AccordionIndicator>
+                      <Accordion.Indicator>
                         <Icon icon="gravity-ui:chevron-down" />
-                      </AccordionIndicator>
-                    </AccordionTrigger>
-                  </AccordionHeading>
-                  <AccordionPanel>
-                    <AccordionBody>{item.content}</AccordionBody>
-                  </AccordionPanel>
-                </AccordionItem>
+                      </Accordion.Indicator>
+                    </Accordion.Trigger>
+                  </Accordion.Heading>
+                  <Accordion.Panel>
+                    <Accordion.Body>{item.content}</Accordion.Body>
+                  </Accordion.Panel>
+                </Accordion.Item>
               ))}
-            </Accordion>
+            </Accordion.Root>
           </div>
         ))}
       </div>

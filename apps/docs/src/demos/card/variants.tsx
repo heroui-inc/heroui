@@ -1,11 +1,11 @@
 "use client";
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@heroui/react";
+import {CardContent, CardDescription, CardHeader, CardRoot, CardTitle} from "@heroui/react";
 
 export function Variants() {
   return (
     <div className="flex flex-col gap-4">
-      <Card className="w-[320px]" variant="flat">
+      <CardRoot className="w-[320px]" variant="flat">
         <CardHeader>
           <CardTitle>Variant Flat</CardTitle>
           <CardDescription>Transparent background with no border</CardDescription>
@@ -13,9 +13,9 @@ export function Variants() {
         <CardContent>
           <p>Content with no variant styling</p>
         </CardContent>
-      </Card>
+      </CardRoot>
 
-      <Card className="w-[320px]" variant="outlined">
+      <CardRoot className="w-[320px]" variant="outlined">
         <CardHeader>
           <CardTitle>Variant Outlined</CardTitle>
           <CardDescription>This card uses outlined variant (default)</CardDescription>
@@ -23,9 +23,9 @@ export function Variants() {
         <CardContent>
           <p>Content with subtle elevation</p>
         </CardContent>
-      </Card>
+      </CardRoot>
 
-      <Card className="w-[320px]" variant="elevated">
+      <CardRoot className="w-[320px]" variant="elevated">
         <CardHeader>
           <CardTitle>Variant Elevated</CardTitle>
           <CardDescription>This card uses elevated variant</CardDescription>
@@ -33,9 +33,9 @@ export function Variants() {
         <CardContent>
           <p>Content with medium elevation</p>
         </CardContent>
-      </Card>
+      </CardRoot>
 
-      <Card className="w-[320px]" variant="filled">
+      <CardRoot className="w-[320px]" variant="filled">
         <CardHeader>
           <CardTitle>Variant Filled</CardTitle>
           <CardDescription>This card uses filled variant</CardDescription>
@@ -43,7 +43,7 @@ export function Variants() {
         <CardContent>
           <p>Content with higher elevation</p>
         </CardContent>
-      </Card>
+      </CardRoot>
     </div>
   );
 }

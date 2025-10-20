@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "@heroui/react";
+import {Button, TooltipArrow, TooltipContent, TooltipRoot, TooltipTrigger} from "@heroui/react";
 import React from "react";
 
 import {Iconify} from "@/components/iconify";
@@ -44,7 +44,7 @@ export function ShowcaseThemeSwitch() {
     : "Toggle theme";
 
   return (
-    <Tooltip delay={1500}>
+    <TooltipRoot delay={1500}>
       <TooltipTrigger>
         <Button
           isIconOnly
@@ -61,6 +61,6 @@ export function ShowcaseThemeSwitch() {
         <TooltipArrow />
         <p className="text-muted text-xs">{tooltipContent}</p>
       </TooltipContent>
-    </Tooltip>
+    </TooltipRoot>
   );
 }

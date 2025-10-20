@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import { RadioGroup, Radio, RadioIndicator } from '@heroui/react';
+import { RadioGroup } from '@heroui/react';
 ```
 
 ### Usage
@@ -24,18 +24,18 @@ import { RadioGroup, Radio, RadioIndicator } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the RadioGroup component and access all parts using dot notation.
 
 ```tsx
-import {RadioGroup, Radio, RadioIndicator} from '@heroui/react';
+import { RadioGroup } from '@heroui/react';
 
 export default () => (
-  <RadioGroup>
-    <Radio value="option1">
-      <RadioIndicator />
+  <RadioGroup.Root>
+    <RadioGroup.Item value="option1">
+      <RadioGroup.Indicator />
       Option 1
-    </Radio>
-  </RadioGroup>
+    </RadioGroup.Item>
+  </RadioGroup.Root>
 )
 ```
 

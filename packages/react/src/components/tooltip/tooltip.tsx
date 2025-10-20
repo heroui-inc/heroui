@@ -16,17 +16,20 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {tooltipVariants} from "./tooltip.styles";
 
-type TooltipProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
+type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
 
 const TooltipContext = createContext<{
   slots?: ReturnType<typeof tooltipVariants>;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Tooltip
+ * Tooltip Root
  * -----------------------------------------------------------------------------------------------*/
 
-const Tooltip = ({children, ...props}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
+const TooltipRoot = ({
+  children,
+  ...props
+}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   return (
@@ -132,6 +135,6 @@ const TooltipTrigger = ({asChild = false, children, className, ...props}: Toolti
 
 /* -----------------------------------------------------------------------------------------------*/
 
-export {Tooltip, TooltipTrigger, TooltipContent, TooltipArrow};
+export {TooltipRoot, TooltipTrigger, TooltipContent, TooltipArrow};
 
-export type {TooltipProps, TooltipContentProps, TooltipTriggerProps};
+export type {TooltipRootProps, TooltipContentProps, TooltipTriggerProps};
