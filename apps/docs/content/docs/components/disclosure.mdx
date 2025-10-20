@@ -1,6 +1,7 @@
 ---
 title: Disclosure
 description: A disclosure is a collapsible section with a header containing a heading and a trigger button, and a panel that wraps the content.
+icon: updated
 links:
   rac: Disclosure
   source: disclosure/disclosure.tsx
@@ -32,13 +33,10 @@ export default () => (
   <Disclosure.Root>
     <Disclosure.Heading>
       <Disclosure.Trigger>
-        Toggle
         <Disclosure.Indicator />
       </Disclosure.Trigger>
     </Disclosure.Heading>
-    <Disclosure.Content>
-      <Disclosure.Body>Content</Disclosure.Body>
-    </Disclosure.Content>
+    <Disclosure.Content/>
   </Disclosure.Root>
 )
 ```
@@ -121,7 +119,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Disclosure Props
+### Disclosure.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

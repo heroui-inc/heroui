@@ -61,7 +61,7 @@ This release adopts React 19 best practices:
 
 - Temporarily fixed `forwardRef` issue in the `Calendar` component that occurred when `--turbopack` is not enabled in `next dev`
 
-## Breaking Changes
+## ⚠️ Breaking Changes
 
 ### Main Component Requires `.Root` Suffix
 
@@ -98,15 +98,12 @@ All compound components are affected:
 - `Avatar` → `Avatar.Root`
 - `Card` → `Card.Root`
 - `Disclosure` → `Disclosure.Root`
-- `DisclosureGroup` → `DisclosureGroup.Root`
 - `Fieldset` → `Fieldset.Root`
 - `Kbd` → `Kbd.Root`
 - `Link` → `Link.Root`
 - `Popover` → `Popover.Root`
 - `RadioGroup` → `RadioGroup.Root`
-- `Slider` → `Slider.Root`
 - `Switch` → `Switch.Root`
-- `SwitchGroup` → `SwitchGroup.Root`
 - `Tabs` → `Tabs.Root`
 - `Tooltip` → `Tooltip.Root`
 
@@ -242,17 +239,15 @@ If you're using the compound pattern, you only need to update the main component
 
 | Component | Named Export Pattern | Compound Pattern (with `.Root`) |
 |-----------|---------------------|---------------------|
-| **Accordion** | `<Accordion>`, `<AccordionItem>` | `<Accordion.Root>`, `<Accordion.Item>` |
-| **Alert** | `<Alert>`, `<AlertIcon>` | `<Alert.Root>`, `<Alert.Icon>` |
-| **Avatar** | `<Avatar>`, `<AvatarImage>` | `<Avatar.Root>`, `<Avatar.Image>` |
-| **Card** | `<Card>`, `<CardHeader>` | `<Card.Root>`, `<Card.Header>` |
-| **Disclosure** | `<Disclosure>`, `<DisclosureTrigger>` | `<Disclosure.Root>`, `<Disclosure.Trigger>` |
-| **Fieldset** | `<Fieldset>`, `<FieldsetLegend>` | `<Fieldset.Root>`, `<Fieldset.Legend>` |
-| **Kbd** | `<Kbd>`, `<KbdKey>` | `<Kbd.Root>`, `<Kbd.Key>` |
-| **Link** | `<Link>`, `<LinkIcon>` | `<Link.Root>`, `<Link.Icon>` |
-| **Popover** | `<Popover>`, `<PopoverTrigger>` | `<Popover.Root>`, `<Popover.Trigger>` |
-| **RadioGroup** | `<RadioGroup>`, `<Radio>` | `<RadioGroup.Root>`, `<RadioGroup.Item>` |
-| **Slider** | `<Slider>`, `<SliderTrack>` | `<Slider.Root>`, `<Slider.Track>` |
+| **Accordion** | `<Accordion>` | `<Accordion.Root>` |
+| **Avatar** | `<Avatar>` | `<Avatar.Root>` |
+| **Card** | `<Card>` | `<Card.Root>` |
+| **Disclosure** | `<Disclosure>`  | `<Disclosure.Root>`  |
+| **Fieldset** | `<Fieldset>`  | `<Fieldset.Root>` |
+| **Kbd** | `<Kbd>` | `<Kbd.Root>`  |
+| **Link** | `<Link>` | `<Link.Root>` |
+| **Popover** | `<Popover>` | `<Popover.Root>` |
+| **Radio** |  `<Radio>` | `<Radio.Root>` |
 | **Switch** | `<Switch>`, `<SwitchControl>` | `<Switch.Root>`, `<Switch.Control>` |
 | **Tabs** | `<Tabs>`, `<TabList>` | `<Tabs.Root>`, `<Tabs.List>` |
 | **Tooltip** | `<Tooltip>`, `<TooltipTrigger>` | `<Tooltip.Root>`, `<Tooltip.Trigger>` |

@@ -65,11 +65,9 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
 const PopoverArrow = ({
   children,
   className,
-  ref,
   ...props
 }: Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
-  ref?: React.Ref<React.ComponentRef<typeof OverlayArrow>>;
 }) => {
   const defaultArrow = (
     <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
@@ -90,7 +88,7 @@ const PopoverArrow = ({
     : defaultArrow;
 
   return (
-    <OverlayArrow ref={ref} data-slot="popover-overlay" {...props} className={className}>
+    <OverlayArrow data-slot="popover-overlay" {...props} className={className}>
       {arrow}
     </OverlayArrow>
   );
@@ -101,21 +99,14 @@ const PopoverArrow = ({
 const PopoverDialog = ({
   children,
   className,
-  ref,
   ...props
 }: Omit<React.ComponentProps<typeof DialogPrimitive>, "children"> & {
   children: React.ReactNode;
-  ref?: React.Ref<React.ComponentRef<typeof DialogPrimitive>>;
 }) => {
   const {slots} = useContext(PopoverContext);
 
   return (
-    <DialogPrimitive
-      ref={ref}
-      data-slot="popover-dialog"
-      {...props}
-      className={slots?.dialog({className})}
-    >
+    <DialogPrimitive data-slot="popover-dialog" {...props} className={slots?.dialog({className})}>
       {children}
     </DialogPrimitive>
   );
@@ -145,15 +136,12 @@ const PopoverTrigger = ({children, className, ...props}: React.HTMLAttributes<HT
 const PopoverHeading = ({
   children,
   className,
-  ref,
   ...props
-}: React.ComponentProps<typeof HeadingPrimitive> & {
-  ref?: React.Ref<React.ComponentRef<typeof HeadingPrimitive>>;
-}) => {
+}: React.ComponentProps<typeof HeadingPrimitive> & {}) => {
   const {slots} = useContext(PopoverContext);
 
   return (
-    <HeadingPrimitive ref={ref} slot="title" {...props} className={slots?.heading({className})}>
+    <HeadingPrimitive slot="title" {...props} className={slots?.heading({className})}>
       {children}
     </HeadingPrimitive>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import {AvatarFallback, AvatarImage, AvatarRoot} from "@heroui/react";
+import {Avatar} from "@heroui/react";
 
 const users = [
   {
@@ -36,34 +36,34 @@ export function Group() {
       {/* Basic avatar group */}
       <div className="flex -space-x-2">
         {users.slice(0, 4).map((user) => (
-          <AvatarRoot key={user.id} className="ring-background ring-2">
-            <AvatarImage alt={user.name} src={user.image} />
-            <AvatarFallback>
+          <Avatar.Root key={user.id} className="ring-background ring-2">
+            <Avatar.Image alt={user.name} src={user.image} />
+            <Avatar.Fallback>
               {user.name
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
-            </AvatarFallback>
-          </AvatarRoot>
+            </Avatar.Fallback>
+          </Avatar.Root>
         ))}
       </div>
 
-      {/* AvatarRoot group with counter */}
+      {/* Avatar group with counter */}
       <div className="flex -space-x-2">
         {users.slice(0, 3).map((user) => (
-          <AvatarRoot key={user.id} className="ring-background ring-2">
-            <AvatarImage alt={user.name} src={user.image} />
-            <AvatarFallback>
+          <Avatar.Root key={user.id} className="ring-background ring-2">
+            <Avatar.Image alt={user.name} src={user.image} />
+            <Avatar.Fallback>
               {user.name
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
-            </AvatarFallback>
-          </AvatarRoot>
+            </Avatar.Fallback>
+          </Avatar.Root>
         ))}
-        <AvatarRoot className="ring-background ring-2">
-          <AvatarFallback className="text-xs">+{users.length - 3}</AvatarFallback>
-        </AvatarRoot>
+        <Avatar.Root className="ring-background ring-2">
+          <Avatar.Fallback className="text-xs">+{users.length - 3}</Avatar.Fallback>
+        </Avatar.Root>
       </div>
     </div>
   );

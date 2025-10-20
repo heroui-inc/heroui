@@ -1,77 +1,69 @@
 "use client";
 
-import {
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
-  AccordionItem,
-  AccordionPanel,
-  AccordionRoot,
-  AccordionTrigger,
-} from "@heroui/react";
+import {Accordion} from "@heroui/react";
 
 export function Multiple() {
   return (
-    <AccordionRoot allowsMultipleExpanded className="w-full max-w-md">
-      <AccordionItem>
-        <AccordionHeading>
-          <AccordionTrigger>
+    <Accordion.Root allowsMultipleExpanded className="w-full max-w-md">
+      <Accordion.Item>
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Getting Started
-            <AccordionIndicator />
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             Learn the basics of HeroUI and how to integrate it into your React project. This section
             covers installation, setup, and your first component.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem>
-        <AccordionHeading>
-          <AccordionTrigger>
+      <Accordion.Item>
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Core Concepts
-            <AccordionIndicator />
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             Understand the fundamental concepts behind HeroUI, including the compound component
             pattern, styling with Tailwind CSS, and accessibility features.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem>
-        <AccordionHeading>
-          <AccordionTrigger>
+      <Accordion.Item>
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Advanced Usage
-            <AccordionIndicator />
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             Explore advanced features like custom variants, theme customization, and integration
             with other libraries in your React ecosystem.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem>
-        <AccordionHeading>
-          <AccordionTrigger>
+      <Accordion.Item>
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Best Practices
-            <AccordionIndicator />
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             Follow our recommended best practices for building performant, accessible, and
             maintainable applications with HeroUI components.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
-    </AccordionRoot>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion.Root>
   );
 }

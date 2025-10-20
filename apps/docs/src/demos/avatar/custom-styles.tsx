@@ -1,46 +1,49 @@
 "use client";
 
-import {AvatarFallback, AvatarImage, AvatarRoot} from "@heroui/react";
+import {Avatar} from "@heroui/react";
 
 export function CustomStyles() {
   return (
     <div className="flex items-center gap-4">
       {/* Custom size with Tailwind classes */}
-      <AvatarRoot className="size-16">
-        <AvatarImage alt="Extra Large" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
-        <AvatarFallback>XL</AvatarFallback>
-      </AvatarRoot>
+      <Avatar.Root className="size-16">
+        <Avatar.Image
+          alt="Extra Large"
+          src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+        />
+        <Avatar.Fallback>XL</Avatar.Fallback>
+      </Avatar.Root>
 
       {/* Square avatar */}
-      <AvatarRoot className="rounded-lg">
-        <AvatarImage
+      <Avatar.Root className="rounded-lg">
+        <Avatar.Image
           alt="Square Avatar"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
         />
-        <AvatarFallback className="rounded-lg">SQ</AvatarFallback>
-      </AvatarRoot>
+        <Avatar.Fallback className="rounded-lg">SQ</Avatar.Fallback>
+      </Avatar.Root>
 
       {/* Gradient border */}
-      <AvatarRoot className="bg-gradient-to-tr from-pink-500 to-yellow-500 p-0.5">
+      <Avatar.Root className="bg-gradient-to-tr from-pink-500 to-yellow-500 p-0.5">
         <div className="bg-background size-full rounded-full p-0.5">
-          <AvatarImage
+          <Avatar.Image
             alt="Gradient Border"
             className="rounded-full"
             src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
           />
-          <AvatarFallback className="border-none">GB</AvatarFallback>
+          <Avatar.Fallback className="border-none">GB</Avatar.Fallback>
         </div>
-      </AvatarRoot>
+      </Avatar.Root>
 
       {/* Status indicator */}
       <div className="relative">
-        <AvatarRoot>
-          <AvatarImage
+        <Avatar.Root>
+          <Avatar.Image
             alt="Online User"
             src="https://img.heroui.chat/image/avatar?w=400&h=400&u=8"
           />
-          <AvatarFallback>ON</AvatarFallback>
-        </AvatarRoot>
+          <Avatar.Fallback>ON</Avatar.Fallback>
+        </Avatar.Root>
         <span className="ring-background absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2" />
       </div>
     </div>

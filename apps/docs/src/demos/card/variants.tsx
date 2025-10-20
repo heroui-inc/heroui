@@ -1,49 +1,49 @@
 "use client";
 
-import {CardContent, CardDescription, CardHeader, CardRoot, CardTitle} from "@heroui/react";
+import {Card} from "@heroui/react";
 
 export function Variants() {
   return (
     <div className="flex flex-col gap-4">
-      <CardRoot className="w-[320px]" variant="flat">
-        <CardHeader>
-          <CardTitle>Variant Flat</CardTitle>
-          <CardDescription>Transparent background with no border</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card.Root className="w-[320px]" variant="flat">
+        <Card.Header>
+          <Card.Title>Variant Flat</Card.Title>
+          <Card.Description>Transparent background with no border</Card.Description>
+        </Card.Header>
+        <Card.Content>
           <p>Content with no variant styling</p>
-        </CardContent>
-      </CardRoot>
+        </Card.Content>
+      </Card.Root>
 
-      <CardRoot className="w-[320px]" variant="outlined">
-        <CardHeader>
-          <CardTitle>Variant Outlined</CardTitle>
-          <CardDescription>This card uses outlined variant (default)</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card.Root className="w-[320px]" variant="outlined">
+        <Card.Header>
+          <Card.Title>Variant Outlined</Card.Title>
+          <Card.Description>This card uses outlined variant (default)</Card.Description>
+        </Card.Header>
+        <Card.Content>
           <p>Content with subtle elevation</p>
-        </CardContent>
-      </CardRoot>
+        </Card.Content>
+      </Card.Root>
 
-      <CardRoot className="w-[320px]" variant="elevated">
-        <CardHeader>
-          <CardTitle>Variant Elevated</CardTitle>
-          <CardDescription>This card uses elevated variant</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card.Root className="w-[320px]" variant="elevated">
+        <Card.Header>
+          <Card.Title>Variant Elevated</Card.Title>
+          <Card.Description>This card uses elevated variant</Card.Description>
+        </Card.Header>
+        <Card.Content>
           <p>Content with medium elevation</p>
-        </CardContent>
-      </CardRoot>
+        </Card.Content>
+      </Card.Root>
 
-      <CardRoot className="w-[320px]" variant="filled">
-        <CardHeader>
-          <CardTitle>Variant Filled</CardTitle>
-          <CardDescription>This card uses filled variant</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card.Root className="w-[320px]" variant="filled">
+        <Card.Header>
+          <Card.Title>Variant Filled</Card.Title>
+          <Card.Description>This card uses filled variant</Card.Description>
+        </Card.Header>
+        <Card.Content>
           <p>Content with higher elevation</p>
-        </CardContent>
-      </CardRoot>
+        </Card.Content>
+      </Card.Root>
     </div>
   );
 }

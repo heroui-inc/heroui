@@ -7,9 +7,7 @@ import {Label as LabelPrimitive} from "react-aria-components";
 
 import {labelVariants} from "./label.styles";
 
-interface LabelProps extends LabelPrimitiveProps, LabelVariants {
-  ref?: React.Ref<HTMLLabelElement>;
-}
+interface LabelProps extends LabelPrimitiveProps, LabelVariants {}
 const Label = ({children, className, isDisabled, isInvalid, isRequired, ...rest}: LabelProps) => {
   return (
     <LabelPrimitive

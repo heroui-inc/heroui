@@ -10,16 +10,13 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {textFieldVariants} from "./text-field.styles";
 
-interface TextFieldProps extends TextFieldPrimitiveProps, TextFieldVariants {
-  ref?: React.Ref<HTMLDivElement>;
-}
+interface TextFieldProps extends TextFieldPrimitiveProps, TextFieldVariants {}
 
-const TextField = ({children, className, ref, ...props}: TextFieldProps) => {
+const TextField = ({children, className, ...props}: TextFieldProps) => {
   const styles = React.useMemo(() => textFieldVariants({}), []);
 
   return (
     <TextFieldPrimitive
-      ref={ref}
       data-slot="text-field"
       {...props}
       className={composeTwRenderProps(className, styles)}

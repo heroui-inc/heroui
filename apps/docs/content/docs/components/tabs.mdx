@@ -1,6 +1,7 @@
 ---
 title: Tabs
 description: Tabs organize content into multiple sections and allow users to navigate between them.
+icon: updated
 links:
   rac: Tabs
   source: tabs/tabs.tsx
@@ -32,13 +33,13 @@ import { Tabs } from '@heroui/react';
 export default () => (
   <Tabs.Root>
     <Tabs.ListWrapper>
-      <Tabs.List>
-        <Tabs.Tab id="tab1">Tab 1<Tabs.Indicator /></Tabs.Tab>
-        <Tabs.Tab id="tab2">Tab 2<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.List aria-label="Options">
+        <Tabs.Tab>
+          <Tabs.Indicator />
+        </Tabs.Tab>
       </Tabs.List>
     </Tabs.ListWrapper>
-    <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
-    <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
+    <Tabs.Panel/>
   </Tabs.Root>
 )
 ```

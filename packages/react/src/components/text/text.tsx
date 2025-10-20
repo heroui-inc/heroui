@@ -9,7 +9,6 @@ import {Text as TextPrimitive} from "react-aria-components";
 import {textVariants} from "./text.styles";
 
 interface TextProps extends TextPrimitiveProps, TextVariants {
-  ref?: React.Ref<HTMLElement>;
   asChild?: boolean;
 }
 const Text = ({asChild = false, children, className, size, variant, ...rest}: TextProps) => {

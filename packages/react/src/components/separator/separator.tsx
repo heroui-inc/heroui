@@ -7,9 +7,8 @@ import {Separator as SeparatorPrimitive} from "react-aria-components";
 
 import {separatorVariants} from "./separator.styles";
 
-interface SeparatorProps extends SeparatorPrimitiveProps, SeparatorVariants {
-  ref?: React.Ref<HTMLHRElement>;
-}
+interface SeparatorProps extends SeparatorPrimitiveProps, SeparatorVariants {}
+
 const Separator = ({className, orientation = "horizontal", ...props}: SeparatorProps) => {
   return (
     <SeparatorPrimitive

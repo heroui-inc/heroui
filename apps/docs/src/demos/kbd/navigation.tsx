@@ -1,6 +1,6 @@
 "use client";
 
-import {KbdAbbr, KbdRoot} from "@heroui/react";
+import {Kbd} from "@heroui/react";
 
 export function NavigationKeys() {
   return (
@@ -8,35 +8,35 @@ export function NavigationKeys() {
       <div className="flex items-center gap-2">
         <span className="text-muted text-sm">Arrow Keys:</span>
         <div className="flex items-center gap-2">
-          <KbdRoot>
-            <KbdAbbr keyValue="up" />
-          </KbdRoot>
-          <KbdRoot>
-            <KbdAbbr keyValue="down" />
-          </KbdRoot>
-          <KbdRoot>
-            <KbdAbbr keyValue="left" />
-          </KbdRoot>
-          <KbdRoot>
-            <KbdAbbr keyValue="right" />
-          </KbdRoot>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="up" />
+          </Kbd.Root>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="down" />
+          </Kbd.Root>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="left" />
+          </Kbd.Root>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="right" />
+          </Kbd.Root>
         </div>
       </div>
       <div className="flex items-center gap-2">
         <span className="text-muted text-sm">Page Navigation:</span>
         <div className="flex items-center gap-2">
-          <KbdRoot>
-            <KbdAbbr keyValue="pageup" />
-          </KbdRoot>
-          <KbdRoot>
-            <KbdAbbr keyValue="pagedown" />
-          </KbdRoot>
-          <KbdRoot>
-            <KbdAbbr keyValue="home" />
-          </KbdRoot>
-          <KbdRoot>
-            <KbdAbbr keyValue="end" />
-          </KbdRoot>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="pageup" />
+          </Kbd.Root>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="pagedown" />
+          </Kbd.Root>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="home" />
+          </Kbd.Root>
+          <Kbd.Root>
+            <Kbd.Abbr keyValue="end" />
+          </Kbd.Root>
         </div>
       </div>
     </div>

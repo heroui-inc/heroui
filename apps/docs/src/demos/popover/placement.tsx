@@ -1,64 +1,64 @@
 "use client";
 
-import {Button, PopoverArrow, PopoverContent, PopoverDialog, PopoverRoot} from "@heroui/react";
+import {Button, Popover} from "@heroui/react";
 
 export function PopoverPlacement() {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div />
-      <PopoverRoot>
+      <Popover.Root>
         <Button className="w-full" variant="tertiary">
           Top
         </Button>
-        <PopoverContent placement="top">
-          <PopoverDialog>
-            <PopoverArrow />
+        <Popover.Content placement="top">
+          <Popover.Dialog>
+            <Popover.Arrow />
             <p className="text-sm">Top placement</p>
-          </PopoverDialog>
-        </PopoverContent>
-      </PopoverRoot>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover.Root>
       <div />
 
-      <PopoverRoot>
+      <Popover.Root>
         <Button className="w-full" variant="tertiary">
           Left
         </Button>
-        <PopoverContent placement="left">
-          <PopoverDialog>
-            <PopoverArrow />
+        <Popover.Content placement="left">
+          <Popover.Dialog>
+            <Popover.Arrow />
             <p className="text-sm">Left placement</p>
-          </PopoverDialog>
-        </PopoverContent>
-      </PopoverRoot>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover.Root>
 
       <div className="flex items-center justify-center">
         <span className="text-muted text-sm">Click buttons</span>
       </div>
 
-      <PopoverRoot>
+      <Popover.Root>
         <Button className="w-full" variant="tertiary">
           Right
         </Button>
-        <PopoverContent placement="right">
-          <PopoverDialog>
-            <PopoverArrow />
+        <Popover.Content placement="right">
+          <Popover.Dialog>
+            <Popover.Arrow />
             <p className="text-sm">Right placement</p>
-          </PopoverDialog>
-        </PopoverContent>
-      </PopoverRoot>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover.Root>
 
       <div />
-      <PopoverRoot>
+      <Popover.Root>
         <Button className="w-full" variant="tertiary">
           Bottom
         </Button>
-        <PopoverContent placement="bottom">
-          <PopoverDialog>
-            <PopoverArrow />
+        <Popover.Content placement="bottom">
+          <Popover.Dialog>
+            <Popover.Arrow />
             <p className="text-sm">Bottom placement</p>
-          </PopoverDialog>
-        </PopoverContent>
-      </PopoverRoot>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover.Root>
       <div />
     </div>
   );

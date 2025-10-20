@@ -2,7 +2,7 @@
 
 import type {Key} from "react-aria-components";
 
-import {Tab, TabIndicator, TabList, TabListWrapper, TabsRoot} from "@heroui/react";
+import {Tabs} from "@heroui/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
 
@@ -53,25 +53,25 @@ export default function AppleIPhoneCameraZoom() {
             />
           ))}
         </div>
-        <TabsRoot defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
-          <TabListWrapper className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
-            <TabList
+        <Tabs.Root defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
+          <Tabs.ListWrapper className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
+            <Tabs.List
               aria-label="Camera zoom options"
               className="bg-surface-3 *:text-muted w-fit min-w-min rounded-full *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
             >
               {zoomLevels.map((zoom) => (
-                <Tab
+                <Tabs.Tab
                   key={zoom}
                   className={zoom === "macro" ? "capitalize" : ""}
                   id={zoom.toString()}
                 >
                   {zoom} {zoom === "macro" ? "" : "mm"}
-                  <TabIndicator className="rounded-full bg-white shadow-none duration-[320ms]" />
-                </Tab>
+                  <Tabs.Indicator className="rounded-full bg-white shadow-none duration-[320ms]" />
+                </Tabs.Tab>
               ))}
-            </TabList>
-          </TabListWrapper>
-        </TabsRoot>
+            </Tabs.List>
+          </Tabs.ListWrapper>
+        </Tabs.Root>
         <div className="relative h-10 w-10">
           {Object.keys(zoomXMap).map((key) => (
             <p

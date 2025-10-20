@@ -17,8 +17,8 @@ const KbdContext = createContext<{
 interface KbdRootProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
-  ref?: React.Ref<HTMLElement>;
 }
+
 const KbdRoot = ({children, className, ...props}: KbdRootProps) => {
   const slots = React.useMemo(() => kbdVariants(), []);
 
@@ -40,8 +40,8 @@ interface KbdAbbrProps extends React.HTMLAttributes<HTMLElement> {
    * The keyboard key to display
    */
   keyValue: KbdKey;
-  ref?: React.Ref<HTMLElement>;
 }
+
 const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
   const {slots} = useContext(KbdContext);
 

@@ -116,12 +116,18 @@ Consistent patterns across all components: sizes (`sm`, `md`, `lg`), variants, c
 <Chip size="lg" variant="success" className="custom" />
 <Avatar size="lg" className="custom" />
 
-// Compound components use named exports
-import { AlertIcon, CardHeader, AccordionTrigger } from '@heroui/react';
+// Compound components support both named exports and dot notation
+import { Alert, AlertIcon, CardHeader, AccordionTrigger } from '@heroui/react';
 
-<AlertIcon />
-<CardHeader />
-<AccordionTrigger />
+// Named exports
+<Alert>
+  <AlertIcon />
+</Alert>
+
+// Dot notation (requires .Root)
+<Alert.Root>
+  <Alert.Icon />
+</Alert.Root>
 ```
 
 ### 6. Type Safety First

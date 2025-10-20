@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Description,
-  Label,
-  Radio,
-  RadioContent,
-  RadioControl,
-  RadioGroupRoot,
-  RadioIndicator,
-} from "@heroui/react";
+import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import clsx from "clsx";
 
@@ -69,11 +61,11 @@ export function DeliveryAndPayment() {
       }}
     >
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroupRoot defaultValue="express" name="delivery">
+        <RadioGroup defaultValue="express" name="delivery">
           <Label>Delivery method</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
-              <Radio
+              <Radio.Root
                 key={option.value}
                 value={option.value}
                 className={clsx(
@@ -81,29 +73,29 @@ export function DeliveryAndPayment() {
                   "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
                 )}
               >
-                <RadioControl className="absolute right-4 top-3 size-5">
-                  <RadioIndicator />
-                </RadioControl>
-                <RadioContent className="flex flex-col gap-6">
+                <Radio.Control className="absolute right-4 top-3 size-5">
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content className="flex flex-col gap-6">
                   <div className="flex flex-col gap-1">
                     <Label>{option.title}</Label>
                     <Description>{option.description}</Description>
                   </div>
                   <span className="text-sm font-semibold">{option.price}</span>
-                </RadioContent>
-              </Radio>
+                </Radio.Content>
+              </Radio.Root>
             ))}
           </div>
-        </RadioGroupRoot>
+        </RadioGroup>
       </section>
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroupRoot defaultValue="visa" name="payment">
+        <RadioGroup defaultValue="visa" name="payment">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Label>Payment method</Label>
           </div>
           <div className="grid gap-x-4 md:grid-cols-2">
             {paymentOptions.map((option) => (
-              <Radio
+              <Radio.Root
                 key={option.value}
                 value={option.value}
                 className={clsx(
@@ -111,20 +103,20 @@ export function DeliveryAndPayment() {
                   "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                 )}
               >
-                <RadioControl className="absolute right-4 top-3 size-5">
-                  <RadioIndicator />
-                </RadioControl>
-                <RadioContent className="flex flex-row items-start justify-start gap-4">
+                <Radio.Control className="absolute right-4 top-3 size-5">
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content className="flex flex-row items-start justify-start gap-4">
                   <Icon className="size-6" icon={option.icon} />
                   <div className="flex flex-col gap-1">
                     <Label>{option.title}</Label>
                     <Description>{option.description}</Description>
                   </div>
-                </RadioContent>
-              </Radio>
+                </Radio.Content>
+              </Radio.Root>
             ))}
           </div>
-        </RadioGroupRoot>
+        </RadioGroup>
       </section>
     </div>
   );

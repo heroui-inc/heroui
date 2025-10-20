@@ -23,9 +23,8 @@ const LinkContext = createContext<LinkContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Link Root
  * --------------------------------------------------------------------------------------------- */
-interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {
-  ref?: React.Ref<HTMLAnchorElement>;
-}
+interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {}
+
 const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
   const slots = React.useMemo(() => linkVariants({}), []);
 
@@ -43,8 +42,8 @@ const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
  * --------------------------------------------------------------------------------------------- */
 type LinkIconProps = React.ComponentProps<"span"> & {
   asChild?: boolean;
-  ref?: React.Ref<HTMLSpanElement>;
 };
+
 const LinkIcon = ({asChild, children, className, ...rest}: LinkIconProps) => {
   const {slots} = useContext(LinkContext);
   const Component = asChild ? SlotPrimitive : "span";

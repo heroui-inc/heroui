@@ -46,14 +46,12 @@ const TooltipRoot = ({
 interface TooltipContentProps extends Omit<TooltipPrimitiveProps, "children">, TooltipVariants {
   showArrow?: boolean;
   children: React.ReactNode;
-  ref?: React.Ref<HTMLDivElement>;
 }
 
 const TooltipContent = ({
   children,
   className,
   offset: offsetProp,
-  ref,
   showArrow = false,
   ...props
 }: TooltipContentProps) => {
@@ -63,7 +61,6 @@ const TooltipContent = ({
   return (
     <TooltipPrimitive
       {...props}
-      ref={ref}
       className={composeTwRenderProps(className, slots?.base())}
       offset={offset}
     >
@@ -77,11 +74,9 @@ const TooltipContent = ({
 const TooltipArrow = ({
   children,
   className,
-  ref,
   ...props
 }: Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
-  ref?: React.Ref<React.ComponentRef<typeof OverlayArrow>>;
 }) => {
   const defaultArrow = (
     <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
@@ -102,7 +97,7 @@ const TooltipArrow = ({
     : defaultArrow;
 
   return (
-    <OverlayArrow ref={ref} data-slot="tooltip-arrow" {...props} className={className}>
+    <OverlayArrow data-slot="tooltip-arrow" {...props} className={className}>
       {arrow}
     </OverlayArrow>
   );
@@ -112,7 +107,6 @@ const TooltipArrow = ({
 
 interface TooltipTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
-  ref?: React.Ref<HTMLDivElement>;
 }
 
 const TooltipTrigger = ({asChild = false, children, className, ...props}: TooltipTriggerProps) => {

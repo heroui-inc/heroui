@@ -1,7 +1,6 @@
 ---
 title: Form
 description: Wrapper component for form validation and submission handling
-icon: new
 links:
   source: form/form.tsx
   rac: https://react-spectrum.adobe.com/react-aria/Form.html
@@ -76,7 +75,6 @@ The Form component is a wrapper around React Aria's Form primitive that provides
 | `onInvalid` | `(event: FormEvent<HTMLFormElement>) => void` | - | Handler called when the form validation fails. By default, the first invalid field will be focused. Use `preventDefault()` to customize focus behavior. |
 | `onReset` | `(event: FormEvent<HTMLFormElement>) => void` | - | Handler called when the form is reset. |
 | `onSubmit` | `(event: FormEvent<HTMLFormElement>) => void` | - | Handler called when the form is submitted. |
-| `ref` | `React.Ref<HTMLFormElement>` | - | Ref forwarded to the form element. |
 | `target` | `'_self' \| '_blank' \| '_parent' \| '_top'` | - | Where to display the response after submitting the form. |
 | `validationBehavior` | `'native' \| 'aria'` | `'native'` | Whether to use native HTML validation or ARIA validation. 'native' blocks form submission, 'aria' displays errors in realtime. |
 | `validationErrors` | `ValidationErrors` | - | Server-side validation errors mapped by field name. Displayed immediately and cleared when user modifies the field. |

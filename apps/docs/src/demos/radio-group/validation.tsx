@@ -1,17 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Description,
-  FieldError,
-  Form,
-  Label,
-  Radio,
-  RadioContent,
-  RadioControl,
-  RadioGroupRoot,
-  RadioIndicator,
-} from "@heroui/react";
+import {Button, Description, FieldError, Form, Label, Radio, RadioGroup} from "@heroui/react";
 import React from "react";
 
 export function Validation() {
@@ -29,37 +18,37 @@ export function Validation() {
         setMessage(`Your chosen plan is: ${value}`);
       }}
     >
-      <RadioGroupRoot isRequired name="plan-validation">
+      <RadioGroup isRequired name="plan-validation">
         <Label>Subscription plan</Label>
-        <Radio value="starter">
-          <RadioControl>
-            <RadioIndicator />
-          </RadioControl>
-          <RadioContent>
+        <Radio.Root value="starter">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
             <Label>Starter</Label>
             <Description>For side projects and small teams</Description>
-          </RadioContent>
-        </Radio>
-        <Radio value="pro">
-          <RadioControl>
-            <RadioIndicator />
-          </RadioControl>
-          <RadioContent>
+          </Radio.Content>
+        </Radio.Root>
+        <Radio.Root value="pro">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
             <Label>Pro</Label>
             <Description>Advanced reporting and analytics</Description>
-          </RadioContent>
-        </Radio>
-        <Radio value="teams">
-          <RadioControl>
-            <RadioIndicator />
-          </RadioControl>
-          <RadioContent>
+          </Radio.Content>
+        </Radio.Root>
+        <Radio.Root value="teams">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
             <Label>Teams</Label>
             <Description>Share access with up to 10 teammates</Description>
-          </RadioContent>
-        </Radio>
+          </Radio.Content>
+        </Radio.Root>
         <FieldError>Choose a subscription before continuing.</FieldError>
-      </RadioGroupRoot>
+      </RadioGroup>
       <Button className="mt-2 w-fit" type="submit">
         Submit
       </Button>

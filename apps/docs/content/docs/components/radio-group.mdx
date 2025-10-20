@@ -1,7 +1,7 @@
 ---
 title: RadioGroup
 description: Radio group for selecting a single option from a list
-icon: new
+icon: updated
 links:
   rac: RadioGroup
   source: radio-group/radio-group.tsx
@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import { RadioGroup } from '@heroui/react';
+import { RadioGroup, Radio } from '@heroui/react';
 ```
 
 ### Usage
@@ -27,15 +27,25 @@ import { RadioGroup } from '@heroui/react';
 Import the RadioGroup component and access all parts using dot notation.
 
 ```tsx
-import { RadioGroup } from '@heroui/react';
+import {RadioGroup, Radio, Label, Description, FieldError} from '@heroui/react';
 
 export default () => (
-  <RadioGroup.Root>
-    <RadioGroup.Item value="option1">
-      <RadioGroup.Indicator />
-      Option 1
-    </RadioGroup.Item>
-  </RadioGroup.Root>
+  <RadioGroup>
+    <Label />
+    <Description />
+    <Radio.Root value="option1">
+      <Radio.Control>
+        <Radio.Indicator>
+          <span>✓</span> {/* Custom indicator (optional) */}
+        </Radio.Indicator>
+      </Radio.Control>
+      <Radio.Content>
+        <Label />
+        <Description />
+      </Radio.Content>
+    </Radio.Root>
+    <FieldError />
+  </RadioGroup>
 )
 ```
 
@@ -93,31 +103,31 @@ Combine `defaultValue` with `onChange` when you only need to react to updates.
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {RadioGroup, Radio, RadioIndicator} from '@heroui/react';
+import { RadioGroup, Radio } from '@heroui/react';
 
 export default () => (
   <RadioGroup defaultValue="premium" name="plan">
-    <Radio
+    <Radio.Root
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-blue-300 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-500/10"
       value="basic"
     >
-      <RadioIndicator className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500" />
+      <Radio.Indicator className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500" />
       Basic Plan
-    </Radio>
-    <Radio
+    </Radio.Root>
+    <Radio.Root
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-purple-300 data-[selected=true]:border-purple-500 data-[selected=true]:bg-purple-500/10"
       value="premium"
     >
-      <RadioIndicator className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500" />
+      <Radio.Indicator className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500" />
       Premium Plan
-    </Radio>
-    <Radio
+    </Radio.Root>
+    <Radio.Root
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-emerald-300 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-500/10"
       value="business"
     >
-      <RadioIndicator className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500" />
+      <Radio.Indicator className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500" />
       Business Plan
-    </Radio>
+    </Radio.Root>
   </RadioGroup>
 );
 ```
@@ -195,7 +205,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the radio group |
 | `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | Radio group content or render prop |
 
-### Radio Props
+### Radio.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -204,13 +214,29 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `name` | `string` | - | The name of the radio button, used when submitting an HTML form |
 | `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Radio content or render prop |
 
-### RadioIndicator Props
+### Radio.Control Props
+
+Extends `React.HTMLAttributes<HTMLSpanElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | The content to render inside the control wrapper (typically Radio.Indicator) |
+
+### Radio.Indicator Props
 
 Extends `React.HTMLAttributes<HTMLSpanElement>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Optional content or render prop that receives the current radio state. |
+
+### Radio.Content Props
+
+Extends `React.HTMLAttributes<HTMLDivElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | The content to render inside the content wrapper (typically Label and Description) |
 
 ### RadioRenderProps
 

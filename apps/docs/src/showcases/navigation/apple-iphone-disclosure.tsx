@@ -3,15 +3,7 @@
 import type {ButtonProps} from "@heroui/react";
 import type {SVGProps} from "react";
 
-import {
-  Button,
-  DisclosureBody,
-  DisclosureContent,
-  DisclosureGroup,
-  DisclosureHeading,
-  DisclosureRoot,
-  useDisclosureGroupNavigation,
-} from "@heroui/react";
+import {Button, Disclosure, DisclosureGroup, useDisclosureGroupNavigation} from "@heroui/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
 
@@ -179,8 +171,8 @@ export default function AppleIPhoneDisclosure() {
             onExpandedChange={setExpandedKeys}
           >
             {showcaseItems.map((item) => (
-              <DisclosureRoot key={item.id} aria-label={item.label} id={item.id}>
-                <DisclosureHeading>
+              <Disclosure.Root key={item.id} aria-label={item.label} id={item.id}>
+                <Disclosure.Heading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
                       {item.id === "colors" ? (
@@ -191,9 +183,9 @@ export default function AppleIPhoneDisclosure() {
                       {item.label}
                     </div>
                   </AppleShowcaseButton>
-                </DisclosureHeading>
-                <DisclosureContent className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
-                  <DisclosureBody
+                </Disclosure.Heading>
+                <Disclosure.Content className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
+                  <Disclosure.Body
                     data-expanded={expandedKeys.has(item.id)}
                     className={cnBase(
                       "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-left backdrop-blur-[20px]",
@@ -215,9 +207,9 @@ export default function AppleIPhoneDisclosure() {
                     >
                       <strong className="font-medium">{item.label}</strong>.&nbsp;{item.content}
                     </p>
-                  </DisclosureBody>
-                </DisclosureContent>
-              </DisclosureRoot>
+                  </Disclosure.Body>
+                </Disclosure.Content>
+              </Disclosure.Root>
             ))}
           </DisclosureGroup>
         </div>

@@ -9,9 +9,8 @@ import {composeTwRenderProps} from "../../utils";
 
 import {textAreaVariants} from "./textarea.styles";
 
-interface TextAreaProps extends TextAreaPrimitiveProps, TextAreaVariants {
-  ref?: React.Ref<HTMLTextAreaElement>;
-}
+interface TextAreaProps extends TextAreaPrimitiveProps, TextAreaVariants {}
+
 const TextArea = ({className, ...rest}: TextAreaProps) => {
   return (
     <TextAreaPrimitive

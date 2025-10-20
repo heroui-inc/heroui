@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
-  AccordionItem,
-  AccordionPanel,
-  AccordionRoot,
-  AccordionTrigger,
-} from "@heroui/react";
+import {Accordion} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 const items = [
@@ -51,25 +43,25 @@ const items = [
 
 export function Oultine() {
   return (
-    <AccordionRoot className="w-full max-w-md" variant="outline">
+    <Accordion.Root className="w-full max-w-md" variant="outline">
       {items.map((item, index) => (
-        <AccordionItem key={index}>
-          <AccordionHeading>
-            <AccordionTrigger>
+        <Accordion.Item key={index}>
+          <Accordion.Heading>
+            <Accordion.Trigger>
               {item.icon ? (
                 <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
               ) : null}
               {item.title}
-              <AccordionIndicator>
+              <Accordion.Indicator>
                 <Icon icon="gravity-ui:chevron-down" />
-              </AccordionIndicator>
-            </AccordionTrigger>
-          </AccordionHeading>
-          <AccordionPanel>
-            <AccordionBody>{item.content}</AccordionBody>
-          </AccordionPanel>
-        </AccordionItem>
+              </Accordion.Indicator>
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>{item.content}</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
       ))}
-    </AccordionRoot>
+    </Accordion.Root>
   );
 }

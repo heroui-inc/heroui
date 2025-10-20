@@ -9,9 +9,8 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {fieldErrorVariants} from "./field-error.styles";
 
-interface FieldErrorProps extends FieldErrorPrimitiveProps, FieldErrorVariants {
-  ref?: React.Ref<HTMLElement>;
-}
+interface FieldErrorProps extends FieldErrorPrimitiveProps, FieldErrorVariants {}
+
 const FieldError = ({children, className, ...rest}: FieldErrorProps) => {
   return (
     <FieldErrorPrimitive

@@ -1,16 +1,6 @@
 "use client";
 
-import {
-  AvatarFallback,
-  AvatarImage,
-  AvatarRoot,
-  Button,
-  PopoverContent,
-  PopoverDialog,
-  PopoverHeading,
-  PopoverRoot,
-  PopoverTrigger,
-} from "@heroui/react";
+import {Avatar, Button, Popover} from "@heroui/react";
 import {useState} from "react";
 
 export function PopoverInteractive() {
@@ -18,34 +8,34 @@ export function PopoverInteractive() {
 
   return (
     <div className="flex items-center gap-6">
-      <PopoverRoot>
-        <PopoverTrigger aria-label="User profile">
+      <Popover.Root>
+        <Popover.Trigger aria-label="User profile">
           <div className="flex items-center gap-2">
-            <AvatarRoot size="sm">
-              <AvatarImage
+            <Avatar.Root size="sm">
+              <Avatar.Image
                 alt="Sarah Johnson"
                 src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
               />
-              <AvatarFallback>SJ</AvatarFallback>
-            </AvatarRoot>
+              <Avatar.Fallback>SJ</Avatar.Fallback>
+            </Avatar.Root>
             <div className="flex flex-col">
               <p className="text-sm font-medium">Sarah Johnson</p>
               <p className="text-muted text-xs">@sarahj</p>
             </div>
           </div>
-        </PopoverTrigger>
-        <PopoverContent className="w-[320px]">
-          <PopoverDialog>
-            <PopoverHeading>
+        </Popover.Trigger>
+        <Popover.Content className="w-[320px]">
+          <Popover.Dialog>
+            <Popover.Heading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <AvatarRoot size="md">
-                    <AvatarImage
+                  <Avatar.Root size="md">
+                    <Avatar.Image
                       alt="Sarah Johnson"
                       src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
                     />
-                    <AvatarFallback>SJ</AvatarFallback>
-                  </AvatarRoot>
+                    <Avatar.Fallback>SJ</Avatar.Fallback>
+                  </Avatar.Root>
                   <div>
                     <p className="font-semibold">Sarah Johnson</p>
                     <p className="text-muted text-sm">@sarahj</p>
@@ -60,7 +50,7 @@ export function PopoverInteractive() {
                   {isFollowing ? "Following" : "Follow"}
                 </Button>
               </div>
-            </PopoverHeading>
+            </Popover.Heading>
             <p className="text-muted mt-3 text-sm">
               Product designer and creative director. Building beautiful experiences that matter.
             </p>
@@ -74,9 +64,9 @@ export function PopoverInteractive() {
                 <span className="text-muted ml-1 text-sm">Followers</span>
               </div>
             </div>
-          </PopoverDialog>
-        </PopoverContent>
-      </PopoverRoot>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover.Root>
     </div>
   );
 }

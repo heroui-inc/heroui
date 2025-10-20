@@ -1,6 +1,7 @@
 ---
 title: DisclosureGroup
 description: Container that manages multiple Disclosure items with coordinated expanded states
+icon: updated
 links:
   rac: DisclosureGroup
   source: disclosure-group/disclosure-group.tsx
@@ -26,19 +27,18 @@ import {DisclosureGroup} from '@heroui/react';
 Import all parts and piece them together.
 
 ```tsx
-import {
-  DisclosureGroup,
-  Disclosure,
-  DisclosureTrigger,
-  DisclosurePanel
-} from '@heroui/react';
+import {DisclosureGroup, Disclosure} from '@heroui/react';
 
 export default () => (
   <DisclosureGroup>
-    <Disclosure id="item1">
-      <DisclosureTrigger>Item 1</DisclosureTrigger>
-      <DisclosurePanel>Content 1</DisclosurePanel>
-    </Disclosure>
+    <Disclosure.Root id="item1">
+      <Disclosure.Heading>
+        <Disclosure.Trigger>
+          <Disclosure.Indicator />
+        </Disclosure.Trigger>
+      </Disclosure.Heading>
+      <Disclosure.Content />
+    </Disclosure.Root>
   </DisclosureGroup>
 )
 ```

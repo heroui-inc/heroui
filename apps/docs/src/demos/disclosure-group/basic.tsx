@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Button,
-  DisclosureBody,
-  DisclosureContent,
-  DisclosureGroup,
-  DisclosureHeading,
-  DisclosureIndicator,
-  DisclosureRoot,
-  Separator,
-} from "@heroui/react";
+import {Button, Disclosure, DisclosureGroup, Separator} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
@@ -21,8 +12,8 @@ export function Basic() {
     <div className="w-full max-w-md">
       <div className="flex flex-col gap-4 bg-transparent p-4">
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <DisclosureRoot aria-label="Preview HeroUI Native" id="preview">
-            <DisclosureHeading>
+          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+            <Disclosure.Heading>
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
@@ -34,11 +25,11 @@ export function Basic() {
                   <Icon icon="gravity-ui:qr-code" />
                   Preview HeroUI Native
                 </div>
-                <DisclosureIndicator className="text-muted" />
+                <Disclosure.Indicator className="text-muted" />
               </Button>
-            </DisclosureHeading>
-            <DisclosureContent>
-              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </Disclosure.Heading>
+            <Disclosure.Content>
+              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -52,12 +43,12 @@ export function Basic() {
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
                 </Button>
-              </DisclosureBody>
-            </DisclosureContent>
-          </DisclosureRoot>
+              </Disclosure.Body>
+            </Disclosure.Content>
+          </Disclosure.Root>
           <Separator className="my-2" />
-          <DisclosureRoot id="download">
-            <DisclosureHeading aria-label="Download HeroUI Native">
+          <Disclosure.Root id="download">
+            <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
@@ -69,11 +60,11 @@ export function Basic() {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download App
                 </div>
-                <DisclosureIndicator className="text-muted" />
+                <Disclosure.Indicator className="text-muted" />
               </Button>
-            </DisclosureHeading>
-            <DisclosureContent>
-              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </Disclosure.Heading>
+            <Disclosure.Content>
+              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Download the HeroUI native app to explore our mobile components directly on your
                   device.
@@ -88,9 +79,9 @@ export function Basic() {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store
                 </Button>
-              </DisclosureBody>
-            </DisclosureContent>
-          </DisclosureRoot>
+              </Disclosure.Body>
+            </Disclosure.Content>
+          </Disclosure.Root>
         </DisclosureGroup>
       </div>
     </div>

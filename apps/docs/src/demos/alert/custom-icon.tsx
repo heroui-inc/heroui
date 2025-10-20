@@ -1,30 +1,30 @@
 "use client";
 
-import {AlertContent, AlertDescription, AlertIcon, AlertRoot, AlertTitle} from "@heroui/react";
+import {Alert} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function CustomIcon() {
   return (
     <div className="flex flex-col gap-4">
-      <AlertRoot className="max-w-lg" variant="success">
-        <AlertIcon>
+      <Alert.Root className="max-w-lg" variant="success">
+        <Alert.Icon>
           <Icon className="size-5" icon="gravity-ui:circle-check-fill" />
-        </AlertIcon>
-        <AlertContent>
-          <AlertTitle>Payment received</AlertTitle>
-          <AlertDescription>Your payment has been successfully processed.</AlertDescription>
-        </AlertContent>
-      </AlertRoot>
+        </Alert.Icon>
+        <Alert.Content>
+          <Alert.Title>Payment received</Alert.Title>
+          <Alert.Description>Your payment has been successfully processed.</Alert.Description>
+        </Alert.Content>
+      </Alert.Root>
 
-      <AlertRoot className="max-w-lg" variant="danger">
-        <AlertIcon>
+      <Alert.Root className="max-w-lg" variant="danger">
+        <Alert.Icon>
           <Icon className="size-5" icon="gravity-ui:triangle-exclamation-fill" />
-        </AlertIcon>
-        <AlertContent>
-          <AlertTitle>Security alert</AlertTitle>
-          <AlertDescription>Unusual activity detected in your account.</AlertDescription>
-        </AlertContent>
-      </AlertRoot>
+        </Alert.Icon>
+        <Alert.Content>
+          <Alert.Title>Security alert</Alert.Title>
+          <Alert.Description>Unusual activity detected in your account.</Alert.Description>
+        </Alert.Content>
+      </Alert.Root>
     </div>
   );
 }

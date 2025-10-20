@@ -1,25 +1,18 @@
 "use client";
 
-import {
-  AlertAction,
-  AlertContent,
-  AlertDescription,
-  AlertIcon,
-  AlertRoot,
-  AlertTitle,
-} from "@heroui/react";
+import {Alert} from "@heroui/react";
 
 export function WithAction() {
   return (
-    <AlertRoot className="max-w-lg">
-      <AlertIcon />
-      <AlertContent>
-        <AlertTitle>Update available</AlertTitle>
-        <AlertDescription>
+    <Alert.Root className="max-w-lg">
+      <Alert.Icon />
+      <Alert.Content>
+        <Alert.Title>Update available</Alert.Title>
+        <Alert.Description>
           A new software update is available. Would you like to install it now?
-        </AlertDescription>
-      </AlertContent>
-      <AlertAction onClick={() => console.log("Update clicked")}>Update</AlertAction>
-    </AlertRoot>
+        </Alert.Description>
+      </Alert.Content>
+      <Alert.Action onClick={() => console.log("Update clicked")}>Update</Alert.Action>
+    </Alert.Root>
   );
 }

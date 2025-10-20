@@ -21,21 +21,14 @@ const SwitchGroupContext = createContext<SwitchGroupContext>({});
 /* -------------------------------------------------------------------------------------------------
  * SwitchGroup Root
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchGroupRootProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {
-  ref?: React.Ref<HTMLDivElement>;
-}
-const SwitchGroupRoot = ({
-  children,
-  className,
-  orientation,
-  ref,
-  ...props
-}: SwitchGroupRootProps) => {
+interface SwitchGroupRootProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
+
+const SwitchGroupRoot = ({children, className, orientation, ...props}: SwitchGroupRootProps) => {
   const slots = React.useMemo(() => switchGroupVariants({orientation}), [orientation]);
 
   return (
     <SwitchGroupContext value={{slots}}>
-      <div ref={ref} data-slot="switch-group" {...props} className={slots.base({className})}>
+      <div data-slot="switch-group" {...props} className={slots.base({className})}>
         {children}
       </div>
     </SwitchGroupContext>
@@ -43,20 +36,12 @@ const SwitchGroupRoot = ({
 };
 
 /* -----------------------------------------------------------------------------------------------*/
-interface SwitchGroupItemsProps extends React.HTMLAttributes<HTMLDivElement> {
-  ref?: React.Ref<HTMLDivElement>;
-}
-const SwitchGroupItems = ({className, ref, ...props}: SwitchGroupItemsProps) => {
+interface SwitchGroupItemsProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const SwitchGroupItems = ({className, ...props}: SwitchGroupItemsProps) => {
   const {slots} = useContext(SwitchGroupContext);
 
-  return (
-    <div
-      ref={ref}
-      className={slots?.items({className})}
-      data-slot="switch-group-items"
-      {...props}
-    />
-  );
+  return <div className={slots?.items({className})} data-slot="switch-group-items" {...props} />;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -67,10 +52,9 @@ interface SwitchContext {
 }
 const SwitchContext = createContext<SwitchContext>({});
 
-interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {
-  ref?: React.Ref<HTMLLabelElement>;
-}
-const SwitchRoot = ({children, className, ref, ...originalProps}: SwitchRootProps) => {
+interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
+
+const SwitchRoot = ({children, className, ...originalProps}: SwitchRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
   const slots = React.useMemo(
     () => switchVariants({...(variantProps as SwitchVariants)}),
@@ -80,7 +64,6 @@ const SwitchRoot = ({children, className, ref, ...originalProps}: SwitchRootProp
   return (
     <SwitchContext value={{slots}}>
       <SwitchPrimitive
-        ref={ref}
         data-slot="switch"
         {...props}
         className={composeTwRenderProps(className, slots.base())}
@@ -92,42 +75,39 @@ const SwitchRoot = ({children, className, ref, ...originalProps}: SwitchRootProp
 };
 
 /* -----------------------------------------------------------------------------------------------*/
-interface SwitchControlProps extends React.HTMLAttributes<HTMLSpanElement> {
-  ref?: React.Ref<HTMLSpanElement>;
-}
-const SwitchControl = ({children, className, ref, ...props}: SwitchControlProps) => {
+interface SwitchControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span ref={ref} className={slots?.control({className})} data-slot="switch-control" {...props}>
+    <span className={slots?.control({className})} data-slot="switch-control" {...props}>
       {children}
     </span>
   );
 };
 
 /* -----------------------------------------------------------------------------------------------*/
-interface SwitchThumbProps extends React.HTMLAttributes<HTMLSpanElement> {
-  ref?: React.Ref<HTMLSpanElement>;
-}
-const SwitchThumb = ({children, className, ref, ...props}: SwitchThumbProps) => {
+interface SwitchThumbProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span ref={ref} className={slots?.thumb({className})} data-slot="switch-thumb" {...props}>
+    <span className={slots?.thumb({className})} data-slot="switch-thumb" {...props}>
       {children}
     </span>
   );
 };
 
 /* -----------------------------------------------------------------------------------------------*/
-interface SwitchIconProps extends React.HTMLAttributes<HTMLSpanElement> {
-  ref?: React.Ref<HTMLSpanElement>;
-}
-const SwitchIcon = ({children, className, ref, ...props}: SwitchIconProps) => {
+interface SwitchIconProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span ref={ref} className={slots?.icon({className})} data-slot="switch-icon" {...props}>
+    <span className={slots?.icon({className})} data-slot="switch-icon" {...props}>
       {children}
     </span>
   );

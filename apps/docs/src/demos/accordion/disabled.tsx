@@ -1,92 +1,84 @@
 "use client";
 
-import {
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
-  AccordionItem,
-  AccordionPanel,
-  AccordionRoot,
-  AccordionTrigger,
-} from "@heroui/react";
+import {Accordion} from "@heroui/react";
 
 export function Disabled() {
   return (
     <div className="flex w-full flex-col items-center gap-8">
       <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Entire accordion disabled</h3>
-        <AccordionRoot isDisabled className="w-full max-w-md">
-          <AccordionItem>
-            <AccordionHeading>
-              <AccordionTrigger>
+        <Accordion.Root isDisabled className="w-full max-w-md">
+          <Accordion.Item>
+            <Accordion.Heading>
+              <Accordion.Trigger>
                 Disabled Item 1
-                <AccordionIndicator />
-              </AccordionTrigger>
-            </AccordionHeading>
-            <AccordionPanel>
-              <AccordionBody>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>
                 This content cannot be accessed when the accordion is disabled.
-              </AccordionBody>
-            </AccordionPanel>
-          </AccordionItem>
+              </Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
 
-          <AccordionItem>
-            <AccordionHeading>
-              <AccordionTrigger>
+          <Accordion.Item>
+            <Accordion.Heading>
+              <Accordion.Trigger>
                 Disabled Item 2
-                <AccordionIndicator />
-              </AccordionTrigger>
-            </AccordionHeading>
-            <AccordionPanel>
-              <AccordionBody>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>
                 This content cannot be accessed when the accordion is disabled.
-              </AccordionBody>
-            </AccordionPanel>
-          </AccordionItem>
-        </AccordionRoot>
+              </Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion.Root>
       </div>
 
       <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Individual items disabled</h3>
-        <AccordionRoot className="w-full max-w-md">
-          <AccordionItem>
-            <AccordionHeading>
-              <AccordionTrigger>
+        <Accordion.Root className="w-full max-w-md">
+          <Accordion.Item>
+            <Accordion.Heading>
+              <Accordion.Trigger>
                 Active Item
-                <AccordionIndicator />
-              </AccordionTrigger>
-            </AccordionHeading>
-            <AccordionPanel>
-              <AccordionBody>This item is active and can be toggled normally.</AccordionBody>
-            </AccordionPanel>
-          </AccordionItem>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>This item is active and can be toggled normally.</Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
 
-          <AccordionItem isDisabled>
-            <AccordionHeading>
-              <AccordionTrigger>
+          <Accordion.Item isDisabled>
+            <Accordion.Heading>
+              <Accordion.Trigger>
                 Disabled Item
-                <AccordionIndicator />
-              </AccordionTrigger>
-            </AccordionHeading>
-            <AccordionPanel>
-              <AccordionBody>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>
                 This content cannot be accessed when the item is disabled.
-              </AccordionBody>
-            </AccordionPanel>
-          </AccordionItem>
+              </Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
 
-          <AccordionItem>
-            <AccordionHeading>
-              <AccordionTrigger>
+          <Accordion.Item>
+            <Accordion.Heading>
+              <Accordion.Trigger>
                 Another Active Item
-                <AccordionIndicator />
-              </AccordionTrigger>
-            </AccordionHeading>
-            <AccordionPanel>
-              <AccordionBody>This item is also active and can be toggled.</AccordionBody>
-            </AccordionPanel>
-          </AccordionItem>
-        </AccordionRoot>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>This item is also active and can be toggled.</Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion.Root>
       </div>
     </div>
   );

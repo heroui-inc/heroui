@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
-  AccordionItem,
-  AccordionPanel,
-  AccordionRoot,
-  AccordionTrigger,
-} from "@heroui/react";
+import {Accordion} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function FAQ() {
@@ -66,23 +58,23 @@ export function FAQ() {
       {categories.map((category) => (
         <div key={category.title}>
           <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-          <AccordionRoot className="w-full" variant="outline">
+          <Accordion.Root className="w-full" variant="outline">
             {category.items.map((item, index) => (
-              <AccordionItem key={index}>
-                <AccordionHeading>
-                  <AccordionTrigger>
+              <Accordion.Item key={index}>
+                <Accordion.Heading>
+                  <Accordion.Trigger>
                     {item.title}
-                    <AccordionIndicator>
+                    <Accordion.Indicator>
                       <Icon icon="gravity-ui:chevron-down" />
-                    </AccordionIndicator>
-                  </AccordionTrigger>
-                </AccordionHeading>
-                <AccordionPanel>
-                  <AccordionBody>{item.content}</AccordionBody>
-                </AccordionPanel>
-              </AccordionItem>
+                    </Accordion.Indicator>
+                  </Accordion.Trigger>
+                </Accordion.Heading>
+                <Accordion.Panel>
+                  <Accordion.Body>{item.content}</Accordion.Body>
+                </Accordion.Panel>
+              </Accordion.Item>
             ))}
-          </AccordionRoot>
+          </Accordion.Root>
         </div>
       ))}
     </div>

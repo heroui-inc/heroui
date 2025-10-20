@@ -12,9 +12,8 @@ import {skeletonVariants} from "./skeleton.styles";
  * -----------------------------------------------------------------------------------------------*/
 interface SkeletonProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
-    SkeletonVariants {
-  ref?: React.Ref<HTMLDivElement>;
-}
+    SkeletonVariants {}
+
 const Skeleton = ({animationType, className, ...props}: SkeletonProps) => {
   // Use the new hook to get CSS variable value with SSR support
   const resolvedAnimationType = useCSSVariable("--skeleton-animation", animationType);

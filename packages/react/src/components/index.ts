@@ -1,8 +1,6 @@
 //  ===================================
-//  Compound Components
+//  Components
 //  ===================================
-
-// completed
 export * from "./accordion";
 export * from "./avatar";
 export * from "./button";
@@ -29,6 +27,7 @@ export * from "./description";
 export * from "./field-error";
 export * from "./fieldset";
 export * from "./form";
+export * from "./radio";
 export * from "./radio-group";
 export * from "./alert";
 export * from "./calendar";

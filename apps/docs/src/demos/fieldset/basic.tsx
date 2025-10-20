@@ -5,9 +5,7 @@ import {
   Description,
   FieldError,
   FieldGroup,
-  FieldsetActions,
-  FieldsetLegend,
-  FieldsetRoot,
+  Fieldset,
   Form,
   Input,
   Label,
@@ -32,8 +30,8 @@ export function Basic() {
 
   return (
     <Form className="w-full max-w-96" onSubmit={onSubmit}>
-      <FieldsetRoot>
-        <FieldsetLegend>Profile Settings</FieldsetLegend>
+      <Fieldset.Root>
+        <Fieldset.Legend>Profile Settings</Fieldset.Legend>
         <Description>Update your profile information.</Description>
         <FieldGroup>
           <TextField
@@ -73,7 +71,7 @@ export function Basic() {
             <FieldError />
           </TextField>
         </FieldGroup>
-        <FieldsetActions>
+        <Fieldset.Actions>
           <Button type="submit">
             <Icon icon="gravity-ui:floppy-disk" />
             Save changes
@@ -81,8 +79,8 @@ export function Basic() {
           <Button type="reset" variant="secondary">
             Cancel
           </Button>
-        </FieldsetActions>
-      </FieldsetRoot>
+        </Fieldset.Actions>
+      </Fieldset.Root>
     </Form>
   );
 }

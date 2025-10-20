@@ -7,9 +7,8 @@ import {Text} from "react-aria-components";
 
 import {descriptionVariants} from "./description.styles";
 
-interface DescriptionProps extends TextProps, DescriptionVariants {
-  ref?: React.Ref<HTMLElement>;
-}
+interface DescriptionProps extends TextProps, DescriptionVariants {}
+
 const Description = ({children, className, ...rest}: DescriptionProps) => {
   return (
     <Text

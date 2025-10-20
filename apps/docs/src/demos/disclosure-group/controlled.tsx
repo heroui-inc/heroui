@@ -2,12 +2,8 @@
 
 import {
   Button,
-  DisclosureBody,
-  DisclosureContent,
+  Disclosure,
   DisclosureGroup,
-  DisclosureHeading,
-  DisclosureIndicator,
-  DisclosureRoot,
   Separator,
   useDisclosureGroupNavigation,
 } from "@heroui/react";
@@ -52,8 +48,8 @@ export function Controlled() {
           </div>
         </div>
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <DisclosureRoot aria-label="Preview HeroUI Native" id="preview">
-            <DisclosureHeading>
+          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+            <Disclosure.Heading>
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
@@ -65,11 +61,11 @@ export function Controlled() {
                   <Icon icon="gravity-ui:qr-code" />
                   Preview HeroUI Native
                 </div>
-                <DisclosureIndicator className="text-muted" />
+                <Disclosure.Indicator className="text-muted" />
               </Button>
-            </DisclosureHeading>
-            <DisclosureContent>
-              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </Disclosure.Heading>
+            <Disclosure.Content>
+              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -83,12 +79,12 @@ export function Controlled() {
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
                 </Button>
-              </DisclosureBody>
-            </DisclosureContent>
-          </DisclosureRoot>
+              </Disclosure.Body>
+            </Disclosure.Content>
+          </Disclosure.Root>
           <Separator className="my-2" />
-          <DisclosureRoot id="download">
-            <DisclosureHeading aria-label="Download HeroUI Native">
+          <Disclosure.Root id="download">
+            <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
@@ -100,11 +96,11 @@ export function Controlled() {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download HeroUI Native
                 </div>
-                <DisclosureIndicator className="text-muted" />
+                <Disclosure.Indicator className="text-muted" />
               </Button>
-            </DisclosureHeading>
-            <DisclosureContent>
-              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </Disclosure.Heading>
+            <Disclosure.Content>
+              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -118,9 +114,9 @@ export function Controlled() {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store
                 </Button>
-              </DisclosureBody>
-            </DisclosureContent>
-          </DisclosureRoot>
+              </Disclosure.Body>
+            </Disclosure.Content>
+          </Disclosure.Root>
         </DisclosureGroup>
       </div>
     </div>

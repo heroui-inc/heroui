@@ -2,15 +2,7 @@
 
 import type {Key} from "@heroui/react";
 
-import {
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
-  AccordionItem,
-  AccordionPanel,
-  AccordionRoot,
-  AccordionTrigger,
-} from "@heroui/react";
+import {Accordion} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
@@ -18,66 +10,66 @@ export function CustomIndicator() {
   const [expandedKeys, setExpandedKeys] = React.useState<Set<Key>>(new Set([""]));
 
   return (
-    <AccordionRoot
+    <Accordion.Root
       className="w-full max-w-md"
       expandedKeys={expandedKeys}
       variant="outline"
       onExpandedChange={setExpandedKeys}
     >
-      <AccordionItem id="1">
-        <AccordionHeading>
-          <AccordionTrigger>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Using Plus/Minus Icon
-            <AccordionIndicator>
+            <Accordion.Indicator>
               {expandedKeys.has("1") ? (
                 <Icon icon="gravity-ui:minus" />
               ) : (
                 <Icon icon="gravity-ui:plus" />
               )}
-            </AccordionIndicator>
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            </Accordion.Indicator>
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             This accordion uses a plus icon that transforms when expanded. The icon automatically
             rotates 45 degrees to form an X.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem id="2">
-        <AccordionHeading>
-          <AccordionTrigger>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Using Caret Icon
-            <AccordionIndicator>
+            <Accordion.Indicator>
               <Icon icon="gravity-ui:circle-chevron-down" />
-            </AccordionIndicator>
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            </Accordion.Indicator>
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             This item uses a caret icon for the indicator. The rotation animation is applied
             automatically.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem id="3">
-        <AccordionHeading>
-          <AccordionTrigger>
+      <Accordion.Item id="3">
+        <Accordion.Heading>
+          <Accordion.Trigger>
             Using Arrow Icon
-            <AccordionIndicator>
+            <Accordion.Indicator>
               <Icon icon="gravity-ui:chevrons-down" />
-            </AccordionIndicator>
-          </AccordionTrigger>
-        </AccordionHeading>
-        <AccordionPanel>
-          <AccordionBody>
+            </Accordion.Indicator>
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>
             This item uses an arrow icon. Any icon you pass will receive the rotation animation when
             the item expands.
-          </AccordionBody>
-        </AccordionPanel>
-      </AccordionItem>
-    </AccordionRoot>
+          </Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion.Root>
   );
 }

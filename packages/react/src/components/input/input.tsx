@@ -9,9 +9,8 @@ import {composeTwRenderProps} from "../../utils";
 
 import {inputVariants} from "./input.styles";
 
-interface InputProps extends InputPrimitiveProps, InputVariants {
-  ref?: React.Ref<HTMLInputElement>;
-}
+interface InputProps extends InputPrimitiveProps, InputVariants {}
+
 const Input = ({className, ...rest}: InputProps) => {
   return (
     <InputPrimitive
