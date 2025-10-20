@@ -35,52 +35,38 @@ interface TabsProps extends TabsPrimitiveProps, TabsVariants {
   className?: string;
 }
 
-const Tabs = React.forwardRef<React.ComponentRef<typeof TabsPrimitive>, TabsProps>(
-  ({children, className, orientation = "horizontal", ...props}, ref) => {
-    const slots = React.useMemo(() => tabsVariants(), []);
+const Tabs = ({children, className, orientation = "horizontal", ...props}: TabsProps) => {
+  const slots = React.useMemo(() => tabsVariants(), []);
 
-    return (
-      <TabsContext.Provider value={{slots, orientation}}>
-        <TabsPrimitive
-          {...props}
-          ref={ref}
-          className={composeTwRenderProps(className, slots.base())}
-          data-slot="tabs"
-          orientation={orientation}
-        >
-          {children}
-        </TabsPrimitive>
-      </TabsContext.Provider>
-    );
-  },
-);
+  return (
+    <TabsContext value={{slots, orientation}}>
+      <TabsPrimitive
+        {...props}
+        className={composeTwRenderProps(className, slots.base())}
+        data-slot="tabs"
+        orientation={orientation}
+      >
+        {children}
+      </TabsPrimitive>
+    </TabsContext>
+  );
+};
 
-Tabs.displayName = "HeroUI.Tabs";
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TabListWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+interface TabListWrapperProps extends React.ComponentProps<"div"> {
   className?: string;
 }
 
-const TabListWrapper = React.forwardRef<React.ComponentRef<"div">, TabListWrapperProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const TabListWrapper = ({children, className, ...props}: TabListWrapperProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <div
-        className={slots?.tabListWrapper({className})}
-        data-slot="tabs-list-wrapper"
-        {...props}
-        ref={ref}
-      >
-        {children}
-      </div>
-    );
-  },
-);
-
-TabListWrapper.displayName = "HeroUI.TabListWrapper";
+  return (
+    <div className={slots?.tabListWrapper({className})} data-slot="tabs-list-wrapper" {...props}>
+      {children}
+    </div>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -89,24 +75,19 @@ interface TabListProps extends TabListPrimitiveProps<object> {
   className?: string;
 }
 
-const TabList = React.forwardRef<React.ComponentRef<typeof TabListPrimitive>, TabListProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const TabList = ({children, className, ...props}: TabListProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <TabListPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tabList())}
-        data-slot="tabs-list"
-      >
-        {children}
-      </TabListPrimitive>
-    );
-  },
-);
-
-TabList.displayName = "HeroUI.TabList";
+  return (
+    <TabListPrimitive
+      {...props}
+      className={composeTwRenderProps(className, slots?.tabList())}
+      data-slot="tabs-list"
+    >
+      {children}
+    </TabListPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -114,48 +95,37 @@ interface TabProps extends TabPrimitiveProps {
   className?: string;
 }
 
-const Tab = React.forwardRef<React.ComponentRef<typeof TabPrimitive>, TabProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const Tab = ({children, className, ...props}: TabProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <TabPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tab())}
-        data-slot="tabs-tab"
-      >
-        {children}
-      </TabPrimitive>
-    );
-  },
-);
-
-Tab.displayName = "HeroUI.Tab";
+  return (
+    <TabPrimitive
+      {...props}
+      className={composeTwRenderProps(className, slots?.tab())}
+      data-slot="tabs-tab"
+    >
+      {children}
+    </TabPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TabIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface TabIndicatorProps extends React.ComponentProps<typeof SelectionIndicatorPrimitive> {
   className?: string;
 }
 
-const TabIndicator = React.forwardRef<
-  React.ComponentRef<typeof SelectionIndicatorPrimitive>,
-  TabIndicatorProps
->(({className, ...props}, ref) => {
+const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
   const {slots} = useContext(TabsContext);
 
   return (
     <SelectionIndicatorPrimitive
-      ref={ref}
       className={slots?.tabIndicator({className})}
       data-slot="tabs-indicator"
       {...props}
     />
   );
-});
-
-TabIndicator.displayName = "HeroUI.TabIndicator";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -164,24 +134,19 @@ interface TabPanelProps extends Omit<TabPanelPrimitiveProps, "children"> {
   className?: string;
 }
 
-const TabPanel = React.forwardRef<React.ComponentRef<typeof TabPanelPrimitive>, TabPanelProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const TabPanel = ({children, className, ...props}: TabPanelProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <TabPanelPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tabPanel())}
-        data-slot="tabs-panel"
-      >
-        {children}
-      </TabPanelPrimitive>
-    );
-  },
-);
-
-TabPanel.displayName = "HeroUI.TabPanel";
+  return (
+    <TabPanelPrimitive
+      {...props}
+      className={composeTwRenderProps(className, slots?.tabPanel())}
+      data-slot="tabs-panel"
+    >
+      {children}
+    </TabPanelPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 

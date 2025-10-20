@@ -19,102 +19,65 @@ import {listboxVariants} from "./listbox.styles";
 type ListBoxContextValue = {
   slots?: ReturnType<typeof listboxVariants>;
 };
-
 const ListBoxContext = React.createContext<ListBoxContextValue>({});
 
 export type ListBoxProps<T extends object> = ListBoxPrimitiveProps<T> &
   ListBoxVariants & {
     className?: string;
   };
+function ListBox<T extends object>({className, variant, ...props}: ListBoxProps<T>) {
+  const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
 
-const ListBoxInner = React.forwardRef<HTMLDivElement, ListBoxProps<object>>(
-  ({className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
-
-    return (
-      <ListBoxContext.Provider value={{slots}}>
-        <ListBoxPrimitive
-          ref={ref}
-          className={composeTwRenderProps(className, slots.base())}
-          {...props}
-        />
-      </ListBoxContext.Provider>
-    );
-  },
-);
-
-ListBoxInner.displayName = "HeroUI.ListBox";
-
-const ListBox = ListBoxInner as <T extends object>(
-  props: ListBoxProps<T> & React.RefAttributes<HTMLDivElement>,
-) => React.ReactElement;
-
+  return (
+    <ListBoxContext value={{slots}}>
+      <ListBoxPrimitive className={composeTwRenderProps(className, slots.base())} {...props} />
+    </ListBoxContext>
+  );
+}
 export type ListBoxItemProps = ListBoxItemPrimitiveProps & {
   className?: string;
 };
+const ListBoxItem = ({children, className, ...props}: ListBoxItemProps) => {
+  const {slots} = React.useContext(ListBoxContext);
 
-const ListBoxItem = React.forwardRef<HTMLDivElement, ListBoxItemProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = React.useContext(ListBoxContext);
-
-    return (
-      <ListBoxItemPrimitive
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.item())}
-        {...props}
-      >
-        {(renderProps) => (
-          <>
-            {typeof children === "function" ? children(renderProps) : children}
-            <ListBoxItemIndicator isSelected={renderProps.isSelected} />
-          </>
-        )}
-      </ListBoxItemPrimitive>
-    );
-  },
-);
-
-ListBoxItem.displayName = "HeroUI.ListBoxItem";
+  return (
+    <ListBoxItemPrimitive className={composeTwRenderProps(className, slots?.item())} {...props}>
+      {(renderProps) => (
+        <>
+          {typeof children === "function" ? children(renderProps) : children}
+          <ListBoxItemIndicator isSelected={renderProps.isSelected} />
+        </>
+      )}
+    </ListBoxItemPrimitive>
+  );
+};
 
 export type ListBoxItemIndicatorProps = {
   className?: string;
   children?: React.ReactNode;
   isSelected?: boolean;
 };
+const ListBoxItemIndicator = ({
+  children,
+  className,
+  isSelected,
+  ...props
+}: ListBoxItemIndicatorProps) => {
+  const {slots} = React.useContext(ListBoxContext);
 
-const ListBoxItemIndicator = React.forwardRef<HTMLSpanElement, ListBoxItemIndicatorProps>(
-  ({children, className, isSelected}, ref) => {
-    const {slots} = React.useContext(ListBoxContext);
-
-    return (
-      <span
-        ref={ref}
-        aria-hidden="true"
-        className={slots?.itemIndicator({className})}
-        data-visible={isSelected || undefined}
-      >
-        {children}
-      </span>
-    );
-  },
-);
-
-ListBoxItemIndicator.displayName = "HeroUI.ListBoxItemIndicator";
-
+  return (
+    <span
+      aria-hidden="true"
+      className={slots?.itemIndicator({className})}
+      data-visible={isSelected || undefined}
+      {...props}
+    >
+      {children}
+    </span>
+  );
+};
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const Root = ListBox;
-const Item = ListBoxItem;
-const ItemIndicator = ListBoxItemIndicator;
-
-export {
-  ListBox,
-  ListBoxItem,
-  ListBoxItemIndicator,
-  // named exports
-  Root,
-  Item,
-  ItemIndicator,
-};
+export {ListBox, ListBoxItem, ListBoxItemIndicator};

@@ -13,17 +13,13 @@ import {RadioGroup as RadioGroupPrimitive, Radio as RadioPrimitive} from "react-
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {radioGroupVariants, radioVariants} from "./radio-group.styles";
-
 /* -------------------------------------------------------------------------------------------------
  * RadioGroup
  * -----------------------------------------------------------------------------------------------*/
-
-interface RadioGroupProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
-
-const RadioGroup = React.forwardRef<
-  React.ComponentRef<typeof RadioGroupPrimitive>,
-  RadioGroupProps
->(({children, className, ...props}, ref) => {
+interface RadioGroupProps extends RadioGroupPrimitiveProps, RadioGroupVariants {
+  ref?: React.Ref<HTMLDivElement>;
+}
+const RadioGroup = ({children, className, ref, ...props}: RadioGroupProps) => {
   const styles = React.useMemo(() => radioGroupVariants(), []);
 
   return (
@@ -36,118 +32,94 @@ const RadioGroup = React.forwardRef<
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
     </RadioGroupPrimitive>
   );
-});
-
-RadioGroup.displayName = "HeroUI.RadioGroup";
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Radio
  * -----------------------------------------------------------------------------------------------*/
-
 interface RadioContext {
   slots?: ReturnType<typeof radioVariants>;
   state?: RadioRenderProps;
 }
-
 const RadioContext = createContext<RadioContext>({});
 
 interface RadioProps extends RadioPrimitiveProps {
   /** The name of the radio button, used when submitting an HTML form. */
   name?: string;
+  ref?: React.Ref<HTMLLabelElement>;
 }
+const Radio = ({children, className, ref, ...props}: RadioProps) => {
+  const slots = React.useMemo(() => radioVariants(), []);
 
-const Radio = React.forwardRef<React.ComponentRef<typeof RadioPrimitive>, RadioProps>(
-  ({children, className, ...props}, ref) => {
-    const slots = React.useMemo(() => radioVariants(), []);
-
-    return (
-      <RadioPrimitive
-        ref={ref}
-        data-slot="radio"
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => (
-          <RadioContext.Provider value={{slots, state: values}}>
-            {typeof children === "function" ? children(values) : children}
-          </RadioContext.Provider>
-        )}
-      </RadioPrimitive>
-    );
-  },
-);
-
-Radio.displayName = "HeroUI.Radio";
+  return (
+    <RadioPrimitive
+      ref={ref}
+      data-slot="radio"
+      {...props}
+      className={composeTwRenderProps(className, slots.base())}
+    >
+      {(values) => (
+        <RadioContext value={{slots, state: values}}>
+          {typeof children === "function" ? children(values) : children}
+        </RadioContext>
+      )}
+    </RadioPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
+interface RadioControlProps extends React.HTMLAttributes<HTMLSpanElement> {
+  ref?: React.Ref<HTMLSpanElement>;
+}
+const RadioControl = ({children, className, ref, ...props}: RadioControlProps) => {
+  const {slots} = useContext(RadioContext);
 
-interface RadioControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
-
-const RadioControl = React.forwardRef<HTMLSpanElement, RadioControlProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(RadioContext);
-
-    return (
-      <span ref={ref} className={slots?.control({className})} data-slot="radio-control" {...props}>
-        {children}
-      </span>
-    );
-  },
-);
-
-RadioControl.displayName = "HeroUI.RadioControl";
+  return (
+    <span ref={ref} className={slots?.control({className})} data-slot="radio-control" {...props}>
+      {children}
+    </span>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface RadioIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
   children?: React.ReactNode | ((props: RadioRenderProps) => React.ReactNode);
+  ref?: React.Ref<HTMLSpanElement>;
 }
+const RadioIndicator = ({children, className, ref, ...props}: RadioIndicatorProps) => {
+  const {slots, state} = useContext(RadioContext);
+  const content =
+    typeof children === "function" ? children(state ?? ({} as RadioRenderProps)) : children;
 
-const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots, state} = useContext(RadioContext);
-
-    const content =
-      typeof children === "function" ? children(state ?? ({} as RadioRenderProps)) : children;
-
-    return (
-      <span
-        ref={ref}
-        aria-hidden="true"
-        className={slots?.indicator({className})}
-        data-slot="radio-indicator"
-        {...props}
-      >
-        {content}
-      </span>
-    );
-  },
-);
-
-RadioIndicator.displayName = "HeroUI.RadioIndicator";
+  return (
+    <span
+      ref={ref}
+      aria-hidden="true"
+      className={slots?.indicator({className})}
+      data-slot="radio-indicator"
+      {...props}
+    >
+      {content}
+    </span>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
+interface RadioContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  ref?: React.Ref<HTMLDivElement>;
+}
+const RadioContent = ({children, className, ref, ...props}: RadioContentProps) => {
+  const {slots} = useContext(RadioContext);
 
-interface RadioContentProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-const RadioContent = React.forwardRef<HTMLDivElement, RadioContentProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(RadioContext);
-
-    return (
-      <div ref={ref} className={slots?.content({className})} data-slot="radio-content" {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-RadioContent.displayName = "HeroUI.RadioContent";
+  return (
+    <div ref={ref} className={slots?.content({className})} data-slot="radio-content" {...props}>
+      {children}
+    </div>
+  );
+};
 
 /* ----------------------------------------------------------------------------------------------*/
-
 export {RadioGroup, Radio, RadioControl, RadioIndicator, RadioContent};
-
 export type {
   RadioGroupProps,
   RadioProps,
