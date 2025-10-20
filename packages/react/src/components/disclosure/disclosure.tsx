@@ -43,7 +43,7 @@ const Disclosure = ({children, className, ...originalProps}: DisclosureProps) =>
   );
 
   return (
-    <DisclosureContext.Provider value={{slots}}>
+    <DisclosureContext value={{slots}}>
       <DisclosurePrimitive
         data-slot="disclosure"
         {...props}
@@ -51,7 +51,7 @@ const Disclosure = ({children, className, ...originalProps}: DisclosureProps) =>
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </DisclosurePrimitive>
-    </DisclosureContext.Provider>
+    </DisclosureContext>
   );
 };
 

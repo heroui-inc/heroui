@@ -26,11 +26,11 @@ const Avatar = ({children, className, color, size, ...props}: AvatarProps) => {
   const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
 
   return (
-    <AvatarContext.Provider value={{slots}}>
+    <AvatarContext value={{slots}}>
       <AvatarPrimitive.Root className={slots.base({className})} {...props}>
         {children}
       </AvatarPrimitive.Root>
-    </AvatarContext.Provider>
+    </AvatarContext>
   );
 };
 

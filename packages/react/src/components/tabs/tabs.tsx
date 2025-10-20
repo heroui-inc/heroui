@@ -39,7 +39,7 @@ const Tabs = ({children, className, orientation = "horizontal", ...props}: TabsP
   const slots = React.useMemo(() => tabsVariants(), []);
 
   return (
-    <TabsContext.Provider value={{slots, orientation}}>
+    <TabsContext value={{slots, orientation}}>
       <TabsPrimitive
         {...props}
         className={composeTwRenderProps(className, slots.base())}
@@ -48,7 +48,7 @@ const Tabs = ({children, className, orientation = "horizontal", ...props}: TabsP
       >
         {children}
       </TabsPrimitive>
-    </TabsContext.Provider>
+    </TabsContext>
   );
 };
 

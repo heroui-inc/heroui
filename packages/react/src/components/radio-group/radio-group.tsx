@@ -59,9 +59,9 @@ const Radio = ({children, className, ref, ...props}: RadioProps) => {
       className={composeTwRenderProps(className, slots.base())}
     >
       {(values) => (
-        <RadioContext.Provider value={{slots, state: values}}>
+        <RadioContext value={{slots, state: values}}>
           {typeof children === "function" ? children(values) : children}
-        </RadioContext.Provider>
+        </RadioContext>
       )}
     </RadioPrimitive>
   );

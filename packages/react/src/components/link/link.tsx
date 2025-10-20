@@ -30,11 +30,11 @@ const Link = ({children, className, ...props}: LinkProps) => {
   const slots = React.useMemo(() => linkVariants({}), []);
 
   return (
-    <LinkContext.Provider value={{slots}}>
+    <LinkContext value={{slots}}>
       <LinkPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </LinkPrimitive>
-    </LinkContext.Provider>
+    </LinkContext>
   );
 };
 

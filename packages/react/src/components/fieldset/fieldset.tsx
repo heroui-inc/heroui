@@ -23,9 +23,9 @@ const Fieldset = ({asChild = false, className, ...props}: FieldsetProps) => {
   const slots = React.useMemo(() => fieldsetVariants({}), []);
 
   return (
-    <FieldsetContext.Provider value={{slots}}>
+    <FieldsetContext value={{slots}}>
       <Comp className={slots?.base({className})} data-slot="fieldset" {...props} />
-    </FieldsetContext.Provider>
+    </FieldsetContext>
   );
 };
 

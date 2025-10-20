@@ -25,11 +25,11 @@ const Card = ({asChild = false, children, className, variant, ...props}: CardPro
   const Comp = asChild ? Slot : "div";
 
   return (
-    <CardContext.Provider value={{slots}}>
+    <CardContext value={{slots}}>
       <Comp className={slots.base({className})} data-slot="card" {...props}>
         {children}
       </Comp>
-    </CardContext.Provider>
+    </CardContext>
   );
 };
 

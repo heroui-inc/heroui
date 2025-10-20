@@ -50,7 +50,7 @@ function Calendar<T extends DateValue = DateValue>({
   const slots = React.useMemo(() => calendarVariants({isDisabled}), [isDisabled]);
 
   return (
-    <CalendarContext.Provider value={{slots}}>
+    <CalendarContext value={{slots}}>
       <CalendarPrimitive
         data-slot="calendar"
         isDisabled={isDisabled}
@@ -59,7 +59,7 @@ function Calendar<T extends DateValue = DateValue>({
       >
         {children}
       </CalendarPrimitive>
-    </CalendarContext.Provider>
+    </CalendarContext>
   );
 }
 /* -----------------------------------------------------------------------------------------------*/

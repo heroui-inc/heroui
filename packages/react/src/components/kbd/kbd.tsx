@@ -23,11 +23,11 @@ const Kbd = ({children, className, ...props}: KbdProps) => {
   const slots = React.useMemo(() => kbdVariants(), []);
 
   return (
-    <KbdContext.Provider value={{slots}}>
+    <KbdContext value={{slots}}>
       <kbd {...props} className={slots.base({className})}>
         {children}
       </kbd>
-    </KbdContext.Provider>
+    </KbdContext>
   );
 };
 

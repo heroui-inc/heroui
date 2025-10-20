@@ -31,11 +31,11 @@ const Popover = ({children, ...props}: React.ComponentProps<typeof PopoverTrigge
   const slots = React.useMemo(() => popoverVariants(), []);
 
   return (
-    <PopoverContext.Provider value={{slots}}>
+    <PopoverContext value={{slots}}>
       <PopoverTriggerPrimitive data-slot="popover-root" {...props}>
         {children}
       </PopoverTriggerPrimitive>
-    </PopoverContext.Provider>
+    </PopoverContext>
   );
 };
 
@@ -49,11 +49,11 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
   const {slots} = useContext(PopoverContext);
 
   return (
-    <PopoverContext.Provider value={{slots}}>
+    <PopoverContext value={{slots}}>
       <PopoverPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
         {children}
       </PopoverPrimitive>
-    </PopoverContext.Provider>
+    </PopoverContext>
   );
 };
 

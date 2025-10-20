@@ -31,11 +31,11 @@ const Alert = ({asChild, children, className, variant, ...rest}: AlertProps) => 
   const Component = asChild ? SlotPrimitive : "div";
 
   return (
-    <AlertContext.Provider value={{slots}}>
+    <AlertContext value={{slots}}>
       <Component className={slots?.base({className})} data-slot="alert-root" {...rest}>
         {children}
       </Component>
-    </AlertContext.Provider>
+    </AlertContext>
   );
 };
 

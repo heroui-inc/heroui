@@ -43,7 +43,7 @@ const Accordion = ({children, className, ...originalProps}: AccordionProps) => {
   );
 
   return (
-    <AccordionContext.Provider value={{slots}}>
+    <AccordionContext value={{slots}}>
       <DisclosureGroup
         data-slot="accordion"
         {...props}
@@ -51,7 +51,7 @@ const Accordion = ({children, className, ...originalProps}: AccordionProps) => {
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </DisclosureGroup>
-    </AccordionContext.Provider>
+    </AccordionContext>
   );
 };
 

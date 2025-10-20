@@ -39,7 +39,7 @@ const Slider = ({children, className, orientation = "horizontal", ...props}: Sli
   );
 
   return (
-    <SliderContext.Provider value={{slots, orientation, isDisabled: props.isDisabled}}>
+    <SliderContext value={{slots, orientation, isDisabled: props.isDisabled}}>
       <SliderPrimitive
         data-slot="slider"
         orientation={orientation}
@@ -48,7 +48,7 @@ const Slider = ({children, className, orientation = "horizontal", ...props}: Sli
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </SliderPrimitive>
-    </SliderContext.Provider>
+    </SliderContext>
   );
 };
 

@@ -28,11 +28,11 @@ const SwitchGroup = ({children, className, orientation, ref, ...props}: SwitchGr
   const slots = React.useMemo(() => switchGroupVariants({orientation}), [orientation]);
 
   return (
-    <SwitchGroupContext.Provider value={{slots}}>
+    <SwitchGroupContext value={{slots}}>
       <div ref={ref} data-slot="switch-group" {...props} className={slots.base({className})}>
         {children}
       </div>
-    </SwitchGroupContext.Provider>
+    </SwitchGroupContext>
   );
 };
 
@@ -72,7 +72,7 @@ const Switch = ({children, className, ref, ...originalProps}: SwitchProps) => {
   );
 
   return (
-    <SwitchContext.Provider value={{slots}}>
+    <SwitchContext value={{slots}}>
       <SwitchPrimitive
         ref={ref}
         data-slot="switch"
@@ -81,7 +81,7 @@ const Switch = ({children, className, ref, ...originalProps}: SwitchProps) => {
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </SwitchPrimitive>
-    </SwitchContext.Provider>
+    </SwitchContext>
   );
 };
 

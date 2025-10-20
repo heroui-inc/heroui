@@ -28,7 +28,7 @@ const InputOTP = ({children, className, isDisabled, isInvalid, ...props}: InputO
   );
 
   return (
-    <InputOTPContext.Provider value={{slots}}>
+    <InputOTPContext value={{slots}}>
       <div className={slots.base({className})} data-slot="input-otp">
         <OTPInput
           disabled={isDisabled}
@@ -49,7 +49,7 @@ const InputOTP = ({children, className, isDisabled, isInvalid, ...props}: InputO
           )}
         />
       </div>
-    </InputOTPContext.Provider>
+    </InputOTPContext>
   );
 };
 

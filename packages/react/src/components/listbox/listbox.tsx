@@ -29,9 +29,9 @@ function ListBox<T extends object>({className, variant, ...props}: ListBoxProps<
   const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
 
   return (
-    <ListBoxContext.Provider value={{slots}}>
+    <ListBoxContext value={{slots}}>
       <ListBoxPrimitive className={composeTwRenderProps(className, slots.base())} {...props} />
-    </ListBoxContext.Provider>
+    </ListBoxContext>
   );
 }
 export type ListBoxItemProps = ListBoxItemPrimitiveProps & {

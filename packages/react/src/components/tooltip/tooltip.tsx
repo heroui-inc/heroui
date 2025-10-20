@@ -30,11 +30,11 @@ const Tooltip = ({children, ...props}: React.ComponentProps<typeof TooltipTrigge
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   return (
-    <TooltipContext.Provider value={{slots}}>
+    <TooltipContext value={{slots}}>
       <TooltipTriggerPrimitive data-slot="tooltip-root" {...props}>
         {children}
       </TooltipTriggerPrimitive>
-    </TooltipContext.Provider>
+    </TooltipContext>
   );
 };
 
