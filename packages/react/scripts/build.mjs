@@ -63,14 +63,15 @@ async function logComponentCount() {
 }
 
 async function addUseClientDirective() {
-  console.log('🔧 Adding "use client" directives...');
+  console.log("🔧 Adding directives to files...");
 
   // Find all JS files in the components and hooks directories
-  const clientFiles = [];
+  const jsFiles = [];
   const componentsDir = path.join(distDir, "components");
   const hooksDir = path.join(distDir, "hooks");
+  const srcDir = path.join(rootDir, "src");
 
-  async function findClientFiles(dir) {
+  async function findJsFiles(dir) {
     const items = await fs.readdir(dir);
 
     for (const item of items) {
@@ -78,31 +79,60 @@ async function addUseClientDirective() {
       const stat = await fs.stat(fullPath);
 
       if (stat.isDirectory()) {
-        await findClientFiles(fullPath);
+        await findJsFiles(fullPath);
       } else if (item.endsWith(".js")) {
-        clientFiles.push(fullPath);
+        jsFiles.push(fullPath);
       }
     }
   }
 
   if (await fs.pathExists(componentsDir)) {
-    await findClientFiles(componentsDir);
+    await findJsFiles(componentsDir);
   }
 
   if (await fs.pathExists(hooksDir)) {
-    await findClientFiles(hooksDir);
+    await findJsFiles(hooksDir);
   }
 
-  // Add "use client" to the beginning of each file
-  for (const file of clientFiles) {
-    const content = await fs.readFile(file, "utf-8");
+  let useClientCount = 0;
+  let useStrictCount = 0;
 
-    if (!content.startsWith('"use client"') && !content.startsWith("'use client'")) {
-      await fs.writeFile(file, `"use client";\n${content}`);
+  // Add "use client" or "use strict" based on source file type
+  for (const jsFile of jsFiles) {
+    // Map the dist file back to its source file
+    const relativePath = path.relative(distDir, jsFile);
+    const sourcePathTs = path.join(srcDir, relativePath.replace(/\.js$/, ".ts"));
+    const sourcePathTsx = path.join(srcDir, relativePath.replace(/\.js$/, ".tsx"));
+
+    const content = await fs.readFile(jsFile, "utf-8");
+
+    // Skip if already has a directive
+    if (
+      content.startsWith('"use client"') ||
+      content.startsWith("'use client'") ||
+      content.startsWith('"use strict"') ||
+      content.startsWith("'use strict'")
+    ) {
+      continue;
+    }
+
+    // Check which source file exists
+    const isTsx = await fs.pathExists(sourcePathTsx);
+    const isTs = await fs.pathExists(sourcePathTs);
+
+    if (isTsx) {
+      // .tsx files get "use client"
+      await fs.writeFile(jsFile, `"use client";\n${content}`);
+      useClientCount++;
+    } else if (isTs) {
+      // .ts files get "use strict"
+      await fs.writeFile(jsFile, `"use strict";\n${content}`);
+      useStrictCount++;
     }
   }
 
-  console.log(`✅ Added "use client" to ${clientFiles.length} component files`);
+  console.log(`✅ Added "use client" to ${useClientCount} files (from .tsx)`);
+  console.log(`✅ Added "use strict" to ${useStrictCount} files (from .ts)`);
 }
 
 async function measureBundleSizes() {

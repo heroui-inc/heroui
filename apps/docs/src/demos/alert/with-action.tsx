@@ -1,17 +1,17 @@
 "use client";
 
 import {
-  Alert,
   AlertAction,
   AlertContent,
   AlertDescription,
   AlertIcon,
+  AlertRoot,
   AlertTitle,
 } from "@heroui/react";
 
 export function WithAction() {
   return (
-    <Alert className="max-w-lg">
+    <AlertRoot className="max-w-lg">
       <AlertIcon />
       <AlertContent>
         <AlertTitle>Update available</AlertTitle>
@@ -20,6 +20,6 @@ export function WithAction() {
         </AlertDescription>
       </AlertContent>
       <AlertAction onClick={() => console.log("Update clicked")}>Update</AlertAction>
-    </Alert>
+    </AlertRoot>
   );
 }

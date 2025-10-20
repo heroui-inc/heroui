@@ -1,5 +1,5 @@
 export {
-  Accordion,
+  AccordionRoot,
   AccordionItem,
   AccordionHeading,
   AccordionTrigger,
@@ -9,7 +9,7 @@ export {
 } from "./accordion";
 
 export type {
-  AccordionProps,
+  AccordionRootProps,
   AccordionItemProps,
   AccordionTriggerProps,
   AccordionPanelProps,
@@ -20,3 +20,5 @@ export type {
 
 export {accordionVariants} from "./accordion.styles";
 export type {AccordionVariants} from "./accordion.styles";
+
+export * as Accordion from "./slots";

@@ -1,10 +1,12 @@
-export {Fieldset, FieldsetLegend, FieldGroup, FieldsetActions} from "./fieldset";
+export {FieldsetRoot, FieldsetLegend, FieldGroup, FieldsetActions} from "./fieldset";
 
 export type {
-  FieldsetProps,
+  FieldsetRootProps,
   FieldsetLegendProps,
   FieldGroupProps,
   FieldsetActionsProps,
 } from "./fieldset";
 
 export {fieldsetVariants, type FieldsetVariants} from "./fieldset.styles";
+
+export * as Fieldset from "./slots";

@@ -1,6 +1,6 @@
 "use client";
 
-import {Kbd, KbdAbbr, KbdContent} from "@heroui/react";
+import {KbdAbbr, KbdContent, KbdRoot} from "@heroui/react";
 
 export function InstructionalText() {
   return (
@@ -10,31 +10,31 @@ export function InstructionalText() {
         <ul className="space-y-2 text-sm">
           <li>
             • Open search:{" "}
-            <Kbd>
+            <KbdRoot>
               <KbdAbbr keyValue="command" />
               <KbdContent>K</KbdContent>
-            </Kbd>
+            </KbdRoot>
           </li>
           <li>
             • Toggle sidebar:{" "}
-            <Kbd>
+            <KbdRoot>
               <KbdAbbr keyValue="command" />
               <KbdContent>B</KbdContent>
-            </Kbd>
+            </KbdRoot>
           </li>
           <li>
             • New file:{" "}
-            <Kbd>
+            <KbdRoot>
               <KbdAbbr keyValue="command" />
               <KbdContent>N</KbdContent>
-            </Kbd>
+            </KbdRoot>
           </li>
           <li>
             • Quick save:{" "}
-            <Kbd>
+            <KbdRoot>
               <KbdAbbr keyValue="command" />
               <KbdContent>S</KbdContent>
-            </Kbd>
+            </KbdRoot>
           </li>
         </ul>
       </div>

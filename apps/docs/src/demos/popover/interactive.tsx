@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  Avatar,
   AvatarFallback,
   AvatarImage,
+  AvatarRoot,
   Button,
-  Popover,
   PopoverContent,
   PopoverDialog,
   PopoverHeading,
+  PopoverRoot,
   PopoverTrigger,
 } from "@heroui/react";
 import {useState} from "react";
@@ -18,16 +18,16 @@ export function PopoverInteractive() {
 
   return (
     <div className="flex items-center gap-6">
-      <Popover>
+      <PopoverRoot>
         <PopoverTrigger aria-label="User profile">
           <div className="flex items-center gap-2">
-            <Avatar size="sm">
+            <AvatarRoot size="sm">
               <AvatarImage
                 alt="Sarah Johnson"
                 src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
               />
               <AvatarFallback>SJ</AvatarFallback>
-            </Avatar>
+            </AvatarRoot>
             <div className="flex flex-col">
               <p className="text-sm font-medium">Sarah Johnson</p>
               <p className="text-muted text-xs">@sarahj</p>
@@ -39,13 +39,13 @@ export function PopoverInteractive() {
             <PopoverHeading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Avatar size="md">
+                  <AvatarRoot size="md">
                     <AvatarImage
                       alt="Sarah Johnson"
                       src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
                     />
                     <AvatarFallback>SJ</AvatarFallback>
-                  </Avatar>
+                  </AvatarRoot>
                   <div>
                     <p className="font-semibold">Sarah Johnson</p>
                     <p className="text-muted text-sm">@sarahj</p>
@@ -76,7 +76,7 @@ export function PopoverInteractive() {
             </div>
           </PopoverDialog>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
     </div>
   );
 }

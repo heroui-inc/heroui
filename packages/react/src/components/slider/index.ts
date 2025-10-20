@@ -1,5 +1,5 @@
 export {
-  Slider,
+  SliderRoot,
   SliderHeader,
   SliderLabel,
   SliderOutput,
@@ -10,7 +10,7 @@ export {
 } from "./slider";
 
 export type {
-  SliderProps,
+  SliderRootProps,
   SliderHeaderProps,
   SliderLabelProps,
   SliderOutputProps,
@@ -21,3 +21,5 @@ export type {
 } from "./slider";
 
 export {sliderVariants, type SliderVariants} from "./slider.styles";
+
+export * as Slider from "./slots";

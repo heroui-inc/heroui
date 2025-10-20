@@ -29,12 +29,12 @@ import {accordionVariants} from "./accordion.styles";
 const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVariants>}>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Accordion
+ * Accordion Root
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionProps extends DisclosureGroupProps, AccordionVariants {}
+interface AccordionRootProps extends DisclosureGroupProps, AccordionVariants {}
 
-const Accordion = ({children, className, ...originalProps}: AccordionProps) => {
+const AccordionRoot = ({children, className, ...originalProps}: AccordionRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
 
   const slots = React.useMemo(
@@ -201,7 +201,7 @@ const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) =>
  * -----------------------------------------------------------------------------------------------*/
 
 export type {
-  AccordionProps,
+  AccordionRootProps,
   AccordionItemProps,
   AccordionTriggerProps,
   AccordionPanelProps,
@@ -211,7 +211,7 @@ export type {
 };
 
 export {
-  Accordion,
+  AccordionRoot,
   AccordionItem,
   AccordionTrigger,
   AccordionPanel,

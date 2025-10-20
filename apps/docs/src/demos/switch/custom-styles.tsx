@@ -1,11 +1,11 @@
 "use client";
 
-import {Switch, SwitchControl, SwitchIcon, SwitchThumb} from "@heroui/react";
+import {SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function CustomStyles() {
   return (
-    <Switch>
+    <SwitchRoot>
       {({isSelected}) => (
         <>
           <SwitchControl
@@ -24,6 +24,6 @@ export function CustomStyles() {
           </SwitchControl>
         </>
       )}
-    </Switch>
+    </SwitchRoot>
   );
 }

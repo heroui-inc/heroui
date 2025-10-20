@@ -11,12 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  Fieldset,
-  FieldsetLegend,
-  FieldGroup,
-  FieldsetActions
-} from '@heroui/react';
+import { Fieldset } from '@heroui/react';
 ```
 
 ### Usage
@@ -25,26 +20,21 @@ import {
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Fieldset component and access all parts using dot notation.
 
 ```tsx
-import {
-  Fieldset,
-  FieldsetLegend,
-  FieldGroup,
-  FieldsetActions
-} from '@heroui/react';
+import { Fieldset } from '@heroui/react';
 
 export default () => (
-  <Fieldset>
-    <FieldsetLegend />
-    <FieldGroup>
+  <Fieldset.Root>
+    <Fieldset.Legend />
+    <Fieldset.Group>
       {/* form fields go here */}
-    </FieldGroup>
-    <FieldsetActions>
+    </Fieldset.Group>
+    <Fieldset.Actions>
       {/* action buttons go here */}
-    </FieldsetActions>
-  </Fieldset>
+    </Fieldset.Actions>
+  </Fieldset.Root>
 )
 ```
 
@@ -57,19 +47,13 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {
-  Fieldset,
-  FieldsetLegend,
-  FieldGroup,
-  FieldsetActions,
-  TextField
-} from '@heroui/react';
+import { Fieldset, TextField, Label, Input } from '@heroui/react';
 
 function CustomFieldset() {
   return (
-    <Fieldset className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
-      <FieldsetLegend className="text-lg font-semibold">Team members</FieldsetLegend>
-      <FieldGroup className="grid gap-4 md:grid-cols-2">
+    <Fieldset.Root className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
+      <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
+      <Fieldset.Group className="grid gap-4 md:grid-cols-2">
         <TextField>
           <Label>First name</Label>
           <Input className="rounded-full border-border/60" placeholder="Jane" />

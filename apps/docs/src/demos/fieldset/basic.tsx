@@ -5,9 +5,9 @@ import {
   Description,
   FieldError,
   FieldGroup,
-  Fieldset,
   FieldsetActions,
   FieldsetLegend,
+  FieldsetRoot,
   Form,
   Input,
   Label,
@@ -32,7 +32,7 @@ export function Basic() {
 
   return (
     <Form className="w-full max-w-96" onSubmit={onSubmit}>
-      <Fieldset>
+      <FieldsetRoot>
         <FieldsetLegend>Profile Settings</FieldsetLegend>
         <Description>Update your profile information.</Description>
         <FieldGroup>
@@ -82,7 +82,7 @@ export function Basic() {
             Cancel
           </Button>
         </FieldsetActions>
-      </Fieldset>
+      </FieldsetRoot>
     </Form>
   );
 }

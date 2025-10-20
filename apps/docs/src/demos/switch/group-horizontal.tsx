@@ -2,36 +2,36 @@
 
 import {
   Label,
-  Switch,
   SwitchControl,
-  SwitchGroup,
   SwitchGroupItems,
+  SwitchGroupRoot,
+  SwitchRoot,
   SwitchThumb,
 } from "@heroui/react";
 
 export function GroupHorizontal() {
   return (
-    <SwitchGroup className="overflow-x-auto" orientation="horizontal">
+    <SwitchGroupRoot className="overflow-x-auto" orientation="horizontal">
       <SwitchGroupItems>
-        <Switch name="notifications">
+        <SwitchRoot name="notifications">
           <SwitchControl>
             <SwitchThumb />
           </SwitchControl>
           <Label className="text-sm">Notifications</Label>
-        </Switch>
-        <Switch name="marketing">
+        </SwitchRoot>
+        <SwitchRoot name="marketing">
           <SwitchControl>
             <SwitchThumb />
           </SwitchControl>
           <Label className="text-sm">Marketing</Label>
-        </Switch>
-        <Switch name="social">
+        </SwitchRoot>
+        <SwitchRoot name="social">
           <SwitchControl>
             <SwitchThumb />
           </SwitchControl>
           <Label className="text-sm">Social</Label>
-        </Switch>
+        </SwitchRoot>
       </SwitchGroupItems>
-    </SwitchGroup>
+    </SwitchGroupRoot>
   );
 }

@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@heroui/react';
+import { Avatar } from '@heroui/react';
 ```
 
 ### Usage
@@ -21,16 +21,16 @@ import { Avatar, AvatarImage, AvatarFallback } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Avatar component and access all parts using dot notation.
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@heroui/react';
+import { Avatar } from '@heroui/react';
 
 export default () => (
-  <Avatar>
-    <AvatarImage/>
-    <AvatarFallback/>
-  </Avatar>
+  <Avatar.Root>
+    <Avatar.Image/>
+    <Avatar.Fallback/>
+  </Avatar.Root>
 )
 ```
 
@@ -59,14 +59,14 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@heroui/react';
+import { Avatar } from '@heroui/react';
 
 function CustomAvatar() {
   return (
-    <Avatar className="size-20">
-      <AvatarImage src="..." alt="..." />
-      <AvatarFallback>XL</AvatarFallback>
-    </Avatar>
+    <Avatar.Root className="size-20">
+      <Avatar.Image src="..." alt="..." />
+      <Avatar.Fallback>XL</Avatar.Fallback>
+    </Avatar.Root>
   );
 }
 ```
@@ -113,7 +113,7 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 
 ## API Reference
 
-### Avatar Props
+### Avatar.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -122,7 +122,7 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 | `className` | `string` | - | Additional CSS classes |
 | `asChild` | `boolean` | `false` | Render as child element |
 
-### AvatarImage Props
+### Avatar.Image Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -140,7 +140,7 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 | `className` | `string` | - | Additional CSS classes |
 | `asChild` | `boolean` | `false` | Render as child element |
 
-### AvatarFallback Props
+### Avatar.Fallback Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

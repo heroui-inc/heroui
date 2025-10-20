@@ -6,7 +6,7 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 
@@ -14,7 +14,7 @@ export function Horizontal() {
   return (
     <div className="flex flex-col gap-4">
       <Label>Subscription plan</Label>
-      <RadioGroup defaultValue="pro" name="plan-orientation" orientation="horizontal">
+      <RadioGroupRoot defaultValue="pro" name="plan-orientation" orientation="horizontal">
         <Radio value="starter">
           <RadioControl>
             <RadioIndicator />
@@ -42,7 +42,7 @@ export function Horizontal() {
             <Description>Up to 10 teammates</Description>
           </RadioContent>
         </Radio>
-      </RadioGroup>
+      </RadioGroupRoot>
     </div>
   );
 }

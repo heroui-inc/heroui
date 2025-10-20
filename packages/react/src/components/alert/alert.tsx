@@ -21,12 +21,12 @@ type AlertContext = {
 const AlertContext = createContext<AlertContext>({});
 
 /* ------------------------------------------------------------------------------------------------
- * Alert
+ * Alert Root
  * --------------------------------------------------------------------------------------------- */
-interface AlertProps extends React.ComponentProps<"div">, AlertVariants {
+interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
   asChild?: boolean;
 }
-const Alert = ({asChild, children, className, variant, ...rest}: AlertProps) => {
+const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootProps) => {
   const slots = React.useMemo(() => alertVariants({variant}), [variant]);
   const Component = asChild ? SlotPrimitive : "div";
 
@@ -182,7 +182,7 @@ AlertClose.displayName = "AlertClose";
 /* ------------------------------------------------------------------------------------------------
  * Exports
  * --------------------------------------------------------------------------------------------- */
-export {Alert, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose};
+export {AlertRoot, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose};
 // For AlertAction and AlertClose, we need to export their prop types
 type AlertActionProps =
   | ({asChild: true} & React.ComponentProps<"button">)
@@ -191,7 +191,7 @@ type AlertCloseProps =
   | ({asChild: true} & React.ComponentProps<"button">)
   | ({asChild?: false} & ButtonPrimitiveProps);
 export type {
-  AlertProps,
+  AlertRootProps,
   AlertIconProps,
   AlertContentProps,
   AlertTitleProps,

@@ -15,12 +15,12 @@ interface CardContext {
 const CardContext = createContext<CardContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Card
+ * Card Root
  * -----------------------------------------------------------------------------------------------*/
-interface CardProps extends React.ComponentProps<"div">, CardVariants {
+interface CardRootProps extends React.ComponentProps<"div">, CardVariants {
   asChild?: boolean;
 }
-const Card = ({asChild = false, children, className, variant, ...props}: CardProps) => {
+const CardRoot = ({asChild = false, children, className, variant, ...props}: CardRootProps) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
   const Comp = asChild ? Slot : "div";
 
@@ -104,11 +104,11 @@ const CardFooter = ({asChild = false, className, ...props}: CardFooterProps) => 
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 export type {
-  CardProps,
+  CardRootProps,
   CardHeaderProps,
   CardTitleProps,
   CardDescriptionProps,
   CardContentProps,
   CardFooterProps,
 };
-export {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};
+export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};

@@ -1,12 +1,12 @@
 "use client";
 
-import {Tab, TabIndicator, TabList, TabListWrapper, TabPanel, Tabs} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListWrapper, TabPanel, TabsRoot} from "@heroui/react";
 
 export function Disabled() {
   return (
-    <Tabs className="w-full max-w-md">
+    <TabsRoot className="w-full max-w-md">
       <TabListWrapper>
-        <TabList aria-label="Tabs with disabled">
+        <TabList aria-label="TabsRoot with disabled">
           <Tab id="active">
             Active
             <TabIndicator />
@@ -30,6 +30,6 @@ export function Disabled() {
       <TabPanel className="pt-4" id="available">
         <p>This tab is also available for selection.</p>
       </TabPanel>
-    </Tabs>
+    </TabsRoot>
   );
 }

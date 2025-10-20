@@ -21,12 +21,12 @@ type LinkContext = {
 const LinkContext = createContext<LinkContext>({});
 
 /* ------------------------------------------------------------------------------------------------
- * Link
+ * Link Root
  * --------------------------------------------------------------------------------------------- */
-interface LinkProps extends LinkPrimitiveProps, LinkVariants {
+interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {
   ref?: React.Ref<HTMLAnchorElement>;
 }
-const Link = ({children, className, ...props}: LinkProps) => {
+const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
   const slots = React.useMemo(() => linkVariants({}), []);
 
   return (
@@ -64,5 +64,5 @@ const LinkIcon = ({asChild, children, className, ...rest}: LinkIconProps) => {
 /* ------------------------------------------------------------------------------------------------
  * Exports
  * --------------------------------------------------------------------------------------------- */
-export type {LinkProps, LinkIconProps};
-export {Link, LinkIcon};
+export type {LinkRootProps, LinkIconProps};
+export {LinkRoot, LinkIcon};

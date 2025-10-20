@@ -1,42 +1,42 @@
 "use client";
 
-import {Kbd, KbdAbbr, KbdContent} from "@heroui/react";
+import {KbdAbbr, KbdContent, KbdRoot} from "@heroui/react";
 
 export function InlineUsage() {
   return (
     <div className="space-y-4">
       <p className="text-sm">
         Press{" "}
-        <Kbd>
+        <KbdRoot>
           <KbdContent>Esc</KbdContent>
-        </Kbd>{" "}
+        </KbdRoot>{" "}
         to close the dialog.
       </p>
       <p className="text-sm">
         Use{" "}
-        <Kbd>
+        <KbdRoot>
           <KbdAbbr keyValue="command" />
           <KbdContent>K</KbdContent>
-        </Kbd>{" "}
+        </KbdRoot>{" "}
         to open the command palette.
       </p>
       <p className="text-sm">
         Navigate with{" "}
-        <Kbd>
+        <KbdRoot>
           <KbdAbbr keyValue="up" />
-        </Kbd>{" "}
+        </KbdRoot>{" "}
         and{" "}
-        <Kbd>
+        <KbdRoot>
           <KbdAbbr keyValue="down" />
-        </Kbd>{" "}
+        </KbdRoot>{" "}
         arrow keys.
       </p>
       <p className="text-sm">
         Save your work with{" "}
-        <Kbd>
+        <KbdRoot>
           <KbdAbbr keyValue="command" />
           <KbdContent>S</KbdContent>
-        </Kbd>{" "}
+        </KbdRoot>{" "}
         regularly.
       </p>
     </div>

@@ -2,11 +2,11 @@
 
 import {
   Button,
-  Disclosure,
   DisclosureBody,
   DisclosureContent,
   DisclosureHeading,
   DisclosureIndicator,
+  DisclosureRoot,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
@@ -16,7 +16,7 @@ export function Basic() {
 
   return (
     <div className="w-full max-w-md text-center">
-      <Disclosure isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <DisclosureRoot isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <DisclosureHeading>
           <Button slot="trigger" variant="secondary">
             <Icon icon="gravity-ui:qr-code" />
@@ -41,7 +41,7 @@ export function Basic() {
             </Button>
           </DisclosureBody>
         </DisclosureContent>
-      </Disclosure>
+      </DisclosureRoot>
     </div>
   );
 }

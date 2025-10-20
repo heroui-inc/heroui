@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
+import { Tabs } from '@heroui/react';
 ```
 
 ### Usage
@@ -24,20 +24,22 @@ import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Tabs component and access all parts using dot notation.
 
 ```tsx
-import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
+import { Tabs } from '@heroui/react';
 
 export default () => (
-  <Tabs>
-    <TabList>
-      <Tab id="tab1">Tab 1</Tab>
-      <Tab id="tab2">Tab 2</Tab>
-    </TabList>
-    <TabPanel id="tab1">Panel 1</TabPanel>
-    <TabPanel id="tab2">Panel 2</TabPanel>
-  </Tabs>
+  <Tabs.Root>
+    <Tabs.ListWrapper>
+      <Tabs.List>
+        <Tabs.Tab id="tab1">Tab 1<Tabs.Indicator /></Tabs.Tab>
+        <Tabs.Tab id="tab2">Tab 2<Tabs.Indicator /></Tabs.Tab>
+      </Tabs.List>
+    </Tabs.ListWrapper>
+    <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
+    <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
+  </Tabs.Root>
 )
 ```
 
@@ -69,37 +71,39 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 <CollapsibleCode lang="tsx" code={`
-import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
+import { Tabs } from '@heroui/react';
 
 function CustomTabs() {
   return (
-    <Tabs className="w-full max-w-lg text-center">
-      <TabList
-        aria-label="Options"
-        className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
-      >
-        <Tab id="daily">Daily</Tab>
-        <Tab id="weekly">Weekly</Tab>
-        <Tab id="bi-weekly">Bi-Weekly</Tab>
-        <Tab id="monthly">Monthly</Tab>
-      </TabList>
-      <TabPanel className="px-4" id="daily">
+    <Tabs.Root className="w-full max-w-lg text-center">
+      <Tabs.ListWrapper>
+        <Tabs.List
+          aria-label="Options"
+          className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
+        >
+          <Tabs.Tab id="daily">Daily<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="weekly">Weekly<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="bi-weekly">Bi-Weekly<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="monthly">Monthly<Tabs.Indicator /></Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListWrapper>
+      <Tabs.Panel className="px-4" id="daily">
         <h3 className="mb-2 font-semibold">Daily</h3>
         <p className="text-sm text-gray-600">Manage your daily tasks and goals.</p>
-      </TabPanel>
-      <TabPanel className="px-4" id="weekly">
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="weekly">
         <h3 className="mb-2 font-semibold">Weekly</h3>
         <p className="text-sm text-gray-600">Manage your weekly tasks and goals.</p>
-      </TabPanel>
-      <TabPanel className="px-4" id="bi-weekly">
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="bi-weekly">
         <h3 className="mb-2 font-semibold">Bi-Weekly</h3>
         <p className="text-sm text-gray-600">Manage your bi-weekly tasks and goals.</p>
-      </TabPanel>
-      <TabPanel className="px-4" id="monthly">
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="monthly">
         <h3 className="mb-2 font-semibold">Monthly</h3>
         <p className="text-sm text-gray-600">Manage your monthly tasks and goals.</p>
-      </TabPanel>
-    </Tabs>
+      </Tabs.Panel>
+    </Tabs.Root>
   );
 }
 `} />
@@ -133,7 +137,7 @@ The component supports both CSS pseudo-classes and data attributes:
 
 ## API Reference
 
-### Tabs Props
+### Tabs.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -143,14 +147,14 @@ The component supports both CSS pseudo-classes and data attributes:
 | `onSelectionChange` | `(key: Key) => void` | - | Selection change handler |
 | `className` | `string` | - | Additional CSS classes |
 
-### TabList Props
+### Tabs.List Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `aria-label` | `string` | - | Accessibility label for tab list |
 | `className` | `string` | - | Additional CSS classes |
 
-### Tab Props
+### Tabs.Tab Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -158,7 +162,7 @@ The component supports both CSS pseudo-classes and data attributes:
 | `isDisabled` | `boolean` | `false` | Whether tab is disabled |
 | `className` | `string` | - | Additional CSS classes |
 
-### TabPanel Props
+### Tabs.Panel Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

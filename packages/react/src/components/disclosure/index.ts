@@ -1,5 +1,5 @@
 export {
-  Disclosure,
+  DisclosureRoot,
   DisclosureHeading,
   DisclosureTrigger,
   DisclosureContent,
@@ -8,7 +8,7 @@ export {
 } from "./disclosure";
 
 export type {
-  DisclosureProps,
+  DisclosureRootProps,
   DisclosureHeadingProps,
   DisclosureTriggerProps,
   DisclosureContentProps,
@@ -18,3 +18,5 @@ export type {
 
 export {disclosureVariants} from "./disclosure.styles";
 export type {DisclosureVariants} from "./disclosure.styles";
+
+export * as Disclosure from "./slots";

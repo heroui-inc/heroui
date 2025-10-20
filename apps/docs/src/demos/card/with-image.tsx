@@ -1,11 +1,11 @@
 "use client";
 
-import {Card, CardFooter} from "@heroui/react";
+import {CardFooter, CardRoot} from "@heroui/react";
 
 export function WithImage() {
   return (
     <div className="flex flex-col gap-4 md:flex-row">
-      <Card className="w-[220px] gap-2 p-1">
+      <CardRoot className="w-[220px] gap-2 p-1">
         <img
           alt="Luxury cars collection"
           className="block aspect-square w-full shrink-0 select-none rounded-[calc(theme(--radius-panel)-theme(spacing.1))] object-cover align-middle"
@@ -18,9 +18,9 @@ export function WithImage() {
             18 pictures
           </span>
         </CardFooter>
-      </Card>
+      </CardRoot>
 
-      <Card className="w-[220px] gap-2 p-1">
+      <CardRoot className="w-[220px] gap-2 p-1">
         <img
           alt="Modern office workspace"
           className="block aspect-square w-full shrink-0 select-none rounded-[calc(theme(--radius-panel)-theme(spacing.1))] object-cover align-middle"
@@ -33,7 +33,7 @@ export function WithImage() {
             56 pictures
           </span>
         </CardFooter>
-      </Card>
+      </CardRoot>
     </div>
   );
 }

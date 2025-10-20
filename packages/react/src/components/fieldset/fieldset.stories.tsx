@@ -12,10 +12,10 @@ import {Label} from "../label";
 import {TextField} from "../text-field";
 import {TextArea} from "../textarea";
 
-import {FieldGroup, Fieldset, FieldsetActions, FieldsetLegend} from "./index";
+import {Fieldset} from "./index";
 
-const meta: Meta<typeof Fieldset> = {
-  component: Fieldset,
+const meta: Meta<typeof Fieldset.Root> = {
+  component: Fieldset.Root,
   parameters: {
     layout: "centered",
   },
@@ -24,7 +24,7 @@ const meta: Meta<typeof Fieldset> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Fieldset>;
+type Story = StoryObj<typeof Fieldset.Root>;
 
 export const Default: Story = {
   render: () => {
@@ -43,10 +43,10 @@ export const Default: Story = {
 
     return (
       <Form onSubmit={onSubmit}>
-        <Fieldset className="w-96">
-          <FieldsetLegend>Profile Settings</FieldsetLegend>
+        <Fieldset.Root className="w-96">
+          <Fieldset.Legend>Profile Settings</Fieldset.Legend>
           <Description>Update your profile information.</Description>
-          <FieldGroup>
+          <Fieldset.Group>
             <TextField
               isRequired
               name="name"
@@ -83,8 +83,8 @@ export const Default: Story = {
               <Description>Minimum 10 characters</Description>
               <FieldError />
             </TextField>
-          </FieldGroup>
-          <FieldsetActions>
+          </Fieldset.Group>
+          <Fieldset.Actions>
             <Button type="submit">
               <Icon icon="gravity-ui:floppy-disk" />
               Save changes
@@ -92,8 +92,8 @@ export const Default: Story = {
             <Button type="reset" variant="secondary">
               Cancel
             </Button>
-          </FieldsetActions>
-        </Fieldset>
+          </Fieldset.Actions>
+        </Fieldset.Root>
       </Form>
     );
   },

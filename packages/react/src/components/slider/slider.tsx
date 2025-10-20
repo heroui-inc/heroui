@@ -25,10 +25,15 @@ interface SliderContext {
 const SliderContext = createContext<SliderContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Slider
+ * Slider Root
  * -----------------------------------------------------------------------------------------------*/
-interface SliderProps extends React.ComponentProps<typeof SliderPrimitive>, SliderVariants {}
-const Slider = ({children, className, orientation = "horizontal", ...props}: SliderProps) => {
+interface SliderRootProps extends React.ComponentProps<typeof SliderPrimitive>, SliderVariants {}
+const SliderRoot = ({
+  children,
+  className,
+  orientation = "horizontal",
+  ...props
+}: SliderRootProps) => {
   const slots = React.useMemo(
     () =>
       sliderVariants({
@@ -171,7 +176,7 @@ const SliderMarks = ({className, ...props}: SliderMarksProps) => {
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 export {
-  Slider,
+  SliderRoot,
   SliderHeader,
   SliderLabel,
   SliderOutput,
@@ -182,7 +187,7 @@ export {
 };
 
 export type {
-  SliderProps,
+  SliderRootProps,
   SliderHeaderProps,
   SliderLabelProps,
   SliderOutputProps,

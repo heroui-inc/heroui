@@ -1,11 +1,11 @@
 "use client";
 
-import {Description, Label, Switch, SwitchControl, SwitchThumb} from "@heroui/react";
+import {Description, Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 
 export function WithDescription() {
   return (
     <div className="max-w-sm">
-      <Switch>
+      <SwitchRoot>
         <div className="flex gap-3">
           <SwitchControl>
             <SwitchThumb />
@@ -15,7 +15,7 @@ export function WithDescription() {
             <Description>Allow others to see your profile information</Description>
           </div>
         </div>
-      </Switch>
+      </SwitchRoot>
     </div>
   );
 }

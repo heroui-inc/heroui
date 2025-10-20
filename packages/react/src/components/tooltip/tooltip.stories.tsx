@@ -1,4 +1,3 @@
-import type {TooltipContentProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -6,7 +5,7 @@ import React from "react";
 
 import {Button} from "../button";
 
-import {Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "./index";
+import {Tooltip} from "./index";
 
 export default {
   argTypes: {
@@ -41,41 +40,41 @@ export default {
       ],
     },
   },
-  component: Tooltip,
+  component: Tooltip.Root,
   title: "Components/Overlays/Tooltip",
-} as Meta<typeof Tooltip>;
+} as Meta<typeof Tooltip.Root>;
 
-const defaultArgs: Omit<TooltipContentProps, "children"> = {
+const defaultArgs: Omit<Tooltip.ContentProps, "children"> = {
   showArrow: true,
 };
 
-const Template = (props: TooltipContentProps) => (
+const Template = (props: Tooltip.ContentProps) => (
   <div className="flex items-center gap-3">
-    <Tooltip delay={0}>
+    <Tooltip.Root delay={0}>
       <Button isIconOnly variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
-      <TooltipContent {...props}>
-        <TooltipArrow />
+      <Tooltip.Content {...props}>
+        <Tooltip.Arrow />
         <p>Tooltip content</p>
-      </TooltipContent>
-    </Tooltip>
+      </Tooltip.Content>
+    </Tooltip.Root>
   </div>
 );
 
-const TemplateWithTrigger = (props: TooltipContentProps) => (
+const TemplateWithTrigger = (props: Tooltip.ContentProps) => (
   <div className="flex items-center gap-3">
-    <Tooltip delay={0}>
-      <TooltipTrigger aria-label="Tooltip trigger">
+    <Tooltip.Root delay={0}>
+      <Tooltip.Trigger aria-label="Tooltip trigger">
         <div className="bg-accent-soft rounded-full p-2">
           <Icon icon="gravity-ui:circle-info" />
         </div>
-      </TooltipTrigger>
-      <TooltipContent {...props}>
-        <TooltipArrow />
+      </Tooltip.Trigger>
+      <Tooltip.Content {...props}>
+        <Tooltip.Arrow />
         <p>Tooltip content</p>
-      </TooltipContent>
-    </Tooltip>
+      </Tooltip.Content>
+    </Tooltip.Root>
   </div>
 );
 

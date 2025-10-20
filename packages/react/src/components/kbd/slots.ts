@@ -1,0 +1,9 @@
+export {KbdRoot as Root, KbdAbbr as Abbr, KbdContent as Content} from "./kbd";
+export type {
+  KbdRootProps as RootProps,
+  KbdAbbrProps as AbbrProps,
+  KbdContentProps as ContentProps,
+} from "./kbd";
+
+export {kbdVariants as variants, type KbdVariants as Variants} from "./kbd.styles";
+export {kbdKeysMap, kbdKeysLabelMap, type KbdKey} from "./kbd.constants";

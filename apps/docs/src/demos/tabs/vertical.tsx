@@ -1,10 +1,10 @@
 "use client";
 
-import {Tab, TabIndicator, TabList, TabListWrapper, TabPanel, Tabs} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListWrapper, TabPanel, TabsRoot} from "@heroui/react";
 
 export function Vertical() {
   return (
-    <Tabs className="w-full max-w-lg" orientation="vertical">
+    <TabsRoot className="w-full max-w-lg" orientation="vertical">
       <TabListWrapper>
         <TabList aria-label="Vertical tabs">
           <Tab id="account">
@@ -43,6 +43,6 @@ export function Vertical() {
         <h3 className="mb-2 font-semibold">Billing Information</h3>
         <p className="text-muted text-sm">View and manage your subscription and payment methods.</p>
       </TabPanel>
-    </Tabs>
+    </TabsRoot>
   );
 }

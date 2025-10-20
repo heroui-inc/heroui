@@ -1,16 +1,16 @@
 ---
 title: v3.0.0-alpha.35
-description: Major breaking change - Migrated from dot notation to named exports for React Server Components compatibility.
+description: React Server Components support for compound components, React 19 improvements, and critical bug fixes.
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 19, 2025</span>
+  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 20, 2025</span>
 </div>
 
-This release introduces a **major breaking change**: all compound components have been migrated from dot notation to named exports to ensure full compatibility with React Server Components (RSC).
+This release fixes a critical issue where **compound components didn't work correctly in React Server Components (RSC)**. The component pattern logic has been moved from inside components to their index files, resolving the `"use client"` directive conflicts. Additionally, this release adopts React 19 best practices by removing `forwardRef` and simplifying context usage.
 
 <Callout type="warning">
-  **Breaking Changes:** This release contains significant breaking changes. All compound components now require importing individual component parts instead of using dot notation. See the [Migration Guide](#migration-guide) below for detailed instructions.
+  **Breaking Change:** The main component in compound patterns now requires the `.Root` suffix (e.g., `<Avatar>` becomes `<Avatar.Root>`). Named exports remain unchanged and fully supported.
 </Callout>
 
 ## Installation
@@ -44,49 +44,85 @@ Update to the latest version:
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
 
+## What's New
+
+### React Server Components Support
+
+Compound components now work correctly in React Server Components. The previous implementation had the compound pattern logic inside components, which conflicted with the `"use client"` directive. This has been fixed by moving the pattern logic to component index files.
+
+### React 19 Improvements
+
+This release adopts React 19 best practices:
+
+1. **Removed `forwardRef`**: No longer needed in React 19, where `ref` is now a prop ([React 19 docs](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop))
+2. **Simplified Context**: `Context.Provider` replaced with just `Context` ([React 19 docs](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider))
+
+### Additional Fixes
+
+- Temporarily fixed `forwardRef` issue in the `Calendar` component that occurred when `--turbopack` is not enabled in `next dev`
+
 ## Breaking Changes
 
-### Dot Notation to Named Exports Migration
+### Main Component Requires `.Root` Suffix
 
-All compound components have been migrated from dot notation (e.g., `Card.Header`) to named exports (e.g., `CardHeader`) to ensure compatibility with React Server Components. The `Object.assign` pattern used for dot notation is not supported in RSC environments.
+To support React Server Components, the compound component pattern has been restructured. The main component now requires the `.Root` suffix when using the compound pattern.
 
-#### Why This Change?
+**Before:**
+```tsx
+import { Avatar } from "@heroui/react"
 
-1. **React Server Components Compatibility**: The new pattern works seamlessly with RSC as it doesn't rely on `Object.assign`
-2. **Better Tree Shaking**: Individual exports can be tree-shaken more effectively
-3. **Clearer Imports**: Explicit imports make it clearer which components are being used
-4. **Enhanced Type Safety**: Each component part has its own type definition, improving TypeScript support
+<Avatar>
+  <Avatar.Image src="/images/avatar.jpeg" alt="Junior Garcia" />
+  <Avatar.Fallback>JR</Avatar.Fallback>
+</Avatar>
+```
+
+**After:**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar.Root>
+  <Avatar.Image src="/images/avatar.jpeg" alt="Junior Garcia" />
+  <Avatar.Fallback>JR</Avatar.Fallback>
+</Avatar.Root>
+```
+
+**Note:** Named exports (e.g., `<Avatar>`, `<AvatarImage>`, `<AvatarFallback>`) remain unchanged and fully supported.
 
 #### Affected Components
 
-All 16 compound components have been affected by this change:
+All compound components are affected:
 
-- Accordion
-- Alert
-- Avatar
-- Card
-- Disclosure & DisclosureGroup
-- Fieldset
-- Kbd
-- Link
-- Popover
-- RadioGroup
-- Slider
-- Switch & SwitchGroup
-- Tabs
-- Tooltip
+- `Accordion` → `Accordion.Root`
+- `Alert` → `Alert.Root`
+- `Avatar` → `Avatar.Root`
+- `Card` → `Card.Root`
+- `Disclosure` → `Disclosure.Root`
+- `DisclosureGroup` → `DisclosureGroup.Root`
+- `Fieldset` → `Fieldset.Root`
+- `Kbd` → `Kbd.Root`
+- `Link` → `Link.Root`
+- `Popover` → `Popover.Root`
+- `RadioGroup` → `RadioGroup.Root`
+- `Slider` → `Slider.Root`
+- `Switch` → `Switch.Root`
+- `SwitchGroup` → `SwitchGroup.Root`
+- `Tabs` → `Tabs.Root`
+- `Tooltip` → `Tooltip.Root`
 
 ## Migration Guide
 
-### Before and After Examples
+You have two options for using HeroUI compound components:
 
-#### Card Component
+### Option 1: Update to Use `.Root` (Compound Pattern)
 
-**Before (v3.0.0-alpha.34):**
+If you're using the compound pattern (dot notation), update your code to use `.Root` for the main component:
+
+**Card Example:**
 ```tsx
 import { Card } from "@heroui/react"
 
-<Card>
+<Card.Root>
   <Card.Header>
     <Card.Title>Card Title</Card.Title>
     <Card.Description>Card description</Card.Description>
@@ -97,10 +133,40 @@ import { Card } from "@heroui/react"
   <Card.Footer>
     Card footer
   </Card.Footer>
-</Card>
+</Card.Root>
 ```
 
-**After (v3.0.0-alpha.35):**
+**Tabs Example:**
+```tsx
+import { Tabs } from "@heroui/react"
+
+<Tabs.Root>
+  <Tabs.ListWrapper>
+    <Tabs.List>
+      <Tabs.Tab id="tab1">Tab 1<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.Tab id="tab2">Tab 2<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListWrapper>
+  <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
+  <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
+</Tabs.Root>
+```
+
+**Avatar Example:**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar.Root>
+  <Avatar.Image alt="John Doe" src="..." />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar.Root>
+```
+
+### Option 2: Continue Using Named Exports (Fully Supported)
+
+Keep your existing code unchanged - named exports work exactly as before:
+
+**Card Example:**
 ```tsx
 import {
   Card,
@@ -125,140 +191,139 @@ import {
 </Card>
 ```
 
-#### Tabs Component
-
-**Before:**
+**Tabs Example:**
 ```tsx
-import { Tabs } from "@heroui/react"
+import { Tabs, TabList, TabListWrapper, Tab, TabIndicator, TabPanel } from "@heroui/react"
 
 <Tabs>
-  <Tabs.List>
-    <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
-    <Tabs.Tab id="tab2">Tab 2</Tabs.Tab>
-  </Tabs.List>
-  <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
-  <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
-</Tabs>
-```
-
-**After:**
-```tsx
-import { Tabs, TabList, Tab, TabPanel } from "@heroui/react"
-
-<Tabs>
-  <TabList>
-    <Tab id="tab1">Tab 1</Tab>
-    <Tab id="tab2">Tab 2</Tab>
-  </TabList>
+  <TabListWrapper>
+    <TabList>
+      <Tab id="tab1">Tab 1<TabIndicator /></Tab>
+      <Tab id="tab2">Tab 2<TabIndicator /></Tab>
+    </TabList>
+  </TabListWrapper>
   <TabPanel id="tab1">Panel 1</TabPanel>
   <TabPanel id="tab2">Panel 2</TabPanel>
 </Tabs>
 ```
 
-### Complete Migration Reference
+**Avatar Example:**
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from "@heroui/react"
 
-| Component | Old (Dot Notation) | New (Named Exports) |
-|-----------|-------------------|---------------------|
-| **Accordion** | `Accordion.Item`, `Accordion.Heading`, `Accordion.Trigger`, etc. | `AccordionItem`, `AccordionHeading`, `AccordionTrigger`, etc. |
-| **Alert** | `Alert.Icon`, `Alert.Content`, `Alert.Title`, etc. | `AlertIcon`, `AlertContent`, `AlertTitle`, etc. |
-| **Avatar** | `Avatar.Image`, `Avatar.Fallback` | `AvatarImage`, `AvatarFallback` |
-| **Card** | `Card.Header`, `Card.Title`, `Card.Content`, etc. | `CardHeader`, `CardTitle`, `CardContent`, etc. |
-| **Disclosure** | `Disclosure.Trigger`, `Disclosure.Panel` | `DisclosureTrigger`, `DisclosurePanel` |
-| **Fieldset** | `Fieldset.Legend`, `Fieldset.Group`, etc. | `FieldsetLegend`, `FieldGroup`, etc. |
-| **Kbd** | `Kbd.Abbr`, `Kbd.Key` | `KbdAbbr`, `KbdKey` |
-| **Link** | `Link.Icon` | `LinkIcon` |
-| **Popover** | `Popover.Trigger`, `Popover.Content`, etc. | `PopoverTrigger`, `PopoverContent`, etc. |
-| **RadioGroup** | `RadioGroup.Item`, `RadioGroup.Indicator` | `Radio`, `RadioIndicator` |
-| **Slider** | `Slider.Track`, `Slider.Thumb`, etc. | `SliderTrack`, `SliderThumb`, etc. |
-| **Switch** | `Switch.Control`, `Switch.Thumb` | `SwitchControl`, `SwitchThumb` |
-| **Tabs** | `Tabs.List`, `Tabs.Tab`, `Tabs.Panel` | `TabList`, `Tab`, `TabPanel` |
-| **Tooltip** | `Tooltip.Trigger`, `Tooltip.Content`, etc. | `TooltipTrigger`, `TooltipContent`, etc. |
+<Avatar>
+  <AvatarImage alt="John Doe" src="..." />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
 
 ### Migration Steps
 
-1. **Update all imports** to include the necessary component parts:
+If you're using the compound pattern, you only need to update the main component to use `.Root`:
+
+1. **Find all instances of compound components** (e.g., `<Avatar>` with `<Avatar.Image>` inside)
+
+2. **Add `.Root` to the main component**:
    ```tsx
    // Before
-   import { Card } from "@heroui/react"
+   <Avatar>
+     <Avatar.Image ... />
+   </Avatar>
 
    // After
-   import { Card, CardHeader, CardTitle, CardContent } from "@heroui/react"
+   <Avatar.Root>
+     <Avatar.Image ... />
+   </Avatar.Root>
    ```
 
-2. **Replace all dot notation** with the corresponding named component:
-   ```tsx
-   // Before
-   <Card.Header>
+3. **That's it!** All child components (e.g., `Avatar.Image`, `Avatar.Fallback`) remain unchanged.
 
-   // After
-   <CardHeader>
-   ```
+### Complete Migration Reference
 
-3. **Update TypeScript types** if you're importing them separately:
-   ```tsx
-   import type {
-     CardProps,
-     CardHeaderProps,
-     CardTitleProps,
-     // ... other types
-   } from "@heroui/react"
-   ```
+| Component | Named Export Pattern | Compound Pattern (with `.Root`) |
+|-----------|---------------------|---------------------|
+| **Accordion** | `<Accordion>`, `<AccordionItem>` | `<Accordion.Root>`, `<Accordion.Item>` |
+| **Alert** | `<Alert>`, `<AlertIcon>` | `<Alert.Root>`, `<Alert.Icon>` |
+| **Avatar** | `<Avatar>`, `<AvatarImage>` | `<Avatar.Root>`, `<Avatar.Image>` |
+| **Card** | `<Card>`, `<CardHeader>` | `<Card.Root>`, `<Card.Header>` |
+| **Disclosure** | `<Disclosure>`, `<DisclosureTrigger>` | `<Disclosure.Root>`, `<Disclosure.Trigger>` |
+| **Fieldset** | `<Fieldset>`, `<FieldsetLegend>` | `<Fieldset.Root>`, `<Fieldset.Legend>` |
+| **Kbd** | `<Kbd>`, `<KbdKey>` | `<Kbd.Root>`, `<Kbd.Key>` |
+| **Link** | `<Link>`, `<LinkIcon>` | `<Link.Root>`, `<Link.Icon>` |
+| **Popover** | `<Popover>`, `<PopoverTrigger>` | `<Popover.Root>`, `<Popover.Trigger>` |
+| **RadioGroup** | `<RadioGroup>`, `<Radio>` | `<RadioGroup.Root>`, `<RadioGroup.Item>` |
+| **Slider** | `<Slider>`, `<SliderTrack>` | `<Slider.Root>`, `<Slider.Track>` |
+| **Switch** | `<Switch>`, `<SwitchControl>` | `<Switch.Root>`, `<Switch.Control>` |
+| **Tabs** | `<Tabs>`, `<TabList>` | `<Tabs.Root>`, `<Tabs.List>` |
+| **Tooltip** | `<Tooltip>`, `<TooltipTrigger>` | `<Tooltip.Root>`, `<Tooltip.Trigger>` |
 
 ### Automated Migration
 
-For large codebases, you can use find-and-replace with regular expressions:
+For large codebases using the compound pattern, you can use find-and-replace:
 
 ```bash
-# Example for Card component
-sed -i 's/Card\.Header/CardHeader/g' **/*.tsx
-sed -i 's/Card\.Title/CardTitle/g' **/*.tsx
-sed -i 's/Card\.Description/CardDescription/g' **/*.tsx
-sed -i 's/Card\.Content/CardContent/g' **/*.tsx
-sed -i 's/Card\.Footer/CardFooter/g' **/*.tsx
+# Example for Avatar component
+# Update the main component to use .Root
+sed -i 's/<Avatar>/<Avatar.Root>/g' **/*.tsx
+sed -i 's/<\/Avatar>/<\/Avatar.Root>/g' **/*.tsx
+
+# Repeat for other compound components (Card, Tabs, etc.)
+# Note: This only affects files using the compound pattern
 ```
 
-## Documentation Updates
-
-All documentation has been updated to reflect the new import patterns:
-
-- Component documentation now shows named exports
-- Code examples use the new syntax
-- API references have been updated
-- Handbook and design principles reflect the changes
+**Important:** Be careful with automated replacements. Make sure you're only replacing compound pattern usage, not named exports like `<Avatar>` that should remain `<Avatar>` (not `<Avatar.Root>`).
 
 ## TypeScript Support
 
-All component exports maintain their TypeScript types with improved individual type definitions:
+All component exports maintain their TypeScript types with both patterns:
 
 ```tsx
-// All props types are still exported and now more granular
-import type {
-  AccordionProps,
-  AccordionItemProps,
-  AccordionHeadingProps,
-  AccordionTriggerProps,
-  AccordionIndicatorProps,
-  AccordionPanelProps,
-  AccordionBodyProps,
-} from "@heroui/react"
+// Compound pattern - types are inferred
+import { Avatar } from "@heroui/react"
+<Avatar.Root size="lg">
+  <Avatar.Image ... />
+</Avatar.Root>
+
+// Named exports - types work as before
+import type { AvatarProps } from "@heroui/react"
+import { Avatar } from "@heroui/react"
+const props: AvatarProps = { size: "lg" }
 ```
+
+## Why This Change?
+
+This change was necessary to fix React Server Components compatibility. The previous implementation had architectural limitations:
+
+1. **RSC Compatibility**: Compound pattern logic conflicted with `"use client"` directives
+2. **React 19 Readiness**: Removes deprecated patterns like `forwardRef` and `Context.Provider`
+3. **Cleaner Architecture**: Pattern logic is now in index files, not component files
+4. **Better Separation**: Server and client components can now work together seamlessly
+
+## Documentation Updates
+
+Component documentation will be updated to reflect the new patterns:
+
+- Examples will show the compound pattern with `.Root`
+- Named export examples remain valid and supported
+- Migration guides will help you transition smoothly
+- Both patterns are fully supported and work identically
 
 ## Need Help?
 
 If you encounter any issues during migration:
 
-1. Ensure all component parts are imported
-2. Verify no dot notation remains in your code
-3. Check that component names match the new pattern
-4. Review the [full migration guide](https://github.com/heroui-inc/heroui/blob/v3/MIGRATION_DOT_NOTATION.md)
-5. Report issues at: [GitHub Issues](https://github.com/heroui-inc/heroui/issues)
+1. **Compound pattern users**: Update the main component to use `.Root` (e.g., `<Avatar>` → `<Avatar.Root>`)
+2. **Named export users**: No changes needed - your code continues to work as-is
+3. Check the component documentation for examples
+4. Report issues at: [GitHub Issues](https://github.com/heroui-inc/heroui/issues)
 
 ## Links
 
-- [Full Migration Guide](https://github.com/heroui-inc/heroui/blob/v3/MIGRATION_DOT_NOTATION.md)
-- [React Server Components Documentation](https://react.dev/reference/rsc/server-components)
-- [GitHub PR](https://github.com/heroui-inc/heroui/pull/XXXX)
+- [Component Documentation](https://heroui.com/docs/components)
+- [React Server Components](https://react.dev/reference/rsc/server-components)
+- [React 19 Release](https://react.dev/blog/2024/12/05/react-19)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
 
 ## Contributors
 
-Thanks to everyone who contributed to this release and helped with the migration to React Server Components compatibility!
+Thanks to everyone who contributed to this release, improving React Server Components support and React 19 compatibility!

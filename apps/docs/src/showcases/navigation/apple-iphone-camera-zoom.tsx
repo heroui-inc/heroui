@@ -2,7 +2,7 @@
 
 import type {Key} from "react-aria-components";
 
-import {Tab, TabIndicator, TabList, TabListWrapper, Tabs} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListWrapper, TabsRoot} from "@heroui/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
 
@@ -53,7 +53,7 @@ export default function AppleIPhoneCameraZoom() {
             />
           ))}
         </div>
-        <Tabs defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
+        <TabsRoot defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
           <TabListWrapper className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
             <TabList
               aria-label="Camera zoom options"
@@ -71,7 +71,7 @@ export default function AppleIPhoneCameraZoom() {
               ))}
             </TabList>
           </TabListWrapper>
-        </Tabs>
+        </TabsRoot>
         <div className="relative h-10 w-10">
           {Object.keys(zoomXMap).map((key) => (
             <p

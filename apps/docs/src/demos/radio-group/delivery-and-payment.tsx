@@ -6,7 +6,7 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
@@ -69,7 +69,7 @@ export function DeliveryAndPayment() {
       }}
     >
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroup defaultValue="express" name="delivery">
+        <RadioGroupRoot defaultValue="express" name="delivery">
           <Label>Delivery method</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
@@ -94,10 +94,10 @@ export function DeliveryAndPayment() {
               </Radio>
             ))}
           </div>
-        </RadioGroup>
+        </RadioGroupRoot>
       </section>
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroup defaultValue="visa" name="payment">
+        <RadioGroupRoot defaultValue="visa" name="payment">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Label>Payment method</Label>
           </div>
@@ -124,7 +124,7 @@ export function DeliveryAndPayment() {
               </Radio>
             ))}
           </div>
-        </RadioGroup>
+        </RadioGroupRoot>
       </section>
     </div>
   );

@@ -2,18 +2,18 @@
 
 import {
   Button,
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
+  CardRoot,
   CardTitle,
-  Link,
+  LinkRoot,
 } from "@heroui/react";
 
 export function WithForm() {
   return (
-    <Card className="w-full max-w-md">
+    <CardRoot className="w-full max-w-md">
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>Enter your credentials to access your account</CardDescription>
@@ -46,10 +46,10 @@ export function WithForm() {
       </CardContent>
       <CardFooter className="flex flex-col gap-2">
         <Button className="w-full">Sign In</Button>
-        <Link className="text-center text-sm" href="#">
+        <LinkRoot className="text-center text-sm" href="#">
           Forgot password?
-        </Link>
+        </LinkRoot>
       </CardFooter>
-    </Card>
+    </CardRoot>
   );
 }

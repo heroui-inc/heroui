@@ -19,12 +19,18 @@ interface SwitchGroupContext {
 const SwitchGroupContext = createContext<SwitchGroupContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * SwitchGroup
+ * SwitchGroup Root
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchGroupProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {
+interface SwitchGroupRootProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {
   ref?: React.Ref<HTMLDivElement>;
 }
-const SwitchGroup = ({children, className, orientation, ref, ...props}: SwitchGroupProps) => {
+const SwitchGroupRoot = ({
+  children,
+  className,
+  orientation,
+  ref,
+  ...props
+}: SwitchGroupRootProps) => {
   const slots = React.useMemo(() => switchGroupVariants({orientation}), [orientation]);
 
   return (
@@ -61,10 +67,10 @@ interface SwitchContext {
 }
 const SwitchContext = createContext<SwitchContext>({});
 
-interface SwitchProps extends SwitchPrimitiveProps, SwitchVariants {
+interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {
   ref?: React.Ref<HTMLLabelElement>;
 }
-const Switch = ({children, className, ref, ...originalProps}: SwitchProps) => {
+const SwitchRoot = ({children, className, ref, ...originalProps}: SwitchRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
   const slots = React.useMemo(
     () => switchVariants({...(variantProps as SwitchVariants)}),
@@ -130,11 +136,11 @@ const SwitchIcon = ({children, className, ref, ...props}: SwitchIconProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {SwitchGroup, SwitchGroupItems, Switch, SwitchControl, SwitchThumb, SwitchIcon};
+export {SwitchGroupRoot, SwitchGroupItems, SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon};
 export type {
-  SwitchGroupProps,
+  SwitchGroupRootProps,
   SwitchGroupItemsProps,
-  SwitchProps,
+  SwitchRootProps,
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,

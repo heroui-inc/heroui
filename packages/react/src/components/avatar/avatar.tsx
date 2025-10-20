@@ -17,12 +17,13 @@ const AvatarContext = createContext<{
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Avatar
+ * Avatar Root
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarProps
+interface AvatarRootProps
   extends Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, "color">,
     AvatarVariants {}
-const Avatar = ({children, className, color, size, ...props}: AvatarProps) => {
+
+const AvatarRoot = ({children, className, color, size, ...props}: AvatarRootProps) => {
   const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
 
   return (
@@ -106,5 +107,5 @@ const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {AvatarProps, AvatarImageProps, AvatarFallbackProps};
-export {Avatar, AvatarImage, AvatarFallback};
+export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};
+export {AvatarRoot, AvatarImage, AvatarFallback};

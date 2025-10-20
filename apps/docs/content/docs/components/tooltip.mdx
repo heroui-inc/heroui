@@ -12,12 +12,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipArrow
-} from '@heroui/react';
+import { Tooltip } from '@heroui/react';
 ```
 
 ### Usage
@@ -28,26 +23,21 @@ import {
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Tooltip component and access all parts using dot notation.
 
 ```tsx
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipArrow
-} from '@heroui/react';
+import { Tooltip } from '@heroui/react';
 
 export default () => (
-  <Tooltip>
-    <TooltipTrigger>
+  <Tooltip.Root>
+    <Tooltip.Trigger>
       <button>Hover for tooltip</button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <TooltipArrow />
+    </Tooltip.Trigger>
+    <Tooltip.Content>
+      <Tooltip.Arrow />
       Helpful information about this element
-    </TooltipContent>
-  </Tooltip>
+    </Tooltip.Content>
+  </Tooltip.Root>
 )
 ```
 
@@ -74,23 +64,18 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  Button
-} from '@heroui/react';
+import { Tooltip, Button } from '@heroui/react';
 
 function CustomTooltip() {
   return (
-    <Tooltip>
-      <TooltipTrigger>
+    <Tooltip.Root>
+      <Tooltip.Trigger>
         <Button>Hover me</Button>
-      </TooltipTrigger>
-      <TooltipContent className="bg-accent text-accent-foreground">
+      </Tooltip.Trigger>
+      <Tooltip.Content className="bg-accent text-accent-foreground">
         <p>Custom styled tooltip</p>
-      </TooltipContent>
-    </Tooltip>
+      </Tooltip.Content>
+    </Tooltip.Root>
   );
 }
 ```
@@ -132,7 +117,7 @@ The component supports animation states:
 
 ## API Reference
 
-### Tooltip Props
+### Tooltip.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -142,7 +127,7 @@ The component supports animation states:
 | `trigger` | `"hover" \| "focus"` | `"hover"` | How the tooltip is triggered |
 | `isDisabled` | `boolean` | `false` | Whether the tooltip is disabled |
 
-### TooltipContent Props
+### Tooltip.Content Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -152,14 +137,14 @@ The component supports animation states:
 | `placement` | `"top" \| "bottom" \| "left" \| "right"` (and variants) | `"top"` | Placement of the tooltip |
 | `className` | `string` | - | Additional CSS classes |
 
-### TooltipTrigger Props
+### Tooltip.Trigger Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Element that triggers the tooltip |
 | `className` | `string` | - | Additional CSS classes |
 
-### TooltipArrow Props
+### Tooltip.Arrow Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

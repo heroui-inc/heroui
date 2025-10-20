@@ -1,7 +1,7 @@
-export {Tabs, TabListWrapper, TabList, Tab, TabIndicator, TabPanel} from "./tabs";
+export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel} from "./tabs";
 
 export type {
-  TabsProps,
+  TabsRootProps,
   TabListWrapperProps,
   TabListProps,
   TabProps,
@@ -10,3 +10,5 @@ export type {
 } from "./tabs";
 
 export {tabsVariants, type TabsVariants} from "./tabs.styles";
+
+export * as Tabs from "./slots";

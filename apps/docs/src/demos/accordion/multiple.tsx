@@ -1,18 +1,18 @@
 "use client";
 
 import {
-  Accordion,
   AccordionBody,
   AccordionHeading,
   AccordionIndicator,
   AccordionItem,
   AccordionPanel,
+  AccordionRoot,
   AccordionTrigger,
 } from "@heroui/react";
 
 export function Multiple() {
   return (
-    <Accordion allowsMultipleExpanded className="w-full max-w-md">
+    <AccordionRoot allowsMultipleExpanded className="w-full max-w-md">
       <AccordionItem>
         <AccordionHeading>
           <AccordionTrigger>
@@ -72,6 +72,6 @@ export function Multiple() {
           </AccordionBody>
         </AccordionPanel>
       </AccordionItem>
-    </Accordion>
+    </AccordionRoot>
   );
 }

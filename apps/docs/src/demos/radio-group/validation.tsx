@@ -9,7 +9,7 @@ import {
   Radio,
   RadioContent,
   RadioControl,
-  RadioGroup,
+  RadioGroupRoot,
   RadioIndicator,
 } from "@heroui/react";
 import React from "react";
@@ -29,7 +29,7 @@ export function Validation() {
         setMessage(`Your chosen plan is: ${value}`);
       }}
     >
-      <RadioGroup isRequired name="plan-validation">
+      <RadioGroupRoot isRequired name="plan-validation">
         <Label>Subscription plan</Label>
         <Radio value="starter">
           <RadioControl>
@@ -59,7 +59,7 @@ export function Validation() {
           </RadioContent>
         </Radio>
         <FieldError>Choose a subscription before continuing.</FieldError>
-      </RadioGroup>
+      </RadioGroupRoot>
       <Button className="mt-2 w-fit" type="submit">
         Submit
       </Button>

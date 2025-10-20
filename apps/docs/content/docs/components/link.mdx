@@ -13,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import { Link, LinkIcon } from '@heroui/react';
+import { Link } from '@heroui/react';
 ```
 
 ### Usage
@@ -24,16 +24,16 @@ import { Link, LinkIcon } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Link component and access all parts using dot notation.
 
 ```tsx
-import {Link, LinkIcon} from '@heroui/react';
+import { Link } from '@heroui/react';
 
 export default () => (
-  <Link href="#">
+  <Link.Root href="#">
     Call to action
-    <LinkIcon />
-  </Link>
+    <Link.Icon />
+  </Link.Root>
 );
 ```
 
@@ -54,16 +54,16 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {Link} from '@heroui/react';
+import { Link } from '@heroui/react';
 
 function CustomLink() {
   return (
-    <Link
+    <Link.Root
       href="#"
       className="text-lg font-bold text-accent hover:text-accent/80"
     >
       Custom styled link
-    </Link>
+    </Link.Root>
   );
 }
 ```
@@ -99,7 +99,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Link Props
+### Link.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -113,7 +113,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `onPress` | `(e: PressEvent) => void` | - | Fired when the link is activated |
 | `autoFocus` | `boolean` | - | Whether the element should receive focus on render |
 
-### LinkIcon Props
+### Link.Icon Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
