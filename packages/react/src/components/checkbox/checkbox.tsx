@@ -115,8 +115,20 @@ const CheckboxIndicator = React.forwardRef<HTMLSpanElement, CheckboxIndicatorPro
   ({children, className, ...props}, ref) => {
     const {slots, state} = useContext(CheckboxContext);
 
+    const isIndeterminate = state?.isIndeterminate;
+
     const content =
-      typeof children === "function" ? children(state ?? ({} as CheckboxRenderProps)) : children;
+      typeof children === "function"
+        ? children(state ?? ({} as CheckboxRenderProps))
+        : (children ?? (
+            <svg aria-hidden="true" viewBox="0 0 18 18">
+              {isIndeterminate ? (
+                <rect height={3} width={15} x={1} y={7.5} />
+              ) : (
+                <polyline points="1 9 7 14 15 4" />
+              )}
+            </svg>
+          ));
 
     return (
       <span
