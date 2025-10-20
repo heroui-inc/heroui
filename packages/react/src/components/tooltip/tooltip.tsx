@@ -26,10 +26,7 @@ const TooltipContext = createContext<{
  * Tooltip
  * -----------------------------------------------------------------------------------------------*/
 
-const TooltipRoot = ({
-  children,
-  ...props
-}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
+const Tooltip = ({children, ...props}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   return (
@@ -41,7 +38,7 @@ const TooltipRoot = ({
   );
 };
 
-TooltipRoot.displayName = "HeroUI.Tooltip";
+Tooltip.displayName = "HeroUI.Tooltip";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -132,11 +129,6 @@ TooltipTrigger.displayName = "HeroUI.TooltipTrigger";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundTooltip = Object.assign(TooltipRoot, {
-  Trigger: TooltipTrigger,
-  Content: TooltipContent,
-  Arrow: TooltipArrow,
-});
+export {Tooltip, TooltipTrigger, TooltipContent, TooltipArrow};
 
-export default CompoundTooltip;
 export type {TooltipProps, TooltipContentProps, TooltipTriggerProps};

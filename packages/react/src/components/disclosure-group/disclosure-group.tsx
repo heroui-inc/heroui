@@ -51,5 +51,9 @@ const DisclosureGroup = React.forwardRef<
 
 DisclosureGroup.displayName = "HeroUI.DisclosureGroup";
 
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+
 export type {DisclosureGroupProps};
-export default DisclosureGroup;
+export {DisclosureGroup};

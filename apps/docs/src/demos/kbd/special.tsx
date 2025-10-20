@@ -1,6 +1,6 @@
 "use client";
 
-import {Kbd} from "@heroui/react";
+import {Kbd, KbdAbbr} from "@heroui/react";
 
 export function SpecialKeys() {
   return (
@@ -8,30 +8,30 @@ export function SpecialKeys() {
       <p className="text-sm">
         Press{" "}
         <Kbd>
-          <Kbd.Abbr keyValue="enter" />
+          <KbdAbbr keyValue="enter" />
         </Kbd>{" "}
         to confirm or{" "}
         <Kbd>
-          <Kbd.Abbr keyValue="escape" />
+          <KbdAbbr keyValue="escape" />
         </Kbd>{" "}
         to cancel.
       </p>
       <p className="text-sm">
         Use{" "}
         <Kbd>
-          <Kbd.Abbr keyValue="tab" />
+          <KbdAbbr keyValue="tab" />
         </Kbd>{" "}
         to navigate between form fields and{" "}
         <Kbd>
-          <Kbd.Abbr keyValue="shift" />
-          <Kbd.Abbr keyValue="tab" />
+          <KbdAbbr keyValue="shift" />
+          <KbdAbbr keyValue="tab" />
         </Kbd>{" "}
         to go back.
       </p>
       <p className="text-sm">
         Hold{" "}
         <Kbd>
-          <Kbd.Abbr keyValue="space" />
+          <KbdAbbr keyValue="space" />
         </Kbd>{" "}
         to temporarily enable panning mode.
       </p>

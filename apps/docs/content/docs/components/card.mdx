@@ -10,7 +10,14 @@ links:
 ## Import
 
 ```tsx
-import {Card} from "@heroui/react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "@heroui/react";
 ```
 
 ### Usage
@@ -24,16 +31,23 @@ import {Card} from "@heroui/react";
 Import all parts and piece them together.
 
 ```tsx
-import {Card} from "@heroui/react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "@heroui/react";
 
 export default () => (
   <Card>
-    <Card.Header>
-      <Card.Title />
-      <Card.Description />
-    </Card.Header>
-    <Card.Content />
-    <Card.Footer />
+    <CardHeader>
+      <CardTitle />
+      <CardDescription />
+    </CardHeader>
+    <CardContent />
+    <CardFooter />
   </Card>
 );
 ```
@@ -79,15 +93,15 @@ export default () => (
 ```tsx
 // Semantic markup
 <Card role="article" aria-labelledby="card-title">
-  <Card.Header>
-    <Card.Title id="card-title">Article Title</Card.Title>
-  </Card.Header>
+  <CardHeader>
+    <CardTitle id="card-title">Article Title</CardTitle>
+  </CardHeader>
 </Card>
 
 // Interactive cards
 <Card asChild>
   <a href="/details" aria-label="View product details">
-    <Card.Title>Product Name</Card.Title>
+    <CardTitle>Product Name</CardTitle>
   </a>
 </Card>
 ```
@@ -98,13 +112,13 @@ export default () => (
 
 ```tsx
 <Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
-  <Card.Header>
-    <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
-    <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
-  </Card.Header>
-  <Card.Content>
+  <CardHeader>
+    <CardTitle className="text-blue-900">Custom Styled Card</CardTitle>
+    <CardDescription className="text-blue-700">Custom colors applied</CardDescription>
+  </CardHeader>
+  <CardContent>
     <p className="text-blue-800">Content with custom styling</p>
-  </Card.Content>
+  </CardContent>
 </Card>
 ```
 
@@ -154,7 +168,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |
 
-### Card.Header
+### CardHeader
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
@@ -162,7 +176,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Header content            |
 
-### Card.Title
+### CardTitle
 
 | Prop        | Type              | Default | Description                      |
 | ----------- | ----------------- | ------- | -------------------------------- |
@@ -170,7 +184,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes           |
 | `children`  | `React.ReactNode` | -       | Title content (renders as `h3`) |
 
-### Card.Description
+### CardDescription
 
 | Prop        | Type              | Default | Description                     |
 | ----------- | ----------------- | ------- | ------------------------------- |
@@ -178,7 +192,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes          |
 | `children`  | `React.ReactNode` | -       | Description content (renders as `p`) |
 
-### Card.Content
+### CardContent
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
@@ -186,7 +200,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Main content              |
 
-### Card.Footer
+### CardFooter
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |

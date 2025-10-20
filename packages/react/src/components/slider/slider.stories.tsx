@@ -2,7 +2,16 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Slider} from "./index";
+import {
+  Slider,
+  SliderFill,
+  SliderHeader,
+  SliderLabel,
+  SliderMarks,
+  SliderOutput,
+  SliderThumb,
+  SliderTrack,
+} from "./index";
 
 const meta: Meta<typeof Slider> = {
   argTypes: {
@@ -37,14 +46,14 @@ export const Default: Story = {
     <Slider defaultValue={50} {...args}>
       {({state}) => (
         <>
-          <Slider.Header>
-            <Slider.Label>Title</Slider.Label>
-            <Slider.Output />
-          </Slider.Header>
-          <Slider.Track>
-            <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-            <Slider.Thumb />
-          </Slider.Track>
+          <SliderHeader>
+            <SliderLabel>Title</SliderLabel>
+            <SliderOutput />
+          </SliderHeader>
+          <SliderTrack>
+            <SliderFill percentage={state.getThumbPercent(0) * 100} />
+            <SliderThumb />
+          </SliderTrack>
         </>
       )}
     </Slider>
@@ -59,14 +68,14 @@ export const Disabled: Story = {
     <Slider defaultValue={30} {...args}>
       {({state}) => (
         <>
-          <Slider.Header>
-            <Slider.Label>Title</Slider.Label>
-            <Slider.Output />
-          </Slider.Header>
-          <Slider.Track>
-            <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-            <Slider.Thumb />
-          </Slider.Track>
+          <SliderHeader>
+            <SliderLabel>Title</SliderLabel>
+            <SliderOutput />
+          </SliderHeader>
+          <SliderTrack>
+            <SliderFill percentage={state.getThumbPercent(0) * 100} />
+            <SliderThumb />
+          </SliderTrack>
         </>
       )}
     </Slider>
@@ -78,19 +87,19 @@ export const WithMarks: Story = {
     <Slider defaultValue={50} step={25}>
       {({state}) => (
         <>
-          <Slider.Header>
-            <Slider.Label>Title</Slider.Label>
-            <Slider.Output />
-          </Slider.Header>
-          <Slider.Track>
-            <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-            <Slider.Thumb />
-          </Slider.Track>
-          <Slider.Marks>
+          <SliderHeader>
+            <SliderLabel>Title</SliderLabel>
+            <SliderOutput />
+          </SliderHeader>
+          <SliderTrack>
+            <SliderFill percentage={state.getThumbPercent(0) * 100} />
+            <SliderThumb />
+          </SliderTrack>
+          <SliderMarks>
             <span>20%</span>
             <span>50%</span>
             <span>80%</span>
-          </Slider.Marks>
+          </SliderMarks>
         </>
       )}
     </Slider>
@@ -103,25 +112,25 @@ export const Range: Story = {
 
     return (
       <Slider value={value} onChange={(newValue) => setValue(newValue as number[])}>
-        <Slider.Header>
-          <Slider.Label>Title</Slider.Label>
-          <Slider.Output />
-        </Slider.Header>
-        <Slider.Track>
-          <Slider.Fill
+        <SliderHeader>
+          <SliderLabel>Title</SliderLabel>
+          <SliderOutput />
+        </SliderHeader>
+        <SliderTrack>
+          <SliderFill
             style={{
               left: `${value[0] ?? 0}%`,
               width: `${(value[1] ?? 0) - (value[0] ?? 0)}%`,
             }}
           />
-          <Slider.Thumb index={0} />
-          <Slider.Thumb index={1} />
-        </Slider.Track>
-        <Slider.Marks>
+          <SliderThumb index={0} />
+          <SliderThumb index={1} />
+        </SliderTrack>
+        <SliderMarks>
           <span>20%</span>
           <span>50%</span>
           <span>80%</span>
-        </Slider.Marks>
+        </SliderMarks>
       </Slider>
     );
   },
@@ -134,14 +143,14 @@ export const Controlled: Story = {
     return (
       <div className="space-y-4">
         <Slider value={value} onChange={(newValue) => setValue(newValue as number)}>
-          <Slider.Header>
-            <Slider.Label>Price</Slider.Label>
-            <Slider.Output />
-          </Slider.Header>
-          <Slider.Track>
-            <Slider.Fill percentage={value} />
-            <Slider.Thumb />
-          </Slider.Track>
+          <SliderHeader>
+            <SliderLabel>Price</SliderLabel>
+            <SliderOutput />
+          </SliderHeader>
+          <SliderTrack>
+            <SliderFill percentage={value} />
+            <SliderThumb />
+          </SliderTrack>
         </Slider>
         <p className="text-gray-11 text-sm">External value: {value}</p>
       </div>
@@ -157,14 +166,14 @@ export const Examples: Story = {
         <Slider defaultValue={50} maxValue={100000}>
           {({state}) => (
             <>
-              <Slider.Header>
-                <Slider.Label>Price</Slider.Label>
-                <Slider.Output />
-              </Slider.Header>
-              <Slider.Track>
-                <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-                <Slider.Thumb />
-              </Slider.Track>
+              <SliderHeader>
+                <SliderLabel>Price</SliderLabel>
+                <SliderOutput />
+              </SliderHeader>
+              <SliderTrack>
+                <SliderFill percentage={state.getThumbPercent(0) * 100} />
+                <SliderThumb />
+              </SliderTrack>
             </>
           )}
         </Slider>
@@ -179,14 +188,14 @@ export const Examples: Story = {
         >
           {({state}) => (
             <>
-              <Slider.Header>
-                <Slider.Label>Price</Slider.Label>
-                <Slider.Output />
-              </Slider.Header>
-              <Slider.Track>
-                <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-                <Slider.Thumb />
-              </Slider.Track>
+              <SliderHeader>
+                <SliderLabel>Price</SliderLabel>
+                <SliderOutput />
+              </SliderHeader>
+              <SliderTrack>
+                <SliderFill percentage={state.getThumbPercent(0) * 100} />
+                <SliderThumb />
+              </SliderTrack>
             </>
           )}
         </Slider>
@@ -207,19 +216,19 @@ export const SingleWithMarks: Story = {
         value={value}
         onChange={(newValue) => setValue(newValue as number)}
       >
-        <Slider.Header>
-          <Slider.Label>Title</Slider.Label>
-          <Slider.Output />
-        </Slider.Header>
-        <Slider.Track>
-          <Slider.Fill percentage={value} />
-          <Slider.Thumb />
-        </Slider.Track>
-        <Slider.Marks>
+        <SliderHeader>
+          <SliderLabel>Title</SliderLabel>
+          <SliderOutput />
+        </SliderHeader>
+        <SliderTrack>
+          <SliderFill percentage={value} />
+          <SliderThumb />
+        </SliderTrack>
+        <SliderMarks>
           <span>20%</span>
           <span>50%</span>
           <span>80%</span>
-        </Slider.Marks>
+        </SliderMarks>
       </Slider>
     );
   },
@@ -237,12 +246,12 @@ export const Vertical: Story = {
     <Slider className="h-full" defaultValue={60} orientation="vertical">
       {({state}) => (
         <>
-          <Slider.Label>Volume</Slider.Label>
-          <Slider.Output />
-          <Slider.Track>
-            <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-            <Slider.Thumb />
-          </Slider.Track>
+          <SliderLabel>Volume</SliderLabel>
+          <SliderOutput />
+          <SliderTrack>
+            <SliderFill percentage={state.getThumbPercent(0) * 100} />
+            <SliderThumb />
+          </SliderTrack>
         </>
       )}
     </Slider>
@@ -254,14 +263,14 @@ export const WithSteps: Story = {
     <Slider defaultValue={50} maxValue={100} minValue={0} step={10}>
       {({state}) => (
         <>
-          <Slider.Header>
-            <Slider.Label>Quality</Slider.Label>
-            <Slider.Output />
-          </Slider.Header>
-          <Slider.Track>
-            <Slider.Fill percentage={state.getThumbPercent(0) * 100} />
-            <Slider.Thumb />
-          </Slider.Track>
+          <SliderHeader>
+            <SliderLabel>Quality</SliderLabel>
+            <SliderOutput />
+          </SliderHeader>
+          <SliderTrack>
+            <SliderFill percentage={state.getThumbPercent(0) * 100} />
+            <SliderThumb />
+          </SliderTrack>
           <div className="text-gray-11 mt-1 flex justify-between text-xs">
             {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((mark) => (
               <span key={mark} className="w-0">

@@ -1,6 +1,14 @@
 "use client";
 
-import {Accordion} from "@heroui/react";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeading,
+  AccordionIndicator,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 const items = [
@@ -45,22 +53,22 @@ export function Basic() {
   return (
     <Accordion className="w-full max-w-md">
       {items.map((item, index) => (
-        <Accordion.Item key={index}>
-          <Accordion.Heading>
-            <Accordion.Trigger>
+        <AccordionItem key={index}>
+          <AccordionHeading>
+            <AccordionTrigger>
               {item.icon ? (
                 <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
               ) : null}
               {item.title}
-              <Accordion.Indicator>
+              <AccordionIndicator>
                 <Icon icon="gravity-ui:chevron-down" />
-              </Accordion.Indicator>
-            </Accordion.Trigger>
-          </Accordion.Heading>
-          <Accordion.Panel>
-            <Accordion.Body>{item.content}</Accordion.Body>
-          </Accordion.Panel>
-        </Accordion.Item>
+              </AccordionIndicator>
+            </AccordionTrigger>
+          </AccordionHeading>
+          <AccordionPanel>
+            <AccordionBody>{item.content}</AccordionBody>
+          </AccordionPanel>
+        </AccordionItem>
       ))}
     </Accordion>
   );

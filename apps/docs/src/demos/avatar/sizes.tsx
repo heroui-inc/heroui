@@ -1,30 +1,30 @@
 "use client";
 
-import {Avatar} from "@heroui/react";
+import {Avatar, AvatarFallback, AvatarImage} from "@heroui/react";
 
 export function Sizes() {
   return (
     <div className="flex items-center gap-4">
       <Avatar size="sm">
-        <Avatar.Image
+        <AvatarImage
           alt="Small Avatar"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
         />
-        <Avatar.Fallback>SM</Avatar.Fallback>
+        <AvatarFallback>SM</AvatarFallback>
       </Avatar>
       <Avatar size="md">
-        <Avatar.Image
+        <AvatarImage
           alt="Medium Avatar"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
         />
-        <Avatar.Fallback>MD</Avatar.Fallback>
+        <AvatarFallback>MD</AvatarFallback>
       </Avatar>
       <Avatar size="lg">
-        <Avatar.Image
+        <AvatarImage
           alt="Large Avatar"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
         />
-        <Avatar.Fallback>LG</Avatar.Fallback>
+        <AvatarFallback>LG</AvatarFallback>
       </Avatar>
     </div>
   );

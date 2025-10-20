@@ -36,9 +36,9 @@ const SliderContext = createContext<SliderContext>({});
  * Slider
  * -----------------------------------------------------------------------------------------------*/
 
-interface SliderRootProps extends SliderPrimitiveProps, SliderVariants {}
+interface SliderProps extends SliderPrimitiveProps, SliderVariants {}
 
-const SliderRoot = React.forwardRef<React.ComponentRef<typeof SliderPrimitive>, SliderRootProps>(
+const Slider = React.forwardRef<React.ComponentRef<typeof SliderPrimitive>, SliderProps>(
   ({children, className, orientation = "horizontal", ...props}, ref) => {
     const slots = React.useMemo(
       () =>
@@ -65,7 +65,7 @@ const SliderRoot = React.forwardRef<React.ComponentRef<typeof SliderPrimitive>, 
   },
 );
 
-SliderRoot.displayName = "HeroUI.Slider";
+Slider.displayName = "HeroUI.Slider";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Header
@@ -83,7 +83,7 @@ const SliderHeader = React.forwardRef<HTMLDivElement, SliderHeaderProps>(
   },
 );
 
-SliderHeader.displayName = "HeroUI.Slider.Header";
+SliderHeader.displayName = "HeroUI.SliderHeader";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Label
@@ -106,7 +106,7 @@ const SliderLabel = React.forwardRef<React.ComponentRef<typeof LabelPrimitive>, 
   },
 );
 
-SliderLabel.displayName = "HeroUI.Slider.Label";
+SliderLabel.displayName = "HeroUI.SliderLabel";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Output
@@ -130,7 +130,7 @@ const SliderOutput = React.forwardRef<
   );
 });
 
-SliderOutput.displayName = "HeroUI.Slider.Output";
+SliderOutput.displayName = "HeroUI.SliderOutput";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Track
@@ -157,7 +157,7 @@ const SliderTrack = React.forwardRef<
   );
 });
 
-SliderTrack.displayName = "HeroUI.Slider.Track";
+SliderTrack.displayName = "HeroUI.SliderTrack";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
@@ -193,7 +193,7 @@ const SliderFill = React.forwardRef<HTMLDivElement, SliderFillProps>(
   },
 );
 
-SliderFill.displayName = "HeroUI.Slider.Fill";
+SliderFill.displayName = "HeroUI.SliderFill";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Thumb
@@ -219,7 +219,7 @@ const SliderThumb = React.forwardRef<
   );
 });
 
-SliderThumb.displayName = "HeroUI.Slider.Thumb";
+SliderThumb.displayName = "HeroUI.SliderThumb";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Marks
@@ -237,25 +237,43 @@ const SliderMarks = React.forwardRef<HTMLDivElement, SliderMarksProps>(
   },
 );
 
-SliderMarks.displayName = "HeroUI.Slider.Marks";
+SliderMarks.displayName = "HeroUI.SliderMarks";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const CompoundSlider = Object.assign(SliderRoot, {
-  Header: SliderHeader,
-  Label: SliderLabel,
-  Output: SliderOutput,
-  Track: SliderTrack,
-  Fill: SliderFill,
-  Thumb: SliderThumb,
-  Marks: SliderMarks,
-});
+const Root = Slider;
+const Header = SliderHeader;
+const Label = SliderLabel;
+const Output = SliderOutput;
+const Track = SliderTrack;
+const Fill = SliderFill;
+const Thumb = SliderThumb;
+const Marks = SliderMarks;
+
+export {
+  Slider,
+  SliderHeader,
+  SliderLabel,
+  SliderOutput,
+  SliderTrack,
+  SliderFill,
+  SliderThumb,
+  SliderMarks,
+  // named exports
+  Root,
+  Header,
+  Label,
+  Output,
+  Track,
+  Fill,
+  Thumb,
+  Marks,
+};
 
 export type {
-  SliderRootProps,
-  SliderRootProps as SliderProps,
+  SliderProps,
   SliderHeaderProps,
   SliderLabelProps,
   SliderOutputProps,
@@ -264,5 +282,3 @@ export type {
   SliderThumbProps,
   SliderMarksProps,
 };
-
-export default CompoundSlider;

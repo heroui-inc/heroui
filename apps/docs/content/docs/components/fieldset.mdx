@@ -11,7 +11,12 @@ links:
 ## Import
 
 ```tsx
-import { Fieldset } from '@heroui/react';
+import {
+  Fieldset,
+  FieldsetLegend,
+  FieldGroup,
+  FieldsetActions
+} from '@heroui/react';
 ```
 
 ### Usage
@@ -23,17 +28,22 @@ import { Fieldset } from '@heroui/react';
 Import all parts and piece them together.
 
 ```tsx
-import {Fieldset} from '@heroui/react';
+import {
+  Fieldset,
+  FieldsetLegend,
+  FieldGroup,
+  FieldsetActions
+} from '@heroui/react';
 
 export default () => (
   <Fieldset>
-    <Fieldset.Legend />
-    <Fieldset.Group>
+    <FieldsetLegend />
+    <FieldGroup>
       {/* form fields go here */}
-    </Fieldset.Group>
-    <Fieldset.Actions>
+    </FieldGroup>
+    <FieldsetActions>
       {/* action buttons go here */}
-    </Fieldset.Actions>
+    </FieldsetActions>
   </Fieldset>
 )
 ```
@@ -47,13 +57,19 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {Fieldset, TextField} from '@heroui/react';
+import {
+  Fieldset,
+  FieldsetLegend,
+  FieldGroup,
+  FieldsetActions,
+  TextField
+} from '@heroui/react';
 
 function CustomFieldset() {
   return (
     <Fieldset className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
-      <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
-      <Fieldset.Group className="grid gap-4 md:grid-cols-2">
+      <FieldsetLegend className="text-lg font-semibold">Team members</FieldsetLegend>
+      <FieldGroup className="grid gap-4 md:grid-cols-2">
         <TextField>
           <Label>First name</Label>
           <Input className="rounded-full border-border/60" placeholder="Jane" />
@@ -62,10 +78,10 @@ function CustomFieldset() {
           <Label>Last name</Label>
           <Input className="rounded-full border-border/60" placeholder="Doe" />
         </TextField>
-      </Fieldset.Group>
-      <Fieldset.Actions className="justify-end gap-3">
+      </FieldGroup>
+      <FieldsetActions className="justify-end gap-3">
         {/* Action buttons */}
-      </Fieldset.Actions>
+      </FieldsetActions>
     </Fieldset>
   );
 }
@@ -116,7 +132,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `ref` | `React.Ref<HTMLFieldSetElement>` | - | Ref forwarded to the fieldset element. |
 | `nativeProps` | `React.HTMLAttributes<HTMLFieldSetElement>` | Supports native fieldset attributes and events. |
 
-### Fieldset.Legend Props
+### FieldsetLegend Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -126,7 +142,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `ref` | `React.Ref<HTMLLegendElement>` | - | Ref forwarded to the legend element. |
 | `nativeProps` | `React.HTMLAttributes<HTMLLegendElement>` |  - | Native legend attributes. |
 
-### Fieldset.Group Props
+### FieldGroup Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -136,7 +152,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `ref` | `React.Ref<HTMLDivElement>` | - | Ref forwarded to the group wrapper. |
 | `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
 
-### Fieldset.Actions Props
+### FieldsetActions Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

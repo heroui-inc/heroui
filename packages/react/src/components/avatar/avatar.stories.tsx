@@ -4,7 +4,7 @@ import type {Meta} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Avatar} from "./index";
+import {Avatar, AvatarFallback, AvatarImage} from "./index";
 
 export default {
   argTypes: {
@@ -83,83 +83,83 @@ const Template = ({color, size}: AvatarProps) => (
   <div className="flex items-start gap-4">
     <div className="flex flex-col gap-4">
       <Avatar color={color} size={size}>
-        <Avatar.Fallback>PG</Avatar.Fallback>
+        <AvatarFallback>PG</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Fallback>JR</Avatar.Fallback>
+        <AvatarFallback>JR</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Fallback>
+        <AvatarFallback>
           <Icon icon="gravity-ui:person" />
-        </Avatar.Fallback>
+        </AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Fallback>
+        <AvatarFallback>
           <Icon icon="gravity-ui:person-gear" />
-        </Avatar.Fallback>
+        </AvatarFallback>
       </Avatar>
     </div>
 
     <div className="flex flex-col gap-4">
       <Avatar color={color} size={size}>
-        <Avatar.Image alt="John Doe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
-        <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+        <AvatarImage alt="John Doe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
+        <AvatarFallback delayMs={600}>JD</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="Junior Garcia"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
         />
-        <Avatar.Fallback delayMs={600}>JG</Avatar.Fallback>
+        <AvatarFallback delayMs={600}>JG</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="Junior Garcia"
           src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
         />
-        <Avatar.Fallback delayMs={600}>JG</Avatar.Fallback>
+        <AvatarFallback delayMs={600}>JG</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image alt="Paul" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=8" />
-        <Avatar.Fallback delayMs={600}>PG</Avatar.Fallback>
+        <AvatarImage alt="Paul" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=8" />
+        <AvatarFallback delayMs={600}>PG</AvatarFallback>
       </Avatar>
     </div>
 
     <div className="flex flex-col gap-4">
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="Red"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
         />
-        <Avatar.Fallback>R</Avatar.Fallback>
+        <AvatarFallback>R</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="Orange"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg"
         />
-        <Avatar.Fallback>O</Avatar.Fallback>
+        <AvatarFallback>O</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="Green"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg"
         />
-        <Avatar.Fallback>G</Avatar.Fallback>
+        <AvatarFallback>G</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="White"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/white.jpg"
         />
-        <Avatar.Fallback>W</Avatar.Fallback>
+        <AvatarFallback>W</AvatarFallback>
       </Avatar>
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           alt="Black"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg"
         />
-        <Avatar.Fallback>B</Avatar.Fallback>
+        <AvatarFallback>B</AvatarFallback>
       </Avatar>
     </div>
   </div>
@@ -177,7 +177,7 @@ const TemplateWithDelay = ({
   return (
     <div className="flex flex-col gap-4">
       <Avatar color={color} size={size}>
-        <Avatar.Image
+        <AvatarImage
           src={`https://app.requestly.io/delay/${delay}/https://img.heroui.chat/image/avatar?w=400&h=400&u=3`}
         />
       </Avatar>
@@ -189,19 +189,19 @@ const TemplateWithColors = () => {
   return (
     <div className="flex items-center gap-4">
       <Avatar color="default">
-        <Avatar.Fallback>DF</Avatar.Fallback>
+        <AvatarFallback>DF</AvatarFallback>
       </Avatar>
       <Avatar color="accent">
-        <Avatar.Fallback>AC</Avatar.Fallback>
+        <AvatarFallback>AC</AvatarFallback>
       </Avatar>
       <Avatar color="success">
-        <Avatar.Fallback>SC</Avatar.Fallback>
+        <AvatarFallback>SC</AvatarFallback>
       </Avatar>
       <Avatar color="warning">
-        <Avatar.Fallback>WR</Avatar.Fallback>
+        <AvatarFallback>WR</AvatarFallback>
       </Avatar>
       <Avatar color="danger">
-        <Avatar.Fallback>DG</Avatar.Fallback>
+        <AvatarFallback>DG</AvatarFallback>
       </Avatar>
     </div>
   );
@@ -212,30 +212,27 @@ const FallbackTemplate = () => {
     <div className="flex items-center gap-4">
       {/* Text fallback */}
       <Avatar>
-        <Avatar.Fallback>JD</Avatar.Fallback>
+        <AvatarFallback>JD</AvatarFallback>
       </Avatar>
-
       {/* Icon fallback */}
       <Avatar>
-        <Avatar.Fallback>
+        <AvatarFallback>
           <Icon icon="gravity-ui:person" />
-        </Avatar.Fallback>
+        </AvatarFallback>
       </Avatar>
-
       {/* Fallback with delay */}
       <Avatar>
-        <Avatar.Image
+        <AvatarImage
           alt="Delayed Avatar"
           src="https://invalid-url-to-show-fallback.com/image.jpg"
         />
-        <Avatar.Fallback delayMs={600}>NA</Avatar.Fallback>
+        <AvatarFallback delayMs={600}>NA</AvatarFallback>
       </Avatar>
-
       {/* Custom styled fallback */}
       <Avatar>
-        <Avatar.Fallback className="border-none bg-gradient-to-br from-pink-500 to-purple-500 text-white">
+        <AvatarFallback className="border-none bg-gradient-to-br from-pink-500 to-purple-500 text-white">
           GB
-        </Avatar.Fallback>
+        </AvatarFallback>
       </Avatar>
     </div>
   );
@@ -247,23 +244,23 @@ const AvatarGroupTemplate = () => {
       <div className="flex items-center justify-center -space-x-2">
         {users.map((user) => (
           <Avatar key={user.id} className="ring-background ring-2">
-            <Avatar.Image src={user.image_url} />
-            <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+            <AvatarImage src={user.image_url} />
+            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
           </Avatar>
         ))}
         <Avatar className="ring-background ring-2">
-          <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
+          <AvatarFallback className="border-none">+5</AvatarFallback>
         </Avatar>
       </div>
       <div className="flex items-center justify-center -space-x-2">
         {circles.map((circle) => (
           <Avatar key={circle.id} className="ring-background ring-2">
-            <Avatar.Image src={circle.image_url} />
-            <Avatar.Fallback>{circle.name}</Avatar.Fallback>
+            <AvatarImage src={circle.image_url} />
+            <AvatarFallback>{circle.name}</AvatarFallback>
           </Avatar>
         ))}
         <Avatar className="ring-background ring-2">
-          <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
+          <AvatarFallback className="border-none">+5</AvatarFallback>
         </Avatar>
       </div>
     </div>
@@ -296,16 +293,16 @@ export const Sizes = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar size="sm">
-        <Avatar.Image alt="Small" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
-        <Avatar.Fallback>SM</Avatar.Fallback>
+        <AvatarImage alt="Small" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
+        <AvatarFallback>SM</AvatarFallback>
       </Avatar>
       <Avatar size="md">
-        <Avatar.Image alt="Medium" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4" />
-        <Avatar.Fallback>MD</Avatar.Fallback>
+        <AvatarImage alt="Medium" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4" />
+        <AvatarFallback>MD</AvatarFallback>
       </Avatar>
       <Avatar size="lg">
-        <Avatar.Image alt="Large" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
-        <Avatar.Fallback>LG</Avatar.Fallback>
+        <AvatarImage alt="Large" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
+        <AvatarFallback>LG</AvatarFallback>
       </Avatar>
     </div>
   ),

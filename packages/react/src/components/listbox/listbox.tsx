@@ -8,7 +8,6 @@ import type {
 
 import React from "react";
 import {
-  Collection,
   ListBoxItem as ListBoxItemPrimitive,
   ListBox as ListBoxPrimitive,
 } from "react-aria-components";
@@ -23,12 +22,12 @@ type ListBoxContextValue = {
 
 const ListBoxContext = React.createContext<ListBoxContextValue>({});
 
-export type ListBoxRootProps<T extends object> = ListBoxPrimitiveProps<T> &
+export type ListBoxProps<T extends object> = ListBoxPrimitiveProps<T> &
   ListBoxVariants & {
     className?: string;
   };
 
-const ListBoxRootInner = React.forwardRef<HTMLDivElement, ListBoxRootProps<object>>(
+const ListBoxInner = React.forwardRef<HTMLDivElement, ListBoxProps<object>>(
   ({className, variant, ...props}, ref) => {
     const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
 
@@ -44,10 +43,10 @@ const ListBoxRootInner = React.forwardRef<HTMLDivElement, ListBoxRootProps<objec
   },
 );
 
-ListBoxRootInner.displayName = "HeroUI.ListBox";
+ListBoxInner.displayName = "HeroUI.ListBox";
 
-const ListBoxRoot = ListBoxRootInner as <T extends object>(
-  props: ListBoxRootProps<T> & React.RefAttributes<HTMLDivElement>,
+const ListBox = ListBoxInner as <T extends object>(
+  props: ListBoxProps<T> & React.RefAttributes<HTMLDivElement>,
 ) => React.ReactElement;
 
 export type ListBoxItemProps = ListBoxItemPrimitiveProps & {
@@ -75,7 +74,7 @@ const ListBoxItem = React.forwardRef<HTMLDivElement, ListBoxItemProps>(
   },
 );
 
-ListBoxItem.displayName = "HeroUI.ListBox.Item";
+ListBoxItem.displayName = "HeroUI.ListBoxItem";
 
 export type ListBoxItemIndicatorProps = {
   className?: string;
@@ -100,14 +99,22 @@ const ListBoxItemIndicator = React.forwardRef<HTMLSpanElement, ListBoxItemIndica
   },
 );
 
-ListBoxItemIndicator.displayName = "HeroUI.ListBox.ItemIndicator";
+ListBoxItemIndicator.displayName = "HeroUI.ListBoxItemIndicator";
 
-const CompoundListBox = Object.assign(ListBoxRoot, {
-  Item: ListBoxItem,
-  ItemIndicator: ListBoxItemIndicator,
-  Collection,
-});
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
-export default CompoundListBox;
-export type {ListBoxRootProps as ListBoxProps};
-export {ListBoxRoot, ListBoxItem, ListBoxItemIndicator, Collection};
+const Root = ListBox;
+const Item = ListBoxItem;
+const ItemIndicator = ListBoxItemIndicator;
+
+export {
+  ListBox,
+  ListBoxItem,
+  ListBoxItemIndicator,
+  // named exports
+  Root,
+  Item,
+  ItemIndicator,
+};

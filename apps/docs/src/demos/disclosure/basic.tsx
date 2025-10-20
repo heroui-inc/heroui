@@ -1,6 +1,13 @@
 "use client";
 
-import {Button, Disclosure} from "@heroui/react";
+import {
+  Button,
+  Disclosure,
+  DisclosureBody,
+  DisclosureContent,
+  DisclosureHeading,
+  DisclosureIndicator,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
@@ -10,15 +17,15 @@ export function Basic() {
   return (
     <div className="w-full max-w-md text-center">
       <Disclosure isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-        <Disclosure.Heading>
+        <DisclosureHeading>
           <Button slot="trigger" variant="secondary">
             <Icon icon="gravity-ui:qr-code" />
             Preview HeroUI Native
-            <Disclosure.Indicator />
+            <DisclosureIndicator />
           </Button>
-        </Disclosure.Heading>
-        <Disclosure.Content>
-          <Disclosure.Body className="bg-panel shadow-panel rounded-panel flex flex-col items-center p-4 text-center">
+        </DisclosureHeading>
+        <DisclosureContent>
+          <DisclosureBody className="bg-panel shadow-panel rounded-panel flex flex-col items-center p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
@@ -32,8 +39,8 @@ export function Basic() {
               <Icon icon="tabler:brand-apple-filled" />
               Download on App Store
             </Button>
-          </Disclosure.Body>
-        </Disclosure.Content>
+          </DisclosureBody>
+        </DisclosureContent>
       </Disclosure>
     </div>
   );

@@ -11,7 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {Kbd} from "@heroui/react";
+import {Kbd, KbdAbbr, KbdKey} from "@heroui/react";
 ```
 
 ### Usage
@@ -25,12 +25,12 @@ import {Kbd} from "@heroui/react";
 Import all parts and piece them together.
 
 ```tsx
-import {Kbd} from "@heroui/react";
+import {Kbd, KbdAbbr, KbdKey} from "@heroui/react";
 
 export default () => (
   <Kbd>
-    <Kbd.Abbr keyValue="command" />
-    <Kbd.Content>K</Kbd.Content>
+    <KbdAbbr title="Command">⌘</KbdAbbr>
+    <KbdKey>K</KbdKey>
   </Kbd>
 );
 ```
@@ -64,12 +64,12 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {Kbd} from "@heroui/react";
+import {Kbd, KbdKey} from "@heroui/react";
 
 function CustomKbd() {
   return (
     <Kbd className="bg-gray-100 dark:bg-gray-800">
-      <Kbd.Content>K</Kbd.Content>
+      <KbdKey>K</KbdKey>
     </Kbd>
   );
 }
@@ -117,14 +117,15 @@ The Kbd component uses these CSS classes ([View source styles](https://github.co
 | `children`  | `React.ReactNode` | -       | Content of the key     |
 | `className` | `string`          | -       | Custom CSS classes     |
 
-### Kbd.Abbr Props
+### KbdAbbr Props
 
 | Prop        | Type     | Default | Description                                                                                                                               |
 | ----------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `keyValue`  | `KbdKey` | -       | The keyboard key to display. Available values include modifier keys and special keys                                                     |
+| `title`     | `string` | -       | Title attribute for accessibility (e.g., "Command" for ⌘)                                                                               |
+| `children`  | `React.ReactNode` | -       | The symbol or text to display (e.g., ⌘, ⌥, ⇧)                                                                                          |
 | `className` | `string` | -       | Custom CSS classes                                                                                                                       |
 
-### Kbd.Content Props
+### KbdKey Props
 
 | Prop        | Type              | Default | Description                        |
 | ----------- | ----------------- | ------- | ---------------------------------- |

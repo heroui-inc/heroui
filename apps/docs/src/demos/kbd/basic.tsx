@@ -1,25 +1,25 @@
 "use client";
 
-import {Kbd} from "@heroui/react";
+import {Kbd, KbdAbbr, KbdContent} from "@heroui/react";
 
 export function Basic() {
   return (
     <div className="flex items-center gap-4">
       <Kbd>
-        <Kbd.Abbr keyValue="command" />
-        <Kbd.Content>K</Kbd.Content>
+        <KbdAbbr keyValue="command" />
+        <KbdContent>K</KbdContent>
       </Kbd>
       <Kbd>
-        <Kbd.Abbr keyValue="shift" />
-        <Kbd.Content>P</Kbd.Content>
+        <KbdAbbr keyValue="shift" />
+        <KbdContent>P</KbdContent>
       </Kbd>
       <Kbd>
-        <Kbd.Abbr keyValue="ctrl" />
-        <Kbd.Content>C</Kbd.Content>
+        <KbdAbbr keyValue="ctrl" />
+        <KbdContent>C</KbdContent>
       </Kbd>
       <Kbd>
-        <Kbd.Abbr keyValue="option" />
-        <Kbd.Content>D</Kbd.Content>
+        <KbdAbbr keyValue="option" />
+        <KbdContent>D</KbdContent>
       </Kbd>
     </div>
   );

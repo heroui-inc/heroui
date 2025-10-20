@@ -3,7 +3,15 @@
 import type {ButtonProps} from "@heroui/react";
 import type {SVGProps} from "react";
 
-import {Button, Disclosure, DisclosureGroup, useDisclosureGroupNavigation} from "@heroui/react";
+import {
+  Button,
+  Disclosure,
+  DisclosureBody,
+  DisclosureContent,
+  DisclosureGroup,
+  DisclosureHeading,
+  useDisclosureGroupNavigation,
+} from "@heroui/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
 
@@ -172,7 +180,7 @@ export default function AppleIPhoneDisclosure() {
           >
             {showcaseItems.map((item) => (
               <Disclosure key={item.id} aria-label={item.label} id={item.id}>
-                <Disclosure.Heading>
+                <DisclosureHeading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
                       {item.id === "colors" ? (
@@ -183,9 +191,9 @@ export default function AppleIPhoneDisclosure() {
                       {item.label}
                     </div>
                   </AppleShowcaseButton>
-                </Disclosure.Heading>
-                <Disclosure.Content className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
-                  <Disclosure.Body
+                </DisclosureHeading>
+                <DisclosureContent className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
+                  <DisclosureBody
                     data-expanded={expandedKeys.has(item.id)}
                     className={cnBase(
                       "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-left backdrop-blur-[20px]",
@@ -207,8 +215,8 @@ export default function AppleIPhoneDisclosure() {
                     >
                       <strong className="font-medium">{item.label}</strong>.&nbsp;{item.content}
                     </p>
-                  </Disclosure.Body>
-                </Disclosure.Content>
+                  </DisclosureBody>
+                </DisclosureContent>
               </Disclosure>
             ))}
           </DisclosureGroup>

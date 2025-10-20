@@ -1,6 +1,14 @@
 "use client";
 
-import {Description, Label, Radio, RadioGroup} from "@heroui/react";
+import {
+  Description,
+  Label,
+  Radio,
+  RadioContent,
+  RadioControl,
+  RadioGroup,
+  RadioIndicator,
+} from "@heroui/react";
 
 export function Disabled() {
   return (
@@ -8,31 +16,31 @@ export function Disabled() {
       <Label>Subscription plan</Label>
       <Description>Plan changes are temporarily paused while we roll out updates.</Description>
       <Radio value="starter">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <RadioControl>
+          <RadioIndicator />
+        </RadioControl>
+        <RadioContent>
           <Label>Starter</Label>
           <Description>For side projects and small teams</Description>
-        </Radio.Content>
+        </RadioContent>
       </Radio>
       <Radio value="pro">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <RadioControl>
+          <RadioIndicator />
+        </RadioControl>
+        <RadioContent>
           <Label>Pro</Label>
           <Description>Advanced reporting and analytics</Description>
-        </Radio.Content>
+        </RadioContent>
       </Radio>
       <Radio value="teams">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <RadioControl>
+          <RadioIndicator />
+        </RadioControl>
+        <RadioContent>
           <Label>Teams</Label>
           <Description>Share access with up to 10 teammates</Description>
-        </Radio.Content>
+        </RadioContent>
       </Radio>
     </RadioGroup>
   );

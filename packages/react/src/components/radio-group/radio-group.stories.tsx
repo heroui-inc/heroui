@@ -10,7 +10,7 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 
-import {Radio, RadioGroup} from "./index";
+import {Radio, RadioContent, RadioControl, RadioGroup, RadioIndicator} from "./index";
 
 export default {
   argTypes: {},
@@ -27,31 +27,31 @@ export const Default: Story = {
         <Label>Plan selection</Label>
         <Description>Choose the plan that suits you best</Description>
         <Radio value="basic">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Basic Plan</Label>
             <Description>Includes 100 messages per month</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="premium">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Premium Plan</Label>
             <Description>Includes 200 messages per month</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="business">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Business Plan</Label>
             <Description>Unlimited messages</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
       </RadioGroup>
     </div>
@@ -65,43 +65,43 @@ export const WithCustomIndicator: Story = {
         <Label>Plan selection</Label>
         <Description>Choose the plan that suits you best</Description>
         <Radio value="basic">
-          <Radio.Control>
-            <Radio.Indicator>
+          <RadioControl>
+            <RadioIndicator>
               {({isSelected}) =>
                 isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
               }
-            </Radio.Indicator>
-          </Radio.Control>
-          <Radio.Content>
+            </RadioIndicator>
+          </RadioControl>
+          <RadioContent>
             <Label>Basic Plan</Label>
             <Description>Includes 100 messages per month</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="premium">
-          <Radio.Control>
-            <Radio.Indicator>
+          <RadioControl>
+            <RadioIndicator>
               {({isSelected}) =>
                 isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
               }
-            </Radio.Indicator>
-          </Radio.Control>
-          <Radio.Content>
+            </RadioIndicator>
+          </RadioControl>
+          <RadioContent>
             <Label>Premium Plan</Label>
             <Description>Includes 200 messages per month</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="business">
-          <Radio.Control>
-            <Radio.Indicator>
+          <RadioControl>
+            <RadioIndicator>
               {({isSelected}) =>
                 isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
               }
-            </Radio.Indicator>
-          </Radio.Control>
-          <Radio.Content>
+            </RadioIndicator>
+          </RadioControl>
+          <RadioContent>
             <Label>Business Plan</Label>
             <Description>Unlimited messages</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
       </RadioGroup>
     </div>
@@ -114,31 +114,31 @@ export const Orientation: Story = {
       <Label>Subscription plan</Label>
       <RadioGroup defaultValue="pro" name="plan-orientation" orientation="horizontal">
         <Radio value="starter">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Starter</Label>
             <Description>For side projects and small teams</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="pro">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Pro</Label>
             <Description>Advanced reporting and analytics</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="teams">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Teams</Label>
             <Description>Share access with up to 10 teammates</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
       </RadioGroup>
     </div>
@@ -162,31 +162,31 @@ export const Validation: Story = {
         <RadioGroup isRequired name="plan-validation">
           <Label>Subscription plan</Label>
           <Radio value="starter">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Starter</Label>
               <Description>For side projects and small teams</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <Radio value="pro">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Pro</Label>
               <Description>Advanced reporting and analytics</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <Radio value="teams">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Teams</Label>
               <Description>Share access with up to 10 teammates</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <FieldError>Choose a subscription before continuing.</FieldError>
         </RadioGroup>
@@ -205,31 +205,31 @@ export const Controlled: Story = {
         <RadioGroup name="plan-controlled" value={value} onChange={setValue}>
           <Label>Subscription plan</Label>
           <Radio value="starter">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Starter</Label>
               <Description>For side projects and small teams</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <Radio value="pro">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Pro</Label>
               <Description>Advanced reporting and analytics</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <Radio value="teams">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Teams</Label>
               <Description>Share access with up to 10 teammates</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
         </RadioGroup>
         <p className="text-muted mt-2 text-sm">
@@ -253,31 +253,31 @@ export const Uncontrolled: Story = {
         >
           <Label>Subscription plan</Label>
           <Radio value="starter">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Starter</Label>
               <Description>For side projects and small teams</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <Radio value="pro">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Pro</Label>
               <Description>Advanced reporting and analytics</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
           <Radio value="teams">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <RadioControl>
+              <RadioIndicator />
+            </RadioControl>
+            <RadioContent>
               <Label>Teams</Label>
               <Description>Share access with up to 10 teammates</Description>
-            </Radio.Content>
+            </RadioContent>
           </Radio>
         </RadioGroup>
         <p className="text-muted mt-2 text-sm">
@@ -295,31 +295,31 @@ export const Disabled: Story = {
         <Label>Subscription plan</Label>
         <Description>Plan changes are temporarily paused while we roll out updates.</Description>
         <Radio value="starter">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Starter</Label>
             <Description>For side projects and small teams</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="pro">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Pro</Label>
             <Description>Advanced reporting and analytics</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="teams">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Teams</Label>
             <Description>Share access with up to 10 teammates</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
       </RadioGroup>
     </div>
@@ -396,16 +396,16 @@ export const DeliveryAndPaymentExample: Story = {
                     "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
                   )}
                 >
-                  <Radio.Control className="absolute right-4 top-3 size-5">
-                    <Radio.Indicator />
-                  </Radio.Control>
-                  <Radio.Content className="flex flex-col gap-6">
+                  <RadioControl className="absolute right-4 top-3 size-5">
+                    <RadioIndicator />
+                  </RadioControl>
+                  <RadioContent className="flex flex-col gap-6">
                     <div className="flex flex-col gap-1">
                       <Label>{option.title}</Label>
                       <Description>{option.description}</Description>
                     </div>
                     <span className="text-sm font-semibold">{option.price}</span>
-                  </Radio.Content>
+                  </RadioContent>
                 </Radio>
               ))}
             </div>
@@ -426,16 +426,16 @@ export const DeliveryAndPaymentExample: Story = {
                     "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                   )}
                 >
-                  <Radio.Control className="absolute right-4 top-3 size-5">
-                    <Radio.Indicator />
-                  </Radio.Control>
-                  <Radio.Content className="flex flex-row items-start justify-start gap-4">
+                  <RadioControl className="absolute right-4 top-3 size-5">
+                    <RadioIndicator />
+                  </RadioControl>
+                  <RadioContent className="flex flex-row items-start justify-start gap-4">
                     <Icon className="size-6" icon={option.icon} />
                     <div className="flex flex-col gap-1">
                       <Label>{option.title}</Label>
                       <Description>{option.description}</Description>
                     </div>
-                  </Radio.Content>
+                  </RadioContent>
                 </Radio>
               ))}
             </div>

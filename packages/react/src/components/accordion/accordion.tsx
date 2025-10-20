@@ -32,36 +32,37 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
  * Accordion
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionRootProps extends DisclosureGroupProps, AccordionVariants {}
+interface AccordionProps extends DisclosureGroupProps, AccordionVariants {}
 
-const AccordionRoot = React.forwardRef<
-  React.ComponentRef<typeof DisclosureGroup>,
-  AccordionRootProps
->(({children, className, ...originalProps}, ref) => {
-  const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
+const Accordion = React.forwardRef<React.ComponentRef<typeof DisclosureGroup>, AccordionProps>(
+  ({children, className, ...originalProps}, ref) => {
+    const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
 
-  const slots = React.useMemo(
-    () => accordionVariants({...(variantProps as AccordionVariants)}),
-    [objectToDeps(variantProps)],
-  );
+    const slots = React.useMemo(
+      () => accordionVariants({...(variantProps as AccordionVariants)}),
+      [objectToDeps(variantProps)],
+    );
 
-  return (
-    <AccordionContext.Provider value={{slots}}>
-      <DisclosureGroup
-        ref={ref}
-        data-slot="accordion"
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </DisclosureGroup>
-    </AccordionContext.Provider>
-  );
-});
+    return (
+      <AccordionContext.Provider value={{slots}}>
+        <DisclosureGroup
+          ref={ref}
+          data-slot="accordion"
+          {...props}
+          className={composeTwRenderProps(className, slots.base())}
+        >
+          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        </DisclosureGroup>
+      </AccordionContext.Provider>
+    );
+  },
+);
 
-AccordionRoot.displayName = "HeroUI.AccordionRoot";
+Accordion.displayName = "HeroUI.Accordion";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * AccordionItem
+ * -----------------------------------------------------------------------------------------------*/
 
 interface AccordionItemProps extends DisclosureProps {}
 
@@ -84,7 +85,9 @@ const AccordionItem = React.forwardRef<React.ComponentRef<typeof Disclosure>, Ac
 
 AccordionItem.displayName = "HeroUI.AccordionItem";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * AccordionIndicator
+ * -----------------------------------------------------------------------------------------------*/
 
 interface AccordionIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
   className?: string;
@@ -126,7 +129,9 @@ const AccordionIndicator = React.forwardRef<
 
 AccordionIndicator.displayName = "HeroUI.AccordionIndicator";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * AccordionHeading
+ * -----------------------------------------------------------------------------------------------*/
 
 interface AccordionHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   className?: string;
@@ -150,7 +155,9 @@ const AccordionHeading = React.forwardRef<
 
 AccordionHeading.displayName = "HeroUI.AccordionHeading";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * AccordionTrigger
+ * -----------------------------------------------------------------------------------------------*/
 
 interface AccordionTriggerProps extends ButtonProps {}
 
@@ -176,7 +183,9 @@ const AccordionTrigger = React.forwardRef<React.ComponentRef<typeof Button>, Acc
 
 AccordionTrigger.displayName = "HeroUI.AccordionTrigger";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * AccordionBody
+ * -----------------------------------------------------------------------------------------------*/
 
 interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -194,7 +203,9 @@ const AccordionBody = React.forwardRef<React.ComponentRef<"div">, AccordionBodyP
 
 AccordionBody.displayName = "HeroUI.AccordionBody";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * AccordionPanel
+ * -----------------------------------------------------------------------------------------------*/
 
 interface AccordionPanelProps extends DisclosurePanelProps {
   ref?: React.Ref<HTMLDivElement>;
@@ -222,24 +233,26 @@ const AccordionPanel = React.forwardRef<
 
 AccordionPanel.displayName = "HeroUI.AccordionPanel";
 
-/* -----------------------------------------------------------------------------------------------*/
-
-export {
-  AccordionRoot,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionPanel,
-  AccordionIndicator,
-  AccordionBody,
-  AccordionHeading,
-};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
 export type {
-  AccordionRootProps,
+  AccordionProps,
   AccordionItemProps,
   AccordionTriggerProps,
   AccordionPanelProps,
   AccordionIndicatorProps,
   AccordionBodyProps,
   AccordionHeadingProps,
+};
+
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionPanel,
+  AccordionIndicator,
+  AccordionBody,
+  AccordionHeading,
 };

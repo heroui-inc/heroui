@@ -36,5 +36,4 @@ const Skeleton = React.forwardRef<React.ComponentRef<"div">, SkeletonProps>(
 Skeleton.displayName = "HeroUI.Skeleton";
 
 export type {SkeletonProps};
-
-export default Skeleton;
+export {Skeleton};

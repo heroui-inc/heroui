@@ -1,11 +1,19 @@
-export {Switch, SwitchGroup} from "./switch";
+export {
+  SwitchGroup,
+  SwitchGroupItems,
+  Switch,
+  SwitchControl,
+  SwitchThumb,
+  SwitchIcon,
+} from "./switch";
+
 export type {
-  SwitchGroupRootProps,
   SwitchGroupProps,
   SwitchGroupItemsProps,
-  SwitchRootProps,
   SwitchProps,
   SwitchControlProps,
+  SwitchThumbProps,
+  SwitchIconProps,
 } from "./switch";
-export {switchVariants, switchGroupVariants} from "./switch.styles";
-export type {SwitchGroupVariants} from "./switch.styles";
+
+export {switchVariants, switchGroupVariants, type SwitchGroupVariants} from "./switch.styles";

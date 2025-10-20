@@ -38,8 +38,8 @@ import Link from 'next/link';
 These components support `asChild`:
 
 - `Button` - Change button element
-- `Alert` parts - Root, Icon, Content, Title, Description, Action, Close
-- `Avatar` - Change root element
+- `Alert` and its parts - `Alert`, `AlertIcon`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertAction`, `AlertClose`
+- `Avatar` and its parts - `Avatar`, `AvatarImage`, `AvatarFallback`
 - More components coming soon
 
 ## Compound Components
@@ -47,15 +47,22 @@ These components support `asChild`:
 HeroUI components are built as compound components - they export multiple parts that work together:
 
 ```tsx
-import { Alert } from '@heroui/react';
+import {
+  Alert,
+  AlertIcon,
+  AlertContent,
+  AlertTitle,
+  AlertDescription,
+  AlertClose
+} from '@heroui/react';
 
 <Alert>
-  <Alert.Icon />
-  <Alert.Content>
-    <Alert.Title>Success</Alert.Title>
-    <Alert.Description>Your changes have been saved.</Alert.Description>
-  </Alert.Content>
-  <Alert.Close />
+  <AlertIcon />
+  <AlertContent>
+    <AlertTitle>Success</AlertTitle>
+    <AlertDescription>Your changes have been saved.</AlertDescription>
+  </AlertContent>
+  <AlertClose />
 </Alert>
 ```
 
@@ -74,7 +81,7 @@ HeroUI exports variant functions that can be applied to any component. This allo
 Apply button styles to any component:
 
 ```tsx
-import { Link, buttonVariants } from '@heroui/react';
+import { Link, LinkIcon, buttonVariants } from '@heroui/react';
 
 // Link styled as a tertiary button
 <Link
@@ -87,7 +94,7 @@ import { Link, buttonVariants } from '@heroui/react';
   target="_blank"
 >
   HeroUI
-  <Link.Icon className="h-2 w-2" />
+  <LinkIcon className="h-2 w-2" />
 </Link>
 
 // Native anchor styled as primary button

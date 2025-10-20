@@ -9,7 +9,7 @@ import {Link as LinkPrimitive} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
-import {LinkIcon as DefaultLinkIcon} from "../icons";
+import {ExternalLinkIcon} from "../icons";
 
 import {linkVariants} from "./link.styles";
 
@@ -23,11 +23,11 @@ type LinkContext = {
 const LinkContext = createContext<LinkContext>({});
 
 /* ------------------------------------------------------------------------------------------------
- * Link Root
+ * Link
  * --------------------------------------------------------------------------------------------- */
-interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {}
+interface LinkProps extends LinkPrimitiveProps, LinkVariants {}
 
-const LinkRoot = React.forwardRef<React.ComponentRef<typeof LinkPrimitive>, LinkRootProps>(
+const Link = React.forwardRef<React.ComponentRef<typeof LinkPrimitive>, LinkProps>(
   ({children, className, ...props}, ref) => {
     const slots = React.useMemo(() => linkVariants({}), []);
 
@@ -45,7 +45,7 @@ const LinkRoot = React.forwardRef<React.ComponentRef<typeof LinkPrimitive>, Link
   },
 );
 
-LinkRoot.displayName = "HeroUI.Link";
+Link.displayName = "HeroUI.Link";
 
 /* ------------------------------------------------------------------------------------------------
  * Link Icon
@@ -54,7 +54,7 @@ type LinkIconProps = React.ComponentProps<"span"> & {
   asChild?: boolean;
 };
 
-const LinkIconComponent = React.forwardRef<HTMLSpanElement, LinkIconProps>(
+const LinkIcon = React.forwardRef<HTMLSpanElement, LinkIconProps>(
   ({asChild, children, className, ...rest}, ref) => {
     const {slots} = useContext(LinkContext);
 
@@ -68,21 +68,17 @@ const LinkIconComponent = React.forwardRef<HTMLSpanElement, LinkIconProps>(
         data-slot="link-icon"
         {...rest}
       >
-        {children ?? <DefaultLinkIcon data-slot="link-default-icon" />}
+        {children ?? <ExternalLinkIcon data-slot="link-default-icon" />}
       </Component>
     );
   },
 );
 
-LinkIconComponent.displayName = "HeroUI.Link.Icon";
+LinkIcon.displayName = "HeroUI.LinkIcon";
 
 /* ------------------------------------------------------------------------------------------------
- * Compound Link Component
+ * Exports
  * --------------------------------------------------------------------------------------------- */
-const CompoundLink = Object.assign(LinkRoot, {
-  Icon: LinkIconComponent,
-});
 
-export type {LinkRootProps as LinkProps, LinkIconProps};
-
-export default CompoundLink;
+export type {LinkProps, LinkIconProps};
+export {Link, LinkIcon};

@@ -1,35 +1,15 @@
-import {
-  AccordionBody,
-  AccordionHeading,
-  AccordionIndicator,
+export {
+  Accordion,
   AccordionItem,
-  AccordionPanel,
-  AccordionRoot,
+  AccordionHeading,
   AccordionTrigger,
+  AccordionPanel,
+  AccordionIndicator,
+  AccordionBody,
 } from "./accordion";
 
-export const Accordion = Object.assign(AccordionRoot, {
-  Item: AccordionItem,
-  Heading: AccordionHeading,
-  Trigger: AccordionTrigger,
-  Panel: AccordionPanel,
-  Indicator: AccordionIndicator,
-  Body: AccordionBody,
-});
-
-export {
-  AccordionRoot,
-  AccordionItem,
-  AccordionHeading,
-  AccordionTrigger,
-  AccordionPanel,
-  AccordionIndicator,
-  AccordionBody,
-};
-
 export type {
-  AccordionRootProps,
-  AccordionRootProps as AccordionProps,
+  AccordionProps,
   AccordionItemProps,
   AccordionTriggerProps,
   AccordionPanelProps,

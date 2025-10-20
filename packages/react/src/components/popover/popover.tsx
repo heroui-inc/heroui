@@ -27,10 +27,7 @@ const PopoverContext = createContext<{
  * Popover
  * -----------------------------------------------------------------------------------------------*/
 
-const PopoverRoot = ({
-  children,
-  ...props
-}: React.ComponentProps<typeof PopoverTriggerPrimitive>) => {
+const Popover = ({children, ...props}: React.ComponentProps<typeof PopoverTriggerPrimitive>) => {
   const slots = React.useMemo(() => popoverVariants(), []);
 
   return (
@@ -42,7 +39,7 @@ const PopoverRoot = ({
   );
 };
 
-PopoverRoot.displayName = "HeroUI.Popover";
+Popover.displayName = "HeroUI.Popover";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -166,13 +163,6 @@ PopoverHeading.displayName = "HeroUI.PopoverHeading";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundPopover = Object.assign(PopoverRoot, {
-  Trigger: PopoverTrigger,
-  Dialog: PopoverDialog,
-  Arrow: PopoverArrow,
-  Content: PopoverContent,
-  Heading: PopoverHeading,
-});
+export {Popover, PopoverTrigger, PopoverDialog, PopoverArrow, PopoverContent, PopoverHeading};
 
-export default CompoundPopover;
 export type {PopoverProps, PopoverContentProps};

@@ -1,4 +1,10 @@
-export {default as Fieldset} from "./fieldset";
-export type {FieldsetProps, FieldsetLegendProps, FieldGroupProps} from "./fieldset";
-export {fieldsetVariants} from "./fieldset.styles";
-export type {FieldsetVariants} from "./fieldset.styles";
+export {Fieldset, FieldsetLegend, FieldGroup, FieldsetActions} from "./fieldset";
+
+export type {
+  FieldsetProps,
+  FieldsetLegendProps,
+  FieldGroupProps,
+  FieldsetActionsProps,
+} from "./fieldset";
+
+export {fieldsetVariants, type FieldsetVariants} from "./fieldset.styles";

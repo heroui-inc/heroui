@@ -23,13 +23,13 @@ type AlertContext = {
 const AlertContext = createContext<AlertContext>({});
 
 /* ------------------------------------------------------------------------------------------------
- * Alert Root
+ * Alert
  * --------------------------------------------------------------------------------------------- */
-interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
+interface AlertProps extends React.ComponentProps<"div">, AlertVariants {
   asChild?: boolean;
 }
 
-const Alert = ({asChild, children, className, variant, ...rest}: AlertRootProps) => {
+const Alert = ({asChild, children, className, variant, ...rest}: AlertProps) => {
   const slots = React.useMemo(() => alertVariants({variant}), [variant]);
 
   const Component = asChild ? SlotPrimitive : "div";
@@ -64,7 +64,7 @@ const AlertIcon = ({asChild, children, className, ...rest}: AlertIconProps) => {
   );
 };
 
-AlertIcon.displayName = "HeroUI.Alert.Icon";
+AlertIcon.displayName = "HeroUI.AlertIcon";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Content
@@ -85,7 +85,7 @@ const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps
   );
 };
 
-AlertContent.displayName = "HeroUI.Alert.Content";
+AlertContent.displayName = "HeroUI.AlertContent";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Title
@@ -106,7 +106,7 @@ const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) =>
   );
 };
 
-AlertTitle.displayName = "HeroUI.Alert.Title";
+AlertTitle.displayName = "HeroUI.AlertTitle";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Description
@@ -127,7 +127,7 @@ const AlertDescription = ({asChild, children, className, ...rest}: AlertDescript
   );
 };
 
-AlertDescription.displayName = "HeroUI.Alert.Description";
+AlertDescription.displayName = "HeroUI.AlertDescription";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Action
@@ -165,7 +165,7 @@ const AlertAction: AlertAction = (props) => {
   );
 };
 
-AlertAction.displayName = "HeroUI.Alert.Action";
+AlertAction.displayName = "HeroUI.AlertAction";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Close
@@ -207,15 +207,29 @@ const AlertClose: AlertClose = (props) => {
   );
 };
 
-AlertClose.displayName = "HeroUI.Alert.Close";
+AlertClose.displayName = "HeroUI.AlertClose";
 
-const CompoundAlert = Object.assign(Alert, {
-  Action: AlertAction,
-  Close: AlertClose,
-  Content: AlertContent,
-  Description: AlertDescription,
-  Icon: AlertIcon,
-  Title: AlertTitle,
-});
+/* ------------------------------------------------------------------------------------------------
+ * Exports
+ * --------------------------------------------------------------------------------------------- */
 
-export default CompoundAlert;
+export {Alert, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose};
+
+// For AlertAction and AlertClose, we need to export their prop types
+type AlertActionProps =
+  | ({asChild: true} & React.ComponentProps<"button">)
+  | ({asChild?: false} & ButtonPrimitiveProps);
+
+type AlertCloseProps =
+  | ({asChild: true} & React.ComponentProps<"button">)
+  | ({asChild?: false} & ButtonPrimitiveProps);
+
+export type {
+  AlertProps,
+  AlertIconProps,
+  AlertContentProps,
+  AlertTitleProps,
+  AlertDescriptionProps,
+  AlertActionProps,
+  AlertCloseProps,
+};

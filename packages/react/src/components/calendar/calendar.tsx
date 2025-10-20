@@ -42,12 +42,12 @@ const CalendarContext = createContext<CalendarContext>({});
  * Calendar
  * -----------------------------------------------------------------------------------------------*/
 
-interface CalendarRootProps<T extends DateValue = DateValue>
+interface CalendarProps<T extends DateValue = DateValue>
   extends CalendarPrimitiveProps<T>,
     CalendarVariants {}
 
-function CalendarRootInner<T extends DateValue = DateValue>(
-  props: CalendarRootProps<T> & React.RefAttributes<HTMLDivElement>,
+function CalendarInner<T extends DateValue = DateValue>(
+  props: CalendarProps<T> & React.RefAttributes<HTMLDivElement>,
   ref?: React.Ref<HTMLDivElement>,
 ) {
   const {children, className, isDisabled, ...rest} = props;
@@ -68,13 +68,13 @@ function CalendarRootInner<T extends DateValue = DateValue>(
   );
 }
 
-const CalendarRoot = React.forwardRef(CalendarRootInner) as <T extends DateValue = DateValue>(
-  props: CalendarRootProps<T> & React.RefAttributes<HTMLDivElement>,
+const Calendar = React.forwardRef(CalendarInner) as <T extends DateValue = DateValue>(
+  props: CalendarProps<T> & React.RefAttributes<HTMLDivElement>,
   ref?: React.ComponentRef<typeof CalendarPrimitive>,
 ) => React.ReactElement;
 
 // @ts-expect-error - displayName on generic component
-CalendarRoot.displayName = "HeroUI.Calendar.Root";
+Calendar.displayName = "HeroUI.Calendar";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -100,7 +100,7 @@ const CalendarHeader = React.forwardRef<HTMLDivElement, CalendarHeaderProps>(
   },
 );
 
-CalendarHeader.displayName = "HeroUI.Calendar.Header";
+CalendarHeader.displayName = "HeroUI.CalendarHeader";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -121,7 +121,7 @@ const CalendarHeading = React.forwardRef<HTMLHeadingElement, CalendarHeadingProp
   },
 );
 
-CalendarHeading.displayName = "HeroUI.Calendar.Heading";
+CalendarHeading.displayName = "HeroUI.CalendarHeading";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -147,7 +147,7 @@ const CalendarNavButton = React.forwardRef<HTMLButtonElement, CalendarNavButtonP
   },
 );
 
-CalendarNavButton.displayName = "HeroUI.Calendar.NavButton";
+CalendarNavButton.displayName = "HeroUI.CalendarNavButton";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -175,7 +175,7 @@ const CalendarGrid = React.forwardRef<HTMLTableElement, CalendarGridProps>(
   },
 );
 
-CalendarGrid.displayName = "HeroUI.Calendar.Grid";
+CalendarGrid.displayName = "HeroUI.CalendarGrid";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -196,7 +196,7 @@ const CalendarGridHeader = React.forwardRef<HTMLTableSectionElement, CalendarGri
   },
 );
 
-CalendarGridHeader.displayName = "HeroUI.Calendar.GridHeader";
+CalendarGridHeader.displayName = "HeroUI.CalendarGridHeader";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -217,7 +217,7 @@ const CalendarHeaderCell = React.forwardRef<HTMLTableCellElement, CalendarHeader
   },
 );
 
-CalendarHeaderCell.displayName = "HeroUI.Calendar.HeaderCell";
+CalendarHeaderCell.displayName = "HeroUI.CalendarHeaderCell";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -257,25 +257,43 @@ const CalendarCell = React.forwardRef<HTMLTableCellElement, CalendarCellProps>(
   },
 );
 
-CalendarCell.displayName = "HeroUI.Calendar.Cell";
+CalendarCell.displayName = "HeroUI.CalendarCell";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const CompoundCalendar = Object.assign(CalendarRoot, {
-  Cell: CalendarCell,
-  Grid: CalendarGrid,
-  GridHeader: CalendarGridHeader,
-  Header: CalendarHeader,
-  HeaderCell: CalendarHeaderCell,
-  Heading: CalendarHeading,
-  NavButton: CalendarNavButton,
-  Root: CalendarRoot,
-});
+const Root = Calendar;
+const Header = CalendarHeader;
+const Heading = CalendarHeading;
+const NavButton = CalendarNavButton;
+const Grid = CalendarGrid;
+const GridHeader = CalendarGridHeader;
+const HeaderCell = CalendarHeaderCell;
+const Cell = CalendarCell;
+
+export {
+  Calendar,
+  CalendarHeader,
+  CalendarHeading,
+  CalendarNavButton,
+  CalendarGrid,
+  CalendarGridHeader,
+  CalendarHeaderCell,
+  CalendarCell,
+  // named exports
+  Root,
+  Header,
+  Heading,
+  NavButton,
+  Grid,
+  GridHeader,
+  HeaderCell,
+  Cell,
+};
 
 export type {
-  CalendarRootProps,
+  CalendarProps,
   CalendarHeaderProps,
   CalendarHeadingProps,
   CalendarNavButtonProps,
@@ -284,5 +302,3 @@ export type {
   CalendarHeaderCellProps,
   CalendarCellProps,
 };
-
-export default CompoundCalendar;

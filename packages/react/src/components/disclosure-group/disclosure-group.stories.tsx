@@ -8,7 +8,13 @@ import React from "react";
 import {cnBase} from "tailwind-variants";
 
 import {Button} from "../button";
-import {Disclosure} from "../disclosure";
+import {
+  Disclosure,
+  DisclosureBody,
+  DisclosureContent,
+  DisclosureHeading,
+  DisclosureIndicator,
+} from "../disclosure";
 import {Separator} from "../separator";
 
 import {DisclosureGroup, useDisclosureGroupNavigation} from "./index";
@@ -43,7 +49,7 @@ const Template = (props: DisclosureGroupProps) => {
       <div className="bg-surface-1 shadow-panel rounded-panel flex flex-col gap-4 p-4">
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
           <Disclosure aria-label="Preview HeroUI Native" id="preview">
-            <Disclosure.Heading>
+            <DisclosureHeading>
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
@@ -55,11 +61,11 @@ const Template = (props: DisclosureGroupProps) => {
                   <Icon icon="gravity-ui:qr-code" />
                   Preview HeroUI Native
                 </div>
-                <Disclosure.Indicator className="text-muted" />
+                <DisclosureIndicator className="text-muted" />
               </Button>
-            </Disclosure.Heading>
-            <Disclosure.Content>
-              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </DisclosureHeading>
+            <DisclosureContent>
+              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -73,12 +79,12 @@ const Template = (props: DisclosureGroupProps) => {
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
                 </Button>
-              </Disclosure.Body>
-            </Disclosure.Content>
+              </DisclosureBody>
+            </DisclosureContent>
           </Disclosure>
           <Separator className="my-2" />
           <Disclosure id="download">
-            <Disclosure.Heading aria-label="Download HeroUI Native">
+            <DisclosureHeading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
@@ -90,11 +96,11 @@ const Template = (props: DisclosureGroupProps) => {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download HeroUI Native
                 </div>
-                <Disclosure.Indicator className="text-muted" />
+                <DisclosureIndicator className="text-muted" />
               </Button>
-            </Disclosure.Heading>
-            <Disclosure.Content>
-              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </DisclosureHeading>
+            <DisclosureContent>
+              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -108,8 +114,8 @@ const Template = (props: DisclosureGroupProps) => {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store
                 </Button>
-              </Disclosure.Body>
-            </Disclosure.Content>
+              </DisclosureBody>
+            </DisclosureContent>
           </Disclosure>
         </DisclosureGroup>
       </div>
@@ -155,7 +161,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
         </div>
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
           <Disclosure aria-label="Preview HeroUI Native" id="preview">
-            <Disclosure.Heading>
+            <DisclosureHeading>
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
@@ -167,11 +173,11 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                   <Icon icon="gravity-ui:qr-code" />
                   Preview HeroUI Native
                 </div>
-                <Disclosure.Indicator className="text-muted" />
+                <DisclosureIndicator className="text-muted" />
               </Button>
-            </Disclosure.Heading>
-            <Disclosure.Content>
-              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </DisclosureHeading>
+            <DisclosureContent>
+              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -185,12 +191,12 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
                 </Button>
-              </Disclosure.Body>
-            </Disclosure.Content>
+              </DisclosureBody>
+            </DisclosureContent>
           </Disclosure>
           <Separator className="my-2" />
           <Disclosure id="download">
-            <Disclosure.Heading aria-label="Download HeroUI Native">
+            <DisclosureHeading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
@@ -202,11 +208,11 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download HeroUI Native
                 </div>
-                <Disclosure.Indicator className="text-muted" />
+                <DisclosureIndicator className="text-muted" />
               </Button>
-            </Disclosure.Heading>
-            <Disclosure.Content>
-              <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
+            </DisclosureHeading>
+            <DisclosureContent>
+              <DisclosureBody className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-muted text-sm">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
@@ -220,8 +226,8 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store
                 </Button>
-              </Disclosure.Body>
-            </Disclosure.Content>
+              </DisclosureBody>
+            </DisclosureContent>
           </Disclosure>
         </DisclosureGroup>
       </div>
@@ -398,7 +404,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
           >
             {showcase1Items.map((item) => (
               <Disclosure key={item.id} aria-label={item.label} id={item.id}>
-                <Disclosure.Heading>
+                <DisclosureHeading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
                       {item.id === "colors" ? (
@@ -409,9 +415,9 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
                       {item.label}
                     </div>
                   </AppleShowcaseButton>
-                </Disclosure.Heading>
-                <Disclosure.Content className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
-                  <Disclosure.Body
+                </DisclosureHeading>
+                <DisclosureContent className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
+                  <DisclosureBody
                     data-expanded={expandedKeys.has(item.id)}
                     className={cnBase(
                       "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-left backdrop-blur-[20px]",
@@ -433,8 +439,8 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
                     >
                       <strong className="font-medium">{item.label}</strong>.&nbsp;{item.content}
                     </p>
-                  </Disclosure.Body>
-                </Disclosure.Content>
+                  </DisclosureBody>
+                </DisclosureContent>
               </Disclosure>
             ))}
           </DisclosureGroup>

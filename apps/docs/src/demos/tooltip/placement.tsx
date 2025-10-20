@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Tooltip} from "@heroui/react";
+import {Button, Tooltip, TooltipArrow, TooltipContent} from "@heroui/react";
 
 export function TooltipPlacement() {
   return (
@@ -10,10 +10,10 @@ export function TooltipPlacement() {
         <Button className="w-full" variant="tertiary">
           Top
         </Button>
-        <Tooltip.Content showArrow placement="top">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="top">
+          <TooltipArrow />
           <p>Top placement</p>
-        </Tooltip.Content>
+        </TooltipContent>
       </Tooltip>
       <div />
 
@@ -21,10 +21,10 @@ export function TooltipPlacement() {
         <Button className="w-full" variant="tertiary">
           Left
         </Button>
-        <Tooltip.Content showArrow placement="left">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="left">
+          <TooltipArrow />
           <p>Left placement</p>
-        </Tooltip.Content>
+        </TooltipContent>
       </Tooltip>
 
       <div className="flex items-center justify-center">
@@ -35,10 +35,10 @@ export function TooltipPlacement() {
         <Button className="w-full" variant="tertiary">
           Right
         </Button>
-        <Tooltip.Content showArrow placement="right">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="right">
+          <TooltipArrow />
           <p>Right placement</p>
-        </Tooltip.Content>
+        </TooltipContent>
       </Tooltip>
 
       <div />
@@ -46,10 +46,10 @@ export function TooltipPlacement() {
         <Button className="w-full" variant="tertiary">
           Bottom
         </Button>
-        <Tooltip.Content showArrow placement="bottom">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="bottom">
+          <TooltipArrow />
           <p>Bottom placement</p>
-        </Tooltip.Content>
+        </TooltipContent>
       </Tooltip>
       <div />
     </div>

@@ -1,6 +1,15 @@
 "use client";
 
-import {Accordion, cn} from "@heroui/react";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeading,
+  AccordionIndicator,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+  cn,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 const items = [
@@ -30,7 +39,7 @@ export function CustomStyles() {
   return (
     <Accordion className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="outline">
       {items.map((item, index) => (
-        <Accordion.Item
+        <AccordionItem
           key={index}
           className={cn(
             "group/item",
@@ -38,8 +47,8 @@ export function CustomStyles() {
             "last:[&:not(:has([data-slot=accordion-trigger][aria-expanded='true']))_[data-slot=accordion-trigger]]:rounded-b-2xl", // Last trigger we want to round the bottom
           )}
         >
-          <Accordion.Heading>
-            <Accordion.Trigger className="hover:bg-surface-2 group flex items-center gap-2 transition-none">
+          <AccordionHeading>
+            <AccordionTrigger className="hover:bg-surface-2 group flex items-center gap-2 transition-none">
               {item.iconUrl ? (
                 <img
                   alt={item.title}
@@ -51,15 +60,15 @@ export function CustomStyles() {
                 <span className="font-medium leading-5">{item.title}</span>
                 <span className="text-muted/80 font-normal leading-6">{item.subtitle}</span>
               </div>
-              <Accordion.Indicator className="text-muted/50 [&>svg]:size-4">
+              <AccordionIndicator className="text-muted/50 [&>svg]:size-4">
                 <Icon icon="gravity-ui:chevron-down" />
-              </Accordion.Indicator>
-            </Accordion.Trigger>
-          </Accordion.Heading>
-          <Accordion.Panel>
-            <Accordion.Body className="text-muted/80">{item.content}</Accordion.Body>
-          </Accordion.Panel>
-        </Accordion.Item>
+              </AccordionIndicator>
+            </AccordionTrigger>
+          </AccordionHeading>
+          <AccordionPanel>
+            <AccordionBody className="text-muted/80">{item.content}</AccordionBody>
+          </AccordionPanel>
+        </AccordionItem>
       ))}
     </Accordion>
   );

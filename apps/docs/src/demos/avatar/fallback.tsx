@@ -1,6 +1,6 @@
 "use client";
 
-import {Avatar} from "@heroui/react";
+import {Avatar, AvatarFallback, AvatarImage} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function Fallback() {
@@ -8,30 +8,30 @@ export function Fallback() {
     <div className="flex items-center gap-4">
       {/* Text fallback */}
       <Avatar>
-        <Avatar.Fallback>JD</Avatar.Fallback>
+        <AvatarFallback>JD</AvatarFallback>
       </Avatar>
 
       {/* Icon fallback */}
       <Avatar>
-        <Avatar.Fallback>
+        <AvatarFallback>
           <Icon icon="gravity-ui:person" />
-        </Avatar.Fallback>
+        </AvatarFallback>
       </Avatar>
 
       {/* Fallback with delay */}
       <Avatar>
-        <Avatar.Image
+        <AvatarImage
           alt="Delayed Avatar"
           src="https://invalid-url-to-show-fallback.com/image.jpg"
         />
-        <Avatar.Fallback delayMs={600}>NA</Avatar.Fallback>
+        <AvatarFallback delayMs={600}>NA</AvatarFallback>
       </Avatar>
 
       {/* Custom styled fallback */}
       <Avatar>
-        <Avatar.Fallback className="border-none bg-gradient-to-br from-pink-500 to-purple-500 text-white">
+        <AvatarFallback className="border-none bg-gradient-to-br from-pink-500 to-purple-500 text-white">
           GB
-        </Avatar.Fallback>
+        </AvatarFallback>
       </Avatar>
     </div>
   );

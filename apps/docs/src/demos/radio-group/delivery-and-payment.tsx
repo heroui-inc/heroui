@@ -1,6 +1,14 @@
 "use client";
 
-import {Description, Label, Radio, RadioGroup} from "@heroui/react";
+import {
+  Description,
+  Label,
+  Radio,
+  RadioContent,
+  RadioControl,
+  RadioGroup,
+  RadioIndicator,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import clsx from "clsx";
 
@@ -73,16 +81,16 @@ export function DeliveryAndPayment() {
                   "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
                 )}
               >
-                <Radio.Control className="absolute right-4 top-3 size-5">
-                  <Radio.Indicator />
-                </Radio.Control>
-                <Radio.Content className="flex flex-col gap-6">
+                <RadioControl className="absolute right-4 top-3 size-5">
+                  <RadioIndicator />
+                </RadioControl>
+                <RadioContent className="flex flex-col gap-6">
                   <div className="flex flex-col gap-1">
                     <Label>{option.title}</Label>
                     <Description>{option.description}</Description>
                   </div>
                   <span className="text-sm font-semibold">{option.price}</span>
-                </Radio.Content>
+                </RadioContent>
               </Radio>
             ))}
           </div>
@@ -103,16 +111,16 @@ export function DeliveryAndPayment() {
                   "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                 )}
               >
-                <Radio.Control className="absolute right-4 top-3 size-5">
-                  <Radio.Indicator />
-                </Radio.Control>
-                <Radio.Content className="flex flex-row items-start justify-start gap-4">
+                <RadioControl className="absolute right-4 top-3 size-5">
+                  <RadioIndicator />
+                </RadioControl>
+                <RadioContent className="flex flex-row items-start justify-start gap-4">
                   <Icon className="size-6" icon={option.icon} />
                   <div className="flex flex-col gap-1">
                     <Label>{option.title}</Label>
                     <Description>{option.description}</Description>
                   </div>
-                </Radio.Content>
+                </RadioContent>
               </Radio>
             ))}
           </div>

@@ -1,10 +1,11 @@
-export {Radio, RadioGroup} from "./radio-group";
+export {RadioGroup, Radio, RadioControl, RadioIndicator, RadioContent} from "./radio-group";
+
 export type {
-  RadioGroupRootProps,
   RadioGroupProps,
-  RadioRootProps,
   RadioProps,
+  RadioControlProps,
   RadioIndicatorProps,
+  RadioContentProps,
 } from "./radio-group";
-export {radioVariants, radioGroupVariants} from "./radio-group.styles";
-export type {RadioGroupVariants} from "./radio-group.styles";
+
+export {radioVariants, radioGroupVariants, type RadioGroupVariants} from "./radio-group.styles";

@@ -1,6 +1,14 @@
 "use client";
 
-import {Description, Label, Radio, RadioGroup} from "@heroui/react";
+import {
+  Description,
+  Label,
+  Radio,
+  RadioContent,
+  RadioControl,
+  RadioGroup,
+  RadioIndicator,
+} from "@heroui/react";
 
 export function CustomIndicator() {
   return (
@@ -8,43 +16,43 @@ export function CustomIndicator() {
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
       <Radio value="basic">
-        <Radio.Control>
-          <Radio.Indicator>
+        <RadioControl>
+          <RadioIndicator>
             {({isSelected}) =>
               isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
             }
-          </Radio.Indicator>
-        </Radio.Control>
-        <Radio.Content>
+          </RadioIndicator>
+        </RadioControl>
+        <RadioContent>
           <Label>Basic Plan</Label>
           <Description>Includes 100 messages per month</Description>
-        </Radio.Content>
+        </RadioContent>
       </Radio>
       <Radio value="premium">
-        <Radio.Control>
-          <Radio.Indicator>
+        <RadioControl>
+          <RadioIndicator>
             {({isSelected}) =>
               isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
             }
-          </Radio.Indicator>
-        </Radio.Control>
-        <Radio.Content>
+          </RadioIndicator>
+        </RadioControl>
+        <RadioContent>
           <Label>Premium Plan</Label>
           <Description>Includes 200 messages per month</Description>
-        </Radio.Content>
+        </RadioContent>
       </Radio>
       <Radio value="business">
-        <Radio.Control>
-          <Radio.Indicator>
+        <RadioControl>
+          <RadioIndicator>
             {({isSelected}) =>
               isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
             }
-          </Radio.Indicator>
-        </Radio.Control>
-        <Radio.Content>
+          </RadioIndicator>
+        </RadioControl>
+        <RadioContent>
           <Label>Business Plan</Label>
           <Description>Unlimited messages</Description>
-        </Radio.Content>
+        </RadioContent>
       </Radio>
     </RadioGroup>
   );

@@ -62,7 +62,9 @@ const Disclosure = React.forwardRef<
 
 Disclosure.displayName = "HeroUI.Disclosure";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * DisclosureHeading
+ * -----------------------------------------------------------------------------------------------*/
 
 interface DisclosureHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   className?: string;
@@ -86,7 +88,9 @@ const DisclosureHeading = React.forwardRef<
 
 DisclosureHeading.displayName = "HeroUI.DisclosureHeading";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * DisclosureTrigger
+ * -----------------------------------------------------------------------------------------------*/
 
 interface DisclosureTriggerProps extends ButtonProps {}
 
@@ -113,7 +117,9 @@ const DisclosureTrigger = React.forwardRef<
 
 DisclosureTrigger.displayName = "HeroUI.DisclosureTrigger";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * DisclosureContent
+ * -----------------------------------------------------------------------------------------------*/
 
 interface DisclosureContentProps extends DisclosurePanelProps {}
 
@@ -141,7 +147,9 @@ const DisclosureContent = React.forwardRef<
 
 DisclosureContent.displayName = "HeroUI.DisclosureContent";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * DisclosureBody
+ * -----------------------------------------------------------------------------------------------*/
 
 interface DisclosureBodyContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -159,7 +167,9 @@ const DisclosureBody = React.forwardRef<React.ComponentRef<"div">, DisclosureBod
 
 DisclosureBody.displayName = "HeroUI.DisclosureBody";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * DisclosureIndicator
+ * -----------------------------------------------------------------------------------------------*/
 
 interface DisclosureIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
   className?: string;
@@ -201,15 +211,9 @@ const DisclosureIndicator = React.forwardRef<
 
 DisclosureIndicator.displayName = "HeroUI.DisclosureIndicator";
 
-/* -----------------------------------------------------------------------------------------------*/
-
-const CompoundDisclosure = Object.assign(Disclosure, {
-  Heading: DisclosureHeading,
-  Trigger: DisclosureTrigger,
-  Content: DisclosureContent,
-  Body: DisclosureBody,
-  Indicator: DisclosureIndicator,
-});
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
 export type {
   DisclosureProps,
@@ -220,4 +224,11 @@ export type {
   DisclosureBodyContentProps,
 };
 
-export default CompoundDisclosure;
+export {
+  Disclosure,
+  DisclosureHeading,
+  DisclosureTrigger,
+  DisclosureContent,
+  DisclosureBody,
+  DisclosureIndicator,
+};

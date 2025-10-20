@@ -13,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import { Link } from '@heroui/react';
+import { Link, LinkIcon } from '@heroui/react';
 ```
 
 ### Usage
@@ -27,12 +27,12 @@ import { Link } from '@heroui/react';
 Import all parts and piece them together.
 
 ```tsx
-import {Link} from '@heroui/react';
+import {Link, LinkIcon} from '@heroui/react';
 
 export default () => (
   <Link href="#">
     Call to action
-    <Link.Icon />
+    <LinkIcon />
   </Link>
 );
 ```
@@ -113,7 +113,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `onPress` | `(e: PressEvent) => void` | - | Fired when the link is activated |
 | `autoFocus` | `boolean` | - | Whether the element should receive focus on render |
 
-### Link.Icon Props
+### LinkIcon Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

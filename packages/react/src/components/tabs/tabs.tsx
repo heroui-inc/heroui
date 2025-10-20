@@ -35,7 +35,7 @@ interface TabsProps extends TabsPrimitiveProps, TabsVariants {
   className?: string;
 }
 
-const TabsRoot = React.forwardRef<React.ComponentRef<typeof TabsPrimitive>, TabsProps>(
+const Tabs = React.forwardRef<React.ComponentRef<typeof TabsPrimitive>, TabsProps>(
   ({children, className, orientation = "horizontal", ...props}, ref) => {
     const slots = React.useMemo(() => tabsVariants(), []);
 
@@ -55,7 +55,7 @@ const TabsRoot = React.forwardRef<React.ComponentRef<typeof TabsPrimitive>, Tabs
   },
 );
 
-TabsRoot.displayName = "HeroUI.Tabs";
+Tabs.displayName = "HeroUI.Tabs";
 /* -----------------------------------------------------------------------------------------------*/
 
 interface TabListWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -185,13 +185,13 @@ TabPanel.displayName = "HeroUI.TabPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundTabs = Object.assign(TabsRoot, {
-  ListWrapper: TabListWrapper,
-  List: TabList,
-  Tab: Tab,
-  Indicator: TabIndicator,
-  Panel: TabPanel,
-});
+export {Tabs, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
 
-export default CompoundTabs;
-export type {TabsProps, TabListProps, TabProps, TabPanelProps};
+export type {
+  TabsProps,
+  TabListWrapperProps,
+  TabListProps,
+  TabProps,
+  TabIndicatorProps,
+  TabPanelProps,
+};

@@ -21,11 +21,11 @@ const CardContext = createContext<CardContext>({});
  * Card
  * -----------------------------------------------------------------------------------------------*/
 
-interface CardRootProps extends React.HTMLAttributes<HTMLDivElement>, CardVariants {
+interface CardProps extends React.HTMLAttributes<HTMLDivElement>, CardVariants {
   asChild?: boolean;
 }
 
-const CardRoot = React.forwardRef<HTMLDivElement, CardRootProps>(
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({asChild = false, children, className, variant, ...props}, ref) => {
     const slots = React.useMemo(() => cardVariants({variant}), [variant]);
     const Comp = asChild ? Slot : "div";
@@ -40,7 +40,7 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardRootProps>(
   },
 );
 
-CardRoot.displayName = "HeroUI.Card";
+Card.displayName = "HeroUI.Card";
 
 /* -------------------------------------------------------------------------------------------------
  * Card Header
@@ -61,7 +61,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   },
 );
 
-CardHeader.displayName = "HeroUI.Card.Header";
+CardHeader.displayName = "HeroUI.CardHeader";
 
 /* -------------------------------------------------------------------------------------------------
  * Card Title
@@ -82,7 +82,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
   },
 );
 
-CardTitle.displayName = "HeroUI.Card.Title";
+CardTitle.displayName = "HeroUI.CardTitle";
 
 /* -------------------------------------------------------------------------------------------------
  * Card Description
@@ -108,7 +108,7 @@ const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionPr
   },
 );
 
-CardDescription.displayName = "HeroUI.Card.Description";
+CardDescription.displayName = "HeroUI.CardDescription";
 
 /* -------------------------------------------------------------------------------------------------
  * Card Content
@@ -129,7 +129,7 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
   },
 );
 
-CardContent.displayName = "HeroUI.Card.Content";
+CardContent.displayName = "HeroUI.CardContent";
 
 /* -------------------------------------------------------------------------------------------------
  * Card Footer
@@ -150,22 +150,14 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   },
 );
 
-CardFooter.displayName = "HeroUI.Card.Footer";
+CardFooter.displayName = "HeroUI.CardFooter";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const CompoundCard = Object.assign(CardRoot, {
-  Content: CardContent,
-  Description: CardDescription,
-  Footer: CardFooter,
-  Header: CardHeader,
-  Title: CardTitle,
-});
-
 export type {
-  CardRootProps,
+  CardProps,
   CardHeaderProps,
   CardTitleProps,
   CardDescriptionProps,
@@ -173,4 +165,4 @@ export type {
   CardFooterProps,
 };
 
-export default CompoundCard;
+export {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};

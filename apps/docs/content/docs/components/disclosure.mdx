@@ -12,7 +12,11 @@ links:
 ## Import
 
 ```tsx
-import {Disclosure} from '@heroui/react';
+import {
+  Disclosure,
+  DisclosureTrigger,
+  DisclosurePanel
+} from '@heroui/react';
 ```
 
 ### Usage
@@ -26,16 +30,16 @@ import {Disclosure} from '@heroui/react';
 Import all parts and piece them together.
 
 ```tsx
-import { Disclosure } from '@heroui/react';
+import {
+  Disclosure,
+  DisclosureTrigger,
+  DisclosurePanel
+} from '@heroui/react';
 
 export default () => (
   <Disclosure>
-    <Disclosure.Heading>
-      <Disclosure.Trigger>
-        <Disclosure.Indicator />
-      </Disclosure.Trigger>
-    </Disclosure.Heading>
-    <Disclosure.Content/>
+    <DisclosureTrigger>Toggle</DisclosureTrigger>
+    <DisclosurePanel>Content</DisclosurePanel>
   </Disclosure>
 )
 ```
@@ -47,18 +51,21 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { Disclosure } from '@heroui/react';
+import {
+  Disclosure,
+  DisclosureTrigger,
+  DisclosurePanel
+} from '@heroui/react';
 
 function CustomDisclosure() {
   return (
     <Disclosure className="border rounded-lg p-4">
-      <Disclosure.Trigger className="text-lg font-semibold">
+      <DisclosureTrigger className="text-lg font-semibold">
         Click to expand
-        <Disclosure.Indicator className="ml-2" />
-      </Disclosure.Trigger>
-      <Disclosure.Content className="mt-4 text-gray-600">
+      </DisclosureTrigger>
+      <DisclosurePanel className="mt-4 text-gray-600">
         Hidden content
-      </Disclosure.Content>
+      </DisclosurePanel>
     </Disclosure>
   );
 }
@@ -124,26 +131,18 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Content to render |
 | `className` | `string` | - | Additional CSS classes |
 
-### Disclosure.Trigger Props
+### DisclosureTrigger Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode \| RenderFunction` | - | Trigger content |
 | `className` | `string` | - | Additional CSS classes |
-| `slot` | `string` | `"trigger"` | Slot name for React Aria |
 
-### Disclosure.Content Props
+### DisclosurePanel Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Content to show/hide |
-| `className` | `string` | - | Additional CSS classes |
-
-### Disclosure.Indicator Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactElement` | `<IconChevronDown />` | Custom indicator element |
 | `className` | `string` | - | Additional CSS classes |
 
 ### RenderProps

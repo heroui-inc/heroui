@@ -1,6 +1,6 @@
 "use client";
 
-import {Avatar} from "@heroui/react";
+import {Avatar, AvatarFallback, AvatarImage} from "@heroui/react";
 
 const users = [
   {
@@ -37,13 +37,13 @@ export function Group() {
       <div className="flex -space-x-2">
         {users.slice(0, 4).map((user) => (
           <Avatar key={user.id} className="ring-background ring-2">
-            <Avatar.Image alt={user.name} src={user.image} />
-            <Avatar.Fallback>
+            <AvatarImage alt={user.name} src={user.image} />
+            <AvatarFallback>
               {user.name
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
-            </Avatar.Fallback>
+            </AvatarFallback>
           </Avatar>
         ))}
       </div>
@@ -52,17 +52,17 @@ export function Group() {
       <div className="flex -space-x-2">
         {users.slice(0, 3).map((user) => (
           <Avatar key={user.id} className="ring-background ring-2">
-            <Avatar.Image alt={user.name} src={user.image} />
-            <Avatar.Fallback>
+            <AvatarImage alt={user.name} src={user.image} />
+            <AvatarFallback>
               {user.name
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
-            </Avatar.Fallback>
+            </AvatarFallback>
           </Avatar>
         ))}
         <Avatar className="ring-background ring-2">
-          <Avatar.Fallback className="text-xs">+{users.length - 3}</Avatar.Fallback>
+          <AvatarFallback className="text-xs">+{users.length - 3}</AvatarFallback>
         </Avatar>
       </div>
     </div>

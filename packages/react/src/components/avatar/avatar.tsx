@@ -4,15 +4,11 @@ import type {AvatarVariants} from "./avatar.styles";
 import type {UseImageProps} from "../../hooks";
 import type {
   AvatarFallbackProps,
-  Image as AvatarImagePrimitive,
   AvatarImageProps,
   AvatarProps as AvatarPrimitiveProps,
 } from "@radix-ui/react-avatar";
 
-import {
-  Fallback as AvatarFallbackPrimitive,
-  Root as AvatarRootPrimitive,
-} from "@radix-ui/react-avatar";
+import {Fallback as AvatarFallbackPrimitive, Root as AvatarPrimitive} from "@radix-ui/react-avatar";
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
@@ -29,30 +25,31 @@ const AvatarContext = createContext<{
  * Avatar
  * -----------------------------------------------------------------------------------------------*/
 
-interface AvatarRootProps extends Omit<AvatarPrimitiveProps, "color">, AvatarVariants {}
+interface AvatarProps extends Omit<AvatarPrimitiveProps, "color">, AvatarVariants {}
 
-const AvatarRoot = React.forwardRef<
-  React.ComponentRef<typeof AvatarRootPrimitive>,
-  AvatarRootProps
->(({children, className, color, size, ...props}, ref) => {
-  const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
+const Avatar = React.forwardRef<React.ComponentRef<typeof AvatarPrimitive>, AvatarProps>(
+  ({children, className, color, size, ...props}, ref) => {
+    const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
 
-  return (
-    <AvatarContext.Provider value={{slots}}>
-      <AvatarRootPrimitive ref={ref} className={slots.base({className})} {...props}>
-        {children}
-      </AvatarRootPrimitive>
-    </AvatarContext.Provider>
-  );
-});
+    return (
+      <AvatarContext.Provider value={{slots}}>
+        <AvatarPrimitive ref={ref} className={slots.base({className})} {...props}>
+          {children}
+        </AvatarPrimitive>
+      </AvatarContext.Provider>
+    );
+  },
+);
 
-AvatarRoot.displayName = "HeroUI.AvatarRoot";
+Avatar.displayName = "HeroUI.Avatar";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Avatar Image
+ * -----------------------------------------------------------------------------------------------*/
 
 const AvatarImage = React.forwardRef<
-  React.ComponentRef<typeof AvatarImagePrimitive>,
-  React.ComponentPropsWithoutRef<typeof AvatarImagePrimitive> & {
+  React.ComponentRef<"img">,
+  React.ComponentPropsWithoutRef<"img"> & {
     asChild?: boolean;
     ignoreFallback?: UseImageProps["ignoreFallback"];
     shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
@@ -78,7 +75,9 @@ const AvatarImage = React.forwardRef<
 
 AvatarImage.displayName = "HeroUI.AvatarImage";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Avatar Fallback
+ * -----------------------------------------------------------------------------------------------*/
 
 const AvatarFallback = React.forwardRef<
   React.ComponentRef<typeof AvatarFallbackPrimitive>,
@@ -93,7 +92,9 @@ const AvatarFallback = React.forwardRef<
 
 AvatarFallback.displayName = "HeroUI.AvatarFallback";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
-export {AvatarRoot, AvatarImage, AvatarFallback};
-export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};
+export type {AvatarProps, AvatarImageProps, AvatarFallbackProps};
+export {Avatar, AvatarImage, AvatarFallback};

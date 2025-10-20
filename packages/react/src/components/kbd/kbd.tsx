@@ -20,7 +20,7 @@ interface KbdProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
 }
 
-const KbdRoot = React.forwardRef<HTMLElement, KbdProps>(({children, className, ...props}, ref) => {
+const Kbd = React.forwardRef<HTMLElement, KbdProps>(({children, className, ...props}, ref) => {
   const slots = React.useMemo(() => kbdVariants(), []);
 
   return (
@@ -32,9 +32,11 @@ const KbdRoot = React.forwardRef<HTMLElement, KbdProps>(({children, className, .
   );
 });
 
-KbdRoot.displayName = "HeroUI.Kbd";
+Kbd.displayName = "HeroUI.Kbd";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * KbdAbbr
+ * -----------------------------------------------------------------------------------------------*/
 
 interface KbdAbbrProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
@@ -61,9 +63,11 @@ const KbdAbbr = React.forwardRef<HTMLElement, KbdAbbrProps>(
   },
 );
 
-KbdAbbr.displayName = "HeroUI.Kbd.Abbr";
+KbdAbbr.displayName = "HeroUI.KbdAbbr";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * KbdContent
+ * -----------------------------------------------------------------------------------------------*/
 
 interface KbdContentProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
@@ -82,14 +86,11 @@ const KbdContent = React.forwardRef<HTMLSpanElement, KbdContentProps>(
   },
 );
 
-KbdContent.displayName = "HeroUI.Kbd.Content";
+KbdContent.displayName = "HeroUI.KbdContent";
 
-/* -----------------------------------------------------------------------------------------------*/
-
-const CompoundKbd = Object.assign(KbdRoot, {
-  Abbr: KbdAbbr,
-  Content: KbdContent,
-});
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
 export type {KbdProps, KbdAbbrProps, KbdContentProps};
-export default CompoundKbd;
+export {Kbd, KbdAbbr, KbdContent};
