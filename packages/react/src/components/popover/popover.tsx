@@ -39,41 +39,35 @@ const Popover = ({children, ...props}: React.ComponentProps<typeof PopoverTrigge
   );
 };
 
-Popover.displayName = "HeroUI.Popover";
-
 /* -----------------------------------------------------------------------------------------------*/
 
 interface PopoverContentProps extends Omit<PopoverPrimitiveProps, "children">, PopoverVariants {
   children: React.ReactNode;
 }
 
-const PopoverContent = React.forwardRef<
-  React.ComponentRef<typeof PopoverPrimitive>,
-  PopoverContentProps
->(({children, className, ...props}, ref) => {
+const PopoverContent = ({children, className, ...props}: PopoverContentProps) => {
   const {slots} = useContext(PopoverContext);
 
   return (
     <PopoverContext.Provider value={{slots}}>
-      <PopoverPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.base())}
-      >
+      <PopoverPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
         {children}
       </PopoverPrimitive>
     </PopoverContext.Provider>
   );
-});
-
-PopoverContent.displayName = "HeroUI.PopoverContent";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const PopoverArrow = React.forwardRef<
-  React.ComponentRef<typeof OverlayArrow>,
-  Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {children?: React.ReactNode}
->(({children, className, ...props}, ref) => {
+const PopoverArrow = ({
+  children,
+  className,
+  ref,
+  ...props
+}: Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+  children?: React.ReactNode;
+  ref?: React.Ref<React.ComponentRef<typeof OverlayArrow>>;
+}) => {
   const defaultArrow = (
     <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
       <path d="M0 0 L6 6 L12 0" />
@@ -97,16 +91,19 @@ const PopoverArrow = React.forwardRef<
       {arrow}
     </OverlayArrow>
   );
-});
-
-PopoverArrow.displayName = "HeroUI.PopoverArrow";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const PopoverDialog = React.forwardRef<
-  React.ComponentRef<typeof DialogPrimitive>,
-  Omit<React.ComponentProps<typeof DialogPrimitive>, "children"> & {children: React.ReactNode}
->(({children, className, ...props}, ref) => {
+const PopoverDialog = ({
+  children,
+  className,
+  ref,
+  ...props
+}: Omit<React.ComponentProps<typeof DialogPrimitive>, "children"> & {
+  children: React.ReactNode;
+  ref?: React.Ref<React.ComponentRef<typeof DialogPrimitive>>;
+}) => {
   const {slots} = useContext(PopoverContext);
 
   return (
@@ -119,9 +116,7 @@ const PopoverDialog = React.forwardRef<
       {children}
     </DialogPrimitive>
   );
-});
-
-PopoverDialog.displayName = "HeroUI.PopoverDialog";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -142,14 +137,16 @@ const PopoverTrigger = ({children, className, ...props}: React.HTMLAttributes<HT
   );
 };
 
-PopoverTrigger.displayName = "HeroUI.PopoverTrigger";
-
 /* -----------------------------------------------------------------------------------------------*/
 
-const PopoverHeading = React.forwardRef<
-  React.ComponentRef<typeof HeadingPrimitive>,
-  React.ComponentProps<typeof HeadingPrimitive>
->(({children, className, ...props}, ref) => {
+const PopoverHeading = ({
+  children,
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<typeof HeadingPrimitive> & {
+  ref?: React.Ref<React.ComponentRef<typeof HeadingPrimitive>>;
+}) => {
   const {slots} = useContext(PopoverContext);
 
   return (
@@ -157,9 +154,7 @@ const PopoverHeading = React.forwardRef<
       {children}
     </HeadingPrimitive>
   );
-});
-
-PopoverHeading.displayName = "HeroUI.PopoverHeading";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 

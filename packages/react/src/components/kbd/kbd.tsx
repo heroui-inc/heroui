@@ -14,83 +14,63 @@ const KbdContext = createContext<{
 /* -------------------------------------------------------------------------------------------------
  * Kbd
  * -----------------------------------------------------------------------------------------------*/
-
 interface KbdProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
+  ref?: React.Ref<HTMLElement>;
 }
-
-const Kbd = React.forwardRef<HTMLElement, KbdProps>(({children, className, ...props}, ref) => {
+const Kbd = ({children, className, ...props}: KbdProps) => {
   const slots = React.useMemo(() => kbdVariants(), []);
 
   return (
     <KbdContext.Provider value={{slots}}>
-      <kbd ref={ref} {...props} className={slots.base({className})}>
+      <kbd {...props} className={slots.base({className})}>
         {children}
       </kbd>
     </KbdContext.Provider>
   );
-});
-
-Kbd.displayName = "HeroUI.Kbd";
+};
 
 /* -------------------------------------------------------------------------------------------------
  * KbdAbbr
  * -----------------------------------------------------------------------------------------------*/
-
 interface KbdAbbrProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
   /**
    * The keyboard key to display
    */
   keyValue: KbdKey;
+  ref?: React.Ref<HTMLElement>;
 }
+const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
+  const {slots} = useContext(KbdContext);
 
-const KbdAbbr = React.forwardRef<HTMLElement, KbdAbbrProps>(
-  ({className, keyValue, ...props}, ref) => {
-    const {slots} = useContext(KbdContext);
-
-    return (
-      <abbr
-        ref={ref}
-        className={slots?.abbr({className})}
-        title={kbdKeysLabelMap[keyValue]}
-        {...props}
-      >
-        {kbdKeysMap[keyValue]}
-      </abbr>
-    );
-  },
-);
-
-KbdAbbr.displayName = "HeroUI.KbdAbbr";
+  return (
+    <abbr className={slots?.abbr({className})} title={kbdKeysLabelMap[keyValue]} {...props}>
+      {kbdKeysMap[keyValue]}
+    </abbr>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * KbdContent
  * -----------------------------------------------------------------------------------------------*/
-
-interface KbdContentProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface KbdContentProps extends React.ComponentProps<"span"> {
   children: React.ReactNode;
   className?: string;
 }
+const KbdContent = ({children, className, ...props}: KbdContentProps) => {
+  const {slots} = useContext(KbdContext);
 
-const KbdContent = React.forwardRef<HTMLSpanElement, KbdContentProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(KbdContext);
-
-    return (
-      <span ref={ref} className={slots?.content({className})} {...props}>
-        {children}
-      </span>
-    );
-  },
-);
-
-KbdContent.displayName = "HeroUI.KbdContent";
+  return (
+    <span className={slots?.content({className})} {...props}>
+      {children}
+    </span>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-
 export type {KbdProps, KbdAbbrProps, KbdContentProps};
 export {Kbd, KbdAbbr, KbdContent};

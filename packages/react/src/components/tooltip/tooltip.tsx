@@ -38,19 +38,22 @@ const Tooltip = ({children, ...props}: React.ComponentProps<typeof TooltipTrigge
   );
 };
 
-Tooltip.displayName = "HeroUI.Tooltip";
-
 /* -----------------------------------------------------------------------------------------------*/
 
 interface TooltipContentProps extends Omit<TooltipPrimitiveProps, "children">, TooltipVariants {
   showArrow?: boolean;
   children: React.ReactNode;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
-const TooltipContent = React.forwardRef<
-  React.ComponentRef<typeof TooltipPrimitive>,
-  TooltipContentProps
->(({children, className, offset: offsetProp, showArrow = false, ...props}, ref) => {
+const TooltipContent = ({
+  children,
+  className,
+  offset: offsetProp,
+  ref,
+  showArrow = false,
+  ...props
+}: TooltipContentProps) => {
   const {slots} = useContext(TooltipContext);
   const offset = offsetProp ? offsetProp : showArrow ? 7 : 3;
 
@@ -64,16 +67,19 @@ const TooltipContent = React.forwardRef<
       {children}
     </TooltipPrimitive>
   );
-});
-
-TooltipContent.displayName = "HeroUI.TooltipContent";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const TooltipArrow = React.forwardRef<
-  React.ComponentRef<typeof OverlayArrow>,
-  Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {children?: React.ReactNode}
->(({children, className, ...props}, ref) => {
+const TooltipArrow = ({
+  children,
+  className,
+  ref,
+  ...props
+}: Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+  children?: React.ReactNode;
+  ref?: React.Ref<React.ComponentRef<typeof OverlayArrow>>;
+}) => {
   const defaultArrow = (
     <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
       <path d="M0 0 L6 6 L12 0" />
@@ -97,14 +103,13 @@ const TooltipArrow = React.forwardRef<
       {arrow}
     </OverlayArrow>
   );
-});
-
-TooltipArrow.displayName = "HeroUI.TooltipArrow";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
 interface TooltipTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 const TooltipTrigger = ({asChild = false, children, className, ...props}: TooltipTriggerProps) => {
@@ -124,8 +129,6 @@ const TooltipTrigger = ({asChild = false, children, className, ...props}: Toolti
     </FocusablePrimitive>
   );
 };
-
-TooltipTrigger.displayName = "HeroUI.TooltipTrigger";
 
 /* -----------------------------------------------------------------------------------------------*/
 

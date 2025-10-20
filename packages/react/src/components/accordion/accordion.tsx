@@ -34,31 +34,26 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
 
 interface AccordionProps extends DisclosureGroupProps, AccordionVariants {}
 
-const Accordion = React.forwardRef<React.ComponentRef<typeof DisclosureGroup>, AccordionProps>(
-  ({children, className, ...originalProps}, ref) => {
-    const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
+const Accordion = ({children, className, ...originalProps}: AccordionProps) => {
+  const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
 
-    const slots = React.useMemo(
-      () => accordionVariants({...(variantProps as AccordionVariants)}),
-      [objectToDeps(variantProps)],
-    );
+  const slots = React.useMemo(
+    () => accordionVariants({...(variantProps as AccordionVariants)}),
+    [objectToDeps(variantProps)],
+  );
 
-    return (
-      <AccordionContext.Provider value={{slots}}>
-        <DisclosureGroup
-          ref={ref}
-          data-slot="accordion"
-          {...props}
-          className={composeTwRenderProps(className, slots.base())}
-        >
-          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-        </DisclosureGroup>
-      </AccordionContext.Provider>
-    );
-  },
-);
-
-Accordion.displayName = "HeroUI.Accordion";
+  return (
+    <AccordionContext.Provider value={{slots}}>
+      <DisclosureGroup
+        data-slot="accordion"
+        {...props}
+        className={composeTwRenderProps(className, slots.base())}
+      >
+        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      </DisclosureGroup>
+    </AccordionContext.Provider>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionItem
@@ -66,37 +61,29 @@ Accordion.displayName = "HeroUI.Accordion";
 
 interface AccordionItemProps extends DisclosureProps {}
 
-const AccordionItem = React.forwardRef<React.ComponentRef<typeof Disclosure>, AccordionItemProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(AccordionContext);
+const AccordionItem = ({className, ...props}: AccordionItemProps) => {
+  const {slots} = useContext(AccordionContext);
 
-    return (
-      <Disclosure
-        ref={ref}
-        data-slot="accordion-item"
-        {...props}
-        className={composeTwRenderProps(className, slots?.item())}
-      >
-        {props.children}
-      </Disclosure>
-    );
-  },
-);
-
-AccordionItem.displayName = "HeroUI.AccordionItem";
+  return (
+    <Disclosure
+      data-slot="accordion-item"
+      {...props}
+      className={composeTwRenderProps(className, slots?.item())}
+    >
+      {props.children}
+    </Disclosure>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionIndicator
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionIndicatorProps extends React.HTMLAttributes<SVGSVGElement> {
+interface AccordionIndicatorProps extends React.ComponentProps<"svg"> {
   className?: string;
 }
 
-const AccordionIndicator = React.forwardRef<
-  React.ComponentRef<typeof IconChevronDown>,
-  AccordionIndicatorProps
->(({children, className, ...props}, ref) => {
+const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorProps) => {
   const {slots} = useContext(AccordionContext);
   const {isExpanded} = useContext(DisclosureStateContext)!;
 
@@ -118,42 +105,33 @@ const AccordionIndicator = React.forwardRef<
 
   return (
     <IconChevronDown
-      ref={ref}
       className={slots?.indicator({className})}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-indicator"
       {...props}
     />
   );
-});
-
-AccordionIndicator.displayName = "HeroUI.AccordionIndicator";
+};
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionHeading
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface AccordionHeadingProps extends React.ComponentProps<typeof DisclosureHeading> {
   className?: string;
 }
 
-const AccordionHeading = React.forwardRef<
-  React.ComponentRef<typeof DisclosureHeading>,
-  AccordionHeadingProps
->(({className, ...props}, ref) => {
+const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
   const {slots} = useContext(AccordionContext);
 
   return (
     <DisclosureHeading
-      ref={ref}
       className={slots?.heading({className})}
       data-slot="accordion-heading"
       {...props}
     />
   );
-});
-
-AccordionHeading.displayName = "HeroUI.AccordionHeading";
+};
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionTrigger
@@ -161,67 +139,54 @@ AccordionHeading.displayName = "HeroUI.AccordionHeading";
 
 interface AccordionTriggerProps extends ButtonProps {}
 
-const AccordionTrigger = React.forwardRef<React.ComponentRef<typeof Button>, AccordionTriggerProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(AccordionContext);
+const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
+  const {slots} = useContext(AccordionContext);
 
-    return (
-      <Button
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.trigger())}
-        data-slot="accordion-trigger"
-        slot="trigger"
-        {...props}
-      >
-        {(values) => (
-          <>{typeof props.children === "function" ? props.children(values) : props.children}</>
-        )}
-      </Button>
-    );
-  },
-);
-
-AccordionTrigger.displayName = "HeroUI.AccordionTrigger";
+  return (
+    <Button
+      className={composeTwRenderProps(className, slots?.trigger())}
+      data-slot="accordion-trigger"
+      slot="trigger"
+      {...props}
+    >
+      {(values) => (
+        <>{typeof props.children === "function" ? props.children(values) : props.children}</>
+      )}
+    </Button>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionBody
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface AccordionBodyProps extends React.ComponentProps<"div"> {
+  className?: string;
+}
 
-const AccordionBody = React.forwardRef<React.ComponentRef<"div">, AccordionBodyProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(AccordionContext);
+const AccordionBody = ({children, className, ...props}: AccordionBodyProps) => {
+  const {slots} = useContext(AccordionContext);
 
-    return (
-      <div ref={ref} className={slots?.body({})} data-slot="accordion-body" {...props}>
-        <div className={slots?.bodyInner({className})}>{children}</div>
-      </div>
-    );
-  },
-);
-
-AccordionBody.displayName = "HeroUI.AccordionBody";
+  return (
+    <div className={slots?.body({})} data-slot="accordion-body" {...props}>
+      <div className={slots?.bodyInner({className})}>{children}</div>
+    </div>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionPanel
  * -----------------------------------------------------------------------------------------------*/
 
-interface AccordionPanelProps extends DisclosurePanelProps {
-  ref?: React.Ref<HTMLDivElement>;
-}
+interface AccordionPanelProps extends DisclosurePanelProps {}
 
-const AccordionPanel = React.forwardRef<
-  React.ComponentRef<typeof DisclosurePanel>,
-  AccordionPanelProps
->(({children, className, ...props}, ref) => {
+const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) => {
   const {slots} = useContext(AccordionContext);
   const {isExpanded} = useContext(DisclosureStateContext)!;
 
   return (
     <DisclosurePanel
       {...props}
-      ref={ref}
       className={composeTwRenderProps(className, slots?.panel())}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-panel"
@@ -229,9 +194,7 @@ const AccordionPanel = React.forwardRef<
       {children}
     </DisclosurePanel>
   );
-});
-
-AccordionPanel.displayName = "HeroUI.AccordionPanel";
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

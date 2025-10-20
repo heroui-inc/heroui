@@ -27,36 +27,31 @@ import {
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {calendarVariants} from "./calendar.styles";
-
 /* -------------------------------------------------------------------------------------------------
  * Calendar Context
  * -----------------------------------------------------------------------------------------------*/
-
 interface CalendarContext {
   slots?: ReturnType<typeof calendarVariants>;
 }
-
 const CalendarContext = createContext<CalendarContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Calendar
  * -----------------------------------------------------------------------------------------------*/
-
 interface CalendarProps<T extends DateValue = DateValue>
   extends CalendarPrimitiveProps<T>,
     CalendarVariants {}
-
-function CalendarInner<T extends DateValue = DateValue>(
-  props: CalendarProps<T> & React.RefAttributes<HTMLDivElement>,
-  ref?: React.Ref<HTMLDivElement>,
-) {
-  const {children, className, isDisabled, ...rest} = props;
+function Calendar<T extends DateValue = DateValue>({
+  children,
+  className,
+  isDisabled,
+  ...rest
+}: CalendarProps<T>) {
   const slots = React.useMemo(() => calendarVariants({isDisabled}), [isDisabled]);
 
   return (
     <CalendarContext.Provider value={{slots}}>
       <CalendarPrimitive
-        ref={ref}
         data-slot="calendar"
         isDisabled={isDisabled}
         {...rest}
@@ -67,210 +62,137 @@ function CalendarInner<T extends DateValue = DateValue>(
     </CalendarContext.Provider>
   );
 }
-
-const Calendar = React.forwardRef(CalendarInner) as <T extends DateValue = DateValue>(
-  props: CalendarProps<T> & React.RefAttributes<HTMLDivElement>,
-  ref?: React.ComponentRef<typeof CalendarPrimitive>,
-) => React.ReactElement;
-
-// @ts-expect-error - displayName on generic component
-Calendar.displayName = "HeroUI.Calendar";
-
 /* -----------------------------------------------------------------------------------------------*/
-
-interface CalendarHeaderProps {
-  children?: React.ReactNode;
+interface CalendarHeaderProps extends React.ComponentProps<"header"> {
   className?: string;
 }
+const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarHeader = React.forwardRef<HTMLDivElement, CalendarHeaderProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
-
-    return (
-      <header
-        ref={ref}
-        className={slots?.header({className})}
-        data-slot="calendar-header"
-        {...props}
-      >
-        {children}
-      </header>
-    );
-  },
-);
-
-CalendarHeader.displayName = "HeroUI.CalendarHeader";
+  return (
+    <header className={slots?.header({className})} data-slot="calendar-header" {...props}>
+      {children}
+    </header>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface CalendarHeadingProps extends HeadingPrimitiveProps {}
+const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarHeading = React.forwardRef<HTMLHeadingElement, CalendarHeadingProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
-
-    return (
-      <HeadingPrimitive
-        ref={ref}
-        data-slot="calendar-heading"
-        {...props}
-        className={slots?.heading({className})}
-      />
-    );
-  },
-);
-
-CalendarHeading.displayName = "HeroUI.CalendarHeading";
+  return (
+    <HeadingPrimitive
+      data-slot="calendar-heading"
+      {...props}
+      className={slots?.heading({className})}
+    />
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface CalendarNavButtonProps extends ButtonPrimitiveProps {
   slot?: "previous" | "next";
 }
+const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavButtonProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarNavButton = React.forwardRef<HTMLButtonElement, CalendarNavButtonProps>(
-  ({children, className, slot, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
-
-    return (
-      <ButtonPrimitive
-        ref={ref}
-        data-slot="calendar-nav-button"
-        slot={slot}
-        {...props}
-        className={composeTwRenderProps(className, slots?.navButton())}
-      >
-        {children || (slot === "previous" ? "‹" : "›")}
-      </ButtonPrimitive>
-    );
-  },
-);
-
-CalendarNavButton.displayName = "HeroUI.CalendarNavButton";
+  return (
+    <ButtonPrimitive
+      data-slot="calendar-nav-button"
+      slot={slot}
+      {...props}
+      className={composeTwRenderProps(className, slots?.navButton())}
+    >
+      {children || (slot === "previous" ? "‹" : "›")}
+    </ButtonPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface CalendarGridProps extends CalendarGridPrimitiveProps {}
+const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarGrid = React.forwardRef<HTMLTableElement, CalendarGridProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
-
-    return (
-      <CalendarGridPrimitive
-        ref={ref}
-        data-slot="calendar-grid"
-        {...props}
-        className={slots?.grid({className})}
-      >
-        <CalendarGridHeader>
-          {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
-        </CalendarGridHeader>
-        <CalendarGridBodyPrimitive>
-          {(date) => <CalendarCell date={date}>{date.day}</CalendarCell>}
-        </CalendarGridBodyPrimitive>
-      </CalendarGridPrimitive>
-    );
-  },
-);
-
-CalendarGrid.displayName = "HeroUI.CalendarGrid";
+  return (
+    <CalendarGridPrimitive
+      data-slot="calendar-grid"
+      {...props}
+      className={slots?.grid({className})}
+    >
+      <CalendarGridHeader>
+        {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
+      </CalendarGridHeader>
+      <CalendarGridBodyPrimitive>
+        {(date) => <CalendarCell date={date}>{date.day}</CalendarCell>}
+      </CalendarGridBodyPrimitive>
+    </CalendarGridPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface CalendarGridHeaderProps extends CalendarGridHeaderPrimitiveProps {}
+const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarGridHeader = React.forwardRef<HTMLTableSectionElement, CalendarGridHeaderProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
-
-    return (
-      <CalendarGridHeaderPrimitive
-        ref={ref}
-        data-slot="calendar-grid-header"
-        {...props}
-        className={slots?.gridHeader({className})}
-      />
-    );
-  },
-);
-
-CalendarGridHeader.displayName = "HeroUI.CalendarGridHeader";
+  return (
+    <CalendarGridHeaderPrimitive
+      data-slot="calendar-grid-header"
+      {...props}
+      className={slots?.gridHeader({className})}
+    />
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface CalendarHeaderCellProps extends CalendarHeaderCellPrimitiveProps {}
+const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarHeaderCell = React.forwardRef<HTMLTableCellElement, CalendarHeaderCellProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
-
-    return (
-      <CalendarHeaderCellPrimitive
-        ref={ref}
-        data-slot="calendar-header-cell"
-        {...props}
-        className={slots?.headerCell({className})}
-      />
-    );
-  },
-);
-
-CalendarHeaderCell.displayName = "HeroUI.CalendarHeaderCell";
+  return (
+    <CalendarHeaderCellPrimitive
+      data-slot="calendar-header-cell"
+      {...props}
+      className={slots?.headerCell({className})}
+    />
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
-
 interface CalendarCellProps extends CalendarCellPrimitiveProps {}
+const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
+  const {slots} = useContext(CalendarContext);
 
-const CalendarCell = React.forwardRef<HTMLTableCellElement, CalendarCellProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(CalendarContext);
+  return (
+    <CalendarCellPrimitive
+      data-slot="calendar-cell"
+      {...props}
+      className={composeTwRenderProps(className, slots?.cell())}
+    >
+      {(values) => {
+        const {formattedDate, isDisabled, isHovered, isOutsideMonth, isSelected, isUnavailable} =
+          values;
 
-    return (
-      <CalendarCellPrimitive
-        ref={ref}
-        data-slot="calendar-cell"
-        {...props}
-        className={composeTwRenderProps(className, slots?.cell())}
-      >
-        {(values) => {
-          const {formattedDate, isDisabled, isHovered, isOutsideMonth, isSelected, isUnavailable} =
-            values;
-
-          return (
-            <div
-              className={slots?.cellButton({
-                isDisabled,
-                isHovered,
-                isOutsideMonth,
-                isSelected,
-                isUnavailable,
-              })}
-            >
-              {typeof children === "function" ? children(values) : children || formattedDate}
-            </div>
-          );
-        }}
-      </CalendarCellPrimitive>
-    );
-  },
-);
-
-CalendarCell.displayName = "HeroUI.CalendarCell";
-
+        return (
+          <div
+            className={slots?.cellButton({
+              isDisabled,
+              isHovered,
+              isOutsideMonth,
+              isSelected,
+              isUnavailable,
+            })}
+          >
+            {typeof children === "function" ? children(values) : children || formattedDate}
+          </div>
+        );
+      }}
+    </CalendarCellPrimitive>
+  );
+};
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-
-const Root = Calendar;
-const Header = CalendarHeader;
-const Heading = CalendarHeading;
-const NavButton = CalendarNavButton;
-const Grid = CalendarGrid;
-const GridHeader = CalendarGridHeader;
-const HeaderCell = CalendarHeaderCell;
-const Cell = CalendarCell;
 
 export {
   Calendar,
@@ -281,17 +203,7 @@ export {
   CalendarGridHeader,
   CalendarHeaderCell,
   CalendarCell,
-  // named exports
-  Root,
-  Header,
-  Heading,
-  NavButton,
-  Grid,
-  GridHeader,
-  HeaderCell,
-  Cell,
 };
-
 export type {
   CalendarProps,
   CalendarHeaderProps,

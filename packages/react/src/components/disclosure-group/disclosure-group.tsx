@@ -21,10 +21,7 @@ const DisclosureGroupContext = createContext<{
 
 interface DisclosureGroupProps extends DisclosureGroupPrimitiveProps, DisclosureGroupVariants {}
 
-const DisclosureGroup = React.forwardRef<
-  React.ComponentRef<typeof DisclosureGroupPrimitive>,
-  DisclosureGroupProps
->(({children, className, ...originalProps}, ref) => {
+const DisclosureGroup = ({children, className, ...originalProps}: DisclosureGroupProps) => {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
     disclosureGroupVariants.variantKeys,
@@ -38,7 +35,6 @@ const DisclosureGroup = React.forwardRef<
   return (
     <DisclosureGroupContext.Provider value={{slots}}>
       <DisclosureGroupPrimitive
-        ref={ref}
         data-slot="disclosure-group"
         {...props}
         className={composeTwRenderProps(className, slots.base())}
@@ -47,9 +43,7 @@ const DisclosureGroup = React.forwardRef<
       </DisclosureGroupPrimitive>
     </DisclosureGroupContext.Provider>
   );
-});
-
-DisclosureGroup.displayName = "HeroUI.DisclosureGroup";
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

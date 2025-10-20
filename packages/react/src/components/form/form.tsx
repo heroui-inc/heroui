@@ -9,11 +9,9 @@ interface FormProps extends FormPrimitiveProps {
   ref?: React.Ref<HTMLFormElement>;
 }
 
-const Form = React.forwardRef<HTMLFormElement, FormProps>(({...props}, ref) => {
+const Form = ({ref, ...props}: FormProps) => {
   return <FormPrimitive ref={ref} {...props} />;
-});
-
-Form.displayName = "HeroUI.Form";
+};
 
 export type {FormProps};
 export {Form};

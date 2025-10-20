@@ -4,7 +4,6 @@ import type {TextVariants} from "./text.styles";
 import type {TextProps as TextPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
-import React from "react";
 import {Text as TextPrimitive} from "react-aria-components";
 
 import {textVariants} from "./text.styles";
@@ -13,28 +12,23 @@ interface TextProps extends TextPrimitiveProps, TextVariants {
   ref?: React.Ref<HTMLElement>;
   asChild?: boolean;
 }
+const Text = ({asChild = false, children, className, size, variant, ...rest}: TextProps) => {
+  const styles = textVariants({size, variant, className});
 
-const Text = React.forwardRef<React.ComponentRef<typeof TextPrimitive>, TextProps>(
-  ({asChild = false, children, className, size, variant, ...rest}, ref) => {
-    const styles = textVariants({size, variant, className});
-
-    if (asChild) {
-      return (
-        <SlotPrimitive ref={ref} className={styles} {...rest}>
-          {children}
-        </SlotPrimitive>
-      );
-    }
-
+  if (asChild) {
     return (
-      <TextPrimitive ref={ref} className={styles} {...rest}>
+      <SlotPrimitive className={styles} {...rest}>
         {children}
-      </TextPrimitive>
+      </SlotPrimitive>
     );
-  },
-);
+  }
 
-Text.displayName = "HeroUI.Text";
+  return (
+    <TextPrimitive className={styles} {...rest}>
+      {children}
+    </TextPrimitive>
+  );
+};
 
 export type {TextProps};
 export {Text};

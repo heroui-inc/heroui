@@ -12,73 +12,57 @@ import {composeTwRenderProps} from "../../utils/compose";
 import {ExternalLinkIcon} from "../icons";
 
 import {linkVariants} from "./link.styles";
-
 /* ------------------------------------------------------------------------------------------------
  * Link Context
  * --------------------------------------------------------------------------------------------- */
 type LinkContext = {
   slots?: ReturnType<typeof linkVariants>;
 };
-
 const LinkContext = createContext<LinkContext>({});
 
 /* ------------------------------------------------------------------------------------------------
  * Link
  * --------------------------------------------------------------------------------------------- */
-interface LinkProps extends LinkPrimitiveProps, LinkVariants {}
+interface LinkProps extends LinkPrimitiveProps, LinkVariants {
+  ref?: React.Ref<HTMLAnchorElement>;
+}
+const Link = ({children, className, ...props}: LinkProps) => {
+  const slots = React.useMemo(() => linkVariants({}), []);
 
-const Link = React.forwardRef<React.ComponentRef<typeof LinkPrimitive>, LinkProps>(
-  ({children, className, ...props}, ref) => {
-    const slots = React.useMemo(() => linkVariants({}), []);
-
-    return (
-      <LinkContext.Provider value={{slots}}>
-        <LinkPrimitive
-          ref={ref}
-          {...props}
-          className={composeTwRenderProps(className, slots?.base())}
-        >
-          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-        </LinkPrimitive>
-      </LinkContext.Provider>
-    );
-  },
-);
-
-Link.displayName = "HeroUI.Link";
+  return (
+    <LinkContext.Provider value={{slots}}>
+      <LinkPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
+        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      </LinkPrimitive>
+    </LinkContext.Provider>
+  );
+};
 
 /* ------------------------------------------------------------------------------------------------
  * Link Icon
  * --------------------------------------------------------------------------------------------- */
 type LinkIconProps = React.ComponentProps<"span"> & {
   asChild?: boolean;
+  ref?: React.Ref<HTMLSpanElement>;
 };
+const LinkIcon = ({asChild, children, className, ...rest}: LinkIconProps) => {
+  const {slots} = useContext(LinkContext);
+  const Component = asChild ? SlotPrimitive : "span";
 
-const LinkIcon = React.forwardRef<HTMLSpanElement, LinkIconProps>(
-  ({asChild, children, className, ...rest}, ref) => {
-    const {slots} = useContext(LinkContext);
-
-    const Component = asChild ? SlotPrimitive : "span";
-
-    return (
-      <Component
-        ref={ref}
-        className={slots?.icon({className})}
-        data-default-icon={dataAttr(!children)}
-        data-slot="link-icon"
-        {...rest}
-      >
-        {children ?? <ExternalLinkIcon data-slot="link-default-icon" />}
-      </Component>
-    );
-  },
-);
-
-LinkIcon.displayName = "HeroUI.LinkIcon";
+  return (
+    <Component
+      className={slots?.icon({className})}
+      data-default-icon={dataAttr(!children)}
+      data-slot="link-icon"
+      {...rest}
+    >
+      {children ?? <ExternalLinkIcon data-slot="link-default-icon" />}
+    </Component>
+  );
+};
 
 /* ------------------------------------------------------------------------------------------------
  * Exports
  * --------------------------------------------------------------------------------------------- */
-
 export type {LinkProps, LinkIconProps};
 export {Link, LinkIcon};
