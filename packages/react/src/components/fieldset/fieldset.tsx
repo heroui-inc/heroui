@@ -110,16 +110,10 @@ const FieldsetActions = React.forwardRef<HTMLDivElement, FieldsetActionsProps>(
   },
 );
 
-FieldsetActions.displayName = "HeroUI.Fieldset.Actions";
+FieldsetActions.displayName = "HeroUI.FieldsetActions";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundFieldset = Object.assign(Fieldset, {
-  Legend: FieldsetLegend,
-  Group: FieldGroup,
-  Actions: FieldsetActions,
-});
+export {Fieldset, FieldsetLegend, FieldGroup, FieldsetActions};
 
-export type {FieldsetProps, FieldsetLegendProps, FieldGroupProps};
-
-export default CompoundFieldset;
+export type {FieldsetProps, FieldsetLegendProps, FieldGroupProps, FieldsetActionsProps};

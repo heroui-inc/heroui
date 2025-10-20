@@ -14,21 +14,22 @@ interface FieldErrorProps extends FieldErrorPrimitiveProps, FieldErrorVariants {
   ref?: React.Ref<HTMLElement>;
 }
 
-const FieldError = React.forwardRef<React.ElementRef<typeof FieldErrorPrimitive>, FieldErrorProps>(
-  ({children, className, ...rest}, ref) => {
-    return (
-      <FieldErrorPrimitive
-        ref={ref}
-        data-visible
-        className={composeTwRenderProps(className, fieldErrorVariants())}
-        data-slot="field-error"
-        {...rest}
-      >
-        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
-      </FieldErrorPrimitive>
-    );
-  },
-);
+const FieldError = React.forwardRef<
+  React.ComponentRef<typeof FieldErrorPrimitive>,
+  FieldErrorProps
+>(({children, className, ...rest}, ref) => {
+  return (
+    <FieldErrorPrimitive
+      ref={ref}
+      data-visible
+      className={composeTwRenderProps(className, fieldErrorVariants())}
+      data-slot="field-error"
+      {...rest}
+    >
+      {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+    </FieldErrorPrimitive>
+  );
+});
 
 FieldError.displayName = "HeroUI.FieldError";
 

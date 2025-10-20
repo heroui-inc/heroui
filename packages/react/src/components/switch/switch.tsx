@@ -25,9 +25,9 @@ const SwitchGroupContext = createContext<SwitchGroupContext>({});
  * SwitchGroup
  * -----------------------------------------------------------------------------------------------*/
 
-interface SwitchGroupRootProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
+interface SwitchGroupProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
 
-const SwitchGroupRoot = React.forwardRef<HTMLDivElement, SwitchGroupRootProps>(
+const SwitchGroup = React.forwardRef<HTMLDivElement, SwitchGroupProps>(
   ({children, className, orientation, ...props}, ref) => {
     const slots = React.useMemo(() => switchGroupVariants({orientation}), [orientation]);
 
@@ -41,7 +41,7 @@ const SwitchGroupRoot = React.forwardRef<HTMLDivElement, SwitchGroupRootProps>(
   },
 );
 
-SwitchGroupRoot.displayName = "HeroUI.SwitchGroup";
+SwitchGroup.displayName = "HeroUI.SwitchGroup";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -62,7 +62,7 @@ const SwitchGroupItems = React.forwardRef<HTMLDivElement, SwitchGroupItemsProps>
   },
 );
 
-SwitchGroupItems.displayName = "HeroUI.SwitchGroup.Items";
+SwitchGroupItems.displayName = "HeroUI.SwitchGroupItems";
 
 /* -------------------------------------------------------------------------------------------------
  * Switch
@@ -74,9 +74,9 @@ interface SwitchContext {
 
 const SwitchContext = createContext<SwitchContext>({});
 
-interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
+interface SwitchProps extends SwitchPrimitiveProps, SwitchVariants {}
 
-const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, SwitchRootProps>(
+const Switch = React.forwardRef<React.ComponentRef<typeof SwitchPrimitive>, SwitchProps>(
   ({children, className, ...originalProps}, ref) => {
     const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
     const slots = React.useMemo(
@@ -99,7 +99,7 @@ const SwitchRoot = React.forwardRef<React.ElementRef<typeof SwitchPrimitive>, Sw
   },
 );
 
-SwitchRoot.displayName = "HeroUI.Switch";
+Switch.displayName = "HeroUI.Switch";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -117,7 +117,7 @@ const SwitchControl = React.forwardRef<HTMLSpanElement, SwitchControlProps>(
   },
 );
 
-SwitchControl.displayName = "HeroUI.Switch.Control";
+SwitchControl.displayName = "HeroUI.SwitchControl";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -135,7 +135,7 @@ const SwitchThumb = React.forwardRef<HTMLSpanElement, SwitchThumbProps>(
   },
 );
 
-SwitchThumb.displayName = "HeroUI.Switch.Thumb";
+SwitchThumb.displayName = "HeroUI.SwitchThumb";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -153,31 +153,19 @@ const SwitchIcon = React.forwardRef<any, SwitchIconProps>(
   },
 );
 
-SwitchIcon.displayName = "HeroUI.Switch.Icon";
+SwitchIcon.displayName = "HeroUI.SwitchIcon";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const CompoundSwitch = Object.assign(SwitchRoot, {
-  Control: SwitchControl,
-  Thumb: SwitchThumb,
-  Icon: SwitchIcon,
-});
-
-const CompoundSwitchGroup = Object.assign(SwitchGroupRoot, {
-  Items: SwitchGroupItems,
-});
+export {SwitchGroup, SwitchGroupItems, Switch, SwitchControl, SwitchThumb, SwitchIcon};
 
 export type {
-  SwitchGroupRootProps,
-  SwitchGroupRootProps as SwitchGroupProps,
+  SwitchGroupProps,
   SwitchGroupItemsProps,
-  SwitchRootProps,
-  SwitchRootProps as SwitchProps,
+  SwitchProps,
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,
 };
-
-export {CompoundSwitch as Switch, CompoundSwitchGroup as SwitchGroup};

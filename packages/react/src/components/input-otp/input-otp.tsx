@@ -22,11 +22,11 @@ const InputOTPContext = createContext<InputOTPContext>({});
  * InputOTP
  * -----------------------------------------------------------------------------------------------*/
 
-interface InputOTPRootProps extends Omit<OTPInputProps, "render">, InputOTPVariants {
+interface InputOTPProps extends Omit<OTPInputProps, "render">, InputOTPVariants {
   children?: React.ReactNode;
 }
 
-const InputOTPRoot = React.forwardRef<HTMLInputElement, InputOTPRootProps>(
+const InputOTP = React.forwardRef<HTMLInputElement, InputOTPProps>(
   ({children, className, isDisabled, isInvalid, ...props}, ref) => {
     const slots = React.useMemo(
       () => inputOTPVariants({isDisabled, isInvalid}),
@@ -61,7 +61,7 @@ const InputOTPRoot = React.forwardRef<HTMLInputElement, InputOTPRootProps>(
   },
 );
 
-InputOTPRoot.displayName = "HeroUI.InputOTP";
+InputOTP.displayName = "HeroUI.InputOTP";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -104,7 +104,7 @@ const InputOTPGroup = React.forwardRef<HTMLDivElement, InputOTPGroupProps>(
   },
 );
 
-InputOTPGroup.displayName = "HeroUI.InputOTP.Group";
+InputOTPGroup.displayName = "HeroUI.InputOTPGroup";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -141,7 +141,7 @@ const InputOTPSlot = React.forwardRef<HTMLDivElement, InputOTPSlotProps>(
   },
 );
 
-InputOTPSlot.displayName = "HeroUI.InputOTP.Slot";
+InputOTPSlot.displayName = "HeroUI.InputOTPSlot";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -164,24 +164,27 @@ const InputOTPSeparator = React.forwardRef<HTMLDivElement, InputOTPSeparatorProp
   },
 );
 
-InputOTPSeparator.displayName = "HeroUI.InputOTP.Separator";
+InputOTPSeparator.displayName = "HeroUI.InputOTPSeparator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const CompoundInputOTP = Object.assign(InputOTPRoot, {
-  Group: InputOTPGroup,
-  Slot: InputOTPSlot,
-  Separator: InputOTPSeparator,
-});
+const Root = InputOTP;
+const Group = InputOTPGroup;
+const Slot = InputOTPSlot;
+const Separator = InputOTPSeparator;
 
-export type {
-  InputOTPRootProps,
-  InputOTPRootProps as InputOTPProps,
-  InputOTPGroupProps,
-  InputOTPSlotProps,
-  InputOTPSeparatorProps,
+export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+  // named exports
+  Root,
+  Group,
+  Slot,
+  Separator,
 };
 
-export default CompoundInputOTP;
+export type {InputOTPProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};

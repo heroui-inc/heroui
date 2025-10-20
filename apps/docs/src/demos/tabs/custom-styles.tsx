@@ -1,33 +1,33 @@
 "use client";
 
-import {Tabs} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListWrapper, Tabs} from "@heroui/react";
 
 export function CustomStyles() {
   return (
     <Tabs className="w-full max-w-lg text-center">
-      <Tabs.ListWrapper>
-        <Tabs.List
+      <TabListWrapper>
+        <TabList
           aria-label="Options"
           className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
         >
-          <Tabs.Tab id="daily">
+          <Tab id="daily">
             Daily
-            <Tabs.Indicator className="bg-accent" />
-          </Tabs.Tab>
-          <Tabs.Tab id="weekly">
+            <TabIndicator className="bg-accent" />
+          </Tab>
+          <Tab id="weekly">
             Weekly
-            <Tabs.Indicator className="bg-accent" />
-          </Tabs.Tab>
-          <Tabs.Tab id="bi-weekly">
+            <TabIndicator className="bg-accent" />
+          </Tab>
+          <Tab id="bi-weekly">
             Bi-Weekly
-            <Tabs.Indicator className="bg-accent" />
-          </Tabs.Tab>
-          <Tabs.Tab id="monthly">
+            <TabIndicator className="bg-accent" />
+          </Tab>
+          <Tab id="monthly">
             Monthly
-            <Tabs.Indicator className="bg-accent" />
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs.ListWrapper>
+            <TabIndicator className="bg-accent" />
+          </Tab>
+        </TabList>
+      </TabListWrapper>
     </Tabs>
   );
 }

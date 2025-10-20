@@ -6,7 +6,7 @@ import React, {useId} from "react";
 
 import {spinnerVariants} from "./spinner.styles";
 
-const SpinnerPrimitive = React.forwardRef<React.ElementRef<"svg">, React.SVGProps<SVGSVGElement>>(
+const SpinnerPrimitive = React.forwardRef<React.ComponentRef<"svg">, React.SVGProps<SVGSVGElement>>(
   ({...props}, ref) => {
     const id = useId();
 
@@ -58,7 +58,7 @@ interface SpinnerProps
   extends Omit<React.ComponentPropsWithoutRef<"svg">, "display" | "opacity" | "color">,
     SpinnerVariants {}
 
-const Spinner = React.forwardRef<React.ElementRef<typeof SpinnerPrimitive>, SpinnerProps>(
+const Spinner = React.forwardRef<React.ComponentRef<typeof SpinnerPrimitive>, SpinnerProps>(
   ({className, color, size, ...props}, ref) => {
     return (
       <span

@@ -1,6 +1,14 @@
 "use client";
 
-import {Accordion} from "@heroui/react";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeading,
+  AccordionIndicator,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function FAQ() {
@@ -60,19 +68,19 @@ export function FAQ() {
           <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
           <Accordion className="w-full" variant="outline">
             {category.items.map((item, index) => (
-              <Accordion.Item key={index}>
-                <Accordion.Heading>
-                  <Accordion.Trigger>
+              <AccordionItem key={index}>
+                <AccordionHeading>
+                  <AccordionTrigger>
                     {item.title}
-                    <Accordion.Indicator>
+                    <AccordionIndicator>
                       <Icon icon="gravity-ui:chevron-down" />
-                    </Accordion.Indicator>
-                  </Accordion.Trigger>
-                </Accordion.Heading>
-                <Accordion.Panel>
-                  <Accordion.Body>{item.content}</Accordion.Body>
-                </Accordion.Panel>
-              </Accordion.Item>
+                    </AccordionIndicator>
+                  </AccordionTrigger>
+                </AccordionHeading>
+                <AccordionPanel>
+                  <AccordionBody>{item.content}</AccordionBody>
+                </AccordionPanel>
+              </AccordionItem>
             ))}
           </Accordion>
         </div>

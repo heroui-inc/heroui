@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Card} from "@heroui/react";
+import {Button, Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function WithBackgroundImage() {
@@ -32,14 +32,14 @@ export function WithBackgroundImage() {
         </div>
 
         {/* Header */}
-        <Card.Header className="z-10 text-white">
-          <Card.Title className="text-xs font-medium tracking-wide text-white/80">
+        <CardHeader className="z-10 text-white">
+          <CardTitle className="text-xs font-medium tracking-wide text-white/80">
             PET HEALTH
-          </Card.Title>
-          <Card.Description className="text-lg font-medium leading-6 text-white">
+          </CardTitle>
+          <CardDescription className="text-lg font-medium leading-6 text-white">
             Your pet deserve the best
-          </Card.Description>
-        </Card.Header>
+          </CardDescription>
+        </CardHeader>
 
         {/* Bottom gradient blur overlay */}
         <div
@@ -58,7 +58,7 @@ export function WithBackgroundImage() {
         </div>
 
         {/* Footer */}
-        <Card.Footer className="z-10 mt-auto flex items-center justify-between">
+        <CardFooter className="z-10 mt-auto flex items-center justify-between">
           <div>
             <div className="text-sm font-medium text-white">Available soon</div>
             <div className="text-xs text-white/60">Get notified</div>
@@ -66,7 +66,7 @@ export function WithBackgroundImage() {
           <Button size="sm" variant="tertiary">
             Notify me
           </Button>
-        </Card.Footer>
+        </CardFooter>
       </Card>
 
       <Card className="aspect-[65/56] w-full md:w-[390px]">
@@ -95,7 +95,7 @@ export function WithBackgroundImage() {
         </div>
 
         {/* Footer */}
-        <Card.Footer className="z-10 mt-auto flex items-center justify-between">
+        <CardFooter className="z-10 mt-auto flex items-center justify-between">
           <div>
             <div className="text-sm font-medium text-white">Buenos Aires</div>
             <div className="text-xs text-white/60">Argentina</div>
@@ -104,7 +104,7 @@ export function WithBackgroundImage() {
             <Icon aria-hidden="true" icon="gravity-ui:map-pin" />
             Map
           </Button>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </div>
   );

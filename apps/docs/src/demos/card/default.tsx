@@ -1,6 +1,15 @@
 "use client";
 
-import {Card, Link} from "@heroui/react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Link,
+  LinkIcon,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function Default() {
@@ -12,14 +21,14 @@ export function Default() {
         icon="gravity-ui:circle-dollar"
         role="img"
       />
-      <Card.Header>
-        <Card.Title>PAYMENT</Card.Title>
-        <Card.Description>You can now withdraw on crypto.</Card.Description>
-      </Card.Header>
-      <Card.Content id="payment-content">
+      <CardHeader>
+        <CardTitle>PAYMENT</CardTitle>
+        <CardDescription>You can now withdraw on crypto.</CardDescription>
+      </CardHeader>
+      <CardContent id="payment-content">
         <p>Add your wallet in settings to withdraw</p>
-      </Card.Content>
-      <Card.Footer>
+      </CardContent>
+      <CardFooter>
         <Link
           aria-label="Go to settings (opens in new tab)"
           href="https://heroui.com"
@@ -27,9 +36,9 @@ export function Default() {
           target="_blank"
         >
           Go to settings
-          <Link.Icon aria-hidden="true" />
+          <LinkIcon aria-hidden="true" />
         </Link>
-      </Card.Footer>
+      </CardFooter>
     </Card>
   );
 }

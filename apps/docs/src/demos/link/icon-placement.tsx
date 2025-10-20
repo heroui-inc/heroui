@@ -1,16 +1,16 @@
 "use client";
 
-import {Link} from "@heroui/react";
+import {Link, LinkIcon} from "@heroui/react";
 
 export function LinkIconPlacement() {
   return (
     <div className="flex flex-col gap-3">
       <Link href="#">
         Icon at end (default)
-        <Link.Icon />
+        <LinkIcon />
       </Link>
       <Link className="gap-1" href="#">
-        <Link.Icon />
+        <LinkIcon />
         Icon at start
       </Link>
     </div>

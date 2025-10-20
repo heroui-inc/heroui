@@ -4,15 +4,11 @@ import type {AvatarVariants} from "./avatar.styles";
 import type {UseImageProps} from "../../hooks";
 import type {
   AvatarFallbackProps,
-  Image as AvatarImagePrimitive,
   AvatarImageProps,
   AvatarProps as AvatarPrimitiveProps,
 } from "@radix-ui/react-avatar";
 
-import {
-  Fallback as AvatarFallbackPrimitive,
-  Root as AvatarRootPrimitive,
-} from "@radix-ui/react-avatar";
+import {Fallback as AvatarFallbackPrimitive, Root as AvatarPrimitive} from "@radix-ui/react-avatar";
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
@@ -31,15 +27,15 @@ const AvatarContext = createContext<{
 
 interface AvatarProps extends Omit<AvatarPrimitiveProps, "color">, AvatarVariants {}
 
-const Avatar = React.forwardRef<React.ElementRef<typeof AvatarRootPrimitive>, AvatarProps>(
+const Avatar = React.forwardRef<React.ComponentRef<typeof AvatarPrimitive>, AvatarProps>(
   ({children, className, color, size, ...props}, ref) => {
     const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
 
     return (
       <AvatarContext.Provider value={{slots}}>
-        <AvatarRootPrimitive ref={ref} className={slots.base({className})} {...props}>
+        <AvatarPrimitive ref={ref} className={slots.base({className})} {...props}>
           {children}
-        </AvatarRootPrimitive>
+        </AvatarPrimitive>
       </AvatarContext.Provider>
     );
   },
@@ -47,11 +43,13 @@ const Avatar = React.forwardRef<React.ElementRef<typeof AvatarRootPrimitive>, Av
 
 Avatar.displayName = "HeroUI.Avatar";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Avatar Image
+ * -----------------------------------------------------------------------------------------------*/
 
 const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarImagePrimitive>,
-  React.ComponentPropsWithoutRef<typeof AvatarImagePrimitive> & {
+  React.ComponentRef<"img">,
+  React.ComponentPropsWithoutRef<"img"> & {
     asChild?: boolean;
     ignoreFallback?: UseImageProps["ignoreFallback"];
     shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
@@ -77,10 +75,12 @@ const AvatarImage = React.forwardRef<
 
 AvatarImage.displayName = "HeroUI.AvatarImage";
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Avatar Fallback
+ * -----------------------------------------------------------------------------------------------*/
 
 const AvatarFallback = React.forwardRef<
-  React.ElementRef<typeof AvatarFallbackPrimitive>,
+  React.ComponentRef<typeof AvatarFallbackPrimitive>,
   React.ComponentPropsWithoutRef<typeof AvatarFallbackPrimitive> & {color?: AvatarVariants["color"]}
 >(({className, color, ...props}, ref) => {
   const {slots} = React.useContext(AvatarContext);
@@ -92,13 +92,9 @@ const AvatarFallback = React.forwardRef<
 
 AvatarFallback.displayName = "HeroUI.AvatarFallback";
 
-/* -----------------------------------------------------------------------------------------------*/
-
-const CompoundAvatar = Object.assign(Avatar, {
-  Image: AvatarImage,
-  Fallback: AvatarFallback,
-});
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
 export type {AvatarProps, AvatarImageProps, AvatarFallbackProps};
-
-export default CompoundAvatar;
+export {Avatar, AvatarImage, AvatarFallback};

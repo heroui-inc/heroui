@@ -43,13 +43,15 @@ Built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/) f
 
 ```tsx
 // Automatic ARIA attributes, keyboard navigation, and focus management
+import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
+
 <Tabs defaultSelectedKey="profile">
-  <Tabs.List aria-label="Settings">
-    <Tabs.Tab id="profile">Profile</Tabs.Tab>
-    <Tabs.Tab id="security">Security</Tabs.Tab>
-  </Tabs.List>
-  <Tabs.Panel id="profile">Content</Tabs.Panel>
-  <Tabs.Panel id="security">Content</Tabs.Panel>
+  <TabList aria-label="Settings">
+    <Tab id="profile">Profile</Tab>
+    <Tab id="security">Security</Tab>
+  </TabList>
+  <TabPanel id="profile">Content</TabPanel>
+  <TabPanel id="security">Content</TabPanel>
 </Tabs>
 ```
 
@@ -59,18 +61,28 @@ Compound components let you rearrange, customize, or omit parts as needed.
 
 ```tsx
 // Compose parts to build exactly what you need
+import {
+  Accordion,
+  AccordionItem,
+  AccordionHeading,
+  AccordionTrigger,
+  AccordionIndicator,
+  AccordionPanel,
+  AccordionBody
+} from '@heroui/react';
+
 <Accordion>
-  <Accordion.Item id="1">
-    <Accordion.Heading>
-      <Accordion.Trigger>
+  <AccordionItem id="1">
+    <AccordionHeading>
+      <AccordionTrigger>
         Question Text
-        <Accordion.Indicator />
-      </Accordion.Trigger>
-    </Accordion.Heading>
-    <Accordion.Panel>
-      <Accordion.Body>Answer content</Accordion.Body>
-    </Accordion.Panel>
-  </Accordion.Item>
+        <AccordionIndicator />
+      </AccordionTrigger>
+    </AccordionHeading>
+    <AccordionPanel>
+      <AccordionBody>Answer content</AccordionBody>
+    </AccordionPanel>
+  </AccordionItem>
 </Accordion>
 ```
 
@@ -104,10 +116,12 @@ Consistent patterns across all components: sizes (`sm`, `md`, `lg`), variants, c
 <Chip size="lg" variant="success" className="custom" />
 <Avatar size="lg" className="custom" />
 
-// Compound components use dot notation
-<Alert.Icon />
-<Card.Header />
-<Accordion.Trigger />
+// Compound components use named exports
+import { AlertIcon, CardHeader, AccordionTrigger } from '@heroui/react';
+
+<AlertIcon />
+<CardHeader />
+<AccordionTrigger />
 ```
 
 ### 6. Type Safety First

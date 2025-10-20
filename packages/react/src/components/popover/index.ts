@@ -1,4 +1,12 @@
-export {default as Popover} from "./popover";
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverDialog,
+  PopoverArrow,
+  PopoverContent,
+  PopoverHeading,
+} from "./popover";
+
 export type {PopoverProps, PopoverContentProps} from "./popover";
-export {popoverVariants} from "./popover.styles";
-export type {PopoverVariants} from "./popover.styles";
+
+export {popoverVariants, type PopoverVariants} from "./popover.styles";

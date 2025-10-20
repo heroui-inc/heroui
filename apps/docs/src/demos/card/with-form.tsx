@@ -1,15 +1,24 @@
 "use client";
 
-import {Button, Card, Link} from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Link,
+} from "@heroui/react";
 
 export function WithForm() {
   return (
     <Card className="w-full max-w-md">
-      <Card.Header>
-        <Card.Title>Login</Card.Title>
-        <Card.Description>Enter your credentials to access your account</Card.Description>
-      </Card.Header>
-      <Card.Content>
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+        <CardDescription>Enter your credentials to access your account</CardDescription>
+      </CardHeader>
+      <CardContent>
         <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium" htmlFor="email">
@@ -34,13 +43,13 @@ export function WithForm() {
             />
           </div>
         </form>
-      </Card.Content>
-      <Card.Footer className="flex flex-col gap-2">
+      </CardContent>
+      <CardFooter className="flex flex-col gap-2">
         <Button className="w-full">Sign In</Button>
         <Link className="text-center text-sm" href="#">
           Forgot password?
         </Link>
-      </Card.Footer>
+      </CardFooter>
     </Card>
   );
 }

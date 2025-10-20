@@ -3,11 +3,11 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Avatar} from "../avatar";
+import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
-import {Link} from "../link";
+import {Link, LinkIcon} from "../link";
 
-import {Card} from "./index";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "./index";
 
 const meta = {
   argTypes: {
@@ -35,14 +35,14 @@ export const Default: Story = {
         icon="gravity-ui:circle-dollar"
         role="img"
       />
-      <Card.Header>
-        <Card.Title>PAYMENT</Card.Title>
-        <Card.Description>You can now withdraw on crypto.</Card.Description>
-      </Card.Header>
-      <Card.Content id="payment-content">
+      <CardHeader>
+        <CardTitle>PAYMENT</CardTitle>
+        <CardDescription>You can now withdraw on crypto.</CardDescription>
+      </CardHeader>
+      <CardContent id="payment-content">
         <p>Add your wallet in settings to withdraw</p>
-      </Card.Content>
-      <Card.Footer>
+      </CardContent>
+      <CardFooter>
         <Link
           aria-label="Go to settings (opens in new tab)"
           href="https://heroui.com"
@@ -50,9 +50,9 @@ export const Default: Story = {
           target="_blank"
         >
           Go to settings
-          <Link.Icon aria-hidden="true" />
+          <LinkIcon aria-hidden="true" />
         </Link>
-      </Card.Footer>
+      </CardFooter>
     </Card>
   ),
 };
@@ -61,43 +61,43 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <Card className="w-[320px]" variant="flat">
-        <Card.Header>
-          <Card.Title>Variant Flat</Card.Title>
-          <Card.Description>Transparent background with no border</Card.Description>
-        </Card.Header>
-        <Card.Content>
+        <CardHeader>
+          <CardTitle>Variant Flat</CardTitle>
+          <CardDescription>Transparent background with no border</CardDescription>
+        </CardHeader>
+        <CardContent>
           <p>Content with no variant styling</p>
-        </Card.Content>
+        </CardContent>
       </Card>
 
       <Card className="w-[320px]" variant="outlined">
-        <Card.Header>
-          <Card.Title>Variant Outlined</Card.Title>
-          <Card.Description>This card uses outlined variant (default)</Card.Description>
-        </Card.Header>
-        <Card.Content>
+        <CardHeader>
+          <CardTitle>Variant Outlined</CardTitle>
+          <CardDescription>This card uses outlined variant (default)</CardDescription>
+        </CardHeader>
+        <CardContent>
           <p>Content with subtle elevation</p>
-        </Card.Content>
+        </CardContent>
       </Card>
 
       <Card className="w-[320px]" variant="elevated">
-        <Card.Header>
-          <Card.Title>Variant Elevated</Card.Title>
-          <Card.Description>This card uses elevated variant</Card.Description>
-        </Card.Header>
-        <Card.Content>
+        <CardHeader>
+          <CardTitle>Variant Elevated</CardTitle>
+          <CardDescription>This card uses elevated variant</CardDescription>
+        </CardHeader>
+        <CardContent>
           <p>Content with medium elevation</p>
-        </Card.Content>
+        </CardContent>
       </Card>
 
       <Card className="w-[320px]" variant="filled">
-        <Card.Header>
-          <Card.Title>Variant Filled</Card.Title>
-          <Card.Description>This card uses filled variant</Card.Description>
-        </Card.Header>
-        <Card.Content>
+        <CardHeader>
+          <CardTitle>Variant Filled</CardTitle>
+          <CardDescription>This card uses filled variant</CardDescription>
+        </CardHeader>
+        <CardContent>
           <p>Content with higher elevation</p>
-        </Card.Content>
+        </CardContent>
       </Card>
     </div>
   ),
@@ -113,14 +113,14 @@ export const Horizontal: Story = {
         src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
       />
       <div className="flex flex-1 flex-col gap-3">
-        <Card.Header className="gap-1">
-          <Card.Title>Get the new Porsche 911 golden edition</Card.Title>
-          <Card.Description>
+        <CardHeader className="gap-1">
+          <CardTitle>Get the new Porsche 911 golden edition</CardTitle>
+          <CardDescription>
             Experience unmatched luxury and performance with the Porsche 911 Golden Edition—where
             sleek design meets cutting-edge tech and pure driving thrill.
-          </Card.Description>
-        </Card.Header>
-        <Card.Footer className="mt-auto flex w-full flex-row items-center justify-between">
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="mt-auto flex w-full flex-row items-center justify-between">
           <div className="flex flex-col">
             <span
               aria-label="Price: 36,799 US dollars"
@@ -133,7 +133,7 @@ export const Horizontal: Story = {
             </span>
           </div>
           <Button>Buy Now</Button>
-        </Card.Footer>
+        </CardFooter>
       </div>
     </Card>
   ),
@@ -149,20 +149,20 @@ export const WithAvatar: Story = {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/device.png"
         />
-        <Card.Header>
-          <Card.Title>Indie Hackers</Card.Title>
-          <Card.Description>148 members</Card.Description>
-        </Card.Header>
-        <Card.Footer className="flex gap-2">
+        <CardHeader>
+          <CardTitle>Indie Hackers</CardTitle>
+          <CardDescription>148 members</CardDescription>
+        </CardHeader>
+        <CardFooter className="flex gap-2">
           <Avatar aria-label="Martha's profile picture" className="size-5">
-            <Avatar.Image
+            <AvatarImage
               alt="Martha's avatar"
               src="https://img.heroui.chat/image/avatar?w=160&h=160"
             />
-            <Avatar.Fallback className="text-xs">IH</Avatar.Fallback>
+            <AvatarFallback className="text-xs">IH</AvatarFallback>
           </Avatar>
           <span className="text-xs">By Martha</span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
 
       <Card className="w-[200px] gap-2" {...args}>
@@ -172,20 +172,20 @@ export const WithAvatar: Story = {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/ai-bot.png"
         />
-        <Card.Header>
-          <Card.Title>AI Builders</Card.Title>
-          <Card.Description>362 members</Card.Description>
-        </Card.Header>
-        <Card.Footer className="flex gap-2">
+        <CardHeader>
+          <CardTitle>AI Builders</CardTitle>
+          <CardDescription>362 members</CardDescription>
+        </CardHeader>
+        <CardFooter className="flex gap-2">
           <Avatar aria-label="John's profile picture" className="size-5">
-            <Avatar.Image
+            <AvatarImage
               alt="John's avatar - blue themed"
               src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
             />
-            <Avatar.Fallback className="text-xs">B</Avatar.Fallback>
+            <AvatarFallback className="text-xs">B</AvatarFallback>
           </Avatar>
           <span className="text-xs">By John</span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </div>
   ),
@@ -201,12 +201,12 @@ export const WithImage: Story = {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
         />
-        <Card.Footer className="flex items-center justify-between px-2 text-sm">
+        <CardFooter className="flex items-center justify-between px-2 text-sm">
           <span>Cars</span>
           <span aria-label="18 pictures in collection" className="text-muted">
             18 pictures
           </span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
 
       <Card className="w-[220px] gap-2 p-1" {...args}>
@@ -216,12 +216,12 @@ export const WithImage: Story = {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/workspace.jpeg"
         />
-        <Card.Footer className="flex items-center justify-between px-2 text-sm">
+        <CardFooter className="flex items-center justify-between px-2 text-sm">
           <span>Workspaces</span>
           <span aria-label="56 pictures in collection" className="text-muted">
             56 pictures
           </span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </div>
   ),
@@ -256,14 +256,14 @@ export const WithBackgroundImage: Story = {
         </div>
 
         {/* Header */}
-        <Card.Header className="z-10 text-white">
-          <Card.Title className="text-xs font-medium tracking-wide text-white/80">
+        <CardHeader className="z-10 text-white">
+          <CardTitle className="text-xs font-medium tracking-wide text-white/80">
             PET HEALTH
-          </Card.Title>
-          <Card.Description className="text-lg font-medium leading-6 text-white">
+          </CardTitle>
+          <CardDescription className="text-lg font-medium leading-6 text-white">
             Your pet deserve the best
-          </Card.Description>
-        </Card.Header>
+          </CardDescription>
+        </CardHeader>
 
         {/* Bottom gradient blur overlay */}
         <div
@@ -282,7 +282,7 @@ export const WithBackgroundImage: Story = {
         </div>
 
         {/* Footer */}
-        <Card.Footer className="z-10 mt-auto flex items-center justify-between">
+        <CardFooter className="z-10 mt-auto flex items-center justify-between">
           <div>
             <div className="text-sm font-medium text-white">Available soon</div>
             <div className="text-xs text-white/60">Get notified</div>
@@ -290,7 +290,7 @@ export const WithBackgroundImage: Story = {
           <Button size="sm" variant="tertiary">
             Notify me
           </Button>
-        </Card.Footer>
+        </CardFooter>
       </Card>
 
       <Card className="rounded-panel h-[336px] w-[390px]" {...args}>
@@ -319,7 +319,7 @@ export const WithBackgroundImage: Story = {
         </div>
 
         {/* Footer */}
-        <Card.Footer className="z-10 mt-auto flex items-center justify-between">
+        <CardFooter className="z-10 mt-auto flex items-center justify-between">
           <div>
             <div className="text-sm font-medium text-white">Buenos Aires</div>
             <div className="text-xs text-white/60">Argentina</div>
@@ -328,7 +328,7 @@ export const WithBackgroundImage: Story = {
             <Icon aria-hidden="true" icon="gravity-ui:map-pin" />
             Map
           </Button>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </div>
   ),
@@ -337,11 +337,11 @@ export const WithBackgroundImage: Story = {
 export const WithForm: Story = {
   render: (args) => (
     <Card className="w-full max-w-md" {...args}>
-      <Card.Header>
-        <Card.Title>Login</Card.Title>
-        <Card.Description>Enter your credentials to access your account</Card.Description>
-      </Card.Header>
-      <Card.Content>
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+        <CardDescription>Enter your credentials to access your account</CardDescription>
+      </CardHeader>
+      <CardContent>
         <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium" htmlFor="email">
@@ -366,13 +366,13 @@ export const WithForm: Story = {
             />
           </div>
         </form>
-      </Card.Content>
-      <Card.Footer className="flex flex-col gap-2">
+      </CardContent>
+      <CardFooter className="flex flex-col gap-2">
         <Button className="w-full">Sign In</Button>
         <Link className="text-center text-sm" href="#">
           Forgot password?
         </Link>
-      </Card.Footer>
+      </CardFooter>
     </Card>
   ),
 };

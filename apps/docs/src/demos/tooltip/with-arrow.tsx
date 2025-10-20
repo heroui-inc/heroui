@@ -1,24 +1,24 @@
 "use client";
 
-import {Button, Tooltip} from "@heroui/react";
+import {Button, Tooltip, TooltipArrow, TooltipContent} from "@heroui/react";
 
 export function TooltipWithArrow() {
   return (
     <div className="flex items-center gap-4">
       <Tooltip delay={0}>
         <Button variant="secondary">With Arrow</Button>
-        <Tooltip.Content showArrow>
-          <Tooltip.Arrow />
+        <TooltipContent showArrow>
+          <TooltipArrow />
           <p>Tooltip with arrow indicator</p>
-        </Tooltip.Content>
+        </TooltipContent>
       </Tooltip>
 
       <Tooltip delay={0}>
         <Button variant="primary">Custom Offset</Button>
-        <Tooltip.Content showArrow offset={12}>
-          <Tooltip.Arrow />
+        <TooltipContent showArrow offset={12}>
+          <TooltipArrow />
           <p>Custom offset from trigger</p>
-        </Tooltip.Content>
+        </TooltipContent>
       </Tooltip>
     </div>
   );

@@ -16,7 +16,7 @@ interface SkeletonProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
     SkeletonVariants {}
 
-const Skeleton = React.forwardRef<React.ElementRef<"div">, SkeletonProps>(
+const Skeleton = React.forwardRef<React.ComponentRef<"div">, SkeletonProps>(
   ({animationType, className, ...props}, ref) => {
     // Use the new hook to get CSS variable value with SSR support
     const resolvedAnimationType = useCSSVariable("--skeleton-animation", animationType);
@@ -36,5 +36,4 @@ const Skeleton = React.forwardRef<React.ElementRef<"div">, SkeletonProps>(
 Skeleton.displayName = "HeroUI.Skeleton";
 
 export type {SkeletonProps};
-
-export default Skeleton;
+export {Skeleton};

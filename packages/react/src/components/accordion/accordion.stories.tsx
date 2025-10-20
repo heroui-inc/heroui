@@ -1,11 +1,19 @@
-import type {AccordionProps} from "./accordion";
+import type {AccordionProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import React from "react";
 import {cnBase} from "tailwind-variants";
 
-import {Accordion} from "./index";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeading,
+  AccordionIndicator,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+} from "./index";
 
 export default {
   argTypes: {
@@ -82,22 +90,22 @@ const Template = (props: AccordionProps) => (
   <Wrapper>
     <Accordion {...props}>
       {items.map((item, index) => (
-        <Accordion.Item key={index}>
-          <Accordion.Heading>
-            <Accordion.Trigger>
+        <AccordionItem key={index}>
+          <AccordionHeading>
+            <AccordionTrigger>
               {item.icon ? (
                 <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
               ) : null}
               {item.title}
-              <Accordion.Indicator>
+              <AccordionIndicator>
                 <Icon icon="gravity-ui:chevron-down" />
-              </Accordion.Indicator>
-            </Accordion.Trigger>
-          </Accordion.Heading>
-          <Accordion.Panel>
-            <Accordion.Body>{item.content}</Accordion.Body>
-          </Accordion.Panel>
-        </Accordion.Item>
+              </AccordionIndicator>
+            </AccordionTrigger>
+          </AccordionHeading>
+          <AccordionPanel>
+            <AccordionBody>{item.content}</AccordionBody>
+          </AccordionPanel>
+        </AccordionItem>
       ))}
     </Accordion>
   </Wrapper>
@@ -186,19 +194,19 @@ const CustomTemplate = (props: AccordionProps) => (
             <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
             <Accordion {...props} className="w-full" variant="outline">
               {category.items.map((item, index) => (
-                <Accordion.Item key={index}>
-                  <Accordion.Heading>
-                    <Accordion.Trigger>
+                <AccordionItem key={index}>
+                  <AccordionHeading>
+                    <AccordionTrigger>
                       {item.title}
-                      <Accordion.Indicator>
+                      <AccordionIndicator>
                         <Icon icon="gravity-ui:chevron-down" />
-                      </Accordion.Indicator>
-                    </Accordion.Trigger>
-                  </Accordion.Heading>
-                  <Accordion.Panel>
-                    <Accordion.Body>{item.content}</Accordion.Body>
-                  </Accordion.Panel>
-                </Accordion.Item>
+                      </AccordionIndicator>
+                    </AccordionTrigger>
+                  </AccordionHeading>
+                  <AccordionPanel>
+                    <AccordionBody>{item.content}</AccordionBody>
+                  </AccordionPanel>
+                </AccordionItem>
               ))}
             </Accordion>
           </div>

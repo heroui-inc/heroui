@@ -36,9 +36,9 @@ const SliderContext = createContext<SliderContext>({});
  * Slider
  * -----------------------------------------------------------------------------------------------*/
 
-interface SliderRootProps extends SliderPrimitiveProps, SliderVariants {}
+interface SliderProps extends SliderPrimitiveProps, SliderVariants {}
 
-const SliderRoot = React.forwardRef<React.ElementRef<typeof SliderPrimitive>, SliderRootProps>(
+const Slider = React.forwardRef<React.ComponentRef<typeof SliderPrimitive>, SliderProps>(
   ({children, className, orientation = "horizontal", ...props}, ref) => {
     const slots = React.useMemo(
       () =>
@@ -65,7 +65,7 @@ const SliderRoot = React.forwardRef<React.ElementRef<typeof SliderPrimitive>, Sl
   },
 );
 
-SliderRoot.displayName = "HeroUI.Slider";
+Slider.displayName = "HeroUI.Slider";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Header
@@ -83,7 +83,7 @@ const SliderHeader = React.forwardRef<HTMLDivElement, SliderHeaderProps>(
   },
 );
 
-SliderHeader.displayName = "HeroUI.Slider.Header";
+SliderHeader.displayName = "HeroUI.SliderHeader";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Label
@@ -91,7 +91,7 @@ SliderHeader.displayName = "HeroUI.Slider.Header";
 
 interface SliderLabelProps extends React.ComponentProps<typeof LabelPrimitive> {}
 
-const SliderLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive>, SliderLabelProps>(
+const SliderLabel = React.forwardRef<React.ComponentRef<typeof LabelPrimitive>, SliderLabelProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(SliderContext);
 
@@ -106,7 +106,7 @@ const SliderLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive>, Sl
   },
 );
 
-SliderLabel.displayName = "HeroUI.Slider.Label";
+SliderLabel.displayName = "HeroUI.SliderLabel";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Output
@@ -115,7 +115,7 @@ SliderLabel.displayName = "HeroUI.Slider.Label";
 interface SliderOutputProps extends React.ComponentProps<typeof SliderOutputPrimitive> {}
 
 const SliderOutput = React.forwardRef<
-  React.ElementRef<typeof SliderOutputPrimitive>,
+  React.ComponentRef<typeof SliderOutputPrimitive>,
   SliderOutputProps
 >(({className, ...props}, ref) => {
   const {slots} = useContext(SliderContext);
@@ -130,7 +130,7 @@ const SliderOutput = React.forwardRef<
   );
 });
 
-SliderOutput.displayName = "HeroUI.Slider.Output";
+SliderOutput.displayName = "HeroUI.SliderOutput";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Track
@@ -139,7 +139,7 @@ SliderOutput.displayName = "HeroUI.Slider.Output";
 interface SliderTrackProps extends SliderTrackPrimitiveProps {}
 
 const SliderTrack = React.forwardRef<
-  React.ElementRef<typeof SliderTrackPrimitive>,
+  React.ComponentRef<typeof SliderTrackPrimitive>,
   SliderTrackProps
 >(({children, className, ...props}, ref) => {
   const {isDisabled, slots} = useContext(SliderContext);
@@ -157,7 +157,7 @@ const SliderTrack = React.forwardRef<
   );
 });
 
-SliderTrack.displayName = "HeroUI.Slider.Track";
+SliderTrack.displayName = "HeroUI.SliderTrack";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
@@ -193,7 +193,7 @@ const SliderFill = React.forwardRef<HTMLDivElement, SliderFillProps>(
   },
 );
 
-SliderFill.displayName = "HeroUI.Slider.Fill";
+SliderFill.displayName = "HeroUI.SliderFill";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Thumb
@@ -202,7 +202,7 @@ SliderFill.displayName = "HeroUI.Slider.Fill";
 interface SliderThumbProps extends SliderThumbPrimitiveProps {}
 
 const SliderThumb = React.forwardRef<
-  React.ElementRef<typeof SliderThumbPrimitive>,
+  React.ComponentRef<typeof SliderThumbPrimitive>,
   SliderThumbProps
 >(({children, className, ...props}, ref) => {
   const {slots} = useContext(SliderContext);
@@ -219,7 +219,7 @@ const SliderThumb = React.forwardRef<
   );
 });
 
-SliderThumb.displayName = "HeroUI.Slider.Thumb";
+SliderThumb.displayName = "HeroUI.SliderThumb";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Marks
@@ -237,25 +237,43 @@ const SliderMarks = React.forwardRef<HTMLDivElement, SliderMarksProps>(
   },
 );
 
-SliderMarks.displayName = "HeroUI.Slider.Marks";
+SliderMarks.displayName = "HeroUI.SliderMarks";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-const CompoundSlider = Object.assign(SliderRoot, {
-  Header: SliderHeader,
-  Label: SliderLabel,
-  Output: SliderOutput,
-  Track: SliderTrack,
-  Fill: SliderFill,
-  Thumb: SliderThumb,
-  Marks: SliderMarks,
-});
+const Root = Slider;
+const Header = SliderHeader;
+const Label = SliderLabel;
+const Output = SliderOutput;
+const Track = SliderTrack;
+const Fill = SliderFill;
+const Thumb = SliderThumb;
+const Marks = SliderMarks;
+
+export {
+  Slider,
+  SliderHeader,
+  SliderLabel,
+  SliderOutput,
+  SliderTrack,
+  SliderFill,
+  SliderThumb,
+  SliderMarks,
+  // named exports
+  Root,
+  Header,
+  Label,
+  Output,
+  Track,
+  Fill,
+  Thumb,
+  Marks,
+};
 
 export type {
-  SliderRootProps,
-  SliderRootProps as SliderProps,
+  SliderProps,
   SliderHeaderProps,
   SliderLabelProps,
   SliderOutputProps,
@@ -264,5 +282,3 @@ export type {
   SliderThumbProps,
   SliderMarksProps,
 };
-
-export default CompoundSlider;

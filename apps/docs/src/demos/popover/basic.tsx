@@ -1,20 +1,20 @@
 "use client";
 
-import {Button, Popover} from "@heroui/react";
+import {Button, Popover, PopoverContent, PopoverDialog, PopoverHeading} from "@heroui/react";
 
 export function PopoverBasic() {
   return (
     <div className="flex items-center gap-4">
       <Popover>
         <Button>Click me</Button>
-        <Popover.Content>
-          <Popover.Dialog>
-            <Popover.Heading>Popover Title</Popover.Heading>
+        <PopoverContent>
+          <PopoverDialog>
+            <PopoverHeading>Popover Title</PopoverHeading>
             <p className="text-muted mt-2 text-sm">
               This is the popover content. You can put any content here.
             </p>
-          </Popover.Dialog>
-        </Popover.Content>
+          </PopoverDialog>
+        </PopoverContent>
       </Popover>
     </div>
   );

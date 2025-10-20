@@ -26,10 +26,7 @@ const TooltipContext = createContext<{
  * Tooltip
  * -----------------------------------------------------------------------------------------------*/
 
-const TooltipRoot = ({
-  children,
-  ...props
-}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
+const Tooltip = ({children, ...props}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   return (
@@ -41,7 +38,7 @@ const TooltipRoot = ({
   );
 };
 
-TooltipRoot.displayName = "HeroUI.Tooltip";
+Tooltip.displayName = "HeroUI.Tooltip";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -51,7 +48,7 @@ interface TooltipContentProps extends Omit<TooltipPrimitiveProps, "children">, T
 }
 
 const TooltipContent = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive>,
+  React.ComponentRef<typeof TooltipPrimitive>,
   TooltipContentProps
 >(({children, className, offset: offsetProp, showArrow = false, ...props}, ref) => {
   const {slots} = useContext(TooltipContext);
@@ -74,7 +71,7 @@ TooltipContent.displayName = "HeroUI.TooltipContent";
 /* -----------------------------------------------------------------------------------------------*/
 
 const TooltipArrow = React.forwardRef<
-  React.ElementRef<typeof OverlayArrow>,
+  React.ComponentRef<typeof OverlayArrow>,
   Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {children?: React.ReactNode}
 >(({children, className, ...props}, ref) => {
   const defaultArrow = (
@@ -132,11 +129,6 @@ TooltipTrigger.displayName = "HeroUI.TooltipTrigger";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundTooltip = Object.assign(TooltipRoot, {
-  Trigger: TooltipTrigger,
-  Content: TooltipContent,
-  Arrow: TooltipArrow,
-});
+export {Tooltip, TooltipTrigger, TooltipContent, TooltipArrow};
 
-export default CompoundTooltip;
 export type {TooltipProps, TooltipContentProps, TooltipTriggerProps};

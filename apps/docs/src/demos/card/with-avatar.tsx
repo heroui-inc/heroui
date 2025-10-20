@@ -1,6 +1,15 @@
 "use client";
 
-import {Avatar, Card} from "@heroui/react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@heroui/react";
 
 export function WithAvatar() {
   return (
@@ -12,20 +21,20 @@ export function WithAvatar() {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/device.png"
         />
-        <Card.Header>
-          <Card.Title>Indie Hackers</Card.Title>
-          <Card.Description>148 members</Card.Description>
-        </Card.Header>
-        <Card.Footer className="flex gap-2">
+        <CardHeader>
+          <CardTitle>Indie Hackers</CardTitle>
+          <CardDescription>148 members</CardDescription>
+        </CardHeader>
+        <CardFooter className="flex gap-2">
           <Avatar aria-label="Martha's profile picture" className="size-5" role="img">
-            <Avatar.Image
+            <AvatarImage
               alt="Martha's avatar"
               src="https://img.heroui.chat/image/avatar?w=160&h=160"
             />
-            <Avatar.Fallback className="text-xs">IH</Avatar.Fallback>
+            <AvatarFallback className="text-xs">IH</AvatarFallback>
           </Avatar>
           <span className="text-xs">By Martha</span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
 
       <Card className="w-[200px] gap-2">
@@ -35,20 +44,20 @@ export function WithAvatar() {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/ai-bot.png"
         />
-        <Card.Header>
-          <Card.Title>AI Builders</Card.Title>
-          <Card.Description>362 members</Card.Description>
-        </Card.Header>
-        <Card.Footer className="flex gap-2">
+        <CardHeader>
+          <CardTitle>AI Builders</CardTitle>
+          <CardDescription>362 members</CardDescription>
+        </CardHeader>
+        <CardFooter className="flex gap-2">
           <Avatar aria-label="John's profile picture" className="size-5" role="img">
-            <Avatar.Image
+            <AvatarImage
               alt="John's avatar - blue themed"
               src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
             />
-            <Avatar.Fallback className="text-xs">B</Avatar.Fallback>
+            <AvatarFallback className="text-xs">B</AvatarFallback>
           </Avatar>
           <span className="text-xs">By John</span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </div>
   );

@@ -6,12 +6,11 @@ import React from "react";
 import {
   ColorSwatchPicker as AriaColorSwatchPicker,
   ColorSwatchPickerItem as AriaColorSwatchPickerItem,
+  ColorSwatch,
 } from "react-aria-components";
 import {tv} from "tailwind-variants";
 
 import {composeTailwindRenderProps, focusRing} from "@/utils/compose-tw-render";
-
-import {ColorSwatch} from "./color-swatch";
 
 const itemStyles = tv({
   base: "rounded-xs relative",

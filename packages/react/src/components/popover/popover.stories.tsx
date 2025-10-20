@@ -1,13 +1,20 @@
-import type {PopoverContentProps} from "./popover";
+import type {PopoverContentProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Avatar} from "../avatar";
+import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
 
-import {Popover} from "./index";
+import {
+  Popover,
+  PopoverArrow,
+  PopoverContent,
+  PopoverDialog,
+  PopoverHeading,
+  PopoverTrigger,
+} from "./index";
 
 export default {
   argTypes: {
@@ -54,12 +61,12 @@ const Template = (props: PopoverContentProps) => (
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
-      <Popover.Content {...props}>
-        <Popover.Dialog>
-          <Popover.Heading>Popover heading</Popover.Heading>
+      <PopoverContent {...props}>
+        <PopoverDialog>
+          <PopoverHeading>Popover heading</PopoverHeading>
           <p>This is the popover content</p>
-        </Popover.Dialog>
-      </Popover.Content>
+        </PopoverDialog>
+      </PopoverContent>
     </Popover>
   </div>
 );
@@ -70,13 +77,13 @@ const TemplateWithArrow = (props: PopoverContentProps) => (
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
-      <Popover.Content {...props}>
-        <Popover.Dialog>
-          <Popover.Arrow />
-          <Popover.Heading>Popover heading</Popover.Heading>
+      <PopoverContent {...props}>
+        <PopoverDialog>
+          <PopoverArrow />
+          <PopoverHeading>Popover heading</PopoverHeading>
           <p>This is the popover content</p>
-        </Popover.Dialog>
-      </Popover.Content>
+        </PopoverDialog>
+      </PopoverContent>
     </Popover>
   </div>
 );
@@ -87,29 +94,29 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
   return (
     <div className="flex items-center gap-3">
       <Popover>
-        <Popover.Trigger aria-label="Popover trigger">
+        <PopoverTrigger aria-label="Popover trigger">
           <div className="flex items-center gap-2">
             <Avatar size="sm">
-              <Avatar.Image alt="Zoe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
-              <Avatar.Fallback>Z</Avatar.Fallback>
+              <AvatarImage alt="Zoe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
+              <AvatarFallback>Z</AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-0">
               <p className="text-sm font-medium leading-5">Zoe</p>
               <p className="text-muted text-xs leading-none">zoe@heroui.com</p>
             </div>
           </div>
-        </Popover.Trigger>
-        <Popover.Content {...props} className="w-[290px]">
-          <Popover.Dialog className="flex flex-col gap-3">
-            <Popover.Heading>
+        </PopoverTrigger>
+        <PopoverContent {...props} className="w-[290px]">
+          <PopoverDialog className="flex flex-col gap-3">
+            <PopoverHeading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar size="md">
-                    <Avatar.Image
+                    <AvatarImage
                       alt="Zoe"
                       src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
                     />
-                    <Avatar.Fallback>Z</Avatar.Fallback>
+                    <AvatarFallback>Z</AvatarFallback>
                   </Avatar>
                   <div className="flex h-full flex-col items-start justify-center">
                     <span className="text-sm font-medium">Zoey Lang</span>
@@ -127,7 +134,7 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
                   {isFollowing ? "Following" : "Follow"}
                 </Button>
               </div>
-            </Popover.Heading>
+            </PopoverHeading>
             <div>
               <p className="pl-px text-sm">
                 Design Engineer, @hero_ui lover she/her. SF Bay Area&nbsp;
@@ -146,8 +153,8 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
                 <p className="text-muted text-sm">Followers</p>
               </div>
             </div>
-          </Popover.Dialog>
-        </Popover.Content>
+          </PopoverDialog>
+        </PopoverContent>
       </Popover>
     </div>
   );
@@ -178,19 +185,19 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
     <div className="flex items-center gap-8">
       <Popover>
         <Button>Click for Spring Animation</Button>
-        <Popover.Content
+        <PopoverContent
           {...props}
           className="data-[entering]:animate-in data-[entering]:zoom-in-90 data-[entering]:fade-in-0 data-[entering]:ease-spring data-[entering]:duration-600"
         >
-          <Popover.Dialog>
-            <Popover.Arrow />
-            <Popover.Heading>Spring Animation 🎉</Popover.Heading>
+          <PopoverDialog>
+            <PopoverArrow />
+            <PopoverHeading>Spring Animation 🎉</PopoverHeading>
             <p className="text-muted mt-2 text-sm">
               Notice the subtle bounce effect when the popover appears and disappears.
             </p>
             <p className="text-muted mt-4 text-xs">Easing: cubic-bezier(0.36, 1.66, 0.04, 1)</p>
-          </Popover.Dialog>
-        </Popover.Content>
+          </PopoverDialog>
+        </PopoverContent>
       </Popover>
     </div>
 

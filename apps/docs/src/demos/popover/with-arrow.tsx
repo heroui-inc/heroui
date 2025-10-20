@@ -1,6 +1,13 @@
 "use client";
 
-import {Button, Popover} from "@heroui/react";
+import {
+  Button,
+  Popover,
+  PopoverArrow,
+  PopoverContent,
+  PopoverDialog,
+  PopoverHeading,
+} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function PopoverWithArrow() {
@@ -8,30 +15,30 @@ export function PopoverWithArrow() {
     <div className="flex items-center gap-4">
       <Popover>
         <Button variant="secondary">With Arrow</Button>
-        <Popover.Content>
-          <Popover.Dialog>
-            <Popover.Arrow />
-            <Popover.Heading>Popover with Arrow</Popover.Heading>
+        <PopoverContent>
+          <PopoverDialog>
+            <PopoverArrow />
+            <PopoverHeading>Popover with Arrow</PopoverHeading>
             <p className="text-muted mt-2 text-sm">
               The arrow shows which element triggered the popover.
             </p>
-          </Popover.Dialog>
-        </Popover.Content>
+          </PopoverDialog>
+        </PopoverContent>
       </Popover>
 
       <Popover>
         <Button isIconOnly variant="tertiary">
           <Icon icon="gravity-ui:ellipsis" />
         </Button>
-        <Popover.Content offset={10}>
-          <Popover.Dialog>
-            <Popover.Arrow />
-            <Popover.Heading>Popover with Arrow</Popover.Heading>
+        <PopoverContent offset={10}>
+          <PopoverDialog>
+            <PopoverArrow />
+            <PopoverHeading>Popover with Arrow</PopoverHeading>
             <p className="text-muted mt-2 text-sm">
               The arrow shows which element triggered the popover.
             </p>
-          </Popover.Dialog>
-        </Popover.Content>
+          </PopoverDialog>
+        </PopoverContent>
       </Popover>
     </div>
   );

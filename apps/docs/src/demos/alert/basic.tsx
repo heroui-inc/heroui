@@ -1,15 +1,15 @@
 "use client";
 
-import {Alert} from "@heroui/react";
+import {Alert, AlertContent, AlertDescription, AlertIcon, AlertTitle} from "@heroui/react";
 
 export function Basic() {
   return (
     <Alert className="max-w-lg">
-      <Alert.Icon />
-      <Alert.Content>
-        <Alert.Title>Heads up!</Alert.Title>
-        <Alert.Description>You can add components to your app using the cli.</Alert.Description>
-      </Alert.Content>
+      <AlertIcon />
+      <AlertContent>
+        <AlertTitle>Heads up!</AlertTitle>
+        <AlertDescription>You can add components to your app using the cli.</AlertDescription>
+      </AlertContent>
     </Alert>
   );
 }

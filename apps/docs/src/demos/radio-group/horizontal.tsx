@@ -1,6 +1,14 @@
 "use client";
 
-import {Description, Label, Radio, RadioGroup} from "@heroui/react";
+import {
+  Description,
+  Label,
+  Radio,
+  RadioContent,
+  RadioControl,
+  RadioGroup,
+  RadioIndicator,
+} from "@heroui/react";
 
 export function Horizontal() {
   return (
@@ -8,31 +16,31 @@ export function Horizontal() {
       <Label>Subscription plan</Label>
       <RadioGroup defaultValue="pro" name="plan-orientation" orientation="horizontal">
         <Radio value="starter">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Starter</Label>
             <Description>For side projects</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="pro">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Pro</Label>
             <Description>Advanced reporting</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
         <Radio value="teams">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <RadioControl>
+            <RadioIndicator />
+          </RadioControl>
+          <RadioContent>
             <Label>Teams</Label>
             <Description>Up to 10 teammates</Description>
-          </Radio.Content>
+          </RadioContent>
         </Radio>
       </RadioGroup>
     </div>

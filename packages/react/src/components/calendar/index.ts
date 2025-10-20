@@ -1,6 +1,16 @@
-export {default as Calendar} from "./calendar";
+export {
+  Calendar,
+  CalendarHeader,
+  CalendarHeading,
+  CalendarNavButton,
+  CalendarGrid,
+  CalendarGridHeader,
+  CalendarHeaderCell,
+  CalendarCell,
+} from "./calendar";
+
 export type {
-  CalendarRootProps,
+  CalendarProps,
   CalendarHeaderProps,
   CalendarHeadingProps,
   CalendarNavButtonProps,
@@ -9,4 +19,5 @@ export type {
   CalendarHeaderCellProps,
   CalendarCellProps,
 } from "./calendar";
+
 export {calendarVariants, type CalendarVariants} from "./calendar.styles";

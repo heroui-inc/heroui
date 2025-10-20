@@ -14,7 +14,7 @@ interface TextProps extends TextPrimitiveProps, TextVariants {
   asChild?: boolean;
 }
 
-const Text = React.forwardRef<React.ElementRef<typeof TextPrimitive>, TextProps>(
+const Text = React.forwardRef<React.ComponentRef<typeof TextPrimitive>, TextProps>(
   ({asChild = false, children, className, size, variant, ...rest}, ref) => {
     const styles = textVariants({size, variant, className});
 

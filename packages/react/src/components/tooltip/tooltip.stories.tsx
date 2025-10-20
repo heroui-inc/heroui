@@ -1,4 +1,4 @@
-import type {TooltipContentProps} from "./tooltip";
+import type {TooltipContentProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -6,7 +6,7 @@ import React from "react";
 
 import {Button} from "../button";
 
-import {Tooltip} from "./index";
+import {Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "./index";
 
 export default {
   argTypes: {
@@ -55,10 +55,10 @@ const Template = (props: TooltipContentProps) => (
       <Button isIconOnly variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
-      <Tooltip.Content {...props}>
-        <Tooltip.Arrow />
+      <TooltipContent {...props}>
+        <TooltipArrow />
         <p>Tooltip content</p>
-      </Tooltip.Content>
+      </TooltipContent>
     </Tooltip>
   </div>
 );
@@ -66,15 +66,15 @@ const Template = (props: TooltipContentProps) => (
 const TemplateWithTrigger = (props: TooltipContentProps) => (
   <div className="flex items-center gap-3">
     <Tooltip delay={0}>
-      <Tooltip.Trigger aria-label="Tooltip trigger">
+      <TooltipTrigger aria-label="Tooltip trigger">
         <div className="bg-accent-soft rounded-full p-2">
           <Icon icon="gravity-ui:circle-info" />
         </div>
-      </Tooltip.Trigger>
-      <Tooltip.Content {...props}>
-        <Tooltip.Arrow />
+      </TooltipTrigger>
+      <TooltipContent {...props}>
+        <TooltipArrow />
         <p>Tooltip content</p>
-      </Tooltip.Content>
+      </TooltipContent>
     </Tooltip>
   </div>
 );

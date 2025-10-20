@@ -18,11 +18,11 @@ import {radioGroupVariants, radioVariants} from "./radio-group.styles";
  * RadioGroup
  * -----------------------------------------------------------------------------------------------*/
 
-interface RadioGroupRootProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
+interface RadioGroupProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
 
 const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive>,
-  RadioGroupRootProps
+  React.ComponentRef<typeof RadioGroupPrimitive>,
+  RadioGroupProps
 >(({children, className, ...props}, ref) => {
   const styles = React.useMemo(() => radioGroupVariants(), []);
 
@@ -51,12 +51,12 @@ interface RadioContext {
 
 const RadioContext = createContext<RadioContext>({});
 
-interface RadioRootProps extends RadioPrimitiveProps {
+interface RadioProps extends RadioPrimitiveProps {
   /** The name of the radio button, used when submitting an HTML form. */
   name?: string;
 }
 
-const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, RadioRootProps>(
+const Radio = React.forwardRef<React.ComponentRef<typeof RadioPrimitive>, RadioProps>(
   ({children, className, ...props}, ref) => {
     const slots = React.useMemo(() => radioVariants(), []);
 
@@ -77,7 +77,7 @@ const RadioRoot = React.forwardRef<React.ElementRef<typeof RadioPrimitive>, Radi
   },
 );
 
-RadioRoot.displayName = "HeroUI.Radio";
+Radio.displayName = "HeroUI.Radio";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -95,7 +95,7 @@ const RadioControl = React.forwardRef<HTMLSpanElement, RadioControlProps>(
   },
 );
 
-RadioControl.displayName = "HeroUI.Radio.Control";
+RadioControl.displayName = "HeroUI.RadioControl";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -124,7 +124,7 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
   },
 );
 
-RadioIndicator.displayName = "HeroUI.Radio.Indicator";
+RadioIndicator.displayName = "HeroUI.RadioIndicator";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -142,22 +142,16 @@ const RadioContent = React.forwardRef<HTMLDivElement, RadioContentProps>(
   },
 );
 
-RadioContent.displayName = "HeroUI.Radio.Content";
+RadioContent.displayName = "HeroUI.RadioContent";
 
 /* ----------------------------------------------------------------------------------------------*/
 
-const CompoundRadio = Object.assign(RadioRoot, {
-  Control: RadioControl,
-  Indicator: RadioIndicator,
-  Content: RadioContent,
-});
+export {RadioGroup, Radio, RadioControl, RadioIndicator, RadioContent};
 
 export type {
-  RadioGroupRootProps,
-  RadioGroupRootProps as RadioGroupProps,
-  RadioRootProps,
-  RadioRootProps as RadioProps,
+  RadioGroupProps,
+  RadioProps,
+  RadioControlProps,
   RadioIndicatorProps,
+  RadioContentProps,
 };
-
-export {CompoundRadio as Radio, RadioGroup};

@@ -12,7 +12,7 @@ import {Label} from "../label";
 import {TextField} from "../text-field";
 import {TextArea} from "../textarea";
 
-import {Fieldset} from "./index";
+import {FieldGroup, Fieldset, FieldsetActions, FieldsetLegend} from "./index";
 
 const meta: Meta<typeof Fieldset> = {
   component: Fieldset,
@@ -44,9 +44,9 @@ export const Default: Story = {
     return (
       <Form onSubmit={onSubmit}>
         <Fieldset className="w-96">
-          <Fieldset.Legend>Profile Settings</Fieldset.Legend>
+          <FieldsetLegend>Profile Settings</FieldsetLegend>
           <Description>Update your profile information.</Description>
-          <Fieldset.Group>
+          <FieldGroup>
             <TextField
               isRequired
               name="name"
@@ -83,8 +83,8 @@ export const Default: Story = {
               <Description>Minimum 10 characters</Description>
               <FieldError />
             </TextField>
-          </Fieldset.Group>
-          <Fieldset.Actions>
+          </FieldGroup>
+          <FieldsetActions>
             <Button type="submit">
               <Icon icon="gravity-ui:floppy-disk" />
               Save changes
@@ -92,7 +92,7 @@ export const Default: Story = {
             <Button type="reset" variant="secondary">
               Cancel
             </Button>
-          </Fieldset.Actions>
+          </FieldsetActions>
         </Fieldset>
       </Form>
     );

@@ -1,6 +1,14 @@
 "use client";
 
-import {Button, Kbd, Tooltip} from "@heroui/react";
+import {
+  Button,
+  Kbd,
+  KbdContent,
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipTrigger,
+} from "@heroui/react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 
@@ -19,7 +27,7 @@ export function ShowcaseHeader() {
   const returnUrl = searchParams.get("returnUrl") || "/showcase";
 
   const onClose = () => {
-    router.push(returnUrl);
+    router.push(returnUrl as any);
   };
 
   useEffect(() => {
@@ -40,17 +48,19 @@ export function ShowcaseHeader() {
     <header className="border-border/50 bg-background/50 z-[1] flex items-center justify-between border-b p-4 backdrop-blur-sm">
       <div className="flex flex-1 justify-start">
         <Tooltip delay={0}>
-          <Button isIconOnly aria-label="Close" variant="secondary" onPress={onClose}>
-            <Iconify className="text-foreground/70" icon="xmark" />
-          </Button>
-          <Tooltip.Content className="text-muted px-2 py-0.5 text-xs" offset={7} placement="bottom">
-            <Tooltip.Arrow />
+          <TooltipTrigger>
+            <Button isIconOnly aria-label="Close" variant="secondary" onPress={onClose}>
+              <Iconify className="text-foreground/70" icon="xmark" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="text-muted px-2 py-0.5 text-xs" offset={7} placement="bottom">
+            <TooltipArrow />
             Press{" "}
             <Kbd>
-              <Kbd.Content className="text-xs">Esc</Kbd.Content>
+              <KbdContent className="text-xs">Esc</KbdContent>
             </Kbd>{" "}
             to close
-          </Tooltip.Content>
+          </TooltipContent>
         </Tooltip>
       </div>
       <div className="flex flex-1 items-center justify-center">
@@ -59,18 +69,20 @@ export function ShowcaseHeader() {
       <div className="flex flex-1 items-center justify-end gap-2">
         <ShowcaseThemeSwitch />
         <Tooltip delay={1500}>
-          <Button
-            isIconOnly
-            aria-label="Toggle showcase code"
-            variant={isCodeVisible ? "primary" : "secondary"}
-            onPress={toggleCode}
-          >
-            <Iconify className={isCodeVisible ? "" : "text-foreground/70"} icon="code" />
-          </Button>
-          <Tooltip.Content offset={7}>
-            <Tooltip.Arrow />
+          <TooltipTrigger>
+            <Button
+              isIconOnly
+              aria-label="Toggle showcase code"
+              variant={isCodeVisible ? "primary" : "secondary"}
+              onPress={toggleCode}
+            >
+              <Iconify className={isCodeVisible ? "" : "text-foreground/70"} icon="code" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent offset={7}>
+            <TooltipArrow />
             <p className="text-muted text-xs">{isCodeVisible ? "Hide code" : "Show code"}</p>
-          </Tooltip.Content>
+          </TooltipContent>
         </Tooltip>
         {/* TODO: Add this later */}
         {/* <Button isIconOnly aria-label="Open showcase in new tab" variant="secondary">

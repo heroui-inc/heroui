@@ -1,0 +1,264 @@
+---
+title: v3.0.0-alpha.35
+description: Major breaking change - Migrated from dot notation to named exports for React Server Components compatibility.
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 19, 2025</span>
+</div>
+
+This release introduces a **major breaking change**: all compound components have been migrated from dot notation to named exports to ensure full compatibility with React Server Components (RSC).
+
+<Callout type="warning">
+  **Breaking Changes:** This release contains significant breaking changes. All compound components now require importing individual component parts instead of using dot notation. See the [Migration Guide](#migration-guide) below for detailed instructions.
+</Callout>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Breaking Changes
+
+### Dot Notation to Named Exports Migration
+
+All compound components have been migrated from dot notation (e.g., `Card.Header`) to named exports (e.g., `CardHeader`) to ensure compatibility with React Server Components. The `Object.assign` pattern used for dot notation is not supported in RSC environments.
+
+#### Why This Change?
+
+1. **React Server Components Compatibility**: The new pattern works seamlessly with RSC as it doesn't rely on `Object.assign`
+2. **Better Tree Shaking**: Individual exports can be tree-shaken more effectively
+3. **Clearer Imports**: Explicit imports make it clearer which components are being used
+4. **Enhanced Type Safety**: Each component part has its own type definition, improving TypeScript support
+
+#### Affected Components
+
+All 16 compound components have been affected by this change:
+
+- Accordion
+- Alert
+- Avatar
+- Card
+- Disclosure & DisclosureGroup
+- Fieldset
+- Kbd
+- Link
+- Popover
+- RadioGroup
+- Slider
+- Switch & SwitchGroup
+- Tabs
+- Tooltip
+
+## Migration Guide
+
+### Before and After Examples
+
+#### Card Component
+
+**Before (v3.0.0-alpha.34):**
+```tsx
+import { Card } from "@heroui/react"
+
+<Card>
+  <Card.Header>
+    <Card.Title>Card Title</Card.Title>
+    <Card.Description>Card description</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    Card content
+  </Card.Content>
+  <Card.Footer>
+    Card footer
+  </Card.Footer>
+</Card>
+```
+
+**After (v3.0.0-alpha.35):**
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@heroui/react"
+
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    Card content
+  </CardContent>
+  <CardFooter>
+    Card footer
+  </CardFooter>
+</Card>
+```
+
+#### Tabs Component
+
+**Before:**
+```tsx
+import { Tabs } from "@heroui/react"
+
+<Tabs>
+  <Tabs.List>
+    <Tabs.Tab id="tab1">Tab 1</Tabs.Tab>
+    <Tabs.Tab id="tab2">Tab 2</Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
+  <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
+</Tabs>
+```
+
+**After:**
+```tsx
+import { Tabs, TabList, Tab, TabPanel } from "@heroui/react"
+
+<Tabs>
+  <TabList>
+    <Tab id="tab1">Tab 1</Tab>
+    <Tab id="tab2">Tab 2</Tab>
+  </TabList>
+  <TabPanel id="tab1">Panel 1</TabPanel>
+  <TabPanel id="tab2">Panel 2</TabPanel>
+</Tabs>
+```
+
+### Complete Migration Reference
+
+| Component | Old (Dot Notation) | New (Named Exports) |
+|-----------|-------------------|---------------------|
+| **Accordion** | `Accordion.Item`, `Accordion.Heading`, `Accordion.Trigger`, etc. | `AccordionItem`, `AccordionHeading`, `AccordionTrigger`, etc. |
+| **Alert** | `Alert.Icon`, `Alert.Content`, `Alert.Title`, etc. | `AlertIcon`, `AlertContent`, `AlertTitle`, etc. |
+| **Avatar** | `Avatar.Image`, `Avatar.Fallback` | `AvatarImage`, `AvatarFallback` |
+| **Card** | `Card.Header`, `Card.Title`, `Card.Content`, etc. | `CardHeader`, `CardTitle`, `CardContent`, etc. |
+| **Disclosure** | `Disclosure.Trigger`, `Disclosure.Panel` | `DisclosureTrigger`, `DisclosurePanel` |
+| **Fieldset** | `Fieldset.Legend`, `Fieldset.Group`, etc. | `FieldsetLegend`, `FieldGroup`, etc. |
+| **Kbd** | `Kbd.Abbr`, `Kbd.Key` | `KbdAbbr`, `KbdKey` |
+| **Link** | `Link.Icon` | `LinkIcon` |
+| **Popover** | `Popover.Trigger`, `Popover.Content`, etc. | `PopoverTrigger`, `PopoverContent`, etc. |
+| **RadioGroup** | `RadioGroup.Item`, `RadioGroup.Indicator` | `Radio`, `RadioIndicator` |
+| **Slider** | `Slider.Track`, `Slider.Thumb`, etc. | `SliderTrack`, `SliderThumb`, etc. |
+| **Switch** | `Switch.Control`, `Switch.Thumb` | `SwitchControl`, `SwitchThumb` |
+| **Tabs** | `Tabs.List`, `Tabs.Tab`, `Tabs.Panel` | `TabList`, `Tab`, `TabPanel` |
+| **Tooltip** | `Tooltip.Trigger`, `Tooltip.Content`, etc. | `TooltipTrigger`, `TooltipContent`, etc. |
+
+### Migration Steps
+
+1. **Update all imports** to include the necessary component parts:
+   ```tsx
+   // Before
+   import { Card } from "@heroui/react"
+
+   // After
+   import { Card, CardHeader, CardTitle, CardContent } from "@heroui/react"
+   ```
+
+2. **Replace all dot notation** with the corresponding named component:
+   ```tsx
+   // Before
+   <Card.Header>
+
+   // After
+   <CardHeader>
+   ```
+
+3. **Update TypeScript types** if you're importing them separately:
+   ```tsx
+   import type {
+     CardProps,
+     CardHeaderProps,
+     CardTitleProps,
+     // ... other types
+   } from "@heroui/react"
+   ```
+
+### Automated Migration
+
+For large codebases, you can use find-and-replace with regular expressions:
+
+```bash
+# Example for Card component
+sed -i 's/Card\.Header/CardHeader/g' **/*.tsx
+sed -i 's/Card\.Title/CardTitle/g' **/*.tsx
+sed -i 's/Card\.Description/CardDescription/g' **/*.tsx
+sed -i 's/Card\.Content/CardContent/g' **/*.tsx
+sed -i 's/Card\.Footer/CardFooter/g' **/*.tsx
+```
+
+## Documentation Updates
+
+All documentation has been updated to reflect the new import patterns:
+
+- Component documentation now shows named exports
+- Code examples use the new syntax
+- API references have been updated
+- Handbook and design principles reflect the changes
+
+## TypeScript Support
+
+All component exports maintain their TypeScript types with improved individual type definitions:
+
+```tsx
+// All props types are still exported and now more granular
+import type {
+  AccordionProps,
+  AccordionItemProps,
+  AccordionHeadingProps,
+  AccordionTriggerProps,
+  AccordionIndicatorProps,
+  AccordionPanelProps,
+  AccordionBodyProps,
+} from "@heroui/react"
+```
+
+## Need Help?
+
+If you encounter any issues during migration:
+
+1. Ensure all component parts are imported
+2. Verify no dot notation remains in your code
+3. Check that component names match the new pattern
+4. Review the [full migration guide](https://github.com/heroui-inc/heroui/blob/v3/MIGRATION_DOT_NOTATION.md)
+5. Report issues at: [GitHub Issues](https://github.com/heroui-inc/heroui/issues)
+
+## Links
+
+- [Full Migration Guide](https://github.com/heroui-inc/heroui/blob/v3/MIGRATION_DOT_NOTATION.md)
+- [React Server Components Documentation](https://react.dev/reference/rsc/server-components)
+- [GitHub PR](https://github.com/heroui-inc/heroui/pull/XXXX)
+
+## Contributors
+
+Thanks to everyone who contributed to this release and helped with the migration to React Server Components compatibility!

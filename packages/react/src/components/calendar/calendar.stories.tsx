@@ -3,7 +3,15 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 import React from "react";
 
-import {Calendar} from "./index";
+import {
+  Calendar,
+  CalendarGrid,
+  CalendarGridHeader,
+  CalendarHeader,
+  CalendarHeaderCell,
+  CalendarHeading,
+  CalendarNavButton,
+} from "./index";
 
 const meta: Meta<typeof Calendar> = {
   argTypes: {
@@ -24,12 +32,12 @@ type Story = StoryObj<typeof Calendar>;
 export const Default: Story = {
   render: (args) => (
     <Calendar {...args} aria-label="Event date">
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <Calendar.Grid />
+      <CalendarHeader>
+        <CalendarNavButton slot="previous" />
+        <CalendarHeading />
+        <CalendarNavButton slot="next" />
+      </CalendarHeader>
+      <CalendarGrid />
     </Calendar>
   ),
 };
@@ -47,12 +55,12 @@ export const ControlledValue: Story = {
           // @ts-expect-error TODO: fix the type inference for events
           onChange={(newValue) => setValue(newValue)}
         >
-          <Calendar.Header>
-            <Calendar.NavButton slot="previous" />
-            <Calendar.Heading />
-            <Calendar.NavButton slot="next" />
-          </Calendar.Header>
-          <Calendar.Grid />
+          <CalendarHeader>
+            <CalendarNavButton slot="previous" />
+            <CalendarHeading />
+            <CalendarNavButton slot="next" />
+          </CalendarHeader>
+          <CalendarGrid />
         </Calendar>
         <p className="text-muted text-sm">Selected date: {value.toString()}</p>
       </div>
@@ -68,12 +76,12 @@ export const MinMaxDates: Story = {
       maxValue={today(getLocalTimeZone()).add({months: 1})}
       minValue={today(getLocalTimeZone())}
     >
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <Calendar.Grid />
+      <CalendarHeader>
+        <CalendarNavButton slot="previous" />
+        <CalendarHeading />
+        <CalendarNavButton slot="next" />
+      </CalendarHeader>
+      <CalendarGrid />
     </Calendar>
   ),
 };
@@ -89,12 +97,12 @@ export const UnavailableDates: Story = {
 
     return (
       <Calendar {...args} aria-label="Event date" isDateUnavailable={isWeekend} minValue={now}>
-        <Calendar.Header>
-          <Calendar.NavButton slot="previous" />
-          <Calendar.Heading />
-          <Calendar.NavButton slot="next" />
-        </Calendar.Header>
-        <Calendar.Grid />
+        <CalendarHeader>
+          <CalendarNavButton slot="previous" />
+          <CalendarHeading />
+          <CalendarNavButton slot="next" />
+        </CalendarHeader>
+        <CalendarGrid />
       </Calendar>
     );
   },
@@ -106,12 +114,12 @@ export const Disabled: Story = {
   },
   render: (args) => (
     <Calendar {...args} aria-label="Event date" defaultValue={today(getLocalTimeZone())}>
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <Calendar.Grid />
+      <CalendarHeader>
+        <CalendarNavButton slot="previous" />
+        <CalendarHeading />
+        <CalendarNavButton slot="next" />
+      </CalendarHeader>
+      <CalendarGrid />
     </Calendar>
   ),
 };
@@ -120,14 +128,14 @@ export const MultipleMonths: Story = {
   render: (args) => (
     <div className="flex gap-4">
       <Calendar {...args} aria-label="Event date" visibleDuration={{months: 2}}>
-        <Calendar.Header>
-          <Calendar.NavButton slot="previous" />
-          <Calendar.Heading />
-          <Calendar.NavButton slot="next" />
-        </Calendar.Header>
+        <CalendarHeader>
+          <CalendarNavButton slot="previous" />
+          <CalendarHeading />
+          <CalendarNavButton slot="next" />
+        </CalendarHeader>
         <div className="flex gap-4">
-          <Calendar.Grid />
-          <Calendar.Grid offset={{months: 1}} />
+          <CalendarGrid />
+          <CalendarGrid offset={{months: 1}} />
         </div>
       </Calendar>
     </div>
@@ -137,16 +145,16 @@ export const MultipleMonths: Story = {
 export const CustomDayNames: Story = {
   render: (args) => (
     <Calendar {...args} aria-label="Event date">
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <Calendar.Grid>
-        <Calendar.GridHeader>
-          {(day) => <Calendar.HeaderCell>{day.slice(0, 1)}</Calendar.HeaderCell>}
-        </Calendar.GridHeader>
-      </Calendar.Grid>
+      <CalendarHeader>
+        <CalendarNavButton slot="previous" />
+        <CalendarHeading />
+        <CalendarNavButton slot="next" />
+      </CalendarHeader>
+      <CalendarGrid>
+        <CalendarGridHeader>
+          {(day) => <CalendarHeaderCell>{day.slice(0, 1)}</CalendarHeaderCell>}
+        </CalendarGridHeader>
+      </CalendarGrid>
     </Calendar>
   ),
 };
@@ -154,12 +162,12 @@ export const CustomDayNames: Story = {
 export const InitialFocus: Story = {
   render: (args) => (
     <Calendar {...args} autoFocus aria-label="Event date" defaultValue={parseDate("2025-02-15")}>
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <Calendar.Grid />
+      <CalendarHeader>
+        <CalendarNavButton slot="previous" />
+        <CalendarHeading />
+        <CalendarNavButton slot="next" />
+      </CalendarHeader>
+      <CalendarGrid />
     </Calendar>
   ),
 };

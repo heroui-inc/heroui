@@ -1,5 +1,5 @@
 //  ===================================
-//  Components
+//  Compound Components
 //  ===================================
 
 // completed
@@ -29,8 +29,6 @@ export * from "./description";
 export * from "./field-error";
 export * from "./fieldset";
 export * from "./form";
-
-// in progress
 export * from "./radio-group";
 export * from "./alert";
 export * from "./calendar";

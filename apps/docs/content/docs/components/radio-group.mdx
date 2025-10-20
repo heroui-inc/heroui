@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import { RadioGroup, Radio } from '@heroui/react';
+import { RadioGroup, Radio, RadioIndicator } from '@heroui/react';
 ```
 
 ### Usage
@@ -27,24 +27,14 @@ import { RadioGroup, Radio } from '@heroui/react';
 Import all parts and piece them together.
 
 ```tsx
-import {RadioGroup, Radio, Label, Description, FieldError} from '@heroui/react';
+import {RadioGroup, Radio, RadioIndicator} from '@heroui/react';
 
 export default () => (
   <RadioGroup>
-    <Label />
-    <Description />
     <Radio value="option1">
-      <Radio.Control>
-        <Radio.Indicator>
-          <span>✓</span> {/* Custom indicator (optional) */}
-        </Radio.Indicator>
-      </Radio.Control>
-      <Radio.Content>
-        <Label />
-        <Description />
-      </Radio.Content>
+      <RadioIndicator />
+      Option 1
     </Radio>
-    <FieldError />
   </RadioGroup>
 )
 ```
@@ -103,51 +93,30 @@ Combine `defaultValue` with `onChange` when you only need to react to updates.
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {RadioGroup, Radio, Label, Description} from '@heroui/react';
+import {RadioGroup, Radio, RadioIndicator} from '@heroui/react';
 
 export default () => (
   <RadioGroup defaultValue="premium" name="plan">
-    <Label>Plan selection</Label>
-    <Description>Choose the plan that best suits your needs</Description>
     <Radio
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-blue-300 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-500/10"
       value="basic"
     >
-      <Radio.Control className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500">
-        <Radio.Indicator />
-      </Radio.Control>
-      <Radio.Content>
-        <Label className="cursor-pointer font-semibold">Basic Plan</Label>
-        <Description className="text-sm">
-          Includes 100 messages per month and up to 3 themes to set up
-        </Description>
-      </Radio.Content>
+      <RadioIndicator className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500" />
+      Basic Plan
     </Radio>
     <Radio
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-purple-300 data-[selected=true]:border-purple-500 data-[selected=true]:bg-purple-500/10"
       value="premium"
     >
-      <Radio.Control className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500">
-        <Radio.Indicator />
-      </Radio.Control>
-      <Radio.Content>
-        <Label className="cursor-pointer font-semibold">Premium Plan</Label>
-        <Description className="text-sm">
-          Includes 200 messages per month and up to 6 themes to set up
-        </Description>
-      </Radio.Content>
+      <RadioIndicator className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500" />
+      Premium Plan
     </Radio>
     <Radio
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-emerald-300 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-500/10"
       value="business"
     >
-      <Radio.Control className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500">
-        <Radio.Indicator />
-      </Radio.Control>
-      <Radio.Content>
-        <Label className="cursor-pointer font-semibold">Business Plan</Label>
-        <Description className="text-sm">Unlimited messages and themes</Description>
-      </Radio.Content>
+      <RadioIndicator className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500" />
+      Business Plan
     </Radio>
   </RadioGroup>
 );
@@ -235,29 +204,13 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `name` | `string` | - | The name of the radio button, used when submitting an HTML form |
 | `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Radio content or render prop |
 
-### Radio.Control Props
-
-Extends `React.HTMLAttributes<HTMLSpanElement>`.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | Content to render inside the control, typically `Radio.Indicator`. |
-
-### Radio.Indicator Props
+### RadioIndicator Props
 
 Extends `React.HTMLAttributes<HTMLSpanElement>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Optional content or render prop that receives the current radio state. |
-
-### Radio.Content Props
-
-Extends `React.HTMLAttributes<HTMLDivElement>`.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | Content displayed next to the control, usually `Label` and `Description`. |
 
 ### RadioRenderProps
 

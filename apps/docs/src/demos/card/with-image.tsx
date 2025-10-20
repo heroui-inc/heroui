@@ -1,6 +1,6 @@
 "use client";
 
-import {Card} from "@heroui/react";
+import {Card, CardFooter} from "@heroui/react";
 
 export function WithImage() {
   return (
@@ -12,12 +12,12 @@ export function WithImage() {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
         />
-        <Card.Footer className="flex items-center justify-between px-2 text-sm">
+        <CardFooter className="flex items-center justify-between px-2 text-sm">
           <span>Cars</span>
           <span aria-label="18 pictures in collection" className="text-muted">
             18 pictures
           </span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
 
       <Card className="w-[220px] gap-2 p-1">
@@ -27,12 +27,12 @@ export function WithImage() {
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/workspace.jpeg"
         />
-        <Card.Footer className="flex items-center justify-between px-2 text-sm">
+        <CardFooter className="flex items-center justify-between px-2 text-sm">
           <span>Workspaces</span>
           <span aria-label="56 pictures in collection" className="text-muted">
             56 pictures
           </span>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </div>
   );

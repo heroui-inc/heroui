@@ -35,7 +35,7 @@ interface TabsProps extends TabsPrimitiveProps, TabsVariants {
   className?: string;
 }
 
-const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsProps>(
+const Tabs = React.forwardRef<React.ComponentRef<typeof TabsPrimitive>, TabsProps>(
   ({children, className, orientation = "horizontal", ...props}, ref) => {
     const slots = React.useMemo(() => tabsVariants(), []);
 
@@ -55,7 +55,7 @@ const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsPr
   },
 );
 
-TabsRoot.displayName = "HeroUI.Tabs";
+Tabs.displayName = "HeroUI.Tabs";
 /* -----------------------------------------------------------------------------------------------*/
 
 interface TabListWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -63,7 +63,7 @@ interface TabListWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const TabListWrapper = React.forwardRef<React.ElementRef<"div">, TabListWrapperProps>(
+const TabListWrapper = React.forwardRef<React.ComponentRef<"div">, TabListWrapperProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
 
@@ -89,7 +89,7 @@ interface TabListProps extends TabListPrimitiveProps<object> {
   className?: string;
 }
 
-const TabList = React.forwardRef<React.ElementRef<typeof TabListPrimitive>, TabListProps>(
+const TabList = React.forwardRef<React.ComponentRef<typeof TabListPrimitive>, TabListProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
 
@@ -114,7 +114,7 @@ interface TabProps extends TabPrimitiveProps {
   className?: string;
 }
 
-const Tab = React.forwardRef<React.ElementRef<typeof TabPrimitive>, TabProps>(
+const Tab = React.forwardRef<React.ComponentRef<typeof TabPrimitive>, TabProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
 
@@ -140,7 +140,7 @@ interface TabIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const TabIndicator = React.forwardRef<
-  React.ElementRef<typeof SelectionIndicatorPrimitive>,
+  React.ComponentRef<typeof SelectionIndicatorPrimitive>,
   TabIndicatorProps
 >(({className, ...props}, ref) => {
   const {slots} = useContext(TabsContext);
@@ -164,7 +164,7 @@ interface TabPanelProps extends Omit<TabPanelPrimitiveProps, "children"> {
   className?: string;
 }
 
-const TabPanel = React.forwardRef<React.ElementRef<typeof TabPanelPrimitive>, TabPanelProps>(
+const TabPanel = React.forwardRef<React.ComponentRef<typeof TabPanelPrimitive>, TabPanelProps>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(TabsContext);
 
@@ -185,13 +185,13 @@ TabPanel.displayName = "HeroUI.TabPanel";
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundTabs = Object.assign(TabsRoot, {
-  ListWrapper: TabListWrapper,
-  List: TabList,
-  Tab: Tab,
-  Indicator: TabIndicator,
-  Panel: TabPanel,
-});
+export {Tabs, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
 
-export default CompoundTabs;
-export type {TabsProps, TabListProps, TabProps, TabPanelProps};
+export type {
+  TabsProps,
+  TabListWrapperProps,
+  TabListProps,
+  TabProps,
+  TabIndicatorProps,
+  TabPanelProps,
+};

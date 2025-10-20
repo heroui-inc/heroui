@@ -1,4 +1,4 @@
-import type {CloseButtonProps} from "./close-button";
+import type {CloseButtonProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";

@@ -1,6 +1,13 @@
 "use client";
 
-import {Alert} from "@heroui/react";
+import {
+  Alert,
+  AlertClose,
+  AlertContent,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from "@heroui/react";
 import {useState} from "react";
 
 export function Dismissible() {
@@ -19,14 +26,14 @@ export function Dismissible() {
 
   return (
     <Alert className="max-w-lg">
-      <Alert.Icon />
-      <Alert.Content>
-        <Alert.Title>Dismissible Alert</Alert.Title>
-        <Alert.Description>
+      <AlertIcon />
+      <AlertContent>
+        <AlertTitle>Dismissible Alert</AlertTitle>
+        <AlertDescription>
           This alert can be dismissed by clicking the close button.
-        </Alert.Description>
-      </Alert.Content>
-      <Alert.Close onClick={() => setIsVisible(false)} />
+        </AlertDescription>
+      </AlertContent>
+      <AlertClose onClick={() => setIsVisible(false)} />
     </Alert>
   );
 }
