@@ -117,7 +117,7 @@ export const Indeterminate: Story = {
     const allOptions = ["coding", "design", "writing"];
 
     return (
-      <div className="flex flex-col gap-3 px-4">
+      <div>
         <Checkbox
           isIndeterminate={selected.length > 0 && selected.length < allOptions.length}
           isSelected={selected.length === allOptions.length}
