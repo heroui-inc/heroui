@@ -17,7 +17,7 @@ interface GenerateProps {
   site?: ReactNode;
 }
 
-export function generateOGImage(options: GenerateProps & ImageResponseOptions): ImageResponse {
+function generateOGImage(options: GenerateProps & ImageResponseOptions): ImageResponse {
   const {description, icon, site, title, ...rest} = options;
 
   return new ImageResponse(generate({description, icon, site, title}), {
@@ -27,7 +27,7 @@ export function generateOGImage(options: GenerateProps & ImageResponseOptions): 
   });
 }
 
-export function generate({...props}: GenerateProps): ReactElement {
+function generate({...props}: GenerateProps): ReactElement {
   return (
     <div
       style={{
@@ -85,7 +85,7 @@ const [interRegular, interBold] = await Promise.all([
   promises.readFile(path.join(process.cwd(), "public/fonts/Inter-Bold.ttf")),
 ]);
 
-export const GET = async (_req: Request, {params}: RouteContext<"/og/[...slug]">) => {
+export const GET = async (_req: Request, {params}: {params: Promise<{slug: string[]}>}) => {
   const {slug} = await params;
   const page = source.getPage(slug.slice(0, -1));
 

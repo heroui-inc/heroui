@@ -3,7 +3,7 @@
 import type {ShowcaseItem as ShowcaseItemType} from "@/showcases";
 
 import {chipVariants} from "@heroui/react";
-import Link from "next/link";
+import LinkRoot from "next/link";
 import {useSearchParams} from "next/navigation";
 import {Suspense} from "react";
 import {tv} from "tailwind-variants";
@@ -108,7 +108,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
             {/* Center - Show used components */}
             <div className="order-1 my-2 flex flex-1 items-center justify-center gap-2 md:order-2 md:my-0">
               {showcase.components.map((component) => (
-                <Link
+                <LinkRoot
                   key={component}
                   href={`/docs/components/${component.toLowerCase().replace(/group$/, "-group")}`}
                   className={chipVariants({
@@ -117,7 +117,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
                   })}
                 >
                   {component}
-                </Link>
+                </LinkRoot>
               ))}
             </div>
 

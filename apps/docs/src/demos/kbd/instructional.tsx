@@ -10,31 +10,31 @@ export function InstructionalText() {
         <ul className="space-y-2 text-sm">
           <li>
             • Open search:{" "}
-            <Kbd>
+            <Kbd.Root>
               <Kbd.Abbr keyValue="command" />
               <Kbd.Content>K</Kbd.Content>
-            </Kbd>
+            </Kbd.Root>
           </li>
           <li>
             • Toggle sidebar:{" "}
-            <Kbd>
+            <Kbd.Root>
               <Kbd.Abbr keyValue="command" />
               <Kbd.Content>B</Kbd.Content>
-            </Kbd>
+            </Kbd.Root>
           </li>
           <li>
             • New file:{" "}
-            <Kbd>
+            <Kbd.Root>
               <Kbd.Abbr keyValue="command" />
               <Kbd.Content>N</Kbd.Content>
-            </Kbd>
+            </Kbd.Root>
           </li>
           <li>
             • Quick save:{" "}
-            <Kbd>
+            <Kbd.Root>
               <Kbd.Abbr keyValue="command" />
               <Kbd.Content>S</Kbd.Content>
-            </Kbd>
+            </Kbd.Root>
           </li>
         </ul>
       </div>

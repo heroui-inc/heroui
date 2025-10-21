@@ -1,9 +1,9 @@
-import type {SpinnerProps} from "./spinner";
+import type {SpinnerProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import React from "react";
 
-import {Spinner} from "./spinner";
+import {Spinner} from "./index";
 
 export default {
   argTypes: {

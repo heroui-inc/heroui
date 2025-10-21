@@ -7,32 +7,32 @@ export function SpecialKeys() {
     <div className="space-y-3">
       <p className="text-sm">
         Press{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="enter" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to confirm or{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="escape" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to cancel.
       </p>
       <p className="text-sm">
         Use{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="tab" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to navigate between form fields and{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="shift" />
           <Kbd.Abbr keyValue="tab" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to go back.
       </p>
       <p className="text-sm">
         Hold{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="space" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to temporarily enable panning mode.
       </p>
     </div>

@@ -3,32 +3,24 @@
 import type {DescriptionVariants} from "./description.styles";
 import type {TextProps} from "react-aria-components";
 
-import React from "react";
 import {Text} from "react-aria-components";
 
 import {descriptionVariants} from "./description.styles";
 
-interface DescriptionProps extends TextProps, DescriptionVariants {
-  ref?: React.Ref<HTMLElement>;
-}
+interface DescriptionProps extends TextProps, DescriptionVariants {}
 
-const Description = React.forwardRef<HTMLElement, DescriptionProps>(
-  ({children, className, ...rest}, ref) => {
-    return (
-      <Text
-        ref={ref}
-        className={descriptionVariants({className})}
-        data-slot="description"
-        slot="description"
-        {...rest}
-      >
-        {children}
-      </Text>
-    );
-  },
-);
-
-Description.displayName = "HeroUI.Description";
+const Description = ({children, className, ...rest}: DescriptionProps) => {
+  return (
+    <Text
+      className={descriptionVariants({className})}
+      data-slot="description"
+      slot="description"
+      {...rest}
+    >
+      {children}
+    </Text>
+  );
+};
 
 export type {DescriptionProps};
 export {Description};

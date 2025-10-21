@@ -1,6 +1,7 @@
 ---
 title: DisclosureGroup
 description: Container that manages multiple Disclosure items with coordinated expanded states
+icon: updated
 links:
   rac: DisclosureGroup
   source: disclosure-group/disclosure-group.tsx
@@ -30,14 +31,14 @@ import {DisclosureGroup, Disclosure} from '@heroui/react';
 
 export default () => (
   <DisclosureGroup>
-    <Disclosure id="item1">
+    <Disclosure.Root id="item1">
       <Disclosure.Heading>
         <Disclosure.Trigger>
           <Disclosure.Indicator />
         </Disclosure.Trigger>
       </Disclosure.Heading>
       <Disclosure.Content />
-    </Disclosure>
+    </Disclosure.Root>
   </DisclosureGroup>
 )
 ```
@@ -59,18 +60,23 @@ You can control which disclosures are expanded with external navigation controls
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {DisclosureGroup, Disclosure} from '@heroui/react';
+import {
+  DisclosureGroup,
+  Disclosure,
+  DisclosureTrigger,
+  DisclosurePanel
+} from '@heroui/react';
 
 function CustomDisclosureGroup() {
   return (
     <DisclosureGroup className="border rounded-lg p-4 space-y-2">
       <Disclosure id="first" className="border-b pb-2">
-        <Disclosure.Trigger>Item 1</Disclosure.Trigger>
-        <Disclosure.Content>Content 1</Disclosure.Content>
+        <DisclosureTrigger>Item 1</DisclosureTrigger>
+        <DisclosurePanel>Content 1</DisclosurePanel>
       </Disclosure>
       <Disclosure id="second">
-        <Disclosure.Trigger>Item 2</Disclosure.Trigger>
-        <Disclosure.Content>Content 2</Disclosure.Content>
+        <DisclosureTrigger>Item 2</DisclosureTrigger>
+        <DisclosurePanel>Content 2</DisclosurePanel>
       </Disclosure>
     </DisclosureGroup>
   );

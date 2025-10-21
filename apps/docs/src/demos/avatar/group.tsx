@@ -36,7 +36,7 @@ export function Group() {
       {/* Basic avatar group */}
       <div className="flex -space-x-2">
         {users.slice(0, 4).map((user) => (
-          <Avatar key={user.id} className="ring-background ring-2">
+          <Avatar.Root key={user.id} className="ring-background ring-2">
             <Avatar.Image alt={user.name} src={user.image} />
             <Avatar.Fallback>
               {user.name
@@ -44,14 +44,14 @@ export function Group() {
                 .map((n) => n[0])
                 .join("")}
             </Avatar.Fallback>
-          </Avatar>
+          </Avatar.Root>
         ))}
       </div>
 
       {/* Avatar group with counter */}
       <div className="flex -space-x-2">
         {users.slice(0, 3).map((user) => (
-          <Avatar key={user.id} className="ring-background ring-2">
+          <Avatar.Root key={user.id} className="ring-background ring-2">
             <Avatar.Image alt={user.name} src={user.image} />
             <Avatar.Fallback>
               {user.name
@@ -59,11 +59,11 @@ export function Group() {
                 .map((n) => n[0])
                 .join("")}
             </Avatar.Fallback>
-          </Avatar>
+          </Avatar.Root>
         ))}
-        <Avatar className="ring-background ring-2">
+        <Avatar.Root className="ring-background ring-2">
           <Avatar.Fallback className="text-xs">+{users.length - 3}</Avatar.Fallback>
-        </Avatar>
+        </Avatar.Root>
       </div>
     </div>
   );

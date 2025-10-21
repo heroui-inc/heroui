@@ -1,6 +1,7 @@
 ---
 title: Popover
 description: Displays rich content in a portal triggered by a button or any custom element
+icon: updated
 links:
   rac: Popover
   source: popover/popover.tsx
@@ -22,13 +23,13 @@ import { Popover } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Popover component and access all parts using dot notation.
 
 ```tsx
 import { Popover } from '@heroui/react';
 
 export default () => (
-  <Popover>
+  <Popover.Root>
     <Popover.Trigger/>
     <Popover.Content>
       <Popover.Arrow />
@@ -37,7 +38,7 @@ export default () => (
         {/* content goes here */}
       </Popover.Dialog>
     </Popover.Content>
-  </Popover>
+  </Popover.Root>
 )
 ```
 
@@ -64,19 +65,21 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {Popover, Button} from '@heroui/react';
+import { Popover, Button } from '@heroui/react';
 
 function CustomPopover() {
   return (
-    <Popover>
-      <Button>Open</Button>
+    <Popover.Root>
+      <Popover.Trigger>
+        <Button>Open</Button>
+      </Popover.Trigger>
       <Popover.Content className="bg-accent text-accent-foreground">
         <Popover.Dialog>
-          <Popover.Heading>Custom Styled</Popover.Heading>
+          <h3>Custom Styled</h3>
           <p>This popover has custom styling</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover>
+    </Popover.Root>
   );
 }
 ```
@@ -125,7 +128,7 @@ The component supports animation states:
 
 ## API Reference
 
-### Popover Props
+### Popover.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -156,13 +159,6 @@ The component supports animation states:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Element that triggers the popover |
-| `className` | `string` | - | Additional CSS classes |
-
-### Popover.Heading Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | Heading text content |
 | `className` | `string` | - | Additional CSS classes |
 
 ### Popover.Arrow Props

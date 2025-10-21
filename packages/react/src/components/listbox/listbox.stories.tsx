@@ -3,9 +3,9 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import * as React from "react";
 
-import {Avatar} from "../avatar";
+import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 
-import {ListBox} from "./index";
+import {ListBox, ListBoxItem, ListBoxItemIndicator} from "./index";
 
 const meta: Meta<typeof ListBox> = {
   component: ListBox,
@@ -21,39 +21,39 @@ type Story = StoryObj<typeof ListBox>;
 export const Default: Story = {
   render: () => (
     <ListBox aria-label="Users" selectionMode="single">
-      <ListBox.Item id="1" textValue="Bob">
+      <ListBoxItem id="1" textValue="Bob">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
-          <Avatar.Fallback>B</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
+          <AvatarFallback>B</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Bob</span>
           <span className="text-xs text-neutral-500">bob@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBox.Item>
-      <ListBox.Item id="2" textValue="Fred">
+      </ListBoxItem>
+      <ListBoxItem id="2" textValue="Fred">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=fred" />
-          <Avatar.Fallback>F</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
+          <AvatarFallback>F</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Fred</span>
           <span className="text-xs text-neutral-500">fred@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBox.Item>
-      <ListBox.Item id="3" textValue="Martha">
+      </ListBoxItem>
+      <ListBoxItem id="3" textValue="Martha">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=martha" />
-          <Avatar.Fallback>M</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
+          <AvatarFallback>M</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Martha</span>
           <span className="text-xs text-neutral-500">martha@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBox.Item>
+      </ListBoxItem>
     </ListBox>
   ),
 };
@@ -61,39 +61,39 @@ export const Default: Story = {
 export const DangerVariant: Story = {
   render: () => (
     <ListBox aria-label="Delete users" selectionMode="single" variant="danger">
-      <ListBox.Item id="1" textValue="Bob">
+      <ListBoxItem id="1" textValue="Bob">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
-          <Avatar.Fallback>B</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
+          <AvatarFallback>B</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Bob</span>
           <span className="text-xs text-neutral-500">bob@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
-      </ListBox.Item>
-      <ListBox.Item id="2" textValue="Fred">
+      </ListBoxItem>
+      <ListBoxItem id="2" textValue="Fred">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=fred" />
-          <Avatar.Fallback>F</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
+          <AvatarFallback>F</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Fred</span>
           <span className="text-xs text-neutral-500">fred@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
-      </ListBox.Item>
-      <ListBox.Item id="3" textValue="Martha">
+      </ListBoxItem>
+      <ListBoxItem id="3" textValue="Martha">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=martha" />
-          <Avatar.Fallback>M</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
+          <AvatarFallback>M</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Martha</span>
           <span className="text-xs text-neutral-500">martha@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
-      </ListBox.Item>
+      </ListBoxItem>
     </ListBox>
   ),
 };
@@ -101,39 +101,39 @@ export const DangerVariant: Story = {
 export const WithDisabledItems: Story = {
   render: () => (
     <ListBox aria-label="Users" selectionMode="single">
-      <ListBox.Item id="1" textValue="Bob">
+      <ListBoxItem id="1" textValue="Bob">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
-          <Avatar.Fallback>B</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
+          <AvatarFallback>B</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Bob</span>
           <span className="text-xs text-neutral-500">bob@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBox.Item>
-      <ListBox.Item isDisabled id="2" textValue="Fred">
+      </ListBoxItem>
+      <ListBoxItem isDisabled id="2" textValue="Fred">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=fred" />
-          <Avatar.Fallback>F</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
+          <AvatarFallback>F</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Fred</span>
           <span className="text-xs text-neutral-500">fred@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBox.Item>
-      <ListBox.Item id="3" textValue="Martha">
+      </ListBoxItem>
+      <ListBoxItem id="3" textValue="Martha">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=martha" />
-          <Avatar.Fallback>M</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
+          <AvatarFallback>M</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Martha</span>
           <span className="text-xs text-neutral-500">martha@email.com</span>
         </div>
         <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBox.Item>
+      </ListBoxItem>
     </ListBox>
   ),
 };
@@ -141,46 +141,46 @@ export const WithDisabledItems: Story = {
 export const MultiSelect: Story = {
   render: () => (
     <ListBox aria-label="Select team members" selectionMode="multiple">
-      <ListBox.Item id="1" textValue="Bob">
+      <ListBoxItem id="1" textValue="Bob">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
-          <Avatar.Fallback>B</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
+          <AvatarFallback>B</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Bob</span>
           <span className="text-xs text-neutral-500">bob@email.com</span>
         </div>
-      </ListBox.Item>
-      <ListBox.Item id="2" textValue="Fred">
+      </ListBoxItem>
+      <ListBoxItem id="2" textValue="Fred">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=fred" />
-          <Avatar.Fallback>F</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
+          <AvatarFallback>F</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Fred</span>
           <span className="text-xs text-neutral-500">fred@email.com</span>
         </div>
-      </ListBox.Item>
-      <ListBox.Item id="3" textValue="Martha">
+      </ListBoxItem>
+      <ListBoxItem id="3" textValue="Martha">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=martha" />
-          <Avatar.Fallback>M</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
+          <AvatarFallback>M</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Martha</span>
           <span className="text-xs text-neutral-500">martha@email.com</span>
         </div>
-      </ListBox.Item>
-      <ListBox.Item id="4" textValue="Sarah">
+      </ListBoxItem>
+      <ListBoxItem id="4" textValue="Sarah">
         <Avatar size="sm">
-          <Avatar.Image src="https://i.pravatar.cc/150?u=sarah" />
-          <Avatar.Fallback>S</Avatar.Fallback>
+          <AvatarImage src="https://i.pravatar.cc/150?u=sarah" />
+          <AvatarFallback>S</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
           <span className="text-sm font-medium">Sarah</span>
           <span className="text-xs text-neutral-500">sarah@email.com</span>
         </div>
-      </ListBox.Item>
+      </ListBoxItem>
     </ListBox>
   ),
 };
@@ -188,14 +188,14 @@ export const MultiSelect: Story = {
 export const SimpleList: Story = {
   render: () => (
     <ListBox aria-label="Options" selectionMode="single">
-      <ListBox.Item id="new">New file</ListBox.Item>
-      <ListBox.Item id="open">Open</ListBox.Item>
-      <ListBox.Item id="save">Save</ListBox.Item>
-      <ListBox.Item id="save-as">Save as...</ListBox.Item>
-      <ListBox.Item isDisabled id="print">
+      <ListBoxItem id="new">New file</ListBoxItem>
+      <ListBoxItem id="open">Open</ListBoxItem>
+      <ListBoxItem id="save">Save</ListBoxItem>
+      <ListBoxItem id="save-as">Save as...</ListBoxItem>
+      <ListBoxItem isDisabled id="print">
         Print
-      </ListBox.Item>
-      <ListBox.Item id="exit">Exit</ListBox.Item>
+      </ListBoxItem>
+      <ListBoxItem id="exit">Exit</ListBoxItem>
     </ListBox>
   ),
 };
@@ -203,36 +203,36 @@ export const SimpleList: Story = {
 export const CustomCheckIcon: Story = {
   render: () => (
     <ListBox aria-label="Options with custom check" selectionMode="single">
-      <ListBox.Item id="new">
+      <ListBoxItem id="new">
         {({isSelected}) => (
           <>
             New file
-            <ListBox.ItemIndicator isSelected={isSelected}>
+            <ListBoxItemIndicator isSelected={isSelected}>
               <Icon className="size-4" icon="gravity-ui:check" />
-            </ListBox.ItemIndicator>
+            </ListBoxItemIndicator>
           </>
         )}
-      </ListBox.Item>
-      <ListBox.Item id="open">
+      </ListBoxItem>
+      <ListBoxItem id="open">
         {({isSelected}) => (
           <>
             Open
-            <ListBox.ItemIndicator isSelected={isSelected}>
+            <ListBoxItemIndicator isSelected={isSelected}>
               <Icon className="size-4" icon="gravity-ui:check" />
-            </ListBox.ItemIndicator>
+            </ListBoxItemIndicator>
           </>
         )}
-      </ListBox.Item>
-      <ListBox.Item id="save">
+      </ListBoxItem>
+      <ListBoxItem id="save">
         {({isSelected}) => (
           <>
             Save
-            <ListBox.ItemIndicator isSelected={isSelected}>
+            <ListBoxItemIndicator isSelected={isSelected}>
               <Icon className="size-4" icon="gravity-ui:check" />
-            </ListBox.ItemIndicator>
+            </ListBoxItemIndicator>
           </>
         )}
-      </ListBox.Item>
+      </ListBoxItem>
     </ListBox>
   ),
 };
@@ -249,36 +249,36 @@ export const Controlled: Story = {
           selectionMode="single"
           onSelectionChange={(keys) => setSelected(new Set(keys))}
         >
-          <ListBox.Item id="1" textValue="Bob">
+          <ListBoxItem id="1" textValue="Bob">
             <Avatar size="sm">
-              <Avatar.Image src="https://i.pravatar.cc/150?u=bob" />
-              <Avatar.Fallback>B</Avatar.Fallback>
+              <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
+              <AvatarFallback>B</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium">Bob</span>
               <span className="text-xs text-neutral-500">bob@email.com</span>
             </div>
-          </ListBox.Item>
-          <ListBox.Item id="2" textValue="Fred">
+          </ListBoxItem>
+          <ListBoxItem id="2" textValue="Fred">
             <Avatar size="sm">
-              <Avatar.Image src="https://i.pravatar.cc/150?u=fred" />
-              <Avatar.Fallback>F</Avatar.Fallback>
+              <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
+              <AvatarFallback>F</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium">Fred</span>
               <span className="text-xs text-neutral-500">fred@email.com</span>
             </div>
-          </ListBox.Item>
-          <ListBox.Item id="3" textValue="Martha">
+          </ListBoxItem>
+          <ListBoxItem id="3" textValue="Martha">
             <Avatar size="sm">
-              <Avatar.Image src="https://i.pravatar.cc/150?u=martha" />
-              <Avatar.Fallback>M</Avatar.Fallback>
+              <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
+              <AvatarFallback>M</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium">Martha</span>
               <span className="text-xs text-neutral-500">martha@email.com</span>
             </div>
-          </ListBox.Item>
+          </ListBoxItem>
         </ListBox>
         <p className="text-sm text-neutral-500">
           Selected: {selected.size > 0 ? Array.from(selected).join(", ") : "None"}

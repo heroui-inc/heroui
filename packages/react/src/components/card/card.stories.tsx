@@ -16,19 +16,19 @@ const meta = {
       options: ["flat", "outlined", "elevated", "filled"],
     },
   },
-  component: Card,
+  component: Card.Root,
   parameters: {
     layout: "centered",
   },
   title: "Components/Layout/Card",
-} satisfies Meta<typeof Card>;
+} satisfies Meta<typeof Card.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
-    <Card className="w-[400px]" {...args}>
+    <Card.Root className="w-[400px]" {...args}>
       <Icon
         aria-label="Dollar sign icon"
         className="text-primary size-6"
@@ -43,7 +43,7 @@ export const Default: Story = {
         <p>Add your wallet in settings to withdraw</p>
       </Card.Content>
       <Card.Footer>
-        <Link
+        <Link.Root
           aria-label="Go to settings (opens in new tab)"
           href="https://heroui.com"
           rel="noopener noreferrer"
@@ -51,16 +51,16 @@ export const Default: Story = {
         >
           Go to settings
           <Link.Icon aria-hidden="true" />
-        </Link>
+        </Link.Root>
       </Card.Footer>
-    </Card>
+    </Card.Root>
   ),
 };
 
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Card className="w-[320px]" variant="flat">
+      <Card.Root className="w-[320px]" variant="flat">
         <Card.Header>
           <Card.Title>Variant Flat</Card.Title>
           <Card.Description>Transparent background with no border</Card.Description>
@@ -68,9 +68,9 @@ export const Variants: Story = {
         <Card.Content>
           <p>Content with no variant styling</p>
         </Card.Content>
-      </Card>
+      </Card.Root>
 
-      <Card className="w-[320px]" variant="outlined">
+      <Card.Root className="w-[320px]" variant="outlined">
         <Card.Header>
           <Card.Title>Variant Outlined</Card.Title>
           <Card.Description>This card uses outlined variant (default)</Card.Description>
@@ -78,9 +78,9 @@ export const Variants: Story = {
         <Card.Content>
           <p>Content with subtle elevation</p>
         </Card.Content>
-      </Card>
+      </Card.Root>
 
-      <Card className="w-[320px]" variant="elevated">
+      <Card.Root className="w-[320px]" variant="elevated">
         <Card.Header>
           <Card.Title>Variant Elevated</Card.Title>
           <Card.Description>This card uses elevated variant</Card.Description>
@@ -88,9 +88,9 @@ export const Variants: Story = {
         <Card.Content>
           <p>Content with medium elevation</p>
         </Card.Content>
-      </Card>
+      </Card.Root>
 
-      <Card className="w-[320px]" variant="filled">
+      <Card.Root className="w-[320px]" variant="filled">
         <Card.Header>
           <Card.Title>Variant Filled</Card.Title>
           <Card.Description>This card uses filled variant</Card.Description>
@@ -98,14 +98,14 @@ export const Variants: Story = {
         <Card.Content>
           <p>Content with higher elevation</p>
         </Card.Content>
-      </Card>
+      </Card.Root>
     </div>
   ),
 };
 
 export const Horizontal: Story = {
   render: (args) => (
-    <Card className="w-full items-stretch md:flex-row" {...args}>
+    <Card.Root className="w-full items-stretch md:flex-row" {...args}>
       <img
         alt="Porsche 911 Golden Edition"
         className="rounded-panel pointer-events-none aspect-square w-full select-none object-cover md:max-w-[136px]"
@@ -135,14 +135,14 @@ export const Horizontal: Story = {
           <Button>Buy Now</Button>
         </Card.Footer>
       </div>
-    </Card>
+    </Card.Root>
   ),
 };
 
 export const WithAvatar: Story = {
   render: (args) => (
     <div className="flex gap-4">
-      <Card className="w-[200px] gap-2" {...args}>
+      <Card.Root className="w-[200px] gap-2" {...args}>
         <img
           alt="Indie Hackers community"
           className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
@@ -154,18 +154,18 @@ export const WithAvatar: Story = {
           <Card.Description>148 members</Card.Description>
         </Card.Header>
         <Card.Footer className="flex gap-2">
-          <Avatar aria-label="Martha's profile picture" className="size-5">
+          <Avatar.Root aria-label="Martha's profile picture" className="size-5">
             <Avatar.Image
               alt="Martha's avatar"
               src="https://img.heroui.chat/image/avatar?w=160&h=160"
             />
             <Avatar.Fallback className="text-xs">IH</Avatar.Fallback>
-          </Avatar>
+          </Avatar.Root>
           <span className="text-xs">By Martha</span>
         </Card.Footer>
-      </Card>
+      </Card.Root>
 
-      <Card className="w-[200px] gap-2" {...args}>
+      <Card.Root className="w-[200px] gap-2" {...args}>
         <img
           alt="AI Builders community"
           className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
@@ -177,16 +177,16 @@ export const WithAvatar: Story = {
           <Card.Description>362 members</Card.Description>
         </Card.Header>
         <Card.Footer className="flex gap-2">
-          <Avatar aria-label="John's profile picture" className="size-5">
+          <Avatar.Root aria-label="John's profile picture" className="size-5">
             <Avatar.Image
               alt="John's avatar - blue themed"
               src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
             />
             <Avatar.Fallback className="text-xs">B</Avatar.Fallback>
-          </Avatar>
+          </Avatar.Root>
           <span className="text-xs">By John</span>
         </Card.Footer>
-      </Card>
+      </Card.Root>
     </div>
   ),
 };
@@ -194,7 +194,7 @@ export const WithAvatar: Story = {
 export const WithImage: Story = {
   render: (args) => (
     <div className="flex gap-4">
-      <Card className="w-[220px] gap-2 p-1" {...args}>
+      <Card.Root className="w-[220px] gap-2 p-1" {...args}>
         <img
           alt="Luxury cars collection"
           className="block aspect-square w-full shrink-0 select-none rounded-[calc(theme(--radius-panel)-theme(spacing.1))] object-cover align-middle"
@@ -207,9 +207,9 @@ export const WithImage: Story = {
             18 pictures
           </span>
         </Card.Footer>
-      </Card>
+      </Card.Root>
 
-      <Card className="w-[220px] gap-2 p-1" {...args}>
+      <Card.Root className="w-[220px] gap-2 p-1" {...args}>
         <img
           alt="Modern office workspace"
           className="block aspect-square w-full shrink-0 select-none rounded-[calc(theme(--radius-panel)-theme(spacing.1))] object-cover align-middle"
@@ -222,7 +222,7 @@ export const WithImage: Story = {
             56 pictures
           </span>
         </Card.Footer>
-      </Card>
+      </Card.Root>
     </div>
   ),
 };
@@ -230,7 +230,7 @@ export const WithImage: Story = {
 export const WithBackgroundImage: Story = {
   render: (args) => (
     <div className="flex flex-row items-center justify-center gap-6">
-      <Card className="rounded-panel h-[337px] w-[280px]" {...args}>
+      <Card.Root className="rounded-panel h-[337px] w-[280px]" {...args}>
         {/* Background image */}
         <img
           alt="Happy pet"
@@ -291,9 +291,9 @@ export const WithBackgroundImage: Story = {
             Notify me
           </Button>
         </Card.Footer>
-      </Card>
+      </Card.Root>
 
-      <Card className="rounded-panel h-[336px] w-[390px]" {...args}>
+      <Card.Root className="rounded-panel h-[336px] w-[390px]" {...args}>
         {/* Background image */}
         <img
           alt="Beautiful aerial view of Buenos Aires cityscape"
@@ -329,14 +329,14 @@ export const WithBackgroundImage: Story = {
             Map
           </Button>
         </Card.Footer>
-      </Card>
+      </Card.Root>
     </div>
   ),
 };
 
 export const WithForm: Story = {
   render: (args) => (
-    <Card className="w-full max-w-md" {...args}>
+    <Card.Root className="w-full max-w-md" {...args}>
       <Card.Header>
         <Card.Title>Login</Card.Title>
         <Card.Description>Enter your credentials to access your account</Card.Description>
@@ -369,10 +369,10 @@ export const WithForm: Story = {
       </Card.Content>
       <Card.Footer className="flex flex-col gap-2">
         <Button className="w-full">Sign In</Button>
-        <Link className="text-center text-sm" href="#">
+        <Link.Root className="text-center text-sm" href="#">
           Forgot password?
-        </Link>
+        </Link.Root>
       </Card.Footer>
-    </Card>
+    </Card.Root>
   ),
 };

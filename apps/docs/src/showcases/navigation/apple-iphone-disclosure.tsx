@@ -171,7 +171,7 @@ export default function AppleIPhoneDisclosure() {
             onExpandedChange={setExpandedKeys}
           >
             {showcaseItems.map((item) => (
-              <Disclosure key={item.id} aria-label={item.label} id={item.id}>
+              <Disclosure.Root key={item.id} aria-label={item.label} id={item.id}>
                 <Disclosure.Heading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
@@ -209,7 +209,7 @@ export default function AppleIPhoneDisclosure() {
                     </p>
                   </Disclosure.Body>
                 </Disclosure.Content>
-              </Disclosure>
+              </Disclosure.Root>
             ))}
           </DisclosureGroup>
         </div>

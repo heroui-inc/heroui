@@ -1,0 +1,17 @@
+/* Switch Group styles */
+.switch-group {
+  @apply flex flex-col gap-6;
+}
+
+.switch-group__items {
+  @apply flex gap-4;
+}
+
+/* Orientation modifiers */
+.switch-group--horizontal .switch-group__items {
+  @apply flex-row;
+}
+
+.switch-group--vertical .switch-group__items {
+  @apply flex-col;
+}

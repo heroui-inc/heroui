@@ -4,6 +4,7 @@ import {
   Button,
   Description,
   FieldError,
+  FieldGroup,
   Fieldset,
   Form,
   Input,
@@ -29,10 +30,10 @@ export function Basic() {
 
   return (
     <Form className="w-full max-w-96" onSubmit={onSubmit}>
-      <Fieldset>
+      <Fieldset.Root>
         <Fieldset.Legend>Profile Settings</Fieldset.Legend>
         <Description>Update your profile information.</Description>
-        <Fieldset.Group>
+        <FieldGroup>
           <TextField
             isRequired
             name="name"
@@ -69,7 +70,7 @@ export function Basic() {
             <Description>Minimum 10 characters</Description>
             <FieldError />
           </TextField>
-        </Fieldset.Group>
+        </FieldGroup>
         <Fieldset.Actions>
           <Button type="submit">
             <Icon icon="gravity-ui:floppy-disk" />
@@ -79,7 +80,7 @@ export function Basic() {
             Cancel
           </Button>
         </Fieldset.Actions>
-      </Fieldset>
+      </Fieldset.Root>
     </Form>
   );
 }

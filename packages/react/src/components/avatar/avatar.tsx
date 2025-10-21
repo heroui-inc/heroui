@@ -2,17 +2,8 @@
 
 import type {AvatarVariants} from "./avatar.styles";
 import type {UseImageProps} from "../../hooks";
-import type {
-  AvatarFallbackProps,
-  Image as AvatarImagePrimitive,
-  AvatarImageProps,
-  AvatarProps as AvatarPrimitiveProps,
-} from "@radix-ui/react-avatar";
 
-import {
-  Fallback as AvatarFallbackPrimitive,
-  Root as AvatarRootPrimitive,
-} from "@radix-ui/react-avatar";
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
@@ -26,79 +17,95 @@ const AvatarContext = createContext<{
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Avatar
+ * Avatar Root
  * -----------------------------------------------------------------------------------------------*/
+interface AvatarRootProps
+  extends Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, "color">,
+    AvatarVariants {}
 
-interface AvatarProps extends Omit<AvatarPrimitiveProps, "color">, AvatarVariants {}
+const AvatarRoot = ({children, className, color, size, ...props}: AvatarRootProps) => {
+  const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
 
-const Avatar = React.forwardRef<React.ElementRef<typeof AvatarRootPrimitive>, AvatarProps>(
-  ({children, className, color, size, ...props}, ref) => {
-    const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
+  return (
+    <AvatarContext value={{slots}}>
+      <AvatarPrimitive.Root className={slots.base({className})} {...props}>
+        {children}
+      </AvatarPrimitive.Root>
+    </AvatarContext>
+  );
+};
 
-    return (
-      <AvatarContext.Provider value={{slots}}>
-        <AvatarRootPrimitive ref={ref} className={slots.base({className})} {...props}>
-          {children}
-        </AvatarRootPrimitive>
-      </AvatarContext.Provider>
-    );
-  },
-);
-
-Avatar.displayName = "HeroUI.Avatar";
-
-/* -----------------------------------------------------------------------------------------------*/
-
-const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarImagePrimitive>,
-  React.ComponentPropsWithoutRef<typeof AvatarImagePrimitive> & {
-    asChild?: boolean;
-    ignoreFallback?: UseImageProps["ignoreFallback"];
-    shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
-    onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
-  }
->(({asChild = false, className, ...props}, ref) => {
+/* -------------------------------------------------------------------------------------------------
+ * Avatar Image
+ * -----------------------------------------------------------------------------------------------*/
+interface AvatarImageProps
+  extends Omit<React.ComponentProps<typeof AvatarPrimitive.Image>, "onLoadingStatusChange"> {
+  asChild?: boolean;
+  ignoreFallback?: UseImageProps["ignoreFallback"];
+  shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
+  onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
+}
+const AvatarImage = ({
+  asChild = false,
+  className,
+  crossOrigin,
+  ignoreFallback,
+  loading,
+  onError,
+  onLoad,
+  onLoadingStatusChange,
+  shouldBypassImageLoad,
+  sizes,
+  src,
+  srcSet,
+  ...props
+}: AvatarImageProps) => {
   const {slots} = React.useContext(AvatarContext);
-
-  const Comp = asChild ? SlotPrimitive : "img";
-
-  const loadingStatus = useImage(props);
+  const Comp = asChild ? SlotPrimitive : AvatarPrimitive.Image;
+  const loadingStatus = useImage({
+    src: typeof src === "string" ? src : undefined,
+    srcSet,
+    sizes,
+    crossOrigin,
+    loading,
+    onLoad,
+    onError,
+    ignoreFallback,
+    shouldBypassImageLoad,
+    onLoadingStatusChange,
+  });
 
   return (
     <Comp
-      ref={ref}
       className={slots?.image({className})}
+      crossOrigin={crossOrigin}
       data-loaded={dataAttr(loadingStatus === "loaded")}
       data-loading-status={loadingStatus}
+      loading={loading}
+      sizes={sizes}
+      src={src}
+      srcSet={srcSet}
+      onError={onError}
+      onLoad={onLoad}
       {...props}
     />
   );
-});
+};
 
-AvatarImage.displayName = "HeroUI.AvatarImage";
-
-/* -----------------------------------------------------------------------------------------------*/
-
-const AvatarFallback = React.forwardRef<
-  React.ElementRef<typeof AvatarFallbackPrimitive>,
-  React.ComponentPropsWithoutRef<typeof AvatarFallbackPrimitive> & {color?: AvatarVariants["color"]}
->(({className, color, ...props}, ref) => {
+/* -------------------------------------------------------------------------------------------------
+ * Avatar Fallback
+ * -----------------------------------------------------------------------------------------------*/
+interface AvatarFallbackProps extends React.ComponentProps<typeof AvatarPrimitive.Fallback> {
+  color?: AvatarVariants["color"];
+}
+const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
   const {slots} = React.useContext(AvatarContext);
 
-  return (
-    <AvatarFallbackPrimitive ref={ref} className={slots?.fallback({className, color})} {...props} />
-  );
-});
+  return <AvatarPrimitive.Fallback className={slots?.fallback({className, color})} {...props} />;
+};
 
-AvatarFallback.displayName = "HeroUI.AvatarFallback";
-
-/* -----------------------------------------------------------------------------------------------*/
-
-const CompoundAvatar = Object.assign(Avatar, {
-  Image: AvatarImage,
-  Fallback: AvatarFallback,
-});
-
-export type {AvatarProps, AvatarImageProps, AvatarFallbackProps};
-
-export default CompoundAvatar;
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};
+export {AvatarRoot, AvatarImage, AvatarFallback};

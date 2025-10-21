@@ -4,7 +4,7 @@ import {Alert} from "./index";
 
 export default {
   argTypes: {},
-  component: Alert,
+  component: Alert.Root,
   title: "📝 ToDo/Alert",
 };
 
@@ -12,7 +12,7 @@ const defaultArgs = {};
 
 const Template = () => (
   <div className="flex w-full max-w-[500px] flex-col gap-6">
-    <Alert>
+    <Alert.Root>
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -20,9 +20,9 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert>
+    </Alert.Root>
 
-    <Alert variant="success">
+    <Alert.Root variant="success">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -30,9 +30,9 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert>
+    </Alert.Root>
 
-    <Alert variant="warning">
+    <Alert.Root variant="warning">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -40,9 +40,9 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert>
+    </Alert.Root>
 
-    <Alert variant="danger">
+    <Alert.Root variant="danger">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>This is an alert</Alert.Title>
@@ -50,7 +50,7 @@ const Template = () => (
       </Alert.Content>
       <Alert.Action>Label</Alert.Action>
       <Alert.Close />
-    </Alert>
+    </Alert.Root>
   </div>
 );
 

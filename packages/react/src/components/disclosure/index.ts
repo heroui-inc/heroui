@@ -1,10 +1,22 @@
-export {default as Disclosure} from "./disclosure";
+export {
+  DisclosureRoot,
+  DisclosureHeading,
+  DisclosureTrigger,
+  DisclosureContent,
+  DisclosureBody,
+  DisclosureIndicator,
+} from "./disclosure";
+
 export type {
-  DisclosureProps,
+  DisclosureRootProps,
+  DisclosureHeadingProps,
   DisclosureTriggerProps,
   DisclosureContentProps,
-  DisclosureHeadingProps,
-  DisclosureIndicatorProps,
   DisclosureBodyContentProps,
+  DisclosureIndicatorProps,
 } from "./disclosure";
-export {disclosureVariants, type DisclosureVariants} from "./disclosure.styles";
+
+export {disclosureVariants} from "./disclosure.styles";
+export type {DisclosureVariants} from "./disclosure.styles";
+
+export * as Disclosure from "./slots";

@@ -1,0 +1,410 @@
+---
+title: v3.0.0-alpha.35
+description: React Server Components support for compound components, React 19 improvements, and critical bug fixes.
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">October 21, 2025</span>
+</div>
+
+This release fixes a critical issue where **compound components didn't work correctly in React Server Components (RSC)**. The component pattern logic has been moved from inside components to their index files, resolving the `"use client"` directive conflicts. Additionally, this release adopts React 19 best practices by removing `forwardRef` and simplifying context usage.
+
+<Callout type="warning">
+  **Breaking Change:** The main component in compound patterns now requires the `.Root` suffix (e.g., `<Avatar>` becomes `<Avatar.Root>`). Named exports remain unchanged and fully supported.
+</Callout>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### React Server Components Support
+
+Compound components now work correctly in React Server Components. The previous implementation had the compound pattern logic inside components, which conflicted with the `"use client"` directive. This has been fixed by moving the pattern logic to component index files.
+
+### React 19 Improvements
+
+This release adopts React 19 best practices:
+
+1. **Removed `forwardRef`**: No longer needed in React 19, where `ref` is now a prop ([React 19 docs](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop))
+2. **Simplified Context**: `Context.Provider` replaced with just `Context` ([React 19 docs](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider))
+
+### Switch Component Architecture Improvement
+
+The Switch component has been refactored to follow the same clean separation pattern as Radio/RadioGroup:
+
+- **Separate Components**: Switch and SwitchGroup are now independent components (previously combined)
+- **Cleaner API**: `<SwitchGroup>` replaces the nested `<Switch.Group>` and `<Switch.GroupItems>` pattern
+- **Better Organization**: Separate styles, types, and implementations for each component
+- **Consistent Pattern**: Matches the Radio/RadioGroup architecture for a more predictable API
+
+**Before:**
+```tsx
+<Switch.Group>
+  <Switch.GroupItems>
+    <Switch.Root>...</Switch.Root>
+  </Switch.GroupItems>
+</Switch.Group>
+```
+
+**After:**
+```tsx
+<SwitchGroup>
+  <Switch.Root>...</Switch.Root>
+  <Switch.Root>...</Switch.Root>
+</SwitchGroup>
+```
+
+## ⚠️ Breaking Changes
+
+### Main Component Requires `.Root` Suffix
+
+To support React Server Components, the compound component pattern has been restructured. The main component now requires the `.Root` suffix when using the compound pattern.
+
+**Before:**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar>
+  <Avatar.Image src="/images/avatar.jpeg" alt="Junior Garcia" />
+  <Avatar.Fallback>JR</Avatar.Fallback>
+</Avatar>
+```
+
+**After:**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar.Root>
+  <Avatar.Image src="/images/avatar.jpeg" alt="Junior Garcia" />
+  <Avatar.Fallback>JR</Avatar.Fallback>
+</Avatar.Root>
+```
+
+**Note:** Named exports (e.g., `<Avatar>`, `<AvatarImage>`, `<AvatarFallback>`) remain unchanged and fully supported.
+
+### Switch Component API Changes
+
+The Switch component grouping API has been restructured to match the Radio/RadioGroup pattern:
+
+**Before:**
+```tsx
+import { Switch } from "@heroui/react"
+
+<Switch.Group orientation="horizontal">
+  <Switch.GroupItems>
+    <Switch.Root name="notifications">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Notifications</Label>
+    </Switch.Root>
+    <Switch.Root name="marketing">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Marketing</Label>
+    </Switch.Root>
+  </Switch.GroupItems>
+</Switch.Group>
+```
+
+**After:**
+```tsx
+import { Switch, SwitchGroup } from "@heroui/react"
+
+<SwitchGroup orientation="horizontal">
+  <Switch.Root name="notifications">
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Notifications</Label>
+  </Switch.Root>
+  <Switch.Root name="marketing">
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Marketing</Label>
+  </Switch.Root>
+</SwitchGroup>
+```
+
+**Migration Steps:**
+1. Import `SwitchGroup` separately: `import { Switch, SwitchGroup } from "@heroui/react"`
+2. Replace `<Switch.Group>` with `<SwitchGroup>`
+3. Remove the nested `<Switch.GroupItems>` wrapper
+4. Individual `Switch.Root` components remain unchanged
+
+#### Affected Components
+
+All compound components are affected:
+
+- `Accordion` → `Accordion.Root`
+- `Avatar` → `Avatar.Root`
+- `Card` → `Card.Root`
+- `Disclosure` → `Disclosure.Root`
+- `Fieldset` → `Fieldset.Root`
+- `Kbd` → `Kbd.Root`
+- `Link` → `Link.Root`
+- `Popover` → `Popover.Root`
+- `RadioGroup` → `RadioGroup.Root`
+- `Switch` → `Switch.Root`
+- `Tabs` → `Tabs.Root`
+- `Tooltip` → `Tooltip.Root`
+
+## Migration Guide
+
+You have two options for using HeroUI compound components:
+
+### Option 1: Update to Use `.Root` (Compound Pattern)
+
+If you're using the compound pattern (dot notation), update your code to use `.Root` for the main component:
+
+**Card Example:**
+```tsx
+import { Card } from "@heroui/react"
+
+<Card.Root>
+  <Card.Header>
+    <Card.Title>Card Title</Card.Title>
+    <Card.Description>Card description</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    Card content
+  </Card.Content>
+  <Card.Footer>
+    Card footer
+  </Card.Footer>
+</Card.Root>
+```
+
+**Tabs Example:**
+```tsx
+import { Tabs } from "@heroui/react"
+
+<Tabs.Root>
+  <Tabs.ListWrapper>
+    <Tabs.List>
+      <Tabs.Tab id="tab1">Tab 1<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.Tab id="tab2">Tab 2<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListWrapper>
+  <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
+  <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
+</Tabs.Root>
+```
+
+**Avatar Example:**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar.Root>
+  <Avatar.Image alt="John Doe" src="..." />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar.Root>
+```
+
+### Option 2: Continue Using Named Exports (Fully Supported)
+
+Keep your existing code unchanged - named exports work exactly as before:
+
+**Card Example:**
+```tsx
+import {
+  CardRoot,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@heroui/react"
+
+<CardRoot>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    Card content
+  </CardContent>
+  <CardFooter>
+    Card footer
+  </CardFooter>
+</CardRoot>
+```
+
+**Tabs Example:**
+```tsx
+import { TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel } from "@heroui/react"
+
+<TabsRoot>
+  <TabListWrapper>
+    <TabList>
+      <Tab id="tab1">Tab 1<TabIndicator /></Tab>
+      <Tab id="tab2">Tab 2<TabIndicator /></Tab>
+    </TabList>
+  </TabListWrapper>
+  <TabPanel id="tab1">Panel 1</TabPanel>
+  <TabPanel id="tab2">Panel 2</TabPanel>
+</TabsRoot>
+```
+
+**Avatar Example:**
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from "@heroui/react"
+
+<Avatar>
+  <AvatarImage alt="John Doe" src="..." />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+### Migration Steps
+
+If you're using the compound pattern, you only need to update the main component to use `.Root`:
+
+1. **Find all instances of compound components** (e.g., `<Avatar>` with `<Avatar.Image>` inside)
+
+2. **Add `.Root` to the main component**:
+   ```tsx
+   // Before
+   <Avatar>
+     <Avatar.Image ... />
+   </Avatar>
+
+   // After
+   <Avatar.Root>
+     <Avatar.Image ... />
+   </Avatar.Root>
+   ```
+
+3. **That's it!** All child components (e.g., `Avatar.Image`, `Avatar.Fallback`) remain unchanged.
+
+### Complete Migration Reference
+
+| Component | Named Export Pattern | Compound Pattern (with `.Root`) | Additional Changes |
+|-----------|---------------------|---------------------|---------------------|
+| **Accordion** | `<Accordion>` | `<Accordion.Root>` | - |
+| **Avatar** | `<Avatar>` | `<Avatar.Root>` | - |
+| **Card** | `<Card>` | `<Card.Root>` | - |
+| **Disclosure** | `<Disclosure>`  | `<Disclosure.Root>`  | - |
+| **Fieldset** | `<Fieldset>`  | `<Fieldset.Root>` | - |
+| **Kbd** | `<Kbd>` | `<Kbd.Root>`  | - |
+| **Link** | `<Link>` | `<Link.Root>` | - |
+| **Popover** | `<Popover>` | `<Popover.Root>` | - |
+| **Radio** |  `<Radio>` | `<Radio.Root>` | - |
+| **Switch** | `<Switch>`, `<SwitchControl>` | `<Switch.Root>`, `<Switch.Control>` | `<Switch.Group>` → `<SwitchGroup>` (separate component) |
+| **Tabs** | `<Tabs>`, `<TabList>` | `<Tabs.Root>`, `<Tabs.List>` | - |
+| **Tooltip** | `<Tooltip>`, `<TooltipTrigger>` | `<Tooltip.Root>`, `<Tooltip.Trigger>` | - |
+
+### Automated Migration
+
+For large codebases using the compound pattern, you can use find-and-replace:
+
+```bash
+# Example for Avatar component
+# Update the main component to use .Root
+sed -i 's/<Avatar>/<Avatar.Root>/g' **/*.tsx
+sed -i 's/<\/Avatar>/<\/Avatar.Root>/g' **/*.tsx
+
+# Switch component requires additional steps
+# First, ensure SwitchGroup is imported
+# Then replace Switch.Group with SwitchGroup
+sed -i 's/<Switch\.Group/<SwitchGroup/g' **/*.tsx
+sed -i 's/<\/Switch\.Group>/<\/SwitchGroup>/g' **/*.tsx
+
+# Remove Switch.GroupItems wrapper
+sed -i 's/<Switch\.GroupItems>//g' **/*.tsx
+sed -i 's/<\/Switch\.GroupItems>//g' **/*.tsx
+
+# Repeat for other compound components (Card, Tabs, etc.)
+# Note: This only affects files using the compound pattern
+```
+
+**Important:**
+- Be careful with automated replacements. Make sure you're only replacing compound pattern usage, not named exports.
+- For Switch migrations, verify that `SwitchGroup` is imported: `import { Switch, SwitchGroup } from "@heroui/react"`
+- Test your code after running automated migrations to ensure all changes are correct.
+
+## TypeScript Support
+
+All component exports maintain their TypeScript types with both patterns:
+
+```tsx
+// Compound pattern - types are inferred
+import { Avatar } from "@heroui/react"
+<Avatar.Root size="lg">
+  <Avatar.Image ... />
+</Avatar.Root>
+
+// Named exports - types work as before
+import type { AvatarProps } from "@heroui/react"
+import { Avatar } from "@heroui/react"
+const props: AvatarProps = { size: "lg" }
+```
+
+## Why This Change?
+
+This change was necessary to fix React Server Components compatibility. The previous implementation had architectural limitations:
+
+1. **RSC Compatibility**: Compound pattern logic conflicted with `"use client"` directives
+2. **React 19 Readiness**: Removes deprecated patterns like `forwardRef` and `Context.Provider`
+3. **Cleaner Architecture**: Pattern logic is now in index files, not component files
+4. **Better Separation**: Server and client components can now work together seamlessly
+
+## Documentation Updates
+
+Component documentation will be updated to reflect the new patterns:
+
+- Examples will show the compound pattern with `.Root`
+- Named export examples remain valid and supported
+- Migration guides will help you transition smoothly
+- Both patterns are fully supported and work identically
+
+## Need Help?
+
+If you encounter any issues during migration:
+
+1. **Compound pattern users**: Update the main component to use `.Root` (e.g., `<Avatar>` → `<Avatar.Root>`)
+2. **Named export users**: No changes needed - your code continues to work as-is
+3. Check the component documentation for examples
+4. Report issues at: [GitHub Issues](https://github.com/heroui-inc/heroui/issues)
+
+## Links
+
+- [Component Documentation](https://heroui.com/docs/components)
+- [React Server Components](https://react.dev/reference/rsc/server-components)
+- [React 19 Release](https://react.dev/blog/2024/12/05/react-19)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+
+## Contributors
+
+Thanks to everyone who contributed to this release, improving React Server Components support and React 19 compatibility!

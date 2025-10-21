@@ -1,18 +1,18 @@
 "use client";
 
-import {Label, Switch} from "@heroui/react";
+import {Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 
 export function RenderProps() {
   return (
-    <Switch>
+    <SwitchRoot>
       {({isSelected}) => (
         <>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
+          <SwitchControl>
+            <SwitchThumb />
+          </SwitchControl>
           <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
         </>
       )}
-    </Switch>
+    </SwitchRoot>
   );
 }

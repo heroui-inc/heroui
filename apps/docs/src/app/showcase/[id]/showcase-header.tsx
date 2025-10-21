@@ -1,6 +1,14 @@
 "use client";
 
-import {Button, Kbd, Tooltip} from "@heroui/react";
+import {
+  Button,
+  KbdContent,
+  KbdRoot,
+  TooltipArrow,
+  TooltipContent,
+  TooltipRoot,
+  TooltipTrigger,
+} from "@heroui/react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 
@@ -19,7 +27,7 @@ export function ShowcaseHeader() {
   const returnUrl = searchParams.get("returnUrl") || "/showcase";
 
   const onClose = () => {
-    router.push(returnUrl);
+    router.push(returnUrl as any);
   };
 
   useEffect(() => {
@@ -39,39 +47,43 @@ export function ShowcaseHeader() {
   return (
     <header className="border-border/50 bg-background/50 z-[1] flex items-center justify-between border-b p-4 backdrop-blur-sm">
       <div className="flex flex-1 justify-start">
-        <Tooltip delay={0}>
-          <Button isIconOnly aria-label="Close" variant="secondary" onPress={onClose}>
-            <Iconify className="text-foreground/70" icon="xmark" />
-          </Button>
-          <Tooltip.Content className="text-muted px-2 py-0.5 text-xs" offset={7} placement="bottom">
-            <Tooltip.Arrow />
+        <TooltipRoot delay={0}>
+          <TooltipTrigger>
+            <Button isIconOnly aria-label="Close" variant="secondary" onPress={onClose}>
+              <Iconify className="text-foreground/70" icon="xmark" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="text-muted px-2 py-0.5 text-xs" offset={7} placement="bottom">
+            <TooltipArrow />
             Press{" "}
-            <Kbd>
-              <Kbd.Content className="text-xs">Esc</Kbd.Content>
-            </Kbd>{" "}
+            <KbdRoot>
+              <KbdContent className="text-xs">Esc</KbdContent>
+            </KbdRoot>{" "}
             to close
-          </Tooltip.Content>
-        </Tooltip>
+          </TooltipContent>
+        </TooltipRoot>
       </div>
       <div className="flex flex-1 items-center justify-center">
         <HeroUILogo className="text-foreground/20" />
       </div>
       <div className="flex flex-1 items-center justify-end gap-2">
         <ShowcaseThemeSwitch />
-        <Tooltip delay={1500}>
-          <Button
-            isIconOnly
-            aria-label="Toggle showcase code"
-            variant={isCodeVisible ? "primary" : "secondary"}
-            onPress={toggleCode}
-          >
-            <Iconify className={isCodeVisible ? "" : "text-foreground/70"} icon="code" />
-          </Button>
-          <Tooltip.Content offset={7}>
-            <Tooltip.Arrow />
+        <TooltipRoot delay={1500}>
+          <TooltipTrigger>
+            <Button
+              isIconOnly
+              aria-label="Toggle showcase code"
+              variant={isCodeVisible ? "primary" : "secondary"}
+              onPress={toggleCode}
+            >
+              <Iconify className={isCodeVisible ? "" : "text-foreground/70"} icon="code" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent offset={7}>
+            <TooltipArrow />
             <p className="text-muted text-xs">{isCodeVisible ? "Hide code" : "Show code"}</p>
-          </Tooltip.Content>
-        </Tooltip>
+          </TooltipContent>
+        </TooltipRoot>
         {/* TODO: Add this later */}
         {/* <Button isIconOnly aria-label="Open showcase in new tab" variant="secondary">
           <Iconify className="text-foreground/70" icon="arrow-up-right-from-square" />
