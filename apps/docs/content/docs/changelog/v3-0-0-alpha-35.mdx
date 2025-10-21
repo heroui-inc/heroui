@@ -239,7 +239,7 @@ Keep your existing code unchanged - named exports work exactly as before:
 **Card Example:**
 ```tsx
 import {
-  Card,
+  CardRoot,
   CardHeader,
   CardTitle,
   CardDescription,
@@ -247,7 +247,7 @@ import {
   CardFooter,
 } from "@heroui/react"
 
-<Card>
+<CardRoot>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
     <CardDescription>Card description</CardDescription>
@@ -258,14 +258,14 @@ import {
   <CardFooter>
     Card footer
   </CardFooter>
-</Card>
+</CardRoot>
 ```
 
 **Tabs Example:**
 ```tsx
-import { Tabs, TabList, TabListWrapper, Tab, TabIndicator, TabPanel } from "@heroui/react"
+import { TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel } from "@heroui/react"
 
-<Tabs>
+<TabsRoot>
   <TabListWrapper>
     <TabList>
       <Tab id="tab1">Tab 1<TabIndicator /></Tab>
@@ -274,7 +274,7 @@ import { Tabs, TabList, TabListWrapper, Tab, TabIndicator, TabPanel } from "@her
   </TabListWrapper>
   <TabPanel id="tab1">Panel 1</TabPanel>
   <TabPanel id="tab2">Panel 2</TabPanel>
-</Tabs>
+</TabsRoot>
 ```
 
 **Avatar Example:**
