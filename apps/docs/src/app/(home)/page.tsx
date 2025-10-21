@@ -15,7 +15,7 @@ const VersionChip = () => {
     >
       <Iconify className="text-pink-400/90" icon="sparkles" />
       {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
-      <span className="text-pink-400/90">v{currentVersion}: Form Components</span>
+      <span className="text-pink-400/90">v{currentVersion}: RSC Support</span>
     </LinkRoot>
   );
 };
