@@ -1,37 +1,28 @@
 "use client";
 
-import {
-  Label,
-  SwitchControl,
-  SwitchGroupItems,
-  SwitchGroupRoot,
-  SwitchRoot,
-  SwitchThumb,
-} from "@heroui/react";
+import {Label, Switch, SwitchGroup} from "@heroui/react";
 
 export function GroupHorizontal() {
   return (
-    <SwitchGroupRoot className="overflow-x-auto" orientation="horizontal">
-      <SwitchGroupItems>
-        <SwitchRoot name="notifications">
-          <SwitchControl>
-            <SwitchThumb />
-          </SwitchControl>
-          <Label className="text-sm">Notifications</Label>
-        </SwitchRoot>
-        <SwitchRoot name="marketing">
-          <SwitchControl>
-            <SwitchThumb />
-          </SwitchControl>
-          <Label className="text-sm">Marketing</Label>
-        </SwitchRoot>
-        <SwitchRoot name="social">
-          <SwitchControl>
-            <SwitchThumb />
-          </SwitchControl>
-          <Label className="text-sm">Social</Label>
-        </SwitchRoot>
-      </SwitchGroupItems>
-    </SwitchGroupRoot>
+    <SwitchGroup className="overflow-x-auto" orientation="horizontal">
+      <Switch.Root name="notifications">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label className="text-sm">Notifications</Label>
+      </Switch.Root>
+      <Switch.Root name="marketing">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label className="text-sm">Marketing</Label>
+      </Switch.Root>
+      <Switch.Root name="social">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label className="text-sm">Social</Label>
+      </Switch.Root>
+    </SwitchGroup>
   );
 }

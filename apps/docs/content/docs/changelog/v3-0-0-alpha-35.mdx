@@ -57,6 +57,32 @@ This release adopts React 19 best practices:
 1. **Removed `forwardRef`**: No longer needed in React 19, where `ref` is now a prop ([React 19 docs](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop))
 2. **Simplified Context**: `Context.Provider` replaced with just `Context` ([React 19 docs](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider))
 
+### Switch Component Architecture Improvement
+
+The Switch component has been refactored to follow the same clean separation pattern as Radio/RadioGroup:
+
+- **Separate Components**: Switch and SwitchGroup are now independent components (previously combined)
+- **Cleaner API**: `<SwitchGroup>` replaces the nested `<Switch.Group>` and `<Switch.GroupItems>` pattern
+- **Better Organization**: Separate styles, types, and implementations for each component
+- **Consistent Pattern**: Matches the Radio/RadioGroup architecture for a more predictable API
+
+**Before:**
+```tsx
+<Switch.Group>
+  <Switch.GroupItems>
+    <Switch.Root>...</Switch.Root>
+  </Switch.GroupItems>
+</Switch.Group>
+```
+
+**After:**
+```tsx
+<SwitchGroup>
+  <Switch.Root>...</Switch.Root>
+  <Switch.Root>...</Switch.Root>
+</SwitchGroup>
+```
+
 ### Additional Fixes
 
 - Temporarily fixed `forwardRef` issue in the `Calendar` component that occurred when `--turbopack` is not enabled in `next dev`
@@ -88,6 +114,58 @@ import { Avatar } from "@heroui/react"
 ```
 
 **Note:** Named exports (e.g., `<Avatar>`, `<AvatarImage>`, `<AvatarFallback>`) remain unchanged and fully supported.
+
+### Switch Component API Changes
+
+The Switch component grouping API has been restructured to match the Radio/RadioGroup pattern:
+
+**Before:**
+```tsx
+import { Switch } from "@heroui/react"
+
+<Switch.Group orientation="horizontal">
+  <Switch.GroupItems>
+    <Switch.Root name="notifications">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Notifications</Label>
+    </Switch.Root>
+    <Switch.Root name="marketing">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Marketing</Label>
+    </Switch.Root>
+  </Switch.GroupItems>
+</Switch.Group>
+```
+
+**After:**
+```tsx
+import { Switch, SwitchGroup } from "@heroui/react"
+
+<SwitchGroup orientation="horizontal">
+  <Switch.Root name="notifications">
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Notifications</Label>
+  </Switch.Root>
+  <Switch.Root name="marketing">
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Marketing</Label>
+  </Switch.Root>
+</SwitchGroup>
+```
+
+**Migration Steps:**
+1. Import `SwitchGroup` separately: `import { Switch, SwitchGroup } from "@heroui/react"`
+2. Replace `<Switch.Group>` with `<SwitchGroup>`
+3. Remove the nested `<Switch.GroupItems>` wrapper
+4. Individual `Switch.Root` components remain unchanged
 
 #### Affected Components
 
@@ -237,20 +315,20 @@ If you're using the compound pattern, you only need to update the main component
 
 ### Complete Migration Reference
 
-| Component | Named Export Pattern | Compound Pattern (with `.Root`) |
-|-----------|---------------------|---------------------|
-| **Accordion** | `<Accordion>` | `<Accordion.Root>` |
-| **Avatar** | `<Avatar>` | `<Avatar.Root>` |
-| **Card** | `<Card>` | `<Card.Root>` |
-| **Disclosure** | `<Disclosure>`  | `<Disclosure.Root>`  |
-| **Fieldset** | `<Fieldset>`  | `<Fieldset.Root>` |
-| **Kbd** | `<Kbd>` | `<Kbd.Root>`  |
-| **Link** | `<Link>` | `<Link.Root>` |
-| **Popover** | `<Popover>` | `<Popover.Root>` |
-| **Radio** |  `<Radio>` | `<Radio.Root>` |
-| **Switch** | `<Switch>`, `<SwitchControl>` | `<Switch.Root>`, `<Switch.Control>` |
-| **Tabs** | `<Tabs>`, `<TabList>` | `<Tabs.Root>`, `<Tabs.List>` |
-| **Tooltip** | `<Tooltip>`, `<TooltipTrigger>` | `<Tooltip.Root>`, `<Tooltip.Trigger>` |
+| Component | Named Export Pattern | Compound Pattern (with `.Root`) | Additional Changes |
+|-----------|---------------------|---------------------|---------------------|
+| **Accordion** | `<Accordion>` | `<Accordion.Root>` | - |
+| **Avatar** | `<Avatar>` | `<Avatar.Root>` | - |
+| **Card** | `<Card>` | `<Card.Root>` | - |
+| **Disclosure** | `<Disclosure>`  | `<Disclosure.Root>`  | - |
+| **Fieldset** | `<Fieldset>`  | `<Fieldset.Root>` | - |
+| **Kbd** | `<Kbd>` | `<Kbd.Root>`  | - |
+| **Link** | `<Link>` | `<Link.Root>` | - |
+| **Popover** | `<Popover>` | `<Popover.Root>` | - |
+| **Radio** |  `<Radio>` | `<Radio.Root>` | - |
+| **Switch** | `<Switch>`, `<SwitchControl>` | `<Switch.Root>`, `<Switch.Control>` | `<Switch.Group>` → `<SwitchGroup>` (separate component) |
+| **Tabs** | `<Tabs>`, `<TabList>` | `<Tabs.Root>`, `<Tabs.List>` | - |
+| **Tooltip** | `<Tooltip>`, `<TooltipTrigger>` | `<Tooltip.Root>`, `<Tooltip.Trigger>` | - |
 
 ### Automated Migration
 
@@ -262,11 +340,24 @@ For large codebases using the compound pattern, you can use find-and-replace:
 sed -i 's/<Avatar>/<Avatar.Root>/g' **/*.tsx
 sed -i 's/<\/Avatar>/<\/Avatar.Root>/g' **/*.tsx
 
+# Switch component requires additional steps
+# First, ensure SwitchGroup is imported
+# Then replace Switch.Group with SwitchGroup
+sed -i 's/<Switch\.Group/<SwitchGroup/g' **/*.tsx
+sed -i 's/<\/Switch\.Group>/<\/SwitchGroup>/g' **/*.tsx
+
+# Remove Switch.GroupItems wrapper
+sed -i 's/<Switch\.GroupItems>//g' **/*.tsx
+sed -i 's/<\/Switch\.GroupItems>//g' **/*.tsx
+
 # Repeat for other compound components (Card, Tabs, etc.)
 # Note: This only affects files using the compound pattern
 ```
 
-**Important:** Be careful with automated replacements. Make sure you're only replacing compound pattern usage, not named exports like `<Avatar>` that should remain `<Avatar>` (not `<Avatar.Root>`).
+**Important:**
+- Be careful with automated replacements. Make sure you're only replacing compound pattern usage, not named exports.
+- For Switch migrations, verify that `SwitchGroup` is imported: `import { Switch, SwitchGroup } from "@heroui/react"`
+- Test your code after running automated migrations to ensure all changes are correct.
 
 ## TypeScript Support
 

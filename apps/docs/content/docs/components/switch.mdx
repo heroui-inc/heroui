@@ -13,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import { Switch, Label } from '@heroui/react';
+import { Switch, SwitchGroup, Label } from '@heroui/react';
 ```
 
 ### Usage
@@ -38,6 +38,29 @@ export default () => (
     </Switch.Control>
     <Label/> {/* Optional */}
   </Switch.Root>
+);
+```
+
+For grouping multiple switches, use the `SwitchGroup` component:
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+
+export default () => (
+  <SwitchGroup>
+    <Switch.Root>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 1</Label>
+    </Switch.Root>
+    <Switch.Root>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 2</Label>
+    </Switch.Root>
+  </SwitchGroup>
 );
 ```
 
@@ -123,6 +146,8 @@ export default () => (
 
 ### Passing Tailwind CSS classes
 
+You can customize individual Switch components:
+
 ```tsx
 import { Switch, Label } from '@heroui/react';
 
@@ -142,6 +167,31 @@ function CustomSwitch() {
         </>
       )}
     </Switch.Root>
+  );
+}
+```
+
+Or customize the SwitchGroup layout:
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+
+function CustomSwitchGroup() {
+  return (
+    <SwitchGroup className="gap-8" orientation="horizontal">
+      <Switch.Root>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 1</Label>
+      </Switch.Root>
+      <Switch.Root>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 2</Label>
+      </Switch.Root>
+    </SwitchGroup>
   );
 }
 ```
@@ -175,19 +225,26 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 
 ### CSS Classes
 
+#### Switch Classes
+
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
-#### Base Classes
 - `.switch` - Base switch container
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb
+- `.switch--sm` - Small size variant
+- `.switch--md` - Medium size variant (default)
+- `.switch--lg` - Large size variant
 
-#### Group Classes
+#### SwitchGroup Classes
+
+The SwitchGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch-group.css)):
+
 - `.switch-group` - Switch group container
 - `.switch-group__items` - Container for switch items
 - `.switch-group--horizontal` - Horizontal layout
-- `.switch-group--vertical` - Vertical layout
+- `.switch-group--vertical` - Vertical layout (default)
 
 ### Interactive States
 
@@ -232,9 +289,10 @@ When using the render prop pattern, these values are provided:
 | `isReadOnly` | `boolean` | Whether the switch is read only |
 | `state` | `-` | State of the switch. |
 
-### Switch.Group Props
+### SwitchGroup Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
 | `children` | `React.ReactNode` | - | The switch items to render |
+| `className` | `string` | - | Additional CSS class names |

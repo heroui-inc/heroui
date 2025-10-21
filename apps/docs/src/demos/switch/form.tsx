@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Label,
-  SwitchControl,
-  SwitchGroupItems,
-  SwitchGroupRoot,
-  SwitchRoot,
-  SwitchThumb,
-} from "@heroui/react";
+import {Button, Label, Switch, SwitchGroup} from "@heroui/react";
 import React from "react";
 
 export function Form() {
@@ -25,28 +17,26 @@ export function Form() {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <SwitchGroupRoot>
-        <SwitchGroupItems>
-          <SwitchRoot name="notifications" value="on">
-            <SwitchControl>
-              <SwitchThumb />
-            </SwitchControl>
-            <Label className="text-sm">Enable notifications</Label>
-          </SwitchRoot>
-          <SwitchRoot defaultSelected name="newsletter" value="on">
-            <SwitchControl>
-              <SwitchThumb />
-            </SwitchControl>
-            <Label className="text-sm">Subscribe to newsletter</Label>
-          </SwitchRoot>
-          <SwitchRoot name="marketing" value="on">
-            <SwitchControl>
-              <SwitchThumb />
-            </SwitchControl>
-            <Label className="text-sm">Receive marketing updates</Label>
-          </SwitchRoot>
-        </SwitchGroupItems>
-      </SwitchGroupRoot>
+      <SwitchGroup>
+        <Switch.Root name="notifications" value="on">
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Enable notifications</Label>
+        </Switch.Root>
+        <Switch.Root defaultSelected name="newsletter" value="on">
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Subscribe to newsletter</Label>
+        </Switch.Root>
+        <Switch.Root name="marketing" value="on">
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Receive marketing updates</Label>
+        </Switch.Root>
+      </SwitchGroup>
       <Button className="mt-4" size="sm" type="submit" variant="primary">
         Submit
       </Button>

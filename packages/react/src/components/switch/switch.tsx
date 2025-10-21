@@ -1,6 +1,6 @@
 "use client";
 
-import type {SwitchGroupVariants, SwitchVariants} from "./switch.styles";
+import type {SwitchVariants} from "./switch.styles";
 import type {SwitchProps as SwitchPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -9,40 +9,7 @@ import {Switch as SwitchPrimitive} from "react-aria-components";
 import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 
-import {switchGroupVariants, switchVariants} from "./switch.styles";
-/* -------------------------------------------------------------------------------------------------
- * SwitchGroup Context
- * -----------------------------------------------------------------------------------------------*/
-interface SwitchGroupContext {
-  slots?: ReturnType<typeof switchGroupVariants>;
-}
-const SwitchGroupContext = createContext<SwitchGroupContext>({});
-
-/* -------------------------------------------------------------------------------------------------
- * SwitchGroup Root
- * -----------------------------------------------------------------------------------------------*/
-interface SwitchGroupRootProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
-
-const SwitchGroupRoot = ({children, className, orientation, ...props}: SwitchGroupRootProps) => {
-  const slots = React.useMemo(() => switchGroupVariants({orientation}), [orientation]);
-
-  return (
-    <SwitchGroupContext value={{slots}}>
-      <div data-slot="switch-group" {...props} className={slots.base({className})}>
-        {children}
-      </div>
-    </SwitchGroupContext>
-  );
-};
-
-/* -----------------------------------------------------------------------------------------------*/
-interface SwitchGroupItemsProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-const SwitchGroupItems = ({className, ...props}: SwitchGroupItemsProps) => {
-  const {slots} = useContext(SwitchGroupContext);
-
-  return <div className={slots?.items({className})} data-slot="switch-group-items" {...props} />;
-};
+import {switchVariants} from "./switch.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Switch
@@ -116,12 +83,5 @@ const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {SwitchGroupRoot, SwitchGroupItems, SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon};
-export type {
-  SwitchGroupRootProps,
-  SwitchGroupItemsProps,
-  SwitchRootProps,
-  SwitchControlProps,
-  SwitchThumbProps,
-  SwitchIconProps,
-};
+export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon};
+export type {SwitchRootProps, SwitchControlProps, SwitchThumbProps, SwitchIconProps};

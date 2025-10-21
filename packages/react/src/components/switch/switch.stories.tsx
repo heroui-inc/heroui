@@ -3,7 +3,6 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Button} from "../button";
 import {Description} from "../description";
 import {Label} from "../label";
 
@@ -111,60 +110,6 @@ export const LabelBefore: Story = {
         <Switch.Thumb />
       </Switch.Control>
     </Switch.Root>
-  ),
-};
-
-export const Group: Story = {
-  render: () => (
-    <Switch.Group>
-      <Switch.GroupItems>
-        <Switch.Root name="notifications">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Allow Notifications</Label>
-        </Switch.Root>
-        <Switch.Root name="marketing">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Marketing emails</Label>
-        </Switch.Root>
-        <Switch.Root name="social">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Social media updates</Label>
-        </Switch.Root>
-      </Switch.GroupItems>
-    </Switch.Group>
-  ),
-};
-
-export const GroupHorizontal: Story = {
-  render: () => (
-    <Switch.Group className="overflow-x-auto" orientation="horizontal">
-      <Switch.GroupItems>
-        <Switch.Root name="notifications">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Notifications</Label>
-        </Switch.Root>
-        <Switch.Root name="marketing">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Marketing</Label>
-        </Switch.Root>
-        <Switch.Root name="social">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Social</Label>
-        </Switch.Root>
-      </Switch.GroupItems>
-    </Switch.Group>
   ),
 };
 
@@ -279,49 +224,4 @@ export const RenderProps: Story = {
       )}
     </Switch.Root>
   ),
-};
-
-export const Form: Story = {
-  render: function FormExample() {
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      const formData = new FormData(e.target as HTMLFormElement);
-
-      alert(
-        `Form submitted with:\n${Array.from(formData.entries())
-          .map(([key, value]) => `${key}: ${value}`)
-          .join("\n")}`,
-      );
-    };
-
-    return (
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <Switch.Group>
-          <Switch.GroupItems>
-            <Switch.Root name="notifications" value="on">
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Enable notifications</Label>
-            </Switch.Root>
-            <Switch.Root defaultSelected name="newsletter" value="on">
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Subscribe to newsletter</Label>
-            </Switch.Root>
-            <Switch.Root name="marketing" value="on">
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Receive marketing updates</Label>
-            </Switch.Root>
-          </Switch.GroupItems>
-        </Switch.Group>
-        <Button className="mt-4" size="sm" type="submit" variant="primary">
-          Submit
-        </Button>
-      </form>
-    );
-  },
 };
