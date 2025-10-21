@@ -14,12 +14,26 @@ icon: clock-arrow-rotate-left
 
 ### v3.0.0-alpha.35
 
-**October 19, 2025**
+**October 21, 2025**
 
-- **(Breaking change)**: Migrated all compound components from dot notation to named exports for React Server Components compatibility
-- All 16 compound components affected: Accordion, Alert, Avatar, Card, Disclosure, DisclosureGroup, Fieldset, Kbd, Link, Popover, RadioGroup, Slider, Switch, SwitchGroup, Tabs, and Tooltip
-- Improved tree-shaking and TypeScript support
-- Updated all documentation to reflect new import patterns
+#### React Server Components Support
+- Fixed critical issue where compound components didn't work in React Server Components (RSC)
+- Moved compound pattern logic from components to index files, resolving `"use client"` conflicts
+- **(⚠️ Breaking change)**: Main component now requires `.Root` suffix (e.g., `<Avatar>` → `<Avatar.Root>`)
+- Named exports remain unchanged and fully supported
+
+#### React 19 Improvements
+- Removed `forwardRef` (now native in [React 19](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop))
+- Simplified Context usage (`Context.Provider` → [React 19](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider))
+
+#### Switch Component Refactoring
+- **(⚠️ Breaking change)**: Split Switch and SwitchGroup into separate components
+- Cleaner API: `<SwitchGroup>` replaces `<Switch.Group>` and `<Switch.GroupItems>`
+- Matches Radio/RadioGroup pattern for consistency
+- Separate styles, types, and implementations
+
+#### Affected Components
+All compound components now require `.Root` suffix: `Accordion`, `Avatar`, `Card`, `Disclosure`, `Fieldset`, `Kbd`, `Link`, `Popover`, `Radio`, `Switch`, `Tabs`, `Tooltip`
 
 [Read full release notes →](/docs/changelog/v3-0-0-alpha-35)
 

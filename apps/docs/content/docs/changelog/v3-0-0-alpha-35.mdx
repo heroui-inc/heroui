@@ -4,7 +4,7 @@ description: React Server Components support for compound components, React 19 i
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-neutral-500 dark:text-neutral-400">October 20, 2025</span>
+  <span className="text-sm text-muted">October 21, 2025</span>
 </div>
 
 This release fixes a critical issue where **compound components didn't work correctly in React Server Components (RSC)**. The component pattern logic has been moved from inside components to their index files, resolving the `"use client"` directive conflicts. Additionally, this release adopts React 19 best practices by removing `forwardRef` and simplifying context usage.
@@ -82,10 +82,6 @@ The Switch component has been refactored to follow the same clean separation pat
   <Switch.Root>...</Switch.Root>
 </SwitchGroup>
 ```
-
-### Additional Fixes
-
-- Temporarily fixed `forwardRef` issue in the `Calendar` component that occurred when `--turbopack` is not enabled in `next dev`
 
 ## ⚠️ Breaking Changes
 
@@ -172,7 +168,6 @@ import { Switch, SwitchGroup } from "@heroui/react"
 All compound components are affected:
 
 - `Accordion` → `Accordion.Root`
-- `Alert` → `Alert.Root`
 - `Avatar` → `Avatar.Root`
 - `Card` → `Card.Root`
 - `Disclosure` → `Disclosure.Root`
