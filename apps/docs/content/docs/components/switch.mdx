@@ -1,6 +1,7 @@
 ---
 title: Switch
 description: A toggle switch component for boolean states
+icon: updated
 links:
   rac: Switch
   source: switch/switch.tsx
@@ -12,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import { Switch, SwitchGroup } from '@heroui/react';
+import { Switch, SwitchGroup, Label } from '@heroui/react';
 ```
 
 ### Usage
@@ -23,19 +24,43 @@ import { Switch, SwitchGroup } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Switch component and access all parts using dot notation.
 
 ```tsx
-import {Switch} from '@heroui/react';
+import { Switch, Label } from '@heroui/react';
 
 export default () => (
-  <Switch>
+  <Switch.Root>
     <Switch.Control>
       <Switch.Thumb>
-        <Switch.Icon />  {/* Optional */}
+        <Switch.Icon/> {/* Optional */}
       </Switch.Thumb>
     </Switch.Control>
-  </Switch>
+    <Label/> {/* Optional */}
+  </Switch.Root>
+);
+```
+
+For grouping multiple switches, use the `SwitchGroup` component:
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+
+export default () => (
+  <SwitchGroup>
+    <Switch.Root>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 1</Label>
+    </Switch.Root>
+    <Switch.Root>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 2</Label>
+    </Switch.Root>
+  </SwitchGroup>
 );
 ```
 
@@ -121,12 +146,14 @@ export default () => (
 
 ### Passing Tailwind CSS classes
 
+You can customize individual Switch components:
+
 ```tsx
 import { Switch, Label } from '@heroui/react';
 
 function CustomSwitch() {
   return (
-    <Switch>
+    <Switch.Root>
       {({isSelected}) => (
         <>
           <Switch.Control
@@ -134,18 +161,37 @@ function CustomSwitch() {
           >
             <Switch.Thumb
               className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
-            >
-              <Switch.Icon>
-                <Icon
-                  className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
-                  icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
-                />
-              </Switch.Icon>
-            </Switch.Thumb>
+            />
           </Switch.Control>
+          <Label>Custom Switch</Label>
         </>
       )}
-    </Switch>
+    </Switch.Root>
+  );
+}
+```
+
+Or customize the SwitchGroup layout:
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+
+function CustomSwitchGroup() {
+  return (
+    <SwitchGroup className="gap-8" orientation="horizontal">
+      <Switch.Root>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 1</Label>
+      </Switch.Root>
+      <Switch.Root>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 2</Label>
+      </Switch.Root>
+    </SwitchGroup>
   );
 }
 ```
@@ -179,19 +225,26 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 
 ### CSS Classes
 
+#### Switch Classes
+
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
-#### Base Classes
 - `.switch` - Base switch container
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb
+- `.switch--sm` - Small size variant
+- `.switch--md` - Medium size variant (default)
+- `.switch--lg` - Large size variant
 
-#### Group Classes
+#### SwitchGroup Classes
+
+The SwitchGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch-group.css)):
+
 - `.switch-group` - Switch group container
 - `.switch-group__items` - Container for switch items
 - `.switch-group--horizontal` - Horizontal layout
-- `.switch-group--vertical` - Vertical layout
+- `.switch-group--vertical` - Vertical layout (default)
 
 ### Interactive States
 
@@ -205,7 +258,7 @@ The switch supports both CSS pseudo-classes and data attributes for flexibility:
 
 ## API Reference
 
-### Switch Props
+### Switch.Root Props
 
 Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
 
@@ -242,3 +295,4 @@ When using the render prop pattern, these values are provided:
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
 | `children` | `React.ReactNode` | - | The switch items to render |
+| `className` | `string` | - | Additional CSS class names |

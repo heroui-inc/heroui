@@ -1,4 +1,3 @@
-import type {DisclosureProps} from "./disclosure";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -22,21 +21,21 @@ export default {
       },
     },
   },
-  component: Disclosure,
+  component: Disclosure.Root,
   title: "Components/Navigation/Disclosure",
-} as Meta<typeof Disclosure>;
+} as Meta<typeof Disclosure.Root>;
 
-const defaultArgs: DisclosureProps = {
+const defaultArgs: Disclosure.RootProps = {
   isDisabled: false,
   isExpanded: false,
 };
 
-const Template = (props: DisclosureProps) => {
+const Template = (props: Disclosure.RootProps) => {
   const [isExpanded, setIsExpanded] = React.useState(props.isExpanded ?? false);
 
   return (
     <div className="w-full max-w-md text-center">
-      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
             <Icon icon="gravity-ui:qr-code" />
@@ -61,12 +60,12 @@ const Template = (props: DisclosureProps) => {
             </Button>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure>
+      </Disclosure.Root>
     </div>
   );
 };
 
-const ControlledTemplate = (props: DisclosureProps) => {
+const ControlledTemplate = (props: Disclosure.RootProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
@@ -79,7 +78,7 @@ const ControlledTemplate = (props: DisclosureProps) => {
           State: {isExpanded ? "Expanded" : "Collapsed"}
         </Chip>
       </div>
-      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Trigger className="mb-2 flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span>Toggle content</span>
           <Icon
@@ -95,17 +94,17 @@ const ControlledTemplate = (props: DisclosureProps) => {
             </p>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure>
+      </Disclosure.Root>
     </div>
   );
 };
 
-const ProductDetailsTemplate = (props: DisclosureProps) => {
+const ProductDetailsTemplate = (props: Disclosure.RootProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <div className="w-full max-w-md">
-      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span className="flex items-center gap-2">
             <Icon icon="gravity-ui:box" />
@@ -146,7 +145,7 @@ const ProductDetailsTemplate = (props: DisclosureProps) => {
             </div>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure>
+      </Disclosure.Root>
     </div>
   );
 };

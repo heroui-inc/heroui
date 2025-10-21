@@ -43,7 +43,7 @@ const items = [
 
 export function Basic() {
   return (
-    <Accordion className="w-full max-w-md">
+    <Accordion.Root className="w-full max-w-md">
       {items.map((item, index) => (
         <Accordion.Item key={index}>
           <Accordion.Heading>
@@ -62,6 +62,6 @@ export function Basic() {
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion>
+    </Accordion.Root>
   );
 }

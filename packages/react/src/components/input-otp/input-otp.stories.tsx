@@ -6,7 +6,7 @@ import {Description} from "../description";
 import {Label} from "../label";
 import {Text} from "../text";
 
-import {InputOTP} from "./index";
+import {InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot} from "./index";
 
 const meta: Meta<typeof InputOTP> = {
   argTypes: {
@@ -33,17 +33,17 @@ type Story = StoryObj<typeof InputOTP>;
 export const Default: Story = {
   render: (args) => (
     <InputOTP {...args} maxLength={6}>
-      <InputOTP.Group>
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-      </InputOTP.Group>
-      <InputOTP.Separator />
-      <InputOTP.Group>
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-      </InputOTP.Group>
+      <InputOTPGroup>
+        <InputOTPSlot />
+        <InputOTPSlot />
+        <InputOTPSlot />
+      </InputOTPGroup>
+      <InputOTPSeparator />
+      <InputOTPGroup>
+        <InputOTPSlot />
+        <InputOTPSlot />
+        <InputOTPSlot />
+      </InputOTPGroup>
     </InputOTP>
   ),
 };
@@ -52,19 +52,20 @@ export const WithLabel: Story = {
   render: (args) => (
     <div className="w-[280px]">
       <Label>Verify account</Label>
-      <Description size="sm">We&apos;ve sent a code to a****@gmail.com</Description>
+      {/* size="sm" */}
+      <Description>We&apos;ve sent a code to a****@gmail.com</Description>
       <InputOTP {...args} maxLength={6}>
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
+        <InputOTPSeparator />
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
       </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
         <Text size="xs" variant="muted">
@@ -81,17 +82,17 @@ export const Required: Story = {
     <div className="w-[280px]">
       <Label isRequired>Verify account</Label>
       <InputOTP {...args} maxLength={6}>
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
+        <InputOTPSeparator />
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
       </InputOTP>
     </div>
   ),
@@ -100,12 +101,12 @@ export const Required: Story = {
 export const FourDigits: Story = {
   render: (args) => (
     <InputOTP {...args} maxLength={4}>
-      <InputOTP.Group>
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-        <InputOTP.Slot />
-      </InputOTP.Group>
+      <InputOTPGroup>
+        <InputOTPSlot />
+        <InputOTPSlot />
+        <InputOTPSlot />
+        <InputOTPSlot />
+      </InputOTPGroup>
     </InputOTP>
   ),
 };
@@ -118,17 +119,17 @@ export const Invalid: Story = {
     <div className="w-[280px]">
       <Label>Verify account</Label>
       <InputOTP {...args} maxLength={6}>
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
+        <InputOTPSeparator />
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
       </InputOTP>
       <Text className="px-1 pt-1" size="xs" variant="danger">
         Invalid code, please try again
@@ -145,17 +146,17 @@ export const Disabled: Story = {
     <div className="w-[280px]">
       <Label isDisabled>Verify account</Label>
       <InputOTP {...args} maxLength={6}>
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
+        <InputOTPSeparator />
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
       </InputOTP>
     </div>
   ),
@@ -166,17 +167,17 @@ export const WithPattern: Story = {
     <div className="w-[280px]">
       <Label>Enter code (numbers only)</Label>
       <InputOTP {...args} maxLength={6} pattern="^[0-9]+$">
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-          <InputOTP.Slot />
-        </InputOTP.Group>
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
+        <InputOTPSeparator />
+        <InputOTPGroup>
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+        </InputOTPGroup>
       </InputOTP>
     </div>
   ),
@@ -201,17 +202,17 @@ export const OnComplete: Story = {
             console.log("Code complete:", code);
           }}
         >
-          <InputOTP.Group>
-            <InputOTP.Slot />
-            <InputOTP.Slot />
-            <InputOTP.Slot />
-          </InputOTP.Group>
-          <InputOTP.Separator />
-          <InputOTP.Group>
-            <InputOTP.Slot />
-            <InputOTP.Slot />
-            <InputOTP.Slot />
-          </InputOTP.Group>
+          <InputOTPGroup>
+            <InputOTPSlot />
+            <InputOTPSlot />
+            <InputOTPSlot />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            <InputOTPSlot />
+            <InputOTPSlot />
+            <InputOTPSlot />
+          </InputOTPGroup>
         </InputOTP>
         {!!isComplete && (
           <Text className="mt-2" size="sm" variant="success">

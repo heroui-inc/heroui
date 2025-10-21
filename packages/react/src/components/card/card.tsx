@@ -6,164 +6,103 @@ import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 
 import {cardVariants} from "./card.styles";
-
 /* -------------------------------------------------------------------------------------------------
  * Card Context
  * -----------------------------------------------------------------------------------------------*/
-
 interface CardContext {
   slots?: ReturnType<typeof cardVariants>;
 }
-
 const CardContext = createContext<CardContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Card
+ * Card Root
  * -----------------------------------------------------------------------------------------------*/
-
-interface CardRootProps extends React.HTMLAttributes<HTMLDivElement>, CardVariants {
+interface CardRootProps extends React.ComponentProps<"div">, CardVariants {
   asChild?: boolean;
 }
+const CardRoot = ({asChild = false, children, className, variant, ...props}: CardRootProps) => {
+  const slots = React.useMemo(() => cardVariants({variant}), [variant]);
+  const Comp = asChild ? Slot : "div";
 
-const CardRoot = React.forwardRef<HTMLDivElement, CardRootProps>(
-  ({asChild = false, children, className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => cardVariants({variant}), [variant]);
-    const Comp = asChild ? Slot : "div";
-
-    return (
-      <CardContext.Provider value={{slots}}>
-        <Comp ref={ref} className={slots.base({className})} data-slot="card" {...props}>
-          {children}
-        </Comp>
-      </CardContext.Provider>
-    );
-  },
-);
-
-CardRoot.displayName = "HeroUI.Card";
+  return (
+    <CardContext value={{slots}}>
+      <Comp className={slots.base({className})} data-slot="card" {...props}>
+        {children}
+      </Comp>
+    </CardContext>
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Card Header
  * -----------------------------------------------------------------------------------------------*/
-
-interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardHeaderProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
+const CardHeader = ({asChild = false, className, ...props}: CardHeaderProps) => {
+  const {slots} = useContext(CardContext);
+  const Comp = asChild ? Slot : "div";
 
-const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "div";
-
-    return (
-      <Comp ref={ref} className={slots?.header({className})} data-slot="card-header" {...props} />
-    );
-  },
-);
-
-CardHeader.displayName = "HeroUI.Card.Header";
+  return <Comp className={slots?.header({className})} data-slot="card-header" {...props} />;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Card Title
  * -----------------------------------------------------------------------------------------------*/
-
-interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface CardTitleProps extends React.ComponentProps<"h3"> {
   asChild?: boolean;
 }
+const CardTitle = ({asChild = false, className, ...props}: CardTitleProps) => {
+  const {slots} = useContext(CardContext);
+  const Comp = asChild ? Slot : "h3";
 
-const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "h3";
-
-    return (
-      <Comp ref={ref} className={slots?.title({className})} data-slot="card-title" {...props} />
-    );
-  },
-);
-
-CardTitle.displayName = "HeroUI.Card.Title";
+  return <Comp className={slots?.title({className})} data-slot="card-title" {...props} />;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Card Description
  * -----------------------------------------------------------------------------------------------*/
-
-interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface CardDescriptionProps extends React.ComponentProps<"p"> {
   asChild?: boolean;
 }
+const CardDescription = ({asChild = false, className, ...props}: CardDescriptionProps) => {
+  const {slots} = useContext(CardContext);
+  const Comp = asChild ? Slot : "p";
 
-const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "p";
-
-    return (
-      <Comp
-        ref={ref}
-        className={slots?.description({className})}
-        data-slot="card-description"
-        {...props}
-      />
-    );
-  },
-);
-
-CardDescription.displayName = "HeroUI.Card.Description";
+  return (
+    <Comp className={slots?.description({className})} data-slot="card-description" {...props} />
+  );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Card Content
  * -----------------------------------------------------------------------------------------------*/
-
-interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardContentProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
+const CardContent = ({asChild = false, className, ...props}: CardContentProps) => {
+  const {slots} = useContext(CardContext);
+  const Comp = asChild ? Slot : "div";
 
-const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "div";
-
-    return (
-      <Comp ref={ref} className={slots?.content({className})} data-slot="card-content" {...props} />
-    );
-  },
-);
-
-CardContent.displayName = "HeroUI.Card.Content";
+  return <Comp className={slots?.content({className})} data-slot="card-content" {...props} />;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Card Footer
  * -----------------------------------------------------------------------------------------------*/
-
-interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardFooterProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
+const CardFooter = ({asChild = false, className, ...props}: CardFooterProps) => {
+  const {slots} = useContext(CardContext);
+  const Comp = asChild ? Slot : "div";
 
-const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const {slots} = useContext(CardContext);
-    const Comp = asChild ? Slot : "div";
-
-    return (
-      <Comp ref={ref} className={slots?.footer({className})} data-slot="card-footer" {...props} />
-    );
-  },
-);
-
-CardFooter.displayName = "HeroUI.Card.Footer";
+  return <Comp className={slots?.footer({className})} data-slot="card-footer" {...props} />;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-
-const CompoundCard = Object.assign(CardRoot, {
-  Content: CardContent,
-  Description: CardDescription,
-  Footer: CardFooter,
-  Header: CardHeader,
-  Title: CardTitle,
-});
-
 export type {
   CardRootProps,
   CardHeaderProps,
@@ -172,5 +111,4 @@ export type {
   CardContentProps,
   CardFooterProps,
 };
-
-export default CompoundCard;
+export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};

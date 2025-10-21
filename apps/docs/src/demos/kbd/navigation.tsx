@@ -8,35 +8,35 @@ export function NavigationKeys() {
       <div className="flex items-center gap-2">
         <span className="text-muted text-sm">Arrow Keys:</span>
         <div className="flex items-center gap-2">
-          <Kbd>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="up" />
-          </Kbd>
-          <Kbd>
+          </Kbd.Root>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="down" />
-          </Kbd>
-          <Kbd>
+          </Kbd.Root>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="left" />
-          </Kbd>
-          <Kbd>
+          </Kbd.Root>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="right" />
-          </Kbd>
+          </Kbd.Root>
         </div>
       </div>
       <div className="flex items-center gap-2">
         <span className="text-muted text-sm">Page Navigation:</span>
         <div className="flex items-center gap-2">
-          <Kbd>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="pageup" />
-          </Kbd>
-          <Kbd>
+          </Kbd.Root>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="pagedown" />
-          </Kbd>
-          <Kbd>
+          </Kbd.Root>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="home" />
-          </Kbd>
-          <Kbd>
+          </Kbd.Root>
+          <Kbd.Root>
             <Kbd.Abbr keyValue="end" />
-          </Kbd>
+          </Kbd.Root>
         </div>
       </div>
     </div>

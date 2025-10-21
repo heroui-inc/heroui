@@ -8,12 +8,12 @@ import {Tabs} from "./index";
 
 const meta = {
   argTypes: {},
-  component: Tabs,
+  component: Tabs.Root,
   parameters: {
     layout: "centered",
   },
   title: "Components/Navigation/Tabs",
-} satisfies Meta<typeof Tabs>;
+} satisfies Meta<typeof Tabs.Root>;
 
 export default meta;
 
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 const DefaultTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
-      <Tabs {...args}>
+      <Tabs.Root {...args}>
         <Tabs.ListWrapper>
           <Tabs.List aria-label="Options">
             <Tabs.Tab id="overview">
@@ -48,7 +48,7 @@ const DefaultTemplate = (args: Story["args"]) => {
         <Tabs.Panel className="pt-4" id="reports">
           <p>Generate and download detailed reports.</p>
         </Tabs.Panel>
-      </Tabs>
+      </Tabs.Root>
     </div>
   );
 };
@@ -56,7 +56,7 @@ const DefaultTemplate = (args: Story["args"]) => {
 const VerticalTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
-      <Tabs {...args} orientation="vertical">
+      <Tabs.Root {...args} orientation="vertical">
         <Tabs.ListWrapper>
           <Tabs.List aria-label="Vertical tabs">
             <Tabs.Tab id="account">
@@ -99,14 +99,14 @@ const VerticalTemplate = (args: Story["args"]) => {
             View and manage your subscription and payment methods.
           </p>
         </Tabs.Panel>
-      </Tabs>
+      </Tabs.Root>
     </div>
   );
 };
 
 const DisabledTabTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs {...args}>
+    <Tabs.Root {...args}>
       <Tabs.ListWrapper>
         <Tabs.List aria-label="Tabs with disabled">
           <Tabs.Tab id="active">
@@ -132,13 +132,13 @@ const DisabledTabTemplate = (args: Story["args"]) => (
       <Tabs.Panel className="pt-4" id="available">
         <p>This tab is also available for selection.</p>
       </Tabs.Panel>
-    </Tabs>
+    </Tabs.Root>
   </div>
 );
 
 const DefaultSelectedTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs defaultSelectedKey="default" {...args}>
+    <Tabs.Root defaultSelectedKey="default" {...args}>
       <Tabs.ListWrapper>
         <Tabs.List aria-label="Tabs with default options">
           <Tabs.Tab id="active">
@@ -164,7 +164,7 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
       <Tabs.Panel className="pt-4" id="available">
         <p>This tab is available for selection as well.</p>
       </Tabs.Panel>
-    </Tabs>
+    </Tabs.Root>
   </div>
 );
 
@@ -174,7 +174,7 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
       <p className="my-2">Selected: {selectedKey}</p>
-      <Tabs selectedKey={selectedKey} onSelectionChange={setSelectedKey} {...args}>
+      <Tabs.Root selectedKey={selectedKey} onSelectionChange={setSelectedKey} {...args}>
         <Tabs.ListWrapper>
           <Tabs.List aria-label="Tabs with controlled options">
             <Tabs.Tab id="active">
@@ -200,7 +200,7 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
         <Tabs.Panel className="pt-4" id="available">
           <p>This tab is available for selection as well.</p>
         </Tabs.Panel>
-      </Tabs>
+      </Tabs.Root>
     </div>
   );
 };
@@ -208,7 +208,7 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
 const CustomStyleTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[380px]">
-      <Tabs {...args}>
+      <Tabs.Root {...args}>
         <Tabs.ListWrapper>
           <Tabs.List
             aria-label="Options"
@@ -232,7 +232,7 @@ const CustomStyleTemplate = (args: Story["args"]) => {
             </Tabs.Tab>
           </Tabs.List>
         </Tabs.ListWrapper>
-      </Tabs>
+      </Tabs.Root>
     </div>
   );
 };
@@ -282,7 +282,7 @@ const Showcase1Template = (args: Story["args"]) => {
             />
           ))}
         </div>
-        <Tabs {...args} defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
+        <Tabs.Root {...args} defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
           <Tabs.ListWrapper className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
             <Tabs.List
               aria-label="Options"
@@ -300,7 +300,7 @@ const Showcase1Template = (args: Story["args"]) => {
               ))}
             </Tabs.List>
           </Tabs.ListWrapper>
-        </Tabs>
+        </Tabs.Root>
         <div className="relative h-10 w-10">
           {Object.keys(zoomXMap).map((key) => (
             <p

@@ -7,7 +7,7 @@ export function Disabled() {
     <div className="flex w-full flex-col items-center gap-8">
       <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Entire accordion disabled</h3>
-        <Accordion isDisabled className="w-full max-w-md">
+        <Accordion.Root isDisabled className="w-full max-w-md">
           <Accordion.Item>
             <Accordion.Heading>
               <Accordion.Trigger>
@@ -35,12 +35,12 @@ export function Disabled() {
               </Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
-        </Accordion>
+        </Accordion.Root>
       </div>
 
       <div className="w-full max-w-md space-y-2">
         <h3 className="text-muted text-sm font-medium">Individual items disabled</h3>
-        <Accordion className="w-full max-w-md">
+        <Accordion.Root className="w-full max-w-md">
           <Accordion.Item>
             <Accordion.Heading>
               <Accordion.Trigger>
@@ -78,7 +78,7 @@ export function Disabled() {
               <Accordion.Body>This item is also active and can be toggled.</Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
-        </Accordion>
+        </Accordion.Root>
       </div>
     </div>
   );

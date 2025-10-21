@@ -1,56 +1,56 @@
 "use client";
 
-import {Button, Tooltip} from "@heroui/react";
+import {Button, TooltipArrow, TooltipContent, TooltipRoot} from "@heroui/react";
 
 export function TooltipPlacement() {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div />
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <Button className="w-full" variant="tertiary">
           Top
         </Button>
-        <Tooltip.Content showArrow placement="top">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="top">
+          <TooltipArrow />
           <p>Top placement</p>
-        </Tooltip.Content>
-      </Tooltip>
+        </TooltipContent>
+      </TooltipRoot>
       <div />
 
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <Button className="w-full" variant="tertiary">
           Left
         </Button>
-        <Tooltip.Content showArrow placement="left">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="left">
+          <TooltipArrow />
           <p>Left placement</p>
-        </Tooltip.Content>
-      </Tooltip>
+        </TooltipContent>
+      </TooltipRoot>
 
       <div className="flex items-center justify-center">
         <span className="text-muted text-sm">Hover buttons</span>
       </div>
 
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <Button className="w-full" variant="tertiary">
           Right
         </Button>
-        <Tooltip.Content showArrow placement="right">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="right">
+          <TooltipArrow />
           <p>Right placement</p>
-        </Tooltip.Content>
-      </Tooltip>
+        </TooltipContent>
+      </TooltipRoot>
 
       <div />
-      <Tooltip delay={0}>
+      <TooltipRoot delay={0}>
         <Button className="w-full" variant="tertiary">
           Bottom
         </Button>
-        <Tooltip.Content showArrow placement="bottom">
-          <Tooltip.Arrow />
+        <TooltipContent showArrow placement="bottom">
+          <TooltipArrow />
           <p>Bottom placement</p>
-        </Tooltip.Content>
-      </Tooltip>
+        </TooltipContent>
+      </TooltipRoot>
       <div />
     </div>
   );

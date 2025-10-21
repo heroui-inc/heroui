@@ -58,7 +58,7 @@ export function FAQ() {
       {categories.map((category) => (
         <div key={category.title}>
           <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-          <Accordion className="w-full" variant="outline">
+          <Accordion.Root className="w-full" variant="outline">
             {category.items.map((item, index) => (
               <Accordion.Item key={index}>
                 <Accordion.Heading>
@@ -74,7 +74,7 @@ export function FAQ() {
                 </Accordion.Panel>
               </Accordion.Item>
             ))}
-          </Accordion>
+          </Accordion.Root>
         </div>
       ))}
     </div>

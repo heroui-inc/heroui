@@ -30,57 +30,43 @@ const TabsContext = createContext<{
  * Tabs
  * -----------------------------------------------------------------------------------------------*/
 
-interface TabsProps extends TabsPrimitiveProps, TabsVariants {
+interface TabsRootProps extends TabsPrimitiveProps, TabsVariants {
   children: React.ReactNode;
   className?: string;
 }
 
-const TabsRoot = React.forwardRef<React.ElementRef<typeof TabsPrimitive>, TabsProps>(
-  ({children, className, orientation = "horizontal", ...props}, ref) => {
-    const slots = React.useMemo(() => tabsVariants(), []);
+const TabsRoot = ({children, className, orientation = "horizontal", ...props}: TabsRootProps) => {
+  const slots = React.useMemo(() => tabsVariants(), []);
 
-    return (
-      <TabsContext.Provider value={{slots, orientation}}>
-        <TabsPrimitive
-          {...props}
-          ref={ref}
-          className={composeTwRenderProps(className, slots.base())}
-          data-slot="tabs"
-          orientation={orientation}
-        >
-          {children}
-        </TabsPrimitive>
-      </TabsContext.Provider>
-    );
-  },
-);
-
-TabsRoot.displayName = "HeroUI.Tabs";
-/* -----------------------------------------------------------------------------------------------*/
-
-interface TabListWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const TabListWrapper = React.forwardRef<React.ElementRef<"div">, TabListWrapperProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
-
-    return (
-      <div
-        className={slots?.tabListWrapper({className})}
-        data-slot="tabs-list-wrapper"
+  return (
+    <TabsContext value={{slots, orientation}}>
+      <TabsPrimitive
         {...props}
-        ref={ref}
+        className={composeTwRenderProps(className, slots.base())}
+        data-slot="tabs"
+        orientation={orientation}
       >
         {children}
-      </div>
-    );
-  },
-);
+      </TabsPrimitive>
+    </TabsContext>
+  );
+};
 
-TabListWrapper.displayName = "HeroUI.TabListWrapper";
+/* -----------------------------------------------------------------------------------------------*/
+
+interface TabListWrapperProps extends React.ComponentProps<"div"> {
+  className?: string;
+}
+
+const TabListWrapper = ({children, className, ...props}: TabListWrapperProps) => {
+  const {slots} = useContext(TabsContext);
+
+  return (
+    <div className={slots?.tabListWrapper({className})} data-slot="tabs-list-wrapper" {...props}>
+      {children}
+    </div>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -89,24 +75,19 @@ interface TabListProps extends TabListPrimitiveProps<object> {
   className?: string;
 }
 
-const TabList = React.forwardRef<React.ElementRef<typeof TabListPrimitive>, TabListProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const TabList = ({children, className, ...props}: TabListProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <TabListPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tabList())}
-        data-slot="tabs-list"
-      >
-        {children}
-      </TabListPrimitive>
-    );
-  },
-);
-
-TabList.displayName = "HeroUI.TabList";
+  return (
+    <TabListPrimitive
+      {...props}
+      className={composeTwRenderProps(className, slots?.tabList())}
+      data-slot="tabs-list"
+    >
+      {children}
+    </TabListPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -114,48 +95,37 @@ interface TabProps extends TabPrimitiveProps {
   className?: string;
 }
 
-const Tab = React.forwardRef<React.ElementRef<typeof TabPrimitive>, TabProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const Tab = ({children, className, ...props}: TabProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <TabPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tab())}
-        data-slot="tabs-tab"
-      >
-        {children}
-      </TabPrimitive>
-    );
-  },
-);
-
-Tab.displayName = "HeroUI.Tab";
+  return (
+    <TabPrimitive
+      {...props}
+      className={composeTwRenderProps(className, slots?.tab())}
+      data-slot="tabs-tab"
+    >
+      {children}
+    </TabPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface TabIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface TabIndicatorProps extends React.ComponentProps<typeof SelectionIndicatorPrimitive> {
   className?: string;
 }
 
-const TabIndicator = React.forwardRef<
-  React.ElementRef<typeof SelectionIndicatorPrimitive>,
-  TabIndicatorProps
->(({className, ...props}, ref) => {
+const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
   const {slots} = useContext(TabsContext);
 
   return (
     <SelectionIndicatorPrimitive
-      ref={ref}
       className={slots?.tabIndicator({className})}
       data-slot="tabs-indicator"
       {...props}
     />
   );
-});
-
-TabIndicator.displayName = "HeroUI.TabIndicator";
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -164,34 +134,29 @@ interface TabPanelProps extends Omit<TabPanelPrimitiveProps, "children"> {
   className?: string;
 }
 
-const TabPanel = React.forwardRef<React.ElementRef<typeof TabPanelPrimitive>, TabPanelProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(TabsContext);
+const TabPanel = ({children, className, ...props}: TabPanelProps) => {
+  const {slots} = useContext(TabsContext);
 
-    return (
-      <TabPanelPrimitive
-        {...props}
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.tabPanel())}
-        data-slot="tabs-panel"
-      >
-        {children}
-      </TabPanelPrimitive>
-    );
-  },
-);
-
-TabPanel.displayName = "HeroUI.TabPanel";
+  return (
+    <TabPanelPrimitive
+      {...props}
+      className={composeTwRenderProps(className, slots?.tabPanel())}
+      data-slot="tabs-panel"
+    >
+      {children}
+    </TabPanelPrimitive>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundTabs = Object.assign(TabsRoot, {
-  ListWrapper: TabListWrapper,
-  List: TabList,
-  Tab: Tab,
-  Indicator: TabIndicator,
-  Panel: TabPanel,
-});
+export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
 
-export default CompoundTabs;
-export type {TabsProps, TabListProps, TabProps, TabPanelProps};
+export type {
+  TabsRootProps,
+  TabListWrapperProps,
+  TabListProps,
+  TabProps,
+  TabIndicatorProps,
+  TabPanelProps,
+};

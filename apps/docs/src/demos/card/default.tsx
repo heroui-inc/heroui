@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 export function Default() {
   return (
-    <Card className="w-[400px]">
+    <Card.Root className="w-[400px]">
       <Icon
         aria-label="Dollar sign icon"
         className="text-primary size-6"
@@ -20,7 +20,7 @@ export function Default() {
         <p>Add your wallet in settings to withdraw</p>
       </Card.Content>
       <Card.Footer>
-        <Link
+        <Link.Root
           aria-label="Go to settings (opens in new tab)"
           href="https://heroui.com"
           rel="noopener noreferrer"
@@ -28,8 +28,8 @@ export function Default() {
         >
           Go to settings
           <Link.Icon aria-hidden="true" />
-        </Link>
+        </Link.Root>
       </Card.Footer>
-    </Card>
+    </Card.Root>
   );
 }

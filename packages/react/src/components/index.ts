@@ -18,6 +18,7 @@ export * from "./separator";
 export * from "./skeleton";
 export * from "./spinner";
 export * from "./switch";
+export * from "./switch-group";
 export * from "./tabs";
 export * from "./tooltip";
 export * from "./input";
@@ -29,9 +30,10 @@ export * from "./description";
 export * from "./field-error";
 export * from "./fieldset";
 export * from "./form";
+export * from "./radio";
+export * from "./radio-group";
 
 // in progress
-export * from "./radio-group";
 export * from "./alert";
 export * from "./calendar";
 export * from "./listbox";
