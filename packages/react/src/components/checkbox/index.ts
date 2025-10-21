@@ -1,5 +1,12 @@
-export * as Checkbox from "./checkbox";
-export {CheckboxGroup} from "./checkbox";
-export type {CheckboxGroupProps, CheckboxProps, CheckboxIndicatorProps} from "./checkbox";
-export {checkboxVariants, checkboxGroupVariants} from "./checkbox.styles";
-export type {CheckboxVariants, CheckboxGroupVariants} from "./checkbox.styles";
+export {CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxContent} from "./checkbox";
+
+export type {
+  CheckboxRootProps,
+  CheckboxControlProps,
+  CheckboxIndicatorProps,
+  CheckboxContentProps,
+} from "./checkbox";
+
+export {checkboxVariants, type CheckboxVariants} from "./checkbox.styles";
+
+export * as Checkbox from "./slots";
