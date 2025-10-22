@@ -321,6 +321,38 @@ export const demos: Record<string, DemoItem> = {
     component: ModalDemos.Default,
     file: "modal/default.tsx",
   },
+  "modal-placements": {
+    component: ModalDemos.Placements,
+    file: "modal/placements.tsx",
+  },
+  "modal-overlay-variants": {
+    component: ModalDemos.OverlayVariants,
+    file: "modal/overlay-variants.tsx",
+  },
+  "modal-scroll-behavior": {
+    component: ModalDemos.ScrollBehavior,
+    file: "modal/scroll-behavior.tsx",
+  },
+  "modal-dismiss-behavior": {
+    component: ModalDemos.DismissBehavior,
+    file: "modal/dismiss-behavior.tsx",
+  },
+  "modal-with-form": {
+    component: ModalDemos.WithForm,
+    file: "modal/with-form.tsx",
+  },
+  "modal-controlled": {
+    component: ModalDemos.Controlled,
+    file: "modal/controlled.tsx",
+  },
+  "modal-custom-trigger": {
+    component: ModalDemos.CustomTrigger,
+    file: "modal/custom-trigger.tsx",
+  },
+  "modal-custom-styles": {
+    component: ModalDemos.CustomStyles,
+    file: "modal/custom-styles.tsx",
+  },
   // Skeleton demos
   "skeleton-basic": {
     component: SkeletonDemos.Basic,

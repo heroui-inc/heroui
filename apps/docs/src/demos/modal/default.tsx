@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 export function Default() {
   return (
-    <Modal>
+    <Modal.Root>
       <Button>Open Modal</Button>
       <Modal.Overlay>
         <Modal.Container>
@@ -29,6 +29,6 @@ export function Default() {
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Overlay>
-    </Modal>
+    </Modal.Root>
   );
 }
