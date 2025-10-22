@@ -61,7 +61,7 @@
 
   /* Hover states - both approaches for compatibility */
   &:not([data-selected="true"]):not([data-disabled="true"]):hover,
-  &[data-hover="true"]:not([data-selected="true"]):not([data-disabled="true"]) {
+  &[data-hovered="true"]:not([data-selected="true"]):not([data-disabled="true"]) {
     @apply opacity-70;
   }
 

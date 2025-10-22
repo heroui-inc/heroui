@@ -65,7 +65,7 @@ export function DeliveryAndPayment() {
           <Label>Delivery method</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
-              <Radio
+              <Radio.Root
                 key={option.value}
                 value={option.value}
                 className={clsx(
@@ -83,7 +83,7 @@ export function DeliveryAndPayment() {
                   </div>
                   <span className="text-sm font-semibold">{option.price}</span>
                 </Radio.Content>
-              </Radio>
+              </Radio.Root>
             ))}
           </div>
         </RadioGroup>
@@ -95,7 +95,7 @@ export function DeliveryAndPayment() {
           </div>
           <div className="grid gap-x-4 md:grid-cols-2">
             {paymentOptions.map((option) => (
-              <Radio
+              <Radio.Root
                 key={option.value}
                 value={option.value}
                 className={clsx(
@@ -113,7 +113,7 @@ export function DeliveryAndPayment() {
                     <Description>{option.description}</Description>
                   </div>
                 </Radio.Content>
-              </Radio>
+              </Radio.Root>
             ))}
           </div>
         </RadioGroup>

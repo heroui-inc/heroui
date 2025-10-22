@@ -9,7 +9,7 @@
   border-color: var(--color-field-border);
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-field-hover;
     border-color: var(--color-field-border-hover);
   }

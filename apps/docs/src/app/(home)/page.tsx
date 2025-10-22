@@ -1,5 +1,5 @@
 import {buttonVariants} from "@heroui/react";
-import Link from "fumadocs-core/link";
+import LinkRoot from "fumadocs-core/link";
 
 // TODO:
 import {Iconify} from "@/components/iconify";
@@ -9,14 +9,14 @@ import {currentVersion} from "@/utils/version";
 
 const VersionChip = () => {
   return (
-    <Link
+    <LinkRoot
       className="chip bg-pink-400/8 hover:bg-default/40 rounded-full border-pink-400/20 dark:border-pink-400/10 dark:bg-white/10 dark:hover:bg-pink-400/20"
       href="/docs/changelog"
     >
       <Iconify className="text-pink-400/90" icon="sparkles" />
       {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
-      <span className="text-pink-400/90">v{currentVersion}: Form Components</span>
-    </Link>
+      <span className="text-pink-400/90">v{currentVersion}: RSC Support</span>
+    </LinkRoot>
   );
 };
 
@@ -35,15 +35,18 @@ export default function HomePage() {
             skip the copy-paste and focus on building.
           </p>
           <div className="mt-2 flex gap-3">
-            <Link className={buttonVariants({class: "shadow-lg", variant: "primary"})} href="/docs">
+            <LinkRoot
+              className={buttonVariants({class: "shadow-lg", variant: "primary"})}
+              href="/docs"
+            >
               Explore Docs
-            </Link>
-            <Link
+            </LinkRoot>
+            <LinkRoot
               className={buttonVariants({class: "bg-default/50", variant: "tertiary"})}
               href="/docs/components/accordion"
             >
               View Components
-            </Link>
+            </LinkRoot>
           </div>
         </div>
         {/* <HomeThemeCustomizer /> */}

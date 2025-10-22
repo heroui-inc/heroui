@@ -1,7 +1,6 @@
 ---
 title: Input
 description: Primitive single-line text input component that accepts standard HTML attributes
-icon: new
 links:
   rac: Input
   source: input/input.tsx
@@ -64,7 +63,7 @@ The base class `.input` powers every instance. Override it once with `@layer com
     @apply rounded-lg border border-border bg-surface-2 px-4 py-2 text-sm shadow-sm transition-colors;
 
     &:hover,
-    &[data-hover="true"] {
+    &[data-hovered="true"] {
       @apply bg-surface-3 border-border/80;
     }
 
@@ -86,7 +85,7 @@ The base class `.input` powers every instance. Override it once with `@layer com
 
 ### Interactive States
 
-- **Hover**: `:hover` or `[data-hover="true"]`
+- **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus Visible**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Invalid**: `[data-invalid="true"]` (also syncs with `aria-invalid`)
 - **Disabled**: `:disabled` or `[aria-disabled="true"]`
@@ -117,6 +116,5 @@ Input accepts all standard HTML `<input>` attributes plus the following:
 | `min` | `number \| string` | - | Minimum value (for number/date inputs). |
 | `max` | `number \| string` | - | Maximum value (for number/date inputs). |
 | `step` | `number \| string` | - | Stepping interval (for number inputs). |
-| `ref` | `React.Ref<HTMLInputElement>` | - | Ref forwarded to the input element. |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with Input as a child component.

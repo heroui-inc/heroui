@@ -3,50 +3,49 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Button} from "../button";
 import {Description} from "../description";
 import {Label} from "../label";
 
-import {Switch, SwitchGroup} from "./switch";
+import {Switch} from "./index";
 
 export default {
   argTypes: {},
-  component: Switch,
+  component: Switch.Root,
   title: "Components/Controls/Switch",
-} as Meta<typeof Switch>;
+} as Meta<typeof Switch.Root>;
 
-type Story = StoryObj<typeof Switch>;
+type Story = StoryObj<typeof Switch.Root>;
 
 export const Default: Story = {
   render: () => (
-    <Switch>
+    <Switch.Root>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch>
+    </Switch.Root>
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
-    <Switch isDisabled>
+    <Switch.Root isDisabled>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch>
+    </Switch.Root>
   ),
 };
 
 export const DefaultSelected: Story = {
   render: () => (
-    <Switch defaultSelected>
+    <Switch.Root defaultSelected>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch>
+    </Switch.Root>
   ),
 };
 
@@ -56,12 +55,12 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <Switch isSelected={isSelected} onChange={setIsSelected}>
+        <Switch.Root isSelected={isSelected} onChange={setIsSelected}>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
           <Label className="text-sm">Enable notifications</Label>
-        </Switch>
+        </Switch.Root>
         <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
       </div>
     );
@@ -70,108 +69,54 @@ export const Controlled: Story = {
 
 export const WithoutLabel: Story = {
   render: () => (
-    <Switch aria-label="Enable notifications">
+    <Switch.Root aria-label="Enable notifications">
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-    </Switch>
+    </Switch.Root>
   ),
 };
 
 export const Sizes: Story = {
   render: () => (
     <div className="flex gap-6">
-      <Switch size="sm">
+      <Switch.Root size="sm">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-xs">Small</Label>
-      </Switch>
-      <Switch size="md">
+      </Switch.Root>
+      <Switch.Root size="md">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Medium</Label>
-      </Switch>
-      <Switch size="lg">
+      </Switch.Root>
+      <Switch.Root size="lg">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-base">Large</Label>
-      </Switch>
+      </Switch.Root>
     </div>
   ),
 };
 
 export const LabelBefore: Story = {
   render: () => (
-    <Switch>
+    <Switch.Root>
       <Label className="text-sm">Enable notifications</Label>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-    </Switch>
-  ),
-};
-
-export const Group: Story = {
-  render: () => (
-    <SwitchGroup>
-      <SwitchGroup.Items>
-        <Switch name="notifications">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Allow Notifications</Label>
-        </Switch>
-        <Switch name="marketing">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Marketing emails</Label>
-        </Switch>
-        <Switch name="social">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Social media updates</Label>
-        </Switch>
-      </SwitchGroup.Items>
-    </SwitchGroup>
-  ),
-};
-
-export const GroupHorizontal: Story = {
-  render: () => (
-    <SwitchGroup className="overflow-x-auto" orientation="horizontal">
-      <SwitchGroup.Items>
-        <Switch name="notifications">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Notifications</Label>
-        </Switch>
-        <Switch name="marketing">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Marketing</Label>
-        </Switch>
-        <Switch name="social">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Social</Label>
-        </Switch>
-      </SwitchGroup.Items>
-    </SwitchGroup>
+    </Switch.Root>
   ),
 };
 
 export const WithDescription: Story = {
   render: () => (
     <div className="max-w-sm">
-      <Switch>
+      <Switch.Root>
         <div className="flex gap-3">
           <Switch.Control>
             <Switch.Thumb />
@@ -181,14 +126,14 @@ export const WithDescription: Story = {
             <Description>Allow others to see your profile information</Description>
           </div>
         </div>
-      </Switch>
+      </Switch.Root>
     </div>
   ),
 };
 
 export const WithCustomStyles: Story = {
   render: () => (
-    <Switch>
+    <Switch.Root>
       {({isSelected}) => (
         <>
           <Switch.Control
@@ -207,7 +152,7 @@ export const WithCustomStyles: Story = {
           </Switch.Control>
         </>
       )}
-    </Switch>
+    </Switch.Root>
   ),
 };
 
@@ -244,7 +189,7 @@ export const WithIcons: Story = {
     return (
       <div className="flex gap-3">
         {Object.entries(icons).map(([key, value]) => (
-          <Switch key={key} defaultSelected size="lg">
+          <Switch.Root key={key} defaultSelected size="lg">
             {({isSelected}) => (
               <>
                 <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
@@ -259,7 +204,7 @@ export const WithIcons: Story = {
                 </Switch.Control>
               </>
             )}
-          </Switch>
+          </Switch.Root>
         ))}
       </div>
     );
@@ -268,7 +213,7 @@ export const WithIcons: Story = {
 
 export const RenderProps: Story = {
   render: () => (
-    <Switch>
+    <Switch.Root>
       {({isSelected}) => (
         <>
           <Switch.Control>
@@ -277,51 +222,6 @@ export const RenderProps: Story = {
           <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
         </>
       )}
-    </Switch>
+    </Switch.Root>
   ),
-};
-
-export const Form: Story = {
-  render: function FormExample() {
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      const formData = new FormData(e.target as HTMLFormElement);
-
-      alert(
-        `Form submitted with:\n${Array.from(formData.entries())
-          .map(([key, value]) => `${key}: ${value}`)
-          .join("\n")}`,
-      );
-    };
-
-    return (
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <SwitchGroup>
-          <SwitchGroup.Items>
-            <Switch name="notifications" value="on">
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Enable notifications</Label>
-            </Switch>
-            <Switch defaultSelected name="newsletter" value="on">
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Subscribe to newsletter</Label>
-            </Switch>
-            <Switch name="marketing" value="on">
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Receive marketing updates</Label>
-            </Switch>
-          </SwitchGroup.Items>
-        </SwitchGroup>
-        <Button className="mt-4" size="sm" type="submit" variant="primary">
-          Submit
-        </Button>
-      </form>
-    );
-  },
 };

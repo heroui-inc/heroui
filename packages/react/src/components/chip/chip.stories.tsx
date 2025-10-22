@@ -1,10 +1,10 @@
-import type {ChipProps} from "./chip";
+import type {ChipProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import React from "react";
 
-import {Chip} from "./chip";
+import {Chip} from "./index";
 
 export default {
   argTypes: {

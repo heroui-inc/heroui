@@ -20,7 +20,7 @@ export function Validation() {
     >
       <RadioGroup isRequired name="plan-validation">
         <Label>Subscription plan</Label>
-        <Radio value="starter">
+        <Radio.Root value="starter">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
@@ -28,8 +28,8 @@ export function Validation() {
             <Label>Starter</Label>
             <Description>For side projects and small teams</Description>
           </Radio.Content>
-        </Radio>
-        <Radio value="pro">
+        </Radio.Root>
+        <Radio.Root value="pro">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
@@ -37,8 +37,8 @@ export function Validation() {
             <Label>Pro</Label>
             <Description>Advanced reporting and analytics</Description>
           </Radio.Content>
-        </Radio>
-        <Radio value="teams">
+        </Radio.Root>
+        <Radio.Root value="teams">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
@@ -46,7 +46,7 @@ export function Validation() {
             <Label>Teams</Label>
             <Description>Share access with up to 10 teammates</Description>
           </Radio.Content>
-        </Radio>
+        </Radio.Root>
         <FieldError>Choose a subscription before continuing.</FieldError>
       </RadioGroup>
       <Button className="mt-2 w-fit" type="submit">

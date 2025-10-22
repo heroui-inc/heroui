@@ -1,14 +1,14 @@
 "use client";
 
-import {Label, Switch} from "@heroui/react";
+import {Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 
 export function Disabled() {
   return (
-    <Switch isDisabled>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+    <SwitchRoot isDisabled>
+      <SwitchControl>
+        <SwitchThumb />
+      </SwitchControl>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch>
+    </SwitchRoot>
   );
 }

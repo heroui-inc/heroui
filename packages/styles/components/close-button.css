@@ -50,7 +50,7 @@
   @apply text-muted bg-transparent;
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply text-foreground bg-default;
   }
 

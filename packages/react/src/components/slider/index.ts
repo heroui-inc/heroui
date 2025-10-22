@@ -1,10 +1,16 @@
-export {default as Slider} from "./slider";
-
-export {sliderVariants, type SliderVariants} from "./slider.styles";
+export {
+  SliderRoot,
+  SliderHeader,
+  SliderLabel,
+  SliderOutput,
+  SliderTrack,
+  SliderFill,
+  SliderThumb,
+  SliderMarks,
+} from "./slider";
 
 export type {
   SliderRootProps,
-  SliderProps,
   SliderHeaderProps,
   SliderLabelProps,
   SliderOutputProps,
@@ -13,3 +19,7 @@ export type {
   SliderThumbProps,
   SliderMarksProps,
 } from "./slider";
+
+export {sliderVariants, type SliderVariants} from "./slider.styles";
+
+export * as Slider from "./slots";

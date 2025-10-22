@@ -8,7 +8,6 @@ import type {
 
 import React from "react";
 import {
-  Collection,
   ListBoxItem as ListBoxItemPrimitive,
   ListBox as ListBoxPrimitive,
 } from "react-aria-components";
@@ -20,94 +19,65 @@ import {listboxVariants} from "./listbox.styles";
 type ListBoxContextValue = {
   slots?: ReturnType<typeof listboxVariants>;
 };
-
 const ListBoxContext = React.createContext<ListBoxContextValue>({});
 
-export type ListBoxRootProps<T extends object> = ListBoxPrimitiveProps<T> &
+export type ListBoxProps<T extends object> = ListBoxPrimitiveProps<T> &
   ListBoxVariants & {
     className?: string;
   };
+function ListBox<T extends object>({className, variant, ...props}: ListBoxProps<T>) {
+  const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
 
-const ListBoxRootInner = React.forwardRef<HTMLDivElement, ListBoxRootProps<object>>(
-  ({className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
-
-    return (
-      <ListBoxContext.Provider value={{slots}}>
-        <ListBoxPrimitive
-          ref={ref}
-          className={composeTwRenderProps(className, slots.base())}
-          {...props}
-        />
-      </ListBoxContext.Provider>
-    );
-  },
-);
-
-ListBoxRootInner.displayName = "HeroUI.ListBox";
-
-const ListBoxRoot = ListBoxRootInner as <T extends object>(
-  props: ListBoxRootProps<T> & React.RefAttributes<HTMLDivElement>,
-) => React.ReactElement;
-
+  return (
+    <ListBoxContext value={{slots}}>
+      <ListBoxPrimitive className={composeTwRenderProps(className, slots.base())} {...props} />
+    </ListBoxContext>
+  );
+}
 export type ListBoxItemProps = ListBoxItemPrimitiveProps & {
   className?: string;
 };
+const ListBoxItem = ({children, className, ...props}: ListBoxItemProps) => {
+  const {slots} = React.useContext(ListBoxContext);
 
-const ListBoxItem = React.forwardRef<HTMLDivElement, ListBoxItemProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = React.useContext(ListBoxContext);
-
-    return (
-      <ListBoxItemPrimitive
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.item())}
-        {...props}
-      >
-        {(renderProps) => (
-          <>
-            {typeof children === "function" ? children(renderProps) : children}
-            <ListBoxItemIndicator isSelected={renderProps.isSelected} />
-          </>
-        )}
-      </ListBoxItemPrimitive>
-    );
-  },
-);
-
-ListBoxItem.displayName = "HeroUI.ListBox.Item";
+  return (
+    <ListBoxItemPrimitive className={composeTwRenderProps(className, slots?.item())} {...props}>
+      {(renderProps) => (
+        <>
+          {typeof children === "function" ? children(renderProps) : children}
+          <ListBoxItemIndicator isSelected={renderProps.isSelected} />
+        </>
+      )}
+    </ListBoxItemPrimitive>
+  );
+};
 
 export type ListBoxItemIndicatorProps = {
   className?: string;
   children?: React.ReactNode;
   isSelected?: boolean;
 };
+const ListBoxItemIndicator = ({
+  children,
+  className,
+  isSelected,
+  ...props
+}: ListBoxItemIndicatorProps) => {
+  const {slots} = React.useContext(ListBoxContext);
 
-const ListBoxItemIndicator = React.forwardRef<HTMLSpanElement, ListBoxItemIndicatorProps>(
-  ({children, className, isSelected}, ref) => {
-    const {slots} = React.useContext(ListBoxContext);
+  return (
+    <span
+      aria-hidden="true"
+      className={slots?.itemIndicator({className})}
+      data-visible={isSelected || undefined}
+      {...props}
+    >
+      {children}
+    </span>
+  );
+};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
-    return (
-      <span
-        ref={ref}
-        aria-hidden="true"
-        className={slots?.itemIndicator({className})}
-        data-visible={isSelected || undefined}
-      >
-        {children}
-      </span>
-    );
-  },
-);
-
-ListBoxItemIndicator.displayName = "HeroUI.ListBox.ItemIndicator";
-
-const CompoundListBox = Object.assign(ListBoxRoot, {
-  Item: ListBoxItem,
-  ItemIndicator: ListBoxItemIndicator,
-  Collection,
-});
-
-export default CompoundListBox;
-export type {ListBoxRootProps as ListBoxProps};
-export {ListBoxRoot, ListBoxItem, ListBoxItemIndicator, Collection};
+export {ListBox, ListBoxItem, ListBoxItemIndicator};

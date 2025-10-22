@@ -1,6 +1,7 @@
 ---
 title: Tooltip
 description: Displays informative text when users hover over or focus on an element
+icon: updated
 links:
   rac: Tooltip
   source: tooltip/tooltip.tsx
@@ -23,13 +24,13 @@ import { Tooltip } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Tooltip component and access all parts using dot notation.
 
 ```tsx
 import { Tooltip } from '@heroui/react';
 
 export default () => (
-  <Tooltip>
+  <Tooltip.Root>
     <Tooltip.Trigger>
       <button>Hover for tooltip</button>
     </Tooltip.Trigger>
@@ -37,7 +38,7 @@ export default () => (
       <Tooltip.Arrow />
       Helpful information about this element
     </Tooltip.Content>
-  </Tooltip>
+  </Tooltip.Root>
 )
 ```
 
@@ -64,16 +65,18 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {Tooltip, Button} from '@heroui/react';
+import { Tooltip, Button } from '@heroui/react';
 
 function CustomTooltip() {
   return (
-    <Tooltip>
-      <Button>Hover me</Button>
+    <Tooltip.Root>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
       <Tooltip.Content className="bg-accent text-accent-foreground">
         <p>Custom styled tooltip</p>
       </Tooltip.Content>
-    </Tooltip>
+    </Tooltip.Root>
   );
 }
 ```
@@ -115,7 +118,7 @@ The component supports animation states:
 
 ## API Reference
 
-### Tooltip Props
+### Tooltip.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

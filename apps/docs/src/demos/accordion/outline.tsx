@@ -43,7 +43,7 @@ const items = [
 
 export function Oultine() {
   return (
-    <Accordion className="w-full max-w-md" variant="outline">
+    <Accordion.Root className="w-full max-w-md" variant="outline">
       {items.map((item, index) => (
         <Accordion.Item key={index}>
           <Accordion.Heading>
@@ -62,6 +62,6 @@ export function Oultine() {
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion>
+    </Accordion.Root>
   );
 }

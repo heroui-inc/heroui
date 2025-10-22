@@ -13,113 +13,71 @@ import {fieldsetVariants} from "./fieldset.styles";
 
 const FieldsetContext = createContext<{slots?: ReturnType<typeof fieldsetVariants>}>({});
 
-interface FieldsetProps extends React.HTMLAttributes<HTMLFieldSetElement>, FieldsetVariants {
-  ref?: React.Ref<HTMLFieldSetElement>;
+interface FieldsetRootProps extends React.ComponentProps<"fieldset">, FieldsetVariants {
   asChild?: boolean;
 }
 
-const Fieldset = React.forwardRef<HTMLFieldSetElement, FieldsetProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const Comp = asChild ? Slot : "fieldset";
+const FieldsetRoot = ({asChild = false, className, ...props}: FieldsetRootProps) => {
+  const Comp = asChild ? Slot : "fieldset";
 
-    const slots = React.useMemo(() => fieldsetVariants({}), []);
+  const slots = React.useMemo(() => fieldsetVariants({}), []);
 
-    return (
-      <FieldsetContext.Provider value={{slots}}>
-        <Comp ref={ref} className={slots?.base({className})} data-slot="fieldset" {...props} />
-      </FieldsetContext.Provider>
-    );
-  },
-);
-
-Fieldset.displayName = "HeroUI.Fieldset";
+  return (
+    <FieldsetContext value={{slots}}>
+      <Comp className={slots?.base({className})} data-slot="fieldset" {...props} />
+    </FieldsetContext>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface FieldsetLegendProps extends React.HTMLAttributes<HTMLLegendElement> {
-  ref?: React.Ref<HTMLLegendElement>;
+interface FieldsetLegendProps extends React.ComponentProps<"legend"> {
   asChild?: boolean;
 }
 
-const FieldsetLegend = React.forwardRef<HTMLLegendElement, FieldsetLegendProps>(
-  ({asChild = false, className, ...props}, ref) => {
-    const Comp = asChild ? Slot : "legend";
+const FieldsetLegend = ({asChild = false, className, ...props}: FieldsetLegendProps) => {
+  const Comp = asChild ? Slot : "legend";
 
-    const {slots} = useContext(FieldsetContext);
+  const {slots} = useContext(FieldsetContext);
 
-    return (
-      <Comp
-        ref={ref}
-        className={slots?.legend({className})}
-        data-slot="fieldset-legend"
-        {...props}
-      />
-    );
-  },
-);
-
-FieldsetLegend.displayName = "HeroUI.FieldsetLegend";
+  return <Comp className={slots?.legend({className})} data-slot="fieldset-legend" {...props} />;
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  ref?: React.Ref<HTMLDivElement>;
+interface FieldGroupProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
 
-const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
-  ({asChild = false, className, ...rest}, ref) => {
-    const Comp = asChild ? Slot : "div";
+const FieldGroup = ({asChild = false, className, ...rest}: FieldGroupProps) => {
+  const Comp = asChild ? Slot : "div";
 
-    const {slots} = useContext(FieldsetContext);
+  const {slots} = useContext(FieldsetContext);
 
-    return (
-      <Comp
-        ref={ref}
-        className={slots?.fieldGroup({className})}
-        data-slot="fieldset-field-group"
-        {...rest}
-      />
-    );
-  },
-);
-
-FieldGroup.displayName = "HeroUI.FieldGroup";
+  return (
+    <Comp className={slots?.fieldGroup({className})} data-slot="fieldset-field-group" {...rest} />
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface FieldsetActionsProps extends React.HTMLAttributes<HTMLDivElement> {
+interface FieldsetActionsProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
 
-const FieldsetActions = React.forwardRef<HTMLDivElement, FieldsetActionsProps>(
-  ({asChild, children, className, ...rest}, ref) => {
-    const Component = asChild ? Slot : "div";
-    const {slots} = useContext(FieldsetContext);
+const FieldsetActions = ({asChild, children, className, ...rest}: FieldsetActionsProps) => {
+  const Component = asChild ? Slot : "div";
+  const {slots} = useContext(FieldsetContext);
 
-    return (
-      <Component
-        ref={ref}
-        className={slots?.actions({className})}
-        data-slot="fieldset-actions"
-        {...rest}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
-
-FieldsetActions.displayName = "HeroUI.Fieldset.Actions";
+  return (
+    <Component className={slots?.actions({className})} data-slot="fieldset-actions" {...rest}>
+      {children}
+    </Component>
+  );
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
-const CompoundFieldset = Object.assign(Fieldset, {
-  Legend: FieldsetLegend,
-  Group: FieldGroup,
-  Actions: FieldsetActions,
-});
+export {FieldsetRoot, FieldsetLegend, FieldGroup, FieldsetActions};
 
-export type {FieldsetProps, FieldsetLegendProps, FieldGroupProps};
-
-export default CompoundFieldset;
+export type {FieldsetRootProps, FieldsetLegendProps, FieldGroupProps, FieldsetActionsProps};

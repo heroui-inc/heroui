@@ -1,4 +1,3 @@
-import type {TooltipContentProps} from "./tooltip";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -41,17 +40,17 @@ export default {
       ],
     },
   },
-  component: Tooltip,
+  component: Tooltip.Root,
   title: "Components/Overlays/Tooltip",
-} as Meta<typeof Tooltip>;
+} as Meta<typeof Tooltip.Root>;
 
-const defaultArgs: Omit<TooltipContentProps, "children"> = {
+const defaultArgs: Omit<Tooltip.ContentProps, "children"> = {
   showArrow: true,
 };
 
-const Template = (props: TooltipContentProps) => (
+const Template = (props: Tooltip.ContentProps) => (
   <div className="flex items-center gap-3">
-    <Tooltip delay={0}>
+    <Tooltip.Root delay={0}>
       <Button isIconOnly variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -59,13 +58,13 @@ const Template = (props: TooltipContentProps) => (
         <Tooltip.Arrow />
         <p>Tooltip content</p>
       </Tooltip.Content>
-    </Tooltip>
+    </Tooltip.Root>
   </div>
 );
 
-const TemplateWithTrigger = (props: TooltipContentProps) => (
+const TemplateWithTrigger = (props: Tooltip.ContentProps) => (
   <div className="flex items-center gap-3">
-    <Tooltip delay={0}>
+    <Tooltip.Root delay={0}>
       <Tooltip.Trigger aria-label="Tooltip trigger">
         <div className="bg-accent-soft rounded-full p-2">
           <Icon icon="gravity-ui:circle-info" />
@@ -75,7 +74,7 @@ const TemplateWithTrigger = (props: TooltipContentProps) => (
         <Tooltip.Arrow />
         <p>Tooltip content</p>
       </Tooltip.Content>
-    </Tooltip>
+    </Tooltip.Root>
   </div>
 );
 

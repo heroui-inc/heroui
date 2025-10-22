@@ -1,14 +1,14 @@
 "use client";
 
-import {Label, Switch} from "@heroui/react";
+import {Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 
 export function DefaultSelected() {
   return (
-    <Switch defaultSelected>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+    <SwitchRoot defaultSelected>
+      <SwitchControl>
+        <SwitchThumb />
+      </SwitchControl>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch>
+    </SwitchRoot>
   );
 }

@@ -1,6 +1,7 @@
 ---
 title: Card
 description: Flexible container component for grouping related content and actions
+icon: updated
 links:
   source: card/card.tsx
   styles: card.css
@@ -10,7 +11,7 @@ links:
 ## Import
 
 ```tsx
-import {Card} from "@heroui/react";
+import { Card } from "@heroui/react";
 ```
 
 ### Usage
@@ -21,20 +22,20 @@ import {Card} from "@heroui/react";
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Card component and access all parts using dot notation.
 
 ```tsx
-import {Card} from "@heroui/react";
+import { Card } from "@heroui/react";
 
 export default () => (
-  <Card>
+  <Card.Root>
     <Card.Header>
       <Card.Title />
       <Card.Description />
     </Card.Header>
     <Card.Content />
     <Card.Footer />
-  </Card>
+  </Card.Root>
 );
 ```
 
@@ -78,18 +79,18 @@ export default () => (
 
 ```tsx
 // Semantic markup
-<Card role="article" aria-labelledby="card-title">
+<Card.Root role="article" aria-labelledby="card-title">
   <Card.Header>
     <Card.Title id="card-title">Article Title</Card.Title>
   </Card.Header>
-</Card>
+</Card.Root>
 
 // Interactive cards
-<Card asChild>
+<Card.Root asChild>
   <a href="/details" aria-label="View product details">
     <Card.Title>Product Name</Card.Title>
   </a>
-</Card>
+</Card.Root>
 ```
 
 ## Styling
@@ -97,7 +98,7 @@ export default () => (
 ### Component Customization
 
 ```tsx
-<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+<Card.Root className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
   <Card.Header>
     <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
     <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
@@ -105,7 +106,7 @@ export default () => (
   <Card.Content>
     <p className="text-blue-800">Content with custom styling</p>
   </Card.Content>
-</Card>
+</Card.Root>
 ```
 
 ### CSS Variable Overrides
@@ -145,7 +146,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
  
 ## API Reference
 
-### Card
+### Card.Root
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |

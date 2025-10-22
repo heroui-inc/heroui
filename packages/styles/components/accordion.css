@@ -49,7 +49,7 @@
 
   /* Hover state */
   &:hover,
-  &[data-hover="true"],
+  &[data-hovered="true"],
   /* Pressed state */
   &[data-pressed="true"] {
     background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
@@ -96,7 +96,7 @@
 
   .accordion__trigger {
     &:hover,
-    &[data-hover="true"] {
+    &[data-hovered="true"] {
       @apply bg-panel-hover;
     }
   }

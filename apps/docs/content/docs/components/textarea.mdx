@@ -1,7 +1,6 @@
 ---
 title: TextArea
 description: Primitive multiline text input component that accepts standard HTML attributes
-icon: new
 links:
   rac: TextArea
   source: textarea/textarea.tsx
@@ -68,7 +67,7 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
     @apply rounded-xl border border-border bg-surface-2 px-4 py-3 text-sm leading-6 shadow-sm;
 
     &:hover,
-    &[data-hover="true"] {
+    &[data-hovered="true"] {
       @apply bg-surface-3 border-border/80;
     }
 
@@ -90,7 +89,7 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 
 ### Interactive States
 
-- **Hover**: `:hover` or `[data-hover="true"]`
+- **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus Visible**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Invalid**: `[data-invalid="true"]`
 - **Disabled**: `:disabled` or `[aria-disabled="true"]`
@@ -118,6 +117,5 @@ TextArea accepts all standard HTML `<textarea>` attributes plus the following:
 | `maxLength` | `number` | - | Maximum number of characters. |
 | `minLength` | `number` | - | Minimum number of characters. |
 | `wrap` | `'soft' \| 'hard'` | - | How text wraps when submitted. |
-| `ref` | `React.Ref<HTMLTextAreaElement>` | - | Ref forwarded to the textarea element. |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with TextArea as a child component.

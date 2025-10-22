@@ -1,35 +1,35 @@
 "use client";
 
-import {Tabs} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListWrapper, TabPanel, TabsRoot} from "@heroui/react";
 
 export function Disabled() {
   return (
-    <Tabs className="w-full max-w-md">
-      <Tabs.ListWrapper>
-        <Tabs.List aria-label="Tabs with disabled">
-          <Tabs.Tab id="active">
+    <TabsRoot className="w-full max-w-md">
+      <TabListWrapper>
+        <TabList aria-label="TabsRoot with disabled">
+          <Tab id="active">
             Active
-            <Tabs.Indicator />
-          </Tabs.Tab>
-          <Tabs.Tab isDisabled id="disabled">
+            <TabIndicator />
+          </Tab>
+          <Tab isDisabled id="disabled">
             Disabled
-            <Tabs.Indicator />
-          </Tabs.Tab>
-          <Tabs.Tab id="available">
+            <TabIndicator />
+          </Tab>
+          <Tab id="available">
             Available
-            <Tabs.Indicator />
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs.ListWrapper>
-      <Tabs.Panel className="pt-4" id="active">
+            <TabIndicator />
+          </Tab>
+        </TabList>
+      </TabListWrapper>
+      <TabPanel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
-      </Tabs.Panel>
-      <Tabs.Panel className="pt-4" id="disabled">
+      </TabPanel>
+      <TabPanel className="pt-4" id="disabled">
         <p>This content cannot be accessed.</p>
-      </Tabs.Panel>
-      <Tabs.Panel className="pt-4" id="available">
+      </TabPanel>
+      <TabPanel className="pt-4" id="available">
         <p>This tab is also available for selection.</p>
-      </Tabs.Panel>
-    </Tabs>
+      </TabPanel>
+    </TabsRoot>
   );
 }

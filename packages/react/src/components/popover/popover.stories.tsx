@@ -1,4 +1,3 @@
-import type {PopoverContentProps} from "./popover";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -42,15 +41,15 @@ export default {
       ],
     },
   },
-  component: Popover,
+  component: Popover.Root,
   title: "Components/Overlays/Popover",
-} as Meta<typeof Popover>;
+} as Meta<typeof Popover.Root>;
 
-const defaultArgs: Omit<PopoverContentProps, "children"> = {};
+const defaultArgs: Omit<Popover.ContentProps, "children"> = {};
 
-const Template = (props: PopoverContentProps) => (
+const Template = (props: Popover.ContentProps) => (
   <div className="flex items-center gap-3">
-    <Popover>
+    <Popover.Root>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -60,13 +59,13 @@ const Template = (props: PopoverContentProps) => (
           <p>This is the popover content</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover>
+    </Popover.Root>
   </div>
 );
 
-const TemplateWithArrow = (props: PopoverContentProps) => (
+const TemplateWithArrow = (props: Popover.ContentProps) => (
   <div className="flex items-center gap-3">
-    <Popover>
+    <Popover.Root>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -77,22 +76,22 @@ const TemplateWithArrow = (props: PopoverContentProps) => (
           <p>This is the popover content</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover>
+    </Popover.Root>
   </div>
 );
 
-const TemplateWithCustomContent = (props: PopoverContentProps) => {
+const TemplateWithCustomContent = (props: Popover.ContentProps) => {
   const [isFollowing, setIsFollowing] = React.useState(false);
 
   return (
     <div className="flex items-center gap-3">
-      <Popover>
+      <Popover.Root>
         <Popover.Trigger aria-label="Popover trigger">
           <div className="flex items-center gap-2">
-            <Avatar size="sm">
+            <Avatar.Root size="sm">
               <Avatar.Image alt="Zoe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
               <Avatar.Fallback>Z</Avatar.Fallback>
-            </Avatar>
+            </Avatar.Root>
             <div className="flex flex-col gap-0">
               <p className="text-sm font-medium leading-5">Zoe</p>
               <p className="text-muted text-xs leading-none">zoe@heroui.com</p>
@@ -104,13 +103,13 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
             <Popover.Heading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Avatar size="md">
+                  <Avatar.Root size="md">
                     <Avatar.Image
                       alt="Zoe"
                       src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
                     />
                     <Avatar.Fallback>Z</Avatar.Fallback>
-                  </Avatar>
+                  </Avatar.Root>
                   <div className="flex h-full flex-col items-start justify-center">
                     <span className="text-sm font-medium">Zoey Lang</span>
                     <span className="text-muted text-sm font-normal leading-4 tracking-tight">
@@ -148,7 +147,7 @@ const TemplateWithCustomContent = (props: PopoverContentProps) => {
             </div>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover>
+      </Popover.Root>
     </div>
   );
 };
@@ -168,7 +167,7 @@ export const WithCustomContent = {
   render: TemplateWithCustomContent,
 };
 
-const SpringAnimationTemplate = (props: PopoverContentProps) => (
+const SpringAnimationTemplate = (props: Popover.ContentProps) => (
   <div className="flex flex-col items-center gap-8 p-8">
     <h1 className="text-xl font-semibold">Popover with Spring Animation</h1>
     <p className="text-muted text-sm">
@@ -176,7 +175,7 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
     </p>
 
     <div className="flex items-center gap-8">
-      <Popover>
+      <Popover.Root>
         <Button>Click for Spring Animation</Button>
         <Popover.Content
           {...props}
@@ -191,7 +190,7 @@ const SpringAnimationTemplate = (props: PopoverContentProps) => (
             <p className="text-muted mt-4 text-xs">Easing: cubic-bezier(0.36, 1.66, 0.04, 1)</p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover>
+      </Popover.Root>
     </div>
 
     <div className="text-muted space-y-1 text-center text-xs">

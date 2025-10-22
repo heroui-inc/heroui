@@ -1,6 +1,7 @@
 ---
 title: Tabs
 description: Tabs organize content into multiple sections and allow users to navigate between them.
+icon: updated
 links:
   rac: Tabs
   source: tabs/tabs.tsx
@@ -24,13 +25,13 @@ import { Tabs } from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Tabs component and access all parts using dot notation.
 
 ```tsx
 import { Tabs } from '@heroui/react';
 
 export default () => (
-  <Tabs>
+  <Tabs.Root>
     <Tabs.ListWrapper>
       <Tabs.List aria-label="Options">
         <Tabs.Tab>
@@ -39,7 +40,7 @@ export default () => (
       </Tabs.List>
     </Tabs.ListWrapper>
     <Tabs.Panel/>
-  </Tabs>
+  </Tabs.Root>
 )
 ```
 
@@ -75,16 +76,16 @@ import { Tabs } from '@heroui/react';
 
 function CustomTabs() {
   return (
-    <Tabs className="w-full max-w-lg text-center">
+    <Tabs.Root className="w-full max-w-lg text-center">
       <Tabs.ListWrapper>
         <Tabs.List
           aria-label="Options"
           className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
         >
-          <Tabs.Tab id="daily">Daily</Tabs.Tab>
-          <Tabs.Tab id="weekly">Weekly</Tabs.Tab>
-          <Tabs.Tab id="bi-weekly">Bi-Weekly</Tabs.Tab>
-          <Tabs.Tab id="monthly">Monthly</Tabs.Tab>
+          <Tabs.Tab id="daily">Daily<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="weekly">Weekly<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="bi-weekly">Bi-Weekly<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="monthly">Monthly<Tabs.Indicator /></Tabs.Tab>
         </Tabs.List>
       </Tabs.ListWrapper>
       <Tabs.Panel className="px-4" id="daily">
@@ -103,7 +104,7 @@ function CustomTabs() {
         <h3 className="mb-2 font-semibold">Monthly</h3>
         <p className="text-sm text-gray-600">Manage your monthly tasks and goals.</p>
       </Tabs.Panel>
-    </Tabs>
+    </Tabs.Root>
   );
 }
 `} />
@@ -129,7 +130,7 @@ The Tabs component uses these CSS classes:
 The component supports both CSS pseudo-classes and data attributes:
 
 - **Selected**: `[aria-selected="true"]`
-- **Hover**: `:hover` or `[data-hover="true"]`
+- **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Disabled**: `[aria-disabled="true"]`
 
@@ -137,7 +138,7 @@ The component supports both CSS pseudo-classes and data attributes:
 
 ## API Reference
 
-### Tabs Props
+### Tabs.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

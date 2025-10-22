@@ -7,36 +7,36 @@ export function InlineUsage() {
     <div className="space-y-4">
       <p className="text-sm">
         Press{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Content>Esc</Kbd.Content>
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to close the dialog.
       </p>
       <p className="text-sm">
         Use{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>K</Kbd.Content>
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         to open the command palette.
       </p>
       <p className="text-sm">
         Navigate with{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="up" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         and{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="down" />
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         arrow keys.
       </p>
       <p className="text-sm">
         Save your work with{" "}
-        <Kbd>
+        <Kbd.Root>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>S</Kbd.Content>
-        </Kbd>{" "}
+        </Kbd.Root>{" "}
         regularly.
       </p>
     </div>

@@ -72,7 +72,7 @@
   @apply bg-accent text-accent-foreground;
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-accent-hover;
   }
 
@@ -87,7 +87,7 @@
   @apply bg-accent-soft text-accent-soft-foreground;
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-accent-soft-hover;
   }
 
@@ -102,7 +102,7 @@
   @apply border-border bg-default;
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-default-hover;
   }
 
@@ -117,7 +117,7 @@
   @apply text-accent-soft-foreground bg-transparent;
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-accent-soft;
   }
 
@@ -132,7 +132,7 @@
   @apply bg-danger text-danger-foreground;
 
   &:hover,
-  &[data-hover="true"] {
+  &[data-hovered="true"] {
     @apply bg-danger-hover;
   }
 

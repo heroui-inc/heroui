@@ -1,6 +1,7 @@
 ---
 title: Disclosure
 description: A disclosure is a collapsible section with a header containing a heading and a trigger button, and a panel that wraps the content.
+icon: updated
 links:
   rac: Disclosure
   source: disclosure/disclosure.tsx
@@ -12,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import {Disclosure} from '@heroui/react';
+import { Disclosure } from '@heroui/react';
 ```
 
 ### Usage
@@ -23,20 +24,20 @@ import {Disclosure} from '@heroui/react';
 
 ### Anatomy
 
-Import all parts and piece them together.
+Import the Disclosure component and access all parts using dot notation.
 
 ```tsx
 import { Disclosure } from '@heroui/react';
 
 export default () => (
-  <Disclosure>
+  <Disclosure.Root>
     <Disclosure.Heading>
       <Disclosure.Trigger>
         <Disclosure.Indicator />
       </Disclosure.Trigger>
     </Disclosure.Heading>
     <Disclosure.Content/>
-  </Disclosure>
+  </Disclosure.Root>
 )
 ```
 
@@ -51,15 +52,19 @@ import { Disclosure } from '@heroui/react';
 
 function CustomDisclosure() {
   return (
-    <Disclosure className="border rounded-lg p-4">
-      <Disclosure.Trigger className="text-lg font-semibold">
-        Click to expand
-        <Disclosure.Indicator className="ml-2" />
-      </Disclosure.Trigger>
-      <Disclosure.Content className="mt-4 text-gray-600">
-        Hidden content
+    <Disclosure.Root className="border rounded-lg p-4">
+      <Disclosure.Heading>
+        <Disclosure.Trigger className="text-lg font-semibold">
+          Click to expand
+          <Disclosure.Indicator />
+        </Disclosure.Trigger>
+      </Disclosure.Heading>
+      <Disclosure.Content>
+        <Disclosure.Body className="mt-4 text-gray-600">
+          Hidden content
+        </Disclosure.Body>
       </Disclosure.Content>
-    </Disclosure>
+    </Disclosure.Root>
   );
 }
 ```
@@ -114,7 +119,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Disclosure Props
+### Disclosure.Root Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -124,26 +129,18 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Content to render |
 | `className` | `string` | - | Additional CSS classes |
 
-### Disclosure.Trigger Props
+### DisclosureTrigger Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode \| RenderFunction` | - | Trigger content |
 | `className` | `string` | - | Additional CSS classes |
-| `slot` | `string` | `"trigger"` | Slot name for React Aria |
 
-### Disclosure.Content Props
+### DisclosurePanel Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Content to show/hide |
-| `className` | `string` | - | Additional CSS classes |
-
-### Disclosure.Indicator Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactElement` | `<IconChevronDown />` | Custom indicator element |
 | `className` | `string` | - | Additional CSS classes |
 
 ### RenderProps

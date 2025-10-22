@@ -1,4 +1,4 @@
-import type {ButtonProps} from "./button";
+import type {ButtonProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";

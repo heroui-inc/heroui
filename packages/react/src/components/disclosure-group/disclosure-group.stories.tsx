@@ -1,4 +1,4 @@
-import type {DisclosureGroupProps} from "./disclosure-group";
+import type {DisclosureGroupProps} from "./index";
 import type {ButtonProps} from "@heroui/react";
 import type {Meta} from "@storybook/react";
 import type {SVGProps} from "react";
@@ -42,7 +42,7 @@ const Template = (props: DisclosureGroupProps) => {
     <div className="w-full max-w-md">
       <div className="bg-surface-1 shadow-panel rounded-panel flex flex-col gap-4 p-4">
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -75,9 +75,9 @@ const Template = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure>
+          </Disclosure.Root>
           <Separator className="my-2" />
-          <Disclosure id="download">
+          <Disclosure.Root id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -110,7 +110,7 @@ const Template = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure>
+          </Disclosure.Root>
         </DisclosureGroup>
       </div>
     </div>
@@ -154,7 +154,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
           </div>
         </div>
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -187,9 +187,9 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure>
+          </Disclosure.Root>
           <Separator className="my-2" />
-          <Disclosure id="download">
+          <Disclosure.Root id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -222,7 +222,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure>
+          </Disclosure.Root>
         </DisclosureGroup>
       </div>
     </div>
@@ -397,7 +397,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
             onExpandedChange={setExpandedKeys}
           >
             {showcase1Items.map((item) => (
-              <Disclosure key={item.id} aria-label={item.label} id={item.id}>
+              <Disclosure.Root key={item.id} aria-label={item.label} id={item.id}>
                 <Disclosure.Heading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
@@ -435,7 +435,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
                     </p>
                   </Disclosure.Body>
                 </Disclosure.Content>
-              </Disclosure>
+              </Disclosure.Root>
             ))}
           </DisclosureGroup>
         </div>
