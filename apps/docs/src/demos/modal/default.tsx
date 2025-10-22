@@ -8,25 +8,26 @@ export function Default() {
     <Modal>
       <Button>Open Modal</Button>
       <Modal.Overlay>
-        <Modal.Content>
-          <Modal.Dialog>
+        <Modal.Container>
+          <Modal.Dialog className="sm:max-w-[360px]">
+            <Modal.CloseTrigger />
             <Modal.Header>
-              <Modal.Icon>
-                <Icon icon="gravity-ui:circle-info" />
-              </Modal.Icon>
-              <Modal.Title>Modal Title</Modal.Title>
-              <Modal.Description>This is a modal description.</Modal.Description>
+              <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                <Icon className="size-5" icon="gravity-ui:rocket" />
+              </div>
+              <h2 className="text-foreground text-lg font-semibold leading-6">Welcome to HeroUI</h2>
             </Modal.Header>
             <Modal.Body>
-              <p>This is the modal body content.</p>
+              <p>
+                Beautiful, fast and modern React UI library for building accessible and customizable
+                web applications.
+              </p>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary">Cancel</Button>
-              <Button>Confirm</Button>
+              <Button className="w-full">Continue</Button>
             </Modal.Footer>
-            <Modal.CloseTrigger />
           </Modal.Dialog>
-        </Modal.Content>
+        </Modal.Container>
       </Modal.Overlay>
     </Modal>
   );
