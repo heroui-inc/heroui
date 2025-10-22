@@ -1,69 +1,52 @@
 "use client";
 
+import type {ModalVariants} from "./modal.styles";
+import type {UseModalStateReturn} from "./use-modal";
 import type {ComponentProps, ComponentRef, HTMLAttributes, ReactNode} from "react";
 import type {ButtonProps, DialogProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {createContext, forwardRef, useContext, useMemo} from "react";
 import {
-  Button as ButtonPrimitive,
   Dialog as DialogPrimitive,
-  Heading as HeadingPrimitive,
   ModalOverlay as ModalOverlayPrimitive,
   Modal as ModalPrimitive,
   DialogTrigger as ModalTriggerPrimitive,
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
+import {isNotAsChild} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
-import {CloseIcon} from "../icons";
+import {CloseButton} from "../close-button";
 
 import {modalVariants} from "./modal.styles";
 
-type ModalProps = ComponentProps<typeof ModalTriggerPrimitive> & {
-  /**
-   * The backdrop variant.
-   * @default "opaque"
-   */
-  backdrop?: "opaque" | "blur" | "transparent";
-  /**
-   * The placement of the modal.
-   * @default "auto"
-   */
-  placement?: "auto" | "center" | "top" | "bottom";
-  /**
-   * The size of the dialog.
-   * @default "md"
-   */
-  size?: "sm" | "md" | "lg" | "xl" | "full";
-  /**
-   * The scroll behavior of the modal.
-   * @default "normal"
-   */
-  scrollBehavior?: "normal" | "inside" | "outside";
-};
+type ModalPlacement = "auto" | "center" | "top" | "bottom";
 
 const ModalContext = createContext<{
   slots?: ReturnType<typeof modalVariants>;
+  placement?: ModalPlacement;
 }>({});
 
-const ModalRoot = ({
-  backdrop = "opaque",
-  children,
-  placement = "auto",
-  scrollBehavior = "normal",
-  size = "md",
-  ...props
-}: ModalProps) => {
-  const slots = useMemo(() => {
-    return modalVariants({backdrop, placement, scrollBehavior, size});
-  }, [backdrop, placement, scrollBehavior, size]);
+interface ModalProps extends ComponentProps<typeof ModalTriggerPrimitive> {
+  state?: UseModalStateReturn;
+}
 
-  const contextValue = useMemo(() => ({slots}), [slots]);
+const ModalRoot = ({children, state, ...props}: ModalProps) => {
+  const contextValue = useMemo(() => ({slots: undefined}), []);
+
+  const controlledProps = useMemo(() => {
+    return state
+      ? {
+          isOpen: state.isOpen,
+          onOpenChange: state.setOpen,
+        }
+      : {};
+  }, [state?.isOpen, state?.setOpen]);
 
   return (
     <ModalContext.Provider value={contextValue}>
-      <ModalTriggerPrimitive data-modal-root {...props}>
+      <ModalTriggerPrimitive data-slot="modal-root" {...controlledProps} {...props}>
         {children}
       </ModalTriggerPrimitive>
     </ModalContext.Provider>
@@ -72,12 +55,19 @@ const ModalRoot = ({
 
 ModalRoot.displayName = "HeroUI.Modal";
 
-const ModalTrigger = ({children, className, ...props}: HTMLAttributes<HTMLDivElement>) => {
+interface ModalTriggerProps extends HTMLAttributes<HTMLDivElement> {}
+
+const ModalTrigger = ({children, className, ...props}: ModalTriggerProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
     <PressablePrimitive>
-      <div data-modal-trigger className={slots?.trigger({className})} role="button" {...props}>
+      <div
+        className={slots?.trigger({className})}
+        data-slot="modal-trigger"
+        role="button"
+        {...props}
+      >
         {children}
       </div>
     </PressablePrimitive>
@@ -86,47 +76,75 @@ const ModalTrigger = ({children, className, ...props}: HTMLAttributes<HTMLDivEle
 
 ModalTrigger.displayName = "HeroUI.Modal.Trigger";
 
-type ModalOverlayProps = ComponentProps<typeof ModalOverlayPrimitive>;
+interface ModalOverlayProps extends ComponentProps<typeof ModalOverlayPrimitive> {
+  variant?: ModalVariants["variant"];
+}
 
 const ModalOverlay = forwardRef<ComponentRef<typeof ModalOverlayPrimitive>, ModalOverlayProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(ModalContext);
+  ({children, className, variant = "solid", ...props}, ref) => {
+    const {slots: parentSlots} = useContext(ModalContext);
+
+    const slots = useMemo(() => {
+      return modalVariants({variant});
+    }, [variant]);
+
+    const contextValue = useMemo(
+      () => ({slots: {...parentSlots, ...slots}, placement: undefined}),
+      [parentSlots, slots],
+    );
 
     return (
-      <ModalOverlayPrimitive
-        ref={ref}
-        data-modal-overlay
-        className={composeTwRenderProps(className, slots?.overlay())}
-        {...props}
-      >
-        {children}
-      </ModalOverlayPrimitive>
+      <ModalContext.Provider value={contextValue}>
+        <ModalOverlayPrimitive
+          ref={ref}
+          className={composeTwRenderProps(className, slots?.overlay())}
+          data-slot="modal-overlay"
+          {...props}
+        >
+          {children}
+        </ModalOverlayPrimitive>
+      </ModalContext.Provider>
     );
   },
 );
 
 ModalOverlay.displayName = "HeroUI.Modal.Overlay";
 
-type ModalContentProps = ComponentProps<typeof ModalPrimitive>;
+interface ModalContainerProps extends ComponentProps<typeof ModalPrimitive> {
+  placement?: ModalPlacement;
+  scroll?: ModalVariants["scroll"];
+}
 
-const ModalContent = forwardRef<ComponentRef<typeof ModalPrimitive>, ModalContentProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots} = useContext(ModalContext);
+const ModalContainer = forwardRef<ComponentRef<typeof ModalPrimitive>, ModalContainerProps>(
+  ({children, className, placement = "auto", scroll = "inside", ...props}, ref) => {
+    const {slots: parentSlots} = useContext(ModalContext);
+
+    const slots = useMemo(() => {
+      return modalVariants({scroll});
+    }, [scroll]);
+
+    const contextValue = useMemo(
+      () => ({slots: {...parentSlots, ...slots}, placement}),
+      [parentSlots, slots, placement],
+    );
 
     return (
-      <ModalPrimitive
-        {...props}
-        ref={ref}
-        data-modal-content
-        className={composeTwRenderProps(className, slots?.content())}
-      >
-        {children}
-      </ModalPrimitive>
+      <ModalContext.Provider value={contextValue}>
+        <ModalPrimitive
+          {...props}
+          ref={ref}
+          className={composeTwRenderProps(className, slots?.container())}
+          data-placement={placement}
+          data-slot="modal-container"
+        >
+          {children}
+        </ModalPrimitive>
+      </ModalContext.Provider>
     );
   },
 );
 
-ModalContent.displayName = "HeroUI.Modal.Content";
+ModalContainer.displayName = "HeroUI.Modal.Container";
 
 interface ModalDialogProps extends Omit<DialogProps, "children"> {
   children: ReactNode | ((opts: {close: () => void}) => ReactNode);
@@ -134,13 +152,14 @@ interface ModalDialogProps extends Omit<DialogProps, "children"> {
 
 const ModalDialog = forwardRef<HTMLElement, ModalDialogProps>(
   ({children, className, ...props}, ref) => {
-    const {slots} = useContext(ModalContext);
+    const {placement, slots} = useContext(ModalContext);
 
     return (
       <DialogPrimitive
         ref={ref}
-        data-modal-dialog
         className={slots?.dialog({className})}
+        data-placement={placement}
+        data-slot="modal-dialog"
         {...props}
       >
         {children}
@@ -151,16 +170,14 @@ const ModalDialog = forwardRef<HTMLElement, ModalDialogProps>(
 
 ModalDialog.displayName = "HeroUI.Modal.Dialog";
 
-interface ModalHeaderProps extends HTMLAttributes<HTMLDivElement> {
-  align?: "left" | "center";
-}
+interface ModalHeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
-  ({align, children, className, ...props}, ref) => {
+  ({children, className, ...props}, ref) => {
     const {slots} = useContext(ModalContext);
 
     return (
-      <div ref={ref} data-modal-header className={slots?.header({align, className})} {...props}>
+      <div ref={ref} className={slots?.header({className})} data-slot="modal-header" {...props}>
         {children}
       </div>
     );
@@ -169,57 +186,12 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
 
 ModalHeader.displayName = "HeroUI.Modal.Header";
 
-const ModalIcon = ({children, className, ...props}: HTMLAttributes<HTMLDivElement>) => {
-  const {slots} = useContext(ModalContext);
-
-  return (
-    <div data-modal-icon className={slots?.icon({className})} {...props}>
-      {children}
-    </div>
-  );
-};
-
-ModalIcon.displayName = "HeroUI.Modal.Icon";
-
-const ModalTitle = forwardRef<
-  ComponentRef<typeof HeadingPrimitive>,
-  ComponentProps<typeof HeadingPrimitive>
->(({children, className, ...props}, ref) => {
-  const {slots} = useContext(ModalContext);
-
-  return (
-    <HeadingPrimitive
-      ref={ref}
-      data-modal-title
-      className={slots?.title({className})}
-      slot="title"
-      {...props}
-    >
-      {children}
-    </HeadingPrimitive>
-  );
-});
-
-ModalTitle.displayName = "HeroUI.Modal.Title";
-
-const ModalDescription = ({children, className, ...props}: HTMLAttributes<HTMLDivElement>) => {
-  const {slots} = useContext(ModalContext);
-
-  return (
-    <div data-modal-description className={slots?.description({className})} {...props}>
-      {children}
-    </div>
-  );
-};
-
-ModalDescription.displayName = "HeroUI.Modal.Description";
-
 const ModalBody = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({children, className, ...props}, ref) => {
     const {slots} = useContext(ModalContext);
 
     return (
-      <div ref={ref} data-modal-body className={slots?.body({className})} {...props}>
+      <div ref={ref} className={slots?.body({className})} data-slot="modal-body" {...props}>
         {children}
       </div>
     );
@@ -228,16 +200,14 @@ const ModalBody = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
 ModalBody.displayName = "HeroUI.Modal.Body";
 
-interface ModalFooterProps extends HTMLAttributes<HTMLDivElement> {
-  layout?: "horizontal" | "vertical";
-}
+interface ModalFooterProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
-  ({children, className, layout, ...props}, ref) => {
+  ({children, className, ...props}, ref) => {
     const {slots} = useContext(ModalContext);
 
     return (
-      <div ref={ref} data-modal-footer className={slots?.footer({layout, className})} {...props}>
+      <div ref={ref} className={slots?.footer({className})} data-slot="modal-footer" {...props}>
         {children}
       </div>
     );
@@ -246,74 +216,95 @@ const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
 
 ModalFooter.displayName = "HeroUI.Modal.Footer";
 
-/**
- * Close trigger button for Modal, positioned in the top-right corner by default.
- *
- * @example
- * <Modal.CloseTrigger />
- *
- * @example
- * <Modal.CloseTrigger>Close</Modal.CloseTrigger>
- *
- * @example
- * <Modal.CloseTrigger asChild>
- *   <CloseButton />
- * </Modal.CloseTrigger>
- */
-interface ModalCloseTriggerProps extends ButtonProps {
-  /**
-   * When true, the CloseTrigger will pass all props to its child element.
-   * Useful for composing with custom components like CloseButton.
-   */
-  asChild?: boolean;
+interface ModalCloseTrigger {
+  (props: {asChild: true} & ComponentProps<"button">): React.JSX.Element;
+  (props: {asChild?: false} & ButtonProps): React.JSX.Element;
+  displayName: string;
 }
 
-const ModalCloseTrigger = forwardRef<ComponentRef<typeof ButtonPrimitive>, ModalCloseTriggerProps>(
-  ({asChild = false, children, className, ...props}, ref) => {
-    const {slots} = useContext(ModalContext);
+const ModalCloseTrigger: ModalCloseTrigger = (props) => {
+  const {slots} = useContext(ModalContext);
 
-    if (asChild) {
-      return <SlotPrimitive slot="close">{children as ReactNode}</SlotPrimitive>;
-    }
+  if (isNotAsChild(props)) {
+    const {className, ...rest} = props;
 
     return (
-      <ButtonPrimitive
-        {...props}
-        ref={ref}
-        data-modal-close-trigger
+      <CloseButton
         className={composeTwRenderProps(className, slots?.closeTrigger())}
+        data-slot="modal-close-trigger"
         slot="close"
-      >
-        {(values) =>
-          typeof children === "function"
-            ? children(values)
-            : (children ?? <CloseIcon data-modal-default-close-icon />)
-        }
-      </ButtonPrimitive>
+        {...rest}
+      />
     );
-  },
-);
+  }
+
+  const {asChild: _asChild, children, className, ...rest} = props;
+
+  return (
+    <SlotPrimitive data-slot="modal-close-trigger" slot="close" {...rest}>
+      {children ?? (
+        <CloseButton className={composeTwRenderProps(className, slots?.closeTrigger())} />
+      )}
+    </SlotPrimitive>
+  );
+};
 
 ModalCloseTrigger.displayName = "HeroUI.Modal.CloseTrigger";
 
+// interface ModalCloseTriggerProps extends ButtonPrimitiveProps {
+//   ref?: Ref<HTMLButtonElement>;
+//   asChild?: boolean;
+// }
+
+// const ModalCloseTrigger = forwardRef<HTMLButtonElement, ModalCloseTriggerProps>(
+//   ({asChild, children, className, ...rest}, ref) => {
+//     const {slots} = useContext(ModalContext);
+
+//     if (asChild) {
+//       return (
+//         <SlotPrimitive
+//           ref={ref}
+//           className={composeTwRenderProps(className)}
+//           data-slot="modal-close-trigger"
+//           slot="close"
+//           {...rest}
+//         >
+//           {typeof children === "function" ? children({} as any) : children}
+//         </SlotPrimitive>
+//       );
+//     }
+
+//     return (
+//       <CloseButton
+//         ref={ref}
+//         className={composeTwRenderProps(className, slots?.closeTrigger())}
+//         data-slot="modal-close-trigger"
+//         slot="close"
+//         {...rest}
+//       >
+//         {children}
+//       </CloseButton>
+//     );
+//   },
+// );
+
+// ModalCloseTrigger.displayName = "HeroUI.Modal.CloseTrigger";
+
 const CompoundModal = Object.assign(ModalRoot, {
-  Trigger: ModalTrigger,
-  Content: ModalContent,
-  Overlay: ModalOverlay,
-  Dialog: ModalDialog,
-  Header: ModalHeader,
-  Icon: ModalIcon,
-  Title: ModalTitle,
-  Description: ModalDescription,
   Body: ModalBody,
-  Footer: ModalFooter,
   CloseTrigger: ModalCloseTrigger,
+  Container: ModalContainer,
+  Dialog: ModalDialog,
+  Footer: ModalFooter,
+  Header: ModalHeader,
+  Overlay: ModalOverlay,
+  Trigger: ModalTrigger,
 });
 
 export type {
   ModalProps,
   ModalOverlayProps,
-  ModalContentProps,
+  ModalContainerProps,
   ModalDialogProps,
   ModalHeaderProps,
   ModalFooterProps,
