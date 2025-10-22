@@ -15,7 +15,7 @@ import {Modal} from "./index";
 
 export default {
   argTypes: {},
-  component: Modal,
+  component: Modal.Root,
   parameters: {
     layout: "centered",
   },
@@ -25,7 +25,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Modal>
+    <Modal.Root>
       <Button>Open Modal</Button>
       <Modal.Overlay>
         <Modal.Container>
@@ -49,7 +49,7 @@ export const Default = () => {
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Overlay>
-    </Modal>
+    </Modal.Root>
   );
 };
 
@@ -59,7 +59,7 @@ export const Placements = () => {
   return (
     <div className="flex flex-wrap gap-4">
       {placements.map((placement) => (
-        <Modal key={placement}>
+        <Modal.Root key={placement}>
           <Button>{placement.charAt(0).toUpperCase() + placement.slice(1)}</Button>
           <Modal.Overlay>
             <Modal.Container placement={placement}>
@@ -85,7 +85,7 @@ export const Placements = () => {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal>
+        </Modal.Root>
       ))}
     </div>
   );
@@ -97,7 +97,7 @@ export const OverlayVariants = () => {
   return (
     <div className="flex flex-wrap gap-4">
       {variants.map((variant) => (
-        <Modal key={variant}>
+        <Modal.Root key={variant}>
           <Button>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Button>
           <Modal.Overlay variant={variant}>
             <Modal.Container>
@@ -123,7 +123,7 @@ export const OverlayVariants = () => {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal>
+        </Modal.Root>
       ))}
     </div>
   );
@@ -158,7 +158,7 @@ export const ScrollComparison = () => {
         </label>
       </div>
 
-      <Modal>
+      <Modal.Root>
         <Button>Open Modal ({scroll.charAt(0).toUpperCase() + scroll.slice(1)})</Button>
         <Modal.Overlay>
           <Modal.Container scroll={scroll}>
@@ -188,13 +188,13 @@ export const ScrollComparison = () => {
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal>
+      </Modal.Root>
     </div>
   );
 };
 
 export const WithForm = () => (
-  <Modal>
+  <Modal.Root>
     <Button>Open Contact Form</Button>
     <Modal.Overlay>
       <Modal.Container placement="auto">
@@ -246,7 +246,7 @@ export const WithForm = () => (
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Overlay>
-  </Modal>
+  </Modal.Root>
 );
 
 export const WithUseModalState = () => {
@@ -268,7 +268,7 @@ export const WithUseModalState = () => {
         </Button>
       </div>
 
-      <Modal state={modalState}>
+      <Modal.Root state={modalState}>
         <Modal.Overlay>
           <Modal.Container>
             <Modal.Dialog>
@@ -303,13 +303,13 @@ export const WithUseModalState = () => {
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal>
+      </Modal.Root>
     </div>
   );
 };
 
 export const CustomTrigger = () => (
-  <Modal>
+  <Modal.Root>
     <Modal.Trigger>
       <div className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 transition-colors hover:bg-neutral-50">
         <div className="flex size-10 items-center justify-center">
@@ -347,11 +347,11 @@ export const CustomTrigger = () => (
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Overlay>
-  </Modal>
+  </Modal.Root>
 );
 
 export const CustomBackdrop = () => (
-  <Modal>
+  <Modal.Root>
     <Button>Custom Backdrop</Button>
     <Modal.Overlay className="bg-transparent bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-md">
       <Modal.Container>
@@ -378,7 +378,7 @@ export const CustomBackdrop = () => (
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Overlay>
-  </Modal>
+  </Modal.Root>
 );
 
 export const CustomAnimations = () => {
@@ -419,7 +419,7 @@ export const CustomAnimations = () => {
   return (
     <div className="flex flex-wrap gap-4">
       {Object.entries(animations).map(([name, classNames]) => (
-        <Modal key={name}>
+        <Modal.Root key={name}>
           <Button>{name.replace("_", " ")}</Button>
           <Modal.Overlay className="data-[entering]:duration-500 data-[exiting]:duration-200">
             <Modal.Container
@@ -453,7 +453,7 @@ export const CustomAnimations = () => {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal>
+        </Modal.Root>
       ))}
     </div>
   );
