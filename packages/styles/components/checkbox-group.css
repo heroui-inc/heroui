@@ -1,0 +1,7 @@
+.checkbox-group {
+  @apply flex flex-col;
+
+  [data-slot="checkbox"] {
+    @apply mt-4;
+  }
+}

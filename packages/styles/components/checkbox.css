@@ -1,21 +1,3 @@
-/* ==================== Checkbox Group Styles ==================== */
-
-/* Checkbox Group base styles */
-.checkbox-group {
-  @apply flex flex-col;
-
-  [data-slot="checkbox"] {
-    @apply mt-4;
-  }
-
-  /* Horizontal orientation */
-  &[data-orientation="horizontal"] {
-    @apply flex-row flex-wrap gap-4;
-  }
-}
-
-/* ==================== Checkbox (Individual Item) Styles ==================== */
-
 /* Base checkbox styles */
 .checkbox {
   @apply flex items-start gap-3 outline-none;
