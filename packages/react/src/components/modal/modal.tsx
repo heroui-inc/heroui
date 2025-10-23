@@ -52,11 +52,11 @@ const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
   }, [state?.isOpen, state?.setOpen]);
 
   return (
-    <ModalContext.Provider value={contextValue}>
+    <ModalContext value={contextValue}>
       <ModalTriggerPrimitive data-slot="modal-root" {...controlledProps} {...props}>
         {children}
       </ModalTriggerPrimitive>
-    </ModalContext.Provider>
+    </ModalContext>
   );
 };
 
@@ -102,7 +102,7 @@ const ModalOverlay = ({children, className, variant = "solid", ...props}: ModalO
   );
 
   return (
-    <ModalContext.Provider value={contextValue}>
+    <ModalContext value={contextValue}>
       <ModalOverlayPrimitive
         className={composeTwRenderProps(className, slots?.overlay())}
         data-slot="modal-overlay"
@@ -110,7 +110,7 @@ const ModalOverlay = ({children, className, variant = "solid", ...props}: ModalO
       >
         {children}
       </ModalOverlayPrimitive>
-    </ModalContext.Provider>
+    </ModalContext>
   );
 };
 
