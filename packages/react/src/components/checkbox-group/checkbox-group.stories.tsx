@@ -63,9 +63,16 @@ export const WithCustomIndicator: Story = {
       <Checkbox.Root value="notifications">
         <Checkbox.Control>
           <Checkbox.Indicator>
-            {({isSelected}) =>
-              isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
-            }
+            <svg
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
@@ -76,9 +83,16 @@ export const WithCustomIndicator: Story = {
       <Checkbox.Root value="newsletter">
         <Checkbox.Control>
           <Checkbox.Indicator>
-            {({isSelected}) =>
-              isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
-            }
+            <svg
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
