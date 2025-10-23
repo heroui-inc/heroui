@@ -7,11 +7,7 @@ description: React Server Components support for compound components, React 19 i
   <span className="text-sm text-muted">October 21, 2025</span>
 </div>
 
-This release fixes a critical issue where **compound components didn't work correctly in React Server Components (RSC)**. The component pattern logic has been moved from inside components to their index files, resolving the `"use client"` directive conflicts. Additionally, this release adopts React 19 best practices by removing `forwardRef` and simplifying context usage.
-
-<Callout type="warning">
-  **Breaking Change:** The main component in compound patterns now requires the `.Root` suffix (e.g., `<Avatar>` becomes `<Avatar.Root>`). Named exports remain unchanged and fully supported.
-</Callout>
+This release fixes a critical issue where **compound components didn't work correctly in React Server Components (RSC)**. Additionally, this release adopts React 19 best practices by removing `forwardRef` and simplifying context usage. The Switch component has been refactored to match the Radio/RadioGroup pattern, providing a cleaner and more consistent API.
 
 ## Installation
 
@@ -157,6 +153,14 @@ import { Switch, SwitchGroup } from "@heroui/react"
 </SwitchGroup>
 ```
 
+This change helps to:
+
+- **Separate Components**: Switch and SwitchGroup are now independent components (previously combined)
+- **Cleaner API**: `<SwitchGroup>` replaces the nested `<Switch.Group>` and `<Switch.GroupItems>` pattern
+- **Better Organization**: Separate styles, types, and implementations for each component
+- **Consistent Pattern**: Matches the Radio/RadioGroup architecture for a more predictable API
+
+
 **Migration Steps:**
 1. Import `SwitchGroup` separately: `import { Switch, SwitchGroup } from "@heroui/react"`
 2. Replace `<Switch.Group>` with `<SwitchGroup>`
@@ -222,6 +226,8 @@ import { Tabs } from "@heroui/react"
 </Tabs.Root>
 ```
 
+[See more examples in the documentation](/docs/components/card)
+
 **Avatar Example:**
 ```tsx
 import { Avatar } from "@heroui/react"
@@ -232,9 +238,11 @@ import { Avatar } from "@heroui/react"
 </Avatar.Root>
 ```
 
-### Option 2: Continue Using Named Exports (Fully Supported)
+[See more examples in the documentation](/docs/components/avatar)
 
-Keep your existing code unchanged - named exports work exactly as before:
+### Option 2: Use Named Exports
+
+We added support for named exports for all compound components. You can use them like this:
 
 **Card Example:**
 ```tsx
@@ -353,24 +361,7 @@ sed -i 's/<\/Switch\.GroupItems>//g' **/*.tsx
 - Be careful with automated replacements. Make sure you're only replacing compound pattern usage, not named exports.
 - For Switch migrations, verify that `SwitchGroup` is imported: `import { Switch, SwitchGroup } from "@heroui/react"`
 - Test your code after running automated migrations to ensure all changes are correct.
-
-## TypeScript Support
-
-All component exports maintain their TypeScript types with both patterns:
-
-```tsx
-// Compound pattern - types are inferred
-import { Avatar } from "@heroui/react"
-<Avatar.Root size="lg">
-  <Avatar.Image ... />
-</Avatar.Root>
-
-// Named exports - types work as before
-import type { AvatarProps } from "@heroui/react"
-import { Avatar } from "@heroui/react"
-const props: AvatarProps = { size: "lg" }
-```
-
+ 
 ## Why This Change?
 
 This change was necessary to fix React Server Components compatibility. The previous implementation had architectural limitations:
