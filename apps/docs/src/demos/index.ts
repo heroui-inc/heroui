@@ -349,9 +349,9 @@ export const demos: Record<string, DemoItem> = {
     component: ModalDemos.CustomTrigger,
     file: "modal/custom-trigger.tsx",
   },
-  "modal-custom-styles": {
-    component: ModalDemos.CustomStyles,
-    file: "modal/custom-styles.tsx",
+  "modal-custom-overlay": {
+    component: ModalDemos.CustomOverlay,
+    file: "modal/custom-overlay.tsx",
   },
   "modal-custom-animations": {
     component: ModalDemos.CustomAnimations,

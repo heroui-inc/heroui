@@ -6,5 +6,5 @@ export {DismissBehavior} from "./dismiss-behavior";
 export {WithForm} from "./with-form";
 export {Controlled} from "./controlled";
 export {CustomTrigger} from "./custom-trigger";
-export {CustomStyles} from "./custom-styles";
+export {CustomOverlay} from "./custom-overlay";
 export {CustomAnimations} from "./custom-animations";

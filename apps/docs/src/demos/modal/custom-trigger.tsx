@@ -7,7 +7,7 @@ export function CustomTrigger() {
   return (
     <Modal.Root>
       <Modal.Trigger>
-        <div className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 transition-colors hover:bg-neutral-50">
+        <div className="border-border bg-default hover:bg-default-hover flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors">
           <div className="flex size-10 items-center justify-center">
             <Icon className="text-primary size-6" icon="gravity-ui:gear" />
           </div>

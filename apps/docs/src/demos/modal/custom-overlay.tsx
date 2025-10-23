@@ -3,11 +3,14 @@
 import {Button, Modal} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
-export function CustomStyles() {
+export function CustomOverlay() {
   return (
     <Modal.Root>
       <Button>Custom Backdrop</Button>
-      <Modal.Overlay className="bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-md">
+      <Modal.Overlay
+        className="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
+        variant="blur"
+      >
         <Modal.Container>
           <Modal.Dialog>
             <Modal.Header className="items-center text-center">
@@ -16,14 +19,15 @@ export function CustomStyles() {
               </div>
               <h2 className="text-foreground text-lg font-semibold leading-6">Premium Backdrop</h2>
               <p className="text-muted text-sm leading-5">
-                Elegant gradient from dark to transparent with blur
+                Elegant gradient adapts to light and dark modes
               </p>
             </Modal.Header>
             <Modal.Body>
               <p>
                 This backdrop features a sophisticated gradient that transitions from an elegant
-                black at the bottom to complete transparency at the top, combined with a smooth blur
-                effect for a premium visual experience.
+                dark color at the bottom to complete transparency at the top, combined with a smooth
+                blur effect. The gradient automatically adapts its intensity for optimal contrast in
+                both light and dark modes.
               </p>
             </Modal.Body>
             <Modal.Footer className="flex-col-reverse">

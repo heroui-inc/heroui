@@ -43,7 +43,7 @@
 
 /* container */
 .modal__container {
-  @apply fixed left-1/2 top-[calc(var(--visual-viewport-height)/2)] isolate z-50 flex max-h-[var(--visual-viewport-height)] w-full -translate-x-1/2 -translate-y-1/2 will-change-auto;
+  @apply fixed left-1/2 top-[calc(var(--visual-viewport-height)/2)] isolate z-50 flex max-h-[var(--visual-viewport-height)] -translate-x-1/2 -translate-y-1/2 will-change-auto;
 
   &[data-placement="auto"] {
     /* Mobile: Position near bottom using translate (not bottom-0), with overflow handling */

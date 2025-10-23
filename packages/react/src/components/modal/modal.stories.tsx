@@ -326,9 +326,9 @@ export const WithUseModalState = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-4">
+      <div className="border-border bg-default rounded-lg border p-4">
         <p className="mb-2 text-sm font-medium">Modal State</p>
-        <p className="text-sm text-neutral-600">
+        <p className="text-muted text-sm">
           Status: <span className="font-mono">{modalState.isOpen ? "open" : "closed"}</span>
         </p>
       </div>
@@ -383,7 +383,7 @@ export const WithUseModalState = () => {
 export const CustomTrigger = () => (
   <Modal.Root>
     <Modal.Trigger>
-      <div className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 transition-colors hover:bg-neutral-50">
+      <div className="border-border bg-default hover:bg-default-hover flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors">
         <div className="flex size-10 items-center justify-center">
           <Icon className="text-primary size-6" icon="gravity-ui:gear" />
         </div>
@@ -425,7 +425,10 @@ export const CustomTrigger = () => (
 export const CustomBackdrop = () => (
   <Modal.Root>
     <Button>Custom Backdrop</Button>
-    <Modal.Overlay className="bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-md">
+    <Modal.Overlay
+      className="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
+      variant="blur"
+    >
       <Modal.Container>
         <Modal.Dialog>
           <Modal.Header className="items-center text-center">
@@ -434,14 +437,15 @@ export const CustomBackdrop = () => (
             </div>
             <h2 className="text-foreground text-lg font-semibold leading-6">Premium Backdrop</h2>
             <p className="text-muted text-sm leading-5">
-              Elegant gradient from dark to transparent with blur
+              Elegant gradient adapts to light and dark modes
             </p>
           </Modal.Header>
           <Modal.Body>
             <p>
-              This backdrop features a sophisticated gradient that transitions from an elegant black
-              at the bottom to complete transparency at the top, combined with a smooth blur effect
-              for a premium visual experience.
+              This backdrop features a sophisticated gradient that transitions from an elegant dark
+              color at the bottom to complete transparency at the top, combined with a smooth blur
+              effect. The gradient automatically adapts its intensity for optimal contrast in both
+              light and dark modes.
             </p>
           </Modal.Body>
           <Modal.Footer className="flex-col-reverse">

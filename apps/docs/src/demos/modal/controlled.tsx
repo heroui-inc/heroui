@@ -8,9 +8,9 @@ export function Controlled() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-4">
+      <div className="border-border bg-default rounded-lg border p-4">
         <p className="mb-2 text-sm font-medium">Modal State</p>
-        <p className="text-sm text-neutral-600">
+        <p className="text-muted text-sm">
           Status: <span className="font-mono">{modalState.isOpen ? "open" : "closed"}</span>
         </p>
       </div>
