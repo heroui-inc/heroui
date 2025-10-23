@@ -17,7 +17,7 @@
 
 /* overlay */
 .modal__overlay {
-  @apply absolute inset-x-0 top-0 z-50 h-[var(--page-height)];
+  @apply fixed inset-0 z-50 h-[var(--visual-viewport-height)] will-change-auto;
 
   &[data-entering] {
     @apply animate-in fade-in-0 ease-out-quad duration-200;
@@ -38,17 +38,12 @@
 }
 
 .modal__overlay--blur {
-  @apply bg-black/50;
-
-  /* TODO: impprove backdrop filter styles */
-  &::before {
-    @apply absolute inset-0 -z-10 backdrop-blur-md content-[""];
-  }
+  @apply bg-black/50 backdrop-blur-md;
 }
 
 /* container */
 .modal__container {
-  @apply fixed left-1/2 top-[calc(var(--visual-viewport-height)/2)] isolate z-50 flex max-h-[var(--visual-viewport-height)] w-full -translate-x-1/2 -translate-y-1/2;
+  @apply fixed left-1/2 top-[calc(var(--visual-viewport-height)/2)] isolate z-50 flex max-h-[var(--visual-viewport-height)] w-full -translate-x-1/2 -translate-y-1/2 will-change-auto;
 
   &[data-placement="auto"] {
     /* Mobile: Position near bottom using translate (not bottom-0), with overflow handling */

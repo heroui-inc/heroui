@@ -353,6 +353,10 @@ export const demos: Record<string, DemoItem> = {
     component: ModalDemos.CustomStyles,
     file: "modal/custom-styles.tsx",
   },
+  "modal-custom-animations": {
+    component: ModalDemos.CustomAnimations,
+    file: "modal/custom-animations.tsx",
+  },
   // Skeleton demos
   "skeleton-basic": {
     component: SkeletonDemos.Basic,

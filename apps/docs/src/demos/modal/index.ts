@@ -7,3 +7,4 @@ export {WithForm} from "./with-form";
 export {Controlled} from "./controlled";
 export {CustomTrigger} from "./custom-trigger";
 export {CustomStyles} from "./custom-styles";
+export {CustomAnimations} from "./custom-animations";
