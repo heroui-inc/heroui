@@ -491,6 +491,24 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           ? errorMessage({isInvalid, validationErrors, validationDetails})
           : errorMessage || validationErrors?.join(" "),
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
+      onFocus: chain(
+        inputProps.onFocus,
+        otherProps.onFocus,
+        (e: React.FocusEvent<HTMLInputElement>) => {
+          // Firefox auto-selects text when tabbing into input, which causes
+          // the text to be replaced when typing. Prevent this by clearing selection.
+          if (
+            e.target.value &&
+            e.target.selectionStart === 0 &&
+            e.target.selectionEnd === e.target.value.length
+          ) {
+            // Move cursor to end of text instead of selecting all
+            const length = e.target.value.length;
+
+            e.target.setSelectionRange(length, length);
+          }
+        },
+      ),
     }) as unknown as InputProps;
 
   const getListBoxProps = () => {
