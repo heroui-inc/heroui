@@ -109,7 +109,7 @@ Apply button styles to any component:
 import { Link, LinkIcon, buttonVariants } from '@heroui/react';
 
 // Link styled as a tertiary button
-<Link
+<Link.Root
   className={buttonVariants({
     size: "md",
     variant: "tertiary",
@@ -120,7 +120,7 @@ import { Link, LinkIcon, buttonVariants } from '@heroui/react';
 >
   HeroUI
   <LinkIcon className="h-2 w-2" />
-</Link>
+</Link.Root>
 
 // Native anchor styled as primary button
 <a
