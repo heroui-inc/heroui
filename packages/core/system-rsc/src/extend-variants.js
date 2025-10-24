@@ -5,21 +5,32 @@ import clsx from "clsx";
 import {mapPropsVariants} from "./utils";
 
 function getSlots(variants) {
-  return variants
-    ? Object.values(variants)
-        .flatMap(Object.values)
-        .reduce((acc, slot) => {
-          if (typeof slot === "object" && slot !== null && !(slot instanceof String)) {
-            Object.keys(slot).forEach((key) => {
-              if (!acc.hasOwnProperty(key)) {
-                acc[key] = "";
-              }
-            });
-          }
+  if (!variants || typeof variants !== "object") return {};
 
-          return acc;
-        }, {})
-    : {};
+  const acc = Object.create(null);
+
+  for (const group of Object.values(variants)) {
+    if (!group || typeof group !== "object") continue;
+
+    for (const config of Object.values(group)) {
+      if (
+        !config ||
+        typeof config !== "object" ||
+        Array.isArray(config) ||
+        config instanceof String
+      ) {
+        continue;
+      }
+
+      for (const slotName of Object.keys(config)) {
+        if (!Object.prototype.hasOwnProperty.call(acc, slotName)) {
+          acc[slotName] = "";
+        }
+      }
+    }
+  }
+
+  return acc;
 }
 
 function getClassNamesWithProps({
