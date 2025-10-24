@@ -48,7 +48,10 @@ type VariantValue<V, SV> = {
 
 type DefaultVariants<V, SV> = VariantValue<V, SV>;
 
-type CompoundVariants<V, SV> = Array<VariantValue<V, SV> & ClassProp<ClassValue>>;
+type CompoundVariants<V, SV, S> = Array<
+  VariantValue<V, SV> &
+    ClassProp<S extends undefined ? ClassValue : ClassValue | SlotsClassValue<S>>
+>;
 
 type Options = {
   /**
@@ -92,7 +95,7 @@ export type ExtendVariants = {
     V extends ComposeVariants<CP, S>,
     SV extends SuggestedVariants<CP, S>,
     DV extends DefaultVariants<V, SV>,
-    CV extends CompoundVariants<V, SV>,
+    CV extends CompoundVariants<V, SV, ComponentSlots<CP>>,
   >(
     BaseComponent: C,
     styles: {
