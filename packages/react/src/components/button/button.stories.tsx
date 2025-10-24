@@ -19,7 +19,7 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "tertiary", "ghost", "danger"],
+      options: ["primary", "secondary", "tertiary", "ghost", "destructive"],
     },
   },
   component: Button,
@@ -44,8 +44,11 @@ const Template = ({isDisabled, size}: ButtonProps) => (
     <Button isDisabled={isDisabled} size={size} variant="ghost">
       Ghost
     </Button>
-    <Button isDisabled={isDisabled} size={size} variant="danger">
-      Danger
+    <Button isDisabled={isDisabled} size={size} variant="destructive">
+      Destructive
+    </Button>
+    <Button isDisabled={isDisabled} size={size} variant="destructive-soft">
+      Destructive Soft
     </Button>
   </div>
 );
@@ -74,9 +77,13 @@ const TemplateWithIcon = ({isDisabled, size}: ButtonProps) => (
       <Icon icon="gravity-ui:envelope" />
       Email
     </Button>
-    <Button isDisabled={isDisabled} size={size} variant="danger">
+    <Button isDisabled={isDisabled} size={size} variant="destructive">
       <Icon icon="gravity-ui:trash-bin" />
       Delete
+    </Button>
+    <Button isDisabled={isDisabled} size={size} variant="destructive-soft">
+      <Icon icon="gravity-ui:trash-bin" />
+      Cancel
     </Button>
   </div>
 );

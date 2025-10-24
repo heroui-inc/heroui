@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border-transparent px-4 text-sm font-medium md:h-9;
+  @apply relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl border-transparent px-4 text-sm font-medium md:h-9;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -10,24 +10,30 @@
   border-width: var(--border-width);
 
   transition:
-    transform 150ms var(--ease-out),
+    transform 250ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 
   /* Pending state */
   &[data-pending] {
     @apply status-pending;
+  }
+
+  /* Default active/pressed state - scale transform */
+  &:active,
+  &[data-pressed] {
+    transform: scale(0.97);
   }
 
   /* SVG icon styling - exclude spinner svgs */
@@ -49,7 +55,7 @@
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed] {
     transform: scale(0.98);
   }
 }
@@ -62,7 +68,7 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed] {
     transform: scale(0.96);
   }
 }
@@ -72,14 +78,8 @@
   @apply bg-accent text-accent-foreground;
 
   &:hover,
-  &[data-hovered="true"] {
+  &[data-hovered] {
     @apply bg-accent-hover;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-accent-hover;
-    transform: scale(0.97);
   }
 }
 
@@ -87,14 +87,8 @@
   @apply bg-accent-soft text-accent-soft-foreground;
 
   &:hover,
-  &[data-hovered="true"] {
+  &[data-hovered] {
     @apply bg-accent-soft-hover;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-accent-soft-hover;
-    transform: scale(0.97);
   }
 }
 
@@ -102,44 +96,35 @@
   @apply border-border bg-default;
 
   &:hover,
-  &[data-hovered="true"] {
+  &[data-hovered] {
     @apply bg-default-hover;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-default-hover;
-    transform: scale(0.97);
   }
 }
 
 .button--ghost {
-  @apply text-accent-soft-foreground bg-transparent;
+  @apply text-default-foreground bg-transparent;
 
   &:hover,
-  &[data-hovered="true"] {
-    @apply bg-accent-soft;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-accent-soft;
-    transform: scale(0.97);
+  &[data-hovered] {
+    @apply bg-default-hover;
   }
 }
 
-.button--danger {
+.button--destructive {
   @apply bg-danger text-danger-foreground;
 
   &:hover,
-  &[data-hovered="true"] {
+  &[data-hovered] {
     @apply bg-danger-hover;
   }
+}
 
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-danger-hover;
-    transform: scale(0.97);
+.button--destructive-soft {
+  @apply bg-danger-soft text-danger-soft-foreground;
+
+  &:hover,
+  &[data-hovered] {
+    @apply bg-danger-soft-hover;
   }
 }
 

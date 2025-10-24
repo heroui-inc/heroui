@@ -12,9 +12,6 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-soft-foreground: var(--accent-soft-foreground);
-
   --color-segment: var(--segment);
   --color-segment-foreground: var(--segment-foreground);
 
@@ -49,20 +46,26 @@
   /* Calculated Variables */
 
   /* Colors */
-  --color-panel-hover: color-mix(
+
+  /* --- background shades --- */
+  --color-background-secondary: color-mix(
     in oklab,
-    var(--color-panel) 90%,
-    var(--color-panel-foreground) 5%
+    var(--color-background) 90%,
+    var(--color-foreground) 4%
   );
+  --color-background-tertiary: color-mix(
+    in oklab,
+    var(--color-background) 90%,
+    var(--color-foreground) 6%
+  );
+  --color-background-inverse: var(--color-foreground);
+
+  /* ------------------------- */
+
   --color-default-hover: color-mix(
     in oklab,
     var(--color-default) 90%,
     var(--color-default-foreground) 2%
-  );
-  --color-accent-soft-hover: color-mix(
-    in oklab,
-    var(--color-accent-soft) 10%,
-    var(--color-accent-soft-foreground) 18%
   );
   --color-success-hover: color-mix(
     in oklab,
@@ -79,6 +82,7 @@
     var(--color-danger) 90%,
     var(--color-danger-foreground) 10%
   );
+
   /* Form Field Colors */
   --color-field-hover: color-mix(
     in oklab,
@@ -102,6 +106,22 @@
     var(--color-field-foreground) 22%
   );
 
+  /* Soft Colors */
+  --color-accent-soft: color-mix(in oklab, var(--color-accent) 15%, transparent);
+  --color-accent-soft-foreground: var(--color-accent);
+  --color-accent-soft-hover: color-mix(in oklab, var(--color-accent) 20%, transparent);
+
+  --color-danger-soft: color-mix(in oklab, var(--color-danger) 15%, transparent);
+  --color-danger-soft-foreground: var(--color-danger);
+  --color-danger-soft-hover: color-mix(in oklab, var(--color-danger) 20%, transparent);
+
+  --color-warning-soft: color-mix(in oklab, var(--color-warning) 15%, transparent);
+  --color-warning-soft-foreground: var(--color-warning);
+  --color-warning-soft-hover: color-mix(in oklab, var(--color-warning) 20%, transparent);
+
+  --color-success-soft: color-mix(in oklab, var(--color-success) 15%, transparent);
+  --color-success-soft-foreground: var(--color-success);
+  --color-success-soft-hover: color-mix(in oklab, var(--color-success) 20%, transparent);
   /* Surface Colors */
   --color-surface-1: var(--surface-1);
   --color-surface-1-foreground: color-mix(

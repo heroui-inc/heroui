@@ -9,7 +9,7 @@
     --white: oklch(100% 0 0);
     --black: oklch(0% 0 0);
     --snow: oklch(0.9911 0 0);
-    --eclipse: oklch(0.2221 0 0);
+    --eclipse: oklch(0.2103 0.0059 285.89);
 
     /* Spacing scale */
     --spacing: 0.25rem;
@@ -44,48 +44,48 @@
     --panel: var(--white);
     --panel-foreground: var(--foreground);
 
-    --muted: var(--color-neutral-500);
+    --muted: oklch(55.2% 0.016 285.938);
 
-    --scrollbar: var(--color-neutral-300);
+    --scrollbar: oklch(87.1% 0.006 286.286);
 
-    --default: var(--color-neutral-50);
+    --default: oklch(96.7% 0.001 286.375);
     --default-foreground: var(--eclipse);
 
     --surface-1: var(--background);
-    --surface-2: var(--color-neutral-100);
-    --surface-3: var(--color-neutral-200);
+    --surface-2: oklch(98.5% 0 0);
+    --surface-3: oklch(92% 0.004 286.32);
 
-    --accent: var(--color-neutral-950);
+    --accent: oklch(0.6204 0.195 253.83);
     --accent-foreground: var(--snow);
 
-    --accent-soft: var(--color-neutral-200);
-    --accent-soft-foreground: var(--color-neutral-900);
+    --accent-soft: oklch(0.9612 0 0);
+    --accent-soft-foreground: oklch(0.6204 0.195 253.83);
 
     /* Form Field Defaults */
-    --field-background: var(--default);
-    --field-foreground: var(--foreground);
+    --field-background: oklch(0.9612 0 0);
+    --field-foreground: oklch(0.2103 0.0059 285.89);
     --field-placeholder: var(--muted);
     --field-border: var(--border);
 
     /* Status Colors */
-    --success: oklch(0.5503 0.1244 153.56);
-    --success-foreground: var(--snow);
+    --success: oklch(0.7329 0.1935 150.81);
+    --success-foreground: var(--eclipse);
 
-    --warning: oklch(0.7186 0.1521 64.85);
+    --warning: oklch(0.7819 0.1585 72.33);
     --warning-foreground: var(--eclipse);
 
-    --danger: oklch(0.6259 0.1908 29.19);
+    --danger: oklch(0.6532 0.2328 25.74);
     --danger-foreground: var(--snow);
 
     /* Component Colors */
     --segment: var(--white);
-    --segment-foreground: var(--foreground);
+    --segment-foreground: var(--eclipse);
 
     /* Misc Colors */
-    --border: oklch(0 0 0 / 15%);
-    --divider: var(--color-neutral-200);
-    --focus: oklch(0% 0 0 / 20%);
-    --link: var(--foreground);
+    --border: oklch(0 0 0 / 0%);
+    --divider: oklch(92% 0.004 286.32);
+    --focus: var(--accent);
+    --link: var(--accent);
 
     /* Shadows */
     --panel-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);

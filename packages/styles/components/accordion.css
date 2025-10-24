@@ -8,7 +8,6 @@
 
 /* Accordion elements */
 .accordion__body {
-  /* Body is now just a wrapper for the grid animation */
 }
 
 .accordion__body-inner {
@@ -32,9 +31,20 @@
   }
 }
 
+/* Accordion Item - Separator styles */
 .accordion__item {
-  @apply border-b last:border-b-0;
+  @apply relative border-none;
 }
+
+.accordion__item::after {
+  content: "";
+  @apply bg-divider absolute bottom-0 left-[3%] h-px w-[94%] rounded-full;
+}
+
+.accordion__item:last-child::after {
+  content: none;
+}
+/* ------------------------------------ */
 
 .accordion__trigger {
   cursor: var(--cursor-interactive);
@@ -43,15 +53,15 @@
   @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
 
   transition:
-    background-color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-out),
     opacity 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 
   /* Hover state */
-  &:hover,
-  &[data-hovered="true"],
+  &:hover:not([aria-expanded="true"]),
+  &[data-hovered="true"]:not([aria-expanded="true"]),
   /* Pressed state */
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
   }
 
@@ -90,26 +100,26 @@
   }
 }
 
-/* Outline variant */
-.accordion--outline {
-  @apply bg-panel rounded-xl border shadow-sm;
+/* Panel variant */
+.accordion--panel {
+  @apply bg-panel rounded-3xl;
 
   .accordion__trigger {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-panel-hover;
+    &:hover:not([aria-expanded="true"]),
+    &[data-hovered="true"]:not([aria-expanded="true"]) {
+      @apply bg-default;
     }
   }
 }
 
-.accordion--outline .accordion__item {
-  /* Special rounding for first and last items in outline variant */
+.accordion--panel .accordion__item {
+  /* Special rounding for first and last items in panel variant */
   &:first-child [data-slot="accordion-trigger"] {
-    @apply rounded-t-lg;
+    @apply rounded-t-3xl;
   }
 
   &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
     [data-slot="accordion-trigger"] {
-    @apply rounded-b-lg;
+    @apply rounded-b-3xl;
   }
 }

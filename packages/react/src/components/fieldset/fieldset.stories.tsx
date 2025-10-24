@@ -89,7 +89,7 @@ export const Default: Story = {
               <Icon icon="gravity-ui:floppy-disk" />
               Save changes
             </Button>
-            <Button type="reset" variant="secondary">
+            <Button type="reset" variant="tertiary">
               Cancel
             </Button>
           </Fieldset.Actions>
