@@ -49,8 +49,7 @@ type VariantValue<V, SV> = {
 type DefaultVariants<V, SV> = VariantValue<V, SV>;
 
 type CompoundVariants<V, SV, S> = Array<
-  VariantValue<V, SV> &
-    ClassProp<S extends undefined ? ClassValue : ClassValue | SlotsClassValue<S>>
+  VariantValue<V, SV> & ClassProp<ClassValue | GetSuggestedValues<S>>
 >;
 
 type Options = {
