@@ -1,4 +1,4 @@
-import type {ExtendVariantProps} from "../src/extend-variants";
+import type {ExtendVariantProps, ExtendVariantWithSlotsProps} from "../src/extend-variants";
 
 import React from "react";
 import {render, screen} from "@testing-library/react";
@@ -37,7 +37,7 @@ const createExtendNoSlotsComponent = (styles: ExtendVariantProps = {}) =>
     ],
   });
 
-const createExtendSlotsComponent = () =>
+const createExtendSlotsComponent = (styles: ExtendVariantWithSlotsProps = {}) =>
   extendVariants(Card, {
     variants: {
       shadow: {
@@ -73,6 +73,7 @@ const createExtendSlotsComponent = () =>
       shadow: "xl",
       radius: "xl",
     },
+    compoundVariants: styles?.compoundVariants ?? [],
   });
 
 describe("extendVariants function - no slots", () => {
@@ -242,7 +243,16 @@ describe("extendVariants function - with slots", () => {
   });
 
   test("should override all slots styles", () => {
-    const Card2 = createExtendSlotsComponent();
+    const Card2 = createExtendSlotsComponent({
+      compoundVariants: [
+        {
+          fullWidth: "true",
+          class: {
+            body: "w-full",
+          },
+        },
+      ],
+    });
     const {getByTestId} = render(
       <Card2 classNames={{base: "shadow-xs", header: "rounded-none"}}>Card Content</Card2>,
     );
