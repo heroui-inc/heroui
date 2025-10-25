@@ -49,17 +49,15 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   useLayoutEffect(() => {
     const frameIds: number[] = [];
 
-    const content = contentRef.current;
-    const canScroll = isOpen && scrollOnOpen && content;
-
-    if (canScroll) {
+    if (isOpen && scrollOnOpen && contentRef.current) {
       // Use double RAF to ensure the animation has started and layout is updated
       frameIds.push(
         requestAnimationFrame(() => {
           frameIds.push(
             requestAnimationFrame(() => {
-              if (canScroll) {
-                content.scrollIntoView({
+              // Re-check current state before scrolling
+              if (contentRef.current && isOpen) {
+                contentRef.current.scrollIntoView({
                   behavior: "smooth",
                   block: "nearest",
                 });
