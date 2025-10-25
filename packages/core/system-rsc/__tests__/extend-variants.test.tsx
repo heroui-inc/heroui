@@ -73,7 +73,13 @@ const createExtendSlotsComponent = (styles: ExtendVariantWithSlotsProps = {}) =>
       shadow: "xl",
       radius: "xl",
     },
-    compoundVariants: styles?.compoundVariants ?? [],
+    compoundVariants: styles?.compoundVariants ?? [
+      {
+        shadow: "none",
+        radius: "md",
+        class: "scale-150",
+      },
+    ],
   });
 
 describe("extendVariants function - no slots", () => {
@@ -243,16 +249,7 @@ describe("extendVariants function - with slots", () => {
   });
 
   test("should override all slots styles", () => {
-    const Card2 = createExtendSlotsComponent({
-      compoundVariants: [
-        {
-          fullWidth: "true",
-          class: {
-            body: "w-full",
-          },
-        },
-      ],
-    });
+    const Card2 = createExtendSlotsComponent();
     const {getByTestId} = render(
       <Card2 classNames={{base: "shadow-xs", header: "rounded-none"}}>Card Content</Card2>,
     );
@@ -262,5 +259,35 @@ describe("extendVariants function - with slots", () => {
 
     expect(baseEl).toHaveClass("shadow-xs");
     expect(headerEl).toHaveClass("rounded-none");
+  });
+
+  test("should include the compound variant styles - original", () => {
+    const Card2 = createExtendSlotsComponent({
+      compoundVariants: [
+        {
+          shadow: "none",
+          radius: "md",
+          class: "scale-150",
+        },
+        {
+          radius: "md",
+          class: {
+            header: "rounded-xl",
+          },
+        },
+      ],
+    });
+
+    const {getByTestId} = render(
+      <Card2 radius="md" shadow="none">
+        Card Content
+      </Card2>,
+    );
+
+    const baseEl = getByTestId("base");
+    const headerEl = getByTestId("header");
+
+    expect(baseEl).toHaveClass("scale-150");
+    expect(headerEl).toHaveClass("rounded-xl");
   });
 });
