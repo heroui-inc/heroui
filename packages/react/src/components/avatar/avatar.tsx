@@ -23,8 +23,8 @@ interface AvatarRootProps
   extends Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, "color">,
     AvatarVariants {}
 
-const AvatarRoot = ({children, className, color, size, ...props}: AvatarRootProps) => {
-  const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
+const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
+  const slots = React.useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
 
   return (
     <AvatarContext value={{slots}}>

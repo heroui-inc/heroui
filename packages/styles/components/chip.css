@@ -74,14 +74,14 @@
   @apply bg-accent-soft text-accent-soft-foreground;
 }
 
-.chip--danger.chip--soft {
-  @apply bg-danger-soft text-danger-soft-foreground;
-}
-
 .chip--success.chip--soft {
   @apply bg-success-soft text-success-soft-foreground;
 }
 
 .chip--warning.chip--soft {
   @apply bg-warning-soft text-warning-soft-foreground;
+}
+
+.chip--danger.chip--soft {
+  @apply bg-danger-soft text-danger-soft-foreground;
 }
