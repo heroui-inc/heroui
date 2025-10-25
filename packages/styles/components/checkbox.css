@@ -82,7 +82,7 @@
   /* Invalid/Error state */
   .checkbox[data-invalid="true"] &,
   .checkbox[aria-invalid="true"] & {
-    @apply border-danger;
+    @apply border-danger border;
   }
 
   /* Invalid + Selected state */
