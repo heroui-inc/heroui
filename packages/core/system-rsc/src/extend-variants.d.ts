@@ -105,13 +105,11 @@ export type ExtendVariants = {
     },
     opts?: Options,
   ): ForwardRefExoticComponent<
-    PropsWithoutRef<
-      CP & {
-        [K in Exclude<keyof V, keyof CP>]?: StringToBoolean<keyof V[K]>;
-      } & {
-        [K in Extract<keyof V, keyof CP>]: CP[K] | StringToBoolean<keyof V[K]>;
-      }
-    > &
+    PropsWithoutRef<{
+      [key in keyof CP | keyof V]?:
+        | (key extends keyof CP ? CP[key] : never)
+        | (key extends keyof V ? StringToBoolean<keyof NonNullable<V[key]>> : never);
+    }> &
       RefAttributes<InferRef<C>>
   >;
 };
