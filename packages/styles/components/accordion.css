@@ -38,7 +38,7 @@
 
 .accordion__item::after {
   content: "";
-  @apply bg-divider absolute bottom-0 left-[3%] h-px w-[94%] rounded-full;
+  @apply bg-divider absolute bottom-0 left-0 h-px w-full rounded-full;
 }
 
 .accordion__item:last-child::after {
@@ -113,6 +113,11 @@
 }
 
 .accordion--panel .accordion__item {
+  /* Panel variant separator styling */
+  &::after {
+    @apply left-[3%] w-[94%];
+  }
+
   /* Special rounding for first and last items in panel variant */
   &:first-child [data-slot="accordion-trigger"] {
     @apply rounded-t-3xl;
