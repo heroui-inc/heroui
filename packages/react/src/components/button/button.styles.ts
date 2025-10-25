@@ -23,8 +23,8 @@ export const buttonVariants = tv({
       secondary: "button--secondary",
       tertiary: "button--tertiary",
       ghost: "button--ghost",
-      destructive: "button--destructive",
-      "destructive-soft": "button--destructive-soft",
+      danger: "button--danger",
+      "danger-soft": "button--danger-soft",
     },
   },
 });

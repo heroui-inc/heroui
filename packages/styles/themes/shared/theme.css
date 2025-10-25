@@ -61,11 +61,15 @@
   --color-background-inverse: var(--color-foreground);
 
   /* ------------------------- */
-
   --color-default-hover: color-mix(
     in oklab,
     var(--color-default) 90%,
     var(--color-default-foreground) 2%
+  );
+  --color-accent-hover: color-mix(
+    in oklab,
+    var(--color-accent) 90%,
+    var(--color-accent-foreground) 10%
   );
   --color-success-hover: color-mix(
     in oklab,
@@ -90,11 +94,6 @@
     var(--color-field-foreground) 2%
   );
   --color-field-focus: transparent;
-  --color-accent-hover: color-mix(
-    in oklab,
-    var(--color-accent) 90%,
-    var(--color-accent-foreground) 20%
-  );
   --color-field-border-hover: color-mix(
     in oklab,
     var(--color-field-border) 88%,
