@@ -271,7 +271,7 @@ describe("extendVariants function - with slots", () => {
     const Card2 = createExtendSlotsComponent();
 
     const {getByTestId} = render(
-      <Card2 radius="sm" shadow="none">
+      <Card2 radius="none" shadow="none">
         Card Content
       </Card2>,
     );
