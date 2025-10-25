@@ -118,13 +118,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
         <div {...getBaseProps()}>
           <Component {...getTabListProps()}>
             {!values.disableAnimation && !values.disableCursorAnimation && selectedKey != null && (
-              <span
-                {...getTabCursorProps({
-                  className:
-                    "[&:not([data-initialized])]:invisible [&:not([data-initialized])]:transition-none",
-                })}
-                ref={cursorRef}
-              />
+              <span {...getTabCursorProps()} ref={cursorRef} />
             )}
             {tabs}
           </Component>
