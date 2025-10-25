@@ -12,12 +12,14 @@ import {isNotAsChild} from "../../utils/props";
 import {CircleDashedIcon, CloseIcon} from "../icons";
 
 import {alertVariants} from "./alert.styles";
+
 /* ------------------------------------------------------------------------------------------------
  * Alert Context
  * --------------------------------------------------------------------------------------------- */
 type AlertContext = {
   slots?: ReturnType<typeof alertVariants>;
 };
+
 const AlertContext = createContext<AlertContext>({});
 
 /* ------------------------------------------------------------------------------------------------
@@ -26,6 +28,7 @@ const AlertContext = createContext<AlertContext>({});
 interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
   asChild?: boolean;
 }
+
 const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootProps) => {
   const slots = React.useMemo(() => alertVariants({variant}), [variant]);
   const Component = asChild ? SlotPrimitive : "div";
@@ -45,6 +48,7 @@ const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootPr
 type AlertIconProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
 };
+
 const AlertIcon = ({asChild, children, className, ...rest}: AlertIconProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "div";
@@ -62,6 +66,7 @@ const AlertIcon = ({asChild, children, className, ...rest}: AlertIconProps) => {
 type AlertContentProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
 };
+
 const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "div";
@@ -79,6 +84,7 @@ const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps
 type AlertTitleProps = React.ComponentProps<"p"> & {
   asChild?: boolean;
 };
+
 const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "p";
@@ -96,6 +102,7 @@ const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) =>
 type AlertDescriptionProps = React.ComponentProps<"span"> & {
   asChild?: boolean;
 };
+
 const AlertDescription = ({asChild, children, className, ...rest}: AlertDescriptionProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "span";
@@ -113,8 +120,8 @@ const AlertDescription = ({asChild, children, className, ...rest}: AlertDescript
 interface AlertAction {
   (props: {asChild: true} & React.ComponentProps<"button">): React.JSX.Element;
   (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
-  displayName: string;
 }
+
 const AlertAction: AlertAction = (props) => {
   const {slots} = useContext(AlertContext);
 
@@ -140,15 +147,14 @@ const AlertAction: AlertAction = (props) => {
   );
 };
 
-AlertAction.displayName = "AlertAction";
 /* ------------------------------------------------------------------------------------------------
  * Alert Close
  * --------------------------------------------------------------------------------------------- */
 interface AlertClose {
   (props: {asChild: true} & React.ComponentProps<"button">): React.JSX.Element;
   (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
-  displayName: string;
 }
+
 const AlertClose: AlertClose = (props) => {
   const {slots} = useContext(AlertContext);
 
@@ -178,18 +184,22 @@ const AlertClose: AlertClose = (props) => {
   );
 };
 
-AlertClose.displayName = "AlertClose";
+/* ------------------------------------------------------------------------------------------------
+ * Types
+ * --------------------------------------------------------------------------------------------- */
+type AlertActionProps =
+  | ({asChild: true} & React.ComponentProps<"button">)
+  | ({asChild?: false} & ButtonPrimitiveProps);
+
+type AlertCloseProps =
+  | ({asChild: true} & React.ComponentProps<"button">)
+  | ({asChild?: false} & ButtonPrimitiveProps);
+
 /* ------------------------------------------------------------------------------------------------
  * Exports
  * --------------------------------------------------------------------------------------------- */
 export {AlertRoot, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose};
-// For AlertAction and AlertClose, we need to export their prop types
-type AlertActionProps =
-  | ({asChild: true} & React.ComponentProps<"button">)
-  | ({asChild?: false} & ButtonPrimitiveProps);
-type AlertCloseProps =
-  | ({asChild: true} & React.ComponentProps<"button">)
-  | ({asChild?: false} & ButtonPrimitiveProps);
+
 export type {
   AlertRootProps,
   AlertIconProps,

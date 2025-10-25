@@ -6,9 +6,12 @@ import React from "react";
 
 import {switchGroupVariants} from "./switch-group.styles";
 
-interface SwitchGroupProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Switch Group Root
+ * -----------------------------------------------------------------------------------------------*/
+interface SwitchGroupRootProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
 
-const SwitchGroup = ({children, className, orientation, ...props}: SwitchGroupProps) => {
+const SwitchGroupRoot = ({children, className, orientation, ...props}: SwitchGroupRootProps) => {
   const slots = React.useMemo(() => switchGroupVariants({orientation}), [orientation]);
 
   return (
@@ -18,5 +21,9 @@ const SwitchGroup = ({children, className, orientation, ...props}: SwitchGroupPr
   );
 };
 
-export {SwitchGroup};
-export type {SwitchGroupProps};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {SwitchGroupRoot};
+
+export type {SwitchGroupRootProps};

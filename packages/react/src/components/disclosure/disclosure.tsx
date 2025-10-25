@@ -24,14 +24,18 @@ import {IconChevronDown} from "../icons";
 
 import {disclosureVariants} from "./disclosure.styles";
 
-const DisclosureContext = createContext<{
+/* ------------------------------------------------------------------------------------------------
+ * Disclosure Context
+ * --------------------------------------------------------------------------------------------- */
+type DisclosureContext = {
   slots?: ReturnType<typeof disclosureVariants>;
-}>({});
+};
+
+const DisclosureContext = createContext<DisclosureContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Root
  * -----------------------------------------------------------------------------------------------*/
-
 interface DisclosureRootProps extends DisclosurePrimitiveProps, DisclosureVariants {}
 
 const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootProps) => {
@@ -56,9 +60,8 @@ const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootP
 };
 
 /* -------------------------------------------------------------------------------------------------
- * DisclosureHeading
+ * Disclosure Heading
  * -----------------------------------------------------------------------------------------------*/
-
 interface DisclosureHeadingProps extends React.ComponentProps<typeof DisclosureHeadingPrimitive> {
   className?: string;
 }
@@ -76,9 +79,8 @@ const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * DisclosureTrigger
+ * Disclosure Trigger
  * -----------------------------------------------------------------------------------------------*/
-
 interface DisclosureTriggerProps extends ButtonProps {}
 
 const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
@@ -99,9 +101,8 @@ const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * DisclosureContent
+ * Disclosure Content
  * -----------------------------------------------------------------------------------------------*/
-
 interface DisclosureContentProps extends DisclosurePanelProps {}
 
 const DisclosureContent = ({children, className, ...props}: DisclosureContentProps) => {
@@ -123,9 +124,8 @@ const DisclosureContent = ({children, className, ...props}: DisclosureContentPro
 };
 
 /* -------------------------------------------------------------------------------------------------
- * DisclosureBody
+ * Disclosure Body
  * -----------------------------------------------------------------------------------------------*/
-
 interface DisclosureBodyContentProps extends React.ComponentProps<"div"> {
   className?: string;
 }
@@ -141,9 +141,8 @@ const DisclosureBody = ({children, className, ...props}: DisclosureBodyContentPr
 };
 
 /* -------------------------------------------------------------------------------------------------
- * DisclosureIndicator
+ * Disclosure Indicator
  * -----------------------------------------------------------------------------------------------*/
-
 interface DisclosureIndicatorProps extends React.ComponentProps<"svg"> {
   className?: string;
 }
@@ -181,6 +180,14 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {
+  DisclosureRoot,
+  DisclosureHeading,
+  DisclosureTrigger,
+  DisclosureContent,
+  DisclosureBody,
+  DisclosureIndicator,
+};
 
 export type {
   DisclosureRootProps,
@@ -189,13 +196,4 @@ export type {
   DisclosureTriggerProps,
   DisclosureIndicatorProps,
   DisclosureBodyContentProps,
-};
-
-export {
-  DisclosureRoot,
-  DisclosureHeading,
-  DisclosureTrigger,
-  DisclosureContent,
-  DisclosureBody,
-  DisclosureIndicator,
 };

@@ -10,10 +10,14 @@ import {composeTwRenderProps} from "../../utils";
 
 import {buttonVariants} from "./button.styles";
 
-interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
+/* -------------------------------------------------------------------------------------------------
+ * Button Root
+ * -----------------------------------------------------------------------------------------------*/
+interface ButtonRootProps extends ButtonPrimitiveProps, ButtonVariants {
   asChild?: boolean;
 }
-const Button = ({
+
+const ButtonRoot = ({
   asChild,
   children,
   className,
@@ -23,7 +27,7 @@ const Button = ({
   style,
   variant,
   ...rest
-}: ButtonProps) => {
+}: ButtonRootProps) => {
   const styles = buttonVariants({
     isIconOnly,
     size,
@@ -56,5 +60,9 @@ const Button = ({
   );
 };
 
-export type {ButtonProps};
-export {Button};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {ButtonRoot};
+
+export type {ButtonRootProps};

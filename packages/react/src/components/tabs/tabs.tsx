@@ -21,15 +21,19 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {tabsVariants} from "./tabs.styles";
 
-const TabsContext = createContext<{
+/* -------------------------------------------------------------------------------------------------
+ * Tabs Context
+ * -----------------------------------------------------------------------------------------------*/
+type TabsContext = {
   slots?: ReturnType<typeof tabsVariants>;
   orientation?: "horizontal" | "vertical";
-}>({});
+};
+
+const TabsContext = createContext<TabsContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Tabs
+ * Tabs Root
  * -----------------------------------------------------------------------------------------------*/
-
 interface TabsRootProps extends TabsPrimitiveProps, TabsVariants {
   children: React.ReactNode;
   className?: string;
@@ -52,8 +56,9 @@ const TabsRoot = ({children, className, orientation = "horizontal", ...props}: T
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tabs List Wrapper
+ * -----------------------------------------------------------------------------------------------*/
 interface TabListWrapperProps extends React.ComponentProps<"div"> {
   className?: string;
 }
@@ -68,8 +73,9 @@ const TabListWrapper = ({children, className, ...props}: TabListWrapperProps) =>
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tabs List
+ * -----------------------------------------------------------------------------------------------*/
 interface TabListProps extends TabListPrimitiveProps<object> {
   children: React.ReactNode;
   className?: string;
@@ -89,8 +95,9 @@ const TabList = ({children, className, ...props}: TabListProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tab
+ * -----------------------------------------------------------------------------------------------*/
 interface TabProps extends TabPrimitiveProps {
   className?: string;
 }
@@ -109,8 +116,9 @@ const Tab = ({children, className, ...props}: TabProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tab Indicator
+ * -----------------------------------------------------------------------------------------------*/
 interface TabIndicatorProps extends React.ComponentProps<typeof SelectionIndicatorPrimitive> {
   className?: string;
 }
@@ -127,8 +135,9 @@ const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tab Panel
+ * -----------------------------------------------------------------------------------------------*/
 interface TabPanelProps extends Omit<TabPanelPrimitiveProps, "children"> {
   children: React.ReactNode;
   className?: string;
@@ -148,8 +157,9 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
 
 export type {

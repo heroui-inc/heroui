@@ -11,10 +11,14 @@ import {CloseIcon} from "../icons";
 
 import {closeButtonVariants} from "./close-button.styles";
 
-interface CloseButtonProps extends ButtonPrimitiveProps, CloseButtonVariants {
+/* -------------------------------------------------------------------------------------------------
+ * Close Button Root
+ * -----------------------------------------------------------------------------------------------*/
+interface CloseButtonRootProps extends ButtonPrimitiveProps, CloseButtonVariants {
   asChild?: boolean;
 }
-const CloseButton = ({
+
+const CloseButtonRoot = ({
   asChild,
   children,
   className,
@@ -22,7 +26,7 @@ const CloseButton = ({
   style,
   variant,
   ...rest
-}: CloseButtonProps) => {
+}: CloseButtonRootProps) => {
   const styles = closeButtonVariants({
     variant,
     class: typeof className === "string" ? className : undefined,
@@ -58,5 +62,9 @@ const CloseButton = ({
   );
 };
 
-export type {CloseButtonProps};
-export {CloseButton};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {CloseButtonRoot};
+
+export type {CloseButtonRootProps};

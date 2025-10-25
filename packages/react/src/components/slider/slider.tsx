@@ -14,6 +14,7 @@ import {
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {sliderVariants} from "./slider.styles";
+
 /* -------------------------------------------------------------------------------------------------
  * Slider Context
  * -----------------------------------------------------------------------------------------------*/
@@ -22,12 +23,14 @@ interface SliderContext {
   orientation?: "horizontal" | "vertical";
   isDisabled?: boolean;
 }
+
 const SliderContext = createContext<SliderContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Root
  * -----------------------------------------------------------------------------------------------*/
 interface SliderRootProps extends React.ComponentProps<typeof SliderPrimitive>, SliderVariants {}
+
 const SliderRoot = ({
   children,
   className,
@@ -61,6 +64,7 @@ const SliderRoot = ({
  * Slider Header
  * -----------------------------------------------------------------------------------------------*/
 interface SliderHeaderProps extends React.ComponentProps<"div"> {}
+
 const SliderHeader = ({className, ...props}: SliderHeaderProps) => {
   const {slots} = useContext(SliderContext);
 
@@ -71,6 +75,7 @@ const SliderHeader = ({className, ...props}: SliderHeaderProps) => {
  * Slider Label
  * -----------------------------------------------------------------------------------------------*/
 interface SliderLabelProps extends React.ComponentProps<"label"> {}
+
 const SliderLabel = ({className, ...props}: SliderLabelProps) => {
   const {slots} = useContext(SliderContext);
 
@@ -83,6 +88,7 @@ const SliderLabel = ({className, ...props}: SliderLabelProps) => {
  * Slider Output
  * -----------------------------------------------------------------------------------------------*/
 interface SliderOutputProps extends React.ComponentProps<typeof SliderOutputPrimitive> {}
+
 const SliderOutput = ({className, ...props}: SliderOutputProps) => {
   const {slots} = useContext(SliderContext);
 
@@ -148,6 +154,7 @@ const SliderFill = ({className, percentage, style, ...props}: SliderFillProps) =
  * Slider Thumb
  * -----------------------------------------------------------------------------------------------*/
 interface SliderThumbProps extends React.ComponentProps<typeof SliderThumbPrimitive> {}
+
 const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
   const {slots} = useContext(SliderContext);
 
@@ -166,6 +173,7 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
  * Slider Marks
  * -----------------------------------------------------------------------------------------------*/
 interface SliderMarksProps extends React.ComponentProps<"div"> {}
+
 const SliderMarks = ({className, ...props}: SliderMarksProps) => {
   const {slots} = useContext(SliderContext);
 
