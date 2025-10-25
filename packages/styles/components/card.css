@@ -3,7 +3,7 @@
 /* Block */
 .card {
   @apply relative flex flex-col gap-3 overflow-hidden p-4;
-  @apply rounded-panel border-border;
+  @apply border-border rounded-3xl;
 
   /* Border */
   border-width: var(--border-width);

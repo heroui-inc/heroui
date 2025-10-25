@@ -108,7 +108,7 @@ export const Horizontal: Story = {
     <Card.Root className="w-full items-stretch md:flex-row" {...args}>
       <img
         alt="Porsche 911 Golden Edition"
-        className="rounded-panel pointer-events-none aspect-square w-full select-none object-cover md:max-w-[136px]"
+        className="pointer-events-none aspect-square w-full select-none rounded-3xl object-cover md:max-w-[136px]"
         loading="lazy"
         src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
       />
@@ -145,7 +145,7 @@ export const WithAvatar: Story = {
       <Card.Root className="w-[200px] gap-2" {...args}>
         <img
           alt="Indie Hackers community"
-          className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/device.png"
         />
@@ -168,7 +168,7 @@ export const WithAvatar: Story = {
       <Card.Root className="w-[200px] gap-2" {...args}>
         <img
           alt="AI Builders community"
-          className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/ai-bot.png"
         />
@@ -230,7 +230,7 @@ export const WithImage: Story = {
 export const WithBackgroundImage: Story = {
   render: (args) => (
     <div className="flex flex-row items-center justify-center gap-6">
-      <Card.Root className="rounded-panel h-[337px] w-[280px]" {...args}>
+      <Card.Root className="h-[337px] w-[280px] rounded-3xl" {...args}>
         {/* Background image */}
         <img
           alt="Happy pet"
@@ -293,7 +293,7 @@ export const WithBackgroundImage: Story = {
         </Card.Footer>
       </Card.Root>
 
-      <Card.Root className="rounded-panel h-[336px] w-[390px]" {...args}>
+      <Card.Root className="h-[336px] w-[390px] rounded-3xl" {...args}>
         {/* Background image */}
         <img
           alt="Beautiful aerial view of Buenos Aires cityscape"

@@ -40,7 +40,7 @@ const Template = (props: DisclosureGroupProps) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-surface-1 shadow-panel rounded-panel flex flex-col gap-4 p-4">
+      <div className="bg-surface-1 shadow-panel flex flex-col gap-4 rounded-3xl p-4">
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
           <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
@@ -129,7 +129,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-surface-1 shadow-panel rounded-panel flex flex-col gap-4 p-4">
+      <div className="bg-surface-1 shadow-panel flex flex-col gap-4 rounded-3xl p-4">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-lg font-semibold">HeroUI Native</h3>
           <div className="flex gap-2">

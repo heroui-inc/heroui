@@ -4,8 +4,37 @@
 
 /* Animation types */
 .skeleton--shimmer {
-  &:before {
+  &::after {
     @apply animate-skeleton via-surface-3 absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
+  }
+
+  /* When applied to a parent container with multiple skeletons */
+  &:has(.skeleton) {
+    &::after {
+      content: none;
+    }
+
+    /* Single synchronized shimmer that passes over all children */
+    &::before {
+      @apply animate-skeleton absolute inset-0 -translate-x-full content-[''];
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        transparent 100%
+      );
+      z-index: 10;
+      pointer-events: none;
+      /* Use mix-blend-mode to only show over skeleton elements */
+      mix-blend-mode: overlay;
+    }
+
+    /* Ensure children don't have their own shimmer */
+    & .skeleton {
+      &::after {
+        content: none;
+      }
+    }
   }
 }
 

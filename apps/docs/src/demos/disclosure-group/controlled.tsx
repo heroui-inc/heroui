@@ -23,7 +23,7 @@ export function Controlled() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="rounded-panel flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 rounded-3xl p-4">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-lg font-semibold">HeroUI Native</h3>
           <div className="flex gap-2">

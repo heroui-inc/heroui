@@ -8,7 +8,7 @@ export function WithAvatar() {
       <Card.Root className="w-[200px] gap-2">
         <img
           alt="Indie Hackers community"
-          className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/device.png"
         />
@@ -31,7 +31,7 @@ export function WithAvatar() {
       <Card.Root className="w-[200px] gap-2">
         <img
           alt="AI Builders community"
-          className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/ai-bot.png"
         />

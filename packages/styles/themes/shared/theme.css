@@ -151,11 +151,6 @@
   --radius-3xl: calc(var(--radius) * 3); /* 1.5rem (24px) */
   --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
 
-  /* Semantic Radius */
-  /* Panel specific radius - used on components like popovers, dropdowns, modals, cards, etc. */
-  --radius-panel: var(--radius-xl); /* 0.75rem (12px) */
-  --radius-panel-inner: var(--radius-2xl); /* 1rem (16px) */
-
   /* Transition Timing Functions  */
   --ease-smooth: ease; /* same as transition: ease; */
   /* These custom curves are made by https://twitter.com/bdc */

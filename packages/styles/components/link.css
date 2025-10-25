@@ -1,6 +1,6 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit items-center underline-offset-4 hover:underline;
+  @apply text-link relative inline-flex h-fit items-center text-sm underline-offset-4 hover:underline;
 
   transition:
     color 150ms var(--ease-smooth),
