@@ -11,6 +11,14 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
+  /* Hover state */
+  &:hover,
+  &[data-hovered="true"] {
+    .link__icon {
+      @apply opacity-100;
+    }
+  }
+
   /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
@@ -28,6 +36,7 @@
 
   .link__icon {
     @apply pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
+    transition: opacity 150ms var(--ease-out);
   }
 
   .link__icon[data-default-icon="true"] {
@@ -36,6 +45,10 @@
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
+
+    .link__icon {
+      transition: none;
+    }
   }
 }
 
