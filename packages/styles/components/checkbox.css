@@ -54,7 +54,7 @@
 
 /* Checkbox control (the square button) */
 .checkbox__control {
-  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded border outline-none [border-width:var(--border-width-field)];
+  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded outline-none;
 
   transition: all 200ms var(--ease-out);
 
@@ -90,17 +90,18 @@
   .checkbox[data-invalid="true"][data-selected="true"] &,
   .checkbox[aria-invalid="true"][aria-checked="true"] &,
   .checkbox[aria-invalid="true"][data-selected="true"] & {
-    @apply border-danger;
-  }
-
-  .checkbox:active[data-selected="true"] &,
-  .checkbox[data-pressed="true"][data-selected="true"] & {
-    @apply bg-accent-hover;
+    @apply bg-danger border-danger;
   }
 
   /* Indeterminate state */
   .checkbox[data-indeterminate="true"] & {
     @apply bg-accent;
+  }
+
+  /* Indeterminate + Invalid state */
+  .checkbox[data-indeterminate="true"][aria-invalid="true"] &,
+  .checkbox[data-indeterminate="true"][data-invalid="true"] & {
+    @apply bg-danger border-danger;
   }
 
   .checkbox:active[data-indeterminate="true"] &,
