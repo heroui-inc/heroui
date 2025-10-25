@@ -4,6 +4,12 @@ import clsx from "clsx";
 
 import {mapPropsVariants} from "./utils";
 
+/**
+ * Extracts slot names from variant configurations.
+ * Traverses: variants -> variant groups -> variant configs -> slot names
+ * @param {Object} variants - Nested object: { variantName: { value: { slotName: "...", ... } } }
+ * @returns {Object} Map of slot names to empty strings
+ */
 function getSlots(variants) {
   if (!variants || typeof variants !== "object") return {};
 
@@ -13,6 +19,7 @@ function getSlots(variants) {
     if (!group || typeof group !== "object") continue;
 
     for (const config of Object.values(group)) {
+      // Skip non-objects, arrays (which would yield numeric indices), and String objects
       if (
         !config ||
         typeof config !== "object" ||
