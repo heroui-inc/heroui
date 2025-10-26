@@ -1,10 +1,5 @@
 import type {ClassValue, StringToBoolean, OmitUndefined, ClassProp} from "tailwind-variants";
-import type {
-  ForwardRefExoticComponent,
-  JSXElementConstructor,
-  PropsWithoutRef,
-  RefAttributes,
-} from "react";
+import type {ForwardRefExoticComponent, JSXElementConstructor, RefAttributes} from "react";
 
 type SlotsClassValue<S> = {
   [K in keyof S]?: ClassValue;
@@ -105,12 +100,11 @@ export type ExtendVariants = {
     },
     opts?: Options,
   ): ForwardRefExoticComponent<
-    PropsWithoutRef<{
-      [key in keyof CP | keyof V]?:
+    {
+      [key in Exclude<keyof CP | keyof V, "ref">]?:
         | (key extends keyof CP ? CP[key] : never)
         | (key extends keyof V ? StringToBoolean<keyof NonNullable<V[key]>> : never);
-    }> &
-      RefAttributes<InferRef<C>>
+    } & RefAttributes<InferRef<C>>
   >;
 };
 
