@@ -57,17 +57,21 @@ const TabsRoot = ({children, className, orientation = "horizontal", ...props}: T
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Tabs List Wrapper
+ * Tabs List Container
  * -----------------------------------------------------------------------------------------------*/
-interface TabListWrapperProps extends React.ComponentProps<"div"> {
+interface TabListContainerProps extends React.ComponentProps<"div"> {
   className?: string;
 }
 
-const TabListWrapper = ({children, className, ...props}: TabListWrapperProps) => {
+const TabListContainer = ({children, className, ...props}: TabListContainerProps) => {
   const {slots} = useContext(TabsContext);
 
   return (
-    <div className={slots?.tabListWrapper({className})} data-slot="tabs-list-wrapper" {...props}>
+    <div
+      className={slots?.tabListContainer({className})}
+      data-slot="tabs-list-container"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -160,11 +164,11 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel};
+export {TabsRoot, TabListContainer, TabList, Tab, TabIndicator, TabPanel};
 
 export type {
   TabsRootProps,
-  TabListWrapperProps,
+  TabListContainerProps,
   TabListProps,
   TabProps,
   TabIndicatorProps,

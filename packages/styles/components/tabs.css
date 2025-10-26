@@ -12,12 +12,12 @@
   }
 }
 
-/* Tab list wrapper */
-.tabs__list-wrapper {
+/* Tab list container */
+.tabs__list-container {
   @apply relative;
 }
 
-/* Tab list container */
+/* Tab list */
 .tabs__list {
   @apply bg-surface-2 inline-flex p-1;
 

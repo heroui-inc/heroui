@@ -8,7 +8,7 @@ export const tabsVariants = tv({
     base: "tabs",
     tab: "tabs__tab",
     tabIndicator: "tabs__indicator",
-    tabListWrapper: "tabs__list-wrapper",
+    tabListContainer: "tabs__list-container",
     tabList: "tabs__list",
     tabPanel: "tabs__panel",
   },
