@@ -6,7 +6,7 @@ type SlotsClassValue<S> = {
 };
 
 type Variants<S> = {
-  [K: string]: {[P: string]: S extends undefined ? ClassValue : SlotsClassValue<S>};
+  [K: string]: {[P: string]: GetSuggestedValues<S>};
 };
 
 type ComponentProps<C> = C extends JSXElementConstructor<infer P> ? P : never;
@@ -15,7 +15,7 @@ type ComponentSlots<CP> = CP extends {classNames?: infer S} ? S : undefined;
 
 type ValidateSubtype<T, U> = OmitUndefined<T> extends U ? "true" : "false";
 
-type GetSuggestedValues<S> = S extends undefined ? ClassValue : SlotsClassValue<S>;
+type GetSuggestedValues<S> = ClassValue | (S extends undefined ? never : SlotsClassValue<S>);
 
 type SuggestedVariants<CP, S> = {
   [K in keyof CP]?: ValidateSubtype<CP[K], string> extends "true"
@@ -43,9 +43,7 @@ type VariantValue<V, SV> = {
 
 type DefaultVariants<V, SV> = VariantValue<V, SV>;
 
-type CompoundVariants<V, SV, S> = Array<
-  VariantValue<V, SV> & ClassProp<ClassValue | GetSuggestedValues<S>>
->;
+type CompoundVariants<V, SV, S> = Array<VariantValue<V, SV> & ClassProp<GetSuggestedValues<S>>>;
 
 type Options = {
   /**
