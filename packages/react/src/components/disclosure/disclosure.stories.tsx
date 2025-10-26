@@ -25,12 +25,12 @@ export default {
   title: "Components/Navigation/Disclosure",
 } as Meta<typeof Disclosure.Root>;
 
-const defaultArgs: Disclosure.RootProps = {
+const defaultArgs: Disclosure["RootProps"] = {
   isDisabled: false,
   isExpanded: false,
 };
 
-const Template = (props: Disclosure.RootProps) => {
+const Template = (props: Disclosure["RootProps"]) => {
   const [isExpanded, setIsExpanded] = React.useState(props.isExpanded ?? false);
 
   return (
@@ -65,7 +65,7 @@ const Template = (props: Disclosure.RootProps) => {
   );
 };
 
-const ControlledTemplate = (props: Disclosure.RootProps) => {
+const ControlledTemplate = (props: Disclosure["RootProps"]) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
@@ -99,7 +99,7 @@ const ControlledTemplate = (props: Disclosure.RootProps) => {
   );
 };
 
-const ProductDetailsTemplate = (props: Disclosure.RootProps) => {
+const ProductDetailsTemplate = (props: Disclosure["RootProps"]) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (

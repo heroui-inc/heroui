@@ -44,11 +44,11 @@ export default {
   title: "Components/Overlays/Tooltip",
 } as Meta<typeof Tooltip.Root>;
 
-const defaultArgs: Omit<Tooltip.ContentProps, "children"> = {
+const defaultArgs: Omit<Tooltip["ContentProps"], "children"> = {
   showArrow: true,
 };
 
-const Template = (props: Tooltip.ContentProps) => (
+const Template = (props: Tooltip["ContentProps"]) => (
   <div className="flex items-center gap-3">
     <Tooltip.Root delay={0}>
       <Button isIconOnly variant="tertiary">
@@ -62,7 +62,7 @@ const Template = (props: Tooltip.ContentProps) => (
   </div>
 );
 
-const TemplateWithTrigger = (props: Tooltip.ContentProps) => (
+const TemplateWithTrigger = (props: Tooltip["ContentProps"]) => (
   <div className="flex items-center gap-3">
     <Tooltip.Root delay={0}>
       <Tooltip.Trigger aria-label="Tooltip trigger">

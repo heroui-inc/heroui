@@ -13,7 +13,7 @@ export default {
   title: "Components/Navigation/Link",
 } as Meta<typeof Link.Root>;
 
-const DefaultTemplate = (_props: Link.RootProps) => (
+const DefaultTemplate = (_props: Link["RootProps"]) => (
   <div className="flex items-center gap-4">
     <Link.Root href="#">
       Call to action
@@ -35,7 +35,7 @@ const DefaultTemplate = (_props: Link.RootProps) => (
   </div>
 );
 
-const CustomIconTemplate = (_props: Link.RootProps) => (
+const CustomIconTemplate = (_props: Link["RootProps"]) => (
   <div className="flex items-center gap-4">
     <Link.Root href="#">
       External Link
@@ -54,7 +54,7 @@ const CustomIconTemplate = (_props: Link.RootProps) => (
   </div>
 );
 
-const IconPlacementTemplate = (_props: Link.RootProps) => (
+const IconPlacementTemplate = (_props: Link["RootProps"]) => (
   <div className="flex flex-col gap-4">
     <Link.Root href="#">
       Icon at end (default)

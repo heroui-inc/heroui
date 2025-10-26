@@ -7,9 +7,12 @@ import {Text} from "react-aria-components";
 
 import {descriptionVariants} from "./description.styles";
 
-interface DescriptionProps extends TextProps, DescriptionVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Description Root
+ * -----------------------------------------------------------------------------------------------*/
+interface DescriptionRootProps extends TextProps, DescriptionVariants {}
 
-const Description = ({children, className, ...rest}: DescriptionProps) => {
+const DescriptionRoot = ({children, className, ...rest}: DescriptionRootProps) => {
   return (
     <Text
       className={descriptionVariants({className})}
@@ -22,5 +25,9 @@ const Description = ({children, className, ...rest}: DescriptionProps) => {
   );
 };
 
-export type {DescriptionProps};
-export {Description};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {DescriptionRoot};
+
+export type {DescriptionRootProps};

@@ -1,4 +1,4 @@
-import type {AvatarRootProps, AvatarVariants} from "./index";
+import type {AvatarVariants} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -23,7 +23,7 @@ export default {
   title: "Components/Media/Avatar",
 } as Meta<typeof Avatar.Root>;
 
-const defaultArgs: AvatarRootProps = {};
+const defaultArgs: Avatar["RootProps"] = {};
 
 const users = [
   {
@@ -81,7 +81,7 @@ const circles = [
   },
 ];
 
-const Template = ({color, size}: AvatarRootProps) => (
+const Template = ({color, size}: Avatar["RootProps"]) => (
   <div className="flex items-start gap-4">
     <div className="flex flex-col gap-4">
       <Avatar.Root color={color} size={size}>

@@ -1,5 +1,47 @@
+import type {ComponentProps} from "react";
+
+import {
+  CalendarCell,
+  CalendarGrid,
+  CalendarGridHeader,
+  CalendarHeader,
+  CalendarHeaderCell,
+  CalendarHeading,
+  CalendarNavButton,
+  CalendarRoot,
+} from "./calendar";
+
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Calendar = Object.assign(CalendarRoot, {
+  Root: CalendarRoot,
+  Header: CalendarHeader,
+  Heading: CalendarHeading,
+  NavButton: CalendarNavButton,
+  Grid: CalendarGrid,
+  GridHeader: CalendarGridHeader,
+  HeaderCell: CalendarHeaderCell,
+  Cell: CalendarCell,
+});
+
+export type Calendar = {
+  Props: ComponentProps<typeof CalendarRoot>;
+  RootProps: ComponentProps<typeof CalendarRoot>;
+  HeaderProps: ComponentProps<typeof CalendarHeader>;
+  HeadingProps: ComponentProps<typeof CalendarHeading>;
+  NavButtonProps: ComponentProps<typeof CalendarNavButton>;
+  GridProps: ComponentProps<typeof CalendarGrid>;
+  GridHeaderProps: ComponentProps<typeof CalendarGridHeader>;
+  HeaderCellProps: ComponentProps<typeof CalendarHeaderCell>;
+  CellProps: ComponentProps<typeof CalendarCell>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
 export {
-  Calendar,
+  CalendarRoot,
   CalendarHeader,
   CalendarHeading,
   CalendarNavButton,
@@ -7,10 +49,11 @@ export {
   CalendarGridHeader,
   CalendarHeaderCell,
   CalendarCell,
-} from "./calendar";
+};
 
 export type {
-  CalendarProps,
+  CalendarRootProps,
+  CalendarRootProps as CalendarProps,
   CalendarHeaderProps,
   CalendarHeadingProps,
   CalendarNavButtonProps,
@@ -20,4 +63,9 @@ export type {
   CalendarCellProps,
 } from "./calendar";
 
-export {calendarVariants, type CalendarVariants} from "./calendar.styles";
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export {calendarVariants} from "./calendar.styles";
+
+export type {CalendarVariants} from "./calendar.styles";

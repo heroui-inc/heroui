@@ -23,7 +23,7 @@ export default {
   title: "Components/Navigation/Accordion",
 } as Meta<typeof Accordion.Root>;
 
-const defaultArgs: Accordion.RootProps = {
+const defaultArgs: Accordion["RootProps"] = {
   allowsMultipleExpanded: false,
   isDisabled: false,
 };
@@ -32,7 +32,7 @@ const Wrapper = ({children, className}: {children: React.ReactNode; className?: 
   <div className={cnBase("w-full max-w-md", className)}>{children}</div>
 );
 
-const Template = (props: Accordion.RootProps) => (
+const Template = (props: Accordion["RootProps"]) => (
   <Wrapper>
     <Accordion.Root {...props}>
       {items.map((item, index) => (
@@ -57,7 +57,7 @@ const Template = (props: Accordion.RootProps) => (
   </Wrapper>
 );
 
-const CustomTemplate = (props: Accordion.RootProps) => (
+const CustomTemplate = (props: Accordion["RootProps"]) => (
   <div className="flex w-full justify-center px-4 py-8">
     <div className="w-full max-w-2xl">
       <div className="flex flex-col gap-1">
@@ -110,7 +110,7 @@ export const PanelVariant = {
     variant: "panel",
     allowsMultipleExpanded: true,
   },
-  render: (args: Accordion.RootProps) => (
+  render: (args: Accordion["RootProps"]) => (
     <section className="bg-background-tertiary flex h-screen w-screen items-center justify-center">
       <Template {...args} />
     </section>
@@ -122,7 +122,7 @@ export const Custom = {
     ...defaultArgs,
     allowsMultipleExpanded: true,
   },
-  render: (args: Accordion.RootProps) => (
+  render: (args: Accordion["RootProps"]) => (
     <section className="bg-background-tertiary flex h-screen w-screen items-center justify-center">
       <CustomTemplate {...args} />
     </section>

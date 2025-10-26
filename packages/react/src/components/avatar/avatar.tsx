@@ -12,9 +12,14 @@ import {dataAttr} from "../../utils/assertion";
 
 import {avatarVariants} from "./avatar.styles";
 
-const AvatarContext = createContext<{
+/* ------------------------------------------------------------------------------------------------
+ * Avatar Context
+ * --------------------------------------------------------------------------------------------- */
+type AvatarContext = {
   slots?: ReturnType<typeof avatarVariants>;
-}>({});
+};
+
+const AvatarContext = createContext<AvatarContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Avatar Root
@@ -45,6 +50,7 @@ interface AvatarImageProps
   shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
   onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
 }
+
 const AvatarImage = ({
   asChild = false,
   className,
@@ -98,6 +104,7 @@ const AvatarImage = ({
 interface AvatarFallbackProps extends React.ComponentProps<typeof AvatarPrimitive.Fallback> {
   color?: AvatarVariants["color"];
 }
+
 const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
   const {slots} = React.useContext(AvatarContext);
 
@@ -107,5 +114,6 @@ const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};
 export {AvatarRoot, AvatarImage, AvatarFallback};
+
+export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};

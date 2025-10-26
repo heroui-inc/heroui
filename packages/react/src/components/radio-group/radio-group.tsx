@@ -10,9 +10,12 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {radioGroupVariants} from "./radio-group.styles";
 
-interface RadioGroupProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Radio Group Root
+ * -----------------------------------------------------------------------------------------------*/
+interface RadioGroupRootProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
 
-const RadioGroup = ({children, className, ...props}: RadioGroupProps) => {
+const RadioGroupRoot = ({children, className, ...props}: RadioGroupRootProps) => {
   const styles = React.useMemo(() => radioGroupVariants(), []);
 
   return (
@@ -26,5 +29,9 @@ const RadioGroup = ({children, className, ...props}: RadioGroupProps) => {
   );
 };
 
-export {RadioGroup};
-export type {RadioGroupProps};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {RadioGroupRoot};
+
+export type {RadioGroupRootProps};

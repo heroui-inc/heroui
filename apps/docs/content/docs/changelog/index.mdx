@@ -12,6 +12,28 @@ icon: clock-arrow-rotate-left
 ## Latest Release
 
 
+### v3.0.0-alpha.36
+
+**October 28, 2025**
+
+#### Flexible Component Patterns
+- Dual syntax support: use components with or without `.Root` suffix (e.g., `<Avatar>` or `<Avatar.Root>`)
+- Three equivalent patterns: compound without `.Root`, compound with `.Root`, named exports
+- Backward compatible with alpha.35 `.Root` pattern
+- **(⚠️ Breaking change)**: Type references require object syntax (`Avatar["RootProps"]` instead of `Avatar.RootProps`)
+
+#### Tabs Component Refactoring
+- **(⚠️ Breaking change)**: Renamed `TabListWrapper` → `TabListContainer` across all exports
+- Updated CSS class `.tabs__list-wrapper` → `.tabs__list-container`
+- Updated data attribute `data-slot="tabs-list-wrapper"` → `data-slot="tabs-list-container"`
+- Simple migration via global find and replace
+
+[Read full release notes →](/docs/changelog/v3-0-0-alpha-36)
+
+---
+
+## Previous Releases
+
 ### v3.0.0-alpha.35
 
 **October 21, 2025**
@@ -36,10 +58,6 @@ icon: clock-arrow-rotate-left
 All compound components now require `.Root` suffix: `Accordion`, `Avatar`, `Card`, `Disclosure`, `Fieldset`, `Kbd`, `Link`, `Popover`, `Radio`, `Switch`, `Tabs`, `Tooltip`
 
 [Read full release notes →](/docs/changelog/v3-0-0-alpha-35)
-
----
-
-## Previous Releases
 
 ### v3.0.0-alpha.34
 
