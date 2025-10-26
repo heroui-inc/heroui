@@ -5,14 +5,10 @@
 
 /* Avatar image element */
 .avatar__image {
-  @apply absolute inset-0 aspect-square opacity-0 transition-[opacity] duration-300 data-[loaded=true]:opacity-100;
+  @apply reduce-motion:transition-none absolute inset-0 aspect-square opacity-0 transition-[opacity] duration-300 data-[loaded=true]:opacity-100;
 
   &[data-loading-status="failed"] {
     @apply hidden;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 

@@ -19,7 +19,7 @@ export default {
 const defaultArgs: SkeletonProps = {};
 
 const Template = (props: SkeletonProps) => (
-  <div className="bg-surface-1 shadow-panel w-[200px] space-y-5 rounded-3xl p-4">
+  <div className="bg-surface-1 shadow-surface w-[200px] space-y-5 rounded-3xl p-4">
     <Skeleton className="h-24 rounded-xl" {...props} />
     <div className="space-y-3">
       <Skeleton className="h-3 w-3/5 rounded-lg" {...props} />

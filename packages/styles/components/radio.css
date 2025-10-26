@@ -23,9 +23,9 @@
 
 /* Radio control (the circular button) */
 .radio__control {
-  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
+  @apply bg-field shadow-field reduce-motion:transition-none relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
 
-  transition: all 200ms var(--ease-out);
+  transition: all 300ms var(--ease-out);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -40,6 +40,14 @@
   .radio:hover &,
   .radio[data-hovered="true"] & {
     @apply border-field-border-hover;
+  }
+
+  /* Hover state - only when not selected */
+  .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
+  .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
+    .radio__indicator:empty::before {
+      @apply bg-field-hover;
+    }
   }
 
   /* Selected state */
@@ -66,10 +74,6 @@
   .radio[data-pressed="true"][data-selected="true"] & {
     @apply bg-accent-hover;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
 /* Radio indicator (the inner dot) */
@@ -81,29 +85,24 @@
 
 .radio__indicator:empty::before {
   content: "";
-  @apply bg-background rounded-full;
+  @apply bg-field reduce-motion:transition-none rounded-full;
 
   width: 100%;
   height: 100%;
-  transition-duration: 420ms;
-  transition-property: scale;
-  transition-timing-function: var(--ease-fluid-out);
   scale: 1;
+  transition:
+    scale 420ms var(--ease-smooth),
+    background-color 400ms var(--ease-smooth);
 }
 
 .radio[aria-checked="true"] .radio__indicator:empty::before,
 .radio[data-selected="true"] .radio__indicator:empty::before {
+  @apply bg-accent-foreground;
   scale: 0.4286; /* 6px */
 }
 
 .radio[data-selected="true"][data-pressed="true"] .radio__indicator:empty::before {
   scale: 0.5714; /* 8px */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .radio__indicator:empty::before {
-    transition: none;
-  }
 }
 
 /* Radio content wrapper */

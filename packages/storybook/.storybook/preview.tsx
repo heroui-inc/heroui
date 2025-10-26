@@ -10,6 +10,7 @@ import {DARK_MODE_EVENT_NAME} from 'storybook-dark-mode';
 import {withInternationalization} from "./addons/i18n/decorator";
 import {withReactScan} from "./addons/react-scan/decorator";
 import {withReactStrictMode} from "./addons/strict-mode/decorator";
+import {withReduceMotion} from "./addons/reduce-motion/decorator";
 
 import "../styles/globals.css";
 
@@ -89,6 +90,7 @@ const decorators: Preview["decorators"] = [
   withReactScan,
   withReactStrictMode,
   withInternationalization,
+  withReduceMotion,
   (Story) => {
     return (
       <div className="flex h-full w-full items-center justify-center" id="root">

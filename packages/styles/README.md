@@ -143,12 +143,6 @@ The package provides a comprehensive set of CSS variables for customization:
   /* Ring offset - Used for focus ring */
   --ring-offset-width: 2px;
 
-  /* Typography */
-  --font-size-base: 1rem;
-  --font-size-scale-desktop: 0.875;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-
   /* Cursor */
   --cursor-interactive: pointer;
   --cursor-disabled: not-allowed;

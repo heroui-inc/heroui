@@ -1,6 +1,6 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
+  @apply reduce-motion:transition-none text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
 
   transition:
     color 150ms var(--ease-smooth),
@@ -35,20 +35,12 @@
   }
 
   .link__icon {
-    @apply pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
+    @apply reduce-motion:transition-none pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
     transition: opacity 150ms var(--ease-out);
   }
 
   .link__icon[data-default-icon="true"] {
     @apply ml-1 pb-1.5;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-
-    .link__icon {
-      transition: none;
-    }
   }
 }
 
@@ -64,6 +56,7 @@
 .link--underline-hover {
   /* Animated underline on hover (default) */
   &::before {
+    @apply reduce-motion:transition-none;
     content: "";
     @apply absolute left-0 h-px w-full origin-left bg-current;
     bottom: 0;
@@ -75,19 +68,14 @@
   &[data-hovered="true"]::before {
     transform: scaleX(1);
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::before {
-      transition: none;
-    }
-  }
 }
 
 .link--underline-always {
   /* Always visible underline with opacity change */
   &::before {
+    @apply reduce-motion:transition-none absolute left-0 h-px w-full bg-current;
+
     content: "";
-    @apply absolute left-0 h-px w-full bg-current;
     bottom: 0;
     opacity: 0.5;
     transition: opacity 200ms var(--ease-out);
@@ -96,12 +84,6 @@
   &:hover::before,
   &[data-hovered="true"]::before {
     opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::before {
-      transition: none;
-    }
   }
 }
 

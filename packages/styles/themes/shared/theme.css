@@ -32,11 +32,17 @@
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
 
-  --shadow-panel: var(--panel-shadow);
+  --shadow-surface: var(--surface-shadow);
+  --shadow-elevated: var(--elevated-shadow);
   --shadow-field: var(--field-shadow);
 
   /* Form Field Tokens */
   --color-field: var(--field-background, var(--color-default));
+  --color-field-hover: color-mix(
+    in oklab,
+    var(--field-background, var(--color-default)) 90%,
+    var(--field-foreground, var(--color-default-foreground)) 10%
+  );
   --color-field-foreground: var(--field-foreground, var(--color-foreground));
   --color-field-placeholder: var(--field-placeholder, var(--color-muted));
   --color-field-border: var(--field-border, var(--color-border));
@@ -93,7 +99,7 @@
     var(--color-field) 90%,
     var(--color-field-foreground) 2%
   );
-  --color-field-focus: transparent;
+  --color-field-focus: var(--color-field);
   --color-field-border-hover: color-mix(
     in oklab,
     var(--color-field-border) 88%,

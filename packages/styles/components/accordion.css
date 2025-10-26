@@ -19,15 +19,11 @@
 }
 
 .accordion__indicator {
-  @apply text-muted ml-auto size-4 shrink-0 transition duration-300;
+  @apply reduce-motion:transition-none text-muted ml-auto size-4 shrink-0 transition duration-300;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {
     @apply -rotate-180;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 
@@ -50,7 +46,7 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
+  @apply reduce-motion:transition-none flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
 
   transition:
     background-color 150ms var(--ease-out),
@@ -76,10 +72,6 @@
   &[aria-disabled="true"] {
     @apply status-disabled;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
 .accordion__panel {
@@ -93,10 +85,6 @@
 
   &[data-expanded="true"] {
     opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 

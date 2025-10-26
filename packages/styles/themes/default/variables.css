@@ -15,18 +15,12 @@
     --spacing: 0.25rem;
 
     /* Border */
-    --border-width: 1px;
+    --border-width: 0px; /* no border by default */
     --field-border-width: var(--border-width);
     --disabled-opacity: 0.5;
 
     /* Ring offset - Used for focus ring */
     --ring-offset-width: 2px;
-
-    /* Typography */
-    --font-size-base: 1rem;
-    --font-size-scale-desktop: 0.875;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
 
     /* Cursor */
     --cursor-interactive: pointer;
@@ -57,11 +51,11 @@
     --accent-soft: oklch(0.9612 0 0);
     --accent-soft-foreground: oklch(0.6204 0.195 253.83);
 
-    /* Form Field Defaults */
-    --field-background: oklch(0.9612 0 0);
+    /* Form Field Defaults - Colors */
+    --field-background: oklch(0.95 0 0);
     --field-foreground: oklch(0.2103 0.0059 285.89);
     --field-placeholder: var(--muted);
-    --field-border: var(--border);
+    --field-border: transparent; /* no border by default on form fields */
 
     /* Status Colors */
     --success: oklch(0.7329 0.1935 150.81);
@@ -84,9 +78,10 @@
     --link: var(--accent);
 
     /* Shadows */
-    --panel-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.03), 0 2px 10px 0 rgba(0, 0, 0, 0.08);
-    /* Shadow used for form fields */
-    --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --surface-shadow: 0 0px 0px 0 rgba(24, 24, 27, 0.03), 0 2px 10px 0 rgba(24, 24, 27, 0.08);
+    --elevated-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
+    --field-shadow:
+      0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 0px 0px 0 rgba(0, 0, 0, 0.05); /* no shadow by default on form fields */
     /* Skeleton Default Global Animation */
     --skeleton-animation: shimmer; /* shimmer, pulse, none */
   }
@@ -137,7 +132,8 @@
     --link: var(--foreground);
 
     /* Shadows */
-    --panel-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    --surface-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    --elevated-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 }

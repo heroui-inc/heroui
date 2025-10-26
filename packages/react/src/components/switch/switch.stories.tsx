@@ -49,6 +49,16 @@ export const DefaultSelected: Story = {
   ),
 };
 
+export const DisabledDefaultSelected: Story = {
+  render: () => (
+    <Switch.Root defaultSelected isDisabled>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+    </Switch.Root>
+  ),
+};
+
 export const Controlled: Story = {
   render: function ControlledSwitch() {
     const [isSelected, setIsSelected] = React.useState(false);
@@ -163,26 +173,31 @@ export const WithIcons: Story = {
         off: "gravity-ui:volume-fill",
         on: "gravity-ui:volume-slash-fill",
         selectedControlClass: "bg-blue-500",
+        selectedIconClass: "text-blue-600",
       },
       microphone: {
         off: "gravity-ui:microphone",
         on: "gravity-ui:microphone-slash",
         selectedControlClass: "bg-red-500",
+        selectedIconClass: "text-red-600",
       },
       check: {
         off: "gravity-ui:power",
         on: "gravity-ui:check",
         selectedControlClass: "bg-green-500",
+        selectedIconClass: "text-green-600",
       },
       darkMode: {
         off: "gravity-ui:moon",
         on: "gravity-ui:sun",
         selectedControlClass: "",
+        selectedIconClass: "",
       },
       notification: {
         off: "gravity-ui:bell-slash",
         on: "gravity-ui:bell-fill",
         selectedControlClass: "bg-purple-500",
+        selectedIconClass: "text-purple-600",
       },
     };
 
@@ -196,7 +211,7 @@ export const WithIcons: Story = {
                   <Switch.Thumb>
                     <Switch.Icon>
                       <Icon
-                        className={`${isSelected ? "opacity-100" : "opacity-70"} size-3 text-inherit`}
+                        className={`${isSelected ? `opacity-100 ${value.selectedIconClass}` : "opacity-70"} size-3 text-inherit`}
                         icon={isSelected ? value.on : value.off}
                       />
                     </Switch.Icon>

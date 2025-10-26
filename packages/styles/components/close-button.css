@@ -2,7 +2,7 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-xl p-1;
+  @apply reduce-motion:transition-none relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-xl p-1;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -35,10 +35,6 @@
     @apply pointer-events-none;
     @apply size-4 shrink-0 self-center;
     @apply -mx-0.5 my-0.5;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 

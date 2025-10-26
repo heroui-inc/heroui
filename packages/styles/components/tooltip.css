@@ -2,7 +2,8 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform dark:shadow-none;
+  @apply bg-panel origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform dark:shadow-none;
+  box-shadow: var(--shadow-elevated);
 
   /* Entering animations */
   &[data-entering] {
@@ -53,6 +54,8 @@
 
 /* Tooltip trigger */
 .tooltip__trigger {
+  @apply reduce-motion:transition-none;
+
   transition:
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
@@ -63,9 +66,5 @@
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }

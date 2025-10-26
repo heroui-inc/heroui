@@ -37,7 +37,7 @@
 }
 
 .card--subtle {
-  @apply border-none bg-transparent shadow-none;
+  @apply border-none bg-transparent;
 }
 
 .card--emphasis {
