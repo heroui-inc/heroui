@@ -51,7 +51,7 @@
   --color-background-secondary: color-mix(
     in oklab,
     var(--color-background) 90%,
-    var(--color-foreground) 4%
+    var(--color-foreground) 3%
   );
   --color-background-tertiary: color-mix(
     in oklab,
@@ -121,25 +121,12 @@
   --color-success-soft: color-mix(in oklab, var(--color-success) 15%, transparent);
   --color-success-soft-foreground: var(--color-success);
   --color-success-soft-hover: color-mix(in oklab, var(--color-success) 20%, transparent);
+
   /* Surface Colors */
-  --color-surface-1: var(--surface-1);
-  --color-surface-1-foreground: color-mix(
-    in oklab,
-    var(--color-surface-1) 80%,
-    var(--color-foreground) 3.5%
-  );
-  --color-surface-2: var(--surface-2);
-  --color-surface-2-foreground: color-mix(
-    in oklab,
-    var(--color-surface-2) 80%,
-    var(--color-foreground) 3.5%
-  );
-  --color-surface-3: var(--surface-3);
-  --color-surface-3-foreground: color-mix(
-    in oklab,
-    var(--color-surface-3) 80%,
-    var(--color-foreground) 3.5%
-  );
+  --color-surface-panel: var(--panel);
+  --color-surface-1: color-mix(in oklab, var(--default) 90%, var(--default-foreground) 1%);
+  --color-surface-2: color-mix(in oklab, var(--default) 90%, var(--default-foreground) 8%);
+  --color-surface-3: color-mix(in oklab, var(--default) 90%, var(--default-foreground) 14%);
 
   /* Radius and default sizes - defaults can change by just changing the --radius */
   --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */

@@ -36,7 +36,7 @@ export function Basic() {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -72,7 +72,7 @@ export function Basic() {
                 <img
                   alt="App Store QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Available on iOS and Android devices.</p>
                 <Button className="mt-4" variant="primary">

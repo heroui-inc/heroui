@@ -32,18 +32,22 @@
 }
 
 /* Modifier - variant */
-.card--variant-flat {
-  @apply border-none bg-transparent shadow-none;
-}
-
-.card--variant-outlined {
+.card--default {
   @apply bg-surface-1;
 }
 
-.card--variant-elevated {
+.card--subtle {
+  @apply border-none bg-transparent shadow-none;
+}
+
+.card--emphasis {
   @apply bg-surface-2;
 }
 
-.card--variant-filled {
+.card--strong {
   @apply bg-surface-3;
+}
+
+.card--panel {
+  @apply bg-panel;
 }

@@ -13,22 +13,25 @@ const cardVariants = tv({
   },
   variants: {
     variant: {
-      flat: {
-        base: "card--variant-flat",
+      default: {
+        base: "card--default",
       },
-      outlined: {
-        base: "card--variant-outlined",
+      subtle: {
+        base: "card--subtle",
       },
-      elevated: {
-        base: "card--variant-elevated",
+      emphasis: {
+        base: "card--emphasis",
       },
-      filled: {
-        base: "card--variant-filled",
+      strong: {
+        base: "card--strong",
+      },
+      panel: {
+        base: "card--panel",
       },
     },
   },
   defaultVariants: {
-    variant: "outlined",
+    variant: "default",
   },
 });
 

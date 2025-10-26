@@ -41,9 +41,17 @@ export default () => (
 
 ### Variants
 
+Cards come in semantic variants that describe their prominence level rather than specific visual styles. This allows themes to interpret them differently:
+
 <ComponentPreview
   name="card-variants"
 />
+
+- **`default`** - Standard card for most use cases (surface-1)
+- **`subtle`** - Minimal prominence, transparent background (great for nested cards)
+- **`emphasis`** - Medium prominence to draw moderate attention (surface-2)
+- **`strong`** - Highest prominence for primary or featured content (surface-3)
+- **`panel`** - Special panel background for distinctive cards
 
 ### Horizontal Layout
 
@@ -113,7 +121,7 @@ export default () => (
 
 ```css
 /* Override specific variants */
-.card--variant-elevated {
+.card--emphasis {
   @apply bg-gradient-to-br from-blue-50 to-purple-50;
 }
 
@@ -139,18 +147,19 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 
 #### Variant Classes
 
-- `.card--variant-flat` - Transparent background, no border
-- `.card--variant-outlined` - Border with subtle background (default)
-- `.card--variant-elevated` - Slightly elevated with medium background
-- `.card--variant-filled` - Prominently filled with stronger background
- 
+- `.card--default` - Standard appearance with surface-1 (default)
+- `.card--subtle` - Minimal prominence, transparent background
+- `.card--emphasis` - Medium prominence with surface-2
+- `.card--strong` - Highest prominence with surface-3
+- `.card--panel` - Special panel background
+
 ## API Reference
 
 ### Card.Root
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
-| `variant`   | `"flat" \| "outlined" \| "elevated" \| "filled"`         | `"outlined"` | Visual variant of the card |
+| `variant`   | `"default" \| "subtle" \| "emphasis" \| "strong" \| "panel"`         | `"default"` | Semantic variant indicating prominence level |
 | `asChild`   | `boolean`                         | `false` | Render as a child element  |
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |

@@ -51,10 +51,6 @@
     --default: oklch(96.7% 0.001 286.375);
     --default-foreground: var(--eclipse);
 
-    --surface-1: var(--background);
-    --surface-2: oklch(98.5% 0 0);
-    --surface-3: oklch(92% 0.004 286.32);
-
     --accent: oklch(0.6204 0.195 253.83);
     --accent-foreground: var(--snow);
 
@@ -88,7 +84,7 @@
     --link: var(--accent);
 
     /* Shadows */
-    --panel-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3) inset, 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    --panel-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.03), 0 2px 10px 0 rgba(0, 0, 0, 0.08);
     /* Shadow used for form fields */
     --field-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     /* Skeleton Default Global Animation */
@@ -98,7 +94,6 @@
   .dark,
   [data-theme="dark"] {
     color-scheme: dark;
-
     /* == Dark Theme Variables == */
 
     /* Base Colors */
@@ -112,10 +107,6 @@
 
     --default: var(--color-neutral-900);
     --default-foreground: var(--snow);
-
-    --surface-1: var(--background);
-    --surface-2: var(--color-neutral-900);
-    --surface-3: var(--color-neutral-800);
 
     --accent: var(--color-neutral-50);
     --accent-foreground: var(--eclipse);
