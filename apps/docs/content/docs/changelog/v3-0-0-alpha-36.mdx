@@ -1,0 +1,268 @@
+---
+title: v3.0.0-alpha.36
+description: Flexible component patterns with dual syntax support for compound and named exports.
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">October 27, 2024</span>
+</div>
+
+This release introduces flexible component patterns, allowing developers to use HeroUI components in multiple ways. You can now use compound patterns with or without the `.Root` suffix, and named exports for maximum flexibility.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Dual Component Pattern Support
+
+HeroUI now supports flexible component syntax. Use compound patterns with or without `.Root`, or named exports - all three patterns work identically.
+
+**Available patterns:**
+
+```tsx
+import { Avatar } from "@heroui/react"
+
+// 1. Compound pattern (no .Root needed) - recommended
+<Avatar>
+  <Avatar.Image src="/avatar.jpg" alt="User" />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+
+// 2. Compound pattern with .Root - still supported
+<Avatar.Root>
+  <Avatar.Image src="/avatar.jpg" alt="User" />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar.Root>
+
+// 3. Named exports
+import { AvatarRoot, AvatarImage, AvatarFallback } from "@heroui/react"
+
+<AvatarRoot>
+  <AvatarImage src="/avatar.jpg" alt="User" />
+  <AvatarFallback>JD</AvatarFallback>
+</AvatarRoot>
+```
+
+### Simple Components
+
+Simple components like Button work the same way:
+
+```tsx
+import { Button } from "@heroui/react"
+
+// No .Root needed
+<Button>Label</Button>
+
+// Or with .Root
+<Button.Root>Label</Button.Root>
+
+// Or named export
+import { ButtonRoot } from "@heroui/react"
+<ButtonRoot>Label</ButtonRoot>
+```
+
+### Mixed Syntax
+
+You can mix compound and named exports in the same component:
+
+```tsx
+import { Avatar, AvatarFallback } from "@heroui/react"
+
+<Avatar>
+  <Avatar.Image src="/avatar.jpg" alt="User" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+## ⚠️ Breaking Changes
+
+### Type Reference Syntax
+
+Due to the dual pattern implementation, type references through the namespace syntax are no longer supported. Use object-style syntax or named type imports instead.
+
+**Before (no longer works):**
+```tsx
+type AvatarProps = Avatar.RootProps
+```
+
+**After (Option 1 - Object-style syntax):**
+```tsx
+type AvatarProps = Avatar["RootProps"]
+```
+
+**After (Option 2 - Named type imports, recommended):**
+```tsx
+import type { AvatarRootProps } from "@heroui/react"
+
+type AvatarProps = AvatarRootProps
+```
+
+This change affects all compound components when accessing prop types.
+
+### Tabs Component Renaming
+
+The Tabs component's wrapper element has been renamed for consistency:
+
+- **Compound property**: `Tabs.ListWrapper` → `Tabs.ListContainer`
+- **Named export**: `TabListWrapper` → `TabListContainer`
+- **CSS class**: `.tabs__list-wrapper` → `.tabs__list-container`
+- **Data attribute**: `data-slot="tabs-list-wrapper"` → `data-slot="tabs-list-container"`
+
+**Migration:**
+
+Find and replace all instances of `TabListWrapper` with `TabListContainer`:
+
+```bash
+# Component usage
+TabListWrapper → TabListContainer
+Tabs.ListWrapper → Tabs.ListContainer
+
+# CSS selectors (if using custom styles)
+.tabs__list-wrapper → .tabs__list-container
+[data-slot="tabs-list-wrapper"] → [data-slot="tabs-list-container"]
+```
+
+## Migration Guide
+
+### Simplifying Compound Pattern Usage
+
+If you adopted the `.Root` suffix from v3.0.0-alpha.35, you can now simplify your code by removing it:
+
+**Before (v3.0.0-alpha.35):**
+```tsx
+<Avatar.Root>
+  <Avatar.Image src="..." alt="..." />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar.Root>
+```
+
+**After (v3.0.0-alpha.36 - simpler):**
+```tsx
+<Avatar>
+  <Avatar.Image src="..." alt="..." />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+**Note:** The `.Root` syntax still works if you prefer it.
+
+### Updating Tabs Component
+
+Replace `TabListWrapper` with `TabListContainer`:
+
+**Before:**
+```tsx
+import { Tabs } from "@heroui/react"
+
+<Tabs.Root>
+  <Tabs.ListWrapper>
+    <Tabs.List>
+      <Tabs.Tab id="home">Home<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListWrapper>
+  <Tabs.Panel id="home">Content</Tabs.Panel>
+</Tabs.Root>
+```
+
+**After (with new dual pattern):**
+```tsx
+import { Tabs } from "@heroui/react"
+
+<Tabs>
+  <Tabs.ListContainer>
+    <Tabs.List>
+      <Tabs.Tab id="home">Home<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+  <Tabs.Panel id="home">Content</Tabs.Panel>
+</Tabs>
+```
+
+### Updating Type References
+
+If you're using namespace syntax for types, switch to object-style syntax or named imports:
+
+**Before:**
+```tsx
+type ButtonProps = Button.RootProps
+```
+
+**After (Option 1 - Object-style):**
+```tsx
+type ButtonProps = Button["RootProps"]
+```
+
+**After (Option 2 - Named imports, recommended):**
+```tsx
+import type { ButtonRootProps } from "@heroui/react"
+
+type ButtonProps = ButtonRootProps
+```
+
+### No Changes Required
+
+If you're already using named exports, no migration is needed:
+
+```tsx
+import { ButtonRoot, AvatarRoot, AvatarImage } from "@heroui/react"
+
+<ButtonRoot>Click me</ButtonRoot>
+```
+
+## Affected Components
+
+All components now support the dual pattern:
+
+- **Simple components**: Button, Link, Spinner, Chip, Kbd
+- **Compound components**: Accordion, Avatar, Card, Disclosure, Fieldset, Popover, RadioGroup, Switch, Tabs, Tooltip
+
+## Why This Change?
+
+This release improves developer experience by providing flexibility in how you write components:
+
+1. **Simpler API**: Main components no longer require `.Root` suffix, making code more intuitive
+2. **Flexibility**: Choose between compound pattern, compound with `.Root`, or named exports based on your preference
+3. **Backward Compatibility**: The `.Root` pattern from v3.0.0-alpha.35 still works
+4. **Better DX**: Both compound and named export patterns are fully supported
+5. **Naming Consistency**: Standardized naming (e.g., "Container" instead of "Wrapper") across the API
+
+These improvements make HeroUI more flexible while maintaining full compatibility with existing code.
+
+## Links
+
+- [GitHub PR #5850](https://github.com/heroui-inc/heroui/pull/5850)
+- [Component Documentation](https://heroui.com/docs/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+
+## Contributors
+
+Thanks to everyone who contributed to this release, improving developer experience with flexible component patterns!
