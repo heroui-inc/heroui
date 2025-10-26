@@ -12,12 +12,14 @@ import {composeTwRenderProps} from "../../utils/compose";
 import {ExternalLinkIcon} from "../icons";
 
 import {linkVariants} from "./link.styles";
+
 /* ------------------------------------------------------------------------------------------------
  * Link Context
  * --------------------------------------------------------------------------------------------- */
 type LinkContext = {
   slots?: ReturnType<typeof linkVariants>;
 };
+
 const LinkContext = createContext<LinkContext>({});
 
 /* ------------------------------------------------------------------------------------------------
@@ -60,8 +62,9 @@ const LinkIcon = ({asChild, children, className, ...rest}: LinkIconProps) => {
   );
 };
 
-/* ------------------------------------------------------------------------------------------------
+/* -------------------------------------------------------------------------------------------------
  * Exports
- * --------------------------------------------------------------------------------------------- */
-export type {LinkRootProps, LinkIconProps};
+ * -----------------------------------------------------------------------------------------------*/
 export {LinkRoot, LinkIcon};
+
+export type {LinkRootProps, LinkIconProps};

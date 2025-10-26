@@ -29,7 +29,7 @@ export default {
   title: "Components/Navigation/Accordion",
 } as Meta<typeof Accordion.Root>;
 
-const defaultArgs: Accordion.RootProps = {
+const defaultArgs: Accordion["RootProps"] = {
   allowsMultipleExpanded: false,
   isDisabled: false,
   variant: "default",
@@ -77,7 +77,7 @@ const items = [
   },
 ];
 
-const Template = (props: Accordion.RootProps) => (
+const Template = (props: Accordion["RootProps"]) => (
   <Wrapper>
     <Accordion.Root {...props}>
       {items.map((item, index) => (
@@ -170,7 +170,7 @@ const categories = [
   },
 ];
 
-const CustomTemplate = (props: Accordion.RootProps) => (
+const CustomTemplate = (props: Accordion["RootProps"]) => (
   <div className="flex w-full justify-center px-4 py-8">
     <div className="w-full max-w-2xl">
       <div className="flex flex-col gap-1">

@@ -7,14 +7,15 @@ import React from "react";
 import {useCSSVariable} from "../../hooks/use-css-variable";
 
 import {skeletonVariants} from "./skeleton.styles";
+
 /* -------------------------------------------------------------------------------------------------
- * Skeleton
+ * Skeleton Root
  * -----------------------------------------------------------------------------------------------*/
-interface SkeletonProps
+interface SkeletonRootProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
     SkeletonVariants {}
 
-const Skeleton = ({animationType, className, ...props}: SkeletonProps) => {
+const SkeletonRoot = ({animationType, className, ...props}: SkeletonRootProps) => {
   // Use the new hook to get CSS variable value with SSR support
   const resolvedAnimationType = useCSSVariable("--skeleton-animation", animationType);
   const slots = React.useMemo(
@@ -28,5 +29,9 @@ const Skeleton = ({animationType, className, ...props}: SkeletonProps) => {
   return <div className={slots.base({className})} {...props} />;
 };
 
-export type {SkeletonProps};
-export {Skeleton};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {SkeletonRoot};
+
+export type {SkeletonRootProps};

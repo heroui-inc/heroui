@@ -9,9 +9,12 @@ import {composeTwRenderProps} from "../../utils";
 
 import {inputVariants} from "./input.styles";
 
-interface InputProps extends InputPrimitiveProps, InputVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Form Root
+ * -----------------------------------------------------------------------------------------------*/
+interface InputRootProps extends InputPrimitiveProps, InputVariants {}
 
-const Input = ({className, ...rest}: InputProps) => {
+const InputRoot = ({className, ...rest}: InputRootProps) => {
   return (
     <InputPrimitive
       className={composeTwRenderProps(className, inputVariants({}))}
@@ -21,5 +24,9 @@ const Input = ({className, ...rest}: InputProps) => {
   );
 };
 
-export type {InputProps};
-export {Input};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {InputRoot};
+
+export type {InputRootProps};

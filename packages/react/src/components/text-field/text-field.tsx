@@ -10,9 +10,12 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {textFieldVariants} from "./text-field.styles";
 
-interface TextFieldProps extends TextFieldPrimitiveProps, TextFieldVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * TextField Root
+ * -----------------------------------------------------------------------------------------------*/
+interface TextFieldRootProps extends TextFieldPrimitiveProps, TextFieldVariants {}
 
-const TextField = ({children, className, ...props}: TextFieldProps) => {
+const TextFieldRoot = ({children, className, ...props}: TextFieldRootProps) => {
   const styles = React.useMemo(() => textFieldVariants({}), []);
 
   return (
@@ -26,5 +29,9 @@ const TextField = ({children, className, ...props}: TextFieldProps) => {
   );
 };
 
-export {TextField};
-export type {TextFieldProps};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {TextFieldRoot};
+
+export type {TextFieldRootProps};
