@@ -69,7 +69,7 @@ const parameters: Preview["parameters"] = {
   options: {
     storySort: {
       method: "alphabetical",
-      order: ["Foundations", "Components"],
+      order: ["Welcome", "Foundations", "Components"],
     },
   },
   darkMode: {

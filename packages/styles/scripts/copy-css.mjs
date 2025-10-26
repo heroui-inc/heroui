@@ -57,7 +57,7 @@ if (fs.existsSync(indexPath)) {
 }
 
 // Copy all CSS files from these directories
-const directories = ["base", "components", "themes", "utilities"];
+const directories = ["base", "components", "themes", "utilities", "variants"];
 
 for (const dir of directories) {
   copyCssDirectory(dir);
