@@ -54,9 +54,9 @@
 
 /* Checkbox control (the square button) */
 .checkbox__control {
-  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded outline-none;
+  @apply reduce-motion:transition-none bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded outline-none;
 
-  transition: all 200ms var(--ease-out);
+  transition: all 300ms var(--ease-out);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -107,10 +107,6 @@
   .checkbox:active[data-indeterminate="true"] &,
   .checkbox[data-pressed="true"][data-indeterminate="true"] & {
     @apply bg-accent-hover;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 

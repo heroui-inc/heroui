@@ -10,6 +10,9 @@ import {Checkbox} from "./index";
 export default {
   argTypes: {},
   component: Checkbox.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Forms/Checkbox",
 } as Meta<typeof Checkbox.Root>;
 
