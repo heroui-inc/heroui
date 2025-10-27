@@ -56,17 +56,17 @@
 .link--underline-hover {
   /* Animated underline on hover (default) */
   &::before {
-    @apply reduce-motion:transition-none;
+    @apply reduce-motion:transition-none absolute left-0 h-px w-full bg-current;
+
     content: "";
-    @apply absolute left-0 h-px w-full origin-left bg-current;
     bottom: 0;
-    transform: scaleX(0);
-    transition: transform 200ms var(--ease-out);
+    opacity: 0;
+    transition: opacity 150ms var(--ease-out);
   }
 
   &:hover::before,
   &[data-hovered="true"]::before {
-    transform: scaleX(1);
+    opacity: 1;
   }
 }
 
