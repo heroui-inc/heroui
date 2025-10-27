@@ -34,7 +34,7 @@
   --color-danger-foreground: var(--danger-foreground);
 
   --shadow-surface: var(--surface-shadow);
-  --shadow-elevated: var(--elevated-shadow);
+  --shadow-overlay: var(--overlay-shadow);
   --shadow-field: var(--field-shadow);
 
   /* Form Field Tokens */
@@ -58,14 +58,18 @@
   --color-background-secondary: color-mix(
     in oklab,
     var(--color-background) 90%,
-    var(--color-foreground) 3%
+    var(--color-foreground) 4%
   );
   --color-background-tertiary: color-mix(
     in oklab,
     var(--color-background) 90%,
-    var(--color-foreground) 6%
+    var(--color-foreground) 8%
   );
-  /* TODO: Add quaternary background color */
+  --color-background-quaternary: color-mix(
+    in oklab,
+    var(--color-background) 90%,
+    var(--color-foreground) 14%
+  );
   --color-background-inverse: var(--color-foreground);
 
   /* ------------------------- */

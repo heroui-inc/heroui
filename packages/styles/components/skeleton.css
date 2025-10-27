@@ -2,6 +2,8 @@
   @apply bg-surface-quaternary/70 pointer-events-none relative overflow-hidden rounded-sm;
 }
 
+/* TODO: Skeleton with parent are not visible */
+
 /* Animation types */
 .skeleton--shimmer {
   &::after {

@@ -82,8 +82,8 @@
 
     /* Shadows */
     --surface-shadow: 0 0px 0px 0 rgba(24, 24, 27, 0.03), 0 2px 10px 0 rgba(24, 24, 27, 0.08);
-    /* Overlay shadow TODO:*/
-    --elevated-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
+    /* Overlay shadow */
+    --overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
     --field-shadow:
       0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 0px 0px 0 rgba(0, 0, 0, 0.05); /* no shadow by default on form fields */
     /* Skeleton Default Global Animation */
@@ -137,7 +137,7 @@
 
     /* Shadows */
     --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
-    --elevated-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+    --overlay-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
     --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
   }
 }

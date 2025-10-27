@@ -114,6 +114,7 @@ export const AllColors = () => {
   const calculatedBackgroundColors: ColorItemProps[] = [
     {name: "Background Secondary", variable: "--color-background-secondary"},
     {name: "Background Tertiary", variable: "--color-background-tertiary"},
+    {name: "Background Quaternary", variable: "--color-background-quaternary"},
     {name: "Background Inverse", variable: "--color-background-inverse"},
   ];
 
