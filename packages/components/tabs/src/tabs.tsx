@@ -44,11 +44,13 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     <Tab key={item.key} item={item} {...tabsProps} {...item.props} />
   ));
 
+  const variant = props?.variant;
+  const previousVariant = useRef<typeof variant>(undefined);
+  const isVertical = props?.isVertical;
+
   const cursorRef = useRef<HTMLSpanElement | null>(null);
   const selectedItem = state.selectedItem;
   const selectedKey = selectedItem?.key;
-  const variant = props?.variant;
-  const isVertical = props?.isVertical;
 
   const getCursorStyles = useCallback(
     (tabRect: DOMRect) => {
@@ -72,15 +74,9 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   );
 
   const updateCursorPosition = useCallback(
-    (entries: ResizeObserverEntry[]) => {
+    (selectedTab: HTMLElement) => {
       if (!cursorRef.current) return;
 
-      const contentRect = entries[0].contentRect;
-
-      // check if rendered
-      if (contentRect.width === 0 && contentRect.height === 0) return;
-
-      const selectedTab = entries[0].target as HTMLElement;
       const tabRect = {
         width: selectedTab.offsetWidth,
         height: selectedTab.offsetHeight,
@@ -90,14 +86,30 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
       const styles = getCursorStyles(tabRect);
 
+      if (variant !== previousVariant.current) {
+        cursorRef.current.removeAttribute("data-initialized");
+      }
       cursorRef.current.style.left = styles.left;
       cursorRef.current.style.top = styles.top;
       cursorRef.current.style.width = styles.width;
       cursorRef.current.style.height = styles.height;
+      previousVariant.current = variant;
 
       requestAnimationFrame(() => cursorRef.current?.setAttribute("data-initialized", "true"));
     },
-    [getCursorStyles],
+    [getCursorStyles, variant],
+  );
+
+  const onResize = useCallback(
+    (entries: ResizeObserverEntry[]) => {
+      const contentRect = entries[0].contentRect;
+
+      // check if rendered
+      if (contentRect.width === 0 && contentRect.height === 0) return;
+
+      updateCursorPosition(entries[0].target as HTMLElement);
+    },
+    [updateCursorPosition],
   );
 
   useEffect(() => {
@@ -105,12 +117,12 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
     if (!selectedTab) return;
 
-    const observer = new ResizeObserver(updateCursorPosition);
+    const observer = new ResizeObserver(onResize);
 
     observer.observe(selectedTab);
 
     return () => observer.disconnect();
-  }, [domRef, selectedKey, updateCursorPosition]);
+  }, [domRef, onResize, selectedKey]);
 
   const renderTabs = useMemo(
     () => (
