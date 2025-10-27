@@ -27,6 +27,9 @@ export default {
     },
   },
   component: DisclosureGroup,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/DisclosureGroup",
 } as Meta<typeof DisclosureGroup>;
 

@@ -1,11 +1,11 @@
 .skeleton {
-  @apply bg-surface-3/70 pointer-events-none relative overflow-hidden rounded-sm;
+  @apply bg-surface-quaternary/70 pointer-events-none relative overflow-hidden rounded-sm;
 }
 
 /* Animation types */
 .skeleton--shimmer {
   &::after {
-    @apply animate-skeleton via-surface-3 absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
+    @apply animate-skeleton via-surface-quaternary absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
   }
 
   /* When applied to a parent container with multiple skeletons */

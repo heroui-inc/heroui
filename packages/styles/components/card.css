@@ -32,22 +32,23 @@
 }
 
 /* Modifier - variant */
-.card--default {
-  @apply bg-surface-1;
-}
 
-.card--subtle {
+.card--transparent {
   @apply border-none bg-transparent;
 }
 
-.card--emphasis {
-  @apply bg-surface-2;
+.card--default {
+  @apply bg-surface;
 }
 
-.card--strong {
-  @apply bg-surface-3;
+.card--secondary {
+  @apply bg-surface-secondary;
 }
 
-.card--panel {
-  @apply bg-panel;
+.card--tertiary {
+  @apply bg-surface-tertiary;
+}
+
+.card--quaternary {
+  @apply bg-surface-quaternary;
 }

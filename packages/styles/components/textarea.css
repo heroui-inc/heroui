@@ -18,7 +18,7 @@
 
   &:focus-visible,
   &[data-focus-visible="true"] {
-    @apply status-focused;
+    @apply status-focused-field;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
   }

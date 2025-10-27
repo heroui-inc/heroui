@@ -69,7 +69,7 @@ const parameters: Preview["parameters"] = {
   options: {
     storySort: {
       method: "alphabetical",
-      order: ["Welcome", "Foundations", "Components"],
+      order: ["Welcome", "Color System", "Components"],
     },
   },
   darkMode: {
@@ -91,13 +91,6 @@ const decorators: Preview["decorators"] = [
   withReactStrictMode,
   withInternationalization,
   withReduceMotion,
-  (Story) => {
-    return (
-      <div className="flex h-full w-full items-center justify-center" id="root">
-        <Story />
-      </div>
-    );
-  },
 ];
 
 const preview: Preview = {

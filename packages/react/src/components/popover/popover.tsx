@@ -75,7 +75,7 @@ type PopoverArrowProps = Omit<React.ComponentProps<typeof OverlayArrow>, "childr
 const PopoverArrow = ({children, className, ...props}: PopoverArrowProps) => {
   const defaultArrow = (
     <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
-      <path d="M0 0 L6 6 L12 0" />
+      <path d="M0 0 Q6 9 12 0" />
     </svg>
   );
 

@@ -17,6 +17,9 @@ export default {
     },
   },
   component: CloseButton,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Buttons/CloseButton",
 } as Meta<typeof CloseButton>;
 

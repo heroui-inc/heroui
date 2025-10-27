@@ -22,6 +22,9 @@ export default {
     },
   },
   component: Button,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Buttons/Button",
 } as Meta<typeof Button>;
 

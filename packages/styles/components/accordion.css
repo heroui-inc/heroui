@@ -88,9 +88,9 @@
   }
 }
 
-/* Panel variant */
-.accordion--panel {
-  @apply bg-panel rounded-3xl;
+/* Elevated variant */
+.accordion--elevated {
+  @apply bg-surface rounded-3xl;
 
   .accordion__trigger {
     &:hover:not([aria-expanded="true"]),
@@ -100,13 +100,13 @@
   }
 }
 
-.accordion--panel .accordion__item {
-  /* Panel variant separator styling */
+.accordion--elevated .accordion__item {
+  /* Elevated variant separator styling */
   &::after {
     @apply left-[3%] w-[94%];
   }
 
-  /* Special rounding for first and last items in panel variant */
+  /* Special rounding for first and last items in elevated variant */
   &:first-child [data-slot="accordion-trigger"] {
     @apply rounded-t-3xl;
   }

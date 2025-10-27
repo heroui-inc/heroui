@@ -1,13 +1,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-panel: var(--panel);
-  --color-panel-foreground: var(--panel-foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  --color-overlay: var(--overlay);
+  --color-overlay-foreground: var(--overlay-foreground);
 
   --color-muted: var(--muted);
-
-  --color-surface: var(--surface-1);
-  --color-surface-foreground: var(--foreground);
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -128,11 +129,14 @@
   --color-success-soft-foreground: var(--color-success);
   --color-success-soft-hover: color-mix(in oklab, var(--color-success) 20%, transparent);
 
-  /* Surface Colors */
-  --color-surface-panel: var(--panel);
-  --color-surface-1: color-mix(in oklab, var(--default) 90%, var(--default-foreground) 1%);
-  --color-surface-2: color-mix(in oklab, var(--default) 90%, var(--default-foreground) 8%);
-  --color-surface-3: color-mix(in oklab, var(--default) 90%, var(--default-foreground) 14%);
+  /* Surface Levels - progressively darker/lighter shades for layering */
+  --color-surface-secondary: color-mix(in oklab, var(--surface) 90%, var(--surface-foreground) 3%);
+  --color-surface-tertiary: color-mix(in oklab, var(--surface) 90%, var(--surface-foreground) 8%);
+  --color-surface-quaternary: color-mix(
+    in oklab,
+    var(--surface) 90%,
+    var(--default-foreground) 14%
+  );
 
   /* Radius and default sizes - defaults can change by just changing the --radius */
   --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */

@@ -5,6 +5,9 @@ import {Alert} from "./index";
 export default {
   argTypes: {},
   component: Alert.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "📝 ToDo/Alert",
 };
 

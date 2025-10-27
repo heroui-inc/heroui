@@ -10,6 +10,12 @@ const meta: Meta<typeof Kbd.Root> = {
   parameters: {
     layout: "centered",
   },
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "light"],
+    },
+  },
   tags: ["autodocs"],
 };
 
@@ -78,6 +84,49 @@ export const KeyCombinations: Story = {
       <div className="flex items-center gap-2">
         <span>Redo:</span>
         <Kbd.Root>
+          <Kbd.Abbr keyValue="command" />
+          <Kbd.Abbr keyValue="shift" />
+          <Kbd.Content>Z</Kbd.Content>
+        </Kbd.Root>
+      </div>
+    </div>
+  ),
+};
+
+export const LightVariant: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-2">
+        <span>Copy:</span>
+        <Kbd.Root variant="light">
+          <Kbd.Abbr keyValue="command" />
+          <Kbd.Content>C</Kbd.Content>
+        </Kbd.Root>
+      </div>
+      <div className="flex items-center gap-2">
+        <span>Paste:</span>
+        <Kbd.Root variant="light">
+          <Kbd.Abbr keyValue="command" />
+          <Kbd.Content>V</Kbd.Content>
+        </Kbd.Root>
+      </div>
+      <div className="flex items-center gap-2">
+        <span>Cut:</span>
+        <Kbd.Root variant="light">
+          <Kbd.Abbr keyValue="command" />
+          <Kbd.Content>X</Kbd.Content>
+        </Kbd.Root>
+      </div>
+      <div className="flex items-center gap-2">
+        <span>Undo:</span>
+        <Kbd.Root variant="light">
+          <Kbd.Abbr keyValue="command" />
+          <Kbd.Content>Z</Kbd.Content>
+        </Kbd.Root>
+      </div>
+      <div className="flex items-center gap-2">
+        <span>Redo:</span>
+        <Kbd.Root variant="light">
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="shift" />
           <Kbd.Content>Z</Kbd.Content>

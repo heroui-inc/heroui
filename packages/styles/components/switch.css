@@ -45,7 +45,7 @@
 /* Switch control (track) */
 .switch__control {
   /* Default size (medium) */
-  @apply bg-surface-3 reduce-motion:transition-none flex shrink-0 items-center rounded-full;
+  @apply bg-surface-quaternary reduce-motion:transition-none flex shrink-0 items-center rounded-full;
   height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
@@ -63,13 +63,13 @@
   /* Hover states */
   .switch:hover &,
   .switch[data-hovered="true"] & {
-    @apply bg-surface-3/80;
+    @apply bg-surface-quaternary/80;
   }
 
   /* Pressed states */
   .switch:active &,
   .switch[data-pressed="true"] & {
-    @apply bg-surface-3/80 reduce-motion:[transform:none];
+    @apply bg-surface-quaternary/80 reduce-motion:[transform:none];
     transform: scale(0.95);
   }
 

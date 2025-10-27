@@ -22,6 +22,9 @@ export default {
     },
   },
   component: Disclosure.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/Disclosure",
 } as Meta<typeof Disclosure.Root>;
 

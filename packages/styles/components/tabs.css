@@ -44,7 +44,7 @@
   z-index: 1;
   cursor: var(--cursor-interactive);
 
-  @apply text-segment-foreground reduce-motion:transition-none flex h-8 w-full items-center justify-center rounded-xl px-4 text-center font-medium outline-none;
+  @apply text-segment-foreground reduce-motion:transition-none flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center font-medium outline-none;
 
   transition:
     color 150ms var(--ease-smooth),
@@ -54,7 +54,7 @@
 
   /* Separator between tabs */
   &:not(:first-child):before {
-    @apply bg-muted/40 reduce-motion:transition-none;
+    @apply bg-muted/25 reduce-motion:transition-none;
 
     content: "";
     border-radius: 4px;

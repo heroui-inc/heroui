@@ -16,6 +16,9 @@ import {RadioGroup} from "./index";
 export default {
   argTypes: {},
   component: RadioGroup,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Forms/RadioGroup",
 } as Meta<typeof RadioGroup>;
 

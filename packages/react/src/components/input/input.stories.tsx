@@ -7,6 +7,9 @@ import {Input} from "./index";
 export default {
   argTypes: {},
   component: Input,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Forms/Input",
 } as Meta<typeof Input>;
 

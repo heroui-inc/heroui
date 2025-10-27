@@ -47,11 +47,11 @@ Cards come in semantic variants that describe their prominence level rather than
   name="card-variants"
 />
 
-- **`default`** - Standard card for most use cases (surface-1)
-- **`subtle`** - Minimal prominence, transparent background (great for nested cards)
-- **`emphasis`** - Medium prominence to draw moderate attention (surface-2)
-- **`strong`** - Highest prominence for primary or featured content (surface-3)
-- **`panel`** - Special panel background for distinctive cards
+- **`transparent`** - Minimal prominence, transparent background (great for nested cards)
+- **`default`** - Standard card for most use cases (surface-secondary)
+- **`secondary`** - Medium prominence to draw moderate attention (surface-tertiary)
+- **`tertiary`** - Higher prominence for important content (surface-quaternary)
+- **`quaternary`** - Highest prominence for critical content
 
 ### Horizontal Layout
 
@@ -121,7 +121,7 @@ Cards come in semantic variants that describe their prominence level rather than
 
 ```css
 /* Override specific variants */
-.card--emphasis {
+.card--secondary {
   @apply bg-gradient-to-br from-blue-50 to-purple-50;
 }
 
@@ -147,11 +147,11 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 
 #### Variant Classes
 
-- `.card--default` - Standard appearance with surface-1 (default)
-- `.card--subtle` - Minimal prominence, transparent background
-- `.card--emphasis` - Medium prominence with surface-2
-- `.card--strong` - Highest prominence with surface-3
-- `.card--panel` - Special panel background
+- `.card--transparent` - Minimal prominence, transparent background (maps to `transparent` variant)
+- `.card--default` - Standard appearance with surface-secondary (default)
+- `.card--secondary` - Medium prominence with surface-tertiary (maps to `secondary` variant)
+- `.card--tertiary` - Higher prominence with surface-quaternary (maps to `tertiary` variant)
+- `.card--quaternary` - Highest prominence for critical content (maps to `quaternary` variant)
 
 ## API Reference
 
@@ -159,7 +159,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
-| `variant`   | `"default" \| "subtle" \| "emphasis" \| "strong" \| "panel"`         | `"default"` | Semantic variant indicating prominence level |
+| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary" \| "quaternary"`         | `"default"` | Semantic variant indicating prominence level |
 | `asChild`   | `boolean`                         | `false` | Render as a child element  |
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |

@@ -10,6 +10,9 @@ import {Link} from "./index";
 export default {
   argTypes: {},
   component: Link.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/Link",
 } as Meta<typeof Link.Root>;
 

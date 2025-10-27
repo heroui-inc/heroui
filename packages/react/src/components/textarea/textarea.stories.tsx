@@ -7,6 +7,9 @@ import {TextArea} from "./index";
 export default {
   argTypes: {},
   component: TextArea,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Forms/Textarea",
 } as Meta<typeof TextArea>;
 

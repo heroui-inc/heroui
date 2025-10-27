@@ -11,6 +11,9 @@ import {Switch} from "./index";
 export default {
   argTypes: {},
   component: Switch.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Controls/Switch",
 } as Meta<typeof Switch.Root>;
 

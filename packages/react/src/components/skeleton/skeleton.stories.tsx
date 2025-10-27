@@ -13,6 +13,9 @@ export default {
     },
   },
   component: Skeleton,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Feedback/Skeleton",
 } as Meta<typeof Skeleton>;
 

@@ -20,3 +20,8 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Variant styles */
+.kbd--light {
+  @apply bg-transparent;
+}

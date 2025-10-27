@@ -25,6 +25,9 @@ export default {
     //  TODO: Add sizes
   },
   component: Chip,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/DataDisplay/Chip",
 } as Meta<typeof Chip>;
 

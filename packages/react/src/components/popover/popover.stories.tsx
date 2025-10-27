@@ -42,6 +42,9 @@ export default {
     },
   },
   component: Popover.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Overlays/Popover",
 } as Meta<typeof Popover.Root>;
 

@@ -20,6 +20,9 @@ export default {
     },
   },
   component: Avatar.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Media/Avatar",
 } as Meta<typeof Avatar.Root>;
 

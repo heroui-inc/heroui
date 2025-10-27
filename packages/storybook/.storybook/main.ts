@@ -42,7 +42,7 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: [pathJoin(__dirname, "../public")],
-  stories: ["./welcome.mdx", ...getStories()],
+  stories: ["./welcome.mdx", "./colors.stories.tsx", ...getStories()],
 };
 
 export default config;

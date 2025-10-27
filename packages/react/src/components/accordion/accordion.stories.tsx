@@ -20,6 +20,9 @@ export default {
     },
   },
   component: Accordion.Root,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/Accordion",
 } as Meta<typeof Accordion.Root>;
 
@@ -71,7 +74,7 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
           <div key={category.title}>
             <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
             <div key={category.title}>
-              <Accordion.Root {...props} className="w-full" variant="panel">
+              <Accordion.Root {...props} className="w-full" variant="elevated">
                 {category.items.map((item, index) => (
                   <Accordion.Item key={index}>
                     <Accordion.Heading>
@@ -104,10 +107,10 @@ export const Default = {
   render: Template,
 };
 
-export const PanelVariant = {
+export const ElevatedVariant = {
   args: {
     ...defaultArgs,
-    variant: "panel",
+    variant: "elevated",
     allowsMultipleExpanded: true,
   },
   render: (args: Accordion["RootProps"]) => (

@@ -269,6 +269,10 @@ export const demos: Record<string, DemoItem> = {
     component: KbdDemos.SpecialKeys,
     file: "kbd/special.tsx",
   },
+  "kbd-variants": {
+    component: KbdDemos.Variants,
+    file: "kbd/variants.tsx",
+  },
   // Link demos
   "link-basic": {
     component: LinkDemos.Basic,
