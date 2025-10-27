@@ -1,0 +1,153 @@
+---
+title: Alert
+description: Display important messages and notifications to users with status indicators
+icon: preview
+links:
+  source: alert/alert.tsx
+  styles: alert.css
+  storybook: alert
+  figma: true
+---
+
+## Import
+
+```tsx
+import { Alert } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="alert-basic"
+/>
+
+
+### Anatomy
+
+Import the Alert component and access all parts using dot notation.
+
+```tsx
+import { Alert } from '@heroui/react';
+
+export default () => (
+  <Alert.Root>
+    <Alert.Indicator />
+    <Alert.Content>
+      <Alert.Title />
+      <Alert.Description />
+    </Alert.Content>
+  </Alert.Root>
+)
+```
+
+<RelatedComponents component="alert" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Alert } from "@heroui/react";
+
+function CustomAlert() {
+  return (
+    <Alert.Root className="border-2 border-blue-500 rounded-xl" status="accent">
+      <Alert.Indicator className="text-blue-600" />
+      <Alert.Content className="gap-1">
+        <Alert.Title className="font-bold text-lg">Custom Alert</Alert.Title>
+        <Alert.Description className="text-sm opacity-80">
+          This alert has custom styling applied
+        </Alert.Description>
+      </Alert.Content>
+    </Alert.Root>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Alert component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .alert {
+    @apply rounded-2xl shadow-lg;
+  }
+
+  .alert__title {
+    @apply font-bold text-lg;
+  }
+
+  .alert--danger {
+    @apply border-l-4 border-red-600;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Alert component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/alert.css)):
+
+#### Base Classes
+- `.alert` - Base alert container
+- `.alert__indicator` - Icon/indicator container
+- `.alert__content` - Content wrapper for title and description
+- `.alert__title` - Alert title text
+- `.alert__description` - Alert description text
+
+#### Status Variant Classes
+- `.alert--default` - Default gray status
+- `.alert--accent` - Accent blue status
+- `.alert--success` - Success green status
+- `.alert--warning` - Warning yellow/orange status
+- `.alert--danger` - Danger red status
+
+### Interactive States
+
+The Alert component is primarily informational and doesn't have interactive states on the base component. However, it can contain interactive elements like buttons or close buttons.
+
+## API Reference
+
+### Alert.Root Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `status` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | The visual status of the alert |
+| `asChild` | `boolean` | `false` | Merge props onto the child element |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The alert content |
+
+### Alert.Indicator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto the child element |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Custom indicator icon (defaults to status icon) |
+
+### Alert.Content Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto the child element |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Content (typically Title and Description) |
+
+### Alert.Title Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto the child element |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The alert title text |
+
+### Alert.Description Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto the child element |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The alert description text |

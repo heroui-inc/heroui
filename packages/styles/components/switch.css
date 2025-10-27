@@ -114,8 +114,7 @@
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply shadow-field reduce-motion:transition-none flex rounded-full bg-white text-black;
-  margin-inline-start: 0.125rem; /* 2px equivalent */
+  @apply shadow-field reduce-motion:transition-none ms-[0.125rem] flex rounded-full bg-white text-black;
   height: 1rem; /* ~14px on desktop, ~16px on mobile */
   width: 1.375rem; /* ~19px on desktop, ~22px on mobile */
 
@@ -126,8 +125,7 @@
   /* Selected/checked state - use margin instead of translate */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground text-accent;
-    margin-inline-start: calc(100% - 1.5rem); /* Adjusts automatically with font-size */
+    @apply bg-accent-foreground text-accent ms-[calc(100%-1.5rem)];
   }
 
   /* Pressed state - scale down with width animation */
@@ -145,7 +143,7 @@
   /* Small selected state positioning */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    margin-inline-start: calc(100% - 1.15625rem); /* Adjusts automatically */
+    @apply ms-[calc(100%-1.15625rem)];
   }
 }
 
@@ -156,7 +154,7 @@
   /* Large selected state positioning */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    margin-inline-start: calc(100% - 1.84375rem); /* Adjusts automatically */
+    @apply ms-[calc(100%-1.84375rem)];
   }
 }
 

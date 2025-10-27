@@ -70,22 +70,6 @@ export const demos: Record<string, DemoItem> = {
     component: AlertDemos.Basic,
     file: "alert/basic.tsx",
   },
-  "alert-variants": {
-    component: AlertDemos.Variants,
-    file: "alert/variants.tsx",
-  },
-  "alert-with-action": {
-    component: AlertDemos.WithAction,
-    file: "alert/with-action.tsx",
-  },
-  "alert-dismissible": {
-    component: AlertDemos.Dismissible,
-    file: "alert/dismissible.tsx",
-  },
-  "alert-custom-icon": {
-    component: AlertDemos.CustomIcon,
-    file: "alert/custom-icon.tsx",
-  },
   // Avatar demos
   "avatar-basic": {
     component: AvatarDemos.Basic,

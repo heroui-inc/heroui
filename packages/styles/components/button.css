@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply reduce-motion:transition-none relative isolate inline-flex h-10 origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium md:h-9;
+  @apply reduce-motion:transition-none relative isolate inline-flex h-10 w-fit origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium md:h-9;
 
   /* Cursor */
   cursor: var(--cursor-interactive);

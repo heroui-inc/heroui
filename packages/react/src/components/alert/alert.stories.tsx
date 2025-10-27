@@ -1,5 +1,9 @@
 import React from "react";
 
+import {Button} from "../button";
+import {CloseButton} from "../close-button";
+import {Spinner} from "../spinner";
+
 import {Alert} from "./index";
 
 export default {
@@ -8,51 +12,121 @@ export default {
   parameters: {
     layout: "centered",
   },
-  title: "📝 ToDo/Alert",
+  title: "Components/Alert",
 };
 
 const defaultArgs = {};
 
 const Template = () => (
-  <div className="flex w-full max-w-[500px] flex-col gap-6">
+  <div className="grid w-full max-w-xl gap-4">
+    {/* Default - General information */}
     <Alert.Root>
-      <Alert.Icon />
+      <Alert.Indicator />
       <Alert.Content>
-        <Alert.Title>This is an alert</Alert.Title>
-        <Alert.Description>Add description in this place</Alert.Description>
+        <Alert.Title>New features available</Alert.Title>
+        <Alert.Description>
+          Check out our latest updates including dark mode support and improved accessibility
+          features.
+        </Alert.Description>
       </Alert.Content>
-      <Alert.Action>Label</Alert.Action>
-      <Alert.Close />
     </Alert.Root>
 
-    <Alert.Root variant="success">
-      <Alert.Icon />
+    {/* Accent - Important information with action */}
+    <Alert.Root status="accent">
+      <Alert.Indicator />
       <Alert.Content>
-        <Alert.Title>This is an alert</Alert.Title>
-        <Alert.Description>Add description in this place</Alert.Description>
+        <Alert.Title>Update available</Alert.Title>
+        <Alert.Description>
+          A new version of the application is available. Please refresh to get the latest features
+          and bug fixes.
+        </Alert.Description>
       </Alert.Content>
-      <Alert.Action>Label</Alert.Action>
-      <Alert.Close />
+      <Button size="sm" variant="primary">
+        Refresh
+      </Button>
     </Alert.Root>
 
-    <Alert.Root variant="warning">
-      <Alert.Icon />
+    {/* Success - Confirmation */}
+    <Alert.Root status="success">
+      <Alert.Indicator />
       <Alert.Content>
-        <Alert.Title>This is an alert</Alert.Title>
-        <Alert.Description>Add description in this place</Alert.Description>
+        <Alert.Title>Payment successful</Alert.Title>
+        <Alert.Description>
+          Your payment of $49.99 has been processed. A confirmation email has been sent to your
+          inbox.
+        </Alert.Description>
       </Alert.Content>
-      <Alert.Action>Label</Alert.Action>
-      <Alert.Close />
+      <Button size="sm" variant="secondary">
+        View Receipt
+      </Button>
     </Alert.Root>
 
-    <Alert.Root variant="danger">
-      <Alert.Icon />
+    {/* Warning - Attention needed */}
+    <Alert.Root status="warning">
+      <Alert.Indicator />
       <Alert.Content>
-        <Alert.Title>This is an alert</Alert.Title>
-        <Alert.Description>Add description in this place</Alert.Description>
+        <Alert.Title>Storage almost full</Alert.Title>
+        <Alert.Description>
+          You're using 90% of your storage quota. Consider upgrading your plan or removing unused
+          files to avoid service interruption.
+        </Alert.Description>
       </Alert.Content>
-      <Alert.Action>Label</Alert.Action>
-      <Alert.Close />
+      <Button size="sm" variant="secondary">
+        Manage Storage
+      </Button>
+    </Alert.Root>
+
+    {/* Danger - Error with detailed steps */}
+    <Alert.Root status="danger">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>Unable to connect to server</Alert.Title>
+        <Alert.Description>
+          We're experiencing connection issues. Please try the following:
+          <ul className="mt-2 list-inside list-disc space-y-1 text-sm">
+            <li>Check your internet connection</li>
+            <li>Refresh the page</li>
+            <li>Clear your browser cache</li>
+          </ul>
+        </Alert.Description>
+      </Alert.Content>
+      <Button size="sm" variant="danger">
+        Retry
+      </Button>
+    </Alert.Root>
+
+    {/* Without description */}
+    <Alert.Root status="success">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>Profile updated successfully</Alert.Title>
+      </Alert.Content>
+      <CloseButton />
+    </Alert.Root>
+
+    {/* Custom indicator - Loading state */}
+    <Alert.Root status="accent">
+      <Alert.Indicator>
+        <Spinner size="sm" />
+      </Alert.Indicator>
+      <Alert.Content>
+        <Alert.Title>Processing your request</Alert.Title>
+        <Alert.Description>
+          Please wait while we sync your data. This may take a few moments.
+        </Alert.Description>
+      </Alert.Content>
+    </Alert.Root>
+
+    {/* Without close button */}
+    <Alert.Root status="warning">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>Scheduled maintenance</Alert.Title>
+        <Alert.Description>
+          Our services will be unavailable on Sunday, March 15th from 2:00 AM to 6:00 AM UTC for
+          scheduled maintenance.
+        </Alert.Description>
+      </Alert.Content>
     </Alert.Root>
   </div>
 );

@@ -23,6 +23,7 @@
     "ui-for-agents/mcp-server",
     "---Components---",
     "components/accordion",
+    "components/alert",
     "components/avatar",
     "components/button",
     "components/card",
