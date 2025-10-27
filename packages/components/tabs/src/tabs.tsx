@@ -97,7 +97,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
       requestAnimationFrame(() => cursorRef.current?.setAttribute("data-initialized", "true"));
     },
-    [getCursorStyles, variant],
+    [cursorRef.current, getCursorStyles, variant],
   );
 
   const onResize = useCallback(
@@ -122,7 +122,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     observer.observe(selectedTab);
 
     return () => observer.disconnect();
-  }, [domRef, onResize, selectedKey]);
+  }, [domRef.current, onResize, selectedKey]);
 
   const renderTabs = useMemo(
     () => (
