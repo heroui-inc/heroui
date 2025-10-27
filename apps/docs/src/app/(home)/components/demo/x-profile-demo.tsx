@@ -1,13 +1,8 @@
-"use client";
-
-import {Avatar, Button, Card} from "@heroui/react";
-import {useState} from "react";
+import {Avatar, Card} from "@heroui/react";
 
 import {VerifiedBadgeIcon} from "@/icons/verified-badge";
 
 export function XProfileDemo() {
-  const [isFollowing, setIsFollowing] = useState(false);
-
   return (
     <Card.Root className="shadow-surface w-[400px] items-start justify-center">
       <Card.Header className="items-top w-full flex-row justify-between">
@@ -27,13 +22,6 @@ export function XProfileDemo() {
             <span className="text-muted text-xs font-medium tracking-tight">@hero_ui</span>
           </div>
         </div>
-        <Button
-          size="sm"
-          variant={isFollowing ? "tertiary" : "secondary"}
-          onPress={() => setIsFollowing(!isFollowing)}
-        >
-          {isFollowing ? "Following" : "Follow"}
-        </Button>
       </Card.Header>
       <Card.Content className="flex-row text-left">
         <p className="pl-px text-sm font-medium">
