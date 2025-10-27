@@ -125,27 +125,27 @@ const image = tv({
     {
       slots: ["wrapper", "img", "blurredImg", "zoomedWrapper"],
       radius: "none",
-      class: "rounded-none",
+      class: "vg-rounded-none",
     },
     {
       slots: ["wrapper", "img", "blurredImg", "zoomedWrapper"],
       radius: "full",
-      class: "rounded-full",
+      class: "vg-rounded-full",
     },
     {
       slots: ["wrapper", "img", "blurredImg", "zoomedWrapper"],
       radius: "sm",
-      class: "rounded-small",
+      class: "vg-rounded-small",
     },
     {
       slots: ["wrapper", "img", "blurredImg", "zoomedWrapper"],
       radius: "md",
-      class: "rounded-md",
+      class: "vg-rounded-md",
     },
     {
       slots: ["wrapper", "img", "blurredImg", "zoomedWrapper"],
       radius: "lg",
-      class: "rounded-large",
+      class: "vg-rounded-large",
     },
   ],
 });
