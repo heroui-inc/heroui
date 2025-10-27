@@ -20,7 +20,7 @@
 
   /* Fumadocs UI Variables */
   --fd-layout-width: 1400px;
-  --color-fd-background: #f9f9f9;
+  --color-fd-background: var(--background);
   --color-fd-primary: oklch(0.14 0 0);
   --color-fd-secondary: #f9f9f9;
   --color-fd-card: #f9f9f9;
@@ -39,6 +39,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme="light"],
+.light {
+}
+
 /* Dark Theme Variables */
 [data-theme="dark"],
 .dark {
@@ -48,7 +52,6 @@
 
   /* Fumadocs UI Dark Theme */
   --color-fd-primary: oklch(0.99 0 0);
-  --color-fd-background: #1a1a1a;
   --color-fd-card: rgba(40, 40, 40, 0.4);
   --color-fd-secondary: #1a1a1a;
   --color-fd-accent: #2c2c2c;
@@ -244,40 +247,6 @@
     @media (max-width: 48rem) {
       background: rgba(10, 10, 10, 0.4);
     }
-  }
-}
-
-.gradient-background {
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-image: linear-gradient(
-    350deg,
-    hsl(0 0% 98%) 0%,
-    hsl(11 15% 95%) 24%,
-    hsl(11 21% 92%) 61%,
-    hsl(353 21% 92%) 81%,
-    hsl(318 16% 93%) 90%,
-    hsl(228 26% 96%) 100%
-  );
-}
-
-[data-theme="dark"],
-.dark {
-  .gradient-background {
-    background-image: linear-gradient(
-      340deg,
-      hsl(0, 33%, 0%) 0%,
-      hsl(0, 33%, 8%) 40%,
-      hsl(284, 22%, 10%) 70%,
-      hsl(233deg 24% 8%) 100%
-    );
   }
 }
 

@@ -35,17 +35,14 @@ export default function HomePage() {
             skip the copy-paste and focus on building.
           </p>
           <div className="mt-2 flex gap-3">
-            <LinkRoot
-              className={buttonVariants({class: "shadow-lg", variant: "primary"})}
-              href="/docs"
-            >
+            <LinkRoot className={buttonVariants({variant: "primary"})} href="/docs">
               Explore Docs
             </LinkRoot>
             <LinkRoot
-              className={buttonVariants({class: "bg-default/50", variant: "tertiary"})}
+              className={buttonVariants({variant: "tertiary"})}
               href="/docs/components/accordion"
             >
-              View Components
+              See components
             </LinkRoot>
           </div>
         </div>
