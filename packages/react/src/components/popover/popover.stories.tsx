@@ -45,9 +45,9 @@ export default {
   title: "Components/Overlays/Popover",
 } as Meta<typeof Popover.Root>;
 
-const defaultArgs: Omit<Popover.ContentProps, "children"> = {};
+const defaultArgs: Omit<Popover["ContentProps"], "children"> = {};
 
-const Template = (props: Popover.ContentProps) => (
+const Template = (props: Popover["ContentProps"]) => (
   <div className="flex items-center gap-3">
     <Popover.Root>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
@@ -63,7 +63,7 @@ const Template = (props: Popover.ContentProps) => (
   </div>
 );
 
-const TemplateWithArrow = (props: Popover.ContentProps) => (
+const TemplateWithArrow = (props: Popover["ContentProps"]) => (
   <div className="flex items-center gap-3">
     <Popover.Root>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
@@ -80,7 +80,7 @@ const TemplateWithArrow = (props: Popover.ContentProps) => (
   </div>
 );
 
-const TemplateWithCustomContent = (props: Popover.ContentProps) => {
+const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
   const [isFollowing, setIsFollowing] = React.useState(false);
 
   return (
@@ -167,7 +167,7 @@ export const WithCustomContent = {
   render: TemplateWithCustomContent,
 };
 
-const SpringAnimationTemplate = (props: Popover.ContentProps) => (
+const SpringAnimationTemplate = (props: Popover["ContentProps"]) => (
   <div className="flex flex-col items-center gap-8 p-8">
     <h1 className="text-xl font-semibold">Popover with Spring Animation</h1>
     <p className="text-muted text-sm">

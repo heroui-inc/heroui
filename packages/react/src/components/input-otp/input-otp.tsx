@@ -8,20 +8,28 @@ import React, {createContext, useContext} from "react";
 
 import {inputOTPVariants} from "./input-otp.styles";
 /* -------------------------------------------------------------------------------------------------
- * InputOTP Context
+ * Input OTP Context
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPContext {
   slots?: ReturnType<typeof inputOTPVariants>;
 }
+
 const InputOTPContext = createContext<InputOTPContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * InputOTP
+ * Input OTP Root
  * -----------------------------------------------------------------------------------------------*/
-interface InputOTPProps extends Omit<OTPInputProps, "render">, InputOTPVariants {
+interface InputOTPRootProps extends Omit<OTPInputProps, "render">, InputOTPVariants {
   children?: React.ReactNode;
 }
-const InputOTP = ({children, className, isDisabled, isInvalid, ...props}: InputOTPProps) => {
+
+const InputOTPRoot = ({
+  children,
+  className,
+  isDisabled,
+  isInvalid,
+  ...props
+}: InputOTPRootProps) => {
   const slots = React.useMemo(
     () => inputOTPVariants({isDisabled, isInvalid}),
     [isDisabled, isInvalid],
@@ -53,17 +61,21 @@ const InputOTP = ({children, className, isDisabled, isInvalid, ...props}: InputO
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Input OTP Group
+ * -----------------------------------------------------------------------------------------------*/
 interface InputOTPSlotData {
   char?: string | null;
   isActive?: boolean;
   hasFakeCaret?: boolean;
 }
+
 interface InputOTPGroupProps {
   children?: React.ReactNode;
   className?: string;
   slots?: InputOTPSlotData[];
 }
+
 const InputOTPGroup = ({children, className, slots = [], ...props}: InputOTPGroupProps) => {
   const {slots: contextSlots} = useContext(InputOTPContext);
 
@@ -89,7 +101,9 @@ const InputOTPGroup = ({children, className, slots = [], ...props}: InputOTPGrou
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Input OTP Slot
+ * -----------------------------------------------------------------------------------------------*/
 interface InputOTPSlotProps {
   index?: number;
   char?: string;
@@ -97,6 +111,7 @@ interface InputOTPSlotProps {
   hasFakeCaret?: boolean;
   className?: string;
 }
+
 const InputOTPSlot = ({char, className, hasFakeCaret, isActive, ...props}: InputOTPSlotProps) => {
   const {slots} = useContext(InputOTPContext);
 
@@ -119,10 +134,13 @@ const InputOTPSlot = ({char, className, hasFakeCaret, isActive, ...props}: Input
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Input OTP Separator
+ * -----------------------------------------------------------------------------------------------*/
 interface InputOTPSeparatorProps {
   className?: string;
 }
+
 const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
   const {slots} = useContext(InputOTPContext);
 
@@ -134,6 +152,6 @@ const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {InputOTPRoot, InputOTPGroup, InputOTPSlot, InputOTPSeparator};
 
-export {InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator};
-export type {InputOTPProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};
+export type {InputOTPRootProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};

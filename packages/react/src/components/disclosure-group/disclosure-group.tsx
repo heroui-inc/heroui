@@ -11,17 +11,21 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {disclosureGroupVariants} from "./disclosure-group.styles";
 
-const DisclosureGroupContext = createContext<{
+/* -------------------------------------------------------------------------------------------------
+ * Disclosure Group Context
+ * -----------------------------------------------------------------------------------------------*/
+type DisclosureGroupContext = {
   slots?: ReturnType<typeof disclosureGroupVariants>;
-}>({});
+};
+
+const DisclosureGroupContext = createContext<DisclosureGroupContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * DisclosureGroup
+ * Disclosure Group Root
  * -----------------------------------------------------------------------------------------------*/
+interface DisclosureGroupRootProps extends DisclosureGroupPrimitiveProps, DisclosureGroupVariants {}
 
-interface DisclosureGroupProps extends DisclosureGroupPrimitiveProps, DisclosureGroupVariants {}
-
-const DisclosureGroup = ({children, className, ...originalProps}: DisclosureGroupProps) => {
+const DisclosureGroupRoot = ({children, className, ...originalProps}: DisclosureGroupRootProps) => {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
     disclosureGroupVariants.variantKeys,
@@ -48,6 +52,6 @@ const DisclosureGroup = ({children, className, ...originalProps}: DisclosureGrou
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {DisclosureGroupRoot};
 
-export type {DisclosureGroupProps};
-export {DisclosureGroup};
+export type {DisclosureGroupRootProps};

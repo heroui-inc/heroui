@@ -1,4 +1,29 @@
-export {RadioGroup} from "./radio-group";
-export type {RadioGroupProps} from "./radio-group";
+import type {ComponentProps} from "react";
 
-export {radioGroupVariants, type RadioGroupVariants} from "./radio-group.styles";
+import {RadioGroupRoot} from "./radio-group";
+
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const RadioGroup = Object.assign(RadioGroupRoot, {
+  Root: RadioGroupRoot,
+});
+
+export type RadioGroup = {
+  Props: ComponentProps<typeof RadioGroupRoot>;
+  RootProps: ComponentProps<typeof RadioGroupRoot>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
+export {RadioGroupRoot};
+
+export type {RadioGroupRootProps, RadioGroupRootProps as RadioGroupProps} from "./radio-group";
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export {radioGroupVariants} from "./radio-group.styles";
+
+export type {RadioGroupVariants} from "./radio-group.styles";

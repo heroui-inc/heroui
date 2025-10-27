@@ -7,9 +7,12 @@ import {Separator as SeparatorPrimitive} from "react-aria-components";
 
 import {separatorVariants} from "./separator.styles";
 
-interface SeparatorProps extends SeparatorPrimitiveProps, SeparatorVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Separator Root
+ * -----------------------------------------------------------------------------------------------*/
+interface SeparatorRootProps extends SeparatorPrimitiveProps, SeparatorVariants {}
 
-const Separator = ({className, orientation = "horizontal", ...props}: SeparatorProps) => {
+const SeparatorRoot = ({className, orientation = "horizontal", ...props}: SeparatorRootProps) => {
   return (
     <SeparatorPrimitive
       data-orientation={orientation}
@@ -24,5 +27,9 @@ const Separator = ({className, orientation = "horizontal", ...props}: SeparatorP
   );
 };
 
-export {Separator};
-export type {SeparatorProps};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {SeparatorRoot};
+
+export type {SeparatorRootProps};

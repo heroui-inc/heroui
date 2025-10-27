@@ -1,6 +1,41 @@
-export {TooltipRoot, TooltipTrigger, TooltipContent, TooltipArrow} from "./tooltip";
-export type {TooltipRootProps, TooltipContentProps, TooltipTriggerProps} from "./tooltip";
+import type {ComponentProps} from "react";
 
-export {tooltipVariants, type TooltipVariants} from "./tooltip.styles";
+import {TooltipArrow, TooltipContent, TooltipRoot, TooltipTrigger} from "./tooltip";
 
-export * as Tooltip from "./slots";
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Tooltip = Object.assign(TooltipRoot, {
+  Root: TooltipRoot,
+  Trigger: TooltipTrigger,
+  Content: TooltipContent,
+  Arrow: TooltipArrow,
+});
+
+export type Tooltip = {
+  Props: ComponentProps<typeof TooltipRoot>;
+  RootProps: ComponentProps<typeof TooltipRoot>;
+  TriggerProps: ComponentProps<typeof TooltipTrigger>;
+  ContentProps: ComponentProps<typeof TooltipContent>;
+  ArrowProps: ComponentProps<typeof TooltipArrow>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
+export {TooltipRoot, TooltipTrigger, TooltipContent, TooltipArrow};
+
+export type {
+  TooltipRootProps,
+  TooltipRootProps as TooltipProps,
+  TooltipArrowProps,
+  TooltipContentProps,
+  TooltipTriggerProps,
+} from "./tooltip";
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export {tooltipVariants} from "./tooltip.styles";
+
+export type {TooltipVariants} from "./tooltip.styles";
