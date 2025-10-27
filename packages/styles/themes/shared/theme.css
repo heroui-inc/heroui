@@ -65,6 +65,7 @@
     var(--color-background) 90%,
     var(--color-foreground) 6%
   );
+  /* TODO: Add quaternary background color */
   --color-background-inverse: var(--color-foreground);
 
   /* ------------------------- */

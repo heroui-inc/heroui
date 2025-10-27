@@ -54,9 +54,6 @@
     --accent: oklch(0.6204 0.195 253.83);
     --accent-foreground: var(--snow);
 
-    --accent-soft: oklch(0.9612 0 0);
-    --accent-soft-foreground: oklch(0.6204 0.195 253.83);
-
     /* Form Field Defaults - Colors */
     --field-background: oklch(0.95 0 0);
     --field-foreground: oklch(0.2103 0.0059 285.89);
@@ -116,9 +113,6 @@
 
     --default: oklch(27.4% 0.006 286.033);
     --default-foreground: var(--snow);
-
-    --accent-soft: oklch(27.4% 0.006 286.033);
-    --accent-soft-foreground: var(--snow);
 
     /* Form Field Defaults - Colors (only the ones that are different from light theme) */
     --field-background: var(--default);

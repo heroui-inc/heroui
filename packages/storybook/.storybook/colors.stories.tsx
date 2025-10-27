@@ -72,8 +72,6 @@ export const AllColors = () => {
   const brandColors: ColorItemProps[] = [
     {name: "Accent", variable: "--color-accent"},
     {name: "Accent Foreground", variable: "--color-accent-foreground"},
-    {name: "Accent Soft", variable: "--color-accent-soft"},
-    {name: "Accent Soft Foreground", variable: "--color-accent-soft-foreground"},
   ];
 
   const semanticColors: ColorItemProps[] = [
@@ -113,6 +111,48 @@ export const AllColors = () => {
     {name: "Eclipse", variable: "--eclipse"},
   ];
 
+  const calculatedBackgroundColors: ColorItemProps[] = [
+    {name: "Background Secondary", variable: "--color-background-secondary"},
+    {name: "Background Tertiary", variable: "--color-background-tertiary"},
+    {name: "Background Inverse", variable: "--color-background-inverse"},
+  ];
+
+  const calculatedHoverColors: ColorItemProps[] = [
+    {name: "Default Hover", variable: "--color-default-hover"},
+    {name: "Accent Hover", variable: "--color-accent-hover"},
+    {name: "Success Hover", variable: "--color-success-hover"},
+    {name: "Warning Hover", variable: "--color-warning-hover"},
+    {name: "Danger Hover", variable: "--color-danger-hover"},
+  ];
+
+  const calculatedSoftColors: ColorItemProps[] = [
+    {name: "Accent Soft", variable: "--color-accent-soft"},
+    {name: "Accent Soft Foreground", variable: "--color-accent-soft-foreground"},
+    {name: "Accent Soft Hover", variable: "--color-accent-soft-hover"},
+    {name: "Danger Soft", variable: "--color-danger-soft"},
+    {name: "Danger Soft Foreground", variable: "--color-danger-soft-foreground"},
+    {name: "Danger Soft Hover", variable: "--color-danger-soft-hover"},
+    {name: "Warning Soft", variable: "--color-warning-soft"},
+    {name: "Warning Soft Foreground", variable: "--color-warning-soft-foreground"},
+    {name: "Warning Soft Hover", variable: "--color-warning-soft-hover"},
+    {name: "Success Soft", variable: "--color-success-soft"},
+    {name: "Success Soft Foreground", variable: "--color-success-soft-foreground"},
+    {name: "Success Soft Hover", variable: "--color-success-soft-hover"},
+  ];
+
+  const calculatedSurfaceColors: ColorItemProps[] = [
+    {name: "Surface Secondary", variable: "--color-surface-secondary"},
+    {name: "Surface Tertiary", variable: "--color-surface-tertiary"},
+    {name: "Surface Quaternary", variable: "--color-surface-quaternary"},
+  ];
+
+  const calculatedFieldColors: ColorItemProps[] = [
+    {name: "Field Hover", variable: "--color-field-hover"},
+    {name: "Field Focus", variable: "--color-field-focus"},
+    {name: "Field Border Hover", variable: "--color-field-border-hover"},
+    {name: "Field Border Focus", variable: "--color-field-border-focus"},
+  ];
+
   return (
     <div className="mx-auto max-w-4xl p-6">
       <div className="mb-8">
@@ -128,6 +168,18 @@ export const AllColors = () => {
       <ColorSection colors={componentColors} title="Component Colors" />
       <ColorSection colors={formFieldColors} title="Form Field Colors" />
       <ColorSection colors={primitiveColors} title="Primitive Colors" />
+
+      <div className="mb-8">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">Calculated Colors</h2>
+        <p className="mb-6 text-sm text-muted">
+          These colors are dynamically calculated using color-mix() from base colors
+        </p>
+        <ColorSection colors={calculatedBackgroundColors} title="Background Shades" />
+        <ColorSection colors={calculatedHoverColors} title="Hover States" />
+        <ColorSection colors={calculatedSoftColors} title="Soft Variants" />
+        <ColorSection colors={calculatedSurfaceColors} title="Surface Levels" />
+        <ColorSection colors={calculatedFieldColors} title="Field States" />
+      </div>
     </div>
   );
 };
