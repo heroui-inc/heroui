@@ -2,4 +2,4 @@
 "@heroui/spinner": patch
 ---
 
-Fix spinner animation delay timing for smoother rotation
+Fix spinner animation (#5794)
