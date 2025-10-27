@@ -257,45 +257,45 @@ const button = tv({
     {
       variant: "light",
       color: "default",
-      class: [colorVariants.light.default, "data-[hover=true]:bg-default/40"],
+      class: [colorVariants.light.default, "vg-data-[hover=true]:bg-default/40"],
     },
     {
       variant: "light",
       color: "primary",
-      class: [colorVariants.light.primary, "data-[hover=true]:bg-primary/20"],
+      class: [colorVariants.light.primary, "vg-data-[hover=true]:bg-primary/20"],
     },
     {
       variant: "light",
       color: "secondary",
-      class: [colorVariants.light.secondary, "data-[hover=true]:bg-secondary/20"],
+      class: [colorVariants.light.secondary, "vg-data-[hover=true]:bg-secondary/20"],
     },
     {
       variant: "light",
       color: "success",
-      class: [colorVariants.light.success, "data-[hover=true]:bg-success/20"],
+      class: [colorVariants.light.success, "vg-data-[hover=true]:bg-success/20"],
     },
     {
       variant: "light",
       color: "warning",
-      class: [colorVariants.light.warning, "data-[hover=true]:bg-warning/20"],
+      class: [colorVariants.light.warning, "vg-data-[hover=true]:bg-warning/20"],
     },
     {
       variant: "light",
       color: "danger",
-      class: [colorVariants.light.danger, "data-[hover=true]:bg-danger/20"],
+      class: [colorVariants.light.danger, "vg-data-[hover=true]:bg-danger/20"],
     },
     // ghost / color
     {
       variant: "ghost",
       color: "default",
-      class: [colorVariants.ghost.default, "data-[hover=true]:!bg-default"],
+      class: [colorVariants.ghost.default, "vg-data-[hover=true]:!bg-default"],
     },
     {
       variant: "ghost",
       color: "primary",
       class: [
         colorVariants.ghost.primary,
-        "data-[hover=true]:!bg-primary data-[hover=true]:!text-primary-foreground",
+        "vg-data-[hover=true]:!bg-primary vg-data-[hover=true]:!text-primary-foreground",
       ],
     },
     {
@@ -303,7 +303,7 @@ const button = tv({
       color: "secondary",
       class: [
         colorVariants.ghost.secondary,
-        "data-[hover=true]:!bg-secondary data-[hover=true]:!text-secondary-foreground",
+        "vg-data-[hover=true]:!bg-secondary vg-data-[hover=true]:!text-secondary-foreground",
       ],
     },
     {
@@ -311,7 +311,7 @@ const button = tv({
       color: "success",
       class: [
         colorVariants.ghost.success,
-        "data-[hover=true]:!bg-success data-[hover=true]:!text-success-foreground",
+        "vg-data-[hover=true]:!bg-success vg-data-[hover=true]:!text-success-foreground",
       ],
     },
     {
@@ -319,7 +319,7 @@ const button = tv({
       color: "warning",
       class: [
         colorVariants.ghost.warning,
-        "data-[hover=true]:!bg-warning data-[hover=true]:!text-warning-foreground",
+        "vg-data-[hover=true]:!bg-warning vg-data-[hover=true]:!text-warning-foreground",
       ],
     },
     {
@@ -327,7 +327,7 @@ const button = tv({
       color: "danger",
       class: [
         colorVariants.ghost.danger,
-        "data-[hover=true]:!bg-danger data-[hover=true]:!text-danger-foreground",
+        "vg-data-[hover=true]:!bg-danger vg-data-[hover=true]:!text-danger-foreground",
       ],
     },
     // isInGroup / radius / size <-- radius not provided
