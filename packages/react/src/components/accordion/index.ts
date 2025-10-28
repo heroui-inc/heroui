@@ -6,7 +6,7 @@ export {
   AccordionPanel,
   AccordionIndicator,
   AccordionBody,
-} from "./accordion";
+} from "./accordion.js";
 
 export type {
   AccordionRootProps,
@@ -16,9 +16,9 @@ export type {
   AccordionIndicatorProps,
   AccordionBodyProps,
   AccordionHeadingProps,
-} from "./accordion";
+} from "./accordion.js";
 
-export {accordionVariants} from "./accordion.styles";
-export type {AccordionVariants} from "./accordion.styles";
+export {accordionVariants} from "./accordion.styles.js";
+export type {AccordionVariants} from "./accordion.styles.js";
 
-export * as Accordion from "./slots";
+export * as Accordion from "./slots.js";

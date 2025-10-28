@@ -2,7 +2,7 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {disabledClasses, focusRingClasses} from "../../utils";
+import {disabledClasses, focusRingClasses} from "../../utils/index.js";
 
 export const calendarVariants = tv({
   compoundSlots: [

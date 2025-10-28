@@ -5,7 +5,7 @@ export {
   CardDescription as Description,
   CardContent as Content,
   CardFooter as Footer,
-} from "./card";
+} from "./card.js";
 export type {
   CardRootProps as RootProps,
   CardHeaderProps as HeaderProps,
@@ -13,6 +13,6 @@ export type {
   CardDescriptionProps as DescriptionProps,
   CardContentProps as ContentProps,
   CardFooterProps as FooterProps,
-} from "./card";
+} from "./card.js";
 
-export {cardVariants as variants, type CardVariants as Variants} from "./card.styles";
+export {cardVariants as variants, type CardVariants as Variants} from "./card.styles.js";

@@ -1,14 +1,14 @@
 "use client";
 
-import type {ButtonVariants} from "./button.styles";
+import type {ButtonVariants} from "./button.styles.js";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeTwRenderProps} from "../../utils/index.js";
 
-import {buttonVariants} from "./button.styles";
+import {buttonVariants} from "./button.styles.js";
 
 interface ButtonProps extends ButtonPrimitiveProps, ButtonVariants {
   asChild?: boolean;

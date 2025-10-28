@@ -1,7 +1,7 @@
 "use client";
 
-import type {DisclosureVariants} from "./disclosure.styles";
-import type {Booleanish} from "../../utils/assertion";
+import type {DisclosureVariants} from "./disclosure.styles.js";
+import type {Booleanish} from "../../utils/assertion.js";
 import type {
   ButtonProps,
   DisclosurePanelProps,
@@ -17,12 +17,12 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
-import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
-import {IconChevronDown} from "../icons";
+import {dataAttr} from "../../utils/assertion.js";
+import {composeTwRenderProps} from "../../utils/compose.js";
+import {mapPropsVariants, objectToDeps} from "../../utils/index.js";
+import {IconChevronDown} from "../icons.js";
 
-import {disclosureVariants} from "./disclosure.styles";
+import {disclosureVariants} from "./disclosure.styles.js";
 
 const DisclosureContext = createContext<{
   slots?: ReturnType<typeof disclosureVariants>;

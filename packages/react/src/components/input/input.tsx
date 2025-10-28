@@ -1,13 +1,13 @@
 "use client";
 
-import type {InputVariants} from "./input.styles";
+import type {InputVariants} from "./input.styles.js";
 import type {InputProps as InputPrimitiveProps} from "react-aria-components";
 
 import {Input as InputPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeTwRenderProps} from "../../utils/index.js";
 
-import {inputVariants} from "./input.styles";
+import {inputVariants} from "./input.styles.js";
 
 interface InputProps extends InputPrimitiveProps, InputVariants {}
 

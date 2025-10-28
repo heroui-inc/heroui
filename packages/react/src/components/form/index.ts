@@ -1,2 +1,2 @@
-export {Form} from "./form";
-export type {FormProps} from "./form";
+export {Form} from "./form.js";
+export type {FormProps} from "./form.js";

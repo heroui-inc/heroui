@@ -1,4 +1,4 @@
-export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from "./card";
+export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from "./card.js";
 
 export type {
   CardRootProps,
@@ -7,8 +7,8 @@ export type {
   CardDescriptionProps,
   CardContentProps,
   CardFooterProps,
-} from "./card";
+} from "./card.js";
 
-export {cardVariants, type CardVariants} from "./card.styles";
+export {cardVariants, type CardVariants} from "./card.styles.js";
 
-export * as Card from "./slots";
+export * as Card from "./slots.js";

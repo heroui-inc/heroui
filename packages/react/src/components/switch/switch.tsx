@@ -1,15 +1,15 @@
 "use client";
 
-import type {SwitchVariants} from "./switch.styles";
+import type {SwitchVariants} from "./switch.styles.js";
 import type {SwitchProps as SwitchPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
+import {mapPropsVariants, objectToDeps} from "../../utils/index.js";
 
-import {switchVariants} from "./switch.styles";
+import {switchVariants} from "./switch.styles.js";
 
 /* -------------------------------------------------------------------------------------------------
  * Switch

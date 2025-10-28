@@ -1,4 +1,4 @@
-export {Separator} from "./separator";
-export type {SeparatorProps} from "./separator";
-export {separatorVariants} from "./separator.styles";
-export type {SeparatorVariants} from "./separator.styles";
+export {Separator} from "./separator.js";
+export type {SeparatorProps} from "./separator.js";
+export {separatorVariants} from "./separator.styles.js";
+export type {SeparatorVariants} from "./separator.styles.js";

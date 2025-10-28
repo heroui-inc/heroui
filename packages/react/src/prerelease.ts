@@ -1,5 +1,5 @@
-import {Logger} from "./utils/logger";
-import {HEROUI_VERSION} from "./version";
+import {Logger} from "./utils/logger.js";
+import {HEROUI_VERSION} from "./version.js";
 
 const logger = new Logger({
   enabled: true,

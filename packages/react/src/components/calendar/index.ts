@@ -7,7 +7,7 @@ export {
   CalendarGridHeader,
   CalendarHeaderCell,
   CalendarCell,
-} from "./calendar";
+} from "./calendar.js";
 
 export type {
   CalendarProps,
@@ -18,6 +18,6 @@ export type {
   CalendarGridHeaderProps,
   CalendarHeaderCellProps,
   CalendarCellProps,
-} from "./calendar";
+} from "./calendar.js";
 
-export {calendarVariants, type CalendarVariants} from "./calendar.styles";
+export {calendarVariants, type CalendarVariants} from "./calendar.styles.js";

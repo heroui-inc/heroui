@@ -1,10 +1,10 @@
 "use client";
 
-import type {ChipVariants} from "./chip.styles";
+import type {ChipVariants} from "./chip.styles.js";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 
-import {chipVariants} from "./chip.styles";
+import {chipVariants} from "./chip.styles.js";
 
 interface ChipRootProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "type">, ChipVariants {
   className?: string;

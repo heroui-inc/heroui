@@ -1,6 +1,6 @@
 "use client";
 
-import type {TabsVariants} from "./tabs.styles";
+import type {TabsVariants} from "./tabs.styles.js";
 import type {
   TabListProps as TabListPrimitiveProps,
   TabPanelProps as TabPanelPrimitiveProps,
@@ -17,9 +17,9 @@ import {
   Tabs as TabsPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {tabsVariants} from "./tabs.styles";
+import {tabsVariants} from "./tabs.styles.js";
 
 const TabsContext = createContext<{
   slots?: ReturnType<typeof tabsVariants>;

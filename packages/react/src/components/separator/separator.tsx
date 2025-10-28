@@ -1,11 +1,11 @@
 "use client";
 
-import type {SeparatorVariants} from "./separator.styles";
+import type {SeparatorVariants} from "./separator.styles.js";
 import type {SeparatorProps as SeparatorPrimitiveProps} from "react-aria-components";
 
 import {Separator as SeparatorPrimitive} from "react-aria-components";
 
-import {separatorVariants} from "./separator.styles";
+import {separatorVariants} from "./separator.styles.js";
 
 interface SeparatorProps extends SeparatorPrimitiveProps, SeparatorVariants {}
 

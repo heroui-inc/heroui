@@ -1,7 +1,7 @@
-export {LinkRoot, LinkIcon} from "./link";
-export type {LinkRootProps, LinkIconProps} from "./link";
+export {LinkRoot, LinkIcon} from "./link.js";
+export type {LinkRootProps, LinkIconProps} from "./link.js";
 
-export {linkVariants} from "./link.styles";
-export type {LinkVariants} from "./link.styles";
+export {linkVariants} from "./link.styles.js";
+export type {LinkVariants} from "./link.styles.js";
 
-export * as Link from "./slots";
+export * as Link from "./slots.js";

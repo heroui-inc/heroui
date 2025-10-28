@@ -3,47 +3,47 @@
 //  ===================================
 
 // completed
-export * from "./accordion";
-export * from "./avatar";
-export * from "./button";
-export * from "./card";
-export * from "./chip";
-export * from "./close-button";
-export * from "./disclosure";
-export * from "./disclosure-group";
-export * from "./kbd";
-export * from "./link";
-export * from "./popover";
-export * from "./separator";
-export * from "./skeleton";
-export * from "./spinner";
-export * from "./switch";
-export * from "./switch-group";
-export * from "./tabs";
-export * from "./tooltip";
-export * from "./input";
-export * from "./textarea";
-export * from "./text-field";
-export * from "./text";
-export * from "./label";
-export * from "./description";
-export * from "./field-error";
-export * from "./fieldset";
-export * from "./form";
-export * from "./radio";
-export * from "./radio-group";
+export * from "./accordion/index.js";
+export * from "./avatar/index.js";
+export * from "./button/index.js";
+export * from "./card/index.js";
+export * from "./chip/index.js";
+export * from "./close-button/index.js";
+export * from "./disclosure/index.js";
+export * from "./disclosure-group/index.js";
+export * from "./kbd/index.js";
+export * from "./link/index.js";
+export * from "./popover/index.js";
+export * from "./separator/index.js";
+export * from "./skeleton/index.js";
+export * from "./spinner/index.js";
+export * from "./switch/index.js";
+export * from "./switch-group/index.js";
+export * from "./tabs/index.js";
+export * from "./tooltip/index.js";
+export * from "./input/index.js";
+export * from "./textarea/index.js";
+export * from "./text-field/index.js";
+export * from "./text/index.js";
+export * from "./label/index.js";
+export * from "./description/index.js";
+export * from "./field-error/index.js";
+export * from "./fieldset/index.js";
+export * from "./form/index.js";
+export * from "./radio/index.js";
+export * from "./radio-group/index.js";
 
 // in progress
-export * from "./alert";
-export * from "./calendar";
-export * from "./listbox";
-export * from "./slider";
-export * from "./input-otp";
+export * from "./alert/index.js";
+export * from "./calendar/index.js";
+export * from "./listbox/index.js";
+export * from "./slider/index.js";
+export * from "./input-otp/index.js";
 
 //  ===================================
 //  Icons
 //  ===================================
-export * from "./icons";
+export * from "./icons.js";
 
 //  ===================================
 //  Types

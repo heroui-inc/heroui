@@ -1,14 +1,14 @@
 "use client";
 
-import type {RadioGroupVariants} from "./radio-group.styles";
+import type {RadioGroupVariants} from "./radio-group.styles.js";
 import type {RadioGroupProps as RadioGroupPrimitiveProps} from "react-aria-components";
 
 import React from "react";
 import {RadioGroup as RadioGroupPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {radioGroupVariants} from "./radio-group.styles";
+import {radioGroupVariants} from "./radio-group.styles.js";
 
 interface RadioGroupProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
 

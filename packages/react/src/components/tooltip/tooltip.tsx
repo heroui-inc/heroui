@@ -1,6 +1,6 @@
 "use client";
 
-import type {TooltipVariants} from "./tooltip.styles";
+import type {TooltipVariants} from "./tooltip.styles.js";
 import type {TooltipProps as TooltipPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
@@ -12,9 +12,9 @@ import {
   TooltipTrigger as TooltipTriggerPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {tooltipVariants} from "./tooltip.styles";
+import {tooltipVariants} from "./tooltip.styles.js";
 
 type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
 

@@ -1,10 +1,10 @@
 "use client";
 
-import type {SwitchGroupVariants} from "./switch-group.styles";
+import type {SwitchGroupVariants} from "./switch-group.styles.js";
 
 import React from "react";
 
-import {switchGroupVariants} from "./switch-group.styles";
+import {switchGroupVariants} from "./switch-group.styles.js";
 
 interface SwitchGroupProps extends React.HTMLAttributes<HTMLDivElement>, SwitchGroupVariants {}
 

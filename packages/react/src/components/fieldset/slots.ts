@@ -3,12 +3,15 @@ export {
   FieldsetLegend as Legend,
   FieldGroup as Group,
   FieldsetActions as Actions,
-} from "./fieldset";
+} from "./fieldset.js";
 export type {
   FieldsetRootProps as RootProps,
   FieldsetLegendProps as LegendProps,
   FieldGroupProps as GroupProps,
   FieldsetActionsProps as ActionsProps,
-} from "./fieldset";
+} from "./fieldset.js";
 
-export {fieldsetVariants as variants, type FieldsetVariants as Variants} from "./fieldset.styles";
+export {
+  fieldsetVariants as variants,
+  type FieldsetVariants as Variants,
+} from "./fieldset.styles.js";

@@ -1,7 +1,7 @@
 "use client";
 
-import type {AccordionVariants} from "./accordion.styles";
-import type {Booleanish} from "../../utils/assertion";
+import type {AccordionVariants} from "./accordion.styles.js";
+import type {Booleanish} from "../../utils/assertion.js";
 import type {
   ButtonProps,
   DisclosureGroupProps,
@@ -19,12 +19,12 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
-import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
-import {IconChevronDown} from "../icons";
+import {dataAttr} from "../../utils/assertion.js";
+import {composeTwRenderProps} from "../../utils/compose.js";
+import {mapPropsVariants, objectToDeps} from "../../utils/index.js";
+import {IconChevronDown} from "../icons.js";
 
-import {accordionVariants} from "./accordion.styles";
+import {accordionVariants} from "./accordion.styles.js";
 
 const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVariants>}>({});
 

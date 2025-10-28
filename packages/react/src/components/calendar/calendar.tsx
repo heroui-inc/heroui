@@ -1,6 +1,6 @@
 "use client";
 
-import type {CalendarVariants} from "./calendar.styles";
+import type {CalendarVariants} from "./calendar.styles.js";
 import type {
   ButtonProps as ButtonPrimitiveProps,
   CalendarCellProps as CalendarCellPrimitiveProps,
@@ -24,9 +24,9 @@ import {
   Heading as HeadingPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {calendarVariants} from "./calendar.styles";
+import {calendarVariants} from "./calendar.styles.js";
 /* -------------------------------------------------------------------------------------------------
  * Calendar Context
  * -----------------------------------------------------------------------------------------------*/

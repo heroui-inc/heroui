@@ -1,12 +1,12 @@
 "use client";
 
-import type {InputOTPVariants} from "./input-otp.styles";
+import type {InputOTPVariants} from "./input-otp.styles.js";
 import type {OTPInputProps} from "input-otp";
 
 import {OTPInput} from "input-otp";
 import React, {createContext, useContext} from "react";
 
-import {inputOTPVariants} from "./input-otp.styles";
+import {inputOTPVariants} from "./input-otp.styles.js";
 /* -------------------------------------------------------------------------------------------------
  * InputOTP Context
  * -----------------------------------------------------------------------------------------------*/

@@ -1,11 +1,11 @@
 "use client";
 
-import type {CardVariants} from "./card.styles";
+import type {CardVariants} from "./card.styles.js";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 
-import {cardVariants} from "./card.styles";
+import {cardVariants} from "./card.styles.js";
 /* -------------------------------------------------------------------------------------------------
  * Card Context
  * -----------------------------------------------------------------------------------------------*/
