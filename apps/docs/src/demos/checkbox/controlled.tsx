@@ -1,5 +1,3 @@
-"use client";
-
 import {Checkbox, Label} from "@heroui/react";
 import {useState} from "react";
 
