@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Card, Input, Label, Link, TextField} from "@heroui/react";
 
 export function WithForm() {

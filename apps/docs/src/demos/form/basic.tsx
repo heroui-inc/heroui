@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Description, FieldError, Form, Input, Label, TextField} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

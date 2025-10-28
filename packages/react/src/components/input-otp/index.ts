@@ -41,14 +41,8 @@ export {inputOTPVariants} from "./input-otp.styles";
 export type {InputOTPVariants} from "./input-otp.styles";
 
 //  ===================================
-// 3rd party
+// Regular Expressions
 //  ===================================
-export {
-  OTPInputContext,
-  type OTPInputProps,
-  REGEXP_ONLY_CHARS,
-  REGEXP_ONLY_DIGITS,
-  REGEXP_ONLY_DIGITS_AND_CHARS,
-  type RenderProps,
-  type SlotProps,
-} from "input-otp";
+export const REGEXP_ONLY_DIGITS = "^\\d+$";
+export const REGEXP_ONLY_CHARS = "^[a-zA-Z]+$";
+export const REGEXP_ONLY_DIGITS_AND_CHARS = "^[a-zA-Z0-9]+$";

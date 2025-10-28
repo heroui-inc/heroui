@@ -1,5 +1,3 @@
-"use client";
-
 import {Kbd} from "@heroui/react";
 
 export function NavigationKeys() {

@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Spinner} from "@heroui/react";
 import React from "react";
 

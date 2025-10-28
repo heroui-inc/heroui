@@ -1,5 +1,3 @@
-"use client";
-
 import {Skeleton} from "@heroui/react";
 
 export function Grid() {

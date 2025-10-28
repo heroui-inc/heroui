@@ -13,7 +13,7 @@ export function CustomIndicator() {
     <Accordion.Root
       className="w-full max-w-md"
       expandedKeys={expandedKeys}
-      variant="outline"
+      variant="elevated"
       onExpandedChange={setExpandedKeys}
     >
       <Accordion.Item id="1">

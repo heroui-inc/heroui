@@ -24,16 +24,14 @@ import { TextField } from '@heroui/react';
 ```tsx
 import {TextField, Label, Input, Description, FieldError} from '@heroui/react';
 
-export default function Example() {
-  return (
-    <TextField isRequired>
-      <Label>Display name</Label>
-      <Input placeholder="Jane" />
-      <Description>Visible to other team members.</Description>
-      <FieldError />
-    </TextField>
-  );
-}
+export default () => (
+  <TextField>
+    <Label />
+    <Input />
+    <Description />
+    <FieldError />
+  </TextField>
+)
 ```
 
 >  **TextField** combines label, input, description, and error into a single accessible component.  

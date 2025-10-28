@@ -1,5 +1,3 @@
-"use client";
-
 import {Accordion, cn} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

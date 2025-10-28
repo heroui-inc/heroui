@@ -1,5 +1,3 @@
-"use client";
-
 import {Tab, TabIndicator, TabList, TabListContainer, TabsRoot} from "@heroui/react";
 
 export function CustomStyles() {

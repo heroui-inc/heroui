@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Card} from "@heroui/react";
 
 export function Horizontal() {

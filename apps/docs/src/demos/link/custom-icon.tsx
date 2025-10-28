@@ -1,5 +1,3 @@
-"use client";
-
 import {Link} from "@heroui/react";
 
 import {LinkIcon} from "@/icons/link";

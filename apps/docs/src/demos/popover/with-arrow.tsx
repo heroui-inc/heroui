@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Popover} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

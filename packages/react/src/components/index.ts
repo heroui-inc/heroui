@@ -32,13 +32,13 @@ export * from "./fieldset";
 export * from "./form";
 export * from "./radio";
 export * from "./radio-group";
+export * from "./input-otp";
+export * from "./alert";
 
 // in progress
-export * from "./alert";
 export * from "./calendar";
 export * from "./listbox";
 export * from "./slider";
-export * from "./input-otp";
 
 //  ===================================
 //  Icons

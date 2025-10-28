@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import clsx from "clsx";

@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Label, Switch, SwitchGroup} from "@heroui/react";
 import React from "react";
 

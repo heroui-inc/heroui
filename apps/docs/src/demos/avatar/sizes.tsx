@@ -1,5 +1,3 @@
-"use client";
-
 import {Avatar} from "@heroui/react";
 
 export function Sizes() {

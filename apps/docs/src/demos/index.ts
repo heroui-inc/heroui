@@ -15,6 +15,7 @@ import * as FieldErrorDemos from "./field-error";
 import * as FieldsetDemos from "./fieldset";
 import * as FormDemos from "./form";
 import * as InputDemos from "./input";
+import * as InputOTPDemos from "./input-otp";
 import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
@@ -231,6 +232,39 @@ export const demos: Record<string, DemoItem> = {
   "input-controlled": {
     component: InputDemos.Controlled,
     file: "input/controlled.tsx",
+  },
+  // InputOTP demos
+  "input-otp-basic": {
+    component: InputOTPDemos.Basic,
+    file: "input-otp/basic.tsx",
+  },
+  "input-otp-four-digits": {
+    component: InputOTPDemos.FourDigits,
+    file: "input-otp/four-digits.tsx",
+  },
+  "input-otp-disabled": {
+    component: InputOTPDemos.Disabled,
+    file: "input-otp/disabled.tsx",
+  },
+  "input-otp-with-pattern": {
+    component: InputOTPDemos.WithPattern,
+    file: "input-otp/with-pattern.tsx",
+  },
+  "input-otp-controlled": {
+    component: InputOTPDemos.Controlled,
+    file: "input-otp/controlled.tsx",
+  },
+  "input-otp-with-validation": {
+    component: InputOTPDemos.WithValidation,
+    file: "input-otp/with-validation.tsx",
+  },
+  "input-otp-on-complete": {
+    component: InputOTPDemos.OnComplete,
+    file: "input-otp/on-complete.tsx",
+  },
+  "input-otp-form-example": {
+    component: InputOTPDemos.FormExample,
+    file: "input-otp/form-example.tsx",
   },
   // Kbd demos
   "kbd-basic": {

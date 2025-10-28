@@ -1,5 +1,3 @@
-"use client";
-
 import {Avatar, Card} from "@heroui/react";
 
 export function WithAvatar() {

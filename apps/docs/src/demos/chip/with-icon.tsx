@@ -1,5 +1,3 @@
-"use client";
-
 import {Chip} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

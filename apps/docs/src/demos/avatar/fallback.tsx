@@ -1,5 +1,3 @@
-"use client";
-
 import {Avatar} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

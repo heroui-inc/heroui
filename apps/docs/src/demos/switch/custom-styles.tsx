@@ -1,5 +1,3 @@
-"use client";
-
 import {SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
