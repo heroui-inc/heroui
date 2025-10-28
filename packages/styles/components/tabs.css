@@ -44,7 +44,7 @@
   z-index: 1;
   cursor: var(--cursor-interactive);
 
-  @apply text-segment-foreground reduce-motion:transition-none flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center font-medium outline-none;
+  @apply text-muted reduce-motion:transition-none flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium outline-none;
 
   transition:
     color 150ms var(--ease-smooth),
@@ -76,6 +76,11 @@
     left: 5%;
     width: 90%;
     height: 1px;
+  }
+
+  /* Selected state */
+  &[data-selected="true"] {
+    @apply text-segment-foreground;
   }
 
   /* Hide separator when this tab is selected */

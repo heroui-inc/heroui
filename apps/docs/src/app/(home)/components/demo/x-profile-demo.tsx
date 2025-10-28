@@ -12,7 +12,7 @@ export function XProfileDemo() {
               alt="HeroUI"
               src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
             />
-            <Avatar.Fallback>Z</Avatar.Fallback>
+            <Avatar.Fallback>H</Avatar.Fallback>
           </Avatar.Root>
           <div className="flex h-full flex-col items-start justify-center">
             <div className="flex items-center gap-0.5">

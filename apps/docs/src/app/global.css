@@ -73,6 +73,7 @@
 
 #nd-home-layout {
   #nd-nav {
+    @apply bg-background-secondary;
     [data-theme-toggle] {
       @apply bg-field;
       margin-left: 4px;

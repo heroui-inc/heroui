@@ -1,19 +1,30 @@
-import {Skeleton} from "@heroui/react";
+import {Skeleton, buttonVariants} from "@heroui/react";
 import * as React from "react";
 
 import {siteConfig} from "@/config/site";
 import {GitHubIcon} from "@/icons/github";
+import {cn} from "@/utils/cn";
 import {GITHUB_API_URL} from "@/utils/constants";
 
-export function GitHubLink() {
+export function GitHubLink({
+  children,
+  className,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+}) {
   return (
     <a
-      className="hover:bg-field-hover bg-field flex items-center gap-1 rounded-full p-2 transition-all"
       href={siteConfig.links.github}
       rel="noreferrer"
       target="_blank"
+      className={buttonVariants({
+        className: cn("bg-surface-tertiary", className),
+        variant: "tertiary",
+      })}
     >
       <GitHubIcon />
+      {children}
       <React.Suspense fallback={<Skeleton className="h-4 w-8" />}>
         <StarsCount />
       </React.Suspense>
@@ -28,7 +39,7 @@ export async function StarsCount() {
   const json = await data.json();
 
   return (
-    <span className="text-muted w-8 text-xs font-medium">
+    <span className="text-muted pt-px text-xs font-medium">
       {json.stargazers_count >= 1000
         ? `${(json.stargazers_count / 1000).toFixed(1)}k`
         : json.stargazers_count.toLocaleString()}

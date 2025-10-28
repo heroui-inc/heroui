@@ -1,19 +1,39 @@
 import {AlertDemo} from "./alert-demo";
+import {AlertDialogDemo} from "./alert-dialog-demo";
 import {AllowNotificationsDemo} from "./allow-notifications-demo";
 import {AvatarGroupDemo} from "./avatar-group-demo";
 import {ButtonsDemo} from "./buttons-demo";
+import {InputOTPDemo} from "./input-otp-demo";
+import {LoginDemo} from "./login-demo";
+import {SubtleCardsDemo} from "./subtle-cards-demo";
+import {TabsDemo1} from "./tabs-1-demo";
+import {TabsDemo2} from "./tabs-2-demo";
+import {TextfieldDemo} from "./textfield-demo";
 import {XProfileDemo} from "./x-profile-demo";
 
 export function DemoComponents() {
   return (
-    <div className="mx-auto py-24">
+    <div className="mx-auto grid grid-cols-3 gap-8 py-24">
+      {/* Left */}
+      <div className="flex flex-col items-center gap-10">
+        <TextfieldDemo />
+        <TabsDemo1 />
+        <TabsDemo2 />
+      </div>
       {/* Center */}
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col items-center gap-10">
         <AvatarGroupDemo />
+        <InputOTPDemo />
         <ButtonsDemo />
         <XProfileDemo />
         <AlertDemo />
         <AllowNotificationsDemo />
+      </div>
+      {/* Right */}
+      <div className="flex flex-col items-center gap-10">
+        <LoginDemo />
+        <SubtleCardsDemo />
+        <AlertDialogDemo />
       </div>
     </div>
   );

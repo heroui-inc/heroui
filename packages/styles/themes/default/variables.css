@@ -78,7 +78,7 @@
     --border: oklch(0 0 0 / 0%);
     --divider: oklch(92% 0.004 286.32);
     --focus: var(--accent);
-    --link: var(--accent);
+    --link: var(--foreground);
 
     /* Shadows */
     /* --surface-shadow: 0 0px 0px 0 rgba(24, 24, 27, 0.03), 0 2px 10px 0 rgba(24, 24, 27, 0.08); */
@@ -136,7 +136,7 @@
     --border: oklch(1 0 0 / 0%);
     --divider: oklch(27.4% 0.006 286.033);
     --focus: var(--accent);
-    --link: var(--accent);
+    --link: var(--foreground);
 
     /* Shadows */
     --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */

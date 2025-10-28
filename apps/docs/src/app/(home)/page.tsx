@@ -2,6 +2,7 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 
 // TODO:
+import {GitHubLink} from "@/components/github-link";
 import {Iconify} from "@/components/iconify";
 import {SocialLinks} from "@/components/social-links";
 // import {ThemeBackground} from "@/components/theme-background";
@@ -37,15 +38,13 @@ export default function HomePage() {
             deliver delightful user experiences.
           </p>
           <div className="mt-2 flex gap-3">
-            <LinkRoot className={buttonVariants({variant: "primary"})} href="/docs">
-              Explore Docs
-            </LinkRoot>
             <LinkRoot
-              className={buttonVariants({className: "bg-surface-tertiary", variant: "tertiary"})}
+              className={buttonVariants({variant: "primary"})}
               href="/docs/components/accordion"
             >
               View components
             </LinkRoot>
+            <GitHubLink>Stars</GitHubLink>
           </div>
         </div>
         <DemoComponents />

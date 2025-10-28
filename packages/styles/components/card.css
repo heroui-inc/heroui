@@ -13,7 +13,7 @@
 
 /* Element - title */
 .card__title {
-  @apply text-foreground text-base font-medium leading-6;
+  @apply text-foreground text-sm font-medium leading-6;
 }
 
 /* Element - description */

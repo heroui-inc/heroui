@@ -4,7 +4,6 @@ import {HomeLayout} from "fumadocs-ui/layouts/home";
 
 import {baseOptions} from "@/app/layout.config";
 import {ExternalLink} from "@/components/external-link";
-import {GitHubLink} from "@/components/github-link";
 import {Iconify} from "@/components/iconify";
 
 export default function Layout({children}: {children: ReactNode}) {
@@ -90,31 +89,10 @@ export default function Layout({children}: {children: ReactNode}) {
         //   text: "Theming",
         //   url: "/docs/theming",
         // },
-        {
-          external: true,
-          icon: <GitHubLink />,
-          on: "all",
-          text: "Github",
-          type: "icon",
-          url: "https://github.com/heroui-inc/heroui",
-        },
       ]}
-      // links={[
-      //   {
-      //     children: (
-      //       <NavbarMenu>
-      //         <NavbarMenuTrigger>Documentation</NavbarMenuTrigger>
-      //         <NavbarMenuContent>
-      //           <NavbarMenuLink href="/docs">Hello World</NavbarMenuLink>
-      //         </NavbarMenuContent>
-      //       </NavbarMenu>
-      //     ),
-      //     // only displayed on navbar, not mobile menu
-      //     on: "nav",
-      //     type: "custom",
-      //   },
-      // other items
-      // ]}
+      themeSwitch={{
+        mode: "light-dark-system",
+      }}
     >
       {children}
     </HomeLayout>

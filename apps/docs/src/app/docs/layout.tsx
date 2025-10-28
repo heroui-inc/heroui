@@ -16,7 +16,7 @@ export default function Layout({children}: {children: ReactNode}) {
         defaultOpenLevel: 0,
       }}
       themeSwitch={{
-        mode: "light-dark",
+        mode: "light-dark-system",
       }}
       {...baseOptions}
       nav={{

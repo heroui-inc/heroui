@@ -38,11 +38,13 @@ const icons = {
 const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...props}, ref) => {
   // Check if it's a gravity-ui icon (no prefix or explicitly in gravity icons)
   const isGravityIcon =
-    typeof iconProp === "string" && (iconProp in icons || !iconProp.includes(":"));
+    typeof iconProp === "string" && (iconProp in icons || iconProp.startsWith("gravity-ui:"));
 
   if (isGravityIcon && typeof iconProp === "string") {
     // Use offline version with gravity-ui icons
-    const gravityIconData = icons[iconProp as keyof typeof icons];
+    // Remove "gravity-ui:" prefix if present
+    const iconName = iconProp.replace(/^gravity-ui:/, "");
+    const gravityIconData = icons[iconName as keyof typeof icons];
 
     if (gravityIconData) {
       return <OfflineIcon {...props} ref={ref} icon={gravityIconData} />;
