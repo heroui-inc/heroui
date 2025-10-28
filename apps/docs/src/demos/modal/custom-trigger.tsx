@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 export function CustomTrigger() {
   return (
-    <Modal.Root>
+    <Modal>
       <Modal.Trigger>
         <div className="border-border bg-default hover:bg-default-hover flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors">
           <div className="flex size-10 items-center justify-center">
@@ -43,6 +43,6 @@ export function CustomTrigger() {
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Overlay>
-    </Modal.Root>
+    </Modal>
   );
 }

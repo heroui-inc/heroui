@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 export function CustomOverlay() {
   return (
-    <Modal.Root>
+    <Modal>
       <Button>Custom Backdrop</Button>
       <Modal.Overlay
         className="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
@@ -40,6 +40,6 @@ export function CustomOverlay() {
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Overlay>
-    </Modal.Root>
+    </Modal>
   );
 }

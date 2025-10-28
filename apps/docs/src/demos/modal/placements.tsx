@@ -9,7 +9,7 @@ export function Placements() {
   return (
     <div className="flex flex-wrap gap-4">
       {placements.map((placement) => (
-        <Modal.Root key={placement}>
+        <Modal key={placement}>
           <Button>{placement.charAt(0).toUpperCase() + placement.slice(1)}</Button>
           <Modal.Overlay>
             <Modal.Container placement={placement}>
@@ -35,7 +35,7 @@ export function Placements() {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       ))}
     </div>
   );

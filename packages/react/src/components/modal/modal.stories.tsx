@@ -15,7 +15,7 @@ import {Modal} from "./index";
 
 export default {
   argTypes: {},
-  component: Modal.Root,
+  component: Modal,
   parameters: {
     layout: "centered",
   },
@@ -25,7 +25,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Modal.Root>
+    <Modal>
       <Button>Open Modal</Button>
       <Modal.Overlay>
         <Modal.Container>
@@ -49,7 +49,7 @@ export const Default = () => {
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Overlay>
-    </Modal.Root>
+    </Modal>
   );
 };
 
@@ -59,7 +59,7 @@ export const Placements = () => {
   return (
     <div className="flex flex-wrap gap-4">
       {placements.map((placement) => (
-        <Modal.Root key={placement}>
+        <Modal key={placement}>
           <Button>{placement.charAt(0).toUpperCase() + placement.slice(1)}</Button>
           <Modal.Overlay>
             <Modal.Container placement={placement}>
@@ -85,7 +85,7 @@ export const Placements = () => {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       ))}
     </div>
   );
@@ -97,7 +97,7 @@ export const OverlayVariants = () => {
   return (
     <div className="flex flex-wrap gap-4">
       {variants.map((variant) => (
-        <Modal.Root key={variant}>
+        <Modal key={variant}>
           <Button>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Button>
           <Modal.Overlay variant={variant}>
             <Modal.Container>
@@ -123,7 +123,7 @@ export const OverlayVariants = () => {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       ))}
     </div>
   );
@@ -137,7 +137,7 @@ export const DismissBehavior = () => (
         Controls whether the modal can be dismissed by clicking the overlay backdrop. When set to{" "}
         <code>true</code>, clicking outside the modal will close it.
       </p>
-      <Modal.Root>
+      <Modal>
         <Button>Open Modal</Button>
         <Modal.Overlay isDismissable>
           <Modal.Container>
@@ -161,7 +161,7 @@ export const DismissBehavior = () => (
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal.Root>
+      </Modal>
     </div>
 
     <div className="flex flex-col gap-2">
@@ -170,7 +170,7 @@ export const DismissBehavior = () => (
         Controls whether the ESC key can dismiss the modal. When set to <code>true</code>, the ESC
         key will be disabled and won't close the modal.
       </p>
-      <Modal.Root>
+      <Modal>
         <Button>Open Modal</Button>
         <Modal.Overlay isKeyboardDismissDisabled>
           <Modal.Container>
@@ -196,7 +196,7 @@ export const DismissBehavior = () => (
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal.Root>
+      </Modal>
     </div>
   </div>
 );
@@ -230,7 +230,7 @@ export const ScrollComparison = () => {
         </label>
       </div>
 
-      <Modal.Root>
+      <Modal>
         <Button>Open Modal ({scroll.charAt(0).toUpperCase() + scroll.slice(1)})</Button>
         <Modal.Overlay>
           <Modal.Container scroll={scroll}>
@@ -260,13 +260,13 @@ export const ScrollComparison = () => {
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal.Root>
+      </Modal>
     </div>
   );
 };
 
 export const WithForm = () => (
-  <Modal.Root>
+  <Modal>
     <Button>Open Contact Form</Button>
     <Modal.Overlay>
       <Modal.Container placement="auto">
@@ -318,7 +318,7 @@ export const WithForm = () => (
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Overlay>
-  </Modal.Root>
+  </Modal>
 );
 
 export const WithUseModalState = () => {
@@ -340,7 +340,7 @@ export const WithUseModalState = () => {
         </Button>
       </div>
 
-      <Modal.Root state={modalState}>
+      <Modal state={modalState}>
         <Modal.Overlay>
           <Modal.Container>
             <Modal.Dialog>
@@ -375,13 +375,13 @@ export const WithUseModalState = () => {
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal.Root>
+      </Modal>
     </div>
   );
 };
 
 export const CustomTrigger = () => (
-  <Modal.Root>
+  <Modal>
     <Modal.Trigger>
       <div className="border-border bg-default hover:bg-default-hover flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors">
         <div className="flex size-10 items-center justify-center">
@@ -419,11 +419,11 @@ export const CustomTrigger = () => (
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Overlay>
-  </Modal.Root>
+  </Modal>
 );
 
 export const CustomBackdrop = () => (
-  <Modal.Root>
+  <Modal>
     <Button>Custom Backdrop</Button>
     <Modal.Overlay
       className="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
@@ -458,7 +458,7 @@ export const CustomBackdrop = () => (
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Overlay>
-  </Modal.Root>
+  </Modal>
 );
 
 export const CustomAnimations = () => {
@@ -499,7 +499,7 @@ export const CustomAnimations = () => {
   return (
     <div className="flex flex-wrap gap-4">
       {Object.entries(animations).map(([name, classNames]) => (
-        <Modal.Root key={name}>
+        <Modal key={name}>
           <Button>{name.replace("_", " ")}</Button>
           <Modal.Overlay className="data-[entering]:duration-500 data-[exiting]:duration-200">
             <Modal.Container
@@ -533,7 +533,7 @@ export const CustomAnimations = () => {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       ))}
     </div>
   );

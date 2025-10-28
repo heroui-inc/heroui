@@ -9,7 +9,7 @@ export function OverlayVariants() {
   return (
     <div className="flex flex-wrap gap-4">
       {variants.map((variant) => (
-        <Modal.Root key={variant}>
+        <Modal key={variant}>
           <Button>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Button>
           <Modal.Overlay variant={variant}>
             <Modal.Container>
@@ -35,7 +35,7 @@ export function OverlayVariants() {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       ))}
     </div>
   );

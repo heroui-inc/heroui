@@ -26,15 +26,19 @@ import {modalVariants} from "./modal.styles";
 
 type ModalPlacement = "auto" | "center" | "top" | "bottom";
 
-const ModalContext = createContext<{
+/* -------------------------------------------------------------------------------------------------
+ * Modal Context
+ * -----------------------------------------------------------------------------------------------*/
+type ModalContext = {
   slots?: ReturnType<typeof modalVariants>;
   placement?: ModalPlacement;
-}>({});
+};
+
+const ModalContext = createContext<ModalContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Root
  * -----------------------------------------------------------------------------------------------*/
-
 interface ModalRootProps extends ComponentProps<typeof ModalTriggerPrimitive> {
   state?: UseModalStateReturn;
 }
@@ -263,18 +267,6 @@ const ModalCloseTrigger: ModalCloseTrigger = (props) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {
-  ModalRootProps,
-  ModalTriggerProps,
-  ModalOverlayProps,
-  ModalContainerProps,
-  ModalDialogProps,
-  ModalHeaderProps,
-  ModalBodyProps,
-  ModalFooterProps,
-  ModalCloseTriggerProps,
-};
-
 export {
   ModalRoot,
   ModalTrigger,
@@ -285,4 +277,16 @@ export {
   ModalBody,
   ModalFooter,
   ModalCloseTrigger,
+};
+
+export type {
+  ModalRootProps,
+  ModalTriggerProps,
+  ModalOverlayProps,
+  ModalContainerProps,
+  ModalDialogProps,
+  ModalHeaderProps,
+  ModalBodyProps,
+  ModalFooterProps,
+  ModalCloseTriggerProps,
 };

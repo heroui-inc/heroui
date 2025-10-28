@@ -22,7 +22,7 @@ export function Controlled() {
         </Button>
       </div>
 
-      <Modal.Root state={modalState}>
+      <Modal state={modalState}>
         <Modal.Overlay>
           <Modal.Container>
             <Modal.Dialog>
@@ -57,7 +57,7 @@ export function Controlled() {
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal.Root>
+      </Modal>
     </div>
   );
 }

@@ -41,7 +41,7 @@ export function CustomAnimations() {
   return (
     <div className="flex flex-wrap gap-4">
       {Object.entries(animations).map(([name, classNames]) => (
-        <Modal.Root key={name}>
+        <Modal key={name}>
           <Button>{name}</Button>
           <Modal.Overlay className="data-[entering]:duration-500 data-[exiting]:duration-200">
             <Modal.Container
@@ -75,7 +75,7 @@ export function CustomAnimations() {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       ))}
     </div>
   );

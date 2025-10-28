@@ -12,7 +12,7 @@ export function DismissBehavior() {
           Controls whether the modal can be dismissed by clicking the overlay backdrop. When set to{" "}
           <code>true</code>, clicking outside the modal will close it.
         </p>
-        <Modal.Root>
+        <Modal>
           <Button>Open Modal</Button>
           <Modal.Overlay isDismissable>
             <Modal.Container>
@@ -38,7 +38,7 @@ export function DismissBehavior() {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -47,7 +47,7 @@ export function DismissBehavior() {
           Controls whether the ESC key can dismiss the modal. When set to <code>true</code>, the ESC
           key will be disabled and won't close the modal.
         </p>
-        <Modal.Root>
+        <Modal>
           <Button>Open Modal</Button>
           <Modal.Overlay isKeyboardDismissDisabled>
             <Modal.Container>
@@ -74,7 +74,7 @@ export function DismissBehavior() {
               </Modal.Dialog>
             </Modal.Container>
           </Modal.Overlay>
-        </Modal.Root>
+        </Modal>
       </div>
     </div>
   );

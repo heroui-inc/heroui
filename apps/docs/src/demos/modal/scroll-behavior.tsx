@@ -32,7 +32,7 @@ export function ScrollBehavior() {
         </label>
       </div>
 
-      <Modal.Root>
+      <Modal>
         <Button>Open Modal ({scroll.charAt(0).toUpperCase() + scroll.slice(1)})</Button>
         <Modal.Overlay>
           <Modal.Container scroll={scroll}>
@@ -62,7 +62,7 @@ export function ScrollBehavior() {
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Overlay>
-      </Modal.Root>
+      </Modal>
     </div>
   );
 }

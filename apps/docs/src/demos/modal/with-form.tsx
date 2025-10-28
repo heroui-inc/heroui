@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 export function WithForm() {
   return (
-    <Modal.Root>
+    <Modal>
       <Button>Open Contact Form</Button>
       <Modal.Overlay>
         <Modal.Container placement="auto">
@@ -57,6 +57,6 @@ export function WithForm() {
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Overlay>
-    </Modal.Root>
+    </Modal>
   );
 }
