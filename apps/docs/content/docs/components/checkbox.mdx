@@ -6,7 +6,7 @@ links:
   rac: Checkbox
   source: checkbox/checkbox.tsx
   styles: checkbox.css
-  storybook: checkbox
+  storybook: Components/Forms/Checkbox
   figma: true
 ---
 
@@ -30,12 +30,12 @@ Import the Checkbox component and access all parts using dot notation.
 import { Checkbox, Label } from '@heroui/react';
 
 export default () => (
-  <Checkbox.Root>
+  <Checkbox>
     <Checkbox.Control>
       <Checkbox.Indicator />
     </Checkbox.Control>
     <Label>Accept terms</Label>
-  </Checkbox.Root>
+  </Checkbox>
 );
 ```
 
@@ -185,7 +185,7 @@ The checkbox supports both CSS pseudo-classes and data attributes for flexibilit
 
 ## API Reference
 
-### Checkbox.Root Props
+### Checkbox Props
 
 Inherits from [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/Checkbox.html).
 
