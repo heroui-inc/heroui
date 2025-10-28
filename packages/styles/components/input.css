@@ -22,7 +22,7 @@
   }
 
   &[data-invalid="true"] {
-    @apply border-danger;
+    @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
 }

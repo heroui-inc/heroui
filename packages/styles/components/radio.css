@@ -59,7 +59,7 @@
   /* Invalid/Error state */
   .radio[data-invalid="true"] &,
   .radio[aria-invalid="true"] & {
-    @apply border-danger;
+    @apply status-invalid-field;
   }
 
   /* Invalid + Selected state */
@@ -67,7 +67,7 @@
   .radio[data-invalid="true"][data-selected="true"] &,
   .radio[aria-invalid="true"][aria-checked="true"] &,
   .radio[aria-invalid="true"][data-selected="true"] & {
-    @apply border-danger;
+    @apply status-invalid-field;
   }
 
   .radio:active[data-selected="true"] &,

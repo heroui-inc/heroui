@@ -39,3 +39,16 @@ export type {
 export {inputOTPVariants} from "./input-otp.styles";
 
 export type {InputOTPVariants} from "./input-otp.styles";
+
+//  ===================================
+// 3rd party
+//  ===================================
+export {
+  OTPInputContext,
+  type OTPInputProps,
+  REGEXP_ONLY_CHARS,
+  REGEXP_ONLY_DIGITS,
+  REGEXP_ONLY_DIGITS_AND_CHARS,
+  type RenderProps,
+  type SlotProps,
+} from "input-otp";

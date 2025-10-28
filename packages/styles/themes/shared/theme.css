@@ -184,10 +184,23 @@
   /* Animations */
   --animate-spin-fast: spin 0.75s linear infinite;
   --animate-skeleton: skeleton 2s linear infinite;
+  --animate-caret-blink: caret-blink 1.2s ease-out infinite;
 
   @keyframes skeleton {
     100% {
       transform: translateX(200%);
+    }
+  }
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
     }
   }
 }
