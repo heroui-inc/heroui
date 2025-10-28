@@ -1,12 +1,12 @@
 "use client";
 
-import type {SkeletonVariants} from "./skeleton.styles";
+import type {SkeletonVariants} from "./skeleton.styles.js";
 
 import React from "react";
 
-import {useCSSVariable} from "../../hooks/use-css-variable";
+import {useCSSVariable} from "../../hooks/use-css-variable.js";
 
-import {skeletonVariants} from "./skeleton.styles";
+import {skeletonVariants} from "./skeleton.styles.js";
 /* -------------------------------------------------------------------------------------------------
  * Skeleton
  * -----------------------------------------------------------------------------------------------*/

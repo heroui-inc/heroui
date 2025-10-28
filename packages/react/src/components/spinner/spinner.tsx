@@ -1,10 +1,10 @@
 "use client";
 
-import type {SpinnerVariants} from "./spinner.styles";
+import type {SpinnerVariants} from "./spinner.styles.js";
 
 import {useId} from "react";
 
-import {spinnerVariants} from "./spinner.styles";
+import {spinnerVariants} from "./spinner.styles.js";
 
 interface SpinnerPrimitiveProps extends React.SVGProps<SVGSVGElement> {}
 

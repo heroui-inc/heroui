@@ -1,6 +1,6 @@
 "use client";
 
-import type {SliderVariants} from "./slider.styles";
+import type {SliderVariants} from "./slider.styles.js";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -11,9 +11,9 @@ import {
   SliderTrack as SliderTrackPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {sliderVariants} from "./slider.styles";
+import {sliderVariants} from "./slider.styles.js";
 /* -------------------------------------------------------------------------------------------------
  * Slider Context
  * -----------------------------------------------------------------------------------------------*/

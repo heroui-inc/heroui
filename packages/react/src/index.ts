@@ -2,17 +2,17 @@
 //  Prerelease Warning
 //  ===================================
 
-import {handlePrereleaseWarning} from "./prerelease";
+import {handlePrereleaseWarning} from "./prerelease.js";
 
 handlePrereleaseWarning();
 //  ===================================
 //  Components
 //  ===================================
-export * from "./components";
+export * from "./components/index.js";
 //  ===================================
 //  Hooks
 //  ===================================
-export * from "./hooks";
+export * from "./hooks/index.js";
 //  ===================================
 //  Utils
 //  ===================================

@@ -7,7 +7,7 @@ export {
   SliderFill as Fill,
   SliderThumb as Thumb,
   SliderMarks as Marks,
-} from "./slider";
+} from "./slider.js";
 export type {
   SliderRootProps as RootProps,
   SliderHeaderProps as HeaderProps,
@@ -17,6 +17,6 @@ export type {
   SliderFillProps as FillProps,
   SliderThumbProps as ThumbProps,
   SliderMarksProps as MarksProps,
-} from "./slider";
+} from "./slider.js";
 
-export {sliderVariants as variants, type SliderVariants as Variants} from "./slider.styles";
+export {sliderVariants as variants, type SliderVariants as Variants} from "./slider.styles.js";

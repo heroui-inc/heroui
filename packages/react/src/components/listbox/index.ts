@@ -1,5 +1,5 @@
-export {ListBox, ListBoxItem, ListBoxItemIndicator} from "./listbox";
+export {ListBox, ListBoxItem, ListBoxItemIndicator} from "./listbox.js";
 
-export type {ListBoxProps, ListBoxItemProps, ListBoxItemIndicatorProps} from "./listbox";
+export type {ListBoxProps, ListBoxItemProps, ListBoxItemIndicatorProps} from "./listbox.js";
 
-export {listboxVariants, type ListBoxVariants} from "./listbox.styles";
+export {listboxVariants, type ListBoxVariants} from "./listbox.styles.js";

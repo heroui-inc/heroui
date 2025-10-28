@@ -16,8 +16,8 @@ async function generateTypes() {
   const tsconfigBuild = {
     compilerOptions: {
       target: "ESNext",
-      module: "ESNext",
-      moduleResolution: "bundler",
+      module: "NodeNext",
+      moduleResolution: "NodeNext",
       lib: ["DOM", "DOM.Iterable", "ESNext"],
       jsx: "react-jsx",
       declaration: true,

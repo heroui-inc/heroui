@@ -1,16 +1,16 @@
 "use client";
 
-import type {AvatarVariants} from "./avatar.styles";
-import type {UseImageProps} from "../../hooks";
+import type {AvatarVariants} from "./avatar.styles.js";
+import type {UseImageProps} from "../../hooks/index.js";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
-import {useImage} from "../../hooks";
-import {dataAttr} from "../../utils/assertion";
+import {useImage} from "../../hooks/index.js";
+import {dataAttr} from "../../utils/assertion.js";
 
-import {avatarVariants} from "./avatar.styles";
+import {avatarVariants} from "./avatar.styles.js";
 
 const AvatarContext = createContext<{
   slots?: ReturnType<typeof avatarVariants>;

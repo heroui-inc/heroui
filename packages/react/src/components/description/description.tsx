@@ -1,11 +1,11 @@
 "use client";
 
-import type {DescriptionVariants} from "./description.styles";
+import type {DescriptionVariants} from "./description.styles.js";
 import type {TextProps} from "react-aria-components";
 
 import {Text} from "react-aria-components";
 
-import {descriptionVariants} from "./description.styles";
+import {descriptionVariants} from "./description.styles.js";
 
 interface DescriptionProps extends TextProps, DescriptionVariants {}
 

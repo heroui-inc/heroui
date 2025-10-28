@@ -6,7 +6,7 @@ export {
   AlertDescription,
   AlertAction,
   AlertClose,
-} from "./alert";
+} from "./alert.js";
 
 export type {
   AlertRootProps,
@@ -16,8 +16,8 @@ export type {
   AlertDescriptionProps,
   AlertActionProps,
   AlertCloseProps,
-} from "./alert";
+} from "./alert.js";
 
-export {alertVariants, type AlertVariants} from "./alert.styles";
+export {alertVariants, type AlertVariants} from "./alert.styles.js";
 
-export * as Alert from "./slots";
+export * as Alert from "./slots.js";

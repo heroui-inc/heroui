@@ -1,12 +1,12 @@
-export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon} from "./switch";
+export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon} from "./switch.js";
 
 export type {
   SwitchRootProps,
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,
-} from "./switch";
+} from "./switch.js";
 
-export {switchVariants, type SwitchVariants} from "./switch.styles";
+export {switchVariants, type SwitchVariants} from "./switch.styles.js";
 
-export * as Switch from "./slots";
+export * as Switch from "./slots.js";

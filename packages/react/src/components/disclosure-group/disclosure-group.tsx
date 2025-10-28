@@ -1,15 +1,15 @@
 "use client";
 
-import type {DisclosureGroupVariants} from "./disclosure-group.styles";
+import type {DisclosureGroupVariants} from "./disclosure-group.styles.js";
 import type {DisclosureGroupProps as DisclosureGroupPrimitiveProps} from "react-aria-components";
 
 import React, {createContext} from "react";
 import {DisclosureGroup as DisclosureGroupPrimitive} from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
+import {mapPropsVariants, objectToDeps} from "../../utils/index.js";
 
-import {disclosureGroupVariants} from "./disclosure-group.styles";
+import {disclosureGroupVariants} from "./disclosure-group.styles.js";
 
 const DisclosureGroupContext = createContext<{
   slots?: ReturnType<typeof disclosureGroupVariants>;

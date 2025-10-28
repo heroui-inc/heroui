@@ -5,7 +5,7 @@ export {
   DisclosureContent as Content,
   DisclosureBody as Body,
   DisclosureIndicator as Indicator,
-} from "./disclosure";
+} from "./disclosure.js";
 export type {
   DisclosureRootProps as RootProps,
   DisclosureHeadingProps as HeadingProps,
@@ -13,7 +13,7 @@ export type {
   DisclosureContentProps as ContentProps,
   DisclosureBodyContentProps as BodyProps,
   DisclosureIndicatorProps as IndicatorProps,
-} from "./disclosure";
+} from "./disclosure.js";
 
-export {disclosureVariants as variants} from "./disclosure.styles";
-export type {DisclosureVariants as Variants} from "./disclosure.styles";
+export {disclosureVariants as variants} from "./disclosure.styles.js";
+export type {DisclosureVariants as Variants} from "./disclosure.styles.js";

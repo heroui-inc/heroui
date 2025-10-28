@@ -1,5 +1,5 @@
-export {Skeleton} from "./skeleton";
-export type {SkeletonProps} from "./skeleton";
+export {Skeleton} from "./skeleton.js";
+export type {SkeletonProps} from "./skeleton.js";
 
-export {skeletonVariants} from "./skeleton.styles";
-export type {SkeletonVariants} from "./skeleton.styles";
+export {skeletonVariants} from "./skeleton.styles.js";
+export type {SkeletonVariants} from "./skeleton.styles.js";

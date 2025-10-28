@@ -1,13 +1,13 @@
 "use client";
 
-import type {FieldErrorVariants} from "./field-error.styles";
+import type {FieldErrorVariants} from "./field-error.styles.js";
 import type {FieldErrorProps as FieldErrorPrimitiveProps} from "react-aria-components";
 
 import {FieldError as FieldErrorPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {fieldErrorVariants} from "./field-error.styles";
+import {fieldErrorVariants} from "./field-error.styles.js";
 
 interface FieldErrorProps extends FieldErrorPrimitiveProps, FieldErrorVariants {}
 

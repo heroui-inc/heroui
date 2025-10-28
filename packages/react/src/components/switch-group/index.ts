@@ -1,4 +1,4 @@
-export {SwitchGroup} from "./switch-group";
-export type {SwitchGroupProps} from "./switch-group";
+export {SwitchGroup} from "./switch-group.js";
+export type {SwitchGroupProps} from "./switch-group.js";
 
-export {switchGroupVariants, type SwitchGroupVariants} from "./switch-group.styles";
+export {switchGroupVariants, type SwitchGroupVariants} from "./switch-group.styles.js";

@@ -1,4 +1,4 @@
-export {Button} from "./button";
-export type {ButtonProps} from "./button";
-export {buttonVariants} from "./button.styles";
-export type {ButtonVariants} from "./button.styles";
+export {Button} from "./button.js";
+export type {ButtonProps} from "./button.js";
+export {buttonVariants} from "./button.styles.js";
+export type {ButtonVariants} from "./button.styles.js";

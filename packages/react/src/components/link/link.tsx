@@ -1,17 +1,17 @@
 "use client";
 
-import type {LinkVariants} from "./link.styles";
+import type {LinkVariants} from "./link.styles.js";
 import type {LinkProps as LinkPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {Link as LinkPrimitive} from "react-aria-components";
 
-import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
-import {ExternalLinkIcon} from "../icons";
+import {dataAttr} from "../../utils/assertion.js";
+import {composeTwRenderProps} from "../../utils/compose.js";
+import {ExternalLinkIcon} from "../icons.js";
 
-import {linkVariants} from "./link.styles";
+import {linkVariants} from "./link.styles.js";
 /* ------------------------------------------------------------------------------------------------
  * Link Context
  * --------------------------------------------------------------------------------------------- */

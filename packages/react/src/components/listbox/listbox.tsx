@@ -1,6 +1,6 @@
 "use client";
 
-import type {ListBoxVariants} from "./listbox.styles";
+import type {ListBoxVariants} from "./listbox.styles.js";
 import type {
   ListBoxItemProps as ListBoxItemPrimitiveProps,
   ListBoxProps as ListBoxPrimitiveProps,
@@ -12,9 +12,9 @@ import {
   ListBox as ListBoxPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeTwRenderProps} from "../../utils/index.js";
 
-import {listboxVariants} from "./listbox.styles";
+import {listboxVariants} from "./listbox.styles.js";
 
 type ListBoxContextValue = {
   slots?: ReturnType<typeof listboxVariants>;

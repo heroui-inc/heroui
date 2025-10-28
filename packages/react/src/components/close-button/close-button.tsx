@@ -1,15 +1,15 @@
 "use client";
 
-import type {CloseButtonVariants} from "./close-button.styles";
+import type {CloseButtonVariants} from "./close-button.styles.js";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
-import {CloseIcon} from "../icons";
+import {composeTwRenderProps} from "../../utils/index.js";
+import {CloseIcon} from "../icons.js";
 
-import {closeButtonVariants} from "./close-button.styles";
+import {closeButtonVariants} from "./close-button.styles.js";
 
 interface CloseButtonProps extends ButtonPrimitiveProps, CloseButtonVariants {
   asChild?: boolean;

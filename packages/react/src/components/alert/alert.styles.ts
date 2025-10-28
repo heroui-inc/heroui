@@ -2,7 +2,7 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {disabledClasses, focusRingClasses} from "../../utils/compose";
+import {disabledClasses, focusRingClasses} from "../../utils/compose.js";
 
 export const alertVariants = tv({
   defaultVariants: {

@@ -1,14 +1,14 @@
 "use client";
 
-import type {TextFieldVariants} from "./text-field.styles";
+import type {TextFieldVariants} from "./text-field.styles.js";
 import type {TextFieldProps as TextFieldPrimitiveProps} from "react-aria-components";
 
 import React from "react";
 import {TextField as TextFieldPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {textFieldVariants} from "./text-field.styles";
+import {textFieldVariants} from "./text-field.styles.js";
 
 interface TextFieldProps extends TextFieldPrimitiveProps, TextFieldVariants {}
 

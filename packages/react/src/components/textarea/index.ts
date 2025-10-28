@@ -1,2 +1,2 @@
-export {TextArea, type TextAreaProps} from "./textarea";
-export {textAreaVariants, type TextAreaVariants} from "./textarea.styles";
+export {TextArea, type TextAreaProps} from "./textarea.js";
+export {textAreaVariants, type TextAreaVariants} from "./textarea.styles.js";

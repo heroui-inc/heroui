@@ -5,7 +5,7 @@ export {
   Tab as Tab,
   TabIndicator as Indicator,
   TabPanel as Panel,
-} from "./tabs";
+} from "./tabs.js";
 export type {
   TabsRootProps as RootProps,
   TabListWrapperProps as ListWrapperProps,
@@ -13,6 +13,6 @@ export type {
   TabProps as TabProps,
   TabIndicatorProps as IndicatorProps,
   TabPanelProps as PanelProps,
-} from "./tabs";
+} from "./tabs.js";
 
-export {tabsVariants as variants, type TabsVariants as Variants} from "./tabs.styles";
+export {tabsVariants as variants, type TabsVariants as Variants} from "./tabs.styles.js";

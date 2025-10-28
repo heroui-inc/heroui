@@ -1,4 +1,4 @@
-export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel} from "./tabs";
+export {TabsRoot, TabListWrapper, TabList, Tab, TabIndicator, TabPanel} from "./tabs.js";
 
 export type {
   TabsRootProps,
@@ -7,8 +7,8 @@ export type {
   TabProps,
   TabIndicatorProps,
   TabPanelProps,
-} from "./tabs";
+} from "./tabs.js";
 
-export {tabsVariants, type TabsVariants} from "./tabs.styles";
+export {tabsVariants, type TabsVariants} from "./tabs.styles.js";
 
-export * as Tabs from "./slots";
+export * as Tabs from "./slots.js";

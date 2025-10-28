@@ -5,9 +5,9 @@ import type {RadioProps as RadioPrimitiveProps, RadioRenderProps} from "react-ar
 import React, {createContext, useContext} from "react";
 import {Radio as RadioPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {radioVariants} from "./radio.styles";
+import {radioVariants} from "./radio.styles.js";
 
 interface RadioContext {
   slots?: ReturnType<typeof radioVariants>;

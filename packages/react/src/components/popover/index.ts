@@ -5,10 +5,10 @@ export {
   PopoverArrow,
   PopoverContent,
   PopoverHeading,
-} from "./popover";
+} from "./popover.js";
 
-export type {PopoverRootProps, PopoverContentProps} from "./popover";
+export type {PopoverRootProps, PopoverContentProps} from "./popover.js";
 
-export {popoverVariants, type PopoverVariants} from "./popover.styles";
+export {popoverVariants, type PopoverVariants} from "./popover.styles.js";
 
-export * as Popover from "./slots";
+export * as Popover from "./slots.js";

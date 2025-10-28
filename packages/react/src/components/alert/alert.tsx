@@ -1,17 +1,17 @@
 "use client";
 
-import type {AlertVariants} from "./alert.styles";
+import type {AlertVariants} from "./alert.styles.js";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
-import {isNotAsChild} from "../../utils/props";
-import {CircleDashedIcon, CloseIcon} from "../icons";
+import {composeTwRenderProps} from "../../utils/compose.js";
+import {isNotAsChild} from "../../utils/props.js";
+import {CircleDashedIcon, CloseIcon} from "../icons.js";
 
-import {alertVariants} from "./alert.styles";
+import {alertVariants} from "./alert.styles.js";
 /* ------------------------------------------------------------------------------------------------
  * Alert Context
  * --------------------------------------------------------------------------------------------- */

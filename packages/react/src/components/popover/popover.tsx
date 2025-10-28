@@ -1,6 +1,6 @@
 "use client";
 
-import type {PopoverVariants} from "./popover.styles";
+import type {PopoverVariants} from "./popover.styles.js";
 import type {PopoverProps as PopoverPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -13,9 +13,9 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose.js";
 
-import {popoverVariants} from "./popover.styles";
+import {popoverVariants} from "./popover.styles.js";
 
 type PopoverRootProps = React.ComponentProps<typeof PopoverTriggerPrimitive>;
 

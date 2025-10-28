@@ -1,11 +1,11 @@
 "use client";
 
-import type {FieldsetVariants} from "./fieldset.styles";
+import type {FieldsetVariants} from "./fieldset.styles.js";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 
-import {fieldsetVariants} from "./fieldset.styles";
+import {fieldsetVariants} from "./fieldset.styles.js";
 
 /* -------------------------------------------------------------------------------------------------
  * Fieldset

@@ -1,11 +1,11 @@
 "use client";
 
-import type {KbdKey} from "./kbd.constants";
+import type {KbdKey} from "./kbd.constants.js";
 
 import React, {createContext, useContext} from "react";
 
-import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants";
-import {kbdVariants} from "./kbd.styles";
+import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants.js";
+import {kbdVariants} from "./kbd.styles.js";
 
 const KbdContext = createContext<{
   slots?: ReturnType<typeof kbdVariants>;
