@@ -45,13 +45,13 @@
 /* Switch control (track) */
 .switch__control {
   /* Default size (medium) */
-  @apply bg-surface-quaternary reduce-motion:transition-none flex shrink-0 items-center rounded-full;
+  @apply bg-surface-quaternary reduce-motion:transition-none relative flex shrink-0 items-center overflow-hidden rounded-full;
   height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
   transition:
-    background-color 150ms var(--ease-smooth),
-    transform 150ms var(--ease-out),
+    background-color 300ms var(--ease-smooth),
+    transform 250ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
 
   /* Focus states */
@@ -126,6 +126,10 @@
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
     @apply bg-accent-foreground text-accent ms-[calc(100%-1.5rem)];
+    box-shadow:
+      0px 0px 5px 0px rgb(0 0 0 / 0.02),
+      0px 2px 10px 0px rgb(0 0 0 / 0.06),
+      0px 0px 1px 0px rgb(0 0 0 / 0.3);
   }
 
   /* Pressed state - scale down with width animation */
