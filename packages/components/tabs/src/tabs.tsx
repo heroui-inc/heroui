@@ -47,6 +47,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   const variant = props?.variant;
   const previousVariant = useRef<typeof variant>(undefined);
   const isVertical = props?.isVertical;
+  const previousIsVertical = useRef<typeof isVertical>(undefined);
 
   const cursorRef = useRef<HTMLSpanElement | null>(null);
   const selectedItem = state.selectedItem;
@@ -86,7 +87,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
       const styles = getCursorStyles(tabRect);
 
-      if (variant !== previousVariant.current) {
+      if (variant !== previousVariant.current || isVertical !== previousIsVertical.current) {
         cursorRef.current.removeAttribute("data-initialized");
       }
       cursorRef.current.style.left = styles.left;
@@ -94,10 +95,11 @@ const Tabs = forwardRef(function Tabs<T extends object>(
       cursorRef.current.style.width = styles.width;
       cursorRef.current.style.height = styles.height;
       previousVariant.current = variant;
+      previousIsVertical.current = isVertical;
 
       requestAnimationFrame(() => cursorRef.current?.setAttribute("data-initialized", "true"));
     },
-    [cursorRef.current, getCursorStyles, variant],
+    [cursorRef.current, getCursorStyles, isVertical, variant],
   );
 
   const onResize = useCallback(
