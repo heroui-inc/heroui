@@ -37,12 +37,44 @@ export function extractLinksFromMDX(content: string): ComponentLinksType | null 
 }
 
 /**
+ * Converts a Storybook title to a URL path segment
+ * Handles both grouped titles (e.g., "Components/Buttons/Button") and simple titles
+ * @param title - The Storybook title
+ * @returns URL-safe path segment
+ */
+function convertStorybookTitleToPath(title: string): string {
+  // Remove emojis and trim whitespace
+  const cleaned = title.replace(/[\u{1F300}-\u{1F9FF}]/gu, "").trim();
+
+  // Split by "/" and convert each part to lowercase, removing spaces
+  return cleaned
+    .split("/")
+    .map((part) => part.toLowerCase().replace(/\s+/g, ""))
+    .join("-");
+}
+
+/**
  * Generates component link URLs based on the extracted links
  * @param links - The extracted links object
  * @returns An object with formatted URLs
  */
 export function generateComponentLinks(links: ComponentLinksType | null) {
   if (!links) return null;
+
+  // Handle storybook link: can be either a simple slug or a full title path
+  let storybookUrl: string | undefined;
+
+  if (links.storybook) {
+    // If the storybook value contains "/", treat it as a full Storybook title
+    if (links.storybook.includes("/")) {
+      const pathSegment = convertStorybookTitleToPath(links.storybook);
+
+      storybookUrl = `${STORYBOOK_URL}/?path=/story/${pathSegment}`;
+    } else {
+      // Legacy support: treat as simple slug (kept for backward compatibility)
+      storybookUrl = `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`;
+    }
+  }
 
   return {
     figma: links.figma ? siteConfig.figmaCommunityFile : undefined,
@@ -51,9 +83,7 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`
       : undefined,
     source: links.source ? `${COMPONENT_PATH}/${links.source}` : undefined,
-    storybook: links.storybook
-      ? `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`
-      : undefined,
+    storybook: storybookUrl,
     styles: links.styles ? `${COMPONENT_STYLES_PATH}/${links.styles}` : undefined,
     tailwind: links.tailwind ? `https://tailwindcss.com/docs/${links.tailwind}` : undefined,
     themes: links.themes ? THEMES_PATH : undefined,
