@@ -21,8 +21,8 @@ async function removeExports() {
     },
     "./package.json": "./package.json",
     "./styles": {
-      default: "./src/styles.css",
       style: "./src/styles.css",
+      default: "./src/styles.css",
     },
   };
 
