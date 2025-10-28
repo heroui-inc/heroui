@@ -8,10 +8,21 @@ import {Text as TextPrimitive} from "react-aria-components";
 
 import {textVariants} from "./text.styles";
 
-interface TextProps extends TextPrimitiveProps, TextVariants {
+/* -------------------------------------------------------------------------------------------------
+ * Text Root
+ * -----------------------------------------------------------------------------------------------*/
+interface TextRootProps extends TextPrimitiveProps, TextVariants {
   asChild?: boolean;
 }
-const Text = ({asChild = false, children, className, size, variant, ...rest}: TextProps) => {
+
+const TextRoot = ({
+  asChild = false,
+  children,
+  className,
+  size,
+  variant,
+  ...rest
+}: TextRootProps) => {
   const styles = textVariants({size, variant, className});
 
   if (asChild) {
@@ -29,5 +40,9 @@ const Text = ({asChild = false, children, className, size, variant, ...rest}: Te
   );
 };
 
-export type {TextProps};
-export {Text};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {TextRoot};
+
+export type {TextRootProps};

@@ -6,11 +6,15 @@ import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 
 import {chipVariants} from "./chip.styles";
 
+/* -------------------------------------------------------------------------------------------------
+ * Chip Root
+ * -----------------------------------------------------------------------------------------------*/
 interface ChipRootProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "type">, ChipVariants {
   className?: string;
   children: React.ReactNode;
   asChild?: boolean;
 }
+
 const ChipRoot = ({
   asChild = false,
   children,
@@ -28,5 +32,9 @@ const ChipRoot = ({
   );
 };
 
-export type {ChipRootProps};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 export {ChipRoot};
+
+export type {ChipRootProps};

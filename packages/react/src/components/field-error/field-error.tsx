@@ -9,9 +9,12 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {fieldErrorVariants} from "./field-error.styles";
 
-interface FieldErrorProps extends FieldErrorPrimitiveProps, FieldErrorVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Field Error Root
+ * -----------------------------------------------------------------------------------------------*/
+interface FieldErrorRootProps extends FieldErrorPrimitiveProps, FieldErrorVariants {}
 
-const FieldError = ({children, className, ...rest}: FieldErrorProps) => {
+const FieldErrorRoot = ({children, className, ...rest}: FieldErrorRootProps) => {
   return (
     <FieldErrorPrimitive
       data-visible
@@ -24,5 +27,9 @@ const FieldError = ({children, className, ...rest}: FieldErrorProps) => {
   );
 };
 
-export type {FieldErrorProps};
-export {FieldError};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {FieldErrorRoot};
+
+export type {FieldErrorRootProps};

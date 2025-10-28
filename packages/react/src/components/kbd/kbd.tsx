@@ -7,9 +7,14 @@ import React, {createContext, useContext} from "react";
 import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants";
 import {kbdVariants} from "./kbd.styles";
 
-const KbdContext = createContext<{
+/* -------------------------------------------------------------------------------------------------
+ * Kbd Context
+ * -----------------------------------------------------------------------------------------------*/
+type KbdContext = {
   slots?: ReturnType<typeof kbdVariants>;
-}>({});
+};
+
+const KbdContext = createContext<KbdContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Kbd Root
@@ -32,7 +37,7 @@ const KbdRoot = ({children, className, ...props}: KbdRootProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * KbdAbbr
+ * Kbd Abbr
  * -----------------------------------------------------------------------------------------------*/
 interface KbdAbbrProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
@@ -53,12 +58,13 @@ const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * KbdContent
+ * Kbd Content
  * -----------------------------------------------------------------------------------------------*/
 interface KbdContentProps extends React.ComponentProps<"span"> {
   children: React.ReactNode;
   className?: string;
 }
+
 const KbdContent = ({children, className, ...props}: KbdContentProps) => {
   const {slots} = useContext(KbdContext);
 
@@ -72,5 +78,6 @@ const KbdContent = ({children, className, ...props}: KbdContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {KbdRootProps, KbdAbbrProps, KbdContentProps};
 export {KbdRoot, KbdAbbr, KbdContent};
+
+export type {KbdRootProps, KbdAbbrProps, KbdContentProps};

@@ -9,9 +9,12 @@ import {composeTwRenderProps} from "../../utils";
 
 import {textAreaVariants} from "./textarea.styles";
 
-interface TextAreaProps extends TextAreaPrimitiveProps, TextAreaVariants {}
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+interface TextAreaRootProps extends TextAreaPrimitiveProps, TextAreaVariants {}
 
-const TextArea = ({className, ...rest}: TextAreaProps) => {
+const TextAreaRoot = ({className, ...rest}: TextAreaRootProps) => {
   return (
     <TextAreaPrimitive
       className={composeTwRenderProps(className, textAreaVariants({}))}
@@ -21,5 +24,9 @@ const TextArea = ({className, ...rest}: TextAreaProps) => {
   );
 };
 
-export type {TextAreaProps};
-export {TextArea};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {TextAreaRoot};
+
+export type {TextAreaRootProps};

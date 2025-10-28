@@ -16,16 +16,24 @@ import {composeTwRenderProps} from "../../utils";
 
 import {listboxVariants} from "./listbox.styles";
 
-type ListBoxContextValue = {
+/* -------------------------------------------------------------------------------------------------
+ * ListBox Context
+ * -----------------------------------------------------------------------------------------------*/
+type ListBoxContext = {
   slots?: ReturnType<typeof listboxVariants>;
 };
-const ListBoxContext = React.createContext<ListBoxContextValue>({});
 
-export type ListBoxProps<T extends object> = ListBoxPrimitiveProps<T> &
+const ListBoxContext = React.createContext<ListBoxContext>({});
+
+/* -------------------------------------------------------------------------------------------------
+ * ListBox Root
+ * -----------------------------------------------------------------------------------------------*/
+type ListBoxRootProps<T extends object> = ListBoxPrimitiveProps<T> &
   ListBoxVariants & {
     className?: string;
   };
-function ListBox<T extends object>({className, variant, ...props}: ListBoxProps<T>) {
+
+function ListBoxRoot<T extends object>({className, variant, ...props}: ListBoxRootProps<T>) {
   const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
 
   return (
@@ -34,9 +42,14 @@ function ListBox<T extends object>({className, variant, ...props}: ListBoxProps<
     </ListBoxContext>
   );
 }
-export type ListBoxItemProps = ListBoxItemPrimitiveProps & {
+
+/* -------------------------------------------------------------------------------------------------
+ * ListBox Item
+ * -----------------------------------------------------------------------------------------------*/
+type ListBoxItemProps = ListBoxItemPrimitiveProps & {
   className?: string;
 };
+
 const ListBoxItem = ({children, className, ...props}: ListBoxItemProps) => {
   const {slots} = React.useContext(ListBoxContext);
 
@@ -52,11 +65,15 @@ const ListBoxItem = ({children, className, ...props}: ListBoxItemProps) => {
   );
 };
 
-export type ListBoxItemIndicatorProps = {
+/* -------------------------------------------------------------------------------------------------
+ * ListBox Item Indicator
+ * -----------------------------------------------------------------------------------------------*/
+type ListBoxItemIndicatorProps = {
   className?: string;
   children?: React.ReactNode;
   isSelected?: boolean;
 };
+
 const ListBoxItemIndicator = ({
   children,
   className,
@@ -76,8 +93,10 @@ const ListBoxItemIndicator = ({
     </span>
   );
 };
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {ListBoxRoot, ListBoxItem, ListBoxItemIndicator};
 
-export {ListBox, ListBoxItem, ListBoxItemIndicator};
+export type {ListBoxRootProps, ListBoxItemProps, ListBoxItemIndicatorProps};

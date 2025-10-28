@@ -12,13 +12,17 @@ import {composeTwRenderProps} from "../../utils/compose";
 import {switchVariants} from "./switch.styles";
 
 /* -------------------------------------------------------------------------------------------------
- * Switch
+ * Switch Context
  * -----------------------------------------------------------------------------------------------*/
 interface SwitchContext {
   slots?: ReturnType<typeof switchVariants>;
 }
+
 const SwitchContext = createContext<SwitchContext>({});
 
+/* -------------------------------------------------------------------------------------------------
+ * Switch Root
+ * -----------------------------------------------------------------------------------------------*/
 interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
 
 const SwitchRoot = ({children, className, ...originalProps}: SwitchRootProps) => {
@@ -41,7 +45,9 @@ const SwitchRoot = ({children, className, ...originalProps}: SwitchRootProps) =>
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Switch Control
+ * -----------------------------------------------------------------------------------------------*/
 interface SwitchControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
@@ -54,7 +60,9 @@ const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Switch Thumb
+ * -----------------------------------------------------------------------------------------------*/
 interface SwitchThumbProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
@@ -67,7 +75,9 @@ const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Switch Icon
+ * -----------------------------------------------------------------------------------------------*/
 interface SwitchIconProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
@@ -84,4 +94,5 @@ const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon};
+
 export type {SwitchRootProps, SwitchControlProps, SwitchThumbProps, SwitchIconProps};

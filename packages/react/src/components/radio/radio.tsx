@@ -9,16 +9,19 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {radioVariants} from "./radio.styles";
 
+/* -------------------------------------------------------------------------------------------------
+ * Radio Context
+ * -----------------------------------------------------------------------------------------------*/
 interface RadioContext {
   slots?: ReturnType<typeof radioVariants>;
   state?: RadioRenderProps;
 }
+
 const RadioContext = createContext<RadioContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Root
  * -----------------------------------------------------------------------------------------------*/
-
 interface RadioRootProps extends RadioPrimitiveProps {
   /** The name of the radio button, used when submitting an HTML form. */
   name?: string;
@@ -42,8 +45,11 @@ const RadioRoot = ({children, className, ...props}: RadioRootProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Radio Control
+ * -----------------------------------------------------------------------------------------------*/
 interface RadioControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
 const RadioControl = ({children, className, ...props}: RadioControlProps) => {
   const {slots} = useContext(RadioContext);
 
@@ -54,7 +60,9 @@ const RadioControl = ({children, className, ...props}: RadioControlProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Radio Indicator
+ * -----------------------------------------------------------------------------------------------*/
 interface RadioIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
   children?: React.ReactNode | ((props: RadioRenderProps) => React.ReactNode);
 }
@@ -76,7 +84,9 @@ const RadioIndicator = ({children, className, ...props}: RadioIndicatorProps) =>
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Radio Content
+ * -----------------------------------------------------------------------------------------------*/
 interface RadioContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const RadioContent = ({children, className, ...props}: RadioContentProps) => {
@@ -89,7 +99,9 @@ const RadioContent = ({children, className, ...props}: RadioContentProps) => {
   );
 };
 
-/* ----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 export {RadioRoot, RadioControl, RadioIndicator, RadioContent};
+
 export type {RadioRootProps, RadioControlProps, RadioIndicatorProps, RadioContentProps};
