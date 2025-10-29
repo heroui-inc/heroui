@@ -47,6 +47,7 @@
     "components/skeleton",
     "components/spinner",
     "components/switch",
+    "components/surface",
     "components/tabs",
     "components/text-field",
     "components/textarea",
