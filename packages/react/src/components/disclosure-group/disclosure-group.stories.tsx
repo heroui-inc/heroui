@@ -43,7 +43,7 @@ const Template = (props: DisclosureGroupProps) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-panel shadow-surface flex flex-col gap-4 rounded-3xl p-4">
+      <div className="bg-surface shadow-surface flex flex-col gap-4 rounded-3xl p-4">
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
           <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
@@ -132,7 +132,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-panel shadow-surface flex flex-col gap-4 rounded-3xl p-4">
+      <div className="bg-surface shadow-surface flex flex-col gap-4 rounded-3xl p-4">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-lg font-semibold">HeroUI Native</h3>
           <div className="flex gap-2">
@@ -353,7 +353,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
   });
 
   return (
-    <section className="bg-panel w-full overflow-hidden">
+    <section className="bg-surface w-full overflow-hidden">
       {/* Left content */}
       <div className="flex w-full items-center gap-8 px-8 py-8">
         {/* Controls */}

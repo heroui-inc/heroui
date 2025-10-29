@@ -57,17 +57,17 @@
   /* --- background shades --- */
   --color-background-secondary: color-mix(
     in oklab,
-    var(--color-background) 90%,
+    var(--color-background) 96%,
     var(--color-foreground) 4%
   );
   --color-background-tertiary: color-mix(
     in oklab,
-    var(--color-background) 90%,
+    var(--color-background) 92%,
     var(--color-foreground) 8%
   );
   --color-background-quaternary: color-mix(
     in oklab,
-    var(--color-background) 90%,
+    var(--color-background) 86%,
     var(--color-foreground) 14%
   );
   --color-background-inverse: var(--color-foreground);
@@ -135,13 +135,27 @@
   --color-success-soft-hover: color-mix(in oklab, var(--color-success) 20%, transparent);
 
   /* Surface Levels - progressively darker/lighter shades for layering */
-  --color-surface-secondary: color-mix(in oklab, var(--surface) 90%, var(--surface-foreground) 3%);
-  --color-surface-tertiary: color-mix(in oklab, var(--surface) 90%, var(--surface-foreground) 8%);
+  --color-surface-secondary: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground) 6%);
+  --color-surface-tertiary: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
   --color-surface-quaternary: color-mix(
     in oklab,
-    var(--surface) 90%,
+    var(--surface) 86%,
     var(--default-foreground) 14%
   );
+
+  /* On Surface Colors */
+  --color-on-surface: color-mix(
+    in oklab,
+    var(--color-surface) 93%,
+    var(--color-surface-foreground) 7%
+  );
+  --color-on-surface-foreground: var(--color-surface-foreground);
+  --color-on-surface-hover: color-mix(
+    in oklab,
+    var(--color-surface) 91%,
+    var(--color-surface-foreground) 9%
+  );
+  --color-on-surface-focus: var(--color-on-surface);
 
   /* Radius and default sizes - defaults can change by just changing the --radius */
   --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */

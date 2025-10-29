@@ -21,23 +21,23 @@ configureActions({
 const channel = addons.getChannel()
 
 const themes = {
-  dark :{
+  dark: {
     ...theming.dark,
     appBg: "#1B1B1B",
     appContentBg: "#1B1B1B",
     background: "#1B1B1B",
     barBg: "#1B1B1B",
-    brandTitle: `<img src="/logo-light.svg" style="width: 120px; height: auto;"/>`
+    brandTitle: `<img src="/logo-light.svg" style="width: 120px; height: auto;"/>`,
   },
   light: {
     ...theming.light,
-    appBg: "#FCFCFC",
-    appContentBg: "#FCFCFC",
-    background: "#FCFCFC",
-    barBg: "#FCFCFC",
-    brandTitle: `<img src="/logo-dark.svg" style="width: 120px; height: auto;"/>`
+    appBg: "#FFFFFF",
+    appContentBg: "#f4f4f4",
+    background: "#f4f4f4",
+    barBg: "#f4f4f4",
+    brandTitle: `<img src="/logo-dark.svg" style="width: 120px; height: auto;"/>`,
   },
-}
+};
 
 const ThemeContainer = (props) => {
   const [curTheme, setCurTheme] = useState<string>()

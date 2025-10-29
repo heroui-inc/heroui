@@ -23,9 +23,9 @@ const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
       : "";
 
   return (
-    <div className="flex items-center gap-4 rounded-lg border border-divider p-4">
+    <div className="flex items-center gap-4 bg-surface rounded-3xl shadow-surface p-4">
       <div
-        className="size-12 shrink-0 rounded-lg border border-divider"
+        className="size-12 shrink-0 rounded-xl border border-divider"
         style={{backgroundColor: `var(${variable})`}}
       />
       <div className="flex flex-1 flex-col gap-1">

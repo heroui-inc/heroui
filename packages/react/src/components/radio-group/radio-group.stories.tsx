@@ -10,6 +10,7 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Radio} from "../radio";
+import {Surface} from "../surface";
 
 import {RadioGroup} from "./index";
 
@@ -59,6 +60,44 @@ export const Default: Story = {
         </Radio.Root>
       </RadioGroup>
     </div>
+  ),
+};
+
+export const OnSurface: Story = {
+  render: () => (
+    <Surface className="w-full rounded-3xl p-6">
+      <RadioGroup defaultValue="premium" name="plan">
+        <Label>Plan selection</Label>
+        <Description>Choose the plan that suits you best</Description>
+        <Radio.Root value="basic">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
+            <Label>Basic Plan</Label>
+            <Description>Includes 100 messages per month</Description>
+          </Radio.Content>
+        </Radio.Root>
+        <Radio.Root value="premium">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
+            <Label>Premium Plan</Label>
+            <Description>Includes 200 messages per month</Description>
+          </Radio.Content>
+        </Radio.Root>
+        <Radio.Root value="business">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
+            <Label>Business Plan</Label>
+            <Description>Unlimited messages</Description>
+          </Radio.Content>
+        </Radio.Root>
+      </RadioGroup>
+    </Surface>
   ),
 };
 
@@ -375,7 +414,7 @@ export const DeliveryAndPaymentExample: Story = {
     ];
 
     return (
-      <div className="bg-background-secondary flex w-full flex-col items-center gap-10 px-4 py-8">
+      <div className="flex w-full flex-col items-center gap-10 px-4 py-8">
         <section className="flex w-full max-w-lg flex-col gap-4">
           <RadioGroup defaultValue="express" name="delivery">
             <Label>Delivery method</Label>
@@ -385,7 +424,7 @@ export const DeliveryAndPaymentExample: Story = {
                   key={option.value}
                   value={option.value}
                   className={clsx(
-                    "bg-panel data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
+                    "bg-surface-tertiary data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
                     "data-[focus-visible=true]:bg-accent/10",
                   )}
                 >
@@ -415,7 +454,7 @@ export const DeliveryAndPaymentExample: Story = {
                   key={option.value}
                   value={option.value}
                   className={clsx(
-                    "bg-panel group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
+                    "bg-surface-tertiary group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
                   )}
                 >

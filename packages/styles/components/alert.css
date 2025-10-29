@@ -2,7 +2,7 @@
 
 /* Base alert styles */
 .alert {
-  @apply bg-surface-secondary flex w-full flex-row items-start justify-start gap-4 rounded-3xl px-4 py-3;
+  @apply bg-surface shadow-surface flex w-full flex-row items-start justify-start gap-4 rounded-3xl px-4 py-3;
 }
 
 /* Alert elements */

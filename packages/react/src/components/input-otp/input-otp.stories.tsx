@@ -8,6 +8,7 @@ import {Form} from "../form";
 import {Label} from "../label";
 import {Link} from "../link";
 import {Spinner} from "../spinner";
+import {Surface} from "../surface";
 
 import {InputOTP, REGEXP_ONLY_CHARS} from "./index";
 
@@ -60,6 +61,36 @@ export const Default: Story = {
         </Link>
       </div>
     </div>
+  ),
+};
+
+export const OnSurface: Story = {
+  render: (args) => (
+    <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
+      <div className="flex flex-col gap-1">
+        <Label>Verify account</Label>
+        <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
+      </div>
+      <InputOTP {...args} maxLength={6}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
+      <div className="flex items-center gap-[5px] px-1 pt-1">
+        <p className="text-muted text-sm">Didn&apos;t receive a code?</p>
+        <Link className="text-foreground" underline="always">
+          Resend
+        </Link>
+      </div>
+    </Surface>
   ),
 };
 

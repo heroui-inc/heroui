@@ -19,7 +19,7 @@
 
 /* Tab list */
 .tabs__list {
-  @apply bg-field inline-flex p-1;
+  @apply bg-default inline-flex p-1;
 
   border-radius: calc(var(--radius-2xl) + 0.25rem);
 

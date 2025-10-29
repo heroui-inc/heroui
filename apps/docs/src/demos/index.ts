@@ -24,6 +24,7 @@ import * as RadioGroupDemos from "./radio-group";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
+import * as SurfaceDemos from "./surface";
 import * as SwitchDemos from "./switch";
 import * as TabsDemos from "./tabs";
 import * as TextFieldDemos from "./text-field";
@@ -220,6 +221,10 @@ export const demos: Record<string, DemoItem> = {
     component: FieldsetDemos.Basic,
     file: "fieldset/basic.tsx",
   },
+  "fieldset-on-surface": {
+    component: FieldsetDemos.OnSurface,
+    file: "fieldset/on-surface.tsx",
+  },
   // Input demos
   "input-basic": {
     component: InputDemos.Basic,
@@ -232,6 +237,10 @@ export const demos: Record<string, DemoItem> = {
   "input-controlled": {
     component: InputDemos.Controlled,
     file: "input/controlled.tsx",
+  },
+  "input-on-surface": {
+    component: InputDemos.OnSurface,
+    file: "input/on-surface.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
@@ -265,6 +274,10 @@ export const demos: Record<string, DemoItem> = {
   "input-otp-form-example": {
     component: InputOTPDemos.FormExample,
     file: "input-otp/form-example.tsx",
+  },
+  "input-otp-on-surface": {
+    component: InputOTPDemos.OnSurface,
+    file: "input-otp/on-surface.tsx",
   },
   // Kbd demos
   "kbd-basic": {
@@ -337,6 +350,10 @@ export const demos: Record<string, DemoItem> = {
     component: RadioGroupDemos.Validation,
     file: "radio-group/validation.tsx",
   },
+  "radio-group-on-surface": {
+    component: RadioGroupDemos.OnSurface,
+    file: "radio-group/on-surface.tsx",
+  },
   // Skeleton demos
   "skeleton-basic": {
     component: SkeletonDemos.Basic,
@@ -383,6 +400,11 @@ export const demos: Record<string, DemoItem> = {
   "spinner-sizes": {
     component: SpinnerDemos.Sizes,
     file: "spinner/sizes.tsx",
+  },
+  // Surface demos
+  "surface-variants": {
+    component: SurfaceDemos.Variants,
+    file: "surface/variants.tsx",
   },
   // Switch demos
   "switch-basic": {
@@ -471,6 +493,10 @@ export const demos: Record<string, DemoItem> = {
     component: TextAreaDemos.Controlled,
     file: "textarea/controlled.tsx",
   },
+  "textarea-on-surface": {
+    component: TextAreaDemos.OnSurface,
+    file: "textarea/on-surface.tsx",
+  },
   // TextField demos
   "text-field-basic": {
     component: TextFieldDemos.Basic,
@@ -507,6 +533,10 @@ export const demos: Record<string, DemoItem> = {
   "text-field-validation": {
     component: TextFieldDemos.Validation,
     file: "text-field/validation.tsx",
+  },
+  "text-field-on-surface": {
+    component: TextFieldDemos.OnSurface,
+    file: "text-field/on-surface.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

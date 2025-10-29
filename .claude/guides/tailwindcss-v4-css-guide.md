@@ -343,7 +343,7 @@ Tailwind CSS v4 embraces CSS custom properties for theming and dynamic values:
    ```css
    .component {
      /* Good: Use @apply for Tailwind utilities */
-     @apply bg-panel rounded-lg border p-4 shadow-md;
+     @apply bg-surface rounded-lg border p-4 shadow-md;
 
      /* Keep custom CSS for non-utility properties */
      cursor: var(--cursor-interactive);

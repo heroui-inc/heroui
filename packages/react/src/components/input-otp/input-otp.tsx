@@ -8,6 +8,7 @@ import React, {createContext, useContext} from "react";
 import {FieldErrorContext} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
+import {SurfaceContext} from "../surface";
 
 import {inputOTPVariants} from "./input-otp.styles";
 
@@ -29,25 +30,32 @@ const InputOTPContext = createContext<InputOTPContext>({
  * Input OTP Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPRootProps
-  extends Omit<React.ComponentProps<typeof OTPInput>, "disabled" | "render">,
+  extends Omit<React.ComponentProps<typeof OTPInput>, "disabled" | "containerClassName" | "render">,
     InputOTPVariants {
   isDisabled?: boolean;
   isInvalid?: boolean;
   validationErrors?: string[];
   validationDetails?: ValidityState;
+  inputClassName?: string;
   children: React.ReactNode;
 }
 
 const InputOTPRoot = ({
   className,
-  containerClassName,
+  inputClassName,
   isDisabled = false,
   isInvalid = false,
+  isOnSurface,
   validationDetails,
   validationErrors = [],
   ...props
 }: InputOTPRootProps) => {
-  const slots = React.useMemo(() => inputOTPVariants(), []);
+  const surfaceContext = useContext(SurfaceContext);
+  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const slots = React.useMemo(
+    () => inputOTPVariants({isOnSurface: isOnSurfaceValue}),
+    [isOnSurfaceValue],
+  );
 
   const validation = React.useMemo(
     () =>
@@ -63,8 +71,9 @@ const InputOTPRoot = ({
     <InputOTPContext value={{slots, isDisabled, isInvalid}}>
       <FieldErrorContext.Provider value={validation}>
         <OTPInput
-          className={slots.base({className})}
-          containerClassName={slots.container({className: containerClassName})}
+          // OTP Input package uses the `className` prop for the actual `input` element which is not visible to the user so no need to pass it to the base container
+          className={slots.input({className: inputClassName})}
+          containerClassName={slots.base({className})}
           data-disabled={dataAttr(isDisabled)}
           data-invalid={dataAttr(isInvalid)}
           data-slot="input-otp"

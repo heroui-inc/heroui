@@ -12,7 +12,7 @@ export default {
   parameters: {
     layout: "centered",
   },
-  title: "Components/Alert",
+  title: "Components/Feedback/Alert",
 };
 
 const defaultArgs = {};

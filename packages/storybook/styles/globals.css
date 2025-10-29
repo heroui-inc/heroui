@@ -72,6 +72,5 @@
 }
 
 body {
-  /* @apply bg-background-secondary; */
   background-color: var(--background);
 }

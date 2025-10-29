@@ -52,7 +52,7 @@ You communicate technical concepts clearly and can assist both human developers 
 
    ```css
    /* Good */
-   @apply bg-panel rounded-lg border p-4 shadow-md;
+   @apply bg-surface rounded-lg border p-4 shadow-md;
    ```
 
 2. **Keep custom CSS properties**: Don't convert properties without Tailwind utilities

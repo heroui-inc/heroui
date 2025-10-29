@@ -33,7 +33,7 @@
     /* == Light Theme Variables == */
 
     /* Base Colors */
-    --background: var(--white);
+    --background: oklch(0.9702 0 0);
     --foreground: var(--eclipse);
 
     /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
@@ -48,14 +48,14 @@
 
     --scrollbar: oklch(87.1% 0.006 286.286);
 
-    --default: oklch(95% 0.001 286.375);
+    --default: oklch(94% 0.001 286.375);
     --default-foreground: var(--eclipse);
 
     --accent: oklch(0.6204 0.195 253.83);
     --accent-foreground: var(--snow);
 
     /* Form Field Defaults - Colors */
-    --field-background: oklch(0.94 0 0);
+    --field-background: var(--white);
     --field-foreground: oklch(0.2103 0.0059 285.89);
     --field-placeholder: var(--muted);
     --field-border: transparent; /* no border by default on form fields */
@@ -88,7 +88,8 @@
     /* Overlay shadow */
     --overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
     --field-shadow:
-      0 0 0 0 rgba(255, 255, 255, 0.1) inset, 0 0px 0px 0 rgba(0, 0, 0, 0.05); /* no shadow by default on form fields */
+      0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+      0 0 1px 0 rgba(0, 0, 0, 0.06);
     /* Skeleton Default Global Animation */
     --skeleton-animation: shimmer; /* shimmer, pulse, none */
   }
@@ -129,7 +130,7 @@
     --danger-foreground: var(--snow);
 
     /* Component Colors */
-    --segment: oklch(44.2% 0.017 285.786);
+    --segment: oklch(0.3964 0.01 285.93);
     --segment-foreground: var(--foreground);
 
     /* Misc Colors */

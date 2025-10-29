@@ -28,3 +28,18 @@
     background-color: var(--color-field-focus);
   }
 }
+
+/* Variant modifiers */
+.textarea--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-on-surface-hover;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
+}

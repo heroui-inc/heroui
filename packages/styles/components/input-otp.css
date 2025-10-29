@@ -1,10 +1,5 @@
 /* Base container */
 .input-otp {
-  @apply flex w-full flex-col gap-1;
-}
-
-/* Container from OTPInput */
-.input-otp__container {
   @apply relative flex items-center gap-2;
 
   &[data-disabled="true"] {
@@ -75,6 +70,24 @@
 /* Separator */
 .input-otp__separator {
   @apply bg-divider h-[2px] w-[6px] shrink-0 rounded-[4px];
+}
+
+/* Variant modifiers */
+.input-otp--on-surface .input-otp__slot {
+  @apply bg-on-surface shadow-none;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-on-surface-hover;
+  }
+
+  &[data-active="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  &[data-filled="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
 }
 
 /* Animations */
