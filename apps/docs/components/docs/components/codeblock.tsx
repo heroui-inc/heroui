@@ -103,7 +103,7 @@ const CodeBlockHighlight = ({
         // due to display: contents on the scrollable child element, this div will also scroll
         // this causes the intersection observer to trigger if scrolled far enough horizontally
         // set the width to fit-content to prevent this div from going off screen
-        // width: "w-full",
+        width: "w-full",
       }}
     >
       {isVisible ? (
@@ -125,23 +125,12 @@ const CodeBlockHighlight = ({
                   preRef.current = element;
                 }
               }}
-              className={clsx(
-                className,
-                classNameProp,
-                `language-${codeLang}`,
-                "max-w-full overflow-x-auto",
-                {
-                  "flex-col": isMultiLine,
-                  "overflow-x-scroll scrollbar-hide": hideScrollBar,
-                },
-              )}
+              className={clsx(className, classNameProp, `language-${codeLang}`, "max-w-full", {
+                "flex-col": isMultiLine,
+                "overflow-x-scroll scrollbar-hide": hideScrollBar,
+              })}
               data-language={language}
-              style={{
-                // set display to block and ensure preformatted text behavior
-                ...style,
-                display: "block",
-                whiteSpace: "pre",
-              }}
+              style={style}
             >
               {tokens.map((line, i) => {
                 const lineProps = getLineProps({line, key: i});
