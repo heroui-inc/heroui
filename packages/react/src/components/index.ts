@@ -7,6 +7,8 @@ export * from "./accordion";
 export * from "./avatar";
 export * from "./button";
 export * from "./card";
+export * from "./checkbox";
+export * from "./checkbox-group";
 export * from "./chip";
 export * from "./close-button";
 export * from "./disclosure";
