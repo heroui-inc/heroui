@@ -1,3 +1,5 @@
+"use client";
+
 import {Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 import React from "react";
 
