@@ -23,6 +23,7 @@ import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
+import {SurfaceContext} from "../surface";
 
 import {accordionVariants} from "./accordion.styles";
 
@@ -41,15 +42,26 @@ const AccordionRoot = ({children, className, ...originalProps}: AccordionRootPro
     [objectToDeps(variantProps)],
   );
 
+  const variant = (variantProps as AccordionVariants)?.variant ?? "default";
+
+  const content = (
+    <DisclosureGroup
+      data-slot="accordion"
+      {...props}
+      className={composeTwRenderProps(className, slots.base())}
+    >
+      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+    </DisclosureGroup>
+  );
+
   return (
     <AccordionContext value={{slots}}>
-      <DisclosureGroup
-        data-slot="accordion"
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </DisclosureGroup>
+      {variant === "elevated" ? (
+        // Allows inner components to apply "on-surface" colors for proper contrast
+        <SurfaceContext.Provider value={{variant: "default"}}>{content}</SurfaceContext.Provider>
+      ) : (
+        content
+      )}
     </AccordionContext>
   );
 };

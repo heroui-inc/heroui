@@ -114,7 +114,7 @@ export const ElevatedVariant = {
     allowsMultipleExpanded: true,
   },
   render: (args: Accordion["RootProps"]) => (
-    <section className="bg-background-tertiary flex h-screen w-screen items-center justify-center">
+    <section className="flex h-screen w-screen items-center justify-center">
       <Template {...args} />
     </section>
   ),
@@ -126,7 +126,7 @@ export const Custom = {
     allowsMultipleExpanded: true,
   },
   render: (args: Accordion["RootProps"]) => (
-    <section className="bg-background-tertiary flex h-screen w-screen items-center justify-center">
+    <section className="flex h-screen w-screen items-center justify-center">
       <CustomTemplate {...args} />
     </section>
   ),

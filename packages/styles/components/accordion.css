@@ -89,7 +89,6 @@
 }
 
 /* Elevated variant */
-/* TODO: Rename this to "secondary" */
 .accordion--elevated {
   @apply bg-surface rounded-3xl;
 
