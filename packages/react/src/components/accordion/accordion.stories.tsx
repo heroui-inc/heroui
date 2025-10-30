@@ -74,7 +74,7 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
           <div key={category.title}>
             <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
             <div key={category.title}>
-              <Accordion.Root {...props} className="w-full" variant="elevated">
+              <Accordion.Root {...props} className="w-full" variant="surface">
                 {category.items.map((item, index) => (
                   <Accordion.Item key={index}>
                     <Accordion.Heading>
@@ -107,10 +107,10 @@ export const Default = {
   render: Template,
 };
 
-export const ElevatedVariant = {
+export const SurfaceVariant = {
   args: {
     ...defaultArgs,
-    variant: "elevated",
+    variant: "surface",
     allowsMultipleExpanded: true,
   },
   render: (args: Accordion["RootProps"]) => (

@@ -56,7 +56,7 @@ export function FAQ() {
       {categories.map((category) => (
         <div key={category.title}>
           <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-          <Accordion.Root className="w-full" variant="elevated">
+          <Accordion.Root className="w-full" variant="surface">
             {category.items.map((item, index) => (
               <Accordion.Item key={index}>
                 <Accordion.Heading>

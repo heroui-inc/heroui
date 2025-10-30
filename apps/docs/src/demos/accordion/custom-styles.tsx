@@ -26,7 +26,7 @@ const items = [
 
 export function CustomStyles() {
   return (
-    <Accordion.Root className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="elevated">
+    <Accordion.Root className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="surface">
       {items.map((item, index) => (
         <Accordion.Item
           key={index}

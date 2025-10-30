@@ -17,8 +17,8 @@ export const accordionVariants = tv({
   variants: {
     variant: {
       default: {},
-      elevated: {
-        base: "accordion--elevated",
+      surface: {
+        base: "accordion--surface",
       },
     },
   },

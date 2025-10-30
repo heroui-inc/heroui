@@ -88,8 +88,8 @@
   }
 }
 
-/* Elevated variant */
-.accordion--elevated {
+/* Surface variant */
+.accordion--surface {
   @apply bg-surface rounded-3xl;
 
   .accordion__trigger {
@@ -100,13 +100,13 @@
   }
 }
 
-.accordion--elevated .accordion__item {
-  /* Elevated variant separator styling */
+.accordion--surface .accordion__item {
+  /* Surface variant separator styling */
   &::after {
     @apply left-[3%] w-[94%];
   }
 
-  /* Special rounding for first and last items in elevated variant */
+  /* Special rounding for first and last items in surface variant */
   &:first-child [data-slot="accordion-trigger"] {
     @apply rounded-t-3xl;
   }
