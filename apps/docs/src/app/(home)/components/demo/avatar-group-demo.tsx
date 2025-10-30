@@ -54,7 +54,7 @@ export function AvatarGroupDemo() {
           </Avatar.Root>
         ))}
         <Avatar.Root className="ring-background ring-2">
-          <Avatar.Fallback className="bg-background text-muted text-xs font-medium">
+          <Avatar.Fallback className="bg-surface text-muted text-xs font-medium">
             +{avatars.length - 2}
           </Avatar.Fallback>
         </Avatar.Root>

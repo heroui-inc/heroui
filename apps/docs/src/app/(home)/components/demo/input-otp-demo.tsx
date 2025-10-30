@@ -2,11 +2,6 @@
 
 import {InputOTP, Label, Link} from "@heroui/react";
 import {useState} from "react";
-import {tv} from "tailwind-variants";
-
-const inputSlotGroupStyles = tv({
-  base: "[&_[data-slot=input-otp-slot]]:shadow-surface [&_[data-slot=input-otp-slot]]:bg-surface",
-});
 
 export function InputOTPDemo() {
   // HERO - 4320 - easter egg
@@ -20,13 +15,13 @@ export function InputOTPDemo() {
           <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
         </div>
         <InputOTP maxLength={6} value={value} onChange={setValue}>
-          <InputOTP.Group className={inputSlotGroupStyles()}>
+          <InputOTP.Group>
             <InputOTP.Slot index={0} />
             <InputOTP.Slot index={1} />
             <InputOTP.Slot index={2} />
           </InputOTP.Group>
           <InputOTP.Separator />
-          <InputOTP.Group className={inputSlotGroupStyles()}>
+          <InputOTP.Group>
             <InputOTP.Slot index={3} />
             <InputOTP.Slot index={4} />
             <InputOTP.Slot index={5} />

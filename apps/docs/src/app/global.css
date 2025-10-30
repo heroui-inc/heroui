@@ -20,7 +20,7 @@
 
   /* Fumadocs UI Variables */
   --fd-layout-width: 1400px;
-  --color-fd-background: var(--color-background-secondary);
+  --color-fd-background: var(--background);
   --color-fd-primary: oklch(0.14 0 0);
   --color-fd-secondary: #f9f9f9;
   --color-fd-card: #f9f9f9;
@@ -73,9 +73,9 @@
 
 #nd-home-layout {
   #nd-nav {
-    @apply bg-background-secondary;
+    @apply bg-background blur-none backdrop-blur-none;
     [data-theme-toggle] {
-      @apply bg-field;
+      @apply bg-on-surface;
       margin-left: 4px;
     }
   }
@@ -116,7 +116,7 @@
   }
 
   [data-search-full] {
-    @apply bg-field border-border rounded-field;
+    @apply bg-on-surface rounded-field;
 
     kbd {
       @apply bg-surface text-muted px-1 font-sans text-xs font-medium;

@@ -23,7 +23,13 @@ interface SurfaceRootProps extends React.ComponentProps<"div">, SurfaceVariants 
   asChild?: boolean;
 }
 
-const SurfaceRoot = ({asChild, children, className, variant, ...rest}: SurfaceRootProps) => {
+const SurfaceRoot = ({
+  asChild,
+  children,
+  className,
+  variant = "default",
+  ...rest
+}: SurfaceRootProps) => {
   const Component = asChild ? SlotPrimitive : "div";
 
   return (

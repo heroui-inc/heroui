@@ -2,7 +2,7 @@ import {Alert, Button} from "@heroui/react";
 
 export function AlertDemo() {
   return (
-    <Alert.Root className="bg-surface shadow-surface w-[400px] items-center">
+    <Alert.Root className="w-[400px] items-center">
       <Alert.Indicator />
       <Alert.Content>
         <Alert.Title>You have 2 credtis left</Alert.Title>

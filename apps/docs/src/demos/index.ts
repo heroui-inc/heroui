@@ -7,6 +7,7 @@ import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
+import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as DescriptionDemos from "./description";
@@ -208,6 +209,51 @@ export const demos: Record<string, DemoItem> = {
   "checkbox-custom-styles": {
     component: CheckboxDemos.CustomStyles,
     file: "checkbox/custom-styles.tsx",
+  },
+  "checkbox-invalid": {
+    component: CheckboxDemos.Invalid,
+    file: "checkbox/invalid.tsx",
+  },
+  "checkbox-custom-indicator": {
+    component: CheckboxDemos.CustomIndicator,
+    file: "checkbox/custom-indicator.tsx",
+  },
+  "checkbox-full-rounded": {
+    component: CheckboxDemos.FullRounded,
+    file: "checkbox/full-rounded.tsx",
+  },
+  "checkbox-features-and-addons": {
+    component: CheckboxDemos.FeaturesAndAddOns,
+    file: "checkbox/features-and-addons.tsx",
+  },
+  // CheckboxGroup demos
+  "checkbox-group-basic": {
+    component: CheckboxGroupDemos.Basic,
+    file: "checkbox-group/basic.tsx",
+  },
+  "checkbox-group-on-surface": {
+    component: CheckboxGroupDemos.OnSurface,
+    file: "checkbox-group/on-surface.tsx",
+  },
+  "checkbox-group-with-custom-indicator": {
+    component: CheckboxGroupDemos.WithCustomIndicator,
+    file: "checkbox-group/with-custom-indicator.tsx",
+  },
+  "checkbox-group-indeterminate": {
+    component: CheckboxGroupDemos.Indeterminate,
+    file: "checkbox-group/indeterminate.tsx",
+  },
+  "checkbox-group-validation": {
+    component: CheckboxGroupDemos.Validation,
+    file: "checkbox-group/validation.tsx",
+  },
+  "checkbox-group-controlled": {
+    component: CheckboxGroupDemos.Controlled,
+    file: "checkbox-group/controlled.tsx",
+  },
+  "checkbox-group-disabled": {
+    component: CheckboxGroupDemos.Disabled,
+    file: "checkbox-group/disabled.tsx",
   },
   // Chip demos
   "chip-basic": {

@@ -28,6 +28,7 @@
     "components/button",
     "components/card",
     "components/checkbox",
+    "components/checkbox-group",
     "components/chip",
     "components/close-button",
     "components/description",

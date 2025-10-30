@@ -3,7 +3,7 @@
 /* Block */
 .card {
   @apply relative flex flex-col gap-3 overflow-hidden p-4;
-  @apply border-border rounded-3xl;
+  @apply border-border shadow-surface rounded-3xl;
 }
 
 /* Element - header */
@@ -34,7 +34,7 @@
 /* Modifier - variant */
 
 .card--transparent {
-  @apply border-none bg-transparent;
+  @apply border-none bg-transparent shadow-none;
 }
 
 .card--default {
