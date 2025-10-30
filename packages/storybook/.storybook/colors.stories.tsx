@@ -100,8 +100,6 @@ export const AllColors = () => {
     {name: "Field Foreground", variable: "--color-field-foreground"},
     {name: "Field Placeholder", variable: "--color-field-placeholder"},
     {name: "Field Border", variable: "--color-field-border"},
-    {name: "Field Hover", variable: "--color-field-hover"},
-    {name: "Field Focus", variable: "--color-field-focus"},
   ];
 
   const primitiveColors: ColorItemProps[] = [
@@ -154,6 +152,13 @@ export const AllColors = () => {
     {name: "Field Border Focus", variable: "--color-field-border-focus"},
   ];
 
+  const calculatedOnSurfaceColors: ColorItemProps[] = [
+    {name: "On Surface", variable: "--color-on-surface"},
+    {name: "On Surface Foreground", variable: "--color-on-surface-foreground"},
+    {name: "On Surface Hover", variable: "--color-on-surface-hover"},
+    {name: "On Surface Focus", variable: "--color-on-surface-focus"},
+  ];
+
   return (
     <div className="mx-auto max-w-4xl p-6">
       <div className="mb-8">
@@ -179,6 +184,7 @@ export const AllColors = () => {
         <ColorSection colors={calculatedHoverColors} title="Hover States" />
         <ColorSection colors={calculatedSoftColors} title="Soft Variants" />
         <ColorSection colors={calculatedSurfaceColors} title="Surface Levels" />
+        <ColorSection colors={calculatedOnSurfaceColors} title="On Surface Colors" />
         <ColorSection colors={calculatedFieldColors} title="Field States" />
       </div>
     </div>
