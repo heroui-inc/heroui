@@ -6,6 +6,7 @@ import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as CardDemos from "./card";
+import * as CheckboxDemos from "./checkbox";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as DescriptionDemos from "./description";
@@ -166,6 +167,47 @@ export const demos: Record<string, DemoItem> = {
   "card-with-background-image": {
     component: CardDemos.WithBackgroundImage,
     file: "card/with-background-image.tsx",
+  },
+  // Checkbox demos
+  "checkbox-basic": {
+    component: CheckboxDemos.Basic,
+    file: "checkbox/basic.tsx",
+  },
+  "checkbox-disabled": {
+    component: CheckboxDemos.Disabled,
+    file: "checkbox/disabled.tsx",
+  },
+  "checkbox-default-selected": {
+    component: CheckboxDemos.DefaultSelected,
+    file: "checkbox/default-selected.tsx",
+  },
+  "checkbox-controlled": {
+    component: CheckboxDemos.Controlled,
+    file: "checkbox/controlled.tsx",
+  },
+  "checkbox-indeterminate": {
+    component: CheckboxDemos.Indeterminate,
+    file: "checkbox/indeterminate.tsx",
+  },
+  "checkbox-with-label": {
+    component: CheckboxDemos.WithLabel,
+    file: "checkbox/with-label.tsx",
+  },
+  "checkbox-with-description": {
+    component: CheckboxDemos.WithDescription,
+    file: "checkbox/with-description.tsx",
+  },
+  "checkbox-render-props": {
+    component: CheckboxDemos.RenderProps,
+    file: "checkbox/render-props.tsx",
+  },
+  "checkbox-form": {
+    component: CheckboxDemos.Form,
+    file: "checkbox/form.tsx",
+  },
+  "checkbox-custom-styles": {
+    component: CheckboxDemos.CustomStyles,
+    file: "checkbox/custom-styles.tsx",
   },
   // Chip demos
   "chip-basic": {

@@ -1,0 +1,125 @@
+/* Base checkbox styles */
+.checkbox {
+  @apply flex items-start gap-3 outline-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  [data-slot="label"] {
+    @apply select-none;
+  }
+
+  [data-slot="description"] {
+    @apply select-none text-wrap;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  svg {
+    @apply size-3 fill-none transition-all duration-200;
+    stroke: var(--accent-foreground);
+    stroke-width: 3px;
+    stroke-dasharray: 22px;
+    stroke-dashoffset: 66;
+  }
+
+  &[data-pressed] .checkbox__indicator {
+    border-color: var(--border-color-pressed);
+  }
+
+  &[data-selected],
+  &[data-indeterminate] {
+    .checkbox__indicator {
+      border-color: var(--accent-foreground);
+      background: var(--accent-hover);
+    }
+
+    svg {
+      stroke-dashoffset: 44;
+    }
+  }
+
+  &[data-indeterminate] {
+    & svg {
+      stroke: none;
+      fill: var(--accent-foreground);
+    }
+  }
+}
+
+/* Checkbox control (the square button) */
+.checkbox__control {
+  @apply reduce-motion:transition-none bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded outline-none;
+
+  transition: all 300ms var(--ease-out);
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Focus states */
+  .checkbox:focus-visible &,
+  .checkbox[data-focus-visible="true"] & {
+    @apply status-focused;
+  }
+
+  /* Hover state */
+  .checkbox:hover &,
+  .checkbox[data-hovered="true"] & {
+    @apply border-field-border-hover;
+  }
+
+  /* Selected state */
+  .checkbox[aria-checked="true"] &,
+  .checkbox[data-selected="true"] & {
+    @apply bg-accent border-transparent;
+  }
+
+  /* Invalid/Error state */
+  .checkbox[data-invalid="true"] &,
+  .checkbox[aria-invalid="true"] & {
+    @apply border-danger border;
+  }
+
+  /* Invalid + Selected state */
+  .checkbox[data-invalid="true"][aria-checked="true"] &,
+  .checkbox[data-invalid="true"][data-selected="true"] &,
+  .checkbox[aria-invalid="true"][aria-checked="true"] &,
+  .checkbox[aria-invalid="true"][data-selected="true"] & {
+    @apply bg-danger border-danger;
+  }
+
+  /* Indeterminate state */
+  .checkbox[data-indeterminate="true"] & {
+    @apply bg-accent;
+  }
+
+  /* Indeterminate + Invalid state */
+  .checkbox[data-indeterminate="true"][aria-invalid="true"] &,
+  .checkbox[data-indeterminate="true"][data-invalid="true"] & {
+    @apply bg-danger border-danger;
+  }
+
+  .checkbox:active[data-indeterminate="true"] &,
+  .checkbox[data-pressed="true"][data-indeterminate="true"] & {
+    @apply bg-accent-hover;
+  }
+}
+
+/* Checkbox indicator */
+.checkbox__indicator {
+}
+
+/* Checkbox content wrapper */
+.checkbox__content {
+  @apply flex flex-col gap-0;
+}
+
+/* Disabled modifier for base */
+.checkbox--disabled {
+  @apply status-disabled;
+}
