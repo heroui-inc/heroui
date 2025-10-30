@@ -75,7 +75,7 @@
   #nd-nav {
     @apply bg-background blur-none backdrop-blur-none;
     [data-theme-toggle] {
-      @apply bg-on-surface;
+      @apply bg-default/80 border-none;
       margin-left: 4px;
     }
   }
@@ -116,7 +116,7 @@
   }
 
   [data-search-full] {
-    @apply bg-on-surface rounded-field;
+    @apply bg-default/80 rounded-field;
 
     kbd {
       @apply bg-surface text-muted px-1 font-sans text-xs font-medium;
@@ -125,15 +125,6 @@
 
   [aria-label="GitHub"] {
     @apply w-0 opacity-0;
-  }
-}
-
-[data-theme="dark"],
-.dark {
-  #nd-nav {
-    [data-search-full] {
-      background: rgba(10, 10, 10, 0.1);
-    }
   }
 }
 

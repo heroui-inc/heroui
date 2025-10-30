@@ -4,7 +4,7 @@ import {tv} from "tailwind-variants";
 const cardStyles = tv({
   slots: {
     avatar: "size-[56px] rounded-xl",
-    card: "bg-surface/90 w-full",
+    card: "w-full",
     cardContent: "items-start",
     footer: "items-center gap-2",
     footerAvatar: "size-4",
