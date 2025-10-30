@@ -9,6 +9,7 @@ import {SubtleCardsDemo} from "./subtle-cards-demo";
 import {TabsDemo1} from "./tabs-1-demo";
 import {TabsDemo2} from "./tabs-2-demo";
 import {TextfieldDemo} from "./textfield-demo";
+import {UIComponentsDemo} from "./ui-components-demo";
 import {XProfileDemo} from "./x-profile-demo";
 
 export function DemoComponents() {
@@ -17,6 +18,7 @@ export function DemoComponents() {
       {/* Left */}
       <div className="flex flex-col items-center gap-10">
         <TextfieldDemo />
+        <UIComponentsDemo />
         <TabsDemo1 />
         <TabsDemo2 />
       </div>
