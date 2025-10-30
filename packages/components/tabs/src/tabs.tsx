@@ -77,12 +77,15 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   const withAnimationReset = useCallback(
     (callback: () => void) => {
       if (variant !== previousVariant.current || isVertical !== previousIsVertical.current) {
-        cursorRef.current?.removeAttribute("data-initialized");
+        cursorRef.current?.removeAttribute("data-animated");
       }
       callback();
       previousVariant.current = variant;
       previousIsVertical.current = isVertical;
-      requestAnimationFrame(() => cursorRef.current?.setAttribute("data-initialized", "true"));
+      requestAnimationFrame(() => {
+        cursorRef.current?.setAttribute("data-animated", "true");
+        cursorRef.current?.setAttribute("data-initialized", "true");
+      });
     },
     [isVertical, variant],
   );

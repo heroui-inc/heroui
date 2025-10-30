@@ -71,9 +71,9 @@ const tabs = tv({
       "will-change-[transform,width,height]",
       "invisible",
       "data-[initialized=true]:visible",
-      "data-[initialized=true]:transition-[left,top,width,height]",
-      "data-[initialized=true]:duration-250",
-      "data-[initialized=true]:ease-out",
+      "data-[animated=true]:transition-[left,top,width,height]",
+      "data-[animated=true]:duration-250",
+      "data-[animated=true]:ease-out",
     ],
     panel: [
       "py-3",
