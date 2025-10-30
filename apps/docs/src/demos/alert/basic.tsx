@@ -5,7 +5,7 @@ export function Basic() {
   return (
     <div className="grid w-full max-w-xl gap-4">
       {/* Default - General information */}
-      <Alert.Root>
+      <Alert>
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>New features available</Alert.Title>
@@ -14,10 +14,10 @@ export function Basic() {
             features.
           </Alert.Description>
         </Alert.Content>
-      </Alert.Root>
+      </Alert>
 
       {/* Accent - Important information with action */}
-      <Alert.Root status="accent">
+      <Alert status="accent">
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>Update available</Alert.Title>
@@ -29,10 +29,10 @@ export function Basic() {
         <Button size="sm" variant="primary">
           Refresh
         </Button>
-      </Alert.Root>
+      </Alert>
 
       {/* Success - Confirmation */}
-      <Alert.Root status="success">
+      <Alert status="success">
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>Payment successful</Alert.Title>
@@ -44,10 +44,10 @@ export function Basic() {
         <Button size="sm" variant="secondary">
           View Receipt
         </Button>
-      </Alert.Root>
+      </Alert>
 
       {/* Warning - Attention needed */}
-      <Alert.Root status="warning">
+      <Alert status="warning">
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>Storage almost full</Alert.Title>
@@ -59,10 +59,10 @@ export function Basic() {
         <Button size="sm" variant="secondary">
           Manage Storage
         </Button>
-      </Alert.Root>
+      </Alert>
 
       {/* Danger - Error with detailed steps */}
-      <Alert.Root status="danger">
+      <Alert status="danger">
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>Unable to connect to server</Alert.Title>
@@ -78,19 +78,19 @@ export function Basic() {
         <Button size="sm" variant="danger">
           Retry
         </Button>
-      </Alert.Root>
+      </Alert>
 
       {/* Without description */}
-      <Alert.Root status="success">
+      <Alert status="success">
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>Profile updated successfully</Alert.Title>
         </Alert.Content>
         <CloseButton />
-      </Alert.Root>
+      </Alert>
 
       {/* Custom indicator - Loading state */}
-      <Alert.Root status="accent">
+      <Alert status="accent">
         <Alert.Indicator>
           <Spinner size="sm" />
         </Alert.Indicator>
@@ -100,10 +100,10 @@ export function Basic() {
             Please wait while we sync your data. This may take a few moments.
           </Alert.Description>
         </Alert.Content>
-      </Alert.Root>
+      </Alert>
 
       {/* Without close button */}
-      <Alert.Root status="warning">
+      <Alert status="warning">
         <Alert.Indicator />
         <Alert.Content>
           <Alert.Title>Scheduled maintenance</Alert.Title>
@@ -112,7 +112,7 @@ export function Basic() {
             scheduled maintenance.
           </Alert.Description>
         </Alert.Content>
-      </Alert.Root>
+      </Alert>
     </div>
   );
 }

@@ -5,7 +5,7 @@ export function Disabled() {
     <CheckboxGroup isDisabled name="disabled-features">
       <Label>Features</Label>
       <Description>Feature selection is temporarily disabled</Description>
-      <Checkbox.Root value="feature1">
+      <Checkbox value="feature1">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
@@ -13,8 +13,8 @@ export function Disabled() {
           <Label>Feature 1</Label>
           <Description>This feature is coming soon</Description>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root value="feature2">
+      </Checkbox>
+      <Checkbox value="feature2">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
@@ -22,7 +22,7 @@ export function Disabled() {
           <Label>Feature 2</Label>
           <Description>This feature is coming soon</Description>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </CheckboxGroup>
   );
 }

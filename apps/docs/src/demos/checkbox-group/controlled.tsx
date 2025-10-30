@@ -9,30 +9,30 @@ export function Controlled() {
   return (
     <CheckboxGroup className="min-w-[320px]" name="skills" value={selected} onChange={setSelected}>
       <Label>Your skills</Label>
-      <Checkbox.Root value="coding">
+      <Checkbox value="coding">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
           <Label>Coding</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root value="design">
+      </Checkbox>
+      <Checkbox value="design">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
           <Label>Design</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root value="writing">
+      </Checkbox>
+      <Checkbox value="writing">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
           <Label>Writing</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
       <Label className="text-muted my-4 text-sm">Selected: {selected.join(", ") || "None"}</Label>
     </CheckboxGroup>
   );

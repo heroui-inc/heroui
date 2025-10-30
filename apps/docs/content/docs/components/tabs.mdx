@@ -31,7 +31,7 @@ Import the Tabs component and access all parts using dot notation.
 import { Tabs } from '@heroui/react';
 
 export default () => (
-  <Tabs.Root>
+  <Tabs>
     <Tabs.ListContainer>
       <Tabs.List aria-label="Options">
         <Tabs.Tab>
@@ -40,7 +40,7 @@ export default () => (
       </Tabs.List>
     </Tabs.ListContainer>
     <Tabs.Panel/>
-  </Tabs.Root>
+  </Tabs>
 )
 ```
 
@@ -76,7 +76,7 @@ import { Tabs } from '@heroui/react';
 
 function CustomTabs() {
   return (
-    <Tabs.Root className="w-full max-w-lg text-center">
+    <Tabs className="w-full max-w-lg text-center">
       <Tabs.ListContainer>
         <Tabs.List
           aria-label="Options"
@@ -104,7 +104,7 @@ function CustomTabs() {
         <h3 className="mb-2 font-semibold">Monthly</h3>
         <p className="text-sm text-gray-600">Manage your monthly tasks and goals.</p>
       </Tabs.Panel>
-    </Tabs.Root>
+    </Tabs>
   );
 }
 `} />
@@ -138,7 +138,7 @@ The component supports both CSS pseudo-classes and data attributes:
 
 ## API Reference
 
-### Tabs.Root Props
+### Tabs Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

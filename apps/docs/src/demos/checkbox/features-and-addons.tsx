@@ -32,7 +32,7 @@ export function FeaturesAndAddOns() {
           <Description>Choose how you want to receive updates</Description>
           <div className="flex flex-col gap-2">
             {addOns.map((addon) => (
-              <Checkbox.Root
+              <Checkbox
                 key={addon.value}
                 value={addon.value}
                 className={clsx(
@@ -50,7 +50,7 @@ export function FeaturesAndAddOns() {
                     <Description>{addon.description}</Description>
                   </div>
                 </Checkbox.Content>
-              </Checkbox.Root>
+              </Checkbox>
             ))}
           </div>
         </CheckboxGroup>

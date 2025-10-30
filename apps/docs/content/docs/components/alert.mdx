@@ -30,13 +30,13 @@ Import the Alert component and access all parts using dot notation.
 import { Alert } from '@heroui/react';
 
 export default () => (
-  <Alert.Root>
+  <Alert>
     <Alert.Indicator />
     <Alert.Content>
       <Alert.Title />
       <Alert.Description />
     </Alert.Content>
-  </Alert.Root>
+  </Alert>
 )
 ```
 
@@ -51,7 +51,7 @@ import { Alert } from "@heroui/react";
 
 function CustomAlert() {
   return (
-    <Alert.Root className="border-2 border-blue-500 rounded-xl" status="accent">
+    <Alert className="border-2 border-blue-500 rounded-xl" status="accent">
       <Alert.Indicator className="text-blue-600" />
       <Alert.Content className="gap-1">
         <Alert.Title className="font-bold text-lg">Custom Alert</Alert.Title>
@@ -59,7 +59,7 @@ function CustomAlert() {
           This alert has custom styling applied
         </Alert.Description>
       </Alert.Content>
-    </Alert.Root>
+    </Alert>
   );
 }
 ```
@@ -111,7 +111,7 @@ The Alert component is primarily informational and doesn't have interactive stat
 
 ## API Reference
 
-### Alert.Root Props
+### Alert Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

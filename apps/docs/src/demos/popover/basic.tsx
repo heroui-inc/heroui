@@ -3,7 +3,7 @@ import {Button, Popover} from "@heroui/react";
 export function PopoverBasic() {
   return (
     <div className="flex items-center gap-4">
-      <Popover.Root>
+      <Popover>
         <Button>Click me</Button>
         <Popover.Content>
           <Popover.Dialog>
@@ -13,7 +13,7 @@ export function PopoverBasic() {
             </p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
   );
 }

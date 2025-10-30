@@ -19,7 +19,7 @@ export function XProfileDemo() {
               <span className="text-sm font-semibold leading-4">HeroUI</span>
               <VerifiedBadgeIcon height={18} width={18} />
             </div>
-            <span className="text-muted text-xs font-medium tracking-tight">@hero_ui</span>
+            <span className="text-muted text-sm tracking-tight">@hero_ui</span>
           </div>
         </div>
       </Card.Header>

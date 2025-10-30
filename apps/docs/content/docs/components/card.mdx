@@ -28,14 +28,14 @@ Import the Card component and access all parts using dot notation.
 import { Card } from "@heroui/react";
 
 export default () => (
-  <Card.Root>
+  <Card>
     <Card.Header>
       <Card.Title />
       <Card.Description />
     </Card.Header>
     <Card.Content />
     <Card.Footer />
-  </Card.Root>
+  </Card>
 );
 ```
 
@@ -87,18 +87,18 @@ Cards come in semantic variants that describe their prominence level rather than
 
 ```tsx
 // Semantic markup
-<Card.Root role="article" aria-labelledby="card-title">
+<Card role="article" aria-labelledby="card-title">
   <Card.Header>
     <Card.Title id="card-title">Article Title</Card.Title>
   </Card.Header>
-</Card.Root>
+</Card>
 
 // Interactive cards
-<Card.Root asChild>
+<Card asChild>
   <a href="/details" aria-label="View product details">
     <Card.Title>Product Name</Card.Title>
   </a>
-</Card.Root>
+</Card>
 ```
 
 ## Styling
@@ -106,7 +106,7 @@ Cards come in semantic variants that describe their prominence level rather than
 ### Component Customization
 
 ```tsx
-<Card.Root className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
   <Card.Header>
     <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
     <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
@@ -114,7 +114,7 @@ Cards come in semantic variants that describe their prominence level rather than
   <Card.Content>
     <p className="text-blue-800">Content with custom styling</p>
   </Card.Content>
-</Card.Root>
+</Card>
 ```
 
 ### CSS Variable Overrides
@@ -155,7 +155,7 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 
 ## API Reference
 
-### Card.Root
+### Card
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |

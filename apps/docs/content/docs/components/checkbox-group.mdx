@@ -32,7 +32,7 @@ export default () => (
   <CheckboxGroup name="interests">
     <Label />
     <Description /> {/* Optional */}
-    <Checkbox.Root value="option1">
+    <Checkbox value="option1">
       <Checkbox.Control>
         <Checkbox.Indicator />
       </Checkbox.Control>
@@ -40,7 +40,7 @@ export default () => (
         <Label />
         <Description /> {/* Optional */}
       </Checkbox.Content>
-    </Checkbox.Root>
+    </Checkbox>
     <FieldError /> {/* Optional */}
   </CheckboxGroup>
 );
@@ -96,14 +96,14 @@ import { CheckboxGroup, Checkbox, Label } from '@heroui/react';
 function CustomCheckboxGroup() {
   return (
     <CheckboxGroup className="gap-4" name="custom">
-      <Checkbox.Root value="option1">
+      <Checkbox value="option1">
         <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
           <Checkbox.Indicator className="text-white" />
         </Checkbox.Control>
         <Checkbox.Content>
           <Label>Option 1</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </CheckboxGroup>
   );
 }

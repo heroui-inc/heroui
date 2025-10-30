@@ -77,17 +77,15 @@ Import the main component and access parts via dot notation:
 ```tsx
 import { Alert } from '@heroui/react';
 
-<Alert.Root>
+<Alert>
   <Alert.Icon />
   <Alert.Content>
     <Alert.Title>Success</Alert.Title>
     <Alert.Description>Your changes have been saved.</Alert.Description>
   </Alert.Content>
   <Alert.Close />
-</Alert.Root>
+</Alert>
 ```
-
-**Note:** When using dot notation, the main component requires `.Root` suffix (e.g., `<Alert.Root>` instead of `<Alert>`).
 
 ### Benefits of Compound Components
 
@@ -109,7 +107,7 @@ Apply button styles to any component:
 import { Link, LinkIcon, buttonVariants } from '@heroui/react';
 
 // Link styled as a tertiary button
-<Link.Root
+<Link
   className={buttonVariants({
     size: "md",
     variant: "tertiary",
@@ -120,7 +118,7 @@ import { Link, LinkIcon, buttonVariants } from '@heroui/react';
 >
   HeroUI
   <LinkIcon className="h-2 w-2" />
-</Link.Root>
+</Link>
 
 // Native anchor styled as primary button
 <a
@@ -160,14 +158,14 @@ function LinkButton({ href, children, ...props }) {
 // Icon button with tooltip
 function IconButton({ icon, label, ...props }) {
   return (
-    <Tooltip.Root>
+    <Tooltip>
       <Tooltip.Trigger>
         <Button isIconOnly {...props}>
           <Icon icon={icon} />
         </Button>
       </Tooltip.Trigger>
       <Tooltip.Content>{label}</Tooltip.Content>
-    </Tooltip.Root>
+    </Tooltip>
   );
 }
 ```

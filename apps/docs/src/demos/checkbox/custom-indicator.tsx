@@ -5,7 +5,7 @@ import {Checkbox, Label} from "@heroui/react";
 export function CustomIndicator() {
   return (
     <div className="flex gap-4">
-      <Checkbox.Root defaultSelected name="heart">
+      <Checkbox defaultSelected name="heart">
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isSelected}) =>
@@ -23,8 +23,8 @@ export function CustomIndicator() {
         <Checkbox.Content>
           <Label>Heart</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root defaultSelected name="plus">
+      </Checkbox>
+      <Checkbox defaultSelected name="plus">
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isSelected}) =>
@@ -52,8 +52,8 @@ export function CustomIndicator() {
         <Checkbox.Content>
           <Label>Plus</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root isIndeterminate name="indeterminate">
+      </Checkbox>
+      <Checkbox isIndeterminate name="indeterminate">
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isIndeterminate}) =>
@@ -68,7 +68,7 @@ export function CustomIndicator() {
         <Checkbox.Content>
           <Label>Indeterminate</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </div>
   );
 }

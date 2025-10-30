@@ -9,7 +9,7 @@ export function Indeterminate() {
 
   return (
     <div>
-      <Checkbox.Root
+      <Checkbox
         isIndeterminate={selected.length > 0 && selected.length < allOptions.length}
         isSelected={selected.length === allOptions.length}
         name="select-all"
@@ -23,33 +23,33 @@ export function Indeterminate() {
         <Checkbox.Content>
           <Label>Select all</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
       <div className="ml-6 flex flex-col gap-2">
         <CheckboxGroup value={selected} onChange={setSelected}>
-          <Checkbox.Root value="coding">
+          <Checkbox value="coding">
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
             <Checkbox.Content>
               <Label>Coding</Label>
             </Checkbox.Content>
-          </Checkbox.Root>
-          <Checkbox.Root value="design">
+          </Checkbox>
+          <Checkbox value="design">
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
             <Checkbox.Content>
               <Label>Design</Label>
             </Checkbox.Content>
-          </Checkbox.Root>
-          <Checkbox.Root value="writing">
+          </Checkbox>
+          <Checkbox value="writing">
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
             <Checkbox.Content>
               <Label>Writing</Label>
             </Checkbox.Content>
-          </Checkbox.Root>
+          </Checkbox>
         </CheckboxGroup>
       </div>
     </div>

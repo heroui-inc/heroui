@@ -15,7 +15,7 @@ export function WithForm() {
   };
 
   return (
-    <Card.Root className="w-full max-w-md">
+    <Card className="w-full max-w-md">
       <Card.Header>
         <Card.Title>Login</Card.Title>
         <Card.Description>Enter your credentials to access your account</Card.Description>
@@ -37,11 +37,11 @@ export function WithForm() {
           <Button className="w-full" type="submit">
             Sign In
           </Button>
-          <Link.Root className="text-center text-sm" href="#">
+          <Link className="text-center text-sm" href="#">
             Forgot password?
-          </Link.Root>
+          </Link>
         </Card.Footer>
       </Form>
-    </Card.Root>
+    </Card>
   );
 }

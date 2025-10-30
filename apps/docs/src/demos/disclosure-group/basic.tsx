@@ -12,7 +12,7 @@ export function Basic() {
     <div className="w-full max-w-md">
       <div className="flex flex-col gap-4 bg-transparent p-4">
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -45,9 +45,9 @@ export function Basic() {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
           <Separator className="my-2" />
-          <Disclosure.Root id="download">
+          <Disclosure id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -81,7 +81,7 @@ export function Basic() {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
         </DisclosureGroup>
       </div>
     </div>

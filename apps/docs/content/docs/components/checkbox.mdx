@@ -30,7 +30,7 @@ Import the Checkbox component and access all parts using dot notation.
 import { Checkbox, Label, Description } from '@heroui/react';
 
 export default () => (
-  <Checkbox.Root name="terms">
+  <Checkbox name="terms">
     <Checkbox.Control>
       <Checkbox.Indicator />  
     </Checkbox.Control>
@@ -38,7 +38,7 @@ export default () => (
       <Label />
       <Description /> {/* Optional */}
     </Checkbox.Content>
-  </Checkbox.Root>
+  </Checkbox>
 );
 ```
 
@@ -131,14 +131,14 @@ import { Checkbox, Label } from '@heroui/react';
 
 function CustomCheckbox() {
   return (
-    <Checkbox.Root name="custom">
+    <Checkbox name="custom">
       <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
         <Checkbox.Indicator className="text-white" />
       </Checkbox.Control>
       <Checkbox.Content>
         <Label>Custom Checkbox</Label>
       </Checkbox.Content>
-    </Checkbox.Root>
+    </Checkbox>
   );
 }
 ```

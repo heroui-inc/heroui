@@ -5,7 +5,7 @@ export function Horizontal() {
     <div className="flex flex-col gap-4">
       <Label>Subscription plan</Label>
       <RadioGroup defaultValue="pro" name="plan-orientation" orientation="horizontal">
-        <Radio.Root value="starter">
+        <Radio value="starter">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
@@ -13,8 +13,8 @@ export function Horizontal() {
             <Label>Starter</Label>
             <Description>For side projects</Description>
           </Radio.Content>
-        </Radio.Root>
-        <Radio.Root value="pro">
+        </Radio>
+        <Radio value="pro">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
@@ -22,8 +22,8 @@ export function Horizontal() {
             <Label>Pro</Label>
             <Description>Advanced reporting</Description>
           </Radio.Content>
-        </Radio.Root>
-        <Radio.Root value="teams">
+        </Radio>
+        <Radio value="teams">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
@@ -31,7 +31,7 @@ export function Horizontal() {
             <Label>Teams</Label>
             <Description>Up to 10 teammates</Description>
           </Radio.Content>
-        </Radio.Root>
+        </Radio>
       </RadioGroup>
     </div>
   );

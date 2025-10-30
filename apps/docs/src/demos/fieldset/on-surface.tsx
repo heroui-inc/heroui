@@ -31,7 +31,7 @@ export function OnSurface() {
     <div className="bg-surface flex items-center justify-center rounded-3xl p-6">
       <Surface className="w-full min-w-[380px]">
         <Form onSubmit={onSubmit}>
-          <Fieldset.Root className="w-full">
+          <Fieldset className="w-full">
             <Fieldset.Legend>Profile Settings</Fieldset.Legend>
             <Description>Update your profile information.</Description>
             <Fieldset.Group>
@@ -81,7 +81,7 @@ export function OnSurface() {
                 Cancel
               </Button>
             </Fieldset.Actions>
-          </Fieldset.Root>
+          </Fieldset>
         </Form>
       </Surface>
     </div>

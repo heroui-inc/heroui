@@ -4,7 +4,7 @@ import {Icon} from "@iconify/react";
 export function PopoverWithArrow() {
   return (
     <div className="flex items-center gap-4">
-      <Popover.Root>
+      <Popover>
         <Button variant="secondary">With Arrow</Button>
         <Popover.Content>
           <Popover.Dialog>
@@ -15,9 +15,9 @@ export function PopoverWithArrow() {
             </p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
 
-      <Popover.Root>
+      <Popover>
         <Button isIconOnly variant="tertiary">
           <Icon icon="gravity-ui:ellipsis" />
         </Button>
@@ -30,7 +30,7 @@ export function PopoverWithArrow() {
             </p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
   );
 }

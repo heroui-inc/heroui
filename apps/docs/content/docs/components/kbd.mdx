@@ -29,10 +29,10 @@ Import the Kbd component and access all parts using dot notation.
 import { Kbd } from "@heroui/react";
 
 export default () => (
-  <Kbd.Root>
+  <Kbd>
     <Kbd.Abbr title="Command">⌘</Kbd.Abbr>
     <Kbd.Content>K</Kbd.Content>
-  </Kbd.Root>
+  </Kbd>
 );
 ```
 
@@ -75,9 +75,9 @@ import { Kbd } from "@heroui/react";
 
 function CustomKbd() {
   return (
-    <Kbd.Root className="bg-gray-100 dark:bg-gray-800">
+    <Kbd className="bg-gray-100 dark:bg-gray-800">
       <Kbd.Content>K</Kbd.Content>
-    </Kbd.Root>
+    </Kbd>
   );
 }
 ```
@@ -117,7 +117,7 @@ The Kbd component uses these CSS classes ([View source styles](https://github.co
 
 ## API Reference
 
-### Kbd.Root Props
+### Kbd Props
 
 | Prop        | Type              | Default | Description            |
 | ----------- | ----------------- | ------- | ---------------------- |

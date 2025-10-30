@@ -2,7 +2,7 @@ import {Button, Card} from "@heroui/react";
 
 export function Horizontal() {
   return (
-    <Card.Root className="w-full items-stretch md:flex-row">
+    <Card className="w-full items-stretch md:flex-row">
       <img
         alt="Porsche 911 Golden Edition"
         className="pointer-events-none aspect-square w-full select-none rounded-3xl object-cover md:max-w-[136px]"
@@ -32,6 +32,6 @@ export function Horizontal() {
           <Button>Buy Now</Button>
         </Card.Footer>
       </div>
-    </Card.Root>
+    </Card>
   );
 }

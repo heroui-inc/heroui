@@ -4,7 +4,7 @@ import {Icon} from "@iconify/react";
 export function WithBackgroundImage() {
   return (
     <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
-      <Card.Root className="aspect-[280/337] w-full max-w-[280px]">
+      <Card className="aspect-[280/337] w-full max-w-[280px]">
         {/* Background image */}
         <img
           alt="Happy pet"
@@ -65,9 +65,9 @@ export function WithBackgroundImage() {
             Notify me
           </Button>
         </Card.Footer>
-      </Card.Root>
+      </Card>
 
-      <Card.Root className="aspect-[65/56] w-full md:w-[390px]">
+      <Card className="aspect-[65/56] w-full md:w-[390px]">
         {/* Background image */}
         <img
           alt="Beautiful aerial view of Buenos Aires cityscape"
@@ -103,7 +103,7 @@ export function WithBackgroundImage() {
             Map
           </Button>
         </Card.Footer>
-      </Card.Root>
+      </Card>
     </div>
   );
 }

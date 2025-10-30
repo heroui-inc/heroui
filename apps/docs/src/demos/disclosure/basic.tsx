@@ -9,7 +9,7 @@ export function Basic() {
 
   return (
     <div className="w-full max-w-md text-center">
-      <Disclosure.Root isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
             <Icon icon="gravity-ui:qr-code" />
@@ -34,7 +34,7 @@ export function Basic() {
             </Button>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 }

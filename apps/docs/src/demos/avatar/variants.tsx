@@ -41,10 +41,7 @@ export function Variants() {
           <div className="text-muted w-24 shrink-0 text-sm">{variant.label}</div>
           {colors.map((color, colorIndex) => (
             <div key={color} className="flex w-20 shrink-0 items-center justify-center">
-              <Avatar.Root
-                color={color}
-                variant={variant.type.includes("soft") ? "soft" : undefined}
-              >
+              <Avatar color={color} variant={variant.type.includes("soft") ? "soft" : undefined}>
                 {variant.type === "img" ? (
                   <>
                     <Avatar.Image
@@ -56,7 +53,7 @@ export function Variants() {
                 ) : (
                   <Avatar.Fallback>{variant.content}</Avatar.Fallback>
                 )}
-              </Avatar.Root>
+              </Avatar>
             </div>
           ))}
         </div>
