@@ -4,10 +4,10 @@ export function ChipBasic() {
   return (
     <div className="flex items-center gap-3">
       <Chip>Default</Chip>
-      <Chip type="accent">Accent</Chip>
-      <Chip type="success">Success</Chip>
-      <Chip type="warning">Warning</Chip>
-      <Chip type="danger">Danger</Chip>
+      <Chip color="accent">Accent</Chip>
+      <Chip color="success">Success</Chip>
+      <Chip color="warning">Warning</Chip>
+      <Chip color="danger">Danger</Chip>
     </div>
   );
 }

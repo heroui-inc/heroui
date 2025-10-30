@@ -9,15 +9,15 @@ export function ChipStatuses() {
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Default
         </Chip>
-        <Chip type="success" variant="primary">
+        <Chip color="success" variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Active
         </Chip>
-        <Chip type="warning" variant="primary">
+        <Chip color="warning" variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Pending
         </Chip>
-        <Chip type="danger" variant="primary">
+        <Chip color="danger" variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Inactive
         </Chip>
@@ -28,15 +28,15 @@ export function ChipStatuses() {
           <Icon icon="gravity-ui:circle-info" width={12} />
           New Feature
         </Chip>
-        <Chip type="success">
+        <Chip color="success">
           <Icon icon="gravity-ui:check" width={12} />
           Available
         </Chip>
-        <Chip type="warning">
+        <Chip color="warning">
           <Icon icon="gravity-ui:triangle-exclamation" width={12} />
           Beta
         </Chip>
-        <Chip type="danger">
+        <Chip color="danger">
           <Icon icon="gravity-ui:ban" width={12} />
           Deprecated
         </Chip>

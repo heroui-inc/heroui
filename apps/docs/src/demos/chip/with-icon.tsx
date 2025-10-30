@@ -8,19 +8,19 @@ export function ChipWithIcon() {
         <Icon icon="gravity-ui:circle-fill" width={6} />
         Information
       </Chip>
-      <Chip type="success">
+      <Chip color="success">
         <Icon icon="gravity-ui:circle-check-fill" width={12} />
         Completed
       </Chip>
-      <Chip type="warning">
+      <Chip color="warning">
         <Icon icon="gravity-ui:clock" width={12} />
         Pending
       </Chip>
-      <Chip type="danger">
+      <Chip color="danger">
         <Icon icon="gravity-ui:xmark" width={12} />
         Failed
       </Chip>
-      <Chip type="accent">
+      <Chip color="accent">
         Label
         <Icon icon="gravity-ui:chevron-down" width={12} />
       </Chip>

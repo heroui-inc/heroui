@@ -1,16 +1,18 @@
+"use client";
+
 import {
   Button,
   Description,
   FieldError,
   Fieldset,
   Form,
-  Icon,
   Input,
   Label,
   Surface,
   TextArea,
   TextField,
 } from "@heroui/react";
+import {Icon} from "@iconify/react";
 import React from "react";
 
 export function OnSurface() {

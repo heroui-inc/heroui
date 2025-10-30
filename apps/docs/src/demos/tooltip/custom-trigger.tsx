@@ -34,7 +34,7 @@ export function TooltipCustomTrigger() {
 
       <TooltipRoot delay={0}>
         <TooltipTrigger aria-label="Status chip">
-          <Chip type="success">
+          <Chip color="success">
             <Icon icon="gravity-ui:circle-check-fill" width={12} />
             Active
           </Chip>
