@@ -5,7 +5,11 @@ import React from "react";
 
 import {Avatar} from "../avatar";
 import {Button} from "../button";
+import {Form} from "../form";
+import {Input} from "../input";
+import {Label} from "../label";
 import {Link} from "../link";
+import {TextField} from "../text-field";
 
 import {Card} from "./index";
 
@@ -345,44 +349,49 @@ export const WithBackgroundImage: Story = {
 };
 
 export const WithForm: Story = {
-  render: (args) => (
-    <Card.Root className="w-full max-w-md" {...args}>
-      <Card.Header>
-        <Card.Title>Login</Card.Title>
-        <Card.Description>Enter your credentials to access your account</Card.Description>
-      </Card.Header>
-      <Card.Content>
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="border-border bg-background focus:ring-focus rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2"
-              id="email"
-              placeholder="email@example.com"
-              type="email"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="border-border bg-background focus:ring-focus rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2"
-              id="password"
-              placeholder="••••••••"
-              type="password"
-            />
-          </div>
-        </form>
-      </Card.Content>
-      <Card.Footer className="flex flex-col gap-2">
-        <Button className="w-full">Sign In</Button>
-        <Link.Root className="text-center text-sm" href="#">
-          Forgot password?
-        </Link.Root>
-      </Card.Footer>
-    </Card.Root>
-  ),
+  render: (args) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const data: Record<string, string> = {};
+
+      // Convert FormData to plain object
+      formData.forEach((value, key) => {
+        data[key] = value.toString();
+      });
+
+      alert("Form submitted successfully!");
+    };
+
+    return (
+      <Card.Root className="w-full max-w-md" {...args}>
+        <Card.Header>
+          <Card.Title>Login</Card.Title>
+          <Card.Description>Enter your credentials to access your account</Card.Description>
+        </Card.Header>
+        <Form onSubmit={onSubmit}>
+          <Card.Content>
+            <div className="flex flex-col gap-4">
+              <TextField name="email" type="email">
+                <Label>Email</Label>
+                <Input placeholder="email@example.com" />
+              </TextField>
+              <TextField name="password" type="password">
+                <Label>Password</Label>
+                <Input placeholder="••••••••" />
+              </TextField>
+            </div>
+          </Card.Content>
+          <Card.Footer className="mt-4 flex flex-col gap-2">
+            <Button className="w-full" type="submit">
+              Sign In
+            </Button>
+            <Link.Root className="text-center text-sm" href="#">
+              Forgot password?
+            </Link.Root>
+          </Card.Footer>
+        </Form>
+      </Card.Root>
+    );
+  },
 };
