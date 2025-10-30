@@ -74,6 +74,19 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     [variant],
   );
 
+  const withAnimationReset = useCallback(
+    (callback: () => void) => {
+      if (variant !== previousVariant.current || isVertical !== previousIsVertical.current) {
+        cursorRef.current?.removeAttribute("data-initialized");
+      }
+      callback();
+      previousVariant.current = variant;
+      previousIsVertical.current = isVertical;
+      requestAnimationFrame(() => cursorRef.current?.setAttribute("data-initialized", "true"));
+    },
+    [isVertical, variant],
+  );
+
   const updateCursorPosition = useCallback(
     (selectedTab: HTMLElement) => {
       if (!cursorRef.current) return;
@@ -87,19 +100,14 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
       const styles = getCursorStyles(tabRect);
 
-      if (variant !== previousVariant.current || isVertical !== previousIsVertical.current) {
-        cursorRef.current.removeAttribute("data-initialized");
-      }
-      cursorRef.current.style.left = styles.left;
-      cursorRef.current.style.top = styles.top;
-      cursorRef.current.style.width = styles.width;
-      cursorRef.current.style.height = styles.height;
-      previousVariant.current = variant;
-      previousIsVertical.current = isVertical;
-
-      requestAnimationFrame(() => cursorRef.current?.setAttribute("data-initialized", "true"));
+      withAnimationReset(() => {
+        cursorRef.current!.style.left = styles.left;
+        cursorRef.current!.style.top = styles.top;
+        cursorRef.current!.style.width = styles.width;
+        cursorRef.current!.style.height = styles.height;
+      });
     },
-    [cursorRef.current, getCursorStyles, isVertical, variant],
+    [cursorRef.current, getCursorStyles, withAnimationReset],
   );
 
   const onResize = useCallback(
