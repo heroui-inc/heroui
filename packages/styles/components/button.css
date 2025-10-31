@@ -12,6 +12,7 @@
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 
+  /* Focus  state */
   &:focus-visible,
   &[data-focus-visible] {
     @apply status-focused;

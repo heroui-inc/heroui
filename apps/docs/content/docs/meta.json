@@ -42,6 +42,7 @@
     "components/kbd",
     "components/label",
     "components/link",
+    "components/listbox",
     "components/popover",
     "components/radio-group",
     "components/separator",

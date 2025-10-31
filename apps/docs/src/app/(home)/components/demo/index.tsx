@@ -4,6 +4,7 @@ import {AllowNotificationsDemo} from "./allow-notifications-demo";
 import {AvatarGroupDemo} from "./avatar-group-demo";
 import {ButtonsDemo} from "./buttons-demo";
 import {InputOTPDemo} from "./input-otp-demo";
+import {ListBoxDemo} from "./listbox-demo";
 import {LoginDemo} from "./login-demo";
 import {SubtleCardsDemo} from "./subtle-cards-demo";
 import {TabsDemo1} from "./tabs-1-demo";
@@ -21,6 +22,7 @@ export function DemoComponents() {
         <UIComponentsDemo />
         <TabsDemo1 />
         <TabsDemo2 />
+        <ListBoxDemo />
       </div>
       {/* Center */}
       <div className="flex flex-col items-center gap-10">

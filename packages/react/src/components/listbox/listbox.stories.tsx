@@ -1,18 +1,25 @@
+import type {Selection} from "@react-types/shared";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import * as React from "react";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
+import {Description} from "../description";
+import {Header} from "../header";
+import {Kbd} from "../kbd";
+import {Label} from "../label";
+import {Separator} from "../separator";
+import {Surface} from "../surface";
 
-import {ListBox, ListBoxItem, ListBoxItemIndicator} from "./index";
+import {ListBox} from "./index";
 
 const meta: Meta<typeof ListBox> = {
   component: ListBox,
   parameters: {
     layout: "centered",
   },
-  title: "📝 ToDo/ListBox",
+  title: "Components/Collections/ListBox",
 };
 
 export default meta;
@@ -20,268 +27,333 @@ type Story = StoryObj<typeof ListBox>;
 
 export const Default: Story = {
   render: () => (
-    <ListBox aria-label="Users" selectionMode="single">
-      <ListBoxItem id="1" textValue="Bob">
+    <ListBox aria-label="Users" className="w-[220px]" selectionMode="single">
+      <ListBox.Item id="1" textValue="Bob">
         <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
+          <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg" />
           <AvatarFallback>B</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <span className="text-sm font-medium">Bob</span>
-          <span className="text-xs text-neutral-500">bob@email.com</span>
+          <Label>Bob</Label>
+          <Description>bob@heroui.com</Description>
         </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBoxItem>
-      <ListBoxItem id="2" textValue="Fred">
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="2" textValue="Fred">
         <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
+          <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg" />
           <AvatarFallback>F</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <span className="text-sm font-medium">Fred</span>
-          <span className="text-xs text-neutral-500">fred@email.com</span>
+          <Label>Fred</Label>
+          <Description>fred@heroui.com</Description>
         </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBoxItem>
-      <ListBoxItem id="3" textValue="Martha">
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="3" textValue="Martha">
         <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
+          <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg" />
           <AvatarFallback>M</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <span className="text-sm font-medium">Martha</span>
-          <span className="text-xs text-neutral-500">martha@email.com</span>
+          <Label>Martha</Label>
+          <Description>martha@heroui.com</Description>
         </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBoxItem>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
     </ListBox>
   ),
 };
 
-export const DangerVariant: Story = {
+export const WithSections: Story = {
   render: () => (
-    <ListBox aria-label="Delete users" selectionMode="single" variant="danger">
-      <ListBoxItem id="1" textValue="Bob">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
-          <AvatarFallback>B</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Bob</span>
-          <span className="text-xs text-neutral-500">bob@email.com</span>
-        </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
-      </ListBoxItem>
-      <ListBoxItem id="2" textValue="Fred">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
-          <AvatarFallback>F</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Fred</span>
-          <span className="text-xs text-neutral-500">fred@email.com</span>
-        </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
-      </ListBoxItem>
-      <ListBoxItem id="3" textValue="Martha">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
-          <AvatarFallback>M</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Martha</span>
-          <span className="text-xs text-neutral-500">martha@email.com</span>
-        </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:trash-bin" />
-      </ListBoxItem>
-    </ListBox>
+    <Surface className="shadow-surface w-[256px] rounded-3xl">
+      <ListBox
+        aria-label="File actions"
+        className="w-full p-2"
+        selectionMode="none"
+        onAction={(key) => alert(`Selected item: ${key}`)}
+      >
+        <ListBox.Section>
+          <Header>Actions</Header>
+          <ListBox.Item id="new-file" textValue="New file">
+            <div className="flex h-8 items-start justify-center pt-px">
+              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+            </div>
+            <div className="flex flex-col">
+              <Label>New file</Label>
+              <Description>Create a new file</Description>
+            </div>
+            <Kbd className="ms-auto" variant="light">
+              <Kbd.Abbr keyValue="command" />
+              <Kbd.Content>N</Kbd.Content>
+            </Kbd>
+          </ListBox.Item>
+          <ListBox.Item id="edit-file" textValue="Edit file">
+            <div className="flex h-8 items-start justify-center pt-px">
+              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+            </div>
+            <div className="flex flex-col">
+              <Label>Edit file</Label>
+              <Description>Make changes</Description>
+            </div>
+            <Kbd className="ms-auto" variant="light">
+              <Kbd.Abbr keyValue="command" />
+              <Kbd.Content>E</Kbd.Content>
+            </Kbd>
+          </ListBox.Item>
+        </ListBox.Section>
+        <Separator />
+        <ListBox.Section>
+          <Header>Danger zone</Header>
+          <ListBox.Item id="delete-file" textValue="Delete file" variant="danger">
+            <div className="flex h-8 items-start justify-center pt-px">
+              <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+            </div>
+            <div className="flex flex-col">
+              <Label>Delete file</Label>
+              <Description>Move to trash</Description>
+            </div>
+            <Kbd className="ms-auto" variant="light">
+              <Kbd.Abbr keyValue="command" />
+              <Kbd.Abbr keyValue="shift" />
+              <Kbd.Content>D</Kbd.Content>
+            </Kbd>
+          </ListBox.Item>
+        </ListBox.Section>
+      </ListBox>
+    </Surface>
   ),
 };
 
 export const WithDisabledItems: Story = {
   render: () => (
-    <ListBox aria-label="Users" selectionMode="single">
-      <ListBoxItem id="1" textValue="Bob">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
-          <AvatarFallback>B</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Bob</span>
-          <span className="text-xs text-neutral-500">bob@email.com</span>
-        </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBoxItem>
-      <ListBoxItem isDisabled id="2" textValue="Fred">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
-          <AvatarFallback>F</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Fred</span>
-          <span className="text-xs text-neutral-500">fred@email.com</span>
-        </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBoxItem>
-      <ListBoxItem id="3" textValue="Martha">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
-          <AvatarFallback>M</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Martha</span>
-          <span className="text-xs text-neutral-500">martha@email.com</span>
-        </div>
-        <Icon className="ms-auto size-4 text-neutral-500" icon="gravity-ui:comment" />
-      </ListBoxItem>
-    </ListBox>
+    <Surface className="shadow-surface w-[256px] rounded-3xl">
+      <ListBox
+        aria-label="File actions"
+        className="w-full p-2"
+        disabledKeys={["delete-file"]}
+        selectionMode="none"
+        onAction={(key) => alert(`Selected item: ${key}`)}
+      >
+        <ListBox.Section>
+          <Header>Actions</Header>
+          <ListBox.Item id="new-file" textValue="New file">
+            <div className="flex h-8 items-start justify-center pt-px">
+              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+            </div>
+            <div className="flex flex-col">
+              <Label>New file</Label>
+              <Description>Create a new file</Description>
+            </div>
+            <Kbd className="ms-auto" variant="light">
+              <Kbd.Abbr keyValue="command" />
+              <Kbd.Content>N</Kbd.Content>
+            </Kbd>
+          </ListBox.Item>
+          <ListBox.Item id="edit-file" textValue="Edit file">
+            <div className="flex h-8 items-start justify-center pt-px">
+              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+            </div>
+            <div className="flex flex-col">
+              <Label>Edit file</Label>
+              <Description>Make changes</Description>
+            </div>
+            <Kbd className="ms-auto" variant="light">
+              <Kbd.Abbr keyValue="command" />
+              <Kbd.Content>E</Kbd.Content>
+            </Kbd>
+          </ListBox.Item>
+        </ListBox.Section>
+        <Separator />
+        <ListBox.Section>
+          <Header>Danger zone</Header>
+          <ListBox.Item id="delete-file" textValue="Delete file" variant="danger">
+            <div className="flex h-8 items-start justify-center pt-px">
+              <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+            </div>
+            <div className="flex flex-col">
+              <Label>Delete file</Label>
+              <Description>Move to trash</Description>
+            </div>
+            <Kbd className="ms-auto" variant="light">
+              <Kbd.Abbr keyValue="command" />
+              <Kbd.Abbr keyValue="shift" />
+              <Kbd.Content>D</Kbd.Content>
+            </Kbd>
+          </ListBox.Item>
+        </ListBox.Section>
+      </ListBox>
+    </Surface>
   ),
 };
 
 export const MultiSelect: Story = {
   render: () => (
-    <ListBox aria-label="Select team members" selectionMode="multiple">
-      <ListBoxItem id="1" textValue="Bob">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
-          <AvatarFallback>B</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Bob</span>
-          <span className="text-xs text-neutral-500">bob@email.com</span>
-        </div>
-      </ListBoxItem>
-      <ListBoxItem id="2" textValue="Fred">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
-          <AvatarFallback>F</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Fred</span>
-          <span className="text-xs text-neutral-500">fred@email.com</span>
-        </div>
-      </ListBoxItem>
-      <ListBoxItem id="3" textValue="Martha">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
-          <AvatarFallback>M</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Martha</span>
-          <span className="text-xs text-neutral-500">martha@email.com</span>
-        </div>
-      </ListBoxItem>
-      <ListBoxItem id="4" textValue="Sarah">
-        <Avatar size="sm">
-          <AvatarImage src="https://i.pravatar.cc/150?u=sarah" />
-          <AvatarFallback>S</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium">Sarah</span>
-          <span className="text-xs text-neutral-500">sarah@email.com</span>
-        </div>
-      </ListBoxItem>
-    </ListBox>
-  ),
-};
-
-export const SimpleList: Story = {
-  render: () => (
-    <ListBox aria-label="Options" selectionMode="single">
-      <ListBoxItem id="new">New file</ListBoxItem>
-      <ListBoxItem id="open">Open</ListBoxItem>
-      <ListBoxItem id="save">Save</ListBoxItem>
-      <ListBoxItem id="save-as">Save as...</ListBoxItem>
-      <ListBoxItem isDisabled id="print">
-        Print
-      </ListBoxItem>
-      <ListBoxItem id="exit">Exit</ListBoxItem>
-    </ListBox>
+    <Surface className="shadow-surface w-[256px] rounded-3xl">
+      <ListBox aria-label="Users" selectionMode="multiple">
+        <ListBox.Item id="1" textValue="Bob">
+          <Avatar size="sm">
+            <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg" />
+            <AvatarFallback>B</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <Label>Bob</Label>
+            <Description>bob@heroui.com</Description>
+          </div>
+          <ListBox.ItemIndicator />
+        </ListBox.Item>
+        <ListBox.Item id="2" textValue="Fred">
+          <Avatar size="sm">
+            <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg" />
+            <AvatarFallback>F</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <Label>Fred</Label>
+            <Description>fred@heroui.com</Description>
+          </div>
+          <ListBox.ItemIndicator />
+        </ListBox.Item>
+        <ListBox.Item id="3" textValue="Martha">
+          <Avatar size="sm">
+            <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg" />
+            <AvatarFallback>M</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <Label>Martha</Label>
+            <Description>martha@heroui.com</Description>
+          </div>
+          <ListBox.ItemIndicator />
+        </ListBox.Item>
+      </ListBox>
+    </Surface>
   ),
 };
 
 export const CustomCheckIcon: Story = {
   render: () => (
-    <ListBox aria-label="Options with custom check" selectionMode="single">
-      <ListBoxItem id="new">
-        {({isSelected}) => (
-          <>
-            New file
-            <ListBoxItemIndicator isSelected={isSelected}>
-              <Icon className="size-4" icon="gravity-ui:check" />
-            </ListBoxItemIndicator>
-          </>
-        )}
-      </ListBoxItem>
-      <ListBoxItem id="open">
-        {({isSelected}) => (
-          <>
-            Open
-            <ListBoxItemIndicator isSelected={isSelected}>
-              <Icon className="size-4" icon="gravity-ui:check" />
-            </ListBoxItemIndicator>
-          </>
-        )}
-      </ListBoxItem>
-      <ListBoxItem id="save">
-        {({isSelected}) => (
-          <>
-            Save
-            <ListBoxItemIndicator isSelected={isSelected}>
-              <Icon className="size-4" icon="gravity-ui:check" />
-            </ListBoxItemIndicator>
-          </>
-        )}
-      </ListBoxItem>
-    </ListBox>
+    <Surface className="shadow-surface w-[256px] rounded-3xl">
+      <ListBox aria-label="Users" selectionMode="multiple">
+        <ListBox.Item id="1" textValue="Bob">
+          <Avatar size="sm">
+            <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg" />
+            <AvatarFallback>B</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <Label>Bob</Label>
+            <Description>bob@heroui.com</Description>
+          </div>
+          <ListBox.ItemIndicator>
+            {({isSelected}) =>
+              isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+            }
+          </ListBox.ItemIndicator>
+        </ListBox.Item>
+        <ListBox.Item id="2" textValue="Fred">
+          <Avatar size="sm">
+            <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg" />
+            <AvatarFallback>F</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <Label>Fred</Label>
+            <Description>fred@heroui.com</Description>
+          </div>
+          <ListBox.ItemIndicator>
+            {({isSelected}) =>
+              isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+            }
+          </ListBox.ItemIndicator>
+        </ListBox.Item>
+        <ListBox.Item id="3" textValue="Martha">
+          <Avatar size="sm">
+            <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg" />
+            <AvatarFallback>M</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <Label>Martha</Label>
+            <Description>martha@heroui.com</Description>
+          </div>
+          <ListBox.ItemIndicator>
+            {({isSelected}) =>
+              isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+            }
+          </ListBox.ItemIndicator>
+        </ListBox.Item>
+      </ListBox>
+    </Surface>
   ),
 };
 
 export const Controlled: Story = {
   render: () => {
-    const [selected, setSelected] = React.useState<Set<React.Key>>(new Set(["2"]));
+    const [selected, setSelected] = React.useState<Selection>(new Set(["1"]));
+
+    const selectedItems = Array.from(selected);
 
     return (
       <div className="space-y-4">
-        <ListBox
-          aria-label="Users"
-          selectedKeys={selected as unknown as Iterable<string>}
-          selectionMode="single"
-          onSelectionChange={(keys) => setSelected(new Set(keys))}
-        >
-          <ListBoxItem id="1" textValue="Bob">
-            <Avatar size="sm">
-              <AvatarImage src="https://i.pravatar.cc/150?u=bob" />
-              <AvatarFallback>B</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">Bob</span>
-              <span className="text-xs text-neutral-500">bob@email.com</span>
-            </div>
-          </ListBoxItem>
-          <ListBoxItem id="2" textValue="Fred">
-            <Avatar size="sm">
-              <AvatarImage src="https://i.pravatar.cc/150?u=fred" />
-              <AvatarFallback>F</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">Fred</span>
-              <span className="text-xs text-neutral-500">fred@email.com</span>
-            </div>
-          </ListBoxItem>
-          <ListBoxItem id="3" textValue="Martha">
-            <Avatar size="sm">
-              <AvatarImage src="https://i.pravatar.cc/150?u=martha" />
-              <AvatarFallback>M</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">Martha</span>
-              <span className="text-xs text-neutral-500">martha@email.com</span>
-            </div>
-          </ListBoxItem>
-        </ListBox>
+        <Surface className="shadow-surface w-[256px] rounded-3xl">
+          <ListBox
+            aria-label="Users"
+            selectedKeys={selected}
+            selectionMode="multiple"
+            onSelectionChange={setSelected}
+          >
+            <ListBox.Item id="1" textValue="Bob">
+              <Avatar size="sm">
+                <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg" />
+                <AvatarFallback>B</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col">
+                <Label>Bob</Label>
+                <Description>bob@heroui.com</Description>
+              </div>
+              <ListBox.ItemIndicator>
+                {({isSelected}) =>
+                  isSelected ? (
+                    <Icon className="text-accent size-4" icon="gravity-ui:check" />
+                  ) : null
+                }
+              </ListBox.ItemIndicator>
+            </ListBox.Item>
+            <ListBox.Item id="2" textValue="Fred">
+              <Avatar size="sm">
+                <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg" />
+                <AvatarFallback>F</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col">
+                <Label>Fred</Label>
+                <Description>fred@heroui.com</Description>
+              </div>
+              <ListBox.ItemIndicator>
+                {({isSelected}) =>
+                  isSelected ? (
+                    <Icon className="text-accent size-4" icon="gravity-ui:check" />
+                  ) : null
+                }
+              </ListBox.ItemIndicator>
+            </ListBox.Item>
+            <ListBox.Item id="3" textValue="Martha">
+              <Avatar size="sm">
+                <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg" />
+                <AvatarFallback>M</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col">
+                <Label>Martha</Label>
+                <Description>martha@heroui.com</Description>
+              </div>
+              <ListBox.ItemIndicator>
+                {({isSelected}) =>
+                  isSelected ? (
+                    <Icon className="text-accent size-4" icon="gravity-ui:check" />
+                  ) : null
+                }
+              </ListBox.ItemIndicator>
+            </ListBox.Item>
+          </ListBox>
+        </Surface>
         <p className="text-sm text-neutral-500">
-          Selected: {selected.size > 0 ? Array.from(selected).join(", ") : "None"}
+          Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
         </p>
       </div>
     );

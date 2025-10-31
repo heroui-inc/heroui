@@ -33,14 +33,17 @@ export * from "./description";
 export * from "./field-error";
 export * from "./fieldset";
 export * from "./form";
+export * from "./header";
 export * from "./radio";
 export * from "./radio-group";
 export * from "./input-otp";
 export * from "./alert";
+export * from "./listbox";
+export * from "./listbox-item";
+export * from "./listbox-section";
 
 // in progress
 export * from "./calendar";
-export * from "./listbox";
 export * from "./slider";
 
 //  ===================================
@@ -59,4 +62,5 @@ export type {
   PointerType,
   KeyboardEvent,
   HoverEvent,
+  Selection,
 } from "@react-types/shared";

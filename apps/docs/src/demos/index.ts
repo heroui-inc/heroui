@@ -21,6 +21,7 @@ import * as InputOTPDemos from "./input-otp";
 import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
+import * as ListBoxDemos from "./listbox";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
 import * as SeparatorDemos from "./separator";
@@ -664,6 +665,31 @@ export const demos: Record<string, DemoItem> = {
   "label-basic": {
     component: LabelDemos.Basic,
     file: "label/basic.tsx",
+  },
+  // ListBox demos
+  "listbox-controlled": {
+    component: ListBoxDemos.Controlled,
+    file: "listbox/controlled.tsx",
+  },
+  "listbox-custom-check-icon": {
+    component: ListBoxDemos.CustomCheckIcon,
+    file: "listbox/custom-check-icon.tsx",
+  },
+  "listbox-default": {
+    component: ListBoxDemos.Default,
+    file: "listbox/default.tsx",
+  },
+  "listbox-multi-select": {
+    component: ListBoxDemos.MultiSelect,
+    file: "listbox/multi-select.tsx",
+  },
+  "listbox-with-disabled-items": {
+    component: ListBoxDemos.WithDisabledItems,
+    file: "listbox/with-disabled-items.tsx",
+  },
+  "listbox-with-sections": {
+    component: ListBoxDemos.WithSections,
+    file: "listbox/with-sections.tsx",
   },
   // Description demos
   "description-basic": {
