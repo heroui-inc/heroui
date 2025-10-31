@@ -8,13 +8,13 @@ const avatars = [
   },
   {
     id: 2,
-    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg",
-    name: "Black",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
+    name: "Green",
   },
   {
     id: 3,
-    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
-    name: "Green",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg",
+    name: "Purple",
   },
   {
     id: 4,
