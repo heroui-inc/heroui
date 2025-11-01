@@ -97,7 +97,6 @@ const CodeBlockHighlight = ({
   return (
     <div
       ref={intersectionRef}
-      className="w-full overflow-hidden"
       style={{
         height: isVisible ? "auto" : `${height}px`,
         // due to display: contents on the scrollable child element, this div will also scroll
@@ -125,10 +124,18 @@ const CodeBlockHighlight = ({
                   preRef.current = element;
                 }
               }}
-              className={clsx(className, classNameProp, `language-${codeLang}`, "max-w-full", {
+              // eslint-disable-next-line prettier/prettier
+              className={clsx(
+                className,
+                classNameProp,
+                `language-${codeLang}`,
+                "max-w-full",
+                {
                 "flex-col": isMultiLine,
                 "overflow-x-scroll scrollbar-hide": hideScrollBar,
-              })}
+                // eslint-disable-next-line prettier/prettier
+                },
+              )}
               data-language={language}
               style={style}
             >
