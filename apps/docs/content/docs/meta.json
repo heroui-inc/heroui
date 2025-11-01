@@ -46,6 +46,7 @@
     "components/popover",
     "components/radio-group",
     "components/separator",
+    "components/select",
     "components/skeleton",
     "components/spinner",
     "components/switch",

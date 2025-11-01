@@ -188,6 +188,9 @@ importers:
       '@iconify/react':
         specifier: 6.0.2
         version: 6.0.2(react@19.1.1)
+      '@react-stately/data':
+        specifier: 3.14.1
+        version: 3.14.1(react@19.1.1)
       '@t3-oss/env-nextjs':
         specifier: 0.13.8
         version: 0.13.8(typescript@5.9.2)(zod@4.1.11)
@@ -346,6 +349,9 @@ importers:
       '@iconify/react':
         specifier: 6.0.2
         version: 6.0.2(react@19.1.1)
+      '@react-stately/data':
+        specifier: 3.14.1
+        version: 3.14.1(react@19.1.1)
       '@storybook/react':
         specifier: 8.6.12
         version: 8.6.12(@storybook/test@8.6.12(storybook@8.6.12(prettier@3.6.2)))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@8.6.12(prettier@3.6.2))(typescript@5.9.2)

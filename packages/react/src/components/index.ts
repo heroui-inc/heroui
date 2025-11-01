@@ -41,6 +41,7 @@ export * from "./alert";
 export * from "./listbox";
 export * from "./listbox-item";
 export * from "./listbox-section";
+export * from "./select";
 
 // in progress
 export * from "./calendar";
@@ -64,3 +65,4 @@ export type {
   HoverEvent,
   Selection,
 } from "@react-types/shared";
+export {Collection, ListBoxLoadMoreItem} from "react-aria-components";

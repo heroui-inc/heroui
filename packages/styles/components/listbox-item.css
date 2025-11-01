@@ -3,10 +3,10 @@
    ========================================================================== */
 
 .listbox-item {
-  @apply reduce-motion:transition-none relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5;
+  @apply reduce-motion:transition-none relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
 
   transition:
-    transform 300ms var(--ease-out-quart),
+    transform 250ms var(--ease-out-quart),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 
@@ -26,9 +26,9 @@
     @apply pr-7;
   }
 
-  /* Focus visible state */
-  &:focus-visible,
-  &[data-focus-visible] {
+  /* Focus visible state (keyboard focus only) */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
@@ -52,7 +52,6 @@
   /* Selected state */
   &[aria-selected="true"],
   &[data-selected="true"] {
-    @apply bg-default-hover;
   }
 
   /* Disabled state */
@@ -66,7 +65,7 @@
    ========================================================================== */
 
 .listbox-item__indicator {
-  @apply text-default-foreground absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
+  @apply text-default-foreground duration-250 absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center transition;
 
   /* Checkmark SVG indicator */
   [data-slot="listbox-item-indicator--checkmark"] {

@@ -34,7 +34,11 @@ const ListBoxItemRoot = ({children, className, variant, ...props}: ListBoxItemRo
   const slots = React.useMemo(() => listboxItemVariants({variant}), [variant]);
 
   return (
-    <ListBoxItemPrimitive className={composeTwRenderProps(className, slots.item())} {...props}>
+    <ListBoxItemPrimitive
+      className={composeTwRenderProps(className, slots.item())}
+      data-slot="listbox-item"
+      {...props}
+    >
       {(values) => (
         <ListBoxItemContext value={{slots, state: values}}>
           {typeof children === "function" ? children(values) : children}
@@ -83,6 +87,7 @@ const ListBoxItemIndicator = ({children, className, ...props}: ListBoxItemIndica
     <span
       aria-hidden="true"
       className={slots?.indicator({className})}
+      data-slot="listbox-item-indicator"
       data-visible={isSelected || undefined}
       {...props}
     >

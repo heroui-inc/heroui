@@ -82,8 +82,8 @@
   @apply reduce-motion:transition-none bg-field shadow-field relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md outline-none;
 
   transition:
-    background-color 300ms var(--ease-out),
-    transform 300ms var(--ease-out-quart);
+    background-color 250ms var(--ease-out),
+    transform 250ms var(--ease-out-quart);
 
   cursor: var(--cursor-interactive);
 

@@ -44,7 +44,7 @@
     --overlay: var(--white);
     --overlay-foreground: var(--foreground);
 
-    --muted: oklch(55.2% 0.016 285.938);
+    --muted: oklch(0.5517 0.0138 285.94);
 
     --scrollbar: oklch(87.1% 0.006 286.286);
 
@@ -108,7 +108,9 @@
     --surface-foreground: var(--foreground);
 
     /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) - lighter for contrast */
-    --overlay: oklch(0.2563 0.0058 271.19); /* Lighter than surface for visibility in dark mode */
+    --overlay: oklch(
+      0.22 0.0059 285.89
+    ); /* A bit lighter than surface for visibility in dark mode */
     --overlay-foreground: var(--foreground);
 
     --muted: oklch(70.5% 0.015 286.067);

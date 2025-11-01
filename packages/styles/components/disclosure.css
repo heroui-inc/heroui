@@ -24,7 +24,7 @@
 }
 
 .disclosure__indicator {
-  @apply reduce-motion:transition-none ml-auto size-4 shrink-0 text-inherit transition duration-300;
+  @apply reduce-motion:transition-none duration-250 ml-auto size-4 shrink-0 text-inherit transition;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {

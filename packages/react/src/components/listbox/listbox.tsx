@@ -20,7 +20,13 @@ interface ListBoxRootProps<T extends object> extends ListBoxPrimitiveProps<T>, L
 function ListBoxRoot<T extends object>({className, variant, ...props}: ListBoxRootProps<T>) {
   const styles = React.useMemo(() => listboxVariants({variant}), [variant]);
 
-  return <ListBoxPrimitive className={composeTwRenderProps(className, styles)} {...props} />;
+  return (
+    <ListBoxPrimitive
+      className={composeTwRenderProps(className, styles)}
+      data-slot="listbox"
+      {...props}
+    />
+  );
 }
 
 /* -------------------------------------------------------------------------------------------------

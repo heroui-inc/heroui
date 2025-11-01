@@ -19,7 +19,7 @@
 }
 
 .accordion__indicator {
-  @apply reduce-motion:transition-none text-muted ml-auto size-4 shrink-0 transition duration-300;
+  @apply reduce-motion:transition-none text-muted duration-250 ml-auto size-4 shrink-0 transition;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {

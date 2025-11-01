@@ -160,7 +160,7 @@
   }
 
   &[data-active="true"] {
-    background: rgba(0, 0, 0, 0.08);
+    @apply bg-surface shadow-surface;
   }
 }
 

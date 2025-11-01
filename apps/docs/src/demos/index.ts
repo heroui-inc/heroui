@@ -24,6 +24,7 @@ import * as LinkDemos from "./link";
 import * as ListBoxDemos from "./listbox";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
+import * as SelectDemos from "./select";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
 import * as SpinnerDemos from "./spinner";
@@ -690,6 +691,67 @@ export const demos: Record<string, DemoItem> = {
   "listbox-with-sections": {
     component: ListBoxDemos.WithSections,
     file: "listbox/with-sections.tsx",
+  },
+  // Select demos
+  "select-default": {
+    component: SelectDemos.Default,
+    file: "select/default.tsx",
+  },
+  "select-with-description": {
+    component: SelectDemos.WithDescription,
+    file: "select/with-description.tsx",
+  },
+  "select-multiple-select": {
+    component: SelectDemos.MultipleSelect,
+    file: "select/multiple-select.tsx",
+  },
+  "select-with-sections": {
+    component: SelectDemos.WithSections,
+    file: "select/with-sections.tsx",
+  },
+  "select-with-disabled-options": {
+    component: SelectDemos.WithDisabledOptions,
+    file: "select/with-disabled-options.tsx",
+  },
+  "select-custom-indicator": {
+    component: SelectDemos.CustomIndicator,
+    file: "select/custom-indicator.tsx",
+  },
+  "select-required": {
+    component: SelectDemos.Required,
+    file: "select/required.tsx",
+  },
+  "select-on-surface": {
+    component: SelectDemos.OnSurface,
+    file: "select/on-surface.tsx",
+  },
+  "select-custom-value": {
+    component: SelectDemos.CustomValue,
+    file: "select/custom-value.tsx",
+  },
+  "select-custom-value-multiple": {
+    component: SelectDemos.CustomValueMultiple,
+    file: "select/custom-value-multiple.tsx",
+  },
+  "select-controlled": {
+    component: SelectDemos.Controlled,
+    file: "select/controlled.tsx",
+  },
+  "select-controlled-multiple": {
+    component: SelectDemos.ControlledMultiple,
+    file: "select/controlled-multiple.tsx",
+  },
+  "select-controlled-open-state": {
+    component: SelectDemos.ControlledOpenState,
+    file: "select/controlled-open-state.tsx",
+  },
+  "select-asynchronous-loading": {
+    component: SelectDemos.AsynchronousLoading,
+    file: "select/asynchronous-loading.tsx",
+  },
+  "select-disabled": {
+    component: SelectDemos.Disabled,
+    file: "select/disabled.tsx",
   },
   // Description demos
   "description-basic": {

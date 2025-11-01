@@ -50,7 +50,7 @@
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
   transition:
-    background-color 300ms var(--ease-smooth),
+    background-color 250ms var(--ease-smooth),
     transform 250ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
 

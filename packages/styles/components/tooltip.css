@@ -2,7 +2,7 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply bg-overlay origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform dark:shadow-none;
+  @apply bg-overlay origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform;
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */

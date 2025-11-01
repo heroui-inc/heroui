@@ -8,7 +8,7 @@
   cursor: var(--cursor-interactive);
 
   transition:
-    transform 300ms var(--ease-out-quart),
+    transform 250ms var(--ease-out-quart),
     color 150ms var(--ease-out),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);

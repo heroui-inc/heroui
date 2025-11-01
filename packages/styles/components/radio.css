@@ -30,7 +30,7 @@
 .radio__control {
   @apply bg-field shadow-field reduce-motion:transition-none relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
 
-  transition: all 300ms var(--ease-out);
+  transition: all 250ms var(--ease-out);
 
   cursor: var(--cursor-interactive);
 
