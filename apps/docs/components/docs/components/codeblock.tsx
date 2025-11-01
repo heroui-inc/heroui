@@ -124,18 +124,10 @@ const CodeBlockHighlight = ({
                   preRef.current = element;
                 }
               }}
-              // eslint-disable-next-line prettier/prettier
-              className={clsx(
-                className,
-                classNameProp,
-                `language-${codeLang}`,
-                "max-w-full",
-                {
+              className={clsx(className, classNameProp, `language-${codeLang}`, "max-w-full", {
                 "flex-col": isMultiLine,
                 "overflow-x-scroll scrollbar-hide": hideScrollBar,
-                // eslint-disable-next-line prettier/prettier
-                },
-              )}
+              })}
               data-language={language}
               style={style}
             >
