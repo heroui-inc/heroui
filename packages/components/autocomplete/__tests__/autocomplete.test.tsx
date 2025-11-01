@@ -979,7 +979,7 @@ describe("focusedKey management with selected key", () => {
         disabledKeys={["penguin"]}
         label="Favorite Animal"
       >
-        <AutocompleteItem key="penguin" isDisabled>
+        <AutocompleteItem key="penguin">
           Penguin
         </AutocompleteItem>
         <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
