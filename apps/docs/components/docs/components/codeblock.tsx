@@ -124,16 +124,10 @@ const CodeBlockHighlight = ({
                   preRef.current = element;
                 }
               }}
-              className={clsx(
-                className,
-                classNameProp,
-                `language-${codeLang}`,
-                "max-w-full contents",
-                {
-                  "flex-col": isMultiLine,
-                  "overflow-x-scroll scrollbar-hide": hideScrollBar,
-                },
-              )}
+              className={clsx(className, classNameProp, `language-${codeLang}`, "max-w-full", {
+                "flex-col": isMultiLine,
+                "overflow-x-scroll scrollbar-hide": hideScrollBar,
+              })}
               data-language={language}
               style={style}
             >
