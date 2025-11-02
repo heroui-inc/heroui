@@ -695,18 +695,18 @@ describe("NumberInput with React Hook Form", () => {
       expect(label).toBeTruthy();
       expect(label?.className).toMatch(/translate-y.*100%/);
     });
-  });
 
-  it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
-    const {container} = render(
-      <HeroUIProvider labelPlacement="outside">
-        <NumberInput label="Test number input" labelPlacement="inside" />
-      </HeroUIProvider>,
-    );
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside">
+          <NumberInput label="Test number input" labelPlacement="inside" />
+        </HeroUIProvider>,
+      );
 
-    const label = container.querySelector("label");
+      const label = container.querySelector("label");
 
-    expect(label).toBeTruthy();
-    expect(label?.className).not.toMatch(/translate-y.*100%/);
+      expect(label).toBeTruthy();
+      expect(label?.className).not.toMatch(/translate-y.*100%/);
+    });
   });
 });
