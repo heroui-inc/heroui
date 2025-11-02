@@ -234,10 +234,18 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       numberInput({
         ...variantProps,
         isInvalid,
+        labelPlacement,
         isClearable,
         disableAnimation,
       }),
-    [objectToDeps(variantProps), isInvalid, isClearable, hasStartContent, disableAnimation],
+    [
+      objectToDeps(variantProps),
+      isInvalid,
+      labelPlacement,
+      isClearable,
+      hasStartContent,
+      disableAnimation,
+    ],
   );
 
   const handleKeyDown = useCallback(
