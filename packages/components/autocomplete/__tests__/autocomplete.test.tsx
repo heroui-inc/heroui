@@ -1088,4 +1088,56 @@ describe("focusedKey management with selected key", () => {
 
     expect(optionItem).toHaveAttribute("data-focus", "true");
   });
+
+  it("should not select text when item is selected via mouse click", async () => {
+    const wrapper = render(
+      <Autocomplete aria-label="Favorite Animal" data-testid="autocomplete" label="Favorite Animal">
+        <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+        <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+        <AutocompleteItem key="shark">Shark</AutocompleteItem>
+      </Autocomplete>,
+    );
+
+    const autocomplete = wrapper.getByTestId("autocomplete") as HTMLInputElement;
+
+    // open the listbox
+    await user.click(autocomplete);
+
+    let options = wrapper.getAllByRole("option");
+
+    // select the target item via mouse click
+    await user.click(options[0]);
+
+    // assert that the input has the value
+    expect(autocomplete).toHaveValue("Penguin");
+
+    // assert that the text is not selected (cursor at end)
+    expect(autocomplete.selectionStart).toBe(autocomplete.value.length);
+    expect(autocomplete.selectionEnd).toBe(autocomplete.value.length);
+  });
+
+  it("should select text when item is selected via Tab key", async () => {
+    const wrapper = render(
+      <Autocomplete aria-label="Favorite Animal" data-testid="autocomplete" label="Favorite Animal">
+        <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
+        <AutocompleteItem key="zebra">Zebra</AutocompleteItem>
+        <AutocompleteItem key="shark">Shark</AutocompleteItem>
+      </Autocomplete>,
+    );
+
+    const autocomplete = wrapper.getByTestId("autocomplete") as HTMLInputElement;
+
+    // open the listbox
+    await user.click(autocomplete);
+
+    // press Tab to commit the selection (first item is focused)
+    await user.keyboard("{Tab}");
+
+    // assert that the input has the value
+    expect(autocomplete).toHaveValue("Penguin");
+
+    // assert that the text is selected
+    expect(autocomplete.selectionStart).toBe(0);
+    expect(autocomplete.selectionEnd).toBe(autocomplete.value.length);
+  });
 });

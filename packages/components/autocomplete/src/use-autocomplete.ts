@@ -12,7 +12,7 @@ import type {ButtonProps} from "@heroui/button";
 import type {AsyncLoadable, PressEvent} from "@react-types/shared";
 
 import {clsx, dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
-import {useEffect, useMemo, useRef} from "react";
+import {useEffect, useMemo, useRef, useState} from "react"; // Added useState for managing focus behavior state
 import {useDOMRef} from "@heroui/react-utils";
 import {useComboBoxState} from "@react-stately/combobox";
 import {useFilter} from "@react-aria/i18n";
@@ -146,6 +146,11 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const globalContext = useProviderContext();
   const {validationBehavior: formValidationBehavior} = useSlottedContext(FormContext) || {};
 
+  // State to control whether to skip text selection on focus, used to fix Firefox focus reset issue
+  const [shouldSkipSelect, setShouldSkipSelect] = useState(false);
+  // Ref to track the last key pressed, used to determine focus behavior
+  const lastKeyRef = useRef<string | null>(null);
+
   const [props, variantProps] = mapPropsVariants(originalProps, autocomplete.variantKeys);
   const disableAnimation =
     originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
@@ -210,6 +215,16 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     shouldCloseOnBlur,
     allowsEmptyCollection,
     defaultFilter: defaultFilter && typeof defaultFilter === "function" ? defaultFilter : contains,
+    onSelectionChange: (key) => {
+      originalProps.onSelectionChange?.(key);
+      // Handle focus behavior after selection: skip text selection if last key was Tab to prevent Firefox focus reset
+      if (lastKeyRef.current === "Tab") {
+        setShouldSkipSelect(false);
+      } else {
+        setShouldSkipSelect(true);
+      }
+      lastKeyRef.current = null;
+    },
     onOpenChange: (open, menuTrigger) => {
       onOpenChange?.(open, menuTrigger);
       if (!open) {
@@ -413,6 +428,10 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       if ("continuePropagation" in e) {
         e.stopPropagation = () => {};
       }
+      // Track Tab key presses to adjust focus behavior and prevent unwanted text selection in Firefox
+      if (e.key === "Tab") {
+        lastKeyRef.current = "Tab";
+      }
 
       return originalOnKeyDown(e);
     };
@@ -495,18 +514,25 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         inputProps.onFocus,
         otherProps.onFocus,
         (e: React.FocusEvent<HTMLInputElement>) => {
-          // Firefox auto-selects text when tabbing into input, which causes
-          // the text to be replaced when typing. Prevent this by clearing selection.
-          if (
+          // Custom focus behavior to fix Firefox focus reset issue: control text selection based on selection state
+          if (shouldSkipSelect) {
+            if (e.target.value) {
+              const length = e.target.value.length;
+
+              e.target.setSelectionRange(length, length);
+            }
+          } else if (
             e.target.value &&
-            e.target.selectionStart === 0 &&
-            e.target.selectionEnd === e.target.value.length
+            state.selectedItem &&
+            e.target.value === state.selectedItem.textValue
           ) {
-            // Move cursor to end of text instead of selecting all
+            e.target.select();
+          } else if (e.target.value) {
             const length = e.target.value.length;
 
             e.target.setSelectionRange(length, length);
           }
+          setShouldSkipSelect(false);
         },
       ),
     }) as unknown as InputProps;
