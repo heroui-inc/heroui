@@ -1,0 +1,39 @@
+/* === Motion Utilities === */
+
+/**
+ * Motion utilities for component transitions
+ *
+ * Naming convention:
+ * - motion-{component}: Full component transition (e.g., motion-button)
+ * - motion-{property/properties}-{speed}: Single property (e.g., motion-opacity-smooth)
+ *
+ * Usage in component CSS:
+ * .button {
+ *   @apply motion-button reduce-motion:transition-none;
+ * }
+ */
+
+@theme {
+  /* ----------------------------------------------------------------------------------------------
+   * Components - motion-{component}
+   * --------------------------------------------------------------------------------------------*/
+  --motion-button:
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out),
+    transform 250ms var(--ease-out-quart);
+
+  --motion-close-button:
+    color 150ms var(--ease-out),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out),
+    transform 250ms var(--ease-out-quart);
+
+  /* ----------------------------------------------------------------------------------------------
+   * Properties - motion-{property/properties}-{speed}
+   * --------------------------------------------------------------------------------------------*/
+  --motion-none: none;
+}
+
+@utility motion-* {
+  transition: --value(--motion-*);
+}
