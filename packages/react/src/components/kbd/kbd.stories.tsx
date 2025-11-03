@@ -4,9 +4,9 @@ import React from "react";
 
 import {Kbd} from "./index";
 
-const meta: Meta<typeof Kbd.Root> = {
+const meta: Meta<typeof Kbd> = {
   title: "Components/Typography/Kbd",
-  component: Kbd.Root,
+  component: Kbd,
   parameters: {
     layout: "centered",
   },
@@ -18,28 +18,28 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Kbd.Root>
+    <Kbd>
       <Kbd.Content>K</Kbd.Content>
-    </Kbd.Root>
+    </Kbd>
   ),
 };
 
 export const WithSingleKey: Story = {
   render: () => (
-    <Kbd.Root>
+    <Kbd>
       <Kbd.Abbr keyValue="command" />
       <Kbd.Content>K</Kbd.Content>
-    </Kbd.Root>
+    </Kbd>
   ),
 };
 
 export const WithMultipleKeys: Story = {
   render: () => (
-    <Kbd.Root>
+    <Kbd>
       <Kbd.Abbr keyValue="command" />
       <Kbd.Abbr keyValue="shift" />
       <Kbd.Content>K</Kbd.Content>
-    </Kbd.Root>
+    </Kbd>
   ),
 };
 
@@ -48,39 +48,39 @@ export const KeyCombinations: Story = {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <span>Copy:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>C</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Paste:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>V</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Cut:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>X</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Undo:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>Z</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Redo:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="shift" />
           <Kbd.Content>Z</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
     </div>
   ),
@@ -89,18 +89,18 @@ export const KeyCombinations: Story = {
 export const NavigationKeys: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <Kbd.Root>
+      <Kbd>
         <Kbd.Abbr keyValue="up" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="down" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="left" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="right" />
-      </Kbd.Root>
+      </Kbd>
     </div>
   ),
 };
@@ -108,42 +108,42 @@ export const NavigationKeys: Story = {
 export const SpecialKeys: Story = {
   render: () => (
     <div className="grid grid-cols-4 gap-4">
-      <Kbd.Root>
+      <Kbd>
         <Kbd.Abbr keyValue="enter" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="delete" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="escape" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="tab" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="capslock" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="space" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="pageup" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="pagedown" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="home" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="end" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="help" />
-      </Kbd.Root>
-      <Kbd.Root>
+      </Kbd>
+      <Kbd>
         <Kbd.Abbr keyValue="fn" />
-      </Kbd.Root>
+      </Kbd>
     </div>
   ),
 };
@@ -153,33 +153,33 @@ export const ComplexShortcuts: Story = {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <span>Open Spotlight:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="space" />
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Force Quit:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="option" />
           <Kbd.Abbr keyValue="escape" />
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Screenshot:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="shift" />
           <Kbd.Content>3</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Switch Apps:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="tab" />
-        </Kbd.Root>
+        </Kbd>
       </div>
     </div>
   ),
@@ -190,28 +190,28 @@ export const InlineUsage: Story = {
     <div className="space-y-2">
       <p className="text-sm">
         Press{" "}
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Content>Esc</Kbd.Content>
-        </Kbd.Root>{" "}
+        </Kbd>{" "}
         to close the dialog.
       </p>
       <p className="text-sm">
         Use{" "}
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>K</Kbd.Content>
-        </Kbd.Root>{" "}
+        </Kbd>{" "}
         to open the command palette.
       </p>
       <p className="text-sm">
         Navigate with{" "}
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="up" />
-        </Kbd.Root>{" "}
+        </Kbd>{" "}
         and{" "}
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="down" />
-        </Kbd.Root>{" "}
+        </Kbd>{" "}
         arrow keys.
       </p>
     </div>
@@ -223,26 +223,26 @@ export const CustomContent: Story = {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <span>Select word:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="option" />
           <Kbd.Abbr keyValue="left" />
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Delete line:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="ctrl" />
           <Kbd.Content>K</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
       <div className="flex items-center gap-2">
         <span>Multiple modifiers:</span>
-        <Kbd.Root>
+        <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="option" />
           <Kbd.Abbr keyValue="shift" />
           <Kbd.Content>4</Kbd.Content>
-        </Kbd.Root>
+        </Kbd>
       </div>
     </div>
   ),

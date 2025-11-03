@@ -4,7 +4,7 @@ import {Button, Card, Input, Label, Link, TextField} from "@heroui/react";
 
 export function WithForm() {
   return (
-    <Card.Root className="w-full max-w-md">
+    <Card className="w-full max-w-md">
       <Card.Header>
         <Card.Title>Login</Card.Title>
         <Card.Description>Enter your credentials to access your account</Card.Description>
@@ -23,10 +23,10 @@ export function WithForm() {
       </Card.Content>
       <Card.Footer className="flex flex-col gap-2">
         <Button className="w-full">Sign In</Button>
-        <Link.Root className="text-center text-sm" href="#">
+        <Link className="text-center text-sm" href="#">
           Forgot password?
-        </Link.Root>
+        </Link>
       </Card.Footer>
-    </Card.Root>
+    </Card>
   );
 }

@@ -48,7 +48,7 @@ export function Controlled() {
           </div>
         </div>
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -81,9 +81,9 @@ export function Controlled() {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
           <Separator className="my-2" />
-          <Disclosure.Root id="download">
+          <Disclosure id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -116,7 +116,7 @@ export function Controlled() {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
         </DisclosureGroup>
       </div>
     </div>

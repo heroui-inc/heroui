@@ -10,7 +10,7 @@ export function CustomIndicator() {
   const [expandedKeys, setExpandedKeys] = React.useState<Set<Key>>(new Set([""]));
 
   return (
-    <Accordion.Root
+    <Accordion
       className="w-full max-w-md"
       expandedKeys={expandedKeys}
       variant="outline"
@@ -70,6 +70,6 @@ export function CustomIndicator() {
           </Accordion.Body>
         </Accordion.Panel>
       </Accordion.Item>
-    </Accordion.Root>
+    </Accordion>
   );
 }

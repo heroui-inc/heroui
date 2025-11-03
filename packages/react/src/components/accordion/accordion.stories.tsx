@@ -25,9 +25,9 @@ export default {
       options: ["default", "outline"],
     },
   },
-  component: Accordion.Root,
+  component: Accordion,
   title: "Components/Navigation/Accordion",
-} as Meta<typeof Accordion.Root>;
+} as Meta<typeof Accordion>;
 
 const defaultArgs: Accordion["RootProps"] = {
   allowsMultipleExpanded: false,
@@ -79,7 +79,7 @@ const items = [
 
 const Template = (props: Accordion["RootProps"]) => (
   <Wrapper>
-    <Accordion.Root {...props}>
+    <Accordion {...props}>
       {items.map((item, index) => (
         <Accordion.Item key={index}>
           <Accordion.Heading>
@@ -98,7 +98,7 @@ const Template = (props: Accordion["RootProps"]) => (
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion.Root>
+    </Accordion>
   </Wrapper>
 );
 
@@ -183,7 +183,7 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
         {categories.map((category) => (
           <div key={category.title}>
             <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-            <Accordion.Root {...props} className="w-full" variant="outline">
+            <Accordion {...props} className="w-full" variant="outline">
               {category.items.map((item, index) => (
                 <Accordion.Item key={index}>
                   <Accordion.Heading>
@@ -199,7 +199,7 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
                   </Accordion.Panel>
                 </Accordion.Item>
               ))}
-            </Accordion.Root>
+            </Accordion>
           </div>
         ))}
       </div>

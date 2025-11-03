@@ -4,12 +4,12 @@ import {Alert} from "@heroui/react";
 
 export function Basic() {
   return (
-    <Alert.Root className="max-w-lg">
+    <Alert className="max-w-lg">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>Heads up!</Alert.Title>
         <Alert.Description>You can add components to your app using the cli.</Alert.Description>
       </Alert.Content>
-    </Alert.Root>
+    </Alert>
   );
 }

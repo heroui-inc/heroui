@@ -30,10 +30,10 @@ Import the Link component and access all parts using dot notation.
 import { Link } from '@heroui/react';
 
 export default () => (
-  <Link.Root href="#">
+  <Link href="#">
     Call to action
     <Link.Icon />
-  </Link.Root>
+  </Link>
 );
 ```
 
@@ -58,12 +58,12 @@ import { Link } from '@heroui/react';
 
 function CustomLink() {
   return (
-    <Link.Root
+    <Link
       href="#"
       className="text-lg font-bold text-accent hover:text-accent/80"
     >
       Custom styled link
-    </Link.Root>
+    </Link>
   );
 }
 ```
@@ -99,7 +99,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Link.Root Props
+### Link Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

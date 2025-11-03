@@ -29,7 +29,7 @@ Import the Popover component and access all parts using dot notation.
 import { Popover } from '@heroui/react';
 
 export default () => (
-  <Popover.Root>
+  <Popover>
     <Popover.Trigger/>
     <Popover.Content>
       <Popover.Arrow />
@@ -38,7 +38,7 @@ export default () => (
         {/* content goes here */}
       </Popover.Dialog>
     </Popover.Content>
-  </Popover.Root>
+  </Popover>
 )
 ```
 
@@ -69,7 +69,7 @@ import { Popover, Button } from '@heroui/react';
 
 function CustomPopover() {
   return (
-    <Popover.Root>
+    <Popover>
       <Popover.Trigger>
         <Button>Open</Button>
       </Popover.Trigger>
@@ -79,7 +79,7 @@ function CustomPopover() {
           <p>This popover has custom styling</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover.Root>
+    </Popover>
   );
 }
 ```
@@ -128,7 +128,7 @@ The component supports animation states:
 
 ## API Reference
 
-### Popover.Root Props
+### Popover Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

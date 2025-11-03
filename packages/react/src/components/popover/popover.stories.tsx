@@ -41,15 +41,15 @@ export default {
       ],
     },
   },
-  component: Popover.Root,
+  component: Popover,
   title: "Components/Overlays/Popover",
-} as Meta<typeof Popover.Root>;
+} as Meta<typeof Popover>;
 
 const defaultArgs: Omit<Popover["ContentProps"], "children"> = {};
 
 const Template = (props: Popover["ContentProps"]) => (
   <div className="flex items-center gap-3">
-    <Popover.Root>
+    <Popover>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -59,13 +59,13 @@ const Template = (props: Popover["ContentProps"]) => (
           <p>This is the popover content</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover.Root>
+    </Popover>
   </div>
 );
 
 const TemplateWithArrow = (props: Popover["ContentProps"]) => (
   <div className="flex items-center gap-3">
-    <Popover.Root>
+    <Popover>
       <Button isIconOnly aria-label="Popover trigger" variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -76,7 +76,7 @@ const TemplateWithArrow = (props: Popover["ContentProps"]) => (
           <p>This is the popover content</p>
         </Popover.Dialog>
       </Popover.Content>
-    </Popover.Root>
+    </Popover>
   </div>
 );
 
@@ -85,13 +85,13 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
 
   return (
     <div className="flex items-center gap-3">
-      <Popover.Root>
+      <Popover>
         <Popover.Trigger aria-label="Popover trigger">
           <div className="flex items-center gap-2">
-            <Avatar.Root size="sm">
+            <Avatar size="sm">
               <Avatar.Image alt="Zoe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5" />
               <Avatar.Fallback>Z</Avatar.Fallback>
-            </Avatar.Root>
+            </Avatar>
             <div className="flex flex-col gap-0">
               <p className="text-sm font-medium leading-5">Zoe</p>
               <p className="text-muted text-xs leading-none">zoe@heroui.com</p>
@@ -103,13 +103,13 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
             <Popover.Heading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Avatar.Root size="md">
+                  <Avatar size="md">
                     <Avatar.Image
                       alt="Zoe"
                       src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
                     />
                     <Avatar.Fallback>Z</Avatar.Fallback>
-                  </Avatar.Root>
+                  </Avatar>
                   <div className="flex h-full flex-col items-start justify-center">
                     <span className="text-sm font-medium">Zoey Lang</span>
                     <span className="text-muted text-sm font-normal leading-4 tracking-tight">
@@ -147,7 +147,7 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
             </div>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
   );
 };
@@ -175,7 +175,7 @@ const SpringAnimationTemplate = (props: Popover["ContentProps"]) => (
     </p>
 
     <div className="flex items-center gap-8">
-      <Popover.Root>
+      <Popover>
         <Button>Click for Spring Animation</Button>
         <Popover.Content
           {...props}
@@ -190,7 +190,7 @@ const SpringAnimationTemplate = (props: Popover["ContentProps"]) => (
             <p className="text-muted mt-4 text-xs">Easing: cubic-bezier(0.36, 1.66, 0.04, 1)</p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
 
     <div className="text-muted space-y-1 text-center text-xs">

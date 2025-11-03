@@ -4,7 +4,7 @@ import {Accordion} from "@heroui/react";
 
 export function Multiple() {
   return (
-    <Accordion.Root allowsMultipleExpanded className="w-full max-w-md">
+    <Accordion allowsMultipleExpanded className="w-full max-w-md">
       <Accordion.Item>
         <Accordion.Heading>
           <Accordion.Trigger>
@@ -64,6 +64,6 @@ export function Multiple() {
           </Accordion.Body>
         </Accordion.Panel>
       </Accordion.Item>
-    </Accordion.Root>
+    </Accordion>
   );
 }

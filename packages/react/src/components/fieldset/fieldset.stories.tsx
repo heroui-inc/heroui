@@ -14,8 +14,8 @@ import {TextArea} from "../textarea";
 
 import {Fieldset} from "./index";
 
-const meta: Meta<typeof Fieldset.Root> = {
-  component: Fieldset.Root,
+const meta: Meta<typeof Fieldset> = {
+  component: Fieldset,
   parameters: {
     layout: "centered",
   },
@@ -24,7 +24,7 @@ const meta: Meta<typeof Fieldset.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Fieldset.Root>;
+type Story = StoryObj<typeof Fieldset>;
 
 export const Default: Story = {
   render: () => {
@@ -43,7 +43,7 @@ export const Default: Story = {
 
     return (
       <Form onSubmit={onSubmit}>
-        <Fieldset.Root className="w-96">
+        <Fieldset className="w-96">
           <Fieldset.Legend>Profile Settings</Fieldset.Legend>
           <Description>Update your profile information.</Description>
           <Fieldset.Group>
@@ -93,7 +93,7 @@ export const Default: Story = {
               Cancel
             </Button>
           </Fieldset.Actions>
-        </Fieldset.Root>
+        </Fieldset>
       </Form>
     );
   },

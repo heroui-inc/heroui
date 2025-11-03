@@ -30,14 +30,14 @@ Import the Switch component and access all parts using dot notation.
 import { Switch, Label } from '@heroui/react';
 
 export default () => (
-  <Switch.Root>
+  <Switch>
     <Switch.Control>
       <Switch.Thumb>
         <Switch.Icon/> {/* Optional */}
       </Switch.Thumb>
     </Switch.Control>
     <Label/> {/* Optional */}
-  </Switch.Root>
+  </Switch>
 );
 ```
 
@@ -48,18 +48,18 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 
 export default () => (
   <SwitchGroup>
-    <Switch.Root>
+    <Switch>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label>Option 1</Label>
-    </Switch.Root>
-    <Switch.Root>
+    </Switch>
+    <Switch>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label>Option 2</Label>
-    </Switch.Root>
+    </Switch>
   </SwitchGroup>
 );
 ```
@@ -153,7 +153,7 @@ import { Switch, Label } from '@heroui/react';
 
 function CustomSwitch() {
   return (
-    <Switch.Root>
+    <Switch>
       {({isSelected}) => (
         <>
           <Switch.Control
@@ -166,7 +166,7 @@ function CustomSwitch() {
           <Label>Custom Switch</Label>
         </>
       )}
-    </Switch.Root>
+    </Switch>
   );
 }
 ```
@@ -179,18 +179,18 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 function CustomSwitchGroup() {
   return (
     <SwitchGroup className="gap-8" orientation="horizontal">
-      <Switch.Root>
+      <Switch>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label>Option 1</Label>
-      </Switch.Root>
-      <Switch.Root>
+      </Switch>
+      <Switch>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label>Option 2</Label>
-      </Switch.Root>
+      </Switch>
     </SwitchGroup>
   );
 }
@@ -258,7 +258,7 @@ The switch supports both CSS pseudo-classes and data attributes for flexibility:
 
 ## API Reference
 
-### Switch.Root Props
+### Switch Props
 
 Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
 

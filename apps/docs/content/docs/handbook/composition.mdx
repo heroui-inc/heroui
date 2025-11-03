@@ -44,58 +44,62 @@ These components support `asChild`:
 
 ## Compound Components
 
-HeroUI components are built as compound components - they export multiple parts that work together. You can use them in two ways:
+HeroUI components are built as compound components. They export multiple parts that work together. All patterns are equivalent. Choose what fits your codebase.
 
-### Option 1: Named Exports (Recommended)
+### Dot Notation (Recommended)
 
-Import each part separately:
-
-```tsx
-import {
-  Alert,
-  AlertIcon,
-  AlertContent,
-  AlertTitle,
-  AlertDescription,
-  AlertClose
-} from '@heroui/react';
-
-<Alert>
-  <AlertIcon />
-  <AlertContent>
-    <AlertTitle>Success</AlertTitle>
-    <AlertDescription>Your changes have been saved.</AlertDescription>
-  </AlertContent>
-  <AlertClose />
-</Alert>
-```
-
-### Option 2: Dot Notation (Compound Pattern)
-
-Import the main component and access parts via dot notation:
+Import the main component and access parts via dot notation.
 
 ```tsx
 import { Alert } from '@heroui/react';
 
-<Alert.Root>
+<Alert>
   <Alert.Icon />
   <Alert.Content>
     <Alert.Title>Success</Alert.Title>
     <Alert.Description>Your changes have been saved.</Alert.Description>
   </Alert.Content>
   <Alert.Close />
-</Alert.Root>
+</Alert>
 ```
 
-**Note:** When using dot notation, the main component requires `.Root` suffix (e.g., `<Alert.Root>` instead of `<Alert>`).
+### Named Exports
 
-### Benefits of Compound Components
+Import each part separately.
 
-Both patterns provide:
+```tsx
+import { AlertRoot, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertClose } from '@heroui/react';
 
-- **Flexibility** - Arrange parts as needed
-- **Customization** - Style each part independently
-- **Control** - Add or remove parts
+<AlertRoot>
+  <AlertIcon />
+  <AlertContent>
+    <AlertTitle>Success</AlertTitle>
+    <AlertDescription>Your changes have been saved.</AlertDescription>
+  </AlertContent>
+  <AlertClose />
+</AlertRoot>
+```
+
+### Mixed Patterns
+
+Mix both patterns as needed.
+
+```tsx
+import { Alert, AlertIcon, AlertClose } from '@heroui/react';
+
+<Alert>
+  <AlertIcon />
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+    <Alert.Description>Your changes have been saved.</Alert.Description>
+  </Alert.Content>
+  <AlertClose />
+</Alert>
+```
+
+### Benefits
+
+Compound components provide flexibility to arrange parts as needed, customize each part independently, and add or remove parts freely.
 
 ## Style Variants
 
@@ -160,14 +164,14 @@ function LinkButton({ href, children, ...props }) {
 // Icon button with tooltip
 function IconButton({ icon, label, ...props }) {
   return (
-    <Tooltip.Root>
+    <Tooltip>
       <Tooltip.Trigger>
         <Button isIconOnly {...props}>
           <Icon icon={icon} />
         </Button>
       </Tooltip.Trigger>
       <Tooltip.Content>{label}</Tooltip.Content>
-    </Tooltip.Root>
+    </Tooltip>
   );
 }
 ```

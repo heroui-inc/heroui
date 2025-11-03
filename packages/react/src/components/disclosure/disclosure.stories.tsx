@@ -21,9 +21,9 @@ export default {
       },
     },
   },
-  component: Disclosure.Root,
+  component: Disclosure,
   title: "Components/Navigation/Disclosure",
-} as Meta<typeof Disclosure.Root>;
+} as Meta<typeof Disclosure>;
 
 const defaultArgs: Disclosure["RootProps"] = {
   isDisabled: false,
@@ -35,7 +35,7 @@ const Template = (props: Disclosure["RootProps"]) => {
 
   return (
     <div className="w-full max-w-md text-center">
-      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
             <Icon icon="gravity-ui:qr-code" />
@@ -60,7 +60,7 @@ const Template = (props: Disclosure["RootProps"]) => {
             </Button>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 };
@@ -78,7 +78,7 @@ const ControlledTemplate = (props: Disclosure["RootProps"]) => {
           State: {isExpanded ? "Expanded" : "Collapsed"}
         </Chip>
       </div>
-      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Trigger className="mb-2 flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span>Toggle content</span>
           <Icon
@@ -94,7 +94,7 @@ const ControlledTemplate = (props: Disclosure["RootProps"]) => {
             </p>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 };
@@ -104,7 +104,7 @@ const ProductDetailsTemplate = (props: Disclosure["RootProps"]) => {
 
   return (
     <div className="w-full max-w-md">
-      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span className="flex items-center gap-2">
             <Icon icon="gravity-ui:box" />
@@ -145,7 +145,7 @@ const ProductDetailsTemplate = (props: Disclosure["RootProps"]) => {
             </div>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 };

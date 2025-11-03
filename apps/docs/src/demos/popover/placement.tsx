@@ -6,7 +6,7 @@ export function PopoverPlacement() {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div />
-      <Popover.Root>
+      <Popover>
         <Button className="w-full" variant="tertiary">
           Top
         </Button>
@@ -16,10 +16,10 @@ export function PopoverPlacement() {
             <p className="text-sm">Top placement</p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
       <div />
 
-      <Popover.Root>
+      <Popover>
         <Button className="w-full" variant="tertiary">
           Left
         </Button>
@@ -29,13 +29,13 @@ export function PopoverPlacement() {
             <p className="text-sm">Left placement</p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
 
       <div className="flex items-center justify-center">
         <span className="text-muted text-sm">Click buttons</span>
       </div>
 
-      <Popover.Root>
+      <Popover>
         <Button className="w-full" variant="tertiary">
           Right
         </Button>
@@ -45,10 +45,10 @@ export function PopoverPlacement() {
             <p className="text-sm">Right placement</p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
 
       <div />
-      <Popover.Root>
+      <Popover>
         <Button className="w-full" variant="tertiary">
           Bottom
         </Button>
@@ -58,7 +58,7 @@ export function PopoverPlacement() {
             <p className="text-sm">Bottom placement</p>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
       <div />
     </div>
   );

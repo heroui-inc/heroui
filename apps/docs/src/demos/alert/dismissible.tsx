@@ -18,7 +18,7 @@ export function Dismissible() {
   }
 
   return (
-    <Alert.Root className="max-w-lg">
+    <Alert className="max-w-lg">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>Dismissible Alert</Alert.Title>
@@ -27,6 +27,6 @@ export function Dismissible() {
         </Alert.Description>
       </Alert.Content>
       <Alert.Close onClick={() => setIsVisible(false)} />
-    </Alert.Root>
+    </Alert>
   );
 }

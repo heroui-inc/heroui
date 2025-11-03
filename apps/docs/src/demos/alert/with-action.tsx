@@ -4,7 +4,7 @@ import {Alert} from "@heroui/react";
 
 export function WithAction() {
   return (
-    <Alert.Root className="max-w-lg">
+    <Alert className="max-w-lg">
       <Alert.Icon />
       <Alert.Content>
         <Alert.Title>Update available</Alert.Title>
@@ -13,6 +13,6 @@ export function WithAction() {
         </Alert.Description>
       </Alert.Content>
       <Alert.Action onClick={() => console.log("Update clicked")}>Update</Alert.Action>
-    </Alert.Root>
+    </Alert>
   );
 }

@@ -26,7 +26,7 @@ Import the Fieldset component and access all parts using dot notation.
 import { Fieldset } from '@heroui/react';
 
 export default () => (
-  <Fieldset.Root>
+  <Fieldset>
     <Fieldset.Legend />
     <Fieldset.Group>
       {/* form fields go here */}
@@ -34,7 +34,7 @@ export default () => (
     <Fieldset.Actions>
       {/* action buttons go here */}
     </Fieldset.Actions>
-  </Fieldset.Root>
+  </Fieldset>
 )
 ```
 
@@ -51,7 +51,7 @@ import { Fieldset, TextField, Label, Input } from '@heroui/react';
 
 function CustomFieldset() {
   return (
-    <Fieldset.Root className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
+    <Fieldset className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
       <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
       <Fieldset.Group className="grid gap-4 md:grid-cols-2">
         <TextField>
@@ -66,7 +66,7 @@ function CustomFieldset() {
       <Fieldset.Actions className="justify-end gap-3">
         {/* Action buttons */}
       </Fieldset.Actions>
-    </Fieldset.Root>
+    </Fieldset>
   );
 }
 ```
@@ -106,7 +106,7 @@ The Fieldset compound component exposes these CSS selectors:
 
 ## API Reference
 
-### Fieldset.Root Props
+### Fieldset Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

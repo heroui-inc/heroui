@@ -115,19 +115,50 @@ Consistent patterns across all components: sizes (`sm`, `md`, `lg`), variants, c
 <Button size="lg" variant="primary" className="custom" data-pressed="true" />
 <Chip size="lg" variant="success" className="custom" />
 <Avatar size="lg" className="custom" />
+```
 
-// Compound components support both named exports and dot notation
-import { Alert, AlertIcon, CardHeader, AccordionTrigger } from '@heroui/react';
+HeroUI supports multiple ways to use components. All patterns are equivalent, choose what fits your codebase.
 
-// Named exports
+```tsx
+import {
+  Button,
+  ButtonRoot,
+  Alert,
+  AlertRoot,
+  AlertIcon,
+  AlertContent,
+  AlertTitle
+} from '@heroui/react';
+
+// Single components work directly  (recommended)
+<Button>Click me</Button>
+
+// Named components
+<ButtonRoot>Click me</ButtonRoot>
+
+// Compound components support dot notation (recommended)
 <Alert>
-  <AlertIcon />
+  <Alert.Icon />
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+  </Alert.Content>
 </Alert>
 
-// Dot notation (requires .Root)
-<Alert.Root>
-  <Alert.Icon />
-</Alert.Root>
+// Import each part separately
+<AlertRoot>
+  <AlertIcon />
+  <AlertContent>
+    <AlertTitle>Success</AlertTitle>
+  </AlertContent>
+</AlertRoot>
+
+// Mix both patterns as needed
+<Alert>
+  <AlertIcon />
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+  </Alert.Content>
+</Alert>
 ```
 
 ### 6. Type Safety First
