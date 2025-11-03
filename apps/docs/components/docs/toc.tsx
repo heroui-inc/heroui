@@ -87,6 +87,7 @@ export const DocsToc: FC<DocsTocProps> = ({headings}) => {
                 <li
                   key={i}
                   className={clsx(
+                    "relative",
                     "transition-colors",
                     "font-normal",
                     "flex items-center text-tiny font-normal text-default-500",
