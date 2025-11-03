@@ -6,7 +6,7 @@ export function PopoverWithArrow() {
     <div className="flex items-center gap-4">
       <Popover>
         <Button variant="secondary">With Arrow</Button>
-        <Popover.Content>
+        <Popover.Content className="max-w-64">
           <Popover.Dialog>
             <Popover.Arrow />
             <Popover.Heading>Popover with Arrow</Popover.Heading>
@@ -21,7 +21,7 @@ export function PopoverWithArrow() {
         <Button isIconOnly variant="tertiary">
           <Icon icon="gravity-ui:ellipsis" />
         </Button>
-        <Popover.Content offset={10}>
+        <Popover.Content className="max-w-64" offset={10}>
           <Popover.Dialog>
             <Popover.Arrow />
             <Popover.Heading>Popover with Arrow</Popover.Heading>

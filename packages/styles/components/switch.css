@@ -114,7 +114,7 @@
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply shadow-field reduce-motion:transition-none ms-[0.125rem] flex rounded-full bg-white text-black;
+  @apply shadow-field reduce-motion:transition-none ms-[0.125rem] flex origin-center rounded-full bg-white text-black;
   height: 1rem; /* ~14px on desktop, ~16px on mobile */
   width: 1.375rem; /* ~19px on desktop, ~22px on mobile */
 

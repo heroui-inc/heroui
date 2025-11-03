@@ -7,6 +7,7 @@ import {InputOTPDemo} from "./input-otp-demo";
 import {ListBoxDemo} from "./listbox-demo";
 import {LoginDemo} from "./login-demo";
 import {SelectDemo} from "./select-demo";
+import {SliderDemo} from "./slider-demo";
 import {SubtleCardsDemo} from "./subtle-cards-demo";
 import {TabsDemo1} from "./tabs-1-demo";
 import {TabsDemo2} from "./tabs-2-demo";
@@ -22,6 +23,7 @@ export function DemoComponents() {
         <TextfieldDemo />
         <SelectDemo />
         <UIComponentsDemo />
+        <SliderDemo />
         <TabsDemo1 />
         <TabsDemo2 />
         <ListBoxDemo />

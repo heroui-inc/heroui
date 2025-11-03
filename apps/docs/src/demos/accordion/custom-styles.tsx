@@ -37,7 +37,7 @@ export function CustomStyles() {
           )}
         >
           <Accordion.Heading>
-            <Accordion.Trigger className="hover:bg-surface-2 group flex items-center gap-2 transition-none">
+            <Accordion.Trigger className="hover:bgsurface group flex items-center gap-2 transition-none">
               {item.iconUrl ? (
                 <img
                   alt={item.title}

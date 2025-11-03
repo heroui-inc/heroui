@@ -4,7 +4,7 @@ import {FieldError, Input, Label, TextField} from "@heroui/react";
 import {useState} from "react";
 
 export function Basic() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("jr");
   const isInvalid = value.length > 0 && value.length < 3;
 
   return (

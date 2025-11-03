@@ -27,6 +27,7 @@ import * as RadioGroupDemos from "./radio-group";
 import * as SelectDemos from "./select";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
+import * as SliderDemos from "./slider";
 import * as SpinnerDemos from "./spinner";
 import * as SurfaceDemos from "./surface";
 import * as SwitchDemos from "./switch";
@@ -88,6 +89,10 @@ export const demos: Record<string, DemoItem> = {
   "avatar-colors": {
     component: AvatarDemos.Colors,
     file: "avatar/colors.tsx",
+  },
+  "avatar-variants": {
+    component: AvatarDemos.Variants,
+    file: "avatar/variants.tsx",
   },
   "avatar-fallback": {
     component: AvatarDemos.Fallback,
@@ -224,10 +229,6 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxDemos.FullRounded,
     file: "checkbox/full-rounded.tsx",
   },
-  "checkbox-features-and-addons": {
-    component: CheckboxDemos.FeaturesAndAddOns,
-    file: "checkbox/features-and-addons.tsx",
-  },
   // CheckboxGroup demos
   "checkbox-group-basic": {
     component: CheckboxGroupDemos.Basic,
@@ -256,6 +257,10 @@ export const demos: Record<string, DemoItem> = {
   "checkbox-group-disabled": {
     component: CheckboxGroupDemos.Disabled,
     file: "checkbox-group/disabled.tsx",
+  },
+  "checkbox-group-features-and-addons": {
+    component: CheckboxGroupDemos.FeaturesAndAddOns,
+    file: "checkbox-group/features-and-addons.tsx",
   },
   // Chip demos
   "chip-basic": {
@@ -407,6 +412,14 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.IconPlacement,
     file: "link/icon-placement.tsx",
   },
+  "link-underline-variants": {
+    component: LinkDemos.UnderlineVariants,
+    file: "link/underline-variants.tsx",
+  },
+  "link-underline-offset": {
+    component: LinkDemos.UnderlineOffset,
+    file: "link/underline-offset.tsx",
+  },
   // RadioGroup demos
   "radio-group-basic": {
     component: RadioGroupDemos.Basic,
@@ -464,6 +477,14 @@ export const demos: Record<string, DemoItem> = {
   "skeleton-animation-types": {
     component: SkeletonDemos.AnimationTypes,
     file: "skeleton/animation-types.tsx",
+  },
+  "skeleton-grid": {
+    component: SkeletonDemos.Grid,
+    file: "skeleton/grid.tsx",
+  },
+  "skeleton-single-shimmer": {
+    component: SkeletonDemos.SingleShimmer,
+    file: "skeleton/single-shimmer.tsx",
   },
   // Separator demos
   "separator-basic": {
@@ -752,6 +773,23 @@ export const demos: Record<string, DemoItem> = {
   "select-disabled": {
     component: SelectDemos.Disabled,
     file: "select/disabled.tsx",
+  },
+  // Slider demos
+  "slider-default": {
+    component: SliderDemos.Default,
+    file: "slider/default.tsx",
+  },
+  "slider-vertical": {
+    component: SliderDemos.Vertical,
+    file: "slider/vertical.tsx",
+  },
+  "slider-range": {
+    component: SliderDemos.Range,
+    file: "slider/range.tsx",
+  },
+  "slider-disabled": {
+    component: SliderDemos.Disabled,
+    file: "slider/disabled.tsx",
   },
   // Description demos
   "description-basic": {

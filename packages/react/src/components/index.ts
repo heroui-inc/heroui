@@ -42,10 +42,10 @@ export * from "./listbox";
 export * from "./listbox-item";
 export * from "./listbox-section";
 export * from "./select";
+export * from "./slider";
 
 // in progress
 export * from "./calendar";
-export * from "./slider";
 
 //  ===================================
 //  Icons

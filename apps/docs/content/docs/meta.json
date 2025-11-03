@@ -48,6 +48,7 @@
     "components/separator",
     "components/select",
     "components/skeleton",
+    "components/slider",
     "components/spinner",
     "components/switch",
     "components/surface",

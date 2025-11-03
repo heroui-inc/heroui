@@ -4,7 +4,6 @@ export {CustomIndicator} from "./custom-indicator";
 export {CustomStyles} from "./custom-styles";
 export {DefaultSelected} from "./default-selected";
 export {Disabled} from "./disabled";
-export {FeaturesAndAddOns} from "./features-and-addons";
 export {Form} from "./form";
 export {FullRounded} from "./full-rounded";
 export {Indeterminate} from "./indeterminate";

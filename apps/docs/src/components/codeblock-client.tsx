@@ -45,7 +45,7 @@ export function CodeBlock({
       <div
         className={cn(
           "code-block-wrapper",
-          isCollapsed && "mask-to-bottom relative max-h-[300px] overflow-hidden",
+          isCollapsed && "mask-to-bottom relative max-h-[150px] overflow-hidden",
           !isCollapsed && "pb-10",
         )}
       >
@@ -62,10 +62,10 @@ export function CodeBlock({
         </Base.CodeBlock>
       </div>
       <Button
-        className={cn("absolute bottom-0 right-1/2 translate-x-1/2", !isCollapsed && "bottom-4")}
+        className="bg-surface absolute bottom-2 right-1/2 translate-x-1/2 text-xs shadow-sm shadow-black/5"
         size="sm"
         type="button"
-        variant="secondary"
+        variant="tertiary"
         onPress={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? "Expand code" : "Collapse code"}

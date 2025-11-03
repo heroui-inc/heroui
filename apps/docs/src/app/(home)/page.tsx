@@ -47,7 +47,53 @@ export default function HomePage() {
             <GitHubLink>Stars</GitHubLink>
           </div>
         </div>
-        <DemoComponents />
+        {/* Mobile/Tablet: Show images */}
+        <section className="-ml-4 mt-16 w-[100vw] overflow-hidden lg:hidden lg:w-[150vw]">
+          <picture>
+            <source
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
+              type="image/jpeg"
+              srcSet="
+                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light_0.25x.jpeg 640w,
+                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light_0.5x.jpeg 1280w,
+                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light.jpeg 2528w
+              "
+            />
+            <img
+              alt="HeroUI components preview"
+              className="block dark:hidden"
+              decoding="async"
+              height="1592"
+              loading="lazy"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light.jpeg"
+              width="2528"
+            />
+          </picture>
+          <picture>
+            <source
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
+              type="image/jpeg"
+              srcSet="
+                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark_0.25x.jpeg 640w,
+                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark_0.5x.jpeg 1280w,
+                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark.jpeg 2528w
+              "
+            />
+            <img
+              alt="HeroUI components preview"
+              className="hidden dark:block"
+              decoding="async"
+              height="1592"
+              loading="lazy"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark.jpeg"
+              width="2528"
+            />
+          </picture>
+        </section>
+        {/* Desktop: Show demos */}
+        <div className="hidden lg:block">
+          <DemoComponents />
+        </div>
       </section>
       <footer className="text-muted mt-auto flex w-full flex-row flex-wrap items-center justify-center gap-2 py-3">
         <p className="text-sm">

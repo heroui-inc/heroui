@@ -8,7 +8,7 @@ export function ChipVariants() {
   const colors = ["accent", "default", "success", "warning", "danger"] as const;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 overflow-x-auto">
       {sizes.map((size, index) => (
         <React.Fragment key={size}>
           <div className="flex flex-col gap-4">

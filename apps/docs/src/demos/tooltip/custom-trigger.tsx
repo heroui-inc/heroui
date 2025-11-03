@@ -15,10 +15,10 @@ export function TooltipCustomTrigger() {
     <div className="flex items-center gap-6">
       <TooltipRoot delay={0}>
         <TooltipTrigger aria-label="User avatar">
-          <AvatarRoot>
+          <AvatarRoot size="sm">
             <AvatarImage
-              alt="John Doe"
-              src="https://img.heroui.chat/image/avatar?w=400&h=400&u=1"
+              alt="Jane Doe"
+              src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
             />
             <AvatarFallback>JD</AvatarFallback>
           </AvatarRoot>
