@@ -10,55 +10,55 @@ import {Switch} from "./index";
 
 export default {
   argTypes: {},
-  component: Switch.Root,
+  component: Switch,
   parameters: {
     layout: "centered",
   },
   title: "Components/Controls/Switch",
-} as Meta<typeof Switch.Root>;
+} as Meta<typeof Switch>;
 
-type Story = StoryObj<typeof Switch.Root>;
+type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
-    <Switch.Root isDisabled>
+    <Switch isDisabled>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const DefaultSelected: Story = {
   render: () => (
-    <Switch.Root defaultSelected>
+    <Switch defaultSelected>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
       <Label className="text-sm">Enable notifications</Label>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const DisabledDefaultSelected: Story = {
   render: () => (
-    <Switch.Root defaultSelected isDisabled>
+    <Switch defaultSelected isDisabled>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
@@ -68,12 +68,12 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <Switch.Root isSelected={isSelected} onChange={setIsSelected}>
+        <Switch isSelected={isSelected} onChange={setIsSelected}>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
           <Label className="text-sm">Enable notifications</Label>
-        </Switch.Root>
+        </Switch>
         <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
       </div>
     );
@@ -82,54 +82,54 @@ export const Controlled: Story = {
 
 export const WithoutLabel: Story = {
   render: () => (
-    <Switch.Root aria-label="Enable notifications">
+    <Switch aria-label="Enable notifications">
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const Sizes: Story = {
   render: () => (
     <div className="flex gap-6">
-      <Switch.Root size="sm">
+      <Switch size="sm">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-xs">Small</Label>
-      </Switch.Root>
-      <Switch.Root size="md">
+      </Switch>
+      <Switch size="md">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Medium</Label>
-      </Switch.Root>
-      <Switch.Root size="lg">
+      </Switch>
+      <Switch size="lg">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-base">Large</Label>
-      </Switch.Root>
+      </Switch>
     </div>
   ),
 };
 
 export const LabelBefore: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       <Label className="text-sm">Enable notifications</Label>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-    </Switch.Root>
+    </Switch>
   ),
 };
 
 export const WithDescription: Story = {
   render: () => (
     <div className="max-w-sm">
-      <Switch.Root>
+      <Switch>
         <div className="flex gap-3">
           <Switch.Control>
             <Switch.Thumb />
@@ -139,14 +139,14 @@ export const WithDescription: Story = {
             <Description>Allow others to see your profile information</Description>
           </div>
         </div>
-      </Switch.Root>
+      </Switch>
     </div>
   ),
 };
 
 export const WithCustomStyles: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       {({isSelected}) => (
         <>
           <Switch.Control
@@ -165,7 +165,7 @@ export const WithCustomStyles: Story = {
           </Switch.Control>
         </>
       )}
-    </Switch.Root>
+    </Switch>
   ),
 };
 
@@ -207,7 +207,7 @@ export const WithIcons: Story = {
     return (
       <div className="flex gap-3">
         {Object.entries(icons).map(([key, value]) => (
-          <Switch.Root key={key} defaultSelected size="lg">
+          <Switch key={key} defaultSelected size="lg">
             {({isSelected}) => (
               <>
                 <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
@@ -222,7 +222,7 @@ export const WithIcons: Story = {
                 </Switch.Control>
               </>
             )}
-          </Switch.Root>
+          </Switch>
         ))}
       </div>
     );
@@ -231,7 +231,7 @@ export const WithIcons: Story = {
 
 export const RenderProps: Story = {
   render: () => (
-    <Switch.Root>
+    <Switch>
       {({isSelected}) => (
         <>
           <Switch.Control>
@@ -240,6 +240,6 @@ export const RenderProps: Story = {
           <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
         </>
       )}
-    </Switch.Root>
+    </Switch>
   ),
 };

@@ -19,16 +19,16 @@ export function UIComponentsDemo() {
 
       {/* Radio Buttons - Unselected and Selected */}
       <RadioGroup className="gap-8" defaultValue="option2" name="demo" orientation="horizontal">
-        <Radio.Root value="option1">
+        <Radio value="option1">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-        </Radio.Root>
-        <Radio.Root value="option2">
+        </Radio>
+        <Radio value="option2">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-        </Radio.Root>
+        </Radio>
       </RadioGroup>
 
       {/* Spinner */}

@@ -43,7 +43,7 @@ export function AvatarGroupDemo() {
     <div className="flex w-full justify-center">
       <div className="flex -space-x-2">
         {avatars.slice(0, 5).map((item) => (
-          <Avatar.Root key={item.id} className="ring-background ring-2">
+          <Avatar key={item.id} className="ring-background ring-2">
             <Avatar.Image alt={item.name} src={item.image} />
             <Avatar.Fallback>
               {item.name
@@ -51,13 +51,13 @@ export function AvatarGroupDemo() {
                 .map((n) => n[0])
                 .join("")}
             </Avatar.Fallback>
-          </Avatar.Root>
+          </Avatar>
         ))}
-        <Avatar.Root className="ring-background ring-2">
+        <Avatar className="ring-background ring-2">
           <Avatar.Fallback className="bg-surface text-muted text-xs font-medium">
             +{avatars.length - 2}
           </Avatar.Fallback>
-        </Avatar.Root>
+        </Avatar>
       </div>
     </div>
   );

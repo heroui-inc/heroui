@@ -12,26 +12,26 @@ import {Checkbox} from "./index";
 
 export default {
   argTypes: {},
-  component: Checkbox.Root,
+  component: Checkbox,
   parameters: {
     layout: "centered",
   },
   title: "Components/Forms/Checkbox",
-} as Meta<typeof Checkbox.Root>;
+} as Meta<typeof Checkbox>;
 
-type Story = StoryObj<typeof Checkbox.Root>;
+type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
   render: () => (
     <div className="px-4">
-      <Checkbox.Root name="terms">
+      <Checkbox name="terms">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
           <Label>Accept terms and conditions</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </div>
   ),
 };
@@ -39,7 +39,7 @@ export const Default: Story = {
 export const WithDescription: Story = {
   render: () => (
     <div className="px-4">
-      <Checkbox.Root name="terms">
+      <Checkbox name="terms">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
@@ -47,7 +47,7 @@ export const WithDescription: Story = {
           <Label>Accept terms and conditions</Label>
           <Description>I agree to the terms and privacy policy</Description>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </div>
   ),
 };
@@ -55,7 +55,7 @@ export const WithDescription: Story = {
 export const WithCustomIndicator: Story = {
   render: () => (
     <div className="flex gap-4 px-4">
-      <Checkbox.Root defaultSelected name="heart">
+      <Checkbox defaultSelected name="heart">
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isSelected}) =>
@@ -73,8 +73,8 @@ export const WithCustomIndicator: Story = {
         <Checkbox.Content>
           <Label>Heart</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root defaultSelected name="plus">
+      </Checkbox>
+      <Checkbox defaultSelected name="plus">
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isSelected}) =>
@@ -102,8 +102,8 @@ export const WithCustomIndicator: Story = {
         <Checkbox.Content>
           <Label>Plus</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
-      <Checkbox.Root isIndeterminate name="indeterminate">
+      </Checkbox>
+      <Checkbox isIndeterminate name="indeterminate">
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isIndeterminate}) =>
@@ -118,7 +118,7 @@ export const WithCustomIndicator: Story = {
         <Checkbox.Content>
           <Label>Indeterminate</Label>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </div>
   ),
 };
@@ -127,7 +127,7 @@ export const Indeterminate: Story = {
   render: () => {
     return (
       <div className="px-4">
-        <Checkbox.Root isIndeterminate name="select-all">
+        <Checkbox isIndeterminate name="select-all">
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
@@ -135,7 +135,7 @@ export const Indeterminate: Story = {
             <Label>Select all</Label>
             <Description>Shows indeterminate state</Description>
           </Checkbox.Content>
-        </Checkbox.Root>
+        </Checkbox>
       </div>
     );
   },
@@ -144,7 +144,7 @@ export const Indeterminate: Story = {
 export const Disabled: Story = {
   render: () => (
     <div className="px-4">
-      <Checkbox.Root isDisabled name="feature">
+      <Checkbox isDisabled name="feature">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
@@ -152,7 +152,7 @@ export const Disabled: Story = {
           <Label>Feature</Label>
           <Description>This feature is coming soon</Description>
         </Checkbox.Content>
-      </Checkbox.Root>
+      </Checkbox>
     </div>
   ),
 };
@@ -163,14 +163,14 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-3 px-4">
-        <Checkbox.Root isSelected={isSelected} name="notifications" onChange={setIsSelected}>
+        <Checkbox isSelected={isSelected} name="notifications" onChange={setIsSelected}>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
             <Label>Email notifications</Label>
           </Checkbox.Content>
-        </Checkbox.Root>
+        </Checkbox>
         <p className="text-muted mt-2 text-sm">
           Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>
         </p>
@@ -181,7 +181,7 @@ export const Controlled: Story = {
 
 export const RenderProps: Story = {
   render: () => (
-    <Checkbox.Root name="terms">
+    <Checkbox name="terms">
       {({isSelected}) => (
         <>
           <Checkbox.Control>
@@ -195,13 +195,13 @@ export const RenderProps: Story = {
           </Checkbox.Content>
         </>
       )}
-    </Checkbox.Root>
+    </Checkbox>
   ),
 };
 
 export const Invalid: Story = {
   render: () => (
-    <Checkbox.Root isInvalid name="agreement">
+    <Checkbox isInvalid name="agreement">
       <Checkbox.Control>
         <Checkbox.Indicator />
       </Checkbox.Control>
@@ -209,7 +209,7 @@ export const Invalid: Story = {
         <Label>I agree to the terms</Label>
         <Description>You must accept the terms to continue</Description>
       </Checkbox.Content>
-    </Checkbox.Root>
+    </Checkbox>
   ),
 };
 
@@ -218,7 +218,7 @@ export const FullRounded: Story = {
     <div className="flex flex-col gap-6 px-4">
       <div className="flex flex-col gap-3">
         <Label className="text-muted">Rounded checkboxes</Label>
-        <Checkbox.Root
+        <Checkbox
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-2"
           name="small-rounded"
         >
@@ -228,30 +228,30 @@ export const FullRounded: Story = {
           <Checkbox.Content>
             <Label>Small size</Label>
           </Checkbox.Content>
-        </Checkbox.Root>
+        </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
-        <Checkbox.Root name="default-rounded">
+        <Checkbox name="default-rounded">
           <Checkbox.Control className="size-4 rounded-full before:rounded-full">
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
             <Label>Default size</Label>
           </Checkbox.Content>
-        </Checkbox.Root>
+        </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
-        <Checkbox.Root name="large-rounded">
+        <Checkbox name="large-rounded">
           <Checkbox.Control className="size-5 rounded-full before:rounded-full">
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
             <Label>Large size</Label>
           </Checkbox.Content>
-        </Checkbox.Root>
+        </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
-        <Checkbox.Root
+        <Checkbox
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-4"
           name="xl-rounded"
         >
@@ -261,7 +261,7 @@ export const FullRounded: Story = {
           <Checkbox.Content>
             <Label>Extra large size</Label>
           </Checkbox.Content>
-        </Checkbox.Root>
+        </Checkbox>
       </div>
     </div>
   ),
@@ -298,7 +298,7 @@ export const FeaturesAndAddOnsExample: Story = {
             <Description>Choose how you want to receive updates</Description>
             <div className="flex flex-col gap-2">
               {addOns.map((addon) => (
-                <Checkbox.Root
+                <Checkbox
                   key={addon.value}
                   value={addon.value}
                   className={clsx(
@@ -316,7 +316,7 @@ export const FeaturesAndAddOnsExample: Story = {
                       <Description>{addon.description}</Description>
                     </div>
                   </Checkbox.Content>
-                </Checkbox.Root>
+                </Checkbox>
               ))}
             </div>
           </CheckboxGroup>

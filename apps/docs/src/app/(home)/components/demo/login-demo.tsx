@@ -6,13 +6,13 @@ import {GoogleIcon} from "@/icons/google";
 
 export function LoginDemo() {
   return (
-    <Card.Root className="w-[320px] items-start justify-center p-5">
+    <Card className="w-[320px] items-start justify-center p-5">
       <Card.Header className="flex w-full items-center justify-center gap-2">
-        <Avatar.Root>
+        <Avatar>
           <Avatar.Fallback>
             <Iconify icon="gravity-ui:person" />
           </Avatar.Fallback>
-        </Avatar.Root>
+        </Avatar>
         <Card.Title>Create an account</Card.Title>
         <CloseButton className="absolute right-3 top-3" />
       </Card.Header>
@@ -35,6 +35,6 @@ export function LoginDemo() {
           Continue with Apple
         </Button>
       </Card.Content>
-    </Card.Root>
+    </Card>
   );
 }

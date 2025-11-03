@@ -4,16 +4,16 @@ import {VerifiedBadgeIcon} from "@/icons/verified-badge";
 
 export function XProfileDemo() {
   return (
-    <Card.Root className="w-[400px] items-start justify-center">
+    <Card className="w-[400px] items-start justify-center">
       <Card.Header className="items-top w-full flex-row justify-between">
         <div className="flex items-center gap-3">
-          <Avatar.Root size="sm">
+          <Avatar size="sm">
             <Avatar.Image
               alt="HeroUI"
               src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
             />
             <Avatar.Fallback>H</Avatar.Fallback>
-          </Avatar.Root>
+          </Avatar>
           <div className="flex h-full flex-col items-start justify-center">
             <div className="flex items-center gap-0.5">
               <span className="text-sm font-semibold leading-4">HeroUI</span>
@@ -43,6 +43,6 @@ export function XProfileDemo() {
           <p className="text-muted text-sm">Followers</p>
         </div>
       </Card.Footer>
-    </Card.Root>
+    </Card>
   );
 }

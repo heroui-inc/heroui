@@ -19,12 +19,12 @@ export default {
       },
     },
   },
-  component: Accordion.Root,
+  component: Accordion,
   parameters: {
     layout: "centered",
   },
   title: "Components/Navigation/Accordion",
-} as Meta<typeof Accordion.Root>;
+} as Meta<typeof Accordion>;
 
 const defaultArgs: Accordion["RootProps"] = {
   allowsMultipleExpanded: false,
@@ -37,7 +37,7 @@ const Wrapper = ({children, className}: {children: React.ReactNode; className?: 
 
 const Template = (props: Accordion["RootProps"]) => (
   <Wrapper>
-    <Accordion.Root {...props}>
+    <Accordion {...props}>
       {items.map((item, index) => (
         <Accordion.Item key={index}>
           <Accordion.Heading>
@@ -56,7 +56,7 @@ const Template = (props: Accordion["RootProps"]) => (
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion.Root>
+    </Accordion>
   </Wrapper>
 );
 
@@ -74,7 +74,7 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
           <div key={category.title}>
             <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
             <div key={category.title}>
-              <Accordion.Root {...props} className="w-full" variant="surface">
+              <Accordion {...props} className="w-full" variant="surface">
                 {category.items.map((item, index) => (
                   <Accordion.Item key={index}>
                     <Accordion.Heading>
@@ -90,7 +90,7 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
                     </Accordion.Panel>
                   </Accordion.Item>
                 ))}
-              </Accordion.Root>
+              </Accordion>
             </div>
           </div>
         ))}

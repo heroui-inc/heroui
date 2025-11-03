@@ -22,24 +22,24 @@ type Story = StoryObj<typeof SwitchGroup>;
 export const Default: Story = {
   render: () => (
     <SwitchGroup>
-      <Switch.Root name="notifications">
+      <Switch name="notifications">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Allow Notifications</Label>
-      </Switch.Root>
-      <Switch.Root name="marketing">
+      </Switch>
+      <Switch name="marketing">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Marketing emails</Label>
-      </Switch.Root>
-      <Switch.Root name="social">
+      </Switch>
+      <Switch name="social">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Social media updates</Label>
-      </Switch.Root>
+      </Switch>
     </SwitchGroup>
   ),
 };
@@ -47,24 +47,24 @@ export const Default: Story = {
 export const Horizontal: Story = {
   render: () => (
     <SwitchGroup className="overflow-x-auto" orientation="horizontal">
-      <Switch.Root name="notifications">
+      <Switch name="notifications">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Notifications</Label>
-      </Switch.Root>
-      <Switch.Root name="marketing">
+      </Switch>
+      <Switch name="marketing">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Marketing</Label>
-      </Switch.Root>
-      <Switch.Root name="social">
+      </Switch>
+      <Switch name="social">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
         <Label className="text-sm">Social</Label>
-      </Switch.Root>
+      </Switch>
     </SwitchGroup>
   ),
 };
@@ -85,24 +85,24 @@ export const Form: Story = {
     return (
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <SwitchGroup>
-          <Switch.Root name="notifications" value="on">
+          <Switch name="notifications" value="on">
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
             <Label className="text-sm">Enable notifications</Label>
-          </Switch.Root>
-          <Switch.Root defaultSelected name="newsletter" value="on">
+          </Switch>
+          <Switch defaultSelected name="newsletter" value="on">
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
             <Label className="text-sm">Subscribe to newsletter</Label>
-          </Switch.Root>
-          <Switch.Root name="marketing" value="on">
+          </Switch>
+          <Switch name="marketing" value="on">
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
             <Label className="text-sm">Receive marketing updates</Label>
-          </Switch.Root>
+          </Switch>
         </SwitchGroup>
         <Button className="mt-4" size="sm" type="submit" variant="primary">
           Submit

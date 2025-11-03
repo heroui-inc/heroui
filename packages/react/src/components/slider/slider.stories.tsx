@@ -6,7 +6,7 @@ import {Label} from "../label";
 
 import {Slider} from "./index";
 
-const meta: Meta<typeof Slider.Root> = {
+const meta: Meta<typeof Slider> = {
   argTypes: {
     isDisabled: {
       control: {type: "boolean"},
@@ -16,7 +16,7 @@ const meta: Meta<typeof Slider.Root> = {
       options: ["horizontal", "vertical"],
     },
   },
-  component: Slider.Root,
+  component: Slider,
   decorators: [
     (Story) => (
       <div className="w-96 p-8">
@@ -32,7 +32,7 @@ const meta: Meta<typeof Slider.Root> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Slider.Root>;
+type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {
   render: (args) => {

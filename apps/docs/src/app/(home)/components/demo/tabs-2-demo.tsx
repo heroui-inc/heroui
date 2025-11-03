@@ -4,7 +4,7 @@ import {Iconify} from "@/components/iconify";
 
 export function TabsDemo2() {
   return (
-    <Tabs.Root className="w-[256px]">
+    <Tabs className="w-[256px]">
       <Tabs.ListContainer>
         <Tabs.List aria-label="Options">
           <Tabs.Tab className="gap-1.5" id="chats">
@@ -19,6 +19,6 @@ export function TabsDemo2() {
           </Tabs.Tab>
         </Tabs.List>
       </Tabs.ListContainer>
-    </Tabs.Root>
+    </Tabs>
   );
 }

@@ -2,7 +2,7 @@ import {Tabs} from "@heroui/react";
 
 export function TabsDemo1() {
   return (
-    <Tabs.Root className="w-[256px]">
+    <Tabs className="w-[256px]">
       <Tabs.ListContainer>
         <Tabs.List aria-label="Options">
           <Tabs.Tab id="1d">
@@ -27,6 +27,6 @@ export function TabsDemo1() {
           </Tabs.Tab>
         </Tabs.List>
       </Tabs.ListContainer>
-    </Tabs.Root>
+    </Tabs>
   );
 }
