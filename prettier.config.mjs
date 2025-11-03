@@ -9,6 +9,14 @@ const __dirname = path.dirname(__filename);
 /** @type {import("prettier").Config} */
 const config = {
   ...preset,
+  overrides: [
+    {
+      files: "./packages/styles/utilities/motions.css",
+      options: {
+        printWidth: 60,
+      },
+    },
+  ],
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindAttributes: ["className", "classNames"],
   tailwindFunctions: ["tv", "clsx", "cn"],

@@ -1,4 +1,5 @@
 /* === Reduced Motion Variant === */
+
 /* This variant activates when:
    1. Developer sets data-reduce-motion="true" on :root or any parent (manual control), OR
    2. User has prefers-reduced-motion: reduce (system preference)
@@ -14,7 +15,19 @@
    }
 */
 
-@custom-variant reduce-motion (
-  &:where([data-reduce-motion="true"] *),
-  @media (prefers-reduced-motion: reduce)
-);
+@custom-variant reduce-motion {
+  /* Apply to elements that have the attribute themselves */
+  &:is([data-reduce-motion="true"]) {
+    @slot;
+  }
+
+  /* Apply to all children of elements with the attribute */
+  &:where([data-reduce-motion="true"] *) {
+    @slot;
+  }
+
+  /* Apply when user has system preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    @slot;
+  }
+}

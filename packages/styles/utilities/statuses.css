@@ -1,0 +1,41 @@
+/* === Focus Ring === */
+@utility focus-ring {
+  @apply ring-focus ring-offset-background outline-none ring-2 ring-offset-0;
+  /* Overrides the ring offset from the theme variables */
+  --tw-ring-offset-width: var(--ring-offset-width);
+}
+
+@utility focus-field-ring {
+  @apply ring-focus outline-none ring-2 ring-offset-0;
+  /* No separation - ring sits directly against the element */
+  --tw-ring-offset-width: 0px;
+}
+
+@utility invalid-field-ring {
+  @apply ring-danger outline-none ring-1 ring-offset-0;
+  /* No separation - ring sits directly against the element */
+  --tw-ring-offset-width: 0px;
+}
+
+/* === Statuses === */
+@utility status-focused {
+  @apply focus-ring;
+}
+
+@utility status-focused-field {
+  @apply focus-field-ring;
+}
+
+@utility status-invalid-field {
+  @apply invalid-field-ring;
+}
+
+@utility status-disabled {
+  opacity: var(--disabled-opacity);
+  cursor: var(--cursor-disabled);
+  pointer-events: none;
+}
+
+@utility status-pending {
+  @apply pointer-events-none;
+}

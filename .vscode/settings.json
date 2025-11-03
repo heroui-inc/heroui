@@ -1,5 +1,6 @@
 {
   "npm.packageManager": "pnpm",
+  "css.lint.emptyRules": "ignore",
   "css.lint.unknownAtRules": "ignore",
   "scss.lint.unknownAtRules": "ignore",
   "typescript.tsdk": "node_modules/typescript/lib",
