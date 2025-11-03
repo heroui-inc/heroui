@@ -34,8 +34,6 @@ We follow a simple naming pattern:
 <div className="bg-accent text-accent-foreground">Hello</div>
 ```
 
-## Available Colors
-
 ### Base Colors
 
 These four colors stay the same in all themes:
@@ -101,8 +99,6 @@ For consistent form field styling across input components:
     { name: "Field Border", variable: "--field-border" },
   ]}
 />
-
-> **Note**: These variables default to existing colors but can be overridden for specialized form styling without affecting other components.
 
 ### Other Colors
 
@@ -311,10 +307,26 @@ The complete theme definition can be found in ([variables.css](https://github.co
 `}
 />
 
-> **Note**: Colors like `--color-neutral-*`, `--color-white`, and `--color-black` come from [Tailwind CSS v4's built-in theme](https://tailwindcss.com/docs/colors).
-
 
 ## Customizing Colors
+
+### Override Existing Colors
+
+```css
+:root {
+  /* Override default colors */
+  --accent: oklch(0.7 0.15 250);
+  --success: oklch(0.65 0.15 155);
+}
+
+[data-theme="dark"] {
+  /* Override dark theme colors */
+  --accent: oklch(0.8 0.12 250);
+  --success: oklch(0.75 0.12 155);
+}
+```
+
+**Tip**: Convert colors at [oklch.com](https://oklch.com)
 
 ### Add Your Own Colors
 
@@ -346,24 +358,6 @@ Now you can use it:
 
 > **Note**: To learn more about theme variables and how they work in Tailwind CSS v4, see the [Tailwind CSS Theme documentation](https://tailwindcss.com/docs/theme).
 
-
-### Override Existing Colors
-
-```css
-:root {
-  /* Override default colors */
-  --accent: oklch(0.7 0.15 250);
-  --success: oklch(0.65 0.15 155);
-}
-
-[data-theme="dark"] {
-  /* Override dark theme colors */
-  --accent: oklch(0.8 0.12 250);
-  --success: oklch(0.75 0.12 155);
-}
-```
-
-**Tip**: Convert colors at [oklch.com](https://oklch.com)
 
 ## Quick Tips
 
