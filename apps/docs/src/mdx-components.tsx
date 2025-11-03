@@ -1,7 +1,7 @@
 import type {MDXComponents} from "mdx/types";
 
 import Link from "fumadocs-core/link";
-import {Callout} from "fumadocs-ui/components/callout";
+import {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
@@ -74,6 +74,15 @@ function RelatedComponents(props: any) {
     <Suspense fallback={null}>
       <RelatedComponentsComponent {...props} />
     </Suspense>
+  );
+}
+
+function Callout({className, ...props}: React.ComponentProps<typeof FDCallout>) {
+  return (
+    <FDCallout
+      {...props}
+      className={cn("bg-surface shadow-surface text-surface-foreground", className)}
+    />
   );
 }
 

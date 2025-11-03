@@ -6,21 +6,21 @@ export function Sizes() {
       <Avatar size="sm">
         <Avatar.Image
           alt="Small Avatar"
-          src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
         />
         <Avatar.Fallback>SM</Avatar.Fallback>
       </Avatar>
       <Avatar size="md">
         <Avatar.Image
           alt="Medium Avatar"
-          src="https://img.heroui.chat/image/avatar?w=400&h=400&u=4"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg"
         />
         <Avatar.Fallback>MD</Avatar.Fallback>
       </Avatar>
       <Avatar size="lg">
         <Avatar.Image
           alt="Large Avatar"
-          src="https://img.heroui.chat/image/avatar?w=400&h=400&u=5"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
         />
         <Avatar.Fallback>LG</Avatar.Fallback>
       </Avatar>

@@ -13,11 +13,10 @@ import {DemoComponents} from "./components/demo";
 const VersionChip = () => {
   return (
     <LinkRoot
-      className="text-foreground/50 chip bg-surface shadow-surface rounded-full"
+      className="text-foreground/50 chip bg-surface shadow-surface rounded-full text-xs"
       href="/docs/changelog"
     >
       <Iconify icon="sparkles" />
-      {/* <span className="bg-gradient-to-r from-[#CA8501] to-[#BD3232] bg-clip-text text-transparent"> */}
       <span>v{currentVersion}: RSC Support</span>
     </LinkRoot>
   );
@@ -33,7 +32,7 @@ export default function HomePage() {
           <h1 className="text-foreground mt-2 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
             Beautiful by default. Customizable by design.
           </h1>
-          <p className="text-muted text-balance text-lg">
+          <p className="text-muted text-balance md:text-lg">
             HeroUI is the modern UI library built to help you move fast, stay consistent, and
             deliver delightful user experiences.
           </p>

@@ -127,7 +127,7 @@
 
 /* Sub Navigation */
 #nd-subnav {
-  @apply h-14;
+  @apply bg-background h-14;
 
   backdrop-filter: none;
 
@@ -141,12 +141,6 @@
     kbd {
       @apply bg-default dark:bg-surface border-border;
     }
-  }
-
-  @media (max-width: 48rem) {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(16px) saturate(120%);
-    border: none !important;
   }
 }
 

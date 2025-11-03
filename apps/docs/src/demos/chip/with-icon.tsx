@@ -3,7 +3,7 @@ import {Icon} from "@iconify/react";
 
 export function ChipWithIcon() {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <Chip>
         <Icon icon="gravity-ui:circle-fill" width={6} />
         Information

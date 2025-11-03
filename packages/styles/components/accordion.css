@@ -8,6 +8,7 @@
 
 /* Accordion elements */
 .accordion__body {
+  @apply text-sm;
 }
 
 .accordion__body-inner {
@@ -46,10 +47,9 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply reduce-motion:transition-none flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
+  @apply reduce-motion:transition-none flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
 
   transition:
-    background-color 150ms var(--ease-out),
     opacity 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 
