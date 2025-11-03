@@ -172,17 +172,23 @@ Use render props to apply dynamic animations based on component state:
 
 ### Respecting Motion Preferences
 
-Always respect user motion preferences:
+HeroUI components automatically respect user motion preferences using the `reduce-motion:` utility. All built-in transitions and animations are disabled when users enable "reduce motion" in their system settings.
 
 ```css
+/* HeroUI automatically handles this pattern */
+.button {
+  @apply transition reduce-motion:motion-none;
+}
+
+/* Expands to: */
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
   }
+}
 
-  .animate-* {
-    animation: none !important;
-  }
+[data-reduce-motion="true"] .button {
+  transition: none;
 }
 ```
 
@@ -203,6 +209,33 @@ function AnimatedCard() {
       <Card>Content</Card>
     </motion.div>
   );
+}
+```
+
+### Disabling Animations Globally
+
+Disable all animations by adding `data-reduce-motion="true"` to the `<html>` or `<body>` tag:
+
+```html
+<!DOCTYPE html>
+<html data-reduce-motion="true">
+  <!-- All HeroUI animations will be disabled -->
+</html>
+```
+
+HeroUI automatically detects the user's `prefers-reduced-motion: reduce` setting and disables animations accordingly.
+
+**Important**: HeroUI uses the `reduce-motion:` prefix (not Tailwind's default `motion-reduce:`). This is because HeroUI checks for the `[data-reduce-motion="true"]` attribute in addition to the media query.
+
+```css
+/* HeroUI pattern - works with both data attribute and media query */
+.button {
+  @apply transition reduce-motion:motion-none;
+}
+
+/* Not used in HeroUI */
+.button {
+  @apply transition motion-reduce:transition-none;
 }
 ```
 
@@ -227,6 +260,8 @@ Prefer `transform` and `opacity` for smooth animations:
 ```
 
 ### Will-Change Optimization
+
+Use `will-change` to optimize animations, but remove it when not animating:
 
 ```css
 .button {
