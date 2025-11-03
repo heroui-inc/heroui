@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import {useIntersectionObserver} from "usehooks-ts";
 
 import {cn} from "@/utils/cn";
 
@@ -21,6 +24,16 @@ export function ComponentPreviewContainer({
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
+  const {isIntersecting: previewInView, ref: previewRef} = useIntersectionObserver({
+    initialIsIntersecting: true,
+    rootMargin: "2000px 0px 100px 0px",
+    threshold: 0.1,
+  });
+  const {isIntersecting: codeInView, ref: codeRef} = useIntersectionObserver({
+    initialIsIntersecting: true,
+    rootMargin: "2000px 0px 100px 0px",
+    threshold: 0.1,
+  });
 
   const alignmentClasses = {
     center: "items-center justify-center",
@@ -38,6 +51,7 @@ export function ComponentPreviewContainer({
 
       {/* Preview Section */}
       <div
+        ref={previewRef}
         data-name={name}
         className={cn(
           "preview not-prose border-divider relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-l border-r border-t p-4 sm:p-10",
@@ -50,13 +64,16 @@ export function ComponentPreviewContainer({
           isolation: "isolate",
         }}
       >
-        {Component}
+        {previewInView ? Component : null}
       </div>
 
       {/* Code Section */}
       {!hideCode && !!Code && (
-        <div className="code-section border-divider relative rounded-b-xl border bg-transparent">
-          <div className="code-block-wrapper min-h-[124px]">{Code}</div>
+        <div
+          ref={codeRef}
+          className="code-section border-divider relative rounded-b-xl border bg-transparent"
+        >
+          <div className="code-block-wrapper min-h-[124px]">{codeInView ? Code : null}</div>
         </div>
       )}
     </div>

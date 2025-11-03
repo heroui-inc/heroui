@@ -7,6 +7,8 @@ import {Icon as OfflineIcon} from "@iconify/react/dist/offline";
 import gravityIcons from "@iconify-json/gravity-ui/icons.json";
 import {forwardRef} from "react";
 
+import {useIsMounted} from "@/hooks/use-is-mounted";
+
 export type IconifyProps = IconProps & {
   icon?: IconProps["icon"] | string;
 };
@@ -34,13 +36,15 @@ const icons = {
   ...customIcons,
 };
 
-// TODO: Hydration error
 const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...props}, ref) => {
+  const isMounted = useIsMounted();
+
   // Check if it's a gravity-ui icon (no prefix or explicitly in gravity icons)
   const isGravityIcon =
     typeof iconProp === "string" && (iconProp in icons || iconProp.startsWith("gravity-ui:"));
 
-  if (isGravityIcon && typeof iconProp === "string") {
+  // Only use offline icon after hydration to avoid mismatch
+  if (isMounted && isGravityIcon && typeof iconProp === "string") {
     // Use offline version with gravity-ui icons
     // Remove "gravity-ui:" prefix if present
     const iconName = iconProp.replace(/^gravity-ui:/, "");
@@ -52,6 +56,7 @@ const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...pro
   }
 
   // Use online version for other icon sets (like simple-icons:vite, lineicons:nextjs)
+  // Also use during SSR to ensure consistent rendering
   return <Icon {...props} ref={ref} icon={iconProp} />;
 });
 
