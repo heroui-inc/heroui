@@ -68,16 +68,16 @@ import { Alert } from '@heroui/react';
 Use the `.Root` suffix if you prefer explicit naming:
 
 ```tsx
-import { Alert, AlertIcon, AlertClose } from '@heroui/react';
+import { Alert } from '@heroui/react';
 
-<Alert>
-  <AlertIcon />
+<Alert.Root>
+  <Alert.Icon />
   <Alert.Content>
     <Alert.Title>Success</Alert.Title>
     <Alert.Description>Your changes have been saved.</Alert.Description>
   </Alert.Content>
-  <AlertClose />
-</Alert>
+  <Alert.Close />
+</Alert.Root>
 ```
 
 ### Option 3: Named Exports
