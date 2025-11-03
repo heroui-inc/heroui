@@ -33,12 +33,18 @@
 
   .slider__thumb {
     /* Flex container for centering pseudo-elements */
-    @apply bg-accent absolute relative flex cursor-grab items-center justify-center rounded-full;
+    @apply bg-accent absolute flex cursor-grab items-center justify-center rounded-full;
+
+    @apply reduce-motion:motion-none;
 
     /* after: Visible thumb element */
     &::after {
-      @apply reduce-motion:transition-none shadow-field relative z-10 origin-center rounded-full bg-white text-black transition-all;
       content: "";
+
+      @apply shadow-field relative z-10 origin-center rounded-full bg-white text-black;
+
+      /* Transition */
+      @apply reduce-motion:motion-none transition-all;
     }
 
     /* Dragging state - cursor changes and thumb scales down */

@@ -39,15 +39,15 @@
 
   /* Arrow rotation based on placement */
   &[data-placement="bottom"] [data-slot="popover-overlay-arrow"] {
-    rotate: 180deg;
+    @apply rotate-180;
   }
 
   &[data-placement="left"] [data-slot="popover-overlay-arrow"] {
-    rotate: -90deg;
+    @apply -rotate-90;
   }
 
   &[data-placement="right"] [data-slot="popover-overlay-arrow"] {
-    rotate: 90deg;
+    @apply rotate-90;
   }
 }
 
@@ -68,12 +68,8 @@
 
 /* Popover trigger */
 .popover__trigger {
-  @apply reduce-motion:transition-none;
-
-  transition:
-    color 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+  /* Transition */
+  @apply motion-popover__content reduce-motion:motion-none;
 
   cursor: var(--cursor-interactive);
 

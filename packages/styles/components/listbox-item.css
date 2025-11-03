@@ -3,12 +3,10 @@
    ========================================================================== */
 
 .listbox-item {
-  @apply reduce-motion:transition-none relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
+  @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
 
-  transition:
-    transform 250ms var(--ease-out-quart),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+  /* Transition */
+  @apply motion-listbox-item reduce-motion:motion-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -65,11 +63,17 @@
    ========================================================================== */
 
 .listbox-item__indicator {
-  @apply text-default-foreground duration-250 absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center transition;
+  @apply text-default-foreground absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
+
+  /* Transition */
+  @apply duration-250 reduce-motion:motion-none transition;
 
   /* Checkmark SVG indicator */
   [data-slot="listbox-item-indicator--checkmark"] {
-    @apply reduce-motion:transition-none size-2.5 transition-all duration-300;
+    @apply size-2.5;
+
+    /* Transition */
+    @apply reduce-motion:motion-none transition-all duration-300;
   }
 
   .listbox-item[aria-selected="true"] [data-slot="listbox-item-indicator--checkmark"],

@@ -13,7 +13,7 @@ const config = {
     {
       files: "./packages/styles/utilities/motions.css",
       options: {
-        printWidth: 60,
+        printWidth: 50,
       },
     },
   ],

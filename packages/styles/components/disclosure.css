@@ -24,7 +24,10 @@
 }
 
 .disclosure__indicator {
-  @apply reduce-motion:transition-none duration-250 ml-auto size-4 shrink-0 text-inherit transition;
+  @apply ml-auto size-4 shrink-0 text-inherit;
+
+  /* Transition */
+  @apply duration-250 reduce-motion:motion-none transition;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {
@@ -35,9 +38,10 @@
 .disclosure__content {
   opacity: 0;
   will-change: height, opacity;
-  transition:
-    height 420ms var(--ease-fluid-out),
-    opacity 340ms var(--ease-out);
+
+  /* Transition */
+  @apply motion-disclosure__panel reduce-motion:motion-none;
+
   height: var(--disclosure-panel-height);
   overflow: clip;
 

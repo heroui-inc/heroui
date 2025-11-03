@@ -5,7 +5,10 @@
 
 /* Avatar image element */
 .avatar__image {
-  @apply reduce-motion:transition-none duration-250 absolute inset-0 aspect-square opacity-0 transition-[opacity] data-[loaded=true]:opacity-100;
+  @apply absolute inset-0 aspect-square opacity-0 data-[loaded=true]:opacity-100;
+
+  /* Transition */
+  @apply motion-avatar__image reduce-motion:motion-none;
 
   &[data-loading-status="failed"] {
     @apply hidden;

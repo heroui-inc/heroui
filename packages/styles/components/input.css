@@ -1,10 +1,9 @@
 .input {
-  @apply reduce-motion:transition-none bg-field text-field-foreground shadow-field placeholder:text-field-placeholder rounded-field border px-3 py-2 text-sm outline-none;
+  @apply bg-field text-field-foreground shadow-field placeholder:text-field-placeholder rounded-field border px-3 py-2 text-sm outline-none;
 
-  transition:
-    background-color 150ms var(--ease-smooth),
-    border-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+  /* Transition */
+  @apply motion-input reduce-motion:motion-none;
+
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 

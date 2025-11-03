@@ -20,7 +20,10 @@
 }
 
 .accordion__indicator {
-  @apply reduce-motion:transition-none text-muted duration-250 ml-auto size-4 shrink-0 transition;
+  @apply text-muted ml-auto size-4 shrink-0;
+
+  /* Transition */
+  @apply duration-250 reduce-motion:motion-none transition;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {
@@ -47,11 +50,10 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply reduce-motion:transition-none flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
 
-  transition:
-    opacity 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+  /* Transition */
+  @apply motion-accordion__trigger reduce-motion:motion-none;
 
   /* Hover state */
   &:hover:not([aria-expanded="true"]),
@@ -77,9 +79,10 @@
 .accordion__panel {
   opacity: 0;
   will-change: height, opacity;
-  transition:
-    height 420ms var(--ease-fluid-out),
-    opacity 340ms var(--ease-out);
+
+  /* Transition */
+  @apply motion-accordion__panel reduce-motion:motion-none;
+
   height: var(--disclosure-panel-height);
   overflow: clip;
 
