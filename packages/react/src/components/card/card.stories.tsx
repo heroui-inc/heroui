@@ -5,7 +5,11 @@ import React from "react";
 
 import {Avatar} from "../avatar";
 import {Button} from "../button";
+import {Form} from "../form";
+import {Input} from "../input";
+import {Label} from "../label";
 import {Link} from "../link";
+import {TextField} from "../text-field";
 
 import {Card} from "./index";
 
@@ -13,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: {type: "select"},
-      options: ["flat", "outlined", "elevated", "filled"],
+      options: ["transparent", "default", "secondary", "tertiary"],
     },
   },
   component: Card,
@@ -60,43 +64,53 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Card className="w-[320px]" variant="flat">
+      <Card className="w-[320px]" variant="transparent">
         <Card.Header>
-          <Card.Title>Variant Flat</Card.Title>
-          <Card.Description>Transparent background with no border</Card.Description>
+          <Card.Title>Transparent</Card.Title>
+          <Card.Description>Minimal prominence with transparent background</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with no variant styling</p>
+          <p>Use for less important content or nested cards</p>
         </Card.Content>
       </Card>
 
-      <Card className="w-[320px]" variant="outlined">
+      <Card className="w-[320px]" variant="default">
         <Card.Header>
-          <Card.Title>Variant Outlined</Card.Title>
-          <Card.Description>This card uses outlined variant (default)</Card.Description>
+          <Card.Title>Default</Card.Title>
+          <Card.Description>Standard card appearance (bg-surface)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with subtle elevation</p>
+          <p>The default card variant for most use cases</p>
         </Card.Content>
       </Card>
 
-      <Card className="w-[320px]" variant="elevated">
+      <Card className="w-[320px]" variant="secondary">
         <Card.Header>
-          <Card.Title>Variant Elevated</Card.Title>
-          <Card.Description>This card uses elevated variant</Card.Description>
+          <Card.Title>Secondary</Card.Title>
+          <Card.Description>Medium prominence (bg-surface-secondary)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with medium elevation</p>
+          <p>Use to draw moderate attention</p>
         </Card.Content>
       </Card>
 
-      <Card className="w-[320px]" variant="filled">
+      <Card className="w-[320px]" variant="tertiary">
         <Card.Header>
-          <Card.Title>Variant Filled</Card.Title>
-          <Card.Description>This card uses filled variant</Card.Description>
+          <Card.Title>Tertiary</Card.Title>
+          <Card.Description>Higher prominence (bg-surface-tertiary)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with higher elevation</p>
+          <p>Use for primary or featured content</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[320px]" variant="quaternary">
+        <Card.Header>
+          <Card.Title>Quaternary</Card.Title>
+          <Card.Description>Highest prominence (bg-surface-quaternary)</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Use for primary or featured content</p>
         </Card.Content>
       </Card>
     </div>
@@ -108,7 +122,7 @@ export const Horizontal: Story = {
     <Card className="w-full items-stretch md:flex-row" {...args}>
       <img
         alt="Porsche 911 Golden Edition"
-        className="rounded-panel pointer-events-none aspect-square w-full select-none object-cover md:max-w-[136px]"
+        className="pointer-events-none aspect-square w-full select-none rounded-3xl object-cover md:max-w-[136px]"
         loading="lazy"
         src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
       />
@@ -145,7 +159,7 @@ export const WithAvatar: Story = {
       <Card className="w-[200px] gap-2" {...args}>
         <img
           alt="Indie Hackers community"
-          className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/device.png"
         />
@@ -168,7 +182,7 @@ export const WithAvatar: Story = {
       <Card className="w-[200px] gap-2" {...args}>
         <img
           alt="AI Builders community"
-          className="rounded-panel pointer-events-none aspect-square w-14 select-none object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/ai-bot.png"
         />
@@ -230,7 +244,7 @@ export const WithImage: Story = {
 export const WithBackgroundImage: Story = {
   render: (args) => (
     <div className="flex flex-row items-center justify-center gap-6">
-      <Card className="rounded-panel h-[337px] w-[280px]" {...args}>
+      <Card className="h-[337px] w-[280px] rounded-3xl" {...args}>
         {/* Background image */}
         <img
           alt="Happy pet"
@@ -293,7 +307,7 @@ export const WithBackgroundImage: Story = {
         </Card.Footer>
       </Card>
 
-      <Card className="rounded-panel h-[336px] w-[390px]" {...args}>
+      <Card className="h-[336px] w-[390px] rounded-3xl" {...args}>
         {/* Background image */}
         <img
           alt="Beautiful aerial view of Buenos Aires cityscape"
@@ -335,44 +349,49 @@ export const WithBackgroundImage: Story = {
 };
 
 export const WithForm: Story = {
-  render: (args) => (
-    <Card className="w-full max-w-md" {...args}>
-      <Card.Header>
-        <Card.Title>Login</Card.Title>
-        <Card.Description>Enter your credentials to access your account</Card.Description>
-      </Card.Header>
-      <Card.Content>
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="border-border bg-background focus:ring-focus rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2"
-              id="email"
-              placeholder="email@example.com"
-              type="email"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="border-border bg-background focus:ring-focus rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2"
-              id="password"
-              placeholder="••••••••"
-              type="password"
-            />
-          </div>
-        </form>
-      </Card.Content>
-      <Card.Footer className="flex flex-col gap-2">
-        <Button className="w-full">Sign In</Button>
-        <Link className="text-center text-sm" href="#">
-          Forgot password?
-        </Link>
-      </Card.Footer>
-    </Card>
-  ),
+  render: (args) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const data: Record<string, string> = {};
+
+      // Convert FormData to plain object
+      formData.forEach((value, key) => {
+        data[key] = value.toString();
+      });
+
+      alert("Form submitted successfully!");
+    };
+
+    return (
+      <Card className="w-full max-w-md" {...args}>
+        <Card.Header>
+          <Card.Title>Login</Card.Title>
+          <Card.Description>Enter your credentials to access your account</Card.Description>
+        </Card.Header>
+        <Form onSubmit={onSubmit}>
+          <Card.Content>
+            <div className="flex flex-col gap-4">
+              <TextField name="email" type="email">
+                <Label>Email</Label>
+                <Input placeholder="email@example.com" />
+              </TextField>
+              <TextField name="password" type="password">
+                <Label>Password</Label>
+                <Input placeholder="••••••••" />
+              </TextField>
+            </div>
+          </Card.Content>
+          <Card.Footer className="mt-4 flex flex-col gap-2">
+            <Button className="w-full" type="submit">
+              Sign In
+            </Button>
+            <Link className="text-center text-sm" href="#">
+              Forgot password?
+            </Link>
+          </Card.Footer>
+        </Form>
+      </Card>
+    );
+  },
 };

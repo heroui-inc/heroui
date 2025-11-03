@@ -5,11 +5,11 @@ import {tv} from "tailwind-variants";
 export const chipVariants = tv({
   base: "chip",
   defaultVariants: {
-    type: "default",
+    color: "default",
     variant: "secondary",
   },
   variants: {
-    type: {
+    color: {
       accent: "chip--accent",
       danger: "chip--danger",
       default: "chip--default",
@@ -20,6 +20,12 @@ export const chipVariants = tv({
       primary: "chip--primary",
       secondary: "chip--secondary",
       tertiary: "chip--tertiary",
+      soft: "chip--soft",
+    },
+    size: {
+      sm: "chip--sm",
+      md: "chip--md",
+      lg: "chip--lg",
     },
   },
 });

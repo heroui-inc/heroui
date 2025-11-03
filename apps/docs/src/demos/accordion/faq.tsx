@@ -1,5 +1,3 @@
-"use client";
-
 import {Accordion} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
@@ -58,7 +56,7 @@ export function FAQ() {
       {categories.map((category) => (
         <div key={category.title}>
           <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-          <Accordion className="w-full" variant="outline">
+          <Accordion className="w-full" variant="surface">
             {category.items.map((item, index) => (
               <Accordion.Item key={index}>
                 <Accordion.Heading>

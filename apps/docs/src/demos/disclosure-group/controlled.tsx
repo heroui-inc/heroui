@@ -23,7 +23,7 @@ export function Controlled() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="rounded-panel flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 rounded-3xl p-4">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-lg font-semibold">HeroUI Native</h3>
           <div className="flex gap-2">
@@ -72,7 +72,7 @@ export function Controlled() {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -107,7 +107,7 @@ export function Controlled() {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">

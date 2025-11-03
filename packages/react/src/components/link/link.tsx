@@ -25,10 +25,43 @@ const LinkContext = createContext<LinkContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Link Root
  * --------------------------------------------------------------------------------------------- */
-interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {}
+interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {
+  asChild?: boolean;
+}
 
-const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
-  const slots = React.useMemo(() => linkVariants({}), []);
+const LinkRoot = ({
+  asChild,
+  children,
+  className,
+  slot,
+  style,
+  underline,
+  underlineOffset,
+  ...props
+}: LinkRootProps) => {
+  const slots = React.useMemo(
+    () => linkVariants({underline, underlineOffset}),
+    [underline, underlineOffset],
+  );
+
+  const styles = slots?.base({
+    className: typeof className === "string" ? className : undefined,
+  });
+
+  if (asChild) {
+    return (
+      <LinkContext value={{slots}}>
+        <SlotPrimitive
+          className={styles}
+          slot={slot as string}
+          style={style as React.CSSProperties}
+          {...(props as any)}
+        >
+          {typeof children === "function" ? children({} as any) : children}
+        </SlotPrimitive>
+      </LinkContext>
+    );
+  }
 
   return (
     <LinkContext value={{slots}}>

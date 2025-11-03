@@ -70,6 +70,7 @@
   "devDependencies": {
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
+    "@react-stately/data": "3.14.1",
     "@storybook/react": "8.6.12",
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.1.15",

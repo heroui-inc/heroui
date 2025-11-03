@@ -1,4 +1,8 @@
 /* Field error styles */
 .field-error {
-  @apply text-danger truncate px-1 text-xs opacity-0 data-[visible=true]:opacity-100;
+  @apply reduce-motion:transition-none text-danger h-0 truncate px-1 text-xs opacity-0 data-[visible=true]:h-auto data-[visible=true]:opacity-100;
+
+  transition:
+    opacity 150ms var(--ease-out),
+    height 350ms var(--ease-smooth);
 }

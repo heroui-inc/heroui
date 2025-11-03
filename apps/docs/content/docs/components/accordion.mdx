@@ -1,7 +1,6 @@
 ---
 title: Accordion
 description: A collapsible content panel for organizing information in a compact space
-icon: updated
 links:
   rac: Disclosure
   source: accordion/accordion.tsx
@@ -120,7 +119,7 @@ const items = [
 
 export function CustomStyles() {
   return (
-    <Accordion className="bg-surface-1 w-full max-w-md rounded-2xl" variant="outline">
+    <Accordion className="bg-surface-secondary w-full max-w-md rounded-2xl" variant="surface">
       {items.map((item, index) => (
         <Accordion.Item
           key={index}
@@ -131,7 +130,7 @@ export function CustomStyles() {
           )}
         >
           <Accordion.Heading>
-            <Accordion.Trigger className="hover:bg-surface-2 group flex items-center gap-2">
+            <Accordion.Trigger className="hover:bg-surface-tertiary group flex items-center gap-2">
               {item.iconUrl ? (
                 <img
                   alt={item.title}
@@ -220,7 +219,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `expandedKeys` | `Iterable<Key>` | - | The controlled expanded keys |
 | `onExpandedChange` | `(keys: Set<Key>) => void` | - | Handler called when expanded keys change |
 | `isDisabled` | `boolean` | `false` | Whether the entire accordion is disabled |
-| `variant` | `"default" \| "outline"` | `"default"` | The visual variant of the accordion |
+| `variant` | `"default" \| "surface"` | `"default"` | The visual variant of the accordion |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The accordion items |
 

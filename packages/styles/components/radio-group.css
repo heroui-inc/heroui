@@ -13,3 +13,27 @@
     @apply flex-row flex-wrap gap-4;
   }
 }
+
+/* Variant modifiers */
+.radio-group--on-surface .radio__control {
+  @apply bg-on-surface shadow-none;
+
+  /* Hover state */
+  .radio:hover &,
+  .radio[data-hovered="true"] & {
+    @apply border-field-border-hover;
+  }
+
+  /* Default indicator color */
+  .radio:not([aria-checked="true"]):not([data-selected="true"]) & .radio__indicator:empty::before {
+    @apply bg-on-surface;
+  }
+
+  /* Hover indicator color */
+  .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
+  .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
+    .radio__indicator:empty::before {
+      @apply bg-on-surface-hover;
+    }
+  }
+}

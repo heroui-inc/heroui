@@ -1,5 +1,3 @@
-"use client";
-
 import {Accordion} from "@heroui/react";
 
 export function Disabled() {

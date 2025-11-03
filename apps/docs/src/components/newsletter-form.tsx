@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Spinner} from "@heroui/react";
+import {Button, FieldError, Form, Input, Label, Spinner, TextField} from "@heroui/react";
 import {AnimatePresence, LazyMotion, domAnimation} from "motion/react";
 import * as m from "motion/react-m";
 import React from "react";
@@ -8,7 +8,7 @@ import React from "react";
 export function NewsletterForm() {
   const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = React.useState("Something went wrong. Please try again.");
+  const [apiErrorMessage, setApiErrorMessage] = React.useState<string | null>(null);
 
   const circleCheckIcon = (
     <svg fill="none" height="16" viewBox="0 0 17 16" width="17" xmlns="http://www.w3.org/2000/svg">
@@ -40,20 +40,21 @@ export function NewsletterForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus("error");
-      setErrorMessage("Please enter a valid email.");
+    const formData = new FormData(e.currentTarget);
+    const emailValue = formData.get("email") as string;
 
+    if (!emailValue) {
       return;
     }
 
     setStatus("loading");
+    setApiErrorMessage(null);
 
     try {
       // Loops - newsletter
       const newsletterResponse = await fetch("/api/newsletter", {
         body: JSON.stringify({
-          email,
+          email: emailValue,
           source: "Subscribe from HeroUI Docs",
         }),
         headers: {
@@ -71,7 +72,7 @@ export function NewsletterForm() {
       // Featurebase - changelog
       const changelogResponse = await fetch("/api/changelog", {
         body: JSON.stringify({
-          email,
+          email: emailValue,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +91,7 @@ export function NewsletterForm() {
       setTimeout(() => setStatus("idle"), 3000);
     } catch (error) {
       setStatus("error");
-      setErrorMessage(
+      setApiErrorMessage(
         error instanceof Error ? error.message : "Something went wrong. Please try again.",
       );
       setTimeout(() => setStatus("idle"), 3000);
@@ -100,36 +101,38 @@ export function NewsletterForm() {
   return (
     <div className="relative w-full py-3">
       <div className="relative h-[172px] w-full">
-        <form noValidate className="flex flex-col gap-2" onSubmit={handleSubmit}>
-          <div className="flex w-full flex-col gap-1">
-            <label
-              className={`pb-1 text-sm font-medium tracking-[-0.07px] ${status === "error" ? "text-[#e44c3d] dark:text-[#eb5545]" : "text-muted"}`}
-              htmlFor="newsletter-email"
-            >
+        <Form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+          <TextField
+            isRequired
+            className="flex w-full flex-col gap-1"
+            isDisabled={status === "loading"}
+            name="email"
+            type="email"
+            value={email}
+            validate={(value) => {
+              if (!value) {
+                return "Email is required";
+              }
+
+              if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                return "Please enter a valid email.";
+              }
+
+              return null;
+            }}
+            onChange={setEmail}
+          >
+            <Label className="pb-1 text-sm font-medium tracking-[-0.07px] after:hidden">
               Hero Newsletter
-            </label>
-            <div className="relative w-full">
-              <input
-                required
-                disabled={status === "loading"}
-                id="newsletter-email"
-                placeholder="name@email.com"
-                type="email"
-                value={email}
-                className={`text-foreground placeholder:text-foreground-muted/80 min-h-8 w-full rounded-xl border px-3 py-2 text-[14px] tracking-[-0.28px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_inset_rgba(255,255,255,0.1)] transition-all duration-150 ease-out focus:outline-none ${
-                  status === "error"
-                    ? "border-danger bg-white/0 dark:bg-black/0"
-                    : "border-black/[0.04] bg-black/[0.07] hover:bg-black/[0.1] dark:bg-white/[0.14] dark:hover:bg-white/[0.18]"
-                }`}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {status === "error" && (
-                <p className="text-danger mt-1 px-1 text-xs">{errorMessage}</p>
-              )}
-            </div>
-          </div>
+            </Label>
+            <Input placeholder="name@email.com" value={email} />
+            <FieldError className="mt-1 px-1 text-xs" />
+            {apiErrorMessage && status === "error" ? (
+              <p className="text-danger mt-1 px-1 text-xs">{apiErrorMessage}</p>
+            ) : null}
+          </TextField>
           <Button
-            className="overflow-clip border-black/[0.1] bg-[#FAFAFA]/[0.7] text-sm transition-all hover:bg-[#F5F5F5] dark:border-white/[0.1] dark:bg-[#171717]/[0.7] dark:hover:bg-[#262626]"
+            className="w-full"
             isPending={status === "loading" || status === "success"}
             type="submit"
             variant="tertiary"
@@ -152,7 +155,7 @@ export function NewsletterForm() {
               </AnimatePresence>
             </LazyMotion>
           </Button>
-        </form>
+        </Form>
       </div>
     </div>
   );

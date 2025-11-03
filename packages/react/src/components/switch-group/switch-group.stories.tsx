@@ -11,6 +11,9 @@ import {SwitchGroup} from "./index";
 export default {
   argTypes: {},
   component: SwitchGroup,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Controls/SwitchGroup",
 } as Meta<typeof SwitchGroup>;
 

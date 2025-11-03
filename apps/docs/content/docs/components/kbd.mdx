@@ -1,7 +1,6 @@
 ---
 title: Kbd
 description: Display keyboard shortcuts and key combinations
-icon: updated
 links:
   source: kbd/kbd.tsx
   styles: kbd.css
@@ -60,6 +59,12 @@ export default () => (
   name="kbd-special-keys"
 />
 
+### Variants
+
+<ComponentPreview 
+  name="kbd-variants"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -116,6 +121,7 @@ The Kbd component uses these CSS classes ([View source styles](https://github.co
 | Prop        | Type              | Default | Description            |
 | ----------- | ----------------- | ------- | ---------------------- |
 | `children`  | `React.ReactNode` | -       | Content of the key     |
+| `variant`   | `"default" | "light"` | `default`       | Variant of the keyboard key |
 | `className` | `string`          | -       | Custom CSS classes     |
 
 ### Kbd.Abbr Props

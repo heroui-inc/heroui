@@ -8,11 +8,15 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
+import {Surface} from "../surface";
 
 import {CheckboxGroup} from "./index";
 
 export default {
   argTypes: {},
+  parameters: {
+    layout: "centered",
+  },
   component: CheckboxGroup,
   title: "Components/Forms/CheckboxGroup",
 } as Meta<typeof CheckboxGroup>;
@@ -55,6 +59,44 @@ export const Default: Story = {
   ),
 };
 
+export const OnSurface: Story = {
+  render: () => (
+    <Surface className="w-full rounded-3xl p-6">
+      <CheckboxGroup name="interests">
+        <Label>Select your interests</Label>
+        <Description>Choose all that apply</Description>
+        <Checkbox value="coding">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Coding</Label>
+            <Description>Love building software</Description>
+          </Checkbox.Content>
+        </Checkbox>
+        <Checkbox value="design">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Design</Label>
+            <Description>Enjoy creating beautiful interfaces</Description>
+          </Checkbox.Content>
+        </Checkbox>
+        <Checkbox value="writing">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Writing</Label>
+            <Description>Passionate about content creation</Description>
+          </Checkbox.Content>
+        </Checkbox>
+      </CheckboxGroup>
+    </Surface>
+  ),
+};
+
 export const WithCustomIndicator: Story = {
   render: () => (
     <CheckboxGroup name="features">
@@ -63,16 +105,20 @@ export const WithCustomIndicator: Story = {
       <Checkbox value="notifications">
         <Checkbox.Control>
           <Checkbox.Indicator>
-            <svg
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            {({isSelected}) =>
+              isSelected ? (
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : null
+            }
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
@@ -83,16 +129,20 @@ export const WithCustomIndicator: Story = {
       <Checkbox value="newsletter">
         <Checkbox.Control>
           <Checkbox.Indicator>
-            <svg
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            {({isSelected}) =>
+              isSelected ? (
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : null
+            }
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
@@ -213,7 +263,12 @@ export const Controlled: Story = {
     const [selected, setSelected] = React.useState(["coding", "design"]);
 
     return (
-      <CheckboxGroup name="skills" value={selected} onChange={setSelected}>
+      <CheckboxGroup
+        className="min-w-[320px]"
+        name="skills"
+        value={selected}
+        onChange={setSelected}
+      >
         <Label>Your skills</Label>
         <Checkbox value="coding">
           <Checkbox.Control>
@@ -239,7 +294,7 @@ export const Controlled: Story = {
             <Label>Writing</Label>
           </Checkbox.Content>
         </Checkbox>
-        <Label className="my-4 text-sm">Selected: {selected.join(", ") || "None"}</Label>
+        <Label className="text-muted my-4 text-sm">Selected: {selected.join(", ") || "None"}</Label>
       </CheckboxGroup>
     );
   },

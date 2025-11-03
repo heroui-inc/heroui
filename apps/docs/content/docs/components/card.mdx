@@ -1,7 +1,6 @@
 ---
 title: Card
 description: Flexible container component for grouping related content and actions
-icon: updated
 links:
   source: card/card.tsx
   styles: card.css
@@ -41,9 +40,17 @@ export default () => (
 
 ### Variants
 
+Cards come in semantic variants that describe their prominence level rather than specific visual styles. This allows themes to interpret them differently:
+
 <ComponentPreview
   name="card-variants"
 />
+
+- **`transparent`** - Minimal prominence, transparent background (great for nested cards)
+- **`default`** - Standard card for most use cases (surface-secondary)
+- **`secondary`** - Medium prominence to draw moderate attention (surface-tertiary)
+- **`tertiary`** - Higher prominence for important content (surface-quaternary)
+- **`quaternary`** - Highest prominence for critical content
 
 ### Horizontal Layout
 
@@ -113,7 +120,7 @@ export default () => (
 
 ```css
 /* Override specific variants */
-.card--variant-elevated {
+.card--secondary {
   @apply bg-gradient-to-br from-blue-50 to-purple-50;
 }
 
@@ -139,18 +146,19 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 
 #### Variant Classes
 
-- `.card--variant-flat` - Transparent background, no border
-- `.card--variant-outlined` - Border with subtle background (default)
-- `.card--variant-elevated` - Slightly elevated with medium background
-- `.card--variant-filled` - Prominently filled with stronger background
- 
+- `.card--transparent` - Minimal prominence, transparent background (maps to `transparent` variant)
+- `.card--default` - Standard appearance with surface-secondary (default)
+- `.card--secondary` - Medium prominence with surface-tertiary (maps to `secondary` variant)
+- `.card--tertiary` - Higher prominence with surface-quaternary (maps to `tertiary` variant)
+- `.card--quaternary` - Highest prominence for critical content (maps to `quaternary` variant)
+
 ## API Reference
 
 ### Card
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
-| `variant`   | `"flat" \| "outlined" \| "elevated" \| "filled"`         | `"outlined"` | Visual variant of the card |
+| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary" \| "quaternary"`         | `"default"` | Semantic variant indicating prominence level |
 | `asChild`   | `boolean`                         | `false` | Render as a child element  |
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |

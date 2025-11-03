@@ -1,0 +1,120 @@
+import {Meta} from "@storybook/blocks";
+import {buttonVariants} from "@heroui/react";
+
+<Meta title="Welcome" />
+
+
+<br />
+
+# Welcome 👋🏼
+
+<br />
+
+## HeroUI Version 3 - Design system
+
+<div className="!text-base !text-foreground max-w-xl [&>p]:text-foreground [&>p]:text-base">
+  Here you can find the guidelines, components APIs and examples to help you build your next project with HeroUI version 3.
+</div>
+
+
+<div className="flex flex-col gap-8">
+  <div className="flex flex-row justify-start items-center mt-8 gap-4">
+    <a
+      href="https://v3.heroui.com"
+      target="_blank"
+      className={buttonVariants({
+        variant: "primary",
+      })}
+    >
+      <span className="[&>p]:!text-white [&>p]:!font-semibold">
+       Website
+      </span>
+      <svg
+        aria-hidden="true"
+        className="flex stroke-current !text-white self-center"
+        fill="none"
+        height="1em"
+        shapeRendering="geometricPrecision"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+        width="1em"
+      >
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+        <path d="M15 3h6v6" />
+        <path d="M10 14L21 3" />
+      </svg>
+    </a>
+    <a
+      href="https://github.com/heroui-inc/heroui"
+      target="_blank"
+      className={buttonVariants({
+        variant: "secondary",
+        className: "[&>p]:!font-semibold",
+      })}
+    >
+      Github
+      <svg
+        aria-hidden="true"
+        className="flex stroke-current self-center"
+        fill="none"
+        height="1em"
+        shapeRendering="geometricPrecision"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+        width="1em"
+      >
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+        <path d="M15 3h6v6" />
+        <path d="M10 14L21 3" />
+      </svg>
+    </a>
+    <a
+      href="https://discord.gg/9b6yyZKmH4"
+      target="_blank"
+      className={buttonVariants({
+        variant: "secondary",
+        className: "[&>p]:!font-semibold",
+      })}
+    >
+      Discord
+      <svg
+        aria-hidden="true"
+        className="flex stroke-current self-center"
+        fill="none"
+        height="1em"
+        shapeRendering="geometricPrecision"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+        width="1em"
+      >
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+        <path d="M15 3h6v6" />
+        <path d="M10 14L21 3" />
+      </svg>
+    </a>
+  </div>
+
+  <div className="flex items-center gap-2">
+    <img src="/logo-dark.svg" style={{width: "120px", height: "auto"}} />
+  </div>
+</div>
+
+<br />
+
+
+export const currentDate = new Date();
+export const isoDate = currentDate.toISOString().split('T')[0];
+export const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+<div className="block text-xs [&>p]:text-default-400">
+  Last updated on <time dateTime={isoDate}>{formattedDate}</time>
+</div>

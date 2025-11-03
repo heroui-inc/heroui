@@ -1,22 +1,32 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit items-center underline-offset-4 hover:underline;
+  @apply reduce-motion:transition-none text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
 
   transition:
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
-    text-decoration-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out),
     opacity 150ms var(--ease-smooth);
 
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
+  /* Hover state */
+  &:hover,
+  &[data-hovered="true"] {
+    .link__icon {
+      @apply opacity-100;
+    }
+  }
 
+  /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
+
+    .link__icon {
+      @apply opacity-100;
+    }
   }
 
   /* Disabled state */
@@ -25,14 +35,73 @@
   }
 
   .link__icon {
-    @apply text-muted pointer-events-none inline-flex size-4 shrink-0 items-center justify-center;
+    @apply reduce-motion:transition-none pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
+    transition: opacity 150ms var(--ease-out);
   }
 
   .link__icon[data-default-icon="true"] {
-    @apply pb-1.5;
+    @apply ml-1 pb-1.5;
+  }
+}
+
+/* Underline variants */
+.link--underline-none {
+  /* No underline - use opacity for hover feedback */
+  &:hover,
+  &[data-hovered="true"] {
+    @apply opacity-80;
+  }
+}
+
+.link--underline-hover {
+  /* Animated underline on hover (default) */
+  &::before {
+    @apply reduce-motion:transition-none absolute left-0 h-px w-full bg-current;
+
+    content: "";
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 150ms var(--ease-out);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
+  &:hover::before,
+  &[data-hovered="true"]::before {
+    opacity: 1;
+  }
+}
+
+.link--underline-always {
+  /* Always visible underline with opacity change */
+  &::before {
+    @apply reduce-motion:transition-none absolute left-0 h-px w-full bg-current;
+
+    content: "";
+    bottom: 0;
+    opacity: 0.5;
+    transition: opacity 200ms var(--ease-out);
+  }
+
+  &:hover::before,
+  &[data-hovered="true"]::before {
+    opacity: 1;
+  }
+}
+
+/* Underline offset variants */
+.link--offset-1 {
+  &::before {
+    bottom: 0;
+  }
+}
+
+.link--offset-2 {
+  &::before {
+    bottom: -2px;
+  }
+}
+
+.link--offset-3 {
+  &::before {
+    bottom: -4px;
   }
 }

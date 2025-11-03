@@ -13,6 +13,8 @@ export const siteConfig = {
   figmaCommunityFile: "https://www.figma.com/community/file/1546526812159103429",
   githubRawUrl:
     "https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3/apps/docs/content/docs",
+  githubRepo: "heroui-inc/heroui",
+  githubUrl: "https://github.com/heroui-inc/heroui",
   links: {
     discord: "https://discord.gg/9b6yyZKmH4",
     github: "https://github.com/heroui-inc",

@@ -17,6 +17,9 @@ export default {
     },
   },
   component: Spinner,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Feedback/Spinner",
 } as Meta<typeof Spinner>;
 

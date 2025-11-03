@@ -39,3 +39,10 @@ export type {
 export {inputOTPVariants} from "./input-otp.styles";
 
 export type {InputOTPVariants} from "./input-otp.styles";
+
+//  ===================================
+// Regular Expressions
+//  ===================================
+export const REGEXP_ONLY_DIGITS = "^\\d+$";
+export const REGEXP_ONLY_CHARS = "^[a-zA-Z]+$";
+export const REGEXP_ONLY_DIGITS_AND_CHARS = "^[a-zA-Z0-9]+$";

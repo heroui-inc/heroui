@@ -1,7 +1,6 @@
 ---
 title: Fieldset
 description: Group related form controls with legends, descriptions, and actions
-icon: updated
 links:
   source: fieldset/fieldset.tsx
   styles: fieldset.css
@@ -17,6 +16,12 @@ import { Fieldset } from '@heroui/react';
 ### Usage
 
 <ComponentPreview name="fieldset-basic" />
+
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, form controls within Fieldset automatically apply on-surface styling.
+
+<ComponentPreview name="fieldset-on-surface" />
 
 ### Anatomy
 
@@ -51,7 +56,7 @@ import { Fieldset, TextField, Label, Input } from '@heroui/react';
 
 function CustomFieldset() {
   return (
-    <Fieldset className="rounded-xl border border-border bg-surface-2 p-6 shadow-sm">
+    <Fieldset className="rounded-xl border border-border bg-surface p-6 shadow-sm">
       <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
       <Fieldset.Group className="grid gap-4 md:grid-cols-2">
         <TextField>
@@ -78,7 +83,7 @@ Use the `@layer components` directive to target Fieldset BEM-style classes.
 ```css
 @layer components {
   .fieldset {
-    @apply gap-5 rounded-xl border border-border/60 bg-surface-2 p-6 shadow-field;
+    @apply gap-5 rounded-xl border border-border/60 bg-surface p-6 shadow-field;
   }
 
   .fieldset__legend {

@@ -1,3 +1,4 @@
+import type {LinkProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import React from "react";
@@ -10,6 +11,9 @@ import {Link} from "./index";
 export default {
   argTypes: {},
   component: Link,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/Link",
 } as Meta<typeof Link>;
 
@@ -67,6 +71,70 @@ const IconPlacementTemplate = (_props: Link["RootProps"]) => (
   </div>
 );
 
+const UnderlineVariantsTemplate = (_props: LinkProps) => (
+  <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-2">
+      <p className="text-muted text-sm">Underline on hover (default)</p>
+      <Link href="#" underline="hover">
+        Hover to see underline animation
+        <Link.Icon />
+      </Link>
+    </div>
+
+    <div className="flex flex-col gap-2">
+      <p className="text-muted text-sm">Always visible underline</p>
+      <Link href="#" underline="always">
+        Underline always visible (50% opacity, 100% on hover)
+        <Link.Icon />
+      </Link>
+    </div>
+
+    <div className="flex flex-col gap-2">
+      <p className="text-muted text-sm">No underline</p>
+      <Link href="#" underline="none">
+        Link without any underline
+        <Link.Icon />
+      </Link>
+    </div>
+
+    <div className="flex flex-col gap-2">
+      <p className="text-muted text-sm">Underline offset variations</p>
+      <div className="flex flex-col gap-3">
+        <Link href="#" underline="always" underlineOffset={1}>
+          Offset 1 (default - no space)
+          <Link.Icon />
+        </Link>
+        <Link href="#" underline="always" underlineOffset={2}>
+          Offset 2 (2px space)
+          <Link.Icon />
+        </Link>
+        <Link href="#" underline="always" underlineOffset={3}>
+          Offset 3 (4px space)
+          <Link.Icon />
+        </Link>
+      </div>
+    </div>
+
+    <div className="flex flex-col gap-2">
+      <p className="text-muted text-sm">Always underline with different offsets</p>
+      <div className="flex flex-col gap-3">
+        <Link href="#" underline="always" underlineOffset={1}>
+          Always underlined - Offset 1
+          <Link.Icon />
+        </Link>
+        <Link href="#" underline="always" underlineOffset={2}>
+          Always underlined - Offset 2
+          <Link.Icon />
+        </Link>
+        <Link href="#" underline="always" underlineOffset={3}>
+          Always underlined - Offset 3
+          <Link.Icon />
+        </Link>
+      </div>
+    </div>
+  </div>
+);
+
 export const Default = {
   args: {},
   render: DefaultTemplate,
@@ -80,4 +148,9 @@ export const CustomIcon = {
 export const IconPlacement = {
   args: {},
   render: IconPlacementTemplate,
+};
+
+export const UnderlineVariants = {
+  args: {},
+  render: UnderlineVariantsTemplate,
 };

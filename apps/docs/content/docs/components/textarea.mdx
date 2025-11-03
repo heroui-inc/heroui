@@ -30,6 +30,12 @@ import { TextArea } from '@heroui/react';
 
 <ComponentPreview name="textarea-rows" />
 
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, TextArea automatically applies on-surface styling.
+
+<ComponentPreview name="textarea-on-surface" />
+
 <RelatedComponents component="textarea" />
 
 <RelatedShowcases component="TextArea" />
@@ -47,7 +53,7 @@ function CustomTextArea() {
       <Label htmlFor="custom-textarea">Message</Label>
       <TextArea
         id="custom-textarea"
-        className="rounded-xl border border-border/70 bg-surface-2 px-4 py-3 text-sm leading-6 shadow-sm"
+        className="rounded-xl border border-border/70 bgsurface px-4 py-3 text-sm leading-6 shadow-sm"
         placeholder="Let us know how we can help..."
         rows={5}
         style={{resize: "vertical"}}
@@ -64,7 +70,7 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 ```css
 @layer components {
   .textarea {
-    @apply rounded-xl border border-border bg-surface-2 px-4 py-3 text-sm leading-6 shadow-sm;
+    @apply rounded-xl border border-border bgsurface px-4 py-3 text-sm leading-6 shadow-sm;
 
     &:hover,
     &[data-hovered="true"] {
@@ -117,5 +123,6 @@ TextArea accepts all standard HTML `<textarea>` attributes plus the following:
 | `maxLength` | `number` | - | Maximum number of characters. |
 | `minLength` | `number` | - | Minimum number of characters. |
 | `wrap` | `'soft' \| 'hard'` | - | How text wraps when submitted. |
+| `isOnSurface` | `boolean` | `false` | Whether the textarea is displayed on a surface (affects styling) |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with TextArea as a child component.

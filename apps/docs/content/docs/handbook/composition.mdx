@@ -38,17 +38,17 @@ import Link from 'next/link';
 These components support `asChild`:
 
 - `Button` - Change button element
-- `Alert` and its parts - `Alert`, `AlertIcon`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertAction`, `AlertClose`
-- `Avatar` and its parts - `Avatar`, `AvatarImage`, `AvatarFallback`
-- More components coming soon
+- `Alert` and its parts - `Alert` (or `Alert.Root`), `Alert.Icon`, `Alert.Content`, `Alert.Title`, `Alert.Description`, `Alert.Action`, `Alert.Close`
+- `Avatar` and its parts - `Avatar` (or `Avatar.Root`), `Avatar.Image`, `Avatar.Fallback`
+- All other HeroUI components with root elements
 
 ## Compound Components
 
-HeroUI components are built as compound components. They export multiple parts that work together. All patterns are equivalent. Choose what fits your codebase.
+HeroUI components are built as compound components - they export multiple parts that work together. You can use them in three flexible ways:
 
-### Dot Notation (Recommended)
+### Option 1: Compound Pattern (Recommended)
 
-Import the main component and access parts via dot notation.
+Use the main component directly without `.Root` suffix:
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -63,26 +63,9 @@ import { Alert } from '@heroui/react';
 </Alert>
 ```
 
-### Named Exports
+### Option 2: Compound Pattern with .Root
 
-Import each part separately.
-
-```tsx
-import { AlertRoot, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertClose } from '@heroui/react';
-
-<AlertRoot>
-  <AlertIcon />
-  <AlertContent>
-    <AlertTitle>Success</AlertTitle>
-    <AlertDescription>Your changes have been saved.</AlertDescription>
-  </AlertContent>
-  <AlertClose />
-</AlertRoot>
-```
-
-### Mixed Patterns
-
-Mix both patterns as needed.
+Use the `.Root` suffix if you prefer explicit naming:
 
 ```tsx
 import { Alert, AlertIcon, AlertClose } from '@heroui/react';
@@ -97,9 +80,73 @@ import { Alert, AlertIcon, AlertClose } from '@heroui/react';
 </Alert>
 ```
 
-### Benefits
+### Option 3: Named Exports
 
-Compound components provide flexibility to arrange parts as needed, customize each part independently, and add or remove parts freely.
+Import each part separately:
+
+```tsx
+import {
+  AlertRoot,
+  AlertIcon,
+  AlertContent,
+  AlertTitle,
+  AlertDescription,
+  AlertClose
+} from '@heroui/react';
+
+<AlertRoot>
+  <AlertIcon />
+  <AlertContent>
+    <AlertTitle>Success</AlertTitle>
+    <AlertDescription>Your changes have been saved.</AlertDescription>
+  </AlertContent>
+  <AlertClose />
+</AlertRoot>
+```
+
+### Mixed Syntax
+
+You can mix compound and named exports in the same component:
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from '@heroui/react';
+
+<Alert>
+  <Alert.Icon />
+  <Alert.Content>
+    <AlertTitle>Success</AlertTitle>
+    <AlertDescription>Your changes have been saved.</AlertDescription>
+  </Alert.Content>
+  <Alert.Close />
+</Alert>
+```
+
+### Simple Components
+
+Simple components like `Button` work the same way - no `.Root` needed:
+
+```tsx
+import { Button } from '@heroui/react';
+
+// Recommended - no .Root needed
+<Button>Click me</Button>
+
+// Or with .Root
+<Button.Root>Click me</Button.Root>
+
+// Or named export
+import { ButtonRoot } from '@heroui/react';
+<ButtonRoot>Click me</ButtonRoot>
+```
+
+### Benefits of Compound Components
+
+All three patterns provide:
+
+- **Flexibility** - Arrange parts as needed
+- **Customization** - Style each part independently
+- **Control** - Add or remove parts
+- **Consistency** - Choose the pattern that fits your codebase
 
 ## Style Variants
 
@@ -181,11 +228,11 @@ function IconButton({ icon, label, ...props }) {
 You can create your own custom variants by extending the component's variant function.
 
 ```tsx
-import type {ButtonProps} from "@heroui/react";
-import type {VariantProps} from "tailwind-variants";
+import type { ButtonRootProps } from "@heroui/react";
+import type { VariantProps } from "tailwind-variants";
 
-import {Button, buttonVariants} from "@heroui/react";
-import {tv} from "tailwind-variants";
+import { Button, buttonVariants } from "@heroui/react";
+import { tv } from "tailwind-variants";
 
 const myButtonVariants = tv({
   extend: buttonVariants,
@@ -214,17 +261,39 @@ const myButtonVariants = tv({
 });
 
 type MyButtonVariants = VariantProps<typeof myButtonVariants>;
-export type MyButtonProps = Omit<ButtonProps, "className"> &
-  MyButtonVariants & {className?: string};
+export type MyButtonProps = Omit<ButtonRootProps, "className"> &
+  MyButtonVariants & { className?: string };
 
-function CustomButton({className, radius, variant, ...props}: MyButtonProps) {
-  return <Button className={myButtonVariants({className, radius, variant})} {...props} />;
+function CustomButton({ className, radius, variant, ...props }: MyButtonProps) {
+  return <Button className={myButtonVariants({ className, radius, variant })} {...props} />;
 }
 
 export function CustomVariants() {
   return <CustomButton>Custom Button</CustomButton>;
 }
 ```
+
+### Type References
+
+When working with component types, use named type imports or object-style syntax:
+
+**Recommended - Named type imports:**
+```tsx
+import type { ButtonRootProps, AvatarRootProps } from "@heroui/react";
+
+type MyButtonProps = ButtonRootProps;
+type MyAvatarProps = AvatarRootProps;
+```
+
+**Alternative - Object-style syntax:**
+```tsx
+import { Button, Avatar } from "@heroui/react";
+
+type MyButtonProps = Button["RootProps"];
+type MyAvatarProps = Avatar["RootProps"];
+```
+
+**Note:** The namespace syntax `Button.RootProps` is no longer supported. Use `Button["RootProps"]` or named imports instead.
 
 
 ## With Next.js

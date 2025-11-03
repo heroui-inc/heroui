@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, Popover} from "@heroui/react";
 
 export function PopoverBasic() {
@@ -7,7 +5,7 @@ export function PopoverBasic() {
     <div className="flex items-center gap-4">
       <Popover>
         <Button>Click me</Button>
-        <Popover.Content>
+        <Popover.Content className="max-w-64">
           <Popover.Dialog>
             <Popover.Heading>Popover Title</Popover.Heading>
             <p className="text-muted mt-2 text-sm">

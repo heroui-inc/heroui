@@ -1,0 +1,20 @@
+/* === Reduced Motion Variant === */
+/* This variant activates when:
+   1. Developer sets data-reduce-motion="true" on :root or any parent (manual control), OR
+   2. User has prefers-reduced-motion: reduce (system preference)
+
+   Usage:
+   - To disable all animations: <html data-reduce-motion="true">
+   - Individual elements: <div data-reduce-motion="true">
+   - Respects user preferences automatically via media query
+
+   On the component, use the variant as follows::after
+   .button {
+        @apply reduce-motion:transition-none ...
+   }
+*/
+
+@custom-variant reduce-motion (
+  &:where([data-reduce-motion="true"] *),
+  @media (prefers-reduced-motion: reduce)
+);

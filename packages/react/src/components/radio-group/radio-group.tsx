@@ -3,10 +3,11 @@
 import type {RadioGroupVariants} from "./radio-group.styles";
 import type {RadioGroupProps as RadioGroupPrimitiveProps} from "react-aria-components";
 
-import React from "react";
+import React, {useContext} from "react";
 import {RadioGroup as RadioGroupPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
+import {SurfaceContext} from "../surface";
 
 import {radioGroupVariants} from "./radio-group.styles";
 
@@ -15,8 +16,13 @@ import {radioGroupVariants} from "./radio-group.styles";
  * -----------------------------------------------------------------------------------------------*/
 interface RadioGroupRootProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
 
-const RadioGroupRoot = ({children, className, ...props}: RadioGroupRootProps) => {
-  const styles = React.useMemo(() => radioGroupVariants(), []);
+const RadioGroupRoot = ({children, className, isOnSurface, ...props}: RadioGroupRootProps) => {
+  const surfaceContext = useContext(SurfaceContext);
+  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const styles = React.useMemo(
+    () => radioGroupVariants({isOnSurface: isOnSurfaceValue}),
+    [isOnSurfaceValue],
+  );
 
   return (
     <RadioGroupPrimitive

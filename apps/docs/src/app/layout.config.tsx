@@ -10,7 +10,6 @@ import {HeroUILogo} from "@/components/heroui-logo";
  * Docs Layout: app/docs/layout.tsx
  */
 export const baseOptions: BaseLayoutProps = {
-  githubUrl: "https://github.com/heroui-inc/heroui",
   nav: {
     title: <HeroUILogo />,
     transparentMode: "always",

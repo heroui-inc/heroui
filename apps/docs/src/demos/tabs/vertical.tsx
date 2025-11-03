@@ -1,5 +1,3 @@
-"use client";
-
 import {Tab, TabIndicator, TabList, TabListContainer, TabPanel, TabsRoot} from "@heroui/react";
 
 export function Vertical() {

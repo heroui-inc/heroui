@@ -1,5 +1,3 @@
-"use client";
-
 import {Card, Link} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

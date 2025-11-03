@@ -10,12 +10,16 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Radio} from "../radio";
+import {Surface} from "../surface";
 
 import {RadioGroup} from "./index";
 
 export default {
   argTypes: {},
   component: RadioGroup,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Forms/RadioGroup",
 } as Meta<typeof RadioGroup>;
 
@@ -56,6 +60,44 @@ export const Default: Story = {
         </Radio>
       </RadioGroup>
     </div>
+  ),
+};
+
+export const OnSurface: Story = {
+  render: () => (
+    <Surface className="w-full rounded-3xl p-6">
+      <RadioGroup defaultValue="premium" name="plan">
+        <Label>Plan selection</Label>
+        <Description>Choose the plan that suits you best</Description>
+        <Radio value="basic">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
+            <Label>Basic Plan</Label>
+            <Description>Includes 100 messages per month</Description>
+          </Radio.Content>
+        </Radio>
+        <Radio value="premium">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
+            <Label>Premium Plan</Label>
+            <Description>Includes 200 messages per month</Description>
+          </Radio.Content>
+        </Radio>
+        <Radio value="business">
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
+          <Radio.Content>
+            <Label>Business Plan</Label>
+            <Description>Unlimited messages</Description>
+          </Radio.Content>
+        </Radio>
+      </RadioGroup>
+    </Surface>
   ),
 };
 
@@ -372,18 +414,7 @@ export const DeliveryAndPaymentExample: Story = {
     ];
 
     return (
-      <div
-        className="flex w-full flex-col items-center gap-10 px-4 py-8"
-        style={{
-          // @ts-expect-error - Overrides default variables
-          "--accent": "#006FEE",
-          "--accent-hover": "#006FEE",
-          "--accent-foreground": "#fff",
-          "--focus": "#006FEE",
-          "--border-width": "2px",
-          "--border-width-field": "2px",
-        }}
-      >
+      <div className="flex w-full flex-col items-center gap-10 px-4 py-8">
         <section className="flex w-full max-w-lg flex-col gap-4">
           <RadioGroup defaultValue="express" name="delivery">
             <Label>Delivery method</Label>
@@ -393,8 +424,8 @@ export const DeliveryAndPaymentExample: Story = {
                   key={option.value}
                   value={option.value}
                   className={clsx(
-                    "bg-surface-2 data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-md border border-transparent px-5 py-4 transition-all",
-                    "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
+                    "bg-surface-tertiary data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
+                    "data-[focus-visible=true]:bg-accent/10",
                   )}
                 >
                   <Radio.Control className="absolute right-4 top-3 size-5">
@@ -423,15 +454,15 @@ export const DeliveryAndPaymentExample: Story = {
                   key={option.value}
                   value={option.value}
                   className={clsx(
-                    "bg-surface-2 group relative flex-col gap-4 rounded-md border border-transparent px-5 py-4 transition-all",
-                    "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
+                    "bg-surface-tertiary group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
+                    "data-[selected=true]:bg-accent/10",
                   )}
                 >
                   <Radio.Control className="absolute right-4 top-3 size-5">
                     <Radio.Indicator />
                   </Radio.Control>
                   <Radio.Content className="flex flex-row items-start justify-start gap-4">
-                    <Icon className="size-6" icon={option.icon} />
+                    <Icon className="text-accent size-6" icon={option.icon} />
                     <div className="flex flex-col gap-1">
                       <Label>{option.title}</Label>
                       <Description>{option.description}</Description>

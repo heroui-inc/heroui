@@ -1,0 +1,83 @@
+"use client";
+
+import type {Selection} from "@heroui/react";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Description,
+  Label,
+  ListBox,
+  Surface,
+} from "@heroui/react";
+import {Icon} from "@iconify/react";
+import {useState} from "react";
+
+export function Controlled() {
+  const [selected, setSelected] = useState<Selection>(new Set(["1"]));
+
+  const selectedItems = Array.from(selected);
+
+  return (
+    <div className="space-y-4">
+      <Surface className="shadow-surface w-[256px] rounded-3xl">
+        <ListBox
+          aria-label="Users"
+          selectedKeys={selected}
+          selectionMode="multiple"
+          onSelectionChange={setSelected}
+        >
+          <ListBox.Item id="1" textValue="Bob">
+            <Avatar size="sm">
+              <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg" />
+              <AvatarFallback>B</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <Label>Bob</Label>
+              <Description>bob@heroui.com</Description>
+            </div>
+            <ListBox.ItemIndicator>
+              {({isSelected}) =>
+                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+              }
+            </ListBox.ItemIndicator>
+          </ListBox.Item>
+          <ListBox.Item id="2" textValue="Fred">
+            <Avatar size="sm">
+              <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg" />
+              <AvatarFallback>F</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <Label>Fred</Label>
+              <Description>fred@heroui.com</Description>
+            </div>
+            <ListBox.ItemIndicator>
+              {({isSelected}) =>
+                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+              }
+            </ListBox.ItemIndicator>
+          </ListBox.Item>
+          <ListBox.Item id="3" textValue="Martha">
+            <Avatar size="sm">
+              <AvatarImage src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg" />
+              <AvatarFallback>M</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <Label>Martha</Label>
+              <Description>martha@heroui.com</Description>
+            </div>
+            <ListBox.ItemIndicator>
+              {({isSelected}) =>
+                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+              }
+            </ListBox.ItemIndicator>
+          </ListBox.Item>
+        </ListBox>
+      </Surface>
+      <p className="text-sm text-neutral-500">
+        Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
+      </p>
+    </div>
+  );
+}

@@ -1,7 +1,6 @@
 ---
 title: Link
 description: A styled anchor component for navigation with built-in icon support
-icon: updated
 links:
   rac: Link
   source: link/link.tsx
@@ -49,6 +48,81 @@ export default () => (
   name="link-icon-placement"
 />
 
+### Underline Variants
+
+Control the underline behavior with the `underline` prop:
+
+<ComponentPreview
+  name="link-underline-variants"
+/>
+
+- `underline="hover"` (default) - Animated underline appears on hover
+- `underline="always"` - Underline always visible (50% opacity, 100% on hover)
+- `underline="none"` - No underline
+
+### Underline Offset
+
+Adjust the spacing between text and underline with the `underlineOffset` prop:
+
+<ComponentPreview
+  name="link-underline-offset"
+/>
+
+- `underlineOffset={1}` (default) - No space
+- `underlineOffset={2}` - 2px spacing
+- `underlineOffset={3}` - 4px spacing
+
+### Using with Routing Libraries
+
+Use the `asChild` prop to compose Link with framework-specific links like Next.js:
+
+```tsx
+import { Link } from '@heroui/react';
+import NextLink from 'next/link';
+
+export default function Demo() {
+  return (
+    <Link asChild underline="hover">
+      <NextLink href="/about">
+        About Page
+        <Link.Icon />
+      </NextLink>
+    </Link>
+  );
+}
+```
+
+### Direct Class Application
+
+Since HeroUI uses BEM classes, you can apply Link styles directly to any link element without using `asChild`:
+
+```tsx
+import NextLink from 'next/link';
+
+// Apply classes directly
+export default function Demo() {
+  return (
+    <NextLink href="/about" className="link link--underline-hover link--offset-1">
+      About Page
+    </NextLink>
+  );
+}
+
+// Or with a native anchor
+export default function NativeLink() {
+  return (
+    <a href="/about" className="link link--underline-always link--offset-2">
+      About Page
+    </a>
+  );
+}
+```
+
+Available BEM classes:
+- Base: `link`
+- Underline: `link--underline-none`, `link--underline-hover`, `link--underline-always`
+- Offset: `link--offset-1`, `link--offset-2`, `link--offset-3`
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -88,7 +162,17 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Link component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)):
 
 #### Base Classes
-- `.link` - Base link styles with underline on hover
+- `.link` - Base link styles
+
+#### Underline Variants
+- `.link--underline-none` - No underline
+- `.link--underline-hover` - Animated underline on hover (default)
+- `.link--underline-always` - Always visible underline
+
+#### Underline Offset
+- `.link--offset-1` - No spacing (default)
+- `.link--offset-2` - 2px spacing
+- `.link--offset-3` - 4px spacing
 
 ### Interactive States
 
@@ -107,6 +191,9 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `target` | `string` | `"_self"` | Controls where to open the linked document |
 | `rel` | `string` | - | Relationship between the current and linked documents |
 | `download` | `boolean \| string` | - | Prompts file download instead of navigation |
+| `underline` | `"none" \| "hover" \| "always"` | `"hover"` | Controls underline visibility and behavior |
+| `underlineOffset` | `1 \| 2 \| 3` | `1` | Spacing between text and underline |
+| `asChild` | `boolean` | `false` | Merge props with child element (useful for routing libraries) |
 | `isDisabled` | `boolean` | `false` | Disables pointer and keyboard interaction |
 | `className` | `string` | - | Custom classes merged with the default styles |
 | `children` | `React.ReactNode` | - | Content rendered inside the link |

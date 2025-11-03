@@ -1,9 +1,10 @@
 export {Basic} from "./basic";
-export {WithDescription} from "./with-description";
-export {Required} from "./required";
-export {WithError} from "./with-error";
-export {Disabled} from "./disabled";
-export {TextAreaExample as TextArea} from "./textarea";
-export {InputTypes} from "./input-types";
 export {Controlled} from "./controlled";
+export {Disabled} from "./disabled";
+export {InputTypes} from "./input-types";
+export {OnSurface} from "./on-surface";
+export {Required} from "./required";
+export {TextAreaExample as TextArea} from "./textarea";
 export {Validation} from "./validation";
+export {WithDescription} from "./with-description";
+export {WithError} from "./with-error";
