@@ -116,7 +116,10 @@
 
 /* dialog */
 .modal__dialog {
-  @apply rounded-panel-inner bg-panel relative flex w-full max-w-md flex-col shadow-lg;
+  @apply bg-surface shadow-surface relative flex w-full max-w-md flex-col rounded-3xl backdrop-blur-[20px];
+
+  /* Default width - matches md breakpoint */
+  @apply w-[360px];
 
   &:focus-visible,
   &[data-focus-visible="true"] {
@@ -125,7 +128,7 @@
 
   &[data-placement="auto"] {
     /* Keep all rounded corners on mobile and desktop */
-    @apply rounded-panel-inner;
+    @apply rounded-3xl;
   }
 }
 
@@ -141,12 +144,12 @@
 
 /* header */
 .modal__header {
-  @apply flex flex-col gap-2 px-6 pt-6;
+  @apply flex flex-col gap-3 px-6 pt-6;
 }
 
 /* body */
 .modal__body {
-  @apply text-foreground flex-1 px-6 py-5 text-sm leading-6;
+  @apply text-muted flex-1 px-6 py-5 text-sm leading-[1.43];
 }
 
 /* body variants - scroll inside  */
