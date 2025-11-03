@@ -54,7 +54,7 @@
 
 /* Checkbox control (the square button) */
 .checkbox__control {
-  @apply reduce-motion:transition-none bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded outline-none;
+  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded outline-none;
 
   transition: all 300ms var(--ease-out);
 
