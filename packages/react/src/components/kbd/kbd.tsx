@@ -1,6 +1,7 @@
 "use client";
 
 import type {KbdKey} from "./kbd.constants";
+import type {KbdVariants} from "./kbd.styles";
 
 import React, {createContext, useContext} from "react";
 
@@ -19,13 +20,13 @@ const KbdContext = createContext<KbdContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Kbd Root
  * -----------------------------------------------------------------------------------------------*/
-interface KbdRootProps extends React.HTMLAttributes<HTMLElement> {
+interface KbdRootProps extends React.HTMLAttributes<HTMLElement>, KbdVariants {
   children: React.ReactNode;
   className?: string;
 }
 
-const KbdRoot = ({children, className, ...props}: KbdRootProps) => {
-  const slots = React.useMemo(() => kbdVariants(), []);
+const KbdRoot = ({children, className, variant, ...props}: KbdRootProps) => {
+  const slots = React.useMemo(() => kbdVariants({variant}), [variant]);
 
   return (
     <KbdContext value={{slots}}>

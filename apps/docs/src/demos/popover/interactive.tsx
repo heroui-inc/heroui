@@ -8,16 +8,16 @@ export function PopoverInteractive() {
 
   return (
     <div className="flex items-center gap-6">
-      <Popover.Root>
+      <Popover>
         <Popover.Trigger aria-label="User profile">
           <div className="flex items-center gap-2">
-            <Avatar.Root size="sm">
+            <Avatar size="sm">
               <Avatar.Image
                 alt="Sarah Johnson"
-                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=1"
               />
               <Avatar.Fallback>SJ</Avatar.Fallback>
-            </Avatar.Root>
+            </Avatar>
             <div className="flex flex-col">
               <p className="text-sm font-medium">Sarah Johnson</p>
               <p className="text-muted text-xs">@sarahj</p>
@@ -29,13 +29,13 @@ export function PopoverInteractive() {
             <Popover.Heading>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Avatar.Root size="md">
+                  <Avatar size="md">
                     <Avatar.Image
                       alt="Sarah Johnson"
-                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=1"
                     />
                     <Avatar.Fallback>SJ</Avatar.Fallback>
-                  </Avatar.Root>
+                  </Avatar>
                   <div>
                     <p className="font-semibold">Sarah Johnson</p>
                     <p className="text-muted text-sm">@sarahj</p>
@@ -66,7 +66,7 @@ export function PopoverInteractive() {
             </div>
           </Popover.Dialog>
         </Popover.Content>
-      </Popover.Root>
+      </Popover>
     </div>
   );
 }

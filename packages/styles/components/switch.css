@@ -15,6 +15,18 @@
       @apply bg-default-foreground/20;
     }
   }
+
+  /* Disabled + Selected state */
+  &:disabled[aria-checked="true"],
+  &:disabled[data-selected="true"],
+  &[data-disabled="true"][aria-checked="true"],
+  &[data-disabled="true"][data-selected="true"],
+  &[aria-disabled="true"][aria-checked="true"],
+  &[aria-disabled="true"][data-selected="true"] {
+    .switch__thumb {
+      opacity: 0.4;
+    }
+  }
 }
 
 /* Size variants - default is medium */
@@ -33,11 +45,13 @@
 /* Switch control (track) */
 .switch__control {
   /* Default size (medium) */
-  @apply bg-surface-3 flex h-[24px] w-[40px] shrink-0 items-center rounded-full sm:h-[20px] sm:w-[32px];
+  @apply bg-surface-quaternary reduce-motion:transition-none relative flex shrink-0 items-center overflow-hidden rounded-full;
+  height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
+  width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
   transition:
-    background-color 150ms var(--ease-smooth),
-    transform 150ms var(--ease-out),
+    background-color 250ms var(--ease-smooth),
+    transform 250ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
 
   /* Focus states */
@@ -49,18 +63,14 @@
   /* Hover states */
   .switch:hover &,
   .switch[data-hovered="true"] & {
-    @apply bg-surface-3/80;
+    @apply bg-surface-quaternary/80;
   }
 
   /* Pressed states */
   .switch:active &,
   .switch[data-pressed="true"] & {
-    @apply bg-surface-3/80;
+    @apply bg-surface-quaternary/80 reduce-motion:[transform:none];
     transform: scale(0.95);
-
-    @media (prefers-reduced-motion: reduce) {
-      transform: none;
-    }
   }
 
   /* Checked states */
@@ -84,25 +94,30 @@
   .switch[data-selected="true"][data-pressed="true"] & {
     @apply bg-accent-hover;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
 /* Size-specific control dimensions */
 .switch--sm .switch__control {
-  @apply h-[18px] w-[30px] sm:h-[16px] sm:w-[26px];
+  height: 1rem; /* ~14px on desktop, ~16px on mobile */
+  width: 2rem; /* ~32px on desktop, ~36px on mobile */
+}
+
+.switch--md .switch__control {
+  /* No styles as this is the default size */
 }
 
 .switch--lg .switch__control {
-  @apply h-[32px] w-[52px] sm:h-[24px] sm:w-[40px];
+  height: 1.5rem; /* ~21px on desktop, ~24px on mobile */
+  width: 3rem; /* ~48px on desktop, ~56px on mobile */
 }
 
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply shadow-field ms-[2px] flex size-5 rounded-full bg-white text-black sm:size-4;
+  @apply shadow-field reduce-motion:transition-none ms-[0.125rem] flex origin-center rounded-full bg-white text-black;
+  height: 1rem; /* ~14px on desktop, ~16px on mobile */
+  width: 1.375rem; /* ~19px on desktop, ~22px on mobile */
+
   transition:
     margin 350ms var(--ease-fluid-out),
     background-color 200ms var(--ease-out);
@@ -110,15 +125,11 @@
   /* Selected/checked state - use margin instead of translate */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply bg-accent-foreground text-accent ms-[calc(100%-18px)];
-  }
-
-  /* Mobile selected state */
-  @media (max-width: 640px) {
-    .switch[aria-checked="true"] &,
-    .switch[data-selected="true"] & {
-      @apply ms-[calc(100%-22px)];
-    }
+    @apply bg-accent-foreground text-accent ms-[calc(100%-1.5rem)];
+    box-shadow:
+      0px 0px 5px 0px rgb(0 0 0 / 0.02),
+      0px 2px 10px 0px rgb(0 0 0 / 0.06),
+      0px 0px 1px 0px rgb(0 0 0 / 0.3);
   }
 
   /* Pressed state - scale down with width animation */
@@ -126,44 +137,28 @@
   .switch[data-pressed="true"] & {
     @apply scale-[0.98];
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
 /* Size-specific thumb dimensions */
 .switch--sm .switch__thumb {
-  @apply size-3.5 sm:size-3;
+  height: 0.75rem; /* ~10.5px on desktop, ~12px on mobile */
+  width: 1.03125rem; /* ~14.4px on desktop, ~16.5px on mobile - maintains 1.375:1 ratio */
 
   /* Small selected state positioning */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply ms-[calc(100%-14px)];
-  }
-
-  @media (max-width: 640px) {
-    .switch[aria-checked="true"] &,
-    .switch[data-selected="true"] & {
-      @apply ms-[calc(100%-16px)];
-    }
+    @apply ms-[calc(100%-1.15625rem)];
   }
 }
 
 .switch--lg .switch__thumb {
-  @apply size-7 sm:size-5;
+  height: 1.25rem; /* ~17.5px on desktop, ~20px on mobile */
+  width: 1.71875rem; /* ~24px on desktop, ~27.5px on mobile - maintains 1.375:1 ratio */
 
   /* Large selected state positioning */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply ms-[calc(100%-22px)];
-  }
-
-  @media (max-width: 640px) {
-    .switch[aria-checked="true"] &,
-    .switch[data-selected="true"] & {
-      @apply ms-[calc(100%-30px)];
-    }
+    @apply ms-[calc(100%-1.84375rem)];
   }
 }
 

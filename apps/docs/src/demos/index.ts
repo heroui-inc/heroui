@@ -6,6 +6,8 @@ import * as AlertDemos from "./alert";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as CardDemos from "./card";
+import * as CheckboxDemos from "./checkbox";
+import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as DescriptionDemos from "./description";
@@ -15,15 +17,20 @@ import * as FieldErrorDemos from "./field-error";
 import * as FieldsetDemos from "./fieldset";
 import * as FormDemos from "./form";
 import * as InputDemos from "./input";
+import * as InputOTPDemos from "./input-otp";
 import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
+import * as ListBoxDemos from "./listbox";
 import * as ModalDemos from "./modal";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
+import * as SelectDemos from "./select";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
+import * as SliderDemos from "./slider";
 import * as SpinnerDemos from "./spinner";
+import * as SurfaceDemos from "./surface";
 import * as SwitchDemos from "./switch";
 import * as TabsDemos from "./tabs";
 import * as TextFieldDemos from "./text-field";
@@ -71,22 +78,6 @@ export const demos: Record<string, DemoItem> = {
     component: AlertDemos.Basic,
     file: "alert/basic.tsx",
   },
-  "alert-variants": {
-    component: AlertDemos.Variants,
-    file: "alert/variants.tsx",
-  },
-  "alert-with-action": {
-    component: AlertDemos.WithAction,
-    file: "alert/with-action.tsx",
-  },
-  "alert-dismissible": {
-    component: AlertDemos.Dismissible,
-    file: "alert/dismissible.tsx",
-  },
-  "alert-custom-icon": {
-    component: AlertDemos.CustomIcon,
-    file: "alert/custom-icon.tsx",
-  },
   // Avatar demos
   "avatar-basic": {
     component: AvatarDemos.Basic,
@@ -99,6 +90,10 @@ export const demos: Record<string, DemoItem> = {
   "avatar-colors": {
     component: AvatarDemos.Colors,
     file: "avatar/colors.tsx",
+  },
+  "avatar-variants": {
+    component: AvatarDemos.Variants,
+    file: "avatar/variants.tsx",
   },
   "avatar-fallback": {
     component: AvatarDemos.Fallback,
@@ -182,6 +177,92 @@ export const demos: Record<string, DemoItem> = {
     component: CardDemos.WithBackgroundImage,
     file: "card/with-background-image.tsx",
   },
+  // Checkbox demos
+  "checkbox-basic": {
+    component: CheckboxDemos.Basic,
+    file: "checkbox/basic.tsx",
+  },
+  "checkbox-disabled": {
+    component: CheckboxDemos.Disabled,
+    file: "checkbox/disabled.tsx",
+  },
+  "checkbox-default-selected": {
+    component: CheckboxDemos.DefaultSelected,
+    file: "checkbox/default-selected.tsx",
+  },
+  "checkbox-controlled": {
+    component: CheckboxDemos.Controlled,
+    file: "checkbox/controlled.tsx",
+  },
+  "checkbox-indeterminate": {
+    component: CheckboxDemos.Indeterminate,
+    file: "checkbox/indeterminate.tsx",
+  },
+  "checkbox-with-label": {
+    component: CheckboxDemos.WithLabel,
+    file: "checkbox/with-label.tsx",
+  },
+  "checkbox-with-description": {
+    component: CheckboxDemos.WithDescription,
+    file: "checkbox/with-description.tsx",
+  },
+  "checkbox-render-props": {
+    component: CheckboxDemos.RenderProps,
+    file: "checkbox/render-props.tsx",
+  },
+  "checkbox-form": {
+    component: CheckboxDemos.Form,
+    file: "checkbox/form.tsx",
+  },
+  "checkbox-custom-styles": {
+    component: CheckboxDemos.CustomStyles,
+    file: "checkbox/custom-styles.tsx",
+  },
+  "checkbox-invalid": {
+    component: CheckboxDemos.Invalid,
+    file: "checkbox/invalid.tsx",
+  },
+  "checkbox-custom-indicator": {
+    component: CheckboxDemos.CustomIndicator,
+    file: "checkbox/custom-indicator.tsx",
+  },
+  "checkbox-full-rounded": {
+    component: CheckboxDemos.FullRounded,
+    file: "checkbox/full-rounded.tsx",
+  },
+  // CheckboxGroup demos
+  "checkbox-group-basic": {
+    component: CheckboxGroupDemos.Basic,
+    file: "checkbox-group/basic.tsx",
+  },
+  "checkbox-group-on-surface": {
+    component: CheckboxGroupDemos.OnSurface,
+    file: "checkbox-group/on-surface.tsx",
+  },
+  "checkbox-group-with-custom-indicator": {
+    component: CheckboxGroupDemos.WithCustomIndicator,
+    file: "checkbox-group/with-custom-indicator.tsx",
+  },
+  "checkbox-group-indeterminate": {
+    component: CheckboxGroupDemos.Indeterminate,
+    file: "checkbox-group/indeterminate.tsx",
+  },
+  "checkbox-group-validation": {
+    component: CheckboxGroupDemos.Validation,
+    file: "checkbox-group/validation.tsx",
+  },
+  "checkbox-group-controlled": {
+    component: CheckboxGroupDemos.Controlled,
+    file: "checkbox-group/controlled.tsx",
+  },
+  "checkbox-group-disabled": {
+    component: CheckboxGroupDemos.Disabled,
+    file: "checkbox-group/disabled.tsx",
+  },
+  "checkbox-group-features-and-addons": {
+    component: CheckboxGroupDemos.FeaturesAndAddOns,
+    file: "checkbox-group/features-and-addons.tsx",
+  },
   // Chip demos
   "chip-basic": {
     component: ChipDemos.Basic,
@@ -236,6 +317,10 @@ export const demos: Record<string, DemoItem> = {
     component: FieldsetDemos.Basic,
     file: "fieldset/basic.tsx",
   },
+  "fieldset-on-surface": {
+    component: FieldsetDemos.OnSurface,
+    file: "fieldset/on-surface.tsx",
+  },
   // Input demos
   "input-basic": {
     component: InputDemos.Basic,
@@ -248,6 +333,47 @@ export const demos: Record<string, DemoItem> = {
   "input-controlled": {
     component: InputDemos.Controlled,
     file: "input/controlled.tsx",
+  },
+  "input-on-surface": {
+    component: InputDemos.OnSurface,
+    file: "input/on-surface.tsx",
+  },
+  // InputOTP demos
+  "input-otp-basic": {
+    component: InputOTPDemos.Basic,
+    file: "input-otp/basic.tsx",
+  },
+  "input-otp-four-digits": {
+    component: InputOTPDemos.FourDigits,
+    file: "input-otp/four-digits.tsx",
+  },
+  "input-otp-disabled": {
+    component: InputOTPDemos.Disabled,
+    file: "input-otp/disabled.tsx",
+  },
+  "input-otp-with-pattern": {
+    component: InputOTPDemos.WithPattern,
+    file: "input-otp/with-pattern.tsx",
+  },
+  "input-otp-controlled": {
+    component: InputOTPDemos.Controlled,
+    file: "input-otp/controlled.tsx",
+  },
+  "input-otp-with-validation": {
+    component: InputOTPDemos.WithValidation,
+    file: "input-otp/with-validation.tsx",
+  },
+  "input-otp-on-complete": {
+    component: InputOTPDemos.OnComplete,
+    file: "input-otp/on-complete.tsx",
+  },
+  "input-otp-form-example": {
+    component: InputOTPDemos.FormExample,
+    file: "input-otp/form-example.tsx",
+  },
+  "input-otp-on-surface": {
+    component: InputOTPDemos.OnSurface,
+    file: "input-otp/on-surface.tsx",
   },
   // Kbd demos
   "kbd-basic": {
@@ -270,6 +396,10 @@ export const demos: Record<string, DemoItem> = {
     component: KbdDemos.SpecialKeys,
     file: "kbd/special.tsx",
   },
+  "kbd-variants": {
+    component: KbdDemos.Variants,
+    file: "kbd/variants.tsx",
+  },
   // Link demos
   "link-basic": {
     component: LinkDemos.Basic,
@@ -282,6 +412,14 @@ export const demos: Record<string, DemoItem> = {
   "link-icon-placement": {
     component: LinkDemos.IconPlacement,
     file: "link/icon-placement.tsx",
+  },
+  "link-underline-variants": {
+    component: LinkDemos.UnderlineVariants,
+    file: "link/underline-variants.tsx",
+  },
+  "link-underline-offset": {
+    component: LinkDemos.UnderlineOffset,
+    file: "link/underline-offset.tsx",
   },
   // RadioGroup demos
   "radio-group-basic": {
@@ -315,6 +453,10 @@ export const demos: Record<string, DemoItem> = {
   "radio-group-validation": {
     component: RadioGroupDemos.Validation,
     file: "radio-group/validation.tsx",
+  },
+  "radio-group-on-surface": {
+    component: RadioGroupDemos.OnSurface,
+    file: "radio-group/on-surface.tsx",
   },
   // Modal demos
   "modal-default": {
@@ -378,6 +520,14 @@ export const demos: Record<string, DemoItem> = {
     component: SkeletonDemos.AnimationTypes,
     file: "skeleton/animation-types.tsx",
   },
+  "skeleton-grid": {
+    component: SkeletonDemos.Grid,
+    file: "skeleton/grid.tsx",
+  },
+  "skeleton-single-shimmer": {
+    component: SkeletonDemos.SingleShimmer,
+    file: "skeleton/single-shimmer.tsx",
+  },
   // Separator demos
   "separator-basic": {
     component: SeparatorDemos.Basic,
@@ -403,6 +553,11 @@ export const demos: Record<string, DemoItem> = {
   "spinner-sizes": {
     component: SpinnerDemos.Sizes,
     file: "spinner/sizes.tsx",
+  },
+  // Surface demos
+  "surface-variants": {
+    component: SurfaceDemos.Variants,
+    file: "surface/variants.tsx",
   },
   // Switch demos
   "switch-basic": {
@@ -491,6 +646,10 @@ export const demos: Record<string, DemoItem> = {
     component: TextAreaDemos.Controlled,
     file: "textarea/controlled.tsx",
   },
+  "textarea-on-surface": {
+    component: TextAreaDemos.OnSurface,
+    file: "textarea/on-surface.tsx",
+  },
   // TextField demos
   "text-field-basic": {
     component: TextFieldDemos.Basic,
@@ -527,6 +686,10 @@ export const demos: Record<string, DemoItem> = {
   "text-field-validation": {
     component: TextFieldDemos.Validation,
     file: "text-field/validation.tsx",
+  },
+  "text-field-on-surface": {
+    component: TextFieldDemos.OnSurface,
+    file: "text-field/on-surface.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {
@@ -566,6 +729,109 @@ export const demos: Record<string, DemoItem> = {
   "label-basic": {
     component: LabelDemos.Basic,
     file: "label/basic.tsx",
+  },
+  // ListBox demos
+  "listbox-controlled": {
+    component: ListBoxDemos.Controlled,
+    file: "listbox/controlled.tsx",
+  },
+  "listbox-custom-check-icon": {
+    component: ListBoxDemos.CustomCheckIcon,
+    file: "listbox/custom-check-icon.tsx",
+  },
+  "listbox-default": {
+    component: ListBoxDemos.Default,
+    file: "listbox/default.tsx",
+  },
+  "listbox-multi-select": {
+    component: ListBoxDemos.MultiSelect,
+    file: "listbox/multi-select.tsx",
+  },
+  "listbox-with-disabled-items": {
+    component: ListBoxDemos.WithDisabledItems,
+    file: "listbox/with-disabled-items.tsx",
+  },
+  "listbox-with-sections": {
+    component: ListBoxDemos.WithSections,
+    file: "listbox/with-sections.tsx",
+  },
+  // Select demos
+  "select-default": {
+    component: SelectDemos.Default,
+    file: "select/default.tsx",
+  },
+  "select-with-description": {
+    component: SelectDemos.WithDescription,
+    file: "select/with-description.tsx",
+  },
+  "select-multiple-select": {
+    component: SelectDemos.MultipleSelect,
+    file: "select/multiple-select.tsx",
+  },
+  "select-with-sections": {
+    component: SelectDemos.WithSections,
+    file: "select/with-sections.tsx",
+  },
+  "select-with-disabled-options": {
+    component: SelectDemos.WithDisabledOptions,
+    file: "select/with-disabled-options.tsx",
+  },
+  "select-custom-indicator": {
+    component: SelectDemos.CustomIndicator,
+    file: "select/custom-indicator.tsx",
+  },
+  "select-required": {
+    component: SelectDemos.Required,
+    file: "select/required.tsx",
+  },
+  "select-on-surface": {
+    component: SelectDemos.OnSurface,
+    file: "select/on-surface.tsx",
+  },
+  "select-custom-value": {
+    component: SelectDemos.CustomValue,
+    file: "select/custom-value.tsx",
+  },
+  "select-custom-value-multiple": {
+    component: SelectDemos.CustomValueMultiple,
+    file: "select/custom-value-multiple.tsx",
+  },
+  "select-controlled": {
+    component: SelectDemos.Controlled,
+    file: "select/controlled.tsx",
+  },
+  "select-controlled-multiple": {
+    component: SelectDemos.ControlledMultiple,
+    file: "select/controlled-multiple.tsx",
+  },
+  "select-controlled-open-state": {
+    component: SelectDemos.ControlledOpenState,
+    file: "select/controlled-open-state.tsx",
+  },
+  "select-asynchronous-loading": {
+    component: SelectDemos.AsynchronousLoading,
+    file: "select/asynchronous-loading.tsx",
+  },
+  "select-disabled": {
+    component: SelectDemos.Disabled,
+    file: "select/disabled.tsx",
+  },
+  // Slider demos
+  "slider-default": {
+    component: SliderDemos.Default,
+    file: "slider/default.tsx",
+  },
+  "slider-vertical": {
+    component: SliderDemos.Vertical,
+    file: "slider/vertical.tsx",
+  },
+  "slider-range": {
+    component: SliderDemos.Range,
+    file: "slider/range.tsx",
+  },
+  "slider-disabled": {
+    component: SliderDemos.Disabled,
+    file: "slider/disabled.tsx",
   },
   // Description demos
   "description-basic": {

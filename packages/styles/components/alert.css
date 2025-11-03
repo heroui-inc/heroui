@@ -1,0 +1,68 @@
+/* Alert component styles */
+
+/* Base alert styles */
+.alert {
+  @apply bg-surface shadow-surface flex w-full flex-row items-start justify-start gap-4 rounded-3xl px-4 py-3;
+}
+
+/* Alert elements */
+.alert__content {
+  @apply flex h-full flex-grow flex-col items-start;
+}
+
+.alert__indicator {
+  @apply flex select-none items-center justify-center p-1;
+
+  [data-slot="alert-default-icon"] {
+    @apply box-content size-4;
+  }
+}
+
+.alert__title {
+  @apply text-sm font-medium leading-6;
+}
+
+.alert__description {
+  @apply text-muted text-sm;
+}
+
+/* Variant modifiers */
+.alert--default .alert__indicator {
+  @apply text-foreground;
+}
+
+.alert--default .alert__title {
+  @apply text-foreground;
+}
+
+.alert--accent .alert__indicator {
+  @apply text-accent;
+}
+
+.alert--accent .alert__title {
+  @apply text-accent;
+}
+
+.alert--success .alert__indicator {
+  @apply text-success;
+}
+
+.alert--success .alert__title {
+  @apply text-success;
+}
+
+.alert--warning .alert__indicator {
+  @apply text-warning;
+}
+
+.alert--warning .alert__title {
+  @apply text-warning;
+}
+
+.alert--danger .alert__indicator {
+  @apply text-danger;
+}
+
+.alert--danger .alert__title {
+  @apply text-danger;
+}

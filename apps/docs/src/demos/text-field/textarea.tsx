@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Label, TextArea, TextField} from "@heroui/react";
 
 export function TextAreaExample() {

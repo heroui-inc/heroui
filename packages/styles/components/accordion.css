@@ -8,7 +8,7 @@
 
 /* Accordion elements */
 .accordion__body {
-  /* Body is now just a wrapper for the grid animation */
+  @apply text-sm;
 }
 
 .accordion__body-inner {
@@ -20,38 +20,44 @@
 }
 
 .accordion__indicator {
-  @apply text-muted ml-auto size-4 shrink-0 transition duration-300;
+  @apply reduce-motion:transition-none text-muted duration-250 ml-auto size-4 shrink-0 transition;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {
     @apply -rotate-180;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
+/* Accordion Item - Separator styles */
 .accordion__item {
-  @apply border-b last:border-b-0;
+  @apply relative border-none;
 }
+
+.accordion__item::after {
+  content: "";
+  @apply bg-divider absolute bottom-0 left-0 h-px w-full rounded-full;
+}
+
+.accordion__item:last-child::after {
+  content: none;
+}
+/* ------------------------------------ */
 
 .accordion__trigger {
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left font-medium;
+  @apply reduce-motion:transition-none flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
 
   transition:
-    background-color 150ms var(--ease-smooth),
     opacity 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
 
   /* Hover state */
-  &:hover,
-  &[data-hovered="true"],
+  &:hover:not([aria-expanded="true"]),
+  &[data-hovered="true"]:not([aria-expanded="true"]),
   /* Pressed state */
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
   }
 
@@ -65,10 +71,6 @@
   &:disabled,
   &[aria-disabled="true"] {
     @apply status-disabled;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 
@@ -84,32 +86,33 @@
   &[data-expanded="true"] {
     opacity: 1;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
-/* Outline variant */
-.accordion--outline {
-  @apply bg-panel rounded-xl border shadow-sm;
+/* Surface variant */
+.accordion--surface {
+  @apply bg-surface rounded-3xl;
 
   .accordion__trigger {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-panel-hover;
+    &:hover:not([aria-expanded="true"]),
+    &[data-hovered="true"]:not([aria-expanded="true"]) {
+      @apply bg-default;
     }
   }
 }
 
-.accordion--outline .accordion__item {
-  /* Special rounding for first and last items in outline variant */
+.accordion--surface .accordion__item {
+  /* Surface variant separator styling */
+  &::after {
+    @apply left-[3%] w-[94%];
+  }
+
+  /* Special rounding for first and last items in surface variant */
   &:first-child [data-slot="accordion-trigger"] {
-    @apply rounded-t-lg;
+    @apply rounded-t-3xl;
   }
 
   &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
     [data-slot="accordion-trigger"] {
-    @apply rounded-b-lg;
+    @apply rounded-b-3xl;
   }
 }

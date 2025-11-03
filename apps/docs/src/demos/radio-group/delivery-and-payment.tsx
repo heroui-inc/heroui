@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import clsx from "clsx";
@@ -61,15 +59,15 @@ export function DeliveryAndPayment() {
       }}
     >
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroup defaultValue="express" name="delivery">
+        <RadioGroup isOnSurface defaultValue="express" name="delivery">
           <Label>Delivery method</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
-              <Radio.Root
+              <Radio
                 key={option.value}
                 value={option.value}
                 className={clsx(
-                  "bg-surface-2 data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-md border border-transparent px-5 py-4 transition-all",
+                  "bg-surface data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-xl border border-transparent px-5 py-4 transition-all",
                   "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
                 )}
               >
@@ -83,23 +81,23 @@ export function DeliveryAndPayment() {
                   </div>
                   <span className="text-sm font-semibold">{option.price}</span>
                 </Radio.Content>
-              </Radio.Root>
+              </Radio>
             ))}
           </div>
         </RadioGroup>
       </section>
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroup defaultValue="visa" name="payment">
+        <RadioGroup isOnSurface defaultValue="visa" name="payment">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Label>Payment method</Label>
           </div>
           <div className="grid gap-x-4 md:grid-cols-2">
             {paymentOptions.map((option) => (
-              <Radio.Root
+              <Radio
                 key={option.value}
                 value={option.value}
                 className={clsx(
-                  "bg-surface-2 group relative flex-col gap-4 rounded-md border border-transparent px-5 py-4 transition-all",
+                  "bg-surface group relative flex-col gap-4 rounded-xl border border-transparent px-5 py-4 transition-all",
                   "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                 )}
               >
@@ -113,7 +111,7 @@ export function DeliveryAndPayment() {
                     <Description>{option.description}</Description>
                   </div>
                 </Radio.Content>
-              </Radio.Root>
+              </Radio>
             ))}
           </div>
         </RadioGroup>

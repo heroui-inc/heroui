@@ -1,5 +1,3 @@
-"use client";
-
 import {TextArea} from "@heroui/react";
 
 export function Basic() {

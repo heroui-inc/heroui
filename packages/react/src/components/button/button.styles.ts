@@ -19,11 +19,12 @@ export const buttonVariants = tv({
       sm: "button--sm",
     },
     variant: {
-      danger: "button--danger",
-      ghost: "button--ghost",
       primary: "button--primary",
       secondary: "button--secondary",
       tertiary: "button--tertiary",
+      ghost: "button--ghost",
+      danger: "button--danger",
+      "danger-soft": "button--danger-soft",
     },
   },
 });

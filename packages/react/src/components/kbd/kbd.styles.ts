@@ -9,7 +9,12 @@ export const kbdVariants = tv({
     content: "kbd__content",
   },
   defaultVariants: {},
-  variants: {},
+  variants: {
+    variant: {
+      default: "kbd--default",
+      light: "kbd--light",
+    },
+  },
 });
 
 export type KbdVariants = VariantProps<typeof kbdVariants>;

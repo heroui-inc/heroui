@@ -1,9 +1,12 @@
 "use client";
 
 import type {CardVariants} from "./card.styles";
+import type {SurfaceVariants} from "../surface";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
+
+import {SurfaceContext} from "../surface";
 
 import {cardVariants} from "./card.styles";
 /* -------------------------------------------------------------------------------------------------
@@ -22,15 +25,36 @@ interface CardRootProps extends React.ComponentProps<"div">, CardVariants {
   asChild?: boolean;
 }
 
-const CardRoot = ({asChild = false, children, className, variant, ...props}: CardRootProps) => {
+const CardRoot = ({
+  asChild = false,
+  children,
+  className,
+  variant = "default",
+  ...props
+}: CardRootProps) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
   const Comp = asChild ? Slot : "div";
 
+  const content = (
+    <Comp className={slots.base({className})} data-slot="card" {...props}>
+      {children}
+    </Comp>
+  );
+
   return (
     <CardContext value={{slots}}>
-      <Comp className={slots.base({className})} data-slot="card" {...props}>
-        {children}
-      </Comp>
+      {variant === "transparent" ? (
+        content
+      ) : (
+        // Allows inner components to apply "on-surface" colors for proper contrast
+        <SurfaceContext.Provider
+          value={{
+            variant: variant as SurfaceVariants["variant"],
+          }}
+        >
+          {content}
+        </SurfaceContext.Provider>
+      )}
     </CardContext>
   );
 };

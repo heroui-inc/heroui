@@ -9,7 +9,9 @@ import {chipVariants} from "./chip.styles";
 /* -------------------------------------------------------------------------------------------------
  * Chip Root
  * -----------------------------------------------------------------------------------------------*/
-interface ChipRootProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "type">, ChipVariants {
+interface ChipRootProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "type" | "color">,
+    ChipVariants {
   className?: string;
   children: React.ReactNode;
   asChild?: boolean;
@@ -19,14 +21,15 @@ const ChipRoot = ({
   asChild = false,
   children,
   className,
-  type,
+  color,
+  size,
   variant,
   ...props
 }: ChipRootProps) => {
   const Comp = asChild ? SlotPrimitive : "span";
 
   return (
-    <Comp {...props} className={chipVariants({className, type, variant})}>
+    <Comp {...props} className={chipVariants({className, size, color, variant})}>
       {children}
     </Comp>
   );

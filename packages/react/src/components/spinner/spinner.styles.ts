@@ -5,7 +5,7 @@ import {tv} from "tailwind-variants";
 export const spinnerVariants = tv({
   base: "spinner",
   defaultVariants: {
-    color: "current",
+    color: "accent",
     size: "md",
   },
   variants: {

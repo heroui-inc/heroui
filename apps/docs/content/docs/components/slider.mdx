@@ -1,0 +1,371 @@
+---
+title: Slider
+description: A slider allows a user to select one or more values within a range
+icon: preview
+links:
+  rac: Slider
+  source: slider/slider.tsx
+  styles: slider.css
+  storybook: Components/Controls/Slider
+---
+
+## Import
+
+```tsx
+import { Slider } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="slider-default"
+/>
+
+### Anatomy
+
+Import the Slider component and access all parts using dot notation.
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+export default () => (
+  <Slider>
+    <Label />
+    <Slider.Output />
+    <Slider.Track>
+      <Slider.Fill />
+      <Slider.Thumb />
+    </Slider.Track>
+  </Slider>
+)
+```
+
+### Range Slider Anatomy
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+export default () => (
+  <Slider defaultValue={[25, 75]}>
+    <Label />
+    <Slider.Output />
+    <Slider.Track>
+      {({state}) => (
+        <>
+          <Slider.Fill />
+          {state.values.map((_, i) => (
+            <Slider.Thumb key={i} index={i} />
+          ))}
+        </>
+      )}
+    </Slider.Track>
+  </Slider>
+)
+```
+
+### Vertical
+
+<ComponentPreview
+  name="slider-vertical"
+/>
+
+### Range
+
+<ComponentPreview
+  name="slider-range"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="slider-disabled"
+/>
+
+<RelatedComponents component="slider" />
+ 
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+function CustomSlider() {
+  return (
+    <Slider className="w-full">
+      <Label>Volume</Label>
+      <Slider.Output className="text-muted-fg text-sm" />
+      <Slider.Track className="h-2 rounded-full bg-surface-secondary">
+        <Slider.Fill className="bg-accent" />
+        <Slider.Thumb className="size-4 rounded-full bg-accent" />
+      </Slider.Track>
+    </Slider>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Slider component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .slider {
+    @apply flex flex-col gap-2;
+  }
+
+  .slider__output {
+    @apply text-muted-fg text-sm;
+  }
+
+  .slider-track {
+    @apply relative h-2 w-full rounded-full bg-surface-secondary;
+  }
+
+  .slider-fill {
+    @apply absolute h-full rounded-full bg-accent;
+  }
+
+  .slider-thumb {
+    @apply size-4 rounded-full bg-accent border-2 border-background;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Slider component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/slider.css)):
+
+#### Base Classes
+- `.slider` - Base slider container
+- `.slider__output` - Output element displaying current value(s)
+- `.slider-track` - Track element containing fill and thumbs
+- `.slider-fill` - Fill element showing selected range
+- `.slider-thumb` - Individual thumb element
+
+#### State Classes
+- `.slider[data-disabled="true"]` - Disabled slider state
+- `.slider[data-orientation="vertical"]` - Vertical orientation
+- `.slider-thumb[data-dragging="true"]` - Thumb being dragged
+- `.slider-thumb[data-focus-visible="true"]` - Thumb keyboard focused
+- `.slider-thumb[data-disabled="true"]` - Disabled thumb state
+- `.slider-track[data-fill-start="true"]` - Fill starts at beginning
+- `.slider-track[data-fill-end="true"]` - Fill ends at end
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Hover**: `:hover` or `[data-hovered="true"]` on thumb
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on thumb
+- **Dragging**: `[data-dragging="true"]` on thumb
+- **Disabled**: `:disabled` or `[data-disabled="true"]` on slider or thumb
+
+## API Reference
+
+### Slider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number \| number[]` | - | The current value (controlled) |
+| `defaultValue` | `number \| number[]` | - | The default value (uncontrolled) |
+| `onChange` | `(value: number \| number[]) => void` | - | Handler called when the value changes |
+| `onChangeEnd` | `(value: number \| number[]) => void` | - | Handler called when dragging ends |
+| `minValue` | `number` | `0` | The slider's minimum value |
+| `maxValue` | `number` | `100` | The slider's maximum value |
+| `step` | `number` | `1` | The slider's step value |
+| `formatOptions` | `Intl.NumberFormatOptions` | - | The display format of the value label |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the slider |
+| `isDisabled` | `boolean` | - | Whether the slider is disabled |
+| `aria-label` | `string` | - | Accessibility label for the slider |
+| `aria-labelledby` | `string` | - | ID of element that labels the slider |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Slider content or render function |
+
+### Slider.Output Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Output content or render function |
+
+### Slider.Track Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Track content or render function |
+
+### Slider.Fill Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `style` | `CSSProperties` | - | Inline styles |
+
+### Slider.Thumb Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `index` | `number` | `0` | Index of the thumb within the slider |
+| `isDisabled` | `boolean` | - | Whether this thumb is disabled |
+| `name` | `string` | - | The name of the input element, used when submitting an HTML form |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Thumb content or render function |
+
+### RenderProps
+
+When using render functions with Slider.Output or Slider.Track, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `state` | `SliderState` | The state of the slider |
+| `values` | `number[]` | Values managed by the slider by thumb index |
+| `getThumbValueLabel` | `(index: number) => string` | Returns the string label for the specified thumb's value |
+| `orientation` | `"horizontal" \| "vertical"` | The orientation of the slider |
+| `isDisabled` | `boolean` | Whether the slider is disabled |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider defaultValue={30}>
+  <Label>Volume</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### Range Slider
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider
+  defaultValue={[100, 500]}
+  formatOptions={{style: "currency", currency: "USD"}}
+  maxValue={1000}
+  minValue={0}
+  step={50}
+>
+  <Label>Price Range</Label>
+  <Slider.Output />
+  <Slider.Track>
+    {({state}) => (
+      <>
+        <Slider.Fill />
+        {state.values.map((_, i) => (
+          <Slider.Thumb key={i} index={i} />
+        ))}
+      </>
+    )}
+  </Slider.Track>
+</Slider>
+```
+
+### Controlled Value
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+import { useState } from 'react';
+
+function ControlledSlider() {
+  const [value, setValue] = useState(25);
+
+  return (
+    <>
+      <Slider value={value} onChange={setValue}>
+        <Label>Volume</Label>
+        <Slider.Output />
+        <Slider.Track>
+          <Slider.Fill />
+          <Slider.Thumb />
+        </Slider.Track>
+      </Slider>
+      <p>Current value: {value}</p>
+    </>
+  );
+}
+```
+
+### Custom Value Formatting
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider
+  defaultValue={60}
+  formatOptions={{style: "currency", currency: "USD"}}
+>
+  <Label>Price</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### Vertical Orientation
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider defaultValue={30} orientation="vertical" aria-label="Volume">
+  <Label>Volume</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### Custom Output Display
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider defaultValue={[25, 75]}>
+  <Label>Range</Label>
+  <Slider.Output>
+    {({state}) => 
+      state.values.map((_, i) => state.getThumbValueLabel(i)).join(' – ')
+    }
+  </Slider.Output>
+  <Slider.Track>
+    {({state}) => (
+      <>
+        <Slider.Fill />
+        {state.values.map((_, i) => (
+          <Slider.Thumb key={i} index={i} />
+        ))}
+      </>
+    )}
+  </Slider.Track>
+</Slider>
+```
+
+## Accessibility
+
+The Slider component implements the ARIA slider pattern and provides:
+
+- Full keyboard navigation support (Arrow keys, Home, End, Page Up/Down)
+- Screen reader announcements for value changes
+- Proper focus management
+- Support for disabled states
+- HTML form integration via hidden input elements
+- Internationalization support with locale-aware value formatting
+- Right-to-left (RTL) language support
+
+For more information, see the [React Aria Slider documentation](https://react-spectrum.adobe.com/react-aria/Slider.html).
+

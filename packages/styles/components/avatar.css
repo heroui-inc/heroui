@@ -1,36 +1,25 @@
 /* Base avatar styles */
 .avatar {
-  @apply bg-surface-3 relative flex size-10 shrink-0 overflow-hidden rounded-full;
+  @apply bg-default relative flex size-10 shrink-0 overflow-hidden rounded-full;
 }
 
 /* Avatar image element */
 .avatar__image {
-  @apply absolute inset-0 aspect-square opacity-0 transition-[opacity] duration-300 data-[loaded=true]:opacity-100;
+  @apply reduce-motion:transition-none duration-250 absolute inset-0 aspect-square opacity-0 transition-[opacity] data-[loaded=true]:opacity-100;
 
   &[data-loading-status="failed"] {
     @apply hidden;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 
 /* Avatar fallback element */
 .avatar__fallback {
-  @apply bg-default flex size-full items-center justify-center rounded-full;
-
-  /* Border */
-  border-width: var(--border-width);
+  @apply bg-default flex size-full items-center justify-center rounded-full text-sm font-medium;
 }
 
 /* Size modifiers */
 .avatar--sm {
   @apply size-8;
-
-  .avatar__fallback {
-    @apply text-sm;
-  }
 }
 
 .avatar--md {
@@ -39,6 +28,10 @@
 
 .avatar--lg {
   @apply size-12;
+
+  .avatar__fallback {
+    @apply text-base;
+  }
 }
 
 /* Color modifiers for fallback */
@@ -60,4 +53,25 @@
 
 .avatar__fallback--danger {
   @apply text-danger;
+}
+
+/* Variant modifiers */
+.avatar--soft {
+  @apply bg-transparent;
+}
+
+.avatar--soft .avatar__fallback--accent {
+  @apply bg-accent-soft text-accent-soft-foreground;
+}
+
+.avatar--soft .avatar__fallback--success {
+  @apply bg-success-soft text-success-soft-foreground;
+}
+
+.avatar--soft .avatar__fallback--warning {
+  @apply bg-warning-soft text-warning-soft-foreground;
+}
+
+.avatar--soft .avatar__fallback--danger {
+  @apply bg-danger-soft text-danger-soft-foreground;
 }

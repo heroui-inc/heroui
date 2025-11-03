@@ -1,49 +1,47 @@
-"use client";
-
 import {Card} from "@heroui/react";
 
 export function Variants() {
   return (
     <div className="flex flex-col gap-4">
-      <Card.Root className="w-[320px]" variant="flat">
+      <Card className="w-[320px]" variant="transparent">
         <Card.Header>
-          <Card.Title>Variant Flat</Card.Title>
-          <Card.Description>Transparent background with no border</Card.Description>
+          <Card.Title>Transparent</Card.Title>
+          <Card.Description>Minimal prominence with transparent background</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with no variant styling</p>
+          <p>Use for less important content or nested cards</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
 
-      <Card.Root className="w-[320px]" variant="outlined">
+      <Card className="w-[320px]" variant="default">
         <Card.Header>
-          <Card.Title>Variant Outlined</Card.Title>
-          <Card.Description>This card uses outlined variant (default)</Card.Description>
+          <Card.Title>Default</Card.Title>
+          <Card.Description>Standard card appearance (surface-secondary)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with subtle elevation</p>
+          <p>The default card variant for most use cases</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
 
-      <Card.Root className="w-[320px]" variant="elevated">
+      <Card className="w-[320px]" variant="secondary">
         <Card.Header>
-          <Card.Title>Variant Elevated</Card.Title>
-          <Card.Description>This card uses elevated variant</Card.Description>
+          <Card.Title>Secondary</Card.Title>
+          <Card.Description>Medium prominence (surface-tertiary)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with medium elevation</p>
+          <p>Use to draw moderate attention</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
 
-      <Card.Root className="w-[320px]" variant="filled">
+      <Card className="w-[320px]" variant="tertiary">
         <Card.Header>
-          <Card.Title>Variant Filled</Card.Title>
-          <Card.Description>This card uses filled variant</Card.Description>
+          <Card.Title>Tertiary</Card.Title>
+          <Card.Description>Higher prominence (surface-quaternary)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Content with higher elevation</p>
+          <p>Use for important content</p>
         </Card.Content>
-      </Card.Root>
+      </Card>
     </div>
   );
 }

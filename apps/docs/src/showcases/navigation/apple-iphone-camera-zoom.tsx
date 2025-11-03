@@ -53,7 +53,7 @@ export default function AppleIPhoneCameraZoom() {
             />
           ))}
         </div>
-        <Tabs.Root defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
+        <Tabs defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
           <Tabs.ListContainer className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
             <Tabs.List
               aria-label="Camera zoom options"
@@ -71,7 +71,7 @@ export default function AppleIPhoneCameraZoom() {
               ))}
             </Tabs.List>
           </Tabs.ListContainer>
-        </Tabs.Root>
+        </Tabs>
         <div className="relative h-10 w-10">
           {Object.keys(zoomXMap).map((key) => (
             <p

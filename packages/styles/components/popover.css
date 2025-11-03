@@ -2,7 +2,8 @@
 
 /* Base popover styles */
 .popover {
-  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-xl p-0 text-sm will-change-transform dark:shadow-none;
+  @apply bg-overlay origin-[var(--trigger-anchor-point)] rounded-3xl p-0 text-sm will-change-transform;
+  box-shadow: var(--shadow-overlay);
 
   /* Entering animations */
   &[data-entering] {
@@ -32,28 +33,27 @@
   }
 
   /* Arrow styling */
-  & [data-slot="overlay-arrow"] {
-    @apply stroke-border/40;
-    fill: var(--panel);
+  & [data-slot="popover-overlay-arrow"] {
+    fill: var(--overlay);
   }
 
   /* Arrow rotation based on placement */
-  &[data-placement="bottom"] [data-slot="overlay-arrow"] {
+  &[data-placement="bottom"] [data-slot="popover-overlay-arrow"] {
     rotate: 180deg;
   }
 
-  &[data-placement="left"] [data-slot="overlay-arrow"] {
+  &[data-placement="left"] [data-slot="popover-overlay-arrow"] {
     rotate: -90deg;
   }
 
-  &[data-placement="right"] [data-slot="overlay-arrow"] {
+  &[data-placement="right"] [data-slot="popover-overlay-arrow"] {
     rotate: 90deg;
   }
 }
 
 /* Popover dialog */
 .popover__dialog {
-  @apply p-3;
+  @apply p-4;
 
   &:focus-visible,
   &[data-focus-visible="true"] {
@@ -68,6 +68,8 @@
 
 /* Popover trigger */
 .popover__trigger {
+  @apply reduce-motion:transition-none;
+
   transition:
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
@@ -85,9 +87,5 @@
   &:disabled,
   &[aria-disabled="true"] {
     @apply status-disabled;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }

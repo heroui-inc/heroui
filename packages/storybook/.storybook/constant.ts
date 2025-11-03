@@ -3,6 +3,7 @@ export const __DEV__ = process.env.NODE_ENV !== "production";
 export enum Emitter {
   STRICT_MODE = "strict-mode",
   INTERNATIONALIZATION = "internationalization",
+  REDUCE_MOTION = "reduce-motion",
 }
 
 export const locales = [

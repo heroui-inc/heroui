@@ -65,7 +65,7 @@ export function LLMCopyButton({
     <button
       disabled={isLoading}
       className={docsButtonVariants({
-        className: "[&_svg]:text-muted [&_svg]:size-3.5",
+        className: "[&_svg]:text-muted text-sm [&_svg]:size-3.5",
       })}
       onClick={onClick}
     >

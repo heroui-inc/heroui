@@ -1,5 +1,3 @@
-"use client";
-
 import {CloseButton} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

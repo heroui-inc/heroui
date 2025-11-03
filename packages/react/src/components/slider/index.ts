@@ -2,8 +2,6 @@ import type {ComponentProps} from "react";
 
 import {
   SliderFill,
-  SliderHeader,
-  SliderLabel,
   SliderMarks,
   SliderOutput,
   SliderRoot,
@@ -16,8 +14,6 @@ import {
  * -----------------------------------------------------------------------------------------------*/
 export const Slider = Object.assign(SliderRoot, {
   Root: SliderRoot,
-  Header: SliderHeader,
-  Label: SliderLabel,
   Output: SliderOutput,
   Track: SliderTrack,
   Fill: SliderFill,
@@ -28,8 +24,6 @@ export const Slider = Object.assign(SliderRoot, {
 export type Slider = {
   Props: ComponentProps<typeof SliderRoot>;
   RootProps: ComponentProps<typeof SliderRoot>;
-  HeaderProps: ComponentProps<typeof SliderHeader>;
-  LabelProps: ComponentProps<typeof SliderLabel>;
   OutputProps: ComponentProps<typeof SliderOutput>;
   TrackProps: ComponentProps<typeof SliderTrack>;
   FillProps: ComponentProps<typeof SliderFill>;
@@ -40,22 +34,11 @@ export type Slider = {
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {
-  SliderRoot,
-  SliderHeader,
-  SliderLabel,
-  SliderOutput,
-  SliderTrack,
-  SliderFill,
-  SliderThumb,
-  SliderMarks,
-};
+export {SliderRoot, SliderOutput, SliderTrack, SliderFill, SliderThumb, SliderMarks};
 
 export type {
   SliderRootProps,
   SliderRootProps as SliderProps,
-  SliderHeaderProps,
-  SliderLabelProps,
   SliderOutputProps,
   SliderTrackProps,
   SliderFillProps,

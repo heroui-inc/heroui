@@ -12,7 +12,7 @@ export function Basic() {
     <div className="w-full max-w-md">
       <div className="flex flex-col gap-4 bg-transparent p-4">
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -36,7 +36,7 @@ export function Basic() {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -45,9 +45,9 @@ export function Basic() {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
           <Separator className="my-2" />
-          <Disclosure.Root id="download">
+          <Disclosure id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -72,7 +72,7 @@ export function Basic() {
                 <img
                   alt="App Store QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Available on iOS and Android devices.</p>
                 <Button className="mt-4" variant="primary">
@@ -81,7 +81,7 @@ export function Basic() {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
         </DisclosureGroup>
       </div>
     </div>

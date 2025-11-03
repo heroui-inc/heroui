@@ -11,7 +11,7 @@ import {CodeBlock} from "./codeblock";
 export async function ComponentSource({
   className,
   // TODO: Disclosure is not ready yet, so we need to use collapsible for now
-  collapsible = false,
+  collapsible = true,
   language,
   name,
   showCodeTitle = false,
