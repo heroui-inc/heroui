@@ -384,6 +384,11 @@ code {
   }
 }
 
+/* Apply !important only for isolated code blocks (not code-block-wrapper) */
+.is-isolated .docs-code-block {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
 .code-block-wrapper {
   @apply rounded-xl;
 }
@@ -539,9 +544,16 @@ code {
   }
 
   .docs-code-block {
+    background: rgba(40, 40, 40, 0.4);
+
     .fd-scroll-container {
       background: transparent !important;
     }
+  }
+
+  /* Apply !important only for isolated code blocks (not code-block-wrapper) */
+  .is-isolated .docs-code-block {
+    background: rgba(40, 40, 40, 0.4) !important;
   }
 
   .shiki:not(.not-fumadocs-codeblock *) code .highlighted {

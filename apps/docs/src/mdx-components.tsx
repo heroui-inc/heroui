@@ -16,6 +16,7 @@ import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {PackageManagers} from "./mdx-components/package-managers";
+import {cn} from "./utils/cn";
 
 // Create icon components using gravity-ui icons
 const AlertTriangle = (props: any) => <Iconify {...props} icon="circle-exclamation-fill" />;
@@ -126,11 +127,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       lineCount = codeContent.split("\n").length;
 
       // Only add line numbers class if more than 5 lines
-      const className =
-        lineCount > MAX_LINES_FOR_LINE_NUMBERS ? "docs-code-block-line-numbers" : undefined;
+      const classes = cn(
+        "mdx-code-block",
+        lineCount > MAX_LINES_FOR_LINE_NUMBERS ? "docs-code-block-line-numbers" : undefined,
+        props.className,
+      );
 
       return (
-        <CodeBlock {...props} className={className}>
+        <CodeBlock {...props} className={classes}>
           <Pre>{children}</Pre>
         </CodeBlock>
       );
