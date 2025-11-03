@@ -3,27 +3,27 @@ import {Avatar} from "@heroui/react";
 const users = [
   {
     id: 1,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg",
     name: "John Doe",
   },
   {
     id: 2,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=5",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
     name: "Kate Wilson",
   },
   {
     id: 3,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=20",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg",
     name: "Emily Chen",
   },
   {
     id: 4,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=23",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
     name: "Michael Brown",
   },
   {
     id: 5,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=16",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
     name: "Olivia Davis",
   },
 ];

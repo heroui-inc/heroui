@@ -12,10 +12,12 @@ export function CodeBlock({
   children,
   className,
   collapsible,
+  isIsolated = false,
   showLineNumbers,
   title,
   ...props
 }: {
+  isIsolated?: boolean;
   lang?: string;
   collapsible?: boolean;
   showLineNumbers?: boolean;
@@ -30,6 +32,7 @@ export function CodeBlock({
         title={title}
         className={cn(
           "code-block-wrapper docs-code-block",
+          isIsolated && "is-isolated",
           showLineNumbers && "docs-code-block-line-numbers",
           className,
         )}
@@ -45,6 +48,7 @@ export function CodeBlock({
       <div
         className={cn(
           "code-block-wrapper",
+          isIsolated && "is-isolated",
           isCollapsed && "mask-to-bottom relative max-h-[150px] overflow-hidden",
           !isCollapsed && "pb-10",
         )}

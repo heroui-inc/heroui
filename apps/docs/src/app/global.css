@@ -8,8 +8,8 @@
 @import "@heroui/styles";
 
 /* ============================================================================
-   CSS VARIABLES - ROOT & THEMES
-   ============================================================================ */
+      CSS VARIABLES - ROOT & THEMES
+      ============================================================================ */
 
 :root {
   /* Brand Accent Colors (Optional Overrides) */
@@ -61,17 +61,17 @@
 }
 
 /* ============================================================================
-   HEROUI COMPONENT OVERRIDES
-   ============================================================================ */
+      HEROUI COMPONENT OVERRIDES
+      ============================================================================ */
 
 /* HeroUI Component Style Overrides */
 /* @utility button {
-  @apply rounded-sm;
-} */
+     @apply rounded-sm;
+   } */
 
 /* ============================================================================
-   FUMADOCS UI - NAVIGATION COMPONENTS
-   ============================================================================ */
+      FUMADOCS UI - NAVIGATION COMPONENTS
+      ============================================================================ */
 
 [data-theme-toggle] {
   @apply bg-default/80 border-none;
@@ -127,7 +127,7 @@
 
 /* Sub Navigation */
 #nd-subnav {
-  @apply h-14;
+  @apply bg-background h-14;
 
   backdrop-filter: none;
 
@@ -141,12 +141,6 @@
     kbd {
       @apply bg-default dark:bg-surface border-border;
     }
-  }
-
-  @media (max-width: 48rem) {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(16px) saturate(120%);
-    border: none !important;
   }
 }
 
@@ -211,8 +205,8 @@
 }
 
 /* ============================================================================
-   FUMADOCS UI - LAYOUT COMPONENTS
-   ============================================================================ */
+      FUMADOCS UI - LAYOUT COMPONENTS
+      ============================================================================ */
 
 #nd-docs-layout {
   position: relative;
@@ -253,8 +247,8 @@
 }
 
 /* ============================================================================
-   FUMADOCS UI - TABLE OF CONTENTS
-   ============================================================================ */
+      FUMADOCS UI - TABLE OF CONTENTS
+      ============================================================================ */
 
 #nd-toc {
   padding-top: 10px;
@@ -291,8 +285,8 @@
 }
 
 /* ============================================================================
-   PROSE & CONTENT STYLES
-   ============================================================================ */
+      PROSE & CONTENT STYLES
+      ============================================================================ */
 
 .prose {
   .shiki {
@@ -369,8 +363,8 @@ code {
 }
 
 /* ============================================================================
-   CODE BLOCK STYLES
-   ============================================================================ */
+      CODE BLOCK STYLES
+      ============================================================================ */
 
 .docs-code-block {
   @apply m-0 rounded-none border-none pl-2 pr-2 pt-4;
@@ -382,6 +376,11 @@ code {
   .line {
     @apply !pl-0;
   }
+}
+
+/* Apply !important only for isolated code blocks (not code-block-wrapper) */
+.is-isolated .docs-code-block {
+  background: rgba(0, 0, 0, 0.04) !important;
 }
 
 .code-block-wrapper {
@@ -422,8 +421,8 @@ code {
 }
 
 /* ============================================================================
-   ANIMATIONS & KEYFRAMES
-   ============================================================================ */
+      ANIMATIONS & KEYFRAMES
+      ============================================================================ */
 
 @keyframes scrolling-banner {
   from {
@@ -470,8 +469,8 @@ code {
 }
 
 /* ============================================================================
-   UTILITY CLASSES
-   ============================================================================ */
+      UTILITY CLASSES
+      ============================================================================ */
 
 .animate-scrolling-banner {
   animation: scrolling-banner var(--duration) linear infinite;
@@ -495,8 +494,8 @@ code {
 }
 
 /* ============================================================================
-   DARK THEME OVERRIDES
-   ============================================================================ */
+      DARK THEME OVERRIDES
+      ============================================================================ */
 
 [data-theme="dark"],
 .dark {
@@ -539,9 +538,16 @@ code {
   }
 
   .docs-code-block {
+    background: rgba(40, 40, 40, 0.4);
+
     .fd-scroll-container {
       background: transparent !important;
     }
+  }
+
+  /* Apply !important only for isolated code blocks (not code-block-wrapper) */
+  .is-isolated .docs-code-block {
+    background: rgba(40, 40, 40, 0.4) !important;
   }
 
   .shiki:not(.not-fumadocs-codeblock *) code .highlighted {

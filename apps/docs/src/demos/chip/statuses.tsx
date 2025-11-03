@@ -4,7 +4,7 @@ import {Icon} from "@iconify/react";
 export function ChipStatuses() {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <Chip variant="primary">
           <Icon icon="gravity-ui:circle-fill" width={6} />
           Default
@@ -23,7 +23,7 @@ export function ChipStatuses() {
         </Chip>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <Chip>
           <Icon icon="gravity-ui:circle-info" width={12} />
           New Feature

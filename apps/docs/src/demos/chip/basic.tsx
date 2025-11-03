@@ -2,7 +2,7 @@ import {Chip} from "@heroui/react";
 
 export function ChipBasic() {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <Chip>Default</Chip>
       <Chip color="accent">Accent</Chip>
       <Chip color="success">Success</Chip>
