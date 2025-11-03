@@ -18,24 +18,24 @@ export function Form() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <SwitchGroup>
-        <Switch.Root name="notifications" value="on">
+        <Switch name="notifications" value="on">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
           <Label className="text-sm">Enable notifications</Label>
-        </Switch.Root>
-        <Switch.Root defaultSelected name="newsletter" value="on">
+        </Switch>
+        <Switch defaultSelected name="newsletter" value="on">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
           <Label className="text-sm">Subscribe to newsletter</Label>
-        </Switch.Root>
-        <Switch.Root name="marketing" value="on">
+        </Switch>
+        <Switch name="marketing" value="on">
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
           <Label className="text-sm">Receive marketing updates</Label>
-        </Switch.Root>
+        </Switch>
       </SwitchGroup>
       <Button className="mt-4" size="sm" type="submit" variant="primary">
         Submit

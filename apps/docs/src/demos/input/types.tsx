@@ -1,5 +1,3 @@
-"use client";
-
 import {Input, Label} from "@heroui/react";
 
 export function Types() {

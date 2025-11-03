@@ -1,7 +1,6 @@
 ---
 title: Card
 description: Flexible container component for grouping related content and actions
-icon: updated
 links:
   source: card/card.tsx
   styles: card.css
@@ -28,22 +27,30 @@ Import the Card component and access all parts using dot notation.
 import { Card } from "@heroui/react";
 
 export default () => (
-  <Card.Root>
+  <Card>
     <Card.Header>
       <Card.Title />
       <Card.Description />
     </Card.Header>
     <Card.Content />
     <Card.Footer />
-  </Card.Root>
+  </Card>
 );
 ```
 
 ### Variants
 
+Cards come in semantic variants that describe their prominence level rather than specific visual styles. This allows themes to interpret them differently:
+
 <ComponentPreview
   name="card-variants"
 />
+
+- **`transparent`** - Minimal prominence, transparent background (great for nested cards)
+- **`default`** - Standard card for most use cases (surface-secondary)
+- **`secondary`** - Medium prominence to draw moderate attention (surface-tertiary)
+- **`tertiary`** - Higher prominence for important content (surface-quaternary)
+- **`quaternary`** - Highest prominence for critical content
 
 ### Horizontal Layout
 
@@ -79,18 +86,18 @@ export default () => (
 
 ```tsx
 // Semantic markup
-<Card.Root role="article" aria-labelledby="card-title">
+<Card role="article" aria-labelledby="card-title">
   <Card.Header>
     <Card.Title id="card-title">Article Title</Card.Title>
   </Card.Header>
-</Card.Root>
+</Card>
 
 // Interactive cards
-<Card.Root asChild>
+<Card asChild>
   <a href="/details" aria-label="View product details">
     <Card.Title>Product Name</Card.Title>
   </a>
-</Card.Root>
+</Card>
 ```
 
 ## Styling
@@ -98,7 +105,7 @@ export default () => (
 ### Component Customization
 
 ```tsx
-<Card.Root className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
   <Card.Header>
     <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
     <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
@@ -106,14 +113,14 @@ export default () => (
   <Card.Content>
     <p className="text-blue-800">Content with custom styling</p>
   </Card.Content>
-</Card.Root>
+</Card>
 ```
 
 ### CSS Variable Overrides
 
 ```css
 /* Override specific variants */
-.card--variant-elevated {
+.card--secondary {
   @apply bg-gradient-to-br from-blue-50 to-purple-50;
 }
 
@@ -139,18 +146,19 @@ Card uses BEM naming for predictable styling, ([View source styles](https://gith
 
 #### Variant Classes
 
-- `.card--variant-flat` - Transparent background, no border
-- `.card--variant-outlined` - Border with subtle background (default)
-- `.card--variant-elevated` - Slightly elevated with medium background
-- `.card--variant-filled` - Prominently filled with stronger background
- 
+- `.card--transparent` - Minimal prominence, transparent background (maps to `transparent` variant)
+- `.card--default` - Standard appearance with surface-secondary (default)
+- `.card--secondary` - Medium prominence with surface-tertiary (maps to `secondary` variant)
+- `.card--tertiary` - Higher prominence with surface-quaternary (maps to `tertiary` variant)
+- `.card--quaternary` - Highest prominence for critical content (maps to `quaternary` variant)
+
 ## API Reference
 
-### Card.Root
+### Card
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
-| `variant`   | `"flat" \| "outlined" \| "elevated" \| "filled"`         | `"outlined"` | Visual variant of the card |
+| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary" \| "quaternary"`         | `"default"` | Semantic variant indicating prominence level |
 | `asChild`   | `boolean`                         | `false` | Render as a child element  |
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |

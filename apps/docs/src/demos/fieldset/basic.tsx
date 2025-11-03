@@ -30,7 +30,7 @@ export function Basic() {
 
   return (
     <Form className="w-full max-w-96" onSubmit={onSubmit}>
-      <Fieldset.Root>
+      <Fieldset>
         <Fieldset.Legend>Profile Settings</Fieldset.Legend>
         <Description>Update your profile information.</Description>
         <FieldGroup>
@@ -80,7 +80,7 @@ export function Basic() {
             Cancel
           </Button>
         </Fieldset.Actions>
-      </Fieldset.Root>
+      </Fieldset>
     </Form>
   );
 }

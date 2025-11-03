@@ -1,0 +1,29 @@
+import type {ComponentProps} from "react";
+
+import {ListBoxSectionRoot} from "./listbox-section";
+
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const ListBoxSection = ListBoxSectionRoot;
+
+export type ListBoxSection = {
+  Props: ComponentProps<typeof ListBoxSectionRoot>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
+export {ListBoxSectionRoot};
+
+export type {
+  ListBoxSectionRootProps,
+  ListBoxSectionRootProps as ListBoxSectionProps,
+} from "./listbox-section";
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export {listboxSectionVariants} from "./listbox-section.styles";
+
+export type {ListBoxSectionVariants} from "./listbox-section.styles";

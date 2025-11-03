@@ -1,0 +1,23 @@
+/* Surface component styles */
+
+/* Block */
+.surface {
+  @apply relative;
+}
+
+/* Modifier - variant */
+.surface--default {
+  @apply bg-surface;
+}
+
+.surface--secondary {
+  @apply bg-surface-secondary;
+}
+
+.surface--tertiary {
+  @apply bg-surface-tertiary;
+}
+
+.surface--quaternary {
+  @apply bg-surface-quaternary;
+}

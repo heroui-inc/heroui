@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, TooltipArrow, TooltipContent, TooltipRoot} from "@heroui/react";
 
 export function TooltipPlacement() {

@@ -1,5 +1,3 @@
-"use client";
-
 import {Separator} from "@heroui/react";
 
 const items = [

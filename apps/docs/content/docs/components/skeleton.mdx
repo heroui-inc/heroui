@@ -45,6 +45,20 @@ import { Skeleton } from '@heroui/react';
   name="skeleton-animation-types"
 />
 
+### Grid
+
+<ComponentPreview
+  name="skeleton-grid"
+/>
+
+### Single Shimmer
+
+A synchronized shimmer effect that passes over all skeleton elements at once. Apply the `skeleton--shimmer` class to a parent container and set `animationType="none"` on child skeletons.
+
+<ComponentPreview
+  name="skeleton-single-shimmer"
+/>
+
 ## Styling
 
 ### Global Animation Configuration
@@ -96,7 +110,7 @@ To customize the Skeleton component classes, you can use the `@layer components`
 
   /* Shimmer animation gradient */
   .skeleton--shimmer:before {
-    @apply via-surface-2; /* Change shimmer gradient color */
+    @apply viasurface; /* Change shimmer gradient color */
   }
 
   /* Pulse animation */

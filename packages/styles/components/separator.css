@@ -2,7 +2,7 @@
 
 /* Base separator with default horizontal orientation */
 .separator {
-  @apply bg-divider shrink-0 border-b-0 border-t-0;
+  @apply bg-divider shrink-0 rounded-[4px] border-b-0 border-t-0;
 
   /* Default size - horizontal orientation */
   @apply h-px w-full;

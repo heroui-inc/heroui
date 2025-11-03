@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Input, Label} from "@heroui/react";
 
 export function Basic() {

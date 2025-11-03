@@ -1,7 +1,6 @@
 ---
 title: RadioGroup
 description: Radio group for selecting a single option from a list
-icon: updated
 links:
   rac: RadioGroup
   source: radio-group/radio-group.tsx
@@ -33,7 +32,7 @@ export default () => (
   <RadioGroup>
     <Label />
     <Description />
-    <Radio.Root value="option1">
+    <Radio value="option1">
       <Radio.Control>
         <Radio.Indicator>
           <span>✓</span> {/* Custom indicator (optional) */}
@@ -43,7 +42,7 @@ export default () => (
         <Label />
         <Description />
       </Radio.Content>
-    </Radio.Root>
+    </Radio>
     <FieldError />
   </RadioGroup>
 )
@@ -87,6 +86,14 @@ Combine `defaultValue` with `onChange` when you only need to react to updates.
   name="radio-group-disabled"
 />
 
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, RadioGroup automatically applies on-surface styling.
+
+<ComponentPreview
+  name="radio-group-on-surface"
+/>
+
 ### Delivery & Payment
 
 <ComponentPreview
@@ -107,27 +114,27 @@ import { RadioGroup, Radio } from '@heroui/react';
 
 export default () => (
   <RadioGroup defaultValue="premium" name="plan">
-    <Radio.Root
+    <Radio
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-blue-300 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-500/10"
       value="basic"
     >
       <Radio.Indicator className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500" />
       Basic Plan
-    </Radio.Root>
-    <Radio.Root
+    </Radio>
+    <Radio
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-purple-300 data-[selected=true]:border-purple-500 data-[selected=true]:bg-purple-500/10"
       value="premium"
     >
       <Radio.Indicator className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500" />
       Premium Plan
-    </Radio.Root>
-    <Radio.Root
+    </Radio>
+    <Radio
       className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-emerald-300 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-500/10"
       value="business"
     >
       <Radio.Indicator className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500" />
       Business Plan
-    </Radio.Root>
+    </Radio>
   </RadioGroup>
 );
 ```
@@ -201,11 +208,12 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `isRequired` | `boolean` | `false` | Whether the radio group is required |
 | `isReadOnly` | `boolean` | `false` | Whether the radio group is read only |
 | `isInvalid` | `boolean` | `false` | Whether the radio group is in an invalid state |
+| `isOnSurface` | `boolean` | `false` | Whether the radio group is displayed on a surface (affects styling) |
 | `name` | `string` | - | The name of the radio group, used when submitting an HTML form |
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the radio group |
 | `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | Radio group content or render prop |
 
-### Radio.Root Props
+### Radio Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

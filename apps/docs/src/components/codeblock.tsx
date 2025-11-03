@@ -10,6 +10,7 @@ export async function CodeBlock({
   className,
   code,
   collapsible,
+  isIsolated = false,
   lang,
   showLineNumbers,
   title,
@@ -17,6 +18,8 @@ export async function CodeBlock({
 }: {
   code: string;
   lang: string;
+  // Means the code block is rendered directly in the MDX file using <CollapsibleCode>
+  isIsolated?: boolean;
   showLineNumbers?: boolean;
   title: string | undefined;
   collapsible?: boolean;
@@ -57,6 +60,7 @@ export async function CodeBlock({
     <CodeBlockClient
       className={className}
       collapsible={collapsible}
+      isIsolated={isIsolated}
       lang={lang}
       showLineNumbers={showLineNumbers}
       title={title}

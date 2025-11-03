@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 
 export function Basic() {
@@ -7,7 +5,7 @@ export function Basic() {
     <RadioGroup defaultValue="premium" name="plan">
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
-      <Radio.Root value="basic">
+      <Radio value="basic">
         <Radio.Control>
           <Radio.Indicator />
         </Radio.Control>
@@ -15,8 +13,8 @@ export function Basic() {
           <Label>Basic Plan</Label>
           <Description>Includes 100 messages per month</Description>
         </Radio.Content>
-      </Radio.Root>
-      <Radio.Root value="premium">
+      </Radio>
+      <Radio value="premium">
         <Radio.Control>
           <Radio.Indicator />
         </Radio.Control>
@@ -24,8 +22,8 @@ export function Basic() {
           <Label>Premium Plan</Label>
           <Description>Includes 200 messages per month</Description>
         </Radio.Content>
-      </Radio.Root>
-      <Radio.Root value="business">
+      </Radio>
+      <Radio value="business">
         <Radio.Control>
           <Radio.Indicator />
         </Radio.Control>
@@ -33,7 +31,7 @@ export function Basic() {
           <Label>Business Plan</Label>
           <Description>Unlimited messages</Description>
         </Radio.Content>
-      </Radio.Root>
+      </Radio>
     </RadioGroup>
   );
 }

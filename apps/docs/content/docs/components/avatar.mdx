@@ -1,7 +1,6 @@
 ---
 title: Avatar
 description: Display user profile images with customizable fallback content
-icon: updated
 links:
   radix: avatar
   source: avatar/avatar.tsx
@@ -28,10 +27,10 @@ Import the Avatar component and access all parts using dot notation.
 import { Avatar } from '@heroui/react';
 
 export default () => (
-  <Avatar.Root>
+  <Avatar>
     <Avatar.Image/>
     <Avatar.Fallback/>
-  </Avatar.Root>
+  </Avatar>
 )
 ```
 
@@ -42,6 +41,10 @@ export default () => (
 ### Colors
 
 <ComponentPreview name="avatar-colors" />
+
+### Variants
+
+<ComponentPreview name="avatar-variants" />
 
 ### Fallback Content
 
@@ -64,10 +67,10 @@ import { Avatar } from '@heroui/react';
 
 function CustomAvatar() {
   return (
-    <Avatar.Root className="size-20">
+    <Avatar className="size-20">
       <Avatar.Image src="..." alt="..." />
       <Avatar.Fallback>XL</Avatar.Fallback>
-    </Avatar.Root>
+    </Avatar>
   );
 }
 ```
@@ -105,6 +108,9 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 - `.avatar--md` - Medium avatar (default, no additional styles)
 - `.avatar--lg` - Large avatar (size-12)
 
+#### Variant Modifiers
+- `.avatar--soft` - Soft variant with lighter background
+
 #### Color Modifiers
 - `.avatar__fallback--default` - Default text color
 - `.avatar__fallback--accent` - Accent text color
@@ -114,12 +120,13 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 
 ## API Reference
 
-### Avatar.Root Props
+### Avatar Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Avatar size |
 | `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Fallback color theme |
+| `variant` | `'default' \| 'soft'` | `'default'` | Visual style variant |
 | `className` | `string` | - | Additional CSS classes |
 | `asChild` | `boolean` | `false` | Render as child element |
 

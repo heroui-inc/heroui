@@ -1,5 +1,3 @@
-"use client";
-
 import {Button, TooltipContent, TooltipRoot} from "@heroui/react";
 import {Icon} from "@iconify/react";
 

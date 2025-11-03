@@ -75,7 +75,7 @@ export function ShowcaseCodePanel({
               initial={{opacity: 0, x: "100%"}}
               transition={{bounce: 0, duration: 0.4, type: "spring"}}
               className={cn(
-                "bg-surface-2/94 absolute right-6 z-[9999] h-full max-h-[88%] w-[45%] overflow-hidden rounded-xl shadow-xl backdrop-blur-md",
+                "bg-surface/94 absolute right-6 z-[9999] h-full max-h-[88%] w-[45%] overflow-hidden rounded-xl shadow-xl backdrop-blur-md",
                 className,
               )}
             >

@@ -1,5 +1,3 @@
-"use client";
-
 import {Accordion, cn} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
@@ -28,7 +26,7 @@ const items = [
 
 export function CustomStyles() {
   return (
-    <Accordion.Root className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="outline">
+    <Accordion className="bg-surface-1/10 w-full max-w-md rounded-2xl" variant="surface">
       {items.map((item, index) => (
         <Accordion.Item
           key={index}
@@ -39,7 +37,7 @@ export function CustomStyles() {
           )}
         >
           <Accordion.Heading>
-            <Accordion.Trigger className="hover:bg-surface-2 group flex items-center gap-2 transition-none">
+            <Accordion.Trigger className="hover:bgsurface group flex items-center gap-2 transition-none">
               {item.iconUrl ? (
                 <img
                   alt={item.title}
@@ -61,6 +59,6 @@ export function CustomStyles() {
           </Accordion.Panel>
         </Accordion.Item>
       ))}
-    </Accordion.Root>
+    </Accordion>
   );
 }

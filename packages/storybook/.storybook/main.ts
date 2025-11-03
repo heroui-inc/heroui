@@ -32,6 +32,7 @@ const config: StorybookConfig = {
     getAbsolutePath("storybook-dark-mode"),
     pathJoin(__dirname, "addons/strict-mode/register"),
     pathJoin(__dirname, "addons/i18n/register"),
+    pathJoin(__dirname, "addons/reduce-motion/register"),
   ],
   core: {
     disableTelemetry: true,
@@ -41,7 +42,7 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: [pathJoin(__dirname, "../public")],
-  stories: getStories(),
+  stories: ["./welcome.mdx", "./colors.stories.tsx", ...getStories()],
 };
 
 export default config;

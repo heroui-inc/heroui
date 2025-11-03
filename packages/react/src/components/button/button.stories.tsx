@@ -22,6 +22,9 @@ export default {
     },
   },
   component: Button,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Buttons/Button",
 } as Meta<typeof Button>;
 
@@ -45,6 +48,9 @@ const Template = ({isDisabled, size}: Button["RootProps"]) => (
     </Button>
     <Button isDisabled={isDisabled} size={size} variant="danger">
       Danger
+    </Button>
+    <Button isDisabled={isDisabled} size={size} variant="danger-soft">
+      Danger Soft
     </Button>
   </div>
 );
@@ -77,6 +83,10 @@ const TemplateWithIcon = ({isDisabled, size}: Button["RootProps"]) => (
       <Icon icon="gravity-ui:trash-bin" />
       Delete
     </Button>
+    <Button isDisabled={isDisabled} size={size} variant="danger-soft">
+      <Icon icon="gravity-ui:trash-bin" />
+      Cancel
+    </Button>
   </div>
 );
 
@@ -91,7 +101,7 @@ const TemplateWithIconOnly = ({isDisabled, size, variant}: Button["RootProps"]) 
 const TemplateWithSpinner = ({size, variant}: Button["RootProps"]) => (
   <div className="flex gap-3">
     <Button isPending size={size} variant={variant}>
-      <Spinner size="sm" />
+      <Spinner color="current" size="sm" />
       Loading
     </Button>
   </div>
@@ -111,7 +121,7 @@ const TemplateWithLoadingState = ({size, variant}: Button["RootProps"]) => {
     <Button isPending={isLoading} size={size} variant={variant ?? "tertiary"} onPress={handlePress}>
       {({isPending}) => (
         <>
-          {isPending ? <Spinner size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
+          {isPending ? <Spinner color="current" size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
           {isLoading ? "Uploading..." : "Upload File"}
         </>
       )}

@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Base listbox styles
+   ========================================================================== */
+
+.listbox {
+  @apply relative flex w-full flex-col gap-1 overflow-clip p-1;
+
+  /* This makes the separator take up 94% of the width and be centered */
+  [data-slot="separator"] {
+    @apply ml-[3%] w-[94%];
+  }
+}

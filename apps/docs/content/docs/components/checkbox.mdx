@@ -1,7 +1,7 @@
 ---
 title: Checkbox
-description: A checkbox component for selecting multiple options
-icon: preview
+description: Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.
+icon: new
 links:
   rac: Checkbox
   source: checkbox/checkbox.tsx
@@ -27,35 +27,18 @@ import { Checkbox, Label } from '@heroui/react';
 Import the Checkbox component and access all parts using dot notation.
 
 ```tsx
-import { Checkbox, Label } from '@heroui/react';
-
-export default () => (
-  <Checkbox>
-    <Checkbox.Control>
-      <Checkbox.Indicator />
-    </Checkbox.Control>
-    <Label>Accept terms</Label>
-  </Checkbox>
-);
-```
-
-The Checkbox component follows a composition pattern. It works with external `Label` and `Description` components using standard HTML `id` and `htmlFor` attributes:
-
-```tsx
 import { Checkbox, Label, Description } from '@heroui/react';
 
 export default () => (
-  <div className="flex gap-3">
-    <Checkbox className="mt-0.5" id="notifications">
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-    </Checkbox>
-    <div className="flex flex-col gap-1">
-      <Label htmlFor="notifications">Email notifications</Label>
-      <Description>Get notified when someone mentions you</Description>
-    </div>
-  </div>
+  <Checkbox name="terms">
+    <Checkbox.Control>
+      <Checkbox.Indicator />  
+    </Checkbox.Control>
+    <Checkbox.Content>
+      <Label />
+      <Description /> {/* Optional */}
+    </Checkbox.Content>
+  </Checkbox>
 );
 ```
 
@@ -113,6 +96,24 @@ export default () => (
   name="checkbox-custom-styles"
 />
 
+### Invalid
+
+<ComponentPreview
+  name="checkbox-invalid"
+/>
+
+### Custom Indicator
+
+<ComponentPreview
+  name="checkbox-custom-indicator"
+/>
+
+### Full Rounded
+
+<ComponentPreview
+  name="checkbox-full-rounded"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -124,14 +125,14 @@ import { Checkbox, Label } from '@heroui/react';
 
 function CustomCheckbox() {
   return (
-    <div className="flex items-center gap-3">
-      <Checkbox id="custom">
-        <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
-          <Checkbox.Indicator className="text-white" />
-        </Checkbox.Control>
-      </Checkbox>
-      <Label htmlFor="custom">Custom Checkbox</Label>
-    </div>
+    <Checkbox name="custom">
+      <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
+        <Checkbox.Indicator className="text-white" />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label>Custom Checkbox</Label>
+      </Checkbox.Content>
+    </Checkbox>
   );
 }
 ```
@@ -149,6 +150,21 @@ To customize the Checkbox component classes, you can use the `@layer components`
 
   .checkbox__control {
     @apply size-5 border-2 border-gray-400 rounded data-[selected=true]:bg-blue-500 data-[selected=true]:border-blue-500;
+
+    /* Animated background indicator */
+    &::before {
+      @apply bg-accent pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md opacity-0 content-[''];
+      
+      transition:
+        scale 200ms linear,
+        opacity 200ms linear,
+        background-color 200ms ease-out;
+    }
+
+    /* Show indicator when selected */
+    &[data-selected="true"]::before {
+      @apply scale-100 opacity-100;
+    }
   }
 
   .checkbox__indicator {
@@ -176,8 +192,9 @@ The Checkbox component uses these CSS classes ([View source styles](https://gith
 
 The checkbox supports both CSS pseudo-classes and data attributes for flexibility:
 
-- **Selected**: `[data-selected="true"]` (shows checkmark and background color change)
+- **Selected**: `[data-selected="true"]` or `[aria-checked="true"]` (shows checkmark and background color change)
 - **Indeterminate**: `[data-indeterminate="true"]` (shows indeterminate state with dash)
+- **Invalid**: `[data-invalid="true"]` or `[aria-invalid="true"]` (shows error state with danger colors)
 - **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
 - **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
@@ -195,7 +212,9 @@ Inherits from [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/
 | `defaultSelected` | `boolean` | `false` | Whether the checkbox is checked by default (uncontrolled) |
 | `isIndeterminate` | `boolean` | `false` | Whether the checkbox is in an indeterminate state |
 | `isDisabled` | `boolean` | `false` | Whether the checkbox is disabled |
+| `isInvalid` | `boolean` | `false` | Whether the checkbox is invalid |
 | `isReadOnly` | `boolean` | `false` | Whether the checkbox is read only |
+| `isOnSurface` | `boolean` | `false` | Whether the checkbox is displayed on a surface (affects styling) |
 | `name` | `string` | - | The name of the input element, used when submitting an HTML form |
 | `value` | `string` | - | The value of the input element, used when submitting an HTML form |
 | `onChange` | `(isSelected: boolean) => void` | - | Handler called when the checkbox value changes |

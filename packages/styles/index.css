@@ -20,3 +20,6 @@
 
 /* Utilities */
 @import "./utilities/index.css";
+
+/* Variants */
+@import "./variants/index.css";

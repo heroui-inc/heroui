@@ -1,53 +1,39 @@
 import type {ComponentProps} from "react";
 
-import {
-  AlertAction,
-  AlertClose,
-  AlertContent,
-  AlertDescription,
-  AlertIcon,
-  AlertRoot,
-  AlertTitle,
-} from "./alert";
+import {AlertContent, AlertDescription, AlertIndicator, AlertRoot, AlertTitle} from "./alert";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const Alert = Object.assign(AlertRoot, {
   Root: AlertRoot,
-  Icon: AlertIcon,
+  Indicator: AlertIndicator,
   Content: AlertContent,
   Title: AlertTitle,
   Description: AlertDescription,
-  Action: AlertAction,
-  Close: AlertClose,
 });
 
 export type Alert = {
   Props: ComponentProps<typeof AlertRoot>;
   RootProps: ComponentProps<typeof AlertRoot>;
-  IconProps: ComponentProps<typeof AlertIcon>;
+  IndicatorProps: ComponentProps<typeof AlertIndicator>;
   ContentProps: ComponentProps<typeof AlertContent>;
   TitleProps: ComponentProps<typeof AlertTitle>;
   DescriptionProps: ComponentProps<typeof AlertDescription>;
-  ActionProps: ComponentProps<typeof AlertAction>;
-  CloseProps: ComponentProps<typeof AlertClose>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {AlertRoot, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose};
+export {AlertRoot, AlertIndicator, AlertContent, AlertTitle, AlertDescription};
 
 export type {
   AlertRootProps,
   AlertRootProps as AlertProps,
-  AlertIconProps,
+  AlertIndicatorProps,
   AlertContentProps,
   AlertTitleProps,
   AlertDescriptionProps,
-  AlertActionProps,
-  AlertCloseProps,
 } from "./alert";
 
 /* -------------------------------------------------------------------------------------------------

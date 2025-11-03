@@ -13,6 +13,12 @@ export const avatarVariants = tv({
     image: "avatar__image",
   },
   variants: {
+    variant: {
+      default: {},
+      soft: {
+        base: "avatar--soft",
+      },
+    },
     color: {
       accent: {
         fallback: "avatar__fallback--accent",

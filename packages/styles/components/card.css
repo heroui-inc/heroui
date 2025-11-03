@@ -3,10 +3,7 @@
 /* Block */
 .card {
   @apply relative flex flex-col gap-3 overflow-hidden p-4;
-  @apply rounded-panel border-border;
-
-  /* Border */
-  border-width: var(--border-width);
+  @apply border-border shadow-surface rounded-3xl;
 }
 
 /* Element - header */
@@ -16,7 +13,7 @@
 
 /* Element - title */
 .card__title {
-  @apply text-foreground text-base font-medium leading-6;
+  @apply text-foreground text-sm font-medium leading-6;
 }
 
 /* Element - description */
@@ -35,18 +32,23 @@
 }
 
 /* Modifier - variant */
-.card--variant-flat {
+
+.card--transparent {
   @apply border-none bg-transparent shadow-none;
 }
 
-.card--variant-outlined {
-  @apply bg-surface-1;
+.card--default {
+  @apply bg-surface;
 }
 
-.card--variant-elevated {
-  @apply bg-surface-2;
+.card--secondary {
+  @apply bg-surface-secondary;
 }
 
-.card--variant-filled {
-  @apply bg-surface-3;
+.card--tertiary {
+  @apply bg-surface-tertiary;
+}
+
+.card--quaternary {
+  @apply bg-surface-quaternary;
 }

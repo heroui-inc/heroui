@@ -13,7 +13,7 @@
 
   /* --accent: oklch(0.5671 0.209451 257.9449); */
   /* Use OS-native cursor for interactive elements (macOS style) */
-  --cursor-interactive: cursor;
+  --cursor-interactive: pointer;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
