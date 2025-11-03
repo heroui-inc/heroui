@@ -16,7 +16,7 @@ const VersionChip = () => {
       className="text-foreground/50 chip bg-surface shadow-surface rounded-full text-xs"
       href="/docs/changelog"
     >
-      <Iconify icon="sparkles" />
+      <Iconify icon="gravity-ui:sparkles" />
       <span>v{currentVersion}: RSC Support</span>
     </LinkRoot>
   );
