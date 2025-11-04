@@ -54,7 +54,7 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
       ) : null}
       {componentLinks.storybook ? (
         <ButtonLink
-          href={`${componentLinks.storybook}--default`}
+          href={`${componentLinks.storybook}--docs`}
           startContent={<StorybookIcon className="text-lg text-[#ff4785]" />}
         >
           Storybook
