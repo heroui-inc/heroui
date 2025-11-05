@@ -40,8 +40,11 @@ const Template = () => (
           A new version of the application is available. Please refresh to get the latest features
           and bug fixes.
         </Alert.Description>
+        <Button className="mt-2 sm:hidden" size="sm" variant="primary">
+          Refresh
+        </Button>
       </Alert.Content>
-      <Button size="sm" variant="primary">
+      <Button className="hidden sm:block" size="sm" variant="primary">
         Refresh
       </Button>
     </Alert>
@@ -55,8 +58,11 @@ const Template = () => (
           Your payment of $49.99 has been processed. A confirmation email has been sent to your
           inbox.
         </Alert.Description>
+        <Button className="mt-2 sm:hidden" size="sm" variant="secondary">
+          View Receipt
+        </Button>
       </Alert.Content>
-      <Button size="sm" variant="secondary">
+      <Button className="hidden sm:block" size="sm" variant="secondary">
         View Receipt
       </Button>
     </Alert>
@@ -70,8 +76,11 @@ const Template = () => (
           You're using 90% of your storage quota. Consider upgrading your plan or removing unused
           files to avoid service interruption.
         </Alert.Description>
+        <Button className="mt-2 sm:hidden" size="sm" variant="secondary">
+          Manage Storage
+        </Button>
       </Alert.Content>
-      <Button size="sm" variant="secondary">
+      <Button className="hidden sm:block" size="sm" variant="secondary">
         Manage Storage
       </Button>
     </Alert>
@@ -89,8 +98,11 @@ const Template = () => (
             <li>Clear your browser cache</li>
           </ul>
         </Alert.Description>
+        <Button className="mt-2 sm:hidden" size="sm" variant="danger">
+          Retry
+        </Button>
       </Alert.Content>
-      <Button size="sm" variant="danger">
+      <Button className="hidden sm:block" size="sm" variant="danger">
         Retry
       </Button>
     </Alert>
