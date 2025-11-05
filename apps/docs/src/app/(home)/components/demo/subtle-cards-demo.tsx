@@ -1,4 +1,5 @@
 import {Avatar, Card} from "@heroui/react";
+import Image from "next/image";
 import {tv} from "tailwind-variants";
 
 const cardStyles = tv({
@@ -19,7 +20,9 @@ export function SubtleCardsDemo() {
       <Card className={card()}>
         <Card.Header>
           <Avatar className={avatar()}>
-            <Avatar.Image src="/assets/images/demo1.jpg" />
+            <Avatar.Image asChild>
+              <Image alt="Demo 1" height={56} src="/assets/images/demo1.jpg" width={56} />
+            </Avatar.Image>
             <Avatar.Fallback>JK</Avatar.Fallback>
           </Avatar>
         </Card.Header>
@@ -29,7 +32,14 @@ export function SubtleCardsDemo() {
         </Card.Content>
         <Card.Footer className={footer()}>
           <Avatar className={footerAvatar()}>
-            <Avatar.Image src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg" />
+            <Avatar.Image asChild>
+              <Image
+                alt="John"
+                height={16}
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
+                width={16}
+              />
+            </Avatar.Image>
             <Avatar.Fallback>JK</Avatar.Fallback>
           </Avatar>
           <p className="text-muted text-xs">By John</p>
@@ -38,7 +48,9 @@ export function SubtleCardsDemo() {
       <Card className={card()}>
         <Card.Header>
           <Avatar className={avatar()}>
-            <Avatar.Image src="/assets/images/demo2.jpg" />
+            <Avatar.Image asChild>
+              <Image alt="Demo 2" height={56} src="/assets/images/demo2.jpg" width={56} />
+            </Avatar.Image>
             <Avatar.Fallback>J</Avatar.Fallback>
           </Avatar>
         </Card.Header>
@@ -48,7 +60,14 @@ export function SubtleCardsDemo() {
         </Card.Content>
         <Card.Footer className={footer()}>
           <Avatar className={footerAvatar()}>
-            <Avatar.Image src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg" />
+            <Avatar.Image asChild>
+              <Image
+                alt="Martha"
+                height={16}
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
+                width={16}
+              />
+            </Avatar.Image>
             <Avatar.Fallback>M</Avatar.Fallback>
           </Avatar>
           <p className="text-muted text-xs">By Martha</p>

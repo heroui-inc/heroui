@@ -68,6 +68,11 @@ const AvatarImage = ({
 }: AvatarImageProps) => {
   const {slots} = React.useContext(AvatarContext);
   const Comp = asChild ? SlotPrimitive : AvatarPrimitive.Image;
+
+  if (asChild) {
+    return <Comp className={slots?.image({className})} {...props} data-loaded />;
+  }
+
   const loadingStatus = useImage({
     src: typeof src === "string" ? src : undefined,
     srcSet,

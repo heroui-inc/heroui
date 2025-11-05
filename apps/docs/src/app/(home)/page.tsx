@@ -1,5 +1,6 @@
 import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
+import Image from "next/image";
 
 // TODO:
 import {GitHubLink} from "@/components/github-link";
@@ -48,46 +49,24 @@ export default function HomePage() {
         </div>
         {/* Mobile/Tablet: Show images */}
         <section className="-ml-4 mt-16 w-[100vw] overflow-hidden lg:hidden lg:w-[150vw]">
-          <picture>
-            <source
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
-              type="image/jpeg"
-              srcSet="
-                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light_0.25x.jpeg 640w,
-                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light_0.5x.jpeg 1280w,
-                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light.jpeg 2528w
-              "
-            />
-            <img
-              alt="HeroUI components preview"
-              className="block dark:hidden"
-              decoding="async"
-              height="1592"
-              loading="lazy"
-              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light.jpeg"
-              width="2528"
-            />
-          </picture>
-          <picture>
-            <source
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
-              type="image/jpeg"
-              srcSet="
-                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark_0.25x.jpeg 640w,
-                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark_0.5x.jpeg 1280w,
-                https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark.jpeg 2528w
-              "
-            />
-            <img
-              alt="HeroUI components preview"
-              className="hidden dark:block"
-              decoding="async"
-              height="1592"
-              loading="lazy"
-              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark.jpeg"
-              width="2528"
-            />
-          </picture>
+          <Image
+            alt="HeroUI components preview"
+            className="block dark:hidden"
+            height={1592}
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
+            src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light.jpeg"
+            width={2528}
+          />
+          <Image
+            alt="HeroUI components preview"
+            className="hidden dark:block"
+            height={1592}
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
+            src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark.jpeg"
+            width={2528}
+          />
         </section>
         {/* Desktop: Show demos */}
         <div className="hidden lg:block">
