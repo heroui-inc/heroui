@@ -3,7 +3,7 @@
       <img 
         alt="HeroUI v3 logo" 
         width="100%" 
-        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/heroui-web-repo.png"
+        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-og_2x.jpg"
       />
   </a>
 </p>
