@@ -168,13 +168,9 @@ export const demos: Record<string, DemoItem> = {
     component: CardDemos.WithForm,
     file: "card/with-form.tsx",
   },
-  "card-with-image": {
-    component: CardDemos.WithImage,
-    file: "card/with-image.tsx",
-  },
-  "card-with-background-image": {
-    component: CardDemos.WithBackgroundImage,
-    file: "card/with-background-image.tsx",
+  "card-with-images": {
+    component: CardDemos.WithImages,
+    file: "card/with-images.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {

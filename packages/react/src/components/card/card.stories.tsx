@@ -5,6 +5,7 @@ import React from "react";
 
 import {Avatar} from "../avatar";
 import {Button} from "../button";
+import {CloseButton} from "../close-button";
 import {Form} from "../form";
 import {Input} from "../input";
 import {Label} from "../label";
@@ -40,20 +41,20 @@ export const Default: Story = {
         role="img"
       />
       <Card.Header>
-        <Card.Title>PAYMENT</Card.Title>
-        <Card.Description>You can now withdraw on crypto.</Card.Description>
+        <Card.Title>Become an Acme Creator!</Card.Title>
+        <Card.Description>
+          Visit the Acme Creator Hub to sign up today and start earning credits from your fans and
+          followers.
+        </Card.Description>
       </Card.Header>
-      <Card.Content id="payment-content">
-        <p>Add your wallet in settings to withdraw</p>
-      </Card.Content>
       <Card.Footer>
         <Link
-          aria-label="Go to settings (opens in new tab)"
+          aria-label="Go to Acme Creator Hub (opens in new tab)"
           href="https://heroui.com"
           rel="noopener noreferrer"
           target="_blank"
         >
-          Go to settings
+          Creator Hub
           <Link.Icon aria-hidden="true" />
         </Link>
       </Card.Footer>
@@ -159,9 +160,9 @@ export const WithAvatar: Story = {
       <Card className="w-[200px] gap-2" {...args}>
         <img
           alt="Indie Hackers community"
-          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-2xl object-cover"
           loading="lazy"
-          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/device.png"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo1.jpg"
         />
         <Card.Header>
           <Card.Title>Indie Hackers</Card.Title>
@@ -171,7 +172,7 @@ export const WithAvatar: Story = {
           <Avatar aria-label="Martha's profile picture" className="size-5">
             <Avatar.Image
               alt="Martha's avatar"
-              src="https://img.heroui.chat/image/avatar?w=160&h=160"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
             />
             <Avatar.Fallback className="text-xs">IH</Avatar.Fallback>
           </Avatar>
@@ -182,9 +183,9 @@ export const WithAvatar: Story = {
       <Card className="w-[200px] gap-2" {...args}>
         <img
           alt="AI Builders community"
-          className="pointer-events-none aspect-square w-14 select-none rounded-3xl object-cover"
+          className="pointer-events-none aspect-square w-14 select-none rounded-2xl object-cover"
           loading="lazy"
-          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/ai-bot.png"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo2.jpg"
         />
         <Card.Header>
           <Card.Title>AI Builders</Card.Title>
@@ -205,145 +206,263 @@ export const WithAvatar: Story = {
   ),
 };
 
-export const WithImage: Story = {
+export const WithImages: Story = {
+  parameters: {
+    layout: "fullscreen",
+  },
   render: (args) => (
-    <div className="flex gap-4">
-      <Card className="w-[220px] gap-2 p-1" {...args}>
-        <img
-          alt="Luxury cars collection"
-          className="block aspect-square w-full shrink-0 select-none rounded-[calc(theme(--radius-panel)-theme(spacing.1))] object-cover align-middle"
-          loading="lazy"
-          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
-        />
-        <Card.Footer className="flex items-center justify-between px-2 text-sm">
-          <span>Cars</span>
-          <span aria-label="18 pictures in collection" className="text-muted">
-            18 pictures
-          </span>
-        </Card.Footer>
-      </Card>
-
-      <Card className="w-[220px] gap-2 p-1" {...args}>
-        <img
-          alt="Modern office workspace"
-          className="block aspect-square w-full shrink-0 select-none rounded-[calc(theme(--radius-panel)-theme(spacing.1))] object-cover align-middle"
-          loading="lazy"
-          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/workspace.jpeg"
-        />
-        <Card.Footer className="flex items-center justify-between px-2 text-sm">
-          <span>Workspaces</span>
-          <span aria-label="56 pictures in collection" className="text-muted">
-            56 pictures
-          </span>
-        </Card.Footer>
-      </Card>
-    </div>
-  ),
-};
-
-export const WithBackgroundImage: Story = {
-  render: (args) => (
-    <div className="flex flex-row items-center justify-center gap-6">
-      <Card className="h-[337px] w-[280px] rounded-3xl" {...args}>
-        {/* Background image */}
-        <img
-          alt="Happy pet"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/dog.png"
-        />
-
-        {/* Top gradient blur overlay */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-0 right-0 top-0 h-[76px]"
-        >
-          <div
-            className="absolute inset-0 h-[-200%] rounded-t-[inherit] backdrop-blur-sm"
-            style={{
-              WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent)",
-              maskImage: "linear-gradient(to bottom, black 80%, transparent)",
-              maskRepeat: "no-repeat",
-              maskSize: "100% 100%",
-            }}
-          />
-        </div>
-
-        {/* Header */}
-        <Card.Header className="z-10 text-white">
-          <Card.Title className="text-xs font-medium tracking-wide text-white/80">
-            PET HEALTH
-          </Card.Title>
-          <Card.Description className="text-lg font-medium leading-6 text-white">
-            Your pet deserve the best
-          </Card.Description>
-        </Card.Header>
-
-        {/* Bottom gradient blur overlay */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 right-0 h-[64px]"
-        >
-          <div
-            className="absolute inset-0 h-[200%] rounded-b-[inherit] backdrop-blur-sm"
-            style={{
-              WebkitMaskImage: "linear-gradient(to top, black 80%, transparent)",
-              maskImage: "linear-gradient(to top, black 80%, transparent)",
-              maskRepeat: "no-repeat",
-              maskSize: "100% 100%",
-            }}
-          />
-        </div>
-
-        {/* Footer */}
-        <Card.Footer className="z-10 mt-auto flex items-center justify-between">
-          <div>
-            <div className="text-sm font-medium text-white">Available soon</div>
-            <div className="text-xs text-white/60">Get notified</div>
+    <div className="flex w-full items-center justify-center">
+      <div className="grid w-full max-w-2xl grid-cols-12 gap-4 p-4">
+        {/* Row 1: Large Product Card - Available Soon */}
+        <Card className="col-span-12 flex h-auto min-h-[152px] flex-col sm:flex-row" {...args}>
+          <div className="relative h-[140px] w-full flex-shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
+            <img
+              alt="Cherries"
+              className="pointer-events-none absolute inset-0 h-full w-full scale-125 select-none object-cover"
+              loading="lazy"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/cherries.jpeg"
+            />
           </div>
-          <Button size="sm" variant="tertiary">
-            Notify me
-          </Button>
-        </Card.Footer>
-      </Card>
+          <div className="flex flex-1 flex-col gap-3">
+            <Card.Header className="gap-1">
+              <Card.Title className="pr-8">Become an ACME Creator!</Card.Title>
+              <Card.Description>
+                Lorem ipsum dolor sit amet consectetur. Sed arcu donec id aliquam dolor sed amet
+                faucibus etiam.
+              </Card.Description>
+              <CloseButton aria-label="Close banner" className="absolute right-3 top-3" />
+            </Card.Header>
+            <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col">
+                <span className="text-foreground text-sm font-medium">Only 10 spots</span>
+                <span className="text-muted text-xs">Submission ends Oct 10.</span>
+              </div>
+              <Button className="w-full sm:w-auto">Apply Now</Button>
+            </Card.Footer>
+          </div>
+        </Card>
 
-      <Card className="h-[336px] w-[390px] rounded-3xl" {...args}>
-        {/* Background image */}
-        <img
-          alt="Beautiful aerial view of Buenos Aires cityscape"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/mountain.png"
-        />
+        {/* Row 2 */}
+        <div className="col-span-12 grid grid-cols-12 gap-4">
+          {/* Left Column */}
+          <div className="col-span-12 grid grid-cols-12 gap-4 lg:col-span-6">
+            {/* Top Card */}
+            <Card className="col-span-12">
+              <div className="absolute right-3 top-3 z-10">
+                <CloseButton aria-label="Close notification" />
+              </div>
+              <Card.Header className="gap-3">
+                <Icon
+                  aria-label="Dollar sign icon"
+                  className="text-primary size-8 flex-shrink-0"
+                  icon="gravity-ui:circle-dollar"
+                  role="img"
+                />
+                <div className="flex flex-col gap-1">
+                  <span className="text-muted text-xs font-medium uppercase">PAYMENT</span>
+                  <Card.Title className="pr-8 text-sm sm:text-base">
+                    You can now withdraw on crypto
+                  </Card.Title>
+                  <Card.Description className="text-xs sm:text-sm">
+                    Add your wallet in settings to withdraw
+                  </Card.Description>
+                </div>
+              </Card.Header>
+              <Card.Footer>
+                <Link aria-label="Go to settings" href="#" rel="noopener noreferrer">
+                  Go to settings
+                  <Link.Icon aria-hidden="true" />
+                </Link>
+              </Card.Footer>
+            </Card>
+            {/* Bottom cards */}
+            <div className="col-span-12 grid grid-cols-12 gap-4">
+              {/* Left Card */}
+              <Card className="col-span-12 gap-2 sm:col-span-6">
+                <Card.Header>
+                  <Avatar className="size-[56px] rounded-xl">
+                    <Avatar.Image
+                      alt="Demo 1"
+                      src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo1.jpg"
+                    />
+                    <Avatar.Fallback>JK</Avatar.Fallback>
+                  </Avatar>
+                </Card.Header>
+                <Card.Content className="mt-1">
+                  <p className="text-sm font-medium leading-4">Indie Hackers</p>
+                  <p className="text-muted text-xs">148 members</p>
+                </Card.Content>
+                <Card.Footer className="flex items-center gap-2">
+                  <Avatar className="size-4">
+                    <Avatar.Image
+                      alt="John"
+                      src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
+                    />
+                    <Avatar.Fallback>JK</Avatar.Fallback>
+                  </Avatar>
+                  <p className="text-muted text-xs">By John</p>
+                </Card.Footer>
+              </Card>
+              {/* Right Card */}
+              <Card className="col-span-12 gap-2 sm:col-span-6">
+                <Card.Header>
+                  <Avatar className="size-[56px] rounded-xl">
+                    <Avatar.Image
+                      alt="Demo 2"
+                      src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo2.jpg"
+                    />
+                    <Avatar.Fallback>AB</Avatar.Fallback>
+                  </Avatar>
+                </Card.Header>
+                <Card.Content className="mt-1">
+                  <p className="text-sm font-medium leading-4">AI Builders</p>
+                  <p className="text-muted text-xs">362 members</p>
+                </Card.Content>
+                <Card.Footer className="flex items-center gap-2">
+                  <Avatar className="size-4">
+                    <Avatar.Image
+                      alt="John"
+                      src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
+                    />
+                    <Avatar.Fallback>M</Avatar.Fallback>
+                  </Avatar>
+                  <p className="text-muted text-xs">By Martha</p>
+                </Card.Footer>
+              </Card>
+            </div>
+          </div>
+          {/* Right Column */}
+          <Card className="col-span-12 min-h-[200px] rounded-3xl lg:col-span-6" {...args}>
+            {/* Background image */}
+            <img
+              alt="NEO Home Robot"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/neo2.jpeg"
+            />
 
-        {/* Bottom gradient blur overlay */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 right-0 h-[64px]"
-        >
-          <div
-            className="absolute inset-0 h-[200%] rounded-b-[inherit] backdrop-blur-sm"
-            style={{
-              WebkitMaskImage: "linear-gradient(to top, black 80%, transparent)",
-              maskImage: "linear-gradient(to top, black 80%, transparent)",
-              maskRepeat: "no-repeat",
-              maskSize: "100% 100%",
-            }}
-          />
+            {/* Header */}
+            <Card.Header className="z-10 text-white">
+              <Card.Title className="text-xs font-semibold tracking-wide text-black/70">
+                NEO
+              </Card.Title>
+              <Card.Description className="text-sm font-medium leading-5 text-black/50">
+                Home Robot
+              </Card.Description>
+            </Card.Header>
+
+            {/* Bottom gradient blur overlay */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-0 left-0 right-0 h-[64px]"
+            >
+              <div
+                className="absolute inset-0 h-[100%] rounded-b-[inherit] backdrop-blur-sm"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to top, black 30%, transparent)",
+                  maskImage: "linear-gradient(to top, black 30%, transparent)",
+                  maskRepeat: "no-repeat",
+                  maskSize: "100% 100%",
+                }}
+              />
+            </div>
+            {/* Footer */}
+            <Card.Footer className="z-10 mt-auto flex items-center justify-between">
+              <div>
+                <div className="text-sm font-medium text-black">Available soon</div>
+                <div className="text-xs text-black/60">Get notified</div>
+              </div>
+              <Button className="bg-white text-black" size="sm" variant="tertiary">
+                Notify me
+              </Button>
+            </Card.Footer>
+          </Card>
         </div>
 
-        {/* Footer */}
-        <Card.Footer className="z-10 mt-auto flex items-center justify-between">
-          <div>
-            <div className="text-sm font-medium text-white">Buenos Aires</div>
-            <div className="text-xs text-white/60">Argentina</div>
+        {/* Row 3 */}
+        <div className="col-span-12 grid grid-cols-12 gap-4">
+          {/* Left Column: Card */}
+          <Card
+            className="relative col-span-12 h-[250px] sm:h-[300px] md:col-span-8 md:h-[350px]"
+            {...args}
+          >
+            <img
+              alt="NEO Home Robot"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/neo1.jpeg"
+            />
+
+            {/* Bottom gradient blur overlay */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 sm:h-20"
+            >
+              <div
+                className="absolute inset-0 h-[100%] rounded-b-[inherit] backdrop-blur-sm"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to top, black 30%, transparent)",
+                  maskImage: "linear-gradient(to top, black 30%, transparent)",
+                  maskRepeat: "no-repeat",
+                  maskSize: "100% 100%",
+                }}
+              />
+            </div>
+            <Card.Footer className="z-10 mt-auto flex items-end justify-between">
+              <div>
+                <div className="text-base font-medium text-black sm:text-lg">NEO</div>
+                <div className="text-xs font-medium text-black/50 sm:text-sm">$499/m</div>
+              </div>
+              <Button className="bg-white text-black" size="sm" variant="tertiary">
+                Get now
+              </Button>
+            </Card.Footer>
+          </Card>
+
+          {/* Right Column: Cards Stack */}
+          <div className="col-span-12 flex flex-col gap-2 md:col-span-4 md:justify-between md:gap-0">
+            {/* 1 */}
+            <Card className="flex flex-row gap-3 p-1" variant="transparent">
+              <img
+                alt="Futuristic Robot"
+                className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                loading="lazy"
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/robot1.jpeg"
+              />
+              <div className="flex flex-1 flex-col justify-center gap-1">
+                <Card.Title className="text-sm">Bridging the Future</Card.Title>
+                <Card.Description className="text-xs">Today, 6:30 PM</Card.Description>
+              </div>
+            </Card>
+            {/* 2 */}
+            <Card className="flex flex-row gap-3 p-1" variant="transparent">
+              <img
+                alt="Avocado"
+                className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                loading="lazy"
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/avocado.jpeg"
+              />
+              <div className="flex flex-1 flex-col justify-center gap-1">
+                <Card.Title className="text-sm">Avocado Hackathon</Card.Title>
+                <Card.Description className="text-xs">Wed, 4:30 PM</Card.Description>
+              </div>
+            </Card>
+            {/* 3 */}
+            <Card className="flex flex-row gap-3 p-1" variant="transparent">
+              <img
+                alt="Sound Electro event"
+                className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                loading="lazy"
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/oranges.jpeg"
+              />
+              <div className="flex flex-1 flex-col justify-center gap-1">
+                <Card.Title className="text-sm">Sound Electro | Beyond art</Card.Title>
+                <Card.Description className="text-xs">Fri, 8:00 PM</Card.Description>
+              </div>
+            </Card>
           </div>
-          <Button aria-label="View Buenos Aires on map" size="sm" variant="tertiary">
-            <Icon aria-hidden="true" icon="gravity-ui:map-pin" />
-            Map
-          </Button>
-        </Card.Footer>
-      </Card>
+        </div>
+      </div>
     </div>
   ),
 };

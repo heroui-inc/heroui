@@ -21,7 +21,12 @@ export function SubtleCardsDemo() {
         <Card.Header>
           <Avatar className={avatar()}>
             <Avatar.Image asChild>
-              <Image alt="Demo 1" height={56} src="/assets/images/demo1.jpg" width={56} />
+              <Image
+                alt="Demo 1"
+                height={56}
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo1.jpg"
+                width={56}
+              />
             </Avatar.Image>
             <Avatar.Fallback>JK</Avatar.Fallback>
           </Avatar>
@@ -49,7 +54,12 @@ export function SubtleCardsDemo() {
         <Card.Header>
           <Avatar className={avatar()}>
             <Avatar.Image asChild>
-              <Image alt="Demo 2" height={56} src="/assets/images/demo2.jpg" width={56} />
+              <Image
+                alt="AI Builders"
+                height={56}
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo2.jpg"
+                width={56}
+              />
             </Avatar.Image>
             <Avatar.Fallback>J</Avatar.Fallback>
           </Avatar>
