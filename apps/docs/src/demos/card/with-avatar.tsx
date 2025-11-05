@@ -2,7 +2,7 @@ import {Avatar, Card} from "@heroui/react";
 
 export function WithAvatar() {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-4">
       <Card className="w-[200px] gap-2">
         <img
           alt="Indie Hackers community"
