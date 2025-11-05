@@ -52,8 +52,9 @@ export default function HomePage() {
           <Image
             alt="HeroUI components preview"
             className="block dark:hidden"
+            fetchPriority="high"
             height={1592}
-            loading="lazy"
+            loading="eager"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
             src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-light.jpeg"
             width={2528}
@@ -61,8 +62,9 @@ export default function HomePage() {
           <Image
             alt="HeroUI components preview"
             className="hidden dark:block"
+            fetchPriority="high"
             height={1592}
-            loading="lazy"
+            loading="eager"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw"
             src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/home-components-dark.jpeg"
             width={2528}
