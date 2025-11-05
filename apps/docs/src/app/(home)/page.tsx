@@ -14,7 +14,7 @@ import {DemoComponents} from "./components/demo";
 const VersionChip = () => {
   return (
     <LinkRoot
-      className="text-foreground/50 chip bg-surface shadow-surface rounded-full text-xs"
+      className="text-muted chip bg-surface-secondary rounded-full text-xs"
       href="/docs/changelog"
     >
       <Iconify icon="gravity-ui:sparkles" />
