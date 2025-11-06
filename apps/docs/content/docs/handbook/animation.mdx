@@ -172,15 +172,17 @@ Use render props to apply dynamic animations based on component state:
 
 ### Respecting Motion Preferences
 
-HeroUI components automatically respect user motion preferences using the `reduce-motion:` utility. All built-in transitions and animations are disabled when users enable "reduce motion" in their system settings.
+HeroUI components automatically respect user motion preferences using Tailwind's `motion-reduce:` utility. All built-in transitions and animations are disabled when users enable "reduce motion" in their system settings.
+
+HeroUI extends Tailwind's `motion-reduce:` variant to support both the native `prefers-reduced-motion` media query and the `data-reduce-motion` attribute, providing flexible control over animations.
 
 ```css
-/* HeroUI automatically handles this pattern */
+/* HeroUI pattern - uses Tailwind's motion-reduce: */
 .button {
-  @apply transition reduce-motion:motion-none;
+  @apply transition-colors motion-reduce:transition-none;
 }
 
-/* Expands to: */
+/* Expands to support both approaches: */
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
@@ -223,21 +225,7 @@ Disable all animations by adding `data-reduce-motion="true"` to the `<html>` or 
 </html>
 ```
 
-HeroUI automatically detects the user's `prefers-reduced-motion: reduce` setting and disables animations accordingly.
-
-**Important**: HeroUI uses the `reduce-motion:` prefix (not Tailwind's default `motion-reduce:`). This is because HeroUI checks for the `[data-reduce-motion="true"]` attribute in addition to the media query.
-
-```css
-/* HeroUI pattern - works with both data attribute and media query */
-.button {
-  @apply transition reduce-motion:motion-none;
-}
-
-/* Not used in HeroUI */
-.button {
-  @apply transition motion-reduce:transition-none;
-}
-```
+HeroUI automatically detects the user's `prefers-reduced-motion: reduce` setting and disables animations accordingly. By extending Tailwind's native `motion-reduce:` variant, HeroUI provides a consistent API that works seamlessly with both system preferences and manual control via the data attribute.
 
 ## Performance Tips
 
