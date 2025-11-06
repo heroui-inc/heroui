@@ -12,7 +12,7 @@ import {SurfaceContext} from "../surface";
 import {inputVariants} from "./input.styles";
 
 /* -------------------------------------------------------------------------------------------------
- * Form Root
+ * Input Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputRootProps extends InputPrimitiveProps, InputVariants {}
 
