@@ -18,7 +18,7 @@ const VersionChip = () => {
       href="/docs/changelog"
     >
       <Iconify icon="gravity-ui:sparkles" />
-      <span>v{currentVersion}: RSC Support</span>
+      <span>v{currentVersion}: Major Redesign</span>
     </LinkRoot>
   );
 };
