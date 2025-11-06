@@ -1,9 +1,6 @@
 /* Base styles */
 .chip {
-  @apply bg-default inline-flex items-center gap-1.5 rounded-sm px-2 py-0.5 text-sm font-medium leading-5 sm:text-xs;
-
-  /* Border */
-  border-width: var(--border-width);
+  @apply bg-default inline-flex items-center gap-1.5 rounded-2xl px-2 py-0.5 text-sm font-medium leading-5;
 }
 
 /* Color variants */
@@ -29,7 +26,6 @@
 
 /* Variant styles */
 .chip--primary {
-  @apply border-transparent;
 }
 
 .chip--secondary {
@@ -40,7 +36,24 @@
   @apply bg-transparent;
 }
 
-/* Compound variants */
+/* Size variants */
+.chip--sm {
+  @apply px-1 py-0 text-xs;
+}
+
+.chip--md {
+  /* No styles as this is the default size */
+}
+
+.chip--lg {
+  @apply px-3 py-1 font-medium;
+}
+
+/* ====================== */
+/* = Compound variants = */
+/* ====================== */
+
+/* Primary variants */
 .chip--primary.chip--accent {
   @apply bg-accent text-accent-foreground;
 }
@@ -55,4 +68,20 @@
 
 .chip--primary.chip--danger {
   @apply bg-danger text-danger-foreground;
+}
+/* Soft variants */
+.chip--accent.chip--soft {
+  @apply bg-accent-soft text-accent-soft-foreground;
+}
+
+.chip--success.chip--soft {
+  @apply bg-success-soft text-success-soft-foreground;
+}
+
+.chip--warning.chip--soft {
+  @apply bg-warning-soft text-warning-soft-foreground;
+}
+
+.chip--danger.chip--soft {
+  @apply bg-danger-soft text-danger-soft-foreground;
 }

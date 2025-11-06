@@ -17,8 +17,7 @@ export function ComponentItem({className, component, ...props}: ComponentItemPro
     <a className="block" href={href} rel="noopener noreferrer" target="_blank">
       <div
         className={cn(
-          "border-border/60 group relative flex h-full flex-col gap-3 rounded-xl border bg-transparent p-5 py-4 transition-all duration-200",
-          "hover:border-border hover:bg-foreground/2",
+          "bg-surface group relative flex h-full flex-col gap-3 rounded-xl p-5 py-4",
           className,
         )}
         {...props}

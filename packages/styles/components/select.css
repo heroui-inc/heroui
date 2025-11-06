@@ -1,0 +1,199 @@
+/* Select styles */
+.select {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit;
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+}
+
+.select__trigger {
+  @apply bg-field text-field-foreground shadow-field rounded-field relative isolate inline-flex min-h-9 select-none border px-3 py-2 text-sm outline-none;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /* Add padding-right when indicator is present */
+  &:has(.select__indicator) {
+    @apply pr-7;
+  }
+
+  /* Hover state */
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-field-hover;
+    border-color: var(--color-field-border-hover);
+  }
+
+  /* Focus visible state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+    border-color: var(--color-field-border-focus);
+    background-color: var(--color-field-focus);
+  }
+
+  /* Focus state */
+  &:focus,
+  &[data-focus="true"] {
+    @apply status-focused;
+    border-color: var(--color-field-border-focus);
+    background-color: var(--color-field-focus);
+  }
+
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-field-focus);
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled pointer-events-none;
+  }
+}
+
+/* On Surface variant */
+.select__trigger--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-on-surface-hover;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  &:focus,
+  &[data-focus="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
+}
+
+.select__value {
+  @apply flex-1 truncate text-left text-current;
+
+  &[data-placeholder="true"] {
+    @apply text-field-placeholder;
+  }
+
+  /* Removes the listbox-item indicator element from the select value*/
+  [data-slot="listbox-item-indicator"] {
+    @apply hidden;
+  }
+}
+
+.select__indicator {
+  @apply text-field-placeholder duration-250 absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center transition;
+
+  &[data-open="true"] {
+    @apply rotate-180;
+  }
+
+  &[data-slot="select-default-indicator"] {
+    @apply size-4;
+  }
+}
+
+/* Similar to popover content styles */
+.select__content {
+  @apply min-w-(--trigger-width) bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  box-shadow: var(--shadow-overlay);
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+
+  /* Entering animations */
+  &[data-entering] {
+    @apply animate-in zoom-in-90 fade-in-0 ease-out-quad duration-200;
+
+    /* Placement-specific translations */
+    &[data-placement="top"] {
+      @apply slide-in-from-bottom-1;
+    }
+
+    &[data-placement="bottom"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement="left"] {
+      @apply slide-in-from-right-1;
+    }
+
+    &[data-placement="right"] {
+      @apply slide-in-from-left-1;
+    }
+  }
+
+  /* Exiting animations */
+  &[data-exiting] {
+    @apply animate-out zoom-out-95 fade-out ease-out-quart duration-150;
+  }
+
+  /* Arrow styling */
+  & [data-slot="popover-overlay-arrow"] {
+    fill: var(--overlay);
+  }
+
+  /* Arrow rotation based on placement */
+  &[data-placement="bottom"] [data-slot="popover-overlay-arrow"] {
+    rotate: 180deg;
+  }
+
+  &[data-placement="left"] [data-slot="popover-overlay-arrow"] {
+    rotate: -90deg;
+  }
+
+  &[data-placement="right"] [data-slot="popover-overlay-arrow"] {
+    rotate: 90deg;
+  }
+
+  /* Listbox styles */
+  [data-slot="listbox"] {
+    @apply p-1.5 outline-none;
+  }
+
+  [data-slot="listbox-item"] {
+    @apply px-2.5;
+  }
+
+  /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
+  [data-slot="listbox"]:not([aria-multiselectable="true"]) [data-slot="listbox-item-indicator"],
+  [data-slot="listbox"]:not([aria-multiselectable="true"])
+    [data-slot="listbox-item-indicator"]
+    [data-slot="listbox-item-indicator--checkmark"] {
+    @apply transition-none;
+  }
+}

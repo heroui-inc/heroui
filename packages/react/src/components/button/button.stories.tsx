@@ -1,4 +1,3 @@
-import type {ButtonProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -23,14 +22,17 @@ export default {
     },
   },
   component: Button,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Buttons/Button",
 } as Meta<typeof Button>;
 
-const defaultArgs: ButtonProps = {
+const defaultArgs: Button["RootProps"] = {
   size: "md",
 };
 
-const Template = ({isDisabled, size}: ButtonProps) => (
+const Template = ({isDisabled, size}: Button["RootProps"]) => (
   <div className="flex gap-3">
     <Button isDisabled={isDisabled} size={size}>
       Primary
@@ -47,10 +49,13 @@ const Template = ({isDisabled, size}: ButtonProps) => (
     <Button isDisabled={isDisabled} size={size} variant="danger">
       Danger
     </Button>
+    <Button isDisabled={isDisabled} size={size} variant="danger-soft">
+      Danger Soft
+    </Button>
   </div>
 );
 
-const TemplateWithAsChild = ({isDisabled, size}: ButtonProps) => (
+const TemplateWithAsChild = ({isDisabled, size}: Button["RootProps"]) => (
   <div className="flex gap-3">
     <Button asChild isDisabled={isDisabled} size={size}>
       <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">
@@ -60,7 +65,7 @@ const TemplateWithAsChild = ({isDisabled, size}: ButtonProps) => (
   </div>
 );
 
-const TemplateWithIcon = ({isDisabled, size}: ButtonProps) => (
+const TemplateWithIcon = ({isDisabled, size}: Button["RootProps"]) => (
   <div className="flex gap-3">
     <Button isDisabled={isDisabled} size={size}>
       <Icon icon="gravity-ui:globe" />
@@ -78,10 +83,14 @@ const TemplateWithIcon = ({isDisabled, size}: ButtonProps) => (
       <Icon icon="gravity-ui:trash-bin" />
       Delete
     </Button>
+    <Button isDisabled={isDisabled} size={size} variant="danger-soft">
+      <Icon icon="gravity-ui:trash-bin" />
+      Cancel
+    </Button>
   </div>
 );
 
-const TemplateWithIconOnly = ({isDisabled, size, variant}: ButtonProps) => (
+const TemplateWithIconOnly = ({isDisabled, size, variant}: Button["RootProps"]) => (
   <div className="flex gap-3">
     <Button isIconOnly isDisabled={isDisabled} size={size} variant={variant ?? "tertiary"}>
       <Icon icon="gravity-ui:ellipsis" />
@@ -89,16 +98,16 @@ const TemplateWithIconOnly = ({isDisabled, size, variant}: ButtonProps) => (
   </div>
 );
 
-const TemplateWithSpinner = ({size, variant}: ButtonProps) => (
+const TemplateWithSpinner = ({size, variant}: Button["RootProps"]) => (
   <div className="flex gap-3">
     <Button isPending size={size} variant={variant}>
-      <Spinner size="sm" />
+      <Spinner color="current" size="sm" />
       Loading
     </Button>
   </div>
 );
 
-const TemplateWithLoadingState = ({size, variant}: ButtonProps) => {
+const TemplateWithLoadingState = ({size, variant}: Button["RootProps"]) => {
   const [isLoading, setLoading] = useState(false);
 
   const handlePress = () => {
@@ -112,7 +121,7 @@ const TemplateWithLoadingState = ({size, variant}: ButtonProps) => {
     <Button isPending={isLoading} size={size} variant={variant ?? "tertiary"} onPress={handlePress}>
       {({isPending}) => (
         <>
-          {isPending ? <Spinner size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
+          {isPending ? <Spinner color="current" size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
           {isLoading ? "Uploading..." : "Upload File"}
         </>
       )}
@@ -155,7 +164,7 @@ const SizesTemplate = () => (
   </div>
 );
 
-const TemplateWithSocialButton = ({size, variant}: ButtonProps) => (
+const TemplateWithSocialButton = ({size, variant}: Button["RootProps"]) => (
   <div className="flex w-full max-w-xs flex-col gap-3">
     <Button size={size} variant={variant ?? "tertiary"}>
       <Icon icon="devicon:google" />

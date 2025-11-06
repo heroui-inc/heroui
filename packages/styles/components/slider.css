@@ -1,0 +1,170 @@
+/* Slider styles */
+
+.slider {
+  @apply w-full gap-2;
+
+  display: grid;
+  grid-template-areas:
+    "label output"
+    "track track";
+  grid-template-columns: 1fr auto;
+
+  [data-slot="label"] {
+    @apply w-fit text-sm font-medium;
+
+    grid-area: label;
+  }
+
+  .slider__output {
+    @apply text-sm font-medium tabular-nums;
+
+    grid-area: output;
+  }
+
+  .slider__track {
+    @apply bg-default relative rounded-full;
+
+    grid-area: track;
+  }
+
+  .slider__fill {
+    @apply bg-accent pointer-events-none absolute;
+  }
+
+  .slider__thumb {
+    /* Flex container for centering pseudo-elements */
+    @apply bg-accent absolute relative flex cursor-grab items-center justify-center rounded-full;
+
+    /* after: Visible thumb element */
+    &::after {
+      @apply shadow-field relative z-10 rounded-full bg-white text-black;
+      content: "";
+
+      /**
+       * Transitions
+       */
+      @apply origin-center transition-all motion-reduce:transition-none;
+    }
+
+    /* Dragging state - cursor changes and thumb scales down */
+    &[data-dragging] {
+      @apply cursor-grabbing;
+
+      &::after {
+        @apply scale-[0.9] motion-reduce:scale-100;
+      }
+    }
+
+    /* Focus state - increase z-index */
+    &[data-focused] {
+      @apply z-10;
+    }
+
+    /* Disabled state */
+    &[data-disabled] {
+      @apply cursor-default;
+    }
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+
+    [data-slot="label"] {
+      @apply opacity-100;
+    }
+  }
+
+  /* Horizontal orientation */
+  &[data-orientation="horizontal"] {
+    flex-direction: column;
+
+    .slider__track {
+      @apply h-5 w-full;
+      /* Add transparent borders to provide space for thumb at edges */
+      /* Thumb width is 1.5rem (24px), so half is 0.75rem (12px) */
+      @apply border-x-[0.75rem] border-x-transparent;
+
+      &[data-fill-start="true"] {
+        @apply border-s-accent;
+      }
+
+      &[data-fill-end="true"] {
+        @apply border-e-accent;
+      }
+    }
+
+    .slider__fill,
+    .slider__thumb {
+      @apply h-full;
+    }
+
+    .slider__thumb {
+      @apply top-1/2;
+
+      /* Thumb width + border width */
+      width: calc(1.5rem + 0.25rem);
+
+      &::after {
+        width: 1.5rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  /* Vertical orientation */
+  &[data-orientation="vertical"] {
+    @apply h-full gap-2;
+
+    flex-direction: row;
+    grid-template-areas:
+      "output"
+      "track"
+      "label";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+
+    .slider__output {
+      text-align: center;
+    }
+
+    [data-slot="label"] {
+      text-align: center;
+    }
+
+    .slider__track {
+      @apply h-full w-5;
+      /* Add transparent borders to provide space for thumb at edges */
+      /* Thumb height is 1.5rem (24px), so half is 0.75rem (12px) */
+      @apply border-y-[0.75rem] border-y-transparent;
+      justify-self: center;
+
+      &[data-fill-start="true"] {
+        @apply border-b-accent;
+      }
+
+      &[data-fill-end="true"] {
+        @apply border-t-accent;
+      }
+    }
+
+    .slider__fill,
+    .slider__thumb {
+      @apply w-full;
+    }
+
+    .slider__thumb {
+      @apply left-1/2;
+
+      /* Thumb height + border height */
+      height: calc(1.5rem + 0.25rem);
+
+      &::after {
+        width: 1rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}

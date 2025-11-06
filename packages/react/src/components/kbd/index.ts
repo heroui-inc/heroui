@@ -1,7 +1,40 @@
-export {KbdRoot, KbdAbbr, KbdContent} from "./kbd";
-export type {KbdRootProps, KbdAbbrProps, KbdContentProps} from "./kbd";
+import type {ComponentProps} from "react";
 
-export {kbdVariants, type KbdVariants} from "./kbd.styles";
-export {kbdKeysMap, kbdKeysLabelMap, type KbdKey} from "./kbd.constants";
+import {KbdAbbr, KbdContent, KbdRoot} from "./kbd";
 
-export * as Kbd from "./slots";
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Kbd = Object.assign(KbdRoot, {
+  Root: KbdRoot,
+  Abbr: KbdAbbr,
+  Content: KbdContent,
+});
+
+export type Kbd = {
+  Props: ComponentProps<typeof KbdRoot>;
+  RootProps: ComponentProps<typeof KbdRoot>;
+  AbbrProps: ComponentProps<typeof KbdAbbr>;
+  ContentProps: ComponentProps<typeof KbdContent>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
+export {KbdRoot, KbdAbbr, KbdContent};
+
+export type {KbdRootProps, KbdAbbrProps, KbdContentProps, KbdRootProps as KbdProps} from "./kbd";
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export {kbdVariants} from "./kbd.styles";
+
+export type {KbdVariants} from "./kbd.styles";
+
+/* -------------------------------------------------------------------------------------------------
+ * Constants
+ * -----------------------------------------------------------------------------------------------*/
+export {kbdKeysMap, kbdKeysLabelMap} from "./kbd.constants";
+
+export type {KbdKey} from "./kbd.constants";

@@ -1,12 +1,11 @@
 ---
 title: DisclosureGroup
 description: Container that manages multiple Disclosure items with coordinated expanded states
-icon: updated
 links:
   rac: DisclosureGroup
   source: disclosure-group/disclosure-group.tsx
   styles: disclosure-group.css
-  storybook: disclosure-group
+  storybook: Components/Navigation/DisclosureGroup
 ---
 
 ## Import
@@ -31,14 +30,14 @@ import {DisclosureGroup, Disclosure} from '@heroui/react';
 
 export default () => (
   <DisclosureGroup>
-    <Disclosure.Root id="item1">
+    <Disclosure id="item1">
       <Disclosure.Heading>
         <Disclosure.Trigger>
           <Disclosure.Indicator />
         </Disclosure.Trigger>
       </Disclosure.Heading>
       <Disclosure.Content />
-    </Disclosure.Root>
+    </Disclosure>
   </DisclosureGroup>
 )
 ```

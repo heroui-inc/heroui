@@ -1,25 +1,23 @@
-"use client";
-
 import {Avatar} from "@heroui/react";
 
 export function Colors() {
   return (
     <div className="flex items-center gap-4">
-      <Avatar.Root color="default">
+      <Avatar color="default">
         <Avatar.Fallback>DF</Avatar.Fallback>
-      </Avatar.Root>
-      <Avatar.Root color="accent">
+      </Avatar>
+      <Avatar color="accent">
         <Avatar.Fallback>AC</Avatar.Fallback>
-      </Avatar.Root>
-      <Avatar.Root color="success">
+      </Avatar>
+      <Avatar color="success">
         <Avatar.Fallback>SC</Avatar.Fallback>
-      </Avatar.Root>
-      <Avatar.Root color="warning">
+      </Avatar>
+      <Avatar color="warning">
         <Avatar.Fallback>WR</Avatar.Fallback>
-      </Avatar.Root>
-      <Avatar.Root color="danger">
+      </Avatar>
+      <Avatar color="danger">
         <Avatar.Fallback>DG</Avatar.Fallback>
-      </Avatar.Root>
+      </Avatar>
     </div>
   );
 }

@@ -1,81 +1,65 @@
 "use client";
 
 import type {SliderVariants} from "./slider.styles";
+import type {SliderRenderProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {
-  Label as LabelPrimitive,
   SliderOutput as SliderOutputPrimitive,
   Slider as SliderPrimitive,
   SliderThumb as SliderThumbPrimitive,
   SliderTrack as SliderTrackPrimitive,
 } from "react-aria-components";
 
+import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {sliderVariants} from "./slider.styles";
+
+/* -------------------------------------------------------------------------------------------------
+ * Component Status: Preview
+ * -----------------------------------------------------------------------------------------------*/
+
+// TODO: steps support
+// TODO: marks support
+// TODO: rtl support
+
 /* -------------------------------------------------------------------------------------------------
  * Slider Context
  * -----------------------------------------------------------------------------------------------*/
 interface SliderContext {
   slots?: ReturnType<typeof sliderVariants>;
-  orientation?: "horizontal" | "vertical";
-  isDisabled?: boolean;
+  state?: SliderRenderProps;
 }
+
 const SliderContext = createContext<SliderContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Root
  * -----------------------------------------------------------------------------------------------*/
 interface SliderRootProps extends React.ComponentProps<typeof SliderPrimitive>, SliderVariants {}
+
 const SliderRoot = ({
   children,
   className,
   orientation = "horizontal",
   ...props
 }: SliderRootProps) => {
-  const slots = React.useMemo(
-    () =>
-      sliderVariants({
-        orientation,
-        isDisabled: props.isDisabled,
-      }),
-    [orientation, props.isDisabled],
-  );
+  const slots = React.useMemo(() => sliderVariants({}), []);
 
   return (
-    <SliderContext value={{slots, orientation, isDisabled: props.isDisabled}}>
-      <SliderPrimitive
-        data-slot="slider"
-        orientation={orientation}
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </SliderPrimitive>
-    </SliderContext>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
- * Slider Header
- * -----------------------------------------------------------------------------------------------*/
-interface SliderHeaderProps extends React.ComponentProps<"div"> {}
-const SliderHeader = ({className, ...props}: SliderHeaderProps) => {
-  const {slots} = useContext(SliderContext);
-
-  return <div className={slots?.header({className})} data-slot="slider-header" {...props} />;
-};
-
-/* -------------------------------------------------------------------------------------------------
- * Slider Label
- * -----------------------------------------------------------------------------------------------*/
-interface SliderLabelProps extends React.ComponentProps<"label"> {}
-const SliderLabel = ({className, ...props}: SliderLabelProps) => {
-  const {slots} = useContext(SliderContext);
-
-  return (
-    <LabelPrimitive className={slots?.label({className})} data-slot="slider-label" {...props} />
+    <SliderPrimitive
+      data-slot="slider"
+      orientation={orientation}
+      {...props}
+      className={composeTwRenderProps(className, slots.base())}
+    >
+      {(values) => (
+        <SliderContext value={{slots, state: values}}>
+          {typeof children === "function" ? children(values) : children}
+        </SliderContext>
+      )}
+    </SliderPrimitive>
   );
 };
 
@@ -83,7 +67,8 @@ const SliderLabel = ({className, ...props}: SliderLabelProps) => {
  * Slider Output
  * -----------------------------------------------------------------------------------------------*/
 interface SliderOutputProps extends React.ComponentProps<typeof SliderOutputPrimitive> {}
-const SliderOutput = ({className, ...props}: SliderOutputProps) => {
+
+const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
   const {slots} = useContext(SliderContext);
 
   return (
@@ -91,7 +76,11 @@ const SliderOutput = ({className, ...props}: SliderOutputProps) => {
       className={composeTwRenderProps(className, slots?.output())}
       data-slot="slider-output"
       {...props}
-    />
+    >
+      {children
+        ? (values) => <>{typeof children === "function" ? children(values) : children}</>
+        : ({state}) => state.values.map((_, i) => state.getThumbValueLabel(i)).join(" – ")}
+    </SliderOutputPrimitive>
   );
 };
 
@@ -101,13 +90,33 @@ const SliderOutput = ({className, ...props}: SliderOutputProps) => {
 interface SliderTrackProps extends React.ComponentProps<typeof SliderTrackPrimitive> {}
 
 const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
-  const {isDisabled, slots} = useContext(SliderContext);
+  const {slots, state} = useContext(SliderContext);
+
+  const {getThumbPercent, values} = state?.state || {};
+
+  const singleThumb = values?.length && values.length === 1;
+
+  const [startOffset, endOffset] = [
+    values?.length && values.length > 1 ? getThumbPercent?.(0) : 0,
+    getThumbPercent?.(values?.length ? values.length - 1 : 0),
+  ].sort();
+
+  const fillWidth = (endOffset! - startOffset!) * 100;
 
   return (
     <SliderTrackPrimitive
       className={composeTwRenderProps(className, slots?.track())}
-      data-disabled={isDisabled || undefined}
+      data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-track"
+      {...(singleThumb
+        ? {
+            "data-fill-start": fillWidth > 0,
+            "data-fill-end": fillWidth == 100,
+          }
+        : {
+            "data-fill-start": startOffset == 0,
+            "data-fill-end": startOffset! * 100 + fillWidth == 100,
+          })}
       {...props}
     >
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
@@ -118,27 +127,37 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
  * -----------------------------------------------------------------------------------------------*/
-interface SliderFillProps extends React.ComponentProps<"div"> {
-  percentage?: number;
-}
+interface SliderFillProps extends React.ComponentProps<"div"> {}
 
-const SliderFill = ({className, percentage, style, ...props}: SliderFillProps) => {
-  const {isDisabled, orientation, slots} = useContext(SliderContext);
-  const fillStyle = React.useMemo(() => {
-    if (percentage === undefined) return style;
+const SliderFill = ({className, style, ...props}: SliderFillProps) => {
+  const {slots, state} = useContext(SliderContext);
 
-    return {
-      ...style,
-      ...(orientation === "horizontal" ? {width: `${percentage}%`} : {height: `${percentage}%`}),
-    };
-  }, [percentage, orientation, style]);
+  const {getThumbPercent, orientation, values} = state?.state || {};
+
+  const [startOffset, endOffset] = [
+    values?.length && values.length > 1 ? getThumbPercent?.(0) : 0,
+    getThumbPercent?.(values?.length ? values.length - 1 : 0),
+  ].sort();
+
+  const isVertical = orientation === "vertical";
 
   return (
     <div
       className={slots?.fill({className})}
-      data-disabled={isDisabled || undefined}
+      data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-fill"
-      style={fillStyle}
+      style={{
+        ...style,
+        // TODO: rtl support
+        [isVertical ? "bottom" : "left"]: `${startOffset! * 100}%`,
+        ...(isVertical
+          ? {
+              height: `${(endOffset! - startOffset!) * 100}%`,
+            }
+          : {
+              width: `${(endOffset! - startOffset!) * 100}%`,
+            }),
+      }}
       {...props}
     />
   );
@@ -148,6 +167,7 @@ const SliderFill = ({className, percentage, style, ...props}: SliderFillProps) =
  * Slider Thumb
  * -----------------------------------------------------------------------------------------------*/
 interface SliderThumbProps extends React.ComponentProps<typeof SliderThumbPrimitive> {}
+
 const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
   const {slots} = useContext(SliderContext);
 
@@ -163,9 +183,10 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Slider Marks
+ * TODO: Slider Marks
  * -----------------------------------------------------------------------------------------------*/
 interface SliderMarksProps extends React.ComponentProps<"div"> {}
+
 const SliderMarks = ({className, ...props}: SliderMarksProps) => {
   const {slots} = useContext(SliderContext);
 
@@ -175,21 +196,10 @@ const SliderMarks = ({className, ...props}: SliderMarksProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {
-  SliderRoot,
-  SliderHeader,
-  SliderLabel,
-  SliderOutput,
-  SliderTrack,
-  SliderFill,
-  SliderThumb,
-  SliderMarks,
-};
+export {SliderRoot, SliderOutput, SliderTrack, SliderFill, SliderThumb, SliderMarks};
 
 export type {
   SliderRootProps,
-  SliderHeaderProps,
-  SliderLabelProps,
   SliderOutputProps,
   SliderTrackProps,
   SliderFillProps,

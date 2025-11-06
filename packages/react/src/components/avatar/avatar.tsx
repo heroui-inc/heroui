@@ -12,9 +12,14 @@ import {dataAttr} from "../../utils/assertion";
 
 import {avatarVariants} from "./avatar.styles";
 
-const AvatarContext = createContext<{
+/* ------------------------------------------------------------------------------------------------
+ * Avatar Context
+ * --------------------------------------------------------------------------------------------- */
+type AvatarContext = {
   slots?: ReturnType<typeof avatarVariants>;
-}>({});
+};
+
+const AvatarContext = createContext<AvatarContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Avatar Root
@@ -23,8 +28,8 @@ interface AvatarRootProps
   extends Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, "color">,
     AvatarVariants {}
 
-const AvatarRoot = ({children, className, color, size, ...props}: AvatarRootProps) => {
-  const slots = React.useMemo(() => avatarVariants({color, size}), [color, size]);
+const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
+  const slots = React.useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
 
   return (
     <AvatarContext value={{slots}}>
@@ -45,6 +50,7 @@ interface AvatarImageProps
   shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
   onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
 }
+
 const AvatarImage = ({
   asChild = false,
   className,
@@ -62,6 +68,11 @@ const AvatarImage = ({
 }: AvatarImageProps) => {
   const {slots} = React.useContext(AvatarContext);
   const Comp = asChild ? SlotPrimitive : AvatarPrimitive.Image;
+
+  if (asChild) {
+    return <Comp className={slots?.image({className})} {...props} data-loaded />;
+  }
+
   const loadingStatus = useImage({
     src: typeof src === "string" ? src : undefined,
     srcSet,
@@ -98,6 +109,7 @@ const AvatarImage = ({
 interface AvatarFallbackProps extends React.ComponentProps<typeof AvatarPrimitive.Fallback> {
   color?: AvatarVariants["color"];
 }
+
 const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
   const {slots} = React.useContext(AvatarContext);
 
@@ -107,5 +119,6 @@ const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};
 export {AvatarRoot, AvatarImage, AvatarFallback};
+
+export type {AvatarRootProps, AvatarImageProps, AvatarFallbackProps};

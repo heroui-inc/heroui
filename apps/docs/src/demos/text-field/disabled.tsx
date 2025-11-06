@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Input, Label, TextField} from "@heroui/react";
 
 export function Disabled() {

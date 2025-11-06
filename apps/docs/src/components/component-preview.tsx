@@ -4,7 +4,7 @@ import * as React from "react";
 import {getDemo} from "@/demos";
 import {cn} from "@/utils/cn";
 
-import {ComponentPreviewTabs} from "./component-preview-tabs";
+import {ComponentPreviewContainer} from "./component-preview-container";
 import {ComponentSource} from "./component-source";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -40,7 +40,7 @@ export function ComponentPreview({
   const Component = demo.component;
 
   return (
-    <ComponentPreviewTabs
+    <ComponentPreviewContainer
       align={align}
       className={className}
       description={description}
@@ -51,6 +51,6 @@ export function ComponentPreview({
     >
       <Component />
       {!hideCode && !!demo.file && <ComponentSource language="tsx" name={name} title={name} />}
-    </ComponentPreviewTabs>
+    </ComponentPreviewContainer>
   );
 }

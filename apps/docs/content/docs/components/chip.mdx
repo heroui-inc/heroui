@@ -4,7 +4,7 @@ description: Small informational badges for displaying labels, statuses, and cat
 links:
   source: chip/chip.tsx
   styles: chip.css
-  storybook: chip
+  storybook: Components/DataDisplay/Chip
   figma: true
 ---
 
@@ -80,29 +80,41 @@ The Chip component uses these CSS classes ([View source styles](https://github.c
 #### Base Classes
 - `.chip` - Base chip styles
 
-#### Type Classes
-- `.chip--accent` - Accent type variant
-- `.chip--danger` - Danger type variant
-- `.chip--default` - Default type variant
-- `.chip--success` - Success type variant
-- `.chip--warning` - Warning type variant
+#### Color Classes
+- `.chip--accent` - Accent color variant
+- `.chip--danger` - Danger color variant
+- `.chip--default` - Default color variant
+- `.chip--success` - Success color variant
+- `.chip--warning` - Warning color variant
 
 #### Variant Classes
 - `.chip--primary` - Primary variant with filled background
 - `.chip--secondary` - Secondary variant with border
 - `.chip--tertiary` - Tertiary variant with transparent background
+- `.chip--soft` - Soft variant with lighter background
+
+#### Size Classes
+- `.chip--sm` - Small size
+- `.chip--md` - Medium size (default)
+- `.chip--lg` - Large size
 
 #### Compound Variant Classes
-- `.chip--primary.chip--accent` - Primary accent combination
-- `.chip--primary.chip--success` - Primary success combination
-- `.chip--primary.chip--warning` - Primary warning combination
-- `.chip--primary.chip--danger` - Primary danger combination
 
-### Interactive States
+Chips support combining variant and color classes (e.g., `.chip--secondary.chip--accent`). The following combinations have default styles defined:
 
-The component supports focus visibility:
+**Primary Variants:**
+- `.chip--primary.chip--accent` - Primary accent combination with filled background
+- `.chip--primary.chip--success` - Primary success combination with filled background
+- `.chip--primary.chip--warning` - Primary warning combination with filled background
+- `.chip--primary.chip--danger` - Primary danger combination with filled background
 
-- **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
+**Soft Variants:**
+- `.chip--accent.chip--soft` - Soft accent combination with lighter background
+- `.chip--success.chip--soft` - Soft success combination with lighter background
+- `.chip--warning.chip--soft` - Soft warning combination with lighter background
+- `.chip--danger.chip--soft` - Soft danger combination with lighter background
+
+**Note:** You can apply custom styles to any variant-color combination (e.g., `.chip--secondary.chip--accent`, `.chip--tertiary.chip--success`) using the `@layer components` directive in your CSS.
 
 ## API Reference
 
@@ -112,5 +124,6 @@ The component supports focus visibility:
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Content to display inside the chip |
 | `className` | `string` | - | Additional CSS classes |
-| `type` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Type variant of the chip |
-| `variant` | `"primary" \| "secondary" \| "tertiary"` | `"secondary"` | Visual style variant |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Color variant of the chip |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "soft"` | `"secondary"` | Visual style variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the chip |

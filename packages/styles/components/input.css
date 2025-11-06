@@ -1,12 +1,18 @@
 .input {
   @apply bg-field text-field-foreground shadow-field placeholder:text-field-placeholder rounded-field border px-3 py-2 text-sm outline-none;
 
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     background-color 150ms var(--ease-smooth),
     border-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
-  border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  @apply motion-reduce:transition-none;
 
   &:hover,
   &[data-hovered="true"] {
@@ -16,17 +22,28 @@
 
   &:focus-visible,
   &[data-focus-visible="true"] {
-    @apply status-focused;
+    @apply status-focused-field;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
   }
 
   &[data-invalid="true"] {
-    @apply border-danger;
+    @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
+/* Variant modifiers */
+.input--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-on-surface-hover;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    background-color: var(--color-on-surface-focus);
   }
 }

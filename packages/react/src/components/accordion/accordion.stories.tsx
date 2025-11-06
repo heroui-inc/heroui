@@ -18,26 +18,119 @@ export default {
         type: "boolean",
       },
     },
-    variant: {
-      control: {
-        type: "select",
-      },
-      options: ["default", "outline"],
-    },
   },
-  component: Accordion.Root,
+  component: Accordion,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/Accordion",
-} as Meta<typeof Accordion.Root>;
+} as Meta<typeof Accordion>;
 
-const defaultArgs: Accordion.RootProps = {
+const defaultArgs: Accordion["RootProps"] = {
   allowsMultipleExpanded: false,
   isDisabled: false,
-  variant: "default",
 };
 
 const Wrapper = ({children, className}: {children: React.ReactNode; className?: string}) => (
   <div className={cnBase("w-full max-w-md", className)}>{children}</div>
 );
+
+const Template = (props: Accordion["RootProps"]) => (
+  <Wrapper>
+    <Accordion {...props}>
+      {items.map((item, index) => (
+        <Accordion.Item key={index}>
+          <Accordion.Heading>
+            <Accordion.Trigger>
+              {item.icon ? (
+                <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
+              ) : null}
+              {item.title}
+              <Accordion.Indicator>
+                <Icon icon="gravity-ui:chevron-down" />
+              </Accordion.Indicator>
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>{item.content}</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
+      ))}
+    </Accordion>
+  </Wrapper>
+);
+
+const CustomTemplate = (props: Accordion["RootProps"]) => (
+  <div className="flex w-full justify-center px-4 py-8">
+    <div className="w-full max-w-2xl">
+      <div className="flex flex-col gap-1">
+        <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+        <p className="text-muted mb-4 text-lg font-medium">
+          Everything you need to know about licensing and usage.
+        </p>
+      </div>
+      <div className="mt-2 flex flex-col gap-6">
+        {categories.map((category) => (
+          <div key={category.title}>
+            <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
+            <div key={category.title}>
+              <Accordion {...props} className="w-full" variant="surface">
+                {category.items.map((item, index) => (
+                  <Accordion.Item key={index}>
+                    <Accordion.Heading>
+                      <Accordion.Trigger>
+                        {item.title}
+                        <Accordion.Indicator>
+                          <Icon icon="gravity-ui:chevron-down" />
+                        </Accordion.Indicator>
+                      </Accordion.Trigger>
+                    </Accordion.Heading>
+                    <Accordion.Panel>
+                      <Accordion.Body>{item.content}</Accordion.Body>
+                    </Accordion.Panel>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+export const Default = {
+  args: {
+    ...defaultArgs,
+    allowsMultipleExpanded: true,
+  },
+  render: Template,
+};
+
+export const SurfaceVariant = {
+  args: {
+    ...defaultArgs,
+    variant: "surface",
+    allowsMultipleExpanded: true,
+  },
+  render: (args: Accordion["RootProps"]) => (
+    <section className="flex h-screen w-screen items-center justify-center">
+      <Template {...args} />
+    </section>
+  ),
+};
+
+export const Custom = {
+  args: {
+    ...defaultArgs,
+    allowsMultipleExpanded: true,
+  },
+  render: (args: Accordion["RootProps"]) => (
+    <section className="flex h-screen w-screen items-center justify-center">
+      <CustomTemplate {...args} />
+    </section>
+  ),
+};
 
 const items = [
   {
@@ -76,31 +169,6 @@ const items = [
     title: "How do I request a refund?",
   },
 ];
-
-const Template = (props: Accordion.RootProps) => (
-  <Wrapper>
-    <Accordion.Root {...props}>
-      {items.map((item, index) => (
-        <Accordion.Item key={index}>
-          <Accordion.Heading>
-            <Accordion.Trigger>
-              {item.icon ? (
-                <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
-              ) : null}
-              {item.title}
-              <Accordion.Indicator>
-                <Icon icon="gravity-ui:chevron-down" />
-              </Accordion.Indicator>
-            </Accordion.Trigger>
-          </Accordion.Heading>
-          <Accordion.Panel>
-            <Accordion.Body>{item.content}</Accordion.Body>
-          </Accordion.Panel>
-        </Accordion.Item>
-      ))}
-    </Accordion.Root>
-  </Wrapper>
-);
 
 const categories = [
   {
@@ -169,56 +237,3 @@ const categories = [
     ],
   },
 ];
-
-const CustomTemplate = (props: Accordion.RootProps) => (
-  <div className="flex w-full justify-center px-4 py-8">
-    <div className="w-full max-w-2xl">
-      <div className="flex flex-col gap-1">
-        <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
-        <p className="text-muted mb-4 text-lg font-medium">
-          Everything you need to know about licensing and usage.
-        </p>
-      </div>
-      <div className="mt-2 flex flex-col gap-6">
-        {categories.map((category) => (
-          <div key={category.title}>
-            <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
-            <Accordion.Root {...props} className="w-full" variant="outline">
-              {category.items.map((item, index) => (
-                <Accordion.Item key={index}>
-                  <Accordion.Heading>
-                    <Accordion.Trigger>
-                      {item.title}
-                      <Accordion.Indicator>
-                        <Icon icon="gravity-ui:chevron-down" />
-                      </Accordion.Indicator>
-                    </Accordion.Trigger>
-                  </Accordion.Heading>
-                  <Accordion.Panel>
-                    <Accordion.Body>{item.content}</Accordion.Body>
-                  </Accordion.Panel>
-                </Accordion.Item>
-              ))}
-            </Accordion.Root>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-);
-
-export const Default = {
-  args: {
-    ...defaultArgs,
-    allowsMultipleExpanded: true,
-  },
-  render: Template,
-};
-
-export const Custom = {
-  args: {
-    ...defaultArgs,
-    allowsMultipleExpanded: true,
-  },
-  render: CustomTemplate,
-};

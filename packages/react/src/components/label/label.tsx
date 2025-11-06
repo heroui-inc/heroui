@@ -7,8 +7,19 @@ import {Label as LabelPrimitive} from "react-aria-components";
 
 import {labelVariants} from "./label.styles";
 
-interface LabelProps extends LabelPrimitiveProps, LabelVariants {}
-const Label = ({children, className, isDisabled, isInvalid, isRequired, ...rest}: LabelProps) => {
+/* -------------------------------------------------------------------------------------------------
+ * Label Root
+ * -----------------------------------------------------------------------------------------------*/
+interface LabelRootProps extends LabelPrimitiveProps, LabelVariants {}
+
+const LabelRoot = ({
+  children,
+  className,
+  isDisabled,
+  isInvalid,
+  isRequired,
+  ...rest
+}: LabelRootProps) => {
   return (
     <LabelPrimitive
       className={labelVariants({isRequired, isDisabled, isInvalid, className})}
@@ -20,5 +31,9 @@ const Label = ({children, className, isDisabled, isInvalid, isRequired, ...rest}
   );
 };
 
-export type {LabelProps};
-export {Label};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {LabelRoot};
+
+export type {LabelRootProps};

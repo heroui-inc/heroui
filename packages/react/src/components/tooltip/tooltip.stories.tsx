@@ -40,17 +40,17 @@ export default {
       ],
     },
   },
-  component: Tooltip.Root,
+  component: Tooltip,
   title: "Components/Overlays/Tooltip",
-} as Meta<typeof Tooltip.Root>;
+} as Meta<typeof Tooltip>;
 
-const defaultArgs: Omit<Tooltip.ContentProps, "children"> = {
+const defaultArgs: Omit<Tooltip["ContentProps"], "children"> = {
   showArrow: true,
 };
 
-const Template = (props: Tooltip.ContentProps) => (
+const Template = (props: Tooltip["ContentProps"]) => (
   <div className="flex items-center gap-3">
-    <Tooltip.Root delay={0}>
+    <Tooltip delay={0}>
       <Button isIconOnly variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />
       </Button>
@@ -58,13 +58,13 @@ const Template = (props: Tooltip.ContentProps) => (
         <Tooltip.Arrow />
         <p>Tooltip content</p>
       </Tooltip.Content>
-    </Tooltip.Root>
+    </Tooltip>
   </div>
 );
 
-const TemplateWithTrigger = (props: Tooltip.ContentProps) => (
+const TemplateWithTrigger = (props: Tooltip["ContentProps"]) => (
   <div className="flex items-center gap-3">
-    <Tooltip.Root delay={0}>
+    <Tooltip delay={0}>
       <Tooltip.Trigger aria-label="Tooltip trigger">
         <div className="bg-accent-soft rounded-full p-2">
           <Icon icon="gravity-ui:circle-info" />
@@ -74,7 +74,7 @@ const TemplateWithTrigger = (props: Tooltip.ContentProps) => (
         <Tooltip.Arrow />
         <p>Tooltip content</p>
       </Tooltip.Content>
-    </Tooltip.Root>
+    </Tooltip>
   </div>
 );
 

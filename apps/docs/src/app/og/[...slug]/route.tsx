@@ -31,11 +31,8 @@ function generate({...props}: GenerateProps): ReactElement {
   return (
     <div
       style={{
-        backgroundImage: `
-          linear-gradient(350deg, #000 0%, rgba(31, 20, 21, .7) 15%, rgba(41, 26, 27, .6) 30%, rgba(37, 24, 28, .65) 40%, rgba(33, 23, 29, .65) 50%, rgba(30, 21, 30, .65) 60%, #1c151e 70%, #18131b 78%, #15121c 85%, #111019 92%, #101119 100%),
-          linear-gradient(350deg, #000 0%, #291a1b 40%, #1c151e 70%, #15121c 85%, #101119 100%)
-        `,
-        color: "#FAFAFA",
+        background: "#F5F5F5",
+        color: "#18181B",
         display: "flex",
         flexDirection: "column",
         height: "100%",
@@ -56,7 +53,7 @@ function generate({...props}: GenerateProps): ReactElement {
       {/* Description */}
       <p
         style={{
-          color: "#A1A1A1",
+          color: "#71717A",
           fontSize: "52px",
         }}
       >

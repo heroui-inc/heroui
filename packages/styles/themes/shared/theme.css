@@ -1,19 +1,17 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-panel: var(--panel);
-  --color-panel-foreground: var(--panel-foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  --color-overlay: var(--overlay);
+  --color-overlay-foreground: var(--overlay-foreground);
 
   --color-muted: var(--muted);
 
-  --color-surface: var(--surface-1);
-  --color-surface-foreground: var(--foreground);
-
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-soft-foreground: var(--accent-soft-foreground);
 
   --color-segment: var(--segment);
   --color-segment-foreground: var(--segment-foreground);
@@ -35,11 +33,17 @@
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
 
-  --shadow-panel: var(--panel-shadow);
+  --shadow-surface: var(--surface-shadow);
+  --shadow-overlay: var(--overlay-shadow);
   --shadow-field: var(--field-shadow);
 
   /* Form Field Tokens */
   --color-field: var(--field-background, var(--color-default));
+  --color-field-hover: color-mix(
+    in oklab,
+    var(--field-background, var(--color-default)) 90%,
+    var(--field-foreground, var(--color-default-foreground)) 10%
+  );
   --color-field-foreground: var(--field-foreground, var(--color-foreground));
   --color-field-placeholder: var(--field-placeholder, var(--color-muted));
   --color-field-border: var(--field-border, var(--color-border));
@@ -49,20 +53,31 @@
   /* Calculated Variables */
 
   /* Colors */
-  --color-panel-hover: color-mix(
+
+  /* --- background shades --- */
+  --color-background-secondary: color-mix(
     in oklab,
-    var(--color-panel) 90%,
-    var(--color-panel-foreground) 5%
+    var(--color-background) 96%,
+    var(--color-foreground) 4%
   );
-  --color-default-hover: color-mix(
+  --color-background-tertiary: color-mix(
     in oklab,
-    var(--color-default) 90%,
-    var(--color-default-foreground) 2%
+    var(--color-background) 92%,
+    var(--color-foreground) 8%
   );
-  --color-accent-soft-hover: color-mix(
+  --color-background-quaternary: color-mix(
     in oklab,
-    var(--color-accent-soft) 10%,
-    var(--color-accent-soft-foreground) 18%
+    var(--color-background) 86%,
+    var(--color-foreground) 14%
+  );
+  --color-background-inverse: var(--color-foreground);
+
+  /* ------------------------- */
+  --color-default-hover: color-mix(in oklab, var(--color-default) 80%, transparent);
+  --color-accent-hover: color-mix(
+    in oklab,
+    var(--color-accent) 90%,
+    var(--color-accent-foreground) 10%
   );
   --color-success-hover: color-mix(
     in oklab,
@@ -79,18 +94,14 @@
     var(--color-danger) 90%,
     var(--color-danger-foreground) 10%
   );
+
   /* Form Field Colors */
   --color-field-hover: color-mix(
     in oklab,
     var(--color-field) 90%,
     var(--color-field-foreground) 2%
   );
-  --color-field-focus: transparent;
-  --color-accent-hover: color-mix(
-    in oklab,
-    var(--color-accent) 90%,
-    var(--color-accent-foreground) 20%
-  );
+  --color-field-focus: var(--color-field);
   --color-field-border-hover: color-mix(
     in oklab,
     var(--color-field-border) 88%,
@@ -102,25 +113,45 @@
     var(--color-field-foreground) 22%
   );
 
-  /* Surface Colors */
-  --color-surface-1: var(--surface-1);
-  --color-surface-1-foreground: color-mix(
+  /* Soft Colors */
+  --color-accent-soft: color-mix(in oklab, var(--color-accent) 15%, transparent);
+  --color-accent-soft-foreground: var(--color-accent);
+  --color-accent-soft-hover: color-mix(in oklab, var(--color-accent) 20%, transparent);
+
+  --color-danger-soft: color-mix(in oklab, var(--color-danger) 15%, transparent);
+  --color-danger-soft-foreground: var(--color-danger);
+  --color-danger-soft-hover: color-mix(in oklab, var(--color-danger) 20%, transparent);
+
+  --color-warning-soft: color-mix(in oklab, var(--color-warning) 15%, transparent);
+  --color-warning-soft-foreground: var(--color-warning);
+  --color-warning-soft-hover: color-mix(in oklab, var(--color-warning) 20%, transparent);
+
+  --color-success-soft: color-mix(in oklab, var(--color-success) 15%, transparent);
+  --color-success-soft-foreground: var(--color-success);
+  --color-success-soft-hover: color-mix(in oklab, var(--color-success) 20%, transparent);
+
+  /* Surface Levels - progressively darker/lighter shades for layering */
+  --color-surface-secondary: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground) 6%);
+  --color-surface-tertiary: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
+  --color-surface-quaternary: color-mix(
     in oklab,
-    var(--color-surface-1) 80%,
-    var(--color-foreground) 3.5%
+    var(--surface) 86%,
+    var(--default-foreground) 14%
   );
-  --color-surface-2: var(--surface-2);
-  --color-surface-2-foreground: color-mix(
+
+  /* On Surface Colors */
+  --color-on-surface: color-mix(
     in oklab,
-    var(--color-surface-2) 80%,
-    var(--color-foreground) 3.5%
+    var(--color-surface) 93%,
+    var(--color-surface-foreground) 7%
   );
-  --color-surface-3: var(--surface-3);
-  --color-surface-3-foreground: color-mix(
+  --color-on-surface-foreground: var(--color-surface-foreground);
+  --color-on-surface-hover: color-mix(
     in oklab,
-    var(--color-surface-3) 80%,
-    var(--color-foreground) 3.5%
+    var(--color-surface) 91%,
+    var(--color-surface-foreground) 9%
   );
+  --color-on-surface-focus: var(--color-on-surface);
 
   /* Radius and default sizes - defaults can change by just changing the --radius */
   --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */
@@ -131,11 +162,6 @@
   --radius-2xl: calc(var(--radius) * 2); /* 1rem (16px) */
   --radius-3xl: calc(var(--radius) * 3); /* 1.5rem (24px) */
   --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
-
-  /* Semantic Radius */
-  /* Panel specific radius - used on components like popovers, dropdowns, modals, cards, etc. */
-  --radius-panel: var(--radius-xl); /* 0.75rem (12px) */
-  --radius-panel-inner: var(--radius-2xl); /* 1rem (16px) */
 
   /* Transition Timing Functions  */
   --ease-smooth: ease; /* same as transition: ease; */
@@ -165,13 +191,29 @@
   --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
   --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
+  /* Linear */
+  --ease-linear: linear;
+
   /* Animations */
   --animate-spin-fast: spin 0.75s linear infinite;
   --animate-skeleton: skeleton 2s linear infinite;
+  --animate-caret-blink: caret-blink 1.2s ease-out infinite;
 
   @keyframes skeleton {
     100% {
       transform: translateX(200%);
+    }
+  }
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
     }
   }
 }

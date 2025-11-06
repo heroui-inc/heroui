@@ -1,26 +1,32 @@
 "use client";
 
 import type {KbdKey} from "./kbd.constants";
+import type {KbdVariants} from "./kbd.styles";
 
 import React, {createContext, useContext} from "react";
 
 import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants";
 import {kbdVariants} from "./kbd.styles";
 
-const KbdContext = createContext<{
+/* -------------------------------------------------------------------------------------------------
+ * Kbd Context
+ * -----------------------------------------------------------------------------------------------*/
+type KbdContext = {
   slots?: ReturnType<typeof kbdVariants>;
-}>({});
+};
+
+const KbdContext = createContext<KbdContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Kbd Root
  * -----------------------------------------------------------------------------------------------*/
-interface KbdRootProps extends React.HTMLAttributes<HTMLElement> {
+interface KbdRootProps extends React.HTMLAttributes<HTMLElement>, KbdVariants {
   children: React.ReactNode;
   className?: string;
 }
 
-const KbdRoot = ({children, className, ...props}: KbdRootProps) => {
-  const slots = React.useMemo(() => kbdVariants(), []);
+const KbdRoot = ({children, className, variant, ...props}: KbdRootProps) => {
+  const slots = React.useMemo(() => kbdVariants({variant}), [variant]);
 
   return (
     <KbdContext value={{slots}}>
@@ -32,7 +38,7 @@ const KbdRoot = ({children, className, ...props}: KbdRootProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * KbdAbbr
+ * Kbd Abbr
  * -----------------------------------------------------------------------------------------------*/
 interface KbdAbbrProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
@@ -53,12 +59,13 @@ const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * KbdContent
+ * Kbd Content
  * -----------------------------------------------------------------------------------------------*/
 interface KbdContentProps extends React.ComponentProps<"span"> {
   children: React.ReactNode;
   className?: string;
 }
+
 const KbdContent = ({children, className, ...props}: KbdContentProps) => {
   const {slots} = useContext(KbdContext);
 
@@ -72,5 +79,6 @@ const KbdContent = ({children, className, ...props}: KbdContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export type {KbdRootProps, KbdAbbrProps, KbdContentProps};
 export {KbdRoot, KbdAbbr, KbdContent};
+
+export type {KbdRootProps, KbdAbbrProps, KbdContentProps};

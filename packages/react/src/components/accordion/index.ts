@@ -1,3 +1,42 @@
+import type {ComponentProps} from "react";
+
+import {
+  AccordionBody,
+  AccordionHeading,
+  AccordionIndicator,
+  AccordionItem,
+  AccordionPanel,
+  AccordionRoot,
+  AccordionTrigger,
+} from "./accordion";
+
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Accordion = Object.assign(AccordionRoot, {
+  Root: AccordionRoot,
+  Item: AccordionItem,
+  Heading: AccordionHeading,
+  Trigger: AccordionTrigger,
+  Panel: AccordionPanel,
+  Indicator: AccordionIndicator,
+  Body: AccordionBody,
+});
+
+export type Accordion = {
+  Props: ComponentProps<typeof AccordionRoot>;
+  RootProps: ComponentProps<typeof AccordionRoot>;
+  ItemProps: ComponentProps<typeof AccordionItem>;
+  HeadingProps: ComponentProps<typeof AccordionHeading>;
+  TriggerProps: ComponentProps<typeof AccordionTrigger>;
+  PanelProps: ComponentProps<typeof AccordionPanel>;
+  IndicatorProps: ComponentProps<typeof AccordionIndicator>;
+  BodyProps: ComponentProps<typeof AccordionBody>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
 export {
   AccordionRoot,
   AccordionItem,
@@ -6,19 +45,22 @@ export {
   AccordionPanel,
   AccordionIndicator,
   AccordionBody,
-} from "./accordion";
+};
 
 export type {
   AccordionRootProps,
+  AccordionRootProps as AccordionProps,
   AccordionItemProps,
+  AccordionHeadingProps,
   AccordionTriggerProps,
   AccordionPanelProps,
   AccordionIndicatorProps,
   AccordionBodyProps,
-  AccordionHeadingProps,
 } from "./accordion";
 
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
 export {accordionVariants} from "./accordion.styles";
-export type {AccordionVariants} from "./accordion.styles";
 
-export * as Accordion from "./slots";
+export type {AccordionVariants} from "./accordion.styles";

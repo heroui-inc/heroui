@@ -27,26 +27,29 @@ import {
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {calendarVariants} from "./calendar.styles";
+
 /* -------------------------------------------------------------------------------------------------
  * Calendar Context
  * -----------------------------------------------------------------------------------------------*/
 interface CalendarContext {
   slots?: ReturnType<typeof calendarVariants>;
 }
+
 const CalendarContext = createContext<CalendarContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Calendar
+ * Calendar Root
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarProps<T extends DateValue = DateValue>
+interface CalendarRootProps<T extends DateValue = DateValue>
   extends CalendarPrimitiveProps<T>,
     CalendarVariants {}
-function Calendar<T extends DateValue = DateValue>({
+
+function CalendarRoot<T extends DateValue = DateValue>({
   children,
   className,
   isDisabled,
   ...rest
-}: CalendarProps<T>) {
+}: CalendarRootProps<T>) {
   const slots = React.useMemo(() => calendarVariants({isDisabled}), [isDisabled]);
 
   return (
@@ -62,10 +65,14 @@ function Calendar<T extends DateValue = DateValue>({
     </CalendarContext>
   );
 }
-/* -----------------------------------------------------------------------------------------------*/
+
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Header
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarHeaderProps extends React.ComponentProps<"header"> {
   className?: string;
 }
+
 const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -76,8 +83,11 @@ const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) =>
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Heading
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarHeadingProps extends HeadingPrimitiveProps {}
+
 const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -90,10 +100,13 @@ const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Nav Button
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarNavButtonProps extends ButtonPrimitiveProps {
   slot?: "previous" | "next";
 }
+
 const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavButtonProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -109,8 +122,11 @@ const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavBut
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Grid
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarGridProps extends CalendarGridPrimitiveProps {}
+
 const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -130,8 +146,11 @@ const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Grid Header
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarGridHeaderProps extends CalendarGridHeaderPrimitiveProps {}
+
 const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -144,8 +163,11 @@ const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Header Cell
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarHeaderCellProps extends CalendarHeaderCellPrimitiveProps {}
+
 const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -158,8 +180,11 @@ const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Calendar Cell
+ * -----------------------------------------------------------------------------------------------*/
 interface CalendarCellProps extends CalendarCellPrimitiveProps {}
+
 const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
   const {slots} = useContext(CalendarContext);
 
@@ -190,12 +215,12 @@ const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
     </CalendarCellPrimitive>
   );
 };
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-
 export {
-  Calendar,
+  CalendarRoot,
   CalendarHeader,
   CalendarHeading,
   CalendarNavButton,
@@ -205,7 +230,7 @@ export {
   CalendarCell,
 };
 export type {
-  CalendarProps,
+  CalendarRootProps,
   CalendarHeaderProps,
   CalendarHeadingProps,
   CalendarNavButtonProps,

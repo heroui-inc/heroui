@@ -17,8 +17,8 @@ Components use semantic naming (primary, secondary, tertiary) instead of visual 
 Inspired by [Uber's Base design system](https://base.uber.com/6d2425e9f/p/756216-button), our variants follow a clear hierarchy:
 
 <DocsImage
-  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/semantic-intent.jpg"
-  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/semantic-intent-dark.jpg"
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/emphasis.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/emphasis-dark.jpg"
   alt="Semantic Intent Hierarchy"
 />
 
@@ -124,10 +124,10 @@ import { Alert, AlertIcon, CardHeader, AccordionTrigger } from '@heroui/react';
   <AlertIcon />
 </Alert>
 
-// Dot notation (requires .Root)
-<Alert.Root>
+// Dot notation
+<Alert>
   <Alert.Icon />
-</Alert.Root>
+</Alert>
 ```
 
 ### 6. Type Safety First

@@ -21,21 +21,24 @@ export default {
       },
     },
   },
-  component: Disclosure.Root,
+  component: Disclosure,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/Disclosure",
-} as Meta<typeof Disclosure.Root>;
+} as Meta<typeof Disclosure>;
 
-const defaultArgs: Disclosure.RootProps = {
+const defaultArgs: Disclosure["RootProps"] = {
   isDisabled: false,
   isExpanded: false,
 };
 
-const Template = (props: Disclosure.RootProps) => {
+const Template = (props: Disclosure["RootProps"]) => {
   const [isExpanded, setIsExpanded] = React.useState(props.isExpanded ?? false);
 
   return (
     <div className="w-full max-w-md text-center">
-      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
             <Icon icon="gravity-ui:qr-code" />
@@ -44,14 +47,14 @@ const Template = (props: Disclosure.RootProps) => {
           </Button>
         </Disclosure.Heading>
         <Disclosure.Content>
-          <Disclosure.Body className="bg-panel shadow-panel rounded-panel flex flex-col items-center p-2 p-4 text-center">
+          <Disclosure.Body className="bg-surface shadow-surface flex flex-col items-center rounded-3xl p-2 p-4 text-center">
             <p className="text-muted text-sm">
               Scan this QR code with your camera app to preview the HeroUI native components.
             </p>
             <img
               alt="Expo Go QR Code"
               className="max-w-54 aspect-square w-full object-cover"
-              src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
             />
             <p className="text-muted text-sm">Expo must be installed on your device.</p>
             <Button className="mt-4" variant="primary">
@@ -60,12 +63,12 @@ const Template = (props: Disclosure.RootProps) => {
             </Button>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 };
 
-const ControlledTemplate = (props: Disclosure.RootProps) => {
+const ControlledTemplate = (props: Disclosure["RootProps"]) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
@@ -78,7 +81,7 @@ const ControlledTemplate = (props: Disclosure.RootProps) => {
           State: {isExpanded ? "Expanded" : "Collapsed"}
         </Chip>
       </div>
-      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Trigger className="mb-2 flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span>Toggle content</span>
           <Icon
@@ -94,17 +97,17 @@ const ControlledTemplate = (props: Disclosure.RootProps) => {
             </p>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 };
 
-const ProductDetailsTemplate = (props: Disclosure.RootProps) => {
+const ProductDetailsTemplate = (props: Disclosure["RootProps"]) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <div className="w-full max-w-md">
-      <Disclosure.Root {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+      <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
           <span className="flex items-center gap-2">
             <Icon icon="gravity-ui:box" />
@@ -145,7 +148,7 @@ const ProductDetailsTemplate = (props: Disclosure.RootProps) => {
             </div>
           </Disclosure.Body>
         </Disclosure.Content>
-      </Disclosure.Root>
+      </Disclosure>
     </div>
   );
 };

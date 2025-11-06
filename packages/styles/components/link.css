@@ -1,22 +1,37 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit items-center underline-offset-4 hover:underline;
+  @apply text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
-    text-decoration-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out),
     opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  text-decoration-color: color-mix(in oklch, var(--link) 50%, transparent);
+  /* Hover state */
+  &:hover,
+  &[data-hovered="true"] {
+    .link__icon {
+      @apply opacity-100;
+    }
+  }
 
+  /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
+
+    .link__icon {
+      @apply opacity-100;
+    }
   }
 
   /* Disabled state */
@@ -25,14 +40,91 @@
   }
 
   .link__icon {
-    @apply text-muted pointer-events-none inline-flex size-4 shrink-0 items-center justify-center;
+    @apply pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: opacity 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
   }
 
   .link__icon[data-default-icon="true"] {
-    @apply pb-1.5;
+    @apply ml-1 pb-1.5;
+  }
+}
+
+/* Underline variants */
+.link--underline-none {
+  /* No underline - use opacity for hover feedback */
+  &:hover,
+  &[data-hovered="true"] {
+    @apply opacity-80;
+  }
+}
+
+.link--underline-hover {
+  /* Animated underline on hover (default) */
+  &::before {
+    content: "";
+    bottom: 0;
+    opacity: 0;
+
+    @apply absolute left-0 h-px w-full bg-current;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: opacity 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
+  &:hover::before,
+  &[data-hovered="true"]::before {
+    opacity: 1;
+  }
+}
+
+.link--underline-always {
+  /* Always visible underline with opacity change */
+  &::before {
+    content: "";
+    bottom: 0;
+    opacity: 0.5;
+
+    @apply absolute left-0 h-px w-full bg-current;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: opacity 200ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+  }
+
+  &:hover::before,
+  &[data-hovered="true"]::before {
+    opacity: 1;
+  }
+}
+
+/* Underline offset variants */
+.link--offset-1 {
+  &::before {
+    bottom: 0;
+  }
+}
+
+.link--offset-2 {
+  &::before {
+    bottom: -2px;
+  }
+}
+
+.link--offset-3 {
+  &::before {
+    bottom: -4px;
   }
 }

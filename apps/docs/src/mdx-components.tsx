@@ -1,7 +1,7 @@
 import type {MDXComponents} from "mdx/types";
 
 import Link from "fumadocs-core/link";
-import {Callout} from "fumadocs-ui/components/callout";
+import {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
@@ -15,7 +15,9 @@ import {Iconify} from "./components/iconify";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
+import {VideoPlayer} from "./components/video-player";
 import {PackageManagers} from "./mdx-components/package-managers";
+import {cn} from "./utils/cn";
 
 // Create icon components using gravity-ui icons
 const AlertTriangle = (props: any) => <Iconify {...props} icon="circle-exclamation-fill" />;
@@ -76,6 +78,15 @@ function RelatedComponents(props: any) {
   );
 }
 
+function Callout({className, ...props}: React.ComponentProps<typeof FDCallout>) {
+  return (
+    <FDCallout
+      {...props}
+      className={cn("bg-surface shadow-surface text-surface-foreground", className)}
+    />
+  );
+}
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -100,6 +111,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     RelatedComponents,
     RelatedShowcases,
     Star,
+    VideoPlayer,
     X,
     XCircle,
     // HTML `ref` attribute conflicts with `forwardRef`
@@ -126,11 +138,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       lineCount = codeContent.split("\n").length;
 
       // Only add line numbers class if more than 5 lines
-      const className =
-        lineCount > MAX_LINES_FOR_LINE_NUMBERS ? "docs-code-block-line-numbers" : undefined;
+      const classes = cn(
+        "mdx-code-block",
+        lineCount > MAX_LINES_FOR_LINE_NUMBERS ? "docs-code-block-line-numbers" : undefined,
+        props.className,
+      );
 
       return (
-        <CodeBlock {...props} className={className}>
+        <CodeBlock {...props} className={classes}>
           <Pre>{children}</Pre>
         </CodeBlock>
       );

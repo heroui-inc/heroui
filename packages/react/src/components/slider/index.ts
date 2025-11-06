@@ -1,18 +1,44 @@
-export {
-  SliderRoot,
-  SliderHeader,
-  SliderLabel,
-  SliderOutput,
-  SliderTrack,
+import type {ComponentProps} from "react";
+
+import {
   SliderFill,
-  SliderThumb,
   SliderMarks,
+  SliderOutput,
+  SliderRoot,
+  SliderThumb,
+  SliderTrack,
 } from "./slider";
+
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Slider = Object.assign(SliderRoot, {
+  Root: SliderRoot,
+  Output: SliderOutput,
+  Track: SliderTrack,
+  Fill: SliderFill,
+  Thumb: SliderThumb,
+  Marks: SliderMarks,
+});
+
+export type Slider = {
+  Props: ComponentProps<typeof SliderRoot>;
+  RootProps: ComponentProps<typeof SliderRoot>;
+  OutputProps: ComponentProps<typeof SliderOutput>;
+  TrackProps: ComponentProps<typeof SliderTrack>;
+  FillProps: ComponentProps<typeof SliderFill>;
+  ThumbProps: ComponentProps<typeof SliderThumb>;
+  MarksProps: ComponentProps<typeof SliderMarks>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
+export {SliderRoot, SliderOutput, SliderTrack, SliderFill, SliderThumb, SliderMarks};
 
 export type {
   SliderRootProps,
-  SliderHeaderProps,
-  SliderLabelProps,
+  SliderRootProps as SliderProps,
   SliderOutputProps,
   SliderTrackProps,
   SliderFillProps,
@@ -20,6 +46,9 @@ export type {
   SliderMarksProps,
 } from "./slider";
 
-export {sliderVariants, type SliderVariants} from "./slider.styles";
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export {sliderVariants} from "./slider.styles";
 
-export * as Slider from "./slots";
+export type {SliderVariants} from "./slider.styles";

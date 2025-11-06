@@ -1,11 +1,9 @@
-"use client";
-
-import {Tab, TabIndicator, TabList, TabListWrapper, TabPanel, TabsRoot} from "@heroui/react";
+import {Tab, TabIndicator, TabList, TabListContainer, TabPanel, TabsRoot} from "@heroui/react";
 
 export function Basic() {
   return (
     <TabsRoot className="w-full max-w-md">
-      <TabListWrapper>
+      <TabListContainer>
         <TabList aria-label="Options">
           <Tab id="overview">
             Overview
@@ -20,7 +18,7 @@ export function Basic() {
             <TabIndicator />
           </Tab>
         </TabList>
-      </TabListWrapper>
+      </TabListContainer>
       <TabPanel className="pt-4" id="overview">
         <p>View your project overview and recent activity.</p>
       </TabPanel>

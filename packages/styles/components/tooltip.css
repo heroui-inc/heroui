@@ -2,7 +2,8 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply bg-panel shadow-panel origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform dark:shadow-none;
+  @apply bg-overlay origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform;
+  box-shadow: var(--shadow-overlay);
 
   /* Entering animations */
   &[data-entering] {
@@ -34,7 +35,7 @@
   /* Arrow styling */
   & [data-slot="overlay-arrow"] {
     @apply stroke-border/40;
-    fill: var(--panel);
+    fill: var(--overlay);
   }
 
   /* Arrow rotation based on placement */
@@ -53,19 +54,20 @@
 
 /* Tooltip trigger */
 .tooltip__trigger {
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
 
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }

@@ -1,0 +1,114 @@
+/* Base container */
+.input-otp {
+  @apply relative flex items-center gap-2;
+
+  &[data-disabled="true"] {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+/* Group - slots separated with gap */
+.input-otp__group {
+  @apply flex items-center gap-2;
+}
+
+/* Individual slot box - fully rounded, standalone */
+.input-otp__slot {
+  @apply w-9.5 relative flex h-10 flex-1 items-center justify-center;
+  @apply bg-field text-field-foreground shadow-field border;
+  @apply rounded-field text-sm font-semibold outline-none;
+
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Hover */
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-field-hover;
+    border-color: var(--color-field-border-hover);
+  }
+
+  /* Active/Focus */
+  &[data-active="true"] {
+    @apply bg-field-focus status-focused-field z-10;
+  }
+
+  /* Filled */
+  &[data-filled="true"] {
+    @apply bg-field-focus;
+  }
+
+  /* Disabled */
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  /* Invalid */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-field-focus);
+  }
+}
+
+/* Slot value */
+.input-otp__slot-value {
+  @apply text-lg leading-6 tracking-[-0.27px];
+
+  /**
+   * Animations
+   * CRITICAL: motion-reduce must be AFTER animation for correct override specificity
+   */
+  animation: slot-value-in 250ms var(--ease-smooth) both;
+  transform-origin: bottom center;
+  @apply motion-reduce:animate-none;
+}
+
+/* Caret */
+.input-otp__caret {
+  @apply bg-field-placeholder animate-caret-blink absolute h-4 w-[2px] rounded-[4px];
+}
+
+/* Separator */
+.input-otp__separator {
+  @apply bg-divider h-[2px] w-[6px] shrink-0 rounded-[4px];
+}
+
+/* Variant modifiers */
+.input-otp--on-surface .input-otp__slot {
+  @apply bg-on-surface shadow-none;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-on-surface-hover;
+  }
+
+  &[data-active="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  &[data-filled="true"] {
+    background-color: var(--color-on-surface-focus);
+  }
+}
+
+/* Animations */
+@keyframes slot-value-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

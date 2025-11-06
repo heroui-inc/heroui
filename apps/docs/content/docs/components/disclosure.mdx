@@ -1,12 +1,11 @@
 ---
 title: Disclosure
 description: A disclosure is a collapsible section with a header containing a heading and a trigger button, and a panel that wraps the content.
-icon: updated
 links:
   rac: Disclosure
   source: disclosure/disclosure.tsx
   styles: disclosure.css
-  storybook: disclosure
+  storybook: Components/Navigation/Disclosure
   figma: true
 ---
 
@@ -30,14 +29,14 @@ Import the Disclosure component and access all parts using dot notation.
 import { Disclosure } from '@heroui/react';
 
 export default () => (
-  <Disclosure.Root>
+  <Disclosure>
     <Disclosure.Heading>
       <Disclosure.Trigger>
         <Disclosure.Indicator />
       </Disclosure.Trigger>
     </Disclosure.Heading>
     <Disclosure.Content/>
-  </Disclosure.Root>
+  </Disclosure>
 )
 ```
 
@@ -52,7 +51,7 @@ import { Disclosure } from '@heroui/react';
 
 function CustomDisclosure() {
   return (
-    <Disclosure.Root className="border rounded-lg p-4">
+    <Disclosure className="border rounded-lg p-4">
       <Disclosure.Heading>
         <Disclosure.Trigger className="text-lg font-semibold">
           Click to expand
@@ -64,7 +63,7 @@ function CustomDisclosure() {
           Hidden content
         </Disclosure.Body>
       </Disclosure.Content>
-    </Disclosure.Root>
+    </Disclosure>
   );
 }
 ```
@@ -119,7 +118,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Disclosure.Root Props
+### Disclosure Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

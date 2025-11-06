@@ -1,5 +1,3 @@
-"use client";
-
 import {Description, Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 
 export function WithDescription() {

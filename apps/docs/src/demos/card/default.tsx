@@ -1,11 +1,9 @@
-"use client";
-
 import {Card, Link} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function Default() {
   return (
-    <Card.Root className="w-[400px]">
+    <Card className="w-[400px]">
       <Icon
         aria-label="Dollar sign icon"
         className="text-primary size-6"
@@ -13,23 +11,23 @@ export function Default() {
         role="img"
       />
       <Card.Header>
-        <Card.Title>PAYMENT</Card.Title>
-        <Card.Description>You can now withdraw on crypto.</Card.Description>
+        <Card.Title>Become an Acme Creator!</Card.Title>
+        <Card.Description>
+          Visit the Acme Creator Hub to sign up today and start earning credits from your fans and
+          followers.
+        </Card.Description>
       </Card.Header>
-      <Card.Content id="payment-content">
-        <p>Add your wallet in settings to withdraw</p>
-      </Card.Content>
       <Card.Footer>
-        <Link.Root
-          aria-label="Go to settings (opens in new tab)"
+        <Link
+          aria-label="Go to Acme Creator Hub (opens in new tab)"
           href="https://heroui.com"
           rel="noopener noreferrer"
           target="_blank"
         >
-          Go to settings
+          Creator Hub
           <Link.Icon aria-hidden="true" />
-        </Link.Root>
+        </Link>
       </Card.Footer>
-    </Card.Root>
+    </Card>
   );
 }

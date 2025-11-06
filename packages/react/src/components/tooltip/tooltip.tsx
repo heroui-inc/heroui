@@ -16,15 +16,19 @@ import {composeTwRenderProps} from "../../utils/compose";
 
 import {tooltipVariants} from "./tooltip.styles";
 
-type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
-
-const TooltipContext = createContext<{
+/* -------------------------------------------------------------------------------------------------
+ * Tooltip Context
+ * -----------------------------------------------------------------------------------------------*/
+type TooltipContext = {
   slots?: ReturnType<typeof tooltipVariants>;
-}>({});
+};
+
+const TooltipContext = createContext<TooltipContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Root
  * -----------------------------------------------------------------------------------------------*/
+type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
 
 const TooltipRoot = ({
   children,
@@ -41,8 +45,9 @@ const TooltipRoot = ({
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tooltip Content
+ * -----------------------------------------------------------------------------------------------*/
 interface TooltipContentProps extends Omit<TooltipPrimitiveProps, "children">, TooltipVariants {
   showArrow?: boolean;
   children: React.ReactNode;
@@ -69,18 +74,17 @@ const TooltipContent = ({
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
-const TooltipArrow = ({
-  children,
-  className,
-  ...props
-}: Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+/* -------------------------------------------------------------------------------------------------
+ * Tooltip Arrow
+ * -----------------------------------------------------------------------------------------------*/
+type TooltipArrowProps = Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
-}) => {
+};
+
+const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
   const defaultArrow = (
     <svg data-slot="overlay-arrow" height={12} viewBox="0 0 12 12" width={12}>
-      <path d="M0 0 L6 6 L12 0" />
+      <path d="M0 0 Q6 9 12 0" />
     </svg>
   );
 
@@ -103,8 +107,9 @@ const TooltipArrow = ({
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Tooltip Trigger
+ * -----------------------------------------------------------------------------------------------*/
 interface TooltipTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
@@ -127,8 +132,9 @@ const TooltipTrigger = ({asChild = false, children, className, ...props}: Toolti
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 export {TooltipRoot, TooltipTrigger, TooltipContent, TooltipArrow};
 
-export type {TooltipRootProps, TooltipContentProps, TooltipTriggerProps};
+export type {TooltipRootProps, TooltipArrowProps, TooltipContentProps, TooltipTriggerProps};

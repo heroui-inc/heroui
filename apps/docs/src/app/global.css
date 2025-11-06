@@ -20,7 +20,7 @@
 
   /* Fumadocs UI Variables */
   --fd-layout-width: 1400px;
-  --color-fd-background: #f9f9f9;
+  --color-fd-background: var(--background);
   --color-fd-primary: oklch(0.14 0 0);
   --color-fd-secondary: #f9f9f9;
   --color-fd-card: #f9f9f9;
@@ -39,6 +39,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme="light"],
+.light {
+}
+
 /* Dark Theme Variables */
 [data-theme="dark"],
 .dark {
@@ -48,9 +52,8 @@
 
   /* Fumadocs UI Dark Theme */
   --color-fd-primary: oklch(0.99 0 0);
-  --color-fd-background: #1a1a1a;
   --color-fd-card: rgba(40, 40, 40, 0.4);
-  --color-fd-secondary: #1a1a1a;
+  --color-fd-secondary: #18181b;
   --color-fd-accent: #2c2c2c;
   --color-fd-popover: #383435;
   --color-fd-border: rgba(255, 255, 255, 0.1);
@@ -66,10 +69,18 @@
   @apply rounded-sm;
 } */
 
-/* Fumadocs UI Components Styles */
+/* ============================================================================
+   FUMADOCS UI - NAVIGATION COMPONENTS
+   ============================================================================ */
 
+[data-theme-toggle] {
+  @apply bg-default/80 border-none;
+}
+
+/* Home Layout Navigation */
 #nd-home-layout {
   #nd-nav {
+    @apply bg-background blur-none backdrop-blur-none;
     [data-theme-toggle] {
       margin-left: 4px;
     }
@@ -80,16 +91,7 @@
   padding-top: 0;
 }
 
-[data-theme="dark"],
-.dark {
-  #nd-nav,
-  #nd-subnav {
-    [data-theme-toggle] {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-
+/* Main Navigation */
 #nd-nav {
   border: none;
   background-color: transparent;
@@ -111,10 +113,10 @@
   }
 
   [data-search-full] {
-    @apply bg-default border-border shadow-xs/5 rounded-xl;
+    @apply bg-default/80 rounded-field;
 
     kbd {
-      @apply bg-default-hover border-border;
+      @apply bg-surface text-muted px-1 font-sans text-xs font-medium;
     }
   }
 
@@ -123,15 +125,26 @@
   }
 }
 
-[data-theme="dark"],
-.dark {
-  #nd-nav {
-    [data-search-full] {
-      background: rgba(10, 10, 10, 0.1);
+/* Sub Navigation */
+#nd-subnav {
+  @apply bg-background h-14;
+
+  backdrop-filter: none;
+
+  > div {
+    @apply border-none px-6;
+  }
+
+  [data-search-full] {
+    @apply bg-field dark:bg-field/80 shadow-field rounded-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:backdrop-blur-md;
+
+    kbd {
+      @apply bg-default dark:bg-surface border-border;
     }
   }
 }
 
+/* Sidebar */
 #nd-sidebar {
   @apply pt-0;
 
@@ -157,6 +170,8 @@
 }
 
 #nd-sidebar a {
+  @apply rounded-field;
+
   transition: none;
 
   &:hover {
@@ -164,19 +179,18 @@
   }
 
   &[data-active="true"] {
-    background: rgba(0, 0, 0, 0.08);
+    @apply bg-surface shadow-surface;
   }
 }
 
-[data-theme="dark"],
-.dark {
-  #nd-sidebar a {
-    &:hover {
-      background: rgba(255, 255, 255, 0.04);
-    }
+/* Nested items inside open groups */
+#nd-sidebar [data-state="open"] > [data-state="open"] {
+  padding: 4px 16px;
 
-    &[data-active="true"] {
-      background: rgba(255, 255, 255, 0.08);
+  a {
+    padding-left: 14px;
+    &::before {
+      display: none;
     }
   }
 }
@@ -198,88 +212,13 @@
   transition: opacity 0.2s;
 }
 
-[data-theme="dark"],
-.dark {
-  #nd-sidebar a[rel="noreferrer noopener"]::after {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
-  }
-}
-
 #nd-sidebar a[rel="noreferrer noopener"]:hover::after {
   opacity: 1;
 }
 
-#nd-subnav {
-  @apply h-14;
-
-  backdrop-filter: none;
-
-  > div {
-    @apply border-none px-6;
-  }
-
-  [data-search-full] {
-    @apply bg-default border-border shadow-xs/5 rounded-xl sm:max-w-[300px] md:max-w-[400px] lg:mr-12;
-
-    kbd {
-      @apply bg-default-hover border-border;
-    }
-  }
-
-  @media (max-width: 48rem) {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(16px) saturate(120%);
-    border: none !important;
-  }
-}
-
-[data-theme="dark"],
-.dark {
-  #nd-subnav {
-    [data-search-full] {
-      background: rgba(10, 10, 10, 0.4);
-      backdrop-filter: blur(5px) saturate(120%);
-    }
-
-    @media (max-width: 48rem) {
-      background: rgba(10, 10, 10, 0.4);
-    }
-  }
-}
-
-.gradient-background {
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-image: linear-gradient(
-    350deg,
-    hsl(0 0% 98%) 0%,
-    hsl(11 15% 95%) 24%,
-    hsl(11 21% 92%) 61%,
-    hsl(353 21% 92%) 81%,
-    hsl(318 16% 93%) 90%,
-    hsl(228 26% 96%) 100%
-  );
-}
-
-[data-theme="dark"],
-.dark {
-  .gradient-background {
-    background-image: linear-gradient(
-      340deg,
-      hsl(0, 33%, 0%) 0%,
-      hsl(0, 33%, 8%) 40%,
-      hsl(284, 22%, 10%) 70%,
-      hsl(233deg 24% 8%) 100%
-    );
-  }
-}
+/* ============================================================================
+   FUMADOCS UI - LAYOUT COMPONENTS
+   ============================================================================ */
 
 #nd-docs-layout {
   position: relative;
@@ -308,12 +247,20 @@
     }
   }
 
-  .component-preview-tabs {
-    [role="tab"] {
-      border-bottom: none;
+  .component-preview-container {
+    /* Preview and code are now displayed vertically */
+
+    .code-section {
+      .code-block-wrapper {
+        @apply rounded-none rounded-b-xl;
+      }
     }
   }
 }
+
+/* ============================================================================
+   FUMADOCS UI - TABLE OF CONTENTS
+   ============================================================================ */
 
 #nd-toc {
   padding-top: 10px;
@@ -333,29 +280,26 @@
 
 #nd-tocnav {
   border-radius: 0rem;
-  top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 6px) !important;
+  top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 12px) !important;
   margin-right: 0rem;
   margin-left: 0rem;
   margin-top: 0px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px) saturate(120%) !important;
+  background: var(--background);
+  backdrop-filter: none !important;
   border-left: none !important;
   border-right: none !important;
   border-top: 1px solid var(--border) !important;
-  border-bottom: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--divider) !important;
 
   @media (min-width: 600px) {
     margin-right: 1rem;
+    border-bottom: 0px solid var(--divider) !important;
   }
 }
 
-[data-theme="dark"],
-.dark {
-  #nd-tocnav {
-    background: rgba(10, 10, 10, 0.4);
-    border: 1px solid rgba(60, 60, 60, 0.5);
-  }
-}
+/* ============================================================================
+   PROSE & CONTENT STYLES
+   ============================================================================ */
 
 .prose {
   .shiki {
@@ -394,29 +338,50 @@
   max-height: fit-content;
 }
 
-[data-theme="dark"],
-.dark {
-  .prose {
-    .shiki {
-      background: transparent;
+[role="tabpanel"] .mdx-code-block {
+  padding: 0;
+}
 
-      figure {
-        background: red;
-      }
+code {
+  @apply border-divider bg-transparent px-[3px];
+}
 
-      /* Scroll container */
-      .fd-scroll-container {
-        background: rgba(40, 40, 40, 0.4);
+/* Table styles for .prose-no-margin */
+.prose-no-margin {
+  table {
+    @apply border-none bg-transparent;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    thead {
+      tr {
+        th {
+          @apply bg-default dark:bg-default/50 border-none;
+
+          &:first-child {
+            @apply rounded-bl-xl rounded-tl-xl;
+          }
+
+          &:last-child {
+            @apply rounded-br-xl rounded-tr-xl;
+          }
+        }
       }
     }
-  }
 
-  .docs-code-block {
-    .fd-scroll-container {
-      background: transparent !important;
+    tbody {
+      tr {
+        td {
+          @apply border-none;
+        }
+      }
     }
   }
 }
+
+/* ============================================================================
+   CODE BLOCK STYLES
+   ============================================================================ */
 
 .docs-code-block {
   @apply m-0 rounded-none border-none pl-2 pr-2 pt-4;
@@ -430,29 +395,13 @@
   }
 }
 
-.shiki:not(.not-fumadocs-codeblock *) code .highlighted {
-  border-radius: 4px;
-  background-color: #d6d8e3 !important;
-}
-
-[data-theme="dark"],
-.dark {
-  .shiki:not(.not-fumadocs-codeblock *) code .highlighted {
-    background-color: #2d2d2d !important;
-  }
+/* Apply !important only for isolated code blocks (not code-block-wrapper) */
+.is-isolated .docs-code-block {
+  background: rgba(0, 0, 0, 0.04) !important;
 }
 
 .code-block-wrapper {
   @apply rounded-xl;
-
-  background: rgba(0, 0, 0, 0.04);
-}
-
-[data-theme="dark"],
-.dark {
-  .code-block-wrapper {
-    background: rgba(40, 40, 40, 0.4);
-  }
 }
 
 .docs-code-block-line-numbers {
@@ -472,7 +421,26 @@
   }
 }
 
-/* Scrolling Banner Animations */
+.shiki:not(.not-fumadocs-codeblock *) code .highlighted {
+  border-radius: 4px;
+  background-color: #d6d8e3 !important;
+}
+
+.showcase-source-wrapper {
+  .code-block-wrapper {
+    background: transparent !important;
+  }
+
+  .fd-scroll-container {
+    max-height: 100%;
+    background: transparent;
+  }
+}
+
+/* ============================================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================================ */
+
 @keyframes scrolling-banner {
   from {
     transform: translateX(0);
@@ -517,7 +485,10 @@
   }
 }
 
-/* Animation utility classes */
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
 .animate-scrolling-banner {
   animation: scrolling-banner var(--duration) linear infinite;
 }
@@ -534,18 +505,69 @@
   mask: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 1) 20%,
     rgba(0, 0, 0, 0) 100%
   );
 }
 
-.showcase-source-wrapper {
-  .code-block-wrapper {
-    background: transparent !important;
+/* ============================================================================
+   DARK THEME OVERRIDES
+   ============================================================================ */
+
+[data-theme="dark"],
+.dark {
+  /* Navigation Components */
+
+  #nd-sidebar a {
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &[data-active="true"] {
+      background: rgba(255, 255, 255, 0.08);
+    }
   }
 
-  .fd-scroll-container {
-    max-height: 100%;
-    background: transparent;
+  #nd-sidebar a[rel="noreferrer noopener"]::after {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
+  }
+
+  /* Table of Contents */
+  #nd-tocnav {
+    background: rgba(10, 10, 10, 0.4);
+    border: 1px solid rgba(60, 60, 60, 0.5);
+  }
+
+  /* Prose & Code Blocks */
+  .prose {
+    .shiki {
+      background: transparent;
+
+      figure {
+        background: red;
+      }
+
+      /* Scroll container */
+      .fd-scroll-container {
+        background: rgba(40, 40, 40, 0.4);
+      }
+    }
+  }
+
+  .docs-code-block {
+    background: rgba(40, 40, 40, 0.4);
+
+    .fd-scroll-container {
+      background: transparent !important;
+    }
+  }
+
+  /* Apply !important only for isolated code blocks (not code-block-wrapper) */
+  .is-isolated .docs-code-block {
+    background: rgba(40, 40, 40, 0.4) !important;
+  }
+
+  .shiki:not(.not-fumadocs-codeblock *) code .highlighted {
+    background-color: #2d2d2d !important;
   }
 }

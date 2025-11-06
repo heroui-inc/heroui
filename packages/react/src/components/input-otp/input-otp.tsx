@@ -1,110 +1,123 @@
 "use client";
 
 import type {InputOTPVariants} from "./input-otp.styles";
-import type {OTPInputProps} from "input-otp";
+import type {ValidationResult} from "react-aria-components";
 
-import {OTPInput} from "input-otp";
+import {OTPInput, OTPInputContext} from "input-otp";
 import React, {createContext, useContext} from "react";
+import {FieldErrorContext} from "react-aria-components";
+
+import {dataAttr} from "../../utils/assertion";
+import {SurfaceContext} from "../surface";
 
 import {inputOTPVariants} from "./input-otp.styles";
+
 /* -------------------------------------------------------------------------------------------------
- * InputOTP Context
+ * Input OTP Context
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPContext {
   slots?: ReturnType<typeof inputOTPVariants>;
+  isDisabled?: boolean;
+  isInvalid?: boolean;
 }
-const InputOTPContext = createContext<InputOTPContext>({});
+
+const InputOTPContext = createContext<InputOTPContext>({
+  isDisabled: false,
+  isInvalid: false,
+});
 
 /* -------------------------------------------------------------------------------------------------
- * InputOTP
+ * Input OTP Root
  * -----------------------------------------------------------------------------------------------*/
-interface InputOTPProps extends Omit<OTPInputProps, "render">, InputOTPVariants {
-  children?: React.ReactNode;
+interface InputOTPRootProps
+  extends Omit<React.ComponentProps<typeof OTPInput>, "disabled" | "containerClassName" | "render">,
+    InputOTPVariants {
+  isDisabled?: boolean;
+  isInvalid?: boolean;
+  validationErrors?: string[];
+  validationDetails?: ValidityState;
+  inputClassName?: string;
+  children: React.ReactNode;
 }
-const InputOTP = ({children, className, isDisabled, isInvalid, ...props}: InputOTPProps) => {
+
+const InputOTPRoot = ({
+  className,
+  inputClassName,
+  isDisabled = false,
+  isInvalid = false,
+  isOnSurface,
+  validationDetails,
+  validationErrors = [],
+  ...props
+}: InputOTPRootProps) => {
+  const surfaceContext = useContext(SurfaceContext);
+  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
   const slots = React.useMemo(
-    () => inputOTPVariants({isDisabled, isInvalid}),
-    [isDisabled, isInvalid],
+    () => inputOTPVariants({isOnSurface: isOnSurfaceValue}),
+    [isOnSurfaceValue],
+  );
+
+  const validation = React.useMemo(
+    () =>
+      ({
+        isInvalid,
+        validationErrors,
+        validationDetails,
+      }) as ValidationResult,
+    [isInvalid],
   );
 
   return (
-    <InputOTPContext value={{slots}}>
-      <div className={slots.base({className})} data-slot="input-otp">
+    <InputOTPContext value={{slots, isDisabled, isInvalid}}>
+      <FieldErrorContext.Provider value={validation}>
         <OTPInput
+          // OTP Input package uses the `className` prop for the actual `input` element which is not visible to the user so no need to pass it to the base container
+          className={slots.input({className: inputClassName})}
+          containerClassName={slots.base({className})}
+          data-disabled={dataAttr(isDisabled)}
+          data-invalid={dataAttr(isInvalid)}
+          data-slot="input-otp"
           disabled={isDisabled}
           {...props}
-          containerClassName={slots.container()}
-          render={({slots: otpSlots}) => (
-            <>
-              {React.Children.map(children, (child) => {
-                if (React.isValidElement(child) && child.type === InputOTPGroup) {
-                  return React.cloneElement(child as React.ReactElement<InputOTPGroupProps>, {
-                    slots: otpSlots,
-                  });
-                }
-
-                return child;
-              })}
-            </>
-          )}
         />
-      </div>
+      </FieldErrorContext.Provider>
     </InputOTPContext>
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-interface InputOTPSlotData {
-  char?: string | null;
-  isActive?: boolean;
-  hasFakeCaret?: boolean;
-}
-interface InputOTPGroupProps {
-  children?: React.ReactNode;
-  className?: string;
-  slots?: InputOTPSlotData[];
-}
-const InputOTPGroup = ({children, className, slots = [], ...props}: InputOTPGroupProps) => {
-  const {slots: contextSlots} = useContext(InputOTPContext);
+/* -------------------------------------------------------------------------------------------------
+ * Input OTP Group
+ * -----------------------------------------------------------------------------------------------*/
 
-  return (
-    <div className={contextSlots?.group({className})} data-slot="input-otp-group" {...props}>
-      {React.Children.map(children, (child, index) => {
-        if (React.isValidElement(child) && child.type === InputOTPSlot) {
-          const slotData = slots[index];
+interface InputOTPGroupProps extends React.ComponentProps<"div"> {}
 
-          if (!slotData) return null;
+const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
+  const {slots} = useContext(InputOTPContext);
 
-          return React.cloneElement(child as React.ReactElement<InputOTPSlotProps>, {
-            char: slotData.char ?? undefined,
-            isActive: slotData.isActive,
-            hasFakeCaret: slotData.hasFakeCaret,
-            index,
-          });
-        }
-
-        return child;
-      })}
-    </div>
-  );
+  return <div className={slots?.group({className})} data-slot="input-otp-group" {...props} />;
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-interface InputOTPSlotProps {
-  index?: number;
-  char?: string;
-  isActive?: boolean;
-  hasFakeCaret?: boolean;
-  className?: string;
+/* -------------------------------------------------------------------------------------------------
+ * Input OTP Slot
+ * -----------------------------------------------------------------------------------------------*/
+interface InputOTPSlotProps extends React.ComponentProps<"div"> {
+  index: number;
 }
-const InputOTPSlot = ({char, className, hasFakeCaret, isActive, ...props}: InputOTPSlotProps) => {
-  const {slots} = useContext(InputOTPContext);
+
+const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
+  const {isDisabled, isInvalid, slots} = useContext(InputOTPContext);
+
+  const inputOTPContext = useContext(OTPInputContext);
+  const {char, hasFakeCaret, isActive} = inputOTPContext?.slots[index] ?? {};
 
   return (
     <div
       {...props}
-      className={slots?.slot({className, isActive, isFilled: !!char})}
-      data-active={isActive || undefined}
+      className={slots?.slot({className})}
+      data-active={dataAttr(isActive)}
+      data-disabled={dataAttr(isDisabled)}
+      data-filled={dataAttr(!!char)}
+      data-invalid={dataAttr(isInvalid)}
       data-slot="input-otp-slot"
     >
       {char ? (
@@ -119,10 +132,13 @@ const InputOTPSlot = ({char, className, hasFakeCaret, isActive, ...props}: Input
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------
+ * Input OTP Separator
+ * -----------------------------------------------------------------------------------------------*/
 interface InputOTPSeparatorProps {
   className?: string;
 }
+
 const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
   const {slots} = useContext(InputOTPContext);
 
@@ -134,6 +150,6 @@ const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {InputOTPRoot, InputOTPGroup, InputOTPSlot, InputOTPSeparator};
 
-export {InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator};
-export type {InputOTPProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};
+export type {InputOTPRootProps, InputOTPGroupProps, InputOTPSlotProps, InputOTPSeparatorProps};

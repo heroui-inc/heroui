@@ -1,11 +1,12 @@
 ---
 title: Input
 description: Primitive single-line text input component that accepts standard HTML attributes
+icon: updated
 links:
   rac: Input
   source: input/input.tsx
   styles: input.css
-  storybook: input
+  storybook: Components/Forms/Input
 ---
 
 ## Import
@@ -30,6 +31,12 @@ import { Input } from '@heroui/react';
 
 <ComponentPreview name="input-controlled" />
 
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, Input automatically applies on-surface styling.
+
+<ComponentPreview name="input-on-surface" />
+
 <RelatedComponents component="input" />
 
 ## Styling
@@ -45,7 +52,7 @@ function CustomInput() {
       <Label htmlFor="custom-input">Project name</Label>
       <Input
         id="custom-input"
-        className="rounded-xl border border-border/70 bg-surface-2 px-4 py-2 text-sm shadow-sm focus-visible:border-primary"
+        className="rounded-xl border border-border/70 bgsurface px-4 py-2 text-sm shadow-sm focus-visible:border-primary"
         placeholder="New web app"
       />
     </div>
@@ -60,11 +67,11 @@ The base class `.input` powers every instance. Override it once with `@layer com
 ```css
 @layer components {
   .input {
-    @apply rounded-lg border border-border bg-surface-2 px-4 py-2 text-sm shadow-sm transition-colors;
+    @apply rounded-lg border border-border bgsurface px-4 py-2 text-sm shadow-sm transition-colors;
 
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-surface-3 border-border/80;
+      @apply bg-surface-secondary border-border/80;
     }
 
     &:focus-visible,
@@ -116,5 +123,6 @@ Input accepts all standard HTML `<input>` attributes plus the following:
 | `min` | `number \| string` | - | Minimum value (for number/date inputs). |
 | `max` | `number \| string` | - | Maximum value (for number/date inputs). |
 | `step` | `number \| string` | - | Stepping interval (for number inputs). |
+| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with Input as a child component.

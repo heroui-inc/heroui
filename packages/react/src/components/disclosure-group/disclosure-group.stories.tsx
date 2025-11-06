@@ -27,6 +27,9 @@ export default {
     },
   },
   component: DisclosureGroup,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Navigation/DisclosureGroup",
 } as Meta<typeof DisclosureGroup>;
 
@@ -40,9 +43,9 @@ const Template = (props: DisclosureGroupProps) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-surface-1 shadow-panel rounded-panel flex flex-col gap-4 p-4">
+      <div className="bg-surface shadow-surface flex flex-col gap-4 rounded-3xl p-4">
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -66,7 +69,7 @@ const Template = (props: DisclosureGroupProps) => {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -75,9 +78,9 @@ const Template = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
           <Separator className="my-2" />
-          <Disclosure.Root id="download">
+          <Disclosure id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -101,7 +104,7 @@ const Template = (props: DisclosureGroupProps) => {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -110,7 +113,7 @@ const Template = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
         </DisclosureGroup>
       </div>
     </div>
@@ -129,7 +132,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-surface-1 shadow-panel rounded-panel flex flex-col gap-4 p-4">
+      <div className="bg-surface shadow-surface flex flex-col gap-4 rounded-3xl p-4">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-lg font-semibold">HeroUI Native</h3>
           <div className="flex gap-2">
@@ -154,7 +157,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
           </div>
         </div>
         <DisclosureGroup {...props} expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure.Root aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure aria-label="Preview HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -178,7 +181,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -187,9 +190,9 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
           <Separator className="my-2" />
-          <Disclosure.Root id="download">
+          <Disclosure id="download">
             <Disclosure.Heading aria-label="Download HeroUI Native">
               <Button
                 slot="trigger"
@@ -213,7 +216,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                 <img
                   alt="Expo Go QR Code"
                   className="max-w-54 aspect-square w-full object-cover"
-                  src="https://raw.githubusercontent.com/heroui-inc/heroui-native/refs/heads/alpha/expo-go-qr.png"
+                  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
                 <p className="text-muted text-sm">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
@@ -222,7 +225,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
-          </Disclosure.Root>
+          </Disclosure>
         </DisclosureGroup>
       </div>
     </div>
@@ -350,7 +353,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
   });
 
   return (
-    <section className="bg-surface-1 w-full overflow-hidden">
+    <section className="bg-surface w-full overflow-hidden">
       {/* Left content */}
       <div className="flex w-full items-center gap-8 px-8 py-8">
         {/* Controls */}
@@ -397,7 +400,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
             onExpandedChange={setExpandedKeys}
           >
             {showcase1Items.map((item) => (
-              <Disclosure.Root key={item.id} aria-label={item.label} id={item.id}>
+              <Disclosure key={item.id} aria-label={item.label} id={item.id}>
                 <Disclosure.Heading>
                   <AppleShowcaseButton isSelected={expandedKeys.has(item.id)} slot="trigger">
                     <div className="flex w-full items-center justify-start gap-3">
@@ -435,7 +438,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
                     </p>
                   </Disclosure.Body>
                 </Disclosure.Content>
-              </Disclosure.Root>
+              </Disclosure>
             ))}
           </DisclosureGroup>
         </div>

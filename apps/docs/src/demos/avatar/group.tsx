@@ -1,31 +1,29 @@
-"use client";
-
 import {Avatar} from "@heroui/react";
 
 const users = [
   {
     id: 1,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg",
     name: "John Doe",
   },
   {
     id: 2,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=5",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
     name: "Kate Wilson",
   },
   {
     id: 3,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=20",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg",
     name: "Emily Chen",
   },
   {
     id: 4,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=23",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
     name: "Michael Brown",
   },
   {
     id: 5,
-    image: "https://img.heroui.chat/image/avatar?w=400&h=400&u=16",
+    image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
     name: "Olivia Davis",
   },
 ];
@@ -36,7 +34,7 @@ export function Group() {
       {/* Basic avatar group */}
       <div className="flex -space-x-2">
         {users.slice(0, 4).map((user) => (
-          <Avatar.Root key={user.id} className="ring-background ring-2">
+          <Avatar key={user.id} className="ring-background ring-2">
             <Avatar.Image alt={user.name} src={user.image} />
             <Avatar.Fallback>
               {user.name
@@ -44,14 +42,14 @@ export function Group() {
                 .map((n) => n[0])
                 .join("")}
             </Avatar.Fallback>
-          </Avatar.Root>
+          </Avatar>
         ))}
       </div>
 
       {/* Avatar group with counter */}
       <div className="flex -space-x-2">
         {users.slice(0, 3).map((user) => (
-          <Avatar.Root key={user.id} className="ring-background ring-2">
+          <Avatar key={user.id} className="ring-background ring-2">
             <Avatar.Image alt={user.name} src={user.image} />
             <Avatar.Fallback>
               {user.name
@@ -59,11 +57,11 @@ export function Group() {
                 .map((n) => n[0])
                 .join("")}
             </Avatar.Fallback>
-          </Avatar.Root>
+          </Avatar>
         ))}
-        <Avatar.Root className="ring-background ring-2">
+        <Avatar className="ring-background ring-2">
           <Avatar.Fallback className="text-xs">+{users.length - 3}</Avatar.Fallback>
-        </Avatar.Root>
+        </Avatar>
       </div>
     </div>
   );

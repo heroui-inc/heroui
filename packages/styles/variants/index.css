@@ -1,0 +1,29 @@
+/* === Reduced Motion Variant === */
+
+@custom-variant motion-reduce {
+  &:is([data-reduce-motion="true"]) {
+    @slot;
+  }
+
+  &:where([data-reduce-motion="true"] *) {
+    @slot;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    @slot;
+  }
+}
+
+/* @custom-variant dark {
+  &:is([data-theme="dark"]) {
+    @slot;
+  }
+
+  &:where([data-theme="dark"] *) {
+    @slot;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @slot;
+  }
+} */

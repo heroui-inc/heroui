@@ -1,9 +1,12 @@
 "use client";
 
 import type {CardVariants} from "./card.styles";
+import type {SurfaceVariants} from "../surface";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
+
+import {SurfaceContext} from "../surface";
 
 import {cardVariants} from "./card.styles";
 /* -------------------------------------------------------------------------------------------------
@@ -12,6 +15,7 @@ import {cardVariants} from "./card.styles";
 interface CardContext {
   slots?: ReturnType<typeof cardVariants>;
 }
+
 const CardContext = createContext<CardContext>({});
 
 /* -------------------------------------------------------------------------------------------------
@@ -20,15 +24,37 @@ const CardContext = createContext<CardContext>({});
 interface CardRootProps extends React.ComponentProps<"div">, CardVariants {
   asChild?: boolean;
 }
-const CardRoot = ({asChild = false, children, className, variant, ...props}: CardRootProps) => {
+
+const CardRoot = ({
+  asChild = false,
+  children,
+  className,
+  variant = "default",
+  ...props
+}: CardRootProps) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
   const Comp = asChild ? Slot : "div";
 
+  const content = (
+    <Comp className={slots.base({className})} data-slot="card" {...props}>
+      {children}
+    </Comp>
+  );
+
   return (
     <CardContext value={{slots}}>
-      <Comp className={slots.base({className})} data-slot="card" {...props}>
-        {children}
-      </Comp>
+      {variant === "transparent" ? (
+        content
+      ) : (
+        // Allows inner components to apply "on-surface" colors for proper contrast
+        <SurfaceContext.Provider
+          value={{
+            variant: variant as SurfaceVariants["variant"],
+          }}
+        >
+          {content}
+        </SurfaceContext.Provider>
+      )}
     </CardContext>
   );
 };
@@ -39,6 +65,7 @@ const CardRoot = ({asChild = false, children, className, variant, ...props}: Car
 interface CardHeaderProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
+
 const CardHeader = ({asChild = false, className, ...props}: CardHeaderProps) => {
   const {slots} = useContext(CardContext);
   const Comp = asChild ? Slot : "div";
@@ -52,6 +79,7 @@ const CardHeader = ({asChild = false, className, ...props}: CardHeaderProps) => 
 interface CardTitleProps extends React.ComponentProps<"h3"> {
   asChild?: boolean;
 }
+
 const CardTitle = ({asChild = false, className, ...props}: CardTitleProps) => {
   const {slots} = useContext(CardContext);
   const Comp = asChild ? Slot : "h3";
@@ -65,6 +93,7 @@ const CardTitle = ({asChild = false, className, ...props}: CardTitleProps) => {
 interface CardDescriptionProps extends React.ComponentProps<"p"> {
   asChild?: boolean;
 }
+
 const CardDescription = ({asChild = false, className, ...props}: CardDescriptionProps) => {
   const {slots} = useContext(CardContext);
   const Comp = asChild ? Slot : "p";
@@ -80,6 +109,7 @@ const CardDescription = ({asChild = false, className, ...props}: CardDescription
 interface CardContentProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
+
 const CardContent = ({asChild = false, className, ...props}: CardContentProps) => {
   const {slots} = useContext(CardContext);
   const Comp = asChild ? Slot : "div";
@@ -93,6 +123,7 @@ const CardContent = ({asChild = false, className, ...props}: CardContentProps) =
 interface CardFooterProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
+
 const CardFooter = ({asChild = false, className, ...props}: CardFooterProps) => {
   const {slots} = useContext(CardContext);
   const Comp = asChild ? Slot : "div";
@@ -103,6 +134,8 @@ const CardFooter = ({asChild = false, className, ...props}: CardFooterProps) => 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};
+
 export type {
   CardRootProps,
   CardHeaderProps,
@@ -111,4 +144,3 @@ export type {
   CardContentProps,
   CardFooterProps,
 };
-export {CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};

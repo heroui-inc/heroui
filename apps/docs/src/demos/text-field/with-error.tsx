@@ -1,5 +1,3 @@
-"use client";
-
 import {FieldError, Input, Label, TextField} from "@heroui/react";
 
 export function WithError() {

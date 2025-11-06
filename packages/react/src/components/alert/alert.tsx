@@ -1,23 +1,22 @@
 "use client";
 
 import type {AlertVariants} from "./alert.styles";
-import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
-import {Button as ButtonPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
-import {isNotAsChild} from "../../utils/props";
-import {CircleDashedIcon, CloseIcon} from "../icons";
+import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
 import {alertVariants} from "./alert.styles";
+
 /* ------------------------------------------------------------------------------------------------
  * Alert Context
  * --------------------------------------------------------------------------------------------- */
 type AlertContext = {
   slots?: ReturnType<typeof alertVariants>;
+  status?: "default" | "accent" | "success" | "warning" | "danger";
 };
+
 const AlertContext = createContext<AlertContext>({});
 
 /* ------------------------------------------------------------------------------------------------
@@ -26,12 +25,13 @@ const AlertContext = createContext<AlertContext>({});
 interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
   asChild?: boolean;
 }
-const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootProps) => {
-  const slots = React.useMemo(() => alertVariants({variant}), [variant]);
+
+const AlertRoot = ({asChild, children, className, status, ...rest}: AlertRootProps) => {
+  const slots = React.useMemo(() => alertVariants({status}), [status]);
   const Component = asChild ? SlotPrimitive : "div";
 
   return (
-    <AlertContext value={{slots}}>
+    <AlertContext value={{slots, status}}>
       <Component className={slots?.base({className})} data-slot="alert-root" {...rest}>
         {children}
       </Component>
@@ -40,18 +40,35 @@ const AlertRoot = ({asChild, children, className, variant, ...rest}: AlertRootPr
 };
 
 /* ------------------------------------------------------------------------------------------------
- * Alert Icon
+ * Alert Indicator
  * --------------------------------------------------------------------------------------------- */
-type AlertIconProps = React.ComponentProps<"div"> & {
+type AlertIndicatorProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
 };
-const AlertIcon = ({asChild, children, className, ...rest}: AlertIconProps) => {
-  const {slots} = useContext(AlertContext);
+
+const AlertIndicator = ({asChild, children, className, ...rest}: AlertIndicatorProps) => {
+  const {slots, status} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "div";
 
+  // Map status to default icons
+  const getDefaultIcon = () => {
+    switch (status) {
+      case "accent":
+        return <InfoIcon data-slot="alert-default-icon" />;
+      case "success":
+        return <SuccessIcon data-slot="alert-default-icon" />;
+      case "warning":
+        return <WarningIcon data-slot="alert-default-icon" />;
+      case "danger":
+        return <DangerIcon data-slot="alert-default-icon" />;
+      default:
+        return <InfoIcon data-slot="alert-default-icon" />;
+    }
+  };
+
   return (
-    <Component className={slots?.icon({className})} data-slot="alert-icon" {...rest}>
-      {children ?? <CircleDashedIcon data-slot="alert-default-icon" />}
+    <Component className={slots?.indicator({className})} data-slot="alert-indicator" {...rest}>
+      {children ?? getDefaultIcon()}
     </Component>
   );
 };
@@ -62,6 +79,7 @@ const AlertIcon = ({asChild, children, className, ...rest}: AlertIconProps) => {
 type AlertContentProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
 };
+
 const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "div";
@@ -79,6 +97,7 @@ const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps
 type AlertTitleProps = React.ComponentProps<"p"> & {
   asChild?: boolean;
 };
+
 const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "p";
@@ -96,6 +115,7 @@ const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) =>
 type AlertDescriptionProps = React.ComponentProps<"span"> & {
   asChild?: boolean;
 };
+
 const AlertDescription = ({asChild, children, className, ...rest}: AlertDescriptionProps) => {
   const {slots} = useContext(AlertContext);
   const Component = asChild ? SlotPrimitive : "span";
@@ -108,94 +128,14 @@ const AlertDescription = ({asChild, children, className, ...rest}: AlertDescript
 };
 
 /* ------------------------------------------------------------------------------------------------
- * Alert Action
- * --------------------------------------------------------------------------------------------- */
-interface AlertAction {
-  (props: {asChild: true} & React.ComponentProps<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
-  displayName: string;
-}
-const AlertAction: AlertAction = (props) => {
-  const {slots} = useContext(AlertContext);
-
-  if (isNotAsChild(props)) {
-    const {children, className, ...rest} = props;
-
-    return (
-      <ButtonPrimitive
-        className={composeTwRenderProps(className, slots?.action?.())}
-        data-slot="alert-action"
-        {...rest}
-      >
-        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
-      </ButtonPrimitive>
-    );
-  }
-  const {asChild: _asChild, children, className, ...rest} = props;
-
-  return (
-    <SlotPrimitive className={slots?.action?.({className})} data-slot="alert-action" {...rest}>
-      {children}
-    </SlotPrimitive>
-  );
-};
-
-AlertAction.displayName = "AlertAction";
-/* ------------------------------------------------------------------------------------------------
- * Alert Close
- * --------------------------------------------------------------------------------------------- */
-interface AlertClose {
-  (props: {asChild: true} & React.ComponentProps<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
-  displayName: string;
-}
-const AlertClose: AlertClose = (props) => {
-  const {slots} = useContext(AlertContext);
-
-  if (isNotAsChild(props)) {
-    const {children, className, ...rest} = props;
-
-    return (
-      <ButtonPrimitive
-        className={composeTwRenderProps(className, slots?.close?.())}
-        data-slot="alert-close"
-        {...rest}
-      >
-        {(renderProps) =>
-          typeof children === "function"
-            ? children(renderProps)
-            : (children ?? <CloseIcon data-slot="alert-default-close-icon" />)
-        }
-      </ButtonPrimitive>
-    );
-  }
-  const {asChild: _asChild, children, className, ...rest} = props;
-
-  return (
-    <SlotPrimitive className={slots?.close?.({className})} data-slot="alert-close" {...rest}>
-      {children ?? <CloseIcon data-slot="alert-default-close-icon" />}
-    </SlotPrimitive>
-  );
-};
-
-AlertClose.displayName = "AlertClose";
-/* ------------------------------------------------------------------------------------------------
  * Exports
  * --------------------------------------------------------------------------------------------- */
-export {AlertRoot, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose};
-// For AlertAction and AlertClose, we need to export their prop types
-type AlertActionProps =
-  | ({asChild: true} & React.ComponentProps<"button">)
-  | ({asChild?: false} & ButtonPrimitiveProps);
-type AlertCloseProps =
-  | ({asChild: true} & React.ComponentProps<"button">)
-  | ({asChild?: false} & ButtonPrimitiveProps);
+export {AlertRoot, AlertIndicator, AlertContent, AlertTitle, AlertDescription};
+
 export type {
   AlertRootProps,
-  AlertIconProps,
+  AlertIndicatorProps,
   AlertContentProps,
   AlertTitleProps,
   AlertDescriptionProps,
-  AlertActionProps,
-  AlertCloseProps,
 };

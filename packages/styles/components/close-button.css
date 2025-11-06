@@ -2,19 +2,21 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate inline-flex h-6 w-6 origin-center transform-gpu select-none items-center justify-center rounded-sm border-transparent p-1;
-
-  /* Border */
-  border-width: var(--border-width);
-
-  transition:
-    transform 150ms var(--ease-out),
-    color 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center select-none items-center justify-center rounded-xl p-1;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    color 150ms var(--ease-out),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
   &:focus-visible,
@@ -36,12 +38,8 @@
   /* SVG icon styling*/
   & svg {
     @apply pointer-events-none;
-    @apply size-5 shrink-0 self-center;
+    @apply size-4 shrink-0 self-center;
     @apply -mx-0.5 my-0.5;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 
@@ -56,8 +54,6 @@
 
   &:active,
   &[data-pressed="true"] {
-    @apply text-foreground bg-default;
-
-    transform: scale(0.97);
+    transform: scale(0.93);
   }
 }

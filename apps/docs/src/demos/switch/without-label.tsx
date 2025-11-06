@@ -1,5 +1,3 @@
-"use client";
-
 import {SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
 
 export function WithoutLabel() {

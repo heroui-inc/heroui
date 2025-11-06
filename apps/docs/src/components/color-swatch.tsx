@@ -83,7 +83,7 @@ export function ColorSwatch({className, foreground, name, value, variable}: Colo
   return (
     <div className={cn("flex flex-col items-center gap-2", className)}>
       <button
-        className="border-border focus:ring-accent group relative size-20 rounded-lg border shadow-sm transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+        className="focus:ring-accent shadow-surface group relative size-10 rounded-full transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
         type="button"
         style={{
           backgroundColor: `var(${variable})`,
@@ -111,7 +111,7 @@ export function ColorSwatch({className, foreground, name, value, variable}: Colo
         </div>
       </button>
       <div className="text-center">
-        <div className="text-xs font-medium">{name}</div>
+        <div className="text-xs font-medium">{variable}</div>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ export function CollapsibleCode({
 }) {
   return (
     <CodeBlock
+      isIsolated
       className={className}
       code={code}
       collapsible={collapsible}

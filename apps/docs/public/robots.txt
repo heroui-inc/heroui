@@ -6,4 +6,4 @@ Allow: /llms.txt
 Allow: /llms-full.txt
 
 # Sitemap
-Sitemap: https://heroui.dev/sitemap.xml
+Sitemap: https://v3.heroui.com/sitemap.xml

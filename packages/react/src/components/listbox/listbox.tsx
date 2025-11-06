@@ -1,83 +1,37 @@
 "use client";
 
 import type {ListBoxVariants} from "./listbox.styles";
-import type {
-  ListBoxItemProps as ListBoxItemPrimitiveProps,
-  ListBoxProps as ListBoxPrimitiveProps,
-} from "react-aria-components";
+import type {ListBoxProps as ListBoxPrimitiveProps} from "react-aria-components";
 
 import React from "react";
-import {
-  ListBoxItem as ListBoxItemPrimitive,
-  ListBox as ListBoxPrimitive,
-} from "react-aria-components";
+import {ListBox as ListBoxPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 
 import {listboxVariants} from "./listbox.styles";
 
-type ListBoxContextValue = {
-  slots?: ReturnType<typeof listboxVariants>;
-};
-const ListBoxContext = React.createContext<ListBoxContextValue>({});
+/* -------------------------------------------------------------------------------------------------
+ * ListBox Root
+ * -----------------------------------------------------------------------------------------------*/
+interface ListBoxRootProps<T extends object> extends ListBoxPrimitiveProps<T>, ListBoxVariants {
+  className?: string;
+}
 
-export type ListBoxProps<T extends object> = ListBoxPrimitiveProps<T> &
-  ListBoxVariants & {
-    className?: string;
-  };
-function ListBox<T extends object>({className, variant, ...props}: ListBoxProps<T>) {
-  const slots = React.useMemo(() => listboxVariants({variant}), [variant]);
+function ListBoxRoot<T extends object>({className, variant, ...props}: ListBoxRootProps<T>) {
+  const styles = React.useMemo(() => listboxVariants({variant}), [variant]);
 
   return (
-    <ListBoxContext value={{slots}}>
-      <ListBoxPrimitive className={composeTwRenderProps(className, slots.base())} {...props} />
-    </ListBoxContext>
+    <ListBoxPrimitive
+      className={composeTwRenderProps(className, styles)}
+      data-slot="listbox"
+      {...props}
+    />
   );
 }
-export type ListBoxItemProps = ListBoxItemPrimitiveProps & {
-  className?: string;
-};
-const ListBoxItem = ({children, className, ...props}: ListBoxItemProps) => {
-  const {slots} = React.useContext(ListBoxContext);
 
-  return (
-    <ListBoxItemPrimitive className={composeTwRenderProps(className, slots?.item())} {...props}>
-      {(renderProps) => (
-        <>
-          {typeof children === "function" ? children(renderProps) : children}
-          <ListBoxItemIndicator isSelected={renderProps.isSelected} />
-        </>
-      )}
-    </ListBoxItemPrimitive>
-  );
-};
-
-export type ListBoxItemIndicatorProps = {
-  className?: string;
-  children?: React.ReactNode;
-  isSelected?: boolean;
-};
-const ListBoxItemIndicator = ({
-  children,
-  className,
-  isSelected,
-  ...props
-}: ListBoxItemIndicatorProps) => {
-  const {slots} = React.useContext(ListBoxContext);
-
-  return (
-    <span
-      aria-hidden="true"
-      className={slots?.itemIndicator({className})}
-      data-visible={isSelected || undefined}
-      {...props}
-    >
-      {children}
-    </span>
-  );
-};
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {ListBoxRoot};
 
-export {ListBox, ListBoxItem, ListBoxItemIndicator};
+export type {ListBoxRootProps};

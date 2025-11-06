@@ -6,6 +6,11 @@ import {useId} from "react";
 
 import {spinnerVariants} from "./spinner.styles";
 
+/* -------------------------------------------------------------------------------------------------
+ * Internal
+ * -------------------------------------------------------------------------------------------------
+ * Spinner Primitive
+ * -----------------------------------------------------------------------------------------------*/
 interface SpinnerPrimitiveProps extends React.SVGProps<SVGSVGElement> {}
 
 const SpinnerPrimitive = ({...props}: SpinnerPrimitiveProps) => {
@@ -52,10 +57,14 @@ const SpinnerPrimitive = ({...props}: SpinnerPrimitiveProps) => {
   );
 };
 
-interface SpinnerProps
+/* -------------------------------------------------------------------------------------------------
+ * Spinner Root
+ * -----------------------------------------------------------------------------------------------*/
+interface SpinnerRootProps
   extends Omit<React.ComponentProps<"svg">, "display" | "opacity" | "color">,
     SpinnerVariants {}
-const Spinner = ({className, color, size, ...props}: SpinnerProps) => {
+
+const SpinnerRoot = ({className, color, size, ...props}: SpinnerRootProps) => {
   return (
     <span
       data-slot="spinner"
@@ -70,5 +79,9 @@ const Spinner = ({className, color, size, ...props}: SpinnerProps) => {
   );
 };
 
-export {Spinner};
-export type {SpinnerProps};
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export {SpinnerRoot};
+
+export type {SpinnerRootProps};

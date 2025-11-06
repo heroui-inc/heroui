@@ -1,5 +1,3 @@
-"use client";
-
 import {Label, TextArea} from "@heroui/react";
 
 export function Rows() {

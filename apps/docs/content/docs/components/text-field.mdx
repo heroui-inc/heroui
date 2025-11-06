@@ -1,11 +1,12 @@
 ---
 title: TextField
 description: Composition-friendly text fields with labels, descriptions, and inline validation
+icon: updated
 links:
   rac: TextField
   source: text-field/text-field.tsx
   styles: text-field.css
-  storybook: text-field
+  storybook: Components/Forms/TextField
   figma: true
 ---
 
@@ -24,16 +25,14 @@ import { TextField } from '@heroui/react';
 ```tsx
 import {TextField, Label, Input, Description, FieldError} from '@heroui/react';
 
-export default function Example() {
-  return (
-    <TextField isRequired>
-      <Label>Display name</Label>
-      <Input placeholder="Jane" />
-      <Description>Visible to other team members.</Description>
-      <FieldError />
-    </TextField>
-  );
-}
+export default () => (
+  <TextField>
+    <Label />
+    <Input />
+    <Description />
+    <FieldError />
+  </TextField>
+)
 ```
 
 >  **TextField** combines label, input, description, and error into a single accessible component.  
@@ -77,6 +76,12 @@ Use [TextArea](/docs/components/textarea) instead of [Input](/docs/components/in
 
 <ComponentPreview name="text-field-input-types" />
 
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, TextField and its child Input/TextArea components automatically apply on-surface styling.
+
+<ComponentPreview name="text-field-on-surface" />
+
 <RelatedComponents component="textfield" />
 
 <RelatedShowcases component="TextField" />
@@ -90,11 +95,11 @@ import {TextField, Label, Input, Description} from '@heroui/react';
 
 function CustomTextField() {
   return (
-    <TextField className="gap-2 rounded-xl border border-border/60 bg-surface-2 p-4 shadow-sm">
+    <TextField className="gap-2 rounded-xl border border-border/60 bgsurface p-4 shadow-sm">
       <Label className="text-sm font-semibold text-default-700">
         Project name
       </Label>
-      <Input className="rounded-lg border border-border/60 bg-surface-2 px-3 py-2" />
+      <Input className="rounded-lg border border-border/60 bgsurface px-3 py-2" />
       <Description className="text-xs text-default-500">
         Keep it short and memorable.
       </Description>

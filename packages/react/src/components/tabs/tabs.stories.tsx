@@ -8,12 +8,12 @@ import {Tabs} from "./index";
 
 const meta = {
   argTypes: {},
-  component: Tabs.Root,
+  component: Tabs,
   parameters: {
     layout: "centered",
   },
   title: "Components/Navigation/Tabs",
-} satisfies Meta<typeof Tabs.Root>;
+} satisfies Meta<typeof Tabs>;
 
 export default meta;
 
@@ -22,8 +22,8 @@ type Story = StoryObj<typeof meta>;
 const DefaultTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
-      <Tabs.Root {...args}>
-        <Tabs.ListWrapper>
+      <Tabs {...args}>
+        <Tabs.ListContainer>
           <Tabs.List aria-label="Options">
             <Tabs.Tab id="overview">
               Overview
@@ -38,7 +38,7 @@ const DefaultTemplate = (args: Story["args"]) => {
               <Tabs.Indicator />
             </Tabs.Tab>
           </Tabs.List>
-        </Tabs.ListWrapper>
+        </Tabs.ListContainer>
         <Tabs.Panel className="pt-4" id="overview">
           <p>View your project overview and recent activity.</p>
         </Tabs.Panel>
@@ -48,7 +48,7 @@ const DefaultTemplate = (args: Story["args"]) => {
         <Tabs.Panel className="pt-4" id="reports">
           <p>Generate and download detailed reports.</p>
         </Tabs.Panel>
-      </Tabs.Root>
+      </Tabs>
     </div>
   );
 };
@@ -56,8 +56,8 @@ const DefaultTemplate = (args: Story["args"]) => {
 const VerticalTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
-      <Tabs.Root {...args} orientation="vertical">
-        <Tabs.ListWrapper>
+      <Tabs {...args} orientation="vertical">
+        <Tabs.ListContainer>
           <Tabs.List aria-label="Vertical tabs">
             <Tabs.Tab id="account">
               Account
@@ -76,7 +76,7 @@ const VerticalTemplate = (args: Story["args"]) => {
               <Tabs.Indicator />
             </Tabs.Tab>
           </Tabs.List>
-        </Tabs.ListWrapper>
+        </Tabs.ListContainer>
         <Tabs.Panel className="px-4" id="account">
           <h3 className="mb-2 font-semibold">Account Settings</h3>
           <p className="text-sm text-gray-600">Manage your account information and preferences.</p>
@@ -99,15 +99,15 @@ const VerticalTemplate = (args: Story["args"]) => {
             View and manage your subscription and payment methods.
           </p>
         </Tabs.Panel>
-      </Tabs.Root>
+      </Tabs>
     </div>
   );
 };
 
 const DisabledTabTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs.Root {...args}>
-      <Tabs.ListWrapper>
+    <Tabs {...args}>
+      <Tabs.ListContainer>
         <Tabs.List aria-label="Tabs with disabled">
           <Tabs.Tab id="active">
             Active
@@ -122,7 +122,7 @@ const DisabledTabTemplate = (args: Story["args"]) => (
             <Tabs.Indicator />
           </Tabs.Tab>
         </Tabs.List>
-      </Tabs.ListWrapper>
+      </Tabs.ListContainer>
       <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
       </Tabs.Panel>
@@ -132,14 +132,14 @@ const DisabledTabTemplate = (args: Story["args"]) => (
       <Tabs.Panel className="pt-4" id="available">
         <p>This tab is also available for selection.</p>
       </Tabs.Panel>
-    </Tabs.Root>
+    </Tabs>
   </div>
 );
 
 const DefaultSelectedTemplate = (args: Story["args"]) => (
   <div className="w-[600px]">
-    <Tabs.Root defaultSelectedKey="default" {...args}>
-      <Tabs.ListWrapper>
+    <Tabs defaultSelectedKey="default" {...args}>
+      <Tabs.ListContainer>
         <Tabs.List aria-label="Tabs with default options">
           <Tabs.Tab id="active">
             Active
@@ -154,7 +154,7 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
             <Tabs.Indicator />
           </Tabs.Tab>
         </Tabs.List>
-      </Tabs.ListWrapper>
+      </Tabs.ListContainer>
       <Tabs.Panel className="pt-4" id="active">
         <p>This tab is active and can be selected.</p>
       </Tabs.Panel>
@@ -164,7 +164,7 @@ const DefaultSelectedTemplate = (args: Story["args"]) => (
       <Tabs.Panel className="pt-4" id="available">
         <p>This tab is available for selection as well.</p>
       </Tabs.Panel>
-    </Tabs.Root>
+    </Tabs>
   </div>
 );
 
@@ -174,8 +174,8 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
       <p className="my-2">Selected: {selectedKey}</p>
-      <Tabs.Root selectedKey={selectedKey} onSelectionChange={setSelectedKey} {...args}>
-        <Tabs.ListWrapper>
+      <Tabs selectedKey={selectedKey} onSelectionChange={setSelectedKey} {...args}>
+        <Tabs.ListContainer>
           <Tabs.List aria-label="Tabs with controlled options">
             <Tabs.Tab id="active">
               Active
@@ -190,7 +190,7 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
               <Tabs.Indicator />
             </Tabs.Tab>
           </Tabs.List>
-        </Tabs.ListWrapper>
+        </Tabs.ListContainer>
         <Tabs.Panel className="pt-4" id="active">
           <p>This tab is active and can be selected.</p>
         </Tabs.Panel>
@@ -200,7 +200,7 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
         <Tabs.Panel className="pt-4" id="available">
           <p>This tab is available for selection as well.</p>
         </Tabs.Panel>
-      </Tabs.Root>
+      </Tabs>
     </div>
   );
 };
@@ -208,8 +208,8 @@ const ControlledSelectionTemplate = (args: Story["args"]) => {
 const CustomStyleTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[380px]">
-      <Tabs.Root {...args}>
-        <Tabs.ListWrapper>
+      <Tabs {...args}>
+        <Tabs.ListContainer>
           <Tabs.List
             aria-label="Options"
             className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
@@ -231,8 +231,8 @@ const CustomStyleTemplate = (args: Story["args"]) => {
               <Tabs.Indicator className="bg-accent" />
             </Tabs.Tab>
           </Tabs.List>
-        </Tabs.ListWrapper>
-      </Tabs.Root>
+        </Tabs.ListContainer>
+      </Tabs>
     </div>
   );
 };
@@ -282,8 +282,8 @@ const Showcase1Template = (args: Story["args"]) => {
             />
           ))}
         </div>
-        <Tabs.Root {...args} defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
-          <Tabs.ListWrapper className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
+        <Tabs {...args} defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
+          <Tabs.ListContainer className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
             <Tabs.List
               aria-label="Options"
               className="w-fit min-w-min rounded-full bg-[#333336] *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:text-white *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
@@ -299,8 +299,8 @@ const Showcase1Template = (args: Story["args"]) => {
                 </Tabs.Tab>
               ))}
             </Tabs.List>
-          </Tabs.ListWrapper>
-        </Tabs.Root>
+          </Tabs.ListContainer>
+        </Tabs>
         <div className="relative h-10 w-10">
           {Object.keys(zoomXMap).map((key) => (
             <p

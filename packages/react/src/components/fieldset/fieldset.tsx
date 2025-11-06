@@ -8,11 +8,17 @@ import React, {createContext, useContext} from "react";
 import {fieldsetVariants} from "./fieldset.styles";
 
 /* -------------------------------------------------------------------------------------------------
- * Fieldset
+ * Fieldset Context
  * -----------------------------------------------------------------------------------------------*/
+type FieldsetContext = {
+  slots?: ReturnType<typeof fieldsetVariants>;
+};
 
-const FieldsetContext = createContext<{slots?: ReturnType<typeof fieldsetVariants>}>({});
+const FieldsetContext = createContext<FieldsetContext>({});
 
+/* -------------------------------------------------------------------------------------------------
+ * Fieldset Root
+ * -----------------------------------------------------------------------------------------------*/
 interface FieldsetRootProps extends React.ComponentProps<"fieldset">, FieldsetVariants {
   asChild?: boolean;
 }
@@ -29,8 +35,9 @@ const FieldsetRoot = ({asChild = false, className, ...props}: FieldsetRootProps)
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Fieldset Legend
+ * -----------------------------------------------------------------------------------------------*/
 interface FieldsetLegendProps extends React.ComponentProps<"legend"> {
   asChild?: boolean;
 }
@@ -43,8 +50,9 @@ const FieldsetLegend = ({asChild = false, className, ...props}: FieldsetLegendPr
   return <Comp className={slots?.legend({className})} data-slot="fieldset-legend" {...props} />;
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Field Group
+ * -----------------------------------------------------------------------------------------------*/
 interface FieldGroupProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
@@ -59,8 +67,9 @@ const FieldGroup = ({asChild = false, className, ...rest}: FieldGroupProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Field Actions
+ * -----------------------------------------------------------------------------------------------*/
 interface FieldsetActionsProps extends React.ComponentProps<"div"> {
   asChild?: boolean;
 }
@@ -76,8 +85,9 @@ const FieldsetActions = ({asChild, children, className, ...rest}: FieldsetAction
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 export {FieldsetRoot, FieldsetLegend, FieldGroup, FieldsetActions};
 
 export type {FieldsetRootProps, FieldsetLegendProps, FieldGroupProps, FieldsetActionsProps};

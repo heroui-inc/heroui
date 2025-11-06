@@ -23,6 +23,7 @@ import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
+import {SurfaceContext} from "../surface";
 
 import {accordionVariants} from "./accordion.styles";
 
@@ -31,7 +32,6 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
 /* -------------------------------------------------------------------------------------------------
  * Accordion Root
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionRootProps extends DisclosureGroupProps, AccordionVariants {}
 
 const AccordionRoot = ({children, className, ...originalProps}: AccordionRootProps) => {
@@ -42,15 +42,26 @@ const AccordionRoot = ({children, className, ...originalProps}: AccordionRootPro
     [objectToDeps(variantProps)],
   );
 
+  const variant = (variantProps as AccordionVariants)?.variant ?? "default";
+
+  const content = (
+    <DisclosureGroup
+      data-slot="accordion"
+      {...props}
+      className={composeTwRenderProps(className, slots.base())}
+    >
+      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+    </DisclosureGroup>
+  );
+
   return (
     <AccordionContext value={{slots}}>
-      <DisclosureGroup
-        data-slot="accordion"
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </DisclosureGroup>
+      {variant === "surface" ? (
+        // Allows inner components to apply "on-surface" colors for proper contrast
+        <SurfaceContext.Provider value={{variant: "default"}}>{content}</SurfaceContext.Provider>
+      ) : (
+        content
+      )}
     </AccordionContext>
   );
 };
@@ -58,7 +69,6 @@ const AccordionRoot = ({children, className, ...originalProps}: AccordionRootPro
 /* -------------------------------------------------------------------------------------------------
  * AccordionItem
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionItemProps extends DisclosureProps {}
 
 const AccordionItem = ({className, ...props}: AccordionItemProps) => {
@@ -78,7 +88,6 @@ const AccordionItem = ({className, ...props}: AccordionItemProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionIndicator
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionIndicatorProps extends React.ComponentProps<"svg"> {
   className?: string;
 }
@@ -116,7 +125,6 @@ const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorP
 /* -------------------------------------------------------------------------------------------------
  * AccordionHeading
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionHeadingProps extends React.ComponentProps<typeof DisclosureHeading> {
   className?: string;
 }
@@ -136,7 +144,6 @@ const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionTrigger
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionTriggerProps extends ButtonProps {}
 
 const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
@@ -159,7 +166,6 @@ const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionBody
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionBodyProps extends React.ComponentProps<"div"> {
   className?: string;
 }
@@ -177,7 +183,6 @@ const AccordionBody = ({children, className, ...props}: AccordionBodyProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionPanel
  * -----------------------------------------------------------------------------------------------*/
-
 interface AccordionPanelProps extends DisclosurePanelProps {}
 
 const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) => {
@@ -199,6 +204,15 @@ const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
+export {
+  AccordionRoot,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionPanel,
+  AccordionIndicator,
+  AccordionBody,
+  AccordionHeading,
+};
 
 export type {
   AccordionRootProps,
@@ -208,14 +222,4 @@ export type {
   AccordionIndicatorProps,
   AccordionBodyProps,
   AccordionHeadingProps,
-};
-
-export {
-  AccordionRoot,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionPanel,
-  AccordionIndicator,
-  AccordionBody,
-  AccordionHeading,
 };
