@@ -21,11 +21,18 @@
 .select__trigger {
   @apply bg-field text-field-foreground shadow-field rounded-field relative isolate inline-flex min-h-9 select-none border px-3 py-2 text-sm outline-none;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
   /* Cursor */
   cursor: var(--cursor-interactive);
-
-  /* Transition */
-  @apply motion-select__trigger reduce-motion:motion-none;
 
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
@@ -106,10 +113,7 @@
 }
 
 .select__indicator {
-  @apply text-field-placeholder absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center;
-
-  /* Transition */
-  @apply duration-250 reduce-motion:motion-none transition;
+  @apply text-field-placeholder duration-250 absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center transition;
 
   &[data-open="true"] {
     @apply rotate-180;

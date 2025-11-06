@@ -2,10 +2,17 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 w-fit origin-center transform-gpu select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium md:h-9;
+  @apply relative isolate inline-flex h-10 w-fit origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium md:h-9;
 
-  /* Transition */
-  @apply motion-button reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);

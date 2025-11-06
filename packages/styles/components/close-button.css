@@ -2,13 +2,21 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center transform-gpu select-none items-center justify-center rounded-xl p-1;
-
-  /* Transition */
-  @apply motion-close-button reduce-motion:motion-none;
+  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center select-none items-center justify-center rounded-xl p-1;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    color 150ms var(--ease-out),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
   &:focus-visible,

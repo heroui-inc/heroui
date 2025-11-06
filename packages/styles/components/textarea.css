@@ -3,11 +3,18 @@
 
   min-height: 38px;
 
-  /* Transition */
-  @apply motion-textarea reduce-motion:motion-none;
-
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   &:hover,
   &[data-hovered="true"] {

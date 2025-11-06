@@ -30,8 +30,12 @@
 .radio__control {
   @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
 
-  /* Transition */
-  @apply motion-radio__control reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition: all 250ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
 
@@ -96,27 +100,41 @@
    ========================================================================== */
 
 .radio__indicator {
-  @apply pointer-events-none absolute inset-0 flex items-center justify-center;
+  @apply absolute inset-0 flex items-center justify-center;
+
+  pointer-events: none;
 }
 
 /* :empty pseudo-class ensures these styles only apply when the indicator has no custom children
    (e.g., custom icon). When custom content is present, these default dot styles are not applied. */
 .radio__indicator:empty::before {
-  @apply bg-field size-full scale-100 rounded-full content-[''];
+  content: "";
+  @apply bg-field rounded-full;
 
-  /* Transition */
-  @apply motion-radio__indicator reduce-motion:motion-none;
+  width: 100%;
+  height: 100%;
+  scale: 1;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    scale 420ms var(--ease-smooth),
+    background-color 400ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
 }
 
 /* Selected state */
 .radio[aria-checked="true"] .radio__indicator:empty::before,
 .radio[data-selected="true"] .radio__indicator:empty::before {
-  @apply bg-accent-foreground scale-[0.4286]; /* 6px */
+  @apply bg-accent-foreground;
+  scale: 0.4286; /* 6px */
 }
 
 /* Selected + Pressed state */
 .radio[data-selected="true"][data-pressed="true"] .radio__indicator:empty::before {
-  @apply scale-[0.5714]; /* 8px */
+  scale: 0.5714; /* 8px */
 }
 
 /* ==========================================================================

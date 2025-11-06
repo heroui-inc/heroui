@@ -5,8 +5,15 @@
 .listbox-item {
   @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
 
-  /* Transition */
-  @apply motion-listbox-item reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -65,20 +72,29 @@
 .listbox-item__indicator {
   @apply text-default-foreground absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
 
-  /* Transition */
-  @apply duration-250 reduce-motion:motion-none transition;
+  /**
+   * Transitions
+   */
+  @apply duration-250 transition motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
   [data-slot="listbox-item-indicator--checkmark"] {
     @apply size-2.5;
 
-    /* Transition */
-    @apply reduce-motion:motion-none transition-all duration-300;
+    /**
+     * Transitions
+     */
+    @apply transition-all duration-300 motion-reduce:transition-none;
   }
 
   .listbox-item[aria-selected="true"] [data-slot="listbox-item-indicator--checkmark"],
   .listbox-item[data-selected="true"] [data-slot="listbox-item-indicator--checkmark"] {
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
     transition: stroke-dashoffset 250ms linear 0.2s;
+    @apply motion-reduce:transition-none;
   }
 }
 

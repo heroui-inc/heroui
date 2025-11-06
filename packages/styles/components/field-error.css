@@ -2,6 +2,12 @@
 .field-error {
   @apply text-danger h-0 truncate px-1 text-xs opacity-0 data-[visible=true]:h-auto data-[visible=true]:opacity-100;
 
-  /* Transition */
-  @apply motion-field-error reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    opacity 150ms var(--ease-out),
+    height 350ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
 }

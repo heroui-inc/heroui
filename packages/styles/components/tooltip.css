@@ -40,22 +40,29 @@
 
   /* Arrow rotation based on placement */
   &[data-placement="bottom"] [data-slot="overlay-arrow"] {
-    @apply rotate-180;
+    rotate: 180deg;
   }
 
   &[data-placement="left"] [data-slot="overlay-arrow"] {
-    @apply -rotate-90;
+    rotate: -90deg;
   }
 
   &[data-placement="right"] [data-slot="overlay-arrow"] {
-    @apply rotate-90;
+    rotate: 90deg;
   }
 }
 
 /* Tooltip trigger */
 .tooltip__trigger {
-  /* Transition */
-  @apply motion-tooltip__content reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
 

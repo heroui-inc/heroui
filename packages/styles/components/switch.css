@@ -49,8 +49,15 @@
   height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
-  /* Transition */
-  @apply motion-switch__control reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 250ms var(--ease-smooth),
+    transform 250ms var(--ease-out),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   /* Focus states */
   .switch:focus-visible &,
@@ -67,7 +74,7 @@
   /* Pressed states */
   .switch:active &,
   .switch[data-pressed="true"] & {
-    @apply bg-surface-quaternary/80 reduce-motion:[transform:none];
+    @apply bg-surface-quaternary/80 motion-reduce:[transform:none];
     transform: scale(0.95);
   }
 
@@ -116,8 +123,14 @@
   height: 1rem; /* ~14px on desktop, ~16px on mobile */
   width: 1.375rem; /* ~19px on desktop, ~22px on mobile */
 
-  /* Transition */
-  @apply motion-switch__thumb reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    margin 350ms var(--ease-fluid-out),
+    background-color 200ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   /* Selected/checked state - use margin instead of translate */
   .switch[aria-checked="true"] &,

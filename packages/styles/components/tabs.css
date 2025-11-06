@@ -46,8 +46,16 @@
 
   @apply text-muted flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium outline-none;
 
-  /* Transition */
-  @apply motion-tab reduce-motion:motion-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    color 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out),
+    opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
 
   /* Separator between tabs */
   &:not(:first-child):before {
@@ -57,8 +65,12 @@
     border-radius: 4px;
     position: absolute;
 
-    /* Transition */
-    @apply motion-tabs__tab-before reduce-motion:motion-none;
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: opacity 150ms var(--ease-smooth);
+    @apply motion-reduce:transition-none;
   }
 
   /* Horizontal tabs - vertical separator */
@@ -128,9 +140,23 @@
 
 /* Tab indicator - React Aria's SelectionIndicator */
 .tabs__indicator {
-  @apply bg-segment absolute inset-0 -z-10 size-full rounded-3xl;
   box-shadow: var(--shadow-surface);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: var(--radius-3xl);
+  width: 100%;
+  height: 100%;
 
-  /* Transition */
-  @apply motion-tabs__indicator reduce-motion:motion-none;
+  @apply bg-segment;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition-duration: 420ms;
+  transition-property: translate, width, height;
+  transition-timing-function: var(--ease-fluid-out);
+  @apply motion-reduce:transition-none;
 }

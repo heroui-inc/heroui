@@ -22,21 +22,21 @@
 
 /* Color variants */
 .spinner--current {
-  @apply text-current;
+  color: inherit;
 }
 
 .spinner--accent {
-  @apply text-accent;
+  color: var(--accent);
 }
 
 .spinner--danger {
-  @apply text-danger;
+  color: var(--danger);
 }
 
 .spinner--success {
-  @apply text-success;
+  color: var(--success);
 }
 
 .spinner--warning {
-  @apply text-warning;
+  color: var(--warning);
 }

@@ -6,12 +6,19 @@
 
 /* Key abbreviation styles */
 .kbd__abbr {
-  @apply flex size-full items-center justify-center no-underline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
 }
 
 /* Content wrapper */
 .kbd__content {
-  @apply flex items-center justify-center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Variant styles */
