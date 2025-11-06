@@ -20,7 +20,12 @@
 }
 
 .accordion__indicator {
-  @apply reduce-motion:transition-none text-muted duration-250 ml-auto size-4 shrink-0 transition;
+  @apply text-muted ml-auto size-4 shrink-0;
+
+  /**
+   * Transitions
+   */
+  @apply duration-250 transition motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {
@@ -47,11 +52,16 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply reduce-motion:transition-none flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     opacity 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   /* Hover state */
   &:hover:not([aria-expanded="true"]),
@@ -77,11 +87,17 @@
 .accordion__panel {
   opacity: 0;
   will-change: height, opacity;
+  height: var(--disclosure-panel-height);
+  overflow: clip;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     height 420ms var(--ease-fluid-out),
     opacity 340ms var(--ease-out);
-  height: var(--disclosure-panel-height);
-  overflow: clip;
+  @apply motion-reduce:transition-none;
 
   &[data-expanded="true"] {
     opacity: 1;

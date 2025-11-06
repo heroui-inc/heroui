@@ -24,7 +24,12 @@
 }
 
 .disclosure__indicator {
-  @apply reduce-motion:transition-none duration-250 ml-auto size-4 shrink-0 text-inherit transition;
+  @apply ml-auto size-4 shrink-0 text-inherit;
+
+  /**
+   * Transitions
+   */
+  @apply duration-250 transition motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
   &[data-expanded="true"] {
@@ -35,11 +40,17 @@
 .disclosure__content {
   opacity: 0;
   will-change: height, opacity;
+  height: var(--disclosure-panel-height);
+  overflow: clip;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     height 420ms var(--ease-fluid-out),
     opacity 340ms var(--ease-out);
-  height: var(--disclosure-panel-height);
-  overflow: clip;
+  @apply motion-reduce:transition-none;
 
   &[data-expanded="true"] {
     opacity: 1;

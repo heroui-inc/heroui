@@ -17,14 +17,19 @@
   @apply w-9.5 relative flex h-10 flex-1 items-center justify-center;
   @apply bg-field text-field-foreground shadow-field border;
   @apply rounded-field text-sm font-semibold outline-none;
-  @apply reduce-motion:transition-none;
 
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     background-color 150ms var(--ease-smooth),
     border-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
-  border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  @apply motion-reduce:transition-none;
 
   /* Hover */
   &:hover,
@@ -57,9 +62,15 @@
 
 /* Slot value */
 .input-otp__slot-value {
-  @apply reduce-motion:animate-none text-lg leading-6 tracking-[-0.27px];
+  @apply text-lg leading-6 tracking-[-0.27px];
+
+  /**
+   * Animations
+   * CRITICAL: motion-reduce must be AFTER animation for correct override specificity
+   */
   animation: slot-value-in 250ms var(--ease-smooth) both;
-  transition-origin: bottom center;
+  transform-origin: bottom center;
+  @apply motion-reduce:animate-none;
 }
 
 /* Caret */

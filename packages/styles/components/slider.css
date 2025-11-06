@@ -37,8 +37,13 @@
 
     /* after: Visible thumb element */
     &::after {
-      @apply reduce-motion:transition-none shadow-field relative z-10 origin-center rounded-full bg-white text-black transition-all;
+      @apply shadow-field relative z-10 rounded-full bg-white text-black;
       content: "";
+
+      /**
+       * Transitions
+       */
+      @apply origin-center transition-all motion-reduce:transition-none;
     }
 
     /* Dragging state - cursor changes and thumb scales down */
@@ -46,7 +51,7 @@
       @apply cursor-grabbing;
 
       &::after {
-        @apply reduce-motion:scale-100 scale-[0.9];
+        @apply scale-[0.9] motion-reduce:scale-100;
       }
     }
 

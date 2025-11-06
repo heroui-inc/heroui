@@ -1,12 +1,17 @@
 /* Base link styles */
 .link {
-  @apply reduce-motion:transition-none text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
+  @apply text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     color 150ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out),
     opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -35,8 +40,14 @@
   }
 
   .link__icon {
-    @apply reduce-motion:transition-none pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
+    @apply pointer-events-none inline-flex size-2 shrink-0 items-center justify-center text-current opacity-60;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
     transition: opacity 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
   }
 
   .link__icon[data-default-icon="true"] {
@@ -56,12 +67,18 @@
 .link--underline-hover {
   /* Animated underline on hover (default) */
   &::before {
-    @apply reduce-motion:transition-none absolute left-0 h-px w-full bg-current;
-
     content: "";
     bottom: 0;
     opacity: 0;
+
+    @apply absolute left-0 h-px w-full bg-current;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
     transition: opacity 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
   }
 
   &:hover::before,
@@ -73,12 +90,18 @@
 .link--underline-always {
   /* Always visible underline with opacity change */
   &::before {
-    @apply reduce-motion:transition-none absolute left-0 h-px w-full bg-current;
-
     content: "";
     bottom: 0;
     opacity: 0.5;
+
+    @apply absolute left-0 h-px w-full bg-current;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
     transition: opacity 200ms var(--ease-out);
+    @apply motion-reduce:transition-none;
   }
 
   &:hover::before,

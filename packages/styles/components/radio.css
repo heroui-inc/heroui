@@ -28,9 +28,14 @@
    ========================================================================== */
 
 .radio__control {
-  @apply bg-field shadow-field reduce-motion:transition-none relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
+  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition: all 250ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
 
@@ -104,14 +109,20 @@
    (e.g., custom icon). When custom content is present, these default dot styles are not applied. */
 .radio__indicator:empty::before {
   content: "";
-  @apply bg-field reduce-motion:transition-none rounded-full;
+  @apply bg-field rounded-full;
 
   width: 100%;
   height: 100%;
   scale: 1;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     scale 420ms var(--ease-smooth),
     background-color 400ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
 }
 
 /* Selected state */

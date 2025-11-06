@@ -43,7 +43,12 @@
 
   /* Checkmark SVG indicator */
   [data-slot="checkbox-default-indicator--checkmark"] {
-    @apply text-accent-foreground reduce-motion:transition-none size-2.5 transition-all duration-200;
+    @apply text-accent-foreground size-2.5;
+
+    /**
+     * Transitions
+     */
+    @apply transition-all duration-200 motion-reduce:transition-none;
   }
 
   &[data-selected] [data-slot="checkbox-default-indicator--checkmark"] {
@@ -79,11 +84,16 @@
    ========================================================================== */
 
 .checkbox__control {
-  @apply reduce-motion:transition-none bg-field shadow-field relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md outline-none;
+  @apply bg-field shadow-field relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md outline-none;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition:
     background-color 250ms var(--ease-out),
     transform 250ms var(--ease-out-quart);
+  @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
 
@@ -94,12 +104,17 @@
 
   /* Background indicator pseudo-element */
   &::before {
-    @apply bg-accent reduce-motion:transition-none pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md opacity-0 content-[''];
+    @apply bg-accent pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md opacity-0 content-[''];
 
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
     transition:
       scale 200ms var(--ease-linear),
       opacity 200ms var(--ease-linear),
       background-color 200ms var(--ease-out);
+    @apply motion-reduce:transition-none;
   }
 
   /* Interactive states */
