@@ -1,35 +1,31 @@
-import {Button, Card} from "@heroui/react";
+import {Button, Card, CloseButton} from "@heroui/react";
 
 export function Horizontal() {
   return (
     <Card className="w-full items-stretch md:flex-row">
-      <img
-        alt="Porsche 911 Golden Edition"
-        className="pointer-events-none aspect-square w-full select-none rounded-3xl object-cover md:max-w-[136px]"
-        loading="lazy"
-        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/components/card/porsche-911.png"
-      />
+      <div className="relative h-[140px] w-full flex-shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
+        <img
+          alt="Cherries"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-125 select-none object-cover"
+          loading="lazy"
+          src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/cherries.jpeg"
+        />
+      </div>
       <div className="flex flex-1 flex-col gap-3">
         <Card.Header className="gap-1">
-          <Card.Title>Get the new Porsche 911 golden edition</Card.Title>
+          <Card.Title className="pr-8">Become an ACME Creator!</Card.Title>
           <Card.Description>
-            Experience unmatched luxury and performance with the Porsche 911 Golden Edition—where
-            sleek design meets cutting-edge tech and pure driving thrill.
+            Lorem ipsum dolor sit amet consectetur. Sed arcu donec id aliquam dolor sed amet
+            faucibus etiam.
           </Card.Description>
+          <CloseButton aria-label="Close banner" className="absolute right-3 top-3" />
         </Card.Header>
-        <Card.Footer className="mt-auto flex w-full flex-row items-center justify-between">
+        <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col">
-            <span
-              aria-label="Price: 36,799 US dollars"
-              className="text-foreground text-sm font-medium"
-            >
-              $36,799
-            </span>
-            <span aria-label="Available stock: 11 units" className="text-muted text-xs">
-              11 available
-            </span>
+            <span className="text-foreground text-sm font-medium">Only 10 spots</span>
+            <span className="text-muted text-xs">Submission ends Oct 10.</span>
           </div>
-          <Button>Buy Now</Button>
+          <Button className="w-full sm:w-auto">Apply Now</Button>
         </Card.Footer>
       </div>
     </Card>

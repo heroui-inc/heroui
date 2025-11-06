@@ -53,7 +53,7 @@
   /* Fumadocs UI Dark Theme */
   --color-fd-primary: oklch(0.99 0 0);
   --color-fd-card: rgba(40, 40, 40, 0.4);
-  --color-fd-secondary: #1a1a1a;
+  --color-fd-secondary: #18181b;
   --color-fd-accent: #2c2c2c;
   --color-fd-popover: #383435;
   --color-fd-border: rgba(255, 255, 255, 0.1);
@@ -180,6 +180,18 @@
 
   &[data-active="true"] {
     @apply bg-surface shadow-surface;
+  }
+}
+
+/* Nested items inside open groups */
+#nd-sidebar [data-state="open"] > [data-state="open"] {
+  padding: 4px 16px;
+
+  a {
+    padding-left: 14px;
+    &::before {
+      display: none;
+    }
   }
 }
 
@@ -323,6 +335,10 @@
 
 .prose .shiki .fd-scroll-container {
   max-height: fit-content;
+}
+
+[role="tabpanel"] .mdx-code-block {
+  padding: 0;
 }
 
 code {

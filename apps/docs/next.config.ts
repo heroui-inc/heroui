@@ -17,6 +17,19 @@ const config: NextConfig = {
     optimizePackageImports: ["@heroui/react"],
     reactCompiler: true,
   },
+  async headers() {
+    return [
+      {
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "index, follow",
+          },
+        ],
+        source: "/:path*",
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

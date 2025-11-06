@@ -16,7 +16,7 @@ export function Variants() {
       <Card className="w-[320px]" variant="default">
         <Card.Header>
           <Card.Title>Default</Card.Title>
-          <Card.Description>Standard card appearance (surface-secondary)</Card.Description>
+          <Card.Description>Standard card appearance (bg-surface)</Card.Description>
         </Card.Header>
         <Card.Content>
           <p>The default card variant for most use cases</p>
@@ -26,7 +26,7 @@ export function Variants() {
       <Card className="w-[320px]" variant="secondary">
         <Card.Header>
           <Card.Title>Secondary</Card.Title>
-          <Card.Description>Medium prominence (surface-tertiary)</Card.Description>
+          <Card.Description>Medium prominence (bg-surface-secondary)</Card.Description>
         </Card.Header>
         <Card.Content>
           <p>Use to draw moderate attention</p>
@@ -36,10 +36,20 @@ export function Variants() {
       <Card className="w-[320px]" variant="tertiary">
         <Card.Header>
           <Card.Title>Tertiary</Card.Title>
-          <Card.Description>Higher prominence (surface-quaternary)</Card.Description>
+          <Card.Description>Higher prominence (bg-surface-tertiary)</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Use for important content</p>
+          <p>Use for primary or featured content</p>
+        </Card.Content>
+      </Card>
+
+      <Card className="w-[320px]" variant="quaternary">
+        <Card.Header>
+          <Card.Title>Quaternary</Card.Title>
+          <Card.Description>Highest prominence (bg-surface-quaternary)</Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <p>Use for primary or featured content</p>
         </Card.Content>
       </Card>
     </div>

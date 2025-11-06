@@ -15,6 +15,7 @@ import {Iconify} from "./components/iconify";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
+import {VideoPlayer} from "./components/video-player";
 import {PackageManagers} from "./mdx-components/package-managers";
 import {cn} from "./utils/cn";
 
@@ -110,6 +111,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     RelatedComponents,
     RelatedShowcases,
     Star,
+    VideoPlayer,
     X,
     XCircle,
     // HTML `ref` attribute conflicts with `forwardRef`

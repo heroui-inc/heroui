@@ -25,39 +25,12 @@ export function Basic() {
             A new version of the application is available. Please refresh to get the latest features
             and bug fixes.
           </Alert.Description>
+          <Button className="mt-2 sm:hidden" size="sm" variant="primary">
+            Refresh
+          </Button>
         </Alert.Content>
-        <Button size="sm" variant="primary">
+        <Button className="hidden sm:block" size="sm" variant="primary">
           Refresh
-        </Button>
-      </Alert>
-
-      {/* Success - Confirmation */}
-      <Alert status="success">
-        <Alert.Indicator />
-        <Alert.Content>
-          <Alert.Title>Payment successful</Alert.Title>
-          <Alert.Description>
-            Your payment of $49.99 has been processed. A confirmation email has been sent to your
-            inbox.
-          </Alert.Description>
-        </Alert.Content>
-        <Button size="sm" variant="secondary">
-          View Receipt
-        </Button>
-      </Alert>
-
-      {/* Warning - Attention needed */}
-      <Alert status="warning">
-        <Alert.Indicator />
-        <Alert.Content>
-          <Alert.Title>Storage almost full</Alert.Title>
-          <Alert.Description>
-            You're using 90% of your storage quota. Consider upgrading your plan or removing unused
-            files to avoid service interruption.
-          </Alert.Description>
-        </Alert.Content>
-        <Button size="sm" variant="secondary">
-          Manage Storage
         </Button>
       </Alert>
 
@@ -74,8 +47,11 @@ export function Basic() {
               <li>Clear your browser cache</li>
             </ul>
           </Alert.Description>
+          <Button className="mt-2 sm:hidden" size="sm" variant="danger">
+            Retry
+          </Button>
         </Alert.Content>
-        <Button size="sm" variant="danger">
+        <Button className="hidden sm:block" size="sm" variant="danger">
           Retry
         </Button>
       </Alert>

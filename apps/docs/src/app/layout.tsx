@@ -81,6 +81,10 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
   },
+  robots: {
+    follow: true,
+    index: true,
+  },
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -96,11 +100,10 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
   themeColor: [
     {color: "#f4f4f5", media: "(prefers-color-scheme: light)"},
     {color: "#111111", media: "(prefers-color-scheme: dark)"},
   ],
-  userScalable: false,
   width: "device-width",
 };

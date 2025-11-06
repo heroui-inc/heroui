@@ -12,23 +12,50 @@ icon: clock-arrow-rotate-left
 ## Latest Release
 
 
-### v3.0.0-alpha.36
+### v3.0.0-beta.1
 
-**October 28, 2025**
+**November 6, 2025**
+
+#### Major Redesign
+- Complete redesign of HeroUI v3 design system, merging the soul of v2 with v3's simplicity
+- New [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3) available
+- All components redesigned with improved animations and accessibility
+
+#### 8 New Components
+- **Alert**: Status messages and notifications
+- **Checkbox & CheckboxGroup**: Form checkbox inputs
+- **InputOTP**: One-time password input
+- **Listbox**: List of selectable options
+- **Select**: Dropdown selection component
+- **Slider**: Range input component
+- **Surface**: Base surface container component
+
+#### Design System Updates
+- **(⚠️ Breaking change)**: `--panel` replaced with `--surface` and `--overlay`
+- **(⚠️ Breaking change)**: Removed `--surface-1`, `--surface-2`, `--surface-3` variables
+- **(⚠️ Breaking change)**: Default border width changed from `1px` to `0px`
+- **(⚠️ Breaking change)**: Shadow system redesigned with `--shadow-surface` and `--shadow-overlay`
+- New background shade levels and soft color variants
+- Refined status colors (success, warning, danger)
+
+#### Component API Changes
+- **(⚠️ Breaking change)**: Chip `type` prop renamed to `color`, added `size` prop
+- Link component enhanced with `underline` and `underlineOffset` props
+- Improved TypeScript types across all components
 
 #### Flexible Component Patterns
 - Dual syntax support: use components with or without `.Root` suffix (e.g., `<Avatar>` or `<Avatar.Root>`)
 - Three equivalent patterns: compound without `.Root`, compound with `.Root`, named exports
 - Backward compatible with alpha.35 `.Root` pattern
 - **(⚠️ Breaking change)**: Type references require object syntax (`Avatar["RootProps"]` instead of `Avatar.RootProps`)
-
-#### Tabs Component Refactoring
 - **(⚠️ Breaking change)**: Renamed `TabListWrapper` → `TabListContainer` across all exports
-- Updated CSS class `.tabs__list-wrapper` → `.tabs__list-container`
-- Updated data attribute `data-slot="tabs-list-wrapper"` → `data-slot="tabs-list-container"`
-- Simple migration via global find and replace
 
-[Read full release notes →](/docs/changelog/v3-0-0-alpha-36)
+#### Performance Improvements
+- Tailwind CSS v4 migration for better performance
+- CSS native animations for smoother transitions
+- Reduced bundle size and faster runtime
+
+[Read full release notes →](/docs/changelog/v3-0-0-beta-1)
 
 ---
 
@@ -112,9 +139,9 @@ Card component redesigned with [new variants](/docs/components/card), added [Clo
 
 HeroUI v3 follows a regular release cycle:
 
-- **Alpha releases**: Weekly to bi-weekly during active development - In progress
-- **Beta releases**: Monthly stabilization releases (once first beta release is made)
-- **Stable releases**: Quarterly major versions (once first stable release is made)
+- **Alpha releases**: Weekly to bi-weekly during active development
+- **Beta releases**: Monthly stabilization releases - In progress
+- **Stable releases**: Quarterly major versions (Q4 2025 target)
 
 ## Contributing
 

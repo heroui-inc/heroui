@@ -1,4 +1,5 @@
 import {Avatar, Card} from "@heroui/react";
+import Image from "next/image";
 
 import {VerifiedBadgeIcon} from "@/icons/verified-badge";
 
@@ -8,10 +9,14 @@ export function XProfileDemo() {
       <Card.Header className="items-top w-full flex-row justify-between">
         <div className="flex items-center gap-3">
           <Avatar size="sm">
-            <Avatar.Image
-              alt="HeroUI"
-              src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-            />
+            <Avatar.Image asChild alt="HeroUI">
+              <Image
+                alt="HeroUI"
+                height={32}
+                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui_isotipo.png"
+                width={32}
+              />
+            </Avatar.Image>
             <Avatar.Fallback>H</Avatar.Fallback>
           </Avatar>
           <div className="flex h-full flex-col items-start justify-center">
