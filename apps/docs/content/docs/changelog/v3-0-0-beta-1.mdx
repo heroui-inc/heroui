@@ -65,29 +65,23 @@ The redesign brings:
 
 This release introduces **8 new** essential components:
 
-#### Alert
+- **[Alert](#alert)**: Display important messages and notifications with status indicators.
+- **[Checkbox & CheckboxGroup](#checkbox-checkboxgroup)**: Select multiple items from a list.
+- **[InputOTP](#inputotp)**: One-time password input for authentication flows.
+- **[Listbox](#listbox)**: Display a list of options and allow single or multiple selection.
+- **[Select](#select)**: Dropdown selection component built on top of Listbox.
+- **[Slider](#slider)**: Select a value from a range with custom marks and labels.
+- **[Surface](#surface)**: Base surface component for creating elevated containers.
 
-Display important messages and notifications to users with status indicators. Supports multiple variants (default, accent, success, warning, danger) and can include titles, descriptions, actions, and close buttons.
+<span id="alert"></span>
+### Alert
 
 <ComponentPreview
   name="alert-basic"
 />
 
-```tsx
-import { Alert } from "@heroui/react";
-
-<Alert status="success">
-  <Alert.Indicator />
-  <Alert.Content>
-    <Alert.Title>Success</Alert.Title>
-    <Alert.Description>Your changes have been saved.</Alert.Description>
-  </Alert.Content>
-</Alert>
-```
-
-#### Checkbox & CheckboxGroup
-
-Checkboxes allow users to select multiple items from a list. The Checkbox component works independently or grouped with CheckboxGroup for better form management.
+<span id="checkbox-checkboxgroup"></span>
+### Checkbox & CheckboxGroup
 
 <ComponentPreview
   name="checkbox-basic"
@@ -97,115 +91,40 @@ Checkboxes allow users to select multiple items from a list. The Checkbox compon
   name="checkbox-group-basic"
 />
 
-```tsx
-import { Checkbox, CheckboxGroup, Label } from "@heroui/react";
-
-<CheckboxGroup>
-  <Checkbox name="terms">
-    <Checkbox.Control>
-      <Checkbox.Indicator />
-    </Checkbox.Control>
-    <Label>Accept terms and conditions</Label>
-  </Checkbox>
-</CheckboxGroup>
-```
-
-#### InputOTP
-
-One-time password input component for authentication flows. Supports customizable slot counts, validation states, and visual feedback.
+<span id="inputotp"></span>
+### InputOTP
 
 <ComponentPreview
   name="input-otp-basic"
 />
 
-```tsx
-import { InputOTP } from "@heroui/react";
-
-<InputOTP maxLength={6}>
-  <InputOTP.Group>
-    <InputOTP.Slot index={0} />
-    <InputOTP.Slot index={1} />
-    <InputOTP.Slot index={2} />
-  </InputOTP.Group>
-</InputOTP>
-```
-
-#### Listbox
-
-A listbox displays a list of options and allows users to select one or more items. Supports single and multiple selection modes, sections, and custom rendering.
+<span id="listbox"></span>
+### Listbox
 
 <ComponentPreview
   name="listbox-default"
 />
 
-```tsx
-import { ListBox } from "@heroui/react";
-
-<ListBox aria-label="Options" selectionMode="single">
-  <ListBox.Item id="option1">Option 1</ListBox.Item>
-  <ListBox.Item id="option2">Option 2</ListBox.Item>
-</ListBox>
-```
-
-#### Select
-
-A select displays a collapsible list of options and allows users to select one of them. Built on top of Listbox, providing a familiar dropdown interface.
+<span id="select"></span>
+### Select
 
 <ComponentPreview
   name="select-default"
 />
 
-```tsx
-import { Select } from "@heroui/react";
-
-<Select aria-label="Choose an option">
-  <Select.Button>Select an option</Select.Button>
-  <Select.Popover>
-    <ListBox>
-      <ListBox.Item id="option1">Option 1</ListBox.Item>
-      <ListBox.Item id="option2">Option 2</ListBox.Item>
-    </ListBox>
-  </Select.Popover>
-</Select>
-```
-
-#### Slider
-
-A slider allows users to select a value from a range. Supports horizontal and vertical orientations, custom marks, labels, and output display.
+<span id="slider"></span>
+### Slider
 
 <ComponentPreview
   name="slider-default"
 />
 
-```tsx
-import { Slider } from "@heroui/react";
-
-<Slider defaultValue={50} minValue={0} maxValue={100}>
-  <Slider.Label>Volume</Slider.Label>
-  <Slider.Track>
-    <Slider.Fill />
-    <Slider.Thumb />
-  </Slider.Track>
-  <Slider.Output />
-</Slider>
-```
-
-#### Surface
-
-A base surface component for creating elevated containers. Useful for cards, panels, and other content containers that need consistent styling.
+<span id="surface"></span>
+### Surface
 
 <ComponentPreview
   name="surface-variants"
 />
-
-```tsx
-import { Surface } from "@heroui/react";
-
-<Surface>
-  <Surface.Header>Title</Surface.Header>
-  <Surface.Content>Content goes here</Surface.Content>
-</Surface>
-```
 
 ### Improved Component APIs
 
@@ -227,6 +146,20 @@ Several components have been refined with better APIs:
 
 <ComponentPreview
   name="chip-basic"
+/>
+
+- **Switch**: Redesigned from the ground up with improved visual design and animations
+
+<span id="switch"></span>
+<ComponentPreview
+  name="switch-basic"
+/>
+
+- **RadioGroup**: Redesigned from the ground up with better API and styling
+
+<span id="radiogroup"></span>
+<ComponentPreview
+  name="radio-group-basic"
 />
 
 ### Flexible Component Patterns
@@ -910,6 +843,7 @@ See what the community is saying: [HeroUI Native Reception](https://x.com/hero_u
 - [Design System - Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
 - [HeroUI Native](https://link.heroui.com/native)
 - [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #5872](https://github.com/heroui-inc/heroui/pull/5872)
 
 ## Contributors
 

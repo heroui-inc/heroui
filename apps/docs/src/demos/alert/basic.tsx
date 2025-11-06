@@ -34,42 +34,6 @@ export function Basic() {
         </Button>
       </Alert>
 
-      {/* Success - Confirmation */}
-      <Alert status="success">
-        <Alert.Indicator />
-        <Alert.Content>
-          <Alert.Title>Payment successful</Alert.Title>
-          <Alert.Description>
-            Your payment of $49.99 has been processed. A confirmation email has been sent to your
-            inbox.
-          </Alert.Description>
-          <Button className="mt-2 sm:hidden" size="sm" variant="secondary">
-            View Receipt
-          </Button>
-        </Alert.Content>
-        <Button className="hidden sm:block" size="sm" variant="secondary">
-          View Receipt
-        </Button>
-      </Alert>
-
-      {/* Warning - Attention needed */}
-      <Alert status="warning">
-        <Alert.Indicator />
-        <Alert.Content>
-          <Alert.Title>Storage almost full</Alert.Title>
-          <Alert.Description>
-            You're using 90% of your storage quota. Consider upgrading your plan or removing unused
-            files to avoid service interruption.
-          </Alert.Description>
-          <Button className="mt-2 sm:hidden" size="sm" variant="secondary">
-            Manage Storage
-          </Button>
-        </Alert.Content>
-        <Button className="hidden sm:block" size="sm" variant="secondary">
-          Manage Storage
-        </Button>
-      </Alert>
-
       {/* Danger - Error with detailed steps */}
       <Alert status="danger">
         <Alert.Indicator />
