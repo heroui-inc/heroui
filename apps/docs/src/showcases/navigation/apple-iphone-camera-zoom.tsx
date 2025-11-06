@@ -57,7 +57,7 @@ export default function AppleIPhoneCameraZoom() {
           <Tabs.ListContainer className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
             <Tabs.List
               aria-label="Camera zoom options"
-              className="bg-surface-3 *:text-muted w-fit min-w-min rounded-full *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
+              className="bg-surface-secondary *:text-muted w-fit min-w-min rounded-full *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
             >
               {zoomLevels.map((zoom) => (
                 <Tabs.Tab
