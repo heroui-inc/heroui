@@ -532,12 +532,6 @@ code {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
   }
 
-  /* Table of Contents */
-  #nd-tocnav {
-    background: rgba(10, 10, 10, 0.4);
-    border: 1px solid rgba(60, 60, 60, 0.5);
-  }
-
   /* Prose & Code Blocks */
   .prose {
     .shiki {
