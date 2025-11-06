@@ -6,6 +6,8 @@ import {Button, Spinner, Tooltip, cn} from "@heroui/react";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useIntersectionObserver} from "usehooks-ts";
 
+import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
+
 import {Iconify} from "./iconify";
 
 interface VideoPlayerProps {
@@ -31,6 +33,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const isMobile = useIsMobileDevice();
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -53,9 +56,12 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     [intersectionRef],
   );
 
-  // play video when it is visible and playMode is auto
+  // Determine effective play mode: force manual on mobile devices
+  const effectivePlayMode = isMobile ? "manual" : playMode;
+
+  // play video when it is visible and playMode is auto (only on non-mobile devices)
   useEffect(() => {
-    if (playMode !== "auto" || !videoRef.current) {
+    if (effectivePlayMode !== "auto" || !videoRef.current) {
       return;
     }
 
@@ -66,7 +72,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
       videoRef.current.pause();
       setIsPlaying(false);
     }
-  }, [isVisible, playMode]);
+  }, [isVisible, effectivePlayMode]);
 
   const handleCanPlay = useCallback(() => {
     setIsLoading(false);
@@ -106,10 +112,6 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     <div
       className="not-prose border-divider relative overflow-hidden rounded-xl border"
       data-playing={isPlaying}
-      style={{
-        height: height ? `${height}px` : "auto",
-        width: width ? `${width}px` : "100%",
-      }}
     >
       {isLoading ? (
         <Spinner
@@ -142,8 +144,9 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         ref={setVideoRef}
         loop
         muted
-        autoPlay={!!autoPlay && playMode === "auto"}
-        className={cn("object-fit w-full", className)}
+        playsInline
+        autoPlay={!!autoPlay && effectivePlayMode === "auto"}
+        className={cn("object-fit aspect-video w-full", className)}
         controls={controls}
         height={height}
         poster={poster}

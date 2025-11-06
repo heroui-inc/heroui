@@ -61,10 +61,19 @@ export function ComponentPreviewContainer({
         )}
         style={{
           contain: "layout style",
+          contentVisibility: "auto",
           isolation: "isolate",
         }}
       >
-        {previewInView ? Component : null}
+        <div
+          className="flex w-full items-center justify-center"
+          style={{
+            pointerEvents: previewInView ? "auto" : "none",
+            visibility: previewInView ? "visible" : "hidden",
+          }}
+        >
+          {Component}
+        </div>
       </div>
 
       {/* Code Section */}
@@ -72,8 +81,19 @@ export function ComponentPreviewContainer({
         <div
           ref={codeRef}
           className="code-section border-divider relative rounded-b-xl border bg-transparent"
+          style={{
+            contentVisibility: "auto",
+          }}
         >
-          <div className="code-block-wrapper min-h-[124px]">{codeInView ? Code : null}</div>
+          <div
+            className="code-block-wrapper min-h-[124px]"
+            style={{
+              pointerEvents: codeInView ? "auto" : "none",
+              visibility: codeInView ? "visible" : "hidden",
+            }}
+          >
+            {Code}
+          </div>
         </div>
       )}
     </div>

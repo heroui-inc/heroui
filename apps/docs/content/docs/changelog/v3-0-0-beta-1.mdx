@@ -48,12 +48,12 @@ We've spent weeks crafting a new design system that merges the soul of HeroUI v2
 
 <VideoPlayer
   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/videos/v3-beta-1.mp4"
-  poster="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-og_2x.jpg"
-  height={396}
+  poster="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/videos/v3-beta-1-poster.png"
+  height={430}
 />
 
 The redesign brings:
-- New color system that materializes v3's vision and stands out for its uniqueness
+- New color system that brings v3's vision to life and stands out for its uniqueness
 - Refined shadow system for better depth perception
 - New variables and tokens for better customization
 - Automatic `isOnSurface` support for form-based components
@@ -224,6 +224,21 @@ This provides:
 - **Flexibility**: Choose between compound pattern, compound with `.Root`, or named exports
 - **Backward Compatibility**: The `.Root` pattern still works
 - **Naming Consistency**: Standardized naming (e.g., "Container" instead of "Wrapper")
+
+### Global Animation Control
+
+HeroUI now supports easy global animation control through the `data-reduce-motion` attribute. Simply add `data-reduce-motion="true"` to your `<html>` or `<body>` tag to disable all animations across your application.
+
+```html
+<!DOCTYPE html>
+<html data-reduce-motion="true">
+  <!-- All HeroUI animations will be disabled -->
+</html>
+```
+
+HeroUI automatically respects user motion preferences using the `prefers-reduced-motion` media query and extends Tailwind's `motion-reduce:` variant to support both system preferences and manual control via the data attribute. This provides flexible control over animations while maintaining accessibility best practices.
+
+Learn more about animations and motion preferences in the [Animation documentation](/docs/handbook/animation).
 
 ## ⚠️ Breaking Changes
 

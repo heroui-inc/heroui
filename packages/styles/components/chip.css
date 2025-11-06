@@ -1,6 +1,6 @@
 /* Base styles */
 .chip {
-  @apply bg-default inline-flex items-center gap-1.5 rounded-2xl px-2 py-0.5 text-sm font-medium leading-5 sm:text-xs;
+  @apply bg-default inline-flex items-center gap-1.5 rounded-2xl px-2 py-0.5 text-sm font-medium leading-5;
 }
 
 /* Color variants */
@@ -46,7 +46,7 @@
 }
 
 .chip--lg {
-  @apply px-3 py-1 text-sm font-medium;
+  @apply px-3 py-1 font-medium;
 }
 
 /* ====================== */

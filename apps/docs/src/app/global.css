@@ -280,19 +280,20 @@
 
 #nd-tocnav {
   border-radius: 0rem;
-  top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 6px) !important;
+  top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 12px) !important;
   margin-right: 0rem;
   margin-left: 0rem;
   margin-top: 0px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px) saturate(120%) !important;
+  background: var(--background);
+  backdrop-filter: none !important;
   border-left: none !important;
   border-right: none !important;
   border-top: 1px solid var(--border) !important;
-  border-bottom: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--divider) !important;
 
   @media (min-width: 600px) {
     margin-right: 1rem;
+    border-bottom: 0px solid var(--divider) !important;
   }
 }
 
