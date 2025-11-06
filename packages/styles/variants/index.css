@@ -14,7 +14,7 @@
   }
 }
 
-@custom-variant dark {
+/* @custom-variant dark {
   &:is([data-theme="dark"]) {
     @slot;
   }
@@ -26,4 +26,4 @@
   @media (prefers-color-scheme: dark) {
     @slot;
   }
-}
+} */

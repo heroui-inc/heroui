@@ -1,25 +1,24 @@
-"use client";
-
 import Image from "next/image";
-import {useTheme} from "next-themes";
-import React from "react";
 
 interface DocsImageProps {
   src: string;
   darkSrc?: string;
   alt: string;
   className?: string;
+  width?: number;
+  height?: number;
+  priority?: boolean;
 }
 
 export function DocsImage({
   alt,
   className = "h-[220px] md:h-[340px]",
   darkSrc,
+  height = 1000,
+  priority = true,
   src,
+  width = 1000,
 }: DocsImageProps) {
-  const {resolvedTheme, theme} = useTheme();
-  const currentTheme = theme === "system" ? resolvedTheme : theme;
-
   const wrapperClasses = `not-prose border border-divider relative w-full overflow-hidden rounded-xl ${className}`;
 
   if (darkSrc) {
@@ -27,10 +26,19 @@ export function DocsImage({
       <div className={wrapperClasses}>
         <Image
           alt={alt}
-          className="absolute inset-0 h-full w-full object-cover"
-          height={1000}
-          src={currentTheme === "dark" ? darkSrc : src}
-          width={1000}
+          className="absolute inset-0 block h-full w-full object-cover dark:hidden"
+          height={height}
+          priority={priority}
+          src={src}
+          width={width}
+        />
+        <Image
+          alt={alt}
+          className="absolute inset-0 hidden h-full w-full object-cover dark:block"
+          height={height}
+          priority={priority}
+          src={darkSrc}
+          width={width}
         />
       </div>
     );
@@ -41,9 +49,10 @@ export function DocsImage({
       <Image
         alt={alt}
         className="absolute inset-0 h-full w-full object-cover"
-        height={1000}
+        height={height}
+        priority={priority}
         src={src}
-        width={1000}
+        width={width}
       />
     </div>
   );

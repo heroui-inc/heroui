@@ -23,6 +23,9 @@ const VersionChip = () => {
   );
 };
 
+export const dynamic = "force-static";
+export const revalidate = false;
+
 export default function HomePage() {
   return (
     <main className="flex h-[calc(100vh-4rem)] flex-col">
