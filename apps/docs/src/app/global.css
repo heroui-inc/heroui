@@ -183,6 +183,18 @@
   }
 }
 
+/* Nested items inside open groups */
+#nd-sidebar [data-state="open"] > [data-state="open"] {
+  padding: 4px 16px;
+
+  a {
+    padding-left: 14px;
+    &::before {
+      display: none;
+    }
+  }
+}
+
 /* External link icon for sidebar links */
 #nd-sidebar a[rel="noreferrer noopener"]::after {
   content: "";

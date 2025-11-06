@@ -26,13 +26,13 @@ export function ComponentPreviewContainer({
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
   const {isIntersecting: previewInView, ref: previewRef} = useIntersectionObserver({
     initialIsIntersecting: true,
-    rootMargin: "2000px 0px 100px 0px",
-    threshold: 0.1,
+    rootMargin: "400px 0px 100px 0px",
+    threshold: 0,
   });
   const {isIntersecting: codeInView, ref: codeRef} = useIntersectionObserver({
     initialIsIntersecting: true,
-    rootMargin: "2000px 0px 100px 0px",
-    threshold: 0.1,
+    rootMargin: "300px 0px 0px 0px",
+    threshold: 0,
   });
 
   const alignmentClasses = {
