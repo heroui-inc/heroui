@@ -146,10 +146,13 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const globalContext = useProviderContext();
   const {validationBehavior: formValidationBehavior} = useSlottedContext(FormContext) || {};
 
-  // State to control whether to skip text selection on focus, used to fix Firefox focus reset issue
+  // State management for custom focus and selection behavior
+  // shouldSkipSelect: Controls text selection on focus events
   const [shouldSkipSelect, setShouldSkipSelect] = useState(false);
-  // Ref to track the last key pressed, used to determine focus behavior
+  // lastKeyRef: Tracks the last key pressed to distinguish Tab navigation
   const lastKeyRef = useRef<string | null>(null);
+  // isMouseFocus: Tracks if current focus originated from mouse interaction
+  const [isMouseFocus, setIsMouseFocus] = useState(false);
 
   const [props, variantProps] = mapPropsVariants(originalProps, autocomplete.variantKeys);
   const disableAnimation =
@@ -217,13 +220,21 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     defaultFilter: defaultFilter && typeof defaultFilter === "function" ? defaultFilter : contains,
     onSelectionChange: (key) => {
       originalProps.onSelectionChange?.(key);
-      // Handle focus behavior after selection: skip text selection if last key was Tab to prevent Firefox focus reset
+      /**
+       * Post-selection behavior determination:
+       * - Tab selections: Allow text selection on next focus (set shouldSkipSelect = false)
+       * - Mouse/Other keyboard selections: Skip text selection, place caret at end (set shouldSkipSelect = true)
+       * - Reset lastKeyRef to prepare for next interaction
+       *
+       * This ensures Tab navigation selects all text for easy replacement,
+       * while mouse and keyboard selections position caret for continued editing.
+       */
       if (lastKeyRef.current === "Tab") {
-        setShouldSkipSelect(false);
+        setShouldSkipSelect(false); // Tab = select all on focus
       } else {
-        setShouldSkipSelect(true);
+        setShouldSkipSelect(true); // Mouse/Keyboard = caret at end
       }
-      lastKeyRef.current = null;
+      lastKeyRef.current = null; // Reset for next interaction
     },
     onOpenChange: (open, menuTrigger) => {
       onOpenChange?.(open, menuTrigger);
@@ -287,6 +298,13 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
             state.open();
           }
         },
+        /**
+         * Mouse interaction tracking:
+         * Sets isMouseFocus flag when user clicks on input.
+         * This allows the focus handler to distinguish mouse clicks from keyboard navigation,
+         * ensuring mouse clicks place caret at end while preserving Tab selection behavior.
+         */
+        onMouseDown: () => setIsMouseFocus(true),
         isClearable: false,
         disableAnimation,
       },
@@ -405,6 +423,32 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     }
   }, [state.isOpen, disableAnimation]);
 
+  /**
+   * Post-selection caret positioning for dropdown interactions:
+   *
+   * PROBLEM: When selecting items from dropdown via mouse, the input remains focused
+   * but React Aria doesn't trigger onFocus again, so our focus handler doesn't run.
+   *
+   * SOLUTION: Watch for selection changes and position caret at end for mouse interactions.
+   * - Uses useSafeLayoutEffect to run after DOM updates but before paint
+   * - Only applies when selection changed and lastKeyRef is null (mouse interaction)
+   * - Ensures input is still focused before setting selection
+   * - Provides consistent behavior regardless of how dropdown items are selected
+   */
+  const prevSelectedKeyRef = useRef(state.selectedKey);
+
+  useSafeLayoutEffect(() => {
+    if (state.selectedKey !== prevSelectedKeyRef.current && lastKeyRef.current === null) {
+      // Mouse selection from dropdown: ensure caret is at end
+      if (inputRef.current && document.activeElement === inputRef.current) {
+        const length = inputRef.current.value.length;
+
+        inputRef.current.setSelectionRange(length, length);
+      }
+    }
+    prevSelectedKeyRef.current = state.selectedKey;
+  }, [state.selectedKey]);
+
   useEffect(() => {
     if (isOpen) {
       // apply the same with to the popover as the select
@@ -428,7 +472,13 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       if ("continuePropagation" in e) {
         e.stopPropagation = () => {};
       }
-      // Track Tab key presses to adjust focus behavior and prevent unwanted text selection in Firefox
+      /**
+       * Tab key tracking for special focus behavior:
+       * - Tab navigation has unique UX expectations (select all text)
+       * - Other keyboard keys (Enter, arrows, etc.) should behave like mouse
+       * - This allows distinguishing Tab from other keyboard interactions
+       * - lastKeyRef is reset in onSelectionChange after use
+       */
       if (e.key === "Tab") {
         lastKeyRef.current = "Tab";
       }
@@ -514,25 +564,55 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         inputProps.onFocus,
         otherProps.onFocus,
         (e: React.FocusEvent<HTMLInputElement>) => {
-          // Custom focus behavior to fix Firefox focus reset issue: control text selection based on selection state
-          if (shouldSkipSelect) {
+          /**
+           * Intelligent focus behavior based on interaction type:
+           *
+           * MOUSE FOCUS (isMouseFocus = true):
+           * - Always place caret at end of text
+           * - Allows immediate editing without disrupting user intent
+           *
+           * KEYBOARD FOCUS (isMouseFocus = false):
+           * - Tab navigation: Select all text if it matches selected item (for easy replacement)
+           * - Other keyboard: Place caret at end (for continued editing)
+           *
+           * This provides the most intuitive experience:
+           * - Mouse users expect to edit where they clicked
+           * - Tab users expect to replace the entire value
+           * - Keyboard navigation maintains editing position
+           */
+          if (isMouseFocus) {
+            // Mouse-initiated focus: always place caret at end
             if (e.target.value) {
               const length = e.target.value.length;
 
               e.target.setSelectionRange(length, length);
             }
-          } else if (
-            e.target.value &&
-            state.selectedItem &&
-            e.target.value === state.selectedItem.textValue
-          ) {
-            e.target.select();
-          } else if (e.target.value) {
-            const length = e.target.value.length;
+          } else {
+            // Keyboard-initiated focus: conditional behavior
+            if (shouldSkipSelect) {
+              // Non-Tab keyboard or mouse selection: caret at end
+              if (e.target.value) {
+                const length = e.target.value.length;
 
-            e.target.setSelectionRange(length, length);
+                e.target.setSelectionRange(length, length);
+              }
+            } else if (
+              e.target.value &&
+              state.selectedItem &&
+              e.target.value === state.selectedItem.textValue
+            ) {
+              // Tab navigation with matching value: select all text
+              e.target.select();
+            } else if (e.target.value) {
+              // Fallback: caret at end
+              const length = e.target.value.length;
+
+              e.target.setSelectionRange(length, length);
+            }
           }
+          // Reset flags for next interaction
           setShouldSkipSelect(false);
+          setIsMouseFocus(false);
         },
       ),
     }) as unknown as InputProps;
