@@ -22,12 +22,22 @@
   /* Explicit: data-reduce-motion="true" on element or ancestor */
   &:is([data-reduce-motion="true"], [data-reduce-motion="true"] *) {
     @slot;
+
+    &::before,
+    &::after {
+      @slot;
+    }
   }
 
   /* Fallback: system prefers-reduced-motion setting */
   @media (prefers-reduced-motion: reduce) {
     &:not(:is([data-reduce-motion="true"], [data-reduce-motion="true"] *)) {
       @slot;
+
+      &::before,
+      &::after {
+        @slot;
+      }
     }
   }
 }
@@ -40,6 +50,11 @@
   /* Explicit: data-reduce-motion="false" on element or ancestor */
   &:is([data-reduce-motion="false"], [data-reduce-motion="false"] *) {
     @slot;
+
+    &::before,
+    &::after {
+      @slot;
+    }
   }
 
   /* Fallback: system has no motion preference set */
@@ -53,6 +68,11 @@
       )
     ) {
       @slot;
+
+      &::before,
+      &::after {
+        @slot;
+      }
     }
   }
 }
@@ -65,12 +85,22 @@
   /* Explicit: .dark class or data-theme="dark" on element or ancestor */
   &:is(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *) {
     @slot;
+
+    &::before,
+    &::after {
+      @slot;
+    }
   }
 
   /* Fallback: system prefers dark color scheme */
   @media (prefers-color-scheme: dark) {
     &:not(:is(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *)) & {
       @slot;
+
+      &::before,
+      &::after {
+        @slot;
+      }
     }
   }
 }
