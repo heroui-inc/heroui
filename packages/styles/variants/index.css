@@ -1,29 +1,76 @@
-/* === Reduced Motion Variant === */
+/**
+ * ================================================================================================
+ * HeroUI Custom Tailwind CSS Variants
+ * ================================================================================================
+ *
+ * Custom variants with intelligent fallback: explicit controls override system preferences.
+ *
+ * Usage:
+ *   motion-reduce:opacity-0      - Reduced motion accessibility
+ *   motion-safe:animate-spin     - Full motion effects
+ *   dark:bg-gray-900             - Dark mode styles
+ *
+ * Priority: Explicit data attributes/classes → System preferences (fallback)
+ * ================================================================================================
+ */
 
+/* -------------------------------------------------------------------------------------------------
+ * motion-reduce — Minimize animations for accessibility
+ * Priority: data-reduce-motion="true" → prefers-reduced-motion: reduce
+ * ------------------------------------------------------------------------------------------------- */
 @custom-variant motion-reduce {
-  &:is([data-reduce-motion="true"]) {
+  /* Explicit: data-reduce-motion="true" on element or ancestor */
+  &:is([data-reduce-motion="true"], [data-reduce-motion="true"] *) {
     @slot;
   }
 
-  &:where([data-reduce-motion="true"] *) {
-    @slot;
-  }
-
+  /* Fallback: system prefers-reduced-motion setting */
   @media (prefers-reduced-motion: reduce) {
-    @slot;
+    &:not(:is([data-reduce-motion="true"], [data-reduce-motion="true"] *)) {
+      @slot;
+    }
   }
 }
 
-/* @custom-variant dark {
-  &:is([data-theme="dark"]) {
+/* -------------------------------------------------------------------------------------------------
+ * motion-safe — Enable full animations and transitions
+ * Priority: data-reduce-motion="false" → prefers-reduced-motion: no-preference
+ * ------------------------------------------------------------------------------------------------- */
+@custom-variant motion-safe {
+  /* Explicit: data-reduce-motion="false" on element or ancestor */
+  &:is([data-reduce-motion="false"], [data-reduce-motion="false"] *) {
     @slot;
   }
 
-  &:where([data-theme="dark"] *) {
+  /* Fallback: system has no motion preference set */
+  @media (prefers-reduced-motion: no-preference) {
+    &:not(
+      :is(
+        [data-reduce-motion="true"],
+        [data-reduce-motion="true"] *,
+        [data-reduce-motion="false"],
+        [data-reduce-motion="false"] *
+      )
+    ) {
+      @slot;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * dark — Dark mode styles
+ * Priority: .dark class / data-theme="dark" → prefers-color-scheme: dark
+ * ------------------------------------------------------------------------------------------------- */
+@custom-variant dark {
+  /* Explicit: .dark class or data-theme="dark" on element or ancestor */
+  &:is(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *) {
     @slot;
   }
 
+  /* Fallback: system prefers dark color scheme */
   @media (prefers-color-scheme: dark) {
-    @slot;
+    &:not(:is(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *)) & {
+      @slot;
+    }
   }
-} */
+}
