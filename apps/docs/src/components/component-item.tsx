@@ -23,9 +23,9 @@ export function ComponentItem({className, component}: ComponentItemProps) {
         <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
           <Image
             alt={title}
-            height={297}
+            height={594}
             src={`https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/related-components/${theme === "dark" ? "dark" : "light"}-${title.toLowerCase()}.png`}
-            width={437}
+            width={874}
           />
         </Link>
       </div>
