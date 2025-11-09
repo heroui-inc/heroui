@@ -2,7 +2,10 @@
 
 import type {ComponentInfo} from "../components-registry";
 
-import {LinkIcon} from "@/icons/link";
+import {Link} from "@heroui/react";
+import Image from "next/image";
+import {useTheme} from "next-themes";
+
 import {cn} from "@/utils/cn";
 
 interface ComponentItemProps extends React.ComponentProps<"div"> {
@@ -10,25 +13,26 @@ interface ComponentItemProps extends React.ComponentProps<"div"> {
   className?: string;
 }
 
-export function ComponentItem({className, component, ...props}: ComponentItemProps) {
+export function ComponentItem({className, component}: ComponentItemProps) {
   const {href, title} = component;
+  const {theme} = useTheme();
 
   return (
-    <a className="block" href={href} rel="noopener noreferrer" target="_blank">
-      <div
-        className={cn(
-          "bg-surface group relative flex h-full flex-col gap-3 rounded-xl p-5 py-4",
-          className,
-        )}
-        {...props}
-      >
-        <div className="flex flex-col gap-1">
-          <h3 className="text-sm font-semibold">{title}</h3>
-        </div>
-        <span className="absolute right-3 top-3">
-          <LinkIcon className="group-hover:text-muted text-muted/30 size-4 transition-all duration-200" />
-        </span>
+    <div className={cn("flex flex-col gap-[9px]", className)}>
+      <div className="border-divider flex rounded-xl border">
+        <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
+          <Image
+            alt={title}
+            height={297}
+            src={`https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/related-components/${theme === "dark" ? "dark" : "light"}-${title.toLowerCase()}.png`}
+            width={437}
+          />
+        </Link>
       </div>
-    </a>
+      <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
+        {title}
+        <Link.Icon />
+      </Link>
+    </div>
   );
 }
