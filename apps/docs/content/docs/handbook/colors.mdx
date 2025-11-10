@@ -13,10 +13,13 @@ HeroUI uses CSS variables for colors that automatically switch between light and
 
 ## How It Works
 
-HeroUI's color system is built on top of Tailwind CSS v4's theme. When you import `@heroui/styles`, it uses Tailwind's built-in color palettes (like `--color-neutral-*`) and maps them to semantic variables.
+HeroUI's color system is built on top of Tailwind CSS v4's theme. When you import `@heroui/styles`, it uses Tailwind's built-in color palettes and maps them to semantic variables.
 
-Add a theme class to your HTML and apply colors to the body:
+**Naming pattern:**
+- Colors without a suffix are backgrounds (e.g., `--accent`)
+- Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
 
+**Usage:**
 ```html
 <html class="light" data-theme="light">
   <body class="bg-background text-foreground">
@@ -24,10 +27,6 @@ Add a theme class to your HTML and apply colors to the body:
   </body>
 </html>
 ```
-
-We follow a simple naming pattern:
-- Colors without a suffix are backgrounds (e.g., `--accent`)
-- Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
 
 ```tsx
 // This gives you the right background and text colors
@@ -60,8 +59,8 @@ These four colors stay the same in all themes:
 
 ### Primary Colors
 
-- **Accent**: Your main brand color (used for primary actions)
-- **Accent Soft**: A lighter version for secondary actions
+**Accent** — Your main brand color (used for primary actions)  
+**Accent Soft** — A lighter version for secondary actions
 
 <ColorPalette
   colors={[
@@ -116,10 +115,8 @@ For consistent form field styling across input components:
 
 ## How to Use Colors
 
-### In Your Components
-
+**In your components:**
 ```jsx
-// Use Tailwind classes
 <div className="bg-background text-foreground">
   <button className="bg-accent text-accent-foreground hover:bg-accent-hover">
     Click me
@@ -127,7 +124,7 @@ For consistent form field styling across input components:
 </div>
 ```
 
-### In CSS Files
+**In CSS files:**
 
 ```css title="global.css"
 /* Direct CSS variables */
@@ -310,7 +307,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
 
 ## Customizing Colors
 
-### Override Existing Colors
+**Override existing colors:**
 
 ```css
 :root {
@@ -326,9 +323,9 @@ The complete theme definition can be found in ([variables.css](https://github.co
 }
 ```
 
-**Tip**: Convert colors at [oklch.com](https://oklch.com)
+**Tip:** Convert colors at [oklch.com](https://oklch.com)
 
-### Add Your Own Colors
+**Add your own colors:**
 
 ```css
 :root, 

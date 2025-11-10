@@ -4,19 +4,13 @@ description: Build flexible UI with component composition patterns
 icon: layers
 ---
 
-## Overview
-
-HeroUI uses composition patterns to create flexible, customizable components. This allows you to:
-
-- Change the rendered element or component
-- Compose components together
-- Maintain full control over markup
+HeroUI uses composition patterns to create flexible, customizable components. Change the rendered element, compose components together, and maintain full control over markup.
 
 ## The asChild Prop
 
-The `asChild` prop lets you change what element a component renders. When `asChild` is true, HeroUI won't render its default element - instead, it clones the child element and merges props.
+The `asChild` prop lets you change what element a component renders. When `asChild` is true, HeroUI clones the child element and merges props instead of rendering its default element.
 
-### Basic Usage
+**Basic usage:**
 
 ```tsx
 import { Button } from '@heroui/react';
@@ -33,22 +27,41 @@ import Link from 'next/link';
 </Button>
 ```
 
-### Available Components
+**Available components:** `Button`, `Alert` and its parts, `Avatar` and its parts, and all other HeroUI components with root elements support `asChild`.
 
-These components support `asChild`:
+## Direct Class Application
 
-- `Button` - Change button element
-- `Alert` and its parts - `Alert` (or `Alert.Root`), `Alert.Icon`, `Alert.Content`, `Alert.Title`, `Alert.Description`, `Alert.Action`, `Alert.Close`
-- `Avatar` and its parts - `Avatar` (or `Avatar.Root`), `Avatar.Image`, `Avatar.Fallback`
-- All other HeroUI components with root elements
+The simplest way to style links or other elements is to apply HeroUI's [BEM](https://getbem.com/) classes directly. This is often simpler than using `asChild` or variant functions.
+
+**With Next.js Link:**
+```tsx
+import Link from 'next/link';
+
+<Link className="button button--tertiary" href="/">
+  Return Home
+</Link>
+```
+
+**With native anchor:**
+```tsx
+<a className="button button--primary" href="/dashboard">
+  Go to Dashboard
+</a>
+```
+
+**Available button classes:**
+- `.button` — Base button styles
+- `.button--primary`, `.button--secondary`, `.button--tertiary`, `.button--danger`, `.button--ghost` — Variants
+- `.button--sm`, `.button--md`, `.button--lg` — Sizes
+- `.button--icon-only` — Icon-only button
+
+This approach works because HeroUI uses [BEM](https://getbem.com/) classes that can be applied to any element. It's perfect when you don't need the component's interactive features (like `onPress` handlers) and just want the visual styling.
 
 ## Compound Components
 
-HeroUI components are built as compound components - they export multiple parts that work together. You can use them in three flexible ways:
+HeroUI components are built as compound components—they export multiple parts that work together. Use them in three flexible ways:
 
-### Option 1: Compound Pattern (Recommended)
-
-Use the main component directly without `.Root` suffix:
+**Option 1: Compound pattern (recommended)** — Use the main component directly without `.Root` suffix:
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -63,9 +76,7 @@ import { Alert } from '@heroui/react';
 </Alert>
 ```
 
-### Option 2: Compound Pattern with .Root
-
-Use the `.Root` suffix if you prefer explicit naming:
+**Option 2: Compound pattern with .Root** — Use the `.Root` suffix if you prefer explicit naming:
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -80,9 +91,7 @@ import { Alert } from '@heroui/react';
 </Alert.Root>
 ```
 
-### Option 3: Named Exports
-
-Import each part separately:
+**Option 3: Named exports** — Import each part separately:
 
 ```tsx
 import {
@@ -104,9 +113,7 @@ import {
 </AlertRoot>
 ```
 
-### Mixed Syntax
-
-You can mix compound and named exports in the same component:
+**Mixed syntax:** Mix compound and named exports in the same component:
 
 ```tsx
 import { Alert, AlertTitle, AlertDescription } from '@heroui/react';
@@ -121,9 +128,7 @@ import { Alert, AlertTitle, AlertDescription } from '@heroui/react';
 </Alert>
 ```
 
-### Simple Components
-
-Simple components like `Button` work the same way - no `.Root` needed:
+**Simple components:** Simple components like `Button` work the same way—no `.Root` needed:
 
 ```tsx
 import { Button } from '@heroui/react';
@@ -139,22 +144,13 @@ import { ButtonRoot } from '@heroui/react';
 <ButtonRoot>Click me</ButtonRoot>
 ```
 
-### Benefits of Compound Components
-
-All three patterns provide:
-
-- **Flexibility** - Arrange parts as needed
-- **Customization** - Style each part independently
-- **Control** - Add or remove parts
-- **Consistency** - Choose the pattern that fits your codebase
+**Benefits:** All three patterns provide flexibility, customization, control, and consistency. Choose the pattern that fits your codebase.
 
 ## Style Variants
 
-HeroUI exports variant functions that can be applied to any component. This allows you to use HeroUI's design system with any element or component:
+HeroUI exports variant functions that can be applied to any component. Use HeroUI's design system with any element or component.
 
-### Using buttonVariants
-
-Apply button styles to any component:
+**Using buttonVariants:**
 
 ```tsx
 import { Link, LinkIcon, buttonVariants } from '@heroui/react';
@@ -182,15 +178,7 @@ import { Link, LinkIcon, buttonVariants } from '@heroui/react';
 </a>
 ```
 
-### Available Variant Functions
-
-Each component exports its variant function:
-
-- `buttonVariants` - Button styles
-- `chipVariants` - Chip styles
-- `linkVariants` - Link styles
-- `spinnerVariants` - Spinner styles
-- More variant functions for each component
+**Available variant functions:** Each component exports its variant function (`buttonVariants`, `chipVariants`, `linkVariants`, `spinnerVariants`, and more).
 
 ## Custom Components
 
@@ -225,7 +213,7 @@ function IconButton({ icon, label, ...props }) {
 
 ## Custom Variants
 
-You can create your own custom variants by extending the component's variant function.
+Create custom variants by extending the component's variant function:
 
 ```tsx
 import type { ButtonRootProps } from "@heroui/react";
@@ -273,11 +261,9 @@ export function CustomVariants() {
 }
 ```
 
-### Type References
+**Type references:** When working with component types, use named type imports or object-style syntax.
 
-When working with component types, use named type imports or object-style syntax:
-
-**Recommended - Named type imports:**
+**Recommended — Named type imports:**
 ```tsx
 import type { ButtonRootProps, AvatarRootProps } from "@heroui/react";
 
@@ -285,7 +271,7 @@ type MyButtonProps = ButtonRootProps;
 type MyAvatarProps = AvatarRootProps;
 ```
 
-**Alternative - Object-style syntax:**
+**Alternative — Object-style syntax:**
 ```tsx
 import { Button, Avatar } from "@heroui/react";
 
@@ -296,10 +282,11 @@ type MyAvatarProps = Avatar["RootProps"];
 **Note:** The namespace syntax `Button.RootProps` is no longer supported. Use `Button["RootProps"]` or named imports instead.
 
 
-## With Next.js
+## Framework Integration
 
-Use `asChild` to integrate with Next.js:
+**With Next.js:**
 
+You can use `asChild`:
 ```tsx
 import Link from 'next/link';
 import { Button } from '@heroui/react';
@@ -309,10 +296,18 @@ import { Button } from '@heroui/react';
 </Button>
 ```
 
-## With React Router
+Or apply classes directly (simpler):
+```tsx
+import Link from 'next/link';
 
-Use `asChild` to integrate with routing libraries:
+<Link className="button button--primary" href="/dashboard">
+  Dashboard
+</Link>
+```
 
+**With React Router:**
+
+You can use `asChild`:
 ```tsx
 import { Link } from 'react-router-dom';
 import { Button } from '@heroui/react';
@@ -320,6 +315,15 @@ import { Button } from '@heroui/react';
 <Button asChild variant="primary">
   <Link to="/dashboard">Dashboard</Link>
 </Button>
+```
+
+Or apply classes directly (simpler):
+```tsx
+import { Link } from 'react-router-dom';
+
+<Link className="button button--primary" to="/dashboard">
+  Dashboard
+</Link>
 ```
 
 

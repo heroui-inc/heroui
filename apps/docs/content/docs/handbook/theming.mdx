@@ -7,28 +7,19 @@ links:
   tailwind: theme
 ---
 
-## Overview
-
-HeroUI uses CSS variables and [BEM](https://getbem.com/) classes for theming. You can customize everything from colors to component styles using standard CSS.
+HeroUI uses CSS variables and [BEM](https://getbem.com/) classes for theming. Customize everything from colors to component styles using standard CSS.
 
 ## How It Works
 
-HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss.com/docs/theme)'s theme. When you import `@heroui/styles`, it:
+HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss.com/docs/theme)'s theme. When you import `@heroui/styles`, it uses Tailwind's built-in color palettes, maps them to semantic variables, automatically switches between light and dark themes, and uses CSS layers and the `@theme` directive for organization.
 
-1. Uses Tailwind's built-in color palettes (like `--color-neutral-*`)
-2. Maps them to semantic variables for easier use
-3. Automatically switches between light and dark themes
-4. Uses CSS layers and the `@theme` directive for organization
-
-The system follows a simple naming pattern:
+**Naming pattern:**
 - Colors without a suffix are backgrounds (e.g., `--accent`)
 - Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
 
 ## Quick Start
 
-### Apply a Theme
-
-Add a theme class to your HTML and apply colors to the body:
+**Apply a theme:** Add a theme class to your HTML and apply colors to the body:
 
 ```html
 <html class="light" data-theme="light">
@@ -38,8 +29,7 @@ Add a theme class to your HTML and apply colors to the body:
 </html>
 ```
 
-### Switch Themes
-
+**Switch themes:**
 ```html
 <!-- Light theme -->
 <html class="light" data-theme="light">
@@ -48,7 +38,7 @@ Add a theme class to your HTML and apply colors to the body:
 <html class="dark" data-theme="dark">
 ```
 
-### Override Colors
+**Override colors:**
 
 ```css
 /* app/globals.css */
@@ -64,7 +54,7 @@ Add a theme class to your HTML and apply colors to the body:
 
 > **Note**: See [Colors](/docs/handbook/colors) for the complete color palette and visual reference.
 
-### Create your own theme
+**Create your own theme:**
 
 <CollapsibleCode lang="css" code={`/* src/themes/ocean.css */
 @layer base {
@@ -237,9 +227,7 @@ Apply your theme:
 
 ## Customize Components
 
-### Global Component Styles
-
-Override any component using BEM classes:
+**Global component styles:** Override any component using BEM classes:
 
 ```css
 @layer components {
@@ -261,31 +249,18 @@ Override any component using BEM classes:
 
 > **Note**: See [Styling](/docs/handbook/styling) for the complete styling reference.
 
-### Find Component Classes
-
-Each component docs page lists all available classes:
-
-- **Base classes**: `.button`, `.accordion`
-- **Modifiers**: `.button--primary`, `.button--icon-only`
-- **Elements**: `.accordion__trigger`, `.accordion__panel`
-- **States**: `[data-hovered="true"]`, `[aria-expanded="true"]`
-
-Example: [Button classes](/docs/components/button#css-classes)
+**Find component classes:** Each component docs page lists all available classes (base classes, modifiers, elements, states). Example: [Button classes](/docs/components/button#css-classes)
 
 ## Import Strategies
 
-### Full Import (Recommended)
-
-Get everything with two lines:
+**Full import (recommended):** Get everything with two lines:
 
 ```css
 @import "tailwindcss";
 @import "@heroui/styles";
 ```
 
-### Selective Import
-
-Import only what you need:
+**Selective import:** Import only what you need:
 
 ```css
 /* Define layers */
@@ -304,9 +279,7 @@ Import only what you need:
 @import "@heroui/styles/components/accordion.css" layer(components);
 ```
 
-### Headless Mode
-
-Build your own styles from scratch:
+**Headless mode:** Build your own styles from scratch:
 
 ```css
 @import "tailwindcss";
@@ -320,7 +293,7 @@ Build your own styles from scratch:
 
 ## Adding Custom Colors
 
-You can add your own semantic colors to the theme:
+Add your own semantic colors to the theme:
 
 ```css
 /* Define in both light and dark themes */
@@ -352,17 +325,13 @@ Now use it in your components:
 ## Variables Reference
 
 HeroUI defines three types of variables:
+1. **Base Variables** — Non-changing values like `--white`, `--black`, spacing, and typography
+2. **Theme Variables** — Colors that change between light/dark themes
+3. **Calculated Variables** — Automatically generated hover states and size variants
 
-1. **Base Variables**: Non-changing values like `--white`, `--black`, spacing, and typography
-2. **Theme Variables**: Colors that change between light/dark themes
-3. **Calculated Variables**: Automatically generated hover states and size variants
+For a complete reference, see: [Colors Documentation](/docs/handbook/colors), [Default Theme Variables](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css), [Shared Theme Utilities](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
 
-For a complete reference of all variables and their values, see:
-- [Colors Documentation](/docs/handbook/colors) - Visual color palette and base variables
-- [Default Theme Variables](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) - Complete theme variables
-- [Shared Theme Utilities](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css) - Calculated variables and utilities
-
-### Calculated Variables (Tailwind)
+**Calculated variables (Tailwind):**
 
 We use Tailwind's `@theme` directive to automatically create calculated variables for hover states and radius variants. These are defined in `themes/shared/theme.css`:
 <CollapsibleCode lang="css" code={`  @theme inline {
