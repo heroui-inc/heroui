@@ -33,7 +33,7 @@ export const homeLayoutLinks = [
       {
         icon: <Iconify icon="circles-4-diamond" />,
         text: "Components",
-        url: "/docs/components",
+        url: "/docs/components-list",
       },
     ],
     on: "menu" as const,
