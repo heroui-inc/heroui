@@ -1,33 +1,33 @@
-import {Tab, TabIndicator, TabList, TabListContainer, TabPanel, TabsRoot} from "@heroui/react";
+import {Tabs} from "@heroui/react";
 
 export function Basic() {
   return (
-    <TabsRoot className="w-full max-w-md">
-      <TabListContainer>
-        <TabList aria-label="Options">
-          <Tab id="overview">
+    <Tabs className="w-full max-w-md">
+      <Tabs.ListContainer>
+        <Tabs.List aria-label="Options">
+          <Tabs.Tab id="overview">
             Overview
-            <TabIndicator />
-          </Tab>
-          <Tab id="analytics">
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="analytics">
             Analytics
-            <TabIndicator />
-          </Tab>
-          <Tab id="reports">
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="reports">
             Reports
-            <TabIndicator />
-          </Tab>
-        </TabList>
-      </TabListContainer>
-      <TabPanel className="pt-4" id="overview">
+            <Tabs.Indicator />
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListContainer>
+      <Tabs.Panel className="pt-4" id="overview">
         <p>View your project overview and recent activity.</p>
-      </TabPanel>
-      <TabPanel className="pt-4" id="analytics">
+      </Tabs.Panel>
+      <Tabs.Panel className="pt-4" id="analytics">
         <p>Track your metrics and analyze performance data.</p>
-      </TabPanel>
-      <TabPanel className="pt-4" id="reports">
+      </Tabs.Panel>
+      <Tabs.Panel className="pt-4" id="reports">
         <p>Generate and download detailed reports.</p>
-      </TabPanel>
-    </TabsRoot>
+      </Tabs.Panel>
+    </Tabs>
   );
 }

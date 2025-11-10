@@ -1,11 +1,11 @@
-import {SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
+import {Switch} from "@heroui/react";
 
 export function WithoutLabel() {
   return (
-    <SwitchRoot aria-label="Enable notifications">
-      <SwitchControl>
-        <SwitchThumb />
-      </SwitchControl>
-    </SwitchRoot>
+    <Switch aria-label="Enable notifications">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+    </Switch>
   );
 }
