@@ -254,8 +254,8 @@ const componentRelationships: Record<string, string[]> = {
   avatar: [],
   button: ["popover", "tooltip", "form", "alert", "closebutton"],
   card: ["surface"],
-  checkbox: ["label", "checkboxgroup"],
-  checkboxgroup: ["checkbox", "label", "fieldset", "surface"],
+  checkbox: ["label", "checkboxgroup", "description"],
+  checkboxgroup: ["checkbox", "label", "fieldset", "surface", "description"],
   chip: ["avatar", "closebutton"],
   closebutton: ["alert", "chip"],
   description: [
@@ -289,7 +289,7 @@ const componentRelationships: Record<string, string[]> = {
     "slider",
     "inputotp",
   ],
-  input: ["textfield", "textarea", "label", "fielderror", "form", "surface"],
+  input: ["textfield", "textarea", "label", "fielderror", "form", "surface", "description"],
   inputotp: ["input", "form", "surface"],
   kbd: [],
   label: [
@@ -306,11 +306,11 @@ const componentRelationships: Record<string, string[]> = {
   link: [],
   listbox: ["select"],
   popover: ["button", "tooltip", "select"],
-  radiogroup: ["fieldset", "surface"],
-  select: ["listbox", "popover", "label", "fielderror", "form", "surface"],
+  radiogroup: ["fieldset", "surface", "description"],
+  select: ["listbox", "popover", "label", "fielderror", "form", "surface", "description"],
   separator: ["card"],
   skeleton: ["card", "avatar"],
-  slider: ["label", "form"],
+  slider: ["label", "form", "description"],
   spinner: [],
   surface: [
     "checkboxgroup",
@@ -323,10 +323,10 @@ const componentRelationships: Record<string, string[]> = {
     "textarea",
     "card",
   ],
-  switch: ["label"],
+  switch: ["label", "description"],
   tabs: [],
-  textarea: ["textfield", "input", "label", "fielderror", "form", "surface"],
-  textfield: ["input", "textarea", "fieldset", "label", "fielderror", "surface"],
+  textarea: ["textfield", "input", "label", "fielderror", "form", "surface", "description"],
+  textfield: ["input", "textarea", "fieldset", "label", "fielderror", "surface", "description"],
   tooltip: ["button", "popover"],
 };
 
