@@ -75,7 +75,7 @@ export const homeLayoutLinks = [
     active: "none" as const,
     on: "nav" as const,
     text: "Components",
-    url: "/docs/components/accordion",
+    url: "/docs/components-list",
   },
   {
     active: "nested-url" as const,
