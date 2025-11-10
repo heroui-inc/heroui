@@ -41,10 +41,7 @@ export default function HomePage() {
             deliver delightful user experiences.
           </p>
           <div className="mt-2 flex gap-3">
-            <LinkRoot
-              className={buttonVariants({variant: "primary"})}
-              href="/docs/components/accordion"
-            >
+            <LinkRoot className={buttonVariants({variant: "primary"})} href="/docs/components-list">
               View components
             </LinkRoot>
             <GitHubLink>Stars</GitHubLink>

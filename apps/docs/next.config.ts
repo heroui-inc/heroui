@@ -58,12 +58,12 @@ const config: NextConfig = {
         source: "/docs",
       },
       {
-        destination: "/docs/components/accordion",
+        destination: "/docs/components-list",
         permanent: true,
         source: "/docs/components",
       },
       {
-        destination: "/docs/components/accordion",
+        destination: "/docs/components-list",
         permanent: true,
         source: "/components",
       },
