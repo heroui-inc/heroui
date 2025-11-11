@@ -5,7 +5,7 @@ description: Learn how to create new variants for the HeroUI components.
 
 # Custom Variants
 
-HeroUI allows you to create new variants for components by extending and customizing their styles. You can override the component's `variants`, `defaultVariants` and `compoundVariants`.
+HeroUI allows you to create new variants for components by extending and customizing their styles. You can override the component's `variants`, `defaultVariants`, `compoundVariants`, and `slots`.
 
 <CarbonAd/>
 
@@ -215,6 +215,25 @@ import customVariantsSlots from "@/content/customization/custom-variants/slots-c
   Use the `Styles source` link at the top of each component page to view its source code as a reference for customization.
 </Blockquote>
 
+## Overriding base component slots
+
+You can also override base component slots directly using the `slots` option. This is useful when you want to apply styles to specific slots globally, regardless of variants. Variant-based slot overrides will still work and will be merged with the base slots.
+
+```tsx
+// MyInput.tsx
+import {extendVariants, Input} from "@heroui/react";
+
+const MyInput = extendVariants(Input, {
+  slots: {
+    label: "!font-medium", // Override the label slot globally
+  },
+});
+
+// Usage
+<MyInput label="My label" labelPlacement="outside-top" />
+```
+
+
 ### Types
 
 ### Main Function
@@ -236,6 +255,7 @@ type ExtendVariantsOptions = {
   variants?: Record<string, Record<string, ClassValue>>;
   defaultVariants?: Record<string, ClassValue>;
   compoundVariants?: Array<Record<string, string> & ClassProp>;
+  slots?: Record<string, ClassValue>;
 };
 ```
 

@@ -102,9 +102,12 @@ function getClassNamesWithProps({
 }
 
 export function extendVariants(BaseComponent, styles = {}, opts = {}) {
-  const {variants, defaultVariants, compoundVariants} = styles || {};
+  const {variants, defaultVariants, compoundVariants, slots: directSlots} = styles || {};
 
-  const slots = getSlots(variants);
+  const inferredSlots = getSlots(variants);
+
+  const slots = directSlots ? {...inferredSlots, ...directSlots} : inferredSlots;
+
   const hasSlots = typeof slots === "object" && Object.keys(slots).length !== 0;
 
   const ForwardedComponent = React.forwardRef((originalProps = {}, ref) => {
