@@ -3,14 +3,20 @@
 import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
 import Link from "next/link";
 
+import {cn} from "@/utils/cn";
 import {currentVersion} from "@/utils/version";
 
 import {Iconify} from "./iconify";
 
-export function VersionSelector() {
+export function VersionSelector({className}: {className?: string}) {
   return (
     <Popover>
-      <PopoverTrigger className="text-muted flex items-center gap-1.5 py-1 text-left text-xs font-medium transition-opacity hover:opacity-80 sm:text-sm">
+      <PopoverTrigger
+        className={cn(
+          "text-muted flex items-center gap-1.5 py-1 text-left text-xs font-medium transition-opacity hover:opacity-80 sm:text-sm",
+          className,
+        )}
+      >
         <span className="max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap">
           {currentVersion}
         </span>

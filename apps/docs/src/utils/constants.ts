@@ -35,3 +35,5 @@ export const STORYBOOK_URL = __DEV__
   : __IS_PRE_RELEASE__ || __PREVIEW__
     ? "https://storybook-v3.heroui.com"
     : "https://storybook.heroui.com";
+
+export const CDN_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com";

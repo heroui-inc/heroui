@@ -55,13 +55,15 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
               <StatusChip className="mb-1.5 w-fit" status={page.data.icon as StatusChipStatus} />
             )}
           </DocsTitle>
-          <div className="flex items-center gap-2">
-            <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
-            <ViewOptions
-              githubUrl={`${DOCS_CONTENT_PATH}/${page.path}`}
-              markdownUrl={`${page.url}.mdx`}
-            />
-          </div>
+          {page.data.toc.length > 0 && (
+            <div className="flex items-center gap-2">
+              <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
+              <ViewOptions
+                githubUrl={`${DOCS_CONTENT_PATH}/${page.path}`}
+                markdownUrl={`${page.url}.mdx`}
+              />
+            </div>
+          )}
         </div>
         <DocsDescription className="text-md mb-4 mt-2">{page.data.description}</DocsDescription>
         {!!links && <ComponentLinks links={links} />}

@@ -4,13 +4,7 @@ description: Add smooth animations and transitions to HeroUI v3 components
 icon: copy-transparent
 ---
 
-## Overview
-
-HeroUI components are built on React Aria and support multiple animation approaches:
-
-- **Built-in animations** - Components come with default CSS transitions
-- **CSS animations** - Customize with Tailwind utilities or custom CSS
-- **JavaScript libraries** - Integrate with Framer Motion, React Spring, etc.
+HeroUI components support multiple animation approaches: built-in CSS transitions, custom CSS animations, and JavaScript libraries like Framer Motion.
 
 ## Built-in Animations
 
@@ -38,10 +32,7 @@ HeroUI components use data attributes to expose their state for animation:
 }
 ```
 
-### State Attributes
-
-Components expose these states for styling:
-
+**State attributes for styling:**
 - `[data-hovered="true"]` - Hover state
 - `[data-pressed="true"]` - Active/pressed state
 - `[data-focus-visible="true"]` - Keyboard focus
@@ -51,7 +42,7 @@ Components expose these states for styling:
 
 ## CSS Animations
 
-### Using Tailwind Utilities
+**Using Tailwind utilities:**
 
 ```tsx
 // Pulse on hover
@@ -71,9 +62,7 @@ Components expose these states for styling:
 </div>
 ```
 
-### Custom Transitions
-
-Override default component animations:
+**Custom transitions:**
 
 ```css
 /* Slower accordion */
@@ -95,7 +84,7 @@ Override default component animations:
 
 HeroUI components work seamlessly with Framer Motion for advanced animations.
 
-### Basic Usage
+**Basic usage:**
 
 ```tsx
 import { motion } from 'framer-motion';
@@ -111,7 +100,7 @@ const MotionButton = motion(Button);
 </MotionButton>
 ```
 
-### Entrance Animations
+**Entrance animations:**
 
 ```tsx
 <motion.div
@@ -125,7 +114,7 @@ const MotionButton = motion(Button);
 </motion.div>
 ```
 
-### Layout Animations
+**Layout animations:**
 
 ```tsx
 import { AnimatePresence, motion } from 'framer-motion';
@@ -152,7 +141,7 @@ function Tabs({ items, selected }) {
 
 ## Render Props
 
-Use render props to apply dynamic animations based on component state:
+Apply dynamic animations based on component state:
 
 ```tsx
 <Button>
@@ -170,11 +159,9 @@ Use render props to apply dynamic animations based on component state:
 
 ## Accessibility
 
-### Respecting Motion Preferences
+**Respecting motion preferences:** HeroUI automatically respects user motion preferences using Tailwind's `motion-reduce:` utility. All built-in transitions and animations are disabled when users enable "reduce motion" in their system settings.
 
-HeroUI components automatically respect user motion preferences using Tailwind's `motion-reduce:` utility. All built-in transitions and animations are disabled when users enable "reduce motion" in their system settings.
-
-HeroUI extends Tailwind's `motion-reduce:` variant to support both the native `prefers-reduced-motion` media query and the `data-reduce-motion` attribute, providing flexible control over animations.
+HeroUI extends Tailwind's `motion-reduce:` variant to support both the native `prefers-reduced-motion` media query and the `data-reduce-motion` attribute.
 
 ```css
 /* HeroUI pattern - uses Tailwind's motion-reduce: */
@@ -214,24 +201,19 @@ function AnimatedCard() {
 }
 ```
 
-### Disabling Animations Globally
-
-Disable all animations by adding `data-reduce-motion="true"` to the `<html>` or `<body>` tag:
+**Disabling animations globally:** Add `data-reduce-motion="true"` to the `<html>` or `<body>` tag:
 
 ```html
-<!DOCTYPE html>
 <html data-reduce-motion="true">
   <!-- All HeroUI animations will be disabled -->
 </html>
 ```
 
-HeroUI automatically detects the user's `prefers-reduced-motion: reduce` setting and disables animations accordingly. By extending Tailwind's native `motion-reduce:` variant, HeroUI provides a consistent API that works seamlessly with both system preferences and manual control via the data attribute.
+HeroUI automatically detects the user's `prefers-reduced-motion: reduce` setting and disables animations accordingly.
 
 ## Performance Tips
 
-### Use GPU-Accelerated Properties
-
-Prefer `transform` and `opacity` for smooth animations:
+**Use GPU-accelerated properties:** Prefer `transform` and `opacity` for smooth animations:
 
 ```css
 /* Good - GPU accelerated */
@@ -247,9 +229,7 @@ Prefer `transform` and `opacity` for smooth animations:
 }
 ```
 
-### Will-Change Optimization
-
-Use `will-change` to optimize animations, but remove it when not animating:
+**Will-change optimization:** Use `will-change` to optimize animations, but remove it when not animating:
 
 ```css
 .button {

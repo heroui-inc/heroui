@@ -7,20 +7,11 @@ links:
   tailwind: theme
 ---
 
-## Overview
-
-HeroUI components are built on React Aria and provide flexible styling options:
-
-- **Tailwind CSS** - Use utility classes directly
-- **CSS** - Target BEM classes or data attributes
-- **CSS-in-JS** - Integrate with styled-components, Emotion, etc.
-- **Render props** - Dynamic styling based on component state
+HeroUI components provide flexible styling options: Tailwind CSS utilities, CSS with [BEM](https://getbem.com/) classes or data attributes, CSS-in-JS libraries, and render props for dynamic styling.
 
 ## Basic Styling
 
-### Using className
-
-All HeroUI components accept `className` props:
+**Using className:** All HeroUI components accept `className` props:
 
 ```tsx
 <Button className="bg-purple-500 hover:bg-purple-600">
@@ -32,9 +23,7 @@ All HeroUI components accept `className` props:
 </Accordion>
 ```
 
-### Using style
-
-Components also accept inline styles:
+**Using style:** Components also accept inline styles:
 
 ```tsx
 <Button style={{ backgroundColor: '#8B5CF6' }}>
@@ -63,7 +52,7 @@ HeroUI components expose their state through data attributes, similar to CSS pse
 
 ## Render Props
 
-Use render props for dynamic styling based on component state:
+Apply dynamic styling based on component state:
 
 ```tsx
 // Dynamic classes
@@ -110,7 +99,7 @@ HeroUI uses [BEM methodology](https://getbem.com/) for consistent class naming:
 .accordion--outline { }
 ```
 
-### Customizing Components Globally
+**Customizing components globally:**
 
 ```css
 /* global.css */
@@ -134,7 +123,7 @@ HeroUI uses [BEM methodology](https://getbem.com/) for consistent class naming:
 
 ## Creating Wrapper Components
 
-For reusable custom components, create wrappers using [tailwind-variants](https://tailwind-variants.org/) - a Tailwind CSS first-class variant API created by us as well:
+Create reusable custom components using [tailwind-variants](https://tailwind-variants.org/)—a Tailwind CSS first-class variant API:
 
 ```tsx
 import { Button as HeroButton, buttonVariants, type ButtonProps } from '@heroui/react';
@@ -180,7 +169,7 @@ export function CustomButton({ intent, size, className, ...props }: CustomButton
 
 ## CSS-in-JS Integration
 
-### Styled Components
+**Styled Components:**
 
 ```tsx
 import styled from 'styled-components';
@@ -198,7 +187,7 @@ const StyledButton = styled(Button)`
 `;
 ```
 
-### Emotion
+**Emotion:**
 
 ```tsx
 import { css } from '@emotion/css';
@@ -222,7 +211,7 @@ const buttonStyles = css`
 
 ## Responsive Design
 
-Use Tailwind's responsive utilities:
+**Using Tailwind utilities:**
 
 ```tsx
 <Button className="text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6">
@@ -230,7 +219,7 @@ Use Tailwind's responsive utilities:
 </Button>
 ```
 
-Or with CSS:
+**Or with CSS:**
 
 ```css
 .button {
@@ -282,22 +271,10 @@ import { Button } from '@heroui/react';
 
 ## Component Classes Reference
 
-### Button
-- `.button` - Base
-- `.button--{variant}` - Variants
-- `.button--{size}` - Sizes
-- `.button--icon-only` - Icon button
+**Button:** `.button`, `.button--{variant}`, `.button--{size}`, `.button--icon-only`  
+**Accordion:** `.accordion`, `.accordion__item`, `.accordion__trigger`, `.accordion__panel`, `.accordion--outline`
 
-> **Note**: See [Button](/docs/components/button#css-classes) for more information on button classes.
-
-### Accordion
-- `.accordion` - Container
-- `.accordion__item` - Item
-- `.accordion__trigger` - Header
-- `.accordion__panel` - Content
-- `.accordion--outline` - Variant
-
-> **Note**: See [Accordion](/docs/components/accordion#css-classes) for more information on accordion classes.
+> **Note:** See component docs for complete class references: [Button](/docs/components/button#css-classes), [Accordion](/docs/components/accordion#css-classes)
 
 View all component classes in [@heroui/styles/components](https://github.com/heroui-inc/heroui/tree/main/packages/styles/components).
 
