@@ -4,17 +4,13 @@ description: Core principles that guide HeroUI v3's design and development
 icon: book
 ---
 
-## Overview
-
 HeroUI v3 follows 10 core principles that prioritize clarity, accessibility, customization, and developer experience.
 
 ## Core Principles
 
 ### 1. Semantic Intent Over Visual Style
 
-Components use semantic naming (primary, secondary, tertiary) instead of visual descriptions (solid, flat, bordered).
-
-Inspired by [Uber's Base design system](https://base.uber.com/6d2425e9f/p/756216-button), our variants follow a clear hierarchy:
+Use semantic naming (primary, secondary, tertiary) instead of visual descriptions (solid, flat, bordered). Inspired by [Uber's Base design system](https://base.uber.com/6d2425e9f/p/756216-button), variants follow a clear hierarchy:
 
 <DocsImage
   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/emphasis.jpg"
@@ -39,10 +35,9 @@ Inspired by [Uber's Base design system](https://base.uber.com/6d2425e9f/p/756216
 
 ### 2. Accessibility as Foundation
 
-Built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/) for WCAG 2.1 AA compliance, keyboard navigation, and screen reader support.
+Built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/) for WCAG 2.1 AA compliance. Automatic ARIA attributes, keyboard navigation, and screen reader support included.
 
 ```tsx
-// Automatic ARIA attributes, keyboard navigation, and focus management
 import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
 
 <Tabs defaultSelectedKey="profile">
@@ -57,7 +52,7 @@ import { Tabs, TabList, Tab, TabPanel } from '@heroui/react';
 
 ### 3. Composition Over Configuration
 
-Compound components let you rearrange, customize, or omit parts as needed.
+Compound components let you rearrange, customize, or omit parts as needed. Use dot notation, named exports, or mix both.
 
 ```tsx
 // Compose parts to build exactly what you need
@@ -88,7 +83,7 @@ import {
 
 ### 4. Progressive Disclosure
 
-Start simple, add complexity only when needed.
+Start simple, add complexity only when needed. Components work with minimal props and scale up as requirements grow.
 
 ```tsx
 // Level 1: Minimal
@@ -108,7 +103,7 @@ Start simple, add complexity only when needed.
 
 ### 5. Predictable Behavior
 
-Consistent patterns across all components: sizes (`sm`, `md`, `lg`), variants, className support, and data attributes.
+Consistent patterns across all components: sizes (`sm`, `md`, `lg`), variants, className support, and data attributes. Same API, same behavior.
 
 ```tsx
 // All components follow the same patterns
@@ -132,7 +127,7 @@ import { Alert, AlertIcon, CardHeader, AccordionTrigger } from '@heroui/react';
 
 ### 6. Type Safety First
 
-Full TypeScript support with IntelliSense, auto-completion, and compile-time error detection.
+Full TypeScript support with IntelliSense, auto-completion, and compile-time error detection. Extend types for custom components.
 
 ```tsx
 import type { ButtonProps } from '@heroui/react';
@@ -154,10 +149,7 @@ interface CustomButtonProps extends Omit<ButtonProps, 'variant'> {
 
 ### 7. Separation of Styles and Logic
 
-Styles (`@heroui/styles`) are separate from logic (`@heroui/react`), enabling use with any framework or vanilla HTML.
-
-
-Full Example: [Tailwind Play](https://play.tailwindcss.com/Ioomj2xdce)
+Styles (`@heroui/styles`) are separate from logic (`@heroui/react`), enabling use with any framework or vanilla HTML. See [Tailwind Play example](https://play.tailwindcss.com/Ioomj2xdce).
 
 ```html
 <!-- Use with plain HTML -->
@@ -181,7 +173,7 @@ Clear APIs, descriptive errors, IntelliSense, AI-friendly markdown docs, and Sto
 
 ### 9. Complete Customization
 
-Beautiful defaults out-of-the-box. Transform the entire look with CSS variables or BEM classes.
+Beautiful defaults out-of-the-box. Transform the entire look with CSS variables or [BEM](https://getbem.com/) classes. Every slot is customizable.
 
 ```css
 /* Theme-wide changes with variables */
@@ -204,7 +196,7 @@ Beautiful defaults out-of-the-box. Transform the entire look with CSS variables 
 
 ### 10. Open and Extensible
 
-Wrap, extend, and customize components to match your needs.
+Wrap, extend, and customize components to match your needs. Use `asChild`, variant functions, or create custom wrappers.
 
 ```tsx
 // Custom wrapper component
@@ -228,7 +220,7 @@ const CTAButton = ({
 };
 ```
 
-Or extend with Tailwind Variants:
+**Extend with Tailwind Variants:**
 
 ```tsx
 import { Button, buttonVariants } from '@heroui/react';
