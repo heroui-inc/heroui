@@ -1,0 +1,287 @@
+---
+title: Modal
+description: Dialog overlay for focused user interactions and important content
+icon: preview
+links:
+  rac: Modal
+  source: modal/modal.tsx
+  styles: modal.css
+  storybook: modal
+---
+
+## Import
+
+```tsx
+import { Modal, useModalState } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="modal-default"
+/>
+
+### Anatomy
+
+```tsx
+<Modal>
+  <Button />              {/* Or Modal.Trigger */}
+  <Modal.Backdrop>        {/* Overlay */}
+    <Modal.Container>     {/* Position wrapper */}
+      <Modal.Dialog>      {/* Content */}
+        <Modal.CloseTrigger />
+        <Modal.Header />
+        <Modal.Body />
+        <Modal.Footer />
+      </Modal.Dialog>
+    </Modal.Container>
+  </Modal.Backdrop>
+</Modal>
+```
+
+### Placement
+
+Control modal position with `placement` prop.
+
+<ComponentPreview
+  name="modal-placements"
+/>
+
+### Backdrop Variants
+
+Three backdrop styles: `solid`, `blur`, `transparent`.
+
+<ComponentPreview
+  name="modal-backdrop-variants"
+/>
+
+### Dismiss Behavior
+
+Control how users can close the modal.
+
+<ComponentPreview
+  name="modal-dismiss-behavior"
+/>
+
+### Scroll Behavior
+
+`inside` scrolls body content, `outside` scrolls entire modal.
+
+<ComponentPreview
+  name="modal-scroll-behavior"
+/>
+
+### With Form
+
+Modal adapts to keyboard on mobile.
+
+<ComponentPreview
+  name="modal-with-form"
+/>
+
+### Controlled State
+
+Use `useModalState` hook for programmatic control.
+
+<ComponentPreview
+  name="modal-controlled"
+/>
+
+### Custom Trigger
+
+Use `Modal.Trigger` for custom trigger elements.
+
+<ComponentPreview
+  name="modal-custom-trigger"
+/>
+
+### Custom Backdrop
+
+Style backdrop with Tailwind classes.
+
+<ComponentPreview
+  name="modal-custom-backdrop"
+/>
+
+### Custom Animations
+
+Override default animations with Tailwind animation utilities.
+
+<ComponentPreview
+  name="modal-custom-animations"
+/>
+
+## Styling
+
+```tsx
+// Tailwind classes
+<Modal.Backdrop className="bg-black/80">
+  <Modal.Container className="items-start pt-20">
+    <Modal.Dialog className="bg-gradient-to-br from-purple-500 to-pink-500">
+      {/* Content */}
+    </Modal.Dialog>
+  </Modal.Container>
+</Modal.Backdrop>
+
+// CSS customization
+@layer components {
+  .modal__backdrop { @apply bg-gradient-to-br from-black/50 to-black/70; }
+  .modal__dialog { @apply border border-white/10; }
+  .modal__close-trigger { @apply rounded-full bg-white/10; }
+}
+```
+
+## CSS Classes
+
+### Component Classes
+
+| Class | Description |
+| --- | --- |
+| `modal__trigger` | Trigger element |
+| `modal__backdrop` | Overlay backdrop |
+| `modal__container` | Position wrapper |
+| `modal__dialog` | Content container |
+| `modal__header` | Header section |
+| `modal__body` | Content area |
+| `modal__footer` | Footer section |
+| `modal__close-trigger` | Close button |
+
+### Variant Classes
+
+| Class | Description |
+| --- | --- |
+| `modal__backdrop--solid` | Solid backdrop |
+| `modal__backdrop--blur` | Blurred backdrop |
+| `modal__backdrop--transparent` | No backdrop |
+| `modal__container--scroll-outside` | Full modal scroll |
+| `modal__dialog--scroll-inside` | Body scroll only |
+| `modal__body--scroll-inside` | Scrollable body |
+
+### Interactive States
+
+```css
+/* Focus states */
+.modal__trigger:focus-visible
+.modal__trigger[data-focus-visible="true"]
+.modal__dialog:focus-visible
+.modal__dialog[data-focus-visible="true"]
+
+/* Hover states */
+.modal__close-trigger:hover
+.modal__close-trigger[data-hovered="true"]
+
+/* Active states */
+.modal__close-trigger:active
+.modal__close-trigger[data-pressed="true"]
+
+/* Animation states */
+.modal__backdrop[data-entering]
+.modal__backdrop[data-exiting]
+.modal__container[data-entering]
+.modal__container[data-exiting]
+
+/* Placement states */
+.modal__container[data-placement="auto"]
+.modal__container[data-placement="top"]
+.modal__container[data-placement="center"]
+.modal__container[data-placement="bottom"]
+```
+
+## API Reference
+
+### Modal
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `state` | `UseModalStateReturn` | - | External state control |
+| `defaultOpen` | `boolean` | `false` | Initially open |
+| `isOpen` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
+
+### Modal.Trigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Trigger content |
+| `className` | `string` | - | CSS classes |
+
+### Modal.Backdrop
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"solid" \| "blur" \| "transparent"` | `"solid"` | Backdrop style |
+| `isDismissable` | `boolean` | `true` | Close on backdrop click |
+| `isKeyboardDismissDisabled` | `boolean` | `false` | Disable ESC key |
+| `className` | `string \| (values) => string` | - | CSS classes |
+
+### Modal.Container
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | Position |
+| `scroll` | `"inside" \| "outside"` | `"inside"` | Scroll behavior |
+| `className` | `string \| (values) => string` | - | CSS classes |
+
+### Modal.Dialog
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode \| ({close}) => ReactNode` | - | Content or render function |
+| `className` | `string \| (values) => string` | - | CSS classes |
+| `role` | `string` | `"dialog"` | ARIA role |
+| `aria-label` | `string` | - | Accessibility label |
+| `aria-labelledby` | `string` | - | ID of label element |
+| `aria-describedby` | `string` | - | ID of description element |
+
+### Modal.Header
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Header content |
+| `className` | `string` | - | CSS classes |
+
+### Modal.Body
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Body content |
+| `className` | `string` | - | CSS classes |
+
+### Modal.Footer
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Footer content |
+| `className` | `string` | - | CSS classes |
+
+### Modal.CloseTrigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Render as child |
+| `children` | `ReactNode` | - | Custom close button |
+| `className` | `string \| (values) => string` | - | CSS classes |
+
+### useModalState Hook
+
+```tsx
+const modalState = useModalState({
+  defaultOpen: false,
+  onOpenChange: (isOpen) => console.log(isOpen)
+});
+
+modalState.isOpen    // Current state
+modalState.open()     // Open modal
+modalState.close()    // Close modal
+modalState.toggle()   // Toggle state
+modalState.setOpen()  // Set state directly
+```
+
+## Accessibility
+
+Implements [WAI-ARIA Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/):
+
+- **Focus trap**: Focus locked within modal
+- **Keyboard**: `ESC` closes (when enabled), `Tab` cycles elements
+- **Screen readers**: Proper ARIA attributes
+- **Scroll lock**: Body scroll disabled when open

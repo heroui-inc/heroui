@@ -22,6 +22,7 @@ import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
 import * as ListBoxDemos from "./listbox";
+import * as ModalDemos from "./modal";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
 import * as SelectDemos from "./select";
@@ -708,6 +709,47 @@ export const demos: Record<string, DemoItem> = {
   "listbox-with-sections": {
     component: ListBoxDemos.WithSections,
     file: "listbox/with-sections.tsx",
+  },
+  // Modal demos
+  "modal-default": {
+    component: ModalDemos.Default,
+    file: "modal/default.tsx",
+  },
+  "modal-placements": {
+    component: ModalDemos.Placements,
+    file: "modal/placements.tsx",
+  },
+  "modal-backdrop-variants": {
+    component: ModalDemos.BackdropVariants,
+    file: "modal/backdrop-variants.tsx",
+  },
+  "modal-scroll-behavior": {
+    component: ModalDemos.ScrollBehavior,
+    file: "modal/scroll-behavior.tsx",
+  },
+  "modal-dismiss-behavior": {
+    component: ModalDemos.DismissBehavior,
+    file: "modal/dismiss-behavior.tsx",
+  },
+  "modal-with-form": {
+    component: ModalDemos.WithForm,
+    file: "modal/with-form.tsx",
+  },
+  "modal-controlled": {
+    component: ModalDemos.Controlled,
+    file: "modal/controlled.tsx",
+  },
+  "modal-custom-trigger": {
+    component: ModalDemos.CustomTrigger,
+    file: "modal/custom-trigger.tsx",
+  },
+  "modal-custom-backdrop": {
+    component: ModalDemos.CustomBackdrop,
+    file: "modal/custom-backdrop.tsx",
+  },
+  "modal-custom-animations": {
+    component: ModalDemos.CustomAnimations,
+    file: "modal/custom-animations.tsx",
   },
   // Select demos
   "select-default": {

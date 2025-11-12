@@ -43,6 +43,7 @@
     "components/label",
     "components/link",
     "components/listbox",
+    "components/modal",
     "components/popover",
     "components/radio-group",
     "components/separator",
