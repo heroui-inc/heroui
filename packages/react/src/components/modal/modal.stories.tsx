@@ -280,19 +280,19 @@ export const WithForm = () => (
     <Modal.Backdrop>
       <Modal.Container placement="auto">
         <Modal.Dialog className="sm:max-w-md">
-          <Surface variant="default">
-            <Modal.CloseTrigger />
-            <Modal.Header>
-              <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
-                <Icon className="size-5" icon="gravity-ui:envelope" />
-              </div>
-              <h2 className="text-foreground text-lg font-semibold leading-6">Contact Us</h2>
-              <p className="text-muted text-sm leading-5">
-                Fill out the form below and we'll get back to you. The modal adapts automatically
-                when the keyboard appears on mobile.
-              </p>
-            </Modal.Header>
-            <Modal.Body>
+          <Modal.CloseTrigger />
+          <Modal.Header>
+            <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+              <Icon className="size-5" icon="gravity-ui:envelope" />
+            </div>
+            <h2 className="text-foreground text-lg font-semibold leading-6">Contact Us</h2>
+            <p className="text-muted text-sm leading-5">
+              Fill out the form below and we'll get back to you. The modal adapts automatically when
+              the keyboard appears on mobile.
+            </p>
+          </Modal.Header>
+          <Modal.Body>
+            <Surface variant="default">
               <form className="flex flex-col gap-4">
                 <TextField className="w-full" name="name" type="text">
                   <Label>Name</Label>
@@ -319,14 +319,14 @@ export const WithForm = () => (
                   <Input placeholder="Enter your message" />
                 </TextField>
               </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Modal.CloseTrigger asChild>
-                <Button variant="secondary">Cancel</Button>
-              </Modal.CloseTrigger>
-              <Button>Send Message</Button>
-            </Modal.Footer>
-          </Surface>
+            </Surface>
+          </Modal.Body>
+          <Modal.Footer>
+            <Modal.CloseTrigger asChild>
+              <Button variant="secondary">Cancel</Button>
+            </Modal.CloseTrigger>
+            <Button>Send Message</Button>
+          </Modal.Footer>
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Backdrop>

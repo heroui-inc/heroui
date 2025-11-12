@@ -33,7 +33,7 @@
  * TODO: fix backdrop animations
  * ------------------------------------------------------------------------------------------------ */
 .modal__backdrop {
-  @apply fixed inset-0 isolate z-50;
+  @apply h-(--visual-viewport-height) fixed inset-0 isolate z-50;
 
   /* Entering animation */
   &[data-entering] {
