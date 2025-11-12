@@ -134,8 +134,6 @@ export type UseToastProps<T = ToastProps> = Props<T> &
   ToastVariantProps &
   Omit<AriaToastProps<T>, "div">;
 
-const SWIPE_THRESHOLD_X = 100;
-const SWIPE_THRESHOLD_Y = 20;
 const INITIAL_POSITION = 50;
 
 export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) {
@@ -359,62 +357,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     exit: {opacity: 0, y: -INITIAL_POSITION * multiplier},
   };
 
-  const [drag, setDrag] = useState(false);
-  const [dragValue, setDragValue] = useState(0);
-
-  const shouldCloseToast = (offsetX: number, offsetY: number) => {
-    const isRight = placement.includes("right");
-    const isLeft = placement.includes("left");
-    const isCenterTop = placement === "top-center";
-    const isCenterBottom = placement === "bottom-center";
-
-    if (
-      (isRight && offsetX >= SWIPE_THRESHOLD_X) ||
-      (isLeft && offsetX <= -SWIPE_THRESHOLD_X) ||
-      (isCenterTop && offsetY <= -SWIPE_THRESHOLD_Y) ||
-      (isCenterBottom && offsetY >= SWIPE_THRESHOLD_Y)
-    ) {
-      return true;
-    }
-  };
-
-  const getDragElasticConstraints = (placement: string) => {
-    const elasticConstraint = {top: 0, bottom: 0, right: 0, left: 0};
-
-    if (placement === "bottom-center") {
-      elasticConstraint.bottom = 1;
-
-      return elasticConstraint;
-    }
-    if (placement === "top-center") {
-      elasticConstraint.top = 1;
-
-      return elasticConstraint;
-    }
-    if (placement.includes("right")) {
-      elasticConstraint.right = 1;
-
-      return elasticConstraint;
-    }
-    if (placement.includes("left")) {
-      elasticConstraint.left = 1;
-
-      return elasticConstraint;
-    }
-
-    elasticConstraint.left = 1;
-    elasticConstraint.right = 1;
-
-    return elasticConstraint;
-  };
-
-  let opacityValue: undefined | number = undefined;
-
-  if ((drag && placement === "bottom-center") || placement === "top-center") {
-    opacityValue = Math.max(0, 1 - dragValue / (SWIPE_THRESHOLD_Y + 5));
-  } else if (drag) {
-    opacityValue = Math.max(0, 1 - dragValue / (SWIPE_THRESHOLD_X + 20));
-  }
 
   const getToastProps: PropGetter = useCallback(
     (props = {}) => {
@@ -432,7 +374,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         "data-has-title": dataAttr(!isEmpty(title)),
         "data-has-description": dataAttr(!isEmpty(description)),
         "data-placement": placement,
-        "data-drag-value": dragValue,
         "data-toast": true,
         "aria-label": "toast",
         "data-toast-exiting": dataAttr(isToastExiting),
@@ -447,9 +388,8 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
               }
             },
         style: {
-          opacity: opacityValue,
           ...pseudoElementStyles,
-        },
+        } as React.CSSProperties,
         ...mergeProps(props, otherProps, toastProps, hoverProps),
       };
     },
@@ -460,7 +400,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       hoverProps,
       toast,
       toast.key,
-      opacityValue,
       isToastExiting,
       state,
       toast.key,
@@ -557,28 +496,48 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
     [],
   );
 
+  /**
+   * Get motion div props for toast animation
+   * 
+   * Note: Drag functionality has been completely removed from toast component.
+   * 
+   * Why drag was removed:
+   * - Drag functionality was causing issues with opacity during drag operations
+   * - The drag ghost image (SVG snapshot) created by Framer Motion was causing visual artifacts
+   * - Users can still close toasts using the close button
+   * 
+   * If drag functionality is needed in the future, the official Framer Motion solution is:
+   * - Use `dragListener={false}` to prevent automatic drag listener creation
+   * - Use `useDragControls()` for manual drag control if needed
+   * - This prevents Framer Motion from creating the SVG/ghost layer snapshot
+   * 
+   * Example:
+   * ```tsx
+   * const controls = useDragControls();
+   * <motion.div
+   *   drag="y"
+   *   dragControls={controls}
+   *   dragListener={false} // Prevents snapshot creation
+   * />
+   * ```
+   */
   const getMotionDivProps = useCallback(
     (
       props = {},
     ): MotionProps & {
-      "data-drag": string | boolean;
       "data-placement": string;
-      "data-drag-value": number;
       className: string;
     } => {
       const comparingValue = isRegionExpanded
         ? maxVisibleToasts - 1
         : Math.min(2, maxVisibleToasts - 1);
       const isCloseToEnd = total - index - 1 <= comparingValue;
-      const dragDirection = placement === "bottom-center" || placement === "top-center" ? "y" : "x";
-      const dragConstraints = {left: 0, right: 0, top: 0, bottom: 0};
-      const dragElastic = getDragElasticConstraints(placement);
 
       const animateProps = (() => {
         if (placement.includes("top")) {
           return {
             top:
-              isRegionExpanded || drag
+              isRegionExpanded
                 ? liftHeight + toastOffset
                 : (total - 1 - index) * 8 + toastOffset,
             bottom: "auto",
@@ -586,7 +545,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         } else if (placement.includes("bottom")) {
           return {
             bottom:
-              isRegionExpanded || drag
+              isRegionExpanded
                 ? liftHeight + toastOffset
                 : (total - 1 - index) * 8 + toastOffset,
             top: "auto",
@@ -600,13 +559,11 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         animate: {
           opacity: isCloseToEnd ? 1 : 0,
           pointerEvents: isCloseToEnd ? "all" : "none",
-          scaleX: isRegionExpanded || drag ? 1 : 1 - (total - 1 - index) * 0.1,
-          height: isRegionExpanded || drag ? initialHeight : frontHeight,
+          scaleX: isRegionExpanded ? 1 : 1 - (total - 1 - index) * 0.1,
+          height: isRegionExpanded ? initialHeight : frontHeight,
           y: 0,
           ...animateProps,
         },
-        drag: dragDirection,
-        dragConstraints,
         exit: {
           opacity: 0,
           transition: {duration: 0.3},
@@ -614,42 +571,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
         initial: {opacity: 0, scale: 1, y: -40 * multiplier},
         transition: {duration: 0.3, ease: "easeOut"},
         variants: toastVariants,
-        dragElastic,
-        onDragEnd: (_, info) => {
-          const {x: offsetX, y: offsetY} = info.offset;
-
-          setDrag(false);
-
-          if (shouldCloseToast(offsetX, offsetY)) {
-            setIsToastExiting(true);
-
-            return;
-          }
-          setDragValue(0);
-        },
-        onDrag: (_, info) => {
-          let updatedDragValue = 0;
-
-          if (placement === "top-center") {
-            updatedDragValue = -info.offset.y;
-          } else if (placement === "bottom-center") {
-            updatedDragValue = info.offset.y;
-          } else if (placement.includes("right")) {
-            updatedDragValue = info.offset.x;
-          } else if (placement.includes("left")) {
-            updatedDragValue = -info.offset.x;
-          }
-
-          if (updatedDragValue >= 0) {
-            setDragValue(updatedDragValue);
-          }
-        },
-        onDragStart: () => {
-          setDrag(true);
-        },
-        "data-drag": dataAttr(drag),
         "data-placement": placement,
-        "data-drag-value": dragValue,
         className: slots.motionDiv({class: classNames?.motionDiv}),
         ...props,
         ...motionProps,
@@ -667,10 +589,6 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
       frontHeight,
       toastVariants,
       classNames,
-      drag,
-      dataAttr,
-      setDrag,
-      shouldCloseToast,
       slots,
       toastOffset,
       maxVisibleToasts,

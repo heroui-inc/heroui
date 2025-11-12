@@ -185,7 +185,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             <Logo className="h-6" />
           </NextLink>
           {versionChip}
-          <Chip
+          {/* <Chip
             as={NextLink}
             className="hidden sm:flex bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
             classNames={{
@@ -200,7 +200,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             <span aria-label="emoji" role="img">
               🔥
             </span>
-          </Chip>
+          </Chip> */}
         </NavbarBrand>
       </NavbarContent>
 
