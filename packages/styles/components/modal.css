@@ -37,12 +37,12 @@
 
   /* Entering animation */
   &[data-entering] {
-    /* @apply animate-in fade-in-0 ease-fluid-out duration-250; */
+    @apply animate-in fade-in-0 ease-out-quad duration-300;
   }
 
   /* Exiting animation */
   &[data-exiting] {
-    /* @apply animate-out fade-out-0 ease-in-quart duration-150; */
+    @apply animate-out fade-out-0 ease-in-quart duration-150;
   }
 
   /**
@@ -51,7 +51,7 @@
    */
   &[data-entering],
   &[data-exiting] {
-    /* @apply motion-reduce:animate-none; */
+    @apply motion-reduce:animate-none;
   }
 }
 
@@ -76,7 +76,7 @@
  * ------------------------------------------------------------------------------------------------ */
 .modal__container {
   @apply max-h-(--visual-viewport-height) fixed left-1/2 flex w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
-  @apply motion-safe:transform-gpu motion-safe:will-change-transform;
+  @apply transform-gpu will-change-transform;
 
   /* Auto - bottom on mobile, center on desktop */
   &[data-placement="auto"] {
@@ -99,37 +99,27 @@
 
   /* Entering animation */
   &[data-entering] {
-    @apply [transform-origin:var(--trigger-anchor-point,center)];
-    @apply animate-in sm:zoom-in-[0.96] sm:fade-in-0 ease-fluid-out duration-250;
+    @apply animate-in fade-in-0 zoom-in-95 ease-out-quad duration-300;
 
     &[data-placement="auto"] {
-      @apply slide-in-from-bottom-[8px] sm:slide-in-from-bottom-0;
+      @apply slide-in-from-bottom-1 sm:slide-in-from-bottom-0;
     }
 
     &[data-placement="top"] {
-      @apply slide-in-from-top-[8px];
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement="center"] {
     }
 
     &[data-placement="bottom"] {
-      @apply slide-in-from-bottom-[8px];
+      @apply slide-in-from-bottom-1;
     }
   }
 
   /* Exiting animation */
   &[data-exiting] {
-    @apply animate-out sm:zoom-out-[0.99] sm:fade-out-0 ease-in-quart duration-150;
-
-    &[data-placement="auto"] {
-      @apply slide-out-to-bottom-[4px] sm:slide-out-to-bottom-0;
-    }
-
-    &[data-placement="top"] {
-      @apply slide-out-to-top-[4px];
-    }
-
-    &[data-placement="bottom"] {
-      @apply slide-out-to-bottom-[4px];
-    }
+    @apply animate-out fade-out-0 zoom-out-95 ease-out-quart duration-150;
   }
 
   /**

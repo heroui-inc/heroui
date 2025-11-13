@@ -23,25 +23,29 @@ import { Modal, useModalState } from '@heroui/react';
 
 ### Anatomy
 
+Import the Modal component and access all parts using dot notation.
+
 ```tsx
-<Modal>
-  <Button />              {/* Or Modal.Trigger */}
-  <Modal.Backdrop>        {/* Overlay */}
-    <Modal.Container>     {/* Position wrapper */}
-      <Modal.Dialog>      {/* Content */}
-        <Modal.CloseTrigger />
-        <Modal.Header />
-        <Modal.Body />
-        <Modal.Footer />
-      </Modal.Dialog>
-    </Modal.Container>
-  </Modal.Backdrop>
-</Modal>
+import { Modal, Button } from '@heroui/react';
+
+export default () => (
+  <Modal>
+    <Button>Open Modal</Button>
+    <Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Dialog>
+          <Modal.CloseTrigger />
+          <Modal.Header />
+          <Modal.Body />
+          <Modal.Footer />
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal>
+)
 ```
 
 ### Placement
-
-Control modal position with `placement` prop.
 
 <ComponentPreview
   name="modal-placements"
@@ -49,15 +53,11 @@ Control modal position with `placement` prop.
 
 ### Backdrop Variants
 
-Three backdrop styles: `solid`, `blur`, `transparent`.
-
 <ComponentPreview
   name="modal-backdrop-variants"
 />
 
 ### Dismiss Behavior
-
-Control how users can close the modal.
 
 <ComponentPreview
   name="modal-dismiss-behavior"
@@ -65,15 +65,11 @@ Control how users can close the modal.
 
 ### Scroll Behavior
 
-`inside` scrolls body content, `outside` scrolls entire modal.
-
 <ComponentPreview
   name="modal-scroll-behavior"
 />
 
 ### With Form
-
-Modal adapts to keyboard on mobile.
 
 <ComponentPreview
   name="modal-with-form"
@@ -81,15 +77,11 @@ Modal adapts to keyboard on mobile.
 
 ### Controlled State
 
-Use `useModalState` hook for programmatic control.
-
 <ComponentPreview
   name="modal-controlled"
 />
 
 ### Custom Trigger
-
-Use `Modal.Trigger` for custom trigger elements.
 
 <ComponentPreview
   name="modal-custom-trigger"
@@ -97,15 +89,11 @@ Use `Modal.Trigger` for custom trigger elements.
 
 ### Custom Backdrop
 
-Style backdrop with Tailwind classes.
-
 <ComponentPreview
   name="modal-custom-backdrop"
 />
 
 ### Custom Animations
-
-Override default animations with Tailwind animation utilities.
 
 <ComponentPreview
   name="modal-custom-animations"
@@ -113,79 +101,97 @@ Override default animations with Tailwind animation utilities.
 
 ## Styling
 
-```tsx
-// Tailwind classes
-<Modal.Backdrop className="bg-black/80">
-  <Modal.Container className="items-start pt-20">
-    <Modal.Dialog className="bg-gradient-to-br from-purple-500 to-pink-500">
-      {/* Content */}
-    </Modal.Dialog>
-  </Modal.Container>
-</Modal.Backdrop>
+### Passing Tailwind CSS classes
 
-// CSS customization
-@layer components {
-  .modal__backdrop { @apply bg-gradient-to-br from-black/50 to-black/70; }
-  .modal__dialog { @apply border border-white/10; }
-  .modal__close-trigger { @apply rounded-full bg-white/10; }
+```tsx
+import { Modal, Button } from '@heroui/react';
+
+function CustomModal() {
+  return (
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Backdrop className="bg-black/80">
+        <Modal.Container className="items-start pt-20">
+          <Modal.Dialog className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+            <Modal.Header>
+              <h2>Custom Styled Modal</h2>
+            </Modal.Header>
+            <Modal.Body>
+              <p>This modal has custom styling applied via Tailwind classes</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button>Close</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
 }
 ```
 
-## CSS Classes
+### Customizing the component classes
 
-### Component Classes
+To customize the Modal component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
-| Class | Description |
-| --- | --- |
-| `modal__trigger` | Trigger element |
-| `modal__backdrop` | Overlay backdrop |
-| `modal__container` | Position wrapper |
-| `modal__dialog` | Content container |
-| `modal__header` | Header section |
-| `modal__body` | Content area |
-| `modal__footer` | Footer section |
-| `modal__close-trigger` | Close button |
+```css
+@layer components {
+  .modal__backdrop {
+    @apply bg-gradient-to-br from-black/50 to-black/70;
+  }
 
-### Variant Classes
+  .modal__dialog {
+    @apply rounded-2xl border border-white/10 shadow-2xl;
+  }
 
-| Class | Description |
-| --- | --- |
-| `modal__backdrop--solid` | Solid backdrop |
-| `modal__backdrop--blur` | Blurred backdrop |
-| `modal__backdrop--transparent` | No backdrop |
-| `modal__container--scroll-outside` | Full modal scroll |
-| `modal__dialog--scroll-inside` | Body scroll only |
-| `modal__body--scroll-inside` | Scrollable body |
+  .modal__header {
+    @apply text-center;
+  }
+
+  .modal__close-trigger {
+    @apply rounded-full bg-white/10 hover:bg-white/20;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Modal component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/modal.css)):
+
+#### Base Classes
+- `.modal__trigger` - Trigger element that opens the modal
+- `.modal__backdrop` - Overlay backdrop behind the modal
+- `.modal__container` - Positioning wrapper with placement support
+- `.modal__dialog` - Modal content container
+- `.modal__header` - Header section for titles and icons
+- `.modal__body` - Main content area
+- `.modal__footer` - Footer section for actions
+- `.modal__close-trigger` - Close button element
+
+#### Backdrop Variants
+- `.modal__backdrop--solid` - Solid colored backdrop (default)
+- `.modal__backdrop--blur` - Blurred backdrop with glass effect
+- `.modal__backdrop--transparent` - Transparent backdrop (no overlay)
+
+#### Scroll Variants
+- `.modal__container--scroll-outside` - Enables scrolling the entire modal
+- `.modal__dialog--scroll-inside` - Constrains modal height for body scrolling
+- `.modal__body--scroll-inside` - Makes only the body scrollable
+- `.modal__body--scroll-outside` - Allows full-page scrolling
 
 ### Interactive States
 
-```css
-/* Focus states */
-.modal__trigger:focus-visible
-.modal__trigger[data-focus-visible="true"]
-.modal__dialog:focus-visible
-.modal__dialog[data-focus-visible="true"]
+The component supports these interactive states:
 
-/* Hover states */
-.modal__close-trigger:hover
-.modal__close-trigger[data-hovered="true"]
-
-/* Active states */
-.modal__close-trigger:active
-.modal__close-trigger[data-pressed="true"]
-
-/* Animation states */
-.modal__backdrop[data-entering]
-.modal__backdrop[data-exiting]
-.modal__container[data-entering]
-.modal__container[data-exiting]
-
-/* Placement states */
-.modal__container[data-placement="auto"]
-.modal__container[data-placement="top"]
-.modal__container[data-placement="center"]
-.modal__container[data-placement="bottom"]
-```
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` - Applied to trigger, dialog, and close button
+- **Hover**: `:hover` or `[data-hovered="true"]` - Applied to close button on hover
+- **Active**: `:active` or `[data-pressed="true"]` - Applied to close button when pressed
+- **Entering**: `[data-entering]` - Applied during modal opening animation
+- **Exiting**: `[data-exiting]` - Applied during modal closing animation
+- **Placement**: `[data-placement="*"]` - Applied based on modal position (auto, top, center, bottom)
 
 ## API Reference
 
