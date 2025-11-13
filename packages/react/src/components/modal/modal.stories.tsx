@@ -27,7 +27,7 @@ export default {
 export const Default = () => {
   return (
     <Modal>
-      <Button>Open Modal</Button>
+      <Button variant="secondary">Open Modal</Button>
       <Modal.Backdrop>
         <Modal.Container>
           <Modal.Dialog className="sm:max-w-[360px]">
@@ -69,7 +69,9 @@ export const Placements = () => {
     <div className="flex flex-wrap gap-4">
       {placements.map((placement) => (
         <Modal key={placement}>
-          <Button>{placement.charAt(0).toUpperCase() + placement.slice(1)}</Button>
+          <Button variant="secondary">
+            {placement.charAt(0).toUpperCase() + placement.slice(1)}
+          </Button>
           <Modal.Backdrop>
             <Modal.Container placement={placement}>
               <Modal.Dialog className="sm:max-w-[360px]">
@@ -113,7 +115,7 @@ export const OverlayVariants = () => {
     <div className="flex flex-wrap gap-4">
       {variants.map((variant) => (
         <Modal key={variant}>
-          <Button>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Button>
+          <Button variant="secondary">{variant.charAt(0).toUpperCase() + variant.slice(1)}</Button>
           <Modal.Backdrop variant={variant}>
             <Modal.Container>
               <Modal.Dialog className="sm:max-w-[360px]">
@@ -160,7 +162,7 @@ export const DismissBehavior = () => (
         <code>true</code>. Set to <code>false</code> to require explicit close action.
       </p>
       <Modal>
-        <Button>Open Modal</Button>
+        <Button variant="secondary">Open Modal</Button>
         <Modal.Backdrop isDismissable={false}>
           <Modal.Container>
             <Modal.Dialog className="sm:max-w-[360px]">
@@ -204,7 +206,7 @@ export const DismissBehavior = () => (
         key will be disabled and users must use explicit close actions.
       </p>
       <Modal>
-        <Button>Open Modal</Button>
+        <Button variant="secondary">Open Modal</Button>
         <Modal.Backdrop isKeyboardDismissDisabled>
           <Modal.Container>
             <Modal.Dialog className="sm:max-w-[360px]">
@@ -271,7 +273,9 @@ export const ScrollComparison = () => {
       </div>
 
       <Modal>
-        <Button>Open Modal ({scroll.charAt(0).toUpperCase() + scroll.slice(1)})</Button>
+        <Button variant="secondary">
+          Open Modal ({scroll.charAt(0).toUpperCase() + scroll.slice(1)})
+        </Button>
         <Modal.Backdrop>
           <Modal.Container scroll={scroll}>
             <Modal.Dialog className="sm:max-w-[360px]">
@@ -314,7 +318,7 @@ export const ScrollComparison = () => {
 
 export const WithForm = () => (
   <Modal>
-    <Button>Open Contact Form</Button>
+    <Button variant="secondary">Open Contact Form</Button>
     <Modal.Backdrop>
       <Modal.Container placement="auto">
         <Modal.Dialog className="sm:max-w-md">
@@ -389,7 +393,9 @@ export const WithUseModalState = () => {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <Button onPress={modalState.open}>Open Modal</Button>
+        <Button variant="secondary" onPress={modalState.open}>
+          Open Modal
+        </Button>
         <Button variant="secondary" onPress={modalState.toggle}>
           Toggle Modal
         </Button>
@@ -482,7 +488,7 @@ export const CustomTrigger = () => (
 
 export const CustomBackdrop = () => (
   <Modal>
-    <Button>Custom Backdrop</Button>
+    <Button variant="secondary">Custom Backdrop</Button>
     <Modal.Backdrop
       className="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
       variant="blur"
@@ -565,7 +571,7 @@ export const CustomAnimations = () => {
     <div className="flex flex-wrap gap-4">
       {Object.entries(animations).map(([name, classNames]) => (
         <Modal key={name}>
-          <Button>{name.replace("_", " ")}</Button>
+          <Button variant="secondary">{name.replace("_", " ")}</Button>
           <Modal.Backdrop className="data-[exiting]:duration-200">
             <Modal.Container
               className={clsx(

@@ -37,12 +37,12 @@
 
   /* Entering animation */
   &[data-entering] {
-    @apply animate-in fade-in-0 ease-out-quad duration-300;
+    @apply animate-in fade-in-0 ease-fluid-out duration-250;
   }
 
   /* Exiting animation */
   &[data-exiting] {
-    @apply animate-out fade-out-0 ease-in-quart duration-150;
+    @apply animate-out fade-out-0 ease-out-quart duration-150;
   }
 
   /**
