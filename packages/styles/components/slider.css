@@ -57,7 +57,7 @@
 
     /* Focus state - increase z-index */
     &[data-focused] {
-      @apply z-10;
+      @apply status-focused z-10;
     }
 
     /* Disabled state */
