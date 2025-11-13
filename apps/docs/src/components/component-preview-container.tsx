@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
+import {useIntersectionObserver} from "usehooks-ts";
 
-import {useGlobalIntersectionObserver} from "@/hooks/use-global-intersection-observer";
 import {cn} from "@/utils/cn";
 
 interface ComponentPreviewContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,14 +24,12 @@ export function ComponentPreviewContainer({
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
-
-  const [previewRef, previewInView] = useGlobalIntersectionObserver<HTMLDivElement>({
+  const {isIntersecting: previewInView, ref: previewRef} = useIntersectionObserver({
     initialIsIntersecting: true,
     rootMargin: "400px 0px 100px 0px",
     threshold: 0,
   });
-
-  const [codeRef, codeInView] = useGlobalIntersectionObserver<HTMLDivElement>({
+  const {isIntersecting: codeInView, ref: codeRef} = useIntersectionObserver({
     initialIsIntersecting: true,
     rootMargin: "300px 0px 0px 0px",
     threshold: 0,
@@ -63,7 +61,7 @@ export function ComponentPreviewContainer({
         )}
         style={{
           contain: "layout style",
-          // contentVisibility: "auto",
+          contentVisibility: "auto",
           isolation: "isolate",
         }}
       >
@@ -83,11 +81,9 @@ export function ComponentPreviewContainer({
         <div
           ref={codeRef}
           className="code-section border-divider relative rounded-b-xl border bg-transparent"
-          style={
-            {
-              // contentVisibility: "auto",
-            }
-          }
+          style={{
+            contentVisibility: "auto",
+          }}
         >
           <div
             className="code-block-wrapper min-h-[124px]"
