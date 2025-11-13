@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Base listbox item styles
+   Base menu item styles
    ========================================================================== */
 
-.listbox-item {
+.menu-item {
   @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
 
   /**
@@ -27,8 +27,8 @@
   }
 
   /* Add padding-right when indicator is present */
-  &:has(.listbox-item__indicator) {
-    @apply pr-7;
+  &:has(.menu-item__indicator) {
+    @apply pl-7;
   }
 
   /* Focus visible state (keyboard focus only) */
@@ -55,8 +55,24 @@
   }
 
   /* Selected state */
+  &[aria-checked="true"],
   &[aria-selected="true"],
   &[data-selected="true"] {
+    [data-slot="menu-item-indicator--checkmark"] {
+      /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+      transition: stroke-dashoffset 100ms linear;
+      @apply motion-reduce:transition-none;
+    }
+
+    [data-slot="menu-item-indicator--dot"] {
+      /**
+       * Selected state: visible and scaled up
+       */
+      @apply scale-100 opacity-100;
+    }
   }
 
   /* Disabled state */
@@ -66,11 +82,11 @@
 }
 
 /* ==========================================================================
-   Listbox item indicator
+   Menu item indicator
    ========================================================================== */
 
-.listbox-item__indicator {
-  @apply text-default-foreground absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
+.menu-item__indicator {
+  @apply text-muted absolute left-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
 
   /**
    * Transitions
@@ -78,7 +94,7 @@
   @apply duration-250 transition motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
-  [data-slot="listbox-item-indicator--checkmark"] {
+  [data-slot="menu-item-indicator--checkmark"] {
     @apply size-2.5;
 
     /**
@@ -87,24 +103,38 @@
     @apply transition-all duration-300 motion-reduce:transition-none;
   }
 
-  .listbox-item[aria-selected="true"] [data-slot="listbox-item-indicator--checkmark"],
-  .listbox-item[data-selected="true"] [data-slot="listbox-item-indicator--checkmark"] {
+  /* Dot SVG indicator */
+  [data-slot="menu-item-indicator--dot"] {
+    @apply size-2;
+
     /**
      * Transitions
-     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
      */
-    transition: stroke-dashoffset 250ms linear;
-    @apply motion-reduce:transition-none;
+    @apply duration-250 transition-all motion-reduce:transition-none;
+
+    /**
+     * Default state: hidden and scaled down
+     */
+    @apply scale-70 opacity-0;
+  }
+}
+
+/* Submenu indicator (chevron-right) */
+.menu-item__indicator--submenu {
+  @apply text-muted;
+
+  svg {
+    @apply size-3;
   }
 }
 
 /* Default variant */
-.listbox-item--default {
+.menu-item--default {
 }
 
 /* Danger variant */
-.listbox-item--danger {
-  .listbox-item__indicator {
+.menu-item--danger {
+  .menu-item__indicator {
     @apply text-danger;
   }
 
