@@ -3,9 +3,9 @@ import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 
 // TODO:
+import {Footer} from "@/components/footer";
 import {GitHubLink} from "@/components/github-link";
 import {Iconify} from "@/components/iconify";
-import {SocialLinks} from "@/components/social-links";
 // import {ThemeBackground} from "@/components/theme-background";
 import {currentVersion} from "@/utils/version";
 
@@ -41,10 +41,7 @@ export default function HomePage() {
             deliver delightful user experiences.
           </p>
           <div className="mt-2 flex gap-3">
-            <LinkRoot
-              className={buttonVariants({variant: "primary"})}
-              href="/docs/components/accordion"
-            >
+            <LinkRoot className={buttonVariants({variant: "primary"})} href="/docs/components-list">
               View components
             </LinkRoot>
             <GitHubLink>Stars</GitHubLink>
@@ -78,12 +75,7 @@ export default function HomePage() {
           <DemoComponents />
         </div>
       </section>
-      <footer className="text-muted mt-auto flex w-full flex-row flex-wrap items-center justify-center gap-2 py-3">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} NextUI Inc. All rights reserved.
-        </p>
-        <SocialLinks />
-      </footer>
+      <Footer />
     </main>
   );
 }

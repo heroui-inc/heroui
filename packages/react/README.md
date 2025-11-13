@@ -16,7 +16,7 @@
   </a>
 </p>
 
-HeroUI is a set of beautiful, customizable, always up-to-date components that help you skip the copy-paste and focus on building.
+HeroUI is the modern UI library built to help you move fast, stay consistent, and deliver delightful user experiences.
 
 ## Getting Started
 
@@ -36,7 +36,7 @@ Visit [https://herouiv3.featurebase.app/roadmap](https://herouiv3.featurebase.ap
 
 ## Figma
 
-Visit [https://www.figma.com/community/file/1546526812159103429](https://www.figma.com/community/file/1546526812159103429) to view the Figma file for HeroUI v3.
+Visit [https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3) to view the Figma UI Kit for HeroUI v3.
 
 ## Community
 

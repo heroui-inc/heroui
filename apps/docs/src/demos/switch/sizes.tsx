@@ -1,26 +1,26 @@
-import {Label, SwitchControl, SwitchRoot, SwitchThumb} from "@heroui/react";
+import {Label, Switch} from "@heroui/react";
 
 export function Sizes() {
   return (
     <div className="flex gap-6">
-      <SwitchRoot size="sm">
-        <SwitchControl>
-          <SwitchThumb />
-        </SwitchControl>
+      <Switch size="sm">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
         <Label className="text-xs">Small</Label>
-      </SwitchRoot>
-      <SwitchRoot size="md">
-        <SwitchControl>
-          <SwitchThumb />
-        </SwitchControl>
+      </Switch>
+      <Switch size="md">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
         <Label className="text-sm">Medium</Label>
-      </SwitchRoot>
-      <SwitchRoot size="lg">
-        <SwitchControl>
-          <SwitchThumb />
-        </SwitchControl>
+      </Switch>
+      <Switch size="lg">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
         <Label className="text-base">Large</Label>
-      </SwitchRoot>
+      </Switch>
     </div>
   );
 }

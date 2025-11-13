@@ -12,7 +12,7 @@ The HeroUI MCP Server gives AI assistants direct access to HeroUI v3 component d
 />
 
 
-The MCP server currently supports **@heroui/react v3** only and [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) and is published at `@heroui/react-mcp` on npm. View the source code on [GitHub](https://github.com/heroui-inc/heroui-mcp).
+The MCP server currently supports **@heroui/react v3** only and [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio). Published at `@heroui/react-mcp` on npm. View the source code on [GitHub](https://github.com/heroui-inc/heroui-mcp).
 
 <Callout>
   As we add more components to HeroUI v3, they'll be available in the MCP server too.
@@ -20,7 +20,7 @@ The MCP server currently supports **@heroui/react v3** only and [stdio transport
 
 ## Quick Setup
 
-### Cursor
+**Cursor:**
 
 <div className="flex items-center gap-3 mb-4">
   <a
@@ -49,9 +49,7 @@ Or manually add to **Cursor Settings** → **Tools** → **MCP Servers**:
 
 Alternatively, add the following to your `~/.cursor/mcp.json` file. To learn more, see the [Cursor documentation](https://cursor.com/docs/context/mcp).
 
-### Claude Code
-
-Run this command in your terminal:
+**Claude Code:** Run this command in your terminal:
 
 ```bash
 claude mcp add heroui-react -- npx -y @heroui/react-mcp@latest
@@ -74,9 +72,7 @@ After adding the configuration, restart Claude Code and run `/mcp` to see the He
 
 See the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-code/mcp) for more details.
 
-### Windsurf
-
-Add the HeroUI server to your project's `.windsurf/mcp.json` configuration file:
+**Windsurf:** Add the HeroUI server to your project's `.windsurf/mcp.json` configuration file:
 
 ```json title=".windsurf/mcp.json"
 {
@@ -93,9 +89,7 @@ After adding the configuration, restart Windsurf to activate the MCP server.
 
 See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp) for more details.
 
-### VS Code
-
-To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
+**VS Code:** To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
 
 ```json title=".vscode/mcp.json"
 {
@@ -158,13 +152,9 @@ The MCP server provides these tools to AI assistants:
 
 ## Troubleshooting
 
-### Requirements
-- Node.js 18 or higher
-- The package will be automatically downloaded when using `npx`
+**Requirements:** Node.js 18 or higher. The package will be automatically downloaded when using `npx`.
 
-### Need Help?
-- [GitHub Issues](https://github.com/heroui-inc/heroui-mcp/issues)
-- [Discord Community](https://discord.gg/heroui)
+**Need help?** [GitHub Issues](https://github.com/heroui-inc/heroui-mcp/issues) | [Discord Community](https://discord.gg/heroui)
 
 ## Links
 
