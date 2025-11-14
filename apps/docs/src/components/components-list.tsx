@@ -30,6 +30,7 @@ const COMPONENT_NAMES = [
   "label",
   "link",
   "listbox",
+  "modal",
   "popover",
   "radio-group",
   "separator",
