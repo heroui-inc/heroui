@@ -17,36 +17,33 @@ export function CustomTrigger() {
           </div>
         </div>
       </Modal.Trigger>
-      <Modal.Backdrop>
-        <Modal.Container>
-          <Modal.Dialog className="sm:max-w-[360px]">
-            {({close}) => (
-              <>
-                <Modal.Header>
-                  <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
-                    <Icon className="size-5" icon="gravity-ui:gear" />
-                  </div>
-                  <h2 className="text-foreground text-lg font-semibold leading-6">Settings</h2>
-                </Modal.Header>
-                <Modal.Body>
-                  <p>
-                    Use <code>Modal.Trigger</code> to create custom trigger elements beyond standard
-                    buttons. This example shows a card-style trigger with icons and descriptive
-                    text.
-                  </p>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onPress={close}>
-                    Cancel
-                  </Button>
-                  <Button onPress={close}>Save</Button>
-                </Modal.Footer>
-                <Modal.CloseTrigger />
-              </>
-            )}
-          </Modal.Dialog>
-        </Modal.Container>
-      </Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Dialog className="sm:max-w-[360px]">
+          {({close}) => (
+            <>
+              <Modal.Header>
+                <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+                  <Icon className="size-5" icon="gravity-ui:gear" />
+                </div>
+                <h2 className="text-foreground text-lg font-semibold leading-6">Settings</h2>
+              </Modal.Header>
+              <Modal.Body>
+                <p>
+                  Use <code>Modal.Trigger</code> to create custom trigger elements beyond standard
+                  buttons. This example shows a card-style trigger with icons and descriptive text.
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onPress={close}>
+                  Cancel
+                </Button>
+                <Button onPress={close}>Save</Button>
+              </Modal.Footer>
+              <Modal.CloseTrigger />
+            </>
+          )}
+        </Modal.Dialog>
+      </Modal.Container>
     </Modal>
   );
 }

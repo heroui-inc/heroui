@@ -31,16 +31,14 @@ import { Modal, Button } from '@heroui/react';
 export default () => (
   <Modal>
     <Button>Open Modal</Button>
-    <Modal.Backdrop>
-      <Modal.Container>
-        <Modal.Dialog>
-          <Modal.CloseTrigger />
-          <Modal.Header />
-          <Modal.Body />
-          <Modal.Footer />
-        </Modal.Dialog>
-      </Modal.Container>
-    </Modal.Backdrop>
+    <Modal.Container>
+      <Modal.Dialog>
+        <Modal.CloseTrigger />
+        <Modal.Header />
+        <Modal.Body />
+        <Modal.Footer />
+      </Modal.Dialog>
+    </Modal.Container>
   </Modal>
 )
 ```
@@ -66,7 +64,7 @@ export default () => (
 ### Scroll Behavior
 
 <ComponentPreview
-  name="modal-scroll-behavior"
+  name="modal-scroll-comparison"
 />
 
 ### With Form
@@ -78,7 +76,7 @@ export default () => (
 ### Controlled State
 
 <ComponentPreview
-  name="modal-controlled"
+  name="modal-with-use-modal-state"
 />
 
 ### Custom Trigger
@@ -110,21 +108,22 @@ function CustomModal() {
   return (
     <Modal>
       <Button>Open Modal</Button>
-      <Modal.Backdrop className="bg-black/80">
-        <Modal.Container className="items-start pt-20">
-          <Modal.Dialog className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
-            <Modal.Header>
-              <h2>Custom Styled Modal</h2>
-            </Modal.Header>
-            <Modal.Body>
-              <p>This modal has custom styling applied via Tailwind classes</p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button>Close</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
-        </Modal.Container>
-      </Modal.Backdrop>
+      <Modal.Container
+        backdropClassName="bg-black/80"
+        className="items-start pt-20"
+      >
+        <Modal.Dialog className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+          <Modal.Header>
+            <h2>Custom Styled Modal</h2>
+          </Modal.Header>
+          <Modal.Body>
+            <p>This modal has custom styling applied via Tailwind classes</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button>Close</Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      </Modal.Container>
     </Modal>
   );
 }
@@ -211,22 +210,17 @@ The component supports these interactive states:
 | `children` | `ReactNode` | - | Trigger content |
 | `className` | `string` | - | CSS classes |
 
-### Modal.Backdrop
-
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"solid" \| "blur" \| "transparent"` | `"solid"` | Backdrop style |
-| `isDismissable` | `boolean` | `true` | Close on backdrop click |
-| `isKeyboardDismissDisabled` | `boolean` | `false` | Disable ESC key |
-| `className` | `string \| (values) => string` | - | CSS classes |
-
 ### Modal.Container
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | Position |
+| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | Modal position on screen |
 | `scroll` | `"inside" \| "outside"` | `"inside"` | Scroll behavior |
-| `className` | `string \| (values) => string` | - | CSS classes |
+| `variant` | `"solid" \| "blur" \| "transparent"` | `"solid"` | Backdrop overlay style |
+| `isDismissable` | `boolean` | `true` | Close on backdrop click |
+| `isKeyboardDismissDisabled` | `boolean` | `false` | Disable ESC key to close |
+| `backdropClassName` | `string \| (values) => string` | - | Backdrop CSS classes |
+| `className` | `string \| (values) => string` | - | Container CSS classes |
 
 ### Modal.Dialog
 

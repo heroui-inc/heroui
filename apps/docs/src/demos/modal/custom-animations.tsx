@@ -42,44 +42,43 @@ export function CustomAnimations() {
     <div className="flex flex-wrap gap-4">
       {Object.entries(animations).map(([name, classNames]) => (
         <Modal key={name}>
-          <Button>{name.replace("_", " ")}</Button>
-          <Modal.Backdrop className="data-[exiting]:duration-200">
-            <Modal.Container
-              className={clsx(
-                "data-[entering]:duration-[350ms]",
-                "data-[exiting]:duration-200",
-                classNames,
+          <Button variant="secondary">{name.replace("_", " ")}</Button>
+          <Modal.Container
+            backdropClassName="data-[exiting]:duration-250"
+            className={clsx(
+              "data-[entering]:duration-300",
+              "data-[exiting]:duration-200",
+              classNames,
+            )}
+          >
+            <Modal.Dialog className="sm:max-w-[360px]">
+              {({close}) => (
+                <>
+                  <Modal.CloseTrigger />
+                  <Modal.Header>
+                    <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                    </div>
+                    <h2 className="text-foreground text-lg font-semibold leading-6">
+                      {name.replace("_", " ")} Animation
+                    </h2>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>
+                      Customize your modal's entrance and exit animations using Tailwind's animation
+                      utilities. This example demonstrates the{" "}
+                      {name.replace("_", " ").toLowerCase()} animation style.
+                    </p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button className="w-full" onPress={close}>
+                      Continue
+                    </Button>
+                  </Modal.Footer>
+                </>
               )}
-            >
-              <Modal.Dialog className="sm:max-w-[360px]">
-                {({close}) => (
-                  <>
-                    <Modal.CloseTrigger />
-                    <Modal.Header>
-                      <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
-                        <Icon className="size-5" icon="gravity-ui:rocket" />
-                      </div>
-                      <h2 className="text-foreground text-lg font-semibold leading-6">
-                        {name.replace("_", " ")} Animation
-                      </h2>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <p>
-                        Customize your modal's entrance and exit animations using Tailwind's
-                        animation utilities. This example demonstrates the{" "}
-                        {name.replace("_", " ").toLowerCase()} animation style.
-                      </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button className="w-full" onPress={close}>
-                        Continue
-                      </Button>
-                    </Modal.Footer>
-                  </>
-                )}
-              </Modal.Dialog>
-            </Modal.Container>
-          </Modal.Backdrop>
+            </Modal.Dialog>
+          </Modal.Container>
         </Modal>
       ))}
     </div>

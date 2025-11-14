@@ -29,8 +29,6 @@
 
 /* ------------------------------------------------------------------------------------------------
  * Backdrop - The overlay behind the dialog
- * ------------------------------------------------------------------------------------------------
- * TODO: fix backdrop animations
  * ------------------------------------------------------------------------------------------------ */
 .modal__backdrop {
   @apply h-(--visual-viewport-height) fixed inset-0 isolate z-50;
@@ -42,7 +40,7 @@
 
   /* Exiting animation */
   &[data-exiting] {
-    @apply animate-out fade-out-0 ease-out-quart duration-150;
+    @apply animate-out fade-out-0 ease-out-quart duration-200;
   }
 
   /**
@@ -99,7 +97,7 @@
 
   /* Entering animation */
   &[data-entering] {
-    @apply animate-in fade-in-0 zoom-in-95 ease-out-quad duration-300;
+    @apply animate-in fade-in-0 zoom-in-95 ease-out-quad duration-250;
 
     &[data-placement="auto"] {
       @apply slide-in-from-bottom-1 sm:slide-in-from-bottom-0;
@@ -119,6 +117,7 @@
 
   /* Exiting animation */
   &[data-exiting] {
+    /* TODO: looking into how to sync the animation duration with the backdrop, for now the container needs to exit a bit earlier */
     @apply animate-out fade-out-0 zoom-out-95 ease-out-quart duration-150;
   }
 

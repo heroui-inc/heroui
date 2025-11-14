@@ -723,9 +723,9 @@ export const demos: Record<string, DemoItem> = {
     component: ModalDemos.BackdropVariants,
     file: "modal/backdrop-variants.tsx",
   },
-  "modal-scroll-behavior": {
-    component: ModalDemos.ScrollBehavior,
-    file: "modal/scroll-behavior.tsx",
+  "modal-scroll-comparison": {
+    component: ModalDemos.ScrollComparison,
+    file: "modal/scroll-comparison.tsx",
   },
   "modal-dismiss-behavior": {
     component: ModalDemos.DismissBehavior,
@@ -735,9 +735,9 @@ export const demos: Record<string, DemoItem> = {
     component: ModalDemos.WithForm,
     file: "modal/with-form.tsx",
   },
-  "modal-controlled": {
-    component: ModalDemos.Controlled,
-    file: "modal/controlled.tsx",
+  "modal-with-use-modal-state": {
+    component: ModalDemos.WithUseModalState,
+    file: "modal/with-use-modal-state.tsx",
   },
   "modal-custom-trigger": {
     component: ModalDemos.CustomTrigger,

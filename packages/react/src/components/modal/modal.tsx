@@ -25,7 +25,7 @@ import {CloseButton} from "../close-button";
 
 import {modalVariants} from "./modal.styles";
 
-type ModalPlacement = "auto" | "center" | "top" | "bottom";
+type ModalPlacement = "auto" | "top" | "center" | "bottom";
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Context
@@ -45,13 +45,15 @@ interface ModalRootProps extends ComponentProps<typeof ModalTriggerPrimitive> {
 }
 
 const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
-  const modalContext = useMemo<ModalContext>(() => {
-    return {slots: modalVariants(), placement: undefined};
-  }, []);
+  const modalContext = useMemo<ModalContext>(
+    () => ({slots: modalVariants(), placement: undefined}),
+    [],
+  );
 
-  const controlledProps = useMemo<UseModalStateProps>(() => {
-    return state ? {isOpen: state.isOpen, onOpenChange: state.setOpen} : {};
-  }, [state]);
+  const controlledProps = useMemo<UseModalStateProps>(
+    () => (state ? {isOpen: state.isOpen, onOpenChange: state.setOpen} : {}),
+    [state],
+  );
 
   return (
     <ModalContext value={modalContext}>
@@ -85,89 +87,57 @@ const ModalTrigger = ({children, className, ...props}: ModalTriggerProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Modal Backdrop
+ * Modal Container
  * -----------------------------------------------------------------------------------------------*/
-interface ModalBackdropProps extends ComponentProps<typeof ModalOverlayPrimitive> {
+interface ModalContainerProps extends ComponentProps<typeof ModalPrimitive> {
+  placement?: ModalPlacement;
+  scroll?: ModalVariants["scroll"];
   variant?: ModalVariants["variant"];
   /**
    * Whether to close the modal when the user interacts outside it.
    * @default true
    */
   isDismissable?: boolean;
-}
-
-const ModalBackdrop = ({
-  children,
-  className,
-  isDismissable = true,
-  variant = "solid",
-  ...props
-}: ModalBackdropProps) => {
-  const {slots: contextSlots} = useContext(ModalContext);
-
-  const updatedSlots = useMemo(() => {
-    return modalVariants({variant});
-  }, [variant]);
-
-  const updatedModalContext = useMemo<ModalContext>(
-    () => ({slots: {...contextSlots, ...updatedSlots}, placement: undefined}),
-    [contextSlots, updatedSlots],
-  );
-
-  return (
-    <ModalContext value={updatedModalContext}>
-      <ModalOverlayPrimitive
-        className={composeTwRenderProps(className, updatedModalContext.slots?.backdrop())}
-        data-slot="modal-backdrop"
-        isDismissable={isDismissable}
-        {...props}
-      >
-        {children}
-      </ModalOverlayPrimitive>
-    </ModalContext>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
- * Modal Container
- * -----------------------------------------------------------------------------------------------*/
-interface ModalContainerProps
-  extends Omit<
-    ComponentProps<typeof ModalPrimitive>,
-    Exclude<keyof ModalBackdropProps, "children" | "className">
-  > {
-  placement?: ModalPlacement;
-  scroll?: ModalVariants["scroll"];
+  backdropClassName?: ComponentProps<typeof ModalOverlayPrimitive>["className"];
 }
 
 const ModalContainer = ({
+  backdropClassName,
   children,
   className,
+  isDismissable = true,
   placement = "auto",
   scroll = "inside",
+  variant = "solid",
   ...props
 }: ModalContainerProps) => {
   const {slots: contextSlots} = useContext(ModalContext);
 
-  const updatedSlots = useMemo(() => {
-    return modalVariants({scroll});
-  }, [scroll]);
+  const updatedSlots = useMemo(() => modalVariants({scroll, variant}), [scroll, variant]);
 
   const updatedModalContext = useMemo<ModalContext>(
-    () => ({slots: {...contextSlots, ...updatedSlots}, placement}),
-    [contextSlots, updatedSlots, placement],
+    () => ({placement, slots: {...contextSlots, ...updatedSlots}}),
+    [contextSlots, placement, updatedSlots],
   );
 
   return (
     <ModalContext.Provider value={updatedModalContext}>
-      <ModalPrimitive
-        className={composeTwRenderProps(className, updatedModalContext.slots?.container())}
-        data-placement={placement}
-        data-slot="modal-container"
+      <ModalOverlayPrimitive
+        className={composeTwRenderProps(backdropClassName, updatedSlots?.backdrop())}
+        data-slot="modal-backdrop"
+        isDismissable={isDismissable}
         {...props}
       >
-        {children}
-      </ModalPrimitive>
+        <ModalPrimitive
+          className={composeTwRenderProps(className, updatedSlots?.container())}
+          data-placement={placement}
+          data-slot="modal-container"
+          isDismissable={isDismissable}
+          {...props}
+        >
+          {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+        </ModalPrimitive>
+      </ModalOverlayPrimitive>
     </ModalContext.Provider>
   );
 };
@@ -279,7 +249,6 @@ const ModalCloseTrigger: ModalCloseTrigger = (props) => {
 export {
   ModalRoot,
   ModalTrigger,
-  ModalBackdrop,
   ModalContainer,
   ModalDialog,
   ModalHeader,
@@ -291,7 +260,6 @@ export {
 export type {
   ModalRootProps,
   ModalTriggerProps,
-  ModalBackdropProps,
   ModalContainerProps,
   ModalDialogProps,
   ModalHeaderProps,
