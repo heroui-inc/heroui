@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import {useIntersectionObserver} from "usehooks-ts";
 
+import {useGlobalIntersectionObserver} from "@/hooks/use-global-intersection-observer";
 import {cn} from "@/utils/cn";
 
 interface ComponentPreviewContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,12 +24,12 @@ export function ComponentPreviewContainer({
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
-  const {isIntersecting: previewInView, ref: previewRef} = useIntersectionObserver({
+  const [previewRef, previewInView] = useGlobalIntersectionObserver<HTMLDivElement>({
     initialIsIntersecting: true,
     rootMargin: "400px 0px 100px 0px",
     threshold: 0,
   });
-  const {isIntersecting: codeInView, ref: codeRef} = useIntersectionObserver({
+  const [codeRef, codeInView] = useGlobalIntersectionObserver<HTMLDivElement>({
     initialIsIntersecting: true,
     rootMargin: "300px 0px 0px 0px",
     threshold: 0,
@@ -59,11 +59,13 @@ export function ComponentPreviewContainer({
           alignmentClasses[align],
           "flex",
         )}
-        style={{
-          contain: "layout style",
-          contentVisibility: "auto",
-          isolation: "isolate",
-        }}
+        style={
+          {
+            // contain: "layout style", // Safari: breaks fixed positioning for Select dropdown
+            // contentVisibility: "auto", // Safari: causes animation stuttering
+            // isolation: "isolate", // Safari: creates unnecessary stacking context affecting Select
+          }
+        }
       >
         <div
           className="flex w-full items-center justify-center"
@@ -81,9 +83,11 @@ export function ComponentPreviewContainer({
         <div
           ref={codeRef}
           className="code-section border-divider relative rounded-b-xl border bg-transparent"
-          style={{
-            contentVisibility: "auto",
-          }}
+          style={
+            {
+              // contentVisibility: "auto",
+            }
+          }
         >
           <div
             className="code-block-wrapper min-h-[124px]"
