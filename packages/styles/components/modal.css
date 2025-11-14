@@ -144,11 +144,6 @@
  * ------------------------------------------------------------------------------------------------ */
 .modal__dialog {
   @apply bg-overlay shadow-overlay relative flex w-full flex-col rounded-3xl outline-none;
-
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    @apply status-focused;
-  }
 }
 
 /* dialog variants - scroll inside  */
