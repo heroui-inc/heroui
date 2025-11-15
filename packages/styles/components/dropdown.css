@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Base dropdown styles
+   ========================================================================== */
+
+.dropdown {
+  @apply flex flex-col gap-1;
+}
+
+.dropdown__trigger {
+  /* Only visible when using a custom trigger  - not passing "Button" as a child - hence we use some button styles (custom trigger) */
+  @apply outline-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled] {
+    @apply status-disabled;
+  }
+
+  /* Pending state */
+  &[data-pending] {
+    @apply status-pending;
+  }
+
+  /* Default active/pressed state - scale transform */
+  &:active,
+  &[data-pressed] {
+    transform: scale(0.97);
+  }
+}
+
+/* Similar to select content styles */
+.dropdown__content {
+  @apply bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  box-shadow: var(--shadow-overlay);
+  min-width: 220px;
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+
+  /* Entering animations */
+  &[data-entering] {
+    @apply animate-in zoom-in-90 fade-in-0 ease-fluid-out duration-250;
+
+    /* Placement-specific translations */
+    &[data-placement="top"] {
+      @apply slide-in-from-bottom-1;
+    }
+
+    &[data-placement="bottom"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement="left"] {
+      @apply slide-in-from-right-1;
+    }
+
+    &[data-placement="right"] {
+      @apply slide-in-from-left-1;
+    }
+  }
+
+  /* Exiting animations */
+  &[data-exiting] {
+    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
+  }
+
+  /* Arrow styling */
+  & [data-slot="popover-overlay-arrow"] {
+    fill: var(--overlay);
+  }
+
+  /* Arrow rotation based on placement */
+  &[data-placement="bottom"] [data-slot="popover-overlay-arrow"] {
+    rotate: 180deg;
+  }
+
+  &[data-placement="left"] [data-slot="popover-overlay-arrow"] {
+    rotate: -90deg;
+  }
+
+  &[data-placement="right"] [data-slot="popover-overlay-arrow"] {
+    rotate: 90deg;
+  }
+
+  /* Menu styles */
+  [data-slot="dropdown-menu"] {
+    @apply p-1.5 outline-none;
+  }
+
+  [data-slot="menu-item"] {
+    @apply px-2.5;
+  }
+}
+
+.dropdown__menu {
+  @apply relative flex w-full flex-col gap-0.5 overflow-clip p-1;
+
+  /* This makes the separator take up 94% of the width and be centered */
+  [data-slot="separator"] {
+    @apply ml-[3%] w-[94%];
+  }
+}

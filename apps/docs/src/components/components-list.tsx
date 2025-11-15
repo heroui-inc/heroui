@@ -21,6 +21,7 @@ const COMPONENT_NAMES = [
   "description",
   "disclosure",
   "disclosure-group",
+  "dropdown",
   "field-error",
   "fieldset",
   "form",

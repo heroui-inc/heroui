@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Base menu item styles
+   ========================================================================== */
+
+.menu-item {
+  @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    box-shadow 150ms var(--ease-out);
+
+  @apply motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  [data-slot="label"] {
+    @apply pointer-events-none w-fit select-none;
+  }
+
+  [data-slot="description"] {
+    @apply pointer-events-none select-none text-wrap;
+  }
+
+  [data-slot="submenu-indicator"] svg {
+    @apply size-3.5;
+  }
+
+  /* Add padding-left when indicator is present */
+  &:has(.menu-item__indicator) {
+    @apply pl-7;
+  }
+
+  /* Add padding-right when indicator is present and has submenu */
+  &[data-has-submenu="true"]:has(.menu-item__indicator) {
+    @apply pl-2 pr-7;
+  }
+
+  /* Focus visible state (keyboard focus only) */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Focus state */
+  &:focus,
+  &[data-focus="true"] {
+  }
+
+  /* Pressed state */
+  &:active,
+  &[data-pressed] {
+    transform: scale(0.98);
+  }
+
+  /* Hover state */
+  &:hover,
+  &[data-hovered] {
+    @apply bg-default-hover;
+  }
+
+  /* Selected state */
+  &[aria-checked="true"],
+  &[aria-selected="true"],
+  &[data-selected="true"] {
+    [data-slot="menu-item-indicator--checkmark"] {
+      /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+      transition: stroke-dashoffset 100ms linear;
+      @apply motion-reduce:transition-none;
+    }
+
+    [data-slot="menu-item-indicator--dot"] {
+      /**
+       * Selected state: visible and scaled up
+       */
+      @apply scale-100 opacity-100;
+    }
+  }
+
+  /* Disabled state */
+  &[data-disabled] {
+    @apply status-disabled;
+  }
+}
+
+/* ==========================================================================
+   Menu item indicator
+   ========================================================================== */
+
+.menu-item__indicator {
+  @apply text-muted absolute left-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
+
+  /**
+   * Transitions
+   */
+  @apply duration-250 transition motion-reduce:transition-none;
+
+  /* Position on the right when menu item has submenu */
+  .menu-item[data-has-submenu="true"] & {
+    @apply left-auto right-2;
+  }
+
+  /* Checkmark SVG indicator */
+  [data-slot="menu-item-indicator--checkmark"] {
+    @apply size-2.5;
+
+    .menu-item[data-selection-mode="multiple"] & {
+      /**
+       * Transitions
+       */
+      @apply transition-all duration-300 motion-reduce:transition-none;
+    }
+  }
+
+  /* Dot SVG indicator */
+  [data-slot="menu-item-indicator--dot"] {
+    @apply size-2;
+
+    .menu-item[data-selection-mode="multiple"] & {
+      /**
+     * Transitions
+     */
+      @apply duration-250 transition-all motion-reduce:transition-none;
+    }
+    /**
+     * Default state: hidden and scaled down
+     */
+    @apply scale-70 opacity-0;
+  }
+}
+
+/* Submenu indicator (chevron-right) */
+.menu-item__indicator--submenu {
+  @apply text-muted;
+
+  svg {
+    @apply size-3;
+  }
+}
+
+/* Default variant */
+.menu-item--default {
+}
+
+/* Danger variant */
+.menu-item--danger {
+  .menu-item__indicator {
+    @apply text-danger;
+  }
+
+  [data-slot="label"] {
+    @apply text-danger;
+  }
+}

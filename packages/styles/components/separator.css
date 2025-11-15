@@ -14,7 +14,7 @@
 }
 
 .separator--vertical {
-  @apply h-full w-px;
+  @apply h-full min-h-2 w-px;
 }
 
 .separator__container {

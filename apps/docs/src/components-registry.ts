@@ -91,6 +91,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "disclosuregroup",
     title: "DisclosureGroup",
   },
+  dropdown: {
+    category: "display",
+    description: "Context menu with actions and options",
+    href: "/docs/components/dropdown",
+    name: "dropdown",
+    title: "Dropdown",
+  },
   fielderror: {
     category: "forms",
     description: "Inline validation messages for form fields",
@@ -259,7 +266,7 @@ const componentRelationships: Record<string, string[]> = {
   accordion: ["disclosuregroup", "disclosure"],
   alert: ["closebutton", "button", "spinner"],
   avatar: ["separator"],
-  button: ["popover", "tooltip", "form", "alert", "closebutton"],
+  button: ["popover", "tooltip", "form", "alert", "closebutton", "dropdown"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [
@@ -287,6 +294,7 @@ const componentRelationships: Record<string, string[]> = {
   ],
   disclosure: ["accordion", "disclosuregroup", "button"],
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
+  dropdown: ["button", "popover", "separator", "listbox"],
   fielderror: ["textfield", "input", "textarea", "form"],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
   form: [
@@ -320,9 +328,9 @@ const componentRelationships: Record<string, string[]> = {
     "select",
   ],
   link: [],
-  listbox: ["select", "avatar", "kbd", "separator", "surface"],
+  listbox: ["select", "avatar", "kbd", "separator", "surface", "dropdown"],
   modal: ["button", "tooltip", "select", "avatar"],
-  popover: ["button", "tooltip", "select", "avatar"],
+  popover: ["button", "tooltip", "select", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
   select: [
     "listbox",
@@ -337,7 +345,7 @@ const componentRelationships: Record<string, string[]> = {
     "separator",
     "avatar",
   ],
-  separator: ["card", "chip", "avatar", "disclosuregroup", "listbox", "select"],
+  separator: ["card", "chip", "avatar", "disclosuregroup", "listbox", "select", "dropdown"],
   skeleton: ["card", "avatar"],
   slider: ["label", "form", "description"],
   spinner: [],

@@ -13,7 +13,7 @@ interface HeaderRootProps extends ComponentProps<typeof HeaderPrimitive> {}
 
 const HeaderRoot = ({children, className, ...rest}: HeaderRootProps) => {
   return (
-    <HeaderPrimitive className={headerVariants({className})} {...rest}>
+    <HeaderPrimitive className={headerVariants({className})} data-slot="header" {...rest}>
       {children}
     </HeaderPrimitive>
   );
