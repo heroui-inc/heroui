@@ -51,6 +51,7 @@ const ButtonRoot = ({
   return (
     <ButtonPrimitive
       className={composeTwRenderProps(className, styles)}
+      data-slot="button"
       slot={slot}
       style={style}
       {...rest}

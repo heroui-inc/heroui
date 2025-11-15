@@ -1,0 +1,530 @@
+---
+title: Dropdown
+description: A dropdown displays a list of actions or options that a user can choose
+icon: new
+links:
+  rac: Menu
+  source: dropdown/dropdown.tsx
+  styles: dropdown.css
+  storybook: Components/Collections/Dropdown
+---
+
+## Import
+
+```tsx
+import { Dropdown } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="dropdown-default"
+/>
+
+### Anatomy
+
+Import the Dropdown component and access all parts using dot notation.
+
+```tsx
+import { Dropdown, Button, Label, Description, Header, Kbd, Separator } from '@heroui/react';
+
+export default () => (
+  <Dropdown>
+    <Dropdown.Trigger>
+      <Button />
+    </Dropdown.Trigger>
+    <Dropdown.Content>
+      <Dropdown.Menu>
+        <Dropdown.Item>
+          <Label />
+          <Description />
+          <Kbd slot="keyboard" />
+          <Dropdown.ItemIndicator />
+        </Dropdown.Item>
+        <Separator />
+        <Dropdown.Section>
+          <Header />
+          <Dropdown.Item />
+        </Dropdown.Section>
+        <Dropdown.SubmenuTrigger>
+          <Dropdown.Item>
+            <Label />
+            <Dropdown.SubmenuIndicator />
+          </Dropdown.Item>
+          <Dropdown.Content>
+            <Dropdown.Menu>
+              <Dropdown.Item />
+            </Dropdown.Menu>
+          </Dropdown.Content>
+        </Dropdown.SubmenuTrigger>
+      </Dropdown.Menu>
+    </Dropdown.Content>
+  </Dropdown>
+)
+```
+
+### With Single Selection
+
+<ComponentPreview
+  name="dropdown-with-single-selection"
+/>
+
+### Single With Custom Indicator
+
+<ComponentPreview
+  name="dropdown-single-with-custom-indicator"
+/>
+
+### With Multiple Selection
+
+<ComponentPreview
+  name="dropdown-with-multiple-selection"
+/>
+
+### With Section Level Selection
+
+<ComponentPreview
+  name="dropdown-with-section-level-selection"
+/>
+
+### With Keyboard Shortcuts
+
+<ComponentPreview
+  name="dropdown-with-keyboard-shortcuts"
+/>
+
+### With Icons
+
+<ComponentPreview
+  name="dropdown-with-icons"
+/>
+
+### Long Press Trigger
+
+<ComponentPreview
+  name="dropdown-long-press-trigger"
+/>
+
+### With Descriptions
+
+<ComponentPreview
+  name="dropdown-with-descriptions"
+/>
+
+### With Sections
+
+<ComponentPreview
+  name="dropdown-with-sections"
+/>
+
+### With Disabled Items
+
+<ComponentPreview
+  name="dropdown-with-disabled-items"
+/>
+
+### With Submenus
+
+<ComponentPreview
+  name="dropdown-with-submenus"
+/>
+
+### With Custom Submenu Indicator
+
+<ComponentPreview
+  name="dropdown-with-custom-submenu-indicator"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="dropdown-controlled"
+/>
+
+### Controlled Open State
+
+<ComponentPreview
+  name="dropdown-controlled-open-state"
+/>
+
+### Custom Trigger
+
+<ComponentPreview
+  name="dropdown-custom-trigger"
+/>
+
+<RelatedComponents component="dropdown" />
+ 
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Dropdown, Button } from '@heroui/react';
+
+function CustomDropdown() {
+  return (
+    <Dropdown>
+      <Dropdown.Trigger className="rounded-lg border p-2 bg-surface">
+        <Button>Actions</Button>
+      </Dropdown.Trigger>
+      <Dropdown.Content className="min-w-[200px]">
+        <Dropdown.Menu>
+          <Dropdown.Item id="item-1" textValue="Item 1" className="hover:bg-surface-secondary">
+            Item 1
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Content>
+    </Dropdown>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Dropdown component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .dropdown {
+    @apply flex flex-col gap-1;
+  }
+
+  .dropdown__trigger {
+    @apply outline-none;
+  }
+
+  .dropdown__content {
+    @apply rounded-lg border border-border bg-overlay p-2;
+  }
+
+  .dropdown__menu {
+    @apply flex flex-col gap-1;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Dropdown component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/dropdown.css)):
+
+#### Base Classes
+- `.dropdown` - Base dropdown container
+- `.dropdown__trigger` - The button or element that triggers the dropdown
+- `.dropdown__content` - The popover content container
+- `.dropdown__menu` - The menu container inside the popover
+
+#### State Classes
+- `.dropdown__trigger[data-focus-visible="true"]` - Focused trigger state
+- `.dropdown__trigger[data-disabled="true"]` - Disabled trigger state
+- `.dropdown__trigger[data-pressed="true"]` - Pressed trigger state
+- `.dropdown__content[data-entering]` - Entering animation state
+- `.dropdown__content[data-exiting]` - Exiting animation state
+- `.dropdown__menu[data-selection-mode="single"]` - Single selection mode
+- `.dropdown__menu[data-selection-mode="multiple"]` - Multiple selection mode
+
+### Menu Component Classes
+
+The Dropdown component uses Menu, MenuItem, and MenuSection as base components. These classes are also available for customization:
+
+#### Menu Classes
+- `.menu` - Base menu container ([menu.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu.css))
+  - `[data-slot="separator"]` - Separator elements within the menu
+
+#### MenuItem Classes
+- `.menu-item` - Base menu item container ([menu-item.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu-item.css))
+- `.menu-item__indicator` - Selection indicator (checkmark or dot)
+  - `[data-slot="menu-item-indicator--checkmark"]` - Checkmark indicator SVG
+  - `[data-slot="menu-item-indicator--dot"]` - Dot indicator SVG
+- `.menu-item__indicator--submenu` - Submenu indicator (chevron)
+- `.menu-item--default` - Default variant styling
+- `.menu-item--danger` - Danger variant styling
+
+#### MenuItem State Classes
+- `.menu-item[data-focus-visible="true"]` - Focused item state (keyboard focus)
+- `.menu-item[data-focus="true"]` - Focused item state
+- `.menu-item[data-pressed]` - Pressed item state
+- `.menu-item[data-hovered]` - Hovered item state
+- `.menu-item[data-selected="true"]` - Selected item state
+- `.menu-item[data-disabled]` - Disabled item state
+- `.menu-item[data-has-submenu="true"]` - Item with submenu
+- `.menu-item[data-selection-mode="single"]` - Single selection mode
+- `.menu-item[data-selection-mode="multiple"]` - Multiple selection mode
+- `.menu-item[aria-checked="true"]` - Checked item (ARIA)
+- `.menu-item[aria-selected="true"]` - Selected item (ARIA)
+
+#### MenuSection Classes
+- `.menu-section` - Base menu section container ([menu-section.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu-section.css))
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Hover**: `:hover` or `[data-hovered="true"]` on trigger and items
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on trigger and items
+- **Disabled**: `:disabled` or `[data-disabled="true"]` on trigger and items
+- **Pressed**: `:active` or `[data-pressed="true"]` on trigger and items
+- **Selected**: `[data-selected="true"]` or `[aria-selected="true"]` on items
+
+## API Reference
+
+### Dropdown Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isOpen` | `boolean` | - | Sets the open state of the menu (controlled) |
+| `defaultOpen` | `boolean` | - | Sets the default open state of the menu (uncontrolled) |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Handler called when the open state changes |
+| `trigger` | `"press" \| "longPress"` | `"press"` | The type of interaction that triggers the menu |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Dropdown content |
+
+### Dropdown.Trigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Trigger content or render function |
+
+All [Button](https://react-spectrum.adobe.com/react-aria/Button.html) props are also supported when using a Button as the trigger.
+
+### Dropdown.Content Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | Placement of the popover relative to the trigger |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Content children |
+
+All [Popover](https://react-spectrum.adobe.com/react-aria/Popover.html) props are also supported.
+
+### Dropdown.Menu Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selectionMode` | `"single" \| "multiple" \| "none"` | `"none"` | Whether single or multiple selection is enabled |
+| `selectedKeys` | `Iterable<Key>` | - | The currently selected keys (controlled) |
+| `defaultSelectedKeys` | `Iterable<Key>` | - | The initial selected keys (uncontrolled) |
+| `onSelectionChange` | `(keys: Selection) => void` | - | Handler called when the selection changes |
+| `disabledKeys` | `Iterable<Key>` | - | Keys of disabled items |
+| `onAction` | `(key: Key) => void` | - | Handler called when an item is activated |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Menu content |
+
+All [Menu](https://react-spectrum.adobe.com/react-aria/Menu.html#menu) props are also supported.
+
+### Dropdown.Section Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selectionMode` | `"single" \| "multiple"` | - | Selection mode for items within this section |
+| `selectedKeys` | `Iterable<Key>` | - | The currently selected keys (controlled) |
+| `defaultSelectedKeys` | `Iterable<Key>` | - | The initial selected keys (uncontrolled) |
+| `onSelectionChange` | `(keys: Selection) => void` | - | Handler called when the selection changes |
+| `disabledKeys` | `Iterable<Key>` | - | Keys of disabled items |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Section content |
+
+All [MenuSection](https://react-spectrum.adobe.com/react-aria/Menu.html#menusection) props are also supported.
+
+### Dropdown.Item Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `Key` | - | Unique identifier for the item |
+| `textValue` | `string` | - | Text content of the item for typeahead |
+| `variant` | `"default" \| "danger"` | `"default"` | Visual variant of the item |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
+
+All [MenuItem](https://react-spectrum.adobe.com/react-aria/Menu.html#menuitem) props are also supported.
+
+### Dropdown.ItemIndicator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"checkmark" \| "dot"` | `"checkmark"` | Type of indicator to display |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Custom indicator content or render function |
+
+When using a render function, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isSelected` | `boolean` | Whether the item is selected |
+| `isIndeterminate` | `boolean` | Whether the item is in an indeterminate state |
+
+### Dropdown.SubmenuIndicator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Custom indicator content |
+
+### Dropdown.SubmenuTrigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Submenu trigger content |
+
+All [SubmenuTrigger](https://react-spectrum.adobe.com/react-aria/Menu.html#submenutrigger) props are also supported.
+
+### RenderProps
+
+When using render functions with Dropdown.Item, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isSelected` | `boolean` | Whether the item is selected |
+| `isFocused` | `boolean` | Whether the item is focused |
+| `isDisabled` | `boolean` | Whether the item is disabled |
+| `isPressed` | `boolean` | Whether the item is being pressed |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { Dropdown, Button, Label } from '@heroui/react';
+
+<Dropdown>
+  <Button aria-label="Menu" variant="secondary">
+    Actions
+  </Button>
+  <Dropdown.Content>
+    <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
+      <Dropdown.Item id="new-file" textValue="New file">
+        <Label>New file</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="open-file" textValue="Open file">
+        <Label>Open file</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
+        <Label>Delete file</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown.Content>
+</Dropdown>
+```
+
+### With Sections
+
+```tsx
+import { Dropdown, Button, Label, Header, Separator } from '@heroui/react';
+
+<Dropdown>
+  <Button aria-label="Menu" variant="secondary">
+    Actions
+  </Button>
+  <Dropdown.Content>
+    <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
+      <Dropdown.Section>
+        <Header>Actions</Header>
+        <Dropdown.Item id="new-file" textValue="New file">
+          <Label>New file</Label>
+        </Dropdown.Item>
+        <Dropdown.Item id="edit-file" textValue="Edit file">
+          <Label>Edit file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+      <Separator />
+      <Dropdown.Section>
+        <Header>Danger zone</Header>
+        <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
+          <Label>Delete file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+    </Dropdown.Menu>
+  </Dropdown.Content>
+</Dropdown>
+```
+
+### Controlled Selection
+
+```tsx
+import type { Selection } from '@heroui/react';
+
+import { Dropdown, Button, Label } from '@heroui/react';
+import { useState } from 'react';
+
+function ControlledDropdown() {
+  const [selected, setSelected] = useState<Selection>(new Set(['bold']));
+
+  return (
+    <Dropdown>
+      <Button aria-label="Menu" variant="secondary">
+        Actions
+      </Button>
+      <Dropdown.Content>
+        <Dropdown.Menu
+          selectedKeys={selected}
+          selectionMode="multiple"
+          onSelectionChange={setSelected}
+        >
+          <Dropdown.Item id="bold" textValue="Bold">
+            <Label>Bold</Label>
+            <Dropdown.ItemIndicator />
+          </Dropdown.Item>
+          <Dropdown.Item id="italic" textValue="Italic">
+            <Label>Italic</Label>
+            <Dropdown.ItemIndicator />
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Content>
+    </Dropdown>
+  );
+}
+```
+
+### With Submenus
+
+```tsx
+import { Dropdown, Button, Label } from '@heroui/react';
+
+<Dropdown>
+  <Button aria-label="Menu" variant="secondary">
+    Share
+  </Button>
+  <Dropdown.Content>
+    <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
+      <Dropdown.Item id="copy-link" textValue="Copy Link">
+        <Label>Copy Link</Label>
+      </Dropdown.Item>
+      <Dropdown.SubmenuTrigger>
+        <Dropdown.Item id="share" textValue="Share">
+          <Label>Other</Label>
+          <Dropdown.SubmenuIndicator />
+        </Dropdown.Item>
+        <Dropdown.Content>
+          <Dropdown.Menu>
+            <Dropdown.Item id="whatsapp" textValue="WhatsApp">
+              <Label>WhatsApp</Label>
+            </Dropdown.Item>
+            <Dropdown.Item id="telegram" textValue="Telegram">
+              <Label>Telegram</Label>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Content>
+      </Dropdown.SubmenuTrigger>
+    </Dropdown.Menu>
+  </Dropdown.Content>
+</Dropdown>
+```
+
+## Accessibility
+
+The Dropdown component implements the ARIA menu pattern and provides:
+
+- Full keyboard navigation support (arrow keys, home/end, typeahead)
+- Screen reader announcements for actions and selection changes
+- Proper focus management
+- Support for disabled states
+- Long press interaction support
+- Submenu navigation
+
+For more information, see the [React Aria Menu documentation](https://react-spectrum.adobe.com/react-aria/Menu.html#menu).
+

@@ -13,6 +13,7 @@ import * as CloseButtonDemos from "./close-button";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
+import * as DropdownDemos from "./dropdown";
 import * as FieldErrorDemos from "./field-error";
 import * as FieldsetDemos from "./fieldset";
 import * as FormDemos from "./form";
@@ -301,6 +302,71 @@ export const demos: Record<string, DemoItem> = {
   "disclosure-group-controlled": {
     component: DisclosureGroupDemos.Controlled,
     file: "disclosure-group/controlled.tsx",
+  },
+  // Dropdown demos
+  "dropdown-default": {
+    component: DropdownDemos.Default,
+    file: "dropdown/default.tsx",
+  },
+  "dropdown-with-single-selection": {
+    component: DropdownDemos.WithSingleSelection,
+    file: "dropdown/with-single-selection.tsx",
+  },
+  "dropdown-single-with-custom-indicator": {
+    component: DropdownDemos.SingleWithCustomIndicator,
+    file: "dropdown/single-with-custom-indicator.tsx",
+  },
+  "dropdown-with-multiple-selection": {
+    component: DropdownDemos.WithMultipleSelection,
+    file: "dropdown/with-multiple-selection.tsx",
+  },
+  "dropdown-with-section-level-selection": {
+    component: DropdownDemos.WithSectionLevelSelection,
+    file: "dropdown/with-section-level-selection.tsx",
+  },
+  "dropdown-with-keyboard-shortcuts": {
+    component: DropdownDemos.WithKeyboardShortcuts,
+    file: "dropdown/with-keyboard-shortcuts.tsx",
+  },
+  "dropdown-with-icons": {
+    component: DropdownDemos.WithIcons,
+    file: "dropdown/with-icons.tsx",
+  },
+  "dropdown-long-press-trigger": {
+    component: DropdownDemos.LongPressTrigger,
+    file: "dropdown/long-press-trigger.tsx",
+  },
+  "dropdown-with-descriptions": {
+    component: DropdownDemos.WithDescriptions,
+    file: "dropdown/with-descriptions.tsx",
+  },
+  "dropdown-with-sections": {
+    component: DropdownDemos.WithSections,
+    file: "dropdown/with-sections.tsx",
+  },
+  "dropdown-with-disabled-items": {
+    component: DropdownDemos.WithDisabledItems,
+    file: "dropdown/with-disabled-items.tsx",
+  },
+  "dropdown-with-submenus": {
+    component: DropdownDemos.WithSubmenus,
+    file: "dropdown/with-submenus.tsx",
+  },
+  "dropdown-with-custom-submenu-indicator": {
+    component: DropdownDemos.WithCustomSubmenuIndicator,
+    file: "dropdown/with-custom-submenu-indicator.tsx",
+  },
+  "dropdown-controlled": {
+    component: DropdownDemos.Controlled,
+    file: "dropdown/controlled.tsx",
+  },
+  "dropdown-controlled-open-state": {
+    component: DropdownDemos.ControlledOpenState,
+    file: "dropdown/controlled-open-state.tsx",
+  },
+  "dropdown-custom-trigger": {
+    component: DropdownDemos.CustomTrigger,
+    file: "dropdown/custom-trigger.tsx",
   },
   // Form demos
   "form-basic": {
