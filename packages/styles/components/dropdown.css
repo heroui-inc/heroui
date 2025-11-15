@@ -7,14 +7,50 @@
 }
 
 .dropdown__trigger {
-  /* Button styles are handled by Button component */
+  /* Only visible when using a custom trigger  - not passing "Button" as a child - hence we use some button styles (custom trigger) */
+  @apply outline-none;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled] {
+    @apply status-disabled;
+  }
+
+  /* Pending state */
+  &[data-pending] {
+    @apply status-pending;
+  }
+
+  /* Default active/pressed state - scale transform */
+  &:active,
+  &[data-pressed] {
+    transform: scale(0.97);
+  }
 }
 
 /* Similar to select content styles */
 .dropdown__content {
   @apply bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
   box-shadow: var(--shadow-overlay);
-  min-width: 160px;
+  min-width: 220px;
 
   /* Focus state */
   &:focus-visible,
@@ -75,19 +111,10 @@
   [data-slot="menu-item"] {
     @apply px-2.5;
   }
-
-  /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
-  [data-slot="dropdown-menu"]:not([data-selection-mode="multiple"])
-    [data-slot="menu-item-indicator"],
-  [data-slot="dropdown-menu"]:not([data-selection-mode="multiple"])
-    [data-slot="menu-item-indicator"]
-    [data-slot="menu-item-indicator--checkmark"] {
-    @apply transition-none;
-  }
 }
 
 .dropdown__menu {
-  @apply relative flex w-full flex-col gap-1 overflow-clip p-1;
+  @apply relative flex w-full flex-col gap-0.5 overflow-clip p-1;
 
   /* This makes the separator take up 94% of the width and be centered */
   [data-slot="separator"] {

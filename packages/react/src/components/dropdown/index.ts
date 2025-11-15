@@ -7,6 +7,7 @@ import {
   DropdownMenu,
   DropdownRoot,
   DropdownSection,
+  DropdownSubmenuIndicator,
   DropdownSubmenuTrigger,
   DropdownTrigger,
 } from "./dropdown";
@@ -22,6 +23,7 @@ export const Dropdown = Object.assign(DropdownRoot, {
   Section: DropdownSection,
   Item: DropdownItem,
   ItemIndicator: DropdownItemIndicator,
+  SubmenuIndicator: DropdownSubmenuIndicator,
   SubmenuTrigger: DropdownSubmenuTrigger,
 });
 
@@ -34,6 +36,7 @@ export type Dropdown<T extends object = object> = {
   SectionProps: ComponentProps<typeof DropdownSection>;
   ItemProps: ComponentProps<typeof DropdownItem>;
   ItemIndicatorProps: ComponentProps<typeof DropdownItemIndicator>;
+  SubmenuIndicatorProps: ComponentProps<typeof DropdownSubmenuIndicator>;
   SubmenuTriggerProps: ComponentProps<typeof DropdownSubmenuTrigger>;
 };
 
@@ -47,6 +50,7 @@ export {
   DropdownMenu,
   DropdownRoot,
   DropdownSection,
+  DropdownSubmenuIndicator,
   DropdownSubmenuTrigger,
   DropdownTrigger,
 };
@@ -59,6 +63,7 @@ export type {
   DropdownRootProps,
   DropdownRootProps as DropdownProps,
   DropdownSectionProps,
+  DropdownSubmenuIndicatorProps,
   DropdownSubmenuTriggerProps,
   DropdownTriggerProps,
 } from "./dropdown";

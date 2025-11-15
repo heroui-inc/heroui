@@ -6,6 +6,7 @@ export const menuItemVariants = tv({
   slots: {
     item: "menu-item",
     indicator: "menu-item__indicator",
+    submenuIndicator: "menu-item__indicator menu-item__indicator--submenu",
   },
   variants: {
     variant: {

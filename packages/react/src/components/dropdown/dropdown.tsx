@@ -20,8 +20,7 @@ import {
 } from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-import {IconChevronRight} from "../icons";
-import {MenuItemIndicator, MenuItemRoot} from "../menu-item";
+import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
 import {MenuSectionRoot} from "../menu-section";
 
 import {dropdownVariants} from "./dropdown.styles";
@@ -78,12 +77,7 @@ interface DropdownContentProps extends Omit<PopoverPrimitiveProps, "children">, 
   children: React.ReactNode;
 }
 
-const DropdownContent = ({
-  children,
-  className,
-  placement = "bottom",
-  ...props
-}: DropdownContentProps) => {
+const DropdownContent = ({children, className, placement, ...props}: DropdownContentProps) => {
   const {slots} = useContext(DropdownContext);
 
   return (
@@ -127,38 +121,24 @@ const DropdownItem = (props: DropdownItemProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Dropdown Submenu Indicator (MenuItemSubmenuIndicator wrapper)
+ * -----------------------------------------------------------------------------------------------*/
+interface DropdownSubmenuIndicatorProps
+  extends React.ComponentProps<typeof MenuItemSubmenuIndicator> {}
+
+const DropdownSubmenuIndicator = (props: DropdownSubmenuIndicatorProps) => {
+  return <MenuItemSubmenuIndicator {...props} />;
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Trigger
  * -----------------------------------------------------------------------------------------------*/
 type DropdownSubmenuTriggerProps = React.ComponentProps<typeof SubmenuTriggerPrimitive>;
 
 const DropdownSubmenuTrigger = ({children, ...props}: DropdownSubmenuTriggerProps) => {
-  const childrenArray = React.Children.toArray(children) as React.ReactElement[];
-  const firstChild = childrenArray[0];
-
-  if (!firstChild || !React.isValidElement(firstChild)) {
-    return null;
-  }
-
-  // Clone the first child (MenuItem) to add the submenu indicator
-  const firstChildProps = firstChild.props as {children?: React.ReactNode};
-  const menuItemWithIndicator = React.cloneElement(firstChild, {
-    children: (
-      <>
-        {firstChildProps.children}
-        <span
-          aria-hidden="true"
-          className="menu-item__indicator menu-item__indicator--submenu"
-          data-slot="submenu-indicator"
-        >
-          <IconChevronRight />
-        </span>
-      </>
-    ),
-  } as Partial<unknown>);
-
   return (
     <SubmenuTriggerPrimitive data-slot="dropdown-submenu-trigger" {...props}>
-      {[menuItemWithIndicator, ...childrenArray.slice(1)]}
+      {children}
     </SubmenuTriggerPrimitive>
   );
 };
@@ -191,6 +171,7 @@ export {
   DropdownMenu,
   DropdownRoot,
   DropdownSection,
+  DropdownSubmenuIndicator,
   DropdownSubmenuTrigger,
   DropdownTrigger,
 };
@@ -202,6 +183,7 @@ export type {
   DropdownMenuProps,
   DropdownRootProps,
   DropdownSectionProps,
+  DropdownSubmenuIndicatorProps,
   DropdownSubmenuTriggerProps,
   DropdownTriggerProps,
 };

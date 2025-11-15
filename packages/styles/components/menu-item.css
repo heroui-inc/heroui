@@ -26,9 +26,18 @@
     @apply pointer-events-none select-none text-wrap;
   }
 
-  /* Add padding-right when indicator is present */
+  [data-slot="submenu-indicator"] svg {
+    @apply size-3.5;
+  }
+
+  /* Add padding-left when indicator is present */
   &:has(.menu-item__indicator) {
     @apply pl-7;
+  }
+
+  /* Add padding-right when indicator is present and has submenu */
+  &[data-has-submenu="true"]:has(.menu-item__indicator) {
+    @apply pl-2 pr-7;
   }
 
   /* Focus visible state (keyboard focus only) */
@@ -93,25 +102,33 @@
    */
   @apply duration-250 transition motion-reduce:transition-none;
 
+  /* Position on the right when menu item has submenu */
+  .menu-item[data-has-submenu="true"] & {
+    @apply left-auto right-2;
+  }
+
   /* Checkmark SVG indicator */
   [data-slot="menu-item-indicator--checkmark"] {
     @apply size-2.5;
 
-    /**
-     * Transitions
-     */
-    @apply transition-all duration-300 motion-reduce:transition-none;
+    .menu-item[data-selection-mode="multiple"] & {
+      /**
+       * Transitions
+       */
+      @apply transition-all duration-300 motion-reduce:transition-none;
+    }
   }
 
   /* Dot SVG indicator */
   [data-slot="menu-item-indicator--dot"] {
     @apply size-2;
 
-    /**
+    .menu-item[data-selection-mode="multiple"] & {
+      /**
      * Transitions
      */
-    @apply duration-250 transition-all motion-reduce:transition-none;
-
+      @apply duration-250 transition-all motion-reduce:transition-none;
+    }
     /**
      * Default state: hidden and scaled down
      */

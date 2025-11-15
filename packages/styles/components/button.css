@@ -17,7 +17,7 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Focus  state */
+  /* Focus state */
   &:focus-visible,
   &[data-focus-visible] {
     @apply status-focused;

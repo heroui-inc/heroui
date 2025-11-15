@@ -10,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
+import {IconChevronRight} from "../icons";
 
 import {menuItemVariants} from "./menu-item.styles";
 
@@ -115,8 +116,44 @@ const MenuItemIndicator = ({
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Menu Item Submenu Indicator
+ * -----------------------------------------------------------------------------------------------*/
+interface MenuItemSubmenuIndicatorProps
+  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+  children?: React.ReactNode;
+}
+
+const MenuItemSubmenuIndicator = ({
+  children,
+  className,
+  ...props
+}: MenuItemSubmenuIndicatorProps) => {
+  const {slots, state} = useContext(MenuItemContext);
+  const hasSubmenu = state?.hasSubmenu;
+
+  // Only render if hasSubmenu is true
+  if (!hasSubmenu) {
+    return null;
+  }
+
+  const defaultContent = <IconChevronRight />;
+  const content = children ?? defaultContent;
+
+  return (
+    <span
+      aria-hidden="true"
+      className={slots?.submenuIndicator({className})}
+      data-slot="submenu-indicator"
+      {...props}
+    >
+      {content}
+    </span>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {MenuItemRoot, MenuItemIndicator};
+export {MenuItemRoot, MenuItemIndicator, MenuItemSubmenuIndicator};
 
-export type {MenuItemRootProps, MenuItemIndicatorProps};
+export type {MenuItemRootProps, MenuItemIndicatorProps, MenuItemSubmenuIndicatorProps};
