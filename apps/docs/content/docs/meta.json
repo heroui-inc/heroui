@@ -35,6 +35,7 @@
     "components/description",
     "components/disclosure",
     "components/disclosure-group",
+    "components/dropdown",
     "components/field-error",
     "components/fieldset",
     "components/form",
