@@ -1,0 +1,35 @@
+{
+  "name": "hero-theme-builder",
+  "version": "1.0.0",
+  "description": "CLI to generate HeroUI-compatible themes for Tailwind CSS. Light/dark JSON from color inputs. By alimor.ir",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": {
+    "name": "Ali Mortazavi",
+    "email": "alimortazavi.pr@gmail.com",
+    "url": "https://github.com/alimortazavi-pr"
+  },
+  "keywords": [
+    "heroui",
+    "tailwind",
+    "theme-generator",
+    "cli",
+    "node.js",
+    "react",
+    "next.js",
+    "colors"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
