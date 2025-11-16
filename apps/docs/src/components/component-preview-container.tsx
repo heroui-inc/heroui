@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import {useGlobalIntersectionObserver} from "@/hooks/use-global-intersection-observer";
 import {cn} from "@/utils/cn";
 
 interface ComponentPreviewContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,16 +23,6 @@ export function ComponentPreviewContainer({
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
-  const [previewRef, previewInView] = useGlobalIntersectionObserver<HTMLDivElement>({
-    initialIsIntersecting: true,
-    rootMargin: "400px 0px 100px 0px",
-    threshold: 0,
-  });
-  const [codeRef, codeInView] = useGlobalIntersectionObserver<HTMLDivElement>({
-    initialIsIntersecting: true,
-    rootMargin: "300px 0px 0px 0px",
-    threshold: 0,
-  });
 
   const alignmentClasses = {
     center: "items-center justify-center",
@@ -51,7 +40,6 @@ export function ComponentPreviewContainer({
 
       {/* Preview Section */}
       <div
-        ref={previewRef}
         data-name={name}
         className={cn(
           "preview not-prose border-divider relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-l border-r border-t p-4 sm:p-10",
@@ -59,45 +47,14 @@ export function ComponentPreviewContainer({
           alignmentClasses[align],
           "flex",
         )}
-        style={
-          {
-            // contain: "layout style", // Safari: breaks fixed positioning for Select dropdown
-            // contentVisibility: "auto", // Safari: causes animation stuttering
-            // isolation: "isolate", // Safari: creates unnecessary stacking context affecting Select
-          }
-        }
       >
-        <div
-          className="flex w-full items-center justify-center"
-          style={{
-            pointerEvents: previewInView ? "auto" : "none",
-            visibility: previewInView ? "visible" : "hidden",
-          }}
-        >
-          {Component}
-        </div>
+        <div className="flex w-full items-center justify-center">{Component}</div>
       </div>
 
       {/* Code Section */}
       {!hideCode && !!Code && (
-        <div
-          ref={codeRef}
-          className="code-section border-divider relative rounded-b-xl border bg-transparent"
-          style={
-            {
-              // contentVisibility: "auto",
-            }
-          }
-        >
-          <div
-            className="code-block-wrapper min-h-[124px]"
-            style={{
-              pointerEvents: codeInView ? "auto" : "none",
-              visibility: codeInView ? "visible" : "hidden",
-            }}
-          >
-            {Code}
-          </div>
+        <div className="code-section border-divider relative rounded-b-xl border bg-transparent">
+          <div className="code-block-wrapper min-h-[124px]">{Code}</div>
         </div>
       )}
     </div>
