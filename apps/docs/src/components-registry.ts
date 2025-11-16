@@ -161,6 +161,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "listbox",
     title: "Listbox",
   },
+  modal: {
+    category: "layout",
+    description: "Displays content in a modal overlay",
+    href: "/docs/components/modal",
+    name: "modal",
+    title: "Modal",
+  },
   popover: {
     category: "display",
     description: "Displays content in context with a trigger",
@@ -322,6 +329,7 @@ const componentRelationships: Record<string, string[]> = {
   ],
   link: [],
   listbox: ["select", "avatar", "kbd", "separator", "surface", "dropdown"],
+  modal: ["button", "tooltip", "select", "avatar"],
   popover: ["button", "tooltip", "select", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
   select: [
