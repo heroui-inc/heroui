@@ -18,6 +18,7 @@ const COMPONENT_NAMES = [
   "checkbox-group",
   "chip",
   "close-button",
+  "combobox",
   "description",
   "disclosure",
   "disclosure-group",

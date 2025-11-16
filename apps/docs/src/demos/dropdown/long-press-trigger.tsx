@@ -6,7 +6,7 @@ export function LongPressTrigger() {
       <Button aria-label="Menu" variant="secondary">
         Long Press
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu>
           <Dropdown.Item id="new-file" textValue="New file">
             <Label>New file</Label>
@@ -21,7 +21,7 @@ export function LongPressTrigger() {
             <Label>Delete file</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

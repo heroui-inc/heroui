@@ -25,7 +25,7 @@ export function SingleWithCustomIndicator() {
       <Button aria-label="Menu" variant="secondary">
         Fruits
       </Button>
-      <Dropdown.Content className="min-w-[256px]">
+      <Dropdown.Popover className="min-w-[256px]">
         <Dropdown.Menu
           selectedKeys={selected}
           selectionMode="single"
@@ -65,7 +65,7 @@ export function SingleWithCustomIndicator() {
             <Label>Pear</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

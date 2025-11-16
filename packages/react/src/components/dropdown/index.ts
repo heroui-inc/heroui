@@ -1,10 +1,10 @@
 import type {ComponentProps} from "react";
 
 import {
-  DropdownContent,
   DropdownItem,
   DropdownItemIndicator,
   DropdownMenu,
+  DropdownPopover,
   DropdownRoot,
   DropdownSection,
   DropdownSubmenuIndicator,
@@ -18,7 +18,7 @@ import {
 export const Dropdown = Object.assign(DropdownRoot, {
   Root: DropdownRoot,
   Trigger: DropdownTrigger,
-  Content: DropdownContent,
+  Popover: DropdownPopover,
   Menu: DropdownMenu,
   Section: DropdownSection,
   Item: DropdownItem,
@@ -31,7 +31,7 @@ export type Dropdown<T extends object = object> = {
   Props: ComponentProps<typeof DropdownRoot>;
   RootProps: ComponentProps<typeof DropdownRoot>;
   TriggerProps: ComponentProps<typeof DropdownTrigger>;
-  ContentProps: ComponentProps<typeof DropdownContent>;
+  PopoverProps: ComponentProps<typeof DropdownPopover>;
   MenuProps: ComponentProps<typeof DropdownMenu<T>>;
   SectionProps: ComponentProps<typeof DropdownSection>;
   ItemProps: ComponentProps<typeof DropdownItem>;
@@ -44,10 +44,10 @@ export type Dropdown<T extends object = object> = {
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
 export {
-  DropdownContent,
   DropdownItem,
   DropdownItemIndicator,
   DropdownMenu,
+  DropdownPopover,
   DropdownRoot,
   DropdownSection,
   DropdownSubmenuIndicator,
@@ -56,10 +56,10 @@ export {
 };
 
 export type {
-  DropdownContentProps,
   DropdownItemIndicatorProps,
   DropdownItemProps,
   DropdownMenuProps,
+  DropdownPopoverProps,
   DropdownRootProps,
   DropdownRootProps as DropdownProps,
   DropdownSectionProps,

@@ -14,7 +14,7 @@ export function WithSectionLevelSelection() {
       <Button aria-label="Menu" variant="secondary">
         Styles
       </Button>
-      <Dropdown.Content className="min-w-[256px]">
+      <Dropdown.Popover className="min-w-[256px]">
         <Dropdown.Menu>
           <Dropdown.Section>
             <Header>Actions</Header>
@@ -105,7 +105,7 @@ export function WithSectionLevelSelection() {
             </Dropdown.Item>
           </Dropdown.Section>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

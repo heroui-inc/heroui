@@ -50,7 +50,7 @@ export function Controlled() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             {states.map((state) => (
               <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
@@ -59,7 +59,7 @@ export function Controlled() {
               </ListBox.Item>
             ))}
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
       <p className="text-muted text-sm">Selected: {selectedState?.name || "None"}</p>
     </div>

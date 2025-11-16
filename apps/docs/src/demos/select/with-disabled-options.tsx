@@ -8,7 +8,7 @@ export function WithDisabledOptions() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="dog" textValue="Dog">
             Dog
@@ -35,7 +35,7 @@ export function WithDisabledOptions() {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }

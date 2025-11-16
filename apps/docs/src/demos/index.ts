@@ -10,6 +10,7 @@ import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as ComboBoxDemos from "./combobox";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -289,6 +290,67 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
+  },
+  // ComboBox demos
+  "combobox-default": {
+    component: ComboBoxDemos.Default,
+    file: "combobox/default.tsx",
+  },
+  "combobox-default-selected-key": {
+    component: ComboBoxDemos.DefaultSelectedKey,
+    file: "combobox/default-selected-key.tsx",
+  },
+  "combobox-with-description": {
+    component: ComboBoxDemos.WithDescription,
+    file: "combobox/with-description.tsx",
+  },
+  "combobox-with-sections": {
+    component: ComboBoxDemos.WithSections,
+    file: "combobox/with-sections.tsx",
+  },
+  "combobox-with-disabled-options": {
+    component: ComboBoxDemos.WithDisabledOptions,
+    file: "combobox/with-disabled-options.tsx",
+  },
+  "combobox-custom-indicator": {
+    component: ComboBoxDemos.CustomIndicator,
+    file: "combobox/custom-indicator.tsx",
+  },
+  "combobox-required": {
+    component: ComboBoxDemos.Required,
+    file: "combobox/required.tsx",
+  },
+  "combobox-custom-value": {
+    component: ComboBoxDemos.CustomValue,
+    file: "combobox/custom-value.tsx",
+  },
+  "combobox-controlled": {
+    component: ComboBoxDemos.Controlled,
+    file: "combobox/controlled.tsx",
+  },
+  "combobox-controlled-input-value": {
+    component: ComboBoxDemos.ControlledInputValue,
+    file: "combobox/controlled-input-value.tsx",
+  },
+  "combobox-asynchronous-loading": {
+    component: ComboBoxDemos.AsynchronousLoading,
+    file: "combobox/asynchronous-loading.tsx",
+  },
+  "combobox-custom-filtering": {
+    component: ComboBoxDemos.CustomFiltering,
+    file: "combobox/custom-filtering.tsx",
+  },
+  "combobox-allows-custom-value": {
+    component: ComboBoxDemos.AllowsCustomValue,
+    file: "combobox/allows-custom-value.tsx",
+  },
+  "combobox-disabled": {
+    component: ComboBoxDemos.Disabled,
+    file: "combobox/disabled.tsx",
+  },
+  "combobox-on-surface": {
+    component: ComboBoxDemos.OnSurface,
+    file: "combobox/on-surface.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {

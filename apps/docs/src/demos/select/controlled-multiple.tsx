@@ -18,7 +18,7 @@ export function ControlledMultiple() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox
             selectedKeys={selected}
             selectionMode="multiple"
@@ -49,9 +49,9 @@ export function ControlledMultiple() {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
-      <p className="text-sm text-neutral-500">
+      <p className="text-muted text-sm">
         Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
       </p>
     </div>

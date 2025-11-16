@@ -8,7 +8,7 @@ export function Default() {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
             <Label>New file</Label>
@@ -23,7 +23,7 @@ export function Default() {
             <Label>Delete file</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

@@ -13,7 +13,7 @@ export function CustomTrigger() {
           <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
         </Avatar>
       </Dropdown.Trigger>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <div className="px-3 pb-1 pt-3">
           <div className="flex items-center gap-2">
             <Avatar size="sm">
@@ -55,7 +55,7 @@ export function CustomTrigger() {
             </div>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

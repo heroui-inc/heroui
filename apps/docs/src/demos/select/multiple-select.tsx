@@ -8,7 +8,7 @@ export function MultipleSelect() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox selectionMode="multiple">
           <ListBox.Item id="argentina" textValue="Argentina">
             Argentina
@@ -47,7 +47,7 @@ export function MultipleSelect() {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }

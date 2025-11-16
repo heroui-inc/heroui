@@ -13,7 +13,7 @@ export function WithMultipleSelection() {
       <Button aria-label="Menu" variant="secondary">
         Preferred Fruits
       </Button>
-      <Dropdown.Content className="min-w-[256px]">
+      <Dropdown.Popover className="min-w-[256px]">
         <Dropdown.Menu
           selectedKeys={selected}
           selectionMode="multiple"
@@ -43,7 +43,7 @@ export function WithMultipleSelection() {
             <Label>Pear</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

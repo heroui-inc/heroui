@@ -125,7 +125,7 @@
 }
 
 /* Similar to popover content styles */
-.select__content {
+.select__popover {
   @apply min-w-(--trigger-width) bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
   box-shadow: var(--shadow-overlay);
 

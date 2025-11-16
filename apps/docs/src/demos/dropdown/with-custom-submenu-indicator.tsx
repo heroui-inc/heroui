@@ -9,7 +9,7 @@ export function WithCustomSubmenuIndicator() {
       <Button aria-label="Menu" variant="secondary">
         Share
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="copy-link" textValue="Copy Link">
             <Label>Copy Link</Label>
@@ -24,7 +24,7 @@ export function WithCustomSubmenuIndicator() {
                 <Icon className="text-muted size-3.5" icon="gravity-ui:arrow-right" />
               </Dropdown.SubmenuIndicator>
             </Dropdown.Item>
-            <Dropdown.Content>
+            <Dropdown.Popover>
               <Dropdown.Menu>
                 <Dropdown.Item id="whatsapp" textValue="WhatsApp">
                   <Label>WhatsApp</Label>
@@ -49,7 +49,7 @@ export function WithCustomSubmenuIndicator() {
                       </svg>
                     </Dropdown.SubmenuIndicator>
                   </Dropdown.Item>
-                  <Dropdown.Content>
+                  <Dropdown.Popover>
                     <Dropdown.Menu>
                       <Dropdown.Item id="work" textValue="Work email">
                         <Label>Work email</Label>
@@ -58,29 +58,29 @@ export function WithCustomSubmenuIndicator() {
                         <Label>Personal email</Label>
                       </Dropdown.Item>
                     </Dropdown.Menu>
-                  </Dropdown.Content>
+                  </Dropdown.Popover>
                 </Dropdown.SubmenuTrigger>
                 <Dropdown.Item id="discord" textValue="Discord">
                   <Label>Discord</Label>
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown.Content>
+            </Dropdown.Popover>
           </Dropdown.SubmenuTrigger>
           <Dropdown.SubmenuTrigger>
             <Dropdown.Item id="other" textValue="Other">
               <Label>Other (default indicator)</Label>
               <Dropdown.SubmenuIndicator />
             </Dropdown.Item>
-            <Dropdown.Content>
+            <Dropdown.Popover>
               <Dropdown.Menu>
                 <Dropdown.Item id="sms" textValue="SMS">
                   <Label>SMS</Label>
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown.Content>
+            </Dropdown.Popover>
           </Dropdown.SubmenuTrigger>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

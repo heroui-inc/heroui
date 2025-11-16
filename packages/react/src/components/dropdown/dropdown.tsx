@@ -71,19 +71,19 @@ const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) 
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Dropdown Content (Popover wrapper)
+ * Dropdown Popover (Popover wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownContentProps extends Omit<PopoverPrimitiveProps, "children">, DropdownVariants {
+interface DropdownPopoverProps extends Omit<PopoverPrimitiveProps, "children">, DropdownVariants {
   children: React.ReactNode;
 }
 
-const DropdownContent = ({children, className, placement, ...props}: DropdownContentProps) => {
+const DropdownPopover = ({children, className, placement, ...props}: DropdownPopoverProps) => {
   const {slots} = useContext(DropdownContext);
 
   return (
     <PopoverPrimitive
       {...props}
-      className={composeTwRenderProps(className, slots?.content())}
+      className={composeTwRenderProps(className, slots?.popover())}
       placement={placement}
     >
       {children}
@@ -165,10 +165,10 @@ const DropdownSection = (props: DropdownSectionProps) => {
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 export {
-  DropdownContent,
   DropdownItem,
   DropdownItemIndicator,
   DropdownMenu,
+  DropdownPopover,
   DropdownRoot,
   DropdownSection,
   DropdownSubmenuIndicator,
@@ -177,10 +177,10 @@ export {
 };
 
 export type {
-  DropdownContentProps,
   DropdownItemIndicatorProps,
   DropdownItemProps,
   DropdownMenuProps,
+  DropdownPopoverProps,
   DropdownRootProps,
   DropdownSectionProps,
   DropdownSubmenuIndicatorProps,

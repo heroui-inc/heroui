@@ -9,7 +9,7 @@ export function WithDisabledItems() {
       <Button isIconOnly aria-label="Menu" variant="secondary">
         <Icon className="outline-none" icon="gravity-ui:bars" />
       </Button>
-      <Dropdown.Content className="min-w-[220px]">
+      <Dropdown.Popover className="min-w-[220px]">
         <Dropdown.Menu
           disabledKeys={["delete-file"]}
           onAction={(key) => console.log(`Selected: ${key}`)}
@@ -62,7 +62,7 @@ export function WithDisabledItems() {
             </Dropdown.Item>
           </Dropdown.Section>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }
