@@ -1,7 +1,7 @@
 ---
 title: Select
 description: A select displays a collapsible list of options and allows a user to select one of them
-icon: new
+icon: updated
 links:
   rac: Select
   source: select/select.tsx
@@ -36,7 +36,7 @@ export default () => (
       <Select.Indicator />
     </Select.Trigger>
     <Description />
-    <Select.Content>
+    <Select.Popover>
       <ListBox>
         <ListBox.Item>
           <Label />
@@ -50,7 +50,7 @@ export default () => (
           </ListBox.Item>
         </ListBox.Section>
       </ListBox>
-    </Select.Content>
+    </Select.Popover>
   </Select>
 )
 ```
@@ -150,13 +150,13 @@ function CustomSelect() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
             Item 1
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }
@@ -185,7 +185,7 @@ To customize the Select component classes, you can use the `@layer components` d
     @apply text-muted;
   }
 
-  .select__content {
+  .select__popover {
     @apply rounded-lg border border-border bg-surface p-2;
   }
 }
@@ -202,7 +202,7 @@ The Select component uses these CSS classes ([View source styles](https://github
 - `.select__trigger` - The button that triggers the select
 - `.select__value` - The displayed value or placeholder
 - `.select__indicator` - The dropdown indicator icon
-- `.select__content` - The popover content container
+- `.select__popover` - The popover container
 
 #### Variant Classes
 - `.select__trigger--on-surface` - On surface variant styling
@@ -268,7 +268,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Custom indicator content |
 
-### Select.Content Props
+### Select.Popover Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -300,7 +300,7 @@ import { Select, Label, ListBox } from '@heroui/react';
     <Select.Value />
     <Select.Indicator />
   </Select.Trigger>
-  <Select.Content>
+      <Select.Popover>
     <ListBox>
       <ListBox.Item id="florida" textValue="Florida">
         Florida
@@ -311,7 +311,7 @@ import { Select, Label, ListBox } from '@heroui/react';
         <ListBox.ItemIndicator />
       </ListBox.Item>
     </ListBox>
-  </Select.Content>
+      </Select.Popover>
 </Select>
 ```
 
@@ -326,7 +326,7 @@ import { Select, Label, ListBox, Header, Separator } from '@heroui/react';
     <Select.Value />
     <Select.Indicator />
   </Select.Trigger>
-  <Select.Content>
+      <Select.Popover>
     <ListBox>
       <ListBox.Section>
         <Header>North America</Header>
@@ -344,7 +344,7 @@ import { Select, Label, ListBox, Header, Separator } from '@heroui/react';
         </ListBox.Item>
       </ListBox.Section>
     </ListBox>
-  </Select.Content>
+      </Select.Popover>
 </Select>
 ```
 
@@ -371,7 +371,7 @@ function ControlledSelect() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="california" textValue="California">
             California
@@ -382,7 +382,7 @@ function ControlledSelect() {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }
@@ -421,11 +421,11 @@ import { Select, Label, ListBox, Avatar, AvatarImage, AvatarFallback } from '@he
     </Select.Value>
     <Select.Indicator />
   </Select.Trigger>
-  <Select.Content>
+      <Select.Popover>
     <ListBox>
       {/* ListBox items */}
     </ListBox>
-  </Select.Content>
+      </Select.Popover>
 </Select>
 ```
 

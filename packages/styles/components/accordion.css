@@ -114,6 +114,10 @@
       @apply bg-default;
     }
   }
+
+  .accordion__item::after {
+    @apply bg-surface-foreground/6;
+  }
 }
 
 .accordion--surface .accordion__item {

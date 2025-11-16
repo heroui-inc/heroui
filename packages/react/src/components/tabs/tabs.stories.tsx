@@ -1,5 +1,5 @@
+import type {Key} from "../rac";
 import type {Meta, StoryObj} from "@storybook/react";
-import type {Key} from "react-aria-components";
 
 import React from "react";
 import {cnBase} from "tailwind-variants";

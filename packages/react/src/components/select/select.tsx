@@ -140,25 +140,25 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Select Content
+ * Select Popover
  * -----------------------------------------------------------------------------------------------*/
-interface SelectContentProps
+interface SelectPopoverProps
   extends Omit<React.ComponentProps<typeof PopoverPrimitive>, "children"> {
   children: React.ReactNode;
 }
 
-const SelectContent = ({
+const SelectPopover = ({
   children,
   className,
   placement = "bottom",
   ...props
-}: SelectContentProps) => {
+}: SelectPopoverProps) => {
   const {slots} = useContext(SelectContext);
 
   return (
     <PopoverPrimitive
       {...props}
-      className={composeTwRenderProps(className, slots?.content())}
+      className={composeTwRenderProps(className, slots?.popover())}
       placement={placement}
     >
       {children}
@@ -169,12 +169,12 @@ const SelectContent = ({
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {SelectRoot, SelectTrigger, SelectValue, SelectIndicator, SelectContent};
+export {SelectRoot, SelectTrigger, SelectValue, SelectIndicator, SelectPopover};
 
 export type {
   SelectRootProps,
   SelectTriggerProps,
   SelectValueProps,
   SelectIndicatorProps,
-  SelectContentProps,
+  SelectPopoverProps,
 };

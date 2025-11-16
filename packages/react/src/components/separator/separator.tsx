@@ -13,6 +13,8 @@ import {separatorVariants} from "./separator.styles";
 interface SeparatorRootProps extends SeparatorPrimitiveProps, SeparatorVariants {}
 
 const SeparatorRoot = ({className, orientation = "horizontal", ...props}: SeparatorRootProps) => {
+  // TODO: Handle on surface colors/variant
+
   return (
     <SeparatorPrimitive
       data-orientation={orientation}
