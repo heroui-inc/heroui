@@ -8,7 +8,7 @@ export function WithKeyboardShortcuts() {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new" textValue="New">
             <Label>New</Label>
@@ -40,7 +40,7 @@ export function WithKeyboardShortcuts() {
             </Kbd>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

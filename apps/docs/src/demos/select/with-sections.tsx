@@ -8,7 +8,7 @@ export function WithSections() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Section>
             <Header>North America</Header>
@@ -70,7 +70,7 @@ export function WithSections() {
             </ListBox.Item>
           </ListBox.Section>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }

@@ -6,7 +6,7 @@ export const dropdownVariants = tv({
   slots: {
     root: "dropdown",
     trigger: "dropdown__trigger",
-    content: "dropdown__content",
+    popover: "dropdown__popover",
     menu: "dropdown__menu",
   },
 });

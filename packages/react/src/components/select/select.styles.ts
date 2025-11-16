@@ -8,7 +8,7 @@ export const selectVariants = tv({
     trigger: "select__trigger",
     value: "select__value",
     indicator: "select__indicator",
-    content: "select__content",
+    popover: "select__popover",
   },
   variants: {
     isOnSurface: {

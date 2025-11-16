@@ -28,7 +28,7 @@ export function AsynchronousLoading() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <Collection items={list.items}>
             {(item: Pokemon) => (
@@ -44,11 +44,11 @@ export function AsynchronousLoading() {
           >
             <div className="flex items-center justify-center gap-2 py-2">
               <Spinner size="sm" />
-              <span className="text-sm text-neutral-500">Loading more...</span>
+              <span className="text-muted text-sm">Loading more...</span>
             </div>
           </ListBoxLoadMoreItem>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }

@@ -12,7 +12,7 @@ export function WithSections() {
       >
         <Icon className="outline-none" icon="gravity-ui:ellipsis-vertical" />
       </Dropdown.Trigger>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Section>
             <Header>Actions</Header>
@@ -62,7 +62,7 @@ export function WithSections() {
             </Dropdown.Item>
           </Dropdown.Section>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

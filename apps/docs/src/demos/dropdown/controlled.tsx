@@ -12,14 +12,14 @@ export function Controlled() {
 
   return (
     <div className="min-w-sm flex flex-col items-center justify-center gap-4">
-      <p className="text-sm text-neutral-500">
+      <p className="text-muted text-sm">
         Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
       </p>
       <Dropdown>
         <Button aria-label="Menu" variant="secondary">
           Actions
         </Button>
-        <Dropdown.Content>
+        <Dropdown.Popover>
           <Dropdown.Menu
             selectedKeys={selected}
             selectionMode="multiple"
@@ -38,7 +38,7 @@ export function Controlled() {
               <Dropdown.ItemIndicator />
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown>
     </div>
   );

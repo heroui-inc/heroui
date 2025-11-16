@@ -15,7 +15,7 @@ export function ControlledOpenState() {
         <Button aria-label="Menu" variant="secondary">
           Actions
         </Button>
-        <Dropdown.Content>
+        <Dropdown.Popover>
           <Dropdown.Menu>
             <Dropdown.Item id="new-file" textValue="New file">
               <Label>New file</Label>
@@ -30,7 +30,7 @@ export function ControlledOpenState() {
               <Label>Delete file</Label>
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown>
     </div>
   );

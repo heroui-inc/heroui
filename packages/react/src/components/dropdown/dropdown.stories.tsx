@@ -32,7 +32,7 @@ export const Default: Story = {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Section>
             <Dropdown.Item id="new-file" textValue="New file">
@@ -52,7 +52,7 @@ export const Default: Story = {
             </Dropdown.Item>
           </Dropdown.Section>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -66,7 +66,7 @@ export const WithSingleSelection: Story = {
         <Button aria-label="Menu" variant="secondary">
           Fruit
         </Button>
-        <Dropdown.Content className="min-w-[256px]">
+        <Dropdown.Popover className="min-w-[256px]">
           <Dropdown.Menu
             selectedKeys={selected}
             selectionMode="single"
@@ -96,7 +96,7 @@ export const WithSingleSelection: Story = {
               <Label>Pear</Label>
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown>
     );
   },
@@ -123,7 +123,7 @@ export const SingleWithCustomIndicator: Story = {
         <Button aria-label="Menu" variant="secondary">
           Fruits
         </Button>
-        <Dropdown.Content className="min-w-[256px]">
+        <Dropdown.Popover className="min-w-[256px]">
           <Dropdown.Menu
             selectedKeys={selected}
             selectionMode="single"
@@ -163,7 +163,7 @@ export const SingleWithCustomIndicator: Story = {
               <Label>Pear</Label>
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown>
     );
   },
@@ -178,7 +178,7 @@ export const WithMultipleSelection: Story = {
         <Button aria-label="Menu" variant="secondary">
           Preferred Fruits
         </Button>
-        <Dropdown.Content className="min-w-[256px]">
+        <Dropdown.Popover className="min-w-[256px]">
           <Dropdown.Menu
             selectedKeys={selected}
             selectionMode="multiple"
@@ -208,7 +208,7 @@ export const WithMultipleSelection: Story = {
               <Label>Pear</Label>
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown>
     );
   },
@@ -224,7 +224,7 @@ export const WithSectionLevelSelection: Story = {
         <Button aria-label="Menu" variant="secondary">
           Styles
         </Button>
-        <Dropdown.Content className="min-w-[256px]">
+        <Dropdown.Popover className="min-w-[256px]">
           <Dropdown.Menu>
             <Dropdown.Section>
               <Header>Actions</Header>
@@ -315,7 +315,7 @@ export const WithSectionLevelSelection: Story = {
               </Dropdown.Item>
             </Dropdown.Section>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown>
     );
   },
@@ -327,7 +327,7 @@ export const WithKeyboardShortcuts: Story = {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Item id="new" textValue="New">
             <Label>New</Label>
@@ -359,7 +359,7 @@ export const WithKeyboardShortcuts: Story = {
             </Kbd>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -370,7 +370,7 @@ export const WithIcons: Story = {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
             <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
@@ -406,7 +406,7 @@ export const WithIcons: Story = {
             </Kbd>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -417,7 +417,7 @@ export const LongPressTrigger: Story = {
       <Button aria-label="Menu" variant="secondary">
         Long Press
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu>
           <Dropdown.Item id="new-file" textValue="New file">
             <Label>New file</Label>
@@ -432,7 +432,7 @@ export const LongPressTrigger: Story = {
             <Label>Delete file</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -443,7 +443,7 @@ export const WithDescriptions: Story = {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
             <div className="flex h-8 items-start justify-center pt-px">
@@ -499,7 +499,7 @@ export const WithDescriptions: Story = {
             </Kbd>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -513,7 +513,7 @@ export const WithSections: Story = {
       >
         <Icon className="outline-none" icon="gravity-ui:ellipsis-vertical" />
       </Dropdown.Trigger>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Section>
             <Header>Actions</Header>
@@ -563,7 +563,7 @@ export const WithSections: Story = {
             </Dropdown.Item>
           </Dropdown.Section>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -574,7 +574,7 @@ export const WithDisabledItems: Story = {
       <Button isIconOnly aria-label="Menu" variant="secondary">
         <Icon className="outline-none" icon="gravity-ui:bars" />
       </Button>
-      <Dropdown.Content className="min-w-[220px]">
+      <Dropdown.Popover className="min-w-[220px]">
         <Dropdown.Menu disabledKeys={["delete-file"]} onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Section>
             <Header>Actions</Header>
@@ -624,7 +624,7 @@ export const WithDisabledItems: Story = {
             </Dropdown.Item>
           </Dropdown.Section>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -635,7 +635,7 @@ export const WithSubmenus: Story = {
       <Button aria-label="Menu" variant="secondary">
         Share
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Item id="copy-link" textValue="Copy Link">
             <Label>Copy Link</Label>
@@ -651,7 +651,7 @@ export const WithSubmenus: Story = {
               <Label>Other</Label>
               <Dropdown.SubmenuIndicator />
             </Dropdown.Item>
-            <Dropdown.Content>
+            <Dropdown.Popover>
               <Dropdown.Menu>
                 <Dropdown.Item id="whatsapp" textValue="WhatsApp">
                   <Label>WhatsApp</Label>
@@ -667,7 +667,7 @@ export const WithSubmenus: Story = {
                     <Label>Email</Label>
                     <Dropdown.SubmenuIndicator />
                   </Dropdown.Item>
-                  <Dropdown.Content>
+                  <Dropdown.Popover>
                     <Dropdown.Menu>
                       <Dropdown.Item id="work" textValue="Work email">
                         <Label>Work email</Label>
@@ -676,13 +676,13 @@ export const WithSubmenus: Story = {
                         <Label>Personal email</Label>
                       </Dropdown.Item>
                     </Dropdown.Menu>
-                  </Dropdown.Content>
+                  </Dropdown.Popover>
                 </Dropdown.SubmenuTrigger>
               </Dropdown.Menu>
-            </Dropdown.Content>
+            </Dropdown.Popover>
           </Dropdown.SubmenuTrigger>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -693,7 +693,7 @@ export const WithCustomSubmenuIndicator: Story = {
       <Button aria-label="Menu" variant="secondary">
         Share
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Item id="copy-link" textValue="Copy Link">
             <Label>Copy Link</Label>
@@ -708,7 +708,7 @@ export const WithCustomSubmenuIndicator: Story = {
                 <Icon className="text-muted size-3.5" icon="gravity-ui:arrow-right" />
               </Dropdown.SubmenuIndicator>
             </Dropdown.Item>
-            <Dropdown.Content>
+            <Dropdown.Popover>
               <Dropdown.Menu>
                 <Dropdown.Item id="whatsapp" textValue="WhatsApp">
                   <Label>WhatsApp</Label>
@@ -733,7 +733,7 @@ export const WithCustomSubmenuIndicator: Story = {
                       </svg>
                     </Dropdown.SubmenuIndicator>
                   </Dropdown.Item>
-                  <Dropdown.Content>
+                  <Dropdown.Popover>
                     <Dropdown.Menu>
                       <Dropdown.Item id="work" textValue="Work email">
                         <Label>Work email</Label>
@@ -742,29 +742,29 @@ export const WithCustomSubmenuIndicator: Story = {
                         <Label>Personal email</Label>
                       </Dropdown.Item>
                     </Dropdown.Menu>
-                  </Dropdown.Content>
+                  </Dropdown.Popover>
                 </Dropdown.SubmenuTrigger>
                 <Dropdown.Item id="discord" textValue="Discord">
                   <Label>Discord</Label>
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown.Content>
+            </Dropdown.Popover>
           </Dropdown.SubmenuTrigger>
           <Dropdown.SubmenuTrigger>
             <Dropdown.Item id="other" textValue="Other">
               <Label>Other (default indicator)</Label>
               <Dropdown.SubmenuIndicator />
             </Dropdown.Item>
-            <Dropdown.Content>
+            <Dropdown.Popover>
               <Dropdown.Menu>
                 <Dropdown.Item id="sms" textValue="SMS">
                   <Label>SMS</Label>
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown.Content>
+            </Dropdown.Popover>
           </Dropdown.SubmenuTrigger>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };
@@ -781,7 +781,7 @@ export const Controlled: Story = {
           <Button aria-label="Menu" variant="secondary">
             Actions
           </Button>
-          <Dropdown.Content>
+          <Dropdown.Popover>
             <Dropdown.Menu
               selectedKeys={selected}
               selectionMode="multiple"
@@ -800,9 +800,9 @@ export const Controlled: Story = {
                 <Dropdown.ItemIndicator />
               </Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown.Content>
+          </Dropdown.Popover>
         </Dropdown>
-        <p className="text-sm text-neutral-500">
+        <p className="text-muted text-sm">
           Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
         </p>
       </div>
@@ -823,7 +823,7 @@ export const ControlledOpenState: Story = {
           <Button aria-label="Menu" variant="secondary">
             Actions
           </Button>
-          <Dropdown.Content>
+          <Dropdown.Popover>
             <Dropdown.Menu>
               <Dropdown.Item id="new-file" textValue="New file">
                 <Label>New file</Label>
@@ -838,7 +838,7 @@ export const ControlledOpenState: Story = {
                 <Label>Delete file</Label>
               </Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown.Content>
+          </Dropdown.Popover>
         </Dropdown>
       </div>
     );
@@ -857,7 +857,7 @@ export const CustomTrigger: Story = {
           <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
         </Avatar>
       </Dropdown.Trigger>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <div className="px-3 pb-1 pt-3">
           <div className="flex items-center gap-2">
             <Avatar size="sm">
@@ -899,7 +899,7 @@ export const CustomTrigger: Story = {
             </div>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   ),
 };

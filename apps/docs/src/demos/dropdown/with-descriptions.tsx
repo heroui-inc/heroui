@@ -9,7 +9,7 @@ export function WithDescriptions() {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
             <div className="flex h-8 items-start justify-center pt-px">
@@ -65,7 +65,7 @@ export function WithDescriptions() {
             </Kbd>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

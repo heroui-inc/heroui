@@ -9,7 +9,7 @@ export function WithIcons() {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
             <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
@@ -45,7 +45,7 @@ export function WithIcons() {
             </Kbd>
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }

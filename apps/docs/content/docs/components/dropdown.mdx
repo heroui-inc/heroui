@@ -33,7 +33,7 @@ export default () => (
     <Dropdown.Trigger>
       <Button />
     </Dropdown.Trigger>
-    <Dropdown.Content>
+    <Dropdown.Popover>
       <Dropdown.Menu>
         <Dropdown.Item>
           <Label />
@@ -51,14 +51,14 @@ export default () => (
             <Label />
             <Dropdown.SubmenuIndicator />
           </Dropdown.Item>
-          <Dropdown.Content>
+          <Dropdown.Popover>
             <Dropdown.Menu>
               <Dropdown.Item />
             </Dropdown.Menu>
-          </Dropdown.Content>
+          </Dropdown.Popover>
         </Dropdown.SubmenuTrigger>
       </Dropdown.Menu>
-    </Dropdown.Content>
+    </Dropdown.Popover>
   </Dropdown>
 )
 ```
@@ -168,13 +168,13 @@ function CustomDropdown() {
       <Dropdown.Trigger className="rounded-lg border p-2 bg-surface">
         <Button>Actions</Button>
       </Dropdown.Trigger>
-      <Dropdown.Content className="min-w-[200px]">
+      <Dropdown.Popover className="min-w-[200px]">
         <Dropdown.Menu>
           <Dropdown.Item id="item-1" textValue="Item 1" className="hover:bg-surface-secondary">
             Item 1
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }
@@ -195,7 +195,7 @@ To customize the Dropdown component classes, you can use the `@layer components`
     @apply outline-none;
   }
 
-  .dropdown__content {
+  .dropdown__popover {
     @apply rounded-lg border border-border bg-overlay p-2;
   }
 
@@ -214,15 +214,15 @@ The Dropdown component uses these CSS classes ([View source styles](https://gith
 #### Base Classes
 - `.dropdown` - Base dropdown container
 - `.dropdown__trigger` - The button or element that triggers the dropdown
-- `.dropdown__content` - The popover content container
+- `.dropdown__popover` - The popover container
 - `.dropdown__menu` - The menu container inside the popover
 
 #### State Classes
 - `.dropdown__trigger[data-focus-visible="true"]` - Focused trigger state
 - `.dropdown__trigger[data-disabled="true"]` - Disabled trigger state
 - `.dropdown__trigger[data-pressed="true"]` - Pressed trigger state
-- `.dropdown__content[data-entering]` - Entering animation state
-- `.dropdown__content[data-exiting]` - Exiting animation state
+- `.dropdown__popover[data-entering]` - Entering animation state
+- `.dropdown__popover[data-exiting]` - Exiting animation state
 - `.dropdown__menu[data-selection-mode="single"]` - Single selection mode
 - `.dropdown__menu[data-selection-mode="multiple"]` - Multiple selection mode
 
@@ -291,7 +291,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 All [Button](https://react-spectrum.adobe.com/react-aria/Button.html) props are also supported when using a Button as the trigger.
 
-### Dropdown.Content Props
+### Dropdown.Popover Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -395,7 +395,7 @@ import { Dropdown, Button, Label } from '@heroui/react';
   <Button aria-label="Menu" variant="secondary">
     Actions
   </Button>
-  <Dropdown.Content>
+  <Dropdown.Popover>
     <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
       <Dropdown.Item id="new-file" textValue="New file">
         <Label>New file</Label>
@@ -407,7 +407,7 @@ import { Dropdown, Button, Label } from '@heroui/react';
         <Label>Delete file</Label>
       </Dropdown.Item>
     </Dropdown.Menu>
-  </Dropdown.Content>
+  </Dropdown.Popover>
 </Dropdown>
 ```
 
@@ -420,7 +420,7 @@ import { Dropdown, Button, Label, Header, Separator } from '@heroui/react';
   <Button aria-label="Menu" variant="secondary">
     Actions
   </Button>
-  <Dropdown.Content>
+  <Dropdown.Popover>
     <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
       <Dropdown.Section>
         <Header>Actions</Header>
@@ -439,7 +439,7 @@ import { Dropdown, Button, Label, Header, Separator } from '@heroui/react';
         </Dropdown.Item>
       </Dropdown.Section>
     </Dropdown.Menu>
-  </Dropdown.Content>
+  </Dropdown.Popover>
 </Dropdown>
 ```
 
@@ -459,7 +459,7 @@ function ControlledDropdown() {
       <Button aria-label="Menu" variant="secondary">
         Actions
       </Button>
-      <Dropdown.Content>
+      <Dropdown.Popover>
         <Dropdown.Menu
           selectedKeys={selected}
           selectionMode="multiple"
@@ -474,7 +474,7 @@ function ControlledDropdown() {
             <Dropdown.ItemIndicator />
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown.Content>
+      </Dropdown.Popover>
     </Dropdown>
   );
 }
@@ -489,7 +489,7 @@ import { Dropdown, Button, Label } from '@heroui/react';
   <Button aria-label="Menu" variant="secondary">
     Share
   </Button>
-  <Dropdown.Content>
+  <Dropdown.Popover>
     <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
       <Dropdown.Item id="copy-link" textValue="Copy Link">
         <Label>Copy Link</Label>
@@ -499,7 +499,7 @@ import { Dropdown, Button, Label } from '@heroui/react';
           <Label>Other</Label>
           <Dropdown.SubmenuIndicator />
         </Dropdown.Item>
-        <Dropdown.Content>
+        <Dropdown.Popover>
           <Dropdown.Menu>
             <Dropdown.Item id="whatsapp" textValue="WhatsApp">
               <Label>WhatsApp</Label>
@@ -508,10 +508,10 @@ import { Dropdown, Button, Label } from '@heroui/react';
               <Label>Telegram</Label>
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown.Content>
+        </Dropdown.Popover>
       </Dropdown.SubmenuTrigger>
     </Dropdown.Menu>
-  </Dropdown.Content>
+  </Dropdown.Popover>
 </Dropdown>
 ```
 
