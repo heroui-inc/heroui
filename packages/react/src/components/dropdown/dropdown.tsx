@@ -3,6 +3,7 @@
 import type {DropdownVariants} from "./dropdown.styles";
 import type {MenuItemIndicatorProps, MenuItemRootProps} from "../menu-item";
 import type {MenuSectionRootProps} from "../menu-section";
+import type {SurfaceVariants} from "../surface";
 import type {
   ButtonProps,
   MenuProps as MenuPrimitiveProps,
@@ -22,6 +23,7 @@ import {
 import {composeTwRenderProps} from "../../utils/compose";
 import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
 import {MenuSectionRoot} from "../menu-section";
+import {SurfaceContext} from "../surface";
 
 import {dropdownVariants} from "./dropdown.styles";
 
@@ -81,13 +83,19 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
   const {slots} = useContext(DropdownContext);
 
   return (
-    <PopoverPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.popover())}
-      placement={placement}
+    <SurfaceContext.Provider
+      value={{
+        variant: "default" as SurfaceVariants["variant"],
+      }}
     >
-      {children}
-    </PopoverPrimitive>
+      <PopoverPrimitive
+        {...props}
+        className={composeTwRenderProps(className, slots?.popover())}
+        placement={placement}
+      >
+        {children}
+      </PopoverPrimitive>
+    </SurfaceContext.Provider>
   );
 };
 

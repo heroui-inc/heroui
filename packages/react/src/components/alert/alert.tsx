@@ -1,11 +1,13 @@
 "use client";
 
 import type {AlertVariants} from "./alert.styles";
+import type {SurfaceVariants} from "../surface";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
+import {SurfaceContext} from "../surface";
 
 import {alertVariants} from "./alert.styles";
 
@@ -32,9 +34,15 @@ const AlertRoot = ({asChild, children, className, status, ...rest}: AlertRootPro
 
   return (
     <AlertContext value={{slots, status}}>
-      <Component className={slots?.base({className})} data-slot="alert-root" {...rest}>
-        {children}
-      </Component>
+      <SurfaceContext.Provider
+        value={{
+          variant: "default" as SurfaceVariants["variant"],
+        }}
+      >
+        <Component className={slots?.base({className})} data-slot="alert-root" {...rest}>
+          {children}
+        </Component>
+      </SurfaceContext.Provider>
     </AlertContext>
   );
 };

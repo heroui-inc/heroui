@@ -19,7 +19,7 @@ export function DocsImage({
   src,
   width = 1000,
 }: DocsImageProps) {
-  const wrapperClasses = `not-prose border border-divider relative w-full overflow-hidden rounded-xl ${className}`;
+  const wrapperClasses = `not-prose border border-separator relative w-full overflow-hidden rounded-xl ${className}`;
 
   if (darkSrc) {
     return (
