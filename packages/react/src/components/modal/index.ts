@@ -7,6 +7,8 @@ import {
   ModalDialog,
   ModalFooter,
   ModalHeader,
+  ModalHeading,
+  ModalIcon,
   ModalRoot,
   ModalTrigger,
 } from "./modal";
@@ -20,6 +22,8 @@ export const Modal = Object.assign(ModalRoot, {
   Container: ModalContainer,
   Dialog: ModalDialog,
   Header: ModalHeader,
+  Icon: ModalIcon,
+  Heading: ModalHeading,
   Body: ModalBody,
   Footer: ModalFooter,
   CloseTrigger: ModalCloseTrigger,
@@ -32,6 +36,8 @@ export type Modal = {
   ContainerProps: ComponentProps<typeof ModalContainer>;
   DialogProps: ComponentProps<typeof ModalDialog>;
   HeaderProps: ComponentProps<typeof ModalHeader>;
+  IconProps: ComponentProps<typeof ModalIcon>;
+  HeadingProps: ComponentProps<typeof ModalHeading>;
   BodyProps: ComponentProps<typeof ModalBody>;
   FooterProps: ComponentProps<typeof ModalFooter>;
   CloseTriggerProps: ComponentProps<typeof ModalCloseTrigger>;
@@ -46,6 +52,8 @@ export {
   ModalContainer,
   ModalDialog,
   ModalHeader,
+  ModalIcon,
+  ModalHeading,
   ModalBody,
   ModalFooter,
   ModalCloseTrigger,
@@ -58,6 +66,8 @@ export type {
   ModalContainerProps,
   ModalDialogProps,
   ModalHeaderProps,
+  ModalIconProps,
+  ModalHeadingProps,
   ModalBodyProps,
   ModalFooterProps,
   ModalCloseTriggerProps,
@@ -69,10 +79,3 @@ export type {
 export {modalVariants} from "./modal.styles";
 
 export type {ModalVariants} from "./modal.styles";
-
-/* -------------------------------------------------------------------------------------------------
- * Hooks
- * -----------------------------------------------------------------------------------------------*/
-export {useModalState} from "./use-modal";
-
-export type {UseModalStateProps, UseModalStateReturn} from "./use-modal";

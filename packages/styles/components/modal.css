@@ -163,6 +163,21 @@
 /* Header - Top section with title and optional description */
 .modal__header {
   @apply flex flex-col gap-3 px-6 pt-6;
+
+  /* When header contains icon, use flex-col layout with gap */
+  & > .modal__icon {
+    @apply mb-0;
+  }
+}
+
+/* Heading - Main title text of the modal */
+.modal__heading-dialog__heading {
+  @apply text-foreground align-middle text-base font-semibold;
+}
+
+/* Icon - Optional icon indicator for the modal */
+.modal__icon {
+  @apply flex size-10 shrink-0 select-none items-center justify-center rounded-full;
 }
 
 /* Body - Main content area */
@@ -181,9 +196,19 @@
   @apply overflow-y-visible;
 }
 
+/* When body follows header, adjust top spacing */
+.modal__header + .modal__body {
+  @apply pt-2;
+}
+
 /* Footer - Bottom section typically for actions */
 .modal__footer {
   @apply flex flex-row items-center justify-end gap-2 px-6 pb-6;
+}
+
+/* When footer directly follows header (no body), increase top spacing */
+.modal__header + .modal__footer {
+  @apply pt-5;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -194,49 +219,4 @@
  * ------------------------------------------------------------------------------------------------ */
 .modal__close-trigger {
   @apply absolute right-4 top-4;
-  @apply isolate inline-flex h-6 w-6 shrink-0 origin-center select-none items-center justify-center rounded-xl p-1;
-  @apply text-muted bg-transparent;
-
-  /* Cursor */
-  cursor: var(--cursor-interactive);
-
-  /**
-   * Transitions
-   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
-   */
-  transition:
-    transform 250ms var(--ease-out-quart),
-    color 150ms var(--ease-out),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
-  @apply transform-gpu motion-reduce:transition-none;
-
-  &:hover,
-  &[data-hovered="true"] {
-    @apply text-foreground bg-default;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    transform: scale(0.93);
-  }
-
-  /* Focus visible state */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    @apply status-focused;
-  }
-
-  /* Disabled state */
-  &:disabled,
-  &[aria-disabled="true"] {
-    @apply status-disabled;
-  }
-
-  /* Icon sizing */
-  & svg {
-    @apply pointer-events-none;
-    @apply size-4 shrink-0 self-center;
-    @apply -mx-0.5 my-0.5;
-  }
 }
