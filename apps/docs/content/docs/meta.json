@@ -25,6 +25,7 @@
     "---Components---",
     "components/accordion",
     "components/alert",
+    "components/alert-dialog",
     "components/avatar",
     "components/button",
     "components/card",

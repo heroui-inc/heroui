@@ -339,7 +339,7 @@ export const Controlled = () => {
 };
 
 export const DismissBehavior = () => (
-  <div className="flex max-w-2xl flex-col gap-8">
+  <div className="flex max-w-md flex-col gap-8">
     <div className="flex flex-col gap-3">
       <h3 className="text-foreground text-lg font-semibold">Dismiss Behavior</h3>
       <p className="text-muted text-pretty text-sm leading-relaxed">
