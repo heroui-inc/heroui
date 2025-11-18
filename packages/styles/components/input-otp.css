@@ -80,7 +80,7 @@
 
 /* Separator */
 .input-otp__separator {
-  @apply bg-divider h-[2px] w-[6px] shrink-0 rounded-[4px];
+  @apply bg-separator h-[2px] w-[6px] shrink-0 rounded-[4px];
 }
 
 /* Variant modifiers */

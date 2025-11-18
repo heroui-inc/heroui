@@ -2,7 +2,7 @@
 
 /* Base separator with default horizontal orientation */
 .separator {
-  @apply bg-divider shrink-0 rounded-[4px] border-b-0 border-t-0;
+  @apply bg-separator shrink-0 rounded-[4px] border-b-0 border-t-0;
 
   /* Default size - horizontal orientation */
   @apply h-px w-full;
@@ -43,4 +43,9 @@
 
 .separator__content--vertical {
   @apply text-center;
+}
+
+/* On Surface variant */
+.separator--on-surface {
+  @apply bg-separator-on-surface;
 }

@@ -2,6 +2,7 @@
 
 import type {ModalVariants} from "./modal.styles";
 import type {UseModalStateProps, UseModalStateReturn} from "./use-modal";
+import type {SurfaceVariants} from "../surface";
 import type {ComponentProps, HTMLAttributes, ReactNode} from "react";
 import type {
   ButtonProps as ButtonPrimitiveProps,
@@ -22,6 +23,7 @@ import {
 import {isNotAsChild} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
+import {SurfaceContext} from "../surface";
 
 import {modalVariants} from "./modal.styles";
 
@@ -151,9 +153,15 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <DialogPrimitive className={slots?.dialog({className})} data-slot="modal-dialog" {...props}>
-      {children}
-    </DialogPrimitive>
+    <SurfaceContext.Provider
+      value={{
+        variant: "default" as SurfaceVariants["variant"],
+      }}
+    >
+      <DialogPrimitive className={slots?.dialog({className})} data-slot="modal-dialog" {...props}>
+        {children}
+      </DialogPrimitive>
+    </SurfaceContext.Provider>
   );
 };
 
