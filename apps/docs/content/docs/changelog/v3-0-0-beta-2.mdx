@@ -119,7 +119,7 @@ Chip component sizes have been updated for better consistency:
 The Separator component now automatically detects when it's placed inside a surface component (one that uses `bg-surface`) and applies the appropriate divider color for better visibility. A new `isOnSurface` prop is also available for manual control.
 
 **New Calculated Variable:**
-- `--color-divider-on-surface`: A calculated variable (automatically generated using `color-mix`) that ensures the divider is visible when placed on a surface background. Like other calculated variables, it can be overridden in your theme.
+- `--color-separator-on-surface`: A calculated variable (automatically generated using `color-mix`) that ensures the separator is visible when placed on a surface background. Like other calculated variables, it can be overridden in your theme.
 
 **Usage:**
 
@@ -135,7 +135,7 @@ You can also use the calculated variable directly with Tailwind classes:
 
 ```tsx
 <div className="bg-surface">
-  <div className="h-px w-full bg-divider-on-surface" />
+  <div className="h-px w-full bg-separator-on-surface" />
 </div>
 ```
 
@@ -186,6 +186,56 @@ import { SelectContent } from "@heroui/react"
 
 // After
 import { SelectPopover } from "@heroui/react"
+```
+
+### CSS Variables and Utilities: Divider → Separator
+
+All CSS variables and utility classes related to `divider` have been renamed to `separator` for consistency with the Separator component name.
+
+**CSS Variables:**
+
+```css
+/* Before */
+border-bottom: 1px solid var(--divider);
+
+/* After */
+border-bottom: 1px solid var(--separator);
+```
+
+**Tailwind Utility Classes:**
+
+```tsx
+// Before
+<div className="bg-divider" />
+<div className="border-divider" />
+
+// After
+<div className="bg-separator" />
+<div className="border-separator" />
+```
+
+**Theme Overrides:**
+
+If you have custom themes that override the divider variable, update them:
+
+```css
+/* Before */
+:root {
+  --divider: oklch(92% 0.004 286.32);
+}
+
+.dark {
+  --divider: oklch(22% 0.006 286.033);
+}
+
+/* After */
+:root {
+  --separator: oklch(92% 0.004 286.32);
+}
+
+.dark {
+  --separator: oklch(22% 0.006 286.033);
+}
 ```
 
 ## Bug Fixes
