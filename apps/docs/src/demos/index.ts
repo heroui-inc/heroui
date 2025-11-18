@@ -909,9 +909,9 @@ export const demos: Record<string, DemoItem> = {
     component: ModalDemos.WithForm,
     file: "modal/with-form.tsx",
   },
-  "modal-with-use-modal-state": {
-    component: ModalDemos.WithUseModalState,
-    file: "modal/with-use-modal-state.tsx",
+  "modal-controlled": {
+    component: ModalDemos.Controlled,
+    file: "modal/controlled.tsx",
   },
   "modal-custom-trigger": {
     component: ModalDemos.CustomTrigger,

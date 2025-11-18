@@ -13,16 +13,14 @@ export function WithForm() {
             <>
               <Modal.CloseTrigger />
               <Modal.Header>
-                <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+                <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                   <Icon className="size-5" icon="gravity-ui:envelope" />
-                </div>
-                <div>
-                  <h2 className="text-foreground text-lg font-semibold leading-6">Contact Us</h2>
-                  <p className="text-muted mt-1.5 text-sm leading-5">
-                    Fill out the form below and we'll get back to you. The modal adapts
-                    automatically when the keyboard appears on mobile.
-                  </p>
-                </div>
+                </Modal.Icon>
+                <Modal.Heading>Contact Us</Modal.Heading>
+                <p className="text-muted mt-1.5 text-sm leading-5">
+                  Fill out the form below and we'll get back to you. The modal adapts automatically
+                  when the keyboard appears on mobile.
+                </p>
               </Modal.Header>
               <Modal.Body className="p-6">
                 <Surface variant="default">

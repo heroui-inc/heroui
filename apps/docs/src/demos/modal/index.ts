@@ -4,7 +4,7 @@ export {BackdropVariants} from "./backdrop-variants";
 export {ScrollComparison} from "./scroll-comparison";
 export {DismissBehavior} from "./dismiss-behavior";
 export {WithForm} from "./with-form";
-export {WithUseModalState} from "./with-use-modal-state";
+export {Controlled} from "./controlled";
 export {CustomTrigger} from "./custom-trigger";
 export {CustomBackdrop} from "./custom-backdrop";
 export {CustomAnimations} from "./custom-animations";

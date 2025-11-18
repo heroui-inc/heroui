@@ -36,9 +36,9 @@ export function ScrollComparison() {
             {({close}) => (
               <>
                 <Modal.Header>
-                  <h2 className="text-foreground text-lg font-semibold leading-6">
+                  <Modal.Heading>
                     Scroll: {scroll.charAt(0).toUpperCase() + scroll.slice(1)}
-                  </h2>
+                  </Modal.Heading>
                   <p className="text-muted text-sm leading-5">
                     Compare scroll behaviors - inside keeps content scrollable within the modal,
                     outside allows page scrolling

@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import { Modal, useModalState } from '@heroui/react';
+import { Modal } from '@heroui/react';
 ```
 
 ### Usage
@@ -33,8 +33,11 @@ export default () => (
     <Button>Open Modal</Button>
     <Modal.Container>
       <Modal.Dialog>
-        <Modal.CloseTrigger />
-        <Modal.Header />
+        <Modal.CloseTrigger />  {/* Optional: Close button */}
+        <Modal.Header>
+          <Modal.Icon />  {/* Optional: Icon */}
+          <Modal.Heading />
+        </Modal.Header>
         <Modal.Body />
         <Modal.Footer />
       </Modal.Dialog>
@@ -76,7 +79,7 @@ export default () => (
 ### Controlled State
 
 <ComponentPreview
-  name="modal-with-use-modal-state"
+  name="modal-controlled"
 />
 
 ### Custom Trigger
@@ -198,16 +201,13 @@ The component supports these interactive states:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `state` | `UseModalStateReturn` | - | External state control |
-| `defaultOpen` | `boolean` | `false` | Initially open |
-| `isOpen` | `boolean` | - | Controlled open state |
-| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
+| `children` | `ReactNode` | - | Trigger and container elements |
 
 ### Modal.Trigger
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | - | Trigger content |
+| `children` | `ReactNode` | - | Custom trigger content |
 | `className` | `string` | - | CSS classes |
 
 ### Modal.Container
@@ -219,6 +219,8 @@ The component supports these interactive states:
 | `variant` | `"solid" \| "blur" \| "transparent"` | `"solid"` | Backdrop overlay style |
 | `isDismissable` | `boolean` | `true` | Close on backdrop click |
 | `isKeyboardDismissDisabled` | `boolean` | `false` | Disable ESC key to close |
+| `isOpen` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
 | `backdropClassName` | `string \| (values) => string` | - | Backdrop CSS classes |
 | `className` | `string \| (values) => string` | - | Container CSS classes |
 
@@ -262,19 +264,21 @@ The component supports these interactive states:
 | `children` | `ReactNode` | - | Custom close button |
 | `className` | `string \| (values) => string` | - | CSS classes |
 
-### useModalState Hook
+### useOverlayState Hook
 
 ```tsx
-const modalState = useModalState({
+import { useOverlayState } from '@heroui/react';
+
+const state = useOverlayState({
   defaultOpen: false,
   onOpenChange: (isOpen) => console.log(isOpen)
 });
 
-modalState.isOpen    // Current state
-modalState.open()     // Open modal
-modalState.close()    // Close modal
-modalState.toggle()   // Toggle state
-modalState.setOpen()  // Set state directly
+state.isOpen      // Current state
+state.open()      // Open modal
+state.close()     // Close modal
+state.toggle()    // Toggle state
+state.setOpen()   // Set state directly
 ```
 
 ## Accessibility
