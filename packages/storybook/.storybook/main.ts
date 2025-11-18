@@ -44,7 +44,9 @@ const config: StorybookConfig = {
 };
 
 function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, "package.json")));
+  // Sanitize the value to prevent path traversal attacks
+  const sanitizedValue = value.replace(/\.\./g, '').replace(/[/\\]/g, '');
+  return dirname(require.resolve(join(sanitizedValue, "package.json")));
 }
 
 export default config;
