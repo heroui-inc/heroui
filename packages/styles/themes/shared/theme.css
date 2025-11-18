@@ -152,6 +152,11 @@
     var(--color-surface-foreground) 9%
   );
   --color-on-surface-focus: var(--color-on-surface);
+  --color-divider-on-surface: color-mix(
+    in oklab,
+    var(--color-surface) 92%,
+    var(--color-surface-foreground) 8%
+  );
 
   /* Radius and default sizes - defaults can change by just changing the --radius */
   --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */

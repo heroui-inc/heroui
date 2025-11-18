@@ -37,7 +37,7 @@ export function ListBoxDemo() {
             </Kbd>
           </ListBox.Item>
         </ListBox.Section>
-        <Separator />
+        <Separator isOnSurface />
         <ListBox.Section>
           <Header>Danger zone</Header>
           <ListBox.Item id="delete-file" textValue="Delete file" variant="danger">

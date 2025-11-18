@@ -1,6 +1,7 @@
 "use client";
 
 import type {ComboBoxVariants} from "./combobox.styles";
+import type {SurfaceVariants} from "../surface";
 import type {ComponentProps, ReactNode} from "react";
 import type {ButtonProps, ComboBoxProps as ComboBoxPrimitiveProps} from "react-aria-components";
 
@@ -17,6 +18,7 @@ import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {isNotAsChild} from "../../utils/props";
 import {IconChevronDown} from "../icons";
+import {SurfaceContext} from "../surface";
 
 import {comboboxVariants} from "./combobox.styles";
 
@@ -139,13 +141,19 @@ const ComboBoxPopover = ({
   const {slots} = useContext(ComboBoxContext);
 
   return (
-    <PopoverPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.popover())}
-      placement={placement}
+    <SurfaceContext.Provider
+      value={{
+        variant: "default" as SurfaceVariants["variant"],
+      }}
     >
-      {children}
-    </PopoverPrimitive>
+      <PopoverPrimitive
+        {...props}
+        className={composeTwRenderProps(className, slots?.popover())}
+        placement={placement}
+      >
+        {children}
+      </PopoverPrimitive>
+    </SurfaceContext.Provider>
   );
 };
 

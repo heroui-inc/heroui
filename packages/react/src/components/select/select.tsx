@@ -2,6 +2,7 @@
 
 import type {SelectVariants} from "./select.styles";
 import type {Booleanish} from "../../utils/assertion";
+import type {SurfaceVariants} from "../surface";
 import type {ButtonProps, SelectProps as SelectPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -156,13 +157,19 @@ const SelectPopover = ({
   const {slots} = useContext(SelectContext);
 
   return (
-    <PopoverPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.popover())}
-      placement={placement}
+    <SurfaceContext.Provider
+      value={{
+        variant: "default" as SurfaceVariants["variant"],
+      }}
     >
-      {children}
-    </PopoverPrimitive>
+      <PopoverPrimitive
+        {...props}
+        className={composeTwRenderProps(className, slots?.popover())}
+        placement={placement}
+      >
+        {children}
+      </PopoverPrimitive>
+    </SurfaceContext.Provider>
   );
 };
 
