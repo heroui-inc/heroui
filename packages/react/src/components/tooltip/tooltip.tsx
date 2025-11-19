@@ -41,27 +41,28 @@ const TooltipRoot = ({
   const [internalIsOpen, setInternalIsOpen] = React.useState(false);
   const clearTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  // Intercept onOpenChange to implement "close and stay closed" behavior
-  // This fixes issue #5912 where tooltips stay open when clicking buttons with popovers
+  // Prevent tooltip from immediately reopening after close.
+  // Fixes issue where tooltips stay visible when clicking triggers that open overlays.
+  // See: https://github.com/heroui-inc/heroui/issues/5912
   const handleOpenChange = React.useCallback(
     (open: boolean) => {
       if (open) {
-        // Tooltip wants to open
         if (forceHide) {
-          // We're in force-hide mode - block reopening
+          // Block reopening while in force-hide mode
           setInternalIsOpen(false);
 
           return;
         }
-        // Allow normal open
         setInternalIsOpen(true);
         setForceHide(false);
       } else {
-        // Tooltip is closing - enter force-hide mode to prevent immediate reopening
+        // Enter force-hide mode to prevent immediate reopening
         setInternalIsOpen(false);
         setForceHide(true);
 
-        // Clear force-hide after a delay to allow normal tooltip behavior on next hover
+        // Clear force-hide after 500ms to restore normal tooltip behavior.
+        // This delay is long enough to prevent the race condition but short
+        // enough to not impact user experience on subsequent hovers.
         if (clearTimeoutRef.current) {
           clearTimeout(clearTimeoutRef.current);
         }

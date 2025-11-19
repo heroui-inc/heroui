@@ -67,7 +67,7 @@ const TemplateWithTrigger = (props: Tooltip["ContentProps"]) => (
   <div className="flex items-center gap-3">
     <Tooltip delay={0}>
       <Tooltip.Trigger aria-label="Tooltip trigger">
-        <div className="bg-accent-soft rounded-full p-2">
+        <div className="rounded-full bg-accent-soft p-2">
           <Icon icon="gravity-ui:circle-info" />
         </div>
       </Tooltip.Trigger>
@@ -89,33 +89,25 @@ export const WithTrigger = {
   render: TemplateWithTrigger,
 };
 
-// Test for issue #5912: Tooltip should close when button with popover is clicked
 const TooltipWithPopoverTemplate = (props: Tooltip["ContentProps"]) => (
-  <div className="flex flex-col items-center gap-8 p-8">
-    <div className="text-sm text-gray-600">
-      <p><strong>Test for Issue #5912:</strong></p>
-      <p>1. Hover over the button below to show tooltip</p>
-      <p>2. Click the button to open popover</p>
-      <p>3. Tooltip should close immediately (not stay visible)</p>
-    </div>
-
+  <div className="flex items-center gap-3">
     <Tooltip delay={0}>
       <Popover>
-        <Button variant="secondary">Hover & Click Me</Button>
-        <Popover.Content className="max-w-64" placement="bottom">
+        <Button variant="secondary">
+          <Icon icon="gravity-ui:gear" />
+          Settings
+        </Button>
+        <Popover.Content className="w-64" placement="bottom">
           <Popover.Dialog>
             <Popover.Arrow />
-            <Popover.Heading>Popover Content</Popover.Heading>
-            <p className="text-sm mt-2">
-              The tooltip should have closed when you clicked the button!
-              If you can still see the tooltip, the bug is NOT fixed.
-            </p>
+            <Popover.Heading>Settings</Popover.Heading>
+            <p className="mt-2 text-sm">Configure your preferences</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
       <Tooltip.Content {...props}>
         <Tooltip.Arrow />
-        <p>This tooltip should close on click</p>
+        <p>Open settings</p>
       </Tooltip.Content>
     </Tooltip>
   </div>
