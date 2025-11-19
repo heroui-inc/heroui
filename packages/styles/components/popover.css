@@ -54,11 +54,6 @@
 /* Popover dialog */
 .popover__dialog {
   @apply p-4;
-
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    @apply status-focused;
-  }
 }
 
 /* Popover heading */

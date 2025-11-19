@@ -196,7 +196,7 @@ The package provides a comprehensive set of CSS variables for customization:
 
   /* UI Colors */
   --border: oklch(0 0 0 / 0%);
-  --divider: oklch(92% 0.004 286.32);
+  --separator: oklch(92% 0.004 286.32);
   --focus: var(--accent);
   --link: var(--foreground);
 
@@ -209,7 +209,7 @@ The package provides a comprehensive set of CSS variables for customization:
 }
 ```
 
-**Note**: Dark mode overrides specific variables (like `--background`, `--surface`, `--overlay`, `--muted`, `--scrollbar`, `--default`, `--warning`, `--danger`, `--segment`, `--divider`, and shadow values) when `.dark` class or `[data-theme="dark"]` attribute is applied.
+**Note**: Dark mode overrides specific variables (like `--background`, `--surface`, `--overlay`, `--muted`, `--scrollbar`, `--default`, `--warning`, `--danger`, `--segment`, `--separator`, and shadow values) when `.dark` class or `[data-theme="dark"]` attribute is applied.
 
 #### Field Tokens
 

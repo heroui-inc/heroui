@@ -54,7 +54,7 @@ export function ComponentPreviewContainer({
         ref={previewRef}
         data-name={name}
         className={cn(
-          "preview not-prose border-divider relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-l border-r border-t p-4 sm:p-10",
+          "preview not-prose border-separator relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-l border-r border-t p-4 sm:p-10",
           isBgSolid && "bg-background",
           alignmentClasses[align],
           "flex",
@@ -80,7 +80,7 @@ export function ComponentPreviewContainer({
       {!hideCode && !!Code && (
         <div
           ref={codeRef}
-          className="code-section border-divider relative rounded-b-xl border bg-transparent"
+          className="code-section border-separator relative rounded-b-xl border bg-transparent"
           style={{
             contentVisibility: "auto",
           }}

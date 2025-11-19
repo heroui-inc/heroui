@@ -35,7 +35,7 @@ export function ComponentItem({
 
   return (
     <div className={cn("flex flex-col gap-[9px]", className)}>
-      <div className="border-divider relative h-[198px] overflow-hidden rounded-xl border">
+      <div className="border-separator relative h-[198px] overflow-hidden rounded-xl border">
         <Link className="h-full w-full" href={href} underline="none" {...linkProps}>
           <Image
             alt={title}

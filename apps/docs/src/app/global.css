@@ -290,11 +290,11 @@
   border-left: none !important;
   border-right: none !important;
   border-top: 1px solid var(--border) !important;
-  border-bottom: 1px solid var(--divider) !important;
+  border-bottom: 1px solid var(--separator) !important;
 
   @media (min-width: 600px) {
     margin-right: 1rem;
-    border-bottom: 0px solid var(--divider) !important;
+    border-bottom: 0px solid var(--separator) !important;
   }
 }
 
@@ -344,7 +344,7 @@
 }
 
 code {
-  @apply border-divider bg-transparent px-[3px];
+  @apply border-separator bg-transparent px-[3px];
 }
 
 /* Table styles for .prose-no-margin */

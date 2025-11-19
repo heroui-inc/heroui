@@ -24,7 +24,7 @@ export function Required() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="florida" textValue="Florida">
               Florida
@@ -51,7 +51,7 @@ export function Required() {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
         <FieldError />
       </Select>
       <Select isRequired className="w-full" name="country" placeholder="Select a country">
@@ -60,7 +60,7 @@ export function Required() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="usa" textValue="United States">
               United States
@@ -87,7 +87,7 @@ export function Required() {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
         <FieldError />
       </Select>
       <Button type="submit">Submit</Button>

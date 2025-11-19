@@ -2,11 +2,9 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 
-// TODO:
 import {Footer} from "@/components/footer";
 import {GitHubLink} from "@/components/github-link";
 import {Iconify} from "@/components/iconify";
-// import {ThemeBackground} from "@/components/theme-background";
 import {currentVersion} from "@/utils/version";
 
 import {DemoComponents} from "./components/demo";
@@ -18,7 +16,7 @@ const VersionChip = () => {
       href="/docs/changelog/v3-0-0-beta-1"
     >
       <Iconify icon="gravity-ui:sparkles" />
-      <span>v{currentVersion}: Major Redesign</span>
+      <span>v{currentVersion}: New components</span>
     </LinkRoot>
   );
 };

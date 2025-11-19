@@ -11,8 +11,8 @@
    */
   transition:
     transform 250ms var(--ease-out-quart),
-    background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
+
   @apply motion-reduce:transition-none;
 
   /* Cursor */
@@ -93,7 +93,7 @@
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
      */
-    transition: stroke-dashoffset 250ms linear 0.2s;
+    transition: stroke-dashoffset 250ms linear;
     @apply motion-reduce:transition-none;
   }
 }

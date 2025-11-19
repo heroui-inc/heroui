@@ -19,7 +19,7 @@ export function ControlledOpenState() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="florida" textValue="Florida">
               Florida
@@ -46,10 +46,10 @@ export function ControlledOpenState() {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
       <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "Close" : "Open"} Select</Button>
-      <p className="text-sm text-neutral-500">Select is {isOpen ? "open" : "closed"}</p>
+      <p className="text-muted text-sm">Select is {isOpen ? "open" : "closed"}</p>
     </div>
   );
 }

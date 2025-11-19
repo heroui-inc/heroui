@@ -88,7 +88,7 @@ export function CustomValueMultiple() {
         </Select.Value>
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           {users.map((user) => (
             <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
@@ -104,7 +104,7 @@ export function CustomValueMultiple() {
             </ListBox.Item>
           ))}
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   );
 }

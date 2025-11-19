@@ -8,7 +8,7 @@ export function WithDescription() {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="florida" textValue="Florida">
             Florida
@@ -35,7 +35,7 @@ export function WithDescription() {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
       <Description>Select your state of residence</Description>
     </Select>
   );

@@ -2,6 +2,7 @@
 
 import type {SelectVariants} from "./select.styles";
 import type {Booleanish} from "../../utils/assertion";
+import type {SurfaceVariants} from "../surface";
 import type {ButtonProps, SelectProps as SelectPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -140,41 +141,47 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Select Content
+ * Select Popover
  * -----------------------------------------------------------------------------------------------*/
-interface SelectContentProps
+interface SelectPopoverProps
   extends Omit<React.ComponentProps<typeof PopoverPrimitive>, "children"> {
   children: React.ReactNode;
 }
 
-const SelectContent = ({
+const SelectPopover = ({
   children,
   className,
   placement = "bottom",
   ...props
-}: SelectContentProps) => {
+}: SelectPopoverProps) => {
   const {slots} = useContext(SelectContext);
 
   return (
-    <PopoverPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.content())}
-      placement={placement}
+    <SurfaceContext.Provider
+      value={{
+        variant: "default" as SurfaceVariants["variant"],
+      }}
     >
-      {children}
-    </PopoverPrimitive>
+      <PopoverPrimitive
+        {...props}
+        className={composeTwRenderProps(className, slots?.popover())}
+        placement={placement}
+      >
+        {children}
+      </PopoverPrimitive>
+    </SurfaceContext.Provider>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {SelectRoot, SelectTrigger, SelectValue, SelectIndicator, SelectContent};
+export {SelectRoot, SelectTrigger, SelectValue, SelectIndicator, SelectPopover};
 
 export type {
   SelectRootProps,
   SelectTriggerProps,
   SelectValueProps,
   SelectIndicatorProps,
-  SelectContentProps,
+  SelectPopoverProps,
 };

@@ -41,6 +41,9 @@ export default {
     },
   },
   component: Tooltip,
+  parameters: {
+    layout: "centered",
+  },
   title: "Components/Overlays/Tooltip",
 } as Meta<typeof Tooltip>;
 
@@ -49,7 +52,7 @@ const defaultArgs: Omit<Tooltip["ContentProps"], "children"> = {
 };
 
 const Template = (props: Tooltip["ContentProps"]) => (
-  <div className="flex items-center gap-3">
+  <div className="flex items-center justify-center gap-3">
     <Tooltip delay={0}>
       <Button isIconOnly variant="tertiary">
         <Icon icon="gravity-ui:circle-info" />

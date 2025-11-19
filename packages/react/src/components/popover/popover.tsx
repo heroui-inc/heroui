@@ -1,6 +1,7 @@
 "use client";
 
 import type {PopoverVariants} from "./popover.styles";
+import type {SurfaceVariants} from "../surface";
 import type {PopoverProps as PopoverPrimitiveProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -14,6 +15,7 @@ import {
 } from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
+import {SurfaceContext} from "../surface";
 
 import {popoverVariants} from "./popover.styles";
 
@@ -58,9 +60,15 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
 
   return (
     <PopoverContext value={{slots}}>
-      <PopoverPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
-        {children}
-      </PopoverPrimitive>
+      <SurfaceContext.Provider
+        value={{
+          variant: "default" as SurfaceVariants["variant"],
+        }}
+      >
+        <PopoverPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
+          {children}
+        </PopoverPrimitive>
+      </SurfaceContext.Provider>
     </PopoverContext>
   );
 };

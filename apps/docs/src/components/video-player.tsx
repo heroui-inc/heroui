@@ -110,7 +110,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
   return (
     <div
-      className="not-prose border-divider relative overflow-hidden rounded-xl border"
+      className="not-prose border-separator relative overflow-hidden rounded-xl border"
       data-playing={isPlaying}
     >
       {isLoading ? (
@@ -130,9 +130,9 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
               onPress={onTogglePlay}
             >
               {isPlaying ? (
-                <Iconify icon="gravity-ui:pause-fill" size={16} />
+                <Iconify icon="gravity-ui:pause-fill" width={16} />
               ) : (
-                <Iconify icon="gravity-ui:play-fill" size={16} />
+                <Iconify icon="gravity-ui:play-fill" width={16} />
               )}
             </Button>
           </Tooltip.Trigger>

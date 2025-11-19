@@ -113,7 +113,7 @@
 }
 
 .select__indicator {
-  @apply text-field-placeholder duration-250 absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center transition;
+  @apply text-field-placeholder absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center transition duration-150;
 
   &[data-open="true"] {
     @apply rotate-180;
@@ -125,7 +125,7 @@
 }
 
 /* Similar to popover content styles */
-.select__content {
+.select__popover {
   @apply min-w-(--trigger-width) bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
   box-shadow: var(--shadow-overlay);
 
@@ -137,7 +137,7 @@
 
   /* Entering animations */
   &[data-entering] {
-    @apply animate-in zoom-in-90 fade-in-0 ease-out-quad duration-200;
+    @apply animate-in zoom-in-95 fade-in-0 ease-fluid-out duration-250;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -159,7 +159,7 @@
 
   /* Exiting animations */
   &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quart duration-150;
+    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
   }
 
   /* Arrow styling */
