@@ -1,7 +1,7 @@
 "use client";
 
 import type {ModalVariants} from "./modal.styles";
-import type {UseModalStateProps, UseModalStateReturn} from "./use-modal";
+import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
 import type {SurfaceVariants} from "../surface";
 import type {ComponentProps, HTMLAttributes, ReactNode} from "react";
 import type {
@@ -14,6 +14,7 @@ import {mergeProps} from "@react-aria/utils";
 import {createContext, useContext, useMemo} from "react";
 import {
   Dialog as DialogPrimitive,
+  Heading as HeadingPrimitive,
   ModalOverlay as ModalOverlayPrimitive,
   Modal as ModalPrimitive,
   DialogTrigger as ModalTriggerPrimitive,
@@ -43,7 +44,7 @@ const ModalContext = createContext<ModalContext>({});
  * Modal Root
  * -----------------------------------------------------------------------------------------------*/
 interface ModalRootProps extends ComponentProps<typeof ModalTriggerPrimitive> {
-  state?: UseModalStateReturn;
+  state?: UseOverlayStateReturn;
 }
 
 const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
@@ -52,7 +53,7 @@ const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
     [],
   );
 
-  const controlledProps = useMemo<UseModalStateProps>(
+  const controlledProps = useMemo<UseOverlayStateProps>(
     () => (state ? {isOpen: state.isOpen, onOpenChange: state.setOpen} : {}),
     [state],
   );
@@ -134,8 +135,6 @@ const ModalContainer = ({
           className={composeTwRenderProps(className, updatedSlots?.container())}
           data-placement={placement}
           data-slot="modal-container"
-          isDismissable={isDismissable}
-          {...props}
         >
           {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
         </ModalPrimitive>
@@ -211,6 +210,41 @@ const ModalFooter = ({children, className, ...props}: ModalFooterProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Modal Heading
+ * -----------------------------------------------------------------------------------------------*/
+interface ModalHeadingProps extends ComponentProps<typeof HeadingPrimitive> {}
+
+const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
+  const {slots} = useContext(ModalContext);
+
+  return (
+    <HeadingPrimitive
+      className={slots?.heading({className})}
+      data-slot="modal-heading"
+      slot="title"
+      {...props}
+    >
+      {children}
+    </HeadingPrimitive>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialog Icon
+ * -----------------------------------------------------------------------------------------------*/
+interface ModalIconProps extends ComponentProps<"div"> {}
+
+const ModalIcon = ({children, className, ...props}: ModalIconProps) => {
+  const {slots} = useContext(ModalContext);
+
+  return (
+    <div className={slots?.icon({className})} data-slot="modal-icon" {...props}>
+      {children}
+    </div>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Modal Close Trigger
  * -----------------------------------------------------------------------------------------------*/
 interface ModalCloseTriggerProps {
@@ -260,6 +294,8 @@ export {
   ModalContainer,
   ModalDialog,
   ModalHeader,
+  ModalIcon,
+  ModalHeading,
   ModalBody,
   ModalFooter,
   ModalCloseTrigger,
@@ -271,6 +307,8 @@ export type {
   ModalContainerProps,
   ModalDialogProps,
   ModalHeaderProps,
+  ModalIconProps,
+  ModalHeadingProps,
   ModalBodyProps,
   ModalFooterProps,
   ModalCloseTriggerProps,

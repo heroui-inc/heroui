@@ -1,9 +1,9 @@
 import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import clsx from "clsx";
 import React, {useState} from "react";
 
+import {useOverlayState} from "../../hooks/use-overlay-state";
 import {Button} from "../button";
 import {Input} from "../input";
 import {Label} from "../label";
@@ -11,8 +11,6 @@ import {Radio} from "../radio";
 import {RadioGroup} from "../radio-group";
 import {Surface} from "../surface";
 import {TextField} from "../text-field";
-
-import {useModalState} from "./use-modal";
 
 import {Modal} from "./index";
 
@@ -36,12 +34,10 @@ export const Default = () => {
             <>
               <Modal.CloseTrigger />
               <Modal.Header>
-                <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                <Modal.Icon className="bg-default text-foreground">
                   <Icon className="size-5" icon="gravity-ui:rocket" />
-                </div>
-                <h2 className="text-foreground text-lg font-semibold leading-6">
-                  Welcome to HeroUI
-                </h2>
+                </Modal.Icon>
+                <Modal.Heading>Welcome to HeroUI</Modal.Heading>
               </Modal.Header>
               <Modal.Body>
                 <p>
@@ -78,12 +74,12 @@ export const Placements = () => {
                 <>
                   <Modal.CloseTrigger />
                   <Modal.Header>
-                    <div className="bg-default flex size-10 items-center justify-center rounded-full">
-                      <Icon icon="gravity-ui:rocket" />
-                    </div>
-                    <h2 className="text-foreground text-lg font-semibold leading-6">
+                    <Modal.Icon className="bg-default text-foreground">
+                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                    </Modal.Icon>
+                    <Modal.Heading>
                       Placement: {placement.charAt(0).toUpperCase() + placement.slice(1)}
-                    </h2>
+                    </Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
                     <p>
@@ -120,12 +116,12 @@ export const BackdropVariants = () => {
                 <>
                   <Modal.CloseTrigger />
                   <Modal.Header>
-                    <div className="bg-default flex size-10 items-center justify-center rounded-full">
-                      <Icon icon="gravity-ui:rocket" />
-                    </div>
-                    <h2 className="text-foreground text-lg font-semibold leading-6">
+                    <Modal.Icon className="bg-default text-foreground">
+                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                    </Modal.Icon>
+                    <Modal.Heading>
                       Backdrop: {variant.charAt(0).toUpperCase() + variant.slice(1)}
-                    </h2>
+                    </Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
                     <p>
@@ -165,12 +161,10 @@ export const DismissBehavior = () => (
               <>
                 <Modal.CloseTrigger />
                 <Modal.Header>
-                  <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                  <Modal.Icon className="bg-default text-foreground">
                     <Icon className="size-5" icon="gravity-ui:circle-info" />
-                  </div>
-                  <h2 className="text-foreground text-lg font-semibold leading-6">
-                    isDismissable = false
-                  </h2>
+                  </Modal.Icon>
+                  <Modal.Heading>isDismissable = false</Modal.Heading>
                   <p className="text-muted text-sm leading-5">
                     Clicking the backdrop won't close this modal
                   </p>
@@ -207,12 +201,10 @@ export const DismissBehavior = () => (
               <>
                 <Modal.CloseTrigger />
                 <Modal.Header>
-                  <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                  <Modal.Icon className="bg-default text-foreground">
                     <Icon className="size-5" icon="gravity-ui:circle-info" />
-                  </div>
-                  <h2 className="text-foreground text-lg font-semibold leading-6">
-                    isKeyboardDismissDisabled = true
-                  </h2>
+                  </Modal.Icon>
+                  <Modal.Heading>isKeyboardDismissDisabled = true</Modal.Heading>
                   <p className="text-muted text-sm leading-5">ESC key is disabled</p>
                 </Modal.Header>
                 <Modal.Body>
@@ -268,9 +260,9 @@ export const ScrollComparison = () => {
             {({close}) => (
               <>
                 <Modal.Header>
-                  <h2 className="text-foreground text-lg font-semibold leading-6">
+                  <Modal.Heading>
                     Scroll: {scroll.charAt(0).toUpperCase() + scroll.slice(1)}
-                  </h2>
+                  </Modal.Heading>
                   <p className="text-muted text-sm leading-5">
                     Compare scroll behaviors - inside keeps content scrollable within the modal,
                     outside allows page scrolling
@@ -310,16 +302,14 @@ export const WithForm = () => (
           <>
             <Modal.CloseTrigger />
             <Modal.Header>
-              <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+              <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                 <Icon className="size-5" icon="gravity-ui:envelope" />
-              </div>
-              <div>
-                <h2 className="text-foreground text-lg font-semibold leading-6">Contact Us</h2>
-                <p className="text-muted mt-1.5 text-sm leading-5">
-                  Fill out the form below and we'll get back to you. The modal adapts automatically
-                  when the keyboard appears on mobile.
-                </p>
-              </div>
+              </Modal.Icon>
+              <Modal.Heading>Contact Us</Modal.Heading>
+              <p className="text-muted mt-1.5 text-sm leading-5">
+                Fill out the form below and we'll get back to you. The modal adapts automatically
+                when the keyboard appears on mobile.
+              </p>
             </Modal.Header>
             <Modal.Body className="p-6">
               <Surface variant="default">
@@ -364,61 +354,124 @@ export const WithForm = () => (
   </Modal>
 );
 
-export const WithUseModalState = () => {
-  const modalState = useModalState();
+export const Controlled = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const state = useOverlayState();
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="border-border bg-default rounded-lg border p-4">
-        <p className="mb-2 text-sm font-medium">Modal State</p>
-        <p className="text-muted text-sm">
-          Status: <span className="font-mono">{modalState.isOpen ? "open" : "closed"}</span>
+    <div className="flex max-w-md flex-col gap-8">
+      <div className="flex flex-col gap-3">
+        <h3 className="text-foreground text-lg font-semibold">With React.useState()</h3>
+        <p className="text-muted text-pretty text-sm leading-relaxed">
+          Control the modal using React's <code className="text-foreground">useState</code> hook for
+          simple state management. Perfect for basic use cases.
         </p>
-      </div>
+        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+          <div className="flex w-full items-center justify-between">
+            <p className="text-muted text-xs">
+              Status:{" "}
+              <span className="text-foreground font-mono font-medium">
+                {isOpen ? "open" : "closed"}
+              </span>
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button size="sm" variant="secondary" onPress={() => setIsOpen(true)}>
+              Open Modal
+            </Button>
+            <Button size="sm" variant="tertiary" onPress={() => setIsOpen(!isOpen)}>
+              Toggle
+            </Button>
+          </div>
+        </div>
 
-      <div className="flex flex-wrap gap-3">
-        <Button variant="secondary" onPress={modalState.open}>
-          Open Modal
-        </Button>
-        <Button variant="secondary" onPress={modalState.toggle}>
-          Toggle Modal
-        </Button>
-      </div>
-
-      <Modal state={modalState}>
-        <Modal.Container>
+        <Modal.Container isOpen={isOpen} onOpenChange={setIsOpen}>
           <Modal.Dialog className="sm:max-w-[360px]">
-            <Modal.Header>
-              <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
-                <Icon className="size-5" icon="gravity-ui:circle-check" />
-              </div>
-              <h2 className="text-foreground text-lg font-semibold leading-6">
-                Controlled with useModalState()
-              </h2>
-              <p className="text-muted text-sm leading-5">
-                This modal is controlled programmatically using the useModalState() hook
-              </p>
-            </Modal.Header>
-            <Modal.Body>
-              <p>
-                The hook provides methods like <code>open()</code>, <code>close()</code>, and{" "}
-                <code>toggle()</code>, along with access to the <code>isOpen</code> state.
-              </p>
-              <p className="mt-3">
-                This enables powerful patterns like opening modals from anywhere in your component
-                tree, handling multiple triggers, and integrating with external state management.
-              </p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onPress={modalState.close}>
-                Close
-              </Button>
-              <Button onPress={modalState.close}>Confirm</Button>
-            </Modal.Footer>
-            <Modal.CloseTrigger />
+            {({close}) => (
+              <>
+                <Modal.CloseTrigger />
+                <Modal.Header>
+                  <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+                    <Icon className="size-5" icon="gravity-ui:circle-check" />
+                  </Modal.Icon>
+                  <Modal.Heading>Controlled with useState()</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>
+                  <p>
+                    This modal is controlled by React's <code>useState</code> hook. Pass{" "}
+                    <code>isOpen</code> and <code>onOpenChange</code> props to manage the modal
+                    state externally.
+                  </p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onPress={close}>
+                    Cancel
+                  </Button>
+                  <Button onPress={close}>Confirm</Button>
+                </Modal.Footer>
+              </>
+            )}
           </Modal.Dialog>
         </Modal.Container>
-      </Modal>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <h3 className="text-foreground text-lg font-semibold">With useOverlayState()</h3>
+        <p className="text-muted text-pretty text-sm leading-relaxed">
+          Use the <code className="text-foreground">useOverlayState</code> hook for a cleaner API
+          with convenient methods like <code>open()</code>, <code>close()</code>, and{" "}
+          <code>toggle()</code>.
+        </p>
+        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+          <div className="flex w-full items-center justify-between">
+            <p className="text-muted text-xs">
+              Status:{" "}
+              <span className="text-foreground font-mono font-medium">
+                {state.isOpen ? "open" : "closed"}
+              </span>
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button size="sm" variant="secondary" onPress={state.open}>
+              Open Modal
+            </Button>
+            <Button size="sm" variant="tertiary" onPress={state.toggle}>
+              Toggle
+            </Button>
+          </div>
+        </div>
+
+        <Modal.Container isOpen={state.isOpen} onOpenChange={state.setOpen}>
+          <Modal.Dialog className="sm:max-w-[360px]">
+            {({close}) => (
+              <>
+                <Modal.CloseTrigger />
+                <Modal.Header>
+                  <Modal.Icon className="bg-success-soft text-success-soft-foreground">
+                    <Icon className="size-5" icon="gravity-ui:circle-check" />
+                  </Modal.Icon>
+                  <Modal.Heading>Controlled with useOverlayState()</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>
+                  <p>
+                    The <code>useOverlayState</code> hook provides dedicated methods for common
+                    operations. No need to manually create callbacks—just use{" "}
+                    <code>state.open()</code>, <code>state.close()</code>, or{" "}
+                    <code>state.toggle()</code>.
+                  </p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onPress={close}>
+                    Cancel
+                  </Button>
+                  <Button onPress={close}>Confirm</Button>
+                </Modal.Footer>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </div>
     </div>
   );
 };
@@ -426,13 +479,13 @@ export const WithUseModalState = () => {
 export const CustomTrigger = () => (
   <Modal>
     <Modal.Trigger>
-      <div className="border-border bg-default hover:bg-default-hover flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors">
-        <div className="flex size-10 items-center justify-center">
-          <Icon className="text-primary size-6" icon="gravity-ui:gear" />
+      <div className="border-border bg-surface hover:bg-surface-secondary group flex cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-sm transition-all hover:shadow">
+        <div className="bg-accent-soft text-accent-soft-foreground flex size-12 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105">
+          <Icon className="size-6" icon="gravity-ui:gear" />
         </div>
-        <div>
-          <p className="font-medium">Settings</p>
-          <p className="text-muted text-sm">Click to open settings</p>
+        <div className="flex flex-1 flex-col gap-0.5">
+          <p className="text-foreground text-sm font-semibold leading-5">Settings</p>
+          <p className="text-muted text-xs leading-relaxed">Manage your preferences</p>
         </div>
       </div>
     </Modal.Trigger>
@@ -440,11 +493,12 @@ export const CustomTrigger = () => (
       <Modal.Dialog className="sm:max-w-[360px]">
         {({close}) => (
           <>
+            <Modal.CloseTrigger />
             <Modal.Header>
-              <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+              <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                 <Icon className="size-5" icon="gravity-ui:gear" />
-              </div>
-              <h2 className="text-foreground text-lg font-semibold leading-6">Settings</h2>
+              </Modal.Icon>
+              <Modal.Heading>Settings</Modal.Heading>
             </Modal.Header>
             <Modal.Body>
               <p>
@@ -458,7 +512,6 @@ export const CustomTrigger = () => (
               </Button>
               <Button onPress={close}>Save</Button>
             </Modal.Footer>
-            <Modal.CloseTrigger />
           </>
         )}
       </Modal.Dialog>
@@ -469,7 +522,6 @@ export const CustomTrigger = () => (
 export const CustomBackdrop = () => (
   <Modal>
     <Button variant="secondary">Custom Backdrop</Button>
-
     <Modal.Container
       backdropClassName="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
       variant="blur"
@@ -478,13 +530,10 @@ export const CustomBackdrop = () => (
         {({close}) => (
           <>
             <Modal.Header className="items-center text-center">
-              <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+              <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                 <Icon className="size-5" icon="gravity-ui:sparkles" />
-              </div>
-              <h2 className="text-foreground text-lg font-semibold leading-6">Premium Backdrop</h2>
-              <p className="text-muted text-sm leading-5">
-                Elegant gradient that adapts to light and dark modes
-              </p>
+              </Modal.Icon>
+              <Modal.Heading>Premium Backdrop</Modal.Heading>
             </Modal.Header>
             <Modal.Body>
               <p>
@@ -511,75 +560,70 @@ export const CustomBackdrop = () => (
 );
 
 export const CustomAnimations = () => {
-  const animations = {
-    Spring: [
-      "data-[entering]:zoom-in-90",
-      "data-[entering]:ease-spring",
-      "data-[exiting]:zoom-out-95",
-      "data-[exiting]:ease-out-quart",
-    ].join(" "),
-    Blur_Slide: [
-      "data-[entering]:blur-in-8",
-      "data-[entering]:slide-in-from-bottom-8",
-      "data-[entering]:fade-in-0",
-      "data-[exiting]:blur-out-8",
-      "data-[exiting]:slide-out-to-bottom-8",
-      "data-[exiting]:fade-out-0",
-      "",
-    ].join(" "),
-    Bounce: [
-      "data-[entering]:zoom-in-50",
-      "data-[entering]:fade-in-0",
-      "data-[entering]:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]",
-      "data-[exiting]:zoom-out-95",
-      "data-[exiting]:fade-out-0",
-    ].join(" "),
-    RotateZoom: [
-      "data-[entering]:zoom-in-75",
-      "data-[entering]:spin-in-45",
-      "data-[entering]:fade-in-0",
-      "data-[exiting]:zoom-out-95",
-      "data-[exiting]:spin-out-12",
-      "data-[exiting]:fade-out-0",
-    ].join(" "),
-  };
+  const animations = [
+    {
+      classNames: [
+        "data-[entering]:animate-in",
+        "data-[entering]:zoom-in-95",
+        "data-[entering]:fade-in-0",
+        "data-[entering]:ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "data-[exiting]:animate-out",
+        "data-[exiting]:zoom-out-95",
+        "data-[exiting]:fade-out-0",
+        "data-[exiting]:ease-out-quart",
+      ].join(" "),
+      description: "Smooth scale animation with elastic spring-like easing",
+      icon: "gravity-ui:sparkles",
+      name: "Smooth Scale",
+    },
+    {
+      classNames: [
+        "data-[entering]:animate-in",
+        "data-[entering]:slide-in-from-bottom-4",
+        "data-[entering]:fade-in-0",
+        "data-[entering]:ease-fluid-out",
+        "data-[exiting]:animate-out",
+        "data-[exiting]:slide-out-to-bottom-2",
+        "data-[exiting]:fade-out-0",
+        "data-[exiting]:ease-in-quad",
+      ].join(" "),
+      description: "Gentle upward slide with seamless fade transition",
+      icon: "gravity-ui:arrow-up-from-line",
+      name: "Slide Up",
+    },
+  ];
 
   return (
     <div className="flex flex-wrap gap-4">
-      {Object.entries(animations).map(([name, classNames]) => (
+      {animations.map(({classNames, description, icon, name}) => (
         <Modal key={name}>
-          <Button variant="secondary">{name.replace("_", " ")}</Button>
+          <Button variant="secondary">{name}</Button>
           <Modal.Container
             backdropClassName="data-[exiting]:duration-250"
-            className={clsx(
-              "data-[entering]:duration-300",
-              "data-[exiting]:duration-200",
-              classNames,
-            )}
+            className={`data-[entering]:duration-300 data-[exiting]:duration-200 ${classNames}`}
           >
             <Modal.Dialog className="sm:max-w-[360px]">
               {({close}) => (
                 <>
-                  <Modal.CloseTrigger />
                   <Modal.Header>
-                    <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
-                      <Icon className="size-5" icon="gravity-ui:rocket" />
-                    </div>
-                    <h2 className="text-foreground text-lg font-semibold leading-6">
-                      {name.replace("_", " ")} Animation
-                    </h2>
+                    <Modal.Icon className="bg-default text-foreground">
+                      <Icon className="size-5" icon={icon} />
+                    </Modal.Icon>
+                    <Modal.Heading>{name} Animation</Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
-                    <p>
-                      Customize your modal's entrance and exit animations using Tailwind's animation
-                      utilities. This example demonstrates the{" "}
-                      {name.replace("_", " ").toLowerCase()} animation style.
+                    <p className="mt-1">
+                      {description}. Customize entrance and exit animations using Tailwind's
+                      animation utilities. Combine <code>data-[entering]</code> and{" "}
+                      <code>data-[exiting]</code> states with custom timings and easing functions
+                      for polished transitions.
                     </p>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button className="w-full" onPress={close}>
-                      Continue
+                    <Button variant="tertiary" onPress={close}>
+                      Close
                     </Button>
+                    <Button onPress={close}>Try Again</Button>
                   </Modal.Footer>
                 </>
               )}

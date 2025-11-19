@@ -21,6 +21,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "alert",
     title: "Alert",
   },
+  alertdialog: {
+    category: "layout",
+    description: "Critical confirmations requiring user attention",
+    href: "/docs/components/alert-dialog",
+    name: "alertdialog",
+    title: "AlertDialog",
+  },
   avatar: {
     category: "display",
     description: "Display user profile images",
@@ -279,8 +286,9 @@ const componentsMap: Record<string, ComponentInfo> = {
 const componentRelationships: Record<string, string[]> = {
   accordion: ["disclosuregroup", "disclosure"],
   alert: ["closebutton", "button", "spinner"],
+  alertdialog: ["button", "closebutton"],
   avatar: ["separator"],
-  button: ["popover", "tooltip", "form", "alert", "closebutton", "dropdown"],
+  button: ["popover", "tooltip", "form", "alert", "alertdialog", "closebutton", "dropdown"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [
@@ -294,7 +302,7 @@ const componentRelationships: Record<string, string[]> = {
     "fielderror",
   ],
   chip: ["avatar", "closebutton", "separator"],
-  closebutton: ["alert", "chip"],
+  closebutton: ["alert", "alertdialog", "chip", "modal"],
   combobox: [
     "listbox",
     "popover",

@@ -20,12 +20,10 @@ export function DismissBehavior() {
                 <>
                   <Modal.CloseTrigger />
                   <Modal.Header>
-                    <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                    <Modal.Icon className="bg-default text-foreground">
                       <Icon className="size-5" icon="gravity-ui:circle-info" />
-                    </div>
-                    <h2 className="text-foreground text-lg font-semibold leading-6">
-                      isDismissable = false
-                    </h2>
+                    </Modal.Icon>
+                    <Modal.Heading>isDismissable = false</Modal.Heading>
                     <p className="text-muted text-sm leading-5">
                       Clicking the backdrop won't close this modal
                     </p>
@@ -62,12 +60,10 @@ export function DismissBehavior() {
                 <>
                   <Modal.CloseTrigger />
                   <Modal.Header>
-                    <div className="bg-default ring-muted/25 flex size-10 items-center justify-center rounded-full ring-1">
+                    <Modal.Icon className="bg-default text-foreground">
                       <Icon className="size-5" icon="gravity-ui:circle-info" />
-                    </div>
-                    <h2 className="text-foreground text-lg font-semibold leading-6">
-                      isKeyboardDismissDisabled = true
-                    </h2>
+                    </Modal.Icon>
+                    <Modal.Heading>isKeyboardDismissDisabled = true</Modal.Heading>
                     <p className="text-muted text-sm leading-5">ESC key is disabled</p>
                   </Modal.Header>
                   <Modal.Body>

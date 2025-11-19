@@ -2,50 +2,60 @@
 
 import {useCallback, useRef, useState} from "react";
 
-export interface UseModalStateProps {
+export interface UseOverlayStateProps {
   /**
-   * Whether the modal is currently open (controlled)
+   * Whether the overlay is currently open (controlled)
    */
   isOpen?: boolean;
   /**
-   * Whether the modal is open by default (uncontrolled)
+   * Whether the overlay is open by default (uncontrolled)
    * @default false
    */
   defaultOpen?: boolean;
   /**
-   * Handler that is called when the modal's open state changes
+   * Handler that is called when the overlay's open state changes
    */
   onOpenChange?: (isOpen: boolean) => void;
 }
 
-export interface UseModalStateReturn {
+export interface UseOverlayStateReturn {
   /**
-   * Whether the modal is currently open
+   * Whether the overlay is currently open
    */
   readonly isOpen: boolean;
   /**
-   * Sets the modal's open state
+   * Sets the overlay's open state
    */
   setOpen(isOpen: boolean): void;
   /**
-   * Opens the modal
+   * Opens the overlay
    */
   open(): void;
   /**
-   * Closes the modal
+   * Closes the overlay
    */
   close(): void;
   /**
-   * Toggles the modal's open state
+   * Toggles the overlay's open state
    */
   toggle(): void;
 }
 
 /**
- * Hook to manage modal overlay trigger state
- * Provides methods to open, close, and toggle the modal
+ * Hook to manage overlay trigger state (Modal, AlertDialog, Popover, etc.)
+ * Provides methods to open, close, and toggle the overlay
+ *
+ * @example
+ * ```tsx
+ * const state = useOverlayState();
+ *
+ * <Button onPress={state.open}>Open Dialog</Button>
+ * <Modal isOpen={state.isOpen} onOpenChange={state.setOpen}>
+ *   <Button onPress={state.close}>Close</Button>
+ * </Modal>
+ * ```
  */
-export const useModalState = (props: UseModalStateProps = {}): UseModalStateReturn => {
+export const useOverlayState = (props: UseOverlayStateProps = {}): UseOverlayStateReturn => {
   const {defaultOpen = false, isOpen: controlledIsOpen, onOpenChange} = props;
 
   // Internal state for uncontrolled mode
@@ -74,7 +84,7 @@ export const useModalState = (props: UseModalStateProps = {}): UseModalStateRetu
     [isControlled],
   );
 
-  // Memoized convenience methods, these are stable unless setOpen changes (which only happens if isControlled changes)
+  // Memoized convenience methods
   const open = useCallback(() => {
     setOpen(true);
   }, [setOpen]);
@@ -88,10 +98,10 @@ export const useModalState = (props: UseModalStateProps = {}): UseModalStateRetu
   }, [setOpen, isOpen]);
 
   return {
-    isOpen,
-    setOpen,
-    open,
     close,
+    isOpen,
+    open,
+    setOpen,
     toggle,
   };
 };

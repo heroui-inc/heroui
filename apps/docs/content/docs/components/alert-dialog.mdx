@@ -1,0 +1,331 @@
+---
+title: Alert Dialog
+description: Modal dialog for critical confirmations requiring user attention and explicit action
+icon: new
+links:
+  rac: AlertDialog
+  source: alert-dialog/alert-dialog.tsx
+  styles: alert-dialog.css
+  storybook: Components/Overlays/AlertDialog
+---
+
+## Import
+
+```tsx
+import { AlertDialog } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="alert-dialog-default"
+/>
+
+### Anatomy
+
+Import the AlertDialog component and access all parts using dot notation.
+
+```tsx
+import { AlertDialog, Button } from '@heroui/react';
+
+export default () => (
+  <AlertDialog>
+    <Button>Open Alert Dialog</Button>
+    <AlertDialog.Container>
+      <AlertDialog.Dialog>
+        <AlertDialog.CloseTrigger />  {/* Optional: Close button */}
+        <AlertDialog.Header>
+          <AlertDialog.Icon />  {/* Optional: Status icon */}
+          <AlertDialog.Heading />
+        </AlertDialog.Header>
+        <AlertDialog.Body />
+        <AlertDialog.Footer />
+      </AlertDialog.Dialog>
+    </AlertDialog.Container>
+  </AlertDialog>
+)
+```
+
+### Statuses
+
+<ComponentPreview
+  name="alert-dialog-statuses"
+/>
+
+### Placements
+
+<ComponentPreview
+  name="alert-dialog-placements"
+/>
+
+### Backdrop Variants
+
+<ComponentPreview
+  name="alert-dialog-backdrop-variants"
+/>
+
+### Controlled State
+
+<ComponentPreview
+  name="alert-dialog-controlled"
+/>
+
+### Dismiss Behavior
+
+<ComponentPreview
+  name="alert-dialog-dismiss-behavior"
+/>
+
+### Custom Icon
+
+<ComponentPreview
+  name="alert-dialog-custom-icon"
+/>
+
+### Custom Backdrop
+
+<ComponentPreview
+  name="alert-dialog-custom-backdrop"
+/>
+
+### Custom Trigger
+
+<ComponentPreview
+  name="alert-dialog-custom-trigger"
+/>
+
+### With Close Button
+
+<ComponentPreview
+  name="alert-dialog-with-close-button"
+/>
+
+### Custom Animations
+
+<ComponentPreview
+  name="alert-dialog-custom-animations"
+/>
+
+<RelatedComponents component="alert-dialog" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { AlertDialog, Button } from '@heroui/react';
+
+function CustomAlertDialog() {
+  return (
+    <AlertDialog>
+      <Button variant="danger">Delete</Button>
+      <AlertDialog.Container
+        backdropClassName="bg-red-950/90"
+        className="items-start pt-20"
+      >
+        <AlertDialog.Dialog className="border-red-500 border-2 sm:max-w-[400px]">
+          {({close}) => (
+            <>
+              <AlertDialog.Header>
+                <AlertDialog.Icon status="danger" />
+                <AlertDialog.Heading>Custom Styled Alert</AlertDialog.Heading>
+              </AlertDialog.Header>
+              <AlertDialog.Body>
+                <p>This alert dialog has custom styling applied via Tailwind classes</p>
+              </AlertDialog.Body>
+              <AlertDialog.Footer>
+                <Button variant="tertiary" onPress={close}>
+                  Cancel
+                </Button>
+                <Button variant="danger" onPress={close}>
+                  Delete
+                </Button>
+              </AlertDialog.Footer>
+            </>
+          )}
+        </AlertDialog.Dialog>
+      </AlertDialog.Container>
+    </AlertDialog>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the AlertDialog component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .alert-dialog__backdrop {
+    @apply bg-gradient-to-br from-black/60 to-black/80;
+  }
+
+  .alert-dialog__dialog {
+    @apply rounded-2xl border border-red-500/20 shadow-2xl;
+  }
+
+  .alert-dialog__header {
+    @apply gap-4;
+  }
+
+  .alert-dialog__icon {
+    @apply size-16;
+  }
+
+  .alert-dialog__close-trigger {
+    @apply rounded-full bg-white/10 hover:bg-white/20;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The AlertDialog component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/alert-dialog.css)):
+
+#### Base Classes
+- `.alert-dialog__trigger` - Trigger element that opens the alert dialog
+- `.alert-dialog__backdrop` - Overlay backdrop behind the dialog
+- `.alert-dialog__container` - Positioning wrapper with placement support
+- `.alert-dialog__dialog` - Dialog content container
+- `.alert-dialog__header` - Header section for icon and title
+- `.alert-dialog__heading` - Heading text styles
+- `.alert-dialog__body` - Main content area
+- `.alert-dialog__footer` - Footer section for actions
+- `.alert-dialog__icon` - Icon container with status colors
+- `.alert-dialog__close-trigger` - Close button element
+
+#### Backdrop Variants
+- `.alert-dialog__backdrop--solid` - Solid colored backdrop (default)
+- `.alert-dialog__backdrop--blur` - Blurred backdrop with glass effect
+- `.alert-dialog__backdrop--transparent` - Transparent backdrop (no overlay)
+
+#### Status Variants (Icon)
+- `.alert-dialog__icon--default` - Default gray status
+- `.alert-dialog__icon--accent` - Accent blue status
+- `.alert-dialog__icon--success` - Success green status
+- `.alert-dialog__icon--warning` - Warning orange status
+- `.alert-dialog__icon--danger` - Danger red status
+
+### Interactive States
+
+The component supports these interactive states:
+
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` - Applied to trigger, dialog, and close button
+- **Hover**: `:hover` or `[data-hovered="true"]` - Applied to close button on hover
+- **Active**: `:active` or `[data-pressed="true"]` - Applied to close button when pressed
+- **Entering**: `[data-entering]` - Applied during dialog opening animation
+- **Exiting**: `[data-exiting]` - Applied during dialog closing animation
+- **Placement**: `[data-placement="*"]` - Applied based on dialog position (auto, top, center, bottom)
+
+## API Reference
+
+### AlertDialog
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Trigger and container elements |
+
+### AlertDialog.Trigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Custom trigger content |
+| `className` | `string` | - | CSS classes |
+
+### AlertDialog.Container
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | Dialog position on screen |
+| `backdropVariant` | `"solid" \| "blur" \| "transparent"` | `"solid"` | Backdrop overlay style |
+| `isDismissable` | `boolean` | `false` | Close on backdrop click |
+| `isKeyboardDismissDisabled` | `boolean` | `true` | Disable ESC key to close |
+| `isOpen` | `boolean` | - | Controlled open state |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
+| `backdropClassName` | `string \| (values) => string` | - | Backdrop CSS classes |
+| `className` | `string \| (values) => string` | - | Container CSS classes |
+
+### AlertDialog.Dialog
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode \| ({close}) => ReactNode` | - | Content or render function |
+| `className` | `string` | - | CSS classes |
+| `role` | `string` | `"alertdialog"` | ARIA role |
+| `aria-label` | `string` | - | Accessibility label |
+| `aria-labelledby` | `string` | - | ID of label element |
+| `aria-describedby` | `string` | - | ID of description element |
+
+### AlertDialog.Header
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Header content (typically Icon and Heading) |
+| `className` | `string` | - | CSS classes |
+
+### AlertDialog.Heading
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Heading text |
+| `className` | `string` | - | CSS classes |
+
+### AlertDialog.Body
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Body content |
+| `className` | `string` | - | CSS classes |
+
+### AlertDialog.Footer
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Footer content (typically action buttons) |
+| `className` | `string` | - | CSS classes |
+
+### AlertDialog.Icon
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Custom icon element |
+| `status` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"danger"` | Status color variant |
+| `className` | `string` | - | CSS classes |
+
+### AlertDialog.CloseTrigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Render as child |
+| `children` | `ReactNode` | - | Custom close button |
+| `className` | `string \| (values) => string` | - | CSS classes |
+
+### useOverlayState Hook
+
+```tsx
+import { useOverlayState } from '@heroui/react';
+
+const state = useOverlayState({
+  defaultOpen: false,
+  onOpenChange: (isOpen) => console.log(isOpen)
+});
+
+state.isOpen      // Current state
+state.open()      // Open dialog
+state.close()     // Close dialog
+state.toggle()    // Toggle state
+state.setOpen()   // Set state directly
+```
+
+## Accessibility
+
+Implements [WAI-ARIA AlertDialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/):
+
+- **Focus trap**: Focus locked within alert dialog
+- **Keyboard**: `ESC` closes (when enabled), `Tab` cycles elements
+- **Screen readers**: Proper ARIA attributes with `role="alertdialog"`
+- **Scroll lock**: Body scroll disabled when open
+- **Required action**: Defaults to requiring explicit user action (no backdrop/ESC dismiss)

@@ -7,7 +7,6 @@ export function CustomBackdrop() {
   return (
     <Modal>
       <Button variant="secondary">Custom Backdrop</Button>
-
       <Modal.Container
         backdropClassName="bg-gradient-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
         variant="blur"
@@ -16,15 +15,10 @@ export function CustomBackdrop() {
           {({close}) => (
             <>
               <Modal.Header className="items-center text-center">
-                <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+                <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                   <Icon className="size-5" icon="gravity-ui:sparkles" />
-                </div>
-                <h2 className="text-foreground text-lg font-semibold leading-6">
-                  Premium Backdrop
-                </h2>
-                <p className="text-muted text-sm leading-5">
-                  Elegant gradient that adapts to light and dark modes
-                </p>
+                </Modal.Icon>
+                <Modal.Heading>Premium Backdrop</Modal.Heading>
               </Modal.Header>
               <Modal.Body>
                 <p>

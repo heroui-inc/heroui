@@ -7,13 +7,13 @@ export function CustomTrigger() {
   return (
     <Modal>
       <Modal.Trigger>
-        <div className="border-border bg-default hover:bg-default-hover flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors">
-          <div className="flex size-10 items-center justify-center">
-            <Icon className="text-primary size-6" icon="gravity-ui:gear" />
+        <div className="border-border bg-surface hover:bg-surface-secondary group flex cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-sm transition-all hover:shadow">
+          <div className="bg-accent-soft text-accent-soft-foreground flex size-12 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105">
+            <Icon className="size-6" icon="gravity-ui:gear" />
           </div>
-          <div>
-            <p className="font-medium">Settings</p>
-            <p className="text-muted text-sm">Click to open settings</p>
+          <div className="flex flex-1 flex-col gap-0.5">
+            <p className="text-foreground text-sm font-semibold leading-5">Settings</p>
+            <p className="text-muted text-xs leading-relaxed">Manage your preferences</p>
           </div>
         </div>
       </Modal.Trigger>
@@ -21,11 +21,12 @@ export function CustomTrigger() {
         <Modal.Dialog className="sm:max-w-[360px]">
           {({close}) => (
             <>
+              <Modal.CloseTrigger />
               <Modal.Header>
-                <div className="bg-accent-soft text-accent-soft-foreground flex size-10 items-center justify-center rounded-full">
+                <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                   <Icon className="size-5" icon="gravity-ui:gear" />
-                </div>
-                <h2 className="text-foreground text-lg font-semibold leading-6">Settings</h2>
+                </Modal.Icon>
+                <Modal.Heading>Settings</Modal.Heading>
               </Modal.Header>
               <Modal.Body>
                 <p>
@@ -39,7 +40,6 @@ export function CustomTrigger() {
                 </Button>
                 <Button onPress={close}>Save</Button>
               </Modal.Footer>
-              <Modal.CloseTrigger />
             </>
           )}
         </Modal.Dialog>

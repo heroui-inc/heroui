@@ -17,12 +17,12 @@ export function BackdropVariants() {
                 <>
                   <Modal.CloseTrigger />
                   <Modal.Header>
-                    <div className="bg-default flex size-10 items-center justify-center rounded-full">
-                      <Icon icon="gravity-ui:rocket" />
-                    </div>
-                    <h2 className="text-foreground text-lg font-semibold leading-6">
+                    <Modal.Icon className="bg-default text-foreground">
+                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                    </Modal.Icon>
+                    <Modal.Heading>
                       Backdrop: {variant.charAt(0).toUpperCase() + variant.slice(1)}
-                    </h2>
+                    </Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
                     <p>

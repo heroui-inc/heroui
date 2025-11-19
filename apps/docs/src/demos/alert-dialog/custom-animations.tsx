@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Modal} from "@heroui/react";
+import {AlertDialog, Button} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function CustomAnimations() {
@@ -40,40 +40,40 @@ export function CustomAnimations() {
   return (
     <div className="flex flex-wrap gap-4">
       {animations.map(({classNames, description, icon, name}) => (
-        <Modal key={name}>
+        <AlertDialog key={name}>
           <Button variant="secondary">{name}</Button>
-          <Modal.Container
+          <AlertDialog.Container
             backdropClassName="data-[exiting]:duration-250"
             className={`data-[entering]:duration-300 data-[exiting]:duration-200 ${classNames}`}
           >
-            <Modal.Dialog className="sm:max-w-[360px]">
+            <AlertDialog.Dialog className="sm:max-w-[400px]">
               {({close}) => (
                 <>
-                  <Modal.Header>
-                    <Modal.Icon className="bg-default text-foreground">
+                  <AlertDialog.Header>
+                    <AlertDialog.Icon status="accent">
                       <Icon className="size-5" icon={icon} />
-                    </Modal.Icon>
-                    <Modal.Heading>{name} Animation</Modal.Heading>
-                  </Modal.Header>
-                  <Modal.Body>
+                    </AlertDialog.Icon>
+                    <AlertDialog.Heading>{name} Animation</AlertDialog.Heading>
+                  </AlertDialog.Header>
+                  <AlertDialog.Body>
                     <p className="mt-1">
                       {description}. Customize entrance and exit animations using Tailwind's
                       animation utilities. Combine <code>data-[entering]</code> and{" "}
                       <code>data-[exiting]</code> states with custom timings and easing functions
                       for polished transitions.
                     </p>
-                  </Modal.Body>
-                  <Modal.Footer>
+                  </AlertDialog.Body>
+                  <AlertDialog.Footer>
                     <Button variant="tertiary" onPress={close}>
                       Close
                     </Button>
                     <Button onPress={close}>Try Again</Button>
-                  </Modal.Footer>
+                  </AlertDialog.Footer>
                 </>
               )}
-            </Modal.Dialog>
-          </Modal.Container>
-        </Modal>
+            </AlertDialog.Dialog>
+          </AlertDialog.Container>
+        </AlertDialog>
       ))}
     </div>
   );

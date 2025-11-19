@@ -11,6 +11,7 @@ import {ComponentItem} from "./component-item";
 const COMPONENT_NAMES = [
   "accordion",
   "alert",
+  "alert-dialog",
   "avatar",
   "button",
   "card",

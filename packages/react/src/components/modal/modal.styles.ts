@@ -14,8 +14,10 @@ export const modalVariants = tv({
     dialog: "modal__dialog",
     footer: "modal__footer",
     header: "modal__header",
+    heading: "modal__heading",
     backdrop: "modal__backdrop",
     trigger: "modal__trigger",
+    icon: "modal__icon",
   },
   variants: {
     variant: {
