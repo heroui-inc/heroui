@@ -25,6 +25,7 @@ import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
 import * as ListBoxDemos from "./listbox";
 import * as ModalDemos from "./modal";
+import * as NumberFieldDemos from "./number-field";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
 import * as SelectDemos from "./select";
@@ -878,6 +879,59 @@ export const demos: Record<string, DemoItem> = {
   "modal-custom-animations": {
     component: ModalDemos.CustomAnimations,
     file: "modal/custom-animations.tsx",
+  },
+  // NumberField demos
+  "number-field-basic": {
+    component: NumberFieldDemos.Basic,
+    file: "number-field/basic.tsx",
+  },
+  "number-field-with-description": {
+    component: NumberFieldDemos.WithDescription,
+    file: "number-field/with-description.tsx",
+  },
+  "number-field-required": {
+    component: NumberFieldDemos.Required,
+    file: "number-field/required.tsx",
+  },
+  "number-field-validation": {
+    component: NumberFieldDemos.Validation,
+    file: "number-field/validation.tsx",
+  },
+  "number-field-disabled": {
+    component: NumberFieldDemos.Disabled,
+    file: "number-field/disabled.tsx",
+  },
+  "number-field-controlled": {
+    component: NumberFieldDemos.Controlled,
+    file: "number-field/controlled.tsx",
+  },
+  "number-field-with-validation": {
+    component: NumberFieldDemos.WithValidation,
+    file: "number-field/with-validation.tsx",
+  },
+  "number-field-with-step": {
+    component: NumberFieldDemos.WithStep,
+    file: "number-field/with-step.tsx",
+  },
+  "number-field-with-format-options": {
+    component: NumberFieldDemos.WithFormatOptions,
+    file: "number-field/with-format-options.tsx",
+  },
+  "number-field-custom-icons": {
+    component: NumberFieldDemos.CustomIcons,
+    file: "number-field/custom-icons.tsx",
+  },
+  "number-field-on-surface": {
+    component: NumberFieldDemos.OnSurface,
+    file: "number-field/on-surface.tsx",
+  },
+  "number-field-with-chevrons": {
+    component: NumberFieldDemos.WithChevrons,
+    file: "number-field/with-chevrons.tsx",
+  },
+  "number-field-form-example": {
+    component: NumberFieldDemos.FormExample,
+    file: "number-field/form-example.tsx",
   },
   // Select demos
   "select-default": {
