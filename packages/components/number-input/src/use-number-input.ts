@@ -76,7 +76,6 @@ export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputV
   hideStepper?: boolean;
   /**
    * Callback fired when the value is cleared.
-   * if you pass this prop, the clear button will be shown.
    */
   onClear?: () => void;
   /**
@@ -208,7 +207,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     typeof props.errorMessage === "function"
       ? props.errorMessage({isInvalid, validationErrors, validationDetails})
       : props.errorMessage || validationErrors?.join(" ");
-  const isClearable = !!onClear || originalProps.isClearable;
+  const isClearable = originalProps.isClearable ?? false;
   const hasElements = !!label || !!description || !!errorMessage;
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
@@ -291,12 +290,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
           inputElement.setSelectionRange(pos, pos);
         }, 0);
-      } else if (
-        e.key === "Escape" &&
-        inputValue &&
-        (isClearable || onClear) &&
-        !originalProps.isReadOnly
-      ) {
+      } else if (e.key === "Escape" && inputValue && isClearable && !originalProps.isReadOnly) {
         state.setInputValue("");
         onClear?.();
       }

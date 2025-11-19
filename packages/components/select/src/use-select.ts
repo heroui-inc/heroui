@@ -127,7 +127,6 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"select">, keyof SelectVariantPr
   onSelectionChange?: (keys: SharedSelection) => void;
   /**
    * Callback fired when the value is cleared.
-   * if you pass this prop, the clear button will be shown.
    */
   onClear?: () => void;
   /**
