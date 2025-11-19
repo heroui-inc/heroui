@@ -13,7 +13,7 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="text-muted chip bg-surface-secondary rounded-full text-xs"
-      href="/docs/changelog/v3-0-0-beta-1"
+      href="/docs/changelog/v3-0-0-beta-2"
     >
       <Iconify icon="gravity-ui:sparkles" />
       <span>v{currentVersion}: New components</span>

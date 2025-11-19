@@ -28,6 +28,7 @@ const COMPONENT_NAMES = [
   "fieldset",
   "form",
   "input",
+  "input-group",
   "input-otp",
   "kbd",
   "label",

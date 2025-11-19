@@ -1,0 +1,125 @@
+/* Input group styles */
+.input-group {
+  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
+  }
+
+  /* Focus within state */
+  &[data-focus-within],
+  &:focus-within {
+    @apply status-focused-field;
+  }
+
+  /* Invalid state */
+  &[data-invalid] {
+    @apply status-invalid-field;
+    background-color: var(--color-field-focus);
+    border-color: var(--color-field-border-invalid);
+  }
+
+  /* Disabled state */
+  &[data-disabled],
+  &[aria-disabled] {
+    @apply status-disabled pointer-events-none;
+  }
+}
+
+.input-group__input {
+  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+
+  /* Remove border radius on left side when prefix is present */
+  .input-group:has([data-slot="input-group-prefix"]) & {
+    @apply rounded-l-none pl-0;
+  }
+
+  /* Remove border radius on right side when suffix is present */
+  .input-group:has([data-slot="input-group-suffix"]) & {
+    @apply rounded-r-none pr-0;
+  }
+
+  /* Focus state - handled by group */
+  &:focus,
+  &:focus-visible {
+    @apply outline-none;
+  }
+}
+
+.input-group__prefix {
+  @apply text-field-placeholder rounded-l-field flex h-full items-center justify-center rounded-r-none bg-transparent px-3;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+  border-style: solid;
+  border-right-color: var(--color-field-border);
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+}
+
+.input-group__suffix {
+  @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+  border-style: solid;
+  border-left-color: var(--color-field-border);
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+}
+
+/* On Surface variant */
+.input-group--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-on-surface-hover;
+    }
+  }
+
+  &:focus-within,
+  &[data-focus-within] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  [data-slot="input-group-input"] {
+    @apply bg-transparent;
+  }
+}
