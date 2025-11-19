@@ -35,10 +35,31 @@ const TooltipRoot = ({
   ...props
 }: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  // Intercept clicks on any child element to close the tooltip
+  const handleClick = React.useCallback((e: React.MouseEvent) => {
+    // Close tooltip when any child is clicked
+    // This fixes the issue where tooltip stays open when clicking a button with popover
+    if (rootRef.current && rootRef.current.contains(e.target as Node)) {
+      // Dispatch a mouseLeave event to trigger React Aria's tooltip close logic
+      const mouseLeaveEvent = new MouseEvent('mouseleave', { bubbles: true, cancelable: true });
+      e.currentTarget.dispatchEvent(mouseLeaveEvent);
+    }
+  }, []);
+
+  const contextValue = React.useMemo(() => ({
+    slots,
+  }), [slots]);
 
   return (
-    <TooltipContext value={{slots}}>
-      <TooltipTriggerPrimitive data-slot="tooltip-root" {...props}>
+    <TooltipContext value={contextValue}>
+      <TooltipTriggerPrimitive
+        ref={rootRef}
+        data-slot="tooltip-root"
+        {...props}
+        onClick={handleClick}
+      >
         {children}
       </TooltipTriggerPrimitive>
     </TooltipContext>
