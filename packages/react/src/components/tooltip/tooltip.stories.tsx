@@ -4,6 +4,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
+import {Popover} from "../popover";
 
 import {Tooltip} from "./index";
 
@@ -86,4 +87,41 @@ export const Default = {
 export const WithTrigger = {
   args: defaultArgs,
   render: TemplateWithTrigger,
+};
+
+// Test for issue #5912: Tooltip should close when button with popover is clicked
+const TooltipWithPopoverTemplate = (props: Tooltip["ContentProps"]) => (
+  <div className="flex flex-col items-center gap-8 p-8">
+    <div className="text-sm text-gray-600">
+      <p><strong>Test for Issue #5912:</strong></p>
+      <p>1. Hover over the button below to show tooltip</p>
+      <p>2. Click the button to open popover</p>
+      <p>3. Tooltip should close immediately (not stay visible)</p>
+    </div>
+
+    <Tooltip delay={0}>
+      <Popover>
+        <Button variant="secondary">Hover & Click Me</Button>
+        <Popover.Content className="max-w-64" placement="bottom">
+          <Popover.Dialog>
+            <Popover.Arrow />
+            <Popover.Heading>Popover Content</Popover.Heading>
+            <p className="text-sm mt-2">
+              The tooltip should have closed when you clicked the button!
+              If you can still see the tooltip, the bug is NOT fixed.
+            </p>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover>
+      <Tooltip.Content {...props}>
+        <Tooltip.Arrow />
+        <p>This tooltip should close on click</p>
+      </Tooltip.Content>
+    </Tooltip>
+  </div>
+);
+
+export const WithPopover = {
+  args: defaultArgs,
+  render: TooltipWithPopoverTemplate,
 };
