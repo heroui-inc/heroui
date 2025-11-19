@@ -33,6 +33,7 @@ const COMPONENT_NAMES = [
   "link",
   "listbox",
   "modal",
+  "number-field",
   "popover",
   "radio-group",
   "separator",
@@ -70,7 +71,9 @@ export function ComponentsList() {
   }).filter((item): item is NonNullable<typeof item> => item !== null);
 
   return (
-    <div className={cn("not-prose grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3")}>
+    <div
+      className={cn("not-prose grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3")}
+    >
       {components.map(({component, status}) => (
         <ComponentItem
           key={component.name}
