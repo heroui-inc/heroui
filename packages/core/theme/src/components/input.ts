@@ -48,6 +48,8 @@ const input = tv({
       "data-[type=color]:rounded-none",
       "file:cursor-pointer file:bg-transparent file:border-0",
       "autofill:bg-transparent bg-clip-text",
+      // Safari autofill styling fix - ensures text color is visible in dark mode
+      "dark:autofill:[-webkit-text-fill-color:hsl(var(--heroui-foreground))]",
     ],
     clearButton: [
       "p-2",
