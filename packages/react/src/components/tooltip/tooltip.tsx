@@ -21,6 +21,7 @@ import {tooltipVariants} from "./tooltip.styles";
  * -----------------------------------------------------------------------------------------------*/
 type TooltipContext = {
   slots?: ReturnType<typeof tooltipVariants>;
+  forceHide?: boolean;
 };
 
 const TooltipContext = createContext<TooltipContext>({});
@@ -32,33 +33,71 @@ type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
 
 const TooltipRoot = ({
   children,
+  closeDelay = 0,
   ...props
 }: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
-  const rootRef = React.useRef<HTMLDivElement>(null);
+  const [forceHide, setForceHide] = React.useState(false);
+  const [internalIsOpen, setInternalIsOpen] = React.useState(false);
+  const clearTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  // Intercept clicks on any child element to close the tooltip
-  const handleClick = React.useCallback((e: React.MouseEvent) => {
-    // Close tooltip when any child is clicked
-    // This fixes the issue where tooltip stays open when clicking a button with popover
-    if (rootRef.current && rootRef.current.contains(e.target as Node)) {
-      // Dispatch a mouseLeave event to trigger React Aria's tooltip close logic
-      const mouseLeaveEvent = new MouseEvent('mouseleave', { bubbles: true, cancelable: true });
-      e.currentTarget.dispatchEvent(mouseLeaveEvent);
-    }
+  // Intercept onOpenChange to implement "close and stay closed" behavior
+  // This fixes issue #5912 where tooltips stay open when clicking buttons with popovers
+  const handleOpenChange = React.useCallback(
+    (open: boolean) => {
+      if (open) {
+        // Tooltip wants to open
+        if (forceHide) {
+          // We're in force-hide mode - block reopening
+          setInternalIsOpen(false);
+
+          return;
+        }
+        // Allow normal open
+        setInternalIsOpen(true);
+        setForceHide(false);
+      } else {
+        // Tooltip is closing - enter force-hide mode to prevent immediate reopening
+        setInternalIsOpen(false);
+        setForceHide(true);
+
+        // Clear force-hide after a delay to allow normal tooltip behavior on next hover
+        if (clearTimeoutRef.current) {
+          clearTimeout(clearTimeoutRef.current);
+        }
+        clearTimeoutRef.current = setTimeout(() => {
+          setForceHide(false);
+        }, 500);
+      }
+    },
+    [forceHide],
+  );
+
+  // Cleanup timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (clearTimeoutRef.current) {
+        clearTimeout(clearTimeoutRef.current);
+      }
+    };
   }, []);
 
-  const contextValue = React.useMemo(() => ({
-    slots,
-  }), [slots]);
+  const contextValue = React.useMemo(
+    () => ({
+      slots,
+      forceHide,
+    }),
+    [slots, forceHide],
+  );
 
   return (
     <TooltipContext value={contextValue}>
       <TooltipTriggerPrimitive
-        ref={rootRef}
+        closeDelay={closeDelay}
         data-slot="tooltip-root"
+        isOpen={internalIsOpen}
+        onOpenChange={handleOpenChange}
         {...props}
-        onClick={handleClick}
       >
         {children}
       </TooltipTriggerPrimitive>
@@ -81,8 +120,14 @@ const TooltipContent = ({
   showArrow = false,
   ...props
 }: TooltipContentProps) => {
-  const {slots} = useContext(TooltipContext);
+  const {forceHide, slots} = useContext(TooltipContext);
   const offset = offsetProp ? offsetProp : showArrow ? 7 : 3;
+
+  // Don't render tooltip if it's been force-hidden (e.g., after clicking a button)
+  // This prevents tooltip from staying visible when opening popovers/dialogs
+  if (forceHide) {
+    return null;
+  }
 
   return (
     <TooltipPrimitive
