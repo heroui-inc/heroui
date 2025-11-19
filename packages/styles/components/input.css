@@ -22,7 +22,7 @@
     }
   }
 
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible] {
     @apply status-focused-field;
     border-color: var(--color-field-border-focus);
@@ -46,7 +46,7 @@
     }
   }
 
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible] {
     background-color: var(--color-on-surface-focus);
   }

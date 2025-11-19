@@ -61,7 +61,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible] {
     @apply ring-focus ring-offset-background rounded outline-none ring-2 ring-offset-2;
   }
@@ -94,7 +94,7 @@
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible] {
     @apply outline-none;
   }
