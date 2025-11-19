@@ -67,7 +67,7 @@
   cursor: var(--cursor-interactive);
 
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply status-focused;
   }
 }

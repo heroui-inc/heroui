@@ -68,8 +68,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled;
 
     [data-slot="label"] {
@@ -87,11 +87,11 @@
       /* Thumb width is 1.5rem (24px), so half is 0.75rem (12px) */
       @apply border-x-[0.75rem] border-x-transparent;
 
-      &[data-fill-start="true"] {
+      &[data-fill-start] {
         @apply border-s-accent;
       }
 
-      &[data-fill-end="true"] {
+      &[data-fill-end] {
         @apply border-e-accent;
       }
     }
@@ -141,11 +141,11 @@
       @apply border-y-[0.75rem] border-y-transparent;
       justify-self: center;
 
-      &[data-fill-start="true"] {
+      &[data-fill-start] {
         @apply border-b-accent;
       }
 
-      &[data-fill-end="true"] {
+      &[data-fill-end] {
         @apply border-t-accent;
       }
     }

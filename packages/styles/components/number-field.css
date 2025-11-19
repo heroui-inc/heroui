@@ -2,8 +2,8 @@
 .number-field {
   @apply flex flex-col gap-1;
 
-  &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  &[data-invalid],
+  &[aria-invalid] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -34,28 +34,30 @@
   @apply motion-reduce:transition-none;
 
   /* Hover state */
-  &:hover:not(:focus-within),
-  &[data-hovered="true"]:not([data-focus-within="true"]) {
-    @apply bg-field-hover;
-    border-color: var(--color-field-border-hover);
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
   }
 
   /* Focus within state */
-  &[data-focus-within="true"],
+  &[data-focus-within],
   &:focus-within {
     @apply status-focused-field;
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
     border-color: var(--color-field-border-invalid);
   }
 
   /* Disabled state */
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled pointer-events-none;
   }
 }
@@ -101,25 +103,25 @@
 
   /* Hover state */
   &:hover,
-  &[data-hovered="true"] {
+  &[data-hovered] {
   }
 
   /* Focus visible state */
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
   }
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed] {
     @apply bg-field-foreground/10;
     transform: scale(0.97);
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled pointer-events-none;
   }
 
@@ -142,13 +144,15 @@
 .number-field__group--on-surface {
   @apply bg-on-surface shadow-none;
 
-  &:hover:not(:focus-within),
-  &[data-hovered="true"]:not([data-focus-within="true"]) {
-    @apply bg-on-surface-hover;
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-on-surface-hover;
+    }
   }
 
   &:focus-within,
-  &[data-focus-within="true"] {
+  &[data-focus-within] {
     background-color: var(--color-on-surface-focus);
   }
 

@@ -2,8 +2,8 @@
 .combobox {
   @apply flex flex-col gap-1;
 
-  &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  &[data-invalid],
+  &[aria-invalid] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -27,7 +27,7 @@
 
     /* Focus state (input.css only has focus-visible, but combobox also needs focus) */
     &:focus,
-    &[data-focus="true"] {
+    &[data-focus] {
       @apply status-focused-field;
       border-color: var(--color-field-border-focus);
       background-color: var(--color-field-focus);
@@ -35,8 +35,8 @@
 
     /* Disabled state */
     &:disabled,
-    &[data-disabled="true"],
-    &[aria-disabled="true"] {
+    &[data-disabled],
+    &[aria-disabled] {
       @apply status-disabled pointer-events-none;
     }
   }
@@ -53,26 +53,28 @@
   @apply border-none bg-transparent outline-none;
 
   /* Hover state */
-  &:hover,
-  &[data-hovered="true"] {
-    @apply text-field-foreground;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply text-field-foreground;
+    }
   }
 
   /* Focus visible state */
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply ring-focus ring-offset-background rounded outline-none ring-2 ring-offset-2;
   }
 
   /* Pressed state */
-  &[data-pressed="true"] {
+  &[data-pressed] {
     @apply opacity-70;
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply cursor-not-allowed opacity-50;
   }
 
@@ -81,7 +83,7 @@
   }
 
   /* Rotate icon when trigger is open */
-  &[data-open="true"] [data-slot="combobox-trigger-default-icon"] {
+  &[data-open] [data-slot="combobox-trigger-default-icon"] {
     @apply rotate-180;
   }
 }
@@ -93,7 +95,7 @@
 
   /* Focus state */
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply outline-none;
   }
 

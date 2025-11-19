@@ -54,7 +54,7 @@
 
   /* Focus state */
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply outline-none;
   }
 
