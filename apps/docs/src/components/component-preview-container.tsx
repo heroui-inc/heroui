@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import {useIntersectionObserver} from "usehooks-ts";
 
 import {cn} from "@/utils/cn";
 
@@ -24,16 +23,6 @@ export function ComponentPreviewContainer({
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
-  const {isIntersecting: previewInView, ref: previewRef} = useIntersectionObserver({
-    initialIsIntersecting: true,
-    rootMargin: "400px 0px 100px 0px",
-    threshold: 0,
-  });
-  const {isIntersecting: codeInView, ref: codeRef} = useIntersectionObserver({
-    initialIsIntersecting: true,
-    rootMargin: "300px 0px 0px 0px",
-    threshold: 0,
-  });
 
   const alignmentClasses = {
     center: "items-center justify-center",
@@ -51,7 +40,6 @@ export function ComponentPreviewContainer({
 
       {/* Preview Section */}
       <div
-        ref={previewRef}
         data-name={name}
         className={cn(
           "preview not-prose border-separator relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-l border-r border-t p-4 sm:p-10",
@@ -59,41 +47,19 @@ export function ComponentPreviewContainer({
           alignmentClasses[align],
           "flex",
         )}
-        style={{
-          contain: "layout style",
-          contentVisibility: "auto",
-          isolation: "isolate",
-        }}
       >
-        <div
-          className="flex w-full items-center justify-center"
-          style={{
-            pointerEvents: previewInView ? "auto" : "none",
-            visibility: previewInView ? "visible" : "hidden",
-          }}
-        >
-          {Component}
-        </div>
+        <div className="flex w-full items-center justify-center">{Component}</div>
       </div>
 
       {/* Code Section */}
       {!hideCode && !!Code && (
         <div
-          ref={codeRef}
           className="code-section border-separator relative rounded-b-xl border bg-transparent"
           style={{
             contentVisibility: "auto",
           }}
         >
-          <div
-            className="code-block-wrapper min-h-[124px]"
-            style={{
-              pointerEvents: codeInView ? "auto" : "none",
-              visibility: codeInView ? "visible" : "hidden",
-            }}
-          >
-            {Code}
-          </div>
+          <div className="code-block-wrapper min-h-[124px]">{Code}</div>
         </div>
       )}
     </div>
