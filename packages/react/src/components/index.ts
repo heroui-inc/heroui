@@ -49,6 +49,7 @@ export * from "./menu";
 export * from "./menu-item";
 export * from "./menu-section";
 export * from "./modal";
+export * from "./number-field";
 export * from "./select";
 export * from "./slider";
 

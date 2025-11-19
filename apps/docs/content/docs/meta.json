@@ -48,6 +48,7 @@
     "components/link",
     "components/listbox",
     "components/modal",
+    "components/number-field",
     "components/popover",
     "components/radio-group",
     "components/separator",

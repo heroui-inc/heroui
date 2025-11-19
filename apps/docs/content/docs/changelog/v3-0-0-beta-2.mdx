@@ -1,13 +1,13 @@
 ---
 title: v3.0.0-beta.2
-description: Four new components (AlertDialog, ComboBox, Dropdown, Modal), Select API improvements, and component refinements.
+description: Five new components (AlertDialog, ComboBox, Dropdown, Modal, NumberField), Select API improvements, and component refinements.
 ---
 
 <div className="flex items-center gap-3 mb-6">
   <span className="text-sm text-muted">November 16, 2025</span>
 </div>
 
-This release introduces four essential new components, improves the Select component API, and includes various refinements and bug fixes.
+This release introduces five essential new components, improves the Select component API, and includes various refinements and bug fixes.
 
 ## Installation
 
@@ -44,12 +44,13 @@ Update to the latest version:
 
 ### New Components
 
-This release introduces **4 new** essential components:
+This release introduces **5 new** essential components:
 
 - **[AlertDialog](#alert-dialog)**: Modal dialog for important decisions that require user confirmation. ([Documentation](/docs/components/alert-dialog))
 - **[ComboBox](#combobox)**: Combines a text input with a listbox, allowing users to filter a list of options. ([Documentation](/docs/components/combobox))
 - **[Dropdown](#dropdown)**: Displays a list of actions or options that a user can choose. ([Documentation](/docs/components/dropdown))
 - **[Modal](#modal)**: Dialog overlay for focused user interactions and important content. ([Documentation](/docs/components/modal))
+- **[NumberField](#numberfield)**: Number input with increment/decrement buttons, validation, and internationalized formatting. ([Documentation](/docs/components/number-field))
 
 <span id="alert-dialog"></span>
 ### AlertDialog
@@ -75,8 +76,24 @@ This release introduces **4 new** essential components:
 <span id="modal"></span>
 ### Modal
 
+```tsx
+<Modal.Header>
+  <Modal.Icon className="bg-default text-foreground">
+    <Icon className="size-5" icon="gravity-ui:rocket" />
+  </Modal.Icon>
+  <Modal.Heading>Welcome to HeroUI</Modal.Heading>
+</Modal.Header>
+```
+
 <ComponentPreview
   name="modal-default"
+/>
+
+<span id="numberfield"></span>
+### NumberField
+
+<ComponentPreview
+  name="number-field-basic"
 />
 
 ### Component Improvements
