@@ -82,47 +82,47 @@ export const demos: Record<string, DemoItem> = {
     file: "alert/basic.tsx",
   },
   // AlertDialog demos
-  "alert-dialog/default": {
+  "alert-dialog-default": {
     component: AlertDialogDemos.Default,
     file: "alert-dialog/default.tsx",
   },
-  "alert-dialog/statuses": {
+  "alert-dialog-statuses": {
     component: AlertDialogDemos.Statuses,
     file: "alert-dialog/statuses.tsx",
   },
-  "alert-dialog/placements": {
+  "alert-dialog-placements": {
     component: AlertDialogDemos.Placements,
     file: "alert-dialog/placements.tsx",
   },
-  "alert-dialog/backdrop-variants": {
+  "alert-dialog-backdrop-variants": {
     component: AlertDialogDemos.BackdropVariants,
     file: "alert-dialog/backdrop-variants.tsx",
   },
-  "alert-dialog/controlled": {
+  "alert-dialog-controlled": {
     component: AlertDialogDemos.Controlled,
     file: "alert-dialog/controlled.tsx",
   },
-  "alert-dialog/dismiss-behavior": {
+  "alert-dialog-dismiss-behavior": {
     component: AlertDialogDemos.DismissBehavior,
     file: "alert-dialog/dismiss-behavior.tsx",
   },
-  "alert-dialog/custom-icon": {
+  "alert-dialog-custom-icon": {
     component: AlertDialogDemos.CustomIcon,
     file: "alert-dialog/custom-icon.tsx",
   },
-  "alert-dialog/custom-backdrop": {
+  "alert-dialog-custom-backdrop": {
     component: AlertDialogDemos.CustomBackdrop,
     file: "alert-dialog/custom-backdrop.tsx",
   },
-  "alert-dialog/custom-trigger": {
+  "alert-dialog-custom-trigger": {
     component: AlertDialogDemos.CustomTrigger,
     file: "alert-dialog/custom-trigger.tsx",
   },
-  "alert-dialog/with-close-button": {
+  "alert-dialog-with-close-button": {
     component: AlertDialogDemos.WithCloseButton,
     file: "alert-dialog/with-close-button.tsx",
   },
-  "alert-dialog/custom-animations": {
+  "alert-dialog-custom-animations": {
     component: AlertDialogDemos.CustomAnimations,
     file: "alert-dialog/custom-animations.tsx",
   },
