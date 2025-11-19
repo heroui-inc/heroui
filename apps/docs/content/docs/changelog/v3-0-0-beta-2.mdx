@@ -96,6 +96,23 @@ This release introduces **5 new** essential components:
   name="number-field-basic"
 />
 
+### Style Improvements
+
+#### Custom Variants and Theme Compatibility
+
+Enhanced CSS variants and theme system for better customization:
+
+**Motion Preferences**:
+- New `motion-safe` variant with `data-reduce-motion="true"` attribute matching
+- Enhanced `motion-reduce` now supports ancestor elements and pseudo-elements
+
+**Dark Mode**:
+- Class and `data-theme="dark"` attribute selectors now take precedence over `prefers-color-scheme`
+- Full support for pseudo-elements in dark mode
+
+**Theme Variables**:
+- Expanded light theme scope to support nested themes (`:root`, `.light`, `.default`, `[data-theme="light"]`, `[data-theme="default"]`)
+
 ### Component Improvements
 
 #### Select Component API Update
