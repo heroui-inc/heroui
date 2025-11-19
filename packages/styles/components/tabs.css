@@ -90,36 +90,38 @@
   }
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected] {
     @apply text-segment-foreground;
   }
 
   /* Hide separator when this tab is selected */
-  &[data-selected="true"]:before {
+  &[data-selected]:before {
     opacity: 0;
   }
 
   /* Hide separator when previous sibling is selected */
-  &[data-selected="true"] + .tabs__tab:before {
+  &[data-selected] + .tabs__tab:before {
     opacity: 0;
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled;
   }
 
   /* Hover states - both approaches for compatibility */
-  &:not([data-selected="true"]):not([data-disabled="true"]):hover,
-  &[data-hovered="true"]:not([data-selected="true"]):not([data-disabled="true"]) {
-    @apply opacity-70;
+  @media (hover: hover) {
+    &:not([data-selected]):not([data-disabled]):hover,
+    &[data-hovered]:not([data-selected]):not([data-disabled]) {
+      @apply opacity-70;
+    }
   }
 
   /* Focus states - comprehensive fallback */
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply status-focused;
   }
 }

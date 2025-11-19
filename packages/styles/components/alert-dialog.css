@@ -16,13 +16,13 @@
 
   /* Focus  state */
   &:focus-visible,
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 }
@@ -123,8 +123,8 @@
    * Reduce Animation
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
-  &[data-entering="true"],
-  &[data-exiting="true"] {
+  &[data-entering],
+  &[data-exiting] {
     @apply motion-reduce:animate-none;
   }
 }

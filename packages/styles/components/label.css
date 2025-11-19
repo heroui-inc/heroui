@@ -10,19 +10,18 @@
  * not on individual options within those groups
  */
 .label--required,
-[data-required="true"]:not([role="group"]):not([role="radiogroup"]):not([role="checkboxgroup"])
-  > .label,
-[data-required="true"]:not([data-slot="radio"]):not([data-slot="checkbox"]) > .label {
+[data-required]:not([role="group"]):not([role="radiogroup"]):not([role="checkboxgroup"]) > .label,
+[data-required]:not([data-slot="radio"]):not([data-slot="checkbox"]) > .label {
   @apply after:text-danger after:ml-0.5 after:content-['*'];
 }
 
 .label--disabled,
-[data-disabled="true"] .label {
+[data-disabled] .label {
   @apply status-disabled;
 }
 
 .label--invalid,
-[data-invalid="true"] .label,
-[aria-invalid="true"] .label {
+[data-invalid] .label,
+[aria-invalid] .label {
   @apply text-danger;
 }

@@ -7,8 +7,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled;
 
     .switch__thumb {
@@ -17,12 +17,12 @@
   }
 
   /* Disabled + Selected state */
-  &:disabled[aria-checked="true"],
-  &:disabled[data-selected="true"],
-  &[data-disabled="true"][aria-checked="true"],
-  &[data-disabled="true"][data-selected="true"],
-  &[aria-disabled="true"][aria-checked="true"],
-  &[aria-disabled="true"][data-selected="true"] {
+  &:disabled[aria-checked],
+  &:disabled[data-selected],
+  &[data-disabled][aria-checked],
+  &[data-disabled][data-selected],
+  &[aria-disabled][aria-checked],
+  &[aria-disabled][data-selected] {
     .switch__thumb {
       opacity: 0.4;
     }
@@ -61,42 +61,42 @@
 
   /* Focus states */
   .switch:focus-visible &,
-  .switch[data-focus-visible="true"] & {
+  .switch[data-focus-visible] & {
     @apply status-focused;
   }
 
   /* Hover states */
   .switch:hover &,
-  .switch[data-hovered="true"] & {
+  .switch[data-hovered] & {
     @apply bg-surface-quaternary/80;
   }
 
   /* Pressed states */
   .switch:active &,
-  .switch[data-pressed="true"] & {
+  .switch[data-pressed] & {
     @apply bg-surface-quaternary/80 motion-reduce:[transform:none];
     transform: scale(0.95);
   }
 
   /* Checked states */
-  .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
+  .switch[aria-checked] &,
+  .switch[data-selected] & {
     @apply bg-accent;
   }
 
   /* Checked + Hover states */
-  .switch[aria-checked="true"]:hover &,
-  .switch[data-selected="true"]:hover &,
-  .switch[aria-checked="true"][data-hovered="true"] &,
-  .switch[data-selected="true"][data-hovered="true"] & {
+  .switch[aria-checked]:hover &,
+  .switch[data-selected]:hover &,
+  .switch[aria-checked][data-hovered] &,
+  .switch[data-selected][data-hovered] & {
     @apply bg-accent-hover;
   }
 
   /* Checked + Pressed states */
-  .switch[aria-checked="true"]:active &,
-  .switch[data-selected="true"]:active &,
-  .switch[aria-checked="true"][data-pressed="true"] &,
-  .switch[data-selected="true"][data-pressed="true"] & {
+  .switch[aria-checked]:active &,
+  .switch[data-selected]:active &,
+  .switch[aria-checked][data-pressed] &,
+  .switch[data-selected][data-pressed] & {
     @apply bg-accent-hover;
   }
 }
@@ -133,8 +133,8 @@
   @apply motion-reduce:transition-none;
 
   /* Selected/checked state - use margin instead of translate */
-  .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
+  .switch[aria-checked] &,
+  .switch[data-selected] & {
     @apply bg-accent-foreground text-accent ms-[calc(100%-1.5rem)];
     box-shadow:
       0px 0px 5px 0px rgb(0 0 0 / 0.02),
@@ -144,7 +144,7 @@
 
   /* Pressed state - scale down with width animation */
   .switch:active &,
-  .switch[data-pressed="true"] & {
+  .switch[data-pressed] & {
     @apply scale-[0.98];
   }
 }
@@ -155,8 +155,8 @@
   width: 1.03125rem; /* ~14.4px on desktop, ~16.5px on mobile - maintains 1.375:1 ratio */
 
   /* Small selected state positioning */
-  .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
+  .switch[aria-checked] &,
+  .switch[data-selected] & {
     @apply ms-[calc(100%-1.15625rem)];
   }
 }
@@ -166,8 +166,8 @@
   width: 1.71875rem; /* ~24px on desktop, ~27.5px on mobile - maintains 1.375:1 ratio */
 
   /* Large selected state positioning */
-  .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
+  .switch[aria-checked] &,
+  .switch[data-selected] & {
     @apply ms-[calc(100%-1.84375rem)];
   }
 }
