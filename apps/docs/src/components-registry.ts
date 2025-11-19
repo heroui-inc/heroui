@@ -140,6 +140,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "input",
     title: "Input",
   },
+  inputgroup: {
+    category: "forms",
+    description: "Group related input controls with prefix and suffix elements",
+    href: "/docs/components/input-group",
+    name: "inputgroup",
+    title: "InputGroup",
+  },
   inputotp: {
     category: "forms",
     description: "One-time password input",
@@ -363,6 +370,19 @@ const componentRelationships: Record<string, string[]> = {
     "description",
     "combobox",
   ],
+  inputgroup: [
+    "textfield",
+    "input",
+    "label",
+    "fielderror",
+    "form",
+    "surface",
+    "description",
+    "button",
+    "chip",
+    "kbd",
+    "spinner",
+  ],
   inputotp: ["input", "form", "surface", "button", "link", "spinner"],
   kbd: [],
   label: [
@@ -437,6 +457,7 @@ const componentRelationships: Record<string, string[]> = {
     "surface",
     "description",
     "numberfield",
+    "inputgroup",
   ],
   tooltip: ["button", "popover"],
 };

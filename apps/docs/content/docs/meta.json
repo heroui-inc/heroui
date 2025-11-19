@@ -42,6 +42,7 @@
     "components/fieldset",
     "components/form",
     "components/input",
+    "components/input-group",
     "components/input-otp",
     "components/kbd",
     "components/label",

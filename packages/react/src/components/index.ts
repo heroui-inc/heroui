@@ -27,6 +27,7 @@ export * from "./switch-group";
 export * from "./tabs";
 export * from "./tooltip";
 export * from "./input";
+export * from "./input-group";
 export * from "./textarea";
 export * from "./text-field";
 export * from "./text";

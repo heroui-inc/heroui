@@ -20,6 +20,7 @@ import * as FieldErrorDemos from "./field-error";
 import * as FieldsetDemos from "./fieldset";
 import * as FormDemos from "./form";
 import * as InputDemos from "./input";
+import * as InputGroupDemos from "./input-group";
 import * as InputOTPDemos from "./input-otp";
 import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
@@ -545,6 +546,75 @@ export const demos: Record<string, DemoItem> = {
   "input-otp-on-surface": {
     component: InputOTPDemos.OnSurface,
     file: "input-otp/on-surface.tsx",
+  },
+  // InputGroup demos
+  "input-group-default": {
+    component: InputGroupDemos.Default,
+    file: "input-group/default.tsx",
+  },
+  "input-group-with-prefix-icon": {
+    component: InputGroupDemos.WithPrefixIcon,
+    file: "input-group/with-prefix-icon.tsx",
+  },
+  "input-group-with-suffix-icon": {
+    component: InputGroupDemos.WithSuffixIcon,
+    file: "input-group/with-suffix-icon.tsx",
+  },
+  "input-group-with-prefix-and-suffix": {
+    component: InputGroupDemos.WithPrefixAndSuffix,
+    file: "input-group/with-prefix-and-suffix.tsx",
+  },
+  "input-group-with-text-prefix": {
+    component: InputGroupDemos.WithTextPrefix,
+    file: "input-group/with-text-prefix.tsx",
+  },
+  "input-group-with-text-suffix": {
+    component: InputGroupDemos.WithTextSuffix,
+    file: "input-group/with-text-suffix.tsx",
+  },
+  "input-group-with-icon-prefix-and-text-suffix": {
+    component: InputGroupDemos.WithIconPrefixAndTextSuffix,
+    file: "input-group/with-icon-prefix-and-text-suffix.tsx",
+  },
+  "input-group-with-copy-suffix": {
+    component: InputGroupDemos.WithCopySuffix,
+    file: "input-group/with-copy-suffix.tsx",
+  },
+  "input-group-with-icon-prefix-and-copy-suffix": {
+    component: InputGroupDemos.WithIconPrefixAndCopySuffix,
+    file: "input-group/with-icon-prefix-and-copy-suffix.tsx",
+  },
+  "input-group-password-with-toggle": {
+    component: InputGroupDemos.PasswordWithToggle,
+    file: "input-group/password-with-toggle.tsx",
+  },
+  "input-group-with-loading-suffix": {
+    component: InputGroupDemos.WithLoadingSuffix,
+    file: "input-group/with-loading-suffix.tsx",
+  },
+  "input-group-with-keyboard-shortcut": {
+    component: InputGroupDemos.WithKeyboardShortcut,
+    file: "input-group/with-keyboard-shortcut.tsx",
+  },
+  "input-group-with-badge-suffix": {
+    component: InputGroupDemos.WithBadgeSuffix,
+    file: "input-group/with-badge-suffix.tsx",
+  },
+  "input-group-required": {
+    component: InputGroupDemos.Required,
+    file: "input-group/required.tsx",
+  },
+  "input-group-invalid": {
+    component: InputGroupDemos.Invalid,
+    file: "input-group/invalid.tsx",
+  },
+  "input-group-disabled": {
+    component: InputGroupDemos.Disabled,
+    file: "input-group/disabled.tsx",
+  },
+  "input-group-on-surface": {
+    component: InputGroupDemos.OnSurface,
+    file: "input-group/on-surface.tsx",
   },
   // Kbd demos
   "kbd-basic": {

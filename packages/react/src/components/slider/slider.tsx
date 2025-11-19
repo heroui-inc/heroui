@@ -110,12 +110,12 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
       data-slot="slider-track"
       {...(singleThumb
         ? {
-            "data-fill-start": fillWidth > 0,
-            "data-fill-end": fillWidth == 100,
+            "data-fill-start": dataAttr(fillWidth > 0),
+            "data-fill-end": dataAttr(fillWidth == 100),
           }
         : {
-            "data-fill-start": startOffset == 0,
-            "data-fill-end": startOffset! * 100 + fillWidth == 100,
+            "data-fill-start": dataAttr(startOffset == 0),
+            "data-fill-end": dataAttr(startOffset! * 100 + fillWidth == 100),
           })}
       {...props}
     >
