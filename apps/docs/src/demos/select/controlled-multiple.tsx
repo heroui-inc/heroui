@@ -1,29 +1,29 @@
 "use client";
 
-import type {Selection} from "@react-types/shared";
+import type {Key} from "@heroui/react";
 
 import {Label, ListBox, Select} from "@heroui/react";
-import {useState} from "react";
+import React from "react";
 
 export function ControlledMultiple() {
-  const [selected, setSelected] = useState<Selection>(new Set(["california", "texas"]));
-
-  const selectedItems = Array.from(selected);
+  const [selected, setSelected] = React.useState<Key[]>(["california", "texas"]);
 
   return (
     <div className="space-y-4">
-      <Select className="w-[256px]" placeholder="Select states" selectionMode="multiple">
+      <Select
+        className="w-[256px]"
+        placeholder="Select states"
+        selectionMode="multiple"
+        value={selected}
+        onChange={(keys) => setSelected(keys as Key[])}
+      >
         <Label>States (controlled multiple)</Label>
         <Select.Trigger>
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
         <Select.Popover>
-          <ListBox
-            selectedKeys={selected}
-            selectionMode="multiple"
-            onSelectionChange={(keys) => setSelected(keys as Selection)}
-          >
+          <ListBox selectionMode="multiple">
             <ListBox.Item id="california" textValue="California">
               California
               <ListBox.ItemIndicator />
@@ -52,7 +52,7 @@ export function ControlledMultiple() {
         </Select.Popover>
       </Select>
       <p className="text-muted text-sm">
-        Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
+        Selected: {selected.length > 0 ? selected.join(", ") : "None"}
       </p>
     </div>
   );
