@@ -1,0 +1,305 @@
+---
+title: v3.0.0-beta.2
+description: Six new components (AlertDialog, ComboBox, Dropdown, InputGroup, Modal, NumberField), Select API improvements, and component refinements.
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">November 20, 2025</span>
+</div>
+
+This release introduces six essential new components, improves the Select component API, and includes various refinements and bug fixes.
+
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-2-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-2-dark@2x.jpg"
+  alt="HeroUI v3 Beta 2"
+  className="h-[220px] md:h-[384px]"
+/>
+
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### New Components
+
+This release introduces **6 new** essential components:
+
+- **[AlertDialog](#alert-dialog)**: Modal dialog for important decisions that require user confirmation. ([Documentation](/docs/components/alert-dialog))
+- **[ComboBox](#combobox)**: Combines a text input with a listbox, allowing users to filter a list of options. ([Documentation](/docs/components/combobox))
+- **[Dropdown](#dropdown)**: Displays a list of actions or options that a user can choose. ([Documentation](/docs/components/dropdown))
+- **[InputGroup](#inputgroup)**: Group related input controls with prefix and suffix elements for enhanced form fields. ([Documentation](/docs/components/input-group))
+- **[Modal](#modal)**: Dialog overlay for focused user interactions and important content. ([Documentation](/docs/components/modal))
+- **[NumberField](#numberfield)**: Number input with increment/decrement buttons, validation, and internationalized formatting. ([Documentation](/docs/components/number-field))
+
+### AlertDialog
+
+<ComponentPreview
+  name="alert-dialog-default"
+/>
+
+### ComboBox
+
+<ComponentPreview
+  name="combobox-default"
+/>
+
+### Dropdown
+
+<ComponentPreview
+  name="dropdown-default"
+/>
+
+
+### Modal
+
+<ComponentPreview
+  name="modal-default"
+/>
+
+### InputGroup
+
+<ComponentPreview
+  name="input-group-with-icon-prefix-and-text-suffix"
+/>
+
+### NumberField
+
+<ComponentPreview
+  name="number-field-basic"
+/>
+
+### Style Improvements
+
+#### Custom Variants and Theme Compatibility
+
+Enhanced CSS variants and theme system for better customization:
+
+**Motion Preferences**:
+- New `motion-safe` variant with `data-reduce-motion="true"` attribute matching
+- Enhanced `motion-reduce` now supports ancestor elements and pseudo-elements
+
+**Dark Mode**:
+- Class and `data-theme="dark"` attribute selectors now take precedence over `prefers-color-scheme`
+- Full support for pseudo-elements in dark mode
+
+**Theme Variables**:
+- Expanded light theme scope to support nested themes (`:root`, `.light`, `.default`, `[data-theme="light"]`, `[data-theme="default"]`)
+
+### Component Improvements
+
+#### Select Component API Update
+
+The Select component's API has been improved for better consistency with other components. The `Content` subcomponent has been renamed to `Popover`.
+
+**Before:**
+```tsx
+<Select>
+  <Select.Trigger>
+    <Select.Value />
+    <Select.Indicator />
+  </Select.Trigger>
+  <Select.Content>
+    <ListBox>
+      {/* items */}
+    </ListBox>
+  </Select.Content>
+</Select>
+```
+
+**After:**
+```tsx
+<Select>
+  <Select.Trigger>
+    <Select.Value />
+    <Select.Indicator />
+  </Select.Trigger>
+  <Select.Popover>
+    <ListBox>
+      {/* items */}
+    </ListBox>
+  </Select.Popover>
+</Select>
+```
+
+#### Chip Component Refinements
+
+Chip component sizes have been updated for better consistency:
+- **Small (`sm`)**: `px-1 py-0 text-xs`
+- **Medium (`md`)**: `text-xs` (now explicitly set)
+- **Large (`lg`)**: `px-3 py-1 text-sm font-medium`
+
+#### Separator Component Enhancement
+
+The Separator component now automatically detects when it's placed inside a surface component (one that uses `bg-surface`) and applies the appropriate divider color for better visibility. A new `isOnSurface` prop is also available for manual control.
+
+**New Calculated Variable:**
+- `--color-separator-on-surface`: A calculated variable (automatically generated using `color-mix`) that ensures the separator is visible when placed on a surface background. Like other calculated variables, it can be overridden in your theme.
+
+**Usage:**
+
+```tsx
+<div className="bg-surface">
+  <Separator isOnSurface />
+</div>
+```
+
+The `isOnSurface` prop is automatically applied when the Separator detects a `SurfaceContext` provider (used by components like Card, Alert, Popover, Modal, etc.).
+
+You can also use the calculated variable directly with Tailwind classes:
+
+```tsx
+<div className="bg-surface">
+  <div className="h-px w-full bg-separator-on-surface" />
+</div>
+```
+
+#### Animation Improvements
+
+- Loading state spinner color updated for better visibility
+- Select and Slider component styles adjusted for improved animations
+- Checkbox animation improved (faster transition)
+- Better support for `prefers-reduced-motion` with pseudo elements
+
+## ⚠️ Breaking Changes
+
+### Select Component
+
+The `Select.Content` subcomponent has been renamed to `Select.Popover` for consistency with other components like ComboBox and Dropdown.
+
+**Migration:**
+
+Replace all instances of `Select.Content` with `Select.Popover`:
+
+```tsx
+// Before
+<Select.Content>
+  <ListBox>...</ListBox>
+</Select.Content>
+
+// After
+<Select.Popover>
+  <ListBox>...</ListBox>
+</Select.Popover>
+```
+
+**Type imports:**
+
+```tsx
+// Before
+import type { SelectContentProps } from "@heroui/react"
+
+// After
+import type { SelectPopoverProps } from "@heroui/react"
+```
+
+**Named exports:**
+
+```tsx
+// Before
+import { SelectContent } from "@heroui/react"
+
+// After
+import { SelectPopover } from "@heroui/react"
+```
+
+### CSS Variables and Utilities: Divider → Separator
+
+All CSS variables and utility classes related to `divider` have been renamed to `separator` for consistency with the Separator component name.
+
+**CSS Variables:**
+
+```css
+/* Before */
+border-bottom: 1px solid var(--divider);
+
+/* After */
+border-bottom: 1px solid var(--separator);
+```
+
+**Tailwind Utility Classes:**
+
+```tsx
+// Before
+<div className="bg-divider" />
+<div className="border-divider" />
+
+// After
+<div className="bg-separator" />
+<div className="border-separator" />
+```
+
+**Theme Overrides:**
+
+If you have custom themes that override the divider variable, update them:
+
+```css
+/* Before */
+:root {
+  --divider: oklch(92% 0.004 286.32);
+}
+
+.dark {
+  --divider: oklch(22% 0.006 286.033);
+}
+
+/* After */
+:root {
+  --separator: oklch(92% 0.004 286.32);
+}
+
+.dark {
+  --separator: oklch(22% 0.006 286.033);
+}
+```
+
+## Bug Fixes
+
+- Fixed loading state spinner color for better visibility
+- Fixed bordered focus styles taking precedence over hover states
+- Fixed animation stuttering in documentation
+- Improved modal form styling
+- Enhanced motion reduce support for pseudo elements
+- Fixed mobile hover states sticking after touch interactions by wrapping hover styles in `@media (hover: hover)` media queries. Also simplified data attribute selectors by removing unnecessary `="true"` value checks.
+
+## Links
+
+- [Component Documentation](https://v3.heroui.com/docs/components)
+- [Design System - Figma Kit V3 (updated)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #5885](https://github.com/heroui-inc/heroui/pull/5885)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+

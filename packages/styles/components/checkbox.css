@@ -27,8 +27,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled;
   }
 
@@ -52,14 +52,14 @@
   }
 
   &[data-selected] [data-slot="checkbox-default-indicator--checkmark"] {
-    transition: stroke-dashoffset 250ms linear 0.2s;
+    transition: stroke-dashoffset 250ms linear 150ms;
   }
 
   /* Invalid + Selected: checkmark icon color */
-  &[data-invalid="true"][data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"],
-  &[data-invalid="true"][aria-checked="true"] [data-slot="checkbox-default-indicator--checkmark"],
-  &[aria-invalid="true"][data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"],
-  &[aria-invalid="true"][aria-checked="true"] [data-slot="checkbox-default-indicator--checkmark"] {
+  &[data-invalid][data-selected] [data-slot="checkbox-default-indicator--checkmark"],
+  &[data-invalid][aria-checked] [data-slot="checkbox-default-indicator--checkmark"],
+  &[aria-invalid][data-selected] [data-slot="checkbox-default-indicator--checkmark"],
+  &[aria-invalid][aria-checked] [data-slot="checkbox-default-indicator--checkmark"] {
     @apply text-danger-foreground;
   }
 
@@ -71,10 +71,8 @@
   }
 
   /* Invalid + Indeterminate: indeterminate icon color */
-  &[data-indeterminate="true"][data-invalid="true"]
-    [data-slot="checkbox-default-indicator--indeterminate"],
-  &[data-indeterminate="true"][aria-invalid="true"]
-    [data-slot="checkbox-default-indicator--indeterminate"] {
+  &[data-indeterminate][data-invalid] [data-slot="checkbox-default-indicator--indeterminate"],
+  &[data-indeterminate][aria-invalid] [data-slot="checkbox-default-indicator--indeterminate"] {
     @apply text-danger-foreground;
   }
 }
@@ -120,13 +118,13 @@
   /* Interactive states */
   /* Focus */
   .checkbox:focus-visible &,
-  .checkbox[data-focus-visible="true"] & {
+  .checkbox[data-focus-visible] & {
     @apply status-focused;
   }
 
   /* Hover */
   .checkbox:hover &,
-  .checkbox[data-hovered="true"] & {
+  .checkbox[data-hovered] & {
     @apply border-field-border-hover;
 
     &::before {
@@ -136,14 +134,14 @@
 
   /* Pressed */
   .checkbox:active &,
-  .checkbox[data-pressed="true"] & {
+  .checkbox[data-pressed] & {
     @apply scale-95;
   }
 
   /* Selection states */
   /* Selected */
-  .checkbox[aria-checked="true"] &,
-  .checkbox[data-selected="true"] & {
+  .checkbox[aria-checked] &,
+  .checkbox[data-selected] & {
     @apply text-accent-foreground border-transparent;
 
     &::before {
@@ -152,34 +150,28 @@
   }
 
   /* Indeterminate */
-  .checkbox[data-indeterminate="true"] & {
+  .checkbox[data-indeterminate] & {
     @apply bg-accent text-accent-foreground;
   }
 
   /* Indeterminate + Pressed */
-  .checkbox:active[data-indeterminate="true"] &,
-  .checkbox[data-pressed="true"][data-indeterminate="true"] & {
+  .checkbox:active[data-indeterminate] &,
+  .checkbox[data-pressed][data-indeterminate] & {
     @apply bg-accent-hover;
   }
 
   /* Validation states */
   /* Invalid (only when not selected/indeterminate) */
-  .checkbox[data-invalid="true"]:not([aria-checked="true"]):not([data-selected="true"]):not(
-      [data-indeterminate="true"]
-    )
-    &,
-  .checkbox[aria-invalid="true"]:not([aria-checked="true"]):not([data-selected="true"]):not(
-      [data-indeterminate="true"]
-    )
-    & {
+  .checkbox[data-invalid]:not([aria-checked]):not([data-selected]):not([data-indeterminate]) &,
+  .checkbox[aria-invalid]:not([aria-checked]):not([data-selected]):not([data-indeterminate]) & {
     @apply status-invalid-field;
   }
 
   /* Invalid + Selected */
-  .checkbox[data-invalid="true"][aria-checked="true"] &,
-  .checkbox[data-invalid="true"][data-selected="true"] &,
-  .checkbox[aria-invalid="true"][aria-checked="true"] &,
-  .checkbox[aria-invalid="true"][data-selected="true"] & {
+  .checkbox[data-invalid][aria-checked] &,
+  .checkbox[data-invalid][data-selected] &,
+  .checkbox[aria-invalid][aria-checked] &,
+  .checkbox[aria-invalid][data-selected] & {
     @apply bg-danger text-danger-foreground border-transparent;
 
     &::before {
@@ -188,8 +180,8 @@
   }
 
   /* Invalid + Indeterminate */
-  .checkbox[data-indeterminate="true"][aria-invalid="true"] &,
-  .checkbox[data-indeterminate="true"][data-invalid="true"] & {
+  .checkbox[data-indeterminate][aria-invalid] &,
+  .checkbox[data-indeterminate][data-invalid] & {
     @apply bg-danger text-danger-foreground;
   }
 }
@@ -226,23 +218,21 @@
   @apply shadow-none;
 }
 
-.checkbox--on-surface:not([aria-checked="true"]):not([data-selected="true"]):not(
-    [data-indeterminate="true"]
-  )
+.checkbox--on-surface:not([aria-checked]):not([data-selected]):not([data-indeterminate])
   .checkbox__control {
   @apply bg-on-surface;
 }
 
 /* Selected state on surface */
-.checkbox--on-surface[aria-checked="true"] .checkbox__control,
-.checkbox--on-surface[data-selected="true"] .checkbox__control {
+.checkbox--on-surface[aria-checked] .checkbox__control,
+.checkbox--on-surface[data-selected] .checkbox__control {
   &::before {
     @apply bg-accent;
   }
 }
 
 /* Indeterminate state on surface */
-.checkbox--on-surface[data-indeterminate="true"] .checkbox__control {
+.checkbox--on-surface[data-indeterminate] .checkbox__control {
   @apply bg-accent;
 
   &::before {
@@ -253,7 +243,7 @@
 .checkbox--on-surface .checkbox__control {
   /* Hover state */
   .checkbox:hover &,
-  .checkbox[data-hovered="true"] & {
+  .checkbox[data-hovered] & {
     @apply border-field-border-hover;
   }
 }

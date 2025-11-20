@@ -352,7 +352,7 @@ export const Controlled: Story = {
             </ListBox.Item>
           </ListBox>
         </Surface>
-        <p className="text-sm text-neutral-500">
+        <p className="text-muted text-sm">
           Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
         </p>
       </div>

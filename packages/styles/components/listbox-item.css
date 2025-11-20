@@ -11,8 +11,8 @@
    */
   transition:
     transform 250ms var(--ease-out-quart),
-    background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
+
   @apply motion-reduce:transition-none;
 
   /* Cursor */
@@ -33,13 +33,13 @@
 
   /* Focus visible state (keyboard focus only) */
   &:focus-visible:not(:focus),
-  &[data-focus-visible="true"] {
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Focus state */
   &:focus,
-  &[data-focus="true"] {
+  &[data-focus] {
   }
 
   /* Pressed state */
@@ -49,14 +49,16 @@
   }
 
   /* Hover state */
-  &:hover,
-  &[data-hovered] {
-    @apply bg-default-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-default-hover;
+    }
   }
 
   /* Selected state */
-  &[aria-selected="true"],
-  &[data-selected="true"] {
+  &[aria-selected],
+  &[data-selected] {
   }
 
   /* Disabled state */
@@ -87,13 +89,13 @@
     @apply transition-all duration-300 motion-reduce:transition-none;
   }
 
-  .listbox-item[aria-selected="true"] [data-slot="listbox-item-indicator--checkmark"],
-  .listbox-item[data-selected="true"] [data-slot="listbox-item-indicator--checkmark"] {
+  .listbox-item[aria-selected] [data-slot="listbox-item-indicator--checkmark"],
+  .listbox-item[data-selected] [data-slot="listbox-item-indicator--checkmark"] {
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
      */
-    transition: stroke-dashoffset 250ms linear 0.2s;
+    transition: stroke-dashoffset 250ms linear;
     @apply motion-reduce:transition-none;
   }
 }

@@ -4,6 +4,7 @@
 
 // completed
 export * from "./accordion";
+export * from "./alert-dialog";
 export * from "./avatar";
 export * from "./button";
 export * from "./card";
@@ -11,6 +12,7 @@ export * from "./checkbox";
 export * from "./checkbox-group";
 export * from "./chip";
 export * from "./close-button";
+export * from "./combobox";
 export * from "./disclosure";
 export * from "./disclosure-group";
 export * from "./kbd";
@@ -25,11 +27,13 @@ export * from "./switch-group";
 export * from "./tabs";
 export * from "./tooltip";
 export * from "./input";
+export * from "./input-group";
 export * from "./textarea";
 export * from "./text-field";
 export * from "./text";
 export * from "./label";
 export * from "./description";
+export * from "./empty-state";
 export * from "./field-error";
 export * from "./fieldset";
 export * from "./form";
@@ -41,6 +45,12 @@ export * from "./alert";
 export * from "./listbox";
 export * from "./listbox-item";
 export * from "./listbox-section";
+export * from "./dropdown";
+export * from "./menu";
+export * from "./menu-item";
+export * from "./menu-section";
+export * from "./modal";
+export * from "./number-field";
 export * from "./select";
 export * from "./slider";
 
@@ -51,20 +61,6 @@ export * from "./calendar";
 //  Icons
 //  ===================================
 export * from "./icons";
-
-//  ===================================
-//  Types
-//  ===================================
-export type {
-  Key,
-  Direction,
-  Orientation,
-  PressEvent,
-  PointerType,
-  KeyboardEvent,
-  HoverEvent,
-  Selection,
-} from "@react-types/shared";
 
 //  ===================================
 //  React Aria Components

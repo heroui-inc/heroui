@@ -28,7 +28,7 @@
   @apply duration-250 transition motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded="true"] {
+  &[data-expanded] {
     @apply -rotate-180;
   }
 }
@@ -40,7 +40,7 @@
 
 .accordion__item::after {
   content: "";
-  @apply bg-divider absolute bottom-0 left-0 h-px w-full rounded-full;
+  @apply bg-separator absolute bottom-0 left-0 h-px w-full rounded-full;
 }
 
 .accordion__item:last-child::after {
@@ -64,22 +64,27 @@
   @apply motion-reduce:transition-none;
 
   /* Hover state */
-  &:hover:not([aria-expanded="true"]),
-  &[data-hovered="true"]:not([aria-expanded="true"]),
+  @media (hover: hover) {
+    &:hover:not([aria-expanded]),
+    &[data-hovered]:not([aria-expanded]) {
+      background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
+    }
+  }
+
   /* Pressed state */
-  &[data-pressed="true"]:not([aria-expanded="true"]) {
+  &[data-pressed]:not([aria-expanded]) {
     background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
   }
 
   /* Focus state */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Disabled State */
   &:disabled,
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 }
@@ -99,7 +104,7 @@
     opacity 340ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded="true"] {
+  &[data-expanded] {
     opacity: 1;
   }
 }
@@ -109,10 +114,16 @@
   @apply bg-surface rounded-3xl;
 
   .accordion__trigger {
-    &:hover:not([aria-expanded="true"]),
-    &[data-hovered="true"]:not([aria-expanded="true"]) {
-      @apply bg-default;
+    @media (hover: hover) {
+      &:hover:not([aria-expanded]),
+      &[data-hovered]:not([aria-expanded]) {
+        @apply bg-default;
+      }
     }
+  }
+
+  .accordion__item::after {
+    @apply bg-surface-foreground/6;
   }
 }
 
@@ -127,7 +138,7 @@
     @apply rounded-t-3xl;
   }
 
-  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
+  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded]))
     [data-slot="accordion-trigger"] {
     @apply rounded-b-3xl;
   }

@@ -14,20 +14,22 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &:hover,
-  &[data-hovered="true"] {
-    @apply bg-field-hover;
-    border-color: var(--color-field-border-hover);
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
   }
 
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     @apply status-focused-field;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
   }
 
-  &[data-invalid="true"] {
+  &[data-invalid] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
@@ -37,13 +39,15 @@
 .input--on-surface {
   @apply bg-on-surface shadow-none;
 
-  &:hover,
-  &[data-hovered="true"] {
-    @apply bg-on-surface-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-on-surface-hover;
+    }
   }
 
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     background-color: var(--color-on-surface-focus);
   }
 }

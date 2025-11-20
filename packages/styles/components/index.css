@@ -1,38 +1,113 @@
-@import "./accordion.css";
-@import "./alert.css";
-@import "./avatar.css";
-@import "./button.css";
-@import "./card.css";
-@import "./checkbox.css";
-@import "./checkbox-group.css";
-@import "./chip.css";
-@import "./description.css";
+/* ------------------------------------------------------------------------------------------------
+ * Component Styles
+ * ------------------------------------------------------------------------------------------------
+ * CRITICAL: Import order matters for CSS specificity and style overrides.
+ *
+ * General Rule: Shared/primitive components MUST be imported FIRST, before components that use them.
+ * This ensures that parent component styles can properly override shared component defaults.
+ *
+ * Organization: Components are grouped by their Storybook categories (Components/Category/Name)
+ * to maintain consistency between documentation and implementation.
+ * ------------------------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------------------------
+ * Shared Components - MUST Import FIRST
+ * ------------------------------------------------------------------------------------------------
+ * These are used by multiple components and must be imported early to allow proper overrides.
+ * ------------------------------------------------------------------------------------------------ */
 @import "./close-button.css";
-@import "./disclosure.css";
-@import "./disclosure-group.css";
-@import "./kbd.css";
+@import "./description.css";
+@import "./field-error.css";
 @import "./label.css";
-@import "./link.css";
-@import "./listbox.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Buttons
+ * ------------------------------------------------------------------------------------------------ */
+@import "./button.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Collections
+ * ------------------------------------------------------------------------------------------------ */
+@import "./dropdown.css";
 @import "./listbox-item.css";
 @import "./listbox-section.css";
-@import "./header.css";
-@import "./popover.css";
-@import "./radio.css";
-@import "./radio-group.css";
-@import "./skeleton.css";
-@import "./spinner.css";
-@import "./surface.css";
+@import "./listbox.css";
+@import "./menu-item.css";
+@import "./menu-section.css";
+@import "./menu.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Controls
+ * ------------------------------------------------------------------------------------------------ */
+@import "./slider.css";
 @import "./switch.css";
 @import "./switch-group.css";
-@import "./tabs.css";
-@import "./tooltip.css";
-@import "./separator.css";
-@import "./select.css";
-@import "./slider.css";
-@import "./input.css";
-@import "./input-otp.css";
-@import "./textarea.css";
-@import "./text-field.css";
-@import "./field-error.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * DataDisplay
+ * ------------------------------------------------------------------------------------------------ */
+@import "./chip.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Feedback
+ * ------------------------------------------------------------------------------------------------ */
+@import "./alert.css";
+@import "./empty-state.css";
+@import "./skeleton.css";
+@import "./spinner.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Forms
+ * ------------------------------------------------------------------------------------------------ */
+@import "./checkbox-group.css";
+@import "./checkbox.css";
 @import "./fieldset.css";
+@import "./input-otp.css";
+@import "./input.css";
+@import "./input-group.css";
+@import "./number-field.css";
+@import "./radio-group.css";
+@import "./radio.css";
+@import "./text-field.css";
+@import "./textarea.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Layout
+ * ------------------------------------------------------------------------------------------------ */
+@import "./card.css";
+@import "./header.css";
+@import "./separator.css";
+@import "./surface.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Media
+ * ------------------------------------------------------------------------------------------------ */
+@import "./avatar.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Navigation
+ * ------------------------------------------------------------------------------------------------ */
+@import "./accordion.css";
+@import "./disclosure-group.css";
+@import "./disclosure.css";
+@import "./link.css";
+@import "./tabs.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Overlays
+ * ------------------------------------------------------------------------------------------------ */
+@import "./alert-dialog.css";
+@import "./modal.css";
+@import "./popover.css";
+@import "./tooltip.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Pickers
+ * ------------------------------------------------------------------------------------------------ */
+@import "./combobox.css";
+@import "./select.css";
+
+/* ------------------------------------------------------------------------------------------------
+ * Typography
+ * ------------------------------------------------------------------------------------------------ */
+@import "./kbd.css";

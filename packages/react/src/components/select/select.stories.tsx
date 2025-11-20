@@ -1,11 +1,10 @@
+import type {Key} from "../rac";
 import type {Selection} from "@react-types/shared";
 import type {Meta, StoryObj} from "@storybook/react";
-import type {Key} from "react-aria-components";
 
 import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React from "react";
-import {Collection, ListBoxLoadMoreItem} from "react-aria-components";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
@@ -16,6 +15,7 @@ import {Form} from "../form";
 import {Header} from "../header";
 import {Label} from "../label";
 import {ListBox} from "../listbox";
+import {Collection, ListBoxLoadMoreItem} from "../rac";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
 import {Surface} from "../surface";
@@ -42,7 +42,7 @@ export const Default: Story = {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="florida" textValue="Florida">
             Florida
@@ -69,7 +69,7 @@ export const Default: Story = {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   ),
 };
@@ -82,7 +82,7 @@ export const WithDescription: Story = {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="florida" textValue="Florida">
             Florida
@@ -109,7 +109,7 @@ export const WithDescription: Story = {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
       <Description>Select your state of residence</Description>
     </Select>
   ),
@@ -123,7 +123,7 @@ export const MultipleSelect: Story = {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox selectionMode="multiple">
           <ListBox.Item id="argentina" textValue="Argentina">
             Argentina
@@ -162,7 +162,7 @@ export const MultipleSelect: Story = {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   ),
 };
@@ -175,7 +175,7 @@ export const WithSections: Story = {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Section>
             <Header>North America</Header>
@@ -237,7 +237,7 @@ export const WithSections: Story = {
             </ListBox.Item>
           </ListBox.Section>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   ),
 };
@@ -250,7 +250,7 @@ export const WithDisabledOptions: Story = {
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="dog" textValue="Dog">
             Dog
@@ -277,7 +277,7 @@ export const WithDisabledOptions: Story = {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   ),
 };
@@ -292,7 +292,7 @@ export const CustomIndicator: Story = {
           <Icon icon="gravity-ui:chevrons-expand-vertical" />
         </Select.Indicator>
       </Select.Trigger>
-      <Select.Content>
+      <Select.Popover>
         <ListBox>
           <ListBox.Item id="florida" textValue="Florida">
             Florida
@@ -319,7 +319,7 @@ export const CustomIndicator: Story = {
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
-      </Select.Content>
+      </Select.Popover>
     </Select>
   ),
 };
@@ -347,7 +347,7 @@ export const Required: Story = {
             <Select.Value />
             <Select.Indicator />
           </Select.Trigger>
-          <Select.Content>
+          <Select.Popover>
             <ListBox>
               <ListBox.Item id="florida" textValue="Florida">
                 Florida
@@ -374,7 +374,7 @@ export const Required: Story = {
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
-          </Select.Content>
+          </Select.Popover>
           <FieldError />
         </Select>
         <Select isRequired className="w-full" name="country" placeholder="Select a country">
@@ -383,7 +383,7 @@ export const Required: Story = {
             <Select.Value />
             <Select.Indicator />
           </Select.Trigger>
-          <Select.Content>
+          <Select.Popover>
             <ListBox>
               <ListBox.Item id="usa" textValue="United States">
                 United States
@@ -410,7 +410,7 @@ export const Required: Story = {
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
-          </Select.Content>
+          </Select.Popover>
           <FieldError />
         </Select>
         <Button type="submit">Submit</Button>
@@ -443,7 +443,7 @@ export const OnSurface: Story = {
               <Select.Value />
               <Select.Indicator />
             </Select.Trigger>
-            <Select.Content>
+            <Select.Popover>
               <ListBox>
                 <ListBox.Item id="florida" textValue="Florida">
                   Florida
@@ -470,7 +470,7 @@ export const OnSurface: Story = {
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
               </ListBox>
-            </Select.Content>
+            </Select.Popover>
             <FieldError />
           </Select>
           <Select isRequired className="w-full" name="country" placeholder="Select a country">
@@ -479,7 +479,7 @@ export const OnSurface: Story = {
               <Select.Value />
               <Select.Indicator />
             </Select.Trigger>
-            <Select.Content>
+            <Select.Popover>
               <ListBox>
                 <ListBox.Item id="usa" textValue="United States">
                   United States
@@ -506,7 +506,7 @@ export const OnSurface: Story = {
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
               </ListBox>
-            </Select.Content>
+            </Select.Popover>
             <FieldError />
           </Select>
           <Button type="submit">Submit</Button>
@@ -591,7 +591,7 @@ export const CustomValue: Story = {
           </Select.Value>
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             {users.map((user) => (
               <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
@@ -607,7 +607,7 @@ export const CustomValue: Story = {
               </ListBox.Item>
             ))}
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
     );
   },
@@ -691,7 +691,7 @@ export const CustomValueMultiple: Story = {
           </Select.Value>
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             {users.map((user) => (
               <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
@@ -707,7 +707,7 @@ export const CustomValueMultiple: Story = {
               </ListBox.Item>
             ))}
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
     );
   },
@@ -759,7 +759,7 @@ export const Controlled: Story = {
             <Select.Value />
             <Select.Indicator />
           </Select.Trigger>
-          <Select.Content>
+          <Select.Popover>
             <ListBox>
               {states.map((state) => (
                 <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
@@ -768,7 +768,7 @@ export const Controlled: Story = {
                 </ListBox.Item>
               ))}
             </ListBox>
-          </Select.Content>
+          </Select.Popover>
         </Select>
         <p className="text-muted text-sm">Selected: {selectedState?.name || "None"}</p>
       </div>
@@ -790,7 +790,7 @@ export const ControlledMultiple: Story = {
             <Select.Value />
             <Select.Indicator />
           </Select.Trigger>
-          <Select.Content>
+          <Select.Popover>
             <ListBox
               selectedKeys={selected}
               selectionMode="multiple"
@@ -821,9 +821,9 @@ export const ControlledMultiple: Story = {
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
-          </Select.Content>
+          </Select.Popover>
         </Select>
-        <p className="text-sm text-neutral-500">
+        <p className="text-muted text-sm">
           Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
         </p>
       </div>
@@ -848,7 +848,7 @@ export const ControlledOpenState: Story = {
             <Select.Value />
             <Select.Indicator />
           </Select.Trigger>
-          <Select.Content>
+          <Select.Popover>
             <ListBox>
               <ListBox.Item id="florida" textValue="Florida">
                 Florida
@@ -875,10 +875,10 @@ export const ControlledOpenState: Story = {
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
-          </Select.Content>
+          </Select.Popover>
         </Select>
         <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "Close" : "Open"} Select</Button>
-        <p className="text-sm text-neutral-500">Select is {isOpen ? "open" : "closed"}</p>
+        <p className="text-muted text-sm">Select is {isOpen ? "open" : "closed"}</p>
       </div>
     );
   },
@@ -909,7 +909,7 @@ export const AsynchronousLoading: Story = {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <Collection items={list.items}>
               {(item: Pokemon) => (
@@ -925,11 +925,11 @@ export const AsynchronousLoading: Story = {
             >
               <div className="flex items-center justify-center gap-2 py-2">
                 <Spinner size="sm" />
-                <span className="text-sm text-neutral-500">Loading more...</span>
+                <span className="text-muted text-sm">Loading more...</span>
               </div>
             </ListBoxLoadMoreItem>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
     );
   },
@@ -944,7 +944,7 @@ export const Disabled: Story = {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="florida" textValue="Florida">
               Florida
@@ -971,7 +971,7 @@ export const Disabled: Story = {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
       <Select
         isDisabled
@@ -985,7 +985,7 @@ export const Disabled: Story = {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="argentina" textValue="Argentina">
               Argentina
@@ -1012,7 +1012,7 @@ export const Disabled: Story = {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
     </div>
   ),

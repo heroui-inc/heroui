@@ -19,14 +19,14 @@
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 
@@ -47,13 +47,15 @@
 .close-button--default {
   @apply text-muted bg-transparent;
 
-  &:hover,
-  &[data-hovered="true"] {
-    @apply text-foreground bg-default;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply text-foreground bg-default;
+    }
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed] {
     transform: scale(0.93);
   }
 }

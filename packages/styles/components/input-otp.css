@@ -2,7 +2,7 @@
 .input-otp {
   @apply relative flex items-center gap-2;
 
-  &[data-disabled="true"] {
+  &[data-disabled] {
     @apply cursor-not-allowed opacity-50;
   }
 }
@@ -32,29 +32,31 @@
   @apply motion-reduce:transition-none;
 
   /* Hover */
-  &:hover,
-  &[data-hovered="true"] {
-    @apply bg-field-hover;
-    border-color: var(--color-field-border-hover);
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
   }
 
   /* Active/Focus */
-  &[data-active="true"] {
+  &[data-active] {
     @apply bg-field-focus status-focused-field z-10;
   }
 
   /* Filled */
-  &[data-filled="true"] {
+  &[data-filled] {
     @apply bg-field-focus;
   }
 
   /* Disabled */
-  &[data-disabled="true"] {
+  &[data-disabled] {
     @apply status-disabled;
   }
 
   /* Invalid */
-  &[data-invalid="true"] {
+  &[data-invalid] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
@@ -80,23 +82,25 @@
 
 /* Separator */
 .input-otp__separator {
-  @apply bg-divider h-[2px] w-[6px] shrink-0 rounded-[4px];
+  @apply bg-separator h-[2px] w-[6px] shrink-0 rounded-[4px];
 }
 
 /* Variant modifiers */
 .input-otp--on-surface .input-otp__slot {
   @apply bg-on-surface shadow-none;
 
-  &:hover,
-  &[data-hovered="true"] {
-    @apply bg-on-surface-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-on-surface-hover;
+    }
   }
 
-  &[data-active="true"] {
+  &[data-active] {
     background-color: var(--color-on-surface-focus);
   }
 
-  &[data-filled="true"] {
+  &[data-filled] {
     background-color: var(--color-on-surface-focus);
   }
 }

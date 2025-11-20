@@ -11,14 +11,14 @@
   cursor: var(--cursor-interactive);
 
   /* Focus state */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 }
@@ -32,7 +32,7 @@
   @apply duration-250 transition motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded="true"] {
+  &[data-expanded] {
     @apply -rotate-180;
   }
 }
@@ -52,7 +52,7 @@
     opacity 340ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded="true"] {
+  &[data-expanded] {
     opacity: 1;
   }
 }

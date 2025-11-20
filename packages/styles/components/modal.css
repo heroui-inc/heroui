@@ -1,0 +1,222 @@
+/* ------------------------------------------------------------------------------------------------
+ * Trigger
+ * ------------------------------------------------------------------------------------------------ */
+.modal__trigger {
+  @apply cursor-(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Focus  state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled] {
+    @apply status-disabled;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Backdrop - The overlay behind the dialog
+ * ------------------------------------------------------------------------------------------------ */
+.modal__backdrop {
+  @apply h-(--visual-viewport-height) fixed inset-0 isolate z-50;
+
+  /* Entering animation */
+  &[data-entering] {
+    @apply animate-in fade-in-0 ease-fluid-out duration-250;
+  }
+
+  /* Exiting animation */
+  &[data-exiting] {
+    @apply animate-out fade-out-0 ease-out-quart duration-200;
+  }
+
+  /**
+   * Reduce Animation
+   * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
+   */
+  &[data-entering],
+  &[data-exiting] {
+    @apply motion-reduce:animate-none;
+  }
+}
+
+/* Backdrop Variants */
+.modal__backdrop--transparent {
+  @apply bg-transparent;
+}
+
+.modal__backdrop--solid {
+  @apply bg-black/50 dark:bg-black/60;
+}
+
+.modal__backdrop--blur {
+  @apply bg-black/50 backdrop-blur-md dark:bg-black/60;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Container - Positioning wrapper with placement support
+ * ------------------------------------------------------------------------------------------------
+ * Handles modal positioning, scroll behavior, and animations.
+ * Adapts to mobile keyboards by using visual viewport height.
+ * ------------------------------------------------------------------------------------------------ */
+.modal__container {
+  @apply max-h-(--visual-viewport-height) fixed left-1/2 flex w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
+  @apply transform-gpu will-change-transform;
+
+  /* Auto - bottom on mobile, center on desktop */
+  &[data-placement="auto"] {
+    @apply top-[calc(var(--visual-viewport-height)-theme(spacing.2))] -translate-y-full items-end;
+    @apply sm:top-[calc(var(--visual-viewport-height)/2)] sm:-translate-y-1/2 sm:items-center;
+  }
+
+  &[data-placement="top"] {
+    @apply top-2 items-start sm:top-6;
+  }
+
+  &[data-placement="center"] {
+    @apply top-[calc(var(--visual-viewport-height)/2)] -translate-y-1/2;
+  }
+
+  &[data-placement="bottom"] {
+    @apply top-[calc(var(--visual-viewport-height)-theme(spacing.2))] -translate-y-full items-end;
+    @apply sm:top-[calc(var(--visual-viewport-height)-theme(spacing.6))];
+  }
+
+  /* Entering animation */
+  &[data-entering] {
+    @apply animate-in fade-in-0 zoom-in-95 ease-out-quad duration-250;
+
+    &[data-placement="auto"] {
+      @apply slide-in-from-bottom-1 sm:slide-in-from-bottom-0;
+    }
+
+    &[data-placement="top"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement="center"] {
+    }
+
+    &[data-placement="bottom"] {
+      @apply slide-in-from-bottom-1;
+    }
+  }
+
+  /* Exiting animation */
+  &[data-exiting] {
+    /* TODO: looking into how to sync the animation duration with the backdrop, for now the container needs to exit a bit earlier */
+    @apply animate-out fade-out-0 zoom-out-95 ease-out-quart duration-150;
+  }
+
+  /**
+   * Reduce Animation
+   * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
+   */
+  &[data-entering],
+  &[data-exiting] {
+    @apply motion-reduce:animate-none;
+  }
+}
+
+/* container variants - scroll outside  */
+.modal__container--scroll-outside {
+  @apply !h-full !max-h-[var(--visual-viewport-height)] !items-start justify-center overflow-y-auto p-0;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Dialog - The modal content container
+ * ------------------------------------------------------------------------------------------------
+ * The actual dialog box containing the modal content.
+ * Animations are handled by the container for better separation of concerns.
+ * ------------------------------------------------------------------------------------------------ */
+.modal__dialog {
+  @apply bg-overlay shadow-overlay relative flex w-full flex-col rounded-3xl outline-none;
+}
+
+/* dialog variants - scroll inside  */
+.modal__dialog--scroll-inside {
+  @apply max-h-[calc(var(--visual-viewport-height)-8rem)] overflow-y-hidden;
+}
+
+/* dialog variants - scroll outside  */
+.modal__dialog--scroll-outside {
+  @apply mx-1 my-16 sm:mx-6;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Content Sections - Header, Body, Footer
+ * ------------------------------------------------------------------------------------------------ */
+
+/* Header - Top section with title and optional description */
+.modal__header {
+  @apply flex flex-col gap-3 px-6 pt-6;
+
+  /* When header contains icon, use flex-col layout with gap */
+  & > .modal__icon {
+    @apply mb-0;
+  }
+}
+
+/* Heading - Main title text of the modal */
+.modal__heading {
+  @apply text-foreground align-middle text-base font-medium;
+}
+
+/* Icon - Optional icon indicator for the modal */
+.modal__icon {
+  @apply flex size-10 shrink-0 select-none items-center justify-center rounded-full;
+}
+
+/* Body - Main content area */
+.modal__body {
+  @apply text-muted flex-1 px-6 py-5 text-sm leading-[1.43];
+}
+
+/* body variants - scroll inside  */
+.modal__body--scroll-inside {
+  @apply overflow-y-auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* body variants - scroll outside  */
+.modal__body--scroll-outside {
+  @apply overflow-y-visible;
+}
+
+/* When body follows header, adjust top spacing */
+.modal__header + .modal__body {
+  @apply pt-2;
+}
+
+/* Footer - Bottom section typically for actions */
+.modal__footer {
+  @apply flex flex-row items-center justify-end gap-2 px-6 pb-6;
+}
+
+/* When footer directly follows header (no body), increase top spacing */
+.modal__header + .modal__footer {
+  @apply pt-5;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Close Trigger - Optional dismiss button
+ * ------------------------------------------------------------------------------------------------
+ * Positioned absolutely in top-right corner.
+ * Provides tactile feedback with scale transform on press.
+ * ------------------------------------------------------------------------------------------------ */
+.modal__close-trigger {
+  @apply absolute right-4 top-4;
+}

@@ -17,16 +17,18 @@
   cursor: var(--cursor-interactive);
 
   /* Hover state */
-  &:hover,
-  &[data-hovered="true"] {
-    .link__icon {
-      @apply opacity-100;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      .link__icon {
+        @apply opacity-100;
+      }
     }
   }
 
   /* Focus state */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     @apply status-focused;
 
     .link__icon {
@@ -35,7 +37,7 @@
   }
 
   /* Disabled state */
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 
@@ -50,7 +52,7 @@
     @apply motion-reduce:transition-none;
   }
 
-  .link__icon[data-default-icon="true"] {
+  .link__icon[data-default-icon] {
     @apply ml-1 pb-1.5;
   }
 }
@@ -58,9 +60,11 @@
 /* Underline variants */
 .link--underline-none {
   /* No underline - use opacity for hover feedback */
-  &:hover,
-  &[data-hovered="true"] {
-    @apply opacity-80;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply opacity-80;
+    }
   }
 }
 
@@ -81,9 +85,11 @@
     @apply motion-reduce:transition-none;
   }
 
-  &:hover::before,
-  &[data-hovered="true"]::before {
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover::before,
+    &[data-hovered]::before {
+      opacity: 1;
+    }
   }
 }
 
@@ -104,9 +110,11 @@
     @apply motion-reduce:transition-none;
   }
 
-  &:hover::before,
-  &[data-hovered="true"]::before {
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover::before,
+    &[data-hovered]::before {
+      opacity: 1;
+    }
   }
 }
 

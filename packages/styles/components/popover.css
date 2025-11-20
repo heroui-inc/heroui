@@ -54,11 +54,6 @@
 /* Popover dialog */
 .popover__dialog {
   @apply p-4;
-
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    @apply status-focused;
-  }
 }
 
 /* Popover heading */
@@ -81,14 +76,14 @@
   cursor: var(--cursor-interactive);
 
   /* Focus state */
-  &:focus-visible,
-  &[data-focus-visible="true"] {
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled="true"] {
+  &[aria-disabled] {
     @apply status-disabled;
   }
 }

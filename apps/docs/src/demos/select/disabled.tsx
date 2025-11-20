@@ -9,7 +9,7 @@ export function Disabled() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="florida" textValue="Florida">
               Florida
@@ -36,7 +36,7 @@ export function Disabled() {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
       <Select
         isDisabled
@@ -50,7 +50,7 @@ export function Disabled() {
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
-        <Select.Content>
+        <Select.Popover>
           <ListBox>
             <ListBox.Item id="argentina" textValue="Argentina">
               Argentina
@@ -77,7 +77,7 @@ export function Disabled() {
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
-        </Select.Content>
+        </Select.Popover>
       </Select>
     </div>
   );

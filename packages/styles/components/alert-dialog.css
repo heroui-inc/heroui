@@ -1,0 +1,218 @@
+/* ------------------------------------------------------------------------------------------------
+ * Trigger
+ * ------------------------------------------------------------------------------------------------ */
+.alert-dialog__trigger {
+  @apply cursor-(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Focus  state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled] {
+    @apply status-disabled;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Backdrop - The overlay behind the dialog
+ * ------------------------------------------------------------------------------------------------ */
+.alert-dialog__backdrop {
+  @apply h-(--visual-viewport-height) fixed inset-0 isolate z-50;
+
+  /* Entering animation */
+  &[data-entering] {
+    @apply animate-in fade-in-0 ease-fluid-out duration-250;
+  }
+
+  /* Exiting animation */
+  &[data-exiting] {
+    @apply animate-out fade-out-0 ease-out-quart duration-200;
+  }
+
+  /**
+   * Reduce Animation
+   * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
+   */
+  &[data-entering],
+  &[data-exiting] {
+    @apply motion-reduce:animate-none;
+  }
+}
+
+/* Backdrop Variants */
+.alert-dialog__backdrop--transparent {
+  @apply bg-transparent;
+}
+
+.alert-dialog__backdrop--solid {
+  @apply bg-black/50 dark:bg-black/60;
+}
+
+.alert-dialog__backdrop--blur {
+  @apply bg-black/50 backdrop-blur-md dark:bg-black/60;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Container - Positioning wrapper with placement support
+ * ------------------------------------------------------------------------------------------------
+ * Handles alert dialog positioning and animations.
+ * ------------------------------------------------------------------------------------------------ */
+.alert-dialog__container {
+  @apply max-h-(--visual-viewport-height) fixed left-1/2 flex w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
+  @apply transform-gpu will-change-transform;
+
+  /* Auto - bottom on mobile, center on desktop */
+  &[data-placement="auto"] {
+    @apply top-[calc(var(--visual-viewport-height)-theme(spacing.2))] -translate-y-full items-end;
+    @apply sm:top-[calc(var(--visual-viewport-height)/2)] sm:-translate-y-1/2 sm:items-center;
+  }
+
+  &[data-placement="top"] {
+    @apply top-2 items-start sm:top-6;
+  }
+
+  &[data-placement="center"] {
+    @apply top-[calc(var(--visual-viewport-height)/2)] -translate-y-1/2;
+  }
+
+  &[data-placement="bottom"] {
+    @apply top-[calc(var(--visual-viewport-height)-theme(spacing.2))] -translate-y-full items-end;
+    @apply sm:top-[calc(var(--visual-viewport-height)-theme(spacing.6))];
+  }
+
+  /* Entering animation */
+  &[data-entering] {
+    @apply animate-in fade-in-0 zoom-in-95 ease-out-quad duration-250;
+
+    &[data-placement="auto"] {
+      @apply slide-in-from-bottom-1 sm:slide-in-from-bottom-0;
+    }
+
+    &[data-placement="top"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement="center"] {
+    }
+
+    &[data-placement="bottom"] {
+      @apply slide-in-from-bottom-1;
+    }
+  }
+
+  /* Exiting animation */
+  &[data-exiting] {
+    @apply animate-out fade-out-0 zoom-out-95 ease-out-quart duration-150;
+  }
+
+  /**
+   * Reduce Animation
+   * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
+   */
+  &[data-entering],
+  &[data-exiting] {
+    @apply motion-reduce:animate-none;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Dialog - The alert dialog content container
+ * ------------------------------------------------------------------------------------------------
+ * The actual dialog box containing the alert content.
+ * ------------------------------------------------------------------------------------------------ */
+.alert-dialog__dialog {
+  @apply bg-overlay shadow-overlay relative flex w-full flex-col rounded-3xl outline-none;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Content Sections - Header (Heading), Body, Footer
+ * ------------------------------------------------------------------------------------------------ */
+
+/* Header - Top section with title and optional icon */
+.alert-dialog__header {
+  @apply flex flex-col gap-3 px-6 pt-6;
+
+  /* When header contains icon, use flex-col layout with gap */
+  & > .alert-dialog__icon {
+    @apply mb-0;
+  }
+}
+
+/* Heading - Main title text of the alert dialog */
+.alert-dialog__heading {
+  @apply text-foreground align-middle text-base font-medium;
+}
+
+/* Icon - Optional icon indicator for the alert dialog */
+.alert-dialog__icon {
+  @apply flex size-10 shrink-0 select-none items-center justify-center rounded-full;
+
+  [data-slot="alert-dialog-default-icon"] {
+    @apply box-content size-5;
+  }
+}
+
+/* Icon Status Variants - Soft colored backgrounds with matching foreground colors */
+.alert-dialog__icon--default {
+  @apply bg-default text-foreground;
+}
+
+.alert-dialog__icon--accent {
+  @apply bg-accent-soft text-accent-soft-foreground;
+}
+
+.alert-dialog__icon--success {
+  @apply bg-success-soft text-success-soft-foreground;
+}
+
+.alert-dialog__icon--warning {
+  @apply bg-warning-soft text-warning-soft-foreground;
+}
+
+.alert-dialog__icon--danger {
+  @apply bg-danger-soft text-danger-soft-foreground;
+}
+
+/* Body - Main content area with descriptive text */
+.alert-dialog__body {
+  @apply text-muted flex-1 px-6 py-5 text-sm leading-[1.43];
+}
+
+/* When body follows header, adjust top spacing */
+.alert-dialog__header + .alert-dialog__body {
+  @apply pt-2;
+}
+
+/* Footer - Bottom section for action buttons (Cancel/Confirm) */
+.alert-dialog__footer {
+  @apply flex flex-row items-center justify-end gap-2 px-6 pb-6;
+}
+
+/* When footer directly follows header (no body), increase top spacing */
+.alert-dialog__header + .alert-dialog__footer {
+  @apply pt-5;
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Close Trigger - Optional dismiss button
+ * ------------------------------------------------------------------------------------------------
+ * Positioned absolutely in top-right corner.
+ * Note: Alert dialogs typically require explicit action, so this may be hidden.
+ * ------------------------------------------------------------------------------------------------ */
+.alert-dialog__close-trigger {
+  @apply absolute right-4 top-4;
+}

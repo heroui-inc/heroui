@@ -35,6 +35,16 @@
     /* Flex container for centering pseudo-elements */
     @apply bg-accent absolute relative flex cursor-grab items-center justify-center rounded-full;
 
+    /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+    transition:
+      background-color 250ms var(--ease-smooth),
+      transform 250ms var(--ease-out),
+      box-shadow 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+
     /* after: Visible thumb element */
     &::after {
       @apply shadow-field relative z-10 rounded-full bg-white text-black;
@@ -56,8 +66,8 @@
     }
 
     /* Focus state - increase z-index */
-    &[data-focused] {
-      @apply z-10;
+    &[data-focus-visible] {
+      @apply status-focused z-10;
     }
 
     /* Disabled state */
@@ -68,8 +78,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled],
+  &[aria-disabled] {
     @apply status-disabled;
 
     [data-slot="label"] {
@@ -87,11 +97,11 @@
       /* Thumb width is 1.5rem (24px), so half is 0.75rem (12px) */
       @apply border-x-[0.75rem] border-x-transparent;
 
-      &[data-fill-start="true"] {
+      &[data-fill-start] {
         @apply border-s-accent;
       }
 
-      &[data-fill-end="true"] {
+      &[data-fill-end] {
         @apply border-e-accent;
       }
     }
@@ -141,11 +151,11 @@
       @apply border-y-[0.75rem] border-y-transparent;
       justify-self: center;
 
-      &[data-fill-start="true"] {
+      &[data-fill-start] {
         @apply border-b-accent;
       }
 
-      &[data-fill-end="true"] {
+      &[data-fill-end] {
         @apply border-t-accent;
       }
     }

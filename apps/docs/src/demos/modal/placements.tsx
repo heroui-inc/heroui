@@ -1,0 +1,48 @@
+"use client";
+
+import {Button, Modal} from "@heroui/react";
+import {Icon} from "@iconify/react";
+
+export function Placements() {
+  const placements = ["auto", "top", "center", "bottom"] as const;
+
+  return (
+    <div className="flex flex-wrap gap-4">
+      {placements.map((placement) => (
+        <Modal key={placement}>
+          <Button variant="secondary">
+            {placement.charAt(0).toUpperCase() + placement.slice(1)}
+          </Button>
+          <Modal.Container placement={placement}>
+            <Modal.Dialog className="sm:max-w-[360px]">
+              {({close}) => (
+                <>
+                  <Modal.CloseTrigger />
+                  <Modal.Header>
+                    <Modal.Icon className="bg-default text-foreground">
+                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                    </Modal.Icon>
+                    <Modal.Heading>
+                      Placement: {placement.charAt(0).toUpperCase() + placement.slice(1)}
+                    </Modal.Heading>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>
+                      This modal uses the <code>{placement}</code> placement option. Try different
+                      placements to see how the modal positions itself on the screen.
+                    </p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button className="w-full" onPress={close}>
+                      Continue
+                    </Button>
+                  </Modal.Footer>
+                </>
+              )}
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal>
+      ))}
+    </div>
+  );
+}

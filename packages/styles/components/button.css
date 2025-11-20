@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 w-fit origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium md:h-9;
+  @apply relative isolate inline-flex h-10 w-fit origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium outline-none md:h-9;
 
   /**
    * Transitions
@@ -17,8 +17,8 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Focus  state */
-  &:focus-visible,
+  /* Focus state */
+  &:focus-visible:not(:focus),
   &[data-focus-visible] {
     @apply status-focused;
   }
@@ -77,54 +77,66 @@
 .button--primary {
   @apply bg-accent text-accent-foreground;
 
-  &:hover,
-  &[data-hovered] {
-    @apply bg-accent-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-accent-hover;
+    }
   }
 }
 
 .button--secondary {
   @apply bg-default text-accent;
 
-  &:hover,
-  &[data-hovered] {
-    @apply bg-default-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-default-hover;
+    }
   }
 }
 
 .button--tertiary {
   @apply bg-default;
 
-  &:hover,
-  &[data-hovered] {
-    @apply bg-default-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-default-hover;
+    }
   }
 }
 
 .button--ghost {
   @apply text-default-foreground bg-transparent;
 
-  &:hover,
-  &[data-hovered] {
-    @apply bg-default-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-default-hover;
+    }
   }
 }
 
 .button--danger {
   @apply bg-danger text-danger-foreground;
 
-  &:hover,
-  &[data-hovered] {
-    @apply bg-danger-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-danger-hover;
+    }
   }
 }
 
 .button--danger-soft {
   @apply bg-danger-soft text-danger-soft-foreground;
 
-  &:hover,
-  &[data-hovered] {
-    @apply bg-danger-soft-hover;
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered] {
+      @apply bg-danger-soft-hover;
+    }
   }
 }
 

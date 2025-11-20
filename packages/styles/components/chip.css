@@ -42,11 +42,11 @@
 }
 
 .chip--md {
-  /* No styles as this is the default size */
+  @apply text-xs;
 }
 
 .chip--lg {
-  @apply px-3 py-1 font-medium;
+  @apply px-3 py-1 text-sm font-medium;
 }
 
 /* ====================== */

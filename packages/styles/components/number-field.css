@@ -1,0 +1,162 @@
+/* Number field styles */
+.number-field {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid],
+  &[aria-invalid] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit;
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+}
+
+.number-field__group {
+  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
+  }
+
+  /* Focus within state */
+  &[data-focus-within],
+  &:focus-within {
+    @apply status-focused-field;
+  }
+
+  /* Invalid state */
+  &[data-invalid] {
+    @apply status-invalid-field;
+    background-color: var(--color-field-focus);
+    border-color: var(--color-field-border-invalid);
+  }
+
+  /* Disabled state */
+  &[data-disabled],
+  &[aria-disabled] {
+    @apply status-disabled pointer-events-none;
+  }
+}
+
+.number-field__input {
+  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 tabular-nums shadow-none outline-none;
+
+  /* Remove border radius on left side when decrement button is present */
+  .number-field__group:has([slot="decrement"]) & {
+    @apply rounded-l-none;
+  }
+
+  /* Remove border radius on right side when increment button is present */
+  .number-field__group:has([slot="increment"]) & {
+    @apply rounded-r-none;
+  }
+
+  /* Focus state - handled by group */
+  &:focus,
+  &:focus-visible {
+    @apply outline-none;
+  }
+}
+
+.number-field__increment-button,
+.number-field__decrement-button {
+  @apply text-field-foreground flex h-full w-10 items-center justify-center rounded-none bg-transparent outline-none;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+  border-style: solid;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Hover state */
+  &:hover,
+  &[data-hovered] {
+  }
+
+  /* Focus visible state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
+  }
+
+  /* Pressed state */
+  &:active,
+  &[data-pressed] {
+    @apply bg-field-foreground/10;
+    transform: scale(0.97);
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled],
+  &[aria-disabled] {
+    @apply status-disabled pointer-events-none;
+  }
+
+  /* Icon styling */
+  [data-slot="number-field-increment-button-icon"],
+  [data-slot="number-field-decrement-button-icon"] {
+    @apply size-4;
+  }
+}
+
+.number-field__increment-button {
+  @apply rounded-r-field border-field-placeholder/15 rounded-l-none border-l;
+}
+
+.number-field__decrement-button {
+  @apply rounded-l-field border-field-placeholder/15 rounded-r-none border-r;
+}
+
+/* On Surface variant */
+.number-field__group--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-on-surface-hover;
+    }
+  }
+
+  &:focus-within,
+  &[data-focus-within] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  [data-slot="number-field-input"] {
+    @apply bg-transparent;
+  }
+}

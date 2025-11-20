@@ -11,6 +11,7 @@ import {ComponentItem} from "./component-item";
 const COMPONENT_NAMES = [
   "accordion",
   "alert",
+  "alert-dialog",
   "avatar",
   "button",
   "card",
@@ -18,18 +19,23 @@ const COMPONENT_NAMES = [
   "checkbox-group",
   "chip",
   "close-button",
+  "combobox",
   "description",
   "disclosure",
   "disclosure-group",
+  "dropdown",
   "field-error",
   "fieldset",
   "form",
   "input",
+  "input-group",
   "input-otp",
   "kbd",
   "label",
   "link",
   "listbox",
+  "modal",
+  "number-field",
   "popover",
   "radio-group",
   "separator",
@@ -67,7 +73,9 @@ export function ComponentsList() {
   }).filter((item): item is NonNullable<typeof item> => item !== null);
 
   return (
-    <div className={cn("not-prose grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3")}>
+    <div
+      className={cn("not-prose grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3")}
+    >
       {components.map(({component, status}) => (
         <ComponentItem
           key={component.name}
