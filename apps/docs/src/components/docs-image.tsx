@@ -1,4 +1,7 @@
+import type {UrlObject} from "url";
+
 import Image from "next/image";
+import Link from "next/link";
 
 interface DocsImageProps {
   src: string;
@@ -8,6 +11,7 @@ interface DocsImageProps {
   width?: number;
   height?: number;
   priority?: boolean;
+  href?: string;
 }
 
 export function DocsImage({
@@ -15,45 +19,50 @@ export function DocsImage({
   className = "h-[220px] md:h-[340px]",
   darkSrc,
   height = 1000,
+  href,
   priority = true,
   src,
   width = 1000,
 }: DocsImageProps) {
-  const wrapperClasses = `not-prose border border-separator relative w-full overflow-hidden rounded-xl ${className}`;
+  const wrapperClasses = `block not-prose border border-separator relative w-full overflow-hidden rounded-xl ${className}`;
 
-  if (darkSrc) {
-    return (
-      <div className={wrapperClasses}>
-        <Image
-          alt={alt}
-          className="absolute inset-0 block h-full w-full object-cover dark:hidden"
-          height={height}
-          priority={priority}
-          src={src}
-          width={width}
-        />
-        <Image
-          alt={alt}
-          className="absolute inset-0 hidden h-full w-full object-cover dark:block"
-          height={height}
-          priority={priority}
-          src={darkSrc}
-          width={width}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className={wrapperClasses}>
+  const imageContent = darkSrc ? (
+    <>
       <Image
         alt={alt}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 block h-full w-full object-cover dark:hidden"
         height={height}
         priority={priority}
         src={src}
         width={width}
       />
-    </div>
+      <Image
+        alt={alt}
+        className="absolute inset-0 hidden h-full w-full object-cover dark:block"
+        height={height}
+        priority={priority}
+        src={darkSrc}
+        width={width}
+      />
+    </>
+  ) : (
+    <Image
+      alt={alt}
+      className="absolute inset-0 h-full w-full object-cover"
+      height={height}
+      priority={priority}
+      src={src}
+      width={width}
+    />
   );
+
+  if (href) {
+    return (
+      <Link className={wrapperClasses} href={href as unknown as UrlObject}>
+        {imageContent}
+      </Link>
+    );
+  }
+
+  return <div className={wrapperClasses}>{imageContent}</div>;
 }
