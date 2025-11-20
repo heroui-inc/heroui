@@ -1,6 +1,6 @@
 {
   "mode": "pre",
-  "tag": "alpha",
+  "tag": "beta",
   "initialVersions": {
     "@heroui/react": "3.0.0-beta.2",
     "@heroui/styles": "3.0.0-beta.2"
