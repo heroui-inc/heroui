@@ -171,8 +171,8 @@
 }
 
 /* Heading - Main title text of the modal */
-.modal__heading-dialog__heading {
-  @apply text-foreground align-middle text-base font-semibold;
+.modal__heading {
+  @apply text-foreground align-middle text-base font-medium;
 }
 
 /* Icon - Optional icon indicator for the modal */

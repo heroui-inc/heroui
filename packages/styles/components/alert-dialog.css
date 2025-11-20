@@ -154,7 +154,7 @@
 
 /* Heading - Main title text of the alert dialog */
 .alert-dialog__heading {
-  @apply text-foreground align-middle text-base font-semibold;
+  @apply text-foreground align-middle text-base font-medium;
 }
 
 /* Icon - Optional icon indicator for the alert dialog */
