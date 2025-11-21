@@ -15,6 +15,10 @@ export interface ComponentLinksType {
   [key: string]: string | boolean | undefined;
 }
 
+export interface GithubInfoType {
+  pull?: number;
+}
+
 /**
  * Extracts the links field from MDX frontmatter
  * @param content - The raw MDX content string
@@ -31,6 +35,27 @@ export function extractLinksFromMDX(content: string): ComponentLinksType | null 
     return null;
   } catch (error) {
     console.error("Error extracting links from MDX:", error);
+
+    return null;
+  }
+}
+
+/**
+ * Extracts the github field from MDX frontmatter
+ * @param content - The raw MDX content string
+ * @returns The parsed github object or null if not found
+ */
+export function extractGithubFromMDX(content: string): GithubInfoType | null {
+  try {
+    const {data} = matter(content);
+
+    if (data["github"] && typeof data["github"] === "object") {
+      return data["github"] as GithubInfoType;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting github info from MDX:", error);
 
     return null;
   }

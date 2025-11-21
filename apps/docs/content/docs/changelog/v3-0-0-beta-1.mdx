@@ -1,6 +1,8 @@
 ---
 title: v3.0.0-beta.1
 description: Major redesign with new design system, 8 new components, and improved developer experience.
+github:
+  pull: 5872
 ---
 
 <div className="flex items-center gap-3 mb-6">
@@ -590,7 +592,7 @@ You can override any auto-calculated values using Tailwind's `@theme` directive:
 @theme inline {
   /* Adjust surface levels */
   --color-surface-secondary: color-mix(in oklab, var(--surface) 96%, var(--surface-foreground) 4%);
-  
+
   /* Adjust soft colors */
   --color-accent-soft: color-mix(in oklab, var(--color-accent) 20%, transparent);
 }
@@ -864,3 +866,4 @@ See what the community is saying: [HeroUI Native Reception](https://x.com/hero_u
 
 Thanks to everyone who contributed to this release, helping us create a design system that's both beautiful and practical!
 
+<PRContributors />

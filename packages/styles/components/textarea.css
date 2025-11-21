@@ -35,6 +35,12 @@
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
+
+  /* Disabled state */
+  &[data-disabled],
+  &[aria-disabled] {
+    @apply status-disabled pointer-events-none;
+  }
 }
 
 /* Variant modifiers */

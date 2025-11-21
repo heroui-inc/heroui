@@ -8,11 +8,12 @@ import {notFound} from "next/navigation";
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {NewsletterForm} from "@/components/newsletter-form";
+import {PRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {DOCS_CONTENT_PATH} from "@/utils/constants";
-import {extractLinksFromMDX} from "@/utils/extract-links";
+import {extractGithubFromMDX, extractLinksFromMDX} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
 const componentStatusIcons = ["preview", "new", "updated"];
@@ -35,6 +36,9 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
 
   // Extract links from MDX content
   const links = extractLinksFromMDX(page.data.content);
+
+  // Extract GitHub info from MDX content
+  const githubInfo = extractGithubFromMDX(page.data.content);
 
   return (
     <DocsPage
@@ -71,6 +75,8 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
       <DocsBody className="prose-sm">
         <MDXContent
           components={getMDXComponents({
+            PRContributors: () => <PRContributors github={githubInfo} />,
+
             // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page),
           })}
