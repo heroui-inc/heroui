@@ -539,4 +539,63 @@ describe("Tabs", () => {
       expect(newTabButtons[2]).toHaveAttribute("aria-selected", "true");
     });
   });
+
+  test("should have correct aria-orientation for vertical tabs", () => {
+    const wrapper = render(
+      <Tabs isVertical aria-label="Vertical tabs test">
+        <Tab key="item1" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" title="Item 2">
+          <div>Content 2</div>
+        </Tab>
+        <Tab key="item3" title="Item 3">
+          <div>Content 3</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const tablist = wrapper.getByRole("tablist");
+
+    expect(tablist).toHaveAttribute("aria-orientation", "vertical");
+  });
+
+  test("should navigate vertical tabs with ArrowUp and ArrowDown keys", async () => {
+    const wrapper = render(
+      <Tabs isVertical aria-label="Vertical tabs keyboard test">
+        <Tab key="item1" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" title="Item 2">
+          <div>Content 2</div>
+        </Tab>
+        <Tab key="item3" title="Item 3">
+          <div>Content 3</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const tab1 = wrapper.getByRole("tab", {name: "Item 1"});
+    const tab2 = wrapper.getByRole("tab", {name: "Item 2"});
+    const tab3 = wrapper.getByRole("tab", {name: "Item 3"});
+
+    act(() => {
+      focus(tab1);
+    });
+
+    await user.keyboard("[ArrowDown]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
+
+    await user.keyboard("[ArrowDown]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "false");
+    expect(tab3).toHaveAttribute("aria-selected", "true");
+
+    await user.keyboard("[ArrowUp]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
+  });
 });
