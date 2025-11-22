@@ -40,7 +40,7 @@
     "remark": "15.0.1",
     "remark-gfm": "4.0.1",
     "remark-mdx": "3.1.1",
-    "shiki": "3.15.0",
+    "shiki": "3.13.0",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2",
     "ts-morph": "27.0.2",
