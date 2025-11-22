@@ -3,7 +3,7 @@
 import {Button, Disclosure, DisclosureGroup, Separator} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 export function Basic() {
   const [expandedKeys, setExpandedKeys] = React.useState(new Set<string | number>(["preview"]));
@@ -17,7 +17,7 @@ export function Basic() {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("preview"),
                 })}
               >
@@ -52,7 +52,7 @@ export function Basic() {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("download"),
                 })}
               >

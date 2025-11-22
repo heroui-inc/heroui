@@ -56,16 +56,16 @@
   "clean-package": "./clean-package.config.json",
   "dependencies": {
     "@internationalized/date": "3.10.0",
-    "@radix-ui/react-avatar": "1.1.10",
-    "@radix-ui/react-slot": "1.2.3",
+    "@radix-ui/react-avatar": "1.1.11",
+    "@radix-ui/react-slot": "1.2.4",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/utils": "3.31.0",
     "@react-types/shared": "3.32.1",
     "clsx": "2.1.1",
     "input-otp": "1.4.2",
     "react-aria-components": "1.13.0",
-    "tailwind-merge": "3.3.1",
-    "tailwind-variants": "3.1.1"
+    "tailwind-merge": "3.4.0",
+    "tailwind-variants": "3.2.2"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
@@ -73,13 +73,12 @@
     "@react-stately/data": "3.14.1",
     "@storybook/react": "8.6.12",
     "@types/fs-extra": "11.0.4",
-    "@types/react": "19.1.15",
-    "@types/react-dom": "19.1.9",
+    "@types/react": "19.2.6",
+    "@types/react-dom": "19.2.3",
     "fs-extra": "11.3.2",
-    "glob": "11.0.3",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "tailwindcss": "4.1.13"
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "tailwindcss": "4.1.17"
   },
   "peerDependencies": {
     "react": ">=19.0.0",

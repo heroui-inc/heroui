@@ -2,7 +2,7 @@ import type {Key} from "../rac";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 import {Tabs} from "./index";
 
@@ -307,7 +307,7 @@ const Showcase1Template = (args: Story["args"]) => {
               key={key}
               aria-hidden={selectedZoom !== key}
               data-selected={selectedZoom === key}
-              className={cnBase(
+              className={cn(
                 "text-foreground ease-in-out-quad absolute left-1/2 top-1/2 origin-center -translate-x-1/2 -translate-y-1/2 scale-75 text-[21px] font-medium opacity-0 transition-[scale,opacity] duration-[300ms] ease-[cubic-bezier(0.33,1,0.68,1)] data-[selected=true]:scale-100 data-[selected=true]:opacity-100 data-[selected=true]:delay-200",
                 {
                   "sr-only": selectedZoom !== key,

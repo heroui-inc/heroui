@@ -5,7 +5,7 @@ import type {SVGProps} from "react";
 
 import {Icon} from "@iconify/react";
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 import {Button} from "../button";
 import {Disclosure} from "../disclosure";
@@ -50,7 +50,7 @@ const Template = (props: DisclosureGroupProps) => {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("preview"),
                 })}
               >
@@ -85,7 +85,7 @@ const Template = (props: DisclosureGroupProps) => {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("download"),
                 })}
               >
@@ -162,7 +162,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("preview"),
                 })}
               >
@@ -197,7 +197,7 @@ const ControlledTemplate = (props: DisclosureGroupProps) => {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("download"),
                 })}
               >
@@ -240,7 +240,7 @@ function AppleShowcaseButton({
 }: ButtonProps & {isSelected: boolean}) {
   return (
     <Button
-      className={cnBase(
+      className={cn(
         "ease-in-out-quad h-14 rounded-full bg-[#1e1e20] text-[17px] text-[#f5f5f7] duration-[400ms] hover:bg-[#272729]",
         isSelected && "bg-[#272729]",
         className,
@@ -268,7 +268,7 @@ function SelectedIphoneColorSwatch({color, name}: {color: string; name: string})
 function PlusIcon({className, height = 24, width = 24, ...props}: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      className={cnBase("size-6 flex-none", className)}
+      className={cn("size-6 flex-none", className)}
       height={height}
       viewBox="0 0 24 24"
       width={width}
@@ -359,7 +359,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
         {/* Controls */}
         <div
           data-expanded={isAnyItemExpanded}
-          className={cnBase(
+          className={cn(
             "z-[1] hidden flex-col gap-5 opacity-0 sm:flex",
             // Animation
             "ease-out-quad data-[expanded=true]:duration-400 transition-all duration-300",
@@ -416,13 +416,13 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
                 <Disclosure.Content className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
                   <Disclosure.Body
                     data-expanded={expandedKeys.has(item.id)}
-                    className={cnBase(
+                    className={cn(
                       "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-left backdrop-blur-[20px]",
                     )}
                   >
                     <p
                       data-expanded={expandedKeys.has(item.id)}
-                      className={cnBase(
+                      className={cn(
                         "text-[17px] font-light text-[#F5F5F7]",
                         "translate-y-[20px] opacity-0",
                         "data-[expanded=true]:translate-y-0 data-[expanded=true]:opacity-100",
@@ -450,7 +450,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
           alt={item.label}
           data-selected={expandedKeys.has(item.id)}
           src={item.imgSrc}
-          className={cnBase(
+          className={cn(
             "pointer-events-none absolute right-[10%] top-1/2 z-[0] hidden w-full max-w-6xl -translate-y-1/2 scale-[1.5] opacity-0 lg:block",
             "translate-x-[10%] data-[selected=true]:translate-x-0 data-[selected=true]:opacity-100",
           )}

@@ -5,7 +5,7 @@ import type {SVGProps} from "react";
 
 import {Button, Disclosure, DisclosureGroup, useDisclosureGroupNavigation} from "@heroui/react";
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 function AppleShowcaseButton({
   children,
@@ -15,7 +15,7 @@ function AppleShowcaseButton({
 }: ButtonProps & {isSelected: boolean}) {
   return (
     <Button
-      className={cnBase(
+      className={cn(
         "ease-in-out-quad h-14 rounded-full bg-[#1e1e20] text-[17px] text-[#f5f5f7] duration-[400ms] hover:bg-[#272729]",
         isSelected && "bg-[#272729]",
         className,
@@ -43,7 +43,7 @@ function SelectedIphoneColorSwatch({color, name}: {color: string; name: string})
 function PlusIcon({className, height = 24, width = 24, ...props}: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      className={cnBase("size-6 flex-none", className)}
+      className={cn("size-6 flex-none", className)}
       height={height}
       viewBox="0 0 24 24"
       width={width}
@@ -132,7 +132,7 @@ export default function AppleIPhoneDisclosure() {
       <div className="flex w-full items-center gap-8 px-8 py-8">
         <div
           data-expanded={isAnyItemExpanded}
-          className={cnBase(
+          className={cn(
             "z-[1] hidden flex-col gap-5 opacity-0 sm:flex",
             "ease-out-quad data-[expanded=true]:duration-400 transition-all duration-300",
             "translate-y-[120px] data-[expanded=true]:translate-y-0 data-[expanded=true]:opacity-100",
@@ -187,13 +187,13 @@ export default function AppleIPhoneDisclosure() {
                 <Disclosure.Content className="ease-out-quad duration-[420ms] ease-[cubic-bezier(0.95,0.05,0.795,0.035)]">
                   <Disclosure.Body
                     data-expanded={expandedKeys.has(item.id)}
-                    className={cnBase(
+                    className={cn(
                       "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-left backdrop-blur-[20px]",
                     )}
                   >
                     <p
                       data-expanded={expandedKeys.has(item.id)}
-                      className={cnBase(
+                      className={cn(
                         "text-[17px] font-light text-[#F5F5F7]",
                         "translate-y-[20px] opacity-0",
                         "data-[expanded=true]:translate-y-0 data-[expanded=true]:opacity-100",
@@ -220,7 +220,7 @@ export default function AppleIPhoneDisclosure() {
           alt={item.label}
           data-selected={expandedKeys.has(item.id)}
           src={item.imgSrc}
-          className={cnBase(
+          className={cn(
             "pointer-events-none absolute right-[10%] top-1/2 z-[0] hidden w-full max-w-6xl -translate-y-1/2 scale-[1.5] opacity-0 lg:block",
             "translate-x-[10%] data-[selected=true]:translate-x-0 data-[selected=true]:opacity-100",
           )}
