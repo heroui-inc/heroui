@@ -2,7 +2,7 @@ import type {Meta} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 import {Accordion} from "./index";
 
@@ -32,7 +32,7 @@ const defaultArgs: Accordion["RootProps"] = {
 };
 
 const Wrapper = ({children, className}: {children: React.ReactNode; className?: string}) => (
-  <div className={cnBase("w-full max-w-md", className)}>{children}</div>
+  <div className={cn("w-full max-w-md", className)}>{children}</div>
 );
 
 const Template = (props: Accordion["RootProps"]) => (

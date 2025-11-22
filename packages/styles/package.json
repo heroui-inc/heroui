@@ -36,10 +36,10 @@
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@tailwindcss/cli": "4.1.13",
+    "@tailwindcss/cli": "4.1.17",
     "clean-package": "2.2.0",
-    "rimraf": "6.0.1",
-    "tailwindcss": "4.1.13"
+    "rimraf": "6.1.2",
+    "tailwindcss": "4.1.17"
   },
   "peerDependencies": {
     "tailwindcss": ">=4.0.0"
