@@ -531,6 +531,21 @@ export const CustomWithClassNames = {
   },
 };
 
+export const WithRealTimeFormat = {
+  render: ControlledTemplate,
+
+  args: {
+    ...defaultProps,
+    label: "Amount (Real-time format)",
+    isRealTimeFormat: true,
+    formatOptions: {
+      style: "decimal",
+      useGrouping: true,
+    },
+    description: "Number is formatted as you type with isRealTimeFormat enabled",
+  },
+};
+
 // export const CustomWithHooks = {
 //   render: CustomWithHooksTemplate,
 

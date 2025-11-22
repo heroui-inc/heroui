@@ -14,6 +14,7 @@ import {useLocale} from "@react-aria/i18n";
 import {clsx, dataAttr, isEmpty, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useNumberFieldState} from "@react-stately/numberfield";
 import {useNumberField as useAriaNumberInput} from "@react-aria/numberfield";
+import {NumberParser} from "@internationalized/number";
 import {useMemo, useCallback, useState} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
@@ -79,6 +80,12 @@ export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputV
    * if you pass this prop, the clear button will be shown.
    */
   onClear?: () => void;
+  /**
+   * Whether to format the value in real-time as the user types.
+   * When false, formatting only happens on blur (React Aria default behavior).
+   * @default false
+   */
+  isRealTimeFormat?: boolean;
   /**
    * React aria onChange event.
    */
@@ -304,6 +311,70 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     [inputValue, state, onClear, isClearable, originalProps.isReadOnly],
   );
 
+  const numberFormatter = useMemo(() => {
+    return new Intl.NumberFormat(locale, originalProps.formatOptions);
+  }, [locale, originalProps.formatOptions]);
+
+  const numberParser = useMemo(() => {
+    return new NumberParser(locale, originalProps.formatOptions);
+  }, [locale, originalProps.formatOptions]);
+
+  const shouldFormat = useMemo(() => {
+    // Return false if isRealTimeFormat is not enabled (React Aria default)
+    if (!originalProps.isRealTimeFormat) return false;
+
+    // Only check useGrouping if isRealTimeFormat is true
+    const resolved = numberFormatter.resolvedOptions();
+
+    return resolved.useGrouping !== false;
+  }, [originalProps.isRealTimeFormat, numberFormatter]);
+
+  const handleBeforeInput = useCallback(
+    (e: React.FormEvent<HTMLInputElement> & {data: string | null}) => {
+      if (!e.data) return;
+
+      const input = domRef.current;
+
+      if (!input) return;
+
+      const {value, selectionStart, selectionEnd} = input;
+      const nextValue =
+        value.slice(0, selectionStart ?? 0) + e.data + value.slice(selectionEnd ?? 0);
+
+      // Use React Aria's NumberParser for validation and parsing
+      // This handles full-width numbers and locale-specific symbols
+      if (!numberParser.isValidPartialNumber(nextValue)) {
+        e.preventDefault();
+
+        return;
+      }
+
+      const parsedValue = numberParser.parse(nextValue);
+
+      if (isNaN(parsedValue)) return;
+
+      e.preventDefault();
+
+      const formattedValue = numberFormatter.format(parsedValue);
+
+      // Call validate like React Aria does
+      if (!state.validate(formattedValue)) {
+        return;
+      }
+
+      state.setInputValue(formattedValue);
+      state.setNumberValue(parsedValue);
+
+      if (onChange) {
+        onChange({
+          target: {value: formattedValue},
+          currentTarget: {value: formattedValue},
+        } as React.ChangeEvent<HTMLInputElement>);
+      }
+    },
+    [numberParser, numberFormatter, state, domRef, onChange],
+  );
+
   const getBaseProps: PropGetter = useCallback(
     (props = {}) => {
       return {
@@ -387,6 +458,8 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
           }),
           props,
         ),
+        // Only override onBeforeInput when isRealTimeFormat is true
+        ...(shouldFormat ? {onBeforeInput: handleBeforeInput} : {}),
         "aria-readonly": dataAttr(originalProps.isReadOnly),
         onChange: chain(inputProps.onChange, onChange),
         onKeyDown: chain(inputProps.onKeyDown, props.onKeyDown, handleKeyDown),
@@ -406,6 +479,8 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       originalProps.isRequired,
       onChange,
       handleKeyDown,
+      shouldFormat,
+      handleBeforeInput,
     ],
   );
 

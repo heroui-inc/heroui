@@ -48,6 +48,7 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
+    "@internationalized/number": "3.6.5",
     "@react-aria/focus": "3.21.2",
     "@react-aria/i18n": "3.12.13",
     "@react-aria/interactions": "3.25.6",
