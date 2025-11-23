@@ -39,6 +39,7 @@ const COMPONENT_NAMES = [
   "popover",
   "radio-group",
   "separator",
+  "search-field",
   "select",
   "skeleton",
   "slider",

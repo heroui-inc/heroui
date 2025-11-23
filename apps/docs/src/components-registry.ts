@@ -210,6 +210,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "radiogroup",
     title: "RadioGroup",
   },
+  searchfield: {
+    category: "forms",
+    description: "Search input field with clear button and search icon",
+    href: "/docs/components/search-field",
+    name: "searchfield",
+    title: "SearchField",
+  },
   select: {
     category: "forms",
     description: "Dropdown select control",
@@ -404,6 +411,7 @@ const componentRelationships: Record<string, string[]> = {
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
+  searchfield: ["label", "description", "fielderror", "form", "surface", "input", "closebutton"],
   select: [
     "listbox",
     "popover",

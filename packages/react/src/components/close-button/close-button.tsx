@@ -58,7 +58,9 @@ const CloseButtonRoot = ({
       {...rest}
     >
       {(renderProps) =>
-        typeof children === "function" ? children(renderProps) : (children ?? <CloseIcon />)
+        typeof children === "function"
+          ? children(renderProps)
+          : (children ?? <CloseIcon data-slot="close-button-icon" />)
       }
     </ButtonPrimitive>
   );

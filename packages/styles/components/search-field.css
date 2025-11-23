@@ -1,0 +1,125 @@
+/* Search field styles */
+.search-field {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid],
+  &[aria-invalid] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit;
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+}
+
+.search-field__group {
+  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
+  }
+
+  /* Focus within state */
+  &[data-focus-within],
+  &:focus-within {
+    @apply status-focused-field;
+  }
+
+  /* Invalid state */
+  &[data-invalid] {
+    @apply status-invalid-field;
+    background-color: var(--color-field-focus);
+    border-color: var(--color-field-border-invalid);
+  }
+
+  /* Disabled state */
+  &[data-disabled],
+  &[aria-disabled] {
+    @apply status-disabled;
+  }
+}
+
+.search-field__input {
+  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+
+  /* Hide browser default search clear button */
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Remove border radius on left side when search icon is present */
+  .search-field__group:has([data-slot="search-field-search-icon"]) & {
+    @apply rounded-l-none pl-2;
+  }
+
+  /* Remove border radius on right side when clear button is present */
+  .search-field__group:has([slot="clear"]) & {
+    @apply rounded-r-none pr-2;
+  }
+
+  /* Focus state - handled by group */
+  &:focus,
+  &:focus-visible {
+    @apply outline-none;
+  }
+}
+
+.search-field__search-icon {
+  @apply text-field-placeholder pointer-events-none shrink-0;
+  @apply ml-3 mr-0 size-4;
+}
+
+.search-field__clear-button {
+  @apply mr-1 shrink-0;
+
+  /* Overrides close button default icon size from 16px to 12px */
+  [data-slot="close-button-icon"] {
+    @apply size-3;
+  }
+}
+
+/* On Surface variant */
+.search-field__group--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered]:not([data-focus-within]) {
+      @apply bg-on-surface-hover;
+    }
+  }
+
+  &:focus-within,
+  &[data-focus-within] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  [data-slot="search-field-input"] {
+    @apply bg-transparent;
+  }
+}
