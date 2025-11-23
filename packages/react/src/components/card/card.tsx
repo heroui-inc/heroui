@@ -2,6 +2,7 @@
 
 import type {CardVariants} from "./card.styles";
 import type {SurfaceVariants} from "../surface";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
@@ -21,7 +22,7 @@ const CardContext = createContext<CardContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Card Root
  * -----------------------------------------------------------------------------------------------*/
-interface CardRootProps extends React.ComponentProps<"div">, CardVariants {
+interface CardRootProps extends ComponentPropsWithRef<"div">, CardVariants {
   asChild?: boolean;
 }
 
@@ -62,7 +63,7 @@ const CardRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Card Header
  * -----------------------------------------------------------------------------------------------*/
-interface CardHeaderProps extends React.ComponentProps<"div"> {
+interface CardHeaderProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;
 }
 
@@ -76,7 +77,7 @@ const CardHeader = ({asChild = false, className, ...props}: CardHeaderProps) => 
 /* -------------------------------------------------------------------------------------------------
  * Card Title
  * -----------------------------------------------------------------------------------------------*/
-interface CardTitleProps extends React.ComponentProps<"h3"> {
+interface CardTitleProps extends ComponentPropsWithRef<"h3"> {
   asChild?: boolean;
 }
 
@@ -90,7 +91,7 @@ const CardTitle = ({asChild = false, className, ...props}: CardTitleProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Description
  * -----------------------------------------------------------------------------------------------*/
-interface CardDescriptionProps extends React.ComponentProps<"p"> {
+interface CardDescriptionProps extends ComponentPropsWithRef<"p"> {
   asChild?: boolean;
 }
 
@@ -106,7 +107,7 @@ const CardDescription = ({asChild = false, className, ...props}: CardDescription
 /* -------------------------------------------------------------------------------------------------
  * Card Content
  * -----------------------------------------------------------------------------------------------*/
-interface CardContentProps extends React.ComponentProps<"div"> {
+interface CardContentProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;
 }
 
@@ -120,7 +121,7 @@ const CardContent = ({asChild = false, className, ...props}: CardContentProps) =
 /* -------------------------------------------------------------------------------------------------
  * Card Footer
  * -----------------------------------------------------------------------------------------------*/
-interface CardFooterProps extends React.ComponentProps<"div"> {
+interface CardFooterProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;
 }
 

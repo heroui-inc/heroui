@@ -1,7 +1,7 @@
 "use client";
 
 import type {TooltipVariants} from "./tooltip.styles";
-import type {TooltipProps as TooltipPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
@@ -28,12 +28,12 @@ const TooltipContext = createContext<TooltipContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Root
  * -----------------------------------------------------------------------------------------------*/
-type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
+type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
 const TooltipRoot = ({
   children,
   ...props
-}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
+}: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   return (
@@ -48,7 +48,9 @@ const TooltipRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Content
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipContentProps extends Omit<TooltipPrimitiveProps, "children">, TooltipVariants {
+interface TooltipContentProps
+  extends Omit<ComponentPropsWithRef<typeof TooltipPrimitive>, "children">,
+    TooltipVariants {
   showArrow?: boolean;
   children: React.ReactNode;
 }
@@ -77,7 +79,7 @@ const TooltipContent = ({
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Arrow
  * -----------------------------------------------------------------------------------------------*/
-type TooltipArrowProps = Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+type TooltipArrowProps = Omit<ComponentPropsWithRef<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
 };
 
@@ -110,7 +112,7 @@ const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TooltipTriggerProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;
 }
 

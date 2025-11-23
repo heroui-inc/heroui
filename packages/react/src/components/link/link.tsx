@@ -1,7 +1,7 @@
 "use client";
 
 import type {LinkVariants} from "./link.styles";
-import type {LinkProps as LinkPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
@@ -25,7 +25,7 @@ const LinkContext = createContext<LinkContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Link Root
  * --------------------------------------------------------------------------------------------- */
-interface LinkRootProps extends LinkPrimitiveProps, LinkVariants {
+interface LinkRootProps extends ComponentPropsWithRef<typeof LinkPrimitive>, LinkVariants {
   asChild?: boolean;
 }
 
@@ -75,7 +75,7 @@ const LinkRoot = ({
 /* ------------------------------------------------------------------------------------------------
  * Link Icon
  * --------------------------------------------------------------------------------------------- */
-type LinkIconProps = React.ComponentProps<"span"> & {
+type LinkIconProps = ComponentPropsWithRef<"span"> & {
   asChild?: boolean;
 };
 

@@ -2,8 +2,8 @@
 
 import type {ComboBoxVariants} from "./combobox.styles";
 import type {SurfaceVariants} from "../surface";
-import type {ComponentProps, ReactNode} from "react";
-import type {ButtonProps, ComboBoxProps as ComboBoxPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {ButtonProps} from "react-aria-components";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
@@ -34,7 +34,9 @@ const ComboBoxContext = createContext<ComboBoxContext>({});
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Root
  * -----------------------------------------------------------------------------------------------*/
-interface ComboBoxRootProps<T extends object> extends ComboBoxPrimitiveProps<T>, ComboBoxVariants {
+interface ComboBoxRootProps<T extends object>
+  extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T>>,
+    ComboBoxVariants {
   items?: Iterable<T>;
 }
 
@@ -84,7 +86,7 @@ interface ComboBoxTriggerProps {
 }
 
 interface ComboBoxTrigger {
-  (props: {asChild: true} & ComponentProps<"button">): React.JSX.Element;
+  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
   (props: {asChild?: false} & ButtonProps): React.JSX.Element;
 }
 
@@ -128,7 +130,7 @@ const ComboBoxTrigger: ComboBoxTrigger = (props) => {
  * ComboBox Popover
  * -----------------------------------------------------------------------------------------------*/
 interface ComboBoxPopoverProps
-  extends Omit<React.ComponentProps<typeof PopoverPrimitive>, "children"> {
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children"> {
   children: React.ReactNode;
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import type {InputGroupVariants} from "./input-group.styles";
-import type {GroupProps, InputProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -28,7 +28,9 @@ const InputGroupContext = createContext<InputGroupContext>({});
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Root
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupRootProps extends GroupProps, InputGroupVariants {}
+interface InputGroupRootProps
+  extends ComponentPropsWithRef<typeof GroupPrimitive>,
+    InputGroupVariants {}
 
 const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
@@ -59,7 +61,7 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Input
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupInputProps extends InputProps {
+interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
   isOnSurface?: boolean;
 }
 
@@ -80,7 +82,7 @@ const InputGroupInput = ({className, isOnSurface, ...props}: InputGroupInputProp
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Prefix
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupPrefixProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface InputGroupPrefixProps extends ComponentPropsWithRef<"div"> {}
 
 const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps) => {
   const {slots} = useContext(InputGroupContext);
@@ -95,7 +97,7 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupSuffixProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface InputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
 
 const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps) => {
   const {slots} = useContext(InputGroupContext);

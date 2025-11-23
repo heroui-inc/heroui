@@ -1,15 +1,11 @@
 "use client";
 
 import type {NumberFieldVariants} from "./number-field.styles";
-import type {
-  ButtonProps,
-  InputProps,
-  NumberFieldProps as NumberFieldPrimitiveProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
-  Button,
+  Button as ButtonPrimitive,
   Group as GroupPrimitive,
   Input as InputPrimitive,
   NumberField as NumberFieldPrimitive,
@@ -33,7 +29,9 @@ const NumberFieldContext = createContext<NumberFieldContext>({});
 /* -------------------------------------------------------------------------------------------------
  * NumberField Root
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldRootProps extends NumberFieldPrimitiveProps, NumberFieldVariants {}
+interface NumberFieldRootProps
+  extends ComponentPropsWithRef<typeof NumberFieldPrimitive>,
+    NumberFieldVariants {}
 
 const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
@@ -60,7 +58,7 @@ const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFie
 /* -------------------------------------------------------------------------------------------------
  * NumberField Group
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldGroupProps extends React.ComponentProps<typeof GroupPrimitive> {}
+interface NumberFieldGroupProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
 const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps) => {
   const {slots} = useContext(NumberFieldContext);
@@ -79,7 +77,7 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
 /* -------------------------------------------------------------------------------------------------
  * NumberField Input
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldInputProps extends InputProps {
+interface NumberFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
   isOnSurface?: boolean;
 }
 
@@ -100,7 +98,7 @@ const NumberFieldInput = ({className, isOnSurface, ...props}: NumberFieldInputPr
 /* -------------------------------------------------------------------------------------------------
  * NumberField Increment Button
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldIncrementButtonProps extends ButtonProps {}
+interface NumberFieldIncrementButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const NumberFieldIncrementButton = ({
   children,
@@ -110,7 +108,7 @@ const NumberFieldIncrementButton = ({
   const {slots} = useContext(NumberFieldContext);
 
   return (
-    <Button
+    <ButtonPrimitive
       className={composeTwRenderProps(className, slots?.incrementButton())}
       data-slot="number-field-increment-button"
       slot="increment"
@@ -121,14 +119,14 @@ const NumberFieldIncrementButton = ({
       ) : (
         <IconPlus data-slot="number-field-increment-button-icon" />
       )}
-    </Button>
+    </ButtonPrimitive>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Decrement Button
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldDecrementButtonProps extends ButtonProps {}
+interface NumberFieldDecrementButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const NumberFieldDecrementButton = ({
   children,
@@ -138,7 +136,7 @@ const NumberFieldDecrementButton = ({
   const {slots} = useContext(NumberFieldContext);
 
   return (
-    <Button
+    <ButtonPrimitive
       className={composeTwRenderProps(className, slots?.decrementButton())}
       data-slot="number-field-decrement-button"
       slot="decrement"
@@ -149,7 +147,7 @@ const NumberFieldDecrementButton = ({
       ) : (
         <IconMinus data-slot="number-field-decrement-button-icon" />
       )}
-    </Button>
+    </ButtonPrimitive>
   );
 };
 

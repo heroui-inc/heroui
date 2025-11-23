@@ -65,7 +65,7 @@ export function CustomValue() {
               return `${selectedItems.length} users selected`;
             }
 
-            const selectedItem = users.find((user) => user.id === selectedItems[0].key);
+            const selectedItem = users.find((user) => user.id === selectedItems[0]?.key);
 
             if (!selectedItem) {
               return defaultChildren;

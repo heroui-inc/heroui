@@ -1,7 +1,7 @@
 "use client";
 
 import type {DisclosureGroupVariants} from "./disclosure-group.styles";
-import type {DisclosureGroupProps as DisclosureGroupPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext} from "react";
 import {DisclosureGroup as DisclosureGroupPrimitive} from "react-aria-components";
@@ -23,7 +23,9 @@ const DisclosureGroupContext = createContext<DisclosureGroupContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Group Root
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureGroupRootProps extends DisclosureGroupPrimitiveProps, DisclosureGroupVariants {}
+interface DisclosureGroupRootProps
+  extends ComponentPropsWithRef<typeof DisclosureGroupPrimitive>,
+    DisclosureGroupVariants {}
 
 const DisclosureGroupRoot = ({children, className, ...originalProps}: DisclosureGroupRootProps) => {
   const [props, variantProps] = mapPropsVariants(

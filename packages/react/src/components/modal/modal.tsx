@@ -3,9 +3,9 @@
 import type {ModalVariants} from "./modal.styles";
 import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
 import type {SurfaceVariants} from "../surface";
-import type {ComponentProps, HTMLAttributes, ReactNode} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {
-  ButtonProps as ButtonPrimitiveProps,
+  Button as ButtonPrimitive,
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
@@ -43,7 +43,7 @@ const ModalContext = createContext<ModalContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Modal Root
  * -----------------------------------------------------------------------------------------------*/
-interface ModalRootProps extends ComponentProps<typeof ModalTriggerPrimitive> {
+interface ModalRootProps extends ComponentPropsWithRef<typeof ModalTriggerPrimitive> {
   state?: UseOverlayStateReturn;
 }
 
@@ -70,7 +70,7 @@ const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface ModalTriggerProps extends HTMLAttributes<HTMLDivElement> {}
+interface ModalTriggerProps extends ComponentPropsWithRef<"div"> {}
 
 const ModalTrigger = ({children, className, ...props}: ModalTriggerProps) => {
   const {slots} = useContext(ModalContext);
@@ -92,7 +92,7 @@ const ModalTrigger = ({children, className, ...props}: ModalTriggerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Container
  * -----------------------------------------------------------------------------------------------*/
-interface ModalContainerProps extends ComponentProps<typeof ModalPrimitive> {
+interface ModalContainerProps extends ComponentPropsWithRef<typeof ModalPrimitive> {
   placement?: ModalPlacement;
   scroll?: ModalVariants["scroll"];
   variant?: ModalVariants["variant"];
@@ -101,7 +101,7 @@ interface ModalContainerProps extends ComponentProps<typeof ModalPrimitive> {
    * @default true
    */
   isDismissable?: boolean;
-  backdropClassName?: ComponentProps<typeof ModalOverlayPrimitive>["className"];
+  backdropClassName?: ComponentPropsWithRef<typeof ModalOverlayPrimitive>["className"];
 }
 
 const ModalContainer = ({
@@ -167,7 +167,7 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Header
  * -----------------------------------------------------------------------------------------------*/
-interface ModalHeaderProps extends HTMLAttributes<HTMLDivElement> {}
+interface ModalHeaderProps extends ComponentPropsWithRef<"div"> {}
 
 const ModalHeader = ({children, className, ...props}: ModalHeaderProps) => {
   const {slots} = useContext(ModalContext);
@@ -182,7 +182,7 @@ const ModalHeader = ({children, className, ...props}: ModalHeaderProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Body
  * -----------------------------------------------------------------------------------------------*/
-interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {}
+interface ModalBodyProps extends ComponentPropsWithRef<"div"> {}
 
 const ModalBody = ({children, className, ...props}: ModalBodyProps) => {
   const {slots} = useContext(ModalContext);
@@ -197,7 +197,7 @@ const ModalBody = ({children, className, ...props}: ModalBodyProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Footer
  * -----------------------------------------------------------------------------------------------*/
-interface ModalFooterProps extends HTMLAttributes<HTMLDivElement> {}
+interface ModalFooterProps extends ComponentPropsWithRef<"div"> {}
 
 const ModalFooter = ({children, className, ...props}: ModalFooterProps) => {
   const {slots} = useContext(ModalContext);
@@ -212,7 +212,7 @@ const ModalFooter = ({children, className, ...props}: ModalFooterProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Heading
  * -----------------------------------------------------------------------------------------------*/
-interface ModalHeadingProps extends ComponentProps<typeof HeadingPrimitive> {}
+interface ModalHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
   const {slots} = useContext(ModalContext);
@@ -232,7 +232,7 @@ const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
  * -----------------------------------------------------------------------------------------------*/
-interface ModalIconProps extends ComponentProps<"div"> {}
+interface ModalIconProps extends ComponentPropsWithRef<"div"> {}
 
 const ModalIcon = ({children, className, ...props}: ModalIconProps) => {
   const {slots} = useContext(ModalContext);
@@ -254,8 +254,8 @@ interface ModalCloseTriggerProps {
 }
 
 interface ModalCloseTrigger {
-  (props: {asChild: true} & ComponentProps<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
+  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
+  (props: {asChild?: false} & ComponentPropsWithRef<typeof ButtonPrimitive>): React.JSX.Element;
 }
 
 const ModalCloseTrigger: ModalCloseTrigger = (props) => {

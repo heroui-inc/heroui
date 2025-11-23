@@ -1,6 +1,6 @@
 "use client";
 
-import type {FormProps as FormPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
 import {Form as FormPrimitive} from "react-aria-components";
@@ -8,7 +8,7 @@ import {Form as FormPrimitive} from "react-aria-components";
 /* -------------------------------------------------------------------------------------------------
  * Form Root
  * -----------------------------------------------------------------------------------------------*/
-interface FormRootProps extends FormPrimitiveProps {}
+interface FormRootProps extends ComponentPropsWithRef<typeof FormPrimitive> {}
 
 const FormRoot = ({...props}: FormRootProps) => {
   return <FormPrimitive {...props} />;

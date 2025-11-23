@@ -1,12 +1,7 @@
 "use client";
 
 import type {TabsVariants} from "./tabs.styles";
-import type {
-  TabListProps as TabListPrimitiveProps,
-  TabPanelProps as TabPanelPrimitiveProps,
-  TabProps as TabPrimitiveProps,
-  TabsProps as TabsPrimitiveProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -34,7 +29,7 @@ const TabsContext = createContext<TabsContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Tabs Root
  * -----------------------------------------------------------------------------------------------*/
-interface TabsRootProps extends TabsPrimitiveProps, TabsVariants {
+interface TabsRootProps extends ComponentPropsWithRef<typeof TabsPrimitive>, TabsVariants {
   children: React.ReactNode;
   className?: string;
 }
@@ -59,7 +54,7 @@ const TabsRoot = ({children, className, orientation = "horizontal", ...props}: T
 /* -------------------------------------------------------------------------------------------------
  * Tabs List Container
  * -----------------------------------------------------------------------------------------------*/
-interface TabListContainerProps extends React.ComponentProps<"div"> {
+interface TabListContainerProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
@@ -80,7 +75,7 @@ const TabListContainer = ({children, className, ...props}: TabListContainerProps
 /* -------------------------------------------------------------------------------------------------
  * Tabs List
  * -----------------------------------------------------------------------------------------------*/
-interface TabListProps extends TabListPrimitiveProps<object> {
+interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<object>> {
   children: React.ReactNode;
   className?: string;
 }
@@ -102,7 +97,7 @@ const TabList = ({children, className, ...props}: TabListProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab
  * -----------------------------------------------------------------------------------------------*/
-interface TabProps extends TabPrimitiveProps {
+interface TabProps extends ComponentPropsWithRef<typeof TabPrimitive> {
   className?: string;
 }
 
@@ -123,7 +118,7 @@ const Tab = ({children, className, ...props}: TabProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface TabIndicatorProps extends React.ComponentProps<typeof SelectionIndicatorPrimitive> {
+interface TabIndicatorProps extends ComponentPropsWithRef<typeof SelectionIndicatorPrimitive> {
   className?: string;
 }
 
@@ -142,7 +137,7 @@ const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab Panel
  * -----------------------------------------------------------------------------------------------*/
-interface TabPanelProps extends Omit<TabPanelPrimitiveProps, "children"> {
+interface TabPanelProps extends Omit<ComponentPropsWithRef<typeof TabPanelPrimitive>, "children"> {
   children: React.ReactNode;
   className?: string;
 }

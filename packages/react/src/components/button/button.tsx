@@ -1,7 +1,7 @@
 "use client";
 
 import type {ButtonVariants} from "./button.styles";
-import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {Button as ButtonPrimitive} from "react-aria-components";
@@ -13,7 +13,7 @@ import {buttonVariants} from "./button.styles";
 /* -------------------------------------------------------------------------------------------------
  * Button Root
  * -----------------------------------------------------------------------------------------------*/
-interface ButtonRootProps extends ButtonPrimitiveProps, ButtonVariants {
+interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {
   asChild?: boolean;
 }
 

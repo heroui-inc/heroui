@@ -1,6 +1,7 @@
 "use client";
 
 import type {InputOTPVariants} from "./input-otp.styles";
+import type {ComponentPropsWithRef} from "react";
 import type {ValidationResult} from "react-aria-components";
 
 import {OTPInput, OTPInputContext} from "input-otp";
@@ -30,7 +31,10 @@ const InputOTPContext = createContext<InputOTPContext>({
  * Input OTP Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPRootProps
-  extends Omit<React.ComponentProps<typeof OTPInput>, "disabled" | "containerClassName" | "render">,
+  extends Omit<
+      ComponentPropsWithRef<typeof OTPInput>,
+      "disabled" | "containerClassName" | "render"
+    >,
     InputOTPVariants {
   isDisabled?: boolean;
   isInvalid?: boolean;
@@ -89,7 +93,7 @@ const InputOTPRoot = ({
  * Input OTP Group
  * -----------------------------------------------------------------------------------------------*/
 
-interface InputOTPGroupProps extends React.ComponentProps<"div"> {}
+interface InputOTPGroupProps extends ComponentPropsWithRef<"div"> {}
 
 const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
   const {slots} = useContext(InputOTPContext);
@@ -100,7 +104,7 @@ const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Slot
  * -----------------------------------------------------------------------------------------------*/
-interface InputOTPSlotProps extends React.ComponentProps<"div"> {
+interface InputOTPSlotProps extends ComponentPropsWithRef<"div"> {
   index: number;
 }
 
@@ -135,7 +139,7 @@ const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Separator
  * -----------------------------------------------------------------------------------------------*/
-interface InputOTPSeparatorProps {
+interface InputOTPSeparatorProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 

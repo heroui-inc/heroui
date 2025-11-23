@@ -10,11 +10,10 @@ import {
 } from "react-aria-components";
 import {tv} from "tailwind-variants";
 
-import {composeTailwindRenderProps, focusRing} from "@/utils/compose-tw-render";
+import {composeTailwindRenderProps} from "@/utils/compose-tw-render";
 
 const itemStyles = tv({
   base: "rounded-xs relative",
-  extend: focusRing,
 });
 
 const focusIndicator = tv({

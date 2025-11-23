@@ -2,11 +2,8 @@
 
 import type {DisclosureVariants} from "./disclosure.styles";
 import type {Booleanish} from "../../utils/assertion";
-import type {
-  ButtonProps,
-  DisclosurePanelProps,
-  DisclosureProps as DisclosurePrimitiveProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {ButtonProps} from "react-aria-components";
 
 import React, {createContext, useContext, useRef} from "react";
 import {
@@ -36,7 +33,9 @@ const DisclosureContext = createContext<DisclosureContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Root
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureRootProps extends DisclosurePrimitiveProps, DisclosureVariants {}
+interface DisclosureRootProps
+  extends ComponentPropsWithRef<typeof DisclosurePrimitive>,
+    DisclosureVariants {}
 
 const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
@@ -62,7 +61,7 @@ const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootP
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Heading
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureHeadingProps extends React.ComponentProps<typeof DisclosureHeadingPrimitive> {
+interface DisclosureHeadingProps extends ComponentPropsWithRef<typeof DisclosureHeadingPrimitive> {
   className?: string;
 }
 
@@ -103,7 +102,7 @@ const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Content
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureContentProps extends DisclosurePanelProps {}
+interface DisclosureContentProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
 const DisclosureContent = ({children, className, ...props}: DisclosureContentProps) => {
   const {slots} = useContext(DisclosureContext);
@@ -126,7 +125,7 @@ const DisclosureContent = ({children, className, ...props}: DisclosureContentPro
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Body
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureBodyContentProps extends React.ComponentProps<"div"> {
+interface DisclosureBodyContentProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
@@ -143,7 +142,7 @@ const DisclosureBody = ({children, className, ...props}: DisclosureBodyContentPr
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureIndicatorProps extends React.ComponentProps<"svg"> {
+interface DisclosureIndicatorProps extends ComponentPropsWithRef<"svg"> {
   className?: string;
 }
 

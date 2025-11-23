@@ -1,6 +1,7 @@
 "use client";
 
 import type {SpinnerVariants} from "./spinner.styles";
+import type {ComponentPropsWithRef} from "react";
 
 import {useId} from "react";
 
@@ -11,7 +12,7 @@ import {spinnerVariants} from "./spinner.styles";
  * -------------------------------------------------------------------------------------------------
  * Spinner Primitive
  * -----------------------------------------------------------------------------------------------*/
-interface SpinnerPrimitiveProps extends React.SVGProps<SVGSVGElement> {}
+interface SpinnerPrimitiveProps extends ComponentPropsWithRef<"svg"> {}
 
 const SpinnerPrimitive = ({...props}: SpinnerPrimitiveProps) => {
   const id = useId();
@@ -61,7 +62,7 @@ const SpinnerPrimitive = ({...props}: SpinnerPrimitiveProps) => {
  * Spinner Root
  * -----------------------------------------------------------------------------------------------*/
 interface SpinnerRootProps
-  extends Omit<React.ComponentProps<"svg">, "display" | "opacity" | "color">,
+  extends Omit<ComponentPropsWithRef<"svg">, "display" | "opacity" | "color">,
     SpinnerVariants {}
 
 const SpinnerRoot = ({className, color, size, ...props}: SpinnerRootProps) => {

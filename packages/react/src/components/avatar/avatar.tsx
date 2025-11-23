@@ -2,6 +2,7 @@
 
 import type {AvatarVariants} from "./avatar.styles";
 import type {UseImageProps} from "../../hooks";
+import type {ComponentPropsWithRef} from "react";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
@@ -25,7 +26,7 @@ const AvatarContext = createContext<AvatarContext>({});
  * Avatar Root
  * -----------------------------------------------------------------------------------------------*/
 interface AvatarRootProps
-  extends Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, "color">,
+  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">,
     AvatarVariants {}
 
 const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
@@ -44,7 +45,7 @@ const AvatarRoot = ({children, className, color, size, variant, ...props}: Avata
  * Avatar Image
  * -----------------------------------------------------------------------------------------------*/
 interface AvatarImageProps
-  extends Omit<React.ComponentProps<typeof AvatarPrimitive.Image>, "onLoadingStatusChange"> {
+  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Image>, "onLoadingStatusChange"> {
   asChild?: boolean;
   ignoreFallback?: UseImageProps["ignoreFallback"];
   shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
@@ -106,7 +107,7 @@ const AvatarImage = ({
 /* -------------------------------------------------------------------------------------------------
  * Avatar Fallback
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarFallbackProps extends React.ComponentProps<typeof AvatarPrimitive.Fallback> {
+interface AvatarFallbackProps extends ComponentPropsWithRef<typeof AvatarPrimitive.Fallback> {
   color?: AvatarVariants["color"];
 }
 

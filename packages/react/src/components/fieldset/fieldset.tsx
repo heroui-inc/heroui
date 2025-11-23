@@ -1,6 +1,7 @@
 "use client";
 
 import type {FieldsetVariants} from "./fieldset.styles";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
@@ -19,7 +20,7 @@ const FieldsetContext = createContext<FieldsetContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Root
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetRootProps extends React.ComponentProps<"fieldset">, FieldsetVariants {
+interface FieldsetRootProps extends ComponentPropsWithRef<"fieldset">, FieldsetVariants {
   asChild?: boolean;
 }
 
@@ -38,7 +39,7 @@ const FieldsetRoot = ({asChild = false, className, ...props}: FieldsetRootProps)
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Legend
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetLegendProps extends React.ComponentProps<"legend"> {
+interface FieldsetLegendProps extends ComponentPropsWithRef<"legend"> {
   asChild?: boolean;
 }
 
@@ -53,7 +54,7 @@ const FieldsetLegend = ({asChild = false, className, ...props}: FieldsetLegendPr
 /* -------------------------------------------------------------------------------------------------
  * Field Group
  * -----------------------------------------------------------------------------------------------*/
-interface FieldGroupProps extends React.ComponentProps<"div"> {
+interface FieldGroupProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;
 }
 
@@ -70,7 +71,7 @@ const FieldGroup = ({asChild = false, className, ...rest}: FieldGroupProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Field Actions
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetActionsProps extends React.ComponentProps<"div"> {
+interface FieldsetActionsProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;
 }
 
