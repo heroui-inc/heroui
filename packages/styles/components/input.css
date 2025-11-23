@@ -37,7 +37,7 @@
   /* Disabled state */
   &[data-disabled],
   &[aria-disabled] {
-    @apply status-disabled pointer-events-none;
+    @apply status-disabled;
   }
 }
 

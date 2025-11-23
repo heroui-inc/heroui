@@ -1,0 +1,328 @@
+---
+title: SearchField
+description: Search input field with clear button and search icon
+icon: new
+links:
+  rac: SearchField
+  source: search-field/search-field.tsx
+  styles: search-field.css
+  storybook: Components/Forms/SearchField
+  figma: true
+---
+
+## Import
+
+```tsx
+import { SearchField } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="search-field-basic" />
+
+### Anatomy
+
+```tsx
+import {SearchField, Label, Description, FieldError} from '@heroui/react';
+
+export default () => (
+  <SearchField>
+    <Label />
+    <SearchField.Group>
+      <SearchField.SearchIcon />
+      <SearchField.Input />
+      <SearchField.ClearButton />
+    </SearchField.Group>
+    <Description />
+    <FieldError />
+  </SearchField>
+)
+```
+
+> **SearchField** allows users to enter and clear a search query. It includes a search icon and an optional clear button for easy reset.
+
+### With Description
+
+<ComponentPreview name="search-field-with-description" />
+
+### Required Field
+
+<ComponentPreview name="search-field-required" />
+
+### Validation
+
+Use `isInvalid` together with `FieldError` to surface validation messages.
+
+<ComponentPreview name="search-field-validation" />
+
+### Disabled State
+
+<ComponentPreview name="search-field-disabled" />
+
+### Controlled
+
+Control the value to synchronize with other components or perform custom formatting.
+
+<ComponentPreview name="search-field-controlled" />
+
+### With Validation
+
+Implement custom validation logic with controlled values.
+
+<ComponentPreview name="search-field-with-validation" />
+
+### Custom Icons
+
+Customize the search icon and clear button icons.
+
+<ComponentPreview name="search-field-custom-icons" />
+
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, SearchField automatically applies on-surface styling.
+
+<ComponentPreview name="search-field-on-surface" />
+
+### Form Example
+
+Complete form integration with validation and submission handling.
+
+<ComponentPreview name="search-field-form-example" />
+
+### With Keyboard Shortcut
+
+Add keyboard shortcuts to quickly focus the search field.
+
+<ComponentPreview name="search-field-with-keyboard-shortcut" />
+
+<RelatedComponents component="searchfield" />
+
+<RelatedShowcases component="SearchField" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {SearchField, Label} from '@heroui/react';
+
+function CustomSearchField() {
+  return (
+    <SearchField className="gap-2">
+      <Label className="text-sm font-semibold">Search</Label>
+      <SearchField.Group className="rounded-xl border-2">
+        <SearchField.SearchIcon className="text-blue-500" />
+        <SearchField.Input className="text-center font-bold" />
+        <SearchField.ClearButton className="text-red-500" />
+      </SearchField.Group>
+    </SearchField>
+  );
+}
+```
+
+### Customizing the component classes
+
+SearchField uses CSS classes that can be customized. Override the component classes to match your design system.
+
+```css
+@layer components {
+  .search-field {
+    @apply flex flex-col gap-1;
+  }
+
+  /* When invalid, the description is hidden automatically */
+  .search-field[data-invalid],
+  .search-field[aria-invalid] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  .search-field__group {
+    @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border;
+  }
+
+  .search-field__input {
+    @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  }
+
+  .search-field__search-icon {
+    @apply text-field-placeholder pointer-events-none shrink-0 ml-3 mr-0 size-4;
+  }
+
+  .search-field__clear-button {
+    @apply mr-1 shrink-0;
+  }
+}
+```
+
+### CSS Classes
+
+- `.search-field` – Root container with minimal styling (`flex flex-col gap-1`)
+- `.search-field__group` – Container for search icon, input, and clear button with border and background styling
+- `.search-field__input` – The search input field
+- `.search-field__search-icon` – The search icon displayed on the left
+- `.search-field__clear-button` – Button to clear the search field
+- `.search-field__group--on-surface` – Applied when used inside a Surface component
+
+> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options.
+
+### Interactive States
+
+SearchField automatically manages these data attributes based on its state:
+
+- **Invalid**: `[data-invalid="true"]` or `[aria-invalid="true"]` - Automatically hides the description slot when invalid
+- **Disabled**: `[data-disabled="true"]` - Applied when `isDisabled` is true
+- **Focus Within**: `[data-focus-within="true"]` - Applied when the input is focused
+- **Focus Visible**: `[data-focus-visible="true"]` - Applied when focus is visible (keyboard navigation)
+- **Hovered**: `[data-hovered="true"]` - Applied when hovering over the group
+- **Empty**: `[data-empty="true"]` - Applied when the field is empty (hides clear button)
+
+Additional attributes are available through render props (see SearchFieldRenderProps below).
+
+## API Reference
+
+### SearchField Props
+
+SearchField inherits all props from React Aria's [SearchField](https://react-spectrum.adobe.com/react-aria/SearchField.html) component.
+
+#### Base Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| (values: SearchFieldRenderProps) => React.ReactNode` | - | Child components (Label, Group, Input, etc.) or render function. |
+| `className` | `string \| (values: SearchFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
+| `style` | `React.CSSProperties \| (values: SearchFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `id` | `string` | - | The element's unique identifier. |
+| `isOnSurface` | `boolean` | - | Whether the field is on a surface (auto-detected when inside Surface). |
+
+#### Value Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | Current value (controlled). |
+| `defaultValue` | `string` | - | Default value (uncontrolled). |
+| `onChange` | `(value: string) => void` | - | Handler called when the value changes. |
+
+#### Validation Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isRequired` | `boolean` | `false` | Whether user input is required before form submission. |
+| `isInvalid` | `boolean` | - | Whether the value is invalid. |
+| `validate` | `(value: string) => ValidationError \| true \| null \| undefined` | - | Custom validation function. |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | Whether to use native HTML form validation or ARIA attributes. |
+| `validationErrors` | `string[]` | - | Server-side validation errors. |
+
+#### State Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isDisabled` | `boolean` | - | Whether the input is disabled. |
+| `isReadOnly` | `boolean` | - | Whether the input can be selected but not changed. |
+
+#### Form Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | - | Name of the input element, for HTML form submission. |
+| `autoFocus` | `boolean` | - | Whether the element should receive focus on render. |
+
+#### Event Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onSubmit` | `(value: string) => void` | - | Handler called when the user submits the search (Enter key). |
+| `onClear` | `() => void` | - | Handler called when the clear button is pressed. |
+
+#### Accessibility Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `aria-label` | `string` | - | Accessibility label when no visible label is present. |
+| `aria-labelledby` | `string` | - | ID of elements that label this field. |
+| `aria-describedby` | `string` | - | ID of elements that describe this field. |
+| `aria-details` | `string` | - | ID of elements with additional details. |
+
+### Composition Components
+
+SearchField works with these separate components that should be imported and used directly:
+
+- **SearchField.Group** - Container for search icon, input, and clear button
+- **SearchField.Input** - The search input field
+- **SearchField.SearchIcon** - The search icon displayed on the left
+- **SearchField.ClearButton** - Button to clear the search field
+- **Label** - Field label component from `@heroui/react`
+- **Description** - Helper text component from `@heroui/react`
+- **FieldError** - Validation error message from `@heroui/react`
+
+Each of these components has its own props API. Use them directly within SearchField for composition:
+
+```tsx
+<SearchField isRequired isInvalid={hasError} value={value} onChange={setValue}>
+  <Label>Search</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input placeholder="Search..." />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+  <Description>Enter keywords to search</Description>
+  <FieldError>Search query is required</FieldError>
+</SearchField>
+```
+
+#### SearchField.Group Props
+
+SearchField.Group inherits props from React Aria's [Group](https://react-spectrum.adobe.com/react-aria/Group.html) component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | Child components (SearchIcon, Input, ClearButton) or render function. |
+| `className` | `string \| (values: GroupRenderProps) => string` | - | CSS classes for styling. |
+
+#### SearchField.Input Props
+
+SearchField.Input inherits props from React Aria's [Input](https://react-spectrum.adobe.com/react-aria/Input.html) component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | CSS classes for styling. |
+| `isOnSurface` | `boolean` | - | Whether the input is on a surface (auto-detected when inside Surface). |
+| `placeholder` | `string` | - | Placeholder text displayed when the input is empty. |
+| `type` | `string` | `"search"` | Input type (automatically set to "search"). |
+
+#### SearchField.SearchIcon Props
+
+SearchField.SearchIcon is a custom component that renders the search icon.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | `<IconSearch />` | Custom icon element. Defaults to search icon. |
+| `className` | `string` | - | CSS classes for styling. |
+
+#### SearchField.ClearButton Props
+
+SearchField.ClearButton inherits props from React Aria's [Button](https://react-spectrum.adobe.com/react-aria/Button.html) component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | `<CloseButton icon />` | Icon or content for the button. Defaults to close icon. |
+| `className` | `string` | - | CSS classes for styling. |
+| `slot` | `"clear"` | `"clear"` | Must be set to "clear" (automatically set). |
+
+### SearchFieldRenderProps
+
+When using render props with `className`, `style`, or `children`, these values are available:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isDisabled` | `boolean` | Whether the field is disabled. |
+| `isInvalid` | `boolean` | Whether the field is currently invalid. |
+| `isReadOnly` | `boolean` | Whether the field is read-only. |
+| `isRequired` | `boolean` | Whether the field is required. |
+| `isFocused` | `boolean` | Whether the field is currently focused (DEPRECATED - use `isFocusWithin`). |
+| `isFocusWithin` | `boolean` | Whether any child element is focused. |
+| `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
+| `value` | `string` | Current value. |
+| `isEmpty` | `boolean` | Whether the field is empty. |
+

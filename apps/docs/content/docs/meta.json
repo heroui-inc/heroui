@@ -53,6 +53,7 @@
     "components/popover",
     "components/radio-group",
     "components/separator",
+    "components/search-field",
     "components/select",
     "components/skeleton",
     "components/slider",
