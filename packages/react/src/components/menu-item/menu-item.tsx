@@ -1,10 +1,8 @@
 "use client";
 
 import type {MenuItemVariants} from "./menu-item.styles";
-import type {
-  MenuItemProps as MenuItemPrimitiveProps,
-  MenuItemRenderProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {MenuItemRenderProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components";
@@ -27,7 +25,9 @@ const MenuItemContext = createContext<MenuItemContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Root
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemRootProps extends MenuItemPrimitiveProps, MenuItemVariants {
+interface MenuItemRootProps
+  extends ComponentPropsWithRef<typeof MenuItemPrimitive>,
+    MenuItemVariants {
   className?: string;
 }
 
@@ -52,7 +52,7 @@ const MenuItemRoot = ({children, className, variant, ...props}: MenuItemRootProp
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface MenuItemIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode | ((props: MenuItemRenderProps) => React.ReactNode);
   type?: "checkmark" | "dot";
 }
@@ -118,8 +118,7 @@ const MenuItemIndicator = ({
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Submenu Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemSubmenuIndicatorProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface MenuItemSubmenuIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode;
 }
 

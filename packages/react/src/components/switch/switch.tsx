@@ -1,7 +1,7 @@
 "use client";
 
 import type {SwitchVariants} from "./switch.styles";
-import type {SwitchProps as SwitchPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
@@ -23,7 +23,7 @@ const SwitchContext = createContext<SwitchContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Switch Root
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchRootProps extends SwitchPrimitiveProps, SwitchVariants {}
+interface SwitchRootProps extends ComponentPropsWithRef<typeof SwitchPrimitive>, SwitchVariants {}
 
 const SwitchRoot = ({children, className, ...originalProps}: SwitchRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
@@ -48,7 +48,7 @@ const SwitchRoot = ({children, className, ...originalProps}: SwitchRootProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Switch Control
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
+interface SwitchControlProps extends ComponentPropsWithRef<"span"> {}
 
 const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
   const {slots} = useContext(SwitchContext);
@@ -63,7 +63,7 @@ const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Switch Thumb
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchThumbProps extends React.HTMLAttributes<HTMLSpanElement> {}
+interface SwitchThumbProps extends ComponentPropsWithRef<"span"> {}
 
 const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
   const {slots} = useContext(SwitchContext);
@@ -78,7 +78,7 @@ const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Switch Icon
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchIconProps extends React.HTMLAttributes<HTMLSpanElement> {}
+interface SwitchIconProps extends ComponentPropsWithRef<"span"> {}
 
 const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
   const {slots} = useContext(SwitchContext);

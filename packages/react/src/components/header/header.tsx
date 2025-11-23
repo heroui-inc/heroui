@@ -1,6 +1,6 @@
 "use client";
 
-import type {ComponentProps} from "react";
+import type {ComponentPropsWithRef} from "react";
 
 import {Header as HeaderPrimitive} from "react-aria-components";
 
@@ -9,7 +9,7 @@ import {headerVariants} from "./header.styles";
 /* -------------------------------------------------------------------------------------------------
  * Header Root
  * -----------------------------------------------------------------------------------------------*/
-interface HeaderRootProps extends ComponentProps<typeof HeaderPrimitive> {}
+interface HeaderRootProps extends ComponentPropsWithRef<typeof HeaderPrimitive> {}
 
 const HeaderRoot = ({children, className, ...rest}: HeaderRootProps) => {
   return (

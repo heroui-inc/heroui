@@ -1,5 +1,5 @@
 import type {EmptyStateVariants} from "./empty-state.styles";
-import type {HTMLAttributes} from "react";
+import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
 
@@ -8,7 +8,7 @@ import {emptyStateVariants} from "./empty-state.styles";
 /* -------------------------------------------------------------------------------------------------
  * EmptyState Root
  * -----------------------------------------------------------------------------------------------*/
-interface EmptyStateRootProps extends HTMLAttributes<HTMLDivElement>, EmptyStateVariants {}
+interface EmptyStateRootProps extends ComponentPropsWithRef<"div">, EmptyStateVariants {}
 
 const EmptyStateRoot = ({children, className, ...rest}: EmptyStateRootProps) => {
   return (

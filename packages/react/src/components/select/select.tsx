@@ -3,11 +3,11 @@
 import type {SelectVariants} from "./select.styles";
 import type {Booleanish} from "../../utils/assertion";
 import type {SurfaceVariants} from "../surface";
-import type {ButtonProps, SelectProps as SelectPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
-  Button,
+  Button as ButtonPrimitive,
   Popover as PopoverPrimitive,
   Select as SelectPrimitive,
   SelectStateContext,
@@ -34,7 +34,7 @@ const SelectContext = createContext<SelectContext>({});
  * Select Root
  * -----------------------------------------------------------------------------------------------*/
 interface SelectRootProps<T extends object, M extends "single" | "multiple" = "single">
-  extends SelectPrimitiveProps<T, M>,
+  extends ComponentPropsWithRef<typeof SelectPrimitive<T, M>>,
     SelectVariants {
   items?: Iterable<T, M>;
 }
@@ -68,26 +68,26 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
 /* -------------------------------------------------------------------------------------------------
  * Select Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface SelectTriggerProps extends ButtonProps {}
+interface SelectTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const SelectTrigger = ({children, className, ...props}: SelectTriggerProps) => {
   const {slots} = useContext(SelectContext);
 
   return (
-    <Button
+    <ButtonPrimitive
       className={composeTwRenderProps(className, slots?.trigger())}
       data-slot="select-trigger"
       {...props}
     >
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-    </Button>
+    </ButtonPrimitive>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Select Value
  * -----------------------------------------------------------------------------------------------*/
-interface SelectValueProps extends React.ComponentProps<typeof SelectValuePrimitive> {}
+interface SelectValueProps extends ComponentPropsWithRef<typeof SelectValuePrimitive> {}
 
 const SelectValue = ({children, className, ...props}: SelectValueProps) => {
   const {slots} = useContext(SelectContext);
@@ -106,7 +106,7 @@ const SelectValue = ({children, className, ...props}: SelectValueProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Select Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface SelectIndicatorProps extends React.ComponentProps<"svg"> {
+interface SelectIndicatorProps extends ComponentPropsWithRef<"svg"> {
   className?: string;
 }
 
@@ -144,7 +144,7 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
  * Select Popover
  * -----------------------------------------------------------------------------------------------*/
 interface SelectPopoverProps
-  extends Omit<React.ComponentProps<typeof PopoverPrimitive>, "children"> {
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children"> {
   children: React.ReactNode;
 }
 

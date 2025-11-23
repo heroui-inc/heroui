@@ -1,7 +1,7 @@
 "use client";
 
 import type {TextAreaVariants} from "./textarea.styles";
-import type {TextAreaProps as TextAreaPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {useContext} from "react";
 import {TextArea as TextAreaPrimitive} from "react-aria-components";
@@ -12,9 +12,11 @@ import {SurfaceContext} from "../surface";
 import {textAreaVariants} from "./textarea.styles";
 
 /* -------------------------------------------------------------------------------------------------
- * Exports
+ * TextArea Root
  * -----------------------------------------------------------------------------------------------*/
-interface TextAreaRootProps extends TextAreaPrimitiveProps, TextAreaVariants {}
+interface TextAreaRootProps
+  extends ComponentPropsWithRef<typeof TextAreaPrimitive>,
+    TextAreaVariants {}
 
 const TextAreaRoot = ({className, isOnSurface, ...rest}: TextAreaRootProps) => {
   const surfaceContext = useContext(SurfaceContext);

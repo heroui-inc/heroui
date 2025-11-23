@@ -2,6 +2,7 @@
 
 import type {AlertVariants} from "./alert.styles";
 import type {SurfaceVariants} from "../surface";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
@@ -24,7 +25,7 @@ const AlertContext = createContext<AlertContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Alert Root
  * --------------------------------------------------------------------------------------------- */
-interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
+interface AlertRootProps extends ComponentPropsWithRef<"div">, AlertVariants {
   asChild?: boolean;
 }
 
@@ -50,7 +51,7 @@ const AlertRoot = ({asChild, children, className, status, ...rest}: AlertRootPro
 /* ------------------------------------------------------------------------------------------------
  * Alert Indicator
  * --------------------------------------------------------------------------------------------- */
-type AlertIndicatorProps = React.ComponentProps<"div"> & {
+type AlertIndicatorProps = ComponentPropsWithRef<"div"> & {
   asChild?: boolean;
 };
 
@@ -84,7 +85,7 @@ const AlertIndicator = ({asChild, children, className, ...rest}: AlertIndicatorP
 /* ------------------------------------------------------------------------------------------------
  * Alert Content
  * --------------------------------------------------------------------------------------------- */
-type AlertContentProps = React.ComponentProps<"div"> & {
+type AlertContentProps = ComponentPropsWithRef<"div"> & {
   asChild?: boolean;
 };
 
@@ -102,7 +103,7 @@ const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps
 /* ------------------------------------------------------------------------------------------------
  * Alert Title
  * --------------------------------------------------------------------------------------------- */
-type AlertTitleProps = React.ComponentProps<"p"> & {
+type AlertTitleProps = ComponentPropsWithRef<"p"> & {
   asChild?: boolean;
 };
 
@@ -120,7 +121,7 @@ const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) =>
 /* ------------------------------------------------------------------------------------------------
  * Alert Description
  * --------------------------------------------------------------------------------------------- */
-type AlertDescriptionProps = React.ComponentProps<"span"> & {
+type AlertDescriptionProps = ComponentPropsWithRef<"span"> & {
   asChild?: boolean;
 };
 

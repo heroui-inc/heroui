@@ -1,7 +1,7 @@
 "use client";
 
 import type {AlertDialogVariants} from "./alert-dialog.styles";
-import type {ComponentProps, HTMLAttributes, ReactNode} from "react";
+import type {ComponentPropsWithRef, HTMLAttributes, ReactNode} from "react";
 import type {
   ButtonProps as ButtonPrimitiveProps,
   DialogProps as DialogPrimitiveProps,
@@ -42,7 +42,7 @@ const AlertDialogContext = createContext<AlertDialogContext>({});
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Root
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogRootProps extends ComponentProps<typeof AlertDialogTriggerPrimitive> {}
+interface AlertDialogRootProps extends ComponentPropsWithRef<typeof AlertDialogTriggerPrimitive> {}
 
 const AlertDialogRoot = ({children, ...props}: AlertDialogRootProps) => {
   const alertDialogContext = useMemo<AlertDialogContext>(
@@ -84,7 +84,7 @@ const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerP
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Container
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogContainerProps extends ComponentProps<typeof ModalPrimitive> {
+interface AlertDialogContainerProps extends ComponentPropsWithRef<typeof ModalPrimitive> {
   /**
    * The placement of the alert dialog on the screen.
    * @default "auto"
@@ -98,7 +98,7 @@ interface AlertDialogContainerProps extends ComponentProps<typeof ModalPrimitive
   /**
    * Additional CSS classes to apply to the backdrop overlay.
    */
-  backdropClassName?: ComponentProps<typeof ModalOverlayPrimitive>["className"];
+  backdropClassName?: ComponentPropsWithRef<typeof ModalOverlayPrimitive>["className"];
   /**
    * Whether to close the alert dialog when the user interacts outside it.
    * Alert dialogs typically require explicit action, so this defaults to false.
@@ -194,7 +194,7 @@ const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderPro
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Heading
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogHeadingProps extends ComponentProps<typeof HeadingPrimitive> {}
+interface AlertDialogHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const AlertDialogHeading = ({children, className, ...props}: AlertDialogHeadingProps) => {
   const {slots} = useContext(AlertDialogContext);
@@ -244,7 +244,7 @@ const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterPro
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogIconProps extends ComponentProps<"div"> {
+interface AlertDialogIconProps extends ComponentPropsWithRef<"div"> {
   /**
    * The semantic status of the icon, affects background color and default icon
    * @default "danger"
@@ -294,7 +294,7 @@ interface AlertDialogCloseTriggerProps {
 }
 
 interface AlertDialogCloseTrigger {
-  (props: {asChild: true} & ComponentProps<"button">): React.JSX.Element;
+  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
   (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
 }
 

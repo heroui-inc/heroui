@@ -2,6 +2,7 @@
 
 import type {KbdKey} from "./kbd.constants";
 import type {KbdVariants} from "./kbd.styles";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 
@@ -20,7 +21,7 @@ const KbdContext = createContext<KbdContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Kbd Root
  * -----------------------------------------------------------------------------------------------*/
-interface KbdRootProps extends React.HTMLAttributes<HTMLElement>, KbdVariants {
+interface KbdRootProps extends ComponentPropsWithRef<"kbd">, KbdVariants {
   children: React.ReactNode;
   className?: string;
 }
@@ -40,7 +41,7 @@ const KbdRoot = ({children, className, variant, ...props}: KbdRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Kbd Abbr
  * -----------------------------------------------------------------------------------------------*/
-interface KbdAbbrProps extends React.HTMLAttributes<HTMLElement> {
+interface KbdAbbrProps extends ComponentPropsWithRef<"abbr"> {
   className?: string;
   /**
    * The keyboard key to display
@@ -61,7 +62,7 @@ const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Kbd Content
  * -----------------------------------------------------------------------------------------------*/
-interface KbdContentProps extends React.ComponentProps<"span"> {
+interface KbdContentProps extends ComponentPropsWithRef<"span"> {
   children: React.ReactNode;
   className?: string;
 }

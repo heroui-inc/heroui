@@ -1,6 +1,7 @@
 "use client";
 
 import type {SurfaceVariants} from "./surface.styles";
+import type {ComponentPropsWithRef} from "react";
 
 import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
@@ -19,7 +20,7 @@ const SurfaceContext = createContext<SurfaceContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Surface Root
  * --------------------------------------------------------------------------------------------- */
-interface SurfaceRootProps extends React.ComponentProps<"div">, SurfaceVariants {
+interface SurfaceRootProps extends ComponentPropsWithRef<"div">, SurfaceVariants {
   asChild?: boolean;
 }
 

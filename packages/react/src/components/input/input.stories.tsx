@@ -22,11 +22,13 @@ export const Default: Story = {
 };
 
 export const OnSurface: Story = {
-  render: () => (
-    <div className="bg-surface flex h-[180px] w-[280px] items-center justify-center rounded-3xl p-4">
-      <Surface className="w-full">
-        <Input className="w-full" placeholder="Your name" />
-      </Surface>
-    </div>
-  ),
+  render: () => {
+    return (
+      <div className="bg-surface flex h-[180px] w-[280px] items-center justify-center rounded-3xl p-4">
+        <Surface className="w-full">
+          <Input className="w-full" placeholder="Your name" />
+        </Surface>
+      </div>
+    );
+  },
 };

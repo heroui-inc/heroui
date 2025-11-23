@@ -2,12 +2,7 @@
 
 import type {AccordionVariants} from "./accordion.styles";
 import type {Booleanish} from "../../utils/assertion";
-import type {
-  ButtonProps,
-  DisclosureGroupProps,
-  DisclosurePanelProps,
-  DisclosureProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -32,7 +27,9 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
 /* -------------------------------------------------------------------------------------------------
  * Accordion Root
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionRootProps extends DisclosureGroupProps, AccordionVariants {}
+interface AccordionRootProps
+  extends ComponentPropsWithRef<typeof DisclosureGroup>,
+    AccordionVariants {}
 
 const AccordionRoot = ({children, className, ...originalProps}: AccordionRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
@@ -69,7 +66,7 @@ const AccordionRoot = ({children, className, ...originalProps}: AccordionRootPro
 /* -------------------------------------------------------------------------------------------------
  * AccordionItem
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionItemProps extends DisclosureProps {}
+interface AccordionItemProps extends ComponentPropsWithRef<typeof Disclosure> {}
 
 const AccordionItem = ({className, ...props}: AccordionItemProps) => {
   const {slots} = useContext(AccordionContext);
@@ -88,7 +85,7 @@ const AccordionItem = ({className, ...props}: AccordionItemProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionIndicator
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionIndicatorProps extends React.ComponentProps<"svg"> {
+interface AccordionIndicatorProps extends ComponentPropsWithRef<"svg"> {
   className?: string;
 }
 
@@ -125,7 +122,7 @@ const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorP
 /* -------------------------------------------------------------------------------------------------
  * AccordionHeading
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionHeadingProps extends React.ComponentProps<typeof DisclosureHeading> {
+interface AccordionHeadingProps extends ComponentPropsWithRef<typeof DisclosureHeading> {
   className?: string;
 }
 
@@ -144,7 +141,7 @@ const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionTrigger
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionTriggerProps extends ButtonProps {}
+interface AccordionTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
 const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
   const {slots} = useContext(AccordionContext);
@@ -166,7 +163,7 @@ const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionBody
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionBodyProps extends React.ComponentProps<"div"> {
+interface AccordionBodyProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
@@ -183,7 +180,7 @@ const AccordionBody = ({children, className, ...props}: AccordionBodyProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionPanel
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionPanelProps extends DisclosurePanelProps {}
+interface AccordionPanelProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
 const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) => {
   const {slots} = useContext(AccordionContext);

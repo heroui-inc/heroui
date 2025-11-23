@@ -2,7 +2,7 @@
 
 import type {PopoverVariants} from "./popover.styles";
 import type {SurfaceVariants} from "../surface";
-import type {PopoverProps as PopoverPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -31,12 +31,12 @@ const PopoverContext = createContext<PopoverContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Popover Root
  * -----------------------------------------------------------------------------------------------*/
-type PopoverRootProps = React.ComponentProps<typeof PopoverTriggerPrimitive>;
+type PopoverRootProps = ComponentPropsWithRef<typeof PopoverTriggerPrimitive>;
 
 const PopoverRoot = ({
   children,
   ...props
-}: React.ComponentProps<typeof PopoverTriggerPrimitive>) => {
+}: ComponentPropsWithRef<typeof PopoverTriggerPrimitive>) => {
   const slots = React.useMemo(() => popoverVariants(), []);
 
   return (
@@ -51,7 +51,9 @@ const PopoverRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Popover Content
  * -----------------------------------------------------------------------------------------------*/
-interface PopoverContentProps extends Omit<PopoverPrimitiveProps, "children">, PopoverVariants {
+interface PopoverContentProps
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">,
+    PopoverVariants {
   children: React.ReactNode;
 }
 
@@ -76,7 +78,7 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Popover Arrow
  * -----------------------------------------------------------------------------------------------*/
-type PopoverArrowProps = Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+type PopoverArrowProps = Omit<ComponentPropsWithRef<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
 };
 
@@ -109,7 +111,7 @@ const PopoverArrow = ({children, className, ...props}: PopoverArrowProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Popover Dialog
  * -----------------------------------------------------------------------------------------------*/
-type PopoverDialogProps = Omit<React.ComponentProps<typeof DialogPrimitive>, "children"> & {
+type PopoverDialogProps = Omit<ComponentPropsWithRef<typeof DialogPrimitive>, "children"> & {
   children: React.ReactNode;
 };
 
@@ -126,7 +128,7 @@ const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Popover Trigger
  * -----------------------------------------------------------------------------------------------*/
-type PopoverTriggerProps = React.HTMLAttributes<HTMLDivElement>;
+type PopoverTriggerProps = ComponentPropsWithRef<"div">;
 
 const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) => {
   const {slots} = useContext(PopoverContext);
@@ -148,7 +150,7 @@ const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Popover Heading
  * -----------------------------------------------------------------------------------------------*/
-type PopoverHeadingProps = React.ComponentProps<typeof HeadingPrimitive> & {};
+type PopoverHeadingProps = ComponentPropsWithRef<typeof HeadingPrimitive> & {};
 
 const PopoverHeading = ({children, className, ...props}: PopoverHeadingProps) => {
   const {slots} = useContext(PopoverContext);
