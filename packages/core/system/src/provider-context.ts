@@ -1,4 +1,5 @@
 import type {SpinnerVariants, Calendar, DateValue, CalendarIdentifier} from "./types";
+import type {Href} from "@react-types/shared";
 
 import {createContext} from "@heroui/react-utils";
 
@@ -90,6 +91,10 @@ export type ProviderContextProps = {
    * @default default
    */
   spinnerVariant?: SpinnerVariants;
+  /**
+   * Convert a ` href ` provided to a link component to a native `href`.
+   */
+  useHref?: (href: Href) => string;
 };
 
 export const [ProviderContext, useProviderContext] = createContext<ProviderContextProps>({
