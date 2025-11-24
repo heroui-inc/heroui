@@ -20,8 +20,9 @@ import {tabsVariants} from "./tabs.styles";
  * Tabs Context
  * -----------------------------------------------------------------------------------------------*/
 type TabsContext = {
-  slots?: ReturnType<typeof tabsVariants>;
+  hideSeparator?: boolean;
   orientation?: "horizontal" | "vertical";
+  slots?: ReturnType<typeof tabsVariants>;
 };
 
 const TabsContext = createContext<TabsContext>({});
@@ -32,13 +33,20 @@ const TabsContext = createContext<TabsContext>({});
 interface TabsRootProps extends ComponentPropsWithRef<typeof TabsPrimitive>, TabsVariants {
   children: React.ReactNode;
   className?: string;
+  hideSeparator?: boolean;
 }
 
-const TabsRoot = ({children, className, orientation = "horizontal", ...props}: TabsRootProps) => {
+const TabsRoot = ({
+  children,
+  className,
+  hideSeparator = false,
+  orientation = "horizontal",
+  ...props
+}: TabsRootProps) => {
   const slots = React.useMemo(() => tabsVariants(), []);
 
   return (
-    <TabsContext value={{slots, orientation}}>
+    <TabsContext value={{hideSeparator, orientation, slots}}>
       <TabsPrimitive
         {...props}
         className={composeTwRenderProps(className, slots.base())}
@@ -81,12 +89,13 @@ interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<obj
 }
 
 const TabList = ({children, className, ...props}: TabListProps) => {
-  const {slots} = useContext(TabsContext);
+  const {hideSeparator, slots} = useContext(TabsContext);
 
   return (
     <TabListPrimitive
       {...props}
       className={composeTwRenderProps(className, slots?.tabList())}
+      data-hide-separator={hideSeparator ? "true" : undefined}
       data-slot="tabs-list"
     >
       {children}

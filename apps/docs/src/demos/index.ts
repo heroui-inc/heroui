@@ -834,6 +834,10 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.CustomStyles,
     file: "tabs/custom-styles.tsx",
   },
+  "tabs-without-separator": {
+    component: TabsDemos.WithoutSeparator,
+    file: "tabs/without-separator.tsx",
+  },
   // TextArea demos
   "textarea-basic": {
     component: TextAreaDemos.Basic,
