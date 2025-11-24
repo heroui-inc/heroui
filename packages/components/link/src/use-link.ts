@@ -114,7 +114,7 @@ export function useLink(originalProps: UseLinkProps) {
       "data-focus": dataAttr(isFocused),
       "data-disabled": dataAttr(originalProps.isDisabled),
       "data-focus-visible": dataAttr(isFocusVisible),
-      ...mergeProps(focusProps, otherProps, linkProps),
+      ...mergeProps(focusProps, linkProps, otherProps),
     };
   }, [styles, isFocused, isFocusVisible, focusProps, linkProps, otherProps]);
 

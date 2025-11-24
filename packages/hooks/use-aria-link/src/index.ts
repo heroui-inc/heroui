@@ -79,7 +79,7 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
       "aria-current": props["aria-current"],
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         pressProps.onClick?.(e);
-        handleLinkClick(e, router, routerLinkProps.href, props.routerOptions);
+        handleLinkClick(e, router, props.href, props.routerOptions);
       },
     }),
   };
