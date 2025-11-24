@@ -406,13 +406,13 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "minValue",
-      type: "RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null",
+      type: "DateValue | null",
       description: "The minimum value of the date-range-picker.",
       default: "-"
     },
     {
       attribute: "maxValue",
-      type: "RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null",
+      type: "DateValue | null",
       description: "The maximum value of the date-range-picker.",
       default: "-"
     },
@@ -424,7 +424,7 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "placeholderValue",
-      type: "ZonedDateTime | CalendarDate | CalendarDateTime | undefined | null",
+      type: "DateValue | null",
       description: "The placeholder of the date-range-picker.",
       default: "-"
     },
