@@ -376,7 +376,7 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "value",
-      type: "RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null",
+      type: "RangeValue<DateValue> | null",
       description: "The current value of the date-range-picker (controlled).",
       default: "-"
     },
@@ -418,7 +418,7 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "defaultValue",
-      type: "string",
+      type: "RangeValue<DateValue> | null",
       description: "The default value of the date-range-picker (uncontrolled).",
       default: "-"
     },
