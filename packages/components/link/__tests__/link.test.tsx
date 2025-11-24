@@ -3,6 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import * as React from "react";
 import {render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Link} from "../src";
 
@@ -85,16 +86,16 @@ describe("Link", () => {
     expect(container.querySelector("button")?.getAttribute("role")).toBe("link");
   });
 
-  // it("should apply useHref from provider", () => {
-  //   const useHref = (href: string) => `/example${href}`;
-  //
-  //   const {getByRole} = render(
-  //     <HeroUIProvider navigate={jest.fn()} useHref={useHref}>
-  //       <Link href="/test">Test Link</Link>
-  //     </HeroUIProvider>,
-  //   );
-  //   const link = getByRole("link");
-  //
-  //   expect(link.getAttribute("href")).toBe("/example/test");
-  // });
+  it("should apply useHref from provider", () => {
+    const useHref = (href: string) => `/example${href}`;
+
+    const {getByRole} = render(
+      <HeroUIProvider navigate={jest.fn()} useHref={useHref}>
+        <Link href="/test">Test Link</Link>
+      </HeroUIProvider>,
+    );
+    const link = getByRole("link");
+
+    expect(link.getAttribute("href")).toBe("/example/test");
+  });
 });
