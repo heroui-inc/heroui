@@ -68,8 +68,7 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
   let domProps = filterDOMProps(otherProps, {labelable: true, isLink: elementType === "a"});
   let interactionHandlers = mergeProps(focusableProps, pressProps);
   let router = useRouter();
-  let processedHref = props.href && router.useHref ? router.useHref(props.href) : props.href;
-  let routerLinkProps = useLinkProps({...props, href: processedHref});
+  let routerLinkProps = useLinkProps(props);
 
   return {
     isPressed, // Used to indicate press state for visual
@@ -80,7 +79,7 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
       "aria-current": props["aria-current"],
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         pressProps.onClick?.(e);
-        handleLinkClick(e, router, processedHref, props.routerOptions);
+        handleLinkClick(e, router, routerLinkProps.href, props.routerOptions);
       },
     }),
   };
