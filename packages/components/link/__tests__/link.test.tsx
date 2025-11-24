@@ -94,8 +94,8 @@ describe("Link", () => {
         <Link href="/test">Test Link</Link>
       </HeroUIProvider>,
     );
-    const link = getByRole("link") as HTMLAnchorElement;
+    const link = getByRole("link");
 
-    expect(link.href).toBe("/example/test");
+    expect(link.getAttribute("href")).toBe("/example/test");
   });
 });
