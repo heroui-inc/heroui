@@ -14,6 +14,7 @@ import {CarbonAd} from "@/components/ads/carbon-ad";
 import * as DocsComponents from "@/components/docs/components";
 import * as BlogComponents from "@/components/blog/components";
 import {Codeblock} from "@/components/docs/components";
+import {DeprecationMessage} from "@/components/docs/deprecation-message";
 import {VirtualAnchor, virtualAnchorEncode} from "@/components/virtual-anchor";
 import {
   Table as StaticTable,
@@ -362,6 +363,7 @@ export const MDXComponents = {
   tr: Trow,
   td: Tcol,
   CarbonAd,
+  DeprecationMessage,
   code: Code,
   ul: List,
   a: (props: React.HTMLAttributes<HTMLAnchorElement>) => <Link {...props} />,
