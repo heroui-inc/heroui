@@ -77,7 +77,7 @@ function getClassNamesWithProps({
 
   // if no slots, the result is a string
   if (!hasSlots) {
-    newProps.className = clsx(result, props.className);
+    newProps.className = clsx(result, defaultVariants?.className, props.className);
   }
   // if has slots, the result is an object with keys as slots functions
   else {
