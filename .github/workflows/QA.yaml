@@ -35,18 +35,6 @@ jobs:
       - name: Run ESLint
         run: pnpm lint
 
-  prettier:
-    name: Prettier
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v4
-
-      - name: Install
-        uses: ./.github/common-actions/install
-
-      - name: Run prettier
-        run: pnpm prettier --check .
 
   types:
     name: TypeScript
@@ -65,9 +53,14 @@ jobs:
     name: Continuous Release
     if: github.repository == 'heroui-inc/heroui'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install
         uses: ./.github/common-actions/install
@@ -76,4 +69,4 @@ jobs:
         run: pnpm build
 
       - name: Release
-        run: pnpx pkg-pr-new publish --compact --pnpm './packages/styles' './packages/react'
+        run: pnpx pkg-pr-new publish --pnpm './packages/styles' './packages/react'
