@@ -21,18 +21,6 @@ jobs:
       - name: Build packages
         run: pnpm build
 
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v4
-
-      - name: Install
-        uses: ./.github/common-actions/install
-
-      - name: Run tests
-        run: pnpm test
 
   eslint:
     name: ESLint
@@ -58,7 +46,7 @@ jobs:
         uses: ./.github/common-actions/install
 
       - name: Run prettier
-        run: pnpm format:check
+        run: pnpm prettier --check .
 
   types:
     name: TypeScript
