@@ -210,6 +210,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "radiogroup",
     title: "RadioGroup",
   },
+  scrollshadow: {
+    category: "utilities",
+    description: "Visual shadows for scrollable content overflow",
+    href: "/docs/components/scroll-shadow",
+    name: "scrollshadow",
+    title: "ScrollShadow",
+  },
   select: {
     category: "forms",
     description: "Dropdown select control",
@@ -404,6 +411,7 @@ const componentRelationships: Record<string, string[]> = {
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
+  scrollshadow: [],
   select: [
     "listbox",
     "popover",
