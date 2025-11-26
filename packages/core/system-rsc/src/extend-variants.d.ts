@@ -1,5 +1,6 @@
 import type {ClassValue, StringToBoolean, OmitUndefined, ClassProp} from "tailwind-variants";
 import type {ForwardRefExoticComponent, JSXElementConstructor, RefAttributes} from "react";
+import type * as _heroui_system from "@heroui/system";
 
 type SlotsClassValue<S> = {
   [K in keyof S]?: ClassValue;
@@ -18,13 +19,13 @@ type ValidateSubtype<T, U> = OmitUndefined<T> extends U ? "true" : "false";
 type GetSuggestedValues<S> = ClassValue | (S extends undefined ? never : SlotsClassValue<S>);
 
 type SuggestedVariants<CP, S> = {
-  [K in keyof CP]?: ValidateSubtype<CP[K], string> extends "true"
+  [K in Exclude<keyof CP, "classNames" | "className" | "class">]?: ValidateSubtype<
+    CP[K],
+    string
+  > extends "true"
     ? {[K2 in CP[K]]?: GetSuggestedValues<S>}
     : ValidateSubtype<CP[K], boolean> extends "true"
-      ? {
-          true?: GetSuggestedValues<S>;
-          false?: GetSuggestedValues<S>;
-        }
+      ? {true?: GetSuggestedValues<S>; false?: GetSuggestedValues<S>}
       : never;
 };
 
@@ -41,7 +42,9 @@ type VariantValue<V, SV> = {
         : never);
 };
 
-type DefaultVariants<V, SV> = VariantValue<V, SV>;
+type DefaultVariants<V, SV, S> = VariantValue<V, SV> & {
+  classNames?: S extends undefined ? never : SlotsClassValue<S>;
+};
 
 type CompoundVariants<V, SV, S> = Array<VariantValue<V, SV> & ClassProp<GetSuggestedValues<S>>>;
 
@@ -68,7 +71,7 @@ export type ExtendVariantProps = {
 
 export type ExtendVariantWithSlotsProps = {
   variants?: Record<string, Record<string, string | Record<string, string>>>;
-  defaultVariants?: Record<string, string>;
+  defaultVariants?: Record<string, string | Record<string, string>>;
   compoundVariants?: Array<Record<string, boolean | string | Record<string, string>>>;
 };
 
@@ -79,32 +82,35 @@ type InferRef<C> =
       ? I
       : any;
 
-export type ExtendVariants = {
-  <
-    C extends JSXElementConstructor<any>,
-    CP extends ComponentProps<C>,
-    S extends ComponentSlots<CP>,
-    V extends ComposeVariants<CP, S>,
-    SV extends SuggestedVariants<CP, S>,
-    DV extends DefaultVariants<V, SV>,
-    CV extends CompoundVariants<V, SV, ComponentSlots<CP>>,
-  >(
-    BaseComponent: C,
-    styles: {
-      variants?: V;
-      defaultVariants?: DV;
-      compoundVariants?: CV;
-      slots?: S;
-    },
-    opts?: Options,
-  ): ForwardRefExoticComponent<
-    {
-      [key in Exclude<keyof CP | keyof V, "ref">]?:
-        | (key extends keyof CP ? CP[key] : never)
-        | (key extends keyof V ? StringToBoolean<keyof NonNullable<V[key]>> : never);
-    } & RefAttributes<InferRef<C>>
-  >;
-};
+export type ExtendVariants = <
+  C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
+  CP extends ComponentProps<C> = ComponentProps<C>,
+  S extends ComponentSlots<CP> = ComponentSlots<CP>,
+  V extends ComposeVariants<CP, S> = ComposeVariants<CP, S>,
+  SV extends SuggestedVariants<CP, S> = SuggestedVariants<CP, S>,
+  DV extends DefaultVariants<V, SV, S> = DefaultVariants<V, SV, S>,
+  CV extends CompoundVariants<V, SV, ComponentSlots<CP>> = CompoundVariants<
+    V,
+    SV,
+    ComponentSlots<CP>
+  >,
+>(
+  BaseComponent: C,
+  styles: {
+    variants?: V;
+    defaultVariants?: DV;
+    compoundVariants?: CV;
+    slots?: S;
+  },
+  opts?: Options,
+) => _heroui_system.InternalForwardRefRenderFunction<
+  C,
+  {
+    [K in Exclude<keyof (CP & V), "ref" | "as">]?:
+      | (K extends keyof CP ? CP[K] : never)
+      | (K extends keyof V ? StringToBoolean<keyof NonNullable<V[K]>> : never);
+  }
+>;
 
 // main function
 export declare const extendVariants: ExtendVariants;

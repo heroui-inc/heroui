@@ -30,9 +30,7 @@ function getSlots(variants) {
       }
 
       for (const slotName of Object.keys(config)) {
-        if (!Object.prototype.hasOwnProperty.call(acc, slotName)) {
-          acc[slotName] = "";
-        }
+        acc[slotName] = "";
       }
     }
   }
