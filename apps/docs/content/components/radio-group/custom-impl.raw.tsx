@@ -18,12 +18,13 @@ export const CustomRadio = (props: RadioProps) => {
 
   return (
     <Component
-      {...getBaseProps()}
-      className={cn(
-        "group inline-flex items-center justify-between hover:bg-content2 flex-row-reverse",
-        "max-w-[300px] cursor-pointer border-2 border-default rounded-lg gap-4 p-4",
-        "data-[selected=true]:border-primary",
-      )}
+      {...getBaseProps({
+        className: cn(
+          "group inline-flex items-center hover:opacity-70 active:opacity-50 justify-between flex-row-reverse tap-highlight-transparent m-0",
+          "max-w-[300px] cursor-pointer border-2 border-default rounded-lg gap-4 p-4",
+          "data-[selected=true]:border-primary",
+        ),
+      })}
     >
       <VisuallyHidden>
         <input {...getInputProps()} />

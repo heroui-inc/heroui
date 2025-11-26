@@ -4,11 +4,11 @@ import type {RadioProps, RadioGroupProps} from "../src";
 
 import React from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
-import {radio, button} from "@heroui/theme";
+import {radio, button, cn} from "@heroui/theme";
 import {clsx} from "@heroui/shared-utils";
 import {Form} from "@heroui/form";
 
-import {RadioGroup, Radio, useRadio, useRadioGroupContext} from "../src";
+import {RadioGroup, Radio, useRadio} from "../src";
 
 export default {
   title: "Components/RadioGroup",
@@ -360,19 +360,14 @@ export const Controlled = {
 const CustomRadio = (props: RadioProps) => {
   const {children, ...otherProps} = props;
 
-  const {groupState} = useRadioGroupContext();
-
-  const isSelected = groupState.selectedValue === otherProps.value;
-
   return (
     <Radio
       {...otherProps}
       classNames={{
-        base: clsx(
-          "inline-flex bg-content1 hover:bg-content2 items-center justify-between flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2 border-transparent",
-          {
-            "border-primary": isSelected,
-          },
+        base: cn(
+          "inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between",
+          "flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2 border-transparent",
+          "data-[selected=true]:border-primary",
         ),
       }}
     >
@@ -401,7 +396,6 @@ const RadioCard = (props: RadioProps) => {
   const {
     Component,
     children,
-    isSelected,
     description,
     getBaseProps,
     getWrapperProps,
@@ -413,13 +407,13 @@ const RadioCard = (props: RadioProps) => {
 
   return (
     <Component
-      {...getBaseProps()}
-      className={clsx(
-        "group inline-flex items-center justify-between hover:bg-content2 flex-row-reverse max-w-[300px] cursor-pointer border-2 border-default rounded-lg gap-4 p-4",
-        {
-          "border-primary": isSelected,
-        },
-      )}
+      {...getBaseProps({
+        className: cn(
+          "group inline-flex items-center hover:opacity-70 active:opacity-50 justify-between flex-row-reverse tap-highlight-transparent m-0",
+          "max-w-[300px] cursor-pointer border-2 border-default rounded-lg gap-4 p-4",
+          "data-[selected=true]:border-primary",
+        ),
+      })}
     >
       <VisuallyHidden>
         <input {...getInputProps()} />

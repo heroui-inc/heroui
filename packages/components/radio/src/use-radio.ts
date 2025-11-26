@@ -156,7 +156,7 @@ export function useRadio(props: UseRadioProps) {
       return {
         ...props,
         ref: domRef,
-        className: slots.base({class: baseStyles}),
+        className: slots.base({class: clsx(baseStyles, props?.className)}),
         "data-disabled": dataAttr(isDisabled),
         "data-focus": dataAttr(isFocused),
         "data-focus-visible": dataAttr(isFocusVisible),
