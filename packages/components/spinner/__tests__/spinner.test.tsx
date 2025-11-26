@@ -1,5 +1,6 @@
 import * as React from "react";
 import {render} from "@testing-library/react";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Spinner} from "../src";
 
@@ -39,5 +40,25 @@ describe("Spinner", () => {
     const {getByLabelText} = render(<Spinner aria-label="Custom label" />);
 
     expect(getByLabelText("Custom label")).toBeInTheDocument();
+  });
+
+  it("should use global spinner variant if variant is not defined", () => {
+    const {container} = render(
+      <HeroUIProvider spinnerVariant="gradient">
+        <Spinner aria-label="Custom label" />
+      </HeroUIProvider>,
+    );
+
+    expect(container.querySelector("[class*='gradient']")).toBeInTheDocument();
+  });
+
+  it("should not use global spinner variant if variant is defined", () => {
+    const {container} = render(
+      <HeroUIProvider spinnerVariant="gradient">
+        <Spinner aria-label="Custom label" variant="default" />
+      </HeroUIProvider>,
+    );
+
+    expect(container.querySelector("[class*='gradient']")).not.toBeInTheDocument();
   });
 });
