@@ -40,6 +40,7 @@ const COMPONENT_NAMES = [
   "radio-group",
   "scroll-shadow",
   "separator",
+  "search-field",
   "select",
   "skeleton",
   "slider",

@@ -54,6 +54,7 @@
     "components/radio-group",
     "components/scroll-shadow",
     "components/separator",
+    "components/search-field",
     "components/select",
     "components/skeleton",
     "components/slider",

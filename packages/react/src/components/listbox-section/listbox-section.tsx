@@ -1,6 +1,6 @@
 "use client";
 
-import type {ComponentProps} from "react";
+import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
 import {ListBoxSection as ListBoxSectionPrimitive} from "react-aria-components";
@@ -10,7 +10,7 @@ import {listboxSectionVariants} from "./listbox-section.styles";
 /* -------------------------------------------------------------------------------------------------
  * ListBox Section Root
  * -----------------------------------------------------------------------------------------------*/
-interface ListBoxSectionRootProps extends ComponentProps<typeof ListBoxSectionPrimitive> {
+interface ListBoxSectionRootProps extends ComponentPropsWithRef<typeof ListBoxSectionPrimitive> {
   className?: string;
 }
 

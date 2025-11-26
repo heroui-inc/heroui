@@ -104,6 +104,11 @@
     opacity: 0;
   }
 
+  /* Hide separator when hideSeparator prop is set */
+  [data-hide-separator="true"] &:not(:first-child):before {
+    display: none;
+  }
+
   /* Disabled state */
   &:disabled,
   &[data-disabled],

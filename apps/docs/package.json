@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -34,29 +34,29 @@
     "motion": "12.23.22",
     "next": "15.5.4",
     "next-themes": "0.4.6",
-    "react": "19.1.1",
+    "react": "19.2.0",
     "react-aria-components": "1.13.0",
-    "react-dom": "19.1.1",
+    "react-dom": "19.2.0",
     "remark": "15.0.1",
     "remark-gfm": "4.0.1",
     "remark-mdx": "3.1.1",
     "shiki": "3.13.0",
-    "tailwind-merge": "3.3.1",
-    "tailwind-variants": "3.1.1",
-    "ts-morph": "27.0.0",
+    "tailwind-merge": "3.4.0",
+    "tailwind-variants": "3.2.2",
+    "ts-morph": "27.0.2",
     "usehooks-ts": "3.1.1",
-    "zod": "4.1.11"
+    "zod": "4.1.12"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
     "@heroui/styles": "workspace:*",
-    "@tailwindcss/postcss": "4.1.13",
+    "@tailwindcss/postcss": "4.1.17",
     "@types/color-convert": "2.0.4",
     "@types/mdx": "2.0.13",
-    "@types/react": "19.1.15",
-    "@types/react-dom": "19.1.9",
-    "babel-plugin-react-compiler": "19.1.0-rc.3",
+    "@types/react": "19.2.6",
+    "@types/react-dom": "19.2.3",
+    "babel-plugin-react-compiler": "1.0.0",
     "postcss": "8.5.6",
-    "tailwindcss": "4.1.13"
+    "tailwindcss": "4.1.17"
   }
 }

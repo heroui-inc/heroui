@@ -1,10 +1,8 @@
 "use client";
 
 import type {ListBoxItemVariants} from "./listbox-item.styles";
-import type {
-  ListBoxItemProps as ListBoxItemPrimitiveProps,
-  ListBoxItemRenderProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {ListBoxItemRenderProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {ListBoxItem as ListBoxItemPrimitive} from "react-aria-components";
@@ -26,7 +24,9 @@ const ListBoxItemContext = createContext<ListBoxItemContext>({});
 /* -------------------------------------------------------------------------------------------------
  * ListBox Item Root
  * -----------------------------------------------------------------------------------------------*/
-interface ListBoxItemRootProps extends ListBoxItemPrimitiveProps, ListBoxItemVariants {
+interface ListBoxItemRootProps
+  extends ComponentPropsWithRef<typeof ListBoxItemPrimitive>,
+    ListBoxItemVariants {
   className?: string;
 }
 
@@ -51,8 +51,7 @@ const ListBoxItemRoot = ({children, className, variant, ...props}: ListBoxItemRo
 /* -------------------------------------------------------------------------------------------------
  * ListBox Item Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface ListBoxItemIndicatorProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface ListBoxItemIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode | ((props: ListBoxItemRenderProps) => React.ReactNode);
 }
 

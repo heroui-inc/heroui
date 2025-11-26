@@ -1,6 +1,6 @@
 "use client";
 
-import {cnBase as cn} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 import {siteConfig} from "@/config/site";
 import {DiscordIcon} from "@/icons/discord";

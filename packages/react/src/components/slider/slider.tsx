@@ -1,6 +1,7 @@
 "use client";
 
 import type {SliderVariants} from "./slider.styles";
+import type {ComponentPropsWithRef} from "react";
 import type {SliderRenderProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
@@ -37,7 +38,7 @@ const SliderContext = createContext<SliderContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Slider Root
  * -----------------------------------------------------------------------------------------------*/
-interface SliderRootProps extends React.ComponentProps<typeof SliderPrimitive>, SliderVariants {}
+interface SliderRootProps extends ComponentPropsWithRef<typeof SliderPrimitive>, SliderVariants {}
 
 const SliderRoot = ({
   children,
@@ -66,7 +67,7 @@ const SliderRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Slider Output
  * -----------------------------------------------------------------------------------------------*/
-interface SliderOutputProps extends React.ComponentProps<typeof SliderOutputPrimitive> {}
+interface SliderOutputProps extends ComponentPropsWithRef<typeof SliderOutputPrimitive> {}
 
 const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
   const {slots} = useContext(SliderContext);
@@ -87,7 +88,7 @@ const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Track
  * -----------------------------------------------------------------------------------------------*/
-interface SliderTrackProps extends React.ComponentProps<typeof SliderTrackPrimitive> {}
+interface SliderTrackProps extends ComponentPropsWithRef<typeof SliderTrackPrimitive> {}
 
 const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
   const {slots, state} = useContext(SliderContext);
@@ -127,7 +128,7 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
  * -----------------------------------------------------------------------------------------------*/
-interface SliderFillProps extends React.ComponentProps<"div"> {}
+interface SliderFillProps extends ComponentPropsWithRef<"div"> {}
 
 const SliderFill = ({className, style, ...props}: SliderFillProps) => {
   const {slots, state} = useContext(SliderContext);
@@ -166,7 +167,7 @@ const SliderFill = ({className, style, ...props}: SliderFillProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Thumb
  * -----------------------------------------------------------------------------------------------*/
-interface SliderThumbProps extends React.ComponentProps<typeof SliderThumbPrimitive> {}
+interface SliderThumbProps extends ComponentPropsWithRef<typeof SliderThumbPrimitive> {}
 
 const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
   const {slots} = useContext(SliderContext);
@@ -185,7 +186,7 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
 /* -------------------------------------------------------------------------------------------------
  * TODO: Slider Marks
  * -----------------------------------------------------------------------------------------------*/
-interface SliderMarksProps extends React.ComponentProps<"div"> {}
+interface SliderMarksProps extends ComponentPropsWithRef<"div"> {}
 
 const SliderMarks = ({className, ...props}: SliderMarksProps) => {
   const {slots} = useContext(SliderContext);

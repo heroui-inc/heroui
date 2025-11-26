@@ -31,6 +31,7 @@ export * from "./input";
 export * from "./input-group";
 export * from "./textarea";
 export * from "./text-field";
+export * from "./search-field";
 export * from "./text";
 export * from "./label";
 export * from "./description";

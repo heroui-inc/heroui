@@ -31,6 +31,7 @@ import * as NumberFieldDemos from "./number-field";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
 import * as ScrollShadowDemos from "./scroll-shadow";
+import * as SearchFieldDemos from "./search-field";
 import * as SelectDemos from "./select";
 import * as SeparatorDemos from "./separator";
 import * as SkeletonDemos from "./skeleton";
@@ -834,6 +835,10 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.CustomStyles,
     file: "tabs/custom-styles.tsx",
   },
+  "tabs-without-separator": {
+    component: TabsDemos.WithoutSeparator,
+    file: "tabs/without-separator.tsx",
+  },
   // TextArea demos
   "textarea-basic": {
     component: TextAreaDemos.Basic,
@@ -1110,6 +1115,51 @@ export const demos: Record<string, DemoItem> = {
   "select-disabled": {
     component: SelectDemos.Disabled,
     file: "select/disabled.tsx",
+  },
+  // SearchField demos
+  "search-field-basic": {
+    component: SearchFieldDemos.Basic,
+    file: "search-field/basic.tsx",
+  },
+  "search-field-with-description": {
+    component: SearchFieldDemos.WithDescription,
+    file: "search-field/with-description.tsx",
+  },
+  "search-field-required": {
+    component: SearchFieldDemos.Required,
+    file: "search-field/required.tsx",
+  },
+  "search-field-validation": {
+    component: SearchFieldDemos.Validation,
+    file: "search-field/validation.tsx",
+  },
+  "search-field-disabled": {
+    component: SearchFieldDemos.Disabled,
+    file: "search-field/disabled.tsx",
+  },
+  "search-field-controlled": {
+    component: SearchFieldDemos.Controlled,
+    file: "search-field/controlled.tsx",
+  },
+  "search-field-with-validation": {
+    component: SearchFieldDemos.WithValidation,
+    file: "search-field/with-validation.tsx",
+  },
+  "search-field-custom-icons": {
+    component: SearchFieldDemos.CustomIcons,
+    file: "search-field/custom-icons.tsx",
+  },
+  "search-field-on-surface": {
+    component: SearchFieldDemos.OnSurface,
+    file: "search-field/on-surface.tsx",
+  },
+  "search-field-form-example": {
+    component: SearchFieldDemos.FormExample,
+    file: "search-field/form-example.tsx",
+  },
+  "search-field-with-keyboard-shortcut": {
+    component: SearchFieldDemos.WithKeyboardShortcut,
+    file: "search-field/with-keyboard-shortcut.tsx",
   },
   // ScrollShadow demos
   "scroll-shadow-default": {
