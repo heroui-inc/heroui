@@ -6,7 +6,7 @@
   "homepage": "https://heroui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "https://github.com/heroui-inc/heroui",
     "directory": "packages/styles"
   },
   "license": "MIT",
