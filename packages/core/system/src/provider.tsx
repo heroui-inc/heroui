@@ -90,7 +90,6 @@ export const HeroUIProvider: React.FC<HeroUIProviderProps> = ({
       validationBehavior,
       labelPlacement,
       spinnerVariant,
-      useHref,
     };
   }, [
     createCalendar,
@@ -101,7 +100,6 @@ export const HeroUIProvider: React.FC<HeroUIProviderProps> = ({
     validationBehavior,
     labelPlacement,
     spinnerVariant,
-    useHref,
   ]);
 
   return (
