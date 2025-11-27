@@ -44,12 +44,7 @@ export type UseLinkProps = Props & AriaLinkProps;
 
 export function useLink(originalProps: UseLinkProps) {
   const globalContext = useProviderContext();
-  const resolvedProps =
-    globalContext?.useHref && originalProps.href
-      ? {...originalProps, href: globalContext.useHref(originalProps.href)}
-      : originalProps;
-
-  const [props, variantProps] = mapPropsVariants(resolvedProps, link.variantKeys);
+  const [props, variantProps] = mapPropsVariants(originalProps, link.variantKeys);
 
   const {
     ref,
@@ -114,7 +109,7 @@ export function useLink(originalProps: UseLinkProps) {
       "data-focus": dataAttr(isFocused),
       "data-disabled": dataAttr(originalProps.isDisabled),
       "data-focus-visible": dataAttr(isFocusVisible),
-      ...mergeProps(focusProps, linkProps, otherProps),
+      ...mergeProps(focusProps, otherProps, linkProps),
     };
   }, [styles, isFocused, isFocusVisible, focusProps, linkProps, otherProps]);
 
