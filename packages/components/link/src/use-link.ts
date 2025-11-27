@@ -44,6 +44,7 @@ export type UseLinkProps = Props & AriaLinkProps;
 
 export function useLink(originalProps: UseLinkProps) {
   const globalContext = useProviderContext();
+
   const [props, variantProps] = mapPropsVariants(originalProps, link.variantKeys);
 
   const {
