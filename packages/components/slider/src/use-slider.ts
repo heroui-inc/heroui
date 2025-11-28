@@ -8,13 +8,13 @@ import type {ValueBase} from "@react-types/shared";
 import type {SliderThumbProps} from "./slider-thumb";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {slider} from "@heroui/theme";
+import {slider, cn} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useSliderState} from "@react-stately/slider";
 import {useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
 import {useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx, mergeProps, objectToDeps, warn} from "@heroui/shared-utils";
+import {mergeProps, objectToDeps, warn} from "@heroui/shared-utils";
 import {useHover} from "@react-aria/interactions";
 
 export type SliderValue = number | number[];
@@ -247,7 +247,7 @@ export function useSlider(originalProps: UseSliderProps) {
   );
   const {isHovered, hoverProps} = useHover({isDisabled: originalProps.isDisabled});
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
   const isVertical = orientation === "vertical";
   const hasMarks = marks?.length > 0;
   const hasSingleThumb = fillOffset === undefined ? state.values.length === 1 : false;

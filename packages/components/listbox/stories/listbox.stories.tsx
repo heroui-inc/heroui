@@ -15,7 +15,7 @@ import {
 import {usersData} from "@heroui/stories-utils";
 import {Avatar} from "@heroui/avatar";
 import {Chip} from "@heroui/chip";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {ScrollShadow} from "@heroui/scroll-shadow";
 
 import {Listbox, ListboxItem, ListboxSection} from "../src";
@@ -297,7 +297,7 @@ const WithStartContentTemplate = ({color, variant, disableAnimation, ...args}: L
         key="delete"
         className="text-danger"
         color="danger"
-        startContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+        startContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
       >
         Delete file
       </ListboxItem>
@@ -330,7 +330,7 @@ const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => 
         key="delete"
         className="text-danger"
         color="danger"
-        endContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+        endContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
       >
         Delete file
       </ListboxItem>
@@ -484,7 +484,7 @@ const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) =>
         className="text-danger"
         color="danger"
         description="Permanently delete the file"
-        startContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+        startContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
       >
         Delete file
       </ListboxItem>
@@ -533,7 +533,7 @@ const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
           className="text-danger"
           color="danger"
           description="Permanently delete the file"
-          startContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+          startContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
         >
           Delete file
         </ListboxItem>
@@ -544,7 +544,7 @@ const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
 
 const CustomWithClassNamesTemplate = ({color, variant, disableAnimation, ...args}) => {
   const IconWrapper = ({children, className}) => (
-    <div className={clsx(className, "flex items-center rounded-small justify-center w-7 h-7")}>
+    <div className={cn(className, "flex items-center rounded-small justify-center w-7 h-7")}>
       {children}
     </div>
   );

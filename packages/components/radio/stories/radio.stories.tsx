@@ -5,7 +5,7 @@ import type {RadioProps, RadioGroupProps} from "../src";
 import React from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {radio, button, cn} from "@heroui/theme";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {Form} from "@heroui/form";
 
 import {RadioGroup, Radio, useRadio} from "../src";
@@ -424,7 +424,7 @@ const RadioCard = (props: RadioProps) => {
       <div {...getLabelWrapperProps()}>
         {children && <span {...getLabelProps()}>{children}</span>}
         {description && (
-          <span className={clsx("text-sm text-foreground opacity-70")}>{description}</span>
+          <span className={cn("text-sm text-foreground opacity-70")}>{description}</span>
         )}
       </div>
     </Component>

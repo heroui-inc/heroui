@@ -4,7 +4,7 @@ import type {ReactRef} from "@heroui/react-utils";
 import {useEffect} from "react";
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {useModalContext} from "./modal-context";
 
@@ -37,7 +37,7 @@ const ModalHeader = forwardRef<"header", ModalHeaderProps>((props, ref) => {
   return (
     <Component
       ref={domRef}
-      className={slots.header({class: clsx(classNames?.header, className)})}
+      className={slots.header({class: cn(classNames?.header, className)})}
       id={headerId}
       {...otherProps}
     >

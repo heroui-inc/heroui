@@ -11,12 +11,12 @@ import type {ScrollShadowProps} from "@heroui/scroll-shadow";
 import type {ButtonProps} from "@heroui/button";
 import type {AsyncLoadable, PressEvent} from "@react-types/shared";
 
-import {clsx, dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useEffect, useMemo, useRef} from "react";
 import {useDOMRef} from "@heroui/react-utils";
 import {useComboBoxState} from "@react-stately/combobox";
 import {useFilter} from "@react-aria/i18n";
-import {autocomplete} from "@heroui/theme";
+import {autocomplete, cn} from "@heroui/theme";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useComboBox} from "@react-aria/combobox";
@@ -328,7 +328,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     ),
   };
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
   const isOpen = slotsProps.listboxProps?.hideEmptyContent
     ? state.isOpen && !!state.collection.size
     : state.isOpen;
@@ -442,7 +442,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       ...mergeProps(buttonProps, slotsProps.selectorButtonProps),
       "data-open": dataAttr(state.isOpen),
       className: slots.selectorButton({
-        class: clsx(classNames?.selectorButton, slotsProps.selectorButtonProps?.className),
+        class: cn(classNames?.selectorButton, slotsProps.selectorButtonProps?.className),
       }),
     }) as ButtonProps;
 
@@ -468,7 +468,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       },
       "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
       className: slots.clearButton({
-        class: clsx(classNames?.clearButton, slotsProps.clearButtonProps?.className),
+        class: cn(classNames?.clearButton, slotsProps.clearButtonProps?.className),
       }),
     }) as ButtonProps;
 
@@ -527,7 +527,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       classNames: {
         ...slotsProps.popoverProps?.classNames,
         content: slots.popoverContent({
-          class: clsx(
+          class: cn(
             classNames?.popoverContent,
             slotsProps.popoverProps?.classNames?.["content"],
             props.className,
@@ -551,7 +551,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const getListBoxWrapperProps: PropGetter = (props: any = {}) => ({
     ...mergeProps(slotsProps.scrollShadowProps, props),
     className: slots.listboxWrapper({
-      class: clsx(
+      class: cn(
         classNames?.listboxWrapper,
         slotsProps.scrollShadowProps?.className,
         props?.className,
@@ -564,7 +564,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
 
   const getEndContentWrapperProps: PropGetter = (props: any = {}) => ({
     className: slots.endContentWrapper({
-      class: clsx(classNames?.endContentWrapper, props?.className),
+      class: cn(classNames?.endContentWrapper, props?.className),
     }),
     onPointerDown: chain(props.onPointerDown, (e: React.PointerEvent) => {
       if (e.button === 0 && e.currentTarget === e.target) {

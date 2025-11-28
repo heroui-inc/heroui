@@ -9,7 +9,7 @@ import {
   EditDocumentBulkIcon,
   DeleteDocumentBulkIcon,
 } from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {Menu, MenuItem, MenuSection} from "../src";
 
@@ -174,7 +174,7 @@ const WithStartContentTemplate = ({color, variant, disableAnimation, ...args}: M
         className="text-danger"
         color="danger"
         shortcut="⌘⇧D"
-        startContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+        startContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
       >
         Delete file
       </MenuItem>
@@ -207,7 +207,7 @@ const WithEndContentTemplate = ({color, variant, disableAnimation, ...args}) => 
         key="delete"
         className="text-danger"
         color="danger"
-        endContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+        endContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
       >
         Delete file
       </MenuItem>
@@ -257,7 +257,7 @@ const WithDescriptionTemplate = ({color, variant, disableAnimation, ...args}) =>
         color="danger"
         description="Permanently delete the file"
         shortcut="⌘⇧D"
-        startContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+        startContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
       >
         Delete file
       </MenuItem>
@@ -311,7 +311,7 @@ const WithSectionsTemplate = ({color, variant, disableAnimation, ...args}) => {
           color="danger"
           description="Permanently delete the file"
           shortcut="⌘⇧D"
-          startContent={<DeleteDocumentBulkIcon className={clsx(iconClasses, "!text-danger")} />}
+          startContent={<DeleteDocumentBulkIcon className={cn(iconClasses, "!text-danger")} />}
         >
           Delete file
         </MenuItem>

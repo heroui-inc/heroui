@@ -361,9 +361,6 @@ importers:
       canvas-confetti:
         specifier: ^1.9.2
         version: 1.9.3
-      clsx:
-        specifier: ^1.2.1
-        version: 1.2.1
       cmdk:
         specifier: ^0.2.0
         version: 0.2.1(@types/react@18.2.8)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -3197,9 +3194,6 @@ importers:
       '@react-types/shared':
         specifier: 3.32.1
         version: 3.32.1(react@18.3.0)
-      clsx:
-        specifier: ^1.2.1
-        version: 1.2.1
     devDependencies:
       '@heroui/react-utils':
         specifier: workspace:*
@@ -3228,9 +3222,6 @@ importers:
       '@heroui/shared-utils':
         specifier: workspace:*
         version: link:../../utilities/shared-utils
-      clsx:
-        specifier: ^1.2.1
-        version: 1.2.1
       color:
         specifier: ^4.2.3
         version: 4.2.3
@@ -3879,6 +3870,9 @@ importers:
 
   packages/utilities/shared-utils:
     devDependencies:
+      '@heroui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
@@ -9306,10 +9300,6 @@ packages:
   clone@2.1.2:
     resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
     engines: {node: '>=0.8'}
-
-  clsx@1.2.1:
-    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
-    engines: {node: '>=6'}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -21912,8 +21902,6 @@ snapshots:
   clone@1.0.4: {}
 
   clone@2.1.2: {}
-
-  clsx@1.2.1: {}
 
   clsx@2.1.1: {}
 

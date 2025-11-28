@@ -6,12 +6,13 @@ import type {ValuesType} from "./use-table";
 import {cloneElement, isValidElement} from "react";
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableColumnHeader} from "@react-aria/table";
 import {ChevronDownIcon} from "@heroui/shared-icons";
 import {useFocusRing} from "@react-aria/focus";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {useHover} from "@react-aria/interactions";
+import {cn} from "@heroui/theme";
 
 // @internal
 export type SortIconProps = {
@@ -45,7 +46,7 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
 
   const {columnHeaderProps} = useTableColumnHeader({node}, state, domRef);
 
-  const thStyles = clsx(classNames?.th, className, node.props?.className);
+  const thStyles = cn(classNames?.th, className, node.props?.className);
 
   const {isFocusVisible, focusProps} = useFocusRing();
   const {isHovered, hoverProps} = useHover({});

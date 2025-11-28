@@ -20,10 +20,11 @@ import {useFocusRing} from "@react-aria/focus";
 import {useTreeState} from "@react-stately/tree";
 import {useSelectableCollection} from "@react-aria/selection";
 import {usePress} from "@react-aria/interactions";
-import {clsx, dataAttr, debounce, isEmpty} from "@heroui/shared-utils";
+import {dataAttr, debounce, isEmpty} from "@heroui/shared-utils";
 import {Spacer, Link as HeroUILink, Chip, dataFocusVisibleClasses} from "@heroui/react";
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
+import {cn} from "@heroui/theme";
 
 import {ScrollArea} from "../scroll-area";
 
@@ -89,7 +90,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
 
   const Component = hasChildNodes ? "ul" : "li";
 
-  const cn = clsx(
+  const cn = cn(
     "w-full",
     "font-normal",
     "before:mr-4",
@@ -125,7 +126,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
         <span className="flex items-center gap-3">
           <span className="font-medium sm:text-sm">{rendered}</span>
           <ChevronIcon
-            className={clsx("transition-transform", {
+            className={cn("transition-transform", {
               "-rotate-90": isExpanded,
             })}
           />
@@ -136,14 +137,14 @@ function TreeItem<T>(props: TreeItemProps<T>) {
     return (
       <HeroUILink
         as={item.props?.comingSoon ? "div" : Link}
-        className={clsx(cn, {
+        className={cn(cn, {
           "pointer-events-none": item.props?.comingSoon,
         })}
         color="foreground"
         href={item.props?.comingSoon ? "#" : paths.pathname}
       >
         <span
-          className={clsx(
+          className={cn(
             "sm:text-sm",
             isSelected
               ? "text-primary font-medium dark:text-foreground"
@@ -195,7 +196,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       ref={ref}
       aria-expanded={dataAttr(hasChildNodes ? isExpanded : undefined)}
       aria-selected={dataAttr(isSelected)}
-      className={clsx(
+      className={cn(
         "flex flex-col outline-solid outline-transparent w-full tap-highlight-transparent",
         hasChildNodes ? "mb-4" : "first:mt-4",
         // focus ring
@@ -206,7 +207,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
       role="treeitem"
     >
       <div
-        className={clsx("flex items-center gap-3 cursor-pointer", {
+        className={cn("flex items-center gap-3 cursor-pointer", {
           "pointer-events-none": item.props?.comingSoon,
         })}
         {...(item.props?.comingSoon ? {} : pressProps)}
@@ -349,7 +350,7 @@ export const DocsSidebar: FC<DocsSidebarProps> = ({routes, slug, tag, className}
 
   return (
     <div
-      className={clsx(
+      className={cn(
         "lg:fixed mt-2 z-0 lg:h-[calc(100vh-121px)]",
         isProBannerVisible ? "lg:top-32" : "lg:top-20",
         className,

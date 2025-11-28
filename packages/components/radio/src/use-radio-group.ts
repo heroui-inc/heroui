@@ -6,13 +6,13 @@ import type {RadioGroupState} from "@react-stately/radio";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {RadioProps} from "./index";
 
-import {radioGroup} from "@heroui/theme";
+import {radioGroup, cn} from "@heroui/theme";
 import {useCallback, useMemo} from "react";
 import {useRadioGroupState} from "@react-stately/radio";
 import {useRadioGroup as useReactAriaRadioGroup} from "@react-aria/radio";
 import {useProviderContext} from "@heroui/system";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, safeAriaLabel, mergeProps} from "@heroui/shared-utils";
+import {safeAriaLabel, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 interface Props extends Omit<HTMLHeroUIProps<"div">, "onChange"> {
@@ -171,7 +171,7 @@ export function useRadioGroup(props: UseRadioGroupProps) {
     [isInvalid, isRequired, disableAnimation],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getGroupProps: PropGetter = useCallback(() => {
     return {
@@ -206,7 +206,7 @@ export function useRadioGroup(props: UseRadioGroupProps) {
       return {
         ...props,
         ...descriptionProps,
-        className: slots.description({class: clsx(classNames?.description, props?.className)}),
+        className: slots.description({class: cn(classNames?.description, props?.className)}),
       };
     },
     [slots, classNames?.description, descriptionProps, slots.description],
@@ -217,7 +217,7 @@ export function useRadioGroup(props: UseRadioGroupProps) {
       return {
         ...props,
         ...errorMessageProps,
-        className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+        className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
       };
     },
     [slots, classNames?.errorMessage, errorMessageProps],

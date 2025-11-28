@@ -7,19 +7,11 @@ import {useProviderContext} from "@heroui/system";
 import {useCallback, useId} from "react";
 import {useMemo, useRef} from "react";
 import {useToggleState} from "@react-stately/toggle";
-import {checkbox} from "@heroui/theme";
+import {checkbox, cn} from "@heroui/theme";
 import {useCallbackRef} from "@heroui/use-callback-ref";
 import {useHover} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
-import {
-  __DEV__,
-  warn,
-  clsx,
-  dataAttr,
-  safeAriaLabel,
-  mergeProps,
-  chain,
-} from "@heroui/shared-utils";
+import {__DEV__, warn, dataAttr, safeAriaLabel, mergeProps, chain} from "@heroui/shared-utils";
 import {
   useCheckbox as useReactAriaCheckbox,
   useCheckboxGroupItem as useReactAriaCheckboxGroupItem,
@@ -270,7 +262,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
     [isReadOnly, isDisabled, onChangeProp],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getBaseProps: PropGetter = useCallback(() => {
     return {
@@ -308,7 +300,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
       return {
         ...props,
         "aria-hidden": true,
-        className: clsx(slots.wrapper({class: clsx(classNames?.wrapper, props?.className)})),
+        className: cn(slots.wrapper({class: cn(classNames?.wrapper, props?.className)})),
       };
     },
     [slots, classNames?.wrapper],

@@ -1,5 +1,5 @@
 import {Tooltip} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {CircleInfo} from "@/components/icons";
 
@@ -35,7 +35,7 @@ export function ConfigSection({
           </Tooltip>
         )}
       </div>
-      <div className={clsx("flex flex-wrap gap-2 mt-3")}>{children}</div>
+      <div className={cn("flex flex-wrap gap-2 mt-3")}>{children}</div>
     </div>
   );
 }

@@ -11,12 +11,12 @@ import type {SpinnerProps} from "@heroui/spinner";
 import type {CollectionChildren, ValidationError} from "@react-types/shared";
 
 import {mapPropsVariants, useLabelPlacement, useProviderContext} from "@heroui/system";
-import {select} from "@heroui/theme";
+import {select, cn} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useMemo, useCallback, useRef, useEffect} from "react";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useHover, usePress} from "@react-aria/interactions";
 import {useMultiSelect, useMultiSelectState} from "@heroui/use-aria-multiselect";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
@@ -377,7 +377,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   const hasLabel = !!label;
   const hasLabelOutside = hasLabel && (isOutsideLeft || (shouldLabelBeOutside && hasPlaceholder));
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const slots = useMemo(
     () =>
@@ -425,7 +425,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
       "data-invalid": dataAttr(isInvalid),
       "data-has-label-outside": dataAttr(hasLabelOutside),
       className: slots.base({
-        class: clsx(baseStyles, props.className),
+        class: cn(baseStyles, props.className),
       }),
       ...props,
     }),
@@ -504,7 +504,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     (props = {}) => ({
       "data-slot": "label",
       className: slots.label({
-        class: clsx(classNames?.label, props.className),
+        class: cn(classNames?.label, props.className),
       }),
       ...labelProps,
       ...props,
@@ -516,7 +516,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     (props = {}) => ({
       "data-slot": "value",
       className: slots.value({
-        class: clsx(classNames?.value, props.className),
+        class: cn(classNames?.value, props.className),
       }),
       ...valueProps,
       ...props,
@@ -528,7 +528,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     (props = {}) => ({
       "data-slot": "listboxWrapper",
       className: slots.listboxWrapper({
-        class: clsx(classNames?.listboxWrapper, props?.className),
+        class: cn(classNames?.listboxWrapper, props?.className),
       }),
       style: {
         maxHeight: maxListboxHeight ?? 256,
@@ -559,7 +559,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         : undefined,
       "data-slot": "listbox",
       className: slots.listbox({
-        class: clsx(classNames?.listbox, props?.className),
+        class: cn(classNames?.listbox, props?.className),
       }),
       scrollShadowProps: slotsProps.scrollShadowProps,
       ...mergeProps(slotsProps.listboxProps, props, menuProps),
@@ -579,7 +579,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         triggerType: "listbox",
         classNames: {
           content: slots.popoverContent({
-            class: clsx(classNames?.popoverContent, props.className),
+            class: cn(classNames?.popoverContent, props.className),
           }),
         },
         ...popoverProps,
@@ -616,7 +616,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         "data-slot": "innerWrapper",
         className: slots.innerWrapper({
-          class: clsx(classNames?.innerWrapper, props?.className),
+          class: cn(classNames?.innerWrapper, props?.className),
         }),
       };
     },
@@ -629,7 +629,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         "data-slot": "helperWrapper",
         className: slots.helperWrapper({
-          class: clsx(classNames?.helperWrapper, props?.className),
+          class: cn(classNames?.helperWrapper, props?.className),
         }),
       };
     },
@@ -642,7 +642,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         ...descriptionProps,
         "data-slot": "description",
-        className: slots.description({class: clsx(classNames?.description, props?.className)}),
+        className: slots.description({class: cn(classNames?.description, props?.className)}),
       };
     },
     [slots, classNames?.description],
@@ -654,7 +654,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         "data-slot": "mainWrapper",
         className: slots.mainWrapper({
-          class: clsx(classNames?.mainWrapper, props?.className),
+          class: cn(classNames?.mainWrapper, props?.className),
         }),
       };
     },
@@ -667,7 +667,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         "data-slot": "end-wrapper",
         className: slots.endWrapper({
-          class: clsx(classNames?.endWrapper, props?.className),
+          class: cn(classNames?.endWrapper, props?.className),
         }),
       };
     },
@@ -680,7 +680,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         "data-slot": "end-content",
         className: slots.endContent({
-          class: clsx(classNames?.endContent, props?.className),
+          class: cn(classNames?.endContent, props?.className),
         }),
       };
     },
@@ -693,7 +693,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...props,
         ...errorMessageProps,
         "data-slot": "error-message",
-        className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+        className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
       };
     },
     [slots, errorMessageProps, classNames?.errorMessage],
@@ -709,7 +709,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         ...spinnerProps,
         ...props,
         ref: spinnerRef,
-        className: slots.spinner({class: clsx(classNames?.spinner, props?.className)}),
+        className: slots.spinner({class: cn(classNames?.spinner, props?.className)}),
       };
     },
     [slots, spinnerRef, spinnerProps, classNames?.spinner],
@@ -724,7 +724,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
         "aria-label": "clear selection",
         "data-slot": "clear-button",
         "data-focus-visible": dataAttr(isClearButtonFocusVisible),
-        className: slots.clearButton({class: clsx(classNames?.clearButton, props?.className)}),
+        className: slots.clearButton({class: cn(classNames?.clearButton, props?.className)}),
         ...mergeProps(clearPressProps, clearFocusProps),
       };
     },

@@ -8,9 +8,9 @@ import type {CollectionChildren} from "@react-types/shared";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {tabs} from "@heroui/theme";
+import {tabs, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps} from "@heroui/react-utils";
 import {useMemo, useCallback} from "react";
 import {useTabListState} from "@react-stately/tabs";
@@ -130,7 +130,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     [objectToDeps(variantProps), disableAnimation, isVertical],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const values = useMemo<ValuesType<T>>(
     () => ({
@@ -158,7 +158,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
   const getBaseProps: PropGetter = useCallback(
     (props) => ({
       "data-slot": "base",
-      className: slots.base({class: clsx(baseStyles, props?.className)}),
+      className: slots.base({class: cn(baseStyles, props?.className)}),
       ...mergeProps(
         filterDOMProps(otherProps, {
           enabled: shouldFilterDOMProps,
@@ -172,7 +172,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
   const getWrapperProps: PropGetter = useCallback(
     (props) => ({
       "data-slot": "tabWrapper",
-      className: slots.tabWrapper({class: clsx(classNames?.tabWrapper, props?.className)}),
+      className: slots.tabWrapper({class: cn(classNames?.tabWrapper, props?.className)}),
       "data-placement": placement,
       "data-vertical":
         isVertical || placement === "start" || placement === "end" ? "vertical" : "horizontal",
@@ -184,7 +184,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     (props) => ({
       ref: domRef,
       "data-slot": "tabList",
-      className: slots.tabList({class: clsx(classNames?.tabList, props?.className)}),
+      className: slots.tabList({class: cn(classNames?.tabList, props?.className)}),
       ...mergeProps(tabListProps, props),
     }),
     [domRef, tabListProps, classNames, slots],
@@ -194,7 +194,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     (props) => ({
       "data-slot": "cursor",
       className: slots.cursor({
-        class: clsx(classNames?.cursor, props?.className),
+        class: cn(classNames?.cursor, props?.className),
       }),
     }),
     [classNames, slots],

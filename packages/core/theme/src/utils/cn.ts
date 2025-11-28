@@ -1,4 +1,14 @@
-import type {ClassValue} from "clsx";
+export type ClassValue =
+  | ClassArray
+  | ClassDictionary
+  | string
+  | number
+  | bigint
+  | null
+  | boolean
+  | undefined;
+export type ClassDictionary = Record<string, any>;
+export type ClassArray = ClassValue[];
 
 import {cnMerge} from "tailwind-variants";
 
