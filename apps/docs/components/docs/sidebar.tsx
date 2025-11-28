@@ -21,10 +21,9 @@ import {useTreeState} from "@react-stately/tree";
 import {useSelectableCollection} from "@react-aria/selection";
 import {usePress} from "@react-aria/interactions";
 import {dataAttr, debounce, isEmpty} from "@heroui/shared-utils";
-import {Spacer, Link as HeroUILink, Chip, dataFocusVisibleClasses} from "@heroui/react";
+import {Spacer, Link as HeroUILink, Chip, dataFocusVisibleClasses, cn} from "@heroui/react";
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
-import {cn} from "@heroui/theme";
 
 import {ScrollArea} from "../scroll-area";
 
@@ -90,7 +89,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
 
   const Component = hasChildNodes ? "ul" : "li";
 
-  const cn = cn(
+  const classNames = cn(
     "w-full",
     "font-normal",
     "before:mr-4",
@@ -137,7 +136,7 @@ function TreeItem<T>(props: TreeItemProps<T>) {
     return (
       <HeroUILink
         as={item.props?.comingSoon ? "div" : Link}
-        className={cn(cn, {
+        className={cn(classNames, {
           "pointer-events-none": item.props?.comingSoon,
         })}
         color="foreground"

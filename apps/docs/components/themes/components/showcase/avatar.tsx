@@ -55,23 +55,23 @@ const Section = ({
 
   switch (scaling) {
     case 90: {
-      className = cn("h-6 w-6", borderClassName);
+      className = cn("h-6 w-6", borderClassName) as string;
       break;
     }
     case 95: {
-      className = cn("h-8 w-8", borderClassName);
+      className = cn("h-8 w-8", borderClassName) as string;
       break;
     }
     case 100: {
-      className = cn("h-10 w-10", borderClassName);
+      className = cn("h-10 w-10", borderClassName) as string;
       break;
     }
     case 105: {
-      className = cn("h-12 w-12", borderClassName);
+      className = cn("h-12 w-12", borderClassName) as string;
       break;
     }
     case 110: {
-      className = cn("h-14 w-14", borderClassName);
+      className = cn("h-14 w-14", borderClassName) as string;
       break;
     }
   }
