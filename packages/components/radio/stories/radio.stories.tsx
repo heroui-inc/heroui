@@ -5,7 +5,6 @@ import type {RadioProps, RadioGroupProps} from "../src";
 import React from "react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {radio, button, cn} from "@heroui/theme";
-import {cn} from "@heroui/theme";
 import {Form} from "@heroui/form";
 
 import {RadioGroup, Radio, useRadio} from "../src";
