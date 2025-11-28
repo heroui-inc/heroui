@@ -1,7 +1,6 @@
 import type {ClassValue} from "clsx";
 
-import clsx from "clsx";
-import {extendTailwindMerge} from "tailwind-merge";
+import {cnMerge} from "tailwind-variants";
 
 import {twMergeConfig} from "./tw-merge-config";
 
@@ -10,8 +9,7 @@ import {twMergeConfig} from "./tw-merge-config";
  *
  * So we can use classes like `text-small` or `text-default-500` and override them.
  */
-const twMerge = extendTailwindMerge({extend: twMergeConfig});
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return cnMerge(inputs, {twMergeConfig});
 }
