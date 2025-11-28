@@ -21,5 +21,5 @@ import {twMergeConfig} from "./tw-merge-config";
  */
 
 export function cn(...inputs: ClassValue[]) {
-  return cnMerge(inputs, {twMergeConfig});
+  return cnMerge(...inputs)({twMergeConfig});
 }
