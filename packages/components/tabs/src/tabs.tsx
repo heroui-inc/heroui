@@ -48,6 +48,8 @@ const Tabs = forwardRef(function Tabs<T extends object>(
   const previousVariant = useRef<typeof variant>(undefined);
   const isVertical = props?.isVertical;
   const previousIsVertical = useRef<typeof isVertical>(undefined);
+  const placement = props?.placement;
+  const previousPlacement = useRef<typeof placement>(undefined);
 
   const cursorRef = useRef<HTMLSpanElement | null>(null);
   const selectedItem = state.selectedItem;
@@ -76,18 +78,23 @@ const Tabs = forwardRef(function Tabs<T extends object>(
 
   const withAnimationReset = useCallback(
     (callback: () => void) => {
-      if (variant !== previousVariant.current || isVertical !== previousIsVertical.current) {
+      if (
+        variant !== previousVariant.current ||
+        isVertical !== previousIsVertical.current ||
+        placement !== previousPlacement.current
+      ) {
         cursorRef.current?.removeAttribute("data-animated");
       }
       callback();
       previousVariant.current = variant;
       previousIsVertical.current = isVertical;
+      previousPlacement.current = placement;
       requestAnimationFrame(() => {
         cursorRef.current?.setAttribute("data-animated", "true");
         cursorRef.current?.setAttribute("data-initialized", "true");
       });
     },
-    [isVertical, variant],
+    [isVertical, variant, placement],
   );
 
   const updateCursorPosition = useCallback(
