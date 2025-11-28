@@ -57,7 +57,7 @@ export function useKbd(originalProps: UseKbdProps) {
   const getKbdProps: PropGetter = (props = {}) => ({
     ...otherProps,
     ...props,
-    className: cn(slots.base({class: cn(baseStyles, props.className)})),
+    className: slots.base({class: cn(baseStyles, props.className)}),
   });
 
   return {Component, slots, classNames, title, children, keysToRender, getKbdProps};

@@ -300,7 +300,7 @@ export function useCheckbox(props: UseCheckboxProps = {}) {
       return {
         ...props,
         "aria-hidden": true,
-        className: cn(slots.wrapper({class: cn(classNames?.wrapper, props?.className)})),
+        className: slots.wrapper({class: cn(classNames?.wrapper, props?.className)}),
       };
     },
     [slots, classNames?.wrapper],
