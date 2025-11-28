@@ -3870,9 +3870,6 @@ importers:
 
   packages/utilities/shared-utils:
     devDependencies:
-      '@heroui/theme':
-        specifier: workspace:*
-        version: link:../../core/theme
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

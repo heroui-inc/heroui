@@ -1,6 +1,6 @@
 import type {MutableRefObject, Ref} from "react";
 
-import {cn} from "@heroui/theme";
+import {clsx} from "./clsx";
 
 // Partial code from react-spectrum to avoid importing the entire package
 interface Props {
@@ -99,7 +99,7 @@ export function mergeProps<T extends PropsArg[]>(...args: T): UnionToIntersectio
         typeof a === "string" &&
         typeof b === "string"
       ) {
-        result[key] = cn(a, b);
+        result[key] = clsx(a, b);
       } else if (key === "id" && a && b) {
         result.id = mergeIds(a, b);
         // Override others

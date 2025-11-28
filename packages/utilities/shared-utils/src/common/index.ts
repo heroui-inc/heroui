@@ -1,4 +1,5 @@
 export * from "./assertion";
+export * from "./clsx";
 export * from "./object";
 export * from "./text";
 export * from "./dimensions";

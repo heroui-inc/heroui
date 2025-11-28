@@ -37,8 +37,7 @@
     "postbuild": "npm run postinstall"
   },
   "devDependencies": {
-    "clean-package": "2.2.0",
-    "@heroui/theme": "workspace:*"
+    "clean-package": "2.2.0"
   },
   "clean-package": "../../../clean-package.config.json",
   "tsup": {
