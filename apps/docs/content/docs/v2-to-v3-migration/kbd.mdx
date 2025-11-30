@@ -1,0 +1,228 @@
+---
+title: Kbd
+description: Migration guide for Kbd from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Kbd documentation](/docs/components/kbd) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Kbd component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `Kbd.Abbr` and `Kbd.Content` components.
+
+## Structure Changes
+
+### v2: Keys Prop
+
+In v2, Kbd used a `keys` prop to automatically render keyboard keys:
+
+```tsx
+import { Kbd } from "@heroui/react";
+
+<Kbd keys={["command"]}>K</Kbd>
+```
+
+### v3: Compound Components
+
+In v3, Kbd requires manual definition of keys using compound components:
+
+```tsx
+import { Kbd } from "@heroui/react";
+
+<Kbd>
+  <Kbd.Abbr keyValue="command" />
+  <Kbd.Content>K</Kbd.Content>
+</Kbd>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single component with `keys` prop  
+**v3:** Compound components: `Kbd.Abbr`, `Kbd.Content`
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `keys` | - | Removed (use `Kbd.Abbr` with `keyValue`) |
+| `classNames` | - | Use `className` props |
+| - | `variant` | New prop (`default` \| `light`) |
+
+### 3. Removed Props
+
+The following props are no longer available in v3:
+
+- `keys` - Use `Kbd.Abbr` components with `keyValue` prop instead
+- `classNames` - Use `className` props on individual components
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Kbd } from "@heroui/react";
+
+    export default function App() {
+      return <Kbd keys={["command"]}>K</Kbd>;
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Kbd } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Kbd>
+          <Kbd.Abbr keyValue="command" />
+          <Kbd.Content>K</Kbd.Content>
+        </Kbd>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Multiple Keys
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Kbd keys={["command", "shift"]}>N</Kbd>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Kbd>
+      <Kbd.Abbr keyValue="command" />
+      <Kbd.Abbr keyValue="shift" />
+      <Kbd.Content>N</Kbd.Content>
+    </Kbd>
+    ```
+  </Tab>
+</Tabs>
+
+### Key Only (No Content)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Kbd keys={["enter"]} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Kbd>
+      <Kbd.Abbr keyValue="enter" />
+    </Kbd>
+    ```
+  </Tab>
+</Tabs>
+
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Kbd keys={["command"]}>K</Kbd>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Kbd variant="default">
+      <Kbd.Abbr keyValue="command" />
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+    <Kbd variant="light">
+      <Kbd.Abbr keyValue="command" />
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Kbd
+      keys={["command"]}
+      classNames={{
+        base: "custom-base",
+        abbr: "custom-abbr",
+        content: "custom-content"
+      }}
+    >
+      K
+    </Kbd>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Kbd className="custom-base">
+      <Kbd.Abbr keyValue="command" className="custom-abbr" />
+      <Kbd.Content className="custom-content">K</Kbd.Content>
+    </Kbd>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Kbd follows this structure:
+
+```
+Kbd (Root)
+  ├── Kbd.Abbr (keyValue="command")
+  ├── Kbd.Abbr (keyValue="shift") [optional, multiple]
+  └── Kbd.Content [optional, for text content]
+```
+
+## Available Key Values
+
+The `keyValue` prop accepts the same keyboard key types as v2:
+
+**Modifier Keys:**
+- `command`, `shift`, `ctrl`, `option`, `alt`, `win`
+
+**Special Keys:**
+- `enter`, `delete`, `escape`, `tab`, `space`, `capslock`, `help`
+
+**Navigation Keys:**
+- `up`, `down`, `left`, `right`, `pageup`, `pagedown`, `home`, `end`
+
+**Function Keys:**
+- `fn`
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must manually define keys using `Kbd.Abbr` components
+2. **keys Prop Removed**: Use `Kbd.Abbr` with `keyValue` prop instead
+3. **Children Wrapping**: Wrap text content in `Kbd.Content` component
+4. **ClassNames Removed**: Use `className` props on individual components
+5. **New Variant Prop**: Added `variant` prop for styling (`default` \| `light`)
+
+## Tips for Migration
+
+1. **Replace keys prop**: Convert `keys={["command"]}` to `<Kbd.Abbr keyValue="command" />`
+2. **Multiple keys**: Add multiple `Kbd.Abbr` components for key combinations
+3. **Wrap content**: Wrap text children in `Kbd.Content` component
+4. **Key-only display**: Omit `Kbd.Content` if only displaying keys
+5. **Custom styling**: Apply `className` props directly to `Kbd`, `Kbd.Abbr`, and `Kbd.Content`
+6. **Use variants**: Apply `variant="light"` for a lighter appearance
+
+## Need Help?
+
+**For v3 Kbd features and API:**
+- See the [API Reference](/docs/components/kbd#api-reference)
+- Check [interactive examples](/docs/components/kbd#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

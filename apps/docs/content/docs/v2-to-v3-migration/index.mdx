@@ -1,0 +1,509 @@
+---
+title: Migration
+description: Complete guide to migrate your HeroUI v2 application to v3
+icon: code-pull-request-arrow-right
+index: true
+---
+
+<Callout type="warning">
+  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
+</Callout>
+
+## Overview
+
+### Major Changes
+
+- **No Provider Required**: v3 removes the need for `HeroUIProvider`
+- **CSS-First Theming**: New CSS-based theming system replaces Tailwind plugin
+- **React 19 Required**: v3 requires React 19+ (v2 supports React 18+)
+- **No Framer Motion**: Animation library dependency removed
+- **Component API Updates**: Many components use React Aria Components patterns
+- **Compound Components**: New compound component patterns for better customization
+
+### Key API Changes
+
+#### General Props Changes
+
+- `key` prop → `id` and `textValue` props (ListBox, etc.)
+- `onClick` → `onPress` (all interactive components)
+
+#### Compound Component Patterns
+
+Many components now use compound component patterns for better composition and flexibility. For example:
+
+- **Checkbox**: `Checkbox`, `Checkbox.Control`, `Checkbox.Indicator`, `Checkbox.Content`
+- **Card**: `Card`, `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`
+- **Modal**: `Modal`, `Modal.Overlay`, `Modal.Content`, `Modal.Header`, `Modal.Footer`, `Modal.Body`
+- **Select**: `Select`, `Select.Trigger`, `Select.Value`, `Select.Content`, `Select.Item`
+- **Dropdown**: `Dropdown`, `Dropdown.Trigger`, `Dropdown.Content`, `Dropdown.Item`
+
+See specific component migration guides for detailed examples and usage patterns.
+
+## Migration Steps
+
+### Step 1: Update Dependencies
+
+#### Update React
+
+v3 requires React 19+. Update your React version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+</Tabs>
+
+#### Update HeroUI Packages
+
+Remove v2 packages and install v3:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm uninstall @heroui/react @heroui/theme
+    npm install @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm remove @heroui/react @heroui/theme
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn remove @heroui/react @heroui/theme
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun remove @heroui/react @heroui/theme
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+#### Remove Framer Motion
+
+v3 no longer requires Framer Motion:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm uninstall framer-motion
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm remove framer-motion
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn remove framer-motion
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun remove framer-motion
+    ```
+  </Tab>
+</Tabs>
+
+#### Update Tailwind CSS
+
+Ensure you're using Tailwind CSS v4:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add tailwindcss@^4.0.0
+    ```
+  </Tab>
+</Tabs>
+
+### Step 2: Update Theming Configuration
+
+#### Remove Tailwind Plugin Configuration
+
+**v2 Configuration:**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
+  plugins: [heroui()],
+  // ... other config
+};
+```
+
+**v3 Configuration:**
+
+Remove the `heroui()` plugin from your Tailwind config. If you only used Tailwind for HeroUI and have no other customizations, you can remove `tailwind.config.js` entirely. Otherwise, keep the file but remove the HeroUI plugin configuration.
+
+#### Update CSS Imports
+
+**v2 CSS:**
+
+```css
+/* globals.css or main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+**v3 CSS:**
+
+```css
+/* globals.css or main.css */
+@import "tailwindcss";
+@import "@heroui/styles"; /* [!code highlight]*/
+```
+
+<Callout type="warning">
+  Import order matters! Always import `tailwindcss` before `@heroui/styles`.
+</Callout>
+
+#### Remove Theme Plugin File
+
+If you created a `hero.ts` file for v2, you can remove it:
+
+```bash
+rm hero.ts
+```
+
+### Step 3: Remove HeroUIProvider
+
+v3 does not require a Provider component. Remove it from your application root.
+
+**v2 Code:**
+
+```tsx
+// app.tsx or App.tsx
+import {HeroUIProvider} from "@heroui/react";
+
+function App() {
+  return (
+    <HeroUIProvider>
+      <YourApplication />
+    </HeroUIProvider>
+  );
+}
+```
+
+**v3 Code:**
+
+```tsx
+// app.tsx or App.tsx
+function App() {
+  return <YourApplication />;
+}
+```
+
+**If you were using Provider props:**
+
+If you were using Provider props like `navigate`, `useHref`, `locale`, `disableAnimation`, etc., you'll need to handle these differently:
+
+- **Router integration**: Use React Router or your routing library directly
+- **Locale**: Use React Aria's `I18nProvider` directly if needed
+- **Animation**: See the Animation Changes section below
+
+#### Animation Changes
+
+v3 removes the Framer Motion dependency and handles animations differently:
+
+- **CSS-based animations**: v3 uses native CSS animations and transitions instead of JavaScript-based animations
+- **Better performance**: CSS animations provide better performance and smoother animations
+- **No global disable**: Unlike v2's Provider `disableAnimation` prop, there's no global animation toggle in v3
+- **Per-component control**: Control animations through CSS or component-specific props where available
+- **Custom animations**: Use standard CSS `@keyframes` and transition properties for custom animations
+
+### Step 4: Update Component Imports
+
+All components are now imported from a single package:
+
+**v2 Imports:**
+
+```tsx
+// Individual packages (if used)
+import {Button} from "@heroui/button";
+import {Card} from "@heroui/card";
+
+// Or from main package
+import {Button, Card} from "@heroui/react";
+```
+
+**v3 Imports:**
+
+```tsx
+// All components from single package
+import {Button, Card} from "@heroui/react";
+```
+
+#### TypeScript Considerations
+
+If you're using TypeScript, be aware of type changes in v3:
+
+```tsx
+// Import types alongside components
+import {Button, type ButtonProps} from "@heroui/react";
+
+// Compound component types are properly exported
+import {Checkbox, type CheckboxProps} from "@heroui/react";
+
+// Type names may have changed - check component documentation
+type MyButtonProps = ButtonProps & {
+  customProp?: string;
+};
+```
+
+**Common type changes:**
+- Component prop interfaces may have different names or properties
+- Event handler types changed from `onClick` to `onPress` (uses React Aria types)
+- Compound component parts have their own type exports
+- Ref types updated to match React 19 patterns
+
+### Step 5: Component Migration Reference
+
+Use the table below to quickly find migration guidance for each component. Use the link in the "Migration Guide" column to jump to detailed migration instructions.
+
+<Callout>
+  **Component Development Status**: Components marked with 🔄 In Progress or 📋 Planned are still being developed. Check the [Roadmap](https://herouiv3.featurebase.app/roadmap) for the task status. Guides for these components will be available once development is finished.
+</Callout>
+
+| v2 Component | v3 Component | Status | Migration Guide |
+|-------------|--------------|--------|-----------------|
+| Accordion | Accordion | ✅ Available | [View guide →](/docs/v2-to-v3-migration/accordion) |
+| Alert | Alert | ✅ Available | [View guide →](/docs/v2-to-v3-migration/alert) |
+| Autocomplete | Combobox | ✅ Available | [View guide →](/docs/v2-to-v3-migration/autocomplete) |
+| Avatar | Avatar | ✅ Available | [View guide →](/docs/v2-to-v3-migration/avatar) |
+| Badge | Badge | 📋 Planned | - |
+| Breadcrumbs | Breadcrumbs | 🔄 In Progress | - |
+| Button | Button | ✅ Available | [View guide →](/docs/v2-to-v3-migration/button) |
+| Calendar | Calendar | 🔄 In Progress | - |
+| Card | Card | ✅ Available | [View guide →](/docs/v2-to-v3-migration/card) |
+| Checkbox | Checkbox | ✅ Available | [View guide →](/docs/v2-to-v3-migration/checkbox) |
+| Chip | Chip | ✅ Available | [View guide →](/docs/v2-to-v3-migration/chip) |
+| Code | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/code) |
+| DateInput | DatePicker | 🔄 In Progress | - |
+| DatePicker | DatePicker | 🔄 In Progress | - |
+| Divider | Separator | ✅ Renamed | [View guide →](/docs/v2-to-v3-migration/divider) |
+| Drawer | Drawer | 📋 Planned | - |
+| Dropdown | Dropdown | ✅ Available | [View guide →](/docs/v2-to-v3-migration/dropdown) |
+| Form | Form | ✅ Available | [View guide →](/docs/v2-to-v3-migration/form) |
+| Image | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/image) |
+| Input | Input | ✅ Available | [View guide →](/docs/v2-to-v3-migration/input) |
+| InputOTP | InputOTP | ✅ Available | [View guide →](/docs/v2-to-v3-migration/input-otp) |
+| Kbd | Kbd | ✅ Available | [View guide →](/docs/v2-to-v3-migration/kbd) |
+| Link | Link | ✅ Available | [View guide →](/docs/v2-to-v3-migration/link) |
+| Listbox | ListBox | ✅ Available | [View guide →](/docs/v2-to-v3-migration/listbox) |
+| Modal | Modal | ✅ Available | [View guide →](/docs/v2-to-v3-migration/modal) |
+| Navbar | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/navbar) |
+| NumberInput | NumberField | ✅ Renamed | [View guide →](/docs/v2-to-v3-migration/numberinput) |
+| Pagination | Pagination | 📋 Planned | - |
+| Popover | Popover | ✅ Available | [View guide →](/docs/v2-to-v3-migration/popover) |
+| Progress | Progress | 📋 Planned | - |
+| Radio | Radio | ✅ Available | [View guide →](/docs/v2-to-v3-migration/radio) |
+| Ripple | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/ripple) |
+| ScrollShadow | ScrollShadow | 📋 Planned | - |
+| Select | Select | ✅ Available | [View guide →](/docs/v2-to-v3-migration/select) |
+| Skeleton | Skeleton | ✅ Available | [View guide →](/docs/v2-to-v3-migration/skeleton) |
+| Slider | Slider | ✅ Available | [View guide →](/docs/v2-to-v3-migration/slider) |
+| Snippet | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/snippet) |
+| Spacer | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/spacer) |
+| Spinner | Spinner | ✅ Available | [View guide →](/docs/v2-to-v3-migration/spinner) |
+| Switch | Switch | ✅ Available | [View guide →](/docs/v2-to-v3-migration/switch) |
+| Table | Table | 📋 Planned | - |
+| Tabs | Tabs | ✅ Available | [View guide →](/docs/v2-to-v3-migration/tabs) |
+| Toast | Toast | 📋 Planned | - |
+| Tooltip | Tooltip | ✅ Available | [View guide →](/docs/v2-to-v3-migration/tooltip) |
+| User | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/user) |
+
+### New Components in v3
+
+v3 introduces several new components not available in v2:
+
+| Component | Purpose | Documentation |
+|-----------|---------|---------------|
+| TextField | Enhanced text input with label and description support | [View docs →](/docs/components/textfield) |
+| Textarea | Multi-line text input component | [View docs →](/docs/components/textarea) |
+| Alert Dialog | Modal dialog for confirmations and alerts | [View docs →](/docs/components/alert-dialog) |
+| Empty State | Display empty or no-data states | [View docs →](/docs/components/empty-state) |
+| Text | Typography component for consistent text styling | [View docs →](/docs/components/text) |
+| Label | Accessible form label component | [View docs →](/docs/components/label) |
+| Description | Helper text for form fields | [View docs →](/docs/components/description) |
+| Field Error | Form field error message display | [View docs →](/docs/components/field-error) |
+| Fieldset | Group related form fields | [View docs →](/docs/components/fieldset) |
+| Input Group | Compose multiple inputs together | [View docs →](/docs/components/input-group) |
+| Surface | Container component with elevation styles | [View docs →](/docs/components/surface) |
+| Disclosure | Expandable/collapsible content sections | [View docs →](/docs/components/disclosure) |
+
+### Step 6: Update Custom Theme Overrides
+
+If you had custom theme overrides in v2, you'll need to update them for v3's CSS-based theming system.
+
+**v2 Theme Customization:**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [
+    heroui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              // custom colors
+            },
+          },
+        },
+      },
+    }),
+  ],
+};
+```
+
+**v3 Theme Customization:**
+
+v3 uses CSS variables. Override them in your CSS:
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  --color-primary: /* your color */;
+  /* other CSS variables */
+}
+```
+
+Check the [Theming documentation](/docs/handbook/theming) for available CSS variables.
+
+### Step 7: Testing
+
+After migration, thoroughly test your application:
+
+1. **Visual Testing**: Check all components render correctly
+2. **Functionality**: Test all interactions and behaviors
+3. **Accessibility**: Verify keyboard navigation and screen reader support
+4. **Responsive Design**: Test on different screen sizes
+5. **Performance**: Check bundle size and runtime performance
+
+## Migration Checklist
+
+Use this checklist to track your migration progress:
+
+### Dependencies
+- [ ] Update React to v19+
+- [ ] Update HeroUI packages to v3
+- [ ] Remove Framer Motion
+- [ ] Update Tailwind CSS to v4
+
+### Configuration
+- [ ] Remove `heroui()` plugin from Tailwind config
+- [ ] Update CSS imports
+- [ ] Remove `hero.ts` file (if exists)
+
+### Application Code
+- [ ] Remove `HeroUIProvider` wrapper
+- [ ] Handle Provider props migration (router, locale, animations)
+- [ ] Update all component imports to `@heroui/react`
+- [ ] Migrate renamed components (Divider → Separator, Autocomplete → Combobox, NumberInput → NumberField)
+- [ ] Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
+- [ ] Update group components (CheckboxGroup, RadioGroup, SwitchGroup)
+- [ ] Change `onClick` to `onPress` for interactive components
+- [ ] Update `key` prop to `id` and `textValue` where applicable
+- [ ] Update TypeScript type references (if using component types)
+- [ ] Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User)
+- [ ] Plan alternatives for in-progress/planned components (Badge, Calendar, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast)
+- [ ] Update custom theme overrides to CSS variables
+- [ ] Consider using `asChild` prop for flexible composition
+
+### Testing
+- [ ] Visual regression testing
+- [ ] Functionality testing
+- [ ] Accessibility testing
+- [ ] Performance testing
+
+## Common Issues and Solutions
+
+### Issue: Components not rendering
+
+**Solution:** Ensure you've imported `@heroui/styles` in your CSS file and it's imported after `tailwindcss`.
+
+### Issue: Styles not applying
+
+**Solution:** Check that Tailwind CSS v4 is properly configured and CSS imports are in the correct order.
+
+### Issue: TypeScript errors
+
+**Solution:** Update your TypeScript types. v3 may have different prop types. Check component documentation.
+
+### Issue: Animations not working
+
+**Solution:** v3 handles animations differently. Check if the component supports animations in v3.
+
+## Getting Help
+
+If you encounter issues during migration:
+
+1. Check the [v3 documentation](/docs)
+2. Review component-specific documentation
+3. Check the [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+4. Join the [Discord community](https://discord.gg/9b6yyZKmH4)
+
+## Next Steps
+
+After completing the migration:
+
+1. Review the [v3 component documentation](/docs/components-list)
+2. Explore new components available in v3
+3. Check out the [styling guide](/docs/handbook/styling)
+4. Learn about [composition patterns](/docs/handbook/composition)
+
+---
+
+<Callout type="info">
+  This migration guide is a living document. As v3 evolves, we'll update this guide with new information and best practices.
+</Callout>

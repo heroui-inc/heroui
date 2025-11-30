@@ -1,0 +1,545 @@
+---
+title: Accordion
+description: Migration guide for Accordion from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Accordion documentation](/docs/components/accordion) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Accordion component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `Accordion.Item` and its subcomponents.
+
+## Structure Changes
+
+### v2: Flat Component Structure
+
+In v2, `AccordionItem` was a self-contained component that accepted props for title, subtitle, content, and other elements:
+
+```tsx
+import { Accordion, AccordionItem } from "@heroui/react";
+
+<Accordion>
+  <AccordionItem 
+    key="1" 
+    title="Accordion 1" 
+    subtitle="Press to expand"
+  >
+    Content here
+  </AccordionItem>
+</Accordion>
+```
+
+### v3: Compound Component Structure
+
+In v3, Accordion uses a compound component pattern with explicit subcomponents:
+
+```tsx
+import { Accordion } from "@heroui/react";
+
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Heading>
+      <Accordion.Trigger>
+        Accordion 1
+        <Accordion.Indicator />
+      </Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>Content here</Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `AccordionItem` component with props  
+**v3:** Compound components: `Accordion.Item`, `Accordion.Heading`, `Accordion.Trigger`, `Accordion.Panel`, `Accordion.Body`, `Accordion.Indicator`
+
+### 2. State Management Props
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `selectedKeys` | `expandedKeys` | Changed from `Set<Key>` to `Iterable<Key>` |
+| `defaultSelectedKeys` | `defaultExpandedKeys` | Same change |
+| `onSelectionChange` | `onExpandedChange` | Callback signature: `(keys: Set<Key>) => void` |
+| `selectionMode="multiple"` | `allowsMultipleExpanded` | Changed from string to boolean |
+
+### 3. Variants
+
+**v2 Variants:** `light`, `shadow`, `bordered`, `splitted`  
+**v3 Variants:** `default`, `surface`
+
+The v3 variants are simplified. To achieve similar effects to v2 variants:
+
+- **v2 `light`** → v3 `default` (default variant)
+- **v2 `shadow`** → v3 `surface` (or use `default` + `shadow-lg` class for custom styling)
+- **v2 `bordered`** → v3 `default` + add border classes
+- **v2 `splitted`** → v3 `default` + add spacing/margin between items
+
+### 4. Removed Props
+
+The following props are no longer available in v3:
+
+- `isCompact` - Use Tailwind CSS classes like `text-sm` or `py-2` instead
+- `hideIndicator` - Simply don't render `<Accordion.Indicator />`
+- `disableAnimation` - Animations are handled by React Aria Components
+- `disableIndicatorAnimation` - Use CSS to control indicator animations
+- `motionProps` - Animation is handled internally
+- `showDivider` - Add dividers manually between items if needed
+- `dividerProps` - Use a separate `Divider` component
+- `keepContentMounted` - Content is always mounted in v3
+- `selectionBehavior` - Not applicable with new API
+- `disallowEmptySelection` - Not applicable
+- `itemClasses` - Use `className` on individual items
+- `startContent` - Place content directly in `<Accordion.Trigger>`
+- `title` / `subtitle` props - Place content directly in `<Accordion.Trigger>`
+
+### 5. Item Identification
+
+**v2:** Used `key` prop on `AccordionItem`  
+**v3:** Use `id` prop on `Accordion.Item`
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Accordion, AccordionItem } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Accordion>
+          <AccordionItem 
+            key="1" 
+            aria-label="Accordion 1" 
+            title="Accordion 1"
+          >
+            Lorem ipsum dolor sit amet...
+          </AccordionItem>
+          <AccordionItem 
+            key="2" 
+            aria-label="Accordion 2" 
+            title="Accordion 2"
+          >
+            Lorem ipsum dolor sit amet...
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Accordion } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Accordion>
+          <Accordion.Item id="1">
+            <Accordion.Heading>
+              <Accordion.Trigger>
+                Accordion 1
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>
+                Lorem ipsum dolor sit amet...
+              </Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
+          <Accordion.Item id="2">
+            <Accordion.Heading>
+              <Accordion.Trigger>
+                Accordion 2
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel>
+              <Accordion.Body>
+                Lorem ipsum dolor sit amet...
+              </Accordion.Body>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Multiple Expanded Items
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Accordion selectionMode="multiple">
+      <AccordionItem key="1" title="Item 1">
+        Content 1
+      </AccordionItem>
+      <AccordionItem key="2" title="Item 2">
+        Content 2
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Accordion allowsMultipleExpanded>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 1</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 2</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { Accordion, AccordionItem } from "@heroui/react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
+
+    <Accordion 
+      selectedKeys={selectedKeys} 
+      onSelectionChange={setSelectedKeys}
+    >
+      <AccordionItem key="1" title="Item 1">
+        Content 1
+      </AccordionItem>
+      <AccordionItem key="2" title="Item 2">
+        Content 2
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Accordion } from "@heroui/react";
+    import type { Key } from "@heroui/react";
+
+    const [expandedKeys, setExpandedKeys] = useState<Set<Key>>(new Set(["1"]));
+
+    <Accordion 
+      expandedKeys={expandedKeys} 
+      onExpandedChange={setExpandedKeys}
+    >
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 1</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 2</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### With Subtitle and Start Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Accordion>
+      <AccordionItem 
+        key="1"
+        title="Accordion 1"
+        subtitle="Press to expand"
+        startContent={<Icon icon="gravity-ui:box" />}
+      >
+        Content here
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Accordion>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            <Icon icon="gravity-ui:box" className="mr-2" />
+            <div className="flex flex-col">
+              <span>Accordion 1</span>
+              <span className="text-sm text-muted">Press to expand</span>
+            </div>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content here</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Indicator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Accordion>
+      <AccordionItem 
+        key="1"
+        title="Item 1"
+        indicator={(props) => (
+          props.isOpen ? <Icon icon="minus" /> : <Icon icon="plus" />
+        )}
+      >
+        Content
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+    import { useState } from "react";
+    import { Accordion } from "@heroui/react";
+    import type { Key } from "@heroui/react";
+
+    const [expandedKeys, setExpandedKeys] = useState<Set<Key>>(new Set());
+
+    <Accordion 
+      expandedKeys={expandedKeys}
+      onExpandedChange={setExpandedKeys}
+    >
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator>
+              {expandedKeys.has("1") ? (
+                <Icon icon="gravity-ui:minus" />
+              ) : (
+                <Icon icon="gravity-ui:plus" />
+              )}
+            </Accordion.Indicator>
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled Items
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Accordion disabledKeys={["2"]}>
+      <AccordionItem key="1" title="Item 1">
+        Content 1
+      </AccordionItem>
+      <AccordionItem key="2" title="Item 2">
+        Content 2
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Accordion>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 1</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2" isDisabled>
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 2</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### Default Expanded Keys
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Accordion defaultExpandedKeys={["2"]}>
+      <AccordionItem key="1" title="Item 1">
+        Content 1
+      </AccordionItem>
+      <AccordionItem key="2" title="Item 2">
+        Content 2
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Accordion defaultExpandedKeys={["2"]}>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 1</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 2</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<AccordionItem 
+  classNames={{
+    base: "custom-base",
+    title: "custom-title",
+    content: "custom-content"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Accordion.Item className="custom-base">
+  <Accordion.Heading>
+    <Accordion.Trigger className="custom-title">
+      Title
+      <Accordion.Indicator />
+    </Accordion.Trigger>
+  </Accordion.Heading>
+  <Accordion.Panel>
+    <Accordion.Body className="custom-content">
+      Content
+    </Accordion.Body>
+  </Accordion.Panel>
+</Accordion.Item>
+```
+
+## Component Anatomy
+
+The v3 Accordion follows this structure:
+
+```
+Accordion (Root)
+  └── Accordion.Item
+      ├── Accordion.Heading
+      │   └── Accordion.Trigger
+      │       ├── [Your content: title, subtitle, icons, etc.]
+      │       └── Accordion.Indicator
+      └── Accordion.Panel
+          └── Accordion.Body
+              └── [Your content]
+```
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must use compound components instead of props
+2. **State Props**: `selectedKeys` → `expandedKeys`, `onSelectionChange` → `onExpandedChange`
+3. **Multiple Selection**: `selectionMode="multiple"` → `allowsMultipleExpanded={true}`
+4. **Item Keys**: `key` prop → `id` prop
+5. **Variants**: Reduced from 4 to 2 variants
+6. **Removed Props**: Many convenience props removed; use Tailwind CSS classes instead
+7. **Content Structure**: Title, subtitle, and start content must be manually placed in `Trigger`
+8. **Indicator**: Must be explicitly rendered; no automatic indicator
+
+## Tips for Migration
+
+1. **Start with structure**: Convert the component structure first, then handle props
+2. **Use TypeScript**: The v3 types will help guide you through the migration
+3. **Leverage Tailwind**: Many removed props can be replaced with Tailwind utility classes
+4. **Test interactions**: Ensure keyboard navigation and accessibility still work
+5. **Check animations**: v3 handles animations differently, so verify they meet your needs
+
+## Need Help?
+
+**For v3 Accordion features and API:**
+- See the [API Reference](/docs/components/accordion#api-reference)
+- Check [interactive examples](/docs/components/accordion#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

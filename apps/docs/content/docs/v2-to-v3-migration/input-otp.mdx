@@ -1,0 +1,361 @@
+---
+title: InputOTP
+description: Migration guide for InputOTP from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 InputOTP documentation](/docs/components/input-otp) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The InputOTP component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `InputOTP.Group`, `InputOTP.Slot`, and `InputOTP.Separator` components.
+
+## Structure Changes
+
+### v2: Automatic Segment Rendering
+
+In v2, InputOtp automatically rendered segments based on the `length` prop:
+
+```tsx
+import { InputOtp } from "@heroui/react";
+
+<InputOtp length={4} />
+```
+
+### v3: Manual Slot Definition
+
+In v3, InputOTP requires manual definition of slots using compound components:
+
+```tsx
+import { InputOTP } from "@heroui/react";
+
+<InputOTP maxLength={4}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+    <InputOTP.Slot index={3} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single component with automatic segment rendering  
+**v3:** Compound components: `InputOTP.Group`, `InputOTP.Slot`, `InputOTP.Separator`
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `length` | `maxLength` | Renamed (required) |
+| `allowedKeys` | `pattern` | Renamed (regex pattern) |
+| `onValueChange` | `onChange` | Renamed event handler |
+| `description` | - | Removed (handle separately) |
+| `errorMessage` | - | Removed (handle separately) |
+| `variant` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `classNames` | - | Use `className` props |
+| - | `isOnSurface` | New prop for surface styling |
+
+### 3. Removed Props
+
+The following props are no longer available in v3:
+
+- `length` - Use `maxLength` instead
+- `allowedKeys` - Use `pattern` instead
+- `description` - Handle separately with `Description` component
+- `errorMessage` - Handle separately with error display
+- `variant` - Use Tailwind CSS classes
+- `color` - Use Tailwind CSS classes
+- `size` - Use Tailwind CSS classes
+- `radius` - Use Tailwind CSS classes
+- `classNames` - Use `className` props on individual components
+- `onValueChange` - Use `onChange` instead
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { InputOtp } from "@heroui/react";
+    import { useState } from "react";
+
+    export default function App() {
+      const [value, setValue] = useState("");
+
+      return (
+        <InputOtp length={4} value={value} onValueChange={setValue} />
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { InputOTP } from "@heroui/react";
+    import { useState } from "react";
+
+    export default function App() {
+      const [value, setValue] = useState("");
+
+      return (
+        <InputOTP maxLength={4} value={value} onChange={setValue}>
+          <InputOTP.Group>
+            <InputOTP.Slot index={0} />
+            <InputOTP.Slot index={1} />
+            <InputOTP.Slot index={2} />
+            <InputOTP.Slot index={3} />
+          </InputOTP.Group>
+        </InputOTP>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled InputOTP
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState("");
+
+    <InputOtp length={4} value={value} onValueChange={setValue} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState("");
+
+    <InputOTP maxLength={4} value={value} onChange={setValue}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+        <InputOTP.Slot index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+### With Allowed Keys / Pattern
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp allowedKeys="^[a-z]*$" length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { REGEXP_ONLY_CHARS } from "@heroui/react";
+
+    <InputOTP maxLength={4} pattern={REGEXP_ONLY_CHARS}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+        <InputOTP.Slot index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+### With Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp description="Enter the code sent to your email" length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description } from "@heroui/react";
+
+    <div className="flex flex-col gap-2">
+      <InputOTP maxLength={4}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+        </InputOTP.Group>
+      </InputOTP>
+      <Description>Enter the code sent to your email</Description>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With Error Message
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp errorMessage="Invalid code" isInvalid length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex flex-col gap-2">
+      <InputOTP isInvalid maxLength={4}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+        </InputOTP.Group>
+      </InputOTP>
+      <span className="field-error" data-visible={isInvalid}>
+        Invalid code
+      </span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With onComplete Callback
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp
+      length={6}
+      onComplete={(value) => console.log("Complete:", value)}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <InputOTP
+      maxLength={6}
+      onComplete={(value) => console.log("Complete:", value)}
+    >
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+      </InputOTP.Group>
+      <InputOTP.Separator />
+      <InputOTP.Group>
+        <InputOTP.Slot index={3} />
+        <InputOTP.Slot index={4} />
+        <InputOTP.Slot index={5} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp isDisabled length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <InputOTP isDisabled maxLength={4}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+        <InputOTP.Slot index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp
+      classNames={{
+        segment: "custom-segment",
+        base: "custom-base"
+      }}
+      length={4}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <InputOTP className="custom-base" maxLength={4}>
+      <InputOTP.Group>
+        <InputOTP.Slot className="custom-segment" index={0} />
+        <InputOTP.Slot className="custom-segment" index={1} />
+        <InputOTP.Slot className="custom-segment" index={2} />
+        <InputOTP.Slot className="custom-segment" index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 InputOTP follows this structure:
+
+```
+InputOTP (Root)
+  ├── InputOTP.Group
+  │   ├── InputOTP.Slot (index={0})
+  │   ├── InputOTP.Slot (index={1})
+  │   └── ...
+  ├── InputOTP.Separator (optional)
+  └── InputOTP.Group (optional, for grouping)
+      └── InputOTP.Slot (index={...})
+```
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must manually define slots using `InputOTP.Group` and `InputOTP.Slot`
+2. **length → maxLength**: Prop renamed
+3. **allowedKeys → pattern**: Prop renamed, uses regex pattern
+4. **onValueChange → onChange**: Event handler renamed
+5. **Description Removed**: Handle separately with `Description` component
+6. **Error Message Removed**: Handle separately with error display
+7. **Variants Removed**: Use Tailwind CSS classes for styling
+8. **Colors Removed**: Use Tailwind CSS classes for styling
+9. **Sizes Removed**: Use Tailwind CSS classes for styling
+10. **Radius Removed**: Use Tailwind CSS classes for styling
+11. **ClassNames Removed**: Use `className` props on individual components
+
+## Tips for Migration
+
+1. **Manual slot definition**: You must define each slot manually with `index` prop
+2. **Group slots**: Use `InputOTP.Group` to group related slots
+3. **Add separators**: Use `InputOTP.Separator` between groups for visual separation
+4. **Update props**: Change `length` to `maxLength`, `allowedKeys` to `pattern`
+5. **Update handlers**: Change `onValueChange` to `onChange`
+6. **Handle description/errors**: Add `Description` component and error display separately
+7. **Custom styling**: Use Tailwind CSS classes on slots and groups for variants, colors, sizes
+
+## Need Help?
+
+**For v3 InputOTP features and API:**
+- See the [API Reference](/docs/components/input-otp#api-reference)
+- Check [interactive examples](/docs/components/input-otp#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

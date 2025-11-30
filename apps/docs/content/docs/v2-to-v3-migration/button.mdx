@@ -1,0 +1,481 @@
+---
+title: Button
+description: Migration guide for Button from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Button documentation](/docs/components/button) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Button component in HeroUI v3 has been simplified with variant-based styling replacing the separate `color` prop, and `onClick` has been renamed to `onPress`.
+
+## Structure Changes
+
+### v2: Single Component with Color and Variant Props
+
+In v2, `Button` used a combination of `color` and `variant` props:
+
+```tsx
+import { Button } from "@heroui/react";
+
+<Button color="primary" variant="solid">
+  Button
+</Button>
+```
+
+### v3: Single Component with Variant Only
+
+In v3, Button uses only the `variant` prop (no separate `color` prop):
+
+```tsx
+import { Button } from "@heroui/react";
+
+<Button variant="primary">
+  Button
+</Button>
+```
+
+## Key Changes
+
+### 1. Event Handler: `onClick` → `onPress`
+
+**v2:** Supported both `onClick` (deprecated) and `onPress`  
+**v3:** Only `onPress` is supported
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button onClick={() => console.log("clicked")}>Click me</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button onPress={() => console.log("pressed")}>Click me</Button>
+    ```
+  </Tab>
+</Tabs>
+
+### 2. Variants and Colors
+
+**v2:** Used `color` + `variant` combination  
+**v3:** Uses `variant` only (no separate `color` prop)
+
+| v2 Color + Variant | v3 Variant | Notes |
+|-------------------|------------|-------|
+| `color="primary" variant="solid"` | `variant="primary"` | Default primary button |
+| `color="default" variant="solid"` | `variant="primary"` | Use primary variant |
+| `color="secondary" variant="solid"` | `variant="secondary"` | Same |
+| `color="success" variant="solid"` | `variant="primary"` | Use primary with custom styling if needed |
+| `color="warning" variant="solid"` | `variant="primary"` | Use primary with custom styling if needed |
+| `color="danger" variant="solid"` | `variant="danger"` | Danger variant available |
+| `color="primary" variant="bordered"` | `variant="secondary"` | Similar appearance |
+| `color="primary" variant="light"` | `variant="tertiary"` | Similar appearance |
+| `color="primary" variant="flat"` | `variant="tertiary"` | Similar appearance |
+| `color="primary" variant="faded"` | `variant="secondary"` | Similar appearance |
+| `color="primary" variant="ghost"` | `variant="ghost"` | Same |
+| `color="danger" variant="flat"` | `variant="danger-soft"` | New soft danger variant |
+
+**v2 Variants:** `solid`, `bordered`, `light`, `flat`, `faded`, `shadow`, `ghost`  
+**v3 Variants:** `primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-soft`
+
+### 3. Loading State: `isLoading` → `isPending`
+
+**v2:** Used `isLoading` prop  
+**v3:** Uses `isPending` prop
+
+### 4. Removed Props
+
+The following props are no longer available in v3:
+
+- `color` - Variants handle styling instead
+- `radius` - Use Tailwind CSS classes like `rounded-lg`, `rounded-full`, etc.
+- `startContent` / `endContent` - Place icons directly as children
+- `spinner` / `spinnerPlacement` - Handle loading state manually with render props
+- `fullWidth` - Use Tailwind CSS class `w-full`
+- `disableRipple` - Ripple effect removed in v3
+- `disableAnimation` - Animations are handled internally
+- `classNames` - Use `className` prop instead
+
+### 5. ButtonGroup Removed
+
+**v2:** Had a dedicated `ButtonGroup` component  
+**v3:** No `ButtonGroup` component - create groups manually with CSS classes
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Button } from "@heroui/react";
+
+    export default function App() {
+      return <Button color="primary">Button</Button>;
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button } from "@heroui/react";
+
+    export default function App() {
+      return <Button variant="primary">Button</Button>;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button color="primary" variant="solid">Solid</Button>
+    <Button color="primary" variant="bordered">Bordered</Button>
+    <Button color="primary" variant="light">Light</Button>
+    <Button color="primary" variant="flat">Flat</Button>
+    <Button color="primary" variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="tertiary">Tertiary</Button>
+    <Button variant="ghost">Ghost</Button>
+    <Button variant="danger">Danger</Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Colors
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button color="default">Default</Button>
+    <Button color="primary">Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="success">Success</Button>
+    <Button color="warning">Warning</Button>
+    <Button color="danger">Danger</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="tertiary">Tertiary</Button>
+    <Button variant="danger">Danger</Button>
+    <Button variant="danger-soft">Danger Soft</Button>
+    {/* For success/warning, use primary with custom styling */}
+    <Button variant="primary" className="bg-success text-white">
+      Success
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button 
+      color="success" 
+      endContent={<Icon icon="gravity-ui:camera" />}
+    >
+      Take a photo
+    </Button>
+    <Button 
+      color="danger" 
+      startContent={<Icon icon="gravity-ui:trash-bin" />}
+      variant="bordered"
+    >
+      Delete user
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button variant="primary">
+      <Icon icon="gravity-ui:camera" />
+      Take a photo
+    </Button>
+    <Button variant="secondary">
+      <Icon icon="gravity-ui:trash-bin" />
+      Delete user
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Icon Only Button
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isIconOnly color="danger">
+      <HeartIcon />
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button isIconOnly variant="danger">
+      <Icon icon="gravity-ui:heart" />
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Loading State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isLoading color="primary">
+      Loading
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Spinner } from "@heroui/react";
+
+    <Button isPending>
+      {({isPending}) => (
+        <>
+          {isPending ? <Spinner color="current" size="sm" /> : null}
+          Loading
+        </>
+      )}
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Loading State with Conditional Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    <Button 
+      isLoading={isLoading}
+      spinnerPlacement="start"
+      color="primary"
+      onPress={() => setIsLoading(true)}
+    >
+      Upload File
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Spinner } from "@heroui/react";
+    import { Icon } from "@iconify/react";
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    <Button 
+      isPending={isLoading}
+      onPress={() => setIsLoading(true)}
+    >
+      {({isPending}) => (
+        <>
+          {isPending ? (
+            <Spinner color="current" size="sm" />
+          ) : (
+            <Icon icon="gravity-ui:paperclip" />
+          )}
+          {isPending ? "Uploading..." : "Upload File"}
+        </>
+      )}
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Full Width Button
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button fullWidth color="primary">
+      Full Width
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button className="w-full" variant="primary">
+      Full Width
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Radius
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button radius="full" color="primary">
+      Rounded
+    </Button>
+    <Button radius="lg" color="primary">
+      Large Radius
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button className="rounded-full" variant="primary">
+      Rounded
+    </Button>
+    <Button className="rounded-lg" variant="primary">
+      Large Radius
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Button Group
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup>
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="inline-flex rounded-lg border border-divider" role="group">
+      <Button className="rounded-r-none border-r border-divider">
+        One
+      </Button>
+      <Button className="rounded-none border-r border-divider">
+        Two
+      </Button>
+      <Button className="rounded-l-none">
+        Three
+      </Button>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isDisabled color="primary">
+      Disabled
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button isDisabled variant="primary">
+      Disabled
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button size="sm" color="primary">Small</Button>
+    <Button size="md" color="primary">Medium</Button>
+    <Button size="lg" color="primary">Large</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button size="sm" variant="primary">Small</Button>
+    <Button size="md" variant="primary">Medium</Button>
+    <Button size="lg" variant="primary">Large</Button>
+    ```
+  </Tab>
+</Tabs>
+
+## Render Props Pattern
+
+v3 Button supports a render prop pattern that provides state information:
+
+```tsx
+<Button isPending={isLoading}>
+  {({isPending, isPressed, isHovered, isFocused, isDisabled}) => (
+    <>
+      {isPending && <Spinner size="sm" />}
+      {isPressed ? "Pressed!" : "Click me"}
+    </>
+  )}
+</Button>
+```
+
+Available render props:
+- `isPending` - Whether button is in loading state
+- `isPressed` - Whether button is currently pressed
+- `isHovered` - Whether button is hovered
+- `isFocused` - Whether button is focused
+- `isFocusVisible` - Whether button should show focus indicator
+- `isDisabled` - Whether button is disabled
+
+## Breaking Changes Summary
+
+1. **onClick → onPress**: Must use `onPress` instead of `onClick`
+2. **Color Prop Removed**: Use `variant` prop instead of `color` + `variant`
+3. **Variants Changed**: New variant system (`primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-soft`)
+4. **isLoading → isPending**: Loading prop renamed
+5. **Icons**: `startContent`/`endContent` removed - place icons as children
+6. **Loading Spinner**: Must handle spinner manually with render props
+7. **Radius Removed**: Use Tailwind CSS classes
+8. **FullWidth Removed**: Use Tailwind `w-full` class
+9. **Ripple Removed**: No ripple effect in v3
+10. **ButtonGroup Removed**: Create groups manually with CSS
+11. **ClassNames Removed**: Use `className` prop
+
+## Tips for Migration
+
+1. **Replace onClick**: Change all `onClick` handlers to `onPress`
+2. **Map variants**: Use the variant mapping table to find equivalent v3 variants
+3. **Handle loading**: Use render props pattern for loading states with spinners
+4. **Icons as children**: Move icons from `startContent`/`endContent` to direct children
+5. **Use Tailwind**: Many removed props can be replaced with Tailwind utility classes
+6. **Button groups**: Use flexbox and border utilities to create button groups
+7. **Custom colors**: For success/warning colors, use `variant="primary"` with custom Tailwind classes
+
+## Need Help?
+
+**For v3 Button features and API:**
+- See the [API Reference](/docs/components/button#api-reference)
+- Check [interactive examples](/docs/components/button#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

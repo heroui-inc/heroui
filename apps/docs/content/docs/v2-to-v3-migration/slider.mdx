@@ -1,0 +1,435 @@
+---
+title: Slider
+description: Migration guide for Slider from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Slider documentation](/docs/components/slider) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Slider component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `Slider.Output`, `Slider.Track`, `Slider.Fill`, and `Slider.Thumb` components.
+
+## Structure Changes
+
+### v2: Simple Structure
+
+In v2, Slider used a simple structure with props:
+
+```tsx
+import { Slider } from "@heroui/react";
+
+<Slider
+  label="Volume"
+  defaultValue={30}
+  size="md"
+  color="primary"
+/>
+```
+
+### v3: Compound Components
+
+In v3, Slider requires compound components:
+
+```tsx
+import { Slider, Label } from "@heroui/react";
+
+<Slider defaultValue={30}>
+  <Label>Volume</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Simple Slider with props  
+**v3:** Compound components: `Slider.Output`, `Slider.Track`, `Slider.Fill`, `Slider.Thumb`
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `label` | - | Removed (use `Label` component) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `classNames` | - | Use `className` props |
+| `showSteps` | - | Removed (not yet supported) |
+| `showTooltip` | - | Removed (not yet supported) |
+| `marks` | - | Removed (not yet supported, see `Slider.Marks`) |
+| `startContent` | - | Removed (customize track wrapper) |
+| `endContent` | - | Removed (customize track wrapper) |
+| `hideValue` | - | Removed (omit `Slider.Output`) |
+| `hideThumb` | - | Removed (omit `Slider.Thumb`) |
+| `showOutline` | - | Removed (use Tailwind CSS) |
+| `renderThumb` | - | Use `Slider.Thumb` render prop |
+| `renderLabel` | - | Use `Label` component |
+| `renderValue` | - | Use `Slider.Output` render prop |
+| `getValue` | - | Use `Slider.Output` render prop |
+| `fillOffset` | - | Removed (not yet supported) |
+| `disableThumbScale` | - | Removed (use Tailwind CSS) |
+| `disableAnimation` | - | Removed |
+
+### 3. Removed Props
+
+The following props are no longer available in v3:
+
+- `label` - Use `Label` component instead
+- `size`, `color`, `radius` - Use Tailwind CSS classes
+- `classNames` - Use `className` props on individual components
+- `showSteps`, `showTooltip`, `marks` - Not yet supported (see TODOs in source)
+- `startContent`, `endContent` - Customize track wrapper directly
+- `hideValue`, `hideThumb`, `showOutline` - Control visibility/styling manually
+- `renderThumb`, `renderLabel`, `renderValue` - Use render props on components
+- `getValue`, `getTooltipValue` - Use `Slider.Output` render prop
+- `fillOffset` - Not yet supported
+- `disableThumbScale`, `disableAnimation` - Use Tailwind CSS
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Slider } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Slider
+          className="max-w-md"
+          defaultValue={0.4}
+          label="Temperature"
+          maxValue={1}
+          minValue={0}
+          step={0.01}
+        />
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Slider, Label } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Slider
+          className="w-full max-w-md"
+          defaultValue={0.4}
+          maxValue={1}
+          minValue={0}
+          step={0.01}
+        >
+          <Label>Temperature</Label>
+          <Slider.Output />
+          <Slider.Track>
+            <Slider.Fill />
+            <Slider.Thumb />
+          </Slider.Track>
+        </Slider>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState(25);
+
+    <Slider
+      value={value}
+      onChange={setValue}
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState(25);
+
+    <Slider value={value} onChange={setValue}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Range Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={[100, 500]}
+      formatOptions={{style: "currency", currency: "USD"}}
+      label="Price Range"
+      maxValue={1000}
+      minValue={0}
+      step={50}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider
+      defaultValue={[100, 500]}
+      formatOptions={{style: "currency", currency: "USD"}}
+      maxValue={1000}
+      minValue={0}
+      step={50}
+    >
+      <Label>Price Range</Label>
+      <Slider.Output />
+      <Slider.Track>
+        {({state}) => (
+          <>
+            <Slider.Fill />
+            {state.values.map((_, i) => (
+              <Slider.Thumb key={i} index={i} />
+            ))}
+          </>
+        )}
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Vertical Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={30}
+      orientation="vertical"
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30} orientation="vertical">
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      isDisabled
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider isDisabled defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Value Display
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      renderValue={(props) => (
+        <output {...props}>Custom: {value}</output>
+      )}
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output>
+        {({state}) => `Custom: ${state.values[0]}`}
+      </Slider.Output>
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      classNames={{
+        base: "custom-base",
+        track: "custom-track",
+        thumb: "custom-thumb"
+      }}
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider className="custom-base" defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track className="custom-track">
+        <Slider.Fill />
+        <Slider.Thumb className="custom-thumb" />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Without Value Display
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      hideValue
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      {/* Omit Slider.Output */}
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Slider follows this structure:
+
+```
+Slider (Root)
+  ├── Label (optional)
+  ├── Slider.Output (optional)
+  └── Slider.Track
+      ├── Slider.Fill
+      └── Slider.Thumb (or multiple for range)
+```
+
+For range sliders, use a render prop in `Slider.Track`:
+
+```tsx
+<Slider.Track>
+  {({state}) => (
+    <>
+      <Slider.Fill />
+      {state.values.map((_, i) => (
+        <Slider.Thumb key={i} index={i} />
+      ))}
+    </>
+  )}
+</Slider.Track>
+```
+
+## Important Notes
+
+### Range Sliders
+
+- **v2:** Automatically detected range when `value` or `defaultValue` is an array
+- **v3:** Still detects range automatically, but you must map over thumbs in `Slider.Track` render prop
+
+### Features Not Yet Supported
+
+Based on the v3 source code TODOs, the following features are not yet implemented:
+- Steps (`showSteps`)
+- Marks (`marks` - though `Slider.Marks` component exists)
+- RTL support
+- Fill offset (`fillOffset`)
+
+### Value Formatting
+
+- **v2:** Used `formatOptions` prop and `getValue` function
+- **v3:** `formatOptions` still works, but custom formatting uses `Slider.Output` render prop
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must use compound components (`Slider.Output`, `Slider.Track`, `Slider.Fill`, `Slider.Thumb`)
+2. **Label Handling**: `label` prop removed - use `Label` component
+3. **Styling Props Removed**: `size`, `color`, `radius` - use Tailwind CSS
+4. **ClassNames Removed**: Use `className` props on individual components
+5. **Feature Props Removed**: `showSteps`, `showTooltip`, `marks`, `startContent`, `endContent` - not yet supported or customize manually
+6. **Render Props Removed**: `renderThumb`, `renderLabel`, `renderValue` - use render props on components
+7. **Visibility Props Removed**: `hideValue`, `hideThumb` - omit components instead
+8. **Range Sliders**: Must map over thumbs in `Slider.Track` render prop
+
+## Tips for Migration
+
+1. **Update structure**: Wrap Slider content in compound components
+2. **Add Label**: Use `Label` component for slider label
+3. **Add Output**: Use `Slider.Output` for value display (omit if not needed)
+4. **Add Track**: Wrap `Slider.Fill` and `Slider.Thumb` in `Slider.Track`
+5. **Range sliders**: Use render prop in `Slider.Track` to map over thumbs
+6. **Update styling**: Use Tailwind CSS classes for sizes, colors, radius
+7. **Custom value**: Use `Slider.Output` render prop for custom formatting
+8. **Remove unused props**: Remove `showSteps`, `showTooltip`, `marks`, etc. if used
+
+## Need Help?
+
+**For v3 Slider features and API:**
+- See the [API Reference](/docs/components/slider#api-reference)
+- Check [interactive examples](/docs/components/slider#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

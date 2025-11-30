@@ -1,0 +1,579 @@
+---
+title: Dropdown
+description: Migration guide for Dropdown from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Dropdown documentation](/docs/components/dropdown) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Dropdown component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, and `Dropdown.Item` components.
+
+## Structure Changes
+
+### v2: Separate Components
+
+In v2, Dropdown used separate components: `DropdownTrigger`, `DropdownMenu`, `DropdownItem`, `DropdownSection`:
+
+```tsx
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
+
+<Dropdown>
+  <DropdownTrigger>
+    <Button>Open Menu</Button>
+  </DropdownTrigger>
+  <DropdownMenu>
+    <DropdownItem key="new">New file</DropdownItem>
+    <DropdownItem key="copy">Copy link</DropdownItem>
+  </DropdownMenu>
+</Dropdown>
+```
+
+### v3: Compound Component Structure
+
+In v3, Dropdown uses a compound component pattern with explicit subcomponents:
+
+```tsx
+import { Dropdown, Button, Label } from "@heroui/react";
+
+<Dropdown>
+  <Button>Open Menu</Button>
+  <Dropdown.Popover>
+    <Dropdown.Menu>
+      <Dropdown.Item id="new" textValue="New file">
+        <Label>New file</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="copy" textValue="Copy link">
+        <Label>Copy link</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown.Popover>
+</Dropdown>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Separate components: `DropdownTrigger`, `DropdownMenu`, `DropdownItem`, `DropdownSection`  
+**v3:** Compound components: `Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, `Dropdown.Item`, `Dropdown.Section`
+
+### 2. Component Name Changes
+
+| v2 Component | v3 Component | Notes |
+|-------------|--------------|-------|
+| `DropdownTrigger` | `Dropdown.Trigger` | Same functionality |
+| `DropdownMenu` | `Dropdown.Menu` | Wrapped in `Dropdown.Popover` |
+| `DropdownItem` | `Dropdown.Item` | Requires `id` instead of `key` |
+| `DropdownSection` | `Dropdown.Section` | Same functionality |
+| - | `Dropdown.Popover` | New wrapper component (required) |
+
+### 3. Item Props Changes
+
+**v2:** Used `key` prop for item identification  
+**v3:** Uses `id` prop instead of `key`, and requires `textValue` prop
+
+**v2:** Item content passed as children  
+**v3:** Item content must use `Label` component for text
+
+### 4. Removed Props
+
+The following props are no longer available in v3:
+
+- `DropdownMenu`:
+  - `variant` - Removed (no longer supports visual variants)
+  - `color` - Removed (no longer supports color themes)
+  - `classNames` - Use `className` prop directly
+  - `itemClasses` - Use `className` on individual items
+- `DropdownItem`:
+  - `key` - Use `id` instead
+  - `color` - Use `variant="danger"` for danger items
+  - `title` - Use `Label` component as child
+  - `description` - Use `Description` component as child
+  - `shortcut` - Use `Kbd` component as child
+  - `startContent` - Use icon/components as first child
+  - `endContent` - Use components as last child
+  - `selectedIcon` - Use `Dropdown.ItemIndicator` component
+  - `showDivider` - Use `Separator` component between items
+  - `classNames` - Use `className` prop directly
+  - `isSelected` - Use `selectedKeys` on `Dropdown.Menu`
+  - `isDisabled` - Use `disabledKeys` on `Dropdown.Menu`
+
+### 5. New Components
+
+- `Dropdown.Popover` - Required wrapper around `Dropdown.Menu`
+- `Dropdown.ItemIndicator` - For selection indicators (checkmark/dot)
+- `Dropdown.SubmenuTrigger` - For submenu functionality
+- `Dropdown.SubmenuIndicator` - For submenu chevron indicator
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Dropdown>
+          <DropdownTrigger>
+            <Button variant="bordered">Open Menu</Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions">
+            <DropdownItem key="new">New file</DropdownItem>
+            <DropdownItem key="copy">Copy link</DropdownItem>
+            <DropdownItem key="edit">Edit file</DropdownItem>
+            <DropdownItem key="delete" className="text-danger" color="danger">
+              Delete file
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Dropdown, Button, Label } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Dropdown>
+          <Button variant="secondary">Open Menu</Button>
+          <Dropdown.Popover>
+            <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
+              <Dropdown.Item id="new" textValue="New file">
+                <Label>New file</Label>
+              </Dropdown.Item>
+              <Dropdown.Item id="copy" textValue="Copy link">
+                <Label>Copy link</Label>
+              </Dropdown.Item>
+              <Dropdown.Item id="edit" textValue="Edit file">
+                <Label>Edit file</Label>
+              </Dropdown.Item>
+              <Dropdown.Item id="delete" textValue="Delete file" variant="danger">
+                <Label>Delete file</Label>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown.Popover>
+        </Dropdown>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### With Action Handler
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownMenu onAction={(key) => alert(key)}>
+      <DropdownItem key="new">New file</DropdownItem>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown.Menu onAction={(key) => alert(key)}>
+      <Dropdown.Item id="new" textValue="New file">
+        <Label>New file</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem
+      key="new"
+      startContent={<AddNoteIcon />}
+    >
+      New file
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Dropdown.Item id="new" textValue="New file">
+      <Icon icon="gravity-ui:square-plus" />
+      <Label>New file</Label>
+    </Dropdown.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### With Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem
+      key="new"
+      description="Create a new file"
+    >
+      New file
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label, Description } from "@heroui/react";
+
+    <Dropdown.Item id="new" textValue="New file">
+      <Label>New file</Label>
+      <Description>Create a new file</Description>
+    </Dropdown.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### With Shortcut
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem
+      key="new"
+      shortcut="⌘N"
+    >
+      New file
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label, Kbd } from "@heroui/react";
+
+    <Dropdown.Item id="new" textValue="New file">
+      <Label>New file</Label>
+      <Kbd slot="keyboard" variant="light">
+        <Kbd.Abbr keyValue="command" />
+        <Kbd.Content>N</Kbd.Content>
+      </Kbd>
+    </Dropdown.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### Danger Item
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem
+      key="delete"
+      className="text-danger"
+      color="danger"
+    >
+      Delete file
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown.Item id="delete" textValue="Delete file" variant="danger">
+      <Label>Delete file</Label>
+    </Dropdown.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### With Sections
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownMenu>
+      <DropdownSection showDivider title="Actions">
+        <DropdownItem key="new">New file</DropdownItem>
+        <DropdownItem key="edit">Edit file</DropdownItem>
+      </DropdownSection>
+      <DropdownSection title="Danger zone">
+        <DropdownItem key="delete" color="danger">Delete file</DropdownItem>
+      </DropdownSection>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Separator } from "@heroui/react";
+
+    <Dropdown.Menu>
+      <Dropdown.Section>
+        <Header>Actions</Header>
+        <Dropdown.Item id="new" textValue="New file">
+          <Label>New file</Label>
+        </Dropdown.Item>
+        <Dropdown.Item id="edit" textValue="Edit file">
+          <Label>Edit file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+      <Separator />
+      <Dropdown.Section>
+        <Header>Danger zone</Header>
+        <Dropdown.Item id="delete" textValue="Delete file" variant="danger">
+          <Label>Delete file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### Single Selection
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["text"]));
+
+    <DropdownMenu
+      selectedKeys={selectedKeys}
+      selectionMode="single"
+      onSelectionChange={setSelectedKeys}
+    >
+      <DropdownItem key="text">Text</DropdownItem>
+      <DropdownItem key="number">Number</DropdownItem>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["text"]));
+
+    <Dropdown.Menu
+      selectedKeys={selectedKeys}
+      selectionMode="single"
+      onSelectionChange={setSelectedKeys}
+    >
+      <Dropdown.Item id="text" textValue="Text">
+        <Dropdown.ItemIndicator />
+        <Label>Text</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="number" textValue="Number">
+        <Dropdown.ItemIndicator />
+        <Label>Number</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### Multiple Selection
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["bold"]));
+
+    <DropdownMenu
+      selectedKeys={selectedKeys}
+      selectionMode="multiple"
+      onSelectionChange={setSelectedKeys}
+    >
+      <DropdownItem key="bold">Bold</DropdownItem>
+      <DropdownItem key="italic">Italic</DropdownItem>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["bold"]));
+
+    <Dropdown.Menu
+      selectedKeys={selectedKeys}
+      selectionMode="multiple"
+      onSelectionChange={setSelectedKeys}
+    >
+      <Dropdown.Item id="bold" textValue="Bold">
+        <Label>Bold</Label>
+        <Dropdown.ItemIndicator />
+      </Dropdown.Item>
+      <Dropdown.Item id="italic" textValue="Italic">
+        <Label>Italic</Label>
+        <Dropdown.ItemIndicator />
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled Items
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownMenu disabledKeys={["delete"]}>
+      <DropdownItem key="new">New file</DropdownItem>
+      <DropdownItem key="delete">Delete file</DropdownItem>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown.Menu disabledKeys={["delete"]}>
+      <Dropdown.Item id="new" textValue="New file">
+        <Label>New file</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="delete" textValue="Delete file">
+        <Label>Delete file</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Trigger
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Dropdown>
+      <DropdownTrigger>
+        <CustomButton>Menu</CustomButton>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem key="new">New file</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown>
+      <Dropdown.Trigger>
+        <CustomButton>Menu</CustomButton>
+      </Dropdown.Trigger>
+      <Dropdown.Popover>
+        <Dropdown.Menu>
+          <Dropdown.Item id="new" textValue="New file">
+            <Label>New file</Label>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled Open State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Dropdown
+      isOpen={isOpen}
+      onOpenChange={setIsOpen}
+    >
+      <DropdownTrigger>
+        <Button>Menu</Button>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem key="new">New file</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Dropdown
+      isOpen={isOpen}
+      onOpenChange={setIsOpen}
+    >
+      <Button>Menu</Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu>
+          <Dropdown.Item id="new" textValue="New file">
+            <Label>New file</Label>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Dropdown follows this structure:
+
+```
+Dropdown (Root)
+  ├── Dropdown.Trigger (optional, defaults to first child)
+  ├── Dropdown.Popover (required wrapper)
+  │   └── Dropdown.Menu
+  │       ├── Dropdown.Item
+  │       │   ├── Icon (optional, first child)
+  │       │   ├── Label (required for text)
+  │       │   ├── Description (optional)
+  │       │   ├── Kbd (optional, for shortcuts)
+  │       │   └── Dropdown.ItemIndicator (optional, for selection)
+  │       ├── Separator (for dividers)
+  │       └── Dropdown.Section
+  │           ├── Header (optional)
+  │           └── Dropdown.Item
+```
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must use compound components (`Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, etc.)
+2. **Dropdown.Popover Required**: `Dropdown.Menu` must be wrapped in `Dropdown.Popover`
+3. **key → id**: Items use `id` prop instead of `key`
+4. **textValue Required**: All items must have `textValue` prop
+5. **Label Component**: Item text must use `Label` component
+6. **Description Component**: Use `Description` component instead of `description` prop
+7. **Kbd Component**: Use `Kbd` component instead of `shortcut` prop
+8. **Icons as Children**: Icons go as first child, not `startContent` prop
+9. **Separator Component**: Use `Separator` instead of `showDivider` prop
+10. **ItemIndicator Component**: Use `Dropdown.ItemIndicator` for selection indicators
+11. **Variant Instead of Color**: Use `variant="danger"` instead of `color="danger"`
+12. **No Menu Variants**: `Dropdown.Menu` no longer supports `variant` or `color` props
+13. **ClassNames Removed**: Use `className` props on individual components
+
+## Tips for Migration
+
+1. **Start with structure**: Convert to compound components first
+2. **Add Popover wrapper**: Wrap `Dropdown.Menu` in `Dropdown.Popover`
+3. **Update item props**: Change `key` to `id` and add `textValue`
+4. **Use Label component**: Wrap item text in `Label` component
+5. **Move content to children**: Icons, descriptions, shortcuts go as children
+6. **Use Separator**: Replace `showDivider` with `Separator` component
+7. **Add ItemIndicator**: Add `Dropdown.ItemIndicator` for selection modes
+8. **Update disabled/selected**: Use `disabledKeys` and `selectedKeys` on menu
+
+## Need Help?
+
+**For v3 Dropdown features and API:**
+- See the [API Reference](/docs/components/dropdown#api-reference)
+- Check [interactive examples](/docs/components/dropdown#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

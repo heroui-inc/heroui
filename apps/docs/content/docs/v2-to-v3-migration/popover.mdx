@@ -1,0 +1,388 @@
+---
+title: Popover
+description: Migration guide for Popover from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Popover documentation](/docs/components/popover) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Popover component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `Popover.Content`, `Popover.Dialog`, `Popover.Heading`, and `Popover.Arrow` components.
+
+## Structure Changes
+
+### v2: Separate Components
+
+In v2, Popover used separate components:
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from "@heroui/react";
+
+<Popover placement="right">
+  <PopoverTrigger>
+    <Button>Open</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <div>Content</div>
+  </PopoverContent>
+</Popover>
+```
+
+### v3: Compound Components
+
+In v3, Popover uses compound components:
+
+```tsx
+import { Popover, Button } from "@heroui/react";
+
+<Popover>
+  <Button>Open</Button>
+  <Popover.Content>
+    <Popover.Dialog>
+      <Popover.Heading>Title</Popover.Heading>
+      <div>Content</div>
+    </Popover.Dialog>
+  </Popover.Content>
+</Popover>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Separate components (`Popover`, `PopoverTrigger`, `PopoverContent`)  
+**v3:** Compound components (`Popover`, `Popover.Trigger`, `Popover.Content`, `Popover.Dialog`, `Popover.Heading`, `Popover.Arrow`)
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `placement` | `placement` (on Content) | Moved to `Popover.Content` |
+| `showArrow` | - | Removed (use `Popover.Arrow` component) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `shadow` | - | Removed (use Tailwind CSS) |
+| `backdrop` | - | Removed |
+| `offset` | `offset` (on Content) | Moved to `Popover.Content` |
+| `shouldFlip` | `shouldFlip` (on Content) | Moved to `Popover.Content` |
+| `motionProps` | - | Removed (animations handled differently) |
+| `classNames` | - | Use `className` props |
+| `onClose` | - | Use `onOpenChange` instead |
+
+### 3. Removed Props
+
+The following props are no longer available in v3:
+
+- `size` - Use Tailwind CSS classes
+- `color` - Use Tailwind CSS classes
+- `radius` - Use Tailwind CSS classes
+- `shadow` - Use Tailwind CSS classes
+- `backdrop` - Removed
+- `showArrow` - Use `Popover.Arrow` component instead
+- `motionProps` - Animations handled differently
+- `classNames` - Use `className` props on individual components
+- `onClose` - Use `onOpenChange` instead
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Popover placement="right">
+          <PopoverTrigger>
+            <Button>Open Popover</Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="px-1 py-2">
+              <div className="text-small font-bold">Popover Content</div>
+              <div className="text-tiny">This is the popover content</div>
+            </div>
+          </PopoverContent>
+        </Popover>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Popover, Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Popover>
+          <Button>Open Popover</Button>
+          <Popover.Content placement="right">
+            <Popover.Dialog>
+              <Popover.Heading>Popover Content</Popover.Heading>
+              <p className="text-muted mt-2 text-sm">
+                This is the popover content
+              </p>
+            </Popover.Dialog>
+          </Popover.Content>
+        </Popover>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### With Arrow
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Popover showArrow>
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <Popover.Arrow />
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### With Placement
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Popover placement="top">
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content placement="top">
+        <Popover.Dialog>
+          <Popover.Arrow />
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### With Heading
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <PopoverContent>
+      <div className="px-1 py-2">
+        <div className="text-small font-bold">Title</div>
+        <div className="text-tiny">Content</div>
+      </div>
+    </PopoverContent>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover.Content>
+      <Popover.Dialog>
+        <Popover.Heading>Title</Popover.Heading>
+        <p className="text-muted mt-2 text-sm">Content</p>
+      </Popover.Dialog>
+    </Popover.Content>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### With Offset
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Popover offset={10}>
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content offset={10}>
+        <Popover.Dialog>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Trigger
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <PopoverTrigger>
+      <CustomButton>Custom</CustomButton>
+    </PopoverTrigger>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover.Trigger>
+      <CustomButton>Custom</CustomButton>
+    </Popover.Trigger>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Popover
+      classNames={{
+        base: "custom-base",
+        content: "custom-content"
+      }}
+    >
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content className="custom-content">
+        <Popover.Dialog className="custom-dialog">
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Popover follows this structure:
+
+```
+Popover (Root)
+  ├── Popover.Trigger (optional, or use Button directly)
+  └── Popover.Content
+      └── Popover.Dialog
+          ├── Popover.Arrow (optional)
+          ├── Popover.Heading (optional)
+          └── Content
+```
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must use compound components (`Popover.Content`, `Popover.Dialog`, etc.)
+2. **Trigger**: Can use `Popover.Trigger` or Button directly
+3. **Content Wrapper**: Content must be wrapped in `Popover.Dialog`
+4. **Arrow**: `showArrow` prop removed - use `Popover.Arrow` component
+5. **Heading**: Use `Popover.Heading` component for titles
+6. **Props Moved**: `placement`, `offset`, `shouldFlip` moved to `Popover.Content`
+7. **Styling Props Removed**: `size`, `color`, `radius`, `shadow` - use Tailwind CSS
+8. **Backdrop Removed**: `backdrop` prop removed
+9. **Motion Removed**: `motionProps` removed, animations handled differently
+10. **ClassNames Removed**: Use `className` props on individual components
+
+## Tips for Migration
+
+1. **Update structure**: Wrap content in `Popover.Content` and `Popover.Dialog`
+2. **Move placement**: Move `placement` prop to `Popover.Content`
+3. **Add arrow**: Use `Popover.Arrow` component instead of `showArrow` prop
+4. **Add heading**: Use `Popover.Heading` for titles
+5. **Update trigger**: Use `Popover.Trigger` or Button directly
+6. **Move offset**: Move `offset` prop to `Popover.Content`
+7. **Update styling**: Use Tailwind CSS classes for sizes, colors, radius, shadows
+8. **Remove backdrop**: Backdrop functionality removed
+
+## Need Help?
+
+**For v3 Popover features and API:**
+- See the [API Reference](/docs/components/popover#api-reference)
+- Check [interactive examples](/docs/components/popover#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

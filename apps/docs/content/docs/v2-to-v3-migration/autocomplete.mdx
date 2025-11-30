@@ -1,0 +1,674 @@
+---
+title: Autocomplete
+description: Migration guide for Autocomplete (renamed to ComboBox) from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 ComboBox documentation](/docs/components/combobox) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Autocomplete component has been renamed to **ComboBox** in HeroUI v3 and redesigned with a compound component pattern, requiring explicit structure with `ComboBox.InputGroup`, `ComboBox.Trigger`, `ComboBox.Popover`, and `ListBox` components.
+
+## Structure Changes
+
+### v2: Single Component with Internal Structure
+
+In v2, Autocomplete was a single component that wrapped Input internally:
+
+```tsx
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
+
+<Autocomplete label="Select an animal">
+  <AutocompleteItem key="cat">Cat</AutocompleteItem>
+  <AutocompleteItem key="dog">Dog</AutocompleteItem>
+</Autocomplete>
+```
+
+### v3: Compound Component Pattern
+
+In v3, ComboBox uses compound components and requires explicit Input:
+
+```tsx
+import { ComboBox, Input, Label, ListBox } from "@heroui/react";
+
+<ComboBox>
+  <Label>Select an animal</Label>
+  <ComboBox.InputGroup>
+    <Input placeholder="Search animals..." />
+    <ComboBox.Trigger />
+  </ComboBox.InputGroup>
+  <ComboBox.Popover>
+    <ListBox>
+      <ListBox.Item id="cat" textValue="Cat">
+        Cat
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="dog" textValue="Dog">
+        Dog
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+    </ListBox>
+  </ComboBox.Popover>
+</ComboBox>
+```
+
+## Key Changes
+
+### 1. Component Rename
+
+**v2:** `Autocomplete`  
+**v3:** `ComboBox`
+
+### 2. Component Structure
+
+**v2:** Single component with internal Input  
+**v3:** Compound components (`ComboBox.InputGroup`, `ComboBox.Trigger`, `ComboBox.Popover`)
+
+### 3. Item Components
+
+**v2:** `AutocompleteItem`, `AutocompleteSection`  
+**v3:** `ListBox.Item`, `ListBox.Section` (from ListBox component)
+
+### 4. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `key` (on AutocompleteItem) | `id` (on ListBox.Item) | Changed prop name |
+| - | `textValue` (on ListBox.Item) | Now required for accessibility |
+| `label` | `Label` component | Separate component |
+| `description` | `Description` component | Separate component |
+| `placeholder` | `placeholder` (on Input) | Moved to Input component |
+| `variant` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `labelPlacement` | - | Removed (use Label component positioning) |
+| `startContent` | - | Removed (add to Input directly) |
+| `endContent` | - | Removed (add to Input directly) |
+| `selectorIcon` | - | Removed (customize ComboBox.Trigger) |
+| `clearIcon` | - | Removed (not built-in) |
+| `isClearable` | - | Removed (implement manually) |
+| `showScrollIndicators` | - | Removed |
+| `classNames` | - | Use `className` props |
+| `selectedKey` | `selectedKey` | Still exists |
+| `onSelectionChange` | `onSelectionChange` | Still exists |
+| `inputValue` | `inputValue` | Still exists |
+| `onInputChange` | `onInputChange` | Still exists |
+| `allowsCustomValue` | `allowsCustomValue` | Still exists |
+| `allowsEmptyCollection` | `allowsEmptyCollection` | Still exists |
+| `defaultFilter` | `defaultFilter` | Still exists |
+| `disabledKeys` | `disabledKeys` | Still exists |
+| `isDisabled` | `isDisabled` | Still exists |
+| `isRequired` | `isRequired` | Still exists |
+| `isInvalid` | `isInvalid` | Still exists |
+| `name` | `name` | Still exists |
+
+### 5. Removed Props
+
+The following props are no longer available in v3:
+
+- `variant`, `color`, `size`, `radius` - Use Tailwind CSS classes
+- `labelPlacement` - Use Label component positioning
+- `startContent`, `endContent` - Add directly to Input component
+- `selectorIcon`, `clearIcon` - Customize ComboBox.Trigger or implement manually
+- `isClearable` - Implement clear functionality manually
+- `showScrollIndicators` - Not supported
+- `classNames` - Use `className` props on individual components
+- `popoverProps`, `listboxProps`, `inputProps` - Configure components directly
+- `scrollShadowProps` - Not supported
+- `selectorButtonProps`, `clearButtonProps` - Not applicable
+- `disableSelectorIconRotation` - Not applicable
+- `menuTrigger` - Handled automatically
+- `isReadOnly` - Use Input `readOnly` prop
+- `fullWidth` - Use Tailwind CSS classes
+- `isVirtualized`, `maxListboxHeight`, `itemHeight` - Not supported
+- `scrollRef` - Not supported
+- `onClose`, `onClear` - Use different event handlers
+- `validationBehavior`, `validate` - Use Form component
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Autocomplete, AutocompleteItem } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Autocomplete className="max-w-xs" label="Select an animal">
+          <AutocompleteItem key="cat">Cat</AutocompleteItem>
+          <AutocompleteItem key="dog">Dog</AutocompleteItem>
+          <AutocompleteItem key="bird">Bird</AutocompleteItem>
+        </Autocomplete>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ComboBox, Input, Label, ListBox } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <ComboBox className="max-w-xs">
+          <Label>Select an animal</Label>
+          <ComboBox.InputGroup>
+            <Input placeholder="Search animals..." />
+            <ComboBox.Trigger />
+          </ComboBox.InputGroup>
+          <ComboBox.Popover>
+            <ListBox>
+              <ListBox.Item id="cat" textValue="Cat">
+                Cat
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="dog" textValue="Dog">
+                Dog
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="bird" textValue="Bird">
+                Bird
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            </ListBox>
+          </ComboBox.Popover>
+        </ComboBox>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### With Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete
+      label="Select an animal"
+      description="Choose your favorite animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description } from "@heroui/react";
+
+    <ComboBox>
+      <Label>Select an animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <Description>Choose your favorite animal</Description>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled Selection
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKey, setSelectedKey] = useState("cat");
+
+    <Autocomplete
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+      label="Animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Key } from "@heroui/react";
+
+    const [selectedKey, setSelectedKey] = useState<Key | null>("cat");
+
+    <ComboBox
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+    >
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Sections
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete label="Country">
+      <AutocompleteSection title="North America">
+        <AutocompleteItem key="usa">United States</AutocompleteItem>
+        <AutocompleteItem key="canada">Canada</AutocompleteItem>
+      </AutocompleteSection>
+      <AutocompleteSection title="Europe">
+        <AutocompleteItem key="uk">United Kingdom</AutocompleteItem>
+      </AutocompleteSection>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Separator } from "@heroui/react";
+
+    <ComboBox>
+      <Label>Country</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search countries..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Section>
+            <Header>North America</Header>
+            <ListBox.Item id="usa" textValue="United States">
+              United States
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="canada" textValue="Canada">
+              Canada
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox.Section>
+          <Separator />
+          <ListBox.Section>
+            <Header>Europe</Header>
+            <ListBox.Item id="uk" textValue="United Kingdom">
+              United Kingdom
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox.Section>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Dynamic Items
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const animals = [
+      {label: "Cat", key: "cat"},
+      {label: "Dog", key: "dog"}
+    ];
+
+    <Autocomplete defaultItems={animals} label="Animal">
+      {(item) => (
+        <AutocompleteItem key={item.key}>
+          {item.label}
+        </AutocompleteItem>
+      )}
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const animals = [
+      {id: "cat", name: "Cat"},
+      {id: "dog", name: "Dog"}
+    ];
+
+    <ComboBox items={animals}>
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          {(item) => (
+            <ListBox.Item id={item.id} textValue={item.name}>
+              {item.name}
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          )}
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Custom Filtering
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete
+      label="Animal"
+      defaultFilter={(text, inputValue) => {
+        if (!inputValue) return true;
+        return text.toLowerCase().includes(inputValue.toLowerCase());
+      }}
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ComboBox
+      defaultFilter={(text, inputValue) => {
+        if (!inputValue) return true;
+        return text.toLowerCase().includes(inputValue.toLowerCase());
+      }}
+    >
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Disabled Items
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete
+      label="Animal"
+      disabledKeys={["dog"]}
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ComboBox disabledKeys={["dog"]}>
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### Required Field
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete
+      label="Animal"
+      isRequired
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { FieldError, Form } from "@heroui/react";
+
+    <Form>
+      <ComboBox isRequired name="animal">
+        <Label>Animal</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder="Search animals..." />
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Popover>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </ComboBox.Popover>
+        <FieldError />
+      </ComboBox>
+    </Form>
+    ```
+  </Tab>
+</Tabs>
+
+### With Error Message
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete
+      label="Animal"
+      isInvalid
+      errorMessage="Please select an animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { FieldError } from "@heroui/react";
+
+    <ComboBox isInvalid>
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+      <FieldError>Please select an animal</FieldError>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete
+      label="Animal"
+      variant="bordered"
+      color="primary"
+      size="lg"
+      classNames={{
+        base: "custom-base",
+        listbox: "custom-listbox"
+      }}
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ComboBox className="custom-combobox">
+      <Label>Animal</Label>
+      <ComboBox.InputGroup className="custom-input-group">
+        <Input placeholder="Search animals..." className="custom-input" />
+        <ComboBox.Trigger className="custom-trigger" />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover className="custom-popover">
+        <ListBox className="custom-listbox">
+          <ListBox.Item id="cat" textValue="Cat" className="custom-item">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 ComboBox follows this structure:
+
+```
+ComboBox (Root)
+  ├── Label
+  ├── ComboBox.InputGroup
+  │   ├── Input
+  │   └── ComboBox.Trigger
+  ├── Description (optional)
+  ├── ComboBox.Popover
+  │   └── ListBox
+  │       ├── ListBox.Item
+  │       │   ├── [Content]
+  │       │   └── ListBox.ItemIndicator (optional)
+  │       └── ListBox.Section (optional)
+  │           ├── Header
+  │           └── ListBox.Item
+  └── FieldError (optional)
+```
+
+## Important Notes
+
+### Component Rename
+
+- **v2:** `Autocomplete` → **v3:** `ComboBox`
+- Update all imports and component references
+
+### Item Components
+
+- **v2:** `AutocompleteItem`, `AutocompleteSection`
+- **v3:** `ListBox.Item`, `ListBox.Section` (from ListBox component)
+
+### Item Props
+
+- **v2:** Used `key` prop on `AutocompleteItem`
+- **v3:** Use `id` prop on `ListBox.Item` (required) and `textValue` prop (required)
+
+### Input Component
+
+- **v2:** Input was internal to Autocomplete
+- **v3:** Must explicitly include `Input` component inside `ComboBox.InputGroup`
+
+### Label and Description
+
+- **v2:** Props on Autocomplete component
+- **v3:** Separate `Label` and `Description` components
+
+### Selection Indicators
+
+- **v2:** Automatic selection indicators
+- **v3:** Must explicitly include `ListBox.ItemIndicator` component in items
+
+### Clear Button
+
+- **v2:** Built-in clear button with `isClearable` prop
+- **v3:** Not built-in - implement manually if needed
+
+### Styling
+
+- **v2:** Many styling props (`variant`, `color`, `size`, `radius`)
+- **v3:** Use Tailwind CSS classes directly
+
+## Breaking Changes Summary
+
+1. **Component Rename**: `Autocomplete` → `ComboBox`
+2. **Component Structure**: Single component → Compound components
+3. **Item Components**: `AutocompleteItem` → `ListBox.Item`
+4. **Item Props**: `key` → `id` + `textValue` (required)
+5. **Input**: Internal → Explicit `Input` component required
+6. **Label/Description**: Props → Separate components
+7. **Styling Props Removed**: `variant`, `color`, `size`, `radius` - use Tailwind CSS
+8. **Clear Button**: Built-in → Manual implementation required
+9. **ClassNames Removed**: Use `className` props on individual components
+10. **Many Props Removed**: See prop changes table above
+
+## Tips for Migration
+
+1. **Rename component**: Change `Autocomplete` to `ComboBox`
+2. **Update imports**: Import `ComboBox`, `Input`, `Label`, `ListBox` from `@heroui/react`
+3. **Restructure**: Use compound component pattern with `ComboBox.InputGroup`, `ComboBox.Trigger`, `ComboBox.Popover`
+4. **Add Input**: Include explicit `Input` component
+5. **Update items**: Change `AutocompleteItem` to `ListBox.Item`
+6. **Add textValue**: Add `textValue` prop to all items (required)
+7. **Update keys**: Change `key` prop to `id` prop
+8. **Add indicators**: Include `ListBox.ItemIndicator` for selection indicators
+9. **Update labels**: Use `Label` component instead of `label` prop
+10. **Update descriptions**: Use `Description` component instead of `description` prop
+11. **Update styling**: Replace styling props with Tailwind CSS classes
+12. **Handle clear**: Implement clear button manually if needed
+
+## Need Help?
+
+**For v3 ComboBox features and API:**
+- See the [API Reference](/docs/components/combobox#api-reference)
+- Check [interactive examples](/docs/components/combobox#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)
