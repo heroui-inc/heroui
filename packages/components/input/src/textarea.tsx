@@ -5,6 +5,7 @@ import {forwardRef} from "@heroui/system";
 import {useMemo, useState} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import {CloseFilledIcon} from "@heroui/shared-icons";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 
 import {useInput} from "./use-input";
 
@@ -88,12 +89,25 @@ const Textarea = forwardRef<"textarea", TextAreaProps>(
       getErrorMessageProps,
       isClearable,
       getClearButtonProps,
+      domRef,
     } = useInput<HTMLTextAreaElement>({...otherProps, ref, isMultiline: true});
 
     const [hasMultipleRows, setIsHasMultipleRows] = useState(minRows > 1);
     const [isLimitReached, setIsLimitReached] = useState(false);
     const labelContent = label ? <label {...getLabelProps()}>{label}</label> : null;
     const inputProps = getInputProps();
+
+    // Sync the input value with the ref value to avoid the input value being reset
+    // after the form submission.
+    useSafeLayoutEffect(() => {
+      if (!domRef.current || inputProps.value === undefined) {
+        return;
+      }
+
+      if (domRef.current.value !== String(inputProps.value)) {
+        domRef.current.value = String(inputProps.value);
+      }
+    });
 
     const handleHeightChange = (height: number, meta: TextareaHeightChangeMeta) => {
       if (minRows === 1) {
