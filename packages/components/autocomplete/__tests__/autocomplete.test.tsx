@@ -3,7 +3,7 @@ import type {UserEvent} from "@testing-library/user-event";
 import type {AutocompleteProps} from "../src";
 
 import * as React from "react";
-import {within, render, renderHook, act} from "@testing-library/react";
+import {within, render, renderHook, act, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
@@ -1087,5 +1087,65 @@ describe("focusedKey management with selected key", () => {
     const optionItem = options[1];
 
     expect(optionItem).toHaveAttribute("data-focus", "true");
+  });
+});
+
+describe("Autocomplete with allowsCustomValue", () => {
+  let user: UserEvent;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
+  it("should show the empty content when allowsCustomValue is true and a custom emptyContent is provided", async () => {
+    const wrapper = render(
+      <Autocomplete
+        allowsCustomValue
+        aria-label="Favorite Animal"
+        data-testid="autocomplete"
+        defaultItems={[]}
+        label="Favorite Animal"
+        listboxProps={{
+          emptyContent: <div data-testid="empty-content">No animals found</div>,
+        }}
+      >
+        {(item: Item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+      </Autocomplete>,
+    );
+
+    const input = wrapper.getByTestId("autocomplete");
+
+    await user.click(input);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    const emptyContent = wrapper.getByTestId("empty-content");
+
+    await waitFor(() => {
+      expect(emptyContent).toBeVisible();
+    });
+  });
+
+  it("should not show the empty content when allowsCustomValue is true and no custom emptyContent is provided", async () => {
+    const wrapper = render(
+      <Autocomplete
+        allowsCustomValue
+        aria-label="Favorite Animal"
+        defaultItems={[]}
+        label="Favorite Animal"
+      >
+        {(item: Item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+      </Autocomplete>,
+    );
+
+    const input = wrapper.getByRole("combobox");
+
+    await user.click(input);
+
+    const listbox = wrapper.queryByRole("listbox");
+
+    expect(listbox).toBeNull();
   });
 });
