@@ -1,0 +1,542 @@
+---
+title: Checkbox
+description: Migration guide for Checkbox from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Checkbox documentation](/docs/components/checkbox) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Checkbox component in HeroUI v3 has been redesigned with a compound component pattern, requiring explicit structure with `Checkbox.Control`, `Checkbox.Indicator`, and `Checkbox.Content` components.
+
+## Structure Changes
+
+### v2: Simple Component with Children as Label
+
+In v2, `Checkbox` accepted children as the label:
+
+```tsx
+import { Checkbox } from "@heroui/react";
+
+<Checkbox defaultSelected>Option</Checkbox>
+```
+
+### v3: Compound Component Structure
+
+In v3, Checkbox uses a compound component pattern with explicit subcomponents:
+
+```tsx
+import { Checkbox, Label } from "@heroui/react";
+
+<Checkbox defaultSelected id="option">
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="option">Option</Label>
+  </Checkbox.Content>
+</Checkbox>
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Simple component with children as label  
+**v3:** Compound components: `Checkbox.Control`, `Checkbox.Indicator`, `Checkbox.Content`
+
+### 2. Label Handling
+
+**v2:** Label passed as children directly to `Checkbox`  
+**v3:** Label must be wrapped in `Checkbox.Content` using the `Label` component
+
+### 3. Event Handler: `onValueChange` → `onChange`
+
+**v2:** Used `onValueChange` prop  
+**v3:** Uses `onChange` prop (from React Aria Components)
+
+### 4. Removed Props
+
+The following props are no longer available in v3:
+
+- `color` - Use Tailwind CSS classes on `Checkbox.Control` for custom colors
+- `size` - Use Tailwind CSS classes like `size-4`, `size-5`, `size-6`
+- `radius` - Use Tailwind CSS classes like `rounded-sm`, `rounded-md`, `rounded-full`
+- `lineThrough` - Use Tailwind CSS class `line-through` on label
+- `icon` - Use custom content in `Checkbox.Indicator` instead
+- `classNames` - Use `className` props on individual components
+- `disableAnimation` - Animations are handled internally
+
+### 5. CheckboxGroup Changes
+
+**v2:** `Checkbox.Group` (compound component)  
+**v3:** `CheckboxGroup` (separate component, but structure of children changed)
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Checkbox } from "@heroui/react";
+
+    export default function App() {
+      return <Checkbox defaultSelected>Option</Checkbox>;
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Checkbox, Label } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Checkbox defaultSelected id="option">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label htmlFor="option">Option</Label>
+          </Checkbox.Content>
+        </Checkbox>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled Checkbox
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(false);
+
+    <Checkbox isSelected={isSelected} onValueChange={setIsSelected}>
+      Subscribe
+    </Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Label } from "@heroui/react";
+
+    const [isSelected, setIsSelected] = useState(false);
+
+    <Checkbox id="subscribe" isSelected={isSelected} onChange={setIsSelected}>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="subscribe">Subscribe</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Checkbox with Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have built-in description support */}
+    <Checkbox defaultSelected>
+      Option
+    </Checkbox>
+    <p className="text-sm text-default-500">Description text</p>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Checkbox, Label, Description } from "@heroui/react";
+
+    <Checkbox id="option" defaultSelected>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+        <Description>Description text</Description>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### CheckboxGroup
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Checkbox } from "@heroui/react";
+
+    <Checkbox.Group label="Select cities">
+      <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
+      <Checkbox value="sydney">Sydney</Checkbox>
+      <Checkbox value="san-francisco">San Francisco</Checkbox>
+    </Checkbox.Group>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { CheckboxGroup, Description } from "@heroui/react";
+
+    <CheckboxGroup name="cities">
+      <Label>Select cities</Label>
+      <Description>Choose all that apply</Description>
+      <Checkbox value="buenos-aires">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Buenos Aires</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="sydney">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Sydney</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="san-francisco">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>San Francisco</Label>
+        </Checkbox.Content>
+      </Checkbox>
+    </CheckboxGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### Colors
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox defaultSelected color="primary">Primary</Checkbox>
+    <Checkbox defaultSelected color="success">Success</Checkbox>
+    <Checkbox defaultSelected color="danger">Danger</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Use Tailwind classes for custom colors */}
+    <Checkbox defaultSelected id="primary">
+      <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="primary">Primary</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox defaultSelected size="sm">Small</Checkbox>
+    <Checkbox defaultSelected size="md">Medium</Checkbox>
+    <Checkbox defaultSelected size="lg">Large</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Use Tailwind classes for sizes */}
+    <Checkbox defaultSelected id="small">
+      <Checkbox.Control className="size-4">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="small">Small</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    <Checkbox defaultSelected id="medium">
+      <Checkbox.Control className="size-5">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="medium">Medium</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    <Checkbox defaultSelected id="large">
+      <Checkbox.Control className="size-6">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="large">Large</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Radius
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox defaultSelected radius="full">Rounded</Checkbox>
+    <Checkbox defaultSelected radius="lg">Large Radius</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox defaultSelected id="rounded">
+      <Checkbox.Control className="rounded-full">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="rounded">Rounded</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    <Checkbox defaultSelected id="large-radius">
+      <Checkbox.Control className="rounded-lg">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="large-radius">Large Radius</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Line Through
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox defaultSelected lineThrough>
+      Option
+    </Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox defaultSelected id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option" className="line-through">
+          Option
+        </Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Icon/Indicator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox defaultSelected icon={<HeartIcon />}>
+      Option
+    </Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox defaultSelected id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator>
+          {({isSelected}) => isSelected ? <HeartIcon /> : null}
+        </Checkbox.Indicator>
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Indeterminate State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox isIndeterminate>Option</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox isIndeterminate id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox isDisabled>Disabled</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox isDisabled id="disabled">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="disabled">Disabled</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Invalid State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox isInvalid>Invalid</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox isInvalid id="invalid">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="invalid">Invalid</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+## Render Props Pattern
+
+v3 Checkbox supports a render prop pattern that provides state information:
+
+```tsx
+<Checkbox id="terms">
+  {({isSelected, isIndeterminate, isHovered, isPressed, isFocused, isDisabled}) => (
+    <>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="terms">
+          {isSelected ? "Terms accepted" : "Accept terms"}
+        </Label>
+      </Checkbox.Content>
+    </>
+  )}
+</Checkbox>
+```
+
+Available render props:
+- `isSelected` - Whether checkbox is checked
+- `isIndeterminate` - Whether checkbox is in indeterminate state
+- `isHovered` - Whether checkbox is hovered
+- `isPressed` - Whether checkbox is currently pressed
+- `isFocused` - Whether checkbox is focused
+- `isFocusVisible` - Whether checkbox should show focus indicator
+- `isDisabled` - Whether checkbox is disabled
+- `isReadOnly` - Whether checkbox is read only
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Checkbox 
+  classNames={{
+    base: "custom-base",
+    wrapper: "custom-wrapper",
+    icon: "custom-icon",
+    label: "custom-label"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Checkbox className="custom-base" id="option">
+  <Checkbox.Control className="custom-control">
+    <Checkbox.Indicator className="custom-indicator" />
+  </Checkbox.Control>
+  <Checkbox.Content className="custom-content">
+    <Label htmlFor="option" className="custom-label">
+      Option
+    </Label>
+  </Checkbox.Content>
+</Checkbox>
+```
+
+## Component Anatomy
+
+The v3 Checkbox follows this structure:
+
+```
+Checkbox (Root)
+  ├── Checkbox.Control
+  │   └── Checkbox.Indicator
+  └── Checkbox.Content (optional)
+      ├── Label (required if using Content)
+      └── Description (optional)
+```
+
+## Breaking Changes Summary
+
+1. **Component Structure**: Must use compound components (`Control`, `Indicator`, `Content`)
+2. **Label Handling**: Labels must use `Label` component inside `Checkbox.Content`
+3. **onValueChange → onChange**: Event handler prop renamed
+4. **Color Removed**: Use Tailwind CSS classes on `Checkbox.Control`
+5. **Size Removed**: Use Tailwind CSS classes on `Checkbox.Control`
+6. **Radius Removed**: Use Tailwind CSS classes on `Checkbox.Control`
+7. **LineThrough Removed**: Use Tailwind `line-through` class on label
+8. **Icon Prop Removed**: Use custom content in `Checkbox.Indicator`
+9. **CheckboxGroup**: Changed from `Checkbox.Group` to `CheckboxGroup` with different child structure
+10. **ClassNames Removed**: Use `className` props on individual components
+
+## Tips for Migration
+
+1. **Start with structure**: Convert to compound components first
+2. **Add Label component**: Wrap labels in `Checkbox.Content` with `Label` component
+3. **Use htmlFor/id**: Always provide `id` on Checkbox and `htmlFor` on Label for accessibility
+4. **Custom styling**: Use Tailwind classes on `Checkbox.Control` for colors, sizes, and radius
+5. **Custom indicators**: Use render props in `Checkbox.Indicator` for custom icons
+6. **CheckboxGroup**: Update from `Checkbox.Group` to `CheckboxGroup` and restructure children
+
+## Need Help?
+
+**For v3 Checkbox features and API:**
+- See the [API Reference](/docs/components/checkbox#api-reference)
+- Check [interactive examples](/docs/components/checkbox#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

@@ -1,0 +1,296 @@
+---
+title: Link
+description: Migration guide for Link from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Link documentation](/docs/components/link) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Link component in HeroUI v3 has been simplified with removed styling props and a compound component pattern for icons using `Link.Icon`.
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single component with icon props  
+**v3:** Compound component: `Link.Icon` for icons
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `showAnchorIcon` | - | Removed (use `Link.Icon` component) |
+| `anchorIcon` | - | Removed (use `Link.Icon` children) |
+| `isExternal` | - | Removed (handle manually with `target` and `rel`) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `isBlock` | - | Removed (use Tailwind CSS) |
+| `disableAnimation` | - | Removed |
+| `underline` | `underline` | Simplified (`active` and `focus` removed) |
+| - | `underlineOffset` | New prop (1 \| 2 \| 3) |
+| - | `asChild` | New prop for composition |
+
+### 3. Removed Props
+
+The following props are no longer available in v3:
+
+- `size` - Use Tailwind CSS classes (e.g., `text-sm`, `text-base`, `text-lg`)
+- `color` - Use Tailwind CSS classes (e.g., `text-primary`, `text-danger`)
+- `isBlock` - Use Tailwind CSS classes (e.g., `block`, `hover:bg-surface`)
+- `disableAnimation` - Animations are handled differently in v3
+- `showAnchorIcon` - Use `Link.Icon` component instead
+- `anchorIcon` - Pass custom icon as children to `Link.Icon`
+- `isExternal` - Handle manually with `target="_blank"` and `rel="noopener noreferrer"`
+
+## Migration Examples
+
+### Basic Usage
+
+Basic usage remains unchanged in v3:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Link } from "@heroui/react";
+
+    export default function App() {
+      return <Link href="#">Default Link</Link>;
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Link } from "@heroui/react";
+
+    export default function App() {
+      return <Link href="#">Default Link</Link>;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### With Icon
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link showAnchorIcon href="#">
+      External Link
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#">
+      External Link
+      <Link.Icon />
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Icon
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link
+      showAnchorIcon
+      anchorIcon={<CustomIcon />}
+      href="#"
+    >
+      Custom Icon
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#">
+      Custom Icon
+      <Link.Icon>
+        <CustomIcon />
+      </Link.Icon>
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### External Link
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link isExternal href="https://example.com">
+      External Link
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link
+      href="https://example.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      External Link
+      <Link.Icon />
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link href="#" size="sm">Small</Link>
+    <Link href="#" size="md">Medium</Link>
+    <Link href="#" size="lg">Large</Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" className="text-sm">Small</Link>
+    <Link href="#" className="text-base">Medium</Link>
+    <Link href="#" className="text-lg">Large</Link>
+    ```
+  </Tab>
+</Tabs>
+
+### Colors
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link href="#" color="primary">Primary</Link>
+    <Link href="#" color="danger">Danger</Link>
+    <Link href="#" color="success">Success</Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" className="text-primary">Primary</Link>
+    <Link href="#" className="text-danger">Danger</Link>
+    <Link href="#" className="text-success">Success</Link>
+    ```
+  </Tab>
+</Tabs>
+
+### Underline Offset
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have underlineOffset prop */}
+    <Link href="#" underline="hover">
+      No offset
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" underline="hover" underlineOffset={1}>
+      No offset
+    </Link>
+    <Link href="#" underline="hover" underlineOffset={2}>
+      2px offset
+    </Link>
+    <Link href="#" underline="hover" underlineOffset={3}>
+      4px offset
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### Block Link
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link href="#" isBlock>
+      Block Link
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" className="block p-2 rounded-lg hover:bg-surface">
+      Block Link
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### With Routing Libraries
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    <Link as={NextLink} href="/about">
+      About
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    <Link asChild underline="hover">
+      <NextLink href="/about">
+        About
+        <Link.Icon />
+      </NextLink>
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Link follows this structure:
+
+```
+Link (Root)
+  ├── Link content (text)
+  └── Link.Icon (optional)
+```
+
+## Breaking Changes Summary
+
+1. **Icon Handling**: `showAnchorIcon` and `anchorIcon` props replaced with `Link.Icon` component
+2. **External Links**: `isExternal` prop removed - handle manually with `target` and `rel`
+3. **Size Prop Removed**: Use Tailwind CSS classes (`text-sm`, `text-base`, `text-lg`)
+4. **Color Prop Removed**: Use Tailwind CSS classes (`text-primary`, `text-danger`, etc.)
+5. **Block Prop Removed**: Use Tailwind CSS classes (`block`, `hover:bg-surface`)
+6. **Underline Simplified**: Removed `active` and `focus` variants, only `none`, `hover`, `always` remain
+7. **New UnderlineOffset**: Added `underlineOffset` prop (1, 2, 3) for spacing control
+8. **New asChild Prop**: Added for better composition with routing libraries
+9. **Animation Removed**: `disableAnimation` prop removed
+
+## Tips for Migration
+
+1. **Replace icon props**: Convert `showAnchorIcon` to `<Link.Icon />` component
+2. **Custom icons**: Pass custom icon as children to `Link.Icon`
+3. **External links**: Manually add `target="_blank"` and `rel="noopener noreferrer"`
+4. **Styling**: Use Tailwind CSS classes for sizes, colors, and block styling
+5. **Underline variants**: Remove `active` and `focus` variants, use CSS if needed
+6. **Routing**: Use `asChild` prop with Next.js or React Router links
+7. **Icon placement**: Control icon position with flexbox classes (`flex`, `gap-1`, etc.)
+
+## Need Help?
+
+**For v3 Link features and API:**
+- See the [API Reference](/docs/components/link#api-reference)
+- Check [interactive examples](/docs/components/link#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

@@ -1,0 +1,276 @@
+---
+title: Spinner
+description: Migration guide for Spinner from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Spinner documentation](/docs/components/spinner) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Spinner component in HeroUI v3 has been simplified to a single circular spinner variant. The `label`, `variant`, and `labelColor` props have been removed.
+
+## Structure Changes
+
+### v2: Multiple Variants with Label
+
+In v2, Spinner supported multiple variants and labels:
+
+```tsx
+import { Spinner } from "@heroui/react";
+
+<Spinner variant="default" label="Loading..." color="primary" />
+```
+
+### v3: Single Variant
+
+In v3, Spinner is simplified to a single circular variant:
+
+```tsx
+import { Spinner } from "@heroui/react";
+
+<Spinner color="accent" />
+```
+
+## Key Changes
+
+### 1. Component Behavior
+
+**v2:** Supported multiple variants (`default`, `simple`, `gradient`, `wave`, `dots`, `spinner`) and labels  
+**v3:** Single circular spinner variant, no label support
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Prop | Notes |
+|---------|---------|-------|
+| `label` | - | Removed (add label manually if needed) |
+| `variant` | - | Removed (only one variant) |
+| `labelColor` | - | Removed (no label support) |
+| `classNames` | - | Use `className` prop directly |
+| `size` | `size` | Changed: `"sm" \| "md" \| "lg"` → `"sm" \| "md" \| "lg" \| "xl"` |
+| `color` | `color` | Changed: `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` → `"current" \| "accent" \| "success" \| "warning" \| "danger"` |
+
+### 3. Removed Props
+
+The following props are no longer available in v3:
+
+- `label` - Add label manually with separate element if needed
+- `variant` - Only one spinner variant available
+- `labelColor` - No label support
+- `classNames` - Use `className` prop directly
+
+### 4. Changed Color Values
+
+- `"default"` → `"current"` (inherits current text color)
+- `"primary"` → `"accent"`
+- `"secondary"` → Removed (use `"current"` or `"accent"`)
+- `"success"`, `"warning"`, `"danger"` → Still available
+
+## Migration Examples
+
+### Basic Usage
+
+Basic usage remains unchanged in v3:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spinner } from "@heroui/react";
+
+    export default function App() {
+      return <Spinner />;
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Spinner } from "@heroui/react";
+
+    export default function App() {
+      return <Spinner />;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### With Label
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Spinner label="Loading..." />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex flex-col items-center gap-2">
+      <Spinner />
+      <span>Loading...</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Sizes
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+      <Spinner size="xl" />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Colors
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner color="default" />
+      <Spinner color="primary" />
+      <Spinner color="secondary" />
+      <Spinner color="success" />
+      <Spinner color="warning" />
+      <Spinner color="danger" />
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner color="current" />
+      <Spinner color="accent" />
+      <Spinner color="success" />
+      <Spinner color="warning" />
+      <Spinner color="danger" />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Variants (Removed)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner variant="default" />
+      <Spinner variant="simple" />
+      <Spinner variant="gradient" />
+      <Spinner variant="wave" />
+      <Spinner variant="dots" />
+      <Spinner variant="spinner" />
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Only one variant available - circular spinner */}
+    <Spinner />
+    
+    {/* For other spinner styles, consider using CSS animations */}
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Spinner
+      classNames={{
+        base: "custom-base",
+        wrapper: "custom-wrapper",
+        circle1: "custom-circle1"
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Spinner className="custom-spinner" />
+    ```
+  </Tab>
+</Tabs>
+
+### With Label and Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Spinner
+      label="Loading..."
+      labelColor="primary"
+      classNames={{
+        label: "text-foreground mt-4"
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex flex-col items-center gap-2">
+      <Spinner />
+      <span className="text-foreground mt-4">Loading...</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## Color Mapping
+
+When migrating colors, use this mapping:
+
+| v2 Color | v3 Color | Notes |
+|----------|----------|-------|
+| `"default"` | `"current"` | Inherits current text color |
+| `"primary"` | `"accent"` | Use accent color |
+| `"secondary"` | `"current"` or `"accent"` | Use current or accent |
+| `"success"` | `"success"` | No change |
+| `"warning"` | `"warning"` | No change |
+| `"danger"` | `"danger"` | No change |
+
+## Breaking Changes Summary
+
+1. **No Label Support**: `label` prop removed - add label manually if needed
+2. **No Variants**: `variant` prop removed - only one circular spinner available
+3. **No Label Color**: `labelColor` prop removed - style label manually
+4. **Color Values Changed**: `"default"` → `"current"`, `"primary"` → `"accent"`, `"secondary"` removed
+5. **Size Added**: New `"xl"` size option available
+6. **ClassNames Removed**: Use `className` prop directly
+
+## Tips for Migration
+
+1. **Remove label prop**: If using `label`, wrap Spinner and add label as separate element
+2. **Remove variant prop**: Only one spinner variant available in v3
+3. **Update colors**: Map `"default"` → `"current"`, `"primary"` → `"accent"`, remove `"secondary"`
+4. **Update classNames**: Replace `classNames` prop with `className` prop
+5. **Add manual labels**: If you need labels, add them as separate elements with appropriate styling
+6. **Consider alternatives**: For other spinner styles (wave, dots, etc.), consider CSS animations or other libraries
+
+## Need Help?
+
+**For v3 Spinner features and API:**
+- See the [API Reference](/docs/components/spinner#api-reference)
+- Check [interactive examples](/docs/components/spinner#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

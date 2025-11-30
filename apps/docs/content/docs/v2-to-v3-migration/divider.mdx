@@ -1,0 +1,263 @@
+---
+title: Divider
+description: Migration guide for Divider (renamed to Separator) from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Separator documentation](/docs/components/separator) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Divider component has been renamed to `Separator` in HeroUI v3. The API remains largely the same, with the addition of automatic surface detection.
+
+## Component Rename
+
+**v2:** `Divider`  
+**v3:** `Separator`
+
+## Key Changes
+
+### 1. Component Name
+
+**v2:** `Divider`  
+**v3:** `Separator`
+
+### 2. New Feature: Surface Detection
+
+**v3:** Added `isOnSurface` prop and automatic surface detection for better visibility on surface backgrounds (e.g., inside Card, Alert, Popover, Modal components).
+
+### 3. Props Comparison
+
+| Prop | v2 | v3 | Notes |
+|------|----|----|-------|
+| `orientation` | ✅ | ✅ | Same: `"horizontal"` \| `"vertical"` |
+| `className` | ✅ | ✅ | Same |
+| `isOnSurface` | ❌ | ✅ | New: Automatically detects surface context |
+
+## Migration Examples
+
+### Basic Usage
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Divider } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div>
+          <p>Content above</p>
+          <Divider />
+          <p>Content below</p>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Separator } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div>
+          <p>Content above</p>
+          <Separator />
+          <p>Content below</p>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Horizontal Separator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Divider orientation="horizontal" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Separator orientation="horizontal" />
+    ```
+  </Tab>
+</Tabs>
+
+### Vertical Separator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="flex items-center space-x-4">
+      <div>Blog</div>
+      <Divider orientation="vertical" />
+      <div>Docs</div>
+      <Divider orientation="vertical" />
+      <div>Source</div>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex items-center space-x-4">
+      <div>Blog</div>
+      <Separator orientation="vertical" />
+      <div>Docs</div>
+      <Separator orientation="vertical" />
+      <div>Source</div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With Custom Styling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Divider className="my-4" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Separator className="my-4" />
+    ```
+  </Tab>
+</Tabs>
+
+### On Surface Backgrounds
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have surface detection */}
+    <Card>
+      <Divider />
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 automatically detects surface context */}
+    <Card>
+      <Separator />
+    </Card>
+    
+    {/* Or explicitly set */}
+    <div className="bg-surface">
+      <Separator isOnSurface />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Divider } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="max-w-md">
+          <div className="space-y-1">
+            <h4 className="text-medium font-medium">HeroUI Components</h4>
+            <p className="text-small text-default-400">
+              Beautiful, fast and modern React UI library.
+            </p>
+          </div>
+          <Divider className="my-4" />
+          <div className="flex h-5 items-center space-x-4 text-small">
+            <div>Blog</div>
+            <Divider orientation="vertical" />
+            <div>Docs</div>
+            <Divider orientation="vertical" />
+            <div>Source</div>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Separator } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="max-w-md">
+          <div className="space-y-1">
+            <h4 className="text-medium font-medium">HeroUI v3 Components</h4>
+            <p className="text-small text-default-400">
+              Beautiful, fast and modern React UI library.
+            </p>
+          </div>
+          <Separator className="my-4" />
+          <div className="flex h-5 items-center space-x-4 text-small">
+            <div>Blog</div>
+            <Separator orientation="vertical" />
+            <div>Docs</div>
+            <Separator orientation="vertical" />
+            <div>Source</div>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Automatic Surface Detection
+
+v3 Separator automatically detects when it's placed inside components that provide `SurfaceContext` and applies appropriate styling for better visibility. This works with:
+
+- Card
+- Alert
+- Popover
+- Modal
+- Combobox
+- Select
+- Dropdown
+
+You can also explicitly set `isOnSurface={true}` when needed:
+
+```tsx
+<div className="bg-surface">
+  <Separator isOnSurface />
+</div>
+```
+
+## Breaking Changes Summary
+
+1. **Component Renamed**: `Divider` → `Separator`
+2. **Import Change**: Update import statement from `Divider` to `Separator`
+3. **New Feature**: Added `isOnSurface` prop for better surface visibility
+
+## Migration Steps
+
+1. **Update Import**: Change `import { Divider }` to `import { Separator }`
+2. **Update Component**: Replace all `<Divider />` with `<Separator />`
+3. **Verify Functionality**: The `orientation` prop works the same way
+4. **Optional**: Use `isOnSurface` prop when needed for better visibility on surface backgrounds
+
+## Tips for Migration
+
+1. **Find and Replace**: Use find-and-replace to update all instances of `Divider` to `Separator`
+2. **Check Imports**: Update all import statements
+3. **Surface Detection**: v3 automatically handles surface detection, so you may not need to change anything else
+4. **Explicit Control**: Use `isOnSurface` prop when you need explicit control over surface styling
+
+## Need Help?
+
+**For v3 Separator features and API:**
+- See the [API Reference](/docs/components/separator#api-reference)
+- Check [interactive examples](/docs/components/separator#usage)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)
