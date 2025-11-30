@@ -1199,3 +1199,18 @@ export const PopoverTopOrBottom = {
     </div>
   ),
 };
+export const WithCustomEmptyContentAndAllowCustomValue = () => (
+  <Autocomplete
+    allowsCustomValue
+    className="max-w-xs"
+    defaultItems={[]}
+    label="Favorite Animal"
+    listboxProps={{
+      emptyContent: (
+        <div className="p-4 text-center text-default-500">No animals found. Create one?</div>
+      ),
+    }}
+  >
+    {(item: any) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+  </Autocomplete>
+);
