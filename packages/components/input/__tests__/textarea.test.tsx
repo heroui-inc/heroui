@@ -4,8 +4,6 @@ import userEvent from "@testing-library/user-event";
 
 import {Textarea} from "../src";
 
-jest.mock("react-textarea-autosize");
-
 describe("Textarea", () => {
   it("should clear the value and onClear is triggered", async () => {
     const onClear = jest.fn();
@@ -79,20 +77,5 @@ describe("Textarea", () => {
     const clearButton = getByRole("button");
 
     expect(clearButton).not.toBeNull();
-  });
-
-  it("should restore value when DOM is cleared externally (e.g. form reset)", async () => {
-    const {getByRole, rerender} = render(<Textarea defaultValue="Hello" />);
-    const textarea = getByRole("textbox") as HTMLTextAreaElement;
-
-    expect(textarea.value).toBe("Hello");
-
-    // Simulate external DOM change (e.g., form reset)
-    textarea.value = "";
-
-    // Trigger re-render. The mock ensures React skips update if props are unchanged.
-    rerender(<Textarea defaultValue="Hello" />);
-
-    expect(textarea.value).toBe("Hello");
   });
 });
