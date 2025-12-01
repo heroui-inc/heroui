@@ -3,21 +3,356 @@ title: Code
 description: Migration guide for Code from HeroUI v2 to v3
 ---
 
-#### Code
+<Callout type="warning">
+  The Code component has been **removed** in HeroUI v3. Use native HTML `<code>` element with Tailwind CSS classes instead.
+</Callout>
+
+## Overview
+
+The Code component was a simple wrapper around the native HTML `<code>` element with predefined styling variants. In v3, you should use the native `<code>` element directly with Tailwind CSS utilities to achieve the same styling.
+
+## Key Changes
+
+### 1. Component Removal
+
+**v2:** `<Code>` component from `@heroui/react`  
+**v3:** Native HTML `<code>` element with Tailwind classes
+
+### 2. Variants Mapping
+
+The v2 Code component had the following variants that need to be replaced:
+
+| v2 Variant | v3 Equivalent | Notes |
+|-----------|---------------|-------|
+| `color="default"` | `bg-default/40 text-default-700` | Use Tailwind opacity utilities |
+| `color="primary"` | `bg-accent/20 text-accent-600` | `primary` renamed to `accent` |
+| `color="secondary"` | `bg-default/40 text-default-700` | Similar to default |
+| `color="success"` | `bg-success/20 text-success-700` | Same color name |
+| `color="warning"` | `bg-warning/20 text-warning-700` | Same color name |
+| `color="danger"` | `bg-danger/20 text-danger-600` | Same color name |
+| `size="sm"` | `text-sm` | Tailwind text size |
+| `size="md"` | `text-base` | Tailwind text size |
+| `size="lg"` | `text-lg` | Tailwind text size |
+| `radius="none"` | `rounded-none` | Tailwind border radius |
+| `radius="sm"` | `rounded-sm` | Tailwind border radius |
+| `radius="md"` | `rounded-md` | Tailwind border radius |
+| `radius="lg"` | `rounded-lg` | Tailwind border radius |
+| `radius="full"` | `rounded-full` | Tailwind border radius |
+
+## Migration Examples
+
+### Basic Usage
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    // TODO: Add v2 Code example
+    import { Code } from "@heroui/react";
+
+    export default function App() {
+      return <Code>npm install @heroui/react</Code>;
+    }
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    // TODO: Add v3 Code alternative
+    export default function App() {
+      return (
+        <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+          npm install @heroui/react
+        </code>
+      );
+    }
     ```
   </Tab>
 </Tabs>
 
-<Callout>
-  TODO: Add migration notes for Code (removed)
-</Callout>
+### With Color Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Code color="primary">Primary code</Code>
+    <Code color="success">Success code</Code>
+    <Code color="warning">Warning code</Code>
+    <Code color="danger">Danger code</Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-accent/20 text-accent-600 text-sm">
+      Primary code
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-success/20 text-success-700 text-sm">
+      Success code
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-warning/20 text-warning-700 text-sm">
+      Warning code
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-danger/20 text-danger-600 text-sm">
+      Danger code
+    </code>
+    ```
+  </Tab>
+</Tabs>
+
+### With Size Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Code size="sm">Small code</Code>
+    <Code size="md">Medium code</Code>
+    <Code size="lg">Large code</Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+      Small code
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-base">
+      Medium code
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-lg">
+      Large code
+    </code>
+    ```
+  </Tab>
+</Tabs>
+
+### With Radius Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Code radius="sm">Rounded small</Code>
+    <Code radius="md">Rounded medium</Code>
+    <Code radius="full">Rounded full</Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+      Rounded small
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-md bg-default/40 text-default-700 text-sm">
+      Rounded medium
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-full bg-default/40 text-default-700 text-sm">
+      Rounded full
+    </code>
+    ```
+  </Tab>
+</Tabs>
+
+### Combined Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Code color="primary" size="md" radius="lg">
+      npm install @heroui/react
+    </Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-lg bg-accent/20 text-accent-600 text-base">
+      npm install @heroui/react
+    </code>
+    ```
+  </Tab>
+</Tabs>
+
+## Creating a Reusable Code Component (Optional)
+
+If you use inline code frequently, you can create a simple wrapper component:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Code } from "@heroui/react";
+
+    <Code color="primary" size="md">Code snippet</Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    // components/Code.tsx
+    import { cn } from "@/lib/utils"; // or your cn utility
+
+    interface CodeProps extends React.HTMLAttributes<HTMLElement> {
+      color?: "default" | "accent" | "success" | "warning" | "danger";
+      size?: "sm" | "md" | "lg";
+      radius?: "none" | "sm" | "md" | "lg" | "full";
+    }
+
+    const colorClasses = {
+      default: "bg-default/40 text-default-700",
+      accent: "bg-accent/20 text-accent-600",
+      success: "bg-success/20 text-success-700",
+      warning: "bg-warning/20 text-warning-700",
+      danger: "bg-danger/20 text-danger-600",
+    };
+
+    const sizeClasses = {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    };
+
+    const radiusClasses = {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    };
+
+    export function Code({
+      children,
+      className,
+      color = "default",
+      size = "sm",
+      radius = "sm",
+      ...props
+    }: CodeProps) {
+      return (
+        <code
+          className={cn(
+            "px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap",
+            colorClasses[color],
+            sizeClasses[size],
+            radiusClasses[radius],
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </code>
+      );
+    }
+
+    // Usage
+    <Code color="accent" size="md">Code snippet</Code>
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Code } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <p>
+            Install HeroUI with <Code>npm install @heroui/react</Code>
+          </p>
+          <div className="flex gap-2">
+            <Code color="primary">Primary</Code>
+            <Code color="success">Success</Code>
+            <Code color="warning">Warning</Code>
+            <Code color="danger">Danger</Code>
+          </div>
+          <div className="flex gap-2 items-center">
+            <Code size="sm">Small</Code>
+            <Code size="md">Medium</Code>
+            <Code size="lg">Large</Code>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <p>
+            Install HeroUI with{" "}
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+              npm install @heroui/react
+            </code>
+          </p>
+          <div className="flex gap-2">
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-accent/20 text-accent-600 text-sm">
+              Primary
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-success/20 text-success-700 text-sm">
+              Success
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-warning/20 text-warning-700 text-sm">
+              Warning
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-danger/20 text-danger-600 text-sm">
+              Danger
+            </code>
+          </div>
+          <div className="flex gap-2 items-center">
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+              Small
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-base">
+              Medium
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-lg">
+              Large
+            </code>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Base Styles Reference
+
+The v2 Code component used these base styles that you should include:
+
+- `px-2` - Horizontal padding
+- `py-1` - Vertical padding
+- `h-fit` - Height fits content
+- `font-mono` - Monospace font family
+- `font-normal` - Normal font weight
+- `inline-block` - Inline block display
+- `whitespace-nowrap` - Prevent text wrapping
+
+## Breaking Changes Summary
+
+1. **Component Removed**: `Code` component no longer exists in v3
+2. **Import Change**: Remove `import { Code } from "@heroui/react"`
+3. **Use Native Element**: Replace with native `<code>` HTML element
+4. **Styling**: Apply Tailwind CSS classes directly
+5. **Color Mapping**: `primary` → `accent` in v3
+
+## Migration Steps
+
+1. **Remove Import**: Remove `Code` from `@heroui/react` imports
+2. **Replace Component**: Replace all `<Code>` instances with `<code>` elements
+3. **Add Tailwind Classes**: Apply equivalent Tailwind classes for styling
+4. **Update Colors**: Change `color="primary"` to use `accent` color classes
+5. **Optional**: Create a reusable wrapper component if you use inline code frequently
+
+## Tips for Migration
+
+1. **Find and Replace**: Use find-and-replace to update all instances of `<Code>` to `<code>`
+2. **Create Utility Component**: Consider creating a simple `Code` wrapper component if you use it frequently
+3. **Use CSS Variables**: Leverage HeroUI's CSS variables (`--accent`, `--success`, etc.) for consistent theming
+4. **Dark Mode**: Tailwind's opacity utilities (`/20`, `/40`) work automatically with dark mode
+5. **Customization**: You have full control with Tailwind classes - customize as needed
+
+## Need Help?
+
+**For styling guidance:**
+- See the [Styling documentation](/docs/handbook/styling)
+- Check [Colors documentation](/docs/handbook/colors) for available color variables
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)
