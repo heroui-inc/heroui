@@ -3,21 +3,583 @@ title: User
 description: Migration guide for User from HeroUI v2 to v3
 ---
 
-#### User
+<Callout type="warning">
+  The User component has been **removed** in HeroUI v3. Compose user displays manually using Avatar and text elements with Tailwind CSS classes.
+</Callout>
+
+## Overview
+
+The User component was a convenience component that combined an Avatar with user name and optional description text. In v3, you should compose this manually using the Avatar component and text elements with Tailwind CSS classes for layout and styling.
+
+## Key Changes
+
+### 1. Component Removal
+
+**v2:** `<User>` component from `@heroui/react`  
+**v3:** Manual composition using `Avatar` + text elements
+
+### 2. Features Mapping
+
+The v2 User component had the following features that need to be replaced:
+
+| v2 Feature | v3 Equivalent | Notes |
+|-----------|---------------|-------|
+| `name` prop | Text element | Render name as text or heading |
+| `description` prop | Text element | Render description as text |
+| `avatarProps` prop | `Avatar` component | Use v3 Avatar component directly |
+| `isFocusable` prop | Manual focus handling | Add `tabIndex` and focus styles if needed |
+| `classNames` prop | Tailwind classes | Apply classes directly to elements |
+
+## Migration Examples
+
+### Basic Usage
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    // TODO: Add v2 User example
+    import { User } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <User
+          name="Junior Garcia"
+          avatarProps={{
+            src: "https://example.com/avatar.jpg",
+          }}
+        />
+      );
+    }
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    // TODO: Add v3 User alternative (Avatar + Text)
+    import { Avatar } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="inline-flex items-center gap-2">
+          <Avatar>
+            <Avatar.Image
+              src="https://example.com/avatar.jpg"
+              alt="Junior Garcia"
+            />
+            <Avatar.Fallback>JG</Avatar.Fallback>
+          </Avatar>
+          <span className="text-sm">Junior Garcia</span>
+        </div>
+      );
+    }
     ```
   </Tab>
 </Tabs>
 
-<Callout>
-  TODO: Add migration notes for User (removed)
-</Callout>
+### With Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      description="Software Engineer"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <div className="flex flex-col items-start">
+        <span className="text-sm">Junior Garcia</span>
+        <span className="text-xs text-muted">Software Engineer</span>
+      </div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With Default Avatar (Initials)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      avatarProps={{
+        name: "Junior Garcia",
+        getInitials: (name) =>
+          name
+            .split(" ")
+            .map((n) => n[0])
+            .join(""),
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    function getInitials(name: string) {
+      return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("");
+    }
+
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Fallback>{getInitials("Junior Garcia")}</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With Link Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User, Link } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      description={
+        <Link href="https://x.com/jrgarciadev" size="sm">
+          @jrgarciadev
+        </Link>
+      }
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, Link } from "@heroui/react";
+
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <div className="flex flex-col items-start">
+        <span className="text-sm">Junior Garcia</span>
+        <Link href="https://x.com/jrgarciadev" className="text-xs">
+          @jrgarciadev
+        </Link>
+      </div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Focusable User (Clickable)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      isFocusable
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <button
+      className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
+      tabIndex={0}
+    >
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </button>
+    ```
+  </Tab>
+</Tabs>
+
+### As Button Element
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      as="button"
+      name="Junior Garcia"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <button
+      className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
+    >
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </button>
+    ```
+  </Tab>
+</Tabs>
+
+## Creating a Reusable User Component (Recommended)
+
+Since User displays are commonly needed, here's a reusable component:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      description="Software Engineer"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, Link } from "@heroui/react";
+    import { ReactNode } from "react";
+    import { cn } from "@/lib/utils"; // or your cn utility
+
+    interface UserProps {
+      name: string | ReactNode;
+      description?: string | ReactNode;
+      avatarSrc?: string;
+      avatarAlt?: string;
+      avatarFallback?: string;
+      className?: string;
+      isFocusable?: boolean;
+      as?: "div" | "button" | "a";
+      href?: string;
+      onClick?: () => void;
+    }
+
+    function getInitials(name: string): string {
+      return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+    }
+
+    export function User({
+      name,
+      description,
+      avatarSrc,
+      avatarAlt,
+      avatarFallback,
+      className,
+      isFocusable = false,
+      as = "div",
+      href,
+      onClick,
+    }: UserProps) {
+      const Component = as === "a" ? "a" : as === "button" ? "button" : "div";
+      const fallback = avatarFallback || (typeof name === "string" ? getInitials(name) : "?");
+
+      const content = (
+        <>
+          <Avatar>
+            {avatarSrc && (
+              <Avatar.Image
+                src={avatarSrc}
+                alt={avatarAlt || (typeof name === "string" ? name : "")}
+              />
+            )}
+            <Avatar.Fallback>{fallback}</Avatar.Fallback>
+          </Avatar>
+          <div className="flex flex-col items-start">
+            <span className="text-sm">{name}</span>
+            {description && (
+              <span className="text-xs text-muted">{description}</span>
+            )}
+          </div>
+        </>
+      );
+
+      const baseClasses = cn(
+        "inline-flex items-center gap-2 rounded-sm outline-none",
+        isFocusable && "focus-visible:ring-2 focus-visible:ring-focus",
+        className
+      );
+
+      if (Component === "button") {
+        return (
+          <button className={baseClasses} onClick={onClick} tabIndex={isFocusable ? 0 : -1}>
+            {content}
+          </button>
+        );
+      }
+
+      if (Component === "a") {
+        return (
+          <a href={href} className={baseClasses} tabIndex={isFocusable ? 0 : -1}>
+            {content}
+          </a>
+        );
+      }
+
+      return (
+        <div className={baseClasses} tabIndex={isFocusable ? 0 : -1}>
+          {content}
+        </div>
+      );
+    }
+
+    // Usage
+    <User
+      name="Junior Garcia"
+      description="Software Engineer"
+      avatarSrc="https://example.com/avatar.jpg"
+      avatarAlt="Junior Garcia"
+    />
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User, Link } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <User
+            name="Junior Garcia"
+            avatarProps={{
+              src: "https://example.com/avatar1.jpg",
+            }}
+          />
+          <User
+            name="Jane Doe"
+            description="Product Designer"
+            avatarProps={{
+              src: "https://example.com/avatar2.jpg",
+            }}
+          />
+          <User
+            name="John Smith"
+            description={
+              <Link href="https://x.com/johnsmith" size="sm">
+                @johnsmith
+              </Link>
+            }
+            avatarProps={{
+              name: "John Smith",
+              getInitials: (name) =>
+                name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join(""),
+            }}
+          />
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, Link } from "@heroui/react";
+
+    function getInitials(name: string) {
+      return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+    }
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-2">
+            <Avatar>
+              <Avatar.Image
+                src="https://example.com/avatar1.jpg"
+                alt="Junior Garcia"
+              />
+              <Avatar.Fallback>JG</Avatar.Fallback>
+            </Avatar>
+            <span className="text-sm">Junior Garcia</span>
+          </div>
+
+          <div className="inline-flex items-center gap-2">
+            <Avatar>
+              <Avatar.Image
+                src="https://example.com/avatar2.jpg"
+                alt="Jane Doe"
+              />
+              <Avatar.Fallback>JD</Avatar.Fallback>
+            </Avatar>
+            <div className="flex flex-col items-start">
+              <span className="text-sm">Jane Doe</span>
+              <span className="text-xs text-muted">Product Designer</span>
+            </div>
+          </div>
+
+          <div className="inline-flex items-center gap-2">
+            <Avatar>
+              <Avatar.Fallback>{getInitials("John Smith")}</Avatar.Fallback>
+            </Avatar>
+            <div className="flex flex-col items-start">
+              <span className="text-sm">John Smith</span>
+              <Link href="https://x.com/johnsmith" className="text-xs">
+                @johnsmith
+              </Link>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Reference
+
+The v2 User component used these base styles that you should replicate:
+
+- **Base container**: `inline-flex items-center gap-2 rounded-sm`
+- **Wrapper (for name/description)**: `inline-flex flex-col items-start`
+- **Name**: `text-sm` (text-small)
+- **Description**: `text-xs text-muted` (text-tiny text-foreground-400)
+
+## Breaking Changes Summary
+
+1. **Component Removed**: `User` component no longer exists in v3
+2. **Import Change**: Remove `import { User } from "@heroui/react"`
+3. **Manual Composition**: Compose using Avatar + text elements
+4. **Avatar Changes**: Use v3 Avatar compound component pattern
+5. **Styling**: Apply Tailwind CSS classes directly
+6. **Focus Handling**: Implement focus styles manually if needed
+
+## Migration Steps
+
+1. **Remove Import**: Remove `User` from `@heroui/react` imports
+2. **Replace Component**: Replace all `<User>` instances with manual composition
+3. **Use Avatar**: Use v3 Avatar component with compound pattern
+4. **Add Text Elements**: Add name and description as text elements
+5. **Apply Styling**: Use Tailwind CSS classes for layout and styling
+6. **Handle Focus**: Add focus styles if `isFocusable` was used
+7. **Optional**: Create reusable User component for your application
+
+## Tips for Migration
+
+1. **Create Reusable Component**: Since user displays are common, create a reusable component
+2. **Use Avatar Compound Pattern**: Follow v3 Avatar structure with `Avatar.Image` and `Avatar.Fallback`
+3. **Generate Initials**: Create a helper function to generate initials from names
+4. **Consistent Styling**: Use consistent text sizes (`text-sm` for name, `text-xs` for description)
+5. **Accessibility**: Include `alt` text for avatar images
+6. **Focus States**: Add focus-visible styles for interactive user elements
+7. **Flexbox Layout**: Use `flex items-center gap-2` for horizontal layout
+
+## Common Patterns
+
+### User List
+
+```tsx
+<div className="space-y-2">
+  {users.map((user) => (
+    <div key={user.id} className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image src={user.avatar} alt={user.name} />
+        <Avatar.Fallback>{getInitials(user.name)}</Avatar.Fallback>
+      </Avatar>
+      <div className="flex flex-col items-start">
+        <span className="text-sm">{user.name}</span>
+        {user.role && (
+          <span className="text-xs text-muted">{user.role}</span>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+### Clickable User
+
+```tsx
+<button
+  className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus hover:bg-default-100"
+  onClick={() => handleUserClick(user)}
+>
+  <Avatar>
+    <Avatar.Image src={user.avatar} alt={user.name} />
+    <Avatar.Fallback>{getInitials(user.name)}</Avatar.Fallback>
+  </Avatar>
+  <div className="flex flex-col items-start">
+    <span className="text-sm">{user.name}</span>
+    <span className="text-xs text-muted">{user.email}</span>
+  </div>
+</button>
+```
+
+## Need Help?
+
+**For Avatar component:**
+- See the [Avatar documentation](/docs/components/avatar)
+- Check [Avatar migration guide](/docs/v2-to-v3-migration/avatar)
+
+**For styling guidance:**
+- See the [Styling documentation](/docs/handbook/styling)
+- Check [Tailwind CSS documentation](https://tailwindcss.com/docs) for flexbox utilities
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

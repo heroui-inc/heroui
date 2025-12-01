@@ -3,21 +3,634 @@ title: Snippet
 description: Migration guide for Snippet from HeroUI v2 to v3
 ---
 
-#### Snippet
+<Callout type="warning">
+  The Snippet component has been **removed** in HeroUI v3. Use native HTML elements with Tailwind CSS classes and implement copy functionality manually using the Clipboard API.
+</Callout>
+
+## Overview
+
+The Snippet component was used to display code snippets with built-in copy-to-clipboard functionality, optional symbol prefixes (like `$`), and support for multi-line code. In v3, you should use native HTML elements (`<pre>`, `<code>`) with Tailwind CSS classes and implement copy functionality manually using the Clipboard API.
+
+## Key Changes
+
+### 1. Component Removal
+
+**v2:** `<Snippet>` component from `@heroui/react`  
+**v3:** Native HTML elements (`<pre>`, `<code>`) with manual copy implementation
+
+### 2. Features Mapping
+
+The v2 Snippet component had the following features that need to be replaced:
+
+| v2 Feature | v3 Equivalent | Notes |
+|-----------|---------------|-------|
+| Copy button | Manual Button + Clipboard API | Use `navigator.clipboard.writeText()` |
+| Copy tooltip | Tooltip component | Use v3 Tooltip component |
+| Symbol prefix | Manual rendering | Add symbol as text content |
+| Multi-line support | Array mapping | Map over array of strings |
+| Variants (`flat`, `solid`, `bordered`, `shadow`) | Tailwind classes | Use background/border utilities |
+| Colors (`default`, `primary`, etc.) | Tailwind classes | Use color utilities |
+| Sizes (`sm`, `md`, `lg`) | Tailwind text sizes | Use `text-sm`, `text-base`, `text-lg` |
+| Radius | Tailwind border radius | Use `rounded-*` classes |
+
+## Migration Examples
+
+### Basic Usage
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    // TODO: Add v2 Snippet example
+    import { Snippet } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <Snippet symbol="$">
+          npm install @heroui/react
+        </Snippet>
+      );
+    }
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    // TODO: Add v3 Snippet alternative
+    import { Button, Tooltip } from "@heroui/react";
+    import { useState } from "react";
+
+    export default function App() {
+      const [copied, setCopied] = useState(false);
+
+      const handleCopy = async () => {
+        await navigator.clipboard.writeText("npm install @heroui/react");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+
+      return (
+        <div className="flex items-center gap-2 rounded-lg bg-default-100 px-3 py-1.5">
+          <pre className="text-sm font-mono">
+            <span className="text-default-500">$ </span>
+            npm install @heroui/react
+          </pre>
+          <Tooltip content={copied ? "Copied!" : "Copy to clipboard"}>
+            <Button
+              isIconOnly
+              aria-label="Copy"
+              size="sm"
+              variant="ghost"
+              onPress={handleCopy}
+            >
+              {copied ? "✓" : "📋"}
+            </Button>
+          </Tooltip>
+        </div>
+      );
+    }
     ```
   </Tab>
 </Tabs>
 
-<Callout>
-  TODO: Add migration notes for Snippet (removed)
-</Callout>
+### Multi-line Snippet
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Snippet symbol="$">
+      {[
+        "npm install @heroui/react",
+        "yarn add @heroui/react",
+        "pnpm add @heroui/react"
+      ]}
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, Tooltip } from "@heroui/react";
+    import { useState } from "react";
+
+    function MultiLineSnippet() {
+      const [copied, setCopied] = useState(false);
+      const lines = [
+        "npm install @heroui/react",
+        "yarn add @heroui/react",
+        "pnpm add @heroui/react"
+      ];
+      const codeString = lines.join("\n");
+
+      const handleCopy = async () => {
+        await navigator.clipboard.writeText(codeString);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+
+      return (
+        <div className="flex items-start gap-2 rounded-lg bg-default-100 p-3">
+          <div className="flex-1 space-y-1">
+            {lines.map((line, index) => (
+              <pre key={index} className="text-sm font-mono">
+                <span className="text-default-500">$ </span>
+                {line}
+              </pre>
+            ))}
+          </div>
+          <Tooltip content={copied ? "Copied!" : "Copy to clipboard"}>
+            <Button
+              isIconOnly
+              aria-label="Copy"
+              size="sm"
+              variant="ghost"
+              onPress={handleCopy}
+            >
+              {copied ? "✓" : "📋"}
+            </Button>
+          </Tooltip>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### With Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Snippet variant="bordered" color="primary">
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex items-center gap-2 rounded-lg border border-accent bg-transparent px-3 py-1.5">
+      <pre className="text-sm font-mono text-accent">
+        <span className="text-accent/60">$ </span>
+        npm install @heroui/react
+      </pre>
+      {/* Copy button */}
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Without Symbol
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Snippet hideSymbol>
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="flex items-center gap-2 rounded-lg bg-default-100 px-3 py-1.5">
+      <pre className="text-sm font-mono">
+        npm install @heroui/react
+      </pre>
+      {/* Copy button */}
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Without Copy Button
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Snippet hideCopyButton>
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="rounded-lg bg-default-100 px-3 py-1.5">
+      <pre className="text-sm font-mono">
+        <span className="text-default-500">$ </span>
+        npm install @heroui/react
+      </pre>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## Creating a Reusable Snippet Component (Recommended)
+
+Since Snippet functionality is commonly needed, here's a complete reusable component:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Snippet } from "@heroui/react";
+
+    <Snippet
+      symbol="$"
+      variant="bordered"
+      color="primary"
+      size="md"
+    >
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, Tooltip } from "@heroui/react";
+    import { useState, ReactNode } from "react";
+    import { cn } from "@/lib/utils"; // or your cn utility
+
+    interface SnippetProps {
+      children: string | string[];
+      symbol?: string | ReactNode;
+      variant?: "flat" | "solid" | "bordered" | "shadow";
+      color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+      size?: "sm" | "md" | "lg";
+      radius?: "none" | "sm" | "md" | "lg" | "full";
+      hideSymbol?: boolean;
+      hideCopyButton?: boolean;
+      disableCopy?: boolean;
+      disableTooltip?: boolean;
+      className?: string;
+      codeString?: string;
+      onCopy?: (value: string) => void;
+    }
+
+    const variantClasses = {
+      flat: "bg-default-100",
+      solid: "bg-default-200",
+      bordered: "border border-default-200 bg-transparent",
+      shadow: "bg-default-100 shadow-sm",
+    };
+
+    const colorClasses = {
+      default: "text-default-foreground",
+      primary: "text-accent",
+      secondary: "text-default-600",
+      success: "text-success",
+      warning: "text-warning",
+      danger: "text-danger",
+    };
+
+    const sizeClasses = {
+      sm: "px-1.5 py-0.5 text-xs",
+      md: "px-3 py-1.5 text-sm",
+      lg: "px-4 py-2 text-base",
+    };
+
+    const radiusClasses = {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    };
+
+    export function Snippet({
+      children,
+      symbol = "$",
+      variant = "flat",
+      color = "default",
+      size = "md",
+      radius = "md",
+      hideSymbol = false,
+      hideCopyButton = false,
+      disableCopy = false,
+      disableTooltip = false,
+      className,
+      codeString,
+      onCopy,
+    }: SnippetProps) {
+      const [copied, setCopied] = useState(false);
+      const isMultiLine = Array.isArray(children);
+      const lines = isMultiLine ? children : [children];
+      const textToCopy = codeString || (isMultiLine ? lines.join("\n") : String(children));
+
+      const handleCopy = async () => {
+        if (disableCopy) return;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+          onCopy?.(textToCopy);
+        } catch (error) {
+          console.error("Failed to copy:", error);
+        }
+      };
+
+      const symbolElement = hideSymbol ? null : (
+        <span className={cn("text-default-500", colorClasses[color], "opacity-60")}>
+          {symbol}{typeof symbol === "string" ? " " : ""}
+        </span>
+      );
+
+      const copyButton = hideCopyButton ? null : (
+        <Tooltip
+          content={copied ? "Copied!" : "Copy to clipboard"}
+          isDisabled={disableTooltip || disableCopy}
+        >
+          <Button
+            isIconOnly
+            aria-label="Copy"
+            size="sm"
+            variant="ghost"
+            onPress={handleCopy}
+            isDisabled={disableCopy}
+            className="shrink-0"
+          >
+            {copied ? (
+              <span className="text-success">✓</span>
+            ) : (
+              <span>📋</span>
+            )}
+          </Button>
+        </Tooltip>
+      );
+
+      return (
+        <div
+          className={cn(
+            "flex items-start gap-2 font-mono",
+            variantClasses[variant],
+            sizeClasses[size],
+            radiusClasses[radius],
+            className
+          )}
+        >
+          <div className="flex-1 min-w-0">
+            {isMultiLine ? (
+              <div className="space-y-1">
+                {lines.map((line, index) => (
+                  <pre key={index} className={cn("m-0", colorClasses[color])}>
+                    {symbolElement}
+                    {line}
+                  </pre>
+                ))}
+              </div>
+            ) : (
+              <pre className={cn("m-0", colorClasses[color])}>
+                {symbolElement}
+                {children}
+              </pre>
+            )}
+          </div>
+          {copyButton}
+        </div>
+      );
+    }
+
+    // Usage
+    <Snippet
+      symbol="$"
+      variant="bordered"
+      color="primary"
+      size="md"
+    >
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Snippet } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <Snippet symbol="$" variant="flat">
+            npm install @heroui/react
+          </Snippet>
+          <Snippet symbol="$" variant="bordered" color="primary">
+            yarn add @heroui/react
+          </Snippet>
+          <Snippet symbol="$" variant="solid" color="success">
+            {[
+              "npm install @heroui/react",
+              "yarn add @heroui/react",
+              "pnpm add @heroui/react"
+            ]}
+          </Snippet>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, Tooltip } from "@heroui/react";
+    import { useState } from "react";
+
+    export default function App() {
+      const [copied1, setCopied1] = useState(false);
+      const [copied2, setCopied2] = useState(false);
+      const [copied3, setCopied3] = useState(false);
+
+      const lines = [
+        "npm install @heroui/react",
+        "yarn add @heroui/react",
+        "pnpm add @heroui/react"
+      ];
+
+      return (
+        <div className="space-y-4">
+          {/* Flat variant */}
+          <div className="flex items-center gap-2 rounded-md bg-default-100 px-3 py-1.5">
+            <pre className="text-sm font-mono">
+              <span className="text-default-500">$ </span>
+              npm install @heroui/react
+            </pre>
+            <Tooltip content={copied1 ? "Copied!" : "Copy to clipboard"}>
+              <Button
+                isIconOnly
+                aria-label="Copy"
+                size="sm"
+                variant="ghost"
+                onPress={async () => {
+                  await navigator.clipboard.writeText("npm install @heroui/react");
+                  setCopied1(true);
+                  setTimeout(() => setCopied1(false), 2000);
+                }}
+              >
+                {copied1 ? "✓" : "📋"}
+              </Button>
+            </Tooltip>
+          </div>
+
+          {/* Bordered variant */}
+          <div className="flex items-center gap-2 rounded-md border border-accent bg-transparent px-3 py-1.5">
+            <pre className="text-sm font-mono text-accent">
+              <span className="text-accent/60">$ </span>
+              yarn add @heroui/react
+            </pre>
+            <Tooltip content={copied2 ? "Copied!" : "Copy to clipboard"}>
+              <Button
+                isIconOnly
+                aria-label="Copy"
+                size="sm"
+                variant="ghost"
+                onPress={async () => {
+                  await navigator.clipboard.writeText("yarn add @heroui/react");
+                  setCopied2(true);
+                  setTimeout(() => setCopied2(false), 2000);
+                }}
+              >
+                {copied2 ? "✓" : "📋"}
+              </Button>
+            </Tooltip>
+          </div>
+
+          {/* Multi-line */}
+          <div className="flex items-start gap-2 rounded-md bg-success/10 px-3 py-1.5">
+            <div className="flex-1 space-y-1">
+              {lines.map((line, index) => (
+                <pre key={index} className="text-sm font-mono text-success">
+                  <span className="text-success/60">$ </span>
+                  {line}
+                </pre>
+              ))}
+            </div>
+            <Tooltip content={copied3 ? "Copied!" : "Copy to clipboard"}>
+              <Button
+                isIconOnly
+                aria-label="Copy"
+                size="sm"
+                variant="ghost"
+                onPress={async () => {
+                  await navigator.clipboard.writeText(lines.join("\n"));
+                  setCopied3(true);
+                  setTimeout(() => setCopied3(false), 2000);
+                }}
+              >
+                {copied3 ? "✓" : "📋"}
+              </Button>
+            </Tooltip>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Using Icons
+
+For better visual consistency, use icon libraries instead of emojis:
+
+```tsx
+import { Button, Tooltip } from "@heroui/react";
+import { Icon } from "@iconify/react";
+import { useState } from "react";
+
+function SnippetWithIcons() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText("npm install @heroui/react");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="flex items-center gap-2 rounded-lg bg-default-100 px-3 py-1.5">
+      <pre className="text-sm font-mono">
+        <span className="text-default-500">$ </span>
+        npm install @heroui/react
+      </pre>
+      <Tooltip content={copied ? "Copied!" : "Copy to clipboard"}>
+        <Button
+          isIconOnly
+          aria-label="Copy"
+          size="sm"
+          variant="ghost"
+          onPress={handleCopy}
+        >
+          <Icon
+            icon={copied ? "gravity-ui:check" : "gravity-ui:copy"}
+            className="size-4"
+          />
+        </Button>
+      </Tooltip>
+    </div>
+  );
+}
+```
+
+## Breaking Changes Summary
+
+1. **Component Removed**: `Snippet` component no longer exists in v3
+2. **Import Change**: Remove `import { Snippet } from "@heroui/react"`
+3. **Use Native Elements**: Replace with native `<pre>` and `<code>` elements
+4. **Manual Copy**: Implement copy functionality using Clipboard API
+5. **Styling**: Apply Tailwind CSS classes directly for variants, colors, sizes
+6. **Tooltip**: Use v3 Tooltip component for copy button tooltips
+7. **Button**: Use v3 Button component for copy button
+
+## Migration Steps
+
+1. **Remove Import**: Remove `Snippet` from `@heroui/react` imports
+2. **Replace Component**: Replace all `<Snippet>` instances with native HTML elements
+3. **Add Copy Functionality**: Implement copy using `navigator.clipboard.writeText()`
+4. **Add Copy Button**: Use v3 Button component with Tooltip
+5. **Apply Styling**: Use Tailwind CSS classes for variants, colors, sizes
+6. **Handle Multi-line**: Map over arrays if multi-line snippets are needed
+7. **Optional**: Create reusable Snippet component for your application
+
+## Tips for Migration
+
+1. **Create Reusable Component**: Since snippet functionality is commonly needed, create a reusable component
+2. **Use Clipboard API**: Use `navigator.clipboard.writeText()` for copy functionality
+3. **Error Handling**: Add try-catch for clipboard operations (may fail in some contexts)
+4. **Visual Feedback**: Show checkmark icon when copied, reset after timeout
+5. **Accessibility**: Include `aria-label` on copy buttons
+6. **Icons**: Use icon libraries (Iconify, Lucide, etc.) instead of emojis for better consistency
+7. **Tooltip**: Use v3 Tooltip component for better UX
+
+## Clipboard API Notes
+
+The Clipboard API requires:
+- HTTPS (or localhost for development)
+- User interaction (can't be called automatically)
+- Browser support (modern browsers)
+
+For fallback support:
+
+```tsx
+const handleCopy = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    // Fallback for older browsers
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+  }
+};
+```
+
+## Need Help?
+
+**For styling guidance:**
+- See the [Styling documentation](/docs/handbook/styling)
+- Check [Tailwind CSS documentation](https://tailwindcss.com/docs) for utility classes
+
+**For Button and Tooltip:**
+- See [Button documentation](/docs/components/button)
+- See [Tooltip documentation](/docs/components/tooltip)
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)

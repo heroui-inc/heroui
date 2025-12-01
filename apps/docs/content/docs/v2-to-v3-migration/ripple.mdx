@@ -3,21 +3,514 @@ title: Ripple
 description: Migration guide for Ripple from HeroUI v2 to v3
 ---
 
-#### Ripple
+<Callout type="warning">
+  The Ripple component has been **removed** in HeroUI v3. Ripple effects are no longer built into Button or other components. If you need ripple effects, you'll need to implement them manually.
+</Callout>
+
+## Overview
+
+The Ripple component was used to create Material Design-inspired ripple effects on press interactions, typically used with Button and Card components. In v3, ripple effects have been completely removed. If you need ripple effects, you can implement them manually using CSS or animation libraries.
+
+## Key Changes
+
+### 1. Component Removal
+
+**v2:** `<Ripple>` component and `useRipple` hook from `@heroui/react`  
+**v3:** No ripple component or hook available
+
+### 2. Button Integration
+
+**v2:** Button had built-in ripple support via `disableRipple` prop and `getRippleProps()`  
+**v3:** Button no longer has ripple effects - removed entirely
+
+### 3. Features Removed
+
+| v2 Feature | v3 Status | Notes |
+|-----------|-----------|-------|
+| `Ripple` component | ❌ Removed | No longer available |
+| `useRipple` hook | ❌ Removed | No longer available |
+| `disableRipple` prop (Button) | ❌ Removed | Button doesn't have ripple |
+| `getRippleProps()` (Button) | ❌ Removed | Button doesn't have ripple |
+
+## Migration Examples
+
+### Basic Ripple Usage (v2)
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    // TODO: Add v2 Ripple example
+    import { useRipple, Ripple } from "@heroui/react";
+
+    function MyComponent() {
+      const { ripples, onClear, onPress } = useRipple();
+
+      return (
+        <div
+          className="relative overflow-hidden cursor-pointer"
+          onPress={onPress}
+        >
+          <div>Click me</div>
+          <Ripple ripples={ripples} onClear={onClear} />
+        </div>
+      );
+    }
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    // TODO: Add v3 Ripple note (built into Button)
+    // Option 1: Use CSS-only ripple effect
+    function MyComponent() {
+      return (
+        <button className="relative overflow-hidden cursor-pointer active:after:absolute active:after:inset-0 active:after:bg-white/30 active:after:rounded-full active:after:animate-ping">
+          Click me
+        </button>
+      );
+    }
+
+    // Option 2: Implement custom ripple with React
+    import { useState, useRef } from "react";
+
+    function MyComponent() {
+      const [ripples, setRipples] = useState<Array<{id: number; x: number; y: number}>>([]);
+      const containerRef = useRef<HTMLDivElement>(null);
+
+      const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const size = Math.max(rect.width, rect.height);
+        const id = Date.now();
+
+        setRipples((prev) => [...prev, { id, x, y }]);
+
+        setTimeout(() => {
+          setRipples((prev) => prev.filter((r) => r.id !== id));
+        }, 600);
+      };
+
+      return (
+        <div
+          ref={containerRef}
+          className="relative overflow-hidden cursor-pointer"
+          onClick={handleClick}
+        >
+          <div>Click me</div>
+          {ripples.map((ripple) => (
+            <span
+              key={ripple.id}
+              className="absolute rounded-full bg-white/30 pointer-events-none animate-ping"
+              style={{
+                left: ripple.x,
+                top: ripple.y,
+                width: 100,
+                height: 100,
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          ))}
+        </div>
+      );
+    }
     ```
   </Tab>
 </Tabs>
 
-<Callout>
-  TODO: Add migration notes for Ripple (removed, built into Button)
-</Callout>
+### Button with Ripple (v2)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Button } from "@heroui/react";
+
+    // Ripple was built-in, could be disabled
+    <Button disableRipple={false}>Click me</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button } from "@heroui/react";
+
+    // No ripple effect - Button doesn't have it
+    <Button>Click me</Button>
+
+    // If you need ripple, wrap Button with custom implementation
+    import { useState, useRef } from "react";
+    import { Button } from "@heroui/react";
+
+    function ButtonWithRipple() {
+      const [ripples, setRipples] = useState<Array<{id: number; x: number; y: number}>>([]);
+      const containerRef = useRef<HTMLDivElement>(null);
+
+      const handleClick = (e: React.MouseEvent) => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const id = Date.now();
+
+        setRipples((prev) => [...prev, { id, x, y }]);
+
+        setTimeout(() => {
+          setRipples((prev) => prev.filter((r) => r.id !== id));
+        }, 600);
+      };
+
+      return (
+        <div ref={containerRef} className="relative overflow-hidden inline-block" onClick={handleClick}>
+          <Button>Click me</Button>
+          {ripples.map((ripple) => (
+            <span
+              key={ripple.id}
+              className="absolute rounded-full bg-white/30 pointer-events-none animate-ping"
+              style={{
+                left: ripple.x,
+                top: ripple.y,
+                width: 100,
+                height: 100,
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          ))}
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Ripple Hook (v3 Alternative)
+
+If you frequently need ripple effects, you can create a reusable hook:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useRipple, Ripple } from "@heroui/react";
+
+    function Component() {
+      const { ripples, onClear, onPress } = useRipple();
+
+      return (
+        <div onPress={onPress}>
+          Content
+          <Ripple ripples={ripples} onClear={onClear} />
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState, useCallback, useRef } from "react";
+
+    interface Ripple {
+      id: number;
+      x: number;
+      y: number;
+      size: number;
+    }
+
+    function useRipple() {
+      const [ripples, setRipples] = useState<Ripple[]>([]);
+      const containerRef = useRef<HTMLElement>(null);
+
+      const onPress = useCallback((event: React.MouseEvent) => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
+        const id = Date.now();
+
+        setRipples((prev) => [...prev, { id, x, y, size }]);
+
+        setTimeout(() => {
+          setRipples((prev) => prev.filter((r) => r.id !== id));
+        }, 600);
+      }, []);
+
+      const RippleComponent = () => (
+        <>
+          {ripples.map((ripple) => (
+            <span
+              key={ripple.id}
+              className="absolute rounded-full bg-white/30 pointer-events-none"
+              style={{
+                left: ripple.x,
+                top: ripple.y,
+                width: ripple.size,
+                height: ripple.size,
+                animation: "ripple 600ms ease-out",
+              }}
+            />
+          ))}
+        </>
+      );
+
+      return { ripples, onPress, RippleComponent, containerRef };
+    }
+
+    // Usage
+    function Component() {
+      const { onPress, RippleComponent, containerRef } = useRipple();
+
+      return (
+        <div ref={containerRef} className="relative overflow-hidden" onClick={onPress}>
+          Content
+          <RippleComponent />
+        </div>
+      );
+    }
+
+    // Add CSS animation
+    // @keyframes ripple {
+    //   from {
+    //     transform: scale(0);
+    //     opacity: 0.35;
+    //   }
+    //   to {
+    //     transform: scale(2);
+    //     opacity: 0;
+    //   }
+    // }
+    ```
+  </Tab>
+</Tabs>
+
+### Card with Ripple (v2)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Card, useRipple, Ripple } from "@heroui/react";
+
+    function CardWithRipple() {
+      const { ripples, onClear, onPress } = useRipple();
+
+      return (
+        <Card
+          isPressable
+          onPress={onPress}
+          className="relative overflow-hidden"
+        >
+          <Card.Body>
+            <p>Card content</p>
+          </Card.Body>
+          <Ripple ripples={ripples} onClear={onClear} />
+        </Card>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Card } from "@heroui/react";
+    import { useState, useRef } from "react";
+
+    function CardWithRipple() {
+      const [ripples, setRipples] = useState<Array<{id: number; x: number; y: number}>>([]);
+      const containerRef = useRef<HTMLDivElement>(null);
+
+      const handlePress = (e: React.MouseEvent) => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const id = Date.now();
+
+        setRipples((prev) => [...prev, { id, x, y }]);
+
+        setTimeout(() => {
+          setRipples((prev) => prev.filter((r) => r.id !== id));
+        }, 600);
+      };
+
+      return (
+        <div ref={containerRef} className="relative overflow-hidden">
+          <Card isPressable onPress={handlePress}>
+            <Card.Content>
+              <p>Card content</p>
+            </Card.Content>
+          </Card>
+          {ripples.map((ripple) => (
+            <span
+              key={ripple.id}
+              className="absolute rounded-full bg-white/30 pointer-events-none animate-ping"
+              style={{
+                left: ripple.x,
+                top: ripple.y,
+                width: 100,
+                height: 100,
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          ))}
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Custom Ripple Implementation
+
+Here's a complete, reusable ripple component you can use in v3:
+
+```tsx
+import { useState, useCallback, useRef, ReactNode } from "react";
+
+interface RippleEffectProps {
+  children: ReactNode;
+  color?: string;
+  className?: string;
+}
+
+export function RippleEffect({ children, color = "rgba(255, 255, 255, 0.3)", className = "" }: RippleEffectProps) {
+  const [ripples, setRipples] = useState<Array<{id: number; x: number; y: number; size: number}>>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
+    const id = Date.now();
+
+    setRipples((prev) => [...prev, { id, x, y, size }]);
+
+    setTimeout(() => {
+      setRipples((prev) => prev.filter((r) => r.id !== id));
+    }, 600);
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative overflow-hidden ${className}`}
+      onClick={handleClick}
+    >
+      {children}
+      {ripples.map((ripple) => (
+        <span
+          key={ripple.id}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            width: ripple.size,
+            height: ripple.size,
+            backgroundColor: color,
+            transform: "scale(0)",
+            animation: "ripple-animation 600ms ease-out",
+          }}
+        />
+      ))}
+      <style jsx>{`
+        @keyframes ripple-animation {
+          to {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// Usage
+<RippleEffect color="rgba(59, 130, 246, 0.3)">
+  <Button>Click me</Button>
+</RippleEffect>
+```
+
+## Breaking Changes Summary
+
+1. **Component Removed**: `Ripple` component no longer exists in v3
+2. **Hook Removed**: `useRipple` hook no longer available
+3. **Button Integration**: Button no longer has `disableRipple` prop or `getRippleProps()` method
+4. **No Built-in Ripple**: No components have ripple effects built-in
+
+## Migration Steps
+
+1. **Remove Imports**: Remove `Ripple` and `useRipple` from `@heroui/react` imports
+2. **Remove Ripple Usage**: Remove all `<Ripple>` components and `useRipple` hook calls
+3. **Remove Button Props**: Remove `disableRipple` prop from Button components
+4. **Implement Manually**: If ripple effects are needed, implement them manually using CSS or React state
+5. **Optional**: Create reusable ripple components/hooks for your application
+
+## Tips for Migration
+
+1. **Consider Alternatives**: Modern UI often uses simpler hover/active states instead of ripple effects
+2. **CSS-Only Solution**: For simple cases, use CSS `:active` pseudo-class with animations
+3. **Reusable Component**: Create a custom ripple component if you use it frequently
+4. **Performance**: Be mindful of performance when implementing ripple effects manually
+5. **Accessibility**: Ensure ripple effects don't interfere with keyboard navigation
+6. **Animation Libraries**: Consider using animation libraries like Framer Motion if you need complex ripple effects
+
+## CSS-Only Ripple Alternative
+
+For simple cases, you can use CSS-only ripple effects:
+
+```css
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  top: 50%;
+  left: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ripple-effect:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+```
+
+```tsx
+<button className="ripple-effect">Click me</button>
+```
+
+## Need Help?
+
+**For styling guidance:**
+- See the [Styling documentation](/docs/handbook/styling)
+- Check [Tailwind CSS documentation](https://tailwindcss.com/docs) for animation utilities
+
+**For animation libraries:**
+- [Framer Motion](https://www.framer.com/motion/) - Popular React animation library
+- [React Spring](https://www.react-spring.dev/) - Spring-based animations
+
+**For community support:**
+- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+- [Discord community](https://discord.gg/9b6yyZKmH4)
