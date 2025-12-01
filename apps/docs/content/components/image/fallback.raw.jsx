@@ -4,9 +4,10 @@ export default function App() {
   return (
     <Image
       alt="HeroUI Image with fallback"
-      fallbackSrc="https://via.placeholder.com/300x200"
+      classNames={{fallbackImgWrapper: "bg-center bg-cover"}}
+      fallbackSrc="https://heroui.com/images/fruit-4.jpeg"
       height={200}
-      src="https://app.requestly.io/delay/1000/https://heroui.com/images/fruit-4.jpeg"
+      src="wrong-image-address"
       width={300}
     />
   );
