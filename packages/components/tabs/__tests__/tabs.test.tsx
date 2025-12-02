@@ -341,7 +341,7 @@ describe("Tabs", () => {
     expect(tabWrapper).toHaveAttribute("data-vertical", "horizontal");
   });
 
-  test("should destory inactive tab panels", () => {
+  test("should destroy inactive tab panels", () => {
     const {container} = render(
       <Tabs aria-label="Tabs test (destroyInactiveTabPanel=true)">
         <Tab key="tab1" data-testid="item1" title="Tab 1">
@@ -356,7 +356,7 @@ describe("Tabs", () => {
     expect(container.querySelectorAll("[data-slot='panel']")).toHaveLength(1);
   });
 
-  test("should not destory inactive tab panels", async () => {
+  test("should not destroy inactive tab panels", async () => {
     const wrapper = render(
       <Tabs aria-label="Tabs test (destroyInactiveTabPanel=false)" destroyInactiveTabPanel={false}>
         <Tab key="tab1" data-testid="item1" title="Tab 1">
