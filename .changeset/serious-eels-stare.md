@@ -3,4 +3,4 @@
 "@heroui/theme": patch
 ---
 
-responsive tab cursor
+responsive tab cursor (#5943)
