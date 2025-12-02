@@ -11,6 +11,32 @@ index: true
 
 ## Overview
 
+### Migration Workflow
+
+<Callout type="important">
+  **Multi-Step Migration Process**: The migration from HeroUI v2 to v3 should be performed in multiple steps. Follow this workflow:
+</Callout>
+
+**Step 1: Component Migration**
+1. Check this guide (`index.mdx`) for general migration steps
+2. Review individual component migration guides as needed (see [Component Migration Reference](#step-5-component-migration-reference))
+3. Migrate component APIs, props, and structure
+4. **Stop here and wait for user confirmation before proceeding**
+
+**Step 2: Styling Migration**
+1. After component migration is complete, check the [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
+2. Update utility classes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
+3. Update color tokens (`bg-primary` → `bg-accent`, `bg-content1` → `bg-surface`, etc.)
+4. Update component styling (sizes, spacing, border radius)
+5. Review visual differences and adjust as needed
+
+**Why Separate Steps?**
+
+- **Component migration** focuses on API changes, props, and component structure
+- **Styling migration** focuses on CSS classes, color tokens, and visual appearance
+- Separating these allows you to verify component functionality before addressing styling changes
+- Makes the migration process more manageable and easier to debug
+
 ### Major Changes
 
 - **No Provider Required**: v3 removes the need for `HeroUIProvider`
@@ -420,11 +446,41 @@ v3 uses CSS variables. Override them in your CSS:
 
 Check the [Theming documentation](/docs/handbook/theming) for available CSS variables.
 
-<Callout type="info">
-  For comprehensive styling migration guidance, including utility classes, component styles, and visual differences, see the [Styling Migration Guide](/docs/v2-to-v3-migration/styling).
-</Callout>
+This is a good point to pause and verify component functionality before proceeding to styling migration.
 
-### Step 7: Testing
+### Step 7: Styling Migration
+
+After component migration is complete, proceed with styling changes. This is a separate step to ensure component functionality is verified before addressing visual changes.
+
+**Styling Migration Guide:**
+
+See the comprehensive [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`) for:
+
+- Utility class changes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
+- Color token updates (`bg-primary` → `bg-accent`, `bg-content1` → `bg-surface`, etc.)
+- Component styling differences (sizes, spacing, border radius)
+- CSS variable changes
+- Visual differences and alignment changes
+
+**Key Styling Changes:**
+
+- **Utility Classes**: Custom utilities replaced with standard Tailwind classes
+- **Color Tokens**: `primary` → `accent`, `secondary` removed, `content1-4` → `surface`/`overlay`
+- **Numbered Scales**: Color scales like `primary-50`, `primary-100` removed
+- **Border Radius**: Default values changed (smaller in v3)
+- **Component Styles**: Updated default sizes, padding, and spacing
+
+**Migration Checklist:**
+
+- [ ] Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling)
+- [ ] Update utility classes (`text-tiny` → `text-xs`, etc.)
+- [ ] Update color tokens (`bg-primary` → `bg-accent`, etc.)
+- [ ] Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
+- [ ] Update numbered color scales (`bg-primary-50` → `bg-accent-soft`)
+- [ ] Review component styling changes (sizes, spacing, border radius)
+- [ ] Test visual appearance and adjust as needed
+
+### Step 8: Testing
 
 After migration, thoroughly test your application:
 
@@ -449,7 +505,7 @@ Use this checklist to track your migration progress:
 - [ ] Update CSS imports
 - [ ] Remove `hero.ts` file (if exists)
 
-### Application Code
+### Application Code - Component Migration
 - [ ] Remove `HeroUIProvider` wrapper
 - [ ] Handle Provider props migration (router, locale, animations)
 - [ ] Update all component imports to `@heroui/react`
@@ -461,8 +517,19 @@ Use this checklist to track your migration progress:
 - [ ] Update TypeScript type references (if using component types)
 - [ ] Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User)
 - [ ] Plan alternatives for in-progress/planned components (Badge, Calendar, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast)
-- [ ] Update custom theme overrides to CSS variables
 - [ ] Consider using `asChild` prop for flexible composition
+- [ ] **Verify component functionality before proceeding to styling migration**
+
+### Application Code - Styling Migration
+- [ ] Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
+- [ ] Update utility classes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
+- [ ] Update color tokens (`bg-primary` → `bg-accent`, `bg-secondary` → `bg-default`, etc.)
+- [ ] Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
+- [ ] Update numbered color scales (`bg-primary-50` → `bg-accent-soft`, etc.)
+- [ ] Update transition utilities (`.transition-background` → `transition-colors`, etc.)
+- [ ] Review component styling changes (sizes, spacing, border radius)
+- [ ] Update custom theme overrides to CSS variables
+- [ ] Test visual appearance and adjust as needed
 
 ### Testing
 - [ ] Visual regression testing
