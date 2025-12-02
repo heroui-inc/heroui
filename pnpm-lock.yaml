@@ -413,8 +413,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0
       posthog-js:
-        specifier: 1.197.0
-        version: 1.197.0
+        specifier: 1.298.0
+        version: 1.298.0
       prism-react-renderer:
         specifier: ^1.2.1
         version: 1.3.5(react@18.3.0)
@@ -6714,6 +6714,9 @@ packages:
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
+
+  '@posthog/core@1.6.0':
+    resolution: {integrity: sha512-Tbh8UACwbb7jFdDC7wwXHtfNzO+4wKh3VbyMHmp2UBe6w1jliJixexTJNfkqdGZm+ht3M10mcKvGGPnoZ2zLBg==}
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -13144,8 +13147,8 @@ packages:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.197.0:
-    resolution: {integrity: sha512-tvzx47x/vn/XoDTrZsn2f1WbswuwnesDmihdMpbTuxHapfNH4Jp7aV3XCs6hT0Qujo4MNG3nB/kap33FpWatDA==}
+  posthog-js@1.298.0:
+    resolution: {integrity: sha512-Zwzsf7TO8qJ6DFLuUlQSsT/5OIOcxSBZlKOSk3satkEnwKdmnBXUuxgVXRHrvq1kj7OB2PVAPgZiQ8iHHj9DRA==}
 
   preact@10.26.9:
     resolution: {integrity: sha512-SSjF9vcnF27mJK1XyFMNJzFd5u3pQiATFqoaDy03XuN00u4ziveVVEGt5RKJrDR8MHE/wJo9Nnad56RLzS2RMA==}
@@ -18757,6 +18760,10 @@ snapshots:
       config-chain: 1.1.13
 
   '@polka/url@1.0.0-next.29': {}
+
+  '@posthog/core@1.6.0':
+    dependencies:
+      cross-spawn: 7.0.6
 
   '@protobufjs/aspromise@1.1.2': {}
 
@@ -26834,8 +26841,9 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  posthog-js@1.197.0:
+  posthog-js@1.298.0:
     dependencies:
+      '@posthog/core': 1.6.0
       core-js: 3.43.0
       fflate: 0.4.8
       preact: 10.26.9

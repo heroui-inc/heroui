@@ -46,6 +46,8 @@ const numberInput = tv({
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
       "autofill:bg-transparent bg-clip-text",
+      // Safari autofill styling fix - ensures text color is visible in dark mode
+      "dark:autofill:[-webkit-text-fill-color:hsl(var(--heroui-foreground))]",
     ],
     clearButton: [
       "p-2",
@@ -114,6 +116,7 @@ const numberInput = tv({
           "border-default-200",
           "data-[hover=true]:border-default-400",
           "group-data-[focus=true]:border-default-foreground",
+          "group-data-[focus=true]:data-[hover=true]:border-default-foreground",
         ],
       },
       underlined: {
@@ -467,7 +470,10 @@ const numberInput = tv({
       variant: "bordered",
       color: "primary",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-primary",
+        inputWrapper: [
+          "group-data-[focus=true]:border-primary",
+          "group-data-[focus=true]:data-[hover=true]:border-primary",
+        ],
         label: "text-primary",
       },
     },
@@ -475,7 +481,10 @@ const numberInput = tv({
       variant: "bordered",
       color: "secondary",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-secondary",
+        inputWrapper: [
+          "group-data-[focus=true]:border-secondary",
+          "group-data-[focus=true]:data-[hover=true]:border-secondary",
+        ],
         label: "text-secondary",
       },
     },
@@ -483,7 +492,10 @@ const numberInput = tv({
       variant: "bordered",
       color: "success",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-success",
+        inputWrapper: [
+          "group-data-[focus=true]:border-success",
+          "group-data-[focus=true]:data-[hover=true]:border-success",
+        ],
         label: "text-success",
       },
     },
@@ -491,7 +503,10 @@ const numberInput = tv({
       variant: "bordered",
       color: "warning",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-warning",
+        inputWrapper: [
+          "group-data-[focus=true]:border-warning",
+          "group-data-[focus=true]:data-[hover=true]:border-warning",
+        ],
         label: "text-warning",
       },
     },
@@ -499,7 +514,10 @@ const numberInput = tv({
       variant: "bordered",
       color: "danger",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-danger",
+        inputWrapper: [
+          "group-data-[focus=true]:border-danger",
+          "group-data-[focus=true]:data-[hover=true]:border-danger",
+        ],
         label: "text-danger",
       },
     },
