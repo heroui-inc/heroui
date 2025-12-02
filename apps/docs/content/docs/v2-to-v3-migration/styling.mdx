@@ -16,6 +16,8 @@ HeroUI v3 introduces significant changes to the styling system:
 - **CSS Variables**: New CSS variable naming and structure
 - **Component Styles**: Updated default sizes, spacing, and visual appearance
 - **No Plugin Required**: Removed dependency on Tailwind plugin configuration
+- **Color System Overhaul**: Semantic colors reorganized (`primary` → `accent`, `secondary` removed, numbered scales removed)
+- **Content Colors Removed**: `content1-4` replaced with `surface` and `overlay` system
 
 ## Quick Reference
 
@@ -33,6 +35,13 @@ HeroUI v3 introduces significant changes to the styling system:
 | `border-small` | `border` | Border width: 1px → 1px (use standard Tailwind) |
 | `border-medium` | `border-2` | Border width: 2px → 2px (use standard Tailwind) |
 | `border-large` | `border-[3px]` | Border width: 3px → 3px (use arbitrary value) |
+| `bg-content1` | `bg-surface` or `bg-overlay` | Content color removed, use surface/overlay |
+| `bg-content2` | `bg-surface-secondary` | Content color removed, use surface level |
+| `bg-primary` | `bg-accent` | Primary renamed to accent |
+| `bg-secondary` | `bg-default` | Secondary color removed, use default |
+| `bg-primary-50` | `bg-accent-soft` | Numbered scales removed |
+| `bg-primary-100` | `bg-accent-soft` | Numbered scales removed |
+| `text-primary-600` | `text-accent` | Numbered scales removed |
 | `.transition-background` | Standard CSS transitions | Removed utility |
 | `.transition-colors-opacity` | Standard CSS transitions | Removed utility |
 
@@ -641,6 +650,210 @@ v2 used the pattern `--heroui-{property}-{scale}` while v3 uses `--{property}` o
 2. **Naming**: v2 used numbered shades (50-900), v3 uses semantic names
 3. **Calculated Colors**: v3 uses `color-mix()` for hover states
 4. **Foreground Colors**: v3 explicitly defines foreground colors
+5. **Primary → Accent**: `primary` color renamed to `accent`
+6. **Secondary Color Removed**: `secondary` semantic color removed (was purple in v2)
+7. **Numbered Scales Removed**: Color scales like `primary-50`, `primary-100`, etc. no longer exist
+
+### Primary → Accent Rename
+
+v2 used `primary` as the main brand color. v3 renamed it to `accent` for better semantic clarity.
+
+**v2 Primary Color:**
+
+```tsx
+// v2 - Primary color with numbered scales
+<Button color="primary">Primary Button</Button>
+<div className="bg-primary">Primary background</div>
+<div className="bg-primary-50">Light primary</div>
+<div className="bg-primary-100">Lighter primary</div>
+<div className="text-primary-600">Primary text</div>
+```
+
+**v3 Accent Color:**
+
+```tsx
+// v3 - Accent color (no numbered scales)
+<Button variant="primary">Primary Button</Button>
+<div className="bg-accent">Accent background</div>
+<div className="bg-accent-soft">Soft accent</div>
+<div className="text-accent">Accent text</div>
+```
+
+**Migration:**
+
+| v2 Class | v3 Equivalent | Notes |
+|----------|---------------|-------|
+| `bg-primary` | `bg-accent` | Base accent color |
+| `text-primary` | `text-accent` | Accent text color |
+| `bg-primary-50` | `bg-accent-soft` | Light accent variant |
+| `bg-primary-100` | `bg-accent-soft` | Light accent variant |
+| `bg-primary-500` | `bg-accent` | Base accent color |
+| `text-primary-600` | `text-accent` | Accent text color |
+| `border-primary` | `border-accent` | Accent border |
+
+**Note:** v3 doesn't have numbered color scales (`-50`, `-100`, `-200`, etc.). Use semantic variants like `-soft`, `-hover`, or custom Tailwind classes.
+
+### Secondary Color Removed
+
+v2 provided a `secondary` semantic color (purple). This has been removed in v3. Component variants named "secondary" now use different colors.
+
+**v2 Secondary Color:**
+
+```tsx
+// v2 - Secondary as a semantic color (purple)
+<Button color="secondary">Secondary Button</Button>
+<div className="bg-secondary">Secondary background</div>
+<div className="bg-secondary-50">Light secondary</div>
+<div className="text-secondary-600">Secondary text</div>
+```
+
+**v3 Secondary Variant:**
+
+```tsx
+// v3 - Secondary is a variant, not a color
+<Button variant="secondary">Secondary Button</Button>
+<div className="bg-default">Default background (used by secondary variant)</div>
+<div className="text-accent">Accent text</div>
+```
+
+**Migration:**
+
+| v2 Class | v3 Equivalent | Notes |
+|----------|---------------|-------|
+| `bg-secondary` | `bg-default` | Secondary variant uses default color |
+| `text-secondary` | `text-accent` | Use accent for emphasis |
+| `bg-secondary-50` | `bg-default` | Use default color |
+| `border-secondary` | `border-accent` | Use accent border |
+
+**Note:** In v3, "secondary" refers to a component variant style (like `button--secondary`), not a color token. The secondary variant typically uses `bg-default` and `text-accent`.
+
+### Numbered Color Scales Removed
+
+v2 provided numbered color scales (50-900) for all semantic colors. v3 removed these in favor of semantic variants and calculated colors.
+
+**v2 Numbered Scales:**
+
+```tsx
+// v2 - Numbered color scales
+<div className="bg-primary-50">Lightest</div>
+<div className="bg-primary-100">Lighter</div>
+<div className="bg-primary-200">Light</div>
+<div className="bg-primary-500">Base</div>
+<div className="bg-primary-600">Dark</div>
+<div className="bg-primary-900">Darkest</div>
+```
+
+**v3 Semantic Variants:**
+
+```tsx
+// v3 - Semantic variants and calculated colors
+<div className="bg-accent-soft">Soft variant</div>
+<div className="bg-accent">Base color</div>
+<div className="bg-accent-hover">Hover state</div>
+```
+
+**Migration:**
+
+- **Light shades** (`-50`, `-100`, `-200`): Use `-soft` variants or custom Tailwind opacity classes
+- **Base color** (`-500`): Use base color name (`bg-accent`, `bg-danger`, etc.)
+- **Dark shades** (`-600`, `-700`, `-800`, `-900`): Use hover variants or custom Tailwind classes
+
+**Example:**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="bg-primary-50 text-primary-900">
+      Light primary background
+    </div>
+    <div className="bg-danger-100 text-danger-800">
+      Light danger background
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="bg-accent-soft text-accent">
+      Soft accent background
+    </div>
+    <div className="bg-danger-soft text-danger">
+      Soft danger background
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Content Colors Removed
+
+v2 provided `content1`, `content2`, `content3`, and `content4` colors for layered backgrounds. These have been removed in v3 and replaced with semantic surface colors.
+
+**v2 Content Colors:**
+
+```tsx
+// v2 - Content colors for layered backgrounds
+<div className="bg-content1">Base content</div>
+<div className="bg-content2">Secondary content</div>
+<div className="bg-content3">Tertiary content</div>
+<div className="bg-content4">Quaternary content</div>
+```
+
+**v3 Surface Colors:**
+
+```tsx
+// v3 - Surface colors for non-overlay components
+<div className="bg-surface">Base surface</div>
+<div className="bg-surface-secondary">Secondary surface</div>
+<div className="bg-surface-tertiary">Tertiary surface</div>
+<div className="bg-surface-quaternary">Quaternary surface</div>
+
+// v3 - Overlay colors for floating components
+<div className="bg-overlay">Overlay (tooltips, popovers, modals)</div>
+```
+
+**Migration Mapping:**
+
+| v2 Class | v3 Equivalent | Usage |
+|----------|---------------|-------|
+| `bg-content1` | `bg-surface` | Non-overlay components (cards, accordions) |
+| `bg-content1` | `bg-overlay` | Floating components (tooltips, popovers, modals) |
+| `bg-content2` | `bg-surface-secondary` | Secondary surface level |
+| `bg-content3` | `bg-surface-tertiary` | Tertiary surface level |
+| `bg-content4` | `bg-surface-quaternary` | Quaternary surface level |
+
+**Key Changes:**
+
+1. **Semantic Naming**: `content1-4` replaced with `surface` and `overlay` for clearer semantics
+2. **Component-Specific**: Use `bg-surface` for page-level components, `bg-overlay` for floating components
+3. **Auto-Calculated**: Surface levels (`secondary`, `tertiary`, `quaternary`) are automatically calculated from the base `surface` color using `color-mix()`
+
+**Migration Example:**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card className="bg-content1">
+      <CardBody>Content</CardBody>
+    </Card>
+    <Popover>
+      <PopoverContent className="bg-content1">
+        Popover content
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card className="bg-surface">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    <Popover>
+      <Popover.Content className="bg-overlay">
+        Popover content
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
 
 ### Spacing & Layout Tokens
 
