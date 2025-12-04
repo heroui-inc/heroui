@@ -3,4 +3,4 @@
 "@heroui/theme": patch
 ---
 
-fix(table): remove space and replace by css (#2108, #5479)
+fix(table): virtualized table in firefox by replacing Spacer with css (#2108, #5479)
