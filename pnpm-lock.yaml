@@ -2695,9 +2695,6 @@ importers:
       '@heroui/shared-utils':
         specifier: workspace:*
         version: link:../../utilities/shared-utils
-      '@heroui/spacer':
-        specifier: workspace:*
-        version: link:../spacer
       '@react-aria/focus':
         specifier: 3.21.2
         version: 3.21.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
