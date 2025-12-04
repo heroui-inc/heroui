@@ -210,6 +210,11 @@ const numberInput = tv({
         label: "relative text-foreground pe-2 ps-2 pointer-events-auto",
         stepperButton: "min-w-3 w-3 h-3",
       },
+      "outside-top": {
+        mainWrapper: "flex flex-col",
+        label: "relative text-foreground pb-2 pointer-events-auto",
+        stepperButton: "min-w-3 w-3 h-3",
+      },
       inside: {
         label: "cursor-text",
         inputWrapper: "flex-col items-start justify-center gap-0",

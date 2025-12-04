@@ -4,7 +4,7 @@ import type {NumberFieldStateOptions} from "@react-stately/numberfield";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {Ref} from "react";
 
-import {useLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
+import {useInputLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useFocusRing} from "@react-aria/focus";
 import {numberInput} from "@heroui/theme";
@@ -199,7 +199,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     onPress: handleClear,
   });
 
-  const labelPlacement = useLabelPlacement({
+  const labelPlacement = useInputLabelPlacement({
     labelPlacement: originalProps.labelPlacement,
     label,
   });
@@ -213,16 +213,21 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
   const hasHelper = !!description || !!errorMessage;
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
   const shouldLabelBeInside = labelPlacement === "inside";
   const isPlaceholderShown = domRef.current
     ? (!domRef.current.value || domRef.current.value === "" || !inputValue) && hasPlaceholder
     : false;
   const isOutsideLeft = labelPlacement === "outside-left";
+  const isOutsideTop = labelPlacement === "outside-top";
 
   const hasStartContent = !!startContent;
   const isLabelOutside = shouldLabelBeOutside
     ? labelPlacement === "outside-left" ||
+      isOutsideTop ||
       hasPlaceholder ||
       (labelPlacement === "outside" && hasStartContent)
     : false;
@@ -601,6 +606,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     hasStartContent,
     isLabelOutside,
     isOutsideLeft,
+    isOutsideTop,
     isLabelOutsideAsPlaceholder,
     shouldLabelBeOutside,
     shouldLabelBeInside,
