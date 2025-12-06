@@ -361,7 +361,10 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   });
 
   const hasPlaceholder = !!placeholder;
-  const shouldLabelBeOutside = labelPlacement === "outside-left" || labelPlacement === "outside";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-top";
   const shouldLabelBeInside = labelPlacement === "inside";
   const isOutsideLeft = labelPlacement === "outside-left";
   const isClearable = originalProps.isClearable;

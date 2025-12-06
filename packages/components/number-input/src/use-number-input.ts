@@ -4,7 +4,7 @@ import type {NumberFieldStateOptions} from "@react-stately/numberfield";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {Ref} from "react";
 
-import {useInputLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
+import {useLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useFocusRing} from "@react-aria/focus";
 import {numberInput} from "@heroui/theme";
@@ -199,7 +199,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     onPress: handleClear,
   });
 
-  const labelPlacement = useInputLabelPlacement({
+  const labelPlacement = useLabelPlacement({
     labelPlacement: originalProps.labelPlacement,
     label,
   });

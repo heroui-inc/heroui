@@ -17,7 +17,7 @@ export const animals = [
 ];
 
 export default function App() {
-  const placements = ["inside", "outside", "outside-left"];
+  const placements = ["inside", "outside", "outside-left", "outside-top"];
 
   return (
     <div className="w-full flex flex-col gap-4">
