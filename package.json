@@ -27,6 +27,8 @@
     "lint:docs": "dotenv -- turbo lint --filter=@heroui/docs",
     "lint:react": "turbo lint --filter=@heroui/react",
     "lint:storybook": "dotenv -- turbo lint --filter=@heroui/storybook",
+    "format:check": "prettier --check packages/**/* --cache",
+    "format:write": "prettier --write packages/**/* --cache",
     "typecheck": "turbo typecheck",
     "typecheck:docs": "dotenv -- turbo typecheck --filter=@heroui/docs",
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
