@@ -46,6 +46,8 @@ const numberInput = tv({
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
       "autofill:bg-transparent bg-clip-text",
+      // Safari autofill styling fix - ensures text color is visible in dark mode
+      "dark:autofill:[-webkit-text-fill-color:hsl(var(--heroui-foreground))]",
     ],
     clearButton: [
       "p-2",

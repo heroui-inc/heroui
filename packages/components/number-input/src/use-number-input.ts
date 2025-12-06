@@ -155,7 +155,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
   const inputValue = isNaN(state.numberValue) ? "" : state.numberValue;
 
-  const isFilled = !isEmpty(inputValue);
+  const isFilled = !isEmpty(state.inputValue) && !isEmpty(inputValue);
 
   const isFilledWithin = isFilled || isFocusWithin;
 

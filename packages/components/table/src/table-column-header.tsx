@@ -35,6 +35,10 @@ export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"
   node: GridNode<T>;
 }
 
+const normalizeWidth = (value: number | string): string => {
+  return typeof value === "number" ? `${value}px` : value;
+};
+
 const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) => {
   const {as, className, state, node, slots, classNames, sortIcon, ...otherProps} = props;
 
@@ -49,9 +53,15 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
 
   const {isFocusVisible, focusProps} = useFocusRing();
   const {isHovered, hoverProps} = useHover({});
-  const {hideHeader, align, ...columnProps} = node.props;
+  const {hideHeader, align, width, minWidth, maxWidth, ...columnProps} = node.props;
 
   const allowsSorting = columnProps.allowsSorting;
+
+  const columnStyles: React.CSSProperties = {};
+
+  if (width) columnStyles.width = normalizeWidth(width);
+  if (minWidth) columnStyles.minWidth = normalizeWidth(minWidth);
+  if (maxWidth) columnStyles.maxWidth = normalizeWidth(maxWidth);
 
   const sortIconProps = {
     "aria-hidden": true,
@@ -72,6 +82,7 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
       data-focus-visible={dataAttr(isFocusVisible)}
       data-hover={dataAttr(isHovered)}
       data-sortable={dataAttr(allowsSorting)}
+      style={columnStyles}
       {...mergeProps(
         columnHeaderProps,
         focusProps,
