@@ -19,6 +19,14 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "directory": "packages/styles"
+  },
+  "bugs": {
+    "url": "https://github.com/heroui-inc/heroui/issues"
+  },
   "scripts": {
     "build": "pnpm run build:copy && pnpm run build:minify",
     "build:copy": "node scripts/copy-css.mjs",
