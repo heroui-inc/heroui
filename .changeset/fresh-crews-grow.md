@@ -1,6 +1,10 @@
 ---
 "@heroui/number-input": patch
+"@heroui/select": patch
+"@heroui/date-input": patch
+"@heroui/date-picker": patch
+"@heroui/system": patch
 "@heroui/theme": patch
 ---
 
-Added support for `labelPlacement="outside-top"` to the `NumberInput` component (#5641)
+`outside-top` label placement support (#5641, #5967)
