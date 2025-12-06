@@ -1,9 +1,10 @@
-name: QA
+name: QA-v3
 
 on:
   pull_request:
     branches:
-      - canary
+      - v3
+      - 'beta-*'
 
 jobs:
   build:
@@ -18,19 +19,19 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+  # Enable when v3 tests are available
+  # tests:
+  #   name: Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout branch
+  #       uses: actions/checkout@v4
 
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v4
+  #     - name: Install
+  #       uses: ./.github/common-actions/install
 
-      - name: Install
-        uses: ./.github/common-actions/install
-
-      - name: Run tests
-        run: pnpm test
+  #     - name: Run tests
+  #       run: pnpm test
 
   eslint:
     name: ESLint
@@ -86,4 +87,4 @@ jobs:
         run: pnpm build
 
       - name: Release
-        run: pnpx pkg-pr-new publish --compact --pnpm './packages/components/*' './packages/core/*' './packages/hooks/*' './packages/utilities/*'
+        run: pnpx pkg-pr-new publish --compact --pnpm './packages/styles' './packages/react'
