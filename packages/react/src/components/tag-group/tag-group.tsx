@@ -41,9 +41,13 @@ const TagGroupRoot = ({children, className, size = "md", ...restProps}: TagGroup
 /* -------------------------------------------------------------------------------------------------
  * TagGroup List
  * -----------------------------------------------------------------------------------------------*/
-type TagGroupListProps = ComponentPropsWithRef<typeof TagListPrimitive> & {};
+type TagGroupListProps<T extends object> = ComponentPropsWithRef<typeof TagListPrimitive<T>> & {};
 
-const TagGroupList = ({children, className, ...restProps}: TagGroupListProps) => {
+const TagGroupList = <T extends object>({
+  children,
+  className,
+  ...restProps
+}: TagGroupListProps<T>) => {
   const {slots} = useContext(TagGroupContext);
 
   return (
