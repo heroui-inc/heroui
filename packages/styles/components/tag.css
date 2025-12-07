@@ -1,0 +1,123 @@
+/* Tag component styles */
+.tag {
+  --optical-offset: 0.062em;
+
+  @apply bg-field text-field-foreground relative select-none rounded-full font-medium;
+  @apply inline-flex items-center gap-1;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    color 150ms var(--ease-smooth),
+    scale 150ms var(--ease-smooth),
+    opacity 150ms var(--ease-smooth),
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply origin-center transform-gpu will-change-transform motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Disabled state */
+  &:is([data-disabled="true"], [aria-disabled="true"]) {
+    @apply status-disabled;
+  }
+
+  /* Focus visible state (keyboard focus only) */
+  &:is(:focus-visible:not(:focus), [data-focus-visible]) {
+    @apply status-focused-field;
+  }
+
+  /* Focus state (general) */
+  &:is(:focus, [data-focused="true"]) {
+  }
+
+  /* Pressed/Active state */
+  &:is(:active, [data-pressed="true"]) {
+    @apply scale-[0.97];
+  }
+
+  /* Hover state (default - when not selected or disabled) */
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      @apply bg-field-hover;
+    }
+  }
+
+  /* Selected state */
+  &:is([data-selected="true"], [aria-selected="true"]) {
+    @apply bg-accent text-accent-foreground;
+
+    /* Selected + Hover state*/
+    @media (hover: hover) {
+      &:is(:hover, [data-hovered="true"]) {
+        @apply bg-accent-hover;
+      }
+    }
+  }
+
+  /* SVG icon styling */
+  & svg {
+    @apply pointer-events-none size-3 shrink-0 self-center text-current;
+    transform-origin: center;
+    transform: translateY(var(--optical-offset)); /* optical adjustment */
+  }
+}
+
+/* Size variants */
+.tag--sm {
+  @apply px-1.5 py-0.5 text-xs;
+
+  &:has(.tag__remove-trigger) {
+    @apply pr-1; /* visual alignment adjustment */
+  }
+}
+
+.tag--md {
+  @apply px-3 py-1 text-xs;
+
+  &:has(.tag__remove-trigger) {
+    @apply pr-2.5; /* visual alignment adjustment */
+  }
+}
+
+.tag--lg {
+  @apply px-3.5 py-1.5 text-sm;
+
+  &:has(.tag__remove-trigger) {
+    @apply pr-3; /* visual alignment adjustment */
+  }
+}
+
+/* Remove trigger (close button) */
+.tag__remove-trigger {
+  @apply size-4 text-inherit;
+  @apply -ml-0.5; /* visual alignment adjustment */
+
+  /* SVG icon styling */
+  & svg {
+    @apply size-3;
+    transform-origin: center;
+    transform: translateY(var(--optical-offset)); /* optical adjustment */
+  }
+}
+
+/* On Surface variant */
+.tag--on-surface {
+  @apply bg-on-surface shadow-none;
+
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      @apply bg-on-surface-hover;
+    }
+  }
+
+  &:is(:focus-visible:not(:focus), [data-focus-visible]) {
+    background-color: var(--color-on-surface-focus);
+  }
+}
+
+.tag__remove-trigger--on-surface {
+}
