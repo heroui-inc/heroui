@@ -13,8 +13,8 @@
   "dependencies": {
     "@heroui/react": "workspace:*",
     "@heroui/styles": "workspace:*",
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
