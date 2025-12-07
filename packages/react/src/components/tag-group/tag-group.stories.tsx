@@ -4,7 +4,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React, {useState} from "react";
 
-import {Avatar, Description, EmptyState, Label, Surface, Tag} from "../";
+import {Avatar, Description, EmptyState, ErrorMessage, Label, Surface, Tag} from "../";
 import {useListData} from "../../";
 
 import {TagGroup} from "./";
@@ -180,6 +180,32 @@ export const OnSurface: Story = {
       </Surface>
     </div>
   ),
+};
+
+export const WithErrorMessage: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Iterable<Key>>(new Set());
+
+    const isInvalid = Array.from(selected).length === 0;
+
+    return (
+      <TagGroup
+        selectedKeys={selected}
+        selectionMode="multiple"
+        onSelectionChange={(keys) => setSelected(keys)}
+      >
+        <Label>Required Categories</Label>
+        <TagGroup.List>
+          <Tag id="news">News</Tag>
+          <Tag id="travel">Travel</Tag>
+          <Tag id="gaming">Gaming</Tag>
+          <Tag id="shopping">Shopping</Tag>
+        </TagGroup.List>
+        <Description>Select at least one category</Description>
+        {!!isInvalid && <ErrorMessage>Please select at least one category</ErrorMessage>}
+      </TagGroup>
+    );
+  },
 };
 
 export const WithPrefix: Story = {

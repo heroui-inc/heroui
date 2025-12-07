@@ -15,6 +15,7 @@ export * from "./close-button";
 export * from "./combobox";
 export * from "./disclosure";
 export * from "./disclosure-group";
+export * from "./error-message";
 export * from "./kbd";
 export * from "./link";
 export * from "./popover";

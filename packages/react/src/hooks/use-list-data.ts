@@ -17,6 +17,7 @@
  * large package that would significantly increase our bundle size. We maintain full attribution to
  * Adobe and comply with the Apache License 2.0 requirements.
  */
+"use client";
 
 import type {Key, Selection} from "@react-types/shared";
 
