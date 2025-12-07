@@ -97,11 +97,15 @@ the end of the label and the select will be required.
 
 ### Label Placements
 
-You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside` or `outside-left`.
+You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside`, `outside-left` or `outside-top`.
 
 <CodeDemo title="Label Placements" files={selectContent.labelPlacements} />
 
 > **Note**: If the `label` is not passed, the `labelPlacement` property will be `outside` by default.
+
+> **Note**: If the `labelPlacement` is `outside`, `label` is outside only when a placeholder is provided.
+
+> **Note**: If the `labelPlacement` is `outside-top` or `outside-left`, `label` is outside even if a placeholder is not provided.
 
 ### Start Content
 
@@ -476,7 +480,7 @@ If you need to submit a specific `value` instead of the `key` during form submis
     },
     {
       attribute: "labelPlacement",
-      type: "inside | outside | outside-left",
+      type: "inside | outside | outside-left | outside-top",
       description: "The position of the label.",
       default: "inside"
     },
