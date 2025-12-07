@@ -5,9 +5,13 @@ import {composeRenderProps} from "react-aria-components";
 
 function composeTwRenderProps<T>(
   className: string | ((v: T) => string) | undefined,
-  tailwind?: string,
+  tailwind?: string | ((v: T) => string | undefined),
 ): string | ((v: T) => string) {
-  return composeRenderProps(className, (className) => clsx(tailwind ?? "", className ?? ""));
+  return composeRenderProps(className, (className, renderProps) => {
+    const tw = typeof tailwind === "function" ? (tailwind(renderProps) ?? "") : (tailwind ?? "");
+
+    return clsx(tw, className);
+  });
 }
 
 const focusRingClasses =
