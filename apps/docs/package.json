@@ -43,7 +43,6 @@
     "shiki": "3.13.0",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2",
-    "ts-morph": "27.0.2",
     "usehooks-ts": "3.1.1",
     "zod": "4.1.12"
   },
@@ -57,6 +56,7 @@
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
     "postcss": "8.5.6",
+    "source-map-support": "0.5.21",
     "tailwindcss": "4.1.17"
   }
 }
