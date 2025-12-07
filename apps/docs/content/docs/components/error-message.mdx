@@ -1,0 +1,77 @@
+---
+title: ErrorMessage
+description: Displays validation error messages for components with validation support
+icon: new
+links:
+  rac: TagGroup
+  source: error-message/error-message.tsx
+  styles: error-message.css
+---
+
+## Import
+
+```tsx
+import { ErrorMessage } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="error-message-basic"
+/>
+
+### With TagGroup
+
+<ComponentPreview
+  name="error-message-with-tag-group"
+/>
+
+<RelatedComponents component="errormessage" />
+
+## API Reference
+
+### ErrorMessage Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The error message content |
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { ErrorMessage } from '@heroui/react';
+
+function CustomErrorMessage() {
+  return (
+    <ErrorMessage className="font-bold text-sm">
+      Custom styled error message
+    </ErrorMessage>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the ErrorMessage component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .error-message {
+    @apply text-red-600 text-sm font-medium;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The ErrorMessage component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/error-message.css)):
+
+#### Base Classes
+- `.error-message` - Base error message styles with danger color and text truncation
+
