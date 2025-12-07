@@ -16,6 +16,7 @@ import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
 import * as DropdownDemos from "./dropdown";
+import * as ErrorMessageDemos from "./error-message";
 import * as FieldErrorDemos from "./field-error";
 import * as FieldsetDemos from "./fieldset";
 import * as FormDemos from "./form";
@@ -39,6 +40,7 @@ import * as SpinnerDemos from "./spinner";
 import * as SurfaceDemos from "./surface";
 import * as SwitchDemos from "./switch";
 import * as TabsDemos from "./tabs";
+import * as TagGroupDemos from "./tag-group";
 import * as TextFieldDemos from "./text-field";
 import * as TextAreaDemos from "./textarea";
 import * as TooltipDemos from "./tooltip";
@@ -480,6 +482,15 @@ export const demos: Record<string, DemoItem> = {
     component: DropdownDemos.CustomTrigger,
     file: "dropdown/custom-trigger.tsx",
   },
+  // ErrorMessage demos
+  "error-message-basic": {
+    component: ErrorMessageDemos.Basic,
+    file: "error-message/basic.tsx",
+  },
+  "error-message-with-tag-group": {
+    component: ErrorMessageDemos.WithTagGroup,
+    file: "error-message/with-tag-group.tsx",
+  },
   // Form demos
   "form-basic": {
     component: FormDemos.Basic,
@@ -837,6 +848,47 @@ export const demos: Record<string, DemoItem> = {
   "tabs-without-separator": {
     component: TabsDemos.WithoutSeparator,
     file: "tabs/without-separator.tsx",
+  },
+  // TagGroup demos
+  "tag-group-basic": {
+    component: TagGroupDemos.Basic,
+    file: "tag-group/basic.tsx",
+  },
+  "tag-group-sizes": {
+    component: TagGroupDemos.Sizes,
+    file: "tag-group/sizes.tsx",
+  },
+  "tag-group-disabled": {
+    component: TagGroupDemos.Disabled,
+    file: "tag-group/disabled.tsx",
+  },
+  "tag-group-selection-modes": {
+    component: TagGroupDemos.SelectionModes,
+    file: "tag-group/selection-modes.tsx",
+  },
+  "tag-group-controlled": {
+    component: TagGroupDemos.Controlled,
+    file: "tag-group/controlled.tsx",
+  },
+  "tag-group-on-surface": {
+    component: TagGroupDemos.OnSurface,
+    file: "tag-group/on-surface.tsx",
+  },
+  "tag-group-with-error-message": {
+    component: TagGroupDemos.WithErrorMessage,
+    file: "tag-group/with-error-message.tsx",
+  },
+  "tag-group-with-prefix": {
+    component: TagGroupDemos.WithPrefix,
+    file: "tag-group/with-prefix.tsx",
+  },
+  "tag-group-with-remove-button": {
+    component: TagGroupDemos.WithRemoveButton,
+    file: "tag-group/with-remove-button.tsx",
+  },
+  "tag-group-with-list-data": {
+    component: TagGroupDemos.WithListData,
+    file: "tag-group/with-list-data.tsx",
   },
   // TextArea demos
   "textarea-basic": {

@@ -38,6 +38,7 @@
     "components/disclosure",
     "components/disclosure-group",
     "components/dropdown",
+    "components/error-message",
     "components/field-error",
     "components/fieldset",
     "components/form",
@@ -61,6 +62,7 @@
     "components/switch",
     "components/surface",
     "components/tabs",
+    "components/tag-group",
     "components/text-field",
     "components/textarea",
     "components/tooltip"

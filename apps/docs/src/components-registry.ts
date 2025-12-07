@@ -112,6 +112,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "dropdown",
     title: "Dropdown",
   },
+  errormessage: {
+    category: "forms",
+    description: "Displays validation error messages for components with validation support",
+    href: "/docs/components/error-message",
+    name: "errormessage",
+    title: "ErrorMessage",
+  },
   fielderror: {
     category: "forms",
     description: "Inline validation messages for form fields",
@@ -273,6 +280,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "tabs",
     title: "Tabs",
   },
+  taggroup: {
+    category: "display",
+    description: "Focusable list of tags with selection and removal support",
+    href: "/docs/components/tag-group",
+    name: "taggroup",
+    title: "TagGroup",
+  },
   textarea: {
     category: "forms",
     description: "Multiline text input with focus management",
@@ -347,6 +361,7 @@ const componentRelationships: Record<string, string[]> = {
   disclosure: ["accordion", "disclosuregroup", "button"],
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
   dropdown: ["button", "popover", "separator", "listbox"],
+  errormessage: ["taggroup"],
   fielderror: ["textfield", "input", "textarea", "combobox", "form", "numberfield"],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
   form: [
@@ -455,6 +470,7 @@ const componentRelationships: Record<string, string[]> = {
   ],
   switch: ["label", "description", "button", "form"],
   tabs: [],
+  taggroup: ["tag", "label", "description", "errormessage", "closebutton"],
   textarea: ["textfield", "input", "label", "fielderror", "form", "surface", "description"],
   textfield: [
     "input",
