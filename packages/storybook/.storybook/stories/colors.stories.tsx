@@ -19,13 +19,15 @@ interface ColorItemProps {
 const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
   const computedColor =
     typeof window !== "undefined"
-      ? getComputedStyle(document.documentElement).getPropertyValue(cssVariable || variable).trim()
+      ? getComputedStyle(document.documentElement)
+          .getPropertyValue(cssVariable || variable)
+          .trim()
       : "";
 
   return (
-    <div className="flex items-center gap-4 bg-surface rounded-3xl shadow-surface p-4">
+    <div className="flex items-center gap-4 rounded-3xl bg-surface p-4 shadow-surface">
       <div
-        className="size-12 shrink-0 rounded-xl border border-divider"
+        className="border-divider size-12 shrink-0 rounded-xl border"
         style={{backgroundColor: `var(${variable})`}}
       />
       <div className="flex flex-1 flex-col gap-1">
@@ -34,7 +36,7 @@ const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
       </div>
       {computedColor && (
         <div className="text-right">
-          <code className="text-xs font-mono text-muted">{computedColor}</code>
+          <code className="font-mono text-xs text-muted">{computedColor}</code>
         </div>
       )}
     </div>
@@ -163,9 +165,7 @@ export const AllColors = () => {
     <div className="mx-auto max-w-4xl p-6">
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold text-foreground">Color System</h1>
-        <p className="text-muted">
-          HeroUI's color palette with CSS variables and computed values
-        </p>
+        <p className="text-muted">HeroUI's color palette with CSS variables and computed values</p>
       </div>
 
       <ColorSection colors={baseColors} title="Base Colors" />

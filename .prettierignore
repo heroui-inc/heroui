@@ -1,0 +1,64 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+dist
+build
+.next
+out
+.turbo
+.swc
+.cache
+.vercel
+.rollup.cache
+
+# Generated files
+*.tsbuildinfo
+.next-env.d.ts
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Storybook
+storybook-static
+.storybook-static
+
+# Coverage
+coverage
+.nyc_output
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Temporary files
+.temp
+.tmp
+*.tmp
+
+# Changeset
+.changeset
+
+# Content layer
+.contentlayer
+.source
+
+# Public assets (usually don't need formatting)
+public
+

@@ -75,7 +75,7 @@
    ============================================================================ */
 
 [data-theme-toggle] {
-  @apply bg-default/80 border-none;
+  @apply border-none bg-default/80;
 }
 
 /* Home Layout Navigation */
@@ -105,7 +105,7 @@
 
   ul:last-of-type {
     li > a:last-of-type {
-      @apply text-foreground ml-1 inline-flex items-center rounded-full border p-1.5;
+      @apply ml-1 inline-flex items-center rounded-full border p-1.5 text-foreground;
     }
   }
 
@@ -114,10 +114,10 @@
   }
 
   [data-search-full] {
-    @apply bg-default/80 rounded-field;
+    @apply rounded-field bg-default/80;
 
     kbd {
-      @apply bg-surface text-muted px-1 font-sans text-xs font-medium;
+      @apply bg-surface px-1 font-sans text-xs font-medium text-muted;
     }
   }
 
@@ -128,7 +128,7 @@
 
 /* Sub Navigation */
 #nd-subnav {
-  @apply bg-background h-14;
+  @apply h-14 bg-background;
 
   backdrop-filter: none;
 
@@ -137,10 +137,10 @@
   }
 
   [data-search-full] {
-    @apply bg-field dark:bg-field/80 shadow-field rounded-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:backdrop-blur-md;
+    @apply rounded-field bg-field shadow-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:bg-field/80 dark:backdrop-blur-md;
 
     kbd {
-      @apply bg-default dark:bg-surface border-border;
+      @apply border-border bg-default dark:bg-surface;
     }
   }
 }
@@ -357,14 +357,14 @@ code {
     thead {
       tr {
         th {
-          @apply bg-default dark:bg-default/50 border-none;
+          @apply border-none bg-default dark:bg-default/50;
 
           &:first-child {
-            @apply rounded-bl-xl rounded-tl-xl;
+            @apply rounded-tl-xl rounded-bl-xl;
           }
 
           &:last-child {
-            @apply rounded-br-xl rounded-tr-xl;
+            @apply rounded-tr-xl rounded-br-xl;
           }
         }
       }
@@ -385,7 +385,7 @@ code {
    ============================================================================ */
 
 .docs-code-block {
-  @apply m-0 rounded-none border-none pl-2 pr-2 pt-4;
+  @apply m-0 rounded-none border-none pt-4 pr-2 pl-2;
 
   .fd-scroll-container {
     @apply rounded-none border-none !bg-transparent p-0;
