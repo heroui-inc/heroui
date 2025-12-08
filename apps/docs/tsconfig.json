@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "jsx": "preserve",
     "paths": {
-      "@/.source": ["./.source/index.ts"],
+      "@/.source": ["./.source/server.ts"],
+      "@/.source/*": ["./.source/*"],
       "@/*": ["./src/*"],
       "~env": ["./env.ts"]
     }

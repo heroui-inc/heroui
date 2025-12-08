@@ -1,9 +1,23 @@
+import {stat} from "node:fs/promises";
+import {join} from "node:path";
+
 import {Feed} from "feed";
 
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 
-export const getRSS = (): string => {
+async function getFileLastModified(pagePath: string): Promise<Date> {
+  try {
+    const filePath = join(process.cwd(), "content/docs", `${pagePath}.mdx`);
+    const stats = await stat(filePath);
+
+    return stats.mtime;
+  } catch {
+    return new Date();
+  }
+}
+
+export const getRSS = async (): Promise<string> => {
   const currentYear = new Date().getFullYear();
   const baseUrl = siteConfig.siteUrl;
 
@@ -20,6 +34,7 @@ export const getRSS = (): string => {
 
   for (const page of source.getPages()) {
     const pageUrl = new URL(page.url, baseUrl);
+    const lastModified = await getFileLastModified(page.path);
 
     feed.addItem({
       author: [
@@ -27,7 +42,7 @@ export const getRSS = (): string => {
           name: siteConfig.creator,
         },
       ],
-      date: new Date(page.data.lastModified || Date.now()),
+      date: lastModified,
       description: page.data.description || "HeroUI documentation page",
       id: page.url,
       link: pageUrl.toString(),
