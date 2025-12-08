@@ -11,17 +11,44 @@ index: true
 
 ## Overview
 
-### Migration Workflow
+### Migration MCP Tool
 
-<Callout type="important">
-  **Multi-Step Migration Process**: The migration from HeroUI v2 to v3 should be performed in multiple steps. Follow this workflow:
+To make migration easier, we provide a **Migration MCP (Model Context Protocol) server** that AI assistants can use to access migration guides directly. This tool provides programmatic access to all migration documentation, making it easier for AI-powered development tools to help you migrate your codebase.
+
+**Features:**
+- Access to comprehensive migration guide
+- Component-specific migration guides
+- Step-by-step migration instructions
+- Code examples and API changes
+
+**Setup:**
+
+Add the Migration MCP server to your MCP client configuration (e.g., in Cursor or other MCP-compatible tools):
+
+```json
+{
+  "mcpServers": {
+    "heroui-v3-migration": {
+      "url": "https://heroui-v3-migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+<Callout type="warning">
+  **Important:** Do not use the Migration MCP alongside the `heroui-react` MCP server. Having both configured simultaneously may confuse AI assistants about which set of component documentation to use. For migration purposes, connect only to the Migration MCP. Once migration is complete, you can switch to using the `heroui-react` MCP for v3 component documentation.
 </Callout>
+
+Once configured, AI assistants can automatically access migration guides and help you migrate your components more efficiently. The MCP server provides tools like `get_migration_guide`, `list_migration_guides`, and `get_component_guides` that can be used to fetch relevant migration information for your specific needs.
+
+**Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/heroui-v3-migration-mcp).
+
+### Migration Workflow
 
 **Step 1: Component Migration**
 1. Check this guide (`index.mdx`) for general migration steps
 2. Review individual component migration guides as needed (see [Component Migration Reference](#step-5-component-migration-reference))
 3. Migrate component APIs, props, and structure
-4. **Stop here and wait for user confirmation before proceeding**
 
 **Step 2: Styling Migration**
 1. After component migration is complete, check the [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
@@ -29,13 +56,6 @@ index: true
 3. Update color tokens (`bg-primary` → `bg-accent`, `bg-content1` → `bg-surface`, etc.)
 4. Update component styling (sizes, spacing, border radius)
 5. Review visual differences and adjust as needed
-
-**Why Separate Steps?**
-
-- **Component migration** focuses on API changes, props, and component structure
-- **Styling migration** focuses on CSS classes, color tokens, and visual appearance
-- Separating these allows you to verify component functionality before addressing styling changes
-- Makes the migration process more manageable and easier to debug
 
 ### Major Changes
 
@@ -472,13 +492,13 @@ See the comprehensive [Styling Migration Guide](/docs/v2-to-v3-migration/styling
 
 **Migration Checklist:**
 
-- [ ] Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling)
-- [ ] Update utility classes (`text-tiny` → `text-xs`, etc.)
-- [ ] Update color tokens (`bg-primary` → `bg-accent`, etc.)
-- [ ] Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
-- [ ] Update numbered color scales (`bg-primary-50` → `bg-accent-soft`)
-- [ ] Review component styling changes (sizes, spacing, border radius)
-- [ ] Test visual appearance and adjust as needed
+- Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling)
+- Update utility classes (`text-tiny` → `text-xs`, etc.)
+- Update color tokens (`bg-primary` → `bg-accent`, etc.)
+- Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
+- Update numbered color scales (`bg-primary-50` → `bg-accent-soft`)
+- Review component styling changes (sizes, spacing, border radius)
+- Test visual appearance and adjust as needed
 
 ### Step 8: Testing
 
@@ -495,47 +515,47 @@ After migration, thoroughly test your application:
 Use this checklist to track your migration progress:
 
 ### Dependencies
-- [ ] Update React to v19+
-- [ ] Update HeroUI packages to v3
-- [ ] Remove Framer Motion
-- [ ] Update Tailwind CSS to v4
+- Update React to v19+
+- Update HeroUI packages to v3
+- Remove Framer Motion
+- Update Tailwind CSS to v4
 
 ### Configuration
-- [ ] Remove `heroui()` plugin from Tailwind config
-- [ ] Update CSS imports
-- [ ] Remove `hero.ts` file (if exists)
+- Remove `heroui()` plugin from Tailwind config
+- Update CSS imports
+- Remove `hero.ts` file (if exists)
 
 ### Application Code - Component Migration
-- [ ] Remove `HeroUIProvider` wrapper
-- [ ] Handle Provider props migration (router, locale, animations)
-- [ ] Update all component imports to `@heroui/react`
-- [ ] Migrate renamed components (Divider → Separator, Autocomplete → Combobox, NumberInput → NumberField)
-- [ ] Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
-- [ ] Update group components (CheckboxGroup, RadioGroup, SwitchGroup)
-- [ ] Change `onClick` to `onPress` for interactive components
-- [ ] Update `key` prop to `id` and `textValue` where applicable
-- [ ] Update TypeScript type references (if using component types)
-- [ ] Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User)
-- [ ] Plan alternatives for in-progress/planned components (Badge, Calendar, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast)
-- [ ] Consider using `asChild` prop for flexible composition
-- [ ] **Verify component functionality before proceeding to styling migration**
+- Remove `HeroUIProvider` wrapper
+- Handle Provider props migration (router, locale, animations)
+- Update all component imports to `@heroui/react`
+- Migrate renamed components (Divider → Separator, Autocomplete → Combobox, NumberInput → NumberField)
+- Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
+- Update group components (CheckboxGroup, RadioGroup, SwitchGroup)
+- Change `onClick` to `onPress` for interactive components
+- Update `key` prop to `id` and `textValue` where applicable
+- Update TypeScript type references (if using component types)
+- Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User)
+- Plan alternatives for in-progress/planned components (Badge, Calendar, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast)
+- Consider using `asChild` prop for flexible composition
+- **Verify component functionality before proceeding to styling migration**
 
 ### Application Code - Styling Migration
-- [ ] Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
-- [ ] Update utility classes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
-- [ ] Update color tokens (`bg-primary` → `bg-accent`, `bg-secondary` → `bg-default`, etc.)
-- [ ] Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
-- [ ] Update numbered color scales (`bg-primary-50` → `bg-accent-soft`, etc.)
-- [ ] Update transition utilities (`.transition-background` → `transition-colors`, etc.)
-- [ ] Review component styling changes (sizes, spacing, border radius)
-- [ ] Update custom theme overrides to CSS variables
-- [ ] Test visual appearance and adjust as needed
+- Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
+- Update utility classes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
+- Update color tokens (`bg-primary` → `bg-accent`, `bg-secondary` → `bg-default`, etc.)
+- Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
+- Update numbered color scales (`bg-primary-50` → `bg-accent-soft`, etc.)
+- Update transition utilities (`.transition-background` → `transition-colors`, etc.)
+- Review component styling changes (sizes, spacing, border radius)
+- Update custom theme overrides to CSS variables
+- Test visual appearance and adjust as needed
 
 ### Testing
-- [ ] Visual regression testing
-- [ ] Functionality testing
-- [ ] Accessibility testing
-- [ ] Performance testing
+- Visual regression testing
+- Functionality testing
+- Accessibility testing
+- Performance testing
 
 ## Common Issues and Solutions
 
