@@ -1,6 +1,9 @@
 import type {StatusChipStatus} from "@/components/status-chip";
 import type {Metadata} from "next";
 
+import {readFile} from "node:fs/promises";
+import {join} from "node:path";
+
 import {createRelativeLink} from "fumadocs-ui/mdx";
 import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
@@ -18,6 +21,16 @@ import {extractGithubFromMDX, extractLinksFromMDX} from "@/utils/extract-links";
 
 const componentStatusIcons = ["preview", "new", "updated"];
 
+async function getRawMDXContent(pagePath: string): Promise<string> {
+  try {
+    const filePath = join(process.cwd(), "content/docs", `${pagePath}.mdx`);
+
+    return await readFile(filePath, "utf-8");
+  } catch {
+    return "";
+  }
+}
+
 export default async function Page(props: {params: Promise<{slug?: string[]}>}) {
   const params = await props.params;
   const page = source.getPage(params.slug);
@@ -34,11 +47,14 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   //   path: `apps/docs/content/docs/${page.path}`,
   // });
 
+  // Read raw MDX content for frontmatter extraction
+  const rawContent = await getRawMDXContent(page.path);
+
   // Extract links from MDX content
-  const links = extractLinksFromMDX(page.data.content);
+  const links = extractLinksFromMDX(rawContent);
 
   // Extract GitHub info from MDX content
-  const githubInfo = extractGithubFromMDX(page.data.content);
+  const githubInfo = extractGithubFromMDX(rawContent);
 
   return (
     <DocsPage
@@ -51,7 +67,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         style: "normal",
       }}
     >
-      <section className="border-border mb-4 flex flex-col gap-2 border-b">
+      <section className="mb-4 flex flex-col gap-2 border-b border-border">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <DocsTitle className="flex items-end gap-2">
             {page.data.title}
@@ -69,7 +85,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
             </div>
           )}
         </div>
-        <DocsDescription className="text-md mb-4 mt-2">{page.data.description}</DocsDescription>
+        <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
         {!!links && <ComponentLinks links={links} />}
       </section>
       <DocsBody className="prose-sm">

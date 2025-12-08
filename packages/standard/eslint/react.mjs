@@ -1,7 +1,4 @@
-import {dirname} from "path";
-import {fileURLToPath} from "url";
-
-import {FlatCompat} from "@eslint/eslintrc";
+import typescriptParser from "@typescript-eslint/parser";
 import {defineConfig} from "eslint/config";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
@@ -12,21 +9,8 @@ import globals from "globals";
 
 import baseConfig from "./base.mjs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default defineConfig([
+const config = defineConfig([
   ...baseConfig,
-  ...compat.extends(
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:storybook/recommended",
-  ),
   {
     files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
     languageOptions: {
@@ -36,6 +20,7 @@ export default defineConfig([
         JSX: true,
         React: true,
       },
+      parser: typescriptParser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -50,6 +35,13 @@ export default defineConfig([
       storybook: storybookPlugin,
     },
     rules: {
+      // React recommended rules
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      ...jsxA11yPlugin.configs.recommended.rules,
+      // Storybook recommended rules
+      ...storybookPlugin.configs.recommended.rules,
+      // Custom overrides
       "jsx-a11y/alt-text": "off",
       "jsx-a11y/click-events-have-key-events": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
@@ -110,3 +102,5 @@ export default defineConfig([
     },
   },
 ]);
+
+export default config;

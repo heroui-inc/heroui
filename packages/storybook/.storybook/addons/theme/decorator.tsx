@@ -1,34 +1,50 @@
 import type {Decorator} from "@storybook/react";
 
-import {useGlobals} from "@storybook/preview-api";
+import {addons, useGlobals} from "storybook/preview-api";
 import React, {useEffect} from "react";
 
-import {DEFAULT_THEME, THEME_GLOBAL_TYPE_ID} from "./constants";
+import {THEME_ADDON_ID, THEME_EVENT_NAME, THEME_GLOBAL_TYPE_ID, ensureThemeKey} from "./constants";
+
+/** Update preview iframe with theme (only preview uses CSS selectors) */
+const updatePreviewTheme = (theme: string) => {
+  const root = document.documentElement;
+
+  root.setAttribute("data-theme", theme);
+  root.classList.remove("light", "dark");
+  root.classList.add(theme);
+};
 
 export const withTheme: Decorator = (Story, context) => {
   const [globals] = useGlobals();
-  const selectedTheme = globals[THEME_GLOBAL_TYPE_ID] || DEFAULT_THEME;
+  const theme = ensureThemeKey(globals[THEME_GLOBAL_TYPE_ID] as string | undefined);
 
+  // Update theme in memory and apply to preview/docs
   useEffect(() => {
-    const root = document.documentElement;
+    updatePreviewTheme(theme);
 
-    // Remove any existing theme
-    root.removeAttribute("data-theme");
-
-    // Apply new theme
-    if (selectedTheme !== "system") {
-      root.setAttribute("data-theme", selectedTheme);
+    // Notify manager about theme change
+    const channel = addons.getChannel();
+    if (channel) {
+      channel.emit(THEME_EVENT_NAME, {theme}, {source: THEME_ADDON_ID});
     }
+  }, [theme]);
 
-    // For system theme, check user preference
-    if (selectedTheme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  // Listen for STORY_CHANGED and SET_STORIES events to ensure preview theme is applied
+  useEffect(() => {
+    const channel = addons.getChannel();
 
-      if (prefersDark) {
-        root.setAttribute("data-theme", "dark");
-      }
-    }
-  }, [selectedTheme]);
+    const handleEvent = () => {
+      updatePreviewTheme(theme);
+    };
+
+    channel.on("STORY_CHANGED", handleEvent);
+    channel.on("SET_STORIES", handleEvent);
+
+    return () => {
+      channel.removeListener("STORY_CHANGED", handleEvent);
+      channel.removeListener("SET_STORIES", handleEvent);
+    };
+  }, [theme]);
 
   return <Story {...context} />;
 };
