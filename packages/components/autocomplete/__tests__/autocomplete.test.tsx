@@ -8,6 +8,7 @@ import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Autocomplete, AutocompleteItem, AutocompleteSection} from "../src";
 import {Modal, ModalContent, ModalBody, ModalHeader, ModalFooter} from "../../modal/src";
@@ -858,6 +859,38 @@ describe("Autocomplete", () => {
         expect(input).not.toHaveAttribute("aria-describedby");
         expect(input).not.toHaveAttribute("aria-invalid");
       });
+    });
+  });
+
+  describe("Autocomplete with HeroUIProvider context", () => {
+    it("should inherit labelPlacement from HeroUIProvider", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside">
+          <Autocomplete defaultItems={itemsData} label="Test autocomplete">
+            {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+          </Autocomplete>
+        </HeroUIProvider>,
+      );
+
+      const label = container.querySelector("label");
+
+      expect(label).toBeTruthy();
+      expect(label?.className).toMatch(/translate-y.*100%/);
+    });
+
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside">
+          <Autocomplete defaultItems={itemsData} label="Test autocomplete" labelPlacement="inside">
+            {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+          </Autocomplete>
+        </HeroUIProvider>,
+      );
+
+      const label = container.querySelector("label");
+
+      expect(label).toBeTruthy();
+      expect(label?.className).not.toMatch(/translate-y.*100%/);
     });
   });
 });
