@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "https://github.com/heroui-inc/heroui.git",
     "directory": "packages/react"
   },
   "bugs": {
@@ -73,11 +73,11 @@
     "@react-stately/data": "3.14.1",
     "@storybook/react": "8.6.12",
     "@types/fs-extra": "11.0.4",
-    "@types/react": "19.2.6",
+    "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "fs-extra": "11.3.2",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "tailwindcss": "4.1.17"
   },
   "peerDependencies": {

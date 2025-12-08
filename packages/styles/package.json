@@ -4,6 +4,11 @@
   "description": "HeroUI core styles and Tailwind plugin",
   "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "directory": "packages/styles"
+  },
   "license": "MIT",
   "type": "module",
   "main": "./index.css",
