@@ -11,9 +11,9 @@
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@testing-library/jest-dom": "6.8.0",
+    "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "glob": "11.0.3"
+    "glob": "13.0.0"
   }
 }
