@@ -889,7 +889,24 @@ describe("Autocomplete", () => {
 
       const label = container.querySelector("label");
 
+      expect(label?.className).not.toMatch(/translate-y.*100%/);
+    });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <Autocomplete defaultItems={itemsData} label="Test autocomplete">
+            {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+          </Autocomplete>
+        </HeroUIProvider>,
+      );
+
+      const label = container.querySelector("label");
+      const mainWrapper = container.querySelector("[data-slot=main-wrapper]");
+
       expect(label).toBeTruthy();
+      // outside-top uses flex-col on mainWrapper and relative label (no translate-y)
+      expect(mainWrapper).toHaveClass("flex-col");
       expect(label?.className).not.toMatch(/translate-y.*100%/);
     });
   });

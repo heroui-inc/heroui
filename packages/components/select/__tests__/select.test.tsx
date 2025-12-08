@@ -1760,5 +1760,33 @@ describe("validation", () => {
       expect(base).toHaveTextContent(labelContent);
       expect(trigger).toHaveTextContent(labelContent);
     });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      // outside-top: label is in base, not trigger
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).not.toHaveTextContent(labelContent);
+      expect(base).toHaveClass("flex-col");
+    });
   });
 });

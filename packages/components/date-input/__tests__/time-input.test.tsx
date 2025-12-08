@@ -477,5 +477,23 @@ describe("TimeInput", () => {
       expect(label).toHaveTextContent(labelContent);
       expect(group).toHaveTextContent(labelContent);
     });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const labelContent = "Test time input label";
+
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <TimeInput label={labelContent} />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+      const base = container.querySelector("[data-slot=base]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).not.toHaveTextContent(labelContent);
+      expect(base).toHaveClass("flex-col");
+    });
   });
 });
