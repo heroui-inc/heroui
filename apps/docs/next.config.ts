@@ -27,6 +27,7 @@ const config: NextConfig = {
     ];
   },
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         hostname: "heroui-assets.nyc3.cdn.digitaloceanspaces.com",

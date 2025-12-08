@@ -4,6 +4,7 @@ import {defineConfig} from "eslint/config";
 const config = defineConfig([
   {
     ignores: [
+      // Build outputs
       "**/.temp",
       "**/.next",
       "**/.swc",
@@ -11,20 +12,26 @@ const config = defineConfig([
       "**/.cache",
       "**/.build",
       "**/.vercel",
-      "**/.changeset",
-      "**/.DS_Store",
       "**/dist",
       "**/build",
-      "**/public/*",
-      "**/node_modules/",
-      "**/coverage",
-      "**/__snapshots__",
-      "**/.contentlayer/",
-      "pnpm-lock.yaml",
       "**/storybook-static",
-      "!public/manifest.json",
       ".rollup.cache",
       ".rollup.cache/**",
+      // Dependencies
+      "**/node_modules/",
+      "**/public/*",
+      // Generated files
+      "pnpm-lock.yaml",
+      "**/.contentlayer/",
+      "**/.source/**",
+      // Test coverage
+      "**/coverage",
+      "**/__snapshots__",
+      // OS files
+      "**/.DS_Store",
+      "**/.changeset",
+      // Exceptions - files we want to lint
+      "!public/manifest.json",
       "!.vscode",
       "!scripts",
       "!.*.js",

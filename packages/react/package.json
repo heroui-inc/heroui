@@ -71,7 +71,7 @@
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
     "@react-stately/data": "3.14.1",
-    "@storybook/react": "8.6.12",
+    "@storybook/react": "10.1.4",
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",

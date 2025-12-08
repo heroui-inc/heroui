@@ -1,8 +1,7 @@
-import {Meta} from "@storybook/blocks";
+import {Meta} from "@storybook/addon-docs/blocks";
 import {buttonVariants} from "@heroui/react";
 
 <Meta title="Welcome" />
-
 
 <br />
 
@@ -12,10 +11,10 @@ import {buttonVariants} from "@heroui/react";
 
 ## HeroUI Version 3 - Design system
 
-<div className="!text-base !text-foreground max-w-xl [&>p]:text-foreground [&>p]:text-base">
-  Here you can find the guidelines, components APIs and examples to help you build your next project with HeroUI version 3.
+<div className="max-w-xl text-base! text-foreground! [&>p]:text-base [&>p]:text-foreground">
+  Here you can find the guidelines, components APIs and examples to help you build your next project
+  with HeroUI version 3.
 </div>
-
 
 <div className="flex flex-col gap-8">
   <div className="flex flex-row justify-start items-center mt-8 gap-4">
@@ -26,12 +25,12 @@ import {buttonVariants} from "@heroui/react";
         variant: "primary",
       })}
     >
-      <span className="[&>p]:!text-white [&>p]:!font-semibold">
+      <span className="[&>p]:text-white! [&>p]:font-semibold!">
        Website
       </span>
       <svg
         aria-hidden="true"
-        className="flex stroke-current !text-white self-center"
+        className="flex stroke-current text-white! self-center"
         fill="none"
         height="1em"
         shapeRendering="geometricPrecision"
@@ -52,7 +51,7 @@ import {buttonVariants} from "@heroui/react";
       target="_blank"
       className={buttonVariants({
         variant: "secondary",
-        className: "[&>p]:!font-semibold",
+        className: "[&>p]:font-semibold!",
       })}
     >
       Github
@@ -79,7 +78,7 @@ import {buttonVariants} from "@heroui/react";
       target="_blank"
       className={buttonVariants({
         variant: "secondary",
-        className: "[&>p]:!font-semibold",
+        className: "[&>p]:font-semibold!",
       })}
     >
       Discord
@@ -110,11 +109,16 @@ import {buttonVariants} from "@heroui/react";
 
 <br />
 
-
 export const currentDate = new Date();
-export const isoDate = currentDate.toISOString().split('T')[0];
-export const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-<div className="block text-xs [&>p]:text-default-400">
+export const isoDate = currentDate.toISOString().split("T")[0];
+
+export const formattedDate = currentDate.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+
+<div className="[&>p]:text-default-400 block text-xs">
   Last updated on <time dateTime={isoDate}>{formattedDate}</time>
 </div>

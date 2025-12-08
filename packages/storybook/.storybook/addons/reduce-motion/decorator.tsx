@@ -1,38 +1,21 @@
-import {addons, makeDecorator} from "@storybook/preview-api";
-import React, {useEffect, useState} from "react";
+import type {Decorator} from "@storybook/react";
 
-import {Emitter} from "../../constant";
+import {useGlobals} from "storybook/preview-api";
+import React, {useEffect} from "react";
 
-const ReduceMotionDecorator = ({children}) => {
-  const [reduceMotion, setReduceMotion] = useState(false);
+import {REDUCE_MOTION_GLOBAL_TYPE_ID} from "./constants";
+
+export const withReduceMotion: Decorator = (Story) => {
+  const [globals] = useGlobals();
+  const reduceMotion = globals[REDUCE_MOTION_GLOBAL_TYPE_ID] === "true";
 
   useEffect(() => {
-    const channel = addons.getChannel();
-
-    const updateReduceMotion = (val: boolean) => {
-      setReduceMotion(val);
-      // Update the data attribute on the root element
-      if (val) {
-        document.documentElement.setAttribute("data-reduce-motion", "true");
-      } else {
-        document.documentElement.removeAttribute("data-reduce-motion");
-      }
-    };
-
-    channel.on(Emitter.REDUCE_MOTION, updateReduceMotion);
-
-    return () => {
-      channel.removeListener(Emitter.REDUCE_MOTION, updateReduceMotion);
-      // Clean up on unmount
+    if (reduceMotion) {
+      document.documentElement.setAttribute("data-reduce-motion", "true");
+    } else {
       document.documentElement.removeAttribute("data-reduce-motion");
-    };
-  }, []);
+    }
+  }, [reduceMotion]);
 
-  return <>{children}</>;
+  return <Story />;
 };
-
-export const withReduceMotion = makeDecorator({
-  name: "withReduceMotion",
-  parameterName: "reduceMotion",
-  wrapper: (getStory, context) => <ReduceMotionDecorator>{getStory(context)}</ReduceMotionDecorator>,
-});
