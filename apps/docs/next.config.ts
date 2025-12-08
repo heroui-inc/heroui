@@ -10,12 +10,8 @@ const withMDX = createMDX();
 
 const config: NextConfig = {
   compress: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   experimental: {
     optimizePackageImports: ["@heroui/react"],
-    reactCompiler: true,
   },
   async headers() {
     return [
@@ -54,6 +50,7 @@ const config: NextConfig = {
       fullUrl: true,
     },
   },
+  reactCompiler: true,
   reactStrictMode: true,
   async redirects() {
     return [
