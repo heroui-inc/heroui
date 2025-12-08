@@ -1,12 +1,8 @@
-export const __DEV__ = process.env.NODE_ENV !== "production";
+export const I18N_ADDON_ID = "heroui-i18n-addon";
+export const I18N_GLOBAL_TYPE_ID = "heroui-i18n";
+export const I18N_PARAM_KEY = "heroui-i18n";
 
-export enum Emitter {
-  STRICT_MODE = "strict-mode",
-  INTERNATIONALIZATION = "internationalization",
-  REDUCE_MOTION = "reduce-motion",
-}
-
-export const locales = [
+export const LOCALES = [
   {
     country: "Auto",
     direction: "ltr",
@@ -230,3 +226,6 @@ export const locales = [
     value: "he-IL",
   },
 ];
+
+export const DEFAULT_LOCALE = "Auto";
+

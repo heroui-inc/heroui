@@ -1,19 +1,20 @@
-import {makeDecorator} from "@storybook/preview-api";
+import type {Decorator} from "@storybook/react";
+
+import {useGlobals} from "storybook/preview-api";
 import React, {useEffect} from "react";
 import {scan} from "react-scan";
 
-const ReactScanDecorator = ({children}) => {
+import {REACT_SCAN_GLOBAL_TYPE_ID} from "./constants";
+
+export const withReactScan: Decorator = (Story) => {
+  const [globals] = useGlobals();
+  const isEnabled = globals[REACT_SCAN_GLOBAL_TYPE_ID] === "true";
+
   useEffect(() => {
     scan({
-      enabled: true,
+      enabled: isEnabled,
     });
-  }, []);
+  }, [isEnabled]);
 
-  return children;
+  return <Story />;
 };
-
-export const withReactScan = makeDecorator({
-  name: "withReactScan",
-  parameterName: "reactScan",
-  wrapper: (getStory, context) => <ReactScanDecorator>{getStory(context)}</ReactScanDecorator>,
-});

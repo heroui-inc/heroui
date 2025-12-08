@@ -90,7 +90,7 @@ const lintStaged = {
     return [];
   },
 
-  "**/*.{html,css,scss,json,md}": async (files) => {
+  "**/*.{html,css,scss,json,jsonc,md,mdx}": async (files) => {
     return [`prettier --ignore-path .prettierignore --write ${files.join(" ")}`];
   },
 };

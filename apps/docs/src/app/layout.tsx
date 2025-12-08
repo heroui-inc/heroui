@@ -2,7 +2,7 @@ import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
 
 import {Analytics} from "@vercel/analytics/next";
-import {RootProvider} from "fumadocs-ui/provider";
+import {RootProvider} from "fumadocs-ui/provider/next";
 import {Inter} from "next/font/google";
 
 import {siteConfig} from "@/config/site";

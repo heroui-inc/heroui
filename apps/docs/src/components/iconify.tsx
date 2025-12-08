@@ -1,13 +1,45 @@
 import type {IconProps} from "@iconify/react";
 
 import {Icon} from "@iconify/react";
-import {Icon as OfflineIcon} from "@iconify/react/dist/offline";
 import gravityIcons from "@iconify-json/gravity-ui/icons.json";
 import {forwardRef} from "react";
 
 export type IconifyProps = IconProps & {
   icon?: IconProps["icon"] | string;
 };
+
+// Helper component to render SVG directly from icon data
+// This ensures consistent rendering between SSR and client
+// React 19 supports passing refs through props directly
+function SVGFromIconData({
+  iconData,
+  ref,
+  ...props
+}: {
+  iconData: {body: string; width?: number; height?: number};
+  ref?: React.Ref<SVGSVGElement>;
+} & Omit<IconProps, "icon">) {
+  const {className, height = "1em", style, width = "1em", ...restProps} = props;
+  const viewBox =
+    iconData.width && iconData.height ? `0 0 ${iconData.width} ${iconData.height}` : "0 0 16 16";
+
+  return (
+    <svg
+      ref={ref}
+      aria-hidden="true"
+      className={className}
+      height={height}
+      role="img"
+      style={style}
+      viewBox={viewBox}
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      {...restProps}
+      dangerouslySetInnerHTML={{__html: iconData.body}}
+    />
+  );
+}
 
 const customIcons = {
   "bulb-off": {
@@ -37,20 +69,20 @@ const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...pro
   const isGravityIcon =
     typeof iconProp === "string" && (iconProp in icons || iconProp.startsWith("gravity-ui:"));
 
-  // Only use offline icon after hydration to avoid mismatch
+  // For gravity-ui icons, render SVG directly from icon data
+  // This ensures consistent rendering between SSR and client, avoiding hydration mismatch
   if (isGravityIcon && typeof iconProp === "string") {
-    // Use offline version with gravity-ui icons
     // Remove "gravity-ui:" prefix if present
     const iconName = iconProp.replace(/^gravity-ui:/, "");
     const gravityIconData = icons[iconName as keyof typeof icons];
 
     if (gravityIconData) {
-      return <OfflineIcon {...props} ref={ref} icon={gravityIconData} />;
+      return <SVGFromIconData ref={ref} iconData={gravityIconData} {...props} />;
     }
   }
 
   // Use online version for other icon sets (like simple-icons:vite, lineicons:nextjs)
-  // Also use during SSR to ensure consistent rendering
+  // Icon component supports SSR, so this works consistently on both server and client
   return <Icon {...props} ref={ref} icon={iconProp} />;
 });
 
