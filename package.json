@@ -105,9 +105,15 @@
     "typescript-eslint": "8.45.0",
     "vitest": "3.2.4"
   },
+  "pnpm": {
+    "overrides": {
+      "shiki": "3.19.0",
+      "ts-morph": "27.0.2"
+    }
+  },
   "engines": {
     "node": ">=20.x",
     "pnpm": ">=10.x"
   },
-  "packageManager": "pnpm@10.20.0"
+  "packageManager": "pnpm@10.24.0"
 }
