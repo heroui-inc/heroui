@@ -94,31 +94,6 @@ HeroUI v2 provided custom text size utilities that mapped to CSS variables. v3 u
 | `text-medium` | 1rem (16px) | 1.5rem (24px) | `text-base` | 1rem (16px) | 1.5rem (24px) |
 | `text-large` | 1.125rem (18px) | 1.75rem (28px) | `text-lg` | 1.125rem (18px) | 1.75rem (28px) |
 
-**Migration Example:**
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button size="sm" className="text-tiny">
-      Small Button
-    </Button>
-    <p className="text-small text-foreground-400">
-      Helper text
-    </p>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button size="sm" className="text-xs">
-      Small Button
-    </Button>
-    <p className="text-sm text-muted">
-      Helper text
-    </p>
-    ```
-  </Tab>
-</Tabs>
-
 ### Border Radius Utilities
 
 v2 used custom border radius utilities (`rounded-small`, `rounded-medium`, `rounded-large`) that mapped to CSS variables. v3 uses standard Tailwind border radius classes, but the actual values differ.
@@ -162,31 +137,6 @@ v2 used custom border radius utilities (`rounded-small`, `rounded-medium`, `roun
 <div className="rounded-[14px]">Custom radius</div>
 ```
 
-**Migration Example:**
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button radius="sm" color="primary">
-      Button
-    </Button>
-    <Card radius="md">
-      <CardBody>Content</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button className="rounded-sm" variant="primary">
-      Button
-    </Button>
-    <Card className="rounded-md">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
 ### Border Width Utilities
 
 v2 provided custom border width utilities (`border-small`, `border-medium`, `border-large`). v3 uses standard Tailwind border width classes.
@@ -204,7 +154,7 @@ v2 provided custom border width utilities (`border-small`, `border-medium`, `bor
 
 ```tsx
 // v3 - Standard Tailwind classes
-<div className="border border-border">1px border</div>
+<div className="border border-default">1px border</div>
 <div className="border-2 border-accent">2px border</div>
 <div className="border-[3px] border-danger">3px border</div>
 ```
@@ -219,71 +169,26 @@ v2 provided custom border width utilities (`border-small`, `border-medium`, `bor
 
 ### Transition Utilities
 
-v2 provided custom transition utilities for common animation patterns. v3 removes these utilities in favor of standard CSS transitions.
+v2 provided custom transition utilities for common animation patterns with a default duration of 250ms. v3 removes these utilities in favor of standard Tailwind `transition-*` utilities, where you specify which properties to transition.
 
 **v2 Transition Utilities:**
 
-```tsx
-// v2 - Custom transition utilities
-<div className="transition-background">
-  Background transitions
-</div>
-<div className="transition-colors-opacity">
-  Colors and opacity transitions
-</div>
-<div className="transition-transform-colors-opacity">
-  Transform, colors, and opacity
-</div>
-```
+v2 provided custom transition utilities with a default duration of 250ms and `ease` timing function. The following table shows which CSS properties each utility transitions:
 
-**v3 Standard Transitions:**
+| v2 Utility | Transition Properties |
+|-----------|----------------------|
+| `.transition-background` | `background` |
+| `.transition-colors-opacity` | `color, background-color, border-color, text-decoration-color, fill, stroke, opacity` |
+| `.transition-width` | `width` |
+| `.transition-height` | `height` |
+| `.transition-size` | `width, height` |
+| `.transition-left` | `left` |
+| `.transition-transform-opacity` | `transform, scale, opacity rotate` |
+| `.transition-transform-background` | `transform, scale, background` |
+| `.transition-transform-colors` | `transform, scale, color, background, background-color, border-color, text-decoration-color, fill, stroke` |
+| `.transition-transform-colors-opacity` | `transform, scale, color, background, background-color, border-color, text-decoration-color, fill, stroke, opacity` |
 
-```tsx
-// v3 - Standard CSS transitions
-<div className="transition-colors duration-150">
-  Background transitions
-</div>
-<div className="transition-[colors,opacity] duration-150">
-  Colors and opacity transitions
-</div>
-<div className="transition-[transform,colors,opacity] duration-150">
-  Transform, colors, and opacity
-</div>
-```
-
-**Removed Utilities:**
-
-The following transition utilities are no longer available in v3:
-
-- `.transition-background` → Use `transition-colors`
-- `.transition-colors-opacity` → Use `transition-[colors,opacity]`
-- `.transition-width` → Use `transition-[width]`
-- `.transition-height` → Use `transition-[height]`
-- `.transition-size` → Use `transition-[width,height]`
-- `.transition-left` → Use `transition-[left]`
-- `.transition-transform-opacity` → Use `transition-[transform,opacity]`
-- `.transition-transform-background` → Use `transition-[transform,background-color]`
-- `.transition-transform-colors` → Use `transition-[transform,colors]`
-- `.transition-transform-colors-opacity` → Use `transition-[transform,colors,opacity]`
-
-**Migration Example:**
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button className="transition-transform-colors-opacity">
-      Animated Button
-    </Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button className="transition-[transform,colors,opacity] duration-150">
-      Animated Button
-    </Button>
-    ```
-  </Tab>
-</Tabs>
+**Note:** These utilities are no longer available in v3. Use Tailwind's standard `transition-*` utilities to specify which properties to transition.
 
 ### Other Utilities
 
@@ -1136,9 +1041,11 @@ v3 uses more consistent gap spacing:
 
 ### Issue: Transitions not working
 
-**Solution:** Replace custom transition utilities with standard Tailwind:
-- `.transition-background` → `transition-colors`
-- `.transition-colors-opacity` → `transition-[colors,opacity]`
+**Solution:** Replace custom transition utilities with standard Tailwind `transition-*` utilities. Add `duration-250 ease` to match v2's default 250ms duration and ease timing function. Note that v2 utilities transition many specific properties:
+
+- `.transition-background` → `transition-[background] duration-250 ease`
+- `.transition-colors-opacity` → `transition-[color,background-color,border-color,text-decoration-color,fill,stroke,opacity] duration-250 ease`
+- `.transition-transform-colors-opacity` → `transition-[transform,scale,color,background,background-color,border-color,text-decoration-color,fill,stroke,opacity] duration-250 ease`
 
 ## Best Practices
 
