@@ -180,8 +180,10 @@ The following props are no longer available on `Input` in v3:
     ```tsx
     <TextField name="price" type="number">
       <Label>Price</Label>
-      <span>$</span>
-      <Input />
+      <div className="flex items-center gap-2">
+        <span>$</span>
+        <Input className="flex-1" />
+      </div>
       <FieldError />
     </TextField>
     ```
