@@ -42,19 +42,17 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
   );
 
   return (
-    <InputGroupContext.Provider value={{slots}}>
+    <InputGroupContext value={{slots}}>
       <GroupPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
         data-slot="input-group"
       >
         {composeRenderProps(children, (children, renderProps) => (
-          <InputContext.Provider value={{disabled: renderProps.isDisabled}}>
-            {children}
-          </InputContext.Provider>
+          <InputContext value={{disabled: renderProps.isDisabled}}>{children}</InputContext>
         ))}
       </GroupPrimitive>
-    </InputGroupContext.Provider>
+    </InputGroupContext>
   );
 };
 

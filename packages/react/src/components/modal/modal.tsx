@@ -9,7 +9,6 @@ import type {
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {mergeProps} from "@react-aria/utils";
 import {createContext, useContext, useMemo} from "react";
 import {
@@ -21,7 +20,6 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {isNotAsChild} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
@@ -124,7 +122,7 @@ const ModalContainer = ({
   );
 
   return (
-    <ModalContext.Provider value={updatedModalContext}>
+    <ModalContext value={updatedModalContext}>
       <ModalOverlayPrimitive
         className={composeTwRenderProps(backdropClassName, updatedSlots?.backdrop())}
         data-slot="modal-backdrop"
@@ -139,7 +137,7 @@ const ModalContainer = ({
           {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
         </ModalPrimitive>
       </ModalOverlayPrimitive>
-    </ModalContext.Provider>
+    </ModalContext>
   );
 };
 
@@ -152,15 +150,11 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <SurfaceContext.Provider
-      value={{
-        variant: "default" as SurfaceVariants["variant"],
-      }}
-    >
+    <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
       <DialogPrimitive className={slots?.dialog({className})} data-slot="modal-dialog" {...props}>
         {children}
       </DialogPrimitive>
-    </SurfaceContext.Provider>
+    </SurfaceContext>
   );
 };
 
@@ -247,41 +241,21 @@ const ModalIcon = ({children, className, ...props}: ModalIconProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Close Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface ModalCloseTriggerProps {
-  asChild?: boolean;
+interface ModalCloseTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   className?: string;
   children?: ReactNode;
 }
 
-interface ModalCloseTrigger {
-  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ComponentPropsWithRef<typeof ButtonPrimitive>): React.JSX.Element;
-}
-
-const ModalCloseTrigger: ModalCloseTrigger = (props) => {
+const ModalCloseTrigger = ({className, ...rest}: ModalCloseTriggerProps) => {
   const {slots} = useContext(ModalContext);
 
-  if (isNotAsChild(props)) {
-    const {className, ...rest} = props;
-
-    return (
-      <CloseButton
-        className={composeTwRenderProps(className, slots?.closeTrigger())}
-        data-slot="modal-close-trigger"
-        slot="close"
-        {...rest}
-      />
-    );
-  }
-
-  const {asChild: _asChild, children, className, ...rest} = props;
-
   return (
-    <SlotPrimitive data-slot="modal-close-trigger" slot="close" {...rest}>
-      {children ?? (
-        <CloseButton className={composeTwRenderProps(className, slots?.closeTrigger())} />
-      )}
-    </SlotPrimitive>
+    <CloseButton
+      className={composeTwRenderProps(className, slots?.closeTrigger())}
+      data-slot="modal-close-trigger"
+      slot="close"
+      {...rest}
+    />
   );
 };
 

@@ -1,13 +1,12 @@
 "use client";
 
 import type {AlertDialogVariants} from "./alert-dialog.styles";
-import type {ComponentPropsWithRef, HTMLAttributes, ReactNode} from "react";
+import type {ComponentPropsWithRef, HTMLAttributes} from "react";
 import type {
   ButtonProps as ButtonPrimitiveProps,
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {createContext, useContext, useMemo} from "react";
 import {
   DialogTrigger as AlertDialogTriggerPrimitive,
@@ -18,7 +17,6 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {isNotAsChild} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
@@ -287,41 +285,18 @@ const AlertDialogIcon = ({
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Close Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogCloseTriggerProps {
-  asChild?: boolean;
-  className?: string;
-  children?: ReactNode;
-}
+interface AlertDialogCloseTriggerProps extends ButtonPrimitiveProps {}
 
-interface AlertDialogCloseTrigger {
-  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
-}
-
-const AlertDialogCloseTrigger: AlertDialogCloseTrigger = (props) => {
+const AlertDialogCloseTrigger = ({className, ...rest}: AlertDialogCloseTriggerProps) => {
   const {slots} = useContext(AlertDialogContext);
 
-  if (isNotAsChild(props)) {
-    const {className, ...rest} = props;
-
-    return (
-      <CloseButton
-        className={composeTwRenderProps(className, slots?.closeTrigger())}
-        data-slot="alert-dialog-close-trigger"
-        slot="close"
-        {...rest}
-      />
-    );
-  }
-
-  const {asChild: _asChild, children, className, ...rest} = props;
-
   return (
-    <SlotPrimitive data-slot="alert-dialog-close-trigger" slot="close" {...rest}>
-      {children ?? (
-        <CloseButton className={composeTwRenderProps(className, slots?.closeTrigger())} />
-      )}
-    </SlotPrimitive>
+    <CloseButton
+      className={composeTwRenderProps(className, slots?.closeTrigger())}
+      data-slot="alert-dialog-close-trigger"
+      slot="close"
+      {...rest}
+    />
   );
 };
 

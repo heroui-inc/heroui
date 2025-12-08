@@ -5,7 +5,6 @@ import type {UseImageProps} from "../../hooks";
 import type {ComponentPropsWithRef} from "react";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
 import {useImage} from "../../hooks";
@@ -46,14 +45,12 @@ const AvatarRoot = ({children, className, color, size, variant, ...props}: Avata
  * -----------------------------------------------------------------------------------------------*/
 interface AvatarImageProps
   extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Image>, "onLoadingStatusChange"> {
-  asChild?: boolean;
   ignoreFallback?: UseImageProps["ignoreFallback"];
   shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
   onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
 }
 
 const AvatarImage = ({
-  asChild = false,
   className,
   crossOrigin,
   ignoreFallback,
@@ -68,11 +65,6 @@ const AvatarImage = ({
   ...props
 }: AvatarImageProps) => {
   const {slots} = React.useContext(AvatarContext);
-  const Comp = asChild ? SlotPrimitive : AvatarPrimitive.Image;
-
-  if (asChild) {
-    return <Comp className={slots?.image({className})} {...props} data-loaded />;
-  }
 
   const loadingStatus = useImage({
     src: typeof src === "string" ? src : undefined,
@@ -88,7 +80,7 @@ const AvatarImage = ({
   });
 
   return (
-    <Comp
+    <AvatarPrimitive.Image
       className={slots?.image({className})}
       crossOrigin={crossOrigin}
       data-loaded={dataAttr(loadingStatus === "loaded")}

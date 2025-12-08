@@ -3,7 +3,6 @@
 import type {LinkVariants} from "./link.styles";
 import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {Link as LinkPrimitive} from "react-aria-components";
 
@@ -25,43 +24,13 @@ const LinkContext = createContext<LinkContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Link Root
  * --------------------------------------------------------------------------------------------- */
-interface LinkRootProps extends ComponentPropsWithRef<typeof LinkPrimitive>, LinkVariants {
-  asChild?: boolean;
-}
+interface LinkRootProps extends ComponentPropsWithRef<typeof LinkPrimitive>, LinkVariants {}
 
-const LinkRoot = ({
-  asChild,
-  children,
-  className,
-  slot,
-  style,
-  underline,
-  underlineOffset,
-  ...props
-}: LinkRootProps) => {
+const LinkRoot = ({children, className, underline, underlineOffset, ...props}: LinkRootProps) => {
   const slots = React.useMemo(
     () => linkVariants({underline, underlineOffset}),
     [underline, underlineOffset],
   );
-
-  const styles = slots?.base({
-    className: typeof className === "string" ? className : undefined,
-  });
-
-  if (asChild) {
-    return (
-      <LinkContext value={{slots}}>
-        <SlotPrimitive
-          className={styles}
-          slot={slot as string}
-          style={style as React.CSSProperties}
-          {...(props as any)}
-        >
-          {typeof children === "function" ? children({} as any) : children}
-        </SlotPrimitive>
-      </LinkContext>
-    );
-  }
 
   return (
     <LinkContext value={{slots}}>
@@ -75,23 +44,20 @@ const LinkRoot = ({
 /* ------------------------------------------------------------------------------------------------
  * Link Icon
  * --------------------------------------------------------------------------------------------- */
-type LinkIconProps = ComponentPropsWithRef<"span"> & {
-  asChild?: boolean;
-};
+type LinkIconProps = ComponentPropsWithRef<"span">;
 
-const LinkIcon = ({asChild, children, className, ...rest}: LinkIconProps) => {
+const LinkIcon = ({children, className, ...rest}: LinkIconProps) => {
   const {slots} = useContext(LinkContext);
-  const Component = asChild ? SlotPrimitive : "span";
 
   return (
-    <Component
+    <span
       className={slots?.icon({className})}
       data-default-icon={dataAttr(!children)}
       data-slot="link-icon"
       {...rest}
     >
       {children ?? <ExternalLinkIcon data-slot="link-default-icon" />}
-    </Component>
+    </span>
   );
 };
 

@@ -5,7 +5,6 @@ import type {SurfaceVariants} from "../surface";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -16,7 +15,6 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
-import {isNotAsChild} from "../../utils/props";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -48,7 +46,7 @@ const ComboBoxRoot = <T extends object = object>({
   const slots = React.useMemo(() => comboboxVariants(), []);
 
   return (
-    <ComboBoxContext.Provider value={{slots}}>
+    <ComboBoxContext value={{slots}}>
       <ComboBoxPrimitive
         data-slot="combobox"
         {...props}
@@ -56,7 +54,7 @@ const ComboBoxRoot = <T extends object = object>({
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </ComboBoxPrimitive>
-    </ComboBoxContext.Provider>
+    </ComboBoxContext>
   );
 };
 
@@ -79,50 +77,24 @@ const ComboBoxInputGroup = ({children, className, ...props}: ComboBoxInputGroupP
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface ComboBoxTriggerProps {
-  asChild?: boolean;
+interface ComboBoxTriggerProps extends ButtonProps {
   className?: string;
   children?: ReactNode;
 }
 
-interface ComboBoxTrigger {
-  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ButtonProps): React.JSX.Element;
-}
-
-const ComboBoxTrigger: ComboBoxTrigger = (props) => {
+const ComboBoxTrigger = ({children, className, ...rest}: ComboBoxTriggerProps) => {
   const {slots} = useContext(ComboBoxContext);
   const state = useContext(ComboBoxStateContext);
 
-  if (isNotAsChild(props)) {
-    const {children, className, ...rest} = props;
-
-    return (
-      <Button
-        className={composeTwRenderProps(className, slots?.trigger())}
-        data-open={dataAttr(state?.isOpen)}
-        data-slot="combobox-trigger"
-        {...rest}
-      >
-        {children ?? <IconChevronDown data-slot="combobox-trigger-default-icon" />}
-      </Button>
-    );
-  }
-
-  const {asChild: _asChild, children, className, ...rest} = props;
-
   return (
-    <SlotPrimitive data-open={dataAttr(state?.isOpen)} data-slot="combobox-trigger" {...rest}>
-      {children ?? (
-        <Button
-          className={composeTwRenderProps(className, slots?.trigger())}
-          data-open={dataAttr(state?.isOpen)}
-          data-slot="combobox-trigger-button"
-        >
-          <IconChevronDown data-slot="combobox-trigger-default-icon" />
-        </Button>
-      )}
-    </SlotPrimitive>
+    <Button
+      className={composeTwRenderProps(className, slots?.trigger())}
+      data-open={dataAttr(state?.isOpen)}
+      data-slot="combobox-trigger"
+      {...rest}
+    >
+      {children ?? <IconChevronDown data-slot="combobox-trigger-default-icon" />}
+    </Button>
   );
 };
 
@@ -143,7 +115,7 @@ const ComboBoxPopover = ({
   const {slots} = useContext(ComboBoxContext);
 
   return (
-    <SurfaceContext.Provider
+    <SurfaceContext
       value={{
         variant: "default" as SurfaceVariants["variant"],
       }}
@@ -155,7 +127,7 @@ const ComboBoxPopover = ({
       >
         {children}
       </PopoverPrimitive>
-    </SurfaceContext.Provider>
+    </SurfaceContext>
   );
 };
 

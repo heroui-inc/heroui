@@ -55,7 +55,7 @@ const AccordionRoot = ({children, className, ...originalProps}: AccordionRootPro
     <AccordionContext value={{slots}}>
       {variant === "surface" ? (
         // Allows inner components to apply "on-surface" colors for proper contrast
-        <SurfaceContext.Provider value={{variant: "default"}}>{content}</SurfaceContext.Provider>
+        <SurfaceContext value={{variant: "default"}}>{content}</SurfaceContext>
       ) : (
         content
       )}

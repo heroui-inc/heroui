@@ -62,7 +62,7 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
 
   return (
     <PopoverContext value={{slots}}>
-      <SurfaceContext.Provider
+      <SurfaceContext
         value={{
           variant: "default" as SurfaceVariants["variant"],
         }}
@@ -70,7 +70,7 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
         <PopoverPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
           {children}
         </PopoverPrimitive>
-      </SurfaceContext.Provider>
+      </SurfaceContext>
     </PopoverContext>
   );
 };

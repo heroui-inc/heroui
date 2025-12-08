@@ -43,7 +43,7 @@ const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFie
   );
 
   return (
-    <NumberFieldContext.Provider value={{slots}}>
+    <NumberFieldContext value={{slots}}>
       <NumberFieldPrimitive
         data-slot="number-field"
         {...props}
@@ -51,7 +51,7 @@ const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFie
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </NumberFieldPrimitive>
-    </NumberFieldContext.Provider>
+    </NumberFieldContext>
   );
 };
 

@@ -53,7 +53,7 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
   );
 
   return (
-    <SelectContext.Provider value={{slots}}>
+    <SelectContext value={{slots}}>
       <SelectPrimitive
         data-slot="select"
         {...props}
@@ -61,7 +61,7 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </SelectPrimitive>
-    </SelectContext.Provider>
+    </SelectContext>
   );
 };
 
@@ -157,7 +157,7 @@ const SelectPopover = ({
   const {slots} = useContext(SelectContext);
 
   return (
-    <SurfaceContext.Provider
+    <SurfaceContext
       value={{
         variant: "default" as SurfaceVariants["variant"],
       }}
@@ -169,7 +169,7 @@ const SelectPopover = ({
       >
         {children}
       </PopoverPrimitive>
-    </SurfaceContext.Provider>
+    </SurfaceContext>
   );
 };
 
