@@ -85,7 +85,14 @@ import { Button } from "@heroui/react";
 **v2:** Used `isLoading` prop  
 **v3:** Uses `isPending` prop
 
-### 4. Removed Props
+### 4. Default Width Behavior
+
+**v2:** Buttons had minimum widths based on size (`min-w-16` for sm, `min-w-20` for md, `min-w-24` for lg)  
+**v3:** Buttons use `w-fit` by default (width fits content, no minimum width)
+
+This means v3 buttons will be narrower than v2 buttons when they have short text. To maintain v2's minimum width behavior, add Tailwind classes see the [Minimum Width](#minimum-width) example section.
+
+### 5. Removed Props
 
 The following props are no longer available in v3:
 
@@ -98,7 +105,7 @@ The following props are no longer available in v3:
 - `disableAnimation` - Animations are handled internally
 - `classNames` - Use `className` prop instead
 
-### 5. ButtonGroup Removed
+### 6. ButtonGroup Removed
 
 **v2:** Had a dedicated `ButtonGroup` component  
 **v3:** No `ButtonGroup` component - create groups manually with CSS classes
@@ -423,6 +430,29 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Minimum Width
+
+If you need to maintain v2's minimum width behavior:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 automatically applies minimum widths */}
+    <Button size="sm">OK</Button>
+    <Button size="md">Save</Button>
+    <Button size="lg">Submit</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Add min-width classes to match v2 behavior */}
+    <Button size="sm" className="min-w-16">OK</Button>
+    <Button size="md" className="min-w-20">Save</Button>
+    <Button size="lg" className="min-w-24">Submit</Button>
+    ```
+  </Tab>
+</Tabs>
+
 ## Render Props Pattern
 
 v3 Button supports a render prop pattern that provides state information:
@@ -452,23 +482,25 @@ Available render props:
 2. **Color Prop Removed**: Use `variant` prop instead of `color` + `variant`
 3. **Variants Changed**: New variant system (`primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-soft`)
 4. **isLoading → isPending**: Loading prop renamed
-5. **Icons**: `startContent`/`endContent` removed - place icons as children
-6. **Loading Spinner**: Must handle spinner manually with render props
-7. **Radius Removed**: Use Tailwind CSS classes
-8. **FullWidth Removed**: Use Tailwind `w-full` class
-9. **Ripple Removed**: No ripple effect in v3
-10. **ButtonGroup Removed**: Create groups manually with CSS
-11. **ClassNames Removed**: Use `className` prop
+5. **Default Width Changed**: Buttons now use `w-fit` instead of minimum widths - add `min-w-*` classes to match v2 behavior
+6. **Icons**: `startContent`/`endContent` removed - place icons as children
+7. **Loading Spinner**: Must handle spinner manually with render props
+8. **Radius Removed**: Use Tailwind CSS classes
+9. **FullWidth Removed**: Use Tailwind `w-full` class
+10. **Ripple Removed**: No ripple effect in v3
+11. **ButtonGroup Removed**: Create groups manually with CSS
+12. **ClassNames Removed**: Use `className` prop
 
 ## Tips for Migration
 
 1. **Replace onClick**: Change all `onClick` handlers to `onPress`
 2. **Map variants**: Use the variant mapping table to find equivalent v3 variants
 3. **Handle loading**: Use render props pattern for loading states with spinners
-4. **Icons as children**: Move icons from `startContent`/`endContent` to direct children
-5. **Use Tailwind**: Many removed props can be replaced with Tailwind utility classes
-6. **Button groups**: Use flexbox and border utilities to create button groups
-7. **Custom colors**: For success/warning colors, use `variant="primary"` with custom Tailwind classes
+4. **Check button widths**: If buttons appear narrower than expected, add `min-w-16` (sm), `min-w-20` (md), or `min-w-24` (lg) classes to match v2 behavior
+5. **Icons as children**: Move icons from `startContent`/`endContent` to direct children
+6. **Use Tailwind**: Many removed props can be replaced with Tailwind utility classes
+7. **Button groups**: Use flexbox and border utilities to create button groups
+8. **Custom colors**: For success/warning colors, use `variant="primary"` with custom Tailwind classes
 
 ## Need Help?
 
