@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/immutability */
 "use client";
 
 import type {ImgHTMLAttributes, SyntheticEvent} from "react";
@@ -95,6 +96,22 @@ export function useImage(props: UseImageProps = {}) {
 
   const [status, setStatus] = useState<ImgLoadingStatus>("pending");
 
+  useEffect(() => {
+    if (!imageRef.current) return;
+    imageRef.current.onload = (event) => {
+      flush();
+      setStatus("loaded");
+      onLoadingStatusChange?.("loaded");
+      onLoad?.(event as unknown as ImageEvent);
+    };
+    imageRef.current.onerror = (error) => {
+      flush();
+      setStatus("failed");
+      onLoadingStatusChange?.("failed");
+      onError?.(error as any);
+    };
+  }, [imageRef.current]);
+
   const flush = () => {
     if (imageRef.current) {
       imageRef.current.onload = null;
@@ -102,25 +119,6 @@ export function useImage(props: UseImageProps = {}) {
       imageRef.current = null;
     }
   };
-
-  useEffect(() => {
-    const img = imageRef.current;
-
-    if (!img) return;
-
-    img.onload = (event) => {
-      flush();
-      setStatus("loaded");
-      onLoadingStatusChange?.("loaded");
-      onLoad?.(event as unknown as ImageEvent);
-    };
-    img.onerror = (error) => {
-      flush();
-      setStatus("failed");
-      onLoadingStatusChange?.("failed");
-      onError?.(error as any);
-    };
-  }, [onLoad, onError, onLoadingStatusChange]);
 
   const load = useCallback((): ImgLoadingStatus => {
     if (!src) return "pending";
@@ -140,17 +138,7 @@ export function useImage(props: UseImageProps = {}) {
     }
 
     return "loading";
-  }, [
-    src,
-    crossOrigin,
-    srcSet,
-    sizes,
-    onLoad,
-    onError,
-    loading,
-    ignoreFallback,
-    shouldBypassImageLoad,
-  ]);
+  }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading, shouldBypassImageLoad]);
 
   useSafeLayoutEffect(() => {
     if (isHydrated) {
