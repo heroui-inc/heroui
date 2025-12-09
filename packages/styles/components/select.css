@@ -19,7 +19,7 @@
 }
 
 .select__trigger {
-  @apply bg-field text-field-foreground shadow-field rounded-field relative isolate inline-flex min-h-9 select-none border px-3 py-2 text-sm outline-none;
+  @apply relative isolate inline-flex min-h-9 rounded-field border bg-field px-3 py-2 text-sm text-field-foreground shadow-field outline-none select-none;
 
   /**
    * Transitions
@@ -117,7 +117,7 @@
 }
 
 .select__indicator {
-  @apply text-field-placeholder absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center transition duration-150;
+  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150 will-change-transform;
 
   &[data-open] {
     @apply rotate-180;
@@ -130,7 +130,7 @@
 
 /* Similar to popover content styles */
 .select__popover {
-  @apply min-w-(--trigger-width) bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  @apply min-w-(--trigger-width) origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
@@ -141,7 +141,7 @@
 
   /* Entering animations */
   &[data-entering] {
-    @apply animate-in zoom-in-95 fade-in-0 ease-fluid-out duration-250;
+    @apply animate-in duration-250 ease-fluid-out fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -163,7 +163,7 @@
 
   /* Exiting animations */
   &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
+    @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
   /* Arrow styling */
