@@ -5,7 +5,7 @@ import {tv} from "tailwind-variants";
 export const alertDialogVariants = tv({
   defaultVariants: {
     status: "danger",
-    variant: "solid",
+    variant: "opaque",
   },
   slots: {
     body: "alert-dialog__body",
@@ -44,8 +44,8 @@ export const alertDialogVariants = tv({
       blur: {
         backdrop: "alert-dialog__backdrop--blur",
       },
-      solid: {
-        backdrop: "alert-dialog__backdrop--solid",
+      opaque: {
+        backdrop: "alert-dialog__backdrop--opaque",
       },
     },
   },
