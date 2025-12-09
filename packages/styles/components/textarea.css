@@ -17,18 +17,24 @@
   @apply motion-reduce:transition-none;
 
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
+    &:hover:not(:focus):not(:focus-visible),
+    &[data-hovered]:not([data-focused]):not([data-focus-visible]) {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
   }
 
-  &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  /* Focus state */
+  &:focus,
+  &[data-focused] {
     @apply status-focused-field;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
+  }
+
+  /* Focus visible state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible] {
   }
 
   &[data-invalid] {
@@ -48,14 +54,20 @@
   @apply bg-on-surface shadow-none;
 
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
+    &:hover:not(:focus):not(:focus-visible),
+    &[data-hovered]:not([data-focus-visible]) {
       @apply bg-on-surface-hover;
     }
   }
 
+  /* Focus state */
+  &:focus,
+  &[data-focused] {
+    background-color: var(--color-on-surface-focus);
+  }
+
+  /* Focus visible state */
   &:focus-visible:not(:focus),
   &[data-focus-visible] {
-    background-color: var(--color-on-surface-focus);
   }
 }

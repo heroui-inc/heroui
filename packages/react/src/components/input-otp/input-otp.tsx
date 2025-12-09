@@ -66,7 +66,7 @@ const InputOTPRoot = ({
         validationErrors,
         validationDetails,
       }) as ValidationResult,
-    [isInvalid],
+    [isInvalid, validationErrors, validationDetails],
   );
 
   return (

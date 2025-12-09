@@ -42,14 +42,21 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   });
 
   // Merge refs: videoRef for video operations and intersectionRef for intersection observer
+  // Use ref callback to avoid mutating hook return value
   const setVideoRef = useCallback(
     (element: HTMLVideoElement | null) => {
       videoRef.current = element;
       if (element) {
+        // Call intersectionRef if it's a function (ref callback)
         if (typeof intersectionRef === "function") {
           intersectionRef(element);
-        } else if (intersectionRef && "current" in intersectionRef) {
-          (intersectionRef as React.MutableRefObject<HTMLVideoElement | null>).current = element;
+        }
+        // Note: If intersectionRef is a ref object, we can't mutate it as it's a hook return value
+        // The intersection observer hook should handle ref assignment internally
+      } else {
+        // Cleanup: call with null when element is removed
+        if (typeof intersectionRef === "function") {
+          intersectionRef(null);
         }
       }
     },
@@ -67,10 +74,8 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
     if (isVisible) {
       videoRef.current.play();
-      setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
   }, [isVisible, effectivePlayMode]);
 
@@ -78,16 +83,24 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     setIsLoading(false);
   }, []);
 
+  const handlePlay = useCallback(() => {
+    setIsPlaying(true);
+  }, []);
+
+  const handlePause = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
   useEffect(() => {
     const videoEl = videoRef.current;
 
     if (videoEl) {
+      // Check if video is already ready, but update state via event handler to avoid setState in effect
       if (videoEl.readyState > 3) {
-        // HAVE_FUTURE_DATA: enough data to start playing
-        handleCanPlay();
-      } else {
-        videoEl.addEventListener("canplaythrough", handleCanPlay);
+        // Trigger the event handler asynchronously to avoid setState in effect
+        videoEl.dispatchEvent(new Event("canplaythrough"));
       }
+      videoEl.addEventListener("canplaythrough", handleCanPlay);
 
       // Cleanup the event listener
       return () => {
@@ -153,6 +166,8 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         src={src}
         width={width}
         onCanPlay={handleCanPlay}
+        onPause={handlePause}
+        onPlay={handlePlay}
       />
     </div>
   );

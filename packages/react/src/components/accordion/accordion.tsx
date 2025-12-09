@@ -14,7 +14,6 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
@@ -30,15 +29,8 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
 interface AccordionRootProps
   extends ComponentPropsWithRef<typeof DisclosureGroup>, AccordionVariants {}
 
-const AccordionRoot = ({children, className, ...originalProps}: AccordionRootProps) => {
-  const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);
-
-  const slots = React.useMemo(
-    () => accordionVariants({...(variantProps as AccordionVariants)}),
-    [objectToDeps(variantProps)],
-  );
-
-  const variant = (variantProps as AccordionVariants)?.variant ?? "default";
+const AccordionRoot = ({children, className, variant, ...props}: AccordionRootProps) => {
+  const slots = React.useMemo(() => accordionVariants({variant}), [variant]);
 
   const content = (
     <DisclosureGroup

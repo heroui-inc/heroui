@@ -6,7 +6,6 @@ import type {ComponentPropsWithRef} from "react";
 import React, {createContext} from "react";
 import {DisclosureGroup as DisclosureGroupPrimitive} from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {disclosureGroupVariants} from "./disclosure-group.styles";
@@ -26,16 +25,8 @@ const DisclosureGroupContext = createContext<DisclosureGroupContext>({});
 interface DisclosureGroupRootProps
   extends ComponentPropsWithRef<typeof DisclosureGroupPrimitive>, DisclosureGroupVariants {}
 
-const DisclosureGroupRoot = ({children, className, ...originalProps}: DisclosureGroupRootProps) => {
-  const [props, variantProps] = mapPropsVariants(
-    originalProps,
-    disclosureGroupVariants.variantKeys,
-  );
-
-  const slots = React.useMemo(
-    () => disclosureGroupVariants({...(variantProps as DisclosureGroupVariants)}),
-    [objectToDeps(variantProps)],
-  );
+const DisclosureGroupRoot = ({children, className, ...props}: DisclosureGroupRootProps) => {
+  const slots = React.useMemo(() => disclosureGroupVariants({}), []);
 
   return (
     <DisclosureGroupContext value={{slots}}>

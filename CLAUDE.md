@@ -277,7 +277,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - `focusRingClasses`: Consistent focus styling
    - `disabledClasses`: Disabled state styling
    - `mapPropsVariants`: Separate variant props from component props
-   - `objectToDeps`: Convert objects to dependency arrays for memoization
 
 5. **React Aria Components className Patterns**:
 
