@@ -62,9 +62,6 @@
   /* Focus state */
   &:focus,
   &[data-focus] {
-    @apply status-focused;
-    border-color: var(--color-field-border-focus);
-    background-color: var(--color-field-focus);
   }
 
   /* Invalid state */
@@ -99,7 +96,6 @@
 
   &:focus,
   &[data-focus] {
-    background-color: var(--color-on-surface-focus);
   }
 }
 
