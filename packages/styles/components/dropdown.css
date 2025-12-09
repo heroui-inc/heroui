@@ -48,7 +48,7 @@
 
 /* Similar to select popover styles */
 .dropdown__popover {
-  @apply bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  @apply origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-transform;
   box-shadow: var(--shadow-overlay);
   min-width: 220px;
 
@@ -60,7 +60,7 @@
 
   /* Entering animations */
   &[data-entering] {
-    @apply animate-in zoom-in-90 fade-in-0 ease-fluid-out duration-250;
+    @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-90;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -82,7 +82,7 @@
 
   /* Exiting animations */
   &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
+    @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
   /* Arrow styling */

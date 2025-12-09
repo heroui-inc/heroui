@@ -25,7 +25,7 @@ export function CustomAnimations() {
         "data-[entering]:animate-in",
         "data-[entering]:slide-in-from-bottom-4",
         "data-[entering]:fade-in-0",
-        "data-[entering]:ease-fluid-out",
+        "data-[entering]:ease-out-fluid",
         "data-[exiting]:animate-out",
         "data-[exiting]:slide-out-to-bottom-2",
         "data-[exiting]:fade-out-0",

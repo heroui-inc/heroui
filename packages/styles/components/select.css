@@ -126,7 +126,7 @@
 
 /* Similar to popover content styles */
 .select__popover {
-  @apply min-w-(--trigger-width) origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
@@ -137,7 +137,7 @@
 
   /* Entering animations */
   &[data-entering] {
-    @apply animate-in duration-250 ease-fluid-out fade-in-0 zoom-in-95;
+    @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
     &[data-placement="top"] {

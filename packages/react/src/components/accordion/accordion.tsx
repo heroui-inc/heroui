@@ -28,8 +28,7 @@ const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVaria
  * Accordion Root
  * -----------------------------------------------------------------------------------------------*/
 interface AccordionRootProps
-  extends ComponentPropsWithRef<typeof DisclosureGroup>,
-    AccordionVariants {}
+  extends ComponentPropsWithRef<typeof DisclosureGroup>, AccordionVariants {}
 
 const AccordionRoot = ({children, className, ...originalProps}: AccordionRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, accordionVariants.variantKeys);

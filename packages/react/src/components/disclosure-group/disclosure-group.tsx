@@ -24,8 +24,7 @@ const DisclosureGroupContext = createContext<DisclosureGroupContext>({});
  * Disclosure Group Root
  * -----------------------------------------------------------------------------------------------*/
 interface DisclosureGroupRootProps
-  extends ComponentPropsWithRef<typeof DisclosureGroupPrimitive>,
-    DisclosureGroupVariants {}
+  extends ComponentPropsWithRef<typeof DisclosureGroupPrimitive>, DisclosureGroupVariants {}
 
 const DisclosureGroupRoot = ({children, className, ...originalProps}: DisclosureGroupRootProps) => {
   const [props, variantProps] = mapPropsVariants(

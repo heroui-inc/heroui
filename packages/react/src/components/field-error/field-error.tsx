@@ -13,8 +13,7 @@ import {fieldErrorVariants} from "./field-error.styles";
  * Field Error Root
  * -----------------------------------------------------------------------------------------------*/
 interface FieldErrorRootProps
-  extends ComponentPropsWithRef<typeof FieldErrorPrimitive>,
-    FieldErrorVariants {}
+  extends ComponentPropsWithRef<typeof FieldErrorPrimitive>, FieldErrorVariants {}
 
 const FieldErrorRoot = ({children, className, ...rest}: FieldErrorRootProps) => {
   return (

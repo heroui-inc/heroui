@@ -23,7 +23,7 @@ export function CustomStyles() {
 
       {/* Gradient border */}
       <Avatar className="bg-gradient-to-tr from-pink-500 to-yellow-500 p-0.5">
-        <div className="bg-background size-full rounded-full p-0.5">
+        <div className="size-full rounded-full bg-background p-0.5">
           <Avatar.Image
             alt="Gradient Border"
             className="rounded-full"
@@ -42,7 +42,7 @@ export function CustomStyles() {
           />
           <Avatar.Fallback>ON</Avatar.Fallback>
         </Avatar>
-        <span className="ring-background absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2" />
+        <span className="absolute right-0 bottom-0 size-3 rounded-full bg-green-500 ring-2 ring-background" />
       </div>
     </div>
   );

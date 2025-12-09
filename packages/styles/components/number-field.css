@@ -19,7 +19,7 @@
 }
 
 .number-field__group {
-  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -84,7 +84,7 @@
 
 .number-field__increment-button,
 .number-field__decrement-button {
-  @apply text-field-foreground flex h-full w-10 items-center justify-center rounded-none bg-transparent outline-none;
+  @apply flex h-full w-10 items-center justify-center rounded-none bg-transparent text-field-foreground outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
   border-style: solid;
@@ -133,11 +133,11 @@
 }
 
 .number-field__increment-button {
-  @apply rounded-r-field border-field-placeholder/15 rounded-l-none border-l;
+  @apply rounded-l-none rounded-r-field border-l border-field-placeholder/15;
 }
 
 .number-field__decrement-button {
-  @apply rounded-l-field border-field-placeholder/15 rounded-r-none border-r;
+  @apply rounded-l-field rounded-r-none border-r border-field-placeholder/15;
 }
 
 /* On Surface variant */

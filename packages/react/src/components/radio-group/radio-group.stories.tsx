@@ -111,7 +111,7 @@ export const WithCustomIndicator: Story = {
           <Radio.Control>
             <Radio.Indicator>
               {({isSelected}) =>
-                isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
+                isSelected ? <span className="text-xs leading-none text-background">✓</span> : null
               }
             </Radio.Indicator>
           </Radio.Control>
@@ -124,7 +124,7 @@ export const WithCustomIndicator: Story = {
           <Radio.Control>
             <Radio.Indicator>
               {({isSelected}) =>
-                isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
+                isSelected ? <span className="text-xs leading-none text-background">✓</span> : null
               }
             </Radio.Indicator>
           </Radio.Control>
@@ -137,7 +137,7 @@ export const WithCustomIndicator: Story = {
           <Radio.Control>
             <Radio.Indicator>
               {({isSelected}) =>
-                isSelected ? <span className="text-background text-xs leading-none">✓</span> : null
+                isSelected ? <span className="text-xs leading-none text-background">✓</span> : null
               }
             </Radio.Indicator>
           </Radio.Control>
@@ -275,7 +275,7 @@ export const Controlled: Story = {
             </Radio.Content>
           </Radio>
         </RadioGroup>
-        <p className="text-muted mt-2 text-sm">
+        <p className="mt-2 text-sm text-muted">
           Selected plan: <span className="font-medium">{value}</span>
         </p>
       </div>
@@ -323,7 +323,7 @@ export const Uncontrolled: Story = {
             </Radio.Content>
           </Radio>
         </RadioGroup>
-        <p className="text-muted mt-2 text-sm">
+        <p className="mt-2 text-sm text-muted">
           Last chosen plan: <span className="font-medium">{selection}</span>
         </p>
       </div>
@@ -424,11 +424,11 @@ export const DeliveryAndPaymentExample: Story = {
                   key={option.value}
                   value={option.value}
                   className={clsx(
-                    "bg-surface-tertiary data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
+                    "group relative flex-col gap-4 rounded-xl bg-surface-tertiary px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                     "data-[focus-visible=true]:bg-accent/10",
                   )}
                 >
-                  <Radio.Control className="absolute right-4 top-3 size-5">
+                  <Radio.Control className="absolute top-3 right-4 size-5">
                     <Radio.Indicator />
                   </Radio.Control>
                   <Radio.Content className="flex flex-col gap-6">
@@ -454,15 +454,15 @@ export const DeliveryAndPaymentExample: Story = {
                   key={option.value}
                   value={option.value}
                   className={clsx(
-                    "bg-surface-tertiary group relative flex-col gap-4 rounded-xl px-5 py-4 transition-all",
+                    "group relative flex-col gap-4 rounded-xl bg-surface-tertiary px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
                   )}
                 >
-                  <Radio.Control className="absolute right-4 top-3 size-5">
+                  <Radio.Control className="absolute top-3 right-4 size-5">
                     <Radio.Indicator />
                   </Radio.Control>
                   <Radio.Content className="flex flex-row items-start justify-start gap-4">
-                    <Icon className="text-accent size-6" icon={option.icon} />
+                    <Icon className="size-6 text-accent" icon={option.icon} />
                     <div className="flex flex-col gap-1">
                       <Label>{option.title}</Label>
                       <Description>{option.description}</Description>

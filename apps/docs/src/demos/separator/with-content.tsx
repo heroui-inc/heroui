@@ -28,7 +28,7 @@ export function WithContent() {
             <img alt={item.title} className="size-12" src={item.iconUrl} />
             <div className="flex-1 space-y-0">
               <h4 className="text-small font-medium">{item.title}</h4>
-              <p className="text-muted text-sm">{item.subtitle}</p>
+              <p className="text-sm text-muted">{item.subtitle}</p>
             </div>
           </div>
           {index < items.length - 1 && <Separator className="my-4" />}

@@ -13,11 +13,11 @@ import {tv} from "tailwind-variants";
 import {composeTailwindRenderProps} from "@/utils/compose-tw-render";
 
 const itemStyles = tv({
-  base: "rounded-xs relative",
+  base: "relative rounded-xs",
 });
 
 const focusIndicator = tv({
-  base: "absolute left-0 top-0 h-full w-full scale-[0.5] rounded-full border-2 border-black opacity-0 outline-2 -outline-offset-4 outline-white transition-all forced-color-adjust-none dark:border-white dark:outline-black",
+  base: "absolute top-0 left-0 h-full w-full scale-[0.5] rounded-full border-2 border-black opacity-0 outline-2 -outline-offset-4 outline-white transition-all forced-color-adjust-none dark:border-white dark:outline-black",
   variants: {
     isSelected: {
       true: "scale-100 opacity-100",

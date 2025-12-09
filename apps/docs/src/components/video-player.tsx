@@ -110,12 +110,12 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
   return (
     <div
-      className="not-prose border-separator relative overflow-hidden rounded-xl border"
+      className="not-prose relative overflow-hidden rounded-xl border border-separator"
       data-playing={isPlaying}
     >
       {isLoading ? (
         <Spinner
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           color="accent"
           size="lg"
         />
@@ -124,7 +124,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
           <Tooltip.Trigger>
             <Button
               isIconOnly
-              className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              className="absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
               size="sm"
               variant="tertiary"
               onPress={onTogglePlay}

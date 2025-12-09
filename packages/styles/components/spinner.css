@@ -1,6 +1,6 @@
 /* Base spinner styles */
 .spinner {
-  @apply animate-spin-fast pointer-events-none relative size-6 origin-center;
+  @apply pointer-events-none relative size-6 origin-center animate-spin-fast;
 }
 
 /* Size variants */

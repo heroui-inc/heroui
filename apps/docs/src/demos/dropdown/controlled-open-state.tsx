@@ -7,8 +7,8 @@ export function ControlledOpenState() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-w-sm flex flex-col items-center justify-center gap-4">
-      <p className="text-muted text-sm">
+    <div className="flex min-w-sm flex-col items-center justify-center gap-4">
+      <p className="text-sm text-muted">
         Dropdown is: <strong>{open ? "open" : "closed"}</strong>
       </p>
       <Dropdown isOpen={open} onOpenChange={setOpen}>

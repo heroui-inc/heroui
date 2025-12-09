@@ -13,7 +13,7 @@ export function Controlled() {
 
   return (
     <div className="space-y-4">
-      <Surface className="shadow-surface w-[256px] rounded-3xl">
+      <Surface className="w-[256px] rounded-3xl shadow-surface">
         <ListBox
           aria-label="Users"
           selectedKeys={selected}
@@ -34,7 +34,7 @@ export function Controlled() {
             </div>
             <ListBox.ItemIndicator>
               {({isSelected}) =>
-                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+                isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
               }
             </ListBox.ItemIndicator>
           </ListBox.Item>
@@ -52,7 +52,7 @@ export function Controlled() {
             </div>
             <ListBox.ItemIndicator>
               {({isSelected}) =>
-                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+                isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
               }
             </ListBox.ItemIndicator>
           </ListBox.Item>
@@ -70,13 +70,13 @@ export function Controlled() {
             </div>
             <ListBox.ItemIndicator>
               {({isSelected}) =>
-                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+                isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
               }
             </ListBox.ItemIndicator>
           </ListBox.Item>
         </ListBox>
       </Surface>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
       </p>
     </div>

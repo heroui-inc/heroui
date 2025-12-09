@@ -3,5 +3,5 @@
    ========================================================================== */
 
 .header {
-  @apply text-muted w-full px-2 pb-1 pt-1.5 text-left text-xs font-medium;
+  @apply w-full px-2 pt-1.5 pb-1 text-left text-xs font-medium text-muted;
 }

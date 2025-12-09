@@ -29,7 +29,7 @@
   /**
    * Transitions
    */
-  @apply duration-250 transition motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
   &[data-expanded] {
@@ -48,8 +48,8 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    height 420ms var(--ease-fluid-out),
-    opacity 340ms var(--ease-out);
+    height 320ms var(--ease-out-fluid),
+    opacity 250ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
 
   &[data-expanded] {

@@ -34,8 +34,7 @@ const DisclosureContext = createContext<DisclosureContext>({});
  * Disclosure Root
  * -----------------------------------------------------------------------------------------------*/
 interface DisclosureRootProps
-  extends ComponentPropsWithRef<typeof DisclosurePrimitive>,
-    DisclosureVariants {}
+  extends ComponentPropsWithRef<typeof DisclosurePrimitive>, DisclosureVariants {}
 
 const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootProps) => {
   const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);

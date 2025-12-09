@@ -31,10 +31,8 @@ const InputOTPContext = createContext<InputOTPContext>({
  * Input OTP Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPRootProps
-  extends Omit<
-      ComponentPropsWithRef<typeof OTPInput>,
-      "disabled" | "containerClassName" | "render"
-    >,
+  extends
+    Omit<ComponentPropsWithRef<typeof OTPInput>, "disabled" | "containerClassName" | "render">,
     InputOTPVariants {
   isDisabled?: boolean;
   isInvalid?: boolean;
