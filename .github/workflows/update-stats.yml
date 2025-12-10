@@ -3,7 +3,7 @@ name: Update Stats
 on:
   schedule:
     # Runs every Monday at 00:00 UTC
-    - cron: '0 0 * * 1'
+    - cron: "0 0 * * 1"
   # Allow manual trigger
   workflow_dispatch:
 
@@ -33,7 +33,7 @@ jobs:
             This PR updates the project statistics including:
             - Search metadata
             - GitHub repository information
-            
+
             This is an automated PR generated weekly.
           branch: chore/update-stats
           base: main
