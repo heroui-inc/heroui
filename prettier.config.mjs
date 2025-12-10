@@ -12,6 +12,13 @@ const config = {
         printWidth: 50,
       },
     },
+    {
+      files: "./apps/docs/content/**/*.mdx",
+      options: {
+        bracketSpacing: true,
+        singleQuote: false,
+      },
+    },
   ],
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindAttributes: ["className", "classNames"],
