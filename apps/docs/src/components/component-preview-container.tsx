@@ -20,6 +20,7 @@ export function ComponentPreviewContainer({
   hideCode = false,
   isBgSolid = false,
   name,
+  style,
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
@@ -34,6 +35,7 @@ export function ComponentPreviewContainer({
     <div
       className={cn("component-preview-container group relative my-4 w-full", className)}
       data-name={name}
+      style={{...style, contain: style?.contain ?? "content"}}
       {...props}
     >
       {!!description && <p className="text-muted-foreground mb-2 text-sm">{description}</p>}
@@ -47,11 +49,6 @@ export function ComponentPreviewContainer({
           alignmentClasses[align],
           "flex",
         )}
-        style={{
-          contain: "content style layout paint",
-          containIntrinsicSize: "350px",
-          contentVisibility: "auto",
-        }}
       >
         <div className="flex w-full items-center justify-center">{Component}</div>
       </div>
