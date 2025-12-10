@@ -19,6 +19,8 @@ pnpm-lock.yaml
 **/__snapshots__
 **/.DS_Store
 **/.changeset
+**/*.md
+**/*.mdx
 !public/manifest.json
 !.vscode
 !scripts
