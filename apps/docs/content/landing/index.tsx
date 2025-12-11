@@ -287,7 +287,7 @@ export const Example = () => {
             shortcut="⌘⇧D"
             startContent={
               <DeleteDocumentBulkIcon
-                className={clsx(iconClasses, "text-danger!")}
+                className={cn(iconClasses, "text-danger!")}
               />
             }
           >
@@ -301,7 +301,7 @@ export const Example = () => {
 `,
   darkModeExampleCode: `import {Card, CardBody, Button, Image, Progress, CardProps} from "@heroui/react";
 import {useState, FC} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {
   PauseCircleBoldIcon,
@@ -320,7 +320,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
   return (
     <Card
       isBlurred
-      className={clsx("border-none bg-background/60 dark:bg-default-100/50", className)}
+      className={cn("border-none bg-background/60 dark:bg-default-100/50", className)}
       shadow="sm"
       {...otherProps}
     >

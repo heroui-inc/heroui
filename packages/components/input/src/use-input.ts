@@ -7,11 +7,10 @@ import type {Ref} from "react";
 import {mapPropsVariants, useProviderContext, useInputLabelPlacement} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useFocusRing} from "@react-aria/focus";
-import {input} from "@heroui/theme";
+import {input, cn} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
 import {
-  clsx,
   dataAttr,
   isEmpty,
   objectToDeps,
@@ -157,7 +156,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
   const isHiddenType = type === "hidden";
   const isMultiline = originalProps.isMultiline;
 
-  const baseStyles = clsx(classNames?.base, className, isFilled ? "is-filled" : "");
+  const baseStyles = cn(classNames?.base, className, isFilled ? "is-filled" : "");
 
   const handleClear = useCallback(() => {
     if (isFileTypeInput) {
@@ -387,7 +386,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-has-end-content": dataAttr(!!endContent),
         "data-type": type,
         className: slots.input({
-          class: clsx(
+          class: cn(
             classNames?.input,
             isFilled ? "is-filled" : "",
             isMultiline ? "pe-0" : "",
@@ -437,7 +436,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-focus-visible": dataAttr(isFocusVisible),
         "data-focus": dataAttr(isFocused),
         className: slots.inputWrapper({
-          class: clsx(classNames?.inputWrapper, isFilled ? "is-filled" : ""),
+          class: cn(classNames?.inputWrapper, isFilled ? "is-filled" : ""),
         }),
         ...mergeProps(props, hoverProps),
         onClick: (e) => {
@@ -474,7 +473,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
           }
         },
         className: slots.innerWrapper({
-          class: clsx(classNames?.innerWrapper, props?.className),
+          class: cn(classNames?.innerWrapper, props?.className),
         }),
       };
     },
@@ -487,7 +486,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         ...props,
         "data-slot": "main-wrapper",
         className: slots.mainWrapper({
-          class: clsx(classNames?.mainWrapper, props?.className),
+          class: cn(classNames?.mainWrapper, props?.className),
         }),
       };
     },
@@ -500,7 +499,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         ...props,
         "data-slot": "helper-wrapper",
         className: slots.helperWrapper({
-          class: clsx(classNames?.helperWrapper, props?.className),
+          class: cn(classNames?.helperWrapper, props?.className),
         }),
       };
     },
@@ -513,7 +512,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         ...props,
         ...descriptionProps,
         "data-slot": "description",
-        className: slots.description({class: clsx(classNames?.description, props?.className)}),
+        className: slots.description({class: cn(classNames?.description, props?.className)}),
       };
     },
     [slots, classNames?.description],
@@ -525,7 +524,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         ...props,
         ...errorMessageProps,
         "data-slot": "error-message",
-        className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+        className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
       };
     },
     [slots, errorMessageProps, classNames?.errorMessage],
@@ -542,7 +541,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
         "data-slot": "clear-button",
         "data-focus-visible": dataAttr(isClearButtonFocusVisible),
         className: slots.clearButton({
-          class: clsx(classNames?.clearButton, props?.className),
+          class: cn(classNames?.clearButton, props?.className),
         }),
         ...mergeProps(clearPressProps, clearFocusProps),
       };

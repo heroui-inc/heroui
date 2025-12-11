@@ -1,6 +1,5 @@
 import * as React from "react";
-import {tv} from "@heroui/theme";
-import clsx from "clsx";
+import {tv, cn} from "@heroui/theme";
 
 import {mapPropsVariants} from "./utils";
 
@@ -77,7 +76,7 @@ function getClassNamesWithProps({
 
   // if no slots, the result is a string
   if (!hasSlots) {
-    newProps.className = clsx(result, props.className);
+    newProps.className = cn(result, props.className);
   }
   // if has slots, the result is an object with keys as slots functions
   else {
@@ -90,7 +89,7 @@ function getClassNamesWithProps({
     });
 
     Object.entries(props.classNames ?? {}).forEach(([key, value]) => {
-      classNames[key] = clsx(classNames[key], value);
+      classNames[key] = cn(classNames[key], value);
     });
   }
 

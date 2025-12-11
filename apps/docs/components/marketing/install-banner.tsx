@@ -2,7 +2,7 @@
 
 import {Button, Link} from "@heroui/react";
 import {ArrowRightIcon} from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import NextLink from "next/link";
 import {Code} from "@heroui/react";
 import {usePostHog} from "posthog-js/react";
@@ -114,7 +114,7 @@ export const InstallBanner = () => {
         </div>
       </div>
       <div
-        className={clsx(
+        className={cn(
           "absolute -top-20 lg:top-10 -translate-y-1/2 w-screen h-screen -z-50 opacity-0",
           "data-[mounted=true]:opacity-100 transition-opacity",
           "bg-left bg-no-repeat bg-[url('/gradients/looper-pattern.svg')]",

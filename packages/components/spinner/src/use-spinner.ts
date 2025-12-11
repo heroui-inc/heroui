@@ -3,8 +3,8 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
 import type {Ref} from "react";
 
 import {mapPropsVariants} from "@heroui/system-rsc";
-import {spinner} from "@heroui/theme";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
+import {spinner, cn} from "@heroui/theme";
+import {objectToDeps} from "@heroui/shared-utils";
 import {useMemo, useCallback} from "react";
 import {useProviderContext} from "@heroui/system";
 
@@ -50,7 +50,7 @@ export function useSpinner(originalProps: UseSpinnerProps) {
     [objectToDeps(variantProps), variant],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const label = labelProp || children;
 

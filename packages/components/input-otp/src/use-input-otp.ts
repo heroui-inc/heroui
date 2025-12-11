@@ -10,16 +10,9 @@ import type {OTPInputProps} from "input-otp";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {inputOtp} from "@heroui/theme";
+import {inputOtp, cn} from "@heroui/theme";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {
-  clsx,
-  dataAttr,
-  objectToDeps,
-  isPatternNumeric,
-  chain,
-  mergeProps,
-} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, isPatternNumeric, chain, mergeProps} from "@heroui/shared-utils";
 import {useFormReset} from "@heroui/use-form-reset";
 import {useCallback, useMemo} from "react";
 import {useControlledState} from "@react-stately/utils";
@@ -154,7 +147,7 @@ export function useInputOtp(originalProps: UseInputOtpProps) {
   const disableAnimation =
     originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
   const isDisabled = originalProps.isDisabled;
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const validationState = useFormValidationState<string>({
     ...props,
@@ -252,7 +245,7 @@ export function useInputOtp(originalProps: UseInputOtpProps) {
         pasteTransformer,
         noScriptCSSFallback,
         inputMode: inputMode ?? (isPatternNumeric(allowedKeys) ? "numeric" : "text"),
-        containerClassName: slots.wrapper?.({class: clsx(classNames?.wrapper, containerClassName)}),
+        containerClassName: slots.wrapper?.({class: cn(classNames?.wrapper, containerClassName)}),
         ...props,
       };
 
@@ -279,7 +272,7 @@ export function useInputOtp(originalProps: UseInputOtpProps) {
     (props = {}) => {
       return {
         className: slots.segmentWrapper({
-          class: clsx(classNames?.segmentWrapper, props?.className),
+          class: cn(classNames?.segmentWrapper, props?.className),
         }),
         "data-slot": "segment-wrapper",
         "data-disabled": dataAttr(isDisabled),
@@ -294,7 +287,7 @@ export function useInputOtp(originalProps: UseInputOtpProps) {
     (props = {}) => {
       return {
         className: slots.helperWrapper({
-          class: clsx(classNames?.helperWrapper, props?.className),
+          class: cn(classNames?.helperWrapper, props?.className),
         }),
         "data-slot": "helper-wrapper",
         ...props,
@@ -307,7 +300,7 @@ export function useInputOtp(originalProps: UseInputOtpProps) {
     (props = {}) => {
       return {
         className: slots.errorMessage({
-          class: clsx(classNames?.errorMessage, props?.className),
+          class: cn(classNames?.errorMessage, props?.className),
         }),
         "data-slot": "error-message",
         ...props,
@@ -320,7 +313,7 @@ export function useInputOtp(originalProps: UseInputOtpProps) {
     (props = {}) => {
       return {
         className: slots.description({
-          class: clsx(classNames?.description, props?.className),
+          class: cn(classNames?.description, props?.className),
         }),
         "data-slot": "description",
         ...props,
