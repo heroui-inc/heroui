@@ -7,3 +7,414 @@ links:
   figma: true
 ---
 
+## Imports
+
+Note: Before importing this component, ensure you have completed the setup as per the [Quick Start guide](../../../README.md).
+
+```tsx
+import { Accordion } from 'heroui-native';
+```
+
+## Usage
+
+### Basic Usage
+
+The Accordion component uses compound parts to create expandable content sections.
+
+```tsx
+<Accordion selectionMode="single">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator />
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Single Selection Mode
+
+Allow only one item to be expanded at a time.
+
+```tsx
+<Accordion selectionMode="single" defaultValue="2">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="2">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Multiple Selection Mode
+
+Allow multiple items to be expanded simultaneously.
+
+```tsx
+<Accordion selectionMode="multiple" defaultValue={['1', '3']}>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="2">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="3">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Surface Variant
+
+Apply a surface container style to the accordion.
+
+```tsx
+<Accordion selectionMode="single" variant="surface">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator />
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Custom Indicator
+
+Replace the default chevron indicator with custom content.
+
+```tsx
+<Accordion selectionMode="single">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator>
+        <CustomIndicator />
+      </Accordion.Indicator>
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Without Dividers
+
+Hide the dividers between accordion items.
+
+```tsx
+<Accordion selectionMode="single" isDividerVisible={false}>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="2">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### With PressableFeedback
+
+Wrap `Accordion.Trigger` with `PressableFeedback` to add custom press feedback animations.
+
+```tsx
+import { Accordion, PressableFeedback } from 'heroui-native';
+
+<Accordion selectionMode="single">
+  <Accordion.Item value="1">
+    <PressableFeedback
+      feedbackVariant="highlight"
+      animation={{
+        highlight: {
+          opacity: { value: [0, 0.05] },
+        },
+      }}
+    >
+      <Accordion.Trigger>
+        <Text>Item Title</Text>
+        <Accordion.Indicator />
+      </Accordion.Trigger>
+    </PressableFeedback>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>;
+```
+
+## Example
+
+```tsx
+import { Accordion, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View, Text } from 'react-native';
+
+export default function AccordionExample() {
+  const themeColorMuted = useThemeColor('muted');
+
+  const accordionData = [
+    {
+      id: '1',
+      title: 'How do I place an order?',
+      icon: <Ionicons name="bag-outline" size={16} color={themeColorMuted} />,
+      content:
+        'Lorem ipsum dolor sit amet consectetur. Netus nunc mauris risus consequat. Libero placerat dignissim consectetur nisl.',
+    },
+    {
+      id: '2',
+      title: 'What payment methods do you accept?',
+      icon: <Ionicons name="card-outline" size={16} color={themeColorMuted} />,
+      content:
+        'Lorem ipsum dolor sit amet consectetur. Netus nunc mauris risus consequat. Libero placerat dignissim consectetur nisl.',
+    },
+    {
+      id: '3',
+      title: 'How much does shipping cost?',
+      icon: <Ionicons name="cube-outline" size={16} color={themeColorMuted} />,
+      content:
+        'Lorem ipsum dolor sit amet consectetur. Netus nunc mauris risus consequat. Libero placerat dignissim consectetur nisl.',
+    },
+  ];
+
+  return (
+    <Accordion selectionMode="single" variant="surface" defaultValue="2">
+      {accordionData.map((item) => (
+        <Accordion.Item key={item.id} value={item.id}>
+          <Accordion.Trigger>
+            <View className="flex-row items-center flex-1 gap-3">
+              {item.icon}
+              <Text className="text-foreground text-base flex-1">
+                {item.title}
+              </Text>
+            </View>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+          <Accordion.Content>
+            <Text className="text-muted text-base/relaxed px-[25px]">
+              {item.content}
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+      ))}
+    </Accordion>
+  );
+}
+```
+
+## Anatomy
+
+```tsx
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator>...</Accordion.Indicator>
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+- **Accordion**: Main container that manages the accordion state and behavior. Controls expansion/collapse of items, supports single or multiple selection modes, and provides variant styling (default or surface).
+- **Accordion.Item**: Container for individual accordion items. Wraps the trigger and content, managing the expanded state for each item.
+- **Accordion.Trigger**: Interactive element that toggles item expansion. Built on Header and Trigger primitives.
+- **Accordion.Indicator**: Optional visual indicator showing expansion state. Defaults to an animated chevron icon that rotates based on item state.
+- **Accordion.Content**: Container for expandable content. Animated with layout transitions for smooth expand/collapse effects.
+
+## API Reference
+
+### Accordion
+
+| prop                    | type                                               | default     | description                                                       |
+| ----------------------- | -------------------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                                  | -           | Children elements to be rendered inside the accordion             |
+| `selectionMode`         | `'single' \| 'multiple'`                           | -           | Whether the accordion allows single or multiple expanded items    |
+| `variant`               | `'default' \| 'surface'`                           | `'default'` | Visual variant of the accordion                                   |
+| `isDividerVisible`      | `boolean`                                          | `true`      | Whether to display a divider at the bottom of each accordion item |
+| `defaultValue`          | `string \| string[] \| undefined`                  | -           | Default expanded item(s) in uncontrolled mode                     |
+| `value`                 | `string \| string[] \| undefined`                  | -           | Controlled expanded item(s)                                       |
+| `isDisabled`            | `boolean`                                          | -           | Whether all accordion items are disabled                          |
+| `isCollapsible`         | `boolean`                                          | `true`      | Whether expanded items can be collapsed                           |
+| `animation`             | `AccordionRootAnimation`                           | -           | Animation configuration for accordion                             |
+| `className`             | `string`                                           | -           | Additional CSS classes for the container                          |
+| `classNames`            | `ElementSlotsRootSlots`                          | -           | Additional CSS classes for the slots                              |
+| `onValueChange`         | `(value: string \| string[] \| undefined) => void` | -           | Callback when expanded items change                               |
+| `...Animated.ViewProps` | `Animated.ViewProps`                               | -           | All Reanimated Animated.View props are supported                  |
+
+#### ElementSlotsRootSlots
+
+| prop        | type     | description                                     |
+| ----------- | -------- | ----------------------------------------------- |
+| `container` | `string` | Custom class name for the accordion container   |
+| `divider`   | `string` | Custom class name for the divider between items |
+
+#### AccordionRootAnimation
+
+Animation configuration for accordion root component. Can be:
+
+- `false` or `"disabled"`: Disable only root animations
+- `"disable-all"`: Disable all animations including children
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop     | type                                           | default                                                             | description                                       |
+| -------- | ---------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------- |
+| `layout` | `AnimationValue<{ value?: LayoutTransition }>` | `LinearTransition.springify().damping(140).stiffness(1600).mass(4)` | Custom layout animation for accordion transitions |
+
+### Accordion.Item
+
+| prop                    | type                                                                        | default | description                                                                      |
+| ----------------------- | --------------------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode \| ((props: AccordionItemRenderProps) => React.ReactNode)` | -       | Children elements to be rendered inside the accordion item, or a render function |
+| `value`                 | `string`                                                                    | -       | Unique value to identify this item                                               |
+| `isDisabled`            | `boolean`                                                                   | -       | Whether this specific item is disabled                                           |
+| `className`             | `string`                                                                    | -       | Additional CSS classes                                                           |
+| `...Animated.ViewProps` | `Animated.ViewProps`                                                        | -       | All Reanimated Animated.View props are supported                                 |
+
+#### AccordionItemRenderProps
+
+| prop         | type      | description                                      |
+| ------------ | --------- | ------------------------------------------------ |
+| `isExpanded` | `boolean` | Whether the accordion item is currently expanded |
+| `value`      | `string`  | Unique value identifier for this accordion item  |
+
+### Accordion.Trigger
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | Children elements to be rendered inside the trigger     |
+| `className`         | `string`          | -       | Additional CSS classes                                  |
+| `isDisabled`        | `boolean`         | -       | Whether the trigger is disabled                         |
+| `...PressableProps` | `PressableProps`  | -       | All standard React Native Pressable props are supported |
+
+### Accordion.Indicator
+
+| prop                    | type                          | default | description                                                            |
+| ----------------------- | ----------------------------- | ------- | ---------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`             | -       | Custom indicator content, if not provided defaults to animated chevron |
+| `className`             | `string`                      | -       | Additional CSS classes                                                 |
+| `iconProps`             | `AccordionIndicatorIconProps` | -       | Icon configuration                                                     |
+| `animation`             | `AccordionIndicatorAnimation` | -       | Animation configuration for indicator                                  |
+| `...Animated.ViewProps` | `Animated.ViewProps`          | -       | All Reanimated Animated.View props are supported                       |
+
+#### AccordionIndicatorIconProps
+
+| prop    | type     | default      | description       |
+| ------- | -------- | ------------ | ----------------- |
+| `size`  | `number` | `16`         | Size of the icon  |
+| `color` | `string` | `foreground` | Color of the icon |
+
+#### AccordionIndicatorAnimation
+
+Animation configuration for accordion indicator component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop       | type                                                                            | default                                                                          | description                      |
+| ---------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------- |
+| `rotation` | `AnimationValue<{ value?: [number, number], springConfig?: WithSpringConfig }>` | `{ value: [0, -180], springConfig: { damping: 140, stiffness: 1000, mass: 4 } }` | Rotation animation configuration |
+
+##### Rotation AnimationValue
+
+| prop           | type               | default                                      | description                                      |
+| -------------- | ------------------ | -------------------------------------------- | ------------------------------------------------ |
+| `value`        | `[number, number]` | `[0, -180]`                                  | Rotation values [collapsed, expanded] in degrees |
+| `springConfig` | `WithSpringConfig` | `{ damping: 140, stiffness: 1000, mass: 4 }` | Spring animation configuration for rotation      |
+
+### Accordion.Content
+
+| prop           | type                        | default | description                                         |
+| -------------- | --------------------------- | ------- | --------------------------------------------------- |
+| `children`     | `React.ReactNode`           | -       | Children elements to be rendered inside the content |
+| `className`    | `string`                    | -       | Additional CSS classes                              |
+| `animation`    | `AccordionContentAnimation` | -       | Animation configuration for content                 |
+| `...ViewProps` | `ViewProps`                 | -       | All standard React Native View props are supported  |
+
+#### AccordionContentAnimation
+
+Animation configuration for accordion content component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop       | type                                                | default                                                | description                           |
+| ---------- | --------------------------------------------------- | ------------------------------------------------------ | ------------------------------------- |
+| `entering` | `AnimationValue<{ value?: EntryOrExitLayoutType }>` | `FadeIn.duration(200).easing(Easing.out(Easing.ease))` | Custom entering animation for content |
+| `exiting`  | `AnimationValue<{ value?: EntryOrExitLayoutType }>` | `FadeOut.duration(200).easing(Easing.in(Easing.ease))` | Custom exiting animation for content  |
+
+##### Entering/Exiting AnimationValue
+
+| prop    | type                    | default | description                                  |
+| ------- | ----------------------- | ------- | -------------------------------------------- |
+| `value` | `EntryOrExitLayoutType` | -       | Custom reanimated entering/exiting animation |
+
+## Hooks
+
+### useAccordion
+
+Hook to access the accordion root context. Must be used within an `Accordion` component.
+
+```tsx
+import { useAccordion } from 'heroui-native';
+
+const { value, onValueChange, selectionMode, isCollapsible, isDisabled } =
+  useAccordion();
+```
+
+#### Returns
+
+| property        | type                                                                  | description                                                                  |
+| --------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `selectionMode` | `'single' \| 'multiple' \| undefined`                                 | Whether the accordion allows single or multiple expanded items               |
+| `value`         | `(string \| undefined) \| string[]`                                   | Currently expanded item(s) - string for single mode, array for multiple mode |
+| `onValueChange` | `(value: string \| undefined) => void \| ((value: string[]) => void)` | Callback function to update expanded items                                   |
+| `isCollapsible` | `boolean`                                                             | Whether expanded items can be collapsed                                      |
+| `isDisabled`    | `boolean \| undefined`                                                | Whether all accordion items are disabled                                     |
+
+### useAccordionItem
+
+Hook to access the accordion item context. Must be used within an `Accordion.Item` component.
+
+```tsx
+import { useAccordionItem } from 'heroui-native';
+
+const { value, isExpanded, isDisabled, nativeID } = useAccordionItem();
+```
+
+#### Returns
+
+| property     | type                   | description                                          |
+| ------------ | ---------------------- | ---------------------------------------------------- |
+| `value`      | `string`               | Unique value identifier for this accordion item      |
+| `isExpanded` | `boolean`              | Whether the accordion item is currently expanded     |
+| `isDisabled` | `boolean \| undefined` | Whether this specific item is disabled               |
+| `nativeID`   | `string`               | Native ID used for accessibility and ARIA attributes |
+
+## Special Note
+
+When using the Accordion component alongside other components in the same view, you should import and apply `AccordionLayoutTransition` to those components to ensure smooth and consistent layout animations across the entire screen.
+
+```jsx
+import { Accordion, AccordionLayoutTransition } from 'heroui-native';
+import Animated from 'react-native-reanimated';
+
+<Animated.ScrollView layout={AccordionLayoutTransition}>
+  <Animated.View layout={AccordionLayoutTransition}>
+    {/* Other content */}
+  </Animated.View>
+
+  <Accordion>{/* Accordion items */}</Accordion>
+</Animated.ScrollView>;
+```
+
+This ensures that when the accordion expands or collapses, all components on the screen animate with the same timing and easing, creating a cohesive user experience.
