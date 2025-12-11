@@ -1,4 +1,4 @@
-import type {ExtendVariantProps} from "../src/extend-variants";
+import type {ExtendVariantProps, ExtendVariantWithSlotsProps} from "../src/extend-variants";
 
 import React from "react";
 import {render, screen} from "@testing-library/react";
@@ -37,7 +37,7 @@ const createExtendNoSlotsComponent = (styles: ExtendVariantProps = {}) =>
     ],
   });
 
-const createExtendSlotsComponent = () =>
+const createExtendSlotsComponent = (styles: ExtendVariantWithSlotsProps = {}) =>
   extendVariants(Card, {
     variants: {
       shadow: {
@@ -73,6 +73,19 @@ const createExtendSlotsComponent = () =>
       shadow: "xl",
       radius: "xl",
     },
+    compoundVariants: styles?.compoundVariants ?? [
+      {
+        shadow: "none",
+        radius: "none",
+        class: "rounded-sm",
+      },
+      {
+        shadow: "none",
+        class: {
+          header: "scale-75",
+        },
+      },
+    ],
   });
 
 describe("extendVariants function - no slots", () => {
@@ -252,5 +265,51 @@ describe("extendVariants function - with slots", () => {
 
     expect(baseEl).toHaveClass("shadow-xs");
     expect(headerEl).toHaveClass("rounded-none");
+  });
+
+  test("should include the compound variant styles - extended", () => {
+    const Card2 = createExtendSlotsComponent();
+
+    const {getByTestId} = render(
+      <Card2 radius="none" shadow="none">
+        Card Content
+      </Card2>,
+    );
+
+    const baseEl = getByTestId("base");
+    const headerEl = getByTestId("header");
+
+    expect(baseEl).toHaveClass("rounded-sm");
+    expect(headerEl).toHaveClass("scale-75");
+  });
+
+  test("should include the compound variant styles - original", () => {
+    const Card2 = createExtendSlotsComponent({
+      compoundVariants: [
+        {
+          shadow: "none",
+          radius: "sm",
+          class: "rounded-xl",
+        },
+        {
+          radius: "sm",
+          class: {
+            header: "scale-150",
+          },
+        },
+      ],
+    });
+
+    const {getByTestId} = render(
+      <Card2 radius="sm" shadow="none">
+        Card Content
+      </Card2>,
+    );
+
+    const baseEl = getByTestId("base");
+    const headerEl = getByTestId("header");
+
+    expect(baseEl).toHaveClass("rounded-xl");
+    expect(headerEl).toHaveClass("scale-150");
   });
 });
