@@ -155,7 +155,10 @@ export function useDateRangePicker<T extends DateValue>({
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   /**
    * ------------------------------

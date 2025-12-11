@@ -139,7 +139,10 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   const slots = useMemo(
     () =>

@@ -50,7 +50,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["inside", "outside", "outside-left"],
+      options: ["inside", "outside", "outside-left", "outside-top"],
     },
     isDisabled: {
       control: {
@@ -412,6 +412,15 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
         >
           {items}
         </Select>
+        <Select
+          color={color}
+          label="Select an animal"
+          variant={variant}
+          {...args}
+          labelPlacement="outside-top"
+        >
+          {items}
+        </Select>
       </div>
     </div>
     <div className="w-full max-w-5xl flex flex-col gap-3">
@@ -443,6 +452,16 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
           variant={variant}
           {...args}
           labelPlacement="outside-left"
+        >
+          {items}
+        </Select>
+        <Select
+          color={color}
+          label="Favorite Animal"
+          placeholder="Select an animal"
+          variant={variant}
+          {...args}
+          labelPlacement="outside-top"
         >
           {items}
         </Select>
@@ -480,6 +499,17 @@ const LabelPlacementTemplate = ({color, variant, ...args}: SelectProps) => (
           variant={variant}
           {...args}
           labelPlacement="outside-left"
+        >
+          {items}
+        </Select>
+        <Select
+          color={color}
+          description="Select your favorite animal"
+          label="Favorite Animal"
+          placeholder="Select an animal"
+          variant={variant}
+          {...args}
+          labelPlacement="outside-top"
         >
           {items}
         </Select>

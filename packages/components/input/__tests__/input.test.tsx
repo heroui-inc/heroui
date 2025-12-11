@@ -5,6 +5,7 @@ import {render, renderHook, fireEvent, act} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Input} from "../src";
 
@@ -664,5 +665,55 @@ describe("Input with React Hook Form", () => {
         // expect(input).not.toHaveAttribute("aria-invalid");
       });
     });
+  });
+});
+
+describe("Input with HeroUIProvider context", () => {
+  it("should inherit labelPlacement from HeroUIProvider", () => {
+    const labelContent = "Test input label";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside">
+        <Input label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("label");
+
+    expect(label).toBeTruthy();
+    expect(label?.className).toMatch(/translate-y.*100%/);
+  });
+
+  it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+    const labelContent = "Test input label";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside">
+        <Input label={labelContent} labelPlacement="inside" />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("label");
+
+    expect(label).toBeTruthy();
+    expect(label?.className).not.toMatch(/translate-y.*100%/);
+  });
+
+  it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+    const labelContent = "Test input label";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside-top">
+        <Input label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("label");
+    const mainWrapper = container.querySelector("[data-slot=main-wrapper]");
+
+    expect(label).toBeTruthy();
+    // outside-top uses flex-col on mainWrapper and relative label (no translate-y)
+    expect(mainWrapper).toHaveClass("flex-col");
+    expect(label?.className).not.toMatch(/translate-y.*100%/);
   });
 });

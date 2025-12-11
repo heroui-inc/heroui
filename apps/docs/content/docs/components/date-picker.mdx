@@ -59,7 +59,7 @@ DatePickers combine a DateInput and a Calendar popover to allow users to enter o
 
 ### Label Placements
 
-You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside` or `outside-left`.
+You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside`, `outside-left` or `outside-top`.
 
 <CodeDemo title="Label Placements" files={datePickerContent.labelPlacements} />
 
@@ -407,7 +407,7 @@ import {I18nProvider} from "@react-aria/i18n";
     },
     {
       attribute: "labelPlacement",
-      type: "inside | outside | outside-left",
+      type: "inside | outside | outside-left | outside-top",
       description: "The position of the label.",
       default: "inside"
     },

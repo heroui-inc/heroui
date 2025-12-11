@@ -7,6 +7,7 @@ import {fireEvent, render} from "@testing-library/react";
 import {Time, ZonedDateTime} from "@internationalized/date";
 import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
+import {HeroUIProvider} from "@heroui/system";
 
 import {TimeInput as TimeInputBase} from "../src";
 
@@ -441,6 +442,58 @@ describe("TimeInput", () => {
       await user.keyboard("[ArrowUp]");
       expect(input).toHaveValue("18:00:00");
       expect(document.querySelector("[data-slot=error-message]")).toBeVisible();
+    });
+  });
+
+  describe("TimeInput with HeroUIProvider context", () => {
+    it("should inherit labelPlacement from HeroUIProvider", () => {
+      const labelContent = "Test time input label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <TimeInput label={labelContent} />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).not.toHaveTextContent(labelContent);
+    });
+
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const labelContent = "Test time input label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <TimeInput label={labelContent} labelPlacement="inside" />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).toHaveTextContent(labelContent);
+    });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const labelContent = "Test time input label";
+
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <TimeInput label={labelContent} />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+      const base = container.querySelector("[data-slot=base]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).not.toHaveTextContent(labelContent);
+      expect(base).toHaveClass("flex-col");
     });
   });
 });

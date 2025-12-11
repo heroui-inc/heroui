@@ -975,3 +975,58 @@ describe("DatePicker", () => {
     });
   });
 });
+
+describe("DatePicker with HeroUIProvider context", () => {
+  it("should inherit labelPlacement from HeroUIProvider", () => {
+    const labelContent = "Test DatePicker";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside">
+        <DatePickerBase disableAnimation label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("span[data-slot=label]");
+    const inputWrapper = container.querySelector("div[data-slot=input-wrapper]");
+    const base = container.querySelector("[data-slot=base]");
+
+    expect(label).toHaveTextContent(labelContent);
+    expect(inputWrapper).not.toHaveTextContent(labelContent);
+    expect(base).toContainElement(label as HTMLElement);
+  });
+
+  it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+    const labelContent = "Test DatePicker";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside-top">
+        <DatePickerBase disableAnimation label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("span[data-slot=label]");
+    const inputWrapper = container.querySelector("div[data-slot=input-wrapper]");
+    const base = container.querySelector("[data-slot=base]");
+
+    expect(label).toHaveTextContent(labelContent);
+    expect(inputWrapper).not.toHaveTextContent(labelContent);
+    expect(base).toHaveClass("flex-col");
+  });
+
+  it("should inherit labelPlacement='inside' from HeroUIProvider", () => {
+    const labelContent = "Test DatePicker";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="inside">
+        <DatePickerBase disableAnimation label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("span[data-slot=label]");
+    const inputWrapper = container.querySelector("div[data-slot=input-wrapper]");
+
+    expect(label).toHaveTextContent(labelContent);
+    // In inside placement, label is inside inputWrapper
+    expect(inputWrapper).toContainElement(label as HTMLElement);
+  });
+});

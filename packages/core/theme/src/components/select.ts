@@ -178,6 +178,11 @@ const select = tv({
         label: "relative pe-2 text-foreground",
         clearButton: "mb-0",
       },
+      "outside-top": {
+        base: "flex flex-col",
+        label: "relative text-foreground pb-2 pointer-events-auto",
+        clearButton: "mb-0",
+      },
       inside: {
         label: "text-tiny cursor-pointer",
         trigger: "flex-col items-start justify-center gap-0",

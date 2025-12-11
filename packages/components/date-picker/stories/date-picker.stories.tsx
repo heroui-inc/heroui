@@ -59,7 +59,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["inside", "outside", "outside-left"],
+      options: ["inside", "outside", "outside-left", "outside-top"],
     },
     isDisabled: {
       control: {
@@ -116,6 +116,7 @@ const LabelPlacementTemplate = (args: DatePickerProps) => (
     <DatePicker {...args} description="inside" />
     <DatePicker {...args} description="outside" labelPlacement="outside" />
     <DatePicker {...args} description="outside-left" labelPlacement="outside-left" />
+    <DatePicker {...args} description="outside-top" labelPlacement="outside-top" />
   </div>
 );
 

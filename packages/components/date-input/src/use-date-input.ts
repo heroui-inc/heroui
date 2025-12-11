@@ -196,7 +196,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   const slots = useMemo(
     () =>
