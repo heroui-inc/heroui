@@ -78,8 +78,18 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
           Source
         </ButtonLink>
       ) : null}
+      {componentLinks.source_native ? (
+        <ButtonLink href={componentLinks.source_native} startContent={<GithubIcon size={20} />}>
+          Source
+        </ButtonLink>
+      ) : null}
       {componentLinks.styles ? (
         <ButtonLink href={componentLinks.styles} startContent={<GithubIcon size={20} />}>
+          Styles source
+        </ButtonLink>
+      ) : null}
+      {componentLinks.styles_native ? (
+        <ButtonLink href={componentLinks.styles_native} startContent={<GithubIcon size={20} />}>
           Styles source
         </ButtonLink>
       ) : null}
