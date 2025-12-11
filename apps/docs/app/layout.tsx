@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import "@/styles/sandpack.css";
 import type {Metadata, Viewport} from "next";
 
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {Analytics} from "@vercel/analytics/next";
 
 import {Providers} from "./providers";
@@ -75,7 +75,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html suppressHydrationWarning dir="ltr" lang="en">
       <head />
       <body
-        className={clsx(
+        className={cn(
           "min-h-screen text-foreground bg-background font-sans antialiased",
           fonts.sans.variable,
           fonts.mono.variable,

@@ -54,7 +54,7 @@ const table = tv({
       "overflow-auto",
     ],
     table: "min-w-full h-auto",
-    thead: "[&>tr]:first:rounded-lg",
+    thead: "[&>tr]:first:rounded-lg after:content-[''] after:table-row after:h-[5px]",
     tbody: "after:block",
     tr: ["group/tr", "outline-solid outline-transparent", ...dataFocusVisibleClasses],
     th: [

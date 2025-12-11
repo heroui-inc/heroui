@@ -1,7 +1,6 @@
 import type {UseTableProps} from "./use-table";
 
 import {useCallback} from "react";
-import {Spacer} from "@heroui/spacer";
 import {forwardRef} from "@heroui/system";
 
 import {useTable} from "./use-table";
@@ -111,7 +110,6 @@ const Table = forwardRef<"table", TableProps>((props, ref) => {
                   )}
                 </TableHeaderRow>
               ))}
-              <Spacer as="tr" tabIndex={-1} y={1} />
             </TableRowGroup>
             <TableBody
               checkboxesProps={values.checkboxesProps}

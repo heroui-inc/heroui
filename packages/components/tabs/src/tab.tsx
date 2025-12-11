@@ -4,11 +4,12 @@ import type {ValuesType} from "./use-tabs";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps, mergeRefs} from "@heroui/react-utils";
-import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {useFocusRing} from "@react-aria/focus";
 import {useTab} from "@react-aria/tabs";
 import {useHover} from "@react-aria/interactions";
+import {cn} from "@heroui/theme";
 
 export interface TabItemProps<T extends object = object> extends BaseTabItemProps<T> {
   item: Node<T>;
@@ -62,7 +63,7 @@ const Tab = forwardRef<"button", TabItemProps>((props, ref) => {
     isDisabled,
   });
 
-  const tabStyles = clsx(classNames?.tab, className);
+  const tabStyles = cn(classNames?.tab, className);
 
   const handleClick = () => {
     if (!domRef?.current || !listRef?.current) return;

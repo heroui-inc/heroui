@@ -309,8 +309,8 @@ const CustomToastComponent = (args) => {
         variant="bordered"
         onPress={() => {
           addToast({
-            title: "Sucessful!",
-            description: "Document uploaded to cloud successful.",
+            title: "Successful!",
+            description: "Document uploaded to cloud successfully.",
             classNames: {
               base: cn([
                 "bg-default-50 dark:bg-background shadow-sm",

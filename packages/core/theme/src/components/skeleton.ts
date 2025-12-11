@@ -25,7 +25,6 @@ const skeleton = tv({
       "before:absolute",
       "before:inset-0",
       "before:-translate-x-full",
-      "before:animate-shimmer",
       "before:border-t",
       "before:border-content4/30",
       "before:bg-gradient-to-r",
@@ -56,7 +55,7 @@ const skeleton = tv({
         content: "transition-none",
       },
       false: {
-        base: "transition-background !duration-300",
+        base: "before:animate-shimmer transition-background !duration-300",
         content: "transition-opacity motion-reduce:transition-none !duration-300",
       },
     },

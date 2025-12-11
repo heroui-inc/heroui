@@ -3,10 +3,10 @@ import type {ListState} from "@react-stately/list";
 import type {ListboxItemProps} from "./listbox-item";
 import type {ListboxSectionBaseProps} from "./base/listbox-section-base";
 
-import {listboxSection} from "@heroui/theme";
+import {listboxSection, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
-import {clsx, mergeProps} from "@heroui/shared-utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {Divider} from "@heroui/divider";
 import {useListBoxSection} from "@react-aria/listbox";
 
@@ -63,8 +63,8 @@ const ListboxSection = forwardRef<"li", ListboxSectionProps>(
 
     const slots = useMemo(() => listboxSection(), []);
 
-    const baseStyles = clsx(classNames?.base, className);
-    const dividerStyles = clsx(classNames?.divider, dividerProps?.className);
+    const baseStyles = cn(classNames?.base, className);
+    const dividerStyles = cn(classNames?.divider, dividerProps?.className);
 
     const {itemProps, headingProps, groupProps} = useListBoxSection({
       heading: item.rendered,

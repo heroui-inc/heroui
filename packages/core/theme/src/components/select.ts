@@ -82,6 +82,7 @@ const select = tv({
           "data-[hover=true]:border-default-400",
           "data-[open=true]:border-default-foreground",
           "data-[focus=true]:border-default-foreground",
+          "data-[focus=true]:data-[hover=true]:border-default-foreground",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
         clearButton: "mb-4",
@@ -445,7 +446,11 @@ const select = tv({
       variant: "bordered",
       color: "primary",
       class: {
-        trigger: ["data-[open=true]:border-primary", "data-[focus=true]:border-primary"],
+        trigger: [
+          "data-[open=true]:border-primary",
+          "data-[focus=true]:border-primary",
+          "data-[focus=true]:data-[hover=true]:border-primary",
+        ],
         label: "text-primary",
       },
     },
@@ -453,7 +458,11 @@ const select = tv({
       variant: "bordered",
       color: "secondary",
       class: {
-        trigger: ["data-[open=true]:border-secondary", "data-[focus=true]:border-secondary"],
+        trigger: [
+          "data-[open=true]:border-secondary",
+          "data-[focus=true]:border-secondary",
+          "data-[focus=true]:data-[hover=true]:border-secondary",
+        ],
         label: "text-secondary",
       },
     },
@@ -461,7 +470,11 @@ const select = tv({
       variant: "bordered",
       color: "success",
       class: {
-        trigger: ["data-[open=true]:border-success", "data-[focus=true]:border-success"],
+        trigger: [
+          "data-[open=true]:border-success",
+          "data-[focus=true]:border-success",
+          "data-[focus=true]:data-[hover=true]:border-success",
+        ],
         label: "text-success",
       },
     },
@@ -469,7 +482,11 @@ const select = tv({
       variant: "bordered",
       color: "warning",
       class: {
-        trigger: ["data-[open=true]:border-warning", "data-[focus=true]:border-warning"],
+        trigger: [
+          "data-[open=true]:border-warning",
+          "data-[focus=true]:border-warning",
+          "data-[focus=true]:data-[hover=true]:border-warning",
+        ],
         label: "text-warning",
       },
     },
@@ -477,7 +494,11 @@ const select = tv({
       variant: "bordered",
       color: "danger",
       class: {
-        trigger: ["data-[open=true]:border-danger", "data-[focus=true]:border-danger"],
+        trigger: [
+          "data-[open=true]:border-danger",
+          "data-[focus=true]:border-danger",
+          "data-[focus=true]:data-[hover=true]:border-danger",
+        ],
         label: "text-danger",
       },
     },

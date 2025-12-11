@@ -5,7 +5,7 @@ import React from "react";
 import {toggle} from "@heroui/theme";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {SunFilledIcon, MoonFilledIcon} from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {button} from "@heroui/theme";
 import {useForm} from "react-hook-form";
 
@@ -82,7 +82,7 @@ const CustomWithClassNamesTemplate = (args: SwitchProps) => {
     <div className="flex flex-col gap-2">
       <Switch
         classNames={{
-          base: clsx(
+          base: cn(
             "inline-flex flex-row-reverse w-full max-w-md bg-content1 hover:bg-content2 items-center justify-between cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent",
             {
               "border-primary": isSelected,
