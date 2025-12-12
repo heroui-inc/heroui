@@ -39,107 +39,62 @@ The v2 Code component had the following variants that need to be replaced:
 | `radius="lg"` | `rounded-lg` | Tailwind border radius |
 | `radius="full"` | `rounded-full` | Tailwind border radius |
 
+## Structure Changes
+
+### v2: Component Wrapper
+
+In v2, `Code` was a component wrapper around the native `<code>` element:
+
+```tsx
+import { Code } from "@heroui/react";
+
+export default function App() {
+  return <Code>npm install @heroui/react</Code>;
+}
+```
+
+### v3: Native HTML Element
+
+In v3, use the native `<code>` element directly with Tailwind CSS classes:
+
+```tsx
+export default function App() {
+  return (
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+      npm install @heroui/react
+    </code>
+  );
+}
+```
+
 ## Migration Examples
 
-### Basic Usage
+### Variants
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Code } from "@heroui/react";
-
-    export default function App() {
-      return <Code>npm install @heroui/react</Code>;
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    export default function App() {
-      return (
-        <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
-          npm install @heroui/react
-        </code>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Color Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Colors */}
     <Code color="primary">Primary code</Code>
     <Code color="success">Success code</Code>
-    <Code color="warning">Warning code</Code>
-    <Code color="danger">Danger code</Code>
+    
+    {/* Sizes */}
+    <Code size="md">Medium code</Code>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Colors */}
     <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-accent/20 text-accent-600 text-sm">
       Primary code
     </code>
     <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-success/20 text-success-700 text-sm">
       Success code
     </code>
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-warning/20 text-warning-700 text-sm">
-      Warning code
-    </code>
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-danger/20 text-danger-600 text-sm">
-      Danger code
-    </code>
-    ```
-  </Tab>
-</Tabs>
-
-### With Size Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Code size="sm">Small code</Code>
-    <Code size="md">Medium code</Code>
-    <Code size="lg">Large code</Code>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
-      Small code
-    </code>
+    
+    {/* Sizes */}
     <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-base">
       Medium code
-    </code>
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-lg">
-      Large code
-    </code>
-    ```
-  </Tab>
-</Tabs>
-
-### With Radius Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Code radius="sm">Rounded small</Code>
-    <Code radius="md">Rounded medium</Code>
-    <Code radius="full">Rounded full</Code>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
-      Rounded small
-    </code>
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-md bg-default/40 text-default-700 text-sm">
-      Rounded medium
-    </code>
-    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-full bg-default/40 text-default-700 text-sm">
-      Rounded full
     </code>
     ```
   </Tab>
@@ -338,21 +293,3 @@ The v2 Code component used these base styles that you should include:
 3. **Add Tailwind Classes**: Apply equivalent Tailwind classes for styling
 4. **Update Colors**: Change `color="primary"` to use `accent` color classes
 5. **Optional**: Create a reusable wrapper component if you use inline code frequently
-
-## Tips for Migration
-
-1. **Find and Replace**: Use find-and-replace to update all instances of `<Code>` to `<code>`
-2. **Create Utility Component**: Consider creating a simple `Code` wrapper component if you use it frequently
-3. **Use CSS Variables**: Leverage HeroUI's CSS variables (`--accent`, `--success`, etc.) for consistent theming
-4. **Dark Mode**: Tailwind's opacity utilities (`/20`, `/40`) work automatically with dark mode
-5. **Customization**: You have full control with Tailwind classes - customize as needed
-
-## Need Help?
-
-**For styling guidance:**
-- See the [Styling documentation](/docs/handbook/styling)
-- Check [Colors documentation](/docs/handbook/colors) for available color variables
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

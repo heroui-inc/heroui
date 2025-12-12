@@ -20,12 +20,16 @@ In v2, Slider used a simple structure with props:
 ```tsx
 import { Slider } from "@heroui/react";
 
-<Slider
-  label="Volume"
-  defaultValue={30}
-  size="md"
-  color="primary"
-/>
+export default function App() {
+  return (
+    <Slider
+      label="Volume"
+      defaultValue={30}
+      size="md"
+      color="primary"
+    />
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -35,14 +39,18 @@ In v3, Slider requires compound components:
 ```tsx
 import { Slider, Label } from "@heroui/react";
 
-<Slider defaultValue={30}>
-  <Label>Volume</Label>
-  <Slider.Output />
-  <Slider.Track>
-    <Slider.Fill />
-    <Slider.Thumb />
-  </Slider.Track>
-</Slider>
+export default function App() {
+  return (
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+  );
+}
 ```
 
 ## Key Changes
@@ -93,53 +101,6 @@ The following props are no longer available in v3:
 - `disableThumbScale`, `disableAnimation` - Use Tailwind CSS
 
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Slider } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Slider
-          className="max-w-md"
-          defaultValue={0.4}
-          label="Temperature"
-          maxValue={1}
-          minValue={0}
-          step={0.01}
-        />
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Slider, Label } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Slider
-          className="w-full max-w-md"
-          defaultValue={0.4}
-          maxValue={1}
-          minValue={0}
-          step={0.01}
-        >
-          <Label>Temperature</Label>
-          <Slider.Output />
-          <Slider.Track>
-            <Slider.Fill />
-            <Slider.Thumb />
-          </Slider.Track>
-        </Slider>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ### Controlled Slider
 
@@ -242,32 +203,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Disabled State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Slider
-      isDisabled
-      label="Volume"
-      defaultValue={30}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Slider isDisabled defaultValue={30}>
-      <Label>Volume</Label>
-      <Slider.Output />
-      <Slider.Track>
-        <Slider.Fill />
-        <Slider.Thumb />
-      </Slider.Track>
-    </Slider>
-    ```
-  </Tab>
-</Tabs>
-
 ### Custom Value Display
 
 <Tabs items={["v2", "v3"]}>
@@ -289,62 +224,6 @@ The following props are no longer available in v3:
       <Slider.Output>
         {({state}) => `Custom: ${state.values[0]}`}
       </Slider.Output>
-      <Slider.Track>
-        <Slider.Fill />
-        <Slider.Thumb />
-      </Slider.Track>
-    </Slider>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Slider
-      classNames={{
-        base: "custom-base",
-        track: "custom-track",
-        thumb: "custom-thumb"
-      }}
-      label="Volume"
-      defaultValue={30}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Slider className="custom-base" defaultValue={30}>
-      <Label>Volume</Label>
-      <Slider.Output />
-      <Slider.Track className="custom-track">
-        <Slider.Fill />
-        <Slider.Thumb className="custom-thumb" />
-      </Slider.Track>
-    </Slider>
-    ```
-  </Tab>
-</Tabs>
-
-### Without Value Display
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Slider
-      hideValue
-      label="Volume"
-      defaultValue={30}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Slider defaultValue={30}>
-      <Label>Volume</Label>
-      {/* Omit Slider.Output */}
       <Slider.Track>
         <Slider.Fill />
         <Slider.Thumb />
@@ -412,24 +291,3 @@ Based on the v3 source code TODOs, the following features are not yet implemente
 6. **Render Props Removed**: `renderThumb`, `renderLabel`, `renderValue` - use render props on components
 7. **Visibility Props Removed**: `hideValue`, `hideThumb` - omit components instead
 8. **Range Sliders**: Must map over thumbs in `Slider.Track` render prop
-
-## Tips for Migration
-
-1. **Update structure**: Wrap Slider content in compound components
-2. **Add Label**: Use `Label` component for slider label
-3. **Add Output**: Use `Slider.Output` for value display (omit if not needed)
-4. **Add Track**: Wrap `Slider.Fill` and `Slider.Thumb` in `Slider.Track`
-5. **Range sliders**: Use render prop in `Slider.Track` to map over thumbs
-6. **Update styling**: Use Tailwind CSS classes for sizes, colors, radius
-7. **Custom value**: Use `Slider.Output` render prop for custom formatting
-8. **Remove unused props**: Remove `showSteps`, `showTooltip`, `marks`, etc. if used
-
-## Need Help?
-
-**For v3 Slider features and API:**
-- See the [API Reference](/docs/components/slider#api-reference)
-- Check [interactive examples](/docs/components/slider#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

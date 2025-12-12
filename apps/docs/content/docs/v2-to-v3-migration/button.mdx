@@ -20,9 +20,9 @@ In v2, `Button` used a combination of `color` and `variant` props:
 ```tsx
 import { Button } from "@heroui/react";
 
-<Button color="primary" variant="solid">
-  Button
-</Button>
+export default function App() {
+  return <Button color="primary" variant="solid">Button</Button>;
+}
 ```
 
 ### v3: Single Component with Variant Only
@@ -32,9 +32,9 @@ In v3, Button uses only the `variant` prop (no separate `color` prop):
 ```tsx
 import { Button } from "@heroui/react";
 
-<Button variant="primary">
-  Button
-</Button>
+export default function App() {
+  return <Button variant="primary">Button</Button>;
+}
 ```
 
 ## Key Changes
@@ -112,29 +112,6 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Button } from "@heroui/react";
-
-    export default function App() {
-      return <Button color="primary">Button</Button>;
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Button } from "@heroui/react";
-
-    export default function App() {
-      return <Button variant="primary">Button</Button>;
-    }
-    ```
-  </Tab>
-</Tabs>
-
 ### Variants
 
 <Tabs items={["v2", "v3"]}>
@@ -142,8 +119,6 @@ The following props are no longer available in v3:
     ```tsx
     <Button color="primary" variant="solid">Solid</Button>
     <Button color="primary" variant="bordered">Bordered</Button>
-    <Button color="primary" variant="light">Light</Button>
-    <Button color="primary" variant="flat">Flat</Button>
     <Button color="primary" variant="ghost">Ghost</Button>
     ```
   </Tab>
@@ -151,37 +126,7 @@ The following props are no longer available in v3:
     ```tsx
     <Button variant="primary">Primary</Button>
     <Button variant="secondary">Secondary</Button>
-    <Button variant="tertiary">Tertiary</Button>
     <Button variant="ghost">Ghost</Button>
-    <Button variant="danger">Danger</Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button color="default">Default</Button>
-    <Button color="primary">Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="success">Success</Button>
-    <Button color="warning">Warning</Button>
-    <Button color="danger">Danger</Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button variant="primary">Primary</Button>
-    <Button variant="secondary">Secondary</Button>
-    <Button variant="tertiary">Tertiary</Button>
-    <Button variant="danger">Danger</Button>
-    <Button variant="danger-soft">Danger Soft</Button>
-    {/* For success/warning, use primary with custom styling */}
-    <Button variant="primary" className="bg-success text-white">
-      Success
-    </Button>
     ```
   </Tab>
 </Tabs>
@@ -250,36 +195,12 @@ The following props are no longer available in v3:
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    {/* Simple loading */}
     <Button isLoading color="primary">
       Loading
     </Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Spinner } from "@heroui/react";
-
-    <Button isPending>
-      {({isPending}) => (
-        <>
-          {isPending ? <Spinner color="current" size="sm" /> : null}
-          Loading
-        </>
-      )}
-    </Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Loading State with Conditional Content
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [isLoading, setIsLoading] = useState(false);
-
+    
+    {/* Loading with conditional content */}
     <Button 
       isLoading={isLoading}
       spinnerPlacement="start"
@@ -298,6 +219,17 @@ The following props are no longer available in v3:
 
     const [isLoading, setIsLoading] = useState(false);
 
+    {/* Simple loading */}
+    <Button isPending={isLoading}>
+      {({isPending}) => (
+        <>
+          {isPending && <Spinner color="current" size="sm" />}
+          Loading
+        </>
+      )}
+    </Button>
+    
+    {/* Loading with conditional content */}
     <Button 
       isPending={isLoading}
       onPress={() => setIsLoading(true)}
@@ -312,50 +244,6 @@ The following props are no longer available in v3:
           {isPending ? "Uploading..." : "Upload File"}
         </>
       )}
-    </Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Full Width Button
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button fullWidth color="primary">
-      Full Width
-    </Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button className="w-full" variant="primary">
-      Full Width
-    </Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Radius
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button radius="full" color="primary">
-      Rounded
-    </Button>
-    <Button radius="lg" color="primary">
-      Large Radius
-    </Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button className="rounded-full" variant="primary">
-      Rounded
-    </Button>
-    <Button className="rounded-lg" variant="primary">
-      Large Radius
     </Button>
     ```
   </Tab>
@@ -392,63 +280,21 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Disabled State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button isDisabled color="primary">
-      Disabled
-    </Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button isDisabled variant="primary">
-      Disabled
-    </Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Sizes
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Button size="sm" color="primary">Small</Button>
-    <Button size="md" color="primary">Medium</Button>
-    <Button size="lg" color="primary">Large</Button>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Button size="sm" variant="primary">Small</Button>
-    <Button size="md" variant="primary">Medium</Button>
-    <Button size="lg" variant="primary">Large</Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Minimum Width
-
-If you need to maintain v2's minimum width behavior:
+### Sizes and Minimum Width
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     {/* v2 automatically applies minimum widths */}
-    <Button size="sm">OK</Button>
-    <Button size="md">Save</Button>
-    <Button size="lg">Submit</Button>
+    <Button size="md" color="primary">Save</Button>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    {/* Add min-width classes to match v2 behavior */}
-    <Button size="sm" className="min-w-16">OK</Button>
-    <Button size="md" className="min-w-20">Save</Button>
-    <Button size="lg" className="min-w-24">Submit</Button>
+    {/* v3 uses w-fit by default - add min-width to match v2 */}
+    <Button size="md" variant="primary" className="min-w-20">
+      Save
+    </Button>
     ```
   </Tab>
 </Tabs>
@@ -490,24 +336,3 @@ Available render props:
 10. **Ripple Removed**: No ripple effect in v3
 11. **ButtonGroup Removed**: Create groups manually with CSS
 12. **ClassNames Removed**: Use `className` prop
-
-## Tips for Migration
-
-1. **Replace onClick**: Change all `onClick` handlers to `onPress`
-2. **Map variants**: Use the variant mapping table to find equivalent v3 variants
-3. **Handle loading**: Use render props pattern for loading states with spinners
-4. **Check button widths**: If buttons appear narrower than expected, add `min-w-16` (sm), `min-w-20` (md), or `min-w-24` (lg) classes to match v2 behavior
-5. **Icons as children**: Move icons from `startContent`/`endContent` to direct children
-6. **Use Tailwind**: Many removed props can be replaced with Tailwind utility classes
-7. **Button groups**: Use flexbox and border utilities to create button groups
-8. **Custom colors**: For success/warning colors, use `variant="primary"` with custom Tailwind classes
-
-## Need Help?
-
-**For v3 Button features and API:**
-- See the [API Reference](/docs/components/button#api-reference)
-- Check [interactive examples](/docs/components/button#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

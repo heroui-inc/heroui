@@ -20,11 +20,15 @@ In v2, Tabs used `Tab` component with `title` prop and children as panel content
 ```tsx
 import { Tabs, Tab } from "@heroui/react";
 
-<Tabs aria-label="Options">
-  <Tab key="photos" title="Photos">
-    <Card>Content here</Card>
-  </Tab>
-</Tabs>
+export default function App() {
+  return (
+    <Tabs aria-label="Options">
+      <Tab key="photos" title="Photos">
+        <Card>Content here</Card>
+      </Tab>
+    </Tabs>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -34,19 +38,23 @@ In v3, Tabs requires compound components with separate tab and panel:
 ```tsx
 import { Tabs } from "@heroui/react";
 
-<Tabs>
-  <Tabs.ListContainer>
-    <Tabs.List aria-label="Options">
-      <Tabs.Tab id="photos">
-        Photos
-        <Tabs.Indicator />
-      </Tabs.Tab>
-    </Tabs.List>
-  </Tabs.ListContainer>
-  <Tabs.Panel id="photos">
-    <Card>Content here</Card>
-  </Tabs.Panel>
-</Tabs>
+export default function App() {
+  return (
+    <Tabs>
+      <Tabs.ListContainer>
+        <Tabs.List aria-label="Options">
+          <Tabs.Tab id="photos">
+            Photos
+            <Tabs.Indicator />
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListContainer>
+      <Tabs.Panel id="photos">
+        <Card>Content here</Card>
+      </Tabs.Panel>
+    </Tabs>
+  );
+}
 ```
 
 ## Key Changes
@@ -96,75 +104,6 @@ The following props are no longer available in v3:
 - **Indicator**: Automatic cursor → explicit `Tabs.Indicator` component
 
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Tabs, Tab, Card, CardBody } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Tabs aria-label="Options">
-          <Tab key="photos" title="Photos">
-            <Card>
-              <CardBody>
-                Lorem ipsum dolor sit amet...
-              </CardBody>
-            </Card>
-          </Tab>
-          <Tab key="music" title="Music">
-            <Card>
-              <CardBody>
-                Ut enim ad minim veniam...
-              </CardBody>
-            </Card>
-          </Tab>
-        </Tabs>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Tabs } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Tabs className="w-full max-w-md">
-          <Tabs.ListContainer>
-            <Tabs.List aria-label="Options">
-              <Tabs.Tab id="photos">
-                Photos
-                <Tabs.Indicator />
-              </Tabs.Tab>
-              <Tabs.Tab id="music">
-                Music
-                <Tabs.Indicator />
-              </Tabs.Tab>
-            </Tabs.List>
-          </Tabs.ListContainer>
-          <Tabs.Panel className="pt-4" id="photos">
-            <Card>
-              <CardBody>
-                Lorem ipsum dolor sit amet...
-              </CardBody>
-            </Card>
-          </Tabs.Panel>
-          <Tabs.Panel className="pt-4" id="music">
-            <Card>
-              <CardBody>
-                Ut enim ad minim veniam...
-              </CardBody>
-            </Card>
-          </Tabs.Panel>
-        </Tabs>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ### Controlled Tabs
 
@@ -240,39 +179,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Disabled Tab
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tabs aria-label="Options">
-      <Tab key="photos" title="Photos">Content</Tab>
-      <Tab key="disabled" title="Disabled" isDisabled>Content</Tab>
-    </Tabs>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tabs>
-      <Tabs.ListContainer>
-        <Tabs.List aria-label="Options">
-          <Tabs.Tab id="photos">
-            Photos
-            <Tabs.Indicator />
-          </Tabs.Tab>
-          <Tabs.Tab isDisabled id="disabled">
-            Disabled
-            <Tabs.Indicator />
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs.ListContainer>
-      <Tabs.Panel id="photos">Content</Tabs.Panel>
-      <Tabs.Panel id="disabled">Content</Tabs.Panel>
-    </Tabs>
-    ```
-  </Tab>
-</Tabs>
-
 ### With Icons
 
 <Tabs items={["v2", "v3"]}>
@@ -292,42 +198,6 @@ The following props are no longer available in v3:
         <Tabs.List aria-label="Options">
           <Tabs.Tab id="photos">
             <PhotoIcon />
-            Photos
-            <Tabs.Indicator />
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs.ListContainer>
-      <Tabs.Panel id="photos">Content</Tabs.Panel>
-    </Tabs>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tabs
-      variant="underlined"
-      color="primary"
-      size="lg"
-      classNames={{
-        base: "custom-base",
-        tabList: "custom-tab-list",
-        tab: "custom-tab"
-      }}
-    >
-      <Tab key="photos" title="Photos">Content</Tab>
-    </Tabs>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tabs className="custom-base">
-      <Tabs.ListContainer>
-        <Tabs.List className="custom-tab-list" aria-label="Options">
-          <Tabs.Tab className="custom-tab" id="photos">
             Photos
             <Tabs.Indicator />
           </Tabs.Tab>
@@ -384,24 +254,3 @@ Tabs (Root)
 6. **Orientation**: `isVertical` → `orientation` prop
 7. **Styling Props Removed**: `variant`, `color`, `size`, `radius`, `placement` - use Tailwind CSS
 8. **ClassNames Removed**: Use `className` props on individual components
-
-## Tips for Migration
-
-1. **Update structure**: Wrap tabs in `Tabs.ListContainer` and `Tabs.List`
-2. **Separate tab and panel**: Move panel content to `Tabs.Panel` component
-3. **Update keys**: Change `key` prop to `id` prop (must match between tab and panel)
-4. **Remove title prop**: Move title content directly into `Tabs.Tab`
-5. **Add indicator**: Include `Tabs.Indicator` in each `Tabs.Tab`
-6. **Update orientation**: Change `isVertical` to `orientation="vertical"`
-7. **Update styling**: Replace styling props with Tailwind CSS classes
-8. **Update classNames**: Replace `classNames` prop with `className` props on individual components
-
-## Need Help?
-
-**For v3 Tabs features and API:**
-- See the [API Reference](/docs/components/tabs#api-reference)
-- Check [interactive examples](/docs/components/tabs#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

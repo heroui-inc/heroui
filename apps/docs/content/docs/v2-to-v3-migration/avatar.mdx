@@ -20,11 +20,15 @@ In v2, `Avatar` was a single component that accepted props for image source, nam
 ```tsx
 import { Avatar } from "@heroui/react";
 
-<Avatar 
-  src="https://example.com/avatar.jpg"
-  name="John Doe"
-  showFallback
-/>
+export default function App() {
+  return (
+    <Avatar 
+      src="https://example.com/avatar.jpg"
+      name="John Doe"
+      showFallback
+    />
+  );
+}
 ```
 
 ### v3: Compound Component Structure
@@ -34,10 +38,14 @@ In v3, Avatar uses a compound component pattern with explicit subcomponents:
 ```tsx
 import { Avatar } from "@heroui/react";
 
-<Avatar>
-  <Avatar.Image src="https://example.com/avatar.jpg" alt="John Doe" />
-  <Avatar.Fallback>JD</Avatar.Fallback>
-</Avatar>
+export default function App() {
+  return (
+    <Avatar>
+      <Avatar.Image src="https://example.com/avatar.jpg" alt="John Doe" />
+      <Avatar.Fallback>JD</Avatar.Fallback>
+    </Avatar>
+  );
+}
 ```
 
 ## Key Changes
@@ -86,90 +94,18 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Sizes and Colors
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Avatar } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Avatar 
-          src="https://example.com/avatar.jpg"
-          name="John Doe"
-          showFallback
-        />
-      );
-    }
+    <Avatar size="md" color="primary" src="..." name="John" />
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Avatar } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Avatar>
-          <Avatar.Image 
-            src="https://example.com/avatar.jpg" 
-            alt="John Doe"
-          />
-          <Avatar.Fallback>JD</Avatar.Fallback>
-        </Avatar>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Sizes
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Avatar size="sm" src="..." />
-    <Avatar size="md" src="..." />
-    <Avatar size="lg" src="..." />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Avatar size="sm">
-      <Avatar.Image src="..." alt="..." />
-      <Avatar.Fallback>S</Avatar.Fallback>
-    </Avatar>
-    <Avatar size="md">
-      <Avatar.Image src="..." alt="..." />
-      <Avatar.Fallback>M</Avatar.Fallback>
-    </Avatar>
-    <Avatar size="lg">
-      <Avatar.Image src="..." alt="..." />
-      <Avatar.Fallback>L</Avatar.Fallback>
-    </Avatar>
-    ```
-  </Tab>
-</Tabs>
-
-### Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Avatar color="primary" name="John" />
-    <Avatar color="success" name="Jane" />
-    <Avatar color="danger" name="Joe" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Avatar color="accent">
-      <Avatar.Fallback>J</Avatar.Fallback>
-    </Avatar>
-    <Avatar color="success">
-      <Avatar.Fallback>J</Avatar.Fallback>
-    </Avatar>
-    <Avatar color="danger">
+    <Avatar size="md" color="accent">
+      <Avatar.Image src="..." alt="John" />
       <Avatar.Fallback>J</Avatar.Fallback>
     </Avatar>
     ```
@@ -202,55 +138,6 @@ The following props are no longer available in v3:
       <Avatar.Fallback>
         <Icon icon="mdi:account" />
       </Avatar.Fallback>
-    </Avatar>
-    ```
-  </Tab>
-</Tabs>
-
-### Bordered Avatar
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Avatar 
-      isBordered
-      src="https://example.com/avatar.jpg"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Avatar className="ring-2 ring-background">
-      <Avatar.Image src="https://example.com/avatar.jpg" alt="User" />
-      <Avatar.Fallback>U</Avatar.Fallback>
-    </Avatar>
-    ```
-  </Tab>
-</Tabs>
-
-### Radius
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Avatar radius="full" src="..." />
-    <Avatar radius="lg" src="..." />
-    <Avatar radius="md" src="..." />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Avatar className="rounded-full">
-      <Avatar.Image src="..." alt="..." className="rounded-full" />
-      <Avatar.Fallback className="rounded-full">F</Avatar.Fallback>
-    </Avatar>
-    <Avatar className="rounded-lg">
-      <Avatar.Image src="..." alt="..." className="rounded-lg" />
-      <Avatar.Fallback className="rounded-lg">L</Avatar.Fallback>
-    </Avatar>
-    <Avatar className="rounded-md">
-      <Avatar.Image src="..." alt="..." className="rounded-md" />
-      <Avatar.Fallback className="rounded-md">M</Avatar.Fallback>
     </Avatar>
     ```
   </Tab>
@@ -335,27 +222,6 @@ The following props are no longer available in v3:
         </Avatar.Fallback>
       </Avatar>
     </div>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled Avatar
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Avatar 
-      isDisabled
-      src="https://example.com/avatar.jpg"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Avatar className="opacity-50 cursor-not-allowed">
-      <Avatar.Image src="https://example.com/avatar.jpg" alt="User" />
-      <Avatar.Fallback>U</Avatar.Fallback>
-    </Avatar>
     ```
   </Tab>
 </Tabs>
@@ -446,22 +312,3 @@ function getInitials(name: string): string {
 8. **AvatarGroup Removed**: Create groups manually with CSS
 9. **Icon Prop Removed**: Place icon content in `Avatar.Fallback`
 10. **ClassNames Removed**: Use `className` props on individual components
-
-## Tips for Migration
-
-1. **Start with structure**: Convert to compound components first
-2. **Generate initials**: Create a helper function for name-to-initials conversion
-3. **Handle fallbacks**: Always include `<Avatar.Fallback />` for better UX
-4. **Use Tailwind**: Many removed props can be replaced with Tailwind utility classes
-5. **Avatar groups**: Use `-space-x-2` and `ring-2 ring-background` for overlapping avatars
-6. **Image alt text**: Always provide `alt` prop on `Avatar.Image` for accessibility
-
-## Need Help?
-
-**For v3 Avatar features and API:**
-- See the [API Reference](/docs/components/avatar#api-reference)
-- Check [interactive examples](/docs/components/avatar#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

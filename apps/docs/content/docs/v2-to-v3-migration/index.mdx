@@ -28,8 +28,8 @@ Add the Migration MCP server to your MCP client configuration (e.g., in Cursor o
 ```json
 {
   "mcpServers": {
-    "heroui-v3-migration": {
-      "url": "https://heroui-v3-migration-mcp.heroui.com"
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
     }
   }
 }
@@ -39,9 +39,9 @@ Add the Migration MCP server to your MCP client configuration (e.g., in Cursor o
   **Important:** Do not use the Migration MCP alongside the `heroui-react` MCP server. Having both configured simultaneously may confuse AI assistants about which set of component documentation to use. For migration purposes, connect only to the Migration MCP. Once migration is complete, you can switch to using the `heroui-react` MCP for v3 component documentation.
 </Callout>
 
-Once configured, AI assistants can automatically access migration guides and help you migrate your components more efficiently. The MCP server provides tools like `get_migration_guide`, `list_migration_guides`, and `get_component_guides` that can be used to fetch relevant migration information for your specific needs.
+Once configured, AI assistants can automatically access migration guides and help you migrate your components more efficiently. The MCP server provides tools like `get_migration_guide`, `get_styling_migration_guide`, and `get_component_guides` that can be used to fetch relevant migration information for your specific needs.
 
-**Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/heroui-v3-migration-mcp).
+**Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
 
 ### Migration Workflow
 
@@ -388,7 +388,7 @@ Use the table below to quickly find migration guidance for each component. Use t
 | Popover | Popover | ✅ Available | [View guide →](/docs/v2-to-v3-migration/popover) |
 | Progress | Progress | 📋 Planned | - |
 | Radio | Radio | ✅ Available | [View guide →](/docs/v2-to-v3-migration/radio) |
-| Ripple | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/ripple) |
+| Ripple | ❌ | ❌ Removed | Unsupported |
 | ScrollShadow | ScrollShadow | 📋 Planned | - |
 | Select | Select | ✅ Available | [View guide →](/docs/v2-to-v3-migration/select) |
 | Skeleton | Skeleton | ✅ Available | [View guide →](/docs/v2-to-v3-migration/skeleton) |

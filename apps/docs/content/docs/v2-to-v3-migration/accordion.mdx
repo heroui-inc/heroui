@@ -20,15 +20,24 @@ In v2, `AccordionItem` was a self-contained component that accepted props for ti
 ```tsx
 import { Accordion, AccordionItem } from "@heroui/react";
 
-<Accordion>
-  <AccordionItem 
-    key="1" 
-    title="Accordion 1" 
-    subtitle="Press to expand"
-  >
-    Content here
-  </AccordionItem>
-</Accordion>
+export default function App() {
+  return (
+    <Accordion>
+      <AccordionItem
+        key="1"
+        title="Accordion 1"
+      >
+        Content here
+      </AccordionItem>
+      <AccordionItem
+        key="2"
+        title="Accordion 2"
+      >
+        Content here
+      </AccordionItem>
+    </Accordion>
+  );
+}
 ```
 
 ### v3: Compound Component Structure
@@ -38,19 +47,34 @@ In v3, Accordion uses a compound component pattern with explicit subcomponents:
 ```tsx
 import { Accordion } from "@heroui/react";
 
-<Accordion>
-  <Accordion.Item>
-    <Accordion.Heading>
-      <Accordion.Trigger>
-        Accordion 1
-        <Accordion.Indicator />
-      </Accordion.Trigger>
-    </Accordion.Heading>
-    <Accordion.Panel>
-      <Accordion.Body>Content here</Accordion.Body>
-    </Accordion.Panel>
-  </Accordion.Item>
-</Accordion>
+export default function App() {
+  return (
+    <Accordion>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Accordion 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content here</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Accordion 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content here</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
 ```
 
 ## Key Changes
@@ -76,10 +100,10 @@ import { Accordion } from "@heroui/react";
 
 The v3 variants are simplified. To achieve similar effects to v2 variants:
 
-- **v2 `light`** → v3 `default` (default variant)
-- **v2 `shadow`** → v3 `surface` (or use `default` + `shadow-lg` class for custom styling)
+- **v2 `light`** → v3 `default`
+- **v2 `shadow`** → v3 `surface`
 - **v2 `bordered`** → v3 `default` + add border classes
-- **v2 `splitted`** → v3 `default` + add spacing/margin between items
+- **v2 `splitted`** → v3 `default` + add background color and spacing/margin between items
 
 ### 4. Removed Props
 
@@ -87,9 +111,9 @@ The following props are no longer available in v3:
 
 - `isCompact` - Use Tailwind CSS classes like `text-sm` or `py-2` instead
 - `hideIndicator` - Simply don't render `<Accordion.Indicator />`
-- `disableAnimation` - Animations are handled by React Aria Components
+- `disableAnimation` - Animations not supported
 - `disableIndicatorAnimation` - Use CSS to control indicator animations
-- `motionProps` - Animation is handled internally
+- `motionProps` - Animations not supported
 - `showDivider` - Add dividers manually between items if needed
 - `dividerProps` - Use a separate `Divider` component
 - `keepContentMounted` - Content is always mounted in v3
@@ -105,120 +129,6 @@ The following props are no longer available in v3:
 **v3:** Use `id` prop on `Accordion.Item`
 
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Accordion, AccordionItem } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Accordion>
-          <AccordionItem 
-            key="1" 
-            aria-label="Accordion 1" 
-            title="Accordion 1"
-          >
-            Lorem ipsum dolor sit amet...
-          </AccordionItem>
-          <AccordionItem 
-            key="2" 
-            aria-label="Accordion 2" 
-            title="Accordion 2"
-          >
-            Lorem ipsum dolor sit amet...
-          </AccordionItem>
-        </Accordion>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Accordion } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Accordion>
-          <Accordion.Item id="1">
-            <Accordion.Heading>
-              <Accordion.Trigger>
-                Accordion 1
-                <Accordion.Indicator />
-              </Accordion.Trigger>
-            </Accordion.Heading>
-            <Accordion.Panel>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet...
-              </Accordion.Body>
-            </Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item id="2">
-            <Accordion.Heading>
-              <Accordion.Trigger>
-                Accordion 2
-                <Accordion.Indicator />
-              </Accordion.Trigger>
-            </Accordion.Heading>
-            <Accordion.Panel>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet...
-              </Accordion.Body>
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Multiple Expanded Items
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Accordion selectionMode="multiple">
-      <AccordionItem key="1" title="Item 1">
-        Content 1
-      </AccordionItem>
-      <AccordionItem key="2" title="Item 2">
-        Content 2
-      </AccordionItem>
-    </Accordion>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Accordion allowsMultipleExpanded>
-      <Accordion.Item id="1">
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 1
-            <Accordion.Indicator />
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content 1</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-      <Accordion.Item id="2">
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 2
-            <Accordion.Indicator />
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content 2</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
-    ```
-  </Tab>
-</Tabs>
 
 ### Controlled State
 
@@ -287,6 +197,8 @@ The following props are no longer available in v3:
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    import { Icon } from "@iconify/react";
+
     <Accordion>
       <AccordionItem 
         key="1"
@@ -329,12 +241,14 @@ The following props are no longer available in v3:
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    import { Icon } from "@iconify/react";
+
     <Accordion>
       <AccordionItem 
         key="1"
         title="Item 1"
         indicator={(props) => (
-          props.isOpen ? <Icon icon="minus" /> : <Icon icon="plus" />
+          props.isOpen ? <Icon icon="mdi:minus" /> : <Icon icon="mdi:plus" />
         )}
       >
         Content
@@ -377,12 +291,15 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Disabled Items
+### Disabled Items and Default Expanded Keys
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    <Accordion disabledKeys={["2"]}>
+    <Accordion 
+      defaultExpandedKeys={["1"]}
+      disabledKeys={["2"]}
+    >
       <AccordionItem key="1" title="Item 1">
         Content 1
       </AccordionItem>
@@ -394,7 +311,7 @@ The following props are no longer available in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
-    <Accordion>
+    <Accordion defaultExpandedKeys={["1"]}>
       <Accordion.Item id="1">
         <Accordion.Heading>
           <Accordion.Trigger>
@@ -407,51 +324,6 @@ The following props are no longer available in v3:
         </Accordion.Panel>
       </Accordion.Item>
       <Accordion.Item id="2" isDisabled>
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 2
-            <Accordion.Indicator />
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content 2</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
-    ```
-  </Tab>
-</Tabs>
-
-### Default Expanded Keys
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Accordion defaultExpandedKeys={["2"]}>
-      <AccordionItem key="1" title="Item 1">
-        Content 1
-      </AccordionItem>
-      <AccordionItem key="2" title="Item 2">
-        Content 2
-      </AccordionItem>
-    </Accordion>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Accordion defaultExpandedKeys={["2"]}>
-      <Accordion.Item id="1">
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 1
-            <Accordion.Indicator />
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content 1</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-      <Accordion.Item id="2">
         <Accordion.Heading>
           <Accordion.Trigger>
             Item 2
@@ -525,21 +397,3 @@ Accordion (Root)
 6. **Removed Props**: Many convenience props removed; use Tailwind CSS classes instead
 7. **Content Structure**: Title, subtitle, and start content must be manually placed in `Trigger`
 8. **Indicator**: Must be explicitly rendered; no automatic indicator
-
-## Tips for Migration
-
-1. **Start with structure**: Convert the component structure first, then handle props
-2. **Use TypeScript**: The v3 types will help guide you through the migration
-3. **Leverage Tailwind**: Many removed props can be replaced with Tailwind utility classes
-4. **Test interactions**: Ensure keyboard navigation and accessibility still work
-5. **Check animations**: v3 handles animations differently, so verify they meet your needs
-
-## Need Help?
-
-**For v3 Accordion features and API:**
-- See the [API Reference](/docs/components/accordion#api-reference)
-- Check [interactive examples](/docs/components/accordion#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

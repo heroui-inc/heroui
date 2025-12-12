@@ -20,9 +20,13 @@ In v2, Tooltip used a `content` prop:
 ```tsx
 import { Tooltip, Button } from "@heroui/react";
 
-<Tooltip content="I am a tooltip">
-  <Button>Hover me</Button>
-</Tooltip>
+export default function App() {
+  return (
+    <Tooltip content="I am a tooltip">
+      <Button>Hover me</Button>
+    </Tooltip>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -32,14 +36,18 @@ In v3, Tooltip requires compound components:
 ```tsx
 import { Tooltip, Button } from "@heroui/react";
 
-<Tooltip>
-  <Tooltip.Trigger>
-    <Button>Hover me</Button>
-  </Tooltip.Trigger>
-  <Tooltip.Content>
-    I am a tooltip
-  </Tooltip.Content>
-</Tooltip>
+export default function App() {
+  return (
+    <Tooltip>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        I am a tooltip
+      </Tooltip.Content>
+    </Tooltip>
+  );
+}
 ```
 
 ## Key Changes
@@ -94,54 +102,30 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Content Configuration
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Tooltip, Button } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Tooltip content="I am a tooltip">
-          <Button>Hover me</Button>
-        </Tooltip>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Tooltip, Button } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Tooltip delay={0}>
-          <Tooltip.Trigger>
-            <Button>Hover me</Button>
-          </Tooltip.Trigger>
-          <Tooltip.Content>
-            <p>I am a tooltip</p>
-          </Tooltip.Content>
-        </Tooltip>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Arrow
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* With arrow */}
     <Tooltip content="I am a tooltip" showArrow>
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    {/* With placement */}
+    <Tooltip content="Tooltip" placement="bottom">
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    {/* With offset */}
+    <Tooltip content="Tooltip" offset={12}>
       <Button>Hover me</Button>
     </Tooltip>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* With arrow */}
     <Tooltip delay={0}>
       <Tooltip.Trigger>
         <Button>Hover me</Button>
@@ -151,27 +135,23 @@ The following props are no longer available in v3:
         <p>I am a tooltip</p>
       </Tooltip.Content>
     </Tooltip>
-    ```
-  </Tab>
-</Tabs>
-
-### With Placement
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tooltip content="Tooltip" placement="bottom">
-      <Button>Hover me</Button>
-    </Tooltip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
+    
+    {/* With placement */}
     <Tooltip delay={0}>
       <Tooltip.Trigger>
         <Button>Hover me</Button>
       </Tooltip.Trigger>
       <Tooltip.Content placement="bottom">
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    
+    {/* With offset */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content offset={12}>
         <p>Tooltip</p>
       </Tooltip.Content>
     </Tooltip>
@@ -273,38 +253,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tooltip
-      content="Tooltip"
-      color="primary"
-      size="lg"
-      classNames={{
-        base: "custom-base",
-        content: "custom-content"
-      }}
-    >
-      <Button>Hover me</Button>
-    </Tooltip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tooltip delay={0}>
-      <Tooltip.Trigger>
-        <Button>Hover me</Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content className="custom-content bg-accent text-accent-foreground">
-        <p>Tooltip</p>
-      </Tooltip.Content>
-    </Tooltip>
-    ```
-  </Tab>
-</Tabs>
-
 ### With Custom Trigger
 
 <Tabs items={["v2", "v3"]}>
@@ -322,30 +270,6 @@ The following props are no longer available in v3:
         <div>Custom trigger</div>
       </Tooltip.Trigger>
       <Tooltip.Content>
-        <p>Tooltip</p>
-      </Tooltip.Content>
-    </Tooltip>
-    ```
-  </Tab>
-</Tabs>
-
-### With Offset
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tooltip content="Tooltip" offset={12}>
-      <Button>Hover me</Button>
-    </Tooltip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tooltip delay={0}>
-      <Tooltip.Trigger>
-        <Button>Hover me</Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content offset={12}>
         <p>Tooltip</p>
       </Tooltip.Content>
     </Tooltip>
@@ -403,24 +327,3 @@ Tooltip (Root)
 6. **Motion Props Removed**: `motionProps` removed - animations handled differently
 7. **Advanced Props Removed**: Many positioning and behavior props removed
 8. **Default Delay Changed**: Default delay changed from `0` to `700`
-
-## Tips for Migration
-
-1. **Update structure**: Wrap trigger in `Tooltip.Trigger` and content in `Tooltip.Content`
-2. **Remove content prop**: Move content to `Tooltip.Content` children
-3. **Add arrow**: Use `showArrow` on `Tooltip.Content` and include `Tooltip.Arrow` component
-4. **Move placement**: Move `placement` prop to `Tooltip.Content`
-5. **Move offset**: Move `offset` prop to `Tooltip.Content`
-6. **Update styling**: Replace styling props with Tailwind CSS classes
-7. **Update classNames**: Replace `classNames` prop with `className` props on individual components
-8. **Set delay**: If you need immediate tooltip (like v2 default), set `delay={0}`
-
-## Need Help?
-
-**For v3 Tooltip features and API:**
-- See the [API Reference](/docs/components/tooltip#api-reference)
-- Check [interactive examples](/docs/components/tooltip#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

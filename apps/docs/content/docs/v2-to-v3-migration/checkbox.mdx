@@ -20,7 +20,9 @@ In v2, `Checkbox` accepted children as the label:
 ```tsx
 import { Checkbox } from "@heroui/react";
 
-<Checkbox defaultSelected>Option</Checkbox>
+export default function App() {
+  return <Checkbox defaultSelected>Option</Checkbox>;
+}
 ```
 
 ### v3: Compound Component Structure
@@ -30,14 +32,18 @@ In v3, Checkbox uses a compound component pattern with explicit subcomponents:
 ```tsx
 import { Checkbox, Label } from "@heroui/react";
 
-<Checkbox defaultSelected id="option">
-  <Checkbox.Control>
-    <Checkbox.Indicator />
-  </Checkbox.Control>
-  <Checkbox.Content>
-    <Label htmlFor="option">Option</Label>
-  </Checkbox.Content>
-</Checkbox>
+export default function App() {
+  return (
+    <Checkbox defaultSelected id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+  );
+}
 ```
 
 ## Key Changes
@@ -75,38 +81,6 @@ The following props are no longer available in v3:
 **v3:** `CheckboxGroup` (separate component, but structure of children changed)
 
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Checkbox } from "@heroui/react";
-
-    export default function App() {
-      return <Checkbox defaultSelected>Option</Checkbox>;
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Checkbox, Label } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Checkbox defaultSelected id="option">
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
-          <Checkbox.Content>
-            <Label htmlFor="option">Option</Label>
-          </Checkbox.Content>
-        </Checkbox>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ### Controlled Checkbox
 
@@ -220,19 +194,21 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Colors
+### Colors and Sizes
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    {/* Colors */}
     <Checkbox defaultSelected color="primary">Primary</Checkbox>
-    <Checkbox defaultSelected color="success">Success</Checkbox>
-    <Checkbox defaultSelected color="danger">Danger</Checkbox>
+    
+    {/* Sizes */}
+    <Checkbox defaultSelected size="md">Medium</Checkbox>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    {/* Use Tailwind classes for custom colors */}
+    {/* Colors - use Tailwind classes */}
     <Checkbox defaultSelected id="primary">
       <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
         <Checkbox.Indicator />
@@ -241,102 +217,14 @@ The following props are no longer available in v3:
         <Label htmlFor="primary">Primary</Label>
       </Checkbox.Content>
     </Checkbox>
-    ```
-  </Tab>
-</Tabs>
-
-### Sizes
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Checkbox defaultSelected size="sm">Small</Checkbox>
-    <Checkbox defaultSelected size="md">Medium</Checkbox>
-    <Checkbox defaultSelected size="lg">Large</Checkbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Use Tailwind classes for sizes */}
-    <Checkbox defaultSelected id="small">
-      <Checkbox.Control className="size-4">
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="small">Small</Label>
-      </Checkbox.Content>
-    </Checkbox>
+    
+    {/* Sizes - use Tailwind classes */}
     <Checkbox defaultSelected id="medium">
       <Checkbox.Control className="size-5">
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
         <Label htmlFor="medium">Medium</Label>
-      </Checkbox.Content>
-    </Checkbox>
-    <Checkbox defaultSelected id="large">
-      <Checkbox.Control className="size-6">
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="large">Large</Label>
-      </Checkbox.Content>
-    </Checkbox>
-    ```
-  </Tab>
-</Tabs>
-
-### Radius
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Checkbox defaultSelected radius="full">Rounded</Checkbox>
-    <Checkbox defaultSelected radius="lg">Large Radius</Checkbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Checkbox defaultSelected id="rounded">
-      <Checkbox.Control className="rounded-full">
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="rounded">Rounded</Label>
-      </Checkbox.Content>
-    </Checkbox>
-    <Checkbox defaultSelected id="large-radius">
-      <Checkbox.Control className="rounded-lg">
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="large-radius">Large Radius</Label>
-      </Checkbox.Content>
-    </Checkbox>
-    ```
-  </Tab>
-</Tabs>
-
-### Line Through
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Checkbox defaultSelected lineThrough>
-      Option
-    </Checkbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Checkbox defaultSelected id="option">
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="option" className="line-through">
-          Option
-        </Label>
       </Checkbox.Content>
     </Checkbox>
     ```
@@ -391,12 +279,13 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Disabled State
+### States
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     <Checkbox isDisabled>Disabled</Checkbox>
+    <Checkbox isInvalid>Invalid</Checkbox>
     ```
   </Tab>
   <Tab value="v3">
@@ -409,20 +298,6 @@ The following props are no longer available in v3:
         <Label htmlFor="disabled">Disabled</Label>
       </Checkbox.Content>
     </Checkbox>
-    ```
-  </Tab>
-</Tabs>
-
-### Invalid State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Checkbox isInvalid>Invalid</Checkbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
     <Checkbox isInvalid id="invalid">
       <Checkbox.Control>
         <Checkbox.Indicator />
@@ -521,22 +396,3 @@ Checkbox (Root)
 8. **Icon Prop Removed**: Use custom content in `Checkbox.Indicator`
 9. **CheckboxGroup**: Changed from `Checkbox.Group` to `CheckboxGroup` with different child structure
 10. **ClassNames Removed**: Use `className` props on individual components
-
-## Tips for Migration
-
-1. **Start with structure**: Convert to compound components first
-2. **Add Label component**: Wrap labels in `Checkbox.Content` with `Label` component
-3. **Use htmlFor/id**: Always provide `id` on Checkbox and `htmlFor` on Label for accessibility
-4. **Custom styling**: Use Tailwind classes on `Checkbox.Control` for colors, sizes, and radius
-5. **Custom indicators**: Use render props in `Checkbox.Indicator` for custom icons
-6. **CheckboxGroup**: Update from `Checkbox.Group` to `CheckboxGroup` and restructure children
-
-## Need Help?
-
-**For v3 Checkbox features and API:**
-- See the [API Reference](/docs/components/checkbox#api-reference)
-- Check [interactive examples](/docs/components/checkbox#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

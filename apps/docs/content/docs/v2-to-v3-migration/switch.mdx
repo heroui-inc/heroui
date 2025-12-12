@@ -20,7 +20,9 @@ In v2, Switch used a simple structure with children as label:
 ```tsx
 import { Switch } from "@heroui/react";
 
-<Switch>Enable notifications</Switch>
+export default function App() {
+  return <Switch>Enable notifications</Switch>;
+}
 ```
 
 ### v3: Compound Components
@@ -30,12 +32,16 @@ In v3, Switch requires compound components:
 ```tsx
 import { Switch, Label } from "@heroui/react";
 
-<Switch>
-  <Switch.Control>
-    <Switch.Thumb />
-  </Switch.Control>
-  <Label>Enable notifications</Label>
-</Switch>
+export default function App() {
+  return (
+    <Switch>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Enable notifications</Label>
+    </Switch>
+  );
+}
 ```
 
 ## Key Changes
@@ -75,36 +81,6 @@ The following props are no longer available in v3:
 - `Switch.Icon` - For icons inside the thumb
 
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Switch } from "@heroui/react";
-
-    export default function App() {
-      return <Switch defaultSelected aria-label="Automatic updates" />;
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Switch, Label } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Switch defaultSelected>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label>Automatic updates</Label>
-        </Switch>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ### Controlled Switch
 
@@ -206,20 +182,27 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Sizes
+### Sizes and Colors
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    {/* Sizes */}
     <div className="flex gap-4">
       <Switch size="sm">Small</Switch>
       <Switch size="md">Medium</Switch>
       <Switch size="lg">Large</Switch>
     </div>
+    
+    {/* Colors */}
+    <Switch color="primary">Primary</Switch>
+    <Switch color="success">Success</Switch>
+    <Switch color="danger">Danger</Switch>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Sizes */}
     <div className="flex gap-4">
       <Switch size="sm">
         <Switch.Control>
@@ -240,23 +223,8 @@ The following props are no longer available in v3:
         <Label>Large</Label>
       </Switch>
     </div>
-    ```
-  </Tab>
-</Tabs>
-
-### Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Switch color="primary">Primary</Switch>
-    <Switch color="success">Success</Switch>
-    <Switch color="danger">Danger</Switch>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Use Tailwind CSS classes for colors */}
+    
+    {/* Colors - Use Tailwind CSS classes */}
     <Switch>
       <Switch.Control className="data-[selected=true]:bg-accent">
         <Switch.Thumb />
@@ -274,54 +242,6 @@ The following props are no longer available in v3:
         <Switch.Thumb />
       </Switch.Control>
       <Label>Danger</Label>
-    </Switch>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Switch isDisabled>Disabled switch</Switch>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Switch isDisabled>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Disabled switch</Label>
-    </Switch>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Switch
-      classNames={{
-        base: "custom-base",
-        wrapper: "custom-wrapper",
-        thumb: "custom-thumb"
-      }}
-    >
-      Custom switch
-    </Switch>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Switch className="custom-base">
-      <Switch.Control className="custom-control">
-        <Switch.Thumb className="custom-thumb" />
-      </Switch.Control>
-      <Label>Custom switch</Label>
     </Switch>
     ```
   </Tab>
@@ -413,24 +333,3 @@ SwitchGroup
 5. **Icon Props Removed**: `thumbIcon`, `startContent`, `endContent` - use components or customize directly
 6. **ClassNames Removed**: Use `className` props on individual components
 7. **New Component**: `SwitchGroup` available for grouping switches
-
-## Tips for Migration
-
-1. **Update structure**: Wrap Switch content in `Switch.Control` and `Switch.Thumb`
-2. **Add Label**: Use `Label` component for switch label
-3. **Update event handler**: Change `onValueChange` to `onChange`
-4. **Update icons**: Replace `thumbIcon` with `Switch.Icon` inside `Switch.Thumb`
-5. **Update start/end content**: Add icons directly to `Switch.Control` with appropriate styling
-6. **Update colors**: Use Tailwind CSS classes with `data-[selected=true]:` prefix
-7. **Update styling**: Replace `classNames` prop with `className` props on individual components
-8. **Use SwitchGroup**: For grouping switches, use `SwitchGroup` component
-
-## Need Help?
-
-**For v3 Switch features and API:**
-- See the [API Reference](/docs/components/switch#api-reference)
-- Check [interactive examples](/docs/components/switch#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

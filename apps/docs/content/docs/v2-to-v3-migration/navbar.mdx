@@ -46,88 +46,53 @@ The Navbar component was a complex navigation component with multiple subcompone
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@heroui/react";
+    import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
 
-    export default function App() {
-      return (
-        <Navbar>
-          <NavbarBrand>
-            <Logo />
-            <p className="font-bold">ACME</p>
-          </NavbarBrand>
-          <NavbarContent>
-            <NavbarItem>
-              <Link href="#">Features</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link href="#">Pricing</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link href="#">About</Link>
-            </NavbarItem>
-          </NavbarContent>
-        </Navbar>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Link } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
-          <header className="flex h-16 items-center justify-between px-6">
-            <div className="flex items-center gap-3">
-              <Logo />
-              <p className="font-bold">ACME</p>
-            </div>
-            <ul className="flex items-center gap-4">
-              <li>
-                <Link href="#">Features</Link>
-              </li>
-              <li>
-                <Link href="#">Pricing</Link>
-              </li>
-              <li>
-                <Link href="#">About</Link>
-              </li>
-            </ul>
-          </header>
-        </nav>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Right-Aligned Content
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Basic */}
+    <Navbar>
+      <NavbarBrand>
+        <Logo />
+        <p className="font-bold">ACME</p>
+      </NavbarBrand>
+      <NavbarContent>
+        <NavbarItem><Link href="#">Features</Link></NavbarItem>
+        <NavbarItem><Link href="#">Pricing</Link></NavbarItem>
+      </NavbarContent>
+    </Navbar>
+    
+    {/* With right-aligned content */}
     <Navbar>
       <NavbarBrand>Logo</NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem>
-          <Button>Sign Up</Button>
-        </NavbarItem>
+        <NavbarItem><Button>Sign Up</Button></NavbarItem>
       </NavbarContent>
     </Navbar>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Button } from "@heroui/react";
+    import { Link, Button } from "@heroui/react";
 
+    {/* Basic */}
+    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+      <header className="flex h-16 items-center justify-between px-6">
+        <div className="flex items-center gap-3">
+          <Logo />
+          <p className="font-bold">ACME</p>
+        </div>
+        <ul className="flex items-center gap-4">
+          <li><Link href="#">Features</Link></li>
+          <li><Link href="#">Pricing</Link></li>
+        </ul>
+      </header>
+    </nav>
+    
+    {/* With right-aligned content */}
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
       <header className="flex h-16 items-center justify-between px-6">
         <div>Logo</div>
         <ul className="flex items-center gap-4">
-          <li>
-            <Button>Sign Up</Button>
-          </li>
+          <li><Button>Sign Up</Button></li>
         </ul>
       </header>
     </nav>
@@ -243,52 +208,6 @@ The Navbar component was a complex navigation component with multiple subcompone
         </nav>
       );
     }
-    ```
-  </Tab>
-</Tabs>
-
-### With Active State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <NavbarItem isActive>
-      <Link href="#">Dashboard</Link>
-    </NavbarItem>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <li>
-      <Link
-        href="#"
-        className="font-medium text-accent"
-        aria-current="page"
-      >
-        Dashboard
-      </Link>
-    </li>
-    ```
-  </Tab>
-</Tabs>
-
-### With Max Width Container
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Navbar maxWidth="lg">
-      {/* content */}
-    </Navbar>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <nav className="sticky top-0 z-40 w-full">
-      <header className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        {/* content */}
-      </header>
-    </nav>
     ```
   </Tab>
 </Tabs>
@@ -687,16 +606,6 @@ useEffect(() => {
 6. **Handle State**: Manage mobile menu state with React `useState`
 7. **Optional**: Create reusable Navbar component for your application
 
-## Tips for Migration
-
-1. **Start Simple**: Begin with a basic navbar structure, then add features
-2. **Use Semantic HTML**: Use `<nav>`, `<header>`, `<ul>`, `<li>` for accessibility
-3. **Mobile-First**: Design mobile menu first, then add desktop navigation
-4. **Accessibility**: Include `aria-label`, `aria-expanded` for mobile toggle
-5. **Responsive**: Use Tailwind responsive utilities (`md:flex`, `md:hidden`)
-6. **Reusable Component**: Create a reusable component if you have multiple navbars
-7. **Keep It Simple**: Avoid over-engineering - start with basic functionality
-
 ## Common Patterns
 
 ### Simple Navigation
@@ -733,17 +642,3 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/r
   </li>
 </ul>
 ```
-
-## Need Help?
-
-**For styling guidance:**
-- See the [Styling documentation](/docs/handbook/styling)
-- Check [Tailwind CSS documentation](https://tailwindcss.com/docs) for layout utilities
-
-**For mobile menu patterns:**
-- See [MDN Navigation Patterns](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/patterns/navigation)
-- Check [WAI-ARIA Navigation Example](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

@@ -20,10 +20,14 @@ In v2, Radio used a simple structure with props:
 ```tsx
 import { RadioGroup, Radio } from "@heroui/react";
 
-<RadioGroup label="Select city">
-  <Radio value="london">London</Radio>
-  <Radio value="tokyo" description="Capital of Japan">Tokyo</Radio>
-</RadioGroup>
+export default function App() {
+  return (
+    <RadioGroup label="Select city">
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo" description="Capital of Japan">Tokyo</Radio>
+    </RadioGroup>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -33,26 +37,30 @@ In v3, Radio requires compound components:
 ```tsx
 import { RadioGroup, Radio, Label, Description } from "@heroui/react";
 
-<RadioGroup>
-  <Label>Select city</Label>
-  <Radio value="london">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
-      <Label>London</Label>
-    </Radio.Content>
-  </Radio>
-  <Radio value="tokyo">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
-      <Label>Tokyo</Label>
-      <Description>Capital of Japan</Description>
-    </Radio.Content>
-  </Radio>
-</RadioGroup>
+export default function App() {
+  return (
+    <RadioGroup>
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+          <Description>Capital of Japan</Description>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+  );
+}
 ```
 
 ## Key Changes
@@ -87,82 +95,33 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Form Validation
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { RadioGroup, Radio } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <RadioGroup label="Select your favorite city">
-          <Radio value="buenos-aires">Buenos Aires</Radio>
-          <Radio value="sydney">Sydney</Radio>
-          <Radio value="san-francisco">San Francisco</Radio>
-        </RadioGroup>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { RadioGroup, Radio, Label } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <RadioGroup>
-          <Label>Select your favorite city</Label>
-          <Radio value="buenos-aires">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
-              <Label>Buenos Aires</Label>
-            </Radio.Content>
-          </Radio>
-          <Radio value="sydney">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
-              <Label>Sydney</Label>
-            </Radio.Content>
-          </Radio>
-          <Radio value="san-francisco">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
-              <Label>San Francisco</Label>
-            </Radio.Content>
-          </Radio>
-        </RadioGroup>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Description
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* With description */}
     <RadioGroup label="Select city">
       <Radio value="london" description="Capital of England">
         London
       </Radio>
-      <Radio value="tokyo" description="Capital of Japan">
-        Tokyo
-      </Radio>
+    </RadioGroup>
+    
+    {/* With validation */}
+    <RadioGroup
+      isInvalid
+      errorMessage="Please select an option"
+      label="Select city"
+    >
+      <Radio value="london">London</Radio>
     </RadioGroup>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Description } from "@heroui/react";
+    import { Description, FieldError } from "@heroui/react";
 
+    {/* With description */}
     <RadioGroup>
       <Label>Select city</Label>
       <Radio value="london">
@@ -174,15 +133,20 @@ The following props are no longer available in v3:
           <Description>Capital of England</Description>
         </Radio.Content>
       </Radio>
-      <Radio value="tokyo">
+    </RadioGroup>
+    
+    {/* With validation */}
+    <RadioGroup isInvalid>
+      <Label>Select city</Label>
+      <Radio value="london">
         <Radio.Control>
           <Radio.Indicator />
         </Radio.Control>
         <Radio.Content>
-          <Label>Tokyo</Label>
-          <Description>Capital of Japan</Description>
+          <Label>London</Label>
         </Radio.Content>
       </Radio>
+      <FieldError>Please select an option</FieldError>
     </RadioGroup>
     ```
   </Tab>
@@ -271,123 +235,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### With Validation
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <RadioGroup
-      isInvalid
-      errorMessage="Please select an option"
-      label="Select city"
-    >
-      <Radio value="london">London</Radio>
-      <Radio value="tokyo">Tokyo</Radio>
-    </RadioGroup>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { FieldError } from "@heroui/react";
-
-    <RadioGroup isInvalid>
-      <Label>Select city</Label>
-      <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
-          <Label>London</Label>
-        </Radio.Content>
-      </Radio>
-      <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
-          <Label>Tokyo</Label>
-        </Radio.Content>
-      </Radio>
-      <FieldError>Please select an option</FieldError>
-    </RadioGroup>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <RadioGroup isDisabled label="Select city">
-      <Radio value="london">London</Radio>
-      <Radio value="tokyo">Tokyo</Radio>
-    </RadioGroup>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <RadioGroup isDisabled>
-      <Label>Select city</Label>
-      <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
-          <Label>London</Label>
-        </Radio.Content>
-      </Radio>
-      <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
-          <Label>Tokyo</Label>
-        </Radio.Content>
-      </Radio>
-    </RadioGroup>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <RadioGroup
-      classNames={{
-        base: "custom-base",
-        wrapper: "custom-wrapper"
-      }}
-    >
-      <Radio
-        classNames={{
-          base: "custom-radio-base",
-          control: "custom-control"
-        }}
-        value="london"
-      >
-        London
-      </Radio>
-    </RadioGroup>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <RadioGroup className="custom-base">
-      <Radio className="custom-radio-base" value="london">
-        <Radio.Control className="custom-control">
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
-          <Label>London</Label>
-        </Radio.Content>
-      </Radio>
-    </RadioGroup>
-    ```
-  </Tab>
-</Tabs>
 
 ## Component Anatomy
 
@@ -414,23 +261,3 @@ RadioGroup (Root)
 5. **Styling Props Removed**: `size`, `color` - use Tailwind CSS
 6. **ClassNames Removed**: Use `className` props on individual components
 7. **Error Message**: Use `FieldError` component instead of `errorMessage` prop
-
-## Tips for Migration
-
-1. **Update structure**: Wrap Radio content in `Radio.Control`, `Radio.Indicator`, and `Radio.Content`
-2. **Add Label**: Use `Label` component for RadioGroup label
-3. **Add Description**: Use `Description` component inside `Radio.Content`
-4. **Update event handler**: Change `onValueChange` to `onChange`
-5. **Add indicator**: Include `Radio.Indicator` inside `Radio.Control`
-6. **Update styling**: Use Tailwind CSS classes for sizes and colors
-7. **Add error**: Use `FieldError` component for validation messages
-
-## Need Help?
-
-**For v3 RadioGroup features and API:**
-- See the [API Reference](/docs/components/radio-group#api-reference)
-- Check [interactive examples](/docs/components/radio-group#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)
