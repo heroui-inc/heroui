@@ -1,6 +1,6 @@
 /* Base styles */
 .kbd {
-  @apply bg-default text-muted border-border inline-flex h-6 items-center space-x-0.5 whitespace-nowrap rounded-lg px-2 text-center font-sans text-sm font-medium rtl:space-x-reverse;
+  @apply inline-flex h-6 items-center space-x-0.5 rounded-lg border-border bg-default px-2 text-center font-sans text-sm font-medium whitespace-nowrap text-muted rtl:space-x-reverse;
   word-spacing: -0.25rem;
 }
 

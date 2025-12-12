@@ -18,7 +18,7 @@ export function WithSections() {
             <Header>Actions</Header>
             <Dropdown.Item id="new-file" textValue="New file">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+                <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:square-plus" />
               </div>
               <div className="flex flex-col">
                 <Label>New file</Label>
@@ -31,7 +31,7 @@ export function WithSections() {
             </Dropdown.Item>
             <Dropdown.Item id="edit-file" textValue="Edit file">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+                <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:pencil" />
               </div>
               <div className="flex flex-col">
                 <Label>Edit file</Label>
@@ -48,7 +48,7 @@ export function WithSections() {
             <Header>Danger zone</Header>
             <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+                <Icon className="size-4 flex-shrink-0 text-danger" icon="gravity-ui:trash-bin" />
               </div>
               <div className="flex flex-col">
                 <Label>Delete file</Label>

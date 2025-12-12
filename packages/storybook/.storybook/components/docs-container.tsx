@@ -21,9 +21,7 @@ export const DocsContainer: NonNullable<Preview["parameters"]>["docs"]["containe
 }) => {
   const initialTheme = useMemo(
     () =>
-      ensureThemeKey(
-        (context?.globals?.[THEME_GLOBAL_TYPE_ID] as string | undefined) || undefined,
-      ),
+      ensureThemeKey((context?.globals?.[THEME_GLOBAL_TYPE_ID] as string | undefined) || undefined),
     [context?.globals],
   );
 

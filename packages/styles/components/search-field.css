@@ -19,7 +19,7 @@
 }
 
 .search-field__group {
-  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -90,8 +90,8 @@
 }
 
 .search-field__search-icon {
-  @apply text-field-placeholder pointer-events-none shrink-0;
-  @apply ml-3 mr-0 size-4;
+  @apply pointer-events-none shrink-0 text-field-placeholder;
+  @apply mr-0 ml-3 size-4;
 }
 
 .search-field__clear-button {

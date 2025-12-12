@@ -67,11 +67,11 @@ export function DeliveryAndPayment() {
                 key={option.value}
                 value={option.value}
                 className={clsx(
-                  "bg-surface data-[selected=true]:border-accent data-[selected=true]:bg-accent/10 group relative flex-col gap-4 rounded-xl border border-transparent px-5 py-4 transition-all",
+                  "group relative flex-col gap-4 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                   "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
                 )}
               >
-                <Radio.Control className="absolute right-4 top-3 size-5">
+                <Radio.Control className="absolute top-3 right-4 size-5">
                   <Radio.Indicator />
                 </Radio.Control>
                 <Radio.Content className="flex flex-col gap-6">
@@ -97,11 +97,11 @@ export function DeliveryAndPayment() {
                 key={option.value}
                 value={option.value}
                 className={clsx(
-                  "bg-surface group relative flex-col gap-4 rounded-xl border border-transparent px-5 py-4 transition-all",
+                  "group relative flex-col gap-4 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all",
                   "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                 )}
               >
-                <Radio.Control className="absolute right-4 top-3 size-5">
+                <Radio.Control className="absolute top-3 right-4 size-5">
                   <Radio.Indicator />
                 </Radio.Control>
                 <Radio.Content className="flex flex-row items-start justify-start gap-4">

@@ -5,7 +5,7 @@ export function Variants() {
     <div className="flex items-center gap-4">
       <div className="flex flex-col items-center gap-2">
         <CloseButton />
-        <span className="text-muted text-xs">Default</span>
+        <span className="text-xs text-muted">Default</span>
       </div>
     </div>
   );

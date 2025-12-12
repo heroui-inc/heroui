@@ -23,7 +23,7 @@
   }
 
   [data-slot="description"] {
-    @apply pointer-events-none select-none text-wrap;
+    @apply pointer-events-none text-wrap select-none;
   }
 
   /* Add padding-right when indicator is present */
@@ -72,12 +72,12 @@
    ========================================================================== */
 
 .listbox-item__indicator {
-  @apply text-default-foreground absolute right-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
+  @apply absolute top-1/2 right-2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-default-foreground;
 
   /**
    * Transitions
    */
-  @apply duration-250 transition motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
   [data-slot="listbox-item-indicator--checkmark"] {

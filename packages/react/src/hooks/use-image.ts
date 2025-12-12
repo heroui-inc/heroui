@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/immutability */
 "use client";
 
 import type {ImgHTMLAttributes, SyntheticEvent} from "react";

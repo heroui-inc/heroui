@@ -1,64 +1,32 @@
-# Dependencies
-node_modules
-.pnp
-.pnp.js
-
-# Build outputs
-dist
-build
-.next
-out
-.turbo
-.swc
-.cache
-.vercel
+**/.temp
+**/.next
+**/.swc
+**/.turbo
+**/.cache
+**/.build
+**/.vercel
+**/dist
+**/build
+**/storybook-static
 .rollup.cache
-
-# Generated files
-*.tsbuildinfo
-.next-env.d.ts
+.rollup.cache/**
+**/node_modules/
+**/public/*
 pnpm-lock.yaml
-yarn.lock
-package-lock.json
-
-# Storybook
-storybook-static
-.storybook-static
-
-# Coverage
-coverage
-.nyc_output
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode
-.idea
-*.swp
-*.swo
-*~
-
-# Temporary files
-.temp
-.tmp
-*.tmp
-
-# Changeset
-.changeset
-
-# Content layer
-.contentlayer
-.source
-
-# Public assets (usually don't need formatting)
-public
-
+**/.contentlayer/
+**/.source/**
+**/coverage
+**/__snapshots__
+**/.DS_Store
+**/.changeset
+**/*.md
+**/*.mdx
+!public/manifest.json
+!.vscode
+!scripts
+!.*.js
+!.*.cjs
+!.*.mjs
+!.*.ts
+!contentlayer.config.ts
+!next-sitemap.config.ts

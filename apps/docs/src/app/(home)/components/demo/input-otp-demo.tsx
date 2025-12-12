@@ -12,7 +12,7 @@ export function InputOTPDemo() {
       <div className="flex w-[280px] flex-col items-start justify-center gap-2">
         <div className="flex flex-col items-start gap-1">
           <Label>Verify account</Label>
-          <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
+          <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
         </div>
         <InputOTP maxLength={6} value={value} onChange={setValue}>
           <InputOTP.Group>
@@ -28,7 +28,7 @@ export function InputOTPDemo() {
           </InputOTP.Group>
         </InputOTP>
         <div className="flex items-center gap-[5px] px-1 pt-1">
-          <p className="text-muted text-sm">Didn&apos;t receive a code?</p>
+          <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
           <Link className="text-foreground" underline="always">
             Resend
           </Link>

@@ -25,4 +25,3 @@ export const REDUCE_MOTION_OPTIONS: ReduceMotionOption[] = [
     icon: "stop",
   },
 ];
-

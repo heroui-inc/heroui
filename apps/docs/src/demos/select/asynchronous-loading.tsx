@@ -44,7 +44,7 @@ export function AsynchronousLoading() {
           >
             <div className="flex items-center justify-center gap-2 py-2">
               <Spinner size="sm" />
-              <span className="text-muted text-sm">Loading more...</span>
+              <span className="text-sm text-muted">Loading more...</span>
             </div>
           </ListBoxLoadMoreItem>
         </ListBox>

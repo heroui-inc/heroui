@@ -14,8 +14,7 @@ import {separatorVariants} from "./separator.styles";
  * Separator Root
  * -----------------------------------------------------------------------------------------------*/
 interface SeparatorRootProps
-  extends ComponentPropsWithRef<typeof SeparatorPrimitive>,
-    SeparatorVariants {}
+  extends ComponentPropsWithRef<typeof SeparatorPrimitive>, SeparatorVariants {}
 
 const SeparatorRoot = ({
   className,

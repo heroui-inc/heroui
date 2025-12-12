@@ -10,7 +10,7 @@ export function PopoverWithArrow() {
           <Popover.Dialog>
             <Popover.Arrow />
             <Popover.Heading>Popover with Arrow</Popover.Heading>
-            <p className="text-muted mt-2 text-sm">
+            <p className="mt-2 text-sm text-muted">
               The arrow shows which element triggered the popover.
             </p>
           </Popover.Dialog>
@@ -25,7 +25,7 @@ export function PopoverWithArrow() {
           <Popover.Dialog>
             <Popover.Arrow />
             <Popover.Heading>Popover with Arrow</Popover.Heading>
-            <p className="text-muted mt-2 text-sm">
+            <p className="mt-2 text-sm text-muted">
               The arrow shows which element triggered the popover.
             </p>
           </Popover.Dialog>

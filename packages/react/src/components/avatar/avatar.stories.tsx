@@ -248,23 +248,23 @@ const AvatarGroupTemplate = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-center -space-x-2">
         {users.map((user) => (
-          <Avatar key={user.id} className="ring-background ring-2">
+          <Avatar key={user.id} className="ring-2 ring-background">
             <Avatar.Image src={user.image_url} />
             <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
           </Avatar>
         ))}
-        <Avatar className="ring-background ring-2">
+        <Avatar className="ring-2 ring-background">
           <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
         </Avatar>
       </div>
       <div className="flex items-center justify-center -space-x-2">
         {circles.map((circle) => (
-          <Avatar key={circle.id} className="ring-background ring-2">
+          <Avatar key={circle.id} className="ring-2 ring-background">
             <Avatar.Image src={circle.image_url} />
             <Avatar.Fallback>{circle.name}</Avatar.Fallback>
           </Avatar>
         ))}
-        <Avatar className="ring-background ring-2">
+        <Avatar className="ring-2 ring-background">
           <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
         </Avatar>
       </div>
@@ -340,7 +340,7 @@ const VariantsTemplate = (props: AvatarRootProps) => {
         <div className="w-24 shrink-0" />
         {colors.map((color) => (
           <div key={color} className="flex w-20 shrink-0 items-center justify-center">
-            <span className="text-muted text-xs capitalize">{color}</span>
+            <span className="text-xs text-muted capitalize">{color}</span>
           </div>
         ))}
       </div>
@@ -350,7 +350,7 @@ const VariantsTemplate = (props: AvatarRootProps) => {
       {/* Variant rows */}
       {variants.map((variant) => (
         <div key={variant.label} className="flex items-center gap-3">
-          <div className="text-muted w-24 shrink-0 text-sm">{variant.label}</div>
+          <div className="w-24 shrink-0 text-sm text-muted">{variant.label}</div>
           {colors.map((color, colorIndex) => (
             <div key={color} className="flex w-20 shrink-0 items-center justify-center">
               <Avatar

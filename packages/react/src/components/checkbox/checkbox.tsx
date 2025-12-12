@@ -20,8 +20,7 @@ interface CheckboxContext {
 const CheckboxContext = createContext<CheckboxContext>({});
 
 interface CheckboxRootProps
-  extends ComponentPropsWithRef<typeof CheckboxPrimitive>,
-    CheckboxVariants {
+  extends ComponentPropsWithRef<typeof CheckboxPrimitive>, CheckboxVariants {
   /** The name of the checkbox, used when submitting an HTML form. */
   name?: string;
 }

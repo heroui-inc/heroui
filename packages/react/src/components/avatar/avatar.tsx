@@ -26,8 +26,7 @@ const AvatarContext = createContext<AvatarContext>({});
  * Avatar Root
  * -----------------------------------------------------------------------------------------------*/
 interface AvatarRootProps
-  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">,
-    AvatarVariants {}
+  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">, AvatarVariants {}
 
 const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
   const slots = React.useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
@@ -44,8 +43,10 @@ const AvatarRoot = ({children, className, color, size, variant, ...props}: Avata
 /* -------------------------------------------------------------------------------------------------
  * Avatar Image
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarImageProps
-  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Image>, "onLoadingStatusChange"> {
+interface AvatarImageProps extends Omit<
+  ComponentPropsWithRef<typeof AvatarPrimitive.Image>,
+  "onLoadingStatusChange"
+> {
   asChild?: boolean;
   ignoreFallback?: UseImageProps["ignoreFallback"];
   shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];

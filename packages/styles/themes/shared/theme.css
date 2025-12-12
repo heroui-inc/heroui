@@ -187,7 +187,7 @@
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
   /* Custom smooth-out curve: fast start, smooth stop - Apple style */
-  --ease-fluid-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
   /* From slower to faster */
   --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);

@@ -14,8 +14,7 @@ import {listboxVariants} from "./listbox.styles";
  * ListBox Root
  * -----------------------------------------------------------------------------------------------*/
 interface ListBoxRootProps<T extends object>
-  extends ComponentPropsWithRef<typeof ListBoxPrimitive<T>>,
-    ListBoxVariants {
+  extends ComponentPropsWithRef<typeof ListBoxPrimitive<T>>, ListBoxVariants {
   className?: string;
 }
 

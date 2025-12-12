@@ -31,16 +31,16 @@
  * Backdrop - The overlay behind the dialog
  * ------------------------------------------------------------------------------------------------ */
 .alert-dialog__backdrop {
-  @apply h-(--visual-viewport-height) fixed inset-0 isolate z-50;
+  @apply fixed inset-0 isolate z-50 h-(--visual-viewport-height);
 
   /* Entering animation */
   &[data-entering] {
-    @apply animate-in fade-in-0 ease-fluid-out duration-250;
+    @apply animate-in duration-200 ease-out-quad fade-in-0;
   }
 
   /* Exiting animation */
   &[data-exiting] {
-    @apply animate-out fade-out-0 ease-out-quart duration-200;
+    @apply animate-out duration-100 ease-out-quad fade-out-0;
   }
 
   /**
@@ -58,7 +58,7 @@
   @apply bg-transparent;
 }
 
-.alert-dialog__backdrop--solid {
+.alert-dialog__backdrop--opaque {
   @apply bg-black/50 dark:bg-black/60;
 }
 
@@ -72,12 +72,12 @@
  * Handles alert dialog positioning and animations.
  * ------------------------------------------------------------------------------------------------ */
 .alert-dialog__container {
-  @apply max-h-(--visual-viewport-height) fixed left-1/2 flex w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
+  @apply fixed left-1/2 flex max-h-(--visual-viewport-height) w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
   @apply transform-gpu will-change-transform;
 
   /* Auto - bottom on mobile, center on desktop */
   &[data-placement="auto"] {
-    @apply top-[calc(var(--visual-viewport-height)-theme(spacing.2))] -translate-y-full items-end;
+    @apply top-[calc(var(--visual-viewport-height)-(--spacing(2)))] -translate-y-full items-end;
     @apply sm:top-[calc(var(--visual-viewport-height)/2)] sm:-translate-y-1/2 sm:items-center;
   }
 
@@ -90,13 +90,13 @@
   }
 
   &[data-placement="bottom"] {
-    @apply top-[calc(var(--visual-viewport-height)-theme(spacing.2))] -translate-y-full items-end;
-    @apply sm:top-[calc(var(--visual-viewport-height)-theme(spacing.6))];
+    @apply top-[calc(var(--visual-viewport-height)-(--spacing(2)))] -translate-y-full items-end;
+    @apply sm:top-[calc(var(--visual-viewport-height)-(--spacing(6)))];
   }
 
   /* Entering animation */
   &[data-entering] {
-    @apply animate-in fade-in-0 zoom-in-95 ease-out-quad duration-250;
+    @apply animate-in duration-250 ease-out-quad fade-in-0 zoom-in-105;
 
     &[data-placement="auto"] {
       @apply slide-in-from-bottom-1 sm:slide-in-from-bottom-0;
@@ -116,7 +116,7 @@
 
   /* Exiting animation */
   &[data-exiting] {
-    @apply animate-out fade-out-0 zoom-out-95 ease-out-quart duration-150;
+    @apply animate-out duration-100 ease-out-quad fade-out-0 zoom-out-95;
   }
 
   /**
@@ -135,7 +135,7 @@
  * The actual dialog box containing the alert content.
  * ------------------------------------------------------------------------------------------------ */
 .alert-dialog__dialog {
-  @apply bg-overlay shadow-overlay relative flex w-full flex-col rounded-3xl outline-none;
+  @apply relative flex w-full flex-col rounded-3xl bg-overlay shadow-overlay outline-none;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -154,12 +154,12 @@
 
 /* Heading - Main title text of the alert dialog */
 .alert-dialog__heading {
-  @apply text-foreground align-middle text-base font-medium;
+  @apply align-middle text-base font-medium text-foreground;
 }
 
 /* Icon - Optional icon indicator for the alert dialog */
 .alert-dialog__icon {
-  @apply flex size-10 shrink-0 select-none items-center justify-center rounded-full;
+  @apply flex size-10 shrink-0 items-center justify-center rounded-full select-none;
 
   [data-slot="alert-dialog-default-icon"] {
     @apply box-content size-5;
@@ -189,7 +189,7 @@
 
 /* Body - Main content area with descriptive text */
 .alert-dialog__body {
-  @apply text-muted flex-1 px-6 py-5 text-sm leading-[1.43];
+  @apply flex-1 px-6 py-5 text-sm leading-[1.43] text-muted;
 }
 
 /* When body follows header, adjust top spacing */
@@ -214,5 +214,5 @@
  * Note: Alert dialogs typically require explicit action, so this may be hidden.
  * ------------------------------------------------------------------------------------------------ */
 .alert-dialog__close-trigger {
-  @apply absolute right-4 top-4;
+  @apply absolute top-4 right-4;
 }

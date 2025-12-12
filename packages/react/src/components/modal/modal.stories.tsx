@@ -103,7 +103,7 @@ export const Placements = () => {
 };
 
 export const BackdropVariants = () => {
-  const variants = ["solid", "blur", "transparent"] as const;
+  const variants = ["opaque", "blur", "transparent"] as const;
 
   return (
     <div className="flex flex-wrap gap-4">
@@ -126,7 +126,7 @@ export const BackdropVariants = () => {
                   <Modal.Body>
                     <p>
                       This modal uses the <code>{variant}</code> backdrop variant. Compare the
-                      different visual effects: solid provides full opacity, blur adds a backdrop
+                      different visual effects: opaque provides full opacity, blur adds a backdrop
                       filter, and transparent removes the background.
                     </p>
                   </Modal.Body>
@@ -149,7 +149,7 @@ export const DismissBehavior = () => (
   <div className="flex max-w-sm flex-col gap-6">
     <div className="flex flex-col gap-2">
       <h3 className="text-lg font-semibold">isDismissable</h3>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Controls whether the modal can be dismissed by clicking the overlay backdrop. Defaults to{" "}
         <code>true</code>. Set to <code>false</code> to require explicit close action.
       </p>
@@ -165,7 +165,7 @@ export const DismissBehavior = () => (
                     <Icon className="size-5" icon="gravity-ui:circle-info" />
                   </Modal.Icon>
                   <Modal.Heading>isDismissable = false</Modal.Heading>
-                  <p className="text-muted text-sm leading-5">
+                  <p className="text-sm leading-5 text-muted">
                     Clicking the backdrop won't close this modal
                   </p>
                 </Modal.Header>
@@ -189,7 +189,7 @@ export const DismissBehavior = () => (
 
     <div className="flex flex-col gap-2">
       <h3 className="text-lg font-semibold">isKeyboardDismissDisabled</h3>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Controls whether the ESC key can dismiss the modal. When set to <code>true</code>, the ESC
         key will be disabled and users must use explicit close actions.
       </p>
@@ -205,7 +205,7 @@ export const DismissBehavior = () => (
                     <Icon className="size-5" icon="gravity-ui:circle-info" />
                   </Modal.Icon>
                   <Modal.Heading>isKeyboardDismissDisabled = true</Modal.Heading>
-                  <p className="text-muted text-sm leading-5">ESC key is disabled</p>
+                  <p className="text-sm leading-5 text-muted">ESC key is disabled</p>
                 </Modal.Header>
                 <Modal.Body>
                   <p>
@@ -263,7 +263,7 @@ export const ScrollComparison = () => {
                   <Modal.Heading>
                     Scroll: {scroll.charAt(0).toUpperCase() + scroll.slice(1)}
                   </Modal.Heading>
-                  <p className="text-muted text-sm leading-5">
+                  <p className="text-sm leading-5 text-muted">
                     Compare scroll behaviors - inside keeps content scrollable within the modal,
                     outside allows page scrolling
                   </p>
@@ -306,7 +306,7 @@ export const WithForm = () => (
                 <Icon className="size-5" icon="gravity-ui:envelope" />
               </Modal.Icon>
               <Modal.Heading>Contact Us</Modal.Heading>
-              <p className="text-muted mt-1.5 text-sm leading-5">
+              <p className="mt-1.5 text-sm leading-5 text-muted">
                 Fill out the form below and we'll get back to you. The modal adapts automatically
                 when the keyboard appears on mobile.
               </p>
@@ -362,16 +362,16 @@ export const Controlled = () => {
   return (
     <div className="flex max-w-md flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">With React.useState()</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">With React.useState()</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Control the modal using React's <code className="text-foreground">useState</code> hook for
           simple state management. Perfect for basic use cases.
         </p>
-        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
-            <p className="text-muted text-xs">
+            <p className="text-xs text-muted">
               Status:{" "}
-              <span className="text-foreground font-mono font-medium">
+              <span className="font-mono font-medium text-foreground">
                 {isOpen ? "open" : "closed"}
               </span>
             </p>
@@ -417,17 +417,17 @@ export const Controlled = () => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">With useOverlayState()</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">With useOverlayState()</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Use the <code className="text-foreground">useOverlayState</code> hook for a cleaner API
           with convenient methods like <code>open()</code>, <code>close()</code>, and{" "}
           <code>toggle()</code>.
         </p>
-        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
-            <p className="text-muted text-xs">
+            <p className="text-xs text-muted">
               Status:{" "}
-              <span className="text-foreground font-mono font-medium">
+              <span className="font-mono font-medium text-foreground">
                 {state.isOpen ? "open" : "closed"}
               </span>
             </p>
@@ -479,13 +479,13 @@ export const Controlled = () => {
 export const CustomTrigger = () => (
   <Modal>
     <Modal.Trigger>
-      <div className="border-border bg-surface hover:bg-surface-secondary group flex cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-sm transition-all hover:shadow">
-        <div className="bg-accent-soft text-accent-soft-foreground flex size-12 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105">
+      <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm transition-all hover:bg-surface-secondary hover:shadow">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-soft-foreground transition-transform group-hover:scale-105">
           <Icon className="size-6" icon="gravity-ui:gear" />
         </div>
         <div className="flex flex-1 flex-col gap-0.5">
-          <p className="text-foreground text-sm font-semibold leading-5">Settings</p>
-          <p className="text-muted text-xs leading-relaxed">Manage your preferences</p>
+          <p className="text-sm leading-5 font-semibold text-foreground">Settings</p>
+          <p className="text-xs leading-relaxed text-muted">Manage your preferences</p>
         </div>
       </div>
     </Modal.Trigger>
@@ -581,7 +581,7 @@ export const CustomAnimations = () => {
         "data-[entering]:animate-in",
         "data-[entering]:slide-in-from-bottom-4",
         "data-[entering]:fade-in-0",
-        "data-[entering]:ease-fluid-out",
+        "data-[entering]:ease-out-fluid",
         "data-[exiting]:animate-out",
         "data-[exiting]:slide-out-to-bottom-2",
         "data-[exiting]:fade-out-0",

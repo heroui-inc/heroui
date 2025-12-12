@@ -1,6 +1,6 @@
 "use client";
 
-import {useCallback, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 export interface UseOverlayStateProps {
   /**
@@ -68,7 +68,10 @@ export const useOverlayState = (props: UseOverlayStateProps = {}): UseOverlaySta
   // Keep a stable reference to onOpenChange to avoid recreating callbacks
   const onOpenChangeRef = useRef(onOpenChange);
 
-  onOpenChangeRef.current = onOpenChange;
+  // Update ref in effect to avoid updating during render
+  useEffect(() => {
+    onOpenChangeRef.current = onOpenChange;
+  }, [onOpenChange]);
 
   // Stable setter function that works for both controlled and uncontrolled modes
   const setOpen = useCallback(

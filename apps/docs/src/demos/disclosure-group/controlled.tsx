@@ -66,15 +66,15 @@ export function Controlled() {
             </Disclosure.Heading>
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
-                <p className="text-muted text-sm">
+                <p className="text-sm text-muted">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
                 <img
                   alt="Expo Go QR Code"
-                  className="max-w-54 aspect-square w-full object-cover"
+                  className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-muted text-sm">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
@@ -101,15 +101,15 @@ export function Controlled() {
             </Disclosure.Heading>
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
-                <p className="text-muted text-sm">
+                <p className="text-sm text-muted">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
                 <img
                   alt="Expo Go QR Code"
-                  className="max-w-54 aspect-square w-full object-cover"
+                  className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-muted text-sm">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store

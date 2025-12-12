@@ -29,7 +29,7 @@ export function HomeColorSwatchPicker({
       value={value}
       className={cn(
         className,
-        "h-13 flex items-center gap-2 rounded-full bg-[#D7CDD0] px-3 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5),0_1px_4px_rgba(0,0,0,0.15)] backdrop-blur-md dark:bg-[#383435]/30 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),0px_1px_4px_0px_rgba(0,0,0,0.15)]",
+        "flex h-13 items-center gap-2 rounded-full bg-[#D7CDD0] px-3 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5),0_1px_4px_rgba(0,0,0,0.15)] backdrop-blur-md dark:bg-[#383435]/30 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),0px_1px_4px_0px_rgba(0,0,0,0.15)]",
       )}
       onChange={(color) => onValueChange?.(color.toString())}
       {...props}
