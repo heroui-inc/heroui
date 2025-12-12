@@ -45,58 +45,45 @@ The following props are no longer available in v3:
 - `anchorIcon` - Pass custom icon as children to `Link.Icon`
 - `isExternal` - Handle manually with `target="_blank"` and `rel="noopener noreferrer"`
 
+## Structure Changes
+
+### v2: Link Component
+
+In v2, Link component usage:
+
+```tsx
+import { Link } from "@heroui/react";
+
+export default function App() {
+  return <Link href="#">Default Link</Link>;
+}
+```
+
+### v3: Link Component
+
+In v3, Link component usage remains the same for basic cases:
+
+```tsx
+import { Link } from "@heroui/react";
+
+export default function App() {
+  return <Link href="#">Default Link</Link>;
+}
+```
+
 ## Migration Examples
 
-### Basic Usage
-
-Basic usage remains unchanged in v3:
+### With Icons
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Link } from "@heroui/react";
-
-    export default function App() {
-      return <Link href="#">Default Link</Link>;
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Link } from "@heroui/react";
-
-    export default function App() {
-      return <Link href="#">Default Link</Link>;
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Icon
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Default icon */}
     <Link showAnchorIcon href="#">
       External Link
     </Link>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Link href="#">
-      External Link
-      <Link.Icon />
-    </Link>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Icon
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* Custom icon */}
     <Link
       showAnchorIcon
       anchorIcon={<CustomIcon />}
@@ -108,6 +95,13 @@ Basic usage remains unchanged in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Default icon */}
+    <Link href="#">
+      External Link
+      <Link.Icon />
+    </Link>
+    
+    {/* Custom icon */}
     <Link href="#">
       Custom Icon
       <Link.Icon>
@@ -142,44 +136,6 @@ Basic usage remains unchanged in v3:
   </Tab>
 </Tabs>
 
-### Sizes
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Link href="#" size="sm">Small</Link>
-    <Link href="#" size="md">Medium</Link>
-    <Link href="#" size="lg">Large</Link>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Link href="#" className="text-sm">Small</Link>
-    <Link href="#" className="text-base">Medium</Link>
-    <Link href="#" className="text-lg">Large</Link>
-    ```
-  </Tab>
-</Tabs>
-
-### Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Link href="#" color="primary">Primary</Link>
-    <Link href="#" color="danger">Danger</Link>
-    <Link href="#" color="success">Success</Link>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Link href="#" className="text-primary">Primary</Link>
-    <Link href="#" className="text-danger">Danger</Link>
-    <Link href="#" className="text-success">Success</Link>
-    ```
-  </Tab>
-</Tabs>
-
 ### Underline Offset
 
 <Tabs items={["v2", "v3"]}>
@@ -201,25 +157,6 @@ Basic usage remains unchanged in v3:
     </Link>
     <Link href="#" underline="hover" underlineOffset={3}>
       4px offset
-    </Link>
-    ```
-  </Tab>
-</Tabs>
-
-### Block Link
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Link href="#" isBlock>
-      Block Link
-    </Link>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Link href="#" className="block p-2 rounded-lg hover:bg-surface">
-      Block Link
     </Link>
     ```
   </Tab>
@@ -274,23 +211,3 @@ Link (Root)
 7. **New UnderlineOffset**: Added `underlineOffset` prop (1, 2, 3) for spacing control
 8. **New asChild Prop**: Added for better composition with routing libraries
 9. **Animation Removed**: `disableAnimation` prop removed
-
-## Tips for Migration
-
-1. **Replace icon props**: Convert `showAnchorIcon` to `<Link.Icon />` component
-2. **Custom icons**: Pass custom icon as children to `Link.Icon`
-3. **External links**: Manually add `target="_blank"` and `rel="noopener noreferrer"`
-4. **Styling**: Use Tailwind CSS classes for sizes, colors, and block styling
-5. **Underline variants**: Remove `active` and `focus` variants, use CSS if needed
-6. **Routing**: Use `asChild` prop with Next.js or React Router links
-7. **Icon placement**: Control icon position with flexbox classes (`flex`, `gap-1`, etc.)
-
-## Need Help?
-
-**For v3 Link features and API:**
-- See the [API Reference](/docs/components/link#api-reference)
-- Check [interactive examples](/docs/components/link#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

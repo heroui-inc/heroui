@@ -30,48 +30,51 @@ The v2 User component had the following features that need to be replaced:
 | `isFocusable` prop | Manual focus handling | Add `tabIndex` and focus styles if needed |
 | `classNames` prop | Tailwind classes | Apply classes directly to elements |
 
-## Migration Examples
+## Structure Changes
 
-### Basic Usage
+### v2: User Component
 
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { User } from "@heroui/react";
+In v2, `User` was a convenience component combining Avatar with name:
 
-    export default function App() {
-      return (
-        <User
-          name="Junior Garcia"
-          avatarProps={{
-            src: "https://example.com/avatar.jpg",
-          }}
+```tsx
+import { User } from "@heroui/react";
+
+export default function App() {
+  return (
+    <User
+      name="Junior Garcia"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+  );
+}
+```
+
+### v3: Manual Composition
+
+In v3, compose user displays manually using Avatar and text elements:
+
+```tsx
+import { Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
         />
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Avatar } from "@heroui/react";
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </div>
+  );
+}
+```
 
-    export default function App() {
-      return (
-        <div className="inline-flex items-center gap-2">
-          <Avatar>
-            <Avatar.Image
-              src="https://example.com/avatar.jpg"
-              alt="Junior Garcia"
-            />
-            <Avatar.Fallback>JG</Avatar.Fallback>
-          </Avatar>
-          <span className="text-sm">Junior Garcia</span>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
+## Migration Examples
 
 ### With Description
 
@@ -194,13 +197,14 @@ The v2 User component had the following features that need to be replaced:
   </Tab>
 </Tabs>
 
-### Focusable User (Clickable)
+### Clickable User
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     import { User } from "@heroui/react";
 
+    {/* Focusable */}
     <User
       name="Junior Garcia"
       isFocusable
@@ -208,36 +212,8 @@ The v2 User component had the following features that need to be replaced:
         src: "https://example.com/avatar.jpg",
       }}
     />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Avatar } from "@heroui/react";
-
-    <button
-      className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
-      tabIndex={0}
-    >
-      <Avatar>
-        <Avatar.Image
-          src="https://example.com/avatar.jpg"
-          alt="Junior Garcia"
-        />
-        <Avatar.Fallback>JG</Avatar.Fallback>
-      </Avatar>
-      <span className="text-sm">Junior Garcia</span>
-    </button>
-    ```
-  </Tab>
-</Tabs>
-
-### As Button Element
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { User } from "@heroui/react";
-
+    
+    {/* As button */}
     <User
       as="button"
       name="Junior Garcia"
@@ -251,6 +227,22 @@ The v2 User component had the following features that need to be replaced:
     ```tsx
     import { Avatar } from "@heroui/react";
 
+    {/* Focusable */}
+    <button
+      className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
+      tabIndex={0}
+    >
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </button>
+    
+    {/* As button */}
     <button
       className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
     >
@@ -388,109 +380,6 @@ Since User displays are commonly needed, here's a reusable component:
   </Tab>
 </Tabs>
 
-## Complete Example
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { User, Link } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <div className="space-y-4">
-          <User
-            name="Junior Garcia"
-            avatarProps={{
-              src: "https://example.com/avatar1.jpg",
-            }}
-          />
-          <User
-            name="Jane Doe"
-            description="Product Designer"
-            avatarProps={{
-              src: "https://example.com/avatar2.jpg",
-            }}
-          />
-          <User
-            name="John Smith"
-            description={
-              <Link href="https://x.com/johnsmith" size="sm">
-                @johnsmith
-              </Link>
-            }
-            avatarProps={{
-              name: "John Smith",
-              getInitials: (name) =>
-                name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join(""),
-            }}
-          />
-        </div>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Avatar, Link } from "@heroui/react";
-
-    function getInitials(name: string) {
-      return name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2);
-    }
-
-    export default function App() {
-      return (
-        <div className="space-y-4">
-          <div className="inline-flex items-center gap-2">
-            <Avatar>
-              <Avatar.Image
-                src="https://example.com/avatar1.jpg"
-                alt="Junior Garcia"
-              />
-              <Avatar.Fallback>JG</Avatar.Fallback>
-            </Avatar>
-            <span className="text-sm">Junior Garcia</span>
-          </div>
-
-          <div className="inline-flex items-center gap-2">
-            <Avatar>
-              <Avatar.Image
-                src="https://example.com/avatar2.jpg"
-                alt="Jane Doe"
-              />
-              <Avatar.Fallback>JD</Avatar.Fallback>
-            </Avatar>
-            <div className="flex flex-col items-start">
-              <span className="text-sm">Jane Doe</span>
-              <span className="text-xs text-muted">Product Designer</span>
-            </div>
-          </div>
-
-          <div className="inline-flex items-center gap-2">
-            <Avatar>
-              <Avatar.Fallback>{getInitials("John Smith")}</Avatar.Fallback>
-            </Avatar>
-            <div className="flex flex-col items-start">
-              <span className="text-sm">John Smith</span>
-              <Link href="https://x.com/johnsmith" className="text-xs">
-                @johnsmith
-              </Link>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
 ## Styling Reference
 
 The v2 User component used these base styles that you should replicate:
@@ -518,16 +407,6 @@ The v2 User component used these base styles that you should replicate:
 5. **Apply Styling**: Use Tailwind CSS classes for layout and styling
 6. **Handle Focus**: Add focus styles if `isFocusable` was used
 7. **Optional**: Create reusable User component for your application
-
-## Tips for Migration
-
-1. **Create Reusable Component**: Since user displays are common, create a reusable component
-2. **Use Avatar Compound Pattern**: Follow v3 Avatar structure with `Avatar.Image` and `Avatar.Fallback`
-3. **Generate Initials**: Create a helper function to generate initials from names
-4. **Consistent Styling**: Use consistent text sizes (`text-sm` for name, `text-xs` for description)
-5. **Accessibility**: Include `alt` text for avatar images
-6. **Focus States**: Add focus-visible styles for interactive user elements
-7. **Flexbox Layout**: Use `flex items-center gap-2` for horizontal layout
 
 ## Common Patterns
 
@@ -569,17 +448,3 @@ The v2 User component used these base styles that you should replicate:
   </div>
 </button>
 ```
-
-## Need Help?
-
-**For Avatar component:**
-- See the [Avatar documentation](/docs/components/avatar)
-- Check [Avatar migration guide](/docs/v2-to-v3-migration/avatar)
-
-**For styling guidance:**
-- See the [Styling documentation](/docs/handbook/styling)
-- Check [Tailwind CSS documentation](https://tailwindcss.com/docs) for flexbox utilities
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

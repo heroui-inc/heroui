@@ -18,16 +18,20 @@ The Popover component in HeroUI v3 has been redesigned with a compound component
 In v2, Popover used separate components:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent } from "@heroui/react";
+import { Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react";
 
-<Popover placement="right">
-  <PopoverTrigger>
-    <Button>Open</Button>
-  </PopoverTrigger>
-  <PopoverContent>
-    <div>Content</div>
-  </PopoverContent>
-</Popover>
+export default function App() {
+  return (
+    <Popover placement="right">
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -37,15 +41,19 @@ In v3, Popover uses compound components:
 ```tsx
 import { Popover, Button } from "@heroui/react";
 
-<Popover>
-  <Button>Open</Button>
-  <Popover.Content>
-    <Popover.Dialog>
-      <Popover.Heading>Title</Popover.Heading>
-      <div>Content</div>
-    </Popover.Dialog>
-  </Popover.Content>
-</Popover>
+export default function App() {
+  return (
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <Popover.Heading>Title</Popover.Heading>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+  );
+}
 ```
 
 ## Key Changes
@@ -88,70 +96,33 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Content Configuration
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Popover placement="right">
-          <PopoverTrigger>
-            <Button>Open Popover</Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            <div className="px-1 py-2">
-              <div className="text-small font-bold">Popover Content</div>
-              <div className="text-tiny">This is the popover content</div>
-            </div>
-          </PopoverContent>
-        </Popover>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Popover, Button } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Popover>
-          <Button>Open Popover</Button>
-          <Popover.Content placement="right">
-            <Popover.Dialog>
-              <Popover.Heading>Popover Content</Popover.Heading>
-              <p className="text-muted mt-2 text-sm">
-                This is the popover content
-              </p>
-            </Popover.Dialog>
-          </Popover.Content>
-        </Popover>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Arrow
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* With arrow */}
     <Popover showArrow>
-      <PopoverTrigger>
-        <Button>Open</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div>Content</div>
-      </PopoverContent>
+      <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+      <PopoverContent><div>Content</div></PopoverContent>
+    </Popover>
+    
+    {/* With placement */}
+    <Popover placement="top">
+      <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+      <PopoverContent><div>Content</div></PopoverContent>
+    </Popover>
+    
+    {/* With offset */}
+    <Popover offset={10}>
+      <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+      <PopoverContent><div>Content</div></PopoverContent>
     </Popover>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* With arrow - use component */}
     <Popover>
       <Button>Open</Button>
       <Popover.Content>
@@ -161,32 +132,23 @@ The following props are no longer available in v3:
         </Popover.Dialog>
       </Popover.Content>
     </Popover>
-    ```
-  </Tab>
-</Tabs>
-
-### With Placement
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Popover placement="top">
-      <PopoverTrigger>
-        <Button>Open</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div>Content</div>
-      </PopoverContent>
-    </Popover>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
+    
+    {/* With placement - moved to Content */}
     <Popover>
       <Button>Open</Button>
       <Popover.Content placement="top">
         <Popover.Dialog>
           <Popover.Arrow />
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    
+    {/* With offset - moved to Content */}
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content offset={10}>
+        <Popover.Dialog>
           <div>Content</div>
         </Popover.Dialog>
       </Popover.Content>
@@ -257,35 +219,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### With Offset
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Popover offset={10}>
-      <PopoverTrigger>
-        <Button>Open</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div>Content</div>
-      </PopoverContent>
-    </Popover>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Popover>
-      <Button>Open</Button>
-      <Popover.Content offset={10}>
-        <Popover.Dialog>
-          <div>Content</div>
-        </Popover.Dialog>
-      </Popover.Content>
-    </Popover>
-    ```
-  </Tab>
-</Tabs>
-
 ### Custom Trigger
 
 <Tabs items={["v2", "v3"]}>
@@ -301,40 +234,6 @@ The following props are no longer available in v3:
     <Popover.Trigger>
       <CustomButton>Custom</CustomButton>
     </Popover.Trigger>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Popover
-      classNames={{
-        base: "custom-base",
-        content: "custom-content"
-      }}
-    >
-      <PopoverTrigger>
-        <Button>Open</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div>Content</div>
-      </PopoverContent>
-    </Popover>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Popover>
-      <Button>Open</Button>
-      <Popover.Content className="custom-content">
-        <Popover.Dialog className="custom-dialog">
-          <div>Content</div>
-        </Popover.Dialog>
-      </Popover.Content>
-    </Popover>
     ```
   </Tab>
 </Tabs>
@@ -365,24 +264,3 @@ Popover (Root)
 8. **Backdrop Removed**: `backdrop` prop removed
 9. **Motion Removed**: `motionProps` removed, animations handled differently
 10. **ClassNames Removed**: Use `className` props on individual components
-
-## Tips for Migration
-
-1. **Update structure**: Wrap content in `Popover.Content` and `Popover.Dialog`
-2. **Move placement**: Move `placement` prop to `Popover.Content`
-3. **Add arrow**: Use `Popover.Arrow` component instead of `showArrow` prop
-4. **Add heading**: Use `Popover.Heading` for titles
-5. **Update trigger**: Use `Popover.Trigger` or Button directly
-6. **Move offset**: Move `offset` prop to `Popover.Content`
-7. **Update styling**: Use Tailwind CSS classes for sizes, colors, radius, shadows
-8. **Remove backdrop**: Backdrop functionality removed
-
-## Need Help?
-
-**For v3 Popover features and API:**
-- See the [API Reference](/docs/components/popover#api-reference)
-- Check [interactive examples](/docs/components/popover#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

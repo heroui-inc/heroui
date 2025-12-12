@@ -35,6 +35,44 @@ Use `Input` when you need:
 - Custom label/error handling
 - Integration with custom form components
 
+## Structure Changes
+
+### v2: Single Component with Props
+
+In v2, `Input` was a full-featured component that accepted props for label, description, placeholder, and other elements:
+
+```tsx
+import { Input } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Input
+      label="Email"
+      placeholder="Enter your email"
+      type="email"
+    />
+  );
+}
+```
+
+### v3: Compound Component Structure
+
+In v3, `Input` is a primitive component. For form fields with labels and validation, use `TextField` which wraps `Input` with `Label`, `Description`, and `FieldError`:
+
+```tsx
+import { TextField, Label, Input, FieldError } from "@heroui/react";
+
+export default function App() {
+  return (
+    <TextField name="email" type="email">
+      <Label>Email</Label>
+      <Input placeholder="Enter your email" />
+      <FieldError />
+    </TextField>
+  );
+}
+```
+
 ## Key Changes
 
 ### 1. Component Split
@@ -69,82 +107,43 @@ The following props are no longer available on `Input` in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Form Validation
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Input } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Input
-          label="Email"
-          placeholder="Enter your email"
-          type="email"
-        />
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { TextField, Label, Input, FieldError } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <TextField name="email" type="email">
-          <Label>Email</Label>
-          <Input placeholder="Enter your email" />
-          <FieldError />
-        </TextField>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Input with Description
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* With description */}
     <Input
       description="We'll never share your email"
       label="Email"
       type="email"
     />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Description } from "@heroui/react";
-
-    <TextField name="email" type="email">
-      <Label>Email</Label>
-      <Input />
-      <Description>We'll never share your email</Description>
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
-
-### Input with Error Message
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* With error message */}
     <Input
       errorMessage="Please enter a valid email"
       isInvalid
       label="Email"
       type="email"
     />
+    
+    {/* Required */}
+    <Input isRequired label="Email" type="email" />
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    import { Description } from "@heroui/react";
+
+    {/* With description */}
+    <TextField name="email" type="email">
+      <Label>Email</Label>
+      <Input />
+      <Description>We'll never share your email</Description>
+      <FieldError />
+    </TextField>
+    
+    {/* With error message */}
     <TextField
       isInvalid
       name="email"
@@ -156,6 +155,13 @@ The following props are no longer available on `Input` in v3:
         return null;
       }}
     >
+      <Label>Email</Label>
+      <Input />
+      <FieldError />
+    </TextField>
+    
+    {/* Required */}
+    <TextField isRequired name="email" type="email">
       <Label>Email</Label>
       <Input />
       <FieldError />
@@ -227,29 +233,6 @@ The following props are no longer available on `Input` in v3:
   </Tab>
 </Tabs>
 
-### Required Input
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Input
-      isRequired
-      label="Email"
-      type="email"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <TextField isRequired name="email" type="email">
-      <Label>Email</Label>
-      <Input />
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
-
 ### Controlled Input
 
 <Tabs items={["v2", "v3"]}>
@@ -301,70 +284,6 @@ The following props are no longer available on `Input` in v3:
   </Tab>
 </Tabs>
 
-### Input Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Input label="Email" type="email" variant="bordered" />
-    <Input label="Email" type="email" variant="flat" />
-    <Input label="Email" type="email" variant="underlined" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Use Tailwind CSS classes for styling */}
-    <TextField name="email" type="email">
-      <Label>Email</Label>
-      <Input className="border border-border" />
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
-
-### Input Sizes
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Input label="Email" size="sm" type="email" />
-    <Input label="Email" size="md" type="email" />
-    <Input label="Email" size="lg" type="email" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Use Tailwind CSS classes for sizes */}
-    <TextField name="email" type="email">
-      <Label>Email</Label>
-      <Input className="h-8 text-sm" />
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
-
-### Input Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Input color="primary" label="Email" type="email" />
-    <Input color="danger" label="Email" type="email" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Use Tailwind CSS classes for colors */}
-    <TextField name="email" type="email">
-      <Label>Email</Label>
-      <Input className="border-primary focus-visible:border-primary" />
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
 
 ## Breaking Changes Summary
 
@@ -381,24 +300,3 @@ The following props are no longer available on `Input` in v3:
 11. **Radius Removed**: Use Tailwind CSS classes
 12. **onValueChange Removed**: Use `onChange` event handler
 13. **ClassNames Removed**: Use `className` props on individual components
-
-## Tips for Migration
-
-1. **Most cases**: Convert `Input` to `TextField` compound component
-2. **Simple inputs**: Use `Input` directly if you don't need labels/validation
-3. **Add TextField wrapper**: Wrap `Input` with `TextField` for form fields
-4. **Add Label**: Use `Label` component for labels
-5. **Add FieldError**: Always include `FieldError` for error display
-6. **Move validation**: Move `validate` function to `TextField`
-7. **Use onChange**: Replace `onValueChange` with `onChange` event handler
-8. **Custom styling**: Use Tailwind CSS classes for variants, colors, sizes
-
-## Need Help?
-
-**For v3 Input features and API:**
-- See the [API Reference](/docs/components/input#api-reference)
-- Check [interactive examples](/docs/components/input#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

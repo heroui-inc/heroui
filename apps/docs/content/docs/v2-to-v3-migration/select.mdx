@@ -20,10 +20,14 @@ In v2, Select used a simple structure with props:
 ```tsx
 import { Select, SelectItem } from "@heroui/react";
 
-<Select label="Select animal" placeholder="Choose one">
-  <SelectItem key="cat">Cat</SelectItem>
-  <SelectItem key="dog">Dog</SelectItem>
-</Select>
+export default function App() {
+  return (
+    <Select label="Select animal" placeholder="Choose one">
+      <SelectItem key="cat">Cat</SelectItem>
+      <SelectItem key="dog">Dog</SelectItem>
+    </Select>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -33,25 +37,29 @@ In v3, Select requires compound components and uses `ListBox` for items:
 ```tsx
 import { Select, Label, ListBox } from "@heroui/react";
 
-<Select placeholder="Choose one">
-  <Label>Select animal</Label>
-  <Select.Trigger>
-    <Select.Value />
-    <Select.Indicator />
-  </Select.Trigger>
-  <Select.Popover>
-    <ListBox>
-      <ListBox.Item id="cat" textValue="Cat">
-        Cat
-        <ListBox.ItemIndicator />
-      </ListBox.Item>
-      <ListBox.Item id="dog" textValue="Dog">
-        Dog
-        <ListBox.ItemIndicator />
-      </ListBox.Item>
-    </ListBox>
-  </Select.Popover>
-</Select>
+export default function App() {
+  return (
+    <Select placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+  );
+}
 ```
 
 ## Key Changes
@@ -108,170 +116,30 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Select, SelectItem } from "@heroui/react";
-
-    const animals = [
-      { key: "cat", label: "Cat" },
-      { key: "dog", label: "Dog" },
-      { key: "elephant", label: "Elephant" },
-    ];
-
-    export default function App() {
-      return (
-        <Select className="max-w-xs" label="Select an animal">
-          {animals.map((animal) => (
-            <SelectItem key={animal.key}>{animal.label}</SelectItem>
-          ))}
-        </Select>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Select, Label, ListBox } from "@heroui/react";
-
-    const animals = [
-      { id: "cat", name: "Cat" },
-      { id: "dog", name: "Dog" },
-      { id: "elephant", name: "Elephant" },
-    ];
-
-    export default function App() {
-      return (
-        <Select className="w-[256px]" placeholder="Select one">
-          <Label>Select an animal</Label>
-          <Select.Trigger>
-            <Select.Value />
-            <Select.Indicator />
-          </Select.Trigger>
-          <Select.Popover>
-            <ListBox>
-              {animals.map((animal) => (
-                <ListBox.Item key={animal.id} id={animal.id} textValue={animal.name}>
-                  {animal.name}
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              ))}
-            </ListBox>
-          </Select.Popover>
-        </Select>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Description
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Select
-      label="Select animal"
-      description="Choose your favorite"
-      placeholder="Choose one"
-    >
-      <SelectItem key="cat">Cat</SelectItem>
-      <SelectItem key="dog">Dog</SelectItem>
-    </Select>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Description } from "@heroui/react";
-
-    <Select placeholder="Choose one">
-      <Label>Select animal</Label>
-      <Select.Trigger>
-        <Select.Value />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Description>Choose your favorite</Description>
-      <Select.Popover>
-        <ListBox>
-          <ListBox.Item id="cat" textValue="Cat">
-            Cat
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-          <ListBox.Item id="dog" textValue="Dog">
-            Dog
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-        </ListBox>
-      </Select.Popover>
-    </Select>
-    ```
-  </Tab>
-</Tabs>
-
-### Controlled Selection
+### Selection
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     import { useState } from "react";
 
-    const [value, setValue] = useState(new Set([]));
-
+    {/* Single selection */}
+    const [singleValue, setSingleValue] = useState(new Set([]));
     <Select
-      selectedKeys={value}
-      onSelectionChange={setValue}
+      selectedKeys={singleValue}
+      onSelectionChange={setSingleValue}
       label="Select animal"
     >
       <SelectItem key="cat">Cat</SelectItem>
       <SelectItem key="dog">Dog</SelectItem>
     </Select>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-    import type { Key } from "@heroui/react";
-
-    const [value, setValue] = useState<Key | null>(null);
-
-    <Select value={value} onChange={setValue} placeholder="Choose one">
-      <Label>Select animal</Label>
-      <Select.Trigger>
-        <Select.Value />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Select.Popover>
-        <ListBox>
-          <ListBox.Item id="cat" textValue="Cat">
-            Cat
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-          <ListBox.Item id="dog" textValue="Dog">
-            Dog
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-        </ListBox>
-      </Select.Popover>
-    </Select>
-    ```
-  </Tab>
-</Tabs>
-
-### Multiple Selection
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [value, setValue] = useState(new Set([]));
-
+    
+    {/* Multiple selection */}
+    const [multiValue, setMultiValue] = useState(new Set([]));
     <Select
       selectionMode="multiple"
-      selectedKeys={value}
-      onSelectionChange={setValue}
+      selectedKeys={multiValue}
+      onSelectionChange={setMultiValue}
       label="Select animals"
     >
       <SelectItem key="cat">Cat</SelectItem>
@@ -284,12 +152,34 @@ The following props are no longer available in v3:
     import { useState } from "react";
     import type { Key } from "@heroui/react";
 
-    const [value, setValue] = useState<Key[]>([]);
-
+    {/* Single selection */}
+    const [singleValue, setSingleValue] = useState<Key | null>(null);
+    <Select value={singleValue} onChange={setSingleValue} placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    
+    {/* Multiple selection */}
+    const [multiValue, setMultiValue] = useState<Key[]>([]);
     <Select
       selectionMode="multiple"
-      value={value}
-      onChange={setValue}
+      value={multiValue}
+      onChange={setMultiValue}
       placeholder="Choose multiple"
     >
       <Label>Select animals</Label>
@@ -309,6 +199,73 @@ The following props are no longer available in v3:
           </ListBox.Item>
         </ListBox>
       </Select.Popover>
+    </Select>
+    ```
+  </Tab>
+</Tabs>
+
+### Form Validation
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <Select
+      label="Select animal"
+      description="Choose your favorite"
+      placeholder="Choose one"
+    >
+      <SelectItem key="cat">Cat</SelectItem>
+    </Select>
+    
+    {/* With validation */}
+    <Select
+      isInvalid
+      errorMessage="Please select an option"
+      label="Select animal"
+    >
+      <SelectItem key="cat">Cat</SelectItem>
+    </Select>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError } from "@heroui/react";
+
+    {/* With description */}
+    <Select placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Description>Choose your favorite</Description>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    
+    {/* With validation */}
+    <Select isInvalid placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+      <FieldError>Please select an option</FieldError>
     </Select>
     ```
   </Tab>
@@ -368,85 +325,6 @@ The following props are no longer available in v3:
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox.Section>
-        </ListBox>
-      </Select.Popover>
-    </Select>
-    ```
-  </Tab>
-</Tabs>
-
-### With Validation
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Select
-      isInvalid
-      errorMessage="Please select an option"
-      label="Select animal"
-    >
-      <SelectItem key="cat">Cat</SelectItem>
-      <SelectItem key="dog">Dog</SelectItem>
-    </Select>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { FieldError } from "@heroui/react";
-
-    <Select isInvalid placeholder="Choose one">
-      <Label>Select animal</Label>
-      <Select.Trigger>
-        <Select.Value />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Select.Popover>
-        <ListBox>
-          <ListBox.Item id="cat" textValue="Cat">
-            Cat
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-          <ListBox.Item id="dog" textValue="Dog">
-            Dog
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-        </ListBox>
-      </Select.Popover>
-      <FieldError>Please select an option</FieldError>
-    </Select>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled Items
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Select disabledKeys={["dog"]} label="Select animal">
-      <SelectItem key="cat">Cat</SelectItem>
-      <SelectItem key="dog">Dog</SelectItem>
-    </Select>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Select disabledKeys={["dog"]} placeholder="Choose one">
-      <Label>Select animal</Label>
-      <Select.Trigger>
-        <Select.Value />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Select.Popover>
-        <ListBox>
-          <ListBox.Item id="cat" textValue="Cat">
-            Cat
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-          <ListBox.Item id="dog" textValue="Dog">
-            Dog
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
         </ListBox>
       </Select.Popover>
     </Select>
@@ -641,26 +519,3 @@ The `isClearable` prop has been removed. To implement a clear button:
 8. **Clear Button**: `isClearable` removed - implement manually
 9. **Custom Value**: Use `Select.Value` render prop instead of `renderValue`
 10. **Item Props**: `key` → `id` and `textValue` (required)
-
-## Tips for Migration
-
-1. **Update structure**: Wrap Select content in compound components
-2. **Add Label**: Use `Label` component for Select label
-3. **Add Description**: Use `Description` component
-4. **Add Error**: Use `FieldError` component for validation messages
-5. **Update items**: Replace `SelectItem` with `ListBox.Item` (add `id` and `textValue`)
-6. **Update sections**: Replace `SelectSection` with `ListBox.Section` and `Header`
-7. **Update selection**: Change `selectedKeys`/`onSelectionChange` to `value`/`onChange`
-8. **Add indicators**: Include `ListBox.ItemIndicator` in each item
-9. **Update styling**: Use Tailwind CSS classes for variants, colors, sizes
-10. **Customize trigger**: Add custom content directly to `Select.Trigger` if needed
-
-## Need Help?
-
-**For v3 Select features and API:**
-- See the [API Reference](/docs/components/select#api-reference)
-- Check [interactive examples](/docs/components/select#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

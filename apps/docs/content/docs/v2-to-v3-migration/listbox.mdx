@@ -20,9 +20,13 @@ In v2, Listbox used separate components:
 ```tsx
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
-<Listbox>
-  <ListboxItem key="1">Item 1</ListboxItem>
-</Listbox>
+export default function App() {
+  return (
+    <Listbox>
+      <ListboxItem key="1">Item 1</ListboxItem>
+    </Listbox>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -32,11 +36,15 @@ In v3, ListBox uses compound components:
 ```tsx
 import { ListBox, Label } from "@heroui/react";
 
-<ListBox>
-  <ListBox.Item id="1" textValue="Item 1">
-    <Label>Item 1</Label>
-  </ListBox.Item>
-</ListBox>
+export default function App() {
+  return (
+    <ListBox>
+      <ListBox.Item id="1" textValue="Item 1">
+        <Label>Item 1</Label>
+      </ListBox.Item>
+    </ListBox>
+  );
+}
 ```
 
 ## Key Changes
@@ -89,64 +97,32 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Listbox, ListboxItem } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Listbox aria-label="Actions" onAction={(key) => alert(key)}>
-          <ListboxItem key="new">New file</ListboxItem>
-          <ListboxItem key="copy">Copy link</ListboxItem>
-          <ListboxItem key="edit">Edit file</ListboxItem>
-        </Listbox>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Label, ListBox } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <ListBox
-          aria-label="Actions"
-          selectionMode="none"
-          onAction={(key) => alert(key)}
-        >
-          <ListBox.Item id="new" textValue="New file">
-            <Label>New file</Label>
-          </ListBox.Item>
-          <ListBox.Item id="copy" textValue="Copy link">
-            <Label>Copy link</Label>
-          </ListBox.Item>
-          <ListBox.Item id="edit" textValue="Edit file">
-            <Label>Edit file</Label>
-          </ListBox.Item>
-        </ListBox>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Single Selection
+### Selection
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     import { useState } from "react";
 
-    const [selectedKeys, setSelectedKeys] = useState(new Set(["text"]));
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
 
     <Listbox
-      selectedKeys={selectedKeys}
+      selectedKeys={singleSelected}
       selectionMode="single"
-      onSelectionChange={setSelectedKeys}
+      onSelectionChange={setSingleSelected}
+    >
+      <ListboxItem key="text">Text</ListboxItem>
+      <ListboxItem key="number">Number</ListboxItem>
+    </Listbox>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState(new Set(["text"]));
+
+    <Listbox
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
     >
       <ListboxItem key="text">Text</ListboxItem>
       <ListboxItem key="number">Number</ListboxItem>
@@ -158,12 +134,13 @@ The following props are no longer available in v3:
     import { useState } from "react";
     import type { Selection } from "@heroui/react";
 
-    const [selected, setSelected] = useState<Selection>(new Set(["text"]));
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState<Selection>(new Set(["text"]));
 
     <ListBox
-      selectedKeys={selected}
+      selectedKeys={singleSelected}
       selectionMode="single"
-      onSelectionChange={setSelected}
+      onSelectionChange={setSingleSelected}
     >
       <ListBox.Item id="text" textValue="Text">
         <Label>Text</Label>
@@ -174,40 +151,14 @@ The following props are no longer available in v3:
         <ListBox.ItemIndicator />
       </ListBox.Item>
     </ListBox>
-    ```
-  </Tab>
-</Tabs>
-
-### Multiple Selection
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [selectedKeys, setSelectedKeys] = useState(new Set(["text"]));
-
-    <Listbox
-      selectedKeys={selectedKeys}
-      selectionMode="multiple"
-      onSelectionChange={setSelectedKeys}
-    >
-      <ListboxItem key="text">Text</ListboxItem>
-      <ListboxItem key="number">Number</ListboxItem>
-    </Listbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-    import type { Selection } from "@heroui/react";
-
-    const [selected, setSelected] = useState<Selection>(new Set(["text"]));
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState<Selection>(new Set(["text"]));
 
     <ListBox
-      selectedKeys={selected}
+      selectedKeys={multiSelected}
       selectionMode="multiple"
-      onSelectionChange={setSelected}
+      onSelectionChange={setMultiSelected}
     >
       <ListBox.Item id="text" textValue="Text">
         <Label>Text</Label>
@@ -339,58 +290,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Disabled Items
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Listbox disabledKeys={["disabled"]}>
-      <ListboxItem key="enabled">Enabled</ListboxItem>
-      <ListboxItem key="disabled">Disabled</ListboxItem>
-    </Listbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <ListBox disabledKeys={["disabled"]}>
-      <ListBox.Item id="enabled" textValue="Enabled">
-        <Label>Enabled</Label>
-      </ListBox.Item>
-      <ListBox.Item id="disabled" textValue="Disabled" isDisabled>
-        <Label>Disabled</Label>
-      </ListBox.Item>
-    </ListBox>
-    ```
-  </Tab>
-</Tabs>
-
-### Variants and Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Listbox variant="flat" color="primary">
-      <ListboxItem key="1" color="danger">
-        Item 1
-      </ListboxItem>
-    </Listbox>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <ListBox className="bg-surface">
-      <ListBox.Item
-        id="1"
-        textValue="Item 1"
-        variant="danger"
-        className="text-danger"
-      >
-        <Label>Item 1</Label>
-      </ListBox.Item>
-    </ListBox>
-    ```
-  </Tab>
-</Tabs>
 
 ## Component Anatomy
 
@@ -419,25 +318,3 @@ ListBox (Root)
 7. **Content Props Removed**: `topContent`, `bottomContent` - handle separately
 8. **Virtualization Removed**: `isVirtualized` and `virtualization` props removed
 9. **Selection Type**: Uses `Selection` type (Set) instead of arrays
-
-## Tips for Migration
-
-1. **Update imports**: Change `Listbox` to `ListBox`, use compound components
-2. **Replace key prop**: Change `key` to `id` and add `textValue` prop
-3. **Add Label**: Wrap item content in `Label` component
-4. **Add Description**: Use `Description` component instead of `description` prop
-5. **Add Indicator**: Include `ListBox.ItemIndicator` for selection indicators
-6. **Manual icons**: Place icons directly in item content instead of `startContent`/`endContent`
-7. **Sections**: Use `Header` component instead of `title` prop
-8. **Styling**: Use Tailwind CSS classes for variants and colors
-9. **Selection**: Ensure `selectedKeys` uses `Selection` type (Set)
-
-## Need Help?
-
-**For v3 ListBox features and API:**
-- See the [API Reference](/docs/components/listbox#api-reference)
-- Check [interactive examples](/docs/components/listbox#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

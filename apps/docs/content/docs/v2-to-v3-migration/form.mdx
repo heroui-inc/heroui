@@ -30,11 +30,11 @@ The Form component props remain the same between v2 and v3, with one addition:
 | `className` | ✅ | ✅ | Same |
 | `onInvalid` | ❌ | ✅ | New: Handler called when form validation fails |
 
-## Migration Examples
+## Structure Changes
 
-### Basic Usage
+### v2: Form Component
 
-Basic usage remains unchanged in v3:
+In v2, Form component usage:
 
 ```tsx
 import { Form, Button } from "@heroui/react";
@@ -53,6 +53,30 @@ export default function App() {
   );
 }
 ```
+
+### v3: Form Component
+
+In v3, Form component usage remains the same:
+
+```tsx
+import { Form, Button } from "@heroui/react";
+
+export default function App() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted");
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      {/* Form content */}
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+}
+```
+
+## Migration Examples
 
 ### Form with Invalid Handler (New in v3)
 
@@ -98,13 +122,3 @@ The `onInvalid` handler is called when form validation fails. By default, the fi
 ## Note on Form Fields
 
 While the Form component itself is unchanged, form field components (like `Input`, `TextField`, etc.) have been updated in v3. Refer to their respective migration guides for details on migrating form fields within your forms.
-
-## Need Help?
-
-**For v3 Form features and API:**
-- See the [API Reference](/docs/components/form#api-reference)
-- Check [interactive examples](/docs/components/form#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

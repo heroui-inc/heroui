@@ -20,12 +20,14 @@ In v2, `Alert` was a single component that accepted props for title, description
 ```tsx
 import { Alert } from "@heroui/react";
 
-<Alert 
-  title="Alert Title"
-  description="Alert description"
-  color="success"
-  variant="flat"
-/>
+export default function App() {
+  return (
+    <Alert 
+      title="This is an alert"
+      description="Thanks for subscribing to our newsletter!"
+    />
+  );
+}
 ```
 
 ### v3: Compound Component Structure
@@ -35,13 +37,19 @@ In v3, Alert uses a compound component pattern with explicit subcomponents:
 ```tsx
 import { Alert } from "@heroui/react";
 
-<Alert status="success">
-  <Alert.Indicator />
-  <Alert.Content>
-    <Alert.Title>Alert Title</Alert.Title>
-    <Alert.Description>Alert description</Alert.Description>
-  </Alert.Content>
-</Alert>
+export default function App() {
+  return (
+    <Alert>
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>This is an alert</Alert.Title>
+        <Alert.Description>
+          Thanks for subscribing to our newsletter!
+        </Alert.Description>
+      </Alert.Content>
+    </Alert>
+  );
+}
 ```
 
 ## Key Changes
@@ -111,97 +119,28 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Alert } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Alert 
-          title="This is an alert"
-          description="Thanks for subscribing to our newsletter!"
-        />
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Alert } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Alert>
-          <Alert.Indicator />
-          <Alert.Content>
-            <Alert.Title>This is an alert</Alert.Title>
-            <Alert.Description>
-              Thanks for subscribing to our newsletter!
-            </Alert.Description>
-          </Alert.Content>
-        </Alert>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Colors/Status
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Alert color="success" title="Success!" />
-    <Alert color="warning" title="Warning!" />
-    <Alert color="danger" title="Error!" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Alert status="success">
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Success!</Alert.Title>
-      </Alert.Content>
-    </Alert>
-    
-    <Alert status="warning">
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Warning!</Alert.Title>
-      </Alert.Content>
-    </Alert>
-    
-    <Alert status="danger">
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Error!</Alert.Title>
-      </Alert.Content>
-    </Alert>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Icon
+### Icon Handling
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     import { Icon } from '@iconify/react';
 
+    {/* With custom icon */}
     <Alert 
       icon={<Icon icon="gravity-ui:box" />}
       title="Custom Icon Alert"
     />
+    
+    {/* Without icon */}
+    <Alert hideIcon title="No Icon Alert" />
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
     import { Icon } from '@iconify/react';
 
+    {/* With custom icon */}
     <Alert>
       <Alert.Indicator>
         <Icon icon="gravity-ui:box" />
@@ -210,23 +149,8 @@ The following props are no longer available in v3:
         <Alert.Title>Custom Icon Alert</Alert.Title>
       </Alert.Content>
     </Alert>
-    ```
-  </Tab>
-</Tabs>
-
-### Without Icon
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Alert 
-      hideIcon
-      title="No Icon Alert"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
+    
+    {/* Without icon */}
     <Alert>
       <Alert.Content>
         <Alert.Title>No Icon Alert</Alert.Title>
@@ -309,110 +233,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Controlled Visibility
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Alert, Button } from "@heroui/react";
-    import { useState } from "react";
-
-    const [isVisible, setIsVisible] = useState(true);
-
-    <>
-      {isVisible ? (
-        <Alert
-          title="Success Notification"
-          isVisible={isVisible}
-          onVisibleChange={setIsVisible}
-          onClose={() => setIsVisible(false)}
-        />
-      ) : (
-        <Button onPress={() => setIsVisible(true)}>
-          Show Alert
-        </Button>
-      )}
-    </>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Alert, Button, CloseButton } from "@heroui/react";
-    import { useState } from "react";
-
-    const [isVisible, setIsVisible] = useState(true);
-
-    <>
-      {isVisible ? (
-        <Alert status="success">
-          <Alert.Indicator />
-          <Alert.Content>
-            <Alert.Title>Success Notification</Alert.Title>
-          </Alert.Content>
-          <CloseButton 
-            aria-label="Close"
-            onPress={() => setIsVisible(false)}
-          />
-        </Alert>
-      ) : (
-        <Button onPress={() => setIsVisible(true)}>
-          Show Alert
-        </Button>
-      )}
-    </>
-    ```
-  </Tab>
-</Tabs>
-
-### With Radius
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Alert 
-      title="Rounded Alert"
-      radius="full"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Alert className="rounded-full">
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Rounded Alert</Alert.Title>
-      </Alert.Content>
-    </Alert>
-    ```
-  </Tab>
-</Tabs>
-
-### With Variants (Using Tailwind Classes)
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Alert 
-      title="Bordered Alert"
-      variant="bordered"
-      color="success"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Alert 
-      status="success"
-      className="border-2 border-success"
-    >
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Bordered Alert</Alert.Title>
-      </Alert.Content>
-    </Alert>
-    ```
-  </Tab>
-</Tabs>
 
 ## Styling Changes
 
@@ -465,21 +285,3 @@ Alert (Root)
 6. **No Visibility Control**: Handle visibility with conditional rendering
 7. **No Start/End Content Props**: Place content directly in the component tree
 8. **Icon Handling**: Use `<Alert.Indicator />` with children or omit it
-
-## Tips for Migration
-
-1. **Start with structure**: Convert the component structure first, then handle props
-2. **Use conditional rendering**: Replace `isVisible` prop with conditional rendering
-3. **Add close button manually**: Import and use `CloseButton` from `@heroui/react`
-4. **Leverage Tailwind**: Many removed props can be replaced with Tailwind utility classes
-5. **Status mapping**: Remember `primary` → `accent` and `secondary` → `default`
-
-## Need Help?
-
-**For v3 Alert features and API:**
-- See the [API Reference](/docs/components/alert#api-reference)
-- Check [interactive examples](/docs/components/alert#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

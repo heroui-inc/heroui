@@ -20,11 +20,15 @@ In v2, Card used separate components: `CardHeader`, `CardBody`, and `CardFooter`
 ```tsx
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
 
-<Card>
-  <CardHeader>Header</CardHeader>
-  <CardBody>Body</CardBody>
-  <CardFooter>Footer</CardFooter>
-</Card>
+export default function App() {
+  return (
+    <Card>
+      <CardHeader>Header</CardHeader>
+      <CardBody>Body</CardBody>
+      <CardFooter>Footer</CardFooter>
+    </Card>
+  );
+}
 ```
 
 ### v3: Compound Component Structure
@@ -34,14 +38,18 @@ In v3, Card uses a compound component pattern with explicit subcomponents:
 ```tsx
 import { Card } from "@heroui/react";
 
-<Card>
-  <Card.Header>
-    <Card.Title>Title</Card.Title>
-    <Card.Description>Description</Card.Description>
-  </Card.Header>
-  <Card.Content>Body content</Card.Content>
-  <Card.Footer>Footer</Card.Footer>
-</Card>
+export default function App() {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Title</Card.Title>
+        <Card.Description>Description</Card.Description>
+      </Card.Header>
+      <Card.Content>Body content</Card.Content>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+  );
+}
 ```
 
 ## Key Changes
@@ -85,71 +93,19 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Card Structure
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Card, CardBody } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Card>
-          <CardBody>
-            <p>Make beautiful websites regardless of your design experience.</p>
-          </CardBody>
-        </Card>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Card } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Card>
-          <Card.Content>
-            <p>Make beautiful websites regardless of your design experience.</p>
-          </Card.Content>
-        </Card>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Card with Header, Body, and Footer
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Basic structure */}
     <Card>
       <CardHeader>Header</CardHeader>
       <CardBody>Body content</CardBody>
       <CardFooter>Footer</CardFooter>
     </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card>
-      <Card.Header>
-        <Card.Title>Header</Card.Title>
-      </Card.Header>
-      <Card.Content>Body content</Card.Content>
-      <Card.Footer>Footer</Card.Footer>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Card with Title and Description
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* With title and description */}
     <Card>
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <p className="text-tiny uppercase font-bold">Daily Mix</p>
@@ -162,6 +118,16 @@ The following props are no longer available in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Basic structure */}
+    <Card>
+      <Card.Header>
+        <Card.Title>Header</Card.Title>
+      </Card.Header>
+      <Card.Content>Body content</Card.Content>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+    
+    {/* With title and description */}
     <Card>
       <Card.Header>
         <Card.Title>Frontend Radio</Card.Title>
@@ -239,82 +205,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Card with Shadow
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Card shadow="lg">
-      <CardBody>Content</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card className="shadow-lg">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Card with Radius
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Card radius="lg">
-      <CardBody>Content</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card className="rounded-lg">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Full Width Card
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Card fullWidth>
-      <CardBody>Content</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card className="w-full">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Hoverable Card
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Card isHoverable>
-      <CardBody>Content</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card className="transition-colors hover:bg-surface-secondary">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
 ### Blurred Footer Card
 
 <Tabs items={["v2", "v3"]}>
@@ -379,12 +269,6 @@ The following props are no longer available in v3:
     <Card variant="secondary">
       <Card.Content>Content</Card.Content>
     </Card>
-    <Card variant="tertiary">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    <Card variant="transparent">
-      <Card.Content>Content</Card.Content>
-    </Card>
     ```
   </Tab>
 </Tabs>
@@ -443,22 +327,3 @@ Card (Root)
 6. **Blur Effects**: Use Tailwind `backdrop-blur-*` classes instead of props
 7. **Variants**: New variant system for semantic prominence levels
 8. **ClassNames Removed**: Use `className` props on individual components
-
-## Tips for Migration
-
-1. **Start with structure**: Convert component names first (`CardBody` → `Card.Content`)
-2. **Add Title/Description**: Use `Card.Title` and `Card.Description` in headers for better semantics
-3. **Use Tailwind**: Many removed props can be replaced with Tailwind utility classes
-4. **Pressable cards**: Wrap content in a button/link and use `asChild` prop
-5. **Blur effects**: Apply `backdrop-blur-md` classes directly to footer elements
-6. **Variants**: Use variants for semantic prominence rather than visual styling
-
-## Need Help?
-
-**For v3 Card features and API:**
-- See the [API Reference](/docs/components/card#api-reference)
-- Check [interactive examples](/docs/components/card#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

@@ -18,17 +18,24 @@ The Modal component in HeroUI v3 has been redesigned with a compound component p
 In v2, Modal used separate components:
 
 ```tsx
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
 
-const {isOpen, onOpen, onOpenChange} = useDisclosure();
+export default function App() {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
-<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-  <ModalContent>
-    <ModalHeader>Title</ModalHeader>
-    <ModalBody>Content</ModalBody>
-    <ModalFooter>Footer</ModalFooter>
-  </ModalContent>
-</Modal>
+  return (
+    <>
+      <Button onPress={onOpen}>Open Modal</Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Title</ModalHeader>
+          <ModalBody>Content</ModalBody>
+          <ModalFooter>Footer</ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
 ```
 
 ### v3: Compound Components
@@ -38,19 +45,23 @@ In v3, Modal uses compound components:
 ```tsx
 import { Modal, Button } from "@heroui/react";
 
-<Modal>
-  <Button>Open Modal</Button>
-  <Modal.Container>
-    <Modal.Dialog>
-      <Modal.CloseTrigger />
-      <Modal.Header>
-        <Modal.Heading>Title</Modal.Heading>
-      </Modal.Header>
-      <Modal.Body>Content</Modal.Body>
-      <Modal.Footer>Footer</Modal.Footer>
-    </Modal.Dialog>
-  </Modal.Container>
-</Modal>
+export default function App() {
+  return (
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Container>
+        <Modal.Dialog>
+          <Modal.CloseTrigger />
+          <Modal.Header>
+            <Modal.Heading>Title</Modal.Heading>
+          </Modal.Header>
+          <Modal.Body>Content</Modal.Body>
+          <Modal.Footer>Footer</Modal.Footer>
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal>
+  );
+}
 ```
 
 ## Key Changes
@@ -103,80 +114,6 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import {
-      Modal,
-      ModalContent,
-      ModalHeader,
-      ModalBody,
-      ModalFooter,
-      Button,
-      useDisclosure,
-    } from "@heroui/react";
-
-    export default function App() {
-      const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
-      return (
-        <>
-          <Button onPress={onOpen}>Open Modal</Button>
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-            <ModalContent>
-              {(onClose) => (
-                <>
-                  <ModalHeader>Modal Title</ModalHeader>
-                  <ModalBody>
-                    <p>Modal content goes here</p>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button onPress={onClose}>Close</Button>
-                  </ModalFooter>
-                </>
-              )}
-            </ModalContent>
-          </Modal>
-        </>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Modal, Button } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Modal>
-          <Button>Open Modal</Button>
-          <Modal.Container>
-            <Modal.Dialog className="sm:max-w-[360px]">
-              {({close}) => (
-                <>
-                  <Modal.CloseTrigger />
-                  <Modal.Header>
-                    <Modal.Heading>Modal Title</Modal.Heading>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <p>Modal content goes here</p>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button onPress={close}>Close</Button>
-                  </Modal.Footer>
-                </>
-              )}
-            </Modal.Dialog>
-          </Modal.Container>
-        </Modal>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
 ### Controlled Modal
 
 <Tabs items={["v2", "v3"]}>
@@ -223,138 +160,75 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### With Sizes
+### Container Props
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    <Modal size="lg">
-      <ModalContent>
-        {/* content */}
-      </ModalContent>
-    </Modal>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Modal.Container>
-      <Modal.Dialog className="sm:max-w-[640px]">
-        {/* content */}
-      </Modal.Dialog>
-    </Modal.Container>
-    ```
-  </Tab>
-</Tabs>
-
-### With Backdrop
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Backdrop */}
     <Modal backdrop="blur">
-      <ModalContent>
-        {/* content */}
-      </ModalContent>
+      <ModalContent>{/* content */}</ModalContent>
     </Modal>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Modal.Container variant="blur">
-      <Modal.Dialog>
-        {/* content */}
-      </Modal.Dialog>
-    </Modal.Container>
-    ```
-  </Tab>
-</Tabs>
-
-### With Placement
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* Placement */}
     <Modal placement="top">
-      <ModalContent>
-        {/* content */}
-      </ModalContent>
+      <ModalContent>{/* content */}</ModalContent>
     </Modal>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Modal.Container placement="top">
-      <Modal.Dialog>
-        {/* content */}
-      </Modal.Dialog>
-    </Modal.Container>
-    ```
-  </Tab>
-</Tabs>
-
-### With Scroll Behavior
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* Scroll behavior */}
     <Modal scrollBehavior="outside">
-      <ModalContent>
-        {/* content */}
-      </ModalContent>
+      <ModalContent>{/* content */}</ModalContent>
     </Modal>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Backdrop - renamed to variant */}
+    <Modal.Container variant="blur">
+      <Modal.Dialog>{/* content */}</Modal.Dialog>
+    </Modal.Container>
+    
+    {/* Placement - moved to Container */}
+    <Modal.Container placement="top">
+      <Modal.Dialog>{/* content */}</Modal.Dialog>
+    </Modal.Container>
+    
+    {/* Scroll behavior - renamed to scroll */}
     <Modal.Container scroll="outside">
-      <Modal.Dialog>
-        {/* content */}
-      </Modal.Dialog>
+      <Modal.Dialog>{/* content */}</Modal.Dialog>
     </Modal.Container>
     ```
   </Tab>
 </Tabs>
 
-### Without Close Button
+### Close Button
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    {/* Without close button */}
     <Modal hideCloseButton>
-      <ModalContent>
-        {/* content */}
-      </ModalContent>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    
+    {/* Custom close button */}
+    <Modal closeButton={<CustomCloseIcon />}>
+      <ModalContent>{/* content */}</ModalContent>
     </Modal>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Without close button - omit Modal.CloseTrigger */}
     <Modal.Container>
       <Modal.Dialog>
-        {/* Omit Modal.CloseTrigger */}
         <Modal.Header>
           <Modal.Heading>Title</Modal.Heading>
         </Modal.Header>
       </Modal.Dialog>
     </Modal.Container>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Close Button
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Modal closeButton={<CustomCloseIcon />}>
-      <ModalContent>
-        {/* content */}
-      </ModalContent>
-    </Modal>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
+    
+    {/* Custom close button */}
     <Modal.Container>
       <Modal.Dialog>
         <Modal.CloseTrigger>
@@ -419,24 +293,3 @@ Modal (Root)
 8. **Scroll Renamed**: `scrollBehavior` → `scroll` (`normal` → `inside`)
 9. **Motion Removed**: `motionProps` removed, animations handled differently
 10. **New Components**: `Modal.Icon`, `Modal.Heading`, `Modal.Trigger`
-
-## Tips for Migration
-
-1. **Update structure**: Wrap content in `Modal.Container` and `Modal.Dialog`
-2. **Move props**: Move `placement`, `backdrop`, `scrollBehavior`, etc. to `Modal.Container`
-3. **Update state**: Use built-in trigger or controlled state on `Modal.Container`
-4. **Replace close**: Use `close` from render prop instead of `onClose` callback
-5. **Add close trigger**: Include `Modal.CloseTrigger` or omit it to hide
-6. **Update styling**: Use Tailwind CSS classes for sizes, radius, shadows
-7. **Add heading**: Use `Modal.Heading` inside `Modal.Header`
-8. **Add icon**: Use `Modal.Icon` inside `Modal.Header` if needed
-
-## Need Help?
-
-**For v3 Modal features and API:**
-- See the [API Reference](/docs/components/modal#api-reference)
-- Check [interactive examples](/docs/components/modal#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

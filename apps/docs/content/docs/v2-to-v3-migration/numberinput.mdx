@@ -20,7 +20,9 @@ In v2, NumberInput was a single component with props:
 ```tsx
 import { NumberInput } from "@heroui/react";
 
-<NumberInput label="Amount" defaultValue={1024} />
+export default function App() {
+  return <NumberInput label="Amount" defaultValue={1024} />;
+}
 ```
 
 ### v3: Compound Components
@@ -30,14 +32,18 @@ In v3, NumberField requires compound components:
 ```tsx
 import { NumberField, Label } from "@heroui/react";
 
-<NumberField defaultValue={1024}>
-  <Label>Amount</Label>
-  <NumberField.Group>
-    <NumberField.DecrementButton />
-    <NumberField.Input />
-    <NumberField.IncrementButton />
-  </NumberField.Group>
-</NumberField>
+export default function App() {
+  return (
+    <NumberField defaultValue={1024}>
+      <Label>Amount</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+  );
+}
 ```
 
 ## Key Changes
@@ -93,55 +99,33 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
+### Form Validation
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { NumberInput } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <NumberInput label="Amount" defaultValue={1024} />
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { NumberField, Label } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <NumberField defaultValue={1024}>
-          <Label>Amount</Label>
-          <NumberField.Group>
-            <NumberField.DecrementButton />
-            <NumberField.Input />
-            <NumberField.IncrementButton />
-          </NumberField.Group>
-        </NumberField>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### With Description
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* With description */}
     <NumberInput
       description="Enter the amount"
       label="Amount"
     />
+    
+    {/* With error message */}
+    <NumberInput
+      errorMessage="Please enter a valid number"
+      isInvalid
+      label="Amount"
+    />
+    
+    {/* Required */}
+    <NumberInput isRequired label="Quantity" />
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Description, Label } from "@heroui/react";
+    import { Description, FieldError, Label } from "@heroui/react";
 
+    {/* With description */}
     <NumberField>
       <Label>Amount</Label>
       <NumberField.Group>
@@ -151,26 +135,8 @@ The following props are no longer available in v3:
       </NumberField.Group>
       <Description>Enter the amount</Description>
     </NumberField>
-    ```
-  </Tab>
-</Tabs>
-
-### With Error Message
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <NumberInput
-      errorMessage="Please enter a valid number"
-      isInvalid
-      label="Amount"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { FieldError, Label } from "@heroui/react";
-
+    
+    {/* With error message */}
     <NumberField isInvalid>
       <Label>Amount</Label>
       <NumberField.Group>
@@ -179,6 +145,16 @@ The following props are no longer available in v3:
         <NumberField.IncrementButton />
       </NumberField.Group>
       <FieldError>Please enter a valid number</FieldError>
+    </NumberField>
+    
+    {/* Required */}
+    <NumberField isRequired>
+      <Label>Quantity</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
     </NumberField>
     ```
   </Tab>
@@ -237,59 +213,22 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### With Min/Max Values
+### Number Constraints
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    {/* Min/Max */}
     <NumberInput
       label="Quantity"
       maxValue={100}
       minValue={0}
     />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <NumberField maxValue={100} minValue={0}>
-      <Label>Quantity</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    ```
-  </Tab>
-</Tabs>
-
-### With Step Value
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* Step */}
     <NumberInput label="Percentage" step={0.1} />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <NumberField step={0.1}>
-      <Label>Percentage</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    ```
-  </Tab>
-</Tabs>
-
-### With Format Options
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    
+    {/* Format options */}
     <NumberInput
       formatOptions={{style: "currency", currency: "USD"}}
       label="Price"
@@ -298,6 +237,27 @@ The following props are no longer available in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Min/Max */}
+    <NumberField maxValue={100} minValue={0}>
+      <Label>Quantity</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    
+    {/* Step */}
+    <NumberField step={0.1}>
+      <Label>Percentage</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    
+    {/* Format options */}
     <NumberField formatOptions={{style: "currency", currency: "USD"}}>
       <Label>Price</Label>
       <NumberField.Group>
@@ -310,77 +270,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Required Field
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <NumberInput isRequired label="Quantity" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <NumberField isRequired>
-      <Label>Quantity</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <NumberInput isDisabled label="Amount" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <NumberField isDisabled>
-      <Label>Amount</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <NumberInput
-      classNames={{
-        base: "custom-base",
-        input: "custom-input"
-      }}
-      label="Amount"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <NumberField className="custom-base">
-      <Label>Amount</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input className="custom-input" />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    ```
-  </Tab>
-</Tabs>
 
 ## Component Anatomy
 
@@ -409,26 +298,3 @@ NumberField (Root)
 8. **Clear Button Removed**: `isClearable` removed - handle manually
 9. **Stepper Control**: `hideStepper` removed - omit buttons instead
 10. **Label Placement Removed**: `labelPlacement` removed - handle with layout
-
-## Tips for Migration
-
-1. **Update component name**: Change `NumberInput` to `NumberField`
-2. **Add compound structure**: Wrap input and buttons in `NumberField.Group`
-3. **Add stepper buttons**: Include `NumberField.IncrementButton` and `NumberField.DecrementButton`
-4. **Replace label prop**: Use `Label` component instead
-5. **Replace description prop**: Use `Description` component instead
-6. **Replace errorMessage prop**: Use `FieldError` component instead
-7. **Update event handler**: Change `onValueChange` to `onChange`
-8. **Remove hideStepper**: Omit stepper buttons if not needed
-9. **Handle clear manually**: Implement clear functionality if needed
-10. **Update styling**: Use Tailwind CSS classes for variants, colors, sizes
-
-## Need Help?
-
-**For v3 NumberField features and API:**
-- See the [API Reference](/docs/components/numberfield#api-reference)
-- Check [interactive examples](/docs/components/numberfield#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

@@ -58,130 +58,76 @@ The following props are no longer available in v3:
 | `warning` | `warning` | Same |
 | `danger` | `danger` | Same |
 
+## Structure Changes
+
+### v2: Component with Props
+
+In v2, `Chip` was a component that accepted various props for styling:
+
+```tsx
+import { Chip } from "@heroui/react";
+
+export default function App() {
+  return <Chip>Chip</Chip>;
+}
+```
+
+### v3: Simplified Component
+
+In v3, `Chip` has a simplified API with fewer variants:
+
+```tsx
+import { Chip } from "@heroui/react";
+
+export default function App() {
+  return <Chip>Chip</Chip>;
+}
+```
+
 ## Migration Examples
 
-### Basic Usage
+### Variants and Colors
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Chip } from "@heroui/react";
-
-    export default function App() {
-      return <Chip>Chip</Chip>;
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Chip } from "@heroui/react";
-
-    export default function App() {
-      return <Chip>Chip</Chip>;
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Variants */}
     <Chip variant="solid">Solid</Chip>
     <Chip variant="bordered">Bordered</Chip>
-    <Chip variant="light">Light</Chip>
-    <Chip variant="flat">Flat</Chip>
-    <Chip variant="faded">Faded</Chip>
-    <Chip variant="shadow">Shadow</Chip>
+    <Chip variant="soft">Soft</Chip>
+    
+    {/* Colors */}
+    <Chip color="primary">Primary</Chip>
+    <Chip color="success">Success</Chip>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Variants */}
     <Chip variant="primary">Primary</Chip>
     <Chip variant="secondary">Secondary</Chip>
     <Chip variant="soft">Soft</Chip>
-    <Chip variant="tertiary">Tertiary</Chip>
-    ```
-  </Tab>
-</Tabs>
-
-### Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Chip color="default">Default</Chip>
-    <Chip color="primary">Primary</Chip>
-    <Chip color="secondary">Secondary</Chip>
-    <Chip color="success">Success</Chip>
-    <Chip color="warning">Warning</Chip>
-    <Chip color="danger">Danger</Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Chip color="default">Default</Chip>
+    
+    {/* Colors */}
     <Chip color="accent">Accent</Chip>
     <Chip color="success">Success</Chip>
-    <Chip color="warning">Warning</Chip>
-    <Chip color="danger">Danger</Chip>
     ```
   </Tab>
 </Tabs>
 
-### Radius
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Chip radius="full">Full</Chip>
-    <Chip radius="lg">Large</Chip>
-    <Chip radius="md">Medium</Chip>
-    <Chip radius="sm">Small</Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Chip className="rounded-full">Full</Chip>
-    <Chip className="rounded-lg">Large</Chip>
-    <Chip className="rounded-md">Medium</Chip>
-    <Chip className="rounded-sm">Small</Chip>
-    ```
-  </Tab>
-</Tabs>
-
-### With Icons (Start Content)
+### With Icons
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     import { Icon } from "@iconify/react";
 
+    {/* Start content */}
     <Chip startContent={<Icon icon="gravity-ui:check" />}>
       Chip
     </Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Icon } from "@iconify/react";
-
-    <Chip>
-      <Icon icon="gravity-ui:check" />
-      Chip
-    </Chip>
-    ```
-  </Tab>
-</Tabs>
-
-### With Icons (End Content)
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Icon } from "@iconify/react";
-
+    
+    {/* End content */}
     <Chip endContent={<Icon icon="gravity-ui:chevron-down" />}>
       Chip
     </Chip>
@@ -191,6 +137,13 @@ The following props are no longer available in v3:
     ```tsx
     import { Icon } from "@iconify/react";
 
+    {/* Start content */}
+    <Chip>
+      <Icon icon="gravity-ui:check" />
+      Chip
+    </Chip>
+    
+    {/* End content */}
     <Chip>
       Chip
       <Icon icon="gravity-ui:chevron-down" />
@@ -251,80 +204,31 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Dot Variant
+### Removed Variants
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
+    {/* Dot variant */}
     <Chip variant="dot">Dot</Chip>
+    
+    {/* Shadow variant */}
+    <Chip variant="shadow">Shadow</Chip>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
     import { Icon } from "@iconify/react";
 
+    {/* Dot variant - implement manually */}
     <Chip>
       <Icon icon="gravity-ui:circle-fill" width={6} />
       Dot
     </Chip>
-    ```
-  </Tab>
-</Tabs>
-
-### Shadow Variant
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Chip variant="shadow">Shadow</Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
+    
+    {/* Shadow variant - use Tailwind classes */}
     <Chip variant="primary" className="shadow-md">
       Shadow
-    </Chip>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Chip isDisabled>Disabled</Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Use conditional rendering or disabled attribute */}
-    <Chip className="opacity-50 cursor-not-allowed">
-      Disabled
-    </Chip>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styles
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Chip 
-      classNames={{
-        base: "custom-base",
-        content: "custom-content"
-      }}
-    >
-      Custom
-    </Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Chip className="custom-base">
-      <span className="custom-content">Custom</span>
     </Chip>
     ```
   </Tab>
@@ -367,22 +271,3 @@ The following props are no longer available in v3:
 8. **Shadow Variant Removed**: Use Tailwind `shadow-*` classes
 9. **Disabled Prop Removed**: Use conditional rendering or CSS classes
 10. **ClassNames Removed**: Use `className` prop directly
-
-## Tips for Migration
-
-1. **Map variants**: Use the variant mapping table to find equivalent v3 variants
-2. **Update colors**: Change `primary` to `accent`, remove `secondary` usage
-3. **Move content**: Place icons, avatars, and other content as children instead of props
-4. **Implement close**: Use `CloseButton` component for close functionality
-5. **Use Tailwind**: Apply radius, shadows, and other styling with Tailwind classes
-6. **Dot variant**: Use an icon component as the first child to replicate dot variant
-
-## Need Help?
-
-**For v3 Chip features and API:**
-- See the [API Reference](/docs/components/chip#api-reference)
-- Check [interactive examples](/docs/components/chip#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

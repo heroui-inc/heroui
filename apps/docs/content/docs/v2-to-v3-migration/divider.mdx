@@ -35,6 +35,44 @@ The Divider component has been renamed to `Separator` in HeroUI v3. The API rema
 | `className` | ✅ | ✅ | Same |
 | `isOnSurface` | ❌ | ✅ | New: Automatically detects surface context |
 
+## Structure Changes
+
+### v2: Divider Component
+
+In v2, the component was named `Divider`:
+
+```tsx
+import { Divider } from "@heroui/react";
+
+export default function App() {
+  return (
+    <div>
+      <p>Content above</p>
+      <Divider />
+      <p>Content below</p>
+    </div>
+  );
+}
+```
+
+### v3: Separator Component
+
+In v3, the component has been renamed to `Separator`:
+
+```tsx
+import { Separator } from "@heroui/react";
+
+export default function App() {
+  return (
+    <div>
+      <p>Content above</p>
+      <Separator />
+      <p>Content below</p>
+    </div>
+  );
+}
+```
+
 ## Migration Examples
 
 ### Basic Usage
@@ -42,67 +80,25 @@ The Divider component has been renamed to `Separator` in HeroUI v3. The API rema
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Divider } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <div>
-          <p>Content above</p>
-          <Divider />
-          <p>Content below</p>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Separator } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <div>
-          <p>Content above</p>
-          <Separator />
-          <p>Content below</p>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-### Horizontal Separator
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
+    {/* Horizontal */}
     <Divider orientation="horizontal" />
+    
+    {/* Vertical */}
+    <div className="flex items-center space-x-4">
+      <div>Blog</div>
+      <Divider orientation="vertical" />
+      <div>Docs</div>
+      <Divider orientation="vertical" />
+      <div>Source</div>
+    </div>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
+    {/* Horizontal */}
     <Separator orientation="horizontal" />
-    ```
-  </Tab>
-</Tabs>
-
-### Vertical Separator
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <div className="flex items-center space-x-4">
-      <div>Blog</div>
-      <Divider orientation="vertical" />
-      <div>Docs</div>
-      <Divider orientation="vertical" />
-      <div>Source</div>
-    </div>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
+    
+    {/* Vertical */}
     <div className="flex items-center space-x-4">
       <div>Blog</div>
       <Separator orientation="vertical" />
@@ -110,21 +106,6 @@ The Divider component has been renamed to `Separator` in HeroUI v3. The API rema
       <Separator orientation="vertical" />
       <div>Source</div>
     </div>
-    ```
-  </Tab>
-</Tabs>
-
-### With Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Divider className="my-4" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Separator className="my-4" />
     ```
   </Tab>
 </Tabs>
@@ -244,20 +225,3 @@ You can also explicitly set `isOnSurface={true}` when needed:
 2. **Update Component**: Replace all `<Divider />` with `<Separator />`
 3. **Verify Functionality**: The `orientation` prop works the same way
 4. **Optional**: Use `isOnSurface` prop when needed for better visibility on surface backgrounds
-
-## Tips for Migration
-
-1. **Find and Replace**: Use find-and-replace to update all instances of `Divider` to `Separator`
-2. **Check Imports**: Update all import statements
-3. **Surface Detection**: v3 automatically handles surface detection, so you may not need to change anything else
-4. **Explicit Control**: Use `isOnSurface` prop when you need explicit control over surface styling
-
-## Need Help?
-
-**For v3 Separator features and API:**
-- See the [API Reference](/docs/components/separator#api-reference)
-- Check [interactive examples](/docs/components/separator#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

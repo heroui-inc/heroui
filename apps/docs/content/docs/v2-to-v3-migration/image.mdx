@@ -32,43 +32,46 @@ The v2 Image component had several features that need to be replaced:
 | `disableSkeleton` / Loading skeleton | Manual loading state | Use React state + conditional rendering |
 | `removeWrapper` prop | Direct rendering | No wrapper needed, render `<img>` directly |
 
+## Structure Changes
+
+### v2: Image Component
+
+In v2, `Image` was a component wrapper around the native `<img>` element:
+
+```tsx
+import { Image } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Image
+      src="https://example.com/image.jpg"
+      alt="Example image"
+      width={300}
+      height={200}
+    />
+  );
+}
+```
+
+### v3: Native HTML Element
+
+In v3, use the native `<img>` element directly with Tailwind CSS classes:
+
+```tsx
+export default function App() {
+  return (
+    <img
+      src="https://example.com/image.jpg"
+      alt="Example image"
+      width={300}
+      height={200}
+      className="rounded-lg"
+    />
+  );
+}
+```
+
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Image } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Image
-          src="https://example.com/image.jpg"
-          alt="Example image"
-          width={300}
-          height={200}
-        />
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    export default function App() {
-      return (
-        <img
-          src="https://example.com/image.jpg"
-          alt="Example image"
-          width={300}
-          height={200}
-          className="rounded-lg"
-        />
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ### With Next.js Image (Recommended)
 
@@ -98,46 +101,6 @@ If you're using Next.js, use the optimized `Image` component:
       height={200}
       className="rounded-lg"
     />
-    ```
-  </Tab>
-</Tabs>
-
-### With Radius Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Image radius="sm" src="..." alt="..." />
-    <Image radius="md" src="..." alt="..." />
-    <Image radius="lg" src="..." alt="..." />
-    <Image radius="full" src="..." alt="..." />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <img src="..." alt="..." className="rounded-sm" />
-    <img src="..." alt="..." className="rounded-md" />
-    <img src="..." alt="..." className="rounded-lg" />
-    <img src="..." alt="..." className="rounded-full" />
-    ```
-  </Tab>
-</Tabs>
-
-### With Shadow Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Image shadow="sm" src="..." alt="..." />
-    <Image shadow="md" src="..." alt="..." />
-    <Image shadow="lg" src="..." alt="..." />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <img src="..." alt="..." className="shadow-sm" />
-    <img src="..." alt="..." className="shadow-md" />
-    <img src="..." alt="..." className="shadow-lg" />
     ```
   </Tab>
 </Tabs>
@@ -542,16 +505,6 @@ If you frequently use images with similar features, you can create a reusable co
 5. **Use Next.js Image**: If using Next.js, consider using `next/image` for optimization
 6. **Optional**: Create reusable wrapper components for frequently used patterns
 
-## Tips for Migration
-
-1. **Next.js Users**: Use `next/image` for automatic optimization, lazy loading, and responsive images
-2. **Simple Images**: For basic images, native `<img>` with Tailwind classes is sufficient
-3. **Complex Features**: Create custom hooks or components for blur, zoom, and loading states
-4. **Performance**: Use `loading="lazy"` attribute for images below the fold
-5. **Accessibility**: Always include `alt` text and consider `aria-hidden="true"` for decorative blurred backgrounds
-6. **Error Handling**: Implement `onError` handlers for fallback images
-7. **Loading States**: Use React state to manage loading and error states
-
 ## Next.js Image Component
 
 If you're using Next.js, the `Image` component from `next/image` provides:
@@ -575,16 +528,3 @@ import Image from "next/image";
   blurDataURL="data:image/..." // Optional: base64 blur data
 />
 ```
-
-## Need Help?
-
-**For styling guidance:**
-- See the [Styling documentation](/docs/handbook/styling)
-- Check [Tailwind CSS documentation](https://tailwindcss.com/docs) for utility classes
-
-**For Next.js Image:**
-- See [Next.js Image documentation](https://nextjs.org/docs/app/api-reference/components/image)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)

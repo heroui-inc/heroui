@@ -20,9 +20,15 @@ In v2, Skeleton wrapped children and showed/hid them based on `isLoaded`:
 ```tsx
 import { Skeleton } from "@heroui/react";
 
-<Skeleton isLoaded={isLoaded}>
-  <div className="h-24 bg-secondary" />
-</Skeleton>
+export default function App() {
+  const isLoaded = false;
+  
+  return (
+    <Skeleton isLoaded={isLoaded}>
+      <div className="h-24 bg-secondary" />
+    </Skeleton>
+  );
+}
 ```
 
 ### v3: Standalone Component
@@ -32,11 +38,19 @@ In v3, Skeleton is a standalone placeholder that you control visibility of manua
 ```tsx
 import { Skeleton } from "@heroui/react";
 
-{!isLoaded ? (
-  <Skeleton className="h-24 rounded-lg" />
-) : (
-  <div className="h-24 bg-secondary" />
-)}
+export default function App() {
+  const isLoaded = false;
+  
+  return (
+    <>
+      {!isLoaded ? (
+        <Skeleton className="h-24 rounded-lg" />
+      ) : (
+        <div className="h-24 bg-secondary" />
+      )}
+    </>
+  );
+}
 ```
 
 ## Key Changes
@@ -68,33 +82,6 @@ The following props are no longer available in v3:
 - `animationType` - Controls animation type: `"shimmer"` (default), `"pulse"`, or `"none"`
 
 ## Migration Examples
-
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Skeleton } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <Skeleton className="rounded-lg">
-          <div className="h-24 rounded-lg bg-default-300" />
-        </Skeleton>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Skeleton } from "@heroui/react";
-
-    export default function App() {
-      return <Skeleton className="h-24 rounded-lg" />;
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ### With Loaded State
 
@@ -152,24 +139,7 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Animation Control
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Skeleton disableAnimation>
-      <div className="h-24 bg-default-300" />
-    </Skeleton>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Skeleton animationType="none" className="h-24 rounded-lg" />
-    ```
-  </Tab>
-</Tabs>
-
-### Different Animation Types
+### Animation Types
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
@@ -195,28 +165,6 @@ The following props are no longer available in v3:
 
     {/* No animation */}
     <Skeleton animationType="none" className="h-24 rounded-lg" />
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Styling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Skeleton
-      classNames={{
-        base: "custom-base",
-        content: "custom-content"
-      }}
-    >
-      <div className="h-24 bg-default-300" />
-    </Skeleton>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Skeleton className="custom-skeleton h-24 rounded-lg" />
     ```
   </Tab>
 </Tabs>
@@ -293,22 +241,3 @@ This can be overridden by the `animationType` prop on individual components.
 3. **Animation Control**: `disableAnimation` → `animationType` (`"shimmer"`, `"pulse"`, `"none"`)
 4. **Styling**: `classNames` → `className` prop directly
 5. **Simplified API**: Much simpler component focused on being a placeholder
-
-## Tips for Migration
-
-1. **Remove `isLoaded`**: Replace with conditional rendering (`{!isLoaded ? <Skeleton /> : <Content />}`)
-2. **Remove children**: Skeleton no longer wraps content - render skeleton and content separately
-3. **Update animation**: Change `disableAnimation={true}` to `animationType="none"`
-4. **Update styling**: Replace `classNames` prop with `className` prop
-5. **Add dimensions**: Make sure to add height/width classes since skeleton no longer inherits from children
-6. **Use conditional rendering**: Show skeleton when loading, content when loaded
-
-## Need Help?
-
-**For v3 Skeleton features and API:**
-- See the [API Reference](/docs/components/skeleton#api-reference)
-- Check [interactive examples](/docs/components/skeleton#usage)
-
-**For community support:**
-- [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
-- [Discord community](https://discord.gg/9b6yyZKmH4)
