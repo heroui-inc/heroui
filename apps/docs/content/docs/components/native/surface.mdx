@@ -7,3 +7,148 @@ links:
   figma: true
 ---
 
+## Import
+
+```tsx
+import { Surface } from 'heroui-native';
+```
+
+## Anatomy
+
+The Surface component is a container that provides elevation and background styling. It accepts children and can be customized with variants and styling props.
+
+```tsx
+<Surface>...</Surface>
+```
+
+- **Surface**: Main container component that provides consistent padding, background styling, and elevation through variants.
+
+## Usage
+
+### Basic Usage
+
+The Surface component creates a container with consistent padding and styling.
+
+```tsx
+<Surface>...</Surface>
+```
+
+### Variants
+
+Control the visual appearance with different surface levels.
+
+```tsx
+<Surface variant="default">
+  ...
+</Surface>
+
+<Surface variant="secondary">
+  ...
+</Surface>
+
+<Surface variant="tertiary">
+  ...
+</Surface>
+
+<Surface variant="quaternary">
+  ...
+</Surface>
+```
+
+### Nested Surfaces
+
+Create visual hierarchy by nesting surfaces with different variants.
+
+```tsx
+<Surface variant="default">
+  ...
+  <Surface variant="secondary">
+    ...
+    <Surface variant="tertiary">
+      ...
+      <Surface variant="quaternary">...</Surface>
+    </Surface>
+  </Surface>
+</Surface>
+```
+
+### Custom Styling
+
+Apply custom styles using className or style props.
+
+```tsx
+<Surface className="bg-accent-soft">
+  ...
+</Surface>
+
+<Surface variant="quaternary" className="p-0">
+  ...
+</Surface>
+```
+
+### Disable All Animations
+
+Disable all animations including children by using the `"disable-all"` value for the `animation` prop.
+
+```tsx
+{
+  /* Disable all animations including children */
+}
+<Surface animation="disable-all">No Animations</Surface>;
+```
+
+## Example
+
+```tsx
+import { Surface } from 'heroui-native';
+import { Text, View } from 'react-native';
+
+export default function SurfaceExample() {
+  return (
+    <View className="gap-4">
+      <Surface variant="default" className="gap-2">
+        <AppText className="text-foreground">Surface Content</AppText>
+        <AppText className="text-muted">
+          This is a default surface variant. It uses bg-surface styling.
+        </AppText>
+      </Surface>
+
+      <Surface variant="secondary" className="gap-2">
+        <AppText className="text-foreground">Surface Content</AppText>
+        <AppText className="text-muted">
+          This is a secondary surface variant. It uses bg-surface-secondary
+          styling.
+        </AppText>
+      </Surface>
+
+      <Surface variant="tertiary" className="gap-2">
+        <AppText className="text-foreground">Surface Content</AppText>
+        <AppText className="text-muted">
+          This is a tertiary surface variant. It uses bg-surface-tertiary
+          styling.
+        </AppText>
+      </Surface>
+
+      <Surface variant="quaternary" className="gap-2">
+        <AppText className="text-foreground">Surface Content</AppText>
+        <AppText className="text-muted">
+          This is a quaternary surface variant. It uses bg-surface-quaternary
+          styling.
+        </AppText>
+      </Surface>
+    </View>
+  );
+}
+```
+
+## API Reference
+
+### Surface
+
+| prop           | type                                                                      | default     | description                                                                               |
+| -------------- | ------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `variant`      | `'default' \| 'secondary' \| 'tertiary' \| 'quaternary' \| 'transparent'` | `'default'` | Visual variant controlling background color and border                                    |
+| `children`     | `React.ReactNode`                                                         | -           | Content to be rendered inside the surface                                                 |
+| `className`    | `string`                                                                  | -           | Additional CSS classes to apply                                                           |
+| `animation`    | `"disable-all" \| undefined`                                              | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| `...ViewProps` | `ViewProps`                                                               | -           | All standard React Native View props are supported                                        |
