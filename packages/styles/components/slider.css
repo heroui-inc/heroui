@@ -22,18 +22,18 @@
   }
 
   .slider__track {
-    @apply bg-default relative rounded-full;
+    @apply relative rounded-full bg-default;
 
     grid-area: track;
   }
 
   .slider__fill {
-    @apply bg-accent pointer-events-none absolute;
+    @apply pointer-events-none absolute bg-accent;
   }
 
   .slider__thumb {
     /* Flex container for centering pseudo-elements */
-    @apply bg-accent absolute relative flex cursor-grab items-center justify-center rounded-full;
+    @apply absolute relative flex cursor-grab items-center justify-center rounded-full bg-accent;
 
     /**
    * Transitions
@@ -47,7 +47,7 @@
 
     /* after: Visible thumb element */
     &::after {
-      @apply shadow-field relative z-10 rounded-full bg-white text-black;
+      @apply relative z-10 rounded-full bg-white text-black shadow-field;
       content: "";
 
       /**
@@ -67,7 +67,7 @@
 
     /* Focus state - increase z-index */
     &[data-focus-visible] {
-      @apply status-focused z-10;
+      @apply z-10 status-focused;
     }
 
     /* Disabled state */

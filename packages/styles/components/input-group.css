@@ -1,6 +1,6 @@
 /* Input group styles */
 .input-group {
-  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -27,6 +27,8 @@
   &[data-focus-within],
   &:focus-within {
     @apply status-focused-field;
+    border-color: var(--color-field-border-focus);
+    background-color: var(--color-field-focus);
   }
 
   /* Invalid state */
@@ -64,7 +66,7 @@
 }
 
 .input-group__prefix {
-  @apply text-field-placeholder rounded-l-field flex h-full items-center justify-center rounded-r-none bg-transparent px-3;
+  @apply flex h-full items-center justify-center rounded-l-field rounded-r-none bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
   border-style: solid;
@@ -84,7 +86,7 @@
 }
 
 .input-group__suffix {
-  @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
+  @apply flex h-full items-center justify-center rounded-l-none rounded-r-field bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
   border-style: solid;
@@ -114,6 +116,7 @@
     }
   }
 
+  /* Focus within state */
   &:focus-within,
   &[data-focus-within] {
     background-color: var(--color-on-surface-focus);

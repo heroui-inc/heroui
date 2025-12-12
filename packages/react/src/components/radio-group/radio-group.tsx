@@ -15,8 +15,7 @@ import {radioGroupVariants} from "./radio-group.styles";
  * Radio Group Root
  * -----------------------------------------------------------------------------------------------*/
 interface RadioGroupRootProps
-  extends ComponentPropsWithRef<typeof RadioGroupPrimitive>,
-    RadioGroupVariants {}
+  extends ComponentPropsWithRef<typeof RadioGroupPrimitive>, RadioGroupVariants {}
 
 const RadioGroupRoot = ({children, className, isOnSurface, ...props}: RadioGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);

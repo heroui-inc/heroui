@@ -491,7 +491,7 @@ export const Controlled: Story = {
             </ListBox>
           </ComboBox.Popover>
         </ComboBox>
-        <p className="text-muted text-sm">Selected: {selectedAnimal?.name || "None"}</p>
+        <p className="text-sm text-muted">Selected: {selectedAnimal?.name || "None"}</p>
       </div>
     );
   },
@@ -538,7 +538,7 @@ export const ControlledInputValue: Story = {
             </ListBox>
           </ComboBox.Popover>
         </ComboBox>
-        <p className="text-muted text-sm">Input value: {inputValue || "(empty)"}</p>
+        <p className="text-sm text-muted">Input value: {inputValue || "(empty)"}</p>
       </div>
     );
   },

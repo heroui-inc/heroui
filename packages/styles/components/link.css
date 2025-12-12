@@ -1,6 +1,6 @@
 /* Base link styles */
 .link {
-  @apply text-link relative inline-flex h-fit w-fit items-center text-sm font-medium;
+  @apply relative inline-flex h-fit w-fit items-center text-sm font-medium text-link;
 
   /**
    * Transitions

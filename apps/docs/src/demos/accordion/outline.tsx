@@ -47,7 +47,7 @@ export function Oultine() {
           <Accordion.Heading>
             <Accordion.Trigger>
               {item.icon ? (
-                <Icon className="text-muted mr-3 size-4 shrink-0" icon={item.icon} />
+                <Icon className="mr-3 size-4 shrink-0 text-muted" icon={item.icon} />
               ) : null}
               {item.title}
               <Accordion.Indicator>

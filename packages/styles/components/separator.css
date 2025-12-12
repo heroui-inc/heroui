@@ -2,7 +2,7 @@
 
 /* Base separator with default horizontal orientation */
 .separator {
-  @apply bg-separator shrink-0 rounded-[4px] border-b-0 border-t-0;
+  @apply shrink-0 rounded-[4px] border-t-0 border-b-0 bg-separator;
 
   /* Default size - horizontal orientation */
   @apply h-px w-full;
@@ -34,7 +34,7 @@
 }
 
 .separator__content {
-  @apply text-muted inline-flex items-center justify-center whitespace-nowrap text-center;
+  @apply inline-flex items-center justify-center text-center whitespace-nowrap text-muted;
 }
 
 .separator__content--horizontal {

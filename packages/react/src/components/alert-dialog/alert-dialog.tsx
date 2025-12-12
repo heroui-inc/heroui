@@ -92,7 +92,7 @@ interface AlertDialogContainerProps extends ComponentPropsWithRef<typeof ModalPr
   placement?: AlertDialogPlacement;
   /**
    * The visual variant of the backdrop overlay.
-   * @default "solid"
+   * @default "opaque"
    */
   backdropVariant?: AlertDialogVariants["variant"];
   /**
@@ -115,7 +115,7 @@ interface AlertDialogContainerProps extends ComponentPropsWithRef<typeof ModalPr
 
 const AlertDialogContainer = ({
   backdropClassName,
-  backdropVariant = "solid",
+  backdropVariant = "opaque",
   children,
   className,
   isDismissable = false,

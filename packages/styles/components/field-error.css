@@ -1,6 +1,6 @@
 /* Field error styles */
 .field-error {
-  @apply text-danger h-0 truncate px-1 text-xs opacity-0 data-[visible=true]:h-auto data-[visible=true]:opacity-100;
+  @apply h-0 truncate px-1 text-xs text-danger opacity-0 data-[visible=true]:h-auto data-[visible=true]:opacity-100;
 
   /**
    * Transitions

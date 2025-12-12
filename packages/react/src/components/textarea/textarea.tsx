@@ -15,8 +15,7 @@ import {textAreaVariants} from "./textarea.styles";
  * TextArea Root
  * -----------------------------------------------------------------------------------------------*/
 interface TextAreaRootProps
-  extends ComponentPropsWithRef<typeof TextAreaPrimitive>,
-    TextAreaVariants {}
+  extends ComponentPropsWithRef<typeof TextAreaPrimitive>, TextAreaVariants {}
 
 const TextAreaRoot = ({className, isOnSurface, ...rest}: TextAreaRootProps) => {
   const surfaceContext = useContext(SurfaceContext);

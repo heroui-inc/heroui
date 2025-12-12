@@ -20,7 +20,7 @@ export function PopoverInteractive() {
             </Avatar>
             <div className="flex flex-col">
               <p className="text-sm font-medium">Sarah Johnson</p>
-              <p className="text-muted text-xs">@sarahj</p>
+              <p className="text-xs text-muted">@sarahj</p>
             </div>
           </div>
         </Popover.Trigger>
@@ -38,7 +38,7 @@ export function PopoverInteractive() {
                   </Avatar>
                   <div>
                     <p className="font-semibold">Sarah Johnson</p>
-                    <p className="text-muted text-sm">@sarahj</p>
+                    <p className="text-sm text-muted">@sarahj</p>
                   </div>
                 </div>
                 <Button
@@ -51,17 +51,17 @@ export function PopoverInteractive() {
                 </Button>
               </div>
             </Popover.Heading>
-            <p className="text-muted mt-3 text-sm">
+            <p className="mt-3 text-sm text-muted">
               Product designer and creative director. Building beautiful experiences that matter.
             </p>
             <div className="mt-3 flex gap-4">
               <div>
                 <span className="font-semibold">892</span>
-                <span className="text-muted ml-1 text-sm">Following</span>
+                <span className="ml-1 text-sm text-muted">Following</span>
               </div>
               <div>
                 <span className="font-semibold">12.5K</span>
-                <span className="text-muted ml-1 text-sm">Followers</span>
+                <span className="ml-1 text-sm text-muted">Followers</span>
               </div>
             </div>
           </Popover.Dialog>

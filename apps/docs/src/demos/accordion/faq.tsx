@@ -49,13 +49,13 @@ export function FAQ() {
     <div className="flex w-full flex-col gap-6">
       <div className="flex flex-col gap-1">
         <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
-        <p className="text-muted mb-4 text-lg font-medium">
+        <p className="mb-4 text-lg font-medium text-muted">
           Everything you need to know about licensing and usage.
         </p>
       </div>
       {categories.map((category) => (
         <div key={category.title}>
-          <p className="text-muted text-md mb-2 font-medium">{category.title}</p>
+          <p className="text-md mb-2 font-medium text-muted">{category.title}</p>
           <Accordion className="w-full" variant="surface">
             {category.items.map((item, index) => (
               <Accordion.Item key={index}>

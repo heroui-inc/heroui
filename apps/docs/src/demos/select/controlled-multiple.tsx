@@ -51,7 +51,7 @@ export function ControlledMultiple() {
           </ListBox>
         </Select.Popover>
       </Select>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Selected: {selected.length > 0 ? selected.join(", ") : "None"}
       </p>
     </div>

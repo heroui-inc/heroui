@@ -8,7 +8,7 @@ export function PopoverBasic() {
         <Popover.Content className="max-w-64">
           <Popover.Dialog>
             <Popover.Heading>Popover Title</Popover.Heading>
-            <p className="text-muted mt-2 text-sm">
+            <p className="mt-2 text-sm text-muted">
               This is the popover content. You can put any content here.
             </p>
           </Popover.Dialog>

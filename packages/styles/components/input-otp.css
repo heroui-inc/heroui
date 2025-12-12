@@ -14,8 +14,8 @@
 
 /* Individual slot box - fully rounded, standalone */
 .input-otp__slot {
-  @apply w-9.5 relative flex h-10 flex-1 items-center justify-center;
-  @apply bg-field text-field-foreground shadow-field border;
+  @apply relative flex h-10 w-9.5 flex-1 items-center justify-center;
+  @apply border bg-field text-field-foreground shadow-field;
   @apply rounded-field text-sm font-semibold outline-none;
 
   border-width: var(--border-width-field);
@@ -42,7 +42,7 @@
 
   /* Active/Focus */
   &[data-active] {
-    @apply bg-field-focus status-focused-field z-10;
+    @apply z-10 bg-field-focus status-focused-field;
   }
 
   /* Filled */
@@ -77,12 +77,12 @@
 
 /* Caret */
 .input-otp__caret {
-  @apply bg-field-placeholder animate-caret-blink absolute h-4 w-[2px] rounded-[4px];
+  @apply absolute h-4 w-[2px] animate-caret-blink rounded-[4px] bg-field-placeholder;
 }
 
 /* Separator */
 .input-otp__separator {
-  @apply bg-separator h-[2px] w-[6px] shrink-0 rounded-[4px];
+  @apply h-[2px] w-[6px] shrink-0 rounded-[4px] bg-separator;
 }
 
 /* Variant modifiers */

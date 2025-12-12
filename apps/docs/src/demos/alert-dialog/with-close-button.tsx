@@ -17,7 +17,7 @@ export function WithCloseButton() {
                   <Icon className="size-5" icon="gravity-ui:circle-info" />
                 </AlertDialog.Icon>
                 <AlertDialog.Heading>Less critical information</AlertDialog.Heading>
-                <p className="text-muted text-sm leading-relaxed">
+                <p className="text-sm leading-relaxed text-muted">
                   Close button and backdrop dismiss are enabled
                 </p>
               </AlertDialog.Header>

@@ -4,7 +4,7 @@
 }
 
 .fieldset__legend {
-  @apply text-foreground text-base font-medium;
+  @apply text-base font-medium text-foreground;
 }
 .fieldset_field_group {
   @apply w-full space-y-4;

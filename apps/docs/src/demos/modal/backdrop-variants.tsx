@@ -4,7 +4,7 @@ import {Button, Modal} from "@heroui/react";
 import {Icon} from "@iconify/react";
 
 export function BackdropVariants() {
-  const variants = ["solid", "blur", "transparent"] as const;
+  const variants = ["opaque", "blur", "transparent"] as const;
 
   return (
     <div className="flex flex-wrap gap-4">
@@ -27,7 +27,7 @@ export function BackdropVariants() {
                   <Modal.Body>
                     <p>
                       This modal uses the <code>{variant}</code> backdrop variant. Compare the
-                      different visual effects: solid provides full opacity, blur adds a backdrop
+                      different visual effects: opaque provides full opacity, blur adds a backdrop
                       filter, and transparent removes the background.
                     </p>
                   </Modal.Body>

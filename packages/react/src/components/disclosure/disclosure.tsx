@@ -14,7 +14,6 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
@@ -34,16 +33,10 @@ const DisclosureContext = createContext<DisclosureContext>({});
  * Disclosure Root
  * -----------------------------------------------------------------------------------------------*/
 interface DisclosureRootProps
-  extends ComponentPropsWithRef<typeof DisclosurePrimitive>,
-    DisclosureVariants {}
+  extends ComponentPropsWithRef<typeof DisclosurePrimitive>, DisclosureVariants {}
 
-const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootProps) => {
-  const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
-
-  const slots = React.useMemo(
-    () => disclosureVariants({...(variantProps as DisclosureVariants)}),
-    [objectToDeps(variantProps)],
-  );
+const DisclosureRoot = ({children, className, ...props}: DisclosureRootProps) => {
+  const slots = React.useMemo(() => disclosureVariants({}), []);
 
   return (
     <DisclosureContext value={{slots}}>

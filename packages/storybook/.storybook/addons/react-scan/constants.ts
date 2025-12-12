@@ -6,4 +6,3 @@ export const REACT_SCAN_VALUES = ["true", "false"] as const;
 export type ReactScanKey = (typeof REACT_SCAN_VALUES)[number];
 
 export const DEFAULT_REACT_SCAN: ReactScanKey = "false";
-

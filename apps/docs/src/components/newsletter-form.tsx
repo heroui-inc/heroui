@@ -128,7 +128,7 @@ export function NewsletterForm() {
             <Input placeholder="name@email.com" value={email} />
             <FieldError className="mt-1 px-1 text-xs" />
             {apiErrorMessage && status === "error" ? (
-              <p className="text-danger mt-1 px-1 text-xs">{apiErrorMessage}</p>
+              <p className="mt-1 px-1 text-xs text-danger">{apiErrorMessage}</p>
             ) : null}
           </TextField>
           <Button

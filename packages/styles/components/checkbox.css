@@ -22,7 +22,7 @@
   }
 
   [data-slot="description"] {
-    @apply select-none text-wrap;
+    @apply text-wrap select-none;
   }
 
   /* Disabled state */
@@ -43,7 +43,7 @@
 
   /* Checkmark SVG indicator */
   [data-slot="checkbox-default-indicator--checkmark"] {
-    @apply text-accent-foreground size-2.5;
+    @apply size-2.5 text-accent-foreground;
 
     /**
      * Transitions
@@ -82,7 +82,7 @@
    ========================================================================== */
 
 .checkbox__control {
-  @apply bg-field shadow-field relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md outline-none;
+  @apply relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md bg-field shadow-field outline-none;
 
   /**
    * Transitions
@@ -102,7 +102,7 @@
 
   /* Background indicator pseudo-element */
   &::before {
-    @apply bg-accent pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md opacity-0 content-[''];
+    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md bg-accent opacity-0 content-[''];
 
     /**
      * Transitions
@@ -135,14 +135,13 @@
   /* Pressed */
   .checkbox:active &,
   .checkbox[data-pressed] & {
-    @apply scale-95;
   }
 
   /* Selection states */
   /* Selected */
   .checkbox[aria-checked] &,
   .checkbox[data-selected] & {
-    @apply text-accent-foreground border-transparent;
+    @apply border-transparent text-accent-foreground;
 
     &::before {
       @apply scale-100 opacity-100;
@@ -172,10 +171,10 @@
   .checkbox[data-invalid][data-selected] &,
   .checkbox[aria-invalid][aria-checked] &,
   .checkbox[aria-invalid][data-selected] & {
-    @apply bg-danger text-danger-foreground border-transparent;
+    @apply border-transparent bg-danger text-danger-foreground;
 
     &::before {
-      @apply bg-danger scale-100 opacity-100;
+      @apply scale-100 bg-danger opacity-100;
     }
   }
 

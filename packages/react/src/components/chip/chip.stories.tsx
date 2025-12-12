@@ -105,7 +105,7 @@ const VariantsTemplate = (props: ChipProps) => {
       {sizes.map((size, index) => (
         <React.Fragment key={size}>
           <div className="flex flex-col gap-4">
-            <h3 className="text-muted text-sm font-semibold capitalize">{size}</h3>
+            <h3 className="text-sm font-semibold text-muted capitalize">{size}</h3>
             {/* Color labels header */}
             <div className="flex items-center gap-3">
               <div className="w-24 shrink-0" />
@@ -115,14 +115,14 @@ const VariantsTemplate = (props: ChipProps) => {
                   className="flex shrink-0 items-center justify-center"
                   style={{width: "130px"}}
                 >
-                  <span className="text-muted text-xs capitalize">{color}</span>
+                  <span className="text-xs text-muted capitalize">{color}</span>
                 </div>
               ))}
             </div>
             <div className="flex flex-col gap-3">
               {variants.map((variant) => (
                 <div key={variant} className="flex items-center gap-3">
-                  <div className="text-muted w-24 shrink-0 text-sm capitalize">{variant}</div>
+                  <div className="w-24 shrink-0 text-sm text-muted capitalize">{variant}</div>
                   {colors.map((color) => (
                     <div
                       key={color}

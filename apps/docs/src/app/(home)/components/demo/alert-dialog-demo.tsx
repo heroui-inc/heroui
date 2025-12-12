@@ -13,7 +13,7 @@ export function AlertDialogDemo() {
         </Avatar>
         <Card.Title>Unsaved changes</Card.Title>
         <Card.Description>Do you want to save or discard changes?</Card.Description>
-        <CloseButton className="absolute right-3 top-3" />
+        <CloseButton className="absolute top-3 right-3" />
       </Card.Header>
       <Card.Footer className="flex w-full items-center gap-2 px-0.5 pt-3">
         <Button className="w-full" variant="tertiary">

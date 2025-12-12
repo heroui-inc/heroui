@@ -1,5 +1,5 @@
 .skeleton {
-  @apply bg-surface-quaternary/70 pointer-events-none relative overflow-hidden rounded-sm;
+  @apply pointer-events-none relative overflow-hidden rounded-sm bg-surface-quaternary/70;
 }
 
 /* TODO: Skeleton with parent are not visible */
@@ -7,7 +7,7 @@
 /* Animation types */
 .skeleton--shimmer {
   &::after {
-    @apply animate-skeleton via-surface-quaternary absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent content-[''];
+    @apply absolute inset-0 -translate-x-full animate-skeleton bg-linear-to-r from-transparent via-surface-quaternary to-transparent content-[''];
   }
 
   /* When applied to a parent container with multiple skeletons */
@@ -18,7 +18,7 @@
 
     /* Single synchronized shimmer that passes over all children */
     &::before {
-      @apply animate-skeleton absolute inset-0 -translate-x-full content-[''];
+      @apply absolute inset-0 -translate-x-full animate-skeleton content-[''];
       background: linear-gradient(
         90deg,
         transparent 0%,

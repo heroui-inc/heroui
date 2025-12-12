@@ -17,11 +17,11 @@ export const ExternalLink = React.forwardRef<HTMLAnchorElement, ExternalLinkProp
       <Link
         ref={ref}
         external
-        className={`text-muted hover:text-fd-accent-foreground data-[active=true]:text-fd-primary relative inline-flex items-center gap-1 p-2 text-sm transition-colors ${className}`}
+        className={`hover:text-fd-accent-foreground data-[active=true]:text-fd-primary relative inline-flex items-center gap-1 p-2 text-sm text-muted transition-colors ${className}`}
         {...props}
       >
         {children}
-        <LinkIcon className="outline-solid absolute right-[-1px] top-[8px] outline-transparent transition-transform group-data-[hover=true]:translate-y-0.5 [&>path]:stroke-[2.5px]" />
+        <LinkIcon className="absolute top-[8px] right-[-1px] outline-transparent transition-transform outline-solid group-data-[hover=true]:translate-y-0.5 [&>path]:stroke-[2.5px]" />
       </Link>
     );
   },

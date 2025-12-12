@@ -47,7 +47,7 @@
 }
 
 .combobox__trigger {
-  @apply text-field-placeholder absolute right-0 top-1/2 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 transition duration-150;
+  @apply absolute top-1/2 right-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 text-field-placeholder transition duration-150;
 
   /* Remove default button styles */
   @apply border-none bg-transparent outline-none;
@@ -63,7 +63,7 @@
   /* Focus visible state */
   &:focus-visible:not(:focus),
   &[data-focus-visible] {
-    @apply ring-focus ring-offset-background rounded outline-none ring-2 ring-offset-2;
+    @apply rounded ring-2 ring-focus ring-offset-2 ring-offset-background outline-none;
   }
 
   /* Pressed state */
@@ -90,7 +90,7 @@
 
 /* Similar to popover content styles */
 .combobox__popover {
-  @apply min-w-(--trigger-width) bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-transform;
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
@@ -101,7 +101,7 @@
 
   /* Entering animations */
   &[data-entering] {
-    @apply animate-in zoom-in-95 fade-in-0 ease-fluid-out duration-250;
+    @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -123,7 +123,7 @@
 
   /* Exiting animations */
   &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
+    @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
   /* Arrow styling */

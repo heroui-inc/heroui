@@ -62,7 +62,7 @@ export const ControlledValue: Story = {
           </CalendarHeader>
           <CalendarGrid />
         </Calendar>
-        <p className="text-muted text-sm">Selected date: {value.toString()}</p>
+        <p className="text-sm text-muted">Selected date: {value.toString()}</p>
       </div>
     );
   },

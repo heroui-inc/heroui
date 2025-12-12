@@ -3,7 +3,7 @@
 /* Block */
 .card {
   @apply relative flex flex-col gap-3 overflow-hidden p-4;
-  @apply border-border shadow-surface rounded-3xl;
+  @apply rounded-3xl border-border shadow-surface;
 }
 
 /* Element - header */
@@ -13,12 +13,12 @@
 
 /* Element - title */
 .card__title {
-  @apply text-foreground text-sm font-medium leading-6;
+  @apply text-sm leading-6 font-medium text-foreground;
 }
 
 /* Element - description */
 .card__description {
-  @apply text-muted text-sm leading-5;
+  @apply text-sm leading-5 text-muted;
 }
 
 /* Element - content */

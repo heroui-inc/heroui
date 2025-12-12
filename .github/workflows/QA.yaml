@@ -5,7 +5,7 @@ on:
     branches:
       - canary
       - v3
-      - 'beta-*'
+      - "beta-*"
 
 jobs:
   build:
@@ -21,7 +21,6 @@ jobs:
       - name: Build packages
         run: pnpm build
 
-
   eslint:
     name: ESLint
     runs-on: ubuntu-latest
@@ -34,7 +33,6 @@ jobs:
 
       - name: Run ESLint
         run: pnpm lint
-
 
   types:
     name: TypeScript
