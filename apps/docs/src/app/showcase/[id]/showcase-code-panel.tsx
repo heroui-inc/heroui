@@ -75,14 +75,14 @@ export function ShowcaseCodePanel({
               initial={{opacity: 0, x: "100%"}}
               transition={{bounce: 0, duration: 0.4, type: "spring"}}
               className={cn(
-                "bg-surface/94 absolute right-6 z-[9999] h-full max-h-[88%] w-[45%] overflow-hidden rounded-xl shadow-xl backdrop-blur-md",
+                "absolute right-6 z-[9999] h-full max-h-[88%] w-[45%] overflow-hidden rounded-xl bg-surface/94 shadow-xl backdrop-blur-md",
                 className,
               )}
             >
               <div className="flex h-full flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-3">
-                  <h3 className="text-foreground/60 text-sm font-medium">Source code</h3>
+                  <h3 className="text-sm font-medium text-foreground/60">Source code</h3>
                   <div className="flex items-center gap-2">
                     <button
                       aria-label="Download code"
@@ -93,7 +93,7 @@ export function ShowcaseCodePanel({
                     </button>
                     <button
                       aria-label="Copy code"
-                      className="text-foreground/40 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md transition-colors hover:bg-white/5 hover:text-white/60 data-[copied=true]:text-green-400"
+                      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md text-foreground/40 transition-colors hover:bg-white/5 hover:text-white/60 data-[copied=true]:text-green-400"
                       data-copied={copied}
                       onClick={onCopy}
                     >

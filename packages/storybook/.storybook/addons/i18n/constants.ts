@@ -228,4 +228,3 @@ export const LOCALES = [
 ];
 
 export const DEFAULT_LOCALE = "Auto";
-

@@ -49,8 +49,7 @@ const TooltipRoot = ({
  * Tooltip Content
  * -----------------------------------------------------------------------------------------------*/
 interface TooltipContentProps
-  extends Omit<ComponentPropsWithRef<typeof TooltipPrimitive>, "children">,
-    TooltipVariants {
+  extends Omit<ComponentPropsWithRef<typeof TooltipPrimitive>, "children">, TooltipVariants {
   showArrow?: boolean;
   children: React.ReactNode;
 }

@@ -4,7 +4,7 @@ export function Disabled() {
   return (
     <div className="flex w-full flex-col items-center gap-8">
       <div className="w-full max-w-md space-y-2">
-        <h3 className="text-muted text-sm font-medium">Entire accordion disabled</h3>
+        <h3 className="text-sm font-medium text-muted">Entire accordion disabled</h3>
         <Accordion isDisabled className="w-full max-w-md">
           <Accordion.Item>
             <Accordion.Heading>
@@ -37,7 +37,7 @@ export function Disabled() {
       </div>
 
       <div className="w-full max-w-md space-y-2">
-        <h3 className="text-muted text-sm font-medium">Individual items disabled</h3>
+        <h3 className="text-sm font-medium text-muted">Individual items disabled</h3>
         <Accordion className="w-full max-w-md">
           <Accordion.Item>
             <Accordion.Heading>

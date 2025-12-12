@@ -9,7 +9,7 @@ export function WithIconPrefixAndTextSuffix() {
       <Label>Website</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:globe" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-full max-w-[280px]" defaultValue="heroui" />
         <InputGroup.Suffix>.com</InputGroup.Suffix>

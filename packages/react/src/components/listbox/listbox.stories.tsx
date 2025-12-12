@@ -67,7 +67,7 @@ export const Default: Story = {
 
 export const WithSections: Story = {
   render: () => (
-    <Surface className="shadow-surface w-[256px] rounded-3xl">
+    <Surface className="w-[256px] rounded-3xl shadow-surface">
       <ListBox
         aria-label="File actions"
         className="w-full p-2"
@@ -78,7 +78,7 @@ export const WithSections: Story = {
           <Header>Actions</Header>
           <ListBox.Item id="new-file" textValue="New file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+              <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:square-plus" />
             </div>
             <div className="flex flex-col">
               <Label>New file</Label>
@@ -91,7 +91,7 @@ export const WithSections: Story = {
           </ListBox.Item>
           <ListBox.Item id="edit-file" textValue="Edit file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+              <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:pencil" />
             </div>
             <div className="flex flex-col">
               <Label>Edit file</Label>
@@ -108,7 +108,7 @@ export const WithSections: Story = {
           <Header>Danger zone</Header>
           <ListBox.Item id="delete-file" textValue="Delete file" variant="danger">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+              <Icon className="size-4 flex-shrink-0 text-danger" icon="gravity-ui:trash-bin" />
             </div>
             <div className="flex flex-col">
               <Label>Delete file</Label>
@@ -128,7 +128,7 @@ export const WithSections: Story = {
 
 export const WithDisabledItems: Story = {
   render: () => (
-    <Surface className="shadow-surface w-[256px] rounded-3xl">
+    <Surface className="w-[256px] rounded-3xl shadow-surface">
       <ListBox
         aria-label="File actions"
         className="w-full p-2"
@@ -140,7 +140,7 @@ export const WithDisabledItems: Story = {
           <Header>Actions</Header>
           <ListBox.Item id="new-file" textValue="New file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+              <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:square-plus" />
             </div>
             <div className="flex flex-col">
               <Label>New file</Label>
@@ -153,7 +153,7 @@ export const WithDisabledItems: Story = {
           </ListBox.Item>
           <ListBox.Item id="edit-file" textValue="Edit file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+              <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:pencil" />
             </div>
             <div className="flex flex-col">
               <Label>Edit file</Label>
@@ -170,7 +170,7 @@ export const WithDisabledItems: Story = {
           <Header>Danger zone</Header>
           <ListBox.Item id="delete-file" textValue="Delete file" variant="danger">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+              <Icon className="size-4 flex-shrink-0 text-danger" icon="gravity-ui:trash-bin" />
             </div>
             <div className="flex flex-col">
               <Label>Delete file</Label>
@@ -190,7 +190,7 @@ export const WithDisabledItems: Story = {
 
 export const MultiSelect: Story = {
   render: () => (
-    <Surface className="shadow-surface w-[256px] rounded-3xl">
+    <Surface className="w-[256px] rounded-3xl shadow-surface">
       <ListBox aria-label="Users" selectionMode="multiple">
         <ListBox.Item id="1" textValue="Bob">
           <Avatar size="sm">
@@ -232,7 +232,7 @@ export const MultiSelect: Story = {
 
 export const CustomCheckIcon: Story = {
   render: () => (
-    <Surface className="shadow-surface w-[256px] rounded-3xl">
+    <Surface className="w-[256px] rounded-3xl shadow-surface">
       <ListBox aria-label="Users" selectionMode="multiple">
         <ListBox.Item id="1" textValue="Bob">
           <Avatar size="sm">
@@ -245,7 +245,7 @@ export const CustomCheckIcon: Story = {
           </div>
           <ListBox.ItemIndicator>
             {({isSelected}) =>
-              isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+              isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
             }
           </ListBox.ItemIndicator>
         </ListBox.Item>
@@ -260,7 +260,7 @@ export const CustomCheckIcon: Story = {
           </div>
           <ListBox.ItemIndicator>
             {({isSelected}) =>
-              isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+              isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
             }
           </ListBox.ItemIndicator>
         </ListBox.Item>
@@ -275,7 +275,7 @@ export const CustomCheckIcon: Story = {
           </div>
           <ListBox.ItemIndicator>
             {({isSelected}) =>
-              isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
+              isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
             }
           </ListBox.ItemIndicator>
         </ListBox.Item>
@@ -292,7 +292,7 @@ export const Controlled: Story = {
 
     return (
       <div className="space-y-4">
-        <Surface className="shadow-surface w-[256px] rounded-3xl">
+        <Surface className="w-[256px] rounded-3xl shadow-surface">
           <ListBox
             aria-label="Users"
             selectedKeys={selected}
@@ -311,7 +311,7 @@ export const Controlled: Story = {
               <ListBox.ItemIndicator>
                 {({isSelected}) =>
                   isSelected ? (
-                    <Icon className="text-accent size-4" icon="gravity-ui:check" />
+                    <Icon className="size-4 text-accent" icon="gravity-ui:check" />
                   ) : null
                 }
               </ListBox.ItemIndicator>
@@ -328,7 +328,7 @@ export const Controlled: Story = {
               <ListBox.ItemIndicator>
                 {({isSelected}) =>
                   isSelected ? (
-                    <Icon className="text-accent size-4" icon="gravity-ui:check" />
+                    <Icon className="size-4 text-accent" icon="gravity-ui:check" />
                   ) : null
                 }
               </ListBox.ItemIndicator>
@@ -345,14 +345,14 @@ export const Controlled: Story = {
               <ListBox.ItemIndicator>
                 {({isSelected}) =>
                   isSelected ? (
-                    <Icon className="text-accent size-4" icon="gravity-ui:check" />
+                    <Icon className="size-4 text-accent" icon="gravity-ui:check" />
                   ) : null
                 }
               </ListBox.ItemIndicator>
             </ListBox.Item>
           </ListBox>
         </Surface>
-        <p className="text-muted text-sm">
+        <p className="text-sm text-muted">
           Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
         </p>
       </div>

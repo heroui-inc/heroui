@@ -7,7 +7,7 @@ import HorizontalScrollingBanner from "./horizontal-scrolling-banner";
 export function HomeThemeCustomizer() {
   return (
     <>
-      <div className="text-muted mt-8 flex flex-col gap-3">
+      <div className="mt-8 flex flex-col gap-3 text-muted">
         <p>Customize theme (preview)</p>
         <div className="flex items-center gap-3">
           <HomeColorSwatchPicker />
@@ -21,7 +21,7 @@ export function HomeThemeCustomizer() {
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <div
               key={item}
-              className="bg-default flex h-[320px] w-[250px] items-center justify-center rounded-lg text-2xl font-bold"
+              className="flex h-[320px] w-[250px] items-center justify-center rounded-lg bg-default text-2xl font-bold"
             >
               {item}
             </div>

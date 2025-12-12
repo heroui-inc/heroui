@@ -25,8 +25,7 @@ const ListBoxItemContext = createContext<ListBoxItemContext>({});
  * ListBox Item Root
  * -----------------------------------------------------------------------------------------------*/
 interface ListBoxItemRootProps
-  extends ComponentPropsWithRef<typeof ListBoxItemPrimitive>,
-    ListBoxItemVariants {
+  extends ComponentPropsWithRef<typeof ListBoxItemPrimitive>, ListBoxItemVariants {
   className?: string;
 }
 

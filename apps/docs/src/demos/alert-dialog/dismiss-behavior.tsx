@@ -7,8 +7,8 @@ export function DismissBehavior() {
   return (
     <div className="flex max-w-md flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">Dismiss Behavior</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">Dismiss Behavior</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Alert dialogs require explicit user action by design—users must click an action button to
           close the dialog. By default, backdrop clicks and ESC key are both disabled to prevent
           accidental dismissal of critical confirmations.
@@ -16,8 +16,8 @@ export function DismissBehavior() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">Default (Requires Action)</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">Default (Requires Action)</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           With default settings, users cannot close the dialog by clicking outside or pressing ESC.
           They must choose an action button.
         </p>
@@ -55,8 +55,8 @@ export function DismissBehavior() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">Allow Backdrop Clicks</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">Allow Backdrop Clicks</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Set <code className="text-foreground">isDismissable=true</code> to let users click outside
           the dialog to close it. Useful for less critical confirmations.
         </p>
@@ -92,8 +92,8 @@ export function DismissBehavior() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">Full Flexibility</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">Full Flexibility</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Enable both <code className="text-foreground">isDismissable=true</code> and{" "}
           <code className="text-foreground">isKeyboardDismissDisabled=false</code> for maximum
           flexibility. Users can close via backdrop,{" "}

@@ -43,7 +43,7 @@ export function ControlledInputValue() {
           </ListBox>
         </ComboBox.Popover>
       </ComboBox>
-      <p className="text-muted text-sm">Input value: {inputValue || "(empty)"}</p>
+      <p className="text-sm text-muted">Input value: {inputValue || "(empty)"}</p>
     </div>
   );
 }

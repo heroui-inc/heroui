@@ -12,7 +12,7 @@ export function Interactive() {
         aria-label={`Close (clicked ${count} times)`}
         onPress={() => setCount(count + 1)}
       />
-      <span className="text-muted text-sm">Clicked: {count} times</span>
+      <span className="text-sm text-muted">Clicked: {count} times</span>
     </div>
   );
 }

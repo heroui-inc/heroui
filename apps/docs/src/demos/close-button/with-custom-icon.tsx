@@ -8,13 +8,13 @@ export function WithCustomIcon() {
         <CloseButton>
           <Icon icon="gravity-ui:circle-xmark" />
         </CloseButton>
-        <span className="text-muted text-xs">Custom Icon</span>
+        <span className="text-xs text-muted">Custom Icon</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <CloseButton>
           <Icon icon="gravity-ui:xmark" />
         </CloseButton>
-        <span className="text-muted text-xs">Alternative Icon</span>
+        <span className="text-xs text-muted">Alternative Icon</span>
       </div>
     </div>
   );

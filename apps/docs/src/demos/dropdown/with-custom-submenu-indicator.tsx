@@ -21,7 +21,7 @@ export function WithCustomSubmenuIndicator() {
             <Dropdown.Item id="share" textValue="Share">
               <Label>More options</Label>
               <Dropdown.SubmenuIndicator>
-                <Icon className="text-muted size-3.5" icon="gravity-ui:arrow-right" />
+                <Icon className="size-3.5 text-muted" icon="gravity-ui:arrow-right" />
               </Dropdown.SubmenuIndicator>
             </Dropdown.Item>
             <Dropdown.Popover>
@@ -37,7 +37,7 @@ export function WithCustomSubmenuIndicator() {
                     <Label>Email</Label>
                     <Dropdown.SubmenuIndicator>
                       <svg
-                        className="text-muted size-3.5"
+                        className="size-3.5 text-muted"
                         fill="none"
                         stroke="currentColor"
                         strokeLinecap="round"

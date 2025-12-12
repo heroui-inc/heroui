@@ -18,19 +18,19 @@ export interface SwitchProps extends Omit<AriaSwitchProps, "children"> {
 
 const wrapper = tv({
   base: [
-    "h-13 group relative flex w-[84px] items-center gap-3 rounded-full bg-[#C6BCBB]/50",
+    "group relative flex h-13 w-[84px] items-center gap-3 rounded-full bg-[#C6BCBB]/50",
     "px-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5),0_1px_4px_rgba(0,0,0,0.15)]",
     "backdrop-blur-[54.3px] dark:bg-[#383435]/30 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),0px_1px_4px_0px_rgba(0,0,0,0.15)]",
   ],
 });
 
 const icon = tv({
-  base: "text-foreground z-20 text-xl",
+  base: "z-20 text-xl text-foreground",
 });
 
 const thumb = tv({
   base: [
-    "absolute left-2.5 top-1/2 z-10 h-8 w-8 bg-[#FFFFFF]/70 backdrop-blur-md",
+    "absolute top-1/2 left-2.5 z-10 h-8 w-8 bg-[#FFFFFF]/70 backdrop-blur-md",
     "-translate-y-1/2 rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]",
     "dark:bg-[#383435]/30 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),0px_1px_4px_0px_rgba(0,0,0,0.15)]",
     "transition-all duration-300",

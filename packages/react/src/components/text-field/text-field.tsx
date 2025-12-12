@@ -14,8 +14,7 @@ import {textFieldVariants} from "./text-field.styles";
  * TextField Root
  * -----------------------------------------------------------------------------------------------*/
 interface TextFieldRootProps
-  extends ComponentPropsWithRef<typeof TextFieldPrimitive>,
-    TextFieldVariants {}
+  extends ComponentPropsWithRef<typeof TextFieldPrimitive>, TextFieldVariants {}
 
 const TextFieldRoot = ({children, className, ...props}: TextFieldRootProps) => {
   const styles = React.useMemo(() => textFieldVariants({}), []);

@@ -29,8 +29,7 @@ const InputGroupContext = createContext<InputGroupContext>({});
  * InputGroup Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputGroupRootProps
-  extends ComponentPropsWithRef<typeof GroupPrimitive>,
-    InputGroupVariants {}
+  extends ComponentPropsWithRef<typeof GroupPrimitive>, InputGroupVariants {}
 
 const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);

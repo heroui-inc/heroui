@@ -26,8 +26,7 @@ const MenuItemContext = createContext<MenuItemContext>({});
  * Menu Item Root
  * -----------------------------------------------------------------------------------------------*/
 interface MenuItemRootProps
-  extends ComponentPropsWithRef<typeof MenuItemPrimitive>,
-    MenuItemVariants {
+  extends ComponentPropsWithRef<typeof MenuItemPrimitive>, MenuItemVariants {
   className?: string;
 }
 

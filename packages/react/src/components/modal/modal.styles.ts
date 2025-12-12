@@ -4,7 +4,7 @@ import {tv} from "tailwind-variants";
 
 export const modalVariants = tv({
   defaultVariants: {
-    variant: "solid",
+    variant: "opaque",
     scroll: "inside",
   },
   slots: {
@@ -27,8 +27,8 @@ export const modalVariants = tv({
       blur: {
         backdrop: "modal__backdrop--blur",
       },
-      solid: {
-        backdrop: "modal__backdrop--solid",
+      opaque: {
+        backdrop: "modal__backdrop--opaque",
       },
     },
     scroll: {

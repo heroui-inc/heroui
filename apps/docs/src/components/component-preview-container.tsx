@@ -20,6 +20,7 @@ export function ComponentPreviewContainer({
   hideCode = false,
   isBgSolid = false,
   name,
+  style,
   ...props
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Component, Code] = React.Children.toArray(children) as React.ReactElement[];
@@ -34,6 +35,7 @@ export function ComponentPreviewContainer({
     <div
       className={cn("component-preview-container group relative my-4 w-full", className)}
       data-name={name}
+      style={{...style, contain: style?.contain ?? "content"}}
       {...props}
     >
       {!!description && <p className="text-muted-foreground mb-2 text-sm">{description}</p>}
@@ -42,7 +44,7 @@ export function ComponentPreviewContainer({
       <div
         data-name={name}
         className={cn(
-          "preview not-prose border-separator relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-l border-r border-t p-4 sm:p-10",
+          "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-t border-r border-l border-separator p-4 sm:p-10",
           isBgSolid && "bg-background",
           alignmentClasses[align],
           "flex",
@@ -53,13 +55,8 @@ export function ComponentPreviewContainer({
 
       {/* Code Section */}
       {!hideCode && !!Code && (
-        <div
-          className="code-section border-separator relative rounded-b-xl border bg-transparent"
-          style={{
-            contentVisibility: "auto",
-          }}
-        >
-          <div className="code-block-wrapper min-h-[124px]">{Code}</div>
+        <div className="code-section relative rounded-b-xl border border-separator bg-transparent">
+          <div className="code-block-wrapper">{Code}</div>
         </div>
       )}
     </div>

@@ -5,7 +5,7 @@ import {Button, buttonVariants} from "@heroui/react";
 import {tv} from "tailwind-variants";
 
 const myButtonVariants = tv({
-  base: "text-md text-shadow-lg font-semibold shadow-md data-[pending=true]:opacity-40",
+  base: "text-md font-semibold shadow-md text-shadow-lg data-[pending=true]:opacity-40",
   defaultVariants: {
     radius: "full",
     variant: "primary",

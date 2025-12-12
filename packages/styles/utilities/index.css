@@ -1,18 +1,18 @@
 /* === Focus Ring === */
 @utility focus-ring {
-  @apply ring-focus ring-offset-background outline-none ring-2 ring-offset-0;
+  @apply ring-2 ring-focus ring-offset-0 ring-offset-background outline-none;
   /* Overrides the ring offset from the theme variables */
   --tw-ring-offset-width: var(--ring-offset-width);
 }
 
 @utility focus-field-ring {
-  @apply ring-focus outline-none ring-2 ring-offset-0;
+  @apply ring-2 ring-focus ring-offset-0 outline-none;
   /* No separation - ring sits directly against the element */
   --tw-ring-offset-width: 0px;
 }
 
 @utility invalid-field-ring {
-  @apply ring-danger outline-none ring-1 ring-offset-0;
+  @apply ring-1 ring-danger ring-offset-0 outline-none;
   /* No separation - ring sits directly against the element */
   --tw-ring-offset-width: 0px;
 }

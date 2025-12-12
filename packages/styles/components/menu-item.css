@@ -23,7 +23,7 @@
   }
 
   [data-slot="description"] {
-    @apply pointer-events-none select-none text-wrap;
+    @apply pointer-events-none text-wrap select-none;
   }
 
   [data-slot="submenu-indicator"] svg {
@@ -37,7 +37,7 @@
 
   /* Add padding-right when indicator is present and has submenu */
   &[data-has-submenu]:has(.menu-item__indicator) {
-    @apply pl-2 pr-7;
+    @apply pr-7 pl-2;
   }
 
   /* Focus visible state (keyboard focus only) */
@@ -97,16 +97,16 @@
    ========================================================================== */
 
 .menu-item__indicator {
-  @apply text-muted absolute left-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center;
+  @apply absolute top-1/2 left-2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-muted;
 
   /**
    * Transitions
    */
-  @apply duration-250 transition motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Position on the right when menu item has submenu */
   .menu-item[data-has-submenu] & {
-    @apply left-auto right-2;
+    @apply right-2 left-auto;
   }
 
   /* Checkmark SVG indicator */
@@ -129,7 +129,7 @@
       /**
      * Transitions
      */
-      @apply duration-250 transition-all motion-reduce:transition-none;
+      @apply transition-all duration-250 motion-reduce:transition-none;
     }
     /**
      * Default state: hidden and scaled down

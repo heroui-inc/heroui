@@ -5,7 +5,7 @@ github:
   pull: 5923
 ---
 
-<div className="flex items-center gap-3 mb-6">
+<div className="mb-6 flex items-center gap-3">
   <span className="text-sm text-muted">November 23, 2025</span>
 </div>
 
@@ -16,27 +16,25 @@ Minor bug fixes and improvements.
 Update to the latest version:
 
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
-  <Tab value="npm">
-    ```bash
-    npm i @heroui/styles@beta @heroui/react@beta
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm add @heroui/styles@beta @heroui/react@beta
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn add @heroui/styles@beta @heroui/react@beta
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bun add @heroui/styles@beta @heroui/react@beta
-    ```
-  </Tab>
+  <Tab value="npm">```bash npm i @heroui/styles@beta @heroui/react@beta ```</Tab>
+  <Tab value="pnpm">```bash pnpm add @heroui/styles@beta @heroui/react@beta ```</Tab>
+  <Tab value="yarn">```bash yarn add @heroui/styles@beta @heroui/react@beta ```</Tab>
+  <Tab value="bun">```bash bun add @heroui/styles@beta @heroui/react@beta ```</Tab>
 </Tabs>
+
+## Breaking Changes
+
+- **AlertDialog & Modal**: Renamed `backdropVariant`/`variant` prop value from `"solid"` to `"opaque"` for better semantic clarity. Update your code:
+
+  ```tsx
+  // Before
+  <AlertDialog.Container backdropVariant="solid" />
+  <Modal.Container variant="solid" />
+
+  // After
+  <AlertDialog.Container backdropVariant="opaque" />
+  <Modal.Container variant="opaque" />
+  ```
 
 ## Bug Fixes
 
@@ -45,7 +43,6 @@ Update to the latest version:
 ## Style Fixes
 
 - Fixed disabled state styling for [Input](/docs/components/input) and [TextArea](/docs/components/textarea) components
-
 
 ## Links
 

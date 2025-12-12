@@ -16,7 +16,7 @@ export function Controlled() {
         </Checkbox>
         <Label htmlFor="email-notifications">Email notifications</Label>
       </div>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>
       </p>
     </div>

@@ -9,7 +9,7 @@ export function WithPrefixIcon() {
       <Label>Email address</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-full max-w-[280px]" placeholder="name@email.com" />
       </InputGroup>

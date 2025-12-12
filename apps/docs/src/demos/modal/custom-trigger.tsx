@@ -7,13 +7,13 @@ export function CustomTrigger() {
   return (
     <Modal>
       <Modal.Trigger>
-        <div className="border-border bg-surface hover:bg-surface-secondary group flex cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-sm transition-all hover:shadow">
-          <div className="bg-accent-soft text-accent-soft-foreground flex size-12 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105">
+        <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm transition-all hover:bg-surface-secondary hover:shadow">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-soft-foreground transition-transform group-hover:scale-105">
             <Icon className="size-6" icon="gravity-ui:gear" />
           </div>
           <div className="flex flex-1 flex-col gap-0.5">
-            <p className="text-foreground text-sm font-semibold leading-5">Settings</p>
-            <p className="text-muted text-xs leading-relaxed">Manage your preferences</p>
+            <p className="text-sm leading-5 font-semibold text-foreground">Settings</p>
+            <p className="text-xs leading-relaxed text-muted">Manage your preferences</p>
           </div>
         </div>
       </Modal.Trigger>

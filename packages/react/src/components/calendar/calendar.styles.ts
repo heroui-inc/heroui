@@ -16,7 +16,7 @@ export const calendarVariants = tv({
     isDisabled: false,
   },
   slots: {
-    base: ["flex flex-col", "bg-surface rounded-xl", "shadow-lg", "p-4", "w-[280px]"],
+    base: ["flex flex-col", "rounded-xl bg-surface", "shadow-lg", "p-4", "w-[280px]"],
     cell: ["relative", "p-0", "text-center", "focus-within:z-10"],
     cellButton: [
       "relative",

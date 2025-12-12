@@ -11,8 +11,7 @@ import {composeTwRenderProps} from "../../utils/compose";
 import {checkboxGroupVariants} from "./checkbox-group.styles";
 
 interface CheckboxGroupProps
-  extends ComponentPropsWithRef<typeof CheckboxGroupPrimitive>,
-    CheckboxGroupVariants {}
+  extends ComponentPropsWithRef<typeof CheckboxGroupPrimitive>, CheckboxGroupVariants {}
 
 const CheckboxGroup = ({children, className, ...props}: CheckboxGroupProps) => {
   const styles = React.useMemo(() => checkboxGroupVariants(), []);

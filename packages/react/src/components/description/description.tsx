@@ -12,9 +12,7 @@ import {descriptionVariants} from "./description.styles";
  * Description Root
  * -----------------------------------------------------------------------------------------------*/
 interface DescriptionRootProps
-  extends ComponentPropsWithRef<typeof Text>,
-    TextProps,
-    DescriptionVariants {}
+  extends ComponentPropsWithRef<typeof Text>, TextProps, DescriptionVariants {}
 
 const DescriptionRoot = ({children, className, ...rest}: DescriptionRootProps) => {
   return (

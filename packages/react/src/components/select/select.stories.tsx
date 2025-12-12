@@ -769,7 +769,7 @@ export const Controlled: Story = {
             </ListBox>
           </Select.Popover>
         </Select>
-        <p className="text-muted text-sm">Selected: {selectedState?.name || "None"}</p>
+        <p className="text-sm text-muted">Selected: {selectedState?.name || "None"}</p>
       </div>
     );
   },
@@ -822,7 +822,7 @@ export const ControlledMultiple: Story = {
             </ListBox>
           </Select.Popover>
         </Select>
-        <p className="text-muted text-sm">
+        <p className="text-sm text-muted">
           Selected: {selected.length > 0 ? selected.join(", ") : "None"}
         </p>
       </div>
@@ -877,7 +877,7 @@ export const ControlledOpenState: Story = {
           </Select.Popover>
         </Select>
         <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "Close" : "Open"} Select</Button>
-        <p className="text-muted text-sm">Select is {isOpen ? "open" : "closed"}</p>
+        <p className="text-sm text-muted">Select is {isOpen ? "open" : "closed"}</p>
       </div>
     );
   },
@@ -924,7 +924,7 @@ export const AsynchronousLoading: Story = {
             >
               <div className="flex items-center justify-center gap-2 py-2">
                 <Spinner size="sm" />
-                <span className="text-muted text-sm">Loading more...</span>
+                <span className="text-sm text-muted">Loading more...</span>
               </div>
             </ListBoxLoadMoreItem>
           </ListBox>
