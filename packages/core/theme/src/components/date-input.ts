@@ -171,6 +171,11 @@ const dateInput = tv({
         inputWrapper: "relative flex-1",
         helperWrapper: "absolute top-[calc(100%_+_2px)] start-0",
       },
+      "outside-top": {
+        base: "flex flex-col data-[has-helper=true]:pb-[calc(var(--heroui-font-size-tiny)_+8px)] gap-y-1.5",
+        label: "w-full text-foreground",
+        helperWrapper: "absolute top-[calc(100%_+_2px)] start-0",
+      },
       inside: {
         label: "w-full text-tiny cursor-text",
         inputWrapper: "flex-col items-start justify-center gap-0",

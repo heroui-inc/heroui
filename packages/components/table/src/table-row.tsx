@@ -4,11 +4,12 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableRow} from "@react-aria/table";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useMemo} from "react";
+import {cn} from "@heroui/theme";
 
 // @internal
 export interface TableRowProps<T = object> extends Omit<BaseTableRowProps, "children"> {
@@ -33,7 +34,7 @@ const TableRow = forwardRef<"tr", TableRowProps>((props, ref) => {
 
   const {rowProps} = useTableRow({node}, state, domRef);
 
-  const trStyles = clsx(classNames?.tr, className, node.props?.className);
+  const trStyles = cn(classNames?.tr, className, node.props?.className);
 
   const {isFocusVisible, focusProps} = useFocusRing();
 

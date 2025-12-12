@@ -8,6 +8,7 @@ import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Select, SelectItem, SelectSection} from "../src";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "../../modal/src";
@@ -1703,6 +1704,89 @@ describe("validation", () => {
       expect(document.getElementById(trigger.getAttribute("aria-describedby")!)).toHaveTextContent(
         "new error",
       );
+    });
+  });
+
+  describe("Select with HeroUIProvider context", () => {
+    it("should inherit labelPlacement from HeroUIProvider", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).not.toHaveTextContent(labelContent);
+    });
+
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            labelPlacement="inside"
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).toHaveTextContent(labelContent);
+    });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      // outside-top: label is in base, not trigger
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).not.toHaveTextContent(labelContent);
+      expect(base).toHaveClass("flex-col");
     });
   });
 });

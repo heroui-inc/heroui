@@ -12,7 +12,7 @@ import {CloseIcon} from "@heroui/shared-icons";
 import {tv} from "tailwind-variants";
 import {usePathname, useRouter} from "next/navigation";
 import MultiRef from "react-multi-ref";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {isAppleDevice, isWebKit} from "@react-aria/utils";
 import {create} from "zustand";
@@ -323,7 +323,7 @@ export const Cmdk: FC<{}> = () => {
       return (
         <Button
           isIconOnly
-          className={clsx(
+          className={cn(
             "border data-[hover=true]:bg-content2 border-default-400 dark:border-default-100",
             className,
           )}

@@ -1,7 +1,7 @@
 import type {ForwardedRef, ReactElement} from "react";
 import type {UseTabsProps} from "./use-tabs";
 
-import {useRef, useMemo} from "react";
+import {useEffect, useCallback, useRef, useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
 import {useTabs} from "./use-tabs";
@@ -44,66 +44,105 @@ const Tabs = forwardRef(function Tabs<T extends object>(
     <Tab key={item.key} item={item} {...tabsProps} {...item.props} />
   ));
 
+  const variant = props?.variant;
+  const previousVariant = useRef<typeof variant>(undefined);
+  const isVertical = props?.isVertical;
+  const previousIsVertical = useRef<typeof isVertical>(undefined);
+  const placement = props?.placement;
+  const previousPlacement = useRef<typeof placement>(undefined);
+
+  const cursorRef = useRef<HTMLSpanElement | null>(null);
   const selectedItem = state.selectedItem;
   const selectedKey = selectedItem?.key;
-  const prevSelectedKey = useRef<typeof selectedKey>(undefined);
-  const prevVariant = useRef(props?.variant);
-  const variant = props?.variant;
-  const isVertical = props?.isVertical;
 
-  const getCursorStyles = (tabRect: DOMRect, relativeLeft: number, relativeTop: number) => {
-    const baseStyles = {
-      left: `${relativeLeft}px`,
-      width: `${tabRect.width}px`,
-    };
+  const getCursorStyles = useCallback(
+    (tabRect: DOMRect) => {
+      if (variant === "underlined") {
+        return {
+          left: `${tabRect.left + tabRect.width * 0.1}px`,
+          top: `${tabRect.top + tabRect.height - 2}px`,
+          width: `${tabRect.width * 0.8}px`,
+          height: "",
+        };
+      }
 
-    if (variant === "underlined") {
       return {
-        left: `${relativeLeft + tabRect.width * 0.1}px`,
-        top: `${relativeTop + tabRect.height - 2}px`,
-        width: `${tabRect.width * 0.8}px`,
-        height: "",
+        left: `${tabRect.left}px`,
+        top: `${tabRect.top}px`,
+        width: `${tabRect.width}px`,
+        height: `${tabRect.height}px`,
       };
-    }
+    },
+    [variant],
+  );
 
-    return {
-      ...baseStyles,
-      top: `${relativeTop}px`,
-      height: `${tabRect.height}px`,
-    };
-  };
+  const withAnimationReset = useCallback(
+    (callback: () => void) => {
+      if (
+        variant !== previousVariant.current ||
+        isVertical !== previousIsVertical.current ||
+        placement !== previousPlacement.current
+      ) {
+        cursorRef.current?.removeAttribute("data-animated");
+      }
+      callback();
+      previousVariant.current = variant;
+      previousIsVertical.current = isVertical;
+      previousPlacement.current = placement;
+      requestAnimationFrame(() => {
+        cursorRef.current?.setAttribute("data-animated", "true");
+        cursorRef.current?.setAttribute("data-initialized", "true");
+      });
+    },
+    [isVertical, variant, placement],
+  );
 
-  const updateCursorPosition = (node: HTMLSpanElement, selectedTab: HTMLElement) => {
-    const tabRect = {
-      width: selectedTab.offsetWidth,
-      height: selectedTab.offsetHeight,
-    } as DOMRect;
+  const updateCursorPosition = useCallback(
+    (selectedTab: HTMLElement) => {
+      if (!cursorRef.current) return;
 
-    const styles = getCursorStyles(tabRect, selectedTab.offsetLeft, selectedTab.offsetTop);
+      const tabRect = {
+        width: selectedTab.offsetWidth,
+        height: selectedTab.offsetHeight,
+        left: selectedTab.offsetLeft,
+        top: selectedTab.offsetTop,
+      } as DOMRect;
 
-    node.style.left = styles.left;
-    node.style.top = styles.top;
-    node.style.width = styles.width;
-    node.style.height = styles.height;
-  };
+      const styles = getCursorStyles(tabRect);
 
-  const handleCursorRef = (node: HTMLSpanElement | null) => {
-    if (!node) return;
+      withAnimationReset(() => {
+        cursorRef.current!.style.left = styles.left;
+        cursorRef.current!.style.top = styles.top;
+        cursorRef.current!.style.width = styles.width;
+        cursorRef.current!.style.height = styles.height;
+      });
+    },
+    [cursorRef.current, getCursorStyles, withAnimationReset],
+  );
 
-    const selectedTab = domRef.current?.querySelector(`[data-key="${selectedKey}"]`) as HTMLElement;
+  const onResize = useCallback(
+    (entries: ResizeObserverEntry[]) => {
+      const contentRect = entries[0].contentRect;
 
-    if (!selectedTab || !domRef.current) return;
+      // check if rendered
+      if (contentRect.width === 0 && contentRect.height === 0) return;
 
-    const shouldDisableTransition =
-      prevSelectedKey.current === undefined || prevVariant.current !== variant;
+      updateCursorPosition(entries[0].target as HTMLElement);
+    },
+    [updateCursorPosition],
+  );
 
-    node.style.transition = shouldDisableTransition ? "none" : "";
+  useEffect(() => {
+    const selectedTab = domRef.current?.querySelector(`[data-key="${selectedKey}"]`);
 
-    prevSelectedKey.current = selectedKey;
-    prevVariant.current = variant;
+    if (!selectedTab) return;
 
-    updateCursorPosition(node, selectedTab);
-  };
+    const observer = new ResizeObserver(onResize);
+
+    observer.observe(selectedTab);
+
+    return () => observer.disconnect();
+  }, [domRef.current, onResize, selectedKey]);
 
   const renderTabs = useMemo(
     () => (
@@ -111,7 +150,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
         <div {...getBaseProps()}>
           <Component {...getTabListProps()}>
             {!values.disableAnimation && !values.disableCursorAnimation && selectedKey != null && (
-              <span {...getTabCursorProps()} ref={handleCursorRef} />
+              <span {...getTabCursorProps()} ref={cursorRef} />
             )}
             {tabs}
           </Component>
@@ -145,6 +184,7 @@ const Tabs = forwardRef(function Tabs<T extends object>(
       values.state,
       destroyInactiveTabPanel,
       domRef,
+      cursorRef,
       variant,
       isVertical,
     ],

@@ -5,9 +5,9 @@ import type {ReactRef} from "@heroui/react-utils";
 
 import {useCallback} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {image} from "@heroui/theme";
+import {image, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {useImage as useImageBase} from "@heroui/use-image";
 import {useMemo} from "react";
 type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -147,10 +147,10 @@ export function useImage(originalProps: UseImageProps) {
     [objectToDeps(variantProps), disableAnimation, showSkeleton],
   );
 
-  const baseStyles = clsx(className, classNames?.img);
+  const baseStyles = cn(className, classNames?.img);
 
   const getImgProps: PropGetter = (props = {}) => {
-    const imgStyles = clsx(baseStyles, props?.className);
+    const imgStyles = cn(baseStyles, props?.className);
 
     return {
       src,

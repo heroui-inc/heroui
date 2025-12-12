@@ -3,8 +3,9 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "react";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, mergeProps} from "@heroui/shared-utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {useTableRowGroup} from "@react-aria/table";
+import {cn} from "@heroui/theme";
 
 export interface TableRowGroupProps extends HTMLHeroUIProps<"thead"> {
   slots: ValuesType["slots"];
@@ -20,7 +21,7 @@ const TableRowGroup = forwardRef<HTMLTableSectionElement, TableRowGroupProps>((p
 
   const {rowGroupProps} = useTableRowGroup();
 
-  const theadStyles = clsx(classNames?.thead, className);
+  const theadStyles = cn(classNames?.thead, className);
 
   return (
     <Component

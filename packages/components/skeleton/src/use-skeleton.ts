@@ -3,8 +3,8 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 import type {Ref} from "react";
 
 import {mapPropsVariants} from "@heroui/system";
-import {skeleton} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {skeleton, cn} from "@heroui/theme";
+import {dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {useMemo} from "react";
 import {useProviderContext} from "@heroui/system";
 
@@ -56,19 +56,19 @@ export function useSkeleton(originalProps: UseSkeletonProps) {
     [objectToDeps(variantProps), disableAnimation, children],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getSkeletonProps: PropGetter = (props = {}) => {
     return {
       "data-loaded": dataAttr(isLoaded),
-      className: slots.base({class: clsx(baseStyles, props?.className)}),
+      className: slots.base({class: cn(baseStyles, props?.className)}),
       ...otherProps,
     };
   };
 
   const getContentProps: PropGetter = (props = {}) => {
     return {
-      className: slots.content({class: clsx(classNames?.content, props?.className)}),
+      className: slots.content({class: cn(classNames?.content, props?.className)}),
     };
   };
 

@@ -2,7 +2,7 @@ import {DateInput} from "@heroui/react";
 import {CalendarDate} from "@internationalized/date";
 
 export default function App() {
-  const placements = ["inside", "outside", "outside-left"];
+  const placements = ["inside", "outside", "outside-left", "outside-top"];
 
   return (
     <div className="w-full flex flex-col max-w-sm gap-4">

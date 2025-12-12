@@ -8,11 +8,11 @@ import type {CheckboxProps} from "./index";
 
 import {useProviderContext} from "@heroui/system";
 import {useCallback, useMemo} from "react";
-import {checkboxGroup} from "@heroui/theme";
+import {checkboxGroup, cn} from "@heroui/theme";
 import {useCheckboxGroup as useReactAriaCheckboxGroup} from "@react-aria/checkbox";
 import {useCheckboxGroupState} from "@react-stately/checkbox";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {clsx, safeAriaLabel, chain, mergeProps} from "@heroui/shared-utils";
+import {safeAriaLabel, chain, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 interface Props extends HTMLHeroUIProps<"div"> {
@@ -178,7 +178,7 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps) {
     [isRequired, groupState.isInvalid, , disableAnimation],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getGroupProps: PropGetter = useCallback(() => {
     return {
@@ -213,7 +213,7 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps) {
       return {
         ...props,
         ...descriptionProps,
-        className: slots.description({class: clsx(classNames?.description, props?.className)}),
+        className: slots.description({class: cn(classNames?.description, props?.className)}),
       };
     },
     [slots, descriptionProps, classNames?.description],
@@ -224,7 +224,7 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps) {
       return {
         ...props,
         ...errorMessageProps,
-        className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+        className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
       };
     },
     [slots, errorMessageProps, classNames?.errorMessage],

@@ -47,7 +47,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["inside", "outside", "outside-left"],
+      options: ["inside", "outside", "outside-left", "outside-top"],
     },
     isDisabled: {
       control: {
@@ -90,6 +90,7 @@ const LabelPlacementTemplate = (args: TimeInputProps) => (
     <TimeInput {...args} description="inside" />
     <TimeInput {...args} description="outside" labelPlacement="outside" />
     <TimeInput {...args} description="outside-left" labelPlacement="outside-left" />
+    <TimeInput {...args} description="outside-top" labelPlacement="outside-top" />
   </div>
 );
 

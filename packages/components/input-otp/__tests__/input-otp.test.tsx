@@ -293,7 +293,7 @@ describe("InputOtp with react-hook-form", () => {
     expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 
-  it("should work correctly wiht react-hook-form controller", async () => {
+  it("should work correctly with react-hook-form controller", async () => {
     const {result} = renderHook(() =>
       useForm({
         defaultValues: {

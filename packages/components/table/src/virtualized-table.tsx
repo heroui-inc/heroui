@@ -1,7 +1,6 @@
 import type {UseTableProps} from "./use-table";
 
 import {useCallback, useLayoutEffect, useRef, useState} from "react";
-import {Spacer} from "@heroui/spacer";
 import {forwardRef} from "@heroui/system";
 import {useVirtualizer} from "@tanstack/react-virtual";
 
@@ -128,7 +127,6 @@ const VirtualizedTable = forwardRef<"table", TableProps>((props, ref) => {
                   )}
                 </TableHeaderRow>
               ))}
-              <Spacer as="tr" tabIndex={-1} y={1} />
             </TableRowGroup>
             <VirtualizedTableBody
               checkboxesProps={values.checkboxesProps}

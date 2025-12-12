@@ -2,7 +2,7 @@ import type {HTMLHeroUIProps} from "@heroui/system";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {useCardContext} from "./card-context";
 
@@ -16,7 +16,7 @@ const CardFooter = forwardRef<"div", CardFooterProps>((props, ref) => {
 
   const {slots, classNames} = useCardContext();
 
-  const footerStyles = clsx(classNames?.footer, className);
+  const footerStyles = cn(classNames?.footer, className);
 
   return (
     <Component ref={domRef} className={slots.footer?.({class: footerStyles})} {...otherProps}>
