@@ -7,3 +7,184 @@ links:
   figma: true
 ---
 
+## Import
+
+```tsx
+import { Card } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Card>
+  <Card.Header>...</Card.Header>
+  <Card.Body>
+    <Card.Title>...</Card.Title>
+    <Card.Description>...</Card.Description>
+  </Card.Body>
+  <Card.Footer>...</Card.Footer>
+</Card>
+```
+
+- **Card**: Main container that extends Surface component. Provides base card structure with configurable surface variants and handles overall layout.
+- **Card.Header**: Header section for top-aligned content like icons or badges.
+- **Card.Body**: Main content area with flex-1 that expands to fill all available space between Card.Header and Card.Footer.
+- **Card.Title**: Title text with foreground color and medium font weight.
+- **Card.Description**: Description text with muted color and smaller font size.
+- **Card.Footer**: Footer section for bottom-aligned actions like buttons.
+
+## Usage
+
+### Basic Usage
+
+The Card component creates a container with built-in sections for organized content.
+
+```tsx
+<Card>
+  <Card.Body>...</Card.Body>
+</Card>
+```
+
+### With Title and Description
+
+Combine title and description components for structured text content.
+
+```tsx
+<Card>
+  <Card.Body>
+    <Card.Title>...</Card.Title>
+    <Card.Description>...</Card.Description>
+  </Card.Body>
+</Card>
+```
+
+### With Header and Footer
+
+Add header and footer sections for icons, badges, or actions.
+
+```tsx
+<Card>
+  <Card.Header>...</Card.Header>
+  <Card.Body>...</Card.Body>
+  <Card.Footer>...</Card.Footer>
+</Card>
+```
+
+### Variants
+
+Control the card's background appearance using different variants.
+
+```tsx
+<Card variant="default">...</Card>
+<Card variant="secondary">...</Card>
+<Card variant="tertiary">...</Card>
+<Card variant="quaternary">...</Card>
+<Card variant="transparent">...</Card>
+```
+
+### Horizontal Layout
+
+Create horizontal cards by using flex-row styling.
+
+```tsx
+<Card className="flex-row gap-4">
+  <Image source={...} className="size-24 rounded-lg" />
+</Card>
+```
+
+### Background Image
+
+Use an image as an absolute positioned background.
+
+```tsx
+<Card>
+  <Image source={...} className="absolute inset-0" />
+  <View className="gap-4">...</View>
+</Card>
+```
+
+## Example
+
+```tsx
+import { Button, Card } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+
+export default function CardExample() {
+  return (
+    <Card>
+      <View className="gap-4">
+        <Card.Body className="mb-4">
+          <View className="gap-1 mb-2">
+            <Card.Title className="text-pink-500">$450</Card.Title>
+            <Card.Title>Living room Sofa • Collection 2025</Card.Title>
+          </View>
+          <Card.Description>
+            This sofa is perfect for modern tropical spaces, baroque inspired
+            spaces.
+          </Card.Description>
+        </Card.Body>
+        <Card.Footer className="gap-3">
+          <Button variant="primary">Buy now</Button>
+          <Button variant="ghost">
+            <Button.Label>Add to cart</Button.Label>
+            <Ionicons name="bag-outline" size={16} />
+          </Button>
+        </Card.Footer>
+      </View>
+    </Card>
+  );
+}
+```
+
+## API Reference
+
+### Card
+
+| prop           | type                                                                      | default     | description                                                                               |
+| -------------- | ------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                                                         | -           | Content to be rendered inside the card                                                    |
+| `variant`      | `'default' \| 'secondary' \| 'tertiary' \| 'quaternary' \| 'transparent'` | `'default'` | Visual variant of the card surface                                                        |
+| `className`    | `string`                                                                  | -           | Additional CSS classes to apply                                                           |
+| `animation`    | `"disable-all" \| undefined`                                              | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| `...ViewProps` | `ViewProps`                                                               | -           | All standard React Native View props are supported                                        |
+
+### Card.Header
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements to be rendered inside the header |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### Card.Body
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements to be rendered inside the body   |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### Card.Footer
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements to be rendered inside the footer |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### Card.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements to be rendered as the title text |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported |
+
+### Card.Description
+
+| prop           | type              | default | description                                              |
+| -------------- | ----------------- | ------- | -------------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements to be rendered as the description text |
+| `className`    | `string`          | -       | Additional CSS classes                                   |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported       |
