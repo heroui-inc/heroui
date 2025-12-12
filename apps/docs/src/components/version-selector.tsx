@@ -13,7 +13,7 @@ export function VersionSelector({className}: {className?: string}) {
     <Popover>
       <PopoverTrigger
         className={cn(
-          "text-muted flex items-center gap-1.5 py-1 text-left text-xs font-medium transition-opacity hover:opacity-80 sm:text-sm",
+          "flex items-center gap-1.5 py-1 text-left text-xs font-medium text-muted transition-opacity hover:opacity-80 sm:text-sm",
           className,
         )}
       >
@@ -26,16 +26,16 @@ export function VersionSelector({className}: {className?: string}) {
         <div className="flex flex-col gap-1">
           <div className="bg-primary/10 text-primary hover:bg-primary/20 flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium">
             <span>v3</span>
-            <span className="text-muted ml-2 text-xs font-semibold">{currentVersion}</span>
+            <span className="ml-2 text-xs font-semibold text-muted">{currentVersion}</span>
           </div>
           <Link
-            className="text-muted hover:bg-muted/30 hover:text-foreground flex items-center justify-between rounded-lg px-3 py-2 text-sm"
+            className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-muted hover:bg-muted/30 hover:text-foreground"
             href="https://heroui.com"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span>v2</span>
-            <span className="text-muted ml-2 text-xs font-semibold">2.8.x</span>
+            <span className="ml-2 text-xs font-semibold text-muted">2.8.x</span>
           </Link>
         </div>
       </PopoverContent>

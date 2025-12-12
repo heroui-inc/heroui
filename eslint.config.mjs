@@ -15,8 +15,8 @@ const config = defineConfig([
       "**/dist",
       "**/build",
       "**/storybook-static",
-      ".rollup.cache",
-      ".rollup.cache/**",
+      "**/.rollup.cache",
+      "**/.rollup.cache/**",
       // Dependencies
       "**/node_modules/",
       "**/public/*",

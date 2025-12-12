@@ -6,7 +6,7 @@ export function CustomStyles() {
       <Tabs.ListContainer>
         <Tabs.List
           aria-label="Options"
-          className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
+          className="w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal *:data-[selected=true]:text-accent-foreground"
         >
           <Tabs.Tab id="daily">
             Daily

@@ -17,7 +17,7 @@ export function WithForm() {
                   <Icon className="size-5" icon="gravity-ui:envelope" />
                 </Modal.Icon>
                 <Modal.Heading>Contact Us</Modal.Heading>
-                <p className="text-muted mt-1.5 text-sm leading-5">
+                <p className="mt-1.5 text-sm leading-5 text-muted">
                   Fill out the form below and we'll get back to you. The modal adapts automatically
                   when the keyboard appears on mobile.
                 </p>

@@ -74,7 +74,7 @@ export const Controlled: Story = {
           </Switch.Control>
           <Label className="text-sm">Enable notifications</Label>
         </Switch>
-        <p className="text-muted text-sm">Switch is {isSelected ? "on" : "off"}</p>
+        <p className="text-sm text-muted">Switch is {isSelected ? "on" : "off"}</p>
       </div>
     );
   },

@@ -21,4 +21,3 @@ export const i18nGlobalType = {
     },
   },
 };
-

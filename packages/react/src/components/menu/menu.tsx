@@ -14,8 +14,7 @@ import {menuVariants} from "./menu.styles";
  * Menu Root
  * -----------------------------------------------------------------------------------------------*/
 interface MenuRootProps<T extends object>
-  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>,
-    MenuVariants {
+  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>, MenuVariants {
   className?: string;
 }
 

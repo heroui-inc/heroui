@@ -2,16 +2,16 @@
 
 /* Base alert styles */
 .alert {
-  @apply bg-surface shadow-surface flex w-full flex-row items-start justify-start gap-4 rounded-3xl px-4 py-3;
+  @apply flex w-full flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-surface;
 }
 
 /* Alert elements */
 .alert__content {
-  @apply flex h-full flex-grow flex-col items-start;
+  @apply flex h-full grow flex-col items-start;
 }
 
 .alert__indicator {
-  @apply flex select-none items-center justify-center p-1;
+  @apply flex items-center justify-center p-1 select-none;
 
   [data-slot="alert-default-icon"] {
     @apply box-content size-4;
@@ -19,11 +19,11 @@
 }
 
 .alert__title {
-  @apply text-sm font-medium leading-6;
+  @apply text-sm leading-6 font-medium;
 }
 
 .alert__description {
-  @apply text-muted text-sm;
+  @apply text-sm text-muted;
 }
 
 /* Variant modifiers */

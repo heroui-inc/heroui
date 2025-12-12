@@ -33,8 +33,7 @@ const DropdownContext = createContext<DropdownContext>({});
  * Dropdown Root (MenuTrigger wrapper)
  * -----------------------------------------------------------------------------------------------*/
 interface DropdownRootProps
-  extends ComponentPropsWithRef<typeof MenuTriggerPrimitive>,
-    DropdownVariants {
+  extends ComponentPropsWithRef<typeof MenuTriggerPrimitive>, DropdownVariants {
   className?: string;
 }
 
@@ -71,8 +70,7 @@ const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) 
  * Dropdown Popover (Popover wrapper)
  * -----------------------------------------------------------------------------------------------*/
 interface DropdownPopoverProps
-  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">,
-    DropdownVariants {
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">, DropdownVariants {
   children: React.ReactNode;
 }
 
@@ -100,8 +98,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
  * Dropdown Menu (Menu wrapper)
  * -----------------------------------------------------------------------------------------------*/
 interface DropdownMenuProps<T extends object>
-  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>,
-    DropdownVariants {
+  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>, DropdownVariants {
   className?: string;
 }
 
@@ -130,8 +127,9 @@ const DropdownItem = (props: DropdownItemProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Indicator (MenuItemSubmenuIndicator wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownSubmenuIndicatorProps
-  extends ComponentPropsWithRef<typeof MenuItemSubmenuIndicator> {}
+interface DropdownSubmenuIndicatorProps extends ComponentPropsWithRef<
+  typeof MenuItemSubmenuIndicator
+> {}
 
 const DropdownSubmenuIndicator = (props: DropdownSubmenuIndicatorProps) => {
   return <MenuItemSubmenuIndicator {...props} />;
@@ -140,8 +138,9 @@ const DropdownSubmenuIndicator = (props: DropdownSubmenuIndicatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownSubmenuTriggerProps
-  extends ComponentPropsWithRef<typeof SubmenuTriggerPrimitive> {}
+interface DropdownSubmenuTriggerProps extends ComponentPropsWithRef<
+  typeof SubmenuTriggerPrimitive
+> {}
 
 const DropdownSubmenuTrigger = ({children, ...props}: DropdownSubmenuTriggerProps) => {
   return (

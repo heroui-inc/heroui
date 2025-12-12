@@ -28,7 +28,7 @@ export function Variants() {
         <div className="w-24 shrink-0" />
         {colors.map((color) => (
           <div key={color} className="flex w-20 shrink-0 items-center justify-center">
-            <span className="text-muted text-xs capitalize">{color}</span>
+            <span className="text-xs text-muted capitalize">{color}</span>
           </div>
         ))}
       </div>
@@ -38,7 +38,7 @@ export function Variants() {
       {/* Variant rows */}
       {variants.map((variant) => (
         <div key={variant.label} className="flex items-center gap-3">
-          <div className="text-muted w-24 shrink-0 text-sm">{variant.label}</div>
+          <div className="w-24 shrink-0 text-sm text-muted">{variant.label}</div>
           {colors.map((color, colorIndex) => (
             <div key={color} className="flex w-20 shrink-0 items-center justify-center">
               <Avatar color={color} variant={variant.type.includes("soft") ? "soft" : undefined}>

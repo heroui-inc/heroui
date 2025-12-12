@@ -116,7 +116,7 @@ export const OnSurface: Story = {
     };
 
     return (
-      <div className="bg-surface flex items-center justify-center rounded-3xl p-6">
+      <div className="flex items-center justify-center rounded-3xl bg-surface p-6">
         <Surface className="w-full min-w-[380px]">
           <Form onSubmit={onSubmit}>
             <Fieldset className="w-full">

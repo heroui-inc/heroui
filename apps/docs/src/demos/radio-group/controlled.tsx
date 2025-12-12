@@ -38,7 +38,7 @@ export function Controlled() {
           </Radio.Content>
         </Radio>
       </RadioGroup>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Selected plan: <span className="font-medium">{value}</span>
       </p>
     </div>

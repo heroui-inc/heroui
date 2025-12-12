@@ -33,8 +33,7 @@ const CalendarContext = createContext<CalendarContext>({});
  * Calendar Root
  * -----------------------------------------------------------------------------------------------*/
 interface CalendarRootProps<T extends DateValue = DateValue>
-  extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>,
-    CalendarVariants {}
+  extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>, CalendarVariants {}
 
 function CalendarRoot<T extends DateValue = DateValue>({
   children,
@@ -141,8 +140,9 @@ const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Calendar Grid Header
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarGridHeaderProps
-  extends ComponentPropsWithRef<typeof CalendarGridHeaderPrimitive> {}
+interface CalendarGridHeaderProps extends ComponentPropsWithRef<
+  typeof CalendarGridHeaderPrimitive
+> {}
 
 const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
   const {slots} = useContext(CalendarContext);
@@ -159,8 +159,9 @@ const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Calendar Header Cell
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeaderCellProps
-  extends ComponentPropsWithRef<typeof CalendarHeaderCellPrimitive> {}
+interface CalendarHeaderCellProps extends ComponentPropsWithRef<
+  typeof CalendarHeaderCellPrimitive
+> {}
 
 const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
   const {slots} = useContext(CalendarContext);

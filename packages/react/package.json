@@ -76,8 +76,8 @@
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "fs-extra": "11.3.2",
-    "react": "19.2.1",
-    "react-dom": "19.2.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "tailwindcss": "4.1.17"
   },
   "peerDependencies": {

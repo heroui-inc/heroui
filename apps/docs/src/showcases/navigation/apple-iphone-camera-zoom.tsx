@@ -57,7 +57,7 @@ export default function AppleIPhoneCameraZoom() {
           <Tabs.ListContainer className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
             <Tabs.List
               aria-label="Camera zoom options"
-              className="bg-surface-secondary *:text-muted w-fit min-w-min rounded-full *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
+              className="w-fit min-w-min rounded-full bg-surface-secondary *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:text-muted *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
             >
               {zoomLevels.map((zoom) => (
                 <Tabs.Tab
@@ -79,7 +79,7 @@ export default function AppleIPhoneCameraZoom() {
               aria-hidden={selectedZoom !== key}
               data-selected={selectedZoom === key}
               className={cn(
-                "text-foreground ease-in-out-quad absolute left-1/2 top-1/2 origin-center -translate-x-1/2 -translate-y-1/2 scale-75 text-[21px] font-medium opacity-0 transition-[scale,opacity] duration-[300ms] ease-[cubic-bezier(0.33,1,0.68,1)] data-[selected=true]:scale-100 data-[selected=true]:opacity-100 data-[selected=true]:delay-200",
+                "absolute top-1/2 left-1/2 origin-center -translate-x-1/2 -translate-y-1/2 scale-75 text-[21px] font-medium text-foreground opacity-0 transition-[scale,opacity] duration-[300ms] ease-[cubic-bezier(0.33,1,0.68,1)] ease-in-out-quad data-[selected=true]:scale-100 data-[selected=true]:opacity-100 data-[selected=true]:delay-200",
                 {
                   "sr-only": selectedZoom !== key,
                 },
@@ -89,7 +89,7 @@ export default function AppleIPhoneCameraZoom() {
             </p>
           ))}
         </div>
-        <footer className="dark:text-muted/40 text-muted/50 mt-4 w-full px-4 text-center text-xs sm:text-sm">
+        <footer className="mt-4 w-full px-4 text-center text-xs text-muted/50 sm:text-sm dark:text-muted/40">
           <a href="https://www.apple.com/iphone-17-pro/" rel="noopener noreferrer" target="_blank">
             Showcase based on Apple&apos;s iPhone 17 Pro camera zoom showcase
           </a>

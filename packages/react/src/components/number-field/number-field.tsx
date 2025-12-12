@@ -30,8 +30,7 @@ const NumberFieldContext = createContext<NumberFieldContext>({});
  * NumberField Root
  * -----------------------------------------------------------------------------------------------*/
 interface NumberFieldRootProps
-  extends ComponentPropsWithRef<typeof NumberFieldPrimitive>,
-    NumberFieldVariants {}
+  extends ComponentPropsWithRef<typeof NumberFieldPrimitive>, NumberFieldVariants {}
 
 const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);

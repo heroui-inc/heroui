@@ -34,8 +34,7 @@ const SelectContext = createContext<SelectContext>({});
  * Select Root
  * -----------------------------------------------------------------------------------------------*/
 interface SelectRootProps<T extends object, M extends "single" | "multiple" = "single">
-  extends ComponentPropsWithRef<typeof SelectPrimitive<T, M>>,
-    SelectVariants {
+  extends ComponentPropsWithRef<typeof SelectPrimitive<T, M>>, SelectVariants {
   items?: Iterable<T, M>;
 }
 
@@ -143,8 +142,10 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
 /* -------------------------------------------------------------------------------------------------
  * Select Popover
  * -----------------------------------------------------------------------------------------------*/
-interface SelectPopoverProps
-  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children"> {
+interface SelectPopoverProps extends Omit<
+  ComponentPropsWithRef<typeof PopoverPrimitive>,
+  "children"
+> {
   children: React.ReactNode;
 }
 

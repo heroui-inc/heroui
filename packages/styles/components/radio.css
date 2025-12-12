@@ -12,7 +12,7 @@
   }
 
   [data-slot="description"] {
-    @apply select-none text-wrap;
+    @apply text-wrap select-none;
   }
 
   /* Disabled state */
@@ -28,7 +28,7 @@
    ========================================================================== */
 
 .radio__control {
-  @apply bg-field shadow-field relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border outline-none [border-width:var(--border-width-field)];
+  @apply relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border [border-width:var(--border-width-field)] bg-field shadow-field outline-none;
 
   /**
    * Transitions
@@ -70,7 +70,7 @@
   /* Selected */
   .radio[aria-checked] &,
   .radio[data-selected] & {
-    @apply bg-accent border-transparent;
+    @apply border-transparent bg-accent;
   }
 
   /* Selected + Pressed */
@@ -109,7 +109,7 @@
    (e.g., custom icon). When custom content is present, these default dot styles are not applied. */
 .radio__indicator:empty::before {
   content: "";
-  @apply bg-field rounded-full;
+  @apply rounded-full bg-field;
 
   width: 100%;
   height: 100%;

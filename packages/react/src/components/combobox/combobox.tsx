@@ -33,8 +33,7 @@ const ComboBoxContext = createContext<ComboBoxContext>({});
  * ComboBox Root
  * -----------------------------------------------------------------------------------------------*/
 interface ComboBoxRootProps<T extends object>
-  extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T>>,
-    ComboBoxVariants {
+  extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T>>, ComboBoxVariants {
   items?: Iterable<T>;
 }
 
@@ -101,8 +100,10 @@ const ComboBoxTrigger = ({children, className, ...rest}: ComboBoxTriggerProps) =
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Popover
  * -----------------------------------------------------------------------------------------------*/
-interface ComboBoxPopoverProps
-  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children"> {
+interface ComboBoxPopoverProps extends Omit<
+  ComponentPropsWithRef<typeof PopoverPrimitive>,
+  "children"
+> {
   children: React.ReactNode;
 }
 

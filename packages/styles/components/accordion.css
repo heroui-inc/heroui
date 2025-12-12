@@ -12,7 +12,7 @@
 }
 
 .accordion__body-inner {
-  @apply text-muted px-4 pb-4 pt-0;
+  @apply px-4 pt-0 pb-4 text-muted;
 }
 
 .accordion__heading {
@@ -20,12 +20,12 @@
 }
 
 .accordion__indicator {
-  @apply text-muted ml-auto size-4 shrink-0;
+  @apply ml-auto size-4 shrink-0 text-muted;
 
   /**
    * Transitions
    */
-  @apply duration-250 transition motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
   &[data-expanded] {
@@ -40,7 +40,7 @@
 
 .accordion__item::after {
   content: "";
-  @apply bg-separator absolute bottom-0 left-0 h-px w-full rounded-full;
+  @apply absolute bottom-0 left-0 h-px w-full rounded-full bg-separator;
 }
 
 .accordion__item:last-child::after {
@@ -100,8 +100,8 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    height 420ms var(--ease-fluid-out),
-    opacity 340ms var(--ease-out);
+    height 320ms var(--ease-out-fluid),
+    opacity 250ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
 
   &[data-expanded] {
@@ -111,7 +111,7 @@
 
 /* Surface variant */
 .accordion--surface {
-  @apply bg-surface rounded-3xl;
+  @apply rounded-3xl bg-surface;
 
   .accordion__trigger {
     @media (hover: hover) {

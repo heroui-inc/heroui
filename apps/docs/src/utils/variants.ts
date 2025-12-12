@@ -9,7 +9,7 @@ export const docsButtonVariants = tv({
   extend: buttonVariants,
   variants: {
     variant: {
-      tertiary: "dark:bg-default/70 relative gap-2",
+      tertiary: "relative gap-2 dark:bg-default/70",
     },
   },
 });

@@ -182,7 +182,7 @@ export const Placements = () => {
 
 export const BackdropVariants = () => {
   const variants = [
-    {name: "solid", value: "solid"},
+    {name: "opaque", value: "opaque"},
     {name: "blur", value: "blur"},
     {name: "transparent", value: "transparent"},
   ] as const;
@@ -199,8 +199,8 @@ export const BackdropVariants = () => {
                   <AlertDialog.Header>
                     <AlertDialog.Icon status="accent" />
                     <AlertDialog.Heading>
-                      {name === "solid"
-                        ? "Solid Backdrop"
+                      {name === "opaque"
+                        ? "Opaque Backdrop"
                         : name === "blur"
                           ? "Blur Backdrop"
                           : "Transparent Backdrop"}
@@ -208,8 +208,8 @@ export const BackdropVariants = () => {
                   </AlertDialog.Header>
                   <AlertDialog.Body>
                     <p>
-                      {name === "solid"
-                        ? "A solid dark backdrop that completely obscures the background, providing maximum focus on the dialog."
+                      {name === "opaque"
+                        ? "An opaque dark backdrop that completely obscures the background, providing maximum focus on the dialog."
                         : name === "blur"
                           ? "A blurred backdrop that softly obscures the background while maintaining visual context."
                           : "A transparent backdrop that keeps the background fully visible, useful for less critical confirmations."}
@@ -239,16 +239,16 @@ export const Controlled = () => {
   return (
     <div className="flex max-w-md flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">With React.useState()</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">With React.useState()</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Control the dialog using React's <code className="text-foreground">useState</code> hook
           for simple state management. Perfect for basic use cases.
         </p>
-        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
-            <p className="text-muted text-xs">
+            <p className="text-xs text-muted">
               Status:{" "}
-              <span className="text-foreground font-mono font-medium">
+              <span className="font-mono font-medium text-foreground">
                 {isOpen ? "open" : "closed"}
               </span>
             </p>
@@ -287,17 +287,17 @@ export const Controlled = () => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">With useOverlayState()</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">With useOverlayState()</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Use the <code className="text-foreground">useOverlayState</code> hook for a cleaner API
           with convenient methods like <code>open()</code>, <code>close()</code>, and{" "}
           <code>toggle()</code>.
         </p>
-        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
-            <p className="text-muted text-xs">
+            <p className="text-xs text-muted">
               Status:{" "}
-              <span className="text-foreground font-mono font-medium">
+              <span className="font-mono font-medium text-foreground">
                 {state.isOpen ? "open" : "closed"}
               </span>
             </p>
@@ -341,8 +341,8 @@ export const Controlled = () => {
 export const DismissBehavior = () => (
   <div className="flex max-w-md flex-col gap-8">
     <div className="flex flex-col gap-3">
-      <h3 className="text-foreground text-lg font-semibold">Dismiss Behavior</h3>
-      <p className="text-muted text-pretty text-sm leading-relaxed">
+      <h3 className="text-lg font-semibold text-foreground">Dismiss Behavior</h3>
+      <p className="text-sm leading-relaxed text-pretty text-muted">
         Alert dialogs require explicit user action by design—users must click an action button to
         close the dialog. By default, backdrop clicks and ESC key are both disabled to prevent
         accidental dismissal of critical confirmations.
@@ -350,8 +350,8 @@ export const DismissBehavior = () => (
     </div>
 
     <div className="flex flex-col gap-3">
-      <h3 className="text-foreground text-lg font-semibold">Default (Requires Action)</h3>
-      <p className="text-muted text-pretty text-sm leading-relaxed">
+      <h3 className="text-lg font-semibold text-foreground">Default (Requires Action)</h3>
+      <p className="text-sm leading-relaxed text-pretty text-muted">
         With default settings, users cannot close the dialog by clicking outside or pressing ESC.
         They must choose an action button.
       </p>
@@ -389,8 +389,8 @@ export const DismissBehavior = () => (
     </div>
 
     <div className="flex flex-col gap-3">
-      <h3 className="text-foreground text-lg font-semibold">Allow Backdrop Clicks</h3>
-      <p className="text-muted text-pretty text-sm leading-relaxed">
+      <h3 className="text-lg font-semibold text-foreground">Allow Backdrop Clicks</h3>
+      <p className="text-sm leading-relaxed text-pretty text-muted">
         Set <code className="text-foreground">isDismissable=true</code> to let users click outside
         the dialog to close it. Useful for less critical confirmations.
       </p>
@@ -426,8 +426,8 @@ export const DismissBehavior = () => (
     </div>
 
     <div className="flex flex-col gap-3">
-      <h3 className="text-foreground text-lg font-semibold">Full Flexibility</h3>
-      <p className="text-muted text-pretty text-sm leading-relaxed">
+      <h3 className="text-lg font-semibold text-foreground">Full Flexibility</h3>
+      <p className="text-sm leading-relaxed text-pretty text-muted">
         Enable both <code className="text-foreground">isDismissable=true</code> and{" "}
         <code className="text-foreground">isKeyboardDismissDisabled=false</code> for maximum
         flexibility. Users can close via backdrop,{" "}
@@ -544,13 +544,13 @@ export const CustomBackdrop = () => (
 export const CustomTrigger = () => (
   <AlertDialog>
     <AlertDialog.Trigger>
-      <div className="border-border bg-surface hover:bg-surface-secondary group flex cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-sm transition-all hover:shadow">
-        <div className="bg-danger-soft text-danger-soft-foreground flex size-12 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105">
+      <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm transition-all hover:bg-surface-secondary hover:shadow">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-danger-soft text-danger-soft-foreground transition-transform group-hover:scale-105">
           <Icon className="size-6" icon="gravity-ui:trash-bin" />
         </div>
         <div className="flex flex-1 flex-col gap-0.5">
-          <p className="text-foreground text-sm font-semibold leading-5">Delete Item</p>
-          <p className="text-muted text-xs leading-relaxed">Permanently remove this item</p>
+          <p className="text-sm leading-5 font-semibold text-foreground">Delete Item</p>
+          <p className="text-xs leading-relaxed text-muted">Permanently remove this item</p>
         </div>
       </div>
     </AlertDialog.Trigger>
@@ -598,7 +598,7 @@ export const WithCloseButton = () => (
                 <Icon className="size-5" icon="gravity-ui:circle-info" />
               </AlertDialog.Icon>
               <AlertDialog.Heading>Less critical information</AlertDialog.Heading>
-              <p className="text-muted text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed text-muted">
                 Close button and backdrop dismiss are enabled
               </p>
             </AlertDialog.Header>
@@ -643,7 +643,7 @@ export const CustomAnimations = () => {
         "data-[entering]:animate-in",
         "data-[entering]:slide-in-from-bottom-4",
         "data-[entering]:fade-in-0",
-        "data-[entering]:ease-fluid-out",
+        "data-[entering]:ease-out-fluid",
         "data-[exiting]:animate-out",
         "data-[exiting]:slide-out-to-bottom-2",
         "data-[exiting]:fade-out-0",

@@ -62,8 +62,7 @@ const SpinnerPrimitive = ({...props}: SpinnerPrimitiveProps) => {
  * Spinner Root
  * -----------------------------------------------------------------------------------------------*/
 interface SpinnerRootProps
-  extends Omit<ComponentPropsWithRef<"svg">, "display" | "opacity" | "color">,
-    SpinnerVariants {}
+  extends Omit<ComponentPropsWithRef<"svg">, "display" | "opacity" | "color">, SpinnerVariants {}
 
 const SpinnerRoot = ({className, color, size, ...props}: SpinnerRootProps) => {
   return (

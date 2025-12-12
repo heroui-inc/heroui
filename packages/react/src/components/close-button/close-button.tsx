@@ -14,7 +14,8 @@ import {closeButtonVariants} from "./close-button.styles";
 /* -------------------------------------------------------------------------------------------------
  * Close Button Root
  * -----------------------------------------------------------------------------------------------*/
-type CloseButtonRootProps = ComponentPropsWithRef<typeof ButtonPrimitive> & CloseButtonVariants;
+interface CloseButtonRootProps
+  extends ComponentPropsWithRef<typeof ButtonPrimitive>, CloseButtonVariants {}
 
 const CloseButtonRoot = ({
   children,

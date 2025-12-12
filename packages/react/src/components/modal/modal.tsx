@@ -109,7 +109,7 @@ const ModalContainer = ({
   isDismissable = true,
   placement = "auto",
   scroll = "inside",
-  variant = "solid",
+  variant = "opaque",
   ...props
 }: ModalContainerProps) => {
   const {slots: contextSlots} = useContext(ModalContext);

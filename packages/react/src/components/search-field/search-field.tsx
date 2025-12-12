@@ -30,8 +30,7 @@ const SearchFieldContext = createContext<SearchFieldContext>({});
  * SearchField Root
  * -----------------------------------------------------------------------------------------------*/
 interface SearchFieldRootProps
-  extends ComponentPropsWithRef<typeof SearchFieldPrimitive>,
-    SearchFieldVariants {}
+  extends ComponentPropsWithRef<typeof SearchFieldPrimitive>, SearchFieldVariants {}
 
 const SearchFieldRoot = ({children, className, isOnSurface, ...props}: SearchFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);

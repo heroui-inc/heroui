@@ -13,6 +13,7 @@ export function CodeBlock({
   className,
   collapsible,
   isIsolated = false,
+  preview,
   showLineNumbers,
   title,
   ...props
@@ -23,6 +24,7 @@ export function CodeBlock({
   showLineNumbers?: boolean;
   title: string | undefined;
   children: React.ReactNode | React.ReactElement;
+  preview?: React.ReactNode;
 } & CodeBlockProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(true);
 
@@ -56,17 +58,17 @@ export function CodeBlock({
         <Base.CodeBlock
           title={title}
           className={cn(
-            "docs-code-block",
+            "docs-code-block shadow-none",
             showLineNumbers && "docs-code-block-line-numbers",
             className,
           )}
           {...props}
         >
-          {children}
+          {isCollapsed && preview ? preview : children}
         </Base.CodeBlock>
       </div>
       <Button
-        className="bg-surface absolute bottom-2 right-1/2 translate-x-1/2 text-xs shadow-sm shadow-black/5"
+        className="absolute right-1/2 bottom-2 translate-x-1/2 bg-surface text-xs shadow-sm shadow-black/5"
         size="sm"
         type="button"
         variant="tertiary"

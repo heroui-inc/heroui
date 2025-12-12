@@ -52,8 +52,7 @@ const PopoverRoot = ({
  * Popover Content
  * -----------------------------------------------------------------------------------------------*/
 interface PopoverContentProps
-  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">,
-    PopoverVariants {
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">, PopoverVariants {
   children: React.ReactNode;
 }
 

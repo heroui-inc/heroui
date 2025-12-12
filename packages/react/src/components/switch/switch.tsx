@@ -6,7 +6,6 @@ import type {ComponentPropsWithRef} from "react";
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {switchVariants} from "./switch.styles";
@@ -25,12 +24,8 @@ const SwitchContext = createContext<SwitchContext>({});
  * -----------------------------------------------------------------------------------------------*/
 interface SwitchRootProps extends ComponentPropsWithRef<typeof SwitchPrimitive>, SwitchVariants {}
 
-const SwitchRoot = ({children, className, ...originalProps}: SwitchRootProps) => {
-  const [props, variantProps] = mapPropsVariants(originalProps, switchVariants.variantKeys);
-  const slots = React.useMemo(
-    () => switchVariants({...(variantProps as SwitchVariants)}),
-    [objectToDeps(variantProps)],
-  );
+const SwitchRoot = ({children, className, size, ...props}: SwitchRootProps) => {
+  const slots = React.useMemo(() => switchVariants({size}), [size]);
 
   return (
     <SwitchContext value={{slots}}>

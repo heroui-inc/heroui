@@ -12,16 +12,16 @@ export function Controlled() {
   return (
     <div className="flex max-w-md flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">With React.useState()</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">With React.useState()</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Control the modal using React's <code className="text-foreground">useState</code> hook for
           simple state management. Perfect for basic use cases.
         </p>
-        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
-            <p className="text-muted text-xs">
+            <p className="text-xs text-muted">
               Status:{" "}
-              <span className="text-foreground font-mono font-medium">
+              <span className="font-mono font-medium text-foreground">
                 {isOpen ? "open" : "closed"}
               </span>
             </p>
@@ -67,17 +67,17 @@ export function Controlled() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-foreground text-lg font-semibold">With useOverlayState()</h3>
-        <p className="text-muted text-pretty text-sm leading-relaxed">
+        <h3 className="text-lg font-semibold text-foreground">With useOverlayState()</h3>
+        <p className="text-sm leading-relaxed text-pretty text-muted">
           Use the <code className="text-foreground">useOverlayState</code> hook for a cleaner API
           with convenient methods like <code>open()</code>, <code>close()</code>, and{" "}
           <code>toggle()</code>.
         </p>
-        <div className="border-border bg-surface flex flex-col items-start gap-3 rounded-2xl border p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
-            <p className="text-muted text-xs">
+            <p className="text-xs text-muted">
               Status:{" "}
-              <span className="text-foreground font-mono font-medium">
+              <span className="font-mono font-medium text-foreground">
                 {state.isOpen ? "open" : "closed"}
               </span>
             </p>

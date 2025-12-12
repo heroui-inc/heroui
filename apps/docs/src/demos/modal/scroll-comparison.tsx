@@ -39,7 +39,7 @@ export function ScrollComparison() {
                   <Modal.Heading>
                     Scroll: {scroll.charAt(0).toUpperCase() + scroll.slice(1)}
                   </Modal.Heading>
-                  <p className="text-muted text-sm leading-5">
+                  <p className="text-sm leading-5 text-muted">
                     Compare scroll behaviors - inside keeps content scrollable within the modal,
                     outside allows page scrolling
                   </p>
