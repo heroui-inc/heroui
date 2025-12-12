@@ -71,14 +71,14 @@
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
     "@react-stately/data": "3.14.1",
-    "@storybook/react": "10.1.4",
+    "@storybook/react": "10.1.7",
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "fs-extra": "11.3.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "tailwindcss": "4.1.17"
+    "tailwindcss": "4.1.18"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
