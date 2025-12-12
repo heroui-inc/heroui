@@ -43,6 +43,53 @@ Once configured, AI assistants can automatically access migration guides and hel
 
 **Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
 
+### Using Migration Prompts
+
+The Migration MCP server provides **user-invokable prompts** that guide you through an incremental migration workflow. These prompts are designed to help you migrate large projects in manageable phases.
+
+**How to Invoke Prompts:**
+
+Prompts are invoked by **you** (the user), not by AI assistants. The method depends on your MCP client:
+
+- **Cursor**: Use slash commands or the prompts menu
+- **Claude Code**: Use the prompts menu or `/prompt` command
+- **Windsurf**: Use the prompts feature
+- **VS Code**: Use the Copilot prompts interface
+
+**Available Prompts:**
+
+| Prompt | When to Use | What It Does |
+|--------|-------------|--------------|
+| `analyze-project` | First step | Analyzes your codebase to identify all HeroUI v2 components |
+| `create-migration-plan` | After analysis | Generates a phased migration plan based on your project |
+| `migrate-component-group` | For each phase | Provides migration instructions for a specific group of components |
+| `verify-migration-step` | After each phase | Verifies that a migration step was completed successfully |
+| `handle-dependencies` | When needed | Identifies and handles component dependencies during migration |
+| `migrate-styling-phase` | After all components migrated | Provides styling migration instructions |
+
+**Incremental Migration Workflow:**
+
+1. **Invoke `analyze-project` prompt** - Analyze your codebase
+2. **Invoke `create-migration-plan` prompt** - Create a phased migration plan
+3. **For each phase:**
+   - Invoke `migrate-component-group` prompt with phase components
+   - Apply migrations (your AI assistant can help)
+   - Invoke `verify-migration-step` prompt to verify completion
+4. **After all phases:** Switch dependencies (remove v2, install v3)
+5. **Invoke `migrate-styling-phase` prompt** - Complete styling migration
+
+**Important Notes:**
+
+- Prompts guide you through the workflow step-by-step
+- Each prompt includes "next steps" guidance
+- Your AI assistant can help interpret prompt outputs and apply migrations
+- The project will be broken during migration (v2 and v3 cannot coexist)
+- Work in a feature branch to maintain a working main branch
+
+**For AI Assistants:**
+
+If you're using an AI assistant to help with migration, the assistant should use the Migration MCP server which provides an agent-focused guide. The [Agent Migration Guide](/docs/v2-to-v3-migration/agent-guide) explains how assistants should guide users through the incremental migration workflow using prompts.
+
 ### Migration Workflow
 
 **Step 1: Component Migration**
