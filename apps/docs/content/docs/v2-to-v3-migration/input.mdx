@@ -92,8 +92,8 @@ The following props are no longer available on `Input` in v3:
 - `size` - Removed (use Tailwind CSS classes)
 - `radius` - Removed (use Tailwind CSS classes)
 - `labelPlacement` - Use layout with `Label` component
-- `startContent` - Use as first child in `TextField`
-- `endContent` - Use as last child in `TextField`
+- `startContent` - Use `InputGroup` with `InputGroup.Prefix` inside `TextField`
+- `endContent` - Use `InputGroup` with `InputGroup.Suffix` inside `TextField`
 - `isClearable` - Implement manually with button
 - `isRequired` - Use `isRequired` on `TextField`
 - `isInvalid` - Use `isInvalid` on `TextField`
@@ -172,6 +172,8 @@ The following props are no longer available on `Input` in v3:
 
 ### Input with Start/End Content
 
+For inputs with prefix or suffix content, use the **InputGroup** compound component:
+
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
@@ -184,17 +186,24 @@ The following props are no longer available on `Input` in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
+    import { InputGroup } from "@heroui/react";
+
     <TextField name="price" type="number">
       <Label>Price</Label>
-      <div className="flex items-center gap-2">
-        <span>$</span>
-        <Input className="flex-1" />
-      </div>
+      <InputGroup>
+        <InputGroup.Prefix>$</InputGroup.Prefix>
+        <InputGroup.Input />
+      </InputGroup>
       <FieldError />
     </TextField>
     ```
   </Tab>
 </Tabs>
+
+**InputGroup** provides proper styling and layout for prefix/suffix content. Use:
+- `InputGroup.Prefix` for content before the input (replaces `startContent`)
+- `InputGroup.Suffix` for content after the input (replaces `endContent`)
+- `InputGroup.Input` for the input element itself
 
 ### Input with Clear Button
 
@@ -292,7 +301,7 @@ The following props are no longer available on `Input` in v3:
 3. **Error Display**: Must use `FieldError` component instead of `errorMessage` prop
 4. **Description**: Must use `Description` component instead of `description` prop
 5. **Validation**: Move `validate` function from `Input` to `TextField`
-6. **Start/End Content**: Use as children instead of props
+6. **Start/End Content**: Use `InputGroup` with `InputGroup.Prefix`/`InputGroup.Suffix` inside `TextField`
 7. **Clear Button**: Implement manually with `CloseButton`
 8. **Variants Removed**: Use Tailwind CSS classes
 9. **Colors Removed**: Use Tailwind CSS classes
