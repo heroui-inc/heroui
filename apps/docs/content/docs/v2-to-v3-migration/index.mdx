@@ -36,10 +36,10 @@ Add the Migration MCP server to your MCP client configuration (e.g., in Cursor o
 ```
 
 <Callout type="warning">
-  **Important:** Do not use the Migration MCP alongside the `heroui-react` MCP server. Having both configured simultaneously may confuse AI assistants about which set of component documentation to use. For migration purposes, connect only to the Migration MCP. Once migration is complete, you can switch to using the `heroui-react` MCP for v3 component documentation.
+  **Important:** Do not use the Migration MCP alongside the HeroUI React MCP server. Having both configured simultaneously may confuse AI assistants about which set of component documentation to use. For migration purposes, connect only to the Migration MCP. Once migration is complete, you can switch to using the HeroUI React MCP for v3 component documentation.
 </Callout>
 
-Once configured, AI assistants can automatically access migration guides and help you migrate your components more efficiently. The MCP server provides tools like `get_migration_guide`, `get_styling_migration_guide`, and `get_component_guides` that can be used to fetch relevant migration information for your specific needs.
+Once configured, AI assistants can automatically access migration guides through tools to help you migrate your components more efficiently. The MCP server also provides guided migration prompts that can be used with slash commands in your agent chat.
 
 **Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
 
@@ -88,7 +88,7 @@ Prompts are invoked by **you** (the user), not by AI assistants. The method depe
 
 **For AI Assistants:**
 
-If you're using an AI assistant to help with migration, the assistant should use the Migration MCP server which provides an agent-focused guide. The [Agent Migration Guide](/docs/v2-to-v3-migration/agent-guide) explains how assistants should guide users through the incremental migration workflow using prompts.
+If you're using an AI assistant to help with migration, see the [Agent Migration Guide](/docs/v2-to-v3-migration/agent-guide) for instructions on how assistants should guide users through prompts.
 
 ### Migration Workflow
 
@@ -112,6 +112,7 @@ If you're using an AI assistant to help with migration, the assistant should use
 - **No Framer Motion**: Animation library dependency removed
 - **Component API Updates**: Many components use React Aria Components patterns
 - **Compound Components**: New compound component patterns for better customization
+- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use React Aria hooks instead (v2 hooks were based on React Aria)
 
 ### Key API Changes
 
@@ -349,7 +350,29 @@ v3 removes the Framer Motion dependency and handles animations differently:
 - **Per-component control**: Control animations through CSS or component-specific props where available
 - **Custom animations**: Use standard CSS `@keyframes` and transition properties for custom animations
 
-### Step 4: Update Component Imports
+### Step 4: Replace Removed Hooks
+
+HeroUI v2 component hooks like `useSwitch` or `useInput` have been removed in v3. These hooks were based on React Aria hooks, so you should use the React Aria equivalents directly. Note that some hooks like `useInput` do not exist in React Aria, so consider using alternatives like `useTextField`.
+
+**Migration Strategy:**
+1. Search your codebase for imports from `@heroui/react` that include hook names
+2. Check the [React Aria hooks documentation](https://react-spectrum.adobe.com/react-aria/hooks.html) for guidance
+3. Replace v2 hook imports with React Aria equivalents
+4. Update hook usage if the API differs (React Aria hooks may have slightly different return values)
+
+**Example:**
+
+```tsx
+// v2
+import { useSwitch } from "@heroui/react";
+
+// v3
+import { useSwitch } from "react-aria";
+// or
+import { useSwitch } from "@react-aria/switch";
+```
+
+### Step 5: Update Component Imports
 
 All components are now imported from a single package:
 
@@ -394,7 +417,7 @@ type MyButtonProps = ButtonProps & {
 - Compound component parts have their own type exports
 - Ref types updated to match React 19 patterns
 
-### Step 5: Component Migration Reference
+### Step 6: Component Migration Reference
 
 Use the table below to quickly find migration guidance for each component. Use the link in the "Migration Guide" column to jump to detailed migration instructions.
 

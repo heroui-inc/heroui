@@ -35,6 +35,7 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 - **No Framer Motion**: Animation library dependency removed
 - **Component API Updates**: Many components use React Aria Components patterns
 - **Compound Components**: New compound component patterns for better customization
+- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use React Aria hooks instead (v2 hooks were based on React Aria)
 
 ## Dependency Updates
 
@@ -156,6 +157,28 @@ v3 removes the Framer Motion dependency and handles animations differently:
 - **No global disable**: Unlike v2's Provider `disableAnimation` prop, there's no global animation toggle in v3
 - **Per-component control**: Control animations through CSS or component-specific props where available
 - **Custom animations**: Use standard CSS `@keyframes` and transition properties for custom animations
+
+## Hooks Removal
+
+HeroUI v2 component hooks like `useSwitch` or `useInput` have been removed in v3. These hooks were based on React Aria hooks, so you should use the React Aria equivalents directly. Note that some hooks like `useInput` do not exist in React Aria, so consider using alternatives like `useTextField`.
+
+**Migration Strategy:**
+1. Search your codebase for imports from `@heroui/react` that include hook names
+2. Check the [React Aria hooks documentation](https://react-spectrum.adobe.com/react-aria/hooks.html) for guidance
+3. Replace v2 hook imports with React Aria equivalents
+4. Update hook usage if the API differs (React Aria hooks may have slightly different return values)
+
+**Example:**
+
+```tsx
+// v2
+import { useSwitch } from "@heroui/react";
+
+// v3
+import { useSwitch } from "react-aria";
+// or
+import { useSwitch } from "@react-aria/switch";
+```
 
 ## Component Import Changes
 
@@ -369,8 +392,7 @@ The Migration MCP server exposes prompts that **users invoke** (not agents). Eac
 ### Available Prompts
 
 1. **`analyze-and-plan`**: Analyze the project to identify all HeroUI v2 components and create an incremental migration plan. First step in migration. No arguments required.
-2. **`implement-migration`**: Implement component migrations incrementally with checkpoints for user approval. Use this to migrate components phase by phase. No arguments required.
-3. **`migrate-styling-phase`**: Get styling migration instructions after component migration is complete. Use this after switching to v3 dependencies. No arguments required.
+2. **`implement-migration`**: Implement component migrations incrementally with checkpoints for user approval. Use this to migrate components phase by phase, including the final styling migration phase. No arguments required.
 
 **Agent role**: Guide users to invoke prompts at appropriate stages. Help interpret prompt outputs and apply migrations. Use MCP tools (`get_component_guides`, `get_styling_migration_guide`) to fetch detailed guides when needed.
 
@@ -382,6 +404,13 @@ The Migration MCP server exposes prompts that **users invoke** (not agents). Eac
 
 1. **Preparation Stage**: Migrate all component code while still on v2 dependencies (code will be broken)
 2. **Switch Stage**: Update dependencies to v3 and fix any remaining issues
+
+**⚠️ CRITICAL: Don't build to check for errors during migration**
+
+- Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
+- Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
+- **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
+- **DO NOT** attempt to start/run the project during migration
 
 ### Phase 0: Setup and Analysis
 
@@ -405,13 +434,14 @@ These steps can be done before switching HeroUI dependencies and won't break the
 
 1. **Update React to v19** (if not already)
    - This can be done before switching HeroUI
-   - Test that project still works
-   - Commit separately: "chore: update React to v19"
 
 2. **Update Tailwind CSS to v4** (if not already)
    - This can be done before switching HeroUI
-   - Test that project still works
-   - Commit separately: "chore: update Tailwind CSS to v4"
+
+3. **🛑 CHECKPOINT: Stop and wait for user approval**
+   - **DO NOT proceed to next phase automatically**
+   - Explain configuration changes
+   - Wait for explicit user approval before continuing
 
 ### Phase 2-N: Code Migration (v2 Dependencies Still Active)
 
@@ -457,33 +487,32 @@ For each component group in the migration plan:
    - Update CSS imports (add `@import "@heroui/styles";`)
    - Remove HeroUIProvider from app root
    - Update Tailwind config (remove `heroui()` plugin)
-   - Commit: "chore: switch to HeroUI v3 dependencies"
 
 2. **Fix remaining issues**
-   - Project should now compile (may have runtime issues)
-   - Fix any TypeScript errors
-   - Fix any runtime errors
-   - Test each migrated component
-   - Fix issues incrementally
+   - Run typecheck/lint if available (do NOT build)
+   - Fix any TypeScript errors reported by typecheck
+   - Fix any linting errors
+   - Note: Do not attempt to build or run the project during migration
 
 3. **🛑 CHECKPOINT: Stop and wait for user approval**
    - **DO NOT proceed to styling automatically**
    - Verify components work correctly
    - Wait for explicit user approval before styling migration
 
-4. **Guide user to invoke `migrate-styling-phase` prompt**
-   - Prompt includes styling migration instructions
+4. **Continue with styling migration** (part of `implement-migration` prompt)
+   - The prompt includes instructions for the final styling phase
+   - Use `get_styling_migration_guide` MCP tool to fetch styling guide
+   - Apply styling updates systematically
 
 5. **Apply styling updates**
    - Use `get_styling_migration_guide` MCP tool
    - Update utility classes, color tokens, CSS variables
    - Test visual appearance
 
-6. **Final testing**
-   - Comprehensive testing of all components
-   - Visual regression testing
-   - Functionality testing
-   - Accessibility testing
+6. **Final verification**
+   - Run typecheck/lint one final time (do NOT build)
+   - Verify all styling updated correctly
+   - Note: Full testing (visual, functionality, accessibility) should be done after migration is complete, not during migration
 
 ## Migration Strategies
 
@@ -561,11 +590,11 @@ For each component group in the migration plan:
    - Return to failed components after dependency switch
    - Some issues may resolve once dependencies are updated
 
-7. **Test after dependency switch**
+7. **Verify after dependency switch**
    - Only after dependencies are updated to v3
-   - Test each component systematically
-   - Fix issues as they arise
-   - Don't proceed to styling until components work
+   - Run typecheck/lint (do NOT build)
+   - Fix type/lint errors as they arise
+   - Don't proceed to styling until typecheck/lint passes
 
 ## Common Scenarios
 
