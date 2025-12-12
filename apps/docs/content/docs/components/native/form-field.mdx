@@ -7,3 +7,240 @@ links:
   figma: true
 ---
 
+## Import
+
+```tsx
+import { FormField } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<FormField>
+  <FormField.Label>...</FormField.Label>
+  <FormField.Description>...</FormField.Description>
+  <FormField.Indicator>...</FormField.Indicator>
+  <FormField.ErrorMessage>...</FormField.ErrorMessage>
+</FormField>
+```
+
+- **FormField**: Root container that manages layout and state propagation
+- **FormField.Label**: Primary text label for the control
+- **FormField.Description**: Secondary descriptive helper text
+- **FormField.Indicator**: Container for the form control component (Switch, Checkbox)
+- **FormField.ErrorMessage**: Validation error message display
+
+## Usage
+
+### Basic Usage
+
+FormField wraps form controls to provide consistent layout and state management.
+
+```tsx
+<FormField isSelected={value} onSelectedChange={setValue}>
+  <View className="flex-1">
+    <FormField.Label>Label text</FormField.Label>
+  </View>
+  <FormField.Indicator />
+</FormField>
+```
+
+### With Description
+
+Add helper text below the label using the Description component.
+
+```tsx
+<FormField isSelected={value} onSelectedChange={setValue}>
+  <View className="flex-1">
+    <FormField.Label>Enable notifications</FormField.Label>
+    <FormField.Description>
+      Receive push notifications about your account activity
+    </FormField.Description>
+  </View>
+  <FormField.Indicator />
+</FormField>
+```
+
+### With Error Message
+
+Display validation errors using the ErrorMessage component.
+
+```tsx
+<FormField
+  isSelected={value}
+  onSelectedChange={setValue}
+  isInvalid={!value}
+  className="flex-col items-start gap-1"
+>
+  <View className="flex-row items-center gap-2">
+    <View className="flex-1">
+      <FormField.Label>I agree to the terms</FormField.Label>
+      <FormField.Description>
+        By checking this box, you agree to our Terms of Service
+      </FormField.Description>
+    </View>
+    <FormField.Indicator variant="checkbox" />
+  </View>
+  <FormField.ErrorMessage>This field is required</FormField.ErrorMessage>
+</FormField>
+```
+
+### Disabled State
+
+Control interactivity with the disabled prop.
+
+```tsx
+<FormField isSelected={value} onSelectedChange={setValue} isDisabled>
+  <View className="flex-1">
+    <FormField.Label>Disabled field</FormField.Label>
+    <FormField.Description>This field is disabled</FormField.Description>
+  </View>
+  <FormField.Indicator />
+</FormField>
+```
+
+### Disabling All Animations
+
+Disable all animations including children by using `"disable-all"`. This cascades down to all child components.
+
+```tsx
+<FormField
+  isSelected={value}
+  onSelectedChange={setValue}
+  animation="disable-all"
+>
+  <View className="flex-1">
+    <FormField.Label>Label text</FormField.Label>
+    <FormField.Description>Description text</FormField.Description>
+  </View>
+  <FormField.Indicator />
+</FormField>
+```
+
+## Example
+
+```tsx
+import { Checkbox, FormField, Switch } from 'heroui-native';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+
+export default function FormFieldExample() {
+  const [notifications, setNotifications] = React.useState(false);
+  const [terms, setTerms] = React.useState(false);
+  const [newsletter, setNewsletter] = React.useState(true);
+
+  return (
+    <ScrollView className="bg-background p-4">
+      <View className="gap-4">
+        <FormField
+          isSelected={notifications}
+          onSelectedChange={setNotifications}
+        >
+          <View className="flex-1">
+            <FormField.Label>Enable notifications</FormField.Label>
+            <FormField.Description>
+              Receive push notifications about your account activity
+            </FormField.Description>
+          </View>
+          <FormField.Indicator />
+        </FormField>
+
+        <FormField
+          isSelected={terms}
+          onSelectedChange={setTerms}
+          isInvalid={!terms}
+          className="flex-col items-start gap-1"
+        >
+          <View className="flex-row items-center gap-2">
+            <View className="flex-1">
+              <FormField.Label>
+                I agree to the terms and conditions
+              </FormField.Label>
+              <FormField.Description>
+                By checking this box, you agree to our Terms of Service
+              </FormField.Description>
+            </View>
+            <FormField.Indicator className="mt-0.5">
+              <Checkbox />
+            </FormField.Indicator>
+          </View>
+          <FormField.ErrorMessage>
+            This field is required
+          </FormField.ErrorMessage>
+        </FormField>
+
+        <FormField isSelected={newsletter} onSelectedChange={setNewsletter}>
+          <View className="flex-1">
+            <FormField.Label>Subscribe to newsletter</FormField.Label>
+          </View>
+          <FormField.Indicator>
+            <Checkbox color="warning" />
+          </FormField.Indicator>
+        </FormField>
+      </View>
+    </ScrollView>
+  );
+}
+```
+
+## API Reference
+
+### FormField
+
+| prop              | type                                                                    | default     | description                                                                               |
+| ----------------- | ----------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| children          | `React.ReactNode \| ((props: FormFieldRenderProps) => React.ReactNode)` | -           | Content to render inside the form control, or a render function                           |
+| isSelected        | `boolean`                                                               | `undefined` | Whether the control is selected/checked                                                   |
+| isDisabled        | `boolean`                                                               | `false`     | Whether the form control is disabled                                                      |
+| isInvalid         | `boolean`                                                               | `false`     | Whether the form control is invalid                                                       |
+| className         | `string`                                                                | -           | Custom class name for the root element                                                    |
+| onSelectedChange  | `(isSelected: boolean) => void`                                         | -           | Callback when selection state changes                                                     |
+| animation         | `"disable-all" \| undefined`                                            | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| ...PressableProps | `PressableProps`                                                        | -           | All React Native Pressable props are supported                                            |
+
+### FormField.Label
+
+| prop         | type              | default | description                               |
+| ------------ | ----------------- | ------- | ----------------------------------------- |
+| children     | `React.ReactNode` | -       | Label text content                        |
+| className    | `string`          | -       | Custom class name for the label element   |
+| ...TextProps | `TextProps`       | -       | All React Native Text props are supported |
+
+### FormField.Description
+
+| prop         | type              | default | description                                   |
+| ------------ | ----------------- | ------- | --------------------------------------------- |
+| children     | `React.ReactNode` | -       | Description text content                      |
+| className    | `string`          | -       | Custom class name for the description element |
+| ...TextProps | `TextProps`       | -       | All React Native Text props are supported     |
+
+### FormField.Indicator
+
+| prop         | type                     | default    | description                                                |
+| ------------ | ------------------------ | ---------- | ---------------------------------------------------------- |
+| children     | `React.ReactNode`        | -          | Control component to render (Switch, Checkbox)             |
+| variant      | `'checkbox' \| 'switch'` | `'switch'` | Variant of the control to render when no children provided |
+| className    | `string`                 | -          | Custom class name for the indicator element                |
+| ...ViewProps | `ViewProps`              | -          | All React Native View props are supported                  |
+
+**Note**: When children are provided, the component automatically passes down `isSelected`, `onSelectedChange`, `isDisabled`, and `isInvalid` props from the FormField context if they are not already present on the child component.
+
+### FormField.ErrorMessage
+
+FormField.ErrorMessage extends all props from [ErrorView](./error-view) component.
+
+**Note**: The `isInvalid` prop is automatically passed from the FormField context. The error message visibility is controlled by the `isInvalid` state of the parent FormField.
+
+## Hooks
+
+### useFormField
+
+**Returns:**
+
+| property           | type                                           | description                                    |
+| ------------------ | ---------------------------------------------- | ---------------------------------------------- |
+| `isSelected`       | `boolean \| undefined`                         | Whether the control is selected/checked        |
+| `onSelectedChange` | `((isSelected: boolean) => void) \| undefined` | Callback when selection state changes          |
+| `isDisabled`       | `boolean`                                      | Whether the form control is disabled           |
+| `isInvalid`        | `boolean`                                      | Whether the form control is invalid            |
+| `isPressed`        | `SharedValue<boolean>`                         | Reanimated shared value indicating press state |
