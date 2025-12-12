@@ -7,13 +7,31 @@ links:
   figma: true
 ---
 
-## Imports
-
-Note: Before importing this component, ensure you have completed the setup as per the [Quick Start guide](../../../README.md).
+## Import
 
 ```tsx
 import { Accordion } from 'heroui-native';
 ```
+
+## Anatomy
+
+```tsx
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator>...</Accordion.Indicator>
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+- **Accordion**: Main container that manages the accordion state and behavior. Controls expansion/collapse of items, supports single or multiple selection modes, and provides variant styling (default or surface).
+- **Accordion.Item**: Container for individual accordion items. Wraps the trigger and content, managing the expanded state for each item.
+- **Accordion.Trigger**: Interactive element that toggles item expansion. Built on Header and Trigger primitives.
+- **Accordion.Indicator**: Optional visual indicator showing expansion state. Defaults to an animated chevron icon that rotates based on item state.
+- **Accordion.Content**: Container for expandable content. Animated with layout transitions for smooth expand/collapse effects.
 
 ## Usage
 
@@ -208,26 +226,6 @@ export default function AccordionExample() {
 }
 ```
 
-## Anatomy
-
-```tsx
-<Accordion>
-  <Accordion.Item>
-    <Accordion.Trigger>
-      ...
-      <Accordion.Indicator>...</Accordion.Indicator>
-    </Accordion.Trigger>
-    <Accordion.Content>...</Accordion.Content>
-  </Accordion.Item>
-</Accordion>
-```
-
-- **Accordion**: Main container that manages the accordion state and behavior. Controls expansion/collapse of items, supports single or multiple selection modes, and provides variant styling (default or surface).
-- **Accordion.Item**: Container for individual accordion items. Wraps the trigger and content, managing the expanded state for each item.
-- **Accordion.Trigger**: Interactive element that toggles item expansion. Built on Header and Trigger primitives.
-- **Accordion.Indicator**: Optional visual indicator showing expansion state. Defaults to an animated chevron icon that rotates based on item state.
-- **Accordion.Content**: Container for expandable content. Animated with layout transitions for smooth expand/collapse effects.
-
 ## API Reference
 
 ### Accordion
@@ -244,11 +242,11 @@ export default function AccordionExample() {
 | `isCollapsible`         | `boolean`                                          | `true`      | Whether expanded items can be collapsed                           |
 | `animation`             | `AccordionRootAnimation`                           | -           | Animation configuration for accordion                             |
 | `className`             | `string`                                           | -           | Additional CSS classes for the container                          |
-| `classNames`            | `ElementSlotsRootSlots`                          | -           | Additional CSS classes for the slots                              |
+| `classNames`            | `ElementSlots<RootSlots>`                          | -           | Additional CSS classes for the slots                              |
 | `onValueChange`         | `(value: string \| string[] \| undefined) => void` | -           | Callback when expanded items change                               |
 | `...Animated.ViewProps` | `Animated.ViewProps`                               | -           | All Reanimated Animated.View props are supported                  |
 
-#### ElementSlotsRootSlots
+#### `ElementSlots<RootSlots>`
 
 | prop        | type     | description                                     |
 | ----------- | -------- | ----------------------------------------------- |
@@ -264,9 +262,9 @@ Animation configuration for accordion root component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop     | type                                           | default                                                             | description                                       |
-| -------- | ---------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------- |
-| `layout` | `AnimationValue<{ value?: LayoutTransition }>` | `LinearTransition.springify().damping(140).stiffness(1600).mass(4)` | Custom layout animation for accordion transitions |
+| prop           | type               | default                                                                                     | description                                       |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `layout.value` | `LayoutTransition` | `LinearTransition`<br/>`.springify()`<br/>`.damping(140)`<br/>`.stiffness(1600)`<br/>`.mass(4)` | Custom layout animation for accordion transitions |
 
 ### Accordion.Item
 
@@ -319,16 +317,10 @@ Animation configuration for accordion indicator component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop       | type                                                                            | default                                                                          | description                      |
-| ---------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------- |
-| `rotation` | `AnimationValue<{ value?: [number, number], springConfig?: WithSpringConfig }>` | `{ value: [0, -180], springConfig: { damping: 140, stiffness: 1000, mass: 4 } }` | Rotation animation configuration |
-
-##### Rotation AnimationValue
-
-| prop           | type               | default                                      | description                                      |
-| -------------- | ------------------ | -------------------------------------------- | ------------------------------------------------ |
-| `value`        | `[number, number]` | `[0, -180]`                                  | Rotation values [collapsed, expanded] in degrees |
-| `springConfig` | `WithSpringConfig` | `{ damping: 140, stiffness: 1000, mass: 4 }` | Spring animation configuration for rotation      |
+| prop                    | type               | default                                      | description                                      |
+| ----------------------- | ------------------ | -------------------------------------------- | ------------------------------------------------ |
+| `rotation.value`        | `[number, number]` | `[0, -180]`                                  | Rotation values [collapsed, expanded] in degrees |
+| `rotation.springConfig` | `WithSpringConfig` | `{ damping: 140, stiffness: 1000, mass: 4 }` | Spring animation configuration for rotation      |
 
 ### Accordion.Content
 
@@ -347,16 +339,10 @@ Animation configuration for accordion content component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop       | type                                                | default                                                | description                           |
-| ---------- | --------------------------------------------------- | ------------------------------------------------------ | ------------------------------------- |
-| `entering` | `AnimationValue<{ value?: EntryOrExitLayoutType }>` | `FadeIn.duration(200).easing(Easing.out(Easing.ease))` | Custom entering animation for content |
-| `exiting`  | `AnimationValue<{ value?: EntryOrExitLayoutType }>` | `FadeOut.duration(200).easing(Easing.in(Easing.ease))` | Custom exiting animation for content  |
-
-##### Entering/Exiting AnimationValue
-
-| prop    | type                    | default | description                                  |
-| ------- | ----------------------- | ------- | -------------------------------------------- |
-| `value` | `EntryOrExitLayoutType` | -       | Custom reanimated entering/exiting animation |
+| prop             | type                    | default                                                            | description                           |
+| ---------------- | ----------------------- | ------------------------------------------------------------------ | ------------------------------------- |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.out(Easing.ease))` | Custom entering animation for content |
+| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))` | Custom exiting animation for content  |
 
 ## Hooks
 
@@ -400,7 +386,7 @@ const { value, isExpanded, isDisabled, nativeID } = useAccordionItem();
 | `isDisabled` | `boolean \| undefined` | Whether this specific item is disabled               |
 | `nativeID`   | `string`               | Native ID used for accessibility and ARIA attributes |
 
-## Special Note
+## Special Notes
 
 When using the Accordion component alongside other components in the same view, you should import and apply `AccordionLayoutTransition` to those components to ensure smooth and consistent layout animations across the entire screen.
 
