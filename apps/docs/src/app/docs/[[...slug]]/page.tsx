@@ -23,7 +23,7 @@ const componentStatusIcons = ["preview", "new", "updated"];
 
 async function getRawMDXContent(pagePath: string): Promise<string> {
   try {
-    const filePath = join(process.cwd(), "content/docs", `${pagePath}.mdx`);
+    const filePath = join(process.cwd(), "content/docs", pagePath);
 
     return await readFile(filePath, "utf-8");
   } catch {
@@ -67,7 +67,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         style: "normal",
       }}
     >
-      <section className="mb-4 flex flex-col gap-2 border-b border-border">
+      <section className="flex flex-col gap-2 border-b border-border">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <DocsTitle className="flex items-end gap-2">
             {page.data.title}

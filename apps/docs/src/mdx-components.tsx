@@ -3,7 +3,7 @@ import type {MDXComponents} from "mdx/types";
 import Link from "fumadocs-core/link";
 import {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
-import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
+import {Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import {Suspense} from "react";
@@ -17,6 +17,7 @@ import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {VideoPlayer} from "./components/video-player";
+import {FumadocsCustomCodeblock as CodeBlock} from "./mdx-components/fumadocs-custom-codeblock";
 import {PackageManagers} from "./mdx-components/package-managers";
 import {cn} from "./utils/cn";
 

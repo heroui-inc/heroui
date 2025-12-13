@@ -74,6 +74,10 @@
    FUMADOCS UI - NAVIGATION COMPONENTS
    ============================================================================ */
 
+#nd-notebook-layout {
+  transition: none;
+}
+
 [data-theme-toggle] {
   @apply border-none bg-default/80;
 }
@@ -153,6 +157,11 @@
     --fd-sidebar-width: 240px;
   }
 
+  & > div {
+    @apply pl-4;
+    width: 100% !important;
+  }
+
   & > :last-child {
     border-top: none;
   }
@@ -230,7 +239,7 @@
 }
 
 #nd-page {
-  @apply mt-4 gap-10 p-4;
+  @apply mt-4 gap-4 p-4 px-6 sm:px-4 md:px-6 md:pt-8 xl:px-12 xl:pt-12;
 
   > article {
     @apply p-8;
@@ -300,6 +309,8 @@
 
 [data-toc-popover] {
   header {
+    @apply border-b border-separator;
+    padding: 0 0.5rem;
     background: var(--background) !important;
     backdrop-filter: none !important;
   }
@@ -313,6 +324,7 @@
   .shiki {
     @apply border-none;
     background: transparent;
+    box-shadow: none;
 
     /* Code block wrapper */
     figure {

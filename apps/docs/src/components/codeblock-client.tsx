@@ -3,9 +3,9 @@
 import type {CodeBlockProps} from "fumadocs-ui/components/codeblock";
 
 import {Button} from "@heroui/react";
-import * as Base from "fumadocs-ui/components/codeblock";
 import * as React from "react";
 
+import {FumadocsCustomCodeblock as BaseCodeBlock} from "@/mdx-components/fumadocs-custom-codeblock";
 import {cn} from "@/utils/cn";
 
 export function CodeBlock({
@@ -30,7 +30,7 @@ export function CodeBlock({
 
   if (!collapsible) {
     return (
-      <Base.CodeBlock
+      <BaseCodeBlock
         title={title}
         className={cn(
           "code-block-wrapper docs-code-block",
@@ -41,7 +41,7 @@ export function CodeBlock({
         {...props}
       >
         {children}
-      </Base.CodeBlock>
+      </BaseCodeBlock>
     );
   }
 
@@ -55,7 +55,7 @@ export function CodeBlock({
           !isCollapsed && "pb-10",
         )}
       >
-        <Base.CodeBlock
+        <BaseCodeBlock
           title={title}
           className={cn(
             "docs-code-block shadow-none",
@@ -65,7 +65,7 @@ export function CodeBlock({
           {...props}
         >
           {isCollapsed && preview ? preview : children}
-        </Base.CodeBlock>
+        </BaseCodeBlock>
       </div>
       <Button
         className="absolute right-1/2 bottom-2 translate-x-1/2 bg-surface text-xs shadow-sm shadow-black/5"
