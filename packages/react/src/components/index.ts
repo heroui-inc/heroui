@@ -18,6 +18,7 @@ export * from "./disclosure-group";
 export * from "./kbd";
 export * from "./link";
 export * from "./popover";
+export * from "./scroll-shadow";
 export * from "./separator";
 export * from "./skeleton";
 export * from "./spinner";

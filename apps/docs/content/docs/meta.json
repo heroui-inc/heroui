@@ -52,6 +52,7 @@
     "components/number-field",
     "components/popover",
     "components/radio-group",
+    "components/scroll-shadow",
     "components/separator",
     "components/search-field",
     "components/select",
