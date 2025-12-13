@@ -68,7 +68,11 @@ function getClassNamesWithProps({
 
   const [baseProps, variantProps] = mapPropsVariants(props, customTv.variantKeys, false);
 
-  const newProps = {...defaultVariants, ...baseProps};
+  const newProps = {
+    ...defaultVariants,
+    ...baseProps,
+    className: cn(baseProps.className, defaultVariants?.className),
+  };
 
   let classNames = {};
 
@@ -76,7 +80,7 @@ function getClassNamesWithProps({
 
   // if no slots, the result is a string
   if (!hasSlots) {
-    newProps.className = cn(result, defaultVariants?.className, props.className);
+    newProps.className = cn(result, newProps?.className);
   }
   // if has slots, the result is an object with keys as slots functions
   else {
