@@ -56,9 +56,9 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.Basic,
     file: "accordion/basic.tsx",
   },
-  "accordion-outline": {
-    component: AccordionDemos.Oultine,
-    file: "accordion/outline.tsx",
+  "accordion-surface": {
+    component: AccordionDemos.Surface,
+    file: "accordion/surface.tsx",
   },
   "accordion-multiple": {
     component: AccordionDemos.Multiple,

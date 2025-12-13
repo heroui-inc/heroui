@@ -39,7 +39,7 @@ const items = [
   },
 ];
 
-export function Oultine() {
+export function Surface() {
   return (
     <Accordion className="w-full max-w-md" variant="surface">
       {items.map((item, index) => (
