@@ -57,7 +57,7 @@
     }
 
     /* Dragging state - cursor changes and thumb scales down */
-    &[data-dragging] {
+    &[data-dragging="true"] {
       @apply cursor-grabbing;
 
       &::after {
@@ -66,19 +66,19 @@
     }
 
     /* Focus state - increase z-index */
-    &[data-focus-visible] {
+    &[data-focus-visible="true"] {
       @apply z-10 status-focused;
     }
 
     /* Disabled state */
-    &[data-disabled] {
+    &[data-disabled="true"] {
       @apply cursor-default;
     }
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
+  &[data-disabled="true"],
   &[aria-disabled] {
     @apply status-disabled;
 
@@ -97,11 +97,11 @@
       /* Thumb width is 1.5rem (24px), so half is 0.75rem (12px) */
       @apply border-x-[0.75rem] border-x-transparent;
 
-      &[data-fill-start] {
+      &[data-fill-start="true"] {
         @apply border-s-accent;
       }
 
-      &[data-fill-end] {
+      &[data-fill-end="true"] {
         @apply border-e-accent;
       }
     }
@@ -151,11 +151,11 @@
       @apply border-y-[0.75rem] border-y-transparent;
       justify-self: center;
 
-      &[data-fill-start] {
+      &[data-fill-start="true"] {
         @apply border-b-accent;
       }
 
-      &[data-fill-end] {
+      &[data-fill-end="true"] {
         @apply border-t-accent;
       }
     }

@@ -17,14 +17,14 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover:not(:focus-within),
-    &[data-hovered]:not([data-focus-within]) {
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
   }
 
   /* Focus within state */
-  &[data-focus-within],
+  &[data-focus-within="true"],
   &:focus-within {
     @apply status-focused-field;
     border-color: var(--color-field-border-focus);
@@ -32,14 +32,14 @@
   }
 
   /* Invalid state */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
     border-color: var(--color-field-border-invalid);
   }
 
   /* Disabled state */
-  &[data-disabled],
+  &[data-disabled="true"],
   &[aria-disabled] {
     @apply status-disabled;
   }
@@ -111,14 +111,14 @@
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
-    &[data-hovered]:not([data-focus-within]) {
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-on-surface-hover;
     }
   }
 
   /* Focus within state */
   &:focus-within,
-  &[data-focus-within] {
+  &[data-focus-within="true"] {
     background-color: var(--color-on-surface-focus);
   }
 

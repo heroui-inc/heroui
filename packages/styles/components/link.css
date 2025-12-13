@@ -19,7 +19,7 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       .link__icon {
         @apply opacity-100;
       }
@@ -28,7 +28,7 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
 
     .link__icon {
@@ -52,7 +52,7 @@
     @apply motion-reduce:transition-none;
   }
 
-  .link__icon[data-default-icon] {
+  .link__icon[data-default-icon="true"] {
     @apply ml-1 pb-1.5;
   }
 }
@@ -62,7 +62,7 @@
   /* No underline - use opacity for hover feedback */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply opacity-80;
     }
   }
@@ -87,7 +87,7 @@
 
   @media (hover: hover) {
     &:hover::before,
-    &[data-hovered]::before {
+    &[data-hovered="true"]::before {
       opacity: 1;
     }
   }
@@ -112,7 +112,7 @@
 
   @media (hover: hover) {
     &:hover::before,
-    &[data-hovered]::before {
+    &[data-hovered="true"]::before {
       opacity: 1;
     }
   }

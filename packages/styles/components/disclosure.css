@@ -12,7 +12,7 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
@@ -32,7 +32,7 @@
   @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded] {
+  &[data-expanded="true"] {
     @apply -rotate-180;
   }
 }
@@ -48,11 +48,11 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    height 320ms var(--ease-out-fluid),
-    opacity 250ms var(--ease-smooth);
+    height 200ms var(--ease-out-quad),
+    opacity 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded] {
+  &[data-expanded="true"] {
     opacity: 1;
   }
 }

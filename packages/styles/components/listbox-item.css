@@ -33,36 +33,36 @@
 
   /* Focus visible state (keyboard focus only) */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Focus state */
   &:focus,
-  &[data-focus] {
+  &[data-focus="true"] {
   }
 
   /* Pressed state */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.98);
   }
 
   /* Hover state */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
 
   /* Selected state */
   &[aria-selected],
-  &[data-selected] {
+  &[data-selected="true"] {
   }
 
   /* Disabled state */
-  &[data-disabled] {
+  &[data-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -90,7 +90,7 @@
   }
 
   .listbox-item[aria-selected] [data-slot="listbox-item-indicator--checkmark"],
-  .listbox-item[data-selected] [data-slot="listbox-item-indicator--checkmark"] {
+  .listbox-item[data-selected="true"] [data-slot="listbox-item-indicator--checkmark"] {
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
