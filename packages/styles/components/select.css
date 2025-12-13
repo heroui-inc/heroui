@@ -3,7 +3,7 @@
   @apply flex flex-col gap-1;
 
   &[data-invalid="true"],
-  &[aria-invalid] {
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -73,7 +73,7 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -190,8 +190,8 @@
   }
 
   /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
-  [data-slot="listbox"]:not([aria-multiselectable]) [data-slot="listbox-item-indicator"],
-  [data-slot="listbox"]:not([aria-multiselectable])
+  [data-slot="listbox"]:not([aria-multiselectable="true"]) [data-slot="listbox-item-indicator"],
+  [data-slot="listbox"]:not([aria-multiselectable="true"])
     [data-slot="listbox-item-indicator"]
     [data-slot="listbox-item-indicator--checkmark"] {
     @apply transition-none;

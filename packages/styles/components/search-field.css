@@ -3,7 +3,7 @@
   @apply flex flex-col gap-1;
 
   &[data-invalid="true"],
-  &[aria-invalid] {
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -57,7 +57,7 @@
 
   /* Disabled state */
   &[data-disabled="true"],
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }

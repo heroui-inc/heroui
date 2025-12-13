@@ -25,13 +25,13 @@
   }
 
   /* Default indicator color */
-  .radio:not([aria-checked]):not([data-selected="true"]) & .radio__indicator:empty::before {
+  .radio:not([aria-checked="true"]):not([data-selected="true"]) & .radio__indicator:empty::before {
     @apply bg-on-surface;
   }
 
   /* Hover indicator color */
-  .radio:hover:not([aria-checked]):not([data-selected="true"]) &,
-  .radio[data-hovered="true"]:not([aria-checked]):not([data-selected="true"]) & {
+  .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
+  .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
     .radio__indicator:empty::before {
       @apply bg-on-surface-hover;
     }

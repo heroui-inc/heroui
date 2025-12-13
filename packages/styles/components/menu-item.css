@@ -66,8 +66,8 @@
   }
 
   /* Selected state */
-  &[aria-checked],
-  &[aria-selected],
+  &[aria-checked="true"],
+  &[aria-selected="true"],
   &[data-selected="true"] {
     [data-slot="menu-item-indicator--checkmark"] {
       /**

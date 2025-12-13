@@ -43,7 +43,7 @@
 
   /* Disabled state */
   &[data-disabled="true"],
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }

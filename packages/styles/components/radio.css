@@ -18,7 +18,7 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -53,8 +53,8 @@
   }
 
   /* Hover - only when not selected */
-  .radio:hover:not([aria-checked]):not([data-selected="true"]) &,
-  .radio[data-hovered="true"]:not([aria-checked]):not([data-selected="true"]) & {
+  .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
+  .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
     .radio__indicator:empty::before {
       @apply bg-field-hover;
     }
@@ -68,7 +68,7 @@
 
   /* Selection states */
   /* Selected */
-  .radio[aria-checked] &,
+  .radio[aria-checked="true"] &,
   .radio[data-selected="true"] & {
     @apply border-transparent bg-accent;
   }
@@ -82,15 +82,15 @@
   /* Validation states */
   /* Invalid */
   .radio[data-invalid="true"] &,
-  .radio[aria-invalid] & {
+  .radio[aria-invalid="true"] & {
     @apply status-invalid-field;
   }
 
   /* Invalid + Selected */
-  .radio[data-invalid="true"][aria-checked] &,
+  .radio[data-invalid="true"][aria-checked="true"] &,
   .radio[data-invalid="true"][data-selected="true"] &,
-  .radio[aria-invalid][aria-checked] &,
-  .radio[aria-invalid][data-selected="true"] & {
+  .radio[aria-invalid="true"][aria-checked="true"] &,
+  .radio[aria-invalid="true"][data-selected="true"] & {
     @apply status-invalid-field;
   }
 }
@@ -126,7 +126,7 @@
 }
 
 /* Selected state */
-.radio[aria-checked] .radio__indicator:empty::before,
+.radio[aria-checked="true"] .radio__indicator:empty::before,
 .radio[data-selected="true"] .radio__indicator:empty::before {
   @apply bg-accent-foreground;
   scale: 0.4286; /* 6px */

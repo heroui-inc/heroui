@@ -23,6 +23,6 @@
 
 .label--invalid,
 [data-invalid="true"] .label,
-[aria-invalid] .label {
+[aria-invalid="true"] .label {
   @apply text-danger;
 }

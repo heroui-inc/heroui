@@ -57,7 +57,7 @@
   }
 
   /* Selected state */
-  &[aria-selected],
+  &[aria-selected="true"],
   &[data-selected="true"] {
   }
 
@@ -89,7 +89,7 @@
     @apply transition-all duration-300 motion-reduce:transition-none;
   }
 
-  .listbox-item[aria-selected] [data-slot="listbox-item-indicator--checkmark"],
+  .listbox-item[aria-selected="true"] [data-slot="listbox-item-indicator--checkmark"],
   .listbox-item[data-selected="true"] [data-slot="listbox-item-indicator--checkmark"] {
     /**
      * Transitions

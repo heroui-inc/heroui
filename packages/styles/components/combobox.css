@@ -2,8 +2,8 @@
 .combobox {
   @apply flex flex-col gap-1;
 
-  &[data-invalid],
-  &[aria-invalid] {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -36,7 +36,7 @@
     /* Disabled state */
     &:disabled,
     &[data-disabled],
-    &[aria-disabled] {
+    &[aria-disabled="true"] {
       @apply status-disabled;
     }
   }
@@ -55,26 +55,26 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply text-field-foreground;
     }
   }
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply rounded ring-2 ring-focus ring-offset-2 ring-offset-background outline-none;
   }
 
   /* Pressed state */
-  &[data-pressed] {
+  &[data-pressed="true"] {
     @apply opacity-70;
   }
 
   /* Disabled state */
   &:disabled,
   &[data-disabled],
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply cursor-not-allowed opacity-50;
   }
 
@@ -83,7 +83,7 @@
   }
 
   /* Rotate icon when trigger is open */
-  &[data-open] [data-slot="combobox-trigger-default-icon"] {
+  &[data-open="true"] [data-slot="combobox-trigger-default-icon"] {
     @apply rotate-180;
   }
 }
@@ -95,12 +95,12 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply outline-none;
   }
 
   /* Entering animations */
-  &[data-entering] {
+  &[data-entering="true"] {
     @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
@@ -122,7 +122,7 @@
   }
 
   /* Exiting animations */
-  &[data-exiting] {
+  &[data-exiting="true"] {
     @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 

@@ -22,7 +22,7 @@
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -124,8 +124,8 @@
    * Reduce Animation
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
-  &[data-entering],
-  &[data-exiting] {
+  &[data-entering="true"],
+  &[data-exiting="true"] {
     @apply motion-reduce:animate-none;
   }
 }
