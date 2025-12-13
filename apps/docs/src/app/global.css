@@ -298,6 +298,13 @@
   }
 }
 
+[data-toc-popover] {
+  header {
+    background: var(--background) !important;
+    backdrop-filter: none !important;
+  }
+}
+
 /* ============================================================================
    PROSE & CONTENT STYLES
    ============================================================================ */
@@ -388,11 +395,11 @@ code {
   @apply m-0 rounded-none border-none pt-4 pr-2 pl-2;
 
   .fd-scroll-container {
-    @apply rounded-none border-none !bg-transparent p-0;
+    @apply rounded-none border-none bg-transparent! p-0;
   }
 
   .line {
-    @apply !pl-0;
+    @apply pl-0!;
   }
 }
 
