@@ -71,7 +71,7 @@ function getClassNamesWithProps({
   const newProps = {
     ...defaultVariants,
     ...baseProps,
-    className: cn(baseProps.className, defaultVariants?.className),
+    className: cn(defaultVariants?.className, baseProps.className),
   };
 
   let classNames = {};
@@ -80,7 +80,7 @@ function getClassNamesWithProps({
 
   // if no slots, the result is a string
   if (!hasSlots) {
-    newProps.className = cn(result, newProps?.className);
+    newProps.className = cn(result, newProps.className);
   }
   // if has slots, the result is an object with keys as slots functions
   else {
