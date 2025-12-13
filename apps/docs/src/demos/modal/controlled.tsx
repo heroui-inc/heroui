@@ -1,7 +1,7 @@
 "use client";
 
+import {CircleCheck} from "@gravity-ui/icons";
 import {Button, Modal, useOverlayState} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import {useState} from "react";
 
 export function Controlled() {
@@ -43,7 +43,7 @@ export function Controlled() {
                 <Modal.CloseTrigger />
                 <Modal.Header>
                   <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-                    <Icon className="size-5" icon="gravity-ui:circle-check" />
+                    <CircleCheck className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>Controlled with useState()</Modal.Heading>
                 </Modal.Header>
@@ -99,7 +99,7 @@ export function Controlled() {
                 <Modal.CloseTrigger />
                 <Modal.Header>
                   <Modal.Icon className="bg-success-soft text-success-soft-foreground">
-                    <Icon className="size-5" icon="gravity-ui:circle-check" />
+                    <CircleCheck className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>Controlled with useOverlayState()</Modal.Heading>
                 </Modal.Header>

@@ -1,7 +1,7 @@
 "use client";
 
+import {Globe} from "@gravity-ui/icons";
 import {InputGroup, Label, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithIconPrefixAndTextSuffix() {
   return (
@@ -9,7 +9,7 @@ export function WithIconPrefixAndTextSuffix() {
       <Label>Website</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
+          <Globe className="size-4 text-muted" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-full max-w-[280px]" defaultValue="heroui" />
         <InputGroup.Suffix>.com</InputGroup.Suffix>

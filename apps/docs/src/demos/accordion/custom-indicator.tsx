@@ -2,8 +2,8 @@
 
 import type {Key} from "@heroui/react";
 
+import {ChevronsDown, CircleChevronDown, Minus, Plus} from "@gravity-ui/icons";
 import {Accordion} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import React from "react";
 
 export function CustomIndicator() {
@@ -21,11 +21,7 @@ export function CustomIndicator() {
           <Accordion.Trigger>
             Using Plus/Minus Icon
             <Accordion.Indicator>
-              {expandedKeys.has("1") ? (
-                <Icon icon="gravity-ui:minus" />
-              ) : (
-                <Icon icon="gravity-ui:plus" />
-              )}
+              {expandedKeys.has("1") ? <Minus /> : <Plus />}
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>
@@ -42,7 +38,7 @@ export function CustomIndicator() {
           <Accordion.Trigger>
             Using Caret Icon
             <Accordion.Indicator>
-              <Icon icon="gravity-ui:circle-chevron-down" />
+              <CircleChevronDown />
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>
@@ -59,7 +55,7 @@ export function CustomIndicator() {
           <Accordion.Trigger>
             Using Arrow Icon
             <Accordion.Indicator>
-              <Icon icon="gravity-ui:chevrons-down" />
+              <ChevronsDown />
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>

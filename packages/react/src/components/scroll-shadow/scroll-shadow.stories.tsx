@@ -56,7 +56,7 @@ const LoremCards = () => {
         >
           <img
             alt="Lorem Card"
-            className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+            className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
             loading="lazy"
             src={getRandomImage(idx)}
           />
@@ -187,7 +187,7 @@ export const VisibilityChange: Story = {
     return (
       <>
         <div className="mb-4 flex flex-col gap-4">
-          <div className="bg-default rounded p-4">
+          <div className="rounded bg-default p-4">
             <p className="text-sm font-semibold">Vertical Shadow State: {verticalState}</p>
           </div>
           <Card className="w-full p-0 sm:max-w-sm">
@@ -203,7 +203,7 @@ export const VisibilityChange: Story = {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="bg-default rounded p-4">
+          <div className="rounded bg-default p-4">
             <p className="text-sm font-semibold">Horizontal Shadow State: {horizontalState}</p>
           </div>
           <Card className="w-full p-0 sm:max-w-sm">

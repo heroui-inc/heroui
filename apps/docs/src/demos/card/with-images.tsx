@@ -1,5 +1,5 @@
+import {CircleDollar} from "@gravity-ui/icons";
 import {Avatar, Button, Card, CloseButton, Link} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithImages() {
   return (
@@ -44,10 +44,9 @@ export function WithImages() {
                 <CloseButton aria-label="Close notification" />
               </div>
               <Card.Header className="gap-3">
-                <Icon
+                <CircleDollar
                   aria-label="Dollar sign icon"
                   className="text-primary size-8 flex-shrink-0"
-                  icon="gravity-ui:circle-dollar"
                   role="img"
                 />
                 <div className="flex flex-col gap-1">

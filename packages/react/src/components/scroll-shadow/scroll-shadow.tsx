@@ -15,8 +15,7 @@ import {useScrollShadow} from "./use-scroll-shadow";
 export type ScrollShadowVisibility = "auto" | "both" | "top" | "bottom" | "left" | "right" | "none";
 
 export interface ScrollShadowRootProps
-  extends Omit<React.ComponentProps<"div">, "size">,
-    ScrollShadowVariants {
+  extends Omit<React.ComponentProps<"div">, "size">, ScrollShadowVariants {
   /**
    * The shadow size in pixels
    * @default 40

@@ -1,5 +1,6 @@
 "use client";
 
+import {FloppyDisk} from "@gravity-ui/icons";
 import {
   Button,
   Description,
@@ -12,7 +13,6 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Basic() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,7 +73,7 @@ export function Basic() {
         </FieldGroup>
         <Fieldset.Actions>
           <Button type="submit">
-            <Icon icon="gravity-ui:floppy-disk" />
+            <FloppyDisk />
             Save changes
           </Button>
           <Button type="reset" variant="secondary">

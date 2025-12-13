@@ -1,13 +1,13 @@
+import {Person} from "@gravity-ui/icons";
 import {Avatar, Separator} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Variants() {
   const colors = ["accent", "default", "success", "warning", "danger"] as const;
   const variants = [
     {content: "AG", label: "letter", type: "letter"},
     {content: "AG", label: "letter soft", type: "letter-soft"},
-    {content: <Icon icon="gravity-ui:person" />, label: "icon", type: "icon"},
-    {content: <Icon icon="gravity-ui:person" />, label: "icon soft", type: "icon-soft"},
+    {content: <Person />, label: "icon", type: "icon"},
+    {content: <Person />, label: "icon soft", type: "icon-soft"},
     {
       content: [
         "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",

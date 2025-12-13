@@ -43,7 +43,7 @@ export default function Orientation() {
                 >
                   <img
                     alt="Lorem Card"
-                    className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                    className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
                     loading="lazy"
                     src={getRandomImage(idx)}
                   />

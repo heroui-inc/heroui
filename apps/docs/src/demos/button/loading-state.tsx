@@ -1,7 +1,7 @@
 "use client";
 
+import {Paperclip} from "@gravity-ui/icons";
 import {Button, Spinner} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import React, {useState} from "react";
 
 export function LoadingState() {
@@ -16,7 +16,7 @@ export function LoadingState() {
     <Button isPending={isLoading} onPress={handlePress}>
       {({isPending}) => (
         <>
-          {isPending ? <Spinner color="current" size="sm" /> : <Icon icon="gravity-ui:paperclip" />}
+          {isPending ? <Spinner color="current" size="sm" /> : <Paperclip />}
           {isPending ? "Uploading..." : "Upload File"}
         </>
       )}
