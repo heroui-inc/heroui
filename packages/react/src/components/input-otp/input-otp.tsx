@@ -9,6 +9,7 @@ import React, {createContext, useContext} from "react";
 import {FieldErrorContext} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
+import {composeSlotClassName} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {inputOTPVariants} from "./input-otp.styles";
@@ -96,7 +97,13 @@ interface InputOTPGroupProps extends ComponentPropsWithRef<"div"> {}
 const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
   const {slots} = useContext(InputOTPContext);
 
-  return <div className={slots?.group({className})} data-slot="input-otp-group" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.group, className)}
+      data-slot="input-otp-group"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -115,7 +122,7 @@ const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
   return (
     <div
       {...props}
-      className={slots?.slot({className})}
+      className={composeSlotClassName(slots?.slot, className)}
       data-active={dataAttr(isActive)}
       data-disabled={dataAttr(isDisabled)}
       data-filled={dataAttr(!!char)}
@@ -145,7 +152,11 @@ const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
   const {slots} = useContext(InputOTPContext);
 
   return (
-    <div className={slots?.separator({className})} data-slot="input-otp-separator" {...props} />
+    <div
+      className={composeSlotClassName(slots?.separator, className)}
+      data-slot="input-otp-separator"
+      {...props}
+    />
   );
 };
 

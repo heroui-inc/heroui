@@ -10,7 +10,7 @@ import {
   SearchField as SearchFieldPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {IconSearch} from "../icons";
 import {SurfaceContext} from "../surface";
@@ -112,7 +112,7 @@ const SearchFieldSearchIcon = ({children, className, ...props}: SearchFieldSearc
       }>,
       {
         ...props,
-        className: slots?.searchIcon({className}),
+        className: composeSlotClassName(slots?.searchIcon, className),
         "data-slot": "search-field-search-icon",
       },
     );
@@ -120,7 +120,7 @@ const SearchFieldSearchIcon = ({children, className, ...props}: SearchFieldSearc
 
   return (
     <IconSearch
-      className={slots?.searchIcon({className})}
+      className={composeSlotClassName(slots?.searchIcon, className)}
       data-slot="search-field-search-icon"
       {...props}
     />

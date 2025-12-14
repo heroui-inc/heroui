@@ -11,7 +11,7 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {inputGroupVariants} from "./input-group.styles";
@@ -85,7 +85,11 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
   const {slots} = useContext(InputGroupContext);
 
   return (
-    <div className={slots?.prefix({className})} data-slot="input-group-prefix" {...props}>
+    <div
+      className={composeSlotClassName(slots?.prefix, className)}
+      data-slot="input-group-prefix"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -100,7 +104,11 @@ const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps
   const {slots} = useContext(InputGroupContext);
 
   return (
-    <div className={slots?.suffix({className})} data-slot="input-group-suffix" {...props}>
+    <div
+      className={composeSlotClassName(slots?.suffix, className)}
+      data-slot="input-group-suffix"
+      {...props}
+    >
       {children}
     </div>
   );

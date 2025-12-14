@@ -14,7 +14,7 @@ import {
 } from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -64,7 +64,7 @@ interface ComboBoxInputGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ComboBoxInputGroup = ({children, className, ...props}: ComboBoxInputGroupProps) => {
   const {slots} = useContext(ComboBoxContext);
-  const inputGroupClassName = slots?.inputGroup({className});
+  const inputGroupClassName = composeSlotClassName(slots?.inputGroup, className);
 
   return (
     <div className={inputGroupClassName} data-slot="combobox-input-group" {...props}>

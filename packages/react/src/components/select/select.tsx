@@ -15,7 +15,7 @@ import {
 } from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -122,7 +122,7 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
       }>,
       {
         ...props,
-        className: slots?.indicator({className}),
+        className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "select-indicator",
         "data-open": dataAttr(state?.isOpen),
       },
@@ -131,7 +131,7 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
 
   return (
     <IconChevronDown
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-open={dataAttr(state?.isOpen)}
       data-slot="select-default-indicator"
       {...props}

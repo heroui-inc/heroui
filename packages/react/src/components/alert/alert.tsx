@@ -6,6 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 
+import {composeSlotClassName} from "../../utils/compose";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -69,7 +70,11 @@ const AlertIndicator = ({children, className, ...rest}: AlertIndicatorProps) => 
   };
 
   return (
-    <div className={slots?.indicator({className})} data-slot="alert-indicator" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.indicator, className)}
+      data-slot="alert-indicator"
+      {...rest}
+    >
       {children ?? getDefaultIcon()}
     </div>
   );
@@ -84,7 +89,11 @@ const AlertContent = ({children, className, ...rest}: AlertContentProps) => {
   const {slots} = useContext(AlertContext);
 
   return (
-    <div className={slots?.content({className})} data-slot="alert-content" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="alert-content"
+      {...rest}
+    >
       {children}
     </div>
   );
@@ -99,7 +108,7 @@ const AlertTitle = ({children, className, ...rest}: AlertTitleProps) => {
   const {slots} = useContext(AlertContext);
 
   return (
-    <p className={slots?.title({className})} data-slot="alert-title" {...rest}>
+    <p className={composeSlotClassName(slots?.title, className)} data-slot="alert-title" {...rest}>
       {children}
     </p>
   );
@@ -114,7 +123,11 @@ const AlertDescription = ({children, className, ...rest}: AlertDescriptionProps)
   const {slots} = useContext(AlertContext);
 
   return (
-    <span className={slots?.description({className})} data-slot="alert-description" {...rest}>
+    <span
+      className={composeSlotClassName(slots?.description, className)}
+      data-slot="alert-description"
+      {...rest}
+    >
       {children}
     </span>
   );

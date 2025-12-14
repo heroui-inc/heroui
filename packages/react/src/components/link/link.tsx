@@ -7,7 +7,7 @@ import React, {createContext, useContext} from "react";
 import {Link as LinkPrimitive} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {ExternalLinkIcon} from "../icons";
 
 import {linkVariants} from "./link.styles";
@@ -51,7 +51,7 @@ const LinkIcon = ({children, className, ...rest}: LinkIconProps) => {
 
   return (
     <span
-      className={slots?.icon({className})}
+      className={composeSlotClassName(slots?.icon, className)}
       data-default-icon={dataAttr(!children)}
       data-slot="link-icon"
       {...rest}

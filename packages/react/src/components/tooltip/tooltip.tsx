@@ -11,7 +11,7 @@ import {
   TooltipTrigger as TooltipTriggerPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {tooltipVariants} from "./tooltip.styles";
 
@@ -118,7 +118,7 @@ const TooltipTrigger = ({children, className, ...props}: TooltipTriggerProps) =>
   return (
     <FocusablePrimitive>
       <div
-        className={slots?.trigger({className})}
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="tooltip-trigger"
         role="button"
         {...props}

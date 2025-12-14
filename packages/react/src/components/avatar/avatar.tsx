@@ -9,6 +9,7 @@ import React, {createContext} from "react";
 
 import {useImage} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
+import {composeSlotClassName} from "../../utils/compose";
 
 import {avatarVariants} from "./avatar.styles";
 
@@ -82,7 +83,7 @@ const AvatarImage = ({
 
   return (
     <AvatarPrimitive.Image
-      className={slots?.image({className})}
+      className={composeSlotClassName(slots?.image, className)}
       crossOrigin={crossOrigin}
       data-loaded={dataAttr(loadingStatus === "loaded")}
       data-loading-status={loadingStatus}
@@ -107,7 +108,13 @@ interface AvatarFallbackProps extends ComponentPropsWithRef<typeof AvatarPrimiti
 const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
   const {slots} = React.useContext(AvatarContext);
 
-  return <AvatarPrimitive.Fallback className={slots?.fallback({className, color})} {...props} />;
+  return (
+    <AvatarPrimitive.Fallback
+      className={composeSlotClassName(slots?.fallback, className, {color})}
+      data-slot="avatar-fallback"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------

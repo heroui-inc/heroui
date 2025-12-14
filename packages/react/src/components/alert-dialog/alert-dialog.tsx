@@ -17,7 +17,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
@@ -68,7 +68,7 @@ const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerP
   return (
     <PressablePrimitive>
       <div
-        className={slots?.trigger({className})}
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="alert-dialog-trigger"
         role="button"
         {...props}
@@ -164,7 +164,7 @@ const AlertDialogDialog = ({children, className, ...props}: AlertDialogDialogPro
 
   return (
     <DialogPrimitive
-      className={slots?.dialog({className})}
+      className={composeSlotClassName(slots?.dialog, className)}
       data-slot="alert-dialog-dialog"
       role="alertdialog"
       {...props}
@@ -183,7 +183,11 @@ const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderPro
   const {slots} = useContext(AlertDialogContext);
 
   return (
-    <div className={slots?.header({className})} data-slot="alert-dialog-header" {...props}>
+    <div
+      className={composeSlotClassName(slots?.header, className)}
+      data-slot="alert-dialog-header"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -199,7 +203,7 @@ const AlertDialogHeading = ({children, className, ...props}: AlertDialogHeadingP
 
   return (
     <HeadingPrimitive
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
       data-slot="alert-dialog-heading"
       slot="title"
       {...props}
@@ -218,7 +222,11 @@ const AlertDialogBody = ({children, className, ...props}: AlertDialogBodyProps) 
   const {slots} = useContext(AlertDialogContext);
 
   return (
-    <div className={slots?.body({className})} data-slot="alert-dialog-body" {...props}>
+    <div
+      className={composeSlotClassName(slots?.body, className)}
+      data-slot="alert-dialog-body"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -233,7 +241,11 @@ const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterPro
   const {slots} = useContext(AlertDialogContext);
 
   return (
-    <div className={slots?.footer({className})} data-slot="alert-dialog-footer" {...props}>
+    <div
+      className={composeSlotClassName(slots?.footer, className)}
+      data-slot="alert-dialog-footer"
+      {...props}
+    >
       {children}
     </div>
   );

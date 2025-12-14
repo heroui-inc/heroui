@@ -57,7 +57,6 @@
   "dependencies": {
     "@internationalized/date": "3.10.0",
     "@radix-ui/react-avatar": "1.1.11",
-    "@radix-ui/react-slot": "1.2.4",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/utils": "3.31.0",
     "@react-types/shared": "3.32.1",

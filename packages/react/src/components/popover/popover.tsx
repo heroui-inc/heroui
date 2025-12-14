@@ -14,7 +14,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {popoverVariants} from "./popover.styles";
@@ -118,7 +118,11 @@ const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
   const {slots} = useContext(PopoverContext);
 
   return (
-    <DialogPrimitive data-slot="popover-dialog" {...props} className={slots?.dialog({className})}>
+    <DialogPrimitive
+      data-slot="popover-dialog"
+      {...props}
+      className={composeSlotClassName(slots?.dialog, className)}
+    >
       {children}
     </DialogPrimitive>
   );
@@ -135,7 +139,7 @@ const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) =>
   return (
     <PressablePrimitive>
       <div
-        className={slots?.trigger({className})}
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="popover-trigger"
         role="button"
         {...props}
@@ -155,7 +159,11 @@ const PopoverHeading = ({children, className, ...props}: PopoverHeadingProps) =>
   const {slots} = useContext(PopoverContext);
 
   return (
-    <HeadingPrimitive slot="title" {...props} className={slots?.heading({className})}>
+    <HeadingPrimitive
+      slot="title"
+      {...props}
+      className={composeSlotClassName(slots?.heading, className)}
+    >
       {children}
     </HeadingPrimitive>
   );

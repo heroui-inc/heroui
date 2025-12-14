@@ -5,6 +5,8 @@ import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 
+import {composeSlotClassName} from "../../utils/compose";
+
 import {fieldsetVariants} from "./fieldset.styles";
 
 /* -------------------------------------------------------------------------------------------------
@@ -39,7 +41,13 @@ interface FieldsetLegendProps extends ComponentPropsWithRef<"legend"> {}
 const FieldsetLegend = ({className, ...props}: FieldsetLegendProps) => {
   const {slots} = useContext(FieldsetContext);
 
-  return <legend className={slots?.legend({className})} data-slot="fieldset-legend" {...props} />;
+  return (
+    <legend
+      className={composeSlotClassName(slots?.legend, className)}
+      data-slot="fieldset-legend"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -51,7 +59,11 @@ const FieldGroup = ({className, ...rest}: FieldGroupProps) => {
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <div className={slots?.fieldGroup({className})} data-slot="fieldset-field-group" {...rest} />
+    <div
+      className={composeSlotClassName(slots?.fieldGroup, className)}
+      data-slot="fieldset-field-group"
+      {...rest}
+    />
   );
 };
 
@@ -64,7 +76,11 @@ const FieldsetActions = ({children, className, ...rest}: FieldsetActionsProps) =
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <div className={slots?.actions({className})} data-slot="fieldset-actions" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.actions, className)}
+      data-slot="fieldset-actions"
+      {...rest}
+    >
       {children}
     </div>
   );
