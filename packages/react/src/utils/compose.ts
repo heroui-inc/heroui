@@ -10,6 +10,14 @@ function composeTwRenderProps<T>(
   return composeRenderProps(className, (className) => clsx(tailwind ?? "", className ?? ""));
 }
 
+export const composeSlotClassName = (
+  slotFn: ((args?: {className?: string; [key: string]: any}) => string) | undefined,
+  className?: string,
+  variants?: Record<string, any>,
+): string | undefined => {
+  return typeof slotFn === "function" ? slotFn({...(variants ?? {}), className}) : className;
+};
+
 const focusRingClasses =
   "focus-visible:ring-focus focus-visible:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 

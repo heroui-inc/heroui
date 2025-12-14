@@ -18,9 +18,9 @@ const CheckboxGroup = ({children, className, ...props}: CheckboxGroupProps) => {
 
   return (
     <CheckboxGroupPrimitive
+      className={composeTwRenderProps(className, styles)}
       data-slot="checkbox-group"
       {...props}
-      className={composeTwRenderProps(className, styles)}
     >
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
     </CheckboxGroupPrimitive>

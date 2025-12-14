@@ -12,7 +12,7 @@ import {
   Tabs as TabsPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {tabsVariants} from "./tabs.styles";
 
@@ -71,7 +71,7 @@ const TabListContainer = ({children, className, ...props}: TabListContainerProps
 
   return (
     <div
-      className={slots?.tabListContainer({className})}
+      className={composeSlotClassName(slots?.tabListContainer, className)}
       data-slot="tabs-list-container"
       {...props}
     >
@@ -136,7 +136,7 @@ const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
 
   return (
     <SelectionIndicatorPrimitive
-      className={slots?.tabIndicator({className})}
+      className={composeSlotClassName(slots?.tabIndicator, className)}
       data-slot="tabs-indicator"
       {...props}
     />

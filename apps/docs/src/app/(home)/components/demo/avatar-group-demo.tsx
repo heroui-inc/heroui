@@ -1,5 +1,4 @@
 import {Avatar} from "@heroui/react";
-import Image from "next/image";
 
 const avatars = [
   {
@@ -38,9 +37,7 @@ export function AvatarGroupDemo() {
       <div className="flex -space-x-2">
         {avatars.slice(0, 5).map((item, index) => (
           <Avatar key={`${item.name}-${index}`} className="ring-2 ring-background">
-            <Avatar.Image asChild alt={item.name}>
-              <Image alt={item.name} height={40} src={item.image} width={40} />
-            </Avatar.Image>
+            <Avatar.Image alt={item.name} src={item.image} />
             <Avatar.Fallback>
               {item.name
                 .split(" ")

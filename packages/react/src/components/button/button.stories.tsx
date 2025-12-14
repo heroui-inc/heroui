@@ -5,7 +5,7 @@ import React, {useState} from "react";
 
 import {Spinner} from "../spinner";
 
-import {Button} from "./index";
+import {Button, buttonVariants} from "./index";
 
 export default {
   argTypes: {
@@ -55,13 +55,18 @@ const Template = ({isDisabled, size}: Button["RootProps"]) => (
   </div>
 );
 
-const TemplateWithAsChild = ({isDisabled, size}: Button["RootProps"]) => (
-  <div className="flex gap-3">
-    <Button asChild isDisabled={isDisabled} size={size}>
-      <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">
+const TemplateWithLinkButton = ({isIconOnly, size, variant}: Button["RootProps"]) => (
+  <div className="flex flex-col gap-3">
+    <div className="flex gap-3">
+      <a
+        className={buttonVariants({size, variant, isIconOnly})}
+        href="https://www.google.com"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         Google
       </a>
-    </Button>
+    </div>
   </div>
 );
 
@@ -190,9 +195,9 @@ export const Default = {
   render: Template,
 };
 
-export const WithAsChild = {
+export const WithLinkButton = {
   args: defaultArgs,
-  render: TemplateWithAsChild,
+  render: TemplateWithLinkButton,
 };
 
 export const Sizes = {

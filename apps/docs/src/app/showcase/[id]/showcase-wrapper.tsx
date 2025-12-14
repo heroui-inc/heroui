@@ -53,7 +53,7 @@ export function ShowcaseWrapper({
   }, [showcaseTheme]);
 
   return (
-    <ShowcaseContext.Provider
+    <ShowcaseContext
       value={{
         isCodeVisible,
         setIsCodeVisible,
@@ -66,6 +66,6 @@ export function ShowcaseWrapper({
       <div className={showcaseTheme} data-showcase-theme={showcaseTheme}>
         {children}
       </div>
-    </ShowcaseContext.Provider>
+    </ShowcaseContext>
   );
 }

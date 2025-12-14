@@ -41,9 +41,9 @@ const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
   const slots = React.useMemo(() => dropdownVariants(), []);
 
   return (
-    <DropdownContext.Provider value={{slots}}>
+    <DropdownContext value={{slots}}>
       <MenuTriggerPrimitive {...props}>{children}</MenuTriggerPrimitive>
-    </DropdownContext.Provider>
+    </DropdownContext>
   );
 };
 
@@ -78,7 +78,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
   const {slots} = useContext(DropdownContext);
 
   return (
-    <SurfaceContext.Provider
+    <SurfaceContext
       value={{
         variant: "default" as SurfaceVariants["variant"],
       }}
@@ -90,7 +90,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
       >
         {children}
       </PopoverPrimitive>
-    </SurfaceContext.Provider>
+    </SurfaceContext>
   );
 };
 

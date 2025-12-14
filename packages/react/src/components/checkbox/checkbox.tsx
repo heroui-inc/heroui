@@ -7,7 +7,7 @@ import type {CheckboxRenderProps} from "react-aria-components";
 import React, {createContext, useContext} from "react";
 import {Checkbox as CheckboxPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {checkboxVariants} from "./checkbox.styles";
@@ -56,7 +56,11 @@ const CheckboxControl = ({children, className, ...props}: CheckboxControlProps) 
   const {slots} = useContext(CheckboxContext);
 
   return (
-    <span className={slots?.control({className})} data-slot="checkbox-control" {...props}>
+    <span
+      className={composeSlotClassName(slots?.control, className)}
+      data-slot="checkbox-control"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -114,7 +118,7 @@ const CheckboxIndicator = ({children, className, ...props}: CheckboxIndicatorPro
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="checkbox-indicator"
       {...props}
     >
@@ -131,7 +135,11 @@ const CheckboxContent = ({children, className, ...props}: CheckboxContentProps) 
   const {slots} = useContext(CheckboxContext);
 
   return (
-    <div className={slots?.content({className})} data-slot="checkbox-content" {...props}>
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="checkbox-content"
+      {...props}
+    >
       {children}
     </div>
   );

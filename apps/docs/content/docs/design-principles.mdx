@@ -196,7 +196,35 @@ Beautiful defaults out-of-the-box. Transform the entire look with CSS variables 
 
 ### 10. Open and Extensible
 
-Wrap, extend, and customize components to match your needs. Use `asChild`, variant functions, or create custom wrappers.
+Wrap, extend, and customize components to match your needs. Use variant functions, direct BEM class application, or create custom wrappers.
+
+**Apply styles with variant functions:**
+
+```tsx
+import { Link, linkVariants } from '@heroui/react';
+import NextLink from 'next/link';
+
+// Use variant functions to style framework-specific components
+const slots = linkVariants({ underline: "hover" });
+
+<NextLink className={slots.base()} href="/about">
+  About Page
+  <Link.Icon className={slots.icon()} />
+</NextLink>
+```
+
+**Apply BEM classes directly:**
+
+```tsx
+import Link from 'next/link';
+
+// Apply HeroUI's BEM classes directly to any element
+<Link className="button button--primary" href="/dashboard">
+  Dashboard
+</Link>
+```
+
+**Create custom wrapper components:**
 
 ```tsx
 // Custom wrapper component
