@@ -1,7 +1,7 @@
 "use client";
 
+import {PlanetEarth, Rocket, ShoppingBag, SquareArticle} from "@gravity-ui/icons";
 import {Avatar, Description, Label, Tag, TagGroup} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function TagGroupWithPrefix() {
   return (
@@ -10,19 +10,19 @@ export function TagGroupWithPrefix() {
         <Label>With Icons</Label>
         <TagGroup.List>
           <Tag>
-            <Icon icon="gravity-ui:square-article" />
+            <SquareArticle />
             News
           </Tag>
           <Tag>
-            <Icon icon="gravity-ui:planet-earth" />
+            <PlanetEarth />
             Travel
           </Tag>
           <Tag>
-            <Icon icon="gravity-ui:rocket" />
+            <Rocket />
             Gaming
           </Tag>
           <Tag>
-            <Icon icon="gravity-ui:shopping-bag" />
+            <ShoppingBag />
             Shopping
           </Tag>
         </TagGroup.List>

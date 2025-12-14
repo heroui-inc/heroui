@@ -24,11 +24,7 @@ type Story = StoryObj<typeof TagGroup>;
 
 export const Default: Story = {
   render: () => (
-    <TagGroup
-      aria-label="Tags"
-      selectionMode="single"
-      onRemove={(ids) => alert(`Remove ${[...ids]}`)}
-    >
+    <TagGroup aria-label="Tags" selectionMode="single">
       <TagGroup.List>
         <Tag id="default-news">
           <Icon icon="gravity-ui:square-article" />

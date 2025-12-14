@@ -2,8 +2,8 @@
 
 import type {Key} from "@heroui/react";
 
+import {CircleXmarkFill} from "@gravity-ui/icons";
 import {Description, EmptyState, Label, Tag, TagGroup} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import {useState} from "react";
 
 export function TagGroupWithRemoveButton() {
@@ -64,7 +64,7 @@ export function TagGroupWithRemoveButton() {
                     {tag.name}
                     {!!renderProps.allowsRemoving && (
                       <Tag.RemoveButton>
-                        <Icon icon="gravity-ui:circle-xmark-fill" />
+                        <CircleXmarkFill />
                       </Tag.RemoveButton>
                     )}
                   </>

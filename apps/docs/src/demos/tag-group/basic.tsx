@@ -1,30 +1,26 @@
 "use client";
 
+import {PlanetEarth, Rocket, ShoppingBag, SquareArticle} from "@gravity-ui/icons";
 import {Tag, TagGroup} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function TagGroupBasic() {
   return (
-    <TagGroup
-      aria-label="Tags"
-      selectionMode="single"
-      onRemove={(ids) => alert(`Remove ${[...ids]}`)}
-    >
+    <TagGroup aria-label="Tags" selectionMode="single">
       <TagGroup.List>
         <Tag id="default-news">
-          <Icon icon="gravity-ui:square-article" />
+          <SquareArticle />
           News
         </Tag>
         <Tag id="default-travel">
-          <Icon icon="gravity-ui:planet-earth" />
+          <PlanetEarth />
           Travel
         </Tag>
         <Tag id="default-gaming">
-          <Icon icon="gravity-ui:rocket" />
+          <Rocket />
           Gaming
         </Tag>
         <Tag id="default-shopping">
-          <Icon icon="gravity-ui:shopping-bag" />
+          <ShoppingBag />
           Shopping
         </Tag>
       </TagGroup.List>
