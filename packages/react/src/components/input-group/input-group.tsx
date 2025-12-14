@@ -9,6 +9,7 @@ import {
   InputContext,
   Input as InputPrimitive,
   composeRenderProps,
+  useSlottedContext,
 } from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
@@ -34,6 +35,7 @@ interface InputGroupRootProps
 const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const inputContext = useSlottedContext(InputContext);
 
   const slots = React.useMemo(
     () => inputGroupVariants({isOnSurface: isOnSurfaceValue}),
@@ -48,7 +50,12 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
         data-slot="input-group"
       >
         {composeRenderProps(children, (children, renderProps) => (
-          <InputContext.Provider value={{disabled: renderProps.isDisabled}}>
+          <InputContext.Provider
+            value={{
+              ...inputContext,
+              disabled: renderProps.isDisabled,
+            }}
+          >
             {children}
           </InputContext.Provider>
         ))}
