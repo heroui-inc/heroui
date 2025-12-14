@@ -9,11 +9,11 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    color 150ms var(--ease-smooth),
-    scale 150ms var(--ease-smooth),
-    opacity 150ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+    color 100ms var(--ease-smooth),
+    scale 100ms var(--ease-smooth),
+    opacity 100ms var(--ease-smooth),
+    background-color 100ms var(--ease-smooth),
+    box-shadow 100ms var(--ease-out);
   @apply origin-center transform-gpu will-change-transform motion-reduce:transition-none;
 
   /* Cursor */
@@ -32,12 +32,11 @@
 
 /* Focus visible state (keyboard focus only) */
 .tag:is(:focus-visible:not(:focus), [data-focus-visible]) {
-  @apply status-focused-field;
+  @apply status-focused;
 }
 
 /* Pressed/Active state */
 .tag:is(:active, [data-pressed="true"]) {
-  @apply scale-[0.97];
 }
 
 /* Selected state */
