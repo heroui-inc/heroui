@@ -72,11 +72,11 @@ const LoremCards = () => {
 
 export const Default: Story = {
   render: (args) => (
-    <Card className="w-full p-0 sm:max-w-sm">
+    <div className="w-full p-0 sm:max-w-sm">
       <ScrollShadow className="max-h-[240px] p-4" {...args}>
         <LoremContent />
       </ScrollShadow>
-    </Card>
+    </div>
   ),
 };
 
@@ -85,20 +85,20 @@ export const Variants: Story = {
     <div className="flex flex-col gap-8">
       <div>
         <h4 className="mb-2 text-sm font-semibold">Fade (Opacity Effect)</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[240px] p-4" {...args}>
             <LoremContent />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
 
       <div>
         <h4 className="mb-2 text-sm font-semibold">Blur (Blur Effect)</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[240px] p-4" {...args}>
             <LoremContent />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
     </div>
   ),
@@ -109,20 +109,20 @@ export const Orientation: Story = {
     <div className="flex flex-col gap-8">
       <div>
         <h4 className="mb-2 text-sm font-semibold">Vertical</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[240px] p-4" orientation="vertical" {...args}>
             <LoremContent />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
 
       <div>
         <h4 className="mb-2 text-sm font-semibold">Horizontal</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="p-4" orientation="horizontal" {...args}>
             <LoremCards />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
     </div>
   ),
@@ -130,11 +130,11 @@ export const Orientation: Story = {
 
 export const HideScrollBar: Story = {
   render: (args) => (
-    <Card className="w-full p-0 sm:max-w-sm">
+    <div className="w-full p-0 sm:max-w-sm">
       <ScrollShadow hideScrollBar className="max-h-[240px] p-4" {...args}>
         <LoremContent />
       </ScrollShadow>
-    </Card>
+    </div>
   ),
 };
 
@@ -153,27 +153,27 @@ export const CustomSize: Story = {
     <div className="flex flex-col gap-6">
       <div>
         <h4 className="mb-2 text-sm font-semibold">Small Shadow (20px)</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[200px] p-4" size={20} {...args}>
             <LoremContent />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
       <div>
         <h4 className="mb-2 text-sm font-semibold">Default Shadow (40px)</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[200px] p-4" {...args}>
             <LoremContent />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
       <div>
         <h4 className="mb-2 text-sm font-semibold">Large Shadow (80px)</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[200px] p-4" size={80} {...args}>
             <LoremContent />
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
     </div>
   ),
@@ -190,7 +190,7 @@ export const VisibilityChange: Story = {
           <div className="rounded bg-default p-4">
             <p className="text-sm font-semibold">Vertical Shadow State: {verticalState}</p>
           </div>
-          <Card className="w-full p-0 sm:max-w-sm">
+          <div className="w-full p-0 sm:max-w-sm">
             <ScrollShadow
               className="max-h-[240px] p-4"
               orientation="vertical"
@@ -199,14 +199,14 @@ export const VisibilityChange: Story = {
             >
               <LoremContent />
             </ScrollShadow>
-          </Card>
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">
           <div className="rounded bg-default p-4">
             <p className="text-sm font-semibold">Horizontal Shadow State: {horizontalState}</p>
           </div>
-          <Card className="w-full p-0 sm:max-w-sm">
+          <div className="w-full p-0 sm:max-w-sm">
             <ScrollShadow
               className="p-4"
               orientation="horizontal"
@@ -215,7 +215,7 @@ export const VisibilityChange: Story = {
             >
               <LoremCards />
             </ScrollShadow>
-          </Card>
+          </div>
         </div>
       </>
     );

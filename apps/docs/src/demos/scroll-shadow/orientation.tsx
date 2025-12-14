@@ -15,7 +15,7 @@ export default function Orientation() {
     <div className="flex flex-col gap-8">
       <div>
         <h4 className="mb-2 text-sm font-semibold">Vertical</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[240px] p-4" orientation="vertical">
             <div className="space-y-4">
               {Array.from({length: 10}).map((_, idx) => (
@@ -27,12 +27,12 @@ export default function Orientation() {
               ))}
             </div>
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
 
       <div>
         <h4 className="mb-2 text-sm font-semibold">Horizontal</h4>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="p-4" orientation="horizontal">
             <div className="flex flex-row gap-4">
               {Array.from({length: 10}).map((_, idx) => (
@@ -55,7 +55,7 @@ export default function Orientation() {
               ))}
             </div>
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
     </div>
   );
