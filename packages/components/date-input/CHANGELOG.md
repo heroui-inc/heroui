@@ -1,5 +1,16 @@
 # @heroui/date-input
 
+## 2.3.28
+
+### Patch Changes
+
+- [#5964](https://github.com/heroui-inc/heroui/pull/5964) [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - `outside-top` label placement support (#5641, #5967)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/form@2.1.28
+
 ## 2.3.27
 
 ### Patch Changes
