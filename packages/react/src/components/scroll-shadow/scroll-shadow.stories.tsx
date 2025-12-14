@@ -109,20 +109,20 @@ export const Orientation: Story = {
     <div className="flex flex-col gap-8">
       <div>
         <h4 className="mb-2 text-sm font-semibold">Vertical</h4>
-        <div className="w-full p-0 sm:max-w-sm">
+        <Card className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="max-h-[240px] p-4" orientation="vertical" {...args}>
             <LoremContent />
           </ScrollShadow>
-        </div>
+        </Card>
       </div>
 
       <div>
         <h4 className="mb-2 text-sm font-semibold">Horizontal</h4>
-        <div className="w-full p-0 sm:max-w-sm">
+        <Card className="w-full p-0 sm:max-w-sm">
           <ScrollShadow className="p-4" orientation="horizontal" {...args}>
             <LoremCards />
           </ScrollShadow>
-        </div>
+        </Card>
       </div>
     </div>
   ),
