@@ -79,6 +79,8 @@ Cards come in semantic variants that describe their prominence level rather than
 ## Accessibility
 
 ```tsx
+import { Card, cardVariants } from '@heroui/react';
+
 // Semantic markup
 <Card role="article" aria-labelledby="card-title">
   <Card.Header>
@@ -87,11 +89,9 @@ Cards come in semantic variants that describe their prominence level rather than
 </Card>
 
 // Interactive cards
-<Card asChild>
-  <a href="/details" aria-label="View product details">
-    <Card.Title>Product Name</Card.Title>
-  </a>
-</Card>
+<a className={cardVariants().base()} href="/details" aria-label="View product details">
+  <Card.Title>Product Name</Card.Title>
+</a>
 ```
 
 <RelatedComponents component="card" />
@@ -155,7 +155,6 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
 | `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary" \| "quaternary"`         | `"default"` | Semantic variant indicating prominence level |
-| `asChild`   | `boolean`                         | `false` | Render as a child element  |
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |
 
@@ -163,7 +162,6 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
-| `asChild`   | `boolean`         | `false` | Render as a child element |
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Header content            |
 
@@ -171,7 +169,6 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 
 | Prop        | Type              | Default | Description                      |
 | ----------- | ----------------- | ------- | -------------------------------- |
-| `asChild`   | `boolean`         | `false` | Render as a child element       |
 | `className` | `string`          | -       | Additional CSS classes           |
 | `children`  | `React.ReactNode` | -       | Title content (renders as `h3`) |
 
@@ -179,7 +176,6 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 
 | Prop        | Type              | Default | Description                     |
 | ----------- | ----------------- | ------- | ------------------------------- |
-| `asChild`   | `boolean`         | `false` | Render as a child element      |
 | `className` | `string`          | -       | Additional CSS classes          |
 | `children`  | `React.ReactNode` | -       | Description content (renders as `p`) |
 
@@ -187,7 +183,6 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
-| `asChild`   | `boolean`         | `false` | Render as a child element |
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Main content              |
 
@@ -195,6 +190,5 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 
 | Prop        | Type              | Default | Description               |
 | ----------- | ----------------- | ------- | ------------------------- |
-| `asChild`   | `boolean`         | `false` | Render as a child element |
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Footer content            |

@@ -15,7 +15,7 @@ import { Surface } from '@heroui/react';
 
 ### Usage
 
-<ComponentPreview 
+<ComponentPreview
   name="surface-variants"
 />
 
@@ -45,7 +45,7 @@ function MyComponent() {
   const surfaceContext = useContext(SurfaceContext);
   // Access the variant if needed
   const variant = surfaceContext.variant;
-  
+
   return (
     <>
       <Input placeholder="This input will use on-surface styling" />
@@ -74,8 +74,8 @@ import { Surface } from '@heroui/react';
 
 function CustomSurface() {
   return (
-    <Surface 
-      className="rounded-2xl p-8 shadow-lg" 
+    <Surface
+      className="rounded-2xl p-8 shadow-lg"
       variant="secondary"
     >
       <h2>Custom Styled Surface</h2>
@@ -95,7 +95,7 @@ To customize the Surface component classes, you can use the `@layer components` 
   .surface {
     @apply rounded-2xl border border-border;
   }
-  
+
   .surface--secondary {
     @apply bg-gradient-to-br from-blue-50 to-purple-50;
   }
@@ -124,7 +124,6 @@ The Surface component uses these CSS classes ([View source styles](https://githu
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `variant` | `"default" \| "secondary" \| "tertiary" \| "quaternary"` | `"default"` | The visual variant of the surface |
-| `asChild` | `boolean` | `false` | Merge props onto the child element |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The surface content |
 
