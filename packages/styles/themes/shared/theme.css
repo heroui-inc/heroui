@@ -4,6 +4,11 @@
 
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
+  --color-surface-hover: color-mix(
+    in oklab,
+    var(--color-surface) 90%,
+    var(--color-surface-foreground) 10%
+  );
 
   --color-overlay: var(--overlay);
   --color-overlay-foreground: var(--overlay-foreground);
@@ -49,6 +54,12 @@
   --color-field-border: var(--field-border, var(--color-border));
   --radius-field: var(--field-radius, var(--radius-xl));
   --border-width-field: var(--field-border-width, var(--border-width));
+  --color-field-on-background: var(--field-on-background, var(--color-default));
+  --color-field-on-background-hover: color-mix(
+    in oklab,
+    var(--field-on-background, var(--color-default)) 90%,
+    var(--field-foreground, var(--color-default-foreground)) 10%
+  );
 
   /* Calculated Variables */
 

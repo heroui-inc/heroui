@@ -72,38 +72,31 @@ export function TagGroupWithListData() {
           items={list.items}
           renderEmptyState={() => <EmptyState className="p-1">No team members</EmptyState>}
         >
-          {(userData) => {
-            const user = userData as User;
-
-            return (
-              <Tag id={user.id} textValue={user.name}>
-                <Avatar className="size-4" size="sm">
-                  <Avatar.Image src={user.avatar} />
-                  <Avatar.Fallback>{user.fallback}</Avatar.Fallback>
-                </Avatar>
-                {user.name}
-                <Tag.RemoveButton />
-              </Tag>
-            );
-          }}
+          {(user) => (
+            <Tag key={user.id} id={user.id} textValue={user.name}>
+              <Avatar className="size-4" size="sm">
+                <Avatar.Image src={user.avatar} />
+                <Avatar.Fallback>{user.fallback}</Avatar.Fallback>
+              </Avatar>
+              {user.name}
+            </Tag>
+          )}
         </TagGroup.List>
         <Description>Select team members for your project</Description>
       </TagGroup>
       {list.selectedKeys !== "all" && Array.from(list.selectedKeys).length > 0 && (
         <div className="mt-4 flex flex-col gap-2">
-          <p className="text-muted text-sm font-medium">Selected:</p>
+          <p className="text-sm font-medium text-muted">Selected:</p>
           <div className="flex flex-wrap gap-2">
             {Array.from(list.selectedKeys).map((key) => {
               const user = list.getItem(key);
 
-              if (!user) {
-                return null;
-              }
+              if (!user) return null;
 
               return (
                 <div
-                  key={key}
-                  className="bg-surface-tertiary flex items-center gap-2 rounded-lg px-2 py-1"
+                  key={`${user.id}-selected`}
+                  className="flex items-center gap-2 rounded-lg bg-surface-tertiary px-2 py-1"
                 >
                   <Avatar className="size-4" size="sm">
                     <Avatar.Image src={user.avatar} />

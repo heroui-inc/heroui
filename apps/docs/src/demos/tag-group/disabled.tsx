@@ -1,9 +1,11 @@
+"use client";
+
 import {Description, Label, Tag, TagGroup} from "@heroui/react";
 
 export function TagGroupDisabled() {
   return (
     <div className="flex flex-col gap-4">
-      <TagGroup>
+      <TagGroup selectionMode="single">
         <Label>Disabled Tags</Label>
         <TagGroup.List>
           <Tag isDisabled>News</Tag>
@@ -13,12 +15,12 @@ export function TagGroupDisabled() {
         <Description>Some tags are disabled</Description>
       </TagGroup>
 
-      <TagGroup disabledKeys={["travel"]}>
+      <TagGroup disabledKeys={["travel"]} selectionMode="single">
         <Label>Disabled Keys</Label>
         <TagGroup.List>
-          <Tag id="news">News</Tag>
-          <Tag id="travel">Travel</Tag>
-          <Tag id="gaming">Gaming</Tag>
+          <Tag>News</Tag>
+          <Tag>Travel</Tag>
+          <Tag>Gaming</Tag>
         </TagGroup.List>
         <Description>Tags disabled via disabledKeys prop</Description>
       </TagGroup>

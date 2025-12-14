@@ -6,6 +6,7 @@ import React, {createContext, useContext, useMemo} from "react";
 import {TagGroup as TagGroupPrimitive, TagList as TagListPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
+import {SurfaceContext} from "../surface";
 
 import {tagGroupVariants} from "./tag-group.styles";
 
@@ -15,6 +16,8 @@ import {tagGroupVariants} from "./tag-group.styles";
 type TagGroupContext = {
   slots?: ReturnType<typeof tagGroupVariants>;
   size?: "sm" | "md" | "lg";
+  variant?: "default" | "surface";
+  isOnSurface?: boolean;
 };
 
 const TagGroupContext = createContext<TagGroupContext>({});
@@ -24,13 +27,29 @@ const TagGroupContext = createContext<TagGroupContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
   size?: "sm" | "md" | "lg";
+  variant?: "default" | "surface";
+  isOnSurface?: boolean;
 };
 
-const TagGroupRoot = ({children, className, size = "md", ...restProps}: TagGroupRootProps) => {
+const TagGroupRoot = ({
+  children,
+  className,
+  isOnSurface,
+  size,
+  variant,
+  ...restProps
+}: TagGroupRootProps) => {
   const slots = useMemo(() => tagGroupVariants(), []);
 
+  const surfaceContext = useContext(SurfaceContext);
+
+  const isOnSurfaceValue = useMemo(
+    () => isOnSurface ?? (surfaceContext.variant !== undefined ? true : false),
+    [isOnSurface, surfaceContext.variant],
+  );
+
   return (
-    <TagGroupContext value={{slots, size}}>
+    <TagGroupContext value={{slots, size, variant, isOnSurface: isOnSurfaceValue}}>
       <TagGroupPrimitive className={slots.base({className})} data-slot="tag-group" {...restProps}>
         {children}
       </TagGroupPrimitive>

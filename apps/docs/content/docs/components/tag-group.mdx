@@ -136,7 +136,7 @@ To customize the TagGroup component classes, you can use the `@layer components`
     @apply rounded-full px-3 py-1;
   }
 
-  .tag__remove-trigger {
+  .tag__remove-button {
     @apply ml-1;
   }
 }
@@ -152,7 +152,7 @@ The TagGroup component uses these CSS classes ([View source styles](https://gith
 - `.tag-group` - Base tag group container
 - `.tag-group__list` - Container for the list of tags
 - `.tag` - Base tag styles
-- `.tag__remove-trigger` - Remove button trigger
+- `.tag__remove-button` - Remove button trigger
 
 #### Slot Classes
 - `.tag-group [slot="description"]` - Description slot styles
@@ -164,7 +164,12 @@ The TagGroup component uses these CSS classes ([View source styles](https://gith
 - `.tag--lg` - Large size tag
 
 #### Variant Classes
-- `.tag--on-surface` - Tag variant for use on surface components
+- `.tag--default` - Default variant with field-on-background styling
+- `.tag--surface` - Surface variant with surface background
+- `.tag--on-surface` - On-surface variant for use on surface components
+
+#### Modifier Classes
+- `.tag__remove-button--on-surface` - Remove button modifier for on-surface variant
 
 #### State Classes
 - `.tag[data-selected="true"]` - Selected tag state
@@ -197,6 +202,8 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isDisabled` | `boolean` | - | Whether the tag group is disabled |
 | `onRemove` | `(keys: Set<Key>) => void` | - | Handler called when tags are removed |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the tags in the group |
+| `variant` | `"default" \| "surface"` | `"default"` | Visual variant of the tags |
+| `isOnSurface` | `boolean` | - | Whether tags are displayed on a surface component |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | TagGroup content or render function |
 
@@ -216,10 +223,10 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `id` | `Key` | - | The unique identifier for the tag |
 | `textValue` | `string` | - | A string representation of the tag's content, used for accessibility |
 | `isDisabled` | `boolean` | - | Whether the tag is disabled |
-| `isOnSurface` | `boolean` | - | Whether the tag is displayed on a surface component |
-| `size` | `"sm" \| "md" \| "lg"` | - | Size of the tag (inherits from TagGroup if not specified) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Tag content or render function |
+
+**Note**: `size`, `variant`, and `isOnSurface` are inherited from the parent `TagGroup` component and cannot be set directly on individual `Tag` components.
 
 ### Tag.RemoveButton Props
 

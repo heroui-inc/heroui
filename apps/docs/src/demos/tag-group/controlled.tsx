@@ -2,7 +2,7 @@
 
 import type {Key} from "@heroui/react";
 
-import {Label, Tag, TagGroup} from "@heroui/react";
+import {Description, Label, Tag, TagGroup} from "@heroui/react";
 import {useState} from "react";
 
 export function TagGroupControlled() {
@@ -22,10 +22,10 @@ export function TagGroupControlled() {
           <Tag id="gaming">Gaming</Tag>
           <Tag id="shopping">Shopping</Tag>
         </TagGroup.List>
+        <Description>
+          Selected: {Array.from(selected).length > 0 ? Array.from(selected).join(", ") : "None"}
+        </Description>
       </TagGroup>
-      <p className="text-muted text-sm">
-        Selected: {Array.from(selected).length > 0 ? Array.from(selected).join(", ") : "None"}
-      </p>
     </div>
   );
 }

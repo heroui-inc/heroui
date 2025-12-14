@@ -1,9 +1,11 @@
+"use client";
+
 import {Label, Tag, TagGroup} from "@heroui/react";
 
 export function TagGroupSizes() {
   return (
     <div className="flex flex-col gap-6">
-      <TagGroup size="sm">
+      <TagGroup selectionMode="single" size="sm">
         <Label>Small</Label>
         <TagGroup.List>
           <Tag>News</Tag>
@@ -11,7 +13,7 @@ export function TagGroupSizes() {
           <Tag>Gaming</Tag>
         </TagGroup.List>
       </TagGroup>
-      <TagGroup size="md">
+      <TagGroup selectionMode="single" size="md">
         <Label>Medium</Label>
         <TagGroup.List>
           <Tag>News</Tag>
@@ -19,7 +21,7 @@ export function TagGroupSizes() {
           <Tag>Gaming</Tag>
         </TagGroup.List>
       </TagGroup>
-      <TagGroup size="lg">
+      <TagGroup selectionMode="single" size="lg">
         <Label>Large</Label>
         <TagGroup.List>
           <Tag>News</Tag>

@@ -1,15 +1,13 @@
 "use client";
 
-import type {TagVariants} from "./tag.styles";
 import type {ComponentPropsWithRef} from "react";
 import type {Button as ButtonPrimitive} from "react-aria-components";
 
-import React, {Children, createContext, useContext, useMemo} from "react";
+import {Children, createContext, useContext, useMemo} from "react";
 import {Tag as TagPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
-import {SurfaceContext} from "../surface";
 import {TagGroupContext} from "../tag-group";
 
 import {tagVariants} from "./tag.styles";
@@ -26,22 +24,14 @@ const TagContext = createContext<TagContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Tag Root
  * -----------------------------------------------------------------------------------------------*/
-interface TagRootProps extends ComponentPropsWithRef<typeof TagPrimitive>, TagVariants {}
+interface TagRootProps extends ComponentPropsWithRef<typeof TagPrimitive> {}
 
-const TagRoot = ({children, className, isOnSurface, size, ...restProps}: TagRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const tagGroupContext = useContext(TagGroupContext);
-
-  const isOnSurfaceValue = useMemo(
-    () => isOnSurface ?? (surfaceContext.variant !== undefined ? true : false),
-    [isOnSurface, surfaceContext.variant],
-  );
-
-  const sizeValue = useMemo(() => size ?? tagGroupContext.size, [size, tagGroupContext.size]);
+const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
+  const {isOnSurface, size, variant} = useContext(TagGroupContext);
 
   const slots = useMemo(
-    () => tagVariants({size: sizeValue, isOnSurface: isOnSurfaceValue}),
-    [sizeValue, isOnSurfaceValue],
+    () => tagVariants({size, isOnSurface, variant}),
+    [size, isOnSurface, variant],
   );
 
   const textValue = useMemo(() => {
@@ -67,7 +57,14 @@ const TagRoot = ({children, className, isOnSurface, size, ...restProps}: TagRoot
     >
       {(renderProps) => (
         <TagContext value={{slots}}>
-          {typeof children === "function" ? children(renderProps) : children}
+          {typeof children === "function" ? (
+            children(renderProps)
+          ) : (
+            <>
+              {children}
+              {!!renderProps.allowsRemoving && <TagRemoveButton />}
+            </>
+          )}
         </TagContext>
       )}
     </TagPrimitive>
@@ -84,7 +81,7 @@ const TagRemoveButton = ({className, ...restProps}: TagRemoveButtonProps) => {
 
   return (
     <CloseButton
-      className={composeTwRenderProps(className, slots?.removeTrigger())}
+      className={composeTwRenderProps(className, slots?.removeButton())}
       data-slot="tag-remove-button"
       slot="remove"
       {...restProps}

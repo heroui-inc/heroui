@@ -1,9 +1,8 @@
 /* Tag component styles */
 .tag {
-  --optical-offset: 0.062em;
+  --optical-offset: 0.031em;
 
-  @apply bg-field text-field-foreground relative select-none rounded-full font-medium;
-  @apply inline-flex items-center gap-1;
+  @apply relative inline-flex items-center gap-1 rounded-full font-medium select-none;
 
   /**
    * Transitions
@@ -20,104 +19,101 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Disabled state */
-  &:is([data-disabled="true"], [aria-disabled="true"]) {
-    @apply status-disabled;
-  }
-
-  /* Focus visible state (keyboard focus only) */
-  &:is(:focus-visible:not(:focus), [data-focus-visible]) {
-    @apply status-focused-field;
-  }
-
-  /* Focus state (general) */
-  &:is(:focus, [data-focused="true"]) {
-  }
-
-  /* Pressed/Active state */
-  &:is(:active, [data-pressed="true"]) {
-    @apply scale-[0.97];
-  }
-
-  /* Hover state (default - when not selected or disabled) */
-  @media (hover: hover) {
-    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
-      @apply bg-field-hover;
-    }
-  }
-
-  /* Selected state */
-  &:is([data-selected="true"], [aria-selected="true"]) {
-    @apply bg-accent text-accent-foreground;
-
-    /* Selected + Hover state*/
-    @media (hover: hover) {
-      &:is(:hover, [data-hovered="true"]) {
-        @apply bg-accent-hover;
-      }
-    }
-  }
-
   /* SVG icon styling */
   & svg {
     @apply pointer-events-none size-3 shrink-0 self-center text-current;
-    transform-origin: center;
-    transform: translateY(var(--optical-offset)); /* optical adjustment */
   }
 }
 
-/* Size variants */
-.tag--sm {
-  @apply px-1.5 py-0.5 text-xs;
+/* Disabled state */
+.tag:is([data-disabled="true"], [aria-disabled="true"]) {
+  @apply status-disabled;
+}
 
-  &:has(.tag__remove-trigger) {
-    @apply pr-1; /* visual alignment adjustment */
+/* Focus visible state (keyboard focus only) */
+.tag:is(:focus-visible:not(:focus), [data-focus-visible]) {
+  @apply status-focused-field;
+}
+
+/* Pressed/Active state */
+.tag:is(:active, [data-pressed="true"]) {
+  @apply scale-[0.97];
+}
+
+/* Selected state */
+.tag:is([data-selected="true"], [aria-selected="true"]) {
+  @apply bg-accent text-accent-foreground;
+
+  /* Selected + Hover state */
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]) {
+      @apply bg-accent-hover;
+    }
   }
+}
+
+/* Size */
+.tag--sm {
+  @apply px-1 py-0.5 text-xs;
 }
 
 .tag--md {
-  @apply px-3 py-1 text-xs;
-
-  &:has(.tag__remove-trigger) {
-    @apply pr-2.5; /* visual alignment adjustment */
-  }
+  @apply px-1.5 py-1 text-xs;
 }
 
 .tag--lg {
-  @apply px-3.5 py-1.5 text-sm;
+  @apply px-2.5 py-1.5 text-sm;
+}
 
-  &:has(.tag__remove-trigger) {
-    @apply pr-3; /* visual alignment adjustment */
+/* Variant */
+.tag--default {
+  @apply bg-field-on-background text-default-foreground;
+
+  /* Hover state (when not selected or disabled) */
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      @apply bg-field-on-background-hover;
+    }
   }
 }
 
-/* Remove trigger (close button) */
-.tag__remove-trigger {
-  @apply size-4 text-inherit;
-  @apply -ml-0.5; /* visual alignment adjustment */
+.tag--surface {
+  @apply bg-surface text-surface-foreground;
 
-  /* SVG icon styling */
-  & svg {
-    @apply size-3;
-    transform-origin: center;
-    transform: translateY(var(--optical-offset)); /* optical adjustment */
+  /* Hover state (when not selected or disabled) */
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      @apply bg-surface-hover;
+    }
   }
 }
 
-/* On Surface variant */
+/* On Surface */
 .tag--on-surface {
   @apply bg-on-surface shadow-none;
 
+  /* Hover state (when not selected or disabled) */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
       @apply bg-on-surface-hover;
     }
   }
 
+  /* Focus visible state */
   &:is(:focus-visible:not(:focus), [data-focus-visible]) {
     background-color: var(--color-on-surface-focus);
   }
 }
 
-.tag__remove-trigger--on-surface {
+/* Remove Button  */
+.tag__remove-button {
+  @apply size-3 text-inherit;
+
+  /* SVG icon styling */
+  & svg {
+    @apply size-[inherit] shrink-0 self-center text-current;
+  }
+}
+
+.tag__remove-button--on-surface {
 }

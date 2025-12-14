@@ -20,10 +20,10 @@ export function TagGroupSelectionModes() {
       >
         <Label>Single Selection</Label>
         <TagGroup.List>
-          <Tag id="news">News</Tag>
-          <Tag id="travel">Travel</Tag>
-          <Tag id="gaming">Gaming</Tag>
-          <Tag id="shopping">Shopping</Tag>
+          <Tag>News</Tag>
+          <Tag>Travel</Tag>
+          <Tag>Gaming</Tag>
+          <Tag>Shopping</Tag>
         </TagGroup.List>
         <Description>Choose one category</Description>
       </TagGroup>
@@ -35,10 +35,10 @@ export function TagGroupSelectionModes() {
       >
         <Label>Multiple Selection</Label>
         <TagGroup.List>
-          <Tag id="news">News</Tag>
-          <Tag id="travel">Travel</Tag>
-          <Tag id="gaming">Gaming</Tag>
-          <Tag id="shopping">Shopping</Tag>
+          <Tag>News</Tag>
+          <Tag>Travel</Tag>
+          <Tag>Gaming</Tag>
+          <Tag>Shopping</Tag>
         </TagGroup.List>
         <Description>Choose multiple categories</Description>
       </TagGroup>

@@ -6,10 +6,11 @@ export const tagVariants = tv({
   defaultVariants: {
     size: "md",
     isOnSurface: false,
+    variant: "default",
   },
   slots: {
     base: "tag",
-    removeTrigger: "tag__remove-trigger",
+    removeButton: "tag__remove-button",
   },
   variants: {
     size: {
@@ -23,10 +24,18 @@ export const tagVariants = tv({
         base: "tag--sm",
       },
     },
+    variant: {
+      default: {
+        base: "tag--default",
+      },
+      surface: {
+        base: "tag--surface",
+      },
+    },
     isOnSurface: {
       true: {
         base: "tag--on-surface",
-        removeTrigger: "tag__remove-trigger--on-surface",
+        removeButton: "tag__remove-button--on-surface",
       },
       false: {},
     },

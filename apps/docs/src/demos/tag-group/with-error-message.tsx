@@ -16,14 +16,19 @@ export function TagGroupWithErrorMessage() {
       selectionMode="multiple"
       onSelectionChange={(keys) => setSelected(keys)}
     >
-      <Label>Required Categories</Label>
+      <Label>Amenities</Label>
       <TagGroup.List>
-        <Tag id="news">News</Tag>
-        <Tag id="travel">Travel</Tag>
-        <Tag id="gaming">Gaming</Tag>
-        <Tag id="shopping">Shopping</Tag>
+        <Tag id="laundry">Laundry</Tag>
+        <Tag id="fitness">Fitness center</Tag>
+        <Tag id="parking">Parking</Tag>
+        <Tag id="pool">Swimming pool</Tag>
+        <Tag id="breakfast">Breakfast</Tag>
       </TagGroup.List>
-      <Description>Select at least one category</Description>
+      <Description>
+        {isInvalid
+          ? "Select at least one category"
+          : "Selected: " + Array.from(selected).join(", ")}
+      </Description>
       {!!isInvalid && <ErrorMessage>Please select at least one category</ErrorMessage>}
     </TagGroup>
   );

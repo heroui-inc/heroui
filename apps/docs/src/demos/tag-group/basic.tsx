@@ -1,16 +1,33 @@
-import {Description, Label, Tag, TagGroup} from "@heroui/react";
+"use client";
+
+import {Tag, TagGroup} from "@heroui/react";
+import {Icon} from "@iconify/react";
 
 export function TagGroupBasic() {
   return (
-    <TagGroup>
-      <Label>Categories</Label>
+    <TagGroup
+      aria-label="Tags"
+      selectionMode="single"
+      onRemove={(ids) => alert(`Remove ${[...ids]}`)}
+    >
       <TagGroup.List>
-        <Tag>News</Tag>
-        <Tag>Travel</Tag>
-        <Tag>Gaming</Tag>
-        <Tag>Shopping</Tag>
+        <Tag id="default-news">
+          <Icon icon="gravity-ui:square-article" />
+          News
+        </Tag>
+        <Tag id="default-travel">
+          <Icon icon="gravity-ui:planet-earth" />
+          Travel
+        </Tag>
+        <Tag id="default-gaming">
+          <Icon icon="gravity-ui:rocket" />
+          Gaming
+        </Tag>
+        <Tag id="default-shopping">
+          <Icon icon="gravity-ui:shopping-bag" />
+          Shopping
+        </Tag>
       </TagGroup.List>
-      <Description>Select categories that interest you</Description>
     </TagGroup>
   );
 }
