@@ -1,7 +1,7 @@
 "use client";
 
+import {Check} from "@gravity-ui/icons";
 import {Button, Description, FieldError, Form, Input, Label, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Basic() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +63,7 @@ export function Basic() {
 
       <div className="flex gap-2">
         <Button type="submit">
-          <Icon icon="gravity-ui:check" />
+          <Check />
           Submit
         </Button>
         <Button type="reset" variant="secondary">

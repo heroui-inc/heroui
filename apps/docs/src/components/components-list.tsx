@@ -38,6 +38,7 @@ const COMPONENT_NAMES = [
   "number-field",
   "popover",
   "radio-group",
+  "scroll-shadow",
   "separator",
   "search-field",
   "select",

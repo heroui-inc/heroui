@@ -1,5 +1,5 @@
+import {ChevronDown} from "@gravity-ui/icons";
 import {Accordion} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function FAQ() {
   const categories = [
@@ -63,7 +63,7 @@ export function FAQ() {
                   <Accordion.Trigger>
                     {item.title}
                     <Accordion.Indicator>
-                      <Icon icon="gravity-ui:chevron-down" />
+                      <ChevronDown />
                     </Accordion.Indicator>
                   </Accordion.Trigger>
                 </Accordion.Heading>

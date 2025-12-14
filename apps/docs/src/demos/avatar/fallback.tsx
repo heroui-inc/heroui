@@ -1,5 +1,5 @@
+import {Person} from "@gravity-ui/icons";
 import {Avatar} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Fallback() {
   return (
@@ -12,7 +12,7 @@ export function Fallback() {
       {/* Icon fallback */}
       <Avatar>
         <Avatar.Fallback>
-          <Icon icon="gravity-ui:person" />
+          <Person />
         </Avatar.Fallback>
       </Avatar>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import {ChevronDown, ChevronUp, QrCode} from "@gravity-ui/icons";
 import {
   Button,
   Disclosure,
@@ -34,7 +35,7 @@ export function Controlled() {
               variant="secondary"
               onPress={onPrevious}
             >
-              <Icon className="size-4" icon="gravity-ui:chevron-up" />
+              <ChevronUp className="size-4" />
             </Button>
             <Button
               aria-label="Next disclosure"
@@ -43,7 +44,7 @@ export function Controlled() {
               variant="secondary"
               onPress={onNext}
             >
-              <Icon className="size-4" icon="gravity-ui:chevron-down" />
+              <ChevronDown className="size-4" />
             </Button>
           </div>
         </div>
@@ -58,7 +59,7 @@ export function Controlled() {
                 })}
               >
                 <div className="flex w-full items-center justify-start gap-2">
-                  <Icon icon="gravity-ui:qr-code" />
+                  <QrCode />
                   Preview HeroUI Native
                 </div>
                 <Disclosure.Indicator className="text-muted" />

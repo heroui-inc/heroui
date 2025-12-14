@@ -30,6 +30,7 @@ import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
+import * as ScrollShadowDemos from "./scroll-shadow";
 import * as SearchFieldDemos from "./search-field";
 import * as SelectDemos from "./select";
 import * as SeparatorDemos from "./separator";
@@ -55,9 +56,9 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.Basic,
     file: "accordion/basic.tsx",
   },
-  "accordion-outline": {
-    component: AccordionDemos.Oultine,
-    file: "accordion/outline.tsx",
+  "accordion-surface": {
+    component: AccordionDemos.Surface,
+    file: "accordion/surface.tsx",
   },
   "accordion-multiple": {
     component: AccordionDemos.Multiple,
@@ -1159,6 +1160,35 @@ export const demos: Record<string, DemoItem> = {
   "search-field-with-keyboard-shortcut": {
     component: SearchFieldDemos.WithKeyboardShortcut,
     file: "search-field/with-keyboard-shortcut.tsx",
+  },
+  // ScrollShadow demos
+  "scroll-shadow-default": {
+    component: ScrollShadowDemos.Default,
+    file: "scroll-shadow/default.tsx",
+  },
+  "scroll-shadow-orientation": {
+    component: ScrollShadowDemos.Orientation,
+    file: "scroll-shadow/orientation.tsx",
+  },
+  "scroll-shadow-hide-scroll-bar": {
+    component: ScrollShadowDemos.HideScrollBar,
+    file: "scroll-shadow/hide-scroll-bar.tsx",
+  },
+  "scroll-shadow-on-surface": {
+    component: ScrollShadowDemos.OnSurface,
+    file: "scroll-shadow/on-surface.tsx",
+  },
+  "scroll-shadow-custom-size": {
+    component: ScrollShadowDemos.CustomSize,
+    file: "scroll-shadow/custom-size.tsx",
+  },
+  "scroll-shadow-visibility-change": {
+    component: ScrollShadowDemos.VisibilityChange,
+    file: "scroll-shadow/visibility-change.tsx",
+  },
+  "scroll-shadow-with-card": {
+    component: ScrollShadowDemos.WithCard,
+    file: "scroll-shadow/with-card.tsx",
   },
   // Slider demos
   "slider-default": {

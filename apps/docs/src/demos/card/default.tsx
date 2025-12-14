@@ -1,15 +1,10 @@
+import {CircleDollar} from "@gravity-ui/icons";
 import {Card, Link} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Default() {
   return (
     <Card className="w-[400px]">
-      <Icon
-        aria-label="Dollar sign icon"
-        className="text-primary size-6"
-        icon="gravity-ui:circle-dollar"
-        role="img"
-      />
+      <CircleDollar aria-label="Dollar sign icon" className="text-primary size-6" role="img" />
       <Card.Header>
         <Card.Title>Become an Acme Creator!</Card.Title>
         <Card.Description>

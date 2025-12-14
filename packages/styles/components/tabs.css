@@ -90,17 +90,17 @@
   }
 
   /* Selected state */
-  &[data-selected] {
+  &[data-selected="true"] {
     @apply text-segment-foreground;
   }
 
   /* Hide separator when this tab is selected */
-  &[data-selected]:before {
+  &[data-selected="true"]:before {
     opacity: 0;
   }
 
   /* Hide separator when previous sibling is selected */
-  &[data-selected] + .tabs__tab:before {
+  &[data-selected="true"] + .tabs__tab:before {
     opacity: 0;
   }
 
@@ -111,22 +111,22 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Hover states - both approaches for compatibility */
   @media (hover: hover) {
-    &:not([data-selected]):not([data-disabled]):hover,
-    &[data-hovered]:not([data-selected]):not([data-disabled]) {
+    &:not([data-selected="true"]):not([data-disabled="true"]):hover,
+    &[data-hovered="true"]:not([data-selected="true"]):not([data-disabled="true"]) {
       @apply opacity-70;
     }
   }
 
   /* Focus states - comprehensive fallback */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 }

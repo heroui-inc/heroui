@@ -16,13 +16,13 @@
 
   /* Focus  state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -34,12 +34,12 @@
   @apply fixed inset-0 isolate z-50 h-(--visual-viewport-height);
 
   /* Entering animation */
-  &[data-entering] {
+  &[data-entering="true"] {
     @apply animate-in duration-200 ease-out-quad fade-in-0;
   }
 
   /* Exiting animation */
-  &[data-exiting] {
+  &[data-exiting="true"] {
     @apply animate-out duration-100 ease-out-quad fade-out-0;
   }
 
@@ -47,8 +47,8 @@
    * Reduce Animation
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
-  &[data-entering],
-  &[data-exiting] {
+  &[data-entering="true"],
+  &[data-exiting="true"] {
     @apply motion-reduce:animate-none;
   }
 }
@@ -96,7 +96,7 @@
   }
 
   /* Entering animation */
-  &[data-entering] {
+  &[data-entering="true"] {
     @apply animate-in duration-250 ease-out-quad fade-in-0 zoom-in-105;
 
     &[data-placement="auto"] {
@@ -116,7 +116,7 @@
   }
 
   /* Exiting animation */
-  &[data-exiting] {
+  &[data-exiting="true"] {
     @apply animate-out duration-100 ease-out-quad fade-out-0 zoom-out-95;
   }
 
@@ -124,8 +124,8 @@
    * Reduce Animation
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
-  &[data-entering],
-  &[data-exiting] {
+  &[data-entering="true"],
+  &[data-exiting="true"] {
     @apply motion-reduce:animate-none;
   }
 }

@@ -14,6 +14,7 @@ export default function Layout({children}: {children: ReactNode}) {
     <DocsLayout
       tree={source.pageTree}
       sidebar={{
+        banner: () => <div className="hidden" />,
         collapsible: false,
         defaultOpenLevel: 0,
       }}
@@ -24,7 +25,7 @@ export default function Layout({children}: {children: ReactNode}) {
       nav={{
         ...baseOptions.nav,
         children: (
-          <div className="mr-2 flex items-center gap-3 md:mr-0">
+          <div className="mr-2 flex items-center gap-3 md:mr-0" id="nd-nav-actions">
             <VersionSelector className="hidden lg:flex" />
             <Separator className="hidden h-4 lg:block" orientation="vertical" />
             <GitHubLinkSmall />

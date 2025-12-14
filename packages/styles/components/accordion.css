@@ -28,7 +28,7 @@
   @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded] {
+  &[data-expanded="true"] {
     @apply -rotate-180;
   }
 }
@@ -59,32 +59,31 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    opacity 150ms var(--ease-smooth),
+    opacity 150ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   /* Hover state */
   @media (hover: hover) {
-    &:hover:not([aria-expanded]),
-    &[data-hovered]:not([aria-expanded]) {
-      background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
+    &:hover:not([aria-expanded="true"]),
+    &[data-hovered="true"]:not([aria-expanded="true"]) {
+      background-color: color-mix(in oklab, var(--color-foreground) 3%, transparent 90%);
     }
   }
 
   /* Pressed state */
-  &[data-pressed]:not([aria-expanded]) {
-    background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
   }
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled State */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -100,11 +99,11 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    height 320ms var(--ease-out-fluid),
-    opacity 250ms var(--ease-smooth);
+    height 200ms var(--ease-out-quad),
+    opacity 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded] {
+  &[data-expanded="true"] {
     opacity: 1;
   }
 }
@@ -115,8 +114,8 @@
 
   .accordion__trigger {
     @media (hover: hover) {
-      &:hover:not([aria-expanded]),
-      &[data-hovered]:not([aria-expanded]) {
+      &:hover:not([aria-expanded="true"]),
+      &[data-hovered="true"]:not([aria-expanded="true"]) {
         @apply bg-default;
       }
     }
@@ -138,7 +137,7 @@
     @apply rounded-t-3xl;
   }
 
-  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded]))
+  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
     [data-slot="accordion-trigger"] {
     @apply rounded-b-3xl;
   }

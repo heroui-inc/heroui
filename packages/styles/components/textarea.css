@@ -18,7 +18,7 @@
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
-    &[data-hovered]:not([data-focused]):not([data-focus-visible]) {
+    &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
@@ -26,7 +26,7 @@
 
   /* Focus state */
   &:focus,
-  &[data-focused] {
+  &[data-focused="true"] {
     @apply status-focused-field;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
@@ -34,17 +34,17 @@
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
   }
 
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
 
   /* Disabled state */
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -55,19 +55,19 @@
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
-    &[data-hovered]:not([data-focus-visible]) {
+    &[data-hovered="true"]:not([data-focus-visible="true"]) {
       @apply bg-on-surface-hover;
     }
   }
 
   /* Focus state */
   &:focus,
-  &[data-focused] {
+  &[data-focused="true"] {
     background-color: var(--color-on-surface-focus);
   }
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
   }
 }

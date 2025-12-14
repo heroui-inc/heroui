@@ -2,8 +2,8 @@
 .select {
   @apply flex flex-col gap-1;
 
-  &[data-invalid],
-  &[aria-invalid] {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -45,7 +45,7 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
@@ -53,7 +53,7 @@
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
@@ -61,19 +61,19 @@
 
   /* Focus state */
   &:focus,
-  &[data-focus] {
+  &[data-focus="true"] {
   }
 
   /* Invalid state */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -84,25 +84,25 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-on-surface-hover;
     }
   }
 
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     background-color: var(--color-on-surface-focus);
   }
 
   &:focus,
-  &[data-focus] {
+  &[data-focus="true"] {
   }
 }
 
 .select__value {
   @apply flex-1 truncate text-left text-current;
 
-  &[data-placeholder] {
+  &[data-placeholder="true"] {
     @apply text-field-placeholder;
   }
 
@@ -115,7 +115,7 @@
 .select__indicator {
   @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150 will-change-transform;
 
-  &[data-open] {
+  &[data-open="true"] {
     @apply rotate-180;
   }
 
@@ -131,12 +131,12 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply outline-none;
   }
 
   /* Entering animations */
-  &[data-entering] {
+  &[data-entering="true"] {
     @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
@@ -158,7 +158,7 @@
   }
 
   /* Exiting animations */
-  &[data-exiting] {
+  &[data-exiting="true"] {
     @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
@@ -190,8 +190,8 @@
   }
 
   /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
-  [data-slot="listbox"]:not([aria-multiselectable]) [data-slot="listbox-item-indicator"],
-  [data-slot="listbox"]:not([aria-multiselectable])
+  [data-slot="listbox"]:not([aria-multiselectable="true"]) [data-slot="listbox-item-indicator"],
+  [data-slot="listbox"]:not([aria-multiselectable="true"])
     [data-slot="listbox-item-indicator"]
     [data-slot="listbox-item-indicator--checkmark"] {
     @apply transition-none;

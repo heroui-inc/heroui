@@ -1,5 +1,6 @@
 "use client";
 
+import {QrCode} from "@gravity-ui/icons";
 import {Button, Disclosure} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
@@ -12,7 +13,7 @@ export function Basic() {
       <Disclosure isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
         <Disclosure.Heading>
           <Button slot="trigger" variant="secondary">
-            <Icon icon="gravity-ui:qr-code" />
+            <QrCode />
             Preview HeroUI Native
             <Disclosure.Indicator />
           </Button>

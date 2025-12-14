@@ -6,6 +6,7 @@ import {cn} from "@/utils/cn";
 
 interface ComponentPreviewContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "start" | "end";
+  minHeight?: string;
   isBgSolid?: boolean;
   description?: string;
   hideCode?: boolean;
@@ -19,6 +20,7 @@ export function ComponentPreviewContainer({
   description,
   hideCode = false,
   isBgSolid = false,
+  minHeight,
   name,
   style,
   ...props
@@ -50,7 +52,9 @@ export function ComponentPreviewContainer({
           "flex",
         )}
       >
-        <div className="flex w-full items-center justify-center">{Component}</div>
+        <div className="flex w-full items-center justify-center" style={{minHeight}}>
+          {Component}
+        </div>
       </div>
 
       {/* Code Section */}

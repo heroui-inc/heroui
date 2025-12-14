@@ -36,39 +36,39 @@
   }
 
   /* Add padding-right when indicator is present and has submenu */
-  &[data-has-submenu]:has(.menu-item__indicator) {
+  &[data-has-submenu="true"]:has(.menu-item__indicator) {
     @apply pr-7 pl-2;
   }
 
   /* Focus visible state (keyboard focus only) */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Focus state */
   &:focus,
-  &[data-focus] {
+  &[data-focus="true"] {
   }
 
   /* Pressed state */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.98);
   }
 
   /* Hover state */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
 
   /* Selected state */
-  &[aria-checked],
-  &[aria-selected],
-  &[data-selected] {
+  &[aria-checked="true"],
+  &[aria-selected="true"],
+  &[data-selected="true"] {
     [data-slot="menu-item-indicator--checkmark"] {
       /**
      * Transitions
@@ -87,7 +87,7 @@
   }
 
   /* Disabled state */
-  &[data-disabled] {
+  &[data-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -105,7 +105,7 @@
   @apply transition duration-250 motion-reduce:transition-none;
 
   /* Position on the right when menu item has submenu */
-  .menu-item[data-has-submenu] & {
+  .menu-item[data-has-submenu="true"] & {
     @apply right-2 left-auto;
   }
 

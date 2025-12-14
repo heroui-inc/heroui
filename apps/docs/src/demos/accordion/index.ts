@@ -3,5 +3,5 @@ export {CustomIndicator} from "./custom-indicator";
 export {Disabled} from "./disabled";
 export {FAQ} from "./faq";
 export {Multiple} from "./multiple";
-export {Oultine} from "./outline";
+export {Surface} from "./surface";
 export {CustomStyles} from "./custom-styles";

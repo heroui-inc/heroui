@@ -20,18 +20,18 @@
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Pending state */
-  &[data-pending] {
+  &[data-pending="true"] {
     @apply status-pending;
   }
 
@@ -49,13 +49,13 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default text-foreground;
     }
   }
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.93);
   }
 }

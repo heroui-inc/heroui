@@ -1,7 +1,7 @@
 "use client";
 
+import {Envelope} from "@gravity-ui/icons";
 import {InputGroup, Label, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Disabled() {
   return (
@@ -10,7 +10,7 @@ export function Disabled() {
         <Label>Email address</Label>
         <InputGroup>
           <InputGroup.Prefix>
-            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+            <Envelope className="size-4 text-muted" />
           </InputGroup.Prefix>
           <InputGroup.Input className="w-full max-w-[280px]" defaultValue="name@email.com" />
         </InputGroup>

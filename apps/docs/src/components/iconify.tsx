@@ -83,7 +83,14 @@ const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...pro
 
   // Use online version for other icon sets (like simple-icons:vite, lineicons:nextjs)
   // Icon component supports SSR, so this works consistently on both server and client
-  return <Icon {...props} ref={ref} icon={iconProp} />;
+  return (
+    <Icon
+      {...props}
+      ref={ref}
+      fallback={<SVGFromIconData iconData={icons["square"]} />}
+      icon={iconProp}
+    />
+  );
 });
 
 Iconify.displayName = "HeroUI.Iconify";
