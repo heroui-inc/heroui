@@ -6,32 +6,73 @@ icon: layers
 
 HeroUI uses composition patterns to create flexible, customizable components. Change the rendered element, compose components together, and maintain full control over markup.
 
-## The asChild Prop
+## Polymorphic Styling
 
-The `asChild` prop lets you change what element a component renders. When `asChild` is true, HeroUI clones the child element and merges props instead of rendering its default element.
+Apply HeroUI styles to any element using variant functions or BEM classes. Extend component styles to framework components, native HTML elements, or custom components with full type safety.
 
-**Basic usage:**
+**Example: Styling a Link as a Button**
+
+You can use `buttonVariants` to style a Link component with button styles:
 
 ```tsx
-import { Button } from '@heroui/react';
+import { buttonVariants } from '@heroui/react';
 import Link from 'next/link';
 
-// Renders as a Next.js Link
-<Button asChild>
-  <Link href="/about">About</Link>
-</Button>
+// Style a Next.js Link as a primary button
+<Link
+  className={buttonVariants({ variant: "primary" })}
+  href="/about"
+>
+  About
+</Link>
 
-// Renders as a regular anchor
-<Button asChild>
-  <a href="https://example.com">External Link</a>
-</Button>
+// Style a native anchor as a secondary button with custom size
+<a
+  className={buttonVariants({ variant: "secondary", size: "lg" })}
+  href="https://example.com"
+>
+  External Link
+</a>
 ```
 
-**Available components:** `Button`, `Alert` and its parts, `Avatar` and its parts, and all other HeroUI components with root elements support `asChild`.
+**Using BEM classes directly:**
+
+```tsx
+import Link from 'next/link';
+
+// Apply button styles directly using BEM classes
+<Link className="button button--primary" href="/about">
+  About
+</Link>
+```
+
+**Working with Compound Components**
+
+When using a custom root element instead of HeroUI's Root component, child components cannot access context slots. You can manually pass `className` to child components using variant functions or BEM classes:
+
+```tsx
+import { Link, linkVariants } from '@heroui/react';
+import NextLink from 'next/link';
+
+// With custom root - pass className manually
+const slots = linkVariants({ underline: "hover" });
+
+<NextLink className={slots.base()} href="/about">
+  About Page
+  <Link.Icon className={slots.icon()} />
+</NextLink>
+
+<NextLink className="link link--underline-hover" href="/about">
+  About Page
+  <Link.Icon className="link__icon" />
+</NextLink>
+```
+
+This approach works because HeroUI's variant functions and BEM classes can be applied to any element, giving you complete flexibility to style framework components, native elements, or custom components with HeroUI's design system.
 
 ## Direct Class Application
 
-The simplest way to style links or other elements is to apply HeroUI's [BEM](https://getbem.com/) classes directly. This is often simpler than using `asChild` or variant functions.
+The simplest way to style links or other elements is to apply HeroUI's [BEM](https://getbem.com/) classes directly. This approach is straightforward and works with any framework or vanilla HTML.
 
 **With Next.js Link:**
 ```tsx
@@ -56,6 +97,40 @@ import Link from 'next/link';
 - `.button--icon-only` — Icon-only button
 
 This approach works because HeroUI uses [BEM](https://getbem.com/) classes that can be applied to any element. It's perfect when you don't need the component's interactive features (like `onPress` handlers) and just want the visual styling.
+
+## Using Variant Functions
+
+For more control and type safety, use variant functions to apply HeroUI styles to framework-specific components or custom elements.
+
+**With Next.js Link:**
+
+```tsx
+import { Link, linkVariants } from '@heroui/react';
+import NextLink from 'next/link';
+
+const slots = linkVariants({ underline: "hover" });
+
+<NextLink className={slots.base()} href="/about">
+  About Page
+  <Link.Icon className={slots.icon()} />
+</NextLink>
+```
+
+**With Button styles:**
+
+```tsx
+import { buttonVariants } from '@heroui/react';
+import Link from 'next/link';
+
+<Link
+  className={buttonVariants({ variant: "primary", size: "md" })}
+  href="/dashboard"
+>
+  Dashboard
+</Link>
+```
+
+**Available variant functions:** Each component exports its variant function (`buttonVariants`, `chipVariants`, `linkVariants`, `spinnerVariants`, and more). Use them to apply HeroUI's design system to any element while maintaining type safety.
 
 ## Compound Components
 
@@ -146,53 +221,42 @@ import { ButtonRoot } from '@heroui/react';
 
 **Benefits:** All three patterns provide flexibility, customization, control, and consistency. Choose the pattern that fits your codebase.
 
-## Style Variants
+## Mixing Variant Functions
 
-HeroUI exports variant functions that can be applied to any component. Use HeroUI's design system with any element or component.
-
-**Using buttonVariants:**
+You can combine variant functions from different components to create unique styles:
 
 ```tsx
-import { Link, LinkIcon, buttonVariants } from '@heroui/react';
+import { Link, linkVariants, buttonVariants } from '@heroui/react';
 
-// Link styled as a tertiary button
-<Link.Root
-  className={buttonVariants({
-    size: "md",
-    variant: "tertiary",
-    className: "px-3"
-  })}
+// Link styled with button variants
+const linkSlots = linkVariants({ underline: "hover" });
+const buttonStyles = buttonVariants({ variant: "tertiary", size: "md" });
+
+<Link
+  className={`${linkSlots.base()} ${buttonStyles}`}
   href="https://heroui.com"
-  target="_blank"
 >
   HeroUI
-  <LinkIcon className="h-2 w-2" />
-</Link.Root>
-
-// Native anchor styled as primary button
-<a
-  className={buttonVariants({ variant: "primary" })}
-  href="/dashboard"
->
-  Go to Dashboard
-</a>
+</Link>
 ```
-
-**Available variant functions:** Each component exports its variant function (`buttonVariants`, `chipVariants`, `linkVariants`, `spinnerVariants`, and more).
 
 ## Custom Components
 
 Create your own components by composing HeroUI primitives:
 
 ```tsx
-import { Button, Tooltip } from '@heroui/react';
+import { Button, Tooltip, buttonVariants } from '@heroui/react';
 
-// Link button component
-function LinkButton({ href, children, ...props }) {
+// Link button component using variant functions
+function LinkButton({ href, children, variant = "primary", ...props }) {
   return (
-    <Button asChild {...props}>
-      <a href={href}>{children}</a>
-    </Button>
+    <a
+      href={href}
+      className={buttonVariants({ variant, ...props })}
+      {...props}
+    >
+      {children}
+    </a>
   );
 }
 
@@ -286,17 +350,20 @@ type MyAvatarProps = Avatar["RootProps"];
 
 **With Next.js:**
 
-You can use `asChild`:
+Use variant functions for type-safe styling:
 ```tsx
+import { buttonVariants } from '@heroui/react';
 import Link from 'next/link';
-import { Button } from '@heroui/react';
 
-<Button asChild variant="primary">
-  <Link href="/dashboard">Dashboard</Link>
-</Button>
+<Link
+  className={buttonVariants({ variant: "primary" })}
+  href="/dashboard"
+>
+  Dashboard
+</Link>
 ```
 
-Or apply classes directly (simpler):
+Or apply BEM classes directly (simplest):
 ```tsx
 import Link from 'next/link';
 
@@ -307,17 +374,20 @@ import Link from 'next/link';
 
 **With React Router:**
 
-You can use `asChild`:
+Use variant functions:
 ```tsx
+import { buttonVariants } from '@heroui/react';
 import { Link } from 'react-router-dom';
-import { Button } from '@heroui/react';
 
-<Button asChild variant="primary">
-  <Link to="/dashboard">Dashboard</Link>
-</Button>
+<Link
+  className={buttonVariants({ variant: "primary" })}
+  to="/dashboard"
+>
+  Dashboard
+</Link>
 ```
 
-Or apply classes directly (simpler):
+Or apply BEM classes directly (simplest):
 ```tsx
 import { Link } from 'react-router-dom';
 

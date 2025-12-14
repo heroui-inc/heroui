@@ -74,27 +74,27 @@ Adjust the spacing between text and underline with the `underlineOffset` prop:
 
 ### Using with Routing Libraries
 
-Use the `asChild` prop to compose Link with framework-specific links like Next.js:
+Use variant functions to style framework-specific links like Next.js:
 
 ```tsx
-import { Link } from '@heroui/react';
+import { Link, linkVariants } from '@heroui/react';
 import NextLink from 'next/link';
 
 export default function Demo() {
+  const slots = linkVariants({underline: "hover"});
+
   return (
-    <Link asChild underline="hover">
-      <NextLink href="/about">
-        About Page
-        <Link.Icon />
-      </NextLink>
-    </Link>
+    <NextLink className={slots.base()} href="/about">
+      About Page
+      <Link.Icon className={slots.icon()} />
+    </NextLink>
   );
 }
 ```
 
 ### Direct Class Application
 
-Since HeroUI uses [BEM](https://getbem.com/) classes, you can apply Link styles directly to any link element without using `asChild`:
+Since HeroUI uses [BEM](https://getbem.com/) classes, you can apply Link styles directly to any link element:
 
 ```tsx
 import NextLink from 'next/link';
@@ -113,6 +113,7 @@ export default function NativeLink() {
   return (
     <a href="/about" className="link link--underline-always link--offset-2">
       About Page
+      <Link.Icon className="link__icon" />
     </a>
   );
 }
@@ -195,7 +196,6 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `download` | `boolean \| string` | - | Prompts file download instead of navigation |
 | `underline` | `"none" \| "hover" \| "always"` | `"hover"` | Controls underline visibility and behavior |
 | `underlineOffset` | `1 \| 2 \| 3` | `1` | Spacing between text and underline |
-| `asChild` | `boolean` | `false` | Merge props with child element (useful for routing libraries) |
 | `isDisabled` | `boolean` | `false` | Disables pointer and keyboard interaction |
 | `className` | `string` | - | Custom classes merged with the default styles |
 | `children` | `React.ReactNode` | - | Content rendered inside the link |
@@ -206,6 +206,5 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Merge props with child element |
 | `children` | `React.ReactNode` | - | Custom icon element; defaults to the built-in arrow icon when omitted |
 | `className` | `string` | - | Additional CSS classes |

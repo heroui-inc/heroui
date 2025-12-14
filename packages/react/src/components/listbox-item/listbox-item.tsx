@@ -7,7 +7,7 @@ import type {ListBoxItemRenderProps} from "react-aria-components";
 import React, {createContext, useContext} from "react";
 import {ListBoxItem as ListBoxItemPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 
 import {listboxItemVariants} from "./listbox-item.styles";
 
@@ -84,7 +84,7 @@ const ListBoxItemIndicator = ({children, className, ...props}: ListBoxItemIndica
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="listbox-item-indicator"
       data-visible={isSelected || undefined}
       {...props}

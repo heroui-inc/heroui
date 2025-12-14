@@ -15,7 +15,7 @@ import {
 } from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 
 import {disclosureVariants} from "./disclosure.styles";
@@ -63,7 +63,7 @@ const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
 
   return (
     <DisclosureHeadingPrimitive
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
       data-slot="disclosure-heading"
       {...props}
     />
@@ -127,7 +127,7 @@ const DisclosureBody = ({children, className, ...props}: DisclosureBodyContentPr
 
   return (
     <div className={slots?.body({})} data-slot="disclosure-body" {...props}>
-      <div className={slots?.bodyInner({className})}>{children}</div>
+      <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
     </div>
   );
 };
@@ -153,7 +153,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
       {
         ...props,
         "data-expanded": dataAttr(isExpanded),
-        className: slots?.indicator({className}),
+        className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "disclosure-indicator",
       },
     );
@@ -161,7 +161,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
 
   return (
     <IconChevronDown
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-expanded={dataAttr(isExpanded)}
       data-slot="disclosure-indicator"
       {...props}

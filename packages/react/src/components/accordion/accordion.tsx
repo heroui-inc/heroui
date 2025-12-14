@@ -15,7 +15,7 @@ import {
 } from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -34,9 +34,9 @@ const AccordionRoot = ({children, className, variant, ...props}: AccordionRootPr
 
   const content = (
     <DisclosureGroup
+      className={composeTwRenderProps(className, slots.base())}
       data-slot="accordion"
       {...props}
-      className={composeTwRenderProps(className, slots.base())}
     >
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
     </DisclosureGroup>
@@ -46,7 +46,7 @@ const AccordionRoot = ({children, className, variant, ...props}: AccordionRootPr
     <AccordionContext value={{slots}}>
       {variant === "surface" ? (
         // Allows inner components to apply "on-surface" colors for proper contrast
-        <SurfaceContext.Provider value={{variant: "default"}}>{content}</SurfaceContext.Provider>
+        <SurfaceContext value={{variant: "default"}}>{content}</SurfaceContext>
       ) : (
         content
       )}
@@ -64,9 +64,9 @@ const AccordionItem = ({className, ...props}: AccordionItemProps) => {
 
   return (
     <Disclosure
+      className={composeTwRenderProps(className, slots?.item())}
       data-slot="accordion-item"
       {...props}
-      className={composeTwRenderProps(className, slots?.item())}
     >
       {props.children}
     </Disclosure>
@@ -94,7 +94,7 @@ const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorP
       {
         ...props,
         "data-expanded": dataAttr(isExpanded),
-        className: slots?.indicator({className}),
+        className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "accordion-indicator",
       },
     );
@@ -102,7 +102,7 @@ const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorP
 
   return (
     <IconChevronDown
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-indicator"
       {...props}
@@ -122,7 +122,7 @@ const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
 
   return (
     <DisclosureHeading
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
       data-slot="accordion-heading"
       {...props}
     />
@@ -163,7 +163,7 @@ const AccordionBody = ({children, className, ...props}: AccordionBodyProps) => {
 
   return (
     <div className={slots?.body({})} data-slot="accordion-body" {...props}>
-      <div className={slots?.bodyInner({className})}>{children}</div>
+      <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
     </div>
   );
 };
@@ -179,10 +179,10 @@ const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) =>
 
   return (
     <DisclosurePanel
-      {...props}
       className={composeTwRenderProps(className, slots?.panel())}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-panel"
+      {...props}
     >
       {children}
     </DisclosurePanel>

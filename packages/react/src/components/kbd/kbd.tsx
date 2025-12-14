@@ -6,6 +6,8 @@ import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 
+import {composeSlotClassName} from "../../utils/compose";
+
 import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants";
 import {kbdVariants} from "./kbd.styles";
 
@@ -53,7 +55,11 @@ const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
   const {slots} = useContext(KbdContext);
 
   return (
-    <abbr className={slots?.abbr({className})} title={kbdKeysLabelMap[keyValue]} {...props}>
+    <abbr
+      className={composeSlotClassName(slots?.abbr, className)}
+      title={kbdKeysLabelMap[keyValue]}
+      {...props}
+    >
       {kbdKeysMap[keyValue]}
     </abbr>
   );
@@ -71,7 +77,7 @@ const KbdContent = ({children, className, ...props}: KbdContentProps) => {
   const {slots} = useContext(KbdContext);
 
   return (
-    <span className={slots?.content({className})} {...props}>
+    <span className={composeSlotClassName(slots?.content, className)} {...props}>
       {children}
     </span>
   );
