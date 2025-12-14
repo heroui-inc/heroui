@@ -1,7 +1,7 @@
 "use client";
 
+import {Rocket} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function BackdropVariants() {
   const variants = ["opaque", "blur", "transparent"] as const;
@@ -18,7 +18,7 @@ export function BackdropVariants() {
                   <Modal.CloseTrigger />
                   <Modal.Header>
                     <Modal.Icon className="bg-default text-foreground">
-                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                      <Rocket className="size-5" />
                     </Modal.Icon>
                     <Modal.Heading>
                       Backdrop: {variant.charAt(0).toUpperCase() + variant.slice(1)}

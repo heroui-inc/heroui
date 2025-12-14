@@ -1,7 +1,7 @@
 "use client";
 
+import {Check} from "@gravity-ui/icons";
 import {Avatar, Description, Label, ListBox, Surface} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomCheckIcon() {
   return (
@@ -20,9 +20,7 @@ export function CustomCheckIcon() {
             <Description>bob@heroui.com</Description>
           </div>
           <ListBox.ItemIndicator>
-            {({isSelected}) =>
-              isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
-            }
+            {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
           </ListBox.ItemIndicator>
         </ListBox.Item>
         <ListBox.Item id="2" textValue="Fred">
@@ -38,9 +36,7 @@ export function CustomCheckIcon() {
             <Description>fred@heroui.com</Description>
           </div>
           <ListBox.ItemIndicator>
-            {({isSelected}) =>
-              isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
-            }
+            {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
           </ListBox.ItemIndicator>
         </ListBox.Item>
         <ListBox.Item id="3" textValue="Martha">
@@ -56,9 +52,7 @@ export function CustomCheckIcon() {
             <Description>martha@heroui.com</Description>
           </div>
           <ListBox.ItemIndicator>
-            {({isSelected}) =>
-              isSelected ? <Icon className="size-4 text-accent" icon="gravity-ui:check" /> : null
-            }
+            {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
           </ListBox.ItemIndicator>
         </ListBox.Item>
       </ListBox>

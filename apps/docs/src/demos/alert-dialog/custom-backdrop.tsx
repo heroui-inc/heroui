@@ -1,7 +1,7 @@
 "use client";
 
+import {TriangleExclamation} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomBackdrop() {
   return (
@@ -16,7 +16,7 @@ export function CustomBackdrop() {
             <>
               <AlertDialog.Header>
                 <AlertDialog.Icon status="danger">
-                  <Icon className="size-5" icon="gravity-ui:triangle-exclamation" />
+                  <TriangleExclamation className="size-5" />
                 </AlertDialog.Icon>
                 <AlertDialog.Heading>Permanently delete your account?</AlertDialog.Heading>
               </AlertDialog.Header>

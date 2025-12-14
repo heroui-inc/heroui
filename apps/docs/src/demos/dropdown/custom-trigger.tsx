@@ -1,5 +1,5 @@
+import {ArrowRightFromSquare, Gear, Persons} from "@gravity-ui/icons";
 import {Avatar, Dropdown, Label} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomTrigger() {
   return (
@@ -39,19 +39,19 @@ export function CustomTrigger() {
           <Dropdown.Item id="settings" textValue="Settings">
             <div className="flex w-full items-center justify-between gap-2">
               <Label>Settings</Label>
-              <Icon className="size-3.5 text-muted" icon="gravity-ui:gear" />
+              <Gear className="size-3.5 text-muted" />
             </div>
           </Dropdown.Item>
           <Dropdown.Item id="new-project" textValue="New project">
             <div className="flex w-full items-center justify-between gap-2">
               <Label>Create Team</Label>
-              <Icon className="size-3.5 text-muted" icon="gravity-ui:persons" />
+              <Persons className="size-3.5 text-muted" />
             </div>
           </Dropdown.Item>
           <Dropdown.Item id="logout" textValue="Logout" variant="danger">
             <div className="flex w-full items-center justify-between gap-2">
               <Label>Log Out</Label>
-              <Icon className="size-3.5 text-danger" icon="gravity-ui:arrow-right-from-square" />
+              <ArrowRightFromSquare className="size-3.5 text-danger" />
             </div>
           </Dropdown.Item>
         </Dropdown.Menu>

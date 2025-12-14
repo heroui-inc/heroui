@@ -17,8 +17,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -42,19 +42,19 @@
   /* Interactive states */
   /* Focus */
   .radio:focus-visible &,
-  .radio[data-focus-visible] & {
+  .radio[data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover */
   .radio:hover &,
-  .radio[data-hovered] & {
+  .radio[data-hovered="true"] & {
     @apply border-field-border-hover;
   }
 
   /* Hover - only when not selected */
-  .radio:hover:not([aria-checked]):not([data-selected]) &,
-  .radio[data-hovered]:not([aria-checked]):not([data-selected]) & {
+  .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
+  .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
     .radio__indicator:empty::before {
       @apply bg-field-hover;
     }
@@ -62,35 +62,35 @@
 
   /* Pressed */
   .radio:active &,
-  .radio[data-pressed] & {
+  .radio[data-pressed="true"] & {
     @apply scale-95;
   }
 
   /* Selection states */
   /* Selected */
-  .radio[aria-checked] &,
-  .radio[data-selected] & {
+  .radio[aria-checked="true"] &,
+  .radio[data-selected="true"] & {
     @apply border-transparent bg-accent;
   }
 
   /* Selected + Pressed */
-  .radio:active[data-selected] &,
-  .radio[data-pressed][data-selected] & {
+  .radio:active[data-selected="true"] &,
+  .radio[data-pressed="true"][data-selected="true"] & {
     @apply bg-accent-hover;
   }
 
   /* Validation states */
   /* Invalid */
-  .radio[data-invalid] &,
-  .radio[aria-invalid] & {
+  .radio[data-invalid="true"] &,
+  .radio[aria-invalid="true"] & {
     @apply status-invalid-field;
   }
 
   /* Invalid + Selected */
-  .radio[data-invalid][aria-checked] &,
-  .radio[data-invalid][data-selected] &,
-  .radio[aria-invalid][aria-checked] &,
-  .radio[aria-invalid][data-selected] & {
+  .radio[data-invalid="true"][aria-checked="true"] &,
+  .radio[data-invalid="true"][data-selected="true"] &,
+  .radio[aria-invalid="true"][aria-checked="true"] &,
+  .radio[aria-invalid="true"][data-selected="true"] & {
     @apply status-invalid-field;
   }
 }
@@ -126,14 +126,14 @@
 }
 
 /* Selected state */
-.radio[aria-checked] .radio__indicator:empty::before,
-.radio[data-selected] .radio__indicator:empty::before {
+.radio[aria-checked="true"] .radio__indicator:empty::before,
+.radio[data-selected="true"] .radio__indicator:empty::before {
   @apply bg-accent-foreground;
   scale: 0.4286; /* 6px */
 }
 
 /* Selected + Pressed state */
-.radio[data-selected][data-pressed] .radio__indicator:empty::before {
+.radio[data-selected="true"][data-pressed="true"] .radio__indicator:empty::before {
   scale: 0.5714; /* 8px */
 }
 

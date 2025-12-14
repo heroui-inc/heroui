@@ -1,7 +1,7 @@
 "use client";
 
+import {Rocket} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Placements() {
   const placements = ["auto", "top", "center", "bottom"] as const;
@@ -20,7 +20,7 @@ export function Placements() {
                   <Modal.CloseTrigger />
                   <Modal.Header>
                     <Modal.Icon className="bg-default text-foreground">
-                      <Icon className="size-5" icon="gravity-ui:rocket" />
+                      <Rocket className="size-5" />
                     </Modal.Icon>
                     <Modal.Heading>
                       Placement: {placement.charAt(0).toUpperCase() + placement.slice(1)}

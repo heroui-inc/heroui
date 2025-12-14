@@ -1,7 +1,7 @@
 "use client";
 
+import {ChevronsExpandVertical} from "@gravity-ui/icons";
 import {ComboBox, Input, Label, ListBox} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomIndicator() {
   return (
@@ -10,7 +10,7 @@ export function CustomIndicator() {
       <ComboBox.InputGroup>
         <Input placeholder="Search animals..." />
         <ComboBox.Trigger className="size-3">
-          <Icon icon="gravity-ui:chevrons-expand-vertical" />
+          <ChevronsExpandVertical />
         </ComboBox.Trigger>
       </ComboBox.InputGroup>
       <ComboBox.Popover>

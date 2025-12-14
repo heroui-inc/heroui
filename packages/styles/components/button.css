@@ -19,24 +19,24 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Pending state */
-  &[data-pending] {
+  &[data-pending="true"] {
     @apply status-pending;
   }
 
   /* Default active/pressed state - scale transform */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.97);
   }
 
@@ -55,7 +55,7 @@
   }
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.98);
   }
 }
@@ -68,7 +68,7 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.96);
   }
 }
@@ -79,7 +79,7 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-accent-hover;
     }
   }
@@ -90,7 +90,7 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
@@ -101,7 +101,7 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
@@ -112,7 +112,7 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
@@ -123,7 +123,7 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-danger-hover;
     }
   }
@@ -134,7 +134,7 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-danger-soft-hover;
     }
   }

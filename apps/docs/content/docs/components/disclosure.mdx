@@ -17,8 +17,9 @@ import { Disclosure } from '@heroui/react';
 
 ### Usage
 
-<ComponentPreview 
+<ComponentPreview
   name="disclosure-basic"
+  minHeight="440px"
 />
 
 ### Anatomy
@@ -80,15 +81,15 @@ To customize the Disclosure component classes, you can use the `@layer component
   .disclosure {
     @apply relative;
   }
-  
+
   .disclosure__trigger {
     @apply cursor-pointer;
   }
-  
+
   .disclosure__indicator {
     @apply transition-transform duration-300;
   }
-  
+
   .disclosure__content {
     @apply overflow-hidden transition-all;
   }
@@ -116,7 +117,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on trigger
 - **Disabled**: `:disabled` or `[aria-disabled="true"]` on trigger
 - **Hidden**: `[aria-hidden="false"]` on content for visibility
- 
+
 
 ## API Reference
 

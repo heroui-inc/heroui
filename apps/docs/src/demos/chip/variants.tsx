@@ -1,5 +1,5 @@
+import {CircleDashed} from "@gravity-ui/icons";
 import {Chip, Separator} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import React from "react";
 
 export function ChipVariants() {
@@ -37,8 +37,8 @@ export function ChipVariants() {
                       style={{width: "130px"}}
                     >
                       <Chip color={color} size={size} variant={variant}>
-                        <Icon icon="gravity-ui:circle-dashed" />
-                        Label <Icon icon="gravity-ui:circle-dashed" />
+                        <CircleDashed />
+                        Label <CircleDashed />
                       </Chip>
                     </div>
                   ))}

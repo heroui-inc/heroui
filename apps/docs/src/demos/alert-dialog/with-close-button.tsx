@@ -1,7 +1,7 @@
 "use client";
 
+import {CircleInfo} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithCloseButton() {
   return (
@@ -14,7 +14,7 @@ export function WithCloseButton() {
               <AlertDialog.CloseTrigger />
               <AlertDialog.Header>
                 <AlertDialog.Icon status="default">
-                  <Icon className="size-5" icon="gravity-ui:circle-info" />
+                  <CircleInfo className="size-5" />
                 </AlertDialog.Icon>
                 <AlertDialog.Heading>Less critical information</AlertDialog.Heading>
                 <p className="text-sm leading-relaxed text-muted">

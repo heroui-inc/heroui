@@ -1,33 +1,44 @@
 "use client";
 
+import {
+  BellFill,
+  BellSlash,
+  Check,
+  Microphone,
+  MicrophoneSlash,
+  Moon,
+  Power,
+  Sun,
+  VolumeFill,
+  VolumeSlashFill,
+} from "@gravity-ui/icons";
 import {Switch} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithIcons() {
   const icons = {
     check: {
-      off: "gravity-ui:power",
-      on: "gravity-ui:check",
+      off: Power,
+      on: Check,
       selectedControlClass: "bg-green-500/80",
     },
     darkMode: {
-      off: "gravity-ui:moon",
-      on: "gravity-ui:sun",
+      off: Moon,
+      on: Sun,
       selectedControlClass: "",
     },
     microphone: {
-      off: "gravity-ui:microphone",
-      on: "gravity-ui:microphone-slash",
+      off: Microphone,
+      on: MicrophoneSlash,
       selectedControlClass: "bg-red-500/80",
     },
     notification: {
-      off: "gravity-ui:bell-slash",
-      on: "gravity-ui:bell-fill",
+      off: BellSlash,
+      on: BellFill,
       selectedControlClass: "bg-purple-500/80",
     },
     volume: {
-      off: "gravity-ui:volume-fill",
-      on: "gravity-ui:volume-slash-fill",
+      off: VolumeFill,
+      on: VolumeSlashFill,
       selectedControlClass: "bg-blue-500/80",
     },
   };
@@ -41,10 +52,11 @@ export function WithIcons() {
               <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
                 <Switch.Thumb>
                   <Switch.Icon>
-                    <Icon
-                      className={`${isSelected ? "opacity-100" : "opacity-70"} size-3 text-inherit`}
-                      icon={isSelected ? value.on : value.off}
-                    />
+                    {isSelected ? (
+                      <value.on className="size-3 text-inherit opacity-100" />
+                    ) : (
+                      <value.off className="size-3 text-inherit opacity-70" />
+                    )}
                   </Switch.Icon>
                 </Switch.Thumb>
               </Switch.Control>

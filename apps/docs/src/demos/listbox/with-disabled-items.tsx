@@ -1,7 +1,7 @@
 "use client";
 
+import {Pencil, SquarePlus, TrashBin} from "@gravity-ui/icons";
 import {Description, Header, Kbd, Label, ListBox, Separator, Surface} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithDisabledItems() {
   return (
@@ -17,7 +17,7 @@ export function WithDisabledItems() {
           <Header>Actions</Header>
           <ListBox.Item id="new-file" textValue="New file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:square-plus" />
+              <SquarePlus className="size-4 flex-shrink-0 text-muted" />
             </div>
             <div className="flex flex-col">
               <Label>New file</Label>
@@ -30,7 +30,7 @@ export function WithDisabledItems() {
           </ListBox.Item>
           <ListBox.Item id="edit-file" textValue="Edit file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="size-4 flex-shrink-0 text-muted" icon="gravity-ui:pencil" />
+              <Pencil className="size-4 flex-shrink-0 text-muted" />
             </div>
             <div className="flex flex-col">
               <Label>Edit file</Label>
@@ -47,7 +47,7 @@ export function WithDisabledItems() {
           <Header>Danger zone</Header>
           <ListBox.Item id="delete-file" textValue="Delete file" variant="danger">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="size-4 flex-shrink-0 text-danger" icon="gravity-ui:trash-bin" />
+              <TrashBin className="size-4 flex-shrink-0 text-danger" />
             </div>
             <div className="flex flex-col">
               <Label>Delete file</Label>

@@ -1,7 +1,7 @@
 "use client";
 
+import {TrashBin} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomTrigger() {
   return (
@@ -9,7 +9,7 @@ export function CustomTrigger() {
       <AlertDialog.Trigger>
         <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm transition-all hover:bg-surface-secondary hover:shadow">
           <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-danger-soft text-danger-soft-foreground transition-transform group-hover:scale-105">
-            <Icon className="size-6" icon="gravity-ui:trash-bin" />
+            <TrashBin className="size-6" />
           </div>
           <div className="flex flex-1 flex-col gap-0.5">
             <p className="text-sm leading-5 font-semibold text-foreground">Delete Item</p>
@@ -23,7 +23,7 @@ export function CustomTrigger() {
             <>
               <AlertDialog.Header>
                 <AlertDialog.Icon status="danger">
-                  <Icon className="size-5" icon="gravity-ui:trash-bin" />
+                  <TrashBin className="size-5" />
                 </AlertDialog.Icon>
                 <AlertDialog.Heading>Delete this item?</AlertDialog.Heading>
               </AlertDialog.Header>

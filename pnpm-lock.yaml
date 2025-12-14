@@ -177,6 +177,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@gravity-ui/icons':
+        specifier: 2.16.0
+        version: 2.16.0(react@19.2.3)
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -1195,6 +1198,14 @@ packages:
 
   '@formatjs/intl-localematcher@0.6.2':
     resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
+
+  '@gravity-ui/icons@2.16.0':
+    resolution: {integrity: sha512-AMjPSO+7yPpvcCa9k+ZFNOZ+8cmIauLyRMswhoyfQ7SeoJOVzsAa2OP/B+Dd+AZRvzTaeJha4m2iEk93JvAklA==}
+    peerDependencies:
+      react: '*'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -8533,6 +8544,12 @@ snapshots:
   '@formatjs/intl-localematcher@0.6.2':
     dependencies:
       tslib: 2.8.1
+
+  '@gravity-ui/icons@2.16.0(react@19.2.3)':
+    dependencies:
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.2.3
 
   '@humanfs/core@0.19.1': {}
 

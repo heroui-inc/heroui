@@ -2,7 +2,7 @@
 .input-otp {
   @apply relative flex items-center gap-2;
 
-  &[data-disabled] {
+  &[data-disabled="true"] {
     @apply cursor-not-allowed opacity-50;
   }
 }
@@ -34,29 +34,29 @@
   /* Hover */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
   }
 
   /* Active/Focus */
-  &[data-active] {
+  &[data-active="true"] {
     @apply z-10 bg-field-focus status-focused-field;
   }
 
   /* Filled */
-  &[data-filled] {
+  &[data-filled="true"] {
     @apply bg-field-focus;
   }
 
   /* Disabled */
-  &[data-disabled] {
+  &[data-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Invalid */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
@@ -91,16 +91,16 @@
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-on-surface-hover;
     }
   }
 
-  &[data-active] {
+  &[data-active="true"] {
     background-color: var(--color-on-surface-focus);
   }
 
-  &[data-filled] {
+  &[data-filled="true"] {
     background-color: var(--color-on-surface-focus);
   }
 }

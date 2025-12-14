@@ -1,7 +1,7 @@
 "use client";
 
+import {ArrowUpFromLine, CircleInfo, TriangleExclamation} from "@gravity-ui/icons";
 import {AlertDialog, Button, Kbd} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function DismissBehavior() {
   return (
@@ -29,7 +29,7 @@ export function DismissBehavior() {
                 <>
                   <AlertDialog.Header>
                     <AlertDialog.Icon status="danger">
-                      <Icon className="size-5" icon="gravity-ui:triangle-exclamation" />
+                      <TriangleExclamation className="size-5" />
                     </AlertDialog.Icon>
                     <AlertDialog.Heading>Delete this project?</AlertDialog.Heading>
                   </AlertDialog.Header>
@@ -68,7 +68,7 @@ export function DismissBehavior() {
                 <>
                   <AlertDialog.Header>
                     <AlertDialog.Icon status="success">
-                      <Icon className="size-5" icon="gravity-ui:arrow-up-from-line" />
+                      <ArrowUpFromLine className="size-5" />
                     </AlertDialog.Icon>
                     <AlertDialog.Heading>Update available</AlertDialog.Heading>
                   </AlertDialog.Header>
@@ -110,7 +110,7 @@ export function DismissBehavior() {
                 <>
                   <AlertDialog.Header>
                     <AlertDialog.Icon status="accent">
-                      <Icon className="size-5" icon="gravity-ui:circle-info" />
+                      <CircleInfo className="size-5" />
                     </AlertDialog.Icon>
                     <AlertDialog.Heading>Pro tip</AlertDialog.Heading>
                   </AlertDialog.Header>

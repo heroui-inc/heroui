@@ -1,5 +1,6 @@
 "use client";
 
+import {QrCode} from "@gravity-ui/icons";
 import {Button, Disclosure, DisclosureGroup, Separator} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
@@ -22,7 +23,7 @@ export function Basic() {
                 })}
               >
                 <div className="flex w-full items-center justify-start gap-2">
-                  <Icon icon="gravity-ui:qr-code" />
+                  <QrCode />
                   Preview HeroUI Native
                 </div>
                 <Disclosure.Indicator className="text-muted" />

@@ -8,11 +8,12 @@ import {ComponentPreviewContainer} from "./component-preview-container";
 import {ComponentSource} from "./component-source";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
+  name: string;
   align?: "center" | "start" | "end";
   isBgSolid?: boolean;
   description?: string;
   hideCode?: boolean;
-  name: string;
+  minHeight?: string;
 }
 
 export function ComponentPreview({
@@ -21,6 +22,7 @@ export function ComponentPreview({
   description,
   hideCode = false,
   isBgSolid = false,
+  minHeight,
   name,
   ...props
 }: ComponentPreviewProps) {
@@ -46,6 +48,7 @@ export function ComponentPreview({
       description={description}
       hideCode={hideCode}
       isBgSolid={isBgSolid}
+      minHeight={minHeight}
       name={name}
       {...props}
     >

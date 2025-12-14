@@ -1,5 +1,5 @@
+import {CircleCheckFill, CircleQuestion} from "@gravity-ui/icons";
 import {Avatar, Chip, Tooltip} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function TooltipCustomTrigger() {
   return (
@@ -26,7 +26,7 @@ export function TooltipCustomTrigger() {
       <Tooltip delay={0}>
         <Tooltip.Trigger aria-label="Status chip">
           <Chip color="success">
-            <Icon icon="gravity-ui:circle-check-fill" width={12} />
+            <CircleCheckFill width={12} />
             Active
           </Chip>
         </Tooltip.Trigger>
@@ -42,7 +42,7 @@ export function TooltipCustomTrigger() {
       <Tooltip delay={0}>
         <Tooltip.Trigger aria-label="Info icon">
           <div className="rounded-full bg-accent-soft p-2">
-            <Icon className="text-accent" icon="gravity-ui:circle-question" />
+            <CircleQuestion className="text-accent" />
           </div>
         </Tooltip.Trigger>
         <Tooltip.Content showArrow>
