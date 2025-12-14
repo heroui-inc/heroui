@@ -1,5 +1,14 @@
 # @heroui/kbd
 
+## 2.2.23
+
+### Patch Changes
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`a37912e`](https://github.com/heroui-inc/heroui/commit/a37912e17f00cb2e8f11c012b1b412e4152e791a), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99), [`53e27bb`](https://github.com/heroui-inc/heroui/commit/53e27bb6f8acd8e1c422ad9aa352da0ac8d9f207)]:
+  - @heroui/system-rsc@2.3.21
+
 ## 2.2.22
 
 ### Patch Changes
