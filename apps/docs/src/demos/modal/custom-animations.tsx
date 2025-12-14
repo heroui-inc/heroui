@@ -1,7 +1,8 @@
 "use client";
 
+import {ArrowUpFromLine, Sparkles} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
+import React from "react";
 
 export function CustomAnimations() {
   const animations = [
@@ -17,7 +18,7 @@ export function CustomAnimations() {
         "data-[exiting]:ease-out-quart",
       ].join(" "),
       description: "Smooth scale animation with elastic spring-like easing",
-      icon: "gravity-ui:sparkles",
+      icon: Sparkles,
       name: "Smooth Scale",
     },
     {
@@ -32,7 +33,7 @@ export function CustomAnimations() {
         "data-[exiting]:ease-in-quad",
       ].join(" "),
       description: "Gentle upward slide with seamless fade transition",
-      icon: "gravity-ui:arrow-up-from-line",
+      icon: ArrowUpFromLine,
       name: "Slide Up",
     },
   ];
@@ -51,7 +52,7 @@ export function CustomAnimations() {
                 <>
                   <Modal.Header>
                     <Modal.Icon className="bg-default text-foreground">
-                      <Icon className="size-5" icon={icon} />
+                      {React.createElement(icon, {className: "size-5"})}
                     </Modal.Icon>
                     <Modal.Heading>{name} Animation</Modal.Heading>
                   </Modal.Header>
