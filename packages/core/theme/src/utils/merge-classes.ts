@@ -1,6 +1,6 @@
 import type {SlotsToClasses} from "./types";
 
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 /**
  * Merges two sets of class names for each slot in a component.
@@ -19,7 +19,7 @@ export const mergeClasses = <T extends SlotsToClasses<string>, P extends SlotsTo
   return Array.from(keys).reduce(
     (acc, key) => ({
       ...acc,
-      [key]: clsx(itemClasses?.[key], itemPropsClasses?.[key]),
+      [key]: cn(itemClasses?.[key], itemPropsClasses?.[key]),
     }),
     {} as T,
   );

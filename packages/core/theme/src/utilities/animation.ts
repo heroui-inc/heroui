@@ -1,8 +1,9 @@
 export default {
   /** Animation Utilities */
   ".spinner-bar-animation": {
+    animation: "fade-out 1.2s linear infinite",
     "animation-delay": "calc(-1.2s + (0.1s * var(--bar-index)))",
-    transform: "rotate(calc(30deg * var(--bar-index)))translate(140%)",
+    transform: "rotate(calc(30deg * var(--bar-index))) translate(140%)",
   },
   ".spinner-dot-animation": {
     "animation-delay": "calc(250ms * var(--dot-index))",

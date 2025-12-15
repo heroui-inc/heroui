@@ -41,7 +41,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["inside", "outside", "outside-left"],
+      options: ["inside", "outside", "outside-left", "outside-top"],
     },
     isDisabled: {
       control: {
@@ -109,6 +109,7 @@ const LabelPlacementTemplate = (args) => (
         <NumberInput {...args} description="inside" />
         <NumberInput {...args} description="outside" labelPlacement="outside" />
         <NumberInput {...args} description="outside-left" labelPlacement="outside-left" />
+        <NumberInput {...args} description="outside-top" labelPlacement="outside-top" />
       </div>
     </div>
     <div className="flex flex-col gap-3">
@@ -125,6 +126,12 @@ const LabelPlacementTemplate = (args) => (
           {...args}
           description="outside-left"
           labelPlacement="outside-left"
+          placeholder="Enter a number"
+        />
+        <NumberInput
+          {...args}
+          description="outside-top"
+          labelPlacement="outside-top"
           placeholder="Enter a number"
         />
       </div>

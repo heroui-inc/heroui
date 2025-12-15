@@ -1,5 +1,13 @@
 # @heroui/link
 
+## 2.2.24
+
+### Patch Changes
+
+- [#5933](https://github.com/heroui-inc/heroui/pull/5933) [`66ef76e`](https://github.com/heroui-inc/heroui/commit/66ef76e823ed6329b1d2e3c3b9d83721db12fdcf) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - Fix an issue where the useHref was not being applied correctly (#5925, #5431, #5600)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
 ## 2.2.23
 
 ### Patch Changes

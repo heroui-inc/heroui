@@ -1,6 +1,6 @@
 {
   "name": "@heroui/theme",
-  "version": "2.4.23",
+  "version": "2.4.24",
   "description": "The default theme for HeroUI components",
   "keywords": [
     "theme",
@@ -50,9 +50,8 @@
     "color2k": "^2.0.3",
     "deepmerge": "4.3.1",
     "flat": "^5.0.2",
-    "clsx": "^1.2.1",
-    "tailwind-variants": "3.1.1",
-    "tailwind-merge": "3.3.1",
+    "tailwind-variants": "3.2.2",
+    "tailwind-merge": "3.4.0",
     "@heroui/shared-utils": "workspace:*"
   },
   "peerDependencies": {

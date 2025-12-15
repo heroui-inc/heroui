@@ -4,11 +4,11 @@ import type {Key} from "react";
 import type {MenuItemProps} from "./menu-item";
 import type {MenuSectionBaseProps} from "./base/menu-section-base";
 
-import {menuSection} from "@heroui/theme";
+import {menuSection, cn} from "@heroui/theme";
 import {useMenuSection} from "@react-aria/menu";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
-import {clsx, mergeProps} from "@heroui/shared-utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {Divider} from "@heroui/divider";
 
 import MenuItem from "./menu-item";
@@ -72,8 +72,8 @@ const MenuSection = forwardRef<"li", MenuSectionProps>(
 
     const slots = useMemo(() => menuSection(), []);
 
-    const baseStyles = clsx(classNames?.base, className);
-    const dividerStyles = clsx(classNames?.divider, dividerProps?.className);
+    const baseStyles = cn(classNames?.base, className);
+    const dividerStyles = cn(classNames?.divider, dividerProps?.className);
 
     const {itemProps, headingProps, groupProps} = useMenuSection({
       heading: item.rendered,

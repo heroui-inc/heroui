@@ -6,7 +6,7 @@ import {HexColorInput, HexColorPicker} from "react-colorful";
 import Values from "values.js";
 import {readableColor} from "color2k";
 import {useTheme} from "next-themes";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {colorValuesToRgb, getColorWeight} from "../utils/colors";
 
@@ -49,7 +49,7 @@ export function ColorPicker({hexColor, type, onChange, onClose}: ColorPickerProp
           <Button
             fullWidth
             aria-label={`Change ${type} color`}
-            className={clsx(
+            className={cn(
               getColor(type),
               "rounded-lg min-w-9 w-9 h-9",
               "border border-black/10 dark:border-white/10",

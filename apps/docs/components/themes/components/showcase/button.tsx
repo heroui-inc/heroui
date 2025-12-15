@@ -3,7 +3,7 @@ import type {Border} from "../../types";
 
 import {cloneElement} from "react";
 import {Button as HeroUIButton} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
@@ -28,7 +28,7 @@ const SectionBase = ({
   return (
     <HeroUIButton
       key={color}
-      className={clsx(className, "capitalize")}
+      className={cn(className, "capitalize")}
       color={color}
       isDisabled={isDisabled}
       radius={radius}
@@ -74,7 +74,7 @@ const Section = ({
       {variants.map((variant) => (
         <SectionBase
           key={variant}
-          className={clsx(
+          className={cn(
             className,
             variant === "bordered" || variant === "faded" || variant === "ghost" ? borderClass : "",
           )}

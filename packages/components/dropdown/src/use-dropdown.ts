@@ -9,8 +9,8 @@ import type {CollectionElement} from "@react-types/shared";
 import {useProviderContext} from "@heroui/system";
 import {useMenuTriggerState} from "@react-stately/menu";
 import {useMenuTrigger} from "@react-aria/menu";
-import {dropdown} from "@heroui/theme";
-import {clsx, mergeProps} from "@heroui/shared-utils";
+import {dropdown, cn} from "@heroui/theme";
+import {mergeProps} from "@heroui/shared-utils";
 import {mergeRefs} from "@heroui/react-utils";
 import {useMemo, useRef} from "react";
 
@@ -155,7 +155,7 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
       classNames: {
         ...classNamesProp,
         ...props.classNames,
-        content: clsx(styles, classNamesProp?.content, props.className),
+        content: cn(styles, classNamesProp?.content, props.className),
       },
     };
   };

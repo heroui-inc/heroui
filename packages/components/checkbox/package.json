@@ -1,6 +1,6 @@
 {
   "name": "@heroui/checkbox",
-  "version": "2.3.27",
+  "version": "2.3.28",
   "description": "Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.",
   "keywords": [
     "checkbox"
@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "@heroui/system": ">=2.4.18",
-    "@heroui/theme": ">=2.4.17",
+    "@heroui/theme": ">=2.4.23",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },

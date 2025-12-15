@@ -1,4 +1,4 @@
-import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
+import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@heroui/react";
 
 function generateRows(count) {
   return Array.from({length: count}, (_, index) => ({

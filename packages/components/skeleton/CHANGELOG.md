@@ -1,5 +1,13 @@
 # @heroui/skeleton
 
+## 2.2.18
+
+### Patch Changes
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- [#5916](https://github.com/heroui-inc/heroui/pull/5916) [`bc4c982`](https://github.com/heroui-inc/heroui/commit/bc4c9826097a1014939b691425d30eff998d1e2e) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - fixed skeleton shimmer animation not respecting disableAnimation prop (#5915)
+
 ## 2.2.17
 
 ### Patch Changes

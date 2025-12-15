@@ -69,9 +69,11 @@ const tabs = tv({
       "z-0",
       "bg-white",
       "will-change-[transform,width,height]",
-      "transition-[left,top,width,height]",
-      "duration-250",
-      "ease-out",
+      "invisible",
+      "data-[initialized=true]:visible",
+      "data-[animated=true]:transition-[left,top,width,height]",
+      "data-[animated=true]:duration-250",
+      "data-[animated=true]:ease-out",
     ],
     panel: [
       "py-3",
@@ -85,12 +87,9 @@ const tabs = tv({
   },
   variants: {
     variant: {
-      solid: {
-        cursor: "inset-0",
-      },
+      solid: {},
       light: {
         tabList: "bg-transparent dark:bg-transparent",
-        cursor: "inset-0",
       },
       underlined: {
         tabList: "bg-transparent dark:bg-transparent",
@@ -98,7 +97,6 @@ const tabs = tv({
       },
       bordered: {
         tabList: "bg-transparent dark:bg-transparent border-medium border-default-200 shadow-xs",
-        cursor: "inset-0",
       },
     },
     color: {

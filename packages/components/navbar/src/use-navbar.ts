@@ -5,9 +5,9 @@ import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {navbar} from "@heroui/theme";
+import {navbar, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useScrollPosition} from "@heroui/use-scroll-position";
 import {useResizeObserver} from "@heroui/use-resize";
 import {useControlledState} from "@react-stately/utils";
@@ -186,7 +186,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
     [objectToDeps(variantProps), disableAnimation, shouldHideOnScroll],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   useScrollPosition({
     elementRef: parentRef,
@@ -208,7 +208,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
     "data-hidden": dataAttr(isHidden),
     "data-menu-open": dataAttr(isMenuOpen),
     ref: domRef,
-    className: slots.base({class: clsx(baseStyles, props?.className)}),
+    className: slots.base({class: cn(baseStyles, props?.className)}),
     style: {
       "--navbar-height": typeof height === "number" ? `${height}px` : height,
       ...otherProps?.style,
@@ -219,7 +219,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
   const getWrapperProps: PropGetter = (props = {}) => ({
     ...props,
     "data-menu-open": dataAttr(isMenuOpen),
-    className: slots.wrapper({class: clsx(classNames?.wrapper, props?.className)}),
+    className: slots.wrapper({class: cn(classNames?.wrapper, props?.className)}),
   });
 
   return {

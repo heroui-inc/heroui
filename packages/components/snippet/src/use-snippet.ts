@@ -5,10 +5,10 @@ import type {TooltipProps} from "@heroui/tooltip";
 import type {ButtonProps} from "@heroui/button";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {snippet} from "@heroui/theme";
+import {snippet, cn} from "@heroui/theme";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {useClipboard} from "@heroui/use-clipboard";
 import {useFocusRing} from "@react-aria/focus";
 import {useMemo, useCallback, useRef} from "react";
@@ -186,7 +186,7 @@ export function useSnippet(originalProps: UseSnippetProps) {
     return str ? `${str} ` : "";
   }, [symbol]);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getSnippetProps = useCallback<PropGetter>(
     () => ({
@@ -243,7 +243,7 @@ export function useSnippet(originalProps: UseSnippetProps) {
         ...copyButtonProps,
         "data-copied": dataAttr(copied),
         className: slots.copyButton({
-          class: clsx(classNames?.copyButton),
+          class: cn(classNames?.copyButton),
         }),
       }) as ButtonProps,
     [

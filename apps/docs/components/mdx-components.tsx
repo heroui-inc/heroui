@@ -1,6 +1,6 @@
 import type {Language} from "prism-react-renderer";
 
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import * as Components from "@heroui/react";
 import NextImage from "next/image";
 import {usePostHog} from "posthog-js/react";
@@ -37,7 +37,7 @@ const Table: React.FC<{children?: React.ReactNode}> = ({children}) => {
 const Thead: React.FC<{children?: React.ReactNode}> = ({children}) => {
   return (
     <thead
-      className={clsx(
+      className={cn(
         "[&>tr]:h-12",
         "[&>tr>th]:py-0",
         "[&>tr>th]:align-middle",
@@ -95,7 +95,7 @@ const LinkedHeading: React.FC<LinkedHeadingProps> = ({
 
   return (
     <Component
-      className={clsx({"linked-heading": linked}, linked ? {} : className)}
+      className={cn({"linked-heading": linked}, linked ? {} : className)}
       data-id={id}
       data-level={level}
       data-name={props.children}
@@ -118,7 +118,7 @@ const List: React.FC<{children?: React.ReactNode}> = ({children}) => {
 const InlineCode = ({children, className}: {children?: React.ReactNode; className?: string}) => {
   return (
     <Components.Code
-      className={clsx(
+      className={cn(
         'p-0 relative before:content-["`"] after:content-["`"] font-semibold font-mono text-small rounded-md text-default-900 dark:text-default-500 bg-transparent',
         className,
       )}
@@ -152,7 +152,7 @@ const Code = ({
       fullWidth
       hideSymbol
       classNames={{
-        base: clsx(
+        base: cn(
           "px-0 bg-code-background text-code-foreground",
           {
             "items-start": isMultiLine,
@@ -220,7 +220,7 @@ const InlineCodeChip = ({
 }) => {
   return (
     <InlineCode
-      className={clsx(
+      className={cn(
         "before:hidden after:hidden text-tiny rounded-md text-default-600 bg-default-100 dark:bg-default-100/80 px-1.5 py-0.5",
         className,
       )}

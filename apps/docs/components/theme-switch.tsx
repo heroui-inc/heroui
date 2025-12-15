@@ -6,7 +6,7 @@ import type {SwitchProps} from "@heroui/react";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {useSwitch} from "@heroui/react";
 import {useTheme} from "next-themes";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {useIsSSR} from "@react-aria/ssr";
 import {usePostHog} from "posthog-js/react";
 
@@ -50,7 +50,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({className, classNames}) => {
   return (
     <Component
       {...getBaseProps({
-        className: clsx(
+        className: cn(
           "p-1 w-8 h-8 transition-opacity hover:opacity-80 cursor-pointer",
           className,
           classNames?.base,
@@ -69,7 +69,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({className, classNames}) => {
       <div
         {...getWrapperProps()}
         className={slots.wrapper({
-          class: clsx(
+          class: cn(
             [
               "w-auto h-auto",
               "bg-transparent",

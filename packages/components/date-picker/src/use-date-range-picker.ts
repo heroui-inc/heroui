@@ -17,7 +17,7 @@ import {useLabelPlacement, useProviderContext} from "@heroui/system";
 import {useMemo, useRef, useEffect} from "react";
 import {useDateRangePickerState} from "@react-stately/datepicker";
 import {useDateRangePicker as useAriaDateRangePicker} from "@react-aria/datepicker";
-import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {dateRangePicker, dateInput, cn} from "@heroui/theme";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
@@ -155,7 +155,10 @@ export function useDateRangePicker<T extends DateValue>({
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   /**
    * ------------------------------
@@ -175,10 +178,10 @@ export function useDateRangePicker<T extends DateValue>({
       maxValue: timeMaxValue,
       classNames: {
         base: slots.timeInput({
-          class: clsx(classNames?.timeInput, userTimeInputProps?.classNames?.base),
+          class: cn(classNames?.timeInput, userTimeInputProps?.classNames?.base),
         }),
         label: slots.timeInputLabel({
-          class: clsx(classNames?.timeInputLabel, userTimeInputProps?.classNames?.label),
+          class: cn(classNames?.timeInputLabel, userTimeInputProps?.classNames?.label),
         }),
       },
     } as TimeInputProps;
@@ -197,10 +200,10 @@ export function useDateRangePicker<T extends DateValue>({
       maxValue: timeMaxValue,
       classNames: {
         base: slots.timeInput({
-          class: clsx(classNames?.timeInput, userTimeInputProps?.classNames?.base),
+          class: cn(classNames?.timeInput, userTimeInputProps?.classNames?.base),
         }),
         label: slots.timeInputLabel({
-          class: clsx(classNames?.timeInputLabel, userTimeInputProps?.classNames?.label),
+          class: cn(classNames?.timeInputLabel, userTimeInputProps?.classNames?.label),
         }),
       },
     } as TimeInputProps;
@@ -215,7 +218,7 @@ export function useDateRangePicker<T extends DateValue>({
       triggerRef: popoverTriggerRef,
       classNames: {
         content: slots.popoverContent({
-          class: clsx(
+          class: cn(
             classNames?.popoverContent,
             slotsProps.popoverProps?.classNames?.["content"],
             props.className,
@@ -268,7 +271,7 @@ export function useDateRangePicker<T extends DateValue>({
    * ------------------------------
    */
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const dateInputSlots = useMemo(
     () =>
@@ -297,7 +300,7 @@ export function useDateRangePicker<T extends DateValue>({
         maxWidth: "fit-content",
       },
       className: dateInputSlots.input({
-        class: clsx(classNames?.input, props?.className),
+        class: cn(classNames?.input, props?.className),
       }),
     } as DateRangePickerFieldProps;
   };
@@ -316,7 +319,7 @@ export function useDateRangePicker<T extends DateValue>({
       "data-open": dataAttr(state.isOpen),
       classNames,
       className: dateInputSlots.input({
-        class: clsx(classNames?.input, props?.className),
+        class: cn(classNames?.input, props?.className),
       }),
     } as DateRangePickerFieldProps;
   };
@@ -327,7 +330,7 @@ export function useDateRangePicker<T extends DateValue>({
       ...labelProps,
       "data-slot": "label",
       className: dateInputSlots.label({
-        class: clsx(classNames?.label, props?.className),
+        class: cn(classNames?.label, props?.className),
       }),
     };
   };
@@ -361,7 +364,7 @@ export function useDateRangePicker<T extends DateValue>({
       ...props,
       "data-slot": "helper-wrapper",
       className: dateInputSlots.helperWrapper({
-        class: clsx(classNames?.helperWrapper, props?.className),
+        class: cn(classNames?.helperWrapper, props?.className),
       }),
     };
   };
@@ -372,7 +375,7 @@ export function useDateRangePicker<T extends DateValue>({
       ...errorMessageProps,
       "data-slot": "error-message",
       className: dateInputSlots.errorMessage({
-        class: clsx(classNames?.errorMessage, props?.className),
+        class: cn(classNames?.errorMessage, props?.className),
       }),
     };
   };
@@ -383,7 +386,7 @@ export function useDateRangePicker<T extends DateValue>({
       ...descriptionProps,
       "data-slot": "description",
       className: dateInputSlots.description({
-        class: clsx(classNames?.description, props?.className),
+        class: cn(classNames?.description, props?.className),
       }),
     };
   };
