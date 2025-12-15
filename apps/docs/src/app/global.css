@@ -158,7 +158,6 @@
   }
 
   & > div {
-    @apply pl-4;
     width: 100% !important;
   }
 
@@ -236,6 +235,17 @@
   @media (min-width: 48rem) {
     --fd-sidebar-width: 250px;
   }
+}
+
+#nd-notebook-layout {
+  grid-template:
+    ". header header header ."
+    ". sidebar toc-popover toc-popover ."
+    ". sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(
+      0,
+      calc(var(--fd-layout-width, 97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))
+    )
+    var(--fd-toc-width) minmax(min-content, 1fr) !important;
 }
 
 #nd-page {
