@@ -854,3 +854,46 @@ export const Placements = {
     </div>
   ),
 };
+
+// -----------------------------------------------------------------------------
+// Regression: Dropdown auto-closes when child onAction updates parent state
+// Uses DropdownTrigger + DropdownMenu (no Popover)
+// -----------------------------------------------------------------------------
+
+export const Regression_OnActionUpdatesParentState_TriggerMenu = {
+  name: "Regression / onAction updates parent state (Trigger + Menu)",
+  render: (args: DropdownProps) => {
+    function ChildDropdown({value, setValue}: {value: string; setValue: (value: string) => void}) {
+      return (
+        <Dropdown {...args}>
+          <DropdownTrigger>
+            <Button>Current: {value}</Button>
+          </DropdownTrigger>
+
+          <DropdownMenu
+            aria-label="Theme"
+            onAction={(key) => {
+              // Child updates parent state (this used to break auto-close)
+              setValue(key as string);
+            }}
+          >
+            <DropdownItem key="light">Light</DropdownItem>
+            <DropdownItem key="dark">Dark</DropdownItem>
+            <DropdownItem key="system">System</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      );
+    }
+
+    function Parent() {
+      const [value, setValue] = React.useState("light");
+
+      return <ChildDropdown setValue={setValue} value={value} />;
+    }
+
+    return <Parent />;
+  },
+  args: {
+    ...defaultProps,
+  },
+};

@@ -131,15 +131,6 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
     [className],
   );
 
-  const onMenuAction = (menuCloseOnSelect?: boolean) => {
-    if (menuCloseOnSelect !== undefined && !menuCloseOnSelect) {
-      return;
-    }
-    if (closeOnSelect) {
-      state.close();
-    }
-  };
-
   const getPopoverProps: PropGetter = (props = {}) => {
     const popoverProps = mergeProps(otherProps, props);
 
@@ -172,18 +163,23 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
     props?: Partial<MenuProps<T>>,
     _ref: Ref<any> | null | undefined = null,
   ) => {
+    const userOnAction = props?.onAction;
+
     return {
       ref: mergeRefs(_ref, menuRef),
       menuProps,
       closeOnSelect,
-      ...mergeProps(props, {
-        onAction: (key: any, item?: any) => {
-          const closeOnSelect = getCloseOnSelect(props, key, item);
+      ...props,
+      onAction: (key: any, item?: any) => {
+        const resolvedCloseOnSelect = getCloseOnSelect(props, key, item);
 
-          onMenuAction(closeOnSelect);
-        },
-        onClose: state.close,
-      }),
+        if (resolvedCloseOnSelect !== false && closeOnSelect) {
+          state.close();
+        }
+
+        userOnAction?.(key);
+      },
+      onClose: state.close,
     } as MenuProps;
   };
 
