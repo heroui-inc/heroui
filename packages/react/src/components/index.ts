@@ -14,6 +14,7 @@ export * from "./chip";
 export * from "./close-button";
 export * from "./combobox";
 export * from "./date-field";
+export * from "./date-input-group";
 export * from "./disclosure";
 export * from "./disclosure-group";
 export * from "./error-message";

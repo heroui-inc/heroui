@@ -1,57 +1,25 @@
 import type {ComponentProps} from "react";
 
-import {
-  DateFieldGroup,
-  DateFieldInput,
-  DateFieldPrefix,
-  DateFieldRoot,
-  DateFieldSegment,
-  DateFieldSuffix,
-} from "./date-field";
+import {DateFieldRoot} from "./date-field";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const DateField = Object.assign(DateFieldRoot, {
   Root: DateFieldRoot,
-  Group: DateFieldGroup,
-  Input: DateFieldInput,
-  Segment: DateFieldSegment,
-  Prefix: DateFieldPrefix,
-  Suffix: DateFieldSuffix,
 });
 
 export type DateField = {
   Props: ComponentProps<typeof DateFieldRoot>;
   RootProps: ComponentProps<typeof DateFieldRoot>;
-  GroupProps: ComponentProps<typeof DateFieldGroup>;
-  InputProps: ComponentProps<typeof DateFieldInput>;
-  SegmentProps: ComponentProps<typeof DateFieldSegment>;
-  PrefixProps: ComponentProps<typeof DateFieldPrefix>;
-  SuffixProps: ComponentProps<typeof DateFieldSuffix>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {
-  DateFieldGroup,
-  DateFieldInput,
-  DateFieldPrefix,
-  DateFieldRoot,
-  DateFieldSegment,
-  DateFieldSuffix,
-};
+export {DateFieldRoot};
 
-export type {
-  DateFieldRootProps,
-  DateFieldRootProps as DateFieldProps,
-  DateFieldGroupProps,
-  DateFieldInputProps,
-  DateFieldSegmentProps,
-  DateFieldPrefixProps,
-  DateFieldSuffixProps,
-} from "./date-field";
+export type {DateFieldRootProps, DateFieldRootProps as DateFieldProps} from "./date-field";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants
