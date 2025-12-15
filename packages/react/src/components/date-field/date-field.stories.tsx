@@ -281,7 +281,7 @@ export const FormExample: Story = {
       <Form className="flex w-[280px] flex-col gap-4" onSubmit={handleSubmit}>
         <DateField
           isRequired
-          className="w-[256px]"
+          className="w-full"
           isInvalid={isInvalid}
           minValue={todayDate}
           name="date"
