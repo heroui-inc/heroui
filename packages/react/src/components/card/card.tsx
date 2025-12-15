@@ -4,9 +4,9 @@ import type {CardVariants} from "./card.styles";
 import type {SurfaceVariants} from "../surface";
 import type {ComponentPropsWithRef} from "react";
 
-import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 
+import {composeSlotClassName} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {cardVariants} from "./card.styles";
@@ -22,24 +22,15 @@ const CardContext = createContext<CardContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Card Root
  * -----------------------------------------------------------------------------------------------*/
-interface CardRootProps extends ComponentPropsWithRef<"div">, CardVariants {
-  asChild?: boolean;
-}
+interface CardRootProps extends ComponentPropsWithRef<"div">, CardVariants {}
 
-const CardRoot = ({
-  asChild = false,
-  children,
-  className,
-  variant = "default",
-  ...props
-}: CardRootProps) => {
+const CardRoot = ({children, className, variant = "default", ...props}: CardRootProps) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
-  const Comp = asChild ? Slot : "div";
 
   const content = (
-    <Comp className={slots.base({className})} data-slot="card" {...props}>
+    <div className={slots.base({className})} data-slot="card" {...props}>
       {children}
-    </Comp>
+    </div>
   );
 
   return (
@@ -48,13 +39,13 @@ const CardRoot = ({
         content
       ) : (
         // Allows inner components to apply "on-surface" colors for proper contrast
-        <SurfaceContext.Provider
+        <SurfaceContext
           value={{
             variant: variant as SurfaceVariants["variant"],
           }}
         >
           {content}
-        </SurfaceContext.Provider>
+        </SurfaceContext>
       )}
     </CardContext>
   );
@@ -63,73 +54,86 @@ const CardRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Card Header
  * -----------------------------------------------------------------------------------------------*/
-interface CardHeaderProps extends ComponentPropsWithRef<"div"> {
-  asChild?: boolean;
-}
+interface CardHeaderProps extends ComponentPropsWithRef<"div"> {}
 
-const CardHeader = ({asChild = false, className, ...props}: CardHeaderProps) => {
+const CardHeader = ({className, ...props}: CardHeaderProps) => {
   const {slots} = useContext(CardContext);
-  const Comp = asChild ? Slot : "div";
 
-  return <Comp className={slots?.header({className})} data-slot="card-header" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.header, className)}
+      data-slot="card-header"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Card Title
  * -----------------------------------------------------------------------------------------------*/
-interface CardTitleProps extends ComponentPropsWithRef<"h3"> {
-  asChild?: boolean;
-}
+interface CardTitleProps extends ComponentPropsWithRef<"h3"> {}
 
-const CardTitle = ({asChild = false, className, ...props}: CardTitleProps) => {
+const CardTitle = ({children, className, ...props}: CardTitleProps) => {
   const {slots} = useContext(CardContext);
-  const Comp = asChild ? Slot : "h3";
 
-  return <Comp className={slots?.title({className})} data-slot="card-title" {...props} />;
+  return (
+    <h3 className={composeSlotClassName(slots?.title, className)} data-slot="card-title" {...props}>
+      {children}
+    </h3>
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Card Description
  * -----------------------------------------------------------------------------------------------*/
-interface CardDescriptionProps extends ComponentPropsWithRef<"p"> {
-  asChild?: boolean;
-}
+interface CardDescriptionProps extends ComponentPropsWithRef<"p"> {}
 
-const CardDescription = ({asChild = false, className, ...props}: CardDescriptionProps) => {
+const CardDescription = ({children, className, ...props}: CardDescriptionProps) => {
   const {slots} = useContext(CardContext);
-  const Comp = asChild ? Slot : "p";
 
   return (
-    <Comp className={slots?.description({className})} data-slot="card-description" {...props} />
+    <p
+      className={composeSlotClassName(slots?.description, className)}
+      data-slot="card-description"
+      {...props}
+    >
+      {children}
+    </p>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Card Content
  * -----------------------------------------------------------------------------------------------*/
-interface CardContentProps extends ComponentPropsWithRef<"div"> {
-  asChild?: boolean;
-}
+interface CardContentProps extends ComponentPropsWithRef<"div"> {}
 
-const CardContent = ({asChild = false, className, ...props}: CardContentProps) => {
+const CardContent = ({className, ...props}: CardContentProps) => {
   const {slots} = useContext(CardContext);
-  const Comp = asChild ? Slot : "div";
 
-  return <Comp className={slots?.content({className})} data-slot="card-content" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="card-content"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Card Footer
  * -----------------------------------------------------------------------------------------------*/
-interface CardFooterProps extends ComponentPropsWithRef<"div"> {
-  asChild?: boolean;
-}
+interface CardFooterProps extends ComponentPropsWithRef<"div"> {}
 
-const CardFooter = ({asChild = false, className, ...props}: CardFooterProps) => {
+const CardFooter = ({className, ...props}: CardFooterProps) => {
   const {slots} = useContext(CardContext);
-  const Comp = asChild ? Slot : "div";
 
-  return <Comp className={slots?.footer({className})} data-slot="card-footer" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.footer, className)}
+      data-slot="card-footer"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------

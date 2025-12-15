@@ -45,7 +45,7 @@ export function ShowcaseThemeWrapper({
   }, [showcaseTheme]);
 
   return (
-    <ShowcaseThemeContext.Provider
+    <ShowcaseThemeContext
       value={{
         setShowcaseTheme,
         showcaseTheme,
@@ -55,6 +55,6 @@ export function ShowcaseThemeWrapper({
       <div className={showcaseTheme} data-showcase-theme={showcaseTheme}>
         {children}
       </div>
-    </ShowcaseThemeContext.Provider>
+    </ShowcaseThemeContext>
   );
 }

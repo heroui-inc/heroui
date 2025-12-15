@@ -60,6 +60,7 @@
 
     /* Form Field Defaults - Colors */
     --field-background: var(--white);
+    --field-on-background: oklch(0.9219 0 0);
     --field-foreground: oklch(0.2103 0.0059 285.89);
     --field-placeholder: var(--muted);
     --field-border: transparent; /* no border by default on form fields */
@@ -126,6 +127,7 @@
 
     /* Form Field Defaults - Colors (only the ones that are different from light theme) */
     --field-background: var(--default);
+    --field-on-background: var(--surface);
     --field-foreground: var(--foreground);
 
     /* Status Colors */

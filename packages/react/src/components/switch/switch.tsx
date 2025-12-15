@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {switchVariants} from "./switch.styles";
 
@@ -49,7 +49,11 @@ const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span className={slots?.control({className})} data-slot="switch-control" {...props}>
+    <span
+      className={composeSlotClassName(slots?.control, className)}
+      data-slot="switch-control"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -64,7 +68,11 @@ const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span className={slots?.thumb({className})} data-slot="switch-thumb" {...props}>
+    <span
+      className={composeSlotClassName(slots?.thumb, className)}
+      data-slot="switch-thumb"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -79,7 +87,11 @@ const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span className={slots?.icon({className})} data-slot="switch-icon" {...props}>
+    <span
+      className={composeSlotClassName(slots?.icon, className)}
+      data-slot="switch-icon"
+      {...props}
+    >
       {children}
     </span>
   );

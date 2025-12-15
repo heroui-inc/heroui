@@ -3,7 +3,6 @@
 import type {TooltipVariants} from "./tooltip.styles";
 import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {
   Focusable as FocusablePrimitive,
@@ -12,7 +11,7 @@ import {
   TooltipTrigger as TooltipTriggerPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {tooltipVariants} from "./tooltip.styles";
 
@@ -111,24 +110,21 @@ const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipTriggerProps extends ComponentPropsWithRef<"div"> {
-  asChild?: boolean;
-}
+interface TooltipTriggerProps extends ComponentPropsWithRef<"div"> {}
 
-const TooltipTrigger = ({asChild = false, children, className, ...props}: TooltipTriggerProps) => {
+const TooltipTrigger = ({children, className, ...props}: TooltipTriggerProps) => {
   const {slots} = useContext(TooltipContext);
-  const Comp = asChild ? SlotPrimitive : "div";
 
   return (
     <FocusablePrimitive>
-      <Comp
-        className={slots?.trigger({className})}
+      <div
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="tooltip-trigger"
         role="button"
         {...props}
       >
         {children}
-      </Comp>
+      </div>
     </FocusablePrimitive>
   );
 };

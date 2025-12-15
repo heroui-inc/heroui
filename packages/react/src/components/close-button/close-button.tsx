@@ -3,7 +3,7 @@
 import type {CloseButtonVariants} from "./close-button.styles";
 import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {useMemo} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
@@ -15,12 +15,9 @@ import {closeButtonVariants} from "./close-button.styles";
  * Close Button Root
  * -----------------------------------------------------------------------------------------------*/
 interface CloseButtonRootProps
-  extends ComponentPropsWithRef<typeof ButtonPrimitive>, CloseButtonVariants {
-  asChild?: boolean;
-}
+  extends ComponentPropsWithRef<typeof ButtonPrimitive>, CloseButtonVariants {}
 
 const CloseButtonRoot = ({
-  asChild,
   children,
   className,
   slot,
@@ -28,24 +25,14 @@ const CloseButtonRoot = ({
   variant,
   ...rest
 }: CloseButtonRootProps) => {
-  const styles = closeButtonVariants({
-    variant,
-    class: typeof className === "string" ? className : undefined,
-  });
-
-  if (asChild) {
-    return (
-      <SlotPrimitive
-        className={styles}
-        data-slot="close-button"
-        slot={slot as string}
-        style={style as React.CSSProperties}
-        {...rest}
-      >
-        {typeof children === "function" ? children({} as any) : children}
-      </SlotPrimitive>
-    );
-  }
+  const styles = useMemo(
+    () =>
+      closeButtonVariants({
+        variant,
+        className: typeof className === "string" ? className : undefined,
+      }),
+    [variant, className],
+  );
 
   return (
     <ButtonPrimitive

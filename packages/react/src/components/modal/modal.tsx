@@ -9,7 +9,6 @@ import type {
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {mergeProps} from "@react-aria/utils";
 import {createContext, useContext, useMemo} from "react";
 import {
@@ -21,8 +20,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {isNotAsChild} from "../../utils";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
 
@@ -78,7 +76,7 @@ const ModalTrigger = ({children, className, ...props}: ModalTriggerProps) => {
   return (
     <PressablePrimitive>
       <div
-        className={slots?.trigger({className})}
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="modal-trigger"
         role="button"
         {...props}
@@ -124,7 +122,7 @@ const ModalContainer = ({
   );
 
   return (
-    <ModalContext.Provider value={updatedModalContext}>
+    <ModalContext value={updatedModalContext}>
       <ModalOverlayPrimitive
         className={composeTwRenderProps(backdropClassName, updatedSlots?.backdrop())}
         data-slot="modal-backdrop"
@@ -139,7 +137,7 @@ const ModalContainer = ({
           {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
         </ModalPrimitive>
       </ModalOverlayPrimitive>
-    </ModalContext.Provider>
+    </ModalContext>
   );
 };
 
@@ -152,15 +150,15 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <SurfaceContext.Provider
-      value={{
-        variant: "default" as SurfaceVariants["variant"],
-      }}
-    >
-      <DialogPrimitive className={slots?.dialog({className})} data-slot="modal-dialog" {...props}>
+    <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
+      <DialogPrimitive
+        className={composeSlotClassName(slots?.dialog, className)}
+        data-slot="modal-dialog"
+        {...props}
+      >
         {children}
       </DialogPrimitive>
-    </SurfaceContext.Provider>
+    </SurfaceContext>
   );
 };
 
@@ -173,7 +171,11 @@ const ModalHeader = ({children, className, ...props}: ModalHeaderProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div className={slots?.header({className})} data-slot="modal-header" {...props}>
+    <div
+      className={composeSlotClassName(slots?.header, className)}
+      data-slot="modal-header"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -188,7 +190,7 @@ const ModalBody = ({children, className, ...props}: ModalBodyProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div className={slots?.body({className})} data-slot="modal-body" {...props}>
+    <div className={composeSlotClassName(slots?.body, className)} data-slot="modal-body" {...props}>
       {children}
     </div>
   );
@@ -203,7 +205,11 @@ const ModalFooter = ({children, className, ...props}: ModalFooterProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div className={slots?.footer({className})} data-slot="modal-footer" {...props}>
+    <div
+      className={composeSlotClassName(slots?.footer, className)}
+      data-slot="modal-footer"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -219,7 +225,7 @@ const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
 
   return (
     <HeadingPrimitive
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
       data-slot="modal-heading"
       slot="title"
       {...props}
@@ -238,7 +244,7 @@ const ModalIcon = ({children, className, ...props}: ModalIconProps) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div className={slots?.icon({className})} data-slot="modal-icon" {...props}>
+    <div className={composeSlotClassName(slots?.icon, className)} data-slot="modal-icon" {...props}>
       {children}
     </div>
   );
@@ -247,41 +253,21 @@ const ModalIcon = ({children, className, ...props}: ModalIconProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Close Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface ModalCloseTriggerProps {
-  asChild?: boolean;
+interface ModalCloseTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   className?: string;
   children?: ReactNode;
 }
 
-interface ModalCloseTrigger {
-  (props: {asChild: true} & ComponentPropsWithRef<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ComponentPropsWithRef<typeof ButtonPrimitive>): React.JSX.Element;
-}
-
-const ModalCloseTrigger: ModalCloseTrigger = (props) => {
+const ModalCloseTrigger = ({className, ...rest}: ModalCloseTriggerProps) => {
   const {slots} = useContext(ModalContext);
 
-  if (isNotAsChild(props)) {
-    const {className, ...rest} = props;
-
-    return (
-      <CloseButton
-        className={composeTwRenderProps(className, slots?.closeTrigger())}
-        data-slot="modal-close-trigger"
-        slot="close"
-        {...rest}
-      />
-    );
-  }
-
-  const {asChild: _asChild, children, className, ...rest} = props;
-
   return (
-    <SlotPrimitive data-slot="modal-close-trigger" slot="close" {...rest}>
-      {children ?? (
-        <CloseButton className={composeTwRenderProps(className, slots?.closeTrigger())} />
-      )}
-    </SlotPrimitive>
+    <CloseButton
+      className={composeTwRenderProps(className, slots?.closeTrigger())}
+      data-slot="modal-close-trigger"
+      slot="close"
+      {...rest}
+    />
   );
 };
 

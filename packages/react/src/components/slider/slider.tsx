@@ -13,7 +13,7 @@ import {
 } from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {sliderVariants} from "./slider.styles";
 
@@ -144,7 +144,7 @@ const SliderFill = ({className, style, ...props}: SliderFillProps) => {
 
   return (
     <div
-      className={slots?.fill({className})}
+      className={composeSlotClassName(slots?.fill, className)}
       data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-fill"
       style={{
@@ -191,7 +191,13 @@ interface SliderMarksProps extends ComponentPropsWithRef<"div"> {}
 const SliderMarks = ({className, ...props}: SliderMarksProps) => {
   const {slots} = useContext(SliderContext);
 
-  return <div className={slots?.marks({className})} data-slot="slider-marks" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.marks, className)}
+      data-slot="slider-marks"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@ import type {MenuItemRenderProps} from "react-aria-components";
 import React, {createContext, useContext} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 import {IconChevronRight} from "../icons";
 
 import {menuItemVariants} from "./menu-item.styles";
@@ -103,7 +103,7 @@ const MenuItemIndicator = ({
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="menu-item-indicator"
       data-type={type}
       data-visible={isSelected || undefined}
@@ -140,7 +140,7 @@ const MenuItemSubmenuIndicator = ({
   return (
     <span
       aria-hidden="true"
-      className={slots?.submenuIndicator({className})}
+      className={composeSlotClassName(slots?.submenuIndicator, className)}
       data-slot="submenu-indicator"
       {...props}
     >

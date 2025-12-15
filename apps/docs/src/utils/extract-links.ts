@@ -94,10 +94,10 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
     if (links.storybook.includes("/")) {
       const pathSegment = convertStorybookTitleToPath(links.storybook);
 
-      storybookUrl = `${STORYBOOK_URL}/?path=/story/${pathSegment}`;
+      storybookUrl = `${STORYBOOK_URL}/?path=/docs/${pathSegment}`;
     } else {
       // Legacy support: treat as simple slug (kept for backward compatibility)
-      storybookUrl = `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`;
+      storybookUrl = `${STORYBOOK_URL}/?path=/docs/components-${links.storybook}`;
     }
   }
 

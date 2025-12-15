@@ -6,7 +6,7 @@ import type {RadioRenderProps} from "react-aria-components";
 import React, {createContext, useContext} from "react";
 import {Radio as RadioPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {radioVariants} from "./radio.styles";
 
@@ -55,7 +55,11 @@ const RadioControl = ({children, className, ...props}: RadioControlProps) => {
   const {slots} = useContext(RadioContext);
 
   return (
-    <span className={slots?.control({className})} data-slot="radio-control" {...props}>
+    <span
+      className={composeSlotClassName(slots?.control, className)}
+      data-slot="radio-control"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -76,7 +80,7 @@ const RadioIndicator = ({children, className, ...props}: RadioIndicatorProps) =>
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="radio-indicator"
       {...props}
     >
@@ -94,7 +98,11 @@ const RadioContent = ({children, className, ...props}: RadioContentProps) => {
   const {slots} = useContext(RadioContext);
 
   return (
-    <div className={slots?.content({className})} data-slot="radio-content" {...props}>
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="radio-content"
+      {...props}
+    >
       {children}
     </div>
   );

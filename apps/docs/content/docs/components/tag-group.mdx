@@ -1,0 +1,249 @@
+---
+title: TagGroup
+description: A focusable list of tags with support for keyboard navigation, selection, and removal
+icon: new
+links:
+  rac: TagGroup
+  source: tag-group/tag-group.tsx
+  styles: tag-group.css
+  storybook: Components/Collections/TagGroup
+---
+
+## Import
+
+```tsx
+import { TagGroup } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="tag-group-basic"
+/>
+
+### Anatomy
+
+```tsx
+import { TagGroup, Tag, Label, Description, ErrorMessage } from '@heroui/react';
+
+export default () => (
+  <TagGroup>
+    <Label />
+    <TagGroup.List>
+      <Tag>
+        <Tag.RemoveButton />
+      </Tag>
+    </TagGroup.List>
+    <Description />
+    <ErrorMessage />
+  </TagGroup>
+)
+```
+
+### Sizes
+
+<ComponentPreview
+  name="tag-group-sizes"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="tag-group-disabled"
+/>
+
+### Selection Modes
+
+<ComponentPreview
+  name="tag-group-selection-modes"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="tag-group-controlled"
+/>
+
+### On Surface
+
+<ComponentPreview
+  name="tag-group-on-surface"
+/>
+
+### With Error Message
+
+<ComponentPreview
+  name="tag-group-with-error-message"
+/>
+
+### With Prefix
+
+<ComponentPreview
+  name="tag-group-with-prefix"
+/>
+
+### With Remove Button
+
+<ComponentPreview
+  name="tag-group-with-remove-button"
+/>
+
+### With List Data
+
+<ComponentPreview
+  name="tag-group-with-list-data"
+/>
+
+<RelatedComponents component="taggroup" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { TagGroup, Tag, Label } from '@heroui/react';
+
+function CustomTagGroup() {
+  return (
+    <TagGroup className="w-full">
+      <Label>Categories</Label>
+      <TagGroup.List className="gap-2">
+        <Tag className="rounded-lg px-4 py-2 font-bold">
+          Custom Styled
+        </Tag>
+      </TagGroup.List>
+    </TagGroup>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the TagGroup component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .tag-group {
+    @apply flex flex-col gap-2;
+  }
+
+  .tag-group__list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .tag {
+    @apply rounded-full px-3 py-1;
+  }
+
+  .tag__remove-button {
+    @apply ml-1;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The TagGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tag-group.css) and [tag.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tag.css)):
+
+#### Base Classes
+- `.tag-group` - Base tag group container
+- `.tag-group__list` - Container for the list of tags
+- `.tag` - Base tag styles
+- `.tag__remove-button` - Remove button trigger
+
+#### Slot Classes
+- `.tag-group [slot="description"]` - Description slot styles
+- `.tag-group [slot="errorMessage"]` - ErrorMessage slot styles
+
+#### Size Classes
+- `.tag--sm` - Small size tag
+- `.tag--md` - Medium size tag (default)
+- `.tag--lg` - Large size tag
+
+#### Variant Classes
+- `.tag--default` - Default variant with field-on-background styling
+- `.tag--surface` - Surface variant with surface background
+- `.tag--on-surface` - On-surface variant for use on surface components
+
+#### Modifier Classes
+- `.tag__remove-button--on-surface` - Remove button modifier for on-surface variant
+
+#### State Classes
+- `.tag[data-selected="true"]` - Selected tag state
+- `.tag[data-disabled="true"]` - Disabled tag state
+- `.tag[data-hovered="true"]` - Hovered tag state
+- `.tag[data-pressed="true"]` - Pressed tag state
+- `.tag[data-focus-visible="true"]` - Focused tag state (keyboard focus)
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Hover**: `:hover` or `[data-hovered="true"]` on tag
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on tag
+- **Pressed**: `:active` or `[data-pressed="true"]` on tag
+- **Selected**: `[data-selected="true"]` or `[aria-selected="true"]` on tag
+- **Disabled**: `:disabled` or `[data-disabled="true"]` on tag
+
+## API Reference
+
+### TagGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selectionMode` | `"none" \| "single" \| "multiple"` | `"none"` | The type of selection that is allowed |
+| `selectedKeys` | `Selection` | - | The currently selected keys (controlled) |
+| `defaultSelectedKeys` | `Selection` | - | The initial selected keys (uncontrolled) |
+| `onSelectionChange` | `(keys: Selection) => void` | - | Handler called when the selection changes |
+| `disabledKeys` | `Iterable<Key>` | - | Keys of disabled tags |
+| `isDisabled` | `boolean` | - | Whether the tag group is disabled |
+| `onRemove` | `(keys: Set<Key>) => void` | - | Handler called when tags are removed |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the tags in the group |
+| `variant` | `"default" \| "surface"` | `"default"` | Visual variant of the tags |
+| `isOnSurface` | `boolean` | - | Whether tags are displayed on a surface component |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | TagGroup content or render function |
+
+### TagGroup.List Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `Iterable<T>` | - | The items to display in the tag list |
+| `renderEmptyState` | `() => ReactNode` | - | Function to render when the list is empty |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | TagList content or render function |
+
+### Tag Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `Key` | - | The unique identifier for the tag |
+| `textValue` | `string` | - | A string representation of the tag's content, used for accessibility |
+| `isDisabled` | `boolean` | - | Whether the tag is disabled |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| RenderFunction` | - | Tag content or render function |
+
+**Note**: `size`, `variant`, and `isOnSurface` are inherited from the parent `TagGroup` component and cannot be set directly on individual `Tag` components.
+
+### Tag.RemoveButton Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Custom remove button content (defaults to close icon) |
+
+### RenderProps
+
+When using render functions with TagGroup.List, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `isSelected` | `boolean` | Whether the tag is selected |
+| `isDisabled` | `boolean` | Whether the tag is disabled |
+| `isHovered` | `boolean` | Whether the tag is hovered |
+| `isPressed` | `boolean` | Whether the tag is pressed |
+| `isFocused` | `boolean` | Whether the tag is focused |
+| `isFocusVisible` | `boolean` | Whether the tag has keyboard focus |

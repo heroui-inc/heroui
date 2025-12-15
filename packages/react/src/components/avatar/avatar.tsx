@@ -5,11 +5,11 @@ import type {UseImageProps} from "../../hooks";
 import type {ComponentPropsWithRef} from "react";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
 import {useImage} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
+import {composeSlotClassName} from "../../utils/compose";
 
 import {avatarVariants} from "./avatar.styles";
 
@@ -47,14 +47,12 @@ interface AvatarImageProps extends Omit<
   ComponentPropsWithRef<typeof AvatarPrimitive.Image>,
   "onLoadingStatusChange"
 > {
-  asChild?: boolean;
   ignoreFallback?: UseImageProps["ignoreFallback"];
   shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
   onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
 }
 
 const AvatarImage = ({
-  asChild = false,
   className,
   crossOrigin,
   ignoreFallback,
@@ -69,11 +67,6 @@ const AvatarImage = ({
   ...props
 }: AvatarImageProps) => {
   const {slots} = React.useContext(AvatarContext);
-  const Comp = asChild ? SlotPrimitive : AvatarPrimitive.Image;
-
-  if (asChild) {
-    return <Comp className={slots?.image({className})} {...props} data-loaded />;
-  }
 
   const loadingStatus = useImage({
     src: typeof src === "string" ? src : undefined,
@@ -89,8 +82,8 @@ const AvatarImage = ({
   });
 
   return (
-    <Comp
-      className={slots?.image({className})}
+    <AvatarPrimitive.Image
+      className={composeSlotClassName(slots?.image, className)}
       crossOrigin={crossOrigin}
       data-loaded={dataAttr(loadingStatus === "loaded")}
       data-loading-status={loadingStatus}
@@ -115,7 +108,13 @@ interface AvatarFallbackProps extends ComponentPropsWithRef<typeof AvatarPrimiti
 const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
   const {slots} = React.useContext(AvatarContext);
 
-  return <AvatarPrimitive.Fallback className={slots?.fallback({className, color})} {...props} />;
+  return (
+    <AvatarPrimitive.Fallback
+      className={composeSlotClassName(slots?.fallback, className, {color})}
+      data-slot="avatar-fallback"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------

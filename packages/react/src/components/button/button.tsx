@@ -3,7 +3,6 @@
 import type {ButtonVariants} from "./button.styles";
 import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
@@ -13,12 +12,9 @@ import {buttonVariants} from "./button.styles";
 /* -------------------------------------------------------------------------------------------------
  * Button Root
  * -----------------------------------------------------------------------------------------------*/
-interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {
-  asChild?: boolean;
-}
+interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {}
 
 const ButtonRoot = ({
-  asChild,
   children,
   className,
   isIconOnly,
@@ -34,19 +30,6 @@ const ButtonRoot = ({
     variant,
     class: typeof className === "string" ? className : undefined,
   });
-
-  if (asChild) {
-    return (
-      <SlotPrimitive
-        className={styles}
-        slot={slot as string}
-        style={style as React.CSSProperties}
-        {...rest}
-      >
-        {typeof children === "function" ? children({} as any) : children}
-      </SlotPrimitive>
-    );
-  }
 
   return (
     <ButtonPrimitive

@@ -16,7 +16,7 @@ import {
   Heading as HeadingPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {calendarVariants} from "./calendar.styles";
 
@@ -68,7 +68,11 @@ const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) =>
   const {slots} = useContext(CalendarContext);
 
   return (
-    <header className={slots?.header({className})} data-slot="calendar-header" {...props}>
+    <header
+      className={composeSlotClassName(slots?.header, className)}
+      data-slot="calendar-header"
+      {...props}
+    >
       {children}
     </header>
   );
@@ -86,7 +90,7 @@ const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
     <HeadingPrimitive
       data-slot="calendar-heading"
       {...props}
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
     />
   );
 };
@@ -125,7 +129,7 @@ const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
     <CalendarGridPrimitive
       data-slot="calendar-grid"
       {...props}
-      className={slots?.grid({className})}
+      className={composeSlotClassName(slots?.grid, className)}
     >
       <CalendarGridHeader>
         {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
@@ -151,7 +155,7 @@ const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
     <CalendarGridHeaderPrimitive
       data-slot="calendar-grid-header"
       {...props}
-      className={slots?.gridHeader({className})}
+      className={composeSlotClassName(slots?.gridHeader, className)}
     />
   );
 };
@@ -170,7 +174,7 @@ const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
     <CalendarHeaderCellPrimitive
       data-slot="calendar-header-cell"
       {...props}
-      className={slots?.headerCell({className})}
+      className={composeSlotClassName(slots?.headerCell, className)}
     />
   );
 };

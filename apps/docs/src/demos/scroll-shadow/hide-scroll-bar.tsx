@@ -1,8 +1,8 @@
-import {Card, ScrollShadow} from "@heroui/react";
+import {ScrollShadow} from "@heroui/react";
 
 export default function HideScrollBar() {
   return (
-    <Card className="w-full p-0 sm:max-w-sm">
+    <div className="w-full p-0 sm:max-w-sm">
       <ScrollShadow hideScrollBar className="max-h-[240px] p-4">
         <div className="space-y-4">
           {Array.from({length: 10}).map((_, idx) => (
@@ -14,6 +14,6 @@ export default function HideScrollBar() {
           ))}
         </div>
       </ScrollShadow>
-    </Card>
+    </div>
   );
 }

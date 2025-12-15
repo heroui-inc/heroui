@@ -3,7 +3,6 @@
 import type {SurfaceVariants} from "./surface.styles";
 import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext} from "react";
 
 import {surfaceVariants} from "./surface.styles";
@@ -20,24 +19,14 @@ const SurfaceContext = createContext<SurfaceContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Surface Root
  * --------------------------------------------------------------------------------------------- */
-interface SurfaceRootProps extends ComponentPropsWithRef<"div">, SurfaceVariants {
-  asChild?: boolean;
-}
+interface SurfaceRootProps extends ComponentPropsWithRef<"div">, SurfaceVariants {}
 
-const SurfaceRoot = ({
-  asChild,
-  children,
-  className,
-  variant = "default",
-  ...rest
-}: SurfaceRootProps) => {
-  const Component = asChild ? SlotPrimitive : "div";
-
+const SurfaceRoot = ({children, className, variant = "default", ...rest}: SurfaceRootProps) => {
   return (
     <SurfaceContext value={{variant}}>
-      <Component className={surfaceVariants({variant, className})} data-slot="surface" {...rest}>
+      <div className={surfaceVariants({variant, className})} data-slot="surface" {...rest}>
         {children}
-      </Component>
+      </div>
     </SurfaceContext>
   );
 };
