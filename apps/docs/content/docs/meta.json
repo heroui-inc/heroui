@@ -34,6 +34,7 @@
     "components/chip",
     "components/close-button",
     "components/combobox",
+    "components/date-input-group",
     "components/description",
     "components/disclosure",
     "components/disclosure-group",

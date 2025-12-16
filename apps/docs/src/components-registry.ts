@@ -84,6 +84,14 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "combobox",
     title: "ComboBox",
   },
+  dateinputgroup: {
+    category: "forms",
+    description:
+      "Primitive date input component with segmented editing, built on React Aria DateInput",
+    href: "/docs/components/date-input-group",
+    name: "dateinputgroup",
+    title: "DateInputGroup",
+  },
   description: {
     category: "forms",
     description: "Helper text for form fields",
@@ -352,6 +360,7 @@ const componentRelationships: Record<string, string[]> = {
     "spinner",
     "button",
   ],
+  dateinputgroup: ["datefield", "surface", "label", "fielderror", "form", "description"],
   description: [
     "textfield",
     "input",
@@ -364,12 +373,21 @@ const componentRelationships: Record<string, string[]> = {
     "select",
     "combobox",
     "numberfield",
+    "dateinputgroup",
   ],
   disclosure: ["accordion", "disclosuregroup", "button"],
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
   dropdown: ["button", "popover", "separator", "listbox"],
   errormessage: ["taggroup"],
-  fielderror: ["textfield", "input", "textarea", "combobox", "form", "numberfield"],
+  fielderror: [
+    "textfield",
+    "input",
+    "textarea",
+    "combobox",
+    "form",
+    "numberfield",
+    "dateinputgroup",
+  ],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
   form: [
     "button",
@@ -398,6 +416,7 @@ const componentRelationships: Record<string, string[]> = {
     "surface",
     "description",
     "combobox",
+    "dateinputgroup",
   ],
   inputgroup: [
     "textfield",
@@ -473,6 +492,7 @@ const componentRelationships: Record<string, string[]> = {
     "textfield",
     "textarea",
     "numberfield",
+    "dateinputgroup",
     "card",
     "listbox",
   ],
@@ -490,6 +510,7 @@ const componentRelationships: Record<string, string[]> = {
     "description",
     "numberfield",
     "inputgroup",
+    "dateinputgroup",
   ],
   tooltip: ["button", "popover"],
 };

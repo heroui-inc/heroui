@@ -18,6 +18,7 @@
     "@heroui/react": "workspace:*",
     "@iconify-json/gravity-ui": "1.2.10",
     "@iconify/react": "6.0.2",
+    "@internationalized/date": "3.10.0",
     "@react-stately/data": "3.14.1",
     "@t3-oss/env-nextjs": "0.13.8",
     "@vercel/analytics": "1.6.1",

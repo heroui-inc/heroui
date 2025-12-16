@@ -12,6 +12,7 @@ import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ComboBoxDemos from "./combobox";
+import * as DateInputGroupDemos from "./date-input-group";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -522,6 +523,27 @@ export const demos: Record<string, DemoItem> = {
   "input-on-surface": {
     component: InputDemos.OnSurface,
     file: "input/on-surface.tsx",
+  },
+  // DateInputGroup demos
+  "date-input-group-basic": {
+    component: DateInputGroupDemos.Basic,
+    file: "date-input-group/basic.tsx",
+  },
+  "date-input-group-with-prefix": {
+    component: DateInputGroupDemos.WithPrefix,
+    file: "date-input-group/with-prefix.tsx",
+  },
+  "date-input-group-with-suffix": {
+    component: DateInputGroupDemos.WithSuffix,
+    file: "date-input-group/with-suffix.tsx",
+  },
+  "date-input-group-with-prefix-and-suffix": {
+    component: DateInputGroupDemos.WithPrefixAndSuffix,
+    file: "date-input-group/with-prefix-and-suffix.tsx",
+  },
+  "date-input-group-on-surface": {
+    component: DateInputGroupDemos.OnSurface,
+    file: "date-input-group/on-surface.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
