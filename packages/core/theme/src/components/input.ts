@@ -50,6 +50,7 @@ const input = tv({
       "autofill:bg-transparent bg-clip-text",
       // Safari autofill styling fix - ensures text color is visible in dark mode
       "dark:autofill:[-webkit-text-fill-color:hsl(var(--heroui-foreground))]",
+      "[&::-ms-reveal]:hidden",
     ],
     clearButton: [
       "p-2",
