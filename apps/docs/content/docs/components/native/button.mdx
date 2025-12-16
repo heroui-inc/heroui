@@ -239,3 +239,25 @@ For inherited props including `feedbackVariant`, `feedbackPosition`, `animation`
 | `children`     | `React.ReactNode` | -       | Content to be rendered as label       |
 | `className`    | `string`          | -       | Additional CSS classes                |
 | `...TextProps` | `TextProps`       | -       | All standard Text props are supported |
+
+## Hooks
+
+### useButton
+
+Hook to access the Button context values. Returns the button's size, variant, and disabled state.
+
+```tsx
+import { useButton } from 'heroui-native';
+
+const { size, variant, isDisabled } = useButton();
+```
+
+#### Return Value
+
+| property     | type                                                                             | description                    |
+| ------------ | -------------------------------------------------------------------------------- | ------------------------------ |
+| `size`       | `'sm' \| 'md' \| 'lg'`                                                           | Size of the button             |
+| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | Visual variant of the button   |
+| `isDisabled` | `boolean`                                                                        | Whether the button is disabled |
+
+**Note:** This hook must be used within a `Button` component. It will throw an error if called outside of the button context.
