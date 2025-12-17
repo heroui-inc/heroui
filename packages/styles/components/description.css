@@ -1,4 +1,4 @@
 /* Base description styles */
 .description {
-  @apply truncate text-xs text-wrap text-muted;
+  @apply text-xs text-wrap wrap-break-word text-muted;
 }

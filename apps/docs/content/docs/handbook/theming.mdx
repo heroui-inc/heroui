@@ -268,16 +268,32 @@ Apply your theme:
 
 /* Base requirements */
 @import "tailwindcss";
+@import "@heroui/styles/base" layer(base);
+/* OR specific base file */
 @import "@heroui/styles/base/base.css" layer(base);
+
+/* Theme variables */
 @import "@heroui/styles/themes/shared/theme.css" layer(theme);
 @import "@heroui/styles/themes/default" layer(theme);
+/* OR specific theme files */
+@import "@heroui/styles/themes/default/index.css" layer(theme);
+@import "@heroui/styles/themes/default/variables.css" layer(theme);
 
 /* Components (all components) */
+@import "@heroui/styles/components" layer(components);
+/* OR specific component files */
 @import "@heroui/styles/components/index.css" layer(components);
-/* OR specific components */
 @import "@heroui/styles/components/button.css" layer(components);
 @import "@heroui/styles/components/accordion.css" layer(components);
+
+/* Utilities (optional) */
+@import "@heroui/styles/utilities" layer(utilities);
+
+/* Variants (optional) */
+@import "@heroui/styles/variants" layer(utilities);
 ```
+
+> **Note**: Directory imports (e.g., `@heroui/styles/components`) automatically resolve to their `index.css` file. Use explicit file paths (e.g., `@heroui/styles/components/button.css`) to import individual component styles.
 
 **Headless mode:** Build your own styles from scratch:
 

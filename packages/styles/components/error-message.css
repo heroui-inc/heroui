@@ -1,6 +1,6 @@
 /* Base error message styles */
 .error-message {
-  @apply h-auto truncate text-xs text-danger;
+  @apply h-auto text-xs wrap-break-word text-danger;
 
   /**
    * Transitions
