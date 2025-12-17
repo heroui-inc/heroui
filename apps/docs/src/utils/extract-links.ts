@@ -103,7 +103,7 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
 
   return {
     figma: links.figma ? siteConfig.figmaCommunityFile : undefined,
-    rac: links.rac ? `https://react-spectrum.adobe.com/react-aria/${links.rac}.html` : undefined,
+    rac: links.rac ? `https://react-aria.adobe.com/${links.rac}` : undefined,
     radix: links.radix
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`
       : undefined,

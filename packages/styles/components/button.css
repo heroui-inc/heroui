@@ -2,14 +2,14 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap outline-none select-none md:h-9;
+  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap will-change-auto outline-none select-none md:h-9;
 
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    transform 250ms var(--ease-out-quad),
+    transform 250ms var(--ease-smooth),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;

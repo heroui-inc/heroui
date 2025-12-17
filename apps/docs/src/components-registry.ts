@@ -84,6 +84,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "combobox",
     title: "ComboBox",
   },
+  datefield: {
+    category: "forms",
+    description: "Date input field with labels, descriptions, and validation",
+    href: "/docs/components/date-field",
+    name: "datefield",
+    title: "DateField",
+  },
   description: {
     category: "forms",
     description: "Helper text for form fields",
@@ -352,6 +359,7 @@ const componentRelationships: Record<string, string[]> = {
     "spinner",
     "button",
   ],
+  datefield: ["label", "fielderror", "description", "form", "surface"],
   description: [
     "textfield",
     "input",
@@ -364,12 +372,13 @@ const componentRelationships: Record<string, string[]> = {
     "select",
     "combobox",
     "numberfield",
+    "datefield",
   ],
   disclosure: ["accordion", "disclosuregroup", "button"],
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
   dropdown: ["button", "popover", "separator", "listbox"],
   errormessage: ["taggroup"],
-  fielderror: ["textfield", "input", "textarea", "combobox", "form", "numberfield"],
+  fielderror: ["textfield", "input", "textarea", "combobox", "form", "numberfield", "datefield"],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
   form: [
     "button",
@@ -388,6 +397,7 @@ const componentRelationships: Record<string, string[]> = {
     "slider",
     "inputotp",
     "numberfield",
+    "datefield",
   ],
   input: [
     "textfield",
@@ -426,6 +436,7 @@ const componentRelationships: Record<string, string[]> = {
     "select",
     "combobox",
     "numberfield",
+    "datefield",
   ],
   link: [],
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
@@ -473,6 +484,7 @@ const componentRelationships: Record<string, string[]> = {
     "textfield",
     "textarea",
     "numberfield",
+    "datefield",
     "card",
     "listbox",
   ],
@@ -490,6 +502,7 @@ const componentRelationships: Record<string, string[]> = {
     "description",
     "numberfield",
     "inputgroup",
+    "datefield",
   ],
   tooltip: ["button", "popover"],
 };
