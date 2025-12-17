@@ -1,3 +1,6 @@
+/* Declares the theme variables - @see https://tailwindcss.com/docs/theme */
+@import "../shared/theme.css";
+
 /* Default Theme */
 @import "./variables.css" layer(theme);
 
