@@ -4,6 +4,7 @@ import type {FC} from "react";
 
 import {Button, Link, Popover, cn} from "@heroui/react";
 import Image from "next/image";
+import {useTheme} from "next-themes";
 
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
@@ -34,9 +35,13 @@ const LINKS = {
 
 interface NativeVideoPlayerViewProps {
   /**
-   * Video source URL
+   * Video source URL for light theme
    */
-  src: string;
+  srcLight: string;
+  /**
+   * Video source URL for dark theme
+   */
+  srcDark: string;
   /**
    * Video poster image URL
    */
@@ -78,10 +83,17 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
   height = 300,
   playMode,
   poster,
-  src,
+  srcDark,
+  srcLight,
   width,
 }) => {
   const isMobile = useIsMobileDevice();
+
+  const {resolvedTheme} = useTheme();
+
+  // Determine which video source to use based on the current theme
+  // Default to light theme if resolvedTheme is undefined (during SSR)
+  const videoSrc = resolvedTheme === "dark" ? srcDark : srcLight;
 
   return (
     <div className={cn("relative", className)}>
@@ -91,7 +103,7 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
         height={height}
         playMode={playMode}
         poster={poster}
-        src={src}
+        src={videoSrc}
         width={width}
       />
       <Popover>
