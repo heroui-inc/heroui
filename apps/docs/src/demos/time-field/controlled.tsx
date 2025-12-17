@@ -1,6 +1,6 @@
 "use client";
 
-import type {TimeValue} from "@internationalized/date";
+import type {TimeValue} from "@heroui/react";
 
 import {Button, DateInputGroup, Description, Label, TimeField} from "@heroui/react";
 import {Time, getLocalTimeZone, now} from "@internationalized/date";

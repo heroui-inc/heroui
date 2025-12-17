@@ -1,4 +1,4 @@
-import type {TimeValue} from "@internationalized/date";
+import type {TimeValue} from "../rac";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -181,7 +181,7 @@ export const Controlled: Story = {
 
 export const WithValidation: Story = {
   render: () => {
-    const [value, setValue] = useState<TimeValue | null>(null);
+    const [value, setValue] = useState<Time | null>(null);
     const minTime = parseTime("09:00");
     const maxTime = parseTime("17:00");
     const isInvalid = value !== null && (value.compare(minTime) < 0 || value.compare(maxTime) > 0);
@@ -297,7 +297,7 @@ export const OnSurface: Story = {
 
 export const FormExample: Story = {
   render: () => {
-    const [value, setValue] = useState<TimeValue | null>(null);
+    const [value, setValue] = useState<Time | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const minTime = parseTime("09:00");
     const maxTime = parseTime("17:00");

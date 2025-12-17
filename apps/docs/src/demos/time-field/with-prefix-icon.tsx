@@ -1,7 +1,7 @@
 "use client";
 
+import {Clock} from "@gravity-ui/icons";
 import {DateInputGroup, Label, TimeField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithPrefixIcon() {
   return (
@@ -9,7 +9,7 @@ export function WithPrefixIcon() {
       <Label>Time</Label>
       <DateInputGroup>
         <DateInputGroup.Prefix>
-          <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
+          <Clock className="size-4 text-muted" />
         </DateInputGroup.Prefix>
         <DateInputGroup.Input>
           {(segment) => <DateInputGroup.Segment segment={segment} />}

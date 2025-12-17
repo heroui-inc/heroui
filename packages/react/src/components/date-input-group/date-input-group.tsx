@@ -5,8 +5,8 @@ import type {ComponentPropsWithRef} from "react";
 import type {
   DateInputProps as DateInputPrimitiveProps,
   DateSegmentProps as DateSegmentPrimitiveProps,
-  TimeInputProps as TimeInputPrimitiveProps,
-  TimeSegmentProps as TimeSegmentPrimitiveProps,
+  DateInputProps as TimeInputPrimitiveProps,
+  DateSegmentProps as TimeSegmentPrimitiveProps,
 } from "react-aria-components";
 
 import React, {createContext, useContext} from "react";

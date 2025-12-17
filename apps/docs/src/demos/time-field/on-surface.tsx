@@ -1,7 +1,7 @@
 "use client";
 
+import {Clock} from "@gravity-ui/icons";
 import {DateInputGroup, Description, Label, Surface, TimeField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function OnSurface() {
   return (
@@ -19,7 +19,7 @@ export function OnSurface() {
         <Label>Appointment time</Label>
         <DateInputGroup isOnSurface>
           <DateInputGroup.Prefix>
-            <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
+            <Clock className="size-4 text-muted" />
           </DateInputGroup.Prefix>
           <DateInputGroup.Input>
             {(segment) => <DateInputGroup.Segment segment={segment} />}

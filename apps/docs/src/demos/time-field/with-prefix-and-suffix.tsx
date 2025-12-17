@@ -1,7 +1,7 @@
 "use client";
 
+import {ChevronDown, Clock} from "@gravity-ui/icons";
 import {DateInputGroup, Description, Label, TimeField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithPrefixAndSuffix() {
   return (
@@ -9,13 +9,13 @@ export function WithPrefixAndSuffix() {
       <Label>Time</Label>
       <DateInputGroup>
         <DateInputGroup.Prefix>
-          <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
+          <Clock className="size-4 text-muted" />
         </DateInputGroup.Prefix>
         <DateInputGroup.Input>
           {(segment) => <DateInputGroup.Segment segment={segment} />}
         </DateInputGroup.Input>
         <DateInputGroup.Suffix>
-          <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
+          <ChevronDown className="size-4 text-muted" />
         </DateInputGroup.Suffix>
       </DateInputGroup>
       <Description>Enter a time</Description>

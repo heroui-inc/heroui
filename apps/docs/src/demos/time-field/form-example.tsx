@@ -1,7 +1,8 @@
 "use client";
 
-import type {TimeValue} from "@internationalized/date";
+import type {Time} from "@internationalized/date";
 
+import {Clock} from "@gravity-ui/icons";
 import {
   Button,
   DateInputGroup,
@@ -11,12 +12,11 @@ import {
   Label,
   TimeField,
 } from "@heroui/react";
-import {Icon} from "@iconify/react";
 import {parseTime} from "@internationalized/date";
 import {useState} from "react";
 
 export function FormExample() {
-  const [value, setValue] = useState<TimeValue | null>(null);
+  const [value, setValue] = useState<Time | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const minTime = parseTime("09:00");
   const maxTime = parseTime("17:00");
@@ -54,7 +54,7 @@ export function FormExample() {
         <Label>Appointment time</Label>
         <DateInputGroup>
           <DateInputGroup.Prefix>
-            <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
+            <Clock className="size-4 text-muted" />
           </DateInputGroup.Prefix>
           <DateInputGroup.Input>
             {(segment) => <DateInputGroup.Segment segment={segment} />}
