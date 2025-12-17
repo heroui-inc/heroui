@@ -9,6 +9,7 @@
 
 .disclosure__trigger {
   cursor: var(--cursor-interactive);
+  @apply no-highlight;
 
   /* Focus state */
   &:focus-visible:not(:focus),

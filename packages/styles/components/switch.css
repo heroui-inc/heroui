@@ -1,6 +1,6 @@
 /* Switch base styles */
 .switch {
-  @apply inline-flex items-center gap-3;
+  @apply inline-flex items-center gap-3 no-highlight;
 
   /* Cursor */
   cursor: var(--cursor-interactive);

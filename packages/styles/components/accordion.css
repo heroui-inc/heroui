@@ -52,7 +52,7 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium no-highlight;
 
   /**
    * Transitions

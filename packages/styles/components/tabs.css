@@ -44,7 +44,7 @@
   z-index: 1;
   cursor: var(--cursor-interactive);
 
-  @apply flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium text-muted outline-none;
+  @apply flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium text-muted outline-none no-highlight;
 
   /**
    * Transitions

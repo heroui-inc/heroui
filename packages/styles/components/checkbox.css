@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .checkbox {
-  @apply flex gap-3 outline-none;
+  @apply flex gap-3 outline-none no-highlight;
 
   cursor: var(--cursor-interactive);
 
@@ -84,7 +84,7 @@
    ========================================================================== */
 
 .checkbox__control {
-  @apply relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md bg-field shadow-field outline-none;
+  @apply relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-md bg-field shadow-field outline-none no-highlight;
 
   /**
    * Transitions

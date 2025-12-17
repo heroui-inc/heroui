@@ -17,6 +17,10 @@
   --tw-ring-offset-width: 0px;
 }
 
+@utility no-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* === Statuses === */
 @utility status-focused {
   @apply focus-ring;

@@ -2,7 +2,7 @@
 .tag {
   --optical-offset: 0.031em;
 
-  @apply relative inline-flex items-center gap-1 rounded-full font-medium select-none;
+  @apply relative inline-flex items-center gap-1 rounded-full font-medium select-none no-highlight;
 
   /**
    * Transitions
