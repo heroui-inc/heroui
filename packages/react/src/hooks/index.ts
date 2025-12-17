@@ -1,5 +1,4 @@
 export * from "./use-css-variable";
-export * from "./use-image";
 export * from "./use-is-hydrated";
 export * from "./use-list-data";
 export * from "./use-measured-height";
