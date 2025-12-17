@@ -813,13 +813,11 @@ describe("NumberInput Real-Time Formatting", () => {
     let setSelectionRangeSpy: jest.SpyInstance;
 
     beforeEach(() => {
-      jest.useFakeTimers();
       setSelectionRangeSpy = jest.spyOn(HTMLInputElement.prototype, "setSelectionRange");
     });
 
     afterEach(() => {
       setSelectionRangeSpy.mockRestore();
-      jest.useRealTimers();
     });
 
     it("should restore cursor correctly when appending a digit", async () => {
@@ -848,7 +846,7 @@ describe("NumberInput Real-Time Formatting", () => {
       // 1 (1) 2 (2) , (x) 3 (3) 4 (4) 5 (5) -> Index 6
 
       await act(async () => {
-        jest.runAllTimers();
+        await new Promise((resolve) => setTimeout(resolve, 0));
       });
 
       expect(input.value).toBe("12,345");
@@ -880,7 +878,7 @@ describe("NumberInput Real-Time Formatting", () => {
       // 5 (1) -> Index 1
 
       await act(async () => {
-        jest.runAllTimers();
+        await new Promise((resolve) => setTimeout(resolve, 0));
       });
 
       expect(input.value).toBe("51,234");
@@ -914,7 +912,7 @@ describe("NumberInput Real-Time Formatting", () => {
       // Index 2
 
       await act(async () => {
-        jest.runAllTimers();
+        await new Promise((resolve) => setTimeout(resolve, 0));
       });
 
       expect(input.value).toBe("15,234");
@@ -952,7 +950,7 @@ describe("NumberInput Real-Time Formatting", () => {
       // Index of '5' is 2. So cursor at 3.
 
       await act(async () => {
-        jest.runAllTimers();
+        await new Promise((resolve) => setTimeout(resolve, 0));
       });
 
       expect(input.value).toContain("15,234");

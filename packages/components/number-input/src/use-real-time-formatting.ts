@@ -1,7 +1,7 @@
 import type {NumberParser} from "@internationalized/number";
 import type {NumberFieldState} from "@react-stately/numberfield";
 
-import {useCallback, useMemo, useRef} from "react";
+import {useCallback, useRef} from "react";
 
 export interface UseRealTimeInputFormattingProps {
   isRealTimeFormat: boolean;
@@ -16,9 +16,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
   const {isRealTimeFormat, numberParser, numberFormatter, state, domRef, onChange} = props;
   const isComposingRef = useRef(false);
 
-  const shouldFormat = useMemo(() => {
-    return Boolean(isRealTimeFormat);
-  }, [isRealTimeFormat]);
+  const shouldFormat = Boolean(isRealTimeFormat);
 
   const handleCompositionStart = useCallback(() => {
     isComposingRef.current = true;
@@ -184,7 +182,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
 
   const handleBeforeInput = useCallback(
     (e: React.FormEvent<HTMLInputElement> & {data: string | null}) => {
-      if (isComposingRef.current || (e.nativeEvent as any).isComposing) return;
+      if (isComposingRef.current || (e.nativeEvent as InputEvent)?.isComposing) return;
       if (!e.data) return;
 
       const input = domRef.current;
