@@ -53,6 +53,7 @@ const COMPONENT_NAMES = [
   "tag-group",
   "text-field",
   "textarea",
+  "time-field",
   "tooltip",
 ] as const;
 

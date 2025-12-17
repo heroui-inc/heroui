@@ -315,6 +315,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "textfield",
     title: "TextField",
   },
+  timefield: {
+    category: "forms",
+    description: "Time input field with labels, descriptions, and validation",
+    href: "/docs/components/time-field",
+    name: "timefield",
+    title: "TimeField",
+  },
   tooltip: {
     category: "display",
     description: "Contextual information on hover or focus",
@@ -378,7 +385,16 @@ const componentRelationships: Record<string, string[]> = {
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
   dropdown: ["button", "popover", "separator", "listbox"],
   errormessage: ["taggroup"],
-  fielderror: ["textfield", "input", "textarea", "combobox", "form", "numberfield", "datefield"],
+  fielderror: [
+    "textfield",
+    "input",
+    "textarea",
+    "combobox",
+    "form",
+    "numberfield",
+    "datefield",
+    "timefield",
+  ],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
   form: [
     "button",
@@ -398,6 +414,7 @@ const componentRelationships: Record<string, string[]> = {
     "inputotp",
     "numberfield",
     "datefield",
+    "timefield",
   ],
   input: [
     "textfield",
@@ -437,6 +454,7 @@ const componentRelationships: Record<string, string[]> = {
     "combobox",
     "numberfield",
     "datefield",
+    "timefield",
   ],
   link: [],
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
@@ -485,6 +503,7 @@ const componentRelationships: Record<string, string[]> = {
     "textarea",
     "numberfield",
     "datefield",
+    "timefield",
     "card",
     "listbox",
   ],
@@ -504,6 +523,7 @@ const componentRelationships: Record<string, string[]> = {
     "inputgroup",
     "datefield",
   ],
+  timefield: ["label", "fielderror", "description", "form", "surface"],
   tooltip: ["button", "popover"],
 };
 
