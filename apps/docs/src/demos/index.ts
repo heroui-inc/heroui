@@ -12,7 +12,7 @@ import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ComboBoxDemos from "./combobox";
-import * as DateInputGroupDemos from "./date-input-group";
+import * as DateFieldDemos from "./date-field";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -524,26 +524,54 @@ export const demos: Record<string, DemoItem> = {
     component: InputDemos.OnSurface,
     file: "input/on-surface.tsx",
   },
-  // DateInputGroup demos
-  "date-input-group-basic": {
-    component: DateInputGroupDemos.Basic,
-    file: "date-input-group/basic.tsx",
+  // DateField demos
+  "date-field-basic": {
+    component: DateFieldDemos.Basic,
+    file: "date-field/basic.tsx",
   },
-  "date-input-group-with-prefix": {
-    component: DateInputGroupDemos.WithPrefix,
-    file: "date-input-group/with-prefix.tsx",
+  "date-field-controlled": {
+    component: DateFieldDemos.Controlled,
+    file: "date-field/controlled.tsx",
   },
-  "date-input-group-with-suffix": {
-    component: DateInputGroupDemos.WithSuffix,
-    file: "date-input-group/with-suffix.tsx",
+  "date-field-disabled": {
+    component: DateFieldDemos.Disabled,
+    file: "date-field/disabled.tsx",
   },
-  "date-input-group-with-prefix-and-suffix": {
-    component: DateInputGroupDemos.WithPrefixAndSuffix,
-    file: "date-input-group/with-prefix-and-suffix.tsx",
+  "date-field-form-example": {
+    component: DateFieldDemos.FormExample,
+    file: "date-field/form-example.tsx",
   },
-  "date-input-group-on-surface": {
-    component: DateInputGroupDemos.OnSurface,
-    file: "date-input-group/on-surface.tsx",
+  "date-field-invalid": {
+    component: DateFieldDemos.Invalid,
+    file: "date-field/invalid.tsx",
+  },
+  "date-field-on-surface": {
+    component: DateFieldDemos.OnSurface,
+    file: "date-field/on-surface.tsx",
+  },
+  "date-field-required": {
+    component: DateFieldDemos.Required,
+    file: "date-field/required.tsx",
+  },
+  "date-field-with-description": {
+    component: DateFieldDemos.WithDescription,
+    file: "date-field/with-description.tsx",
+  },
+  "date-field-with-prefix-and-suffix": {
+    component: DateFieldDemos.WithPrefixAndSuffix,
+    file: "date-field/with-prefix-and-suffix.tsx",
+  },
+  "date-field-with-prefix-icon": {
+    component: DateFieldDemos.WithPrefixIcon,
+    file: "date-field/with-prefix-icon.tsx",
+  },
+  "date-field-with-suffix-icon": {
+    component: DateFieldDemos.WithSuffixIcon,
+    file: "date-field/with-suffix-icon.tsx",
+  },
+  "date-field-with-validation": {
+    component: DateFieldDemos.WithValidation,
+    file: "date-field/with-validation.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {

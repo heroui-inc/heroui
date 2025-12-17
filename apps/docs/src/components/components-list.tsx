@@ -20,7 +20,7 @@ const COMPONENT_NAMES = [
   "chip",
   "close-button",
   "combobox",
-  "date-input-group",
+  "date-field",
   "description",
   "disclosure",
   "disclosure-group",

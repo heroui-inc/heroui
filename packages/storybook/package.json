@@ -19,11 +19,11 @@
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@storybook/addon-a11y": "10.1.7",
-    "@storybook/addon-docs": "10.1.7",
+    "@storybook/addon-a11y": "10.1.9",
+    "@storybook/addon-docs": "10.1.9",
     "@storybook/icons": "2.0.1",
-    "@storybook/react": "10.1.7",
-    "@storybook/react-vite": "10.1.7",
+    "@storybook/react": "10.1.9",
+    "@storybook/react-vite": "10.1.9",
     "@tailwindcss/postcss": "4.1.18",
     "@tailwindcss/vite": "4.1.18",
     "@types/react": "19.2.7",
@@ -31,8 +31,8 @@
     "@vitejs/plugin-react": "5.1.2",
     "glob": "13.0.0",
     "postcss": "8.5.6",
-    "storybook": "10.1.7",
+    "storybook": "10.1.9",
     "tailwindcss": "4.1.18",
-    "vite": "7.2.7"
+    "vite": "7.3.0"
   }
 }
