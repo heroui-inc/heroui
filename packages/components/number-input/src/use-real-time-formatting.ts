@@ -24,6 +24,26 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
     isComposingRef.current = true;
   }, []);
 
+  const restoreCursorPosition = useCallback(
+    (input: HTMLInputElement, formattedValue: string, digitCount: number) => {
+      setTimeout(() => {
+        if (!input) return;
+        let currentDigitCount = 0;
+        let newCursorPos = 0;
+
+        for (let i = 0; i < formattedValue.length; i++) {
+          if (/\d/.test(formattedValue[i])) currentDigitCount++;
+          if (currentDigitCount >= digitCount) {
+            newCursorPos = i + 1;
+            break;
+          }
+        }
+        input.setSelectionRange(newCursorPos, newCursorPos);
+      }, 0);
+    },
+    [],
+  );
+
   const handleInput = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       if (isComposingRef.current || !shouldFormat) return;
@@ -50,20 +70,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
       state.setInputValue(formattedValue);
       state.setNumberValue(parsedValue);
 
-      setTimeout(() => {
-        if (!input) return;
-        let currentDigitCount = 0;
-        let newCursorPos = 0;
-
-        for (let i = 0; i < formattedValue.length; i++) {
-          if (/\d/.test(formattedValue[i])) currentDigitCount++;
-          if (currentDigitCount >= digitCount) {
-            newCursorPos = i + 1;
-            break;
-          }
-        }
-        input.setSelectionRange(newCursorPos, newCursorPos);
-      }, 0);
+      restoreCursorPosition(input, formattedValue, digitCount);
 
       if (onChange) {
         onChange({
@@ -72,7 +79,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
         } as React.ChangeEvent<HTMLInputElement>);
       }
     },
-    [shouldFormat, numberParser, numberFormatter, state, onChange],
+    [shouldFormat, numberParser, numberFormatter, state, onChange, restoreCursorPosition],
   );
 
   const handleCompositionEnd = useCallback(
@@ -114,20 +121,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
         (value.slice(0, selectionStart ?? 0).match(/\d/g) || []).length +
         (clipboardData.match(/\d/g) || []).length;
 
-      setTimeout(() => {
-        if (!input) return;
-        let currentDigitCount = 0;
-        let newCursorPos = 0;
-
-        for (let i = 0; i < formattedValue.length; i++) {
-          if (/\d/.test(formattedValue[i])) currentDigitCount++;
-          if (currentDigitCount >= digitCount) {
-            newCursorPos = i + 1;
-            break;
-          }
-        }
-        input.setSelectionRange(newCursorPos, newCursorPos);
-      }, 0);
+      restoreCursorPosition(input, formattedValue, digitCount);
 
       if (onChange) {
         onChange({
@@ -136,7 +130,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
         } as React.ChangeEvent<HTMLInputElement>);
       }
     },
-    [numberParser, numberFormatter, state, domRef, onChange],
+    [numberParser, numberFormatter, state, domRef, onChange, restoreCursorPosition],
   );
 
   const handleCut = useCallback(
@@ -176,20 +170,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
 
       const digitCount = (value.slice(0, selectionStart ?? 0).match(/\d/g) || []).length;
 
-      setTimeout(() => {
-        if (!input) return;
-        let currentDigitCount = 0;
-        let newCursorPos = 0;
-
-        for (let i = 0; i < formattedValue.length; i++) {
-          if (/\d/.test(formattedValue[i])) currentDigitCount++;
-          if (currentDigitCount >= digitCount) {
-            newCursorPos = i + 1;
-            break;
-          }
-        }
-        input.setSelectionRange(newCursorPos, newCursorPos);
-      }, 0);
+      restoreCursorPosition(input, formattedValue, digitCount);
 
       if (onChange) {
         onChange({
@@ -198,7 +179,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
         } as React.ChangeEvent<HTMLInputElement>);
       }
     },
-    [numberParser, numberFormatter, state, domRef, onChange],
+    [numberParser, numberFormatter, state, domRef, onChange, restoreCursorPosition],
   );
 
   const handleBeforeInput = useCallback(
@@ -243,21 +224,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
       state.setInputValue(formattedValue);
       state.setNumberValue(parsedValue);
 
-      setTimeout(() => {
-        if (!input) return;
-        let currentDigitCount = 0;
-        let newCursorPos = 0;
-
-        // Iterate through the formatted value to find the new cursor position
-        for (let i = 0; i < formattedValue.length; i++) {
-          if (/\d/.test(formattedValue[i])) currentDigitCount++;
-          if (currentDigitCount >= digitCount) {
-            newCursorPos = i + 1;
-            break;
-          }
-        }
-        input.setSelectionRange(newCursorPos, newCursorPos);
-      }, 0);
+      restoreCursorPosition(input, formattedValue, digitCount);
 
       if (onChange) {
         onChange({
@@ -266,7 +233,7 @@ export function useRealTimeInputFormatting(props: UseRealTimeInputFormattingProp
         } as React.ChangeEvent<HTMLInputElement>);
       }
     },
-    [numberParser, numberFormatter, state, domRef, onChange],
+    [numberParser, numberFormatter, state, domRef, onChange, restoreCursorPosition],
   );
 
   return {

@@ -813,11 +813,13 @@ describe("NumberInput Real-Time Formatting", () => {
     let setSelectionRangeSpy: jest.SpyInstance;
 
     beforeEach(() => {
+      jest.useFakeTimers();
       setSelectionRangeSpy = jest.spyOn(HTMLInputElement.prototype, "setSelectionRange");
     });
 
     afterEach(() => {
       setSelectionRangeSpy.mockRestore();
+      jest.useRealTimers();
     });
 
     it("should restore cursor correctly when appending a digit", async () => {
