@@ -31,7 +31,7 @@
  * Backdrop - The overlay behind the dialog
  * ------------------------------------------------------------------------------------------------ */
 .modal__backdrop {
-  @apply fixed inset-0 isolate z-50 h-(--visual-viewport-height);
+  @apply fixed inset-0 isolate z-50 h-(--visual-viewport-height) will-change-[opacity];
 
   /* Entering animation */
   &[data-entering="true"] {
@@ -74,7 +74,7 @@
  * ------------------------------------------------------------------------------------------------ */
 .modal__container {
   @apply fixed left-1/2 flex max-h-(--visual-viewport-height) w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
-  @apply transform-gpu will-change-transform;
+  @apply transform-gpu will-change-[opacity,transform];
 
   /* Auto - bottom on mobile, center on desktop */
   &[data-placement="auto"] {

@@ -90,7 +90,7 @@
 
 /* Similar to popover content styles */
 .combobox__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-transform;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
