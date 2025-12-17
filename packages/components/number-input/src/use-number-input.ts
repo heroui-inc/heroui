@@ -18,6 +18,8 @@ import {NumberParser} from "@internationalized/number";
 import {useMemo, useCallback, useState} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
+import {useRealTimeInputFormatting} from "./use-real-time-formatting";
+
 export interface Props extends Omit<HTMLHeroUIProps<"input">, keyof NumberInputVariantProps> {
   /**
    * Ref to the DOM node.
@@ -260,62 +262,6 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     ],
   );
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const inputElement = e.currentTarget;
-      const {selectionStart, selectionEnd, value} = inputElement;
-      // locale-aware grouping separator
-      const nf = new Intl.NumberFormat(locale, {useGrouping: true});
-      const groupChar = nf.formatToParts(1000).find((p) => p.type === "group")?.value ?? ",";
-
-      // handle backspace when cursor is between a digit and the first group separator
-      // e.g. 1|,234 (en-US) or 1|.234 (de-DE) -> backspace removes the preceding digit if (
-      if (
-        e.key === "Backspace" &&
-        !originalProps.isReadOnly &&
-        !originalProps.isDisabled &&
-        selectionStart !== null &&
-        selectionEnd !== null &&
-        selectionStart === selectionEnd &&
-        selectionStart > 0 &&
-        value[selectionStart] === groupChar &&
-        value[selectionStart - 1] !== groupChar
-      ) {
-        e.preventDefault();
-        // e.g. 1,234 -> ,234
-        const newValue = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
-        // e.g. ,234 -> 234
-        const cleanValue = newValue.replace(/[^\d.-]/g, "");
-
-        if (cleanValue === "" || cleanValue === "-") {
-          state.setInputValue("");
-        } else {
-          const numberValue = parseFloat(cleanValue);
-
-          if (!isNaN(numberValue)) {
-            state.setNumberValue(numberValue);
-          }
-        }
-
-        setTimeout(() => {
-          // set the new cursor position
-          const pos = Math.max(0, selectionStart - 1);
-
-          inputElement.setSelectionRange(pos, pos);
-        }, 0);
-      } else if (
-        e.key === "Escape" &&
-        inputValue &&
-        (isClearable || onClear) &&
-        !originalProps.isReadOnly
-      ) {
-        state.setInputValue("");
-        onClear?.();
-      }
-    },
-    [inputValue, state, onClear, isClearable, originalProps.isReadOnly],
-  );
-
   const numberFormatter = useMemo(() => {
     return new Intl.NumberFormat(locale, originalProps.formatOptions);
   }, [locale, originalProps.formatOptions]);
@@ -324,60 +270,95 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     return new NumberParser(locale, originalProps.formatOptions);
   }, [locale, originalProps.formatOptions]);
 
-  const shouldFormat = useMemo(() => {
-    // Return false if isRealTimeFormat is not enabled (React Aria default)
-    if (!originalProps.isRealTimeFormat) return false;
+  // Hook to handle real-time formatting logic
+  const {
+    shouldFormat,
+    handleBeforeInput,
+    handleInput,
+    handleCompositionStart,
+    handleCompositionEnd,
+    handlePaste,
+    handleCut,
+  } = useRealTimeInputFormatting({
+    isRealTimeFormat: originalProps.isRealTimeFormat ?? false,
+    numberParser,
+    numberFormatter,
+    state,
+    domRef,
+    onChange,
+  });
 
-    // Only check useGrouping if isRealTimeFormat is true
-    const resolved = numberFormatter.resolvedOptions();
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const {key} = e;
 
-    return resolved.useGrouping !== false;
-  }, [originalProps.isRealTimeFormat, numberFormatter]);
-
-  const handleBeforeInput = useCallback(
-    (e: React.FormEvent<HTMLInputElement> & {data: string | null}) => {
-      if (!e.data) return;
-
-      const input = domRef.current;
-
-      if (!input) return;
-
-      const {value, selectionStart, selectionEnd} = input;
-      const nextValue =
-        value.slice(0, selectionStart ?? 0) + e.data + value.slice(selectionEnd ?? 0);
-
-      // Use React Aria's NumberParser for validation and parsing
-      // This handles full-width numbers and locale-specific symbols
-      if (!numberParser.isValidPartialNumber(nextValue)) {
+      if (key === "ArrowUp") {
         e.preventDefault();
-
-        return;
+        state.increment();
+      } else if (key === "ArrowDown") {
+        e.preventDefault();
+        state.decrement();
       }
 
-      const parsedValue = numberParser.parse(nextValue);
+      const input = e.currentTarget;
+      const {selectionStart, selectionEnd, value} = input;
 
-      if (isNaN(parsedValue)) return;
+      // Restore original Backspace logic for comma/grouping separator navigation
+      // This is required for existing tests and proper behavior across all modes
+      if (
+        key === "Backspace" &&
+        !originalProps.isReadOnly &&
+        !originalProps.isDisabled &&
+        selectionStart !== null &&
+        selectionEnd !== null &&
+        selectionStart === selectionEnd &&
+        selectionStart > 0
+      ) {
+        const groupChar =
+          numberFormatter.formatToParts(1000).find((p) => p.type === "group")?.value ?? ",";
 
-      e.preventDefault();
+        if (value[selectionStart] === groupChar && value[selectionStart - 1] !== groupChar) {
+          e.preventDefault();
+          const newValue = value.slice(0, selectionStart - 1) + value.slice(selectionStart);
+          const cleanValue = newValue.replace(/[^\d.-]/g, "");
 
-      const formattedValue = numberFormatter.format(parsedValue);
+          if (cleanValue === "" || cleanValue === "-") {
+            state.setInputValue("");
+            state.setNumberValue(NaN);
+          } else {
+            const numberValue = parseFloat(cleanValue);
 
-      // Call validate like React Aria does
-      if (!state.validate(formattedValue)) {
-        return;
-      }
+            if (!isNaN(numberValue)) {
+              state.setNumberValue(numberValue);
 
-      state.setInputValue(formattedValue);
-      state.setNumberValue(parsedValue);
+              setTimeout(() => {
+                const pos = Math.max(0, selectionStart - 1);
 
-      if (onChange) {
-        onChange({
-          target: {value: formattedValue},
-          currentTarget: {value: formattedValue},
-        } as React.ChangeEvent<HTMLInputElement>);
+                input.setSelectionRange(pos, pos);
+              }, 0);
+            }
+          }
+        }
+      } else if (
+        key === "Escape" &&
+        inputValue &&
+        (isClearable || onClear) &&
+        !originalProps.isReadOnly
+      ) {
+        state.setInputValue("");
+        onClear?.();
       }
     },
-    [numberParser, numberFormatter, state, domRef, onChange],
+    [
+      inputValue,
+      state,
+      onClear,
+      isClearable,
+      originalProps.isReadOnly,
+      originalProps.isRealTimeFormat,
+      numberParser,
+      numberFormatter,
+    ],
   );
 
   const getBaseProps: PropGetter = useCallback(
@@ -463,8 +444,17 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
           }),
           props,
         ),
-        // Only override onBeforeInput when isRealTimeFormat is true
-        ...(shouldFormat ? {onBeforeInput: handleBeforeInput} : {}),
+        // Only override handlers when isRealTimeFormat is true
+        ...(shouldFormat
+          ? {
+              onBeforeInput: handleBeforeInput,
+              onInput: handleInput,
+              onCompositionStart: handleCompositionStart,
+              onCompositionEnd: handleCompositionEnd,
+              onPaste: handlePaste,
+              onCut: handleCut,
+            }
+          : {}),
         "aria-readonly": dataAttr(originalProps.isReadOnly),
         onChange: chain(inputProps.onChange, onChange),
         onKeyDown: chain(inputProps.onKeyDown, props.onKeyDown, handleKeyDown),
@@ -481,11 +471,15 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
       endContent,
       classNames?.input,
       originalProps.isReadOnly,
-      originalProps.isRequired,
       onChange,
       handleKeyDown,
       shouldFormat,
       handleBeforeInput,
+      handleInput,
+      handleCompositionStart,
+      handleCompositionEnd,
+      handlePaste,
+      handleCut,
     ],
   );
 

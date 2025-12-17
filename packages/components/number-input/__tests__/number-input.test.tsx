@@ -726,3 +726,240 @@ describe("NumberInput with React Hook Form", () => {
     });
   });
 });
+
+describe("NumberInput Real-Time Formatting", () => {
+  let user: ReturnType<typeof userEvent.setup>;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
+  it("should format value in real-time when isRealTimeFormat is true", async () => {
+    const {container} = render(
+      <NumberInput
+        isRealTimeFormat
+        formatOptions={{style: "decimal", useGrouping: true}}
+        label="Price"
+      />,
+    );
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.type(input, "1234");
+    expect(input.value).toBe("1,234");
+  });
+
+  it("should format even if useGrouping is false when isRealTimeFormat is true", async () => {
+    const {container} = render(
+      <NumberInput
+        isRealTimeFormat
+        formatOptions={{style: "currency", currency: "USD", useGrouping: false}}
+        label="Price"
+      />,
+    );
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    // Type 1234. Should be formatted as $1234 (no comma)
+    // Note: Currency symbol depends on locale. Default en-US -> $
+    await user.type(input, "1234");
+    // Standard currency formatting often adds decimals and currency symbol
+    // We check that it has some currency formatting but NO commas for thousands
+    expect(input.value).toMatch(/\$1234(\.00)?/);
+    expect(input.value).not.toContain(",");
+  });
+
+  it("should prevent invalid input via beforeInput", async () => {
+    const {container} = render(<NumberInput isRealTimeFormat label="Number" />);
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    // Simulate beforeInput with invalid char
+    // Note: userEvent.type simulates a sequence of events.
+    // Ideally we'd use a more direct beforeInput simulation if userEvent passes through 'a' by default in JSDOM,
+    // but the implementation logic we added (preventDefault) should block it if JSDOM/userEvent fires beforeInput.
+    await user.type(input, "1a2");
+    // 'a' should be blocked.
+    expect(input.value).toBe("12");
+  });
+
+  it("should handle paste and format", async () => {
+    const {container} = render(<NumberInput isRealTimeFormat label="Number" />);
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.paste("1234");
+
+    expect(input.value).toBe("1,234");
+  });
+
+  it("should NOT format in real-time when isRealTimeFormat is false (default)", async () => {
+    const {container} = render(
+      <NumberInput
+        // isRealTimeFormat is undefined (false)
+        formatOptions={{style: "decimal", useGrouping: true}}
+        label="Price"
+      />,
+    );
+    const input = container.querySelector("input") as HTMLInputElement;
+
+    await user.click(input);
+    await user.keyboard("1234");
+
+    // Should remain "1234" (no commas) while typing because real-time formatting is off
+    // Note: React Aria might format on blur, but here we check immediate value
+    expect(input.value).toBe("1234");
+  });
+
+  describe("Cursor Restoration", () => {
+    // Helper to spy on setSelectionRange
+    let setSelectionRangeSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      setSelectionRangeSpy = jest.spyOn(HTMLInputElement.prototype, "setSelectionRange");
+    });
+
+    afterEach(() => {
+      setSelectionRangeSpy.mockRestore();
+    });
+
+    it("should restore cursor correctly when appending a digit", async () => {
+      // 1,234 -> type '5' at end -> 12,345
+      const {container} = render(
+        <NumberInput
+          isRealTimeFormat
+          defaultValue={1234}
+          formatOptions={{style: "decimal", useGrouping: true}}
+          label="Price"
+        />,
+      );
+      const input = container.querySelector("input") as HTMLInputElement;
+
+      await user.click(input);
+      // Move cursor to end
+      act(() => {
+        input.setSelectionRange(5, 5); // after 4
+      });
+
+      await user.keyboard("5");
+
+      // Original: 1,234 (digits: 1234)
+      // Type 5 -> Value: 12,345
+      // Cursor should be after 5.
+      // 1 (1) 2 (2) , (x) 3 (3) 4 (4) 5 (5) -> Index 6
+
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      expect(input.value).toBe("12,345");
+      expect(setSelectionRangeSpy).toHaveBeenLastCalledWith(6, 6);
+    });
+
+    it("should restore cursor correctly when prepending a digit", async () => {
+      // 1,234 -> type '5' at start -> 51,234
+      const {container} = render(
+        <NumberInput
+          isRealTimeFormat
+          defaultValue={1234}
+          formatOptions={{style: "decimal", useGrouping: true}}
+          label="Price"
+        />,
+      );
+      const input = container.querySelector("input") as HTMLInputElement;
+
+      await user.click(input);
+      // Move cursor to start
+      act(() => {
+        input.setSelectionRange(0, 0);
+      });
+
+      await user.keyboard("5");
+
+      // Result: 51,234
+      // Cursor should be after 5 (1st digit).
+      // 5 (1) -> Index 1
+
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      expect(input.value).toBe("51,234");
+      expect(setSelectionRangeSpy).toHaveBeenLastCalledWith(1, 1);
+    });
+
+    it("should restore cursor correctly when inserting in middle", async () => {
+      // 1,234 -> type '5' after '1' -> 15,234
+      const {container} = render(
+        <NumberInput
+          isRealTimeFormat
+          defaultValue={1234}
+          formatOptions={{style: "decimal", useGrouping: true}}
+          label="Price"
+        />,
+      );
+      const input = container.querySelector("input") as HTMLInputElement;
+
+      await user.click(input);
+      // Cursor after '1'
+      act(() => {
+        input.setSelectionRange(1, 1); // 1|,234
+      });
+
+      await user.keyboard("5");
+
+      // Result: 15,234
+      // Cursor should be after 5.
+      // Digits before: 1, 5 (2 digits)
+      // 1 (1) 5 (2) , (x) ...
+      // Index 2
+
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      expect(input.value).toBe("15,234");
+      expect(setSelectionRangeSpy).toHaveBeenLastCalledWith(2, 2);
+    });
+
+    it("should restore cursor correctly with currency symbols", async () => {
+      // $1,234 -> type '5' after '1' -> $15,234 (Assuming en-US default)
+      const {container} = render(
+        <NumberInput
+          isRealTimeFormat
+          defaultValue={1234}
+          formatOptions={{style: "currency", currency: "USD", useGrouping: true}}
+          label="Price"
+        />,
+      );
+      const input = container.querySelector("input") as HTMLInputElement;
+
+      await user.click(input);
+      // Move cursor after '1' (index 2)
+      act(() => {
+        // Find position of '1'
+        const idx = input.value.indexOf("1");
+
+        input.setSelectionRange(idx + 1, idx + 1);
+      });
+
+      await user.keyboard("5");
+
+      // Result: $15,234.00
+      // Digits before cursor: 1, 5 (2 digits)
+      // New string: $ 1 5 , 2 3 4 . 0 0
+      // Digits:     x 1 2 x 3 4 5 x 6 7
+      // 2nd digit is '5'. Cursor should be after it.
+      // Index of '5' is 2. So cursor at 3.
+
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      expect(input.value).toContain("15,234");
+
+      // We check if the cursor is placed after the 2nd digit
+      const matches = input.value.match(/^[^0-9]*\d\d/); // match prefix + 2 digits
+      const expectedIndex = matches ? matches[0].length : 0;
+
+      expect(setSelectionRangeSpy).toHaveBeenLastCalledWith(expectedIndex, expectedIndex);
+    });
+  });
+});
