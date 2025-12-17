@@ -67,6 +67,7 @@
     "components/tag-group",
     "components/text-field",
     "components/textarea",
+    "components/time-field",
     "components/tooltip"
   ]
 }

@@ -45,6 +45,7 @@ import * as TabsDemos from "./tabs";
 import * as TagGroupDemos from "./tag-group";
 import * as TextFieldDemos from "./text-field";
 import * as TextAreaDemos from "./textarea";
+import * as TimeFieldDemos from "./time-field";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -998,6 +999,55 @@ export const demos: Record<string, DemoItem> = {
   "text-field-on-surface": {
     component: TextFieldDemos.OnSurface,
     file: "text-field/on-surface.tsx",
+  },
+  // TimeField demos
+  "time-field-basic": {
+    component: TimeFieldDemos.Basic,
+    file: "time-field/basic.tsx",
+  },
+  "time-field-controlled": {
+    component: TimeFieldDemos.Controlled,
+    file: "time-field/controlled.tsx",
+  },
+  "time-field-disabled": {
+    component: TimeFieldDemos.Disabled,
+    file: "time-field/disabled.tsx",
+  },
+  "time-field-form-example": {
+    component: TimeFieldDemos.FormExample,
+    file: "time-field/form-example.tsx",
+  },
+  "time-field-invalid": {
+    component: TimeFieldDemos.Invalid,
+    file: "time-field/invalid.tsx",
+  },
+  "time-field-on-surface": {
+    component: TimeFieldDemos.OnSurface,
+    file: "time-field/on-surface.tsx",
+  },
+  "time-field-required": {
+    component: TimeFieldDemos.Required,
+    file: "time-field/required.tsx",
+  },
+  "time-field-with-description": {
+    component: TimeFieldDemos.WithDescription,
+    file: "time-field/with-description.tsx",
+  },
+  "time-field-with-prefix-and-suffix": {
+    component: TimeFieldDemos.WithPrefixAndSuffix,
+    file: "time-field/with-prefix-and-suffix.tsx",
+  },
+  "time-field-with-prefix-icon": {
+    component: TimeFieldDemos.WithPrefixIcon,
+    file: "time-field/with-prefix-icon.tsx",
+  },
+  "time-field-with-suffix-icon": {
+    component: TimeFieldDemos.WithSuffixIcon,
+    file: "time-field/with-suffix-icon.tsx",
+  },
+  "time-field-with-validation": {
+    component: TimeFieldDemos.WithValidation,
+    file: "time-field/with-validation.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {
