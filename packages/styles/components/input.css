@@ -1,5 +1,5 @@
 .input {
-  @apply rounded-field border bg-field px-3 py-2 text-sm text-field-foreground shadow-field outline-none placeholder:text-field-placeholder;
+  @apply rounded-field border bg-field px-3 py-2 text-base text-field-foreground shadow-field outline-none placeholder:text-field-placeholder sm:text-sm;
 
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);

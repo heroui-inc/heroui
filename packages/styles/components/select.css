@@ -100,7 +100,7 @@
 }
 
 .select__value {
-  @apply flex-1 truncate text-left text-current;
+  @apply flex-1 text-left text-base wrap-break-word text-current sm:text-sm;
 
   &[data-placeholder="true"] {
     @apply text-field-placeholder;
