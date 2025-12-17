@@ -13,6 +13,7 @@ import {ComponentPreview} from "./components/component-preview";
 import {ComponentsList} from "./components/components-list";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
+import {NativeVideoPlayerView} from "./components/native-video-player-view";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
@@ -107,6 +108,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Icon,
     Info,
     Link,
+    NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,
     Preview,
