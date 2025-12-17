@@ -5,7 +5,7 @@ import type {FC} from "react";
 
 import {Card, CardBody, Button, Image, Slider} from "@heroui/react";
 import {useState} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import NextImage from "next/image";
 
 import {
@@ -25,7 +25,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = ({className, ...otherProps}) =>
   return (
     <Card
       isBlurred
-      className={clsx("border-none bg-background/60 dark:bg-default-100/50", className)}
+      className={cn("border-none bg-background/60 dark:bg-default-100/50", className)}
       shadow="sm"
       {...otherProps}
     >

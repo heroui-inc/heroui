@@ -1,5 +1,24 @@
 # @heroui/autocomplete
 
+## 2.3.30
+
+### Patch Changes
+
+- [#5951](https://github.com/heroui-inc/heroui/pull/5951) [`b4cfb40`](https://github.com/heroui-inc/heroui/commit/b4cfb408e963c1131ea3beb58aac7821a0ef52a9) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - show popover when emptyContent is provided with allowsCustomValue (#5745)
+
+- [#5827](https://github.com/heroui-inc/heroui/pull/5827) [`2922b35`](https://github.com/heroui-inc/heroui/commit/2922b35644d8136d593ce08cccf9c78c08d00e0f) Thanks [@wingkwong](https://github.com/wingkwong)! - fix close button display in autocomplete on mobile (#5826)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/button@2.2.28
+  - @heroui/input@2.4.29
+  - @heroui/scroll-shadow@2.3.19
+  - @heroui/listbox@2.3.27
+  - @heroui/popover@2.3.28
+  - @heroui/form@2.1.28
+  - @heroui/aria-utils@2.2.25
+
 ## 2.3.29
 
 ### Patch Changes

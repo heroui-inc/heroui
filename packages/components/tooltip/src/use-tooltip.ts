@@ -13,8 +13,8 @@ import {useTooltipTriggerState} from "@react-stately/tooltip";
 import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
 import {useOverlayPosition} from "@react-aria/overlays";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {popover} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {popover, cn} from "@heroui/theme";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {mergeRefs} from "@heroui/react-utils";
 import {createDOMRef} from "@heroui/react-utils";
 import {useMemo, useRef, useCallback} from "react";
@@ -270,7 +270,7 @@ export function useTooltip(originalProps: UseTooltipProps) {
       "data-arrow": dataAttr(showArrow),
       "data-disabled": dataAttr(isDisabled),
       "data-placement": getArrowPlacement(placement || "top", placementProp),
-      className: slots.content({class: clsx(classNames?.content, className)}),
+      className: slots.content({class: cn(classNames?.content, className)}),
     }),
     [slots, isOpen, showArrow, isDisabled, placement, placementProp, classNames],
   );

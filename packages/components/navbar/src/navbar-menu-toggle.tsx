@@ -5,11 +5,12 @@ import type {AriaToggleButtonProps} from "@react-aria/button";
 import {useToggleButton as useAriaToggleButton} from "@react-aria/button";
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useToggleState} from "@react-stately/toggle";
 import {useFocusRing} from "@react-aria/focus";
 import {useHover} from "@react-aria/interactions";
 import {useMemo} from "react";
+import {cn} from "@heroui/theme";
 
 import {useNavbarContext} from "./navbar-context";
 
@@ -58,7 +59,7 @@ const NavbarMenuToggle = forwardRef<"button", NavbarMenuToggleProps>((props, ref
   const {isFocusVisible, focusProps} = useFocusRing({autoFocus});
   const {isHovered, hoverProps} = useHover({});
 
-  const toggleStyles = clsx(classNames?.toggle, className);
+  const toggleStyles = cn(classNames?.toggle, className);
 
   const child = useMemo(() => {
     if (typeof icon === "function") {

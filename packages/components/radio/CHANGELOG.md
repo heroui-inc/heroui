@@ -1,5 +1,16 @@
 # @heroui/radio
 
+## 2.3.28
+
+### Patch Changes
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- [#5944](https://github.com/heroui-inc/heroui/pull/5944) [`4fa5453`](https://github.com/heroui-inc/heroui/commit/4fa54534b2596ca2e46c69945c34894d1da14fab) Thanks [@wingkwong](https://github.com/wingkwong)! - handle props styles in getBaseProps (#5942)
+
+- Updated dependencies [[`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/form@2.1.28
+
 ## 2.3.27
 
 ### Patch Changes

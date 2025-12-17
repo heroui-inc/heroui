@@ -2,7 +2,8 @@ import type {HTMLHeroUIProps} from "@heroui/system";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {dataAttr} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {useNavbarContext} from "./navbar-context";
 
@@ -22,7 +23,7 @@ const NavbarMenuItem = forwardRef<"li", NavbarMenuItemProps>((props, ref) => {
 
   const {slots, isMenuOpen, classNames} = useNavbarContext();
 
-  const styles = clsx(classNames?.menuItem, className);
+  const styles = cn(classNames?.menuItem, className);
 
   return (
     <li

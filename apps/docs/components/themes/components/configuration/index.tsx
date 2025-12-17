@@ -19,7 +19,6 @@ import {useLocalStorage} from "usehooks-ts";
 import {Icon} from "@iconify/react/dist/offline";
 import LinkSquareIcon from "@iconify/icons-solar/link-square-linear";
 import {ArrowLeftIcon, ChevronIcon, ChevronUpIcon, CloseIcon} from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
 
 import {useThemeBuilder} from "../../provider";
 import {configKey, syncThemesKey, initialConfig} from "../../constants";
@@ -234,7 +233,7 @@ export default function Configuration() {
                     return (
                       <div key={template.name} className="flex flex-col items-center">
                         <Button
-                          className={clsx(
+                          className={cn(
                             "p-0 min-w-0 w-auto h-10 border border-black/5 gap-0 rounded-sm overflow-hidden m-[3px]",
                             templateTheme === template.name
                               ? "outline-1 outline-foreground-800"

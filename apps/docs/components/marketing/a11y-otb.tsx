@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "@heroui/react";
 import {useInView} from "framer-motion";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {
   AddNoteBulkIcon,
   CopyDocumentBulkIcon,
@@ -217,7 +217,7 @@ export const A11yOtb = () => {
                       description="Permanently delete the file"
                       shortcut="⌘⇧D"
                       startContent={
-                        <DeleteDocumentBulkIcon className={clsx(iconClasses, "text-danger!")} />
+                        <DeleteDocumentBulkIcon className={cn(iconClasses, "text-danger!")} />
                       }
                     >
                       Delete file

@@ -5,11 +5,11 @@ import type {ListState} from "@react-stately/list";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {useMemo, useRef, useCallback} from "react";
-import {listboxItem} from "@heroui/theme";
+import {listboxItem, cn} from "@heroui/theme";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
 import {filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
 import {useOption} from "@react-aria/listbox";
 import {useHover, usePress} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
@@ -111,7 +111,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     [objectToDeps(variantProps), isDisabled, disableAnimation, rendered, description],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   if (isReadOnly) {
     itemProps = removeEvents(itemProps);
@@ -139,7 +139,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     "data-selected": dataAttr(isSelected),
     "data-pressed": dataAttr(isPressed),
     "data-focus-visible": dataAttr(isFocusVisible),
-    className: slots.base({class: clsx(baseStyles, props.className)}),
+    className: slots.base({class: cn(baseStyles, props.className)}),
   });
 
   const getLabelProps: PropGetter = (props = {}) => ({

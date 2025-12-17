@@ -1,5 +1,14 @@
 # @heroui/card
 
+## 2.2.26
+
+### Patch Changes
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`91e010f`](https://github.com/heroui-inc/heroui/commit/91e010fe3bd8e49653bd53c47e9955d8b11c1db2), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/ripple@2.2.21
+
 ## 2.2.25
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @heroui/toast
 
+## 2.0.18
+
+### Patch Changes
+
+- [#5977](https://github.com/heroui-inc/heroui/pull/5977) [`799bc5b`](https://github.com/heroui-inc/heroui/commit/799bc5bab8f843d2fd7da12a685e087f5c141dad) Thanks [@wingkwong](https://github.com/wingkwong)! - fix long text in toast (#5552)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c), [`0825f88`](https://github.com/heroui-inc/heroui/commit/0825f88cd2bfd1b6638a23b8d21f8812576f84a7), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/spinner@2.2.25
+
 ## 2.0.17
 
 ### Patch Changes

@@ -8,9 +8,9 @@ import type {MotionProps} from "framer-motion";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {toast as toastTheme} from "@heroui/theme";
+import {toast as toastTheme, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, isEmpty, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, isEmpty, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
 import {useToast as useToastAria} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
@@ -292,7 +292,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
   const Component = as || "div";
 
   const domRef = useDOMRef(ref);
-  const baseStyles = clsx(className, classNames?.base);
+  const baseStyles = cn(className, classNames?.base);
   const {toastProps, contentProps, titleProps, descriptionProps} = useToastAria(
     props,
     state,
@@ -428,7 +428,7 @@ export function useToast<T extends ToastProps>(originalProps: UseToastProps<T>) 
 
       return {
         ref: domRef,
-        className: slots.base({class: clsx(baseStyles, classNames?.base)}),
+        className: slots.base({class: cn(baseStyles, classNames?.base)}),
         "data-has-title": dataAttr(!isEmpty(title)),
         "data-has-description": dataAttr(!isEmpty(description)),
         "data-placement": placement,

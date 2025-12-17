@@ -7,9 +7,9 @@ import type {ReactNode} from "react";
 import {mapPropsVariants} from "@heroui/system";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useCallback, useMemo} from "react";
-import {alert} from "@heroui/theme";
+import {alert, cn} from "@heroui/theme";
 import {useControlledState} from "@react-stately/utils";
-import {clsx, dataAttr, isEmpty, objectToDeps, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, isEmpty, objectToDeps, mergeProps} from "@heroui/shared-utils";
 
 interface Props extends HTMLHeroUIProps<"div", "title"> {
   /**
@@ -126,7 +126,7 @@ export function useAlert(originalProps: UseAlertProps) {
     onClose?.();
   }, [setIsVisible, onClose]);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const slots = useMemo(
     () => alert({hasContent: !isEmpty(description) || !isEmpty(children), ...variantProps}),

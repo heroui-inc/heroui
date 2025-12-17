@@ -46,6 +46,8 @@ const numberInput = tv({
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
       "autofill:bg-transparent bg-clip-text",
+      // Safari autofill styling fix - ensures text color is visible in dark mode
+      "dark:autofill:[-webkit-text-fill-color:hsl(var(--heroui-foreground))]",
     ],
     clearButton: [
       "p-2",
@@ -208,6 +210,11 @@ const numberInput = tv({
         inputWrapper: "flex-1",
         mainWrapper: "flex flex-col",
         label: "relative text-foreground pe-2 ps-2 pointer-events-auto",
+        stepperButton: "min-w-3 w-3 h-3",
+      },
+      "outside-top": {
+        mainWrapper: "flex flex-col",
+        label: "relative text-foreground pb-2 pointer-events-auto",
         stepperButton: "min-w-3 w-3 h-3",
       },
       inside: {

@@ -1,5 +1,15 @@
 # @heroui/form
 
+## 2.1.28
+
+### Patch Changes
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`b89ba08`](https://github.com/heroui-inc/heroui/commit/b89ba08ae06bf0140f0bc92f10e9a09c1484cdba), [`799bc5b`](https://github.com/heroui-inc/heroui/commit/799bc5bab8f843d2fd7da12a685e087f5c141dad), [`8921dc4`](https://github.com/heroui-inc/heroui/commit/8921dc4361f7cdb8cbce755e8b90fdd799b668da), [`b38a2cf`](https://github.com/heroui-inc/heroui/commit/b38a2cfb58feb79b3baff10eff19e21480da1563), [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca), [`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c), [`4c43534`](https://github.com/heroui-inc/heroui/commit/4c435348ecbf94f1dc0ede7328096984e247d062), [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1), [`a819f2a`](https://github.com/heroui-inc/heroui/commit/a819f2a95a32d059581b2789f2476c5e497732f2), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99), [`bc4c982`](https://github.com/heroui-inc/heroui/commit/bc4c9826097a1014939b691425d30eff998d1e2e)]:
+  - @heroui/theme@2.4.24
+  - @heroui/system@2.4.24
+
 ## 2.1.27
 
 ### Patch Changes

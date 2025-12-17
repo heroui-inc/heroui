@@ -4,9 +4,10 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableRowGroup} from "@react-aria/table";
 import {filterDOMProps} from "@heroui/react-utils";
+import {cn} from "@heroui/theme";
 
 import TableRow from "./table-row";
 import TableCell from "./table-cell";
@@ -50,7 +51,7 @@ const VirtualizedTableBody = forwardRef<"tbody", VirtualizedTableBodyProps>((pro
 
   const {rowGroupProps} = useTableRowGroup();
 
-  const tbodyStyles = clsx(classNames?.tbody, className);
+  const tbodyStyles = cn(classNames?.tbody, className);
   const bodyProps = collection?.body.props;
 
   const isLoading =

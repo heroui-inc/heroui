@@ -13,7 +13,7 @@ import {listbox} from "@heroui/theme";
 import {useListState} from "@react-stately/list";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useMemo} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 interface AriaListBoxOptions<T> extends AriaListBoxProps<T> {
   /** Whether the listbox uses virtual scrolling. */
@@ -134,7 +134,7 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
 
   const slots = useMemo(() => listbox(), []);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getBaseProps: PropGetter = (props = {}) => {
     return {

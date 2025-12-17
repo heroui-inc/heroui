@@ -7,7 +7,7 @@ import React, {useMemo} from "react";
 import {tv} from "@heroui/theme";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {objectToDeps} from "@heroui/shared-utils";
-import clsx from "clsx";
+import {cn} from "@heroui/theme";
 
 import {forwardRef, mapPropsVariants} from "../src/utils";
 
@@ -175,7 +175,7 @@ export const Card = forwardRef<"div", CardProps>((originalProps, ref) => {
 
   const styles = useMemo(() => card({...variantProps}), [objectToDeps(variantProps)]);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const domRef = useDOMRef(ref);
 

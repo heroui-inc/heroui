@@ -1,5 +1,5 @@
 import {memo} from "react";
-import clsx from "clsx";
+import {cn} from "@heroui/theme";
 
 import {sectionWrapper, title, titleWrapper, subtitle} from "../../primitives";
 import Marquee from "../marquee";
@@ -94,7 +94,7 @@ export const HeroUIProSection = () => {
           <HeroUIProImage />
         </Marquee>
         <div
-          className={clsx(
+          className={cn(
             "absolute inset-0 pointer-events-none z-20 bg-white dark:bg-black",
             "[-webkit-mask-image:radial-gradient(at_70%_50%,_rgba(255,255,255,0)_20%,_rgba(255,255,255,0.8)_40%,_rgba(0,0,0,1)_60%)]",
           )}
