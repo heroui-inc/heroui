@@ -74,7 +74,7 @@
   }
 
   /* Horizontal tabs - vertical separator */
-  [data-orientation="horizontal"] &:not(:first-child):before {
+  .tabs__list[data-orientation="horizontal"] &:not(:first-child):before {
     left: 0;
     top: 25%;
     width: 1px;
@@ -82,7 +82,7 @@
   }
 
   /* Vertical tabs - horizontal separator */
-  [data-orientation="vertical"] &:not(:first-child):before {
+  .tabs__list[data-orientation="vertical"] &:not(:first-child):before {
     top: 0;
     left: 5%;
     width: 90%;
