@@ -69,4 +69,10 @@
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
   }
+
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-on-surface-focus);
+  }
 }

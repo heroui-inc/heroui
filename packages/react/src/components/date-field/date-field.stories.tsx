@@ -265,7 +265,7 @@ export const OnSurface: Story = {
         </DateInputGroup>
         <Description>Enter a date</Description>
       </DateField>
-      <DateField className="w-full" name="date-2">
+      <DateField isInvalid className="w-full" name="date-2">
         <Label>Appointment date</Label>
         <DateInputGroup isOnSurface>
           <DateInputGroup.Prefix>

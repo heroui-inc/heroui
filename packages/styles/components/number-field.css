@@ -159,6 +159,13 @@
     background-color: var(--color-on-surface-focus);
   }
 
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-on-surface-focus);
+    border-color: var(--color-field-border-invalid);
+  }
+
   [data-slot="number-field-input"] {
     @apply bg-transparent;
   }

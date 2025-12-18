@@ -251,6 +251,24 @@ export const OnSurface: Story = {
         </SearchField.Group>
         <Description>Use filters to refine your search</Description>
       </SearchField>
+      <SearchField isInvalid isRequired name="search-invalid" value="ab">
+        <Label>Search query</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input className="w-full" placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+        <FieldError>Search query must be at least 3 characters</FieldError>
+      </SearchField>
+      <SearchField isDisabled name="search-disabled" value="Disabled search">
+        <Label>Disabled search</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input className="w-full" placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+        <Description>This search field is disabled</Description>
+      </SearchField>
     </Surface>
   ),
 };
