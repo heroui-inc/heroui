@@ -52,7 +52,7 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
         {composeRenderProps(children, (children, renderProps) => (
           <InputContext
             value={{
-              ...inputContext,
+              onChange: inputContext?.onChange,
               disabled: renderProps.isDisabled,
             }}
           >
