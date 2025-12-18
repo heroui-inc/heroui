@@ -182,12 +182,13 @@ const ModalContainer = ({
 interface ModalDialogProps extends DialogPrimitiveProps {}
 
 const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
-  const {slots} = useContext(ModalContext);
+  const {placement, slots} = useContext(ModalContext);
 
   return (
     <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
       <DialogPrimitive
         className={composeSlotClassName(slots?.dialog, className)}
+        data-placement={placement}
         data-slot="modal-dialog"
         {...props}
       >

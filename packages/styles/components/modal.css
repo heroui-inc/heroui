@@ -42,10 +42,9 @@
  * Element: backdrop - the overlay behind the dialog
  */
 .modal__backdrop {
-  @apply fixed inset-0;
-  @apply isolate z-50;
+  @apply fixed inset-0 z-50;
   @apply flex flex-row items-center justify-center;
-  @apply h-(--visual-viewport-height) min-h-0 w-full min-w-0;
+  @apply h-(--visual-viewport-height) w-full;
   @apply will-change-[opacity];
 
   /* Entering animation */
@@ -94,29 +93,11 @@
  */
 .modal__container {
   @apply flex flex-col items-center;
-  @apply h-full max-h-(--visual-viewport-height) min-h-0 w-full min-w-0 flex-1;
+  @apply h-(--visual-viewport-height) w-full min-w-0 flex-1;
   @apply p-4;
   @apply sm:w-fit sm:p-10;
   @apply will-change-[opacity,transform];
   @apply pointer-events-none;
-
-  /* Placement variants */
-  &[data-placement="auto"] {
-    @apply justify-end;
-    @apply sm:justify-center;
-  }
-
-  &[data-placement="top"] {
-    @apply justify-start;
-  }
-
-  &[data-placement="center"] {
-    @apply justify-center;
-  }
-
-  &[data-placement="bottom"] {
-    @apply justify-end;
-  }
 
   /* Entering animation */
   &[data-entering="true"] {
@@ -159,6 +140,9 @@
  * Modifier: container--scroll-outside
  */
 .modal__container--scroll-outside {
+  @apply overflow-y-auto;
+  @apply pointer-events-auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -188,50 +172,66 @@
   @apply rounded-3xl bg-overlay shadow-overlay outline-none;
   @apply p-6;
   @apply pointer-events-auto;
+
+  &[data-placement="auto"] {
+    @apply mt-auto;
+    @apply sm:my-auto;
+  }
+
+  &[data-placement="center"] {
+    @apply my-auto;
+  }
+
+  &[data-placement="bottom"] {
+    @apply mt-auto;
+  }
+
+  &[data-placement="top"] {
+    @apply mt-0;
+  }
 }
 
 /**
  * Modifier: dialog--scroll-inside
  */
 .modal__dialog--scroll-inside {
+  @apply overflow-hidden;
 }
 
 /**
  * Modifier: dialog--scroll-outside
  */
 .modal__dialog--scroll-outside {
+  @apply h-auto;
+  @apply min-h-0 shrink-0;
 }
 
 /**
  * Modifier: dialog--xs
  */
 .modal__dialog--xs {
-  @apply w-[calc(100%-2rem)];
-  @apply sm:max-w-xs;
+  @apply max-w-xs;
 }
 
 /**
  * Modifier: dialog--sm
  */
 .modal__dialog--sm {
-  @apply w-[calc(100%-2rem)];
-  @apply sm:max-w-sm;
+  @apply max-w-sm;
 }
 
 /**
  * Modifier: dialog--md
  */
 .modal__dialog--md {
-  @apply w-[calc(100%-2rem)];
-  @apply sm:max-w-md;
+  @apply max-w-md;
 }
 
 /**
  * Modifier: dialog--lg
  */
 .modal__dialog--lg {
-  @apply w-[calc(100%-2rem)];
-  @apply sm:max-w-lg;
+  @apply max-w-lg;
 }
 
 /**
@@ -283,10 +283,9 @@
  * Element: body - the main content area
  */
 .modal__body {
-  @apply flex-1;
+  @apply min-h-0 flex-1;
   @apply text-sm leading-[1.43] text-muted;
   @apply my-0;
-  min-height: 0;
 }
 
 /**
