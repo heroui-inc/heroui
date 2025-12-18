@@ -98,4 +98,18 @@ describe("Link", () => {
 
     expect(link.getAttribute("href")).toBe("/example/test");
   });
+
+  it("should support button usage with as, role, and type", () => {
+    const {getByRole} = render(
+      <Link as="button" role="button" type="button">
+        Button Link
+      </Link>,
+    );
+
+    const button = getByRole("button");
+
+    expect(button.tagName).toBe("BUTTON");
+    expect(button).toHaveAttribute("type", "button");
+    expect(button).not.toHaveAttribute("href");
+  });
 });
