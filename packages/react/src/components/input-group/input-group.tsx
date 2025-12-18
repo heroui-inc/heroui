@@ -4,13 +4,7 @@ import type {InputGroupVariants} from "./input-group.styles";
 import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
-import {
-  Group as GroupPrimitive,
-  InputContext,
-  Input as InputPrimitive,
-  composeRenderProps,
-  useSlottedContext,
-} from "react-aria-components";
+import {Group as GroupPrimitive, Input as InputPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
@@ -35,7 +29,6 @@ interface InputGroupRootProps
 const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
-  const inputContext = useSlottedContext(InputContext);
 
   const slots = React.useMemo(
     () => inputGroupVariants({isOnSurface: isOnSurfaceValue}),
@@ -49,7 +42,7 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
         className={composeTwRenderProps(className, slots?.base())}
         data-slot="input-group"
       >
-        {composeRenderProps(children, (children, renderProps) => (
+        {/* {composeRenderProps(children, (children, renderProps) => (
           <InputContext
             value={{
               ...inputContext,
@@ -58,7 +51,8 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
           >
             {children}
           </InputContext>
-        ))}
+        ))} */}
+        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
       </GroupPrimitive>
     </InputGroupContext>
   );
