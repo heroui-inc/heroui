@@ -4,9 +4,8 @@
   "root": true,
   "pages": [
     "---Getting Started---",
-    "introduction",
+    "native/introduction",
     "native/quick-start",
-    "components-list",
     "design-principles",
     "changelog",
     "[sparkles][Showcase](/showcase)",
