@@ -1,54 +1,190 @@
 ---
 title: v3.0.0-beta.3
-description: Bug fixes and improvements.
+description: Six new components (ButtonGroup, DateField, ErrorMessage, SearchField, TagGroup, TimeField), style fixes for form components, and breaking change for AlertDialog and Modal backdrop variants.
 github:
   pull: 5923
 ---
 
-<div className="mb-6 flex items-center gap-3">
+<div className="flex items-center gap-3 mb-6">
   <span className="text-sm text-muted">November 23, 2025</span>
 </div>
 
-Minor bug fixes and improvements.
+This release introduces six new components, fixes disabled state styling for form components, and includes a breaking change for better semantic clarity in AlertDialog and Modal backdrop variants.
 
 ## Installation
 
 Update to the latest version:
 
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
-  <Tab value="npm">```bash npm i @heroui/styles@beta @heroui/react@beta ```</Tab>
-  <Tab value="pnpm">```bash pnpm add @heroui/styles@beta @heroui/react@beta ```</Tab>
-  <Tab value="yarn">```bash yarn add @heroui/styles@beta @heroui/react@beta ```</Tab>
-  <Tab value="bun">```bash bun add @heroui/styles@beta @heroui/react@beta ```</Tab>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
 </Tabs>
 
-## Breaking Changes
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
 
-- **AlertDialog & Modal**: Renamed `backdropVariant`/`variant` prop value from `"solid"` to `"opaque"` for better semantic clarity. Update your code:
+## What's New
 
-  ```tsx
-  // Before
-  <AlertDialog.Container backdropVariant="solid" />
-  <Modal.Container variant="solid" />
+### New Components
 
-  // After
-  <AlertDialog.Container backdropVariant="opaque" />
-  <Modal.Container variant="opaque" />
-  ```
+This release introduces **6 new** essential components:
 
-## Bug Fixes
+- **[ButtonGroup](#button-group)**: Groups related buttons with consistent styling and spacing. ([Documentation](/docs/components/button-group))
+- **[DateField](#date-field)**: Date input field with labels, descriptions, and validation built on React Aria DateField. ([Documentation](/docs/components/date-field))
+- **[ErrorMessage](#error-message)**: Low-level error message component for displaying errors in non-form components. ([Documentation](/docs/components/error-message))
+- **[SearchField](#search-field)**: Search input field with built-in search icon and clear button. ([Documentation](/docs/components/search-field))
+- **[TagGroup](#tag-group)**: Focusable list of tags with support for keyboard navigation, selection, and removal. ([Documentation](/docs/components/tag-group))
+- **[TimeField](#time-field)**: Time input field with labels, descriptions, and validation built on React Aria TimeField. ([Documentation](/docs/components/time-field))
 
--
+### ButtonGroup
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### DateField
+
+<ComponentPreview
+  name="date-field-basic"
+/>
+
+### ErrorMessage
+
+<ComponentPreview
+  name="error-message-basic"
+/>
+
+### SearchField
+
+<ComponentPreview
+  name="search-field-basic"
+/>
+
+### TagGroup
+
+<ComponentPreview
+  name="tag-group-basic"
+/>
+
+### TimeField
+
+<ComponentPreview
+  name="time-field-basic"
+/>
+
+## Component Improvements
+
+### Tabs Component Enhancement
+
+Added `hideSeparator` prop to the [Tabs](/docs/components/tabs) component to remove tab separators for a cleaner appearance.
+
+```tsx
+<Tabs hideSeparator>
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="overview">Overview<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.Tab id="analytics">Analytics<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+</Tabs>
+```
+
+### Documentation Icons Integration
+
+Integrated [@gravity-ui/icons](https://github.com/gravity-ui/icons) into documentation components for consistent icon rendering with improved SSR support and better performance.
 
 ## Style Fixes
 
-- Fixed disabled state styling for [Input](/docs/components/input) and [TextArea](/docs/components/textarea) components
+### Form Component Disabled State
+
+Fixed disabled state styling for [Input](/docs/components/input) and [TextArea](/docs/components/textarea) components.
+
+### Style Optimizations
+
+- **Improved selector precision**: Enhanced CSS selector specificity for better style isolation and performance
+- **Enhanced animations**: Improved animation performance and smoothness across components
+- **Removed global scrollbar styling**: Removed global scrollbar styles to prevent conflicts with custom scrollbar implementations and fix modal/overlay interaction issues
+
+## ⚠️ Breaking Changes
+
+### AlertDialog & Modal Backdrop Variant
+
+Renamed `backdropVariant`/`variant` prop value from `"solid"` to `"opaque"` for better semantic clarity. The term "opaque" more accurately describes the backdrop's visual appearance.
+
+**Migration:**
+
+Update all instances of `backdropVariant="solid"` to `backdropVariant="opaque"` for AlertDialog, and `variant="solid"` to `variant="opaque"` for Modal:
+
+```tsx
+// Before
+<AlertDialog.Backdrop backdropVariant="solid">
+  <AlertDialog.Container>
+    {/* content */}
+  </AlertDialog.Container>
+</AlertDialog.Backdrop>
+
+<Modal.Backdrop variant="solid">
+  <Modal.Container>
+    {/* content */}
+  </Modal.Container>
+</Modal.Backdrop>
+
+// After
+<AlertDialog.Backdrop backdropVariant="opaque">
+  <AlertDialog.Container>
+    {/* content */}
+  </AlertDialog.Container>
+</AlertDialog.Backdrop>
+
+<Modal.Backdrop variant="opaque">
+  <Modal.Container>
+    {/* content */}
+  </Modal.Container>
+</Modal.Backdrop>
+```
+
+**Available backdrop variants:**
+- `"opaque"` - Dark backdrop that completely obscures the background (formerly `"solid"`)
+- `"blur"` - Blurred backdrop that softly obscures the background
+- `"transparent"` - Transparent backdrop that keeps the background visible
+
+### Removed `asChild` Prop
+
+Removed the `asChild` prop pattern from components for cleaner APIs, improved type safety, and simplified usage.
+
+For more details about component composition patterns, see the [Composition guide](/docs/handbook/composition).
+
+## Bug Fixes
+
+- Fixed `isInvalid` styles when components are used on surface backgrounds
+- Fixed AlertDialog and Modal re-rendering issues after close
+- Fixed Storybook links and navigation issues
 
 ## Links
 
 - [Component Documentation](https://v3.heroui.com/docs/components)
 - [Design System - Figma Kit V3 (updated)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
 - [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #5923](https://github.com/heroui-inc/heroui/pull/5923)
 
 ## Contributors
 
