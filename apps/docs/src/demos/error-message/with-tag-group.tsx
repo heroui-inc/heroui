@@ -3,12 +3,12 @@
 import type {Key} from "@heroui/react";
 
 import {Description, ErrorMessage, Label, Tag, TagGroup} from "@heroui/react";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 
 export function ErrorMessageWithTagGroup() {
   const [selected, setSelected] = useState<Iterable<Key>>(new Set());
 
-  const isInvalid = Array.from(selected).length === 0;
+  const isInvalid = useMemo(() => Array.from(selected).length === 0, [selected]);
 
   return (
     <TagGroup

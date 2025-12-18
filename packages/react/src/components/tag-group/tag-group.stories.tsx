@@ -2,7 +2,7 @@ import type {Key} from "../";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 
 import {Avatar, Description, EmptyState, ErrorMessage, Label, Surface, Tag} from "../";
 import {useListData} from "../../";
@@ -196,7 +196,7 @@ export const WithErrorMessage: Story = {
   render: () => {
     const [selected, setSelected] = useState<Iterable<Key>>(new Set());
 
-    const isInvalid = Array.from(selected).length === 0;
+    const isInvalid = useMemo(() => Array.from(selected).length === 0, [selected]);
 
     return (
       <TagGroup
