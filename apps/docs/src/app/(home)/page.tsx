@@ -15,8 +15,8 @@ const VersionChip = () => {
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
       href="/docs/changelog/v3-0-0-beta-2"
     >
-      <Iconify icon="gravity-ui:sparkles" />
-      <span>v{currentVersion}: 6 New components</span>
+      <Iconify className="size-2 text-accent/90" icon="gravity-ui:circle-fill" />
+      <span>v{currentVersion}: Seven new components</span>
     </LinkRoot>
   );
 };
