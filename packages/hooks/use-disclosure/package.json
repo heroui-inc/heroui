@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@heroui/use-callback-ref": "workspace:*",
-    "@react-aria/utils": "3.31.0",
-    "@react-stately/utils": "3.10.8"
+    "@react-aria/utils": "3.32.0",
+    "@react-stately/utils": "3.11.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

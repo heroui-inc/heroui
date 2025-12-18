@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@heroui/system": "workspace:*",
-    "@react-aria/utils": "3.31.0",
+    "@react-aria/utils": "3.32.0",
     "@react-stately/collections": "3.12.8",
     "@react-types/overlays": "3.9.2",
     "@react-types/shared": "3.32.1"
