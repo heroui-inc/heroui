@@ -70,11 +70,11 @@
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
     "@react-stately/data": "3.15.0",
-    "@storybook/react": "10.1.9",
+    "@storybook/react": "10.1.10",
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "fs-extra": "11.3.2",
+    "fs-extra": "11.3.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwindcss": "4.1.18"
