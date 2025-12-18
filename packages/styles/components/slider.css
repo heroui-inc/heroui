@@ -33,7 +33,7 @@
 
   .slider__thumb {
     /* Flex container for centering pseudo-elements */
-    @apply absolute relative flex cursor-grab items-center justify-center rounded-full bg-accent no-highlight;
+    @apply absolute flex cursor-grab items-center justify-center rounded-full bg-accent no-highlight;
 
     /**
    * Transitions
