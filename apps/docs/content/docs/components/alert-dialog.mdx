@@ -28,17 +28,19 @@ import {AlertDialog, Button} from "@heroui/react";
 export default () => (
   <AlertDialog>
     <Button>Open Alert Dialog</Button>
-    <AlertDialog.Container>
-      <AlertDialog.Dialog>
-        <AlertDialog.CloseTrigger /> {/* Optional: Close button */}
-        <AlertDialog.Header>
-          <AlertDialog.Icon /> {/* Optional: Status icon */}
-          <AlertDialog.Heading />
-        </AlertDialog.Header>
-        <AlertDialog.Body />
-        <AlertDialog.Footer />
-      </AlertDialog.Dialog>
-    </AlertDialog.Container>
+    <AlertDialog.Backdrop>
+      <AlertDialog.Container>
+        <AlertDialog.Dialog>
+          <AlertDialog.CloseTrigger /> {/* Optional: Close button */}
+          <AlertDialog.Header>
+            <AlertDialog.Icon /> {/* Optional: Status icon */}
+            <AlertDialog.Heading />
+          </AlertDialog.Header>
+          <AlertDialog.Body />
+          <AlertDialog.Footer />
+        </AlertDialog.Dialog>
+      </AlertDialog.Container>
+    </AlertDialog.Backdrop>
   </AlertDialog>
 );
 ```
@@ -55,14 +57,6 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-backdrop-variants" />
 
-### Controlled State
-
-<ComponentPreview name="alert-dialog-controlled" />
-
-### Dismiss Behavior
-
-<ComponentPreview name="alert-dialog-dismiss-behavior" />
-
 ### Custom Icon
 
 <ComponentPreview name="alert-dialog-custom-icon" />
@@ -71,17 +65,29 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-custom-backdrop" />
 
+### Dismiss Behavior
+
+<ComponentPreview name="alert-dialog-dismiss-behavior" />
+
+### Close Methods
+
+<ComponentPreview name="alert-dialog-close-methods" />
+
+### Controlled State
+
+<ComponentPreview name="alert-dialog-controlled" />
+
 ### Custom Trigger
 
 <ComponentPreview name="alert-dialog-custom-trigger" />
 
-### With Close Button
-
-<ComponentPreview name="alert-dialog-with-close-button" />
-
 ### Custom Animations
 
 <ComponentPreview name="alert-dialog-custom-animations" />
+
+### Custom Portal
+
+<ComponentPreview name="alert-dialog-custom-portal" />
 
 <RelatedComponents component="alert-dialog" />
 
@@ -96,29 +102,28 @@ function CustomAlertDialog() {
   return (
     <AlertDialog>
       <Button variant="danger">Delete</Button>
-      <AlertDialog.Container backdropClassName="bg-red-950/90" className="items-start pt-20">
-        <AlertDialog.Dialog className="border-2 border-red-500 sm:max-w-[400px]">
-          {({close}) => (
-            <>
-              <AlertDialog.Header>
-                <AlertDialog.Icon status="danger" />
-                <AlertDialog.Heading>Custom Styled Alert</AlertDialog.Heading>
-              </AlertDialog.Header>
-              <AlertDialog.Body>
-                <p>This alert dialog has custom styling applied via Tailwind classes</p>
-              </AlertDialog.Body>
-              <AlertDialog.Footer>
-                <Button variant="tertiary" onPress={close}>
-                  Cancel
-                </Button>
-                <Button variant="danger" onPress={close}>
-                  Delete
-                </Button>
-              </AlertDialog.Footer>
-            </>
-          )}
-        </AlertDialog.Dialog>
-      </AlertDialog.Container>
+      <AlertDialog.Backdrop className="bg-red-950/90">
+        <AlertDialog.Container className="items-start pt-20">
+          <AlertDialog.Dialog className="border-2 border-red-500 sm:max-w-[400px]">
+            <AlertDialog.CloseTrigger />
+            <AlertDialog.Header>
+              <AlertDialog.Icon status="danger" />
+              <AlertDialog.Heading>Custom Styled Alert</AlertDialog.Heading>
+            </AlertDialog.Header>
+            <AlertDialog.Body>
+              <p>This alert dialog has custom styling applied via Tailwind classes</p>
+            </AlertDialog.Body>
+            <AlertDialog.Footer>
+              <Button slot="close" variant="tertiary">
+                Cancel
+              </Button>
+              <Button slot="close" variant="danger">
+                Delete
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Dialog>
+        </AlertDialog.Container>
+      </AlertDialog.Backdrop>
     </AlertDialog>
   );
 }
@@ -214,18 +219,24 @@ The component supports these interactive states:
 | `children`  | `ReactNode` | -       | Custom trigger content |
 | `className` | `string`    | -       | CSS classes            |
 
-### AlertDialog.Container
+### AlertDialog.Backdrop
 
 | Prop                        | Type                                      | Default    | Description               |
 | --------------------------- | ----------------------------------------- | ---------- | ------------------------- |
-| `placement`                 | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"`   | Dialog position on screen |
-| `backdropVariant`           | `"opaque" \| "blur" \| "transparent"`     | `"opaque"` | Backdrop overlay style    |
+| `variant`                   | `"opaque" \| "blur" \| "transparent"`     | `"opaque"` | Backdrop overlay style    |
 | `isDismissable`             | `boolean`                                 | `false`    | Close on backdrop click   |
 | `isKeyboardDismissDisabled` | `boolean`                                 | `true`     | Disable ESC key to close  |
 | `isOpen`                    | `boolean`                                 | -          | Controlled open state     |
 | `onOpenChange`              | `(isOpen: boolean) => void`               | -          | Open state change handler |
-| `backdropClassName`         | `string \| (values) => string`            | -          | Backdrop CSS classes      |
-| `className`                 | `string \| (values) => string`            | -          | Container CSS classes     |
+| `className`                 | `string \| (values) => string`            | -          | Backdrop CSS classes      |
+| `UNSTABLE_portalContainer`  | `HTMLElement`                             | -          | Custom portal container   |
+
+### AlertDialog.Container
+
+| Prop        | Type                                      | Default  | Description               |
+| ----------- | ----------------------------------------- | -------- | ------------------------- |
+| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | Dialog position on screen |
+| `className` | `string \| (values) => string`            | -        | Container CSS classes     |
 
 ### AlertDialog.Dialog
 

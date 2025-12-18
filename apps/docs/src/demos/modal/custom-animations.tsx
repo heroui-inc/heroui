@@ -1,40 +1,61 @@
 "use client";
 
-import {ArrowUpFromLine, Sparkles} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import React from "react";
+import {Icon} from "@iconify/react";
 
 export function CustomAnimations() {
   const animations = [
     {
-      classNames: [
-        "data-[entering]:animate-in",
-        "data-[entering]:zoom-in-95",
-        "data-[entering]:fade-in-0",
-        "data-[entering]:ease-[cubic-bezier(0.16,1,0.3,1)]",
-        "data-[exiting]:animate-out",
-        "data-[exiting]:zoom-out-95",
-        "data-[exiting]:fade-out-0",
-        "data-[exiting]:ease-out-quart",
-      ].join(" "),
-      description: "Smooth scale animation with elastic spring-like easing",
-      icon: Sparkles,
-      name: "Smooth Scale",
+      classNames: {
+        backdrop: [
+          "data-[entering]:duration-400",
+          "data-[entering]:ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "data-[exiting]:duration-200",
+          "data-[exiting]:ease-[cubic-bezier(0.7,0,0.84,0)]",
+        ].join(" "),
+        container: [
+          "data-[entering]:animate-in",
+          "data-[entering]:fade-in-0",
+          "data-[entering]:zoom-in-95",
+          "data-[entering]:duration-400",
+          "data-[entering]:ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "data-[exiting]:animate-out",
+          "data-[exiting]:fade-out-0",
+          "data-[exiting]:zoom-out-95",
+          "data-[exiting]:duration-200",
+          "data-[exiting]:ease-[cubic-bezier(0.7,0,0.84,0)]",
+        ].join(" "),
+      },
+      description:
+        "Physics-based elastic scaling. Simulates a high-damping spring system with fast transient response and prolonged settling time. Ideal for Modals and Popovers.",
+      icon: "gravity-ui:sparkles",
+      name: "Kinematic Scale",
     },
     {
-      classNames: [
-        "data-[entering]:animate-in",
-        "data-[entering]:slide-in-from-bottom-4",
-        "data-[entering]:fade-in-0",
-        "data-[entering]:ease-out-fluid",
-        "data-[exiting]:animate-out",
-        "data-[exiting]:slide-out-to-bottom-2",
-        "data-[exiting]:fade-out-0",
-        "data-[exiting]:ease-in-quad",
-      ].join(" "),
-      description: "Gentle upward slide with seamless fade transition",
-      icon: ArrowUpFromLine,
-      name: "Slide Up",
+      classNames: {
+        backdrop: [
+          "data-[entering]:duration-500",
+          "data-[entering]:ease-[cubic-bezier(0.25,1,0.5,1)]",
+          "data-[exiting]:duration-200",
+          "data-[exiting]:ease-[cubic-bezier(0.5,0,0.75,0)]",
+        ].join(" "),
+        container: [
+          "data-[entering]:animate-in",
+          "data-[entering]:fade-in-0",
+          "data-[entering]:slide-in-from-bottom-4",
+          "data-[entering]:duration-500",
+          "data-[entering]:ease-[cubic-bezier(0.25,1,0.5,1)]",
+          "data-[exiting]:animate-out",
+          "data-[exiting]:fade-out-0",
+          "data-[exiting]:slide-out-to-bottom-2",
+          "data-[exiting]:duration-200",
+          "data-[exiting]:ease-[cubic-bezier(0.5,0,0.75,0)]",
+        ].join(" "),
+      },
+      description:
+        "Simulates movement through a medium with fluid resistance. Eliminates mechanical linearity for a natural, grounded feel. Perfect for Bottom Sheets or Toasts.",
+      icon: "gravity-ui:arrow-up-from-line",
+      name: "Fluid Slide",
     },
   ];
 
@@ -43,37 +64,28 @@ export function CustomAnimations() {
       {animations.map(({classNames, description, icon, name}) => (
         <Modal key={name}>
           <Button variant="secondary">{name}</Button>
-          <Modal.Container
-            backdropClassName="data-[exiting]:duration-250"
-            className={`data-[entering]:duration-300 data-[exiting]:duration-200 ${classNames}`}
-          >
-            <Modal.Dialog className="sm:max-w-[360px]">
-              {({close}) => (
-                <>
-                  <Modal.Header>
-                    <Modal.Icon className="bg-default text-foreground">
-                      {React.createElement(icon, {className: "size-5"})}
-                    </Modal.Icon>
-                    <Modal.Heading>{name} Animation</Modal.Heading>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <p className="mt-1">
-                      {description}. Customize entrance and exit animations using Tailwind's
-                      animation utilities. Combine <code>data-[entering]</code> and{" "}
-                      <code>data-[exiting]</code> states with custom timings and easing functions
-                      for polished transitions.
-                    </p>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="tertiary" onPress={close}>
-                      Close
-                    </Button>
-                    <Button onPress={close}>Try Again</Button>
-                  </Modal.Footer>
-                </>
-              )}
-            </Modal.Dialog>
-          </Modal.Container>
+          <Modal.Backdrop className={classNames.backdrop}>
+            <Modal.Container className={classNames.container}>
+              <Modal.Dialog className="sm:max-w-[360px]">
+                <Modal.CloseTrigger />
+                <Modal.Header>
+                  <Modal.Icon className="bg-default text-foreground">
+                    <Icon className="size-5" icon={icon} />
+                  </Modal.Icon>
+                  <Modal.Heading>{name} Animation</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>
+                  <p className="mt-1">{description}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button slot="close" variant="tertiary">
+                    Close
+                  </Button>
+                  <Button slot="close">Try Again</Button>
+                </Modal.Footer>
+              </Modal.Dialog>
+            </Modal.Container>
+          </Modal.Backdrop>
         </Modal>
       ))}
     </div>
