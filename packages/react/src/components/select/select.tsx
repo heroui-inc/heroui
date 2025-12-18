@@ -41,14 +41,15 @@ interface SelectRootProps<T extends object, M extends "single" | "multiple" = "s
 const SelectRoot = <T extends object = object, M extends "single" | "multiple" = "single">({
   children,
   className,
+  fullWidth,
   isOnSurface,
   ...props
 }: SelectRootProps<T, M>) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
   const slots = React.useMemo(
-    () => selectVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => selectVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+    [fullWidth, isOnSurfaceValue],
   );
 
   return (

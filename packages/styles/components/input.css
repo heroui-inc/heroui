@@ -76,3 +76,8 @@
     background-color: var(--color-on-surface-focus);
   }
 }
+
+/* Full width modifier */
+.input--full-width {
+  @apply w-full;
+}

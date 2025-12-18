@@ -26,13 +26,19 @@ const InputGroupContext = createContext<InputGroupContext>({});
 interface InputGroupRootProps
   extends ComponentPropsWithRef<typeof GroupPrimitive>, InputGroupVariants {}
 
-const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroupRootProps) => {
+const InputGroupRoot = ({
+  children,
+  className,
+  fullWidth,
+  isOnSurface,
+  ...props
+}: InputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   const slots = React.useMemo(
-    () => inputGroupVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => inputGroupVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+    [fullWidth, isOnSurfaceValue],
   );
 
   return (

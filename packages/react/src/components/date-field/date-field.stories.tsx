@@ -40,6 +40,35 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <DateField fullWidth name="date">
+        <Label>Date</Label>
+        <DateInputGroup>
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+        </DateInputGroup>
+      </DateField>
+      <DateField fullWidth name="date-icons">
+        <Label>Date</Label>
+        <DateInputGroup>
+          <DateInputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
+          </DateInputGroup.Prefix>
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+          <DateInputGroup.Suffix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
+          </DateInputGroup.Suffix>
+        </DateInputGroup>
+      </DateField>
+    </div>
+  ),
+};
+
 export const WithDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-4">

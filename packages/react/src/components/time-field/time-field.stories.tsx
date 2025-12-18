@@ -40,6 +40,35 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <TimeField fullWidth name="time">
+        <Label>Time</Label>
+        <DateInputGroup fullWidth>
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+        </DateInputGroup>
+      </TimeField>
+      <TimeField fullWidth name="time-icons">
+        <Label>Time</Label>
+        <DateInputGroup fullWidth>
+          <DateInputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
+          </DateInputGroup.Prefix>
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+          <DateInputGroup.Suffix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
+          </DateInputGroup.Suffix>
+        </DateInputGroup>
+      </TimeField>
+    </div>
+  ),
+};
+
 export const WithDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-4">

@@ -170,3 +170,12 @@
     @apply bg-transparent;
   }
 }
+
+/* Full width modifier */
+.number-field--full-width {
+  @apply w-full;
+}
+
+.number-field__group--full-width {
+  @apply w-full;
+}

@@ -16,14 +16,17 @@ import {inputVariants} from "./input.styles";
  * -----------------------------------------------------------------------------------------------*/
 interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, InputVariants {}
 
-const InputRoot = ({className, isOnSurface, ...rest}: InputRootProps) => {
+const InputRoot = ({className, fullWidth, isOnSurface, ...rest}: InputRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, inputVariants({isOnSurface: isOnSurfaceValue}))}
       data-slot="input"
+      className={composeTwRenderProps(
+        className,
+        inputVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+      )}
       {...rest}
     />
   );

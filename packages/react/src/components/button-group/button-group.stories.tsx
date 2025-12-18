@@ -65,6 +65,29 @@ export const Sizes: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-3">
+      <ButtonGroup fullWidth>
+        <Button>First</Button>
+        <Button>Second</Button>
+        <Button>Third</Button>
+      </ButtonGroup>
+      <ButtonGroup fullWidth>
+        <Button isIconOnly>
+          <Icon icon="gravity-ui:text-align-left" />
+        </Button>
+        <Button isIconOnly>
+          <Icon icon="gravity-ui:text-align-center" />
+        </Button>
+        <Button isIconOnly>
+          <Icon icon="gravity-ui:text-align-right" />
+        </Button>
+      </ButtonGroup>
+    </div>
+  ),
+};
+
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-6">

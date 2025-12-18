@@ -16,8 +16,8 @@ import {textFieldVariants} from "./text-field.styles";
 interface TextFieldRootProps
   extends ComponentPropsWithRef<typeof TextFieldPrimitive>, TextFieldVariants {}
 
-const TextFieldRoot = ({children, className, ...props}: TextFieldRootProps) => {
-  const styles = React.useMemo(() => textFieldVariants({}), []);
+const TextFieldRoot = ({children, className, fullWidth, ...props}: TextFieldRootProps) => {
+  const styles = React.useMemo(() => textFieldVariants({fullWidth}), [fullWidth]);
 
   return (
     <TextFieldPrimitive

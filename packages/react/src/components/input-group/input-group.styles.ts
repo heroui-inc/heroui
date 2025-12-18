@@ -16,6 +16,15 @@ export const inputGroupVariants = tv({
         input: "input-group__input--on-surface",
       },
     },
+    fullWidth: {
+      true: {
+        base: "input-group--full-width",
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
   },
 });
 

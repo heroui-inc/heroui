@@ -77,3 +77,8 @@
     background-color: var(--color-on-surface-focus);
   }
 }
+
+/* Full width modifier */
+.textarea--full-width {
+  @apply w-full;
+}

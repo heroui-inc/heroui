@@ -204,6 +204,30 @@ export const Sizes = {
   render: SizesTemplate,
 };
 
+export const FullWidth = {
+  render: () => (
+    <div className="w-[400px] space-y-3">
+      <Button fullWidth>Primary</Button>
+      <Button fullWidth variant="secondary">
+        Secondary
+      </Button>
+      <Button fullWidth variant="tertiary">
+        Tertiary
+      </Button>
+      <Button fullWidth size="sm">
+        Small
+      </Button>
+      <Button fullWidth size="lg">
+        Large
+      </Button>
+      <Button fullWidth>
+        <Icon icon="gravity-ui:plus" />
+        With Icon
+      </Button>
+    </div>
+  ),
+};
+
 export const WithIcon = {
   args: defaultArgs,
   render: TemplateWithIcon,

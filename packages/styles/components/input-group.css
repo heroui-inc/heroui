@@ -133,3 +133,8 @@
     @apply bg-transparent;
   }
 }
+
+/* Full width modifier */
+.input-group--full-width {
+  @apply w-full;
+}
