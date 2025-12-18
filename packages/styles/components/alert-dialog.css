@@ -1,6 +1,11 @@
-/* ------------------------------------------------------------------------------------------------
- * Trigger
- * ------------------------------------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialog Component Styles
+ * Block: alert-dialog
+ * -----------------------------------------------------------------------------------------------*/
+
+/**
+ * Element: trigger - the element that opens the modal
+ */
 .alert-dialog__trigger {
   @apply cursor-(--cursor-interactive);
 
@@ -14,8 +19,8 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  /* Focus  state */
-  &:focus-visible:not(:focus),
+  /* Focus state */
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -25,17 +30,26 @@
   &[aria-disabled="true"] {
     @apply status-disabled;
   }
+
+  /* Active/pressed state */
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.97);
+  }
 }
 
-/* ------------------------------------------------------------------------------------------------
- * Backdrop - The overlay behind the dialog
- * ------------------------------------------------------------------------------------------------ */
+/**
+ * Element: backdrop - the overlay behind the dialog
+ */
 .alert-dialog__backdrop {
-  @apply fixed inset-0 isolate z-50 h-(--visual-viewport-height);
+  @apply fixed inset-0 z-50;
+  @apply flex flex-row items-center justify-center;
+  @apply h-(--visual-viewport-height) w-full;
+  @apply will-change-[opacity];
 
   /* Entering animation */
   &[data-entering="true"] {
-    @apply animate-in duration-200 ease-out-quad fade-in-0;
+    @apply animate-in duration-250 ease-out-quad fade-in-0;
   }
 
   /* Exiting animation */
@@ -47,59 +61,51 @@
    * Reduce Animation
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
-  &[data-entering="true"],
-  &[data-exiting="true"] {
+  &[data-exiting="true"],
+  &[data-entering="true"] {
     @apply motion-reduce:animate-none;
   }
 }
 
-/* Backdrop Variants */
+/**
+ * Modifier: backdrop--transparent
+ */
 .alert-dialog__backdrop--transparent {
   @apply bg-transparent;
 }
 
+/**
+ * Modifier: backdrop--opaque
+ */
 .alert-dialog__backdrop--opaque {
   @apply bg-black/50 dark:bg-black/60;
 }
 
+/**
+ * Modifier: backdrop--blur
+ */
 .alert-dialog__backdrop--blur {
   @apply bg-black/50 backdrop-blur-md dark:bg-black/60;
 }
 
-/* ------------------------------------------------------------------------------------------------
- * Container - Positioning wrapper with placement support
- * ------------------------------------------------------------------------------------------------
- * Handles alert dialog positioning and animations.
- * ------------------------------------------------------------------------------------------------ */
+/**
+ * Element: container - the positioning wrapper for the modal
+ */
 .alert-dialog__container {
-  @apply fixed left-1/2 flex max-h-(--visual-viewport-height) w-full -translate-x-1/2 justify-center px-2 outline-none sm:w-fit sm:p-0;
-  @apply transform-gpu will-change-transform;
-
-  /* Auto - bottom on mobile, center on desktop */
-  &[data-placement="auto"] {
-    @apply top-[calc(var(--visual-viewport-height)-(--spacing(2)))] -translate-y-full items-end;
-    @apply sm:top-[calc(var(--visual-viewport-height)/2)] sm:-translate-y-1/2 sm:items-center;
-  }
-
-  &[data-placement="top"] {
-    @apply top-2 items-start sm:top-6;
-  }
-
-  &[data-placement="center"] {
-    @apply top-[calc(var(--visual-viewport-height)/2)] -translate-y-1/2;
-  }
-
-  &[data-placement="bottom"] {
-    @apply top-[calc(var(--visual-viewport-height)-(--spacing(2)))] -translate-y-full items-end;
-    @apply sm:top-[calc(var(--visual-viewport-height)-(--spacing(6)))];
-  }
+  @apply flex flex-col items-center;
+  @apply h-(--visual-viewport-height) w-full min-w-0 flex-1;
+  @apply p-4;
+  @apply sm:w-fit sm:p-10;
+  @apply will-change-[opacity,transform];
+  @apply pointer-events-none;
 
   /* Entering animation */
   &[data-entering="true"] {
     @apply animate-in duration-250 ease-out-quad fade-in-0 zoom-in-105;
 
     &[data-placement="auto"] {
-      @apply slide-in-from-bottom-1 sm:slide-in-from-bottom-0;
+      @apply slide-in-from-bottom-1;
+      @apply sm:slide-in-from-bottom-0;
     }
 
     &[data-placement="top"] {
@@ -107,6 +113,7 @@
     }
 
     &[data-placement="center"] {
+      @apply slide-in-from-top-0;
     }
 
     &[data-placement="bottom"] {
@@ -123,96 +130,147 @@
    * Reduce Animation
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
-  &[data-entering="true"],
-  &[data-exiting="true"] {
+  &[data-exiting="true"],
+  &[data-entering="true"] {
     @apply motion-reduce:animate-none;
   }
 }
 
-/* ------------------------------------------------------------------------------------------------
- * Dialog - The alert dialog content container
- * ------------------------------------------------------------------------------------------------
- * The actual dialog box containing the alert content.
- * ------------------------------------------------------------------------------------------------ */
+/**
+ * Element: dialog - the content container for the modal
+ */
 .alert-dialog__dialog {
-  @apply relative flex w-full flex-col rounded-3xl bg-overlay shadow-overlay outline-none;
+  @apply relative;
+  @apply flex w-full flex-col;
+  @apply rounded-3xl bg-overlay shadow-overlay outline-none;
+  @apply p-6;
+  @apply overflow-hidden;
+  @apply pointer-events-auto;
+
+  &[data-placement="auto"] {
+    @apply mt-auto;
+    @apply sm:my-auto;
+  }
+
+  &[data-placement="center"] {
+    @apply my-auto;
+  }
+
+  &[data-placement="bottom"] {
+    @apply mt-auto;
+  }
+
+  &[data-placement="top"] {
+    @apply mt-0;
+  }
 }
 
-/* ------------------------------------------------------------------------------------------------
- * Content Sections - Header (Heading), Body, Footer
- * ------------------------------------------------------------------------------------------------ */
-
-/* Header - Top section with title and optional icon */
+/**
+ * Element: header - the top section with the title
+ */
 .alert-dialog__header {
-  @apply flex flex-col gap-3 px-6 pt-6;
+  @apply flex flex-col gap-3;
+  @apply mb-0;
 
   /* When header contains icon, use flex-col layout with gap */
-  & > .alert-dialog__icon {
+  & > .modal__icon {
     @apply mb-0;
   }
 }
 
-/* Heading - Main title text of the alert dialog */
+/**
+ * Element: heading - the main title text
+ */
 .alert-dialog__heading {
-  @apply align-middle text-base font-medium text-foreground;
+  @apply align-middle;
+  @apply text-base font-medium text-foreground;
 }
 
-/* Icon - Optional icon indicator for the alert dialog */
+/**
+ * Element: icon - the optional icon indicator
+ */
 .alert-dialog__icon {
-  @apply flex size-10 shrink-0 items-center justify-center rounded-full select-none;
+  @apply flex items-center justify-center;
+  @apply size-10 shrink-0;
+  @apply rounded-full select-none;
 
   [data-slot="alert-dialog-default-icon"] {
     @apply box-content size-5;
   }
 }
 
-/* Icon Status Variants - Soft colored backgrounds with matching foreground colors */
+/**
+ * Modifier: icon--default
+ */
 .alert-dialog__icon--default {
   @apply bg-default text-foreground;
 }
 
+/**
+ * Modifier: icon--accent
+ */
 .alert-dialog__icon--accent {
   @apply bg-accent-soft text-accent-soft-foreground;
 }
 
+/**
+ * Modifier: icon--success
+ */
 .alert-dialog__icon--success {
   @apply bg-success-soft text-success-soft-foreground;
 }
 
+/**
+ * Modifier: icon--warning
+ */
 .alert-dialog__icon--warning {
   @apply bg-warning-soft text-warning-soft-foreground;
 }
 
+/**
+ * Modifier: icon--danger
+ */
 .alert-dialog__icon--danger {
   @apply bg-danger-soft text-danger-soft-foreground;
 }
 
-/* Body - Main content area with descriptive text */
+/**
+ * Element: body - the main content area
+ */
 .alert-dialog__body {
-  @apply flex-1 px-6 py-5 text-sm leading-[1.43] text-muted;
+  @apply min-h-0 flex-1;
+  @apply text-sm leading-[1.43] text-muted;
+  @apply my-0;
+  @apply overflow-y-auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* When body follows header, adjust top spacing */
-.alert-dialog__header + .alert-dialog__body {
-  @apply pt-2;
-}
-
-/* Footer - Bottom section for action buttons (Cancel/Confirm) */
+/**
+ * Element: footer - the bottom action section
+ */
 .alert-dialog__footer {
-  @apply flex flex-row items-center justify-end gap-2 px-6 pb-6;
+  @apply flex flex-row items-center justify-end gap-2;
+  @apply mt-0;
 }
 
-/* When footer directly follows header (no body), increase top spacing */
-.alert-dialog__header + .alert-dialog__footer {
-  @apply pt-5;
-}
-
-/* ------------------------------------------------------------------------------------------------
- * Close Trigger - Optional dismiss button
- * ------------------------------------------------------------------------------------------------
- * Positioned absolutely in top-right corner.
- * Note: Alert dialogs typically require explicit action, so this may be hidden.
- * ------------------------------------------------------------------------------------------------ */
+/**
+ * Element: close-trigger - the optional x icon button to close the modal
+ */
 .alert-dialog__close-trigger {
   @apply absolute top-4 right-4;
+}
+
+/**
+ * Elements Spacing
+ */
+.alert-dialog__header + .alert-dialog__body {
+  @apply mt-2;
+}
+
+.alert-dialog__header + .alert-dialog__footer {
+  @apply mt-5;
+}
+
+.alert-dialog__body + .alert-dialog__footer {
+  @apply mt-5;
 }

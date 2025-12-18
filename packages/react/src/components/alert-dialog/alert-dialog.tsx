@@ -80,23 +80,10 @@ const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerP
 };
 
 /* -------------------------------------------------------------------------------------------------
- * AlertDialog Container
+ * AlertDialog Backdrop
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogContainerProps extends ComponentPropsWithRef<typeof ModalPrimitive> {
-  /**
-   * The placement of the alert dialog on the screen.
-   * @default "auto"
-   */
-  placement?: AlertDialogPlacement;
-  /**
-   * The visual variant of the backdrop overlay.
-   * @default "opaque"
-   */
-  backdropVariant?: AlertDialogVariants["variant"];
-  /**
-   * Additional CSS classes to apply to the backdrop overlay.
-   */
-  backdropClassName?: ComponentPropsWithRef<typeof ModalOverlayPrimitive>["className"];
+interface AlertDialogBackdropProps extends ComponentPropsWithRef<typeof ModalOverlayPrimitive> {
+  variant?: AlertDialogVariants["variant"];
   /**
    * Whether to close the alert dialog when the user interacts outside it.
    * Alert dialogs typically require explicit action, so this defaults to false.
@@ -111,46 +98,80 @@ interface AlertDialogContainerProps extends ComponentPropsWithRef<typeof ModalPr
   isKeyboardDismissDisabled?: boolean;
 }
 
-const AlertDialogContainer = ({
-  backdropClassName,
-  backdropVariant = "opaque",
+const AlertDialogBackdrop = ({
   children,
   className,
   isDismissable = false,
   isKeyboardDismissDisabled = true,
-  placement = "auto",
+  variant,
   ...props
-}: AlertDialogContainerProps) => {
+}: AlertDialogBackdropProps) => {
   const {slots: contextSlots} = useContext(AlertDialogContext);
 
-  const updatedSlots = useMemo(
-    () => alertDialogVariants({variant: backdropVariant}),
-    [backdropVariant],
-  );
+  const updatedSlots = useMemo(() => alertDialogVariants({variant}), [variant]);
 
-  const updatedAlertDialogContext = useMemo<AlertDialogContext>(
-    () => ({placement, slots: {...contextSlots, ...updatedSlots}}),
-    [contextSlots, placement, updatedSlots],
+  const updatedModalContext = useMemo<AlertDialogContext>(
+    () => ({slots: {...contextSlots, ...updatedSlots}}),
+    [contextSlots, updatedSlots],
   );
 
   return (
-    <AlertDialogContext value={updatedAlertDialogContext}>
-      <ModalOverlayPrimitive
-        className={composeTwRenderProps(backdropClassName, updatedSlots?.backdrop())}
-        data-slot="alert-dialog-backdrop"
-        isDismissable={isDismissable}
-        isKeyboardDismissDisabled={isKeyboardDismissDisabled}
-        {...props}
-      >
-        <ModalPrimitive
-          className={composeTwRenderProps(className, updatedSlots?.container())}
-          data-placement={placement}
-          data-slot="alert-dialog-container"
-        >
-          {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
-        </ModalPrimitive>
-      </ModalOverlayPrimitive>
-    </AlertDialogContext>
+    <ModalOverlayPrimitive
+      className={composeTwRenderProps(className, updatedSlots?.backdrop())}
+      data-slot="alert-dialog-backdrop"
+      isDismissable={isDismissable}
+      isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+      {...props}
+    >
+      {(renderProps) => (
+        <AlertDialogContext value={updatedModalContext}>
+          {typeof children === "function" ? children(renderProps) : children}{" "}
+        </AlertDialogContext>
+      )}
+    </ModalOverlayPrimitive>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialog Container
+ * -----------------------------------------------------------------------------------------------*/
+interface AlertDialogContainerProps extends Omit<
+  ComponentPropsWithRef<typeof ModalPrimitive>,
+  Exclude<keyof AlertDialogBackdropProps, "children" | "className">
+> {
+  /**
+   * The placement of the alert dialog on the screen.
+   * @default "auto"
+   */
+  placement?: AlertDialogPlacement;
+}
+
+const AlertDialogContainer = ({
+  children,
+  className,
+  placement = "auto",
+  ...props
+}: AlertDialogContainerProps) => {
+  const {slots} = useContext(AlertDialogContext);
+
+  const updatedContext = useMemo<AlertDialogContext>(
+    () => ({placement, slots}),
+    [placement, slots],
+  );
+
+  return (
+    <ModalPrimitive
+      className={composeTwRenderProps(className, slots?.container())}
+      data-placement={placement}
+      data-slot="alert-dialog-container"
+      {...props}
+    >
+      {(renderProps) => (
+        <AlertDialogContext value={updatedContext}>
+          {typeof children === "function" ? children(renderProps) : children}
+        </AlertDialogContext>
+      )}
+    </ModalPrimitive>
   );
 };
 
@@ -160,11 +181,12 @@ const AlertDialogContainer = ({
 interface AlertDialogDialogProps extends DialogPrimitiveProps {}
 
 const AlertDialogDialog = ({children, className, ...props}: AlertDialogDialogProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {placement, slots} = useContext(AlertDialogContext);
 
   return (
     <DialogPrimitive
       className={composeSlotClassName(slots?.dialog, className)}
+      data-placement={placement}
       data-slot="alert-dialog-dialog"
       role="alertdialog"
       {...props}
@@ -318,6 +340,7 @@ const AlertDialogCloseTrigger = ({className, ...rest}: AlertDialogCloseTriggerPr
 export {
   AlertDialogRoot,
   AlertDialogTrigger,
+  AlertDialogBackdrop,
   AlertDialogContainer,
   AlertDialogDialog,
   AlertDialogHeader,
@@ -331,6 +354,7 @@ export {
 export type {
   AlertDialogRootProps,
   AlertDialogTriggerProps,
+  AlertDialogBackdropProps,
   AlertDialogContainerProps,
   AlertDialogDialogProps,
   AlertDialogHeaderProps,
