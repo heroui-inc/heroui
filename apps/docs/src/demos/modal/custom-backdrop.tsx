@@ -1,7 +1,7 @@
 "use client";
 
+import {Sparkles} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomBackdrop() {
   return (
@@ -15,7 +15,7 @@ export function CustomBackdrop() {
           <Modal.Dialog className="sm:max-w-[360px]">
             <Modal.Header className="items-center text-center">
               <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-                <Icon className="size-5" icon="gravity-ui:sparkles" />
+                <Sparkles className="size-5" />
               </Modal.Icon>
               <Modal.Heading>Premium Backdrop</Modal.Heading>
             </Modal.Header>

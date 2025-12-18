@@ -1,7 +1,7 @@
 "use client";
 
+import {CircleInfo} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function DismissBehavior() {
   return (
@@ -21,7 +21,7 @@ export function DismissBehavior() {
                 <AlertDialog.CloseTrigger />
                 <AlertDialog.Header>
                   <AlertDialog.Icon status="danger">
-                    <Icon className="size-5" icon="gravity-ui:circle-info" />
+                    <CircleInfo className="size-5" />
                   </AlertDialog.Icon>
                   <AlertDialog.Heading>isDismissable = false</AlertDialog.Heading>
                   <p className="text-sm leading-5 text-muted">
@@ -61,7 +61,7 @@ export function DismissBehavior() {
                 <AlertDialog.CloseTrigger />
                 <AlertDialog.Header>
                   <AlertDialog.Icon status="accent">
-                    <Icon className="size-5" icon="gravity-ui:circle-info" />
+                    <CircleInfo className="size-5" />
                   </AlertDialog.Icon>
                   <AlertDialog.Heading>isKeyboardDismissDisabled = true</AlertDialog.Heading>
                   <p className="text-sm leading-5 text-muted">ESC key is disabled</p>

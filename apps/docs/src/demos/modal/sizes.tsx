@@ -1,7 +1,7 @@
 "use client";
 
+import {Rocket} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Sizes() {
   const sizes = ["xs", "sm", "md", "lg", "cover", "full"] as const;
@@ -17,7 +17,7 @@ export function Sizes() {
                 <Modal.CloseTrigger />
                 <Modal.Header>
                   <Modal.Icon className="bg-default text-foreground">
-                    <Icon className="size-5" icon="gravity-ui:rocket" />
+                    <Rocket className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>
                     Size: {size.charAt(0).toUpperCase() + size.slice(1)}

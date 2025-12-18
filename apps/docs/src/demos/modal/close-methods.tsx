@@ -1,7 +1,7 @@
 "use client";
 
+import {CircleCheck, CircleInfo} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CloseMethods() {
   return (
@@ -19,7 +19,7 @@ export function CloseMethods() {
               <Modal.Dialog className="sm:max-w-[360px]">
                 <Modal.Header>
                   <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-                    <Icon className="size-5" icon="gravity-ui:circle-info" />
+                    <CircleInfo className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>Using slot="close"</Modal.Heading>
                 </Modal.Header>
@@ -57,7 +57,7 @@ export function CloseMethods() {
                   <>
                     <Modal.Header>
                       <Modal.Icon className="bg-success-soft text-success-soft-foreground">
-                        <Icon className="size-5" icon="gravity-ui:circle-check" />
+                        <CircleCheck className="size-5" />
                       </Modal.Icon>
                       <Modal.Heading>Using Dialog render props</Modal.Heading>
                     </Modal.Header>

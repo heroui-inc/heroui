@@ -22,6 +22,22 @@ import { ButtonGroup } from '@heroui/react';
   name="button-group-basic"
 />
 
+### Anatomy
+
+```tsx
+import { ButtonGroup, Button } from '@heroui/react';
+
+export default () => (
+  <ButtonGroup>
+    <Button>First</Button>
+    <Button>Second</Button>
+    <Button>Third</Button>
+  </ButtonGroup>
+)
+```
+
+> **ButtonGroup** wraps multiple Button components together, applying consistent styling, spacing, and automatic border radius handling. It uses React Context to pass `size`, `variant`, and `isDisabled` props to all child buttons.
+
 ### Variants
 
 <ComponentPreview
