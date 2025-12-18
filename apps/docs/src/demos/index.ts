@@ -6,12 +6,14 @@ import * as AlertDemos from "./alert";
 import * as AlertDialogDemos from "./alert-dialog";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
+import * as ButtonGroupDemos from "./button-group";
 import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ComboBoxDemos from "./combobox";
+import * as DateFieldDemos from "./date-field";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -44,6 +46,7 @@ import * as TabsDemos from "./tabs";
 import * as TagGroupDemos from "./tag-group";
 import * as TextFieldDemos from "./text-field";
 import * as TextAreaDemos from "./textarea";
+import * as TimeFieldDemos from "./time-field";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -209,6 +212,27 @@ export const demos: Record<string, DemoItem> = {
   "button-with-icons": {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
+  },
+  // ButtonGroup demos
+  "button-group-basic": {
+    component: ButtonGroupDemos.Basic,
+    file: "button-group/basic.tsx",
+  },
+  "button-group-disabled": {
+    component: ButtonGroupDemos.Disabled,
+    file: "button-group/disabled.tsx",
+  },
+  "button-group-sizes": {
+    component: ButtonGroupDemos.Sizes,
+    file: "button-group/sizes.tsx",
+  },
+  "button-group-variants": {
+    component: ButtonGroupDemos.Variants,
+    file: "button-group/variants.tsx",
+  },
+  "button-group-with-icons": {
+    component: ButtonGroupDemos.WithIcons,
+    file: "button-group/with-icons.tsx",
   },
   // Card demos
   "card-default": {
@@ -530,6 +554,55 @@ export const demos: Record<string, DemoItem> = {
   "input-on-surface": {
     component: InputDemos.OnSurface,
     file: "input/on-surface.tsx",
+  },
+  // DateField demos
+  "date-field-basic": {
+    component: DateFieldDemos.Basic,
+    file: "date-field/basic.tsx",
+  },
+  "date-field-controlled": {
+    component: DateFieldDemos.Controlled,
+    file: "date-field/controlled.tsx",
+  },
+  "date-field-disabled": {
+    component: DateFieldDemos.Disabled,
+    file: "date-field/disabled.tsx",
+  },
+  "date-field-form-example": {
+    component: DateFieldDemos.FormExample,
+    file: "date-field/form-example.tsx",
+  },
+  "date-field-invalid": {
+    component: DateFieldDemos.Invalid,
+    file: "date-field/invalid.tsx",
+  },
+  "date-field-on-surface": {
+    component: DateFieldDemos.OnSurface,
+    file: "date-field/on-surface.tsx",
+  },
+  "date-field-required": {
+    component: DateFieldDemos.Required,
+    file: "date-field/required.tsx",
+  },
+  "date-field-with-description": {
+    component: DateFieldDemos.WithDescription,
+    file: "date-field/with-description.tsx",
+  },
+  "date-field-with-prefix-and-suffix": {
+    component: DateFieldDemos.WithPrefixAndSuffix,
+    file: "date-field/with-prefix-and-suffix.tsx",
+  },
+  "date-field-with-prefix-icon": {
+    component: DateFieldDemos.WithPrefixIcon,
+    file: "date-field/with-prefix-icon.tsx",
+  },
+  "date-field-with-suffix-icon": {
+    component: DateFieldDemos.WithSuffixIcon,
+    file: "date-field/with-suffix-icon.tsx",
+  },
+  "date-field-with-validation": {
+    component: DateFieldDemos.WithValidation,
+    file: "date-field/with-validation.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
@@ -956,6 +1029,55 @@ export const demos: Record<string, DemoItem> = {
   "text-field-on-surface": {
     component: TextFieldDemos.OnSurface,
     file: "text-field/on-surface.tsx",
+  },
+  // TimeField demos
+  "time-field-basic": {
+    component: TimeFieldDemos.Basic,
+    file: "time-field/basic.tsx",
+  },
+  "time-field-controlled": {
+    component: TimeFieldDemos.Controlled,
+    file: "time-field/controlled.tsx",
+  },
+  "time-field-disabled": {
+    component: TimeFieldDemos.Disabled,
+    file: "time-field/disabled.tsx",
+  },
+  "time-field-form-example": {
+    component: TimeFieldDemos.FormExample,
+    file: "time-field/form-example.tsx",
+  },
+  "time-field-invalid": {
+    component: TimeFieldDemos.Invalid,
+    file: "time-field/invalid.tsx",
+  },
+  "time-field-on-surface": {
+    component: TimeFieldDemos.OnSurface,
+    file: "time-field/on-surface.tsx",
+  },
+  "time-field-required": {
+    component: TimeFieldDemos.Required,
+    file: "time-field/required.tsx",
+  },
+  "time-field-with-description": {
+    component: TimeFieldDemos.WithDescription,
+    file: "time-field/with-description.tsx",
+  },
+  "time-field-with-prefix-and-suffix": {
+    component: TimeFieldDemos.WithPrefixAndSuffix,
+    file: "time-field/with-prefix-and-suffix.tsx",
+  },
+  "time-field-with-prefix-icon": {
+    component: TimeFieldDemos.WithPrefixIcon,
+    file: "time-field/with-prefix-icon.tsx",
+  },
+  "time-field-with-suffix-icon": {
+    component: TimeFieldDemos.WithSuffixIcon,
+    file: "time-field/with-suffix-icon.tsx",
+  },
+  "time-field-with-validation": {
+    component: TimeFieldDemos.WithValidation,
+    file: "time-field/with-validation.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

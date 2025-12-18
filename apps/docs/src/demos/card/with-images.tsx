@@ -7,7 +7,7 @@ export function WithImages() {
       <div className="grid w-full max-w-2xl grid-cols-12 gap-4 p-4">
         {/* Row 1: Large Product Card - Available Soon */}
         <Card className="col-span-12 flex h-auto min-h-[152px] flex-col sm:flex-row">
-          <div className="relative h-[140px] w-full flex-shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
+          <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
             <img
               alt="Cherries"
               className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover select-none"
@@ -46,7 +46,7 @@ export function WithImages() {
               <Card.Header className="gap-3">
                 <CircleDollar
                   aria-label="Dollar sign icon"
-                  className="text-primary size-8 flex-shrink-0"
+                  className="text-primary size-8 shrink-0"
                   role="img"
                 />
                 <div className="flex flex-col gap-1">

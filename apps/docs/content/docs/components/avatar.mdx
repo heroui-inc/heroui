@@ -1,6 +1,7 @@
 ---
 title: Avatar
 description: Display user profile images with customizable fallback content
+icon: updated
 links:
   radix: avatar
   source: avatar/avatar.tsx
@@ -141,9 +142,6 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 | `alt` | `string` | - | Alternative text for the image |
 | `onLoad` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | Callback when the image loads successfully |
 | `onError` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | Callback when there's an error loading the image |
-| `onLoadingStatusChange` | `(status: 'loading' \| 'loaded' \| 'pending' \| 'failed') => void` | - | Callback for loading status changes |
-| `ignoreFallback` | `boolean` | `false` | If `true`, opt out of the fallback logic and use as regular `img` |
-| `shouldBypassImageLoad` | `boolean` | `false` | If `true`, image load will be bypassed |
 | `crossOrigin` | `'anonymous' \| 'use-credentials'` | - | CORS setting for the image request |
 | `loading` | `'eager' \| 'lazy'` | - | Native lazy loading attribute |
 | `className` | `string` | - | Additional CSS classes |

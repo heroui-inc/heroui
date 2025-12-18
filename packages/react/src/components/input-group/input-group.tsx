@@ -4,12 +4,7 @@ import type {InputGroupVariants} from "./input-group.styles";
 import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
-import {
-  Group as GroupPrimitive,
-  InputContext,
-  Input as InputPrimitive,
-  composeRenderProps,
-} from "react-aria-components";
+import {Group as GroupPrimitive, Input as InputPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
@@ -47,9 +42,7 @@ const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroup
         className={composeTwRenderProps(className, slots?.base())}
         data-slot="input-group"
       >
-        {composeRenderProps(children, (children, renderProps) => (
-          <InputContext value={{disabled: renderProps.isDisabled}}>{children}</InputContext>
-        ))}
+        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
       </GroupPrimitive>
     </InputGroupContext>
   );

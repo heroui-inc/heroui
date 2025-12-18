@@ -25,7 +25,7 @@ export default function VisibilityChange() {
         <div className="rounded bg-default p-4">
           <p className="text-sm font-semibold">Vertical Shadow State: {verticalState}</p>
         </div>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow
             className="max-h-[240px] p-4"
             orientation="vertical"
@@ -41,14 +41,14 @@ export default function VisibilityChange() {
               ))}
             </div>
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
 
       <div className="flex flex-col gap-4">
         <div className="rounded bg-default p-4">
           <p className="text-sm font-semibold">Horizontal Shadow State: {horizontalState}</p>
         </div>
-        <Card className="w-full p-0 sm:max-w-sm">
+        <div className="w-full p-0 sm:max-w-sm">
           <ScrollShadow
             className="p-4"
             orientation="horizontal"
@@ -75,7 +75,7 @@ export default function VisibilityChange() {
               ))}
             </div>
           </ScrollShadow>
-        </Card>
+        </div>
       </div>
     </div>
   );

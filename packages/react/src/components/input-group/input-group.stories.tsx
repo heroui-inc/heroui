@@ -207,7 +207,7 @@ export const WithLoadingSuffix: Story = {
 
 export const WithKeyboardShortcut: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="command">
+    <TextField aria-label="Command" className="w-[280px]" name="command">
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="Command" />
         <InputGroup.Suffix className="pr-2">
@@ -223,7 +223,7 @@ export const WithKeyboardShortcut: Story = {
 
 export const WithBadgeSuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="email">
+    <TextField aria-label="Email address" className="w-[280px]" name="email">
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="Email address" />
         <InputGroup.Suffix className="pr-2">

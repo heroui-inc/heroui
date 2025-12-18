@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .menu-item {
-  @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none;
+  @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 will-change-transform outline-none no-highlight;
 
   /**
    * Transitions

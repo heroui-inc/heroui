@@ -12,9 +12,7 @@ import {errorMessageVariants} from "./error-message.styles";
  * Error Message Root
  * -----------------------------------------------------------------------------------------------*/
 interface ErrorMessageRootProps
-  extends ComponentPropsWithRef<typeof Text>,
-    TextProps,
-    ErrorMessageVariants {}
+  extends ComponentPropsWithRef<typeof Text>, TextProps, ErrorMessageVariants {}
 
 const ErrorMessageRoot = ({children, className, ...rest}: ErrorMessageRootProps) => {
   return (

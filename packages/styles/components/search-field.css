@@ -63,7 +63,7 @@
 }
 
 .search-field__input {
-  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 text-base shadow-none outline-none sm:text-sm;
 
   /* Hide browser default search clear button */
   &::-webkit-search-cancel-button,

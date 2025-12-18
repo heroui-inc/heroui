@@ -14,12 +14,14 @@ const COMPONENT_NAMES = [
   "alert-dialog",
   "avatar",
   "button",
+  "button-group",
   "card",
   "checkbox",
   "checkbox-group",
   "chip",
   "close-button",
   "combobox",
+  "date-field",
   "description",
   "disclosure",
   "disclosure-group",
@@ -52,6 +54,7 @@ const COMPONENT_NAMES = [
   "tag-group",
   "text-field",
   "textarea",
+  "time-field",
   "tooltip",
 ] as const;
 

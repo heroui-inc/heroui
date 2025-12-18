@@ -10,11 +10,15 @@
         "default": "./dist/index.css"
       },
       "./css": "./dist/index.css",
-      "./base": "./dist/base",
-      "./components": "./dist/components",
-      "./themes": "./dist/themes",
-      "./utilities": "./dist/utilities",
-      "./variants": "./dist/variants",
+      "./base": "./dist/base/base.css",
+      "./base/*.css": "./dist/base/*.css",
+      "./components": "./dist/components/index.css",
+      "./components/*.css": "./dist/components/*.css",
+      "./themes/default": "./dist/themes/default/index.css",
+      "./themes/*/*.css": "./dist/themes/*/*.css",
+      "./themes/*.css": "./dist/themes/*.css",
+      "./utilities": "./dist/utilities/index.css",
+      "./variants": "./dist/variants/index.css",
       "./package.json": "./package.json"
     }
   },

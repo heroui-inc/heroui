@@ -28,12 +28,14 @@
     "components/alert-dialog",
     "components/avatar",
     "components/button",
+    "components/button-group",
     "components/card",
     "components/checkbox",
     "components/checkbox-group",
     "components/chip",
     "components/close-button",
     "components/combobox",
+    "components/date-field",
     "components/description",
     "components/disclosure",
     "components/disclosure-group",
@@ -66,6 +68,7 @@
     "components/tag-group",
     "components/text-field",
     "components/textarea",
+    "components/time-field",
     "components/tooltip"
   ]
 }

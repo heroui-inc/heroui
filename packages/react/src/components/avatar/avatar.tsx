@@ -1,14 +1,11 @@
 "use client";
 
 import type {AvatarVariants} from "./avatar.styles";
-import type {UseImageProps} from "../../hooks";
 import type {ComponentPropsWithRef} from "react";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import React, {createContext} from "react";
 
-import {useImage} from "../../hooks";
-import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName} from "../../utils/compose";
 
 import {avatarVariants} from "./avatar.styles";
@@ -43,24 +40,14 @@ const AvatarRoot = ({children, className, color, size, variant, ...props}: Avata
 /* -------------------------------------------------------------------------------------------------
  * Avatar Image
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarImageProps extends Omit<
-  ComponentPropsWithRef<typeof AvatarPrimitive.Image>,
-  "onLoadingStatusChange"
-> {
-  ignoreFallback?: UseImageProps["ignoreFallback"];
-  shouldBypassImageLoad?: UseImageProps["shouldBypassImageLoad"];
-  onLoadingStatusChange?: UseImageProps["onLoadingStatusChange"];
-}
+interface AvatarImageProps extends ComponentPropsWithRef<typeof AvatarPrimitive.Image> {}
 
 const AvatarImage = ({
   className,
   crossOrigin,
-  ignoreFallback,
   loading,
   onError,
   onLoad,
-  onLoadingStatusChange,
-  shouldBypassImageLoad,
   sizes,
   src,
   srcSet,
@@ -68,25 +55,10 @@ const AvatarImage = ({
 }: AvatarImageProps) => {
   const {slots} = React.useContext(AvatarContext);
 
-  const loadingStatus = useImage({
-    src: typeof src === "string" ? src : undefined,
-    srcSet,
-    sizes,
-    crossOrigin,
-    loading,
-    onLoad,
-    onError,
-    ignoreFallback,
-    shouldBypassImageLoad,
-    onLoadingStatusChange,
-  });
-
   return (
     <AvatarPrimitive.Image
       className={composeSlotClassName(slots?.image, className)}
       crossOrigin={crossOrigin}
-      data-loaded={dataAttr(loadingStatus === "loaded")}
-      data-loading-status={loadingStatus}
       loading={loading}
       sizes={sizes}
       src={src}

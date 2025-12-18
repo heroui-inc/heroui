@@ -47,7 +47,7 @@
 }
 
 .combobox__trigger {
-  @apply absolute top-1/2 right-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 text-field-placeholder transition duration-150;
+  @apply absolute top-1/2 right-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 text-field-placeholder transition duration-150 no-highlight;
 
   /* Remove default button styles */
   @apply border-none bg-transparent outline-none;
@@ -90,7 +90,7 @@
 
 /* Similar to popover content styles */
 .combobox__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-transform;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
