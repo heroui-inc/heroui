@@ -90,6 +90,43 @@ export const OnSurface: Story = {
           Resend
         </Link>
       </div>
+      <div className="mt-4 flex flex-col gap-1">
+        <Label>Verify account (Invalid)</Label>
+        <p className="text-sm text-muted">Enter the code sent to b****@gmail.com</p>
+      </div>
+      <InputOTP {...args} isInvalid maxLength={6} value="12345">
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
+      <span data-visible className="field-error">
+        Invalid code. Please try again.
+      </span>
+      <div className="mt-4 flex flex-col gap-1">
+        <Label isDisabled>Verify account (Disabled)</Label>
+        <p className="text-sm text-muted">Code verification is currently disabled</p>
+      </div>
+      <InputOTP {...args} isDisabled maxLength={6} value="123456">
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
     </Surface>
   ),
 };

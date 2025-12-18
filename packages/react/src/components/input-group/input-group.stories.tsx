@@ -313,16 +313,36 @@ export const Disabled: Story = {
 
 export const OnSurface: Story = {
   render: () => (
-    <Surface className="rounded-2xl p-6">
+    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-2xl p-6">
       <TextField name="email">
         <Label>Email address</Label>
         <InputGroup isOnSurface>
           <InputGroup.Prefix>
             <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
           </InputGroup.Prefix>
-          <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
+          <InputGroup.Input className="w-full" placeholder="name@email.com" />
         </InputGroup>
         <Description>We'll never share this with anyone else</Description>
+      </TextField>
+      <TextField isInvalid isRequired name="email-invalid">
+        <Label>Email address</Label>
+        <InputGroup isOnSurface>
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input className="w-full" placeholder="name@email.com" />
+        </InputGroup>
+        <FieldError>Please enter a valid email address</FieldError>
+      </TextField>
+      <TextField isDisabled name="email-disabled">
+        <Label>Email address</Label>
+        <InputGroup isOnSurface>
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input className="w-full" defaultValue="disabled@example.com" />
+        </InputGroup>
+        <Description>This field is disabled</Description>
       </TextField>
     </Surface>
   ),

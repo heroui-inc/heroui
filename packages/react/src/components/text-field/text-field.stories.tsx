@@ -216,10 +216,20 @@ export const OnSurface: Story = {
         <Label>Email</Label>
         <Input className="w-full" placeholder="john@example.com" />
       </TextField>
-      <TextField name="bio">
+      <TextField isInvalid name="address" type="text">
+        <Label>Email</Label>
+        <Input className="w-full" placeholder="123 Main St, Anytown, USA" />
+        <FieldError>The address is invalid</FieldError>
+      </TextField>
+      <TextField isInvalid name="bio">
         <Label>Bio</Label>
         <TextArea className="w-full" placeholder="Tell us about yourself..." rows={4} />
-        <Description>Minimum 4 rows</Description>
+        <FieldError>Bio must be at least 20 characters</FieldError>
+      </TextField>
+      <TextField isDisabled name="disabled">
+        <Label>Disabled field</Label>
+        <Input className="w-full" defaultValue="This field is disabled" />
+        <Description>This field cannot be edited</Description>
       </TextField>
     </Surface>
   ),

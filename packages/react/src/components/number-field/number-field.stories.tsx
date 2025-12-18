@@ -412,6 +412,24 @@ export const OnSurface: Story = {
         </NumberField.Group>
         <Description>Value must be between 0 and 100</Description>
       </NumberField>
+      <NumberField isInvalid isRequired maxValue={5} minValue={1} name="quantity" value={10}>
+        <Label>Quantity</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-full" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+        <FieldError>Quantity must be between 1 and 5</FieldError>
+      </NumberField>
+      <NumberField isDisabled defaultValue={50} minValue={0} name="disabled">
+        <Label>Disabled field</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-full" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+        <Description>This field cannot be edited</Description>
+      </NumberField>
     </Surface>
   ),
 };
