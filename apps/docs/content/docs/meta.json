@@ -13,7 +13,7 @@
     "native/handbook/colors",
     "native/handbook/theming",
     "native/handbook/styling",
-    "handbook/animation",
+    "native/handbook/animation",
     "handbook/composition",
     "---UI for Agents---",
     "ui-for-agents/llms-txt",
