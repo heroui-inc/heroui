@@ -1,7 +1,7 @@
 "use client";
 
+import {CircleInfo} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function DismissBehavior() {
   return (
@@ -20,7 +20,7 @@ export function DismissBehavior() {
                 <Modal.CloseTrigger />
                 <Modal.Header>
                   <Modal.Icon className="bg-default text-foreground">
-                    <Icon className="size-5" icon="gravity-ui:circle-info" />
+                    <CircleInfo className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>isDismissable = false</Modal.Heading>
                   <p className="text-sm leading-5 text-muted">
@@ -58,7 +58,7 @@ export function DismissBehavior() {
                 <Modal.CloseTrigger />
                 <Modal.Header>
                   <Modal.Icon className="bg-default text-foreground">
-                    <Icon className="size-5" icon="gravity-ui:circle-info" />
+                    <CircleInfo className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>isKeyboardDismissDisabled = true</Modal.Heading>
                   <p className="text-sm leading-5 text-muted">ESC key is disabled</p>

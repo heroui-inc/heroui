@@ -1,7 +1,13 @@
 "use client";
 
+import {ArrowUpFromLine, Sparkles} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
-import {Icon} from "@iconify/react";
+import React from "react";
+
+const iconMap: Record<string, React.ComponentType<{className?: string}>> = {
+  "gravity-ui:arrow-up-from-line": ArrowUpFromLine,
+  "gravity-ui:sparkles": Sparkles,
+};
 
 export function CustomAnimations() {
   const animations = [
@@ -61,33 +67,37 @@ export function CustomAnimations() {
 
   return (
     <div className="flex flex-wrap gap-4">
-      {animations.map(({classNames, description, icon, name}) => (
-        <AlertDialog key={name}>
-          <Button variant="secondary">{name}</Button>
-          <AlertDialog.Backdrop className={classNames.backdrop}>
-            <AlertDialog.Container className={classNames.container}>
-              <AlertDialog.Dialog className="sm:max-w-[400px]">
-                <AlertDialog.CloseTrigger />
-                <AlertDialog.Header>
-                  <AlertDialog.Icon status="accent">
-                    <Icon className="size-5" icon={icon} />
-                  </AlertDialog.Icon>
-                  <AlertDialog.Heading>{name} Animation</AlertDialog.Heading>
-                </AlertDialog.Header>
-                <AlertDialog.Body>
-                  <p className="mt-1">{description}</p>
-                </AlertDialog.Body>
-                <AlertDialog.Footer>
-                  <Button slot="close" variant="tertiary">
-                    Close
-                  </Button>
-                  <Button slot="close">Try Again</Button>
-                </AlertDialog.Footer>
-              </AlertDialog.Dialog>
-            </AlertDialog.Container>
-          </AlertDialog.Backdrop>
-        </AlertDialog>
-      ))}
+      {animations.map(({classNames, description, icon, name}) => {
+        const IconComponent = iconMap[icon];
+
+        return (
+          <AlertDialog key={name}>
+            <Button variant="secondary">{name}</Button>
+            <AlertDialog.Backdrop className={classNames.backdrop}>
+              <AlertDialog.Container className={classNames.container}>
+                <AlertDialog.Dialog className="sm:max-w-[400px]">
+                  <AlertDialog.CloseTrigger />
+                  <AlertDialog.Header>
+                    <AlertDialog.Icon status="accent">
+                      {!!IconComponent && <IconComponent className="size-5" />}
+                    </AlertDialog.Icon>
+                    <AlertDialog.Heading>{name} Animation</AlertDialog.Heading>
+                  </AlertDialog.Header>
+                  <AlertDialog.Body>
+                    <p className="mt-1">{description}</p>
+                  </AlertDialog.Body>
+                  <AlertDialog.Footer>
+                    <Button slot="close" variant="tertiary">
+                      Close
+                    </Button>
+                    <Button slot="close">Try Again</Button>
+                  </AlertDialog.Footer>
+                </AlertDialog.Dialog>
+              </AlertDialog.Container>
+            </AlertDialog.Backdrop>
+          </AlertDialog>
+        );
+      })}
     </div>
   );
 }

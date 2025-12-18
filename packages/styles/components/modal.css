@@ -49,12 +49,12 @@
 
   /* Entering animation */
   &[data-entering="true"] {
-    @apply animate-in duration-250 ease-out-quad fade-in-0;
+    @apply animate-in duration-150 ease-out fade-in-0;
   }
 
   /* Exiting animation */
   &[data-exiting="true"] {
-    @apply animate-out duration-100 ease-out-quad fade-out-0;
+    @apply animate-out duration-100 ease-out fade-out-0;
   }
 
   /**

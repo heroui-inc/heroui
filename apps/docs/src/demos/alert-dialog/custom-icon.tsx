@@ -1,7 +1,7 @@
 "use client";
 
+import {LockOpen} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomIcon() {
   return (
@@ -13,7 +13,7 @@ export function CustomIcon() {
             <AlertDialog.CloseTrigger />
             <AlertDialog.Header>
               <AlertDialog.Icon status="warning">
-                <Icon className="size-5" icon="gravity-ui:lock-open" />
+                <LockOpen className="size-5" />
               </AlertDialog.Icon>
               <AlertDialog.Heading>Reset your password?</AlertDialog.Heading>
             </AlertDialog.Header>

@@ -1,7 +1,7 @@
 "use client";
 
+import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithForm() {
   return (
@@ -13,7 +13,7 @@ export function WithForm() {
             <Modal.CloseTrigger />
             <Modal.Header>
               <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-                <Icon className="size-5" icon="gravity-ui:envelope" />
+                <Envelope className="size-5" />
               </Modal.Icon>
               <Modal.Heading>Contact Us</Modal.Heading>
               <p className="mt-1.5 text-sm leading-5 text-muted">
