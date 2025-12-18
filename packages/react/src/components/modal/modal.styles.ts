@@ -6,6 +6,7 @@ export const modalVariants = tv({
   defaultVariants: {
     variant: "opaque",
     scroll: "inside",
+    size: "md",
   },
   slots: {
     body: "modal__body",
@@ -40,6 +41,27 @@ export const modalVariants = tv({
         body: "modal__body--scroll-outside",
         container: "modal__container--scroll-outside",
         dialog: "modal__dialog--scroll-outside",
+      },
+    },
+    size: {
+      xs: {
+        dialog: "modal__dialog--xs",
+      },
+      sm: {
+        dialog: "modal__dialog--sm",
+      },
+      md: {
+        dialog: "modal__dialog--md",
+      },
+      lg: {
+        dialog: "modal__dialog--lg",
+      },
+      cover: {
+        dialog: "modal__dialog--cover",
+      },
+      full: {
+        container: "modal__container--full",
+        dialog: "modal__dialog--full",
       },
     },
   },

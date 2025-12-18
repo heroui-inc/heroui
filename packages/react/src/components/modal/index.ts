@@ -1,6 +1,7 @@
 import type {ComponentProps} from "react";
 
 import {
+  ModalBackdrop,
   ModalBody,
   ModalCloseTrigger,
   ModalContainer,
@@ -19,6 +20,7 @@ import {
 export const Modal = Object.assign(ModalRoot, {
   Root: ModalRoot,
   Trigger: ModalTrigger,
+  Backdrop: ModalBackdrop,
   Container: ModalContainer,
   Dialog: ModalDialog,
   Header: ModalHeader,
@@ -33,6 +35,7 @@ export type Modal = {
   Props: ComponentProps<typeof ModalRoot>;
   RootProps: ComponentProps<typeof ModalRoot>;
   TriggerProps: ComponentProps<typeof ModalTrigger>;
+  BackdropProps: ComponentProps<typeof ModalBackdrop>;
   ContainerProps: ComponentProps<typeof ModalContainer>;
   DialogProps: ComponentProps<typeof ModalDialog>;
   HeaderProps: ComponentProps<typeof ModalHeader>;
@@ -49,6 +52,7 @@ export type Modal = {
 export {
   ModalRoot,
   ModalTrigger,
+  ModalBackdrop,
   ModalContainer,
   ModalDialog,
   ModalHeader,
@@ -63,6 +67,7 @@ export type {
   ModalRootProps,
   ModalRootProps as ModalProps,
   ModalTriggerProps,
+  ModalBackdropProps,
   ModalContainerProps,
   ModalDialogProps,
   ModalHeaderProps,

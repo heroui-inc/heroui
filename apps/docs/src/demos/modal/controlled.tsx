@@ -1,11 +1,11 @@
 "use client";
 
-import {CircleCheck} from "@gravity-ui/icons";
 import {Button, Modal, useOverlayState} from "@heroui/react";
-import {useState} from "react";
+import {Icon} from "@iconify/react";
+import React from "react";
 
 export function Controlled() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const state = useOverlayState();
 
@@ -36,34 +36,32 @@ export function Controlled() {
           </div>
         </div>
 
-        <Modal.Container isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Modal.Dialog className="sm:max-w-[360px]">
-            {({close}) => (
-              <>
-                <Modal.CloseTrigger />
-                <Modal.Header>
-                  <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-                    <CircleCheck className="size-5" />
-                  </Modal.Icon>
-                  <Modal.Heading>Controlled with useState()</Modal.Heading>
-                </Modal.Header>
-                <Modal.Body>
-                  <p>
-                    This modal is controlled by React's <code>useState</code> hook. Pass{" "}
-                    <code>isOpen</code> and <code>onOpenChange</code> props to manage the modal
-                    state externally.
-                  </p>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onPress={close}>
-                    Cancel
-                  </Button>
-                  <Button onPress={close}>Confirm</Button>
-                </Modal.Footer>
-              </>
-            )}
-          </Modal.Dialog>
-        </Modal.Container>
+        <Modal.Backdrop isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Modal.Container>
+            <Modal.Dialog className="sm:max-w-[360px]">
+              <Modal.CloseTrigger />
+              <Modal.Header>
+                <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+                  <Icon className="size-5" icon="gravity-ui:circle-check" />
+                </Modal.Icon>
+                <Modal.Heading>Controlled with useState()</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>
+                <p>
+                  This modal is controlled by React's <code>useState</code> hook. Pass{" "}
+                  <code>isOpen</code> and <code>onOpenChange</code> props to manage the modal state
+                  externally.
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button slot="close" variant="secondary">
+                  Cancel
+                </Button>
+                <Button slot="close">Confirm</Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -92,35 +90,33 @@ export function Controlled() {
           </div>
         </div>
 
-        <Modal.Container isOpen={state.isOpen} onOpenChange={state.setOpen}>
-          <Modal.Dialog className="sm:max-w-[360px]">
-            {({close}) => (
-              <>
-                <Modal.CloseTrigger />
-                <Modal.Header>
-                  <Modal.Icon className="bg-success-soft text-success-soft-foreground">
-                    <CircleCheck className="size-5" />
-                  </Modal.Icon>
-                  <Modal.Heading>Controlled with useOverlayState()</Modal.Heading>
-                </Modal.Header>
-                <Modal.Body>
-                  <p>
-                    The <code>useOverlayState</code> hook provides dedicated methods for common
-                    operations. No need to manually create callbacks—just use{" "}
-                    <code>state.open()</code>, <code>state.close()</code>, or{" "}
-                    <code>state.toggle()</code>.
-                  </p>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onPress={close}>
-                    Cancel
-                  </Button>
-                  <Button onPress={close}>Confirm</Button>
-                </Modal.Footer>
-              </>
-            )}
-          </Modal.Dialog>
-        </Modal.Container>
+        <Modal.Backdrop isOpen={state.isOpen} onOpenChange={state.setOpen}>
+          <Modal.Container>
+            <Modal.Dialog className="sm:max-w-[360px]">
+              <Modal.CloseTrigger />
+              <Modal.Header>
+                <Modal.Icon className="bg-success-soft text-success-soft-foreground">
+                  <Icon className="size-5" icon="gravity-ui:circle-check" />
+                </Modal.Icon>
+                <Modal.Heading>Controlled with useOverlayState()</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>
+                <p>
+                  The <code>useOverlayState</code> hook provides dedicated methods for common
+                  operations. No need to manually create callbacks—just use{" "}
+                  <code>state.open()</code>, <code>state.close()</code>, or{" "}
+                  <code>state.toggle()</code>.
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button slot="close" variant="secondary">
+                  Cancel
+                </Button>
+                <Button slot="close">Confirm</Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
       </div>
     </div>
   );

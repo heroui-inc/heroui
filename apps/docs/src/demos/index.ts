@@ -135,6 +135,14 @@ export const demos: Record<string, DemoItem> = {
     component: AlertDialogDemos.CustomAnimations,
     file: "alert-dialog/custom-animations.tsx",
   },
+  "alert-dialog-close-methods": {
+    component: AlertDialogDemos.CloseMethods,
+    file: "alert-dialog/close-methods.tsx",
+  },
+  "alert-dialog-custom-portal": {
+    component: AlertDialogDemos.CustomPortal,
+    file: "alert-dialog/custom-portal.tsx",
+  },
   // Avatar demos
   "avatar-basic": {
     component: AvatarDemos.Basic,
@@ -1175,6 +1183,18 @@ export const demos: Record<string, DemoItem> = {
   "modal-custom-animations": {
     component: ModalDemos.CustomAnimations,
     file: "modal/custom-animations.tsx",
+  },
+  "modal-sizes": {
+    component: ModalDemos.Sizes,
+    file: "modal/sizes.tsx",
+  },
+  "modal-close-methods": {
+    component: ModalDemos.CloseMethods,
+    file: "modal/close-methods.tsx",
+  },
+  "modal-custom-portal": {
+    component: ModalDemos.CustomPortal,
+    file: "modal/custom-portal.tsx",
   },
   // NumberField demos
   "number-field-basic": {
