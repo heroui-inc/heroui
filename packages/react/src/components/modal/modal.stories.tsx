@@ -199,6 +199,44 @@ export const Sizes = () => {
   );
 };
 
+export const CustomBackdrop = () => (
+  <Modal>
+    <Button variant="secondary">Custom Backdrop</Button>
+    <Modal.Backdrop
+      className="bg-linear-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
+      variant="blur"
+    >
+      <Modal.Container>
+        <Modal.Dialog className="sm:max-w-[360px]">
+          <Modal.Header className="items-center text-center">
+            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+              <Icon className="size-5" icon="gravity-ui:sparkles" />
+            </Modal.Icon>
+            <Modal.Heading>Premium Backdrop</Modal.Heading>
+          </Modal.Header>
+          <Modal.Body>
+            <p>
+              This backdrop features a sophisticated gradient that transitions from a dark color at
+              the bottom to complete transparency at the top, combined with a smooth blur effect.
+              The gradient automatically adapts its intensity for optimal contrast in both light and
+              dark modes.
+            </p>
+          </Modal.Body>
+          <Modal.Footer className="flex-col-reverse">
+            <Button className="w-full" slot="close">
+              Amazing!
+            </Button>
+            <Button className="w-full" slot="close" variant="secondary">
+              Close
+            </Button>
+          </Modal.Footer>
+          <Modal.CloseTrigger />
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal>
+);
+
 export const DismissBehavior = () => (
   <div className="flex max-w-sm flex-col gap-6">
     <div className="flex flex-col gap-2">
@@ -277,6 +315,85 @@ export const DismissBehavior = () => (
   </div>
 );
 
+export const CloseMethods = () => (
+  <div className="flex max-w-2xl flex-col gap-8">
+    <div className="flex flex-col gap-2">
+      <h3 className="text-lg font-semibold">Using slot="close"</h3>
+      <p className="text-sm text-muted">
+        The simplest way to close a modal. Add <code>slot="close"</code> to any Button component
+        within the modal. When clicked, it will automatically close the modal.
+      </p>
+      <Modal>
+        <Button variant="secondary">Open Modal</Button>
+        <Modal.Backdrop>
+          <Modal.Container>
+            <Modal.Dialog className="sm:max-w-[360px]">
+              <Modal.Header>
+                <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+                  <Icon className="size-5" icon="gravity-ui:circle-info" />
+                </Modal.Icon>
+                <Modal.Heading>Using slot="close"</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>
+                <p>
+                  Click either button below - both have <code>slot="close"</code> and will close the
+                  modal automatically.
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button slot="close" variant="secondary">
+                  Cancel
+                </Button>
+                <Button slot="close">Confirm</Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
+    </div>
+
+    <div className="flex flex-col gap-2">
+      <h3 className="text-lg font-semibold">Using Dialog render props</h3>
+      <p className="text-sm text-muted">
+        Access the <code>close</code> method from the Dialog's render props. This gives you full
+        control over when and how to close the modal, allowing you to add custom logic before
+        closing.
+      </p>
+      <Modal>
+        <Button variant="secondary">Open Modal</Button>
+        <Modal.Backdrop>
+          <Modal.Container>
+            <Modal.Dialog className="sm:max-w-[360px]">
+              {(renderProps) => (
+                <>
+                  <Modal.Header>
+                    <Modal.Icon className="bg-success-soft text-success-soft-foreground">
+                      <Icon className="size-5" icon="gravity-ui:circle-check" />
+                    </Modal.Icon>
+                    <Modal.Heading>Using Dialog render props</Modal.Heading>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>
+                      The buttons below use the <code>close</code> method from render props. You can
+                      add validation or other logic before calling <code>renderProps.close()</code>.
+                    </p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onPress={() => renderProps.close()}>
+                      Cancel
+                    </Button>
+                    <Button onPress={() => renderProps.close()}>Confirm</Button>
+                  </Modal.Footer>
+                </>
+              )}
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
+    </div>
+  </div>
+);
+
 export const ScrollComparison = () => {
   const [scroll, setScroll] = useState<"inside" | "outside">("inside");
 
@@ -340,61 +457,6 @@ export const ScrollComparison = () => {
     </div>
   );
 };
-
-export const WithForm = () => (
-  <Modal>
-    <Button variant="secondary">Open Contact Form</Button>
-    <Modal.Backdrop>
-      <Modal.Container placement="auto">
-        <Modal.Dialog className="sm:max-w-md">
-          <Modal.CloseTrigger />
-          <Modal.Header>
-            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-              <Icon className="size-5" icon="gravity-ui:envelope" />
-            </Modal.Icon>
-            <Modal.Heading>Contact Us</Modal.Heading>
-            <p className="mt-1.5 text-sm leading-5 text-muted">
-              Fill out the form below and we'll get back to you. The modal adapts automatically when
-              the keyboard appears on mobile.
-            </p>
-          </Modal.Header>
-          <Modal.Body className="p-6">
-            <Surface variant="default">
-              <form className="flex flex-col gap-4">
-                <TextField className="w-full" name="name" type="text">
-                  <Label>Name</Label>
-                  <Input placeholder="Enter your name" />
-                </TextField>
-                <TextField className="w-full" name="email" type="email">
-                  <Label>Email</Label>
-                  <Input placeholder="Enter your email" />
-                </TextField>
-                <TextField className="w-full" name="phone" type="tel">
-                  <Label>Phone</Label>
-                  <Input placeholder="Enter your phone number" />
-                </TextField>
-                <TextField className="w-full" name="company">
-                  <Label>Company</Label>
-                  <Input placeholder="Enter your company name" />
-                </TextField>
-                <TextField className="w-full" name="message">
-                  <Label>Message</Label>
-                  <Input placeholder="Enter your message" />
-                </TextField>
-              </form>
-            </Surface>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button slot="close" variant="secondary">
-              Cancel
-            </Button>
-            <Button slot="close">Send Message</Button>
-          </Modal.Footer>
-        </Modal.Dialog>
-      </Modal.Container>
-    </Modal.Backdrop>
-  </Modal>
-);
 
 export const Controlled = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -514,6 +576,61 @@ export const Controlled = () => {
   );
 };
 
+export const WithForm = () => (
+  <Modal>
+    <Button variant="secondary">Open Contact Form</Button>
+    <Modal.Backdrop>
+      <Modal.Container placement="auto">
+        <Modal.Dialog className="sm:max-w-md">
+          <Modal.CloseTrigger />
+          <Modal.Header>
+            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+              <Icon className="size-5" icon="gravity-ui:envelope" />
+            </Modal.Icon>
+            <Modal.Heading>Contact Us</Modal.Heading>
+            <p className="mt-1.5 text-sm leading-5 text-muted">
+              Fill out the form below and we'll get back to you. The modal adapts automatically when
+              the keyboard appears on mobile.
+            </p>
+          </Modal.Header>
+          <Modal.Body className="p-6">
+            <Surface variant="default">
+              <form className="flex flex-col gap-4">
+                <TextField className="w-full" name="name" type="text">
+                  <Label>Name</Label>
+                  <Input placeholder="Enter your name" />
+                </TextField>
+                <TextField className="w-full" name="email" type="email">
+                  <Label>Email</Label>
+                  <Input placeholder="Enter your email" />
+                </TextField>
+                <TextField className="w-full" name="phone" type="tel">
+                  <Label>Phone</Label>
+                  <Input placeholder="Enter your phone number" />
+                </TextField>
+                <TextField className="w-full" name="company">
+                  <Label>Company</Label>
+                  <Input placeholder="Enter your company name" />
+                </TextField>
+                <TextField className="w-full" name="message">
+                  <Label>Message</Label>
+                  <Input placeholder="Enter your message" />
+                </TextField>
+              </form>
+            </Surface>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button slot="close" variant="secondary">
+              Cancel
+            </Button>
+            <Button slot="close">Send Message</Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal>
+);
+
 export const CustomTrigger = () => (
   <Modal>
     <Modal.Trigger className="group flex items-center gap-3 rounded-2xl bg-surface p-4 shadow-xs select-none hover:bg-surface-secondary">
@@ -547,44 +664,6 @@ export const CustomTrigger = () => (
             </Button>
             <Button slot="close">Save</Button>
           </Modal.Footer>
-        </Modal.Dialog>
-      </Modal.Container>
-    </Modal.Backdrop>
-  </Modal>
-);
-
-export const CustomBackdrop = () => (
-  <Modal>
-    <Button variant="secondary">Custom Backdrop</Button>
-    <Modal.Backdrop
-      className="bg-linear-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
-      variant="blur"
-    >
-      <Modal.Container>
-        <Modal.Dialog className="sm:max-w-[360px]">
-          <Modal.Header className="items-center text-center">
-            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-              <Icon className="size-5" icon="gravity-ui:sparkles" />
-            </Modal.Icon>
-            <Modal.Heading>Premium Backdrop</Modal.Heading>
-          </Modal.Header>
-          <Modal.Body>
-            <p>
-              This backdrop features a sophisticated gradient that transitions from a dark color at
-              the bottom to complete transparency at the top, combined with a smooth blur effect.
-              The gradient automatically adapts its intensity for optimal contrast in both light and
-              dark modes.
-            </p>
-          </Modal.Body>
-          <Modal.Footer className="flex-col-reverse">
-            <Button className="w-full" slot="close">
-              Amazing!
-            </Button>
-            <Button className="w-full" slot="close" variant="secondary">
-              Close
-            </Button>
-          </Modal.Footer>
-          <Modal.CloseTrigger />
         </Modal.Dialog>
       </Modal.Container>
     </Modal.Backdrop>
@@ -709,12 +788,9 @@ export const CustomPortal = () => {
         {!!portalContainer && (
           <Modal>
             <Button>Open Modal</Button>
-            <Modal.Backdrop
-              className="h-full overflow-hidden"
-              UNSTABLE_portalContainer={portalContainer}
-            >
+            <Modal.Backdrop className="h-full" UNSTABLE_portalContainer={portalContainer}>
               <Modal.Container className="h-full max-h-full">
-                <Modal.Dialog className="max-h-[calc(100%-8rem)] sm:max-w-md">
+                <Modal.Dialog className="h-full max-h-full sm:max-w-md">
                   <Modal.CloseTrigger />
                   <Modal.Header>
                     <Modal.Heading>Custom Portal</Modal.Heading>
