@@ -14,6 +14,7 @@ const COMPONENT_NAMES = [
   "alert-dialog",
   "avatar",
   "button",
+  "button-group",
   "card",
   "checkbox",
   "checkbox-group",

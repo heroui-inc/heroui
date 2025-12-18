@@ -42,6 +42,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "button",
     title: "Button",
   },
+  buttongroup: {
+    category: "forms",
+    description: "Group related buttons together",
+    href: "/docs/components/button-group",
+    name: "buttongroup",
+    title: "ButtonGroup",
+  },
   card: {
     category: "layout",
     description: "Content container with header, body, and footer",
@@ -338,6 +345,7 @@ const componentRelationships: Record<string, string[]> = {
   alertdialog: ["button", "closebutton"],
   avatar: ["separator"],
   button: ["popover", "tooltip", "form", "alert", "alertdialog", "closebutton", "dropdown"],
+  buttongroup: ["button", "dropdown", "chip"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [

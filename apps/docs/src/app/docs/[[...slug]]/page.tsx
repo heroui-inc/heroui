@@ -69,10 +69,10 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
     >
       <section className="flex flex-col gap-2 border-b border-border">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <DocsTitle className="flex items-end gap-2">
+          <DocsTitle className="flex items-center gap-2">
             {page.data.title}
             {!!isComponentStatusIcon && (
-              <StatusChip className="mb-1.5 w-fit" status={page.data.icon as StatusChipStatus} />
+              <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
             )}
           </DocsTitle>
           {page.data.toc.length > 0 && (
