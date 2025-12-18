@@ -1,0 +1,116 @@
+---
+title: ButtonGroup
+description: Group related buttons together with consistent styling and spacing
+icon: new
+links:
+  rac: Button
+  source: button-group/button-group.tsx
+  styles: button-group.css
+  storybook: Components/Buttons/ButtonGroup
+  figma: true
+---
+
+## Import
+
+```tsx
+import { ButtonGroup } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### Variants
+
+<ComponentPreview
+  name="button-group-variants"
+/>
+
+### Sizes
+
+<ComponentPreview
+  name="button-group-sizes"
+/>
+
+### With Icons
+
+<ComponentPreview
+  name="button-group-with-icons"
+/>
+
+### Disabled State
+
+<ComponentPreview
+  name="button-group-disabled"
+/>
+
+<RelatedComponents component="button-group" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { ButtonGroup } from '@heroui/react';
+
+function CustomButtonGroup() {
+  return (
+    <ButtonGroup className="gap-2">
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the ButtonGroup component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .button-group {
+    @apply gap-2 rounded-lg;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The ButtonGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/button-group.css)):
+
+#### Base Classes
+- `.button-group` - Base button group container
+
+The ButtonGroup component automatically applies border radius to buttons:
+- First button gets rounded left/start edge
+- Last button gets rounded right/end edge
+- Middle buttons have no border radius
+- Single button gets full border radius on all edges
+
+Separators are automatically added between buttons using a pseudo-element (`:before`) on buttons that are not the first child.
+
+## API Reference
+
+### ButtonGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | - | Visual style variant applied to all buttons in the group |
+| `size` | `'sm' \| 'md' \| 'lg'` | - | Size applied to all buttons in the group |
+| `isDisabled` | `boolean` | `false` | Whether all buttons in the group are disabled (can be overridden on individual buttons) |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Button components to group together |
+
+### Notes
+
+- ButtonGroup uses React Context to pass `size`, `variant`, and `isDisabled` props to all child Button components
+- Individual Button components can override the group's `isDisabled` prop by setting `isDisabled={false}`
+- The component automatically handles border radius and separators between buttons
+- Buttons in a group have their active/pressed scale transform removed for a more cohesive appearance

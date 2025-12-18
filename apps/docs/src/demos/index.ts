@@ -6,6 +6,7 @@ import * as AlertDemos from "./alert";
 import * as AlertDialogDemos from "./alert-dialog";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
+import * as ButtonGroupDemos from "./button-group";
 import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
@@ -203,6 +204,27 @@ export const demos: Record<string, DemoItem> = {
   "button-with-icons": {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
+  },
+  // ButtonGroup demos
+  "button-group-basic": {
+    component: ButtonGroupDemos.Basic,
+    file: "button-group/basic.tsx",
+  },
+  "button-group-disabled": {
+    component: ButtonGroupDemos.Disabled,
+    file: "button-group/disabled.tsx",
+  },
+  "button-group-sizes": {
+    component: ButtonGroupDemos.Sizes,
+    file: "button-group/sizes.tsx",
+  },
+  "button-group-variants": {
+    component: ButtonGroupDemos.Variants,
+    file: "button-group/variants.tsx",
+  },
+  "button-group-with-icons": {
+    component: ButtonGroupDemos.WithIcons,
+    file: "button-group/with-icons.tsx",
   },
   // Card demos
   "card-default": {

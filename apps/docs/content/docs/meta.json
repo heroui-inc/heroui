@@ -28,6 +28,7 @@
     "components/alert-dialog",
     "components/avatar",
     "components/button",
+    "components/button-group",
     "components/card",
     "components/checkbox",
     "components/checkbox-group",
