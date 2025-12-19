@@ -166,6 +166,96 @@ export default function ToastExample() {
 }
 ```
 
+## Global Configuration
+
+Configure toast behavior globally using `HeroUINativeProvider` config prop. Global configs serve as defaults for all toasts unless overridden locally.
+
+> **Note**: For complete provider configuration options, see the [Provider documentation](/docs/native/handbook/provider#toast-configuration).
+
+### Insets
+
+Insets control the distance of toast sides from screen edges. Insets are added to safe area insets. To set all toasts to have a side distance of 20px from screen edges, configure insets:
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      insets: {
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+      },
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
+### Content Wrapper with KeyboardAvoidingView
+
+Wrap toast content with KeyboardAvoidingView to ensure toasts adjust when the keyboard appears:
+
+```tsx
+import {
+  KeyboardAvoidingView,
+  KeyboardProvider,
+} from 'react-native-keyboard-controller';
+import { HeroUINativeProvider } from 'heroui-native';
+import { useCallback } from 'react';
+
+function AppContent() {
+  const contentWrapper = useCallback(
+    (children: React.ReactNode) => (
+      <KeyboardAvoidingView
+        pointerEvents="box-none"
+        behavior="padding"
+        keyboardVerticalOffset={12}
+        className="flex-1"
+      >
+        {children}
+      </KeyboardAvoidingView>
+    ),
+    []
+  );
+
+  return (
+    <KeyboardProvider>
+      <HeroUINativeProvider
+        config={{
+          toast: {
+            contentWrapper,
+          },
+        }}
+      >
+        {children}
+      </HeroUINativeProvider>
+    </KeyboardProvider>
+  );
+}
+```
+
+### Default Props
+
+Set global defaults for variant, placement, animation, and swipe behavior:
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      defaultProps: {
+        variant: 'accent',
+        placement: 'bottom',
+        isSwipeable: false,
+      },
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
 ## API Reference
 
 ### Toast
@@ -329,94 +419,6 @@ Options for showing a toast. Can be either a config object with default styling 
 | `onHide`    | `() => void`                                         | -       | Callback function called when the toast is hidden                                   |
 
 ## Special Notes
-
-### Global Configuration
-
-Configure toast behavior globally using `HeroUINativeProvider` config prop. Global configs serve as defaults for all toasts unless overridden locally.
-
-#### Insets
-
-Insets control the distance of toast sides from screen edges. Insets are added to safe area insets. To set all toasts to have a side distance of 20px from screen edges, configure insets:
-
-```tsx
-<HeroUINativeProvider
-  config={{
-    toast: {
-      insets: {
-        top: 20,
-        bottom: 20,
-        left: 20,
-        right: 20,
-      },
-    },
-  }}
->
-  {children}
-</HeroUINativeProvider>
-```
-
-#### Content Wrapper with KeyboardAvoidingView
-
-Wrap toast content with KeyboardAvoidingView to ensure toasts adjust when the keyboard appears:
-
-```tsx
-import {
-  KeyboardAvoidingView,
-  KeyboardProvider,
-} from 'react-native-keyboard-controller';
-import { HeroUINativeProvider } from 'heroui-native';
-import { useCallback } from 'react';
-
-function AppContent() {
-  const contentWrapper = useCallback(
-    (children: React.ReactNode) => (
-      <KeyboardAvoidingView
-        pointerEvents="box-none"
-        behavior="padding"
-        keyboardVerticalOffset={12}
-        className="flex-1"
-      >
-        {children}
-      </KeyboardAvoidingView>
-    ),
-    []
-  );
-
-  return (
-    <KeyboardProvider>
-      <HeroUINativeProvider
-        config={{
-          toast: {
-            contentWrapper,
-          },
-        }}
-      >
-        {children}
-      </HeroUINativeProvider>
-    </KeyboardProvider>
-  );
-}
-```
-
-#### Default Props
-
-Set global defaults for variant, placement, animation, and swipe behavior:
-
-```tsx
-<HeroUINativeProvider
-  config={{
-    toast: {
-      defaultProps: {
-        variant: 'accent',
-        placement: 'bottom',
-        isSwipeable: false,
-      },
-    },
-  }}
->
-  {children}
-</HeroUINativeProvider>
-```
 
 ### Styling Notes
 
