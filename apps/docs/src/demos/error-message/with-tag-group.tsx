@@ -24,7 +24,7 @@ export function ErrorMessageWithTagGroup() {
         <Tag id="shopping">Shopping</Tag>
       </TagGroup.List>
       <Description>Select at least one category</Description>
-      {!!isInvalid && <ErrorMessage>Please select at least one category</ErrorMessage>}
+      <ErrorMessage>{!!isInvalid && <>Please select at least one category</>}</ErrorMessage>
     </TagGroup>
   );
 }
