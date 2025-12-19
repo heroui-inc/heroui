@@ -18,19 +18,19 @@ import { Separator } from '@heroui/react';
 
 ### Usage
 
-<ComponentPreview 
+<ComponentPreview
   name="separator-basic"
 />
 
 ### Vertical
 
-<ComponentPreview 
+<ComponentPreview
   name="separator-vertical"
 />
 
 ### With Content
 
-<ComponentPreview 
+<ComponentPreview
   name="separator-with-content"
 />
 
@@ -45,7 +45,7 @@ import {Separator} from '@heroui/react';
 
 function CustomSeparator() {
   return (
-    <Separator className="my-8 bg-gradient-to-r from-transparent via-default-500 to-transparent" />
+    <Separator className="my-8 bg-linear-to-r from-transparent via-default-500 to-transparent" />
   );
 }
 ```
@@ -60,7 +60,7 @@ To customize the Separator component classes, you can use the `@layer components
   .separator {
     @apply bg-accent h-[2px];
   }
-  
+
   .separator--vertical {
     @apply bg-accent w-[2px];
   }

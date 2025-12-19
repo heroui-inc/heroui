@@ -21,6 +21,19 @@ export const Default: Story = {
   render: () => <Input placeholder="Your name" />,
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-3">
+      <Input fullWidth placeholder="Full width input" />
+      <div className="flex h-[180px] items-center justify-center rounded-3xl bg-surface p-4">
+        <Surface className="w-full">
+          <Input fullWidth isOnSurface placeholder="Full width input on surface" />
+        </Surface>
+      </div>
+    </div>
+  ),
+};
+
 export const OnSurface: Story = {
   render: () => {
     return (

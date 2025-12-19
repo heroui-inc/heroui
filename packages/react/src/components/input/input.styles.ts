@@ -9,9 +9,14 @@ export const inputVariants = tv({
       true: "input--on-surface",
       false: {},
     },
+    fullWidth: {
+      true: "input--full-width",
+      false: "",
+    },
   },
   defaultVariants: {
     isOnSurface: false,
+    fullWidth: false,
   },
 });
 

@@ -130,3 +130,12 @@
     @apply bg-transparent;
   }
 }
+
+/* Full width modifier */
+.search-field--full-width {
+  @apply w-full;
+}
+
+.search-field__group--full-width {
+  @apply w-full;
+}

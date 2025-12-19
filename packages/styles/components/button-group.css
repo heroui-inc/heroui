@@ -50,3 +50,8 @@
   transition: opacity 150ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
 }
+
+/* Full width modifier */
+.button-group--full-width {
+  @apply w-full;
+}

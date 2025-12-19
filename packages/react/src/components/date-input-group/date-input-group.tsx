@@ -39,6 +39,7 @@ interface DateInputGroupRootProps
 const DateInputGroupRoot = ({
   children,
   className,
+  fullWidth,
   isOnSurface,
   ...props
 }: DateInputGroupRootProps) => {
@@ -46,8 +47,8 @@ const DateInputGroupRoot = ({
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   const slots = React.useMemo(
-    () => dateInputGroupVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => dateInputGroupVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+    [fullWidth, isOnSurfaceValue],
   );
 
   return (

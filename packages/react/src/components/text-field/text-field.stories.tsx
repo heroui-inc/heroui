@@ -32,6 +32,26 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <TextField fullWidth name="name">
+        <Label>Your name</Label>
+        <Input placeholder="John" />
+      </TextField>
+      <TextField fullWidth name="productDescription">
+        <Label>Describe your product</Label>
+        <TextArea placeholder="My product is..." />
+      </TextField>
+      <TextField fullWidth isInvalid isRequired name="password" type="password">
+        <Label>Password</Label>
+        <Input />
+        <FieldError>Password must be longer than 8 characters</FieldError>
+      </TextField>
+    </div>
+  ),
+};
+
 export const WithTextArea: Story = {
   render: () => (
     <div className="flex flex-col gap-4">

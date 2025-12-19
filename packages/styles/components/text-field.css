@@ -13,3 +13,14 @@
     @apply px-1;
   }
 }
+
+/* Full width modifier */
+.text-field--full-width {
+  @apply w-full;
+
+  /* Automatically make Input full width when TextField is full width */
+  [data-slot="input"],
+  [data-slot="textarea"] {
+    @apply w-full;
+  }
+}

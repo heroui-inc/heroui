@@ -1,6 +1,7 @@
 ---
 title: Button
 description: A clickable button component with multiple variants and states
+icon: updated
 links:
   rac: Button
   source: button/button.tsx
@@ -56,6 +57,12 @@ import { Button } from '@heroui/react';
 
 <ComponentPreview
   name="button-sizes"
+/>
+
+### Full Width
+
+<ComponentPreview
+  name="button-full-width"
 />
 
 ### Disabled State
@@ -158,6 +165,7 @@ The button supports both CSS pseudo-classes and data attributes for flexibility:
 |------|------|---------|-------------|
 | `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | `'primary'` | Visual style variant |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the button |
+| `fullWidth` | `boolean` | `false` | Whether the button should take full width of its container |
 | `isDisabled` | `boolean` | `false` | Whether the button is disabled |
 | `isPending` | `boolean` | `false` | Whether the button is in a loading state |
 | `isIconOnly` | `boolean` | `false` | Whether the button contains only an icon |

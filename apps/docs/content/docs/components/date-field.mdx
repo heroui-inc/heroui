@@ -80,6 +80,10 @@ Add prefix or suffix icons to enhance the date field.
 
 <ComponentPreview name="date-field-with-prefix-and-suffix" />
 
+### Full Width
+
+<ComponentPreview name="date-field-full-width" />
+
 ### On Surface
 
 When used inside a [Surface](/docs/components/surface) component, DateField and its child DateInputGroup automatically apply on-surface styling.
@@ -175,6 +179,7 @@ DateField inherits all props from React Aria's [DateField](https://react-aria.ad
 | `children` | `React.ReactNode \| (values: DateFieldRenderProps) => React.ReactNode` | - | Child components (Label, DateInputGroup, etc.) or render function. |
 | `className` | `string \| (values: DateFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: DateFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the date field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
 
 #### Value Props
@@ -313,6 +318,7 @@ DateInputGroup accepts all props from React Aria's `Group` component plus the fo
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
+| `fullWidth` | `boolean` | `false` | Whether the date input group should take full width of its container |
 | `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
 
 ### DateInputGroup.Input Props

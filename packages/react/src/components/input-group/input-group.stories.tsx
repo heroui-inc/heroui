@@ -41,6 +41,31 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <TextField fullWidth name="email">
+        <Label>Email address</Label>
+        <InputGroup fullWidth>
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input placeholder="name@email.com" />
+        </InputGroup>
+      </TextField>
+      <TextField fullWidth name="password">
+        <Label>Password</Label>
+        <InputGroup fullWidth>
+          <InputGroup.Input placeholder="Enter password" type="password" />
+          <InputGroup.Suffix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:eye" />
+          </InputGroup.Suffix>
+        </InputGroup>
+      </TextField>
+    </div>
+  ),
+};
+
 export const WithPrefixIcon: Story = {
   render: () => (
     <TextField className="w-[280px]" name="email">

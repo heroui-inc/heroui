@@ -1,6 +1,7 @@
 ---
 title: ComboBox
 description: A combo box combines a text input with a listbox, allowing users to filter a list of options to items matching a query
+icon: updated
 links:
   rac: ComboBox
   source: combobox/combobox.tsx
@@ -132,6 +133,12 @@ export default () => (
   name="combobox-default-selected-key"
 />
 
+### Full Width
+
+<ComponentPreview
+  name="combobox-full-width"
+/>
+
 ### On Surface
 
 <ComponentPreview
@@ -245,6 +252,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `allowsEmptyCollection` | `boolean` | - | Whether the combobox allows an empty collection |
 | `defaultFilter` | `(text: string, inputValue: string) => boolean` | - | Custom filter function for filtering items |
 | `items` | `Iterable<T>` | - | The items to display in the listbox |
+| `fullWidth` | `boolean` | `false` | Whether the combobox should take full width of its container |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | ComboBox content or render function |
 

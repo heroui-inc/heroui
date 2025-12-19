@@ -56,6 +56,12 @@ export default () => (
   name="button-group-with-icons"
 />
 
+### Full Width
+
+<ComponentPreview
+  name="button-group-full-width"
+/>
+
 ### Disabled State
 
 <ComponentPreview
@@ -120,6 +126,7 @@ Separators are automatically added between buttons using a pseudo-element (`:bef
 |------|------|---------|-------------|
 | `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | - | Visual style variant applied to all buttons in the group |
 | `size` | `'sm' \| 'md' \| 'lg'` | - | Size applied to all buttons in the group |
+| `fullWidth` | `boolean` | `false` | Whether the button group should take full width of its container |
 | `isDisabled` | `boolean` | `false` | Whether all buttons in the group are disabled (can be overridden on individual buttons) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Button components to group together |

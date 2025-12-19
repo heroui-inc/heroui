@@ -21,9 +21,10 @@ interface TimeFieldRootProps<T extends TimeValue>
 function TimeFieldRoot<T extends TimeValue>({
   children,
   className,
+  fullWidth,
   ...props
 }: TimeFieldRootProps<T>) {
-  const styles = React.useMemo(() => timeFieldVariants({}), []);
+  const styles = React.useMemo(() => timeFieldVariants({fullWidth}), [fullWidth]);
 
   return (
     <TimeFieldPrimitive

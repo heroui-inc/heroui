@@ -19,6 +19,7 @@ interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>,
 const ButtonRoot = ({
   children,
   className,
+  fullWidth,
   isDisabled,
   isIconOnly,
   size,
@@ -33,9 +34,11 @@ const ButtonRoot = ({
   const finalSize = size ?? buttonGroupContext?.size;
   const finalVariant = variant ?? buttonGroupContext?.variant;
   const finalIsDisabled = isDisabled ?? buttonGroupContext?.isDisabled;
+  const finalFullWidth = fullWidth ?? buttonGroupContext?.fullWidth;
 
   const styles = buttonVariants({
     class: typeof className === "string" ? className : undefined,
+    fullWidth: finalFullWidth,
     isIconOnly,
     size: finalSize,
     variant: finalVariant,

@@ -158,3 +158,12 @@
     }
   }
 }
+
+/* Full width modifier */
+.combobox--full-width {
+  @apply w-full;
+}
+
+.combobox__input-group--full-width {
+  @apply w-full;
+}
