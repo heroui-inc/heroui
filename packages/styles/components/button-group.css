@@ -51,6 +51,11 @@
   @apply motion-reduce:transition-none;
 }
 
+/* Hide separator when hideSeparator prop is set */
+.button-group[data-hide-separator="true"] .button:not(:first-child):before {
+  display: none;
+}
+
 /* Full width modifier */
 .button-group--full-width {
   @apply w-full;

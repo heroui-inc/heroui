@@ -16,6 +16,7 @@ type ButtonGroupContext = {
   variant?: ButtonProps["variant"];
   isDisabled?: ButtonProps["isDisabled"];
   fullWidth?: ButtonProps["fullWidth"];
+  hideSeparator?: boolean;
 };
 
 const ButtonGroupContext = createContext<ButtonGroupContext>({});
@@ -27,20 +28,24 @@ interface ButtonGroupRootProps
   extends
     ComponentPropsWithRef<"div">,
     Pick<ButtonProps, "size" | "variant" | "isDisabled">,
-    ButtonGroupVariants {}
+    ButtonGroupVariants {
+  hideSeparator?: boolean;
+}
 
 const ButtonGroupRoot = ({
   className,
   fullWidth,
+  hideSeparator = false,
   isDisabled,
   size,
   variant,
   ...rest
 }: ButtonGroupRootProps) => {
   return (
-    <ButtonGroupContext value={{size, variant, isDisabled, fullWidth}}>
+    <ButtonGroupContext value={{size, variant, isDisabled, fullWidth, hideSeparator}}>
       <div
         className={buttonGroupVariants({className, fullWidth})}
+        data-hide-separator={hideSeparator ? "true" : undefined}
         data-slot="button-group"
         {...rest}
       />

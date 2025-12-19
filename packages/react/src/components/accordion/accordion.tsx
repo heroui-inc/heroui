@@ -21,15 +21,26 @@ import {SurfaceContext} from "../surface";
 
 import {accordionVariants} from "./accordion.styles";
 
-const AccordionContext = createContext<{slots?: ReturnType<typeof accordionVariants>}>({});
+const AccordionContext = createContext<{
+  slots?: ReturnType<typeof accordionVariants>;
+  hideSeparator?: boolean;
+}>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Accordion Root
  * -----------------------------------------------------------------------------------------------*/
 interface AccordionRootProps
-  extends ComponentPropsWithRef<typeof DisclosureGroup>, AccordionVariants {}
+  extends ComponentPropsWithRef<typeof DisclosureGroup>, AccordionVariants {
+  hideSeparator?: boolean;
+}
 
-const AccordionRoot = ({children, className, variant, ...props}: AccordionRootProps) => {
+const AccordionRoot = ({
+  children,
+  className,
+  hideSeparator = false,
+  variant,
+  ...props
+}: AccordionRootProps) => {
   const slots = React.useMemo(() => accordionVariants({variant}), [variant]);
 
   const content = (
@@ -43,7 +54,7 @@ const AccordionRoot = ({children, className, variant, ...props}: AccordionRootPr
   );
 
   return (
-    <AccordionContext value={{slots}}>
+    <AccordionContext value={{slots, hideSeparator}}>
       {variant === "surface" ? (
         // Allows inner components to apply "on-surface" colors for proper contrast
         <SurfaceContext value={{variant: "default"}}>{content}</SurfaceContext>
@@ -60,11 +71,12 @@ const AccordionRoot = ({children, className, variant, ...props}: AccordionRootPr
 interface AccordionItemProps extends ComponentPropsWithRef<typeof Disclosure> {}
 
 const AccordionItem = ({className, ...props}: AccordionItemProps) => {
-  const {slots} = useContext(AccordionContext);
+  const {hideSeparator, slots} = useContext(AccordionContext);
 
   return (
     <Disclosure
       className={composeTwRenderProps(className, slots?.item())}
+      data-hide-separator={hideSeparator ? "true" : undefined}
       data-slot="accordion-item"
       {...props}
     >
