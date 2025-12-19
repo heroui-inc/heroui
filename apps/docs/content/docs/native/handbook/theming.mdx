@@ -251,6 +251,54 @@ import { View, Text } from 'react-native';
 </View>
 ```
 
+## Custom Fonts
+
+To use a custom font family in your app, you need to load the fonts and then override the font CSS variables.
+
+### 1. Load Fonts in Your App
+
+First, load your custom fonts (using Expo's `useFonts` hook for example):
+
+```tsx
+import { useFonts } from 'expo-font';
+import { HeroUINativeProvider } from 'heroui-native';
+import { YourFont_400Regular, YourFont_500Medium, YourFont_600SemiBold } from '@expo-google-fonts/your-font';
+
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    YourFont_400Regular,
+    YourFont_500Medium,
+    YourFont_600SemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return null; // Or return a loading screen
+  }
+
+  return (
+    <HeroUINativeProvider>
+      {/* Your app content */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+### 2. Configure Font CSS Variables
+
+After loading the fonts, override the font CSS variables in your `global.css` file:
+
+```css
+@theme {
+  --font-normal: 'YourFont-Regular';
+  --font-medium: 'YourFont-Medium';
+  --font-semibold: 'YourFont-SemiBold';
+}
+```
+
+**Note:** The font names in CSS variables should match the PostScript names of your loaded fonts. Check your font package documentation or use the font names exactly as they appear in your `useFonts` hook.
+
+All HeroUI Native components automatically use these font variables, ensuring consistent typography throughout your app.
+
 ## Variables Reference
 
 HeroUI defines three types of variables:

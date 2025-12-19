@@ -173,6 +173,74 @@ import { View, Text } from 'react-native';
 
 For custom breakpoints and more details, see the [Uniwind breakpoints documentation](https://docs.uniwind.dev/breakpoints).
 
+## Utilities
+
+HeroUI Native provides utility functions to assist with styling components.
+
+### cn Utility
+
+The `cn` utility function merges Tailwind CSS classes with proper conflict resolution. It's particularly useful when combining conditional classes or merging classes from props:
+
+```tsx
+import { cn } from 'heroui-native';
+import { View } from 'react-native';
+
+function MyComponent({ className, isActive }) {
+  return (
+    <View
+      className={cn(
+        'bg-background p-4 rounded-lg',
+        'border border-divider',
+        isActive && 'bg-accent',
+        className
+      )}
+    />
+  );
+}
+```
+
+The `cn` utility is powered by `tailwind-variants` and includes:
+
+- Automatic Tailwind class merging (`twMerge: true`)
+- Custom opacity class group support
+- Proper conflict resolution (later classes override earlier ones)
+
+**Example with conflicts:**
+
+```tsx
+// 'bg-accent' overrides 'bg-background'
+cn('bg-background p-4', 'bg-accent');
+// Result: 'p-4 bg-accent'
+```
+
+### useThemeColor Hook
+
+Quick access to theme colors in hex format for use with the `style` prop:
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+import { View, Text } from 'react-native';
+
+function MyComponent() {
+  const accentColor = useThemeColor('accent');
+  const dangerColor = useThemeColor('danger');
+
+  return (
+    <View style={{ borderColor: accentColor }}>
+      <Text style={{ color: dangerColor }}>Error message</Text>
+    </View>
+  );
+}
+```
+
+**Type signature:**
+
+```tsx
+useThemeColor(themeColor: ThemeColor): string
+```
+
+Available theme colors include: `background`, `foreground`, `surface`, `accent`, `default`, `success`, `warning`, `danger`, and all their variants (hover, soft, etc.).
+
 ## Next Steps
 
 - Learn about [Animation](/docs/native/handbook/animation) techniques
