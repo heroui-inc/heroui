@@ -1,0 +1,46 @@
+---
+title: LLMs.txt
+description: Enable AI assistants like Claude, Cursor, and Windsurf to understand HeroUI Native
+---
+
+We provide [LLMs.txt](https://llmstxt.org/) files to make HeroUI Native documentation accessible to AI coding assistants.
+
+## Available Files
+
+**Core documentation:**
+- [/llms.txt](https://v3.heroui.com/native/llms.txt) — Quick reference index
+- [/llms-full.txt](https://v3.heroui.com/native/llms-full.txt) — Complete HeroUI v3 documentation
+
+**Coming soon** (for limited context windows):
+- `/llms-components.txt` — Component documentation only
+- `/llms-patterns.txt` — Common patterns and recipes
+
+## Integration
+
+**Claude Code:** Tell Claude to reference the documentation:
+```
+Use HeroUI Native documentation from https://v3.heroui.com/native/llms.txt
+```
+Or add to your project's `.claude` file for automatic loading.
+
+**Cursor:** Use the `@Docs` feature:
+```
+@Docs https://v3.heroui.com/native/llms-full.txt
+```
+[Learn more](https://docs.cursor.com/context/@-symbols/@-docs)
+
+**Windsurf:** Add to your `.windsurfrules` file:
+```
+#docs https://v3.heroui.com/native/llms-full.txt
+```
+[Learn more](https://docs.codeium.com/windsurf/memories#memories-and-rules)
+
+**Other AI tools:** Most AI assistants can reference documentation by URL. Simply provide:
+```
+https://v3.heroui.com/native/llms.txt
+```
+
+
+## Contributing
+
+Found an issue with AI-generated code? Help us improve our LLMs.txt files on [GitHub](https://github.com/heroui-inc/heroui-native).
