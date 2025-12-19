@@ -1,7 +1,7 @@
 /* Base scroll-shadow component */
 .scroll-shadow {
   @apply relative;
-  @apply [--scroll-shadow-size:_attr(data-scroll-shadow-size_px,_40px)];
+  --scroll-shadow-size: 40px;
 }
 
 /* On surface variant */
@@ -21,45 +21,52 @@
 /* Variant: Fade - Vertical */
 .scroll-shadow--fade.scroll-shadow--vertical {
   &[data-top-scroll="true"] {
-    mask-image: linear-gradient(0deg, #000 calc(100% - var(--scroll-shadow-size)), transparent);
+    --scroll-linear-gradient: 0deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-bottom-scroll="true"] {
-    mask-image: linear-gradient(180deg, #000 calc(100% - var(--scroll-shadow-size)), transparent);
+    --scroll-linear-gradient: 180deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-top-bottom-scroll="true"] {
-    mask-image: linear-gradient(
-      #000,
-      #000,
-      transparent 0,
-      #000 var(--scroll-shadow-size),
-      #000 calc(100% - var(--scroll-shadow-size)),
-      transparent
-    );
+    --scroll-linear-gradient:
+      #000, #000, transparent 0, #000 var(--scroll-shadow-size),
+      #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 }
 
 /* Variant: Fade - Horizontal */
 .scroll-shadow--fade.scroll-shadow--horizontal {
   &[data-left-scroll="true"] {
-    mask-image: linear-gradient(270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent);
+    --scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-right-scroll="true"] {
-    mask-image: linear-gradient(90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent);
+    --scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-left-right-scroll="true"] {
-    mask-image: linear-gradient(
-      to right,
-      #000,
-      #000,
-      transparent 0,
-      #000 var(--scroll-shadow-size),
-      #000 calc(100% - var(--scroll-shadow-size)),
-      transparent
-    );
+    --scroll-linear-gradient:
+      to right, #000, #000, transparent 0, #000 var(--scroll-shadow-size),
+      #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 }
 
