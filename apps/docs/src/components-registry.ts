@@ -42,6 +42,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "button",
     title: "Button",
   },
+  buttongroup: {
+    category: "forms",
+    description: "Group related buttons together",
+    href: "/docs/components/button-group",
+    name: "buttongroup",
+    title: "ButtonGroup",
+  },
   card: {
     category: "layout",
     description: "Content container with header, body, and footer",
@@ -84,6 +91,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "combobox",
     title: "ComboBox",
   },
+  datefield: {
+    category: "forms",
+    description: "Date input field with labels, descriptions, and validation",
+    href: "/docs/components/date-field",
+    name: "datefield",
+    title: "DateField",
+  },
   description: {
     category: "forms",
     description: "Helper text for form fields",
@@ -111,6 +125,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     href: "/docs/components/dropdown",
     name: "dropdown",
     title: "Dropdown",
+  },
+  errormessage: {
+    category: "forms",
+    description: "Displays validation error messages for components with validation support",
+    href: "/docs/components/error-message",
+    name: "errormessage",
+    title: "ErrorMessage",
   },
   fielderror: {
     category: "forms",
@@ -210,6 +231,20 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "radiogroup",
     title: "RadioGroup",
   },
+  scrollshadow: {
+    category: "utilities",
+    description: "Visual shadows for scrollable content overflow",
+    href: "/docs/components/scroll-shadow",
+    name: "scrollshadow",
+    title: "ScrollShadow",
+  },
+  searchfield: {
+    category: "forms",
+    description: "Search input field with clear button and search icon",
+    href: "/docs/components/search-field",
+    name: "searchfield",
+    title: "SearchField",
+  },
   select: {
     category: "forms",
     description: "Dropdown select control",
@@ -266,6 +301,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "tabs",
     title: "Tabs",
   },
+  taggroup: {
+    category: "display",
+    description: "Focusable list of tags with selection and removal support",
+    href: "/docs/components/tag-group",
+    name: "taggroup",
+    title: "TagGroup",
+  },
   textarea: {
     category: "forms",
     description: "Multiline text input with focus management",
@@ -279,6 +321,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     href: "/docs/components/text-field",
     name: "textfield",
     title: "TextField",
+  },
+  timefield: {
+    category: "forms",
+    description: "Time input field with labels, descriptions, and validation",
+    href: "/docs/components/time-field",
+    name: "timefield",
+    title: "TimeField",
   },
   tooltip: {
     category: "display",
@@ -296,6 +345,7 @@ const componentRelationships: Record<string, string[]> = {
   alertdialog: ["button", "closebutton"],
   avatar: ["separator"],
   button: ["popover", "tooltip", "form", "alert", "alertdialog", "closebutton", "dropdown"],
+  buttongroup: ["button", "dropdown", "chip"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [
@@ -324,6 +374,7 @@ const componentRelationships: Record<string, string[]> = {
     "spinner",
     "button",
   ],
+  datefield: ["label", "fielderror", "description", "form", "surface"],
   description: [
     "textfield",
     "input",
@@ -336,11 +387,22 @@ const componentRelationships: Record<string, string[]> = {
     "select",
     "combobox",
     "numberfield",
+    "datefield",
   ],
   disclosure: ["accordion", "disclosuregroup", "button"],
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
   dropdown: ["button", "popover", "separator", "listbox"],
-  fielderror: ["textfield", "input", "textarea", "combobox", "form", "numberfield"],
+  errormessage: ["taggroup"],
+  fielderror: [
+    "textfield",
+    "input",
+    "textarea",
+    "combobox",
+    "form",
+    "numberfield",
+    "datefield",
+    "timefield",
+  ],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
   form: [
     "button",
@@ -359,6 +421,8 @@ const componentRelationships: Record<string, string[]> = {
     "slider",
     "inputotp",
     "numberfield",
+    "datefield",
+    "timefield",
   ],
   input: [
     "textfield",
@@ -397,6 +461,8 @@ const componentRelationships: Record<string, string[]> = {
     "select",
     "combobox",
     "numberfield",
+    "datefield",
+    "timefield",
   ],
   link: [],
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
@@ -404,6 +470,8 @@ const componentRelationships: Record<string, string[]> = {
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
+  scrollshadow: [],
+  searchfield: ["label", "description", "fielderror", "form", "surface", "input", "closebutton"],
   select: [
     "listbox",
     "popover",
@@ -442,11 +510,14 @@ const componentRelationships: Record<string, string[]> = {
     "textfield",
     "textarea",
     "numberfield",
+    "datefield",
+    "timefield",
     "card",
     "listbox",
   ],
   switch: ["label", "description", "button", "form"],
   tabs: [],
+  taggroup: ["tag", "label", "description", "errormessage", "closebutton"],
   textarea: ["textfield", "input", "label", "fielderror", "form", "surface", "description"],
   textfield: [
     "input",
@@ -458,7 +529,9 @@ const componentRelationships: Record<string, string[]> = {
     "description",
     "numberfield",
     "inputgroup",
+    "datefield",
   ],
+  timefield: ["label", "fielderror", "description", "form", "surface"],
   tooltip: ["button", "popover"],
 };
 

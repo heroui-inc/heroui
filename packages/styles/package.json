@@ -4,6 +4,11 @@
   "description": "HeroUI core styles and Tailwind plugin",
   "author": "HeroUI <support@heroui.com>",
   "homepage": "https://heroui.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "directory": "packages/styles"
+  },
   "license": "MIT",
   "type": "module",
   "main": "./index.css",
@@ -36,10 +41,10 @@
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@tailwindcss/cli": "4.1.13",
+    "@tailwindcss/cli": "4.1.18",
     "clean-package": "2.2.0",
-    "rimraf": "6.0.1",
-    "tailwindcss": "4.1.13"
+    "rimraf": "6.1.2",
+    "tailwindcss": "4.1.18"
   },
   "peerDependencies": {
     "tailwindcss": ">=4.0.0"

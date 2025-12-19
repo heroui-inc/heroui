@@ -1,16 +1,8 @@
 "use client";
 
 import type {CalendarVariants} from "./calendar.styles";
-import type {
-  ButtonProps as ButtonPrimitiveProps,
-  CalendarCellProps as CalendarCellPrimitiveProps,
-  CalendarGridHeaderProps as CalendarGridHeaderPrimitiveProps,
-  CalendarGridProps as CalendarGridPrimitiveProps,
-  CalendarHeaderCellProps as CalendarHeaderCellPrimitiveProps,
-  CalendarProps as CalendarPrimitiveProps,
-  DateValue,
-  HeadingProps as HeadingPrimitiveProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {DateValue} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -24,7 +16,7 @@ import {
   Heading as HeadingPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {calendarVariants} from "./calendar.styles";
 
@@ -41,8 +33,7 @@ const CalendarContext = createContext<CalendarContext>({});
  * Calendar Root
  * -----------------------------------------------------------------------------------------------*/
 interface CalendarRootProps<T extends DateValue = DateValue>
-  extends CalendarPrimitiveProps<T>,
-    CalendarVariants {}
+  extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>, CalendarVariants {}
 
 function CalendarRoot<T extends DateValue = DateValue>({
   children,
@@ -69,7 +60,7 @@ function CalendarRoot<T extends DateValue = DateValue>({
 /* -------------------------------------------------------------------------------------------------
  * Calendar Header
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeaderProps extends React.ComponentProps<"header"> {
+interface CalendarHeaderProps extends ComponentPropsWithRef<"header"> {
   className?: string;
 }
 
@@ -77,7 +68,11 @@ const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) =>
   const {slots} = useContext(CalendarContext);
 
   return (
-    <header className={slots?.header({className})} data-slot="calendar-header" {...props}>
+    <header
+      className={composeSlotClassName(slots?.header, className)}
+      data-slot="calendar-header"
+      {...props}
+    >
       {children}
     </header>
   );
@@ -86,7 +81,7 @@ const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Calendar Heading
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeadingProps extends HeadingPrimitiveProps {}
+interface CalendarHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
   const {slots} = useContext(CalendarContext);
@@ -95,7 +90,7 @@ const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
     <HeadingPrimitive
       data-slot="calendar-heading"
       {...props}
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
     />
   );
 };
@@ -103,7 +98,7 @@ const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Calendar Nav Button
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarNavButtonProps extends ButtonPrimitiveProps {
+interface CalendarNavButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   slot?: "previous" | "next";
 }
 
@@ -125,7 +120,7 @@ const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavBut
 /* -------------------------------------------------------------------------------------------------
  * Calendar Grid
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarGridProps extends CalendarGridPrimitiveProps {}
+interface CalendarGridProps extends ComponentPropsWithRef<typeof CalendarGridPrimitive> {}
 
 const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
   const {slots} = useContext(CalendarContext);
@@ -134,7 +129,7 @@ const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
     <CalendarGridPrimitive
       data-slot="calendar-grid"
       {...props}
-      className={slots?.grid({className})}
+      className={composeSlotClassName(slots?.grid, className)}
     >
       <CalendarGridHeader>
         {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
@@ -149,7 +144,9 @@ const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Calendar Grid Header
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarGridHeaderProps extends CalendarGridHeaderPrimitiveProps {}
+interface CalendarGridHeaderProps extends ComponentPropsWithRef<
+  typeof CalendarGridHeaderPrimitive
+> {}
 
 const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
   const {slots} = useContext(CalendarContext);
@@ -158,7 +155,7 @@ const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
     <CalendarGridHeaderPrimitive
       data-slot="calendar-grid-header"
       {...props}
-      className={slots?.gridHeader({className})}
+      className={composeSlotClassName(slots?.gridHeader, className)}
     />
   );
 };
@@ -166,7 +163,9 @@ const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Calendar Header Cell
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeaderCellProps extends CalendarHeaderCellPrimitiveProps {}
+interface CalendarHeaderCellProps extends ComponentPropsWithRef<
+  typeof CalendarHeaderCellPrimitive
+> {}
 
 const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
   const {slots} = useContext(CalendarContext);
@@ -175,7 +174,7 @@ const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
     <CalendarHeaderCellPrimitive
       data-slot="calendar-header-cell"
       {...props}
-      className={slots?.headerCell({className})}
+      className={composeSlotClassName(slots?.headerCell, className)}
     />
   );
 };
@@ -183,7 +182,7 @@ const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Calendar Cell
  * -----------------------------------------------------------------------------------------------*/
-interface CalendarCellProps extends CalendarCellPrimitiveProps {}
+interface CalendarCellProps extends ComponentPropsWithRef<typeof CalendarCellPrimitive> {}
 
 const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
   const {slots} = useContext(CalendarContext);

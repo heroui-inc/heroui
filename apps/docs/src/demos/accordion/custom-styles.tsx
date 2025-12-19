@@ -1,5 +1,5 @@
+import {ChevronDown} from "@gravity-ui/icons";
 import {Accordion, cn} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 const items = [
   {
@@ -41,16 +41,16 @@ export function CustomStyles() {
               {item.iconUrl ? (
                 <img
                   alt={item.title}
-                  className="group-hover/item:scale-120 group-hover/item:-rotate-10 h-11 w-11 transition-[scale,rotate] duration-300 ease-out group-hover/item:drop-shadow-lg"
+                  className="h-11 w-11 transition-[scale,rotate] duration-300 ease-out group-hover/item:scale-120 group-hover/item:-rotate-10 group-hover/item:drop-shadow-lg"
                   src={item.iconUrl}
                 />
               ) : null}
               <div className="flex flex-col gap-0">
-                <span className="font-medium leading-5">{item.title}</span>
-                <span className="text-muted/80 font-normal leading-6">{item.subtitle}</span>
+                <span className="leading-5 font-medium">{item.title}</span>
+                <span className="leading-6 font-normal text-muted/80">{item.subtitle}</span>
               </div>
               <Accordion.Indicator className="text-muted/50 [&>svg]:size-4">
-                <Icon icon="gravity-ui:chevron-down" />
+                <ChevronDown />
               </Accordion.Indicator>
             </Accordion.Trigger>
           </Accordion.Heading>

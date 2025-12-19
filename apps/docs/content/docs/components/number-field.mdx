@@ -1,7 +1,7 @@
 ---
 title: NumberField
 description: Number input fields with increment/decrement buttons, validation, and internationalized formatting
-icon: new
+icon: updated
 links:
   rac: NumberField
   source: number-field/number-field.tsx
@@ -94,6 +94,10 @@ Use chevron icons in a vertical layout for a different visual style.
 ### Disabled State
 
 <ComponentPreview name="number-field-disabled" />
+
+### Full Width
+
+<ComponentPreview name="number-field-full-width" />
 
 ### On Surface
 
@@ -199,6 +203,7 @@ NumberField inherits all props from React Aria's [NumberField](https://react-spe
 | `children` | `React.ReactNode \| (values: NumberFieldRenderProps) => React.ReactNode` | - | Child components (Label, Group, Input, etc.) or render function. |
 | `className` | `string \| (values: NumberFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: NumberFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the number field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
 | `isOnSurface` | `boolean` | - | Whether the field is on a surface (auto-detected when inside Surface). |
 

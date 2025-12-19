@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroui-inc/heroui.git",
+    "url": "https://github.com/heroui-inc/heroui.git",
     "directory": "packages/react"
   },
   "bugs": {
@@ -55,31 +55,29 @@
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
-    "@internationalized/date": "3.10.0",
-    "@radix-ui/react-avatar": "1.1.10",
-    "@radix-ui/react-slot": "1.2.3",
+    "@internationalized/date": "3.10.1",
+    "@radix-ui/react-avatar": "1.1.11",
     "@react-aria/ssr": "3.9.10",
-    "@react-aria/utils": "3.31.0",
+    "@react-aria/utils": "3.32.0",
     "@react-types/shared": "3.32.1",
     "clsx": "2.1.1",
     "input-otp": "1.4.2",
-    "react-aria-components": "1.13.0",
-    "tailwind-merge": "3.3.1",
-    "tailwind-variants": "3.1.1"
+    "react-aria-components": "1.14.0",
+    "tailwind-merge": "3.4.0",
+    "tailwind-variants": "3.2.2"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
-    "@react-stately/data": "3.14.1",
-    "@storybook/react": "8.6.12",
+    "@react-stately/data": "3.15.0",
+    "@storybook/react": "10.1.10",
     "@types/fs-extra": "11.0.4",
-    "@types/react": "19.1.15",
-    "@types/react-dom": "19.1.9",
-    "fs-extra": "11.3.2",
-    "glob": "11.0.3",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "tailwindcss": "4.1.13"
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "fs-extra": "11.3.3",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwindcss": "4.1.18"
   },
   "peerDependencies": {
     "react": ">=19.0.0",

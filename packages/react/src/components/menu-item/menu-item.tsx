@@ -1,15 +1,13 @@
 "use client";
 
 import type {MenuItemVariants} from "./menu-item.styles";
-import type {
-  MenuItemProps as MenuItemPrimitiveProps,
-  MenuItemRenderProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {MenuItemRenderProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 import {IconChevronRight} from "../icons";
 
 import {menuItemVariants} from "./menu-item.styles";
@@ -27,7 +25,8 @@ const MenuItemContext = createContext<MenuItemContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Root
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemRootProps extends MenuItemPrimitiveProps, MenuItemVariants {
+interface MenuItemRootProps
+  extends ComponentPropsWithRef<typeof MenuItemPrimitive>, MenuItemVariants {
   className?: string;
 }
 
@@ -52,7 +51,7 @@ const MenuItemRoot = ({children, className, variant, ...props}: MenuItemRootProp
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface MenuItemIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode | ((props: MenuItemRenderProps) => React.ReactNode);
   type?: "checkmark" | "dot";
 }
@@ -104,7 +103,7 @@ const MenuItemIndicator = ({
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="menu-item-indicator"
       data-type={type}
       data-visible={isSelected || undefined}
@@ -118,8 +117,7 @@ const MenuItemIndicator = ({
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Submenu Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemSubmenuIndicatorProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface MenuItemSubmenuIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode;
 }
 
@@ -142,7 +140,7 @@ const MenuItemSubmenuIndicator = ({
   return (
     <span
       aria-hidden="true"
-      className={slots?.submenuIndicator({className})}
+      className={composeSlotClassName(slots?.submenuIndicator, className)}
       data-slot="submenu-indicator"
       {...props}
     >

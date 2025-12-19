@@ -2,8 +2,8 @@
 .number-field {
   @apply flex flex-col gap-1;
 
-  &[data-invalid],
-  &[aria-invalid] {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -19,7 +19,7 @@
 }
 
 .number-field__group {
-  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -36,34 +36,36 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover:not(:focus-within),
-    &[data-hovered]:not([data-focus-within]) {
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
   }
 
   /* Focus within state */
-  &[data-focus-within],
+  &[data-focus-within="true"],
   &:focus-within {
     @apply status-focused-field;
+    border-color: var(--color-field-border-focus);
+    background-color: var(--color-field-focus);
   }
 
   /* Invalid state */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
     border-color: var(--color-field-border-invalid);
   }
 
   /* Disabled state */
-  &[data-disabled],
-  &[aria-disabled] {
-    @apply status-disabled pointer-events-none;
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
   }
 }
 
 .number-field__input {
-  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 tabular-nums shadow-none outline-none;
+  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 text-base tabular-nums shadow-none outline-none sm:text-sm;
 
   /* Remove border radius on left side when decrement button is present */
   .number-field__group:has([slot="decrement"]) & {
@@ -84,7 +86,7 @@
 
 .number-field__increment-button,
 .number-field__decrement-button {
-  @apply text-field-foreground flex h-full w-10 items-center justify-center rounded-none bg-transparent outline-none;
+  @apply flex h-full w-10 items-center justify-center rounded-none bg-transparent text-field-foreground outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
   border-style: solid;
@@ -103,26 +105,26 @@
 
   /* Hover state */
   &:hover,
-  &[data-hovered] {
+  &[data-hovered="true"] {
   }
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
   }
 
   /* Pressed state */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     @apply bg-field-foreground/10;
     transform: scale(0.97);
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
-    @apply status-disabled pointer-events-none;
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
   }
 
   /* Icon styling */
@@ -133,11 +135,11 @@
 }
 
 .number-field__increment-button {
-  @apply rounded-r-field border-field-placeholder/15 rounded-l-none border-l;
+  @apply rounded-l-none rounded-r-field border-l border-field-placeholder/15;
 }
 
 .number-field__decrement-button {
-  @apply rounded-l-field border-field-placeholder/15 rounded-r-none border-r;
+  @apply rounded-l-field rounded-r-none border-r border-field-placeholder/15;
 }
 
 /* On Surface variant */
@@ -146,17 +148,34 @@
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
-    &[data-hovered]:not([data-focus-within]) {
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-on-surface-hover;
     }
   }
 
+  /* Focus within state */
   &:focus-within,
-  &[data-focus-within] {
+  &[data-focus-within="true"] {
     background-color: var(--color-on-surface-focus);
+  }
+
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-on-surface-focus);
+    border-color: var(--color-field-border-invalid);
   }
 
   [data-slot="number-field-input"] {
     @apply bg-transparent;
   }
+}
+
+/* Full width modifier */
+.number-field--full-width {
+  @apply w-full;
+}
+
+.number-field__group--full-width {
+  @apply w-full;
 }

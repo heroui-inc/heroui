@@ -294,7 +294,7 @@ export const Controlled: Story = {
             <Label>Writing</Label>
           </Checkbox.Content>
         </Checkbox>
-        <Label className="text-muted my-4 text-sm">Selected: {selected.join(", ") || "None"}</Label>
+        <Label className="my-4 text-sm text-muted">Selected: {selected.join(", ") || "None"}</Label>
       </CheckboxGroup>
     );
   },

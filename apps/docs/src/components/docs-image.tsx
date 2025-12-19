@@ -30,7 +30,7 @@ export function DocsImage({
     <>
       <Image
         alt={alt}
-        className="absolute inset-0 block h-full w-full object-cover dark:hidden"
+        className="absolute inset-0 block h-full w-full object-contain dark:hidden"
         height={height}
         priority={priority}
         src={src}
@@ -38,7 +38,7 @@ export function DocsImage({
       />
       <Image
         alt={alt}
-        className="absolute inset-0 hidden h-full w-full object-cover dark:block"
+        className="absolute inset-0 hidden h-full w-full object-contain dark:block"
         height={height}
         priority={priority}
         src={darkSrc}
@@ -48,7 +48,7 @@ export function DocsImage({
   ) : (
     <Image
       alt={alt}
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 h-full w-full object-contain"
       height={height}
       priority={priority}
       src={src}

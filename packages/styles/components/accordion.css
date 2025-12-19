@@ -12,7 +12,7 @@
 }
 
 .accordion__body-inner {
-  @apply text-muted px-4 pb-4 pt-0;
+  @apply px-4 pt-0 pb-4 text-muted;
 }
 
 .accordion__heading {
@@ -20,15 +20,15 @@
 }
 
 .accordion__indicator {
-  @apply text-muted ml-auto size-4 shrink-0;
+  @apply ml-auto size-4 shrink-0 text-muted;
 
   /**
    * Transitions
    */
-  @apply duration-250 transition motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded] {
+  &[data-expanded="true"] {
     @apply -rotate-180;
   }
 }
@@ -40,11 +40,16 @@
 
 .accordion__item::after {
   content: "";
-  @apply bg-separator absolute bottom-0 left-0 h-px w-full rounded-full;
+  @apply absolute bottom-0 left-0 h-px w-full rounded-full bg-separator;
 }
 
 .accordion__item:last-child::after {
   content: none;
+}
+
+/* Hide separator when hideSeparator prop is set */
+.accordion__item[data-hide-separator="true"]::after {
+  display: none;
 }
 /* ------------------------------------ */
 
@@ -52,39 +57,38 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium no-highlight;
 
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    opacity 150ms var(--ease-smooth),
+    opacity 150ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   /* Hover state */
   @media (hover: hover) {
-    &:hover:not([aria-expanded]),
-    &[data-hovered]:not([aria-expanded]) {
-      background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
+    &:hover:not([aria-expanded="true"]),
+    &[data-hovered="true"]:not([aria-expanded="true"]) {
+      background-color: color-mix(in oklab, var(--color-foreground) 3%, transparent 90%);
     }
   }
 
   /* Pressed state */
-  &[data-pressed]:not([aria-expanded]) {
-    background-color: color-mix(in oklab, var(--color-foreground) 6%, transparent 90%);
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
   }
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled State */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -100,23 +104,23 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    height 420ms var(--ease-fluid-out),
-    opacity 340ms var(--ease-out);
+    height 200ms var(--ease-out-quad),
+    opacity 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded] {
+  &[data-expanded="true"] {
     opacity: 1;
   }
 }
 
 /* Surface variant */
 .accordion--surface {
-  @apply bg-surface rounded-3xl;
+  @apply rounded-3xl bg-surface;
 
   .accordion__trigger {
     @media (hover: hover) {
-      &:hover:not([aria-expanded]),
-      &[data-hovered]:not([aria-expanded]) {
+      &:hover:not([aria-expanded="true"]),
+      &[data-hovered="true"]:not([aria-expanded="true"]) {
         @apply bg-default;
       }
     }
@@ -138,7 +142,7 @@
     @apply rounded-t-3xl;
   }
 
-  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded]))
+  &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
     [data-slot="accordion-trigger"] {
     @apply rounded-b-3xl;
   }

@@ -1,5 +1,5 @@
+import {ArrowUpRightFromSquare, Link as LinkIcon} from "@gravity-ui/icons";
 import {Link} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function LinkCustomIcon() {
   return (
@@ -7,13 +7,13 @@ export function LinkCustomIcon() {
       <Link href="#">
         External link
         <Link.Icon className="ml-1.5 size-3">
-          <Icon icon="gravity-ui:arrow-up-right-from-square" />
+          <ArrowUpRightFromSquare />
         </Link.Icon>
       </Link>
       <Link className="gap-1" href="#">
         Go to page
         <Link.Icon className="size-3">
-          <Icon icon="gravity-ui:link" />
+          <LinkIcon />
         </Link.Icon>
       </Link>
     </div>

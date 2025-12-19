@@ -1,6 +1,6 @@
 /* Input group styles */
 .input-group {
-  @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -17,34 +17,36 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover:not(:focus-within),
-    &[data-hovered]:not([data-focus-within]) {
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
   }
 
   /* Focus within state */
-  &[data-focus-within],
+  &[data-focus-within="true"],
   &:focus-within {
     @apply status-focused-field;
+    border-color: var(--color-field-border-focus);
+    background-color: var(--color-field-focus);
   }
 
   /* Invalid state */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
     border-color: var(--color-field-border-invalid);
   }
 
   /* Disabled state */
-  &[data-disabled],
-  &[aria-disabled] {
-    @apply status-disabled pointer-events-none;
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
   }
 }
 
 .input-group__input {
-  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 text-base shadow-none outline-none sm:text-sm;
 
   /* Remove border radius on left side when prefix is present */
   .input-group:has([data-slot="input-group-prefix"]) & {
@@ -64,7 +66,7 @@
 }
 
 .input-group__prefix {
-  @apply text-field-placeholder rounded-l-field flex h-full items-center justify-center rounded-r-none bg-transparent px-3;
+  @apply flex h-full items-center justify-center rounded-l-field rounded-r-none bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
   border-style: solid;
@@ -84,7 +86,7 @@
 }
 
 .input-group__suffix {
-  @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
+  @apply flex h-full items-center justify-center rounded-l-none rounded-r-field bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
   border-style: solid;
@@ -109,17 +111,30 @@
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
-    &[data-hovered]:not([data-focus-within]) {
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-on-surface-hover;
     }
   }
 
+  /* Focus within state */
   &:focus-within,
-  &[data-focus-within] {
+  &[data-focus-within="true"] {
     background-color: var(--color-on-surface-focus);
+  }
+
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-on-surface-focus);
+    border-color: var(--color-field-border-invalid);
   }
 
   [data-slot="input-group-input"] {
     @apply bg-transparent;
   }
+}
+
+/* Full width modifier */
+.input-group--full-width {
+  @apply w-full;
 }

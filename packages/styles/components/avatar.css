@@ -1,25 +1,21 @@
 /* Base avatar styles */
 .avatar {
-  @apply bg-default relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full;
+  @apply relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-default;
 }
 
 /* Avatar fallback element */
 .avatar__fallback {
-  @apply bg-default flex size-full items-center justify-center rounded-full text-sm font-medium;
+  @apply flex size-full items-center justify-center rounded-full bg-default text-sm font-medium;
 }
 
 /* Avatar image element */
 .avatar__image {
-  @apply absolute inset-0 aspect-square size-full opacity-0 data-[loaded=true]:opacity-100;
+  @apply absolute inset-0 aspect-square size-full;
 
   /**
    * Transitions
    */
-  @apply duration-250 transition-[opacity] motion-reduce:transition-none;
-
-  &[data-loading-status="failed"] {
-    @apply hidden;
-  }
+  @apply transition-opacity duration-250 motion-reduce:transition-none;
 }
 
 /* Size modifiers */

@@ -1,6 +1,7 @@
 ---
 title: TextField
 description: Composition-friendly text fields with labels, descriptions, and inline validation
+icon: updated
 links:
   rac: TextField
   source: text-field/text-field.tsx
@@ -34,7 +35,7 @@ export default () => (
 )
 ```
 
->  **TextField** combines label, input, description, and error into a single accessible component.  
+>  **TextField** combines label, input, description, and error into a single accessible component.
 For standalone inputs, use **[Input](/docs/components/input)** or **[TextArea](/docs/components/textarea)**.
 
 ### With Description
@@ -74,6 +75,10 @@ Use [TextArea](/docs/components/textarea) instead of [Input](/docs/components/in
 ### Input Types
 
 <ComponentPreview name="text-field-input-types" />
+
+### Full Width
+
+<ComponentPreview name="text-field-full-width" />
 
 ### On Surface
 
@@ -160,6 +165,7 @@ TextField inherits all props from React Aria's [TextField](https://react-spectru
 | `children` | `React.ReactNode \| (values: TextFieldRenderProps) => React.ReactNode` | - | Child components (Label, Input, etc.) or render function. |
 | `className` | `string \| (values: TextFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: TextFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the text field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
 
 #### Validation Props

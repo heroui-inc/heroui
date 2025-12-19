@@ -1,7 +1,7 @@
 "use client";
 
 import type {ListBoxVariants} from "./listbox.styles";
-import type {ListBoxProps as ListBoxPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
 import {ListBox as ListBoxPrimitive} from "react-aria-components";
@@ -13,7 +13,8 @@ import {listboxVariants} from "./listbox.styles";
 /* -------------------------------------------------------------------------------------------------
  * ListBox Root
  * -----------------------------------------------------------------------------------------------*/
-interface ListBoxRootProps<T extends object> extends ListBoxPrimitiveProps<T>, ListBoxVariants {
+interface ListBoxRootProps<T extends object>
+  extends ComponentPropsWithRef<typeof ListBoxPrimitive<T>>, ListBoxVariants {
   className?: string;
 }
 

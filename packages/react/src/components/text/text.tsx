@@ -1,9 +1,8 @@
 "use client";
 
 import type {TextVariants} from "./text.styles";
-import type {TextProps as TextPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import {Text as TextPrimitive} from "react-aria-components";
 
 import {textVariants} from "./text.styles";
@@ -11,27 +10,10 @@ import {textVariants} from "./text.styles";
 /* -------------------------------------------------------------------------------------------------
  * Text Root
  * -----------------------------------------------------------------------------------------------*/
-interface TextRootProps extends TextPrimitiveProps, TextVariants {
-  asChild?: boolean;
-}
+interface TextRootProps extends ComponentPropsWithRef<typeof TextPrimitive>, TextVariants {}
 
-const TextRoot = ({
-  asChild = false,
-  children,
-  className,
-  size,
-  variant,
-  ...rest
-}: TextRootProps) => {
+const TextRoot = ({children, className, size, variant, ...rest}: TextRootProps) => {
   const styles = textVariants({size, variant, className});
-
-  if (asChild) {
-    return (
-      <SlotPrimitive className={styles} {...rest}>
-        {children}
-      </SlotPrimitive>
-    );
-  }
 
   return (
     <TextPrimitive className={styles} {...rest}>

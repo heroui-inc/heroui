@@ -25,21 +25,21 @@ export function Vertical() {
       </Tabs.ListContainer>
       <Tabs.Panel className="px-4" id="account">
         <h3 className="mb-2 font-semibold">Account Settings</h3>
-        <p className="text-muted text-sm">Manage your account information and preferences.</p>
+        <p className="text-sm text-muted">Manage your account information and preferences.</p>
       </Tabs.Panel>
       <Tabs.Panel className="px-4" id="security">
         <h3 className="mb-2 font-semibold">Security Settings</h3>
-        <p className="text-muted text-sm">
+        <p className="text-sm text-muted">
           Configure two-factor authentication and password settings.
         </p>
       </Tabs.Panel>
       <Tabs.Panel className="px-4" id="notifications">
         <h3 className="mb-2 font-semibold">Notification Preferences</h3>
-        <p className="text-muted text-sm">Choose how and when you want to receive notifications.</p>
+        <p className="text-sm text-muted">Choose how and when you want to receive notifications.</p>
       </Tabs.Panel>
       <Tabs.Panel className="px-4" id="billing">
         <h3 className="mb-2 font-semibold">Billing Information</h3>
-        <p className="text-muted text-sm">View and manage your subscription and payment methods.</p>
+        <p className="text-sm text-muted">View and manage your subscription and payment methods.</p>
       </Tabs.Panel>
     </Tabs>
   );

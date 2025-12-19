@@ -1,6 +1,7 @@
 {
   "title": "Changelog",
   "description": "HeroUI v3 Release Notes",
+  "icon": "clock-arrow-rotate-left",
   "root": false,
-  "pages": ["changelog", "v3-0-0-beta-2"]
+  "pages": ["changelog", "v3-0-0-beta-3"]
 }

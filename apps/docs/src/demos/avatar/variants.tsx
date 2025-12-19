@@ -1,13 +1,13 @@
+import {Person} from "@gravity-ui/icons";
 import {Avatar, Separator} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Variants() {
   const colors = ["accent", "default", "success", "warning", "danger"] as const;
   const variants = [
     {content: "AG", label: "letter", type: "letter"},
     {content: "AG", label: "letter soft", type: "letter-soft"},
-    {content: <Icon icon="gravity-ui:person" />, label: "icon", type: "icon"},
-    {content: <Icon icon="gravity-ui:person" />, label: "icon soft", type: "icon-soft"},
+    {content: <Person />, label: "icon", type: "icon"},
+    {content: <Person />, label: "icon soft", type: "icon-soft"},
     {
       content: [
         "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
@@ -28,7 +28,7 @@ export function Variants() {
         <div className="w-24 shrink-0" />
         {colors.map((color) => (
           <div key={color} className="flex w-20 shrink-0 items-center justify-center">
-            <span className="text-muted text-xs capitalize">{color}</span>
+            <span className="text-xs text-muted capitalize">{color}</span>
           </div>
         ))}
       </div>
@@ -38,7 +38,7 @@ export function Variants() {
       {/* Variant rows */}
       {variants.map((variant) => (
         <div key={variant.label} className="flex items-center gap-3">
-          <div className="text-muted w-24 shrink-0 text-sm">{variant.label}</div>
+          <div className="w-24 shrink-0 text-sm text-muted">{variant.label}</div>
           {colors.map((color, colorIndex) => (
             <div key={color} className="flex w-20 shrink-0 items-center justify-center">
               <Avatar color={color} variant={variant.type.includes("soft") ? "soft" : undefined}>

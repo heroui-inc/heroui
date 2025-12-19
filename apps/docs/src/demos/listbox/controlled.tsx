@@ -2,8 +2,8 @@
 
 import type {Selection} from "@heroui/react";
 
+import {Check} from "@gravity-ui/icons";
 import {Avatar, Description, Label, ListBox, Surface} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import {useState} from "react";
 
 export function Controlled() {
@@ -13,7 +13,7 @@ export function Controlled() {
 
   return (
     <div className="space-y-4">
-      <Surface className="shadow-surface w-[256px] rounded-3xl">
+      <Surface className="w-[256px] rounded-3xl shadow-surface">
         <ListBox
           aria-label="Users"
           selectedKeys={selected}
@@ -33,9 +33,7 @@ export function Controlled() {
               <Description>bob@heroui.com</Description>
             </div>
             <ListBox.ItemIndicator>
-              {({isSelected}) =>
-                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
-              }
+              {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
             </ListBox.ItemIndicator>
           </ListBox.Item>
           <ListBox.Item id="2" textValue="Fred">
@@ -51,9 +49,7 @@ export function Controlled() {
               <Description>fred@heroui.com</Description>
             </div>
             <ListBox.ItemIndicator>
-              {({isSelected}) =>
-                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
-              }
+              {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
             </ListBox.ItemIndicator>
           </ListBox.Item>
           <ListBox.Item id="3" textValue="Martha">
@@ -69,14 +65,12 @@ export function Controlled() {
               <Description>martha@heroui.com</Description>
             </div>
             <ListBox.ItemIndicator>
-              {({isSelected}) =>
-                isSelected ? <Icon className="text-accent size-4" icon="gravity-ui:check" /> : null
-              }
+              {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
             </ListBox.ItemIndicator>
           </ListBox.Item>
         </ListBox>
       </Surface>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
       </p>
     </div>

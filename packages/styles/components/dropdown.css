@@ -24,43 +24,43 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Pending state */
-  &[data-pending] {
+  &[data-pending="true"] {
     @apply status-pending;
   }
 
   /* Default active/pressed state - scale transform */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.97);
   }
 }
 
 /* Similar to select popover styles */
 .dropdown__popover {
-  @apply bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  @apply origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
   min-width: 220px;
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply outline-none;
   }
 
   /* Entering animations */
-  &[data-entering] {
-    @apply animate-in zoom-in-90 fade-in-0 ease-fluid-out duration-250;
+  &[data-entering="true"] {
+    @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-90;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -81,8 +81,8 @@
   }
 
   /* Exiting animations */
-  &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
+  &[data-exiting="true"] {
+    @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
   /* Arrow styling */

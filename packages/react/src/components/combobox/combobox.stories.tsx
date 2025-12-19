@@ -74,6 +74,56 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <ComboBox fullWidth>
+        <Label>Favorite Animal</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder="Search animals..." />
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Popover>
+          <ListBox>
+            <ListBox.Item id="aardvark" textValue="Aardvark">
+              Aardvark
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="dog" textValue="Dog">
+              Dog
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </ComboBox.Popover>
+      </ComboBox>
+      <ComboBox fullWidth isRequired>
+        <Label>Favorite Animal</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder="Search animals..." />
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Popover>
+          <ListBox>
+            <ListBox.Item id="aardvark" textValue="Aardvark">
+              Aardvark
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </ComboBox.Popover>
+        <FieldError />
+      </ComboBox>
+    </div>
+  ),
+};
+
 export const DefaultSelectedKey: Story = {
   render: () => (
     <ComboBox className="w-[256px]" defaultSelectedKey="cat">
@@ -491,7 +541,7 @@ export const Controlled: Story = {
             </ListBox>
           </ComboBox.Popover>
         </ComboBox>
-        <p className="text-muted text-sm">Selected: {selectedAnimal?.name || "None"}</p>
+        <p className="text-sm text-muted">Selected: {selectedAnimal?.name || "None"}</p>
       </div>
     );
   },
@@ -538,7 +588,7 @@ export const ControlledInputValue: Story = {
             </ListBox>
           </ComboBox.Popover>
         </ComboBox>
-        <p className="text-muted text-sm">Input value: {inputValue || "(empty)"}</p>
+        <p className="text-sm text-muted">Input value: {inputValue || "(empty)"}</p>
       </div>
     );
   },

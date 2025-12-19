@@ -1,6 +1,7 @@
 "use client";
 
 import type {InputOTPVariants} from "./input-otp.styles";
+import type {ComponentPropsWithRef} from "react";
 import type {ValidationResult} from "react-aria-components";
 
 import {OTPInput, OTPInputContext} from "input-otp";
@@ -8,6 +9,7 @@ import React, {createContext, useContext} from "react";
 import {FieldErrorContext} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
+import {composeSlotClassName} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {inputOTPVariants} from "./input-otp.styles";
@@ -30,7 +32,8 @@ const InputOTPContext = createContext<InputOTPContext>({
  * Input OTP Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPRootProps
-  extends Omit<React.ComponentProps<typeof OTPInput>, "disabled" | "containerClassName" | "render">,
+  extends
+    Omit<ComponentPropsWithRef<typeof OTPInput>, "disabled" | "containerClassName" | "render">,
     InputOTPVariants {
   isDisabled?: boolean;
   isInvalid?: boolean;
@@ -64,12 +67,12 @@ const InputOTPRoot = ({
         validationErrors,
         validationDetails,
       }) as ValidationResult,
-    [isInvalid],
+    [isInvalid, validationErrors, validationDetails],
   );
 
   return (
     <InputOTPContext value={{slots, isDisabled, isInvalid}}>
-      <FieldErrorContext.Provider value={validation}>
+      <FieldErrorContext value={validation}>
         <OTPInput
           // OTP Input package uses the `className` prop for the actual `input` element which is not visible to the user so no need to pass it to the base container
           className={slots.input({className: inputClassName})}
@@ -80,7 +83,7 @@ const InputOTPRoot = ({
           disabled={isDisabled}
           {...props}
         />
-      </FieldErrorContext.Provider>
+      </FieldErrorContext>
     </InputOTPContext>
   );
 };
@@ -89,18 +92,24 @@ const InputOTPRoot = ({
  * Input OTP Group
  * -----------------------------------------------------------------------------------------------*/
 
-interface InputOTPGroupProps extends React.ComponentProps<"div"> {}
+interface InputOTPGroupProps extends ComponentPropsWithRef<"div"> {}
 
 const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
   const {slots} = useContext(InputOTPContext);
 
-  return <div className={slots?.group({className})} data-slot="input-otp-group" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.group, className)}
+      data-slot="input-otp-group"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Slot
  * -----------------------------------------------------------------------------------------------*/
-interface InputOTPSlotProps extends React.ComponentProps<"div"> {
+interface InputOTPSlotProps extends ComponentPropsWithRef<"div"> {
   index: number;
 }
 
@@ -113,7 +122,7 @@ const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
   return (
     <div
       {...props}
-      className={slots?.slot({className})}
+      className={composeSlotClassName(slots?.slot, className)}
       data-active={dataAttr(isActive)}
       data-disabled={dataAttr(isDisabled)}
       data-filled={dataAttr(!!char)}
@@ -135,7 +144,7 @@ const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Separator
  * -----------------------------------------------------------------------------------------------*/
-interface InputOTPSeparatorProps {
+interface InputOTPSeparatorProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
@@ -143,7 +152,11 @@ const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
   const {slots} = useContext(InputOTPContext);
 
   return (
-    <div className={slots?.separator({className})} data-slot="input-otp-separator" {...props} />
+    <div
+      className={composeSlotClassName(slots?.separator, className)}
+      data-slot="input-otp-separator"
+      {...props}
+    />
   );
 };
 

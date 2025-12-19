@@ -1,11 +1,8 @@
-import {dirname} from "path";
-import {fileURLToPath} from "url";
-
-import {FlatCompat} from "@eslint/eslintrc";
 import js from "@eslint/js";
 import typescriptPlugin from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
 import {defineConfig} from "eslint/config";
+import prettierConfig from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import onlyWarnPlugin from "eslint-plugin-only-warn";
 import prettierPlugin from "eslint-plugin-prettier";
@@ -15,21 +12,17 @@ import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-});
-
-export default defineConfig([
-  ...compat.extends(
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "prettier",
-  ),
+const config = defineConfig([
+  // ESLint recommended rules
+  js.configs.recommended,
+  // TypeScript ESLint recommended rules
+  ...tseslint.configs.recommended,
+  // Prettier config - disables conflicting ESLint rules
+  {
+    rules: {
+      ...prettierConfig.rules,
+    },
+  },
   {
     files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
     languageOptions: {
@@ -40,8 +33,7 @@ export default defineConfig([
       },
       parser: typescriptParser,
       parserOptions: {
-        ecmaVersion: "latest",
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir: import.meta.dirname,
       },
       sourceType: "module",
     },
@@ -171,6 +163,7 @@ export default defineConfig([
       },
     },
   },
+  // Disable type checking for config files (.*.js, .*.cjs, .*.mjs)
   {
     files: [".*.js", ".*.cjs", ".*.mjs"],
     ...tseslint.configs.disableTypeChecked,
@@ -184,8 +177,6 @@ export default defineConfig([
       "**/.cache/**",
       "**/.build/**",
       "**/.vercel/**",
-      "**/.rollup.cache/**",
-      "**/.rollup.cache",
       "**/.changeset/**",
       "**/.DS_Store",
       "**/dist/**",
@@ -203,3 +194,5 @@ export default defineConfig([
     ],
   },
 ]);
+
+export default config;

@@ -199,7 +199,7 @@ HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss
     }
 }
 `}
-/> 
+/>
 
 Use your theme:
 
@@ -268,16 +268,32 @@ Apply your theme:
 
 /* Base requirements */
 @import "tailwindcss";
+@import "@heroui/styles/base" layer(base);
+/* OR specific base file */
 @import "@heroui/styles/base/base.css" layer(base);
+
+/* Theme variables */
 @import "@heroui/styles/themes/shared/theme.css" layer(theme);
 @import "@heroui/styles/themes/default" layer(theme);
+/* OR specific theme files */
+@import "@heroui/styles/themes/default/index.css" layer(theme);
+@import "@heroui/styles/themes/default/variables.css" layer(theme);
 
 /* Components (all components) */
+@import "@heroui/styles/components" layer(components);
+/* OR specific component files */
 @import "@heroui/styles/components/index.css" layer(components);
-/* OR specific components */
 @import "@heroui/styles/components/button.css" layer(components);
 @import "@heroui/styles/components/accordion.css" layer(components);
+
+/* Utilities (optional) */
+@import "@heroui/styles/utilities" layer(utilities);
+
+/* Variants (optional) */
+@import "@heroui/styles/variants" layer(utilities);
 ```
+
+> **Note**: Directory imports (e.g., `@heroui/styles/components`) automatically resolve to their `index.css` file. Use explicit file paths (e.g., `@heroui/styles/components/button.css`) to import individual component styles.
 
 **Headless mode:** Build your own styles from scratch:
 
@@ -297,7 +313,7 @@ Add your own semantic colors to the theme:
 
 ```css
 /* Define in both light and dark themes */
-:root, 
+:root,
 [data-theme="light"] {
   --info: oklch(0.6 0.15 210);
   --info-foreground: oklch(0.98 0 0);
@@ -511,7 +527,7 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
     --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
-    --ease-fluid-out: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
     --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
     --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
     --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);

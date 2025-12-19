@@ -3,9 +3,9 @@
 import type {CodeBlockProps} from "fumadocs-ui/components/codeblock";
 
 import {Button} from "@heroui/react";
-import * as Base from "fumadocs-ui/components/codeblock";
 import * as React from "react";
 
+import {FumadocsCustomCodeblock as BaseCodeBlock} from "@/mdx-components/fumadocs-custom-codeblock";
 import {cn} from "@/utils/cn";
 
 export function CodeBlock({
@@ -13,6 +13,7 @@ export function CodeBlock({
   className,
   collapsible,
   isIsolated = false,
+  preview,
   showLineNumbers,
   title,
   ...props
@@ -23,12 +24,13 @@ export function CodeBlock({
   showLineNumbers?: boolean;
   title: string | undefined;
   children: React.ReactNode | React.ReactElement;
+  preview?: React.ReactNode;
 } & CodeBlockProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(true);
 
   if (!collapsible) {
     return (
-      <Base.CodeBlock
+      <BaseCodeBlock
         title={title}
         className={cn(
           "code-block-wrapper docs-code-block",
@@ -39,7 +41,7 @@ export function CodeBlock({
         {...props}
       >
         {children}
-      </Base.CodeBlock>
+      </BaseCodeBlock>
     );
   }
 
@@ -53,20 +55,20 @@ export function CodeBlock({
           !isCollapsed && "pb-10",
         )}
       >
-        <Base.CodeBlock
+        <BaseCodeBlock
           title={title}
           className={cn(
-            "docs-code-block",
+            "docs-code-block shadow-none",
             showLineNumbers && "docs-code-block-line-numbers",
             className,
           )}
           {...props}
         >
-          {children}
-        </Base.CodeBlock>
+          {isCollapsed && preview ? preview : children}
+        </BaseCodeBlock>
       </div>
       <Button
-        className="bg-surface absolute bottom-2 right-1/2 translate-x-1/2 text-xs shadow-sm shadow-black/5"
+        className="absolute right-1/2 bottom-2 translate-x-1/2 bg-surface text-xs shadow-sm shadow-black/5"
         size="sm"
         type="button"
         variant="tertiary"

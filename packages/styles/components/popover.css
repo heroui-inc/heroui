@@ -2,12 +2,12 @@
 
 /* Base popover styles */
 .popover {
-  @apply bg-overlay origin-[var(--trigger-anchor-point)] rounded-3xl p-0 text-sm will-change-transform;
+  @apply origin-(--trigger-anchor-point) rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */
-  &[data-entering] {
-    @apply animate-in zoom-in-90 fade-in-0 ease-out-quad duration-200;
+  &[data-entering="true"] {
+    @apply animate-in duration-200 ease-out-quad fade-in-0 zoom-in-90;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -28,8 +28,8 @@
   }
 
   /* Exiting animations */
-  &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quart duration-150;
+  &[data-exiting="true"] {
+    @apply animate-out duration-150 ease-out-quart zoom-out-95 fade-out;
   }
 
   /* Arrow styling */
@@ -77,13 +77,13 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }

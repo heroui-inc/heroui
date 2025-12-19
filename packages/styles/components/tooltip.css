@@ -2,12 +2,12 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply bg-overlay origin-[var(--trigger-anchor-point)] rounded-xl px-3 py-1 text-sm will-change-transform;
+  @apply origin-(--trigger-anchor-point) rounded-xl bg-overlay px-3 py-1 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */
-  &[data-entering] {
-    @apply animate-in zoom-in-90 fade-in-0 ease-out-quad duration-200;
+  &[data-entering="true"] {
+    @apply animate-in duration-200 ease-out-quad fade-in-0 zoom-in-90;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -28,8 +28,8 @@
   }
 
   /* Exiting animations */
-  &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quart duration-150;
+  &[data-exiting="true"] {
+    @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
   /* Arrow styling */
@@ -67,7 +67,7 @@
   cursor: var(--cursor-interactive);
 
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 }

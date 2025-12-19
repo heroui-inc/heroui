@@ -39,7 +39,7 @@ export const Default: Story = {
     <div className="flex w-[280px] flex-col gap-2">
       <div className="flex flex-col gap-1">
         <Label>Verify account</Label>
-        <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
+        <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
       </div>
       <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
@@ -55,7 +55,7 @@ export const Default: Story = {
         </InputOTP.Group>
       </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
-        <p className="text-muted text-sm">Didn&apos;t receive a code?</p>
+        <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
         <Link className="text-foreground" underline="always">
           Resend
         </Link>
@@ -69,7 +69,7 @@ export const OnSurface: Story = {
     <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
       <div className="flex flex-col gap-1">
         <Label>Verify account</Label>
-        <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
+        <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
       </div>
       <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
@@ -85,11 +85,48 @@ export const OnSurface: Story = {
         </InputOTP.Group>
       </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
-        <p className="text-muted text-sm">Didn&apos;t receive a code?</p>
+        <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
         <Link className="text-foreground" underline="always">
           Resend
         </Link>
       </div>
+      <div className="mt-4 flex flex-col gap-1">
+        <Label>Verify account (Invalid)</Label>
+        <p className="text-sm text-muted">Enter the code sent to b****@gmail.com</p>
+      </div>
+      <InputOTP {...args} isInvalid maxLength={6} value="12345">
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
+      <span data-visible className="field-error">
+        Invalid code. Please try again.
+      </span>
+      <div className="mt-4 flex flex-col gap-1">
+        <Label isDisabled>Verify account (Disabled)</Label>
+        <p className="text-sm text-muted">Code verification is currently disabled</p>
+      </div>
+      <InputOTP {...args} isDisabled maxLength={6} value="123456">
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
     </Surface>
   ),
 };
@@ -179,7 +216,7 @@ export const Controlled: Story = {
             <>
               Value: {value} ({value.length}/6) •{" "}
               <button
-                className="text-foreground font-medium underline"
+                className="font-medium text-foreground underline"
                 onClick={() => setValue("")}
               >
                 Clear
@@ -408,8 +445,8 @@ export const FormExample: Story = {
           )}
         </Button>
         <div className="flex items-center justify-center gap-1">
-          <p className="text-muted text-sm">Having trouble?</p>
-          <Link className="text-foreground text-sm" underline="always">
+          <p className="text-sm text-muted">Having trouble?</p>
+          <Link className="text-sm text-foreground" underline="always">
             Use backup code
           </Link>
         </div>

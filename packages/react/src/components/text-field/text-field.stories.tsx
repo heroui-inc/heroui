@@ -32,6 +32,26 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <TextField fullWidth name="name">
+        <Label>Your name</Label>
+        <Input placeholder="John" />
+      </TextField>
+      <TextField fullWidth name="productDescription">
+        <Label>Describe your product</Label>
+        <TextArea placeholder="My product is..." />
+      </TextField>
+      <TextField fullWidth isInvalid isRequired name="password" type="password">
+        <Label>Password</Label>
+        <Input />
+        <FieldError>Password must be longer than 8 characters</FieldError>
+      </TextField>
+    </div>
+  ),
+};
+
 export const WithTextArea: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
@@ -216,10 +236,20 @@ export const OnSurface: Story = {
         <Label>Email</Label>
         <Input className="w-full" placeholder="john@example.com" />
       </TextField>
-      <TextField name="bio">
+      <TextField isInvalid name="address" type="text">
+        <Label>Email</Label>
+        <Input className="w-full" placeholder="123 Main St, Anytown, USA" />
+        <FieldError>The address is invalid</FieldError>
+      </TextField>
+      <TextField isInvalid name="bio">
         <Label>Bio</Label>
         <TextArea className="w-full" placeholder="Tell us about yourself..." rows={4} />
-        <Description>Minimum 4 rows</Description>
+        <FieldError>Bio must be at least 20 characters</FieldError>
+      </TextField>
+      <TextField isDisabled name="disabled">
+        <Label>Disabled field</Label>
+        <Input className="w-full" defaultValue="This field is disabled" />
+        <Description>This field cannot be edited</Description>
       </TextField>
     </Surface>
   ),

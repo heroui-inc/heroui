@@ -1,6 +1,7 @@
 ---
 title: Accordion
 description: A collapsible content panel for organizing information in a compact space
+icon: updated
 links:
   rac: Disclosure
   source: accordion/accordion.tsx
@@ -19,6 +20,7 @@ import { Accordion } from '@heroui/react';
 
 <ComponentPreview
   name="accordion-basic"
+  minHeight="400px"
 />
 
 
@@ -45,40 +47,53 @@ export default () => (
 )
 ```
 
-### Outline
+### Surface
 
 <ComponentPreview
-  name="accordion-outline"
+  name="accordion-surface"
+ minHeight="400px"
 />
 
 ### Multiple Expanded
 
 <ComponentPreview
   name="accordion-multiple"
+   minHeight="524px"
 />
 
 ### Custom Indicator
 
 <ComponentPreview
   name="accordion-custom-indicator"
+   minHeight="320px"
 />
 
 ### Disabled State
 
 <ComponentPreview
   name="accordion-disabled"
+   minHeight="524px"
 />
 
 ### FAQ Layout
 
 <ComponentPreview
   name="accordion-faq"
+  minHeight="720px"
 />
 
 ### Custom Styles
 
 <ComponentPreview
   name="accordion-custom-styles"
+  minHeight="420px"
+/>
+
+### Without Separator
+
+<ComponentPreview
+  name="accordion-without-separator"
+  minHeight="400px"
 />
 
 <RelatedComponents component="accordion" />
@@ -220,6 +235,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `onExpandedChange` | `(keys: Set<Key>) => void` | - | Handler called when expanded keys change |
 | `isDisabled` | `boolean` | `false` | Whether the entire accordion is disabled |
 | `variant` | `"default" \| "surface"` | `"default"` | The visual variant of the accordion |
+| `hideSeparator` | `boolean` | `false` | Hide separator lines between accordion items |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The accordion items |
 

@@ -1,7 +1,7 @@
 ---
 title: InputGroup
 description: Group related input controls with prefix and suffix elements for enhanced form fields
-icon: new
+icon: updated
 links:
   rac: Group
   source: input-group/input-group.tsx
@@ -129,6 +129,10 @@ InputGroup respects the disabled state from its parent TextField.
 
 <ComponentPreview name="input-group-disabled" />
 
+### Full Width
+
+<ComponentPreview name="input-group-full-width" />
+
 ### On Surface
 
 When used inside a [Surface](/docs/components/surface) component, InputGroup automatically applies on-surface styling. You can also manually control this with the `isOnSurface` prop.
@@ -223,6 +227,7 @@ InputGroup inherits all props from React Aria's [Group](https://react-spectrum.a
 | `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | Child components (Input, Prefix, Suffix) or render function. |
 | `className` | `string \| (values: GroupRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: GroupRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the input group should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
 
 #### Variant Props

@@ -1,7 +1,7 @@
 "use client";
 
 import type {MenuVariants} from "./menu.styles";
-import type {MenuProps as MenuPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
 import {Menu as MenuPrimitive} from "react-aria-components";
@@ -13,7 +13,8 @@ import {menuVariants} from "./menu.styles";
 /* -------------------------------------------------------------------------------------------------
  * Menu Root
  * -----------------------------------------------------------------------------------------------*/
-interface MenuRootProps<T extends object> extends MenuPrimitiveProps<T>, MenuVariants {
+interface MenuRootProps<T extends object>
+  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>, MenuVariants {
   className?: string;
 }
 

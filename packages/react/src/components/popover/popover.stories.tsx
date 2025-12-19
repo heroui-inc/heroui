@@ -96,8 +96,8 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
               <Avatar.Fallback>Z</Avatar.Fallback>
             </Avatar>
             <div className="flex flex-col gap-0">
-              <p className="text-sm font-medium leading-5">Zoe</p>
-              <p className="text-muted text-xs leading-none">zoe@heroui.com</p>
+              <p className="text-sm leading-5 font-medium">Zoe</p>
+              <p className="text-xs leading-none text-muted">zoe@heroui.com</p>
             </div>
           </div>
         </Popover.Trigger>
@@ -115,7 +115,7 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
                   </Avatar>
                   <div className="flex h-full flex-col items-start justify-center">
                     <span className="text-sm font-medium">Zoey Lang</span>
-                    <span className="text-muted text-sm font-normal leading-4 tracking-tight">
+                    <span className="text-sm leading-4 font-normal tracking-tight text-muted">
                       @zoe
                     </span>
                   </div>
@@ -141,11 +141,11 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
             <div className="flex gap-3">
               <div className="flex gap-1">
                 <p className="text-sm font-semibold">4</p>
-                <p className="text-muted text-sm">Following</p>
+                <p className="text-sm text-muted">Following</p>
               </div>
               <div className="flex gap-1">
                 <p className="text-sm font-semibold">97.1K</p>
-                <p className="text-muted text-sm">Followers</p>
+                <p className="text-sm text-muted">Followers</p>
               </div>
             </div>
           </Popover.Dialog>
@@ -173,7 +173,7 @@ export const WithCustomContent = {
 const SpringAnimationTemplate = (props: Popover["ContentProps"]) => (
   <div className="flex flex-col items-center gap-8 p-8">
     <h1 className="text-xl font-semibold">Popover with Spring Animation</h1>
-    <p className="text-muted text-sm">
+    <p className="text-sm text-muted">
       The popover now uses a spring easing function for a more dynamic feel
     </p>
 
@@ -182,23 +182,23 @@ const SpringAnimationTemplate = (props: Popover["ContentProps"]) => (
         <Button>Click for Spring Animation</Button>
         <Popover.Content
           {...props}
-          className="data-[entering]:animate-in data-[entering]:zoom-in-90 data-[entering]:fade-in-0 data-[entering]:ease-spring data-[entering]:duration-600"
+          className="data-[entering]:ease-spring data-[entering]:animate-in data-[entering]:duration-600 data-[entering]:fade-in-0 data-[entering]:zoom-in-90"
         >
           <Popover.Dialog>
             <Popover.Arrow />
             <Popover.Heading>Spring Animation 🎉</Popover.Heading>
-            <p className="text-muted mt-2 text-sm">
+            <p className="mt-2 text-sm text-muted">
               Notice the subtle bounce effect when the popover appears and disappears.
             </p>
-            <p className="text-muted mt-4 text-xs">Easing: cubic-bezier(0.36, 1.66, 0.04, 1)</p>
+            <p className="mt-4 text-xs text-muted">Easing: cubic-bezier(0.36, 1.66, 0.04, 1)</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
     </div>
 
-    <div className="text-muted space-y-1 text-center text-xs">
+    <div className="space-y-1 text-center text-xs text-muted">
       <p>Animation classes applied:</p>
-      <code className="bg-surface rounded px-2 py-1 text-xs">
+      <code className="rounded bg-surface px-2 py-1 text-xs">
         data-[entering]:animate-in data-[entering]:zoom-in-90 data-[entering]:fade-in-0
         data-[entering]:ease-spring data-[entering]:duration-600
       </code>

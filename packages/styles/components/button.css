@@ -2,16 +2,16 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 w-fit origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium outline-none md:h-9;
+  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap will-change-transform outline-none select-none no-highlight md:h-9;
 
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    transform 250ms var(--ease-out-quart),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+    transform 250ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Cursor */
@@ -19,24 +19,24 @@
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Pending state */
-  &[data-pending] {
+  &[data-pending="true"] {
     @apply status-pending;
   }
 
   /* Default active/pressed state - scale transform */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.97);
   }
 
@@ -55,7 +55,7 @@
   }
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.98);
   }
 }
@@ -68,7 +68,7 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.96);
   }
 }
@@ -77,9 +77,14 @@
 .button--primary {
   @apply bg-accent text-accent-foreground;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-accent-hover;
     }
   }
@@ -88,9 +93,14 @@
 .button--secondary {
   @apply bg-default text-accent;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
@@ -99,20 +109,30 @@
 .button--tertiary {
   @apply bg-default;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
 }
 
 .button--ghost {
-  @apply text-default-foreground bg-transparent;
+  @apply bg-transparent text-default-foreground;
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-default-hover;
     }
   }
@@ -121,9 +141,14 @@
 .button--danger {
   @apply bg-danger text-danger-foreground;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-danger-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-danger-hover;
     }
   }
@@ -132,9 +157,14 @@
 .button--danger-soft {
   @apply bg-danger-soft text-danger-soft-foreground;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-danger-soft-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-danger-soft-hover;
     }
   }
@@ -151,4 +181,9 @@
 
 .button--icon-only.button--lg {
   @apply w-11 md:w-10;
+}
+
+/* Full width modifier */
+.button--full-width {
+  @apply w-full;
 }

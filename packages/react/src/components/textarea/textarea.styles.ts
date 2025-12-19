@@ -9,9 +9,14 @@ export const textAreaVariants = tv({
       true: "textarea--on-surface",
       false: {},
     },
+    fullWidth: {
+      true: "textarea--full-width",
+      false: "",
+    },
   },
   defaultVariants: {
     isOnSurface: false,
+    fullWidth: false,
   },
 });
 

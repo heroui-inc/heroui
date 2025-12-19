@@ -39,7 +39,7 @@ export function GitHubLinkSmall({className}: {className?: string}) {
       rel="noreferrer"
       target="_blank"
       className={buttonVariants({
-        className: cn("bg-default/80 h-[34px] border-none", className),
+        className: cn("h-[34px] border-none bg-default/80", className),
         size: "sm",
         variant: "tertiary",
       })}
@@ -59,7 +59,7 @@ export async function StarsCount() {
   const json = await data.json();
 
   return (
-    <span className="text-muted pt-px text-xs font-medium">
+    <span className="pt-px text-xs font-medium text-muted">
       {json.stargazers_count >= 1000
         ? `${(json.stargazers_count / 1000).toFixed(1)}k`
         : json.stargazers_count.toLocaleString()}

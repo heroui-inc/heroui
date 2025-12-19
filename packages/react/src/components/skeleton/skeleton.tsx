@@ -1,6 +1,7 @@
 "use client";
 
 import type {SkeletonVariants} from "./skeleton.styles";
+import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
 
@@ -12,8 +13,7 @@ import {skeletonVariants} from "./skeleton.styles";
  * Skeleton Root
  * -----------------------------------------------------------------------------------------------*/
 interface SkeletonRootProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
-    SkeletonVariants {}
+  extends Omit<ComponentPropsWithRef<"div">, "children">, SkeletonVariants {}
 
 const SkeletonRoot = ({animationType, className, ...props}: SkeletonRootProps) => {
   // Use the new hook to get CSS variable value with SSR support

@@ -74,7 +74,7 @@ const IconPlacementTemplate = (_props: Link["RootProps"]) => (
 const UnderlineVariantsTemplate = (_props: LinkProps) => (
   <div className="flex flex-col gap-6">
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Underline on hover (default)</p>
+      <p className="text-sm text-muted">Underline on hover (default)</p>
       <Link href="#" underline="hover">
         Hover to see underline animation
         <Link.Icon />
@@ -82,7 +82,7 @@ const UnderlineVariantsTemplate = (_props: LinkProps) => (
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Always visible underline</p>
+      <p className="text-sm text-muted">Always visible underline</p>
       <Link href="#" underline="always">
         Underline always visible (50% opacity, 100% on hover)
         <Link.Icon />
@@ -90,7 +90,7 @@ const UnderlineVariantsTemplate = (_props: LinkProps) => (
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">No underline</p>
+      <p className="text-sm text-muted">No underline</p>
       <Link href="#" underline="none">
         Link without any underline
         <Link.Icon />
@@ -98,7 +98,7 @@ const UnderlineVariantsTemplate = (_props: LinkProps) => (
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Underline offset variations</p>
+      <p className="text-sm text-muted">Underline offset variations</p>
       <div className="flex flex-col gap-3">
         <Link href="#" underline="always" underlineOffset={1}>
           Offset 1 (default - no space)
@@ -116,7 +116,7 @@ const UnderlineVariantsTemplate = (_props: LinkProps) => (
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Always underline with different offsets</p>
+      <p className="text-sm text-muted">Always underline with different offsets</p>
       <div className="flex flex-col gap-3">
         <Link href="#" underline="always" underlineOffset={1}>
           Always underlined - Offset 1

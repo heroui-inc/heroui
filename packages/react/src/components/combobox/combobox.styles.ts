@@ -9,7 +9,18 @@ export const comboboxVariants = tv({
     trigger: "combobox__trigger",
     popover: "combobox__popover",
   },
-  variants: {},
+  variants: {
+    fullWidth: {
+      true: {
+        base: "combobox--full-width",
+        inputGroup: "combobox__input-group--full-width",
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
+  },
 });
 
 export type ComboBoxVariants = VariantProps<typeof comboboxVariants>;

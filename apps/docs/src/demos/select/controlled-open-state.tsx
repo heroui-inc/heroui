@@ -49,7 +49,7 @@ export function ControlledOpenState() {
         </Select.Popover>
       </Select>
       <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "Close" : "Open"} Select</Button>
-      <p className="text-muted text-sm">Select is {isOpen ? "open" : "closed"}</p>
+      <p className="text-sm text-muted">Select is {isOpen ? "open" : "closed"}</p>
     </div>
   );
 }

@@ -1,9 +1,8 @@
 "use client";
 
 import type {TooltipVariants} from "./tooltip.styles";
-import type {TooltipProps as TooltipPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 import {
   Focusable as FocusablePrimitive,
@@ -12,7 +11,7 @@ import {
   TooltipTrigger as TooltipTriggerPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {tooltipVariants} from "./tooltip.styles";
 
@@ -28,12 +27,12 @@ const TooltipContext = createContext<TooltipContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Root
  * -----------------------------------------------------------------------------------------------*/
-type TooltipRootProps = React.ComponentProps<typeof TooltipTriggerPrimitive>;
+type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
 const TooltipRoot = ({
   children,
   ...props
-}: React.ComponentProps<typeof TooltipTriggerPrimitive>) => {
+}: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   return (
@@ -48,7 +47,8 @@ const TooltipRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Content
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipContentProps extends Omit<TooltipPrimitiveProps, "children">, TooltipVariants {
+interface TooltipContentProps
+  extends Omit<ComponentPropsWithRef<typeof TooltipPrimitive>, "children">, TooltipVariants {
   showArrow?: boolean;
   children: React.ReactNode;
 }
@@ -77,7 +77,7 @@ const TooltipContent = ({
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Arrow
  * -----------------------------------------------------------------------------------------------*/
-type TooltipArrowProps = Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+type TooltipArrowProps = Omit<ComponentPropsWithRef<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
 };
 
@@ -110,24 +110,21 @@ const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
-  asChild?: boolean;
-}
+interface TooltipTriggerProps extends ComponentPropsWithRef<"div"> {}
 
-const TooltipTrigger = ({asChild = false, children, className, ...props}: TooltipTriggerProps) => {
+const TooltipTrigger = ({children, className, ...props}: TooltipTriggerProps) => {
   const {slots} = useContext(TooltipContext);
-  const Comp = asChild ? SlotPrimitive : "div";
 
   return (
     <FocusablePrimitive>
-      <Comp
-        className={slots?.trigger({className})}
+      <div
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="tooltip-trigger"
         role="button"
         {...props}
       >
         {children}
-      </Comp>
+      </div>
     </FocusablePrimitive>
   );
 };

@@ -1,9 +1,11 @@
 "use client";
 
 import type {FieldsetVariants} from "./fieldset.styles";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
+
+import {composeSlotClassName} from "../../utils/compose";
 
 import {fieldsetVariants} from "./fieldset.styles";
 
@@ -19,18 +21,14 @@ const FieldsetContext = createContext<FieldsetContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Root
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetRootProps extends React.ComponentProps<"fieldset">, FieldsetVariants {
-  asChild?: boolean;
-}
+interface FieldsetRootProps extends ComponentPropsWithRef<"fieldset">, FieldsetVariants {}
 
-const FieldsetRoot = ({asChild = false, className, ...props}: FieldsetRootProps) => {
-  const Comp = asChild ? Slot : "fieldset";
-
+const FieldsetRoot = ({className, ...props}: FieldsetRootProps) => {
   const slots = React.useMemo(() => fieldsetVariants({}), []);
 
   return (
     <FieldsetContext value={{slots}}>
-      <Comp className={slots?.base({className})} data-slot="fieldset" {...props} />
+      <fieldset className={slots?.base({className})} data-slot="fieldset" {...props} />
     </FieldsetContext>
   );
 };
@@ -38,50 +36,53 @@ const FieldsetRoot = ({asChild = false, className, ...props}: FieldsetRootProps)
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Legend
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetLegendProps extends React.ComponentProps<"legend"> {
-  asChild?: boolean;
-}
+interface FieldsetLegendProps extends ComponentPropsWithRef<"legend"> {}
 
-const FieldsetLegend = ({asChild = false, className, ...props}: FieldsetLegendProps) => {
-  const Comp = asChild ? Slot : "legend";
-
+const FieldsetLegend = ({className, ...props}: FieldsetLegendProps) => {
   const {slots} = useContext(FieldsetContext);
 
-  return <Comp className={slots?.legend({className})} data-slot="fieldset-legend" {...props} />;
+  return (
+    <legend
+      className={composeSlotClassName(slots?.legend, className)}
+      data-slot="fieldset-legend"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Field Group
  * -----------------------------------------------------------------------------------------------*/
-interface FieldGroupProps extends React.ComponentProps<"div"> {
-  asChild?: boolean;
-}
+interface FieldGroupProps extends ComponentPropsWithRef<"div"> {}
 
-const FieldGroup = ({asChild = false, className, ...rest}: FieldGroupProps) => {
-  const Comp = asChild ? Slot : "div";
-
+const FieldGroup = ({className, ...rest}: FieldGroupProps) => {
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <Comp className={slots?.fieldGroup({className})} data-slot="fieldset-field-group" {...rest} />
+    <div
+      className={composeSlotClassName(slots?.fieldGroup, className)}
+      data-slot="fieldset-field-group"
+      {...rest}
+    />
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Field Actions
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetActionsProps extends React.ComponentProps<"div"> {
-  asChild?: boolean;
-}
+interface FieldsetActionsProps extends ComponentPropsWithRef<"div"> {}
 
-const FieldsetActions = ({asChild, children, className, ...rest}: FieldsetActionsProps) => {
-  const Component = asChild ? Slot : "div";
+const FieldsetActions = ({children, className, ...rest}: FieldsetActionsProps) => {
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <Component className={slots?.actions({className})} data-slot="fieldset-actions" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.actions, className)}
+      data-slot="fieldset-actions"
+      {...rest}
+    >
       {children}
-    </Component>
+    </div>
   );
 };
 

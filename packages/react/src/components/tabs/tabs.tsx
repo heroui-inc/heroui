@@ -1,12 +1,7 @@
 "use client";
 
 import type {TabsVariants} from "./tabs.styles";
-import type {
-  TabListProps as TabListPrimitiveProps,
-  TabPanelProps as TabPanelPrimitiveProps,
-  TabProps as TabPrimitiveProps,
-  TabsProps as TabsPrimitiveProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -17,7 +12,7 @@ import {
   Tabs as TabsPrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 import {tabsVariants} from "./tabs.styles";
 
@@ -25,8 +20,9 @@ import {tabsVariants} from "./tabs.styles";
  * Tabs Context
  * -----------------------------------------------------------------------------------------------*/
 type TabsContext = {
-  slots?: ReturnType<typeof tabsVariants>;
+  hideSeparator?: boolean;
   orientation?: "horizontal" | "vertical";
+  slots?: ReturnType<typeof tabsVariants>;
 };
 
 const TabsContext = createContext<TabsContext>({});
@@ -34,16 +30,23 @@ const TabsContext = createContext<TabsContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Tabs Root
  * -----------------------------------------------------------------------------------------------*/
-interface TabsRootProps extends TabsPrimitiveProps, TabsVariants {
+interface TabsRootProps extends ComponentPropsWithRef<typeof TabsPrimitive>, TabsVariants {
   children: React.ReactNode;
   className?: string;
+  hideSeparator?: boolean;
 }
 
-const TabsRoot = ({children, className, orientation = "horizontal", ...props}: TabsRootProps) => {
+const TabsRoot = ({
+  children,
+  className,
+  hideSeparator = false,
+  orientation = "horizontal",
+  ...props
+}: TabsRootProps) => {
   const slots = React.useMemo(() => tabsVariants(), []);
 
   return (
-    <TabsContext value={{slots, orientation}}>
+    <TabsContext value={{hideSeparator, orientation, slots}}>
       <TabsPrimitive
         {...props}
         className={composeTwRenderProps(className, slots.base())}
@@ -59,7 +62,7 @@ const TabsRoot = ({children, className, orientation = "horizontal", ...props}: T
 /* -------------------------------------------------------------------------------------------------
  * Tabs List Container
  * -----------------------------------------------------------------------------------------------*/
-interface TabListContainerProps extends React.ComponentProps<"div"> {
+interface TabListContainerProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
@@ -68,7 +71,7 @@ const TabListContainer = ({children, className, ...props}: TabListContainerProps
 
   return (
     <div
-      className={slots?.tabListContainer({className})}
+      className={composeSlotClassName(slots?.tabListContainer, className)}
       data-slot="tabs-list-container"
       {...props}
     >
@@ -80,18 +83,19 @@ const TabListContainer = ({children, className, ...props}: TabListContainerProps
 /* -------------------------------------------------------------------------------------------------
  * Tabs List
  * -----------------------------------------------------------------------------------------------*/
-interface TabListProps extends TabListPrimitiveProps<object> {
+interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<object>> {
   children: React.ReactNode;
   className?: string;
 }
 
 const TabList = ({children, className, ...props}: TabListProps) => {
-  const {slots} = useContext(TabsContext);
+  const {hideSeparator, slots} = useContext(TabsContext);
 
   return (
     <TabListPrimitive
       {...props}
       className={composeTwRenderProps(className, slots?.tabList())}
+      data-hide-separator={hideSeparator ? "true" : undefined}
       data-slot="tabs-list"
     >
       {children}
@@ -102,7 +106,7 @@ const TabList = ({children, className, ...props}: TabListProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab
  * -----------------------------------------------------------------------------------------------*/
-interface TabProps extends TabPrimitiveProps {
+interface TabProps extends ComponentPropsWithRef<typeof TabPrimitive> {
   className?: string;
 }
 
@@ -123,7 +127,7 @@ const Tab = ({children, className, ...props}: TabProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface TabIndicatorProps extends React.ComponentProps<typeof SelectionIndicatorPrimitive> {
+interface TabIndicatorProps extends ComponentPropsWithRef<typeof SelectionIndicatorPrimitive> {
   className?: string;
 }
 
@@ -132,7 +136,7 @@ const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
 
   return (
     <SelectionIndicatorPrimitive
-      className={slots?.tabIndicator({className})}
+      className={composeSlotClassName(slots?.tabIndicator, className)}
       data-slot="tabs-indicator"
       {...props}
     />
@@ -142,7 +146,7 @@ const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab Panel
  * -----------------------------------------------------------------------------------------------*/
-interface TabPanelProps extends Omit<TabPanelPrimitiveProps, "children"> {
+interface TabPanelProps extends Omit<ComponentPropsWithRef<typeof TabPanelPrimitive>, "children"> {
   children: React.ReactNode;
   className?: string;
 }

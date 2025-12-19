@@ -10,7 +10,7 @@ interface RelatedComponentsProps {
 }
 
 export function RelatedComponents({className, component}: RelatedComponentsProps) {
-  const relatedComponents = getRelatedComponents(component);
+  const relatedComponents = getRelatedComponents(component)?.slice(0, 3);
 
   if (!relatedComponents || relatedComponents.length === 0) {
     return null;

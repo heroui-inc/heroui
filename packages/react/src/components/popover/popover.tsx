@@ -2,7 +2,7 @@
 
 import type {PopoverVariants} from "./popover.styles";
 import type {SurfaceVariants} from "../surface";
-import type {PopoverProps as PopoverPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
 import {
@@ -14,7 +14,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {popoverVariants} from "./popover.styles";
@@ -31,12 +31,12 @@ const PopoverContext = createContext<PopoverContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Popover Root
  * -----------------------------------------------------------------------------------------------*/
-type PopoverRootProps = React.ComponentProps<typeof PopoverTriggerPrimitive>;
+type PopoverRootProps = ComponentPropsWithRef<typeof PopoverTriggerPrimitive>;
 
 const PopoverRoot = ({
   children,
   ...props
-}: React.ComponentProps<typeof PopoverTriggerPrimitive>) => {
+}: ComponentPropsWithRef<typeof PopoverTriggerPrimitive>) => {
   const slots = React.useMemo(() => popoverVariants(), []);
 
   return (
@@ -51,7 +51,8 @@ const PopoverRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Popover Content
  * -----------------------------------------------------------------------------------------------*/
-interface PopoverContentProps extends Omit<PopoverPrimitiveProps, "children">, PopoverVariants {
+interface PopoverContentProps
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">, PopoverVariants {
   children: React.ReactNode;
 }
 
@@ -60,7 +61,7 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
 
   return (
     <PopoverContext value={{slots}}>
-      <SurfaceContext.Provider
+      <SurfaceContext
         value={{
           variant: "default" as SurfaceVariants["variant"],
         }}
@@ -68,7 +69,7 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
         <PopoverPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
           {children}
         </PopoverPrimitive>
-      </SurfaceContext.Provider>
+      </SurfaceContext>
     </PopoverContext>
   );
 };
@@ -76,7 +77,7 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Popover Arrow
  * -----------------------------------------------------------------------------------------------*/
-type PopoverArrowProps = Omit<React.ComponentProps<typeof OverlayArrow>, "children"> & {
+type PopoverArrowProps = Omit<ComponentPropsWithRef<typeof OverlayArrow>, "children"> & {
   children?: React.ReactNode;
 };
 
@@ -109,7 +110,7 @@ const PopoverArrow = ({children, className, ...props}: PopoverArrowProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Popover Dialog
  * -----------------------------------------------------------------------------------------------*/
-type PopoverDialogProps = Omit<React.ComponentProps<typeof DialogPrimitive>, "children"> & {
+type PopoverDialogProps = Omit<ComponentPropsWithRef<typeof DialogPrimitive>, "children"> & {
   children: React.ReactNode;
 };
 
@@ -117,7 +118,11 @@ const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
   const {slots} = useContext(PopoverContext);
 
   return (
-    <DialogPrimitive data-slot="popover-dialog" {...props} className={slots?.dialog({className})}>
+    <DialogPrimitive
+      data-slot="popover-dialog"
+      {...props}
+      className={composeSlotClassName(slots?.dialog, className)}
+    >
       {children}
     </DialogPrimitive>
   );
@@ -126,7 +131,7 @@ const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Popover Trigger
  * -----------------------------------------------------------------------------------------------*/
-type PopoverTriggerProps = React.HTMLAttributes<HTMLDivElement>;
+type PopoverTriggerProps = ComponentPropsWithRef<"div">;
 
 const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) => {
   const {slots} = useContext(PopoverContext);
@@ -134,7 +139,7 @@ const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) =>
   return (
     <PressablePrimitive>
       <div
-        className={slots?.trigger({className})}
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="popover-trigger"
         role="button"
         {...props}
@@ -148,13 +153,17 @@ const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Popover Heading
  * -----------------------------------------------------------------------------------------------*/
-type PopoverHeadingProps = React.ComponentProps<typeof HeadingPrimitive> & {};
+type PopoverHeadingProps = ComponentPropsWithRef<typeof HeadingPrimitive> & {};
 
 const PopoverHeading = ({children, className, ...props}: PopoverHeadingProps) => {
   const {slots} = useContext(PopoverContext);
 
   return (
-    <HeadingPrimitive slot="title" {...props} className={slots?.heading({className})}>
+    <HeadingPrimitive
+      slot="title"
+      {...props}
+      className={composeSlotClassName(slots?.heading, className)}
+    >
       {children}
     </HeadingPrimitive>
   );

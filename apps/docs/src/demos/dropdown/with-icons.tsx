@@ -1,7 +1,7 @@
 "use client";
 
+import {FloppyDisk, FolderOpen, SquarePlus, TrashBin} from "@gravity-ui/icons";
 import {Button, Dropdown, Kbd, Label} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithIcons() {
   return (
@@ -12,7 +12,7 @@ export function WithIcons() {
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
-            <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+            <SquarePlus className="size-4 shrink-0 text-muted" />
             <Label>New file</Label>
             <Kbd className="ms-auto" slot="keyboard" variant="light">
               <Kbd.Abbr keyValue="command" />
@@ -20,7 +20,7 @@ export function WithIcons() {
             </Kbd>
           </Dropdown.Item>
           <Dropdown.Item id="open-file" textValue="Open file">
-            <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:folder-open" />
+            <FolderOpen className="size-4 shrink-0 text-muted" />
             <Label>Open file</Label>
             <Kbd className="ms-auto" slot="keyboard" variant="light">
               <Kbd.Abbr keyValue="command" />
@@ -28,7 +28,7 @@ export function WithIcons() {
             </Kbd>
           </Dropdown.Item>
           <Dropdown.Item id="save-file" textValue="Save file">
-            <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:floppy-disk" />
+            <FloppyDisk className="size-4 shrink-0 text-muted" />
             <Label>Save file</Label>
             <Kbd className="ms-auto" slot="keyboard" variant="light">
               <Kbd.Abbr keyValue="command" />
@@ -36,7 +36,7 @@ export function WithIcons() {
             </Kbd>
           </Dropdown.Item>
           <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
-            <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+            <TrashBin className="size-4 shrink-0 text-danger" />
             <Label>Delete file</Label>
             <Kbd className="ms-auto" slot="keyboard" variant="light">
               <Kbd.Abbr keyValue="command" />

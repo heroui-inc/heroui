@@ -1,26 +1,26 @@
 "use client";
 
 import type {ButtonVariants} from "./button.styles";
-import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {useContext} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
+import {ButtonGroupContext} from "../button-group";
 
 import {buttonVariants} from "./button.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Button Root
  * -----------------------------------------------------------------------------------------------*/
-interface ButtonRootProps extends ButtonPrimitiveProps, ButtonVariants {
-  asChild?: boolean;
-}
+interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {}
 
 const ButtonRoot = ({
-  asChild,
   children,
   className,
+  fullWidth,
+  isDisabled,
   isIconOnly,
   size,
   slot,
@@ -28,30 +28,27 @@ const ButtonRoot = ({
   variant,
   ...rest
 }: ButtonRootProps) => {
-  const styles = buttonVariants({
-    isIconOnly,
-    size,
-    variant,
-    class: typeof className === "string" ? className : undefined,
-  });
+  const buttonGroupContext = useContext(ButtonGroupContext);
 
-  if (asChild) {
-    return (
-      <SlotPrimitive
-        className={styles}
-        slot={slot as string}
-        style={style as React.CSSProperties}
-        {...rest}
-      >
-        {typeof children === "function" ? children({} as any) : children}
-      </SlotPrimitive>
-    );
-  }
+  // Merge props with precedence: direct props > context props
+  const finalSize = size ?? buttonGroupContext?.size;
+  const finalVariant = variant ?? buttonGroupContext?.variant;
+  const finalIsDisabled = isDisabled ?? buttonGroupContext?.isDisabled;
+  const finalFullWidth = fullWidth ?? buttonGroupContext?.fullWidth;
+
+  const styles = buttonVariants({
+    class: typeof className === "string" ? className : undefined,
+    fullWidth: finalFullWidth,
+    isIconOnly,
+    size: finalSize,
+    variant: finalVariant,
+  });
 
   return (
     <ButtonPrimitive
       className={composeTwRenderProps(className, styles)}
       data-slot="button"
+      isDisabled={finalIsDisabled}
       slot={slot}
       style={style}
       {...rest}

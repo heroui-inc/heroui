@@ -37,6 +37,21 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <NumberField fullWidth defaultValue={1024} minValue={0} name="width">
+        <Label>Width</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+    </div>
+  ),
+};
+
 export const WithDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
@@ -412,6 +427,24 @@ export const OnSurface: Story = {
         </NumberField.Group>
         <Description>Value must be between 0 and 100</Description>
       </NumberField>
+      <NumberField isInvalid isRequired maxValue={5} minValue={1} name="quantity" value={10}>
+        <Label>Quantity</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-full" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+        <FieldError>Quantity must be between 1 and 5</FieldError>
+      </NumberField>
+      <NumberField isDisabled defaultValue={50} minValue={0} name="disabled">
+        <Label>Disabled field</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-full" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+        <Description>This field cannot be edited</Description>
+      </NumberField>
     </Surface>
   ),
 };
@@ -431,8 +464,8 @@ export const WithChevrons: Story = {
       <Label>Number field with chevrons</Label>
       <NumberField.Group>
         <NumberField.Input />
-        <div className="border-field-placeholder/15 flex h-[calc(100%+2px)] flex-col border-l">
-          <NumberField.IncrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-l-0 border-r-0 pt-0.5 text-sm">
+        <div className="flex h-[calc(100%+2px)] flex-col border-l border-field-placeholder/15">
+          <NumberField.IncrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-r-0 border-l-0 pt-0.5 text-sm">
             <svg
               aria-hidden="true"
               height="11"
@@ -448,7 +481,7 @@ export const WithChevrons: Story = {
               />
             </svg>
           </NumberField.IncrementButton>
-          <NumberField.DecrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-l-0 border-r-0 pb-0.5 text-sm">
+          <NumberField.DecrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-r-0 border-l-0 pb-0.5 text-sm">
             <svg
               aria-hidden="true"
               height="11"

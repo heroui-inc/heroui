@@ -12,11 +12,11 @@ import {DemoComponents} from "./components/demo";
 const VersionChip = () => {
   return (
     <LinkRoot
-      className="text-muted chip bg-surface-secondary rounded-full text-xs"
+      className="chip rounded-full bg-surface-secondary text-xs text-muted"
       href="/docs/changelog/v3-0-0-beta-2"
     >
-      <Iconify icon="gravity-ui:sparkles" />
-      <span>v{currentVersion}: 6 New components</span>
+      <Iconify className="size-2 text-accent/90" icon="gravity-ui:circle-fill" />
+      <span>v{currentVersion}: Seven new components</span>
     </LinkRoot>
   );
 };
@@ -31,10 +31,10 @@ export default function HomePage() {
       <section className="z-10 flex flex-col items-center pt-20 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">
           <VersionChip />
-          <h1 className="text-foreground mt-2 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Beautiful by default. Customizable by design.
           </h1>
-          <p className="text-muted text-balance md:text-lg">
+          <p className="text-balance text-muted md:text-lg">
             HeroUI is the modern UI library built to help you move fast, stay consistent, and
             deliver delightful user experiences.
           </p>
@@ -46,7 +46,7 @@ export default function HomePage() {
           </div>
         </div>
         {/* Mobile/Tablet: Show images */}
-        <section className="-ml-4 mt-16 w-[100vw] overflow-hidden lg:hidden lg:w-[150vw]">
+        <section className="mt-16 -ml-4 w-screen overflow-hidden lg:hidden lg:w-[150vw]">
           <Image
             alt="HeroUI components preview"
             className="block dark:hidden"

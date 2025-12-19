@@ -2,10 +2,11 @@
 
 import type {AlertVariants} from "./alert.styles";
 import type {SurfaceVariants} from "../surface";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
 import React, {createContext, useContext} from "react";
 
+import {composeSlotClassName} from "../../utils/compose";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -24,25 +25,22 @@ const AlertContext = createContext<AlertContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Alert Root
  * --------------------------------------------------------------------------------------------- */
-interface AlertRootProps extends React.ComponentProps<"div">, AlertVariants {
-  asChild?: boolean;
-}
+interface AlertRootProps extends ComponentPropsWithRef<"div">, AlertVariants {}
 
-const AlertRoot = ({asChild, children, className, status, ...rest}: AlertRootProps) => {
+const AlertRoot = ({children, className, status, ...rest}: AlertRootProps) => {
   const slots = React.useMemo(() => alertVariants({status}), [status]);
-  const Component = asChild ? SlotPrimitive : "div";
 
   return (
     <AlertContext value={{slots, status}}>
-      <SurfaceContext.Provider
+      <SurfaceContext
         value={{
           variant: "default" as SurfaceVariants["variant"],
         }}
       >
-        <Component className={slots?.base({className})} data-slot="alert-root" {...rest}>
+        <div className={slots?.base({className})} data-slot="alert-root" {...rest}>
           {children}
-        </Component>
-      </SurfaceContext.Provider>
+        </div>
+      </SurfaceContext>
     </AlertContext>
   );
 };
@@ -50,13 +48,10 @@ const AlertRoot = ({asChild, children, className, status, ...rest}: AlertRootPro
 /* ------------------------------------------------------------------------------------------------
  * Alert Indicator
  * --------------------------------------------------------------------------------------------- */
-type AlertIndicatorProps = React.ComponentProps<"div"> & {
-  asChild?: boolean;
-};
+type AlertIndicatorProps = ComponentPropsWithRef<"div">;
 
-const AlertIndicator = ({asChild, children, className, ...rest}: AlertIndicatorProps) => {
+const AlertIndicator = ({children, className, ...rest}: AlertIndicatorProps) => {
   const {slots, status} = useContext(AlertContext);
-  const Component = asChild ? SlotPrimitive : "div";
 
   // Map status to default icons
   const getDefaultIcon = () => {
@@ -75,63 +70,66 @@ const AlertIndicator = ({asChild, children, className, ...rest}: AlertIndicatorP
   };
 
   return (
-    <Component className={slots?.indicator({className})} data-slot="alert-indicator" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.indicator, className)}
+      data-slot="alert-indicator"
+      {...rest}
+    >
       {children ?? getDefaultIcon()}
-    </Component>
+    </div>
   );
 };
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Content
  * --------------------------------------------------------------------------------------------- */
-type AlertContentProps = React.ComponentProps<"div"> & {
-  asChild?: boolean;
-};
+type AlertContentProps = ComponentPropsWithRef<"div">;
 
-const AlertContent = ({asChild, children, className, ...rest}: AlertContentProps) => {
+const AlertContent = ({children, className, ...rest}: AlertContentProps) => {
   const {slots} = useContext(AlertContext);
-  const Component = asChild ? SlotPrimitive : "div";
 
   return (
-    <Component className={slots?.content({className})} data-slot="alert-content" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="alert-content"
+      {...rest}
+    >
       {children}
-    </Component>
+    </div>
   );
 };
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Title
  * --------------------------------------------------------------------------------------------- */
-type AlertTitleProps = React.ComponentProps<"p"> & {
-  asChild?: boolean;
-};
+type AlertTitleProps = ComponentPropsWithRef<"p">;
 
-const AlertTitle = ({asChild, children, className, ...rest}: AlertTitleProps) => {
+const AlertTitle = ({children, className, ...rest}: AlertTitleProps) => {
   const {slots} = useContext(AlertContext);
-  const Component = asChild ? SlotPrimitive : "p";
 
   return (
-    <Component className={slots?.title({className})} data-slot="alert-title" {...rest}>
+    <p className={composeSlotClassName(slots?.title, className)} data-slot="alert-title" {...rest}>
       {children}
-    </Component>
+    </p>
   );
 };
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Description
  * --------------------------------------------------------------------------------------------- */
-type AlertDescriptionProps = React.ComponentProps<"span"> & {
-  asChild?: boolean;
-};
+type AlertDescriptionProps = ComponentPropsWithRef<"span">;
 
-const AlertDescription = ({asChild, children, className, ...rest}: AlertDescriptionProps) => {
+const AlertDescription = ({children, className, ...rest}: AlertDescriptionProps) => {
   const {slots} = useContext(AlertContext);
-  const Component = asChild ? SlotPrimitive : "span";
 
   return (
-    <Component className={slots?.description({className})} data-slot="alert-description" {...rest}>
+    <span
+      className={composeSlotClassName(slots?.description, className)}
+      data-slot="alert-description"
+      {...rest}
+    >
       {children}
-    </Component>
+    </span>
   );
 };
 

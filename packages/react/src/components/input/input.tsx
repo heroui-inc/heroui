@@ -1,7 +1,7 @@
 "use client";
 
 import type {InputVariants} from "./input.styles";
-import type {InputProps as InputPrimitiveProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {useContext} from "react";
 import {Input as InputPrimitive} from "react-aria-components";
@@ -14,16 +14,19 @@ import {inputVariants} from "./input.styles";
 /* -------------------------------------------------------------------------------------------------
  * Input Root
  * -----------------------------------------------------------------------------------------------*/
-interface InputRootProps extends InputPrimitiveProps, InputVariants {}
+interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, InputVariants {}
 
-const InputRoot = ({className, isOnSurface, ...rest}: InputRootProps) => {
+const InputRoot = ({className, fullWidth, isOnSurface, ...rest}: InputRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, inputVariants({isOnSurface: isOnSurfaceValue}))}
       data-slot="input"
+      className={composeTwRenderProps(
+        className,
+        inputVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+      )}
       {...rest}
     />
   );

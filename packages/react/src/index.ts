@@ -16,4 +16,4 @@ export * from "./hooks";
 //  ===================================
 //  Utils
 //  ===================================
-export {tv, cnBase as cn, type VariantProps} from "tailwind-variants";
+export {tv, cn, type VariantProps} from "tailwind-variants";

@@ -1,0 +1,24 @@
+/* Time field styles */
+.time-field {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit;
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+}
+
+/* Full width modifier */
+.time-field--full-width {
+  @apply w-full;
+}

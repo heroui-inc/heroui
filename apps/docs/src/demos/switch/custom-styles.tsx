@@ -1,7 +1,7 @@
 "use client";
 
+import {Check, Power} from "@gravity-ui/icons";
 import {Switch} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomStyles() {
   return (
@@ -15,10 +15,11 @@ export function CustomStyles() {
               className={`size-[27px] bg-white shadow-sm ${isSelected ? "ms-[22px] shadow-lg" : ""}`}
             >
               <Switch.Icon>
-                <Icon
-                  className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
-                  icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
-                />
+                {isSelected ? (
+                  <Check className="size-4 text-cyan-600" />
+                ) : (
+                  <Power className="size-4 text-blue-600" />
+                )}
               </Switch.Icon>
             </Switch.Thumb>
           </Switch.Control>

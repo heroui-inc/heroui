@@ -1,17 +1,12 @@
 "use client";
 
 import type {InputGroupVariants} from "./input-group.styles";
-import type {GroupProps, InputProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
-import {
-  Group as GroupPrimitive,
-  InputContext,
-  Input as InputPrimitive,
-  composeRenderProps,
-} from "react-aria-components";
+import {Group as GroupPrimitive, Input as InputPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {inputGroupVariants} from "./input-group.styles";
@@ -28,38 +23,41 @@ const InputGroupContext = createContext<InputGroupContext>({});
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Root
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupRootProps extends GroupProps, InputGroupVariants {}
+interface InputGroupRootProps
+  extends ComponentPropsWithRef<typeof GroupPrimitive>, InputGroupVariants {}
 
-const InputGroupRoot = ({children, className, isOnSurface, ...props}: InputGroupRootProps) => {
+const InputGroupRoot = ({
+  children,
+  className,
+  fullWidth,
+  isOnSurface,
+  ...props
+}: InputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   const slots = React.useMemo(
-    () => inputGroupVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => inputGroupVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+    [fullWidth, isOnSurfaceValue],
   );
 
   return (
-    <InputGroupContext.Provider value={{slots}}>
+    <InputGroupContext value={{slots}}>
       <GroupPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
         data-slot="input-group"
       >
-        {composeRenderProps(children, (children, renderProps) => (
-          <InputContext.Provider value={{disabled: renderProps.isDisabled}}>
-            {children}
-          </InputContext.Provider>
-        ))}
+        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
       </GroupPrimitive>
-    </InputGroupContext.Provider>
+    </InputGroupContext>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Input
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupInputProps extends InputProps {
+interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
   isOnSurface?: boolean;
 }
 
@@ -80,13 +78,17 @@ const InputGroupInput = ({className, isOnSurface, ...props}: InputGroupInputProp
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Prefix
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupPrefixProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface InputGroupPrefixProps extends ComponentPropsWithRef<"div"> {}
 
 const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps) => {
   const {slots} = useContext(InputGroupContext);
 
   return (
-    <div className={slots?.prefix({className})} data-slot="input-group-prefix" {...props}>
+    <div
+      className={composeSlotClassName(slots?.prefix, className)}
+      data-slot="input-group-prefix"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -95,13 +97,17 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupSuffixProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface InputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
 
 const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps) => {
   const {slots} = useContext(InputGroupContext);
 
   return (
-    <div className={slots?.suffix({className})} data-slot="input-group-suffix" {...props}>
+    <div
+      className={composeSlotClassName(slots?.suffix, className)}
+      data-slot="input-group-suffix"
+      {...props}
+    >
       {children}
     </div>
   );

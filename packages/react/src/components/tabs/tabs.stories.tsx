@@ -2,7 +2,7 @@ import type {Key} from "../rac";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 import {Tabs} from "./index";
 
@@ -212,7 +212,7 @@ const CustomStyleTemplate = (args: Story["args"]) => {
         <Tabs.ListContainer>
           <Tabs.List
             aria-label="Options"
-            className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
+            className="w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal *:data-[selected=true]:text-accent-foreground"
           >
             <Tabs.Tab id="daily">
               Daily
@@ -232,6 +232,40 @@ const CustomStyleTemplate = (args: Story["args"]) => {
             </Tabs.Tab>
           </Tabs.List>
         </Tabs.ListContainer>
+      </Tabs>
+    </div>
+  );
+};
+
+const WithoutSeparatorTemplate = (args: Story["args"]) => {
+  return (
+    <div className="w-[600px]">
+      <Tabs {...args} hideSeparator>
+        <Tabs.ListContainer>
+          <Tabs.List aria-label="Options">
+            <Tabs.Tab id="overview">
+              Overview
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="analytics">
+              Analytics
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="reports">
+              Reports
+              <Tabs.Indicator />
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.ListContainer>
+        <Tabs.Panel className="pt-4" id="overview">
+          <p>View your project overview and recent activity.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="analytics">
+          <p>Track your metrics and analyze performance data.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="reports">
+          <p>Generate and download detailed reports.</p>
+        </Tabs.Panel>
       </Tabs>
     </div>
   );
@@ -307,8 +341,8 @@ const Showcase1Template = (args: Story["args"]) => {
               key={key}
               aria-hidden={selectedZoom !== key}
               data-selected={selectedZoom === key}
-              className={cnBase(
-                "text-foreground ease-in-out-quad absolute left-1/2 top-1/2 origin-center -translate-x-1/2 -translate-y-1/2 scale-75 text-[21px] font-medium opacity-0 transition-[scale,opacity] duration-[300ms] ease-[cubic-bezier(0.33,1,0.68,1)] data-[selected=true]:scale-100 data-[selected=true]:opacity-100 data-[selected=true]:delay-200",
+              className={cn(
+                "absolute top-1/2 left-1/2 origin-center -translate-x-1/2 -translate-y-1/2 scale-75 text-[21px] font-medium text-foreground opacity-0 transition-[scale,opacity] duration-[300ms] ease-[cubic-bezier(0.33,1,0.68,1)] ease-in-out-quad data-[selected=true]:scale-100 data-[selected=true]:opacity-100 data-[selected=true]:delay-200",
                 {
                   "sr-only": selectedZoom !== key,
                 },
@@ -318,7 +352,7 @@ const Showcase1Template = (args: Story["args"]) => {
             </p>
           ))}
         </div>
-        <footer className="text-muted/30 mt-4 w-full px-4 text-center text-xs sm:text-sm">
+        <footer className="mt-4 w-full px-4 text-center text-xs text-muted/30 sm:text-sm">
           <a href="https://www.apple.com/iphone-17-pro/" rel="noopener noreferrer" target="_blank">
             Showcase based on Apple&apos;s iPhone 17 Pro camera zoom showcase
           </a>
@@ -369,6 +403,13 @@ export const WithCustomStyle: Story = {
     children: null,
   },
   render: CustomStyleTemplate,
+};
+
+export const WithoutSeparator: Story = {
+  args: {
+    children: null,
+  },
+  render: WithoutSeparatorTemplate,
 };
 
 export const Showcase1: Story = {

@@ -1,5 +1,6 @@
 "use client";
 
+import {ChevronDown, ChevronUp, QrCode} from "@gravity-ui/icons";
 import {
   Button,
   Disclosure,
@@ -9,7 +10,7 @@ import {
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 export function Controlled() {
   const [expandedKeys, setExpandedKeys] = React.useState(new Set<string | number>(["preview"]));
@@ -34,7 +35,7 @@ export function Controlled() {
               variant="secondary"
               onPress={onPrevious}
             >
-              <Icon className="size-4" icon="gravity-ui:chevron-up" />
+              <ChevronUp className="size-4" />
             </Button>
             <Button
               aria-label="Next disclosure"
@@ -43,7 +44,7 @@ export function Controlled() {
               variant="secondary"
               onPress={onNext}
             >
-              <Icon className="size-4" icon="gravity-ui:chevron-down" />
+              <ChevronDown className="size-4" />
             </Button>
           </div>
         </div>
@@ -53,12 +54,12 @@ export function Controlled() {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("preview"),
                 })}
               >
                 <div className="flex w-full items-center justify-start gap-2">
-                  <Icon icon="gravity-ui:qr-code" />
+                  <QrCode />
                   Preview HeroUI Native
                 </div>
                 <Disclosure.Indicator className="text-muted" />
@@ -66,15 +67,15 @@ export function Controlled() {
             </Disclosure.Heading>
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
-                <p className="text-muted text-sm">
+                <p className="text-sm text-muted">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
                 <img
                   alt="Expo Go QR Code"
-                  className="max-w-54 aspect-square w-full object-cover"
+                  className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-muted text-sm">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
@@ -88,7 +89,7 @@ export function Controlled() {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("download"),
                 })}
               >
@@ -101,15 +102,15 @@ export function Controlled() {
             </Disclosure.Heading>
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
-                <p className="text-muted text-sm">
+                <p className="text-sm text-muted">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
                 <img
                   alt="Expo Go QR Code"
-                  className="max-w-54 aspect-square w-full object-cover"
+                  className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-muted text-sm">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store

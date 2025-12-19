@@ -12,21 +12,19 @@ links:
 ## Import
 
 ```tsx
-import { Select } from '@heroui/react';
+import {Select} from "@heroui/react";
 ```
 
 ### Usage
 
-<ComponentPreview
-  name="select-default"
-/>
+<ComponentPreview name="select-default" />
 
 ### Anatomy
 
 Import the Select component and access all parts using dot notation.
 
 ```tsx
-import { Select, Label, Description, Header, ListBox, Separator } from '@heroui/react';
+import {Select, Label, Description, Header, ListBox, Separator} from "@heroui/react";
 
 export default () => (
   <Select>
@@ -52,101 +50,79 @@ export default () => (
       </ListBox>
     </Select.Popover>
   </Select>
-)
+);
 ```
 
 ### With Description
 
-<ComponentPreview
-  name="select-with-description"
-/>
+<ComponentPreview name="select-with-description" />
 
 ### Multiple Select
 
-<ComponentPreview
-  name="select-multiple-select"
-/>
+<ComponentPreview name="select-multiple-select" />
 
 ### With Sections
 
-<ComponentPreview
-  name="select-with-sections"
-/>
+<ComponentPreview name="select-with-sections" />
 
 ### With Disabled Options
 
-<ComponentPreview
-  name="select-with-disabled-options"
-/>
+<ComponentPreview name="select-with-disabled-options" />
 
 ### Custom Indicator
 
-<ComponentPreview
-  name="select-custom-indicator"
-/>
+<ComponentPreview name="select-custom-indicator" />
 
 ### Required
 
-<ComponentPreview
-  name="select-required"
-/>
+<ComponentPreview name="select-required" />
+
+### Full Width
+
+<ComponentPreview name="select-full-width" />
 
 ### On Surface
 
-<ComponentPreview
-  name="select-on-surface"
-/>
+<ComponentPreview name="select-on-surface" />
 
 ### Custom Value
 
-<ComponentPreview
-  name="select-custom-value"
-/>
+<ComponentPreview name="select-custom-value" />
 
 ### Controlled
 
-<ComponentPreview
-  name="select-controlled"
-/>
+<ComponentPreview name="select-controlled" />
 
 ### Controlled Multiple
 
-<ComponentPreview
-  name="select-controlled-multiple"
-/>
+<ComponentPreview name="select-controlled-multiple" />
 
 ### Controlled Open State
 
-<ComponentPreview
-  name="select-controlled-open-state"
-/>
+<ComponentPreview name="select-controlled-open-state" />
 
 ### Asynchronous Loading
 
-<ComponentPreview
-  name="select-asynchronous-loading"
-/>
+<ComponentPreview name="select-asynchronous-loading" />
 
 ### Disabled
 
-<ComponentPreview
-  name="select-disabled"
-/>
+<ComponentPreview name="select-disabled" />
 
 <RelatedComponents component="select" />
- 
+
 ## Styling
 
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { Select } from '@heroui/react';
+import {Select} from "@heroui/react";
 
 function CustomSelect() {
   return (
     <Select className="w-full">
       <Label>State</Label>
-      <Select.Trigger className="border rounded-lg p-2 bg-surface">
+      <Select.Trigger className="rounded-lg border bg-surface p-2">
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
@@ -165,7 +141,9 @@ function CustomSelect() {
 ### Customizing the component classes
 
 To customize the Select component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+<br />
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -198,6 +176,7 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Select component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/select.css)):
 
 #### Base Classes
+
 - `.select` - Base select container
 - `.select__trigger` - The button that triggers the select
 - `.select__value` - The displayed value or placeholder
@@ -205,9 +184,11 @@ The Select component uses these CSS classes ([View source styles](https://github
 - `.select__popover` - The popover container
 
 #### Variant Classes
+
 - `.select__trigger--on-surface` - On surface variant styling
 
 #### State Classes
+
 - `.select[data-invalid="true"]` - Invalid state
 - `.select__trigger[data-focus-visible="true"]` - Focused trigger state
 - `.select__trigger[data-disabled="true"]` - Disabled trigger state
@@ -227,207 +208,66 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ### Select Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `placeholder` | `string` | `'Select an item'` | Temporary text that occupies the select when it is empty |
-| `selectionMode` | `"single" \| "multiple"` | `"single"` | Whether single or multiple selection is enabled |
-| `isOpen` | `boolean` | - | Sets the open state of the menu (controlled) |
-| `defaultOpen` | `boolean` | - | Sets the default open state of the menu (uncontrolled) |
-| `onOpenChange` | `(isOpen: boolean) => void` | - | Handler called when the open state changes |
-| `disabledKeys` | `Iterable<Key>` | - | Keys of disabled items |
-| `isDisabled` | `boolean` | - | Whether the select is disabled |
-| `value` | `Key \| Key[] \| null` | - | Current value (controlled) |
-| `defaultValue` | `Key \| Key[] \| null` | - | Default value (uncontrolled) |
-| `onChange` | `(value: Key \| Key[] \| null) => void` | - | Handler called when the value changes |
-| `isRequired` | `boolean` | - | Whether user input is required |
-| `isInvalid` | `boolean` | - | Whether the select value is invalid |
-| `name` | `string` | - | The name of the input, used when submitting an HTML form |
-| `autoComplete` | `string` | - | Describes the type of autocomplete functionality |
-| `isOnSurface` | `boolean` | - | Whether the select is displayed on a surface component |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode \| RenderFunction` | - | Select content or render function |
+| Prop            | Type                                    | Default            | Description                                              |
+| --------------- | --------------------------------------- | ------------------ | -------------------------------------------------------- |
+| `placeholder`   | `string`                                | `'Select an item'` | Temporary text that occupies the select when it is empty |
+| `selectionMode` | `"single" \| "multiple"`                | `"single"`         | Whether single or multiple selection is enabled          |
+| `isOpen`        | `boolean`                               | -                  | Sets the open state of the menu (controlled)             |
+| `defaultOpen`   | `boolean`                               | -                  | Sets the default open state of the menu (uncontrolled)   |
+| `onOpenChange`  | `(isOpen: boolean) => void`             | -                  | Handler called when the open state changes               |
+| `disabledKeys`  | `Iterable<Key>`                         | -                  | Keys of disabled items                                   |
+| `isDisabled`    | `boolean`                               | -                  | Whether the select is disabled                           |
+| `value`         | `Key \| Key[] \| null`                  | -                  | Current value (controlled)                               |
+| `defaultValue`  | `Key \| Key[] \| null`                  | -                  | Default value (uncontrolled)                             |
+| `onChange`      | `(value: Key \| Key[] \| null) => void` | -                  | Handler called when the value changes                    |
+| `isRequired`    | `boolean`                               | -                  | Whether user input is required                           |
+| `isInvalid`     | `boolean`                               | -                  | Whether the select value is invalid                      |
+| `name`          | `string`                                | -                  | The name of the input, used when submitting an HTML form |
+| `autoComplete`  | `string`                                | -                  | Describes the type of autocomplete functionality         |
+| `fullWidth`     | `boolean`                               | `false`             | Whether the select should take full width of its container |
+| `isOnSurface`   | `boolean`                               | -                  | Whether the select is displayed on a surface component   |
+| `className`     | `string`                                | -                  | Additional CSS classes                                   |
+| `children`      | `ReactNode \| RenderFunction`           | -                  | Select content or render function                        |
 
 ### Select.Trigger Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode \| RenderFunction` | - | Trigger content or render function |
+| Prop        | Type                          | Default | Description                        |
+| ----------- | ----------------------------- | ------- | ---------------------------------- |
+| `className` | `string`                      | -       | Additional CSS classes             |
+| `children`  | `ReactNode \| RenderFunction` | -       | Trigger content or render function |
 
 ### Select.Value Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode \| RenderFunction` | - | Value content or render function |
+| Prop        | Type                          | Default | Description                      |
+| ----------- | ----------------------------- | ------- | -------------------------------- |
+| `className` | `string`                      | -       | Additional CSS classes           |
+| `children`  | `ReactNode \| RenderFunction` | -       | Value content or render function |
 
 ### Select.Indicator Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Custom indicator content |
+| Prop        | Type        | Default | Description              |
+| ----------- | ----------- | ------- | ------------------------ |
+| `className` | `string`    | -       | Additional CSS classes   |
+| `children`  | `ReactNode` | -       | Custom indicator content |
 
 ### Select.Popover Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop        | Type                                                                                                                                                                                                                                                                                                                     | Default    | Description                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
 | `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | Placement of the popover relative to the trigger |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Content children |
+| `className` | `string`                                                                                                                                                                                                                                                                                                                 | -          | Additional CSS classes                           |
+| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children                                 |
 
 ### RenderProps
 
 When using render functions with Select.Value, these values are provided:
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `defaultChildren` | `ReactNode` | The default rendered value |
-| `isPlaceholder` | `boolean` | Whether the value is a placeholder |
-| `state` | `SelectState` | The state of the select |
-| `selectedItems` | `Node[]` | The currently selected items |
-
-## Examples
-
-### Basic Usage
-
-```tsx
-import { Select, Label, ListBox } from '@heroui/react';
-
-<Select className="w-[256px]" placeholder="Select one">
-  <Label>State</Label>
-  <Select.Trigger>
-    <Select.Value />
-    <Select.Indicator />
-  </Select.Trigger>
-      <Select.Popover>
-    <ListBox>
-      <ListBox.Item id="florida" textValue="Florida">
-        Florida
-        <ListBox.ItemIndicator />
-      </ListBox.Item>
-      <ListBox.Item id="california" textValue="California">
-        California
-        <ListBox.ItemIndicator />
-      </ListBox.Item>
-    </ListBox>
-      </Select.Popover>
-</Select>
-```
-
-### With Sections
-
-```tsx
-import { Select, Label, ListBox, Header, Separator } from '@heroui/react';
-
-<Select className="w-[256px]" placeholder="Select a country">
-  <Label>Country</Label>
-  <Select.Trigger>
-    <Select.Value />
-    <Select.Indicator />
-  </Select.Trigger>
-      <Select.Popover>
-    <ListBox>
-      <ListBox.Section>
-        <Header>North America</Header>
-        <ListBox.Item id="usa" textValue="United States">
-          United States
-          <ListBox.ItemIndicator />
-        </ListBox.Item>
-      </ListBox.Section>
-      <Separator />
-      <ListBox.Section>
-        <Header>Europe</Header>
-        <ListBox.Item id="uk" textValue="United Kingdom">
-          United Kingdom
-          <ListBox.ItemIndicator />
-        </ListBox.Item>
-      </ListBox.Section>
-    </ListBox>
-      </Select.Popover>
-</Select>
-```
-
-### Controlled Selection
-
-```tsx
-import type { Key } from '@heroui/react';
-
-import { Select, Label, ListBox } from '@heroui/react';
-import { useState } from 'react';
-
-function ControlledSelect() {
-  const [value, setValue] = useState<Key | null>('california');
-
-  return (
-    <Select
-      className="w-[256px]"
-      placeholder="Select a state"
-      value={value}
-      onChange={setValue}
-    >
-      <Label>State</Label>
-      <Select.Trigger>
-        <Select.Value />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Select.Popover>
-        <ListBox>
-          <ListBox.Item id="california" textValue="California">
-            California
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-          <ListBox.Item id="texas" textValue="Texas">
-            Texas
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-        </ListBox>
-      </Select.Popover>
-    </Select>
-  );
-}
-```
-
-### Custom Value Display
-
-```tsx
-import { Select, Label, ListBox, Avatar, AvatarImage, AvatarFallback } from '@heroui/react';
-
-<Select className="w-[256px]" placeholder="Select a user">
-  <Label>User</Label>
-  <Select.Trigger>
-    <Select.Value>
-      {({defaultChildren, isPlaceholder, state}) => {
-        if (isPlaceholder || state.selectedItems.length === 0) {
-          return defaultChildren;
-        }
-
-        const selectedItem = users.find((user) => user.id === state.selectedItems[0].key);
-
-        if (!selectedItem) {
-          return defaultChildren;
-        }
-
-        return (
-          <div className="flex items-center gap-2">
-            <Avatar className="size-4" size="sm">
-              <AvatarImage src={selectedItem.avatarUrl} />
-              <AvatarFallback>{selectedItem.fallback}</AvatarFallback>
-            </Avatar>
-            <span>{selectedItem.name}</span>
-          </div>
-        );
-      }}
-    </Select.Value>
-    <Select.Indicator />
-  </Select.Trigger>
-      <Select.Popover>
-    <ListBox>
-      {/* ListBox items */}
-    </ListBox>
-      </Select.Popover>
-</Select>
-```
+| Prop              | Type          | Description                        |
+| ----------------- | ------------- | ---------------------------------- |
+| `defaultChildren` | `ReactNode`   | The default rendered value         |
+| `isPlaceholder`   | `boolean`     | Whether the value is a placeholder |
+| `state`           | `SelectState` | The state of the select            |
+| `selectedItems`   | `Node[]`      | The currently selected items       |
 
 ## Accessibility
 
@@ -441,5 +281,3 @@ The Select component implements the ARIA listbox pattern and provides:
 - HTML form integration
 
 For more information, see the [React Aria Select documentation](https://react-spectrum.adobe.com/react-aria/Select.html).
-
-

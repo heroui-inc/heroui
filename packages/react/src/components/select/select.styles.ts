@@ -16,6 +16,16 @@ export const selectVariants = tv({
         trigger: "select__trigger--on-surface",
       },
     },
+    fullWidth: {
+      true: {
+        base: "select--full-width",
+        trigger: "select__trigger--full-width",
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
   },
 });
 

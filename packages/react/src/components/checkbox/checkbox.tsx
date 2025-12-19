@@ -1,15 +1,13 @@
 "use client";
 
 import type {CheckboxVariants} from "./checkbox.styles";
-import type {
-  CheckboxProps as CheckboxPrimitiveProps,
-  CheckboxRenderProps,
-} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {CheckboxRenderProps} from "react-aria-components";
 
 import React, {createContext, useContext} from "react";
 import {Checkbox as CheckboxPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 import {checkboxVariants} from "./checkbox.styles";
@@ -21,7 +19,8 @@ interface CheckboxContext {
 
 const CheckboxContext = createContext<CheckboxContext>({});
 
-interface CheckboxRootProps extends CheckboxPrimitiveProps, CheckboxVariants {
+interface CheckboxRootProps
+  extends ComponentPropsWithRef<typeof CheckboxPrimitive>, CheckboxVariants {
   /** The name of the checkbox, used when submitting an HTML form. */
   name?: string;
 }
@@ -51,13 +50,17 @@ const CheckboxRoot = ({children, className, isOnSurface, ...props}: CheckboxRoot
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface CheckboxControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
+interface CheckboxControlProps extends ComponentPropsWithRef<"span"> {}
 
 const CheckboxControl = ({children, className, ...props}: CheckboxControlProps) => {
   const {slots} = useContext(CheckboxContext);
 
   return (
-    <span className={slots?.control({className})} data-slot="checkbox-control" {...props}>
+    <span
+      className={composeSlotClassName(slots?.control, className)}
+      data-slot="checkbox-control"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -65,7 +68,7 @@ const CheckboxControl = ({children, className, ...props}: CheckboxControlProps) 
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface CheckboxIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface CheckboxIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode | ((props: CheckboxRenderProps) => React.ReactNode);
 }
 
@@ -115,7 +118,7 @@ const CheckboxIndicator = ({children, className, ...props}: CheckboxIndicatorPro
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="checkbox-indicator"
       {...props}
     >
@@ -126,13 +129,17 @@ const CheckboxIndicator = ({children, className, ...props}: CheckboxIndicatorPro
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface CheckboxContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface CheckboxContentProps extends ComponentPropsWithRef<"div"> {}
 
 const CheckboxContent = ({children, className, ...props}: CheckboxContentProps) => {
   const {slots} = useContext(CheckboxContext);
 
   return (
-    <div className={slots?.content({className})} data-slot="checkbox-content" {...props}>
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="checkbox-content"
+      {...props}
+    >
       {children}
     </div>
   );

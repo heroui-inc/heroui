@@ -42,7 +42,7 @@ export function Uncontrolled() {
           </Radio.Content>
         </Radio>
       </RadioGroup>
-      <p className="text-muted text-sm">
+      <p className="text-sm text-muted">
         Last chosen plan: <span className="font-medium">{selection}</span>
       </p>
     </div>

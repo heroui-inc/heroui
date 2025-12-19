@@ -56,7 +56,7 @@ export function Controlled() {
           </ListBox>
         </ComboBox.Popover>
       </ComboBox>
-      <p className="text-muted text-sm">Selected: {selectedAnimal?.name || "None"}</p>
+      <p className="text-sm text-muted">Selected: {selectedAnimal?.name || "None"}</p>
     </div>
   );
 }

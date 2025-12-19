@@ -17,6 +17,16 @@ export const numberFieldVariants = tv({
         input: "number-field__input--on-surface",
       },
     },
+    fullWidth: {
+      true: {
+        base: "number-field--full-width",
+        group: "number-field__group--full-width",
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
   },
 });
 

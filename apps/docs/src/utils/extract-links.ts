@@ -15,6 +15,10 @@ export interface ComponentLinksType {
   [key: string]: string | boolean | undefined;
 }
 
+export interface GithubInfoType {
+  pull?: number;
+}
+
 /**
  * Extracts the links field from MDX frontmatter
  * @param content - The raw MDX content string
@@ -31,6 +35,27 @@ export function extractLinksFromMDX(content: string): ComponentLinksType | null 
     return null;
   } catch (error) {
     console.error("Error extracting links from MDX:", error);
+
+    return null;
+  }
+}
+
+/**
+ * Extracts the github field from MDX frontmatter
+ * @param content - The raw MDX content string
+ * @returns The parsed github object or null if not found
+ */
+export function extractGithubFromMDX(content: string): GithubInfoType | null {
+  try {
+    const {data} = matter(content);
+
+    if (data["github"] && typeof data["github"] === "object") {
+      return data["github"] as GithubInfoType;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting github info from MDX:", error);
 
     return null;
   }
@@ -69,16 +94,16 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
     if (links.storybook.includes("/")) {
       const pathSegment = convertStorybookTitleToPath(links.storybook);
 
-      storybookUrl = `${STORYBOOK_URL}/?path=/story/${pathSegment}`;
+      storybookUrl = `${STORYBOOK_URL}/?path=/docs/${pathSegment}`;
     } else {
       // Legacy support: treat as simple slug (kept for backward compatibility)
-      storybookUrl = `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`;
+      storybookUrl = `${STORYBOOK_URL}/?path=/docs/components-${links.storybook}`;
     }
   }
 
   return {
     figma: links.figma ? siteConfig.figmaCommunityFile : undefined,
-    rac: links.rac ? `https://react-spectrum.adobe.com/react-aria/${links.rac}.html` : undefined,
+    rac: links.rac ? `https://react-aria.adobe.com/${links.rac}` : undefined,
     radix: links.radix
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`
       : undefined,

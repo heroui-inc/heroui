@@ -1,7 +1,7 @@
 "use client";
 
+import {EllipsisVertical, Pencil, SquarePlus, TrashBin} from "@gravity-ui/icons";
 import {Description, Dropdown, Header, Kbd, Label, Separator} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithSections() {
   return (
@@ -10,7 +10,7 @@ export function WithSections() {
         aria-label="Menu"
         className="button button-md button--secondary button--icon-only data-[focus-visible=true]:status-focused"
       >
-        <Icon className="outline-none" icon="gravity-ui:ellipsis-vertical" />
+        <EllipsisVertical className="outline-none" />
       </Dropdown.Trigger>
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
@@ -18,7 +18,7 @@ export function WithSections() {
             <Header>Actions</Header>
             <Dropdown.Item id="new-file" textValue="New file">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+                <SquarePlus className="size-4 shrink-0 text-muted" />
               </div>
               <div className="flex flex-col">
                 <Label>New file</Label>
@@ -31,7 +31,7 @@ export function WithSections() {
             </Dropdown.Item>
             <Dropdown.Item id="edit-file" textValue="Edit file">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+                <Pencil className="size-4 shrink-0 text-muted" />
               </div>
               <div className="flex flex-col">
                 <Label>Edit file</Label>
@@ -48,7 +48,7 @@ export function WithSections() {
             <Header>Danger zone</Header>
             <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+                <TrashBin className="size-4 shrink-0 text-danger" />
               </div>
               <div className="flex flex-col">
                 <Label>Delete file</Label>

@@ -12,9 +12,9 @@ runs:
     - name: Setup node
       uses: actions/setup-node@v4
       with:
-        cache: 'pnpm'
+        cache: "pnpm"
         check-latest: true
-        node-version-file: '.nvmrc'
+        node-version-file: ".nvmrc"
         registry-url: "https://registry.npmjs.org"
 
     - name: Get pnpm store directory
@@ -39,4 +39,3 @@ runs:
       run: |
         git config --global user.email "jrgarciadev@gmail.com"
         git config --global user.name "Junior Garcia"
-

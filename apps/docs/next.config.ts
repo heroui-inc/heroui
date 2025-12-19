@@ -10,12 +10,8 @@ const withMDX = createMDX();
 
 const config: NextConfig = {
   compress: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   experimental: {
     optimizePackageImports: ["@heroui/react"],
-    reactCompiler: true,
   },
   async headers() {
     return [
@@ -31,6 +27,7 @@ const config: NextConfig = {
     ];
   },
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         hostname: "heroui-assets.nyc3.cdn.digitaloceanspaces.com",
@@ -42,6 +39,11 @@ const config: NextConfig = {
         pathname: "/**",
         protocol: "https",
       },
+      {
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
+        protocol: "https",
+      },
     ],
   },
   logging: {
@@ -49,6 +51,7 @@ const config: NextConfig = {
       fullUrl: true,
     },
   },
+  reactCompiler: true,
   reactStrictMode: true,
   async redirects() {
     return [

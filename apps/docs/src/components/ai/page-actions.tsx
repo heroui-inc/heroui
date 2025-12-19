@@ -65,7 +65,7 @@ export function LLMCopyButton({
     <button
       disabled={isLoading}
       className={docsButtonVariants({
-        className: "[&_svg]:text-muted text-sm [&_svg]:size-3.5",
+        className: "text-sm [&_svg]:size-3.5 [&_svg]:text-muted",
       })}
       onClick={onClick}
     >
@@ -148,7 +148,7 @@ export function ViewOptions({
           >
             {item.icon}
             {item.title}
-            <LinkIcon className="text-muted ms-auto size-3 flex-none" />
+            <LinkIcon className="ms-auto size-3 flex-none text-muted" />
           </a>
         ))}
       </PopoverContent>
