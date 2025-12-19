@@ -8,7 +8,7 @@ export function WithPrefixAndSuffix() {
       <Label>Set a price</Label>
       <InputGroup>
         <InputGroup.Prefix>$</InputGroup.Prefix>
-        <InputGroup.Input className="w-full max-w-[200px]" defaultValue="10" type="number" />
+        <InputGroup.Input className="w-full max-w-[200px]" placeholder="10" type="number" />
         <InputGroup.Suffix>USD</InputGroup.Suffix>
       </InputGroup>
       <Description>What customers would pay</Description>
