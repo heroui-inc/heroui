@@ -77,6 +77,10 @@ Customize the search icon and clear button icons.
 
 <ComponentPreview name="search-field-custom-icons" />
 
+### Full Width
+
+<ComponentPreview name="search-field-full-width" />
+
 ### On Surface
 
 When used inside a [Surface](/docs/components/surface) component, SearchField automatically applies on-surface styling.
@@ -193,6 +197,7 @@ SearchField inherits all props from React Aria's [SearchField](https://react-spe
 | `children` | `React.ReactNode \| (values: SearchFieldRenderProps) => React.ReactNode` | - | Child components (Label, Group, Input, etc.) or render function. |
 | `className` | `string \| (values: SearchFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: SearchFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the search field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
 | `isOnSurface` | `boolean` | - | Whether the field is on a surface (auto-detected when inside Surface). |
 

@@ -1,6 +1,7 @@
 ---
 title: Select
 description: A select displays a collapsible list of options and allows a user to select one of them
+icon: updated
 links:
   rac: Select
   source: select/select.tsx
@@ -75,6 +76,10 @@ export default () => (
 ### Required
 
 <ComponentPreview name="select-required" />
+
+### Full Width
+
+<ComponentPreview name="select-full-width" />
 
 ### On Surface
 
@@ -219,6 +224,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isInvalid`     | `boolean`                               | -                  | Whether the select value is invalid                      |
 | `name`          | `string`                                | -                  | The name of the input, used when submitting an HTML form |
 | `autoComplete`  | `string`                                | -                  | Describes the type of autocomplete functionality         |
+| `fullWidth`     | `boolean`                               | `false`             | Whether the select should take full width of its container |
 | `isOnSurface`   | `boolean`                               | -                  | Whether the select is displayed on a surface component   |
 | `className`     | `string`                                | -                  | Additional CSS classes                                   |
 | `children`      | `ReactNode \| RenderFunction`           | -                  | Select content or render function                        |

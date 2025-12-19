@@ -17,6 +17,16 @@ export const searchFieldVariants = tv({
         input: "search-field__input--on-surface",
       },
     },
+    fullWidth: {
+      true: {
+        base: "search-field--full-width",
+        group: "search-field__group--full-width",
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
   },
 });
 

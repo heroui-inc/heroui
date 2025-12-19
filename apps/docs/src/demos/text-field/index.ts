@@ -1,6 +1,7 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
 export {Disabled} from "./disabled";
+export {FullWidth} from "./full-width";
 export {InputTypes} from "./input-types";
 export {OnSurface} from "./on-surface";
 export {Required} from "./required";

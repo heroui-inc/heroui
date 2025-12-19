@@ -21,6 +21,17 @@ export const Default: Story = {
   render: () => <TextArea placeholder="Describe your product" />,
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-3">
+      <TextArea fullWidth placeholder="Full width textarea" />
+      <Surface className="w-full rounded-3xl p-6">
+        <TextArea fullWidth isOnSurface placeholder="Full width textarea on surface" />
+      </Surface>
+    </div>
+  ),
+};
+
 export const OnSurface: Story = {
   render: () => (
     <Surface className="w-full rounded-3xl p-6">

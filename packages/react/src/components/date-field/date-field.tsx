@@ -21,9 +21,10 @@ interface DateFieldRootProps<T extends DateValue>
 function DateFieldRoot<T extends DateValue>({
   children,
   className,
+  fullWidth,
   ...props
 }: DateFieldRootProps<T>) {
-  const styles = React.useMemo(() => dateFieldVariants({}), []);
+  const styles = React.useMemo(() => dateFieldVariants({fullWidth}), [fullWidth]);
 
   return (
     <DateFieldPrimitive

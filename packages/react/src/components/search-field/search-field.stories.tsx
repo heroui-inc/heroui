@@ -38,6 +38,21 @@ export const Default: Story = {
   ),
 };
 
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <SearchField fullWidth name="search">
+        <Label>Search</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+      </SearchField>
+    </div>
+  ),
+};
+
 export const WithDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-4">

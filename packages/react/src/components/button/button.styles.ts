@@ -4,11 +4,6 @@ import {tv} from "tailwind-variants";
 
 export const buttonVariants = tv({
   base: "button",
-  defaultVariants: {
-    isIconOnly: false,
-    size: "md",
-    variant: "primary",
-  },
   variants: {
     isIconOnly: {
       true: "button--icon-only",
@@ -26,6 +21,16 @@ export const buttonVariants = tv({
       danger: "button--danger",
       "danger-soft": "button--danger-soft",
     },
+    fullWidth: {
+      true: "button--full-width",
+      false: "",
+    },
+  },
+  defaultVariants: {
+    isIconOnly: false,
+    size: "md",
+    variant: "primary",
+    fullWidth: false,
   },
 });
 

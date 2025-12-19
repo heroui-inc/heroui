@@ -17,3 +17,8 @@
     @apply px-1;
   }
 }
+
+/* Full width modifier */
+.date-field--full-width {
+  @apply w-full;
+}

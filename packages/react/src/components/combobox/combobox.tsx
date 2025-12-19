@@ -40,9 +40,10 @@ interface ComboBoxRootProps<T extends object>
 const ComboBoxRoot = <T extends object = object>({
   children,
   className,
+  fullWidth,
   ...props
 }: ComboBoxRootProps<T>) => {
-  const slots = React.useMemo(() => comboboxVariants(), []);
+  const slots = React.useMemo(() => comboboxVariants({fullWidth}), [fullWidth]);
 
   return (
     <ComboBoxContext value={{slots}}>

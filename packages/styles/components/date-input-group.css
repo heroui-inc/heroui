@@ -136,3 +136,8 @@
     @apply bg-transparent;
   }
 }
+
+/* Full width modifier */
+.date-input-group--full-width {
+  @apply w-full;
+}

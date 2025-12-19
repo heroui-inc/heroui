@@ -32,13 +32,19 @@ const SearchFieldContext = createContext<SearchFieldContext>({});
 interface SearchFieldRootProps
   extends ComponentPropsWithRef<typeof SearchFieldPrimitive>, SearchFieldVariants {}
 
-const SearchFieldRoot = ({children, className, isOnSurface, ...props}: SearchFieldRootProps) => {
+const SearchFieldRoot = ({
+  children,
+  className,
+  fullWidth,
+  isOnSurface,
+  ...props
+}: SearchFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   const slots = React.useMemo(
-    () => searchFieldVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => searchFieldVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+    [fullWidth, isOnSurfaceValue],
   );
 
   return (

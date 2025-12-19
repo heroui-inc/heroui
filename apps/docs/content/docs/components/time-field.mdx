@@ -80,6 +80,10 @@ Add prefix or suffix icons to enhance the time field.
 
 <ComponentPreview name="time-field-with-prefix-and-suffix" />
 
+### Full Width
+
+<ComponentPreview name="time-field-full-width" />
+
 ### On Surface
 
 When used inside a [Surface](/docs/components/surface) component, TimeField and its child DateInputGroup automatically apply on-surface styling.
@@ -175,6 +179,7 @@ TimeField inherits all props from React Aria's [TimeField](https://react-aria.ad
 | `children` | `React.ReactNode \| (values: TimeFieldRenderProps) => React.ReactNode` | - | Child components (Label, DateInputGroup, etc.) or render function. |
 | `className` | `string \| (values: TimeFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: TimeFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the time field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
 
 #### Value Props

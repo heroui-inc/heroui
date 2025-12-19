@@ -17,14 +17,17 @@ import {textAreaVariants} from "./textarea.styles";
 interface TextAreaRootProps
   extends ComponentPropsWithRef<typeof TextAreaPrimitive>, TextAreaVariants {}
 
-const TextAreaRoot = ({className, isOnSurface, ...rest}: TextAreaRootProps) => {
+const TextAreaRoot = ({className, fullWidth, isOnSurface, ...rest}: TextAreaRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   return (
     <TextAreaPrimitive
-      className={composeTwRenderProps(className, textAreaVariants({isOnSurface: isOnSurfaceValue}))}
       data-slot="textarea"
+      className={composeTwRenderProps(
+        className,
+        textAreaVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+      )}
       {...rest}
     />
   );

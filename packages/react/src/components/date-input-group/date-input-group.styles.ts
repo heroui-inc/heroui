@@ -17,6 +17,15 @@ export const dateInputGroupVariants = tv({
         input: "date-input-group__input--on-surface",
       },
     },
+    fullWidth: {
+      true: {
+        base: "date-input-group--full-width",
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
   },
 });
 

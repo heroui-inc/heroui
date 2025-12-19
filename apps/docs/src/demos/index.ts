@@ -201,6 +201,10 @@ export const demos: Record<string, DemoItem> = {
     component: ButtonDemos.Sizes,
     file: "button/sizes.tsx",
   },
+  "button-full-width": {
+    component: ButtonDemos.FullWidth,
+    file: "button/full-width.tsx",
+  },
   "button-social": {
     component: ButtonDemos.Social,
     file: "button/social.tsx",
@@ -225,6 +229,10 @@ export const demos: Record<string, DemoItem> = {
   "button-group-sizes": {
     component: ButtonGroupDemos.Sizes,
     file: "button-group/sizes.tsx",
+  },
+  "button-group-full-width": {
+    component: ButtonGroupDemos.FullWidth,
+    file: "button-group/full-width.tsx",
   },
   "button-group-variants": {
     component: ButtonGroupDemos.Variants,
@@ -404,6 +412,10 @@ export const demos: Record<string, DemoItem> = {
     component: ComboBoxDemos.Required,
     file: "combobox/required.tsx",
   },
+  "combobox-full-width": {
+    component: ComboBoxDemos.FullWidth,
+    file: "combobox/full-width.tsx",
+  },
   "combobox-custom-value": {
     component: ComboBoxDemos.CustomValue,
     file: "combobox/custom-value.tsx",
@@ -543,6 +555,10 @@ export const demos: Record<string, DemoItem> = {
     component: InputDemos.Basic,
     file: "input/basic.tsx",
   },
+  "input-full-width": {
+    component: InputDemos.FullWidth,
+    file: "input/full-width.tsx",
+  },
   "input-types": {
     component: InputDemos.Types,
     file: "input/types.tsx",
@@ -600,6 +616,10 @@ export const demos: Record<string, DemoItem> = {
     component: DateFieldDemos.WithSuffixIcon,
     file: "date-field/with-suffix-icon.tsx",
   },
+  "date-field-full-width": {
+    component: DateFieldDemos.FullWidth,
+    file: "date-field/full-width.tsx",
+  },
   "date-field-with-validation": {
     component: DateFieldDemos.WithValidation,
     file: "date-field/with-validation.tsx",
@@ -645,6 +665,10 @@ export const demos: Record<string, DemoItem> = {
   "input-group-default": {
     component: InputGroupDemos.Default,
     file: "input-group/default.tsx",
+  },
+  "input-group-full-width": {
+    component: InputGroupDemos.FullWidth,
+    file: "input-group/full-width.tsx",
   },
   "input-group-with-prefix-icon": {
     component: InputGroupDemos.WithPrefixIcon,
@@ -977,6 +1001,10 @@ export const demos: Record<string, DemoItem> = {
     component: TextAreaDemos.Basic,
     file: "textarea/basic.tsx",
   },
+  "textarea-full-width": {
+    component: TextAreaDemos.FullWidth,
+    file: "textarea/full-width.tsx",
+  },
   "textarea-rows": {
     component: TextAreaDemos.Rows,
     file: "textarea/rows.tsx",
@@ -1017,6 +1045,10 @@ export const demos: Record<string, DemoItem> = {
   "text-field-input-types": {
     component: TextFieldDemos.InputTypes,
     file: "text-field/input-types.tsx",
+  },
+  "text-field-full-width": {
+    component: TextFieldDemos.FullWidth,
+    file: "text-field/full-width.tsx",
   },
   "text-field-controlled": {
     component: TextFieldDemos.Controlled,
@@ -1074,6 +1106,10 @@ export const demos: Record<string, DemoItem> = {
   "time-field-with-suffix-icon": {
     component: TimeFieldDemos.WithSuffixIcon,
     file: "time-field/with-suffix-icon.tsx",
+  },
+  "time-field-full-width": {
+    component: TimeFieldDemos.FullWidth,
+    file: "time-field/full-width.tsx",
   },
   "time-field-with-validation": {
     component: TimeFieldDemos.WithValidation,
@@ -1217,6 +1253,10 @@ export const demos: Record<string, DemoItem> = {
     component: NumberFieldDemos.Disabled,
     file: "number-field/disabled.tsx",
   },
+  "number-field-full-width": {
+    component: NumberFieldDemos.FullWidth,
+    file: "number-field/full-width.tsx",
+  },
   "number-field-controlled": {
     component: NumberFieldDemos.Controlled,
     file: "number-field/controlled.tsx",
@@ -1278,6 +1318,10 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.Required,
     file: "select/required.tsx",
   },
+  "select-full-width": {
+    component: SelectDemos.FullWidth,
+    file: "select/full-width.tsx",
+  },
   "select-on-surface": {
     component: SelectDemos.OnSurface,
     file: "select/on-surface.tsx",
@@ -1330,6 +1374,10 @@ export const demos: Record<string, DemoItem> = {
   "search-field-disabled": {
     component: SearchFieldDemos.Disabled,
     file: "search-field/disabled.tsx",
+  },
+  "search-field-full-width": {
+    component: SearchFieldDemos.FullWidth,
+    file: "search-field/full-width.tsx",
   },
   "search-field-controlled": {
     component: SearchFieldDemos.Controlled,

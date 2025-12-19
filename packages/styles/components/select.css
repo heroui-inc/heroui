@@ -197,3 +197,12 @@
     @apply transition-none;
   }
 }
+
+/* Full width modifier */
+.select--full-width {
+  @apply w-full;
+}
+
+.select__trigger--full-width {
+  @apply w-full;
+}

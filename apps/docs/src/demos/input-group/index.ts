@@ -1,5 +1,6 @@
 export {Default} from "./default";
 export {Disabled} from "./disabled";
+export {FullWidth} from "./full-width";
 export {Invalid} from "./invalid";
 export {OnSurface} from "./on-surface";
 export {PasswordWithToggle} from "./password-with-toggle";

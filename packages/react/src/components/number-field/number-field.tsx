@@ -32,13 +32,19 @@ const NumberFieldContext = createContext<NumberFieldContext>({});
 interface NumberFieldRootProps
   extends ComponentPropsWithRef<typeof NumberFieldPrimitive>, NumberFieldVariants {}
 
-const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFieldRootProps) => {
+const NumberFieldRoot = ({
+  children,
+  className,
+  fullWidth,
+  isOnSurface,
+  ...props
+}: NumberFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
   const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   const slots = React.useMemo(
-    () => numberFieldVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => numberFieldVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+    [fullWidth, isOnSurfaceValue],
   );
 
   return (
