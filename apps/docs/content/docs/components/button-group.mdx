@@ -68,6 +68,12 @@ export default () => (
   name="button-group-disabled"
 />
 
+### Without Separator
+
+<ComponentPreview
+  name="button-group-without-separator"
+/>
+
 <RelatedComponents component="button-group" />
 
 ## Styling
@@ -128,6 +134,7 @@ Separators are automatically added between buttons using a pseudo-element (`:bef
 | `size` | `'sm' \| 'md' \| 'lg'` | - | Size applied to all buttons in the group |
 | `fullWidth` | `boolean` | `false` | Whether the button group should take full width of its container |
 | `isDisabled` | `boolean` | `false` | Whether all buttons in the group are disabled (can be overridden on individual buttons) |
+| `hideSeparator` | `boolean` | `false` | Hide separator lines between buttons |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Button components to group together |
 

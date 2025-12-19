@@ -1,6 +1,6 @@
 ---
 title: v3.0.0-beta.3
-description: Seven new components (ButtonGroup, DateField, ErrorMessage, ScrollShadow, SearchField, TagGroup, TimeField), style fixes for form components, and breaking change for AlertDialog and Modal backdrop variants.
+description: Seven new components, fullWidth and hideSeparator support, style fixes, and breaking changes for AlertDialog/Modal backdrop variants and asChild prop removal.
 github:
   pull: 5923
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">December 19, 2025</span>
 </div>
 
-This release introduces seven new components, fixes disabled state styling for form components, and includes a breaking change for better semantic clarity in AlertDialog and Modal backdrop variants.
+This release introduces seven new components ([ButtonGroup](/docs/components/button-group), [DateField](/docs/components/date-field), [ErrorMessage](/docs/components/error-message), [ScrollShadow](/docs/components/scroll-shadow), [SearchField](/docs/components/search-field), [TagGroup](/docs/components/tag-group), [TimeField](/docs/components/time-field)), adds `fullWidth` support for form components and `hideSeparator` to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion), includes style fixes, and ⚠️ **breaking changes** removing the `asChild` prop and updating [AlertDialog](/docs/components/alert-dialog) & [Modal](/docs/components/modal) backdrop variants.
 
 
 <DocsImage
@@ -130,10 +130,11 @@ Added `fullWidth` support to form and input components, allowing them to span th
 
 ## Component Improvements
 
-### Tabs Component Enhancement
+### Separator Control Enhancement
 
-Added `hideSeparator` prop to the [Tabs](/docs/components/tabs) component to remove tab separators for a cleaner appearance.
+Added `hideSeparator` prop to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion) components, allowing you to hide separator lines between items for a cleaner, more minimal appearance.
 
+**Tabs:**
 ```tsx
 <Tabs hideSeparator>
   <Tabs.ListContainer>
@@ -143,6 +144,29 @@ Added `hideSeparator` prop to the [Tabs](/docs/components/tabs) component to rem
     </Tabs.List>
   </Tabs.ListContainer>
 </Tabs>
+```
+
+**ButtonGroup:**
+```tsx
+<ButtonGroup hideSeparator>
+  <Button>First</Button>
+  <Button>Second</Button>
+  <Button>Third</Button>
+</ButtonGroup>
+```
+
+**Accordion:**
+```tsx
+<Accordion hideSeparator>
+  <Accordion.Item>
+    <Accordion.Heading>
+      <Accordion.Trigger>Item 1</Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>Content</Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
 ```
 
 ### Documentation Icons Integration

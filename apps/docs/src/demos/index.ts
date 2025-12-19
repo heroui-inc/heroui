@@ -85,6 +85,10 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.CustomStyles,
     file: "accordion/custom-styles.tsx",
   },
+  "accordion-without-separator": {
+    component: AccordionDemos.WithoutSeparator,
+    file: "accordion/without-separator.tsx",
+  },
   // Alert demos
   "alert-basic": {
     component: AlertDemos.Basic,
@@ -241,6 +245,10 @@ export const demos: Record<string, DemoItem> = {
   "button-group-with-icons": {
     component: ButtonGroupDemos.WithIcons,
     file: "button-group/with-icons.tsx",
+  },
+  "button-group-without-separator": {
+    component: ButtonGroupDemos.WithoutSeparator,
+    file: "button-group/without-separator.tsx",
   },
   // Card demos
   "card-default": {
