@@ -84,7 +84,11 @@
   --color-background-inverse: var(--color-foreground);
 
   /* ------------------------- */
-  --color-default-hover: color-mix(in oklab, var(--color-default) 80%, transparent);
+  --color-default-hover: color-mix(
+    in oklab,
+    var(--color-default) 96%,
+    var(--color-default-foreground) 4%
+  );
   --color-accent-hover: color-mix(
     in oklab,
     var(--color-accent) 90%,

@@ -10,8 +10,8 @@
    */
   transition:
     transform 250ms var(--ease-smooth),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Cursor */
@@ -77,6 +77,11 @@
 .button--primary {
   @apply bg-accent text-accent-foreground;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-accent-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
@@ -87,6 +92,11 @@
 
 .button--secondary {
   @apply bg-default text-accent;
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
 
   @media (hover: hover) {
     &:hover,
@@ -99,6 +109,11 @@
 .button--tertiary {
   @apply bg-default;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
@@ -109,6 +124,11 @@
 
 .button--ghost {
   @apply bg-transparent text-default-foreground;
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
 
   @media (hover: hover) {
     &:hover,
@@ -121,6 +141,11 @@
 .button--danger {
   @apply bg-danger text-danger-foreground;
 
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-danger-hover;
+  }
+
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
@@ -131,6 +156,11 @@
 
 .button--danger-soft {
   @apply bg-danger-soft text-danger-soft-foreground;
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-danger-soft-hover;
+  }
 
   @media (hover: hover) {
     &:hover,

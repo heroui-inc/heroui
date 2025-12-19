@@ -14,7 +14,7 @@
   transition:
     transform 250ms var(--ease-out-quart),
     color 150ms var(--ease-out),
-    background-color 150ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
@@ -46,6 +46,11 @@
 /* Variants */
 .close-button--default {
   @apply bg-transparent text-muted;
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover text-foreground;
+  }
 
   @media (hover: hover) {
     &:hover,
