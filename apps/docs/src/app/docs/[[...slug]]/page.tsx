@@ -11,7 +11,7 @@ import {notFound} from "next/navigation";
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {NewsletterForm} from "@/components/newsletter-form";
-import {PRContributors} from "@/components/pr-contributors";
+import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
@@ -56,6 +56,9 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   // Extract GitHub info from MDX content
   const githubInfo = extractGithubFromMDX(rawContent);
 
+  // Fetch PR contributors if github info is available
+  const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
+
   return (
     <DocsPage
       full={page.data.full}
@@ -91,7 +94,9 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
       <DocsBody className="prose-sm">
         <MDXContent
           components={getMDXComponents({
-            PRContributors: () => <PRContributors github={githubInfo} />,
+            PRContributors: () => (
+              <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
+            ),
 
             // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page),
