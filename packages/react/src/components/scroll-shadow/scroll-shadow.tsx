@@ -118,6 +118,11 @@ export const ScrollShadowRoot = ({
       className={slots.base({className})}
       data-orientation={orientation}
       data-scroll-shadow-size={size}
+      style={{
+        // @ts-expect-error - CSS variables are not typed
+        "--scroll-shadow-size": `${size}px`,
+        ...props.style,
+      }}
       {...props}
     >
       {children}
