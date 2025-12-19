@@ -53,8 +53,13 @@ function generate({...props}: GenerateProps): ReactElement {
       {/* Description */}
       <p
         style={{
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 3,
           color: "#71717A",
+          display: "-webkit-box",
           fontSize: "52px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
         }}
       >
         {props.description}
