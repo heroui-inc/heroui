@@ -132,6 +132,39 @@ export const Custom = {
   ),
 };
 
+const WithoutSeparatorTemplate = ({hideSeparator = true, ...props}: Accordion["RootProps"]) => (
+  <Wrapper>
+    <Accordion hideSeparator={hideSeparator} {...props}>
+      {items.map((item, index) => (
+        <Accordion.Item key={index}>
+          <Accordion.Heading>
+            <Accordion.Trigger>
+              {item.icon ? (
+                <Icon className="mr-3 size-4 shrink-0 text-muted" icon={item.icon} />
+              ) : null}
+              {item.title}
+              <Accordion.Indicator>
+                <Icon icon="gravity-ui:chevron-down" />
+              </Accordion.Indicator>
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>{item.content}</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
+      ))}
+    </Accordion>
+  </Wrapper>
+);
+
+export const WithoutSeparator = {
+  args: {
+    ...defaultArgs,
+    allowsMultipleExpanded: true,
+  },
+  render: WithoutSeparatorTemplate,
+};
+
 const items = [
   {
     content:

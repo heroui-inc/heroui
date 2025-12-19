@@ -1,6 +1,7 @@
 ---
 title: Accordion
 description: A collapsible content panel for organizing information in a compact space
+icon: updated
 links:
   rac: Disclosure
   source: accordion/accordion.tsx
@@ -86,6 +87,13 @@ export default () => (
 <ComponentPreview
   name="accordion-custom-styles"
   minHeight="420px"
+/>
+
+### Without Separator
+
+<ComponentPreview
+  name="accordion-without-separator"
+  minHeight="400px"
 />
 
 <RelatedComponents component="accordion" />
@@ -227,6 +235,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `onExpandedChange` | `(keys: Set<Key>) => void` | - | Handler called when expanded keys change |
 | `isDisabled` | `boolean` | `false` | Whether the entire accordion is disabled |
 | `variant` | `"default" \| "surface"` | `"default"` | The visual variant of the accordion |
+| `hideSeparator` | `boolean` | `false` | Hide separator lines between accordion items |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The accordion items |
 

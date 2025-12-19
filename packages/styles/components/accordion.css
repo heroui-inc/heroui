@@ -46,6 +46,11 @@
 .accordion__item:last-child::after {
   content: none;
 }
+
+/* Hide separator when hideSeparator prop is set */
+.accordion__item[data-hide-separator="true"]::after {
+  display: none;
+}
 /* ------------------------------------ */
 
 .accordion__trigger {

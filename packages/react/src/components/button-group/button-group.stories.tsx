@@ -196,6 +196,16 @@ export const WithIcons: Story = {
   ),
 };
 
+export const WithoutSeparator: Story = {
+  render: () => (
+    <ButtonGroup hideSeparator>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  ),
+};
+
 export const Examples: Story = {
   render: () => (
     <div className="flex flex-col items-start gap-8">
