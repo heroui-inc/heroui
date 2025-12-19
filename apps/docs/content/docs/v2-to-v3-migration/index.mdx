@@ -96,6 +96,7 @@ If you're using an AI assistant to help with migration, see the [Agent Migration
 1. Check this guide (`index.mdx`) for general migration steps
 2. Review individual component migration guides as needed (see [Component Migration Reference](#step-5-component-migration-reference))
 3. Migrate component APIs, props, and structure
+4. Replace component hooks and migrate `useDisclosure` → `useOverlayState` (see [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks))
 
 **Step 2: Styling Migration**
 1. After component migration is complete, check the [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
@@ -112,7 +113,7 @@ If you're using an AI assistant to help with migration, see the [Agent Migration
 - **No Framer Motion**: Animation library dependency removed
 - **Component API Updates**: Many components use React Aria Components patterns
 - **Compound Components**: New compound component patterns for better customization
-- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead to customize component structure
+- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead. `useDisclosure` is replaced with `useOverlayState`. See the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) for details.
 
 ### Key API Changes
 
@@ -353,28 +354,12 @@ v3 removes the Framer Motion dependency and handles animations differently:
 
 ### Step 4: Replace Removed Hooks
 
-HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) that returned prop getters (`getBaseProps`, `getWrapperProps`, `getThumbProps`, etc.) to customize component structure when users couldn't directly modify inner child components. HeroUI v3 solves this with compound components, eliminating the need for hooks.
+HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) and utility hooks like `useDisclosure`. HeroUI v3 removes most component hooks in favor of compound components, and replaces `useDisclosure` with `useOverlayState`.
 
-**Why Hooks Existed in v2:**
-
-In v2, components had fixed internal structures. To customize these structures, users needed to use hooks that provided prop getters. For example, `useSwitch` returned `getBaseProps()`, `getWrapperProps()`, `getThumbProps()`, etc., which users could spread onto custom elements to build their own Switch structure.
-
-**v3 Solution: Compound Components**
-
-v3 uses compound component patterns that give you direct access to component parts. Instead of using hooks with prop getters, you compose components directly using subcomponents like `Switch.Control`, `Switch.Thumb`, `Checkbox.Control`, `Checkbox.Indicator`, etc.
-
-**Migration Strategy:**
-
-1. **Identify hook usage**: Search your codebase for imports from `@heroui/react` that include hook names (`useSwitch`, `useInput`, `useCheckbox`, `useRadio`, etc.)
-2. **Replace with compound components**: Instead of using hooks with prop getters, use the compound component pattern
-3. **Reference component guides**: Check individual component migration guides for specific examples
-
-**Key Differences:**
-
-- **v2**: Hooks provided prop getters to customize fixed component structures
-- **v3**: Compound components allow direct composition of component parts
-
-For detailed migration examples for specific components, see the individual component migration guides linked above.
+See the comprehensive [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) for:
+- Component hooks removal and migration to compound components
+- `useDisclosure` → `useOverlayState` migration
+- Migration strategies and examples
 
 ### Step 5: Update Component Imports
 
@@ -542,9 +527,17 @@ Check the [Theming documentation](/docs/handbook/theming) for available CSS vari
 
 This is a good point to pause and verify component functionality before proceeding to styling migration.
 
-### Step 7: Styling Migration
+### Step 7: Hooks Migration
 
-After component migration is complete, proceed with styling changes. This is a separate step to ensure component functionality is verified before addressing visual changes.
+After component migration is complete, ensure all hooks have been migrated:
+
+1. **Replace component hooks**: Replace hooks like `useSwitch`, `useInput`, `useCheckbox`, etc. with compound components
+2. **Migrate useDisclosure**: Replace `useDisclosure` with `useOverlayState` for overlay state management
+3. **Reference hooks guide**: See the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) for detailed migration instructions and examples
+
+### Step 8: Styling Migration
+
+After hooks migration is complete, proceed with styling changes. This is a separate step to ensure component functionality is verified before addressing visual changes.
 
 **Styling Migration Guide:**
 
@@ -574,7 +567,7 @@ See the comprehensive [Styling Migration Guide](/docs/v2-to-v3-migration/styling
 - Review component styling changes (sizes, spacing, border radius)
 - Test visual appearance and adjust as needed
 
-### Step 8: Testing
+### Step 9: Testing
 
 After migration, thoroughly test your application:
 
@@ -609,10 +602,17 @@ Use this checklist to track your migration progress:
 - Change `onClick` to `onPress` for interactive components
 - Update `key` prop to `id` and `textValue` where applicable
 - Update TypeScript type references (if using component types)
-- Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User)
-- Plan alternatives for in-progress/planned components (Badge, Calendar, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast)
+- Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) - replace with HTML elements
+- Handle in-progress/planned components (Badge, Breadcrumbs, Calendar, DateInput, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast) - replace with HTML elements until v3 components are available
 - Consider using `asChild` prop for flexible composition
-- **Verify component functionality before proceeding to styling migration**
+- **Verify component functionality before proceeding to hooks migration**
+
+### Application Code - Hooks Migration
+- Review [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) (`hooks.mdx`)
+- Replace component hooks (`useSwitch`, `useInput`, `useCheckbox`, etc.) with compound components
+- Replace `useDisclosure` with `useOverlayState` for overlay state management
+- Update all hook usages according to migration guide
+- **Verify hooks migration before proceeding to styling migration**
 
 ### Application Code - Styling Migration
 - Review [Styling Migration Guide](/docs/v2-to-v3-migration/styling) (`styling.mdx`)
