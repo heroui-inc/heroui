@@ -35,7 +35,7 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 - **No Framer Motion**: Animation library dependency removed
 - **Component API Updates**: Many components use React Aria Components patterns
 - **Compound Components**: New compound component patterns for better customization
-- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead to customize component structure
+- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead. `useDisclosure` is replaced with `useOverlayState`. See the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) for details.
 
 ## Dependency Updates
 
@@ -158,22 +158,21 @@ v3 removes the Framer Motion dependency and handles animations differently:
 - **Per-component control**: Control animations through CSS or component-specific props where available
 - **Custom animations**: Use standard CSS `@keyframes` and transition properties for custom animations
 
-## Hooks Removal
+## Hooks Migration
 
-HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) that returned prop getters (`getBaseProps`, `getWrapperProps`, `getThumbProps`, etc.) to customize component structure when users couldn't directly modify inner child components. HeroUI v3 solves this with compound components, eliminating the need for hooks.
+HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) and utility hooks like `useDisclosure`. HeroUI v3 removes most component hooks in favor of compound components, and replaces `useDisclosure` with `useOverlayState`.
+
+**When to migrate hooks:**
+
+- **During component migration**: Replace component hooks (`useSwitch`, `useInput`, etc.) as you migrate each component to use compound components
+- **After component migration**: Migrate `useDisclosure` → `useOverlayState` for overlay state management before styling migration
 
 **Migration Strategy:**
 
-1. **Identify hook usage**: Search codebase for imports from `@heroui/react` that include hook names (`useSwitch`, `useInput`, `useCheckbox`, `useRadio`, etc.)
-2. **Replace with compound components**: Instead of using hooks with prop getters, use the compound component pattern
-3. **Reference component guides**: Use `get_component_guides` MCP tool to fetch specific migration guides
-
-**Key Differences:**
-
-- **v2**: Hooks provided prop getters to customize fixed component structures
-- **v3**: Compound components allow direct composition of component parts
-
-For detailed migration examples, use the `get_component_guides` MCP tool to fetch component-specific migration guides.
+1. **Identify hook usage**: Search codebase for imports from `@heroui/react` that include hook names (`useSwitch`, `useInput`, `useCheckbox`, `useRadio`, `useDisclosure`, etc.)
+2. **Replace component hooks**: Use compound components instead of hooks with prop getters (done during component migration)
+3. **Replace useDisclosure**: Migrate to `useOverlayState` for overlay state management (use `get_hooks_migration_guide` MCP tool)
+4. **Reference guides**: Use `get_hooks_migration_guide` MCP tool for hooks migration, `get_component_guides` for component-specific guides
 
 ## Component Import Changes
 
@@ -243,6 +242,10 @@ See specific component migration guides for detailed examples and usage patterns
 ## Component Migration Reference
 
 Use this table to find migration guidance for each component. Use the `get_component_guides` MCP tool to fetch detailed guides.
+
+<Callout type="info">
+  **Removed/In-Progress/Planned Components**: For components marked as ❌ Removed, 🔄 In Progress, or 📋 Planned, replace them with standard HTML elements during migration. You can migrate back to HeroUI components once they become available in v3.
+</Callout>
 
 | v2 Component | v3 Component | Status | Migration Guide |
 |-------------|--------------|--------|-----------------|

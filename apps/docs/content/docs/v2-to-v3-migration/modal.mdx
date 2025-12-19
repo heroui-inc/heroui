@@ -74,7 +74,11 @@ export default function App() {
 ### 2. State Management
 
 **v2:** Uses `useDisclosure` hook  
-**v3:** Built-in trigger or controlled with `isOpen`/`onOpenChange` on `Modal.Container`
+**v3:** Built-in trigger or controlled with `isOpen`/`onOpenChange` on `Modal.Container`, or use `useOverlayState` hook
+
+<Callout type="info">
+  For detailed migration from `useDisclosure` to `useOverlayState`, see the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks).
+</Callout>
 
 ### 3. Prop Changes
 
@@ -116,7 +120,7 @@ The following props are no longer available in v3:
 
 ### Controlled Modal
 
-<Tabs items={["v2", "v3"]}>
+<Tabs items={["v2", "v3 (useState)", "v3 (useOverlayState)"]}>
   <Tab value="v2">
     ```tsx
     import { useDisclosure } from "@heroui/react";
@@ -135,7 +139,7 @@ The following props are no longer available in v3:
     </Modal>
     ```
   </Tab>
-  <Tab value="v3">
+  <Tab value="v3 (useState)">
     ```tsx
     import { useState } from "react";
 
@@ -158,7 +162,34 @@ The following props are no longer available in v3:
     </Modal>
     ```
   </Tab>
+  <Tab value="v3 (useOverlayState)">
+    ```tsx
+    import { useOverlayState } from "@heroui/react";
+
+    const state = useOverlayState();
+
+    <Modal>
+      <Button onPress={state.open}>Open</Button>
+      <Modal.Container isOpen={state.isOpen} onOpenChange={state.setOpen}>
+        <Modal.Dialog>
+          {({close}) => (
+            <>
+              <Modal.Header>
+                <Modal.Heading>Title</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>Content</Modal.Body>
+            </>
+          )}
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal>
+    ```
+  </Tab>
 </Tabs>
+
+<Callout type="info">
+  For detailed `useDisclosure` → `useOverlayState` migration guide, see the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks).
+</Callout>
 
 ### Container Props
 
