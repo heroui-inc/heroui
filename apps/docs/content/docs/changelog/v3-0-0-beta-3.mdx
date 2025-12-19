@@ -1,6 +1,6 @@
 ---
 title: v3.0.0-beta.3
-description: Six new components (ButtonGroup, DateField, ErrorMessage, SearchField, TagGroup, TimeField), style fixes for form components, and breaking change for AlertDialog and Modal backdrop variants.
+description: Seven new components (ButtonGroup, DateField, ErrorMessage, ScrollShadow, SearchField, TagGroup, TimeField), style fixes for form components, and breaking change for AlertDialog and Modal backdrop variants.
 github:
   pull: 5923
 ---
@@ -9,7 +9,17 @@ github:
   <span className="text-sm text-muted">December 19, 2025</span>
 </div>
 
-This release introduces six new components, fixes disabled state styling for form components, and includes a breaking change for better semantic clarity in AlertDialog and Modal backdrop variants.
+This release introduces seven new components, fixes disabled state styling for form components, and includes a breaking change for better semantic clarity in AlertDialog and Modal backdrop variants.
+
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-dark@2x.jpg"
+  alt="HeroUI v3 Beta 3"
+  href="/docs/changelog/v3-0-0-beta-3"
+  className="h-[220px] md:h-[384px]"
+/>
+
 
 ## Installation
 
@@ -46,11 +56,12 @@ Update to the latest version:
 
 ### New Components
 
-This release introduces **6 new** essential components:
+This release introduces **7 new** essential components:
 
 - **[ButtonGroup](#button-group)**: Groups related buttons with consistent styling and spacing. ([Documentation](/docs/components/button-group))
 - **[DateField](#date-field)**: Date input field with labels, descriptions, and validation built on React Aria DateField. ([Documentation](/docs/components/date-field))
 - **[ErrorMessage](#error-message)**: Low-level error message component for displaying errors in non-form components. ([Documentation](/docs/components/error-message))
+- **[ScrollShadow](#scroll-shadow)**: Apply visual shadows to indicate scrollable content overflow with automatic detection of scroll position. ([Documentation](/docs/components/scroll-shadow))
 - **[SearchField](#search-field)**: Search input field with built-in search icon and clear button. ([Documentation](/docs/components/search-field))
 - **[TagGroup](#tag-group)**: Focusable list of tags with support for keyboard navigation, selection, and removal. ([Documentation](/docs/components/tag-group))
 - **[TimeField](#time-field)**: Time input field with labels, descriptions, and validation built on React Aria TimeField. ([Documentation](/docs/components/time-field))
@@ -77,6 +88,12 @@ This release introduces **6 new** essential components:
 
 <ComponentPreview
   name="search-field-basic"
+/>
+
+### ScrollShadow
+
+<ComponentPreview
+  name="scroll-shadow-orientation"
 />
 
 ### TagGroup
@@ -112,6 +129,35 @@ Added `hideSeparator` prop to the [Tabs](/docs/components/tabs) component to rem
 
 Integrated [@gravity-ui/icons](https://github.com/gravity-ui/icons) into documentation components for consistent icon rendering with improved SSR support and better performance.
 
+## Dependencies
+
+### React Aria Components v1.14.0
+
+Upgraded [react-aria-components](https://react-aria.adobe.com/releases/v1-14-0) to v1.14.0. This release includes:
+
+**Enhancements:**
+- SearchField: Added `isReadOnly` and `isRequired` to render props
+- Tooltip: Added `shouldCloseOnPress` prop
+- Tabs: Support for animated transitions between tab panels
+- Miscellaneous: Support for `setState` callback in `useControlledState`
+
+**Fixes:**
+- ComboBox: Fixed VoiceOver announcement not respecting `aria-label` of ListBoxItem
+- Date and Time: Enhanced error handling for absolute date and date time strings
+- NumberField: Prevented incrementing/decrementing when scrolling on mobile
+- Overlays: Fixed overlay positioning and flipping when boundary container is set
+- Table: Fixed crash in drag and drop when keyboard navigating
+- Various other bug fixes and improvements
+
+For the complete list of changes, see the [React Aria Components v1.14.0 release notes](https://react-aria.adobe.com/releases/v1-14-0).
+
+### Other Dependency Upgrades
+
+- `@internationalized/date`: 3.10.0 → 3.10.1
+- `@radix-ui/react-avatar`: 1.1.10 → 1.1.11
+- `tailwind-merge`: 3.3.1 → 3.4.0
+- `tailwind-variants`: 3.1.1 → 3.2.2
+
 ## Style Fixes
 
 ### Form Component Disabled State
@@ -122,6 +168,8 @@ Fixed disabled state styling for [Input](/docs/components/input) and [TextArea](
 
 - **Improved selector precision**: Enhanced CSS selector specificity for better style isolation and performance
 - **Enhanced animations**: Improved animation performance and smoothness across components
+- **Added no-highlight utility**: Added `no-highlight` utility class to prevent text selection on interactive elements for improved user experience
+- **Optimized will-change properties**: Updated `will-change` CSS properties across components for better animation performance
 - **Removed global scrollbar styling**: Removed global scrollbar styles to prevent conflicts with custom scrollbar implementations and fix modal/overlay interaction issues
 
 ## ⚠️ Breaking Changes
@@ -177,6 +225,7 @@ For more details about component composition patterns, see the [Composition guid
 
 - Fixed `isInvalid` styles when components are used on surface backgrounds
 - Fixed AlertDialog and Modal re-rendering issues after close
+- Fixed overlay close issue that prevented proper cleanup when closing overlays
 - Fixed Storybook links and navigation issues
 
 ## Links
