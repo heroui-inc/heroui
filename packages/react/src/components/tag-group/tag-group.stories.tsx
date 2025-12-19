@@ -91,12 +91,12 @@ export const Disabled: Story = {
         <Description>Some tags are disabled</Description>
       </TagGroup>
 
-      <TagGroup disabledKeys={["travel"]} selectionMode="single">
+      <TagGroup disabledKeys={["disabled-travel"]} selectionMode="single">
         <Label>Disabled Keys</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
+          <Tag id="disabled-news">News</Tag>
+          <Tag id="disabled-travel">Travel</Tag>
+          <Tag id="disabled-gaming">Gaming</Tag>
         </TagGroup.List>
         <Description>Tags disabled via disabledKeys prop</Description>
       </TagGroup>
