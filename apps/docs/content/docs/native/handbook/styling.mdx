@@ -1,0 +1,248 @@
+---
+title: Styling
+description: Style HeroUI Native components with Tailwind or StyleSheet API
+icon: brush
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI Native components provide flexible styling options: Tailwind CSS utilities, StyleSheet API, and render props for dynamic styling.
+
+## Styling Principles
+
+HeroUI Native is built with `className` as the go-to styling solution. You can use Tailwind CSS classes via the `className` prop on all components.
+
+**StyleSheet precedence:** The `style` prop (StyleSheet API) can be used and has precedence over `className` when both are provided. This allows you to override Tailwind classes when needed.
+
+**Animated styles:** Some style properties are animated using `react-native-reanimated` and, like StyleSheet styles, they have precedence over `className`. To identify which styles are animated and cannot be used via `className`:
+
+- **Hover over `className` in your IDE** - The TypeScript definitions will show which properties are available
+- **Check component documentation** - Each component page includes a link to the component's style source at the top, which contains notes about animated properties
+
+**Customizing animated styles:** If styles are occupied by animation, you can modify them via the `animation` prop on components that support it.
+
+## Basic Styling
+
+**Using className:** All HeroUI Native components accept `className` props:
+
+```tsx
+import { Button } from 'heroui-native';
+
+<Button className="bg-accent px-6 py-3 rounded-lg">
+  <Button.Label>Custom Button</Button.Label>
+</Button>
+```
+
+**Using style:** Components also accept inline styles via the `style` prop:
+
+```tsx
+import { Button } from 'heroui-native';
+
+<Button style={{ backgroundColor: '#8B5CF6', paddingHorizontal: 24 }}>
+  <Button.Label>Styled Button</Button.Label>
+</Button>
+```
+
+## Render Props
+
+Use a render function to access component state and customize content dynamically:
+
+```tsx
+import { RadioGroup, cn } from 'heroui-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1">
+    {({ isSelected, isInvalid, isDisabled }) => (
+      <>
+        <RadioGroup.Label
+          className={cn(
+            "text-foreground",
+            isSelected && "text-accent font-semibold"
+          )}
+        >
+          Option 1
+        </RadioGroup.Label>
+        <RadioGroup.Indicator
+          className={cn(
+            "border-2 rounded-full",
+            isSelected && "border-accent bg-accent"
+          )}
+        >
+          {isSelected && <CustomIcon />}
+        </RadioGroup.Indicator>
+      </>
+    )}
+  </RadioGroup.Item>
+</RadioGroup>
+```
+
+## Creating Wrapper Components
+
+Create reusable custom components using [tailwind-variants](https://tailwind-variants.org/)—a Tailwind CSS first-class variant API:
+
+```tsx
+import { Button } from 'heroui-native';
+import type { ButtonRootProps } from 'heroui-native';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const customButtonVariants = tv({
+  base: 'font-semibold rounded-lg',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500 text-white',
+      secondary: 'bg-gray-200',
+      danger: 'bg-red-500 text-white',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
+
+type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
+
+interface CustomButtonProps
+  extends Omit<ButtonRootProps, 'className' | 'variant'>,
+    CustomButtonVariants {
+  className?: string;
+}
+
+export function CustomButton({
+  intent,
+  className,
+  children,
+  ...props
+}: CustomButtonProps) {
+  return (
+    <Button
+      className={customButtonVariants({ intent, className })}
+      {...props}
+    >
+      <Button.Label>{children}</Button.Label>
+    </Button>
+  );
+}
+```
+
+## Responsive Design
+
+HeroUI Native supports Tailwind's responsive breakpoint system via [Uniwind](https://docs.uniwind.dev/breakpoints). Use breakpoint prefixes like `sm:`, `md:`, `lg:`, and `xl:` to apply styles conditionally based on screen width.
+
+**Mobile-first approach:** Start with mobile styles (no prefix), then use breakpoints to enhance for larger screens.
+
+### Responsive Typography and Spacing
+
+```tsx
+import { Button } from 'heroui-native';
+import { View, Text } from 'react-native';
+
+<View className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+  <Text className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
+    Responsive Heading
+  </Text>
+  <Button className="px-3 sm:px-4 lg:px-6">
+    <Button.Label className="text-sm sm:text-base lg:text-lg">
+      Responsive Button
+    </Button.Label>
+  </Button>
+</View>
+```
+
+### Responsive Layouts
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="flex-row flex-wrap">
+  {/* Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns */}
+  <View className="w-full sm:w-1/2 lg:w-1/3 p-2">
+    <View className="bg-accent p-4 rounded-lg">
+      <Text className="text-accent-foreground">Item 1</Text>
+    </View>
+  </View>
+</View>
+```
+
+**Default breakpoints:**
+- `sm`: 640px
+- `md`: 768px
+- `lg`: 1024px
+- `xl`: 1280px
+- `2xl`: 1536px
+
+For custom breakpoints and more details, see the [Uniwind breakpoints documentation](https://docs.uniwind.dev/breakpoints).
+
+## Utilities
+
+HeroUI Native provides utility functions to assist with styling components.
+
+### cn Utility
+
+The `cn` utility function merges Tailwind CSS classes with proper conflict resolution. It's particularly useful when combining conditional classes or merging classes from props:
+
+```tsx
+import { cn } from 'heroui-native';
+import { View } from 'react-native';
+
+function MyComponent({ className, isActive }) {
+  return (
+    <View
+      className={cn(
+        'bg-background p-4 rounded-lg',
+        'border border-divider',
+        isActive && 'bg-accent',
+        className
+      )}
+    />
+  );
+}
+```
+
+The `cn` utility is powered by `tailwind-variants` and includes:
+
+- Automatic Tailwind class merging (`twMerge: true`)
+- Custom opacity class group support
+- Proper conflict resolution (later classes override earlier ones)
+
+**Example with conflicts:**
+
+```tsx
+// 'bg-accent' overrides 'bg-background'
+cn('bg-background p-4', 'bg-accent');
+// Result: 'p-4 bg-accent'
+```
+
+### useThemeColor Hook
+
+Quick access to theme colors in hex format for use with the `style` prop:
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+import { View, Text } from 'react-native';
+
+function MyComponent() {
+  const accentColor = useThemeColor('accent');
+  const dangerColor = useThemeColor('danger');
+
+  return (
+    <View style={{ borderColor: accentColor }}>
+      <Text style={{ color: dangerColor }}>Error message</Text>
+    </View>
+  );
+}
+```
+
+**Type signature:**
+
+```tsx
+useThemeColor(themeColor: ThemeColor): string
+```
+
+Available theme colors include: `background`, `foreground`, `surface`, `accent`, `default`, `success`, `warning`, `danger`, and all their variants (hover, soft, etc.).
+
+## Next Steps
+
+- Learn about [Animation](/docs/native/handbook/animation) techniques
+- Explore [Theming](/docs/native/handbook/theming) system
+- Explore [Colors](/docs/native/handbook/colors) documentation

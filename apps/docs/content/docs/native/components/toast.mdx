@@ -1,0 +1,429 @@
+---
+title: Toast
+description: Displays temporary notification messages that appear at the top or bottom of the screen.
+links:
+  source_native: toast/toast.tsx
+  styles_native: toast/toast.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/toast-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/toast-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Toast, useToast } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Toast>
+  <Toast.Title>...</Toast.Title>
+  <Toast.Description>...</Toast.Description>
+  <Toast.Action>...</Toast.Action>
+  <Toast.Close />
+</Toast>
+```
+
+- **Toast**: Main container that displays notification messages. Handles positioning, animations, and swipe gestures.
+- **Toast.Title**: Title text of the toast notification. Inherits variant styling from parent Toast context.
+- **Toast.Description**: Descriptive text content displayed below the title.
+- **Toast.Action**: Action button within the toast. Button variant is automatically determined based on toast variant but can be overridden.
+- **Toast.Close**: Close button for dismissing the toast. Renders as an icon-only button that calls hide when pressed.
+
+## Usage
+
+### Usage Pattern 1: Simple String
+
+Show a toast with a simple string message.
+
+```tsx
+const { toast } = useToast();
+
+toast.show('This is a toast message');
+```
+
+### Usage Pattern 2: Config Object
+
+Show a toast with label, description, variant, and action button using a config object.
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  variant: 'success',
+  label: 'You have upgraded your plan',
+  description: 'You can continue using HeroUI Chat',
+  icon: <Icon name="check" />,
+  actionLabel: 'Close',
+  onActionPress: ({ hide }) => hide(),
+});
+```
+
+### Usage Pattern 3: Custom Component
+
+Show a toast with a fully custom component for complete control over styling and layout.
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  component: (props) => (
+    <Toast variant="accent" placement="top" {...props}>
+      <Toast.Title>Custom Toast</Toast.Title>
+      <Toast.Description>This is a custom toast component</Toast.Description>
+      <Toast.Close />
+    </Toast>
+  ),
+});
+```
+
+**Note**: Toast items are memoized for performance. If you need to pass external state (like loading state) to a custom toast component, it will not update automatically. Use shared state techniques instead, such as React Context, state management libraries, or refs to ensure state updates propagate to the toast component.
+
+### Disabling All Animations
+
+Disable all animations including children by using `"disable-all"`. This cascades down to all child components (like Button in Toast.Action).
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  variant: 'success',
+  label: 'Operation completed',
+  description: 'All animations are disabled',
+  animation: 'disable-all',
+});
+```
+
+Or with a custom component:
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  component: (props) => (
+    <Toast variant="accent" animation="disable-all" {...props}>
+      <Toast.Title>No animations</Toast.Title>
+      <Toast.Description>
+        This toast has all animations disabled
+      </Toast.Description>
+      <Toast.Action>Action</Toast.Action>
+    </Toast>
+  ),
+});
+```
+
+## Example
+
+```tsx
+import { Button, Toast, useToast, useThemeColor } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function ToastExample() {
+  const { toast } = useToast();
+  const themeColorForeground = useThemeColor('foreground');
+
+  return (
+    <View className="gap-4 p-4">
+      <Button
+        onPress={() =>
+          toast.show({
+            variant: 'success',
+            label: 'You have upgraded your plan',
+            description: 'You can continue using HeroUI Chat',
+            actionLabel: 'Close',
+            onActionPress: ({ hide }) => hide(),
+          })
+        }
+      >
+        Show Success Toast
+      </Button>
+
+      <Button
+        onPress={() =>
+          toast.show({
+            component: (props) => (
+              <Toast variant="accent" {...props}>
+                <Toast.Title>Custom Toast</Toast.Title>
+                <Toast.Description>
+                  This uses a custom component
+                </Toast.Description>
+                <Toast.Action onPress={() => props.hide()}>Undo</Toast.Action>
+                <Toast.Close className="absolute top-0 right-0" />
+              </Toast>
+            ),
+          })
+        }
+      >
+        Show Custom Toast
+      </Button>
+    </View>
+  );
+}
+```
+
+## Global Configuration
+
+Configure toast behavior globally using `HeroUINativeProvider` config prop. Global configs serve as defaults for all toasts unless overridden locally.
+
+> **Note**: For complete provider configuration options, see the [Provider documentation](/docs/native/handbook/provider#toast-configuration).
+
+### Insets
+
+Insets control the distance of toast sides from screen edges. Insets are added to safe area insets. To set all toasts to have a side distance of 20px from screen edges, configure insets:
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      insets: {
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+      },
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
+### Content Wrapper with KeyboardAvoidingView
+
+Wrap toast content with KeyboardAvoidingView to ensure toasts adjust when the keyboard appears:
+
+```tsx
+import {
+  KeyboardAvoidingView,
+  KeyboardProvider,
+} from 'react-native-keyboard-controller';
+import { HeroUINativeProvider } from 'heroui-native';
+import { useCallback } from 'react';
+
+function AppContent() {
+  const contentWrapper = useCallback(
+    (children: React.ReactNode) => (
+      <KeyboardAvoidingView
+        pointerEvents="box-none"
+        behavior="padding"
+        keyboardVerticalOffset={12}
+        className="flex-1"
+      >
+        {children}
+      </KeyboardAvoidingView>
+    ),
+    []
+  );
+
+  return (
+    <KeyboardProvider>
+      <HeroUINativeProvider
+        config={{
+          toast: {
+            contentWrapper,
+          },
+        }}
+      >
+        {children}
+      </HeroUINativeProvider>
+    </KeyboardProvider>
+  );
+}
+```
+
+### Default Props
+
+Set global defaults for variant, placement, animation, and swipe behavior:
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      defaultProps: {
+        variant: 'accent',
+        placement: 'bottom',
+        isSwipeable: false,
+      },
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
+## API Reference
+
+### Toast
+
+| prop           | type                                                          | default     | description                                                               |
+| -------------- | ------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `variant`      | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Visual variant of the toast                                               |
+| `placement`    | `'top' \| 'bottom'`                                           | `'top'`     | Placement of the toast on screen                                          |
+| `isSwipeable`  | `boolean`                                                     | `true`      | Whether the toast can be swiped to dismiss and dragged with rubber effect |
+| `animation`    | `ToastRootAnimation`                                          | -           | Animation configuration                                                   |
+| `className`    | `string`                                                      | -           | Additional CSS class for the toast container                              |
+| `...ViewProps` | `ViewProps`                                                   | -           | All standard React Native View props are supported                        |
+
+#### ToastRootAnimation
+
+Animation configuration for Toast component. Can be:
+
+- `false` or `"disabled"`: Disable only root animations
+- `"disable-all"`: Disable all animations including children
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                      | type                    | default                                                                                                                   | description                                                                      |
+| ------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `opacity.value`           | `[number, number]`      | `[1, 0]`                                                                                                                  | Opacity interpolation values for fade effect as toasts move beyond visible stack |
+| `opacity.timingConfig`    | `WithTimingConfig`      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for opacity transitions                           |
+| `translateY.value`        | `[number, number]`      | `[0, 10]`                                                                                                                 | Translate Y interpolation values for peek effect of stacked toasts               |
+| `translateY.timingConfig` | `WithTimingConfig`      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for translateY transitions                        |
+| `scale.value`             | `[number, number]`      | `[1, 0.97]`                                                                                                               | Scale interpolation values for depth effect of stacked toasts                    |
+| `scale.timingConfig`      | `WithTimingConfig`      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for scale transitions                             |
+| `entering.top`            | `EntryOrExitLayoutType` | `FadeInUp`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: -100 }] })`<br/>`.mass(3)`  | Custom entering animation for top placement                                      |
+| `entering.bottom`         | `EntryOrExitLayoutType` | `FadeInDown`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: 100 }] })`<br/>`.mass(3)` | Custom entering animation for bottom placement                                   |
+| `exiting.top`             | `EntryOrExitLayoutType` | Keyframe animation with<br/>`translateY: -100, scale: 0.97, opacity: 0.5`                                                 | Custom exiting animation for top placement                                       |
+| `exiting.bottom`          | `EntryOrExitLayoutType` | Keyframe animation with<br/>`translateY: 100, scale: 0.97, opacity: 0.5`                                                  | Custom exiting animation for bottom placement                                    |
+
+### Toast.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Content to be rendered as title                    |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported |
+
+### Toast.Description
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Content to be rendered as description              |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported |
+
+### Toast.Action
+
+Toast.Action extends all props from [Button](button) component. Button variant is automatically determined based on toast variant but can be overridden.
+
+| prop        | type                   | default | description                                                                  |
+| ----------- | ---------------------- | ------- | ---------------------------------------------------------------------------- |
+| `children`  | `React.ReactNode`      | -       | Content to be rendered as action button label                                |
+| `variant`   | `ButtonVariant`        | -       | Button variant. If not provided, automatically determined from toast variant |
+| `size`      | `'sm' \| 'md' \| 'lg'` | `'sm'`  | Size of the action button                                                    |
+| `className` | `string`               | -       | Additional CSS classes                                                       |
+
+For inherited props including `onPress`, `isDisabled`, and all Button props, see [Button API Reference](button#api-reference).
+
+### Toast.Close
+
+Toast.Close extends all props from [Button](button) component.
+
+| prop        | type                                | default | description                                    |
+| ----------- | ----------------------------------- | ------- | ---------------------------------------------- |
+| `children`  | `React.ReactNode`                   | -       | Custom close icon. Defaults to CloseIcon       |
+| `iconProps` | `{ size?: number; color?: string }` | -       | Props for the default close icon               |
+| `size`      | `'sm' \| 'md' \| 'lg'`              | `'sm'`  | Size of the close button                       |
+| `className` | `string`                            | -       | Additional CSS classes                         |
+| `onPress`   | `(event: any) => void`              | -       | Custom press handler. Defaults to hiding toast |
+
+For inherited props including `isDisabled` and all Button props, see [Button API Reference](button#api-reference).
+
+### ToastProviderProps
+
+Props for configuring toast behavior globally via `HeroUINativeProvider` config prop.
+
+| prop               | type                                                | default | description                                                      |
+| ------------------ | --------------------------------------------------- | ------- | ---------------------------------------------------------------- |
+| `defaultProps`     | `ToastGlobalConfig`                                 | -       | Global toast configuration used as defaults for all toasts       |
+| `insets`           | `ToastInsets`                                       | -       | Insets for spacing from screen edges (added to safe area insets) |
+| `maxVisibleToasts` | `number`                                            | `3`     | Maximum number of visible toasts before opacity starts fading    |
+| `contentWrapper`   | `(children: React.ReactNode) => React.ReactElement` | -       | Custom wrapper function to wrap toast content                    |
+| `children`         | `React.ReactNode`                                   | -       | Children to render                                               |
+
+#### ToastGlobalConfig
+
+Global toast configuration used as defaults for all toasts unless overridden locally.
+
+| prop          | type                                                          | description                                                               |
+| ------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `variant`     | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | Visual variant of the toast                                               |
+| `placement`   | `'top' \| 'bottom'`                                           | Placement of the toast on screen                                          |
+| `isSwipeable` | `boolean`                                                     | Whether the toast can be swiped to dismiss and dragged with rubber effect |
+| `animation`   | `ToastRootAnimation`                                          | Animation configuration for toast                                         |
+
+#### ToastInsets
+
+Insets for spacing from screen edges. Values are added to safe area insets.
+
+| prop     | type     | default | description                                                                                               |
+| -------- | -------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| `top`    | `number` | -       | Inset from the top edge in pixels (added to safe area inset). Platform-specific: iOS = 0, Android = 12    |
+| `bottom` | `number` | -       | Inset from the bottom edge in pixels (added to safe area inset). Platform-specific: iOS = 6, Android = 12 |
+| `left`   | `number` | -       | Inset from the left edge in pixels (added to safe area inset). Default: 12                                |
+| `right`  | `number` | -       | Inset from the right edge in pixels (added to safe area inset). Default: 12                               |
+
+## Hooks
+
+### useToast
+
+Hook to access toast functionality. Must be used within a `ToastProvider` (provided by `HeroUINativeProvider`).
+
+| return value     | type           | description                              |
+| ---------------- | -------------- | ---------------------------------------- |
+| `toast`          | `ToastManager` | Toast manager with show and hide methods |
+| `isToastVisible` | `boolean`      | Whether any toast is currently visible   |
+
+#### ToastManager
+
+| method | type                                              | description                                                                                                                          |
+| ------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `show` | `(options: string \| ToastShowOptions) => string` | Show a toast. Returns the ID of the shown toast. Supports three usage patterns: simple string, config object, or custom component    |
+| `hide` | `(ids?: string \| string[] \| 'all') => void`     | Hide one or more toasts. No argument hides the last toast, 'all' hides all toasts, single ID or array of IDs hides specific toast(s) |
+
+#### ToastShowOptions
+
+Options for showing a toast. Can be either a config object with default styling or a custom component.
+
+**When using config object (without component):**
+
+| prop            | type                                                                                                                              | default | description                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `variant`       | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'`                                                                     | -       | Visual variant of the toast                                                         |
+| `placement`     | `'top' \| 'bottom'`                                                                                                               | -       | Placement of the toast on screen                                                    |
+| `isSwipeable`   | `boolean`                                                                                                                         | -       | Whether the toast can be swiped to dismiss                                          |
+| `animation`     | `ToastRootAnimation \| false \| "disabled" \| "disable-all"`                                                                      | -       | Animation configuration for toast                                                   |
+| `duration`      | `number \| 'persistent'`                                                                                                          | `4000`  | Duration in milliseconds before auto-hide. Set to 'persistent' to prevent auto-hide |
+| `id`            | `string`                                                                                                                          | -       | Optional ID for the toast. If not provided, one will be generated                   |
+| `label`         | `string`                                                                                                                          | -       | Label text for the toast                                                            |
+| `description`   | `string`                                                                                                                          | -       | Description text for the toast                                                      |
+| `actionLabel`   | `string`                                                                                                                          | -       | Action button label text                                                            |
+| `onActionPress` | `(helpers: { show: (options: string \| ToastShowOptions) => string; hide: (ids?: string \| string[] \| 'all') => void }) => void` | -       | Callback function called when the action button is pressed                          |
+| `icon`          | `React.ReactNode`                                                                                                                 | -       | Icon element to display in the toast                                                |
+| `onShow`        | `() => void`                                                                                                                      | -       | Callback function called when the toast is shown                                    |
+| `onHide`        | `() => void`                                                                                                                      | -       | Callback function called when the toast is hidden                                   |
+
+**When using custom component:**
+
+| prop        | type                                                 | default | description                                                                         |
+| ----------- | ---------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `id`        | `string`                                             | -       | Optional ID for the toast. If not provided, one will be generated                   |
+| `component` | `(props: ToastComponentProps) => React.ReactElement` | -       | A function that receives toast props and returns a React element                    |
+| `duration`  | `number \| 'persistent'`                             | `4000`  | Duration in milliseconds before auto-hide. Set to 'persistent' to prevent auto-hide |
+| `onShow`    | `() => void`                                         | -       | Callback function called when the toast is shown                                    |
+| `onHide`    | `() => void`                                         | -       | Callback function called when the toast is hidden                                   |
+
+## Special Notes
+
+### Styling Notes
+
+#### Border as Padding
+
+Toast uses `border-[16px]` class which serves as padding. This is intentional because when visible toasts have different heights, the toast adapts to the last visible toast height. In cases where a toast originally has one height and gets smaller when a new toast comes to stack, content might be visible behind the last toast without proper padding. The border ensures consistent spacing regardless of toast height changes.
+
+For padding, use `border` classes. For actual borders, use `outline` classes.

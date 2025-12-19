@@ -1,21 +1,21 @@
 ---
 title: MCP Server
-description: Access HeroUI v3 documentation directly in your AI assistant
+description: Access HeroUI Native documentation directly in your AI assistant
 ---
 
-The HeroUI MCP Server gives AI assistants direct access to HeroUI v3 component documentation, making it easier to build with HeroUI in AI-powered development environments.
+The HeroUI MCP Server gives AI assistants direct access to HeroUI Native component documentation, making it easier to build with HeroUI in AI-powered development environments.
 
 <DocsImage
-  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/hero-react-mcp-light-new-2.jpg"
-  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/hero-react-mcp-dark-new.jpg"
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/hero-native-mcp-light-new.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/hero-native-mcp-dark-new.jpg"
   alt="HeroUI v3 MCP Server"
 />
 
 
-The MCP server currently supports **@heroui/react v3** only and [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio). Published at `@heroui/react-mcp` on npm. View the source code on [GitHub](https://github.com/heroui-inc/heroui-mcp).
+The MCP server currently supports **heroui-native** and [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio). Published at `@heroui/native-mcp` on npm. View the source code on [GitHub](https://github.com/heroui-inc/heroui-mcp).
 
 <Callout>
-  As we add more components to HeroUI v3, they'll be available in the MCP server too.
+  As we add more components to HeroUI Native, they'll be available in the MCP server too.
 </Callout>
 
 ## Quick Setup
@@ -39,9 +39,9 @@ Or manually add to **Cursor Settings** → **Tools** → **MCP Servers**:
 ```json title=".cursor/mcp.json"
 {
   "mcpServers": {
-    "heroui-react": {
+    "heroui-native": {
       "command": "npx",
-      "args": ["-y", "@heroui/react-mcp@latest"]
+      "args": ["-y", "@heroui/native-mcp@latest"]
     }
   }
 }
@@ -52,7 +52,7 @@ Alternatively, add the following to your `~/.cursor/mcp.json` file. To learn mor
 **Claude Code:** Run this command in your terminal:
 
 ```bash
-claude mcp add heroui-react -- npx -y @heroui/react-mcp@latest
+claude mcp add heroui-native -- npx -y @heroui/native-mcp@latest
 ```
 
 Or manually add to your project's `.mcp.json` file:
@@ -60,9 +60,9 @@ Or manually add to your project's `.mcp.json` file:
 ```json title=".mcp.json"
 {
   "mcpServers": {
-    "heroui-react": {
+    "heroui-native": {
       "command": "npx",
-      "args": ["-y", "@heroui/react-mcp@latest"]
+      "args": ["-y", "@heroui/native-mcp@latest"]
     }
   }
 }
@@ -77,9 +77,9 @@ See the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-c
 ```json title=".windsurf/mcp.json"
 {
   "mcpServers": {
-    "heroui-react": {
+    "heroui-native": {
       "command": "npx",
-      "args": ["-y", "@heroui/react-mcp@latest"]
+      "args": ["-y", "@heroui/native-mcp@latest"]
     }
   }
 }
@@ -94,15 +94,15 @@ See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/
 ```json title=".vscode/mcp.json"
 {
   "mcpServers": {
-    "heroui-react": {
+    "heroui-native": {
       "command": "npx",
-      "args": ["-y", "@heroui/react-mcp@latest"]
+      "args": ["-y", "@heroui/native-mcp@latest"]
     }
   }
 }
 ```
 
-After adding the configuration, open `.vscode/mcp.json` and click **Start** next to the heroui-react server.
+After adding the configuration, open `.vscode/mcp.json` and click **Start** next to the heroui-native server.
 
 See the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) for more details.
 
@@ -110,20 +110,20 @@ See the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/c
 
 Once configured, ask your AI assistant questions like:
 
-- "Help me install HeroUI v3 in my Next.js/Vite/Astro app"
-- "Show me all HeroUI components"
+- "Help me install HeroUI Native in my Expo app"
+- "Show me all HeroUI Native components"
 - "What props does the Button component have?"
 - "Give me an example of using the Card component"
 - "Get the source code for the Button component"
-- "Show me the CSS styles for Card"
+- "Show me the default styles for Card"
 - "What are the theme variables for dark mode?"
 
 ### Automatic Updates
 
-The MCP server can help you upgrade to the latest HeroUI version:
+The MCP server can help you upgrade to the latest HeroUI Native version:
 
 ```bash
-"Hey Cursor, update HeroUI to the latest version"
+"Hey Cursor, update HeroUI Native to the latest version"
 ```
 
 Your AI assistant will automatically:
@@ -139,15 +139,13 @@ The MCP server provides these tools to AI assistants:
 
 | Tool | Description |
 |------|-------------|
-| `installation` | Get complete installation instructions for your specific framework (Next.js, Vite, etc.) and package manager |
-| `list_components` | List all available HeroUI v3 components |
+| `installation` | Get complete installation instructions for your specific framework (Expo or Bare React Native) and package manager |
+| `list_components` | List all available HeroUI Native components |
 | `get_component_info` | Get detailed documentation, anatomy, props, and examples for specific components |
-| `get_component_props` | Get detailed props information for HeroUI components |
-| `get_component_examples` | Get usage examples for HeroUI components |
-| `get_component_source_code` | Access the React/TypeScript source code (.tsx files) for components |
-| `get_component_source_styles` | View the CSS styles (.css files) for components |
+| `get_component_props` | Get detailed props information for HeroUI Native components |
+| `get_component_examples` | Get usage examples for HeroUI Native components |
 | `get_theme_info` | Access theme variables for colors, typography, spacing with light/dark mode support |
-| `get_docs` | Browse the full HeroUI v3 documentation including guides and principles |
+| `get_docs` | Browse the full HeroUI Native documentation including guides and principles |
  
 
 ## Troubleshooting
@@ -158,6 +156,6 @@ The MCP server provides these tools to AI assistants:
 
 ## Links
 
-- [npm Package](https://www.npmjs.com/package/@heroui/react-mcp)
+- [npm Package](https://www.npmjs.com/package/@heroui/native-mcp)
 - [GitHub Repository](https://github.com/heroui-inc/heroui-mcp)
 - [Contributing Guide](https://github.com/heroui-inc/heroui-mcp/blob/main/CONTRIBUTING.md)
