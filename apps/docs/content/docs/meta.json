@@ -14,7 +14,7 @@
     "native/handbook/theming",
     "native/handbook/styling",
     "native/handbook/animation",
-    "handbook/composition",
+    "native/handbook/composition",
     "---UI for Agents---",
     "ui-for-agents/llms-txt",
     "ui-for-agents/mcp-server",
