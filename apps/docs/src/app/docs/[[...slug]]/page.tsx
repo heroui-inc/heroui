@@ -5,11 +5,16 @@ import {readFile} from "node:fs/promises";
 import {join} from "node:path";
 
 import {createRelativeLink} from "fumadocs-ui/mdx";
-import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
 
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
+import {
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+} from "@/components/fumadocs/layouts/notebook/page";
 import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";

@@ -1,21 +1,14 @@
 import type {ReactNode} from "react";
 
-import {DocsLayout} from "fumadocs-ui/layouts/notebook";
-import {headers} from "next/headers";
-
 import {baseOptions} from "@/app/layout.config";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
+import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
 import {GitHubLinkSmall} from "@/components/github-link";
 import {HeroUILogo} from "@/components/heroui-logo";
 import {VersionSelector} from "@/components/version-selector";
 import {source} from "@/lib/source";
 
-export default async function Layout({children}: {children: ReactNode}) {
-  const headersList = await headers();
-  const headerUrl = headersList.get("x-url") || "";
-
-  const currentFramework = headerUrl.includes("/docs/react") ? "react" : "native";
-
+export default function Layout({children}: {children: ReactNode}) {
   return (
     <DocsLayout
       tabMode="navbar"
@@ -24,18 +17,12 @@ export default async function Layout({children}: {children: ReactNode}) {
         banner: () => <div className="hidden" />,
         collapsible: false,
         defaultOpenLevel: 0,
+        headerTabsProps: {
+          children: <FrameworksTabs />,
+          filterByPathname: true,
+        },
         tabs: {
           transform: (tab) => {
-            const isNative = tab.url.includes("/docs/native");
-
-            if (currentFramework === "react" && isNative) {
-              return null;
-            }
-
-            if (currentFramework === "native" && !isNative) {
-              return null;
-            }
-
             return {
               ...tab,
               title: (
@@ -71,7 +58,6 @@ export default async function Layout({children}: {children: ReactNode}) {
         ),
       }}
     >
-      <FrameworksTabs />
       {children}
     </DocsLayout>
   );
