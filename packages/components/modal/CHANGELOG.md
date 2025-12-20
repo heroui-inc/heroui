@@ -1,5 +1,18 @@
 # @heroui/modal
 
+## 2.2.26
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/use-aria-modal-overlay@2.2.20
+  - @heroui/use-aria-button@2.2.21
+  - @heroui/use-disclosure@2.2.18
+  - @heroui/use-draggable@2.1.19
+  - @heroui/framer-utils@2.1.25
+
 ## 2.2.25
 
 ### Patch Changes
