@@ -109,7 +109,7 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
       <Popover>
         <Button
           aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
-          className="absolute right-3 top-3 z-50"
+          className="absolute top-3 right-3 z-50"
           size="sm"
           variant="tertiary"
         >
@@ -118,22 +118,22 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
         </Button>
         <Popover.Content className="max-w-xs rounded-2xl" offset={6} placement="bottom end">
           <Popover.Dialog className="flex flex-col items-center gap-4 p-6">
-            <span className="text-foreground text-center text-xs">
+            <span className="text-center text-xs text-foreground">
               {isMobile
                 ? "Tap the link below to preview the HeroUI Native components on your mobile device."
                 : "Scan this QR code with your camera app to preview the HeroUI Native components."}
             </span>
             {isMobile ? (
               <Link
-                className="border-foreground/20 flex w-full items-center gap-3 rounded-xl border p-2 px-4"
+                className="flex w-full items-center gap-3 rounded-xl border border-foreground/20 p-2 px-4"
                 href={LINKS.NATIVE_PREVIEW}
                 rel="noopener noreferrer"
                 target="_blank"
                 underline="none"
               >
                 <div className="flex flex-1 flex-col gap-1">
-                  <span className="text-foreground text-sm font-semibold">Open Preview App</span>
-                  <span className="text-muted/75 text-xs">link.heroui.com/native-demo</span>
+                  <span className="text-sm font-semibold text-foreground">Open Preview App</span>
+                  <span className="text-xs text-muted/75">link.heroui.com/native-demo</span>
                 </div>
                 <Link.Icon />
               </Link>
@@ -145,7 +145,7 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
                 width={200}
               />
             )}
-            <span className="text-foreground mb-2 text-center text-xs">
+            <span className="mb-2 text-center text-xs text-foreground">
               Expo must be installed on your device.
             </span>
             <div className="flex w-full flex-col items-center gap-2">

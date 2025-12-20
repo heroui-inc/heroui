@@ -1,0 +1,529 @@
+---
+title: Theming
+description: Customize HeroUI Native's design system with CSS variables and global styles
+icon: palette
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI Native uses CSS variables for theming. Customize everything from colors to component styles using standard CSS.
+
+## How It Works
+
+HeroUI Native's theming system is built on top of [Tailwind CSS v4](https://tailwindcss.com/docs/theme)'s theme via [Uniwind](https://uniwind.dev/). When you import `heroui-native/styles`, it uses Tailwind's built-in color palettes, maps them to semantic variables, automatically switches between light and dark themes, and uses CSS layers and the `@theme` directive for organization.
+
+**Naming pattern:**
+- Colors without a suffix are backgrounds (e.g., `--accent`)
+- Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
+
+## Quick Start
+
+**Apply colors in your components:**
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-background flex-1">
+  <Text className="text-foreground">Your app content</Text>
+</View>
+```
+
+**Switch themes:**
+
+HeroUI Native automatically supports dark mode through [Uniwind](https://docs.uniwind.dev/theming/basics). The theme switches between light and dark variants based on system preferences or manual selection:
+
+```tsx
+import { Uniwind, useUniwind } from 'uniwind';
+import { Button } from 'heroui-native';
+
+function ThemeToggle() {
+  const { theme } = useUniwind();
+
+  return (
+    <Button
+      onPress={() => Uniwind.setTheme(theme === 'light' ? 'dark' : 'light')}
+    >
+      <Button.Label>Toggle {theme === 'light' ? 'Dark' : 'Light'} Mode</Button.Label>
+    </Button>
+  );
+}
+```
+
+**Override colors:**
+
+```css
+/* global.css */
+@layer theme {
+  @variant light {
+    /* Override any color variable */
+    --accent: oklch(0.65 0.25 270); /* Custom indigo accent */
+    --success: oklch(0.65 0.15 155);
+  }
+
+  @variant dark {
+    --accent: oklch(0.65 0.25 270);
+    --success: oklch(0.75 0.12 155);
+  }
+}
+```
+
+> **Note**: See [Colors](/docs/native/getting-started/handbook/colors) for the complete color palette and visual reference.
+
+**Create your own theme:**
+
+Create multiple themes using Uniwind's variant system. For complete custom theme documentation, see the [Uniwind Custom Themes Guide](https://docs.uniwind.dev/theming/custom-themes).
+
+<Callout type="warning">
+  **Important:** All themes must define the same variables. See the [Default Theme](/docs/native/getting-started/handbook/colors#default-theme) section for a complete list of all required variables.
+</Callout>
+
+```css
+/* global.css */
+@layer theme {
+  :root {
+    @variant ocean-light {
+      /* Base Colors */
+      --background: oklch(0.95 0.02 230);
+      --foreground: oklch(0.25 0.04 230);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: oklch(0.98 0.01 230);
+      --surface-foreground: oklch(0.3 0.045 230);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+      --overlay: oklch(0.998 0.003 230);
+      --overlay-foreground: oklch(0.3 0.045 230);
+
+      --muted: oklch(0.55 0.035 230);
+
+      --default: oklch(0.94 0.018 230);
+      --default-foreground: oklch(0.4 0.05 230);
+
+      /* Accent */
+      --accent: oklch(0.6 0.2 230);
+      --accent-foreground: oklch(0.98 0.005 230);
+
+      /* Form Field Defaults - Colors */
+      --field-background: oklch(0.98 0.01 230);
+      --field-foreground: oklch(0.25 0.04 230);
+      --field-placeholder: var(--muted);
+      --field-border: transparent;
+
+      /* Status Colors */
+      --success: oklch(0.72 0.14 165);
+      --success-foreground: oklch(0.25 0.08 165);
+
+      --warning: oklch(0.78 0.12 85);
+      --warning-foreground: oklch(0.3 0.08 85);
+
+      --danger: oklch(0.68 0.18 15);
+      --danger-foreground: oklch(0.98 0.005 15);
+
+      /* Component Colors */
+      --segment: oklch(0.98 0.01 230);
+      --segment-foreground: oklch(0.25 0.04 230);
+
+      /* Misc Colors */
+      --border: oklch(0 0 0 / 0%);
+      --divider: oklch(0.91 0.015 230);
+      --link: oklch(0.62 0.17 230);
+    }
+
+    @variant ocean-dark {
+      /* Base Colors */
+      --background: oklch(0.15 0.04 230);
+      --foreground: oklch(0.94 0.01 230);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: oklch(0.2 0.048 230);
+      --surface-foreground: oklch(0.9 0.015 230);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+      --overlay: oklch(0.23 0.045 230);
+      --overlay-foreground: oklch(0.9 0.015 230);
+
+      --muted: oklch(0.5 0.04 230);
+
+      --default: oklch(0.25 0.05 230);
+      --default-foreground: oklch(0.88 0.018 230);
+
+      /* Accent */
+      --accent: oklch(0.72 0.21 230);
+      --accent-foreground: oklch(0.15 0.04 230);
+
+      /* Form Field Defaults - Colors */
+      --field-background: var(--default);
+      --field-foreground: var(--foreground);
+      --field-placeholder: var(--muted);
+      --field-border: transparent;
+
+      /* Status Colors */
+      --success: oklch(0.68 0.16 165);
+      --success-foreground: oklch(0.95 0.008 165);
+
+      --warning: oklch(0.75 0.14 90);
+      --warning-foreground: oklch(0.2 0.04 90);
+
+      --danger: oklch(0.65 0.2 20);
+      --danger-foreground: oklch(0.95 0.008 20);
+
+      /* Component Colors */
+      --segment: oklch(0.22 0.046 230);
+      --segment-foreground: oklch(0.9 0.015 230);
+
+      /* Misc Colors */
+      --border: oklch(0 0 0 / 0%);
+      --divider: oklch(0.28 0.045 230);
+      --link: oklch(0.75 0.18 230);
+    }
+  }
+}
+```
+
+**Important:** When adding custom themes, you must register them in your Metro config:
+
+```js
+// metro.config.js
+const { withUniwindConfig } = require('uniwind/metro');
+const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro-config');
+
+const config = {
+  // ... your existing config
+};
+
+module.exports = withUniwindConfig(wrapWithReanimatedMetroConfig(config), {
+  cssEntryFile: './global.css',
+  dtsFile: './src/uniwind.d.ts',
+  extraThemes: [
+    'ocean-light',
+    'ocean-dark',
+  ],
+});
+```
+
+Apply themes in your app:
+
+```tsx
+import { Uniwind } from 'uniwind';
+import { Button } from 'heroui-native';
+
+function App() {
+  return (
+    <Button onPress={() => Uniwind.setTheme('ocean-light')}>
+      <Button.Label>Ocean Theme</Button.Label>
+    </Button>
+  );
+}
+```
+
+## Adding Custom Colors
+
+Add your own semantic colors to the theme:
+
+```css
+@layer theme {
+  @variant light {
+    --info: oklch(0.6 0.15 210);
+    --info-foreground: oklch(0.98 0 0);
+  }
+
+  @variant dark {
+    --info: oklch(0.7 0.12 210);
+    --info-foreground: oklch(0.15 0 0);
+  }
+}
+
+/* Make the color available to Tailwind */
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+Now use it in your components:
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-info p-4 rounded-lg">
+  <Text className="text-info-foreground">Info message</Text>
+</View>
+```
+
+## Custom Fonts
+
+To use a custom font family in your app, you need to load the fonts and then override the font CSS variables.
+
+### 1. Load Fonts in Your App
+
+First, load your custom fonts (using Expo's `useFonts` hook for example):
+
+```tsx
+import { useFonts } from 'expo-font';
+import { HeroUINativeProvider } from 'heroui-native';
+import { YourFont_400Regular, YourFont_500Medium, YourFont_600SemiBold } from '@expo-google-fonts/your-font';
+
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    YourFont_400Regular,
+    YourFont_500Medium,
+    YourFont_600SemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return null; // Or return a loading screen
+  }
+
+  return (
+    <HeroUINativeProvider>
+      {/* Your app content */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+### 2. Configure Font CSS Variables
+
+After loading the fonts, override the font CSS variables in your `global.css` file:
+
+```css
+@theme {
+  --font-normal: 'YourFont-Regular';
+  --font-medium: 'YourFont-Medium';
+  --font-semibold: 'YourFont-SemiBold';
+}
+```
+
+**Note:** The font names in CSS variables should match the PostScript names of your loaded fonts. Check your font package documentation or use the font names exactly as they appear in your `useFonts` hook.
+
+All HeroUI Native components automatically use these font variables, ensuring consistent typography throughout your app.
+
+## Variables Reference
+
+HeroUI defines three types of variables:
+1. **Base Variables** — Non-changing values like `--white`, `--black`
+2. **Theme Variables** — Colors that change between light/dark themes
+3. **Calculated Variables** — Automatically generated hover (pressed) states and size variants
+
+For a complete reference, see: [Colors Documentation](/docs/native/getting-started/handbook/colors), [Default Theme Variables](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css), [Shared Theme Utilities](https://github.com/heroui-inc/heroui-native/blob/beta/src/styles/theme.css)
+
+**Calculated variables (Tailwind):**
+
+We use Tailwind's `@theme` directive to automatically create calculated variables for hover (pressed) states and radius variants. These are defined in [theme.css](https://github.com/heroui-inc/heroui-native/blob/beta/src/styles/theme.css):
+<CollapsibleCode lang="css" code={`  @theme inline static {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-surface: var(--surface);
+    --color-surface-foreground: var(--surface-foreground);
+
+    --color-overlay: var(--overlay);
+    --color-overlay-foreground: var(--overlay-foreground);
+
+    --color-muted: var(--muted);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-segment: var(--segment);
+    --color-segment-foreground: var(--segment-foreground);
+
+    --color-border: var(--border);
+    --color-divider: var(--divider);
+    --color-focus: var(--focus);
+    --color-link: var(--link);
+
+    --color-default: var(--default);
+    --color-default-foreground: var(--default-foreground);
+
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+
+    --color-danger: var(--danger);
+    --color-danger-foreground: var(--danger-foreground);
+
+    /* Form Field Tokens */
+    --color-field: var(--field-background, var(--color-default));
+    --color-field-hover: color-mix(
+      in oklab,
+      var(--field-background, var(--color-default)) 90%,
+      var(--field-foreground, var(--color-default-foreground)) 10%
+    );
+    --color-field-foreground: var(--field-foreground, var(--color-foreground));
+    --color-field-placeholder: var(--field-placeholder, var(--color-muted));
+    --color-field-border: var(--field-border, var(--color-border));
+    --radius-field: var(--field-radius, var(--radius-xl));
+    --border-width-field: var(--field-border-width, var(--border-width));
+
+    /* Calculated Variables */
+
+    /* Colors */
+
+    /* --- background shades --- */
+    --color-background-secondary: color-mix(
+      in oklab,
+      var(--color-background) 96%,
+      var(--color-foreground) 4%
+    );
+    --color-background-tertiary: color-mix(
+      in oklab,
+      var(--color-background) 92%,
+      var(--color-foreground) 8%
+    );
+    --color-background-quaternary: color-mix(
+      in oklab,
+      var(--color-background) 86%,
+      var(--color-foreground) 14%
+    );
+    --color-background-inverse: var(--color-foreground);
+
+    /* ------------------------- */
+    --color-default-hover: color-mix(
+      in oklab,
+      var(--color-default) 90%,
+      var(--color-default-foreground) 2%
+    );
+    --color-accent-hover: color-mix(
+      in oklab,
+      var(--color-accent) 90%,
+      var(--color-accent-foreground) 10%
+    );
+    --color-success-hover: color-mix(
+      in oklab,
+      var(--color-success) 90%,
+      var(--color-success-foreground) 10%
+    );
+    --color-warning-hover: color-mix(
+      in oklab,
+      var(--color-warning) 90%,
+      var(--color-warning-foreground) 10%
+    );
+    --color-danger-hover: color-mix(
+      in oklab,
+      var(--color-danger) 90%,
+      var(--color-danger-foreground) 10%
+    );
+
+    /* Form Field Colors */
+    --color-field-hover: color-mix(
+      in oklab,
+      var(--color-field) 90%,
+      var(--color-field-foreground) 2%
+    );
+    --color-field-focus: var(--color-field);
+    --color-field-border-hover: color-mix(
+      in oklab,
+      var(--color-field-border) 88%,
+      var(--color-field-foreground) 10%
+    );
+    --color-field-border-focus: color-mix(
+      in oklab,
+      var(--color-field-border) 74%,
+      var(--color-field-foreground) 22%
+    );
+
+    /* Soft Colors */
+    --color-accent-soft: color-mix(
+      in oklab,
+      var(--color-accent) 15%,
+      transparent
+    );
+    --color-accent-soft-foreground: var(--color-accent);
+    --color-accent-soft-hover: color-mix(
+      in oklab,
+      var(--color-accent) 20%,
+      transparent
+    );
+
+    --color-danger-soft: color-mix(
+      in oklab,
+      var(--color-danger) 15%,
+      transparent
+    );
+    --color-danger-soft-foreground: var(--color-danger);
+    --color-danger-soft-hover: color-mix(
+      in oklab,
+      var(--color-danger) 20%,
+      transparent
+    );
+
+    --color-warning-soft: color-mix(
+      in oklab,
+      var(--color-warning) 15%,
+      transparent
+    );
+    --color-warning-soft-foreground: var(--color-warning);
+    --color-warning-soft-hover: color-mix(
+      in oklab,
+      var(--color-warning) 20%,
+      transparent
+    );
+
+    --color-success-soft: color-mix(
+      in oklab,
+      var(--color-success) 15%,
+      transparent
+    );
+    --color-success-soft-foreground: var(--color-success);
+    --color-success-soft-hover: color-mix(
+      in oklab,
+      var(--color-success) 20%,
+      transparent
+    );
+
+    /* Surface Levels - progressively darker/lighter shades for layering */
+    --color-surface-secondary: color-mix(
+      in oklab,
+      var(--surface) 94%,
+      var(--surface-foreground) 6%
+    );
+    --color-surface-tertiary: color-mix(
+      in oklab,
+      var(--surface) 92%,
+      var(--surface-foreground) 8%
+    );
+    --color-surface-quaternary: color-mix(
+      in oklab,
+      var(--surface) 86%,
+      var(--default-foreground) 14%
+    );
+
+    /* On Surface Colors */
+    --color-on-surface: color-mix(
+      in oklab,
+      var(--color-surface) 93%,
+      var(--color-surface-foreground) 7%
+    );
+    --color-on-surface-foreground: var(--color-surface-foreground);
+    --color-on-surface-hover: color-mix(
+      in oklab,
+      var(--color-surface) 91%,
+      var(--color-surface-foreground) 9%
+    );
+    --color-on-surface-focus: var(--color-on-surface);
+
+    /* Radius and default sizes - defaults can change by just changing the --radius */
+    --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */
+    --radius-sm: calc(var(--radius) * 0.5); /* 0.25rem (4px) */
+    --radius-md: calc(var(--radius) * 0.75); /* 0.375rem (6px) */
+    --radius-lg: calc(var(--radius) * 1); /* 0.5rem (8px) */
+    --radius-xl: calc(var(--radius) * 1.5); /* 0.75rem (12px) */
+    --radius-2xl: calc(var(--radius) * 2); /* 1rem (16px) */
+    --radius-3xl: calc(var(--radius) * 3); /* 1.5rem (24px) */
+    --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
+  }
+`}
+/>
+
+Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
+
+## Resources
+
+- [Colors Documentation](/docs/native/getting-started/handbook/colors)
+- [Styling Guide](/docs/native/getting-started/handbook/styling)
+- [Tailwind CSS v4 Theming](https://tailwindcss.com/docs/theme)
+- [OKLCH Color Tool](https://oklch.com)

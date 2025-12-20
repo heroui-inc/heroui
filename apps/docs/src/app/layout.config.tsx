@@ -28,12 +28,17 @@ export const homeLayoutLinks = [
       {
         icon: <Iconify icon="book" />,
         text: "Getting Started",
-        url: "/docs",
+        url: "/docs/react/getting-started",
       },
       {
         icon: <Iconify icon="circles-4-diamond" />,
         text: "Components",
-        url: "/docs/components-list",
+        url: "/docs/react/components",
+      },
+      {
+        icon: <Iconify icon="rocket" />,
+        text: "Releases",
+        url: "/docs/react/releases",
       },
     ],
     on: "menu" as const,
@@ -69,13 +74,13 @@ export const homeLayoutLinks = [
     active: "none" as const,
     on: "nav" as const,
     text: "Docs",
-    url: "/docs/introduction",
+    url: "/docs/react/getting-started",
   },
   {
     active: "none" as const,
     on: "nav" as const,
     text: "Components",
-    url: "/docs/components-list",
+    url: "/docs/react/components",
   },
   {
     active: "nested-url" as const,

@@ -1,0 +1,22 @@
+{
+  "title": "Getting Started",
+  "description": "Get started with HeroUI Native",
+  "root": true,
+  "icon": "book-open",
+  "pages": [
+    "---Overview---",
+    "index",
+    "(overview)/quick-start",
+    "(overview)/design-principles",
+    "---Handbook---",
+    "(handbook)/colors",
+    "(handbook)/theming",
+    "(handbook)/styling",
+    "(handbook)/animation",
+    "(handbook)/composition",
+    "(handbook)/provider",
+    "---UI for Agents---",
+    "(ui-for-agents)/llms-txt",
+    "(ui-for-agents)/mcp-server"
+  ]
+}

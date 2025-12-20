@@ -1,0 +1,285 @@
+---
+title: v3.0.0-beta.3
+description: Seven new components, fullWidth and hideSeparator support, style fixes, and breaking changes for AlertDialog/Modal backdrop variants and asChild prop removal.
+github:
+  pull: 5923
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">December 19, 2025</span>
+</div>
+
+This release introduces seven new components ([ButtonGroup](/docs/components/button-group), [DateField](/docs/components/date-field), [ErrorMessage](/docs/components/error-message), [ScrollShadow](/docs/components/scroll-shadow), [SearchField](/docs/components/search-field), [TagGroup](/docs/components/tag-group), [TimeField](/docs/components/time-field)), adds `fullWidth` support for form components and `hideSeparator` to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion), includes style fixes, and ⚠️ **breaking changes** removing the `asChild` prop and updating [AlertDialog](/docs/components/alert-dialog) & [Modal](/docs/components/modal) backdrop variants.
+
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-dark@2x.jpg"
+  alt="HeroUI v3 Beta 3"
+  href="/docs/changelog/v3-0-0-beta-3"
+/>
+
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### New Components
+
+This release introduces **7 new** essential components:
+
+- **[ButtonGroup](#button-group)**: Groups related buttons with consistent styling and spacing. ([Documentation](/docs/components/button-group))
+- **[DateField](#date-field)**: Date input field with labels, descriptions, and validation built on React Aria DateField. ([Documentation](/docs/components/date-field))
+- **[ErrorMessage](#error-message)**: Low-level error message component for displaying errors in non-form components. ([Documentation](/docs/components/error-message))
+- **[ScrollShadow](#scroll-shadow)**: Apply visual shadows to indicate scrollable content overflow with automatic detection of scroll position. ([Documentation](/docs/components/scroll-shadow))
+- **[SearchField](#search-field)**: Search input field with built-in search icon and clear button. ([Documentation](/docs/components/search-field))
+- **[TagGroup](#tag-group)**: Focusable list of tags with support for keyboard navigation, selection, and removal. ([Documentation](/docs/components/tag-group))
+- **[TimeField](#time-field)**: Time input field with labels, descriptions, and validation built on React Aria TimeField. ([Documentation](/docs/components/time-field))
+
+### ButtonGroup
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### DateField
+
+<ComponentPreview
+  name="date-field-basic"
+/>
+
+### ErrorMessage
+
+<ComponentPreview
+  name="error-message-basic"
+/>
+
+### SearchField
+
+<ComponentPreview
+  name="search-field-basic"
+/>
+
+### ScrollShadow
+
+<ComponentPreview
+  name="scroll-shadow-orientation"
+/>
+
+### TagGroup
+
+<ComponentPreview
+  name="tag-group-basic"
+/>
+
+### TimeField
+
+<ComponentPreview
+  name="time-field-basic"
+/>
+
+
+### Full-Width Support
+
+Added `fullWidth` support to form and input components, allowing them to span the full width of their container. This is particularly useful for creating consistent form layouts and responsive designs.
+
+**Supported components:**
+- [ButtonGroup](/docs/components/button-group)
+- [Button](/docs/components/button)
+- [ComboBox](/docs/components/combobox)
+- [DateField](/docs/components/date-field)
+- [DateInputGroup](/docs/components/date-input-group)
+- [InputGroup](/docs/components/input-group)
+- [Input](/docs/components/input)
+- [NumberField](/docs/components/number-field)
+- [SearchField](/docs/components/search-field)
+- [Select](/docs/components/select)
+- [TextField](/docs/components/text-field)
+- [TextArea](/docs/components/textarea)
+- [TimeField](/docs/components/time-field)
+
+## Component Improvements
+
+### Separator Control Enhancement
+
+Added `hideSeparator` prop to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion) components, allowing you to hide separator lines between items for a cleaner, more minimal appearance.
+
+**Tabs:**
+```tsx
+<Tabs hideSeparator>
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="overview">Overview<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.Tab id="analytics">Analytics<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+</Tabs>
+```
+
+**ButtonGroup:**
+```tsx
+<ButtonGroup hideSeparator>
+  <Button>First</Button>
+  <Button>Second</Button>
+  <Button>Third</Button>
+</ButtonGroup>
+```
+
+**Accordion:**
+```tsx
+<Accordion hideSeparator>
+  <Accordion.Item>
+    <Accordion.Heading>
+      <Accordion.Trigger>Item 1</Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>Content</Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Documentation Icons Integration
+
+Integrated [@gravity-ui/icons](https://github.com/gravity-ui/icons) into documentation components for consistent icon rendering with improved SSR support and better performance.
+
+## Dependencies
+
+### React Aria Components v1.14.0
+
+Upgraded [react-aria-components](https://react-aria.adobe.com/releases/v1-14-0) to v1.14.0. This release includes:
+
+**Enhancements:**
+- SearchField: Added `isReadOnly` and `isRequired` to render props
+- Tooltip: Added `shouldCloseOnPress` prop
+- Tabs: Support for animated transitions between tab panels
+- Miscellaneous: Support for `setState` callback in `useControlledState`
+
+**Fixes:**
+- ComboBox: Fixed VoiceOver announcement not respecting `aria-label` of ListBoxItem
+- Date and Time: Enhanced error handling for absolute date and date time strings
+- NumberField: Prevented incrementing/decrementing when scrolling on mobile
+- Overlays: Fixed overlay positioning and flipping when boundary container is set
+- Table: Fixed crash in drag and drop when keyboard navigating
+- Various other bug fixes and improvements
+
+For the complete list of changes, see the [React Aria Components v1.14.0 release notes](https://react-aria.adobe.com/releases/v1-14-0).
+
+### Other Dependency Upgrades
+
+- `@internationalized/date`: 3.10.0 → 3.10.1
+- `@radix-ui/react-avatar`: 1.1.10 → 1.1.11
+- `tailwind-merge`: 3.3.1 → 3.4.0
+- `tailwind-variants`: 3.1.1 → 3.2.2
+
+## Style Fixes
+
+### Form Component Disabled State
+
+Fixed disabled state styling for [Input](/docs/components/input) and [TextArea](/docs/components/textarea) components.
+
+### Style Optimizations
+
+- **Improved selector precision**: Enhanced CSS selector specificity for better style isolation and performance
+- **Enhanced animations**: Improved animation performance and smoothness across components
+- **Added no-highlight utility**: Added `no-highlight` utility class to prevent text selection on interactive elements for improved user experience
+- **Optimized will-change properties**: Updated `will-change` CSS properties across components for better animation performance
+- **Removed global scrollbar styling**: Removed global scrollbar styles to prevent conflicts with custom scrollbar implementations and fix modal/overlay interaction issues
+
+## ⚠️ Breaking Changes
+
+### AlertDialog & Modal Backdrop Variant
+
+Renamed `backdropVariant`/`variant` prop value from `"solid"` to `"opaque"` for better semantic clarity. The term "opaque" more accurately describes the backdrop's visual appearance.
+
+**Migration:**
+
+Update all instances of `backdropVariant="solid"` to `backdropVariant="opaque"` for AlertDialog, and `variant="solid"` to `variant="opaque"` for Modal:
+
+```tsx
+// Before
+<AlertDialog.Backdrop backdropVariant="solid">
+  <AlertDialog.Container>
+    {/* content */}
+  </AlertDialog.Container>
+</AlertDialog.Backdrop>
+
+<Modal.Backdrop variant="solid">
+  <Modal.Container>
+    {/* content */}
+  </Modal.Container>
+</Modal.Backdrop>
+
+// After
+<AlertDialog.Backdrop backdropVariant="opaque">
+  <AlertDialog.Container>
+    {/* content */}
+  </AlertDialog.Container>
+</AlertDialog.Backdrop>
+
+<Modal.Backdrop variant="opaque">
+  <Modal.Container>
+    {/* content */}
+  </Modal.Container>
+</Modal.Backdrop>
+```
+
+**Available backdrop variants:**
+- `"opaque"` - Dark backdrop that completely obscures the background (formerly `"solid"`)
+- `"blur"` - Blurred backdrop that softly obscures the background
+- `"transparent"` - Transparent backdrop that keeps the background visible
+
+### Removed `asChild` Prop
+
+Removed the `asChild` prop pattern from components for cleaner APIs, improved type safety, and simplified usage.
+
+For more details about component composition patterns, see the [Composition guide](/docs/handbook/composition).
+
+## Bug Fixes
+
+- Fixed `isInvalid` styles when components are used on surface backgrounds
+- Fixed AlertDialog and Modal re-rendering issues after close
+- Fixed overlay close issue that prevented proper cleanup when closing overlays
+- Fixed Storybook links and navigation issues
+
+## Links
+
+- [Component Documentation](https://v3.heroui.com/docs/components)
+- [Design System - Figma Kit V3 (updated)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #5923](https://github.com/heroui-inc/heroui/pull/5923)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

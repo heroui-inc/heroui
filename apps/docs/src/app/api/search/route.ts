@@ -4,26 +4,24 @@ import {createFromSource} from "fumadocs-core/search/server";
 
 import {source} from "@/lib/source";
 
-// Create a filtered source that excludes changelog pages
+// Create a filtered source that excludes releases pages
 const filteredSource = {
   ...source,
   getPages() {
     return source.getPages().filter((page) => {
-      // Filter out changelog pages by checking slugs, URL, and path
+      // Filter out releases pages by checking slugs, URL, and path
       const firstSlug = page.slugs[0];
       const url = page.url;
       const path = page.path;
 
-      return (
-        firstSlug !== "changelog" && !url.includes("/changelog") && !path.includes("changelog")
-      );
+      return firstSlug !== "releases" && !url.includes("/releases") && !path.includes("releases");
     });
   },
 } as typeof source;
 
 const {GET: originalGET} = createFromSource(filteredSource);
 
-// Wrap the GET handler to filter out changelog results from the response
+// Wrap the GET handler to filter out releases results from the response
 export async function GET(request: NextRequest) {
   const response = await originalGET(request);
 
@@ -38,24 +36,24 @@ export async function GET(request: NextRequest) {
   try {
     const data = await response.json();
 
-    // Helper function to check if an item is a changelog entry
-    const isChangelog = (item: any): boolean => {
+    // Helper function to check if an item is a releases entry
+    const isReleases = (item: any): boolean => {
       const url = item?.url || item?.href || "";
       const id = item?.id || "";
       const title = item?.title || "";
       const path = item?.path || "";
 
       return (
-        url.includes("/changelog") ||
-        id.includes("/changelog") ||
-        path.includes("changelog") ||
-        title.toLowerCase().includes("changelog")
+        url.includes("/releases") ||
+        id.includes("/releases") ||
+        path.includes("releases") ||
+        title.toLowerCase().includes("releases")
       );
     };
 
-    // Filter out changelog results from the search response
+    // Filter out releases results from the search response
     if (Array.isArray(data)) {
-      const filtered = data.filter((item: any) => !isChangelog(item));
+      const filtered = data.filter((item: any) => !isReleases(item));
 
       return Response.json(filtered, {
         headers: response.headers,
@@ -70,13 +68,13 @@ export async function GET(request: NextRequest) {
 
       for (const [key, value] of Object.entries(data)) {
         if (Array.isArray(value)) {
-          filtered[key] = (value as any[]).filter((item: any) => !isChangelog(item));
+          filtered[key] = (value as any[]).filter((item: any) => !isReleases(item));
         } else if (value && typeof value === "object" && "results" in value) {
           // Handle Orama-style search results
           filtered[key] = {
             ...value,
             results: Array.isArray((value as any).results)
-              ? (value as any).results.filter((item: any) => !isChangelog(item))
+              ? (value as any).results.filter((item: any) => !isReleases(item))
               : (value as any).results,
           };
         } else {
