@@ -1,5 +1,16 @@
 # @heroui/input
 
+## 2.4.30
+
+### Patch Changes
+
+- [#5990](https://github.com/heroui-inc/heroui/pull/5990) [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4) Thanks [@wingkwong](https://github.com/wingkwong)! - hide password reveal button (#5984)
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies []:
+  - @heroui/form@2.1.29
+
 ## 2.4.29
 
 ### Patch Changes

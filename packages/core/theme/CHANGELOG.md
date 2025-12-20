@@ -1,5 +1,13 @@
 # @heroui/theme
 
+## 2.4.25
+
+### Patch Changes
+
+- [#6011](https://github.com/heroui-inc/heroui/pull/6011) [`086f6a1`](https://github.com/heroui-inc/heroui/commit/086f6a1c4474e12d9797282528fc98c0267f933f) Thanks [@wingkwong](https://github.com/wingkwong)! - fix default transition-duration (#5992, #6005)
+
+- [#5990](https://github.com/heroui-inc/heroui/pull/5990) [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4) Thanks [@wingkwong](https://github.com/wingkwong)! - hide password reveal button (#5984)
+
 ## 2.4.24
 
 ### Patch Changes

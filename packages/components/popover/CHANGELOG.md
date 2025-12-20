@@ -1,5 +1,18 @@
 # @heroui/popover
 
+## 2.3.29
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/use-aria-overlay@2.0.5
+  - @heroui/use-aria-button@2.2.21
+  - @heroui/aria-utils@2.2.26
+  - @heroui/button@2.2.29
+  - @heroui/framer-utils@2.1.25
+
 ## 2.3.28
 
 ### Patch Changes

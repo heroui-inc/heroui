@@ -1,5 +1,21 @@
 # @heroui/select
 
+## 2.4.30
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/use-aria-multiselect@2.4.20
+  - @heroui/use-aria-button@2.2.21
+  - @heroui/aria-utils@2.2.26
+  - @heroui/listbox@2.3.28
+  - @heroui/popover@2.3.29
+  - @heroui/form@2.1.29
+  - @heroui/scroll-shadow@2.3.19
+  - @heroui/spinner@2.2.26
+
 ## 2.4.29
 
 ### Patch Changes

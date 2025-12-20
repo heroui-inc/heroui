@@ -1,5 +1,20 @@
 # @heroui/autocomplete
 
+## 2.3.31
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4), [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/input@2.4.30
+  - @heroui/aria-utils@2.2.26
+  - @heroui/listbox@2.3.28
+  - @heroui/popover@2.3.29
+  - @heroui/button@2.2.29
+  - @heroui/form@2.1.29
+  - @heroui/scroll-shadow@2.3.19
+
 ## 2.3.30
 
 ### Patch Changes

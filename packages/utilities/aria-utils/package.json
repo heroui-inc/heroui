@@ -1,6 +1,6 @@
 {
   "name": "@heroui/aria-utils",
-  "version": "2.2.25",
+  "version": "2.2.26",
   "description": "A package for managing @react-aria HeroUI utils.",
   "keywords": [
     "aria-utils"
