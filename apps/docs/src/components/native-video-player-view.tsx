@@ -67,6 +67,11 @@ interface NativeVideoPlayerViewProps {
    */
   controls?: boolean;
   /**
+   * Whether to show the QR code preview button
+   * @default true
+   */
+  showQRCode?: boolean;
+  /**
    * Additional CSS classes
    */
   className?: string;
@@ -83,6 +88,7 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
   height = 300,
   playMode,
   poster,
+  showQRCode = true,
   srcDark,
   srcLight,
   width,
@@ -106,65 +112,73 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
         src={videoSrc}
         width={width}
       />
-      <Popover>
-        <Button
-          aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
-          className="absolute top-3 right-3 z-50"
-          size="sm"
-          variant="tertiary"
-        >
-          {!isMobile && <Iconify icon="gravity-ui:qr-code" width={16} />}
-          {isMobile ? "Tap to preview" : "Scan to preview"}
-        </Button>
-        <Popover.Content className="max-w-xs rounded-2xl" offset={6} placement="bottom end">
-          <Popover.Dialog className="flex flex-col items-center gap-4 p-6">
-            <span className="text-center text-xs text-foreground">
-              {isMobile
-                ? "Tap the link below to preview the HeroUI Native components on your mobile device."
-                : "Scan this QR code with your camera app to preview the HeroUI Native components."}
-            </span>
-            {isMobile ? (
-              <Link
-                className="flex w-full items-center gap-3 rounded-xl border border-foreground/20 p-2 px-4"
-                href={LINKS.NATIVE_PREVIEW}
-                rel="noopener noreferrer"
-                target="_blank"
-                underline="none"
-              >
-                <div className="flex flex-1 flex-col gap-1">
-                  <span className="text-sm font-semibold text-foreground">Open Preview App</span>
-                  <span className="text-xs text-muted/75">link.heroui.com/native-demo</span>
-                </div>
-                <Link.Icon />
-              </Link>
-            ) : (
-              <Image
-                alt="QR code for native component preview"
-                height={200}
-                src={LINKS.QR_CODE_IMAGE}
-                width={200}
-              />
-            )}
-            <span className="mb-2 text-center text-xs text-foreground">
-              Expo must be installed on your device.
-            </span>
-            <div className="flex w-full flex-col items-center gap-2">
-              <Button asChild size="sm">
-                <a href={LINKS.APP_STORE} rel="noopener noreferrer" target="_blank">
+      {!!showQRCode && (
+        <Popover>
+          <Button
+            aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
+            className="absolute top-3 right-3 z-50"
+            size="sm"
+            variant="tertiary"
+          >
+            {!isMobile && <Iconify icon="gravity-ui:qr-code" width={16} />}
+            {isMobile ? "Tap to preview" : "Scan to preview"}
+          </Button>
+          <Popover.Content className="max-w-xs rounded-2xl" offset={6} placement="bottom end">
+            <Popover.Dialog className="flex flex-col items-center gap-4 p-6">
+              <span className="text-center text-xs text-foreground">
+                {isMobile
+                  ? "Tap the link below to preview the HeroUI Native components on your mobile device."
+                  : "Scan this QR code with your camera app to preview the HeroUI Native components."}
+              </span>
+              {isMobile ? (
+                <Link
+                  className="flex w-full items-center gap-3 rounded-xl border border-foreground/20 p-2 px-4"
+                  href={LINKS.NATIVE_PREVIEW}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  underline="none"
+                >
+                  <div className="flex flex-1 flex-col gap-1">
+                    <span className="text-sm font-semibold text-foreground">Open Preview App</span>
+                    <span className="text-xs text-muted/75">link.heroui.com/native-demo</span>
+                  </div>
+                  <Link.Icon />
+                </Link>
+              ) : (
+                <Image
+                  alt="QR code for native component preview"
+                  height={200}
+                  src={LINKS.QR_CODE_IMAGE}
+                  width={200}
+                />
+              )}
+              <span className="mb-2 text-center text-xs text-foreground">
+                Expo must be installed on your device.
+              </span>
+              <div className="flex w-full flex-col items-center gap-2">
+                <a
+                  className="button button--primary button--sm"
+                  href={LINKS.APP_STORE}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <Iconify icon="tabler:brand-apple-filled" width={20} />
                   Download on App Store
                 </a>
-              </Button>
-              <Button asChild size="sm" variant="tertiary">
-                <a href={LINKS.PLAY_STORE} rel="noopener noreferrer" target="_blank">
+                <a
+                  className="button button--tertiary button--sm"
+                  href={LINKS.PLAY_STORE}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <Iconify icon="simple-icons:googleplay" width={20} />
                   Download on Play Store
                 </a>
-              </Button>
-            </div>
-          </Popover.Dialog>
-        </Popover.Content>
-      </Popover>
+              </div>
+            </Popover.Dialog>
+          </Popover.Content>
+        </Popover>
+      )}
     </div>
   );
 };

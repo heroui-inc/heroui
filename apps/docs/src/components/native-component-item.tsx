@@ -1,50 +1,15 @@
 "use client";
 
-import type {ComponentInfo} from "../components-registry";
 import type {StatusChipStatus} from "./status-chip";
 import type {UrlObject} from "url";
 
 import {Link} from "@heroui/react";
-import Image from "next/image";
 import NextLink from "next/link";
 
 import {cn} from "@/utils/cn";
-import {CDN_URL} from "@/utils/constants";
 
+import {NativeVideoPlayerView} from "./native-video-player-view";
 import StatusChip from "./status-chip";
-
-function ComponentImagePair({
-  alt,
-  darkSrc,
-  height = 594,
-  lightSrc,
-  width = 874,
-}: {
-  alt: string;
-  darkSrc: string;
-  height?: number;
-  lightSrc: string;
-  width?: number;
-}) {
-  return (
-    <>
-      <Image
-        alt={alt}
-        className="absolute inset-0 block h-full w-full object-cover dark:hidden"
-        height={height}
-        src={lightSrc}
-        width={width}
-      />
-      <Image
-        alt={alt}
-        className="absolute inset-0 hidden h-full w-full object-cover dark:block"
-        height={height}
-        src={darkSrc}
-        width={width}
-      />
-    </>
-  );
-}
 
 function ComponentTitleContent({status, title}: {status?: StatusChipStatus; title: string}) {
   return (
@@ -85,27 +50,36 @@ function ConditionalLink({
   );
 }
 
-interface ComponentItemProps extends React.ComponentProps<"div"> {
-  component: ComponentInfo;
+interface NativeComponentInfo {
+  name: string;
+  title: string;
+  description: string;
+  href: string;
+  category?: string;
+}
+
+interface NativeComponentItemProps extends React.ComponentProps<"div"> {
+  component: NativeComponentInfo;
+  srcLight: string;
+  srcDark: string;
   className?: string;
   status?: StatusChipStatus;
   openInNewTab?: boolean;
 }
 
-export function ComponentItem({
+export function NativeComponentItem({
   className,
   component,
   openInNewTab = false,
+  srcDark,
+  srcLight,
   status,
-}: ComponentItemProps) {
+}: NativeComponentItemProps) {
   const {href, title} = component;
-  const imageName = title.toLowerCase();
-  const lightSrc = `${CDN_URL}/docs/related-components/light-${imageName}.png`;
-  const darkSrc = `${CDN_URL}/docs/related-components/dark-${imageName}.png`;
 
   return (
     <div className={cn("flex flex-col gap-[9px]", className)}>
-      {/* Title first on mobile, image first on desktop */}
+      {/* Title first on mobile, video first on desktop */}
       <div className="order-1 sm:order-2">
         {openInNewTab ? (
           <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
@@ -118,9 +92,17 @@ export function ComponentItem({
           </ConditionalLink>
         )}
       </div>
-      <div className="relative order-2 h-[198px] overflow-hidden rounded-xl border border-separator sm:order-1">
-        <ConditionalLink className="h-full w-full" href={href} openInNewTab={openInNewTab}>
-          <ComponentImagePair alt={title} darkSrc={darkSrc} lightSrc={lightSrc} />
+      <div className="relative order-2 overflow-hidden rounded-xl sm:order-1">
+        <ConditionalLink className="block" href={href} openInNewTab={openInNewTab}>
+          <NativeVideoPlayerView
+            autoPlay
+            className="w-full"
+            height={300}
+            playMode="auto"
+            showQRCode={false}
+            srcDark={srcDark}
+            srcLight={srcLight}
+          />
         </ConditionalLink>
       </div>
     </div>

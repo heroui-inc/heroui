@@ -1,5 +1,6 @@
 "use client";
 
+import type {Framework} from "@/hooks/use-current-framework";
 import type {Key} from "@heroui/react";
 
 import {Globe, Smartphone} from "@gravity-ui/icons";
@@ -7,73 +8,29 @@ import {Tabs} from "@heroui/react";
 import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useRef, useState} from "react";
 
+import {
+  getEquivalentPath as getEquivalentPathHelper,
+  useCurrentFramework,
+} from "@/hooks/use-current-framework";
+
 export function FrameworksTabs() {
   const pathname = usePathname();
   const router = useRouter();
   const isNavigatingRef = useRef(false);
   const previousPathnameRef = useRef(pathname);
+  const currentFramework = useCurrentFramework();
 
-  const [selectedKey, setSelectedKey] = useState<"web" | "native">(() => {
+  const [selectedKey, setSelectedKey] = useState<Framework>(() => {
     // Initialize based on current pathname
-    return pathname.startsWith("/docs/native") ? "native" : "web";
+    return currentFramework;
   });
-
-  // Valid top-level routes for each framework (from meta.json)
-  const validRoutes = {
-    native: ["getting-started", "components"],
-    web: ["getting-started", "components", "releases"],
-  };
-
-  // Default routes for each framework
-  const defaultRoutes = {
-    native: "/docs/native/getting-started",
-    web: "/docs/react/getting-started",
-  };
-
-  // Determine current framework based on pathname
-  const getCurrentFramework = useCallback((): "web" | "native" => {
-    if (pathname.startsWith("/docs/native")) {
-      return "native";
-    }
-
-    return "web";
-  }, [pathname]);
 
   // Map current path to equivalent path in other framework
   const getEquivalentPath = useCallback(
-    (targetFramework: "web" | "native"): string => {
-      const currentFramework = getCurrentFramework();
-
-      // If already on target framework, return current path
-      if (currentFramework === targetFramework) {
-        return pathname;
-      }
-
-      // Extract path segments after /docs/react or /docs/native
-      const pathSegments = pathname.split("/").filter(Boolean);
-      const frameworkIndex = pathSegments.findIndex((seg) => seg === "react" || seg === "native");
-
-      if (frameworkIndex === -1) {
-        // Fallback to default pages
-        return defaultRoutes[targetFramework];
-      }
-
-      // Get the first route segment after the framework (e.g., "releases", "components", "getting-started")
-      const firstRouteSegment = pathSegments[frameworkIndex + 1];
-
-      // Check if this route exists in the target framework
-      if (firstRouteSegment && !validRoutes[targetFramework].includes(firstRouteSegment)) {
-        // Route doesn't exist in target framework, fallback to default
-        return defaultRoutes[targetFramework];
-      }
-
-      // Replace framework segment
-      pathSegments[frameworkIndex] = targetFramework === "web" ? "react" : "native";
-      const newPath = `/${pathSegments.join("/")}`;
-
-      return newPath;
+    (targetFramework: Framework): string => {
+      return getEquivalentPathHelper(pathname, targetFramework);
     },
-    [pathname, getCurrentFramework],
+    [pathname],
   );
 
   const handleTabChange = useCallback(
@@ -85,7 +42,7 @@ export function FrameworksTabs() {
         return;
       }
 
-      const targetFramework = keyString as "web" | "native";
+      const targetFramework = keyString as Framework;
 
       // Update local state first to trigger animation
       setSelectedKey(targetFramework);
@@ -111,8 +68,6 @@ export function FrameworksTabs() {
         isNavigatingRef.current = false;
       }
 
-      const currentFramework = getCurrentFramework();
-
       if (currentFramework !== selectedKey) {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedKey(currentFramework);
@@ -120,7 +75,7 @@ export function FrameworksTabs() {
 
       previousPathnameRef.current = pathname;
     }
-  }, [pathname, getCurrentFramework, selectedKey]);
+  }, [pathname, currentFramework, selectedKey]);
 
   return (
     <div className="ml-auto">

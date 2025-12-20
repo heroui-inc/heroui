@@ -200,6 +200,7 @@
 
   & > div {
     width: 100% !important;
+    max-width: var(--fd-sidebar-width);
   }
 
   & > :last-child {
@@ -207,7 +208,7 @@
   }
 
   [data-radix-scroll-area-viewport] {
-    @apply pt-2;
+    @apply pt-2 pl-0;
 
     p {
       @apply font-medium;

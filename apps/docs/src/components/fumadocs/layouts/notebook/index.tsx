@@ -46,6 +46,8 @@ export interface DocsLayoutProps extends BaseLayoutProps {
 
   nav?: BaseLayoutProps["nav"] & {
     mode?: "top" | "auto";
+    titleSuffix?: ReactNode;
+    titleSuffixGap?: string;
   };
 
   sidebar?: SidebarOptions;
@@ -156,12 +158,24 @@ export function DocsLayout(props: DocsLayoutProps) {
           <Header>
             {navMode === "auto" && (
               <div className="flex justify-between">
-                <Link
-                  className="inline-flex items-center gap-2.5 font-medium"
-                  href={nav.url ?? "/"}
-                >
-                  {nav.title}
-                </Link>
+                {nav.titleSuffix ? (
+                  <div className={cn("flex items-center", nav.titleSuffixGap ?? "gap-4")}>
+                    <Link
+                      className="inline-flex items-center gap-2.5 font-medium"
+                      href={nav.url ?? "/"}
+                    >
+                      {nav.title}
+                    </Link>
+                    {nav.titleSuffix}
+                  </div>
+                ) : (
+                  <Link
+                    className="inline-flex items-center gap-2.5 font-medium"
+                    href={nav.url ?? "/"}
+                  >
+                    {nav.title}
+                  </Link>
+                )}
                 {!!collapsible && (
                   <SidebarCollapseTrigger
                     className={cn(
@@ -326,15 +340,30 @@ function DocsNavbar({
               <SidebarIcon />
             </SidebarCollapseTrigger>
           )}
-          <Link
-            href={nav.url ?? "/"}
-            className={cn(
-              "inline-flex items-center gap-2.5 font-semibold",
-              navMode === "auto" && "md:hidden",
-            )}
-          >
-            {nav.title}
-          </Link>
+          {nav.titleSuffix ? (
+            <div className={cn("flex items-center", nav.titleSuffixGap ?? "gap-4")}>
+              <Link
+                href={nav.url ?? "/"}
+                className={cn(
+                  "inline-flex items-center gap-2.5 font-semibold",
+                  navMode === "auto" && "md:hidden",
+                )}
+              >
+                {nav.title}
+              </Link>
+              {nav.titleSuffix}
+            </div>
+          ) : (
+            <Link
+              href={nav.url ?? "/"}
+              className={cn(
+                "inline-flex items-center gap-2.5 font-semibold",
+                navMode === "auto" && "md:hidden",
+              )}
+            >
+              {nav.title}
+            </Link>
+          )}
         </div>
         {searchToggle.enabled !== false &&
           (searchToggle.components?.lg ? (

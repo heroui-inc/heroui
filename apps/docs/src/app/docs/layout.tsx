@@ -50,12 +50,9 @@ export default function Layout({children}: {children: ReactNode}) {
           </div>
         ),
         mode: "top",
-        title: (
-          <div className="flex items-center gap-4">
-            <HeroUILogo />
-            <VersionSelector className="mt-1 hidden lg:flex" />
-          </div>
-        ),
+        title: <HeroUILogo />,
+        titleSuffix: <VersionSelector className="mt-1 hidden lg:flex" />,
+        titleSuffixGap: "gap-4",
       }}
     >
       {children}

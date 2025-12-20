@@ -4,6 +4,8 @@
   "root": true,
   "icon": "circles-4-diamond",
   "pages": [
+    "---Overview---",
+    "index",
     "---Buttons---",
     "(buttons)/button",
     "---Forms---",
