@@ -263,7 +263,7 @@ export function PageFooter({items, ...props}: FooterProps) {
     <div
       {...props}
       className={cn(
-        "@container grid gap-4",
+        "@container my-8 grid gap-4",
         previous && next ? "grid-cols-2" : "grid-cols-1",
         props.className,
       )}
@@ -282,7 +282,7 @@ function FooterItem({index, item}: {item: Item; index: 0 | 1}) {
     <Link
       href={item.url}
       className={cn(
-        "hover:bg-fd-accent/80 hover:text-fd-accent-foreground flex flex-col gap-2 rounded-lg border p-4 text-sm transition-colors @max-lg:col-span-full",
+        "hover:text-fd-accent-foreground flex flex-col gap-2 rounded-2xl p-4 text-sm transition-none hover:bg-surface-secondary @max-lg:col-span-full",
         index === 1 && "text-end",
       )}
     >

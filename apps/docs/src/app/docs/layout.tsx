@@ -1,8 +1,11 @@
 import type {ReactNode} from "react";
 
+import {Separator} from "@heroui/react";
+
 import {baseOptions} from "@/app/layout.config";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
 import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
+import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
 import {GitHubLinkSmall} from "@/components/github-link";
 import {HeroUILogo} from "@/components/heroui-logo";
 import {VersionSelector} from "@/components/version-selector";
@@ -14,9 +17,22 @@ export default function Layout({children}: {children: ReactNode}) {
       tabMode="navbar"
       tree={source.pageTree}
       sidebar={{
-        banner: () => <div className="hidden" />,
+        banner: () => (
+          <div className="flex flex-col items-start justify-center gap-4 px-4 pt-4 sm:hidden">
+            <div className="flex w-full items-center justify-between gap-4 pl-1">
+              <HeroUILogo />
+              <ThemeToggle mode="light-dark-system" />
+            </div>
+            <Separator />
+          </div>
+        ),
         collapsible: false,
         defaultOpenLevel: 0,
+        footer: () => (
+          <div className="px-4 pb-4 sm:hidden">
+            <FrameworksTabs />
+          </div>
+        ),
         headerTabsProps: {
           children: <FrameworksTabs />,
           filterByPathname: true,

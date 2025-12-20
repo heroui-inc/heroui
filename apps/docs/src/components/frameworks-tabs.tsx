@@ -82,12 +82,12 @@ export function FrameworksTabs() {
       <Tabs selectedKey={selectedKey} onSelectionChange={handleTabChange}>
         <Tabs.ListContainer className="pb-1.5">
           <Tabs.List aria-label="Documentation framework">
-            <Tabs.Tab className="h-6 data-[selected=true]:[&>svg]:text-sky-400" id="web">
+            <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-sky-400" id="web">
               <Globe className="mr-1 size-4" />
               Web
               <Tabs.Indicator />
             </Tabs.Tab>
-            <Tabs.Tab className="h-6 data-[selected=true]:[&>svg]:text-indigo-500" id="native">
+            <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500" id="native">
               <Smartphone className="mr-1 size-4" />
               Native
               <Tabs.Indicator />

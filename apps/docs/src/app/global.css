@@ -192,10 +192,10 @@
 
 /* Sidebar */
 #nd-sidebar {
-  @apply pt-4 transition-none;
+  @apply items-start pt-4 pl-3 transition-none;
 
   @media (min-width: 600px) {
-    --fd-sidebar-width: 240px;
+    --fd-sidebar-width: 220px;
   }
 
   & > div {
@@ -208,7 +208,7 @@
   }
 
   [data-radix-scroll-area-viewport] {
-    @apply pt-2 pl-0;
+    @apply px-1 pt-2;
 
     p {
       @apply font-medium;
@@ -271,6 +271,14 @@
   opacity: 1;
 }
 
+#nd-sidebar-mobile {
+  [data-radix-scroll-area-viewport] {
+    p {
+      @apply font-medium;
+    }
+  }
+}
+
 /* ============================================================================
    FUMADOCS UI - LAYOUT COMPONENTS
    ============================================================================ */
@@ -279,11 +287,14 @@
   position: relative;
 
   @media (min-width: 48rem) {
-    --fd-sidebar-width: 250px;
+    --fd-sidebar-width: 220px;
   }
 }
 
 #nd-notebook-layout {
+  @media (min-width: 48rem) {
+    --fd-sidebar-width: 220px;
+  }
   grid-template:
     ". header header header ."
     ". sidebar toc-popover toc-popover ."
@@ -329,13 +340,18 @@
    ============================================================================ */
 
 #nd-toc {
-  @apply right-0 pt-6;
+  @apply right-0 pt-6 pl-4 transition-none;
   --fd-toc-width: 220px;
   --color-fd-foreground: transparent;
   /* Disables the active indicator */
   [role="none"] {
     display: none;
     background: transparent;
+  }
+
+  /* Selects all links inside the toc (active and not active)*/
+  [data-active] {
+    @apply truncate pr-2 text-[13px];
   }
 
   @media (min-width: 600px) {

@@ -116,7 +116,7 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
         <Popover>
           <Button
             aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
-            className="absolute top-3 right-3 z-50"
+            className="absolute top-3 right-3 z-1"
             size="sm"
             variant="tertiary"
           >

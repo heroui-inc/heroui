@@ -4,6 +4,7 @@ import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui
 import Link from "next/link";
 import {useState} from "react";
 
+import {useCurrentFramework} from "@/hooks/use-current-framework";
 import {cn} from "@/utils/cn";
 import {currentVersion} from "@/utils/version";
 
@@ -11,6 +12,11 @@ import {Iconify} from "./iconify";
 
 export function VersionSelector({className}: {className?: string}) {
   const [open, setOpen] = useState(false);
+  const currentFramework = useCurrentFramework();
+
+  if (currentFramework === "native") {
+    return null;
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
