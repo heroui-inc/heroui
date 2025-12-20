@@ -1,7 +1,7 @@
 "use client";
 
 import {Skeleton, buttonVariants} from "@heroui/react";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import {useCurrentFramework} from "@/hooks/use-current-framework";
 import {GitHubIcon} from "@/icons/github";
@@ -121,22 +121,33 @@ function StarsCountInner({framework}: {framework: "web" | "native"}) {
   const cachedData = getCachedStars(repo);
   const [isLoading, setIsLoading] = useState(() => !cachedData);
   const [json, setJson] = useState<any>(() => cachedData);
+  const prevRepoRef = useRef<string>(repo);
 
   useEffect(() => {
     const currentRepo = getGitHubRepo(framework);
     const cached = getCachedStars(currentRepo);
+    const repoChanged = prevRepoRef.current !== currentRepo;
+
+    // Update ref for next comparison
+    prevRepoRef.current = currentRepo;
 
     // If we have valid cached data, use it (handles framework changes)
     if (cached) {
-      // Use requestAnimationFrame to avoid synchronous setState warning
-      const rafId = requestAnimationFrame(() => {
-        setJson(cached);
-        setIsLoading(false);
-      });
+      // Only update if the repo changed (framework switched) to avoid CLS on initial mount
+      if (repoChanged) {
+        // Use requestAnimationFrame to avoid synchronous setState warning
+        const rafId = requestAnimationFrame(() => {
+          setJson(cached);
+          setIsLoading(false);
+        });
 
-      return () => {
-        cancelAnimationFrame(rafId);
-      };
+        return () => {
+          cancelAnimationFrame(rafId);
+        };
+      }
+
+      // Repo didn't change and we have cached data - no update needed, avoid CLS
+      return;
     }
 
     // No cache, fetch from API
