@@ -95,19 +95,19 @@
     "prettier": "3.7.4",
     "prettier-plugin-css-order": "2.1.2",
     "prettier-plugin-tailwindcss": "0.7.2",
-    "rollup": "4.53.5",
+    "rollup": "4.54.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
-    "turbo": "2.6.3",
+    "turbo": "2.7.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.50.0",
     "vitest": "4.0.16"
   },
   "pnpm": {
     "overrides": {
-      "shiki": "3.19.0",
+      "shiki": "3.20.0",
       "ts-morph": "27.0.2"
     }
   },
@@ -115,5 +115,5 @@
     "node": ">=20.x",
     "pnpm": ">=10.x"
   },
-  "packageManager": "pnpm@10.25.0"
+  "packageManager": "pnpm@10.26.1"
 }
