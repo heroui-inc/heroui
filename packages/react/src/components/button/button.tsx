@@ -37,7 +37,6 @@ const ButtonRoot = ({
   const finalFullWidth = fullWidth ?? buttonGroupContext?.fullWidth;
 
   const styles = buttonVariants({
-    class: typeof className === "string" ? className : undefined,
     fullWidth: finalFullWidth,
     isIconOnly,
     size: finalSize,
