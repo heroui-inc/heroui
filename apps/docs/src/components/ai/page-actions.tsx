@@ -14,48 +14,61 @@ import {docsButtonVariants} from "@/utils/variants";
 
 import {Iconify} from "../iconify";
 
+const MAX_CACHE_SIZE = 50;
 const cache = new Map<string, string>();
 
-export function LLMCopyButton({
-  /**
-   * A URL to fetch the raw Markdown/MDX content of page
-   */
-  markdownUrl,
-}: {
-  markdownUrl: string;
-}) {
+function setCache(key: string, value: string) {
+  if (cache.size >= MAX_CACHE_SIZE) {
+    const firstKey = cache.keys().next().value;
+
+    if (firstKey) {
+      cache.delete(firstKey);
+    }
+  }
+
+  cache.set(key, value);
+}
+
+function markdownUrlToSlug(markdownUrl: string): string {
+  const slug = markdownUrl.replace(/^\/docs\//, "").replace(/\.mdx$/, "");
+
+  return slug || "index";
+}
+
+export function LLMCopyButton({markdownUrl}: {markdownUrl: string}) {
   const [isLoading, setLoading] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
-    // Skip cache in development mode
     if (!__DEV__) {
       const cached = cache.get(markdownUrl);
 
-      if (cached) return navigator.clipboard.writeText(cached);
+      if (cached) {
+        return navigator.clipboard.writeText(cached);
+      }
     }
 
-    let url = markdownUrl;
-
-    if (markdownUrl === "/docs.mdx") {
-      url = "/docs/index.mdx";
-    }
+    const slug = markdownUrlToSlug(markdownUrl);
+    const slugArray = slug.split("/").filter(Boolean);
+    const apiUrl = `/llms-raw.mdx/${slugArray.join("/")}`;
 
     setLoading(true);
 
     try {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          "text/plain": fetch(url).then(async (res) => {
-            const content = await res.text();
+      const res = await fetch(apiUrl);
 
-            // Only cache in production
-            if (!__DEV__) {
-              cache.set(markdownUrl, content);
-            }
+      if (!res.ok) {
+        throw new Error(`Failed to fetch content: ${res.statusText}`);
+      }
 
-            return content;
-          }),
-        }),
-      ]);
+      const content = await res.text();
+
+      if (!__DEV__) {
+        setCache(markdownUrl, content);
+      }
+
+      await navigator.clipboard.writeText(content);
+    } catch (error) {
+      console.error("Failed to copy markdown:", error);
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -88,24 +101,21 @@ const optionVariants = tv({
   base: "hover:text-fd-accent-foreground hover:bg-fd-accent inline-flex items-center gap-2 rounded-lg p-2 text-sm [&_svg]:flex-none",
 });
 
-export function ViewOptions({
-  githubUrl,
-  markdownUrl,
-}: {
-  /**
-   * A URL to the raw Markdown/MDX content of page
-   */
-  markdownUrl: string;
-
-  /**
-   * Source file URL on GitHub
-   */
-  githubUrl: string;
-}) {
+export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; githubUrl: string}) {
   const items = useMemo(() => {
-    const fullMarkdownUrl =
-      typeof window !== "undefined" ? new URL(markdownUrl, window.location.origin) : "loading";
-    const q = `Read ${fullMarkdownUrl}, I want to ask questions about it.`;
+    let fullMarkdownUrl = "";
+
+    if (typeof window !== "undefined") {
+      try {
+        fullMarkdownUrl = new URL(markdownUrl, window.location.origin).href;
+      } catch {
+        fullMarkdownUrl = `${window.location.origin}${markdownUrl}`;
+      }
+    }
+
+    const query = fullMarkdownUrl
+      ? `Read ${fullMarkdownUrl}, I want to ask questions about it.`
+      : "I want to ask questions about this documentation.";
 
     return [
       {
@@ -114,17 +124,12 @@ export function ViewOptions({
         title: "Open in GitHub",
       },
       {
-        href: `https://chatgpt.com/?${new URLSearchParams({
-          hints: "search",
-          q,
-        })}`,
+        href: `https://chatgpt.com/?${new URLSearchParams({hints: "search", q: query})}`,
         icon: <OpenAIIcon size={16} />,
         title: "Open in ChatGPT",
       },
       {
-        href: `https://claude.ai/new?${new URLSearchParams({
-          q,
-        })}`,
+        href: `https://claude.ai/new?${new URLSearchParams({q: query})}`,
         icon: <AnthropicIcon size={16} />,
         title: "Open in Claude",
       },
