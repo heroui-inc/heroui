@@ -53,7 +53,7 @@ export function FrameworksTabs({className}: {className?: string}) {
       setTimeout(() => {
         const targetPath = getEquivalentPath(targetFramework);
 
-        router.push(targetPath);
+        router.push(targetPath as any);
       }, 150); // Small delay to let animation start
     },
     [getEquivalentPath, router],
