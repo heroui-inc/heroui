@@ -36,6 +36,11 @@ export const homeLayoutLinks = [
         url: "/docs/react/components",
       },
       {
+        icon: <Iconify icon="smartphone" />,
+        text: "React Native",
+        url: "/docs/native/getting-started",
+      },
+      {
         icon: <Iconify icon="rocket" />,
         text: "Releases",
         url: "/docs/react/releases",
@@ -58,12 +63,6 @@ export const homeLayoutLinks = [
         icon: <Iconify icon="route" />,
         text: "Roadmap",
         url: "https://herouiv3.featurebase.app/roadmap",
-      },
-      {
-        external: true,
-        icon: <Iconify icon="smartphone" />,
-        text: "React Native",
-        url: "https://link.heroui.com/native?ref=heroui-v3",
       },
     ],
     on: "menu" as const,
