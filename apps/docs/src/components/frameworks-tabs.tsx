@@ -12,8 +12,9 @@ import {
   getEquivalentPath as getEquivalentPathHelper,
   useCurrentFramework,
 } from "@/hooks/use-current-framework";
+import {cn} from "@/utils/cn";
 
-export function FrameworksTabs() {
+export function FrameworksTabs({className}: {className?: string}) {
   const pathname = usePathname();
   const router = useRouter();
   const isNavigatingRef = useRef(false);
@@ -78,7 +79,7 @@ export function FrameworksTabs() {
   }, [pathname, currentFramework, selectedKey]);
 
   return (
-    <div className="ml-auto">
+    <div className={cn("ml-auto", className)}>
       <Tabs selectedKey={selectedKey} onSelectionChange={handleTabChange}>
         <Tabs.ListContainer className="pb-1.5">
           <Tabs.List aria-label="Documentation framework">

@@ -85,6 +85,12 @@ export const homeLayoutLinks = [
   {
     active: "nested-url" as const,
     on: "nav" as const,
+    text: "React Native",
+    url: "/docs/native/getting-started",
+  },
+  {
+    active: "nested-url" as const,
+    on: "nav" as const,
     text: "Showcase",
     url: "/showcase",
   },

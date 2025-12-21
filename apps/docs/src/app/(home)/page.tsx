@@ -35,8 +35,8 @@ export default function HomePage() {
             Beautiful by default. Customizable by design.
           </h1>
           <p className="text-balance text-muted md:text-lg">
-            HeroUI is the modern UI library built to help you move fast, stay consistent, and
-            deliver delightful user experiences.
+            HeroUI is the modern UI library for web and mobile, built to help you move fast, stay
+            consistent, and deliver delightful user experiences.
           </p>
           <div className="mt-2 flex gap-3">
             <LinkRoot

@@ -453,11 +453,8 @@ function DocsNavbar({
       </div>
       {!!showLayoutTabs && (
         <LayoutHeaderTabs
+          className={cn("h-10 overflow-x-auto border-b px-6", headerTabsProps?.className)}
           data-header-tabs=""
-          className={cn(
-            "h-10 overflow-x-auto border-b px-6 max-lg:hidden",
-            headerTabsProps?.className,
-          )}
           {...headerTabsProps}
           options={tabs}
         />

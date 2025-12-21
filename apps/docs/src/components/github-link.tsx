@@ -1,6 +1,6 @@
 "use client";
 
-import {Skeleton, buttonVariants} from "@heroui/react";
+import {buttonVariants} from "@heroui/react";
 import {useEffect, useRef, useState} from "react";
 
 import {useCurrentFramework} from "@/hooks/use-current-framework";
@@ -10,6 +10,10 @@ import {GITHUB_API_URL, REPO_NAME, REPO_NAME_NATIVE} from "@/utils/constants";
 
 const CACHE_DURATION = 86400000; // 1 day in milliseconds
 const CACHE_KEY_PREFIX = "github-stars-";
+const STATIC_STARS = {
+  native: 2300,
+  web: 27700,
+};
 
 interface CachedStarsData {
   timestamp: number;
@@ -68,6 +72,10 @@ function getGitHubUrl(framework: "web" | "native"): string {
   return `https://github.com/${repo}`;
 }
 
+function formatStarsCount(count: number): string {
+  return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toLocaleString();
+}
+
 export function GitHubLink({
   children,
   className,
@@ -118,48 +126,45 @@ export function GitHubLinkSmall({className}: {className?: string}) {
 
 function StarsCountInner({framework}: {framework: "web" | "native"}) {
   const repo = getGitHubRepo(framework);
-  const cachedData = getCachedStars(repo);
-  const [isLoading, setIsLoading] = useState(() => !cachedData);
-  const [json, setJson] = useState<any>(() => cachedData);
+  const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [json, setJson] = useState<any>(null);
   const prevRepoRef = useRef<string>(repo);
+
+  // Mark as mounted after hydration to ensure server/client match
+  useEffect(() => {
+    const rafId = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   useEffect(() => {
     const currentRepo = getGitHubRepo(framework);
-    const cached = getCachedStars(currentRepo);
-    const repoChanged = prevRepoRef.current !== currentRepo;
 
     // Update ref for next comparison
     prevRepoRef.current = currentRepo;
 
+    const cached = getCachedStars(currentRepo);
+
     // If we have valid cached data, use it (handles framework changes)
     if (cached) {
-      // Only update if the repo changed (framework switched) to avoid CLS on initial mount
-      if (repoChanged) {
-        // Use requestAnimationFrame to avoid synchronous setState warning
-        const rafId = requestAnimationFrame(() => {
-          setJson(cached);
-          setIsLoading(false);
-        });
+      // Use requestAnimationFrame to avoid synchronous setState warning
+      const rafId = requestAnimationFrame(() => {
+        setJson(cached);
+        setIsLoading(false);
+      });
 
-        return () => {
-          cancelAnimationFrame(rafId);
-        };
-      }
-
-      // Repo didn't change and we have cached data - no update needed, avoid CLS
-      return;
+      return () => {
+        cancelAnimationFrame(rafId);
+      };
     }
 
     // No cache, fetch from API
-    // Set loading state in the promise chain to avoid linter warning
     let cancelled = false;
-
-    // Start loading before fetch
-    requestAnimationFrame(() => {
-      if (!cancelled) {
-        setIsLoading(true);
-      }
-    });
 
     fetch(`${GITHUB_API_URL}/repos/${currentRepo}`)
       .then((response) => response.json())
@@ -183,19 +188,17 @@ function StarsCountInner({framework}: {framework: "web" | "native"}) {
     };
   }, [framework]);
 
-  if (isLoading) {
-    return <Skeleton className="h-4 w-8" />;
-  }
+  // Use static values during SSR and initial client render to prevent CLS
+  const staticStars = STATIC_STARS[framework];
+  const displayCount = !mounted || isLoading ? staticStars : json?.stargazers_count;
 
-  if (!json?.stargazers_count) {
+  if (!displayCount) {
     return null;
   }
 
   return (
-    <span className="pt-px text-xs font-medium text-muted">
-      {json.stargazers_count >= 1000
-        ? `${(json.stargazers_count / 1000).toFixed(1)}k`
-        : json.stargazers_count.toLocaleString()}
+    <span className="pt-px text-xs font-medium text-muted tabular-nums">
+      {formatStarsCount(displayCount)}
     </span>
   );
 }

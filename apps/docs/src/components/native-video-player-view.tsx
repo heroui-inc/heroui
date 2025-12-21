@@ -5,6 +5,7 @@ import type {FC} from "react";
 import {Button, Link, Popover, cn} from "@heroui/react";
 import Image from "next/image";
 import {useTheme} from "next-themes";
+import {useCallback, useState} from "react";
 
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
@@ -94,12 +95,17 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
   width,
 }) => {
   const isMobile = useIsMobileDevice();
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const {resolvedTheme} = useTheme();
 
   // Determine which video source to use based on the current theme
   // Default to light theme if resolvedTheme is undefined (during SSR)
   const videoSrc = resolvedTheme === "dark" ? srcDark : srcLight;
+
+  const handlePlayingChange = useCallback((playing: boolean) => {
+    setIsPlaying(playing);
+  }, []);
 
   return (
     <div className={cn("relative", className)}>
@@ -111,12 +117,13 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
         poster={poster}
         src={videoSrc}
         width={width}
+        onPlayingChange={handlePlayingChange}
       />
-      {!!showQRCode && (
+      {!!showQRCode && !isPlaying && (
         <Popover>
           <Button
             aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
-            className="absolute top-3 right-3 z-1"
+            className="absolute top-3 right-3 z-20"
             size="sm"
             variant="tertiary"
           >

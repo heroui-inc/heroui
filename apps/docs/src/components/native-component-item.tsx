@@ -3,9 +3,11 @@
 import type {StatusChipStatus} from "./status-chip";
 import type {UrlObject} from "url";
 
+import {Link as LocalLinkIcon} from "@gravity-ui/icons";
 import {Link} from "@heroui/react";
 import NextLink from "next/link";
 
+import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 import {cn} from "@/utils/cn";
 
 import {NativeVideoPlayerView} from "./native-video-player-view";
@@ -76,6 +78,7 @@ export function NativeComponentItem({
   status,
 }: NativeComponentItemProps) {
   const {href, title} = component;
+  const isMobile = useIsMobileDevice();
 
   return (
     <div className={cn("flex flex-col gap-[9px]", className)}>
@@ -89,11 +92,12 @@ export function NativeComponentItem({
         ) : (
           <ConditionalLink className="link" href={href} openInNewTab={openInNewTab}>
             <ComponentTitleContent status={status} title={title} />
+            <LocalLinkIcon className="ml-1 size-3.5 text-muted" />
           </ConditionalLink>
         )}
       </div>
       <div className="relative order-2 overflow-hidden rounded-xl sm:order-1">
-        <ConditionalLink className="block" href={href} openInNewTab={openInNewTab}>
+        {isMobile ? (
           <NativeVideoPlayerView
             autoPlay
             className="w-full"
@@ -103,7 +107,19 @@ export function NativeComponentItem({
             srcDark={srcDark}
             srcLight={srcLight}
           />
-        </ConditionalLink>
+        ) : (
+          <ConditionalLink className="block" href={href} openInNewTab={openInNewTab}>
+            <NativeVideoPlayerView
+              autoPlay
+              className="w-full"
+              height={300}
+              playMode="auto"
+              showQRCode={false}
+              srcDark={srcDark}
+              srcLight={srcLight}
+            />
+          </ConditionalLink>
+        )}
       </div>
     </div>
   );

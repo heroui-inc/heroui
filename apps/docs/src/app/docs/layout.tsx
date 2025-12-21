@@ -34,7 +34,7 @@ export default function Layout({children}: {children: ReactNode}) {
           </div>
         ),
         headerTabsProps: {
-          children: <FrameworksTabs />,
+          children: <FrameworksTabs className="hidden md:flex" />,
           filterByPathname: true,
         },
         tabs: {
