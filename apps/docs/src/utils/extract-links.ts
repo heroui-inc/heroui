@@ -71,6 +71,27 @@ export function extractGithubFromMDX(content: string): GithubInfoType | null {
 }
 
 /**
+ * Extracts the image field from MDX frontmatter
+ * @param content - The raw MDX content string
+ * @returns The image URL string or null if not found
+ */
+export function extractImageFromMDX(content: string): string | null {
+  try {
+    const {data} = matter(content);
+
+    if (data["image"] && typeof data["image"] === "string") {
+      return data["image"];
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting image from MDX:", error);
+
+    return null;
+  }
+}
+
+/**
  * Converts a Storybook title to a URL path segment
  * Handles both grouped titles (e.g., "Components/Buttons/Button") and simple titles
  * @param title - The Storybook title
