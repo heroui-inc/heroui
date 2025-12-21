@@ -8,10 +8,7 @@ import {Tabs} from "@heroui/react";
 import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useRef, useState} from "react";
 
-import {
-  getEquivalentPath as getEquivalentPathHelper,
-  useCurrentFramework,
-} from "@/hooks/use-current-framework";
+import {defaultRoutes, useCurrentFramework} from "@/hooks/use-current-framework";
 import {cn} from "@/utils/cn";
 
 export function FrameworksTabs({className}: {className?: string}) {
@@ -26,14 +23,6 @@ export function FrameworksTabs({className}: {className?: string}) {
     return currentFramework;
   });
 
-  // Map current path to equivalent path in other framework
-  const getEquivalentPath = useCallback(
-    (targetFramework: Framework): string => {
-      return getEquivalentPathHelper(pathname, targetFramework);
-    },
-    [pathname],
-  );
-
   const handleTabChange = useCallback(
     (key: Key) => {
       // Convert Key (string | number) to string
@@ -45,18 +34,21 @@ export function FrameworksTabs({className}: {className?: string}) {
 
       const targetFramework = keyString as Framework;
 
+      // Don't navigate if already on the target framework
+      if (targetFramework === currentFramework) {
+        return;
+      }
+
       // Update local state first to trigger animation
       setSelectedKey(targetFramework);
       isNavigatingRef.current = true;
 
-      // Navigate after a short delay to allow animation to play
+      // Navigate to default route for target framework after a short delay to allow animation to play
       setTimeout(() => {
-        const targetPath = getEquivalentPath(targetFramework);
-
-        router.push(targetPath as any);
+        router.push(defaultRoutes[targetFramework] as any);
       }, 150); // Small delay to let animation start
     },
-    [getEquivalentPath, router],
+    [currentFramework, router],
   );
 
   // Sync selectedKey with pathname changes (e.g., browser back/forward)

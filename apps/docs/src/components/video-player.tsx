@@ -142,7 +142,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     >
       {isLoading && !isPlaying ? (
         <Spinner
-          className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-2 -translate-x-1/2 -translate-y-1/2"
           color="accent"
           size="md"
         />
@@ -151,7 +151,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
           <Tooltip.Trigger>
             <Button
               isIconOnly
-              className="absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              className="absolute top-1/2 left-1/2 z-3 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
               size="sm"
               variant="tertiary"
               onPress={onTogglePlay}
@@ -168,7 +168,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
       ) : null}
       {/* Absolute overlay for clicking anywhere on the video to play/pause */}
       {/* z-0 ensures it's below buttons (preview button is z-1, play button is z-50) */}
-      <div className="absolute inset-0 z-10 cursor-pointer" onClick={handleVideoClick} />
+      <div className="absolute inset-0 z-3 cursor-pointer" onClick={handleVideoClick} />
 
       <video
         ref={setVideoRef}
