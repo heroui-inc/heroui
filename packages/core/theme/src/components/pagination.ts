@@ -154,7 +154,7 @@ const pagination = tv({
     variant: "flat",
     color: "primary",
     size: "md",
-    radius: "md",
+    radius: "full",
     isCompact: false,
     isDisabled: false,
     showShadow: false,
@@ -390,17 +390,17 @@ const pagination = tv({
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "sm",
-      class: "min-w-8 w-8 h-8 text-tiny",
+      class: "min-w-10 w-auto h-8 text-tiny px-1",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "md",
-      class: "min-w-9 w-9 h-9 text-small",
+      class: "min-w-12 w-auto h-9 text-small px-1",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "lg",
-      class: "min-w-10 w-10 h-10 text-medium",
+      class: "min-w-14 w-auto h-10 text-medium px-1",
     },
     // radius
     {
