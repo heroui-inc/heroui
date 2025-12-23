@@ -66,12 +66,12 @@
 
 /* Variant */
 .tag--default {
-  @apply bg-field-on-background text-default-foreground;
+  @apply bg-default text-default-foreground;
 
   /* Hover state (when not selected or disabled) */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
-      @apply bg-field-on-background-hover;
+      @apply bg-default-hover;
     }
   }
 }
