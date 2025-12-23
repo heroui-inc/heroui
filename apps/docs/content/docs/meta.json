@@ -27,6 +27,7 @@
     "components/alert",
     "components/alert-dialog",
     "components/avatar",
+    "components/breadcrumbs",
     "components/button",
     "components/button-group",
     "components/card",
