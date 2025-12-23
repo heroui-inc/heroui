@@ -13,6 +13,7 @@ Event handlers (`onload`/`onerror`) were attached AFTER setting the image `src`.
 - Attach `onload`/`onerror` handlers BEFORE setting `src`
 - Check both `naturalWidth` AND `naturalHeight` (per CodeRabbit review feedback on #4523)
 - Handle synchronous error callbacks for failed cached images
-- Add comprehensive test coverage including synchronous callback scenarios
+- Include `ignoreFallback` in useCallback dependencies to prevent stale closures when prop changes dynamically
+- Add comprehensive test coverage including synchronous callback scenarios and dynamic `ignoreFallback` changes
 
 Fixes #4534, #2259

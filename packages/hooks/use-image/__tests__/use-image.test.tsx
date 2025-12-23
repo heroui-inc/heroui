@@ -195,6 +195,51 @@ describe("use-image hook", () => {
       // shouldBypassImageLoad makes load() return "loaded"
       expect(result.current).toEqual("loaded");
     });
+
+    it("loads image when ignoreFallback changes from true to false", async () => {
+      // This test verifies that the load callback is recreated when ignoreFallback changes,
+      // preventing stale closure bugs where the image never loads
+      const {result, rerender} = renderHook(
+        ({src, ignoreFallback}: {src: string; ignoreFallback: boolean}) =>
+          useImage({src, ignoreFallback}),
+        {
+          initialProps: {src: "/test.png", ignoreFallback: true},
+        },
+      );
+
+      // With ignoreFallback=true, should return "loaded" immediately without loading
+      expect(result.current).toEqual("loaded");
+
+      // Change ignoreFallback to false - should now actually load the image
+      rerender({src: "/test.png", ignoreFallback: false});
+
+      // Should be in loading state while image loads
+      expect(result.current).toEqual("loading");
+
+      // Simulate successful image load
+      mockImage.simulate("loaded");
+      await waitFor(() => expect(result.current).toBe("loaded"));
+    });
+
+    it("returns loaded immediately when ignoreFallback changes from false to true", async () => {
+      // This test verifies the hook properly short-circuits when ignoreFallback becomes true
+      const {result, rerender} = renderHook(
+        ({src, ignoreFallback}: {src: string; ignoreFallback: boolean}) =>
+          useImage({src, ignoreFallback}),
+        {
+          initialProps: {src: "/test.png", ignoreFallback: false},
+        },
+      );
+
+      // With ignoreFallback=false, should be loading
+      expect(result.current).toEqual("loading");
+
+      // Change ignoreFallback to true - should immediately return "loaded"
+      rerender({src: "/test.png", ignoreFallback: true});
+
+      // Should return "loaded" immediately due to ignoreFallback
+      expect(result.current).toEqual("loaded");
+    });
   });
 
   describe("callbacks", () => {

@@ -144,7 +144,18 @@ export function useImage(props: UseImageProps = {}) {
     }
 
     return "loading";
-  }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading, shouldBypassImageLoad, flush]);
+  }, [
+    src,
+    crossOrigin,
+    srcSet,
+    sizes,
+    onLoad,
+    onError,
+    ignoreFallback,
+    loading,
+    shouldBypassImageLoad,
+    flush,
+  ]);
 
   useSafeLayoutEffect(() => {
     if (isHydrated) {
