@@ -73,6 +73,25 @@ export async function getRedirects(): Promise<Redirect[]> {
   const rootDir = join(process.cwd(), "content/docs/react");
   const redirects: Redirect[] = [];
 
+  // Framework root redirects - redirect /react, /web, and /native to their respective docs
+  redirects.push(
+    {
+      destination: "/docs/react/getting-started",
+      permanent: true,
+      source: "/react",
+    },
+    {
+      destination: "/docs/react/getting-started",
+      permanent: true,
+      source: "/web",
+    },
+    {
+      destination: "/docs/native/getting-started",
+      permanent: true,
+      source: "/native",
+    },
+  );
+
   // Root redirect
   redirects.push({
     destination: "/docs/react/getting-started",
