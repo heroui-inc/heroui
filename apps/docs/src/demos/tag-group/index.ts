@@ -1,6 +1,7 @@
 export {TagGroupBasic as Basic} from "./basic";
 export {TagGroupDisabled as Disabled} from "./disabled";
 export {TagGroupOnSurface as OnSurface} from "./on-surface";
+export {TagGroupOnFormField as OnFormField} from "./on-form-field";
 export {TagGroupSelectionModes as SelectionModes} from "./selection-modes";
 export {TagGroupSizes as Sizes} from "./sizes";
 export {TagGroupControlled as Controlled} from "./controlled";
