@@ -80,6 +80,13 @@ export async function getRedirects(): Promise<Redirect[]> {
     source: "/docs",
   });
 
+  // Redirect /docs/getting-started to /docs/react/getting-started
+  redirects.push({
+    destination: "/docs/react/getting-started",
+    permanent: true,
+    source: "/docs/getting-started",
+  });
+
   // Getting Started pages - now includes (overview), (handbook), and (ui-for-agents) route groups
   const gettingStartedDir = join(rootDir, "getting-started");
   const gettingStartedPages = await getMdxFiles(gettingStartedDir);
@@ -115,6 +122,11 @@ export async function getRedirects(): Promise<Redirect[]> {
       destination: "/docs/react/getting-started/design-principles",
       permanent: true,
       source: "/docs/react/design-principles",
+    },
+    {
+      destination: "/docs/react/getting-started/design-principles",
+      permanent: true,
+      source: "/docs/design-principles",
     },
   );
 
