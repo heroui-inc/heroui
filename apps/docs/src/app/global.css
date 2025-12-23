@@ -86,8 +86,13 @@
 #nd-home-layout {
   #nd-nav {
     @apply bg-background blur-none backdrop-blur-none;
+
     [data-theme-toggle] {
       margin-left: 4px;
+    }
+
+    nav {
+      @apply px-6;
     }
   }
 }
@@ -132,12 +137,48 @@
 
 /* Sub Navigation */
 #nd-subnav {
-  @apply h-14 bg-background;
-
+  @apply gap-0 bg-background md:gap-1;
   backdrop-filter: none;
 
-  > div {
-    @apply border-none px-6;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 1px;
+    z-index: 1;
+    background: var(--separator);
+  }
+
+  [data-header-body] {
+    @apply h-13 md:h-14;
+  }
+
+  [data-header-tabs] {
+    @apply gap-1 border-none px-4 md:gap-3 md:px-6;
+
+    a {
+      @apply px-1 pb-2;
+    }
+
+    .border-fd-primary {
+      border-color: var(--color-accent);
+    }
+
+    [data-frameworks-tabs] {
+      @apply flex items-center;
+
+      .tabs__list-container {
+        @apply w-auto;
+      }
+
+      .tabs__list {
+        @apply w-auto;
+      }
+    }
   }
 
   [data-search-full] {
@@ -151,14 +192,15 @@
 
 /* Sidebar */
 #nd-sidebar {
-  @apply pt-0;
+  @apply items-start pt-4 pl-3 transition-none;
 
   @media (min-width: 600px) {
-    --fd-sidebar-width: 240px;
+    --fd-sidebar-width: 220px;
   }
 
   & > div {
     width: 100% !important;
+    max-width: var(--fd-sidebar-width);
   }
 
   & > :last-child {
@@ -166,7 +208,11 @@
   }
 
   [data-radix-scroll-area-viewport] {
-    @apply pt-2;
+    @apply px-1 pt-2;
+
+    p {
+      @apply font-medium;
+    }
 
     p:not(:first-child) {
       @apply mt-4;
@@ -225,6 +271,14 @@
   opacity: 1;
 }
 
+#nd-sidebar-mobile {
+  [data-radix-scroll-area-viewport] {
+    p {
+      @apply font-medium;
+    }
+  }
+}
+
 /* ============================================================================
    FUMADOCS UI - LAYOUT COMPONENTS
    ============================================================================ */
@@ -233,11 +287,14 @@
   position: relative;
 
   @media (min-width: 48rem) {
-    --fd-sidebar-width: 250px;
+    --fd-sidebar-width: 220px;
   }
 }
 
 #nd-notebook-layout {
+  @media (min-width: 48rem) {
+    --fd-sidebar-width: 220px;
+  }
   grid-template:
     ". header header header ."
     ". sidebar toc-popover toc-popover ."
@@ -249,7 +306,7 @@
 }
 
 #nd-page {
-  @apply mt-4 gap-4 p-4 px-6 sm:px-4 md:px-6 md:pt-8 xl:px-12 xl:pt-12;
+  @apply mt-4 gap-4 p-4 px-6 sm:px-4 md:px-6 md:pt-0 xl:px-12 xl:pt-8;
 
   > article {
     @apply p-8;
@@ -283,14 +340,18 @@
    ============================================================================ */
 
 #nd-toc {
-  padding-top: 10px;
-  right: 0;
+  @apply right-0 pt-6 pl-4 transition-none;
   --fd-toc-width: 220px;
   --color-fd-foreground: transparent;
   /* Disables the active indicator */
   [role="none"] {
     display: none;
     background: transparent;
+  }
+
+  /* Selects all links inside the toc (active and not active)*/
+  [data-active] {
+    @apply truncate pr-2 text-[13px];
   }
 
   @media (min-width: 600px) {
@@ -318,8 +379,9 @@
 }
 
 [data-toc-popover] {
+  @apply top-[93px] md:top-[101px];
   header {
-    @apply border-b border-separator;
+    @apply border-b border-separator md:border-b-0;
     padding: 0 0.5rem;
     background: var(--background) !important;
     backdrop-filter: none !important;

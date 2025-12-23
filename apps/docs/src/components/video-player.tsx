@@ -19,6 +19,7 @@ interface VideoPlayerProps {
   height?: number;
   controls?: boolean;
   className?: string;
+  onPlayingChange?: (isPlaying: boolean) => void;
 }
 
 export const VideoPlayer: FC<VideoPlayerProps> = ({
@@ -26,6 +27,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   className,
   controls = false,
   height,
+  onPlayingChange,
   playMode = "auto",
   poster,
   src,
@@ -85,11 +87,13 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
   const handlePlay = useCallback(() => {
     setIsPlaying(true);
-  }, []);
+    onPlayingChange?.(true);
+  }, [onPlayingChange]);
 
   const handlePause = useCallback(() => {
     setIsPlaying(false);
-  }, []);
+    onPlayingChange?.(false);
+  }, [onPlayingChange]);
 
   useEffect(() => {
     const videoEl = videoRef.current;
@@ -121,23 +125,33 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     }
   }, [isPlaying]);
 
+  const handleVideoClick = useCallback(() => {
+    if (videoRef.current) {
+      if (!isPlaying) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
   return (
     <div
       className="not-prose relative overflow-hidden rounded-xl border border-separator"
       data-playing={isPlaying}
     >
-      {isLoading ? (
+      {isLoading && !isPlaying ? (
         <Spinner
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-2 -translate-x-1/2 -translate-y-1/2"
           color="accent"
-          size="lg"
+          size="md"
         />
       ) : !isPlaying ? (
         <Tooltip delay={1000}>
           <Tooltip.Trigger>
             <Button
               isIconOnly
-              className="absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              className="absolute top-1/2 left-1/2 z-3 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
               size="sm"
               variant="tertiary"
               onPress={onTogglePlay}
@@ -152,6 +166,9 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
           <Tooltip.Content>{isPlaying ? "Pause" : "Play"}</Tooltip.Content>
         </Tooltip>
       ) : null}
+      {/* Absolute overlay for clicking anywhere on the video to play/pause */}
+      {/* z-0 ensures it's below buttons (preview button is z-1, play button is z-50) */}
+      <div className="absolute inset-0 z-3 cursor-pointer" onClick={handleVideoClick} />
 
       <video
         ref={setVideoRef}

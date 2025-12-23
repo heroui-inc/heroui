@@ -2,6 +2,8 @@ import type {NextConfig} from "next";
 
 import {createMDX} from "fumadocs-mdx/next";
 
+import {getRedirects} from "./next-redirects";
+
 // TODO: remove it for next typegen
 // validate environment variables
 // import "./env";
@@ -54,28 +56,7 @@ const config: NextConfig = {
   reactCompiler: true,
   reactStrictMode: true,
   async redirects() {
-    return [
-      {
-        destination: "/docs/introduction",
-        permanent: true,
-        source: "/docs",
-      },
-      {
-        destination: "/docs/components-list",
-        permanent: true,
-        source: "/docs/components",
-      },
-      {
-        destination: "/docs/components-list",
-        permanent: true,
-        source: "/components",
-      },
-      {
-        destination: "/docs/handbook/styling",
-        permanent: true,
-        source: "/handbook",
-      },
-    ];
+    return getRedirects();
   },
   async rewrites() {
     return [
