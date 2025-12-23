@@ -78,6 +78,52 @@ export const Sizes: Story = {
   ),
 };
 
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <TagGroup selectionMode="single" variant="default">
+        <Label>Default</Label>
+        <TagGroup.List>
+          <Tag>News</Tag>
+          <Tag>Travel</Tag>
+          <Tag>Gaming</Tag>
+        </TagGroup.List>
+      </TagGroup>
+
+      <TagGroup selectionMode="single" variant="surface">
+        <Label>Surface</Label>
+        <TagGroup.List>
+          <Tag>News</Tag>
+          <Tag>Travel</Tag>
+          <Tag>Gaming</Tag>
+        </TagGroup.List>
+      </TagGroup>
+    </div>
+  ),
+};
+export const SelectedVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <TagGroup defaultSelectedKeys={["travel"]} selectionMode="single">
+        <Label>Default</Label>
+        <TagGroup.List>
+          <Tag id="news">News</Tag>
+          <Tag id="travel">Travel</Tag>
+          <Tag id="gaming">Gaming</Tag>
+        </TagGroup.List>
+      </TagGroup>
+      <TagGroup defaultSelectedKeys={["travel-soft"]} selectedVariant="soft" selectionMode="single">
+        <Label>Soft</Label>
+        <TagGroup.List>
+          <Tag id="news-soft">News</Tag>
+          <Tag id="travel-soft">Travel</Tag>
+          <Tag id="gaming-soft">Gaming</Tag>
+        </TagGroup.List>
+      </TagGroup>
+    </div>
+  ),
+};
+
 export const Disabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
