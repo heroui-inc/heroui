@@ -6,6 +6,7 @@ export const tagVariants = tv({
   defaultVariants: {
     size: "md",
     isOnSurface: false,
+    isOnFormField: false,
     variant: "default",
   },
   slots: {
@@ -36,6 +37,12 @@ export const tagVariants = tv({
       true: {
         base: "tag--on-surface",
         removeButton: "tag__remove-button--on-surface",
+      },
+      false: {},
+    },
+    isOnFormField: {
+      true: {
+        base: "tag--on-form-field",
       },
       false: {},
     },

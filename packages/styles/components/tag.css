@@ -104,6 +104,18 @@
   }
 }
 
+/* On Form Field */
+.tag--on-form-field {
+  @apply bg-field-on-background shadow-none;
+
+  /* Hover state (when not selected or disabled) */
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      @apply bg-field-on-background-hover;
+    }
+  }
+}
+
 /* Remove Button  */
 .tag__remove-button {
   @apply size-3 text-inherit;

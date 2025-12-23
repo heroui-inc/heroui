@@ -3,7 +3,11 @@
 import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext, useMemo} from "react";
-import {TagGroup as TagGroupPrimitive, TagList as TagListPrimitive} from "react-aria-components";
+import {
+  FormContext,
+  TagGroup as TagGroupPrimitive,
+  TagList as TagListPrimitive,
+} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
@@ -18,6 +22,7 @@ type TagGroupContext = {
   size?: "sm" | "md" | "lg";
   variant?: "default" | "surface";
   isOnSurface?: boolean;
+  isOnFormField?: boolean;
 };
 
 const TagGroupContext = createContext<TagGroupContext>({});
@@ -29,11 +34,13 @@ type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
   size?: "sm" | "md" | "lg";
   variant?: "default" | "surface";
   isOnSurface?: boolean;
+  isOnFormField?: boolean;
 };
 
 const TagGroupRoot = ({
   children,
   className,
+  isOnFormField,
   isOnSurface,
   size,
   variant,
@@ -43,13 +50,28 @@ const TagGroupRoot = ({
 
   const surfaceContext = useContext(SurfaceContext);
 
+  const formContext = useContext(FormContext);
+
   const isOnSurfaceValue = useMemo(
     () => isOnSurface ?? (surfaceContext.variant !== undefined ? true : false),
     [isOnSurface, surfaceContext.variant],
   );
 
+  const isOnFormFieldValue = useMemo(
+    () => isOnFormField ?? (formContext !== null ? true : false),
+    [isOnFormField, formContext],
+  );
+
   return (
-    <TagGroupContext value={{slots, size, variant, isOnSurface: isOnSurfaceValue}}>
+    <TagGroupContext
+      value={{
+        slots,
+        size,
+        variant,
+        isOnSurface: isOnSurfaceValue,
+        isOnFormField: isOnFormFieldValue,
+      }}
+    >
       <TagGroupPrimitive className={slots.base({className})} data-slot="tag-group" {...restProps}>
         {children}
       </TagGroupPrimitive>

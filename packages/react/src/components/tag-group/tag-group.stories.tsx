@@ -4,7 +4,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React, {useMemo, useState} from "react";
 
-import {Avatar, Description, EmptyState, ErrorMessage, Label, Surface, Tag} from "../";
+import {Avatar, Description, EmptyState, ErrorMessage, Form, Label, Surface, Tag} from "../";
 import {useListData} from "../../";
 
 import {TagGroup} from "./";
@@ -190,6 +190,37 @@ export const OnSurface: Story = {
       </Surface>
     </div>
   ),
+};
+
+export const OnFormField: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Iterable<Key>>(new Set());
+
+    return (
+      <Form>
+        <TagGroup
+          isOnFormField
+          selectedKeys={selected}
+          selectionMode="multiple"
+          onSelectionChange={(keys) => setSelected(keys)}
+        >
+          <Label>Interests</Label>
+          <TagGroup.List>
+            <Tag id="technology">Technology</Tag>
+            <Tag id="design">Design</Tag>
+            <Tag id="music">Music</Tag>
+            <Tag id="sports">Sports</Tag>
+            <Tag id="travel">Travel</Tag>
+          </TagGroup.List>
+          <Description>
+            {Array.from(selected).length > 0
+              ? `Selected: ${Array.from(selected).join(", ")}`
+              : "Select your interests"}
+          </Description>
+        </TagGroup>
+      </Form>
+    );
+  },
 };
 
 export const WithErrorMessage: Story = {
