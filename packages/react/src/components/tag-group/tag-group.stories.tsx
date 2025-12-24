@@ -4,7 +4,18 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React, {useMemo, useState} from "react";
 
-import {Avatar, Description, EmptyState, ErrorMessage, Form, Label, Surface, Tag} from "../";
+import {
+  Avatar,
+  Description,
+  EmptyState,
+  ErrorMessage,
+  Form,
+  InputGroup,
+  Label,
+  Surface,
+  Tag,
+  TextField,
+} from "../";
 import {useListData} from "../../";
 
 import {TagGroup} from "./";
@@ -194,30 +205,20 @@ export const OnSurface: Story = {
 
 export const OnFormField: Story = {
   render: () => {
-    const [selected, setSelected] = useState<Iterable<Key>>(new Set());
-
     return (
       <Form>
-        <TagGroup
-          isOnFormField
-          selectedKeys={selected}
-          selectionMode="multiple"
-          onSelectionChange={(keys) => setSelected(keys)}
-        >
-          <Label>Interests</Label>
-          <TagGroup.List>
-            <Tag id="technology">Technology</Tag>
-            <Tag id="design">Design</Tag>
-            <Tag id="music">Music</Tag>
-            <Tag id="sports">Sports</Tag>
-            <Tag id="travel">Travel</Tag>
-          </TagGroup.List>
-          <Description>
-            {Array.from(selected).length > 0
-              ? `Selected: ${Array.from(selected).join(", ")}`
-              : "Select your interests"}
-          </Description>
-        </TagGroup>
+        <TextField className="w-[320px]" name="tags">
+          <InputGroup>
+            <InputGroup.Prefix>
+              <TagGroup isOnFormField>
+                <TagGroup.List className="flex flex-wrap gap-1">
+                  <Tag id="frontend">Frontend</Tag>
+                </TagGroup.List>
+              </TagGroup>
+            </InputGroup.Prefix>
+            <InputGroup.Input placeholder="Input your project name" />
+          </InputGroup>
+        </TextField>
       </Form>
     );
   },
