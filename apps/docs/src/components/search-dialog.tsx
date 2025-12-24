@@ -78,6 +78,13 @@ export default function CustomSearchDialog(props: SharedProps) {
     tag: selectedTag,
     type: "fetch",
   });
+  const {onOpenChange, ...restProps} = props;
+  const handleOpenChange = (isOpen: boolean) => {
+    onOpenChange?.(isOpen);
+    if (!isOpen) {
+      setSearch("");
+    }
+  };
   const {full} = useTreeContext();
   const router = useRouter();
 
@@ -167,7 +174,13 @@ export default function CustomSearchDialog(props: SharedProps) {
   }
 
   return (
-    <SearchDialog isLoading={query.isLoading} search={search} onSearchChange={setSearch} {...props}>
+    <SearchDialog
+      isLoading={query.isLoading}
+      search={search}
+      onOpenChange={handleOpenChange}
+      onSearchChange={setSearch}
+      {...restProps}
+    >
       <SearchDialogOverlay />
       <SearchDialogContent>
         <div className="px-2 pt-2">
