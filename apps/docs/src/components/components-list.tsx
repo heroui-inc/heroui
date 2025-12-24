@@ -13,6 +13,7 @@ const COMPONENT_NAMES = [
   "alert",
   "alert-dialog",
   "avatar",
+  "breadcrumbs",
   "button",
   "button-group",
   "card",
