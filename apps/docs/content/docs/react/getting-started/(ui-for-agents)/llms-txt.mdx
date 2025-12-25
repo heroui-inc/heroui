@@ -1,0 +1,62 @@
+---
+title: LLMs.txt
+description: Enable AI assistants like Claude, Cursor, and Windsurf to understand HeroUI v3
+---
+
+We provide [LLMs.txt](https://llmstxt.org/) files to make HeroUI v3 documentation accessible to AI coding assistants.
+
+## Available Files
+
+**Core documentation:**
+- [/react/llms.txt](/react/llms.txt) — Quick reference index for React documentation
+- [/react/llms-full.txt](/react/llms-full.txt) — Complete HeroUI React documentation
+
+**For limited context windows:**
+- [/react/llms-components.txt](/react/llms-components.txt) — Component documentation only
+- [/react/llms-patterns.txt](/react/llms-patterns.txt) — Common patterns and recipes
+
+**All platforms:**
+- [/llms.txt](/llms.txt) — Quick reference index (React + Native)
+- [/llms-full.txt](/llms-full.txt) — Complete documentation (React + Native)
+- [/llms-components.txt](/llms-components.txt) — All component documentation
+- [/llms-patterns.txt](/llms-patterns.txt) — All patterns and recipes
+
+## Integration
+
+**Claude Code:** Tell Claude to reference the documentation:
+```
+Use HeroUI React documentation from https://v3.heroui.com/react/llms.txt
+```
+Or add to your project's `.claude` file for automatic loading.
+
+**Cursor:** Use the `@Docs` feature:
+```
+@Docs https://v3.heroui.com/react/llms-full.txt
+```
+[Learn more](https://docs.cursor.com/context/@-symbols/@-docs)
+
+**Windsurf:** Add to your `.windsurfrules` file:
+```
+#docs https://v3.heroui.com/react/llms-full.txt
+```
+[Learn more](https://docs.codeium.com/windsurf/memories#memories-and-rules)
+
+**Other AI tools:** Most AI assistants can reference documentation by URL. Simply provide:
+```
+https://v3.heroui.com/react/llms.txt
+```
+
+**For component-specific documentation:**
+```
+https://v3.heroui.com/react/llms-components.txt
+```
+
+**For patterns and best practices:**
+```
+https://v3.heroui.com/react/llms-patterns.txt
+```
+
+
+## Contributing
+
+Found an issue with AI-generated code? Help us improve our LLMs.txt files on [GitHub](https://github.com/heroui-inc/heroui).

@@ -5,18 +5,28 @@ import {readFile} from "node:fs/promises";
 import {join} from "node:path";
 
 import {createRelativeLink} from "fumadocs-ui/mdx";
-import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
 
 import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
+import {
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+} from "@/components/fumadocs/layouts/notebook/page";
 import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
+import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {DOCS_CONTENT_PATH} from "@/utils/constants";
-import {extractGithubFromMDX, extractLinksFromMDX} from "@/utils/extract-links";
+import {
+  extractGithubFromMDX,
+  extractImageFromMDX,
+  extractLinksFromMDX,
+} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
 const componentStatusIcons = ["preview", "new", "updated"];
@@ -115,17 +125,25 @@ export async function generateMetadata(props: {
 
   if (!page) notFound();
 
-  const image = ["/og", ...(params.slug ?? []), "image.png"].join("/");
+  // Read raw MDX to extract image from frontmatter
+  const rawContent = await getRawMDXContent(page.path);
+  const frontmatterImage = extractImageFromMDX(rawContent);
+
+  // Determine image URL
+  const image = frontmatterImage || ["/og", ...(params.slug ?? []), "image.png"].join("/");
+
+  // Ensure absolute URL for Open Graph
+  const imageUrl = image.startsWith("http") ? image : new URL(image, siteConfig.siteUrl).toString();
 
   return {
     description: page.data.description,
     openGraph: {
-      images: image,
+      images: imageUrl,
     },
     title: page.data.title,
     twitter: {
       card: "summary_large_image",
-      images: image,
+      images: imageUrl,
     },
   };
 }

@@ -1,0 +1,383 @@
+---
+title: Avatar
+description: Displays a user avatar with support for images, text initials, or fallback icons.
+links:
+  source_native: avatar/avatar.tsx
+  styles_native: avatar/avatar.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/avatar-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/avatar-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Avatar } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Avatar>
+  <Avatar.Image />
+  <Avatar.Fallback />
+</Avatar>
+```
+
+- **Avatar**: Main container that manages avatar display state. Provides size and color context to child components. Supports animation configuration to control all child animations.
+- **Avatar.Image**: Optional image component that displays the avatar image. Handles loading states and errors automatically with opacity-based fade-in animation.
+- **Avatar.Fallback**: Optional fallback component shown when image fails to load or is unavailable. Displays a default person icon when no children are provided. Supports configurable entering animations with delay support.
+
+## Usage
+
+### Basic Usage
+
+The Avatar component displays a default person icon when no image or text is provided.
+
+```tsx
+<Avatar>
+  <Avatar.Fallback />
+</Avatar>
+```
+
+### With Image
+
+Display an avatar image with automatic fallback handling.
+
+```tsx
+<Avatar>
+  <Avatar.Image source={{ uri: 'https://example.com/avatar.jpg' }} />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### With Text Initials
+
+Show text initials as the avatar content.
+
+```tsx
+<Avatar>
+  <Avatar.Fallback>AB</Avatar.Fallback>
+</Avatar>
+```
+
+### With Custom Icon
+
+Provide a custom icon as fallback content.
+
+```tsx
+<Avatar>
+  <Avatar.Fallback>
+    <Ionicons name="person" size={18} />
+  </Avatar.Fallback>
+</Avatar>
+```
+
+### Sizes
+
+Control the avatar size with the size prop.
+
+```tsx
+<Avatar size="sm">
+  <Avatar.Fallback />
+</Avatar>
+
+<Avatar size="md">
+  <Avatar.Fallback />
+</Avatar>
+
+<Avatar size="lg">
+  <Avatar.Fallback />
+</Avatar>
+```
+
+### Variants
+
+Choose between different visual styles with the `variant` prop.
+
+```tsx
+<Avatar variant="default">
+  <Avatar.Fallback>DF</Avatar.Fallback>
+</Avatar>
+
+<Avatar variant="soft">
+  <Avatar.Fallback>SF</Avatar.Fallback>
+</Avatar>
+```
+
+### Colors
+
+Apply different color variants to the avatar.
+
+```tsx
+<Avatar color="default">
+  <Avatar.Fallback>DF</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="accent">
+  <Avatar.Fallback>AC</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="success">
+  <Avatar.Fallback>SC</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="warning">
+  <Avatar.Fallback>WR</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="danger">
+  <Avatar.Fallback>DG</Avatar.Fallback>
+</Avatar>
+```
+
+### Delayed Fallback
+
+Show fallback after a delay to prevent flashing during image load.
+
+```tsx
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} />
+  <Avatar.Fallback delayMs={600}>NA</Avatar.Fallback>
+</Avatar>
+```
+
+### Custom Image Component
+
+Use a custom image component with the asChild prop.
+
+```tsx
+import { Image } from 'expo-image';
+
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} asChild>
+    <Image style={{ width: '100%', height: '100%' }} contentFit="cover" />
+  </Avatar.Image>
+  <Avatar.Fallback>EI</Avatar.Fallback>
+</Avatar>;
+```
+
+### Animation Control
+
+Control animations at different levels of the Avatar component.
+
+#### Disable All Animations
+
+Disable all animations including children from the root component:
+
+```tsx
+<Avatar animation="disable-all">
+  <Avatar.Image source={{ uri: imageUrl }} />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+#### Custom Image Animation
+
+Customize the image opacity animation:
+
+```tsx
+<Avatar>
+  <Avatar.Image
+    source={{ uri: imageUrl }}
+    animation={{
+      opacity: {
+        value: [0.3, 1],
+        timingConfig: { duration: 300 },
+      },
+    }}
+  />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+#### Custom Fallback Animation
+
+Customize the fallback entering animation:
+
+```tsx
+import { FadeInDown } from 'react-native-reanimated';
+
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} />
+  <Avatar.Fallback
+    animation={{
+      entering: {
+        value: FadeInDown.duration(400),
+      },
+    }}
+  >
+    JD
+  </Avatar.Fallback>
+</Avatar>;
+```
+
+#### Disable Individual Animations
+
+Disable animations for specific components:
+
+```tsx
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} animation={false} />
+  <Avatar.Fallback animation="disabled">JD</Avatar.Fallback>
+</Avatar>
+```
+
+## Example
+
+```tsx
+import { Avatar } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function AvatarExample() {
+  const users = [
+    { id: 1, image: 'https://example.com/user1.jpg', name: 'John Doe' },
+    { id: 2, image: 'https://example.com/user2.jpg', name: 'Jane Smith' },
+    { id: 3, image: 'https://example.com/user3.jpg', name: 'Bob Johnson' },
+  ];
+
+  return (
+    <View className="flex-row gap-4">
+      {users.map((user) => (
+        <Avatar key={user.id} size="lg" color="accent">
+          <Avatar.Image source={{ uri: user.image }} />
+          <Avatar.Fallback>
+            {user.name
+              .split(' ')
+              .map((n) => n[0])
+              .join('')}
+          </Avatar.Fallback>
+        </Avatar>
+      ))}
+    </View>
+  );
+}
+```
+
+## API Reference
+
+### Avatar
+
+| prop           | type                                                          | default     | description                                                                               |
+| -------------- | ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                                             | -           | Avatar content (Image and/or Fallback components)                                         |
+| `size`         | `'sm' \| 'md' \| 'lg'`                                        | `'md'`      | Size of the avatar                                                                        |
+| `variant`      | `'default' \| 'soft'`                                         | `'default'` | Visual variant of the avatar                                                              |
+| `color`        | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'accent'`  | Color variant of the avatar                                                               |
+| `className`    | `string`                                                      | -           | Additional CSS classes to apply                                                           |
+| `animation`    | `"disable-all"` \| `undefined`                                | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| `alt`          | `string`                                                      | -           | Alternative text description for accessibility                                            |
+| `...ViewProps` | `ViewProps`                                                   | -           | All standard React Native View props are supported                                        |
+
+### Avatar.Image
+
+Props extend different base types depending on the `asChild` prop value:
+
+- When `asChild={false}` (default): extends `AnimatedProps<ImageProps>` from React Native Reanimated
+- When `asChild={true}`: extends primitive image props for custom image components
+
+**Note:** When using `asChild={true}` with custom image components, the `className` prop may not be applied in some cases depending on the custom component's implementation. Ensure your custom component properly handles style props.
+
+| prop               | type                                           | default | description                                      |
+| ------------------ | ---------------------------------------------- | ------- | ------------------------------------------------ |
+| `source`           | `ImageSourcePropType`                          | -       | Image source (required when `asChild={false}`)   |
+| `asChild`          | `boolean`                                      | `false` | Whether to use a custom image component as child |
+| `className`        | `string`                                       | -       | Additional CSS classes to apply                  |
+| `animation`        | `AvatarImageAnimation`                         | -       | Animation configuration                          |
+| `...AnimatedProps` | `AnimatedProps<ImageProps>` or primitive props | -       | Additional props based on `asChild` value        |
+
+#### AvatarImageAnimation
+
+Animation configuration for avatar image component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                   | type               | default                                             | description                                          |
+| ---------------------- | ------------------ | --------------------------------------------------- | ---------------------------------------------------- |
+| `opacity.value`        | `[number, number]` | `[0, 1]`                                            | Opacity values [initial, loaded] for image animation |
+| `opacity.timingConfig` | `WithTimingConfig` | `{ duration: 200, easing: Easing.in(Easing.ease) }` | Animation timing configuration                       |
+
+**Note:** Animation is automatically disabled when `asChild={true}`
+
+### Avatar.Fallback
+
+| prop                    | type                                                          | default               | description                                                                       |
+| ----------------------- | ------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                                             | -                     | Fallback content (text, icon, or custom element)                                  |
+| `delayMs`               | `number`                                                      | `0`                   | Delay in milliseconds before showing the fallback (applied to entering animation) |
+| `color`                 | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | inherited from parent | Color variant of the fallback                                                     |
+| `className`             | `string`                                                      | -                     | Additional CSS classes for the container                                          |
+| `classNames`            | `ElementSlots<AvatarFallbackSlots>`                           | -                     | Additional CSS classes for different parts                                        |
+| `textProps`             | `TextProps`                                                   | -                     | Props to pass to Text component when children is a string                         |
+| `iconProps`             | `PersonIconProps`                                             | -                     | Props to customize the default person icon                                        |
+| `animation`             | `AvatarFallbackAnimation`                                     | -                     | Animation configuration                                                           |
+| `...Animated.ViewProps` | `Animated.ViewProps`                                          | -                     | All Reanimated Animated.View props are supported                                  |
+
+**classNames prop:** `ElementSlots<AvatarFallbackSlots>` provides type-safe CSS classes for different parts of the fallback component. Available slots: `container`, `text`.
+
+#### AvatarFallbackAnimation
+
+Animation configuration for avatar fallback component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop             | type                    | default                                                                             | description                            |
+| ---------------- | ----------------------- | ----------------------------------------------------------------------------------- | -------------------------------------- |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))`<br/>`.delay(0)` | Custom entering animation for fallback |
+
+#### PersonIconProps
+
+| prop    | type     | description                           |
+| ------- | -------- | ------------------------------------- |
+| `size`  | `number` | Size of the icon in pixels (optional) |
+| `color` | `string` | Color of the icon (optional)          |
+
+## Hooks
+
+### useAvatar Hook
+
+Hook to access Avatar primitive root context. Provides access to avatar status.
+
+**Note:** The `status` property is particularly useful for adding a skeleton loader while the image is loading.
+
+```tsx
+import { Avatar, useAvatar, Skeleton } from 'heroui-native';
+
+function AvatarWithSkeleton() {
+  return (
+    <Avatar>
+      <Avatar.Image source={{ uri: imageUrl }} />
+      <AvatarContent />
+      <Avatar.Fallback>JD</Avatar.Fallback>
+    </Avatar>
+  );
+}
+
+function AvatarContent() {
+  const { status } = useAvatar();
+
+  if (status === 'loading') {
+    return <Skeleton className="absolute inset-0 rounded-full" />;
+  }
+
+  return null;
+}
+```
+
+| property    | type                                                 | description                                                 |
+| ----------- | ---------------------------------------------------- | ----------------------------------------------------------- |
+| `status`    | `'loading' \| 'loaded' \| 'error'`                   | Current loading state of the avatar image.                  |
+| `setStatus` | `(status: 'loading' \| 'loaded' \| 'error') => void` | Function to manually set the avatar status (advanced usage) |
+
+**Status Values:**
+
+- `'loading'`: Image is currently being loaded. Use this state to show a skeleton loader.
+- `'loaded'`: Image has successfully loaded.
+- `'error'`: Image failed to load or source is invalid. The fallback component is automatically shown in this state.

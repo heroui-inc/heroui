@@ -3,7 +3,7 @@ import {__BASE_URL__, __CDN_URL__} from "@/utils/env";
 export const siteConfig = {
   authors: [
     {
-      name: "hero_ui",
+      name: "HeroUI",
       url: "https://x.com/hero_ui",
     },
   ],
@@ -22,6 +22,7 @@ export const siteConfig = {
   },
   name: "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
   ogImage: `/images/twitter-card.jpg`,
+  ogImageNative: `/images/twitter-card-native.jpeg`,
   siteUrl: __BASE_URL__,
   supportEmail: "support@heroui.com",
 };

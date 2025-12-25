@@ -1,0 +1,285 @@
+---
+title: Styling
+description: Style HeroUI components with CSS, Tailwind, or CSS-in-JS
+icon: brush
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI components provide flexible styling options: Tailwind CSS utilities, CSS with [BEM](https://getbem.com/) classes or data attributes, CSS-in-JS libraries, and render props for dynamic styling.
+
+## Basic Styling
+
+**Using className:** All HeroUI components accept `className` props:
+
+```tsx
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Custom Button
+</Button>
+
+<Accordion className="border-2 border-gray-200 rounded-xl">
+  {/* content */}
+</Accordion>
+```
+
+**Using style:** Components also accept inline styles:
+
+```tsx
+<Button style={{ backgroundColor: '#8B5CF6' }}>
+  Styled Button
+</Button>
+```
+
+## State-Based Styling
+
+HeroUI components expose their state through data attributes, similar to CSS pseudo-classes:
+
+```css
+/* Target different states */
+.button[data-hovered="true"], .button:hover {
+  background: var(--accent-hover);
+}
+
+.button[data-pressed="true"], .button:active {
+  transform: scale(0.97);
+}
+
+.button[data-focus-visible="true"], .button:focus-visible {
+  outline: 2px solid var(--focus);
+}
+```
+
+## Render Props
+
+Apply dynamic styling based on component state:
+
+```tsx
+// Dynamic classes
+<Button
+  className={({ isPressed }) =>
+    isPressed ? 'bg-blue-600' : 'bg-blue-500'
+  }
+>
+  Press me
+</Button>
+
+// Dynamic content
+<Button>
+  {({ isHovered, isPressed }) => (
+    <>
+      <Icon
+        icon="gravity-ui:heart"
+        className={isPressed ? 'text-red-500' : 'text-neutral-400'}
+      />
+      <span className={isHovered ? 'underline' : ''}>
+        Like
+      </span>
+    </>
+  )}
+</Button>
+```
+
+## BEM Classes
+
+HeroUI uses [BEM methodology](https://getbem.com/) for consistent class naming:
+
+```css
+/* Block */
+.button { }
+.accordion { }
+
+/* Element */
+.accordion__trigger { }
+.accordion__panel { }
+
+/* Modifier */
+.button--primary { }
+.button--lg { }
+.accordion--outline { }
+```
+
+**Customizing components globally:**
+
+```css
+/* global.css */
+
+@layer components {
+  /* Override button styles */
+  .button {
+    @apply font-semibold uppercase;
+  }
+
+  .button--primary {
+    @apply bg-indigo-600 hover:bg-indigo-700;
+  }
+
+  /* Add custom variant */
+  .button--gradient {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500;
+  }
+}
+```
+
+## Creating Wrapper Components
+
+Create reusable custom components using [tailwind-variants](https://tailwind-variants.org/)—a Tailwind CSS first-class variant API:
+
+```tsx
+import { Button as HeroButton, buttonVariants, type ButtonProps } from '@heroui/react';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const customButtonVariants = tv({
+  extend: buttonVariants,
+  base: 'font-medium transition-all',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500 hover:bg-blue-600 text-white',
+      secondary: 'bg-gray-200 hover:bg-gray-300',
+      danger: 'bg-red-500 hover:bg-red-600 text-white',
+    },
+    size: {
+      small: 'text-sm px-2 py-1',
+      medium: 'text-base px-4 py-2',
+      large: 'text-lg px-6 py-3',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+    size: 'medium',
+  },
+});
+
+type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
+interface CustomButtonProps
+  extends Omit<ButtonProps, 'className'>,
+  CustomButtonVariants {
+  className?: string;
+}
+
+export function CustomButton({ intent, size, className, ...props }: CustomButtonProps) {
+  return (
+    <HeroButton
+      className={customButtonVariants({ intent, size, className })}
+      {...props}
+    />
+  );
+}
+```
+
+## CSS-in-JS Integration
+
+**Styled Components:**
+
+```tsx
+import styled from 'styled-components';
+import { Button } from '@heroui/react';
+
+const StyledButton = styled(Button)`
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 24px;
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
+  }
+`;
+```
+
+**Emotion:**
+
+```tsx
+import { css } from '@emotion/css';
+import { Button } from '@heroui/react';
+
+const buttonStyles = css`
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 24px;
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
+  }
+`;
+
+<Button className={buttonStyles}>
+  Emotion Button
+</Button>
+```
+
+## Responsive Design
+
+**Using Tailwind utilities:**
+
+```tsx
+<Button className="text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6">
+  Responsive Button
+</Button>
+```
+
+**Or with CSS:**
+
+```css
+.button {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+```
+
+## CSS Modules
+
+For scoped styles, use CSS Modules:
+
+```css
+/* Button.module.css */
+.button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+```
+
+```tsx
+import styles from './Button.module.css';
+import { Button } from '@heroui/react';
+
+<Button className={styles.button}>
+  Scoped Button
+</Button>
+```
+
+## Component Classes Reference
+
+**Button:** `.button`, `.button--{variant}`, `.button--{size}`, `.button--icon-only`  
+**Accordion:** `.accordion`, `.accordion__item`, `.accordion__trigger`, `.accordion__panel`, `.accordion--outline`
+
+> **Note:** See component docs for complete class references: [Button](/docs/components/button#css-classes), [Accordion](/docs/components/accordion#css-classes)
+
+View all component classes in [@heroui/styles/components](https://github.com/heroui-inc/heroui/tree/main/packages/styles/components).
+
+## Next Steps
+
+- Learn about [Animation](/docs/handbook/animation) techniques
+- Explore [Theming](/docs/handbook/theming) system
+- Browse [Component](/docs/react/components) examples

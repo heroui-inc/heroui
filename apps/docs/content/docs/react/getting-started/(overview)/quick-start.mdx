@@ -1,0 +1,70 @@
+---
+title: Quick Start
+description: Get started with HeroUI v3 in minutes
+icon: rocket
+---
+
+## Requirements
+
+- [React 19+](https://reactjs.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/docs/installation/framework-guides)
+
+## Quick Install
+
+Install HeroUI and required dependencies:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+## Import Styles
+
+Add to your main CSS file `globals.css`:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles"; /* [!code highlight]*/
+```
+
+<Callout type="warning">
+  Import order matters. Always import `tailwindcss` first.
+</Callout>
+
+## Use Components
+
+```tsx
+import { Button } from '@heroui/react';
+
+function App() {
+  return (
+    <Button>
+      My Button
+    </Button>
+  );
+}
+```
+
+## What's Next?
+
+- [Browse Components](/docs/react/components) - See all available components
+- [Learn Styling](/docs/handbook/styling) - Customize with Tailwind CSS
+- [Explore Patterns](/docs/handbook/composition) - Master compound components

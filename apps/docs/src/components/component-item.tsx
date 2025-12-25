@@ -105,21 +105,24 @@ export function ComponentItem({
 
   return (
     <div className={cn("flex flex-col gap-[9px]", className)}>
-      <div className="relative h-[198px] overflow-hidden rounded-xl border border-separator">
+      {/* Title first on mobile, image first on desktop */}
+      <div className="order-1 sm:order-2">
+        {openInNewTab ? (
+          <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
+            <ComponentTitleContent status={status} title={title} />
+            <Link.Icon />
+          </Link>
+        ) : (
+          <ConditionalLink className="link" href={href} openInNewTab={openInNewTab}>
+            <ComponentTitleContent status={status} title={title} />
+          </ConditionalLink>
+        )}
+      </div>
+      <div className="relative order-2 h-[198px] overflow-hidden rounded-xl border border-separator sm:order-1">
         <ConditionalLink className="h-full w-full" href={href} openInNewTab={openInNewTab}>
           <ComponentImagePair alt={title} darkSrc={darkSrc} lightSrc={lightSrc} />
         </ConditionalLink>
       </div>
-      {openInNewTab ? (
-        <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
-          <ComponentTitleContent status={status} title={title} />
-          <Link.Icon />
-        </Link>
-      ) : (
-        <ConditionalLink className="link" href={href} openInNewTab={openInNewTab}>
-          <ComponentTitleContent status={status} title={title} />
-        </ConditionalLink>
-      )}
     </div>
   );
 }
