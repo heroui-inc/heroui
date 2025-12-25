@@ -31,7 +31,7 @@
 }
 
 /* Focus visible state (keyboard focus only) */
-.tag:is(:focus-visible:not(:focus), [data-focus-visible]) {
+.tag:is(:focus-visible, [data-focus-visible]) {
   @apply status-focused;
 }
 
@@ -99,7 +99,7 @@
   }
 
   /* Focus visible state */
-  &:is(:focus-visible:not(:focus), [data-focus-visible]) {
+  &:is(:focus-visible, [data-focus-visible]) {
     background-color: var(--color-on-surface-focus);
   }
 }
