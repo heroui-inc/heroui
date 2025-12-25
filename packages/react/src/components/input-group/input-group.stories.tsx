@@ -373,6 +373,40 @@ export const OnSurface: Story = {
   ),
 };
 
+export const WithTextArea: Story = {
+  render: () => {
+    const [feedback, setFeedback] = useState("");
+
+    return (
+      <TextField
+        fullWidth
+        className="flex w-xs flex-col sm:w-sm"
+        isInvalid={feedback.length > 500}
+        name="feedback"
+        onChange={setFeedback}
+      >
+        <Label>Your Feedback</Label>
+        <InputGroup fullWidth>
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.TextArea
+            className="resize-none"
+            placeholder="Share your thoughts, suggestions, or issues..."
+            rows={5}
+            value={feedback}
+          />
+        </InputGroup>
+        <Description className="flex w-full items-center justify-between px-1">
+          <span>Maximum 500 characters.</span>
+          <span className="ml-auto">{feedback.length}/500</span>
+        </Description>
+        <FieldError>Feedback must be less than 500 characters</FieldError>
+      </TextField>
+    );
+  },
+};
+
 export const AllVariations: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
