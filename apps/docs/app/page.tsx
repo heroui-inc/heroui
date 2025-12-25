@@ -12,7 +12,6 @@ import {InstallBanner} from "@/components/marketing/install-banner";
 import {Community} from "@/components/marketing/community";
 import Support from "@/components/marketing/support";
 import landingContent from "@/content/landing";
-import {Sponsors} from "@/components/marketing/sponsors";
 import {HeroUIProSection} from "@/components/marketing/heroui-pro-section";
 
 export default async function Home() {
@@ -21,7 +20,6 @@ export default async function Home() {
       <section className="flex flex-col items-center justify-center">
         <Hero />
         <FeaturesGrid features={landingContent.topFeatures} />
-        <Sponsors />
         <CustomThemes />
         <A11yOtb />
         <DarkMode />
