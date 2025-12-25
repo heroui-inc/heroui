@@ -1,5 +1,14 @@
 # @heroui/date-input
 
+## 2.3.29
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies []:
+  - @heroui/form@2.1.29
+
 ## 2.3.28
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@heroui/date-picker",
-  "version": "2.3.29",
+  "version": "2.3.30",
   "description": "A date picker combines a DateInput and a Calendar popover to allow users to enter or select a date and time value.",
   "keywords": [
     "date-picker"
@@ -35,13 +35,13 @@
   },
   "peerDependencies": {
     "@heroui/system": ">=2.4.18",
-    "@heroui/theme": ">=2.4.23",
+    "@heroui/theme": ">=2.4.24",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
   "dependencies": {
-    "@internationalized/date": "3.10.0",
+    "@internationalized/date": "3.10.1",
     "@heroui/aria-utils": "workspace:*",
     "@heroui/button": "workspace:*",
     "@heroui/calendar": "workspace:*",
@@ -51,11 +51,11 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-aria/datepicker": "3.15.2",
-    "@react-aria/i18n": "3.12.13",
-    "@react-stately/datepicker": "3.15.2",
-    "@react-stately/utils": "3.10.8",
-    "@react-types/datepicker": "3.13.2",
+    "@react-aria/datepicker": "3.15.3",
+    "@react-aria/i18n": "3.12.14",
+    "@react-stately/datepicker": "3.15.3",
+    "@react-stately/utils": "3.11.0",
+    "@react-types/datepicker": "3.13.3",
     "@react-types/shared": "3.32.1"
   },
   "devDependencies": {

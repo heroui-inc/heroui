@@ -1,5 +1,62 @@
 # @heroui/react
 
+## 2.8.7
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`086f6a1`](https://github.com/heroui-inc/heroui/commit/086f6a1c4474e12d9797282528fc98c0267f933f), [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4), [`090b151`](https://github.com/heroui-inc/heroui/commit/090b151a5bebe334751b17d6064bbe454f56b24b), [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/theme@2.4.25
+  - @heroui/input@2.4.30
+  - @heroui/link@2.2.25
+  - @heroui/autocomplete@2.3.31
+  - @heroui/number-input@2.0.20
+  - @heroui/breadcrumbs@2.2.24
+  - @heroui/date-picker@2.3.30
+  - @heroui/date-input@2.3.29
+  - @heroui/pagination@2.2.26
+  - @heroui/accordion@2.2.26
+  - @heroui/input-otp@2.1.29
+  - @heroui/calendar@2.2.29
+  - @heroui/checkbox@2.3.29
+  - @heroui/dropdown@2.3.29
+  - @heroui/progress@2.2.24
+  - @heroui/listbox@2.3.28
+  - @heroui/popover@2.3.29
+  - @heroui/snippet@2.2.30
+  - @heroui/tooltip@2.2.26
+  - @heroui/avatar@2.2.24
+  - @heroui/button@2.2.29
+  - @heroui/navbar@2.2.27
+  - @heroui/select@2.4.30
+  - @heroui/slider@2.4.26
+  - @heroui/switch@2.2.26
+  - @heroui/alert@2.2.29
+  - @heroui/modal@2.2.26
+  - @heroui/radio@2.3.29
+  - @heroui/table@2.2.29
+  - @heroui/toast@2.0.19
+  - @heroui/card@2.2.27
+  - @heroui/chip@2.2.24
+  - @heroui/menu@2.2.28
+  - @heroui/tabs@2.2.26
+  - @heroui/user@2.2.24
+  - @heroui/system@2.4.25
+  - @heroui/badge@2.2.18
+  - @heroui/code@2.2.22
+  - @heroui/divider@2.2.21
+  - @heroui/drawer@2.2.26
+  - @heroui/form@2.1.29
+  - @heroui/image@2.2.18
+  - @heroui/kbd@2.2.23
+  - @heroui/ripple@2.2.21
+  - @heroui/scroll-shadow@2.3.19
+  - @heroui/skeleton@2.2.18
+  - @heroui/spacer@2.2.22
+  - @heroui/spinner@2.2.26
+  - @heroui/framer-utils@2.1.25
+
 ## 2.8.6
 
 ### Patch Changes

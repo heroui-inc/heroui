@@ -1,6 +1,6 @@
 {
   "name": "@heroui/tabs",
-  "version": "2.2.25",
+  "version": "2.2.26",
   "description": "Tabs organize content into multiple sections and allow users to navigate between them.",
   "keywords": [
     "tabs"
@@ -37,7 +37,7 @@
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
-    "@heroui/theme": ">=2.4.23",
+    "@heroui/theme": ">=2.4.24",
     "@heroui/system": ">=2.4.18"
   },
   "dependencies": {
@@ -45,10 +45,10 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/aria-utils": "workspace:*",
     "@heroui/use-is-mounted": "workspace:*",
-    "@react-aria/focus": "3.21.2",
-    "@react-aria/interactions": "3.25.6",
-    "@react-aria/tabs": "3.10.8",
-    "@react-stately/tabs": "3.8.6",
+    "@react-aria/focus": "3.21.3",
+    "@react-aria/interactions": "3.26.0",
+    "@react-aria/tabs": "3.10.9",
+    "@react-stately/tabs": "3.8.7",
     "@react-types/shared": "3.32.1",
     "scroll-into-view-if-needed": "3.0.10"
   },

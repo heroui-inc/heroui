@@ -1,6 +1,6 @@
 {
   "name": "@heroui/drawer",
-  "version": "2.2.25",
+  "version": "2.2.26",
   "description": "Used to render a content that slides in from the side of the screen.",
   "keywords": [
     "drawer"
@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@heroui/theme": ">=2.4.23",
+    "@heroui/theme": ">=2.4.24",
     "@heroui/system": ">=2.4.18"
   },
   "dependencies": {

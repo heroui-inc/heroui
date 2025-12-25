@@ -1,6 +1,6 @@
 {
   "name": "@heroui/autocomplete",
-  "version": "2.3.30",
+  "version": "2.3.31",
   "description": "An autocomplete combines a text input with a listbox, allowing users to filter a list of options to items matching a query.",
   "keywords": [
     "autocomplete"
@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "@heroui/system": ">=2.4.18",
-    "@heroui/theme": ">=2.4.23",
+    "@heroui/theme": ">=2.4.24",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -52,10 +52,10 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/combobox": "3.14.0",
-    "@react-aria/i18n": "3.12.13",
-    "@react-stately/combobox": "3.12.0",
-    "@react-types/combobox": "3.13.9",
+    "@react-aria/combobox": "3.14.1",
+    "@react-aria/i18n": "3.12.14",
+    "@react-stately/combobox": "3.12.1",
+    "@react-types/combobox": "3.13.10",
     "@react-types/shared": "3.32.1"
   },
   "devDependencies": {
@@ -65,7 +65,7 @@
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
-    "@react-stately/data": "3.14.1",
+    "@react-stately/data": "3.15.0",
     "clean-package": "2.2.0",
     "framer-motion": "11.18.2",
     "react": "18.3.0",
