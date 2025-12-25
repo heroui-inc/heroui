@@ -1,0 +1,383 @@
+---
+title: TextField
+description: A text input component with label, description, and error handling for collecting user input.
+links:
+  source_native: text-field/text-field.tsx
+  styles_native: text-field/text-field.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { TextField } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<TextField>
+  <TextField.Label>...</TextField.Label>
+  <TextField.Input>
+    <TextField.InputStartContent>...</TextField.InputStartContent>
+    <TextField.InputEndContent>...</TextField.InputEndContent>
+  </TextField.Input>
+  <TextField.Description>...</TextField.Description>
+  <TextField.ErrorMessage>...</TextField.ErrorMessage>
+</TextField>
+```
+
+- **TextField**: Root container that provides spacing and state management
+- **TextField.Label**: Label with optional asterisk for required fields
+- **TextField.Input**: Input container with animated border and background
+- **TextField.InputStartContent**: Optional content at the start of the input
+- **TextField.InputEndContent**: Optional content at the end of the input
+- **TextField.Description**: Helper text displayed below the input
+- **TextField.ErrorMessage**: Error message shown when field is invalid
+
+## Usage
+
+### Basic Usage
+
+TextField provides a complete form input structure with label and description.
+
+```tsx
+<TextField>
+  <TextField.Label>Email</TextField.Label>
+  <TextField.Input placeholder="Enter your email" />
+  <TextField.Description>We'll never share your email</TextField.Description>
+</TextField>
+```
+
+### With Required Field
+
+Mark fields as required to show an asterisk in the label.
+
+```tsx
+<TextField isRequired>
+  <TextField.Label>Username</TextField.Label>
+  <TextField.Input placeholder="Choose a username" />
+</TextField>
+```
+
+### With Start and End Content
+
+Add icons or other content at the beginning or end of the input.
+
+```tsx
+<TextField>
+  <TextField.Label>Password</TextField.Label>
+  <TextField.Input placeholder="Enter password" secureTextEntry>
+    <TextField.InputStartContent>...</TextField.InputStartContent>
+    <TextField.InputEndContent>...</TextField.InputEndContent>
+  </TextField.Input>
+</TextField>
+```
+
+### With Validation
+
+Display error messages when the field is invalid.
+
+```tsx
+<TextField isRequired isInvalid={true}>
+  <TextField.Label>Email</TextField.Label>
+  <TextField.Input placeholder="Enter your email" />
+  <TextField.ErrorMessage>Please enter a valid email</TextField.ErrorMessage>
+</TextField>
+```
+
+### With Local Invalid State Override
+
+Override the context's invalid state for individual components.
+
+```tsx
+<TextField isInvalid={true}>
+  <TextField.Label isInvalid={false}>Email</TextField.Label>
+  <TextField.Input placeholder="Enter your email" isInvalid={false} />
+  <TextField.Description>
+    This shows despite input being invalid
+  </TextField.Description>
+  <TextField.ErrorMessage>Email format is incorrect</TextField.ErrorMessage>
+</TextField>
+```
+
+### Multiline Input
+
+Create text areas for longer content.
+
+```tsx
+<TextField>
+  <TextField.Label>Message</TextField.Label>
+  <TextField.Input
+    placeholder="Type your message..."
+    multiline
+    numberOfLines={4}
+  />
+  <TextField.Description>Maximum 500 characters</TextField.Description>
+</TextField>
+```
+
+### Disabled State
+
+Disable the entire field to prevent interaction.
+
+```tsx
+<TextField isDisabled>
+  <TextField.Label>Disabled Field</TextField.Label>
+  <TextField.Input placeholder="Cannot edit" value="Read only value" />
+</TextField>
+```
+
+### Custom Colors
+
+Customize the input colors for different states using the animation prop.
+
+```tsx
+<TextField>
+  <TextField.Label>Custom Styled</TextField.Label>
+  <TextField.Input
+    placeholder="Custom colors"
+    animation={{
+      backgroundColor: {
+        value: {
+          blur: '#eff6ff',
+          focus: '#dbeafe',
+          error: '#eff6ff',
+        },
+      },
+      borderColor: {
+        value: {
+          blur: '#2563eb',
+          focus: '#1d4ed8',
+          error: '#dc2626',
+        },
+      },
+    }}
+  />
+</TextField>
+```
+
+## Example
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { TextField, useThemeColor } from 'heroui-native';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+
+export default function TextFieldExample() {
+  const themeColorMuted = useThemeColor('muted');
+  const [email, setEmail] = React.useState('');
+  const isInvalidEmail =
+    email !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  return (
+    <ScrollView className="bg-background p-6">
+      <View className="gap-6">
+        <TextField isRequired isInvalid={isInvalidEmail}>
+          <TextField.Label>Email Address</TextField.Label>
+          <TextField.Input
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={setEmail}
+          >
+            <TextField.InputStartContent>
+              <Ionicons name="mail-outline" size={16} color={themeColorMuted} />
+            </TextField.InputStartContent>
+          </TextField.Input>
+          <TextField.Description>
+            We'll send a confirmation to this email
+          </TextField.Description>
+          <TextField.ErrorMessage>
+            Please enter a valid email address
+          </TextField.ErrorMessage>
+        </TextField>
+
+        <TextField isRequired>
+          <TextField.Label>Password</TextField.Label>
+          <TextField.Input placeholder="Enter password" secureTextEntry>
+            <TextField.InputStartContent>
+              <Ionicons
+                name="lock-closed-outline"
+                size={16}
+                color={themeColorMuted}
+              />
+            </TextField.InputStartContent>
+            <TextField.InputEndContent>
+              <Ionicons name="eye-outline" size={16} color={themeColorMuted} />
+            </TextField.InputEndContent>
+          </TextField.Input>
+        </TextField>
+
+        <TextField>
+          <TextField.Label>Bio</TextField.Label>
+          <TextField.Input
+            placeholder="Tell us about yourself..."
+            multiline
+            numberOfLines={4}
+          />
+          <TextField.Description>
+            Brief description for your profile
+          </TextField.Description>
+        </TextField>
+      </View>
+    </ScrollView>
+  );
+}
+```
+
+## API Reference
+
+### TextField
+
+| prop         | type                         | default     | description                                                                               |
+| ------------ | ---------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| children     | `React.ReactNode`            | -           | Content to render inside the text field                                                   |
+| isDisabled   | `boolean`                    | `false`     | Whether the entire text field is disabled                                                 |
+| isInvalid    | `boolean`                    | `false`     | Whether the text field is in an invalid state                                             |
+| isRequired   | `boolean`                    | `false`     | Whether the text field is required (shows asterisk)                                       |
+| className    | `string`                     | -           | Custom class name for the root element                                                    |
+| animation    | `"disable-all" \| undefined` | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| ...ViewProps | `ViewProps`                  | -           | All standard React Native View props are supported                                        |
+
+### TextField.Label
+
+| prop                  | type                       | default     | description                                                  |
+| --------------------- | -------------------------- | ----------- | ------------------------------------------------------------ |
+| children              | `React.ReactNode`          | -           | Label text content                                           |
+| isInvalid             | `boolean`                  | `undefined` | Whether the label is in an invalid state (overrides context) |
+| className             | `string`                   | -           | Custom class name for the label element                      |
+| classNames            | `ElementSlots<LabelSlots>` | -           | Custom class names for different parts of the label          |
+| animation             | `TextFieldLabelAnimation`  | -           | Animation configuration                                      |
+| ...Animated.TextProps | `AnimatedProps<TextProps>` | -           | All Reanimated Animated.Text props are supported             |
+
+#### `ElementSlots<LabelSlots>`
+
+| prop     | type     | description                          |
+| -------- | -------- | ------------------------------------ |
+| text     | `string` | Custom class name for the label text |
+| asterisk | `string` | Custom class name for the asterisk   |
+
+#### TextFieldLabelAnimation
+
+Animation configuration for TextField.Label component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop             | type                    | default                                                               | description               |
+| ---------------- | ----------------------- | --------------------------------------------------------------------- | ------------------------- |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation |
+| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation  |
+
+### TextField.Input
+
+| prop              | type                       | default     | description                                                  |
+| ----------------- | -------------------------- | ----------- | ------------------------------------------------------------ |
+| children          | `React.ReactNode`          | -           | Content to render inside the input container                 |
+| isInvalid         | `boolean`                  | `undefined` | Whether the input is in an invalid state (overrides context) |
+| className         | `string`                   | -           | Custom class name for the input container                    |
+| classNames        | `ElementSlots<InputSlots>` | -           | Custom class names for different parts of the input          |
+| animation         | `TextFieldInputAnimation`  | -           | Animation configuration                                      |
+| ...TextInputProps | `TextInputProps`           | -           | All standard React Native TextInput props are supported      |
+
+#### `ElementSlots<InputSlots>`
+
+| prop      | type     | description                                  |
+| --------- | -------- | -------------------------------------------- |
+| container | `string` | Custom class name for the input container    |
+| input     | `string` | Custom class name for the text input element |
+
+#### TextFieldInputAnimation
+
+Animation configuration for TextField.Input component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                           | type               | default                                              | description                                                     |
+| ------------------------------ | ------------------ | ---------------------------------------------------- | --------------------------------------------------------------- |
+| `backgroundColor`<br/>`.value`<br/>`.blur`   | `string`           | Uses theme color                                     | Background color when input is blurred                          |
+| `backgroundColor`<br/>`.value`<br/>`.focus`  | `string`           | Uses theme color                                     | Background color when input is focused                          |
+| `backgroundColor`<br/>`.value`<br/>`.error`  | `string`           | Uses theme color                                     | Background color when input is invalid                          |
+| `backgroundColor`<br/>`.timingConfig` | `WithTimingConfig` | `{ duration: 150, easing: Easing.out(Easing.ease) }` | Animation timing configuration for background color transitions |
+| `borderColor`<br/>`.value`<br/>`.blur`       | `string`           | Uses theme color                                     | Border color when input is blurred                              |
+| `borderColor`<br/>`.value`<br/>`.focus`      | `string`           | Uses theme color                                     | Border color when input is focused                              |
+| `borderColor`<br/>`.value`<br/>`.error`      | `string`           | Uses theme color                                     | Border color when input is invalid                              |
+| `borderColor`<br/>`.timingConfig`     | `WithTimingConfig` | `{ duration: 150, easing: Easing.out(Easing.ease) }` | Animation timing configuration for border color transitions     |
+
+### TextField.InputStartContent
+
+| prop         | type              | default | description                                        |
+| ------------ | ----------------- | ------- | -------------------------------------------------- |
+| children     | `React.ReactNode` | -       | Content to render at the start of the input        |
+| className    | `string`          | -       | Custom class name for the start content element    |
+| ...ViewProps | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### TextField.InputEndContent
+
+| prop         | type              | default | description                                        |
+| ------------ | ----------------- | ------- | -------------------------------------------------- |
+| children     | `React.ReactNode` | -       | Content to render at the end of the input          |
+| className    | `string`          | -       | Custom class name for the end content element      |
+| ...ViewProps | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### TextField.Description
+
+| prop                  | type                            | default     | description                                                        |
+| --------------------- | ------------------------------- | ----------- | ------------------------------------------------------------------ |
+| children              | `React.ReactNode`               | -           | Description text content                                           |
+| isInvalid             | `boolean`                       | `undefined` | Whether the description is in an invalid state (overrides context) |
+| className             | `string`                        | -           | Custom class name for the description element                      |
+| animation             | `TextFieldDescriptionAnimation` | -           | Animation configuration                                            |
+| ...Animated.TextProps | `AnimatedProps<TextProps>`      | -           | All Reanimated Animated.Text props are supported                   |
+
+#### TextFieldDescriptionAnimation
+
+Animation configuration for TextField.Description component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop             | type                    | default                                                               | description               |
+| ---------------- | ----------------------- | --------------------------------------------------------------------- | ------------------------- |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation |
+| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation  |
+
+### TextField.ErrorMessage
+
+> **Note**: `TextField.ErrorMessage` extends `ErrorView` component. For complete API reference, see [ErrorView documentation](error-view).
+
+## Hooks
+
+### useTextField
+
+Hook to access the TextField context values. Must be used within a `TextField` component.
+
+```tsx
+import { TextField, useTextField } from 'heroui-native';
+
+function CustomComponent() {
+  const { isDisabled, isInvalid, isRequired } = useTextField();
+
+  // Use the context values...
+}
+```
+
+#### Returns
+
+| property   | type      | description                                   |
+| ---------- | --------- | --------------------------------------------- |
+| isDisabled | `boolean` | Whether the entire text field is disabled     |
+| isInvalid  | `boolean` | Whether the text field is in an invalid state |
+| isRequired | `boolean` | Whether the text field is required            |

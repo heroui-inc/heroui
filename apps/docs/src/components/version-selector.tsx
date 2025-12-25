@@ -2,15 +2,24 @@
 
 import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
 import Link from "next/link";
+import {useState} from "react";
 
+import {useCurrentFramework} from "@/hooks/use-current-framework";
 import {cn} from "@/utils/cn";
 import {currentVersion} from "@/utils/version";
 
 import {Iconify} from "./iconify";
 
 export function VersionSelector({className}: {className?: string}) {
+  const [open, setOpen] = useState(false);
+  const currentFramework = useCurrentFramework();
+
+  if (currentFramework === "native") {
+    return null;
+  }
+
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         className={cn(
           "flex items-center gap-1.5 py-1 text-left text-xs font-medium text-muted transition-opacity hover:opacity-80 sm:text-sm",

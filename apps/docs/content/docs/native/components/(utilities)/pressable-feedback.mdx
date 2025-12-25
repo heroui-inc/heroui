@@ -1,0 +1,273 @@
+---
+title: PressableFeedback
+description: Container component that provides visual feedback for press interactions with automatic scale animation.
+links:
+  source_native: pressable-feedback/pressable-feedback.tsx
+  styles_native: pressable-feedback/pressable-feedback.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/pressable-feedback-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/pressable-feedback-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { PressableFeedback } from 'heroui-native';
+```
+
+## Usage
+
+### Basic Usage
+
+The PressableFeedback component wraps content to provide press feedback effects. By default, it applies a subtle scale animation when pressed.
+
+```tsx
+<PressableFeedback>...</PressableFeedback>
+```
+
+### Highlight Variant
+
+Default iOS-style highlight feedback effect with automatic scale animation.
+
+```tsx
+<PressableFeedback feedbackVariant="highlight">...</PressableFeedback>
+```
+
+### Ripple Variant
+
+Android-style ripple feedback effect that emanates from the press point, combined with scale animation.
+
+```tsx
+<PressableFeedback feedbackVariant="ripple">...</PressableFeedback>
+```
+
+### Custom Highlight Animation
+
+Configure highlight overlay opacity and background color while maintaining the default scale effect.
+
+```tsx
+<PressableFeedback
+  feedbackVariant="highlight"
+  animation={{
+    highlight: {
+      opacity: { value: [0, 0.2] },
+      backgroundColor: { value: '#3b82f6' },
+    },
+  }}
+>
+  ...
+</PressableFeedback>
+```
+
+### Custom Ripple Animation
+
+Configure ripple effect color, opacity, and duration along with scale animation.
+
+```tsx
+<PressableFeedback
+  feedbackVariant="ripple"
+  animation={{
+    ripple: {
+      backgroundColor: { value: '#ec4899' },
+      opacity: { value: [0, 0.3, 0] },
+      progress: { baseDuration: 600 },
+    },
+  }}
+>
+  ...
+</PressableFeedback>
+```
+
+### Feedback Position
+
+Control whether the feedback effect renders above or below content.
+
+```tsx
+<PressableFeedback feedbackPosition="behind">
+  ...
+</PressableFeedback>
+
+<PressableFeedback feedbackPosition="top">
+  ...
+</PressableFeedback>
+```
+
+### Custom Scale Animation
+
+Customize or disable the default scale animation on press.
+
+```tsx
+<PressableFeedback
+  animation={{
+    scale: {
+      value: 0.98,
+      timingConfig: { duration: 150 }
+    }
+  }}
+>
+  ...
+</PressableFeedback>
+
+<PressableFeedback animation={{ scale: "disabled" }}>
+  ...
+</PressableFeedback>
+```
+
+### Disabled State
+
+Disable press interactions and all feedback animations.
+
+```tsx
+<PressableFeedback animation="disabled">...</PressableFeedback>
+```
+
+## Example
+
+```tsx
+import { PressableFeedback, Card } from 'heroui-native';
+import { View, Text, Image } from 'react-native';
+
+export default function PressableFeedbackExample() {
+  return (
+    <View className="flex-1 items-center justify-center px-5">
+      <View className="flex-row gap-4">
+        <PressableFeedback
+          feedbackVariant="ripple"
+          className="flex-1 aspect-[1/1.3] rounded-3xl"
+          animation={{
+            ripple: {
+              backgroundColor: { value: '#fecdd3' },
+              opacity: { value: [0, 0.2, 0] },
+            },
+          }}
+        >
+          <Card className="flex-1">
+            <View className="flex-1 gap-4">
+              <Card.Header>
+                <Image
+                  source={{
+                    uri: 'https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo1.jpg',
+                  }}
+                  style={{
+                    height: 60,
+                    aspectRatio: 1,
+                    borderRadius: 14,
+                  }}
+                />
+              </Card.Header>
+              <Card.Body className="flex-1">
+                <Card.Title>Indie Hackers</Card.Title>
+                <Card.Description className="text-sm">
+                  148 members
+                </Card.Description>
+              </Card.Body>
+              <Card.Footer className="flex-row items-center gap-2">
+                <View className="size-3 rounded-full bg-rose-400" />
+                <Text className="text-sm font-medium text-foreground">
+                  @indiehackers
+                </Text>
+              </Card.Footer>
+            </View>
+          </Card>
+        </PressableFeedback>
+        <PressableFeedback
+          feedbackVariant="ripple"
+          className="flex-1 aspect-[1/1.3] rounded-3xl"
+          animation={{
+            ripple: {
+              backgroundColor: { value: '#67e8f9' },
+            },
+          }}
+        >
+          <Card className="flex-1">
+            <View className="flex-1 gap-4">
+              <Card.Header>
+                <Image
+                  source={{
+                    uri: 'https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo2.jpg',
+                  }}
+                  style={{
+                    height: 60,
+                    aspectRatio: 1,
+                    borderRadius: 14,
+                  }}
+                />
+              </Card.Header>
+              <Card.Body className="flex-1">
+                <Card.Title>AI Builders</Card.Title>
+                <Card.Description className="text-sm">
+                  362 members
+                </Card.Description>
+              </Card.Body>
+              <Card.Footer className="flex-row items-center gap-2">
+                <View className="size-3 rounded-full bg-emerald-400" />
+                <Text className="text-sm font-medium text-foreground">
+                  @aibuilders
+                </Text>
+              </Card.Footer>
+            </View>
+          </Card>
+        </PressableFeedback>
+      </View>
+    </View>
+  );
+}
+```
+
+## API Reference
+
+### PressableFeedback
+
+| prop               | type                                                                              | default       | description                                                          |
+| ------------------ | --------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------------- |
+| `children`         | `React.ReactNode`                                                                 | -             | Content to be wrapped with press feedback                            |
+| `feedbackVariant`  | `'highlight' \| 'ripple'`                                                         | `'highlight'` | Type of feedback effect to display                                   |
+| `feedbackPosition` | `'behind' \| 'top'`                                                               | `'top'`       | Controls z-index positioning of feedback effect relative to children |
+| `isDisabled`       | `boolean`                                                                         | `false`       | Whether the pressable component is disabled                          |
+| `className`        | `string`                                                                          | -             | Additional CSS classes                                               |
+| `animation`        | `PressableFeedbackHighlightRootAnimation \| PressableFeedbackRippleRootAnimation` | -             | Animation configuration                                              |
+| `...AnimatedProps` | `AnimatedProps<PressableProps>`                                                   | -             | All Reanimated Animated Pressable props are supported                |
+
+#### PressableFeedbackHighlightRootAnimation
+
+Animation configuration for PressableFeedback component with highlight variant. Can be:
+
+- `false` or `"disabled"`: Disable only root animations
+- `"disable-all"`: Disable all animations including children
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                              | type               | default                                              | description                                                                |
+| --------------------------------- | ------------------ | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| `scale`<br/>`.value`                     | `number`           | `0.985`                                              | Scale value when pressed (automatically adjusted based on container width) |
+| `scale`<br/>`.timingConfig`              | `WithTimingConfig` | `{ duration: 300, easing: Easing.out(Easing.ease) }` | Animation timing configuration                                             |
+| `scale`<br/>`.ignoreScaleCoefficient`    | `boolean`          | `false`                                              | Ignore automatic scale coefficient and use the scale value directly        |
+| `highlight`<br/>`.opacity`<br/>`.value`         | `[number, number]` | `[0, 0.1]`                                           | Opacity values [unpressed, pressed]                                        |
+| `highlight`<br/>`.opacity`<br/>`.timingConfig`  | `WithTimingConfig` | `{ duration: 200 }`                                  | Animation timing configuration                                             |
+| `highlight`<br/>`.backgroundColor`<br/>`.value` | `string`           | Computed based on theme                              | Background color of highlight overlay                                      |
+
+#### PressableFeedbackRippleRootAnimation
+
+Animation configuration for PressableFeedback component with ripple variant. Can be:
+
+- `false` or `"disabled"`: Disable only root animations
+- `"disable-all"`: Disable all animations including children
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                                        | type                       | default                                              | description                                                                  |
+| ------------------------------------------- | -------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `scale`<br/>`.value`                               | `number`                   | `0.985`                                              | Scale value when pressed (automatically adjusted based on container width)   |
+| `scale`<br/>`.timingConfig`                        | `WithTimingConfig`         | `{ duration: 300, easing: Easing.out(Easing.ease) }` | Animation timing configuration                                               |
+| `scale`<br/>`.ignoreScaleCoefficient`              | `boolean`                  | `false`                                              | Ignore automatic scale coefficient and use the scale value directly          |
+| `ripple`<br/>`.backgroundColor`<br/>`.value`              | `string`                   | Computed based on theme                              | Background color of ripple effect                                            |
+| `ripple`<br/>`.progress`<br/>`.baseDuration`              | `number`                   | `1000`                                               | Base duration for ripple progress (automatically adjusted based on diagonal) |
+| `ripple`<br/>`.progress`<br/>`.minBaseDuration`           | `number`                   | -                                                    | Minimum base duration for the ripple progress animation                      |
+| `ripple`<br/>`.progress`<br/>`.ignoreDurationCoefficient` | `boolean`                  | `false`                                              | Ignore automatic duration coefficient and use base duration directly         |
+| `ripple`<br/>`.opacity`<br/>`.value`                      | `[number, number, number]` | `[0, 0.1, 0]`                                        | Opacity values [start, peak, end] for ripple animation                       |
+| `ripple`<br/>`.opacity`<br/>`.timingConfig`               | `WithTimingConfig`         | `{ duration: 30 }`                                   | Animation timing configuration                                               |
+| `ripple`<br/>`.scale`<br/>`.value`                        | `[number, number, number]` | `[0, 1, 1]`                                          | Scale values [start, peak, end] for ripple animation                         |
+| `ripple`<br/>`.scale`<br/>`.timingConfig`                 | `WithTimingConfig`         | `{ duration: 30 }`                                   | Animation timing configuration                                               |

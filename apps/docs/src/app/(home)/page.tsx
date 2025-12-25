@@ -13,7 +13,7 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/changelog/v3-0-0-beta-3"
+      href="/docs/react/releases/v3-0-0-beta-3"
     >
       <Iconify className="size-2 text-accent/90" icon="gravity-ui:circle-fill" />
       <span>v{currentVersion}: Seven new components</span>
@@ -35,11 +35,14 @@ export default function HomePage() {
             Beautiful by default. Customizable by design.
           </h1>
           <p className="text-balance text-muted md:text-lg">
-            HeroUI is the modern UI library built to help you move fast, stay consistent, and
-            deliver delightful user experiences.
+            HeroUI is the modern UI library for web and mobile, built to help you move fast, stay
+            consistent, and deliver delightful user experiences.
           </p>
           <div className="mt-2 flex gap-3">
-            <LinkRoot className={buttonVariants({variant: "primary"})} href="/docs/components-list">
+            <LinkRoot
+              className={buttonVariants({variant: "primary"})}
+              href="/docs/react/components"
+            >
               View components
             </LinkRoot>
             <GitHubLink>Stars</GitHubLink>
