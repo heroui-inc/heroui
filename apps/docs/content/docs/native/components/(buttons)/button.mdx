@@ -1,0 +1,268 @@
+---
+title: Button
+description: Interactive component that triggers an action when pressed.
+links:
+  source_native: button/button.tsx
+  styles_native: button/button.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/button-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Button } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Button>
+  <Button.Label>...</Button.Label>
+</Button>
+```
+
+- **Button**: Main container that handles press interactions, animations, and variants. Renders string children as label or accepts compound components for custom layouts.
+- **Button.Label**: Text content of the button. Inherits size and variant styling from parent Button context.
+
+## Usage
+
+### Basic Usage
+
+The Button component accepts string children that automatically render as label.
+
+```tsx
+<Button>Basic Button</Button>
+```
+
+### With Compound Parts
+
+Use Button.Label for explicit control over the label component.
+
+```tsx
+<Button>
+  <Button.Label>Click me</Button.Label>
+</Button>
+```
+
+### With Icons
+
+Combine icons with labels for enhanced visual communication.
+
+```tsx
+<Button>
+  <Icon name="add" size={20} />
+  <Button.Label>Add Item</Button.Label>
+</Button>
+
+<Button>
+  <Button.Label>Download</Button.Label>
+  <Icon name="download" size={18} />
+</Button>
+```
+
+### Icon Only
+
+Create square icon-only buttons using the isIconOnly prop.
+
+```tsx
+<Button isIconOnly>
+  <Icon name="heart" size={18} />
+</Button>
+```
+
+### Sizes
+
+Control button dimensions with three size options.
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+```
+
+### Variants
+
+Choose from six visual variants for different emphasis levels.
+
+```tsx
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="tertiary">Tertiary</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="danger">Danger</Button>
+<Button variant="danger-soft">Danger Soft</Button>
+```
+
+### Feedback Variants
+
+Choose between highlight and ripple feedback effects for press interactions.
+
+```tsx
+{
+  /* Highlight feedback (default) */
+}
+<Button feedbackVariant="highlight">Highlight Effect</Button>;
+
+{
+  /* Ripple feedback */
+}
+<Button feedbackVariant="ripple">Ripple Effect</Button>;
+
+{
+  /* Customize ripple animation */
+}
+<Button
+  feedbackVariant="ripple"
+  animation={{
+    ripple: {
+      backgroundColor: { value: '#3b82f6' },
+      opacity: { value: [0, 0.3, 0] },
+    },
+  }}
+>
+  Custom Ripple
+</Button>;
+```
+
+### Loading State with Spinner
+
+Transform button to loading state with spinner animation.
+
+```tsx
+const themeColorAccentForeground = useThemeColor('accent-foreground');
+
+<Button
+  layout={LinearTransition.springify()}
+  variant="primary"
+  onPress={() => {
+    setIsDownloading(true);
+    setTimeout(() => {
+      setIsDownloading(false);
+    }, 3000);
+  }}
+  isIconOnly={isDownloading}
+  className="self-center"
+>
+  {isDownloading ? (
+    <Spinner entering={FadeIn.delay(50)} color={themeColorAccentForeground} />
+  ) : (
+    'Download now'
+  )}
+</Button>;
+```
+
+### Custom Background with LinearGradient
+
+Add gradient backgrounds using absolute positioned elements.
+
+```tsx
+<Button>
+  <LinearGradient
+    colors={['#9333ea', '#ec4899']}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 0 }}
+    style={StyleSheet.absoluteFill}
+  />
+  <Button.Label className="text-white font-bold">Gradient</Button.Label>
+</Button>
+```
+
+## Example
+
+```tsx
+import { Button, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+
+export default function ButtonExample() {
+  const themeColorAccentForeground = useThemeColor('accent-foreground');
+  const themeColorAccentSoftForeground = useThemeColor(
+    'accent-soft-foreground'
+  );
+  const themeColorDangerForeground = useThemeColor('danger-foreground');
+  const themeColorDefaultForeground = useThemeColor('default-foreground');
+
+  return (
+    <View className="gap-4 p-4">
+      <Button variant="primary">
+        <Ionicons name="add" size={20} color={themeColorAccentForeground} />
+        <Button.Label>Add Item</Button.Label>
+      </Button>
+
+      <View className="flex-row gap-4">
+        <Button size="sm" isIconOnly>
+          <Ionicons name="heart" size={16} color={themeColorAccentForeground} />
+        </Button>
+        <Button size="sm" variant="secondary" isIconOnly>
+          <Ionicons
+            name="bookmark"
+            size={16}
+            color={themeColorAccentSoftForeground}
+          />
+        </Button>
+        <Button size="sm" variant="danger" isIconOnly>
+          <Ionicons name="trash" size={16} color={themeColorDangerForeground} />
+        </Button>
+      </View>
+
+      <Button variant="tertiary">
+        <Button.Label>Learn More</Button.Label>
+        <Ionicons
+          name="chevron-forward"
+          size={18}
+          color={themeColorDefaultForeground}
+        />
+      </Button>
+    </View>
+  );
+}
+```
+
+## API Reference
+
+### Button
+
+Button extends all props from [PressableFeedback](./pressable-feedback) component with additional button-specific props.
+
+| prop         | type                                                                             | default     | description                                                    |
+| ------------ | -------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------- |
+| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'` | Visual variant of the button                                   |
+| `size`       | `'sm' \| 'md' \| 'lg'`                                                           | `'md'`      | Size of the button                                             |
+| `isIconOnly` | `boolean`                                                                        | `false`     | Whether the button displays an icon only (square aspect ratio) |
+
+For inherited props including `feedbackVariant`, `feedbackPosition`, `animation`, `isDisabled`, `className`, `children`, and all Pressable props, see [PressableFeedback API Reference](./pressable-feedback#api-reference).
+
+### Button.Label
+
+| prop           | type              | default | description                           |
+| -------------- | ----------------- | ------- | ------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Content to be rendered as label       |
+| `className`    | `string`          | -       | Additional CSS classes                |
+| `...TextProps` | `TextProps`       | -       | All standard Text props are supported |
+
+## Hooks
+
+### useButton
+
+Hook to access the Button context values. Returns the button's size, variant, and disabled state.
+
+```tsx
+import { useButton } from 'heroui-native';
+
+const { size, variant, isDisabled } = useButton();
+```
+
+#### Return Value
+
+| property     | type                                                                             | description                    |
+| ------------ | -------------------------------------------------------------------------------- | ------------------------------ |
+| `size`       | `'sm' \| 'md' \| 'lg'`                                                           | Size of the button             |
+| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | Visual variant of the button   |
+| `isDisabled` | `boolean`                                                                        | Whether the button is disabled |
+
+**Note:** This hook must be used within a `Button` component. It will throw an error if called outside of the button context.

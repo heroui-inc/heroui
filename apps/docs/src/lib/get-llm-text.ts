@@ -51,6 +51,19 @@ async function getRawMDXContent(pagePath: string): Promise<string> {
   }
 }
 
+function formatAbsoluteUrl(path: string): string {
+  if (!path) return "";
+
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  const baseUrl = siteConfig.siteUrl.toString().replace(/\/$/, "");
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+  return `${baseUrl}${cleanPath}`;
+}
+
 function formatLLMHeader(
   category: string,
   title: string,
@@ -58,11 +71,14 @@ function formatLLMHeader(
   sourcePath: string,
   description: string,
 ): string {
-  return `# HeroUI v3 > ${category} > ${title}
-URL: ${url}
-Source: ${siteConfig.githubRawUrl}/${sourcePath}
+  const descriptionBlock = description ? `\n> ${description}\n` : "\n";
+  const absoluteUrl = formatAbsoluteUrl(url);
 
-${description}`;
+  return `# ${title}
+
+**Category**: ${category}
+**URL**: ${absoluteUrl}
+**Source**: ${siteConfig.githubRawUrl}/${sourcePath}${descriptionBlock}`;
 }
 
 export async function getLLMText(page: Page) {
@@ -73,21 +89,38 @@ export async function getLLMText(page: Page) {
   const normalizedPath = normalizePagePath(page.path);
 
   const rawContent = await getRawMDXContent(page.path);
+  const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
   if (!rawContent) {
-    return `${formatLLMHeader(category, title, url, normalizedPath, description)}
+    return `<page url="${url}">
+${header}
 
-*Content unavailable*`;
+*Content unavailable*
+</page>`;
   }
 
+  // First, process MDX content to replace ComponentPreview, CollapsibleCode, etc.
+  const processedContent = await processMDXContent(rawContent);
+
+  // Then process with remark to convert MDX to markdown
   const processed = await processor.process({
     path: join(process.cwd(), CONTENT_DIR, normalizedPath),
-    value: rawContent,
+    value: processedContent,
   });
 
-  return `${formatLLMHeader(category, title, url, normalizedPath, description)}
+  // Clean up any remaining component tags that remark might have preserved
+  const finalContent = processed.value
+    .toString()
+    .replace(
+      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsList|NativeVideoPlayerView)[^>]*\/?>/g,
+      "",
+    );
 
-${processed.value}`;
+  return `<page url="${url}">
+${header}
+
+${finalContent}
+</page>`;
 }
 
 const COMPONENT_PREVIEW_REGEX = /<ComponentPreview\s+name\s*=\s*["']([^"']+)["'][^/>]*\/>/g;
@@ -174,12 +207,16 @@ function replaceRelatedComponents(content: string): string {
   });
 }
 
-const USELESS_COMPONENT_TAGS = /<(ComponentCard|ComponentGrid|ComponentsList)[^>]*\/>/g;
+const USELESS_COMPONENT_TAGS =
+  /<(ComponentCard|ComponentGrid|ComponentsList|ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsList|NativeVideoPlayerView)[^>]*\/?>/g;
 const BR_TAG = /<br\s*\/>/g;
 const CODE_BLOCK_BEFORE = /([^\n`])\n(```[\w]*\n)/g;
 const CODE_BLOCK_AFTER = /(```[\s\S]*?```)\n([^\n`])/g;
 const EXCESSIVE_NEWLINES = /\n{3,}/g;
 const FRONTMATTER_SPACING = /^(---\s*\n[\s\S]*?\n---\s*\n)([^\n])/m;
+const FRONTMATTER_CONTENT = /^---\s*\n[\s\S]*?\n---\s*\n/m;
+const YAML_FRONTMATTER_LINES = /^(title|description|icon|links|image|darkSrc|src):\s*.*$/gm;
+const SEPARATOR_LINE = /^-{3,}$/gm;
 
 function cleanContentForLLM(content: string): string {
   let processed = content.replace(USELESS_COMPONENT_TAGS, "").replace(BR_TAG, "\n");
@@ -222,6 +259,9 @@ function cleanContentForLLM(content: string): string {
     .replace(CODE_BLOCK_AFTER, "$1\n\n$2")
     .replace(EXCESSIVE_NEWLINES, "\n\n")
     .replace(FRONTMATTER_SPACING, "$1\n$2")
+    .replace(FRONTMATTER_CONTENT, "")
+    .replace(YAML_FRONTMATTER_LINES, "")
+    .replace(SEPARATOR_LINE, "")
     .trim();
 
   return processed;
@@ -243,30 +283,37 @@ export async function getLLMRawText(page: Page) {
   const description = page.data.description || "";
   const url = page.url || "";
   const normalizedPath = normalizePagePath(page.path);
+  const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
   const rawContent = await getRawMDXContent(page.path);
 
   if (!rawContent) {
-    return `${formatLLMHeader(category, title, url, normalizedPath, description)}
+    return `<page url="${url}">
+${header}
 
 ***
 
-*Content unavailable*`;
+*Content unavailable*
+</page>`;
   }
 
   const processedContent = await processMDXContent(rawContent);
 
   if (!processedContent.trim()) {
-    return `${formatLLMHeader(category, title, url, normalizedPath, description)}
+    return `<page url="${url}">
+${header}
 
 ***
 
-*Content processed but empty*`;
+*Content processed but empty*
+</page>`;
   }
 
-  return `${formatLLMHeader(category, title, url, normalizedPath, description)}
+  return `<page url="${url}">
+${header}
 
 ***
 
-${processedContent}`;
+${processedContent}
+</page>`;
 }

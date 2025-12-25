@@ -1,0 +1,248 @@
+---
+title: Animation
+description: Add smooth animations and transitions to HeroUI v3 components
+icon: copy-transparent
+---
+
+HeroUI components support multiple animation approaches: built-in CSS transitions, custom CSS animations, and JavaScript libraries like Framer Motion.
+
+## Built-in Animations
+
+HeroUI components use data attributes to expose their state for animation:
+
+```css
+/* Popover entrance/exit */
+.popover[data-entering] {
+  @apply animate-in zoom-in-90 fade-in-0 duration-200;
+}
+
+.popover[data-exiting] {
+  @apply animate-out zoom-out-95 fade-out duration-150;
+}
+
+/* Button press effect */
+.button:active,
+.button[data-pressed="true"] {
+  transform: scale(0.97);
+}
+
+/* Accordion expansion */
+.accordion__panel[aria-hidden="false"] {
+  @apply h-[var(--panel-height)] opacity-100;
+}
+```
+
+**State attributes for styling:**
+- `[data-hovered="true"]` - Hover state
+- `[data-pressed="true"]` - Active/pressed state
+- `[data-focus-visible="true"]` - Keyboard focus
+- `[data-disabled="true"]` - Disabled state
+- `[data-entering]` / `[data-exiting]` - Transition states
+- `[aria-expanded="true"]` - Expanded state
+
+## CSS Animations
+
+**Using Tailwind utilities:**
+
+```tsx
+// Pulse on hover
+<Button className="hover:animate-pulse">
+  Hover me
+</Button>
+
+// Fade in entrance
+<Alert className="animate-fade-in">
+  Welcome message
+</Alert>
+
+// Staggered list
+<div className="space-y-2">
+  <Card className="animate-fade-in animate-delay-100">Item 1</Card>
+  <Card className="animate-fade-in animate-delay-200">Item 2</Card>
+</div>
+```
+
+**Custom transitions:**
+
+```css
+/* Slower accordion */
+.accordion__panel {
+  @apply transition-all duration-500;
+}
+
+/* Bouncy button */
+.button:active {
+  animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+  50% { transform: scale(0.95); }
+}
+```
+
+## Framer Motion
+
+HeroUI components work seamlessly with Framer Motion for advanced animations.
+
+**Basic usage:**
+
+```tsx
+import { motion } from 'framer-motion';
+import { Button } from '@heroui/react';
+
+const MotionButton = motion(Button);
+
+<MotionButton
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  Animated Button
+</MotionButton>
+```
+
+**Entrance animations:**
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
+  <Alert>
+    <Alert.Title>Welcome!</Alert.Title>
+  </Alert>
+</motion.div>
+```
+
+**Layout animations:**
+
+```tsx
+import { AnimatePresence, motion } from 'framer-motion';
+
+function Tabs({ items, selected }) {
+  return (
+    <div className="flex gap-2">
+      {items.map((item, i) => (
+        <Button key={i} onPress={() => setSelected(i)}>
+          {item}
+          {selected === i && (
+            <motion.div
+              layoutId="active"
+              className="absolute inset-0 bg-accent"
+              transition={{ type: "spring", bounce: 0.2 }}
+            />
+          )}
+        </Button>
+      ))}
+    </div>
+  );
+}
+```
+
+## Render Props
+
+Apply dynamic animations based on component state:
+
+```tsx
+<Button>
+  {({ isPressed, isHovered }) => (
+    <motion.span
+      animate={{
+        scale: isPressed ? 0.95 : isHovered ? 1.05 : 1
+      }}
+    >
+      Interactive Button
+    </motion.span>
+  )}
+</Button>
+```
+
+## Accessibility
+
+**Respecting motion preferences:** HeroUI automatically respects user motion preferences using Tailwind's `motion-reduce:` utility. All built-in transitions and animations are disabled when users enable "reduce motion" in their system settings.
+
+HeroUI extends Tailwind's `motion-reduce:` variant to support both the native `prefers-reduced-motion` media query and the `data-reduce-motion` attribute.
+
+```css
+/* HeroUI pattern - uses Tailwind's motion-reduce: */
+.button {
+  @apply transition-colors motion-reduce:transition-none;
+}
+
+/* Expands to support both approaches: */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
+
+[data-reduce-motion="true"] .button {
+  transition: none;
+}
+```
+
+With Framer Motion:
+
+```tsx
+import { useReducedMotion } from 'framer-motion';
+
+function AnimatedCard() {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+    >
+      <Card>Content</Card>
+    </motion.div>
+  );
+}
+```
+
+**Disabling animations globally:** Add `data-reduce-motion="true"` to the `<html>` or `<body>` tag:
+
+```html
+<html data-reduce-motion="true">
+  <!-- All HeroUI animations will be disabled -->
+</html>
+```
+
+HeroUI automatically detects the user's `prefers-reduced-motion: reduce` setting and disables animations accordingly.
+
+## Performance Tips
+
+**Use GPU-accelerated properties:** Prefer `transform` and `opacity` for smooth animations:
+
+```css
+/* Good - GPU accelerated */
+.slide-in {
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+/* Avoid - Triggers layout */
+.slide-in {
+  left: -100%;
+  transition: left 0.3s;
+}
+```
+
+**Will-change optimization:** Use `will-change` to optimize animations, but remove it when not animating:
+
+```css
+.button {
+  will-change: transform;
+}
+
+.button:not(:hover) {
+  will-change: auto;
+}
+```
+
+## Next Steps
+
+- Learn about [Styling](/docs/handbook/styling) approaches
+- Explore [Component](/docs/react/components) examples
+- View [Theming](/docs/handbook/theming) documentation

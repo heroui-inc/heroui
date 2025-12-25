@@ -1,9 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-# LLM-specific endpoints
-Allow: /llms.txt
-Allow: /llms-full.txt
+# Host
+Host: https://v3.heroui.com
 
-# Sitemap
+# Sitemaps
 Sitemap: https://v3.heroui.com/sitemap.xml
