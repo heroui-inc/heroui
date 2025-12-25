@@ -25,14 +25,7 @@ const CloseButtonRoot = ({
   variant,
   ...rest
 }: CloseButtonRootProps) => {
-  const styles = useMemo(
-    () =>
-      closeButtonVariants({
-        variant,
-        className: typeof className === "string" ? className : undefined,
-      }),
-    [variant, className],
-  );
+  const styles = useMemo(() => closeButtonVariants({variant}), [variant]);
 
   return (
     <ButtonPrimitive
