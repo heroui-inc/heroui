@@ -1,13 +1,22 @@
 import matter from "gray-matter";
 
 import {siteConfig} from "@/config/site";
-import {COMPONENT_PATH, COMPONENT_STYLES_PATH, STORYBOOK_URL, THEMES_PATH} from "@/utils/constants";
+import {
+  COMPONENT_PATH,
+  COMPONENT_PATH_NATIVE,
+  COMPONENT_STYLES_PATH,
+  COMPONENT_STYLES_PATH_NATIVE,
+  STORYBOOK_URL,
+  THEMES_PATH,
+} from "@/utils/constants";
 
 export interface ComponentLinksType {
   rac?: string;
   radix?: string;
   source?: string;
+  source_native?: string;
   styles?: string;
+  styles_native?: string;
   storybook?: string;
   themes?: string;
   tailwind?: string;
@@ -62,6 +71,27 @@ export function extractGithubFromMDX(content: string): GithubInfoType | null {
 }
 
 /**
+ * Extracts the image field from MDX frontmatter
+ * @param content - The raw MDX content string
+ * @returns The image URL string or null if not found
+ */
+export function extractImageFromMDX(content: string): string | null {
+  try {
+    const {data} = matter(content);
+
+    if (data["image"] && typeof data["image"] === "string") {
+      return data["image"];
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting image from MDX:", error);
+
+    return null;
+  }
+}
+
+/**
  * Converts a Storybook title to a URL path segment
  * Handles both grouped titles (e.g., "Components/Buttons/Button") and simple titles
  * @param title - The Storybook title
@@ -108,8 +138,14 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`
       : undefined,
     source: links.source ? `${COMPONENT_PATH}/${links.source}` : undefined,
+    source_native: links.source_native
+      ? `${COMPONENT_PATH_NATIVE}/${links.source_native}`
+      : undefined,
     storybook: storybookUrl,
     styles: links.styles ? `${COMPONENT_STYLES_PATH}/${links.styles}` : undefined,
+    styles_native: links.styles_native
+      ? `${COMPONENT_STYLES_PATH_NATIVE}/${links.styles_native}`
+      : undefined,
     tailwind: links.tailwind ? `https://tailwindcss.com/docs/${links.tailwind}` : undefined,
     themes: links.themes ? THEMES_PATH : undefined,
   };

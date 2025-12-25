@@ -2,11 +2,15 @@ import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
 
 import {Analytics} from "@vercel/analytics/next";
-import {RootProvider} from "fumadocs-ui/provider/next";
+import {NextProvider} from "fumadocs-core/framework/next";
+import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {Inter} from "next/font/google";
 
 import {siteConfig} from "@/config/site";
+import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
+
+import {CustomRootProvider} from "./custom-root-provider";
 
 import "./global.css";
 
@@ -18,7 +22,11 @@ export default function Layout({children}: {children: ReactNode}) {
   return (
     <html suppressHydrationWarning className={inter.className} lang="en">
       <body className="flex min-h-screen flex-col">
-        <RootProvider>{children}</RootProvider>
+        <NextProvider>
+          <TreeContextProvider tree={source.pageTree}>
+            <CustomRootProvider>{children}</CustomRootProvider>
+          </TreeContextProvider>
+        </NextProvider>
         <Analytics />
       </body>
     </html>

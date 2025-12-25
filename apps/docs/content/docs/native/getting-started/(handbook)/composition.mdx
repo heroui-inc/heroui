@@ -1,0 +1,181 @@
+---
+title: Composition
+description: Build flexible UI with component composition patterns
+icon: layers
+---
+
+HeroUI Native uses composition patterns to create flexible, customizable components. Change the rendered element, compose components together, and maintain full control over markup.
+
+## Compound Components
+
+HeroUI Native components use a compound component pattern with dot notation—components export sub-components as properties (e.g., `Button.Label`, `Dialog.Trigger`, `Accordion.Item`) that work together to form complete UI elements.
+
+```tsx
+import { Button, Dialog } from 'heroui-native';
+
+function DialogExample() {
+  return (
+    <Dialog>
+      <Dialog.Trigger>
+        Open Dialog
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          <Dialog.Close />
+          <Dialog.Title>Dialog Title</Dialog.Title>
+          <Dialog.Description>Dialog description</Dialog.Description>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+```
+
+## The asChild Prop
+
+The `asChild` prop lets you change what element a component renders. When `asChild` is true, HeroUI Native clones the child element and merges props instead of rendering its default element.
+
+```tsx
+import { Button, Dialog } from 'heroui-native';
+
+function DialogExample() {
+  return (
+    <Dialog>
+      {/* With asChild: Button becomes the trigger directly, no wrapper element */}
+      <Dialog.Trigger asChild>
+        <Button variant="primary">Open Dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          {/* Dialog.Close can also use asChild */}
+          <Dialog.Close asChild>
+            <Button variant="ghost" size="sm">Cancel</Button>
+          </Dialog.Close>
+          <Dialog.Title>Dialog Title</Dialog.Title>
+          <Dialog.Description>Dialog description</Dialog.Description>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+```
+
+## Custom Components
+
+Create your own components by composing HeroUI Native primitives:
+
+```tsx
+import { Button, Card, Popover } from 'heroui-native';
+import { View } from 'react-native';
+
+// Product card component
+function ProductCard({ title, description, price, onBuy, ...props }) {
+  return (
+    <Card {...props}>
+      <Card.Body>
+        <Card.Title>{price}</Card.Title>
+        <Card.Title>{title}</Card.Title>
+        <Card.Description>{description}</Card.Description>
+      </Card.Body>
+      <Card.Footer>
+        <Button variant="primary" onPress={onBuy}>
+          <Button.Label>Buy now</Button.Label>
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+}
+
+// Popover button component
+function PopoverButton({ children, popoverContent, ...props }) {
+  return (
+    <Popover>
+      <Popover.Trigger asChild>
+        <Button {...props}>
+          <Button.Label>{children}</Button.Label>
+        </Button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Overlay />
+        <Popover.Content>
+          <Popover.Close />
+          {popoverContent}
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover>
+  );
+}
+
+// Usage
+<ProductCard
+  title="Living room Sofa"
+  description="Perfect for modern spaces"
+  price="$450"
+  onBuy={() => console.log('Buy')}
+/>
+
+<PopoverButton variant="tertiary" popoverContent={
+  <View>
+    <Popover.Title>Information</Popover.Title>
+    <Popover.Description>Additional details here</Popover.Description>
+  </View>
+}>
+  Show Info
+</PopoverButton>
+```
+
+## Custom Variants
+
+Create custom variants using `tailwind-variants` to extend component styling:
+
+```tsx
+import { Button } from 'heroui-native';
+import type { ButtonRootProps } from 'heroui-native';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const customButtonVariants = tv({
+  base: 'font-semibold rounded-lg',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500 text-white',
+      secondary: 'bg-gray-200',
+      danger: 'bg-red-500 text-white',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
+
+type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
+
+interface CustomButtonProps
+  extends Omit<ButtonRootProps, 'className' | 'variant'>,
+    CustomButtonVariants {
+  className?: string;
+}
+
+export function CustomButton({
+  intent,
+  className,
+  children,
+  ...props
+}: CustomButtonProps) {
+  return (
+    <Button
+      className={customButtonVariants({ intent, className })}
+      {...props}
+    >
+      <Button.Label>{children}</Button.Label>
+    </Button>
+  );
+}
+```
+
+## Next Steps
+
+- Learn about [Styling](/docs/native/getting-started/styling) system
+- Explore [Theming](/docs/native/getting-started/theming) documentation
+- Explore [Animation](/docs/native/getting-started/animation) options

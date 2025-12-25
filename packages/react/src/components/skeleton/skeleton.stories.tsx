@@ -33,7 +33,7 @@ const Template = (props: SkeletonProps) => (
 );
 
 const GridTemplate = (props: SkeletonProps) => (
-  <div className="grid w-full max-w-xl grid-cols-3 gap-4">
+  <div className="grid w-[450px] grid-cols-3 gap-4">
     <Skeleton className="h-24 rounded-xl" {...props} />
     <Skeleton className="h-24 rounded-xl" {...props} />
     <Skeleton className="h-24 rounded-xl" {...props} />
@@ -41,7 +41,7 @@ const GridTemplate = (props: SkeletonProps) => (
 );
 
 const SingleShimmerTemplate = (props: SkeletonProps) => (
-  <div className="skeleton--shimmer relative grid w-full max-w-xl grid-cols-3 gap-4 overflow-hidden rounded-xl">
+  <div className="skeleton--shimmer relative grid w-[450px] grid-cols-3 gap-4 overflow-hidden rounded-xl">
     <Skeleton className="h-24 rounded-xl" {...props} />
     <Skeleton className="h-24 rounded-xl" {...props} />
     <Skeleton className="h-24 rounded-xl" {...props} />
@@ -59,6 +59,9 @@ export const Grid = {
 };
 
 export const SingleShimmer = {
-  args: defaultArgs,
+  args: {
+    ...defaultArgs,
+    animationType: "none",
+  },
   render: SingleShimmerTemplate,
 };
