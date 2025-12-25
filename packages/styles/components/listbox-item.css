@@ -32,7 +32,7 @@
   }
 
   /* Focus visible state (keyboard focus only) */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }

@@ -23,7 +23,7 @@
   cursor: var(--cursor-interactive);
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -48,11 +48,12 @@
 
 /* Similar to select popover styles */
 .dropdown__popover {
-  @apply max-w-[48svw] origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform] md:min-w-55;
+  @apply origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
+  min-width: 220px;
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply outline-none;
   }
