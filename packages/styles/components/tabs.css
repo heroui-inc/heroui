@@ -125,7 +125,7 @@
   }
 
   /* Focus states - comprehensive fallback */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -134,15 +134,6 @@
 /* Tab panel */
 .tabs__panel {
   @apply w-full p-2 outline-none;
-
-  /* Entering animations */
-  &[data-entering="true"] {
-  }
-
-  /* Exiting animations */
-  &[data-exiting="true"] {
-    @apply absolute top-0 left-0 w-full;
-  }
 
   /* Orientation spacing */
   &[data-orientation="horizontal"] {

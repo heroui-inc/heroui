@@ -136,10 +136,6 @@ export function DocsLayout(props: DocsLayoutProps) {
               {footer}
             </div>
           );
-
-    // Normalize nav.title to ReactNode
-    const titleNode: ReactNode =
-      typeof nav.title === "function" ? nav.title({} as ComponentProps<"a">) : nav.title;
     const viewport = (
       <SidebarViewport>
         {links
@@ -168,7 +164,7 @@ export function DocsLayout(props: DocsLayoutProps) {
                       className="inline-flex items-center gap-2.5 font-medium"
                       href={nav.url ?? "/"}
                     >
-                      {titleNode}
+                      {nav.title}
                     </Link>
                     {nav.titleSuffix}
                   </div>
@@ -177,7 +173,7 @@ export function DocsLayout(props: DocsLayoutProps) {
                     className="inline-flex items-center gap-2.5 font-medium"
                     href={nav.url ?? "/"}
                   >
-                    {titleNode}
+                    {nav.title}
                   </Link>
                 )}
                 {!!collapsible && (
@@ -315,10 +311,6 @@ function DocsNavbar({
   const navMode = nav.mode ?? "auto";
   const showLayoutTabs = tabMode === "navbar" && tabs.length > 0;
 
-  // Normalize nav.title to ReactNode
-  const titleNode: ReactNode =
-    typeof nav.title === "function" ? nav.title({} as ComponentProps<"a">) : nav.title;
-
   return (
     <LayoutHeader
       id="nd-subnav"
@@ -357,7 +349,7 @@ function DocsNavbar({
                   navMode === "auto" && "md:hidden",
                 )}
               >
-                {titleNode}
+                {nav.title}
               </Link>
               {nav.titleSuffix}
             </div>
@@ -369,7 +361,7 @@ function DocsNavbar({
                 navMode === "auto" && "md:hidden",
               )}
             >
-              {titleNode}
+              {nav.title}
             </Link>
           )}
         </div>
