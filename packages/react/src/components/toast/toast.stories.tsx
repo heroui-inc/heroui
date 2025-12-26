@@ -1,17 +1,12 @@
+import type {ToastVariants} from "./index";
+
 import React, {useState} from "react";
 
 import {Button} from "../button";
 
-import {Toast, ToastQueue} from "./index";
+import {Toast, toast} from "./index";
 
-// Define toast content type
-type ToastContent = {
-  title: string;
-  description?: string;
-};
-
-// Create a global toast queue
-const toastQueue = new ToastQueue<ToastContent>();
+type Placement = NonNullable<ToastVariants["placement"]>;
 
 export default {
   argTypes: {},
@@ -22,253 +17,156 @@ export default {
   title: "Components/Feedback/Toast",
 };
 
-const Template = () => {
-  return (
-    <div className="min-h-screen p-8">
-      <Toast.Region placement="bottom-right" queue={toastQueue}>
-        {({toast}) => {
-          const content = toast.content as ToastContent;
-
-          return (
-            <Toast toast={toast} variant="default">
-              <Toast.Content>
-                <Toast.Title>{content.title}</Toast.Title>
-                {!!content.description && (
-                  <Toast.Description>{content.description}</Toast.Description>
-                )}
-              </Toast.Content>
-              <Toast.Close />
-            </Toast>
-          );
-        }}
-      </Toast.Region>
-
-      <div className="flex max-w-md flex-col gap-4">
-        <h2 className="text-2xl font-bold">Toast Examples</h2>
-
-        <div className="flex flex-col gap-2">
-          <Button
-            onPress={() =>
-              toastQueue.add({
-                title: "Files uploaded",
-                description: "3 files uploaded successfully.",
-              })
-            }
-          >
-            Show Default Toast
-          </Button>
-
-          <Button
-            variant="primary"
-            onPress={() =>
-              toastQueue.add(
-                {
-                  title: "Update available",
-                  description: "A new version is ready to install.",
-                },
-                {timeout: 5000},
-              )
-            }
-          >
-            Show Accent Toast (5s timeout)
-          </Button>
-
-          <Button
-            variant="primary"
-            onPress={() =>
-              toastQueue.add({
-                title: "Payment successful",
-                description: "Your payment has been processed.",
-              })
-            }
-          >
-            Show Success Toast
-          </Button>
-
-          <Button
-            variant="secondary"
-            onPress={() =>
-              toastQueue.add({
-                title: "Storage almost full",
-                description: "You're using 90% of your storage quota.",
-              })
-            }
-          >
-            Show Warning Toast
-          </Button>
-
-          <Button
-            variant="danger"
-            onPress={() =>
-              toastQueue.add({
-                title: "Unable to connect",
-                description: "We're experiencing connection issues.",
-              })
-            }
-          >
-            Show Danger Toast
-          </Button>
-
-          <Button
-            variant="secondary"
-            onPress={() =>
-              toastQueue.add({
-                title: "File saved",
-              })
-            }
-          >
-            Show Toast Without Description
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export const Default = {
-  args: {},
-  render: Template,
-};
+  render: () => {
+    return (
+      <>
+        <Toast.Region placement="bottom-right" />
 
-const ProgrammaticDismissTemplate = () => {
-  const [toastKey, setToastKey] = useState<string | null>(null);
+        <div className="min-h-screen p-8">
+          <div className="flex max-w-md flex-col gap-4">
+            <h2 className="text-2xl font-bold">Toast API Examples</h2>
 
-  return (
-    <div className="min-h-screen p-8">
-      <Toast.Region placement="bottom-right" queue={toastQueue}>
-        {({toast}) => {
-          const content = toast.content as ToastContent;
+            <div className="flex flex-col gap-2">
+              {/* 1. Default toast */}
+              <Button
+                onPress={() => {
+                  toast("Event has been created");
+                }}
+              >
+                1. Default Toast
+              </Button>
 
-          return (
-            <Toast toast={toast} variant="default">
-              <Toast.Content>
-                <Toast.Title>{content.title}</Toast.Title>
-                {!!content.description && (
-                  <Toast.Description>{content.description}</Toast.Description>
-                )}
-              </Toast.Content>
-              <Toast.Close />
-            </Toast>
-          );
-        }}
-      </Toast.Region>
+              {/* 2. Toast with description */}
+              <Button
+                onPress={() => {
+                  toast("Event has been created", {
+                    description: "Monday, January 3rd at 6:00pm",
+                  });
+                }}
+              >
+                2. Toast with Description
+              </Button>
 
-      <div className="flex max-w-md flex-col gap-4">
-        <h2 className="text-2xl font-bold">Programmatic Dismiss</h2>
+              {/* 3. Success toast */}
+              <Button
+                onPress={() => {
+                  toast.success("Event has been created");
+                }}
+              >
+                3. Success Toast
+              </Button>
 
-        <Button
-          onPress={() => {
-            if (!toastKey) {
-              setToastKey(
-                toastQueue.add(
-                  {
-                    title: "Processing...",
-                    description: "This toast can be dismissed programmatically.",
-                  },
-                  {onClose: () => setToastKey(null)},
-                ),
-              );
-            } else {
-              toastQueue.close(toastKey);
-              setToastKey(null);
-            }
-          }}
-        >
-          {toastKey ? "Cancel Processing" : "Start Processing"}
-        </Button>
-      </div>
-    </div>
-  );
-};
+              {/* 4. Info toast */}
+              <Button
+                onPress={() => {
+                  toast.info("Be at the area 10 minutes before the event time");
+                }}
+              >
+                4. Info Toast
+              </Button>
 
-export const ProgrammaticDismiss = {
-  args: {},
-  render: ProgrammaticDismissTemplate,
-};
+              {/* 5. Warning toast */}
+              <Button
+                onPress={() => {
+                  toast.warning("Event start time cannot be earlier than 8am");
+                }}
+              >
+                5. Warning Toast
+              </Button>
 
-const PlacementTemplate = () => {
-  const [placement, setPlacement] = useState<
-    "top-left" | "top-right" | "bottom-left" | "bottom-right"
-  >("bottom-right");
+              {/* 6. Danger toast */}
+              <Button
+                onPress={() => {
+                  toast.danger("Event has not been created");
+                }}
+              >
+                6. Danger Toast
+              </Button>
 
-  return (
-    <div className="min-h-screen p-8">
-      <Toast.Region placement={placement} queue={toastQueue}>
-        {({toast}) => {
-          const content = toast.content as ToastContent;
+              {/* 7. Toast with action */}
+              <Button
+                onPress={() => {
+                  toast("Event has been created", {
+                    action: {
+                      label: "Undo",
+                      onClick: () => {
+                        toast.info("Event undone");
+                      },
+                    },
+                  });
+                }}
+              >
+                7. Toast with Action
+              </Button>
 
-          return (
-            <Toast toast={toast} variant="default">
-              <Toast.Content>
-                <Toast.Title>{content.title}</Toast.Title>
-                {!!content.description && (
-                  <Toast.Description>{content.description}</Toast.Description>
-                )}
-              </Toast.Content>
-              <Toast.Close />
-            </Toast>
-          );
-        }}
-      </Toast.Region>
+              {/* 8. Promise toast */}
+              <Button
+                onPress={() => {
+                  const promise = () =>
+                    new Promise<{name: string}>((resolve) =>
+                      setTimeout(() => resolve({name: "Sonner"}), 2000),
+                    );
 
-      <div className="flex max-w-md flex-col gap-4">
-        <h2 className="text-2xl font-bold">Placement Options</h2>
-
-        <div className="flex flex-col gap-2">
-          <Button
-            onPress={() => {
-              setPlacement("top-left");
-              toastQueue.add({
-                title: "Top Left",
-                description: "Toast appears in the top-left corner.",
-              });
-            }}
-          >
-            Top Left
-          </Button>
-
-          <Button
-            onPress={() => {
-              setPlacement("top-right");
-              toastQueue.add({
-                title: "Top Right",
-                description: "Toast appears in the top-right corner.",
-              });
-            }}
-          >
-            Top Right
-          </Button>
-
-          <Button
-            onPress={() => {
-              setPlacement("bottom-left");
-              toastQueue.add({
-                title: "Bottom Left",
-                description: "Toast appears in the bottom-left corner.",
-              });
-            }}
-          >
-            Bottom Left
-          </Button>
-
-          <Button
-            onPress={() => {
-              setPlacement("bottom-right");
-              toastQueue.add({
-                title: "Bottom Right",
-                description: "Toast appears in the bottom-right corner.",
-              });
-            }}
-          >
-            Bottom Right
-          </Button>
+                  toast.promise(promise, {
+                    loading: "Loading...",
+                    success: (data) => {
+                      return `${data.name} toast has been added`;
+                    },
+                    error: "Error",
+                  });
+                }}
+              >
+                8. Promise Toast
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      </>
+    );
+  },
 };
 
 export const Placement = {
-  args: {},
-  render: PlacementTemplate,
+  render: () => {
+    const PlacementComponent = () => {
+      const [placement, setPlacement] = useState<Placement>("bottom-right");
+
+      const handlePlacementChange = (newPlacement: Placement) => {
+        toast.clear();
+
+        setPlacement(newPlacement);
+
+        const placementLabels: Record<Placement, string> = {
+          "top-left": "Top Left",
+          "top-right": "Top Right",
+          "bottom-left": "Bottom Left",
+          "bottom-right": "Bottom Right",
+        };
+
+        toast(`${placementLabels[newPlacement]}`, {
+          description: `Toast appears in the ${placementLabels[newPlacement].toLowerCase()}.`,
+        });
+      };
+
+      return (
+        <div className="min-h-screen p-8">
+          <Toast.Region placement={placement} />
+
+          <div className="flex max-w-md flex-col gap-4">
+            <h2 className="text-2xl font-bold">Placement Options</h2>
+
+            <div className="flex flex-col gap-2">
+              <Button onPress={() => handlePlacementChange("top-left")}>Top Left</Button>
+              <Button onPress={() => handlePlacementChange("top-right")}>Top Right</Button>
+              <Button onPress={() => handlePlacementChange("bottom-left")}>Bottom Left</Button>
+              <Button onPress={() => handlePlacementChange("bottom-right")}>Bottom Right</Button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    return <PlacementComponent />;
+  },
 };

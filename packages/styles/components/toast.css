@@ -28,7 +28,7 @@
 
 /* Base toast styles */
 .toast {
-  @apply flex w-[230px] items-center gap-4 rounded-lg bg-surface px-4 py-3 shadow-surface forced-color-adjust-none outline-none;
+  @apply flex w-[230px] items-center gap-4 rounded-3xl bg-surface px-4 py-3 shadow-surface forced-color-adjust-none outline-none;
   view-transition-class: toast;
 }
 
@@ -38,22 +38,57 @@
 
 /* Toast content */
 .toast__content {
-  @apply flex min-w-0 flex-1 flex-col;
+  @apply flex min-w-0 flex-1 flex-col items-start py-3;
+}
+
+/* Toast icon */
+.toast__icon {
+  @apply flex shrink-0 items-center justify-center py-3 select-none;
+
+  [data-slot="toast-default-icon"] {
+    @apply box-content size-[14px];
+  }
 }
 
 /* Toast title */
 .toast__title {
-  @apply text-sm leading-6 font-semibold;
+  @apply text-sm leading-[1.43] font-medium;
 }
 
 /* Toast description */
 .toast__description {
-  @apply text-xs text-muted;
+  @apply text-sm leading-[1.43] font-normal;
+}
+
+.toast--default .toast__description {
+  @apply text-muted;
 }
 
 /* Toast close button */
 .toast__close {
-  @apply shrink-0;
+  @apply shrink-0 py-3;
+}
+
+/* Toast action button */
+.toast__action {
+  @apply h-9 shrink-0 rounded-3xl px-[14px] py-2 text-sm font-medium;
+  @apply bg-default text-default-foreground;
+  @apply transition-colors duration-100;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-default-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-2 outline-offset-2 outline-focus;
+  }
 }
 
 /* Variant modifiers */
@@ -61,52 +96,109 @@
   @apply text-foreground;
 }
 
+.toast--default .toast__icon {
+  @apply text-foreground;
+}
+
 .toast--accent {
-  @apply bg-accent text-accent-foreground;
+  @apply bg-accent-soft;
 }
 
 .toast--accent .toast__title {
-  @apply text-accent-foreground;
+  @apply text-accent-soft-foreground;
 }
 
 .toast--accent .toast__description {
-  @apply text-accent-foreground/80;
+  @apply text-accent-soft-foreground/80;
+}
+
+.toast--accent .toast__icon {
+  @apply text-accent-soft-foreground;
 }
 
 .toast--success {
-  @apply bg-success text-success-foreground;
+  @apply bg-success-soft;
 }
 
 .toast--success .toast__title {
-  @apply text-success-foreground;
+  @apply text-success-soft-foreground;
 }
 
 .toast--success .toast__description {
-  @apply text-success-foreground/80;
+  @apply text-success-soft-foreground/80;
+}
+
+.toast--success .toast__icon {
+  @apply text-success-soft-foreground;
 }
 
 .toast--warning {
-  @apply bg-warning text-warning-foreground;
+  @apply bg-warning-soft;
 }
 
 .toast--warning .toast__title {
-  @apply text-warning-foreground;
+  @apply text-warning-soft-foreground;
 }
 
 .toast--warning .toast__description {
-  @apply text-warning-foreground/80;
+  @apply text-warning-soft-foreground/80;
+}
+
+.toast--warning .toast__icon {
+  @apply text-warning-soft-foreground;
 }
 
 .toast--danger {
-  @apply bg-danger text-danger-foreground;
+  @apply bg-danger-soft;
 }
 
 .toast--danger .toast__title {
-  @apply text-danger-foreground;
+  @apply text-danger-soft-foreground;
 }
 
 .toast--danger .toast__description {
-  @apply text-danger-foreground/80;
+  @apply text-danger-soft-foreground/80;
+}
+
+.toast--danger .toast__icon {
+  @apply text-danger-soft-foreground;
+}
+
+/* Action button variants for different toast types */
+.toast--accent .toast__action {
+  @apply bg-accent-soft-hover text-accent-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-accent-soft-hover;
+  }
+}
+
+.toast--success .toast__action {
+  @apply bg-success-soft-hover text-success-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-success-soft-hover;
+  }
+}
+
+.toast--warning .toast__action {
+  @apply bg-warning-soft-hover text-warning-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-warning-soft-hover;
+  }
+}
+
+.toast--danger .toast__action {
+  @apply bg-danger-soft-hover text-danger-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-danger-soft-hover;
+  }
 }
 
 /* View transition animations */
