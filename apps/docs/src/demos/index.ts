@@ -972,6 +972,14 @@ export const demos: Record<string, DemoItem> = {
     component: TagGroupDemos.Sizes,
     file: "tag-group/sizes.tsx",
   },
+  "tag-group-variants": {
+    component: TagGroupDemos.Variants,
+    file: "tag-group/variants.tsx",
+  },
+  "tag-group-selected-variants": {
+    component: TagGroupDemos.SelectedVariants,
+    file: "tag-group/selected-variants.tsx",
+  },
   "tag-group-disabled": {
     component: TagGroupDemos.Disabled,
     file: "tag-group/disabled.tsx",

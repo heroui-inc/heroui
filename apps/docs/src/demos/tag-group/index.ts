@@ -4,6 +4,8 @@ export {TagGroupOnSurface as OnSurface} from "./on-surface";
 export {TagGroupOnFormField as OnFormField} from "./on-form-field";
 export {TagGroupSelectionModes as SelectionModes} from "./selection-modes";
 export {TagGroupSizes as Sizes} from "./sizes";
+export {TagGroupVariants as Variants} from "./variants";
+export {TagGroupSelectedVariants as SelectedVariants} from "./selected-variants";
 export {TagGroupControlled as Controlled} from "./controlled";
 export {TagGroupWithErrorMessage as WithErrorMessage} from "./with-error-message";
 export {TagGroupWithPrefix as WithPrefix} from "./with-prefix";

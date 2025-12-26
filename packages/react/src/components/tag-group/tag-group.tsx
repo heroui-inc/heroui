@@ -21,6 +21,7 @@ type TagGroupContext = {
   slots?: ReturnType<typeof tagGroupVariants>;
   size?: "sm" | "md" | "lg";
   variant?: "default" | "surface";
+  selectedVariant?: "default" | "soft";
   isOnSurface?: boolean;
   isOnFormField?: boolean;
 };
@@ -33,6 +34,7 @@ const TagGroupContext = createContext<TagGroupContext>({});
 type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
   size?: "sm" | "md" | "lg";
   variant?: "default" | "surface";
+  selectedVariant?: "default" | "soft";
   isOnSurface?: boolean;
   isOnFormField?: boolean;
 };
@@ -42,6 +44,7 @@ const TagGroupRoot = ({
   className,
   isOnFormField,
   isOnSurface,
+  selectedVariant,
   size,
   variant,
   ...restProps
