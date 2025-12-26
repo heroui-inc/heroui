@@ -1318,6 +1318,10 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.WithDisabledOptions,
     file: "select/with-disabled-options.tsx",
   },
+  "select-with-autocomplete": {
+    component: SelectDemos.WithAutocomplete,
+    file: "select/with-autocomplete.tsx",
+  },
   "select-custom-indicator": {
     component: SelectDemos.CustomIndicator,
     file: "select/custom-indicator.tsx",
