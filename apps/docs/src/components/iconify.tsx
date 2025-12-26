@@ -2,7 +2,7 @@ import type {IconProps} from "@iconify/react";
 
 import {Icon} from "@iconify/react";
 import gravityIcons from "@iconify-json/gravity-ui/icons.json";
-import {forwardRef} from "react";
+import {forwardRef, useId, useMemo} from "react";
 
 export type IconifyProps = IconProps & {
   icon?: IconProps["icon"] | string;
@@ -20,8 +20,35 @@ function SVGFromIconData({
   ref?: React.Ref<SVGSVGElement>;
 } & Omit<IconProps, "icon">) {
   const {className, height = "1em", style, width = "1em", ...restProps} = props;
+
   const viewBox =
     iconData.width && iconData.height ? `0 0 ${iconData.width} ${iconData.height}` : "0 0 16 16";
+
+  const uniqueId = useId().replace(/:/g, "");
+
+  const processedBody = useMemo(() => {
+    const {body} = iconData;
+
+    if (!body.includes("id=")) {
+      return body;
+    }
+
+    const regex = /\bid=["']([^"']+)["']|url\(#([^)]+)\)|(?:href|xlink:href)=["']#([^"']+)["']/g;
+
+    return body.replace(regex, (match, g1, g2, g3) => {
+      const id = g1 || g2 || g3;
+
+      if (!id) return match;
+
+      const newId = `${id}-${uniqueId}`;
+
+      if (g1) return `id="${newId}"`;
+      if (g2) return `url(#${newId})`;
+      if (g3) return `href="#${newId}"`;
+
+      return match;
+    });
+  }, [iconData.body, uniqueId]);
 
   return (
     <svg
@@ -36,7 +63,7 @@ function SVGFromIconData({
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       {...restProps}
-      dangerouslySetInnerHTML={{__html: iconData.body}}
+      dangerouslySetInnerHTML={{__html: processedBody}}
     />
   );
 }
