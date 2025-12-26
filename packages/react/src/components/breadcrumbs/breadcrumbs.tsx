@@ -4,7 +4,6 @@ import type {BreadcrumbsVariants} from "./breadcrumbs.styles";
 import type {LinkProps} from "../link";
 import type {ComponentPropsWithRef} from "react";
 
-import {Icon} from "@iconify/react";
 import React, {createContext, useContext} from "react";
 import {
   Breadcrumb as BreadcrumbPrimitive,
@@ -12,6 +11,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {IconChevronRight} from "../icons";
 import {Link} from "../link";
 
 import {breadcrumbsVariants} from "./breadcrumbs.styles";
@@ -64,13 +64,7 @@ const BreadcrumbsItem = ({
 
   const renderSeparator = () => {
     if (!separator)
-      return (
-        <Icon
-          className={slots?.separator()}
-          data-slot="breadcrumbs-separator"
-          icon="gravity-ui:chevron-right"
-        />
-      );
+      return <IconChevronRight className={slots?.separator()} data-slot="breadcrumbs-separator" />;
 
     if (React.isValidElement(separator)) {
       return React.cloneElement(
