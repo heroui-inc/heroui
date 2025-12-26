@@ -323,8 +323,8 @@ function DocsNavbar({
     <LayoutHeader
       id="nd-subnav"
       className={cn(
-        "data-[transparent=false]:bg-fd-background/80 layout:[--fd-header-height:--spacing(14)] sticky top-(--fd-docs-row-1) z-10 flex flex-col backdrop-blur-sm transition-colors [grid-area:header]",
-        showLayoutTabs && "lg:layout:[--fd-header-height:--spacing(24)]",
+        "data-[transparent=false]:bg-fd-background/80 layout:[--fd-header-height:--spacing(23)] sticky top-(--fd-docs-row-1) z-10 flex flex-col backdrop-blur-sm transition-colors [grid-area:header]",
+        showLayoutTabs && "md:layout:[--fd-header-height:--spacing(25)]",
       )}
     >
       <div className="flex h-14 gap-2 border-b px-4 md:px-6" data-header-body="">
