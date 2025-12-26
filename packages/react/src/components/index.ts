@@ -28,6 +28,7 @@ export * from "./separator";
 export * from "./skeleton";
 export * from "./spinner";
 export * from "./surface";
+export * from "./toast";
 export * from "./switch";
 export * from "./switch-group";
 export * from "./tabs";

@@ -1,0 +1,135 @@
+/* Toast component styles */
+
+/* Toast Region - Container for all toasts */
+.toast-region {
+  @apply fixed z-50 flex flex-col gap-2 outline-none;
+}
+
+/* Placement variants */
+.toast-region--top-left {
+  @apply top-4 left-4;
+}
+
+.toast-region--top-right {
+  @apply top-4 right-4;
+}
+
+.toast-region--bottom-left {
+  @apply bottom-4 left-4;
+}
+
+.toast-region--bottom-right {
+  @apply right-4 bottom-4 flex-col-reverse;
+}
+
+.toast-region:focus-visible {
+  @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Base toast styles */
+.toast {
+  @apply flex w-[230px] items-center gap-4 rounded-lg bg-surface px-4 py-3 shadow-surface forced-color-adjust-none outline-none;
+  view-transition-class: toast;
+}
+
+.toast:focus-visible {
+  @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Toast content */
+.toast__content {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+/* Toast title */
+.toast__title {
+  @apply text-sm leading-6 font-semibold;
+}
+
+/* Toast description */
+.toast__description {
+  @apply text-xs text-muted;
+}
+
+/* Toast close button */
+.toast__close {
+  @apply shrink-0;
+}
+
+/* Variant modifiers */
+.toast--default .toast__title {
+  @apply text-foreground;
+}
+
+.toast--accent {
+  @apply bg-accent text-accent-foreground;
+}
+
+.toast--accent .toast__title {
+  @apply text-accent-foreground;
+}
+
+.toast--accent .toast__description {
+  @apply text-accent-foreground/80;
+}
+
+.toast--success {
+  @apply bg-success text-success-foreground;
+}
+
+.toast--success .toast__title {
+  @apply text-success-foreground;
+}
+
+.toast--success .toast__description {
+  @apply text-success-foreground/80;
+}
+
+.toast--warning {
+  @apply bg-warning text-warning-foreground;
+}
+
+.toast--warning .toast__title {
+  @apply text-warning-foreground;
+}
+
+.toast--warning .toast__description {
+  @apply text-warning-foreground/80;
+}
+
+.toast--danger {
+  @apply bg-danger text-danger-foreground;
+}
+
+.toast--danger .toast__title {
+  @apply text-danger-foreground;
+}
+
+.toast--danger .toast__description {
+  @apply text-danger-foreground/80;
+}
+
+/* View transition animations */
+::view-transition-new(.toast):only-child {
+  animation: toast-slide-in 400ms;
+}
+
+::view-transition-old(.toast):only-child {
+  animation: toast-slide-out 400ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes toast-slide-out {
+  to {
+    translate: 100% 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes toast-slide-in {
+  from {
+    translate: 100% 0;
+    opacity: 0;
+  }
+}
