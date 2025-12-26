@@ -13,7 +13,7 @@ import {sectionWrapper, titleWrapper, title, subtitle} from "../primitives";
 
 import {FeaturesGrid} from "./features-grid";
 
-import {OpenCollectiveIcon, PatreonIcon, HeartBoldIcon, PlusLinearIcon} from "@/components/icons";
+import {OpenCollectiveIcon, HeartBoldIcon, PlusLinearIcon} from "@/components/icons";
 import {SPONSOR_TIERS, SPONSOR_COLORS, getTier} from "@/libs/docs/sponsors";
 import {SonarPulse} from "@/components/sonar-pulse";
 import {useIsMobile} from "@/hooks/use-media-query";
@@ -28,13 +28,6 @@ const supportAccounts = [
     description: "Sponsor the HeroUI maintainers.",
     icon: <OpenCollectiveIcon className="text-pink-500" />,
     href: "https://opencollective.com/heroui",
-    isExternal: true,
-  },
-  {
-    title: "Patreon",
-    description: "Sponsor the creator, Junior Garcia.",
-    icon: <PatreonIcon className="text-pink-500" />,
-    href: "https://www.patreon.com/jrgarciadev?fan_landing=true",
     isExternal: true,
   },
 ];
@@ -169,7 +162,7 @@ export const Support: FC<SupportProps> = ({sponsors = []}) => {
           <Spacer y={12} />
           <FeaturesGrid
             classNames={{
-              base: "lg:grid-cols-2",
+              base: "flex justify-center",
             }}
             features={supportAccounts}
           />
