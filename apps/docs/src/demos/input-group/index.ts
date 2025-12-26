@@ -16,3 +16,4 @@ export {WithPrefixIcon} from "./with-prefix-icon";
 export {WithSuffixIcon} from "./with-suffix-icon";
 export {WithTextPrefix} from "./with-text-prefix";
 export {WithTextSuffix} from "./with-text-suffix";
+export {WithTextArea} from "./with-textarea";
