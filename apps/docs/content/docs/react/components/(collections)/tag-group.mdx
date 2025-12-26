@@ -84,6 +84,12 @@ The `selectedVariant` prop controls the visual style of selected tags. Use `"sof
   name="tag-group-on-surface"
 />
 
+### On Form Field
+
+<ComponentPreview
+  name="tag-group-on-form-field"
+/>
+
 ### With Error Message
 
 <ComponentPreview
@@ -181,6 +187,7 @@ The TagGroup component uses these CSS classes ([View source styles](https://gith
 - `.tag--default` - Default variant with field-on-background styling
 - `.tag--surface` - Surface variant with surface background
 - `.tag--on-surface` - On-surface variant for use on surface components
+- `.tag--on-form-field` - On-form-field variant for use within form components
 
 #### Selected Variant Classes
 - `.tag--selected-default` - Default selected state with accent background (applied when selected)
@@ -223,6 +230,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant` | `"default" \| "surface"` | `"default"` | Visual variant of the tags |
 | `selectedVariant` | `"default" \| "soft"` | `"default"` |  Visual style for selected tags (use "soft" for subtle accent) |
 | `isOnSurface` | `boolean` | - | Whether tags are displayed on a surface component |
+| `isOnFormField` | `boolean` | - | Whether tags are displayed within a form component |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | TagGroup content or render function |
 
@@ -245,7 +253,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Tag content or render function |
 
-**Note**: `size`, `variant`, and `isOnSurface` are inherited from the parent `TagGroup` component and cannot be set directly on individual `Tag` components.
+**Note**: `size`, `variant`, `isOnSurface`, and `isOnFormField` are inherited from the parent `TagGroup` component and cannot be set directly on individual `Tag` components.
 
 ### Tag.RemoveButton Props
 

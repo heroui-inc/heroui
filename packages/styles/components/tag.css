@@ -78,12 +78,12 @@
 
 /* Variant */
 .tag--default {
-  @apply bg-field-on-background text-default-foreground;
+  @apply bg-default text-default-foreground;
 
   /* Hover state (when not selected or disabled) */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
-      @apply bg-field-on-background-hover;
+      @apply bg-default-hover;
     }
   }
 }
@@ -113,6 +113,18 @@
   /* Focus visible state */
   &:is(:focus-visible, [data-focus-visible]) {
     background-color: var(--color-on-surface-focus);
+  }
+}
+
+/* On Form Field */
+.tag--on-form-field {
+  @apply bg-field-on-background shadow-none;
+
+  /* Hover state (when not selected or disabled) */
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      @apply bg-field-on-background-hover;
+    }
   }
 }
 

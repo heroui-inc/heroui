@@ -996,6 +996,10 @@ export const demos: Record<string, DemoItem> = {
     component: TagGroupDemos.OnSurface,
     file: "tag-group/on-surface.tsx",
   },
+  "tag-group-on-form-field": {
+    component: TagGroupDemos.OnFormField,
+    file: "tag-group/on-form-field.tsx",
+  },
   "tag-group-with-error-message": {
     component: TagGroupDemos.WithErrorMessage,
     file: "tag-group/with-error-message.tsx",
