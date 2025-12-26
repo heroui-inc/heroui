@@ -7,6 +7,7 @@ export const tagVariants = tv({
     size: "md",
     isOnSurface: false,
     variant: "default",
+    selectedVariant: "default",
   },
   slots: {
     base: "tag",
@@ -30,6 +31,14 @@ export const tagVariants = tv({
       },
       surface: {
         base: "tag--surface",
+      },
+    },
+    selectedVariant: {
+      default: {
+        base: "tag--selected-default",
+      },
+      soft: {
+        base: "tag--selected-soft",
       },
     },
     isOnSurface: {
