@@ -59,7 +59,7 @@ export function SidebarContent({
             "md:layout:[--fd-sidebar-width:268px] pointer-events-none sticky z-20 [grid-area:sidebar] *:pointer-events-auto max-md:hidden",
             navMode === "auto"
               ? "top-(--fd-docs-row-1) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-1))]"
-              : "top-(--fd-docs-row-2) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-2))]",
+              : "top-(--fd-docs-row-2) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-2))] max-lg:top-(--fd-docs-row-3) max-lg:h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))]",
           )}
         >
           {!!collapsed && <div className="absolute inset-y-0 start-0 w-4" {...rest} />}
