@@ -5,8 +5,6 @@ import {tv} from "tailwind-variants";
 export const tagVariants = tv({
   defaultVariants: {
     size: "md",
-    isOnSurface: false,
-    isOnFormField: false,
     variant: "default",
     selectedVariant: "default",
   },
@@ -33,27 +31,13 @@ export const tagVariants = tv({
       surface: {
         base: "tag--surface",
       },
-    },
-    selectedVariant: {
-      default: {
-        base: "tag--selected-default",
-      },
-      soft: {
-        base: "tag--selected-soft",
-      },
-    },
-    isOnSurface: {
-      true: {
+      "on-surface": {
         base: "tag--on-surface",
         removeButton: "tag__remove-button--on-surface",
       },
-      false: {},
-    },
-    isOnFormField: {
-      true: {
+      "on-form-field": {
         base: "tag--on-form-field",
       },
-      false: {},
     },
   },
 });

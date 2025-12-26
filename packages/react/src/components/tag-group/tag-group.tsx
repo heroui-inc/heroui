@@ -3,14 +3,9 @@
 import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext, useMemo} from "react";
-import {
-  FormContext,
-  TagGroup as TagGroupPrimitive,
-  TagList as TagListPrimitive,
-} from "react-aria-components";
+import {TagGroup as TagGroupPrimitive, TagList as TagListPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
 
 import {tagGroupVariants} from "./tag-group.styles";
 
@@ -20,10 +15,7 @@ import {tagGroupVariants} from "./tag-group.styles";
 type TagGroupContext = {
   slots?: ReturnType<typeof tagGroupVariants>;
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface";
-  selectedVariant?: "default" | "soft";
-  isOnSurface?: boolean;
-  isOnFormField?: boolean;
+  variant?: "default" | "surface" | "on-surface" | "on-form-field";
 };
 
 const TagGroupContext = createContext<TagGroupContext>({});
@@ -33,37 +25,11 @@ const TagGroupContext = createContext<TagGroupContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface";
-  selectedVariant?: "default" | "soft";
-  isOnSurface?: boolean;
-  isOnFormField?: boolean;
+  variant?: "default" | "surface" | "on-surface" | "on-form-field";
 };
 
-const TagGroupRoot = ({
-  children,
-  className,
-  isOnFormField,
-  isOnSurface,
-  selectedVariant,
-  size,
-  variant,
-  ...restProps
-}: TagGroupRootProps) => {
+const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGroupRootProps) => {
   const slots = useMemo(() => tagGroupVariants(), []);
-
-  const surfaceContext = useContext(SurfaceContext);
-
-  const formContext = useContext(FormContext);
-
-  const isOnSurfaceValue = useMemo(
-    () => isOnSurface ?? (surfaceContext.variant !== undefined ? true : false),
-    [isOnSurface, surfaceContext.variant],
-  );
-
-  const isOnFormFieldValue = useMemo(
-    () => isOnFormField ?? (formContext !== null ? true : false),
-    [isOnFormField, formContext],
-  );
 
   return (
     <TagGroupContext
@@ -71,8 +37,6 @@ const TagGroupRoot = ({
         slots,
         size,
         variant,
-        isOnSurface: isOnSurfaceValue,
-        isOnFormField: isOnFormFieldValue,
       }}
     >
       <TagGroupPrimitive className={slots.base({className})} data-slot="tag-group" {...restProps}>

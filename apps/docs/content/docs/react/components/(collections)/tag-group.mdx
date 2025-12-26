@@ -52,14 +52,6 @@ export default () => (
   name="tag-group-variants"
 />
 
-### Selected Variants
-
-The `selectedVariant` prop controls the visual style of selected tags. Use `"soft"` for a more subtle selection appearance with softer accent colors.
-
-<ComponentPreview
-  name="tag-group-selected-variants"
-/>
-
 ### Disabled
 
 <ComponentPreview
@@ -76,18 +68,6 @@ The `selectedVariant` prop controls the visual style of selected tags. Use `"sof
 
 <ComponentPreview
   name="tag-group-controlled"
-/>
-
-### On Surface
-
-<ComponentPreview
-  name="tag-group-on-surface"
-/>
-
-### On Form Field
-
-<ComponentPreview
-  name="tag-group-on-form-field"
 />
 
 ### With Error Message
@@ -189,10 +169,6 @@ The TagGroup component uses these CSS classes ([View source styles](https://gith
 - `.tag--on-surface` - On-surface variant for use on surface components
 - `.tag--on-form-field` - On-form-field variant for use within form components
 
-#### Selected Variant Classes
-- `.tag--selected-default` - Default selected state with accent background (applied when selected)
-- `.tag--selected-soft` - Soft selected state with softer accent background (applied when selected)
-
 #### Modifier Classes
 - `.tag__remove-button--on-surface` - Remove button modifier for on-surface variant
 
@@ -227,10 +203,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isDisabled` | `boolean` | - | Whether the tag group is disabled |
 | `onRemove` | `(keys: Set<Key>) => void` | - | Handler called when tags are removed |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the tags in the group |
-| `variant` | `"default" \| "surface"` | `"default"` | Visual variant of the tags |
-| `selectedVariant` | `"default" \| "soft"` | `"default"` |  Visual style for selected tags (use "soft" for subtle accent) |
-| `isOnSurface` | `boolean` | - | Whether tags are displayed on a surface component |
-| `isOnFormField` | `boolean` | - | Whether tags are displayed within a form component |
+| `variant` | `"default" \| "surface" \| "on-surface" \| "on-form-field"` | `"default"` | Visual variant of the tags |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | TagGroup content or render function |
 
