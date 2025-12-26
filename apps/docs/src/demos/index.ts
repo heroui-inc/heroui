@@ -5,6 +5,7 @@ import * as AccordionDemos from "./accordion";
 import * as AlertDemos from "./alert";
 import * as AlertDialogDemos from "./alert-dialog";
 import * as AvatarDemos from "./avatar";
+import * as BreadcrumbsDemos from "./breadcrumbs";
 import * as ButtonDemos from "./button";
 import * as ButtonGroupDemos from "./button-group";
 import * as CardDemos from "./card";
@@ -175,6 +176,27 @@ export const demos: Record<string, DemoItem> = {
   "avatar-custom-styles": {
     component: AvatarDemos.CustomStyles,
     file: "avatar/custom-styles.tsx",
+  },
+  // Breadcrumbs demos
+  "breadcrumbs-basic": {
+    component: BreadcrumbsDemos.BreadcrumbsBasic,
+    file: "breadcrumbs/basic.tsx",
+  },
+  "breadcrumbs-level-2": {
+    component: BreadcrumbsDemos.BreadcrumbsLevel2,
+    file: "breadcrumbs/level-2.tsx",
+  },
+  "breadcrumbs-level-3": {
+    component: BreadcrumbsDemos.BreadcrumbsLevel3,
+    file: "breadcrumbs/level-3.tsx",
+  },
+  "breadcrumbs-custom-separator": {
+    component: BreadcrumbsDemos.BreadcrumbsCustomSeparator,
+    file: "breadcrumbs/custom-separator.tsx",
+  },
+  "breadcrumbs-disabled": {
+    component: BreadcrumbsDemos.BreadcrumbsDisabled,
+    file: "breadcrumbs/disabled.tsx",
   },
   // Button demos
   "button-basic": {

@@ -38,7 +38,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Navigation",
-    components: ["accordion", "disclosure", "disclosure-group", "link", "tabs"],
+    components: ["accordion", "breadcrumbs", "disclosure", "disclosure-group", "link", "tabs"],
   },
   {
     category: "Overlays",
