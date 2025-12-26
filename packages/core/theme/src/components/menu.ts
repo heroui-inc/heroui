@@ -12,7 +12,7 @@ import {dataFocusVisibleClasses} from "../utils";
 const menu = tv({
   slots: {
     base: "w-full relative flex flex-col gap-1 p-1 overflow-clip",
-    list: "w-full flex flex-col gap-0.5 outline-none",
+    list: "w-full flex flex-col gap-0.5 outline-solid outline-transparent",
     emptyContent: [
       "h-10",
       "px-2",
@@ -63,21 +63,21 @@ const menuItem = tv({
       "box-border",
       "rounded-small",
       "subpixel-antialiased",
-      "outline-none",
+      "outline-solid outline-transparent",
       "cursor-pointer",
       "tap-highlight-transparent",
       // focus ring
       ...dataFocusVisibleClasses,
       "data-[focus-visible=true]:dark:ring-offset-background-content1",
     ],
-    wrapper: "w-full flex flex-col items-start justify-center",
-    title: "flex-1 text-small font-normal",
+    wrapper: "w-full flex flex-col items-start justify-center min-w-0",
+    title: "flex-1 text-small font-normal w-full",
     description: ["w-full", "text-tiny", "text-foreground-500", "group-hover:text-current"],
-    selectedIcon: ["text-inherit", "w-3", "h-3", "flex-shrink-0"],
+    selectedIcon: ["text-inherit", "w-3", "h-3", "shrink-0"],
     shortcut: [
       "px-1",
       "py-0.5",
-      "rounded",
+      "rounded-sm",
       "font-sans",
       "text-foreground-500",
       "text-tiny",

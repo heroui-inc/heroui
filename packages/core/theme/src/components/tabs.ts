@@ -24,6 +24,7 @@ const tabs = tv({
   slots: {
     base: "inline-flex",
     tabList: [
+      "relative",
       "flex",
       "p-1",
       "h-fit",
@@ -44,7 +45,7 @@ const tabs = tv({
       "relative",
       "justify-center",
       "items-center",
-      "outline-none",
+      "outline-solid outline-transparent",
       "cursor-pointer",
       "transition-opacity",
       "tap-highlight-transparent",
@@ -63,11 +64,21 @@ const tabs = tv({
       "text-default-500",
       "group-data-[selected=true]:text-foreground",
     ],
-    cursor: ["absolute", "z-0", "bg-white"],
+    cursor: [
+      "absolute",
+      "z-0",
+      "bg-white",
+      "will-change-[transform,width,height]",
+      "invisible",
+      "data-[initialized=true]:visible",
+      "data-[animated=true]:transition-[left,top,width,height]",
+      "data-[animated=true]:duration-250",
+      "data-[animated=true]:ease-out",
+    ],
     panel: [
       "py-3",
       "px-1",
-      "outline-none",
+      "outline-solid outline-transparent",
       "data-[inert=true]:hidden",
       // focus ring
       ...dataFocusVisibleClasses,
@@ -76,20 +87,16 @@ const tabs = tv({
   },
   variants: {
     variant: {
-      solid: {
-        cursor: "inset-0",
-      },
+      solid: {},
       light: {
         tabList: "bg-transparent dark:bg-transparent",
-        cursor: "inset-0",
       },
       underlined: {
         tabList: "bg-transparent dark:bg-transparent",
         cursor: "h-[2px] w-[80%] bottom-0 shadow-[0_1px_0px_0_rgba(0,0,0,0.05)]",
       },
       bordered: {
-        tabList: "bg-transparent dark:bg-transparent border-medium border-default-200 shadow-sm",
-        cursor: "inset-0",
+        tabList: "bg-transparent dark:bg-transparent border-medium border-default-200 shadow-xs",
       },
     },
     color: {

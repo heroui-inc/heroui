@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {Meta} from "@storybook/react";
+import type {ButtonVariantProps} from "@heroui/theme";
+import type {PopoverProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
-import {popover, ButtonVariantProps} from "@heroui/theme";
+import {popover} from "@heroui/theme";
 import {Button} from "@heroui/button";
 import {Input} from "@heroui/input";
 import {Card, CardHeader, CardFooter} from "@heroui/card";
 
-import {Popover, PopoverTrigger, PopoverContent, PopoverProps} from "../src";
+import {Popover, PopoverTrigger, PopoverContent} from "../src";
 
 export default {
   title: "Components/Popover",

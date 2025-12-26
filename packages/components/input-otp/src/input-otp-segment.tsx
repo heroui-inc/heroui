@@ -1,6 +1,7 @@
-import {SlotProps} from "input-otp";
+import type {SlotProps} from "input-otp";
+
 import {useMemo} from "react";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {dataAttr} from "@heroui/shared-utils";
 import {cn} from "@heroui/theme";
 
 import {useInputOtpContext} from "./input-otp-context";
@@ -10,9 +11,9 @@ export const InputOtpSegment = ({
 }: SlotProps & {isFocused?: boolean; isFocusVisible?: boolean}) => {
   const {classNames, slots, type} = useInputOtpContext();
 
-  const passwordCharStyles = clsx(classNames?.passwordChar);
-  const caretStyles = clsx(classNames?.caret);
-  const segmentStyles = clsx(classNames?.segment);
+  const passwordCharStyles = cn(classNames?.passwordChar);
+  const caretStyles = cn(classNames?.caret);
+  const segmentStyles = cn(classNames?.segment);
 
   const displayValue = useMemo(() => {
     if (props.isActive && !props.char) {

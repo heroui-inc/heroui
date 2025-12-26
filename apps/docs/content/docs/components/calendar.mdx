@@ -250,6 +250,12 @@ Here's the example to customize `topContent` and `bottomContent` to have some pr
       default: "-"
     },
     {
+      attribute: "selectionAlignment",
+      type: "start | center | end",
+      description: "Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection.",
+      default: "center"
+    },
+    {
       attribute: "focusedValue",
       type: "DateValue",
       description: "Controls the currently focused date within the calendar.",
@@ -258,7 +264,7 @@ Here's the example to customize `topContent` and `bottomContent` to have some pr
     {
       attribute: "defaultFocusedValue",
       type: "DateValue",
-      description: "The date that is focused when the calendar first mounts (uncountrolled).",
+      description: "The date that is focused when the calendar first mounts (uncontrolled).",
       default: "-"
     },
     {

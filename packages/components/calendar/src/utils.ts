@@ -1,4 +1,6 @@
-import {DateValue, startOfYear} from "@internationalized/date";
+import type {DateValue} from "@internationalized/date";
+
+import {startOfYear} from "@internationalized/date";
 
 export function getYearRange(start?: DateValue | null, end?: DateValue | null): DateValue[] {
   const years: DateValue[] = [];

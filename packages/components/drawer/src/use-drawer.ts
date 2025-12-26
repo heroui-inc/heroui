@@ -1,11 +1,12 @@
 import type {ModalProps} from "@heroui/modal";
+import type {ReactRef} from "@heroui/react-utils";
+import type {PropGetter} from "@heroui/system";
 
-import {drawer} from "@heroui/theme";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {drawer, cn} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
 import {useCallback, useMemo} from "react";
 import {TRANSITION_EASINGS} from "@heroui/framer-utils";
-import {clsx, isEmpty} from "@heroui/shared-utils";
-import {PropGetter} from "@heroui/system";
+import {isEmpty} from "@heroui/shared-utils";
 
 interface Props extends Omit<ModalProps, "placement" | "scrollBehavior" | "children"> {
   /**
@@ -67,7 +68,7 @@ export function useDrawer(originalProps: UseDrawerProps) {
     };
   }, [placement, drawerMotionProps]);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const slots = useMemo(
     () =>

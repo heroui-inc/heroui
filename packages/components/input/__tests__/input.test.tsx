@@ -1,8 +1,11 @@
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {render, renderHook, fireEvent, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Input} from "../src";
 
@@ -86,7 +89,37 @@ describe("Input", () => {
     const labelId = container.querySelector("label")?.id;
     const labelledBy = container.querySelector("input")?.getAttribute("aria-labelledby");
 
-    expect(labelledBy?.includes(labelId as string)).toBeTruthy();
+    expect(labelledBy).toBe(labelId);
+  });
+
+  it("should be labelled by placeholder when no label is provided", () => {
+    const {getByRole} = render(<Input placeholder="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by aria-label when no label is provided", () => {
+    const {getByRole} = render(<Input aria-label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label when label is provided", () => {
+    const {getByRole} = render(<Input label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label and aria-label when both label and aria-label are provided", () => {
+    const {getByRole} = render(<Input aria-label="test input" label="test input" />);
+
+    expect(getByRole("textbox", {name: "test input test input"})).toBeInTheDocument();
+  });
+
+  it("should be labelled by label when both label and placeholder are provided", () => {
+    const {getByRole} = render(<Input label="test input" placeholder="test input placeholder" />);
+
+    expect(getByRole("textbox", {name: "test input"})).toBeInTheDocument();
   });
 
   it("should have the correct type attribute", () => {
@@ -299,6 +332,66 @@ describe("Input", () => {
     await user.click(clearButton);
 
     expect(onClear).toHaveBeenCalledTimes(0);
+  });
+
+  it("should clear value when isClearable and pressing ESC key", async () => {
+    const onClear = jest.fn();
+    const defaultValue = "test value";
+
+    const {getByRole} = render(<Input isClearable defaultValue={defaultValue} onClear={onClear} />);
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue);
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe("");
+
+    expect(onClear).toHaveBeenCalledTimes(1);
+  });
+
+  it("should not clear value when pressing ESC key if input is empty", () => {
+    const onClear = jest.fn();
+
+    const {getByRole} = render(<Input isClearable defaultValue="" onClear={onClear} />);
+
+    const input = getByRole("textbox");
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(onClear).not.toHaveBeenCalled();
+  });
+
+  it("should not clear value when pressing ESC key if input is isClearable", () => {
+    const defaultValue = "test value";
+
+    const {getByRole} = render(<Input defaultValue={defaultValue} />);
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe("test value");
+  });
+
+  it("should not clear value when pressing ESC key if input is readonly", () => {
+    const onClear = jest.fn();
+    const defaultValue = "test value";
+
+    const {getByRole} = render(
+      <Input isClearable isReadOnly defaultValue={defaultValue} onClear={onClear} />,
+    );
+
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    expect(input.value).toBe(defaultValue);
+
+    fireEvent.keyDown(input, {key: "Escape"});
+
+    expect(input.value).toBe(defaultValue);
+
+    expect(onClear).not.toHaveBeenCalled();
   });
 });
 
@@ -572,5 +665,55 @@ describe("Input with React Hook Form", () => {
         // expect(input).not.toHaveAttribute("aria-invalid");
       });
     });
+  });
+});
+
+describe("Input with HeroUIProvider context", () => {
+  it("should inherit labelPlacement from HeroUIProvider", () => {
+    const labelContent = "Test input label";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside">
+        <Input label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("label");
+
+    expect(label).toBeTruthy();
+    expect(label?.className).toMatch(/translate-y.*100%/);
+  });
+
+  it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+    const labelContent = "Test input label";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside">
+        <Input label={labelContent} labelPlacement="inside" />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("label");
+
+    expect(label).toBeTruthy();
+    expect(label?.className).not.toMatch(/translate-y.*100%/);
+  });
+
+  it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+    const labelContent = "Test input label";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside-top">
+        <Input label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("label");
+    const mainWrapper = container.querySelector("[data-slot=main-wrapper]");
+
+    expect(label).toBeTruthy();
+    // outside-top uses flex-col on mainWrapper and relative label (no translate-y)
+    expect(mainWrapper).toHaveClass("flex-col");
+    expect(label?.className).not.toMatch(/translate-y.*100%/);
   });
 });

@@ -17,8 +17,7 @@ const breadcrumbItem = tv({
       "flex gap-1 items-center",
       "cursor-pointer",
       "whitespace-nowrap",
-      "line-clamp-1",
-      "outline-none",
+      "outline-solid outline-transparent",
       "tap-highlight-transparent",
       // focus ring
       ...dataFocusVisibleClasses,
@@ -85,7 +84,7 @@ const breadcrumbItem = tv({
         item: "cursor-default",
       },
       false: {
-        item: ["hover:opacity-80", "active:opacity-disabled"],
+        item: ["hover:opacity-hover", "active:opacity-disabled"],
       },
     },
     isDisabled: {
@@ -211,7 +210,7 @@ const breadcrumbs = tv({
         list: "bg-default-100",
       },
       bordered: {
-        list: "border-medium border-default-200 shadow-sm",
+        list: "border-medium border-default-200 shadow-xs",
       },
       light: {},
     },

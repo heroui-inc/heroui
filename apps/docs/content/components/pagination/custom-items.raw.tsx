@@ -1,5 +1,8 @@
-import React, {SVGProps} from "react";
-import {cn, Pagination, PaginationItemType, PaginationItemRenderProps} from "@heroui/react";
+import type {SVGProps} from "react";
+import type {PaginationItemRenderProps} from "@heroui/react";
+
+import React from "react";
+import {cn, Pagination, PaginationItemType} from "@heroui/react";
 
 type IconSvgProps = SVGProps<SVGSVGElement>;
 
@@ -76,7 +79,7 @@ export default function App() {
         ref={ref}
         className={cn(
           className,
-          isActive && "text-white bg-gradient-to-br from-indigo-500 to-pink-500 font-bold",
+          isActive && "text-white bg-linear-to-br from-indigo-500 to-pink-500 font-bold",
         )}
         onClick={() => setPage(value)}
       >

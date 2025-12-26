@@ -1,4 +1,4 @@
-import {IconSvgProps} from "../types";
+import type {IconSvgProps} from "../types";
 
 export const AlignVerticallyBoldIcon = (props: IconSvgProps) => (
   <svg

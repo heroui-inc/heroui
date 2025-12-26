@@ -35,7 +35,7 @@ async function getGithubInfo() {
     };
 
     // Format JSON with prettier
-    const formattedJson = prettier.format(JSON.stringify(githubInfo), {
+    const formattedJson = await prettier.format(JSON.stringify(githubInfo), {
       parser: 'json',
       printWidth: 80,
       tabWidth: 2,

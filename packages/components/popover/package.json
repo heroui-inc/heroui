@@ -1,6 +1,6 @@
 {
   "name": "@heroui/popover",
-  "version": "2.3.13",
+  "version": "2.3.29",
   "description": "A popover is an overlay element positioned relative to a trigger.",
   "keywords": [
     "popover"
@@ -34,8 +34,8 @@
     "postpack": "clean-package restore"
   },
   "peerDependencies": {
-    "@heroui/system": ">=2.4.7",
-    "@heroui/theme": ">=2.4.6",
+    "@heroui/system": ">=2.4.18",
+    "@heroui/theme": ">=2.4.24",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
@@ -47,16 +47,14 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-aria-button": "workspace:*",
+    "@heroui/use-aria-overlay": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/dialog": "3.5.21",
-    "@react-aria/focus": "3.19.1",
-    "@react-aria/interactions": "3.23.0",
-    "@react-aria/overlays": "3.25.0",
-    "@react-aria/utils": "3.27.0",
-    "@react-stately/overlays": "3.6.13",
-    "@react-types/button": "3.10.2",
-    "@react-types/overlays": "3.8.12"
+    "@react-aria/dialog": "3.5.32",
+    "@react-aria/focus": "3.21.3",
+    "@react-aria/overlays": "3.31.0",
+    "@react-stately/overlays": "3.6.21",
+    "@react-types/overlays": "3.9.2"
   },
   "devDependencies": {
     "@heroui/card": "workspace:*",
@@ -65,7 +63,7 @@
     "@heroui/theme": "workspace:*",
     "@heroui/test-utils": "workspace:*",
     "clean-package": "2.2.0",
-    "framer-motion": "11.9.0",
+    "framer-motion": "11.18.2",
     "react": "18.3.0",
     "react-dom": "18.3.0"
   },

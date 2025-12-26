@@ -1,9 +1,22 @@
-import React, {useEffect} from "react";
-import {Meta} from "@storybook/react";
+import type {Meta} from "@storybook/react";
+import type {ToastProps} from "../src";
+
+import {useEffect, useState} from "react";
 import {cn, toast} from "@heroui/theme";
 import {Button} from "@heroui/button";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@heroui/modal";
+import {Drawer, DrawerContent} from "@heroui/drawer";
+import {Spinner} from "@heroui/spinner";
+import {AvatarIcon, CloseIcon} from "@heroui/shared-icons";
 
-import {Toast, ToastProps, ToastProvider, addToast, closeAll} from "../src";
+import {Toast, ToastProvider, addToast, closeToast, closeAll} from "../src";
 
 export default {
   title: "Components/Toast",
@@ -49,6 +62,9 @@ export default {
         "top-center",
       ],
     },
+    maxVisibleToasts: {
+      control: {type: "number"},
+    },
     hideCloseButton: {
       control: {
         type: "boolean",
@@ -80,7 +96,7 @@ const defaultProps = {
 const Template = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div>
         <Button
           onPress={() => {
@@ -100,14 +116,14 @@ const Template = (args: ToastProps) => {
 const ShowTimeoutProgressTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <Button
         onPress={() => {
           addToast({
             title: "Toast Title",
             description: "Toast Description",
             timeout: 3000,
-            shouldShowTimeoutProgess: true,
+            shouldShowTimeoutProgress: true,
             ...args,
           });
         }}
@@ -121,7 +137,7 @@ const ShowTimeoutProgressTemplate = (args: ToastProps) => {
 const WithEndContentTemplate = (args) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <Button
         onPress={() => {
           addToast({
@@ -147,7 +163,7 @@ const WithEndContentTemplate = (args) => {
 const PlacementTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div>
         <Button
           onPress={() => {
@@ -168,7 +184,11 @@ const PlacementTemplate = (args: ToastProps) => {
 const DisableAnimationTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider disableAnimation={true} placement={args.placement} />
+      <ToastProvider
+        disableAnimation={true}
+        maxVisibleToasts={args.maxVisibleToasts}
+        placement={args.placement}
+      />
       <div>
         <Button
           onPress={() => {
@@ -189,14 +209,16 @@ const DisableAnimationTemplate = (args: ToastProps) => {
 const PromiseToastTemplate = (args: ToastProps) => {
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div>
         <Button
           onPress={() => {
             addToast({
               title: "Toast Title",
               description: "Toast Displayed Successfully",
-              promise: new Promise((resolve) => setTimeout(resolve, 5000)),
+              promise: new Promise((resolve) => setTimeout(resolve, 3000)),
+              timeout: 3000,
+              shouldShowTimeoutProgress: false,
               ...args,
             });
           }}
@@ -208,14 +230,76 @@ const PromiseToastTemplate = (args: ToastProps) => {
   );
 };
 
+const WithToastFromOverlayTemplate = (args) => {
+  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+  const {
+    isOpen: isDrawerOpen,
+    onOpen: onDrawerOpen,
+    onOpenChange: onDrawerOpenChange,
+  } = useDisclosure({defaultOpen: args.defaultOpen});
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+
+      <Modal isOpen={isOpen} scrollBehavior="outside" onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Toast from Modal</ModalHeader>
+          <ModalBody>
+            <div>Press &quot;Show Toast&quot; to launch a toast.</div>
+          </ModalBody>
+          <ModalFooter>
+            <div className="flex gap-4">
+              <Button
+                onPress={() => {
+                  addToast({
+                    title: "Toast from modal",
+                    description: "Toast Displayed Successfully",
+                    ...args,
+                  });
+                }}
+              >
+                Show Toast
+              </Button>
+              <Button onPress={onClose}>Close</Button>
+            </div>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Drawer isOpen={isDrawerOpen} onOpenChange={onDrawerOpenChange}>
+        <DrawerContent className="p-4">
+          <Button
+            className="w-fit"
+            onPress={() => {
+              addToast({
+                title: "Toast from drawer",
+                description: "Toast Displayed Successfully",
+                ...args,
+              });
+            }}
+          >
+            Show Toast
+          </Button>
+        </DrawerContent>
+      </Drawer>
+
+      <div className="flex gap-x-2">
+        <Button onPress={onOpen}>Open Modal</Button>
+        <Button onPress={onDrawerOpen}>Open Drawer</Button>
+      </div>
+    </>
+  );
+};
+
 const CustomToastComponent = (args) => {
   const color = args.color;
   const colorMap = {
-    primary: "before:bg-primary border-primary-200 dark:border-primary-100",
-    secondary: "before:bg-secondary border-secondary-200 dark:border-secondary-100",
-    success: "before:bg-success border-success-200 dark:border-success-100",
-    warning: "before:bg-warning border-warning-200 dark:border-warning-100",
-    danger: "before:bg-danger border-danger-200 dark:border-danger-100",
+    primary: "border-primary-200 dark:border-primary-100 border-l-primary",
+    secondary: "border-secondary-200 dark:border-secondary-100 border-l-secondary",
+    success: "border-success-200 dark:border-success-100 border-l-success",
+    warning: "border-warning-200 dark:border-warning-100 border-l-warning",
+    danger: "border-danger-200 dark:border-danger-100 border-l-danger",
   };
 
   return (
@@ -225,16 +309,12 @@ const CustomToastComponent = (args) => {
         variant="bordered"
         onPress={() => {
           addToast({
-            title: "Sucessful!",
-            description: "Document uploaded to cloud successful.",
+            title: "Successful!",
+            description: "Document uploaded to cloud successfully.",
             classNames: {
               base: cn([
                 "bg-default-50 dark:bg-background shadow-sm",
-                "border-1",
-                "relative before:content-[''] before:absolute before:z-10",
-                "before:left-0 before:top-[-1px] before:bottom-[-1px] before:w-1",
-                "rounded-l-none border-l-0",
-                "rounded-md",
+                "border border-l-8 rounded-md rounded-l-none",
                 "flex flex-col items-start",
                 colorMap[color],
               ]),
@@ -251,6 +331,7 @@ const CustomToastComponent = (args) => {
               </div>
             ),
             color: color,
+            ...args,
           });
         }}
       >
@@ -265,7 +346,7 @@ const CustomToastTemplate = (args) => {
 
   return (
     <>
-      <ToastProvider placement={args.placement} />
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
       <div className="flex gap-2">
         {colors.map((color, idx) => (
           <CustomToastComponent key={idx} color={color} />
@@ -275,10 +356,11 @@ const CustomToastTemplate = (args) => {
   );
 };
 
-const CustomCloseButtonTemplate = (args) => {
+const CustomCloseIconTemplate = (args) => {
   return (
     <>
       <ToastProvider
+        maxVisibleToasts={args.maxVisibleToasts}
         placement={args.placement}
         toastProps={{
           classNames: {
@@ -289,28 +371,56 @@ const CustomCloseButtonTemplate = (args) => {
       <Button
         onPress={() =>
           addToast({
-            title: "Toast Title",
+            title: "Custom Close Icon",
             description: "Toast Description",
-            closeIcon: (
-              <svg
-                fill="none"
-                height="32"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                width="32"
-              >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            ),
+            closeIcon: CloseIcon,
           })
         }
       >
         Toast
       </Button>
+    </>
+  );
+};
+
+const CloseToastTemplate = (args: ToastProps) => {
+  const [toastKey, setToastKey] = useState<string[]>([]);
+
+  return (
+    <>
+      <ToastProvider maxVisibleToasts={args.maxVisibleToasts} placement={args.placement} />
+      <div className="flex flex-wrap gap-2">
+        <Button
+          onPress={() => {
+            const key = addToast({
+              title: "New Toast",
+              timeout: Infinity,
+            });
+
+            if (!key) return;
+            setToastKey((prev) => [...prev, key]);
+          }}
+        >
+          Add Toast
+        </Button>
+        <Button
+          onPress={() => {
+            if (toastKey.length == 0) return;
+            closeToast(toastKey[toastKey.length - 1]);
+            setToastKey((prev) => prev.slice(0, prev.length - 1));
+          }}
+        >
+          Close The Last Toast
+        </Button>
+        <Button
+          onPress={() => {
+            closeAll();
+            setToastKey([]);
+          }}
+        >
+          Close All Toasts
+        </Button>
+      </div>
     </>
   );
 };
@@ -330,33 +440,14 @@ export const WithDescription = {
   },
 };
 
-export const WithCustomIcon = {
-  render: Template,
+export const WithEndContent = {
+  render: WithEndContentTemplate,
   args: {
     ...defaultProps,
-    title: "Custom Icon",
-    icon: (
-      <svg height={24} viewBox="0 0 24 24" width={24}>
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeMiterlimit={10}
-          strokeWidth={1.5}
-        >
-          <path
-            d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z"
-            data-name="Stroke 1"
-          />
-          <path d="M11.837 11.174a4.372 4.372 0 10-.031 0z" data-name="Stroke 3" />
-        </g>
-      </svg>
-    ),
   },
 };
 
-export const iconHidden = {
+export const IconHidden = {
   render: Template,
   args: {
     ...defaultProps,
@@ -392,8 +483,8 @@ export const Placement = {
   },
 };
 
-export const WithEndContent = {
-  render: WithEndContentTemplate,
+export const ToastFromOverlay = {
+  render: WithToastFromOverlayTemplate,
   args: {
     ...defaultProps,
   },
@@ -406,8 +497,33 @@ export const CustomStyles = {
   },
 };
 
-export const CustomCloseButton = {
-  render: CustomCloseButtonTemplate,
+export const CustomIcon = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    title: "Custom Icon",
+    icon: AvatarIcon,
+  },
+};
+
+export const CustomLoadingComponent = {
+  render: PromiseToastTemplate,
+  args: {
+    ...defaultProps,
+    title: "Custom Loading Icon",
+    loadingComponent: <Spinner variant="spinner" />,
+  },
+};
+
+export const CustomCloseIcon = {
+  render: CustomCloseIconTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const CloseToast = {
+  render: CloseToastTemplate,
   args: {
     ...defaultProps,
   },

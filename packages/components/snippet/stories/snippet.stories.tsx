@@ -1,5 +1,6 @@
+import type {Meta} from "@storybook/react";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {snippet} from "@heroui/theme";
 
 import {Snippet} from "../src";

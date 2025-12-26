@@ -2,16 +2,19 @@ import type {FocusableProps, PressEvents} from "@react-types/shared";
 import type {SlotsToClasses, CardSlots, CardReturnType, CardVariantProps} from "@heroui/theme";
 import type {AriaButtonProps} from "@heroui/use-aria-button";
 import type {RippleProps} from "@heroui/ripple";
+import type {MouseEventHandler, ReactNode} from "react";
+import type {PressEvent} from "@react-aria/interactions";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {card} from "@heroui/theme";
-import {MouseEventHandler, ReactNode, useCallback, useMemo} from "react";
-import {chain, mergeProps} from "@react-aria/utils";
+import {card, cn} from "@heroui/theme";
+import {useCallback, useMemo} from "react";
 import {useFocusRing} from "@react-aria/focus";
-import {PressEvent, useHover} from "@react-aria/interactions";
+import {useHover} from "@react-aria/interactions";
 import {useAriaButton} from "@heroui/use-aria-button";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, filterDOMProps} from "@heroui/react-utils";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
+import {filterDOMProps} from "@heroui/react-utils";
 import {useDOMRef} from "@heroui/react-utils";
 import {useRipple} from "@heroui/ripple";
 
@@ -94,7 +97,7 @@ export function useCard(originalProps: UseCardProps) {
     originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
   const disableRipple = originalProps.disableRipple ?? globalContext?.disableRipple ?? false;
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const {onClear: onClearRipple, onPress: onRipplePressHandler, ripples} = useRipple();
 

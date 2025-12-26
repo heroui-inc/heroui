@@ -1,16 +1,16 @@
 import type {ChipVariantProps, ChipSlots, SlotsToClasses} from "@heroui/theme";
 import type {ReactNode} from "react";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {PressEvent} from "@react-types/shared";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
+import {mapPropsVariants} from "@heroui/system";
 import {usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
-import {chip} from "@heroui/theme";
+import {chip, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo, isValidElement, cloneElement} from "react";
-import {PressEvent} from "@react-types/shared";
 
 export interface UseChipProps extends HTMLHeroUIProps, ChipVariantProps {
   /**
@@ -77,7 +77,7 @@ export function useChip(originalProps: UseChipProps) {
 
   const domRef = useDOMRef(ref);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const isCloseable = !!onClose;
   const isDotVariant = originalProps.variant === "dot";
@@ -148,7 +148,7 @@ export function useChip(originalProps: UseChipProps) {
     isValidElement(content)
       ? cloneElement(content, {
           // @ts-ignore
-          className: clsx("max-h-[80%]", content.props.className),
+          className: cn("max-h-[80%]", content.props.className),
         })
       : null;
 

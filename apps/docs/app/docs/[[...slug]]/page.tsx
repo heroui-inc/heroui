@@ -1,26 +1,25 @@
 import type {Metadata} from "next";
+import type {Route} from "@/libs/docs/page";
 
 import {notFound} from "next/navigation";
 import {allDocs} from "contentlayer2/generated";
-import {Link} from "@heroui/react";
+import {Link, ToastProvider} from "@heroui/react";
 
 import {MDXContent} from "@/components/mdx-content";
 import {siteConfig} from "@/config/site";
 import {DocsPager, DocsToc} from "@/components/docs";
-import {Route} from "@/libs/docs/page";
 import {GITHUB_URL, REPO_NAME} from "@/libs/github/constants";
 import {CONTENT_PATH, TAG} from "@/libs/docs/config";
 import {getHeadings} from "@/libs/docs/utils";
 
 interface DocPageProps {
-  params: {
-    slug: string[];
-  };
+  params: Promise<{slug: string[]}>;
 }
 
 async function getDocFromParams({params}: DocPageProps) {
-  const slug = params.slug?.join("/") || "";
-  const doc = allDocs.find((doc) => doc.slugAsParams === slug);
+  const {slug} = await params;
+  const paramsSlug = slug?.join("/") || "";
+  const doc = allDocs.find((doc) => doc.slugAsParams === paramsSlug);
 
   if (!doc) {
     null;
@@ -72,9 +71,11 @@ export async function generateMetadata({params}: DocPageProps): Promise<Metadata
 }
 
 export async function generateStaticParams(): Promise<DocPageProps["params"][]> {
-  return allDocs.map((doc) => ({
-    slug: doc.slugAsParams.split("/"),
-  }));
+  return allDocs.map((doc) =>
+    Promise.resolve({
+      slug: doc.slugAsParams.split("/"),
+    }),
+  );
 }
 
 export default async function DocPage({params}: DocPageProps) {
@@ -104,6 +105,8 @@ export default async function DocPage({params}: DocPageProps) {
           <DocsToc headings={headings} />
         </div>
       )}
+      {/* toast page has its own provider*/}
+      {doc.title !== "Toast" && <ToastProvider />}
     </>
   );
 }

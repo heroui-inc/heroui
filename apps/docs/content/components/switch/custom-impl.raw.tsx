@@ -1,5 +1,7 @@
+import type {SwitchProps} from "@heroui/react";
+
 import React from "react";
-import {useSwitch, VisuallyHidden, SwitchProps} from "@heroui/react";
+import {useSwitch, VisuallyHidden} from "@heroui/react";
 
 export const MoonIcon = (props) => {
   return (

@@ -1,14 +1,16 @@
 "use client";
 
-import {FC, useRef, useEffect, useState} from "react";
-import {clsx} from "@heroui/shared-utils";
+import type {FC} from "react";
+import type {Heading} from "@/libs/docs/utils";
+
+import {useRef, useEffect, useState} from "react";
+import {cn} from "@heroui/theme";
 import {Divider, Spacer} from "@heroui/react";
 import {ChevronCircleTopLinearIcon} from "@heroui/shared-icons";
 import scrollIntoView from "scroll-into-view-if-needed";
 
 import {HeroUIProCallout} from "./heroui-pro-callout";
 
-import {Heading} from "@/libs/docs/utils";
 import {useScrollSpy} from "@/hooks/use-scroll-spy";
 import {useScrollPosition} from "@/hooks/use-scroll-position";
 import emitter from "@/libs/emitter";
@@ -67,7 +69,7 @@ export const DocsToc: FC<DocsTocProps> = ({headings}) => {
   }, []);
 
   return (
-    <div className={clsx("fixed", isProBannerVisible ? "top-32" : "top-20")}>
+    <div className={cn("fixed", isProBannerVisible ? "top-32" : "top-20")}>
       <div
         ref={tocRef}
         className="w-full max-w-[12rem] max-h-[calc(100vh-500px)] flex flex-col gap-4 text-left pb-16 scrollbar-hide overflow-y-scroll"
@@ -84,10 +86,11 @@ export const DocsToc: FC<DocsTocProps> = ({headings}) => {
               heading.level > 1 && (
                 <li
                   key={i}
-                  className={clsx(
+                  className={cn(
+                    "relative",
                     "transition-colors",
                     "font-normal",
-                    "flex items-center text-tiny font-normal text-default-500 dark:text-default-300",
+                    "flex items-center text-tiny font-normal text-default-500",
                     "data-[active=true]:text-foreground",
                     "dark:data-[active=true]:text-foreground",
                     "before:content-['']",

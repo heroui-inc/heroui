@@ -1,14 +1,24 @@
+import type {SlotsToClasses, ToastRegionSlots, ToastRegionVariantProps} from "@heroui/theme";
+import type {AriaToastRegionProps} from "@react-aria/toast";
+import type {QueuedToast, ToastState} from "@react-stately/toast";
+import type {ToastProps, ToastPlacement} from "./use-toast";
+
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {useToastRegion, AriaToastRegionProps} from "@react-aria/toast";
-import {QueuedToast, ToastState} from "@react-stately/toast";
+import {useToastRegion} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
-import {mergeProps} from "@react-aria/utils";
-import {toastRegion, ToastRegionVariantProps} from "@heroui/theme";
+import {toastRegion, cn} from "@heroui/theme";
+import {mergeProps} from "@heroui/shared-utils";
+import {AnimatePresence} from "framer-motion";
 
 import Toast from "./toast";
-import {ToastProps, ToastPlacement} from "./use-toast";
+import {isToastClosing} from "./toast-provider";
 
-interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps {
+export interface RegionProps {
+  className?: string;
+  classNames?: SlotsToClasses<ToastRegionSlots>;
+}
+
+interface ToastRegionProps<T> extends AriaToastRegionProps, ToastRegionVariantProps, RegionProps {
   toastQueue: ToastState<T>;
   placement?: ToastPlacement;
   maxVisibleToasts: number;
@@ -23,6 +33,8 @@ export function ToastRegion<T extends ToastProps>({
   maxVisibleToasts,
   toastOffset,
   toastProps = {},
+  className,
+  classNames,
   ...props
 }: ToastRegionProps<T>) {
   const ref = useRef(null);
@@ -40,6 +52,8 @@ export function ToastRegion<T extends ToastProps>({
       }),
     [disableAnimation],
   );
+
+  const baseStyles = cn(classNames?.base, className);
 
   useEffect(() => {
     function handleTouchOutside(event: TouchEvent) {
@@ -65,36 +79,45 @@ export function ToastRegion<T extends ToastProps>({
     <div
       {...mergeProps(regionProps, hoverProps)}
       ref={ref}
-      className={slots.base()}
+      className={slots.base({class: baseStyles})}
       data-placement={placement}
       onTouchStart={handleTouchStart}
     >
-      {toastQueue.visibleToasts.map((toast: QueuedToast<ToastProps>, index) => {
-        if (disableAnimation && total - index > maxVisibleToasts) {
+      <AnimatePresence>
+        {[...toastQueue.visibleToasts].reverse().map((toast: QueuedToast<ToastProps>, index) => {
+          if (disableAnimation && total - index > maxVisibleToasts) {
+            return null;
+          }
+
+          if (
+            disableAnimation ||
+            total - index <= 4 ||
+            (isHovered && total - index <= maxVisibleToasts + 1)
+          ) {
+            const isClosing = isToastClosing(toast.key);
+
+            return (
+              <Toast
+                key={toast.key}
+                state={toastQueue}
+                toast={toast}
+                {...mergeProps(toastProps, toast.content, {isClosing})}
+                disableAnimation={disableAnimation}
+                heights={heights}
+                index={index}
+                isRegionExpanded={isHovered || isTouched}
+                maxVisibleToasts={maxVisibleToasts}
+                placement={placement}
+                setHeights={setHeights}
+                toastOffset={toastOffset}
+                total={total}
+              />
+            );
+          }
+
           return null;
-        }
-
-        if (total - index <= 4 || (isHovered && total - index <= maxVisibleToasts + 1)) {
-          return (
-            <Toast
-              key={toast.key}
-              state={toastQueue}
-              toast={toast}
-              {...mergeProps(toastProps, toast.content)}
-              disableAnimation={disableAnimation}
-              heights={heights}
-              index={index}
-              isRegionExpanded={isHovered || isTouched}
-              placement={placement}
-              setHeights={setHeights}
-              toastOffset={toastOffset}
-              total={total}
-            />
-          );
-        }
-
-        return null;
-      })}
+        })}
+      </AnimatePresence>
     </div>
   );
 }

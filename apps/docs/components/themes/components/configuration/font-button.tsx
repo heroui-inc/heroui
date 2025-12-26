@@ -1,7 +1,7 @@
-import {Button} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import type {FontName, FontType} from "../../types";
 
-import {FontName, FontType} from "../../types";
+import {Button} from "@heroui/react";
+import {cn} from "@heroui/theme";
 
 interface FontButtonProps {
   title: FontName;
@@ -38,7 +38,7 @@ const FontButton = ({title, value, setValue}: FontButtonProps) => {
 
   return (
     <Button
-      className={clsx(
+      className={cn(
         "group h-24 flex flex-col justify-center items-center gap-y-2 px-0 border-black/20 dark:border-white/20",
         value === title ? "border-black/60 dark:border-white/60" : "",
       )}

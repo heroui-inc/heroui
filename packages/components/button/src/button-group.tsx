@@ -1,7 +1,9 @@
+import type {UseButtonGroupProps} from "./use-button-group";
+
 import {forwardRef} from "@heroui/system";
 
 import {ButtonGroupProvider} from "./button-group-context";
-import {UseButtonGroupProps, useButtonGroup} from "./use-button-group";
+import {useButtonGroup} from "./use-button-group";
 
 export interface ButtonGroupProps extends UseButtonGroupProps {}
 

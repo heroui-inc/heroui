@@ -1,16 +1,19 @@
 import type {HTMLHeroUIProps, PropGetter, SharedSelection} from "@heroui/system";
+import type {AriaMenuProps} from "@react-types/menu";
+import type {AriaMenuOptions} from "@react-aria/menu";
+import type {MenuVariantProps, SlotsToClasses, MenuSlots} from "@heroui/theme";
+import type {TreeState} from "@react-stately/tree";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {MenuItemProps} from "./menu-item";
 
 import {useProviderContext} from "@heroui/system";
-import {AriaMenuProps} from "@react-types/menu";
-import {AriaMenuOptions} from "@react-aria/menu";
 import {useMenu as useAriaMenu} from "@react-aria/menu";
-import {menu, MenuVariantProps, SlotsToClasses, MenuSlots} from "@heroui/theme";
-import {TreeState, useTreeState} from "@react-stately/tree";
-import {ReactRef, filterDOMProps, useDOMRef} from "@heroui/react-utils";
-import {ReactNode, useMemo} from "react";
-import {clsx} from "@heroui/shared-utils";
-
-import {MenuItemProps} from "./menu-item";
+import {menu} from "@heroui/theme";
+import {useTreeState} from "@react-stately/tree";
+import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
+import {useMemo} from "react";
+import {cn} from "@heroui/theme";
 
 interface Props<T> {
   /**
@@ -132,7 +135,7 @@ export function useMenu<T extends object>(props: UseMenuProps<T>) {
   const {menuProps} = useAriaMenu({...otherProps, ...userMenuProps, onAction}, state, domRef);
 
   const slots = useMemo(() => menu({className}), [className]);
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getBaseProps: PropGetter = (props = {}) => {
     return {

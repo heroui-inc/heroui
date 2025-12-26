@@ -1,7 +1,9 @@
+import type {ExtendVariantProps} from "../src/extend-variants";
+
 import React from "react";
 import {render, screen} from "@testing-library/react";
 
-import {extendVariants, ExtendVariantProps} from "../src/extend-variants";
+import {extendVariants} from "../src/extend-variants";
 import {Button} from "../test-utils/extend-components";
 import {Card} from "../test-utils/slots-component";
 
@@ -43,7 +45,7 @@ const createExtendSlotsComponent = () =>
           base: "shadow-xs",
         },
         sm: {
-          base: "shadow-sm",
+          base: "shadow-xs",
         },
         xl: {
           base: "shadow-xl",
@@ -165,6 +167,43 @@ describe("extendVariants function - no slots", () => {
 
     expect(button).toHaveClass("scale-150");
   });
+
+  test("should respect defaultVariants.className", () => {
+    const Button2 = extendVariants(Button, {
+      defaultVariants: {
+        className: "w-full text-medium rounded-small",
+        color: "primary",
+        variant: "solid",
+      },
+    });
+
+    const {container} = render(<Button2>Press me</Button2>);
+    const button = container.querySelector("button");
+
+    expect(button).toHaveClass("w-full");
+    expect(button).toHaveClass("text-medium");
+    expect(button).toHaveClass("rounded-small");
+  });
+
+  test("should merge defaultVariants.className with props.className", () => {
+    const Button2 = extendVariants(Button, {
+      defaultVariants: {
+        className: "w-full text-medium rounded-small",
+        color: "primary",
+        variant: "solid",
+      },
+    });
+
+    const {container} = render(<Button2 className="px-4 py-2">Press me</Button2>);
+    const button = container.querySelector("button");
+
+    // Should have both default and props className
+    expect(button).toHaveClass("w-full");
+    expect(button).toHaveClass("text-medium");
+    expect(button).toHaveClass("rounded-small");
+    expect(button).toHaveClass("px-4");
+    expect(button).toHaveClass("py-2");
+  });
 });
 
 describe("extendVariants function - with slots", () => {
@@ -232,23 +271,94 @@ describe("extendVariants function - with slots", () => {
 
   test("should override the slots styles", () => {
     const Card2 = createExtendSlotsComponent();
-    const {getByTestId} = render(<Card2 classNames={{base: "shadow-sm"}}>Card Content</Card2>);
+    const {getByTestId} = render(<Card2 classNames={{base: "shadow-xs"}}>Card Content</Card2>);
 
     const baseEl = getByTestId("base");
 
-    expect(baseEl).toHaveClass("shadow-sm");
+    expect(baseEl).toHaveClass("shadow-xs");
   });
 
   test("should override all slots styles", () => {
     const Card2 = createExtendSlotsComponent();
     const {getByTestId} = render(
-      <Card2 classNames={{base: "shadow-sm", header: "rounded-none"}}>Card Content</Card2>,
+      <Card2 classNames={{base: "shadow-xs", header: "rounded-none"}}>Card Content</Card2>,
     );
 
     const baseEl = getByTestId("base");
     const headerEl = getByTestId("header");
 
-    expect(baseEl).toHaveClass("shadow-sm");
+    expect(baseEl).toHaveClass("shadow-xs");
     expect(headerEl).toHaveClass("rounded-none");
+  });
+
+  test("should override base component slots with direct slots option", () => {
+    const Card2 = extendVariants(Card, {
+      slots: {
+        header: "!font-bold !text-lg",
+        footer: "!bg-red-500",
+      },
+    });
+
+    const {getByTestId} = render(<Card2>Card Content</Card2>);
+
+    const headerEl = getByTestId("header");
+    const footerEl = getByTestId("footer");
+
+    expect(headerEl).toHaveClass("!font-bold");
+    expect(headerEl).toHaveClass("!text-lg");
+    expect(footerEl).toHaveClass("!bg-red-500");
+  });
+
+  test("should merge direct slots with variant-based slots", () => {
+    const Card2 = extendVariants(Card, {
+      slots: {
+        header: "!font-bold",
+      },
+      variants: {
+        shadow: {
+          xl: {
+            base: "shadow-xl",
+          },
+        },
+      },
+      defaultVariants: {
+        shadow: "xl",
+      },
+    });
+
+    const {getByTestId} = render(<Card2>Card Content</Card2>);
+
+    const baseEl = getByTestId("base");
+    const headerEl = getByTestId("header");
+
+    expect(baseEl).toHaveClass("shadow-xl");
+    expect(headerEl).toHaveClass("!font-bold");
+  });
+
+  test("direct slots should override variant-based slots for the same slot", () => {
+    const Card2 = extendVariants(Card, {
+      slots: {
+        base: "!bg-blue-500",
+      },
+      variants: {
+        shadow: {
+          xl: {
+            base: "shadow-xl",
+          },
+        },
+      },
+      defaultVariants: {
+        shadow: "xl",
+      },
+    });
+
+    const {getByTestId} = render(<Card2>Card Content</Card2>);
+
+    const baseEl = getByTestId("base");
+
+    // Direct slots should be applied
+    expect(baseEl).toHaveClass("!bg-blue-500");
+    // Variant-based slots should also be applied (they merge)
+    expect(baseEl).toHaveClass("shadow-xl");
   });
 });

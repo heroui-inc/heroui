@@ -1,10 +1,12 @@
+import type {AvatarProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {AvatarProps, Avatar as HeroUIAvatar} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import {Avatar as HeroUIAvatar} from "@heroui/react";
+import {cn} from "@heroui/theme";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 import {getBorderWidth} from "../../utils/shared";
 
 type Color = AvatarProps["color"];
@@ -53,23 +55,23 @@ const Section = ({
 
   switch (scaling) {
     case 90: {
-      className = clsx("h-6 w-6", borderClassName);
+      className = cn("h-6 w-6", borderClassName) as string;
       break;
     }
     case 95: {
-      className = clsx("h-8 w-8", borderClassName);
+      className = cn("h-8 w-8", borderClassName) as string;
       break;
     }
     case 100: {
-      className = clsx("h-10 w-10", borderClassName);
+      className = cn("h-10 w-10", borderClassName) as string;
       break;
     }
     case 105: {
-      className = clsx("h-12 w-12", borderClassName);
+      className = cn("h-12 w-12", borderClassName) as string;
       break;
     }
     case 110: {
-      className = clsx("h-14 w-14", borderClassName);
+      className = cn("h-14 w-14", borderClassName) as string;
       break;
     }
   }

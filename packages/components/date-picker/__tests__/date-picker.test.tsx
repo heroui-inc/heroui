@@ -1,4 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {DatePickerProps} from "../src";
+
 import * as React from "react";
 import {render, act, fireEvent, waitFor, within} from "@testing-library/react";
 import {
@@ -13,7 +15,7 @@ import {CalendarDate, CalendarDateTime} from "@internationalized/date";
 import {HeroUIProvider} from "@heroui/system";
 import {Form} from "@heroui/form";
 
-import {DatePicker as DatePickerBase, DatePickerProps} from "../src";
+import {DatePicker as DatePickerBase} from "../src";
 
 /**
  * Custom date-picker to disable animations and avoid issues with react-motion and jest
@@ -383,12 +385,15 @@ describe("DatePicker", () => {
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
       expect(onFocusSpy).not.toHaveBeenCalled();
 
-      triggerPress(button);
+      await user.click(button);
       act(() => jest.runAllTimers());
 
       let dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
+      expect(onBlurSpy).not.toHaveBeenCalled();
+      expect(onFocusChangeSpy).toHaveBeenCalledTimes(1);
+      expect(onFocusSpy).toHaveBeenCalledTimes(1);
 
       //@ts-ignore
       fireEvent.keyDown(document.activeElement, {key: "Escape"});
@@ -409,9 +414,15 @@ describe("DatePicker", () => {
       expect(dialog).not.toBeInTheDocument();
       expect(document.activeElement).toBe(button);
       expect(button).toHaveFocus();
+      expect(onBlurSpy).not.toHaveBeenCalled();
+      expect(onFocusChangeSpy).toHaveBeenCalledTimes(1);
+      expect(onFocusSpy).toHaveBeenCalledTimes(1);
 
       await user.tab();
       expect(document.body).toHaveFocus();
+      expect(onBlurSpy).toHaveBeenCalledTimes(1);
+      expect(onFocusChangeSpy).toHaveBeenCalledTimes(2);
+      expect(onFocusSpy).toHaveBeenCalledTimes(1);
     });
 
     it("should trigger right arrow key event for segment navigation", async function () {
@@ -962,5 +973,60 @@ describe("DatePicker", () => {
         expect(getDescription()).not.toContain("Invalid value");
       });
     });
+  });
+});
+
+describe("DatePicker with HeroUIProvider context", () => {
+  it("should inherit labelPlacement from HeroUIProvider", () => {
+    const labelContent = "Test DatePicker";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside">
+        <DatePickerBase disableAnimation label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("span[data-slot=label]");
+    const inputWrapper = container.querySelector("div[data-slot=input-wrapper]");
+    const base = container.querySelector("[data-slot=base]");
+
+    expect(label).toHaveTextContent(labelContent);
+    expect(inputWrapper).not.toHaveTextContent(labelContent);
+    expect(base).toContainElement(label as HTMLElement);
+  });
+
+  it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+    const labelContent = "Test DatePicker";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="outside-top">
+        <DatePickerBase disableAnimation label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("span[data-slot=label]");
+    const inputWrapper = container.querySelector("div[data-slot=input-wrapper]");
+    const base = container.querySelector("[data-slot=base]");
+
+    expect(label).toHaveTextContent(labelContent);
+    expect(inputWrapper).not.toHaveTextContent(labelContent);
+    expect(base).toHaveClass("flex-col");
+  });
+
+  it("should inherit labelPlacement='inside' from HeroUIProvider", () => {
+    const labelContent = "Test DatePicker";
+
+    const {container} = render(
+      <HeroUIProvider labelPlacement="inside">
+        <DatePickerBase disableAnimation label={labelContent} />
+      </HeroUIProvider>,
+    );
+
+    const label = container.querySelector("span[data-slot=label]");
+    const inputWrapper = container.querySelector("div[data-slot=input-wrapper]");
+
+    expect(label).toHaveTextContent(labelContent);
+    // In inside placement, label is inside inputWrapper
+    expect(inputWrapper).toContainElement(label as HTMLElement);
   });
 });

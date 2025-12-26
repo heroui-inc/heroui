@@ -16,7 +16,6 @@ export const useUpdateEffect: typeof useEffect = (effect, deps) => {
       return effect();
     }
     effectCycleRef.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   useEffect(() => {

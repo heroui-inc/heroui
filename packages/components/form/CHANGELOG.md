@@ -1,5 +1,300 @@
 # @heroui/form
 
+## 2.1.29
+
+### Patch Changes
+
+- Updated dependencies [[`086f6a1`](https://github.com/heroui-inc/heroui/commit/086f6a1c4474e12d9797282528fc98c0267f933f), [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4), [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/theme@2.4.25
+  - @heroui/system@2.4.25
+
+## 2.1.28
+
+### Patch Changes
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`b89ba08`](https://github.com/heroui-inc/heroui/commit/b89ba08ae06bf0140f0bc92f10e9a09c1484cdba), [`799bc5b`](https://github.com/heroui-inc/heroui/commit/799bc5bab8f843d2fd7da12a685e087f5c141dad), [`8921dc4`](https://github.com/heroui-inc/heroui/commit/8921dc4361f7cdb8cbce755e8b90fdd799b668da), [`b38a2cf`](https://github.com/heroui-inc/heroui/commit/b38a2cfb58feb79b3baff10eff19e21480da1563), [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca), [`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c), [`4c43534`](https://github.com/heroui-inc/heroui/commit/4c435348ecbf94f1dc0ede7328096984e247d062), [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1), [`a819f2a`](https://github.com/heroui-inc/heroui/commit/a819f2a95a32d059581b2789f2476c5e497732f2), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99), [`bc4c982`](https://github.com/heroui-inc/heroui/commit/bc4c9826097a1014939b691425d30eff998d1e2e)]:
+  - @heroui/theme@2.4.24
+  - @heroui/system@2.4.24
+
+## 2.1.27
+
+### Patch Changes
+
+- [#5761](https://github.com/heroui-inc/heroui/pull/5761) [`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9) Thanks [@wingkwong](https://github.com/wingkwong)! - bump react-aria versions
+
+- Updated dependencies [[`136bdf6`](https://github.com/heroui-inc/heroui/commit/136bdf66b1c2ab108d8d2903d986a76cec205ac9), [`c322411`](https://github.com/heroui-inc/heroui/commit/c3224113def3f50ea3f1f46bed9524d89969b901), [`6eba109`](https://github.com/heroui-inc/heroui/commit/6eba109a7fd9854da818c819a55a5ddc59a0fd76), [`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/system@2.4.23
+  - @heroui/theme@2.4.23
+  - @heroui/shared-utils@2.1.12
+
+## 2.1.26
+
+### Patch Changes
+
+- Updated dependencies [[`f9bf3e3`](https://github.com/heroui-inc/heroui/commit/f9bf3e32c3d56960cc481fd536c8b10d76e79cd0)]:
+  - @heroui/theme@2.4.22
+  - @heroui/system@2.4.22
+
+## 2.1.25
+
+### Patch Changes
+
+- [#5640](https://github.com/heroui-inc/heroui/pull/5640) [`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions (aug 2025)
+
+- [#5539](https://github.com/heroui-inc/heroui/pull/5539) [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c) Thanks [@luislh-dev](https://github.com/luislh-dev)! - Code quality improvements: removed unnecessary type assertions across multiple components and utilities, consolidated imports in Popover module, and enhanced type safety.
+
+- Updated dependencies [[`d90ac57`](https://github.com/heroui-inc/heroui/commit/d90ac57bc537e8999b21d4ad3f7e4894e6106fd1), [`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c), [`928383b`](https://github.com/heroui-inc/heroui/commit/928383bcfc5f35a80010c833f655c1355349d0f2), [`3ba7d29`](https://github.com/heroui-inc/heroui/commit/3ba7d29848d8c27c83f0293ef04620a0b3c42a0c), [`743505f`](https://github.com/heroui-inc/heroui/commit/743505fbc07fc057775042096bd8454d43d0499b), [`6b86a41`](https://github.com/heroui-inc/heroui/commit/6b86a41fe42ecf1830f90b2685a64ff0784a9e14)]:
+  - @heroui/system@2.4.21
+  - @heroui/shared-utils@2.1.11
+  - @heroui/theme@2.4.21
+
+## 2.1.24
+
+### Patch Changes
+
+- [#5517](https://github.com/heroui-inc/heroui/pull/5517) [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b) Thanks [@wingkwong](https://github.com/wingkwong)! - sync with RA release (July 22, 2025)
+
+- Updated dependencies [[`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec), [`139fc94`](https://github.com/heroui-inc/heroui/commit/139fc94e2ac0a4a112fdb18bb340994dc3656f70), [`36eb421`](https://github.com/heroui-inc/heroui/commit/36eb421c66846d4fe6fb102c662ff6bf6149249b), [`a83e3fb`](https://github.com/heroui-inc/heroui/commit/a83e3fb5a01c3ba25c309ee1f67b836c2f299dfb)]:
+  - @heroui/theme@2.4.20
+  - @heroui/system@2.4.20
+
+## 2.1.23
+
+### Patch Changes
+
+- Updated dependencies [[`8ddc6e7`](https://github.com/heroui-inc/heroui/commit/8ddc6e795e56b7ecaac94bb0bbf99a7147dc027b)]:
+  - @heroui/theme@2.4.19
+
+## 2.1.22
+
+### Patch Changes
+
+- [`e489af8`](https://github.com/heroui-inc/heroui/commit/e489af83c189d0b42dca1b0afca1f5d003cd6033) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - ## Consolidated Changes
+
+  ### Major Update
+
+  - TailwindCSS v4
+
+  ### Bug Fixes & Improvements
+
+  #### Theme & Styling
+
+  - fix rotate transition (#5441)
+  - fix incorrect target theme (#5469)
+  - fixed missing radius styles in th and td in Table (#4988)
+  - fixed transition (#5409)
+  - fix text selection in table (#5413)
+  - Fix transition scale (#5271)
+  - fix outline styles (#5266)
+
+  #### Components
+
+  **Toast**
+
+  - Renaming loadingIcon to loadingComponent
+  - Fix toast items closing in reverse order. Toasts now close in proper FIFO instead of LIFO (#5096)
+  - Remove the bottom extension of the toast (#5231)
+  - Enable programmatically closing a toast with a specific key (#5084)
+
+  **Slider**
+
+  - introduce `getTooltipValue` prop for custom tooltip value (#4741)
+  - fixed slider component NaN values when min and max are the same value (#5014)
+
+  **Select**
+
+  - add `isClearable` and `onClear` prop to Select component (#2239)
+
+  **Calendar**
+
+  - Replace rectangle intersection detection with center-point distance calculation to make the calendar picker more resilient when browser zoom is changed. The new approach finds the closest picker item to the highlight element's center, preventing mismatches between displayed and selected year / month. (#5117)
+
+  **Input**
+
+  - fix `Input` accessibility label duplication (#5150)
+
+  **Date Input**
+
+  - add 'outside-top' prop to input (#3058)
+
+  **Table**
+
+  - support custom sort icon in Table (#5223)
+  - remove `removeWrapper` from virtualized table (#4995)
+
+  **Autocomplete**
+
+  - do not render selector button if selector icon is null (#5423)
+
+  **Image & Avatar**
+
+  - fixed image src double fetch issue (#3847)
+
+  #### System & Core
+
+  - add useInputLabelPlacement
+  - remove `@heroui/aria-utils` dependency
+
+  #### Hooks & Utilities
+
+  - fix use-theme logic
+  - Fix skeleton animate
+  - bump RA versions
+  - Draggable modal will be scrollable in mobile devices (#5280)
+  - refactor: overlay & interactOutside
+
+- Updated dependencies [[`e489af8`](https://github.com/heroui-inc/heroui/commit/e489af83c189d0b42dca1b0afca1f5d003cd6033)]:
+  - @heroui/shared-utils@2.1.10
+  - @heroui/system@2.4.19
+  - @heroui/theme@2.4.18
+
+## 2.1.22-beta.4
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/shared-utils@2.1.10-beta.7
+  - @heroui/system@2.4.19-beta.2
+  - @heroui/theme@2.4.18-beta.7
+
+## 2.1.22-beta.3
+
+### Patch Changes
+
+- Updated dependencies [[`7d23120`](https://github.com/heroui-inc/heroui/commit/7d23120f91e8af81b6fa3804a239a7807f1b45bf), [`2d76d32`](https://github.com/heroui-inc/heroui/commit/2d76d32e0b14f86d08e4d53617d11af46e069c9c)]:
+  - @heroui/theme@2.4.18-beta.6
+
+## 2.1.22-beta.2
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+  - @heroui/system@2.4.19-beta.1
+  - @heroui/theme@2.4.18-beta.5
+
+## 2.1.22-beta.1
+
+### Patch Changes
+
+- Updated dependencies [[`be697f7`](https://github.com/heroui-inc/heroui/commit/be697f77f5f6f8be439c72bd0e2155fd94eefeea), [`e1a0d9d`](https://github.com/heroui-inc/heroui/commit/e1a0d9d53d34cdb59a1aaf3f553f7d54fbf6f60d), [`bd5ad76`](https://github.com/heroui-inc/heroui/commit/bd5ad766115d64307b08faef7ce8401afe24cb46)]:
+  - @heroui/theme@2.4.18-beta.4
+
+## 2.1.22-beta.0
+
+### Patch Changes
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`f62f49c`](https://github.com/heroui-inc/heroui/commit/f62f49c096727133ecf38719115aa4cdbed25a13), [`6086ab0`](https://github.com/heroui-inc/heroui/commit/6086ab084abc4b44533dc71025a327ee46ea8948), [`ecffb26`](https://github.com/heroui-inc/heroui/commit/ecffb26320da15824356dbccb33d8627326a4b7c), [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/theme@2.4.18-beta.3
+  - @heroui/shared-utils@2.1.10-beta.5
+  - @heroui/system@2.4.19-beta.0
+
+## 2.1.21
+
+### Patch Changes
+
+- [#5374](https://github.com/heroui-inc/heroui/pull/5374) [`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed) Thanks [@wingkwong](https://github.com/wingkwong)! - bump system peer dependencies
+
+- Updated dependencies [[`be6a1db`](https://github.com/heroui-inc/heroui/commit/be6a1dbf40507af164ebdbe085eda6cceb98aeed), [`7dff993`](https://github.com/heroui-inc/heroui/commit/7dff993e1d11e8f915d1e9c1201396e9b5b53dbf)]:
+  - @heroui/system@2.4.18
+
+## 2.1.20
+
+### Patch Changes
+
+- [#5361](https://github.com/heroui-inc/heroui/pull/5361) [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - remove unused dependencies
+
+- Updated dependencies [[`ace931b`](https://github.com/heroui-inc/heroui/commit/ace931b44db98c227bd4a36bd26c4db8de7d5bf6), [`1e23994`](https://github.com/heroui-inc/heroui/commit/1e2399434578827987aedc8ff3cc9cf6ccc99c5f), [`ff4b1b2`](https://github.com/heroui-inc/heroui/commit/ff4b1b23936412fdb1c762434d673f7b6935ac51), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56), [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56)]:
+  - @heroui/theme@2.4.17
+  - @heroui/system@2.4.17
+
+## 2.1.19
+
+### Patch Changes
+
+- [#5310](https://github.com/heroui-inc/heroui/pull/5310) [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`ee4d2eb`](https://github.com/heroui-inc/heroui/commit/ee4d2ebe257319ce1dd14dd96b545f27bd92d56c), [`1d62208`](https://github.com/heroui-inc/heroui/commit/1d62208642d06f7896724b2702ecb5a17931eb88), [`06fe3a3`](https://github.com/heroui-inc/heroui/commit/06fe3a3c4e7f2fdfb5fcbb2255c907280c892de9)]:
+  - @heroui/theme@2.4.16
+  - @heroui/system@2.4.16
+
+## 2.1.18
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/system@2.4.15
+  - @heroui/theme@2.4.15
+  - @heroui/react-utils@2.1.10
+  - @heroui/shared-utils@2.1.9
+
+## 2.1.17
+
+### Patch Changes
+
+- [#5186](https://github.com/heroui-inc/heroui/pull/5186) [`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump (#5186)
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e), [`f223e1f`](https://github.com/heroui-inc/heroui/commit/f223e1ff634ee5c97e6e88e2d74ab002132fa19e), [`99a5bc2`](https://github.com/heroui-inc/heroui/commit/99a5bc2f4caa7d5468c629c30286935b5e5fa833)]:
+  - @heroui/shared-utils@2.1.8
+  - @heroui/system@2.4.14
+  - @heroui/theme@2.4.14
+  - @heroui/react-utils@2.1.9
+
+## 2.1.16
+
+### Patch Changes
+
+- [#5060](https://github.com/heroui-inc/heroui/pull/5060) [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1) Thanks [@wingkwong](https://github.com/wingkwong)! - RA version bump
+
+- Updated dependencies [[`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a), [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef), [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9), [`3944e1a`](https://github.com/heroui-inc/heroui/commit/3944e1af4ad58e45e49c4f54c3562474092505b1), [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8)]:
+  - @heroui/theme@2.4.13
+  - @heroui/system@2.4.13
+
+## 2.1.15
+
+### Patch Changes
+
+- [#4998](https://github.com/heroui-inc/heroui/pull/4998) [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- Updated dependencies [[`e9c67fa`](https://github.com/heroui-inc/heroui/commit/e9c67fa6caf62fa835474d009b86cf722b08b66d), [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d), [`88f1641`](https://github.com/heroui-inc/heroui/commit/88f164116c2be75cd2de0a076f5ba0942a43e3de)]:
+  - @heroui/theme@2.4.12
+  - @heroui/system@2.4.12
+
+## 2.1.14
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/system@2.4.11
+  - @heroui/theme@2.4.11
+  - @heroui/react-utils@2.1.8
+  - @heroui/shared-utils@2.1.7
+
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies [[`2774a1b`](https://github.com/heroui-inc/heroui/commit/2774a1b3513e2a046c538a2982a438f56608bbf2)]:
+  - @heroui/theme@2.4.10
+
 ## 2.1.12
 
 ### Patch Changes

@@ -1,25 +1,21 @@
 import type {SliderSlots, SliderVariantProps, SlotsToClasses} from "@heroui/theme";
+import type {DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {AriaSliderProps} from "@react-aria/slider";
+import type {TooltipProps} from "@heroui/tooltip";
+import type {ValueBase} from "@react-types/shared";
+import type {SliderThumbProps} from "./slider-thumb";
 
-import {
-  DOMAttributes,
-  HTMLHeroUIProps,
-  mapPropsVariants,
-  PropGetter,
-  useProviderContext,
-} from "@heroui/system";
-import {slider} from "@heroui/theme";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {slider, cn} from "@heroui/theme";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useSliderState} from "@react-stately/slider";
-import {ReactNode, useCallback, useMemo, useRef} from "react";
+import {useCallback, useMemo, useRef} from "react";
 import {useNumberFormatter, useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
-import {AriaSliderProps, useSlider as useAriaSlider} from "@react-aria/slider";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {TooltipProps} from "@heroui/tooltip";
+import {useSlider as useAriaSlider} from "@react-aria/slider";
+import {mergeProps, objectToDeps, warn} from "@heroui/shared-utils";
 import {useHover} from "@react-aria/interactions";
-import {ValueBase} from "@react-types/shared";
-
-import {SliderThumbProps} from "./slider-thumb";
 
 export type SliderValue = number | number[];
 export type SliderStepMark = {
@@ -120,6 +116,15 @@ interface Props extends HTMLHeroUIProps<"div"> {
    * Overrides default formatted number.
    */
   getValue?: (value: SliderValue) => string;
+
+  /**
+   * A function that returns the content to display as the tooltip label. (in analogy to getValue)
+   * @param value - The value of the slider, array or single number.
+   * @param index - The index of the thumb, if multiple thumbs are used.
+   * In addition to formatting with tooltipValueFormatOptions if number is returned.
+   */
+  getTooltipValue?: (value: SliderValue, index?: number) => string | number;
+
   /**
    * Function to render the label.
    */
@@ -168,10 +173,17 @@ export function useSlider(originalProps: UseSliderProps) {
     onChange,
     onChangeEnd,
     getValue,
+    getTooltipValue,
     tooltipValueFormatOptions = formatOptions,
     tooltipProps: userTooltipProps = {},
     ...otherProps
   } = props;
+
+  const isFixedValue = minValue === maxValue;
+
+  if (isFixedValue) {
+    warn("Min and max values should not be the same. This may cause unexpected behavior.");
+  }
 
   const Component = as || "div";
   const shouldFilterDOMProps = typeof Component === "string";
@@ -185,11 +197,15 @@ export function useSlider(originalProps: UseSliderProps) {
   const {direction} = useLocale();
 
   const clampValue = useCallback(
-    (valueToClamp: number) => Math.min(Math.max(valueToClamp, minValue), maxValue),
+    (valueToClamp: number) => {
+      return Math.min(Math.max(valueToClamp, minValue), maxValue);
+    },
     [minValue, maxValue],
   );
 
   const validatedValue = useMemo(() => {
+    if (isFixedValue) return minValue;
+
     if (valueProp === undefined) return undefined;
 
     if (Array.isArray(valueProp)) {
@@ -197,7 +213,7 @@ export function useSlider(originalProps: UseSliderProps) {
     }
 
     return clampValue(valueProp);
-  }, [valueProp, clampValue]);
+  }, [valueProp, clampValue, isFixedValue, minValue]);
 
   const state = useSliderState({
     ...otherProps,
@@ -231,7 +247,7 @@ export function useSlider(originalProps: UseSliderProps) {
   );
   const {isHovered, hoverProps} = useHover({isDisabled: originalProps.isDisabled});
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
   const isVertical = orientation === "vertical";
   const hasMarks = marks?.length > 0;
   const hasSingleThumb = fillOffset === undefined ? state.values.length === 1 : false;
@@ -252,8 +268,8 @@ export function useSlider(originalProps: UseSliderProps) {
     state.values.length > 1
       ? state.getThumbPercent(0)
       : fillOffset !== undefined
-      ? state.getValuePercent(fillOffset)
-      : 0,
+        ? state.getValuePercent(fillOffset)
+        : 0,
     state.getThumbPercent(state.values.length - 1),
   ].sort();
 
@@ -311,11 +327,22 @@ export function useSlider(originalProps: UseSliderProps) {
   };
 
   const getTrackProps: PropGetter = (props = {}) => {
+    const fillWidth = (endOffset - startOffset) * 100;
+
     return {
       ref: trackRef,
       "data-slot": "track",
       "data-thumb-hidden": !!originalProps?.hideThumb,
       "data-vertical": isVertical,
+      ...(hasSingleThumb
+        ? {
+            "data-fill-start": fillWidth > 0,
+            "data-fill-end": fillWidth == 100,
+          }
+        : {
+            "data-fill-start": startOffset == 0,
+            "data-fill-end": startOffset * 100 + fillWidth == 100,
+          }),
       className: slots.track({class: classNames?.track}),
       ...trackProps,
       ...props,
@@ -358,6 +385,7 @@ export function useSlider(originalProps: UseSliderProps) {
       orientation,
       isVertical,
       tooltipProps,
+      getTooltipValue,
       showTooltip,
       renderThumb,
       formatOptions: tooltipValueFormatOptions,
@@ -395,6 +423,8 @@ export function useSlider(originalProps: UseSliderProps) {
       onPointerDown: (e: React.PointerEvent) => e.stopPropagation(),
       onClick: (e: any) => {
         e.stopPropagation();
+        if (isFixedValue) return;
+
         if (state.values.length === 1) {
           state.setThumbPercent(0, percent);
         } else {

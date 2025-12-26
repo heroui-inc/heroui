@@ -24,6 +24,7 @@ const popover = tv({
       "z-0",
       "relative",
       "bg-transparent",
+      "[transform-origin:var(--trigger-anchor-point)]",
       // arrow
       "before:content-['']",
       "before:hidden",
@@ -81,7 +82,7 @@ const popover = tv({
       "justify-center",
       "box-border",
       "subpixel-antialiased",
-      "outline-none",
+      "outline-solid outline-transparent",
       "box-border",
     ],
     trigger: ["z-10"],

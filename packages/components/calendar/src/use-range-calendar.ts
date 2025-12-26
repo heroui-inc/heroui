@@ -1,18 +1,19 @@
 import type {DateValue, AriaRangeCalendarProps} from "@react-types/calendar";
 import type {HTMLHeroUIProps} from "@heroui/system";
 import type {RangeCalendarState} from "@react-stately/calendar";
+import type {ButtonProps} from "@heroui/button";
+import type {ContextType, UseCalendarBaseProps} from "./use-calendar-base";
+import type {CalendarBaseProps} from "./calendar-base";
 
 import {useMemo, useRef} from "react";
 import {filterDOMProps} from "@heroui/react-utils";
 import {useRangeCalendar as useAriaRangeCalendar} from "@react-aria/calendar";
 import {useRangeCalendarState} from "@react-stately/calendar";
 import {createCalendar} from "@internationalized/date";
-import {clsx} from "@heroui/shared-utils";
-import {ButtonProps} from "@heroui/button";
-import {chain} from "@react-aria/utils";
+import {chain} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
-import {ContextType, useCalendarBase, UseCalendarBaseProps} from "./use-calendar-base";
-import {CalendarBaseProps} from "./calendar-base";
+import {useCalendarBase} from "./use-calendar-base";
 
 type HeroUIBaseProps<T extends DateValue> = Omit<
   HTMLHeroUIProps<"div">,
@@ -75,7 +76,7 @@ export function useRangeCalendar<T extends DateValue>({
   const {title, calendarProps, prevButtonProps, nextButtonProps, errorMessageProps} =
     useAriaRangeCalendar(originalProps, state, domRef);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const buttonPickerProps: ButtonProps = {
     ...buttonPickerPropsProp,

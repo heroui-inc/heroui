@@ -1,8 +1,11 @@
-import React, {ReactNode} from "react";
+import type {ReactNode} from "react";
+import type {UseDropdownProps} from "./use-dropdown";
+
+import React from "react";
 import {Popover} from "@heroui/popover";
 
 import {DropdownProvider} from "./dropdown-context";
-import {UseDropdownProps, useDropdown} from "./use-dropdown";
+import {useDropdown} from "./use-dropdown";
 
 export interface DropdownProps extends UseDropdownProps {
   /**

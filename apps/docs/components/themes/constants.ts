@@ -1,6 +1,6 @@
-import {colors} from "@heroui/theme";
+import type {ConfigColors, Config, ConfigLayout} from "./types";
 
-import {ConfigColors, Config, ConfigLayout} from "./types";
+import {colors} from "@heroui/theme";
 
 // Colors
 export const defaultDarkColorWeight = 20;
@@ -39,7 +39,7 @@ export const initialLightTheme: ConfigColors = {
     foreground: colors.black,
     background: colors.white,
     focus: colors.blue[500],
-    overlay: colors.black,
+    overlay: colors.white,
   },
   contentColor: {
     content1: colors.white,
@@ -64,7 +64,7 @@ export const initialDarkTheme: ConfigColors = {
     foreground: colors.white,
     background: colors.black,
     focus: colors.blue[500],
-    overlay: colors.white,
+    overlay: colors.black,
   },
   contentColor: {
     content1: colors.zinc[900],

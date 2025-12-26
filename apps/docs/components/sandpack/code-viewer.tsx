@@ -1,11 +1,10 @@
 import type {SandpackInitMode} from "@codesandbox/sandpack-react";
+import type {Language} from "prism-react-renderer";
+import type {HighlightedLines} from "./types";
+import type {Decorators} from "./types";
 
-import * as React from "react";
 import {FileTabs, useSandpack, useActiveCode, SandpackStack} from "@codesandbox/sandpack-react";
-import {Language} from "prism-react-renderer";
-
-import {HighlightedLines} from "./types";
-import {Decorators} from "./types";
+import * as React from "react";
 
 import {Codeblock} from "@/components/docs/components";
 

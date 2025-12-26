@@ -10,7 +10,7 @@ on:
 jobs:
   update-stats:
     name: Update Stats
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4

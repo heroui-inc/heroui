@@ -3,7 +3,6 @@ import type {
   ForwardRefExoticComponent,
   JSXElementConstructor,
   PropsWithoutRef,
-  ReactElement,
   RefAttributes,
 } from "react";
 
@@ -27,11 +26,11 @@ type SuggestedVariants<CP, S> = {
   [K in keyof CP]?: ValidateSubtype<CP[K], string> extends "true"
     ? {[K2 in CP[K]]?: GetSuggestedValues<S>}
     : ValidateSubtype<CP[K], boolean> extends "true"
-    ? {
-        true?: GetSuggestedValues<S>;
-        false?: GetSuggestedValues<S>;
-      }
-    : never;
+      ? {
+          true?: GetSuggestedValues<S>;
+          false?: GetSuggestedValues<S>;
+        }
+      : never;
 };
 
 type ComposeVariants<CP, S> = SuggestedVariants<CP, S> | Variants<S>;
@@ -78,6 +77,13 @@ export type ExtendVariantWithSlotsProps = {
   compoundVariants?: Array<Record<string, boolean | string | Record<string, string>>>;
 };
 
+type InferRef<C> =
+  C extends ForwardRefExoticComponent<RefAttributes<infer R>>
+    ? R
+    : C extends new (...args: any[]) => infer I
+      ? I
+      : any;
+
 export type ExtendVariants = {
   <
     C extends JSXElementConstructor<any>,
@@ -97,12 +103,12 @@ export type ExtendVariants = {
     },
     opts?: Options,
   ): ForwardRefExoticComponent<
-    PropsWithoutRef<{
-      [key in keyof CP | keyof V]?:
-        | (key extends keyof CP ? CP[key] : never)
-        | (key extends keyof V ? StringToBoolean<keyof V[key]> : never);
-    }> &
-      RefAttributes<ReactElement>
+    PropsWithoutRef<
+      CP & {
+        [key in keyof V]?: StringToBoolean<keyof V[key]>;
+      }
+    > &
+      RefAttributes<InferRef<C>>
   >;
 };
 

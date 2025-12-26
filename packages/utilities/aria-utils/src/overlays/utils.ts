@@ -1,6 +1,5 @@
 import type {OverlayPlacement} from "./types";
-
-import {Placement, PlacementAxis} from "@react-types/overlays";
+import type {Placement, PlacementAxis} from "@react-types/overlays";
 
 export const getTransformOrigins = (placement: OverlayPlacement) => {
   const origins: Record<

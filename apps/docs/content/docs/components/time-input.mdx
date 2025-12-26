@@ -89,11 +89,13 @@ You can also pass an error message as a function. This allows for dynamic error 
 <CodeDemo title="With Error Message Function" files={timeInputContent.errorMessageFunction} />
 
 
-### Label Placement
+### Label Placements
 
-The label's overall position relative to the element it is labeling.
+You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside`, `outside-left` or `outside-top`.
 
-<CodeDemo title="Label Placement" files={timeInputContent.labelPlacement} />
+<CodeDemo title="Label Placements" files={timeInputContent.labelPlacement} />
+ 
+> **Note**: If the `label` is not passed, the `labelPlacement` property will be `outside` by default.
 
 ### Start Content
 
@@ -279,7 +281,7 @@ By default, `TimeInput` displays times in either 12 or 24 hour hour format depen
     },
     {
       attribute: "labelPlacement",
-      type: "inside | outside | outside-left",
+      type: "inside | outside | outside-left | outside-top",
       description: "The position of the label.",
       default: "inside"
     },

@@ -1,9 +1,12 @@
+import type {UserEvent} from "@testing-library/user-event";
+import type {CheckboxProps} from "../src";
+
 import * as React from "react";
 import {render, renderHook, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {useForm} from "react-hook-form";
 
-import {Checkbox, CheckboxProps} from "../src";
+import {Checkbox} from "../src";
 
 describe("Checkbox", () => {
   let user: UserEvent;

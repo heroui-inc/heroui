@@ -1,6 +1,8 @@
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
+
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {useCardContext} from "./card-context";
 
@@ -12,7 +14,7 @@ const CardHeader = forwardRef<"div", HTMLHeroUIProps<"div">>((props, ref) => {
 
   const {slots, classNames} = useCardContext();
 
-  const headerStyles = clsx(classNames?.header, className);
+  const headerStyles = cn(classNames?.header, className);
 
   return (
     <Component ref={domRef} className={slots.header?.({class: headerStyles})} {...otherProps}>

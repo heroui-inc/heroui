@@ -76,7 +76,7 @@ export default function App() {
             title: "Toast Title",
             description: "Toast Description",
             timeout: 3000,
-            shouldShowTimeoutProgess: true,
+            shouldShowTimeoutProgress: true,
           });
         }}
       >

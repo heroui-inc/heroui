@@ -1,8 +1,10 @@
+import type {Meta} from "@storybook/react";
+import type {ProgressProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {progress} from "@heroui/theme";
 
-import {Progress, ProgressProps} from "../src";
+import {Progress} from "../src";
 
 export default {
   title: "Components/Progress",
@@ -108,7 +110,7 @@ export const Indeterminate = {
 
   args: {
     ...defaultProps,
-    size: "xs",
+    size: "sm",
     radius: "none",
     isIndeterminate: true,
   },

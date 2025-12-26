@@ -1,10 +1,10 @@
+import type {ThemeType} from "../../types";
+
 import {Button, Tooltip} from "@heroui/react";
 import {Icon} from "@iconify/react/dist/offline";
 import SunIcon from "@iconify/icons-solar/sun-linear";
 import MoonIcon from "@iconify/icons-solar/moon-linear";
 import UndoLeftIcon from "@iconify/icons-solar/undo-left-linear";
-
-import {ThemeType} from "../../types";
 
 interface ActionsProps {
   theme: ThemeType;

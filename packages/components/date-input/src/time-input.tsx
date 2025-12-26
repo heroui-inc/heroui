@@ -1,9 +1,10 @@
 import type {TimeValue} from "@react-types/datepicker";
 import type {ForwardedRef, ReactElement} from "react";
+import type {UseTimeInputProps} from "./use-time-input";
 
 import {forwardRef} from "@heroui/system";
 
-import {UseTimeInputProps, useTimeInput} from "./use-time-input";
+import {useTimeInput} from "./use-time-input";
 import {DateInputField} from "./date-input-field";
 import {DateInputGroup} from "./date-input-group";
 

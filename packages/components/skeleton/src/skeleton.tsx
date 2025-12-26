@@ -1,6 +1,8 @@
+import type {UseSkeletonProps} from "./use-skeleton";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseSkeletonProps, useSkeleton} from "./use-skeleton";
+import {useSkeleton} from "./use-skeleton";
 
 export interface SkeletonProps extends UseSkeletonProps {}
 

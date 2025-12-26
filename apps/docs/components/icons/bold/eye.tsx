@@ -1,4 +1,4 @@
-import {IconSvgProps} from "@/types";
+import type {IconSvgProps} from "@/types";
 
 export const EyeBoldIcon = ({size = 24, width, height, ...props}: IconSvgProps) => (
   <svg

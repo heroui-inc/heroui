@@ -1,5 +1,7 @@
 "use client";
 
+import type {ModalProps} from "@heroui/react";
+
 import {
   Modal,
   ModalContent,
@@ -10,7 +12,6 @@ import {
   useDisclosure,
   RadioGroup,
   Radio,
-  ModalProps,
 } from "@heroui/react";
 import {useState} from "react";
 

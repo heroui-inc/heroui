@@ -1,6 +1,8 @@
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {render, screen} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
 import {addToast, ToastProvider} from "../src";
 
@@ -114,14 +116,12 @@ describe("Toast", () => {
     await user.click(button);
 
     const initialCloseButtons = wrapper.getAllByRole("button");
-    const initialButtonLength = initialCloseButtons.length;
 
     await user.click(initialCloseButtons[0]);
 
-    const finalCloseButtons = wrapper.getAllByRole("button");
-    const finalButtonLength = finalCloseButtons.length;
+    const toast = wrapper.getAllByRole("alertdialog")[0]! as HTMLElement;
 
-    expect(initialButtonLength).toEqual(finalButtonLength + 1);
+    expect(toast).toHaveAttribute("data-toast-exiting", "true");
   });
 
   it("should work with placement", async () => {
@@ -173,5 +173,70 @@ describe("Toast", () => {
     const loadingIcon = wrapper.getByLabelText("loadingIcon");
 
     expect(loadingIcon).toBeTruthy();
+  });
+
+  it("should call onClose when toast times out", async () => {
+    const onCloseMock = jest.fn();
+
+    const wrapper = render(
+      <>
+        <ToastProvider disableAnimation />
+        <button
+          data-testid="button"
+          onClick={() => {
+            addToast({
+              title: title,
+              description: description,
+              timeout: 500,
+              onClose: onCloseMock,
+            });
+          }}
+        >
+          Show Toast
+        </button>
+      </>,
+    );
+
+    const button = wrapper.getByTestId("button");
+
+    await user.click(button);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("should call onClose when close button is clicked", async () => {
+    const onCloseMock = jest.fn();
+
+    const wrapper = render(
+      <>
+        <ToastProvider disableAnimation maxVisibleToasts={1} />
+        <button
+          data-testid="button"
+          onClick={() => {
+            addToast({
+              title: title,
+              description: description,
+              onClose: onCloseMock,
+            });
+          }}
+        >
+          Show Toast
+        </button>
+      </>,
+    );
+
+    const button = wrapper.getByTestId("button");
+
+    await user.click(button);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const closeButtons = wrapper.getAllByRole("button");
+
+    await user.click(closeButtons[0]);
+
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 });

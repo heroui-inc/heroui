@@ -1,7 +1,9 @@
+import type {UseKbdProps} from "./use-kbd";
+
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system-rsc";
 
-import {UseKbdProps, useKbd} from "./use-kbd";
+import {useKbd} from "./use-kbd";
 import {kbdKeysLabelMap, kbdKeysMap} from "./utils";
 
 export interface KbdProps extends UseKbdProps {}

@@ -1,11 +1,15 @@
+import type {UseNumberInputProps} from "./use-number-input";
+
 import {CloseFilledIcon} from "@heroui/shared-icons";
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
-import {UseNumberInputProps, useNumberInput} from "./use-number-input";
+import {useNumberInput} from "./use-number-input";
 import NumberInputStepper from "./number-input-stepper";
 
-export interface NumberInputProps extends UseNumberInputProps {}
+export interface NumberInputProps extends Omit<UseNumberInputProps, "type"> {
+  type?: "number";
+}
 
 const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
   const {
@@ -18,6 +22,7 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
     labelPlacement,
     hasHelper,
     isOutsideLeft,
+    isOutsideTop,
     shouldLabelBeOutside,
     errorMessage,
     isInvalid,
@@ -102,7 +107,7 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
       return (
         <div {...getMainWrapperProps()}>
           <div {...getInputWrapperProps()}>
-            {!isOutsideLeft ? labelContent : null}
+            {!isOutsideLeft && !isOutsideTop ? labelContent : null}
             {innerWrapper}
           </div>
           {helperWrapper}
@@ -135,7 +140,7 @@ const NumberInput = forwardRef<"input", NumberInputProps>((props, ref) => {
 
   return (
     <Component {...getBaseProps()}>
-      {isOutsideLeft ? labelContent : null}
+      {isOutsideLeft || isOutsideTop ? labelContent : null}
       {mainWrapper}
     </Component>
   );

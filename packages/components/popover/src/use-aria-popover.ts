@@ -1,20 +1,14 @@
-import {RefObject, useEffect} from "react";
-import {
-  useOverlay,
-  AriaPopoverProps,
-  PopoverAria,
-  useOverlayPosition,
-  AriaOverlayProps,
-} from "@react-aria/overlays";
-import {
-  OverlayPlacement,
-  ariaHideOutside,
-  toReactAriaPlacement,
-  ariaShouldCloseOnInteractOutside,
-} from "@heroui/aria-utils";
-import {OverlayTriggerState} from "@react-stately/overlays";
-import {mergeProps} from "@react-aria/utils";
+import type {RefObject} from "react";
+import type {AriaPopoverProps, PopoverAria, AriaOverlayProps} from "@react-aria/overlays";
+import type {OverlayPlacement} from "@heroui/aria-utils";
+import type {OverlayTriggerState} from "@react-stately/overlays";
+
+import {ariaHideOutside, keepVisible, toReactAriaPlacement} from "@heroui/aria-utils";
+import {useOverlayPosition} from "@react-aria/overlays";
+import {useEffect} from "react";
+import {mergeProps} from "@heroui/shared-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {useAriaOverlay} from "@heroui/use-aria-overlay";
 
 export interface Props {
   /**
@@ -47,6 +41,10 @@ export interface Props {
    * @default true
    */
   isDismissable?: boolean;
+  /**
+   * The origin of the target in the overlay's coordinate system. Useful for animations.
+   */
+  triggerAnchorPoint?: {x: number; y: number} | null;
 }
 
 export type ReactAriaPopoverProps = Props &
@@ -62,6 +60,7 @@ export function useReactAriaPopover(
   state: OverlayTriggerState,
 ): PopoverAria {
   const {
+    groupRef,
     triggerRef,
     popoverRef,
     showArrow,
@@ -84,16 +83,18 @@ export function useReactAriaPopover(
 
   const isNonModal = isNonModalProp ?? true;
 
-  const {overlayProps, underlayProps} = useOverlay(
+  const isSubmenu = otherProps["trigger"] === "SubmenuTrigger";
+
+  const {overlayProps, underlayProps} = useAriaOverlay(
     {
       isOpen: state.isOpen,
       onClose: state.close,
       shouldCloseOnBlur,
-      isDismissable,
+      isDismissable: isDismissable || isSubmenu,
       isKeyboardDismissDisabled,
-      shouldCloseOnInteractOutside: shouldCloseOnInteractOutside
-        ? shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, triggerRef, state),
+      shouldCloseOnInteractOutside:
+        shouldCloseOnInteractOutside || ((el) => !triggerRef.current?.contains(el)),
+      disableOutsideEvents: !isNonModal,
     },
     popoverRef,
   );
@@ -103,6 +104,7 @@ export function useReactAriaPopover(
     arrowProps,
     placement,
     updatePosition,
+    triggerAnchorPoint: origin,
   } = useOverlayPosition({
     ...otherProps,
     shouldFlip,
@@ -115,7 +117,7 @@ export function useReactAriaPopover(
     containerPadding,
     placement: toReactAriaPlacement(placementProp),
     offset: showArrow ? offset + 3 : offset,
-    onClose: isNonModal && shouldCloseOnScroll ? state.close : () => {},
+    onClose: isNonModal && !isSubmenu && shouldCloseOnScroll ? state.close : () => {},
   });
 
   useSafeLayoutEffect(() => {
@@ -125,15 +127,20 @@ export function useReactAriaPopover(
   }, updatePositionDeps);
 
   useEffect(() => {
-    if (state.isOpen && !isNonModal && popoverRef.current) {
-      return ariaHideOutside([popoverRef.current]);
+    if (state.isOpen && popoverRef.current) {
+      if (isNonModal) {
+        return keepVisible(groupRef?.current ?? popoverRef.current);
+      } else {
+        return ariaHideOutside([groupRef?.current ?? popoverRef.current]);
+      }
     }
-  }, [isNonModal, state.isOpen, popoverRef]);
+  }, [isNonModal, state.isOpen, popoverRef, groupRef]);
 
   return {
     popoverProps: mergeProps(overlayProps, positionProps),
     arrowProps,
     underlayProps,
     placement,
+    triggerAnchorPoint: origin,
   };
 }

@@ -1,7 +1,9 @@
 import "@testing-library/jest-dom";
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {render, fireEvent, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {Button} from "@heroui/button";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 
@@ -127,9 +129,9 @@ describe("Popover", () => {
 
     const content = wrapper.getByTestId("content-test");
 
-    act(() => {
-      content.blur();
-    });
+    expect(content).toHaveFocus();
+
+    fireEvent.keyDown(content, {key: "Escape"});
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });
@@ -254,9 +256,9 @@ describe("Popover", () => {
 
     await act(async () => {
       // open popover
-      await user.click(trigger);
+      await user.pointer({target: trigger, keys: "[MouseLeft>]"});
       // close popover
-      await user.click(trigger);
+      await user.pointer({target: trigger, keys: "[/MouseLeft]"});
       // assert that the focus is restored back to trigger
       expect(trigger).toHaveFocus();
     });
@@ -366,4 +368,41 @@ it("should close popover on scroll when shouldCloseOnScroll is false", async () 
 
   // assert that the popover is still open
   expect(popover).toHaveAttribute("aria-expanded", "true");
+});
+
+it("should display popover content only after content is ready", async () => {
+  jest.useFakeTimers();
+
+  const TestComponent = () => {
+    const [content, setContent] = React.useState("");
+
+    React.useEffect(() => {
+      const timer = setTimeout(() => {
+        setContent("test content");
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+    return (
+      <Popover defaultOpen>
+        <PopoverTrigger>
+          <Button data-testid="trigger">Open popover</Button>
+        </PopoverTrigger>
+        <PopoverContent data-testid="content-test">{content}</PopoverContent>
+      </Popover>
+    );
+  };
+
+  const wrapper = render(<TestComponent />);
+
+  expect(wrapper.queryByTestId("content-test")).not.toBeInTheDocument();
+
+  act(() => {
+    jest.advanceTimersByTime(1000);
+  });
+
+  expect(wrapper.getByTestId("content-test")).toBeInTheDocument();
+
+  jest.useRealTimers();
 });

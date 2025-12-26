@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {CalendarProps, DateValue} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {calendar} from "@heroui/theme";
 import {
   today,
@@ -15,7 +17,7 @@ import {Radio, RadioGroup} from "@heroui/radio";
 import {cn} from "@heroui/theme";
 import {HeroUIProvider} from "@heroui/system";
 
-import {Calendar, CalendarProps, DateValue} from "../src";
+import {Calendar} from "../src";
 
 export default {
   title: "Components/Calendar",
@@ -137,7 +139,7 @@ const ControlledFocusedValueTemplate = (args: CalendarProps) => {
 };
 
 const InvalidDateTemplate = (args: CalendarProps) => {
-  let [date, setDate] = React.useState<DateValue | null>(today(getLocalTimeZone()));
+  let [date, setDate] = React.useState<DateValue>(today(getLocalTimeZone()));
   let {locale} = useLocale();
   let isInvalid = isWeekend(date, locale);
 

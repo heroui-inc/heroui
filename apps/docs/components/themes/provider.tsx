@@ -1,8 +1,4 @@
-import {useState, createContext, useContext} from "react";
-import {useLocalStorage} from "usehooks-ts";
-
-import {configKey, initialConfig} from "./constants";
-import {
+import type {
   ConfigColors,
   Config,
   ConfigLayout,
@@ -13,6 +9,11 @@ import {
   HeroUIScaling,
   Border,
 } from "./types";
+
+import {useState, createContext, useContext} from "react";
+import {useLocalStorage} from "usehooks-ts";
+
+import {configKey, initialConfig} from "./constants";
 
 export interface ThemeBuilderContextProps {
   config: Config;

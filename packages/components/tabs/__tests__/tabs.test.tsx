@@ -1,10 +1,15 @@
+import type {UserEvent} from "@testing-library/user-event";
+import type {TabsProps} from "../src";
+
 import * as React from "react";
-import {act, render, fireEvent, within} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import {act, render, fireEvent, within, waitFor} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import {focus} from "@heroui/test-utils";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "@heroui/modal";
+import {Button} from "@heroui/button";
 
-import {Tabs, Tab, TabsProps} from "../src";
+import {Tabs, Tab} from "../src";
 
 type Item = {
   id: string;
@@ -336,7 +341,7 @@ describe("Tabs", () => {
     expect(tabWrapper).toHaveAttribute("data-vertical", "horizontal");
   });
 
-  test("should destory inactive tab panels", () => {
+  test("should destroy inactive tab panels", () => {
     const {container} = render(
       <Tabs aria-label="Tabs test (destroyInactiveTabPanel=true)">
         <Tab key="tab1" data-testid="item1" title="Tab 1">
@@ -351,7 +356,7 @@ describe("Tabs", () => {
     expect(container.querySelectorAll("[data-slot='panel']")).toHaveLength(1);
   });
 
-  test("should not destory inactive tab panels", async () => {
+  test("should not destroy inactive tab panels", async () => {
     const wrapper = render(
       <Tabs aria-label="Tabs test (destroyInactiveTabPanel=false)" destroyInactiveTabPanel={false}>
         <Tab key="tab1" data-testid="item1" title="Tab 1">
@@ -399,5 +404,198 @@ describe("Tabs", () => {
       </Tabs>,
     );
     expect(ref.current).not.toBeNull();
+  });
+
+  it("Tab click should be handled", async () => {
+    const item1Click = jest.fn();
+    const item2Click = jest.fn();
+    const wrapper = render(
+      <Tabs>
+        <Tab key="item1" data-testid="item1" title="Item 1" onClick={item1Click}>
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" data-testid="item2" title="Item 2" onClick={item2Click}>
+          <div>Content 2</div>
+        </Tab>
+      </Tabs>,
+    );
+    const tab1 = wrapper.getByTestId("item1");
+    const tab2 = wrapper.getByTestId("item2");
+
+    // Test initial state
+    expect(tab1).toHaveAttribute("aria-selected", "true");
+    expect(tab2).toHaveAttribute("aria-selected", "false");
+
+    // Test clicking tab2
+    await user.click(tab2);
+    expect(item2Click).toHaveBeenCalledTimes(1);
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+
+    // Test clicking tab2 again
+    await user.click(tab2);
+    expect(item2Click).toHaveBeenCalledTimes(2);
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("should allow reopening modal with tabs without blocking", async () => {
+    const TestComponent = () => {
+      const [isOpen, setIsOpen] = React.useState(false);
+
+      return (
+        <>
+          <Button data-testid="open-modal-btn" onPress={() => setIsOpen(true)}>
+            Open Modal
+          </Button>
+          <Modal data-testid="test-modal" isOpen={isOpen} onOpenChange={setIsOpen}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader>Test Modal with Tabs</ModalHeader>
+                  <ModalBody>
+                    <Tabs aria-label="Test tabs" data-testid="modal-tabs">
+                      <Tab key="tab1" data-testid="tab-1" title="Tab 1">
+                        <div data-testid="tab1-content">Content for Tab 1</div>
+                      </Tab>
+                      <Tab key="tab2" data-testid="tab-2" title="Tab 2">
+                        <div data-testid="tab2-content">Content for Tab 2</div>
+                      </Tab>
+                      <Tab key="tab3" data-testid="tab-3" title="Tab 3">
+                        <div data-testid="tab3-content">Content for Tab 3</div>
+                      </Tab>
+                    </Tabs>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button data-testid="close-modal-btn" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+        </>
+      );
+    };
+
+    const {getByTestId, getByRole, queryByRole} = render(<TestComponent />);
+
+    const openButton = getByTestId("open-modal-btn");
+
+    await act(async () => {
+      fireEvent.click(openButton);
+    });
+
+    await waitFor(() => {
+      const modal = getByRole("dialog");
+
+      expect(modal).toBeInTheDocument();
+    });
+
+    const tabButtons = getByRole("dialog").querySelectorAll('[role="tab"]');
+
+    expect(tabButtons).toHaveLength(3);
+
+    await act(async () => {
+      fireEvent.click(tabButtons[1]);
+    });
+
+    await waitFor(() => {
+      expect(tabButtons[1]).toHaveAttribute("aria-selected", "true");
+    });
+
+    const closeButton = getByTestId("close-modal-btn");
+
+    await act(async () => {
+      fireEvent.click(closeButton);
+    });
+
+    await waitFor(
+      () => {
+        expect(queryByRole("dialog")).not.toBeInTheDocument();
+      },
+      {timeout: 1000},
+    );
+
+    await act(async () => {
+      fireEvent.click(openButton);
+    });
+
+    await waitFor(() => {
+      const modal = getByRole("dialog");
+
+      expect(modal).toBeInTheDocument();
+    });
+
+    const newTabButtons = getByRole("dialog").querySelectorAll('[role="tab"]');
+
+    expect(newTabButtons).toHaveLength(3);
+
+    await act(async () => {
+      fireEvent.click(newTabButtons[2]);
+    });
+
+    await waitFor(() => {
+      expect(newTabButtons[2]).toHaveAttribute("aria-selected", "true");
+    });
+  });
+
+  test("should have correct aria-orientation for vertical tabs", () => {
+    const wrapper = render(
+      <Tabs isVertical aria-label="Vertical tabs test">
+        <Tab key="item1" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" title="Item 2">
+          <div>Content 2</div>
+        </Tab>
+        <Tab key="item3" title="Item 3">
+          <div>Content 3</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const tablist = wrapper.getByRole("tablist");
+
+    expect(tablist).toHaveAttribute("aria-orientation", "vertical");
+  });
+
+  test("should navigate vertical tabs with ArrowUp and ArrowDown keys", async () => {
+    const wrapper = render(
+      <Tabs isVertical aria-label="Vertical tabs keyboard test">
+        <Tab key="item1" title="Item 1">
+          <div>Content 1</div>
+        </Tab>
+        <Tab key="item2" title="Item 2">
+          <div>Content 2</div>
+        </Tab>
+        <Tab key="item3" title="Item 3">
+          <div>Content 3</div>
+        </Tab>
+      </Tabs>,
+    );
+
+    const tab1 = wrapper.getByRole("tab", {name: "Item 1"});
+    const tab2 = wrapper.getByRole("tab", {name: "Item 2"});
+    const tab3 = wrapper.getByRole("tab", {name: "Item 3"});
+
+    act(() => {
+      focus(tab1);
+    });
+
+    await user.keyboard("[ArrowDown]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
+
+    await user.keyboard("[ArrowDown]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "false");
+    expect(tab3).toHaveAttribute("aria-selected", "true");
+
+    await user.keyboard("[ArrowUp]");
+    expect(tab1).toHaveAttribute("aria-selected", "false");
+    expect(tab2).toHaveAttribute("aria-selected", "true");
+    expect(tab3).toHaveAttribute("aria-selected", "false");
   });
 });

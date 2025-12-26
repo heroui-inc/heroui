@@ -1,5 +1,328 @@
 # @heroui/theme
 
+## 2.4.25
+
+### Patch Changes
+
+- [#6011](https://github.com/heroui-inc/heroui/pull/6011) [`086f6a1`](https://github.com/heroui-inc/heroui/commit/086f6a1c4474e12d9797282528fc98c0267f933f) Thanks [@wingkwong](https://github.com/wingkwong)! - fix default transition-duration (#5992, #6005)
+
+- [#5990](https://github.com/heroui-inc/heroui/pull/5990) [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4) Thanks [@wingkwong](https://github.com/wingkwong)! - hide password reveal button (#5984)
+
+## 2.4.24
+
+### Patch Changes
+
+- [#5963](https://github.com/heroui-inc/heroui/pull/5963) [`b89ba08`](https://github.com/heroui-inc/heroui/commit/b89ba08ae06bf0140f0bc92f10e9a09c1484cdba) Thanks [@wingkwong](https://github.com/wingkwong)! - fix(table): virtualized table in firefox by replacing Spacer with css (#2108, #5479)
+
+- [#5977](https://github.com/heroui-inc/heroui/pull/5977) [`799bc5b`](https://github.com/heroui-inc/heroui/commit/799bc5bab8f843d2fd7da12a685e087f5c141dad) Thanks [@wingkwong](https://github.com/wingkwong)! - fix long text in toast (#5552)
+
+- [#5909](https://github.com/heroui-inc/heroui/pull/5909) [`8921dc4`](https://github.com/heroui-inc/heroui/commit/8921dc4361f7cdb8cbce755e8b90fdd799b668da) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - fix Safari autofill styling for dark mode readability in NumberInput & Input components (#4657)
+
+- [#5816](https://github.com/heroui-inc/heroui/pull/5816) [`b38a2cf`](https://github.com/heroui-inc/heroui/commit/b38a2cfb58feb79b3baff10eff19e21480da1563) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tab cursor (#5790, #5809)
+
+- [#5964](https://github.com/heroui-inc/heroui/pull/5964) [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - `outside-top` label placement support (#5641, #5967)
+
+- [#5815](https://github.com/heroui-inc/heroui/pull/5815) [`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c) Thanks [@Vishesh-Verma-07](https://github.com/Vishesh-Verma-07)! - Fix spinner animation (#5794)
+
+- [#5799](https://github.com/heroui-inc/heroui/pull/5799) [`4c43534`](https://github.com/heroui-inc/heroui/commit/4c435348ecbf94f1dc0ede7328096984e247d062) Thanks [@IsDyh01](https://github.com/IsDyh01)! - fix incorrect label position of select component when the labelPlacement is outside and data-has-helper=true (#5796)
+
+- [#5893](https://github.com/heroui-inc/heroui/pull/5893) [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - Fix bordered focus styles overridden by hover styles (#5585)
+
+- [#5846](https://github.com/heroui-inc/heroui/pull/5846) [`a819f2a`](https://github.com/heroui-inc/heroui/commit/a819f2a95a32d059581b2789f2476c5e497732f2) Thanks [@adbjo](https://github.com/adbjo)! - responsive tab cursor (#5943)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- [#5916](https://github.com/heroui-inc/heroui/pull/5916) [`bc4c982`](https://github.com/heroui-inc/heroui/commit/bc4c9826097a1014939b691425d30eff998d1e2e) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - fixed skeleton shimmer animation not respecting disableAnimation prop (#5915)
+
+## 2.4.23
+
+### Patch Changes
+
+- [#5752](https://github.com/heroui-inc/heroui/pull/5752) [`c322411`](https://github.com/heroui-inc/heroui/commit/c3224113def3f50ea3f1f46bed9524d89969b901) Thanks [@wingkwong](https://github.com/wingkwong)! - fix: broken `--visual-viewport-height` (#5731)
+
+- [#5705](https://github.com/heroui-inc/heroui/pull/5705) [`6eba109`](https://github.com/heroui-inc/heroui/commit/6eba109a7fd9854da818c819a55a5ddc59a0fd76) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tabs in modal (#5657)
+
+- Updated dependencies [[`0d95d7f`](https://github.com/heroui-inc/heroui/commit/0d95d7faa0604ee41213ab637ca7ac4daa16cbcc)]:
+  - @heroui/shared-utils@2.1.12
+
+## 2.4.22
+
+### Patch Changes
+
+- [#5672](https://github.com/heroui-inc/heroui/pull/5672) [`f9bf3e3`](https://github.com/heroui-inc/heroui/commit/f9bf3e32c3d56960cc481fd536c8b10d76e79cd0) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants version
+
+## 2.4.21
+
+### Patch Changes
+
+- [#5607](https://github.com/heroui-inc/heroui/pull/5607) [`928383b`](https://github.com/heroui-inc/heroui/commit/928383bcfc5f35a80010c833f655c1355349d0f2) Thanks [@luislh-dev](https://github.com/luislh-dev)! - use peer-data-[filled=true]:pointer-events-none to disable clear button interaction when input is disabled and has content
+
+- [#5638](https://github.com/heroui-inc/heroui/pull/5638) [`3ba7d29`](https://github.com/heroui-inc/heroui/commit/3ba7d29848d8c27c83f0293ef04620a0b3c42a0c) Thanks [@IsDyh01](https://github.com/IsDyh01)! - fix after setting the maximum width at DropdownMenu, if there is a description, an ellipsis will not appear if the text is too long (#5564)
+
+- [#5628](https://github.com/heroui-inc/heroui/pull/5628) [`743505f`](https://github.com/heroui-inc/heroui/commit/743505fbc07fc057775042096bd8454d43d0499b) Thanks [@IsDyh01](https://github.com/IsDyh01)! - set stepperButton height when lablePlacement=outside (#5622)
+
+- [#5635](https://github.com/heroui-inc/heroui/pull/5635) [`6b86a41`](https://github.com/heroui-inc/heroui/commit/6b86a41fe42ecf1830f90b2685a64ff0784a9e14) Thanks [@wingkwong](https://github.com/wingkwong)! - chore: bump tailwind-variants version
+
+- Updated dependencies [[`e2aed2e`](https://github.com/heroui-inc/heroui/commit/e2aed2e9467c09fd8e32d8f4706289e4dc61bf2c)]:
+  - @heroui/shared-utils@2.1.11
+
+## 2.4.20
+
+### Patch Changes
+
+- [#5531](https://github.com/heroui-inc/heroui/pull/5531) [`2f414a8`](https://github.com/heroui-inc/heroui/commit/2f414a8926854d0c936584be2269fdb454a3c4ec) Thanks [@wingkwong](https://github.com/wingkwong)! - use outline-solid outline-transparent to perverse focus ring styles (#5530)
+
+- [#5538](https://github.com/heroui-inc/heroui/pull/5538) [`139fc94`](https://github.com/heroui-inc/heroui/commit/139fc94e2ac0a4a112fdb18bb340994dc3656f70) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants version
+
+- [#5512](https://github.com/heroui-inc/heroui/pull/5512) [`a83e3fb`](https://github.com/heroui-inc/heroui/commit/a83e3fb5a01c3ba25c309ee1f67b836c2f299dfb) Thanks [@wingkwong](https://github.com/wingkwong)! - vertically center alert icon / endContent (#2678)
+
+## 2.4.19
+
+### Patch Changes
+
+- [#5486](https://github.com/heroui-inc/heroui/pull/5486) [`8ddc6e7`](https://github.com/heroui-inc/heroui/commit/8ddc6e795e56b7ecaac94bb0bbf99a7147dc027b) Thanks [@wingkwong](https://github.com/wingkwong)! - use `outline-hidden` which is equivalent to `outline-none` in v3 (#5485)
+
+## 2.4.18
+
+### Patch Changes
+
+- [`e489af8`](https://github.com/heroui-inc/heroui/commit/e489af83c189d0b42dca1b0afca1f5d003cd6033) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - ## Consolidated Changes
+
+  ### Major Update
+
+  - TailwindCSS v4
+
+  ### Bug Fixes & Improvements
+
+  #### Theme & Styling
+
+  - fix rotate transition (#5441)
+  - fix incorrect target theme (#5469)
+  - fixed missing radius styles in th and td in Table (#4988)
+  - fixed transition (#5409)
+  - fix text selection in table (#5413)
+  - Fix transition scale (#5271)
+  - fix outline styles (#5266)
+
+  #### Components
+
+  **Toast**
+
+  - Renaming loadingIcon to loadingComponent
+  - Fix toast items closing in reverse order. Toasts now close in proper FIFO instead of LIFO (#5096)
+  - Remove the bottom extension of the toast (#5231)
+  - Enable programmatically closing a toast with a specific key (#5084)
+
+  **Slider**
+
+  - introduce `getTooltipValue` prop for custom tooltip value (#4741)
+  - fixed slider component NaN values when min and max are the same value (#5014)
+
+  **Select**
+
+  - add `isClearable` and `onClear` prop to Select component (#2239)
+
+  **Calendar**
+
+  - Replace rectangle intersection detection with center-point distance calculation to make the calendar picker more resilient when browser zoom is changed. The new approach finds the closest picker item to the highlight element's center, preventing mismatches between displayed and selected year / month. (#5117)
+
+  **Input**
+
+  - fix `Input` accessibility label duplication (#5150)
+
+  **Date Input**
+
+  - add 'outside-top' prop to input (#3058)
+
+  **Table**
+
+  - support custom sort icon in Table (#5223)
+  - remove `removeWrapper` from virtualized table (#4995)
+
+  **Autocomplete**
+
+  - do not render selector button if selector icon is null (#5423)
+
+  **Image & Avatar**
+
+  - fixed image src double fetch issue (#3847)
+
+  #### System & Core
+
+  - add useInputLabelPlacement
+  - remove `@heroui/aria-utils` dependency
+
+  #### Hooks & Utilities
+
+  - fix use-theme logic
+  - Fix skeleton animate
+  - bump RA versions
+  - Draggable modal will be scrollable in mobile devices (#5280)
+  - refactor: overlay & interactOutside
+
+- Updated dependencies [[`e489af8`](https://github.com/heroui-inc/heroui/commit/e489af83c189d0b42dca1b0afca1f5d003cd6033)]:
+  - @heroui/shared-utils@2.1.10
+
+## 2.4.18-beta.7
+
+### Patch Changes
+
+- [#5466](https://github.com/heroui-inc/heroui/pull/5466) [`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32) Thanks [@wingkwong](https://github.com/wingkwong)! - add back RA deps (overlays & utils)
+
+- Updated dependencies [[`87f8a12`](https://github.com/heroui-inc/heroui/commit/87f8a12c279e06cab23d0b60ae35c96ee6d29f32)]:
+  - @heroui/shared-utils@2.1.10-beta.7
+
+## 2.4.18-beta.6
+
+### Patch Changes
+
+- [#5454](https://github.com/heroui-inc/heroui/pull/5454) [`7d23120`](https://github.com/heroui-inc/heroui/commit/7d23120f91e8af81b6fa3804a239a7807f1b45bf) Thanks [@Priyadharshini0101](https://github.com/Priyadharshini0101)! - fix text selection in table (#5413)
+
+- [#5449](https://github.com/heroui-inc/heroui/pull/5449) [`2d76d32`](https://github.com/heroui-inc/heroui/commit/2d76d32e0b14f86d08e4d53617d11af46e069c9c) Thanks [@winchesHe](https://github.com/winchesHe)! - fix rotate transition (#5441)
+
+## 2.4.18-beta.5
+
+### Patch Changes
+
+- [`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8) Thanks [@wingkwong](https://github.com/wingkwong)! - trigger beta release
+
+- Updated dependencies [[`3275e8c`](https://github.com/heroui-inc/heroui/commit/3275e8ca01e65a207e6a431dd40b949a22c1f1f8)]:
+  - @heroui/shared-utils@2.1.10-beta.6
+
+## 2.4.18-beta.4
+
+### Patch Changes
+
+- [#5062](https://github.com/heroui-inc/heroui/pull/5062) [`be697f7`](https://github.com/heroui-inc/heroui/commit/be697f77f5f6f8be439c72bd0e2155fd94eefeea) Thanks [@kaishuige](https://github.com/kaishuige)! - fixed missing radius styles in th and td in Table (#4988)
+
+- [#5245](https://github.com/heroui-inc/heroui/pull/5245) [`e1a0d9d`](https://github.com/heroui-inc/heroui/commit/e1a0d9d53d34cdb59a1aaf3f553f7d54fbf6f60d) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Remove the bottom extenstion of the toast (#5231)
+
+- [#4785](https://github.com/heroui-inc/heroui/pull/4785) [`bd5ad76`](https://github.com/heroui-inc/heroui/commit/bd5ad766115d64307b08faef7ce8401afe24cb46) Thanks [@abhinav700](https://github.com/abhinav700)! - add `isClearable` and `onClear` prop to Select component (#2239)
+
+## 2.4.18-beta.3
+
+### Patch Changes
+
+- [#5421](https://github.com/heroui-inc/heroui/pull/5421) [`f62f49c`](https://github.com/heroui-inc/heroui/commit/f62f49c096727133ecf38719115aa4cdbed25a13) Thanks [@winchesHe](https://github.com/winchesHe)! - fix outline styles (#5266)
+
+- [#5417](https://github.com/heroui-inc/heroui/pull/5417) [`6086ab0`](https://github.com/heroui-inc/heroui/commit/6086ab084abc4b44533dc71025a327ee46ea8948) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed transition (#5409)
+
+- [#4919](https://github.com/heroui-inc/heroui/pull/4919) [`ecffb26`](https://github.com/heroui-inc/heroui/commit/ecffb26320da15824356dbccb33d8627326a4b7c) Thanks [@macci001](https://github.com/macci001)! - Renaming loadingIcon to loadingComponent.
+
+- [`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0) Thanks [@wingkwong](https://github.com/wingkwong)! - sync 2.7.11 release
+
+- Updated dependencies [[`1bca3f9`](https://github.com/heroui-inc/heroui/commit/1bca3f994655081f04714843047185aacdd481c0)]:
+  - @heroui/shared-utils@2.1.10-beta.5
+
+## 2.4.18-beta.2
+
+### Patch Changes
+
+- [#5401](https://github.com/heroui-inc/heroui/pull/5401) [`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d) Thanks [@wingkwong](https://github.com/wingkwong)! - remove `@heroui/aria-utils` dependency
+
+- Updated dependencies [[`a2c4745`](https://github.com/heroui-inc/heroui/commit/a2c4745f078b2fe30890149d336b1a19a09d394d)]:
+  - @heroui/shared-utils@2.1.10-beta.4
+
+## 2.4.18-beta.1
+
+### Patch Changes
+
+- [#5398](https://github.com/heroui-inc/heroui/pull/5398) [`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be) Thanks [@wingkwong](https://github.com/wingkwong)! - remove RA dependencies (overlays & utils)
+
+- Updated dependencies [[`9c3e4d9`](https://github.com/heroui-inc/heroui/commit/9c3e4d97377706162a5e3145a1429fdb2e5db3be)]:
+  - @heroui/shared-utils@2.1.10-beta.3
+
+## 2.4.18-beta.0
+
+### Patch Changes
+
+- [#5392](https://github.com/heroui-inc/heroui/pull/5392) [`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b) Thanks [@wingkwong](https://github.com/wingkwong)! - bump RA versions
+
+- [#5284](https://github.com/heroui-inc/heroui/pull/5284) [`2bf0a42`](https://github.com/heroui-inc/heroui/commit/2bf0a4243a4e02356477a8da2275dba4e299e55f) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix transition scale (#5271)
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - TailwindCSS v4
+
+- [#4775](https://github.com/heroui-inc/heroui/pull/4775) [`851d411`](https://github.com/heroui-inc/heroui/commit/851d411ef90c7b1fdf504752ad81e0eb5e2edf4f) Thanks [@abhinav700](https://github.com/abhinav700)! - add 'outside-top' prop to input (#3058)
+
+- [#5274](https://github.com/heroui-inc/heroui/pull/5274) [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a) Thanks [@winchesHe](https://github.com/winchesHe)! - Fix skeleton animate
+
+- Updated dependencies [[`0001ab7`](https://github.com/heroui-inc/heroui/commit/0001ab794bd83f141d82d91d205f8391f5d98d9b), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a), [`a8ef824`](https://github.com/heroui-inc/heroui/commit/a8ef8241faf896ce980998e563d805fcf7132a7a)]:
+  - @heroui/shared-utils@2.1.10-beta.2
+
+## 2.4.17
+
+### Patch Changes
+
+- [#5350](https://github.com/heroui-inc/heroui/pull/5350) [`ace931b`](https://github.com/heroui-inc/heroui/commit/ace931b44db98c227bd4a36bd26c4db8de7d5bf6) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Consistent helperWrapper padding (#5338)
+
+- [#5349](https://github.com/heroui-inc/heroui/pull/5349) [`ff4b1b2`](https://github.com/heroui-inc/heroui/commit/ff4b1b23936412fdb1c762434d673f7b6935ac51) Thanks [@anuj-kuralkar](https://github.com/anuj-kuralkar)! - fixed inconsistent isInvalid styling between Input, InputOtp and DateInput in faded variant (#5339)
+
+- [#5362](https://github.com/heroui-inc/heroui/pull/5362) [`0d217e4`](https://github.com/heroui-inc/heroui/commit/0d217e466f3af30c85edc7d53638e031c8458c56) Thanks [@wingkwong](https://github.com/wingkwong)! - consistent type imports
+
+## 2.4.16
+
+### Patch Changes
+
+- [#5252](https://github.com/heroui-inc/heroui/pull/5252) [`ee4d2eb`](https://github.com/heroui-inc/heroui/commit/ee4d2ebe257319ce1dd14dd96b545f27bd92d56c) Thanks [@Vishvsalvi](https://github.com/Vishvsalvi)! - Fixed the clear button rendering for smaller devices (#5069)
+
+## 2.4.15
+
+### Patch Changes
+
+- [`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf) Thanks [@jrgarciadev](https://github.com/jrgarciadev)! - add default value for custom theme properties (#5194)
+
+  v2.7.7
+
+- Updated dependencies [[`b9e94a2`](https://github.com/heroui-inc/heroui/commit/b9e94a21518ba18447603680055c3a7dad8372bf)]:
+  - @heroui/shared-utils@2.1.9
+
+## 2.4.14
+
+### Patch Changes
+
+- [#5170](https://github.com/heroui-inc/heroui/pull/5170) [`f223e1f`](https://github.com/heroui-inc/heroui/commit/f223e1ff634ee5c97e6e88e2d74ab002132fa19e) Thanks [@Nathanael-Shermett](https://github.com/Nathanael-Shermett)! - Utilize `hover-opacity` in Link & Breadcrumb component (#5169)
+
+- [#5179](https://github.com/heroui-inc/heroui/pull/5179) [`99a5bc2`](https://github.com/heroui-inc/heroui/commit/99a5bc2f4caa7d5468c629c30286935b5e5fa833) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed input-otp variants on segment background
+
+- Updated dependencies [[`500ed77`](https://github.com/heroui-inc/heroui/commit/500ed771e25b08038fdc0d9401bfac31a2d68c3e)]:
+  - @heroui/shared-utils@2.1.8
+
+## 2.4.13
+
+### Patch Changes
+
+- [#5147](https://github.com/heroui-inc/heroui/pull/5147) [`2420acf`](https://github.com/heroui-inc/heroui/commit/2420acfe24f21aeee172307baad1420f69dc704a) Thanks [@wingkwong](https://github.com/wingkwong)! - fix select styles for label & helper text (#5413)
+
+- [#5087](https://github.com/heroui-inc/heroui/pull/5087) [`14fc373`](https://github.com/heroui-inc/heroui/commit/14fc373bd3ebe411e2692b543c368538a7b65aef) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed slider display when `hideThumb` is `true` (#5085)
+
+- [#5098](https://github.com/heroui-inc/heroui/pull/5098) [`de2e47c`](https://github.com/heroui-inc/heroui/commit/de2e47c11a69bbd8c42e95de92cce85788dce0c9) Thanks [@wingkwong](https://github.com/wingkwong)! - fix input with type=color style (#5083)
+
+- [#5034](https://github.com/heroui-inc/heroui/pull/5034) [`afdd892`](https://github.com/heroui-inc/heroui/commit/afdd892690f8ab166f3c5f35a1c1a3f2446831b8) Thanks [@macci001](https://github.com/macci001)! - Making toast compatible with RA upgrade.
+  Changing the type of description prop to ReactNode(#5033).
+
+## 2.4.12
+
+### Patch Changes
+
+- [#4968](https://github.com/heroui-inc/heroui/pull/4968) [`e9c67fa`](https://github.com/heroui-inc/heroui/commit/e9c67fa6caf62fa835474d009b86cf722b08b66d) Thanks [@wingkwong](https://github.com/wingkwong)! - fixed stepper button pseudo height in number-input (#4920)
+
+- [#5001](https://github.com/heroui-inc/heroui/pull/5001) [`6f94545`](https://github.com/heroui-inc/heroui/commit/6f945458c8372949e80a1f5acc6c3047450d6b9d) Thanks [@macci001](https://github.com/macci001)! - Toast should be above the modal(#4898).
+
+## 2.4.11
+
+### Patch Changes
+
+- v2.7.4
+
+- Updated dependencies []:
+  - @heroui/shared-utils@2.1.7
+
+## 2.4.10
+
+### Patch Changes
+
+- [#4922](https://github.com/heroui-inc/heroui/pull/4922) [`2774a1b`](https://github.com/heroui-inc/heroui/commit/2774a1b3513e2a046c538a2982a438f56608bbf2) Thanks [@wingkwong](https://github.com/wingkwong)! - fix broken start & end content in breadcrumb (#4921)
+
 ## 2.4.9
 
 ### Patch Changes

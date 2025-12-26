@@ -1,7 +1,10 @@
-import {cloneElement, ReactElement} from "react";
+import type {ReactElement} from "react";
+import type {UseSwitchProps} from "./use-switch";
+
+import {cloneElement} from "react";
 import {forwardRef} from "@heroui/system";
 
-import {UseSwitchProps, useSwitch} from "./use-switch";
+import {useSwitch} from "./use-switch";
 
 export interface SwitchProps extends UseSwitchProps {}
 

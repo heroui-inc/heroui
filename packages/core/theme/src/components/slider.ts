@@ -95,15 +95,15 @@ const slider = tv({
       },
       sm: {
         thumb:
-          "rounded-[calc(theme(borderRadius.small)/2)] after:rounded-[calc(theme(borderRadius.small)/3)]",
+          "rounded-[calc(var(--heroui-radius-small)/2)] after:rounded-[calc(var(--heroui-radius-small)/3)]",
       },
       md: {
         thumb:
-          "rounded-[calc(theme(borderRadius.medium)/2)] after:rounded-[calc(theme(borderRadius.medium)/3)]",
+          "rounded-[calc(var(--heroui-radius-medium)/2)] after:rounded-[calc(var(--heroui-radius-medium)/3)]",
       },
       lg: {
         thumb:
-          "rounded-[calc(theme(borderRadius.large)/1.5)] after:rounded-[calc(theme(borderRadius.large)/2)]",
+          "rounded-[calc(var(--heroui-radius-large)/1.5)] after:rounded-[calc(var(--heroui-radius-large)/2)]",
       },
       full: {
         thumb: "rounded-full after:rounded-full",
@@ -311,102 +311,92 @@ const slider = tv({
           "w-7 mx-[calc((theme(spacing.7)-theme(spacing.5))/2)] border-y-[calc(theme(spacing.7)/2)]",
       },
     },
-    // color && !isVertical && hasSingleThumb
+    // color && !isVertical
     {
       color: "foreground",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-foreground",
+        track:
+          "data-[fill-start=true]:border-s-foreground data-[fill-end=true]:border-e-foreground",
       },
     },
     {
       color: "primary",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-primary",
+        track: "data-[fill-start=true]:border-s-primary data-[fill-end=true]:border-e-primary",
       },
     },
     {
       color: "secondary",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-secondary",
+        track: "data-[fill-start=true]:border-s-secondary data-[fill-end=true]:border-e-secondary",
       },
     },
     {
       color: "success",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-success",
+        track: "data-[fill-start=true]:border-s-success data-[fill-end=true]:border-e-success",
       },
     },
     {
       color: "warning",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-warning",
+        track: "data-[fill-start=true]:border-s-warning data-[fill-end=true]:border-e-warning",
       },
     },
     {
       color: "danger",
       isVertical: false,
-      hasSingleThumb: true,
       class: {
-        track: "border-s-danger",
+        track: "data-[fill-start=true]:border-s-danger data-[fill-end=true]:border-e-danger",
       },
     },
-    // color && isVertical && hasSingleThumb
+    // color && isVertical
     {
       color: "foreground",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-foreground",
+        track:
+          "data-[fill-start=true]:border-b-foreground data-[fill-end=true]:border-t-foreground",
       },
     },
     {
       color: "primary",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-primary",
+        track: "data-[fill-start=true]:border-b-primary data-[fill-end=true]:border-t-primary",
       },
     },
     {
       color: "secondary",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-secondary",
+        track: "data-[fill-start=true]:border-b-secondary data-[fill-end=true]:border-t-secondary",
       },
     },
     {
       color: "success",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-success",
+        track: "data-[fill-start=true]:border-b-success data-[fill-end=true]:border-t-success",
       },
     },
     {
       color: "warning",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-warning",
+        track: "data-[fill-start=true]:border-b-warning data-[fill-end=true]:border-t-warning",
       },
     },
     {
       color: "danger",
       isVertical: true,
-      hasSingleThumb: true,
       class: {
-        track: "border-b-danger",
+        track: "data-[fill-start=true]:border-b-danger data-[fill-end=true]:border-t-danger",
       },
     },
   ],

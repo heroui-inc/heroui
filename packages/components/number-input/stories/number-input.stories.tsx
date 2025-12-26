@@ -1,14 +1,13 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import type {ValidationResult} from "@react-types/shared";
+import type {Meta} from "@storybook/react";
+import type {NumberInputProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {button} from "@heroui/theme";
 import {Form} from "@heroui/form";
 import {numberInput} from "@heroui/theme";
 
-import {NumberInput, NumberInputProps} from "../src";
+import {NumberInput} from "../src";
 
 export default {
   title: "Components/NumberInput",
@@ -42,7 +41,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["inside", "outside", "outside-left"],
+      options: ["inside", "outside", "outside-left", "outside-top"],
     },
     isDisabled: {
       control: {
@@ -110,6 +109,7 @@ const LabelPlacementTemplate = (args) => (
         <NumberInput {...args} description="inside" />
         <NumberInput {...args} description="outside" labelPlacement="outside" />
         <NumberInput {...args} description="outside-left" labelPlacement="outside-left" />
+        <NumberInput {...args} description="outside-top" labelPlacement="outside-top" />
       </div>
     </div>
     <div className="flex flex-col gap-3">
@@ -126,6 +126,12 @@ const LabelPlacementTemplate = (args) => (
           {...args}
           description="outside-left"
           labelPlacement="outside-left"
+          placeholder="Enter a number"
+        />
+        <NumberInput
+          {...args}
+          description="outside-top"
+          labelPlacement="outside-top"
           placeholder="Enter a number"
         />
       </div>
@@ -373,7 +379,7 @@ export const StartAndEndContent = {
           Currency
         </label>
         <select
-          className="outline-none border-0 bg-transparent text-default-400 text-sm"
+          className="outline-solid outline-transparent border-0 bg-transparent text-default-400 text-sm"
           id="currency"
           name="currency"
         >

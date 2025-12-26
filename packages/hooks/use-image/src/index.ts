@@ -40,7 +40,14 @@ export interface UseImageProps {
    * This tells the browser to request cross-origin access when trying to download the image data.
    */
   crossOrigin?: NativeImageProps["crossOrigin"];
+  /**
+   * Defines the `loading` attribute for the image
+   */
   loading?: NativeImageProps["loading"];
+  /**
+   * If `true`, image load will be bypassed and the load will be handled by `as` component.
+   */
+  shouldBypassImageLoad?: boolean;
 }
 
 type Status = "loading" | "failed" | "pending" | "loaded";
@@ -66,7 +73,17 @@ type ImageEvent = SyntheticEvent<HTMLImageElement, Event>;
  */
 
 export function useImage(props: UseImageProps = {}) {
-  const {onLoad, onError, ignoreFallback, src, crossOrigin, srcSet, sizes, loading} = props;
+  const {
+    onLoad,
+    onError,
+    ignoreFallback,
+    src,
+    crossOrigin,
+    srcSet,
+    sizes,
+    loading,
+    shouldBypassImageLoad = false,
+  } = props;
 
   const isHydrated = useIsHydrated();
 
@@ -98,7 +115,7 @@ export function useImage(props: UseImageProps = {}) {
 
   const load = useCallback((): Status => {
     if (!src) return "pending";
-    if (ignoreFallback) return "loaded";
+    if (ignoreFallback || shouldBypassImageLoad) return "loaded";
 
     const img = new Image();
 
@@ -114,7 +131,7 @@ export function useImage(props: UseImageProps = {}) {
     }
 
     return "loading";
-  }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading]);
+  }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading, shouldBypassImageLoad]);
 
   useSafeLayoutEffect(() => {
     if (isHydrated) {

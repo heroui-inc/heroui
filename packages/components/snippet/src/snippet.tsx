@@ -1,11 +1,14 @@
-import {ReactNode, useCallback, useMemo, cloneElement} from "react";
+import type {ReactNode} from "react";
+import type {UseSnippetProps} from "./use-snippet";
+
+import {useCallback, useMemo, cloneElement} from "react";
 import {forwardRef} from "@heroui/system";
 import {Tooltip} from "@heroui/tooltip";
 import {CopyLinearIcon, CheckLinearIcon} from "@heroui/shared-icons";
 import {Button} from "@heroui/button";
 import {objectToDeps} from "@heroui/shared-utils";
 
-import {useSnippet, UseSnippetProps} from "./use-snippet";
+import {useSnippet} from "./use-snippet";
 
 export interface SnippetProps extends UseSnippetProps {}
 

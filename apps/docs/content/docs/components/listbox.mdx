@@ -376,6 +376,12 @@ You can customize the `Listbox` items style by using the `itemClasses` prop and 
       default: "false"
     },
     {
+      attribute: "selectionBehavior",
+      type: "'toggle' | 'replace'",
+      description: "How multiple selection should behave in the collection.",
+      default: "toggle"
+    },
+    {
       attribute: "classNames",
       type: "Partial<Record<\"base\" | \"list\" | \"emptyContent\", string>>",
       description: "Allows to set custom class names for the listbox slots.",
@@ -397,7 +403,7 @@ You can customize the `Listbox` items style by using the `itemClasses` prop and 
     {
       attribute: "onAction",
       type: "(key: React.Key) => void",
-      description: "Handler that is called when an item is selected.",
+      description: "Handler that is called when a user performs an action on an item. The exact user event depends on the collection's selectionBehavior prop and the interaction modality.",
       default: "-"
     },
     {

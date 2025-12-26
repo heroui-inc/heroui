@@ -1,5 +1,6 @@
-import {ReactNode, FC} from "react";
-import {clsx} from "@heroui/shared-utils";
+import type {ReactNode, FC} from "react";
+
+import {cn} from "@heroui/theme";
 export interface BgGridContainerProps {
   showGradient?: boolean;
   children?: ReactNode;
@@ -13,7 +14,7 @@ export const BgGridContainer: FC<BgGridContainerProps> = ({
 }) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         "relative overflow-y-hidden flex items-center border border-default-200 dark:border-default-100 px-2 py-4 rounded-lg",
         "overflow-hidden",
         // blur effect
@@ -34,7 +35,7 @@ export const BgGridContainer: FC<BgGridContainerProps> = ({
         {children}
       </div>
       {/* <div
-        className={clsx(
+        className={cn(
           "hidden md:block absolute z-[-1] inset-0 bg-grid-zinc-300/25 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.6))]",
           "dark:bg-grid-zinc-500/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]",
         )}

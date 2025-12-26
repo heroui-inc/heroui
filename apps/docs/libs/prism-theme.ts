@@ -1,4 +1,4 @@
-import {PrismTheme} from "prism-react-renderer";
+import type {PrismTheme} from "prism-react-renderer";
 
 const codeTheme: PrismTheme = {
   plain: {

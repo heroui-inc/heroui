@@ -1,7 +1,9 @@
+import type {Config} from "../types";
+
 import {initialDarkTheme, initialLayout, initialLightTheme} from "../constants";
-import {Config} from "../types";
 
 export const emerald: Config = {
+  name: "emerald",
   light: {
     defaultColor: {
       default: "#b9c9be",

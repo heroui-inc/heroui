@@ -1,12 +1,12 @@
 import type {GridNode} from "@react-types/grid";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {ValuesType} from "./use-table";
 
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {useTableHeaderRow} from "@react-aria/table";
-import {mergeProps} from "@react-aria/utils";
-
-import {ValuesType} from "./use-table";
+import {cn} from "@heroui/theme";
 
 // @internal
 export interface TableHeaderRowProps<T = object> extends HTMLHeroUIProps<"tr"> {
@@ -28,7 +28,7 @@ const TableHeaderRow = forwardRef<"tr", TableHeaderRowProps>((props, ref) => {
 
   const {rowProps} = useTableHeaderRow({node}, state, domRef);
 
-  const trStyles = clsx(classNames?.tr, className, node.props?.className);
+  const trStyles = cn(classNames?.tr, className, node.props?.className);
 
   return (
     <Component

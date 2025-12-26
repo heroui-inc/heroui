@@ -1,12 +1,14 @@
 import type {SelectProps} from "../src";
+import type {UserEvent} from "@testing-library/user-event";
 
 import "@testing-library/jest-dom";
 import * as React from "react";
 import {render, renderHook, waitFor, act} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {spy, shouldIgnoreReactWarning} from "@heroui/test-utils";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@heroui/system";
 
 import {Select, SelectItem, SelectSection} from "../src";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "../../modal/src";
@@ -771,7 +773,7 @@ describe("Select", () => {
     await user.click(listboxItems[1]);
 
     expect(onChange).toHaveBeenCalledTimes(1);
-  });
+  }, 10000);
 
   it("should place the label outside when labelPlacement is outside and isMultiline enabled", () => {
     const labelContent = "Favorite Animal Label";
@@ -910,6 +912,186 @@ describe("Select", () => {
     expect(listbox).toBeInTheDocument();
     // assert that the listbox items are not rendered
     expect(wrapper.queryByRole("option")).not.toBeInTheDocument();
+  });
+
+  it("should show clear button when isClearable and a value is selected", async () => {
+    let onClear = jest.fn();
+
+    const wrapper = render(
+      <Select
+        disableAnimation
+        isClearable
+        isOpen
+        aria-label="Favorite Animal"
+        data-testid="select"
+        label="Favorite Animal"
+        selectionMode="single"
+        onClear={onClear}
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>,
+    );
+
+    let listboxItems = wrapper.getAllByRole("option");
+
+    await user.click(listboxItems[1]);
+
+    const clearButton = document.querySelector("[data-slot=clear-button]")!;
+
+    expect(clearButton).not.toBeNull();
+  });
+
+  it("should not show clear button when isClearable but no value is selected", async () => {
+    let onClear = jest.fn();
+
+    const wrapper = render(
+      <Select
+        disableAnimation
+        isClearable
+        isOpen
+        aria-label="Favorite Animal"
+        data-testid="select"
+        label="Favorite Animal"
+        selectionMode="single"
+        onClear={onClear}
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>,
+    );
+
+    const select = wrapper.getByTestId("select");
+
+    const buttons = select.querySelectorAll("button");
+
+    expect(buttons.length).toEqual(0);
+  });
+
+  it("should not show clear button when not isClearable and a value is selected", async () => {
+    let onClear = jest.fn();
+
+    const wrapper = render(
+      <Select
+        disableAnimation
+        isOpen
+        aria-label="Favorite Animal"
+        data-testid="select"
+        label="Favorite Animal"
+        selectionMode="single"
+        onClear={onClear}
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>,
+    );
+
+    const select = wrapper.getByTestId("select");
+
+    let listboxItems = wrapper.getAllByRole("option");
+
+    await user.click(listboxItems[1]);
+
+    const buttons = select.querySelectorAll("button");
+
+    expect(buttons.length).toEqual(0);
+  });
+
+  it("should not show clear button when not isClearable and no value is selected", async () => {
+    let onClear = jest.fn();
+
+    const wrapper = render(
+      <Select
+        disableAnimation
+        isOpen
+        aria-label="Favorite Animal"
+        data-testid="select"
+        label="Favorite Animal"
+        selectionMode="single"
+        onClear={onClear}
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>,
+    );
+
+    const select = wrapper.getByTestId("select");
+
+    const buttons = select.querySelectorAll("button");
+
+    expect(buttons.length).toEqual(0);
+  });
+
+  it("should call onClear when clear button is clicked", async () => {
+    let onClear = jest.fn();
+
+    const wrapper = render(
+      <Select
+        disableAnimation
+        isClearable
+        isOpen
+        aria-label="Favorite Animal"
+        data-testid="select"
+        label="Favorite Animal"
+        selectionMode="single"
+        onClear={onClear}
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>,
+    );
+
+    let listboxItems = wrapper.getAllByRole("option");
+
+    await user.click(listboxItems[1]);
+
+    const clearButton = document.querySelector("[data-slot=clear-button]")!;
+
+    await user.click(clearButton);
+
+    expect(onClear).toHaveBeenCalledTimes(1);
+  });
+
+  it("should clear the selected value when clear button is clicked", async () => {
+    let onClear = jest.fn();
+
+    const wrapper = render(
+      <Select
+        disableAnimation
+        isClearable
+        isOpen
+        aria-label="Favorite Animal"
+        data-testid="select"
+        label="Favorite Animal"
+        selectionMode="single"
+        onClear={onClear}
+      >
+        <SelectItem key="penguin">Penguin</SelectItem>
+        <SelectItem key="zebra">Zebra</SelectItem>
+        <SelectItem key="shark">Shark</SelectItem>
+      </Select>,
+    );
+
+    const select = wrapper.getByTestId("select");
+
+    let listboxItems = wrapper.getAllByRole("option");
+
+    await user.click(listboxItems[1]);
+
+    expect(select).toHaveTextContent("Favorite AnimalZebra");
+
+    const clearButton = select.querySelectorAll("button")[0];
+
+    await user.click(clearButton);
+
+    expect(select).toHaveTextContent("Favorite Animal");
+
+    expect(select).not.toHaveTextContent("Favorite Animalzebra");
   });
 });
 
@@ -1522,6 +1704,89 @@ describe("validation", () => {
       expect(document.getElementById(trigger.getAttribute("aria-describedby")!)).toHaveTextContent(
         "new error",
       );
+    });
+  });
+
+  describe("Select with HeroUIProvider context", () => {
+    it("should inherit labelPlacement from HeroUIProvider", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).not.toHaveTextContent(labelContent);
+    });
+
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            labelPlacement="inside"
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).toHaveTextContent(labelContent);
+    });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const labelContent = "Favorite Animal Label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <Select
+            disableAnimation
+            aria-label="Favorite Animal"
+            data-testid="select"
+            label={labelContent}
+            placeholder="placeholder"
+          >
+            <SelectItem key="penguin">Penguin</SelectItem>
+            <SelectItem key="zebra">Zebra</SelectItem>
+            <SelectItem key="shark">Shark</SelectItem>
+          </Select>
+        </HeroUIProvider>,
+      );
+
+      const base = document.querySelector("[data-slot=base]");
+      const trigger = document.querySelector("[data-slot=trigger]");
+
+      // outside-top: label is in base, not trigger
+      expect(base).toHaveTextContent(labelContent);
+      expect(trigger).not.toHaveTextContent(labelContent);
+      expect(base).toHaveClass("flex-col");
     });
   });
 });

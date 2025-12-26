@@ -1,4 +1,6 @@
-import {tv as tvBase, TV} from "tailwind-variants";
+import type {TV} from "tailwind-variants";
+
+import {tv as tvBase} from "tailwind-variants";
 
 import {twMergeConfig} from "./tw-merge-config";
 

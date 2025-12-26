@@ -1,12 +1,13 @@
 import type {ValidationResult} from "@react-types/shared";
+import type {Meta} from "@storybook/react";
+import type {CheckboxGroupProps} from "../src";
 
 import React from "react";
-import {Meta} from "@storybook/react";
 import {checkbox} from "@heroui/theme";
 import {button} from "@heroui/theme";
 import {Form} from "@heroui/form";
 
-import {CheckboxGroup, Checkbox, CheckboxGroupProps} from "../src";
+import {CheckboxGroup, Checkbox} from "../src";
 
 export default {
   title: "Components/CheckboxGroup",

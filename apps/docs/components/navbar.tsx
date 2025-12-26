@@ -1,6 +1,9 @@
 "use client";
 
-import {useRef, useState, FC, ReactNode, Key, useMemo, useCallback} from "react";
+import type {FC, ReactNode} from "react";
+import type {Route} from "@/libs/docs/page";
+
+import {useRef, useState, useMemo, useCallback} from "react";
 import {
   link,
   Navbar as HeroUINavbar,
@@ -12,17 +15,12 @@ import {
   Link,
   Button,
   Kbd,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownTrigger,
   Chip,
   Divider,
 } from "@heroui/react";
 import {dataFocusVisibleClasses} from "@heroui/theme";
-import {ChevronDownIcon, LinkIcon} from "@heroui/shared-icons";
 import {isAppleDevice} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import NextLink from "next/link";
 import {usePathname} from "next/navigation";
 import {motion, AnimatePresence} from "framer-motion";
@@ -35,8 +33,7 @@ import {FbRoadmapLink} from "./featurebase/fb-roadmap-link";
 
 import {currentVersion} from "@/utils/version";
 import {siteConfig} from "@/config/site";
-import {Route} from "@/libs/docs/page";
-import {LargeLogo, SmallLogo, ThemeSwitch} from "@/components";
+import {Logo, ThemeSwitch} from "@/components";
 import {GithubIcon, SearchLinearIcon} from "@/components/icons";
 import {useIsMounted} from "@/hooks/use-is-mounted";
 import {DocsSidebar} from "@/components/docs/sidebar";
@@ -94,18 +91,10 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     "/docs/guide/upgrade-to-v2",
   ];
 
-  const navLinkClasses = clsx(
+  const navLinkClasses = cn(
     link({color: "foreground"}),
     "data-[active=true]:text-primary data-[active=true]:font-semibold",
   );
-
-  const handleVersionChange = useCallback((key: Key) => {
-    if (key === "v1") {
-      const newWindow = window.open("https://v1.heroui.com", "_blank", "noopener,noreferrer");
-
-      if (newWindow) newWindow.opener = null;
-    }
-  }, []);
 
   const handlePressNavbarItem = useCallback(
     (name: string, url: string) => {
@@ -133,7 +122,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
       }
       startContent={
         <SearchLinearIcon
-          className="text-base text-default-400 pointer-events-none flex-shrink-0"
+          className="text-base text-default-400 pointer-events-none shrink-0"
           size={16}
           strokeWidth={2}
         />
@@ -145,40 +134,24 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     </Button>
   );
 
-  const versionDropdown = useMemo(() => {
+  const versionChip = useMemo(() => {
     return ref.current ? (
-      <Dropdown placement="bottom-start" portalContainer={ref.current}>
-        <AnimatePresence>
-          {isMounted && (
-            <motion.div animate={{opacity: 1}} exit={{opacity: 0}} initial={{opacity: 0}}>
-              <DropdownTrigger>
-                <Button
-                  className="min-w-[74px] max-w-[74px] hidden font-medium text-default-500 text-xs h-6 w-[74px] py-1 min-w-fit sm:flex gap-0.5 bg-default-400/20 dark:bg-default-500/20"
-                  endContent={<ChevronDownIcon className="text-tiny" />}
-                  radius="full"
-                  size="sm"
-                  variant="flat"
-                >
-                  v{currentVersion}
-                </Button>
-              </DropdownTrigger>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <DropdownMenu
-          aria-label="HeroUI versions"
-          defaultSelectedKeys={["v2"]}
-          selectionMode="single"
-          onAction={handleVersionChange}
-        >
-          <DropdownItem key="v2">v{currentVersion}</DropdownItem>
-          <DropdownItem key="v1" endContent={<LinkIcon />}>
-            v1.0.0
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+      <AnimatePresence>
+        {isMounted && (
+          <motion.div animate={{opacity: 1}} exit={{opacity: 0}} initial={{opacity: 0}}>
+            <Chip
+              className="max-w-[44px] hidden h-6 w-[44px] py-1 min-w-fit sm:flex gap-0.5 bg-default-400/20 dark:bg-default-500/20"
+              classNames={{
+                content: "font-medium text-default-500 text-xs",
+              }}
+            >
+              v{currentVersion}
+            </Chip>
+          </motion.div>
+        )}
+      </AnimatePresence>
     ) : (
-      <div className="w-[74px]" />
+      <div className="w-[44px]" />
     );
   }, [ref.current, isMounted]);
 
@@ -189,8 +162,8 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
   return (
     <HeroUINavbar
       ref={ref}
-      className={clsx({
-        "z-[100001]": isMenuOpen,
+      className={cn({
+        "z-100001": isMenuOpen,
       })}
       classNames={{
         base: "bg-white/[.90] dark:bg-black/[.65]",
@@ -209,26 +182,25 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             href="/"
             onClick={() => handlePressNavbarItem("Home", "/")}
           >
-            <SmallLogo className="w-6 h-6 md:hidden" />
-            <LargeLogo className="h-5 md:h-6" />
+            <Logo className="h-6" />
           </NextLink>
-          {versionDropdown}
-          <Chip
+          {versionChip}
+          {/* <Chip
             as={NextLink}
             className="hidden sm:flex bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
             classNames={{
               content: "font-semibold text-foreground text-xs ",
             }}
             color="primary"
-            href="/blog/v2.7.0"
+            href="/blog/v2.8.0"
             variant="flat"
-            onClick={() => handlePressNavbarItem("HeroUI v2.7.0", "/blog/v2.7.0")}
+            onClick={() => handlePressNavbarItem("HeroUI v2.8.0", "/blog/v2.8.0")}
           >
-            HeroUI v2.7.0&nbsp;
+            HeroUI v2.8.0&nbsp;
             <span aria-label="emoji" role="img">
               🔥
             </span>
-          </Chip>
+          </Chip> */}
         </NavbarBrand>
       </NavbarContent>
 
@@ -247,14 +219,14 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         <NavbarItem className="flex h-full items-center">
           <ThemeSwitch
             classNames={{
-              wrapper: "!text-default-500 dark:!text-default-500",
+              wrapper: "text-default-500! dark:text-default-500!",
             }}
           />
         </NavbarItem>
         <NavbarItem className="flex h-full items-center">
           <button
-            className={clsx(
-              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-none",
+            className={cn(
+              "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-solid outline-transparent",
               // focus ring
               ...dataFocusVisibleClasses,
             )}
@@ -364,7 +336,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
           <ThemeSwitch
             className="border-1 border-default-200 rounded-full h-full min-w-10 min-h-10 flex items-center justify-center"
             classNames={{
-              wrapper: "!text-default-400 dark:!text-default-500",
+              wrapper: "text-default-400! dark:text-default-500!",
             }}
           />
         </NavbarItem>

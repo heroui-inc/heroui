@@ -1,15 +1,15 @@
 import type {ToggleVariantProps, ToggleSlots, SlotsToClasses} from "@heroui/theme";
 import type {AriaSwitchProps} from "@react-aria/switch";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactNode, Ref} from "react";
 
-import {ReactNode, Ref, useCallback, useId, useRef} from "react";
+import {useCallback, useId, useRef} from "react";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {mergeRefs} from "@heroui/react-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useHover} from "@react-aria/interactions";
-import {toggle} from "@heroui/theme";
-import {chain, mergeProps} from "@react-aria/utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
+import {toggle, cn} from "@heroui/theme";
+import {dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useSwitch as useReactAriaSwitch} from "@react-aria/switch";
 import {useMemo} from "react";
 import {useToggleState} from "@react-stately/toggle";
@@ -177,13 +177,13 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
     [objectToDeps(variantProps), disableAnimation],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getBaseProps: PropGetter = (props) => {
     return {
       ...mergeProps(hoverProps, otherProps, props),
       ref: domRef,
-      className: slots.base({class: clsx(baseStyles, props?.className)}),
+      className: slots.base({class: cn(baseStyles, props?.className)}),
       "data-disabled": dataAttr(isDisabled),
       "data-selected": dataAttr(isSelected),
       "data-readonly": dataAttr(isReadOnly),
@@ -199,7 +199,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
       return {
         ...props,
         "aria-hidden": true,
-        className: clsx(slots.wrapper({class: clsx(classNames?.wrapper, props?.className)})),
+        className: slots.wrapper({class: cn(classNames?.wrapper, props?.className)}),
       };
     },
     [slots, classNames?.wrapper],
@@ -218,7 +218,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
   const getThumbProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
-      className: slots.thumb({class: clsx(classNames?.thumb, props?.className)}),
+      className: slots.thumb({class: cn(classNames?.thumb, props?.className)}),
     }),
     [slots, classNames?.thumb],
   );
@@ -227,7 +227,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
     (props = {}) => ({
       ...props,
       id: labelId,
-      className: slots.label({class: clsx(classNames?.label, props?.className)}),
+      className: slots.label({class: cn(classNames?.label, props?.className)}),
     }),
     [slots, classNames?.label, isDisabled, isSelected],
   );
@@ -242,7 +242,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
         {
           width: "1em",
           height: "1em",
-          className: slots.thumbIcon({class: clsx(classNames?.thumbIcon)}),
+          className: slots.thumbIcon({class: cn(classNames?.thumbIcon)}),
         },
         props.includeStateProps
           ? {
@@ -258,7 +258,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
       width: "1em",
       height: "1em",
       ...props,
-      className: slots.startContent({class: clsx(classNames?.startContent, props?.className)}),
+      className: slots.startContent({class: cn(classNames?.startContent, props?.className)}),
     }),
     [slots, classNames?.startContent, isSelected],
   );
@@ -268,7 +268,7 @@ export function useSwitch(originalProps: UseSwitchProps = {}) {
       width: "1em",
       height: "1em",
       ...props,
-      className: slots.endContent({class: clsx(classNames?.endContent, props?.className)}),
+      className: slots.endContent({class: cn(classNames?.endContent, props?.className)}),
     }),
     [slots, classNames?.endContent, isSelected],
   );

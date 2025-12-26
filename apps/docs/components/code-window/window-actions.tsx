@@ -1,6 +1,6 @@
 import React from "react";
 import {tv} from "tailwind-variants";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 export type WindowActionsProps = {
   title?: string;
@@ -21,7 +21,7 @@ const windowIconStyles = tv({
 export const WindowActions: React.FC<WindowActionsProps> = ({title, className, ...props}) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         "flex items-center sticky top-0 left-0 px-4 z-10 justify-between h-8 bg-code-background w-full",
         className,
       )}

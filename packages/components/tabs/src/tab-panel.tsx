@@ -1,14 +1,14 @@
 import type {AriaTabPanelProps} from "@react-aria/tabs";
+import type {Key} from "@react-types/shared";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {ValuesType} from "./use-tabs";
 
-import {Key} from "@react-types/shared";
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, getInertValue} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {getInertValue, mergeProps} from "@heroui/shared-utils";
 import {useTabPanel} from "@react-aria/tabs";
 import {useFocusRing} from "@react-aria/focus";
-
-import {ValuesType} from "./use-tabs";
+import {cn} from "@heroui/theme";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**
@@ -55,7 +55,7 @@ const TabPanel = forwardRef<"div", TabPanelProps>((props, ref) => {
 
   const content = state.collection.getItem(tabKey)!.props.children;
 
-  const tabPanelStyles = clsx(classNames?.panel, className, selectedItem?.props?.className);
+  const tabPanelStyles = cn(classNames?.panel, className, selectedItem?.props?.className);
 
   const isSelected = tabKey === selectedItem?.key;
 

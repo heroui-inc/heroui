@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {NavbarProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {navbar} from "@heroui/theme";
 import {Link} from "@heroui/link";
 import {Button} from "@heroui/button";
@@ -26,7 +28,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  NavbarProps,
 } from "../src";
 
 export default {
@@ -514,7 +515,7 @@ const WithSearchInputTemplate = (args: NavbarProps) => {
             }}
             placeholder="Search..."
             size="sm"
-            startContent={<SearchIcon className="text-base pointer-events-none flex-shrink-0" />}
+            startContent={<SearchIcon className="text-base pointer-events-none shrink-0" />}
             onClear={() => {
               // eslint-disable-next-line no-console
               console.log("clear");

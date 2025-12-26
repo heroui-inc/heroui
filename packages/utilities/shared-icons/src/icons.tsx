@@ -1,6 +1,7 @@
+import type {IconSvgProps} from "./types";
+
 import * as React from "react";
 
-import {IconSvgProps} from "./types";
 interface IconProps extends IconSvgProps {
   fill?: string;
   filled?: boolean;

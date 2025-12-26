@@ -93,18 +93,7 @@ export function useIntersectionObserver({
     return () => {
       observer.disconnect();
     };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    ref,
-    isEnabled,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    JSON.stringify(threshold),
-    root,
-    rootMargin,
-    frozen,
-    freezeOnceVisible,
-  ]);
+  }, [ref, isEnabled, JSON.stringify(threshold), root, rootMargin, frozen, freezeOnceVisible]);
 
   // ensures that if the observed element changes, the intersection observer is reinitialized
   const prevRef = useRef<Element | null>(null);

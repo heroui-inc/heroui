@@ -14,7 +14,7 @@ concurrency:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: heroui-runner
     timeout-minutes: 30
     steps:
       - name: Checkout branch

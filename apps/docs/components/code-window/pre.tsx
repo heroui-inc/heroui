@@ -1,5 +1,5 @@
 import {forwardRef} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 export interface PreProps {
   className?: string;
@@ -14,7 +14,7 @@ export const Pre = forwardRef<HTMLPreElement, PreProps>(
     return (
       <pre
         ref={forwardedRef}
-        className={clsx(
+        className={cn(
           "relative w-full h-full box-border shadow-md text-white/80 leading-5 whitespace-pre text-sm font-mono bg-code-background rounded-xl [&>code]:transition-transform",
           scrollClass,
           className,

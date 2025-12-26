@@ -1,16 +1,16 @@
 import type {MenuItemBaseProps} from "./base/menu-item-base";
 import type {MenuItemVariantProps} from "@heroui/theme";
 import type {Node, PressEvent} from "@react-types/shared";
+import type {TreeState} from "@react-stately/tree";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {useMemo, useRef, useCallback} from "react";
-import {menuItem} from "@heroui/theme";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {menuItem, cn} from "@heroui/theme";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
-import {TreeState} from "@react-stately/tree";
-import {clsx, dataAttr, objectToDeps, removeEvents, warn} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
 import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
 import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
-import {mergeProps} from "@react-aria/utils";
 import {useIsMobile} from "@heroui/use-is-mobile";
 import {filterDOMProps} from "@heroui/react-utils";
 
@@ -54,7 +54,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     isReadOnly = false,
     closeOnSelect,
     onClose,
-    onClick: deprecatedOnClick,
+    onClick,
     ...otherProps
   } = props;
 
@@ -77,19 +77,12 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     autoFocus,
   });
 
-  if (deprecatedOnClick && typeof deprecatedOnClick === "function") {
-    warn(
-      "onClick is deprecated, please use onPress instead. See: https://github.com/heroui-inc/heroui/issues/4292",
-      "MenuItem",
-    );
-  }
-
   const handlePress = useCallback(
     (e: PressEvent) => {
-      deprecatedOnClick?.(e as unknown as React.MouseEvent<HTMLLIElement | HTMLAnchorElement>);
+      onClick?.(e as unknown as React.MouseEvent<HTMLLIElement | HTMLAnchorElement>);
       onPress?.(e);
     },
-    [deprecatedOnClick, onPress],
+    [onClick, onPress],
   );
 
   const {
@@ -149,7 +142,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     [objectToDeps(variantProps), isDisabled, disableAnimation, rendered, description],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   if (isReadOnly) {
     itemProps = removeEvents(itemProps);
@@ -173,7 +166,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     "data-selected": dataAttr(isSelected),
     "data-pressed": dataAttr(isPressed),
     "data-focus-visible": dataAttr(isFocusVisible),
-    className: slots.base({class: clsx(baseStyles, props.className)}),
+    className: slots.base({class: cn(baseStyles, props.className)}),
   });
 
   const getLabelProps: PropGetter = (props = {}) => ({

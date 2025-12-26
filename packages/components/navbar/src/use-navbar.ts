@@ -1,15 +1,16 @@
 import type {NavbarVariantProps, SlotsToClasses, NavbarSlots} from "@heroui/theme";
+import type {ReactRef} from "@heroui/react-utils";
+import type {HTMLMotionProps} from "framer-motion";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
-import {navbar} from "@heroui/theme";
-import {useDOMRef} from "@heroui/react-utils";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {mergeProps, useResizeObserver} from "@react-aria/utils";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {navbar, cn} from "@heroui/theme";
+import {useDOMRef} from "@heroui/react-utils";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useScrollPosition} from "@heroui/use-scroll-position";
+import {useResizeObserver} from "@heroui/use-resize";
 import {useControlledState} from "@react-stately/utils";
-import {HTMLMotionProps} from "framer-motion";
 import {usePreventScroll} from "@react-aria/overlays";
 
 interface Props extends HTMLHeroUIProps<"nav"> {
@@ -57,7 +58,7 @@ interface Props extends HTMLHeroUIProps<"nav"> {
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    * This motion is only available if the `shouldHideOnScroll` prop is set to `true`.
    */
-  motionProps?: HTMLMotionProps<"nav">;
+  motionProps?: Omit<HTMLMotionProps<"nav">, "ref">;
   /**
    * The event handler for the menu open state.
    * @param isOpen boolean
@@ -185,7 +186,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
     [objectToDeps(variantProps), disableAnimation, shouldHideOnScroll],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   useScrollPosition({
     elementRef: parentRef,
@@ -207,7 +208,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
     "data-hidden": dataAttr(isHidden),
     "data-menu-open": dataAttr(isMenuOpen),
     ref: domRef,
-    className: slots.base({class: clsx(baseStyles, props?.className)}),
+    className: slots.base({class: cn(baseStyles, props?.className)}),
     style: {
       "--navbar-height": typeof height === "number" ? `${height}px` : height,
       ...otherProps?.style,
@@ -218,7 +219,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
   const getWrapperProps: PropGetter = (props = {}) => ({
     ...props,
     "data-menu-open": dataAttr(isMenuOpen),
-    className: slots.wrapper({class: clsx(classNames?.wrapper, props?.className)}),
+    className: slots.wrapper({class: cn(classNames?.wrapper, props?.className)}),
   });
 
   return {

@@ -1,6 +1,8 @@
+import type {UseCircularProgressProps} from "./use-circular-progress";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseCircularProgressProps, useCircularProgress} from "./use-circular-progress";
+import {useCircularProgress} from "./use-circular-progress";
 
 export interface CircularProgressProps extends UseCircularProgressProps {}
 

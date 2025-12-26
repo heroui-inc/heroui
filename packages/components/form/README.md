@@ -1,8 +1,8 @@
 # @heroui/form
 
-A Quick description of the component
+A form is a group of inputs that allows users submit data to a server and supports field validation errors.
 
-> This is an internal utility, not intended for public usage.
+Please refer to the [documentation](https://heroui.com/docs/components/form) for more information.
 
 ## Installation
 

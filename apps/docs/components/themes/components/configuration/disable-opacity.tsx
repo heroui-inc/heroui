@@ -1,6 +1,7 @@
+import type {Config} from "../../types";
+
 import {setOtherCssParams} from "../../css-vars";
 import {useThemeBuilder} from "../../provider";
-import {Config} from "../../types";
 import {ConfigSection} from "../config-section";
 
 import ValueButton from "./value-button";

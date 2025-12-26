@@ -1,11 +1,11 @@
 import type {AvatarSlots, AvatarVariantProps, SlotsToClasses} from "@heroui/theme";
 import type {DOMElement, DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {avatar} from "@heroui/theme";
+import {avatar, cn} from "@heroui/theme";
 import {useProviderContext} from "@heroui/system";
-import {mergeProps} from "@react-aria/utils";
-import {ReactRef, useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, safeText, dataAttr} from "@heroui/shared-utils";
+import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
+import {dataAttr, mergeProps, safeInitials} from "@heroui/shared-utils";
 import {useFocusRing} from "@react-aria/focus";
 import {useMemo, useCallback} from "react";
 import {useImage} from "@heroui/use-image";
@@ -117,7 +117,7 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
     isBordered = groupContext?.isBordered ?? false,
     isDisabled = groupContext?.isDisabled ?? false,
     isFocusable = false,
-    getInitials = safeText,
+    getInitials = safeInitials,
     ignoreFallback = false,
     showFallback: showFallbackProp = false,
     ImgComponent = "img",
@@ -137,11 +137,21 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
   const {isHovered, hoverProps} = useHover({isDisabled});
   const disableAnimation = disableAnimationProp ?? globalContext?.disableAnimation ?? false;
 
-  const imageStatus = useImage({src, onError, ignoreFallback});
+  const isHeroImage =
+    (typeof ImgComponent === "object" && (ImgComponent as any)?.displayName?.includes("HeroUI")) ??
+    false;
+
+  const imageStatus = useImage({
+    src,
+    onError,
+    ignoreFallback,
+    shouldBypassImageLoad: as !== undefined || (ImgComponent !== "img" && !isHeroImage),
+  });
 
   const isImgLoaded = imageStatus === "loaded";
 
-  const shouldFilterDOMProps = typeof ImgComponent === "string";
+  // if the ImgComponent is not a HeroUI component, we need to filter out `disableAnimation`
+  const shouldFilterDOMProps = !isHeroImage;
 
   /**
    * Fallback avatar applies under 2 conditions:
@@ -176,7 +186,7 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
     ],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const canBeFocused = useMemo(() => {
     return isFocusable || as === "button";
@@ -190,7 +200,7 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
       "data-focus": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocusVisible),
       className: slots.base({
-        class: clsx(baseStyles, props?.className),
+        class: cn(baseStyles, props?.className),
       }),
       ...mergeProps(otherProps, hoverProps, canBeFocused ? focusProps : {}),
     }),

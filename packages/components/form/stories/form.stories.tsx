@@ -1,9 +1,11 @@
+import type {Meta} from "@storybook/react";
+import type {FormProps} from "../src";
+
 import React, {useState} from "react";
-import {Meta} from "@storybook/react";
 // import {Input} from "@heroui/input";
 import {Button} from "@heroui/button";
 
-import {Form, FormProps} from "../src";
+import {Form} from "../src";
 
 export default {
   title: "Components/Form",

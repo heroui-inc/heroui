@@ -1,6 +1,8 @@
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
+
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {useNavbarContext} from "./navbar-context";
 
@@ -16,7 +18,7 @@ const NavbarBrand = forwardRef<"div", NavbarBrandProps>((props, ref) => {
 
   const {slots, classNames} = useNavbarContext();
 
-  const styles = clsx(classNames?.brand, className);
+  const styles = cn(classNames?.brand, className);
 
   return (
     <Component ref={domRef} className={slots.brand?.({class: styles})} {...otherProps}>

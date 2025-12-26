@@ -1,9 +1,11 @@
-import {InputProps, Input} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import type {InputProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
+import {Input} from "@heroui/react";
+import {cn} from "@heroui/theme";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 
 type Color = InputProps["color"];
 type Radius = InputProps["radius"];
@@ -86,7 +88,7 @@ const Section = ({
           key={idx}
           classNames={{
             ...classNames,
-            inputWrapper: clsx(clsx(variant === "bordered" && borderClass)),
+            inputWrapper: cn(cn(variant === "bordered" && borderClass)),
           }}
           color={color}
           isDisabled={false}

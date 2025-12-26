@@ -1,5 +1,5 @@
-import {Key} from "react";
-import {TreeCollection} from "@react-stately/tree";
+import type {Key} from "react";
+import type {TreeCollection} from "@react-stately/tree";
 
 export class TreeKeyboardDelegate<T> {
   collator: Intl.Collator;

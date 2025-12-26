@@ -1,6 +1,8 @@
+import type {UserEvent} from "@testing-library/user-event";
+
 import * as React from "react";
 import {act, render, fireEvent} from "@testing-library/react";
-import userEvent, {UserEvent} from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
 import {Table, TableHeader, TableCell, TableColumn, TableBody, TableRow} from "../src";
 import {keyCodes} from "../../../utilities/test-utils/src";
@@ -254,32 +256,49 @@ describe("Table", () => {
   });
 
   it("should set the proper aria-sort on an ascending sorted column header", async () => {
-    const wrapper = render(
-      <Table aria-label="Static Table">
-        <TableHeader>
-          <TableColumn allowsSorting data-testid="test-sort-column">
-            Foo
-          </TableColumn>
-          <TableColumn>Bar</TableColumn>
-          <TableColumn>Baz</TableColumn>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell>Foo 1</TableCell>
-            <TableCell>Bar 1</TableCell>
-            <TableCell>Baz 1</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>,
-    );
+    const TestTable = () => {
+      const [sortDescriptor, setSortDescriptor] = React.useState<
+        | {
+            column: React.Key;
+            direction: "ascending" | "descending";
+          }
+        | undefined
+      >(undefined);
+
+      return (
+        <Table
+          aria-label="Static Table"
+          sortDescriptor={sortDescriptor}
+          onSortChange={(descriptor) => setSortDescriptor(descriptor)}
+        >
+          <TableHeader>
+            <TableColumn allowsSorting data-testid="test-sort-column">
+              Foo
+            </TableColumn>
+            <TableColumn>Bar</TableColumn>
+            <TableColumn>Baz</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>Foo 1</TableCell>
+              <TableCell>Bar 1</TableCell>
+              <TableCell>Baz 1</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+    };
+
+    const wrapper = render(<TestTable />);
 
     const column = wrapper.getByTestId("test-sort-column");
 
     expect(column).toHaveAttribute("aria-sort", "none");
 
-    act(async () => {
-      await userEvent.click(column);
-      expect(column).toHaveAttribute("aria-sort", "ascending");
+    await act(async () => {
+      await user.click(column);
     });
+
+    expect(column).toHaveAttribute("aria-sort", "ascending");
   });
 });

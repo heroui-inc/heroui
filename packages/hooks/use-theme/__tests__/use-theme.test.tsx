@@ -1,7 +1,9 @@
+import type {Theme} from "../src";
+
 import * as React from "react";
 import {render, act} from "@testing-library/react";
 
-import {useTheme, ThemeProps, Theme} from "../src";
+import {useTheme, ThemeProps} from "../src";
 
 const TestComponent = ({defaultTheme}: {defaultTheme?: Theme}) => {
   const {theme, setTheme} = useTheme(defaultTheme);

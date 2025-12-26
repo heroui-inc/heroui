@@ -1,7 +1,9 @@
+import type {HTMLHeroUIProps} from "@heroui/system";
+
 import {useEffect} from "react";
-import {forwardRef, HTMLHeroUIProps} from "@heroui/system";
+import {forwardRef} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {useModalContext} from "./modal-context";
 
@@ -29,7 +31,7 @@ const ModalBody = forwardRef<"div", ModalBodyProps>((props, ref) => {
   return (
     <Component
       ref={domRef}
-      className={slots.body({class: clsx(classNames?.body, className)})}
+      className={slots.body({class: cn(classNames?.body, className)})}
       id={bodyId}
       {...otherProps}
     >

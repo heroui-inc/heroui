@@ -1,10 +1,12 @@
+import type {Sponsor} from "@/components/marketing/sponsor-item";
+
 import {Button, Link} from "@heroui/react";
 
 import {sectionWrapper} from "@/components/primitives";
 import {Story2DesignLogo, CodeRabbitLogo, MochiiAILogo} from "@/components/icons/sponsors";
 import {HeartFilledIcon} from "@/components/icons";
 import {siteConfig} from "@/config/site";
-import {Sponsor, SponsorItem} from "@/components/marketing/sponsor-item";
+import {SponsorItem} from "@/components/marketing/sponsor-item";
 
 const sponsors: Sponsor[] = [
   {

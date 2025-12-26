@@ -1,4 +1,4 @@
-import {ThemeColors} from "./colors/types";
+import type {ThemeColors} from "./colors/types";
 
 export type DefaultThemeType = "light" | "dark";
 

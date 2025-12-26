@@ -1,13 +1,14 @@
 import type {SpacerVariantProps} from "@heroui/theme";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
+import type {ReactRef} from "@heroui/react-utils";
+import type {Space} from "./utils";
 
 import {mapPropsVariants} from "@heroui/system-rsc";
-import {spacer} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {spacer, cn} from "@heroui/theme";
+import {dataAttr, objectToDeps} from "@heroui/shared-utils";
 import {useMemo} from "react";
 
-import {spacing, Space} from "./utils";
+import {spacing} from "./utils";
 
 interface Props extends HTMLHeroUIProps<"span"> {
   /**
@@ -59,7 +60,7 @@ export function useSpacer(originalProps: UseSpacerProps) {
     ...props,
     ...otherProps,
     "aria-hidden": dataAttr(true),
-    className: clsx(styles, props.className),
+    className: cn(styles, props.className),
     style: {
       ...props.style,
       ...otherProps.style,

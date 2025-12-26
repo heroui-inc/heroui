@@ -1,8 +1,10 @@
+import type {UseAvatarProps} from "./use-avatar";
+
 import {useMemo} from "react";
 import {forwardRef} from "@heroui/system";
 
 import {AvatarIcon} from "./avatar-icon";
-import {useAvatar, UseAvatarProps} from "./use-avatar";
+import {useAvatar} from "./use-avatar";
 
 export interface AvatarProps extends UseAvatarProps {}
 

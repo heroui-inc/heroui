@@ -153,7 +153,7 @@ export function objectToDeps(obj: Extractable) {
 
   try {
     return JSON.stringify(obj);
-  } catch (e) {
+  } catch {
     return "";
   }
 }
@@ -353,9 +353,9 @@ export const intersectionBy = <T>(...args: [...arrays: T[][], iteratee: Iteratee
 
   const getIterateeValue = (item: T): unknown => {
     if (typeof iteratee === "function") {
-      return (iteratee as (value: T) => any)(item);
+      return iteratee(item);
     } else if (typeof iteratee === "string") {
-      return (item as any)[iteratee];
+      return item[iteratee];
     } else {
       throw new Error("Iteratee must be a function or a string key of the array elements");
     }

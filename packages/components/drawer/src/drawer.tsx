@@ -1,7 +1,9 @@
+import type {UseDrawerProps} from "./use-drawer";
+
 import {forwardRef} from "@heroui/system";
 import {Modal} from "@heroui/modal";
 
-import {useDrawer, UseDrawerProps} from "./use-drawer";
+import {useDrawer} from "./use-drawer";
 
 export interface DrawerProps extends UseDrawerProps {
   children: React.ReactNode;

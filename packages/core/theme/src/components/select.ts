@@ -18,21 +18,42 @@ const select = tv({
       "text-small",
       "text-foreground-500",
       "pointer-events-none",
+      "group-data-[has-label-outside=true]:pointer-events-auto",
     ],
     mainWrapper: "w-full flex flex-col",
     trigger:
-      "relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-sm outline-none tap-highlight-transparent",
+      "relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-xs outline-solid outline-transparent tap-highlight-transparent",
     innerWrapper:
-      "inline-flex h-fit w-[calc(100%_-_theme(spacing.6))] min-h-4 items-center gap-1.5 box-border",
+      "inline-flex h-fit w-[calc(100%_-theme(spacing.6))] min-h-4 items-center gap-1.5 box-border",
     selectorIcon: "absolute end-3 w-4 h-4",
     spinner: "absolute end-3",
     value: ["text-foreground-500", "font-normal", "w-full", "text-start"],
     listboxWrapper: "scroll-py-6 w-full",
     listbox: "",
     popoverContent: "w-full p-1 overflow-hidden",
+    clearButton: [
+      "w-4",
+      "h-4",
+      "z-10",
+      "mb-4",
+      "relative",
+      "start-auto",
+      "appearance-none",
+      "outline-none",
+      "select-none",
+      "opacity-70",
+      "hover:!opacity-100",
+      "cursor-pointer",
+      "active:!opacity-70",
+      "rounded-full",
+      // focus ring
+      ...dataFocusVisibleClasses,
+    ],
     helperWrapper: "p-1 flex relative flex-col gap-1.5 group-data-[has-helper=true]:flex",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
+    endWrapper: "flex end-18",
+    endContent: "mb-4",
   },
   variants: {
     variant: {
@@ -42,6 +63,7 @@ const select = tv({
           "data-[hover=true]:bg-default-200",
           "group-data-[focus=true]:bg-default-200",
         ],
+        clearButton: "mb-4",
       },
       faded: {
         trigger: [
@@ -51,6 +73,7 @@ const select = tv({
           "data-[hover=true]:border-default-400 data-[focus=true]:border-default-400 data-[open=true]:border-default-400",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
+        clearButton: "mb-4",
       },
       bordered: {
         trigger: [
@@ -59,8 +82,10 @@ const select = tv({
           "data-[hover=true]:border-default-400",
           "data-[open=true]:border-default-foreground",
           "data-[focus=true]:border-default-foreground",
+          "data-[focus=true]:data-[hover=true]:border-default-foreground",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
+        clearButton: "mb-4",
       },
       underlined: {
         trigger: [
@@ -87,6 +112,7 @@ const select = tv({
           "data-[focus=true]:after:w-full",
         ],
         value: "group-data-[has-value=true]:text-default-foreground",
+        clearButton: "mb-4 me-2",
       },
     },
     color: {
@@ -112,14 +138,17 @@ const select = tv({
         label: "text-tiny",
         trigger: "h-8 min-h-8 px-2 rounded-small",
         value: "text-small",
+        clearButton: "text-medium",
       },
       md: {
         trigger: "h-10 min-h-10 rounded-medium",
         value: "text-small",
+        clearButton: "text-large",
       },
       lg: {
         trigger: "h-12 min-h-12 rounded-large",
         value: "text-medium",
+        clearButton: "mb-5 text-large",
       },
     },
     radius: {
@@ -142,10 +171,17 @@ const select = tv({
     labelPlacement: {
       outside: {
         base: "flex flex-col",
+        clearButton: "mb-0",
       },
       "outside-left": {
         base: "flex-row items-center flex-nowrap data-[has-helper=true]:items-start",
         label: "relative pe-2 text-foreground",
+        clearButton: "mb-0",
+      },
+      "outside-top": {
+        base: "flex flex-col",
+        label: "relative text-foreground pb-2 pointer-events-auto",
+        clearButton: "mb-0",
       },
       inside: {
         label: "text-tiny cursor-pointer",
@@ -158,6 +194,12 @@ const select = tv({
       },
       false: {
         base: "min-w-40",
+      },
+    },
+    isClearable: {
+      true: {
+        clearButton: "peer-data-[filled=true]:opacity-70 peer-data-[filled=true]:block",
+        endContent: "ms-3",
       },
     },
     isDisabled: {
@@ -203,10 +245,11 @@ const select = tv({
           "rtl:origin-top-right",
           "!duration-200",
           "!ease-out",
-          "transition-[transform,color,left,opacity]",
+          "transition-[transform,color,left,opacity,translate,scale]",
           "motion-reduce:transition-none",
         ],
         selectorIcon: "transition-transform duration-150 ease motion-reduce:transition-none",
+        clearButton: ["transition-opacity", "motion-reduce:transition-none"],
       },
     },
     disableSelectorIconRotation: {
@@ -408,7 +451,11 @@ const select = tv({
       variant: "bordered",
       color: "primary",
       class: {
-        trigger: ["data-[open=true]:border-primary", "data-[focus=true]:border-primary"],
+        trigger: [
+          "data-[open=true]:border-primary",
+          "data-[focus=true]:border-primary",
+          "data-[focus=true]:data-[hover=true]:border-primary",
+        ],
         label: "text-primary",
       },
     },
@@ -416,7 +463,11 @@ const select = tv({
       variant: "bordered",
       color: "secondary",
       class: {
-        trigger: ["data-[open=true]:border-secondary", "data-[focus=true]:border-secondary"],
+        trigger: [
+          "data-[open=true]:border-secondary",
+          "data-[focus=true]:border-secondary",
+          "data-[focus=true]:data-[hover=true]:border-secondary",
+        ],
         label: "text-secondary",
       },
     },
@@ -424,7 +475,11 @@ const select = tv({
       variant: "bordered",
       color: "success",
       class: {
-        trigger: ["data-[open=true]:border-success", "data-[focus=true]:border-success"],
+        trigger: [
+          "data-[open=true]:border-success",
+          "data-[focus=true]:border-success",
+          "data-[focus=true]:data-[hover=true]:border-success",
+        ],
         label: "text-success",
       },
     },
@@ -432,7 +487,11 @@ const select = tv({
       variant: "bordered",
       color: "warning",
       class: {
-        trigger: ["data-[open=true]:border-warning", "data-[focus=true]:border-warning"],
+        trigger: [
+          "data-[open=true]:border-warning",
+          "data-[focus=true]:border-warning",
+          "data-[focus=true]:data-[hover=true]:border-warning",
+        ],
         label: "text-warning",
       },
     },
@@ -440,7 +499,11 @@ const select = tv({
       variant: "bordered",
       color: "danger",
       class: {
-        trigger: ["data-[open=true]:border-danger", "data-[focus=true]:border-danger"],
+        trigger: [
+          "data-[open=true]:border-danger",
+          "data-[focus=true]:border-danger",
+          "data-[focus=true]:data-[hover=true]:border-danger",
+        ],
         label: "text-danger",
       },
     },
@@ -584,7 +647,9 @@ const select = tv({
       isMultiline: false,
       size: "sm",
       class: {
-        label: ["group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px)]"],
+        label: [
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px)]",
+        ],
         innerWrapper: "group-data-[has-label=true]:pt-4",
       },
     },
@@ -594,7 +659,7 @@ const select = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px)]",
         ],
         innerWrapper: "group-data-[has-label=true]:pt-4",
       },
@@ -606,7 +671,7 @@ const select = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px)]",
         ],
         innerWrapper: "group-data-[has-label=true]:pt-5",
       },
@@ -619,7 +684,7 @@ const select = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -630,7 +695,7 @@ const select = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -642,7 +707,7 @@ const select = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -653,7 +718,9 @@ const select = tv({
       isMultiline: false,
       size: "sm",
       class: {
-        label: ["group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_5px)]"],
+        label: [
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_5px)]",
+        ],
       },
     },
     {
@@ -663,7 +730,7 @@ const select = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_3.5px)]",
         ],
       },
     },
@@ -675,7 +742,7 @@ const select = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]",
+          "group-data-[filled=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_4px)]",
         ],
       },
     },
@@ -688,9 +755,13 @@ const select = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+var(--heroui-font-size-tiny)/2_+_16px)]",
+          "group-data-[has-helper=true]:-translate-y-0",
+          "group-data-[has-helper=true]:relative",
+          "group-data-[has-helper=true]:pe-2",
+          "group-data-[has-helper=true]:pb-1.5",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
       },
     },
     {
@@ -701,9 +772,13 @@ const select = tv({
         label: [
           "start-3",
           "text-small",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
+          "group-data-[has-helper=true]:-translate-y-0",
+          "group-data-[has-helper=true]:relative",
+          "group-data-[has-helper=true]:pe-2",
+          "group-data-[has-helper=true]:pb-1.5",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_10px)]",
       },
     },
     {
@@ -714,12 +789,16 @@ const select = tv({
         label: [
           "start-3",
           "text-medium",
-          "group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
+          "group-data-[filled=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
+          "group-data-[has-helper=true]:-translate-y-0",
+          "group-data-[has-helper=true]:relative",
+          "group-data-[has-helper=true]:pe-2",
+          "group-data-[has-helper=true]:pb-1.5",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
       },
     },
-    // outside-left & size & hasHelper
+    // outside-left & size
     {
       labelPlacement: "outside-left",
       size: "sm",
@@ -754,6 +833,46 @@ const select = tv({
       labelPlacement: ["inside", "outside"],
       class: {
         label: ["pe-2", "max-w-full", "text-ellipsis", "overflow-hidden"],
+      },
+    },
+    // isClearable & labelPlacement
+    {
+      labelPlacement: ["outside", "outside-left"],
+      isClearable: true,
+      class: {
+        endContent: ["mt-4"],
+        clearButton: ["group-data-[has-end-content=true]:mt-4"],
+      },
+    },
+    {
+      isClearable: false,
+      labelPlacement: ["outside", "outside-left"],
+      class: {
+        endContent: ["mt-4"],
+      },
+    },
+    // isClearable + variant
+    {
+      isClearable: true,
+      variant: ["underlined"],
+      class: {
+        clearButton: ["relative group-data-[has-end-content=true]:left-2"],
+        endContent: ["me-2"],
+      },
+    },
+    {
+      isClearable: false,
+      variant: ["underlined"],
+      class: {
+        endContent: ["me-2"],
+      },
+    },
+    // isClearable + size
+    {
+      isClearable: true,
+      size: "sm",
+      class: {
+        endContent: "ms-2",
       },
     },
   ],

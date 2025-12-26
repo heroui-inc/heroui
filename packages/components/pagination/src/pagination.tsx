@@ -1,12 +1,15 @@
-import {PaginationItemValue} from "@heroui/use-pagination";
+import type {PaginationItemValue} from "@heroui/use-pagination";
+import type {UsePaginationProps} from "./use-pagination";
+
 import {useCallback} from "react";
 import {useLocale} from "@react-aria/i18n";
 import {forwardRef} from "@heroui/system";
 import {PaginationItemType} from "@heroui/use-pagination";
 import {ChevronIcon, EllipsisIcon, ForwardIcon} from "@heroui/shared-icons";
-import {clsx, dataAttr} from "@heroui/shared-utils";
+import {dataAttr} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
-import {UsePaginationProps, usePagination} from "./use-pagination";
+import {usePagination} from "./use-pagination";
 import PaginationItem from "./pagination-item";
 import PaginationCursor from "./pagination-cursor";
 
@@ -87,7 +90,7 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
         <PaginationItem
           key={PaginationItemType.NEXT}
           className={slots.next({
-            class: clsx(classNames?.next),
+            class: cn(classNames?.next),
           })}
           data-slot="next"
           getAriaLabel={getItemAriaLabel}
@@ -123,8 +126,8 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
               ? activePage - dotsJump
               : 1
             : activePage + dotsJump <= total
-            ? activePage + dotsJump
-            : total;
+              ? activePage + dotsJump
+              : total;
         }
 
         const itemChildren: Record<PaginationItemType, React.ReactNode> = {
@@ -178,7 +181,7 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
           <PaginationItem
             key={PaginationItemType.DOTS + isBefore}
             className={slots.item({
-              class: clsx(classNames?.item, "group"),
+              class: cn(classNames?.item, "group"),
             })}
             data-slot="item"
             getAriaLabel={getItemAriaLabel}

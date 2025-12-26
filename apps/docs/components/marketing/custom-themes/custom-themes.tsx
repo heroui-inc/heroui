@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react/display-name */
 import {useMemo, useState} from "react";
 import {Tabs, Tab, Card, CardBody, Image, Button, RadioGroup, Radio} from "@heroui/react";
 import NextLink from "next/link";
@@ -10,7 +9,7 @@ import {shopCartStyles} from "./styles";
 
 import {title, subtitle, titleWrapper, sectionWrapper} from "@/components/primitives";
 import {PaletteIcon, MagicIcon, GamingConsoleIcon, StarIcon} from "@/components/icons";
-import {HeroUILogo, CodeWindow} from "@/components";
+import {SmallLogoOutlined, CodeWindow} from "@/components";
 import landingContent from "@/content/landing";
 import {useIsMobile} from "@/hooks/use-media-query";
 
@@ -23,8 +22,7 @@ const themesTabs = (isMobile: boolean) => [
       </p>
     ),
     icon: () => (
-      <HeroUILogo
-        outlined
+      <SmallLogoOutlined
         className="text-default-400 group-data-[selected=true]:text-foreground"
         size={isMobile ? 34 : 44}
       />
@@ -261,7 +259,7 @@ export const CustomThemes = () => {
           />
         </div>
       </div>
-      <div className="h-full dark:md:block absolute hidden -bottom-[10%] -left-[15%] -z-[1]">
+      <div className="h-full dark:md:block absolute hidden -bottom-[10%] -left-[15%] -z-1">
         <Image
           removeWrapper
           alt="custom themes background"

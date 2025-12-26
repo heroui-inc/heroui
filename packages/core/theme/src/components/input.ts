@@ -29,7 +29,7 @@ const input = tv({
       "z-10",
       "pointer-events-none",
       "origin-top-left",
-      "flex-shrink-0",
+      "shrink-0",
       // Using RTL here as Tailwind CSS doesn't support `start` and `end` logical properties for transforms yet.
       "rtl:origin-top-right",
       "subpixel-antialiased",
@@ -39,14 +39,18 @@ const input = tv({
     ],
     mainWrapper: "h-full",
     inputWrapper:
-      "relative w-full inline-flex tap-highlight-transparent flex-row items-center shadow-sm px-3 gap-3",
+      "relative w-full inline-flex tap-highlight-transparent flex-row items-center shadow-xs px-3 gap-3",
     innerWrapper: "inline-flex w-full items-center h-full box-border",
     input: [
-      "w-full font-normal bg-transparent !outline-none placeholder:text-foreground-500 focus-visible:outline-none",
+      "w-full font-normal bg-transparent !outline-solid outline-transparent placeholder:text-foreground-500 focus-visible:outline-solid outline-transparent",
       "data-[has-start-content=true]:ps-1.5",
       "data-[has-end-content=true]:pe-1.5",
+      "data-[type=color]:rounded-none",
       "file:cursor-pointer file:bg-transparent file:border-0",
       "autofill:bg-transparent bg-clip-text",
+      // Safari autofill styling fix - ensures text color is visible in dark mode
+      "dark:autofill:[-webkit-text-fill-color:hsl(var(--heroui-foreground))]",
+      "[&::-ms-reveal]:hidden",
     ],
     clearButton: [
       "p-2",
@@ -57,10 +61,9 @@ const input = tv({
       "start-auto",
       "pointer-events-none",
       "appearance-none",
-      "outline-none",
+      "outline-solid outline-transparent",
       "select-none",
       "opacity-0",
-      "hover:!opacity-100",
       "cursor-pointer",
       "active:!opacity-70",
       "rounded-full",
@@ -95,6 +98,7 @@ const input = tv({
           "border-default-200",
           "data-[hover=true]:border-default-400",
           "group-data-[focus=true]:border-default-foreground",
+          "group-data-[focus=true]:data-[hover=true]:border-default-foreground",
         ],
       },
       underlined: {
@@ -142,13 +146,13 @@ const input = tv({
       md: {
         inputWrapper: "h-10 min-h-10 rounded-medium",
         input: "text-small",
-        clearButton: "text-large",
+        clearButton: "text-large hover:!opacity-100",
       },
       lg: {
         label: "text-medium",
         inputWrapper: "h-12 min-h-12 rounded-large",
         input: "text-medium",
-        clearButton: "text-large",
+        clearButton: "text-large hover:!opacity-100",
       },
     },
     radius: {
@@ -177,6 +181,10 @@ const input = tv({
         inputWrapper: "flex-1",
         mainWrapper: "flex flex-col",
         label: "relative text-foreground pe-2 ps-2 pointer-events-auto",
+      },
+      "outside-top": {
+        mainWrapper: "flex flex-col",
+        label: "relative text-foreground pb-2 pointer-events-auto",
       },
       inside: {
         label: "cursor-text",
@@ -240,7 +248,7 @@ const input = tv({
           "!duration-200",
           "!ease-out",
           "motion-reduce:transition-none",
-          "transition-[transform,color,left,opacity]",
+          "transition-[transform,color,left,opacity,translate,scale]",
         ],
         clearButton: [
           "scale-90",
@@ -445,7 +453,10 @@ const input = tv({
       variant: "bordered",
       color: "primary",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-primary",
+        inputWrapper: [
+          "group-data-[focus=true]:border-primary",
+          "group-data-[focus=true]:data-[hover=true]:border-primary",
+        ],
         label: "text-primary",
       },
     },
@@ -453,7 +464,10 @@ const input = tv({
       variant: "bordered",
       color: "secondary",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-secondary",
+        inputWrapper: [
+          "group-data-[focus=true]:border-secondary",
+          "group-data-[focus=true]:data-[hover=true]:border-secondary",
+        ],
         label: "text-secondary",
       },
     },
@@ -461,7 +475,10 @@ const input = tv({
       variant: "bordered",
       color: "success",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-success",
+        inputWrapper: [
+          "group-data-[focus=true]:border-success",
+          "group-data-[focus=true]:data-[hover=true]:border-success",
+        ],
         label: "text-success",
       },
     },
@@ -469,7 +486,10 @@ const input = tv({
       variant: "bordered",
       color: "warning",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-warning",
+        inputWrapper: [
+          "group-data-[focus=true]:border-warning",
+          "group-data-[focus=true]:data-[hover=true]:border-warning",
+        ],
         label: "text-warning",
       },
     },
@@ -477,7 +497,10 @@ const input = tv({
       variant: "bordered",
       color: "danger",
       class: {
-        inputWrapper: "group-data-[focus=true]:border-danger",
+        inputWrapper: [
+          "group-data-[focus=true]:border-danger",
+          "group-data-[focus=true]:data-[hover=true]:border-danger",
+        ],
         label: "text-danger",
       },
     },
@@ -667,7 +690,7 @@ const input = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px)]",
         ],
       },
     },
@@ -677,7 +700,7 @@ const input = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px)]",
         ],
       },
     },
@@ -688,7 +711,7 @@ const input = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px)]",
         ],
       },
     },
@@ -700,7 +723,7 @@ const input = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -711,7 +734,7 @@ const input = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_6px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -723,7 +746,7 @@ const input = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px_-_theme(borderWidth.medium))]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_8px_-_var(--heroui-border-width-medium))]",
         ],
       },
     },
@@ -735,7 +758,7 @@ const input = tv({
       size: "sm",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-tiny)/2_-_5px)]",
         ],
       },
     },
@@ -746,7 +769,7 @@ const input = tv({
       size: "md",
       class: {
         label: [
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_3.5px)]",
         ],
       },
     },
@@ -758,7 +781,7 @@ const input = tv({
       class: {
         label: [
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(50%_+_var(--heroui-font-size-small)/2_-_4px)]",
         ],
       },
     },
@@ -771,9 +794,9 @@ const input = tv({
         label: [
           "start-2",
           "text-tiny",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-tiny)/2_+_16px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_8px)]",
       },
     },
     {
@@ -785,9 +808,9 @@ const input = tv({
           "start-3",
           "end-auto",
           "text-small",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_20px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_10px)]",
       },
     },
     {
@@ -799,9 +822,9 @@ const input = tv({
           "start-3",
           "end-auto",
           "text-medium",
-          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]",
+          "group-data-[filled-within=true]:-translate-y-[calc(100%_+_var(--heroui-font-size-small)/2_+_24px)]",
         ],
-        base: "data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]",
+        base: "data-[has-label=true]:mt-[calc(var(--heroui-font-size-small)_+_12px)]",
       },
     },
     // outside-left & size & hasHelper
@@ -884,6 +907,14 @@ const input = tv({
           "group-data-[has-value=true]:scale-100",
           "group-data-[has-value=true]:pointer-events-auto",
         ],
+      },
+    },
+    // isClearable & isDisabled
+    {
+      isClearable: true,
+      isDisabled: true,
+      class: {
+        clearButton: "peer-data-[filled=true]:pointer-events-none",
       },
     },
   ],

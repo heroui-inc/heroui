@@ -1,8 +1,9 @@
+import type {UseTableProps} from "./use-table";
+
 import {useCallback} from "react";
-import {Spacer} from "@heroui/spacer";
 import {forwardRef} from "@heroui/system";
 
-import {UseTableProps, useTable} from "./use-table";
+import {useTable} from "./use-table";
 import VirtualizedTable from "./virtualized-table";
 import TableRowGroup from "./table-row-group";
 import TableHeaderRow from "./table-header-row";
@@ -28,6 +29,7 @@ const Table = forwardRef<"table", TableProps>((props, ref) => {
     bottomContentPlacement,
     bottomContent,
     removeWrapper,
+    sortIcon,
     getBaseProps,
     getWrapperProps,
     getTableProps,
@@ -101,13 +103,13 @@ const Table = forwardRef<"table", TableProps>((props, ref) => {
                         classNames={values.classNames}
                         node={column}
                         slots={values.slots}
+                        sortIcon={sortIcon}
                         state={values.state}
                       />
                     ),
                   )}
                 </TableHeaderRow>
               ))}
-              <Spacer as="tr" tabIndex={-1} y={1} />
             </TableRowGroup>
             <TableBody
               checkboxesProps={values.checkboxesProps}

@@ -1,9 +1,11 @@
+import type {TabsProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {TabsProps, Tabs, Tab} from "@heroui/react";
+import {Tabs, Tab} from "@heroui/react";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 
 type Color = TabsProps["color"];
 type Radius = TabsProps["radius"];

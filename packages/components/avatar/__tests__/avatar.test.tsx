@@ -31,7 +31,7 @@ describe("Avatar", () => {
   it("should render initials", () => {
     const {container} = render(<Avatar name="Junior" />);
 
-    expect(container.querySelector("span")).toHaveTextContent("Jun");
+    expect(container.querySelector("span")).toHaveTextContent("J");
   });
 
   it('should work with custom "getInitials" function', () => {
@@ -96,12 +96,77 @@ describe("Avatar - fallback + loading strategy", () => {
   test("should render a name avatar if no src", () => {
     const {container} = render(<Avatar name="Junior" />);
 
-    expect(container.querySelector("span")).toHaveTextContent("Jun");
+    expect(container.querySelector("span")).toHaveTextContent("J");
   });
 
   test("should render a default avatar if no name or src", () => {
     const {container} = render(<Avatar />);
 
     expect(container.querySelector("svg")).toBeInTheDocument();
+  });
+
+  test("should render name initials fallback when image fails to load and showFallback is true", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const src = "https://avatars.githubusercontent.com/u/30373425";
+    const name = "Junior Garcia";
+    const {container} = render(<Avatar showFallback name={name} src={src} />);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(container.querySelector("span")).toHaveTextContent("JG");
+  });
+
+  test("should render default avatar fallback when image fails to load with no name and showFallback is true", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const src = "https://avatars.githubusercontent.com/u/30373425";
+    const {container} = render(<Avatar showFallback src={src} />);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(container.querySelector("svg")).toBeInTheDocument();
+  });
+
+  test("should not render fallback when image fails to load and showFallback is false", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const src = "https://avatars.githubusercontent.com/u/30373425";
+    const name = "Junior Garcia";
+    const {container} = render(<Avatar name={name} showFallback={false} src={src} />);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(container.querySelector("span")).not.toHaveTextContent("JG");
+    expect(container.querySelector("svg")).not.toBeInTheDocument();
+  });
+
+  test("should not render fallback when image fails to load and showFallback is not passed", async () => {
+    const mock = mocks.image();
+
+    mock.simulate("error");
+
+    const src = "https://avatars.githubusercontent.com/u/30373425";
+    const name = "Junior Garcia";
+    const {container} = render(<Avatar name={name} src={src} />);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(container.querySelector("span")).not.toHaveTextContent("JG");
+    expect(container.querySelector("svg")).not.toBeInTheDocument();
   });
 });

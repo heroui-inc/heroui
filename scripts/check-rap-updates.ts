@@ -30,7 +30,7 @@ const checkForUpdates = async (path: string) => {
 };
 
 const main = async () => {
-  const dirs = [resolve('app/docs'), resolve('packages')];
+  const dirs = [resolve('apps/docs'), resolve('packages')];
   for (const dir of dirs) {
     await checkForUpdates(dir);
   }

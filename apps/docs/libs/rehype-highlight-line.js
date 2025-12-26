@@ -20,7 +20,6 @@ const lineNumberify = function lineNumberify(ast, lineNum = 1) {
         const lines = node.value.split("\n");
 
         for (let i = 0; i < lines.length; i++) {
-          // eslint-disable-next-line no-plusplus
           if (i !== 0) ++lineNumber;
           if (i === lines.length - 1 && lines[i].length === 0) continue;
           result.nodes.push({

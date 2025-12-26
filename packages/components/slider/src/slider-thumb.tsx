@@ -1,9 +1,11 @@
+import type {UseSliderThumbProps} from "./use-slider-thumb";
+
 import {forwardRef} from "@heroui/system";
 import {Tooltip} from "@heroui/tooltip";
 import {renderFn} from "@heroui/react-utils";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 
-import {UseSliderThumbProps, useSliderThumb} from "./use-slider-thumb";
+import {useSliderThumb} from "./use-slider-thumb";
 
 export interface SliderThumbProps extends UseSliderThumbProps {}
 

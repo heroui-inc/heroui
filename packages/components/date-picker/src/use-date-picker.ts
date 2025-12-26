@@ -7,16 +7,15 @@ import type {PopoverProps} from "@heroui/popover";
 import type {UseDatePickerBaseProps} from "./use-date-picker-base";
 import type {DOMAttributes} from "@heroui/system";
 import type {DatePickerSlots, SlotsToClasses} from "@heroui/theme";
+import type {AriaDatePickerProps} from "@react-aria/datepicker";
 
 import {useProviderContext} from "@heroui/system";
 import {useMemo, useRef} from "react";
-import {datePicker} from "@heroui/theme";
+import {datePicker, cn} from "@heroui/theme";
 import {useDatePickerState} from "@react-stately/datepicker";
-import {AriaDatePickerProps, useDatePicker as useAriaDatePicker} from "@react-aria/datepicker";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {mergeProps} from "@react-aria/utils";
+import {useDatePicker as useAriaDatePicker} from "@react-aria/datepicker";
+import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {FormContext, useSlottedContext} from "@heroui/form";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
 import {useDatePickerBase} from "./use-date-picker-base";
 
@@ -103,7 +102,7 @@ export function useDatePicker<T extends DateValue>({
 
   const popoverTriggerRef = useRef<HTMLDivElement>(null);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const slots = useMemo(
     () =>
@@ -169,10 +168,10 @@ export function useDatePicker<T extends DateValue>({
       maxValue: timeMaxValue ?? undefined,
       classNames: {
         base: slots.timeInput({
-          class: clsx(classNames?.timeInput, userTimeInputProps?.classNames?.base),
+          class: cn(classNames?.timeInput, userTimeInputProps?.classNames?.base),
         }),
         label: slots.timeInputLabel({
-          class: clsx(classNames?.timeInputLabel, userTimeInputProps?.classNames?.label),
+          class: cn(classNames?.timeInputLabel, userTimeInputProps?.classNames?.label),
         }),
       },
     };
@@ -186,16 +185,13 @@ export function useDatePicker<T extends DateValue>({
       triggerRef: popoverTriggerRef,
       classNames: {
         content: slots.popoverContent({
-          class: clsx(
+          class: cn(
             classNames?.popoverContent,
             slotsProps.popoverProps?.classNames?.["content"],
             props.className,
           ),
         }),
       },
-      shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-        ? popoverProps.shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, popoverTriggerRef, state),
     };
   };
 
@@ -205,9 +201,9 @@ export function useDatePicker<T extends DateValue>({
       ...calendarProps,
       classNames: {
         ...calendarProps.classNames,
-        base: slots.calendar({class: clsx(classNames?.base, calendarProps.classNames?.base)}),
+        base: slots.calendar({class: cn(classNames?.base, calendarProps.classNames?.base)}),
         content: slots.calendarContent({
-          class: clsx(classNames?.calendarContent, calendarProps.classNames?.content),
+          class: cn(classNames?.calendarContent, calendarProps.classNames?.content),
         }),
       },
     };

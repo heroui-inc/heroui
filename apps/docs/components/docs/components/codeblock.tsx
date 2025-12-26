@@ -4,7 +4,7 @@ import type {Language, PrismTheme} from "prism-react-renderer";
 
 import {useIntersectionObserver} from "usehooks-ts";
 import React, {forwardRef, useEffect} from "react";
-import {clsx, dataAttr, getUniqueID} from "@heroui/shared-utils";
+import {dataAttr, getUniqueID} from "@heroui/shared-utils";
 import BaseHighlight, {defaultProps} from "prism-react-renderer";
 import {debounce, omit} from "@heroui/shared-utils";
 import {cn} from "@heroui/react";
@@ -102,7 +102,7 @@ const CodeBlockHighlight = ({
         // due to display: contents on the scrollable child element, this div will also scroll
         // this causes the intersection observer to trigger if scrolled far enough horizontally
         // set the width to fit-content to prevent this div from going off screen
-        width: "fit-content",
+        width: "w-full",
       }}
     >
       {isVisible ? (
@@ -124,16 +124,10 @@ const CodeBlockHighlight = ({
                   preRef.current = element;
                 }
               }}
-              className={clsx(
-                className,
-                classNameProp,
-                `language-${codeLang}`,
-                "max-w-full contents",
-                {
-                  "flex-col": isMultiLine,
-                  "overflow-x-scroll scrollbar-hide": hideScrollBar,
-                },
-              )}
+              className={cn(className, classNameProp, `language-${codeLang}`, "max-w-full", {
+                "flex-col": isMultiLine,
+                "overflow-x-scroll scrollbar-hide": hideScrollBar,
+              })}
               data-language={language}
               style={style}
             >
@@ -144,7 +138,7 @@ const CodeBlockHighlight = ({
                   <div
                     {...omit(lineProps, ["key"])}
                     key={`${i}-${getUniqueID("line-wrapper")}`}
-                    className={clsx(
+                    className={cn(
                       lineProps.className,
                       removeIndent ? "pr-4" : "px-4",
                       "relative [&>span]:relative [&>span]:z-10",
@@ -152,7 +146,7 @@ const CodeBlockHighlight = ({
                         "px-2": showLines,
                       },
                       {
-                        "before:to-code-background before:absolute before:left-0 before:z-0 before:h-full before:w-full before:bg-gradient-to-r before:from-white/10 before:content-[''] before:pointer-events-none":
+                        "before:to-code-background before:absolute before:left-0 before:z-0 before:h-full before:w-full before:bg-linear-to-r before:from-white/10 before:content-[''] before:pointer-events-none":
                           shouldHighlightLine(i),
                       },
                     )}
@@ -202,7 +196,7 @@ const CodeBlockHighlight = ({
           )}
         </BaseHighlight>
       ) : (
-        <div className={clsx(classNameProp, "w-full bg-code-background rounded-lg")} />
+        <div className={cn(classNameProp, "w-full bg-code-background rounded-lg")} />
       )}
     </div>
   );

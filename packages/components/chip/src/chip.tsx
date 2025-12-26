@@ -1,8 +1,10 @@
+import type {UseChipProps} from "./use-chip";
+
 import {CloseFilledIcon} from "@heroui/shared-icons";
 import {forwardRef} from "@heroui/system";
 import {useMemo} from "react";
 
-import {UseChipProps, useChip} from "./use-chip";
+import {useChip} from "./use-chip";
 
 export interface ChipProps extends Omit<UseChipProps, "isOneChar" | "isCloseButtonFocusVisible"> {}
 

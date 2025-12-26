@@ -32,7 +32,7 @@ const modal = tv({
       "z-50",
       "overflow-x-auto",
       "justify-center",
-      "h-[--visual-viewport-height]",
+      "h-(--visual-viewport-height)",
     ],
     base: [
       "flex",
@@ -43,7 +43,7 @@ const modal = tv({
       "w-full",
       "box-border",
       "bg-content1",
-      "outline-none",
+      "outline-solid outline-transparent",
       "mx-1",
       "my-1",
       "sm:mx-6",
@@ -56,7 +56,7 @@ const modal = tv({
     closeButton: [
       "absolute",
       "appearance-none",
-      "outline-none",
+      "outline-solid outline-transparent",
       "select-none",
       "top-1",
       "end-1",

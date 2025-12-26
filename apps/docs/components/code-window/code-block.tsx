@@ -8,7 +8,7 @@ import css from "refractor/lang/css";
 import diff from "refractor/lang/diff";
 import {toHtml} from "hast-util-to-html";
 import rangeParser from "parse-numeric-range";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {Pre} from "./pre";
 import {WindowActions} from "./window-actions";
@@ -141,7 +141,7 @@ const CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>((_props, forw
 
   // TODO reset theme
   const classes = `language-${language}`;
-  const codeClasses = clsx("absolute w-full px-4 pb-6", showWindowIcons ? "top-10" : "top-0");
+  const codeClasses = cn("absolute w-full px-4 pb-6", showWindowIcons ? "top-10" : "top-0");
 
   if (mode === "typewriter") {
     return <CodeTypewriter className={classes} css={css} value={result} {...props} />;
@@ -150,12 +150,12 @@ const CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>((_props, forw
   return (
     <Pre
       ref={forwardedRef}
-      className={clsx("code-block", classes, className)}
+      className={cn("code-block", classes, className)}
       data-line-numbers={showLineNumbers}
       {...props}
     >
       {showWindowIcons && <WindowActions title={title} />}
-      <code dangerouslySetInnerHTML={{__html: result}} className={clsx(classes, codeClasses)} />
+      <code dangerouslySetInnerHTML={{__html: result}} className={cn(classes, codeClasses)} />
     </Pre>
   );
 });

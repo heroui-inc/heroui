@@ -1,15 +1,9 @@
-import {
-  useId,
-  useCallback,
-  useEffect,
-  KeyboardEventHandler,
-  ButtonHTMLAttributes,
-  RefObject,
-  Key,
-} from "react";
-import {DOMAttributes, Node, LongPressEvent, PressEvent} from "@react-types/shared";
+import type {KeyboardEventHandler, ButtonHTMLAttributes, RefObject, Key} from "react";
+import type {DOMAttributes, Node, LongPressEvent, PressEvent} from "@react-types/shared";
+import type {TreeState} from "@react-stately/tree";
+
 import {focusSafely} from "@react-aria/focus";
-import {TreeState} from "@react-stately/tree";
+import {useId, useCallback, useEffect} from "react";
 import {useButton} from "@react-aria/button";
 
 export interface AccordionItemAriaProps<T> {

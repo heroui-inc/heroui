@@ -1,10 +1,12 @@
+import type {ChipProps} from "@heroui/react";
+import type {Border, HeroUIScaling} from "../../types";
+
 import {cloneElement} from "react";
-import {ChipProps, Chip as HeroUIChip} from "@heroui/react";
-import {clsx} from "@heroui/shared-utils";
+import {Chip as HeroUIChip} from "@heroui/react";
+import {cn} from "@heroui/theme";
 
 import {ShowcaseComponent} from "../showcase-component";
 import {useThemeBuilder} from "../../provider";
-import {Border, HeroUIScaling} from "../../types";
 
 type Color = ChipProps["color"];
 type Radius = ChipProps["radius"];
@@ -26,7 +28,7 @@ const SectionBase = ({
   return (
     <HeroUIChip
       key={radius}
-      className={clsx(className, "capitalize")}
+      className={cn(className, "capitalize")}
       color={color}
       isDisabled={isDisabled}
       radius={radius}
@@ -88,7 +90,7 @@ const Section = ({
       {variants.map((variant, idx) =>
         cloneElement(<SectionBase key={idx} />, {
           color,
-          className: clsx(
+          className: cn(
             className,
             variant === "bordered" || variant === "faded" ? borderClass : "",
           ),

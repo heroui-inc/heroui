@@ -1,13 +1,12 @@
 import type {KbdVariantProps, KbdSlots, SlotsToClasses} from "@heroui/theme";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system-rsc";
+import type {ReactRef} from "@heroui/react-utils";
+import type {KbdKey} from "./utils";
 
 import {mapPropsVariants} from "@heroui/system-rsc";
-import {kbd} from "@heroui/theme";
-import {clsx, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
+import {kbd, cn} from "@heroui/theme";
+import {objectToDeps} from "@heroui/shared-utils";
 import {useMemo} from "react";
-
-import {KbdKey} from "./utils";
 
 interface Props extends HTMLHeroUIProps<"kbd"> {
   /**
@@ -51,14 +50,14 @@ export function useKbd(originalProps: UseKbdProps) {
     [objectToDeps(variantProps)],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const keysToRender = typeof keys === "string" ? [keys] : Array.isArray(keys) ? keys : [];
 
   const getKbdProps: PropGetter = (props = {}) => ({
     ...otherProps,
     ...props,
-    className: clsx(slots.base({class: clsx(baseStyles, props.className)})),
+    className: slots.base({class: cn(baseStyles, props.className)}),
   });
 
   return {Component, slots, classNames, title, children, keysToRender, getKbdProps};

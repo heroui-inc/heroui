@@ -2,11 +2,13 @@
  * Based on @react-aria/select with some modifications to support required attribute and
  * custom input/select props.
  */
-import {FocusableElement} from "@react-types/shared";
-import React, {ReactNode, RefObject} from "react";
-import {useFormReset} from "@react-aria/utils";
+import type {FocusableElement} from "@react-types/shared";
+import type {ReactNode, RefObject} from "react";
+import type {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
+
+import React from "react";
+import {useFormReset} from "@heroui/use-form-reset";
 import {useVisuallyHidden} from "@react-aria/visually-hidden";
-import {MultiSelectProps, MultiSelectState} from "@heroui/use-aria-multiselect";
 import {useFormValidation} from "@react-aria/form";
 
 import {selectData} from "./use-select";
@@ -68,6 +70,7 @@ export function useHiddenSelect<T>(
     isDisabled = data.isDisabled,
     selectionMode,
     onChange,
+    form,
   } = props;
   let {validationBehavior, isRequired, isInvalid} = data;
   let {visuallyHiddenProps} = useVisuallyHidden();
@@ -92,6 +95,7 @@ export function useHiddenSelect<T>(
       style: {display: "none"},
     },
     selectProps: {
+      form,
       autoComplete,
       disabled: isDisabled,
       "aria-invalid": isInvalid || undefined,
@@ -102,7 +106,7 @@ export function useHiddenSelect<T>(
       value:
         selectionMode === "multiple"
           ? [...state.selectedKeys].map((k) => String(k))
-          : [...state.selectedKeys][0] ?? "",
+          : ([...state.selectedKeys][0] ?? ""),
       multiple: selectionMode === "multiple",
       onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
         state.setSelectedKeys(e.target.value);
@@ -117,7 +121,7 @@ export function useHiddenSelect<T>(
  * form autofill, mobile form navigation, and native form submission.
  */
 export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
-  let {state, triggerRef, selectRef, label, name, isDisabled} = props;
+  let {state, triggerRef, selectRef, label, name, isDisabled, form} = props;
 
   let {containerProps, selectProps} = useHiddenSelect({...props, selectRef}, state, triggerRef);
 
@@ -151,6 +155,7 @@ export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
       <input
         autoComplete={selectProps.autoComplete}
         disabled={isDisabled}
+        form={form}
         name={name}
         type="hidden"
         value={[...state.selectedKeys].join(",") ?? ""}

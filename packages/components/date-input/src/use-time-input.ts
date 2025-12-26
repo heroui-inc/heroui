@@ -3,16 +3,17 @@ import type {AriaTimeFieldProps, TimeValue} from "@react-types/datepicker";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
+import type {PropGetter} from "@heroui/system";
+import type {HTMLHeroUIProps} from "@heroui/system";
 
 import {useLocale} from "@react-aria/i18n";
-import {mergeProps} from "@react-aria/utils";
-import {PropGetter, useLabelPlacement, useProviderContext} from "@heroui/system";
-import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
+import {useLabelPlacement, useProviderContext} from "@heroui/system";
+import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useTimeField as useAriaTimeField} from "@react-aria/datepicker";
 import {useTimeFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr} from "@heroui/shared-utils";
-import {dateInput} from "@heroui/theme";
+import {objectToDeps, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
@@ -131,14 +132,17 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
     isInvalid,
   } = useAriaTimeField({...originalProps, label, validationBehavior, inputRef}, state, domRef);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const labelPlacement = useLabelPlacement({
     labelPlacement: originalProps.labelPlacement,
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   const slots = useMemo(
     () =>
@@ -155,7 +159,7 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
       ...mergeProps(labelProps, labelPropsProp, props),
       "data-slot": "label",
       className: slots.label({
-        class: clsx(classNames?.label, props?.className),
+        class: cn(classNames?.label, props?.className),
       }),
     };
   };
@@ -174,7 +178,7 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
       "data-slot": "input",
       ...mergeProps(fieldProps, fieldPropsProp, props),
       className: slots.input({
-        class: clsx(classNames?.input, props?.className),
+        class: cn(classNames?.input, props?.className),
       }),
     } as GroupDOMAttributes;
   };
@@ -206,7 +210,7 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
       ...props,
       "data-slot": "helper-wrapper",
       className: slots.helperWrapper({
-        class: clsx(classNames?.helperWrapper, props?.className),
+        class: cn(classNames?.helperWrapper, props?.className),
       }),
     };
   };
@@ -215,7 +219,7 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
     return {
       ...mergeProps(errorMessageProps, errorMessagePropsProp, props),
       "data-slot": "error-message",
-      className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+      className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
     };
   };
 
@@ -223,7 +227,7 @@ export function useTimeInput<T extends TimeValue>(originalProps: UseTimeInputPro
     return {
       ...mergeProps(descriptionProps, descriptionPropsProp, props),
       "data-slot": "description",
-      className: slots.description({class: clsx(classNames?.description, props?.className)}),
+      className: slots.description({class: cn(classNames?.description, props?.className)}),
     };
   };
 

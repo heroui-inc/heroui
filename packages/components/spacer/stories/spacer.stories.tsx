@@ -1,8 +1,10 @@
+import type {Meta} from "@storybook/react";
+import type {SpacerProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {spacer} from "@heroui/theme";
 
-import {Spacer, SpacerProps} from "../src";
+import {Spacer} from "../src";
 
 export default {
   title: "Components/Spacer",

@@ -1,18 +1,20 @@
 import type {ModalVariantProps, SlotsToClasses, ModalSlots} from "@heroui/theme";
 import type {HTMLMotionProps} from "framer-motion";
+import type {AriaModalOverlayProps} from "@react-aria/overlays";
+import type {ReactNode} from "react";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {OverlayTriggerProps} from "@react-stately/overlays";
 
-import {AriaModalOverlayProps} from "@react-aria/overlays";
 import {useAriaModalOverlay} from "@heroui/use-aria-modal-overlay";
-import {useCallback, useId, useRef, useState, useMemo, ReactNode} from "react";
-import {modal} from "@heroui/theme";
-import {HTMLHeroUIProps, mapPropsVariants, PropGetter, useProviderContext} from "@heroui/system";
+import {useCallback, useId, useRef, useState, useMemo} from "react";
+import {modal, cn} from "@heroui/theme";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useAriaButton} from "@heroui/use-aria-button";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
+import {dataAttr, objectToDeps, mergeRefs, mergeProps} from "@heroui/shared-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {useOverlayTriggerState} from "@react-stately/overlays";
-import {OverlayTriggerProps} from "@react-stately/overlays";
-import {mergeRefs, mergeProps} from "@react-aria/utils";
 
 interface Props extends HTMLHeroUIProps<"section"> {
   /**
@@ -22,7 +24,7 @@ interface Props extends HTMLHeroUIProps<"section"> {
   /**
    * The props to modify the framer motion animation. Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<"section">;
+  motionProps?: Omit<HTMLMotionProps<"section">, "ref">;
   /**
    * Determines whether to hide the modal close button.
    * @default false
@@ -145,7 +147,7 @@ export function useModal(originalProps: UseModalProps) {
   const {isFocusVisible: isCloseButtonFocusVisible, focusProps: closeButtonFocusProps} =
     useFocusRing();
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const slots = useMemo(
     () =>
@@ -159,7 +161,7 @@ export function useModal(originalProps: UseModalProps) {
   const getDialogProps: PropGetter = (props = {}, ref = null) => ({
     ref: mergeRefs(ref, domRef),
     ...mergeProps(modalProps, otherProps, props),
-    className: slots.base({class: clsx(baseStyles, props.className)}),
+    className: slots.base({class: cn(baseStyles, props.className)}),
     id: dialogId,
     "data-open": dataAttr(state.isOpen),
     "data-dismissable": dataAttr(isDismissable),
@@ -172,7 +174,6 @@ export function useModal(originalProps: UseModalProps) {
   const getBackdropProps = useCallback<PropGetter>(
     (props = {}) => ({
       className: slots.backdrop({class: classNames?.backdrop}),
-      onClick: () => state.close(),
       ...underlayProps,
       ...props,
     }),

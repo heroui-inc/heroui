@@ -1,7 +1,10 @@
-import {forwardRef} from "@heroui/system";
-import {cloneElement, ReactElement} from "react";
+import type {ReactElement} from "react";
+import type {UseCheckboxProps} from "./use-checkbox";
 
-import {UseCheckboxProps, useCheckbox} from "./use-checkbox";
+import {forwardRef} from "@heroui/system";
+import {cloneElement} from "react";
+
+import {useCheckbox} from "./use-checkbox";
 import {CheckboxIcon} from "./checkbox-icon";
 
 export interface CheckboxProps extends UseCheckboxProps {}

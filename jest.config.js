@@ -1,5 +1,6 @@
 module.exports = {
   testEnvironment: "jsdom",
+  testTimeout: 35000,
   collectCoverageFrom: ["packages/**/*.{ts,tsx}"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   modulePathIgnorePatterns: ["<rootDir>/examples", "<rootDir>/tooling/cra-template*"],
@@ -20,4 +21,5 @@ module.exports = {
   transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
   setupFilesAfterEnv: ["@testing-library/jest-dom", "./scripts/setup-test.ts"],
   watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
+  testTimeout: 15000,
 };

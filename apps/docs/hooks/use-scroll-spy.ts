@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import * as React from "react";
 
 export function useScrollSpy(selectors: string[], options?: IntersectionObserverInit) {

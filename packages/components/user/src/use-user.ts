@@ -1,14 +1,15 @@
 import type {SlotsToClasses, UserSlots} from "@heroui/theme";
 import type {AvatarProps} from "@heroui/avatar";
+import type {ReactNode} from "react";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {ReactNode, useMemo, useCallback} from "react";
+import {useMemo, useCallback} from "react";
 import {useFocusRing} from "@react-aria/focus";
-import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
-import {user} from "@heroui/theme";
-import {clsx, dataAttr} from "@heroui/shared-utils";
-import {filterDOMProps, ReactRef} from "@heroui/react-utils";
+import {user, cn} from "@heroui/theme";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
+import {filterDOMProps} from "@heroui/react-utils";
 import {useDOMRef} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
 interface Props {
   /**
    * Ref to the DOM node.
@@ -82,7 +83,7 @@ export function useUser(props: UseUserProps) {
 
   const slots = useMemo(() => user(), []);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getUserProps = useCallback<PropGetter>(
     () => ({

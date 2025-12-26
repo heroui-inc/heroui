@@ -1,11 +1,15 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import type {DateInputProps} from "../src";
+import type {DateValue} from "@internationalized/date";
+
 import * as React from "react";
 import {fireEvent, render} from "@testing-library/react";
-import {CalendarDate, CalendarDateTime, DateValue, ZonedDateTime} from "@internationalized/date";
+import {CalendarDate, CalendarDateTime, ZonedDateTime} from "@internationalized/date";
 import {pointerMap, triggerPress} from "@heroui/test-utils";
 import userEvent from "@testing-library/user-event";
+import {HeroUIProvider} from "@heroui/system";
 
-import {DateInput as DateInputBase, DateInputProps} from "../src";
+import {DateInput as DateInputBase} from "../src";
 
 /**
  * Custom date-input to disable animations and avoid issues with react-motion and jest
@@ -333,6 +337,57 @@ describe("DateInput", () => {
 
       expect(getDescription()).toBe("Selected Date: February 03, 2020");
       expect(input).toHaveValue("2020-02-03");
+    });
+  });
+  describe("DateInput with HeroUIProvider context", () => {
+    it("should inherit labelPlacement from HeroUIProvider", () => {
+      const labelContent = "Test date input label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <DateInput label={labelContent} />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).not.toHaveTextContent(labelContent);
+    });
+
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const labelContent = "Test date input label";
+
+      render(
+        <HeroUIProvider labelPlacement="outside">
+          <DateInput label={labelContent} labelPlacement="inside" />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).toHaveTextContent(labelContent);
+    });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const labelContent = "Test date input label";
+
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <DateInput label={labelContent} />
+        </HeroUIProvider>,
+      );
+
+      const label = document.querySelector("[data-slot=label]");
+      const group = document.querySelector("[data-slot=input-wrapper]");
+      const base = container.querySelector("[data-slot=base]");
+
+      expect(label).toHaveTextContent(labelContent);
+      expect(group).not.toHaveTextContent(labelContent);
+      expect(base).toHaveClass("flex-col");
     });
   });
 });

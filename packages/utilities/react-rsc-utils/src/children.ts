@@ -1,4 +1,6 @@
-import {Children, isValidElement, ReactNode} from "react";
+import type {ReactNode} from "react";
+
+import {Children, isValidElement} from "react";
 
 /**
  * Gets only the valid children of a component,

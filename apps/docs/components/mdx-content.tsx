@@ -2,9 +2,9 @@
 
 import type {MDXComponents as MDXComponentsType} from "mdx/types";
 
-import {useMDXComponent} from "next-contentlayer2/hooks";
-
 import {MDXComponents} from "./mdx-components";
+
+import {useMDXComponent} from "@/hooks/use-mdx-component";
 
 interface MDXContentProps {
   code: string;

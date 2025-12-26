@@ -1,6 +1,8 @@
+import type {UseBreadcrumbItemProps} from "./use-breadcrumb-item";
+
 import {forwardRef} from "@heroui/system";
 
-import {UseBreadcrumbItemProps, useBreadcrumbItem} from "./use-breadcrumb-item";
+import {useBreadcrumbItem} from "./use-breadcrumb-item";
 
 export interface BreadcrumbItemProps extends UseBreadcrumbItemProps {}
 

@@ -1,27 +1,29 @@
 "use client";
 
+import type {UseCodeDemoProps} from "./use-code-demo";
+import type {WindowResizerProps} from "./window-resizer";
+import type {GradientBoxProps} from "@/components/gradient-box";
+
 import React, {useCallback, useMemo, useRef} from "react";
 import dynamic from "next/dynamic";
 import {Skeleton, Tab, Tabs} from "@heroui/react";
 import {useInView} from "framer-motion";
 
-import {useCodeDemo, UseCodeDemoProps} from "./use-code-demo";
-import WindowResizer, {WindowResizerProps} from "./window-resizer";
-
-import {GradientBoxProps} from "@/components/gradient-box";
+import {useCodeDemo} from "./use-code-demo";
+import WindowResizer from "./window-resizer";
 
 const DynamicReactLiveDemo = dynamic(
   () => import("./react-live-demo").then((m) => m.ReactLiveDemo),
   {
     ssr: false,
-    // eslint-disable-next-line react/display-name
+
     loading: () => <Skeleton className="w-full h-24 rounded-xl" />,
   },
 );
 
 const DynamicSandpack = dynamic(() => import("../../../sandpack").then((m) => m.Sandpack), {
   ssr: false,
-  // eslint-disable-next-line react/display-name
+
   loading: () => <Skeleton className="w-full h-32 rounded-xl" />,
 });
 
@@ -167,23 +169,25 @@ export const CodeDemo: React.FC<CodeDemoProps> = ({
   }, [showTabs, showPreview, showEditor]);
 
   return (
-    <div ref={ref} className="flex flex-col gap-2">
+    <div ref={ref} className="flex flex-col gap-2 relative">
       {shouldRenderTabs ? (
-        <Tabs
-          disableAnimation
-          aria-label="Code demo tabs"
-          classNames={{
-            panel: "pt-0",
-          }}
-          variant="underlined"
-        >
-          <Tab key="preview" title="Preview">
-            {previewContent}
-          </Tab>
-          <Tab key="code" title="Code">
-            {editorContent}
-          </Tab>
-        </Tabs>
+        <>
+          <Tabs
+            disableAnimation
+            aria-label="Code demo tabs"
+            classNames={{
+              panel: "pt-0",
+            }}
+            variant="underlined"
+          >
+            <Tab key="preview" title="Preview">
+              {previewContent}
+            </Tab>
+            <Tab key="code" title="Code">
+              {editorContent}
+            </Tab>
+          </Tabs>
+        </>
       ) : (
         <>
           {previewContent}

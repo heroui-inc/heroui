@@ -1,8 +1,10 @@
+import type {UseSliderProps} from "./use-slider";
+
 import {renderFn} from "@heroui/react-utils";
 import {forwardRef} from "@heroui/system";
 
 import Thumb from "./slider-thumb";
-import {UseSliderProps, useSlider} from "./use-slider";
+import {useSlider} from "./use-slider";
 
 export interface SliderProps
   extends Omit<UseSliderProps, "isVertical" | "hasMarks" | "hasSingleThumb"> {}

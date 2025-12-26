@@ -1,25 +1,26 @@
 import type {AutocompleteVariantProps, SlotsToClasses, AutocompleteSlots} from "@heroui/theme";
 import type {DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {FilterFn} from "@react-stately/combobox";
+import type {ReactRef} from "@heroui/react-utils";
+import type {ReactNode} from "react";
+import type {ComboBoxProps} from "@react-types/combobox";
+import type {PopoverProps} from "@heroui/popover";
+import type {ListboxProps} from "@heroui/listbox";
+import type {InputProps} from "@heroui/input";
+import type {ScrollShadowProps} from "@heroui/scroll-shadow";
+import type {ButtonProps} from "@heroui/button";
+import type {AsyncLoadable, PressEvent} from "@react-types/shared";
 
-import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
-import {autocomplete} from "@heroui/theme";
+import {dataAttr, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
+import {useEffect, useMemo, useRef} from "react";
+import {useDOMRef} from "@heroui/react-utils";
+import {useComboBoxState} from "@react-stately/combobox";
 import {useFilter} from "@react-aria/i18n";
-import {FilterFn, useComboBoxState} from "@react-stately/combobox";
-import {ReactRef, useDOMRef} from "@heroui/react-utils";
-import {ReactNode, useEffect, useMemo, useRef} from "react";
-import {ComboBoxProps} from "@react-types/combobox";
-import {PopoverProps} from "@heroui/popover";
-import {ListboxProps} from "@heroui/listbox";
-import {InputProps} from "@heroui/input";
-import {clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ScrollShadowProps} from "@heroui/scroll-shadow";
-import {chain, mergeProps} from "@react-aria/utils";
-import {ButtonProps} from "@heroui/button";
-import {AsyncLoadable, PressEvent} from "@react-types/shared";
+import {autocomplete, cn} from "@heroui/theme";
+import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useComboBox} from "@react-aria/combobox";
 import {FormContext, useSlottedContext} from "@heroui/form";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
 
 interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>> {
   /**
@@ -112,6 +113,11 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>
    */
   onClose?: () => void;
   /**
+   * Callback fired when the value is cleared.
+   * if you pass this prop, the clear button will be shown.
+   */
+  onClear?: () => void;
+  /**
    * Whether to enable virtualization of the listbox items.
    * By default, virtualization is automatically enabled when the number of items is greater than 50.
    * @default undefined
@@ -148,9 +154,11 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const isClearable =
     originalProps.disableClearable !== undefined
       ? !originalProps.disableClearable
-      : originalProps.isReadOnly
-      ? false
-      : originalProps.isClearable;
+      : originalProps.isDisabled
+        ? false
+        : originalProps.isReadOnly
+          ? false
+          : originalProps.isClearable;
 
   const {
     ref,
@@ -186,6 +194,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     errorMessage,
     onOpenChange,
     onClose,
+    onClear,
     isReadOnly = false,
     ...otherProps
   } = props;
@@ -288,7 +297,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     ),
     listboxProps: mergeProps(
       {
-        hideEmptyContent: allowsCustomValue,
+        hideEmptyContent: allowsCustomValue && !listboxProps?.emptyContent,
         emptyContent: "No results found.",
         disableAnimation,
       },
@@ -319,7 +328,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     ),
   };
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
   const isOpen = slotsProps.listboxProps?.hideEmptyContent
     ? state.isOpen && !!state.collection.size
     : state.isOpen;
@@ -339,15 +348,47 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
     }
   }, [inputRef.current]);
 
-  // focus first non-disabled item
+  // Ensure the focused item in the dropdown correctly reflects the
+  // selected key when the component mounts or relevant state changes.
   useEffect(() => {
-    let key = state.collection.getFirstKey();
+    let keyToFocus: React.Key | null;
 
-    while (key && state.disabledKeys.has(key)) {
-      key = state.collection.getKeyAfter(key);
+    if (
+      state.selectedKey !== null &&
+      state.collection.getItem(state.selectedKey) &&
+      !state.disabledKeys.has(state.selectedKey)
+    ) {
+      keyToFocus = state.selectedKey;
+    } else {
+      let firstAvailableKey = state.collection.getFirstKey();
+
+      while (firstAvailableKey && state.disabledKeys.has(firstAvailableKey)) {
+        firstAvailableKey = state.collection.getKeyAfter(firstAvailableKey);
+      }
+      keyToFocus = firstAvailableKey;
     }
-    state.selectionManager.setFocusedKey(key);
-  }, [state.collection, state.disabledKeys]);
+    state.selectionManager.setFocusedKey(keyToFocus);
+  }, [state.collection, state.disabledKeys, state.selectedKey]);
+
+  // scroll the listbox to the selected item
+  useEffect(() => {
+    if (state.isOpen && popoverRef.current && listBoxRef.current) {
+      let selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
+      let scrollShadow = scrollShadowRef.current;
+
+      if (selectedItem && scrollShadow && selectedItem.parentElement) {
+        let scrollShadowRect = scrollShadow?.getBoundingClientRect();
+        let scrollShadowHeight = scrollShadowRect.height;
+
+        scrollShadow.scrollTop =
+          selectedItem.parentElement.offsetTop -
+          scrollShadowHeight / 2 +
+          selectedItem.parentElement.clientHeight / 2;
+
+        state.selectionManager.setFocusedKey(state.selectedKey);
+      }
+    }
+  }, [state.isOpen, disableAnimation]);
 
   useEffect(() => {
     if (isOpen) {
@@ -401,13 +442,15 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       ...mergeProps(buttonProps, slotsProps.selectorButtonProps),
       "data-open": dataAttr(state.isOpen),
       className: slots.selectorButton({
-        class: clsx(classNames?.selectorButton, slotsProps.selectorButtonProps?.className),
+        class: cn(classNames?.selectorButton, slotsProps.selectorButtonProps?.className),
       }),
-    } as ButtonProps);
+    }) as ButtonProps;
 
   const getClearButtonProps = () =>
     ({
-      ...mergeProps(buttonProps, slotsProps.clearButtonProps),
+      ...slotsProps.clearButtonProps,
+      preventFocusOnPress: true,
+      excludeFromTabOrder: true,
       // disable original focus and state toggle from react aria
       onPressStart: () => {
         // this is in PressStart for mobile so that touching the clear button doesn't remove focus from
@@ -421,12 +464,13 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
         }
         state.setInputValue("");
         state.open();
+        onClear?.();
       },
       "data-visible": !!state.selectedItem || state.inputValue?.length > 0,
       className: slots.clearButton({
-        class: clsx(classNames?.clearButton, slotsProps.clearButtonProps?.className),
+        class: cn(classNames?.clearButton, slotsProps.clearButtonProps?.className),
       }),
-    } as ButtonProps);
+    }) as ButtonProps;
 
   // prevent use-input's useFormValidation hook from overwriting use-autocomplete's useFormValidation hook when there are uncommitted validation errors
   // see https://github.com/heroui-inc/heroui/pull/4452
@@ -447,7 +491,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
           ? errorMessage({isInvalid, validationErrors, validationDetails})
           : errorMessage || validationErrors?.join(" "),
       onClick: chain(slotsProps.inputProps.onClick, otherProps.onClick),
-    } as unknown as InputProps);
+    }) as unknown as InputProps;
 
   const getListBoxProps = () => {
     // Use isVirtualized prop if defined, otherwise fallback to default behavior
@@ -483,16 +527,13 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
       classNames: {
         ...slotsProps.popoverProps?.classNames,
         content: slots.popoverContent({
-          class: clsx(
+          class: cn(
             classNames?.popoverContent,
             slotsProps.popoverProps?.classNames?.["content"],
             props.className,
           ),
         }),
       },
-      shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-        ? popoverProps.shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, inputWrapperRef, state),
       // when the popover is open, the focus should be on input instead of dialog
       // therefore, we skip dialog focus here
       disableDialogFocus: true,
@@ -510,7 +551,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
   const getListBoxWrapperProps: PropGetter = (props: any = {}) => ({
     ...mergeProps(slotsProps.scrollShadowProps, props),
     className: slots.listboxWrapper({
-      class: clsx(
+      class: cn(
         classNames?.listboxWrapper,
         slotsProps.scrollShadowProps?.className,
         props?.className,
@@ -523,7 +564,7 @@ export function useAutocomplete<T extends object>(originalProps: UseAutocomplete
 
   const getEndContentWrapperProps: PropGetter = (props: any = {}) => ({
     className: slots.endContentWrapper({
-      class: clsx(classNames?.endContentWrapper, props?.className),
+      class: cn(classNames?.endContentWrapper, props?.className),
     }),
     onPointerDown: chain(props.onPointerDown, (e: React.PointerEvent) => {
       if (e.button === 0 && e.currentTarget === e.target) {

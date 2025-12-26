@@ -2,18 +2,17 @@ import type {PopoverProps} from "@heroui/popover";
 import type {MenuTriggerType} from "@react-types/menu";
 import type {Ref} from "react";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {MenuProps} from "@heroui/menu";
+import type {CollectionElement} from "@react-types/shared";
 
 import {useProviderContext} from "@heroui/system";
 import {useMenuTriggerState} from "@react-stately/menu";
 import {useMenuTrigger} from "@react-aria/menu";
-import {dropdown} from "@heroui/theme";
-import {clsx} from "@heroui/shared-utils";
-import {ReactRef, mergeRefs} from "@heroui/react-utils";
-import {ariaShouldCloseOnInteractOutside} from "@heroui/aria-utils";
+import {dropdown, cn} from "@heroui/theme";
+import {mergeProps} from "@heroui/shared-utils";
+import {mergeRefs} from "@heroui/react-utils";
 import {useMemo, useRef} from "react";
-import {mergeProps} from "@react-aria/utils";
-import {MenuProps} from "@heroui/menu";
-import {CollectionElement} from "@react-types/shared";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**
@@ -156,11 +155,8 @@ export function useDropdown(props: UseDropdownProps): UseDropdownReturn {
       classNames: {
         ...classNamesProp,
         ...props.classNames,
-        content: clsx(styles, classNamesProp?.content, props.className),
+        content: cn(styles, classNamesProp?.content, props.className),
       },
-      shouldCloseOnInteractOutside: popoverProps?.shouldCloseOnInteractOutside
-        ? popoverProps.shouldCloseOnInteractOutside
-        : (element: Element) => ariaShouldCloseOnInteractOutside(element, triggerRef, state),
     };
   };
 

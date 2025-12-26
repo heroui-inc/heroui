@@ -47,7 +47,7 @@ The `ToastProvider` must be added to the application before using the `addToast`
 import {HeroUIProvider} from '@heroui/react'
 import {ToastProvider} from "@heroui/toast";
 
-export default function Providers({children}) {
+export function Providers({children}) {
   return (
     <HeroUIProvider>
       <ToastProvider />
@@ -109,6 +109,13 @@ Toast comes with 6 color variants to convey different meanings.
   files={toastContent.placement}
 />
 
+### Close Toast
+
+<CodeDemo
+    title="Close"
+    files={toastContent.close}
+/>
+
 ### Custom Styles
 
 You can customize the alert by passing custom Tailwind CSS classes to the component slots.
@@ -168,7 +175,7 @@ Toast has the following slots:
 - `title`: The title element
 - `description`: The description element
 - `icon`: The icon element
-- `loadingIcon`: The icon to be displayed until `promise` is resolved/rejected.
+- `loadingComponent`: The component to be displayed until `promise` is resolved/rejected.
 - `content`: The wrapper for the title, description and icon content.
 - `motionDiv`: The motion.div for the FramerMotion.
 - `progressTrack`: The track of the progressBar.
@@ -180,7 +187,7 @@ Toast has the following slots:
 ## Accessibility
 
 - Toast has role of `alert`
-- All Toasts are present in ToastRegion.
+- All Toasts are present in `ToastRegion`.
 - Close button has aria-label="Close" by default
 - When no toast are present, ToastRegion is removed from the DOM
 
@@ -253,16 +260,10 @@ Toast has the following slots:
       default: "undefined"
     },
     {
-      attribute: "loadingIcon", 
+      attribute: "loadingComponent", 
       type: "ReactNode",
-      description: "The loading icon for toasts with promise prop - overrides the default loading icon",
+      description: "The loading component for toasts with promise prop - overrides the default loading component",
       default: "-"
-    },
-    {
-      attribute: "priority",
-      type: "number | undefined",
-      description: "Priority at which the toast will be displayed",
-      default: "undefined",
     },
     {
       attribute: "hideIcon",
@@ -283,8 +284,14 @@ Toast has the following slots:
       default: "false",
     },
     {
+      attribute: "severity", 
+      type: "default | primary | secondary | success | warning | danger",
+      description: "The severity of the toast. This changes the icon of the toast without having to change the color.",
+      default: "default"
+    },
+    {
       attribute: "classNames",
-      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingIcon\" | \"progressTrack\" | \"progressIndicator\ | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
+      type: "Partial<Record<\"base\" | \"content\" | \"wrapper\" | \"title\" | \"description\" | \"icon\" | \"loadingComponent\" | \"progressTrack\" | \"progressIndicator\" | \"motionDiv\" | \"closeButton\" | \"closeIcon\", string>>",
       description: "Allows to set custom class names for the toast slots.",
       default: "-"
     }
@@ -308,12 +315,6 @@ Toast has the following slots:
       default: "bottom-right"
     },
     {
-      attribute: "severity", 
-      type: "default | primary | secondary | success | warning | danger",
-      description: "The severity of the toast. This changes the icon of the toast without having to change the color.",
-      default: "default"
-    },
-    {
       attribute: "disableAnimation", 
       type: "boolean",
       description: "Disables the animation.",
@@ -331,9 +332,27 @@ Toast has the following slots:
       description: "Props to be passed to all toasts",
       default: "-"
     },
+    {
+      attribute: "regionProps",
+      type: "ToastRegionProps",
+      description: "Props to be passed to toast region",
+      default: "-"
+    },
   ]}
 />
 
+### ToastRegion Props
+
+<APITable
+  data={[
+    {
+      attribute: "classNames",
+      type: "Partial<Record<\"base\", string>>",
+      description: "Allows to set custom class names for the toast region slots.",
+      default: "-"
+    }
+  ]}
+/>
 
 ### Toast Events
 

@@ -1,21 +1,19 @@
 import type {DateInputVariantProps, DateInputSlots, SlotsToClasses} from "@heroui/theme";
-import type {AriaDateFieldProps} from "@react-types/datepicker";
-import type {SupportedCalendars} from "@heroui/system";
-import type {DateValue} from "@react-types/datepicker";
-import type {Calendar} from "@internationalized/date";
+import type {AriaDateFieldProps, SpectrumDatePickerBase} from "@react-types/datepicker";
 import type {ReactRef} from "@heroui/react-utils";
 import type {DOMAttributes, GroupDOMAttributes} from "@react-types/shared";
 import type {DateInputGroupProps} from "./date-input-group";
+import type {DateValue, CalendarIdentifier} from "@internationalized/date";
+import type {PropGetter, HTMLHeroUIProps} from "@heroui/system";
 
 import {useLocale} from "@react-aria/i18n";
 import {createCalendar, CalendarDate, DateFormatter} from "@internationalized/date";
-import {mergeProps} from "@react-aria/utils";
-import {PropGetter, useLabelPlacement, useProviderContext} from "@heroui/system";
-import {HTMLHeroUIProps, mapPropsVariants} from "@heroui/system";
+import {useLabelPlacement, useProviderContext} from "@heroui/system";
+import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
-import {objectToDeps, clsx, dataAttr, getGregorianYearOffset} from "@heroui/shared-utils";
+import {objectToDeps, dataAttr, getGregorianYearOffset, mergeProps} from "@heroui/shared-utils";
 import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";
@@ -88,7 +86,7 @@ interface Props<T extends DateValue> extends HeroUIBaseProps<T> {
    *
    * @default all calendars
    */
-  createCalendar?: (calendar: SupportedCalendars) => Calendar | null;
+  createCalendar?: SpectrumDatePickerBase<DateValue>["createCalendar"];
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.
@@ -122,7 +120,9 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
 
   const {locale} = useLocale();
 
-  const calendarProp = createCalendar(new DateFormatter(locale).resolvedOptions().calendar);
+  const calendarProp = createCalendar(
+    new DateFormatter(locale).resolvedOptions().calendar as CalendarIdentifier,
+  );
 
   // by default, we are using gregorian calendar with possible years in [1900, 2099]
   // however, some locales such as `th-TH-u-ca-buddhist` using different calendar making the years out of bound
@@ -148,10 +148,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     descriptionProps: descriptionPropsProp,
     validationBehavior = formValidationBehavior ?? globalContext?.validationBehavior ?? "native",
     shouldForceLeadingZeros = true,
-    minValue = globalContext?.defaultDates?.minDate ??
-      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1),
-    maxValue = globalContext?.defaultDates?.maxDate ??
-      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31),
+    minValue = (globalContext?.defaultDates?.minDate ??
+      new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1)) as DateValue,
+    maxValue = (globalContext?.defaultDates?.maxDate ??
+      new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31)) as DateValue,
     createCalendar: createCalendarProp = globalContext?.createCalendar ?? null,
     isInvalid: isInvalidProp = validationState ? validationState === "invalid" : false,
     errorMessage,
@@ -187,7 +187,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     isInvalid: ariaIsInvalid,
   } = useAriaDateField({...originalProps, label, validationBehavior, inputRef}, state, domRef);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const isInvalid = isInvalidProp || ariaIsInvalid;
 
@@ -196,7 +196,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   const slots = useMemo(
     () =>
@@ -213,7 +216,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       ...mergeProps(labelProps, labelPropsProp, props),
       "data-slot": "label",
       className: slots.label({
-        class: clsx(classNames?.label, props?.className),
+        class: cn(classNames?.label, props?.className),
       }),
     };
   };
@@ -232,7 +235,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       "data-slot": "input-field",
       ...mergeProps(fieldProps, fieldPropsProp, props),
       className: slots.input({
-        class: clsx(classNames?.input, props?.className),
+        class: cn(classNames?.input, props?.className),
       }),
     } as GroupDOMAttributes;
   };
@@ -266,7 +269,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       ...props,
       "data-slot": "helper-wrapper",
       className: slots.helperWrapper({
-        class: clsx(classNames?.helperWrapper, props?.className),
+        class: cn(classNames?.helperWrapper, props?.className),
       }),
     };
   };
@@ -275,7 +278,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     return {
       ...mergeProps(errorMessageProps, errorMessagePropsProp, props),
       "data-slot": "error-message",
-      className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+      className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
     };
   };
 
@@ -283,7 +286,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     return {
       ...mergeProps(descriptionProps, descriptionPropsProp, props),
       "data-slot": "description",
-      className: slots.description({class: clsx(classNames?.description, props?.className)}),
+      className: slots.description({class: cn(classNames?.description, props?.className)}),
     };
   };
 

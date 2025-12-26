@@ -1,15 +1,18 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 "use client";
 
+import type {FC} from "react";
+import type {ButtonProps} from "@heroui/react";
+
 import {Command} from "cmdk";
-import {useEffect, useState, FC, useMemo, useCallback, useRef} from "react";
+import {useEffect, useState, useMemo, useCallback, useRef} from "react";
 import {matchSorter} from "match-sorter";
-import {Button, ButtonProps, Kbd, Modal, ModalContent} from "@heroui/react";
+import {Button, Kbd, Modal, ModalContent} from "@heroui/react";
 import {CloseIcon} from "@heroui/shared-icons";
 import {tv} from "tailwind-variants";
 import {usePathname, useRouter} from "next/navigation";
 import MultiRef from "react-multi-ref";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import scrollIntoView from "scroll-into-view-if-needed";
 import {isAppleDevice, isWebKit} from "@react-aria/utils";
 import {create} from "zustand";
@@ -60,7 +63,7 @@ const cmdk = tv({
       "h-14",
       "font-sans",
       "text-lg",
-      "outline-none",
+      "outline-solid outline-transparent",
       "rounded-none",
       "bg-transparent",
       "text-default-700",
@@ -78,7 +81,7 @@ const cmdk = tv({
       "justify-between",
       "items-center",
       "rounded-lg",
-      "shadow",
+      "shadow-xs",
       "bg-content2/50",
       "active:opacity-70",
       "cursor-pointer",
@@ -210,7 +213,7 @@ export const Cmdk: FC<{}> = () => {
     [query],
   );
 
-  const items = !isEmpty(results) ? results : recentSearches ?? [];
+  const items = !isEmpty(results) ? results : (recentSearches ?? []);
 
   // Toggle the menu when ⌘K / CTRL K is pressed
   useEffect(() => {
@@ -320,7 +323,7 @@ export const Cmdk: FC<{}> = () => {
       return (
         <Button
           isIconOnly
-          className={clsx(
+          className={cn(
             "border data-[hover=true]:bg-content2 border-default-400 dark:border-default-100",
             className,
           )}
@@ -394,10 +397,10 @@ export const Cmdk: FC<{}> = () => {
           "mt-[20vh]",
           "border-small",
           "dark:border-default-100",
-          "supports-[backdrop-filter]:bg-background/80",
-          "dark:supports-[backdrop-filter]:bg-background/30",
-          "supports-[backdrop-filter]:backdrop-blur-md",
-          "supports-[backdrop-filter]:backdrop-saturate-150",
+          "supports-backdrop-filter:bg-background/80",
+          "dark:supports-backdrop-filter:bg-background/30",
+          "supports-backdrop-filter:backdrop-blur-md",
+          "supports-backdrop-filter:backdrop-saturate-150",
         ],
         backdrop: ["bg-black/80"],
       }}

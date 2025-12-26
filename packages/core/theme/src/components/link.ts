@@ -11,7 +11,7 @@ import {dataFocusVisibleClasses} from "../utils";
  */
 const link = tv({
   base: [
-    "relative inline-flex items-center outline-none tap-highlight-transparent",
+    "relative inline-flex items-center outline-solid outline-transparent tap-highlight-transparent",
     // focus ring
     ...dataFocusVisibleClasses,
   ],
@@ -50,7 +50,7 @@ const link = tv({
         "after:transition-background",
         "after:absolute",
       ],
-      false: "hover:opacity-80 active:opacity-disabled transition-opacity",
+      false: "hover:opacity-hover active:opacity-disabled transition-opacity",
     },
     isDisabled: {
       true: "opacity-disabled cursor-default pointer-events-none",

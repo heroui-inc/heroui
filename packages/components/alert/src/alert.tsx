@@ -1,4 +1,5 @@
 import type {ButtonProps} from "@heroui/button";
+import type {UseAlertProps} from "./use-alert";
 
 import {forwardRef} from "@heroui/system";
 import {
@@ -12,7 +13,7 @@ import {isEmpty} from "@heroui/shared-utils";
 import {Button} from "@heroui/button";
 import {cloneElement, isValidElement} from "react";
 
-import {useAlert, UseAlertProps} from "./use-alert";
+import {useAlert} from "./use-alert";
 
 const iconMap = {
   primary: InfoCircleIcon,

@@ -1,5 +1,7 @@
+import type {Meta} from "@storybook/react";
+import type {BreadcrumbsProps} from "../src";
+
 import React from "react";
-import {Meta} from "@storybook/react";
 import {breadcrumbItem} from "@heroui/theme";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
 import {Button} from "@heroui/button";
@@ -13,9 +15,9 @@ import {
   PetBoldIcon,
   ShoppingCartBoldIcon,
 } from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
-import {Breadcrumbs, BreadcrumbItem, BreadcrumbsProps} from "../src";
+import {Breadcrumbs, BreadcrumbItem} from "../src";
 
 export default {
   title: "Components/Breadcrumbs",
@@ -310,7 +312,7 @@ const WithDropdownItemTemplate = (args: BreadcrumbsProps & {page: number}) => {
         <Dropdown>
           <DropdownTrigger>
             <Button
-              className={clsx("h-6 pr-2", args.size && sizeMap[args.size])}
+              className={cn("h-6 pr-2", args.size && sizeMap[args.size])}
               endContent={<ChevronDownIcon className="text-default-500" />}
               radius="full"
               size="sm"

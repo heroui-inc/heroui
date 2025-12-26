@@ -1,3 +1,5 @@
+import type {ModalProps} from "@heroui/react";
+
 import React from "react";
 import {
   Modal,
@@ -5,7 +7,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  ModalProps,
   Button,
   useDisclosure,
   RadioGroup,

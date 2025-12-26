@@ -5,13 +5,13 @@ import type {
 } from "@heroui/theme";
 import type {PropGetter} from "@heroui/system";
 import type {AriaProgressBarProps} from "@react-types/progress";
+import type {HTMLHeroUIProps} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
 
-import {HTMLHeroUIProps, mapPropsVariants, useProviderContext} from "@heroui/system";
-import {circularProgress} from "@heroui/theme";
+import {mapPropsVariants, useProviderContext} from "@heroui/system";
+import {circularProgress, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clampPercentage, clsx, dataAttr, objectToDeps} from "@heroui/shared-utils";
-import {ReactRef} from "@heroui/react-utils";
-import {mergeProps} from "@react-aria/utils";
+import {clampPercentage, dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo, useCallback} from "react";
 import {useIsMounted} from "@heroui/use-is-mounted";
 import {useProgressBar as useAriaProgress} from "@react-aria/progress";
@@ -79,7 +79,7 @@ export function useCircularProgress(originalProps: UseCircularProgressProps) {
 
   const domRef = useDOMRef(ref);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
   const [, isMounted] = useIsMounted({
     rerender: true,
     delay: 100,

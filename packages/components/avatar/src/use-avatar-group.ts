@@ -1,14 +1,14 @@
 import type {ReactNode} from "react";
 import type {SlotsToClasses, AvatarGroupSlots, AvatarGroupVariantProps} from "@heroui/theme";
+import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import type {ReactRef} from "@heroui/react-utils";
+import type {AvatarProps} from "./index";
 
-import {avatarGroup} from "@heroui/theme";
-import {HTMLHeroUIProps, PropGetter} from "@heroui/system";
+import {avatarGroup, cn} from "@heroui/theme";
 import {useDOMRef} from "@heroui/react-utils";
-import {clsx, compact} from "@heroui/shared-utils";
-import {ReactRef, getValidChildren} from "@heroui/react-utils";
+import {compact} from "@heroui/shared-utils";
+import {getValidChildren} from "@heroui/react-utils";
 import {cloneElement, useMemo} from "react";
-
-import {AvatarProps} from "./index";
 
 interface Props extends HTMLHeroUIProps<"div"> {
   /**
@@ -106,7 +106,7 @@ export function useAvatarGroup(props: UseAvatarGroupProps = {}) {
     const isLastAvatar = index === childrenWithinMax.length - 1;
 
     const childProps = {
-      className: clsx(
+      className: cn(
         isFirstAvatar ? "ms-0" : !isGrid ? "-ms-2" : "",
         isLastAvatar && remainingCount < 1 ? "hover:-translate-x-0" : "",
       ),
@@ -119,7 +119,7 @@ export function useAvatarGroup(props: UseAvatarGroupProps = {}) {
     return {
       ref: domRef,
       className: slots.base({
-        class: clsx(classNames?.base, className),
+        class: cn(classNames?.base, className),
       }),
       role: "group",
       ...otherProps,
