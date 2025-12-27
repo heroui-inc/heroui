@@ -438,4 +438,66 @@ describe("Accordion", () => {
 
     expect(getByRole("separator")).toHaveClass("bg-rose-500");
   });
+
+  it("should scroll to content when scrollOnOpen is true", async () => {
+    const scrollIntoViewMock = jest.fn();
+
+    Element.prototype.scrollIntoView = scrollIntoViewMock;
+
+    const wrapper = render(
+      <Accordion scrollOnOpen>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const first = wrapper.getByTestId("item-1");
+    const firstButton = first.querySelector("button") as HTMLElement;
+
+    await user.click(firstButton);
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    });
+
+    expect(scrollIntoViewMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        behavior: "smooth",
+        block: "nearest",
+      }),
+    );
+
+    jest.restoreAllMocks();
+  });
+
+  it("should apply custom transition duration", async () => {
+    const customDuration = 500;
+    const wrapper = render(
+      <Accordion disableAnimation={false} transitionDuration={customDuration}>
+        <AccordionItem key="1" data-testid="item-1" title="Accordion Item 1">
+          Accordion Item 1 description
+        </AccordionItem>
+      </Accordion>,
+    );
+
+    const first = wrapper.getByTestId("item-1");
+    const firstButton = first.querySelector("button") as HTMLElement;
+
+    await user.click(firstButton);
+
+    const content = first.querySelector("section");
+
+    expect(content).toBeInTheDocument();
+    // During animation the opacity changes from 0 to 1, reaching number close to 1 on the end
+    expect(content).toHaveAttribute("style", expect.stringMatching("opacity: 0"));
+
+    // Allow framer-motion time to apply animation styles
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, customDuration + 10));
+    });
+
+    // Match opacity values between 0.98 and 1 (inclusive)
+    expect(content).toHaveAttribute("style", expect.stringMatching(/opacity: (0\.9[8-9]\d*|1)/));
+  });
 });

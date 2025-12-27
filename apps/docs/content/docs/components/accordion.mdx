@@ -122,6 +122,18 @@ Accordion offers a `motionProps` property to customize the `enter` / `exit` anim
 
 > Learn more about Framer motion variants [here](https://www.framer.com/motion/animation/#variants).
 
+### Transition Duration
+
+Use `transitionDuration` property to customize the animations duration.
+
+<CodeDemo title="Transition Duration" files={accordionContent.transitionDuration} />
+
+### Scroll on Open
+
+Use `scrollOnOpen` property to automatically scroll to the content when an accordion item is expanded.
+
+<CodeDemo title="Scroll on Open" files={accordionContent.scrollOnOpen} />
+
 ### Controlled
 
 Accordion is a controlled component, which means you need to control the `selectedKeys` property by yourself.
@@ -280,6 +292,18 @@ Here's an example of how to customize the accordion styles:
       type: "MotionProps",
       description: "The motion properties of the Accordion.",
       default: "-"
+    },
+    {
+      attribute: "transitionDuration",
+      type: "number",
+      description: "The duration of the animations in milliseconds.",
+      default: 300
+    },
+    {
+      attribute: "scrollOnOpen",
+      type: "boolean",
+      description: "Whether to automatically scroll to the content when an accordion item is expanded.",
+      default: false
     },
     {
       attribute: "disabledKeys",
