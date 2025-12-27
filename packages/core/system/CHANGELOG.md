@@ -1,5 +1,23 @@
 # @heroui/system
 
+## 2.4.25
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies []:
+  - @heroui/system-rsc@2.3.21
+
+## 2.4.24
+
+### Patch Changes
+
+- [#5964](https://github.com/heroui-inc/heroui/pull/5964) [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - `outside-top` label placement support (#5641, #5967)
+
+- Updated dependencies [[`a37912e`](https://github.com/heroui-inc/heroui/commit/a37912e17f00cb2e8f11c012b1b412e4152e791a), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99), [`53e27bb`](https://github.com/heroui-inc/heroui/commit/53e27bb6f8acd8e1c422ad9aa352da0ac8d9f207)]:
+  - @heroui/system-rsc@2.3.21
+
 ## 2.4.23
 
 ### Patch Changes

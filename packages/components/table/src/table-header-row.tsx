@@ -4,8 +4,9 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, mergeProps} from "@heroui/shared-utils";
+import {mergeProps} from "@heroui/shared-utils";
 import {useTableHeaderRow} from "@react-aria/table";
+import {cn} from "@heroui/theme";
 
 // @internal
 export interface TableHeaderRowProps<T = object> extends HTMLHeroUIProps<"tr"> {
@@ -27,7 +28,7 @@ const TableHeaderRow = forwardRef<"tr", TableHeaderRowProps>((props, ref) => {
 
   const {rowProps} = useTableHeaderRow({node}, state, domRef);
 
-  const trStyles = clsx(classNames?.tr, className, node.props?.className);
+  const trStyles = cn(classNames?.tr, className, node.props?.className);
 
   return (
     <Component

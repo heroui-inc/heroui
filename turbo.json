@@ -6,10 +6,7 @@
     "IS_PREVIEW",
     "IS_VA_ENABLED",
     "ENABLE_EXPERIMENTAL_COREPACK",
-    "PLAIN_USER_AUTHENTICATED",
-    "IMPORT_API_KEY",
-    "CHAT_URL",
-    "CHAT_API_URL"
+    "PLAIN_USER_AUTHENTICATED"
   ],
   "tasks": {
     "build": {

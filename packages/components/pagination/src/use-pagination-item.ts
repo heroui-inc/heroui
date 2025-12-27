@@ -5,10 +5,11 @@ import type {PaginationItemValue} from "@heroui/use-pagination";
 
 import {useMemo} from "react";
 import {handleLinkClick, useRouter} from "@react-aria/utils";
-import {clsx, dataAttr, chain, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, chain, mergeProps} from "@heroui/shared-utils";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useHover, usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
+import {cn} from "@heroui/theme";
 
 interface Props extends Omit<HTMLHeroUIProps<"li">, "onClick"> {
   /**
@@ -106,7 +107,7 @@ export function usePaginationItem(props: UsePaginationItemProps) {
           enabled: shouldFilterDOMProps,
         }),
       ),
-      className: clsx(className, props.className),
+      className: cn(className, props.className),
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         chain(pressProps?.onClick, onClick)(e);
         handleLinkClick(e, router, props.href, props.routerOptions);

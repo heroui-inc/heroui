@@ -13,7 +13,7 @@ import {menu} from "@heroui/theme";
 import {useTreeState} from "@react-stately/tree";
 import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
 import {useMemo} from "react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 interface Props<T> {
   /**
@@ -135,7 +135,7 @@ export function useMenu<T extends object>(props: UseMenuProps<T>) {
   const {menuProps} = useAriaMenu({...otherProps, ...userMenuProps, onAction}, state, domRef);
 
   const slots = useMemo(() => menu({className}), [className]);
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const getBaseProps: PropGetter = (props = {}) => {
     return {

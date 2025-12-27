@@ -5,10 +5,10 @@ import type {TreeState} from "@react-stately/tree";
 import type {HTMLHeroUIProps, PropGetter} from "@heroui/system";
 
 import {useMemo, useRef, useCallback} from "react";
-import {menuItem} from "@heroui/theme";
+import {menuItem, cn} from "@heroui/theme";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useFocusRing} from "@react-aria/focus";
-import {clsx, dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
 import {useMenuItem as useAriaMenuItem} from "@react-aria/menu";
 import {isFocusVisible as AriaIsFocusVisible, useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
@@ -142,7 +142,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     [objectToDeps(variantProps), isDisabled, disableAnimation, rendered, description],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   if (isReadOnly) {
     itemProps = removeEvents(itemProps);
@@ -166,7 +166,7 @@ export function useMenuItem<T extends object>(originalProps: UseMenuItemProps<T>
     "data-selected": dataAttr(isSelected),
     "data-pressed": dataAttr(isPressed),
     "data-focus-visible": dataAttr(isFocusVisible),
-    className: slots.base({class: clsx(baseStyles, props.className)}),
+    className: slots.base({class: cn(baseStyles, props.className)}),
   });
 
   const getLabelProps: PropGetter = (props = {}) => ({

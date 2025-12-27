@@ -6,12 +6,13 @@ import type {ValuesType} from "./use-table";
 import {cloneElement, isValidElement} from "react";
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableColumnHeader} from "@react-aria/table";
 import {ChevronDownIcon} from "@heroui/shared-icons";
 import {useFocusRing} from "@react-aria/focus";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
 import {useHover} from "@react-aria/interactions";
+import {cn} from "@heroui/theme";
 
 // @internal
 export type SortIconProps = {
@@ -35,6 +36,10 @@ export interface TableColumnHeaderProps<T = object> extends HTMLHeroUIProps<"th"
   node: GridNode<T>;
 }
 
+const normalizeWidth = (value: number | string): string => {
+  return typeof value === "number" ? `${value}px` : value;
+};
+
 const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) => {
   const {as, className, state, node, slots, classNames, sortIcon, ...otherProps} = props;
 
@@ -45,13 +50,19 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
 
   const {columnHeaderProps} = useTableColumnHeader({node}, state, domRef);
 
-  const thStyles = clsx(classNames?.th, className, node.props?.className);
+  const thStyles = cn(classNames?.th, className, node.props?.className);
 
   const {isFocusVisible, focusProps} = useFocusRing();
   const {isHovered, hoverProps} = useHover({});
-  const {hideHeader, align, ...columnProps} = node.props;
+  const {hideHeader, align, width, minWidth, maxWidth, ...columnProps} = node.props;
 
   const allowsSorting = columnProps.allowsSorting;
+
+  const columnStyles: React.CSSProperties = {};
+
+  if (width) columnStyles.width = normalizeWidth(width);
+  if (minWidth) columnStyles.minWidth = normalizeWidth(minWidth);
+  if (maxWidth) columnStyles.maxWidth = normalizeWidth(maxWidth);
 
   const sortIconProps = {
     "aria-hidden": true,
@@ -72,6 +83,7 @@ const TableColumnHeader = forwardRef<"th", TableColumnHeaderProps>((props, ref) 
       data-focus-visible={dataAttr(isFocusVisible)}
       data-hover={dataAttr(isHovered)}
       data-sortable={dataAttr(allowsSorting)}
+      style={columnStyles}
       {...mergeProps(
         columnHeaderProps,
         focusProps,

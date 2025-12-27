@@ -24,7 +24,7 @@ export type TextareaHeightChangeMeta = {
 
 export interface TextAreaProps extends Omit<UseInputProps<HTMLTextAreaElement>, OmittedInputProps> {
   /**
-   * Whether the textarea should automatically grow vertically to accomodate content.
+   * Whether the textarea should automatically grow vertically to accommodate content.
    * @default false
    */
   disableAutosize?: boolean;

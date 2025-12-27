@@ -1,5 +1,29 @@
 # @heroui/tabs
 
+## 2.2.26
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/aria-utils@2.2.26
+
+## 2.2.25
+
+### Patch Changes
+
+- [#5816](https://github.com/heroui-inc/heroui/pull/5816) [`b38a2cf`](https://github.com/heroui-inc/heroui/commit/b38a2cfb58feb79b3baff10eff19e21480da1563) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tab cursor (#5790, #5809)
+
+- [#5924](https://github.com/heroui-inc/heroui/pull/5924) [`5d9a05b`](https://github.com/heroui-inc/heroui/commit/5d9a05be01fea1a66ed47ec4b4d9a9a442560341) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - Fix vertical tabs to use correct aria-orientation and support Up/Down arrow navigation for accessibility. (#5810)
+
+- [#5846](https://github.com/heroui-inc/heroui/pull/5846) [`a819f2a`](https://github.com/heroui-inc/heroui/commit/a819f2a95a32d059581b2789f2476c5e497732f2) Thanks [@adbjo](https://github.com/adbjo)! - responsive tab cursor (#5943)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies []:
+  - @heroui/aria-utils@2.2.25
+
 ## 2.2.24
 
 ### Patch Changes

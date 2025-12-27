@@ -1,5 +1,35 @@
 # @heroui/date-picker
 
+## 2.3.30
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/date-input@2.3.29
+  - @heroui/aria-utils@2.2.26
+  - @heroui/calendar@2.2.29
+  - @heroui/popover@2.3.29
+  - @heroui/button@2.2.29
+  - @heroui/form@2.1.29
+
+## 2.3.29
+
+### Patch Changes
+
+- [#5964](https://github.com/heroui-inc/heroui/pull/5964) [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - `outside-top` label placement support (#5641, #5967)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca), [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/date-input@2.3.28
+  - @heroui/button@2.2.28
+  - @heroui/calendar@2.2.28
+  - @heroui/popover@2.3.28
+  - @heroui/form@2.1.28
+  - @heroui/aria-utils@2.2.25
+
 ## 2.3.28
 
 ### Patch Changes

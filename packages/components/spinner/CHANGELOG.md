@@ -1,5 +1,27 @@
 # @heroui/spinner
 
+## 2.2.26
+
+### Patch Changes
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/system@2.4.25
+  - @heroui/system-rsc@2.3.21
+
+## 2.2.25
+
+### Patch Changes
+
+- [#5815](https://github.com/heroui-inc/heroui/pull/5815) [`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c) Thanks [@Vishesh-Verma-07](https://github.com/Vishesh-Verma-07)! - Fix spinner animation (#5794)
+
+- [#5948](https://github.com/heroui-inc/heroui/pull/5948) [`0825f88`](https://github.com/heroui-inc/heroui/commit/0825f88cd2bfd1b6638a23b8d21f8812576f84a7) Thanks [@wingkwong](https://github.com/wingkwong)! - cater global spinner variant (#5939)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca), [`a37912e`](https://github.com/heroui-inc/heroui/commit/a37912e17f00cb2e8f11c012b1b412e4152e791a), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99), [`53e27bb`](https://github.com/heroui-inc/heroui/commit/53e27bb6f8acd8e1c422ad9aa352da0ac8d9f207)]:
+  - @heroui/system@2.4.24
+  - @heroui/system-rsc@2.3.21
+
 ## 2.2.24
 
 ### Patch Changes

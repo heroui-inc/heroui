@@ -5,11 +5,12 @@ import type {ValuesType} from "./use-table";
 
 import {forwardRef} from "@heroui/system";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
-import {clsx, dataAttr, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, mergeProps} from "@heroui/shared-utils";
 import {useTableCell, useTableSelectionCheckbox} from "@react-aria/table";
 import {useFocusRing} from "@react-aria/focus";
 import {Checkbox} from "@heroui/checkbox";
 import {VisuallyHidden} from "@react-aria/visually-hidden";
+import {cn} from "@heroui/theme";
 
 // @internal
 export interface TableCheckboxCellProps<T = object> extends HTMLHeroUIProps<"td"> {
@@ -56,7 +57,7 @@ const TableCheckboxCell = forwardRef<"td", TableCheckboxCellProps>((props, ref) 
 
   const {checkboxProps} = useTableSelectionCheckbox({key: node?.parentKey || node.key}, state);
 
-  const tdStyles = clsx(classNames?.td, className, node.props?.className);
+  const tdStyles = cn(classNames?.td, className, node.props?.className);
 
   const isSingleSelectionMode = selectionMode === "single";
 

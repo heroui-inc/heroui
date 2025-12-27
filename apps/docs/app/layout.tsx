@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import "@/styles/sandpack.css";
 import type {Metadata, Viewport} from "next";
 
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import {Analytics} from "@vercel/analytics/next";
 
 import {Providers} from "./providers";
@@ -13,7 +13,7 @@ import {siteConfig} from "@/config/site";
 import {fonts} from "@/config/fonts";
 import {Navbar} from "@/components/navbar";
 import {Footer} from "@/components/footer";
-import {RandomBanner} from "@/components/random-banner";
+import {ProBanner} from "@/components/pro-banner";
 
 export const metadata: Metadata = {
   title: {
@@ -75,7 +75,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html suppressHydrationWarning dir="ltr" lang="en">
       <head />
       <body
-        className={clsx(
+        className={cn(
           "min-h-screen text-foreground bg-background font-sans antialiased",
           fonts.sans.variable,
           fonts.mono.variable,
@@ -83,7 +83,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       >
         <Providers themeProps={{attribute: "class", defaultTheme: "dark"}}>
           <div className="relative flex flex-col" id="app-container">
-            <RandomBanner />
+            <ProBanner />
             <Navbar mobileRoutes={manifest.mobileRoutes} routes={manifest.routes} />
             {children}
             <Analytics mode="production" />

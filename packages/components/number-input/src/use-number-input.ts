@@ -7,11 +7,11 @@ import type {Ref} from "react";
 import {useLabelPlacement, mapPropsVariants, useProviderContext} from "@heroui/system";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 import {useFocusRing} from "@react-aria/focus";
-import {numberInput} from "@heroui/theme";
+import {numberInput, cn} from "@heroui/theme";
 import {useDOMRef, filterDOMProps} from "@heroui/react-utils";
 import {useFocusWithin, useHover, usePress} from "@react-aria/interactions";
 import {useLocale} from "@react-aria/i18n";
-import {clsx, dataAttr, isEmpty, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
+import {dataAttr, isEmpty, objectToDeps, chain, mergeProps} from "@heroui/shared-utils";
 import {useNumberFieldState} from "@react-stately/numberfield";
 import {useNumberField as useAriaNumberInput} from "@react-aria/numberfield";
 import {useMemo, useCallback, useState} from "react";
@@ -154,11 +154,11 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
 
   const inputValue = isNaN(state.numberValue) ? "" : state.numberValue;
 
-  const isFilled = !isEmpty(inputValue);
+  const isFilled = !isEmpty(state.inputValue) && !isEmpty(inputValue);
 
   const isFilledWithin = isFilled || isFocusWithin;
 
-  const baseStyles = clsx(classNames?.base, className, isFilled ? "is-filled" : "");
+  const baseStyles = cn(classNames?.base, className, isFilled ? "is-filled" : "");
 
   const handleClear = useCallback(() => {
     state.setInputValue("");
@@ -212,16 +212,21 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
   const hasHelper = !!description || !!errorMessage;
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
   const shouldLabelBeInside = labelPlacement === "inside";
   const isPlaceholderShown = domRef.current
     ? (!domRef.current.value || domRef.current.value === "" || !inputValue) && hasPlaceholder
     : false;
   const isOutsideLeft = labelPlacement === "outside-left";
+  const isOutsideTop = labelPlacement === "outside-top";
 
   const hasStartContent = !!startContent;
   const isLabelOutside = shouldLabelBeOutside
     ? labelPlacement === "outside-left" ||
+      isOutsideTop ||
       hasPlaceholder ||
       (labelPlacement === "outside" && hasStartContent)
     : false;
@@ -368,7 +373,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         "data-has-start-content": dataAttr(hasStartContent),
         "data-has-end-content": dataAttr(!!endContent),
         className: slots.input({
-          class: clsx(classNames?.input, isFilled ? "is-filled" : ""),
+          class: cn(classNames?.input, isFilled ? "is-filled" : ""),
         }),
         ...mergeProps(
           focusProps,
@@ -425,7 +430,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         "data-focus-visible": dataAttr(isFocusVisible),
         "data-focus": dataAttr(isFocused),
         className: slots.inputWrapper({
-          class: clsx(classNames?.inputWrapper, isFilled ? "is-filled" : ""),
+          class: cn(classNames?.inputWrapper, isFilled ? "is-filled" : ""),
         }),
         ...mergeProps(props, hoverProps),
         onClick: (e) => {
@@ -461,7 +466,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
           }
         },
         className: slots.innerWrapper({
-          class: clsx(classNames?.innerWrapper, props?.className),
+          class: cn(classNames?.innerWrapper, props?.className),
         }),
         ...mergeProps(groupProps, props),
       };
@@ -475,7 +480,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         "data-slot": "main-wrapper",
         className: slots.mainWrapper({
-          class: clsx(classNames?.mainWrapper, props?.className),
+          class: cn(classNames?.mainWrapper, props?.className),
         }),
       };
     },
@@ -488,7 +493,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         "data-slot": "helper-wrapper",
         className: slots.helperWrapper({
-          class: clsx(classNames?.helperWrapper, props?.className),
+          class: cn(classNames?.helperWrapper, props?.className),
         }),
       };
     },
@@ -501,7 +506,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         ...descriptionProps,
         "data-slot": "description",
-        className: slots.description({class: clsx(classNames?.description, props?.className)}),
+        className: slots.description({class: cn(classNames?.description, props?.className)}),
       };
     },
     [slots, classNames?.description],
@@ -513,7 +518,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         ...errorMessageProps,
         "data-slot": "error-message",
-        className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+        className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
       };
     },
     [slots, errorMessageProps, classNames?.errorMessage],
@@ -529,7 +534,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         "aria-label": "clear input",
         "data-slot": "clear-button",
         "data-focus-visible": dataAttr(isClearButtonFocusVisible),
-        className: slots.clearButton({class: clsx(classNames?.clearButton, props?.className)}),
+        className: slots.clearButton({class: cn(classNames?.clearButton, props?.className)}),
         ...mergeProps(clearPressProps, clearFocusProps),
       };
     },
@@ -542,7 +547,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         ...props,
         "data-slot": "stepper-wrapper",
         className: slots.stepperWrapper({
-          class: clsx(classNames?.stepperWrapper, props?.className),
+          class: cn(classNames?.stepperWrapper, props?.className),
         }),
       };
     },
@@ -557,7 +562,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         disabled: originalProps.isDisabled,
         "data-slot": "increase-button",
         className: slots.stepperButton({
-          class: clsx(classNames?.stepperButton, props?.className),
+          class: cn(classNames?.stepperButton, props?.className),
         }),
         ...mergeProps(incrementButtonProps, props),
       };
@@ -572,7 +577,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
         disabled: originalProps.isDisabled,
         "data-slot": "decrease-button",
         className: slots.stepperButton({
-          class: clsx(classNames?.stepperButton, props?.className),
+          class: cn(classNames?.stepperButton, props?.className),
         }),
         ...mergeProps(decrementButtonProps, props),
       };
@@ -595,6 +600,7 @@ export function useNumberInput(originalProps: UseNumberInputProps) {
     hasStartContent,
     isLabelOutside,
     isOutsideLeft,
+    isOutsideTop,
     isLabelOutsideAsPlaceholder,
     shouldLabelBeOutside,
     shouldLabelBeInside,

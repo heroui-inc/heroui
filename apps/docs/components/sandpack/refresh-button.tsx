@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useSandpackNavigation} from "@codesandbox/sandpack-react";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {RotateRightLinearIcon} from "@/components/icons";
 
@@ -16,7 +16,7 @@ export const RefreshButton = ({clientId}: RefreshButtonProps): JSX.Element => {
 
   return (
     <button
-      className={clsx("sp-button", "sp-icon-standalone")}
+      className={cn("sp-button", "sp-icon-standalone")}
       title="Refresh Sandpack"
       type="button"
       onClick={refresh}
