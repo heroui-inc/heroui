@@ -40,19 +40,7 @@
 }
 
 /* Selected state */
-.tag--selected-default:is([data-selected="true"], [aria-selected="true"]) {
-  @apply bg-accent text-accent-foreground;
-
-  /* Selected + Hover state */
-  @media (hover: hover) {
-    &:is(:hover, [data-hovered="true"]) {
-      @apply bg-accent-hover;
-    }
-  }
-}
-
-/* Selected Soft */
-.tag--selected-soft:is([data-selected="true"], [aria-selected="true"]) {
+.tag:is([data-selected="true"], [aria-selected="true"]) {
   @apply bg-accent-soft text-accent-soft-foreground;
 
   /* Selected + Hover state */
