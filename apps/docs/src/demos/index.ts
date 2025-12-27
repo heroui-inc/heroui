@@ -972,6 +972,10 @@ export const demos: Record<string, DemoItem> = {
     component: TagGroupDemos.Sizes,
     file: "tag-group/sizes.tsx",
   },
+  "tag-group-variants": {
+    component: TagGroupDemos.Variants,
+    file: "tag-group/variants.tsx",
+  },
   "tag-group-disabled": {
     component: TagGroupDemos.Disabled,
     file: "tag-group/disabled.tsx",
@@ -983,10 +987,6 @@ export const demos: Record<string, DemoItem> = {
   "tag-group-controlled": {
     component: TagGroupDemos.Controlled,
     file: "tag-group/controlled.tsx",
-  },
-  "tag-group-on-surface": {
-    component: TagGroupDemos.OnSurface,
-    file: "tag-group/on-surface.tsx",
   },
   "tag-group-with-error-message": {
     component: TagGroupDemos.WithErrorMessage,

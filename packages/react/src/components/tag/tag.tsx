@@ -27,12 +27,9 @@ const TagContext = createContext<TagContext>({});
 interface TagRootProps extends ComponentPropsWithRef<typeof TagPrimitive> {}
 
 const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
-  const {isOnSurface, size, variant} = useContext(TagGroupContext);
+  const {size, variant} = useContext(TagGroupContext);
 
-  const slots = useMemo(
-    () => tagVariants({size, isOnSurface, variant}),
-    [size, isOnSurface, variant],
-  );
+  const slots = useMemo(() => tagVariants({size, variant}), [size, variant]);
 
   const textValue = useMemo(() => {
     if (typeof children === "string") {
