@@ -390,17 +390,17 @@ const pagination = tv({
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "sm",
-      class: "min-w-10 w-auto h-8 text-tiny px-1",
+      class: "min-w-8 w-auto h-8 text-tiny px-3",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "md",
-      class: "min-w-12 w-auto h-9 text-small px-1",
+      class: "min-w-9 w-auto h-9 text-small px-4",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "lg",
-      class: "min-w-14 w-auto h-10 text-medium px-1",
+      class: "min-w-10 w-auto h-10 text-medium px-5",
     },
     // radius
     {
