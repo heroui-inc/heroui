@@ -1,6 +1,6 @@
 /* Base link styles */
 .link {
-  @apply relative inline-flex h-fit w-fit items-center text-sm font-medium text-link no-highlight;
+  @apply relative inline-flex h-fit w-fit items-center rounded-xl text-sm font-medium text-link no-highlight;
 
   /**
    * Transitions
@@ -27,7 +27,7 @@
   }
 
   /* Focus state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
 

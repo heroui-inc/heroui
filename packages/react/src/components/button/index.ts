@@ -1,5 +1,7 @@
 import type {ComponentProps} from "react";
 
+import {BUTTON_GROUP_CHILD} from "../button-group";
+
 import {ButtonRoot} from "./button";
 
 /* -------------------------------------------------------------------------------------------------
@@ -20,6 +22,11 @@ export type Button = {
 export {ButtonRoot};
 
 export type {ButtonRootProps, ButtonRootProps as ButtonProps} from "./button";
+
+/* -------------------------------------------------------------------------------------------------
+ * Re-export BUTTON_GROUP_CHILD for type declarations
+ * -----------------------------------------------------------------------------------------------*/
+export {BUTTON_GROUP_CHILD};
 
 /* -------------------------------------------------------------------------------------------------
  * Variants
