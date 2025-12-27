@@ -6,6 +6,13 @@ import userEvent from "@testing-library/user-event";
 
 import {Listbox, ListboxItem, ListboxSection} from "../src";
 
+const getOptionFocusState = (option: HTMLElement) => {
+  return {
+    focused: option.getAttribute("data-focus") === "true",
+    hovered: option.getAttribute("data-hover") === "true",
+  };
+};
+
 describe("Listbox", () => {
   let user: UserEvent;
 
@@ -344,5 +351,85 @@ describe("Listbox", () => {
     expect(onPressUp).toHaveBeenCalled();
 
     expect(onPressChange).toHaveBeenCalled();
+  });
+
+  it("should apply focus style when startContent is non-interactive element", async () => {
+    const {getAllByRole} = render(
+      <Listbox aria-label="Actions">
+        <ListboxItem key="a" startContent={<span data-testid="start-span">S</span>}>
+          Item A
+        </ListboxItem>
+        <ListboxItem key="b">Item B</ListboxItem>
+      </Listbox>,
+    );
+
+    const options = getAllByRole("option");
+    const startSpan = document.querySelector("[data-testid='start-span']")!;
+
+    await user.click(startSpan);
+
+    const {focused} = getOptionFocusState(options[0]);
+
+    expect(focused).toBe(true);
+  });
+
+  it("should NOT apply focus style when startContent is interactive button", async () => {
+    const {getAllByRole} = render(
+      <Listbox aria-label="Actions">
+        <ListboxItem key="a" startContent={<button data-testid="start-button">BTN</button>}>
+          Item A
+        </ListboxItem>
+        <ListboxItem key="b">Item B</ListboxItem>
+      </Listbox>,
+    );
+
+    const options = getAllByRole("option");
+    const button = document.querySelector("[data-testid='start-button']")!;
+
+    await user.click(button);
+
+    const firstOptionState = getOptionFocusState(options[0]);
+
+    expect(firstOptionState.focused).toBe(false);
+  });
+
+  it("should apply focus style when endContent is non-interactive element", async () => {
+    const {getAllByRole} = render(
+      <Listbox aria-label="Actions">
+        <ListboxItem key="a" endContent={<span data-testid="end-span">E</span>}>
+          Item A
+        </ListboxItem>
+        <ListboxItem key="b">Item B</ListboxItem>
+      </Listbox>,
+    );
+
+    const options = getAllByRole("option");
+    const endSpan = document.querySelector("[data-testid='end-span']")!;
+
+    await user.click(endSpan);
+
+    const {focused} = getOptionFocusState(options[0]);
+
+    expect(focused).toBe(true);
+  });
+
+  it("should NOT apply focus style when endContent is interactive button", async () => {
+    const {getAllByRole} = render(
+      <Listbox aria-label="Actions">
+        <ListboxItem key="a" endContent={<button data-testid="end-button">END</button>}>
+          Item A
+        </ListboxItem>
+        <ListboxItem key="b">Item B</ListboxItem>
+      </Listbox>,
+    );
+
+    const options = getAllByRole("option");
+    const button = document.querySelector("[data-testid='end-button']")!;
+
+    await user.click(button);
+
+    const firstOptionState = getOptionFocusState(options[0]);
+
+    expect(firstOptionState.focused).toBe(false);
   });
 });

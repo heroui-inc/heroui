@@ -69,7 +69,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
 
   const {pressProps, isPressed} = usePress({
     ref: domRef,
-    isDisabled: isDisabled,
+    isDisabled,
     onClick,
     onPress,
     onPressUp,
@@ -121,8 +121,20 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     (shouldHighlightOnFocus && isFocused) ||
     (isMobile ? isHovered || isPressed : isHovered || (isFocused && !isFocusVisible));
 
+  const handleFocusCapture = (e: React.FocusEvent) => {
+    // If focusing on end content, don't focus the item itself
+    const target = e.target as HTMLElement;
+    const isBlockBubbled =
+      target.closest("[data-slot='startContent']") || target.closest("[data-slot='endContent']");
+
+    if (isBlockBubbled) {
+      e.stopPropagation();
+    }
+  };
+
   const getItemProps: PropGetter = (props = {}) => ({
     ref: domRef,
+    onFocusCapture: handleFocusCapture,
     ...mergeProps(
       itemProps,
       isReadOnly ? {} : mergeProps(focusProps, pressProps),
