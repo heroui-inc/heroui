@@ -4,6 +4,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
+import {Popover} from "../popover";
 
 import {Tooltip} from "./index";
 
@@ -89,4 +90,33 @@ export const Default = {
 export const WithTrigger = {
   args: defaultArgs,
   render: TemplateWithTrigger,
+};
+
+const TooltipWithPopoverTemplate = (props: Tooltip["ContentProps"]) => (
+  <div className="flex items-center gap-3">
+    <Tooltip delay={0}>
+      <Popover>
+        <Button variant="secondary">
+          <Icon icon="gravity-ui:gear" />
+          Settings
+        </Button>
+        <Popover.Content className="w-64" placement="bottom">
+          <Popover.Dialog>
+            <Popover.Arrow />
+            <Popover.Heading>Settings</Popover.Heading>
+            <p className="mt-2 text-sm">Configure your preferences</p>
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover>
+      <Tooltip.Content {...props}>
+        <Tooltip.Arrow />
+        <p>Open settings</p>
+      </Tooltip.Content>
+    </Tooltip>
+  </div>
+);
+
+export const WithPopover = {
+  args: defaultArgs,
+  render: TooltipWithPopoverTemplate,
 };
