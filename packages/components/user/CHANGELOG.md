@@ -1,5 +1,12 @@
 # @heroui/user
 
+## 2.2.25
+
+### Patch Changes
+
+- Updated dependencies [[`5ec842b`](https://github.com/heroui-inc/heroui/commit/5ec842b1cf6fff845b7ae7cd8fb876762e62e279)]:
+  - @heroui/avatar@2.2.25
+
 ## 2.2.24
 
 ### Patch Changes
