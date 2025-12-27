@@ -17,13 +17,13 @@ async function generateExports() {
   // Start with base exports
   const exports = {
     ".": {
-      import: "./dist/index.js",
       types: "./dist/index.d.ts",
+      import: "./dist/index.js",
     },
     "./package.json": "./package.json",
     "./styles": {
-      default: "./dist/styles.css",
       style: "./dist/styles.css",
+      default: "./dist/styles.css",
     },
   };
 
@@ -46,8 +46,8 @@ async function generateExports() {
 
         // Add export for this component
         exports[`./${item}`] = {
-          import: `./dist/components/${item}/index.js`,
           types: `./dist/components/${item}/index.d.ts`,
+          import: `./dist/components/${item}/index.js`,
         };
       }
     }
