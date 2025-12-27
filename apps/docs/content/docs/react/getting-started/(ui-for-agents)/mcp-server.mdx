@@ -89,6 +89,24 @@ After adding the configuration, restart Windsurf to activate the MCP server.
 
 See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp) for more details.
 
+**Zed:** Add the HeroUI server to your `settings.json` configuration file. Open settings via Command Palette (`zed: open settings`) or use `Cmd-,` (Mac) / `Ctrl-,` (Linux):
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+After adding the configuration, restart Zed and open the Agent Panel settings view. Check that the indicator dot next to the heroui server is green with "Server is active" tooltip.
+
+See the [Zed MCP documentation](https://zed.dev/docs/ai/mcp) for more details.
+
 **VS Code:** To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
 
 ```json title=".vscode/mcp.json"
