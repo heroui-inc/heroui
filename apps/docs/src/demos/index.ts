@@ -111,6 +111,10 @@ export const demos: Record<string, DemoItem> = {
     component: AlertDialogDemos.BackdropVariants,
     file: "alert-dialog/backdrop-variants.tsx",
   },
+  "alert-dialog-sizes": {
+    component: AlertDialogDemos.Sizes,
+    file: "alert-dialog/sizes.tsx",
+  },
   "alert-dialog-controlled": {
     component: AlertDialogDemos.Controlled,
     file: "alert-dialog/controlled.tsx",
