@@ -45,7 +45,6 @@
   @apply fixed inset-0 z-50;
   @apply flex flex-row items-center justify-center;
   @apply h-(--visual-viewport-height) w-full;
-  @apply will-change-[opacity];
 
   /* Entering animation */
   &[data-entering="true"] {
@@ -63,6 +62,7 @@
    */
   &[data-exiting="true"],
   &[data-entering="true"] {
+    @apply will-change-[opacity];
     @apply motion-reduce:animate-none;
   }
 }
@@ -96,7 +96,6 @@
   @apply h-(--visual-viewport-height) w-full min-w-0 flex-1;
   @apply p-4;
   @apply sm:w-fit sm:p-10;
-  @apply will-change-[opacity,transform];
   @apply pointer-events-none;
 
   /* Entering animation */
@@ -132,6 +131,7 @@
    */
   &[data-exiting="true"],
   &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
     @apply motion-reduce:animate-none;
   }
 }
