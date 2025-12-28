@@ -6,7 +6,6 @@ export const tagVariants = tv({
   defaultVariants: {
     size: "md",
     variant: "default",
-    selectedVariant: "default",
   },
   slots: {
     base: "tag",
