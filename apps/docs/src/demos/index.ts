@@ -897,6 +897,14 @@ export const demos: Record<string, DemoItem> = {
     component: SeparatorDemos.WithContent,
     file: "separator/with-content.tsx",
   },
+  "separator-surface-variants": {
+    component: SeparatorDemos.SurfaceVariants,
+    file: "separator/surface-variants.tsx",
+  },
+  "separator-manual-variant-override": {
+    component: SeparatorDemos.ManualVariantOverride,
+    file: "separator/manual-variant-override.tsx",
+  },
   // Spinner demos
   "spinner-basic": {
     component: SpinnerDemos.Basic,

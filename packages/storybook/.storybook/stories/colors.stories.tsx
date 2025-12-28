@@ -90,7 +90,7 @@ export const AllColors = () => {
   const componentColors: ColorItemProps[] = [
     {name: "Muted", variable: "--color-muted"},
     {name: "Border", variable: "--color-border"},
-    {name: "Divider", variable: "--color-divider"},
+    {name: "Separator", variable: "--color-separator"},
     {name: "Focus", variable: "--color-focus"},
     {name: "Link", variable: "--color-link"},
     {name: "Segment", variable: "--color-segment"},
@@ -161,6 +161,13 @@ export const AllColors = () => {
     {name: "On Surface Focus", variable: "--color-on-surface-focus"},
   ];
 
+  const calculatedSeparatorColors: ColorItemProps[] = [
+    {name: "Separator Default", variable: "--color-separator-default"},
+    {name: "Separator Secondary", variable: "--color-separator-secondary"},
+    {name: "Separator Tertiary", variable: "--color-separator-tertiary"},
+    {name: "Separator Quaternary", variable: "--color-separator-quaternary"},
+  ];
+
   return (
     <div className="mx-auto max-w-4xl p-6">
       <div className="mb-8">
@@ -185,6 +192,7 @@ export const AllColors = () => {
         <ColorSection colors={calculatedSoftColors} title="Soft Variants" />
         <ColorSection colors={calculatedSurfaceColors} title="Surface Levels" />
         <ColorSection colors={calculatedOnSurfaceColors} title="On Surface Colors" />
+        <ColorSection colors={calculatedSeparatorColors} title="Separator Colors" />
         <ColorSection colors={calculatedFieldColors} title="Field States" />
       </div>
     </div>

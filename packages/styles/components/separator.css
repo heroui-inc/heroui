@@ -45,7 +45,26 @@
   @apply text-center;
 }
 
-/* On Surface variant */
-.separator--on-surface {
-  @apply bg-separator-on-surface;
+/* Surface Variant Levels
+ * These variants ensure proper visibility when separators are used on different surface backgrounds.
+ * Each variant matches a corresponding surface level (default, secondary, tertiary, quaternary).
+ * The separator color is calculated to provide sufficient contrast on each progressively darker/lighter surface level.
+ * When used inside a Surface component, the separator automatically detects and applies the appropriate variant.
+ */
+
+/* Surface variant levels */
+.separator--default {
+  @apply bg-separator-default;
+}
+
+.separator--secondary {
+  @apply bg-separator-secondary;
+}
+
+.separator--tertiary {
+  @apply bg-separator-tertiary;
+}
+
+.separator--quaternary {
+  @apply bg-separator-quaternary;
 }

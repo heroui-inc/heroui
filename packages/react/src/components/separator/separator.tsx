@@ -18,12 +18,14 @@ interface SeparatorRootProps
 
 const SeparatorRoot = ({
   className,
-  isOnSurface,
   orientation = "horizontal",
+  variant,
   ...props
 }: SeparatorRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  // Auto-detect variant from SurfaceContext if not explicitly provided
+  // If variant is not provided and no SurfaceContext, tv() will use default "default"
+  const resolvedVariant = variant ?? surfaceContext.variant;
 
   return (
     <SeparatorPrimitive
@@ -32,7 +34,7 @@ const SeparatorRoot = ({
       orientation={orientation}
       className={separatorVariants({
         orientation,
-        isOnSurface: isOnSurfaceValue,
+        variant: resolvedVariant,
         className,
       })}
       {...props}
