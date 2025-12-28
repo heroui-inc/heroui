@@ -91,7 +91,9 @@
       0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
       0 0 1px 0 rgba(0, 0, 0, 0.06);
     /* Overlay shadow */
-    --overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
+    --overlay-shadow:
+      0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 -6px 12px 0 rgba(0, 0, 0, 0.03),
+      0 14px 28px 0 rgba(0, 0, 0, 0.08);
     --field-shadow:
       0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
       0 0 1px 0 rgba(0, 0, 0, 0.06);
@@ -113,9 +115,7 @@
     --surface-foreground: var(--foreground);
 
     /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) - lighter for contrast */
-    --overlay: oklch(
-      0.22 0.0059 285.89
-    ); /* A bit lighter than surface for visibility in dark mode */
+    --overlay: oklch(0.2103 0.0059 285.89);
     --overlay-foreground: var(--foreground);
 
     --muted: oklch(70.5% 0.015 286.067);
@@ -149,7 +149,7 @@
 
     /* Shadows */
     --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
-    --overlay-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+    --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
     --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
   }
 }
