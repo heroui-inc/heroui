@@ -746,6 +746,10 @@ export const demos: Record<string, DemoItem> = {
     component: InputGroupDemos.OnSurface,
     file: "input-group/on-surface.tsx",
   },
+  "input-group-with-textarea": {
+    component: InputGroupDemos.WithTextArea,
+    file: "input-group/with-textarea.tsx",
+  },
   // Kbd demos
   "kbd-basic": {
     component: KbdDemos.Basic,

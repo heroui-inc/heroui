@@ -4,7 +4,11 @@ import type {InputGroupVariants} from "./input-group.styles";
 import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext} from "react";
-import {Group as GroupPrimitive, Input as InputPrimitive} from "react-aria-components";
+import {
+  Group as GroupPrimitive,
+  Input as InputPrimitive,
+  TextArea as TextAreaPrimitive,
+} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
@@ -95,6 +99,27 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * InputGroup TextArea
+ * -----------------------------------------------------------------------------------------------*/
+interface InputGroupTextAreaProps extends ComponentPropsWithRef<typeof TextAreaPrimitive> {
+  isOnSurface?: boolean;
+}
+
+const InputGroupTextArea = ({className, isOnSurface, ...props}: InputGroupTextAreaProps) => {
+  const {slots} = useContext(InputGroupContext);
+  const surfaceContext = useContext(SurfaceContext);
+  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+
+  return (
+    <TextAreaPrimitive
+      className={composeTwRenderProps(className, slots?.input({isOnSurface: isOnSurfaceValue}))}
+      data-slot="input-group-textarea"
+      {...props}
+    />
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * InputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
 interface InputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
@@ -116,11 +141,12 @@ const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {InputGroupRoot, InputGroupInput, InputGroupPrefix, InputGroupSuffix};
+export {InputGroupRoot, InputGroupInput, InputGroupTextArea, InputGroupPrefix, InputGroupSuffix};
 
 export type {
   InputGroupRootProps,
   InputGroupInputProps,
+  InputGroupTextAreaProps,
   InputGroupPrefixProps,
   InputGroupSuffixProps,
 };
