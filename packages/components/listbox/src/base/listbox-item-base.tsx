@@ -92,7 +92,7 @@ interface Props<T extends object = {}> extends Omit<ItemProps<"li", T>, "childre
 
 export type ListboxItemBaseProps<T extends object = {}> = Omit<Props<T>, "onClick"> &
   Omit<ListboxItemVariantProps, "hasDescriptionTextChild" | "hasTitleTextChild"> &
-  Omit<AriaOptionProps, "key"> &
+  Omit<AriaOptionProps, "key" | "isDisabled" | "isSelected"> &
   FocusableProps &
   PressEvents & {
     /**
