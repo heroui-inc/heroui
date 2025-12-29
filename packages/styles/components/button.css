@@ -122,6 +122,7 @@
 
 .button--outline {
   @apply border border-border;
+  --button-bg-hover: color-mix(in srgb, var(--color-default) 60%, transparent);
 }
 
 .button--danger {

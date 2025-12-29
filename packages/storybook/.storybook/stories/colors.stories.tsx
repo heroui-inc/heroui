@@ -92,6 +92,7 @@ export const AllColors = () => {
     {name: "Muted", variable: "--color-muted"},
     {name: "Border", variable: "--color-border"},
     {name: "Separator", variable: "--color-separator"},
+    {name: "Border", variable: "--color-border"},
     {name: "Focus", variable: "--color-focus"},
     {name: "Link", variable: "--color-link"},
     {name: "Segment", variable: "--color-segment"},
