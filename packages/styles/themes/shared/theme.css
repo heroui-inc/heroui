@@ -144,19 +144,19 @@
   --color-surface-secondary: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground) 6%);
   --color-surface-tertiary: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
 
-  /* In Surface Colors - Default (on default surface) */
-  --color-in-surface-default: color-mix(
+  /* In Surface Colors (on default surface) */
+  --color-in-surface: color-mix(
     in oklab,
     var(--color-surface) 93%,
     var(--color-surface-foreground) 7%
   );
-  --color-in-surface-default-foreground: var(--color-surface-foreground);
-  --color-in-surface-default-hover: color-mix(
+  --color-in-surface-foreground: var(--color-surface-foreground);
+  --color-in-surface-hover: color-mix(
     in oklab,
     var(--color-surface) 91%,
     var(--color-surface-foreground) 9%
   );
-  --color-in-surface-default-focus: var(--color-in-surface-default);
+  --color-in-surface-focus: var(--color-in-surface);
 
   /* In Surface Colors - Secondary (on secondary surface) */
   --color-in-surface-secondary: color-mix(

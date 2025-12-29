@@ -111,9 +111,9 @@
 
 /* In-surface variant property definitions */
 .tag--in-surface-default {
-  --tag-bg: var(--color-in-surface-default);
-  --tag-bg-hover: var(--color-in-surface-default-hover);
-  --tag-bg-focus: var(--color-in-surface-default-focus);
+  --tag-bg: var(--color-in-surface);
+  --tag-bg-hover: var(--color-in-surface-hover);
+  --tag-bg-focus: var(--color-in-surface-focus);
 }
 
 .tag--in-surface-secondary {

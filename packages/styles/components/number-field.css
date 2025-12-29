@@ -179,9 +179,9 @@
 
 /* In-surface variant property definitions */
 .number-field__group--in-surface-default {
-  --number-field-group-bg: var(--color-in-surface-default);
-  --number-field-group-bg-hover: var(--color-in-surface-default-hover);
-  --number-field-group-bg-focus: var(--color-in-surface-default-focus);
+  --number-field-group-bg: var(--color-in-surface);
+  --number-field-group-bg-hover: var(--color-in-surface-hover);
+  --number-field-group-bg-focus: var(--color-in-surface-focus);
 }
 
 .number-field__group--in-surface-secondary {

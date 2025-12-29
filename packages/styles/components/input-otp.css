@@ -111,9 +111,9 @@
 
 /* In-surface variant property definitions */
 .input-otp--in-surface-default {
-  --input-otp-slot-bg: var(--color-in-surface-default);
-  --input-otp-slot-bg-hover: var(--color-in-surface-default-hover);
-  --input-otp-slot-bg-focus: var(--color-in-surface-default-focus);
+  --input-otp-slot-bg: var(--color-in-surface);
+  --input-otp-slot-bg-hover: var(--color-in-surface-hover);
+  --input-otp-slot-bg-focus: var(--color-in-surface-focus);
 }
 
 .input-otp--in-surface-secondary {

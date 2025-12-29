@@ -85,9 +85,9 @@
 
 /* In-surface variant property definitions */
 .input--in-surface-default {
-  --input-bg: var(--color-in-surface-default);
-  --input-bg-hover: var(--color-in-surface-default-hover);
-  --input-bg-focus: var(--color-in-surface-default-focus);
+  --input-bg: var(--color-in-surface);
+  --input-bg-hover: var(--color-in-surface-hover);
+  --input-bg-focus: var(--color-in-surface-focus);
 }
 
 .input--in-surface-secondary {

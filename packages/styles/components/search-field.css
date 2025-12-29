@@ -140,9 +140,9 @@
 
 /* In-surface variant property definitions */
 .search-field__group--in-surface-default {
-  --search-field-group-bg: var(--color-in-surface-default);
-  --search-field-group-bg-hover: var(--color-in-surface-default-hover);
-  --search-field-group-bg-focus: var(--color-in-surface-default-focus);
+  --search-field-group-bg: var(--color-in-surface);
+  --search-field-group-bg-hover: var(--color-in-surface-hover);
+  --search-field-group-bg-focus: var(--color-in-surface-focus);
 }
 
 .search-field__group--in-surface-secondary {

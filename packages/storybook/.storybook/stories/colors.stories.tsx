@@ -67,6 +67,7 @@ export const AllColors = () => {
     {name: "Foreground", variable: "--color-foreground"},
     {name: "Surface", variable: "--color-surface"},
     {name: "Surface Foreground", variable: "--color-surface-foreground"},
+    {name: "Surface Hover", variable: "--color-surface-hover"},
     {name: "Overlay", variable: "--color-overlay"},
     {name: "Overlay Foreground", variable: "--color-overlay-foreground"},
   ];
@@ -102,6 +103,8 @@ export const AllColors = () => {
     {name: "Field Foreground", variable: "--color-field-foreground"},
     {name: "Field Placeholder", variable: "--color-field-placeholder"},
     {name: "Field Border", variable: "--color-field-border"},
+    {name: "Field On Background", variable: "--color-field-on-background"},
+    {name: "Field On Background Hover", variable: "--color-field-on-background-hover"},
   ];
 
   const primitiveColors: ColorItemProps[] = [
@@ -152,15 +155,28 @@ export const AllColors = () => {
     {name: "Field Border Focus", variable: "--color-field-border-focus"},
   ];
 
-  const calculatedOnSurfaceColors: ColorItemProps[] = [
-    {name: "On Surface", variable: "--color-on-surface"},
-    {name: "On Surface Foreground", variable: "--color-on-surface-foreground"},
-    {name: "On Surface Hover", variable: "--color-on-surface-hover"},
-    {name: "On Surface Focus", variable: "--color-on-surface-focus"},
+  const calculatedInSurfaceColors: ColorItemProps[] = [
+    {name: "In Surface", variable: "--color-in-surface"},
+    {name: "In Surface Foreground", variable: "--color-in-surface-foreground"},
+    {name: "In Surface Hover", variable: "--color-in-surface-hover"},
+    {name: "In Surface Focus", variable: "--color-in-surface-focus"},
+  ];
+
+  const calculatedInSurfaceSecondaryColors: ColorItemProps[] = [
+    {name: "In Surface Secondary", variable: "--color-in-surface-secondary"},
+    {name: "In Surface Secondary Foreground", variable: "--color-in-surface-secondary-foreground"},
+    {name: "In Surface Secondary Hover", variable: "--color-in-surface-secondary-hover"},
+    {name: "In Surface Secondary Focus", variable: "--color-in-surface-secondary-focus"},
+  ];
+
+  const calculatedInSurfaceTertiaryColors: ColorItemProps[] = [
+    {name: "In Surface Tertiary", variable: "--color-in-surface-tertiary"},
+    {name: "In Surface Tertiary Foreground", variable: "--color-in-surface-tertiary-foreground"},
+    {name: "In Surface Tertiary Hover", variable: "--color-in-surface-tertiary-hover"},
+    {name: "In Surface Tertiary Focus", variable: "--color-in-surface-tertiary-focus"},
   ];
 
   const calculatedSeparatorColors: ColorItemProps[] = [
-    {name: "Separator Default", variable: "--color-separator"},
     {name: "Separator Secondary", variable: "--color-separator-secondary"},
     {name: "Separator Tertiary", variable: "--color-separator-tertiary"},
   ];
@@ -188,7 +204,9 @@ export const AllColors = () => {
         <ColorSection colors={calculatedHoverColors} title="Hover States" />
         <ColorSection colors={calculatedSoftColors} title="Soft Variants" />
         <ColorSection colors={calculatedSurfaceColors} title="Surface Levels" />
-        <ColorSection colors={calculatedOnSurfaceColors} title="On Surface Colors" />
+        <ColorSection colors={calculatedInSurfaceColors} title="In Surface Colors" />
+        <ColorSection colors={calculatedInSurfaceSecondaryColors} title="In Surface Colors - Secondary" />
+        <ColorSection colors={calculatedInSurfaceTertiaryColors} title="In Surface Colors - Tertiary" />
         <ColorSection colors={calculatedSeparatorColors} title="Separator Colors" />
         <ColorSection colors={calculatedFieldColors} title="Field States" />
       </div>

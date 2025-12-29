@@ -167,9 +167,9 @@
 
 /* In-surface variant property definitions */
 .input-group--in-surface-default {
-  --input-group-bg: var(--color-in-surface-default);
-  --input-group-bg-hover: var(--color-in-surface-default-hover);
-  --input-group-bg-focus: var(--color-in-surface-default-focus);
+  --input-group-bg: var(--color-in-surface);
+  --input-group-bg-hover: var(--color-in-surface-hover);
+  --input-group-bg-focus: var(--color-in-surface-focus);
 }
 
 .input-group--in-surface-secondary {

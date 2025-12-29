@@ -254,7 +254,7 @@
 
 /* In-surface variant property definitions */
 .checkbox--in-surface-default {
-  --checkbox-control-bg: var(--color-in-surface-default);
+  --checkbox-control-bg: var(--color-in-surface);
 }
 
 .checkbox--in-surface-secondary {

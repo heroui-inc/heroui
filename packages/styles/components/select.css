@@ -108,9 +108,9 @@
 
 /* In-surface variant property definitions */
 .select__trigger--in-surface-default {
-  --select-trigger-bg: var(--color-in-surface-default);
-  --select-trigger-bg-hover: var(--color-in-surface-default-hover);
-  --select-trigger-bg-focus: var(--color-in-surface-default-focus);
+  --select-trigger-bg: var(--color-in-surface);
+  --select-trigger-bg-hover: var(--color-in-surface-hover);
+  --select-trigger-bg-focus: var(--color-in-surface-focus);
 }
 
 .select__trigger--in-surface-secondary {
