@@ -27,7 +27,7 @@ const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
   return (
     <div className="flex items-center gap-4 rounded-3xl bg-surface p-4 shadow-surface">
       <div
-        className="border-separator size-12 shrink-0 rounded-xl border"
+        className="border-border size-12 shrink-0 rounded-xl border"
         style={{backgroundColor: `var(${variable})`}}
       />
       <div className="flex flex-1 flex-col gap-1">
@@ -144,6 +144,7 @@ export const AllColors = () => {
   ];
 
   const calculatedSurfaceColors: ColorItemProps[] = [
+    {name: "Surface", variable: "--color-surface"},
     {name: "Surface Secondary", variable: "--color-surface-secondary"},
     {name: "Surface Tertiary", variable: "--color-surface-tertiary"},
   ];
@@ -177,6 +178,7 @@ export const AllColors = () => {
   ];
 
   const calculatedSeparatorColors: ColorItemProps[] = [
+    {name: "Separator", variable: "--color-separator"},
     {name: "Separator Secondary", variable: "--color-separator-secondary"},
     {name: "Separator Tertiary", variable: "--color-separator-tertiary"},
   ];
