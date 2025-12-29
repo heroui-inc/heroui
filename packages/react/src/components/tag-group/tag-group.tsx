@@ -15,7 +15,7 @@ import {tagGroupVariants} from "./tag-group.styles";
 type TagGroupContext = {
   slots?: ReturnType<typeof tagGroupVariants>;
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface" | "on-surface" | "on-form-field";
+  variant?: "default" | "surface" | "on-form-field";
 };
 
 const TagGroupContext = createContext<TagGroupContext>({});
@@ -25,7 +25,7 @@ const TagGroupContext = createContext<TagGroupContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface" | "on-surface" | "on-form-field";
+  variant?: "default" | "surface" | "on-form-field";
 };
 
 const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGroupRootProps) => {

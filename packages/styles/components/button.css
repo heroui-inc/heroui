@@ -17,6 +17,15 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
+  /* Default tokens (fallback behavior) */
+  --button-bg: transparent;
+  --button-bg-hover: var(--button-bg);
+  --button-bg-pressed: var(--button-bg-hover);
+  --button-fg: currentColor;
+
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+
   /* Focus state */
   &:focus-visible,
   &[data-focus-visible="true"] {
@@ -34,10 +43,19 @@
     @apply status-pending;
   }
 
-  /* Default active/pressed state - scale transform */
+  /* Active / pressed */
   &:active,
   &[data-pressed="true"] {
+    background-color: var(--button-bg-pressed);
     transform: scale(0.97);
+  }
+
+  /* Hover */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      background-color: var(--button-bg-hover);
+    }
   }
 
   /* SVG icon styling - exclude spinner svgs */
@@ -73,101 +91,46 @@
   }
 }
 
-/* Color variants */
+/* Color variants - only set custom property values */
 .button--primary {
-  @apply bg-accent text-accent-foreground;
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-accent-hover;
-  }
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-accent-hover;
-    }
-  }
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-bg-pressed: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
 }
 
 .button--secondary {
-  @apply bg-default text-accent;
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-default-hover;
-  }
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-default-hover;
-    }
-  }
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
+  --button-fg: var(--color-accent);
 }
 
 .button--tertiary {
-  @apply bg-default;
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-default-hover;
-  }
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-default-hover;
-    }
-  }
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
 }
 
 .button--ghost {
-  @apply bg-transparent text-default-foreground;
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-default-hover;
-  }
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-default-hover;
-    }
-  }
+  --button-bg: transparent;
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
+  --button-fg: var(--color-default-foreground);
 }
 
 .button--danger {
-  @apply bg-danger text-danger-foreground;
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-danger-hover;
-  }
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-danger-hover;
-    }
-  }
+  --button-bg: var(--color-danger);
+  --button-bg-hover: var(--color-danger-hover);
+  --button-bg-pressed: var(--color-danger-hover);
+  --button-fg: var(--color-danger-foreground);
 }
 
 .button--danger-soft {
-  @apply bg-danger-soft text-danger-soft-foreground;
-
-  &:active,
-  &[data-pressed="true"] {
-    @apply bg-danger-soft-hover;
-  }
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-danger-soft-hover;
-    }
-  }
+  --button-bg: var(--color-danger-soft);
+  --button-bg-hover: var(--color-danger-soft-hover);
+  --button-bg-pressed: var(--color-danger-soft-hover);
+  --button-fg: var(--color-danger-soft-foreground);
 }
 
 /* Icon-only modifier */

@@ -63,41 +63,93 @@ export const Default: Story = {
   ),
 };
 
-export const OnSurface: Story = {
+export const SurfaceVariants: Story = {
   render: () => (
-    <Surface className="w-full rounded-3xl p-6">
-      <RadioGroup defaultValue="premium" name="plan">
-        <Label>Plan selection</Label>
-        <Description>Choose the plan that suits you best</Description>
-        <Radio value="basic">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Basic Plan</Label>
-            <Description>Includes 100 messages per month</Description>
-          </Radio.Content>
-        </Radio>
-        <Radio value="premium">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Premium Plan</Label>
-            <Description>Includes 200 messages per month</Description>
-          </Radio.Content>
-        </Radio>
-        <Radio value="business">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Business Plan</Label>
-            <Description>Unlimited messages</Description>
-          </Radio.Content>
-        </Radio>
-      </RadioGroup>
-    </Surface>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <RadioGroup defaultValue="premium" name="plan-default">
+            <Label>Plan selection</Label>
+            <Radio value="basic">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Basic Plan</Label>
+              </Radio.Content>
+            </Radio>
+            <Radio value="premium">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Premium Plan</Label>
+              </Radio.Content>
+            </Radio>
+          </RadioGroup>
+          <p className="text-sm text-muted">
+            RadioGroup automatically detects default surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <RadioGroup defaultValue="premium" name="plan-secondary">
+            <Label>Plan selection</Label>
+            <Radio value="basic">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Basic Plan</Label>
+              </Radio.Content>
+            </Radio>
+            <Radio value="premium">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Premium Plan</Label>
+              </Radio.Content>
+            </Radio>
+          </RadioGroup>
+          <p className="text-sm text-muted">
+            RadioGroup automatically detects secondary surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <RadioGroup defaultValue="premium" name="plan-tertiary">
+            <Label>Plan selection</Label>
+            <Radio value="basic">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Basic Plan</Label>
+              </Radio.Content>
+            </Radio>
+            <Radio value="premium">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Premium Plan</Label>
+              </Radio.Content>
+            </Radio>
+          </RadioGroup>
+          <p className="text-sm text-muted">
+            RadioGroup automatically detects tertiary surface level.
+          </p>
+        </Surface>
+      </div>
+    </div>
   ),
 };
 

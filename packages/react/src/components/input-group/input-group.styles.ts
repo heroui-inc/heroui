@@ -10,10 +10,18 @@ export const inputGroupVariants = tv({
     suffix: "input-group__suffix",
   },
   variants: {
-    isOnSurface: {
-      true: {
-        base: "input-group--on-surface",
-        input: "input-group__input--on-surface",
+    inSurface: {
+      default: {
+        base: "input-group--in-surface-default",
+        input: "input-group__input--in-surface-default",
+      },
+      secondary: {
+        base: "input-group--in-surface-secondary",
+        input: "input-group__input--in-surface-secondary",
+      },
+      tertiary: {
+        base: "input-group--in-surface-tertiary",
+        input: "input-group__input--in-surface-tertiary",
       },
     },
     fullWidth: {

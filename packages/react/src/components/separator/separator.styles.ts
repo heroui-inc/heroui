@@ -9,16 +9,15 @@ const separatorVariants = tv({
       horizontal: "separator--horizontal",
       vertical: "separator--vertical",
     },
-    variant: {
-      default: "separator--default",
-      secondary: "separator--secondary",
-      tertiary: "separator--tertiary",
-      quaternary: "separator--quaternary",
+    inSurface: {
+      default: "separator--in-surface-default",
+      secondary: "separator--in-surface-secondary",
+      tertiary: "separator--in-surface-tertiary",
     },
   },
   defaultVariants: {
     orientation: "horizontal",
-    variant: "default",
+    inSurface: undefined,
   },
 });
 

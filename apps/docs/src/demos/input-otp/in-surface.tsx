@@ -1,6 +1,6 @@
 import {InputOTP, Label, Link, Surface} from "@heroui/react";
 
-export function OnSurface() {
+export function InSurface() {
   return (
     <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
       <div className="flex flex-col gap-1">

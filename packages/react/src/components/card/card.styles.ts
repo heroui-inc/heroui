@@ -25,9 +25,6 @@ const cardVariants = tv({
       tertiary: {
         base: "card--tertiary",
       },
-      quaternary: {
-        base: "card--quaternary",
-      },
     },
   },
   defaultVariants: {

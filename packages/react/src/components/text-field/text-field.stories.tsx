@@ -224,33 +224,50 @@ export const WithValidation: Story = {
   },
 };
 
-export const OnSurface: Story = {
+export const SurfaceVariants: Story = {
   render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <TextField name="name">
-        <Label>Your name</Label>
-        <Input className="w-full" placeholder="John" />
-        <Description>We'll never share this with anyone else</Description>
-      </TextField>
-      <TextField name="email" type="email">
-        <Label>Email</Label>
-        <Input className="w-full" placeholder="john@example.com" />
-      </TextField>
-      <TextField isInvalid name="address" type="text">
-        <Label>Email</Label>
-        <Input className="w-full" placeholder="123 Main St, Anytown, USA" />
-        <FieldError>The address is invalid</FieldError>
-      </TextField>
-      <TextField isInvalid name="bio">
-        <Label>Bio</Label>
-        <TextArea className="w-full" placeholder="Tell us about yourself..." rows={4} />
-        <FieldError>Bio must be at least 20 characters</FieldError>
-      </TextField>
-      <TextField isDisabled name="disabled">
-        <Label>Disabled field</Label>
-        <Input className="w-full" defaultValue="This field is disabled" />
-        <Description>This field cannot be edited</Description>
-      </TextField>
-    </Surface>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <TextField name="name-default">
+            <Label>Your name</Label>
+            <Input className="w-full" placeholder="John" />
+          </TextField>
+          <p className="text-sm text-muted">
+            TextField automatically detects default surface level through its Input/TextArea
+            components.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <TextField name="name-secondary">
+            <Label>Your name</Label>
+            <Input className="w-full" placeholder="John" />
+          </TextField>
+          <p className="text-sm text-muted">
+            TextField automatically detects secondary surface level through its Input/TextArea
+            components.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <TextField name="name-tertiary">
+            <Label>Your name</Label>
+            <Input className="w-full" placeholder="John" />
+          </TextField>
+          <p className="text-sm text-muted">
+            TextField automatically detects tertiary surface level through its Input/TextArea
+            components.
+          </p>
+        </Surface>
+      </div>
+    </div>
   ),
 };

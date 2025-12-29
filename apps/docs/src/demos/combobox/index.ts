@@ -10,7 +10,7 @@ export {Default} from "./default";
 export {DefaultSelectedKey} from "./default-selected-key";
 export {Disabled} from "./disabled";
 export {FullWidth} from "./full-width";
-export {OnSurface} from "./on-surface";
+export {InSurface} from "./in-surface";
 export {Required} from "./required";
 export {WithDescription} from "./with-description";
 export {WithDisabledOptions} from "./with-disabled-options";

@@ -100,79 +100,75 @@ export const Default: Story = {
   },
 };
 
-export const OnSurface: Story = {
-  render: () => {
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-      const data: Record<string, string> = {};
-
-      // Convert FormData to plain object
-      formData.forEach((value, key) => {
-        data[key] = value.toString();
-      });
-
-      alert("Form submitted successfully!");
-    };
-
-    return (
-      <div className="flex items-center justify-center rounded-3xl bg-surface p-6">
-        <Surface className="w-full min-w-[380px]">
-          <Form onSubmit={onSubmit}>
-            <Fieldset className="w-full">
-              <Fieldset.Legend>Profile Settings</Fieldset.Legend>
-              <Description>Update your profile information.</Description>
-              <Fieldset.Group>
-                <TextField
-                  isRequired
-                  name="name"
-                  validate={(value) => {
-                    if (value.length < 3) {
-                      return "Name must be at least 3 characters";
-                    }
-
-                    return null;
-                  }}
-                >
-                  <Label>Name</Label>
-                  <Input placeholder="John Doe" />
-                  <FieldError />
-                </TextField>
-                <TextField isRequired name="email" type="email">
-                  <Label>Email</Label>
-                  <Input placeholder="john@example.com" />
-                  <FieldError />
-                </TextField>
-                <TextField
-                  isRequired
-                  name="bio"
-                  validate={(value) => {
-                    if (value.length < 10) {
-                      return "Bio must be at least 10 characters";
-                    }
-
-                    return null;
-                  }}
-                >
-                  <Label>Bio</Label>
-                  <TextArea placeholder="Tell us about yourself..." />
-                  <Description>Minimum 10 characters</Description>
-                  <FieldError />
-                </TextField>
-              </Fieldset.Group>
-              <Fieldset.Actions>
-                <Button type="submit">
-                  <Icon icon="gravity-ui:floppy-disk" />
-                  Save changes
-                </Button>
-                <Button type="reset" variant="tertiary">
-                  Cancel
-                </Button>
-              </Fieldset.Actions>
-            </Fieldset>
-          </Form>
+export const SurfaceVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <Fieldset className="w-full">
+            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
+            <Fieldset.Group>
+              <TextField name="name-default">
+                <Label>Name</Label>
+                <Input placeholder="John Doe" />
+              </TextField>
+              <TextField name="email-default" type="email">
+                <Label>Email</Label>
+                <Input placeholder="john@example.com" />
+              </TextField>
+            </Fieldset.Group>
+          </Fieldset>
+          <p className="text-sm text-muted">
+            Fieldset automatically detects default surface level through its child form components.
+          </p>
         </Surface>
       </div>
-    );
-  },
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <Fieldset className="w-full">
+            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
+            <Fieldset.Group>
+              <TextField name="name-secondary">
+                <Label>Name</Label>
+                <Input placeholder="John Doe" />
+              </TextField>
+              <TextField name="email-secondary" type="email">
+                <Label>Email</Label>
+                <Input placeholder="john@example.com" />
+              </TextField>
+            </Fieldset.Group>
+          </Fieldset>
+          <p className="text-sm text-muted">
+            Fieldset automatically detects secondary surface level through its child form
+            components.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <Fieldset className="w-full">
+            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
+            <Fieldset.Group>
+              <TextField name="name-tertiary">
+                <Label>Name</Label>
+                <Input placeholder="John Doe" />
+              </TextField>
+              <TextField name="email-tertiary" type="email">
+                <Label>Email</Label>
+                <Input placeholder="john@example.com" />
+              </TextField>
+            </Fieldset.Group>
+          </Fieldset>
+          <p className="text-sm text-muted">
+            Fieldset automatically detects tertiary surface level through its child form components.
+          </p>
+        </Surface>
+      </div>
+    </div>
+  ),
 };

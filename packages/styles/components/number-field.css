@@ -142,33 +142,58 @@
   @apply rounded-l-field rounded-r-none border-r border-field-placeholder/15;
 }
 
-/* On Surface variant */
-.number-field__group--on-surface {
-  @apply bg-on-surface shadow-none;
+/**
+ * In-Surface Variants
+ * Used when number field group is placed on a Surface component background.
+ * Uses CSS custom properties to reduce repetition.
+ */
+.number-field__group--in-surface-default,
+.number-field__group--in-surface-secondary,
+.number-field__group--in-surface-tertiary {
+  @apply shadow-none;
+  background-color: var(--number-field-group-bg);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      @apply bg-on-surface-hover;
+      background-color: var(--number-field-group-bg-hover);
     }
   }
 
-  /* Focus within state */
   &:focus-within,
   &[data-focus-within="true"] {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--number-field-group-bg-focus);
   }
 
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-on-surface-focus);
     border-color: var(--color-field-border-invalid);
+    background-color: var(--number-field-group-bg-focus);
   }
 
   [data-slot="number-field-input"] {
     @apply bg-transparent;
   }
+}
+
+/* In-surface variant property definitions */
+.number-field__group--in-surface-default {
+  --number-field-group-bg: var(--color-in-surface-default);
+  --number-field-group-bg-hover: var(--color-in-surface-default-hover);
+  --number-field-group-bg-focus: var(--color-in-surface-default-focus);
+}
+
+.number-field__group--in-surface-secondary {
+  --number-field-group-bg: var(--color-in-surface-secondary);
+  --number-field-group-bg-hover: var(--color-in-surface-secondary-hover);
+  --number-field-group-bg-focus: var(--color-in-surface-secondary-focus);
+}
+
+.number-field__group--in-surface-tertiary {
+  --number-field-group-bg: var(--color-in-surface-tertiary);
+  --number-field-group-bg-hover: var(--color-in-surface-tertiary-hover);
+  --number-field-group-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

@@ -359,9 +359,9 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxGroupDemos.Basic,
     file: "checkbox-group/basic.tsx",
   },
-  "checkbox-group-on-surface": {
-    component: CheckboxGroupDemos.OnSurface,
-    file: "checkbox-group/on-surface.tsx",
+  "checkbox-group-in-surface": {
+    component: CheckboxGroupDemos.InSurface,
+    file: "checkbox-group/in-surface.tsx",
   },
   "checkbox-group-with-custom-indicator": {
     component: CheckboxGroupDemos.WithCustomIndicator,
@@ -478,9 +478,9 @@ export const demos: Record<string, DemoItem> = {
     component: ComboBoxDemos.Disabled,
     file: "combobox/disabled.tsx",
   },
-  "combobox-on-surface": {
-    component: ComboBoxDemos.OnSurface,
-    file: "combobox/on-surface.tsx",
+  "combobox-in-surface": {
+    component: ComboBoxDemos.InSurface,
+    file: "combobox/in-surface.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {
@@ -580,9 +580,9 @@ export const demos: Record<string, DemoItem> = {
     component: FieldsetDemos.Basic,
     file: "fieldset/basic.tsx",
   },
-  "fieldset-on-surface": {
-    component: FieldsetDemos.OnSurface,
-    file: "fieldset/on-surface.tsx",
+  "fieldset-in-surface": {
+    component: FieldsetDemos.InSurface,
+    file: "fieldset/in-surface.tsx",
   },
   // Input demos
   "input-basic": {
@@ -601,9 +601,9 @@ export const demos: Record<string, DemoItem> = {
     component: InputDemos.Controlled,
     file: "input/controlled.tsx",
   },
-  "input-on-surface": {
-    component: InputDemos.OnSurface,
-    file: "input/on-surface.tsx",
+  "input-in-surface": {
+    component: InputDemos.InSurface,
+    file: "input/in-surface.tsx",
   },
   // DateField demos
   "date-field-basic": {
@@ -626,9 +626,9 @@ export const demos: Record<string, DemoItem> = {
     component: DateFieldDemos.Invalid,
     file: "date-field/invalid.tsx",
   },
-  "date-field-on-surface": {
-    component: DateFieldDemos.OnSurface,
-    file: "date-field/on-surface.tsx",
+  "date-field-in-surface": {
+    component: DateFieldDemos.InSurface,
+    file: "date-field/in-surface.tsx",
   },
   "date-field-required": {
     component: DateFieldDemos.Required,
@@ -691,9 +691,9 @@ export const demos: Record<string, DemoItem> = {
     component: InputOTPDemos.FormExample,
     file: "input-otp/form-example.tsx",
   },
-  "input-otp-on-surface": {
-    component: InputOTPDemos.OnSurface,
-    file: "input-otp/on-surface.tsx",
+  "input-otp-in-surface": {
+    component: InputOTPDemos.InSurface,
+    file: "input-otp/in-surface.tsx",
   },
   // InputGroup demos
   "input-group-default": {
@@ -764,9 +764,9 @@ export const demos: Record<string, DemoItem> = {
     component: InputGroupDemos.Disabled,
     file: "input-group/disabled.tsx",
   },
-  "input-group-on-surface": {
-    component: InputGroupDemos.OnSurface,
-    file: "input-group/on-surface.tsx",
+  "input-group-in-surface": {
+    component: InputGroupDemos.InSurface,
+    file: "input-group/in-surface.tsx",
   },
   "input-group-with-textarea": {
     component: InputGroupDemos.WithTextArea,
@@ -851,9 +851,9 @@ export const demos: Record<string, DemoItem> = {
     component: RadioGroupDemos.Validation,
     file: "radio-group/validation.tsx",
   },
-  "radio-group-on-surface": {
-    component: RadioGroupDemos.OnSurface,
-    file: "radio-group/on-surface.tsx",
+  "radio-group-in-surface": {
+    component: RadioGroupDemos.InSurface,
+    file: "radio-group/in-surface.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {
@@ -1059,9 +1059,9 @@ export const demos: Record<string, DemoItem> = {
     component: TextAreaDemos.Controlled,
     file: "textarea/controlled.tsx",
   },
-  "textarea-on-surface": {
-    component: TextAreaDemos.OnSurface,
-    file: "textarea/on-surface.tsx",
+  "textarea-in-surface": {
+    component: TextAreaDemos.InSurface,
+    file: "textarea/in-surface.tsx",
   },
   // TextField demos
   "text-field-basic": {
@@ -1104,9 +1104,9 @@ export const demos: Record<string, DemoItem> = {
     component: TextFieldDemos.Validation,
     file: "text-field/validation.tsx",
   },
-  "text-field-on-surface": {
-    component: TextFieldDemos.OnSurface,
-    file: "text-field/on-surface.tsx",
+  "text-field-in-surface": {
+    component: TextFieldDemos.InSurface,
+    file: "text-field/in-surface.tsx",
   },
   // TimeField demos
   "time-field-basic": {
@@ -1129,9 +1129,9 @@ export const demos: Record<string, DemoItem> = {
     component: TimeFieldDemos.Invalid,
     file: "time-field/invalid.tsx",
   },
-  "time-field-on-surface": {
-    component: TimeFieldDemos.OnSurface,
-    file: "time-field/on-surface.tsx",
+  "time-field-in-surface": {
+    component: TimeFieldDemos.InSurface,
+    file: "time-field/in-surface.tsx",
   },
   "time-field-required": {
     component: TimeFieldDemos.Required,
@@ -1323,9 +1323,9 @@ export const demos: Record<string, DemoItem> = {
     component: NumberFieldDemos.CustomIcons,
     file: "number-field/custom-icons.tsx",
   },
-  "number-field-on-surface": {
-    component: NumberFieldDemos.OnSurface,
-    file: "number-field/on-surface.tsx",
+  "number-field-in-surface": {
+    component: NumberFieldDemos.InSurface,
+    file: "number-field/in-surface.tsx",
   },
   "number-field-with-chevrons": {
     component: NumberFieldDemos.WithChevrons,
@@ -1368,9 +1368,9 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.FullWidth,
     file: "select/full-width.tsx",
   },
-  "select-on-surface": {
-    component: SelectDemos.OnSurface,
-    file: "select/on-surface.tsx",
+  "select-in-surface": {
+    component: SelectDemos.InSurface,
+    file: "select/in-surface.tsx",
   },
   "select-custom-value": {
     component: SelectDemos.CustomValue,
@@ -1437,9 +1437,9 @@ export const demos: Record<string, DemoItem> = {
     component: SearchFieldDemos.CustomIcons,
     file: "search-field/custom-icons.tsx",
   },
-  "search-field-on-surface": {
-    component: SearchFieldDemos.OnSurface,
-    file: "search-field/on-surface.tsx",
+  "search-field-in-surface": {
+    component: SearchFieldDemos.InSurface,
+    file: "search-field/in-surface.tsx",
   },
   "search-field-form-example": {
     component: SearchFieldDemos.FormExample,
@@ -1461,10 +1461,6 @@ export const demos: Record<string, DemoItem> = {
   "scroll-shadow-hide-scroll-bar": {
     component: ScrollShadowDemos.HideScrollBar,
     file: "scroll-shadow/hide-scroll-bar.tsx",
-  },
-  "scroll-shadow-on-surface": {
-    component: ScrollShadowDemos.OnSurface,
-    file: "scroll-shadow/on-surface.tsx",
   },
   "scroll-shadow-custom-size": {
     component: ScrollShadowDemos.CustomSize,

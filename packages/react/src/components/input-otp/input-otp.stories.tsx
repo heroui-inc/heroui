@@ -64,70 +64,78 @@ export const Default: Story = {
   ),
 };
 
-export const OnSurface: Story = {
+export const SurfaceVariants: Story = {
   render: (args) => (
-    <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
-      <div className="flex flex-col gap-1">
-        <Label>Verify account</Label>
-        <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <Label>Verify account</Label>
+          <InputOTP {...args} maxLength={6}>
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+            </InputOTP.Group>
+            <InputOTP.Separator />
+            <InputOTP.Group>
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
+          <p className="text-sm text-muted">
+            InputOTP automatically detects default surface level.
+          </p>
+        </Surface>
       </div>
-      <InputOTP {...args} maxLength={6}>
-        <InputOTP.Group>
-          <InputOTP.Slot index={0} />
-          <InputOTP.Slot index={1} />
-          <InputOTP.Slot index={2} />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot index={3} />
-          <InputOTP.Slot index={4} />
-          <InputOTP.Slot index={5} />
-        </InputOTP.Group>
-      </InputOTP>
-      <div className="flex items-center gap-[5px] px-1 pt-1">
-        <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
-        <Link className="text-foreground" underline="always">
-          Resend
-        </Link>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <Label>Verify account</Label>
+          <InputOTP {...args} maxLength={6}>
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+            </InputOTP.Group>
+            <InputOTP.Separator />
+            <InputOTP.Group>
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
+          <p className="text-sm text-muted">
+            InputOTP automatically detects secondary surface level.
+          </p>
+        </Surface>
       </div>
-      <div className="mt-4 flex flex-col gap-1">
-        <Label>Verify account (Invalid)</Label>
-        <p className="text-sm text-muted">Enter the code sent to b****@gmail.com</p>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <Label>Verify account</Label>
+          <InputOTP {...args} maxLength={6}>
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+            </InputOTP.Group>
+            <InputOTP.Separator />
+            <InputOTP.Group>
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
+          <p className="text-sm text-muted">
+            InputOTP automatically detects tertiary surface level.
+          </p>
+        </Surface>
       </div>
-      <InputOTP {...args} isInvalid maxLength={6} value="12345">
-        <InputOTP.Group>
-          <InputOTP.Slot index={0} />
-          <InputOTP.Slot index={1} />
-          <InputOTP.Slot index={2} />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot index={3} />
-          <InputOTP.Slot index={4} />
-          <InputOTP.Slot index={5} />
-        </InputOTP.Group>
-      </InputOTP>
-      <span data-visible className="field-error">
-        Invalid code. Please try again.
-      </span>
-      <div className="mt-4 flex flex-col gap-1">
-        <Label isDisabled>Verify account (Disabled)</Label>
-        <p className="text-sm text-muted">Code verification is currently disabled</p>
-      </div>
-      <InputOTP {...args} isDisabled maxLength={6} value="123456">
-        <InputOTP.Group>
-          <InputOTP.Slot index={0} />
-          <InputOTP.Slot index={1} />
-          <InputOTP.Slot index={2} />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot index={3} />
-          <InputOTP.Slot index={4} />
-          <InputOTP.Slot index={5} />
-        </InputOTP.Group>
-      </InputOTP>
-    </Surface>
+    </div>
   ),
 };
 

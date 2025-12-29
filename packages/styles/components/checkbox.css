@@ -218,41 +218,72 @@
 }
 
 /* ==========================================================================
-   On Surface variant
+   In-Surface Variants
+   Used when checkbox is placed on a Surface component background.
+   Uses CSS custom properties to reduce repetition.
    ========================================================================== */
 
-.checkbox--on-surface .checkbox__control {
+/* Shared styles for all in-surface variants */
+.checkbox--in-surface-default .checkbox__control,
+.checkbox--in-surface-secondary .checkbox__control,
+.checkbox--in-surface-tertiary .checkbox__control {
   @apply shadow-none;
+
+  /* Hover state */
+  .checkbox:hover &,
+  .checkbox[data-hovered="true"] & {
+    @apply border-field-border-hover;
+  }
 }
 
-.checkbox--on-surface:not([aria-checked="true"]):not([data-selected="true"]):not(
+/* Unselected state background - uses CSS custom properties */
+.checkbox--in-surface-default:not([aria-checked="true"]):not([data-selected="true"]):not(
+    [data-indeterminate="true"]
+  )
+  .checkbox__control,
+.checkbox--in-surface-secondary:not([aria-checked="true"]):not([data-selected="true"]):not(
+    [data-indeterminate="true"]
+  )
+  .checkbox__control,
+.checkbox--in-surface-tertiary:not([aria-checked="true"]):not([data-selected="true"]):not(
     [data-indeterminate="true"]
   )
   .checkbox__control {
-  @apply bg-on-surface;
+  background-color: var(--checkbox-control-bg);
+}
+
+/* In-surface variant property definitions */
+.checkbox--in-surface-default {
+  --checkbox-control-bg: var(--color-in-surface-default);
+}
+
+.checkbox--in-surface-secondary {
+  --checkbox-control-bg: var(--color-in-surface-secondary);
+}
+
+.checkbox--in-surface-tertiary {
+  --checkbox-control-bg: var(--color-in-surface-tertiary);
 }
 
 /* Selected state on surface */
-.checkbox--on-surface[aria-checked="true"] .checkbox__control,
-.checkbox--on-surface[data-selected="true"] .checkbox__control {
+.checkbox--in-surface-default[aria-checked="true"] .checkbox__control,
+.checkbox--in-surface-default[data-selected="true"] .checkbox__control,
+.checkbox--in-surface-secondary[aria-checked="true"] .checkbox__control,
+.checkbox--in-surface-secondary[data-selected="true"] .checkbox__control,
+.checkbox--in-surface-tertiary[aria-checked="true"] .checkbox__control,
+.checkbox--in-surface-tertiary[data-selected="true"] .checkbox__control {
   &::before {
     @apply bg-accent;
   }
 }
 
 /* Indeterminate state on surface */
-.checkbox--on-surface[data-indeterminate="true"] .checkbox__control {
+.checkbox--in-surface-default[data-indeterminate="true"] .checkbox__control,
+.checkbox--in-surface-secondary[data-indeterminate="true"] .checkbox__control,
+.checkbox--in-surface-tertiary[data-indeterminate="true"] .checkbox__control {
   @apply bg-accent;
 
   &::before {
     @apply bg-accent;
-  }
-}
-
-.checkbox--on-surface .checkbox__control {
-  /* Hover state */
-  .checkbox:hover &,
-  .checkbox[data-hovered="true"] & {
-    @apply border-field-border-hover;
   }
 }

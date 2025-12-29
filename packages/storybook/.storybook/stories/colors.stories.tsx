@@ -27,7 +27,7 @@ const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
   return (
     <div className="flex items-center gap-4 rounded-3xl bg-surface p-4 shadow-surface">
       <div
-        className="border-divider size-12 shrink-0 rounded-xl border"
+        className="border-separator size-12 shrink-0 rounded-xl border"
         style={{backgroundColor: `var(${variable})`}}
       />
       <div className="flex flex-1 flex-col gap-1">
@@ -114,7 +114,6 @@ export const AllColors = () => {
   const calculatedBackgroundColors: ColorItemProps[] = [
     {name: "Background Secondary", variable: "--color-background-secondary"},
     {name: "Background Tertiary", variable: "--color-background-tertiary"},
-    {name: "Background Quaternary", variable: "--color-background-quaternary"},
     {name: "Background Inverse", variable: "--color-background-inverse"},
   ];
 
@@ -144,7 +143,6 @@ export const AllColors = () => {
   const calculatedSurfaceColors: ColorItemProps[] = [
     {name: "Surface Secondary", variable: "--color-surface-secondary"},
     {name: "Surface Tertiary", variable: "--color-surface-tertiary"},
-    {name: "Surface Quaternary", variable: "--color-surface-quaternary"},
   ];
 
   const calculatedFieldColors: ColorItemProps[] = [
@@ -162,10 +160,9 @@ export const AllColors = () => {
   ];
 
   const calculatedSeparatorColors: ColorItemProps[] = [
-    {name: "Separator Default", variable: "--color-separator-default"},
+    {name: "Separator Default", variable: "--color-separator"},
     {name: "Separator Secondary", variable: "--color-separator-secondary"},
     {name: "Separator Tertiary", variable: "--color-separator-tertiary"},
-    {name: "Separator Quaternary", variable: "--color-separator-quaternary"},
   ];
 
   return (

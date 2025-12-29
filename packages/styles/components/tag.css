@@ -87,21 +87,45 @@
   }
 }
 
-/* On Surface */
-.tag--on-surface {
-  @apply bg-on-surface shadow-none;
+/**
+ * In-Surface Variants
+ * Used when tag is placed on a Surface component background.
+ * Uses CSS custom properties to reduce repetition.
+ */
+.tag--in-surface-default,
+.tag--in-surface-secondary,
+.tag--in-surface-tertiary {
+  @apply shadow-none;
+  background-color: var(--tag-bg);
 
-  /* Hover state (when not selected or disabled) */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
-      @apply bg-on-surface-hover;
+      background-color: var(--tag-bg-hover);
     }
   }
 
-  /* Focus visible state */
   &:is(:focus-visible, [data-focus-visible]) {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--tag-bg-focus);
   }
+}
+
+/* In-surface variant property definitions */
+.tag--in-surface-default {
+  --tag-bg: var(--color-in-surface-default);
+  --tag-bg-hover: var(--color-in-surface-default-hover);
+  --tag-bg-focus: var(--color-in-surface-default-focus);
+}
+
+.tag--in-surface-secondary {
+  --tag-bg: var(--color-in-surface-secondary);
+  --tag-bg-hover: var(--color-in-surface-secondary-hover);
+  --tag-bg-focus: var(--color-in-surface-secondary-focus);
+}
+
+.tag--in-surface-tertiary {
+  --tag-bg: var(--color-in-surface-tertiary);
+  --tag-bg-hover: var(--color-in-surface-tertiary-hover);
+  --tag-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* On Form Field */
@@ -126,5 +150,11 @@
   }
 }
 
-.tag__remove-button--on-surface {
+.tag__remove-button--in-surface-default {
+}
+
+.tag__remove-button--in-surface-secondary {
+}
+
+.tag__remove-button--in-surface-tertiary {
 }

@@ -31,7 +31,7 @@ export function TagGroupVariants() {
 
       <div className="flex w-sm items-center justify-center rounded-3xl bg-surface p-4">
         <Surface className="w-full">
-          <TagGroup selectionMode="single" variant="on-surface">
+          <TagGroup selectionMode="single" variant="surface">
             <Label>On Surface</Label>
             <TagGroup.List>
               <Tag>News</Tag>

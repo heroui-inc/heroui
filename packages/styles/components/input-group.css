@@ -129,34 +129,59 @@
   @apply motion-reduce:transition-none;
 }
 
-/* On Surface variant */
-.input-group--on-surface {
-  @apply bg-on-surface shadow-none;
+/**
+ * In-Surface Variants
+ * Used when input group is placed on a Surface component background.
+ * Uses CSS custom properties to reduce repetition.
+ */
+.input-group--in-surface-default,
+.input-group--in-surface-secondary,
+.input-group--in-surface-tertiary {
+  @apply shadow-none;
+  background-color: var(--input-group-bg);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      @apply bg-on-surface-hover;
+      background-color: var(--input-group-bg-hover);
     }
   }
 
-  /* Focus within state */
   &:focus-within,
   &[data-focus-within="true"] {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--input-group-bg-focus);
   }
 
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-on-surface-focus);
     border-color: var(--color-field-border-invalid);
+    background-color: var(--input-group-bg-focus);
   }
 
   [data-slot="input-group-input"],
   [data-slot="input-group-textarea"] {
     @apply bg-transparent;
   }
+}
+
+/* In-surface variant property definitions */
+.input-group--in-surface-default {
+  --input-group-bg: var(--color-in-surface-default);
+  --input-group-bg-hover: var(--color-in-surface-default-hover);
+  --input-group-bg-focus: var(--color-in-surface-default-focus);
+}
+
+.input-group--in-surface-secondary {
+  --input-group-bg: var(--color-in-surface-secondary);
+  --input-group-bg-hover: var(--color-in-surface-secondary-hover);
+  --input-group-bg-focus: var(--color-in-surface-secondary-focus);
+}
+
+.input-group--in-surface-tertiary {
+  --input-group-bg: var(--color-in-surface-tertiary);
+  --input-group-bg-hover: var(--color-in-surface-tertiary-hover);
+  --input-group-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

@@ -17,7 +17,3 @@
 .surface--tertiary {
   @apply bg-surface-tertiary;
 }
-
-.surface--quaternary {
-  @apply bg-surface-quaternary;
-}

@@ -415,11 +415,6 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
       var(--color-background) 92%,
       var(--color-foreground) 8%
     );
-    --color-background-quaternary: color-mix(
-      in oklab,
-      var(--color-background) 86%,
-      var(--color-foreground) 14%
-    );
     --color-background-inverse: var(--color-foreground);
 
     /* Hover states */
@@ -483,11 +478,6 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
     /* Surface Levels */
     --color-surface-secondary: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground) 6%);
     --color-surface-tertiary: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
-    --color-surface-quaternary: color-mix(
-      in oklab,
-      var(--surface) 86%,
-      var(--default-foreground) 14%
-    );
 
     /* On Surface Colors */
     --color-on-surface: color-mix(

@@ -22,10 +22,6 @@ import {ScrollShadow} from "@heroui/react";
 
 <ComponentPreview name="scroll-shadow-hide-scroll-bar" />
 
-## On Surface
-
-<ComponentPreview name="scroll-shadow-on-surface" />
-
 ## Custom Shadow Size
 
 <ComponentPreview name="scroll-shadow-custom-size" />
@@ -102,7 +98,6 @@ The ScrollShadow component uses these CSS classes ([View source styles](https://
 #### State Modifiers
 
 - `.scroll-shadow--hide-scrollbar` - Hides native scrollbar
-- `.scroll-shadow--on-surface` - Optimized for use on Surface components
 
 ### Data Attributes
 
@@ -126,7 +121,6 @@ The component uses data attributes to control shadow visibility:
 | `hideScrollBar`      | `boolean`                                                                     | `false`      | Whether to hide the native scrollbar                    |
 | `isEnabled`          | `boolean`                                                                     | `true`       | Whether scroll shadow detection is enabled              |
 | `visibility`         | `"auto"` \| `"both"` \| `"top"` \| `"bottom"` \| `"left"` \| `"right"` \| `"none"` | `"auto"`     | Controlled shadow visibility state                      |
-| `isOnSurface`        | `boolean`                                                                     | `false`      | Whether the component is used on a Surface              |
 | `onVisibilityChange` | `(visibility: ScrollShadowVisibility) => void`                                | -            | Callback invoked when shadow visibility changes         |
 | `className`          | `string`                                                                      | -            | Additional CSS classes to apply to the root element     |
 | `children`           | `ReactNode`                                                                   | -            | The scrollable content                                  |

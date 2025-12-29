@@ -126,7 +126,7 @@
     --default-foreground: var(--snow);
 
     /* Form Fields */
-    --field-background: var(--default);
+    --field-background: oklch(0.2103 0.0059 285.89);
     --field-on-background: var(--surface);
     --field-foreground: var(--foreground);
 

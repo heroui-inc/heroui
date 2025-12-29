@@ -48,7 +48,3 @@
 .card--tertiary {
   @apply bg-surface-tertiary;
 }
-
-.card--quaternary {
-  @apply bg-surface-quaternary;
-}
