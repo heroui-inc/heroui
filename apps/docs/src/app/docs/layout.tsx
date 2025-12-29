@@ -8,6 +8,7 @@ import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
 import {GitHubLinkSmall} from "@/components/github-link";
 import {HeroUILogo} from "@/components/heroui-logo";
+import {UserMenu} from "@/components/user-menu";
 import {VersionSelector} from "@/components/version-selector";
 import {source} from "@/lib/source";
 
@@ -63,6 +64,7 @@ export default function Layout({children}: {children: ReactNode}) {
         children: (
           <div className="mr-2 flex items-center gap-3 md:mr-0" id="nd-nav-actions">
             <GitHubLinkSmall />
+            <UserMenu />
           </div>
         ),
         mode: "top",
