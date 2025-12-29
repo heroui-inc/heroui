@@ -185,7 +185,7 @@
     @apply rounded-field bg-field shadow-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:bg-field/80 dark:backdrop-blur-md;
 
     kbd {
-      @apply border-border bg-default dark:bg-surface;
+      @apply bg-default dark:bg-surface;
     }
   }
 }

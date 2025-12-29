@@ -3,7 +3,7 @@
 /* Block */
 .card {
   @apply relative flex flex-col gap-3 overflow-hidden p-4;
-  @apply rounded-3xl border-border shadow-surface;
+  @apply rounded-3xl shadow-surface;
 }
 
 /* Element - header */

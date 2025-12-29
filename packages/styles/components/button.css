@@ -112,11 +112,16 @@
   --button-bg-pressed: var(--color-default-hover);
 }
 
-.button--ghost {
+.button--ghost,
+.button--outline {
   --button-bg: transparent;
   --button-bg-hover: var(--color-default-hover);
   --button-bg-pressed: var(--color-default-hover);
   --button-fg: var(--color-default-foreground);
+}
+
+.button--outline {
+  @apply border border-border;
 }
 
 .button--danger {

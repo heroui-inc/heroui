@@ -18,7 +18,7 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "tertiary", "ghost", "danger"],
+      options: ["primary", "secondary", "tertiary", "outline", "ghost", "danger"],
     },
   },
   component: Button,
@@ -42,6 +42,9 @@ const Template = ({isDisabled, size}: Button["RootProps"]) => (
     </Button>
     <Button isDisabled={isDisabled} size={size} variant="tertiary">
       Tertiary
+    </Button>
+    <Button isDisabled={isDisabled} size={size} variant="outline">
+      Outline
     </Button>
     <Button isDisabled={isDisabled} size={size} variant="ghost">
       Ghost
