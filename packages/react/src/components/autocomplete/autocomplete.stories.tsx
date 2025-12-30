@@ -1,7 +1,7 @@
 import type {Key} from "@heroui/react";
 import type {Meta, StoryObj} from "@storybook/react";
 
-import {useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 
 import {useFilter} from "../../hooks/use-filter";
 import {EmptyState} from "../empty-state";

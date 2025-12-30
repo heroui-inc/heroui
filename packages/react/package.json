@@ -60,7 +60,6 @@
     "@react-aria/ssr": "3.9.10",
     "@react-aria/utils": "3.32.0",
     "@react-types/shared": "3.32.1",
-    "clsx": "2.1.1",
     "input-otp": "1.4.2",
     "react-aria-components": "1.14.0",
     "tailwind-merge": "3.4.0",
