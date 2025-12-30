@@ -2,8 +2,8 @@ import type {Key} from "@heroui/react";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {useRef, useState} from "react";
-import {useFilter} from "react-aria-components";
 
+import {useFilter} from "../../hooks/use-filter";
 import {Label} from "../label";
 import {ListBox} from "../listbox";
 import {SearchField} from "../search-field";
