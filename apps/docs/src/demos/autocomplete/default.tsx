@@ -2,7 +2,16 @@
 
 import type {Key} from "@heroui/react";
 
-import {Autocomplete, Label, ListBox, SearchField, Tag, TagGroup, useFilter} from "@heroui/react";
+import {
+  Autocomplete,
+  EmptyState,
+  Label,
+  ListBox,
+  SearchField,
+  Tag,
+  TagGroup,
+  useFilter,
+} from "@heroui/react";
 import {useRef, useState} from "react";
 
 export default function AutocompleteDefault() {
@@ -72,7 +81,7 @@ export default function AutocompleteDefault() {
               <SearchField.Input className="w-70" placeholder="Search..." />
             </SearchField.Group>
           </SearchField>
-          <ListBox>
+          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
             {items.map((item) => (
               <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                 {item.name}
