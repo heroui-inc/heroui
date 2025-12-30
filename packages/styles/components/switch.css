@@ -64,7 +64,6 @@
    */
   transition:
     background-color 250ms var(--ease-smooth),
-    transform 250ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
@@ -84,7 +83,6 @@
   .switch:active &,
   .switch[data-pressed="true"] & {
     background-color: var(--switch-control-bg-pressed);
-    transform: scale(0.95);
     @apply motion-reduce:transform-none;
   }
 
@@ -138,7 +136,7 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    margin 350ms var(--ease-out-fluid),
+    margin 300ms var(--ease-out-fluid),
     background-color 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
@@ -155,7 +153,6 @@
   /* Pressed state - scale down with width animation */
   .switch:active &,
   .switch[data-pressed="true"] & {
-    @apply scale-[0.98];
   }
 }
 

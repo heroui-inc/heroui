@@ -388,6 +388,9 @@ importers:
 
   packages/storybook:
     dependencies:
+      '@gravity-ui/icons':
+        specifier: 2.16.0
+        version: 2.16.0(react@19.2.3)
       '@heroui/react':
         specifier: workspace:*
         version: link:../react
@@ -403,6 +406,9 @@ importers:
       react-scan:
         specifier: 0.4.3
         version: 0.4.3(@types/react@19.2.7)(next@16.1.1(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.54.0)
+      tailwind-variants:
+        specifier: ^3.2.2
+        version: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
