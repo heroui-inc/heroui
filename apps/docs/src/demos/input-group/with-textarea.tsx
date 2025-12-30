@@ -28,7 +28,7 @@ export function WithTextArea() {
     >
       <InputGroup fullWidth className="flex flex-col gap-2 rounded-3xl py-2">
         <InputGroup.Prefix className="px-3 py-0">
-          <Button aria-label="Add context" size="sm" variant="tertiary">
+          <Button aria-label="Add context" size="sm" variant="outline">
             <At />
             Add Context
           </Button>
@@ -50,7 +50,7 @@ export function WithTextArea() {
             </Tooltip.Content>
           </Tooltip>
           <Tooltip delay={0}>
-            <Button aria-label="Connect Apps" size="sm" variant="tertiary">
+            <Button isIconOnly aria-label="Connect Apps" size="sm" variant="tertiary">
               <PlugConnection />
             </Button>
             <Tooltip.Content>
@@ -59,7 +59,7 @@ export function WithTextArea() {
           </Tooltip>
           <div className="ml-auto flex items-center gap-1.5">
             <Tooltip delay={0}>
-              <Button aria-label="Voice input" size="sm" variant="ghost">
+              <Button isIconOnly aria-label="Voice input" size="sm" variant="ghost">
                 <Microphone />
               </Button>
               <Tooltip.Content>
