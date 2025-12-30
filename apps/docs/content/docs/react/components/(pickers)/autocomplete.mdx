@@ -1,0 +1,240 @@
+---
+title: Autocomplete
+description: An autocomplete combines a select with filtering, allowing users to search and select from a list of options
+icon: new
+links:
+  rac: Select
+  source: autocomplete/autocomplete.tsx
+  styles: autocomplete.css
+  storybook: Components/Pickers/Autocomplete
+---
+
+## Import
+
+```tsx
+import {Autocomplete} from "@heroui/react";
+```
+
+### Usage
+
+<ComponentPreview name="autocomplete-default" />
+
+### Anatomy
+
+Import the Autocomplete component and access all parts using dot notation.
+
+```tsx
+import {Autocomplete, Label, Description, SearchField, ListBox} from "@heroui/react";
+
+export default () => (
+  <Autocomplete>
+    <Label />
+    <Autocomplete.Group>
+      <Autocomplete.Value />
+      <Autocomplete.Indicator />
+    </Autocomplete.Group>
+    <Description />
+    <Autocomplete.Popover>
+      <Autocomplete.Filter>
+        <SearchField>
+          <SearchField.Group>
+            <SearchField.SearchIcon />
+            <SearchField.Input />
+          </SearchField.Group>
+        </SearchField>
+        <ListBox>
+          <ListBox.Item>
+            <Label />
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Autocomplete.Filter>
+    </Autocomplete.Popover>
+  </Autocomplete>
+);
+```
+
+### Single Select
+
+<ComponentPreview name="autocomplete-single-select" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Autocomplete, SearchField, ListBox} from "@heroui/react";
+
+function CustomAutocomplete() {
+  return (
+    <Autocomplete className="w-full">
+      <Label>State</Label>
+      <Autocomplete.Group className="rounded-lg border bg-surface p-2">
+        <Autocomplete.Value />
+        <Autocomplete.Indicator />
+      </Autocomplete.Group>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter>
+          <SearchField>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search..." />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
+              Item 1
+            </ListBox.Item>
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
+    </Autocomplete>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Autocomplete component classes, use the `@layer components` directive.
+
+<br />
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .autocomplete {
+    @apply flex flex-col gap-1;
+  }
+
+  .autocomplete__group {
+    @apply rounded-lg border border-border bg-surface p-2;
+  }
+
+  .autocomplete__value {
+    @apply text-current;
+  }
+
+  .autocomplete__indicator {
+    @apply text-muted;
+  }
+
+  .autocomplete__popover {
+    @apply rounded-lg border border-border bg-surface p-2;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Autocomplete component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/autocomplete.css)):
+
+#### Base Classes
+
+- `.autocomplete` - Base autocomplete container
+- `.autocomplete__group` - The trigger group containing value and indicator
+- `.autocomplete__value` - The displayed value or placeholder
+- `.autocomplete__indicator` - The dropdown indicator icon
+- `.autocomplete__popover` - The popover container
+- `.autocomplete__filter` - The filter wrapper
+
+#### State Classes
+
+- `.autocomplete__group[data-focus-visible="true"]` - Focused group state
+- `.autocomplete__group[data-disabled="true"]` - Disabled group state
+- `.autocomplete__group[data-invalid="true"]` - Invalid state
+- `.autocomplete__indicator[data-open="true"]` - Open indicator state
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Hover**: `:hover` or `[data-hovered="true"]` on group
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on group
+- **Disabled**: `:disabled` or `[data-disabled="true"]` on autocomplete
+- **Open**: `[data-open="true"]` on indicator
+
+## API Reference
+
+### Autocomplete Props
+
+| Prop            | Type                                    | Default            | Description                                                |
+| --------------- | --------------------------------------- | ------------------ | ---------------------------------------------------------- |
+| `placeholder`   | `string`                                | `'Select an item'` | Temporary text that occupies the select when it is empty   |
+| `selectionMode` | `"single" \| "multiple"`                | `"single"`         | Whether single or multiple selection is enabled            |
+| `isOpen`        | `boolean`                               | -                  | Sets the open state of the popover (controlled)            |
+| `defaultOpen`   | `boolean`                               | -                  | Sets the default open state of the popover (uncontrolled)  |
+| `onOpenChange`  | `(isOpen: boolean) => void`             | -                  | Handler called when the open state changes                 |
+| `disabledKeys`  | `Iterable<Key>`                         | -                  | Keys of disabled items                                     |
+| `isDisabled`    | `boolean`                               | -                  | Whether the autocomplete is disabled                       |
+| `value`         | `Key \| Key[] \| null`                  | -                  | Current value (controlled)                                 |
+| `defaultValue`  | `Key \| Key[] \| null`                  | -                  | Default value (uncontrolled)                               |
+| `onChange`      | `(value: Key \| Key[] \| null) => void` | -                  | Handler called when the value changes                      |
+| `isRequired`    | `boolean`                               | -                  | Whether user input is required                             |
+| `isInvalid`     | `boolean`                               | -                  | Whether the autocomplete value is invalid                  |
+| `name`          | `string`                                | -                  | The name of the input, used when submitting an HTML form   |
+| `fullWidth`     | `boolean`                               | `false`            | Whether the autocomplete should take full width            |
+| `className`     | `string`                                | -                  | Additional CSS classes                                     |
+| `children`      | `ReactNode \| RenderFunction`           | -                  | Autocomplete content or render function                    |
+
+### Autocomplete.Group Props
+
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `className` | `string`    | -       | Additional CSS classes |
+| `children`  | `ReactNode` | -       | Group content          |
+
+### Autocomplete.Value Props
+
+| Prop        | Type                          | Default | Description                      |
+| ----------- | ----------------------------- | ------- | -------------------------------- |
+| `className` | `string`                      | -       | Additional CSS classes           |
+| `children`  | `ReactNode \| RenderFunction` | -       | Value content or render function |
+
+### Autocomplete.Indicator Props
+
+| Prop        | Type        | Default | Description              |
+| ----------- | ----------- | ------- | ------------------------ |
+| `className` | `string`    | -       | Additional CSS classes   |
+| `children`  | `ReactNode` | -       | Custom indicator content |
+
+### Autocomplete.Popover Props
+
+| Prop         | Type                                                                                                                                                                                                                                                                                                                     | Default    | Description                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
+| `placement`  | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | Placement of the popover relative to the trigger |
+| `className`  | `string`                                                                                                                                                                                                                                                                                                                 | -          | Additional CSS classes                           |
+| `triggerRef` | `RefObject<Element>`                                                                                                                                                                                                                                                                                                     | -          | Reference to the trigger element                 |
+| `children`   | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children                                 |
+
+### Autocomplete.Filter Props
+
+| Prop       | Type                                           | Default | Description                      |
+| ---------- | ---------------------------------------------- | ------- | -------------------------------- |
+| `filter`   | `(text: string, input: string) => boolean`     | -       | Custom filter function           |
+| `children` | `ReactNode`                                    | -       | Filter content (SearchField and ListBox) |
+
+### RenderProps
+
+When using render functions with Autocomplete.Value, these values are provided:
+
+| Prop              | Type          | Description                        |
+| ----------------- | ------------- | ---------------------------------- |
+| `defaultChildren` | `ReactNode`   | The default rendered value         |
+| `isPlaceholder`   | `boolean`     | Whether the value is a placeholder |
+| `state`           | `SelectState` | The state of the autocomplete      |
+| `selectedItems`   | `Node[]`      | The currently selected items       |
+
+## Accessibility
+
+The Autocomplete component implements the ARIA select pattern with filtering and provides:
+
+- Full keyboard navigation support
+- Screen reader announcements for selection changes
+- Proper focus management
+- Support for disabled states
+- Search functionality with filtering
+- HTML form integration
+
+For more information, see the [React Aria Select documentation](https://react-spectrum.adobe.com/react-aria/Select.html).
