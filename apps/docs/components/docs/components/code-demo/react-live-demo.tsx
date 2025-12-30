@@ -62,12 +62,12 @@ export const ReactLiveDemo: React.FC<ReactLiveDemoProps> = ({
         <div className="absolute top-[-26px] right-[3px] z-50 flex items-center">
           <StackblitzButton
             button={<PreviewButton icon={undefined} />}
-            className="before:hidden opacity-0 group-hover/code-demo:opacity-100 transition-opacity text-zinc-400"
+            className="before:hidden [&>svg>path]:fill-white opacity-0 group-hover/code-demo:opacity-100 transition-opacity text-zinc-400"
             files={files}
             typescriptStrict={typescriptStrict}
           />
           <CopyButton
-            className="before:hidden opacity-0 group-hover/code-demo:opacity-100 transition-opacity text-zinc-400"
+            className="before:hidden opacity-0 [&>svg>path]:stroke-white group-hover/code-demo:opacity-100 transition-opacity text-zinc-400"
             value={files?.[DEFAULT_FILE] as string}
           />
         </div>
