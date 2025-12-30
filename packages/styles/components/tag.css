@@ -41,12 +41,12 @@
 
 /* Selected state */
 .tag:is([data-selected="true"], [aria-selected="true"]) {
-  @apply bg-accent text-accent-foreground;
+  @apply bg-accent-soft text-accent-soft-foreground;
 
   /* Selected + Hover state */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]) {
-      @apply bg-accent-hover;
+      @apply bg-accent-soft-hover;
     }
   }
 }
@@ -66,12 +66,12 @@
 
 /* Variant */
 .tag--default {
-  @apply bg-field-on-background text-default-foreground;
+  @apply bg-default text-default-foreground;
 
   /* Hover state (when not selected or disabled) */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
-      @apply bg-field-on-background-hover;
+      @apply bg-default-hover;
     }
   }
 }
@@ -87,20 +87,56 @@
   }
 }
 
-/* On Surface */
-.tag--on-surface {
-  @apply bg-on-surface shadow-none;
+/**
+ * In-Surface Variants
+ * Used when tag is placed on a Surface component background.
+ * Uses CSS custom properties to reduce repetition.
+ */
+.tag--in-surface-default,
+.tag--in-surface-secondary,
+.tag--in-surface-tertiary {
+  @apply shadow-none;
+  background-color: var(--tag-bg);
+
+  @media (hover: hover) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
+      background-color: var(--tag-bg-hover);
+    }
+  }
+
+  &:is(:focus-visible, [data-focus-visible]) {
+    background-color: var(--tag-bg-focus);
+  }
+}
+
+/* In-surface variant property definitions */
+.tag--in-surface-default {
+  --tag-bg: var(--color-in-surface);
+  --tag-bg-hover: var(--color-in-surface-hover);
+  --tag-bg-focus: var(--color-in-surface-focus);
+}
+
+.tag--in-surface-secondary {
+  --tag-bg: var(--color-in-surface-secondary);
+  --tag-bg-hover: var(--color-in-surface-secondary-hover);
+  --tag-bg-focus: var(--color-in-surface-secondary-focus);
+}
+
+.tag--in-surface-tertiary {
+  --tag-bg: var(--color-in-surface-tertiary);
+  --tag-bg-hover: var(--color-in-surface-tertiary-hover);
+  --tag-bg-focus: var(--color-in-surface-tertiary-focus);
+}
+
+/* On Form Field */
+.tag--on-form-field {
+  @apply bg-field-on-background shadow-none;
 
   /* Hover state (when not selected or disabled) */
   @media (hover: hover) {
     &:is(:hover, [data-hovered="true"]):not([data-selected="true"]):not([data-disabled="true"]) {
-      @apply bg-on-surface-hover;
+      @apply bg-field-on-background-hover;
     }
-  }
-
-  /* Focus visible state */
-  &:is(:focus-visible, [data-focus-visible]) {
-    background-color: var(--color-on-surface-focus);
   }
 }
 
@@ -114,5 +150,11 @@
   }
 }
 
-.tag__remove-button--on-surface {
+.tag__remove-button--in-surface-default {
+}
+
+.tag__remove-button--in-surface-secondary {
+}
+
+.tag__remove-button--in-surface-tertiary {
 }

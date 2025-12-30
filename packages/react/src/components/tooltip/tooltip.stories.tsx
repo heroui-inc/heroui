@@ -4,6 +4,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
+import {Card} from "../card";
 
 import {Tooltip} from "./index";
 
@@ -89,4 +90,33 @@ export const Default = {
 export const WithTrigger = {
   args: defaultArgs,
   render: TemplateWithTrigger,
+};
+
+const CardWithTooltipTemplate = (props: Tooltip["ContentProps"]) => (
+  <Card className="w-[200px]">
+    <Card.Content className="flex items-center justify-center p-6">
+      <Tooltip delay={0}>
+        <Tooltip.Trigger aria-label="Attach a file">
+          <Button
+            isIconOnly
+            aria-label="Attach file"
+            className="rounded-full"
+            size="lg"
+            variant="secondary"
+          >
+            <Icon icon="gravity-ui:paperclip" />
+          </Button>
+        </Tooltip.Trigger>
+        <Tooltip.Content {...props}>
+          <Tooltip.Arrow />
+          <p>Attach a file</p>
+        </Tooltip.Content>
+      </Tooltip>
+    </Card.Content>
+  </Card>
+);
+
+export const CardWithTooltip = {
+  args: defaultArgs,
+  render: CardWithTooltipTemplate,
 };

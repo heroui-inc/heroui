@@ -1,53 +1,40 @@
-import type {Meta, StoryObj} from "@storybook/react";
+import {Separator, Surface} from "@heroui/react";
 
-import React from "react";
-
-import {Surface} from "./index";
-
-const meta: Meta<typeof Surface> = {
-  argTypes: {},
-  component: Surface,
-  parameters: {
-    layout: "centered",
-  },
-  title: "Components/Layout/Surface",
-};
-
-export default meta;
-type Story = StoryObj<typeof Surface>;
-
-export const Variants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
+export function SurfaceVariants() {
+  return (
+    <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default</p>
+        <p className="text-sm font-medium text-muted">Default Surface</p>
         <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
           <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
+          <Separator />
           <p className="text-sm text-muted">
-            This is a default surface variant. It uses bg-surface styling.
+            Separator automatically detects default surface level.
           </p>
         </Surface>
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary</p>
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
         <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
           <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
+          <Separator />
           <p className="text-sm text-muted">
-            This is a secondary surface variant. It uses bg-surface-secondary styling.
+            Separator automatically detects secondary surface level.
           </p>
         </Surface>
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary</p>
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
         <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
           <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
+          <Separator />
           <p className="text-sm text-muted">
-            This is a tertiary surface variant. It uses bg-surface-tertiary styling.
+            Separator automatically detects tertiary surface level.
           </p>
         </Surface>
       </div>
     </div>
-  ),
-};
+  );
+}

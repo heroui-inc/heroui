@@ -2,7 +2,7 @@ export {Default} from "./default";
 export {Disabled} from "./disabled";
 export {FullWidth} from "./full-width";
 export {Invalid} from "./invalid";
-export {OnSurface} from "./on-surface";
+export {InSurface} from "./in-surface";
 export {PasswordWithToggle} from "./password-with-toggle";
 export {Required} from "./required";
 export {WithBadgeSuffix} from "./with-badge-suffix";

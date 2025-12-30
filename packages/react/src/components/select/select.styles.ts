@@ -11,9 +11,15 @@ export const selectVariants = tv({
     popover: "select__popover",
   },
   variants: {
-    isOnSurface: {
-      true: {
-        trigger: "select__trigger--on-surface",
+    inSurface: {
+      default: {
+        trigger: "select__trigger--in-surface-default",
+      },
+      secondary: {
+        trigger: "select__trigger--in-surface-secondary",
+      },
+      tertiary: {
+        trigger: "select__trigger--in-surface-tertiary",
       },
     },
     fullWidth: {

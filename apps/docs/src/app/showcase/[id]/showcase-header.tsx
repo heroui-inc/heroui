@@ -45,7 +45,7 @@ export function ShowcaseHeader() {
   }, [returnUrl]);
 
   return (
-    <header className="z-[1] flex items-center justify-between border-b border-border/50 bg-background/50 p-4 backdrop-blur-sm">
+    <header className="z-[1] flex items-center justify-between bg-background/50 p-4 backdrop-blur-sm">
       <div className="flex flex-1 justify-start">
         <TooltipRoot delay={0}>
           <TooltipTrigger>

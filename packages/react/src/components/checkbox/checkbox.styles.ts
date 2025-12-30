@@ -10,16 +10,19 @@ export const checkboxVariants = tv({
     content: "checkbox__content",
   },
   variants: {
-    isOnSurface: {
-      true: {
-        base: "checkbox--on-surface",
+    inSurface: {
+      default: {
+        base: "checkbox--in-surface-default",
       },
-      false: {},
+      secondary: {
+        base: "checkbox--in-surface-secondary",
+      },
+      tertiary: {
+        base: "checkbox--in-surface-tertiary",
+      },
     },
   },
-  defaultVariants: {
-    isOnSurface: false,
-  },
+  defaultVariants: {},
 });
 
 export type CheckboxVariants = VariantProps<typeof checkboxVariants>;

@@ -9,7 +9,6 @@ export const surfaceVariants = tv({
       default: "surface--default",
       secondary: "surface--secondary",
       tertiary: "surface--tertiary",
-      quaternary: "surface--quaternary",
     },
   },
   defaultVariants: {

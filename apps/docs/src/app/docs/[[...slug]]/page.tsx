@@ -80,7 +80,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         style: "normal",
       }}
     >
-      <section className="flex flex-col gap-2 border-b border-border">
+      <section className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <DocsTitle className="flex items-center gap-2">
             {page.data.title}

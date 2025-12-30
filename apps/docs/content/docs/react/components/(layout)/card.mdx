@@ -49,8 +49,7 @@ Cards come in semantic variants that describe their prominence level rather than
 - **`transparent`** - Minimal prominence, transparent background (great for nested cards)
 - **`default`** - Standard card for most use cases (surface-secondary)
 - **`secondary`** - Medium prominence to draw moderate attention (surface-tertiary)
-- **`tertiary`** - Higher prominence for important content (surface-quaternary)
-- **`quaternary`** - Highest prominence for critical content
+- **`tertiary`** - Higher prominence for important content (surface-tertiary)
 
 ### Horizontal Layout
 
@@ -145,8 +144,7 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 - `.card--transparent` - Minimal prominence, transparent background (maps to `transparent` variant)
 - `.card--default` - Standard appearance with surface-secondary (default)
 - `.card--secondary` - Medium prominence with surface-tertiary (maps to `secondary` variant)
-- `.card--tertiary` - Higher prominence with surface-quaternary (maps to `tertiary` variant)
-- `.card--quaternary` - Highest prominence for critical content (maps to `quaternary` variant)
+- `.card--tertiary` - Higher prominence with surface-tertiary (maps to `tertiary` variant)
 
 ## API Reference
 
@@ -154,7 +152,7 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 
 | Prop        | Type                                                      | Default      | Description                |
 | ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
-| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary" \| "quaternary"`         | `"default"` | Semantic variant indicating prominence level |
+| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary"`         | `"default"` | Semantic variant indicating prominence level |
 | `className` | `string`                          | -       | Additional CSS classes     |
 | `children`  | `React.ReactNode`                 | -       | Card content               |
 

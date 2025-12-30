@@ -82,7 +82,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
         </div>
 
         {/* Footer */}
-        <footer className="z-[1] border-t border-border/50 bg-background/50 backdrop-blur-sm">
+        <footer className="z-[1] bg-background/50 backdrop-blur-sm">
           <div className="jutify-center mx-auto flex max-w-7xl flex-col flex-wrap items-center px-6 py-4 md:flex-row md:flex-nowrap md:justify-between">
             {/* Left section - Author info */}
             <div className="order-2 flex-1 md:order-1">
