@@ -28,49 +28,58 @@ const schema: AppSchema = _schema;
 const appId =
   typeof process !== "undefined" ? (process.env["NEXT_PUBLIC_INSTANT_APP_ID"] ?? "") : "";
 
-export const db = init<AppSchema>({
-  appId,
-  devtool:
-    typeof process !== "undefined" ? process.env["NEXT_PUBLIC_APP_ENV"] === "development" : false,
-  schema,
-});
+export const db = appId
+  ? init<AppSchema>({
+      appId,
+      devtool:
+        typeof process !== "undefined"
+          ? process.env["NEXT_PUBLIC_APP_ENV"] === "development"
+          : false,
+      schema,
+    })
+  : null;
 
 export const useInstantDBAuth = () => {
+  const isAuthEnabled =
+    appId && typeof process !== "undefined" && process.env["NEXT_PUBLIC_PLATFORM_API_URL"];
+
   const {data: session, isPending} = authClient.useSession();
   const user = session?.user;
 
   useInstantAuth({
     authClient,
-    db,
+    db: isAuthEnabled && db ? db : null,
     persistent: true,
   });
 
-  useSessionMonitor(user?.id || null);
+  useSessionMonitor(isAuthEnabled ? user?.id || null : null);
 
   return {
     data: session,
     error: null,
     isLoading: isPending,
-    user,
+    user: isAuthEnabled ? user : null,
   };
 };
 
 function useSessionMonitor(userId: string | null | undefined) {
   const {data: session, isPending} = authClient.useSession();
 
-  const {data: sessionsData} = db.useQuery(
-    userId
-      ? {
-          sessions: {
-            $: {
-              where: {
-                userId,
+  const {data: sessionsData} = db
+    ? db.useQuery(
+        userId
+          ? {
+              sessions: {
+                $: {
+                  where: {
+                    userId,
+                  },
+                },
               },
-            },
-          },
-        }
-      : null,
-  );
+            }
+          : null,
+      )
+    : {data: undefined};
 
   const hasSeenSessionsRef = useRef(false);
 

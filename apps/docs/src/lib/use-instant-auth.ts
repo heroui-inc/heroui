@@ -101,7 +101,7 @@ export function useInstantAuth<TSessionResult extends SessionResult>({
   persistent,
 }: {
   authClient: MinimalAuthClient<TSessionResult>;
-  db: InstantReactWebDatabase<any, any>;
+  db: InstantReactWebDatabase<any, any> | null;
   persistent?: boolean;
 }) {
   const regularSession = authClient.useSession();
@@ -111,7 +111,7 @@ export function useInstantAuth<TSessionResult extends SessionResult>({
   const {data, isPending} = sessionResult;
 
   useEffect(() => {
-    if (isPending) return;
+    if (isPending || !db) return;
 
     instantAuth(db, data?.session);
   }, [db, isPending, data?.session]);
