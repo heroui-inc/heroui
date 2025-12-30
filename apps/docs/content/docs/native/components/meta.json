@@ -9,6 +9,7 @@
     "---Components---",
     "(navigation)/accordion",
     "(media)/avatar",
+    "(overlays)/bottom-sheet",
     "(buttons)/button",
     "(layout)/card",
     "(forms)/checkbox",

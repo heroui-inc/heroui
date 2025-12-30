@@ -1,0 +1,7 @@
+{
+  "title": "Releases",
+  "description": "HeroUI Native Release Notes",
+  "icon": "rocket",
+  "root": true,
+  "pages": ["---Overview---", "index", "---Releases---", "beta-10"]
+}
