@@ -300,6 +300,7 @@ Animation configuration for avatar image component. Can be:
 
 | prop                   | type               | default                                             | description                                          |
 | ---------------------- | ------------------ | --------------------------------------------------- | ---------------------------------------------------- |
+| `state`                | `'disabled' \| boolean` | -                                                  | Disable animations while customizing properties      |
 | `opacity.value`        | `[number, number]` | `[0, 1]`                                            | Opacity values [initial, loaded] for image animation |
 | `opacity.timingConfig` | `WithTimingConfig` | `{ duration: 200, easing: Easing.in(Easing.ease) }` | Animation timing configuration                       |
 
@@ -331,6 +332,7 @@ Animation configuration for avatar fallback component. Can be:
 
 | prop             | type                    | default                                                                             | description                            |
 | ---------------- | ----------------------- | ----------------------------------------------------------------------------------- | -------------------------------------- |
+| `state`          | `'disabled' \| boolean` | -                                                                                   | Disable animations while customizing properties |
 | `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))`<br/>`.delay(0)` | Custom entering animation for fallback |
 
 #### PersonIconProps

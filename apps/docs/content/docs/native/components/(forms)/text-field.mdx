@@ -275,6 +275,7 @@ Animation configuration for TextField.Label component. Can be:
 
 | prop             | type                    | default                                                               | description               |
 | ---------------- | ----------------------- | --------------------------------------------------------------------- | ------------------------- |
+| `state`          | `'disabled' \| boolean` | -                                                                     | Disable animations while customizing properties |
 | `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation |
 | `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation  |
 
@@ -307,6 +308,7 @@ Animation configuration for TextField.Input component. Can be:
 
 | prop                           | type               | default                                              | description                                                     |
 | ------------------------------ | ------------------ | ---------------------------------------------------- | --------------------------------------------------------------- |
+| `state`                        | `'disabled' \| boolean` | -                                                    | Disable animations while customizing properties                 |
 | `backgroundColor.value.blur`   | `string`           | Uses theme color                                     | Background color when input is blurred                          |
 | `backgroundColor.value.focus`  | `string`           | Uses theme color                                     | Background color when input is focused                          |
 | `backgroundColor.value.error`  | `string`           | Uses theme color                                     | Background color when input is invalid                          |
@@ -352,6 +354,7 @@ Animation configuration for TextField.Description component. Can be:
 
 | prop             | type                    | default                                                               | description               |
 | ---------------- | ----------------------- | --------------------------------------------------------------------- | ------------------------- |
+| `state`          | `'disabled' \| boolean` | -                                                                     | Disable animations while customizing properties |
 | `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation |
 | `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation  |
 

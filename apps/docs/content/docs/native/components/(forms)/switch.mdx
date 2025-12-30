@@ -223,12 +223,13 @@ Animation configuration for Switch component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                           | type               | default                                                        | description                                    |
-| ------------------------------ | ------------------ | -------------------------------------------------------------- | ---------------------------------------------- |
-| `scale.value`                  | `[number, number]` | `[1, 0.96]`                                                    | Scale values [unpressed, pressed]              |
-| `scale.timingConfig`           | `WithTimingConfig` | `{ duration: 150 }`                                            | Animation timing configuration                 |
-| `backgroundColor.value`        | `[string, string]` | Uses theme colors                                              | Background color values [unselected, selected] |
-| `backgroundColor.timingConfig` | `WithTimingConfig` | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | Animation timing configuration                 |
+| prop                           | type                                    | default                                                        | description                                    |
+| ------------------------------ | --------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| `state`                        | `'disabled' \| 'disable-all' \| boolean` | -                                                              | Disable animations while customizing properties |
+| `scale.value`                  | `[number, number]`                      | `[1, 0.96]`                                                    | Scale values [unpressed, pressed]              |
+| `scale.timingConfig`           | `WithTimingConfig`                       | `{ duration: 150 }`                                            | Animation timing configuration                 |
+| `backgroundColor.value`        | `[string, string]`                      | Uses theme colors                                              | Background color values [unselected, selected] |
+| `backgroundColor.timingConfig` | `WithTimingConfig`                       | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | Animation timing configuration                 |
 
 ### Switch.Thumb
 
@@ -250,6 +251,7 @@ Animation configuration for Switch.Thumb component. Can be:
 
 | prop                           | type               | default                                                        | description                                                             |
 | ------------------------------ | ------------------ | -------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `state`                        | `'disabled' \| boolean` | -                                                              | Disable animations while customizing properties                         |
 | `left.value`                   | `number`           | `2`                                                            | Offset value from the edges (left when unselected, right when selected) |
 | `left.springConfig`            | `WithSpringConfig` | `{ damping: 120, stiffness: 1600, mass: 2 }`                   | Spring animation configuration for thumb position                       |
 | `backgroundColor.value`        | `[string, string]` | `['white', theme accent-foreground color]`                     | Background color values [unselected, selected]                          |

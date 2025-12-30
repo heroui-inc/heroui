@@ -266,9 +266,10 @@ Animation configuration for accordion root component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop           | type               | default                                                                                     | description                                       |
-| -------------- | ------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| `layout.value` | `LayoutTransition` | `LinearTransition`<br/>`.springify()`<br/>`.damping(140)`<br/>`.stiffness(1600)`<br/>`.mass(4)` | Custom layout animation for accordion transitions |
+| prop           | type                                    | default                                                                                     | description                                       |
+| -------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `state`        | `'disabled' \| 'disable-all' \| boolean` | -                                                                                               | Disable animations while customizing properties   |
+| `layout.value` | `LayoutTransition`                      | `LinearTransition`<br/>`.springify()`<br/>`.damping(140)`<br/>`.stiffness(1600)`<br/>`.mass(4)` | Custom layout animation for accordion transitions |
 
 ### Accordion.Item
 
@@ -322,10 +323,11 @@ Animation configuration for accordion indicator component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                    | type               | default                                      | description                                      |
-| ----------------------- | ------------------ | -------------------------------------------- | ------------------------------------------------ |
-| `rotation.value`        | `[number, number]` | `[0, -180]`                                  | Rotation values [collapsed, expanded] in degrees |
-| `rotation.springConfig` | `WithSpringConfig` | `{ damping: 140, stiffness: 1000, mass: 4 }` | Spring animation configuration for rotation      |
+| prop                    | type                                    | default                                      | description                                      |
+| ----------------------- | --------------------------------------- | -------------------------------------------- | ------------------------------------------------ |
+| `state`                 | `'disabled' \| boolean`                  | -                                            | Disable animations while customizing properties  |
+| `rotation.value`        | `[number, number]`                      | `[0, -180]`                                  | Rotation values [collapsed, expanded] in degrees |
+| `rotation.springConfig` | `WithSpringConfig`                      | `{ damping: 140, stiffness: 1000, mass: 4 }` | Spring animation configuration for rotation      |
 
 ### Accordion.Content
 
@@ -346,6 +348,7 @@ Animation configuration for accordion content component. Can be:
 
 | prop             | type                    | default                                                            | description                           |
 | ---------------- | ----------------------- | ------------------------------------------------------------------ | ------------------------------------- |
+| `state`          | `'disabled' \| boolean` | -                                                                  | Disable animations while customizing properties |
 | `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.out(Easing.ease))` | Custom entering animation for content |
 | `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))` | Custom exiting animation for content  |
 
