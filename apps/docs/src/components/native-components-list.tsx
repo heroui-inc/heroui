@@ -160,7 +160,12 @@ export function NativeComponentsList() {
 
         return (
           <div key={group.category} className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">{group.category}</h2>
+            <h2
+              className="text-2xl font-semibold"
+              id={group.category.toLowerCase().replace(" ", "-")}
+            >
+              {group.category}
+            </h2>
             <div className={cn("grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2")}>
               {components.map(({component, srcDark, srcLight, status}) => (
                 <NativeComponentItem
