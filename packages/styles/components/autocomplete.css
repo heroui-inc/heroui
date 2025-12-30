@@ -150,6 +150,11 @@
 
   /* Search Field styles */
   [data-slot="search-field"] {
-    @apply px-3 pt-1 pb-2 outline-none;
+    @apply px-3 py-1 outline-none;
+  }
+
+  /* Empty State */
+  [data-slot="empty-state"] {
+    @apply text-center text-sm text-overlay-foreground/60;
   }
 }
