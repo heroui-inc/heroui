@@ -482,6 +482,10 @@ export const demos: Record<string, DemoItem> = {
     component: ComboBoxDemos.InSurface,
     file: "combobox/in-surface.tsx",
   },
+  "combobox-menu-trigger": {
+    component: ComboBoxDemos.MenuTrigger,
+    file: "combobox/menu-trigger.tsx",
+  },
   // Disclosure demos
   "disclosure-basic": {
     component: DisclosureDemos.Basic,
