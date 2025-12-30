@@ -58,6 +58,7 @@
     "---Media---",
     "(media)/avatar",
     "---Pickers---",
+    "(pickers)/autocomplete",
     "(pickers)/combobox",
     "(pickers)/select",
     "---Typography---",
