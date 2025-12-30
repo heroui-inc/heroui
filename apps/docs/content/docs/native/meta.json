@@ -1,5 +1,5 @@
 {
   "title": "Documentation",
   "description": "HeroUI Native Documentation",
-  "pages": ["getting-started", "components"]
+  "pages": ["getting-started", "components", "releases"]
 }

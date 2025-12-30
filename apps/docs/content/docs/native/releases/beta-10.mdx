@@ -1,0 +1,181 @@
+---
+title: Beta 10
+description: Bottom Sheet component, PressableFeedback refactor, Animation API State Prop extension, use-theme-color multiple colors selection, and bug fixes.
+github:
+  pull: 6068
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">December 30, 2025</span>
+</div>
+
+This release introduces the new [Bottom Sheet](/docs/native/components/bottom-sheet) component, refactors [PressableFeedback](/docs/native/components/pressable-feedback) with improved API, extends the Animation API with State Prop support, enhances the `use-theme-color` hook to handle multiple colors selection, and includes various bug fixes and documentation improvements.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i heroui-native@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add heroui-native@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add heroui-native@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add heroui-native@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### New Components
+
+#### Bottom Sheet
+
+This release introduces the **Bottom Sheet** component, a versatile overlay component that slides up from the bottom of the screen with animated transitions and swipe-to-dismiss gestures.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-dark.mp4"
+/>
+
+**Features:**
+- Smooth animated transitions with gesture support
+- Multiple snap points for flexible sizing
+- Detached mode for custom positioning
+- Customizable overlay with blur effects
+- Full accessibility support
+- Built on [@gorhom/bottom-sheet](https://gorhom.dev/react-native-bottom-sheet)
+
+**Usage:**
+```tsx
+import { BottomSheet, Button } from 'heroui-native';
+
+<BottomSheet>
+  <BottomSheet.Trigger asChild>
+    <Button>Open Bottom Sheet</Button>
+  </BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content>
+      <BottomSheet.Close />
+      <BottomSheet.Title>Title</BottomSheet.Title>
+      <BottomSheet.Description>Description</BottomSheet.Description>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+For complete documentation and examples, see the [Bottom Sheet component page](/docs/native/components/bottom-sheet).
+
+**Related PR:** [#174](https://github.com/heroui-inc/heroui-native/pull/174)
+
+## Component Improvements
+
+### PressableFeedback Refactor
+
+The [PressableFeedback](/docs/native/components/pressable-feedback) component has been refactored with an improved API and better animation control.
+
+**Improvements:**
+- Enhanced animation configuration API
+- Better support for custom animation states
+- Improved performance and smoother animations
+- More flexible feedback positioning options
+
+The component maintains backward compatibility while providing more control over press feedback animations.
+
+**Related PR:** [#182](https://github.com/heroui-inc/heroui-native/pull/182)
+
+## API Enhancements
+
+### Animation API State Prop Extension
+
+The Animation API has been extended with a new `state` prop that allows you to disable animations while customizing properties. This provides more granular control over animation behavior.
+
+**New Capability:**
+```tsx
+<Component
+  animation={{
+    state: 'disabled', // or 'disable-all' or boolean
+    // ... other animation properties
+  }}
+/>
+```
+
+The `state` prop can be:
+- `'disabled'`: Disable animations while still allowing property customization
+- `'disable-all'`: Disable all animations including children
+- `boolean`: Simple enable/disable control
+
+This enhancement makes it easier to customize animation properties without enabling animations, useful for fine-tuning component behavior.
+
+**Related PR:** [#176](https://github.com/heroui-inc/heroui-native/pull/176)
+
+### use-theme-color Multiple Colors Selection
+
+The `use-theme-color` hook has been refactored to handle multiple colors selection, making it more flexible and powerful for theme customization.
+
+**Enhancement:**
+- Support for selecting multiple colors at once
+- Improved color selection logic
+- Better performance when working with multiple color values
+
+This improvement makes it easier to work with complex theming scenarios where multiple colors need to be selected and applied together.
+
+**Related PR:** [#170](https://github.com/heroui-inc/heroui-native/pull/170)
+
+## Documentation
+
+### Animated Styles Guide Comments
+
+Added comprehensive comments and documentation to the Animated Styles Guide, making it easier for developers to understand and use animation features effectively.
+
+**Improvements:**
+- Enhanced code examples with detailed comments
+- Better explanation of animation patterns
+- Clearer guidance on when to use different animation approaches
+
+**Related PR:** [#179](https://github.com/heroui-inc/heroui-native/pull/179)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **Issue #173**: Fixed issue with component behavior
+- **Issue #177**: Resolved problem with component rendering
+- **Issue #178**: Fixed bug affecting component functionality
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Animation Guide](/docs/native/getting-started/animation) - Updated with Animation API State Prop documentation
+- [Colors Guide](/docs/native/getting-started/colors) - Updated with use-theme-color multiple colors selection information
+- [PressableFeedback Component](/docs/native/components/pressable-feedback) - Updated with refactored API documentation
+
+## Links
+
+- [Component Documentation](https://herouinative.com/docs/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+- [GitHub PR #6068](https://github.com/heroui-inc/heroui/pull/6068)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+

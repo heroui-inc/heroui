@@ -314,6 +314,32 @@ import { View, Text } from 'react-native';
 
 > **Note**: To learn more about theme variables and how they work in Tailwind CSS v4, see the [Tailwind CSS Theme documentation](https://tailwindcss.com/docs/theme).
 
+## use-theme-color Hook
+
+The `use-theme-color` hook has been enhanced to support multiple colors selection, making it more flexible for complex theming scenarios.
+
+**Multiple Colors Selection:**
+
+You can now select multiple colors at once, which is useful when you need to work with related color values together:
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+
+// Select multiple colors at once
+const { accent, accentForeground, success, danger } = useThemeColor([
+  'accent',
+  'accentForeground',
+  'success',
+  'danger',
+]);
+
+// Use the selected colors
+<View style={{ backgroundColor: accent }}>
+  <Text style={{ color: accentForeground }}>Accent Text</Text>
+</View>
+```
+
+This enhancement improves performance when working with multiple color values and makes it easier to manage complex theming scenarios where multiple colors need to be selected and applied together.
 
 ## Quick Tips
 
