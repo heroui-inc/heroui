@@ -10,6 +10,7 @@ The `HeroUINativeProvider` is the root provider component that configures and in
 
 The provider serves as the main entry point for HeroUI Native, wrapping your application with essential contexts and configurations:
 
+- **Safe Area Insets**: Automatically handles safe area insets updates via `SafeAreaListener` and syncs them with Uniwind for use in Tailwind classes (e.g., `pb-safe-offset-3`)
 - **Text Configuration**: Global text component settings for consistency across all HeroUI components
 - **Animation Configuration**: Global animation control to disable all animations across the application
 - **Toast Configuration**: Global toast system configuration including insets, default props, and wrapper components
@@ -203,12 +204,17 @@ The `HeroUINativeProvider` internally composes multiple providers:
 
 ```
 HeroUINativeProvider
-├── GlobalAnimationSettingsProvider (animation configuration)
-│   └── TextComponentProvider (text configuration)
-│       └── ToastProvider (toast configuration)
-│           └── Your App
-│           └── PortalHost (for overlays)
+├── SafeAreaListener (handles safe area insets updates)
+│   └── GlobalAnimationSettingsProvider (animation configuration)
+│       └── TextComponentProvider (text configuration)
+│           └── ToastProvider (toast configuration)
+│               └── Your App
+│               └── PortalHost (for overlays)
 ```
+
+### Safe Area Insets Handling
+
+The provider automatically wraps your application with [`SafeAreaListener`](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-listener) from `react-native-safe-area-context`. This component listens to safe area insets and frame changes without triggering re-renders, and automatically updates Uniwind with the latest insets via the `onChange` callback.
 
 ## Best Practices
 
