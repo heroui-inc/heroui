@@ -1,3 +1,5 @@
+import type {ComponentProps} from "react";
+
 import {
   AutocompleteFilter,
   AutocompleteGroup,
@@ -7,7 +9,10 @@ import {
   AutocompleteValue,
 } from "./autocomplete";
 
-const CompoundAutocomplete = Object.assign(AutocompleteRoot, {
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Autocomplete = Object.assign(AutocompleteRoot, {
   Root: AutocompleteRoot,
   Group: AutocompleteGroup,
   Value: AutocompleteValue,
@@ -16,8 +21,31 @@ const CompoundAutocomplete = Object.assign(AutocompleteRoot, {
   Filter: AutocompleteFilter,
 });
 
+export type Autocomplete<T extends object = object, M extends "single" | "multiple" = "single"> = {
+  Props: ComponentProps<typeof AutocompleteRoot<T, M>>;
+  RootProps: ComponentProps<typeof AutocompleteRoot<T, M>>;
+  GroupProps: ComponentProps<typeof AutocompleteGroup>;
+  ValueProps: ComponentProps<typeof AutocompleteValue>;
+  IndicatorProps: ComponentProps<typeof AutocompleteIndicator>;
+  PopoverProps: ComponentProps<typeof AutocompletePopover>;
+  FilterProps: ComponentProps<typeof AutocompleteFilter>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Component
+ * -----------------------------------------------------------------------------------------------*/
+export {
+  AutocompleteFilter,
+  AutocompleteGroup,
+  AutocompleteIndicator,
+  AutocompletePopover,
+  AutocompleteRoot,
+  AutocompleteValue,
+};
+
 export type {
   AutocompleteRootProps,
+  AutocompleteRootProps as AutocompleteProps,
   AutocompleteGroupProps,
   AutocompleteValueProps,
   AutocompleteIndicatorProps,
@@ -25,8 +53,9 @@ export type {
   AutocompleteFilterProps,
 } from "./autocomplete";
 
-export type {AutocompleteVariants} from "./autocomplete.styles";
-
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
 export {autocompleteVariants} from "./autocomplete.styles";
 
-export default CompoundAutocomplete;
+export type {AutocompleteVariants} from "./autocomplete.styles";
