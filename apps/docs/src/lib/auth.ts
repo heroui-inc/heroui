@@ -98,9 +98,7 @@ function useSessionMonitor(userId: string | null | undefined) {
 
     if (sessions.length === 0 && hasSessionsData && hasSeenSessionsRef.current) {
       if (!session || !session.session) {
-        authClient.signOut().catch(() => {
-          // Silent fail - error handling done by auth client
-        });
+        authClient.signOut();
       }
     }
   }, [sessionsData?.sessions, userId, isPending, session]);
