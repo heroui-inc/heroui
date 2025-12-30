@@ -4,6 +4,7 @@ import type {ComponentType} from "react";
 import * as AccordionDemos from "./accordion";
 import * as AlertDemos from "./alert";
 import * as AlertDialogDemos from "./alert-dialog";
+import * as AutocompleteDemos from "./autocomplete";
 import * as AvatarDemos from "./avatar";
 import * as ButtonDemos from "./button";
 import * as ButtonGroupDemos from "./button-group";
@@ -390,6 +391,15 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
+  },
+  // Autocomplete demos
+  "autocomplete-default": {
+    component: AutocompleteDemos.AutocompleteDefault,
+    file: "autocomplete/default.tsx",
+  },
+  "autocomplete-single-select": {
+    component: AutocompleteDemos.AutocompleteSingleSelect,
+    file: "autocomplete/single-select.tsx",
   },
   // ComboBox demos
   "combobox-default": {
