@@ -16,9 +16,6 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  /* Cursor */
-  cursor: var(--cursor-interactive);
-
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -66,6 +63,9 @@
 .autocomplete__indicator {
   @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150 will-change-transform;
 
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
   &[data-open="true"] {
     @apply rotate-180;
   }
@@ -77,7 +77,7 @@
 
 /* Similar to popover content styles */
 .autocomplete__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 p-2 pt-3 text-sm will-change-[opacity,transform];
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 pt-2 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
@@ -146,5 +146,10 @@
     [data-slot="listbox-item-indicator"]
     [data-slot="listbox-item-indicator--checkmark"] {
     @apply transition-none;
+  }
+
+  /* Search Field styles */
+  [data-slot="search-field"] {
+    @apply px-3 pt-1 pb-2 outline-none;
   }
 }
