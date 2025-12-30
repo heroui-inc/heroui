@@ -203,6 +203,7 @@ export default function SwitchExample() {
 | `isDisabled`                | `boolean`                                                            | `false`     | Whether the switch is disabled and cannot be interacted with |
 | `className`                 | `string`                                                             | `undefined` | Custom class name for the switch                             |
 | `animation`                 | `SwitchRootAnimation`                                                | -           | Animation configuration                                      |
+| `isAnimatedStyleActive`     | `boolean`                                                            | `true`      | Whether animated styles (react-native-reanimated) are active |
 | `onSelectedChange`          | `(isSelected: boolean) => void`                                      | -           | Callback fired when the switch selection state changes       |
 | `...AnimatedPressableProps` | `AnimatedProps<PressableProps>`                                      | -           | All React Native Reanimated Pressable props are supported    |
 
@@ -231,12 +232,13 @@ Animation configuration for Switch component. Can be:
 
 ### Switch.Thumb
 
-| prop           | type                                                                 | default     | description                                              |
-| -------------- | -------------------------------------------------------------------- | ----------- | -------------------------------------------------------- |
-| `children`     | `React.ReactNode \| ((props: SwitchRenderProps) => React.ReactNode)` | `undefined` | Content to render inside the thumb, or a render function |
-| `className`    | `string`                                                             | `undefined` | Custom class name for the thumb element                  |
-| `animation`    | `SwitchThumbAnimation`                                               | -           | Animation configuration                                  |
-| `...ViewProps` | `ViewProps`                                                          | -           | All standard React Native View props are supported       |
+| prop                    | type                                                                 | default     | description                                                  |
+| ----------------------- | -------------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode \| ((props: SwitchRenderProps) => React.ReactNode)` | `undefined` | Content to render inside the thumb, or a render function     |
+| `className`             | `string`                                                             | `undefined` | Custom class name for the thumb element                      |
+| `animation`             | `SwitchThumbAnimation`                                               | -           | Animation configuration                                      |
+| `isAnimatedStyleActive` | `boolean`                                                            | `true`      | Whether animated styles (react-native-reanimated) are active |
+| `...ViewProps`          | `ViewProps`                                                          | -           | All standard React Native View props are supported           |
 
 #### SwitchThumbAnimation
 
