@@ -127,10 +127,10 @@
   }
 
   [data-search-full] {
-    @apply rounded-field bg-default/80;
+    @apply rounded-field border-none bg-default/80;
 
     kbd {
-      @apply bg-surface px-1 font-sans text-xs font-medium text-muted;
+      @apply border-none bg-surface px-1 font-sans text-xs font-medium text-muted;
     }
   }
 
@@ -189,7 +189,7 @@
     @apply rounded-field border-none bg-field shadow-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:bg-field/80 dark:backdrop-blur-md;
 
     kbd {
-      @apply bg-default dark:bg-surface;
+      @apply border-none bg-default dark:bg-surface;
     }
   }
 }
