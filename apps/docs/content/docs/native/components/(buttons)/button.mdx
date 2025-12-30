@@ -100,26 +100,46 @@ Choose from six visual variants for different emphasis levels.
 
 ### Feedback Variants
 
-Choose between highlight and ripple feedback effects for press interactions.
+Choose between highlight, ripple, or no feedback effects for press interactions.
 
 ```tsx
 {
   /* Highlight feedback (default) */
 }
-<Button feedbackVariant="highlight">Highlight Effect</Button>;
+<Button pressableFeedbackVariant="highlight">Highlight Effect</Button>;
 
 {
   /* Ripple feedback */
 }
-<Button feedbackVariant="ripple">Ripple Effect</Button>;
+<Button pressableFeedbackVariant="ripple">Ripple Effect</Button>;
+
+{
+  /* No feedback overlay (only scale animation) */
+}
+<Button pressableFeedbackVariant="none">No Overlay</Button>;
+
+{
+  /* Customize highlight animation */
+}
+<Button
+  pressableFeedbackVariant="highlight"
+  pressableFeedbackHighlightProps={{
+    animation: {
+      backgroundColor: { value: '#3b82f6' },
+      opacity: { value: [0, 0.2] },
+    },
+  }}
+>
+  Custom Highlight
+</Button>;
 
 {
   /* Customize ripple animation */
 }
 <Button
-  feedbackVariant="ripple"
-  animation={{
-    ripple: {
+  pressableFeedbackVariant="ripple"
+  pressableFeedbackRippleProps={{
+    animation: {
       backgroundColor: { value: '#3b82f6' },
       opacity: { value: [0, 0.3, 0] },
     },
@@ -158,10 +178,17 @@ const themeColorAccentForeground = useThemeColor('accent-foreground');
 
 ### Custom Background with LinearGradient
 
-Add gradient backgrounds using absolute positioned elements.
+Add gradient backgrounds using absolute positioned elements. Use `pressableFeedbackVariant="none"` to disable the default highlight overlay, or add a custom ripple effect.
 
 ```tsx
-<Button>
+import { Button, PressableFeedback } from 'heroui-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet } from 'react-native';
+
+{
+  /* Gradient with no feedback overlay */
+}
+<Button pressableFeedbackVariant="none">
   <LinearGradient
     colors={['#9333ea', '#ec4899']}
     start={{ x: 0, y: 0 }}
@@ -169,7 +196,28 @@ Add gradient backgrounds using absolute positioned elements.
     style={StyleSheet.absoluteFill}
   />
   <Button.Label className="text-white font-bold">Gradient</Button.Label>
-</Button>
+</Button>;
+
+{
+  /* Gradient with custom ripple effect */
+}
+<Button pressableFeedbackVariant="none">
+  <LinearGradient
+    colors={['#0d9488', '#ec4899']}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 0 }}
+    style={StyleSheet.absoluteFill}
+  />
+  <PressableFeedback.Ripple
+    animation={{
+      backgroundColor: { value: 'white' },
+      opacity: { value: [0, 0.5, 0] },
+    }}
+  />
+  <Button.Label className="text-white font-bold" pointerEvents="none">
+    Gradient with Ripple
+  </Button.Label>
+</Button>;
 ```
 
 ## Example
@@ -180,12 +228,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
 
 export default function ButtonExample() {
-  const themeColorAccentForeground = useThemeColor('accent-foreground');
-  const themeColorAccentSoftForeground = useThemeColor(
-    'accent-soft-foreground'
-  );
-  const themeColorDangerForeground = useThemeColor('danger-foreground');
-  const themeColorDefaultForeground = useThemeColor('default-foreground');
+  const [
+    themeColorAccentForeground,
+    themeColorAccentSoftForeground,
+    themeColorDangerForeground,
+    themeColorDefaultForeground,
+  ] = useThemeColor([
+    'accent-foreground',
+    'accent-soft-foreground',
+    'danger-foreground',
+    'default-foreground',
+  ]);
 
   return (
     <View className="gap-4 p-4">
@@ -229,13 +282,16 @@ export default function ButtonExample() {
 
 Button extends all props from [PressableFeedback](./pressable-feedback) component with additional button-specific props.
 
-| prop         | type                                                                             | default     | description                                                    |
-| ------------ | -------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------- |
-| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'` | Visual variant of the button                                   |
-| `size`       | `'sm' \| 'md' \| 'lg'`                                                           | `'md'`      | Size of the button                                             |
-| `isIconOnly` | `boolean`                                                                        | `false`     | Whether the button displays an icon only (square aspect ratio) |
+| prop                              | type                                                                             | default       | description                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------- |
+| `variant`                         | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'`   | Visual variant of the button                                   |
+| `size`                            | `'sm' \| 'md' \| 'lg'`                                                           | `'md'`        | Size of the button                                             |
+| `isIconOnly`                      | `boolean`                                                                        | `false`       | Whether the button displays an icon only (square aspect ratio) |
+| `pressableFeedbackVariant`        | `'highlight' \| 'ripple' \| 'none'`                                              | `'highlight'` | Variant of pressable feedback effect                           |
+| `pressableFeedbackHighlightProps` | `PressableFeedbackHighlightProps`                                                | -             | Props for PressableFeedback.Highlight component                |
+| `pressableFeedbackRippleProps`    | `PressableFeedbackRippleProps`                                                   | -             | Props for PressableFeedback.Ripple component                   |
 
-For inherited props including `feedbackVariant`, `feedbackPosition`, `animation`, `isDisabled`, `className`, `children`, and all Pressable props, see [PressableFeedback API Reference](./pressable-feedback#api-reference).
+For inherited props including `animation` (for root scale animation), `isDisabled`, `className`, `children`, and all Pressable props, see [PressableFeedback API Reference](./pressable-feedback#api-reference).
 
 ### Button.Label
 

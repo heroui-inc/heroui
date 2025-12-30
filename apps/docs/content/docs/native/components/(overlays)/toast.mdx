@@ -260,14 +260,15 @@ Set global defaults for variant, placement, animation, and swipe behavior:
 
 ### Toast
 
-| prop           | type                                                          | default     | description                                                               |
-| -------------- | ------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
-| `variant`      | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Visual variant of the toast                                               |
-| `placement`    | `'top' \| 'bottom'`                                           | `'top'`     | Placement of the toast on screen                                          |
-| `isSwipeable`  | `boolean`                                                     | `true`      | Whether the toast can be swiped to dismiss and dragged with rubber effect |
-| `animation`    | `ToastRootAnimation`                                          | -           | Animation configuration                                                   |
-| `className`    | `string`                                                      | -           | Additional CSS class for the toast container                              |
-| `...ViewProps` | `ViewProps`                                                   | -           | All standard React Native View props are supported                        |
+| prop                   | type                                                          | default     | description                                                               |
+| ---------------------- | ------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `variant`              | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Visual variant of the toast                                               |
+| `placement`            | `'top' \| 'bottom'`                                           | `'top'`     | Placement of the toast on screen                                          |
+| `isSwipeable`          | `boolean`                                                     | `true`      | Whether the toast can be swiped to dismiss and dragged with rubber effect |
+| `animation`            | `ToastRootAnimation`                                          | -           | Animation configuration                                                   |
+| `isAnimatedStyleActive` | `boolean`                                                     | `true`      | Whether animated styles (react-native-reanimated) are active              |
+| `className`            | `string`                                                      | -           | Additional CSS class for the toast container                              |
+| `...ViewProps`         | `ViewProps`                                                   | -           | All standard React Native View props are supported                        |
 
 #### ToastRootAnimation
 
@@ -278,17 +279,18 @@ Animation configuration for Toast component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                      | type                    | default                                                                                                                   | description                                                                      |
-| ------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `opacity.value`           | `[number, number]`      | `[1, 0]`                                                                                                                  | Opacity interpolation values for fade effect as toasts move beyond visible stack |
-| `opacity.timingConfig`    | `WithTimingConfig`      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for opacity transitions                           |
-| `translateY.value`        | `[number, number]`      | `[0, 10]`                                                                                                                 | Translate Y interpolation values for peek effect of stacked toasts               |
-| `translateY.timingConfig` | `WithTimingConfig`      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for translateY transitions                        |
-| `scale.value`             | `[number, number]`      | `[1, 0.97]`                                                                                                               | Scale interpolation values for depth effect of stacked toasts                    |
-| `scale.timingConfig`      | `WithTimingConfig`      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for scale transitions                             |
-| `entering.top`            | `EntryOrExitLayoutType` | `FadeInUp`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: -100 }] })`<br/>`.mass(3)`  | Custom entering animation for top placement                                      |
-| `entering.bottom`         | `EntryOrExitLayoutType` | `FadeInDown`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: 100 }] })`<br/>`.mass(3)` | Custom entering animation for bottom placement                                   |
-| `exiting.top`             | `EntryOrExitLayoutType` | Keyframe animation with<br/>`translateY: -100, scale: 0.97, opacity: 0.5`                                                 | Custom exiting animation for top placement                                       |
+| prop                      | type                                    | default                                                                                                                   | description                                                                      |
+| ------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `state`                   | `'disabled' \| 'disable-all' \| boolean` | -                                                                                                                         | Disable animations while customizing properties                                  |
+| `opacity.value`           | `[number, number]`                      | `[1, 0]`                                                                                                                  | Opacity interpolation values for fade effect as toasts move beyond visible stack |
+| `opacity.timingConfig`    | `WithTimingConfig`                      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for opacity transitions                           |
+| `translateY.value`        | `[number, number]`                      | `[0, 10]`                                                                                                                 | Translate Y interpolation values for peek effect of stacked toasts               |
+| `translateY.timingConfig` | `WithTimingConfig`                      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for translateY transitions                        |
+| `scale.value`             | `[number, number]`                      | `[1, 0.97]`                                                                                                               | Scale interpolation values for depth effect of stacked toasts                    |
+| `scale.timingConfig`      | `WithTimingConfig`                      | `{ duration: 300 }`                                                                                                       | Animation timing configuration for scale transitions                             |
+| `entering.top`            | `EntryOrExitLayoutType`                 | `FadeInUp`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: -100 }] })`<br/>`.mass(3)`  | Custom entering animation for top placement                                      |
+| `entering.bottom`         | `EntryOrExitLayoutType`                 | `FadeInDown`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: 100 }] })`<br/>`.mass(3)` | Custom entering animation for bottom placement                                   |
+| `exiting.top`             | `EntryOrExitLayoutType`                 | Keyframe animation with<br/>`translateY: -100, scale: 0.97, opacity: 0.5`                                                 | Custom exiting animation for top placement                                       |
 | `exiting.bottom`          | `EntryOrExitLayoutType` | Keyframe animation with<br/>`translateY: 100, scale: 0.97, opacity: 0.5`                                                  | Custom exiting animation for bottom placement                                    |
 
 ### Toast.Title
