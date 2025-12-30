@@ -12,7 +12,7 @@ links:
 ## Import
 
 ```tsx
-import {Autocomplete} from "@heroui/react";
+import {Autocomplete, useFilter} from "@heroui/react";
 ```
 
 ### Usage
@@ -214,6 +214,35 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | ---------- | ---------------------------------------------- | ------- | -------------------------------- |
 | `filter`   | `(text: string, input: string) => boolean`     | -       | Custom filter function           |
 | `children` | `ReactNode`                                    | -       | Filter content (SearchField and ListBox) |
+
+### useFilter Hook
+
+The `useFilter` hook from React Aria provides filtering functions for autocomplete functionality.
+
+```tsx
+import {useFilter} from "@heroui/react";
+
+const {contains} = useFilter({sensitivity: "base"});
+
+<Autocomplete.Filter filter={contains}>
+  <SearchField>...</SearchField>
+  <ListBox>...</ListBox>
+</Autocomplete.Filter>
+```
+
+**Options:**
+
+| Option        | Type                                                         | Default      | Description                     |
+| ------------- | ------------------------------------------------------------ | ------------ | ------------------------------- |
+| `sensitivity` | `"base" \| "accent" \| "case" \| "variant"`                  | `"base"`     | Locale sensitivity for matching |
+
+**Returns:**
+
+| Function        | Type                                                | Description                     |
+| --------------- | --------------------------------------------------- | ------------------------------- |
+| `contains`      | `(string: string, substring: string) => boolean`          | Returns whether a string contains a given substring |
+| `startsWith`    | `(string: string, substring: string) => boolean`          | Returns whether a string starts with a given substring    |
+| `endsWith`      | `(string: string, substring: string) => boolean`          | Returns whether a string ends with a given substring     |
 
 ### RenderProps
 
