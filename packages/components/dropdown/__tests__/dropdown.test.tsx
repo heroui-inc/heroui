@@ -216,6 +216,118 @@ describe("Dropdown", () => {
     expect(onOpenChange).toHaveBeenCalled();
   });
 
+  it("should return correct keys with textValue in DropdownSection (bug #6065)", async () => {
+    let onSelectionChange = jest.fn();
+
+    const wrapper = render(
+      <Dropdown>
+        <DropdownTrigger>
+          <Button data-testid="trigger-test">Trigger</Button>
+        </DropdownTrigger>
+        <DropdownMenu
+          aria-label="Actions"
+          selectionMode="single"
+          onSelectionChange={onSelectionChange}
+        >
+          <DropdownSection title="Sidebar control">
+            <DropdownItem key="expanded" textValue="expanded">
+              Expanded
+            </DropdownItem>
+            <DropdownItem key="collapsed" textValue="collapsed">
+              Collapsed
+            </DropdownItem>
+            <DropdownItem key="hover" textValue="hover">
+              Expand on hover
+            </DropdownItem>
+          </DropdownSection>
+        </DropdownMenu>
+      </Dropdown>,
+    );
+
+    let triggerButton = wrapper.getByTestId("trigger-test");
+
+    await act(async () => {
+      await user.click(triggerButton);
+    });
+
+    let menuItems = wrapper.getAllByRole("menuitemradio");
+
+    expect(menuItems.length).toBe(3);
+
+    await act(async () => {
+      await user.click(menuItems[0]);
+    });
+
+    expect(onSelectionChange).toHaveBeenCalledTimes(1);
+
+    // Get the Set passed to onSelectionChange
+    const selectionSet = onSelectionChange.mock.calls[0][0];
+    const selectedKey = Array.from(selectionSet)[0];
+
+    // Bug #6065: This should be "expanded", not "react-aria-123"
+    expect(selectedKey).toBe("expanded");
+  });
+
+  it("should return correct keys with textValue in dynamic DropdownSection (bug #6065)", async () => {
+    let onSelectionChange = jest.fn();
+    const items = [
+      {key: "expanded", label: "Expanded"},
+      {key: "collapsed", label: "Collapsed"},
+      {key: "hover", label: "Expand on hover"},
+    ];
+
+    const wrapper = render(
+      <Dropdown>
+        <DropdownTrigger>
+          <Button data-testid="trigger-test">Trigger</Button>
+        </DropdownTrigger>
+        <DropdownMenu
+          aria-label="Actions"
+          items={[{key: "sidebar", title: "Sidebar control", children: items}]}
+          selectionMode="single"
+          onSelectionChange={onSelectionChange}
+        >
+          {(section: any) => (
+            <DropdownSection
+              aria-label={section.title}
+              items={section.children}
+              title={section.title}
+            >
+              {(item: any) => (
+                <DropdownItem key={item.key} textValue={item.label}>
+                  {item.label}
+                </DropdownItem>
+              )}
+            </DropdownSection>
+          )}
+        </DropdownMenu>
+      </Dropdown>,
+    );
+
+    let triggerButton = wrapper.getByTestId("trigger-test");
+
+    await act(async () => {
+      await user.click(triggerButton);
+    });
+
+    let menuItems = wrapper.getAllByRole("menuitemradio");
+
+    expect(menuItems.length).toBe(3);
+
+    await act(async () => {
+      await user.click(menuItems[0]);
+    });
+
+    expect(onSelectionChange).toHaveBeenCalledTimes(1);
+
+    // Get the Set passed to onSelectionChange
+    const selectionSet = onSelectionChange.mock.calls[0][0];
+    const selectedKey = Array.from(selectionSet)[0];
+
+    // Bug #6065: This should be "expanded", not "react-aria-123"
+    expect(selectedKey).toBe("expanded");
+  });
+
   it("should work with multiple selection (controlled)", async () => {
     let onOpenChange = jest.fn();
     let onSelectionChange = jest.fn();
