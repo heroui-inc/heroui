@@ -47,6 +47,7 @@ const pagination = tv({
       "touch-none",
       "pointer-events-none",
       "z-20",
+      "box-border",
     ],
     forwardIcon: [
       "hidden",
@@ -66,6 +67,7 @@ const pagination = tv({
           "bg-transparent",
           "data-[hover=true]:bg-default-100",
         ],
+        cursor: ["border-medium", "border-transparent"],
       },
       light: {
         item: "bg-transparent",
@@ -73,6 +75,7 @@ const pagination = tv({
       flat: {},
       faded: {
         item: ["border-medium", "border-default"],
+        cursor: ["border-medium", "border-transparent"],
       },
     },
     color: {
@@ -154,7 +157,7 @@ const pagination = tv({
     variant: "flat",
     color: "primary",
     size: "md",
-    radius: "full",
+    radius: "md",
     isCompact: false,
     isDisabled: false,
     showShadow: false,
@@ -390,17 +393,17 @@ const pagination = tv({
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "sm",
-      class: "min-w-8 w-auto h-8 text-tiny px-3",
+      class: "min-w-8 w-auto h-8 text-tiny px-1",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "md",
-      class: "min-w-9 w-auto h-9 text-small px-4",
+      class: "min-w-9 w-auto h-9 text-small px-2",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "lg",
-      class: "min-w-10 w-auto h-10 text-medium px-5",
+      class: "min-w-10 w-auto h-10 text-medium px-2",
     },
     // radius
     {
