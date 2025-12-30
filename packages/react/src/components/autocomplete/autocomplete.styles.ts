@@ -12,20 +12,6 @@ export const autocompleteVariants = tv({
     popover: "autocomplete__popover",
     filter: "autocomplete__filter",
   },
-  variants: {
-    isOnSurface: {
-      true: "autocomplete--on-surface",
-      false: {},
-    },
-    fullWidth: {
-      true: "autocomplete--full-width",
-      false: "",
-    },
-  },
-  defaultVariants: {
-    isOnSurface: false,
-    fullWidth: false,
-  },
 });
 
 export type AutocompleteVariants = VariantProps<typeof autocompleteVariants>;

@@ -43,10 +43,9 @@ interface AutocompleteRootProps<T extends object, M extends "single" | "multiple
 const AutocompleteRoot = <T extends object = object, M extends "single" | "multiple" = "single">({
   children,
   className,
-  fullWidth,
   ...props
 }: AutocompleteRootProps<T, M>) => {
-  const slots = React.useMemo(() => autocompleteVariants({fullWidth}), [fullWidth]);
+  const slots = React.useMemo(() => autocompleteVariants({}), []);
 
   return (
     <AutocompleteContext value={{slots}}>
