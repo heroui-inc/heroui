@@ -19,6 +19,7 @@
     "(navigation)/accordion",
     "(navigation)/tabs",
     "---Overlays---",
+    "(overlays)/bottom-sheet",
     "(overlays)/dialog",
     "(overlays)/popover",
     "(overlays)/toast",

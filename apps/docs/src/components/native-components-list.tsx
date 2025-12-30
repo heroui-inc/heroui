@@ -29,7 +29,12 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Overlays",
-    components: ["(overlays)/dialog", "(overlays)/popover", "(overlays)/toast"],
+    components: [
+      "(overlays)/bottom-sheet",
+      "(overlays)/dialog",
+      "(overlays)/popover",
+      "(overlays)/toast",
+    ],
   },
   {
     category: "Feedback",
