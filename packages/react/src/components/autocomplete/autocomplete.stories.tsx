@@ -10,7 +10,7 @@ import {SearchField} from "../search-field";
 import {Tag} from "../tag";
 import {TagGroup} from "../tag-group";
 
-import Autocomplete from "./index";
+import {Autocomplete} from "./index";
 
 const meta: Meta<typeof Autocomplete> = {
   component: Autocomplete,
