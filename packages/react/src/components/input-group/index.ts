@@ -1,6 +1,12 @@
 import type {ComponentProps} from "react";
 
-import {InputGroupInput, InputGroupPrefix, InputGroupRoot, InputGroupSuffix} from "./input-group";
+import {
+  InputGroupInput,
+  InputGroupPrefix,
+  InputGroupRoot,
+  InputGroupSuffix,
+  InputGroupTextArea,
+} from "./input-group";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -8,6 +14,7 @@ import {InputGroupInput, InputGroupPrefix, InputGroupRoot, InputGroupSuffix} fro
 export const InputGroup = Object.assign(InputGroupRoot, {
   Root: InputGroupRoot,
   Input: InputGroupInput,
+  TextArea: InputGroupTextArea,
   Prefix: InputGroupPrefix,
   Suffix: InputGroupSuffix,
 });
@@ -16,6 +23,7 @@ export type InputGroup = {
   Props: ComponentProps<typeof InputGroupRoot>;
   RootProps: ComponentProps<typeof InputGroupRoot>;
   InputProps: ComponentProps<typeof InputGroupInput>;
+  TextAreaProps: ComponentProps<typeof InputGroupTextArea>;
   PrefixProps: ComponentProps<typeof InputGroupPrefix>;
   SuffixProps: ComponentProps<typeof InputGroupSuffix>;
 };
@@ -23,12 +31,13 @@ export type InputGroup = {
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {InputGroupInput, InputGroupPrefix, InputGroupRoot, InputGroupSuffix};
+export {InputGroupInput, InputGroupPrefix, InputGroupRoot, InputGroupSuffix, InputGroupTextArea};
 
 export type {
   InputGroupRootProps,
   InputGroupRootProps as InputGroupProps,
   InputGroupInputProps,
+  InputGroupTextAreaProps,
   InputGroupPrefixProps,
   InputGroupSuffixProps,
 } from "./input-group";

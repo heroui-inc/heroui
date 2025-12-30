@@ -32,16 +32,6 @@ export function Variants() {
           </p>
         </Surface>
       </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Quaternary</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="quaternary">
-          <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
-          <p className="text-sm text-muted">
-            This is a quaternary surface variant. It uses bg-surface-quaternary styling.
-          </p>
-        </Surface>
-      </div>
     </div>
   );
 }

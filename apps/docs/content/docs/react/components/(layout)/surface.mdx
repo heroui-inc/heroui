@@ -21,7 +21,7 @@ import { Surface } from '@heroui/react';
 
 ## Overview
 
-The Surface component is a semantic container that provides different levels of visual prominence through variants. It also exposes a context that child components (like Input, TextArea, RadioGroup, and InputOTP) can use to automatically apply on-surface styling.
+The Surface component is a semantic container that provides different levels of visual prominence through variants. It also exposes a context that child components (like Input, TextArea, RadioGroup, and InputOTP) can use to automatically apply in-surface styling.
 
 ### Variants
 
@@ -30,11 +30,10 @@ Surface comes in semantic variants that describe their prominence level:
 - **`default`** - Standard surface appearance (bg-surface)
 - **`secondary`** - Medium prominence (bg-surface-secondary)
 - **`tertiary`** - Higher prominence (bg-surface-tertiary)
-- **`quaternary`** - Highest prominence (bg-surface-quaternary)
 
 ## Context
 
-The Surface component provides a `SurfaceContext` that child components can access via `useContext(SurfaceContext)`. Form components like Input, TextArea, RadioGroup, and InputOTP automatically detect when they're inside a Surface and apply the appropriate on-surface styling.
+The Surface component provides a `SurfaceContext` that child components can access via `useContext(SurfaceContext)`. Form components like Input, TextArea, RadioGroup, and InputOTP automatically detect when they're inside a Surface and apply the appropriate in-surface styling.
 
 ```tsx
 import { Surface, Input, TextArea } from '@heroui/react';
@@ -48,8 +47,8 @@ function MyComponent() {
 
   return (
     <>
-      <Input placeholder="This input will use on-surface styling" />
-      <TextArea placeholder="This textarea will use on-surface styling" />
+      <Input placeholder="This input will use in-surface styling" />
+      <TextArea placeholder="This textarea will use in-surface styling" />
     </>
   );
 }
@@ -115,7 +114,6 @@ The Surface component uses these CSS classes ([View source styles](https://githu
 - `.surface--default` - Default surface variant (bg-surface)
 - `.surface--secondary` - Secondary surface variant (bg-surface-secondary)
 - `.surface--tertiary` - Tertiary surface variant (bg-surface-tertiary)
-- `.surface--quaternary` - Quaternary surface variant (bg-surface-quaternary)
 
 ## API Reference
 
@@ -123,7 +121,7 @@ The Surface component uses these CSS classes ([View source styles](https://githu
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"default" \| "secondary" \| "tertiary" \| "quaternary"` | `"default"` | The visual variant of the surface |
+| `variant` | `"default" \| "secondary" \| "tertiary"` | `"default"` | The visual variant of the surface |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The surface content |
 
@@ -139,7 +137,7 @@ import { SurfaceContext } from '@heroui/react';
 
 function MyComponent() {
   const { variant } = useContext(SurfaceContext);
-  // variant will be "default" | "secondary" | "tertiary" | "quaternary" | undefined
+  // variant will be "default" | "secondary" | "tertiary" | undefined
 }
 ```
 

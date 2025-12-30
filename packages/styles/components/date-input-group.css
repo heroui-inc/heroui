@@ -109,32 +109,58 @@
   @apply mr-3 flex items-center;
 }
 
-/* On Surface variant */
-.date-input-group--on-surface {
-  @apply bg-on-surface shadow-none;
+/**
+ * In-Surface Variants
+ * Used when date input group is placed on a Surface component background.
+ * Uses CSS custom properties to reduce repetition.
+ */
+.date-input-group--in-surface-default,
+.date-input-group--in-surface-secondary,
+.date-input-group--in-surface-tertiary {
+  @apply shadow-none;
+  background-color: var(--date-input-group-bg);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      @apply bg-on-surface-hover;
+      background-color: var(--date-input-group-bg-hover);
     }
   }
 
   &:focus-within,
   &[data-focus-within="true"] {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--date-input-group-bg-focus);
   }
 
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-on-surface-focus);
     border-color: var(--color-field-border-invalid);
+    background-color: var(--date-input-group-bg-focus);
   }
 
   [data-slot="date-input-group-input"] {
     @apply bg-transparent;
   }
+}
+
+/* In-surface variant property definitions */
+.date-input-group--in-surface-default {
+  --date-input-group-bg: var(--color-in-surface);
+  --date-input-group-bg-hover: var(--color-in-surface-hover);
+  --date-input-group-bg-focus: var(--color-in-surface-focus);
+}
+
+.date-input-group--in-surface-secondary {
+  --date-input-group-bg: var(--color-in-surface-secondary);
+  --date-input-group-bg-hover: var(--color-in-surface-secondary-hover);
+  --date-input-group-bg-focus: var(--color-in-surface-secondary-focus);
+}
+
+.date-input-group--in-surface-tertiary {
+  --date-input-group-bg: var(--color-in-surface-tertiary);
+  --date-input-group-bg-hover: var(--color-in-surface-tertiary-hover);
+  --date-input-group-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

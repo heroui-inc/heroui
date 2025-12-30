@@ -30,14 +30,14 @@ export default () => (
     <Label />
     <InputGroup>
       <InputGroup.Prefix />
-      <InputGroup.Input />
+      <InputGroup.Input /> {/* Or use InputGroup.TextArea for multiline input */}
       <InputGroup.Suffix />
     </InputGroup>
   </TextField>
 )
 ```
 
-> **InputGroup** wraps an input field with optional prefix and suffix elements, creating a visually cohesive group. It's typically used within **[TextField](/docs/components/text-field)** to add icons, text, buttons, or other elements before or after the input.
+> **InputGroup** wraps an input field with optional prefix and suffix elements, creating a visually cohesive group. It's typically used within **[TextField](/docs/components/text-field)** to add icons, text, buttons, or other elements before or after the input. Use **InputGroup.Input** for single-line inputs or **InputGroup.TextArea** for multiline text inputs.
 
 ### With Prefix Icon
 
@@ -133,11 +133,17 @@ InputGroup respects the disabled state from its parent TextField.
 
 <ComponentPreview name="input-group-full-width" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, InputGroup automatically applies on-surface styling. You can also manually control this with the `isOnSurface` prop.
+When used inside a [Surface](/docs/components/surface) component, InputGroup automatically applies in-surface styling. You can also manually control this with the `inSurface` prop.
 
-<ComponentPreview name="input-group-on-surface" />
+<ComponentPreview name="input-group-in-surface" />
+
+### With TextArea
+
+Use **InputGroup.TextArea** for multiline text inputs with prefix and suffix elements. When a textarea is present, the container automatically adjusts its height to accommodate the content and aligns prefix/suffix elements to the top.
+
+<ComponentPreview name="input-group-with-textarea" />
 
 <RelatedComponents component="inputgroup" />
 
@@ -175,7 +181,7 @@ InputGroup uses CSS classes that can be customized. Override the component class
 ```css
 @layer components {
   .input-group {
-    @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border text-sm outline-none;
+    @apply bg-field text-field-foreground shadow-field rounded-field inline-flex min-h-9 items-center overflow-hidden border text-sm outline-none;
   }
 
   .input-group__input {
@@ -190,20 +196,22 @@ InputGroup uses CSS classes that can be customized. Override the component class
     @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
   }
 
-  /* On surface variant */
-  .input-group--on-surface {
-    @apply bg-on-surface shadow-none;
+  /* In surface variant */
+  .input-group--in-surface {
+    @apply bg-in-surface shadow-none;
   }
 }
 ```
 
 ### CSS Classes
 
-- `.input-group` – Root container with border, background, and flex layout
-- `.input-group__input` – Input element with transparent background and no border
-- `.input-group__prefix` – Prefix container with left border radius
-- `.input-group__suffix` – Suffix container with right border radius
-- `.input-group--on-surface` – Variant for use on surface backgrounds
+- `.input-group` – Root container with border, background, and flex layout. Uses `min-h-9` for flexible height and `items-center` by default, switching to `items-start` when a textarea is present.
+- `.input-group__input` – Input element with transparent background and no border. Also used as the base class for textarea elements.
+- `.input-group__prefix` – Prefix container with left border radius. Aligns to top when used with textarea.
+- `.input-group__suffix` – Suffix container with right border radius. Aligns to top when used with textarea.
+- `.input-group--in-surface` – Variant for use in surface backgrounds
+
+**Note**: When using `InputGroup.TextArea`, the container automatically switches from `items-center` to `items-start` alignment and uses `height: auto` instead of a fixed height. Prefix and suffix elements align to the top with additional padding to match the textarea's vertical padding. The textarea uses the same `.input-group__input` base class with textarea-specific styles (minimum height and vertical resize) applied via the `[data-slot="input-group-textarea"]` attribute selector.
 
 ### Interactive States
 
@@ -224,7 +232,7 @@ InputGroup inherits all props from React Aria's [Group](https://react-spectrum.a
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | Child components (Input, Prefix, Suffix) or render function. |
+| `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | Child components (Input, TextArea, Prefix, Suffix) or render function. |
 | `className` | `string \| (values: GroupRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: GroupRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the input group should take full width of its container |
@@ -234,7 +242,7 @@ InputGroup inherits all props from React Aria's [Group](https://react-spectrum.a
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `isOnSurface` | `boolean` | - | Whether the group is displayed on a surface background. Automatically detected when inside a Surface component. |
+| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the group is displayed in a surface background. Automatically detected when inside a Surface component. |
 
 #### Accessibility Props
 
@@ -251,7 +259,8 @@ InputGroup inherits all props from React Aria's [Group](https://react-spectrum.a
 InputGroup works with these subcomponents:
 
 - **InputGroup.Root** - Root container (also available as `InputGroup`)
-- **InputGroup.Input** - Input element component
+- **InputGroup.Input** - Single-line input element component
+- **InputGroup.TextArea** - Multiline textarea element component
 - **InputGroup.Prefix** - Prefix container component
 - **InputGroup.Suffix** - Suffix container component
 
@@ -262,13 +271,28 @@ InputGroup.Input inherits all props from React Aria's [Input](https://react-spec
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | CSS classes for styling. |
-| `isOnSurface` | `boolean` | - | Whether the input is displayed on a surface background. |
+| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the input is displayed in a surface background. |
 | `type` | `string` | `'text'` | Input type (text, password, email, etc.). |
 | `value` | `string` | - | Current value (controlled). |
 | `defaultValue` | `string` | - | Default value (uncontrolled). |
 | `placeholder` | `string` | - | Placeholder text. |
 | `disabled` | `boolean` | - | Whether the input is disabled. |
 | `readOnly` | `boolean` | - | Whether the input is read-only. |
+
+#### InputGroup.TextArea Props
+
+InputGroup.TextArea inherits all props from React Aria's [TextArea](https://react-spectrum.adobe.com/react-aria/TextArea.html) component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | CSS classes for styling. |
+| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the textarea is displayed in a surface background. |
+| `value` | `string` | - | Current value (controlled). |
+| `defaultValue` | `string` | - | Default value (uncontrolled). |
+| `placeholder` | `string` | - | Placeholder text. |
+| `rows` | `number` | - | Number of visible text lines. |
+| `disabled` | `boolean` | - | Whether the textarea is disabled. |
+| `readOnly` | `boolean` | - | Whether the textarea is read-only. |
 
 #### InputGroup.Prefix Props
 
@@ -305,6 +329,40 @@ function Example() {
           </Button>
         </InputGroup.Suffix>
       </InputGroup>
+    </TextField>
+  );
+}
+```
+
+### TextArea Usage Example
+
+```tsx
+import {Envelope} from "@gravity-ui/icons";
+import {Description, FieldError, InputGroup, Label, TextField} from "@heroui/react";
+import {useState} from "react";
+
+function TextAreaExample() {
+  const [feedback, setFeedback] = useState("");
+
+  return (
+    <TextField fullWidth isInvalid={feedback.length > 500} name="feedback" onChange={setFeedback}>
+      <Label>Your Feedback</Label>
+      <InputGroup fullWidth>
+        <InputGroup.Prefix>
+          <Envelope className="size-4 text-muted" />
+        </InputGroup.Prefix>
+        <InputGroup.TextArea
+          className="resize-none"
+          placeholder="Share your thoughts, suggestions, or issues..."
+          rows={5}
+          value={feedback}
+        />
+      </InputGroup>
+      <Description className="flex w-full items-center justify-between px-1">
+        <span>Maximum 500 characters.</span>
+        <span className="ml-auto">{feedback.length}/500</span>
+      </Description>
+      <FieldError>Feedback must be less than 500 characters</FieldError>
     </TextField>
   );
 }

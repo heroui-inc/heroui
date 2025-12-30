@@ -1,0 +1,23 @@
+/* Base breadcrumbs container */
+.breadcrumbs {
+  @apply flex items-center;
+
+  /* Breadcrumb link */
+  .breadcrumbs__link {
+    @apply relative px-0.5 text-sm leading-5 font-medium text-muted opacity-100;
+
+    &[data-current="true"] {
+      @apply text-link opacity-100;
+    }
+  }
+
+  /* Breadcrumb item wrapper */
+  .breadcrumbs__item {
+    @apply flex shrink-0 items-center justify-center gap-0.5 px-0.5;
+  }
+
+  /* Separator icon */
+  .breadcrumbs__separator {
+    @apply size-3 text-muted rtl:rotate-180;
+  }
+}

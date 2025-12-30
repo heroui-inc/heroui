@@ -81,11 +81,11 @@ Customize the search icon and clear button icons.
 
 <ComponentPreview name="search-field-full-width" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, SearchField automatically applies on-surface styling.
+When used inside a [Surface](/docs/components/surface) component, SearchField automatically applies in-surface styling.
 
-<ComponentPreview name="search-field-on-surface" />
+<ComponentPreview name="search-field-in-surface" />
 
 ### Form Example
 
@@ -167,7 +167,7 @@ SearchField uses CSS classes that can be customized. Override the component clas
 - `.search-field__input` – The search input field
 - `.search-field__search-icon` – The search icon displayed on the left
 - `.search-field__clear-button` – Button to clear the search field
-- `.search-field__group--on-surface` – Applied when used inside a Surface component
+- `.search-field__group--in-surface` – Applied when used inside a Surface component
 
 > **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options.
 
@@ -199,7 +199,7 @@ SearchField inherits all props from React Aria's [SearchField](https://react-spe
 | `style` | `React.CSSProperties \| (values: SearchFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the search field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
-| `isOnSurface` | `boolean` | - | Whether the field is on a surface (auto-detected when inside Surface). |
+| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the field is in a surface (auto-detected when inside Surface). |
 
 #### Value Props
 
@@ -292,7 +292,7 @@ SearchField.Input inherits props from React Aria's [Input](https://react-spectru
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | CSS classes for styling. |
-| `isOnSurface` | `boolean` | - | Whether the input is on a surface (auto-detected when inside Surface). |
+| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the input is in a surface (auto-detected when inside Surface). |
 | `placeholder` | `string` | - | Placeholder text displayed when the input is empty. |
 | `type` | `string` | `"search"` | Input type (automatically set to "search"). |
 
