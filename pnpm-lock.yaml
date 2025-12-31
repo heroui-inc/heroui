@@ -334,9 +334,6 @@ importers:
       '@react-types/shared':
         specifier: 3.32.1
         version: 3.32.1(react@19.2.3)
-      clsx:
-        specifier: 2.1.1
-        version: 2.1.1
       input-otp:
         specifier: 1.4.2
         version: 1.4.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)

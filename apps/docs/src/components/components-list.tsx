@@ -66,7 +66,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Pickers",
-    components: ["combobox", "select"],
+    components: ["autocomplete", "combobox", "select"],
   },
   {
     category: "Typography",
