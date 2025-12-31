@@ -22,8 +22,10 @@ import {dateRangePicker, dateInput, cn} from "@heroui/theme";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 import {useDatePickerBase} from "./use-date-picker-base";
-interface Props<T extends DateValue>
-  extends Omit<UseDatePickerBaseProps<T>, keyof AriaDateRangePickerProps<T>> {
+interface Props<T extends DateValue> extends Omit<
+  UseDatePickerBaseProps<T>,
+  keyof AriaDateRangePickerProps<T>
+> {
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.

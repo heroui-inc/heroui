@@ -8,11 +8,10 @@ import {useRangeCalendar} from "./use-range-calendar";
 import {CalendarProvider} from "./calendar-context";
 import {CalendarBase} from "./calendar-base";
 
-interface Props<T extends DateValue>
-  extends Omit<
-    UseRangeCalendarProps<T>,
-    "isHeaderExpanded" | "onHeaderExpandedChange" | "isHeaderWrapperExpanded"
-  > {}
+interface Props<T extends DateValue> extends Omit<
+  UseRangeCalendarProps<T>,
+  "isHeaderExpanded" | "onHeaderExpandedChange" | "isHeaderWrapperExpanded"
+> {}
 
 export type RangeCalendarProps<T extends DateValue = DateValue> = Props<T>;
 

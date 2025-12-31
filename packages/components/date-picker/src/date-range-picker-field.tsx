@@ -20,9 +20,7 @@ type HeroUIBaseProps<T extends DateValue> = Omit<
 >;
 
 export interface Props<T extends DateValue>
-  extends HeroUIBaseProps<T>,
-    AriaDatePickerProps<T>,
-    Pick<DateInputProps, "createCalendar"> {
+  extends HeroUIBaseProps<T>, AriaDatePickerProps<T>, Pick<DateInputProps, "createCalendar"> {
   /** DateInput classes slots. */
   slots: DateInputReturnType;
   /** DateInput classes. */

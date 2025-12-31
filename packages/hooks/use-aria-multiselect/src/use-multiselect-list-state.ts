@@ -6,9 +6,7 @@ import {useMemo} from "react";
 import {useListState} from "@react-stately/list";
 
 export interface MultiSelectListProps<T>
-  extends CollectionBase<T>,
-    AsyncLoadable,
-    MultipleSelection {}
+  extends CollectionBase<T>, AsyncLoadable, MultipleSelection {}
 
 export interface MultiSelectListState<T> extends ListState<T> {
   /** The keys for the currently selected items. */

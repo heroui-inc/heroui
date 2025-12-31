@@ -23,8 +23,9 @@ import {useMemo, useCallback, useState} from "react";
 import {useTextField} from "@react-aria/textfield";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
-export interface Props<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement>
-  extends Omit<HTMLHeroUIProps<"input">, keyof InputVariantProps> {
+export interface Props<
+  T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement,
+> extends Omit<HTMLHeroUIProps<"input">, keyof InputVariantProps> {
   /**
    * Ref to the DOM node.
    */

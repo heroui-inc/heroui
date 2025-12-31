@@ -109,7 +109,7 @@ export default function App() {
             </Button>
             <Button
               onPress={() => {
-                setValue(nextMonthValue), setFocusedValue(nextMonthValue.start);
+                (setValue(nextMonthValue), setFocusedValue(nextMonthValue.start));
               }}
             >
               Next month

@@ -6,8 +6,10 @@ import {useMemo} from "react";
 import {useListboxItem} from "./use-listbox-item";
 import {ListboxSelectedIcon} from "./listbox-selected-icon";
 
-export interface ListboxItemProps<T extends object = object>
-  extends Omit<UseListboxItemProps<T>, "hasDescriptionTextChild" | "hasTitleTextChild"> {}
+export interface ListboxItemProps<T extends object = object> extends Omit<
+  UseListboxItemProps<T>,
+  "hasDescriptionTextChild" | "hasTitleTextChild"
+> {}
 
 /**
  * @internal

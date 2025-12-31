@@ -13,8 +13,7 @@ import {dataAttr, objectToDeps, mergeProps} from "@heroui/shared-utils";
 import {useMemo} from "react";
 
 interface Props
-  extends Omit<HTMLHeroUIProps<"li">, keyof AriaBreadcrumbItemProps>,
-    AriaBreadcrumbItemProps {
+  extends Omit<HTMLHeroUIProps<"li">, keyof AriaBreadcrumbItemProps>, AriaBreadcrumbItemProps {
   /**
    * Ref to the DOM node.
    */

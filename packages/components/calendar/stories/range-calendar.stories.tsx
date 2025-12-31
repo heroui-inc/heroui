@@ -275,7 +275,7 @@ const PresetsTemplate = (args: RangeCalendarProps) => {
             </Button>
             <Button
               onPress={() => {
-                setValue(nextMonthValue), setFocusedValue(nextMonthValue.start);
+                (setValue(nextMonthValue), setFocusedValue(nextMonthValue.start));
               }}
             >
               Next month

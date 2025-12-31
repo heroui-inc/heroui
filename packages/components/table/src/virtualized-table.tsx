@@ -11,8 +11,10 @@ import TableColumnHeader from "./table-column-header";
 import TableSelectAllCheckbox from "./table-select-all-checkbox";
 import VirtualizedTableBody from "./virtualized-table-body";
 
-export interface TableProps<T = object>
-  extends Omit<UseTableProps<T>, "isSelectable" | "isMultiSelectable"> {
+export interface TableProps<T = object> extends Omit<
+  UseTableProps<T>,
+  "isSelectable" | "isMultiSelectable"
+> {
   isVirtualized?: boolean;
   rowHeight?: number;
   maxTableHeight?: number;
@@ -51,7 +53,7 @@ const VirtualizedTable = forwardRef<"table", TableProps>((props, ref) => {
         </BaseComponent>
       );
     },
-    [getWrapperProps, maxTableHeight],
+    [getWrapperProps, maxTableHeight, parentRef],
   );
 
   const items = [...collection.body.childNodes];

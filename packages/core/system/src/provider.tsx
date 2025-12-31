@@ -12,8 +12,7 @@ import {OverlayProvider} from "@react-aria/overlays";
 import {ProviderContext} from "./provider-context";
 
 export interface HeroUIProviderProps
-  extends Omit<ModalProviderProps, "children">,
-    ProviderContextProps {
+  extends Omit<ModalProviderProps, "children">, ProviderContextProps {
   children: React.ReactNode;
   /**
    * Controls whether `framer-motion` animations are skipped within the application.

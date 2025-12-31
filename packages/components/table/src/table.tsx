@@ -11,8 +11,10 @@ import TableColumnHeader from "./table-column-header";
 import TableSelectAllCheckbox from "./table-select-all-checkbox";
 import TableBody from "./table-body";
 
-export interface TableProps<T = object>
-  extends Omit<UseTableProps<T>, "isSelectable" | "isMultiSelectable"> {
+export interface TableProps<T = object> extends Omit<
+  UseTableProps<T>,
+  "isSelectable" | "isMultiSelectable"
+> {
   isVirtualized?: boolean;
   rowHeight?: number;
   maxTableHeight?: number;

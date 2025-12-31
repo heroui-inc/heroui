@@ -6,8 +6,10 @@ import {forwardRef} from "@heroui/system";
 import Thumb from "./slider-thumb";
 import {useSlider} from "./use-slider";
 
-export interface SliderProps
-  extends Omit<UseSliderProps, "isVertical" | "hasMarks" | "hasSingleThumb"> {}
+export interface SliderProps extends Omit<
+  UseSliderProps,
+  "isVertical" | "hasMarks" | "hasSingleThumb"
+> {}
 
 const Slider = forwardRef<"div", SliderProps>((props, ref) => {
   const {

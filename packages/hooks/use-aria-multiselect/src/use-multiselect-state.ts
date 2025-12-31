@@ -24,7 +24,8 @@ import {useState} from "react";
 import {useMultiSelectListState} from "./use-multiselect-list-state";
 
 export interface MultiSelectProps<T>
-  extends CollectionBase<T>,
+  extends
+    CollectionBase<T>,
     AsyncLoadable,
     Omit<InputBase, "isReadOnly">,
     DOMProps,
@@ -54,9 +55,7 @@ export interface MultiSelectProps<T>
 }
 
 export interface MultiSelectState<T>
-  extends MultiSelectListState<T>,
-    MenuTriggerState,
-    FormValidationState {
+  extends MultiSelectListState<T>, MenuTriggerState, FormValidationState {
   /** Whether the select is currently focused. */
   isFocused: boolean;
   /** Sets whether the select is focused. */

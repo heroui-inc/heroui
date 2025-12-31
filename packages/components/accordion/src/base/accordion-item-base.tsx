@@ -24,7 +24,8 @@ export type AccordionItemIndicatorProps = {
 };
 
 export interface Props<T extends object = {}>
-  extends Omit<ItemProps<"button", T>, "children" | "title" | keyof FocusableProps>,
+  extends
+    Omit<ItemProps<"button", T>, "children" | "title" | keyof FocusableProps>,
     FocusableProps,
     PressEvents {
   /**

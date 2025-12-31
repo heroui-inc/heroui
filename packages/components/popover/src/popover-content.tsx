@@ -13,8 +13,7 @@ import {useDialog} from "@react-aria/dialog";
 import {usePopoverContext} from "./popover-context";
 
 export interface PopoverContentProps
-  extends AriaDialogProps,
-    Omit<HTMLHeroUIProps, "children" | "role"> {
+  extends AriaDialogProps, Omit<HTMLHeroUIProps, "children" | "role"> {
   children?: ReactNode | ((titleProps: DOMAttributes<HTMLElement>) => ReactNode);
 }
 

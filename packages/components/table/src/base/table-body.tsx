@@ -5,8 +5,7 @@ import type {ReactNode} from "react";
 import {TableBody as TableBodyBase} from "@react-stately/table";
 
 export interface TableBodyProps<T>
-  extends TableBodyBaseProps<T>,
-    Omit<HTMLHeroUIProps<"tbody">, keyof TableBodyBaseProps<T>> {
+  extends TableBodyBaseProps<T>, Omit<HTMLHeroUIProps<"tbody">, keyof TableBodyBaseProps<T>> {
   /**
    * Provides content to display a loading component when the `loadingState` is `loading` or `loadingMore`.
    */
