@@ -17,7 +17,7 @@ import {XProfileDemo} from "./x-profile-demo";
 
 export function DemoComponents() {
   return (
-    <div className="mx-auto grid grid-cols-3 gap-8 py-24">
+    <div className="mx-auto grid grid-cols-3 gap-8">
       {/* Left */}
       <div className="flex flex-col items-center gap-10">
         <TextfieldDemo />
