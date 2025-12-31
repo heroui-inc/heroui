@@ -6,6 +6,7 @@ import {render, screen} from "@testing-library/react";
 import {extendVariants} from "../src/extend-variants";
 import {Button} from "../test-utils/extend-components";
 import {Card} from "../test-utils/slots-component";
+import {Link} from "../../react/src";
 
 const createExtendNoSlotsComponent = (styles: ExtendVariantProps = {}) =>
   extendVariants(Button, {
@@ -40,6 +41,11 @@ const createExtendNoSlotsComponent = (styles: ExtendVariantProps = {}) =>
 const createExtendSlotsComponent = (styles: ExtendVariantWithSlotsProps = {}) =>
   extendVariants(Card, {
     variants: {
+      variant: {
+        flat: "",
+        filled: "",
+        test: "",
+      },
       shadow: {
         none: {
           base: "shadow-xs",
@@ -104,12 +110,31 @@ describe("extendVariants function - no slots", () => {
     expect(ref.current).not.toBeNull();
   });
 
-  test("should render with given text", () => {
+  test("as Link should work", () => {
     const Button2 = createExtendNoSlotsComponent();
 
-    render(<Button2>Press me</Button2>);
+    const {container} = render(
+      <Button2 as={Link} href="/sign-in">
+        Press me
+      </Button2>,
+    );
 
+    // Link component from react package - verify it renders
+    const link = container.querySelector("a");
+
+    expect(link).toBeInTheDocument();
     expect(screen.getByText("Press me")).toBeInTheDocument();
+  });
+
+  test("should render with given text", () => {
+    const Button2 = createExtendNoSlotsComponent();
+    const {container} = render(
+      <Button2 className="px-3 py-2 rounded-medium hover:opacity-80">Press me</Button2>,
+    );
+
+    const button = container.querySelector("button");
+
+    expect(button).toHaveTextContent("Press me");
   });
 
   test("should override the base styles", () => {
@@ -179,6 +204,78 @@ describe("extendVariants function - no slots", () => {
     const button = container.querySelector("button");
 
     expect(button).toHaveClass("scale-150");
+  });
+
+  test("as prop should change rendered element to anchor", () => {
+    const Button2 = createExtendNoSlotsComponent();
+    const {container} = render(
+      <Button2 as={Link} href="/test">
+        Link Button
+      </Button2>,
+    );
+
+    const link = container.querySelector("a");
+
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "/test");
+    expect(link).toHaveTextContent("Link Button");
+  });
+
+  test("as prop should change rendered element to div", () => {
+    const Button2 = createExtendNoSlotsComponent();
+    const {container} = render(<Button2 as="div">Div Button</Button2>);
+
+    const div = container.querySelector("div");
+
+    expect(div).toBeInTheDocument();
+    expect(div).toHaveTextContent("Div Button");
+
+    // Should not be a button
+    const button = container.querySelector("button");
+
+    expect(button).not.toBeInTheDocument();
+  });
+
+  test("ref should work with polymorphic component as anchor", () => {
+    const ref = React.createRef<HTMLAnchorElement>();
+    const Button2 = createExtendNoSlotsComponent();
+
+    render(
+      <Button2 ref={ref} as="a" href="/test">
+        Link
+      </Button2>,
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
+    expect(ref.current).toHaveAttribute("href", "/test");
+  });
+
+  test("variant styles should persist with 'as' prop", () => {
+    const Button2 = createExtendNoSlotsComponent();
+    const {container} = render(
+      <Button2 isScalable as="a" href="/test" size="2xl">
+        Link
+      </Button2>,
+    );
+
+    const link = container.querySelector("a");
+
+    expect(link).toHaveClass("size--2xl");
+    // isScalable=true triggers scale-125, but compound variant for size=2xl + isScalable overrides to scale-150
+    expect(link).toHaveClass("scale-150");
+  });
+
+  test("compound variant styles should work with 'as' prop", () => {
+    const Button2 = createExtendNoSlotsComponent();
+    const {container} = render(
+      <Button2 isScalable as="a" href="/test" size="2xl">
+        Link
+      </Button2>,
+    );
+
+    const link = container.querySelector("a");
+
+    expect(link).toHaveClass("scale-150"); // compound variant for size="2xl" + isScalable
   });
 });
 

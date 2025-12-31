@@ -1,6 +1,6 @@
 import type {ClassValue, StringToBoolean, OmitUndefined, ClassProp} from "tailwind-variants";
 import type {ForwardRefExoticComponent, JSXElementConstructor, RefAttributes} from "react";
-import type * as _heroui_system from "@heroui/system";
+import type {InternalForwardRefRenderFunction} from "./types.js";
 
 type SlotsClassValue<S> = {
   [K in keyof S]?: ClassValue;
@@ -103,7 +103,7 @@ export type ExtendVariants = <
     slots?: S;
   },
   opts?: Options,
-) => _heroui_system.InternalForwardRefRenderFunction<
+) => InternalForwardRefRenderFunction<
   C,
   {
     [K in Exclude<keyof (CP & V), "ref" | "as">]?:
