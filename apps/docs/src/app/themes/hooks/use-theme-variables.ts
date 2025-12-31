@@ -38,6 +38,7 @@ export function useThemeVariables() {
 
     // Update --accent with the selected color
     themeBuilderContent?.style.setProperty("--accent", variables.accentColor);
+    themeBuilderContent?.style.setProperty("--color-accent", variables.accentColor);
 
     // Update --radius
     const radiusValue = radiusMap[variables.radius] ?? "0.5rem";
