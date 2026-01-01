@@ -1,5 +1,16 @@
 # @heroui/link
 
+## 2.2.25
+
+### Patch Changes
+
+- [#5999](https://github.com/heroui-inc/heroui/pull/5999) [`090b151`](https://github.com/heroui-inc/heroui/commit/090b151a5bebe334751b17d6064bbe454f56b24b) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - fix link overriding role (#5993)
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/use-aria-link@2.2.22
+
 ## 2.2.24
 
 ### Patch Changes
