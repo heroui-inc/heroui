@@ -72,7 +72,7 @@ function ConditionalLink({
 
   if (openInNewTab) {
     return (
-      <Link className={className} href={href} underline="none" {...linkProps}>
+      <Link className={cn(className, "no-underline")} href={href} {...linkProps}>
         {children}
       </Link>
     );
@@ -108,7 +108,7 @@ export function ComponentItem({
       {/* Title first on mobile, image first on desktop */}
       <div className="order-1 sm:order-2">
         {openInNewTab ? (
-          <Link href={href} rel="noopener noreferrer" target="_blank" underline="none">
+          <Link className="no-underline" href={href} rel="noopener noreferrer" target="_blank">
             <ComponentTitleContent status={status} title={title} />
             <Link.Icon />
           </Link>

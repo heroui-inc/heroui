@@ -139,11 +139,10 @@ export const NativeVideoPlayerView: FC<NativeVideoPlayerViewProps> = ({
               </span>
               {isMobile ? (
                 <Link
-                  className="flex w-full items-center gap-3 rounded-xl border border-foreground/20 p-2 px-4"
+                  className="flex w-full items-center gap-3 rounded-xl border border-foreground/20 p-2 px-4 no-underline"
                   href={LINKS.NATIVE_PREVIEW}
                   rel="noopener noreferrer"
                   target="_blank"
-                  underline="none"
                 >
                   <div className="flex flex-1 flex-col gap-1">
                     <span className="text-sm font-semibold text-foreground">Open Preview App</span>
