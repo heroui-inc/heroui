@@ -81,6 +81,10 @@ interface ComponentWithStatus {
   status?: StatusChipStatus;
 }
 
+interface ComponentCategory {
+  category: string;
+}
+
 function getComponentNameFromPath(path: string): string {
   // Extract component name from path like "(buttons)/button" -> "button"
   // or "(forms)/text-field" -> "text-field"
@@ -153,34 +157,33 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
   };
 }
 
-export function NativeComponentsList() {
+export function NativeComponentsCategory({category}: ComponentCategory) {
+  const group = COMPONENT_GROUPS.find((group) => group.category === category);
+
+  if (!group) return null;
+
+  const components = group.components
+    .map(getComponentWithStatus)
+    .filter((item): item is ComponentWithStatus => item !== null);
+
+  if (components.length === 0) return null;
+
   return (
     <div className={cn("not-prose flex flex-col gap-12")}>
-      {COMPONENT_GROUPS.map((group) => {
-        const components = group.components
-          .map(getComponentWithStatus)
-          .filter((item): item is ComponentWithStatus => item !== null);
-
-        if (components.length === 0) return null;
-
-        return (
-          <div key={group.category} className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">{group.category}</h2>
-            <div className={cn("grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2")}>
-              {components.map(({component, srcDark, srcLight, status}) => (
-                <NativeComponentItem
-                  key={component.name}
-                  component={component}
-                  openInNewTab={false}
-                  srcDark={srcDark}
-                  srcLight={srcLight}
-                  status={status}
-                />
-              ))}
-            </div>
-          </div>
-        );
-      })}
+      <div key={group.category} className="flex flex-col gap-6">
+        <div className={cn("grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2")}>
+          {components.map(({component, srcDark, srcLight, status}) => (
+            <NativeComponentItem
+              key={component.name}
+              component={component}
+              openInNewTab={false}
+              srcDark={srcDark}
+              srcLight={srcLight}
+              status={status}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
