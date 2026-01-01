@@ -145,6 +145,12 @@
 }
 
 /* In-surface variant property definitions */
+.date-input-group--in-surface-transparent {
+}
+
+.date-input-group__input--in-surface-transparent {
+}
+
 .date-input-group--in-surface-default {
   --date-input-group-bg: var(--color-in-surface);
   --date-input-group-bg-hover: var(--color-in-surface-hover);

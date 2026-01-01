@@ -32,6 +32,20 @@ export function Variants() {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
+          <p className="text-sm text-muted">
+            This is a transparent surface variant. It has no background, suitable for overlays and
+            cards with custom backgrounds.
+          </p>
+        </Surface>
+      </div>
     </div>
   );
 }

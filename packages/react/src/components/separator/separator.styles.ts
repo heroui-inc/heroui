@@ -10,6 +10,7 @@ const separatorVariants = tv({
       vertical: "separator--vertical",
     },
     inSurface: {
+      transparent: "separator--in-surface-transparent",
       default: "separator--in-surface-default",
       secondary: "separator--in-surface-secondary",
       tertiary: "separator--in-surface-tertiary",

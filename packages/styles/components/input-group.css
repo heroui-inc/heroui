@@ -166,6 +166,12 @@
 }
 
 /* In-surface variant property definitions */
+.input-group--in-surface-transparent {
+}
+
+.input-group__input--in-surface-transparent {
+}
+
 .input-group--in-surface-default {
   --input-group-bg: var(--color-in-surface);
   --input-group-bg-hover: var(--color-in-surface-hover);

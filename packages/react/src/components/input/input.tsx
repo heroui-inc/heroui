@@ -8,6 +8,7 @@ import {Input as InputPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {SurfaceContext} from "../surface";
+import {TextFieldContext} from "../text-field";
 
 import {inputVariants} from "./input.styles";
 
@@ -18,7 +19,8 @@ interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, I
 
 const InputRoot = ({className, fullWidth, inSurface, ...rest}: InputRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+  const textFieldContext = useContext(TextFieldContext);
+  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive

@@ -1005,6 +1005,41 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <ComboBox className="w-full" name="animal-transparent">
+            <Label>Favorite Animal</Label>
+            <ComboBox.InputGroup>
+              <Input placeholder="Search animals..." />
+              <ComboBox.Trigger />
+            </ComboBox.InputGroup>
+            <ComboBox.Popover>
+              <ListBox>
+                <ListBox.Item id="aardvark" textValue="Aardvark">
+                  Aardvark
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="cat" textValue="Cat">
+                  Cat
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="dog" textValue="Dog">
+                  Dog
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </ComboBox.Popover>
+          </ComboBox>
+          <p className="text-sm text-muted">
+            ComboBox automatically detects transparent surface level through its Input component.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

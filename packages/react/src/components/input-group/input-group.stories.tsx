@@ -393,6 +393,27 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <TextField name="email-transparent">
+            <Label>Email address</Label>
+            <InputGroup>
+              <InputGroup.Prefix>
+                <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+              </InputGroup.Prefix>
+              <InputGroup.Input className="w-full" placeholder="name@email.com" />
+            </InputGroup>
+          </TextField>
+          <p className="text-sm text-muted">
+            InputGroup automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

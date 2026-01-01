@@ -12,6 +12,10 @@ export const numberFieldVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        group: "number-field__group--in-surface-transparent",
+        input: "number-field__input--in-surface-transparent",
+      },
       default: {
         group: "number-field__group--in-surface-default",
         input: "number-field__input--in-surface-default",

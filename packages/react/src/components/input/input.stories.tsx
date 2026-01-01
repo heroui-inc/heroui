@@ -60,6 +60,19 @@ export const SurfaceVariants: Story = {
           <p className="text-sm text-muted">Input automatically detects tertiary surface level.</p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <Input className="w-full" placeholder="Your name" />
+          <p className="text-sm text-muted">
+            Input automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

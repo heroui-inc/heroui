@@ -12,6 +12,9 @@ export const selectVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        trigger: "select__trigger--in-surface-transparent",
+      },
       default: {
         trigger: "select__trigger--in-surface-default",
       },

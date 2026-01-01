@@ -12,6 +12,10 @@ export const dateInputGroupVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        base: "date-input-group--in-surface-transparent",
+        input: "date-input-group__input--in-surface-transparent",
+      },
       default: {
         base: "date-input-group--in-surface-default",
         input: "date-input-group__input--in-surface-default",

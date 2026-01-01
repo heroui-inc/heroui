@@ -85,6 +85,9 @@
 }
 
 /* In-surface variant property definitions */
+.textarea--in-surface-transparent {
+}
+
 .textarea--in-surface-default {
   --textarea-bg: var(--color-in-surface);
   --textarea-bg-hover: var(--color-in-surface-hover);

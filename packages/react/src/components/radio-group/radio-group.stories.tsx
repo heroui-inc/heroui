@@ -149,6 +149,37 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <RadioGroup defaultValue="premium" name="plan-transparent">
+            <Label>Plan selection</Label>
+            <Radio value="basic">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Basic Plan</Label>
+              </Radio.Content>
+            </Radio>
+            <Radio value="premium">
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
+              <Radio.Content>
+                <Label>Premium Plan</Label>
+              </Radio.Content>
+            </Radio>
+          </RadioGroup>
+          <p className="text-sm text-muted">
+            RadioGroup automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

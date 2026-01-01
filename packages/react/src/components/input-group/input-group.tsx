@@ -12,6 +12,7 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
+import {TextFieldContext} from "../text-field";
 
 import {inputGroupVariants} from "./input-group.styles";
 
@@ -37,8 +38,9 @@ const InputGroupRoot = ({
   inSurface,
   ...props
 }: InputGroupRootProps) => {
+  const textFieldContext = useContext(TextFieldContext);
   const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   const slots = React.useMemo(
     () => inputGroupVariants({fullWidth, inSurface: resolvedInSurface}),
@@ -67,8 +69,9 @@ interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimiti
 
 const InputGroupInput = ({className, inSurface, ...props}: InputGroupInputProps) => {
   const {slots} = useContext(InputGroupContext);
+  const textFieldContext = useContext(TextFieldContext);
   const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
@@ -107,8 +110,9 @@ interface InputGroupTextAreaProps extends ComponentPropsWithRef<typeof TextAreaP
 
 const InputGroupTextArea = ({className, inSurface, ...props}: InputGroupTextAreaProps) => {
   const {slots} = useContext(InputGroupContext);
+  const textFieldContext = useContext(TextFieldContext);
   const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <TextAreaPrimitive

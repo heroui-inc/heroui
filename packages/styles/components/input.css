@@ -84,6 +84,9 @@
 }
 
 /* In-surface variant property definitions */
+.input--in-surface-transparent {
+}
+
 .input--in-surface-default {
   --input-bg: var(--color-in-surface);
   --input-bg-hover: var(--color-in-surface-hover);

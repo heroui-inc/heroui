@@ -110,6 +110,12 @@
 }
 
 /* In-surface variant property definitions */
+.tag--in-surface-transparent {
+}
+
+.tag__remove-button--in-surface-transparent {
+}
+
 .tag--in-surface-default {
   --tag-bg: var(--color-in-surface);
   --tag-bg-hover: var(--color-in-surface-hover);

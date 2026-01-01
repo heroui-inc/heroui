@@ -178,6 +178,12 @@
 }
 
 /* In-surface variant property definitions */
+.number-field__group--in-surface-transparent {
+}
+
+.number-field__input--in-surface-transparent {
+}
+
 .number-field__group--in-surface-default {
   --number-field-group-bg: var(--color-in-surface);
   --number-field-group-bg-hover: var(--color-in-surface-hover);

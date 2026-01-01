@@ -35,6 +35,10 @@ export const tagVariants = tv({
       },
     },
     inSurface: {
+      transparent: {
+        base: "tag--in-surface-transparent",
+        removeButton: "tag__remove-button--in-surface-transparent",
+      },
       default: {
         base: "tag--in-surface-default",
         removeButton: "tag__remove-button--in-surface-default",

@@ -6,6 +6,7 @@ export const textAreaVariants = tv({
   base: "textarea",
   variants: {
     inSurface: {
+      transparent: "textarea--in-surface-transparent",
       default: "textarea--in-surface-default",
       secondary: "textarea--in-surface-secondary",
       tertiary: "textarea--in-surface-tertiary",

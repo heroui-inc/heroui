@@ -121,7 +121,7 @@ The Surface component uses these CSS classes ([View source styles](https://githu
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"default" \| "secondary" \| "tertiary"` | `"default"` | The visual variant of the surface |
+| `variant` | ` "transparent" \| "default" \| "secondary" \| "tertiary"` | `"default"` | The visual variant of the surface |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The surface content |
 
@@ -137,7 +137,7 @@ import { SurfaceContext } from '@heroui/react';
 
 function MyComponent() {
   const { variant } = useContext(SurfaceContext);
-  // variant will be "default" | "secondary" | "tertiary" | undefined
+  // variant will be "transparent" | "default" | "secondary" | "tertiary" | undefined
 }
 ```
 

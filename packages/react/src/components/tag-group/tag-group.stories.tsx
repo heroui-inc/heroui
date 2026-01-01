@@ -632,6 +632,33 @@ export const SurfaceVariants: Story = {
           <p className="text-sm text-muted">Tags automatically detect tertiary surface level.</p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <TagGroup selectionMode="single">
+            <Label>Categories</Label>
+            <TagGroup.List>
+              <Tag>
+                <Icon icon="gravity-ui:square-article" />
+                News
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:planet-earth" />
+                Travel
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:rocket" />
+                Gaming
+              </Tag>
+            </TagGroup.List>
+          </TagGroup>
+          <p className="text-sm text-muted">Tags automatically detect transparent surface level.</p>
+        </Surface>
+      </div>
     </div>
   ),
 };

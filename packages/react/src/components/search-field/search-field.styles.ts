@@ -12,6 +12,10 @@ export const searchFieldVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        group: "search-field__group--in-surface-transparent",
+        input: "search-field__input--in-surface-transparent",
+      },
       default: {
         group: "search-field__group--in-surface-default",
         input: "search-field__input--in-surface-default",

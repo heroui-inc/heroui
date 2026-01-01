@@ -48,6 +48,9 @@
 }
 
 /* In-surface variant property definitions */
+.radio-group--in-surface-transparent {
+}
+
 .radio-group--in-surface-default {
   --radio-control-bg: var(--color-in-surface);
   --radio-control-bg-hover: var(--color-in-surface-hover);

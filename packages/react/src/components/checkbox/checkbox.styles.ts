@@ -11,6 +11,9 @@ export const checkboxVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        base: "checkbox--in-surface-transparent",
+      },
       default: {
         base: "checkbox--in-surface-default",
       },

@@ -298,6 +298,26 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <SearchField name="search-transparent">
+            <Label>Search</Label>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input className="w-full" placeholder="Search..." />
+              <SearchField.ClearButton />
+            </SearchField.Group>
+          </SearchField>
+          <p className="text-sm text-muted">
+            SearchField automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

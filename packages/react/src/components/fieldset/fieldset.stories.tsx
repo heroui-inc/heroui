@@ -102,7 +102,7 @@ export const Default: Story = {
 
 export const SurfaceVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-8">
+    <div className="flex max-w-[520px] flex-col gap-8">
       <div className="flex flex-col gap-2">
         <p className="text-sm font-medium text-muted">Default Surface</p>
         <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
@@ -166,6 +166,32 @@ export const SurfaceVariants: Story = {
           </Fieldset>
           <p className="text-sm text-muted">
             Fieldset automatically detects tertiary surface level through its child form components.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <Fieldset className="w-full">
+            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
+            <Fieldset.Group>
+              <TextField name="name-transparent">
+                <Label>Name</Label>
+                <Input placeholder="John Doe" />
+              </TextField>
+              <TextField name="email-transparent" type="email">
+                <Label>Email</Label>
+                <Input placeholder="john@example.com" />
+              </TextField>
+            </Fieldset.Group>
+          </Fieldset>
+          <p className="text-sm text-muted">
+            Fieldset automatically detects transparent surface level through its child form
+            components.
           </p>
         </Surface>
       </div>

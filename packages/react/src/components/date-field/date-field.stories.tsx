@@ -335,6 +335,26 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <DateField className="w-full" name="date-transparent">
+            <Label>Date</Label>
+            <DateInputGroup>
+              <DateInputGroup.Input>
+                {(segment) => <DateInputGroup.Segment segment={segment} />}
+              </DateInputGroup.Input>
+            </DateInputGroup>
+          </DateField>
+          <p className="text-sm text-muted">
+            DateField automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

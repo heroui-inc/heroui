@@ -6,6 +6,7 @@ export const inputVariants = tv({
   base: "input",
   variants: {
     inSurface: {
+      transparent: "input--in-surface-transparent",
       default: "input--in-surface-default",
       secondary: "input--in-surface-secondary",
       tertiary: "input--in-surface-tertiary",

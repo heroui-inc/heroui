@@ -110,6 +110,9 @@
 }
 
 /* In-surface variant property definitions */
+.input-otp--in-surface-transparent {
+}
+
 .input-otp--in-surface-default {
   --input-otp-slot-bg: var(--color-in-surface);
   --input-otp-slot-bg-hover: var(--color-in-surface-hover);

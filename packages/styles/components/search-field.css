@@ -139,6 +139,12 @@
 }
 
 /* In-surface variant property definitions */
+.search-field__group--in-surface-transparent {
+}
+
+.search-field__input--in-surface-transparent {
+}
+
 .search-field__group--in-surface-default {
   --search-field-group-bg: var(--color-in-surface);
   --search-field-group-bg-hover: var(--color-in-surface-hover);

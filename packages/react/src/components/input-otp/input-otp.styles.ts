@@ -14,6 +14,9 @@ export const inputOTPVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        base: "input-otp--in-surface-transparent",
+      },
       default: {
         base: "input-otp--in-surface-default",
       },

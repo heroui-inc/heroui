@@ -226,7 +226,7 @@ export const WithValidation: Story = {
 
 export const SurfaceVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-8">
+    <div className="flex max-w-[520px] flex-col gap-8">
       <div className="flex flex-col gap-2">
         <p className="text-sm font-medium text-muted">Default Surface</p>
         <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
@@ -264,6 +264,23 @@ export const SurfaceVariants: Story = {
           </TextField>
           <p className="text-sm text-muted">
             TextField automatically detects tertiary surface level through its Input/TextArea
+            components.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <TextField name="name-default">
+            <Label>Your name</Label>
+            <TextArea className="w-full" placeholder="John" />
+          </TextField>
+          <p className="text-sm text-muted">
+            TextField automatically detects default surface level through its Input/TextArea
             components.
           </p>
         </Surface>

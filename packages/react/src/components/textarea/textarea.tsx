@@ -8,6 +8,7 @@ import {TextArea as TextAreaPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {SurfaceContext} from "../surface";
+import {TextFieldContext} from "../text-field";
 
 import {textAreaVariants} from "./textarea.styles";
 
@@ -19,7 +20,8 @@ interface TextAreaRootProps
 
 const TextAreaRoot = ({className, fullWidth, inSurface, ...rest}: TextAreaRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+  const textFieldContext = useContext(TextFieldContext);
+  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <TextAreaPrimitive

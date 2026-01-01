@@ -542,6 +542,41 @@ export const SurfaceVariants: Story = {
           <p className="text-sm text-muted">Select automatically detects tertiary surface level.</p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <Select className="w-full" name="state-transparent" placeholder="Select one">
+            <Label>State</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                <ListBox.Item id="florida" textValue="Florida">
+                  Florida
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="california" textValue="California">
+                  California
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="texas" textValue="Texas">
+                  Texas
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </Select.Popover>
+          </Select>
+          <p className="text-sm text-muted">
+            Select automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

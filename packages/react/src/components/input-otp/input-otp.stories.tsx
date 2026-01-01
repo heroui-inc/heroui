@@ -135,6 +135,32 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <Label>Verify account</Label>
+          <InputOTP {...args} maxLength={6}>
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+            </InputOTP.Group>
+            <InputOTP.Separator />
+            <InputOTP.Group>
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
+          <p className="text-sm text-muted">
+            InputOTP automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

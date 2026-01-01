@@ -383,6 +383,27 @@ export const SurfaceVariants: Story = {
           </p>
         </Surface>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <Checkbox name="terms-transparent">
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            <Checkbox.Content>
+              <Label>Accept terms and conditions</Label>
+              <Description>I agree to the terms and privacy policy</Description>
+            </Checkbox.Content>
+          </Checkbox>
+          <p className="text-sm text-muted">
+            Checkbox automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
     </div>
   ),
 };

@@ -11,6 +11,10 @@ export const inputGroupVariants = tv({
   },
   variants: {
     inSurface: {
+      transparent: {
+        base: "input-group--in-surface-transparent",
+        input: "input-group__input--in-surface-transparent",
+      },
       default: {
         base: "input-group--in-surface-default",
         input: "input-group__input--in-surface-default",

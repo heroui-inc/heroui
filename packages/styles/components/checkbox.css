@@ -253,6 +253,9 @@
 }
 
 /* In-surface variant property definitions */
+.checkbox--in-surface-transparent {
+}
+
 .checkbox--in-surface-default {
   --checkbox-control-bg: var(--color-in-surface);
 }

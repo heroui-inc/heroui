@@ -53,6 +53,9 @@
  */
 
 /* Surface variant levels */
+.separator--in-surface-transparent {
+}
+
 .separator--in-surface-default {
   @apply bg-separator;
 }
