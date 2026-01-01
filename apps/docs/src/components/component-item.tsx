@@ -113,7 +113,7 @@ export function ComponentItem({
             <Link.Icon />
           </Link>
         ) : (
-          <ConditionalLink className="link" href={href} openInNewTab={openInNewTab}>
+          <ConditionalLink className="link no-underline" href={href} openInNewTab={openInNewTab}>
             <ComponentTitleContent status={status} title={title} />
           </ConditionalLink>
         )}
