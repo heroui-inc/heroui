@@ -1,6 +1,7 @@
 ---
 title: Link
 description: A styled anchor component for navigation with built-in icon support
+icon: updated
 links:
   rac: Link
   source: link/link.tsx
@@ -48,81 +49,45 @@ export default () => (
   name="link-icon-placement"
 />
 
-### Underline Variants
-
-Control the underline behavior with the `underline` prop:
+### Text Decoration with Tailwind CSS
 
 <ComponentPreview
-  name="link-underline-variants"
+  name="link-underline-and-offset"
 />
 
-- `underline="hover"` (default) - Animated underline appears on hover
-- `underline="always"` - Underline always visible (50% opacity, 100% on hover)
-- `underline="none"` - No underline
+**Text Decoration Line:**
+- `underline` - Always visible underline
+- `no-underline` - Remove underline
+- `hover:underline` - Underline appears on hover
 
-### Underline Offset
+**Text Decoration Color:**
+- `decoration-primary`, `decoration-secondary`, etc. - Set underline color using theme colors
+- `decoration-muted/50` - Use opacity modifiers for semi-transparent underlines
 
-Adjust the spacing between text and underline with the `underlineOffset` prop:
+**Text Decoration Style:**
+- `decoration-solid` - Solid line (default)
+- `decoration-double` - Double line
+- `decoration-dotted` - Dotted line
+- `decoration-dashed` - Dashed line
+- `decoration-wavy` - Wavy line
 
-<ComponentPreview
-  name="link-underline-offset"
-/>
+**Text Decoration Thickness:**
+- `decoration-1`, `decoration-2`, `decoration-4`, etc. - Control underline thickness
 
-- `underlineOffset={1}` (default) - No space
-- `underlineOffset={2}` - 2px spacing
-- `underlineOffset={3}` - 4px spacing
+**Underline Offset:**
+- `underline-offset-1`, `underline-offset-2`, `underline-offset-4`, etc. - Adjust spacing between text and underline
 
-### Using with Routing Libraries
+For more details, see the Tailwind CSS documentation:
+- [text-decoration-line](https://tailwindcss.com/docs/text-decoration-line)
+- [text-decoration-color](https://tailwindcss.com/docs/text-decoration-color)
+- [text-decoration-style](https://tailwindcss.com/docs/text-decoration-style)
+- [text-decoration-thickness](https://tailwindcss.com/docs/text-decoration-thickness)
+- [text-underline-offset](https://tailwindcss.com/docs/text-underline-offset)
 
-Use variant functions to style framework-specific links like Next.js:
-
-```tsx
-import { Link, linkVariants } from '@heroui/react';
-import NextLink from 'next/link';
-
-export default function Demo() {
-  const slots = linkVariants({underline: "hover"});
-
-  return (
-    <NextLink className={slots.base()} href="/about">
-      About Page
-      <Link.Icon className={slots.icon()} />
-    </NextLink>
-  );
-}
-```
-
-### Direct Class Application
-
-Since HeroUI uses [BEM](https://getbem.com/) classes, you can apply Link styles directly to any link element:
-
-```tsx
-import NextLink from 'next/link';
-
-// Apply classes directly
-export default function Demo() {
-  return (
-    <NextLink href="/about" className="link link--underline-hover link--offset-1">
-      About Page
-    </NextLink>
-  );
-}
-
-// Or with a native anchor
-export default function NativeLink() {
-  return (
-    <a href="/about" className="link link--underline-always link--offset-2">
-      About Page
-      <Link.Icon className="link__icon" />
-    </a>
-  );
-}
-```
 
 Available BEM classes:
 - Base: `link`
-- Underline: `link--underline-none`, `link--underline-hover`, `link--underline-always`
-- Offset: `link--offset-1`, `link--offset-2`, `link--offset-3`
+- Icon: `link__icon`
 
 <RelatedComponents component="link" />
 
@@ -166,16 +131,7 @@ The Link component uses these CSS classes ([View source styles](https://github.c
 
 #### Base Classes
 - `.link` - Base link styles
-
-#### Underline Variants
-- `.link--underline-none` - No underline
-- `.link--underline-hover` - Animated underline on hover (default)
-- `.link--underline-always` - Always visible underline
-
-#### Underline Offset
-- `.link--offset-1` - No spacing (default)
-- `.link--offset-2` - 2px spacing
-- `.link--offset-3` - 4px spacing
+- `.link__icon` - Link icon styles
 
 ### Interactive States
 
@@ -194,8 +150,6 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `target` | `string` | `"_self"` | Controls where to open the linked document |
 | `rel` | `string` | - | Relationship between the current and linked documents |
 | `download` | `boolean \| string` | - | Prompts file download instead of navigation |
-| `underline` | `"none" \| "hover" \| "always"` | `"hover"` | Controls underline visibility and behavior |
-| `underlineOffset` | `1 \| 2 \| 3` | `1` | Spacing between text and underline |
 | `isDisabled` | `boolean` | `false` | Disables pointer and keyboard interaction |
 | `className` | `string` | - | Custom classes merged with the default styles |
 | `children` | `React.ReactNode` | - | Content rendered inside the link |
@@ -208,3 +162,52 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Custom icon element; defaults to the built-in arrow icon when omitted |
 | `className` | `string` | - | Additional CSS classes |
+
+
+
+### Using with Routing Libraries
+
+Use variant functions to style framework-specific links like Next.js:
+
+```tsx
+import { Link, linkVariants } from '@heroui/react';
+import NextLink from 'next/link';
+
+export default function Demo() {
+  const slots = linkVariants();
+
+  return (
+    <NextLink className={slots.base()} href="/about">
+      About Page
+      <Link.Icon className={slots.icon()} />
+    </NextLink>
+  );
+}
+```
+
+### Direct Class Application
+
+Since HeroUI uses [BEM](https://getbem.com/) classes, you can apply Link styles directly to any link element:
+
+```tsx
+import NextLink from 'next/link';
+
+// Apply classes directly with Tailwind utilities
+export default function Demo() {
+  return (
+    <NextLink href="/about" className="link hover:underline underline-offset-2">
+      About Page
+    </NextLink>
+  );
+}
+
+// Or with a native anchor
+export default function NativeLink() {
+  return (
+    <a href="/about" className="link underline decoration-primary underline-offset-4">
+      About Page
+      <Link.Icon className="link__icon" />
+    </a>
+  );
+}
+```

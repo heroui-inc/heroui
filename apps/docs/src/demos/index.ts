@@ -814,13 +814,9 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.IconPlacement,
     file: "link/icon-placement.tsx",
   },
-  "link-underline-variants": {
-    component: LinkDemos.UnderlineVariants,
-    file: "link/underline-variants.tsx",
-  },
-  "link-underline-offset": {
-    component: LinkDemos.UnderlineOffset,
-    file: "link/underline-offset.tsx",
+  "link-underline-and-offset": {
+    component: LinkDemos.UnderlineAndOffset,
+    file: "link/underline-and-offset.tsx",
   },
   // RadioGroup demos
   "radio-group-basic": {
