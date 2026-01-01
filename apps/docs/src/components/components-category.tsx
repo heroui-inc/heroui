@@ -89,6 +89,10 @@ interface ComponentWithStatus {
   status?: StatusChipStatus;
 }
 
+interface ComponentCategory {
+  category: string;
+}
+
 function getComponentWithStatus(name: string): ComponentWithStatus | null {
   const componentInfo = getComponentInfo(name);
 
@@ -107,32 +111,31 @@ function getComponentWithStatus(name: string): ComponentWithStatus | null {
   };
 }
 
-export function ComponentsList() {
+export function ComponentsCategory({category}: ComponentCategory) {
+  const group = COMPONENT_GROUPS.find((group) => group.category === category);
+
+  if (!group) return null;
+
+  const components = group.components
+    .map(getComponentWithStatus)
+    .filter((item): item is ComponentWithStatus => item !== null);
+
+  if (components.length === 0) return null;
+
   return (
     <div className={cn("not-prose flex flex-col gap-12")}>
-      {COMPONENT_GROUPS.map((group) => {
-        const components = group.components
-          .map(getComponentWithStatus)
-          .filter((item): item is ComponentWithStatus => item !== null);
-
-        if (components.length === 0) return null;
-
-        return (
-          <div key={group.category} className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">{group.category}</h2>
-            <div className={cn("grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3")}>
-              {components.map(({component, status}) => (
-                <ComponentItem
-                  key={component.name}
-                  component={component}
-                  openInNewTab={false}
-                  status={status}
-                />
-              ))}
-            </div>
-          </div>
-        );
-      })}
+      <div key={group.category} className="flex flex-col gap-6">
+        <div className={cn("grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3")}>
+          {components.map(({component, status}) => (
+            <ComponentItem
+              key={component.name}
+              component={component}
+              openInNewTab={false}
+              status={status}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
