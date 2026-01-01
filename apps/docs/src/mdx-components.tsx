@@ -10,10 +10,10 @@ import {Suspense} from "react";
 
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
-import {ComponentsList} from "./components/components-list";
+import {ComponentsCategory} from "./components/components-category";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
-import {NativeComponentsList} from "./components/native-components-list";
+import {NativeComponentsCategory} from "./components/native-components-category";
 import {NativeVideoPlayerView} from "./components/native-video-player-view";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
@@ -105,12 +105,12 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentCard,
     ComponentGrid,
     ComponentPreview,
-    ComponentsList,
+    ComponentsCategory,
     DocsImage,
     Icon,
     Info,
     Link,
-    NativeComponentsList,
+    NativeComponentsCategory,
     NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,
