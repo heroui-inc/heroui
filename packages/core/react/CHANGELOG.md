@@ -1,5 +1,25 @@
 # @heroui/react
 
+## 2.8.8
+
+### Patch Changes
+
+- Updated dependencies [[`5ec842b`](https://github.com/heroui-inc/heroui/commit/5ec842b1cf6fff845b7ae7cd8fb876762e62e279)]:
+  - @heroui/image@2.2.19
+  - @heroui/avatar@2.2.25
+  - @heroui/card@2.2.27
+  - @heroui/drawer@2.2.26
+  - @heroui/dropdown@2.3.29
+  - @heroui/accordion@2.2.26
+  - @heroui/autocomplete@2.3.31
+  - @heroui/badge@2.2.18
+  - @heroui/chip@2.2.24
+  - @heroui/listbox@2.3.28
+  - @heroui/navbar@2.2.27
+  - @heroui/select@2.4.30
+  - @heroui/user@2.2.25
+  - @heroui/table@2.2.29
+
 ## 2.8.7
 
 ### Patch Changes
