@@ -4,7 +4,18 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React, {useMemo, useState} from "react";
 
-import {Avatar, Description, EmptyState, ErrorMessage, Label, Surface, Tag} from "../";
+import {
+  Avatar,
+  Description,
+  EmptyState,
+  ErrorMessage,
+  Form,
+  Label,
+  ListBox,
+  Select,
+  Surface,
+  Tag,
+} from "../";
 import {useListData} from "../../";
 
 import {TagGroup} from "./";
@@ -76,6 +87,105 @@ export const Sizes: Story = {
       </TagGroup>
     </div>
   ),
+};
+
+export const Variants: Story = {
+  render: () => {
+    const items = [
+      {id: "news", name: "News"},
+      {id: "travel", name: "Travel"},
+      {id: "gaming", name: "Gaming"},
+    ];
+
+    return (
+      <div className="flex flex-col gap-8">
+        <TagGroup selectionMode="single" variant="default">
+          <Label>Default</Label>
+          <TagGroup.List>
+            <Tag>News</Tag>
+            <Tag>Travel</Tag>
+            <Tag>Gaming</Tag>
+          </TagGroup.List>
+        </TagGroup>
+
+        <TagGroup selectionMode="single" variant="surface">
+          <Label>Surface</Label>
+          <TagGroup.List>
+            <Tag>News</Tag>
+            <Tag>Travel</Tag>
+            <Tag>Gaming</Tag>
+          </TagGroup.List>
+        </TagGroup>
+
+        <div className="flex w-sm items-center justify-center rounded-3xl bg-surface p-4">
+          <Surface className="w-full">
+            <TagGroup selectionMode="single">
+              <Label>On Surface</Label>
+              <TagGroup.List>
+                <Tag>News</Tag>
+                <Tag>Travel</Tag>
+                <Tag>Gaming</Tag>
+              </TagGroup.List>
+              <Description>Tags on surface component</Description>
+            </TagGroup>
+          </Surface>
+        </div>
+
+        <Form className="w-100">
+          <div className="flex flex-col gap-2">
+            <Select
+              className="w-full"
+              defaultValue={["news", "travel"]}
+              placeholder="Select items"
+              selectionMode="multiple"
+            >
+              <Select.Trigger>
+                <Select.Value className="no-truncate flex flex-wrap gap-2">
+                  {({defaultChildren, isPlaceholder, state}) => {
+                    if (isPlaceholder || state.selectedItems.length === 0) {
+                      return defaultChildren;
+                    }
+
+                    const selectedItemsKeys = state.selectedItems.map((item) => item.key);
+
+                    return (
+                      <TagGroup variant="on-form-field">
+                        <Label>On Form Field</Label>
+                        <TagGroup.List className="flex flex-wrap gap-1">
+                          {selectedItemsKeys.map((selectedItemKey) => {
+                            const item = items.find((s) => s.id === selectedItemKey);
+
+                            if (!item) return null;
+
+                            return (
+                              <Tag key={item.id} id={item.id}>
+                                {item.name}
+                              </Tag>
+                            );
+                          })}
+                        </TagGroup.List>
+                      </TagGroup>
+                    );
+                  }}
+                </Select.Value>
+                <Select.Indicator />
+              </Select.Trigger>
+              <Select.Popover>
+                <ListBox selectionMode="multiple">
+                  {items.map((skill) => (
+                    <ListBox.Item key={skill.id} id={skill.id} textValue={skill.name}>
+                      {skill.name}
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  ))}
+                </ListBox>
+              </Select.Popover>
+            </Select>
+          </div>
+        </Form>
+      </div>
+    );
+  },
 };
 
 export const Disabled: Story = {
@@ -172,24 +282,6 @@ export const Controlled: Story = {
       </div>
     );
   },
-};
-
-export const OnSurface: Story = {
-  render: () => (
-    <div className="flex w-sm items-center justify-center rounded-3xl bg-surface p-4">
-      <Surface className="w-full">
-        <TagGroup isOnSurface selectionMode="single">
-          <Label>On Surface</Label>
-          <TagGroup.List>
-            <Tag>News</Tag>
-            <Tag>Travel</Tag>
-            <Tag>Gaming</Tag>
-          </TagGroup.List>
-          <Description>Tags on surface component</Description>
-        </TagGroup>
-      </Surface>
-    </div>
-  ),
 };
 
 export const WithErrorMessage: Story = {
@@ -464,4 +556,109 @@ export const WithListData: Story = {
       </div>
     );
   },
+};
+
+export const SurfaceVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <TagGroup selectionMode="single">
+            <Label>Categories</Label>
+            <TagGroup.List>
+              <Tag>
+                <Icon icon="gravity-ui:square-article" />
+                News
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:planet-earth" />
+                Travel
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:rocket" />
+                Gaming
+              </Tag>
+            </TagGroup.List>
+          </TagGroup>
+          <p className="text-sm text-muted">Tags automatically detect default surface level.</p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <TagGroup selectionMode="single">
+            <Label>Categories</Label>
+            <TagGroup.List>
+              <Tag>
+                <Icon icon="gravity-ui:square-article" />
+                News
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:planet-earth" />
+                Travel
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:rocket" />
+                Gaming
+              </Tag>
+            </TagGroup.List>
+          </TagGroup>
+          <p className="text-sm text-muted">Tags automatically detect secondary surface level.</p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <TagGroup selectionMode="single">
+            <Label>Categories</Label>
+            <TagGroup.List>
+              <Tag>
+                <Icon icon="gravity-ui:square-article" />
+                News
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:planet-earth" />
+                Travel
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:rocket" />
+                Gaming
+              </Tag>
+            </TagGroup.List>
+          </TagGroup>
+          <p className="text-sm text-muted">Tags automatically detect tertiary surface level.</p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <TagGroup selectionMode="single">
+            <Label>Categories</Label>
+            <TagGroup.List>
+              <Tag>
+                <Icon icon="gravity-ui:square-article" />
+                News
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:planet-earth" />
+                Travel
+              </Tag>
+              <Tag>
+                <Icon icon="gravity-ui:rocket" />
+                Gaming
+              </Tag>
+            </TagGroup.List>
+          </TagGroup>
+          <p className="text-sm text-muted">Tags automatically detect transparent surface level.</p>
+        </Surface>
+      </div>
+    </div>
+  ),
 };

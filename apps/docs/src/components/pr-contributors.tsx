@@ -179,7 +179,6 @@ function ContributorItem({contributor}: {contributor: GitHubUser}) {
       href={contributor.html_url}
       rel="noreferrer"
       target="_blank"
-      underline="none"
     >
       <Avatar.Root size="sm">
         <Avatar.Image alt={contributor.login} className="m-0!" src={contributor.avatar_url} />

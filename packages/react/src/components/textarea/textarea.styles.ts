@@ -5,9 +5,11 @@ import {tv} from "tailwind-variants";
 export const textAreaVariants = tv({
   base: "textarea",
   variants: {
-    isOnSurface: {
-      true: "textarea--on-surface",
-      false: {},
+    inSurface: {
+      transparent: "textarea--in-surface-transparent",
+      default: "textarea--in-surface-default",
+      secondary: "textarea--in-surface-secondary",
+      tertiary: "textarea--in-surface-tertiary",
     },
     fullWidth: {
       true: "textarea--full-width",
@@ -15,7 +17,7 @@ export const textAreaVariants = tv({
     },
   },
   defaultVariants: {
-    isOnSurface: false,
+    inSurface: undefined,
     fullWidth: false,
   },
 });

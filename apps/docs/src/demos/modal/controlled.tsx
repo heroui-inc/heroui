@@ -17,7 +17,7 @@ export function Controlled() {
           Control the modal using React's <code className="text-foreground">useState</code> hook for
           simple state management. Perfect for basic use cases.
         </p>
-        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
             <p className="text-xs text-muted">
               Status:{" "}
@@ -71,7 +71,7 @@ export function Controlled() {
           with convenient methods like <code>open()</code>, <code>close()</code>, and{" "}
           <code>toggle()</code>.
         </p>
-        <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-sm">
+        <div className="flex flex-col items-start gap-3 rounded-2xl bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
             <p className="text-xs text-muted">
               Status:{" "}

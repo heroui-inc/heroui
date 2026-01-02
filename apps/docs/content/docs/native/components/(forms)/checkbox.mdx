@@ -309,7 +309,7 @@ const CustomIndicator = () => {
 | `onSelectedChange` | `((isSelected: boolean) => void) \| undefined` | Callback function to change the checkbox selection state       |
 | `isDisabled`       | `boolean`                                      | Whether the checkbox is disabled and cannot be interacted with |
 | `isInvalid`        | `boolean`                                      | Whether the checkbox is invalid (shows danger color)           |
-| `isOnSurface`      | `boolean \| undefined`                         | Whether checkbox is on a surface background                    |
+| `inSurface`      | `"default" \| "secondary" \| "tertiary" \| undefined`                         | Whether checkbox is in a surface background                    |
 | `nativeID`         | `string \| undefined`                          | Native ID for the checkbox element                             |
 
 **Note:** This hook must be used within a `Checkbox` component. It will throw an error if called outside of the checkbox context.

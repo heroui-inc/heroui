@@ -6,6 +6,7 @@ export const alertDialogVariants = tv({
   defaultVariants: {
     status: "danger",
     variant: "opaque",
+    size: "md",
   },
   slots: {
     body: "alert-dialog__body",
@@ -46,6 +47,23 @@ export const alertDialogVariants = tv({
       },
       opaque: {
         backdrop: "alert-dialog__backdrop--opaque",
+      },
+    },
+    size: {
+      xs: {
+        dialog: "alert-dialog__dialog--xs",
+      },
+      sm: {
+        dialog: "alert-dialog__dialog--sm",
+      },
+      md: {
+        dialog: "alert-dialog__dialog--md",
+      },
+      lg: {
+        dialog: "alert-dialog__dialog--lg",
+      },
+      cover: {
+        dialog: "alert-dialog__dialog--cover",
       },
     },
   },

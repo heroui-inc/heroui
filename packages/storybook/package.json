@@ -12,10 +12,12 @@
   },
   "dependencies": {
     "@heroui/react": "workspace:*",
+    "@gravity-ui/icons": "2.16.0",
     "@heroui/styles": "workspace:*",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-scan": "0.4.3"
+    "react-scan": "0.4.3",
+    "tailwind-variants": "^3.2.2"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",

@@ -182,8 +182,8 @@ export default function CustomSearchDialog(props: SharedProps) {
       {...restProps}
     >
       <SearchDialogOverlay />
-      <SearchDialogContent>
-        <div className="px-2 pt-2">
+      <SearchDialogContent className="border-none">
+        <div className="border-none px-2 pt-2">
           <TagGroup
             disallowEmptySelection
             aria-label="Framework"

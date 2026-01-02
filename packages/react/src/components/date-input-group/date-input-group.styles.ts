@@ -11,10 +11,22 @@ export const dateInputGroupVariants = tv({
     suffix: "date-input-group__suffix",
   },
   variants: {
-    isOnSurface: {
-      true: {
-        base: "date-input-group--on-surface",
-        input: "date-input-group__input--on-surface",
+    inSurface: {
+      transparent: {
+        base: "date-input-group--in-surface-transparent",
+        input: "date-input-group__input--in-surface-transparent",
+      },
+      default: {
+        base: "date-input-group--in-surface-default",
+        input: "date-input-group__input--in-surface-default",
+      },
+      secondary: {
+        base: "date-input-group--in-surface-secondary",
+        input: "date-input-group__input--in-surface-secondary",
+      },
+      tertiary: {
+        base: "date-input-group--in-surface-tertiary",
+        input: "date-input-group__input--in-surface-tertiary",
       },
     },
     fullWidth: {

@@ -40,15 +40,15 @@ const DateInputGroupRoot = ({
   children,
   className,
   fullWidth,
-  isOnSurface,
+  inSurface,
   ...props
 }: DateInputGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   const slots = React.useMemo(
-    () => dateInputGroupVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
-    [fullWidth, isOnSurfaceValue],
+    () => dateInputGroupVariants({fullWidth, inSurface: resolvedInSurface}),
+    [fullWidth, resolvedInSurface],
   );
 
   return (
@@ -90,20 +90,20 @@ interface DateInputGroupInputProps
   extends
     DateInputPrimitiveProps,
     Partial<Omit<TimeInputPrimitiveProps, keyof DateInputPrimitiveProps>> {
-  isOnSurface?: boolean;
+  inSurface?: "default" | "secondary" | "tertiary";
 }
 
-const DateInputGroupInput = ({className, isOnSurface, ...props}: DateInputGroupInputProps) => {
+const DateInputGroupInput = ({className, inSurface, ...props}: DateInputGroupInputProps) => {
   const {slots} = useContext(DateInputGroupContext);
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   // TimeInput and DateInput have compatible interfaces
   // React Aria Components will handle the correct primitive based on parent context (TimeField vs DateField)
   // We use DateInputPrimitive as the default, but it will work with TimeField context
   return (
     <DateInputPrimitive
-      className={composeTwRenderProps(className, slots?.input({isOnSurface: isOnSurfaceValue}))}
+      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
       data-slot="date-input-group-input"
       {...(props as DateInputPrimitiveProps)}
     />

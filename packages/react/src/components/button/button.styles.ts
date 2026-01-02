@@ -17,6 +17,7 @@ export const buttonVariants = tv({
       primary: "button--primary",
       secondary: "button--secondary",
       tertiary: "button--tertiary",
+      outline: "button--outline",
       ghost: "button--ghost",
       danger: "button--danger",
       "danger-soft": "button--danger-soft",

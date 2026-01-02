@@ -1,6 +1,6 @@
 import {Description, Input, Label, Surface, TextArea, TextField} from "@heroui/react";
 
-export function OnSurface() {
+export function InSurface() {
   return (
     <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
       <TextField name="name">

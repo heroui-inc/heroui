@@ -29,9 +29,7 @@ export function InputOTPDemo() {
         </InputOTP>
         <div className="flex items-center gap-[5px] px-1 pt-1">
           <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
-          <Link className="text-foreground" underline="always">
-            Resend
-          </Link>
+          <Link className="text-foreground">Resend</Link>
         </div>
       </div>
     </div>

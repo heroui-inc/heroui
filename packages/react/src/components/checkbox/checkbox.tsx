@@ -25,12 +25,12 @@ interface CheckboxRootProps
   name?: string;
 }
 
-const CheckboxRoot = ({children, className, isOnSurface, ...props}: CheckboxRootProps) => {
+const CheckboxRoot = ({children, className, inSurface, ...props}: CheckboxRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
   const slots = React.useMemo(
-    () => checkboxVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => checkboxVariants({inSurface: resolvedInSurface}),
+    [resolvedInSurface],
   );
 
   return (

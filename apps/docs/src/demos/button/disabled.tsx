@@ -10,6 +10,9 @@ export function Disabled() {
       <Button isDisabled variant="tertiary">
         Tertiary
       </Button>
+      <Button isDisabled variant="outline">
+        Outline
+      </Button>
       <Button isDisabled variant="ghost">
         Ghost
       </Button>

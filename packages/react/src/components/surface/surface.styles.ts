@@ -6,10 +6,10 @@ export const surfaceVariants = tv({
   base: "surface",
   variants: {
     variant: {
+      transparent: "surface--transparent",
       default: "surface--default",
       secondary: "surface--secondary",
       tertiary: "surface--tertiary",
-      quaternary: "surface--quaternary",
     },
   },
   defaultVariants: {

@@ -141,6 +141,7 @@ Separators are automatically added between buttons using a pseudo-element (`:bef
 ### Notes
 
 - ButtonGroup uses React Context to pass `size`, `variant`, and `isDisabled` props to all child Button components
+- **Only direct child buttons receive the ButtonGroup props** - Buttons nested inside other components (like Modal, Dropdown, etc.) will not inherit the group's props even if they are descendants of the ButtonGroup
 - Individual Button components can override the group's `isDisabled` prop by setting `isDisabled={false}`
 - The component automatically handles border radius and separators between buttons
 - Buttons in a group have their active/pressed scale transform removed for a more cohesive appearance

@@ -9,5 +9,6 @@ export {CustomTrigger} from "./custom-trigger";
 export {Default} from "./default";
 export {DismissBehavior} from "./dismiss-behavior";
 export {Placements} from "./placements";
+export {Sizes} from "./sizes";
 export {Statuses} from "./statuses";
 export {WithCloseButton} from "./with-close-button";

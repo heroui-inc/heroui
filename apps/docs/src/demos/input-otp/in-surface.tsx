@@ -1,6 +1,6 @@
 import {InputOTP, Label, Link, Surface} from "@heroui/react";
 
-export function OnSurface() {
+export function InSurface() {
   return (
     <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
       <div className="flex flex-col gap-1">
@@ -22,7 +22,7 @@ export function OnSurface() {
       </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
         <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
-        <Link className="text-foreground" underline="always">
+        <Link className="text-foreground underline" href="#">
           Resend
         </Link>
       </div>

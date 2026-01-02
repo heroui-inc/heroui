@@ -84,11 +84,11 @@ Add prefix or suffix icons to enhance the time field.
 
 <ComponentPreview name="time-field-full-width" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, TimeField and its child DateInputGroup automatically apply on-surface styling.
+When used inside a [Surface](/docs/components/surface) component, TimeField and its child DateInputGroup automatically apply in-surface styling.
 
-<ComponentPreview name="time-field-on-surface" />
+<ComponentPreview name="time-field-in-surface" />
 
 ### Form Example
 
@@ -317,7 +317,7 @@ DateInputGroup accepts all props from React Aria's `Group` component plus the fo
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `false` | Whether the input is displayed in a surface (affects styling) |
 
 ### DateInputGroup.Input Props
 
@@ -326,7 +326,7 @@ DateInputGroup.Input accepts all props from React Aria's `DateInput` component p
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `false` | Whether the input is displayed in a surface (affects styling) |
 
 The `DateInput` component accepts a render prop function that receives date segments. Each segment represents a part of the time (hour, minute, second, etc.).
 

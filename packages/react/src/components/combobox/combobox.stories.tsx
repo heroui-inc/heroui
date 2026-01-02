@@ -779,24 +779,141 @@ export const Disabled: Story = {
   ),
 };
 
-export const OnSurface: Story = {
-  render: () => {
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-      const data: Record<string, string> = {};
+export const MenuTrigger: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Focus (default)</p>
+        <ComboBox className="w-[256px]" menuTrigger="focus">
+          <Label>Favorite Animal</Label>
+          <ComboBox.InputGroup>
+            <Input placeholder="Search animals..." />
+            <ComboBox.Trigger />
+          </ComboBox.InputGroup>
+          <ComboBox.Popover>
+            <ListBox>
+              <ListBox.Item id="aardvark" textValue="Aardvark">
+                Aardvark
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="cat" textValue="Cat">
+                Cat
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="dog" textValue="Dog">
+                Dog
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="kangaroo" textValue="Kangaroo">
+                Kangaroo
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="panda" textValue="Panda">
+                Panda
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="snake" textValue="Snake">
+                Snake
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            </ListBox>
+          </ComboBox.Popover>
+          <Description>Popover opens when the input is focused</Description>
+        </ComboBox>
+      </div>
 
-      formData.forEach((value, key) => {
-        data[key] = value.toString();
-      });
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Input</p>
+        <ComboBox className="w-[256px]" menuTrigger="input">
+          <Label>Favorite Animal</Label>
+          <ComboBox.InputGroup>
+            <Input placeholder="Search animals..." />
+            <ComboBox.Trigger />
+          </ComboBox.InputGroup>
+          <ComboBox.Popover>
+            <ListBox>
+              <ListBox.Item id="aardvark" textValue="Aardvark">
+                Aardvark
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="cat" textValue="Cat">
+                Cat
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="dog" textValue="Dog">
+                Dog
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="kangaroo" textValue="Kangaroo">
+                Kangaroo
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="panda" textValue="Panda">
+                Panda
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="snake" textValue="Snake">
+                Snake
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            </ListBox>
+          </ComboBox.Popover>
+          <Description>Popover opens when the user edits the input text</Description>
+        </ComboBox>
+      </div>
 
-      alert("Form submitted successfully!");
-    };
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Manual</p>
+        <ComboBox className="w-[256px]" menuTrigger="manual">
+          <Label>Favorite Animal</Label>
+          <ComboBox.InputGroup>
+            <Input placeholder="Search animals..." />
+            <ComboBox.Trigger />
+          </ComboBox.InputGroup>
+          <ComboBox.Popover>
+            <ListBox>
+              <ListBox.Item id="aardvark" textValue="Aardvark">
+                Aardvark
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="cat" textValue="Cat">
+                Cat
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="dog" textValue="Dog">
+                Dog
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="kangaroo" textValue="Kangaroo">
+                Kangaroo
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="panda" textValue="Panda">
+                Panda
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="snake" textValue="Snake">
+                Snake
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            </ListBox>
+          </ComboBox.Popover>
+          <Description>
+            Popover only opens when the trigger button is pressed or arrow keys are used
+          </Description>
+        </ComboBox>
+      </div>
+    </div>
+  ),
+};
 
-    return (
-      <Surface className="w-[320px] rounded-3xl p-6">
-        <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-          <ComboBox isRequired className="w-full" name="animal">
+export const SurfaceVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <ComboBox className="w-full" name="animal-default">
             <Label>Favorite Animal</Label>
             <ComboBox.InputGroup>
               <Input placeholder="Search animals..." />
@@ -816,25 +933,113 @@ export const OnSurface: Story = {
                   Dog
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="kangaroo" textValue="Kangaroo">
-                  Kangaroo
+              </ListBox>
+            </ComboBox.Popover>
+          </ComboBox>
+          <p className="text-sm text-muted">
+            ComboBox automatically detects default surface level through its Input component.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <ComboBox className="w-full" name="animal-secondary">
+            <Label>Favorite Animal</Label>
+            <ComboBox.InputGroup>
+              <Input placeholder="Search animals..." />
+              <ComboBox.Trigger />
+            </ComboBox.InputGroup>
+            <ComboBox.Popover>
+              <ListBox>
+                <ListBox.Item id="aardvark" textValue="Aardvark">
+                  Aardvark
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="panda" textValue="Panda">
-                  Panda
+                <ListBox.Item id="cat" textValue="Cat">
+                  Cat
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="snake" textValue="Snake">
-                  Snake
+                <ListBox.Item id="dog" textValue="Dog">
+                  Dog
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
               </ListBox>
             </ComboBox.Popover>
-            <FieldError />
           </ComboBox>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Surface>
-    );
-  },
+          <p className="text-sm text-muted">
+            ComboBox automatically detects secondary surface level through its Input component.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <ComboBox className="w-full" name="animal-tertiary">
+            <Label>Favorite Animal</Label>
+            <ComboBox.InputGroup>
+              <Input placeholder="Search animals..." />
+              <ComboBox.Trigger />
+            </ComboBox.InputGroup>
+            <ComboBox.Popover>
+              <ListBox>
+                <ListBox.Item id="aardvark" textValue="Aardvark">
+                  Aardvark
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="cat" textValue="Cat">
+                  Cat
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="dog" textValue="Dog">
+                  Dog
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </ComboBox.Popover>
+          </ComboBox>
+          <p className="text-sm text-muted">
+            ComboBox automatically detects tertiary surface level through its Input component.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <ComboBox className="w-full" name="animal-transparent">
+            <Label>Favorite Animal</Label>
+            <ComboBox.InputGroup>
+              <Input placeholder="Search animals..." />
+              <ComboBox.Trigger />
+            </ComboBox.InputGroup>
+            <ComboBox.Popover>
+              <ListBox>
+                <ListBox.Item id="aardvark" textValue="Aardvark">
+                  Aardvark
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="cat" textValue="Cat">
+                  Cat
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="dog" textValue="Dog">
+                  Dog
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </ComboBox.Popover>
+          </ComboBox>
+          <p className="text-sm text-muted">
+            ComboBox automatically detects transparent surface level through its Input component.
+          </p>
+        </Surface>
+      </div>
+    </div>
+  ),
 };

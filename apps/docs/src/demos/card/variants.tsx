@@ -42,16 +42,6 @@ export function Variants() {
           <p>Use for primary or featured content</p>
         </Card.Content>
       </Card>
-
-      <Card className="w-[320px]" variant="quaternary">
-        <Card.Header>
-          <Card.Title>Quaternary</Card.Title>
-          <Card.Description>Highest prominence (bg-surface-quaternary)</Card.Description>
-        </Card.Header>
-        <Card.Content>
-          <p>Use for primary or featured content</p>
-        </Card.Content>
-      </Card>
     </div>
   );
 }

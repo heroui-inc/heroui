@@ -28,6 +28,14 @@ export function Variants() {
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
+        <p className="text-sm text-muted">Outline</p>
+        <ButtonGroup variant="outline">
+          <Button>First</Button>
+          <Button>Second</Button>
+          <Button>Third</Button>
+        </ButtonGroup>
+      </div>
+      <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Ghost</p>
         <ButtonGroup variant="ghost">
           <Button>First</Button>

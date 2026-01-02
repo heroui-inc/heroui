@@ -36,15 +36,15 @@ const SearchFieldRoot = ({
   children,
   className,
   fullWidth,
-  isOnSurface,
+  inSurface,
   ...props
 }: SearchFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   const slots = React.useMemo(
-    () => searchFieldVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
-    [fullWidth, isOnSurfaceValue],
+    () => searchFieldVariants({fullWidth, inSurface: resolvedInSurface}),
+    [fullWidth, resolvedInSurface],
   );
 
   return (
@@ -83,17 +83,17 @@ const SearchFieldGroup = ({children, className, ...props}: SearchFieldGroupProps
  * SearchField Input
  * -----------------------------------------------------------------------------------------------*/
 interface SearchFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
-  isOnSurface?: boolean;
+  inSurface?: "default" | "secondary" | "tertiary";
 }
 
-const SearchFieldInput = ({className, isOnSurface, ...props}: SearchFieldInputProps) => {
+const SearchFieldInput = ({className, inSurface, ...props}: SearchFieldInputProps) => {
   const {slots} = useContext(SearchFieldContext);
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input({isOnSurface: isOnSurfaceValue}))}
+      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
       data-slot="search-field-input"
       {...props}
     />

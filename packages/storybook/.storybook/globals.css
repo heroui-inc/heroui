@@ -20,6 +20,11 @@
   --foreground: lab(8.34178% 0.607349 -2.12998);
 }
 
+html,
+body {
+  font-family: var(--font-sans);
+}
+
 .dark,
 [data-theme="dark"] {
   --background: lab(1.54547% 0.178337 -0.64671);

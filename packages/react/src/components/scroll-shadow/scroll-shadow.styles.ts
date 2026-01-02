@@ -26,18 +26,11 @@ export const scrollShadowVariants = tv({
       },
       false: {},
     },
-    isOnSurface: {
-      true: {
-        base: "scroll-shadow--on-surface",
-      },
-      false: {},
-    },
   },
   defaultVariants: {
     variant: "fade",
     orientation: "vertical",
     hideScrollBar: false,
-    isOnSurface: false,
   },
 });
 

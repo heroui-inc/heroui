@@ -4,7 +4,7 @@ export {CustomIcons} from "./custom-icons";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";
-export {OnSurface} from "./on-surface";
+export {InSurface} from "./in-surface";
 export {Required} from "./required";
 export {Validation} from "./validation";
 export {WithDescription} from "./with-description";

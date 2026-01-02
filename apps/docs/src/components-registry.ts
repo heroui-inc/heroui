@@ -35,6 +35,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "avatar",
     title: "Avatar",
   },
+  breadcrumbs: {
+    category: "navigation",
+    description: "Display the user's current location within a hierarchy",
+    href: "/docs/components/breadcrumbs",
+    name: "breadcrumbs",
+    title: "Breadcrumbs",
+  },
   button: {
     category: "forms",
     description: "Allows a user to perform an action",

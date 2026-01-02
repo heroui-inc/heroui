@@ -11,10 +11,22 @@ export const searchFieldVariants = tv({
     clearButton: "search-field__clear-button",
   },
   variants: {
-    isOnSurface: {
-      true: {
-        group: "search-field__group--on-surface",
-        input: "search-field__input--on-surface",
+    inSurface: {
+      transparent: {
+        group: "search-field__group--in-surface-transparent",
+        input: "search-field__input--in-surface-transparent",
+      },
+      default: {
+        group: "search-field__group--in-surface-default",
+        input: "search-field__input--in-surface-default",
+      },
+      secondary: {
+        group: "search-field__group--in-surface-secondary",
+        input: "search-field__input--in-surface-secondary",
+      },
+      tertiary: {
+        group: "search-field__group--in-surface-tertiary",
+        input: "search-field__input--in-surface-tertiary",
       },
     },
     fullWidth: {

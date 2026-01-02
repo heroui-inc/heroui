@@ -5,7 +5,6 @@ import React, {useState} from "react";
 
 import {Button} from "../button";
 import {Card} from "../card";
-import {Surface} from "../surface";
 
 import {ScrollShadow} from ".";
 
@@ -135,16 +134,6 @@ export const HideScrollBar: Story = {
         <LoremContent />
       </ScrollShadow>
     </div>
-  ),
-};
-
-export const OnSurface: Story = {
-  render: (args) => (
-    <Surface className="w-full rounded-3xl sm:max-w-sm">
-      <ScrollShadow className="max-h-[240px] p-4" {...args}>
-        <LoremContent />
-      </ScrollShadow>
-    </Surface>
   ),
 };
 

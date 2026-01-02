@@ -6,6 +6,10 @@
 }
 
 /* Modifier - variant */
+.surface--transparent {
+  @apply bg-transparent;
+}
+
 .surface--default {
   @apply bg-surface;
 }
@@ -16,8 +20,4 @@
 
 .surface--tertiary {
   @apply bg-surface-tertiary;
-}
-
-.surface--quaternary {
-  @apply bg-surface-quaternary;
 }

@@ -8,6 +8,7 @@ import {Input as InputPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {SurfaceContext} from "../surface";
+import {TextFieldContext} from "../text-field";
 
 import {inputVariants} from "./input.styles";
 
@@ -16,16 +17,17 @@ import {inputVariants} from "./input.styles";
  * -----------------------------------------------------------------------------------------------*/
 interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, InputVariants {}
 
-const InputRoot = ({className, fullWidth, isOnSurface, ...rest}: InputRootProps) => {
+const InputRoot = ({className, fullWidth, inSurface, ...rest}: InputRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const textFieldContext = useContext(TextFieldContext);
+  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
       data-slot="input"
       className={composeTwRenderProps(
         className,
-        inputVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
+        inputVariants({fullWidth, inSurface: resolvedInSurface}),
       )}
       {...rest}
     />

@@ -5,6 +5,7 @@ import React from "react";
 
 import {Avatar} from "../avatar";
 import {Button} from "../button";
+import {Card} from "../card";
 
 import {Popover} from "./index";
 
@@ -209,4 +210,45 @@ const SpringAnimationTemplate = (props: Popover["ContentProps"]) => (
 export const SpringAnimation = {
   args: defaultArgs,
   render: SpringAnimationTemplate,
+};
+
+const CardWithHelptextTemplate = (props: Popover["ContentProps"]) => (
+  <Card className="w-[400px]">
+    <Card.Header>
+      <div className="flex items-center gap-2">
+        <Card.Title>Card Title</Card.Title>
+        <Popover>
+          <Popover.Trigger aria-label="Help information">
+            <Button isIconOnly aria-label="Help" size="sm" variant="ghost">
+              <Icon className="text-muted" icon="gravity-ui:circle-info" />
+            </Button>
+          </Popover.Trigger>
+          <Popover.Content {...props} className="max-w-[200px]" placement="right">
+            <Popover.Dialog>
+              <Popover.Arrow />
+              <Popover.Heading>Help Information</Popover.Heading>
+              <p className="text-sm text-muted">
+                This is a helptext popover that appears on top of the card surface. It provides
+                additional context or information about the card title.
+              </p>
+            </Popover.Dialog>
+          </Popover.Content>
+        </Popover>
+      </div>
+      <Card.Description>
+        This card demonstrates how a popover looks when displayed on top of a card surface.
+      </Card.Description>
+    </Card.Header>
+    <Card.Content>
+      <p className="text-sm">
+        The popover help icon is positioned right after the title, allowing users to access
+        additional information without cluttering the main content area.
+      </p>
+    </Card.Content>
+  </Card>
+);
+
+export const CardWithHelptext = {
+  args: defaultArgs,
+  render: CardWithHelptextTemplate,
 };

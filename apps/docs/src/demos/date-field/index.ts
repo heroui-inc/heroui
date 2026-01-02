@@ -4,7 +4,7 @@ export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";
 export {Invalid} from "./invalid";
-export {OnSurface} from "./on-surface";
+export {InSurface} from "./in-surface";
 export {Required} from "./required";
 export {WithDescription} from "./with-description";
 export {WithPrefixAndSuffix} from "./with-prefix-and-suffix";

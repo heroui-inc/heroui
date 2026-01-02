@@ -99,11 +99,11 @@ Use chevron icons in a vertical layout for a different visual style.
 
 <ComponentPreview name="number-field-full-width" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, NumberField automatically applies on-surface styling.
+When used inside a [Surface](/docs/components/surface) component, NumberField automatically applies in-surface styling.
 
-<ComponentPreview name="number-field-on-surface" />
+<ComponentPreview name="number-field-in-surface" />
 
 ### Form Example
 
@@ -174,7 +174,7 @@ NumberField uses CSS classes that can be customized. Override the component clas
 - `.number-field__input` – The numeric input field
 - `.number-field__increment-button` – Button to increment the value
 - `.number-field__decrement-button` – Button to decrement the value
-- `.number-field__group--on-surface` – Applied when used inside a Surface component
+- `.number-field__group--in-surface` – Applied when used inside a Surface component
 
 > **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options.
 
@@ -205,7 +205,7 @@ NumberField inherits all props from React Aria's [NumberField](https://react-spe
 | `style` | `React.CSSProperties \| (values: NumberFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the number field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
-| `isOnSurface` | `boolean` | - | Whether the field is on a surface (auto-detected when inside Surface). |
+| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | - | Whether the field is in a surface (auto-detected when inside Surface). |
 
 #### Value Props
 
@@ -306,7 +306,7 @@ NumberField.Input inherits props from React Aria's [Input](https://react-spectru
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | CSS classes for styling. |
-| `isOnSurface` | `boolean` | - | Whether the input is on a surface (auto-detected when inside Surface). |
+| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | - | Whether the input is in a surface (auto-detected when inside Surface). |
 
 #### NumberField.IncrementButton Props
 

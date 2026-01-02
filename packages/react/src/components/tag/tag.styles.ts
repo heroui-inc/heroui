@@ -5,7 +5,6 @@ import {tv} from "tailwind-variants";
 export const tagVariants = tv({
   defaultVariants: {
     size: "md",
-    isOnSurface: false,
     variant: "default",
   },
   slots: {
@@ -31,13 +30,27 @@ export const tagVariants = tv({
       surface: {
         base: "tag--surface",
       },
-    },
-    isOnSurface: {
-      true: {
-        base: "tag--on-surface",
-        removeButton: "tag__remove-button--on-surface",
+      "on-form-field": {
+        base: "tag--on-form-field",
       },
-      false: {},
+    },
+    inSurface: {
+      transparent: {
+        base: "tag--in-surface-transparent",
+        removeButton: "tag__remove-button--in-surface-transparent",
+      },
+      default: {
+        base: "tag--in-surface-default",
+        removeButton: "tag__remove-button--in-surface-default",
+      },
+      secondary: {
+        base: "tag--in-surface-secondary",
+        removeButton: "tag__remove-button--in-surface-secondary",
+      },
+      tertiary: {
+        base: "tag--in-surface-tertiary",
+        removeButton: "tag__remove-button--in-surface-tertiary",
+      },
     },
   },
 });

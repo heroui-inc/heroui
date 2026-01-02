@@ -1,0 +1,252 @@
+{
+  "timestamp": "2025-12-28T21:05:44.088Z",
+  "uncompressed": {
+    "bytes": 544,
+    "kb": 0.531,
+    "formatted": "544 B"
+  },
+  "minified": {
+    "bytes": 249668,
+    "kb": 243.816,
+    "formatted": "243.82 KB"
+  },
+  "componentsTotal": {
+    "bytes": 131299,
+    "kb": 128.222,
+    "formatted": "128.22 KB"
+  },
+  "components": {
+    "accordion.css": {
+      "bytes": 3180,
+      "kb": 3.105
+    },
+    "alert-dialog.css": {
+      "bytes": 6099,
+      "kb": 5.956
+    },
+    "alert.css": {
+      "bytes": 1156,
+      "kb": 1.129
+    },
+    "avatar.css": {
+      "bytes": 1481,
+      "kb": 1.446
+    },
+    "breadcrumbs.css": {
+      "bytes": 513,
+      "kb": 0.501
+    },
+    "button-group.css": {
+      "bytes": 1447,
+      "kb": 1.413
+    },
+    "button.css": {
+      "bytes": 3539,
+      "kb": 3.456
+    },
+    "card.css": {
+      "bytes": 873,
+      "kb": 0.853
+    },
+    "checkbox-group.css": {
+      "bytes": 93,
+      "kb": 0.091
+    },
+    "checkbox.css": {
+      "bytes": 9206,
+      "kb": 8.99
+    },
+    "chip.css": {
+      "bytes": 2026,
+      "kb": 1.979
+    },
+    "close-button.css": {
+      "bytes": 1431,
+      "kb": 1.397
+    },
+    "combobox.css": {
+      "bytes": 3844,
+      "kb": 3.754
+    },
+    "date-field.css": {
+      "bytes": 358,
+      "kb": 0.35
+    },
+    "date-input-group.css": {
+      "bytes": 4891,
+      "kb": 4.776
+    },
+    "description.css": {
+      "bytes": 102,
+      "kb": 0.1
+    },
+    "disclosure-group.css": {
+      "bytes": 158,
+      "kb": 0.154
+    },
+    "disclosure.css": {
+      "bytes": 1127,
+      "kb": 1.101
+    },
+    "dropdown.css": {
+      "bytes": 2942,
+      "kb": 2.873
+    },
+    "empty-state.css": {
+      "bytes": 80,
+      "kb": 0.078
+    },
+    "error-message.css": {
+      "bytes": 347,
+      "kb": 0.339
+    },
+    "field-error.css": {
+      "bytes": 409,
+      "kb": 0.399
+    },
+    "fieldset.css": {
+      "bytes": 258,
+      "kb": 0.252
+    },
+    "header.css": {
+      "bytes": 269,
+      "kb": 0.263
+    },
+    "input-group.css": {
+      "bytes": 5803,
+      "kb": 5.667
+    },
+    "input-otp.css": {
+      "bytes": 3862,
+      "kb": 3.771
+    },
+    "input.css": {
+      "bytes": 3079,
+      "kb": 3.007
+    },
+    "kbd.css": {
+      "bytes": 576,
+      "kb": 0.563
+    },
+    "label.css": {
+      "bytes": 785,
+      "kb": 0.767
+    },
+    "link.css": {
+      "bytes": 2795,
+      "kb": 2.729
+    },
+    "listbox-item.css": {
+      "bytes": 2773,
+      "kb": 2.708
+    },
+    "listbox-section.css": {
+      "bytes": 254,
+      "kb": 0.248
+    },
+    "listbox.css": {
+      "bytes": 437,
+      "kb": 0.427
+    },
+    "menu-item.css": {
+      "bytes": 3694,
+      "kb": 3.607
+    },
+    "menu-section.css": {
+      "bytes": 248,
+      "kb": 0.242
+    },
+    "menu.css": {
+      "bytes": 389,
+      "kb": 0.38
+    },
+    "modal.css": {
+      "bytes": 6249,
+      "kb": 6.103
+    },
+    "number-field.css": {
+      "bytes": 5725,
+      "kb": 5.591
+    },
+    "popover.css": {
+      "bytes": 1941,
+      "kb": 1.896
+    },
+    "radio-group.css": {
+      "bytes": 2074,
+      "kb": 2.025
+    },
+    "radio.css": {
+      "bytes": 4250,
+      "kb": 4.15
+    },
+    "scroll-shadow.css": {
+      "bytes": 2559,
+      "kb": 2.499
+    },
+    "search-field.css": {
+      "bytes": 4716,
+      "kb": 4.605
+    },
+    "select.css": {
+      "bytes": 6101,
+      "kb": 5.958
+    },
+    "separator.css": {
+      "bytes": 1632,
+      "kb": 1.594
+    },
+    "skeleton.css": {
+      "bytes": 1156,
+      "kb": 1.129
+    },
+    "slider.css": {
+      "bytes": 3706,
+      "kb": 3.619
+    },
+    "spinner.css": {
+      "bytes": 557,
+      "kb": 0.544
+    },
+    "surface.css": {
+      "bytes": 313,
+      "kb": 0.306
+    },
+    "switch-group.css": {
+      "bytes": 289,
+      "kb": 0.282
+    },
+    "switch.css": {
+      "bytes": 5515,
+      "kb": 5.386
+    },
+    "tabs.css": {
+      "bytes": 3876,
+      "kb": 3.785
+    },
+    "tag-group.css": {
+      "bytes": 299,
+      "kb": 0.292
+    },
+    "tag.css": {
+      "bytes": 4155,
+      "kb": 4.058
+    },
+    "text-field.css": {
+      "bytes": 458,
+      "kb": 0.447
+    },
+    "textarea.css": {
+      "bytes": 3159,
+      "kb": 3.085
+    },
+    "time-field.css": {
+      "bytes": 358,
+      "kb": 0.35
+    },
+    "tooltip.css": {
+      "bytes": 1687,
+      "kb": 1.647
+    }
+  }
+}

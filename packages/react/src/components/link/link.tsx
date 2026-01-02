@@ -26,11 +26,8 @@ const LinkContext = createContext<LinkContext>({});
  * --------------------------------------------------------------------------------------------- */
 interface LinkRootProps extends ComponentPropsWithRef<typeof LinkPrimitive>, LinkVariants {}
 
-const LinkRoot = ({children, className, underline, underlineOffset, ...props}: LinkRootProps) => {
-  const slots = React.useMemo(
-    () => linkVariants({underline, underlineOffset}),
-    [underline, underlineOffset],
-  );
+const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
+  const slots = React.useMemo(() => linkVariants(), []);
 
   return (
     <LinkContext value={{slots}}>

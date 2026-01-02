@@ -399,53 +399,80 @@ export const CustomIcons: Story = {
   ),
 };
 
-export const OnSurface: Story = {
+export const SurfaceVariants: Story = {
   render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <NumberField defaultValue={1024} minValue={0} name="width">
-        <Label>Width</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>Enter the width in pixels</Description>
-      </NumberField>
-      <NumberField
-        defaultValue={0.5}
-        formatOptions={{style: "percent"}}
-        maxValue={1}
-        minValue={0}
-        name="percentage"
-        step={0.1}
-      >
-        <Label>Percentage</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>Value must be between 0 and 100</Description>
-      </NumberField>
-      <NumberField isInvalid isRequired maxValue={5} minValue={1} name="quantity" value={10}>
-        <Label>Quantity</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <FieldError>Quantity must be between 1 and 5</FieldError>
-      </NumberField>
-      <NumberField isDisabled defaultValue={50} minValue={0} name="disabled">
-        <Label>Disabled field</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>This field cannot be edited</Description>
-      </NumberField>
-    </Surface>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <NumberField defaultValue={100} minValue={0} name="quantity-default">
+            <Label>Quantity</Label>
+            <NumberField.Group>
+              <NumberField.DecrementButton />
+              <NumberField.Input className="w-full" />
+              <NumberField.IncrementButton />
+            </NumberField.Group>
+          </NumberField>
+          <p className="text-sm text-muted">
+            NumberField automatically detects default surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <NumberField defaultValue={100} minValue={0} name="quantity-secondary">
+            <Label>Quantity</Label>
+            <NumberField.Group>
+              <NumberField.DecrementButton />
+              <NumberField.Input className="w-full" />
+              <NumberField.IncrementButton />
+            </NumberField.Group>
+          </NumberField>
+          <p className="text-sm text-muted">
+            NumberField automatically detects secondary surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <NumberField defaultValue={100} minValue={0} name="quantity-tertiary">
+            <Label>Quantity</Label>
+            <NumberField.Group>
+              <NumberField.DecrementButton />
+              <NumberField.Input className="w-full" />
+              <NumberField.IncrementButton />
+            </NumberField.Group>
+          </NumberField>
+          <p className="text-sm text-muted">
+            NumberField automatically detects tertiary surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <NumberField defaultValue={100} minValue={0} name="quantity-transparent">
+            <Label>Quantity</Label>
+            <NumberField.Group>
+              <NumberField.DecrementButton />
+              <NumberField.Input className="w-full" />
+              <NumberField.IncrementButton />
+            </NumberField.Group>
+          </NumberField>
+          <p className="text-sm text-muted">
+            NumberField automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
+    </div>
   ),
 };
 

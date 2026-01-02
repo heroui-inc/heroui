@@ -28,6 +28,7 @@
     "build": "pnpm run build:copy && pnpm run build:minify",
     "build:copy": "node scripts/copy-css.mjs",
     "build:minify": "npx @tailwindcss/cli -i ./dist/index.css -o dist/heroui.min.css --minify",
+    "measure-size": "node scripts/measure-bundle-size.mjs",
     "clean": "rm -rf dist .turbo",
     "prepack": "clean-package",
     "postpack": "clean-package restore"

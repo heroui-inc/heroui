@@ -1,6 +1,6 @@
 import {Description, Label, NumberField, Surface} from "@heroui/react";
 
-export function OnSurface() {
+export function InSurface() {
   return (
     <Surface className="flex w-full max-w-[280px] flex-col gap-4 rounded-3xl p-6">
       <NumberField defaultValue={1024} minValue={0} name="width">

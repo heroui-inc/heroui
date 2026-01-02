@@ -30,7 +30,7 @@ function AppleShowcaseButton({
 function SelectedIphoneColorSwatch({color, name}: {color: string; name: string}) {
   return (
     <span
-      className="group relative size-6 rounded-lg border border-border shadow-[inset_0px_-1px_0px_0px_rgba(255,255,255,.5)]"
+      className="group relative size-6 rounded-lg shadow-[inset_0px_-1px_0px_0px_rgba(255,255,255,.5)]"
       style={{
         backgroundColor: `${color}`,
       }}

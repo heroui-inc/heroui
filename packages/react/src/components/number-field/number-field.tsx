@@ -36,15 +36,15 @@ const NumberFieldRoot = ({
   children,
   className,
   fullWidth,
-  isOnSurface,
+  inSurface,
   ...props
 }: NumberFieldRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   const slots = React.useMemo(
-    () => numberFieldVariants({fullWidth, isOnSurface: isOnSurfaceValue}),
-    [fullWidth, isOnSurfaceValue],
+    () => numberFieldVariants({fullWidth, inSurface: resolvedInSurface}),
+    [fullWidth, resolvedInSurface],
   );
 
   return (
@@ -83,17 +83,17 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
  * NumberField Input
  * -----------------------------------------------------------------------------------------------*/
 interface NumberFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
-  isOnSurface?: boolean;
+  inSurface?: "default" | "secondary" | "tertiary";
 }
 
-const NumberFieldInput = ({className, isOnSurface, ...props}: NumberFieldInputProps) => {
+const NumberFieldInput = ({className, inSurface, ...props}: NumberFieldInputProps) => {
   const {slots} = useContext(NumberFieldContext);
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input({isOnSurface: isOnSurfaceValue}))}
+      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
       data-slot="number-field-input"
       {...props}
     />

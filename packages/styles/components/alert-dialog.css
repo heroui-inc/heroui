@@ -166,6 +166,41 @@
 }
 
 /**
+ * Modifier: dialog--xs
+ */
+.alert-dialog__dialog--xs {
+  @apply max-w-xs;
+}
+
+/**
+ * Modifier: dialog--sm
+ */
+.alert-dialog__dialog--sm {
+  @apply max-w-sm;
+}
+
+/**
+ * Modifier: dialog--md
+ */
+.alert-dialog__dialog--md {
+  @apply max-w-md;
+}
+
+/**
+ * Modifier: dialog--lg
+ */
+.alert-dialog__dialog--lg {
+  @apply max-w-lg;
+}
+
+/**
+ * Modifier: dialog--cover
+ */
+.alert-dialog__dialog--cover {
+  @apply h-full min-h-full w-full;
+}
+
+/**
  * Element: header - the top section with the title
  */
 .alert-dialog__header {

@@ -45,19 +45,19 @@ interface InputOTPRootProps
 
 const InputOTPRoot = ({
   className,
+  inSurface,
   inputClassName,
   isDisabled = false,
   isInvalid = false,
-  isOnSurface,
   validationDetails,
   validationErrors = [],
   ...props
 }: InputOTPRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
   const slots = React.useMemo(
-    () => inputOTPVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => inputOTPVariants({inSurface: resolvedInSurface}),
+    [resolvedInSurface],
   );
 
   const validation = React.useMemo(
