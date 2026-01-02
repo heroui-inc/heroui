@@ -1,0 +1,5 @@
+# SSL certificates for localhost HTTPS
+localhost-cert.pem
+localhost-key.pem
+*.pem
+
