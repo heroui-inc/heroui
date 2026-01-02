@@ -1,0 +1,227 @@
+/* Toast component styles */
+
+/* Toast Region - Container for all toasts */
+.toast-region {
+  @apply fixed z-50 flex flex-col gap-2 outline-none;
+}
+
+/* Placement variants */
+.toast-region--top-left {
+  @apply top-4 left-4;
+}
+
+.toast-region--top-right {
+  @apply top-4 right-4;
+}
+
+.toast-region--bottom-left {
+  @apply bottom-4 left-4;
+}
+
+.toast-region--bottom-right {
+  @apply right-4 bottom-4 flex-col-reverse;
+}
+
+.toast-region:focus-visible {
+  @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Base toast styles */
+.toast {
+  @apply flex w-[230px] items-center gap-4 rounded-3xl bg-surface px-4 py-3 shadow-surface forced-color-adjust-none outline-none;
+  view-transition-class: toast;
+}
+
+.toast:focus-visible {
+  @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Toast content */
+.toast__content {
+  @apply flex min-w-0 flex-1 flex-col items-start py-3;
+}
+
+/* Toast icon */
+.toast__icon {
+  @apply flex shrink-0 items-center justify-center py-3 select-none;
+
+  [data-slot="toast-default-icon"] {
+    @apply box-content size-[14px];
+  }
+}
+
+/* Toast title */
+.toast__title {
+  @apply text-sm leading-[1.43] font-medium;
+}
+
+/* Toast description */
+.toast__description {
+  @apply text-sm leading-[1.43] font-normal;
+}
+
+.toast--default .toast__description {
+  @apply text-muted;
+}
+
+/* Toast close button */
+.toast__close {
+  @apply shrink-0 py-3;
+}
+
+/* Toast action button */
+.toast__action {
+  @apply h-9 shrink-0 rounded-3xl px-[14px] py-2 text-sm font-medium;
+  @apply bg-default text-default-foreground;
+  @apply transition-colors duration-100;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-default-hover;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    @apply bg-default-hover;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-2 outline-offset-2 outline-focus;
+  }
+}
+
+/* Variant modifiers */
+.toast--default .toast__title {
+  @apply text-foreground;
+}
+
+.toast--default .toast__icon {
+  @apply text-foreground;
+}
+
+.toast--accent {
+  @apply bg-accent-soft;
+}
+
+.toast--accent .toast__title {
+  @apply text-accent-soft-foreground;
+}
+
+.toast--accent .toast__description {
+  @apply text-accent-soft-foreground/80;
+}
+
+.toast--accent .toast__icon {
+  @apply text-accent-soft-foreground;
+}
+
+.toast--success {
+  @apply bg-success-soft;
+}
+
+.toast--success .toast__title {
+  @apply text-success-soft-foreground;
+}
+
+.toast--success .toast__description {
+  @apply text-success-soft-foreground/80;
+}
+
+.toast--success .toast__icon {
+  @apply text-success-soft-foreground;
+}
+
+.toast--warning {
+  @apply bg-warning-soft;
+}
+
+.toast--warning .toast__title {
+  @apply text-warning-soft-foreground;
+}
+
+.toast--warning .toast__description {
+  @apply text-warning-soft-foreground/80;
+}
+
+.toast--warning .toast__icon {
+  @apply text-warning-soft-foreground;
+}
+
+.toast--danger {
+  @apply bg-danger-soft;
+}
+
+.toast--danger .toast__title {
+  @apply text-danger-soft-foreground;
+}
+
+.toast--danger .toast__description {
+  @apply text-danger-soft-foreground/80;
+}
+
+.toast--danger .toast__icon {
+  @apply text-danger-soft-foreground;
+}
+
+/* Action button variants for different toast types */
+.toast--accent .toast__action {
+  @apply bg-accent-soft-hover text-accent-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-accent-soft-hover;
+  }
+}
+
+.toast--success .toast__action {
+  @apply bg-success-soft-hover text-success-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-success-soft-hover;
+  }
+}
+
+.toast--warning .toast__action {
+  @apply bg-warning-soft-hover text-warning-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-warning-soft-hover;
+  }
+}
+
+.toast--danger .toast__action {
+  @apply bg-danger-soft-hover text-danger-soft-foreground;
+
+  &:hover,
+  &[data-hovered="true"] {
+    @apply bg-danger-soft-hover;
+  }
+}
+
+/* View transition animations */
+::view-transition-new(.toast):only-child {
+  animation: toast-slide-in 400ms;
+}
+
+::view-transition-old(.toast):only-child {
+  animation: toast-slide-out 400ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes toast-slide-out {
+  to {
+    translate: 100% 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes toast-slide-in {
+  from {
+    translate: 100% 0;
+    opacity: 0;
+  }
+}
