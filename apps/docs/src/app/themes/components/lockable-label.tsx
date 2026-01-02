@@ -1,25 +1,19 @@
-import type {ThemeVariables} from "@/stores/theme-builder";
+import type {ThemeVariables} from "../constants";
 
 import {Lock, LockOpen} from "@gravity-ui/icons";
 import {Label, cn} from "@heroui/react";
 import {useState} from "react";
 
-import {useThemeBuilder} from "@/stores/theme-builder";
+import {useToggleLockedVariable} from "../hooks/use-toggle-locked-variable";
 
-interface ThemeBuilderLabelProps {
+interface LockableLabelProps {
   label: string;
   variable: keyof ThemeVariables;
 }
 
-export function ThemeBuilderLabel({label, variable}: ThemeBuilderLabelProps) {
+export function LockableLabel({label, variable}: LockableLabelProps) {
   const [isLabelHovered, setLabelHovered] = useState(false);
-  const lockedVariables = useThemeBuilder((state) => state.lockedVariables);
-  const toggleVariableLock = useThemeBuilder((state) => state.toggleVariableLock);
-  const isLocked = lockedVariables[variable];
-
-  const handleToggleLock = () => {
-    toggleVariableLock(variable);
-  };
+  const {isLocked, toggleLockedVariable} = useToggleLockedVariable(variable);
 
   return (
     <div
@@ -34,7 +28,7 @@ export function ThemeBuilderLabel({label, variable}: ThemeBuilderLabelProps) {
           isLabelHovered && "flex",
           isLocked && "flex",
         )}
-        onClick={handleToggleLock}
+        onClick={toggleLockedVariable}
       >
         {isLocked ? <Lock className="size-4" /> : <LockOpen className="size-4" />}
       </div>

@@ -9,19 +9,19 @@ import {
 } from "@gravity-ui/icons";
 import {Button, Separator, Tabs} from "@heroui/react";
 import Link from "next/link";
-import {useStore} from "zustand";
 
 import {HeroUILogo} from "@/components/heroui-logo";
-import {useThemeBuilder} from "@/stores/theme-builder";
 
 import {tabs} from "../constants";
+import {useResetVariables, useUndoRedo} from "../hooks";
 
-export function ThemeHeader() {
-  const {futureStates, pastStates, redo, undo} = useStore(useThemeBuilder.temporal);
-  const reset = useThemeBuilder((state) => state.reset);
+export function BuilderHeader() {
+  const resetVariables = useResetVariables();
+  const {canRedo, canUndo, redo, undo} = useUndoRedo();
 
-  const canUndo = pastStates.length > 0;
-  const canRedo = futureStates.length > 0;
+  const reset = () => {
+    resetVariables();
+  };
 
   return (
     <div className="mb-6 flex h-15 w-full items-center justify-center">

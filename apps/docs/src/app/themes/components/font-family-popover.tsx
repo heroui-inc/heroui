@@ -3,21 +3,21 @@
 import {ChevronsExpandVertical, FontCase} from "@gravity-ui/icons";
 import {InputGroup, ListBox, Popover} from "@heroui/react";
 
-import {useThemeBuilder} from "@/stores/theme-builder";
 import {cn} from "@/utils/cn";
 
 import {fonts} from "../constants";
+import {useVariableSetter} from "../hooks";
 
-import {ThemeBuilderLabel} from "./theme-builder-label";
+import {LockableLabel} from "./lockable-label";
 
 export function FontFamilyPopover() {
-  const {setVariable, variables} = useThemeBuilder();
+  const {setVariable, variables} = useVariableSetter();
   const currentFont = fonts.find((f) => f.id === variables.fontFamily);
 
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <ThemeBuilderLabel label="Font Family" variable="fontFamily" />
+        <LockableLabel label="Font Family" variable="fontFamily" />
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">
@@ -61,7 +61,7 @@ export function FontFamilyPopover() {
                 style={{fontFamily: `var(${item.variable})`}}
                 textValue={item.label}
                 className={cn(
-                  "group flex h-[83px] w-[95px] flex-col items-center justify-center gap-[5px] rounded-2xl border-2 border-separator-on-surface",
+                  "group border-separator-on-surface flex h-[83px] w-[95px] flex-col items-center justify-center gap-[5px] rounded-2xl border-2",
                   "data-[selected=true]:border-foreground",
                   "data-[hovered=true]:bg-default",
                 )}
