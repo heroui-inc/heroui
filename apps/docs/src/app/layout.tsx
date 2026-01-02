@@ -13,6 +13,7 @@ import {
   Inter,
   Public_Sans,
 } from "next/font/google";
+import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
@@ -65,11 +66,13 @@ export default function Layout({children}: {children: ReactNode}) {
       lang="en"
     >
       <body className="flex min-h-screen flex-col font-sans">
-        <NextProvider>
-          <TreeContextProvider tree={source.pageTree}>
-            <CustomRootProvider>{children}</CustomRootProvider>
-          </TreeContextProvider>
-        </NextProvider>
+        <NuqsAdapter>
+          <NextProvider>
+            <TreeContextProvider tree={source.pageTree}>
+              <CustomRootProvider>{children}</CustomRootProvider>
+            </TreeContextProvider>
+          </NextProvider>
+        </NuqsAdapter>
         <Analytics />
       </body>
     </html>

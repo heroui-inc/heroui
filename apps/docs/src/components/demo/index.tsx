@@ -1,3 +1,5 @@
+"use client";
+
 import {AlertDemo} from "./alert-demo";
 import {AlertDialogDemo} from "./alert-dialog-demo";
 import {AllowNotificationsDemo} from "./allow-notifications-demo";

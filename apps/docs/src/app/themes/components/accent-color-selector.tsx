@@ -3,18 +3,17 @@
 import {Check} from "@gravity-ui/icons";
 import {ListBox} from "@heroui/react";
 
-import {useThemeBuilder} from "@/stores/theme-builder";
-
 import {colors} from "../constants";
+import {useVariableSetter} from "../hooks";
 
-import {ThemeBuilderLabel} from "./theme-builder-label";
+import {LockableLabel} from "./lockable-label";
 
-export function AccentColorPicker() {
-  const {setVariable, variables} = useThemeBuilder();
+export function AccentColorSelector() {
+  const {setVariable, variables} = useVariableSetter();
 
   return (
     <div className="flex flex-col gap-1">
-      <ThemeBuilderLabel label="Accent Color" variable="accentColor" />
+      <LockableLabel label="Accent Color" variable="accentColor" />
       <ListBox
         disallowEmptySelection
         aria-label="Accent Color"

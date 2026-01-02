@@ -4,13 +4,13 @@ import {BucketPaint, ChevronsExpandVertical} from "@gravity-ui/icons";
 import {InputGroup, Label, ListBox, Popover} from "@heroui/react";
 import Image from "next/image";
 
-import {useThemeBuilder} from "@/stores/theme-builder";
 import {cn} from "@/utils/cn";
 
 import {themes} from "../constants";
+import {useVariableSetter} from "../hooks";
 
 export function ThemePopover() {
-  const {setVariable, variables} = useThemeBuilder();
+  const {setVariable, variables} = useVariableSetter();
   const currentTheme = themes.find((t) => t.id === variables.theme);
 
   return (
