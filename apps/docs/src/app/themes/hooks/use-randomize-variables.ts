@@ -1,3 +1,5 @@
+"use client";
+
 import {colorIds, fontIds, radiusIds, themeIds} from "../constants";
 
 import {useVariablesState} from "./use-variables-state";
