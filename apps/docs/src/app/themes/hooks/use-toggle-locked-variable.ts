@@ -1,3 +1,5 @@
+"use client";
+
 import type {ThemeVariables} from "../constants";
 
 import {useVariablesState} from "./use-variables-state";

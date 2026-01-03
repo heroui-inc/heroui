@@ -1,3 +1,5 @@
+"use client";
+
 import {parseAsArrayOf, parseAsStringLiteral, useQueryStates} from "nuqs";
 
 import {

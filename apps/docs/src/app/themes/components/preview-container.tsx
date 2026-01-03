@@ -4,8 +4,13 @@ import {useEffect, useState} from "react";
 
 import {DemoComponents} from "@/components/demo";
 
+import {useCssSync} from "../hooks";
+
 export function PreviewContainer() {
   const [isMounted, setIsMounted] = useState(false);
+
+  // Sync url search values to CSS custom properties
+  useCssSync();
 
   useEffect(() => {
     setTimeout(() => {

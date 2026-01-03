@@ -1,3 +1,5 @@
+"use client";
+
 import type {ThemeVariables} from "../constants";
 
 import {Lock, LockOpen} from "@gravity-ui/icons";

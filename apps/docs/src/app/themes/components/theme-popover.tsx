@@ -60,7 +60,7 @@ export function ThemePopover() {
                 textValue={item.id}
                 className={cn(
                   "group relative flex w-10 flex-col items-center justify-center gap-1.5 p-0",
-                  "data-[hovered=true]:bg-transparent",
+                  "hover:bg-transparent",
                 )}
               >
                 <Image
