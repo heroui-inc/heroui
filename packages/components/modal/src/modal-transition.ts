@@ -2,15 +2,10 @@ import {TRANSITION_EASINGS} from "@heroui/framer-utils";
 
 export const scaleInOut = {
   enter: {
-    scale: "var(--scale-enter)",
     y: "var(--slide-enter)",
     opacity: 1,
     willChange: "auto",
     transition: {
-      scale: {
-        duration: 0.4,
-        ease: TRANSITION_EASINGS.ease,
-      },
       opacity: {
         duration: 0.4,
         ease: TRANSITION_EASINGS.ease,
@@ -23,7 +18,6 @@ export const scaleInOut = {
     },
   },
   exit: {
-    scale: "var(--scale-exit)",
     y: "var(--slide-exit)",
     opacity: 0,
     willChange: "transform",
