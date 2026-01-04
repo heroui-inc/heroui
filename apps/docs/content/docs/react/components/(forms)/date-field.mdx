@@ -84,11 +84,11 @@ Add prefix or suffix icons to enhance the date field.
 
 <ComponentPreview name="date-field-full-width" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, DateField and its child DateInputGroup automatically apply on-surface styling.
+When used inside a [Surface](/docs/components/surface) component, DateField and its child DateInputGroup automatically apply in-surface styling.
 
-<ComponentPreview name="date-field-on-surface" />
+<ComponentPreview name="date-field-in-surface" />
 
 ### Form Example
 
@@ -319,7 +319,7 @@ DateInputGroup accepts all props from React Aria's `Group` component plus the fo
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `fullWidth` | `boolean` | `false` | Whether the date input group should take full width of its container |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `false` | Whether the input is displayed in a surface (affects styling) |
 
 ### DateInputGroup.Input Props
 
@@ -328,7 +328,7 @@ DateInputGroup.Input accepts all props from React Aria's `DateInput` component p
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `false` | Whether the input is displayed in a surface (affects styling) |
 
 The `DateInput` component accepts a render prop function that receives date segments. Each segment represents a part of the date (year, month, day, etc.).
 

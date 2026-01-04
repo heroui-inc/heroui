@@ -112,7 +112,7 @@ ${header}
   const finalContent = processed.value
     .toString()
     .replace(
-      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsList|NativeVideoPlayerView)[^>]*\/?>/g,
+      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsCategory|NativeVideoPlayerView)[^>]*\/?>/g,
       "",
     );
 
@@ -208,7 +208,7 @@ function replaceRelatedComponents(content: string): string {
 }
 
 const USELESS_COMPONENT_TAGS =
-  /<(ComponentCard|ComponentGrid|ComponentsList|ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsList|NativeVideoPlayerView)[^>]*\/?>/g;
+  /<(ComponentCard|ComponentGrid|ComponentsCategory|ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsCategory|NativeVideoPlayerView)[^>]*\/?>/g;
 const BR_TAG = /<br\s*\/>/g;
 const CODE_BLOCK_BEFORE = /([^\n`])\n(```[\w]*\n)/g;
 const CODE_BLOCK_AFTER = /(```[\s\S]*?```)\n([^\n`])/g;

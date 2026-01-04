@@ -144,24 +144,28 @@ interface AlertDialogContainerProps extends Omit<
    * @default "auto"
    */
   placement?: AlertDialogPlacement;
+  size?: AlertDialogVariants["size"];
 }
 
 const AlertDialogContainer = ({
   children,
   className,
   placement = "auto",
+  size,
   ...props
 }: AlertDialogContainerProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots: contextSlots} = useContext(AlertDialogContext);
+
+  const updatedSlots = useMemo(() => alertDialogVariants({size}), [size]);
 
   const updatedContext = useMemo<AlertDialogContext>(
-    () => ({placement, slots}),
-    [placement, slots],
+    () => ({placement, slots: {...contextSlots, ...updatedSlots}}),
+    [placement, contextSlots, updatedSlots],
   );
 
   return (
     <ModalPrimitive
-      className={composeTwRenderProps(className, slots?.container())}
+      className={composeTwRenderProps(className, updatedSlots?.container())}
       data-placement={placement}
       data-slot="alert-dialog-container"
       {...props}

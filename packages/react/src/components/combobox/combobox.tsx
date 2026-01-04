@@ -41,6 +41,7 @@ const ComboBoxRoot = <T extends object = object>({
   children,
   className,
   fullWidth,
+  menuTrigger = "focus",
   ...props
 }: ComboBoxRootProps<T>) => {
   const slots = React.useMemo(() => comboboxVariants({fullWidth}), [fullWidth]);
@@ -49,6 +50,7 @@ const ComboBoxRoot = <T extends object = object>({
     <ComboBoxContext value={{slots}}>
       <ComboBoxPrimitive
         data-slot="combobox"
+        menuTrigger={menuTrigger}
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
       >

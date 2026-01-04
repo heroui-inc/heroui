@@ -20,7 +20,7 @@ The MCP server currently supports **@heroui/react v3** only and [stdio transport
 
 ## Quick Setup
 
-**Cursor:**
+### Cursor
 
 <div className="flex items-center gap-3 mb-4">
   <a
@@ -49,7 +49,9 @@ Or manually add to **Cursor Settings** → **Tools** → **MCP Servers**:
 
 Alternatively, add the following to your `~/.cursor/mcp.json` file. To learn more, see the [Cursor documentation](https://cursor.com/docs/context/mcp).
 
-**Claude Code:** Run this command in your terminal:
+### Claude Code
+
+Run this command in your terminal:
 
 ```bash
 claude mcp add heroui-react -- npx -y @heroui/react-mcp@latest
@@ -72,7 +74,9 @@ After adding the configuration, restart Claude Code and run `/mcp` to see the He
 
 See the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-code/mcp) for more details.
 
-**Windsurf:** Add the HeroUI server to your project's `.windsurf/mcp.json` configuration file:
+### Windsurf
+
+Add the HeroUI server to your project's `.windsurf/mcp.json` configuration file:
 
 ```json title=".windsurf/mcp.json"
 {
@@ -89,7 +93,29 @@ After adding the configuration, restart Windsurf to activate the MCP server.
 
 See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp) for more details.
 
-**VS Code:** To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
+### Zed
+
+Add the HeroUI server to your `settings.json` configuration file. Open settings via Command Palette (`zed: open settings`) or use `Cmd-,` (Mac) / `Ctrl-,` (Linux):
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+After adding the configuration, restart Zed and open the Agent Panel settings view. Check that the indicator dot next to the heroui server is green with "Server is active" tooltip.
+
+See the [Zed MCP documentation](https://zed.dev/docs/ai/mcp) for more details.
+
+### VS Code
+
+To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
 
 ```json title=".vscode/mcp.json"
 {

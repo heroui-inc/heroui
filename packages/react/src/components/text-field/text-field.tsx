@@ -1,22 +1,40 @@
 "use client";
 
 import type {TextFieldVariants} from "./text-field.styles";
+import type {SurfaceProps} from "../surface";
 import type {ComponentPropsWithRef} from "react";
 
-import React from "react";
+import React, {createContext} from "react";
 import {TextField as TextFieldPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 
 import {textFieldVariants} from "./text-field.styles";
 
+/* ------------------------------------------------------------------------------------------------
+ * TextField Context
+ * --------------------------------------------------------------------------------------------- */
+type TextFieldContext = {
+  inSurface?: SurfaceProps["variant"];
+};
+
+const TextFieldContext = createContext<TextFieldContext>({});
+
 /* -------------------------------------------------------------------------------------------------
  * TextField Root
  * -----------------------------------------------------------------------------------------------*/
 interface TextFieldRootProps
-  extends ComponentPropsWithRef<typeof TextFieldPrimitive>, TextFieldVariants {}
+  extends ComponentPropsWithRef<typeof TextFieldPrimitive>, TextFieldVariants {
+  inSurface?: SurfaceProps["variant"];
+}
 
-const TextFieldRoot = ({children, className, fullWidth, ...props}: TextFieldRootProps) => {
+const TextFieldRoot = ({
+  children,
+  className,
+  fullWidth,
+  inSurface,
+  ...props
+}: TextFieldRootProps) => {
   const styles = React.useMemo(() => textFieldVariants({fullWidth}), [fullWidth]);
 
   return (
@@ -25,7 +43,11 @@ const TextFieldRoot = ({children, className, fullWidth, ...props}: TextFieldRoot
       {...props}
       className={composeTwRenderProps(className, styles)}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {(values) => (
+        <TextFieldContext value={{inSurface}}>
+          <>{typeof children === "function" ? children(values) : children}</>
+        </TextFieldContext>
+      )}
     </TextFieldPrimitive>
   );
 };
@@ -33,6 +55,6 @@ const TextFieldRoot = ({children, className, fullWidth, ...props}: TextFieldRoot
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {TextFieldRoot};
+export {TextFieldRoot, TextFieldContext};
 
 export type {TextFieldRootProps};

@@ -56,6 +56,22 @@
   display: none;
 }
 
+/* Remove adjacent borders from outline buttons in group since we have separators */
+/* First button: remove end border (right in LTR, left in RTL) */
+.button-group .button--outline:first-child {
+  @apply border-e-0;
+}
+
+/* Last button: remove start border (left in LTR, right in RTL) */
+.button-group .button--outline:last-child {
+  @apply border-s-0;
+}
+
+/* Middle buttons: remove both inline borders */
+.button-group .button--outline:not(:first-child):not(:last-child) {
+  @apply border-x-0;
+}
+
 /* Full width modifier */
 .button-group--full-width {
   @apply w-full;

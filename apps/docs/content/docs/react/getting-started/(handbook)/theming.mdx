@@ -70,8 +70,8 @@ HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss
 
       /* Spacing & Layout */
       --spacing: 0.25rem;
-      --border-width: 0px;
-      --field-border-width: var(--border-width);
+      --border-width: 1px;
+      --field-border-width: 0px;
       --disabled-opacity: 0.5;
       --ring-offset-width: 2px;
       --cursor-interactive: pointer;
@@ -187,7 +187,7 @@ HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss
       --segment-foreground: var(--foreground);
 
       /* Misc */
-      --border: oklch(1 0 0 / 0%);
+      --border: oklch(22% 0.006 286.033);
       --separator: oklch(22% 0.006 286.033);
       --focus: var(--accent);
       --link: var(--accent);
@@ -415,11 +415,6 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
       var(--color-background) 92%,
       var(--color-foreground) 8%
     );
-    --color-background-quaternary: color-mix(
-      in oklab,
-      var(--color-background) 86%,
-      var(--color-foreground) 14%
-    );
     --color-background-inverse: var(--color-foreground);
 
     /* Hover states */
@@ -483,11 +478,6 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
     /* Surface Levels */
     --color-surface-secondary: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground) 6%);
     --color-surface-tertiary: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
-    --color-surface-quaternary: color-mix(
-      in oklab,
-      var(--surface) 86%,
-      var(--default-foreground) 14%
-    );
 
     /* On Surface Colors */
     --color-on-surface: color-mix(

@@ -296,31 +296,80 @@ export const WithPrefixAndSuffix: Story = {
   ),
 };
 
-export const OnSurface: Story = {
+export const SurfaceVariants: Story = {
   render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <TimeField className="w-full" name="time">
-        <Label>Time</Label>
-        <DateInputGroup isOnSurface>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
-        <Description>Enter a time</Description>
-      </TimeField>
-      <TimeField className="w-full" name="time-2">
-        <Label>Appointment time</Label>
-        <DateInputGroup isOnSurface>
-          <DateInputGroup.Prefix>
-            <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-          </DateInputGroup.Prefix>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
-        <Description>Enter a time for your appointment</Description>
-      </TimeField>
-    </Surface>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <TimeField className="w-full" name="time-default">
+            <Label>Time</Label>
+            <DateInputGroup>
+              <DateInputGroup.Input>
+                {(segment) => <DateInputGroup.Segment segment={segment} />}
+              </DateInputGroup.Input>
+            </DateInputGroup>
+          </TimeField>
+          <p className="text-sm text-muted">
+            TimeField automatically detects default surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <TimeField className="w-full" name="time-secondary">
+            <Label>Time</Label>
+            <DateInputGroup>
+              <DateInputGroup.Input>
+                {(segment) => <DateInputGroup.Segment segment={segment} />}
+              </DateInputGroup.Input>
+            </DateInputGroup>
+          </TimeField>
+          <p className="text-sm text-muted">
+            TimeField automatically detects secondary surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <TimeField className="w-full" name="time-tertiary">
+            <Label>Time</Label>
+            <DateInputGroup>
+              <DateInputGroup.Input>
+                {(segment) => <DateInputGroup.Segment segment={segment} />}
+              </DateInputGroup.Input>
+            </DateInputGroup>
+          </TimeField>
+          <p className="text-sm text-muted">
+            TimeField automatically detects tertiary surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <TimeField className="w-full" name="time-transparent">
+            <Label>Time</Label>
+            <DateInputGroup>
+              <DateInputGroup.Input>
+                {(segment) => <DateInputGroup.Segment segment={segment} />}
+              </DateInputGroup.Input>
+            </DateInputGroup>
+          </TimeField>
+          <p className="text-sm text-muted">
+            TimeField automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
+    </div>
   ),
 };
 

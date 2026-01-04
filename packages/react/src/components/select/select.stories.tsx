@@ -448,25 +448,13 @@ export const Required: Story = {
   },
 };
 
-export const OnSurface: Story = {
-  render: () => {
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-      const data: Record<string, string> = {};
-
-      // Convert FormData to plain object
-      formData.forEach((value, key) => {
-        data[key] = value.toString();
-      });
-
-      alert("Form submitted successfully!");
-    };
-
-    return (
-      <Surface className="w-[320px] rounded-3xl p-6">
-        <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-          <Select isRequired className="w-full" name="state" placeholder="Select one">
+export const SurfaceVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Default Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
+          <Select className="w-full" name="state-default" placeholder="Select one">
             <Label>State</Label>
             <Select.Trigger>
               <Select.Value />
@@ -478,8 +466,34 @@ export const OnSurface: Story = {
                   Florida
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="delaware" textValue="Delaware">
-                  Delaware
+                <ListBox.Item id="california" textValue="California">
+                  California
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="texas" textValue="Texas">
+                  Texas
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </Select.Popover>
+          </Select>
+          <p className="text-sm text-muted">Select automatically detects default surface level.</p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
+          <Select className="w-full" name="state-secondary" placeholder="Select one">
+            <Label>State</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                <ListBox.Item id="florida" textValue="Florida">
+                  Florida
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
                 <ListBox.Item id="california" textValue="California">
@@ -490,59 +504,81 @@ export const OnSurface: Story = {
                   Texas
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="new-york" textValue="New York">
-                  New York
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="washington" textValue="Washington">
-                  Washington
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
               </ListBox>
             </Select.Popover>
-            <FieldError />
           </Select>
-          <Select isRequired className="w-full" name="country" placeholder="Select a country">
-            <Label>Country</Label>
+          <p className="text-sm text-muted">
+            Select automatically detects secondary surface level.
+          </p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
+        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
+          <Select className="w-full" name="state-tertiary" placeholder="Select one">
+            <Label>State</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
             </Select.Trigger>
             <Select.Popover>
               <ListBox>
-                <ListBox.Item id="usa" textValue="United States">
-                  United States
+                <ListBox.Item id="florida" textValue="Florida">
+                  Florida
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="canada" textValue="Canada">
-                  Canada
+                <ListBox.Item id="california" textValue="California">
+                  California
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
-                <ListBox.Item id="mexico" textValue="Mexico">
-                  Mexico
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="uk" textValue="United Kingdom">
-                  United Kingdom
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="france" textValue="France">
-                  France
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="germany" textValue="Germany">
-                  Germany
+                <ListBox.Item id="texas" textValue="Texas">
+                  Texas
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
               </ListBox>
             </Select.Popover>
-            <FieldError />
           </Select>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Surface>
-    );
-  },
+          <p className="text-sm text-muted">Select automatically detects tertiary surface level.</p>
+        </Surface>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Transparent Surface</p>
+        <Surface
+          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
+          variant="transparent"
+        >
+          <Select className="w-full" name="state-transparent" placeholder="Select one">
+            <Label>State</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                <ListBox.Item id="florida" textValue="Florida">
+                  Florida
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="california" textValue="California">
+                  California
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="texas" textValue="Texas">
+                  Texas
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </Select.Popover>
+          </Select>
+          <p className="text-sm text-muted">
+            Select automatically detects transparent surface level.
+          </p>
+        </Surface>
+      </div>
+    </div>
+  ),
 };
 
 export const CustomValue: Story = {

@@ -17,12 +17,12 @@ import {radioGroupVariants} from "./radio-group.styles";
 interface RadioGroupRootProps
   extends ComponentPropsWithRef<typeof RadioGroupPrimitive>, RadioGroupVariants {}
 
-const RadioGroupRoot = ({children, className, isOnSurface, ...props}: RadioGroupRootProps) => {
+const RadioGroupRoot = ({children, className, inSurface, ...props}: RadioGroupRootProps) => {
   const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+  const resolvedInSurface = inSurface ?? surfaceContext.variant;
   const styles = React.useMemo(
-    () => radioGroupVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => radioGroupVariants({inSurface: resolvedInSurface}),
+    [resolvedInSurface],
   );
 
   return (
