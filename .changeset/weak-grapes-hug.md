@@ -2,4 +2,4 @@
 "@heroui/theme": patch
 ---
 
-Refine pagination item sizing to improve layout for large page counts while keeping small numbers visually balanced.
+improve pagination with large page counts (#4853, #5860)
