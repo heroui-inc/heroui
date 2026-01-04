@@ -1,5 +1,27 @@
 # @heroui/table
 
+## 2.2.29
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/checkbox@2.3.29
+
+## 2.2.28
+
+### Patch Changes
+
+- [#5963](https://github.com/heroui-inc/heroui/pull/5963) [`b89ba08`](https://github.com/heroui-inc/heroui/commit/b89ba08ae06bf0140f0bc92f10e9a09c1484cdba) Thanks [@wingkwong](https://github.com/wingkwong)! - fix(table): virtualized table in firefox by replacing Spacer with css (#2108, #5479)
+
+- [#5950](https://github.com/heroui-inc/heroui/pull/5950) [`f08dfb8`](https://github.com/heroui-inc/heroui/commit/f08dfb8dd966e8a6f4b2407ab60e4e9d51821126) Thanks [@wingkwong](https://github.com/wingkwong)! - fix column props not recognized (#1667)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/checkbox@2.3.28
+
 ## 2.2.27
 
 ### Patch Changes

@@ -15,8 +15,8 @@ import {useFocusRing} from "@react-aria/focus";
 import {useOverlayTrigger, usePreventScroll} from "@react-aria/overlays";
 import {getShouldUseAxisPlacement, getArrowPlacement} from "@heroui/aria-utils";
 import {mapPropsVariants, useProviderContext} from "@heroui/system";
-import {popover} from "@heroui/theme";
-import {clsx, dataAttr, objectToDeps, mergeProps, mergeRefs} from "@heroui/shared-utils";
+import {popover, cn} from "@heroui/theme";
+import {dataAttr, objectToDeps, mergeProps, mergeRefs} from "@heroui/shared-utils";
 import {useMemo, useCallback, useRef} from "react";
 
 import {useReactAriaPopover} from "./use-aria-popover";
@@ -200,7 +200,7 @@ export function usePopover(originalProps: UsePopoverProps) {
     [objectToDeps(variantProps)],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const anchorStyles = {
     "--trigger-anchor-point": triggerAnchorPoint
@@ -228,7 +228,7 @@ export function usePopover(originalProps: UsePopoverProps) {
     "data-focus-visible": dataAttr(isFocusVisible),
     "data-placement": ariaPlacement ? getArrowPlacement(ariaPlacement, placementProp) : undefined,
     ...mergeProps(focusProps, dialogPropsProp, props),
-    className: slots.base({class: clsx(baseStyles)}),
+    className: slots.base({class: cn(baseStyles)}),
     style: {
       // this prevent the dialog to have a default outline
       outline: "none",
@@ -242,7 +242,7 @@ export function usePopover(originalProps: UsePopoverProps) {
       "data-open": dataAttr(state.isOpen),
       "data-arrow": dataAttr(showArrow),
       "data-placement": ariaPlacement ? getArrowPlacement(ariaPlacement, placementProp) : undefined,
-      className: slots.content({class: clsx(classNames?.content, props.className)}),
+      className: slots.content({class: cn(classNames?.content, props.className)}),
     }),
     [slots, state.isOpen, showArrow, placement, placementProp, classNames, ariaPlacement],
   );
@@ -284,7 +284,7 @@ export function usePopover(originalProps: UsePopoverProps) {
         onPress,
         isDisabled,
         className: slots.trigger({
-          class: clsx(classNames?.trigger, props.className),
+          class: cn(classNames?.trigger, props.className),
           // apply isDisabled class names to make the trigger child disabled
           // e.g. for elements like div or HeroUI elements that don't have `isDisabled` prop
           isTriggerDisabled: isDisabled,

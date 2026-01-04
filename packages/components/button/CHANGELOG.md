@@ -1,5 +1,28 @@
 # @heroui/button
 
+## 2.2.29
+
+### Patch Changes
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies [[`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b)]:
+  - @heroui/use-aria-button@2.2.21
+  - @heroui/ripple@2.2.21
+  - @heroui/spinner@2.2.26
+
+## 2.2.28
+
+### Patch Changes
+
+- [#5893](https://github.com/heroui-inc/heroui/pull/5893) [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - Fix bordered focus styles overridden by hover styles (#5585)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c), [`91e010f`](https://github.com/heroui-inc/heroui/commit/91e010fe3bd8e49653bd53c47e9955d8b11c1db2), [`0825f88`](https://github.com/heroui-inc/heroui/commit/0825f88cd2bfd1b6638a23b8d21f8812576f84a7), [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/spinner@2.2.25
+  - @heroui/ripple@2.2.21
+
 ## 2.2.27
 
 ### Patch Changes

@@ -5,6 +5,7 @@ import {render, fireEvent, act} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {useForm} from "react-hook-form";
 import {Form} from "@heroui/form";
+import {HeroUIProvider} from "@heroui/system";
 
 import {NumberInput} from "../src";
 
@@ -678,6 +679,50 @@ describe("NumberInput with React Hook Form", () => {
 
         expect(input.value).toBe("123,567");
       });
+    });
+  });
+
+  describe("NumberInput with HeroUIProvider context", () => {
+    it("should inherit labelPlacement from HeroUIProvider", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside">
+          <NumberInput label="Test number input" />
+        </HeroUIProvider>,
+      );
+
+      const label = container.querySelector("label");
+
+      expect(label).toBeTruthy();
+      expect(label?.className).toMatch(/translate-y.*100%/);
+    });
+
+    it("should prioritize labelPlacement prop over HeroUIProvider context", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside">
+          <NumberInput label="Test number input" labelPlacement="inside" />
+        </HeroUIProvider>,
+      );
+
+      const label = container.querySelector("label");
+
+      expect(label).toBeTruthy();
+      expect(label?.className).not.toMatch(/translate-y.*100%/);
+    });
+
+    it("should inherit labelPlacement='outside-top' from HeroUIProvider", () => {
+      const {container} = render(
+        <HeroUIProvider labelPlacement="outside-top">
+          <NumberInput label="Test number input" />
+        </HeroUIProvider>,
+      );
+
+      const label = container.querySelector("label");
+      const mainWrapper = container.querySelector("[data-slot=main-wrapper]");
+
+      expect(label).toBeTruthy();
+      // outside-top uses flex-col on mainWrapper and relative label (no translate-y)
+      expect(mainWrapper).toHaveClass("flex-col");
+      expect(label?.className).not.toMatch(/translate-y.*100%/);
     });
   });
 });

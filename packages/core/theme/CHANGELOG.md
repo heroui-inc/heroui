@@ -1,5 +1,39 @@
 # @heroui/theme
 
+## 2.4.25
+
+### Patch Changes
+
+- [#6011](https://github.com/heroui-inc/heroui/pull/6011) [`086f6a1`](https://github.com/heroui-inc/heroui/commit/086f6a1c4474e12d9797282528fc98c0267f933f) Thanks [@wingkwong](https://github.com/wingkwong)! - fix default transition-duration (#5992, #6005)
+
+- [#5990](https://github.com/heroui-inc/heroui/pull/5990) [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4) Thanks [@wingkwong](https://github.com/wingkwong)! - hide password reveal button (#5984)
+
+## 2.4.24
+
+### Patch Changes
+
+- [#5963](https://github.com/heroui-inc/heroui/pull/5963) [`b89ba08`](https://github.com/heroui-inc/heroui/commit/b89ba08ae06bf0140f0bc92f10e9a09c1484cdba) Thanks [@wingkwong](https://github.com/wingkwong)! - fix(table): virtualized table in firefox by replacing Spacer with css (#2108, #5479)
+
+- [#5977](https://github.com/heroui-inc/heroui/pull/5977) [`799bc5b`](https://github.com/heroui-inc/heroui/commit/799bc5bab8f843d2fd7da12a685e087f5c141dad) Thanks [@wingkwong](https://github.com/wingkwong)! - fix long text in toast (#5552)
+
+- [#5909](https://github.com/heroui-inc/heroui/pull/5909) [`8921dc4`](https://github.com/heroui-inc/heroui/commit/8921dc4361f7cdb8cbce755e8b90fdd799b668da) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - fix Safari autofill styling for dark mode readability in NumberInput & Input components (#4657)
+
+- [#5816](https://github.com/heroui-inc/heroui/pull/5816) [`b38a2cf`](https://github.com/heroui-inc/heroui/commit/b38a2cfb58feb79b3baff10eff19e21480da1563) Thanks [@wingkwong](https://github.com/wingkwong)! - fix tab cursor (#5790, #5809)
+
+- [#5964](https://github.com/heroui-inc/heroui/pull/5964) [`8d07922`](https://github.com/heroui-inc/heroui/commit/8d07922c68b3bb569addcb3102676373dacdbaca) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - `outside-top` label placement support (#5641, #5967)
+
+- [#5815](https://github.com/heroui-inc/heroui/pull/5815) [`1782961`](https://github.com/heroui-inc/heroui/commit/17829618591d723beea665a7c56d9c45a112e24c) Thanks [@Vishesh-Verma-07](https://github.com/Vishesh-Verma-07)! - Fix spinner animation (#5794)
+
+- [#5799](https://github.com/heroui-inc/heroui/pull/5799) [`4c43534`](https://github.com/heroui-inc/heroui/commit/4c435348ecbf94f1dc0ede7328096984e247d062) Thanks [@IsDyh01](https://github.com/IsDyh01)! - fix incorrect label position of select component when the labelPlacement is outside and data-has-helper=true (#5796)
+
+- [#5893](https://github.com/heroui-inc/heroui/pull/5893) [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - Fix bordered focus styles overridden by hover styles (#5585)
+
+- [#5846](https://github.com/heroui-inc/heroui/pull/5846) [`a819f2a`](https://github.com/heroui-inc/heroui/commit/a819f2a95a32d059581b2789f2476c5e497732f2) Thanks [@adbjo](https://github.com/adbjo)! - responsive tab cursor (#5943)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- [#5916](https://github.com/heroui-inc/heroui/pull/5916) [`bc4c982`](https://github.com/heroui-inc/heroui/commit/bc4c9826097a1014939b691425d30eff998d1e2e) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - fixed skeleton shimmer animation not respecting disableAnimation prop (#5915)
+
 ## 2.4.23
 
 ### Patch Changes

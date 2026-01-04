@@ -4,7 +4,7 @@ import type {Language, PrismTheme} from "prism-react-renderer";
 
 import {useIntersectionObserver} from "usehooks-ts";
 import React, {forwardRef, useEffect} from "react";
-import {clsx, dataAttr, getUniqueID} from "@heroui/shared-utils";
+import {dataAttr, getUniqueID} from "@heroui/shared-utils";
 import BaseHighlight, {defaultProps} from "prism-react-renderer";
 import {debounce, omit} from "@heroui/shared-utils";
 import {cn} from "@heroui/react";
@@ -124,16 +124,10 @@ const CodeBlockHighlight = ({
                   preRef.current = element;
                 }
               }}
-              className={clsx(
-                className,
-                classNameProp,
-                `language-${codeLang}`,
-                "max-w-full contents",
-                {
-                  "flex-col": isMultiLine,
-                  "overflow-x-scroll scrollbar-hide": hideScrollBar,
-                },
-              )}
+              className={cn(className, classNameProp, `language-${codeLang}`, "max-w-full", {
+                "flex-col": isMultiLine,
+                "overflow-x-scroll scrollbar-hide": hideScrollBar,
+              })}
               data-language={language}
               style={style}
             >
@@ -144,7 +138,7 @@ const CodeBlockHighlight = ({
                   <div
                     {...omit(lineProps, ["key"])}
                     key={`${i}-${getUniqueID("line-wrapper")}`}
-                    className={clsx(
+                    className={cn(
                       lineProps.className,
                       removeIndent ? "pr-4" : "px-4",
                       "relative [&>span]:relative [&>span]:z-10",
@@ -202,7 +196,7 @@ const CodeBlockHighlight = ({
           )}
         </BaseHighlight>
       ) : (
-        <div className={clsx(classNameProp, "w-full bg-code-background rounded-lg")} />
+        <div className={cn(classNameProp, "w-full bg-code-background rounded-lg")} />
       )}
     </div>
   );

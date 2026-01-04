@@ -80,7 +80,7 @@ By default, when pressing the next or previous buttons, pagination will advance 
 
 ### Label Placements
 
-You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside` or `outside-left`.
+You can change the position of the label by setting the `labelPlacement` property to `inside`, `outside`, `outside-left` or `outside-top`.
 
 <CodeDemo title="Label Placements" files={dateRangePickerContent.labelPlacements} />
 
@@ -142,9 +142,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0",
-    yarn: "yarn add @internationalized/date@3.10.0",
-    pnpm: "pnpm add @internationalized/date@3.10.0",
+    npm: "npm install @internationalized/date@3.10.1",
+    yarn: "yarn add @internationalized/date@3.10.1",
+    pnpm: "pnpm add @internationalized/date@3.10.1",
   }}
 />
 
@@ -167,9 +167,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    npm: "npm install @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    yarn: "yarn add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    pnpm: "pnpm add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
   }}
 />
 
@@ -191,9 +191,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0",
-    yarn: "yarn add @internationalized/date@3.10.0",
-    pnpm: "pnpm add @internationalized/date@3.10.0",
+    npm: "npm install @internationalized/date@3.10.1",
+    yarn: "yarn add @internationalized/date@3.10.1",
+    pnpm: "pnpm add @internationalized/date@3.10.1",
   }}
 />
 
@@ -215,9 +215,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    npm: "npm install @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    yarn: "yarn add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    pnpm: "pnpm add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
   }}
 />
 
@@ -237,9 +237,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    npm: "npm install @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    yarn: "yarn add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    pnpm: "pnpm add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
   }}
 />
 
@@ -262,9 +262,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    npm: "npm install @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    yarn: "yarn add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    pnpm: "pnpm add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
   }}
 />
 
@@ -273,7 +273,7 @@ import {today, isWeekend, getLocalTimeZone} from "@internationalized/date";
 import {useLocale} from "@react-aria/i18n";
 ```
 
-<CodeDemo title="Non Contiguous" files={dateRangePickerContent.nonContigous} />
+<CodeDemo title="Non Contiguous" files={dateRangePickerContent.nonContiguous} />
 
 ### Presets
 
@@ -282,9 +282,9 @@ in multiple formats into `ZonedDateTime` objects.
 
 <PackageManagers
   commands={{
-    npm: "npm install @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    yarn: "yarn add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
-    pnpm: "pnpm add @internationalized/date@3.10.0 @react-aria/i18n@3.12.13",
+    npm: "npm install @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    yarn: "yarn add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
+    pnpm: "pnpm add @internationalized/date@3.10.1 @react-aria/i18n@3.12.14",
   }}
 />
 
@@ -376,7 +376,7 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "value",
-      type: "RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null",
+      type: "RangeValue<DateValue> | null",
       description: "The current value of the date-range-picker (controlled).",
       default: "-"
     },
@@ -406,25 +406,25 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "minValue",
-      type: "RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null",
+      type: "DateValue | null",
       description: "The minimum value of the date-range-picker.",
       default: "-"
     },
     {
       attribute: "maxValue",
-      type: "RangeValue<CalendarDate | CalendarDateTime | ZonedDateTime> | undefined | null",
+      type: "DateValue | null",
       description: "The maximum value of the date-range-picker.",
       default: "-"
     },
     {
       attribute: "defaultValue",
-      type: "string",
+      type: "RangeValue<DateValue> | null",
       description: "The default value of the date-range-picker (uncontrolled).",
       default: "-"
     },
     {
       attribute: "placeholderValue",
-      type: "ZonedDateTime | CalendarDate | CalendarDateTime | undefined | null",
+      type: "DateValue | null",
       description: "The placeholder of the date-range-picker.",
       default: "-"
     },
@@ -478,7 +478,7 @@ You can customize the `DateRangePicker` component by passing custom Tailwind CSS
     },
     {
       attribute: "labelPlacement",
-      type: "inside | outside | outside-left",
+      type: "inside | outside | outside-left | outside-top",
       description: "The position of the label.",
       default: "inside"
     },

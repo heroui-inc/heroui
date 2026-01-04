@@ -13,13 +13,7 @@ import {mapPropsVariants} from "@heroui/system";
 import {useDOMRef} from "@heroui/react-utils";
 import {useDateField as useAriaDateField} from "@react-aria/datepicker";
 import {useDateFieldState} from "@react-stately/datepicker";
-import {
-  objectToDeps,
-  clsx,
-  dataAttr,
-  getGregorianYearOffset,
-  mergeProps,
-} from "@heroui/shared-utils";
+import {objectToDeps, dataAttr, getGregorianYearOffset, mergeProps} from "@heroui/shared-utils";
 import {dateInput, cn} from "@heroui/theme";
 import {useMemo} from "react";
 import {FormContext, useSlottedContext} from "@heroui/form";
@@ -193,7 +187,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     isInvalid: ariaIsInvalid,
   } = useAriaDateField({...originalProps, label, validationBehavior, inputRef}, state, domRef);
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const isInvalid = isInvalidProp || ariaIsInvalid;
 
@@ -202,7 +196,10 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     label,
   });
 
-  const shouldLabelBeOutside = labelPlacement === "outside" || labelPlacement === "outside-left";
+  const shouldLabelBeOutside =
+    labelPlacement === "outside" ||
+    labelPlacement === "outside-left" ||
+    labelPlacement === "outside-top";
 
   const slots = useMemo(
     () =>
@@ -219,7 +216,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       ...mergeProps(labelProps, labelPropsProp, props),
       "data-slot": "label",
       className: slots.label({
-        class: clsx(classNames?.label, props?.className),
+        class: cn(classNames?.label, props?.className),
       }),
     };
   };
@@ -238,7 +235,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       "data-slot": "input-field",
       ...mergeProps(fieldProps, fieldPropsProp, props),
       className: slots.input({
-        class: clsx(classNames?.input, props?.className),
+        class: cn(classNames?.input, props?.className),
       }),
     } as GroupDOMAttributes;
   };
@@ -272,7 +269,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
       ...props,
       "data-slot": "helper-wrapper",
       className: slots.helperWrapper({
-        class: clsx(classNames?.helperWrapper, props?.className),
+        class: cn(classNames?.helperWrapper, props?.className),
       }),
     };
   };
@@ -281,7 +278,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     return {
       ...mergeProps(errorMessageProps, errorMessagePropsProp, props),
       "data-slot": "error-message",
-      className: slots.errorMessage({class: clsx(classNames?.errorMessage, props?.className)}),
+      className: slots.errorMessage({class: cn(classNames?.errorMessage, props?.className)}),
     };
   };
 
@@ -289,7 +286,7 @@ export function useDateInput<T extends DateValue>(originalProps: UseDateInputPro
     return {
       ...mergeProps(descriptionProps, descriptionPropsProp, props),
       "data-slot": "description",
-      className: slots.description({class: clsx(classNames?.description, props?.className)}),
+      className: slots.description({class: cn(classNames?.description, props?.className)}),
     };
   };
 

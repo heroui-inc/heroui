@@ -6,8 +6,8 @@ import type {ToastProps, ToastPlacement} from "./use-toast";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useToastRegion} from "@react-aria/toast";
 import {useHover} from "@react-aria/interactions";
-import {toastRegion} from "@heroui/theme";
-import {clsx, mergeProps} from "@heroui/shared-utils";
+import {toastRegion, cn} from "@heroui/theme";
+import {mergeProps} from "@heroui/shared-utils";
 import {AnimatePresence} from "framer-motion";
 
 import Toast from "./toast";
@@ -53,7 +53,7 @@ export function ToastRegion<T extends ToastProps>({
     [disableAnimation],
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   useEffect(() => {
     function handleTouchOutside(event: TouchEvent) {

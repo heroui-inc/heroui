@@ -1,5 +1,27 @@
 # @heroui/input
 
+## 2.4.30
+
+### Patch Changes
+
+- [#5990](https://github.com/heroui-inc/heroui/pull/5990) [`acc74d1`](https://github.com/heroui-inc/heroui/commit/acc74d1e8fe435961c73f4c76ec1ba1a082649d4) Thanks [@wingkwong](https://github.com/wingkwong)! - hide password reveal button (#5984)
+
+- [#5996](https://github.com/heroui-inc/heroui/pull/5996) [`e07c969`](https://github.com/heroui-inc/heroui/commit/e07c969c4c6c1711ab153c273c2cacd0a79eef4b) Thanks [@wingkwong](https://github.com/wingkwong)! - upgrade react-aria (v1.14.0)
+
+- Updated dependencies []:
+  - @heroui/form@2.1.29
+
+## 2.4.29
+
+### Patch Changes
+
+- [#5893](https://github.com/heroui-inc/heroui/pull/5893) [`fd9dd2a`](https://github.com/heroui-inc/heroui/commit/fd9dd2a20c30beb4f46a8a6ab5d654ec7b9dbec1) Thanks [@hasegawa-101](https://github.com/hasegawa-101)! - Fix bordered focus styles overridden by hover styles (#5585)
+
+- [#5930](https://github.com/heroui-inc/heroui/pull/5930) [`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99) Thanks [@wingkwong](https://github.com/wingkwong)! - bump tailwind-variants & tailwind-merge and use latest tv functions
+
+- Updated dependencies [[`ecf2857`](https://github.com/heroui-inc/heroui/commit/ecf2857c90824409088130d12747fef3d47d9e99)]:
+  - @heroui/form@2.1.28
+
 ## 2.4.28
 
 ### Patch Changes

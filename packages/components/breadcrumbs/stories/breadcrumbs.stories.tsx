@@ -15,7 +15,7 @@ import {
   PetBoldIcon,
   ShoppingCartBoldIcon,
 } from "@heroui/shared-icons";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 
 import {Breadcrumbs, BreadcrumbItem} from "../src";
 
@@ -312,7 +312,7 @@ const WithDropdownItemTemplate = (args: BreadcrumbsProps & {page: number}) => {
         <Dropdown>
           <DropdownTrigger>
             <Button
-              className={clsx("h-6 pr-2", args.size && sizeMap[args.size])}
+              className={cn("h-6 pr-2", args.size && sizeMap[args.size])}
               endContent={<ChevronDownIcon className="text-default-500" />}
               radius="full"
               size="sm"

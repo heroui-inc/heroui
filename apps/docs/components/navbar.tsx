@@ -20,7 +20,7 @@ import {
 } from "@heroui/react";
 import {dataFocusVisibleClasses} from "@heroui/theme";
 import {isAppleDevice} from "@react-aria/utils";
-import {clsx} from "@heroui/shared-utils";
+import {cn} from "@heroui/theme";
 import NextLink from "next/link";
 import {usePathname} from "next/navigation";
 import {motion, AnimatePresence} from "framer-motion";
@@ -91,7 +91,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     "/docs/guide/upgrade-to-v2",
   ];
 
-  const navLinkClasses = clsx(
+  const navLinkClasses = cn(
     link({color: "foreground"}),
     "data-[active=true]:text-primary data-[active=true]:font-semibold",
   );
@@ -162,7 +162,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
   return (
     <HeroUINavbar
       ref={ref}
-      className={clsx({
+      className={cn({
         "z-100001": isMenuOpen,
       })}
       classNames={{
@@ -185,7 +185,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             <Logo className="h-6" />
           </NextLink>
           {versionChip}
-          <Chip
+          {/* <Chip
             as={NextLink}
             className="hidden sm:flex bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
             classNames={{
@@ -200,7 +200,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             <span aria-label="emoji" role="img">
               🔥
             </span>
-          </Chip>
+          </Chip> */}
         </NavbarBrand>
       </NavbarContent>
 
@@ -225,7 +225,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         </NavbarItem>
         <NavbarItem className="flex h-full items-center">
           <button
-            className={clsx(
+            className={cn(
               "transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-solid outline-transparent",
               // focus ring
               ...dataFocusVisibleClasses,
