@@ -446,4 +446,75 @@ describe("extendVariants function - with slots", () => {
     expect(baseEl).toHaveClass("rounded-xl");
     expect(headerEl).toHaveClass("scale-150");
   });
+
+  test("should override base component slots with direct slots option", () => {
+    const Card2 = extendVariants(Card, {
+      slots: {
+        header: "!font-bold !text-lg",
+        footer: "!bg-red-500",
+      },
+    });
+
+    const {getByTestId} = render(<Card2>Card Content</Card2>);
+
+    const headerEl = getByTestId("header");
+    const footerEl = getByTestId("footer");
+
+    expect(headerEl).toHaveClass("!font-bold");
+    expect(headerEl).toHaveClass("!text-lg");
+    expect(footerEl).toHaveClass("!bg-red-500");
+  });
+
+  test("should merge direct slots with variant-based slots", () => {
+    const Card2 = extendVariants(Card, {
+      slots: {
+        header: "!font-bold",
+      },
+      variants: {
+        shadow: {
+          xl: {
+            base: "shadow-xl",
+          },
+        },
+      },
+      defaultVariants: {
+        shadow: "xl",
+      },
+    });
+
+    const {getByTestId} = render(<Card2>Card Content</Card2>);
+
+    const baseEl = getByTestId("base");
+    const headerEl = getByTestId("header");
+
+    expect(baseEl).toHaveClass("shadow-xl");
+    expect(headerEl).toHaveClass("!font-bold");
+  });
+
+  test("direct slots should override variant-based slots for the same slot", () => {
+    const Card2 = extendVariants(Card, {
+      slots: {
+        base: "!bg-blue-500",
+      },
+      variants: {
+        shadow: {
+          xl: {
+            base: "shadow-xl",
+          },
+        },
+      },
+      defaultVariants: {
+        shadow: "xl",
+      },
+    });
+
+    const {getByTestId} = render(<Card2>Card Content</Card2>);
+
+    const baseEl = getByTestId("base");
+
+    // Direct slots should be applied
+    expect(baseEl).toHaveClass("!bg-blue-500");
+    // Variant-based slots should also be applied (they merge)
+    expect(baseEl).toHaveClass("shadow-xl");
+  });
 });
