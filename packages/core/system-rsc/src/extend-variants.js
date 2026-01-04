@@ -130,22 +130,25 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
   const hasSlots = typeof slots === "object" && Object.keys(slots).length !== 0;
 
   const ForwardedComponent = React.forwardRef((originalProps = {}, ref) => {
+    // Extract 'as' prop if present
+    const {as: Component = BaseComponent, ...restProps} = originalProps;
+
     const newProps = React.useMemo(() =>
       getClassNamesWithProps(
         {
           slots,
           variants,
           compoundVariants,
-          props: originalProps,
+          props: restProps, // Use restProps without 'as'
           defaultVariants,
           hasSlots,
           opts,
         },
-        [originalProps],
+        [restProps],
       ),
     );
 
-    return React.createElement(BaseComponent, {...originalProps, ...newProps, ref});
+    return React.createElement(Component, {...restProps, ...newProps, ref});
   });
 
   // Add collection node function for collection-based components
