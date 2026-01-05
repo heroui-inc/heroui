@@ -2,28 +2,9 @@
 
 import {useEffect} from "react";
 
+import {fontMap, radiusCssMap} from "../constants";
+
 import {useVariablesState} from "./use-variables-state";
-
-// Map radius option IDs to CSS rem values
-const radiusMap: Record<string, string> = {
-  "extra-large": "1rem",
-  "extra-small": "0.125rem",
-  large: "0.75rem",
-  medium: "0.5rem",
-  none: "0",
-  small: "0.25rem",
-};
-
-// Map font IDs to their CSS variable names
-const fontVariableMap: Record<string, string> = {
-  "dm-sans": "--font-dm-sans",
-  figtree: "--font-figtree",
-  geist: "--font-geist",
-  "google-sans": "--font-google-sans",
-  "hanken-grotesk": "--font-hanken-grotesk",
-  inter: "--font-inter",
-  "public-sans": "--font-public-sans",
-};
 
 /**
  * Accent-derived variables that need to be recalculated at the scoped level.
@@ -89,19 +70,16 @@ export function useCssSync() {
     applyVariables(themeBuilderContent, accentDerivedVariables);
 
     // Set base radius and re-apply all radius-derived variables
-    const radiusValue = radiusMap[variables.radius] ?? "0.5rem";
-
-    themeBuilderContent.style.setProperty("--radius", radiusValue);
+    themeBuilderContent.style.setProperty("--radius", radiusCssMap[variables.radius]);
     applyVariables(themeBuilderContent, radiusDerivedVariables);
 
     // Set field radius (used by --radius-field)
-    const fieldRadiusValue = radiusMap[variables.formRadius] ?? "0.5rem";
-
-    themeBuilderContent.style.setProperty("--field-radius", fieldRadiusValue);
+    themeBuilderContent.style.setProperty("--field-radius", radiusCssMap[variables.formRadius]);
 
     // Update --font-sans with the selected font variable
-    const fontVariable = fontVariableMap[variables.fontFamily] ?? "--font-inter";
-
-    themeBuilderContent.style.setProperty("--font-sans", `var(${fontVariable})`);
+    themeBuilderContent.style.setProperty(
+      "--font-sans",
+      `var(${fontMap[variables.fontFamily].variable})`,
+    );
   }, [variables.accentColor, variables.fontFamily, variables.formRadius, variables.radius]);
 }

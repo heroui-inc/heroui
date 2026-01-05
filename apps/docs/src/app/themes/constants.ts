@@ -45,6 +45,12 @@ export const fonts: Array<{id: (typeof fontIds)[number]; label: string; variable
   {id: "google-sans", label: "Google Sans", variable: "--font-google-sans"},
 ];
 
+/** Map font ID to font info for quick lookup */
+export const fontMap = Object.fromEntries(fonts.map((f) => [f.id, f])) as Record<
+  (typeof fontIds)[number],
+  (typeof fonts)[number]
+>;
+
 export const radiusIds = [
   "none",
   "extra-small",
@@ -54,18 +60,23 @@ export const radiusIds = [
   "extra-large",
 ] as const;
 export const radiusOptions: Array<{
+  cssValue: string;
   description: string;
   id: (typeof radiusIds)[number];
   label: string;
-  value: string;
 }> = [
-  {description: "none", id: "none", label: "-", value: "none"},
-  {description: "extra small", id: "extra-small", label: "XS", value: "extra-small"},
-  {description: "small", id: "small", label: "S", value: "small"},
-  {description: "medium", id: "medium", label: "M", value: "medium"},
-  {description: "large", id: "large", label: "LG", value: "large"},
-  {description: "extra large", id: "extra-large", label: "XL", value: "extra-large"},
+  {cssValue: "0", description: "none", id: "none", label: "-"},
+  {cssValue: "0.125rem", description: "extra small", id: "extra-small", label: "XS"},
+  {cssValue: "0.25rem", description: "small", id: "small", label: "S"},
+  {cssValue: "0.5rem", description: "medium", id: "medium", label: "M"},
+  {cssValue: "0.75rem", description: "large", id: "large", label: "LG"},
+  {cssValue: "1rem", description: "extra large", id: "extra-large", label: "XL"},
 ];
+
+/** Map radius ID to CSS value for quick lookup */
+export const radiusCssMap = Object.fromEntries(
+  radiusOptions.map((r) => [r.id, r.cssValue]),
+) as Record<(typeof radiusIds)[number], string>;
 
 export const themeIds = [
   "default",

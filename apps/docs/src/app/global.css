@@ -491,6 +491,10 @@ code {
   .line {
     @apply pl-0!;
   }
+
+  [role="region"] {
+    max-height: 75vh;
+  }
 }
 
 /* Apply !important only for isolated code blocks (not code-block-wrapper) */

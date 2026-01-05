@@ -5,3 +5,4 @@ export {BuilderHeader} from "./builder-header";
 export {ThemePopover} from "./theme-popover";
 export {PreviewContainer} from "./preview-container";
 export {ShuffleButton} from "./shuffle-button";
+export {ThemeCodePanel} from "./theme-code-panel";

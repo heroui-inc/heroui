@@ -11,6 +11,7 @@ import {Button, Separator, Tabs} from "@heroui/react";
 import Link from "next/link";
 
 import {HeroUILogo} from "@/components/heroui-logo";
+import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {tabs} from "../constants";
 import {useResetVariables, useUndoRedo} from "../hooks";
@@ -18,6 +19,7 @@ import {useResetVariables, useUndoRedo} from "../hooks";
 export function BuilderHeader() {
   const resetVariables = useResetVariables();
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
+  const {isCodeVisible, toggleCode} = useCodePanel();
 
   const reset = () => {
     resetVariables();
@@ -71,7 +73,12 @@ export function BuilderHeader() {
           <Button isIconOnly size="md" variant="tertiary">
             <NodesRight />
           </Button>
-          <Button isIconOnly size="md" variant="tertiary">
+          <Button
+            isIconOnly
+            size="md"
+            variant={isCodeVisible ? "primary" : "tertiary"}
+            onPress={toggleCode}
+          >
             <Code />
           </Button>
         </div>
