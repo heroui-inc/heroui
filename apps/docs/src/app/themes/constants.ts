@@ -124,3 +124,7 @@ export const defaultThemeValues: ThemeVariables = {
   radius: "medium",
   theme: "default",
 } as const;
+
+export const LOCAL_STORAGE_KEYS = {
+  SHUFFLE_WARNING_SHOWN: "shuffle-warning-shown",
+} as const;
