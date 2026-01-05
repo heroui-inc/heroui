@@ -2,11 +2,10 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 
+import {DemoComponents} from "@/components/demo";
 import {Footer} from "@/components/footer";
 import {FrameworkChip} from "@/components/framework-chip";
 import {GitHubLink} from "@/components/github-link";
-
-import {DemoComponents} from "./components/demo";
 
 const VersionChip = () => {
   return (
@@ -71,7 +70,7 @@ export default function HomePage() {
           />
         </section>
         {/* Desktop: Show demos */}
-        <div className="hidden lg:block">
+        <div className="hidden py-24 lg:block">
           <DemoComponents />
         </div>
       </section>
