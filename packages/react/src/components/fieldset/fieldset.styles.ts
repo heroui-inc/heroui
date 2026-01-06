@@ -7,8 +7,8 @@ export const fieldsetVariants = tv({
     base: "fieldset",
     legend: "fieldset__legend",
     description: "fieldset__description",
-    fieldGroup: "fieldset_field_group",
-    actions: "fieldset_actions",
+    fieldGroup: "fieldset__field_group",
+    actions: "fieldset__actions",
   },
 });
 
