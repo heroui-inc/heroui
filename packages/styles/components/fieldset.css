@@ -1,6 +1,8 @@
 /* Base component styles */
 .fieldset {
   @apply flex flex-col gap-6;
+  /* fix flexbox issue in Safari when fieldset with legend is inside a flexbox */
+  @apply shrink grow basis-0;
 }
 
 .fieldset__legend {
