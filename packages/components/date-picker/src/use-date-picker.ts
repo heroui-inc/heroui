@@ -134,10 +134,20 @@ export function useDatePicker<T extends DateValue>({
   const showTimeField = !!timeGranularity;
 
   const getDateInputProps = () => {
+    const handleWrapperInteraction = (e: React.PointerEvent) => {
+      if (e.target === e.currentTarget) {
+        e.preventDefault();
+        state.open();
+      }
+    };
+
     return {
       ...dateInputProps,
       classNames,
-      groupProps,
+      groupProps: {
+        ...groupProps,
+        onPointerDown: handleWrapperInteraction,
+      },
       labelProps,
       createCalendar,
       errorMessageProps,
