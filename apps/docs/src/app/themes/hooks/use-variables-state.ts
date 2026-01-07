@@ -1,20 +1,14 @@
 "use client";
 
-import {parseAsArrayOf, parseAsStringLiteral, useQueryStates} from "nuqs";
+import {parseAsArrayOf, parseAsString, parseAsStringLiteral, useQueryStates} from "nuqs";
 
-import {
-  colorIds,
-  defaultThemeValues,
-  fontIds,
-  radiusIds,
-  themeIds,
-  themeVariableKeys,
-} from "../constants";
+import {defaultThemeValues, fontIds, radiusIds, themeIds, themeVariableKeys} from "../constants";
 
 export function useVariablesState() {
   return useQueryStates(
     {
-      accentColor: parseAsStringLiteral(colorIds).withDefault(defaultThemeValues.accentColor),
+      // Use parseAsString for accentColor to allow custom colors from the ColorPicker
+      accentColor: parseAsString.withDefault(defaultThemeValues.accentColor),
       fontFamily: parseAsStringLiteral(fontIds).withDefault(defaultThemeValues.fontFamily),
       formRadius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeValues.formRadius),
       lockedVariables: parseAsArrayOf(parseAsStringLiteral(themeVariableKeys)).withDefault([]),

@@ -113,7 +113,8 @@ export const themes: Array<{
 ];
 
 export type ThemeVariables = {
-  accentColor: (typeof colorIds)[number];
+  /** Accent color - can be a predefined colorId or any valid CSS color string */
+  accentColor: (typeof colorIds)[number] | string;
   fontFamily: (typeof fontIds)[number];
   formRadius: (typeof radiusIds)[number];
   radius: (typeof radiusIds)[number];
