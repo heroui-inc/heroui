@@ -56,7 +56,12 @@ export function AccentColorSelector() {
                 className="size-8 cursor-pointer rounded-full border-2 border-white/50"
                 style={{backgroundColor: item.value}}
               />
-              <div className="absolute -top-0.5 -right-1 hidden size-4 items-center justify-center rounded-full border border-background bg-foreground group-data-[selected=true]:flex">
+              <div
+                className={cn(
+                  "absolute -top-0.5 -right-1 flex size-4 items-center justify-center rounded-full border border-background bg-foreground",
+                  "scale-80 opacity-0 transition-all duration-200 ease-out group-data-[selected=true]:scale-100 group-data-[selected=true]:opacity-100",
+                )}
+              >
                 <Check className="size-3 text-background" />
               </div>
             </ListBox.Item>
@@ -98,11 +103,15 @@ export function AccentColorSelector() {
                 }}
               />
               {/* Check indicator when custom color is selected */}
-              {isCustomColor ? (
-                <div className="absolute -top-0.5 -right-1 z-20 flex size-4 items-center justify-center rounded-full border border-background bg-foreground">
-                  <Check className="size-3 text-background" />
-                </div>
-              ) : null}
+              <div
+                className={cn(
+                  "absolute -top-0.5 -right-1 z-20 flex size-4 items-center justify-center rounded-full border border-background bg-foreground",
+                  "transition-all duration-200 ease-out",
+                  isCustomColor ? "scale-100 opacity-100" : "scale-80 opacity-0",
+                )}
+              >
+                <Check className="size-3 text-background" />
+              </div>
             </Button>
           }
           onChange={handleColorChange}
