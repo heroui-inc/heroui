@@ -1,0 +1,154 @@
+---
+title: Beta 11
+description: Enhanced Bottom Sheet close coordination, Dialog swipe-to-dismiss fixes, TextField improvements, and PortalHost export for advanced use cases
+github:
+  pull: 203
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">January 6, 2026</span>
+</div>
+
+Beta 11 focuses on improving component reliability and developer experience across several key areas. This release enhances Bottom Sheet close coordination to ensure consistent behavior across all close mechanisms, fixes Dialog swipe-to-dismiss gesture handling issues, resolves TextField styling and functionality problems, and introduces a new PortalHost export for advanced portal mounting scenarios. These improvements make interactions smoother and provide developers with more control over component behavior.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native@beta
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native@beta
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native@beta
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native@beta
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Component Improvements
+
+### Bottom Sheet Close Coordination Enhancement
+
+The [Bottom Sheet](/docs/native/components/bottom-sheet) component has been enhanced with improved close coordination across all close mechanisms.
+
+**Improvements:**
+
+- Enhanced synchronization between swipe-to-dismiss, overlay press, close button, and programmatic close actions
+- Improved state management to prevent race conditions during close operations
+- More reliable `onOpenChange` callback firing across all close scenarios
+- Better coordination between animation progress and close state transitions
+
+The Bottom Sheet component supports multiple ways to close: swiping down, pressing the overlay, clicking the close button, or programmatically calling close. Previously, these mechanisms could sometimes conflict or produce inconsistent behavior. This update ensures all close mechanisms work harmoniously together, providing a smoother and more predictable user experience.
+
+**Related PR:** [#201](https://github.com/heroui-inc/heroui-native/pull/201)
+
+### Dialog Swipe-to-Dismiss Gesture Handling Fix
+
+The [Dialog](/docs/native/components/dialog) component has been fixed to properly handle swipe-to-dismiss gestures.
+
+**Improvements:**
+
+- Fixed gesture detection and handling for swipe-to-dismiss functionality
+- Improved gesture state management during swipe interactions
+- Enhanced animation coordination during gesture release
+- More reliable dismissal when swiping beyond the threshold
+
+The Dialog component supports swipe-to-dismiss functionality, allowing users to dismiss dialogs by swiping down. This fix resolves issues where gesture handling could become unresponsive or produce unexpected behavior during swipe interactions.
+
+**Related PR:** [#193](https://github.com/heroui-inc/heroui-native/pull/193)
+
+### TextField Styling and Functionality Fixes
+
+The [TextField](/docs/native/components/text-field) component has been fixed to resolve styling and functionality issues.
+
+**Improvements:**
+
+- Fixed input styling inconsistencies
+- Resolved animation state management issues
+- Improved focus and blur state handling
+- Enhanced error state visual feedback
+- Fixed placeholder and selection color application
+
+These fixes ensure the TextField component displays correctly across all states (focused, blurred, invalid) and provides consistent visual feedback to users.
+
+**Related PR:** [#202](https://github.com/heroui-inc/heroui-native/pull/202)
+
+## API Enhancements
+
+### PortalHost Export for Advanced Use Cases
+
+The `PortalHost` component is now exported from the main provider module, enabling advanced portal host mounting scenarios.
+
+**New Capability:**
+
+```tsx
+import { HeroUINativeProvider, PortalHost } from "@heroui/native";
+
+export function CustomLayout() {
+  return (
+    <>
+      <HeroUINativeProvider>
+        {/* Your app content */}
+      </HeroUINativeProvider>
+
+      {/* Manually mount PortalHost in a custom location */}
+      <PortalHost name="custom-host" />
+    </>
+  );
+}
+```
+
+This enhancement allows developers to manually mount portal hosts in custom layouts, which is particularly useful for scenarios where you need portals to render in specific locations (e.g., within BottomSheet, Modal, or other overlay components). By default, `HeroUINativeProvider` includes a `PortalHost` for standard use cases, but now you can create additional hosts with custom names for advanced scenarios.
+
+**Use Cases:**
+
+- Mounting portals within BottomSheet components
+- Creating portal hosts in Modal components
+- Custom overlay rendering scenarios
+- Multi-host portal architectures
+
+**Related PR:** [#185](https://github.com/heroui-inc/heroui-native/pull/185)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #187](https://github.com/heroui-inc/heroui-native/issues/187)**: Fixed an issue where multiple presses were required to re-open a bottom sheet or dialog after it was dismissed via swipe gesture. The internal state now properly synchronizes with the close animation, allowing immediate reopening regardless of how the component was closed.
+
+- **[Issue #189](https://github.com/heroui-inc/heroui-native/issues/189)**: Fixed app freezing when swiping to dismiss dialogs containing text inputs.
+
+- **[Issue #196](https://github.com/heroui-inc/heroui-native/issues/196)**: Fixed TextField multiline input behavior to match React Native's TextInput multiline functionality.
+
+- **[Issue #199](https://github.com/heroui-inc/heroui-native/issues/199)**: Fixed placeholder text positioning within TextField Input component.
+
+**Related PRs:**
+
+- [#201](https://github.com/heroui-inc/heroui-native/pull/201)
+- [#202](https://github.com/heroui-inc/heroui-native/pull/202)
+- [#193](https://github.com/heroui-inc/heroui-native/pull/193)
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
