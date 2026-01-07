@@ -3,7 +3,7 @@
 import type {Color} from "react-aria-components";
 
 import {Check} from "@gravity-ui/icons";
-import {Button, ListBox} from "@heroui/react";
+import {Button, ListBox, cn} from "@heroui/react";
 
 import ColorPicker from "@/components/color-picker";
 
@@ -79,14 +79,27 @@ export function AccentColorSelector() {
             >
               {/* Pastel gradient to indicate custom color picker */}
               <div
-                className="h-full w-full rounded-full"
+                className={cn(
+                  "z-0 size-full rounded-full",
+                  isCustomColor && "z-10 size-7 border-2 border-background",
+                )}
                 style={{
                   background: isCustomColor
                     ? variables.accentColor
                     : "conic-gradient(from 0deg, #F8AECF, #FBC7A3, #F7E8A4, #D7F5B0, #B5F3D2, #A3EAF7, #A8C9FF, #C9B8FF, #F8AECF)",
                 }}
               />
-              <div className="absolute inset-0 z-10 rounded-full border-2 border-white/50 bg-transparent" />
+              <div
+                className={cn(
+                  "absolute inset-0 z-10 rounded-full border-2 border-white/50",
+                  isCustomColor && "z-0 border-none mix-blend-plus-darker",
+                )}
+                style={{
+                  background: isCustomColor
+                    ? "conic-gradient(from 0deg, #F8AECF, #FBC7A3, #F7E8A4, #D7F5B0, #B5F3D2, #A3EAF7, #A8C9FF, #C9B8FF, #F8AECF)"
+                    : "transparent",
+                }}
+              />
               {/* Check indicator when custom color is selected */}
               {isCustomColor ? (
                 <div className="absolute -top-0.5 -right-1 z-20 flex size-4 items-center justify-center rounded-full border border-background bg-foreground">
