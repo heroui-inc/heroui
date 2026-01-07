@@ -71,14 +71,31 @@ const colorFieldInputStyles = tv({
  * -----------------------------------------------------------------------------------------------*/
 
 const defaultSwatches = [
-  "hsla(26, 35%, 92%, 1)",
-  "hsla(338, 77%, 78%, 1)",
-  "hsla(309, 23%, 55%, 1)",
-  "hsla(355, 85%, 66%, 1)",
-  "hsla(16, 100%, 67%, 1)",
-  "hsla(47, 92%, 66%, 1)",
-  "hsla(152, 80%, 56%, 1)",
-  "hsla(197, 59%, 64%, 1)",
+  // Original 8 colors
+  "hsla(26, 35%, 92%, 1)", // Light beige
+  "hsla(338, 77%, 78%, 1)", // Pink
+  "hsla(309, 23%, 55%, 1)", // Muted purple
+  "hsla(355, 85%, 66%, 1)", // Coral/red
+  "hsla(16, 100%, 67%, 1)", // Orange
+  "hsla(47, 92%, 66%, 1)", // Yellow
+  "hsla(152, 80%, 56%, 1)", // Green
+  "hsla(197, 59%, 64%, 1)", // Blue
+  "hsla(220, 13%, 18%, 1)", // Dark slate (backgrounds)
+  "hsla(220, 70%, 50%, 1)", // Royal blue
+  "hsla(210, 100%, 56%, 1)", // Bright blue
+  "hsla(180, 100%, 25%, 1)", // Teal
+  "hsla(170, 50%, 65%, 1)", // Seafoam
+  "hsla(150, 60%, 75%, 1)", // Mint green
+  "hsla(280, 60%, 60%, 1)", // Violet
+  "hsla(270, 50%, 70%, 1)", // Lavender
+  "hsla(350, 100%, 88%, 1)", // Blush
+  "hsla(10, 80%, 65%, 1)", // Tomato red
+  "hsla(30, 90%, 55%, 1)", // Dark orange
+  "hsla(45, 100%, 51%, 1)", // Gold
+  "hsla(60, 90%, 85%, 1)", // Pale yellow
+  "hsla(0, 0%, 95%, 1)", // Cloud white
+  "hsla(0, 0%, 70%, 1)", // Medium gray
+  "hsla(0, 0%, 40%, 1)", // Charcoal
 ];
 
 /* -------------------------------------------------------------------------------------------------
@@ -232,6 +249,18 @@ function chunkArray<T>(array: T[], chunkSize: number): T[][] {
   return chunks;
 }
 
+const handleParseColor = (color: string | Color) => {
+  try {
+    if (typeof color === "string") {
+      return parseColor(color);
+    }
+
+    return color;
+  } catch (error) {
+    return parseColor("#006FEE");
+  }
+};
+
 const SWATCHES_PER_PAGE = 8;
 
 export default function ColorPicker({
@@ -280,7 +309,7 @@ export default function ColorPicker({
   const [internalColor, setInternalColor] = useState<Color>(safeDefaultValue);
 
   // Use controlled value if provided, otherwise use internal state
-  const color = controlledValue ? parseColor(controlledValue as string) : internalColor;
+  const color = controlledValue ? handleParseColor(controlledValue) : internalColor;
 
   // Calculate initial swatch page based on current color - using lazy initializer
   const [swatchPage, setSwatchPage] = useState(() => {
@@ -309,7 +338,6 @@ export default function ColorPicker({
     });
   };
 
-  const currentSwatches = swatchPages[swatchPage] || [];
   const isFirstPage = swatchPage === 0;
   const isLastPage = swatchPage === totalPages - 1;
 
@@ -332,7 +360,7 @@ export default function ColorPicker({
             <Popover.Dialog className="flex flex-col gap-2 px-2 pt-4 pb-2">
               {children ?? (
                 <>
-                  {/* Color Swatches Row */}
+                  {/* Color Swatches Carousel */}
                   {showSwatches && totalPages > 0 ? (
                     <div className="flex items-center gap-2">
                       <Button
@@ -345,21 +373,37 @@ export default function ColorPicker({
                       >
                         <ChevronLeft className="size-4" />
                       </Button>
-                      <div className="flex w-full flex-1 justify-center">
-                        <ColorSwatchPicker className="flex justify-start gap-1.5">
-                          {currentSwatches.map((swatch) => (
-                            <ColorSwatchPickerItem
-                              key={swatch}
-                              className="size-4 rounded-full transition-all data-selected:ring-2 data-selected:ring-foreground data-selected:ring-offset-1"
-                              color={swatch}
+                      {/* Carousel container */}
+                      <div className="relative flex-1 overflow-hidden">
+                        {/* Sliding track containing all pages */}
+                        <div
+                          className="flex transition-transform duration-300 ease-out"
+                          style={{
+                            transform: `translateX(-${swatchPage * 100}%)`,
+                          }}
+                        >
+                          {swatchPages.map((pageSwatches, pageIndex) => (
+                            <div
+                              key={pageIndex}
+                              className="flex h-[22px] w-full shrink-0 justify-center"
                             >
-                              <AriaColorSwatch
-                                className="size-full cursor-pointer rounded-full"
-                                style={{background: swatch}}
-                              />
-                            </ColorSwatchPickerItem>
+                              <ColorSwatchPicker className="flex items-center justify-start gap-1.5">
+                                {pageSwatches.map((swatch) => (
+                                  <ColorSwatchPickerItem
+                                    key={swatch}
+                                    className="size-4 rounded-full transition-all data-selected:ring-2 data-selected:ring-foreground data-selected:ring-offset-1"
+                                    color={swatch}
+                                  >
+                                    <AriaColorSwatch
+                                      className="size-full cursor-pointer rounded-full"
+                                      style={{background: swatch}}
+                                    />
+                                  </ColorSwatchPickerItem>
+                                ))}
+                              </ColorSwatchPicker>
+                            </div>
                           ))}
-                        </ColorSwatchPicker>
+                        </div>
                       </div>
                       <Button
                         isIconOnly

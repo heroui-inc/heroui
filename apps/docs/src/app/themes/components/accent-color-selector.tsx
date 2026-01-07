@@ -18,9 +18,6 @@ export function AccentColorSelector() {
   // Check if current color is a predefined color or custom
   const isCustomColor = !colorIds.includes(variables.accentColor as (typeof colorIds)[number]);
 
-  // Check if the color is in a format react-aria can parse (not OKLCH)
-  const isOklchColor = variables.accentColor.startsWith("oklch");
-
   const handleColorChange = (color: Color) => {
     // Convert to CSS color string
     const cssColor = color.toString("css");
@@ -69,8 +66,8 @@ export function AccentColorSelector() {
         {/* Custom Color Picker - styled to match ListBox items */}
         <ColorPicker
           showSwatches
-          defaultValue={isCustomColor && !isOklchColor ? variables.accentColor : "#006FEE"}
           showAlpha={false}
+          value={variables.accentColor}
           trigger={
             <Button
               isIconOnly
