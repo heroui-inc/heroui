@@ -48,20 +48,22 @@
   }
 }
 
-/**
- * In-Surface Variants
- * Used when input is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.input--in-surface-default,
-.input--in-surface-secondary,
-.input--in-surface-tertiary {
+/* Variant property definitions */
+.input--primary {
+  /* Default styles */
+}
+
+.input--secondary {
   @apply shadow-none;
   background-color: var(--input-bg);
 
+  --input-bg: var(--color-default);
+  --input-bg-hover: var(--color-default-hover);
+  --input-bg-focus: var(--color-default);
+
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
-    &[data-hovered="true"]:not([data-focus-visible="true"]) {
+    &[data-hovered="true"]:not([data-focus-visible="true"]):not([data-focused="true"]) {
       background-color: var(--input-bg-hover);
     }
   }
@@ -81,28 +83,6 @@
     @apply status-invalid-field;
     background-color: var(--input-bg-focus);
   }
-}
-
-/* In-surface variant property definitions */
-.input--in-surface-transparent {
-}
-
-.input--in-surface-default {
-  --input-bg: var(--color-in-surface);
-  --input-bg-hover: var(--color-in-surface-hover);
-  --input-bg-focus: var(--color-in-surface-focus);
-}
-
-.input--in-surface-secondary {
-  --input-bg: var(--color-in-surface-secondary);
-  --input-bg-hover: var(--color-in-surface-secondary-hover);
-  --input-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.input--in-surface-tertiary {
-  --input-bg: var(--color-in-surface-tertiary);
-  --input-bg-hover: var(--color-in-surface-tertiary-hover);
-  --input-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */
