@@ -329,7 +329,7 @@ export default function ColorPicker({
         <Popover>
           <Popover.Trigger>{trigger}</Popover.Trigger>
           <Popover.Content className={cn("w-[248px]", popoverClassName)} placement="top">
-            <Popover.Dialog className="flex flex-col gap-2 px-2 py-4">
+            <Popover.Dialog className="flex flex-col gap-2 px-2 pt-4 pb-2">
               {children ?? (
                 <>
                   {/* Color Swatches Row */}
@@ -398,7 +398,7 @@ export default function ColorPicker({
 
                   {/* Color Field with Color Space Selector */}
                   {showColorField ? (
-                    <InputGroup fullWidth className="h-12 rounded-xl">
+                    <InputGroup fullWidth className="rounded-xl">
                       <InputGroup.Input
                         readOnly
                         className="w-full flex-1 px-4 text-sm"
