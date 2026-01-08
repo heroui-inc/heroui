@@ -41,18 +41,30 @@ const InputGroupRoot = ({
   const textFieldContext = useContext(TextFieldContext);
   const surfaceContext = useContext(SurfaceContext);
   const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
+  const groupRef = React.useRef<HTMLDivElement>(null);
 
   const slots = React.useMemo(
     () => inputGroupVariants({fullWidth, inSurface: resolvedInSurface}),
     [fullWidth, resolvedInSurface],
   );
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const input = groupRef.current?.querySelector("input");
+
+    if (input && target !== input && !input.contains(target)) {
+      input.focus();
+    }
+  };
+
   return (
     <InputGroupContext value={{slots}}>
       <GroupPrimitive
         {...props}
+        ref={groupRef}
         className={composeTwRenderProps(className, slots?.base())}
         data-slot="input-group"
+        onClick={handleClick}
       >
         {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
       </GroupPrimitive>
