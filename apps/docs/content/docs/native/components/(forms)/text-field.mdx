@@ -24,10 +24,7 @@ import { TextField } from 'heroui-native';
 ```tsx
 <TextField>
   <TextField.Label>...</TextField.Label>
-  <TextField.Input>
-    <TextField.InputStartContent>...</TextField.InputStartContent>
-    <TextField.InputEndContent>...</TextField.InputEndContent>
-  </TextField.Input>
+  <TextField.Input />
   <TextField.Description>...</TextField.Description>
   <TextField.ErrorMessage>...</TextField.ErrorMessage>
 </TextField>
@@ -36,8 +33,6 @@ import { TextField } from 'heroui-native';
 - **TextField**: Root container that provides spacing and state management
 - **TextField.Label**: Label with optional asterisk for required fields
 - **TextField.Input**: Input container with animated border and background
-- **TextField.InputStartContent**: Optional content at the start of the input
-- **TextField.InputEndContent**: Optional content at the end of the input
 - **TextField.Description**: Helper text displayed below the input
 - **TextField.ErrorMessage**: Error message shown when field is invalid
 
