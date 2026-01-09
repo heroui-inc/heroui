@@ -73,6 +73,13 @@ export async function getRedirects(): Promise<Redirect[]> {
   const rootDir = join(process.cwd(), "content/docs/react");
   const redirects: Redirect[] = [];
 
+  // Theme builder redirect - redirect /theme to /themes
+  redirects.push({
+    destination: "/themes",
+    permanent: true,
+    source: "/theme",
+  });
+
   // Framework root redirects - redirect /react, /web, and /native to their respective docs
   redirects.push(
     {

@@ -2,15 +2,14 @@
 
 import type {Theme} from "@/showcases";
 
-import React, {createContext, useContext, useEffect, useState} from "react";
+import React, {createContext, useContext, useEffect, useMemo, useState} from "react";
+
+import {CodePanelProvider} from "@/hooks/use-code-panel";
 
 interface ShowcaseContextType {
   showcaseTheme: Theme;
   setShowcaseTheme: (theme: Theme) => void;
   supportsThemeSwitching: boolean;
-  isCodeVisible: boolean;
-  setIsCodeVisible: (visible: boolean) => void;
-  toggleCode: () => void;
 }
 
 const ShowcaseContext = createContext<ShowcaseContextType | undefined>(undefined);
@@ -37,11 +36,6 @@ export function ShowcaseWrapper({
   supportsThemeSwitching = true,
 }: ShowcaseWrapperProps) {
   const [showcaseTheme, setShowcaseTheme] = useState<Theme>(defaultTheme);
-  const [isCodeVisible, setIsCodeVisible] = useState(false);
-
-  const toggleCode = () => {
-    setIsCodeVisible((prev) => !prev);
-  };
 
   useEffect(() => {
     // Set the showcase theme as a data attribute on the showcase container
@@ -52,20 +46,22 @@ export function ShowcaseWrapper({
     }
   }, [showcaseTheme]);
 
+  const value = useMemo(
+    () => ({
+      setShowcaseTheme,
+      showcaseTheme,
+      supportsThemeSwitching,
+    }),
+    [showcaseTheme, supportsThemeSwitching],
+  );
+
   return (
-    <ShowcaseContext
-      value={{
-        isCodeVisible,
-        setIsCodeVisible,
-        setShowcaseTheme,
-        showcaseTheme,
-        supportsThemeSwitching,
-        toggleCode,
-      }}
-    >
-      <div className={showcaseTheme} data-showcase-theme={showcaseTheme}>
-        {children}
-      </div>
-    </ShowcaseContext>
+    <CodePanelProvider>
+      <ShowcaseContext value={value}>
+        <div className={showcaseTheme} data-showcase-theme={showcaseTheme}>
+          {children}
+        </div>
+      </ShowcaseContext>
+    </CodePanelProvider>
   );
 }
