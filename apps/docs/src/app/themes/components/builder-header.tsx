@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowRotateLeft,
-  ArrowUturnCcwLeft,
-  ArrowUturnCwRight,
-  Code,
-  NodesRight,
-} from "@gravity-ui/icons";
+import {ArrowUturnCcwLeft, ArrowUturnCwRight, Code, NodesRight} from "@gravity-ui/icons";
 import {Button, Separator, Tabs} from "@heroui/react";
 import Link from "next/link";
 
@@ -14,16 +8,13 @@ import {HeroUILogo} from "@/components/heroui-logo";
 import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {tabs} from "../constants";
-import {useResetVariables, useUndoRedo} from "../hooks";
+import {useUndoRedo} from "../hooks";
+
+import {ResetButton} from "./reset-button";
 
 export function BuilderHeader() {
-  const resetVariables = useResetVariables();
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
-
-  const reset = () => {
-    resetVariables();
-  };
 
   return (
     <div className="mb-6 flex h-15 w-full items-center justify-center">
@@ -52,9 +43,7 @@ export function BuilderHeader() {
               <ArrowUturnCwRight />
             </Button>
             <Separator className="h-6" orientation="vertical" />
-            <Button isIconOnly size="md" variant="tertiary" onPress={reset}>
-              <ArrowRotateLeft />
-            </Button>
+            <ResetButton />
           </div>
         </div>
         <Tabs>

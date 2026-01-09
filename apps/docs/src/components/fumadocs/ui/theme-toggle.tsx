@@ -36,7 +36,10 @@ export function ThemeToggle({
     setMounted(true);
   }, []);
 
-  const container = cn("inline-flex items-center rounded-full border p-1", className);
+  const container = cn(
+    "inline-flex cursor-(--cursor-interactive) items-center rounded-full border p-1",
+    className,
+  );
 
   if (mode === "light-dark") {
     const value = mounted ? resolvedTheme : null;
