@@ -16,15 +16,26 @@ import spotifyTheme from "@/assets/themes/spotify.png";
 export const tabs = ["components", "dashboard", "mail", "chat", "finances"];
 
 export const colorIds = [
-  "oklch(0.6204 0.195 253.83)",
-  "oklch(0.6368 0.2078 25.33)",
-  "oklch(0.7686 0.1647 70.08)",
-  "oklch(0.6959 0.1491 162.48)",
-  "oklch(0.6668 0.2591 322.15)",
-  "oklch(0 0 0)",
+  "hsla(208, 97%, 49%, 1)",
+  "hsla(0, 84%, 60%, 1)",
+  "hsla(38, 92%, 50%, 1)",
+  "hsla(160, 84%, 39%, 1)",
+  "hsla(292, 84%, 61%, 1)",
+  "hsla(0, 0%, 0%, 1)",
 ] as const;
 
 export const colors = colorIds.map((id) => ({id, value: id}));
+
+/**
+ * Adaptive colors that need different values in light vs dark modes.
+ * Maps a color ID to its light and dark mode variants.
+ */
+export const adaptiveColors: Record<string, {light: string; dark: string}> = {
+  "hsla(0, 0%, 0%, 1)": {
+    dark: "hsla(0, 0%, 98%, 1)",
+    light: "hsla(0, 0%, 0%, 1)",
+  },
+};
 
 export const fontIds = [
   "inter",
@@ -113,7 +124,8 @@ export const themes: Array<{
 ];
 
 export type ThemeVariables = {
-  accentColor: (typeof colorIds)[number];
+  /** Accent color - can be a predefined colorId or any valid CSS color string */
+  accentColor: (typeof colorIds)[number] | string;
   fontFamily: (typeof fontIds)[number];
   formRadius: (typeof radiusIds)[number];
   radius: (typeof radiusIds)[number];
@@ -139,3 +151,5 @@ export const defaultThemeValues: ThemeVariables = {
 export const LOCAL_STORAGE_KEYS = {
   SHUFFLE_WARNING_SHOWN: "shuffle-warning-shown",
 } as const;
+
+export const THEME_BUILDER_CONTENT_ID = "theme-builder-content";
