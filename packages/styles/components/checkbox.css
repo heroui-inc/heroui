@@ -43,7 +43,7 @@
 
   /* Checkmark SVG indicator */
   [data-slot="checkbox-default-indicator--checkmark"] {
-    @apply size-2.5 text-accent-foreground;
+    @apply size-2.5 stroke-[2.5px] text-accent-foreground;
 
     /**
      * Transitions
@@ -52,7 +52,7 @@
   }
 
   &[data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"] {
-    transition: stroke-dashoffset 250ms linear 150ms;
+    transition: stroke-dashoffset 150ms linear 50ms;
   }
 
   /* Invalid + Selected: checkmark icon color */
