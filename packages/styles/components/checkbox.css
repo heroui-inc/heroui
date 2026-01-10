@@ -43,7 +43,7 @@
 
   /* Checkmark SVG indicator */
   [data-slot="checkbox-default-indicator--checkmark"] {
-    @apply size-2.5 text-accent-foreground;
+    @apply size-2.5 stroke-[2.5px] text-accent-foreground;
 
     /**
      * Transitions
@@ -52,7 +52,7 @@
   }
 
   &[data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"] {
-    transition: stroke-dashoffset 250ms linear 150ms;
+    transition: stroke-dashoffset 150ms linear 50ms;
   }
 
   /* Invalid + Selected: checkmark icon color */
@@ -91,8 +91,8 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    background-color 250ms var(--ease-out),
-    transform 250ms var(--ease-out-quart);
+    background-color 200ms var(--ease-out),
+    transform 100ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
@@ -104,14 +104,14 @@
 
   /* Background indicator pseudo-element */
   &::before {
-    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md bg-accent opacity-0 content-[''];
+    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-70 rounded-md bg-accent opacity-0 content-[''];
 
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
      */
     transition:
-      scale 200ms var(--ease-linear),
+      scale 100ms var(--ease-linear),
       opacity 200ms var(--ease-linear),
       background-color 200ms var(--ease-out);
     @apply motion-reduce:transition-none;
