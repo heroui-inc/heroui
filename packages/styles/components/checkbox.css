@@ -91,8 +91,8 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    background-color 250ms var(--ease-out),
-    transform 250ms var(--ease-out-quart);
+    background-color 200ms var(--ease-out),
+    transform 100ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
@@ -104,14 +104,14 @@
 
   /* Background indicator pseudo-element */
   &::before {
-    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md bg-accent opacity-0 content-[''];
+    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-70 rounded-md bg-accent opacity-0 content-[''];
 
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
      */
     transition:
-      scale 200ms var(--ease-linear),
+      scale 100ms var(--ease-linear),
       opacity 200ms var(--ease-linear),
       background-color 200ms var(--ease-out);
     @apply motion-reduce:transition-none;
