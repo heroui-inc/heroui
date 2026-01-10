@@ -36,6 +36,7 @@ const InputGroupRoot = ({
   className,
   fullWidth,
   inSurface,
+  onClick,
   ...props
 }: InputGroupRootProps) => {
   const textFieldContext = useContext(TextFieldContext);
@@ -55,6 +56,8 @@ const InputGroupRoot = ({
     if (input && target !== input && !input.contains(target)) {
       input.focus();
     }
+
+    onClick?.(e);
   };
 
   return (
