@@ -143,7 +143,7 @@
 
     /* Misc Colors */
     --border: oklch(28% 0.006 286.033);
-    --separator: oklch(22% 0.006 286.033);
+    --separator: oklch(25% 0.006 286.033);
     --focus: var(--accent);
     --link: var(--foreground);
 
