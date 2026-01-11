@@ -22,8 +22,8 @@ importers:
         specifier: 7.28.5
         version: 7.28.5(@babel/core@7.28.5)
       '@blazediff/vitest':
-        specifier: 1.1.1
-        version: 1.1.1(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: 1.1.2
+        version: 1.1.2(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))
       '@changesets/changelog-github':
         specifier: 0.5.2
         version: 0.5.2(encoding@0.1.13)
@@ -824,8 +824,8 @@ packages:
   '@blazediff/gmsd@1.7.0':
     resolution: {integrity: sha512-JW5cxM48h1rP3kKUuIk/E8M/q92/oZp0bKkB45HOwFH/KgJ2Jj0+BwhVj5ThyrAKsmCUHhS8eevuJoZUYOwJrw==}
 
-  '@blazediff/matcher@1.1.1':
-    resolution: {integrity: sha512-cglg3rIitUKO+VGCVt5HbGE5evLzz5Cn42mpPiepyt/o9rT7C443HjHakVZtvEuD24xcSPC0qiCp8/sBIdLqHg==}
+  '@blazediff/matcher@1.2.0':
+    resolution: {integrity: sha512-e+ODDvkdv7okWiGUCoCo2qbGMbIf4IyeIBwTxZjAryGXVmCpBPZRIanqCY9mVZosGWxDMwohYJTDkrMUs1Xfgw==}
 
   '@blazediff/pngjs-transformer@2.1.0':
     resolution: {integrity: sha512-rjXp5TqVeFcSKkCpa/dDFsP4H/nSn8GhCFtRw0QNC2lmdqdjQqNsWz0Ik9Az0BZG6xfpocrbtMINiGUK2A48Yw==}
@@ -833,8 +833,8 @@ packages:
   '@blazediff/ssim@1.7.0':
     resolution: {integrity: sha512-OWSOr6AElb0+dimEzQe35kzJqBeVmRepgMitrlm1TmoDJuQOlObegtPLK4LQWAroW7Ss28L5A1DF7bNeDCSDgw==}
 
-  '@blazediff/vitest@1.1.1':
-    resolution: {integrity: sha512-fSqzscpE8T9HPRi1Mmeg0Deqxr1P0m/sTZHQH8kdRzYBr1j/ygp4I1nTlAk98+uwbK8ujpeOylsAkLGwNYzk/g==}
+  '@blazediff/vitest@1.1.2':
+    resolution: {integrity: sha512-MdGokl/IHPDyIYK3d9n2z4nNwzLT3isBspTIGUFWmEtYE+c6CAz1l9b7jvn/pgHjPKNNrV2gaPTBDJWGyeGotg==}
     peerDependencies:
       vitest: '>=1.0.0'
 
@@ -8957,7 +8957,7 @@ snapshots:
 
   '@blazediff/gmsd@1.7.0': {}
 
-  '@blazediff/matcher@1.1.1':
+  '@blazediff/matcher@1.2.0':
     dependencies:
       '@blazediff/bin': 3.1.0
       '@blazediff/core': 1.9.0
@@ -8972,9 +8972,9 @@ snapshots:
 
   '@blazediff/ssim@1.7.0': {}
 
-  '@blazediff/vitest@1.1.1(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))':
+  '@blazediff/vitest@1.1.2(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
-      '@blazediff/matcher': 1.1.1
+      '@blazediff/matcher': 1.2.0
       vitest: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2)
 
   '@changesets/apply-release-plan@7.0.14':
