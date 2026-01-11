@@ -24,11 +24,13 @@ const DISABLE_ANIMATIONS_CSS = `
   }
 `;
 
+const ignoredStoriesSet = new Set(["📝-todo-calendar--docs", "welcome--docs"]);
+
 function loadStories() {
   const index = inject("__STORYBOOK_INDEX__");
 
   return Object.entries(index.entries)
-    .filter(([, entry]) => entry.id.endsWith("--docs"))
+    .filter(([, entry]) => entry.id.endsWith("--docs") && !ignoredStoriesSet.has(entry.id))
     .map(([, entry]) => entry);
 }
 
