@@ -81,9 +81,20 @@ export default () => (
 
 <ComponentPreview name="select-full-width" />
 
+### Variants
+
+The Select component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="select-variants" />
+
 ### In Surface
 
-<ComponentPreview name="select-in-surface" />
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
+
+<ComponentPreview name="select-on-surface" />
 
 ### Custom Value
 
@@ -185,7 +196,8 @@ The Select component uses these CSS classes ([View source styles](https://github
 
 #### Variant Classes
 
-- `.select__trigger--in-surface` - In surface variant styling
+- `.select--primary` - Primary variant with shadow (default)
+- `.select--secondary` - Secondary variant without shadow, suitable for use in surfaces
 
 #### State Classes
 
@@ -225,7 +237,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `name`          | `string`                                | -                  | The name of the input, used when submitting an HTML form |
 | `autoComplete`  | `string`                                | -                  | Describes the type of autocomplete functionality         |
 | `fullWidth`     | `boolean`                               | `false`             | Whether the select should take full width of its container |
-| `inSurface`   | `"transparent" \| "default" \| "secondary" \| "tertiary"`                               | -                  | Whether the select is displayed in a surface component   |
+| `variant`       | `"primary" \| "secondary"`             | `"primary"`         | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `className`     | `string`                                | -                  | Additional CSS classes                                   |
 | `children`      | `ReactNode \| RenderFunction`           | -                  | Select content or render function                        |
 

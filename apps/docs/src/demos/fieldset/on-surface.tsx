@@ -15,7 +15,7 @@ import {
 } from "@heroui/react";
 import React from "react";
 
-export function InSurface() {
+export function OnSurface() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -49,12 +49,12 @@ export function InSurface() {
                 }}
               >
                 <Label>Name</Label>
-                <Input placeholder="John Doe" />
+                <Input placeholder="John Doe" variant="secondary" />
                 <FieldError />
               </TextField>
               <TextField isRequired name="email" type="email">
                 <Label>Email</Label>
-                <Input placeholder="john@example.com" />
+                <Input placeholder="john@example.com" variant="secondary" />
                 <FieldError />
               </TextField>
               <TextField
@@ -69,7 +69,7 @@ export function InSurface() {
                 }}
               >
                 <Label>Bio</Label>
-                <TextArea placeholder="Tell us about yourself..." />
+                <TextArea placeholder="Tell us about yourself..." variant="secondary" />
                 <Description>Minimum 10 characters</Description>
                 <FieldError />
               </TextField>

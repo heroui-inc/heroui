@@ -1,5 +1,5 @@
-import React from "react";
 import {Tabs} from "@heroui/react";
+import React from "react";
 
 export function TabsDemo1() {
   return (
@@ -31,4 +31,3 @@ export function TabsDemo1() {
     </Tabs>
   );
 }
-

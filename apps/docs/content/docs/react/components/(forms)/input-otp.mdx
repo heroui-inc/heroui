@@ -81,11 +81,20 @@ A complete two-factor authentication form with validation and submission.
 
 <ComponentPreview name="input-otp-form-example" />
 
+### Variants
+
+The InputOTP component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="input-otp-variants" />
+
 ### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, InputOTP automatically applies in-surface styling.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
-<ComponentPreview name="input-otp-in-surface" />
+<ComponentPreview name="input-otp-on-surface" />
 
 <RelatedComponents component="inputotp" />
 
@@ -213,7 +222,7 @@ InputOTP is built on top of the [input-otp](https://github.com/guilhermerodz/inp
 | `onComplete` | `(value: string) => void` | - | Handler called when all slots are filled. |
 | `className` | `string` | - | Additional CSS classes for the container. |
 | `containerClassName` | `string` | - | CSS classes for the inner container. |
-| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `false` | Whether the input is displayed in a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `children` | `React.ReactNode` | - | InputOTP.Group, InputOTP.Slot, and InputOTP.Separator components. |
 
 #### Validation Props

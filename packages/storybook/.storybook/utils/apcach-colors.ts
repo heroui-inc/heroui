@@ -18,22 +18,22 @@ const DEFAULT_THEME_VALUES = {
   light: {
     background: {l: 0.9702, c: 0, h: 0},
     foreground: {l: 0.2103, c: 0.0059, h: 285.89},
-    surface: {l: 1, c: 0, h: 285.89}, // Pure white with adjustable hue/chroma
-    overlay: {l: 1, c: 0, h: 285.89}, // Pure white with adjustable hue/chroma
+    surface: {l: 1, c: 0, h: 0}, // Pure white (var(--white): oklch(100% 0 0))
+    overlay: {l: 1, c: 0, h: 0}, // Pure white (var(--white): oklch(100% 0 0))
     muted: {l: 0.5517, c: 0.0138, h: 285.94},
     scrollbar: {l: 0.871, c: 0.006, h: 286.286},
     default: {l: 0.94, c: 0.001, h: 286.375},
     accent: {l: 0.6204, c: 0.195, h: 253.83},
     border: {l: 0.9, c: 0.004, h: 286.32},
     separator: {l: 0.92, c: 0.004, h: 286.32},
-    segment: {l: 1, c: 0, h: 285.89}, // Pure white with adjustable hue/chroma
+    segment: {l: 1, c: 0, h: 0}, // Pure white (var(--white): oklch(100% 0 0))
     success: {l: 0.7329, c: 0.1935, h: 150.81},
     warning: {l: 0.7819, c: 0.1585, h: 72.33},
     danger: {l: 0.6532, c: 0.2328, h: 25.74},
   },
   dark: {
     background: {l: 0.12, c: 0.005, h: 285.823},
-    foreground: {l: 0.9911, c: 0, h: 0},
+    foreground: {l: 0.9911, c: 0, h: 0}, // var(--snow): oklch(0.9911 0 0)
     surface: {l: 0.2103, c: 0.0059, h: 285.89},
     overlay: {l: 0.2103, c: 0.0059, h: 285.89},
     muted: {l: 0.705, c: 0.015, h: 286.067},

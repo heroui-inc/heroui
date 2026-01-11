@@ -53,8 +53,6 @@
   /* Default styles */
 }
 
-/* TODO: Implement this to the rest or form-based components */
-/* TODO: remove surfaces and in-surface variants on form-based-components */
 .input--secondary {
   @apply shadow-none;
   background-color: var(--input-bg);

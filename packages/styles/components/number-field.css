@@ -142,16 +142,18 @@
   @apply rounded-l-field rounded-r-none border-r border-field-placeholder/15;
 }
 
-/**
- * In-Surface Variants
- * Used when number field group is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.number-field__group--in-surface-default,
-.number-field__group--in-surface-secondary,
-.number-field__group--in-surface-tertiary {
+/* Variant property definitions */
+.number-field--primary {
+  /* Default styles */
+}
+
+.number-field--secondary .number-field__group {
   @apply shadow-none;
   background-color: var(--number-field-group-bg);
+
+  --number-field-group-bg: var(--color-default);
+  --number-field-group-bg-hover: var(--color-default-hover);
+  --number-field-group-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
@@ -175,31 +177,6 @@
   [data-slot="number-field-input"] {
     @apply bg-transparent;
   }
-}
-
-/* In-surface variant property definitions */
-.number-field__group--in-surface-transparent {
-}
-
-.number-field__input--in-surface-transparent {
-}
-
-.number-field__group--in-surface-default {
-  --number-field-group-bg: var(--color-in-surface);
-  --number-field-group-bg-hover: var(--color-in-surface-hover);
-  --number-field-group-bg-focus: var(--color-in-surface-focus);
-}
-
-.number-field__group--in-surface-secondary {
-  --number-field-group-bg: var(--color-in-surface-secondary);
-  --number-field-group-bg-hover: var(--color-in-surface-secondary-hover);
-  --number-field-group-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.number-field__group--in-surface-tertiary {
-  --number-field-group-bg: var(--color-in-surface-tertiary);
-  --number-field-group-bg-hover: var(--color-in-surface-tertiary-hover);
-  --number-field-group-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

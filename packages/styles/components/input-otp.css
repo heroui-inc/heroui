@@ -85,16 +85,18 @@
   @apply h-[2px] w-[6px] shrink-0 rounded-[4px] bg-separator;
 }
 
-/**
- * In-Surface Variants
- * Used when input OTP is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.input-otp--in-surface-default .input-otp__slot,
-.input-otp--in-surface-secondary .input-otp__slot,
-.input-otp--in-surface-tertiary .input-otp__slot {
+/* Variant property definitions */
+.input-otp--primary {
+  /* Default styles */
+}
+
+.input-otp--secondary .input-otp__slot {
   @apply shadow-none;
   background-color: var(--input-otp-slot-bg);
+
+  --input-otp-slot-bg: var(--color-default);
+  --input-otp-slot-bg-hover: var(--color-default-hover);
+  --input-otp-slot-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover,
@@ -107,28 +109,6 @@
   &[data-filled="true"] {
     background-color: var(--input-otp-slot-bg-focus);
   }
-}
-
-/* In-surface variant property definitions */
-.input-otp--in-surface-transparent {
-}
-
-.input-otp--in-surface-default {
-  --input-otp-slot-bg: var(--color-in-surface);
-  --input-otp-slot-bg-hover: var(--color-in-surface-hover);
-  --input-otp-slot-bg-focus: var(--color-in-surface-focus);
-}
-
-.input-otp--in-surface-secondary {
-  --input-otp-slot-bg: var(--color-in-surface-secondary);
-  --input-otp-slot-bg-hover: var(--color-in-surface-secondary-hover);
-  --input-otp-slot-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.input-otp--in-surface-tertiary {
-  --input-otp-slot-bg: var(--color-in-surface-tertiary);
-  --input-otp-slot-bg-hover: var(--color-in-surface-tertiary-hover);
-  --input-otp-slot-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Animations */

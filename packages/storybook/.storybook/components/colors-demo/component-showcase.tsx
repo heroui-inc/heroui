@@ -123,13 +123,13 @@ export function ComponentShowcase() {
           <div className="flex flex-col gap-3">
             <h3 className="text-sm font-semibold text-muted">Borders</h3>
             <div className="flex flex-col gap-2">
-              <div className="flex h-12 items-center justify-start rounded-xl border border-border-secondary pl-3">
+              <div className="flex h-12 items-center justify-start rounded-xl border border-border pl-3">
                 <span className="text-sm text-foreground">Border default</span>
               </div>
               <div className="flex h-12 items-center justify-start rounded-xl border border-border-secondary pl-3">
                 <span className="text-sm text-foreground">Border secondary</span>
               </div>
-              <div className="flex h-12 items-center justify-start rounded-xl border border-border-secondary pl-3">
+              <div className="flex h-12 items-center justify-start rounded-xl border border-border-tertiary pl-3">
                 <span className="text-sm text-foreground">Border tertiary</span>
               </div>
             </div>

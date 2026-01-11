@@ -1,5 +1,5 @@
-import React from "react";
 import {Avatar, Card} from "@heroui/react";
+import React from "react";
 
 import {VerifiedBadgeIcon} from "./components/icons";
 
@@ -47,4 +47,3 @@ export function XProfileDemo() {
     </Card>
   );
 }
-

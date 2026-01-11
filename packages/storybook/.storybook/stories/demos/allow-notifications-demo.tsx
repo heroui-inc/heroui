@@ -1,5 +1,5 @@
-import React from "react";
 import {Description, Label, Switch} from "@heroui/react";
+import React from "react";
 
 export function AllowNotificationsDemo() {
   return (
@@ -18,4 +18,3 @@ export function AllowNotificationsDemo() {
     </div>
   );
 }
-

@@ -1,6 +1,5 @@
-import React from "react";
 import {InputOTP, Label, Link} from "@heroui/react";
-import {useState} from "react";
+import React, {useState} from "react";
 
 export function InputOTPDemo() {
   // HERO - 4320 - easter egg
@@ -36,4 +35,3 @@ export function InputOTPDemo() {
     </div>
   );
 }
-

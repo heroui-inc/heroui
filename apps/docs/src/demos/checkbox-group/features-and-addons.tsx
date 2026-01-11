@@ -34,8 +34,8 @@ export function FeaturesAndAddOns() {
             {addOns.map((addon) => (
               <Checkbox
                 key={addon.value}
-                inSurface="default"
                 value={addon.value}
+                variant="secondary"
                 className={clsx(
                   "group relative flex-col gap-4 rounded-3xl bg-surface px-5 py-4 transition-all",
                   "data-[selected=true]:bg-accent/10",

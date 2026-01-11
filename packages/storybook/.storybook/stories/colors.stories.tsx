@@ -1,5 +1,6 @@
-import React from "react";
 import type {Meta} from "@storybook/react";
+
+import React from "react";
 
 const meta: Meta = {
   title: "Color System",
@@ -16,7 +17,7 @@ interface ColorItemProps {
   cssVariable?: string;
 }
 
-const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
+const ColorItem = ({cssVariable, name, variable}: ColorItemProps) => {
   const computedColor =
     typeof window !== "undefined"
       ? getComputedStyle(document.documentElement)
@@ -27,14 +28,14 @@ const ColorItem = ({name, variable, cssVariable}: ColorItemProps) => {
   return (
     <div className="flex items-center gap-4 rounded-3xl bg-surface p-4 shadow-surface">
       <div
-        className="border-border size-12 shrink-0 rounded-xl border"
+        className="size-12 shrink-0 rounded-xl border border-border"
         style={{backgroundColor: `var(${variable})`}}
       />
       <div className="flex flex-1 flex-col gap-1">
         <span className="text-sm font-medium text-foreground">{name}</span>
         <code className="text-xs text-muted">{variable}</code>
       </div>
-      {computedColor && (
+      {!!computedColor && (
         <div className="text-right">
           <code className="font-mono text-xs text-muted">{computedColor}</code>
         </div>
@@ -48,7 +49,7 @@ interface ColorSectionProps {
   colors: ColorItemProps[];
 }
 
-const ColorSection = ({title, colors}: ColorSectionProps) => {
+const ColorSection = ({colors, title}: ColorSectionProps) => {
   return (
     <div className="mb-8">
       <h3 className="mb-4 text-lg font-semibold text-foreground">{title}</h3>
@@ -208,8 +209,14 @@ export const AllColors = () => {
         <ColorSection colors={calculatedSoftColors} title="Soft Variants" />
         <ColorSection colors={calculatedSurfaceColors} title="Surface Levels" />
         <ColorSection colors={calculatedInSurfaceColors} title="In Surface Colors" />
-        <ColorSection colors={calculatedInSurfaceSecondaryColors} title="In Surface Colors - Secondary" />
-        <ColorSection colors={calculatedInSurfaceTertiaryColors} title="In Surface Colors - Tertiary" />
+        <ColorSection
+          colors={calculatedInSurfaceSecondaryColors}
+          title="In Surface Colors - Secondary"
+        />
+        <ColorSection
+          colors={calculatedInSurfaceTertiaryColors}
+          title="In Surface Colors - Tertiary"
+        />
         <ColorSection colors={calculatedSeparatorColors} title="Separator Colors" />
         <ColorSection colors={calculatedFieldColors} title="Field States" />
       </div>
