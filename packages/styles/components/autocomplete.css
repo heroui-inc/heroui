@@ -3,7 +3,7 @@
   @apply flex flex-col gap-1;
 }
 
-.autocomplete__group {
+.autocomplete__trigger {
   @apply relative isolate inline-flex min-h-9 rounded-field border bg-field px-3 py-2 text-sm text-field-foreground shadow-field outline-none select-none no-highlight;
 
   /**
@@ -16,11 +16,14 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
   /* Add padding-right when indicator is present */
-  &:has(.select__indicator) {
+  &:has(.autocomplete__indicator) {
     @apply pr-7;
   }
 
@@ -57,6 +60,49 @@
   &[data-disabled="true"],
   &[aria-disabled="true"] {
     @apply status-disabled;
+  }
+}
+
+/* Variant property definitions */
+.autocomplete--primary {
+  /* Default styles */
+}
+
+.autocomplete--secondary .autocomplete__trigger {
+  @apply shadow-none;
+  background-color: var(--autocomplete-trigger-bg);
+
+  --autocomplete-trigger-bg: var(--color-default);
+  --autocomplete-trigger-bg-hover: var(--color-default-hover);
+  --autocomplete-trigger-bg-focus: var(--color-default);
+
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      background-color: var(--autocomplete-trigger-bg-hover);
+    }
+  }
+
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    background-color: var(--autocomplete-trigger-bg-focus);
+  }
+
+  &:focus,
+  &[data-focus="true"] {
+  }
+}
+
+.autocomplete__value {
+  @apply flex-1 text-left text-base wrap-break-word text-current sm:text-sm;
+
+  &[data-placeholder="true"] {
+    @apply text-field-placeholder;
+  }
+
+  /* Removes the listbox-item indicator element from the autocomplete value*/
+  [data-slot="listbox-item-indicator"] {
+    @apply hidden;
   }
 }
 
@@ -157,4 +203,13 @@
   [data-slot="empty-state"] {
     @apply text-center text-sm text-overlay-foreground/60;
   }
+}
+
+/* Full width modifier */
+.autocomplete--full-width {
+  @apply w-full;
+}
+
+.autocomplete__trigger--full-width {
+  @apply w-full;
 }

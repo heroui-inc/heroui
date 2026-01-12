@@ -4,9 +4,10 @@ import type {TagVariants} from "./tag.styles";
 import type {ComponentPropsWithRef} from "react";
 import type {Button as ButtonPrimitive} from "react-aria-components";
 
-import {Children, createContext, useContext, useMemo} from "react";
+import React, {Children, createContext, useContext, useMemo} from "react";
 import {Tag as TagPrimitive} from "react-aria-components";
 
+import {pickChildren} from "../../utils/children";
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {TagGroupContext} from "../tag-group";
@@ -46,6 +47,15 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
     return undefined;
   }, [children]);
 
+  // Extract custom RemoveButton from children if present
+  const [childrenWithoutRemoveButton, removeButtonChildren] = useMemo(() => {
+    if (typeof children === "function") {
+      return [children, undefined];
+    }
+
+    return pickChildren(children, TagRemoveButton);
+  }, [children]);
+
   return (
     <TagPrimitive
       className={composeTwRenderProps(className, slots.base())}
@@ -59,8 +69,13 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
             children(renderProps)
           ) : (
             <>
-              {children}
-              {!!renderProps.allowsRemoving && <TagRemoveButton />}
+              {childrenWithoutRemoveButton}
+              {!!renderProps.allowsRemoving &&
+                (removeButtonChildren && removeButtonChildren.length > 0 ? (
+                  removeButtonChildren
+                ) : (
+                  <TagRemoveButton />
+                ))}
             </>
           )}
         </TagContext>
@@ -72,9 +87,11 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tag Remove Button
  * -----------------------------------------------------------------------------------------------*/
-type TagRemoveButtonProps = ComponentPropsWithRef<typeof ButtonPrimitive> & {};
+type TagRemoveButtonProps = ComponentPropsWithRef<typeof ButtonPrimitive> & {
+  children?: React.ReactNode;
+};
 
-const TagRemoveButton = ({className, ...restProps}: TagRemoveButtonProps) => {
+const TagRemoveButton = ({children, className, ...restProps}: TagRemoveButtonProps) => {
   const {slots} = useContext(TagContext);
 
   return (
@@ -83,7 +100,9 @@ const TagRemoveButton = ({className, ...restProps}: TagRemoveButtonProps) => {
       data-slot="tag-remove-button"
       slot="remove"
       {...restProps}
-    />
+    >
+      {children}
+    </CloseButton>
   );
 };
 

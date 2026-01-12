@@ -3,13 +3,13 @@
 import type {AutocompleteVariants} from "./autocomplete.styles";
 import type {Booleanish} from "../../utils/assertion";
 import type {SurfaceVariants} from "../surface";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, MutableRefObject} from "react";
 
-import React, {createContext, useContext} from "react";
+import {mergeRefs} from "@react-aria/utils";
+import React, {createContext, useContext, useRef} from "react";
 import {
   Autocomplete as AutocompletePrimitive,
   Button as ButtonPrimitive,
-  Group as GroupPrimitive,
   Popover as PopoverPrimitive,
   Select as SelectPrimitive,
   SelectStateContext,
@@ -28,9 +28,12 @@ import {autocompleteVariants} from "./autocomplete.styles";
  * -----------------------------------------------------------------------------------------------*/
 type AutocompleteContext = {
   slots?: ReturnType<typeof autocompleteVariants>;
+  triggerRef: MutableRefObject<HTMLElement | null>;
 };
 
-const AutocompleteContext = createContext<AutocompleteContext>({});
+const AutocompleteContext = createContext<AutocompleteContext>({
+  triggerRef: {current: null} as MutableRefObject<HTMLElement | null>,
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Root
@@ -43,12 +46,18 @@ interface AutocompleteRootProps<T extends object, M extends "single" | "multiple
 const AutocompleteRoot = <T extends object = object, M extends "single" | "multiple" = "single">({
   children,
   className,
+  fullWidth,
+  variant,
   ...props
 }: AutocompleteRootProps<T, M>) => {
-  const slots = React.useMemo(() => autocompleteVariants({}), []);
+  const slots = React.useMemo(
+    () => autocompleteVariants({fullWidth, variant}),
+    [fullWidth, variant],
+  );
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   return (
-    <AutocompleteContext value={{slots}}>
+    <AutocompleteContext value={{slots, triggerRef}}>
       <SelectPrimitive
         data-slot="autocomplete"
         {...props}
@@ -61,23 +70,39 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Group
+ * Autocomplete Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface AutocompleteGroupProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
+interface AutocompleteTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const AutocompleteGroup = ({children, className, ...props}: AutocompleteGroupProps) => {
-  const {slots} = useContext(AutocompleteContext);
+const AutocompleteTrigger = React.forwardRef<HTMLButtonElement, AutocompleteTriggerProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots, triggerRef} = useContext(AutocompleteContext);
 
-  return (
-    <GroupPrimitive
-      className={composeTwRenderProps(className, slots?.group())}
-      data-slot="autocomplete-group"
-      {...props}
-    >
-      {children}
-    </GroupPrimitive>
-  );
-};
+    // Callback ref to update context ref
+    const contextRefCallback = React.useCallback(
+      (node: HTMLButtonElement | null) => {
+        triggerRef.current = node;
+      },
+      [triggerRef],
+    );
+
+    // Merge context ref callback with user-provided ref
+    const mergedRef = mergeRefs(contextRefCallback, ref);
+
+    return (
+      <ButtonPrimitive
+        ref={mergedRef}
+        className={composeTwRenderProps(className, slots?.trigger())}
+        data-slot="autocomplete-trigger"
+        {...props}
+      >
+        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      </ButtonPrimitive>
+    );
+  },
+);
+
+AutocompleteTrigger.displayName = "AutocompleteTrigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Value
@@ -153,7 +178,7 @@ const AutocompletePopover = ({
   placement = "bottom",
   ...props
 }: AutocompletePopoverProps) => {
-  const {slots} = useContext(AutocompleteContext);
+  const {slots, triggerRef} = useContext(AutocompleteContext);
 
   return (
     <SurfaceContext
@@ -166,6 +191,7 @@ const AutocompletePopover = ({
         className={composeTwRenderProps(className, slots?.popover())}
         data-slot="autocomplete-popover"
         placement={placement}
+        triggerRef={triggerRef}
       >
         {children}
       </PopoverPrimitive>
@@ -191,7 +217,7 @@ const AutocompleteFilter = ({children, ...props}: AutocompleteFilterProps) => {
  * -----------------------------------------------------------------------------------------------*/
 export {
   AutocompleteRoot,
-  AutocompleteGroup,
+  AutocompleteTrigger,
   AutocompleteValue,
   AutocompleteIndicator,
   AutocompletePopover,
@@ -200,7 +226,7 @@ export {
 
 export type {
   AutocompleteRootProps,
-  AutocompleteGroupProps,
+  AutocompleteTriggerProps,
   AutocompleteValueProps,
   AutocompleteIndicatorProps,
   AutocompletePopoverProps,

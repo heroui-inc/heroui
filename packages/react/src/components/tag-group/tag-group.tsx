@@ -1,5 +1,6 @@
 "use client";
 
+import type {TagVariants} from "../tag";
 import type {ComponentPropsWithRef} from "react";
 
 import React, {createContext, useContext, useMemo} from "react";
@@ -14,8 +15,8 @@ import {tagGroupVariants} from "./tag-group.styles";
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupContext = {
   slots?: ReturnType<typeof tagGroupVariants>;
-  size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface" | "on-form-field";
+  size?: TagVariants["size"];
+  variant?: TagVariants["variant"];
 };
 
 const TagGroupContext = createContext<TagGroupContext>({});
@@ -24,8 +25,8 @@ const TagGroupContext = createContext<TagGroupContext>({});
  * TagGroup Root
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
-  size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface" | "on-form-field";
+  size?: TagVariants["size"];
+  variant?: TagVariants["variant"];
 };
 
 const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGroupRootProps) => {

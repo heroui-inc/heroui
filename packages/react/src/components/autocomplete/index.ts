@@ -2,10 +2,10 @@ import type {ComponentProps} from "react";
 
 import {
   AutocompleteFilter,
-  AutocompleteGroup,
   AutocompleteIndicator,
   AutocompletePopover,
   AutocompleteRoot,
+  AutocompleteTrigger,
   AutocompleteValue,
 } from "./autocomplete";
 
@@ -14,7 +14,7 @@ import {
  * -----------------------------------------------------------------------------------------------*/
 export const Autocomplete = Object.assign(AutocompleteRoot, {
   Root: AutocompleteRoot,
-  Group: AutocompleteGroup,
+  Trigger: AutocompleteTrigger,
   Value: AutocompleteValue,
   Indicator: AutocompleteIndicator,
   Popover: AutocompletePopover,
@@ -24,7 +24,7 @@ export const Autocomplete = Object.assign(AutocompleteRoot, {
 export type Autocomplete<T extends object = object, M extends "single" | "multiple" = "single"> = {
   Props: ComponentProps<typeof AutocompleteRoot<T, M>>;
   RootProps: ComponentProps<typeof AutocompleteRoot<T, M>>;
-  GroupProps: ComponentProps<typeof AutocompleteGroup>;
+  TriggerProps: ComponentProps<typeof AutocompleteTrigger>;
   ValueProps: ComponentProps<typeof AutocompleteValue>;
   IndicatorProps: ComponentProps<typeof AutocompleteIndicator>;
   PopoverProps: ComponentProps<typeof AutocompletePopover>;
@@ -36,7 +36,7 @@ export type Autocomplete<T extends object = object, M extends "single" | "multip
  * -----------------------------------------------------------------------------------------------*/
 export {
   AutocompleteFilter,
-  AutocompleteGroup,
+  AutocompleteTrigger,
   AutocompleteIndicator,
   AutocompletePopover,
   AutocompleteRoot,
@@ -46,7 +46,7 @@ export {
 export type {
   AutocompleteRootProps,
   AutocompleteRootProps as AutocompleteProps,
-  AutocompleteGroupProps,
+  AutocompleteTriggerProps,
   AutocompleteValueProps,
   AutocompleteIndicatorProps,
   AutocompletePopoverProps,
