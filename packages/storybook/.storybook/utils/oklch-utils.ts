@@ -156,7 +156,6 @@ export const COLOR_VARIABLES = [
   // Field colors
   {name: "--field-background", label: "Field Background", category: "field"},
   {name: "--field-foreground", label: "Field Foreground", category: "field"},
-  {name: "--field-on-background", label: "Field On Background", category: "field"},
   {name: "--field-placeholder", label: "Field Placeholder", category: "field"},
 
   // Border colors
