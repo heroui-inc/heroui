@@ -16,11 +16,7 @@ links:
 ## Import
 
 ```tsx
-import {
-  BottomSheet,
-  useBottomSheet,
-  useBottomSheetAnimation,
-} from 'heroui-native';
+import { BottomSheet } from 'heroui-native';
 ```
 
 ## Anatomy
@@ -148,6 +144,15 @@ export const BottomSheetBlurOverlay = () => {
 </BottomSheet>
 ```
 
+### Text Input with Keyboard Avoidance
+
+Using `TextField.Input` from heroui-native inside a bottom sheet requires special handling for proper keyboard behavior. You need to:
+
+1. Pass custom `onFocus` and `onBlur` handlers to `TextField.Input` that communicate with the bottom sheet's internal keyboard state using `useBottomSheetInternal` hook from `@gorhom/bottom-sheet`
+2. Use `BottomSheetScrollView` from `@gorhom/bottom-sheet` instead of regular `ScrollView` for proper keyboard avoidance
+
+See the complete example: [bottom-sheet-with-text-input.tsx](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/components/bottom-sheet/with-text-input.tsx)
+
 ## Example
 
 ```tsx
@@ -210,7 +215,6 @@ export default function BottomSheetExample() {
 | `children`                 | `React.ReactNode`          | -       | Bottom sheet content and trigger elements                                                  |
 | `isOpen`                   | `boolean`                  | -       | Controlled open state of the bottom sheet                                                  |
 | `isDefaultOpen`            | `boolean`                  | `false` | Initial open state when uncontrolled                                                       |
-| `closeDelay`               | `number`                   | `300`   | Delay in milliseconds before bottom sheet closes (should match closing animation duration) |
 | `isDismissKeyboardOnClose` | `boolean`                  | `true`  | Whether to dismiss keyboard when bottom sheet closes                                       |
 | `animation`                | `BottomSheetRootAnimation` | -       | Animation configuration                                                                    |
 | `onOpenChange`             | `(value: boolean) => void` | -       | Callback when open state changes                                                           |
@@ -350,3 +354,27 @@ const { bottomSheetState, progress } = useBottomSheetAnimation();
 | ------------------ | ----------------------------- | -------------------------------------------- |
 | `bottomSheetState` | `'idle' \| 'open' \| 'close'` | Internal bottom sheet state                  |
 | `progress`         | `SharedValue<number>`         | Animation progress (0=idle, 1=open, 2=close) |
+
+## Special Notes
+
+### Handling Close Callbacks
+
+It's recommended to use `BottomSheet`'s `onOpenChange` prop for handling close callbacks, as it reliably fires for all close scenarios (swiping down, pressing overlay, pressing close button, programmatic close, etc.).
+
+```tsx
+<BottomSheet
+  isOpen={isOpen}
+  onOpenChange={(value) => {
+    setIsOpen(value);
+    if (!value) {
+      // This callback runs whenever the bottom sheet closes
+      // regardless of how it was closed
+      yourCallbackOnClose();
+    }
+  }}
+>
+  ...
+</BottomSheet>
+```
+
+**Note**: `BottomSheet.Content`'s `onClose` prop (from @gorhom/bottom-sheet) has limitations and will only fire when the bottom sheet is closed by swiping down. It won't fire when closing via overlay press, close button, or programmatic close. For reliable close callbacks, always use `BottomSheet`'s `onOpenChange` prop instead.
